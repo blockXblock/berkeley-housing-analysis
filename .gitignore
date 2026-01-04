@@ -1,0 +1,25 @@
+# Python
+*.pyc
+__pycache__/
+.ipynb_checkpoints/
+
+# System
+.DS_Store
+
+# Data (keep only final)
+permits_raw.csv
+housing_projects_filtered.csv
+*_refreshed_*.csv
+
+# Generated files
+*.db
+outputs/*.html
+outputs/*.md
+
+# Keep structure
+!outputs/.gitkeep
+
+# Don't commit broken workflows
+workflows/
+modules/
+config/

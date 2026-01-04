@@ -11,7 +11,7 @@ Click the Binder badge above ⬆️ (takes 2-3 min first time)
 
 **Or Run Locally:**
 ```bash
-git clone https://github.com/YOUR_USERNAME/berkeley-housing-analysis.git
+git clone https://github.com/johngage/berkeley-housing-analysis.git
 cd berkeley-housing-analysis
 pip install -r requirements.txt
 jupyter notebook notebooks/MASTER_ANALYSIS.ipynb

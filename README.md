@@ -1,6 +1,7 @@
 # Berkeley Housing Development Analysis
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/blockXblock/berkeley-housing-analysis/HEAD?labpath=notebooks%2FMASTER_ANALYSIS.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/MASTER_ANALYSIS.ipynb)
 
 > Interactive analysis of **84 housing development projects** in Berkeley, CA (2020-2025)
 

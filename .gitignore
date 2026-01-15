@@ -19,7 +19,3 @@ outputs/*.md
 # Keep structure
 !outputs/.gitkeep
 
-# Don't commit broken workflows
-workflows/
-modules/
-config/

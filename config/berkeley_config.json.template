@@ -1,0 +1,92 @@
+{
+  "api": {
+    "domain": "data.cityofberkeley.info",
+    "app_token_env_var": "BERKELEY_APP_TOKEN",
+    "rate_limit": 10000,
+    "datasets": {
+      "business_licenses": {
+        "id": "rwnf-bu3w",
+        "description": "Active business licenses"
+      },
+      "building_permits": {
+        "id": "ydr8-5enu",
+        "description": "Building permits"
+      },
+      "zoning_permits": {
+        "id": "vkhm-tsvp",
+        "description": "Zoning permits"
+      },
+      "planning_records": {
+        "id": "rk4r-58ys",
+        "description": "Planning records"
+      }
+    }
+  },
+  "paths": {
+    "data_dir": ".",
+    "workflows_dir": "./workflows",
+    "modules_dir": "./modules",
+    "database": "./berkeley_housing_map.db",
+    "lookup_table": "./alameda_lookup_complete.csv",
+    "housing_projects": "./housing_projects_FINAL.csv"
+  },
+  "geocoding": {
+    "berkeley_bounds": {
+      "lat_min": 37.845,
+      "lat_max": 37.915,
+      "lon_min": -122.325,
+      "lon_max": -122.235
+    },
+    "default_projection": "EPSG:4326"
+  },
+  "timeline": {
+    "stalled_days_threshold": 180,
+    "stages": [
+      "proposed",
+      "in_review",
+      "approved",
+      "appealed",
+      "permitted",
+      "under_construction",
+      "completed"
+    ],
+    "inspection_sequence": [
+      "Foundation",
+      "Framing/Rough",
+      "Electrical Rough",
+      "Plumbing Rough",
+      "Mechanical Rough",
+      "Insulation",
+      "Drywall",
+      "Electrical Final",
+      "Plumbing Final",
+      "Mechanical Final",
+      "Final"
+    ]
+  },
+  "reporting": {
+    "output_formats": ["html", "json", "csv"],
+    "dashboard_endpoint": "https://example.com/dashboard",
+    "alert_thresholds": {
+      "stalled_days": 180,
+      "inspection_delay_days": 60
+    }
+  },
+  "project_categories": {
+    "small": {"min_units": 1, "max_units": 10},
+    "medium": {"min_units": 11, "max_units": 50},
+    "large": {"min_units": 51, "max_units": 100},
+    "mega": {"min_units": 101, "max_units": null}
+  },
+  "status_mappings": {
+    "proposed": ["Proposed", "Pre-Application", "SB330 Preliminary"],
+    "in_review": ["In Review", "Under Review", "Incomplete Pending Applicant", "Corrections Pending Applicant"],
+    "approved": ["Approved", "Pending Final Action", "Conditionally Approved"],
+    "appealed": ["Appealed", "Appeal Pending"],
+    "permitted": ["Permit Issued", "Building Permit Issued"],
+    "under_construction": ["Under Construction", "Active Construction"],
+    "completed": ["Completed", "Certificate of Occupancy", "Final Inspection"],
+    "stalled": ["Stalled", "Inactive", "Expired"],
+    "denied": ["Denied", "Rejected", "Withdrawn"]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "title": "Berkeley Housing Development Database",
+  "description": "Database of 84 housing development projects in Berkeley, CA (2020-2025)",
+  "license": "Public Domain",
+  "databases": {
+    "berkeley_housing_map": {
+      "tables": {
+        "projects": {
+          "title": "Housing Projects",
+          "description": "84 development projects with coordinates"
+        },
+        "map_view": {
+          "title": "Map View",
+          "description": "Formatted view for mapping"
+        }
+      }
+    }
+  },
+  "plugins": {
+    "datasette-cluster-map": {
+      "latitude_column": "latitude",
+      "longitude_column": "longitude"
+    }
+  }
+}

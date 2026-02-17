@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "installCommand": "pip install datasette datasette-cluster-map",
+  "buildCommand": "echo 'No build needed'",
+  "devCommand": "datasette serve berkeley_housing_map.db --metadata metadata.json --port $PORT",
+  "framework": null,
+  "outputDirectory": "."
+}

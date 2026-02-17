@@ -1,0 +1,68 @@
+{
+  "title": "Berkeley Housing Pipeline",
+  "description": "Interactive map and data explorer for Berkeley housing development projects",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "databases": {
+    "housing_projects": {
+      "title": "Berkeley Housing Projects",
+      "description": "Housing development projects in Berkeley's planning pipeline",
+      "tables": {
+        "housing_projects": {
+          "title": "All Housing Projects",
+          "description": "Complete list of housing projects with locations and unit counts",
+          "columns": {
+            "id": "Unique project ID",
+            "address_display": "Street address",
+            "apn": "Assessor's Parcel Number",
+            "owner": "Property owner",
+            "net_units": "Net new housing units (new - demolished)",
+            "new_units": "Total new units to be built",
+            "old_units": "Existing units to be demolished",
+            "year": "Year permit was filed",
+            "permits": "Permit number(s)",
+            "description": "Project description",
+            "status": "Current permit status",
+            "latitude": "Latitude coordinate",
+            "longitude": "Longitude coordinate",
+            "project_size_category": "Size category (Small/Medium/Large/etc)",
+            "slug": "URL-friendly identifier"
+          },
+          "sort_desc": "net_units",
+          "plugins": {
+            "datasette-cluster-map": {
+              "latitude_column": "latitude",
+              "longitude_column": "longitude",
+              "popup_columns": [
+                "address_display",
+                "net_units",
+                "year",
+                "status"
+              ]
+            }
+          },
+          "facets": [
+            "year",
+            "project_size_category",
+            "status"
+          ]
+        },
+        "mappable_projects": {
+          "title": "Projects with Coordinates",
+          "description": "Only projects that can be displayed on a map",
+          "plugins": {
+            "datasette-cluster-map": {
+              "latitude_column": "latitude",
+              "longitude_column": "longitude",
+              "popup_columns": [
+                "address_display",
+                "net_units",
+                "year"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

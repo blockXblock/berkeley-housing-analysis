@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berkeley Housing Permit Pipeline</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            margin: 0 0 10px 0;
+            color: #003262;
+        }
+        .stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 15px;
+        }
+        .stat {
+            font-size: 18px;
+        }
+        .stat strong {
+            color: #003262;
+            font-size: 24px;
+        }
+        iframe {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Berkeley Housing Permit Pipeline (2020-2026)</h1>
+        <p>Interactive map showing 84 housing development projects in Berkeley, CA</p>
+        <div class="stats">
+            <div class="stat">
+                <strong>84</strong><br>
+                Projects
+            </div>
+            <div class="stat">
+                <strong>5,283</strong><br>
+                Housing Units
+            </div>
+            <div class="stat">
+                <strong>2020-2025</strong><br>
+                Timeline
+            </div>
+        </div>
+    </div>
+    <iframe src="map.html" width="100%" height="800"></iframe>
+</body>
+</html>

@@ -1,0 +1,114 @@
+# Berkeley Housing Permit Analysis - Master Configuration
+# Last updated: 2026-02-21
+
+project:
+  name: "Berkeley Housing Permit Pipeline"
+  description: "Track and analyze City of Berkeley housing permits through the full lifecycle"
+  version: "2.0"
+
+# Data Sources
+data_sources:
+  berkeley_open_data:
+    base_url: "https://data.cityofberkeley.info"
+    app_token: "${BERKELEY_APP_TOKEN}"  # Set in environment
+    datasets:
+      business_licenses:
+        id: "ydr8-5enu"
+        status: "working"  # API accessible
+      building_permits:
+        id: "xbu8-myii"
+        status: "blocked"  # WAF returns 403
+      zoning_permits:
+        id: "unknown"
+        status: "blocked"
+
+  alameda_county:
+    address_lookup: "data/reference/alameda_lookup_complete.csv"
+    records: 563000
+
+# Directory Structure
+paths:
+  root: "/Users/johngage/berkeley-data"
+  notebooks:
+    collection: "01_collection"
+    tracking: "02_tracking"
+    analysis: "03_analysis"
+    reporting: "04_reporting"
+  data:
+    raw: "data/raw"
+    processed: "data/processed"
+    reference: "data/reference"
+    outputs: "data/outputs"
+  databases: "databases"
+  modules: "modules"
+
+# Database Configuration
+databases:
+  master: "databases/berkeley.db"
+  housing_analysis: "databases/berkeley_housing_analysis.db"
+  housing_map: "databases/berkeley_housing_map.db"
+
+# Pipeline Stages
+pipeline:
+  stages:
+    - name: "A: Data Collection"
+      notebooks:
+        - "01_collection/00_api_pipeline.ipynb"
+        - "01_collection/A1_data_sources_setup.ipynb"
+        - "01_collection/A2_address_standardization.ipynb"
+        - "01_collection/A3_geocoding_pipeline.ipynb"
+    - name: "B: Timeline Tracking"
+      notebooks:
+        - "02_tracking/B1_lifecycle_tracking.ipynb"
+        - "02_tracking/B2_status_classification.ipynb"
+        - "02_tracking/B3_progress_indicators.ipynb"
+    - name: "C: Analysis"
+      notebooks:
+        - "03_analysis/C1_pipeline_analysis.ipynb"
+        - "03_analysis/C2_timeline_analysis.ipynb"
+        - "03_analysis/C3_proposal_vs_reality.ipynb"
+    - name: "D: Reporting"
+      notebooks:
+        - "04_reporting/D1_monthly_report_generator.ipynb"
+        - "04_reporting/D2_dashboard_data_export.ipynb"
+        - "04_reporting/D3_alerts_monitoring.ipynb"
+
+# Permit Types to Track
+permit_types:
+  - type: "Building Permits"
+    status: "tracked"
+    source: "manual_download"
+  - type: "Zoning Permits"
+    status: "partial"
+    source: "manual_download"
+  - type: "Use Permits"
+    status: "not_tracked"
+  - type: "Demolition Permits"
+    status: "not_tracked"
+  - type: "Inspections"
+    status: "partial"
+  - type: "Certificate of Occupancy"
+    status: "partial"
+  - type: "Business Licenses"
+    status: "tracked"
+    source: "api"
+
+# Current Dataset Statistics
+stats:
+  housing_projects: 84
+  total_units: 5283
+  geocoding_success: 100%
+  date_range: "2020-2025"
+
+# Deployment
+deployment:
+  datasette:
+    url: "https://berkeley-housing.fly.dev/"
+    platform: "fly.dev"
+  github:
+    repo: "https://github.com/blockXblock/berkeley-housing-analysis"
+
+# Related Resources
+obsidian_vaults:
+  project_docs: "/Users/johngage/Obsidian/Berkeley-Housing-Project"
+  research: "/Users/johngage/berkeley-housing-research"

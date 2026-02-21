@@ -5,126 +5,107 @@
 
 > Interactive analysis of **84 housing development projects** in Berkeley, CA (2020-2025)
 
-## 🚀 Quick Start
+## Quick Start
 
-**Run in Browser (No Installation):**  
-Click the Binder badge above ⬆️ (takes 2-3 min first time)
+**Run in Browser (No Installation):**
+Click the Binder badge above (takes 2-3 min first time)
 
 **Or Run Locally:**
 ```bash
-git clone https://github.com/johngage/berkeley-housing-analysis.git
-cd berkeley-housing-analysis
-pip install -r requirements.txt
-jupyter notebook notebooks/MASTER_ANALYSIS.ipynb
+cd /Users/johngage/berkeley-data
+jupyter lab MASTER_ANALYSIS.ipynb
 ```
 
-## 📊 What's Inside
+## Directory Structure (Consolidated Feb 2026)
 
-- **84 housing projects** totaling **6,363 net new units**
+```
+berkeley-data/
+├── MASTER_ANALYSIS.ipynb      # Complete end-to-end analysis
+├── 00_config/
+│   └── config.yaml            # Master configuration
+├── 01_collection/             # Stage A: Data acquisition
+│   ├── 00_api_pipeline.ipynb  # API connections (main working notebook)
+│   ├── A1_data_sources_setup.ipynb
+│   ├── A2_address_standardization.ipynb
+│   └── A3_geocoding_pipeline.ipynb
+├── 02_tracking/               # Stage B: Permit lifecycle
+│   ├── B1_lifecycle_tracking.ipynb
+│   ├── B2_status_classification.ipynb
+│   └── B3_progress_indicators.ipynb
+├── 03_analysis/               # Stage C: Analysis
+│   ├── C1_pipeline_analysis.ipynb
+│   ├── C2_timeline_analysis.ipynb
+│   └── C3_proposal_vs_reality.ipynb
+├── 04_reporting/              # Stage D: Reports & dashboards
+│   ├── D1_monthly_report_generator.ipynb
+│   ├── D2_dashboard_data_export.ipynb
+│   └── D3_alerts_monitoring.ipynb
+├── data/
+│   ├── raw/                   # Downloaded CSVs
+│   ├── processed/             # Cleaned data (housing_projects_FINAL.csv)
+│   ├── reference/             # Lookup tables (Alameda addresses)
+│   └── outputs/               # Visualizations, reports
+├── databases/                 # SQLite databases
+│   └── berkeley.db            # Master database
+├── modules/                   # Python library
+└── archive/                   # Old directory structure
+```
+
+## What's Inside
+
+- **84 housing projects** totaling **5,283 net new units**
 - **100% geocoded** using Alameda County GIS address points
 - **Interactive maps** color-coded by project size
 - **SQL database** with analysis queries
-- **Automated reports** in Markdown format
-- **Data refresh workflow** (Level 1: status check, Level 2: rebuild)
+- **4-stage pipeline:** Collection → Tracking → Analysis → Reporting
 
-## 🗺️ Interactive Map
+## Pipeline Stages
+
+| Stage | Notebooks | Status |
+|-------|-----------|--------|
+| A: Data Collection | `01_collection/` | ⚠️ Business licenses API works; permits blocked |
+| B: Timeline Tracking | `02_tracking/` | ✅ Lifecycle tracking implemented |
+| C: Analysis | `03_analysis/` | 📝 Needs expansion |
+| D: Reporting | `04_reporting/` | 📝 Needs expansion |
+
+## Interactive Map
 
 Projects color-coded by size:
 - 🔴 200+ units (Large)
-- 🟠 100-199 units (Medium-Large)  
+- 🟠 100-199 units (Medium-Large)
 - 🔵 50-99 units (Medium)
 - 🟢 20-49 units (Small-Medium)
 - ⚪ <20 units (Small)
 
-## 📁 Repository Structure
-```
-berkeley-housing-analysis/
-├── notebooks/
-│   └── MASTER_ANALYSIS.ipynb       # Complete analysis workflow
-├── housing_projects_FINAL_COMPLETE.csv  # Geocoded project data (84 projects)
-├── outputs/                         # Generated files (created when you run notebook)
-│   ├── berkeley_housing_map.html
-│   ├── berkeley_housing_analysis.db
-│   └── ANALYSIS_REPORT.md
-└── README.md
-```
+**Live Map:** https://berkeley-housing.fly.dev/
 
-## 🔄 Data Refresh
+## Data Refresh
 
-**Current Data:** December 20, 2024
+**Current Data:** January 2026
 
-The notebook includes two refresh options:
+Berkeley's Open Data Portal restricts API access (WAF returns 403). Workarounds:
+1. Manual CSV download from BuildingEye
+2. Contact Berkeley Planning: planning@berkeleyca.gov
+3. Monitor Clariti API rollout (city's new system)
 
-### Level 1: Quick Status Check
-- Verify data files
-- Check geocoding coverage
-- ~30 seconds
+## Related Resources
 
-### Level 2: Complete Rebuild
-**Note:** Berkeley's Open Data Portal currently restricts API access. We're working on alternative data access methods.
+- **Obsidian Docs:** `/Users/johngage/Obsidian/Berkeley-Housing-Project`
+- **Research Vault:** `/Users/johngage/berkeley-housing-research`
+- **GitHub:** https://github.com/blockXblock/berkeley-housing-analysis
+- **Contact:** [BuildBerkeley.online](https://buildberkeley.online)
 
-**To refresh data manually:**
-1. Contact Berkeley Planning Department: planning@berkeleyca.gov
-2. Request recent building permits dataset
-3. Follow notebook instructions for processing
+## Technical Stack
 
-**Issue Tracker:** See [#1](link) for updates on automated refresh
-
-## 📈 Sample Analysis
-
-From the current dataset:
-
-- **Total Units:** 6,363 net new housing units
-- **Timeline:** 2020-2025
-- **Average Project Size:** 75.8 units
-- **Largest Project:** 698 units
-- **Top Streets:** Analysis by development activity
-
-Run the notebook to see complete statistics!
-
-## 🛠️ Technical Details
-
-**Built with:**
-- Python 3.8+
-- pandas (data analysis)
-- folium (interactive maps)
-- SQLite (database)
+- Python 3.8+ / pandas / folium / SQLite
 - Jupyter notebooks
+- Datasette (web deployment)
+- Fly.dev (hosting)
 
-**Data Sources:**
-- Berkeley Planning Department (building permits)
-- Alameda County GIS (address geocoding with 563k+ address variations)
-
-## 📚 Use Cases
-
-- **Civic Engagement:** Track housing development in your neighborhood
-- **Urban Planning:** Analyze development patterns and trends
-- **Policy Research:** Compare proposed vs. actual housing production
-- **Education:** Learn data analysis with real civic data
-- **Journalism:** Data-driven housing stories
-
-## 🤝 Contributing
-
-Issues and pull requests welcome! Especially:
-- Alternative data sources for Berkeley permits
-- Additional analysis queries
-- Visualization improvements
-- Documentation enhancements
-
-## 📜 License
+## License
 
 **Public Domain** - Free to use for research, education, civic engagement, or journalism
 
-## 🙏 Acknowledgments
-
-- Berkeley Planning Department for public data
-- Alameda County for GIS address points
-- BuildBerkeley.online community
-
-## 📧 Contact
-
-Questions? Open an issue or visit [BuildBerkeley.online](https://buildberkeley.online)
-
 ---
 
-**Note:** This is a community project analyzing public data. Not affiliated with the City of Berkeley.
+**Note:** Community project analyzing public data. Not affiliated with the City of Berkeley.

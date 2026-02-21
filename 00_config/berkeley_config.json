@@ -23,16 +23,16 @@
     }
   },
   "paths": {
-    "root": "/Users/johngage/berkeley-data",
-    "data_dir": "/Users/johngage/berkeley-data/data/processed",
-    "raw_dir": "/Users/johngage/berkeley-data/data/raw",
-    "reference_dir": "/Users/johngage/berkeley-data/data/reference",
-    "output_dir": "/Users/johngage/berkeley-data/data/outputs",
-    "modules_dir": "/Users/johngage/berkeley-data/modules",
-    "database": "/Users/johngage/berkeley-data/databases/berkeley_housing_analysis.db",
-    "database_map": "/Users/johngage/berkeley-data/databases/berkeley_housing_map.db",
-    "lookup_table": "/Users/johngage/berkeley-data/data/reference/alameda_lookup_complete.csv",
-    "housing_projects": "/Users/johngage/berkeley-data/data/processed/housing_projects_FINAL.csv"
+    "data_dir": "data/processed",
+    "raw_dir": "data/raw",
+    "reference_dir": "data/reference",
+    "output_dir": "data/outputs",
+    "modules_dir": "modules",
+    "databases_dir": "databases",
+    "database": "databases/berkeley_housing_analysis.db",
+    "database_map": "databases/berkeley_housing_map.db",
+    "lookup_table": "data/reference/alameda_lookup_complete.csv",
+    "housing_projects": "data/processed/housing_projects_FINAL.csv"
   },
   "geocoding": {
     "berkeley_bounds": {

@@ -193,70 +193,83 @@
 
         <div class="section">
             <h2>Notebooks</h2>
+            <p style="margin-bottom: 1rem;">Click any notebook to open it directly in Google Colab:</p>
             <table>
                 <thead>
-                    <tr><th>Stage</th><th>Notebook</th><th>Description</th></tr>
+                    <tr><th>Stage</th><th>Notebook</th><th>Description</th><th>Run</th></tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td><span class="badge badge-green">A</span></td>
                         <td>A1_data_sources_setup</td>
                         <td>Connect to Berkeley Open Data API, handle WAF blocks</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/01_collection/A1_data_sources_setup.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-green">A</span></td>
                         <td>A2_address_standardization</td>
                         <td>Normalize addresses (FIFTH ↔ 5TH, Ave ↔ AV)</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/01_collection/A2_address_standardization.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-green">A</span></td>
                         <td>A3_geocoding_pipeline</td>
                         <td>Match to lat/lon using 563K address lookup</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/01_collection/A3_geocoding_pipeline.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-yellow">B</span></td>
                         <td>B1_lifecycle_tracking</td>
                         <td>Track permit stages: Zoning → Building → CO</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/02_tracking/B1_lifecycle_tracking.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-yellow">B</span></td>
                         <td>B2_status_classification</td>
                         <td>Classify status into pipeline categories</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/02_tracking/B2_status_classification.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-yellow">B</span></td>
                         <td>B3_progress_indicators</td>
                         <td>Identify stalled projects (>180 days)</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/02_tracking/B3_progress_indicators.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-red">C</span></td>
                         <td>C1_pipeline_analysis</td>
                         <td>Projects by status, conversion rates</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/03_analysis/C1_pipeline_analysis.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-red">C</span></td>
                         <td>C2_timeline_analysis</td>
                         <td>Processing times, bottleneck identification</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/03_analysis/C2_timeline_analysis.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-red">C</span></td>
                         <td>C3_proposal_vs_reality</td>
                         <td>RHNA tracking, "Making It Pencil" analysis</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/03_analysis/C3_proposal_vs_reality.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge" style="background:#e9d8fd;color:#553c9a;">D</span></td>
                         <td>D1_monthly_report_generator</td>
                         <td>HTML/PDF/JSON report generation</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/04_reporting/D1_monthly_report_generator.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge" style="background:#e9d8fd;color:#553c9a;">D</span></td>
                         <td>D2_dashboard_data_export</td>
                         <td>SQLite + Datasette deployment</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/04_reporting/D2_dashboard_data_export.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
                     </tr>
                     <tr>
                         <td><span class="badge" style="background:#e9d8fd;color:#553c9a;">D</span></td>
                         <td>D3_alerts_monitoring</td>
                         <td>Status change alerts, milestone tracking</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/04_reporting/D3_alerts_monitoring.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
                     </tr>
                 </tbody>
             </table>

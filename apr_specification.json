@@ -1,0 +1,575 @@
+{
+  "metadata": {
+    "title": "California Housing Element Annual Progress Report (APR) Specification",
+    "version": "2025-2026",
+    "source": "California Department of Housing and Community Development (HCD)",
+    "legal_basis": "Government Code Section 65400",
+    "deadline": "April 1 each year (covering previous calendar year)",
+    "submission": {
+      "online_portal": "HCD Connect",
+      "email": ["APR@hcd.ca.gov", "lci.apr@lci.ca.gov"]
+    },
+    "recent_legislation": [
+      "AB 879 (Chapter 374, 2017)",
+      "SB 35 (Chapter 366, 2017)",
+      "SB 6 (Chapter 659, 2022)",
+      "AB 2011 (Chapter 647, 2022)",
+      "SB 423 (Chapter 778, 2023)",
+      "AB 3093 (Chapter 282, 2024) - Expanded income categories",
+      "AB 2580 (Chapter 723, 2024) - Historical designation reporting"
+    ]
+  },
+  "income_categories": {
+    "acutely_low": {
+      "abbreviation": "ALI",
+      "definition": "0-15% of Area Median Income (AMI)",
+      "notes": "New category per AB 3093 for jurisdictions with RHNA after Sept 19, 2024"
+    },
+    "extremely_low": {
+      "abbreviation": "ELI",
+      "definition": "15-30% of Area Median Income (AMI)",
+      "notes": "Report in Table A2 field EXTR_LOW_INCOME_UNITS; also count toward very low"
+    },
+    "very_low": {
+      "abbreviation": "VLI",
+      "definition": "30-50% of Area Median Income (AMI)"
+    },
+    "low": {
+      "abbreviation": "LI",
+      "definition": "50-80% of Area Median Income (AMI)"
+    },
+    "moderate": {
+      "abbreviation": "MOD",
+      "definition": "80-120% of Area Median Income (AMI)"
+    },
+    "above_moderate": {
+      "abbreviation": "AM",
+      "definition": "Above 120% of Area Median Income (AMI)"
+    }
+  },
+  "unit_categories": {
+    "SFD": "Single Family Detached",
+    "SFA": "Single Family Attached",
+    "2-4": "2-4 Unit Structures",
+    "5+": "5+ Unit Structures",
+    "ADU": "Accessory Dwelling Unit",
+    "MH": "Manufactured/Mobile Home"
+  },
+  "tenure_types": {
+    "Owner": "Owner-occupied housing",
+    "Renter": "Rental housing"
+  },
+  "tables": {
+    "table_a": {
+      "name": "Housing Development Applications Submitted",
+      "purpose": "Track all applications for residential development determined complete during reporting year",
+      "fields": {
+        "JURIS_NAME": {
+          "description": "Name of reporting jurisdiction (city/county)",
+          "type": "text",
+          "required": true
+        },
+        "CNTY_NAME": {
+          "description": "County name",
+          "type": "text",
+          "required": true
+        },
+        "YEAR": {
+          "description": "Reporting year (calendar year)",
+          "type": "integer",
+          "required": true
+        },
+        "PRIOR_APN": {
+          "description": "Previous Assessor Parcel Number if applicable",
+          "type": "text",
+          "required": false
+        },
+        "APN": {
+          "description": "Current Assessor Parcel Number",
+          "type": "text",
+          "required": true,
+          "max_length": 40,
+          "notes": "Additional APNs in NOTES field"
+        },
+        "STREET_ADDRESS": {
+          "description": "Street number and name",
+          "type": "text",
+          "required": true
+        },
+        "PROJECT_NAME": {
+          "description": "Project name if available",
+          "type": "text",
+          "required": false
+        },
+        "JURS_TRACKING_ID": {
+          "description": "Local jurisdiction tracking/permit ID",
+          "type": "text",
+          "required": false
+        },
+        "UNIT_CAT": {
+          "description": "Unit category/structure type",
+          "type": "text",
+          "required": true,
+          "allowed_values": ["SFD", "SFA", "2-4", "5+", "ADU", "MH"]
+        },
+        "TENURE": {
+          "description": "Housing tenure type",
+          "type": "text",
+          "required": true,
+          "allowed_values": ["Owner", "Renter"]
+        },
+        "APP_SUBMIT_DT": {
+          "description": "Date application was deemed complete",
+          "type": "date",
+          "format": "MM/DD/YYYY",
+          "required": true
+        },
+        "VLOW_INCOME_DR": {
+          "description": "Very Low Income units with deed restriction",
+          "type": "integer",
+          "required": true
+        },
+        "VLOW_INCOME_NDR": {
+          "description": "Very Low Income units without deed restriction",
+          "type": "integer",
+          "required": true
+        },
+        "LOW_INCOME_DR": {
+          "description": "Low Income units with deed restriction",
+          "type": "integer",
+          "required": true
+        },
+        "LOW_INCOME_NDR": {
+          "description": "Low Income units without deed restriction",
+          "type": "integer",
+          "required": true
+        },
+        "MOD_INCOME_DR": {
+          "description": "Moderate Income units with deed restriction",
+          "type": "integer",
+          "required": true
+        },
+        "MOD_INCOME_NDR": {
+          "description": "Moderate Income units without deed restriction",
+          "type": "integer",
+          "required": true
+        },
+        "ABOVE_MOD_INCOME": {
+          "description": "Above Moderate Income units",
+          "type": "integer",
+          "required": true
+        },
+        "TOT_PROPOSED_UNITS": {
+          "description": "Total units proposed in application",
+          "type": "integer",
+          "required": true
+        },
+        "TOT_APPROVED_UNITS": {
+          "description": "Total units approved",
+          "type": "integer",
+          "required": true
+        },
+        "TOT_DISAPPROVED_UNITS": {
+          "description": "Total units disapproved",
+          "type": "integer",
+          "required": true
+        },
+        "APP_SUBMITTED_SB35": {
+          "description": "Was application submitted under SB 35 streamlining?",
+          "type": "text",
+          "allowed_values": ["Yes", "No"],
+          "required": true
+        },
+        "DENSITY_BONUS_RECEIVED": {
+          "description": "Did project receive density bonus?",
+          "type": "text",
+          "allowed_values": ["Yes", "No", "N/A"],
+          "required": true
+        },
+        "DENSITY_BONUS_APPROVED": {
+          "description": "Was density bonus request approved?",
+          "type": "text",
+          "allowed_values": ["Yes", "No", "N/A"],
+          "required": true
+        },
+        "APPLICATION_STATUS": {
+          "description": "Current status of application",
+          "type": "text",
+          "allowed_values": ["Approved", "Pending", "Disapproved"],
+          "required": true
+        },
+        "PROJECT_TYPE": {
+          "description": "Type of project",
+          "type": "text",
+          "required": false
+        },
+        "NOTES": {
+          "description": "Additional notes, additional APNs",
+          "type": "text",
+          "required": false
+        }
+      }
+    },
+    "table_a2": {
+      "name": "Annual Building Activity Report Summary - New Construction, Entitled, Permitted, and Completed Units",
+      "purpose": "Track entitlements, building permits, and certificates of occupancy issued during reporting year",
+      "business_rules": [
+        "Report only activity that occurred within the reporting year",
+        "If project received permits in 2025 but entitlements in 2024, 2025 APR includes only permit info",
+        "Once units have individual APNs, report each on separate row",
+        "Different structure types on same parcel go on separate rows"
+      ],
+      "fields": {
+        "JURIS_NAME": {
+          "description": "Name of reporting jurisdiction",
+          "type": "text",
+          "required": true
+        },
+        "CNTY_NAME": {
+          "description": "County name",
+          "type": "text",
+          "required": true
+        },
+        "YEAR": {
+          "description": "Reporting year",
+          "type": "integer",
+          "required": true
+        },
+        "PRIOR_APN": {
+          "description": "Previous APN if applicable",
+          "type": "text",
+          "required": false
+        },
+        "APN": {
+          "description": "Current Assessor Parcel Number",
+          "type": "text",
+          "required": true
+        },
+        "STREET_ADDRESS": {
+          "description": "Street number and name",
+          "type": "text",
+          "required": true
+        },
+        "PROJECT_NAME": {
+          "description": "Project name",
+          "type": "text",
+          "required": false
+        },
+        "JURS_TRACKING_ID": {
+          "description": "Local permit/tracking ID",
+          "type": "text",
+          "required": false
+        },
+        "UNIT_CAT": {
+          "description": "Unit category",
+          "type": "text",
+          "allowed_values": ["SFD", "SFA", "2-4", "5+", "ADU", "MH"],
+          "required": true
+        },
+        "TENURE": {
+          "description": "Tenure type",
+          "type": "text",
+          "allowed_values": ["Owner", "Renter"],
+          "required": true
+        },
+        "VLOW_INCOME_DR": {
+          "description": "Entitled Very Low Income units with deed restriction",
+          "type": "integer",
+          "required": true
+        },
+        "VLOW_INCOME_NDR": {
+          "description": "Entitled Very Low Income units without deed restriction",
+          "type": "integer",
+          "required": true
+        },
+        "LOW_INCOME_DR": {
+          "description": "Entitled Low Income units with deed restriction",
+          "type": "integer",
+          "required": true
+        },
+        "LOW_INCOME_NDR": {
+          "description": "Entitled Low Income units without deed restriction",
+          "type": "integer",
+          "required": true
+        },
+        "MOD_INCOME_DR": {
+          "description": "Entitled Moderate Income units with deed restriction",
+          "type": "integer",
+          "required": true
+        },
+        "MOD_INCOME_NDR": {
+          "description": "Entitled Moderate Income units without deed restriction",
+          "type": "integer",
+          "required": true
+        },
+        "ABOVE_MOD_INCOME": {
+          "description": "Entitled Above Moderate Income units",
+          "type": "integer",
+          "required": true
+        },
+        "ENT_APPROVE_DT1": {
+          "description": "Date entitlement approved (within reporting year)",
+          "type": "date",
+          "format": "MM/DD/YYYY",
+          "required": false,
+          "notes": "Leave blank if outside reporting year"
+        },
+        "NO_ENTITLEMENTS": {
+          "description": "Project has no entitlement activity this year",
+          "type": "boolean",
+          "required": true
+        },
+        "BP_VLOW_INCOME_DR": {
+          "description": "Building Permit Very Low Income units with deed restriction",
+          "type": "integer",
+          "required": true
+        },
+        "BP_VLOW_INCOME_NDR": {
+          "description": "Building Permit Very Low Income units without deed restriction",
+          "type": "integer",
+          "required": true
+        },
+        "BP_LOW_INCOME_DR": {
+          "description": "Building Permit Low Income units with deed restriction",
+          "type": "integer",
+          "required": true
+        },
+        "BP_LOW_INCOME_NDR": {
+          "description": "Building Permit Low Income units without deed restriction",
+          "type": "integer",
+          "required": true
+        },
+        "BP_MOD_INCOME_DR": {
+          "description": "Building Permit Moderate Income units with deed restriction",
+          "type": "integer",
+          "required": true
+        },
+        "BP_MOD_INCOME_NDR": {
+          "description": "Building Permit Moderate Income units without deed restriction",
+          "type": "integer",
+          "required": true
+        },
+        "BP_ABOVE_MOD_INCOME": {
+          "description": "Building Permit Above Moderate Income units",
+          "type": "integer",
+          "required": true
+        },
+        "BP_ISSUE_DT1": {
+          "description": "Date building permit issued (within reporting year)",
+          "type": "date",
+          "format": "MM/DD/YYYY",
+          "required": false
+        },
+        "NO_BUILDING_PERMITS": {
+          "description": "Project has no building permit activity this year",
+          "type": "boolean",
+          "required": true
+        },
+        "CO_VLOW_INCOME_DR": {
+          "description": "Certificate of Occupancy Very Low Income units with deed restriction",
+          "type": "integer",
+          "required": true
+        },
+        "CO_VLOW_INCOME_NDR": {
+          "description": "Certificate of Occupancy Very Low Income units without deed restriction",
+          "type": "integer",
+          "required": true
+        },
+        "CO_LOW_INCOME_DR": {
+          "description": "Certificate of Occupancy Low Income units with deed restriction",
+          "type": "integer",
+          "required": true
+        },
+        "CO_LOW_INCOME_NDR": {
+          "description": "Certificate of Occupancy Low Income units without deed restriction",
+          "type": "integer",
+          "required": true
+        },
+        "CO_MOD_INCOME_DR": {
+          "description": "Certificate of Occupancy Moderate Income units with deed restriction",
+          "type": "integer",
+          "required": true
+        },
+        "CO_MOD_INCOME_NDR": {
+          "description": "Certificate of Occupancy Moderate Income units without deed restriction",
+          "type": "integer",
+          "required": true
+        },
+        "CO_ABOVE_MOD_INCOME": {
+          "description": "Certificate of Occupancy Above Moderate Income units",
+          "type": "integer",
+          "required": true
+        },
+        "CO_ISSUE_DT1": {
+          "description": "Date certificate of occupancy issued",
+          "type": "date",
+          "format": "MM/DD/YYYY",
+          "required": false
+        },
+        "NO_OTHER_FORMS_OF_READINESS": {
+          "description": "No other forms of readiness to report",
+          "type": "boolean",
+          "required": true
+        },
+        "EXTR_LOW_INCOME_UNITS": {
+          "description": "Extremely Low Income units (subset of Very Low)",
+          "type": "integer",
+          "required": true,
+          "notes": "Must also report in VLI fields to count toward RHNA"
+        },
+        "APPROVE_SB35": {
+          "description": "Approved under SB 35 streamlining",
+          "type": "text",
+          "allowed_values": ["Y", "N"],
+          "required": true
+        },
+        "INFILL_UNITS": {
+          "description": "Number of infill units",
+          "type": "integer",
+          "required": true
+        },
+        "FIN_ASSIST_NAME": {
+          "description": "Financial assistance program name",
+          "type": "text",
+          "required": false
+        },
+        "DR_TYPE": {
+          "description": "Deed restriction type",
+          "type": "text",
+          "required": false
+        },
+        "NO_FA_DR": {
+          "description": "No financial assistance or deed restriction",
+          "type": "boolean",
+          "required": true
+        },
+        "TERM_AFF_DR": {
+          "description": "Term of affordability deed restriction (years)",
+          "type": "integer",
+          "required": false
+        },
+        "DEM_DES_UNITS": {
+          "description": "Demolished or designated units",
+          "type": "integer",
+          "required": true
+        },
+        "DEM_OR_DES_UNITS": {
+          "description": "Demolished or destroyed units",
+          "type": "integer",
+          "required": true
+        },
+        "DEM_DES_UNITS_OWN_RENT": {
+          "description": "Tenure of demolished/destroyed units",
+          "type": "text",
+          "allowed_values": ["Owner", "Renter"],
+          "required": false
+        },
+        "DENSITY_BONUS_TOTAL": {
+          "description": "Total density bonus units",
+          "type": "integer",
+          "required": true
+        },
+        "DENSITY_BONUS_NUMBER_OTHER_INCENTIVES": {
+          "description": "Number of other incentives received",
+          "type": "integer",
+          "required": false
+        },
+        "DENSITY_BONUS_INCENTIVES": {
+          "description": "Description of density bonus incentives",
+          "type": "text",
+          "required": false
+        },
+        "DENSITY_BONUS_RECEIVE_REDUCTION": {
+          "description": "Received parking reduction",
+          "type": "text",
+          "allowed_values": ["Yes", "No"],
+          "required": false
+        },
+        "NOTES": {
+          "description": "Additional notes, descriptions",
+          "type": "text",
+          "required": false
+        }
+      }
+    },
+    "table_b": {
+      "name": "Regional Housing Needs Allocation (RHNA) Progress",
+      "purpose": "Track progress toward RHNA by income category based on building permits issued",
+      "notes": "Building permits are the primary metric for RHNA progress",
+      "fields": {
+        "income_category": {
+          "description": "Income level (VLI, LI, MOD, AM, ELI, ALI)",
+          "type": "text",
+          "required": true
+        },
+        "rhna_allocation": {
+          "description": "Total RHNA allocation for planning period",
+          "type": "integer",
+          "required": true
+        },
+        "permits_issued_this_year": {
+          "description": "Building permits issued this reporting year",
+          "type": "integer",
+          "required": true
+        },
+        "permits_issued_to_date": {
+          "description": "Cumulative permits since start of planning period",
+          "type": "integer",
+          "required": true
+        },
+        "remaining_need": {
+          "description": "Remaining units to meet RHNA",
+          "type": "integer",
+          "derived": true
+        }
+      }
+    },
+    "table_c": {
+      "name": "Sites Inventory",
+      "purpose": "Track sites identified for housing development",
+      "fields": {
+        "site_address_apn": "Site identification",
+        "zoning": "Current zoning designation",
+        "general_plan": "General plan designation",
+        "realistic_capacity": "Realistic unit capacity",
+        "income_category": "Target income level",
+        "site_status": "Development status"
+      }
+    },
+    "table_d": {
+      "name": "Housing Element Program Implementation",
+      "purpose": "Report progress on housing element program objectives",
+      "fields": {
+        "program_name": "Name of housing element program",
+        "objective": "Program objective",
+        "timeframe": "Implementation timeframe",
+        "status": "Implementation status",
+        "progress_description": "Description of progress made"
+      }
+    },
+    "table_e": {
+      "name": "Commercial Development Bonus",
+      "purpose": "Track commercial development bonuses under AB 2011/SB 6"
+    },
+    "table_f": {
+      "name": "Units Rehabilitated, Preserved, and Acquired",
+      "purpose": "Track units not counted as new construction"
+    },
+    "table_g": {
+      "name": "Locally Owned Lands Inventory",
+      "purpose": "Track publicly owned surplus lands per AB 1486"
+    },
+    "table_h": {
+      "name": "Units Built by Housing Type",
+      "purpose": "Summary by structure type"
+    }
+  },
+  "key_definitions": {
+    "entitlement": "All required land use approvals issued (zoning, use permit, design review, etc.)",
+    "building_permit": "Permit authorizing construction, issued by building department",
+    "certificate_of_occupancy": "Final approval allowing occupancy after construction complete",
+    "deed_restriction": "Legal restriction ensuring affordability for specified term",
+    "reporting_period": "Calendar year (January 1 - December 31)",
+    "planning_period": "8-year Housing Element cycle (e.g., 6th cycle: 2023-2031 for most jurisdictions)"
+  }
+}

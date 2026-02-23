@@ -1,0 +1,239 @@
+{
+  "metadata": {
+    "source_file": "data/processed/housing_projects_FINAL.csv",
+    "source_records": 115,
+    "analysis_date": "2026-02-22",
+    "target": "California HCD Annual Progress Report (APR)"
+  },
+  "field_mapping": {
+    "table_a2": {
+      "JURIS_NAME": {
+        "status": "missing",
+        "source_field": null,
+        "derivation_logic": "Hardcode 'BERKELEY' for all records",
+        "priority": "low",
+        "notes": "Easy to add as constant"
+      },
+      "CNTY_NAME": {
+        "status": "missing",
+        "source_field": null,
+        "derivation_logic": "Hardcode 'Alameda' for all records",
+        "priority": "low",
+        "notes": "Easy to add as constant"
+      },
+      "YEAR": {
+        "status": "direct",
+        "source_field": "year",
+        "derivation_logic": null,
+        "priority": "none",
+        "notes": "Direct mapping, may need integer conversion"
+      },
+      "PRIOR_APN": {
+        "status": "missing",
+        "source_field": null,
+        "derivation_logic": null,
+        "priority": "low",
+        "notes": "Optional field"
+      },
+      "APN": {
+        "status": "partial",
+        "source_field": "apn",
+        "derivation_logic": null,
+        "priority": "high",
+        "notes": "Only 3 of 115 records have APN - need to populate from Alameda County parcel data"
+      },
+      "STREET_ADDRESS": {
+        "status": "direct",
+        "source_field": "address_display",
+        "derivation_logic": null,
+        "priority": "none",
+        "notes": "Direct mapping"
+      },
+      "PROJECT_NAME": {
+        "status": "missing",
+        "source_field": null,
+        "derivation_logic": "Could extract from description",
+        "priority": "low",
+        "notes": "Optional field"
+      },
+      "JURS_TRACKING_ID": {
+        "status": "direct",
+        "source_field": "permits",
+        "derivation_logic": null,
+        "priority": "none",
+        "notes": "Use permit number as tracking ID"
+      },
+      "UNIT_CAT": {
+        "status": "derivable",
+        "source_field": "net_units + description",
+        "derivation_logic": "Classify based on unit count: 1=SFD/ADU, 2-4='2-4', 5+='5+'. Parse description for 'ADU', 'accessory'",
+        "priority": "medium",
+        "notes": "Need to add classification logic"
+      },
+      "TENURE": {
+        "status": "missing",
+        "source_field": null,
+        "derivation_logic": "Most multi-family in Berkeley is rental. Could default to 'Renter' for 5+ units",
+        "priority": "high",
+        "notes": "Required field - need to determine owner vs renter"
+      },
+      "VLOW_INCOME_DR": {
+        "status": "missing",
+        "source_field": null,
+        "derivation_logic": "Parse description for 'Very Low-Income' mentions",
+        "priority": "critical",
+        "notes": "Required for RHNA tracking. Some descriptions mention VLI units"
+      },
+      "VLOW_INCOME_NDR": {
+        "status": "missing",
+        "source_field": null,
+        "derivation_logic": null,
+        "priority": "critical",
+        "notes": "Required field - need affordability data"
+      },
+      "LOW_INCOME_DR": {
+        "status": "missing",
+        "source_field": null,
+        "derivation_logic": "Parse description for 'Low-Income' mentions",
+        "priority": "critical",
+        "notes": "Required field"
+      },
+      "LOW_INCOME_NDR": {
+        "status": "missing",
+        "source_field": null,
+        "derivation_logic": null,
+        "priority": "critical",
+        "notes": "Required field"
+      },
+      "MOD_INCOME_DR": {
+        "status": "missing",
+        "source_field": null,
+        "derivation_logic": null,
+        "priority": "critical",
+        "notes": "Required field"
+      },
+      "MOD_INCOME_NDR": {
+        "status": "missing",
+        "source_field": null,
+        "derivation_logic": null,
+        "priority": "critical",
+        "notes": "Required field"
+      },
+      "ABOVE_MOD_INCOME": {
+        "status": "derivable",
+        "source_field": "net_units - (VLI + LI + MOD)",
+        "derivation_logic": "Total units minus affordable units = above moderate",
+        "priority": "medium",
+        "notes": "Can calculate once affordable counts known"
+      },
+      "ENT_APPROVE_DT1": {
+        "status": "missing",
+        "source_field": null,
+        "derivation_logic": "Would need to pull from zoning permit records",
+        "priority": "high",
+        "notes": "Need entitlement dates from permit system"
+      },
+      "BP_ISSUE_DT1": {
+        "status": "missing",
+        "source_field": null,
+        "derivation_logic": "Would need building permit issuance dates",
+        "priority": "high",
+        "notes": "Need building permit dates"
+      },
+      "CO_ISSUE_DT1": {
+        "status": "missing",
+        "source_field": null,
+        "derivation_logic": "Would need certificate of occupancy dates",
+        "priority": "high",
+        "notes": "Need CO dates for completion tracking"
+      },
+      "EXTR_LOW_INCOME_UNITS": {
+        "status": "derivable",
+        "source_field": "description",
+        "derivation_logic": "Parse for 'extremely low' mentions",
+        "priority": "medium",
+        "notes": "Some descriptions mention ELI units"
+      },
+      "APPROVE_SB35": {
+        "status": "derivable",
+        "source_field": "description",
+        "derivation_logic": "Search for 'SB 35', 'SB35' in description",
+        "priority": "medium",
+        "notes": "Can parse from descriptions"
+      },
+      "DENSITY_BONUS_TOTAL": {
+        "status": "derivable",
+        "source_field": "description",
+        "derivation_logic": "Parse for 'density bonus' mentions and extract bonus unit count",
+        "priority": "medium",
+        "notes": "Many descriptions mention density bonus"
+      },
+      "NOTES": {
+        "status": "direct",
+        "source_field": "description",
+        "derivation_logic": null,
+        "priority": "none",
+        "notes": "Can use full description"
+      }
+    }
+  },
+  "coverage_summary": {
+    "direct": 5,
+    "derivable": 7,
+    "partial": 1,
+    "missing": 15,
+    "total_required_fields": 28
+  },
+  "critical_gaps": [
+    {
+      "field": "Income Category Breakdown (VLI/LI/MOD/AM)",
+      "impact": "Cannot track RHNA progress without income categorization",
+      "solution": "1) Parse descriptions for affordability mentions, 2) Cross-reference with city affordability database, 3) Manual review for large projects",
+      "data_sources": [
+        "Berkeley Housing Department affordability records",
+        "Project descriptions mentioning 'Very Low-Income', 'Low-Income'",
+        "Density bonus applications (typically include affordable unit counts)"
+      ]
+    },
+    {
+      "field": "APN (Assessor Parcel Number)",
+      "impact": "Required for state reporting",
+      "solution": "Match addresses to Alameda County parcel data (you have alameda_lookup_complete.csv)",
+      "data_sources": ["data/reference/alameda_lookup_complete.csv"]
+    },
+    {
+      "field": "Permit Stage Dates",
+      "impact": "Cannot determine which year to report activity",
+      "solution": "Extract dates from permit system or BuildingEye",
+      "data_sources": [
+        "Berkeley Building Permit system",
+        "Zoning permit records",
+        "Clariti (when available)"
+      ]
+    },
+    {
+      "field": "Tenure (Owner/Renter)",
+      "impact": "Required field for APR",
+      "solution": "Default most multi-family to Renter, parse descriptions for ownership mentions",
+      "data_sources": ["Project descriptions", "Zoning permit applications"]
+    }
+  ],
+  "extractable_from_descriptions": {
+    "density_bonus": {
+      "pattern": "density bonus|50 percent density bonus|35 percent density bonus",
+      "examples": ["50 percent density bonus, 28 density bonus maximum units"]
+    },
+    "affordable_units": {
+      "pattern": "Very Low-Income|Low-Income|extremely low|moderate-income|affordable",
+      "examples": ["26 Very Low-Income Units", "15 percent of the base project units (56 units) are dedicated to nine Very Low-Income households"]
+    },
+    "sb35_sb330": {
+      "pattern": "SB 35|SB35|SB 330|SB330|AB 2011|AB2011",
+      "examples": ["SB330 Preliminary Application", "AB 2011 Ministerial Application"]
+    },
+    "unit_count": {
+      "pattern": "\\d+ dwelling units|\\d+ units|\\d+-unit",
+      "examples": ["257 dwelling units", "45-unit housing development"]
+    }
+  }
+}

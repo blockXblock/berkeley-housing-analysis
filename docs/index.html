@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berkeley Housing Pipeline Analysis</title>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent: #3182ce;
+            --light: #ebf8ff;
+            --text: #2d3748;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: #f7fafc;
+        }
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .hero p { font-size: 1.25rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .stat { text-align: center; }
+        .stat-value { font-size: 2.5rem; font-weight: bold; }
+        .stat-label { font-size: 0.9rem; opacity: 0.8; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .card h3 { color: var(--primary); margin-bottom: 0.5rem; }
+        .card p { color: #666; font-size: 0.95rem; }
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 1rem;
+            transition: background 0.2s;
+        }
+        .btn:hover { background: var(--secondary); }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+        .btn-outline:hover { background: var(--accent); color: white; }
+        .section { margin: 3rem 0; }
+        .section h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .pipeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .pipeline-stage {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            flex: 1;
+            min-width: 120px;
+        }
+        .pipeline-stage strong { display: block; color: var(--primary); }
+        .pipeline-arrow { color: var(--accent); font-size: 1.5rem; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
+        th { background: var(--light); color: var(--primary); }
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .badge-green { background: #c6f6d5; color: #22543d; }
+        .badge-yellow { background: #fefcbf; color: #744210; }
+        .badge-red { background: #fed7d7; color: #822727; }
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        footer a { color: var(--light); }
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.75rem; }
+            .stats { gap: 1.5rem; }
+            .pipeline-arrow { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Berkeley Housing Pipeline Analysis</h1>
+        <p>Track housing development from permit application to certificate of occupancy. Built for California HCD Annual Progress Report compliance.</p>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">115</div>
+                <div class="stat-label">Housing Projects</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">5,470</div>
+                <div class="stat-label">Net New Units</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">96.5%</div>
+                <div class="stat-label">APN Coverage</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">100%</div>
+                <div class="stat-label">Geocoded</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="cards">
+            <div class="card">
+                <h3>Live Data Map</h3>
+                <p>Interactive map of all Berkeley housing projects with status, units, and timeline data.</p>
+                <a href="https://berkeley-housing.fly.dev/" class="btn" target="_blank">View Map</a>
+            </div>
+            <div class="card">
+                <h3>Run Analysis (Colab)</h3>
+                <p>Execute the full pipeline in Google Colab. No local setup required.</p>
+                <a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/MASTER_ANALYSIS.ipynb" class="btn" target="_blank">Open in Colab</a>
+            </div>
+            <div class="card">
+                <h3>GitHub Repository</h3>
+                <p>Source code, data files, and documentation for the complete analysis pipeline.</p>
+                <a href="https://github.com/blockXblock/berkeley-housing-analysis" class="btn btn-outline" target="_blank">View Code</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>4-Stage Pipeline</h2>
+            <div class="pipeline">
+                <div class="pipeline-stage">
+                    <strong>A: Collection</strong>
+                    <span>API + Manual</span>
+                </div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-stage">
+                    <strong>B: Tracking</strong>
+                    <span>Timeline</span>
+                </div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-stage">
+                    <strong>C: Analysis</strong>
+                    <span>Statistics</span>
+                </div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-stage">
+                    <strong>D: Reporting</strong>
+                    <span>APR Export</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Notebooks</h2>
+            <table>
+                <thead>
+                    <tr><th>Stage</th><th>Notebook</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge badge-green">A</span></td>
+                        <td>A1_data_sources_setup</td>
+                        <td>Connect to Berkeley Open Data API, handle WAF blocks</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-green">A</span></td>
+                        <td>A2_address_standardization</td>
+                        <td>Normalize addresses (FIFTH ↔ 5TH, Ave ↔ AV)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-green">A</span></td>
+                        <td>A3_geocoding_pipeline</td>
+                        <td>Match to lat/lon using 563K address lookup</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-yellow">B</span></td>
+                        <td>B1_lifecycle_tracking</td>
+                        <td>Track permit stages: Zoning → Building → CO</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-yellow">B</span></td>
+                        <td>B2_status_classification</td>
+                        <td>Classify status into pipeline categories</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-yellow">B</span></td>
+                        <td>B3_progress_indicators</td>
+                        <td>Identify stalled projects (>180 days)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-red">C</span></td>
+                        <td>C1_pipeline_analysis</td>
+                        <td>Projects by status, conversion rates</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-red">C</span></td>
+                        <td>C2_timeline_analysis</td>
+                        <td>Processing times, bottleneck identification</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-red">C</span></td>
+                        <td>C3_proposal_vs_reality</td>
+                        <td>RHNA tracking, "Making It Pencil" analysis</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge" style="background:#e9d8fd;color:#553c9a;">D</span></td>
+                        <td>D1_monthly_report_generator</td>
+                        <td>HTML/PDF/JSON report generation</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge" style="background:#e9d8fd;color:#553c9a;">D</span></td>
+                        <td>D2_dashboard_data_export</td>
+                        <td>SQLite + Datasette deployment</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge" style="background:#e9d8fd;color:#553c9a;">D</span></td>
+                        <td>D3_alerts_monitoring</td>
+                        <td>Status change alerts, milestone tracking</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>APR Compliance Status</h2>
+            <p>Progress toward California HCD Annual Progress Report requirements:</p>
+            <table>
+                <thead>
+                    <tr><th>Category</th><th>Coverage</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Direct mappings (year, address, permits)</td>
+                        <td>5 fields</td>
+                        <td><span class="badge badge-green">Ready</span></td>
+                    </tr>
+                    <tr>
+                        <td>Derivable (unit_category, SB35 flag)</td>
+                        <td>7 fields</td>
+                        <td><span class="badge badge-green">Ready</span></td>
+                    </tr>
+                    <tr>
+                        <td>APN (Assessor Parcel Number)</td>
+                        <td>96.5%</td>
+                        <td><span class="badge badge-green">Ready</span></td>
+                    </tr>
+                    <tr>
+                        <td>Income breakdown (VLI, LI, MOD)</td>
+                        <td>0%</td>
+                        <td><span class="badge badge-red">Needs Data</span></td>
+                    </tr>
+                    <tr>
+                        <td>Permit dates (entitlement, BP, CO)</td>
+                        <td>0%</td>
+                        <td><span class="badge badge-yellow">In Progress</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Quick Start</h2>
+            <p>Three ways to explore the data:</p>
+            <ol style="margin: 1rem 0; padding-left: 1.5rem;">
+                <li><strong>Live Map:</strong> <a href="https://berkeley-housing.fly.dev/">berkeley-housing.fly.dev</a> - Browse projects interactively</li>
+                <li><strong>Colab:</strong> Click "Open in Colab" above - Run full analysis in browser</li>
+                <li><strong>Local:</strong> <code>git clone https://github.com/blockXblock/berkeley-housing-analysis && jupyter lab MASTER_ANALYSIS.ipynb</code></li>
+            </ol>
+        </div>
+    </div>
+
+    <footer>
+        <p>Berkeley Housing Pipeline Analysis | <a href="https://github.com/blockXblock/berkeley-housing-analysis">GitHub</a> | Updated February 2026</p>
+        <p style="margin-top: 0.5rem; opacity: 0.8;">Built for California HCD Annual Progress Report compliance</p>
+    </footer>
+</body>
+</html>

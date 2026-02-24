@@ -11,10 +11,13 @@ permits_raw.csv
 housing_projects_filtered.csv
 *_refreshed_*.csv
 
-# Generated files
+# Generated outputs
 *.db
 outputs/*.html
 outputs/*.md
+data/outputs/
+data/backups/
+databases/
 
 # Keep structure
 !outputs/.gitkeep

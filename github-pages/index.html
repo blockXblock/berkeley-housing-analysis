@@ -22,8 +22,14 @@
             margin: 0 0 10px 0;
             color: #003262;
         }
+        h2 {
+            color: #003262;
+            margin-top: 0;
+            font-size: 18px;
+        }
         .stats {
             display: flex;
+            flex-wrap: wrap;
             gap: 30px;
             margin-top: 15px;
         }
@@ -34,32 +40,134 @@
             color: #003262;
             font-size: 24px;
         }
+        .stat.highlight strong {
+            color: #C4820E;
+        }
         iframe {
             border: none;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .timeline-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .timeline-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 4px solid #003262;
+        }
+        .timeline-item.active {
+            border-left-color: #C4820E;
+        }
+        .timeline-item strong {
+            display: block;
+            color: #003262;
+        }
+        .links {
+            margin-top: 15px;
+        }
+        .links a {
+            color: #003262;
+            margin-right: 20px;
+            text-decoration: none;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+        .badge {
+            display: inline-block;
+            background: #C4820E;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 10px;
         }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Berkeley Housing Permit Pipeline (2020-2026)</h1>
-        <p>Interactive map showing 84 housing development projects in Berkeley, CA</p>
+        <p>Tracking housing development from permit application to certificate of occupancy</p>
         <div class="stats">
             <div class="stat">
-                <strong>84</strong><br>
+                <strong>115</strong><br>
                 Projects
             </div>
             <div class="stat">
-                <strong>5,283</strong><br>
+                <strong>5,470</strong><br>
                 Housing Units
             </div>
+            <div class="stat highlight">
+                <strong>6</strong><br>
+                With Full Timeline
+            </div>
+            <div class="stat highlight">
+                <strong>58</strong><br>
+                Permit Events
+            </div>
             <div class="stat">
-                <strong>2020-2025</strong><br>
+                <strong>2020-2026</strong><br>
                 Timeline
             </div>
         </div>
+        <div class="links">
+            <a href="https://berkeley-housing.fly.dev/">Explore Database</a>
+            <a href="https://github.com/blockXblock/berkeley-housing-analysis">GitHub</a>
+            <a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/MASTER_ANALYSIS.ipynb">Run in Colab</a>
+        </div>
     </div>
+
+    <div class="timeline-section">
+        <h2>Timeline Tracking <span class="badge">NEW</span></h2>
+        <p>We now track the complete permit lifecycle with timestamps for each stage:</p>
+        <div class="timeline-grid">
+            <div class="timeline-item">
+                <strong>Filing</strong>
+                First permit submission date
+            </div>
+            <div class="timeline-item active">
+                <strong>Completeness Review</strong>
+                Rounds of corrections tracked
+            </div>
+            <div class="timeline-item">
+                <strong>CEQA Determination</strong>
+                Exemption or environmental review
+            </div>
+            <div class="timeline-item">
+                <strong>Staff Decision</strong>
+                Approval/denial date
+            </div>
+            <div class="timeline-item active">
+                <strong>Appeal</strong>
+                Appeal to City Council if filed
+            </div>
+            <div class="timeline-item">
+                <strong>Issuance</strong>
+                Building permit issued
+            </div>
+            <div class="timeline-item">
+                <strong>Certificate of Occupancy</strong>
+                Project completion
+            </div>
+        </div>
+        <p style="margin-top: 15px; color: #666; font-size: 14px;">
+            <strong>Current coverage:</strong> 6 largest projects (2,098 units) with detailed timeline data.
+            47 permits linked. $82,784 in fees tracked. Data collection ongoing.
+        </p>
+    </div>
+
     <iframe src="map.html" width="100%" height="800"></iframe>
 </body>
 </html>

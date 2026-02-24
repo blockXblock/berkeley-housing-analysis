@@ -1,0 +1,82 @@
+{
+  "title": "Berkeley Housing Pipeline Database",
+  "description": "Track 115 housing development projects in Berkeley, CA from permit filing through Certificate of Occupancy.",
+  "source": "City of Berkeley Planning & Building Departments",
+  "source_url": "https://aca-prod.accela.com/BERKELEY/",
+  "license": "Public Domain (CC0)",
+  "databases": {
+    "berkeley_housing_map": {
+      "title": "Berkeley Housing Pipeline",
+      "description": "Housing projects with timeline tracking",
+      "tables": {
+        "projects": {
+          "title": "All Projects (115)",
+          "description": "Housing projects with timeline dates - 5,470 total units",
+          "sort_desc": "net_units",
+          "facets": ["year", "project_size_category", "is_completed"],
+          "plugins": {
+            "datasette-cluster-map": {
+              "latitude_column": "latitude",
+              "longitude_column": "longitude"
+            }
+          }
+        },
+        "project_permits": {
+          "title": "Permits (47)",
+          "description": "Individual permits linked to projects with filing dates",
+          "sort_desc": "filed_date",
+          "facets": ["permit_type", "permit_module", "permit_year", "status"]
+        },
+        "permit_events": {
+          "title": "Permit Events (58)",
+          "description": "Processing status events with dates - track each step of the pipeline",
+          "sort_desc": "event_date",
+          "facets": ["permit_type", "stage", "action", "stage_status"]
+        },
+        "permit_fees": {
+          "title": "Fees Paid",
+          "description": "Fee payment records by permit",
+          "sort_desc": "payment_date"
+        },
+        "project_velocity": {
+          "title": "Project Velocity (Analysis View)",
+          "description": "Calculate days at each stage, correction rounds, approval times",
+          "sort_desc": "net_units"
+        },
+        "data_collection_log": {
+          "title": "Data Collection Log",
+          "description": "Track when data was imported",
+          "sort_desc": "collection_date"
+        }
+      },
+      "queries": {
+        "stalled_projects": {
+          "title": "Stalled Projects",
+          "description": "Projects with no activity for 180+ days",
+          "sql": "SELECT address_display, net_units, first_filed_date, last_status_date, CAST(JULIANDAY('now') - JULIANDAY(COALESCE(last_status_date, first_filed_date)) AS INTEGER) as days_inactive FROM projects WHERE is_completed = 0 AND JULIANDAY('now') - JULIANDAY(COALESCE(last_status_date, first_filed_date)) > 180 ORDER BY days_inactive DESC"
+        },
+        "timeline_by_project": {
+          "title": "Project Timeline Events",
+          "description": "All events for a specific project",
+          "sql": "SELECT p.address_display, pe.permit_number, pe.stage, pe.action, pe.event_date, pe.marked_by FROM permit_events pe JOIN projects p ON pe.project_id = p.id ORDER BY p.address_display, pe.event_date"
+        },
+        "fees_by_project": {
+          "title": "Fees by Project",
+          "description": "Total fees paid per project",
+          "sql": "SELECT p.address_display, p.net_units, p.total_fees_paid, COUNT(pf.id) as fee_payments FROM projects p LEFT JOIN permit_fees pf ON p.id = pf.project_id WHERE p.total_fees_paid > 0 GROUP BY p.id ORDER BY p.total_fees_paid DESC"
+        },
+        "permits_by_year": {
+          "title": "Permits Filed by Year",
+          "description": "Count of permits filed each year",
+          "sql": "SELECT permit_year, permit_prefix, COUNT(*) as count FROM project_permits WHERE permit_year IS NOT NULL GROUP BY permit_year, permit_prefix ORDER BY permit_year DESC, count DESC"
+        }
+      }
+    }
+  },
+  "plugins": {
+    "datasette-cluster-map": {
+      "latitude_column": "latitude",
+      "longitude_column": "longitude"
+    }
+  }
+}

@@ -129,19 +129,19 @@
         <p>Track housing development from permit application to certificate of occupancy. Built for California HCD Annual Progress Report compliance.</p>
         <div class="stats">
             <div class="stat">
-                <div class="stat-value">115</div>
+                <div class="stat-value" id="stat-projects">--</div>
                 <div class="stat-label">Housing Projects</div>
             </div>
             <div class="stat">
-                <div class="stat-value">5,470</div>
+                <div class="stat-value" id="stat-units">--</div>
                 <div class="stat-label">Net New Units</div>
             </div>
             <div class="stat">
-                <div class="stat-value">96.5%</div>
+                <div class="stat-value" id="stat-apn">--</div>
                 <div class="stat-label">APN Coverage</div>
             </div>
             <div class="stat">
-                <div class="stat-value">100%</div>
+                <div class="stat-value" id="stat-geocoded">--</div>
                 <div class="stat-label">Geocoded</div>
             </div>
         </div>
@@ -442,5 +442,75 @@
         <p>Berkeley Housing Pipeline Analysis | <a href="https://github.com/blockXblock/berkeley-housing-analysis">GitHub</a> | Updated February 2026</p>
         <p style="margin-top: 0.5rem; opacity: 0.8;">Built for California HCD Annual Progress Report compliance</p>
     </footer>
+
+    <script>
+    // Fetch live stats from Datasette API
+    const DATASETTE_URL = 'https://berkeley-housing.fly.dev';
+
+    // Fallback values if API is unavailable
+    const FALLBACK = {
+        projects: 115,
+        units: 5470,
+        apn_pct: 96.5,
+        geocoded_pct: 100
+    };
+
+    async function loadStats() {
+        try {
+            // Query for project count and total units
+            const statsQuery = encodeURIComponent(
+                'SELECT COUNT(*) as projects, CAST(SUM(net_units) AS INTEGER) as units FROM projects'
+            );
+            const statsUrl = `${DATASETTE_URL}/berkeley_housing_map.json?sql=${statsQuery}&_shape=array`;
+
+            const response = await fetch(statsUrl);
+            if (!response.ok) throw new Error('API unavailable');
+
+            const data = await response.json();
+            const stats = data[0];
+
+            // Update project count
+            document.getElementById('stat-projects').textContent =
+                stats.projects.toLocaleString();
+
+            // Update units
+            document.getElementById('stat-units').textContent =
+                stats.units ? stats.units.toLocaleString() : FALLBACK.units.toLocaleString();
+
+            // Query for APN and geocoding coverage
+            const coverageQuery = encodeURIComponent(
+                `SELECT
+                    ROUND(100.0 * SUM(CASE WHEN apn IS NOT NULL AND apn != '' THEN 1 ELSE 0 END) / COUNT(*), 1) as apn_pct,
+                    ROUND(100.0 * SUM(CASE WHEN latitude IS NOT NULL THEN 1 ELSE 0 END) / COUNT(*), 1) as geo_pct
+                FROM projects`
+            );
+            const coverageUrl = `${DATASETTE_URL}/berkeley_housing_map.json?sql=${coverageQuery}&_shape=array`;
+
+            const coverageResponse = await fetch(coverageUrl);
+            if (coverageResponse.ok) {
+                const coverageData = await coverageResponse.json();
+                const coverage = coverageData[0];
+
+                document.getElementById('stat-apn').textContent =
+                    (coverage.apn_pct || FALLBACK.apn_pct) + '%';
+                document.getElementById('stat-geocoded').textContent =
+                    (coverage.geo_pct || FALLBACK.geocoded_pct) + '%';
+            } else {
+                throw new Error('Coverage query failed');
+            }
+
+        } catch (error) {
+            console.log('Using fallback stats:', error.message);
+            // Use fallback values
+            document.getElementById('stat-projects').textContent = FALLBACK.projects.toLocaleString();
+            document.getElementById('stat-units').textContent = FALLBACK.units.toLocaleString();
+            document.getElementById('stat-apn').textContent = FALLBACK.apn_pct + '%';
+            document.getElementById('stat-geocoded').textContent = FALLBACK.geocoded_pct + '%';
+        }
+    }
+
+    // Load stats when page loads
+    loadStats();
+    </script>
 </body>
 </html>

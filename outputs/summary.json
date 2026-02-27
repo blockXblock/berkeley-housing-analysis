@@ -1,0 +1,33 @@
+{
+  "generated": "2026-02-26T20:02:15.763545",
+  "total_projects": 156,
+  "total_units": 5470,
+  "by_data_source": {
+    "both": {
+      "count": 50,
+      "units": 4167
+    },
+    "media_reported": {
+      "count": 41,
+      "units": 0
+    },
+    "official_permit": {
+      "count": 65,
+      "units": 1303
+    }
+  },
+  "by_status": {
+    "Reported in media": 41,
+    "Under Review": 40,
+    "Incomplete Pending Applicant": 19,
+    "In Review": 17,
+    "Corrections Pending Applicant": 17,
+    "Pending Final Action": 12,
+    "Approved": 3,
+    "Pending": 3,
+    "Resubmittal Pending Staff": 2,
+    "Resubmittal Pending Review": 1
+  },
+  "with_coordinates": 127,
+  "with_news_coverage": 88
+}

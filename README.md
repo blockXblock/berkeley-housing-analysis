@@ -53,7 +53,7 @@ berkeley-data/
 
 ## What's Inside
 
-- **84 housing projects** totaling **5,283 net new units**
+- **203 housing projects** totaling **9,000 net new units**
 - **100% geocoded** using Alameda County GIS address points
 - **Interactive maps** color-coded by project size
 - **SQL database** with analysis queries

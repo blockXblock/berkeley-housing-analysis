@@ -18,7 +18,7 @@ Build a complete, replicable data science course for analyzing city housing and 
 ## Course Structure
 
 ```
-01_collection/      → A-Series: Data Collection (4 notebooks)
+01_collection/      → A-Series: Data Collection (5 notebooks)
 02_tracking/        → B-Series: Timeline Tracking (3 notebooks)
 03_analysis/        → C-Series: Analysis (3 notebooks)
 04_reporting/       → D-Series: Reporting (3 notebooks)
@@ -35,6 +35,7 @@ Build a complete, replicable data science course for analyzing city housing and 
 | **A1_data_sources_setup** | Berkeley Open Data, Accela portal, manual downloads |
 | **A2_address_standardization** | Clean messy addresses for geocoding |
 | **A3_geocoding_pipeline** | 100% success using Alameda County lookup (563K addresses) |
+| **A4_apn_enrichment** | Match projects to Assessor Parcel Numbers (APN) |
 | **A5_buildingeye_import** | Design review and permit timeline data |
 
 **Real-world learning:** APIs often blocked, manual workflows required, importance of data quality
@@ -207,7 +208,7 @@ Replace Berkeley-specific elements:
 ## Output Products
 
 ### For Students
-- 15 complete notebooks (A-F series)
+- 16 complete notebooks (A-F series)
 - Real civic data experience
 - Portfolio-ready project
 - Deployed live database
@@ -251,4 +252,4 @@ This is an open educational resource. Improvements welcome:
 
 **Last Updated:** February 2026
 **Berkeley Data:** Current through Feb 24, 2026
-**Notebooks:** 15 (A1-A5, B1-B3, C1-C3, D1-D3, F1-F2)
+**Notebooks:** 16 (A1-A5, B1-B3, C1-C3, D1-D3, F1-F2)

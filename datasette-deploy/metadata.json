@@ -1,24 +1,19 @@
 {
-  "title": "Berkeley Housing Pipeline Database",
-  "description": "Track 156 housing development projects in Berkeley, CA (115 permitted, 41 proposed/reported).",
-  "source": "City of Berkeley Planning & Building Departments, Eric Gellerman's Berkeley Development Map",
+  "title": "Berkeley Housing & Address Database",
+  "description": "Track 156 housing projects linked to 62,226 Berkeley addresses. Every street, every parcel, every project.",
+  "source": "City of Berkeley, Alameda County GIS, Eric Gellerman's Berkeley Development Map",
   "source_url": "https://github.com/blockXblock/berkeley-housing-analysis",
   "license": "Public Domain (CC0)",
   "databases": {
     "berkeley_housing_map": {
-      "title": "Berkeley Housing Pipeline",
-      "description": "Housing projects with timeline tracking - 5,470 total units",
+      "title": "Housing Projects (156)",
+      "description": "Active housing development projects with permits, units, and news coverage",
       "tables": {
         "projects": {
-          "title": "All Projects (156)",
-          "description": "Housing projects from permits and media - 5,470 total units",
+          "title": "All Projects",
+          "description": "156 housing projects - 5,470 total units",
           "sort_desc": "net_units",
-          "facets": [
-            "status",
-            "data_source",
-            "has_official_permit",
-            "has_media_coverage"
-          ],
+          "facets": ["status", "data_source", "has_official_permit", "has_media_coverage"],
           "plugins": {
             "datasette-cluster-map": {
               "latitude_column": "latitude",
@@ -29,32 +24,73 @@
         "news_coverage": {
           "title": "News Coverage",
           "description": "Media articles about housing projects",
-          "sort_desc": "date_added",
-          "facets": [
-            "source"
-          ]
+          "facets": ["source"]
         }
       },
       "queries": {
-        "projects_by_media_coverage": {
-          "title": "Projects by Media Coverage",
-          "description": "Projects ranked by number of news articles",
-          "sql": "SELECT p.address_display, p.data_source, p.net_units, COUNT(n.url) as article_count, GROUP_CONCAT(DISTINCT n.source) as sources FROM projects p LEFT JOIN news_coverage n ON p.id = n.project_id GROUP BY p.id ORDER BY article_count DESC"
+        "projects_by_units": {
+          "title": "Projects by Units",
+          "description": "All projects sorted by unit count",
+          "sql": "SELECT address_display, net_units, status, data_source, latitude, longitude FROM projects ORDER BY net_units DESC"
         },
-        "proposed_vs_permitted": {
-          "title": "Proposed vs Permitted",
-          "description": "Compare projects by data source",
-          "sql": "SELECT data_source, COUNT(*) as count, SUM(net_units) as total_units FROM projects GROUP BY data_source"
+        "projects_with_news": {
+          "title": "Projects with News Coverage",
+          "description": "Projects that have media coverage",
+          "sql": "SELECT address_display, net_units, status, primary_news_source FROM projects WHERE has_media_coverage = 1 ORDER BY net_units DESC"
+        }
+      }
+    },
+    "berkeley_address_centric": {
+      "title": "All Berkeley Addresses (62,226)",
+      "description": "Every Berkeley address linked to housing activity",
+      "tables": {
+        "addresses": {
+          "title": "Master Address Table",
+          "description": "62,226 Berkeley addresses with APNs and coordinates",
+          "facets": ["zipcode", "street_name", "street_type"],
+          "plugins": {
+            "datasette-cluster-map": {
+              "latitude_column": "latitude",
+              "longitude_column": "longitude"
+            }
+          }
         },
-        "news_by_source": {
-          "title": "News Articles by Source",
-          "description": "Count of articles by news outlet",
-          "sql": "SELECT source, COUNT(*) as count FROM news_coverage GROUP BY source ORDER BY count DESC"
+        "projects": {
+          "title": "Housing Projects",
+          "description": "Projects linked to addresses",
+          "sort_desc": "net_units",
+          "facets": ["status", "data_source"]
         },
-        "projects_without_permits": {
-          "title": "Media-Reported Projects (No Permit)",
-          "description": "Projects that appear in news but not in permit system",
-          "sql": "SELECT address_display, latitude, longitude, primary_news_source FROM projects WHERE has_official_permit = 0 ORDER BY address_display"
+        "news_coverage": {
+          "title": "News Links",
+          "facets": ["source"]
+        }
+      },
+      "queries": {
+        "address_lookup": {
+          "title": "Address Lookup",
+          "description": "Find any Berkeley address",
+          "sql": "SELECT a.address_full, a.apn, a.zipcode, a.latitude, a.longitude, p.net_units, p.status FROM addresses a LEFT JOIN projects p ON a.address_id = p.address_id WHERE a.base_address LIKE '%' || :address || '%' LIMIT 100"
+        },
+        "development_by_street": {
+          "title": "Development by Street",
+          "description": "Housing projects grouped by street",
+          "sql": "SELECT * FROM development_by_street"
+        },
+        "streets_summary": {
+          "title": "Street Summary",
+          "description": "Address counts by street",
+          "sql": "SELECT * FROM streets_summary LIMIT 100"
+        },
+        "addresses_by_zipcode": {
+          "title": "Addresses by Zipcode",
+          "description": "Count addresses in each zipcode",
+          "sql": "SELECT zipcode, COUNT(*) as addresses, COUNT(DISTINCT street_name) as streets FROM addresses GROUP BY zipcode ORDER BY addresses DESC"
+        },
+        "parcels_without_projects": {
+          "title": "Addresses Without Projects",
+          "description": "Addresses that don't have housing projects (sample)",
+          "sql": "SELECT a.address_full, a.apn, a.street_name, a.zipcode FROM addresses a LEFT JOIN projects p ON a.address_id = p.address_id WHERE p.project_id IS NULL LIMIT 100"
         }
       }
     }

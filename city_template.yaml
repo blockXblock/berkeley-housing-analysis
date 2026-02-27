@@ -1,0 +1,83 @@
+# City Configuration Template
+# Copy this file and customize for your city
+# Save as: city_<yourCity>.yaml
+
+city_name: "Your City"
+state: "CA"
+county: "Your County"
+
+# Data Sources
+open_data_portal_url: "https://data.yourcity.gov"
+permit_portal_url: "https://permits.yourcity.gov"
+gis_parcels_url: "https://gis.yourcity.gov/parcels"
+assessor_url: "https://assessor.yourcounty.gov"
+
+# Geocoding Strategy
+# Options: county_address_db | census_tiger | google_api | mapbox_api
+geocoding_strategy: "county_address_db"
+geocoding_notes: |
+  Describe where to get your county's address database.
+  For Alameda County, we use a 563K address lookup table.
+
+# Permit System
+permit_system_type: "accela"  # accela | cityworks | custom | other
+permit_api_available: false
+permit_api_notes: |
+  Notes about API access, rate limits, authentication, etc.
+
+# Housing Element / RHNA
+rhna_cycle: "6th"
+rhna_period: "2023-2031"
+rhna_total_units: 0  # Your city's RHNA allocation
+rhna_by_income:
+  very_low: 0
+  low: 0
+  moderate: 0
+  above_moderate: 0
+
+# Status Code Mapping
+# Map your city's permit statuses to standard categories
+status_mappings:
+  proposed:
+    - "Proposed"
+    - "Pre-Application"
+  in_review:
+    - "In Review"
+    - "Under Review"
+    - "Pending"
+  approved:
+    - "Approved"
+    - "Conditionally Approved"
+  permitted:
+    - "Permit Issued"
+    - "Building Permit"
+  under_construction:
+    - "Under Construction"
+    - "Active"
+  completed:
+    - "Completed"
+    - "Certificate of Occupancy"
+    - "Final"
+
+# Geographic Bounds (for validation)
+bounds:
+  lat_min: 37.0
+  lat_max: 38.0
+  lon_min: -123.0
+  lon_max: -122.0
+
+# Contact Info (optional)
+maintainer: "Your Name"
+maintainer_email: "your.email@example.com"
+last_updated: "2026-02-26"
+
+notes: |
+  Replace these fields with your city's specific information.
+  Use this file as a starting point for adapting the Berkeley pipeline.
+
+  Key steps to adapt:
+  1. Update data source URLs
+  2. Configure geocoding for your county
+  3. Map your permit status codes
+  4. Add your RHNA allocation
+  5. Run A9_city_profile_builder.ipynb to test

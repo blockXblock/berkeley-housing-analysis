@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8080
 
 # Run datasette
-CMD ["datasette", "serve", "berkeley_housing_map.db", "--metadata", "metadata.json", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["datasette", "serve", "berkeley_housing_map.db", "--metadata", "metadata.json", "--host", "0.0.0.0", "--port", "8080", "--cors"]

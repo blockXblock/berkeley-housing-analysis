@@ -23,7 +23,7 @@
         }
         .info-panel {
             position: absolute;
-            top: 10px;
+            top: 46px;
             left: 50px;
             z-index: 1000;
             background: white;
@@ -47,9 +47,36 @@
         .leaflet-popup-content { min-width: 200px; }
         .leaflet-popup-content a { text-decoration: none; }
         .leaflet-popup-content a:hover { text-decoration: underline; }
+        .site-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 2000;
+            background: #1e40af;
+            color: white;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+        .site-nav a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .site-nav a:hover { color: #bfdbfe; }
+        #map { margin-top: 36px; height: calc(100vh - 36px); }
     </style>
 </head>
 <body>
+    <!-- Site Navigation -->
+    <div class="site-nav">
+        <a href="explorer.html"><span style="margin-right: 4px;">←</span> View Explorer Dashboard</a>
+        <span style="font-weight: 500;">Project Map</span>
+    </div>
     <div id="loading" class="loading">Loading projects...</div>
     <div id="map"></div>
     <div class="info-panel">
@@ -65,8 +92,10 @@
     <script>
         const map = L.map('map').setView([37.8715, -122.2730], 13);
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors'
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 20
         }).addTo(map);
 
         function getColor(units) {

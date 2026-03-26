@@ -7,6 +7,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <!-- D3.js for Sankey diagram -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+    <!-- Leaflet for spatial map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
         .tab-content { display: none; }
         .tab-content.active { display: block; }
@@ -52,6 +58,15 @@
                 <button class="tab-btn px-4 py-2 rounded-lg font-medium text-sm transition hover:bg-gray-100" onclick="showTab('analysis')">Analysis</button>
                 <button class="tab-btn px-4 py-2 rounded-lg font-medium text-sm transition hover:bg-gray-100" onclick="showTab('skyline')">Skyline</button>
                 <button class="tab-btn px-4 py-2 rounded-lg font-medium text-sm transition hover:bg-gray-100" onclick="showTab('apr')">APR Comparison</button>
+                <span class="border-l border-gray-300 mx-2"></span>
+                <button class="tab-btn px-4 py-2 rounded-lg font-medium text-sm transition hover:bg-gray-100" onclick="showTab('sankey')">Sankey</button>
+                <button class="tab-btn px-4 py-2 rounded-lg font-medium text-sm transition hover:bg-gray-100" onclick="showTab('process')">Process Analysis</button>
+                <button class="tab-btn px-4 py-2 rounded-lg font-medium text-sm transition hover:bg-gray-100" onclick="showTab('spatial')">Spatial Process</button>
+                <span class="border-l border-gray-300 mx-2"></span>
+                <button class="tab-btn px-4 py-2 rounded-lg font-medium text-sm transition hover:bg-gray-100 text-gray-400" onclick="showTab('constructtech')">ConstructTech</button>
+                <button class="tab-btn px-4 py-2 rounded-lg font-medium text-sm transition hover:bg-gray-100 text-gray-400" onclick="showTab('costanal')">CostAnal</button>
+                <button class="tab-btn px-4 py-2 rounded-lg font-medium text-sm transition hover:bg-gray-100 text-gray-400" onclick="showTab('waterpower')">WaterPower</button>
+                <button class="tab-btn px-4 py-2 rounded-lg font-medium text-sm transition hover:bg-gray-100 text-gray-400" onclick="showTab('econimpact')">EconImpact</button>
             </div>
         </div>
     </nav>
@@ -223,6 +238,124 @@
                     <tbody id="aprTableBody">
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        <!-- Sankey Tab -->
+        <div id="sankey" class="tab-content fade-in">
+            <div class="bg-white rounded-xl shadow p-6 mb-6">
+                <h2 class="text-xl font-semibold mb-2">Pipeline Flow: Sankey Diagram</h2>
+                <p class="text-gray-600 text-sm mb-4">Visualizes project flow through permit stages. Width represents unit count. Click stages for details.</p>
+                <div id="sankeyChart" style="width: 100%; height: 600px;"></div>
+            </div>
+            <div class="bg-white rounded-xl shadow p-6">
+                <h3 class="text-lg font-semibold mb-4">Stage Transition Summary</h3>
+                <div id="sankeyStats" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+            </div>
+        </div>
+
+        <!-- Process Analysis Tab -->
+        <div id="process" class="tab-content fade-in">
+            <div class="bg-white rounded-xl shadow p-6 mb-6">
+                <h2 class="text-xl font-semibold mb-2">Processing Time Analysis</h2>
+                <p class="text-gray-600 text-sm mb-4">Distribution of processing days by stage. Hover for details.</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white rounded-xl shadow p-6">
+                    <h3 class="text-lg font-semibold mb-4">Box Plot: Days by Stage</h3>
+                    <canvas id="boxPlotChart" height="300"></canvas>
+                </div>
+                <div class="bg-white rounded-xl shadow p-6">
+                    <h3 class="text-lg font-semibold mb-4">Distribution by Project Size</h3>
+                    <canvas id="sizeScatterChart" height="300"></canvas>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow p-6">
+                <h3 class="text-lg font-semibold mb-4">Processing Time Histogram</h3>
+                <canvas id="processingHistogram" height="200"></canvas>
+            </div>
+        </div>
+
+        <!-- Spatial Process Tab -->
+        <div id="spatial" class="tab-content fade-in">
+            <div class="bg-white rounded-xl shadow p-6 mb-6">
+                <h2 class="text-xl font-semibold mb-2">Spatial Processing Analysis</h2>
+                <p class="text-gray-600 text-sm mb-4">Map showing projects colored by processing time. Red = longer processing, green = faster.</p>
+                <div class="flex space-x-4 mb-4">
+                    <button class="px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded hover:bg-blue-200" onclick="colorMapBy('proc_days')">By Processing Days</button>
+                    <button class="px-3 py-1 text-sm bg-gray-100 rounded hover:bg-gray-200" onclick="colorMapBy('units')">By Unit Count</button>
+                    <button class="px-3 py-1 text-sm bg-gray-100 rounded hover:bg-gray-200" onclick="colorMapBy('status')">By Status</button>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow overflow-hidden" style="height: 600px;">
+                <div id="spatialMap" style="height: 100%; width: 100%;"></div>
+            </div>
+            <div class="bg-white rounded-xl shadow p-6 mt-6">
+                <h3 class="text-lg font-semibold mb-4">Geographic Clusters</h3>
+                <div id="spatialStats" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+            </div>
+        </div>
+
+        <!-- ConstructTech Placeholder Tab -->
+        <div id="constructtech" class="tab-content fade-in">
+            <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl shadow p-12 text-center">
+                <div class="text-6xl mb-6 opacity-30">🏗️</div>
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">Construction Technology Analysis</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto mb-6">
+                    Track modular, prefabricated, and off-site construction methods. Compare construction timelines
+                    by method type. Requires construction method field in building permits (currently not captured).
+                </p>
+                <div class="inline-block bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-medium">
+                    Coming Soon — Awaiting Data Requirements
+                </div>
+            </div>
+        </div>
+
+        <!-- CostAnal Placeholder Tab -->
+        <div id="costanal" class="tab-content fade-in">
+            <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl shadow p-12 text-center">
+                <div class="text-6xl mb-6 opacity-30">💰</div>
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">Full Cost Accounting</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto mb-6">
+                    Calculate true public and private costs of housing development. Track all permit fees,
+                    staff hours, developer carrying costs, and infrastructure assessments. Our finding of
+                    $45,861 in planning fees for a single project represents only a fraction of total costs.
+                </p>
+                <div class="inline-block bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-medium">
+                    Coming Soon — Requires Fee Aggregation System
+                </div>
+            </div>
+        </div>
+
+        <!-- WaterPower Placeholder Tab -->
+        <div id="waterpower" class="tab-content fade-in">
+            <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl shadow p-12 text-center">
+                <div class="text-6xl mb-6 opacity-30">💧⚡</div>
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">Infrastructure Capacity Analysis</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto mb-6">
+                    Assess cumulative infrastructure demands from pipeline projects. Track water, sewer,
+                    electrical capacity, traffic impacts, and school enrollment projections. Identify
+                    capacity constraints before they cause delays.
+                </p>
+                <div class="inline-block bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-medium">
+                    Coming Soon — Requires Utility Connection Data
+                </div>
+            </div>
+        </div>
+
+        <!-- EconImpact Placeholder Tab -->
+        <div id="econimpact" class="tab-content fade-in">
+            <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl shadow p-12 text-center">
+                <div class="text-6xl mb-6 opacity-30">📊</div>
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">Neighborhood Economic Impact</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto mb-6">
+                    Measure how new housing affects local business activity, property values, and
+                    displacement risk. Replace anecdotal concerns about development impacts with
+                    measured outcomes using geocoded permit data (95.6% coverage achieved).
+                </p>
+                <div class="inline-block bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-medium">
+                    Coming Soon — Requires Business License Integration
+                </div>
             </div>
         </div>
     </main>
@@ -569,12 +702,494 @@
         });
     }
 
+    // ============================================
+    // SANKEY DIAGRAM
+    // ============================================
+    function renderSankey() {
+        const container = document.getElementById('sankeyChart');
+        if (!container) return;
+
+        // Clear previous
+        container.innerHTML = '';
+
+        const width = container.clientWidth;
+        const height = 550;
+
+        // Define stages and map project statuses to them
+        const stageOrder = ['Filed', 'Completeness Review', 'Application Complete', 'In Review', 'Corrections Pending', 'CEQA Review', 'Staff Decision', 'ZAB Hearing', 'Approved', 'Building Permit', 'Construction', 'Completed'];
+
+        // Map status to stage
+        function getStage(project) {
+            const status = (project.status || '').toLowerCase();
+            const accela = (project.accela_status || '').toLowerCase();
+
+            if (status.includes('completed') || accela.includes('certificate of occupancy')) return 'Completed';
+            if (status.includes('construction') || accela.includes('inspection')) return 'Construction';
+            if (accela.includes('building permit') || status.includes('building permit')) return 'Building Permit';
+            if (status.includes('approved') || accela.includes('approved')) return 'Approved';
+            if (accela.includes('zab') || accela.includes('hearing')) return 'ZAB Hearing';
+            if (accela.includes('staff decision') || accela.includes('pending final')) return 'Staff Decision';
+            if (accela.includes('ceqa')) return 'CEQA Review';
+            if (status.includes('corrections') || accela.includes('corrections')) return 'Corrections Pending';
+            if (status.includes('in review') || accela.includes('resubmittal')) return 'In Review';
+            if (status.includes('under review')) return 'In Review';
+            if (accela.includes('application complete') || project.complete) return 'Application Complete';
+            if (accela.includes('completeness') || accela.includes('incomplete')) return 'Completeness Review';
+            if (project.filed) return 'Filed';
+            return 'Filed';
+        }
+
+        // Count projects and units at each stage
+        const stageCounts = {};
+        const stageUnits = {};
+        stageOrder.forEach(s => { stageCounts[s] = 0; stageUnits[s] = 0; });
+
+        DATA.projects.forEach(p => {
+            const stage = getStage(p);
+            stageCounts[stage] = (stageCounts[stage] || 0) + 1;
+            stageUnits[stage] = (stageUnits[stage] || 0) + (p.units || 0);
+        });
+
+        // Build nodes and links for sankey
+        const nodes = stageOrder.map((name, i) => ({ name, index: i }));
+        const links = [];
+
+        // Create links between consecutive stages (flow = cumulative units that passed through)
+        let cumulativeUnits = DATA.projects.reduce((sum, p) => sum + (p.units || 0), 0);
+        for (let i = 0; i < stageOrder.length - 1; i++) {
+            const fromStage = stageOrder[i];
+            const toStage = stageOrder[i + 1];
+
+            // Units that passed through = total - units stuck at earlier stages
+            const stuckUnits = stageUnits[fromStage] || 0;
+            const flowUnits = Math.max(0, cumulativeUnits - stuckUnits);
+
+            if (flowUnits > 0) {
+                links.push({
+                    source: i,
+                    target: i + 1,
+                    value: flowUnits
+                });
+            }
+            cumulativeUnits = flowUnits;
+        }
+
+        // Create SVG
+        const svg = d3.select('#sankeyChart')
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height);
+
+        // Create sankey generator
+        const sankey = d3.sankey()
+            .nodeWidth(20)
+            .nodePadding(15)
+            .extent([[10, 10], [width - 10, height - 10]]);
+
+        const graph = sankey({
+            nodes: nodes.map(d => Object.assign({}, d)),
+            links: links.map(d => Object.assign({}, d))
+        });
+
+        // Color scale
+        const colorScale = d3.scaleOrdinal()
+            .domain(stageOrder)
+            .range(['#3b82f6', '#6366f1', '#8b5cf6', '#a855f7', '#d946ef', '#ec4899', '#f43f5e', '#ef4444', '#f97316', '#eab308', '#22c55e', '#10b981']);
+
+        // Draw links
+        svg.append('g')
+            .selectAll('path')
+            .data(graph.links)
+            .join('path')
+            .attr('d', d3.sankeyLinkHorizontal())
+            .attr('fill', 'none')
+            .attr('stroke', d => colorScale(d.source.name))
+            .attr('stroke-opacity', 0.4)
+            .attr('stroke-width', d => Math.max(1, d.width))
+            .append('title')
+            .text(d => `${d.source.name} → ${d.target.name}\n${d.value.toLocaleString()} units`);
+
+        // Draw nodes
+        svg.append('g')
+            .selectAll('rect')
+            .data(graph.nodes)
+            .join('rect')
+            .attr('x', d => d.x0)
+            .attr('y', d => d.y0)
+            .attr('width', d => d.x1 - d.x0)
+            .attr('height', d => d.y1 - d.y0)
+            .attr('fill', d => colorScale(d.name))
+            .attr('stroke', '#333')
+            .append('title')
+            .text(d => `${d.name}\n${stageCounts[d.name]} projects\n${stageUnits[d.name].toLocaleString()} units at this stage`);
+
+        // Add labels
+        svg.append('g')
+            .selectAll('text')
+            .data(graph.nodes)
+            .join('text')
+            .attr('x', d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+            .attr('y', d => (d.y1 + d.y0) / 2)
+            .attr('dy', '0.35em')
+            .attr('text-anchor', d => d.x0 < width / 2 ? 'start' : 'end')
+            .attr('font-size', '11px')
+            .attr('fill', '#333')
+            .text(d => `${d.name} (${stageCounts[d.name]})`);
+
+        // Render stats
+        const statsContainer = document.getElementById('sankeyStats');
+        statsContainer.innerHTML = '';
+
+        const topStages = stageOrder.filter(s => stageUnits[s] > 0).slice(0, 8);
+        topStages.forEach(stage => {
+            const div = document.createElement('div');
+            div.className = 'text-center p-3 rounded-lg';
+            div.style.backgroundColor = colorScale(stage) + '20';
+            div.innerHTML = `
+                <div class="text-xl font-bold" style="color: ${colorScale(stage)}">${stageUnits[stage].toLocaleString()}</div>
+                <div class="text-xs text-gray-600">${stage}</div>
+                <div class="text-xs text-gray-400">${stageCounts[stage]} projects</div>
+            `;
+            statsContainer.appendChild(div);
+        });
+    }
+
+    // ============================================
+    // PROCESS ANALYSIS CHARTS
+    // ============================================
+    function renderProcessAnalysis() {
+        renderBoxPlot();
+        renderSizeScatter();
+        renderProcessingHistogram();
+    }
+
+    function renderBoxPlot() {
+        const ctx = document.getElementById('boxPlotChart');
+        if (!ctx) return;
+
+        // Group processing days by status
+        const statusGroups = {};
+        DATA.projects.forEach(p => {
+            if (p.proc_days && p.proc_days > 0) {
+                const status = p.status || 'Unknown';
+                if (!statusGroups[status]) statusGroups[status] = [];
+                statusGroups[status].push(p.proc_days);
+            }
+        });
+
+        // Calculate box plot stats for each group
+        const labels = Object.keys(statusGroups).sort();
+        const boxData = labels.map(status => {
+            const days = statusGroups[status].sort((a, b) => a - b);
+            const q1 = days[Math.floor(days.length * 0.25)];
+            const median = days[Math.floor(days.length * 0.5)];
+            const q3 = days[Math.floor(days.length * 0.75)];
+            const min = days[0];
+            const max = days[days.length - 1];
+            return { min, q1, median, q3, max, count: days.length };
+        });
+
+        // Use bar chart to show median with error bars approximation
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Median Processing Days',
+                    data: boxData.map(d => d.median),
+                    backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                    borderColor: 'rgb(59, 130, 246)',
+                    borderWidth: 1
+                }, {
+                    label: 'Q1-Q3 Range Min',
+                    data: boxData.map(d => d.q1),
+                    backgroundColor: 'rgba(59, 130, 246, 0.3)',
+                    borderColor: 'rgba(59, 130, 246, 0.5)',
+                    borderWidth: 1
+                }, {
+                    label: 'Q3 (75th percentile)',
+                    data: boxData.map(d => d.q3),
+                    backgroundColor: 'rgba(239, 68, 68, 0.3)',
+                    borderColor: 'rgba(239, 68, 68, 0.5)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: {
+                        callbacks: {
+                            afterBody: function(context) {
+                                const idx = context[0].dataIndex;
+                                const d = boxData[idx];
+                                return `\nProjects: ${d.count}\nMin: ${d.min}\nMax: ${d.max}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: { title: { display: true, text: 'Processing Days' } }
+                }
+            }
+        });
+    }
+
+    function renderSizeScatter() {
+        const ctx = document.getElementById('sizeScatterChart');
+        if (!ctx) return;
+
+        const dataPoints = DATA.projects
+            .filter(p => p.proc_days > 0 && p.units > 0)
+            .map(p => ({
+                x: p.units,
+                y: p.proc_days,
+                label: p.address
+            }));
+
+        new Chart(ctx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Projects',
+                    data: dataPoints,
+                    backgroundColor: 'rgba(59, 130, 246, 0.6)',
+                    borderColor: 'rgb(59, 130, 246)',
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.raw.label}: ${context.raw.x} units, ${context.raw.y} days`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: { title: { display: true, text: 'Unit Count' } },
+                    y: { title: { display: true, text: 'Processing Days' } }
+                }
+            }
+        });
+    }
+
+    function renderProcessingHistogram() {
+        const ctx = document.getElementById('processingHistogram');
+        if (!ctx) return;
+
+        // Bin processing days
+        const bins = [0, 100, 200, 300, 400, 500, 600, 800, 1000, 1500];
+        const binCounts = new Array(bins.length).fill(0);
+        const binUnits = new Array(bins.length).fill(0);
+
+        DATA.projects.forEach(p => {
+            if (p.proc_days > 0) {
+                for (let i = 0; i < bins.length; i++) {
+                    if (i === bins.length - 1 || p.proc_days < bins[i + 1]) {
+                        binCounts[i]++;
+                        binUnits[i] += (p.units || 0);
+                        break;
+                    }
+                }
+            }
+        });
+
+        const labels = bins.map((b, i) => i === bins.length - 1 ? `${b}+` : `${b}-${bins[i+1]}`);
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Projects',
+                    data: binCounts,
+                    backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                    yAxisID: 'y'
+                }, {
+                    label: 'Units',
+                    data: binUnits,
+                    backgroundColor: 'rgba(34, 197, 94, 0.7)',
+                    yAxisID: 'y1'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' }
+                },
+                scales: {
+                    x: { title: { display: true, text: 'Processing Days Range' } },
+                    y: {
+                        type: 'linear',
+                        position: 'left',
+                        title: { display: true, text: 'Projects' }
+                    },
+                    y1: {
+                        type: 'linear',
+                        position: 'right',
+                        title: { display: true, text: 'Units' },
+                        grid: { drawOnChartArea: false }
+                    }
+                }
+            }
+        });
+    }
+
+    // ============================================
+    // SPATIAL MAP
+    // ============================================
+    let spatialMap = null;
+    let spatialMarkers = [];
+
+    function renderSpatialMap() {
+        const container = document.getElementById('spatialMap');
+        if (!container) return;
+
+        // Initialize map if not exists
+        if (!spatialMap) {
+            spatialMap = L.map('spatialMap').setView([37.867, -122.267], 14);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; OpenStreetMap &copy; CARTO',
+                subdomains: 'abcd',
+                maxZoom: 20
+            }).addTo(spatialMap);
+        }
+
+        // Color by processing days by default
+        colorMapBy('proc_days');
+    }
+
+    function colorMapBy(metric) {
+        if (!spatialMap) return;
+
+        // Clear existing markers
+        spatialMarkers.forEach(m => spatialMap.removeLayer(m));
+        spatialMarkers = [];
+
+        // Get value range for coloring
+        let values = DATA.projects.map(p => p[metric] || 0).filter(v => v > 0);
+        const minVal = Math.min(...values);
+        const maxVal = Math.max(...values);
+
+        // Update button styles
+        document.querySelectorAll('[onclick^="colorMapBy"]').forEach(btn => {
+            btn.classList.remove('bg-blue-100', 'text-blue-700');
+            btn.classList.add('bg-gray-100');
+        });
+        event.target.classList.add('bg-blue-100', 'text-blue-700');
+        event.target.classList.remove('bg-gray-100');
+
+        DATA.projects.forEach(p => {
+            if (!p.lat || !p.lng) return;
+
+            let color, value;
+            if (metric === 'proc_days') {
+                value = p.proc_days || 0;
+                // Red for long processing, green for fast
+                const ratio = maxVal > minVal ? (value - minVal) / (maxVal - minVal) : 0;
+                const r = Math.round(255 * ratio);
+                const g = Math.round(255 * (1 - ratio));
+                color = `rgb(${r}, ${g}, 50)`;
+            } else if (metric === 'units') {
+                value = p.units || 0;
+                const ratio = maxVal > minVal ? (value - minVal) / (maxVal - minVal) : 0;
+                const intensity = Math.round(100 + 155 * ratio);
+                color = `rgb(59, ${intensity}, 246)`;
+            } else if (metric === 'status') {
+                const statusColors = {
+                    'Approved': '#22c55e',
+                    'Completed': '#10b981',
+                    'In Review': '#f59e0b',
+                    'Under Review': '#f59e0b',
+                    'Corrections Pending': '#ef4444',
+                    'Corrections Pending Applicant': '#ef4444',
+                    'Incomplete Pending Applicant': '#dc2626',
+                    'Pending Final Action': '#8b5cf6',
+                    'Pending': '#6b7280'
+                };
+                color = statusColors[p.status] || '#6b7280';
+                value = p.status;
+            }
+
+            const radius = Math.max(6, Math.min(20, Math.sqrt(p.units || 1) * 2));
+
+            const marker = L.circleMarker([parseFloat(p.lat), parseFloat(p.lng)], {
+                radius: radius,
+                fillColor: color,
+                color: '#333',
+                weight: 1,
+                opacity: 0.8,
+                fillOpacity: 0.7
+            }).bindPopup(`
+                <strong>${p.address}</strong><br>
+                Units: ${p.units}<br>
+                Status: ${p.status}<br>
+                Processing Days: ${p.proc_days || 'N/A'}
+            `);
+
+            marker.addTo(spatialMap);
+            spatialMarkers.push(marker);
+        });
+
+        // Update stats
+        updateSpatialStats(metric);
+    }
+
+    function updateSpatialStats(metric) {
+        const container = document.getElementById('spatialStats');
+        if (!container) return;
+
+        // Calculate geographic clusters/stats
+        const downtown = DATA.projects.filter(p => p.lat && parseFloat(p.lat) > 37.865 && parseFloat(p.lat) < 37.875 && parseFloat(p.lng) > -122.275 && parseFloat(p.lng) < -122.260);
+        const southside = DATA.projects.filter(p => p.lat && parseFloat(p.lat) < 37.865);
+        const westBerkeley = DATA.projects.filter(p => p.lat && parseFloat(p.lng) < -122.280);
+        const other = DATA.projects.filter(p => p.lat && !downtown.includes(p) && !southside.includes(p) && !westBerkeley.includes(p));
+
+        const clusters = [
+            { name: 'Downtown', projects: downtown },
+            { name: 'Southside', projects: southside },
+            { name: 'West Berkeley', projects: westBerkeley },
+            { name: 'Other', projects: other }
+        ];
+
+        container.innerHTML = clusters.map(c => `
+            <div class="text-center p-3 bg-gray-50 rounded-lg">
+                <div class="text-xl font-bold text-blue-600">${c.projects.length}</div>
+                <div class="text-xs text-gray-600">${c.name}</div>
+                <div class="text-xs text-gray-400">${c.projects.reduce((s, p) => s + (p.units || 0), 0).toLocaleString()} units</div>
+            </div>
+        `).join('');
+    }
+
     // Initialize
     document.addEventListener('DOMContentLoaded', () => {
         initCharts();
         renderProjectTable();
         renderGantt();
         renderAPRTable();
+
+        // Lazy load visualizations when tabs are shown
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                setTimeout(() => {
+                    if (document.getElementById('sankey').classList.contains('active') && !document.querySelector('#sankeyChart svg')) {
+                        renderSankey();
+                    }
+                    if (document.getElementById('process').classList.contains('active') && !document.querySelector('#boxPlotChart canvas')) {
+                        renderProcessAnalysis();
+                    }
+                    if (document.getElementById('spatial').classList.contains('active') && !spatialMap) {
+                        renderSpatialMap();
+                    }
+                }, 100);
+            });
+        });
     });
     </script>
 </body>

@@ -172,6 +172,9 @@
                 <p class="text-xs text-gray-500 mb-3">Showing projects with entitled dates first (30 entitled, 58 total with filed dates). Hover over bars for details.</p>
                 <div id="ganttChart" class="space-y-1 max-h-[600px] overflow-y-auto">
                 </div>
+                <p class="text-xs text-gray-500 mt-4 italic">
+                    Note: Construction start dates estimated from building permit "Issued" status. Green bars show projects with active building permits.
+                </p>
             </div>
         </div>
 
@@ -317,17 +320,122 @@
             </div>
         </div>
 
-        <!-- ConstructTech Placeholder Tab -->
+        <!-- ConstructTech Tab -->
         <div id="constructtech" class="tab-content fade-in">
-            <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl shadow p-12 text-center">
-                <div class="text-6xl mb-6 opacity-30">🏗️</div>
-                <h2 class="text-2xl font-semibold text-gray-700 mb-4">Construction Technology Analysis</h2>
-                <p class="text-gray-500 max-w-2xl mx-auto mb-6">
-                    Track modular, prefabricated, and off-site construction methods. Compare construction timelines
-                    by method type. Requires construction method field in building permits (currently not captured).
-                </p>
-                <div class="inline-block bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-medium">
-                    Coming Soon — Awaiting Data Requirements
+            <div class="space-y-6">
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-emerald-600 to-teal-600 rounded-xl shadow p-6 text-white">
+                    <h2 class="text-2xl font-bold mb-2">Modular & Off-Site Construction</h2>
+                    <p class="text-emerald-100">Factory-built housing can reduce construction timelines by 30-50% while improving quality and reducing waste. Berkeley has an opportunity to lead in this space.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Berkeley Modular Projects -->
+                    <div class="bg-white rounded-xl shadow p-6">
+                        <h3 class="text-lg font-semibold mb-4 flex items-center">
+                            <span class="w-3 h-3 bg-emerald-500 rounded-full mr-2"></span>
+                            Berkeley Modular Projects
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-emerald-500 pl-4">
+                                <h4 class="font-medium">Shattuck Studios (2018)</h4>
+                                <p class="text-sm text-gray-600">One of California's first multi-story modular hotels. Modules manufactured off-site, assembled in weeks.</p>
+                                <span class="inline-block bg-emerald-100 text-emerald-700 text-xs px-2 py-1 rounded mt-1">Completed</span>
+                            </div>
+                            <div class="border-l-4 border-blue-500 pl-4">
+                                <h4 class="font-medium">1598 University Ave (CITYSPACE Berkeley)</h4>
+                                <p class="text-sm text-gray-600">170-unit student housing project using cross-laminated timber (CLT) and modular construction.</p>
+                                <span class="inline-block bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded mt-1">Under Construction</span>
+                            </div>
+                            <div class="border-l-4 border-amber-500 pl-4">
+                                <h4 class="font-medium">Additional Berkeley Projects</h4>
+                                <p class="text-sm text-gray-600">Data collection in progress for additional modular/prefab projects in the pipeline.</p>
+                                <span class="inline-block bg-amber-100 text-amber-700 text-xs px-2 py-1 rounded mt-1">Coming Soon</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Comparison Chart -->
+                    <div class="bg-white rounded-xl shadow p-6">
+                        <h3 class="text-lg font-semibold mb-4">Construction Timeline Comparison</h3>
+                        <canvas id="modularCompareChart" height="200"></canvas>
+                        <p class="text-xs text-gray-500 mt-3">Source: McKinsey Global Institute, Modular Construction Report 2019</p>
+                    </div>
+
+                    <!-- Global Leaders -->
+                    <div class="bg-white rounded-xl shadow p-6">
+                        <h3 class="text-lg font-semibold mb-4 flex items-center">
+                            <span class="w-3 h-3 bg-blue-500 rounded-full mr-2"></span>
+                            Global Leaders in Modular Construction
+                        </h3>
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <div class="font-medium text-blue-600">Sweden</div>
+                                <div class="text-2xl font-bold">84%</div>
+                                <div class="text-gray-500 text-xs">of single-family homes built with prefab components</div>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <div class="font-medium text-blue-600">Japan (Sekisui House)</div>
+                                <div class="text-2xl font-bold">2.5M+</div>
+                                <div class="text-gray-500 text-xs">homes built using factory methods since 1960</div>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <div class="font-medium text-blue-600">Holon (Tel Aviv)</div>
+                                <div class="text-2xl font-bold">75%</div>
+                                <div class="text-gray-500 text-xs">reduction in construction time</div>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-3">
+                                <div class="font-medium text-blue-600">CIMC MBS (China)</div>
+                                <div class="text-2xl font-bold">30+</div>
+                                <div class="text-gray-500 text-xs">story modular buildings completed</div>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-4 border-t text-sm">
+                            <p class="text-gray-600"><strong>Other notable companies:</strong> Lindbäcks (Sweden), BoKlok (IKEA/Skanska), Factory OS (Oakland), Katerra (closed 2021), Volumetric Building Companies</p>
+                        </div>
+                    </div>
+
+                    <!-- Opportunity for Berkeley -->
+                    <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl shadow p-6 border border-amber-200">
+                        <h3 class="text-lg font-semibold mb-4 flex items-center text-amber-800">
+                            <span class="text-xl mr-2">💡</span>
+                            Opportunity for Berkeley
+                        </h3>
+                        <ul class="space-y-3 text-sm text-gray-700">
+                            <li class="flex items-start">
+                                <span class="text-amber-500 mr-2">•</span>
+                                <span><strong>Track construction method</strong> in building permits to measure modular adoption</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-amber-500 mr-2">•</span>
+                                <span><strong>Expedited permitting</strong> for pre-approved modular designs (following LA's pre-approved ADU program model)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-amber-500 mr-2">•</span>
+                                <span><strong>Factory OS partnership</strong> – Oakland-based modular manufacturer could serve Berkeley projects</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-amber-500 mr-2">•</span>
+                                <span><strong>CLT/mass timber incentives</strong> – Lower carbon footprint, faster construction, fire-resistant</span>
+                            </li>
+                        </ul>
+                        <div class="mt-4 pt-4 border-t border-amber-200">
+                            <span class="inline-block bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs font-medium">
+                                Policy Research in Progress
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Status Banner -->
+                <div class="bg-gray-100 rounded-xl p-4 flex items-center justify-between">
+                    <div class="flex items-center text-gray-600">
+                        <span class="text-xl mr-3">📊</span>
+                        <span class="text-sm">Construction method data not yet captured in Berkeley building permits. Timeline comparisons require building permit to CO tracking.</span>
+                    </div>
+                    <span class="inline-block bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap">
+                        Data Collection Needed
+                    </span>
                 </div>
             </div>
         </div>
@@ -550,6 +658,50 @@
             },
             options: { scales: { y: { beginAtZero: true } } }
         });
+
+        // Modular vs Conventional Construction Timeline Comparison
+        new Chart(document.getElementById('modularCompareChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Design & Permits', 'Site Prep', 'Construction', 'Finishing', 'Total'],
+                datasets: [
+                    {
+                        label: 'Conventional (months)',
+                        data: [6, 2, 14, 4, 26],
+                        backgroundColor: '#9ca3af',
+                        barPercentage: 0.8
+                    },
+                    {
+                        label: 'Modular (months)',
+                        data: [6, 2, 6, 2, 16],
+                        backgroundColor: '#10b981',
+                        barPercentage: 0.8
+                    }
+                ]
+            },
+            options: {
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Months' }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: {
+                        callbacks: {
+                            afterBody: function(context) {
+                                if (context[0].dataIndex === 4) {
+                                    return 'Modular saves ~10 months (38%)';
+                                }
+                                return '';
+                            }
+                        }
+                    }
+                }
+            }
+        });
     }
 
     // Project Table
@@ -741,6 +893,23 @@
                 const w4 = (phase4End - bpIssued) / (1000 * 60 * 60 * 24) / totalDays * 100;
                 const phase4Label = coDate ? 'Construction (Complete)' : 'Under Construction';
                 bar.innerHTML += `<div class="absolute h-5 bg-green-500 rounded-r" style="left:${startPct4}%;width:${Math.max(w4, 0.5)}%" title="${phase4Label}: ${Math.round((phase4End - bpIssued) / (1000 * 60 * 60 * 24))} days"></div>`;
+            }
+
+            // Add date labels - format date as MM/YY
+            const formatDate = (d) => {
+                const mm = String(d.getMonth() + 1).padStart(2, '0');
+                const yy = String(d.getFullYear()).slice(-2);
+                return `${mm}/${yy}`;
+            };
+
+            // Start date label (filed date)
+            bar.innerHTML += `<div class="absolute text-[9px] text-gray-500 whitespace-nowrap" style="left:${startPct}%; top: -10px;">${formatDate(filed)}</div>`;
+
+            // End date label (latest milestone or current)
+            const endDate = coDate || bpIssued || entitled || complete || maxDate;
+            const endPct = (endDate - minDate) / (1000 * 60 * 60 * 24) / totalDays * 100;
+            if (endDate !== maxDate || !coDate) {
+                bar.innerHTML += `<div class="absolute text-[9px] text-gray-500 whitespace-nowrap" style="left:${Math.min(endPct, 97)}%; top: -10px;">${formatDate(endDate)}</div>`;
             }
 
             row.appendChild(label);

@@ -117,6 +117,86 @@
                 </div>
             </div>
 
+            <!-- Affordable Housing Summary -->
+            <div class="bg-white rounded-xl shadow p-6 mb-8">
+                <h2 class="text-xl font-semibold mb-4">Affordable Housing Progress by Income Level</h2>
+
+                <!-- RHNA by Income Level -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-purple-50 rounded-lg p-4 border border-purple-200">
+                        <div class="text-xs text-purple-600 font-medium">Very Low Income (VLI)</div>
+                        <div class="text-2xl font-bold text-purple-700">106</div>
+                        <div class="text-xs text-gray-500">of 1,432 RHNA (7%)</div>
+                        <div class="h-2 bg-gray-200 rounded-full mt-2">
+                            <div class="h-full bg-purple-500 rounded-full" style="width: 7.4%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
+                        <div class="text-xs text-blue-600 font-medium">Low Income (LI)</div>
+                        <div class="text-2xl font-bold text-blue-700">~85</div>
+                        <div class="text-xs text-gray-500">of 825 RHNA (10%)</div>
+                        <div class="h-2 bg-gray-200 rounded-full mt-2">
+                            <div class="h-full bg-blue-500 rounded-full" style="width: 10.3%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-green-50 rounded-lg p-4 border border-green-200">
+                        <div class="text-xs text-green-600 font-medium">Moderate Income (MOD)</div>
+                        <div class="text-2xl font-bold text-green-700">~120</div>
+                        <div class="text-xs text-gray-500">of 1,416 RHNA (8%)</div>
+                        <div class="h-2 bg-gray-200 rounded-full mt-2">
+                            <div class="h-full bg-green-500 rounded-full" style="width: 8.5%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                        <div class="text-xs text-gray-600 font-medium">Above Moderate</div>
+                        <div class="text-2xl font-bold text-gray-700">3,155</div>
+                        <div class="text-xs text-gray-500">of 5,261 RHNA (60%)</div>
+                        <div class="h-2 bg-gray-200 rounded-full mt-2">
+                            <div class="h-full bg-gray-500 rounded-full" style="width: 60%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stacked Bar Chart -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-medium mb-3">Units Entitled by Year & Income Level</h4>
+                        <canvas id="affordabilityChart" height="200"></canvas>
+                    </div>
+                    <div>
+                        <h4 class="font-medium mb-3">Affordable Housing Metrics</h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span class="text-sm">Projects with VLI units</span>
+                                <span class="font-bold text-purple-700">14 projects</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span class="text-sm">Density Bonus projects</span>
+                                <span class="font-bold text-blue-700">36 projects (4,782 units)</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span class="text-sm">2025 ADUs (est. ABAG method)</span>
+                                <span class="font-bold text-green-700">~95 units</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                                <span class="text-sm">Berkeley total housing stock</span>
+                                <span class="font-bold text-gray-700">~52,000 units</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notes -->
+                <div class="mt-6 p-4 bg-amber-50 rounded-lg border border-amber-200">
+                    <h4 class="font-medium text-amber-800 mb-2">Notes on Housing Data</h4>
+                    <ul class="text-sm text-amber-900 space-y-1">
+                        <li>• <strong>ADU Affordability:</strong> Per ABAG methodology, ADUs count as 30% VLI, 30% LI, 30% MOD, 10% Above Moderate</li>
+                        <li>• <strong>UC Berkeley:</strong> UC is exempt from city zoning and builds student housing independently. UC projects are tracked separately and not included in the city's RHNA allocation.</li>
+                        <li>• <strong>Estimates:</strong> LI/MOD counts are estimates based on density bonus requirements. Actual deed-restricted counts may vary.</li>
+                    </ul>
+                </div>
+            </div>
+
             <!-- Dashboard Charts -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div class="bg-white rounded-xl shadow p-6">
@@ -868,6 +948,63 @@
                 }]
             },
             options: { scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false } } }
+        });
+
+        // Affordability Stacked Bar Chart
+        new Chart(document.getElementById('affordabilityChart'), {
+            type: 'bar',
+            data: {
+                labels: ['2023', '2024', '2025'],
+                datasets: [
+                    {
+                        label: 'VLI',
+                        data: [0, 7, 29],
+                        backgroundColor: '#8b5cf6',
+                        stack: 'income'
+                    },
+                    {
+                        label: 'LI',
+                        data: [3, 15, 28],
+                        backgroundColor: '#3b82f6',
+                        stack: 'income'
+                    },
+                    {
+                        label: 'MOD',
+                        data: [5, 20, 28],
+                        backgroundColor: '#22c55e',
+                        stack: 'income'
+                    },
+                    {
+                        label: 'Above Mod',
+                        data: [20, 777, 2319],
+                        backgroundColor: '#9ca3af',
+                        stack: 'income'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: { stacked: true },
+                    y: {
+                        stacked: true,
+                        beginAtZero: true,
+                        title: { display: true, text: 'Units' }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: {
+                        callbacks: {
+                            afterBody: function(context) {
+                                const dataIndex = context[0].dataIndex;
+                                const totals = [28, 819, 2404];
+                                return 'Total: ' + totals[dataIndex] + ' units';
+                            }
+                        }
+                    }
+                }
+            }
         });
 
         // Histogram

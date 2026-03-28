@@ -989,6 +989,361 @@ def parse_building_permit_list(lines: list) -> list:
     return events
 
 
+def parse_building_permit_file(text: str) -> dict:
+    """
+    Parse a Building Permit file from the building/ directory.
+
+    These files contain building permit search results with formats:
+
+    1. Detailed permit blocks:
+        ADDRESS: 1899 OXFORD ST, Berkeley CA 94709
+
+        BUILDING PERMITS FOUND: 1
+
+        --- PERMIT 1 ---
+        Permit #: B2026-00973
+        Type: Building Permit (Demolition)
+        Status: Corrections List Issued
+        Date: 2026 (filed 03/10/2026 per fee payment)
+        Description: Demolish 2-story multi-family building (5,104sf).
+
+    2. Compact list format:
+        Full permit list:
+          B2012-02615 | 07/02/2012 | Building Permit | Closed Expired | Description
+
+    Returns dict with:
+        - address: string
+        - permits: list of permit dicts with keys:
+            permit_number, permit_type, status, date, description, job_value, finaled_date
+    """
+    lines = text.strip().split('\n')
+    result = {
+        'address': None,
+        'permits': [],
+        'permit_count': 0
+    }
+
+    # Extract address
+    for line in lines:
+        if line.startswith('ADDRESS:'):
+            addr = line.replace('ADDRESS:', '').strip()
+            # Remove city/state/zip
+            addr = re.sub(r',?\s*(Berkeley|CA|94\d{3}).*$', '', addr, flags=re.IGNORECASE)
+            result['address'] = addr.strip()
+            break
+
+    # Extract permit count
+    for line in lines:
+        match = re.search(r'BUILDING PERMITS FOUND:\s*(\d+)', line)
+        if match:
+            result['permit_count'] = int(match.group(1))
+            break
+
+    # Parse detailed permit blocks (--- PERMIT N ---)
+    current_permit = None
+    i = 0
+    while i < len(lines):
+        line = lines[i].strip()
+
+        # Start of permit block
+        if re.match(r'^---\s*PERMIT\s+\d+\s*---', line):
+            if current_permit and current_permit.get('permit_number'):
+                result['permits'].append(current_permit)
+            current_permit = {
+                'permit_number': None,
+                'permit_type': None,
+                'status': None,
+                'date': None,
+                'finaled_date': None,
+                'description': None,
+                'job_value': None,
+                'owner': None,
+                'applicant': None
+            }
+            i += 1
+            continue
+
+        # Parse permit fields
+        if current_permit is not None:
+            if line.startswith('Permit #:'):
+                current_permit['permit_number'] = line.replace('Permit #:', '').strip()
+            elif line.startswith('Type:'):
+                current_permit['permit_type'] = line.replace('Type:', '').strip()
+            elif line.startswith('Status:'):
+                current_permit['status'] = line.replace('Status:', '').strip()
+            elif line.startswith('Date:'):
+                date_str = line.replace('Date:', '').strip()
+                # Try to extract ISO date
+                date_match = re.search(r'(\d{2}/\d{2}/\d{4})', date_str)
+                if date_match:
+                    try:
+                        dt = datetime.strptime(date_match.group(1), '%m/%d/%Y')
+                        current_permit['date'] = dt.strftime('%Y-%m-%d')
+                    except:
+                        current_permit['date'] = date_str
+                else:
+                    current_permit['date'] = date_str
+            elif line.startswith('Description:'):
+                current_permit['description'] = line.replace('Description:', '').strip()
+            elif line.startswith('Job Value:'):
+                current_permit['job_value'] = line.replace('Job Value:', '').strip()
+            elif line.startswith('Owner:'):
+                current_permit['owner'] = line.replace('Owner:', '').strip()
+            elif line.startswith('Applicant:'):
+                current_permit['applicant'] = line.replace('Applicant:', '').strip()
+
+        i += 1
+
+    # Don't forget last permit
+    if current_permit and current_permit.get('permit_number'):
+        result['permits'].append(current_permit)
+
+    # Parse compact list format (B2012-02615 | 07/02/2012 | Building Permit | Closed Expired | Desc)
+    for line in lines:
+        # Match: permit_num | date | type | status | description
+        match = re.match(
+            r'^\s*([A-Z]\d{4}-\d+(?:-REV\d+)?)\s*\|\s*'
+            r'(\d{2}/\d{2}/\d{4})\s*\|\s*'
+            r'([^|]+)\s*\|\s*'
+            r'([^|]+)\s*\|\s*'
+            r'(.*)$',
+            line.strip()
+        )
+        if match:
+            permit_num = match.group(1).strip()
+            # Check if we already have this permit from detailed block
+            existing = [p for p in result['permits'] if p.get('permit_number') == permit_num]
+            if not existing:
+                try:
+                    dt = datetime.strptime(match.group(2).strip(), '%m/%d/%Y')
+                    date_iso = dt.strftime('%Y-%m-%d')
+                except:
+                    date_iso = match.group(2).strip()
+
+                result['permits'].append({
+                    'permit_number': permit_num,
+                    'permit_type': match.group(3).strip(),
+                    'status': match.group(4).strip(),
+                    'date': date_iso,
+                    'finaled_date': None,
+                    'description': match.group(5).strip(),
+                    'job_value': None,
+                    'owner': None,
+                    'applicant': None
+                })
+
+    # Extract finaled dates from Processing Status section
+    for i, line in enumerate(lines):
+        if 'Finaled' in line and 'Permit #' not in line:
+            # Look for date in this line or nearby
+            date_match = re.search(r'(\d{2}/\d{2}/\d{4})', line)
+            if date_match:
+                try:
+                    dt = datetime.strptime(date_match.group(1), '%m/%d/%Y')
+                    finaled_date = dt.strftime('%Y-%m-%d')
+                    # Apply to permits with "Finaled" status
+                    for permit in result['permits']:
+                        if permit['status'] and 'Finaled' in permit['status']:
+                            permit['finaled_date'] = finaled_date
+                except:
+                    pass
+
+    return result
+
+
+def parse_building_filename(filename: str) -> str | None:
+    """
+    Parse address from building permit filename.
+
+    Expected format: B_1899_OXFORD_St.txt or B_2601_SAN_PABLO_Ave.txt
+    Returns address string or None if can't parse.
+    """
+    name = Path(filename).stem  # Remove .txt extension
+
+    if not name.startswith('B_'):
+        return None
+
+    # Remove B_ prefix
+    addr_part = name[2:]
+
+    # Convert underscores to spaces
+    address = addr_part.replace('_', ' ')
+
+    return address
+
+
+def save_building_permit_events(db_path: str, text_file: str) -> dict:
+    """
+    Parse Building Permit file and save events to database.
+
+    Unlike Planning permits, Building files contain the address and may have
+    multiple permits. We extract all permits and their events.
+
+    Returns dict with counts of inserted/skipped records.
+    """
+    path = Path(text_file)
+    if not path.exists():
+        return {'error': f"File not found: {text_file}"}
+
+    text = path.read_text()
+
+    # Check for placeholder/empty files
+    if 'pbpaste' in text and len(text) < 200:
+        return {'error': "Placeholder file (contains pbpaste command)", 'permits': 0}
+
+    if 'No building permits found' in text:
+        return {
+            'permits_found': 0,
+            'events_inserted': 0,
+            'events_skipped': 0,
+            'no_permits': True,
+            'source_file': str(path)
+        }
+
+    # Parse the file
+    parsed = parse_building_permit_file(text)
+
+    if not parsed['permits']:
+        # Check if explicitly no qualifying permits
+        if 'No qualifying permits found' in text or 'RESULT: No qualifying' in text:
+            return {
+                'permits_found': 0,
+                'events_inserted': 0,
+                'events_skipped': 0,
+                'no_qualifying_permits': True,
+                'source_file': str(path)
+            }
+        return {'error': "No permits parsed from file", 'permits': 0}
+
+    address = parsed['address']
+
+    # Connect to database
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+
+    # Look up project_id
+    project_id = lookup_project_id(conn, address) if address else None
+
+    # Track results
+    results = {
+        'source_file': str(path),
+        'address': address,
+        'project_id': project_id,
+        'permits_found': len(parsed['permits']),
+        'events_inserted': 0,
+        'events_skipped': 0,
+        'permits_upserted': 0,
+        'warnings': []
+    }
+
+    if project_id is None and address:
+        results['warnings'].append(f"No project match for address: {address}")
+
+    # Ensure permit_events table exists
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS permit_events (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            project_id INTEGER,
+            address TEXT,
+            permit_number TEXT,
+            stage TEXT,
+            action TEXT,
+            event_date TEXT,
+            assigned_to TEXT,
+            marked_by TEXT,
+            comment TEXT,
+            stage_status TEXT,
+            source TEXT DEFAULT 'accela',
+            imported_at TEXT DEFAULT (datetime('now')),
+            permit_type TEXT,
+            UNIQUE(permit_number, stage, action, event_date)
+        )
+    """)
+
+    # Ensure building_permits table exists
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS building_permits (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            project_id INTEGER,
+            permit_number TEXT NOT NULL UNIQUE,
+            permit_type TEXT,
+            address TEXT,
+            status TEXT,
+            filed_date TEXT,
+            finaled_date TEXT,
+            job_value TEXT,
+            description TEXT,
+            owner TEXT,
+            applicant TEXT,
+            source TEXT DEFAULT 'accela',
+            imported_at TEXT DEFAULT (datetime('now'))
+        )
+    """)
+
+    # Insert each permit
+    for permit in parsed['permits']:
+        permit_number = permit.get('permit_number')
+        if not permit_number:
+            continue
+
+        # Insert event for this permit
+        try:
+            cursor.execute("""
+                INSERT INTO permit_events
+                (project_id, address, permit_number, stage, action, event_date,
+                 assigned_to, marked_by, stage_status, source, permit_type)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'accela_building', 'Building')
+            """, (
+                project_id,
+                address,
+                permit_number,
+                permit.get('permit_type', 'Building Permit'),
+                permit.get('status'),
+                permit.get('date'),
+                None,
+                None,
+                'Finaled' if permit.get('status') and 'Finaled' in permit.get('status') else 'Active'
+            ))
+            results['events_inserted'] += 1
+        except sqlite3.IntegrityError:
+            results['events_skipped'] += 1
+
+        # Upsert into building_permits table
+        try:
+            cursor.execute("""
+                INSERT INTO building_permits
+                (project_id, permit_number, permit_type, address, status,
+                 filed_date, finaled_date, job_value, description, owner, applicant)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(permit_number) DO UPDATE SET
+                    project_id = excluded.project_id,
+                    status = excluded.status,
+                    finaled_date = excluded.finaled_date,
+                    job_value = excluded.job_value,
+                    description = excluded.description
+            """, (
+                project_id,
+                permit_number,
+                permit.get('permit_type'),
+                address,
+                permit.get('status'),
+                permit.get('date'),
+                permit.get('finaled_date'),
+                permit.get('job_value'),
+                permit.get('description'),
+                permit.get('owner'),
+                permit.get('applicant')
+            ))
+            results['permits_upserted'] += 1
+        except Exception as e:
+            results['warnings'].append(f"Error upserting {permit_number}: {e}")
+
+    conn.commit()
+    conn.close()
+
+    return results
+
+
 def parse_pipe_delimited_status(lines: list) -> list:
     """
     Parse Processing Status from pipe-delimited format (Claude sidebar markdown).
@@ -1910,13 +2265,45 @@ def save_batch_command(args):
     }
 
     for txt_file in sorted(txt_files):
-        # Parse filename
-        parsed = parse_filename(txt_file.name)
+        filename = txt_file.name
+
+        # Check if this is a Building permit file (starts with B_)
+        if filename.startswith('B_'):
+            # Process as Building permit file
+            results = save_building_permit_events(args.db, str(txt_file))
+
+            if 'error' in results:
+                print(f"ERROR: {filename}: {results['error']}")
+                totals['files_skipped'] += 1
+                continue
+
+            # Handle files with no permits or no qualifying permits
+            if results.get('no_permits') or results.get('no_qualifying_permits'):
+                print(f"NO PERMITS: {filename} (no qualifying building permits)")
+                totals['files_processed'] += 1
+                continue
+
+            # Print progress
+            address = results.get('address', 'Unknown')
+            status = "OK" if results.get('project_id') else "NO PROJECT MATCH"
+            print(f"{status}: [BUILDING] {address} "
+                  f"({results['permits_found']} permits, {results['events_inserted']} events inserted)")
+
+            # Update totals
+            totals['files_processed'] += 1
+            totals['events_inserted'] += results.get('events_inserted', 0)
+            totals['events_skipped'] += results.get('events_skipped', 0)
+            totals['permits_upserted'] += results.get('permits_upserted', 0)
+            totals['warnings'].extend(results.get('warnings', []))
+            continue
+
+        # Otherwise, process as Planning permit file
+        parsed = parse_filename(filename)
 
         if parsed is None:
-            print(f"SKIP: {txt_file.name} (can't parse filename)")
+            print(f"SKIP: {filename} (can't parse filename)")
             totals['files_skipped'] += 1
-            totals['warnings'].append(f"Can't parse filename: {txt_file.name}")
+            totals['warnings'].append(f"Can't parse filename: {filename}")
             continue
 
         permit_number, address = parsed
@@ -1925,7 +2312,7 @@ def save_batch_command(args):
         results = save_permit_events(args.db, permit_number, address, str(txt_file))
 
         if 'error' in results:
-            print(f"ERROR: {txt_file.name}: {results['error']}")
+            print(f"ERROR: {filename}: {results['error']}")
             totals['files_skipped'] += 1
             continue
 

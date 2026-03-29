@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 #
 # scrape_and_save.sh - Interactive Accela data collection script
 #
@@ -10,8 +10,13 @@
 #   ./scripts/scrape_and_save.sh --resume  # Resume from last position
 #   ./scripts/scrape_and_save.sh --skip N  # Skip first N projects
 #
+# Note: Written for zsh (macOS default shell)
+#
 
 set -e
+
+# Enable bash-like array indexing (0-based)
+setopt KSH_ARRAYS
 
 # Paths
 QUEUE_CSV="data/processed/scraping_queue.csv"
@@ -60,8 +65,8 @@ if [ "$RESUME" = true ] && [ -f "$POSITION_FILE" ]; then
     echo -e "${CYAN}Resuming from position $SKIP${NC}"
 fi
 
-# Read queue into array (skip header)
-mapfile -t PROJECTS < <(tail -n +2 "$QUEUE_CSV")
+# Read queue into array (skip header) - zsh compatible
+PROJECTS=("${(@f)$(tail -n +2 "$QUEUE_CSV")}")
 TOTAL=${#PROJECTS[@]}
 
 echo ""
@@ -84,15 +89,25 @@ echo ""
 
 # Process each project
 for ((i=SKIP; i<TOTAL; i++)); do
-    IFS=',' read -r address permit units missing search_term priority score <<< "${PROJECTS[$i]}"
+    # Use Python to properly parse CSV line (handles quoted fields with commas)
+    LINE="${PROJECTS[$i]}"
+    eval $(python3 -c "
+import csv
+import sys
+from io import StringIO
 
-    # Remove quotes if present
-    address=$(echo "$address" | tr -d '"')
-    permit=$(echo "$permit" | tr -d '"')
-    units=$(echo "$units" | tr -d '"')
-    missing=$(echo "$missing" | tr -d '"')
-    search_term=$(echo "$search_term" | tr -d '"')
-    priority=$(echo "$priority" | tr -d '"')
+line = '''$LINE'''
+reader = csv.reader(StringIO(line))
+row = next(reader)
+if len(row) >= 7:
+    print(f'address=\"{row[0]}\"')
+    print(f'permit=\"{row[1]}\"')
+    print(f'units=\"{row[2]}\"')
+    print(f'missing=\"{row[3]}\"')
+    print(f'search_term=\"{row[4]}\"')
+    print(f'priority=\"{row[5]}\"')
+    print(f'score=\"{row[6]}\"')
+")
 
     # Generate filename
     if [[ "$permit" != "TBD" && -n "$permit" ]]; then

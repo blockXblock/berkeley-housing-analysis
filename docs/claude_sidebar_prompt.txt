@@ -1,0 +1,219 @@
+BERKELEY HOUSING PIPELINE - CHROME SIDEBAR EXTRACTION PROMPT
+=============================================================
+
+Copy and paste this prompt into the Claude sidebar when viewing an Accela permit page.
+The output format is designed to be parsed by scripts/accela_workflow.py
+
+=============================================================
+PROMPT FOR PLANNING PERMITS (ZP, PLN, LMSAP, DRCF, etc.)
+=============================================================
+
+Extract all information from this Accela permit page in the following exact format:
+
+PERMIT: [permit number, e.g., ZP2024-0058]
+ADDRESS: [full address including city/state/zip]
+STATUS: [current permit status]
+DESCRIPTION: [project description]
+
+RECORD INFO:
+  Type: [permit type, e.g., Zoning Permit, Pre-Application]
+  Date: [application date]
+  Status: [status]
+  Project Name: [if available]
+  APN: [parcel number if shown]
+
+APPLICANT:
+  Name: [full name]
+  Company: [company name if applicable]
+  Address: [mailing address]
+  Phone: [phone number]
+  Email: [email address]
+
+OWNER:
+  Name: [property owner name]
+  Company: [company if applicable]
+  Address: [mailing address]
+
+DEVELOPER: [if different from applicant/owner]
+  Name: [developer name]
+  Company: [company name]
+
+ARCHITECT:
+  Name: [architect name]
+  Company: [firm name]
+  License: [license number if shown]
+
+CONTRACTOR: [if shown]
+  Name: [contractor name]
+  Company: [company name]
+  License: [license number]
+
+ASSIGNED PLANNER:
+  Name: [city planner name]
+  Email: [email if shown]
+
+PROCESSING STATUS:
+For each stage, list all events in this format:
+
+[STAGE NAME] [STATUS if shown]:
+  - Due: [MM/DD/YYYY] | Assigned: [name] | Marked as: [action] | On: [MM/DD/YYYY] | By: [name]
+  - Due: [MM/DD/YYYY] | Assigned: [name] | Marked as: [action] | On: [MM/DD/YYYY] | By: [name]
+
+Example stages: Completeness Review, Application Processing, Staff Decision,
+CEQA Determination, Public Hearing, Case Closed
+
+FEES:
+List each fee item:
+  - [Fee Name]: $[amount] ([status: Paid/Due/Invoiced])
+  - [Fee Name]: $[amount] ([status])
+  Total Fees: $[total]
+  Total Paid: $[paid]
+  Balance Due: $[balance]
+
+ATTACHMENTS:
+For each attachment, capture the download URL by right-clicking or inspecting the link:
+  [filename] | [date] | [size] | [download URL or href]
+  [filename] | [date] | [size] | [download URL or href]
+
+IMPORTANT: For each attachment, right-click or inspect the document link to capture
+the actual download URL or href. The URL may be a direct link like
+https://aca-prod.accela.com/BERKELEY/... or a JavaScript link. Capture whatever
+URL the document name points to.
+
+Priority documents to capture URLs for:
+  - Density Bonus Eligibility Statements
+  - Affordable Housing Requirements
+  - Complete Letters
+  - Staff Reports
+  - ZAB Resolutions
+  - Fee Invoices
+  - Inspection Reports
+
+CONDITIONS: [if any conditions are listed]
+  1. [condition text]
+  2. [condition text]
+
+RELATED PERMITS:
+List any linked permits:
+  - [Permit Number] | [Type] | [Status]
+
+
+=============================================================
+PROMPT FOR BUILDING PERMITS (B20xx-xxxxx)
+=============================================================
+
+Extract all information from this Accela Building Permit page:
+
+PERMIT: [permit number, e.g., B2024-03190]
+ADDRESS: [full address]
+STATUS: [current status, e.g., Issued, Finaled, Expired]
+DESCRIPTION: [work description]
+
+RECORD INFO:
+  Type: [Building Permit / Building Permit Revision / etc.]
+  Application Date: [date]
+  Issue Date: [date if issued]
+  Expiration Date: [expiration date]
+  Finaled Date: [date if finaled]
+
+VALUATION:
+  Job Value: $[amount]
+  Square Footage: [sq ft if shown]
+
+CONTRACTOR:
+  Name: [contractor name]
+  Company: [company name]
+  License: [CSLB license number]
+  Phone: [phone]
+  Email: [email]
+
+OWNER:
+  Name: [owner name]
+  Address: [address]
+
+PROCESSING STATUS:
+List each inspection/status event:
+  - [Date] | [Status/Action] | [By: name if shown]
+
+INSPECTIONS:
+List each inspection:
+  - [Date] | [Inspection Type] | [Result: Pass/Fail/Pending] | [Inspector if shown]
+
+FEES:
+  - [Fee Name]: $[amount] ([Paid/Due])
+  Total: $[total]
+
+RELATED PERMITS:
+  - [Permit Number] | [Type] | [Status]
+
+
+=============================================================
+PROMPT FOR MULTIPLE PERMITS (Search Results Page)
+=============================================================
+
+When viewing a search results page with multiple permits for one address:
+
+ADDRESS: [address]
+Search results: [N] permits found
+Generated: [current date]
+
+For each permit found, extract full details using the format above,
+prefixed with:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PERMIT 1: [permit number]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[full permit details]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PERMIT 2: [permit number]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[full permit details]
+
+
+=============================================================
+IMPORTANT NOTES FOR EXTRACTION
+=============================================================
+
+1. ALWAYS include the PERMIT and ADDRESS lines first
+2. For PROCESSING STATUS, capture ALL events in chronological order
+3. Include exact dates in MM/DD/YYYY format
+4. Include staff names exactly as shown (e.g., "By: Sharon Gong")
+5. If a section is empty or not applicable, write: (none)
+6. For fees, include both paid and unpaid items with totals
+7. For ATTACHMENTS: capture filename, date, size, AND the download URL
+   - Right-click each attachment link and copy the URL
+   - Or use browser DevTools to inspect the href attribute
+   - URLs are critical for downloading Staff Reports, Fee Invoices, etc.
+8. If viewing the Planning tab, note: [Planning Tab]
+9. If viewing the Building tab, note: [Building Tab]
+10. Click "Expand All" or view each section before extracting
+11. Search the Building tab for related building permits (B20xx-xxxxx)
+
+
+=============================================================
+QUICK REFERENCE - EXPECTED SECTIONS
+=============================================================
+
+Planning Permits:
+  [x] PERMIT, ADDRESS, STATUS, DESCRIPTION
+  [x] RECORD INFO
+  [x] APPLICANT, OWNER, DEVELOPER, ARCHITECT, CONTRACTOR
+  [x] ASSIGNED PLANNER
+  [x] PROCESSING STATUS (all events with staff names)
+  [x] FEES (itemized with totals)
+  [x] ATTACHMENTS (with dates AND download URLs)
+  [x] CONDITIONS (if any)
+  [x] RELATED PERMITS
+
+Building Permits:
+  [x] PERMIT, ADDRESS, STATUS, DESCRIPTION
+  [x] RECORD INFO (including issue/final dates)
+  [x] VALUATION
+  [x] CONTRACTOR, OWNER
+  [x] PROCESSING STATUS
+  [x] INSPECTIONS (all with dates/results)
+  [x] FEES
+  [x] RELATED PERMITS

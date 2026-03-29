@@ -2008,6 +2008,14 @@ def save_permit_events(db_path: str, permit_number: str, address: str, text_file
     # Parse the text file
     text = path.read_text()
 
+    # If no permit number provided (address-only file), extract from content
+    if permit_number is None:
+        # Look for permit patterns like "1. DRCF2024-0004 |" or "PERMIT: ZP2022-0099"
+        permit_matches = re.findall(r'(?:^\d+\.\s+|PERMIT:\s*)([A-Z]{2,}[0-9]{4}-[0-9]+)', text, re.MULTILINE)
+        if permit_matches:
+            # Use the first permit found (usually the most recent/primary)
+            permit_number = permit_matches[0]
+
     # Check if file explicitly indicates no processing status records
     text_lower = text.lower()
     has_no_records = (
@@ -2202,12 +2210,34 @@ def save_command(args):
     return 0
 
 
+def extract_address_from_file(filepath: str) -> str | None:
+    """
+    Extract address from file content (ADDRESS: line).
+    Used for address-only files without permit prefix in filename.
+    """
+    try:
+        with open(filepath, 'r') as f:
+            for line in f:
+                if line.startswith('ADDRESS:'):
+                    # Extract address, remove city/state/zip
+                    addr = line.replace('ADDRESS:', '').strip()
+                    addr = re.sub(r',?\s*(BERKELEY|CA|94\d{3}).*$', '', addr, flags=re.IGNORECASE)
+                    return addr.strip()
+    except Exception:
+        pass
+    return None
+
+
 def parse_filename(filename: str) -> tuple[str, str] | None:
     """
     Parse permit number and address from filename.
 
-    Expected format: ZP2024-0058_2700_SHATTUCK.txt
+    Expected formats:
+    - ZP2024-0058_2700_SHATTUCK.txt -> (ZP2024-0058, 2700 SHATTUCK)
+    - 1598_UNIVERSITY.txt -> (None, 1598 UNIVERSITY)  # address-only file
+
     Returns (permit_number, address) or None if can't parse.
+    permit_number may be None for address-only files.
     """
     name = Path(filename).stem  # Remove .txt extension
 
@@ -2216,14 +2246,21 @@ def parse_filename(filename: str) -> tuple[str, str] | None:
     if len(parts) < 2:
         return None
 
-    permit_number = parts[0]
+    first_part = parts[0]
 
-    # Convert remaining underscores to spaces for address
-    address_parts = parts[1].replace('_', ' ')
+    # Check if first part is a permit number (has letters or dashes) vs street number (digits only)
+    # Permit numbers: ZP2024-0058, PLN2024-0011, B2025-05534, DRCF2024-0004
+    # Street numbers: 1598, 1701, 2555
+    is_permit_number = bool(re.search(r'[A-Za-z-]', first_part))
 
-    # Add "St" or similar if it looks like just a street name
-    # e.g., "2700 SHATTUCK" -> "2700 SHATTUCK Ave" (but we'll leave as-is for matching)
-    address = address_parts
+    if is_permit_number:
+        permit_number = first_part
+        # Convert remaining underscores to spaces for address
+        address = parts[1].replace('_', ' ')
+    else:
+        # First part is a street number - whole filename is an address
+        permit_number = None
+        address = name.replace('_', ' ')
 
     return permit_number, address
 
@@ -2307,6 +2344,12 @@ def save_batch_command(args):
             continue
 
         permit_number, address = parsed
+
+        # For address-only files (no permit in filename), extract address from file content
+        if permit_number is None:
+            file_address = extract_address_from_file(str(txt_file))
+            if file_address:
+                address = file_address
 
         # Process file
         results = save_permit_events(args.db, permit_number, address, str(txt_file))

@@ -2655,6 +2655,10 @@
 
         // Update stats
         updateSpatialStats(metric, projects);
+        console.log('✅ colorMapBy() complete');
+        } catch (err) {
+            console.error('❌ colorMapBy error:', err);
+        }
     }
 
     function updateSpatialStats(metric, projects) {
@@ -2695,10 +2699,6 @@
                 <div class="text-xs text-gray-400">${c.projects.reduce((s, p) => s + (p.units || 0), 0).toLocaleString()} units</div>
             </div>
         `).join('');
-        console.log('✅ colorMapBy() complete');
-        } catch (err) {
-            console.error('❌ colorMapBy error:', err);
-        }
     }
 
     // ============================================

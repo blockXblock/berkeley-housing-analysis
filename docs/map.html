@@ -151,7 +151,7 @@
 
         async function loadProjects() {
             const query = encodeURIComponent(
-                "SELECT address_display, net_units, status, data_source, latitude, longitude, has_media_coverage, news_urls, primary_news_source FROM projects WHERE latitude IS NOT NULL ORDER BY net_units DESC"
+                "SELECT address, units, status, permits, description, latitude, longitude FROM projects WHERE latitude IS NOT NULL ORDER BY units DESC"
             );
 
             const url = "https://berkeley-housing.fly.dev/berkeley_housing_map.json?sql=" + query + "&_shape=array";
@@ -165,7 +165,7 @@
                 let totalUnits = 0;
 
                 projects.forEach(project => {
-                    const units = project.net_units || 0;
+                    const units = project.units || 0;
                     totalUnits += units;
 
                     const circle = L.circleMarker([project.latitude, project.longitude], {
@@ -178,13 +178,13 @@
                     });
 
                     let popupContent =
-                        "<strong>" + project.address_display + "</strong><br>" +
+                        "<strong>" + project.address + "</strong><br>" +
                         "<b>" + units + " units</b><br>" +
-                        "Status: " + (project.status || "N/A") + "<br>" +
-                        "Source: " + (project.data_source || "N/A");
+                        "Status: " + (project.status || "N/A");
 
-                    // Add news links if available
-                    popupContent += formatNewsLinks(project.news_urls);
+                    if (project.permits) {
+                        popupContent += "<br><span style='font-size:11px;color:#666;'>Permits: " + project.permits + "</span>";
+                    }
 
                     circle.bindPopup(popupContent, { maxWidth: 300 });
 

@@ -346,6 +346,31 @@ def parse_processing_status(text: str) -> list:
         for line in lines
     )
 
+    # Check for date-action-name format (Format 12) - has "Stage Name:" followed by
+    # indented lines like "  MM/DD/YYYY - Action - Name"
+    has_date_action_name_format = False
+    for i, line in enumerate(lines):
+        # Look for stage header (word ending with colon, not PROCESSING STATUS)
+        if re.match(r'^[A-Za-z][A-Za-z\s]+:$', line.strip()) and 'PROCESSING STATUS' not in line.upper():
+            # Check if next lines have the date-action-name pattern
+            for j in range(i + 1, min(i + 5, len(lines))):
+                if re.match(r'^\s+\d{2}/\d{2}/\d{4}\s*-\s*.+\s*-\s*.+', lines[j]):
+                    has_date_action_name_format = True
+                    break
+        if has_date_action_name_format:
+            break
+
+    # Check for due-marked format (Format 13) - has "Due DATE - Marked ACTION on DATE by NAME"
+    # without the pipe-delimited structure. Handles both "-" and "," separators.
+    has_due_marked_format = False
+    for line in lines:
+        # Pattern: "Due MM/DD/YYYY ... [-,] Marked ... on MM/DD/YYYY by Name"
+        if re.search(r'Due\s+\d{2}/\d{2}/\d{4}.*[-,]\s*Marked\s+(?:as\s+)?.+\s+on\s+\d{2}/\d{2}/\d{4}\s+by', line):
+            # Make sure it's not a pipe-delimited format (Format 5)
+            if 'Action:' not in line:
+                has_due_marked_format = True
+                break
+
     # Check for arrow format first (more specific)
     has_arrow = any('→' in line or '->' in line for line in lines)
     has_bullet_arrow = has_arrow and any(
@@ -371,7 +396,13 @@ def parse_processing_status(text: str) -> list:
             if line.strip().startswith('###') or line.strip().startswith('**Fees'):
                 break
 
-    if has_stage_line_format:
+    if has_due_marked_format:
+        # Parse due-marked format (Format 13)
+        events = parse_due_marked_status(lines)
+    elif has_date_action_name_format:
+        # Parse date-action-name format (Format 12)
+        events = parse_date_action_name_status(lines)
+    elif has_stage_line_format:
         # Parse Stage line format (Format 8)
         events = parse_stage_line_status(lines)
     elif has_numbered_stage_format:
@@ -409,6 +440,203 @@ def parse_processing_status(text: str) -> list:
         text_clean = strip_markdown(text)
         lines_clean = text_clean.strip().split('\n')
         events = parse_original_accela_status(lines_clean)
+
+    return events
+
+
+def parse_date_action_name_status(lines: list) -> list:
+    """
+    Parse Processing Status from date-action-name format (Format 12).
+
+    Format:
+        PROCESSING STATUS:
+        Completeness Review:
+          03/03/2023 - Application Submitted - Niloufar Karimzadegan
+          03/22/2023 - Incomplete - Niloufar Karimzadegan
+        Application Processing:
+          10/01/2024 - Pending Final Action - MJ
+        Case Closed:
+          10/21/2024 - Approved/Case Closed - MJ
+
+    Returns list of event dicts.
+    """
+    events = []
+    current_stage = None
+
+    # Pattern to match stage headers (word(s) followed by colon)
+    stage_header_pattern = re.compile(r'^([A-Za-z][A-Za-z\s]+):$')
+
+    # Pattern to match event lines: MM/DD/YYYY - Action - Name [optional (note)]
+    event_pattern = re.compile(
+        r'^\s+(\d{2}/\d{2}/\d{4})\s*-\s*(.+?)\s*-\s*([A-Za-z][A-Za-z\s]+?)(?:\s*\((.+?)\))?$'
+    )
+
+    in_processing = False
+
+    for line in lines:
+        line_stripped = line.strip()
+
+        # Look for PROCESSING STATUS section
+        if 'PROCESSING STATUS' in line_stripped.upper():
+            in_processing = True
+            continue
+
+        # Stop at next major section
+        if in_processing and line_stripped and (
+            line_stripped.startswith('FEES') or
+            line_stripped.startswith('ATTACHMENTS') or
+            line_stripped.startswith('===') or
+            line_stripped.startswith('PERMIT') and 'OF' in line_stripped
+        ):
+            break
+
+        if not in_processing:
+            continue
+
+        # Check for stage header
+        stage_match = stage_header_pattern.match(line_stripped)
+        if stage_match:
+            current_stage = stage_match.group(1).strip()
+            continue
+
+        # Check for event line (indented with date-action-name pattern)
+        event_match = event_pattern.match(line)
+        if event_match:
+            date_str = event_match.group(1)
+            action = event_match.group(2).strip()
+            by_whom = event_match.group(3).strip()
+            comment = event_match.group(4) if event_match.group(4) else None
+
+            # Convert MM/DD/YYYY to YYYY-MM-DD
+            try:
+                dt = datetime.strptime(date_str, '%m/%d/%Y')
+                iso_date = dt.strftime('%Y-%m-%d')
+            except:
+                iso_date = date_str
+
+            events.append({
+                'stage': current_stage or 'Unknown',
+                'action': action,
+                'date': iso_date,
+                'by': by_whom,
+                'stage_status': 'Complete' if current_stage and 'closed' in current_stage.lower() else 'Active',
+                'assigned_to': None,
+                'comment': comment
+            })
+
+    return events
+
+
+def parse_due_marked_status(lines: list) -> list:
+    """
+    Parse Processing Status from due-marked format (Format 13).
+
+    Format (2538 DURANT style):
+        Processing Status:
+          Completeness Review
+            Due 06/04/2025 - Marked Application Complete on 06/06/2025 by MJ
+
+    Format (2550 SHATTUCK style):
+        Stage: Completeness Review
+            Due 10/25/2023, assigned TBD - Marked Incomplete Pending Applicant on 10/25/2023 by Allison Riemer
+
+    Returns list of event dicts.
+    """
+    events = []
+    current_stage = None
+
+    # Stage names we recognize
+    stage_names = [
+        'Completeness Review', 'Application Processing', 'CEQA Determination',
+        'Staff Decision', 'Appeal', 'Case Closed', 'Hearing', 'Public Hearing',
+        'Notice of Decision', 'Issuance', 'Plan Review', 'Distribution',
+        'Final Inspection', 'Certificate of Occupancy', 'Application Submittal',
+        'Staff Review', 'Public Notice', 'Decision', 'Hearing Notice'
+    ]
+
+    # Pattern to match stage headers - multiple formats:
+    # "Stage: Name" or just "Stage Name" on its own line (indented or not)
+    stage_patterns = [
+        re.compile(r'^Stage:\s*(.+)$'),  # "Stage: Completeness Review"
+    ]
+
+    # Pattern to match event lines:
+    # "Due MM/DD/YYYY[, assigned NAME] [-,] Marked [as] ACTION on MM/DD/YYYY by NAME [Comment: ...]"
+    # Handles "-", "--", and "," separators, and "Marked" vs "Marked as"
+    event_pattern = re.compile(
+        r'Due\s+(\d{2}/\d{2}/\d{4})'  # Due date
+        r'(?:,?\s*(?:assigned(?:\s+to)?|Assigned)\s+([^-,]+?))?'  # Optional assigned to
+        r'\s*[-,]+\s*Marked(?:\s+as)?\s+(.+?)\s+on\s+(\d{2}/\d{2}/\d{4})'  # Action and date (handles -, --, or ,)
+        r'\s+by\s+([A-Za-z][A-Za-z\s.]+?)'  # By whom (allow periods for initials)
+        r'(?:\s*$|\s*Comment:\s*(.+))?',  # Optional comment
+        re.IGNORECASE
+    )
+
+    in_processing = False
+
+    for line in lines:
+        line_stripped = line.strip()
+
+        # Look for PROCESSING STATUS section
+        if 'PROCESSING STATUS' in line_stripped.upper():
+            in_processing = True
+            continue
+
+        # Stop at next major section
+        if in_processing and line_stripped and (
+            line_stripped.upper().startswith('FEES') or
+            line_stripped.upper().startswith('ATTACHMENTS') or
+            line_stripped.startswith('===') or
+            (line_stripped.startswith('PERMIT') and 'OF' in line_stripped) or
+            line_stripped.startswith('---')
+        ):
+            break
+
+        if not in_processing:
+            continue
+
+        # Check for stage header
+        for sp in stage_patterns:
+            stage_match = sp.match(line_stripped)
+            if stage_match:
+                current_stage = stage_match.group(1).strip()
+                # Clean up stage name
+                current_stage = re.sub(r'\s*\[.*\]', '', current_stage)  # Remove [STATUS]
+                break
+
+        # Also check if line is a known stage name (indented, on its own line)
+        if not stage_match:
+            for sn in stage_names:
+                if line_stripped == sn or line_stripped.startswith(sn + ' '):
+                    current_stage = sn
+                    break
+
+        # Check for event line
+        event_match = event_pattern.search(line)
+        if event_match:
+            due_date = event_match.group(1)
+            assigned_to = event_match.group(2).strip() if event_match.group(2) else None
+            action = event_match.group(3).strip()
+            marked_date = event_match.group(4)
+            by_whom = event_match.group(5).strip()
+            comment = event_match.group(6).strip() if event_match.group(6) else None
+
+            # Convert MM/DD/YYYY to YYYY-MM-DD
+            try:
+                dt = datetime.strptime(marked_date, '%m/%d/%Y')
+                iso_date = dt.strftime('%Y-%m-%d')
+            except:
+                iso_date = marked_date
+
+            events.append({
+                'stage': current_stage or 'Unknown',
+                'action': action,
+                'date': iso_date,
+                'by': by_whom,
+                'stage_status': 'Complete' if current_stage and 'closed' in current_stage.lower() else 'Active',
+                'assigned_to': assigned_to,
+                'comment': comment
+            })
 
     return events
 

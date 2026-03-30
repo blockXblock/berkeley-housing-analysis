@@ -1253,6 +1253,8 @@
 
     // Initialize Charts
     function initCharts() {
+        console.log('📊 initCharts() called');
+        try {
         // Status Distribution
         const statusCounts = {};
         DATA.projects.forEach(p => {
@@ -1501,14 +1503,22 @@
                 }
             }
         });
+        console.log('✅ initCharts() complete');
+        } catch (err) {
+            console.error('❌ initCharts error:', err);
+        }
     }
 
     // Project Table
     function renderProjectTable() {
-        const tbody = document.getElementById('projectTableBody');
-        tbody.innerHTML = '';
-        DATA.projects.sort((a, b) => b.units - a.units).forEach((p, i) => {
-            const events = DATA.events[p.id] || [];
+        console.log('📋 renderProjectTable() called');
+        try {
+            const tbody = document.getElementById('projectTableBody');
+            if (!tbody) { console.error('❌ projectTableBody not found'); return; }
+            tbody.innerHTML = '';
+            console.log(`📋 Rendering ${DATA.projects.length} projects`);
+            DATA.projects.sort((a, b) => b.units - a.units).forEach((p, i) => {
+                const events = (DATA.events && DATA.events[p.id]) ? DATA.events[p.id] : [];
             const row = document.createElement('tr');
             row.className = 'border-t hover:bg-gray-50 cursor-pointer';
             row.onclick = () => toggleRow(i);
@@ -1550,6 +1560,10 @@
             `;
             tbody.appendChild(expandRow);
         });
+        console.log('✅ renderProjectTable() complete');
+        } catch (err) {
+            console.error('❌ renderProjectTable error:', err);
+        }
     }
 
     function toggleRow(i) {
@@ -1590,10 +1604,13 @@
     // Gantt Chart
     let ganttSort = 'duration';
     function renderGantt() {
-        const container = document.getElementById('ganttChart');
-        container.innerHTML = '';
+        console.log('📊 renderGantt() called');
+        try {
+            const container = document.getElementById('ganttChart');
+            if (!container) { console.error('❌ ganttChart not found'); return; }
+            container.innerHTML = '';
 
-        let projectsWithTimeline = DATA.projects.filter(p => p.filed);
+            let projectsWithTimeline = DATA.projects.filter(p => p.filed);
 
         // Debug: Log milestone coverage
         const withFiled = DATA.projects.filter(p => p.filed).length;
@@ -1738,6 +1755,10 @@
             row.appendChild(bar);
             container.appendChild(row);
         });
+        console.log('✅ renderGantt() complete');
+        } catch (err) {
+            console.error('❌ renderGantt error:', err);
+        }
     }
 
     function sortGantt(sort) {
@@ -2254,14 +2275,22 @@
     // PROCESS ANALYSIS CHARTS
     // ============================================
     function renderProcessAnalysis() {
-        renderBoxPlot();
-        renderSizeScatter();
-        renderProcessingHistogram();
+        console.log('📈 renderProcessAnalysis() called');
+        try {
+            renderBoxPlot();
+            renderSizeScatter();
+            renderProcessingHistogram();
+            console.log('✅ renderProcessAnalysis() complete');
+        } catch (err) {
+            console.error('❌ renderProcessAnalysis error:', err);
+        }
     }
 
     function renderBoxPlot() {
+        console.log('📊 renderBoxPlot() called');
+        try {
         const ctx = document.getElementById('boxPlotChart');
-        if (!ctx) return;
+        if (!ctx) { console.warn('⚠️ boxPlotChart not found'); return; }
 
         // Group processing days by status
         const statusGroups = {};
@@ -2329,11 +2358,17 @@
                 }
             }
         });
+        console.log('✅ renderBoxPlot() complete');
+        } catch (err) {
+            console.error('❌ renderBoxPlot error:', err);
+        }
     }
 
     function renderSizeScatter() {
+        console.log('📊 renderSizeScatter() called');
+        try {
         const ctx = document.getElementById('sizeScatterChart');
-        if (!ctx) return;
+        if (!ctx) { console.warn('⚠️ sizeScatterChart not found'); return; }
 
         const dataPoints = DATA.projects
             .filter(p => p.proc_days > 0 && p.units > 0)
@@ -2373,11 +2408,17 @@
                 }
             }
         });
+        console.log('✅ renderSizeScatter() complete');
+        } catch (err) {
+            console.error('❌ renderSizeScatter error:', err);
+        }
     }
 
     function renderProcessingHistogram() {
+        console.log('📊 renderProcessingHistogram() called');
+        try {
         const ctx = document.getElementById('processingHistogram');
-        if (!ctx) return;
+        if (!ctx) { console.warn('⚠️ processingHistogram not found'); return; }
 
         // Bin processing days
         const bins = [0, 100, 200, 300, 400, 500, 600, 800, 1000, 1500];
@@ -2435,6 +2476,10 @@
                 }
             }
         });
+        console.log('✅ renderProcessingHistogram() complete');
+        } catch (err) {
+            console.error('❌ renderProcessingHistogram error:', err);
+        }
     }
 
     // ============================================
@@ -2446,21 +2491,27 @@
     let currentColorMetric = 'proc_days';
 
     function renderSpatialMap() {
-        const container = document.getElementById('spatialMap');
-        if (!container) return;
+        console.log('🗺️ renderSpatialMap() called');
+        try {
+            const container = document.getElementById('spatialMap');
+            if (!container) { console.warn('⚠️ spatialMap not found'); return; }
 
-        // Initialize map if not exists
-        if (!spatialMap) {
-            spatialMap = L.map('spatialMap').setView([37.867, -122.267], 14);
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; OpenStreetMap &copy; CARTO',
-                subdomains: 'abcd',
-                maxZoom: 20
-            }).addTo(spatialMap);
+            // Initialize map if not exists
+            if (!spatialMap) {
+                spatialMap = L.map('spatialMap').setView([37.867, -122.267], 14);
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                    attribution: '&copy; OpenStreetMap &copy; CARTO',
+                    subdomains: 'abcd',
+                    maxZoom: 20
+                }).addTo(spatialMap);
+            }
+
+            // Color by processing days by default
+            colorMapBy('proc_days');
+            console.log('✅ renderSpatialMap() complete');
+        } catch (err) {
+            console.error('❌ renderSpatialMap error:', err);
         }
-
-        // Color by processing days by default
-        colorMapBy('proc_days');
     }
 
     function filterMap(filter) {
@@ -2502,9 +2553,11 @@
     }
 
     function colorMapBy(metric) {
-        if (!spatialMap) return;
+        console.log('🎨 colorMapBy() called with metric:', metric);
+        try {
+            if (!spatialMap) { console.warn('⚠️ spatialMap not initialized'); return; }
 
-        currentColorMetric = metric;
+            currentColorMetric = metric;
 
         // Clear existing markers
         spatialMarkers.forEach(m => spatialMap.removeLayer(m));
@@ -2642,6 +2695,10 @@
                 <div class="text-xs text-gray-400">${c.projects.reduce((s, p) => s + (p.units || 0), 0).toLocaleString()} units</div>
             </div>
         `).join('');
+        console.log('✅ colorMapBy() complete');
+        } catch (err) {
+            console.error('❌ colorMapBy error:', err);
+        }
     }
 
     // ============================================
@@ -2989,10 +3046,17 @@
 
     // Initialize
     document.addEventListener('DOMContentLoaded', () => {
-        initCharts();
-        renderProjectTable();
-        renderGantt();
-        renderAPRTable();
+        console.log('🚀 DOMContentLoaded - Initializing explorer...');
+        console.log('📊 DATA check:', {
+            projects: DATA.projects ? DATA.projects.length : 'MISSING',
+            events: DATA.events ? Object.keys(DATA.events).length : 'MISSING'
+        });
+
+        // Wrap each init function in try-catch to prevent cascade failures
+        try { initCharts(); } catch(e) { console.error('❌ initCharts failed:', e); }
+        try { renderProjectTable(); } catch(e) { console.error('❌ renderProjectTable failed:', e); }
+        try { renderGantt(); } catch(e) { console.error('❌ renderGantt failed:', e); }
+        try { renderAPRTable(); } catch(e) { console.error('❌ renderAPRTable failed:', e); }
 
         // Lazy load visualizations when tabs are shown
         document.querySelectorAll('.tab-btn').forEach(btn => {

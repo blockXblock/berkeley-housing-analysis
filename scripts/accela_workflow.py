@@ -371,6 +371,15 @@ def parse_processing_status(text: str) -> list:
                 has_due_marked_format = True
                 break
 
+    # Check for building permit inline format (Format 14) - has "Stage: Action DATE by Name; Action DATE by Name"
+    # Events are on same line as stage, separated by semicolons
+    has_building_inline_format = False
+    for line in lines:
+        # Pattern: "Stage Name: Action MM/DD/YYYY by Name" (events on same line as stage)
+        if re.search(r'^[A-Za-z][A-Za-z\s]+:\s+[A-Za-z].*\d{2}/\d{2}/\d{4}\s+by\s+[A-Za-z]', line):
+            has_building_inline_format = True
+            break
+
     # Check for arrow format first (more specific)
     has_arrow = any('→' in line or '->' in line for line in lines)
     has_bullet_arrow = has_arrow and any(
@@ -396,7 +405,10 @@ def parse_processing_status(text: str) -> list:
             if line.strip().startswith('###') or line.strip().startswith('**Fees'):
                 break
 
-    if has_due_marked_format:
+    if has_building_inline_format:
+        # Parse building permit inline format (Format 14)
+        events = parse_building_inline_status(lines)
+    elif has_due_marked_format:
         # Parse due-marked format (Format 13)
         events = parse_due_marked_status(lines)
     elif has_date_action_name_format:
@@ -637,6 +649,101 @@ def parse_due_marked_status(lines: list) -> list:
                 'assigned_to': assigned_to,
                 'comment': comment
             })
+
+    return events
+
+
+def parse_building_inline_status(lines: list) -> list:
+    """
+    Parse Processing Status from building permit inline format (Format 14).
+
+    Format (3030 TELEGRAPH style):
+        Processing Status:
+        Application Submittal: Plan Distribution 03/24/2025 by ADM
+        Building and Safety Review: Copy Docs from ESR 03/25/2025 by Kong Chung; Corrections 04/02/2025 by Kong Chung
+        Issuance: Issued 01/08/2025 by Autumn Maltbie
+        Inspection: Finaled 01/27/2026 by Freddie Mares
+
+    Events are on the same line as the stage, separated by semicolons.
+    Pattern: "Stage: Action DATE by Name [; Action DATE by Name]..."
+
+    Returns list of event dicts.
+    """
+    events = []
+    in_processing = False
+    current_permit = None
+
+    # Pattern to extract events from a line: "Action MM/DD/YYYY by Name"
+    event_pattern = re.compile(
+        r'([A-Za-z][A-Za-z\s\-]+?)\s+(\d{2}/\d{2}/\d{4})\s+by\s+([A-Za-z][A-Za-z\s.]+?)(?:\s*\(([^)]+)\))?(?:;|$)'
+    )
+
+    # Pattern for stage header on its own: "Stage Name:"
+    stage_header_pattern = re.compile(r'^([A-Za-z][A-Za-z\s\-]+):\s*$')
+
+    # Pattern for stage with events: "Stage Name: Event..."
+    stage_with_events_pattern = re.compile(r'^([A-Za-z][A-Za-z\s\-]+):\s+(.+)$')
+
+    for line in lines:
+        line_stripped = line.strip()
+
+        # Track RECORD sections for permit context
+        if line_stripped.startswith('RECORD') and ':' in line_stripped:
+            # Extract permit from "RECORD N: PERMIT" pattern
+            match = re.search(r'RECORD\s+\d+:\s*([A-Z0-9-]+)', line_stripped)
+            if match:
+                current_permit = match.group(1)
+            continue
+
+        # Look for Processing Status section
+        if line_stripped.lower() == 'processing status:':
+            in_processing = True
+            continue
+
+        # Stop at next major section
+        if in_processing and line_stripped and (
+            line_stripped.startswith('Fees') or
+            line_stripped.startswith('Attachments') or
+            line_stripped.startswith('RECORD') or
+            line_stripped.startswith('===') or
+            line_stripped.startswith('---')
+        ):
+            in_processing = False
+            continue
+
+        if not in_processing:
+            continue
+
+        # Check for stage with events on same line
+        stage_match = stage_with_events_pattern.match(line_stripped)
+        if stage_match:
+            stage_name = stage_match.group(1).strip()
+            events_text = stage_match.group(2)
+
+            # Find all events in the line
+            for event_match in event_pattern.finditer(events_text):
+                action = event_match.group(1).strip()
+                date_str = event_match.group(2)
+                by_whom = event_match.group(3).strip()
+                comment = event_match.group(4) if event_match.group(4) else None
+
+                # Convert MM/DD/YYYY to YYYY-MM-DD
+                try:
+                    dt = datetime.strptime(date_str, '%m/%d/%Y')
+                    iso_date = dt.strftime('%Y-%m-%d')
+                except:
+                    iso_date = date_str
+
+                events.append({
+                    'stage': stage_name,
+                    'action': action,
+                    'date': iso_date,
+                    'by': by_whom,
+                    'stage_status': 'Complete' if 'finaled' in action.lower() or 'issued' in action.lower() else 'Active',
+                    'assigned_to': None,
+                    'comment': comment,
+                    'permit_number': current_permit
+                })
 
     return events
 

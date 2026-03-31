@@ -122,6 +122,30 @@ This memo accompanies Berkeley's 2025 Annual Progress Report (APR) to the Califo
 - **Date Validation:** Processing dates validated against Accela status histories
 - **Income Classification:** VLI units extracted from permit descriptions and density bonus applications
 
+### Construction Data Reliability Framework
+
+We developed a four-tier reliability rating for construction progress data, based on the availability of Accela inspection records:
+
+| Rating | Projects | Units | Criteria |
+|--------|----------|-------|----------|
+| **Confirmed** | 7 | 408 | Has Accela inspection records, finaled status, or CO documentation |
+| **Probable** | 7 | 592 | Building permit issued, under construction status, but no inspection data |
+| **Estimated** | 26 | 2,406 | Approved/entitled status, construction dates from news sources |
+| **Unknown** | 123 | 6,817 | No construction data available |
+
+**Key Finding:** Only 7 of 163 projects (4.3%) have confirmed construction data from city inspection records. Construction progress for most projects is estimated from news reporting, SFYimby articles, and building permit status rather than verified city records.
+
+**Projects with Confirmed Certificates of Occupancy (407 units):**
+
+| Project | Units | CO Date | Notes |
+|---------|-------|---------|-------|
+| 3030 Telegraph Ave | 144 | 2026-01-27 | Inspection finaled records |
+| 2001 Ashby Ave | 87 | 2025-06-01 | 100% affordable (RCD) |
+| 1752 Shattuck Ave | 68 | 2025-05-27 | Finaled 05/27/2025 |
+| 2127 Dwight Way | 58 | 2025-03-03 | Multiple finaled dates |
+| 1367 University Ave | 39 | 2025-06-18 | Supportive housing |
+| 2555 College Ave | 11 | 2025-07-25 | Finaled zoning |
+
 ### Known Limitations
 
 1. **Affordability Data:** Income-level breakdowns rely on extracted VLI counts from project descriptions. LI and MOD estimates are derived from density bonus requirements and may not reflect actual deed-restricted unit counts.

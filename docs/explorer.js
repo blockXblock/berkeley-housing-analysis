@@ -1,0 +1,2298 @@
+// Berkeley Housing Pipeline Explorer
+// Main JavaScript file
+
+    console.log("🔵 Script tag started loading");
+
+    // Tab switching function
+    function showTab(tabId) {
+        console.log('🔄 showTab called with:', tabId);
+        // Hide all tab contents
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        // Remove active from all buttons
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        // Show selected tab
+        const selectedTab = document.getElementById(tabId);
+        if (selectedTab) {
+            selectedTab.classList.add('active');
+        }
+        // Activate the button (find by onclick attribute)
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(tabId)) {
+                btn.classList.add('active');
+            }
+        });
+    }
+
+    // Analysis sub-tab switching function
+    function showAnalysisSection(sectionId) {
+        console.log('🔄 showAnalysisSection called with:', sectionId);
+        // Hide all analysis sections
+        document.querySelectorAll('.analysis-section').forEach(section => {
+            section.classList.add('hidden');
+        });
+        // Remove active from all sub-tab buttons
+        document.querySelectorAll('.analysis-subtab-btn').forEach(btn => {
+            btn.classList.remove('active', 'bg-blue-500', 'text-white');
+            btn.classList.add('bg-gray-100');
+        });
+        // Show selected section
+        const selectedSection = document.getElementById('analysis-' + sectionId);
+        if (selectedSection) {
+            selectedSection.classList.remove('hidden');
+        }
+        // Activate the button
+        document.querySelectorAll('.analysis-subtab-btn').forEach(btn => {
+            if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(sectionId)) {
+                btn.classList.remove('bg-gray-100');
+                btn.classList.add('active', 'bg-blue-500', 'text-white');
+            }
+        });
+        // Re-render Sankey if flow section is shown
+        if (sectionId === 'flow' && typeof renderSankey === 'function') {
+            setTimeout(() => renderSankey(), 100);
+        }
+    }
+
+    // Embedded Data
+
+// DATA object is loaded from explorer_data.js
+
+    // Initialize Charts
+    function initCharts() {
+        console.log('📊 initCharts() called');
+        try {
+        // Status Distribution
+        const statusCounts = {};
+        DATA.projects.forEach(p => {
+            const s = p.status || 'Unknown';
+            statusCounts[s] = (statusCounts[s] || 0) + 1;
+        });
+        new Chart(document.getElementById('statusChart'), {
+            type: 'doughnut',
+            data: {
+                labels: Object.keys(statusCounts),
+                datasets: [{
+                    data: Object.values(statusCounts),
+                    backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#6b7280', '#ec4899', '#14b8a6']
+                }]
+            },
+            options: { plugins: { legend: { position: 'right' } } }
+        });
+
+        // Year Distribution
+        const yearUnits = {};
+        DATA.projects.forEach(p => {
+            if (p.year >= 2020) {
+                yearUnits[p.year] = (yearUnits[p.year] || 0) + p.units;
+            }
+        });
+        const years = Object.keys(yearUnits).sort();
+        new Chart(document.getElementById('yearChart'), {
+            type: 'bar',
+            data: {
+                labels: years,
+                datasets: [{
+                    label: 'Units',
+                    data: years.map(y => yearUnits[y]),
+                    backgroundColor: '#3b82f6'
+                }]
+            },
+            options: { scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false } } }
+        });
+
+        // Fees by Year Chart
+        if (DATA.fees) {
+            const feeYears = Object.keys(DATA.fees.by_year).sort();
+            const feeAmounts = feeYears.map(y => DATA.fees.by_year[y] || 0);
+
+            new Chart(document.getElementById('feesByYearChart'), {
+                type: 'bar',
+                data: {
+                    labels: feeYears,
+                    datasets: [{
+                        label: 'Fees Paid ($)',
+                        data: feeAmounts,
+                        backgroundColor: '#22c55e'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) { return '$' + (value / 1000) + 'k'; }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return '$' + context.raw.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Update fee stats
+            document.getElementById('totalFeesDisplay').textContent = '$' + DATA.fees.total.toLocaleString();
+            document.getElementById('feeProjectCount').textContent = 'across ' + DATA.fees.project_count + ' projects';
+
+            const avgFee = DATA.fees.project_count > 0 ? Math.round(DATA.fees.total / DATA.fees.project_count) : 0;
+            document.getElementById('avgFeeDisplay').textContent = '$' + avgFee.toLocaleString();
+
+            // Calculate avg fee per unit
+            const projectsWithFees = DATA.projects.filter(p => p.total_fees > 0);
+            const totalUnitsWithFees = projectsWithFees.reduce((sum, p) => sum + p.units, 0);
+            const avgPerUnit = totalUnitsWithFees > 0 ? Math.round(DATA.fees.total / totalUnitsWithFees) : 0;
+            document.getElementById('avgFeePerUnitDisplay').textContent = '$' + avgPerUnit.toLocaleString();
+
+            const largeFees = DATA.fees.large_fees ? DATA.fees.large_fees.length : 0;
+            document.getElementById('largeFeeCount').textContent = largeFees;
+        }
+
+        // Affordability Stacked Bar Chart
+        new Chart(document.getElementById('affordabilityChart'), {
+            type: 'bar',
+            data: {
+                labels: ['2023', '2024', '2025'],
+                datasets: [
+                    {
+                        label: 'VLI',
+                        data: [0, 75, 29],
+                        backgroundColor: '#8b5cf6',
+                        stack: 'income'
+                    },
+                    {
+                        label: 'LI',
+                        data: [3, 15, 28],
+                        backgroundColor: '#3b82f6',
+                        stack: 'income'
+                    },
+                    {
+                        label: 'MOD',
+                        data: [5, 20, 28],
+                        backgroundColor: '#22c55e',
+                        stack: 'income'
+                    },
+                    {
+                        label: 'Above Mod',
+                        data: [20, 777, 2319],
+                        backgroundColor: '#9ca3af',
+                        stack: 'income'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: { stacked: true },
+                    y: {
+                        stacked: true,
+                        beginAtZero: true,
+                        title: { display: true, text: 'Units' }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: {
+                        callbacks: {
+                            afterBody: function(context) {
+                                const dataIndex = context[0].dataIndex;
+                                const totals = [28, 819, 2404];
+                                return 'Total: ' + totals[dataIndex] + ' units';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Histogram
+        const procDays = DATA.projects.filter(p => p.proc_days > 0).map(p => p.proc_days);
+        const bins = [0, 100, 200, 300, 400, 500, 600, 800, 1000];
+        const histData = bins.slice(0, -1).map((b, i) => 
+            procDays.filter(d => d >= b && d < bins[i+1]).length
+        );
+        new Chart(document.getElementById('histogramChart'), {
+            type: 'bar',
+            data: {
+                labels: bins.slice(0, -1).map((b, i) => b + '-' + bins[i+1]),
+                datasets: [{ label: 'Projects', data: histData, backgroundColor: '#8b5cf6' }]
+            },
+            options: { scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false } } }
+        });
+
+        // Scatter Plot
+        const scatterData = DATA.projects.filter(p => p.proc_days > 0 && p.units > 0).map(p => ({
+            x: p.units, y: p.proc_days, label: p.address
+        }));
+        new Chart(document.getElementById('scatterChart'), {
+            type: 'scatter',
+            data: { datasets: [{ data: scatterData, backgroundColor: '#10b981' }] },
+            options: {
+                scales: { x: { title: { display: true, text: 'Units' } }, y: { title: { display: true, text: 'Processing Days' } } },
+                plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.raw.label + ': ' + ctx.raw.y + ' days' } } }
+            }
+        });
+
+        // Box Plot (simplified as grouped bar)
+        const sizeCategories = { 'Small (1-9)': [], 'Medium (10-49)': [], 'Large (50-99)': [], 'Mega (100+)': [] };
+        DATA.projects.filter(p => p.proc_days > 0).forEach(p => {
+            if (p.units >= 100) sizeCategories['Mega (100+)'].push(p.proc_days);
+            else if (p.units >= 50) sizeCategories['Large (50-99)'].push(p.proc_days);
+            else if (p.units >= 10) sizeCategories['Medium (10-49)'].push(p.proc_days);
+            else sizeCategories['Small (1-9)'].push(p.proc_days);
+        });
+        const boxData = Object.entries(sizeCategories).map(([k, v]) => ({
+            category: k,
+            avg: v.length ? Math.round(v.reduce((a,b) => a+b, 0) / v.length) : 0,
+            count: v.length
+        }));
+        new Chart(document.getElementById('boxChart'), {
+            type: 'bar',
+            data: {
+                labels: boxData.map(d => d.category),
+                datasets: [{ label: 'Avg Processing Days', data: boxData.map(d => d.avg), backgroundColor: '#f59e0b' }]
+            },
+            options: { scales: { y: { beginAtZero: true } } }
+        });
+
+        // Trend Chart
+        const yearProcDays = {};
+        DATA.projects.filter(p => p.proc_days > 0 && p.year >= 2020).forEach(p => {
+            if (!yearProcDays[p.year]) yearProcDays[p.year] = [];
+            yearProcDays[p.year].push(p.proc_days);
+        });
+        const trendYears = Object.keys(yearProcDays).sort();
+        new Chart(document.getElementById('trendChart'), {
+            type: 'line',
+            data: {
+                labels: trendYears,
+                datasets: [{
+                    label: 'Avg Processing Days',
+                    data: trendYears.map(y => Math.round(yearProcDays[y].reduce((a,b) => a+b, 0) / yearProcDays[y].length)),
+                    borderColor: '#ef4444',
+                    fill: false,
+                    tension: 0.3
+                }]
+            },
+            options: { scales: { y: { beginAtZero: true } } }
+        });
+
+        // Skyline Chart
+        const topByHeight = [...DATA.projects].filter(p => p.height_stories > 0).sort((a, b) => b.height_stories - a.height_stories).slice(0, 20);
+        new Chart(document.getElementById('skylineChart'), {
+            type: 'bar',
+            data: {
+                labels: topByHeight.map(p => p.address.split(' ').slice(0, 2).join(' ')),
+                datasets: [{
+                    label: 'Stories',
+                    data: topByHeight.map(p => p.height_stories),
+                    backgroundColor: topByHeight.map((p, i) => `hsl(${210 + i * 5}, 70%, ${50 + i}%)`),
+                }]
+            },
+            options: {
+                indexAxis: 'x',
+                scales: { y: { beginAtZero: true, title: { display: true, text: 'Stories' } } },
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // APR Comparison
+        const matched = DATA.city_apr.filter(c => c.matched);
+        const unmatched = DATA.city_apr.filter(c => !c.matched);
+        document.getElementById('aprMatched').textContent = matched.length;
+        document.getElementById('aprUnmatched').textContent = unmatched.length;
+
+        new Chart(document.getElementById('aprCompareChart'), {
+            type: 'bar',
+            data: {
+                labels: matched.slice(0, 15).map(c => c.address.split(',')[0].substring(0, 20)),
+                datasets: [
+                    { label: 'City APR Units', data: matched.slice(0, 15).map(c => c.units), backgroundColor: '#3b82f6' },
+                    { label: 'Our Units', data: matched.slice(0, 15).map(c => c.our_units), backgroundColor: '#10b981' }
+                ]
+            },
+            options: { scales: { y: { beginAtZero: true } } }
+        });
+
+        // Modular vs Conventional Construction Timeline Comparison
+        new Chart(document.getElementById('modularCompareChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Design & Permits', 'Site Prep', 'Construction', 'Finishing', 'Total'],
+                datasets: [
+                    {
+                        label: 'Conventional (months)',
+                        data: [6, 2, 14, 4, 26],
+                        backgroundColor: '#9ca3af',
+                        barPercentage: 0.8
+                    },
+                    {
+                        label: 'Modular (months)',
+                        data: [6, 2, 6, 2, 16],
+                        backgroundColor: '#10b981',
+                        barPercentage: 0.8
+                    }
+                ]
+            },
+            options: {
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Months' }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: {
+                        callbacks: {
+                            afterBody: function(context) {
+                                if (context[0].dataIndex === 4) {
+                                    return 'Modular saves ~10 months (38%)';
+                                }
+                                return '';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        console.log('✅ initCharts() complete');
+        } catch (err) {
+            console.error('❌ initCharts error:', err);
+        }
+    }
+
+    // Project Table
+    function renderProjectTable() {
+        console.log('📋 renderProjectTable() called');
+        try {
+            const tbody = document.getElementById('projectTableBody');
+            if (!tbody) { console.error('❌ projectTableBody not found'); return; }
+            tbody.innerHTML = '';
+            console.log(`📋 Rendering ${DATA.projects.length} projects`);
+            DATA.projects.sort((a, b) => b.units - a.units).forEach((p, i) => {
+                // Match events by address (normalized comparison)
+                const events = DATA.events ? DATA.events.filter(e =>
+                    e.address && p.address &&
+                    e.address.toUpperCase().replace(/\s+/g, ' ').trim() ===
+                    p.address.toUpperCase().replace(/\s+/g, ' ').trim()
+                ) : [];
+            const row = document.createElement('tr');
+            row.className = 'border-t hover:bg-gray-50 cursor-pointer';
+            row.onclick = () => toggleRow(i);
+            row.innerHTML = `
+                <td class="px-4 py-3"><span class="text-gray-400">▶</span></td>
+                <td class="px-4 py-3 font-medium">${p.address}</td>
+                <td class="px-4 py-3 text-right">${p.units.toLocaleString()}</td>
+                <td class="px-4 py-3 text-right">${p.height_stories || '-'}</td>
+                <td class="px-4 py-3 text-center">${p.year || '-'}</td>
+                <td class="px-4 py-3"><span class="px-2 py-1 text-xs rounded-full ${getStatusColor(p.status)}">${p.status || '-'}</span></td>
+                <td class="px-4 py-3 text-right">${p.processing_days || '-'}</td>
+                <td class="px-4 py-3 text-center text-xs">${p.app_filed || '-'}</td>
+                <td class="px-4 py-3 text-center text-xs">${p.app_complete || '-'}</td>
+                <td class="px-4 py-3 text-center text-xs">${p.entitled || '-'}</td>
+            `;
+            tbody.appendChild(row);
+            
+            // Expandable row
+            const expandRow = document.createElement('tr');
+            expandRow.className = 'expandable-row bg-gray-50';
+            expandRow.id = 'expand-' + i;
+            const feeDisplay = p.total_fees > 0
+                ? `<div class="bg-green-50 p-3 rounded-lg mt-2">
+                    <span class="text-green-800 font-semibold">Total Fees: $${p.total_fees.toLocaleString()}</span>
+                    ${p.fee_per_unit ? `<span class="text-green-600 text-sm ml-2">($${p.fee_per_unit.toLocaleString()}/unit)</span>` : ''}
+                   </div>`
+                : '<p class="text-gray-400 text-sm mt-2">No fee data available</p>';
+
+            expandRow.innerHTML = `
+                <td colspan="10" class="px-4 py-4">
+                    <div class="grid grid-cols-3 gap-4">
+                        <div>
+                            <h4 class="font-semibold mb-2">Project Details</h4>
+                            <p class="text-sm text-gray-600 mb-2">${p.description || 'No description available'}</p>
+                            <p class="text-sm"><strong>Permits:</strong> ${p.permits || '-'}</p>
+                            <p class="text-sm"><strong>Accela Status:</strong> ${p.accela_status || '-'}</p>
+                            ${feeDisplay}
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2">Timeline Events (${events.length})</h4>
+                            <div class="max-h-40 overflow-y-auto text-sm">
+                                ${events.length ? events.slice(0, 20).map(e => `<div class="py-1 border-b"><span class="text-gray-500">${e.date || 'N/A'}</span> - ${e.event || 'Unknown'}</div>`).join('') + (events.length > 20 ? `<div class="text-gray-400 py-1">...and ${events.length - 20} more events</div>` : '') : '<p class="text-gray-500">No events</p>'}
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2">Key Dates</h4>
+                            <div class="text-sm space-y-1">
+                                <p><strong>Filed:</strong> ${p.app_filed || 'N/A'}</p>
+                                <p><strong>Complete:</strong> ${p.app_complete || 'N/A'}</p>
+                                <p><strong>Entitled:</strong> ${p.entitled || 'N/A'}</p>
+                                <p><strong>BP Issued:</strong> ${p.bp_issued || 'N/A'}</p>
+                                <p><strong>CO Date:</strong> ${p.co_date || 'N/A'}</p>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            `;
+            tbody.appendChild(expandRow);
+        });
+        console.log('✅ renderProjectTable() complete');
+        } catch (err) {
+            console.error('❌ renderProjectTable error:', err);
+        }
+    }
+
+    function toggleRow(i) {
+        const row = document.getElementById('expand-' + i);
+        row.classList.toggle('show');
+    }
+
+    function getStatusColor(status) {
+        if (!status) return 'bg-gray-100';
+        const s = status.toLowerCase();
+        if (s.includes('approved') || s.includes('entitled')) return 'bg-green-100 text-green-800';
+        if (s.includes('review') || s.includes('pending')) return 'bg-yellow-100 text-yellow-800';
+        if (s.includes('incomplete')) return 'bg-red-100 text-red-800';
+        return 'bg-blue-100 text-blue-800';
+    }
+
+    let currentSort = { col: 2, asc: false };
+    function sortTable(col) {
+        currentSort.asc = currentSort.col === col ? !currentSort.asc : false;
+        currentSort.col = col;
+        const keys = ['', 'address', 'units', 'height_stories', 'year', 'status', 'processing_days'];
+        const key = keys[col];
+        DATA.projects.sort((a, b) => {
+            let av = a[key], bv = b[key];
+            if (typeof av === 'string') return currentSort.asc ? av.localeCompare(bv) : bv.localeCompare(av);
+            return currentSort.asc ? av - bv : bv - av;
+        });
+        try { renderProjectTable(); } catch(e) { console.error('❌ renderProjectTable sort failed:', e); }
+    }
+
+    function filterProjects() {
+        const search = document.getElementById('projectSearch').value.toLowerCase();
+        document.querySelectorAll('#projectTableBody tr:not(.expandable-row)').forEach(row => {
+            row.style.display = row.textContent.toLowerCase().includes(search) ? '' : 'none';
+        });
+    }
+
+    // Gantt Chart
+    let ganttSort = 'duration';
+    function renderGantt() {
+        console.log('📊 renderGantt() called');
+        try {
+            const container = document.getElementById('ganttChart');
+            if (!container) { console.error('❌ ganttChart not found'); return; }
+            container.innerHTML = '';
+
+            let projectsWithTimeline = DATA.projects.filter(p => p.app_filed);
+
+        // Debug: Log milestone coverage
+        const withFiled = DATA.projects.filter(p => p.app_filed).length;
+        const withComplete = DATA.projects.filter(p => p.app_complete).length;
+        const withEntitled = DATA.projects.filter(p => p.entitled).length;
+        const withBpIssued = DATA.projects.filter(p => p.bp_issued).length;
+        const withCo = DATA.projects.filter(p => p.co_date).length;
+        console.log(`📊 Gantt Debug - Milestone Coverage:
+  Filed: ${withFiled} projects
+  Complete: ${withComplete} projects
+  Entitled: ${withEntitled} projects
+  BP Issued: ${withBpIssued} projects
+  CO: ${withCo} projects`);
+
+        // Log projects with entitled dates
+        const entitledProjects = DATA.projects.filter(p => p.entitled);
+        console.log(`📋 Projects with entitled_date (${entitledProjects.length}):`,
+            entitledProjects.map(p => `${p.address}: ${p.entitled}`));
+
+        if (ganttSort === 'duration') projectsWithTimeline.sort((a, b) => (b.proc_days || 0) - (a.proc_days || 0));
+        else if (ganttSort === 'start') projectsWithTimeline.sort((a, b) => (a.app_filed || '').localeCompare(b.app_filed || ''));
+        else if (ganttSort === 'units') projectsWithTimeline.sort((a, b) => b.units - a.units);
+        else if (ganttSort === 'entitled') {
+            // Sort to show projects with entitled dates first
+            projectsWithTimeline.sort((a, b) => {
+                if (a.entitled && !b.entitled) return -1;
+                if (!a.entitled && b.entitled) return 1;
+                return (b.proc_days || 0) - (a.proc_days || 0);
+            });
+        }
+
+        const minDate = new Date(Math.min(...projectsWithTimeline.map(p => new Date(p.app_filed || '2025-01-01'))));
+        const maxDate = new Date();
+        const totalDays = (maxDate - minDate) / (1000 * 60 * 60 * 24);
+
+        // Show projects with entitled dates first (up to first 60 or all with entitled)
+        const entitledFirst = projectsWithTimeline.filter(p => p.entitled);
+        const others = projectsWithTimeline.filter(p => !p.entitled);
+        const toShow = [...entitledFirst, ...others].slice(0, 60);
+
+        toShow.forEach(p => {
+            const row = document.createElement('div');
+            row.className = 'flex items-center py-1 border-b';
+
+            const label = document.createElement('div');
+            label.className = 'w-48 flex-shrink-0 pr-2 gantt-label';
+            label.textContent = p.address.split(' ').slice(0, 3).join(' ');
+            label.title = `${p.address}\nStatus: ${p.status}\nFiled: ${p.app_filed || 'N/A'}\nComplete: ${p.app_complete || 'N/A'}\nEntitled: ${p.entitled || 'N/A'}\nBP Issued: ${p.bp_issued || 'N/A'}\nCO: ${p.co_date || 'N/A'}`;
+
+            const bar = document.createElement('div');
+            bar.className = 'flex-1 relative h-6';
+
+            const filed = new Date(p.app_filed);
+            const complete = p.app_complete ? new Date(p.app_complete) : null;
+            const entitled = p.entitled ? new Date(p.entitled) : null;
+            const bpIssued = p.bp_issued ? new Date(p.bp_issued) : null;
+            const coDate = p.co_date ? new Date(p.co_date) : null;
+
+            const startPct = (filed - minDate) / (1000 * 60 * 60 * 24) / totalDays * 100;
+
+            // Phase 1: Filed to Complete (gray) - Completeness Review
+            if (complete) {
+                const w = (complete - filed) / (1000 * 60 * 60 * 24) / totalDays * 100;
+                bar.innerHTML += `<div class="absolute h-5 bg-gray-400 rounded-l" style="left:${startPct}%;width:${Math.max(w, 0.5)}%" title="Completeness Review: ${Math.round((complete - filed) / (1000 * 60 * 60 * 24))} days"></div>`;
+            }
+
+            // Phase 2: Complete to Entitled (blue) - City Decision Period
+            if (entitled) {
+                const phaseStart = complete || filed;
+                const startPct2 = (phaseStart - minDate) / (1000 * 60 * 60 * 24) / totalDays * 100;
+                const w = (entitled - phaseStart) / (1000 * 60 * 60 * 24) / totalDays * 100;
+                bar.innerHTML += `<div class="absolute h-5 bg-blue-500" style="left:${startPct2}%;width:${Math.max(w, 0.5)}%" title="City Decision: ${Math.round((entitled - phaseStart) / (1000 * 60 * 60 * 24))} days"></div>`;
+
+                // Phase 3: Entitled to BP Issued or today (orange) - Post-Entitlement
+                const phase3Start = entitled;
+                const phase3End = bpIssued || maxDate;
+                const startPct3 = (phase3Start - minDate) / (1000 * 60 * 60 * 24) / totalDays * 100;
+                const w3 = (phase3End - phase3Start) / (1000 * 60 * 60 * 24) / totalDays * 100;
+                const phase3Label = bpIssued ? 'Post-Entitlement' : 'Awaiting BP';
+                bar.innerHTML += `<div class="absolute h-5 bg-orange-400" style="left:${startPct3}%;width:${Math.max(w3, 0.5)}%" title="${phase3Label}: ${Math.round((phase3End - phase3Start) / (1000 * 60 * 60 * 24))} days"></div>`;
+            } else if (!complete && !entitled) {
+                // Still in review - no entitled date
+                const w = (maxDate - filed) / (1000 * 60 * 60 * 24) / totalDays * 100;
+                bar.innerHTML += `<div class="absolute h-5 bg-gray-300 rounded opacity-60" style="left:${startPct}%;width:${Math.max(w, 0.5)}%" title="In Review: ${Math.round((maxDate - filed) / (1000 * 60 * 60 * 24))} days"></div>`;
+            } else if (complete && !entitled) {
+                // Complete but not yet entitled
+                const startPct2 = (complete - minDate) / (1000 * 60 * 60 * 24) / totalDays * 100;
+                const w = (maxDate - complete) / (1000 * 60 * 60 * 24) / totalDays * 100;
+                bar.innerHTML += `<div class="absolute h-5 bg-blue-300 opacity-60" style="left:${startPct2}%;width:${Math.max(w, 0.5)}%" title="Pending Decision: ${Math.round((maxDate - complete) / (1000 * 60 * 60 * 24))} days"></div>`;
+            }
+
+            // Phase 4: Construction (green) - Use construction_start if available, else bp_issued
+            const constructionStart = p.construction_start ? new Date(p.construction_start) : bpIssued;
+            const constructionEnd = p.construction_end ? new Date(p.construction_end) : (coDate || maxDate);
+            
+            if (constructionStart || bpIssued) {
+                const phase4Start = constructionStart || bpIssued;
+                const phase4End = coDate || (p.construction_status === 'occupied' ? new Date(p.construction_end) : maxDate);
+                const startPct4 = (phase4Start - minDate) / (1000 * 60 * 60 * 24) / totalDays * 100;
+                const w4 = (phase4End - phase4Start) / (1000 * 60 * 60 * 24) / totalDays * 100;
+                
+                // Determine label based on construction_status
+                let phase4Label = 'Under Construction';
+                let bgColor = 'bg-green-500';
+                if (p.construction_status === 'occupied' || p.construction_status === 'completed') {
+                    phase4Label = 'Completed';
+                    bgColor = 'bg-green-600';
+                } else if (p.construction_status === 'demolition') {
+                    phase4Label = 'Demolition';
+                    bgColor = 'bg-yellow-500';
+                } else if (p.construction_status === 'foundation') {
+                    phase4Label = 'Foundation';
+                } else if (p.construction_status === 'framing') {
+                    phase4Label = 'Framing';
+                } else if (p.construction_status === 'topped_out') {
+                    phase4Label = 'Topped Out';
+                } else if (p.construction_status === 'finishing') {
+                    phase4Label = 'Finishing';
+                }
+                
+                bar.innerHTML += `<div class="absolute h-5 ${bgColor} rounded-r" style="left:${startPct4}%;width:${Math.max(w4, 0.5)}%" title="${phase4Label}: ${Math.round((phase4End - phase4Start) / (1000 * 60 * 60 * 24))} days"></div>`;
+            }
+
+            // Add date labels - format date as MM/YY
+            const formatDate = (d) => {
+                const mm = String(d.getMonth() + 1).padStart(2, '0');
+                const yy = String(d.getFullYear()).slice(-2);
+                return `${mm}/${yy}`;
+            };
+
+            // Start date label (filed date)
+            bar.innerHTML += `<div class="absolute text-[9px] text-gray-500 whitespace-nowrap" style="left:${startPct}%; top: -10px;">${formatDate(filed)}</div>`;
+
+            // End date label (latest milestone or current)
+            const endDate = coDate || bpIssued || entitled || complete || maxDate;
+            const endPct = (endDate - minDate) / (1000 * 60 * 60 * 24) / totalDays * 100;
+            if (endDate !== maxDate || !coDate) {
+                bar.innerHTML += `<div class="absolute text-[9px] text-gray-500 whitespace-nowrap" style="left:${Math.min(endPct, 97)}%; top: -10px;">${formatDate(endDate)}</div>`;
+            }
+
+            row.appendChild(label);
+            row.appendChild(bar);
+            container.appendChild(row);
+        });
+        console.log('✅ renderGantt() complete');
+        } catch (err) {
+            console.error('❌ renderGantt error:', err);
+        }
+    }
+
+    function sortGantt(sort) {
+        ganttSort = sort;
+        try { renderGantt(); } catch(e) { console.error('❌ renderGantt sort failed:', e); }
+    }
+
+    // APR Table
+    function renderAPRTable() {
+        const tbody = document.getElementById('aprTableBody');
+        tbody.innerHTML = '';
+        DATA.city_apr.sort((a, b) => b.units - a.units).forEach(c => {
+            const diff = c.matched ? c.our_units - c.units : '-';
+            const diffClass = diff > 0 ? 'text-green-600' : diff < 0 ? 'text-red-600' : '';
+            const row = document.createElement('tr');
+            row.className = 'border-t hover:bg-gray-50' + (c.matched ? '' : ' bg-red-50');
+            row.innerHTML = `
+                <td class="px-4 py-2">${c.address}</td>
+                <td class="px-4 py-2 text-center">${c.units}</td>
+                <td class="px-4 py-2 text-center">${c.matched ? c.our_units : '-'}</td>
+                <td class="px-4 py-2 text-center ${diffClass}">${diff !== '-' ? (diff > 0 ? '+' : '') + diff : diff}</td>
+                <td class="px-4 py-2">${c.status}</td>
+                <td class="px-4 py-2 text-center">${c.matched ? '✓' : '✗'}</td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
+
+    // ============================================
+    // SANKEY DIAGRAM
+    // ============================================
+    function renderSankey() {
+        const container = document.getElementById('sankeyChart');
+        if (!container) return;
+
+        // Get selected year
+        const yearSelect = document.getElementById('sankeyYear');
+        const selectedYear = parseInt(yearSelect ? yearSelect.value : '2024');
+
+        // Update title
+        const titleEl = document.getElementById('sankeyTitle');
+        if (titleEl) {
+            titleEl.textContent = `Housing Pipeline Flow: How Projects Moved Through Berkeley's Permit Process in ${selectedYear}`;
+        }
+
+        // Clear previous
+        container.innerHTML = '';
+
+        const width = container.clientWidth;
+        const height = 550;
+
+        // Define status categories
+        const startCategories = ['New Application', 'Under Review', 'Corrections Pending', 'Pending Final Action', 'Approved', 'Under Construction'];
+        const endCategories = ['Under Review', 'Corrections Pending', 'Pending Final Action', 'Approved', 'Under Construction', 'Completed', 'Stalled'];
+
+        // Year boundaries
+        const yearStart = new Date(`${selectedYear}-01-01`);
+        const yearEnd = new Date(`${selectedYear}-12-31`);
+        const today = new Date();
+
+        // Determine start-of-year and end-of-year status for each project
+        function getStatusAtDate(project, date) {
+            const filed = project.app_filed ? new Date(project.app_filed) : null;
+            const complete = project.app_complete ? new Date(project.app_complete) : null;
+            const entitled = project.entitled ? new Date(project.entitled) : null;
+            const bpIssued = project.bp_issued ? new Date(project.bp_issued) : null;
+            const coDate = project.co_date ? new Date(project.co_date) : null;
+            const constructionStart = project.construction_start ? new Date(project.construction_start) : null;
+            const constructionEnd = project.estimated_completion ? new Date(project.estimated_completion) : null;
+            const constructionStatus = project.construction_status || '';
+
+            // Check construction status first
+            if (constructionStatus === 'occupied' || constructionStatus === 'completed') {
+                if (constructionEnd && constructionEnd <= date) return 'Completed';
+            }
+            if (coDate && coDate <= date) return 'Completed';
+            
+            // Check if under construction
+            if (constructionStart && constructionStart <= date) return 'Under Construction';
+            if (bpIssued && bpIssued <= date) return 'Under Construction';
+            if (entitled && entitled <= date) return 'Approved';
+
+            // Check current status for projects still in review
+            const status = (project.status || '').toLowerCase();
+            if (status.includes('pending final')) return 'Pending Final Action';
+            if (status.includes('corrections')) return 'Corrections Pending';
+
+            if (complete && complete <= date) return 'Under Review';
+            if (filed && filed <= date) {
+                // Check if stalled (no activity > 12 months)
+                const lastActivity = entitled || complete || filed;
+                const monthsSinceActivity = (date - new Date(lastActivity)) / (1000 * 60 * 60 * 24 * 30);
+                if (monthsSinceActivity > 12 && !entitled) return 'Stalled';
+                return 'Under Review';
+            }
+
+            return null; // Not yet filed
+        }
+
+        function getStartOfYearStatus(project) {
+            const filed = project.app_filed ? new Date(project.app_filed) : null;
+            if (!filed) return null;
+
+            // If filed during this year, it's a new application
+            if (filed >= yearStart && filed <= yearEnd) return 'New Application';
+            // If filed before this year, determine status at year start
+            if (filed < yearStart) return getStatusAtDate(project, yearStart);
+            return null;
+        }
+
+        function getEndOfYearStatus(project) {
+            const filed = project.app_filed ? new Date(project.app_filed) : null;
+            if (!filed) return null;
+
+            // Only include if filed by end of year
+            if (filed > yearEnd) return null;
+
+            // Use actual end of year or today if year is current
+            const effectiveEnd = yearEnd < today ? yearEnd : today;
+            return getStatusAtDate(project, effectiveEnd);
+        }
+
+        // Build flow data
+        const flows = {};
+        const startCounts = {};
+        const endCounts = {};
+
+        DATA.projects.forEach(p => {
+            const startStatus = getStartOfYearStatus(p);
+            const endStatus = getEndOfYearStatus(p);
+
+            if (!startStatus || !endStatus) return;
+
+            const key = `${startStatus}|${endStatus}`;
+            if (!flows[key]) flows[key] = { units: 0, projects: 0 };
+            flows[key].units += (p.units || 0);
+            flows[key].projects += 1;
+
+            startCounts[startStatus] = (startCounts[startStatus] || 0) + (p.units || 0);
+            endCounts[endStatus] = (endCounts[endStatus] || 0) + (p.units || 0);
+        });
+
+        // Build nodes - only include categories with data
+        const activeStartCats = startCategories.filter(c => startCounts[c] > 0);
+        const activeEndCats = endCategories.filter(c => endCounts[c] > 0);
+
+        const nodes = [
+            ...activeStartCats.map(name => ({ name: `${name} (Start)`, side: 'start', category: name })),
+            ...activeEndCats.map(name => ({ name: `${name} (End)`, side: 'end', category: name }))
+        ];
+
+        // Build links
+        const links = [];
+        Object.entries(flows).forEach(([key, data]) => {
+            const [from, to] = key.split('|');
+            const sourceIdx = nodes.findIndex(n => n.side === 'start' && n.category === from);
+            const targetIdx = nodes.findIndex(n => n.side === 'end' && n.category === to);
+
+            if (sourceIdx >= 0 && targetIdx >= 0 && data.units > 0) {
+                // Determine flow color based on progress
+                let flowType = 'same';
+                const startOrder = startCategories.indexOf(from);
+                const endOrder = endCategories.indexOf(to);
+                if (to === 'Completed' || to === 'Approved' || to === 'Under Construction') {
+                    if (from !== to && from !== 'Under Construction' && from !== 'Approved') flowType = 'forward';
+                }
+                if (to === 'Stalled') flowType = 'stalled';
+                if (from === to) flowType = 'same';
+
+                links.push({
+                    source: sourceIdx,
+                    target: targetIdx,
+                    value: data.units,
+                    projects: data.projects,
+                    flowType: flowType
+                });
+            }
+        });
+
+        if (nodes.length === 0 || links.length === 0) {
+            container.innerHTML = '<div class="text-center text-gray-500 py-20">No project flow data available for ' + selectedYear + '</div>';
+            return;
+        }
+
+        // Create SVG
+        const svg = d3.select('#sankeyChart')
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height);
+
+        // Create sankey generator
+        const sankey = d3.sankey()
+            .nodeWidth(20)
+            .nodePadding(20)
+            .extent([[10, 30], [width - 10, height - 30]]);
+
+        const graph = sankey({
+            nodes: nodes.map(d => Object.assign({}, d)),
+            links: links.map(d => Object.assign({}, d))
+        });
+
+        // Color scale for flow types
+        const flowColors = {
+            'forward': '#22c55e',  // green
+            'same': '#eab308',     // yellow
+            'stalled': '#ef4444'   // red
+        };
+
+        // Node colors
+        const nodeColors = {
+            'New Application': '#3b82f6',
+            'Under Review': '#6366f1',
+            'Corrections Pending': '#f59e0b',
+            'Pending Final Action': '#8b5cf6',
+            'Approved': '#22c55e',
+            'Under Construction': '#14b8a6',
+            'Completed': '#10b981',
+            'Stalled': '#ef4444'
+        };
+
+        // Draw links
+        svg.append('g')
+            .selectAll('path')
+            .data(graph.links)
+            .join('path')
+            .attr('d', d3.sankeyLinkHorizontal())
+            .attr('fill', 'none')
+            .attr('stroke', d => flowColors[d.flowType] || '#999')
+            .attr('stroke-opacity', 0.5)
+            .attr('stroke-width', d => Math.max(2, d.width))
+            .append('title')
+            .text(d => `${d.source.category} → ${d.target.category}\n${d.value.toLocaleString()} units (${d.projects} projects)`);
+
+        // Draw nodes
+        svg.append('g')
+            .selectAll('rect')
+            .data(graph.nodes)
+            .join('rect')
+            .attr('x', d => d.x0)
+            .attr('y', d => d.y0)
+            .attr('width', d => d.x1 - d.x0)
+            .attr('height', d => Math.max(d.y1 - d.y0, 4))
+            .attr('fill', d => nodeColors[d.category] || '#666')
+            .attr('stroke', '#333')
+            .attr('stroke-width', 0.5)
+            .append('title')
+            .text(d => {
+                const count = d.side === 'start' ? startCounts[d.category] : endCounts[d.category];
+                return `${d.category}\n${(count || 0).toLocaleString()} units`;
+            });
+
+        // Add labels
+        svg.append('g')
+            .selectAll('text')
+            .data(graph.nodes)
+            .join('text')
+            .attr('x', d => d.side === 'start' ? d.x0 - 6 : d.x1 + 6)
+            .attr('y', d => (d.y1 + d.y0) / 2)
+            .attr('dy', '0.35em')
+            .attr('text-anchor', d => d.side === 'start' ? 'end' : 'start')
+            .attr('font-size', '11px')
+            .attr('fill', '#333')
+            .text(d => d.category);
+
+        // Add column headers
+        svg.append('text')
+            .attr('x', 10)
+            .attr('y', 15)
+            .attr('font-size', '12px')
+            .attr('font-weight', 'bold')
+            .attr('fill', '#666')
+            .text(`Jan 1, ${selectedYear}`);
+
+        svg.append('text')
+            .attr('x', width - 10)
+            .attr('y', 15)
+            .attr('text-anchor', 'end')
+            .attr('font-size', '12px')
+            .attr('font-weight', 'bold')
+            .attr('fill', '#666')
+            .text(`Dec 31, ${selectedYear}`);
+
+        // Render stats
+        const statsContainer = document.getElementById('sankeyStats');
+        statsContainer.innerHTML = '';
+
+        const statsData = [
+            { label: 'Forward Progress', color: '#22c55e', units: links.filter(l => l.flowType === 'forward').reduce((s, l) => s + l.value, 0) },
+            { label: 'No Change', color: '#eab308', units: links.filter(l => l.flowType === 'same').reduce((s, l) => s + l.value, 0) },
+            { label: 'Stalled', color: '#ef4444', units: links.filter(l => l.flowType === 'stalled').reduce((s, l) => s + l.value, 0) },
+            { label: 'Completed', color: '#10b981', units: endCounts['Completed'] || 0 },
+            { label: 'New Apps', color: '#3b82f6', units: startCounts['New Application'] || 0 }
+        ];
+
+        statsData.forEach(stat => {
+            const div = document.createElement('div');
+            div.className = 'text-center p-3 rounded-lg';
+            div.style.backgroundColor = stat.color + '15';
+            div.innerHTML = `
+                <div class="text-xl font-bold" style="color: ${stat.color}">${stat.units.toLocaleString()}</div>
+                <div class="text-xs text-gray-600">${stat.label}</div>
+            `;
+            statsContainer.appendChild(div);
+        });
+    }
+
+    // Current Sankey view mode
+    let currentSankeyView = 'lifecycle';
+
+    // Switch between lifecycle and annual views
+    function switchSankeyView(mode) {
+        currentSankeyView = mode;
+
+        // Update button styles
+        const lifecycleBtn = document.getElementById('lifecycleBtn');
+        const annualBtn = document.getElementById('annualBtn');
+        const yearSelector = document.getElementById('yearSelector');
+        const lifecycleLegend = document.getElementById('lifecycleLegend');
+        const annualLegend = document.getElementById('annualLegend');
+        const correlationSection = document.getElementById('correlationSection');
+        const sankeyTitle = document.getElementById('sankeyTitle');
+        const sankeySubtitle = document.getElementById('sankeySubtitle');
+        const statsTitle = document.getElementById('statsTitle');
+
+        if (mode === 'lifecycle') {
+            lifecycleBtn.className = 'px-3 py-1 text-sm rounded-md bg-blue-500 text-white';
+            annualBtn.className = 'px-3 py-1 text-sm rounded-md text-gray-600 hover:bg-gray-200';
+            yearSelector.classList.add('hidden');
+            lifecycleLegend.classList.remove('hidden');
+            annualLegend.classList.add('hidden');
+            correlationSection.classList.remove('hidden');
+            sankeyTitle.textContent = 'Project Lifecycle: Typical Path from Conception to Occupancy';
+            sankeySubtitle.textContent = 'Average timeline showing median days at each stage. Based on 159 Berkeley housing projects.';
+            statsTitle.textContent = 'Lifecycle Summary';
+            try { renderLifecycleSankey(); } catch(e) { console.error('❌ renderLifecycleSankey toggle failed:', e); }
+        } else {
+            annualBtn.className = 'px-3 py-1 text-sm rounded-md bg-blue-500 text-white';
+            lifecycleBtn.className = 'px-3 py-1 text-sm rounded-md text-gray-600 hover:bg-gray-200';
+            yearSelector.classList.remove('hidden');
+            lifecycleLegend.classList.add('hidden');
+            annualLegend.classList.remove('hidden');
+            correlationSection.classList.add('hidden');
+            statsTitle.textContent = 'Annual Flow Summary';
+            try { renderSankey(); } catch(e) { console.error('❌ renderSankey toggle failed:', e); }
+        }
+    }
+
+    // Render Lifecycle View Sankey
+    function renderLifecycleSankey() {
+        const container = document.getElementById('sankeyChart');
+        if (!container) return;
+
+        container.innerHTML = '';
+
+        const width = container.clientWidth;
+        const height = 550;
+
+        // Lifecycle stage data with median days
+        const lifecycleData = {
+            'Pre-Application': { median_days: 180, count: 159, color: '#9ca3af', description: 'Estimated from earliest public reporting' },
+            'Completeness Review': { median_days: 44, count: 51, color: '#60a5fa', description: 'Filed → Complete' },
+            'City Decision': { median_days: 377, count: 29, color: '#818cf8', description: 'Complete → Entitled' },
+            'Post-Entitlement': { median_days: 180, count: 15, color: '#fb923c', description: 'Entitled → BP Issued' },
+            'Construction': { median_days: 579, count: 15, color: '#22c55e', description: 'BP Issued → CO' }
+        };
+
+        // Calculate total days and proportions
+        const stages = Object.keys(lifecycleData);
+        const totalDays = stages.reduce((sum, s) => sum + lifecycleData[s].median_days, 0);
+        const totalYears = (totalDays / 365).toFixed(1);
+
+        // Create SVG
+        const svg = d3.select('#sankeyChart')
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height);
+
+        // Margins for labels
+        const margin = { top: 60, right: 30, bottom: 80, left: 30 };
+        const chartWidth = width - margin.left - margin.right;
+        const chartHeight = height - margin.top - margin.bottom;
+        const barHeight = 80;
+        const barY = margin.top + (chartHeight - barHeight) / 2;
+
+        // Draw timeline bar
+        let currentX = margin.left;
+        stages.forEach((stage, i) => {
+            const stageData = lifecycleData[stage];
+            const stageWidth = (stageData.median_days / totalDays) * chartWidth;
+
+            // Stage rectangle
+            const g = svg.append('g');
+
+            g.append('rect')
+                .attr('x', currentX)
+                .attr('y', barY)
+                .attr('width', Math.max(stageWidth - 2, 20))
+                .attr('height', barHeight)
+                .attr('fill', stageData.color)
+                .attr('rx', 4)
+                .attr('opacity', 0.9)
+                .style('cursor', 'pointer')
+                .append('title')
+                .text(`${stage}\n${stageData.median_days} days (${(stageData.median_days/365*12).toFixed(1)} months)\n${stageData.description}\nBased on ${stageData.count} projects`);
+
+            // Stage label inside bar (if wide enough)
+            if (stageWidth > 80) {
+                g.append('text')
+                    .attr('x', currentX + stageWidth / 2)
+                    .attr('y', barY + barHeight / 2)
+                    .attr('dy', '-0.3em')
+                    .attr('text-anchor', 'middle')
+                    .attr('fill', 'white')
+                    .attr('font-size', '12px')
+                    .attr('font-weight', 'bold')
+                    .text(stage.length > 15 ? stage.substring(0, 15) + '...' : stage);
+
+                g.append('text')
+                    .attr('x', currentX + stageWidth / 2)
+                    .attr('y', barY + barHeight / 2)
+                    .attr('dy', '1em')
+                    .attr('text-anchor', 'middle')
+                    .attr('fill', 'white')
+                    .attr('font-size', '14px')
+                    .attr('font-weight', 'bold')
+                    .text(`${stageData.median_days} days`);
+            }
+
+            // Label below bar (for all stages)
+            svg.append('text')
+                .attr('x', currentX + stageWidth / 2)
+                .attr('y', barY + barHeight + 20)
+                .attr('text-anchor', 'middle')
+                .attr('fill', '#374151')
+                .attr('font-size', '11px')
+                .text(stage);
+
+            svg.append('text')
+                .attr('x', currentX + stageWidth / 2)
+                .attr('y', barY + barHeight + 35)
+                .attr('text-anchor', 'middle')
+                .attr('fill', '#6b7280')
+                .attr('font-size', '10px')
+                .text(`(n=${stageData.count})`);
+
+            // Arrow connector
+            if (i < stages.length - 1) {
+                svg.append('path')
+                    .attr('d', `M${currentX + stageWidth - 1} ${barY + barHeight/2} L${currentX + stageWidth + 10} ${barY + barHeight/2}`)
+                    .attr('stroke', '#9ca3af')
+                    .attr('stroke-width', 2)
+                    .attr('marker-end', 'url(#arrowhead)');
+            }
+
+            currentX += stageWidth;
+        });
+
+        // Add arrowhead marker
+        svg.append('defs').append('marker')
+            .attr('id', 'arrowhead')
+            .attr('viewBox', '0 -5 10 10')
+            .attr('refX', 5)
+            .attr('refY', 0)
+            .attr('markerWidth', 6)
+            .attr('markerHeight', 6)
+            .attr('orient', 'auto')
+            .append('path')
+            .attr('d', 'M0,-5L10,0L0,5')
+            .attr('fill', '#9ca3af');
+
+        // Title
+        svg.append('text')
+            .attr('x', width / 2)
+            .attr('y', 25)
+            .attr('text-anchor', 'middle')
+            .attr('font-size', '16px')
+            .attr('font-weight', 'bold')
+            .attr('fill', '#1f2937')
+            .text(`Total Timeline: ${totalDays} days (${totalYears} years)`);
+
+        svg.append('text')
+            .attr('x', width / 2)
+            .attr('y', 45)
+            .attr('text-anchor', 'middle')
+            .attr('font-size', '12px')
+            .attr('fill', '#6b7280')
+            .text('From initial concept to Certificate of Occupancy');
+
+        // Update stats
+        const statsContainer = document.getElementById('sankeyStats');
+        statsContainer.innerHTML = '';
+
+        const statsData = [
+            { label: 'Total Timeline', value: `${totalYears} years`, color: '#3b82f6' },
+            { label: 'Pre-Application', value: '180 days', color: '#9ca3af' },
+            { label: 'Permitting', value: `${44 + 377} days`, color: '#6366f1' },
+            { label: 'Post-Entitlement', value: '180 days', color: '#fb923c' },
+            { label: 'Construction', value: '579 days', color: '#22c55e' }
+        ];
+
+        statsData.forEach(stat => {
+            const div = document.createElement('div');
+            div.className = 'text-center p-3 rounded-lg';
+            div.style.backgroundColor = stat.color + '15';
+            div.innerHTML = `
+                <div class="text-xl font-bold" style="color: ${stat.color}">${stat.value}</div>
+                <div class="text-xs text-gray-600">${stat.label}</div>
+            `;
+            statsContainer.appendChild(div);
+        });
+    }
+
+    // ============================================
+    // PROCESS ANALYSIS CHARTS
+    // ============================================
+    function renderProcessAnalysis() {
+        console.log('📈 renderProcessAnalysis() called');
+        try {
+            renderBoxPlot();
+            renderSizeScatter();
+            renderProcessingHistogram();
+            console.log('✅ renderProcessAnalysis() complete');
+        } catch (err) {
+            console.error('❌ renderProcessAnalysis error:', err);
+        }
+    }
+
+    function renderBoxPlot() {
+        console.log('📊 renderBoxPlot() called');
+        try {
+        const ctx = document.getElementById('boxPlotChart');
+        if (!ctx) { console.warn('⚠️ boxPlotChart not found'); return; }
+
+        // Group processing days by status
+        const statusGroups = {};
+        DATA.projects.forEach(p => {
+            if (p.processing_days && p.processing_days > 0) {
+                const status = p.status || 'Unknown';
+                if (!statusGroups[status]) statusGroups[status] = [];
+                statusGroups[status].push(p.processing_days);
+            }
+        });
+
+        // Calculate box plot stats for each group
+        const labels = Object.keys(statusGroups).sort();
+        const boxData = labels.map(status => {
+            const days = statusGroups[status].sort((a, b) => a - b);
+            const q1 = days[Math.floor(days.length * 0.25)];
+            const median = days[Math.floor(days.length * 0.5)];
+            const q3 = days[Math.floor(days.length * 0.75)];
+            const min = days[0];
+            const max = days[days.length - 1];
+            return { min, q1, median, q3, max, count: days.length };
+        });
+
+        // Use bar chart to show median with error bars approximation
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Median Processing Days',
+                    data: boxData.map(d => d.median),
+                    backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                    borderColor: 'rgb(59, 130, 246)',
+                    borderWidth: 1
+                }, {
+                    label: 'Q1-Q3 Range Min',
+                    data: boxData.map(d => d.q1),
+                    backgroundColor: 'rgba(59, 130, 246, 0.3)',
+                    borderColor: 'rgba(59, 130, 246, 0.5)',
+                    borderWidth: 1
+                }, {
+                    label: 'Q3 (75th percentile)',
+                    data: boxData.map(d => d.q3),
+                    backgroundColor: 'rgba(239, 68, 68, 0.3)',
+                    borderColor: 'rgba(239, 68, 68, 0.5)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: {
+                        callbacks: {
+                            afterBody: function(context) {
+                                const idx = context[0].dataIndex;
+                                const d = boxData[idx];
+                                return `\nProjects: ${d.count}\nMin: ${d.min}\nMax: ${d.max}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: { title: { display: true, text: 'Processing Days' } }
+                }
+            }
+        });
+        console.log('✅ renderBoxPlot() complete');
+        } catch (err) {
+            console.error('❌ renderBoxPlot error:', err);
+        }
+    }
+
+    function renderSizeScatter() {
+        console.log('📊 renderSizeScatter() called');
+        try {
+        const ctx = document.getElementById('sizeScatterChart');
+        if (!ctx) { console.warn('⚠️ sizeScatterChart not found'); return; }
+
+        const dataPoints = DATA.projects
+            .filter(p => p.processing_days > 0 && p.units > 0)
+            .map(p => ({
+                x: p.units,
+                y: p.processing_days,
+                label: p.address
+            }));
+
+        new Chart(ctx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Projects',
+                    data: dataPoints,
+                    backgroundColor: 'rgba(59, 130, 246, 0.6)',
+                    borderColor: 'rgb(59, 130, 246)',
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.raw.label}: ${context.raw.x} units, ${context.raw.y} days`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: { title: { display: true, text: 'Unit Count' } },
+                    y: { title: { display: true, text: 'Processing Days' } }
+                }
+            }
+        });
+        console.log('✅ renderSizeScatter() complete');
+        } catch (err) {
+            console.error('❌ renderSizeScatter error:', err);
+        }
+    }
+
+    function renderProcessingHistogram() {
+        console.log('📊 renderProcessingHistogram() called');
+        try {
+        const ctx = document.getElementById('processingHistogram');
+        if (!ctx) { console.warn('⚠️ processingHistogram not found'); return; }
+
+        // Bin processing days
+        const bins = [0, 100, 200, 300, 400, 500, 600, 800, 1000, 1500];
+        const binCounts = new Array(bins.length).fill(0);
+        const binUnits = new Array(bins.length).fill(0);
+
+        DATA.projects.forEach(p => {
+            if (p.processing_days > 0) {
+                for (let i = 0; i < bins.length; i++) {
+                    if (i === bins.length - 1 || p.processing_days < bins[i + 1]) {
+                        binCounts[i]++;
+                        binUnits[i] += (p.units || 0);
+                        break;
+                    }
+                }
+            }
+        });
+
+        const labels = bins.map((b, i) => i === bins.length - 1 ? `${b}+` : `${b}-${bins[i+1]}`);
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Projects',
+                    data: binCounts,
+                    backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                    yAxisID: 'y'
+                }, {
+                    label: 'Units',
+                    data: binUnits,
+                    backgroundColor: 'rgba(34, 197, 94, 0.7)',
+                    yAxisID: 'y1'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' }
+                },
+                scales: {
+                    x: { title: { display: true, text: 'Processing Days Range' } },
+                    y: {
+                        type: 'linear',
+                        position: 'left',
+                        title: { display: true, text: 'Projects' }
+                    },
+                    y1: {
+                        type: 'linear',
+                        position: 'right',
+                        title: { display: true, text: 'Units' },
+                        grid: { drawOnChartArea: false }
+                    }
+                }
+            }
+        });
+        console.log('✅ renderProcessingHistogram() complete');
+        } catch (err) {
+            console.error('❌ renderProcessingHistogram error:', err);
+        }
+    }
+
+    // ============================================
+    // FEE ANALYSIS
+    // ============================================
+    function renderFeeAnalysis() {
+        console.log('💰 renderFeeAnalysis() called');
+        try {
+            if (!DATA.fees) {
+                console.warn('⚠️ No fee data available');
+                return;
+            }
+
+            // Top 15 projects by fees
+            const projectsWithFees = DATA.projects
+                .filter(p => p.total_fees > 0)
+                .sort((a, b) => b.total_fees - a.total_fees)
+                .slice(0, 15);
+
+            const topFeesCtx = document.getElementById('topFeeProjectsChart');
+            if (topFeesCtx) {
+                new Chart(topFeesCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: projectsWithFees.map(p => p.address.split(' ').slice(0, 2).join(' ')),
+                        datasets: [{
+                            label: 'Total Fees ($)',
+                            data: projectsWithFees.map(p => p.total_fees),
+                            backgroundColor: '#22c55e'
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) { return '$' + (value / 1000).toFixed(0) + 'k'; }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return '$' + context.raw.toLocaleString();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Units vs Fees scatter
+            const scatterData = projectsWithFees.map(p => ({
+                x: p.units,
+                y: p.total_fees,
+                label: p.address
+            }));
+
+            const scatterCtx = document.getElementById('unitsVsFeesChart');
+            if (scatterCtx) {
+                new Chart(scatterCtx, {
+                    type: 'scatter',
+                    data: {
+                        datasets: [{
+                            label: 'Projects',
+                            data: scatterData,
+                            backgroundColor: 'rgba(59, 130, 246, 0.6)',
+                            borderColor: 'rgb(59, 130, 246)',
+                            pointRadius: 8,
+                            pointHoverRadius: 10
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: { title: { display: true, text: 'Unit Count' } },
+                            y: {
+                                title: { display: true, text: 'Total Fees ($)' },
+                                ticks: {
+                                    callback: function(value) { return '$' + (value / 1000).toFixed(0) + 'k'; }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.raw.label + ': ' + context.raw.x + ' units, $' + context.raw.y.toLocaleString();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Fee per unit chart
+            const feePerUnitData = projectsWithFees
+                .filter(p => p.fee_per_unit)
+                .sort((a, b) => b.fee_per_unit - a.fee_per_unit)
+                .slice(0, 15);
+
+            const feePerUnitCtx = document.getElementById('feePerUnitChart');
+            if (feePerUnitCtx) {
+                new Chart(feePerUnitCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: feePerUnitData.map(p => p.address.split(' ').slice(0, 2).join(' ')),
+                        datasets: [{
+                            label: 'Fee per Unit ($)',
+                            data: feePerUnitData.map(p => p.fee_per_unit),
+                            backgroundColor: '#8b5cf6'
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) { return '$' + value.toLocaleString(); }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return '$' + context.raw.toLocaleString() + ' per unit';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Large fees table
+            const largeFeeBody = document.getElementById('largeFeeTableBody');
+            if (largeFeeBody && DATA.fees.large_fees) {
+                largeFeeBody.innerHTML = DATA.fees.large_fees
+                    .sort((a, b) => b.amount - a.amount)
+                    .map((f, i) => `
+                        <tr class="${i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}">
+                            <td class="px-3 py-2 font-medium">${f.address.substring(0, 25)}</td>
+                            <td class="px-3 py-2 text-right text-green-600 font-bold">$${f.amount.toLocaleString()}</td>
+                            <td class="px-3 py-2 text-gray-500">${f.description || 'Fee item'}</td>
+                        </tr>
+                    `).join('');
+            }
+
+            // Fee summary stats
+            const summaryDiv = document.getElementById('feeSummaryStats');
+            if (summaryDiv) {
+                const totalFees = DATA.fees.total;
+                const projectCount = DATA.fees.project_count;
+                const avgFee = projectCount > 0 ? totalFees / projectCount : 0;
+                const totalUnits = projectsWithFees.reduce((sum, p) => sum + p.units, 0);
+                const avgPerUnit = totalUnits > 0 ? totalFees / totalUnits : 0;
+
+                summaryDiv.innerHTML = `
+                    <div class="bg-green-50 rounded-lg p-4 text-center">
+                        <div class="text-2xl font-bold text-green-700">$${totalFees.toLocaleString()}</div>
+                        <div class="text-xs text-gray-600">Total Fees Tracked</div>
+                    </div>
+                    <div class="bg-blue-50 rounded-lg p-4 text-center">
+                        <div class="text-2xl font-bold text-blue-700">${projectCount}</div>
+                        <div class="text-xs text-gray-600">Projects with Fee Data</div>
+                    </div>
+                    <div class="bg-purple-50 rounded-lg p-4 text-center">
+                        <div class="text-2xl font-bold text-purple-700">$${Math.round(avgFee).toLocaleString()}</div>
+                        <div class="text-xs text-gray-600">Avg Fee per Project</div>
+                    </div>
+                    <div class="bg-orange-50 rounded-lg p-4 text-center">
+                        <div class="text-2xl font-bold text-orange-700">$${Math.round(avgPerUnit).toLocaleString()}</div>
+                        <div class="text-xs text-gray-600">Avg Fee per Unit</div>
+                    </div>
+                `;
+            }
+
+            console.log('✅ renderFeeAnalysis() complete');
+        } catch (err) {
+            console.error('❌ renderFeeAnalysis error:', err);
+        }
+    }
+
+    // ============================================
+    // SPATIAL MAP
+    // ============================================
+    let spatialMap = null;
+    let spatialMarkers = [];
+    let currentFilter = 'all';
+    let currentColorMetric = 'processing_days';
+
+    function renderSpatialMap() {
+        console.log('🗺️ renderSpatialMap() called');
+        try {
+            const container = document.getElementById('spatialMap');
+            if (!container) { console.warn('⚠️ spatialMap not found'); return; }
+
+            // Initialize map if not exists
+            if (!spatialMap) {
+                spatialMap = L.map('spatialMap').setView([37.867, -122.267], 14);
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                    attribution: '&copy; OpenStreetMap &copy; CARTO',
+                    subdomains: 'abcd',
+                    maxZoom: 20
+                }).addTo(spatialMap);
+            }
+
+            // Color by processing days by default
+            colorMapBy('processing_days');
+            console.log('✅ renderSpatialMap() complete');
+        } catch (err) {
+            console.error('❌ renderSpatialMap error:', err);
+        }
+    }
+
+    function filterMap(filter) {
+        currentFilter = filter;
+
+        // Update filter button styles
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.remove('bg-blue-100', 'text-blue-700');
+            btn.classList.add('bg-gray-100');
+        });
+        event.target.classList.add('bg-blue-100', 'text-blue-700');
+        event.target.classList.remove('bg-gray-100');
+
+        // Re-render with current color metric
+        colorMapBy(currentColorMetric);
+    }
+
+    function getFilteredProjects() {
+        let filtered = DATA.projects.filter(p => p.latitude && p.longitude);
+
+        switch (currentFilter) {
+            case 'vli':
+                filtered = filtered.filter(p => (p.vli_units || 0) > 0);
+                break;
+            case 'density_bonus':
+                filtered = filtered.filter(p => p.density_bonus === true || p.density_bonus === 'True');
+                break;
+            case 'approved':
+                filtered = filtered.filter(p => p.status === 'Approved');
+                break;
+            case 'completed':
+                filtered = filtered.filter(p => p.status === 'Completed' || p.co_date);
+                break;
+            default: // 'all'
+                break;
+        }
+
+        return filtered;
+    }
+
+    function colorMapBy(metric) {
+        console.log('🎨 colorMapBy() called with metric:', metric);
+        try {
+            if (!spatialMap) { console.warn('⚠️ spatialMap not initialized'); return; }
+
+            currentColorMetric = metric;
+
+        // Clear existing markers
+        spatialMarkers.forEach(m => spatialMap.removeLayer(m));
+        spatialMarkers = [];
+
+        // Get filtered projects
+        const projects = getFilteredProjects();
+
+        // Get value range for coloring
+        let values = projects.map(p => p[metric] || 0).filter(v => v > 0);
+        const minVal = values.length ? Math.min(...values) : 0;
+        const maxVal = values.length ? Math.max(...values) : 1;
+
+        // Update color button styles
+        document.querySelectorAll('.color-btn').forEach(btn => {
+            btn.classList.remove('bg-blue-100', 'text-blue-700');
+            btn.classList.add('bg-gray-100');
+        });
+        if (event && event.target) {
+            event.target.classList.add('bg-blue-100', 'text-blue-700');
+            event.target.classList.remove('bg-gray-100');
+        }
+
+        // Show/hide affordability legend
+        const legend = document.getElementById('affordabilityLegend');
+        if (legend) {
+            legend.classList.toggle('hidden', metric !== 'affordability');
+        }
+
+        projects.forEach(p => {
+            let color, value;
+            if (metric === 'processing_days') {
+                value = p.processing_days || 0;
+                // Red for long processing, green for fast
+                const ratio = maxVal > minVal ? (value - minVal) / (maxVal - minVal) : 0;
+                const r = Math.round(255 * ratio);
+                const g = Math.round(255 * (1 - ratio));
+                color = `rgb(${r}, ${g}, 50)`;
+            } else if (metric === 'units') {
+                value = p.units || 0;
+                const ratio = maxVal > minVal ? (value - minVal) / (maxVal - minVal) : 0;
+                const intensity = Math.round(100 + 155 * ratio);
+                color = `rgb(59, ${intensity}, 246)`;
+            } else if (metric === 'status') {
+                const statusColors = {
+                    'Approved': '#22c55e',
+                    'Completed': '#10b981',
+                    'In Review': '#f59e0b',
+                    'Under Review': '#f59e0b',
+                    'Corrections Pending': '#ef4444',
+                    'Corrections Pending Applicant': '#ef4444',
+                    'Incomplete Pending Applicant': '#dc2626',
+                    'Pending Final Action': '#8b5cf6',
+                    'Pending': '#6b7280'
+                };
+                color = statusColors[p.status] || '#6b7280';
+                value = p.status;
+            } else if (metric === 'affordability') {
+                // Red = no affordable, Blue = has VLI, Green = has LI/MOD (density bonus without VLI)
+                const hasVLI = (p.vli_units || 0) > 0;
+                const hasDensityBonus = p.density_bonus === true || p.density_bonus === 'True';
+
+                if (hasVLI) {
+                    color = '#3b82f6'; // Blue - has VLI units
+                } else if (hasDensityBonus) {
+                    color = '#22c55e'; // Green - has LI/MOD via density bonus
+                } else {
+                    color = '#ef4444'; // Red - no affordable units
+                }
+                value = hasVLI ? 'VLI' : hasDensityBonus ? 'Density Bonus' : 'Market Rate';
+            }
+
+            const radius = Math.max(6, Math.min(20, Math.sqrt(p.units || 1) * 2));
+
+            const vliInfo = (p.vli_units || 0) > 0 ? `<br>VLI Units: ${p.vli_units}` : '';
+            const dbInfo = (p.density_bonus === true || p.density_bonus === 'True') ? '<br>Density Bonus: Yes' : '';
+
+            const marker = L.circleMarker([parseFloat(p.latitude), parseFloat(p.longitude)], {
+                radius: radius,
+                fillColor: color,
+                color: '#333',
+                weight: 1,
+                opacity: 0.8,
+                fillOpacity: 0.7
+            }).bindPopup(`
+                <strong>${p.address}</strong><br>
+                Units: ${p.units}<br>
+                Status: ${p.status}<br>
+                Processing Days: ${p.proc_days || 'N/A'}${vliInfo}${dbInfo}
+            `);
+
+            marker.addTo(spatialMap);
+            spatialMarkers.push(marker);
+        });
+
+        // Update stats
+        updateSpatialStats(metric, projects);
+        console.log('✅ colorMapBy() complete');
+        } catch (err) {
+            console.error('❌ colorMapBy error:', err);
+        }
+    }
+
+    function updateSpatialStats(metric, projects) {
+        const container = document.getElementById('spatialStats');
+        if (!container) return;
+
+        // Use provided projects or fall back to all projects with coords
+        const allProjects = projects || DATA.projects.filter(p => p.latitude && p.longitude);
+
+        // Calculate geographic clusters/stats
+        const downtown = allProjects.filter(p => parseFloat(p.latitude) > 37.865 && parseFloat(p.latitude) < 37.875 && parseFloat(p.longitude) > -122.275 && parseFloat(p.longitude) < -122.260);
+        const southside = allProjects.filter(p => parseFloat(p.latitude) < 37.865);
+        const westBerkeley = allProjects.filter(p => parseFloat(p.longitude) < -122.280);
+        const other = allProjects.filter(p => !downtown.includes(p) && !southside.includes(p) && !westBerkeley.includes(p));
+
+        const clusters = [
+            { name: 'Downtown', projects: downtown },
+            { name: 'Southside', projects: southside },
+            { name: 'West Berkeley', projects: westBerkeley },
+            { name: 'Other', projects: other }
+        ];
+
+        // Show filter info
+        const filterName = {
+            'all': 'All Projects',
+            'vli': 'VLI Projects',
+            'density_bonus': 'Density Bonus',
+            'approved': 'Approved Only',
+            'completed': 'Completed Only'
+        }[currentFilter] || 'All Projects';
+
+        container.innerHTML = `
+            <div class="col-span-full text-sm text-gray-600 mb-2">Showing: <strong>${allProjects.length}</strong> projects (${filterName})</div>
+        ` + clusters.map(c => `
+            <div class="text-center p-3 bg-gray-50 rounded-lg">
+                <div class="text-xl font-bold text-blue-600">${c.projects.length}</div>
+                <div class="text-xs text-gray-600">${c.name}</div>
+                <div class="text-xs text-gray-400">${c.projects.reduce((s, p) => s + (p.units || 0), 0).toLocaleString()} units</div>
+            </div>
+        `).join('');
+    }
+
+    // ============================================
+    // COST ANALYSIS
+    // ============================================
+
+    // Sample event data based on actual Accela permit records
+    // Use real staff data from DATA if available, else use sample
+    const SAMPLE_EVENTS = {
+        staff: DATA.staff && DATA.staff.length > 0 ? DATA.staff.map(s => ({
+            name: s.name.split(' ')[0] + ' ' + (s.name.split(' ')[1] || '').charAt(0) + '.',
+            fullName: s.name,
+            projects: s.projects || 0,
+            events: s.actions || 0,
+            // Estimate event types from total actions
+            completeness: Math.round((s.actions || 0) * 0.2),
+            decisions: Math.round((s.actions || 0) * 0.15),
+            corrections: Math.round((s.actions || 0) * 0.5),
+            zab: Math.round((s.actions || 0) * 0.05)
+        })) : [
+            { name: 'Allison R.', fullName: 'Allison Riemer', projects: 18, events: 52, completeness: 12, decisions: 8, corrections: 24, zab: 2 },
+            { name: 'Sharon G.', fullName: 'Sharon Gong', projects: 15, events: 44, completeness: 10, decisions: 6, corrections: 22, zab: 1 },
+            { name: 'Katrina L.', fullName: 'Katrina Lapira', projects: 14, events: 41, completeness: 9, decisions: 5, corrections: 20, zab: 2 }
+        ],
+        // Resubmittals per project (top projects)
+        resubmittals: [
+            { address: '1750 Sacramento', units: 739, cycles: 3 },
+            { address: '1974 Shattuck', units: 599, cycles: 5 },
+            { address: '2276 Shattuck', units: 336, cycles: 2 },
+            { address: '2700 Shattuck', units: 276, cycles: 4 },
+            { address: '2425 Durant', units: 250, cycles: 3 },
+            { address: '2274 Shattuck', units: 227, cycles: 4 },
+            { address: '2100 Milvia', units: 201, cycles: 3 },
+            { address: '2425 Durant', units: 169, cycles: 2 },
+            { address: '1581 University', units: 158, cycles: 4 },
+            { address: '2733 San Pablo', units: 152, cycles: 5 },
+            { address: '2847 Shattuck', units: 136, cycles: 6 },
+            { address: '2109 Virginia', units: 131, cycles: 2 },
+            { address: '2720 San Pablo', units: 117, cycles: 3 },
+            { address: '2530 Bancroft', units: 110, cycles: 2 },
+            { address: '2109 Milvia', units: 105, cycles: 3 }
+        ]
+    };
+
+    let costAnalysisCharts = {};
+    let hourlyRate = 95;
+
+    function calculateStaffHours(s) {
+        return (s.completeness * 4) + (s.decisions * 8) + (s.corrections * 2) + (s.zab * 16);
+    }
+
+    function initCostAnalysis() {
+        if (costAnalysisCharts.cityCost) return; // Already initialized
+
+        updateCostAnalysis();
+        updateStaffWorkload();
+        initDevCostCharts();
+        initFeeShareChart();
+        initInLieuFeeChart();
+    }
+
+    function updateCostAnalysis() {
+        hourlyRate = parseInt(document.getElementById('hourlyRateSlider').value);
+        document.getElementById('hourlyRateDisplay').textContent = hourlyRate;
+
+        // Update staff table
+        const tbody = document.getElementById('staffCostTable');
+        if (!tbody) return;
+
+        let totalHours = 0;
+        const rows = SAMPLE_EVENTS.staff.map(s => {
+            const hours = calculateStaffHours(s);
+            totalHours += hours;
+            const cost = hours * hourlyRate;
+            return `
+                <tr class="border-t hover:bg-gray-50">
+                    <td class="px-4 py-2">${s.name}</td>
+                    <td class="px-4 py-2 text-center">${s.projects}</td>
+                    <td class="px-4 py-2 text-center">${s.events}</td>
+                    <td class="px-4 py-2 text-center">${hours}</td>
+                    <td class="px-4 py-2 text-right">$${cost.toLocaleString()}</td>
+                </tr>
+            `;
+        });
+        tbody.innerHTML = rows.join('');
+
+        // Update metrics
+        document.getElementById('totalCityHours').textContent = totalHours.toLocaleString();
+
+        // Calculate median costs
+        const projectCosts = SAMPLE_EVENTS.resubmittals.map(p => {
+            const avgCyclesForSize = p.cycles;
+            const hours = (avgCyclesForSize * 2) + 8 + 4; // corrections + decision + completeness
+            return { cost: hours * hourlyRate, units: p.units };
+        });
+        const sortedCosts = [...projectCosts].sort((a, b) => a.cost - b.cost);
+        const medianCost = sortedCosts[Math.floor(sortedCosts.length / 2)].cost;
+        document.getElementById('medianCityCost').textContent = '$' + medianCost.toLocaleString();
+
+        const costPerUnit = Math.round(projectCosts.reduce((s, p) => s + p.cost, 0) / projectCosts.reduce((s, p) => s + p.units, 0));
+        document.getElementById('costPerUnit').textContent = '$' + costPerUnit;
+
+        // City cost chart
+        const ctx = document.getElementById('cityCostChart');
+        if (ctx) {
+            if (costAnalysisCharts.cityCost) costAnalysisCharts.cityCost.destroy();
+
+            const topProjects = SAMPLE_EVENTS.resubmittals.slice(0, 15);
+            const costs = topProjects.map(p => {
+                const hours = (p.cycles * 2) + 8 + 4;
+                return hours * hourlyRate;
+            });
+
+            costAnalysisCharts.cityCost = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: topProjects.map(p => p.address),
+                    datasets: [{
+                        label: 'Est. City Review Cost',
+                        data: costs,
+                        backgroundColor: '#3b82f6'
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: { callback: v => '$' + v.toLocaleString() }
+                        }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+    }
+
+    function updateStaffWorkload() {
+        const anonymize = document.getElementById('anonymizeToggle')?.checked || false;
+
+        const ctx = document.getElementById('workloadChart');
+        if (!ctx) return;
+
+        if (costAnalysisCharts.workload) costAnalysisCharts.workload.destroy();
+
+        const labels = SAMPLE_EVENTS.staff.map((s, i) => anonymize ? `Planner ${String.fromCharCode(65 + i)}` : s.name);
+        const data = SAMPLE_EVENTS.staff.map(s => s.events);
+
+        costAnalysisCharts.workload = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Review Events',
+                    data: data,
+                    backgroundColor: '#8b5cf6'
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                scales: { x: { beginAtZero: true } },
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // Calculate concentration
+        const totalEvents = data.reduce((a, b) => a + b, 0);
+        const sortedEvents = [...data].sort((a, b) => b - a);
+        const top3Events = sortedEvents.slice(0, 3).reduce((a, b) => a + b, 0);
+        const top3Pct = Math.round((top3Events / totalEvents) * 100);
+
+        document.getElementById('top3Pct').textContent = top3Pct + '%';
+        document.getElementById('avgEventsPerStaff').textContent = Math.round(totalEvents / data.length);
+        document.getElementById('activeStaffCount').textContent = data.length;
+    }
+
+    function initDevCostCharts() {
+        // Resubmittal chart
+        const resubCtx = document.getElementById('resubmittalChart');
+        if (resubCtx) {
+            costAnalysisCharts.resubmittal = new Chart(resubCtx, {
+                type: 'bar',
+                data: {
+                    labels: SAMPLE_EVENTS.resubmittals.map(p => p.address),
+                    datasets: [{
+                        label: 'Resubmittal Cycles',
+                        data: SAMPLE_EVENTS.resubmittals.map(p => p.cycles),
+                        backgroundColor: '#f59e0b'
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    scales: { x: { beginAtZero: true, max: 8 } },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        // Developer cost chart
+        const devCtx = document.getElementById('devCostChart');
+        if (devCtx) {
+            const projects = SAMPLE_EVENTS.resubmittals.slice(0, 10);
+            const baseFee = 25000; // Estimated average permit fee
+
+            costAnalysisCharts.devCost = new Chart(devCtx, {
+                type: 'bar',
+                data: {
+                    labels: projects.map(p => p.address),
+                    datasets: [
+                        {
+                            label: 'Permit Fees',
+                            data: projects.map(() => baseFee),
+                            backgroundColor: '#6b7280'
+                        },
+                        {
+                            label: 'Resubmittal Costs (Med)',
+                            data: projects.map(p => p.cycles * 20000),
+                            backgroundColor: '#f59e0b'
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        x: { stacked: true },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true,
+                            ticks: { callback: v => '$' + (v / 1000) + 'K' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update summary costs
+        const avgCycles = SAMPLE_EVENTS.resubmittals.reduce((s, p) => s + p.cycles, 0) / SAMPLE_EVENTS.resubmittals.length;
+        document.getElementById('devCostLow').textContent = '$' + Math.round(25000 + avgCycles * 10000).toLocaleString();
+        document.getElementById('devCostMed').textContent = '$' + Math.round(25000 + avgCycles * 20000).toLocaleString();
+        document.getElementById('devCostHigh').textContent = '$' + Math.round(25000 + avgCycles * 30000).toLocaleString();
+    }
+
+    function initFeeShareChart() {
+        const ctx = document.getElementById('feeShareChart');
+        if (!ctx) return;
+
+        // Estimate construction cost and fee percentage for top projects
+        const projects = SAMPLE_EVENTS.resubmittals.slice(0, 10).map(p => {
+            const sqft = p.units * 900;
+            const constructionCost = sqft * 400;
+            const estimatedFees = p.units * 500; // ~$500/unit in permit fees
+            const feePct = (estimatedFees / constructionCost) * 100;
+            return { address: p.address, feePct: feePct };
+        });
+
+        costAnalysisCharts.feeShare = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: projects.map(p => p.address),
+                datasets: [{
+                    label: 'Fees as % of Construction',
+                    data: projects.map(p => p.feePct.toFixed(2)),
+                    backgroundColor: '#ef4444'
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 2,
+                        ticks: { callback: v => v + '%' }
+                    }
+                },
+                plugins: { legend: { display: false } }
+            }
+        });
+    }
+
+    function initInLieuFeeChart() {
+        const ctx = document.getElementById('inLieuComparisonChart');
+        if (!ctx) return;
+
+        // 2128 Oxford comparison: $11M in-lieu vs 47 on-site units
+        const inLieuValue = 11000000;
+        const costPerUnit = 700000; // Terner Center average
+        const unitsFromInLieu = Math.round(inLieuValue / costPerUnit);
+        const onSiteUnits = 47;
+        const onSiteValue = onSiteUnits * costPerUnit;
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['In-Lieu Fee ($11M)', 'On-Site Affordable (47 units)'],
+                datasets: [
+                    {
+                        label: 'Dollar Value',
+                        data: [inLieuValue, onSiteValue],
+                        backgroundColor: ['#8b5cf6', '#22c55e'],
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'Affordable Units Equivalent',
+                        data: [unitsFromInLieu, onSiteUnits],
+                        backgroundColor: ['#c4b5fd', '#86efac'],
+                        yAxisID: 'y1'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        type: 'linear',
+                        position: 'left',
+                        title: { display: true, text: 'Dollar Value ($)' },
+                        ticks: {
+                            callback: v => '$' + (v/1000000).toFixed(0) + 'M'
+                        }
+                    },
+                    y1: {
+                        type: 'linear',
+                        position: 'right',
+                        title: { display: true, text: 'Affordable Units' },
+                        grid: { drawOnChartArea: false }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '2128 Oxford: In-Lieu Fee vs On-Site Value Comparison'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => {
+                                if (ctx.dataset.label === 'Dollar Value') {
+                                    return '$' + (ctx.raw/1000000).toFixed(1) + 'M';
+                                }
+                                return ctx.raw + ' units';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('🚀 DOMContentLoaded - Initializing explorer...');
+        console.log('📊 DATA check:', {
+            projects: DATA.projects ? DATA.projects.length : 'MISSING',
+            events: DATA.events ? Object.keys(DATA.events).length : 'MISSING'
+        });
+
+        // Wrap each init function in try-catch to prevent cascade failures
+        try { initCharts(); } catch(e) { console.error('❌ initCharts failed:', e); }
+        try { renderProjectTable(); } catch(e) { console.error('❌ renderProjectTable failed:', e); }
+        try { renderGantt(); } catch(e) { console.error('❌ renderGantt failed:', e); }
+        try { renderAPRTable(); } catch(e) { console.error('❌ renderAPRTable failed:', e); }
+
+        // Lazy load visualizations when tabs are shown
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                setTimeout(() => {
+                    if (document.getElementById('sankey').classList.contains('active') && !document.querySelector('#sankeyChart svg')) {
+                        try { renderLifecycleSankey(); } catch(e) { console.error('❌ renderLifecycleSankey failed:', e); }
+                    }
+                    if (document.getElementById('process').classList.contains('active') && !document.querySelector('#boxPlotChart canvas')) {
+                        try { renderProcessAnalysis(); } catch(e) { console.error('❌ renderProcessAnalysis failed:', e); }
+                    }
+                    if (document.getElementById('spatial').classList.contains('active') && !spatialMap) {
+                        try { renderSpatialMap(); } catch(e) { console.error('❌ renderSpatialMap failed:', e); }
+                    }
+                    if (document.getElementById('costanal').classList.contains('active') && !costAnalysisCharts.cityCost) {
+                        try { initCostAnalysis(); } catch(e) { console.error('❌ initCostAnalysis failed:', e); }
+                    }
+                    if (document.getElementById('analysis').classList.contains('active') && !document.querySelector('#topFeeProjectsChart canvas')) {
+                        try { renderFeeAnalysis(); } catch(e) { console.error('❌ renderFeeAnalysis failed:', e); }
+                    }
+                }, 100);
+            });
+        });
+    });
+    
+        // ===== PLAYERS TAB =====
+        function initPlayersTab() {
+            const players = DATA.players;
+            if (!players) return;
+            
+            // Summary stats
+            document.getElementById('playerDevCount').textContent = players.developers.length;
+            document.getElementById('playerArchCount').textContent = players.architects.length;
+            document.getElementById('playerTotalUnits').textContent = players.developers.reduce((sum, d) => sum + d.units, 0).toLocaleString();
+            const avgDays = players.friction.reduce((sum, f) => sum + f.proc_days, 0) / players.friction.length;
+            document.getElementById('playerAvgDays').textContent = Math.round(avgDays);
+            
+            // Developer Chart
+            const devTop15 = players.developers.filter(d => d.name !== 'Unknown').slice(0, 15);
+            new Chart(document.getElementById('developerChart'), {
+                type: 'bar',
+                data: {
+                    labels: devTop15.map(d => d.name.substring(0, 20)),
+                    datasets: [{
+                        label: 'Units',
+                        data: devTop15.map(d => d.units),
+                        backgroundColor: '#6366f1'
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    scales: { x: { beginAtZero: true } },
+                    plugins: { legend: { display: false } }
+                }
+            });
+            
+            // Developer Table
+            const devTableBody = document.getElementById('developerTableBody');
+            players.developers.forEach((d, i) => {
+                const row = document.createElement('tr');
+                row.className = i % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+                row.innerHTML = `
+                    <td class="px-3 py-2 text-left font-medium">${d.name.substring(0, 35)}</td>
+                    <td class="px-3 py-2 text-right">${d.projects}</td>
+                    <td class="px-3 py-2 text-right font-bold text-indigo-600">${d.units.toLocaleString()}</td>
+                    <td class="px-3 py-2 text-right ${d.vli > 0 ? 'text-purple-600' : 'text-gray-400'}">${d.vli}</td>
+                    <td class="px-3 py-2 text-right">${d.avg_proc_days || '-'}</td>
+                `;
+                devTableBody.appendChild(row);
+            });
+            
+            // Architect Table
+            const archTableBody = document.getElementById('architectTableBody');
+            players.architects.forEach((a, i) => {
+                const row = document.createElement('tr');
+                row.className = i % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+                row.innerHTML = `
+                    <td class="px-4 py-2 font-medium">${a.name}</td>
+                    <td class="px-4 py-2 text-right">${a.projects}</td>
+                    <td class="px-4 py-2 text-right font-bold text-purple-600">${a.units.toLocaleString()}</td>
+                    <td class="px-4 py-2 text-right ${a.vli > 0 ? 'text-green-600' : 'text-gray-400'}">${a.vli}</td>
+                    <td class="px-4 py-2 text-right">${a.avg_proc_days || '-'}</td>
+                    <td class="px-4 py-2 text-gray-500 text-xs">${a.addresses.slice(0, 2).join(', ')}</td>
+                `;
+                archTableBody.appendChild(row);
+            });
+            
+            // Economics Table
+            const econTableBody = document.getElementById('economicsTableBody');
+            players.economics.forEach((e, i) => {
+                const row = document.createElement('tr');
+                row.className = i % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+                row.innerHTML = `
+                    <td class="px-3 py-2 font-medium">${e.address}</td>
+                    <td class="px-3 py-2 text-right">${e.units}</td>
+                    <td class="px-3 py-2 text-right ${e.vli > 0 ? 'text-purple-600' : 'text-gray-400'}">${e.vli}</td>
+                    <td class="px-3 py-2 text-right text-green-600">$${(e.annual_revenue / 1000000).toFixed(1)}M</td>
+                    <td class="px-3 py-2 text-right text-orange-600">$${(e.est_fees / 1000000).toFixed(1)}M</td>
+                    <td class="px-3 py-2 text-right">${e.fee_pct}%</td>
+                `;
+                econTableBody.appendChild(row);
+            });
+            
+            // Slowest Projects Table
+            const slowestBody = document.getElementById('slowestTableBody');
+            players.friction.slice(0, 15).forEach((f, i) => {
+                const row = document.createElement('tr');
+                row.className = i % 2 === 0 ? 'bg-white' : 'bg-red-50';
+                row.innerHTML = `
+                    <td class="px-3 py-2 font-medium">${f.address}</td>
+                    <td class="px-3 py-2 text-right font-bold text-red-600">${f.proc_days}</td>
+                    <td class="px-3 py-2 text-right">${f.units}</td>
+                    <td class="px-3 py-2 text-xs">${f.status}</td>
+                `;
+                slowestBody.appendChild(row);
+            });
+            
+            // Fastest Projects Table
+            const fastestBody = document.getElementById('fastestTableBody');
+            const fastest = [...players.friction].sort((a, b) => a.proc_days - b.proc_days);
+            fastest.slice(0, 15).forEach((f, i) => {
+                const row = document.createElement('tr');
+                row.className = i % 2 === 0 ? 'bg-white' : 'bg-green-50';
+                row.innerHTML = `
+                    <td class="px-3 py-2 font-medium">${f.address}</td>
+                    <td class="px-3 py-2 text-right font-bold text-green-600">${f.proc_days}</td>
+                    <td class="px-3 py-2 text-right">${f.units}</td>
+                    <td class="px-3 py-2 text-xs">${f.status}</td>
+                `;
+                fastestBody.appendChild(row);
+            });
+            
+            // In-Lieu Fee Table
+            const inlieuBody = document.getElementById('inlieuTableBody');
+            players.inlieu.forEach((il, i) => {
+                const row = document.createElement('tr');
+                row.className = 'bg-red-50';
+                row.innerHTML = `
+                    <td class="px-4 py-2 font-medium">${il.address}</td>
+                    <td class="px-4 py-2">${il.developer}</td>
+                    <td class="px-4 py-2 text-right">${il.units}</td>
+                    <td class="px-4 py-2 text-right text-purple-600">${il.vli_built}</td>
+                    <td class="px-4 py-2 text-right font-bold text-red-600">$${(il.inlieu_amount / 1000000).toFixed(0)}M</td>
+                    <td class="px-4 py-2 text-right text-orange-600">${il.units_avoided}</td>
+                    <td class="px-4 py-2 text-xs text-gray-600">${il.notes}</td>
+                `;
+                inlieuBody.appendChild(row);
+            });
+        }
+        
+        // Initialize Players tab when shown
+        const originalShowTab = showTab;
+        showTab = function(tabId) {
+            originalShowTab(tabId);
+            if (tabId === 'players' && !window.playersInitialized) {
+                initPlayersTab();
+                window.playersInitialized = true;
+            }
+        };
+

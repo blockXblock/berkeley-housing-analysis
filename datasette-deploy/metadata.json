@@ -1,42 +1,159 @@
 {
-  "title": "Berkeley Housing & Address Database",
-  "description": "Track 156 housing projects linked to 62,226 Berkeley addresses. Every street, every parcel, every project.",
-  "source": "City of Berkeley, Alameda County GIS, Eric Gellerman's Berkeley Development Map",
+  "title": "Berkeley Housing Pipeline Database",
+  "description": "Track 162 housing projects, 755 permit events, and 62,226 Berkeley addresses. Comprehensive data from City of Berkeley Accela permits system.",
+  "source": "City of Berkeley Accela, Alameda County GIS",
   "source_url": "https://github.com/blockXblock/berkeley-housing-analysis",
   "license": "Public Domain (CC0)",
   "databases": {
     "berkeley_housing_map": {
-      "title": "Housing Projects (156)",
-      "description": "Active housing development projects with permits, units, and news coverage",
+      "title": "Housing Pipeline (162 projects, 755 events)",
+      "description": "Active housing development projects with permits, timeline events, and processing data",
       "tables": {
         "projects": {
-          "title": "All Projects",
-          "description": "156 housing projects - 5,470 total units",
-          "sort_desc": "net_units",
-          "facets": ["status", "data_source", "has_official_permit", "has_media_coverage"],
+          "title": "All Projects (162)",
+          "description": "Housing projects in Berkeley's development pipeline - 10,155 total units",
+          "sort_desc": "units",
+          "facets": ["status", "construction_status", "year", "tenure", "unit_category", "density_bonus"],
           "plugins": {
             "datasette-cluster-map": {
               "latitude_column": "latitude",
               "longitude_column": "longitude"
             }
+          },
+          "columns": {
+            "id": "Unique project identifier",
+            "address": "Project street address",
+            "apn": "Assessor's Parcel Number",
+            "owner": "Property owner name",
+            "units": "Net new dwelling units",
+            "new_units": "Total new units proposed",
+            "old_units": "Existing units demolished",
+            "permits": "Comma-separated permit numbers (ZP, PLN, B prefixes)",
+            "description": "Project description from permit application",
+            "status": "Current planning status (Approved, Under Review, etc.)",
+            "construction_status": "Construction phase status",
+            "latitude": "Latitude coordinate",
+            "longitude": "Longitude coordinate",
+            "height_stories": "Building height in stories",
+            "height_feet": "Building height in feet",
+            "year": "Year application filed",
+            "unit_category": "Size category (SFD, 2-4, 5+)",
+            "tenure": "Owner or Renter",
+            "project_size_category": "small/medium/large/major",
+            "sb35_flag": "SB 35 streamlined approval",
+            "sb330_flag": "SB 330 Housing Crisis Act",
+            "ab2011_flag": "AB 2011 Affordable Housing",
+            "density_bonus": "State Density Bonus used",
+            "density_bonus_pct": "Density bonus percentage",
+            "vli_units": "Very Low Income affordable units",
+            "app_filed": "Application filed date",
+            "app_complete": "Application deemed complete date",
+            "entitled": "Entitlement/approval date",
+            "bp_issued_date": "Building permit issued date",
+            "co_date": "Certificate of Occupancy date",
+            "construction_start": "Construction start date",
+            "estimated_completion": "Estimated completion date",
+            "total_processing_days": "Days from filed to entitled",
+            "accela_status": "Most recent Accela processing status",
+            "accela_status_date": "Date of Accela status",
+            "app_packet_size_mb": "Application packet size in MB"
           }
         },
-        "news_coverage": {
-          "title": "News Coverage",
-          "description": "Media articles about housing projects",
-          "facets": ["source"]
+        "permit_events": {
+          "title": "Permit Timeline Events (755)",
+          "description": "Processing events from Accela - completeness reviews, corrections, approvals, hearings",
+          "sort_desc": "event_date",
+          "facets": ["stage", "action", "marked_by", "permit_type"],
+          "columns": {
+            "id": "Event ID",
+            "project_id": "Link to projects table",
+            "address": "Project address",
+            "permit_number": "Permit number (ZP2023-0001 format)",
+            "stage": "Processing stage (Completeness Review, Application Processing, CEQA, etc.)",
+            "action": "Action taken (Application Complete, Corrections Issued, Approved, etc.)",
+            "event_date": "Date of event",
+            "assigned_to": "Staff assigned",
+            "marked_by": "Staff who recorded the event",
+            "comment": "Staff comments",
+            "stage_status": "Stage completion status",
+            "source": "Data source (accela)",
+            "imported_at": "When data was imported",
+            "permit_type": "Type of permit"
+          }
+        },
+        "building_permits": {
+          "title": "Building Permits (11)",
+          "description": "Building permits linked to housing projects",
+          "facets": ["permit_type", "status"],
+          "columns": {
+            "id": "Permit ID",
+            "project_id": "Link to projects table",
+            "permit_number": "Building permit number (B2023-00001 format)",
+            "permit_type": "Type of permit (Building, Electrical, etc.)",
+            "address": "Project address",
+            "status": "Permit status",
+            "filed_date": "Date filed",
+            "finaled_date": "Date finaled",
+            "job_value": "Construction value",
+            "description": "Work description",
+            "owner": "Property owner",
+            "applicant": "Permit applicant",
+            "source": "Data source",
+            "imported_at": "Import timestamp"
+          }
+        },
+        "project_permits": {
+          "title": "Project-Permit Links (69)",
+          "description": "Junction table linking projects to their permits",
+          "columns": {
+            "id": "Link ID",
+            "project_id": "Project ID",
+            "permit_number": "Permit number",
+            "permit_type": "Type of permit",
+            "is_primary": "Primary permit for project"
+          }
         }
       },
       "queries": {
         "projects_by_units": {
           "title": "Projects by Units",
           "description": "All projects sorted by unit count",
-          "sql": "SELECT address_display, net_units, status, data_source, latitude, longitude FROM projects ORDER BY net_units DESC"
+          "sql": "SELECT address, units, status, permits, latitude, longitude FROM projects ORDER BY units DESC"
         },
-        "projects_with_news": {
-          "title": "Projects with News Coverage",
-          "description": "Projects that have media coverage",
-          "sql": "SELECT address_display, net_units, status, primary_news_source FROM projects WHERE has_media_coverage = 1 ORDER BY net_units DESC"
+        "projects_with_vli": {
+          "title": "Projects with Affordable Units",
+          "description": "Projects that include Very Low Income units",
+          "sql": "SELECT address, units, vli_units, status, density_bonus FROM projects WHERE vli_units > 0 ORDER BY vli_units DESC"
+        },
+        "processing_times": {
+          "title": "Processing Time Analysis",
+          "description": "Projects with complete processing timeline",
+          "sql": "SELECT address, units, app_filed, app_complete, entitled, total_processing_days, status FROM projects WHERE total_processing_days > 0 ORDER BY total_processing_days DESC"
+        },
+        "events_by_project": {
+          "title": "Events by Project",
+          "description": "Timeline events grouped by project",
+          "sql": "SELECT p.address, p.units, COUNT(e.id) as event_count, MAX(e.event_date) as last_event FROM projects p LEFT JOIN permit_events e ON p.id = e.project_id GROUP BY p.id ORDER BY event_count DESC"
+        },
+        "recent_events": {
+          "title": "Recent Processing Events",
+          "description": "Most recent permit events",
+          "sql": "SELECT e.event_date, e.address, e.permit_number, e.stage, e.action, e.marked_by FROM permit_events e ORDER BY e.event_date DESC LIMIT 100"
+        },
+        "staff_activity": {
+          "title": "Staff Activity",
+          "description": "Events by staff member",
+          "sql": "SELECT marked_by, COUNT(*) as events, COUNT(DISTINCT permit_number) as permits FROM permit_events WHERE marked_by IS NOT NULL AND marked_by != '' GROUP BY marked_by ORDER BY events DESC"
+        },
+        "density_bonus_projects": {
+          "title": "Density Bonus Projects",
+          "description": "Projects using State Density Bonus",
+          "sql": "SELECT address, units, vli_units, density_bonus_pct, status FROM projects WHERE density_bonus = 1 ORDER BY units DESC"
+        },
+        "entitled_projects": {
+          "title": "Entitled Projects",
+          "description": "Projects that have received entitlements",
+          "sql": "SELECT address, units, app_filed, entitled, total_processing_days, construction_status FROM projects WHERE entitled IS NOT NULL ORDER BY entitled DESC"
         }
       }
     },
@@ -86,11 +203,6 @@
           "title": "Addresses by Zipcode",
           "description": "Count addresses in each zipcode",
           "sql": "SELECT zipcode, COUNT(*) as addresses, COUNT(DISTINCT street_name) as streets FROM addresses GROUP BY zipcode ORDER BY addresses DESC"
-        },
-        "parcels_without_projects": {
-          "title": "Addresses Without Projects",
-          "description": "Addresses that don't have housing projects (sample)",
-          "sql": "SELECT a.address_full, a.apn, a.street_name, a.zipcode FROM addresses a LEFT JOIN projects p ON a.address_id = p.address_id WHERE p.project_id IS NULL LIMIT 100"
         }
       }
     }

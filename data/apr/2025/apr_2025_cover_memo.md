@@ -155,6 +155,63 @@ Based on public reporting, these projects may have 2025 activity not captured:
 
 ---
 
+## Limitations of the APR Framework
+
+### Building Permits Measure Regulatory Output, Not Housing Delivery
+
+The APR framework, as defined by HCD, treats building permit issuance as the primary measure of housing progress toward RHNA targets. This approach has significant limitations:
+
+**The Problem:**
+
+HCD counts a building permit as "progress" even if construction never begins. Our analysis of Berkeley's housing pipeline reveals a stark gap between regulatory approvals and actual housing delivery:
+
+| Metric | Count | % of Pipeline |
+|--------|-------|---------------|
+| Total Pipeline Units | 10,142 | 100% |
+| Building Permits Issued | 988 | 9.7% |
+| Certificates of Occupancy | 126 | 1.2% |
+| Stale Approvals (12+ months, no construction) | 983 | 9.7% |
+
+**Key Findings:**
+
+1. **Permits ≠ Construction:** Of Berkeley's 10,142 pipeline units, only 988 (9.7%) have building permits issued. The remaining 9,154 units exist only as planning entitlements.
+
+2. **Stale Approvals:** We identified 10 projects with 983 approved units that show no construction activity 12+ months after approval. These include:
+   - 2128 Oxford St: 485 units (entitled Oct 2024, no BP)
+   - 2136 San Pablo Ave: 125 units (entitled Apr 2024, no BP)
+   - 2530 Bancroft Way: 110 units (entitled Dec 2024, no BP)
+
+3. **CO Gap:** Only 126 units have received certificates of occupancy — representing actual, occupiable housing. This is 1.2% of the pipeline.
+
+### What RHNA Doesn't Measure
+
+A complete measure of housing delivery should track:
+
+- **Construction starts** — when ground is actually broken
+- **Certificates of occupancy** — when units become habitable
+- **Vacancy rates** — whether completed units are occupied
+- **Lease-up timelines** — how quickly units reach tenants
+- **Rental affordability** — actual rents vs. income targets
+- **Purchase prices** — whether for-sale units serve intended income levels
+
+### Recommendations for HCD
+
+We recommend that HCD enhance future APR requirements to include:
+
+1. **Construction Start Tracking:** Add a mandatory field for construction commencement date, separate from building permit issuance.
+
+2. **CO-to-Occupancy Tracking:** Require jurisdictions to report time from certificate of occupancy to first occupancy.
+
+3. **Stale Approval Monitoring:** Flag projects where building permits have not been pulled within 18 months of entitlement approval.
+
+4. **Outcome Metrics:** Pilot a supplemental report tracking actual occupancy, vacancy rates, and achieved rent levels for completed projects.
+
+5. **Annual Reconciliation:** Require jurisdictions to report on prior-year pipeline projects that have not advanced, with explanations for delays.
+
+The current system creates a false sense of progress. Berkeley's impressive "113% of RHNA" figure obscures the reality that less than 10% of those units have begun construction, and barely 1% are ready for occupancy.
+
+---
+
 ## Recommendations
 
 1. **Improve Accela Data Entry:** Require structured data fields for income levels, deed restriction status, and milestone dates.

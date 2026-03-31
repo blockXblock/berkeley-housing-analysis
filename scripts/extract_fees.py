@@ -6,11 +6,12 @@ Extracts fee data from Accela text files and inserts into permit_fees table.
 Handles multiple formats:
 1. Tabular: | Date | Invoice | Amount | rows
 2. Line format: 04/26/2022 | Invoice 499818 | $13,055.00
-3. Summary: Total Paid: $X or Total Fees: $X (only used if no detailed records)
+3. Summary: Total Paid: $X, Total Paid Fees: $X, TOTAL PAID $X
 4. Parenthetical: (Invoice 478368: $750.00 on 10/21/2021)
-5. Note format: largest single payment $122,310.00 on 08/25/2021
+5. Itemized: Fee Name: $100.00
 
 Separates Planning permits (ZP, PLN, DRCP, DRCF) from Building permits (B).
+Keeps BOTH detailed and summary records, deduplicating only within same permit.
 """
 
 import os
@@ -27,10 +28,7 @@ TEXT_FILES_DIR = Path(__file__).parent.parent / "data" / "raw" / "accela_status"
 def create_permit_fees_table(conn):
     """Create permit_fees table if it doesn't exist."""
     cursor = conn.cursor()
-
-    # Drop and recreate to add permit_type
     cursor.execute("DROP TABLE IF EXISTS permit_fees")
-
     cursor.execute("""
         CREATE TABLE permit_fees (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -47,7 +45,6 @@ def create_permit_fees_table(conn):
             created_at TEXT DEFAULT CURRENT_TIMESTAMP
         )
     """)
-    # Create indexes
     cursor.execute("CREATE INDEX idx_permit_fees_permit ON permit_fees(permit_number)")
     cursor.execute("CREATE INDEX idx_permit_fees_address ON permit_fees(address)")
     cursor.execute("CREATE INDEX idx_permit_fees_type ON permit_fees(permit_type)")
@@ -61,9 +58,11 @@ def get_permit_type(permit_number):
     permit_number = permit_number.upper()
     if permit_number.startswith('B'):
         return 'Building'
-    elif permit_number.startswith(('ZP', 'PLN', 'DRCP', 'DRCF', 'LMSAP', 'ZCBL')):
+    elif permit_number.startswith(('ZP', 'PLN', 'DRCP', 'DRCF', 'LMSAP', 'ZCBL', 'UPPH')):
         return 'Planning'
     elif permit_number.startswith('P') and re.match(r'P\d{4}-', permit_number):
+        return 'Planning'
+    elif permit_number.startswith('PREAPP'):
         return 'Planning'
     else:
         return 'Unknown'
@@ -107,8 +106,7 @@ def parse_date(date_str):
 
 def extract_fees_from_file(filepath):
     """Extract all fee records from a single text file."""
-    detailed_fees = []  # Fees with invoice numbers/dates
-    summary_fees = []   # Summary totals (fallback)
+    all_fees = []  # All fees (detailed and summaries)
 
     try:
         with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
@@ -123,26 +121,66 @@ def extract_fees_from_file(filepath):
 
     current_permit = default_permit
     current_address = default_address
+    in_fee_section = False
+
+    # Track which permits have detailed fees
+    permits_with_details = set()
 
     lines = content.split('\n')
 
     for i, line in enumerate(lines):
         line_stripped = line.strip()
 
-        # Check for permit number changes
-        permit_match = re.search(r'Permit\s*(?:Number|#|No\.?):\s*([A-Z]+\d{4}-\d{4,5})', line, re.IGNORECASE)
+        # Check for permit number changes - multiple formats
+        # Format: "Permit Number: ZP2022-0170" or "Permit #: B2023-06416"
+        permit_match = re.search(r'Permit\s*(?:Number|#|No\.?):\s*([A-Z]+\d{4}-\d{4,5}(?:-[A-Z0-9]+)?)', line, re.IGNORECASE)
         if permit_match:
             current_permit = permit_match.group(1).upper()
+
+        # Format: "RECORD 12: B2023-06416"
+        record_match = re.search(r'RECORD\s*\d+[^:]*:\s*([A-Z]+\d{4}-\d{4,5}(?:-[A-Z0-9]+)?)', line, re.IGNORECASE)
+        if record_match:
+            current_permit = record_match.group(1).upper()
 
         # Check for address
         address_match = re.search(r'Address:\s*(.+?)(?:,\s*BERKELEY|$)', line, re.IGNORECASE)
         if address_match:
             current_address = address_match.group(1).strip()
 
-        # Check for RECORD markers
-        record_match = re.search(r'RECORD\s*\d+.*?:\s*([A-Z]+\d{4}-\d{4,5})', line, re.IGNORECASE)
-        if record_match:
-            current_permit = record_match.group(1).upper()
+        # Detect fee section start
+        if re.match(r'^FEES?:?\s*$', line_stripped, re.IGNORECASE) or line_stripped.startswith('Fees:') or line_stripped.startswith('FEES:'):
+            in_fee_section = True
+
+            # Check for inline total: "Fees: TOTAL PAID $1,259,375.39"
+            inline_total = re.search(r'Fees:\s*TOTAL\s*PAID\s*\$?([\d,]+\.?\d*)', line, re.IGNORECASE)
+            if inline_total:
+                amount = parse_fee_amount(inline_total.group(1))
+                if amount and amount > 0:
+                    all_fees.append({
+                        'permit_number': current_permit or 'UNKNOWN',
+                        'permit_type': get_permit_type(current_permit),
+                        'address': current_address or default_address,
+                        'fee_description': 'Total Paid (building)',
+                        'amount': amount,
+                        'fee_date': None,
+                        'status': 'paid',
+                        'invoice_number': None,
+                        'is_summary': 1,
+                        'source_file': filename
+                    })
+            continue
+
+        # Detect fee section end
+        if in_fee_section and (
+            line_stripped.startswith('Attachments') or
+            line_stripped.startswith('ATTACHMENTS') or
+            line_stripped.startswith('---') or
+            line_stripped.startswith('===') or
+            (line_stripped.startswith('RECORD') and 'Fee' not in line_stripped) or
+            line_stripped.startswith('Processing Status')
+        ):
+            in_fee_section = False
+            continue
 
         # Pattern 1: Tabular format | Date | Invoice | Amount |
         table_match = re.match(r'\|\s*(\d{2}/\d{2}/\d{4})\s*\|\s*(\d{5,6})\s*\|\s*\$?([\d,]+\.?\d*)\s*\|?', line_stripped)
@@ -151,10 +189,11 @@ def extract_fees_from_file(filepath):
             invoice = table_match.group(2)
             amount = parse_fee_amount(table_match.group(3))
             if amount and amount > 0:
-                detailed_fees.append({
+                permits_with_details.add(current_permit)
+                all_fees.append({
                     'permit_number': current_permit or 'UNKNOWN',
                     'permit_type': get_permit_type(current_permit),
-                    'address': current_address,
+                    'address': current_address or default_address,
                     'fee_description': None,
                     'amount': amount,
                     'fee_date': fee_date,
@@ -172,10 +211,11 @@ def extract_fees_from_file(filepath):
             invoice = line_match.group(2)
             amount = parse_fee_amount(line_match.group(3))
             if amount and amount > 0:
-                detailed_fees.append({
+                permits_with_details.add(current_permit)
+                all_fees.append({
                     'permit_number': current_permit or 'UNKNOWN',
                     'permit_type': get_permit_type(current_permit),
-                    'address': current_address,
+                    'address': current_address or default_address,
                     'fee_description': None,
                     'amount': amount,
                     'fee_date': fee_date,
@@ -186,17 +226,40 @@ def extract_fees_from_file(filepath):
                 })
             continue
 
-        # Pattern 3: Parenthetical (Invoice 478368: $750.00 on 10/21/2021)
+        # Pattern 3: Short date/invoice format: "04/10/2017, Invoice 335703, $100.00"
+        short_match = re.match(r'(\d{2}/\d{2}/\d{4}),?\s*Invoice\s*(\d{5,6}),?\s*\$?([\d,]+\.?\d*)', line_stripped)
+        if short_match:
+            fee_date = parse_date(short_match.group(1))
+            invoice = short_match.group(2)
+            amount = parse_fee_amount(short_match.group(3))
+            if amount and amount > 0:
+                permits_with_details.add(current_permit)
+                all_fees.append({
+                    'permit_number': current_permit or 'UNKNOWN',
+                    'permit_type': get_permit_type(current_permit),
+                    'address': current_address or default_address,
+                    'fee_description': None,
+                    'amount': amount,
+                    'fee_date': fee_date,
+                    'status': 'paid',
+                    'invoice_number': invoice,
+                    'is_summary': 0,
+                    'source_file': filename
+                })
+            continue
+
+        # Pattern 4: Parenthetical (Invoice 478368: $750.00 on 10/21/2021)
         paren_matches = re.findall(r'\(Invoice\s*(\d{5,6}):\s*\$?([\d,]+\.?\d*)\s*on\s*(\d{2}/\d{2}/\d{4})\)', line, re.IGNORECASE)
         for match in paren_matches:
             invoice = match[0]
             amount = parse_fee_amount(match[1])
             fee_date = parse_date(match[2])
             if amount and amount > 0:
-                detailed_fees.append({
+                permits_with_details.add(current_permit)
+                all_fees.append({
                     'permit_number': current_permit or 'UNKNOWN',
                     'permit_type': get_permit_type(current_permit),
-                    'address': current_address,
+                    'address': current_address or default_address,
                     'fee_description': None,
                     'amount': amount,
                     'fee_date': fee_date,
@@ -206,37 +269,84 @@ def extract_fees_from_file(filepath):
                     'source_file': filename
                 })
 
-        # Pattern 4: Summary totals - collect but mark as summary
-        total_match = re.search(r'(?:Total\s*(?:Paid|Fees?))[:\s]*\$?([\d,]+\.?\d*)', line, re.IGNORECASE)
+        # Pattern 5: Itemized fee lines "Fee Name: $100.00" or "Fee Name $100.00"
+        # Only within fee section
+        if in_fee_section:
+            itemized_match = re.match(r'^([A-Za-z][A-Za-z\s]+(?:Fee|Permit|Review|Charge|Technology))[:.]?\s*\$?([\d,]+\.?\d+)$', line_stripped)
+            if itemized_match:
+                fee_desc = itemized_match.group(1).strip()
+                amount = parse_fee_amount(itemized_match.group(2))
+                if amount and amount > 0:
+                    permits_with_details.add(current_permit)
+                    all_fees.append({
+                        'permit_number': current_permit or 'UNKNOWN',
+                        'permit_type': get_permit_type(current_permit),
+                        'address': current_address or default_address,
+                        'fee_description': fee_desc,
+                        'amount': amount,
+                        'fee_date': None,
+                        'status': 'paid',
+                        'invoice_number': None,
+                        'is_summary': 0,
+                        'source_file': filename
+                    })
+                continue
+
+        # Pattern 6: Outstanding fees "Outstanding: MM/DD/YYYY, Invoice XXXXXX, $XXX.XX"
+        outstanding_match = re.match(r'Outstanding:\s*(\d{2}/\d{2}/\d{4}),?\s*Invoice\s*(\d{5,6}),?\s*\$?([\d,]+\.?\d*)', line_stripped)
+        if outstanding_match:
+            fee_date = parse_date(outstanding_match.group(1))
+            invoice = outstanding_match.group(2)
+            amount = parse_fee_amount(outstanding_match.group(3))
+            if amount and amount > 0:
+                permits_with_details.add(current_permit)
+                all_fees.append({
+                    'permit_number': current_permit or 'UNKNOWN',
+                    'permit_type': get_permit_type(current_permit),
+                    'address': current_address or default_address,
+                    'fee_description': 'Outstanding',
+                    'amount': amount,
+                    'fee_date': fee_date,
+                    'status': 'outstanding',
+                    'invoice_number': invoice,
+                    'is_summary': 0,
+                    'source_file': filename
+                })
+            continue
+
+        # Pattern 7: Summary totals - multiple formats
+        # "Total Paid: $X" or "Total Paid Fees: $X" or "Total paid fees: $X" or "Total paid: $X"
+        total_match = re.search(r'Total\s*(?:Paid\s*)?(?:Fees?)?\s*[:=]\s*\$?([\d,]+\.?\d*)', line, re.IGNORECASE)
         if total_match:
             amount = parse_fee_amount(total_match.group(1))
             if amount and amount > 0:
-                summary_fees.append({
-                    'permit_number': current_permit or 'UNKNOWN',
-                    'permit_type': get_permit_type(current_permit),
-                    'address': current_address,
-                    'fee_description': 'Total Fees (summary)',
-                    'amount': amount,
-                    'fee_date': None,
-                    'status': 'paid',
-                    'invoice_number': None,
-                    'is_summary': 1,
-                    'source_file': filename
-                })
+                # Don't add if we already have this exact amount for this permit
+                existing = [f for f in all_fees if f['permit_number'] == current_permit and abs(f['amount'] - amount) < 0.01]
+                if not existing:
+                    all_fees.append({
+                        'permit_number': current_permit or 'UNKNOWN',
+                        'permit_type': get_permit_type(current_permit),
+                        'address': current_address or default_address,
+                        'fee_description': 'Total Paid',
+                        'amount': amount,
+                        'fee_date': None,
+                        'status': 'paid',
+                        'invoice_number': None,
+                        'is_summary': 1,
+                        'source_file': filename
+                    })
 
-    # Return detailed fees if available, otherwise use summary
-    # Group by permit to avoid duplicate summaries
-    if detailed_fees:
-        return detailed_fees
-    elif summary_fees:
-        # Deduplicate summary fees by permit_number (take highest amount per permit)
-        by_permit = {}
-        for fee in summary_fees:
-            pn = fee['permit_number']
-            if pn not in by_permit or fee['amount'] > by_permit[pn]['amount']:
-                by_permit[pn] = fee
-        return list(by_permit.values())
-    return []
+    # Post-process: For permits with detailed fees, remove their summaries to avoid double-counting
+    # But keep summaries for permits that ONLY have summaries
+    final_fees = []
+    for fee in all_fees:
+        permit = fee['permit_number']
+        if fee['is_summary'] and permit in permits_with_details:
+            # Skip summary if we have detailed fees for this permit
+            continue
+        final_fees.append(fee)
+
+    return final_fees
 
 def extract_all_fees():
     """Extract fees from all text files and insert into database."""
@@ -251,6 +361,8 @@ def extract_all_fees():
     total_summary = 0
     total_amount_detailed = 0.0
     total_amount_summary = 0.0
+    building_fees = 0.0
+    planning_fees = 0.0
     projects_with_fees = set()
 
     for filepath in all_files:
@@ -278,9 +390,17 @@ def extract_all_fees():
             else:
                 total_detailed += 1
                 total_amount_detailed += fee['amount']
+
+            if fee['permit_type'] == 'Building':
+                building_fees += fee['amount']
+            elif fee['permit_type'] == 'Planning':
+                planning_fees += fee['amount']
+
             projects_with_fees.add(fee['permit_number'])
 
     conn.commit()
+
+    total_all = total_amount_detailed + total_amount_summary
 
     # Generate summary
     print("\n" + "="*60)
@@ -288,27 +408,26 @@ def extract_all_fees():
     print("="*60)
     print(f"📊 Detailed fee records: {total_detailed:,} (${total_amount_detailed:,.2f})")
     print(f"📋 Summary fee records: {total_summary:,} (${total_amount_summary:,.2f})")
-    print(f"💰 Total (detailed only): ${total_amount_detailed:,.2f}")
+    print(f"💰 TOTAL ALL FEES: ${total_all:,.2f}")
     print(f"🏗️  Projects with fee data: {len(projects_with_fees)}")
 
     # Show by permit type
-    print("\n📊 Fees by Permit Type (detailed only):")
+    print("\n📊 Fees by Permit Type:")
     cursor.execute("""
         SELECT permit_type, COUNT(*) as records, SUM(amount) as total
         FROM permit_fees
-        WHERE is_summary = 0
         GROUP BY permit_type
         ORDER BY total DESC
     """)
     for row in cursor.fetchall():
         print(f"   {row[0]:12} {row[1]:5} records  ${row[2]:>15,.2f}")
 
-    # Show fees by year (detailed only)
-    print("\n📅 Fees by Year (detailed only):")
+    # Show fees by year
+    print("\n📅 Fees by Year (dated records only):")
     cursor.execute("""
         SELECT substr(fee_date, 1, 4) as year, SUM(amount) as total, COUNT(*) as count
         FROM permit_fees
-        WHERE fee_date IS NOT NULL AND is_summary = 0
+        WHERE fee_date IS NOT NULL
         GROUP BY year
         ORDER BY year DESC
     """)
@@ -316,28 +435,32 @@ def extract_all_fees():
     for row in cursor.fetchall():
         print(f"   {row[0]}: ${row[1]:>12,.2f} ({row[2]} records)")
         yearly_total += row[1]
-    print(f"   {'TOTAL':4}: ${yearly_total:>12,.2f}")
 
-    # Top 10 by amount (detailed)
-    print("\n📈 Top 10 fees by amount (detailed):")
+    # Show undated summary fees
+    cursor.execute("SELECT SUM(amount) FROM permit_fees WHERE fee_date IS NULL")
+    undated = cursor.fetchone()[0] or 0
+    print(f"   Undated summaries: ${undated:>12,.2f}")
+    print(f"   TOTAL: ${total_all:>12,.2f}")
+
+    # Top 15 by amount
+    print("\n📈 Top 15 fees by amount:")
     cursor.execute("""
-        SELECT permit_number, permit_type, address, amount, fee_date, invoice_number
+        SELECT permit_number, permit_type, address, amount, fee_date, is_summary
         FROM permit_fees
-        WHERE is_summary = 0
         ORDER BY amount DESC
-        LIMIT 10
+        LIMIT 15
     """)
     for row in cursor.fetchall():
-        print(f"   ${row[3]:>12,.2f} | {row[1]:8} | {row[0]} | {row[2] or 'N/A'}")
+        marker = '(S)' if row[5] else '(D)'
+        print(f"   ${row[3]:>12,.2f} {marker} | {row[1]:8} | {row[0]} | {row[2] or 'N/A'}")
 
     # Export to JSON for explorer
     print("\n💾 Exporting fee data to JSON...")
 
-    # Build fee data by project (detailed only)
+    # Build fee data by project
     cursor.execute("""
         SELECT permit_number, permit_type, address, SUM(amount) as total_fees, COUNT(*) as fee_count
         FROM permit_fees
-        WHERE is_summary = 0
         GROUP BY permit_number
         ORDER BY total_fees DESC
     """)
@@ -351,11 +474,11 @@ def extract_all_fees():
             'fee_count': row[4]
         }
 
-    # Build fee data by year (detailed only)
+    # Build fee data by year (dated records only)
     cursor.execute("""
         SELECT substr(fee_date, 1, 4) as year, SUM(amount) as total
         FROM permit_fees
-        WHERE fee_date IS NOT NULL AND is_summary = 0
+        WHERE fee_date IS NOT NULL
         GROUP BY year
         ORDER BY year
     """)
@@ -365,16 +488,15 @@ def extract_all_fees():
     cursor.execute("""
         SELECT permit_type, SUM(amount) as total, COUNT(*) as count
         FROM permit_fees
-        WHERE is_summary = 0
         GROUP BY permit_type
     """)
     by_type = {row[0]: {'total': row[1], 'count': row[2]} for row in cursor.fetchall()}
 
-    # Large fees (>$50k, detailed only)
+    # Large fees (>$50k)
     cursor.execute("""
         SELECT permit_number, permit_type, address, amount, fee_date, invoice_number, source_file
         FROM permit_fees
-        WHERE amount > 50000 AND is_summary = 0
+        WHERE amount > 50000
         ORDER BY amount DESC
     """)
     large_fees = [{
@@ -387,11 +509,10 @@ def extract_all_fees():
         'source': row[6]
     } for row in cursor.fetchall()]
 
-    # All detailed records
+    # All records for detailed analysis
     cursor.execute("""
-        SELECT permit_number, permit_type, address, fee_description, amount, fee_date, status, invoice_number, source_file
+        SELECT permit_number, permit_type, address, fee_description, amount, fee_date, status, invoice_number, is_summary, source_file
         FROM permit_fees
-        WHERE is_summary = 0
         ORDER BY amount DESC
     """)
     all_records = [{
@@ -403,15 +524,18 @@ def extract_all_fees():
         'date': row[5],
         'status': row[6],
         'invoice': row[7],
-        'source': row[8]
+        'is_summary': row[8],
+        'source': row[9]
     } for row in cursor.fetchall()]
 
     fee_data = {
         'by_project': by_project,
         'by_year': by_year,
         'by_type': by_type,
-        'total': total_amount_detailed,
-        'record_count': total_detailed,
+        'total': total_all,
+        'total_detailed': total_amount_detailed,
+        'total_summary': total_amount_summary,
+        'record_count': total_detailed + total_summary,
         'project_count': len([p for p in projects_with_fees if p != 'UNKNOWN']),
         'large_fees': large_fees,
         'all_records': all_records

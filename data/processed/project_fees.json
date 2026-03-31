@@ -3,9 +3,58 @@
     "UNKNOWN": {
       "permit_number": "UNKNOWN",
       "permit_type": "Unknown",
-      "address": "1701 SAN PABLO AVE",
-      "total_fees": 406530.81,
-      "fee_count": 48
+      "address": "2587 TELEGRAPH Ave",
+      "total_fees": 3365545.88,
+      "fee_count": 74
+    },
+    "B2024-05944": {
+      "permit_number": "B2024-05944",
+      "permit_type": "Building",
+      "address": "2300 ELLSWORTH St 94704",
+      "total_fees": 2937035.82,
+      "fee_count": 2
+    },
+    "B2024-01268": {
+      "permit_number": "B2024-01268",
+      "permit_type": "Building",
+      "address": "2016 ASHBY Ave",
+      "total_fees": 2192720.87,
+      "fee_count": 1
+    },
+    "B2023-06416": {
+      "permit_number": "B2023-06416",
+      "permit_type": "Building",
+      "address": "3030 TELEGRAPH Ave",
+      "total_fees": 1259375.39,
+      "fee_count": 1
+    },
+    "B2021-02905": {
+      "permit_number": "B2021-02905",
+      "permit_type": "Building",
+      "address": "2001 ASHBY AVE",
+      "total_fees": 965120.98,
+      "fee_count": 1
+    },
+    "B2023-00774": {
+      "permit_number": "B2023-00774",
+      "permit_type": "Building",
+      "address": "1752 SHATTUCK AVE",
+      "total_fees": 628046.4,
+      "fee_count": 1
+    },
+    "B2025-05534": {
+      "permit_number": "B2025-05534",
+      "permit_type": "Building",
+      "address": "1825 San Pablo, Suite 200, Oakland CA 94612",
+      "total_fees": 309266.48,
+      "fee_count": 1
+    },
+    "ZP2021-0046": {
+      "permit_number": "ZP2021-0046",
+      "permit_type": "Planning",
+      "address": "2136 SAN PABLO AVE",
+      "total_fees": 212874.0,
+      "fee_count": 1
     },
     "ZP2022-0019": {
       "permit_number": "ZP2022-0019",
@@ -14,12 +63,40 @@
       "total_fees": 179362.17,
       "fee_count": 79
     },
+    "B2022-04366": {
+      "permit_number": "B2022-04366",
+      "permit_type": "Building",
+      "address": "1367 UNIVERSITY Ave",
+      "total_fees": 128165.99,
+      "fee_count": 1
+    },
+    "ZP2024-0079": {
+      "permit_number": "ZP2024-0079",
+      "permit_type": "Planning",
+      "address": "2036 BANCROFT Way",
+      "total_fees": 114313.0,
+      "fee_count": 1
+    },
     "ZP2021-0158": {
       "permit_number": "ZP2021-0158",
       "permit_type": "Planning",
       "address": "130 BERKELEY Sq",
       "total_fees": 107645.5,
       "fee_count": 8
+    },
+    "ZP2022-0021": {
+      "permit_number": "ZP2022-0021",
+      "permit_type": "Planning",
+      "address": "2449 DWIGHT Way",
+      "total_fees": 101780.0,
+      "fee_count": 1
+    },
+    "ZP2022-0011": {
+      "permit_number": "ZP2022-0011",
+      "permit_type": "Planning",
+      "address": "1752 SHATTUCK AVE",
+      "total_fees": 92135.6,
+      "fee_count": 6
     },
     "ZP2022-0171": {
       "permit_number": "ZP2022-0171",
@@ -28,12 +105,33 @@
       "total_fees": 91456.1,
       "fee_count": 12
     },
+    "ZP2022-0046": {
+      "permit_number": "ZP2022-0046",
+      "permit_type": "Planning",
+      "address": "3000 SHATTUCK Ave",
+      "total_fees": 89178.38,
+      "fee_count": 1
+    },
     "P2022-0038": {
       "permit_number": "P2022-0038",
       "permit_type": "Planning",
       "address": "** 2820 San Pablo Ave",
       "total_fees": 81603.0,
       "fee_count": 16
+    },
+    "ZP2024-0075": {
+      "permit_number": "ZP2024-0075",
+      "permit_type": "Planning",
+      "address": "1899 OXFORD St",
+      "total_fees": 79652.0,
+      "fee_count": 1
+    },
+    "ZP2023-0163": {
+      "permit_number": "ZP2023-0163",
+      "permit_type": "Planning",
+      "address": "** 2100 Milvia St",
+      "total_fees": 78888.0,
+      "fee_count": 1
     },
     "ZP2023-0089": {
       "permit_number": "ZP2023-0089",
@@ -49,12 +147,68 @@
       "total_fees": 61567.0,
       "fee_count": 10
     },
+    "ZP2023-0079": {
+      "permit_number": "ZP2023-0079",
+      "permit_type": "Planning",
+      "address": "** 2274 Shattuck Ave",
+      "total_fees": 51650.76,
+      "fee_count": 2
+    },
+    "ZP2024-0066": {
+      "permit_number": "ZP2024-0066",
+      "permit_type": "Planning",
+      "address": "1683 SHATTUCK AVE A",
+      "total_fees": 48988.0,
+      "fee_count": 1
+    },
     "ZP2024-0070": {
       "permit_number": "ZP2024-0070",
       "permit_type": "Planning",
       "address": "** 2442 Haste St",
       "total_fees": 39505.0,
       "fee_count": 10
+    },
+    "ZP2023-0024": {
+      "permit_number": "ZP2023-0024",
+      "permit_type": "Planning",
+      "address": "2300 ELLSWORTH St",
+      "total_fees": 38885.0,
+      "fee_count": 1
+    },
+    "ZP2023-0040": {
+      "permit_number": "ZP2023-0040",
+      "permit_type": "Planning",
+      "address": "1974 Shattuck",
+      "total_fees": 38817.0,
+      "fee_count": 1
+    },
+    "PLN2022-0018": {
+      "permit_number": "PLN2022-0018",
+      "permit_type": "Planning",
+      "address": "2538 DURANT Ave",
+      "total_fees": 38537.7,
+      "fee_count": 2
+    },
+    "ZP2022-0097": {
+      "permit_number": "ZP2022-0097",
+      "permit_type": "Planning",
+      "address": "2538 DURANT Ave",
+      "total_fees": 38137.7,
+      "fee_count": 1
+    },
+    "ZP2018-0112": {
+      "permit_number": "ZP2018-0112",
+      "permit_type": "Planning",
+      "address": "2198 SAN PABLO AVE",
+      "total_fees": 36610.0,
+      "fee_count": 1
+    },
+    "ZP2024-0114": {
+      "permit_number": "ZP2024-0114",
+      "permit_type": "Planning",
+      "address": "2138 KITTREDGE St",
+      "total_fees": 34925.0,
+      "fee_count": 1
     },
     "ZP2025-0105": {
       "permit_number": "ZP2025-0105",
@@ -63,12 +217,40 @@
       "total_fees": 27690.0,
       "fee_count": 8
     },
+    "PLN2021-0072": {
+      "permit_number": "PLN2021-0072",
+      "permit_type": "Planning",
+      "address": "2024 ASHBY Ave",
+      "total_fees": 26270.0,
+      "fee_count": 1
+    },
+    "ZP2023-0103": {
+      "permit_number": "ZP2023-0103",
+      "permit_type": "Planning",
+      "address": "2403 SAN PABLO AVE",
+      "total_fees": 25624.0,
+      "fee_count": 1
+    },
+    "B2021-05326": {
+      "permit_number": "B2021-05326",
+      "permit_type": "Building",
+      "address": "1367 UNIVERSITY Ave",
+      "total_fees": 24059.48,
+      "fee_count": 1
+    },
     "ZP2024-0162": {
       "permit_number": "ZP2024-0162",
       "permit_type": "Planning",
       "address": "2425 Durant Ave",
       "total_fees": 22880.0,
       "fee_count": 14
+    },
+    "ZP2024-0029": {
+      "permit_number": "ZP2024-0029",
+      "permit_type": "Planning",
+      "address": "2680 Bancroft Way",
+      "total_fees": 19998.0,
+      "fee_count": 1
     },
     "ZP2024-0181": {
       "permit_number": "ZP2024-0181",
@@ -84,6 +266,69 @@
       "total_fees": 18303.0,
       "fee_count": 9
     },
+    "ZP2024-0096": {
+      "permit_number": "ZP2024-0096",
+      "permit_type": "Planning",
+      "address": "2417 MARINER SQUARE LOOP 247, ALAMEDA CA 94501",
+      "total_fees": 16267.5,
+      "fee_count": 1
+    },
+    "ZP2022-0149": {
+      "permit_number": "ZP2022-0149",
+      "permit_type": "Planning",
+      "address": "2420 SHATTUCK Ave",
+      "total_fees": 16110.6,
+      "fee_count": 1
+    },
+    "ZP2024-0126": {
+      "permit_number": "ZP2024-0126",
+      "permit_type": "Planning",
+      "address": "2425 CHANNING WAY B PM",
+      "total_fees": 15837.5,
+      "fee_count": 1
+    },
+    "ZP2024-0074": {
+      "permit_number": "ZP2024-0074",
+      "permit_type": "Planning",
+      "address": "22377 Stevens Creek Blvd, Cupertino CA 95014",
+      "total_fees": 14103.0,
+      "fee_count": 1
+    },
+    "ZP2023-0090": {
+      "permit_number": "ZP2023-0090",
+      "permit_type": "Planning",
+      "address": "2672 RELIEZ VALLEY RD, MARTINEZ CA 94553",
+      "total_fees": 13729.0,
+      "fee_count": 1
+    },
+    "ZP2024-0071": {
+      "permit_number": "ZP2024-0071",
+      "permit_type": "Planning",
+      "address": "2955 SHATTUCK Ave",
+      "total_fees": 12900.0,
+      "fee_count": 1
+    },
+    "B2021-05653": {
+      "permit_number": "B2021-05653",
+      "permit_type": "Building",
+      "address": "2001 ASHBY AVE",
+      "total_fees": 11975.48,
+      "fee_count": 1
+    },
+    "ZP2024-0058": {
+      "permit_number": "ZP2024-0058",
+      "permit_type": "Planning",
+      "address": "1600 Shattuck Ave 218",
+      "total_fees": 11929.25,
+      "fee_count": 1
+    },
+    "ZP2023-0107": {
+      "permit_number": "ZP2023-0107",
+      "permit_type": "Planning",
+      "address": "2462 Bancroft Way",
+      "total_fees": 11383.0,
+      "fee_count": 1
+    },
     "ZP2024-0116": {
       "permit_number": "ZP2024-0116",
       "permit_type": "Planning",
@@ -91,12 +336,47 @@
       "total_fees": 11335.0,
       "fee_count": 10
     },
+    "ZP2023-0058": {
+      "permit_number": "ZP2023-0058",
+      "permit_type": "Planning",
+      "address": "9101 BURNING TREE RD, BETHESDA MD 20817",
+      "total_fees": 11039.0,
+      "fee_count": 1
+    },
+    "ZP2024-0057": {
+      "permit_number": "ZP2024-0057",
+      "permit_type": "Planning",
+      "address": "1442 A WALNUT ST 349, YOCHAI KIDRON",
+      "total_fees": 10968.0,
+      "fee_count": 1
+    },
     "ZP2024-0014": {
       "permit_number": "ZP2024-0014",
       "permit_type": "Planning",
       "address": "** 1048 Keith Ave",
       "total_fees": 10579.0,
       "fee_count": 9
+    },
+    "ZP2021-0220": {
+      "permit_number": "ZP2021-0220",
+      "permit_type": "Planning",
+      "address": "2403 SAN PABLO AVE",
+      "total_fees": 10530.0,
+      "fee_count": 1
+    },
+    "ZP2023-0099": {
+      "permit_number": "ZP2023-0099",
+      "permit_type": "Planning",
+      "address": "499 EMBARCADERO, OAKLAND CA 94606",
+      "total_fees": 10068.0,
+      "fee_count": 1
+    },
+    "ZP2023-0138": {
+      "permit_number": "ZP2023-0138",
+      "permit_type": "Planning",
+      "address": "2550 SHATTUCK Ave",
+      "total_fees": 10068.0,
+      "fee_count": 1
     },
     "ZP2024-0129": {
       "permit_number": "ZP2024-0129",
@@ -126,12 +406,96 @@
       "total_fees": 9255.0,
       "fee_count": 8
     },
+    "ZP2022-0132": {
+      "permit_number": "ZP2022-0132",
+      "permit_type": "Planning",
+      "address": "614 Bridgewater Cir, Danville CA 94526",
+      "total_fees": 8715.0,
+      "fee_count": 1
+    },
+    "ZP2025-0046": {
+      "permit_number": "ZP2025-0046",
+      "permit_type": "Planning",
+      "address": "1752 SHATTUCK AVE",
+      "total_fees": 8205.0,
+      "fee_count": 1
+    },
+    "ZP2024-0059": {
+      "permit_number": "ZP2024-0059",
+      "permit_type": "Planning",
+      "address": "1958A UNIVERSITY AVE",
+      "total_fees": 7952.0,
+      "fee_count": 1
+    },
+    "ZP2019-0173": {
+      "permit_number": "ZP2019-0173",
+      "permit_type": "Planning",
+      "address": "1367 University Ave",
+      "total_fees": 7695.0,
+      "fee_count": 1
+    },
+    "ZP2023-0095": {
+      "permit_number": "ZP2023-0095",
+      "permit_type": "Planning",
+      "address": "2660 Bancroft Way",
+      "total_fees": 7423.0,
+      "fee_count": 1
+    },
+    "ZP2024-0047": {
+      "permit_number": "ZP2024-0047",
+      "permit_type": "Planning",
+      "address": "2091 ROSE ST",
+      "total_fees": 7423.0,
+      "fee_count": 1
+    },
+    "DRCP2022-0007": {
+      "permit_number": "DRCP2022-0007",
+      "permit_type": "Planning",
+      "address": "2538 DURANT Ave",
+      "total_fees": 6595.0,
+      "fee_count": 1
+    },
+    "DRCP2023-0015": {
+      "permit_number": "DRCP2023-0015",
+      "permit_type": "Planning",
+      "address": "2550 SHATTUCK Ave",
+      "total_fees": 6595.0,
+      "fee_count": 1
+    },
+    "PLN2022-0065": {
+      "permit_number": "PLN2022-0065",
+      "permit_type": "Planning",
+      "address": "2538 DURANT Ave",
+      "total_fees": 6398.0,
+      "fee_count": 1
+    },
+    "ZP2024-0033": {
+      "permit_number": "ZP2024-0033",
+      "permit_type": "Planning",
+      "address": "2278 SHATTUCK AVE",
+      "total_fees": 6398.0,
+      "fee_count": 1
+    },
     "ZP2024-0008": {
       "permit_number": "ZP2024-0008",
       "permit_type": "Planning",
       "address": "** 1614 Sixth St",
       "total_fees": 5782.0,
       "fee_count": 4
+    },
+    "ZP2019-0179": {
+      "permit_number": "ZP2019-0179",
+      "permit_type": "Planning",
+      "address": "2136 SAN PABLO AVE",
+      "total_fees": 5647.5,
+      "fee_count": 1
+    },
+    "DRCF2023-0003": {
+      "permit_number": "DRCF2023-0003",
+      "permit_type": "Planning",
+      "address": "2538 DURANT Ave",
+      "total_fees": 5570.0,
+      "fee_count": 1
     },
     "LMSAP2024-0005": {
       "permit_number": "LMSAP2024-0005",
@@ -140,6 +504,13 @@
       "total_fees": 5570.0,
       "fee_count": 2
     },
+    "ZP2025-0101": {
+      "permit_number": "ZP2025-0101",
+      "permit_type": "Planning",
+      "address": "2190 Shattuck Ave",
+      "total_fees": 5430.0,
+      "fee_count": 1
+    },
     "ZP2024-0131": {
       "permit_number": "ZP2024-0131",
       "permit_type": "Planning",
@@ -147,12 +518,131 @@
       "total_fees": 5330.0,
       "fee_count": 6
     },
+    "DRCP2018-0003": {
+      "permit_number": "DRCP2018-0003",
+      "permit_type": "Planning",
+      "address": "2198 SAN PABLO AVE",
+      "total_fees": 5050.0,
+      "fee_count": 1
+    },
+    "DRCP2021-0002": {
+      "permit_number": "DRCP2021-0002",
+      "permit_type": "Planning",
+      "address": "2136 SAN PABLO AVE",
+      "total_fees": 5050.0,
+      "fee_count": 1
+    },
+    "DRCP2022-0001": {
+      "permit_number": "DRCP2022-0001",
+      "permit_type": "Planning",
+      "address": "1752 SHATTUCK AVE",
+      "total_fees": 5050.0,
+      "fee_count": 1
+    },
+    "DRCP2022-0003": {
+      "permit_number": "DRCP2022-0003",
+      "permit_type": "Planning",
+      "address": "2449 DWIGHT Way",
+      "total_fees": 5050.0,
+      "fee_count": 1
+    },
+    "DRCF2023-0001": {
+      "permit_number": "DRCF2023-0001",
+      "permit_type": "Planning",
+      "address": "1752 SHATTUCK AVE",
+      "total_fees": 4300.0,
+      "fee_count": 1
+    },
+    "DRCF2023-0005": {
+      "permit_number": "DRCF2023-0005",
+      "permit_type": "Planning",
+      "address": "2480 Bancroft Way",
+      "total_fees": 4300.0,
+      "fee_count": 1
+    },
+    "DRCF2024-0003": {
+      "permit_number": "DRCF2024-0003",
+      "permit_type": "Planning",
+      "address": "2403 SAN PABLO AVE",
+      "total_fees": 4300.0,
+      "fee_count": 1
+    },
+    "DRCF2021-0010": {
+      "permit_number": "DRCF2021-0010",
+      "permit_type": "Planning",
+      "address": "1367 University Ave",
+      "total_fees": 3734.0,
+      "fee_count": 1
+    },
+    "B2025-00388": {
+      "permit_number": "B2025-00388",
+      "permit_type": "Building",
+      "address": "2300 ELLSWORTH St 94704",
+      "total_fees": 3521.23,
+      "fee_count": 1
+    },
+    "PLN2019-0059": {
+      "permit_number": "PLN2019-0059",
+      "permit_type": "Planning",
+      "address": "2001 ASHBY AVE",
+      "total_fees": 3460.0,
+      "fee_count": 1
+    },
     "ZP2023-0123": {
       "permit_number": "ZP2023-0123",
       "permit_type": "Planning",
       "address": "** 2833 Seventh St",
       "total_fees": 3224.0,
       "fee_count": 3
+    },
+    "ZP2026-0006": {
+      "permit_number": "ZP2026-0006",
+      "permit_type": "Planning",
+      "address": "2138 KITTREDGE St",
+      "total_fees": 3000.0,
+      "fee_count": 1
+    },
+    "DRCP2019-0014": {
+      "permit_number": "DRCP2019-0014",
+      "permit_type": "Planning",
+      "address": "1367 University Ave",
+      "total_fees": 2658.0,
+      "fee_count": 1
+    },
+    "B2015-00364": {
+      "permit_number": "B2015-00364",
+      "permit_type": "Building",
+      "address": "2601 SAN PABLO AVE",
+      "total_fees": 2573.48,
+      "fee_count": 1
+    },
+    "B2023-01026": {
+      "permit_number": "B2023-01026",
+      "permit_type": "Building",
+      "address": "1752 SHATTUCK AVE",
+      "total_fees": 2109.64,
+      "fee_count": 1
+    },
+    "DRCP2021-0022": {
+      "permit_number": "DRCP2021-0022",
+      "permit_type": "Planning",
+      "address": "2403 SAN PABLO AVE",
+      "total_fees": 1788.0,
+      "fee_count": 1
+    },
+    "PLN2021-0037": {
+      "permit_number": "PLN2021-0037",
+      "permit_type": "Planning",
+      "address": "1708 HARMON St",
+      "total_fees": 1720.0,
+      "fee_count": 2
+    },
+    "AUP2005-0099": {
+      "permit_number": "AUP2005-0099",
+      "permit_type": "Unknown",
+      "address": "1367 University Ave",
+      "total_fees": 1364.7,
+      "fee_count": 1
     },
     "PLN2023-0065": {
       "permit_number": "PLN2023-0065",
@@ -168,10 +658,108 @@
       "total_fees": 1055.0,
       "fee_count": 2
     },
+    "PLN2025-0038": {
+      "permit_number": "PLN2025-0038",
+      "permit_type": "Planning",
+      "address": "2330 DURANT Ave",
+      "total_fees": 1055.0,
+      "fee_count": 1
+    },
+    "PLN2022-0084": {
+      "permit_number": "PLN2022-0084",
+      "permit_type": "Planning",
+      "address": "2300 ELLSWORTH St",
+      "total_fees": 970.0,
+      "fee_count": 1
+    },
+    "PLN2022-0099": {
+      "permit_number": "PLN2022-0099",
+      "permit_type": "Planning",
+      "address": "1708 HARMON St",
+      "total_fees": 970.0,
+      "fee_count": 1
+    },
+    "PLN2022-0101": {
+      "permit_number": "PLN2022-0101",
+      "permit_type": "Planning",
+      "address": "1708 HARMON St",
+      "total_fees": 970.0,
+      "fee_count": 1
+    },
+    "PLN2023-0016": {
+      "permit_number": "PLN2023-0016",
+      "permit_type": "Planning",
+      "address": "2300 ELLSWORTH St",
+      "total_fees": 970.0,
+      "fee_count": 1
+    },
+    "PLN2023-0026": {
+      "permit_number": "PLN2023-0026",
+      "permit_type": "Planning",
+      "address": "2550 SHATTUCK Ave",
+      "total_fees": 970.0,
+      "fee_count": 1
+    },
+    "PLN2023-0098": {
+      "permit_number": "PLN2023-0098",
+      "permit_type": "Planning",
+      "address": "2350 TELEGRAPH Ave",
+      "total_fees": 970.0,
+      "fee_count": 1
+    },
+    "PLN2024-0024": {
+      "permit_number": "PLN2024-0024",
+      "permit_type": "Planning",
+      "address": "1434 SPRUCE ST",
+      "total_fees": 970.0,
+      "fee_count": 1
+    },
+    "AUP2004-0166": {
+      "permit_number": "AUP2004-0166",
+      "permit_type": "Unknown",
+      "address": "1367 University Ave",
+      "total_fees": 920.8,
+      "fee_count": 1
+    },
+    "ZP2015-0200": {
+      "permit_number": "ZP2015-0200",
+      "permit_type": "Planning",
+      "address": "1367 University Ave",
+      "total_fees": 878.0,
+      "fee_count": 1
+    },
+    "ZP2016-0166": {
+      "permit_number": "ZP2016-0166",
+      "permit_type": "Planning",
+      "address": "1367 University Ave",
+      "total_fees": 878.0,
+      "fee_count": 1
+    },
+    "PLN2019-0021": {
+      "permit_number": "PLN2019-0021",
+      "permit_type": "Planning",
+      "address": "1367 University Ave",
+      "total_fees": 750.0,
+      "fee_count": 1
+    },
     "PLN2020-0041": {
       "permit_number": "PLN2020-0041",
       "permit_type": "Planning",
       "address": "2136 SAN PABLO AVE",
+      "total_fees": 750.0,
+      "fee_count": 1
+    },
+    "PLN2021-0030": {
+      "permit_number": "PLN2021-0030",
+      "permit_type": "Planning",
+      "address": "2449 DWIGHT Way",
+      "total_fees": 750.0,
+      "fee_count": 1
+    },
+    "PLN2021-0036": {
+      "permit_number": "PLN2021-0036",
+      "permit_type": "Planning",
+      "address": "2024 ASHBY Ave",
       "total_fees": 750.0,
       "fee_count": 1
     },
@@ -182,39 +770,231 @@
       "total_fees": 750.0,
       "fee_count": 1
     },
+    "PLN2021-0055": {
+      "permit_number": "PLN2021-0055",
+      "permit_type": "Planning",
+      "address": "1752 SHATTUCK AVE",
+      "total_fees": 750.0,
+      "fee_count": 1
+    },
+    "DRCP2019-0015": {
+      "permit_number": "DRCP2019-0015",
+      "permit_type": "Planning",
+      "address": "2136 SAN PABLO AVE",
+      "total_fees": 650.0,
+      "fee_count": 1
+    },
+    "ZP2024-0112": {
+      "permit_number": "ZP2024-0112",
+      "permit_type": "Planning",
+      "address": "2463 PRINCE ST",
+      "total_fees": 630.0,
+      "fee_count": 1
+    },
+    "ZP2025-0048": {
+      "permit_number": "ZP2025-0048",
+      "permit_type": "Planning",
+      "address": "2538 DURANT Ave",
+      "total_fees": 630.0,
+      "fee_count": 1
+    },
+    "ZP2026-0015": {
+      "permit_number": "ZP2026-0015",
+      "permit_type": "Planning",
+      "address": "2455 TELEGRAPH Ave / 2506 HASTE St",
+      "total_fees": 630.0,
+      "fee_count": 1
+    },
+    "ZP2024-0122": {
+      "permit_number": "ZP2024-0122",
+      "permit_type": "Planning",
+      "address": "3036 REGENT ST",
+      "total_fees": 575.0,
+      "fee_count": 1
+    },
     "PLN2023-0025": {
       "permit_number": "PLN2023-0025",
       "permit_type": "Planning",
       "address": "1700 MONTGOMERY ST 215, JAMESTOWN -1 OVERTON, SAN FRANCISCO CA 94111",
       "total_fees": 460.0,
       "fee_count": 1
+    },
+    "B2024-03794": {
+      "permit_number": "B2024-03794",
+      "permit_type": "Building",
+      "address": "3030 TELEGRAPH Ave",
+      "total_fees": 361.03,
+      "fee_count": 1
+    },
+    "B2025-01173": {
+      "permit_number": "B2025-01173",
+      "permit_type": "Building",
+      "address": "3030 TELEGRAPH Ave",
+      "total_fees": 250.0,
+      "fee_count": 1
+    },
+    "B2017-00252": {
+      "permit_number": "B2017-00252",
+      "permit_type": "Building",
+      "address": "3030 TELEGRAPH Ave",
+      "total_fees": 244.0,
+      "fee_count": 4
+    },
+    "B2023-06437": {
+      "permit_number": "B2023-06437",
+      "permit_type": "Building",
+      "address": "3030 TELEGRAPH Ave",
+      "total_fees": 200.0,
+      "fee_count": 1
+    },
+    "LMIN2020-0004": {
+      "permit_number": "LMIN2020-0004",
+      "permit_type": "Unknown",
+      "address": "2136 SAN PABLO AVE",
+      "total_fees": 100.0,
+      "fee_count": 1
     }
   },
   "by_year": {
     "2010": 5011.3,
     "2013": 60.0,
+    "2017": 244.0,
     "2020": 750.0,
     "2021": 8095.0,
     "2022": 441192.5,
-    "2023": 250148.80000000002,
+    "2023": 250348.80000000002,
     "2024": 326222.58,
     "2025": 144848.0,
-    "2026": 35800.0
+    "2026": 36050.0
   },
   "by_type": {
+    "Building": {
+      "total": 8465026.27,
+      "count": 20
+    },
     "Planning": {
-      "total": 805597.37,
-      "count": 260
+      "total": 2293016.86,
+      "count": 344
     },
     "Unknown": {
-      "total": 406530.81,
-      "count": 48
+      "total": 3367931.38,
+      "count": 77
     }
   },
-  "total": 1212128.1800000002,
-  "record_count": 308,
-  "project_count": 53,
+  "total": 14125974.51,
+  "total_detailed": 1212822.1800000002,
+  "total_summary": 12913152.33,
+  "record_count": 441,
+  "project_count": 121,
   "large_fees": [
+    {
+      "permit_number": "B2024-01268",
+      "permit_type": "Building",
+      "address": "2016 ASHBY Ave",
+      "amount": 2192720.87,
+      "date": null,
+      "invoice": null,
+      "source": "2016_ASHBY_Ave.txt"
+    },
+    {
+      "permit_number": "B2024-05944",
+      "permit_type": "Building",
+      "address": "2300 ELLSWORTH St 94704",
+      "amount": 1469330.41,
+      "date": null,
+      "invoice": null,
+      "source": "2300_ELLSWORTH_St.txt"
+    },
+    {
+      "permit_number": "B2024-05944",
+      "permit_type": "Building",
+      "address": "2300 ELLSWORTH St 94704",
+      "amount": 1467705.41,
+      "date": null,
+      "invoice": null,
+      "source": "2300_ELLSWORTH_St.txt"
+    },
+    {
+      "permit_number": "B2023-06416",
+      "permit_type": "Building",
+      "address": "3030 TELEGRAPH Ave",
+      "amount": 1259375.39,
+      "date": null,
+      "invoice": null,
+      "source": "ZP2022-0170_3030_TELEGRAPH_Ave.txt"
+    },
+    {
+      "permit_number": "B2021-02905",
+      "permit_type": "Building",
+      "address": "2001 ASHBY AVE",
+      "amount": 965120.98,
+      "date": null,
+      "invoice": null,
+      "source": "2001_ASHBY_Ave.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "2587 TELEGRAPH Ave",
+      "amount": 953910.91,
+      "date": null,
+      "invoice": null,
+      "source": "2587_TELEGRAPH_Ave.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "2587 TELEGRAPH Ave",
+      "amount": 745604.82,
+      "date": null,
+      "invoice": null,
+      "source": "2587_TELEGRAPH_Ave.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "2902 ADELINE ST",
+      "amount": 713390.77,
+      "date": null,
+      "invoice": null,
+      "source": "2902_ADELINE_St.txt"
+    },
+    {
+      "permit_number": "B2023-00774",
+      "permit_type": "Building",
+      "address": "1752 SHATTUCK AVE",
+      "amount": 628046.4,
+      "date": null,
+      "invoice": null,
+      "source": "1752_SHATTUCK_Ave.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "** 2128 Oxford St",
+      "amount": 377724.51,
+      "date": null,
+      "invoice": null,
+      "source": " ZP2022-0135_2128_Oxford_St.txt"
+    },
+    {
+      "permit_number": "B2025-05534",
+      "permit_type": "Building",
+      "address": "1825 San Pablo, Suite 200, Oakland CA 94612",
+      "amount": 309266.48,
+      "date": null,
+      "invoice": null,
+      "source": "B2025-05534_1750_SACRAMENTO_St.txt"
+    },
+    {
+      "permit_number": "ZP2021-0046",
+      "permit_type": "Planning",
+      "address": "2136 SAN PABLO AVE",
+      "amount": 212874.0,
+      "date": null,
+      "invoice": null,
+      "source": "ZP2021-0046_2136_SAN_PABLO_Ave.txt"
+    },
     {
       "permit_number": "UNKNOWN",
       "permit_type": "Unknown",
@@ -225,6 +1005,33 @@
       "source": " ZP2022-0135_2128_Oxford_St.txt"
     },
     {
+      "permit_number": "B2022-04366",
+      "permit_type": "Building",
+      "address": "1367 UNIVERSITY Ave",
+      "amount": 128165.99,
+      "date": null,
+      "invoice": null,
+      "source": "1367_UNIVERSITY_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2024-0079",
+      "permit_type": "Planning",
+      "address": "2036 BANCROFT Way",
+      "amount": 114313.0,
+      "date": null,
+      "invoice": null,
+      "source": "ZP2024-0079_2036_BANCROFT_Way.txt"
+    },
+    {
+      "permit_number": "ZP2022-0021",
+      "permit_type": "Planning",
+      "address": "2449 DWIGHT Way",
+      "amount": 101780.0,
+      "date": null,
+      "invoice": null,
+      "source": "ZP2022-0021_2449_DWIGHT_Way.txt"
+    },
+    {
       "permit_number": "ZP2021-0158",
       "permit_type": "Planning",
       "address": "130 BERKELEY Sq",
@@ -232,6 +1039,33 @@
       "date": "2022-02-17",
       "invoice": "488404",
       "source": "ZP2021-0158_130_BERKELEY_Sq.txt"
+    },
+    {
+      "permit_number": "ZP2022-0046",
+      "permit_type": "Planning",
+      "address": "3000 SHATTUCK Ave",
+      "amount": 89178.38,
+      "date": null,
+      "invoice": null,
+      "source": "ZP2022-0046_3000_SHATTUCK_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2024-0075",
+      "permit_type": "Planning",
+      "address": "1899 OXFORD St",
+      "amount": 79652.0,
+      "date": null,
+      "invoice": null,
+      "source": "ZP2024-0075_1899_OXFORD_St.txt"
+    },
+    {
+      "permit_number": "ZP2023-0163",
+      "permit_type": "Planning",
+      "address": "** 2100 Milvia St",
+      "amount": 78888.0,
+      "date": null,
+      "invoice": null,
+      "source": "ZP2023-0163_2100_Milvia.txt"
     },
     {
       "permit_number": "ZP2022-0171",
@@ -250,10 +1084,172 @@
       "date": "2024-06-06",
       "invoice": "572199",
       "source": "ZP2023-0089_2441_LE_CONTE_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2022-0011",
+      "permit_type": "Planning",
+      "address": "1752 SHATTUCK AVE",
+      "amount": 54425.0,
+      "date": null,
+      "invoice": null,
+      "source": "1752_SHATTUCK_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2023-0079",
+      "permit_type": "Planning",
+      "address": "** 2274 Shattuck Ave",
+      "amount": 51289.76,
+      "date": null,
+      "invoice": null,
+      "source": "ZP2023-0079_2274_SHATTUCK.txt"
     }
   ],
   "all_records": [
     {
+      "permit_number": "B2024-01268",
+      "permit_type": "Building",
+      "address": "2016 ASHBY Ave",
+      "description": "Total Paid",
+      "amount": 2192720.87,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2016_ASHBY_Ave.txt"
+    },
+    {
+      "permit_number": "B2024-05944",
+      "permit_type": "Building",
+      "address": "2300 ELLSWORTH St 94704",
+      "description": "Total Paid",
+      "amount": 1469330.41,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2300_ELLSWORTH_St.txt"
+    },
+    {
+      "permit_number": "B2024-05944",
+      "permit_type": "Building",
+      "address": "2300 ELLSWORTH St 94704",
+      "description": "Total Paid",
+      "amount": 1467705.41,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2300_ELLSWORTH_St.txt"
+    },
+    {
+      "permit_number": "B2023-06416",
+      "permit_type": "Building",
+      "address": "3030 TELEGRAPH Ave",
+      "description": "Total Paid (building)",
+      "amount": 1259375.39,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2022-0170_3030_TELEGRAPH_Ave.txt"
+    },
+    {
+      "permit_number": "B2021-02905",
+      "permit_type": "Building",
+      "address": "2001 ASHBY AVE",
+      "description": "Total Paid",
+      "amount": 965120.98,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2001_ASHBY_Ave.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "2587 TELEGRAPH Ave",
+      "description": "Total Paid",
+      "amount": 953910.91,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2587_TELEGRAPH_Ave.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "2587 TELEGRAPH Ave",
+      "description": "Total Paid",
+      "amount": 745604.82,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2587_TELEGRAPH_Ave.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "2902 ADELINE ST",
+      "description": "Total Paid",
+      "amount": 713390.77,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2902_ADELINE_St.txt"
+    },
+    {
+      "permit_number": "B2023-00774",
+      "permit_type": "Building",
+      "address": "1752 SHATTUCK AVE",
+      "description": "Total Paid",
+      "amount": 628046.4,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1752_SHATTUCK_Ave.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "** 2128 Oxford St",
+      "description": "Total Paid",
+      "amount": 377724.51,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": " ZP2022-0135_2128_Oxford_St.txt"
+    },
+    {
+      "permit_number": "B2025-05534",
+      "permit_type": "Building",
+      "address": "1825 San Pablo, Suite 200, Oakland CA 94612",
+      "description": "Total Paid",
+      "amount": 309266.48,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "B2025-05534_1750_SACRAMENTO_St.txt"
+    },
+    {
+      "permit_number": "ZP2021-0046",
+      "permit_type": "Planning",
+      "address": "2136 SAN PABLO AVE",
+      "description": "Total Paid",
+      "amount": 212874.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2021-0046_2136_SAN_PABLO_Ave.txt"
+    },
+    {
       "permit_number": "UNKNOWN",
       "permit_type": "Unknown",
       "address": "** 2128 Oxford St",
@@ -262,7 +1258,44 @@
       "date": "2022-10-28",
       "status": "paid",
       "invoice": "511931",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
+    },
+    {
+      "permit_number": "B2022-04366",
+      "permit_type": "Building",
+      "address": "1367 UNIVERSITY Ave",
+      "description": "Total Paid",
+      "amount": 128165.99,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1367_UNIVERSITY_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2024-0079",
+      "permit_type": "Planning",
+      "address": "2036 BANCROFT Way",
+      "description": "Total Paid",
+      "amount": 114313.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2024-0079_2036_BANCROFT_Way.txt"
+    },
+    {
+      "permit_number": "ZP2022-0021",
+      "permit_type": "Planning",
+      "address": "2449 DWIGHT Way",
+      "description": "Total Paid",
+      "amount": 101780.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2022-0021_2449_DWIGHT_Way.txt"
     },
     {
       "permit_number": "ZP2021-0158",
@@ -273,7 +1306,44 @@
       "date": "2022-02-17",
       "status": "paid",
       "invoice": "488404",
+      "is_summary": 0,
       "source": "ZP2021-0158_130_BERKELEY_Sq.txt"
+    },
+    {
+      "permit_number": "ZP2022-0046",
+      "permit_type": "Planning",
+      "address": "3000 SHATTUCK Ave",
+      "description": "Total Paid",
+      "amount": 89178.38,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2022-0046_3000_SHATTUCK_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2024-0075",
+      "permit_type": "Planning",
+      "address": "1899 OXFORD St",
+      "description": "Total Paid",
+      "amount": 79652.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2024-0075_1899_OXFORD_St.txt"
+    },
+    {
+      "permit_number": "ZP2023-0163",
+      "permit_type": "Planning",
+      "address": "** 2100 Milvia St",
+      "description": "Total Paid",
+      "amount": 78888.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2023-0163_2100_Milvia.txt"
     },
     {
       "permit_number": "ZP2022-0171",
@@ -284,6 +1354,7 @@
       "date": "2024-02-07",
       "status": "paid",
       "invoice": "556420",
+      "is_summary": 0,
       "source": "ZP2022-0171_2601_SAN_PABLO_Ave.txt"
     },
     {
@@ -295,7 +1366,32 @@
       "date": "2024-06-06",
       "status": "paid",
       "invoice": "572199",
+      "is_summary": 0,
       "source": "ZP2023-0089_2441_LE_CONTE_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2022-0011",
+      "permit_type": "Planning",
+      "address": "1752 SHATTUCK AVE",
+      "description": "Total Paid",
+      "amount": 54425.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1752_SHATTUCK_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2023-0079",
+      "permit_type": "Planning",
+      "address": "** 2274 Shattuck Ave",
+      "description": "Total Paid",
+      "amount": 51289.76,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2023-0079_2274_SHATTUCK.txt"
     },
     {
       "permit_number": "ZP2022-0116",
@@ -306,6 +1402,7 @@
       "date": "2025-10-23",
       "status": "paid",
       "invoice": "618906",
+      "is_summary": 0,
       "source": "ZP2022-0116_2920_SHATTUCK_Ave.txt"
     },
     {
@@ -317,7 +1414,20 @@
       "date": "2024-09-09",
       "status": "paid",
       "invoice": "578558",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
+    },
+    {
+      "permit_number": "ZP2024-0066",
+      "permit_type": "Planning",
+      "address": "1683 SHATTUCK AVE A",
+      "description": "Total Paid",
+      "amount": 48988.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2024-0066_2109_VIRGINIA_St.txt"
     },
     {
       "permit_number": "P2022-0038",
@@ -328,6 +1438,7 @@
       "date": "2022-09-09",
       "status": "paid",
       "invoice": "509223",
+      "is_summary": 0,
       "source": "P2022-0038_2820_San_Pablo.txt"
     },
     {
@@ -339,7 +1450,56 @@
       "date": "2023-06-09",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2023-0024",
+      "permit_type": "Planning",
+      "address": "2300 ELLSWORTH St",
+      "description": "Total Paid",
+      "amount": 38885.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2300_ELLSWORTH_St.txt"
+    },
+    {
+      "permit_number": "ZP2023-0040",
+      "permit_type": "Planning",
+      "address": "1974 Shattuck",
+      "description": "Total Paid",
+      "amount": 38817.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2023-0040_1974_Shattuck.txt"
+    },
+    {
+      "permit_number": "ZP2022-0097",
+      "permit_type": "Planning",
+      "address": "2538 DURANT Ave",
+      "description": "Total Paid",
+      "amount": 38137.7,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2538_DURANT_Ave.txt"
+    },
+    {
+      "permit_number": "PLN2022-0018",
+      "permit_type": "Planning",
+      "address": "2538 DURANT Ave",
+      "description": "Total Paid",
+      "amount": 38137.7,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2538_DURANT_Ave.txt"
     },
     {
       "permit_number": "UNKNOWN",
@@ -350,7 +1510,56 @@
       "date": "2022-10-28",
       "status": "paid",
       "invoice": "511932",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
+    },
+    {
+      "permit_number": "ZP2018-0112",
+      "permit_type": "Planning",
+      "address": "2198 SAN PABLO AVE",
+      "description": "Total Paid",
+      "amount": 36610.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2198_SAN_PABLO_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2024-0114",
+      "permit_type": "Planning",
+      "address": "2138 KITTREDGE St",
+      "description": "Total Paid",
+      "amount": 34925.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2024-0114_2138_KITTREDGE_St.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "2587 TELEGRAPH Ave",
+      "description": "Total Paid",
+      "amount": 33742.4,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2587_TELEGRAPH_Ave.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "2902 ADELINE ST",
+      "description": "Total Paid",
+      "amount": 30183.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2902_ADELINE_St.txt"
     },
     {
       "permit_number": "ZP2022-0019",
@@ -361,6 +1570,7 @@
       "date": "2022-04-14",
       "status": "paid",
       "invoice": "498478",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -372,6 +1582,7 @@
       "date": "2025-09-18",
       "status": "paid",
       "invoice": "616518",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
     },
     {
@@ -383,7 +1594,68 @@
       "date": "2023-09-25",
       "status": "paid",
       "invoice": "544175",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
+    },
+    {
+      "permit_number": "PLN2021-0072",
+      "permit_type": "Planning",
+      "address": "2024 ASHBY Ave",
+      "description": "Total Paid",
+      "amount": 26270.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2016_ASHBY_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2023-0103",
+      "permit_type": "Planning",
+      "address": "2403 SAN PABLO AVE",
+      "description": "Total Paid",
+      "amount": 25624.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2403_SAN_PABLO_Ave.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "1598 UNIVERSITY Ave",
+      "description": "Total Paid",
+      "amount": 25095.6,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1598_UNIVERSITY.txt"
+    },
+    {
+      "permit_number": "ZP2022-0011",
+      "permit_type": "Planning",
+      "address": "1598 UNIVERSITY Ave",
+      "description": "Total Paid",
+      "amount": 25095.6,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2022-0011_1598_UNIVERSITY_Ave.txt"
+    },
+    {
+      "permit_number": "B2021-05326",
+      "permit_type": "Building",
+      "address": "1367 UNIVERSITY Ave",
+      "description": "Total Paid",
+      "amount": 24059.48,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1367_UNIVERSITY_Ave.txt"
     },
     {
       "permit_number": "ZP2024-0070",
@@ -394,6 +1666,7 @@
       "date": "2025-09-18",
       "status": "paid",
       "invoice": "616521",
+      "is_summary": 0,
       "source": "ZP2024-0070_2442_Haste.txt"
     },
     {
@@ -405,7 +1678,80 @@
       "date": "2023-06-09",
       "status": "paid",
       "invoice": "537585",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2024-0029",
+      "permit_type": "Planning",
+      "address": "2680 Bancroft Way",
+      "description": "Total Paid",
+      "amount": 19998.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2024-0029_2680_BANCROFT.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "1701 SAN PABLO AVE",
+      "description": "Total Paid",
+      "amount": 18910.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1701_SAN_PABLO.txt"
+    },
+    {
+      "permit_number": "ZP2024-0096",
+      "permit_type": "Planning",
+      "address": "2417 MARINER SQUARE LOOP 247, ALAMEDA CA 94501",
+      "description": "Total Paid",
+      "amount": 16267.5,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2024-0096_2147_SAN_PABLO_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2022-0149",
+      "permit_type": "Planning",
+      "address": "2420 SHATTUCK Ave",
+      "description": "Total Paid",
+      "amount": 16110.6,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2022-0149_2420_SHATTUCK_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2024-0126",
+      "permit_type": "Planning",
+      "address": "2425 CHANNING WAY B PM",
+      "description": "Total Paid",
+      "amount": 15837.5,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2024-0126_2298_DURANT_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2024-0074",
+      "permit_type": "Planning",
+      "address": "22377 Stevens Creek Blvd, Cupertino CA 95014",
+      "description": "Total Paid",
+      "amount": 14103.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2024-0074_1581_UNIVERSITY_Ave.txt"
     },
     {
       "permit_number": "UNKNOWN",
@@ -416,7 +1762,20 @@
       "date": "2023-08-25",
       "status": "paid",
       "invoice": "542399",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
+    },
+    {
+      "permit_number": "ZP2023-0090",
+      "permit_type": "Planning",
+      "address": "2672 RELIEZ VALLEY RD, MARTINEZ CA 94553",
+      "description": "Total Paid",
+      "amount": 13729.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2023-0090_2733_SAN_PABLO_Ave.txt"
     },
     {
       "permit_number": "UNKNOWN",
@@ -427,7 +1786,20 @@
       "date": "2022-04-26",
       "status": "paid",
       "invoice": "499818",
+      "is_summary": 0,
       "source": "1701_SAN_PABLO.txt"
+    },
+    {
+      "permit_number": "ZP2024-0071",
+      "permit_type": "Planning",
+      "address": "2955 SHATTUCK Ave",
+      "description": "Total Paid",
+      "amount": 12900.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2024-0071_2955_SHATTUCK_Ave.txt"
     },
     {
       "permit_number": "ZP2025-0105",
@@ -438,7 +1810,80 @@
       "date": "2026-03-23",
       "status": "paid",
       "invoice": "640143",
+      "is_summary": 0,
       "source": "ZP2025-0105_2712_TELEGRAPH_Ave.txt"
+    },
+    {
+      "permit_number": "B2021-05653",
+      "permit_type": "Building",
+      "address": "2001 ASHBY AVE",
+      "description": "Total Paid",
+      "amount": 11975.48,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2001_ASHBY_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2024-0058",
+      "permit_type": "Planning",
+      "address": "1600 Shattuck Ave 218",
+      "description": "Total Paid",
+      "amount": 11929.25,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2024-0058_2700_SHATTUCK_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2023-0107",
+      "permit_type": "Planning",
+      "address": "2462 Bancroft Way",
+      "description": "Total Paid",
+      "amount": 11383.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2023-0107_2462_BANCROFT.txt"
+    },
+    {
+      "permit_number": "ZP2023-0058",
+      "permit_type": "Planning",
+      "address": "9101 BURNING TREE RD, BETHESDA MD 20817",
+      "description": "Total Paid",
+      "amount": 11039.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2023-0058_2720_SAN_PABLO_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2024-0057",
+      "permit_type": "Planning",
+      "address": "1442 A WALNUT ST 349, YOCHAI KIDRON",
+      "description": "Total Paid",
+      "amount": 10968.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2024-0057_2655_SHATTUCK_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2021-0220",
+      "permit_type": "Planning",
+      "address": "2403 SAN PABLO AVE",
+      "description": "Total Paid",
+      "amount": 10530.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2403_SAN_PABLO_Ave.txt"
     },
     {
       "permit_number": "UNKNOWN",
@@ -449,7 +1894,32 @@
       "date": "2023-09-13",
       "status": "paid",
       "invoice": "543504",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
+    },
+    {
+      "permit_number": "ZP2023-0099",
+      "permit_type": "Planning",
+      "address": "499 EMBARCADERO, OAKLAND CA 94606",
+      "description": "Total Paid",
+      "amount": 10068.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2023-0099_2109_MILVIA_St.txt"
+    },
+    {
+      "permit_number": "ZP2023-0138",
+      "permit_type": "Planning",
+      "address": "2550 SHATTUCK Ave",
+      "description": "Total Paid",
+      "amount": 10068.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2550_SHATTUCK_Ave.txt"
     },
     {
       "permit_number": "ZP2022-0019",
@@ -460,6 +1930,7 @@
       "date": "2023-07-27",
       "status": "paid",
       "invoice": "540443",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -471,6 +1942,7 @@
       "date": "2026-02-18",
       "status": "paid",
       "invoice": "633206",
+      "is_summary": 0,
       "source": "ZP2025-0105_2712_TELEGRAPH_Ave.txt"
     },
     {
@@ -482,6 +1954,7 @@
       "date": "2023-06-09",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -493,6 +1966,7 @@
       "date": "2023-09-19",
       "status": "paid",
       "invoice": "543859",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
     },
     {
@@ -504,6 +1978,7 @@
       "date": "2022-10-07",
       "status": "paid",
       "invoice": "616540",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
     },
     {
@@ -515,7 +1990,32 @@
       "date": "2024-10-09",
       "status": "paid",
       "invoice": "580734",
+      "is_summary": 0,
       "source": "P2022-0038_2820_San_Pablo.txt"
+    },
+    {
+      "permit_number": "ZP2022-0132",
+      "permit_type": "Planning",
+      "address": "614 Bridgewater Cir, Danville CA 94526",
+      "description": "Total Paid",
+      "amount": 8715.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2022-0132_2847_SHATTUCK_Ave.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "2587 TELEGRAPH Ave",
+      "description": "Total Paid",
+      "amount": 8705.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2587_TELEGRAPH_Ave.txt"
     },
     {
       "permit_number": "UNKNOWN",
@@ -526,6 +2026,7 @@
       "date": "2023-01-20",
       "status": "paid",
       "invoice": "518433",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
     },
     {
@@ -537,7 +2038,68 @@
       "date": "2025-09-03",
       "status": "paid",
       "invoice": "615712",
+      "is_summary": 0,
       "source": "ZP2024-0162_2425_Durant_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2025-0046",
+      "permit_type": "Planning",
+      "address": "1752 SHATTUCK AVE",
+      "description": "Total Paid",
+      "amount": 8205.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1752_SHATTUCK_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2024-0059",
+      "permit_type": "Planning",
+      "address": "1958A UNIVERSITY AVE",
+      "description": "Total Paid",
+      "amount": 7952.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2024-0059_2204_DWIGHT_Way.txt"
+    },
+    {
+      "permit_number": "ZP2019-0173",
+      "permit_type": "Planning",
+      "address": "1367 University Ave",
+      "description": "Total Paid",
+      "amount": 7695.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1367_UNIVERSITY_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2024-0047",
+      "permit_type": "Planning",
+      "address": "2091 ROSE ST",
+      "description": "Total Paid",
+      "amount": 7423.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2024-0047_2450_SHATTUCK_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2023-0095",
+      "permit_type": "Planning",
+      "address": "2660 Bancroft Way",
+      "description": "Total Paid",
+      "amount": 7423.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2023-0095_2660_BANCROFT.txt"
     },
     {
       "permit_number": "UNKNOWN",
@@ -548,6 +2110,7 @@
       "date": "2024-09-09",
       "status": "paid",
       "invoice": "578558",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
     },
     {
@@ -559,6 +2122,7 @@
       "date": "2023-06-09",
       "status": "paid",
       "invoice": "548180",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -570,6 +2134,7 @@
       "date": "2023-03-27",
       "status": "paid",
       "invoice": "530751",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -581,7 +2146,92 @@
       "date": "2024-07-02",
       "status": "paid",
       "invoice": "573936",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "2587 TELEGRAPH Ave",
+      "description": "Total Paid",
+      "amount": 6595.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2587_TELEGRAPH_Ave.txt"
+    },
+    {
+      "permit_number": "DRCP2022-0007",
+      "permit_type": "Planning",
+      "address": "2538 DURANT Ave",
+      "description": "Total Paid",
+      "amount": 6595.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2538_DURANT_Ave.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "1598 UNIVERSITY Ave",
+      "description": "Total Paid",
+      "amount": 6595.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1598_UNIVERSITY.txt"
+    },
+    {
+      "permit_number": "ZP2022-0011",
+      "permit_type": "Planning",
+      "address": "1598 UNIVERSITY Ave",
+      "description": "Total Paid",
+      "amount": 6595.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2022-0011_1598_UNIVERSITY_Ave.txt"
+    },
+    {
+      "permit_number": "DRCP2023-0015",
+      "permit_type": "Planning",
+      "address": "2550 SHATTUCK Ave",
+      "description": "Total Paid",
+      "amount": 6595.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2550_SHATTUCK_Ave.txt"
+    },
+    {
+      "permit_number": "PLN2022-0065",
+      "permit_type": "Planning",
+      "address": "2538 DURANT Ave",
+      "description": "Total Paid",
+      "amount": 6398.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2538_DURANT_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2024-0033",
+      "permit_type": "Planning",
+      "address": "2278 SHATTUCK AVE",
+      "description": "Total Paid",
+      "amount": 6398.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2024-0033_2317_CHANNING_Way.txt"
     },
     {
       "permit_number": "P2022-0038",
@@ -592,6 +2242,7 @@
       "date": "2024-02-29",
       "status": "paid",
       "invoice": "560985",
+      "is_summary": 0,
       "source": "P2022-0038_2820_San_Pablo.txt"
     },
     {
@@ -603,6 +2254,7 @@
       "date": "2024-04-22",
       "status": "paid",
       "invoice": "569164",
+      "is_summary": 0,
       "source": "ZP2023-0126_2530_Bancroft.txt"
     },
     {
@@ -614,6 +2266,7 @@
       "date": "2022-04-26",
       "status": "paid",
       "invoice": "499818",
+      "is_summary": 0,
       "source": "1701_SAN_PABLO.txt"
     },
     {
@@ -625,7 +2278,32 @@
       "date": "2025-10-09",
       "status": "paid",
       "invoice": "618005",
+      "is_summary": 0,
       "source": "ZP2024-0181_2029_UNIVERSITY.txt"
+    },
+    {
+      "permit_number": "ZP2019-0179",
+      "permit_type": "Planning",
+      "address": "2136 SAN PABLO AVE",
+      "description": "Total Paid",
+      "amount": 5647.5,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2021-0046_2136_SAN_PABLO_Ave.txt"
+    },
+    {
+      "permit_number": "DRCF2023-0003",
+      "permit_type": "Planning",
+      "address": "2538 DURANT Ave",
+      "description": "Total Paid",
+      "amount": 5570.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2538_DURANT_Ave.txt"
     },
     {
       "permit_number": "ZP2023-0089",
@@ -636,6 +2314,7 @@
       "date": "2023-06-20",
       "status": "paid",
       "invoice": "538051",
+      "is_summary": 0,
       "source": "ZP2023-0089_2441_LE_CONTE_Ave.txt"
     },
     {
@@ -647,6 +2326,7 @@
       "date": "2022-09-03",
       "status": "paid",
       "invoice": "508922",
+      "is_summary": 0,
       "source": "ZP2022-0116_2920_SHATTUCK_Ave.txt"
     },
     {
@@ -658,6 +2338,7 @@
       "date": "2023-09-06",
       "status": "paid",
       "invoice": "543110",
+      "is_summary": 0,
       "source": "ZP2023-0126_2530_Bancroft.txt"
     },
     {
@@ -669,6 +2350,7 @@
       "date": "2022-12-02",
       "status": "paid",
       "invoice": "513739",
+      "is_summary": 0,
       "source": "ZP2022-0171_2601_SAN_PABLO_Ave.txt"
     },
     {
@@ -680,6 +2362,7 @@
       "date": "2024-02-08",
       "status": "paid",
       "invoice": "556638",
+      "is_summary": 0,
       "source": "ZP2024-0014__1048_Keith_St.txt"
     },
     {
@@ -691,6 +2374,7 @@
       "date": "2024-06-11",
       "status": "paid",
       "invoice": "572616",
+      "is_summary": 0,
       "source": "LMSAP2024-0005_2276_SHATTUCK_Ave.txt"
     },
     {
@@ -702,6 +2386,7 @@
       "date": "2022-10-07",
       "status": "paid",
       "invoice": "510755",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
     },
     {
@@ -713,6 +2398,7 @@
       "date": "2023-05-11",
       "status": "paid",
       "invoice": "535755",
+      "is_summary": 0,
       "source": "ZP2023-0064_2037_Durant.txt"
     },
     {
@@ -724,6 +2410,7 @@
       "date": "2026-03-02",
       "status": "paid",
       "invoice": "636386",
+      "is_summary": 0,
       "source": "ZP2025-0107_2001_CENTER_St.txt"
     },
     {
@@ -735,6 +2422,7 @@
       "date": "2024-12-13",
       "status": "paid",
       "invoice": "584670",
+      "is_summary": 0,
       "source": "ZP2024-0162_2425_Durant_Ave.txt"
     },
     {
@@ -746,6 +2434,7 @@
       "date": "2024-11-21",
       "status": "paid",
       "invoice": "583305",
+      "is_summary": 0,
       "source": "ZP2024-0138_2145_GRANT_St.txt"
     },
     {
@@ -757,6 +2446,7 @@
       "date": "2024-12-24",
       "status": "paid",
       "invoice": "585997",
+      "is_summary": 0,
       "source": "ZP2024-0116_811_Cedar.txt"
     },
     {
@@ -768,6 +2458,7 @@
       "date": "2024-11-05",
       "status": "paid",
       "invoice": "582151",
+      "is_summary": 0,
       "source": "ZP2024-0129_1627_Jaynes_St.txt"
     },
     {
@@ -779,6 +2470,7 @@
       "date": "2024-09-18",
       "status": "paid",
       "invoice": "579377",
+      "is_summary": 0,
       "source": "ZP2024-0070_2442_Haste.txt"
     },
     {
@@ -790,6 +2482,7 @@
       "date": "2023-06-09",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -801,6 +2494,7 @@
       "date": "2023-06-09",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -812,7 +2506,80 @@
       "date": "2023-10-19",
       "status": "paid",
       "invoice": "545723",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
+    },
+    {
+      "permit_number": "ZP2025-0101",
+      "permit_type": "Planning",
+      "address": "2190 Shattuck Ave",
+      "description": "Total Paid",
+      "amount": 5430.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2025-0101_2190_SHATTUCK.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "2587 TELEGRAPH Ave",
+      "description": "Total Paid",
+      "amount": 5290.88,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2587_TELEGRAPH_Ave.txt"
+    },
+    {
+      "permit_number": "DRCP2022-0003",
+      "permit_type": "Planning",
+      "address": "2449 DWIGHT Way",
+      "description": "Total Paid",
+      "amount": 5050.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2022-0021_2449_DWIGHT_Way.txt"
+    },
+    {
+      "permit_number": "DRCP2022-0001",
+      "permit_type": "Planning",
+      "address": "1752 SHATTUCK AVE",
+      "description": "Total Paid",
+      "amount": 5050.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1752_SHATTUCK_Ave.txt"
+    },
+    {
+      "permit_number": "DRCP2021-0002",
+      "permit_type": "Planning",
+      "address": "2136 SAN PABLO AVE",
+      "description": "Total Paid",
+      "amount": 5050.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2021-0046_2136_SAN_PABLO_Ave.txt"
+    },
+    {
+      "permit_number": "DRCP2018-0003",
+      "permit_type": "Planning",
+      "address": "2198 SAN PABLO AVE",
+      "description": "Total Paid",
+      "amount": 5050.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2198_SAN_PABLO_Ave.txt"
     },
     {
       "permit_number": "P2022-0038",
@@ -823,6 +2590,7 @@
       "date": "2024-07-01",
       "status": "paid",
       "invoice": "573851",
+      "is_summary": 0,
       "source": "P2022-0038_2820_San_Pablo.txt"
     },
     {
@@ -834,6 +2602,7 @@
       "date": "2022-02-04",
       "status": "paid",
       "invoice": "486258",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -845,6 +2614,7 @@
       "date": "2022-03-03",
       "status": "paid",
       "invoice": "491262",
+      "is_summary": 0,
       "source": "P2022-0038_2820_San_Pablo.txt"
     },
     {
@@ -856,7 +2626,92 @@
       "date": "2021-08-26",
       "status": "paid",
       "invoice": "475179",
+      "is_summary": 0,
       "source": "ZP2021-0158_130_BERKELEY_Sq.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "2587 TELEGRAPH Ave",
+      "description": "Total Paid",
+      "amount": 4730.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2587_TELEGRAPH_Ave.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "2902 ADELINE ST",
+      "description": "Total Paid",
+      "amount": 4550.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2902_ADELINE_St.txt"
+    },
+    {
+      "permit_number": "DRCF2023-0005",
+      "permit_type": "Planning",
+      "address": "2480 Bancroft Way",
+      "description": "Total Paid",
+      "amount": 4300.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "DRCF2023-0005_2480_BANCROFT.txt"
+    },
+    {
+      "permit_number": "DRCF2023-0001",
+      "permit_type": "Planning",
+      "address": "1752 SHATTUCK AVE",
+      "description": "Total Paid",
+      "amount": 4300.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1752_SHATTUCK_Ave.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "1598 UNIVERSITY Ave",
+      "description": "Total Paid",
+      "amount": 4300.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1598_UNIVERSITY.txt"
+    },
+    {
+      "permit_number": "DRCF2024-0003",
+      "permit_type": "Planning",
+      "address": "2403 SAN PABLO AVE",
+      "description": "Total Paid",
+      "amount": 4300.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2403_SAN_PABLO_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2022-0011",
+      "permit_type": "Planning",
+      "address": "1598 UNIVERSITY Ave",
+      "description": "Total Paid",
+      "amount": 4300.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2022-0011_1598_UNIVERSITY_Ave.txt"
     },
     {
       "permit_number": "ZP2024-0181",
@@ -867,7 +2722,44 @@
       "date": "2025-01-16",
       "status": "paid",
       "invoice": "589573",
+      "is_summary": 0,
       "source": "ZP2024-0181_2029_UNIVERSITY.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "1701 SAN PABLO AVE",
+      "description": "Total Paid",
+      "amount": 3859.55,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1701_SAN_PABLO.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "2900-2902 ADELINE ST",
+      "description": "Total Paid",
+      "amount": 3734.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2902_ADELINE_St.txt"
+    },
+    {
+      "permit_number": "DRCF2021-0010",
+      "permit_type": "Planning",
+      "address": "1367 University Ave",
+      "description": "Total Paid",
+      "amount": 3734.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1367_UNIVERSITY_Ave.txt"
     },
     {
       "permit_number": "ZP2024-0008",
@@ -878,7 +2770,56 @@
       "date": "2024-01-23",
       "status": "paid",
       "invoice": "553845",
+      "is_summary": 0,
       "source": "ZP2024-0008_1614_Sixth_St.txt"
+    },
+    {
+      "permit_number": "B2025-00388",
+      "permit_type": "Building",
+      "address": "2300 ELLSWORTH St 94704",
+      "description": "Total Paid",
+      "amount": 3521.23,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2300_ELLSWORTH_St.txt"
+    },
+    {
+      "permit_number": "PLN2019-0059",
+      "permit_type": "Planning",
+      "address": "2001 ASHBY AVE",
+      "description": "Total Paid",
+      "amount": 3460.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2001_ASHBY_Ave.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "2902 ADELINE ST",
+      "description": "Total Paid",
+      "amount": 3366.88,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2902_ADELINE_St.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "1701 SAN PABLO AVE",
+      "description": "Total Paid",
+      "amount": 3355.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1701_SAN_PABLO.txt"
     },
     {
       "permit_number": "UNKNOWN",
@@ -889,6 +2830,7 @@
       "date": "2022-10-07",
       "status": "paid",
       "invoice": "510755",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
     },
     {
@@ -900,6 +2842,7 @@
       "date": "2022-03-03",
       "status": "paid",
       "invoice": "491262",
+      "is_summary": 0,
       "source": "P2022-0038_2820_San_Pablo.txt"
     },
     {
@@ -911,6 +2854,7 @@
       "date": "2024-10-07",
       "status": "paid",
       "invoice": "580528",
+      "is_summary": 0,
       "source": "ZP2024-0131_2113-15_Kittredge.txt"
     },
     {
@@ -922,7 +2866,20 @@
       "date": "2026-02-14",
       "status": "paid",
       "invoice": "632595",
+      "is_summary": 0,
       "source": "ZP2025-0105_2712_TELEGRAPH_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2026-0006",
+      "permit_type": "Planning",
+      "address": "2138 KITTREDGE St",
+      "description": "Total Paid",
+      "amount": 3000.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2026-0006_2138_KITTREDGE_St.txt"
     },
     {
       "permit_number": "ZP2024-0070",
@@ -933,6 +2890,7 @@
       "date": "2025-04-10",
       "status": "paid",
       "invoice": "604044",
+      "is_summary": 0,
       "source": "ZP2024-0070_2442_Haste.txt"
     },
     {
@@ -944,6 +2902,7 @@
       "date": "2024-09-18",
       "status": "paid",
       "invoice": "579329",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
     },
     {
@@ -955,6 +2914,7 @@
       "date": "2023-11-28",
       "status": "paid",
       "invoice": "548017",
+      "is_summary": 0,
       "source": "ZP2023-0126_2530_Bancroft.txt"
     },
     {
@@ -966,6 +2926,7 @@
       "date": "2023-08-23",
       "status": "paid",
       "invoice": "542223",
+      "is_summary": 0,
       "source": "ZP2023-0123_2833_Seventh_St.txt"
     },
     {
@@ -977,6 +2938,7 @@
       "date": "2025-01-16",
       "status": "paid",
       "invoice": "589573",
+      "is_summary": 0,
       "source": "ZP2024-0181_2029_UNIVERSITY.txt"
     },
     {
@@ -988,7 +2950,20 @@
       "date": "2023-06-09",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
+    },
+    {
+      "permit_number": "DRCP2019-0014",
+      "permit_type": "Planning",
+      "address": "1367 University Ave",
+      "description": "Total Paid",
+      "amount": 2658.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1367_UNIVERSITY_Ave.txt"
     },
     {
       "permit_number": "UNKNOWN",
@@ -999,7 +2974,20 @@
       "date": "2010-07-28",
       "status": "paid",
       "invoice": "10519",
+      "is_summary": 0,
       "source": "1701_SAN_PABLO.txt"
+    },
+    {
+      "permit_number": "B2015-00364",
+      "permit_type": "Building",
+      "address": "2601 SAN PABLO AVE",
+      "description": "Total Paid",
+      "amount": 2573.48,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "B_2601_SAN_PABLO_Ave.txt"
     },
     {
       "permit_number": "ZP2022-0019",
@@ -1010,6 +2998,7 @@
       "date": "2023-06-09",
       "status": "paid",
       "invoice": "537586",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -1021,6 +3010,7 @@
       "date": "2024-12-23",
       "status": "paid",
       "invoice": "585870",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -1032,6 +3022,7 @@
       "date": "2023-06-09",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -1043,7 +3034,20 @@
       "date": "2023-06-09",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
+    },
+    {
+      "permit_number": "B2023-01026",
+      "permit_type": "Building",
+      "address": "1752 SHATTUCK AVE",
+      "description": "Total Paid",
+      "amount": 2109.64,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1752_SHATTUCK_Ave.txt"
     },
     {
       "permit_number": "UNKNOWN",
@@ -1054,6 +3058,7 @@
       "date": "2024-09-26",
       "status": "paid",
       "invoice": "579959",
+      "is_summary": 0,
       "source": "1701_SAN_PABLO.txt"
     },
     {
@@ -1065,6 +3070,7 @@
       "date": "2025-05-28",
       "status": "paid",
       "invoice": "607781",
+      "is_summary": 0,
       "source": "ZP2024-0070_2442_Haste.txt"
     },
     {
@@ -1076,7 +3082,20 @@
       "date": "2023-06-20",
       "status": "paid",
       "invoice": "538051",
+      "is_summary": 0,
       "source": "ZP2023-0089_2441_LE_CONTE_Ave.txt"
+    },
+    {
+      "permit_number": "DRCP2021-0022",
+      "permit_type": "Planning",
+      "address": "2403 SAN PABLO AVE",
+      "description": "Total Paid",
+      "amount": 1788.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2403_SAN_PABLO_Ave.txt"
     },
     {
       "permit_number": "ZP2024-0162",
@@ -1087,6 +3106,7 @@
       "date": "2024-12-13",
       "status": "paid",
       "invoice": "584670",
+      "is_summary": 0,
       "source": "ZP2024-0162_2425_Durant_Ave.txt"
     },
     {
@@ -1098,6 +3118,7 @@
       "date": "2024-12-13",
       "status": "paid",
       "invoice": "584670",
+      "is_summary": 0,
       "source": "ZP2024-0162_2425_Durant_Ave.txt"
     },
     {
@@ -1109,6 +3130,7 @@
       "date": "2025-06-13",
       "status": "paid",
       "invoice": "610591",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -1120,6 +3142,7 @@
       "date": "2024-03-08",
       "status": "paid",
       "invoice": "562357",
+      "is_summary": 0,
       "source": "ZP2024-0008_1614_Sixth_St.txt"
     },
     {
@@ -1131,6 +3154,7 @@
       "date": "2024-11-21",
       "status": "paid",
       "invoice": "583305",
+      "is_summary": 0,
       "source": "ZP2024-0138_2145_GRANT_St.txt"
     },
     {
@@ -1142,6 +3166,7 @@
       "date": "2022-02-17",
       "status": "paid",
       "invoice": "488406",
+      "is_summary": 0,
       "source": "ZP2021-0158_130_BERKELEY_Sq.txt"
     },
     {
@@ -1153,6 +3178,7 @@
       "date": "2023-01-13",
       "status": "paid",
       "invoice": "517156",
+      "is_summary": 0,
       "source": "ZP2022-0171_2601_SAN_PABLO_Ave.txt"
     },
     {
@@ -1164,6 +3190,7 @@
       "date": "2024-03-21",
       "status": "paid",
       "invoice": "564644",
+      "is_summary": 0,
       "source": "ZP2024-0014__1048_Keith_St.txt"
     },
     {
@@ -1175,6 +3202,7 @@
       "date": "2025-03-04",
       "status": "paid",
       "invoice": "598947",
+      "is_summary": 0,
       "source": "ZP2024-0116_811_Cedar.txt"
     },
     {
@@ -1186,6 +3214,7 @@
       "date": "2023-04-27",
       "status": "paid",
       "invoice": "534729",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
     },
     {
@@ -1197,6 +3226,7 @@
       "date": "2024-04-10",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -1208,6 +3238,7 @@
       "date": "2023-01-13",
       "status": "paid",
       "invoice": "517156",
+      "is_summary": 0,
       "source": "ZP2022-0171_2601_SAN_PABLO_Ave.txt"
     },
     {
@@ -1219,6 +3250,7 @@
       "date": "2022-12-02",
       "status": "paid",
       "invoice": "513739",
+      "is_summary": 0,
       "source": "ZP2022-0171_2601_SAN_PABLO_Ave.txt"
     },
     {
@@ -1230,6 +3262,7 @@
       "date": "2023-03-16",
       "status": "paid",
       "invoice": "529049",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
     },
     {
@@ -1241,6 +3274,7 @@
       "date": "2022-10-07",
       "status": "paid",
       "invoice": "510755",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
     },
     {
@@ -1252,7 +3286,20 @@
       "date": "2023-05-11",
       "status": "paid",
       "invoice": "535755",
+      "is_summary": 0,
       "source": "ZP2023-0064_2037_Durant.txt"
+    },
+    {
+      "permit_number": "AUP2005-0099",
+      "permit_type": "Unknown",
+      "address": "1367 University Ave",
+      "description": "Total Paid",
+      "amount": 1364.7,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1367_UNIVERSITY_Ave.txt"
     },
     {
       "permit_number": "UNKNOWN",
@@ -1263,6 +3310,7 @@
       "date": "2022-10-07",
       "status": "paid",
       "invoice": "547139",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
     },
     {
@@ -1274,6 +3322,7 @@
       "date": "2025-01-16",
       "status": "paid",
       "invoice": "589573",
+      "is_summary": 0,
       "source": "ZP2024-0181_2029_UNIVERSITY.txt"
     },
     {
@@ -1285,6 +3334,7 @@
       "date": "2024-09-18",
       "status": "paid",
       "invoice": "579377",
+      "is_summary": 0,
       "source": "ZP2024-0070_2442_Haste.txt"
     },
     {
@@ -1296,6 +3346,7 @@
       "date": "2024-10-09",
       "status": "paid",
       "invoice": "580734",
+      "is_summary": 0,
       "source": "P2022-0038_2820_San_Pablo.txt"
     },
     {
@@ -1307,6 +3358,7 @@
       "date": "2022-10-07",
       "status": "paid",
       "invoice": "510755",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
     },
     {
@@ -1318,6 +3370,7 @@
       "date": "2026-03-02",
       "status": "paid",
       "invoice": "636386",
+      "is_summary": 0,
       "source": "ZP2025-0107_2001_CENTER_St.txt"
     },
     {
@@ -1329,6 +3382,7 @@
       "date": "2024-12-13",
       "status": "paid",
       "invoice": "584670",
+      "is_summary": 0,
       "source": "ZP2024-0162_2425_Durant_Ave.txt"
     },
     {
@@ -1340,6 +3394,7 @@
       "date": "2024-10-07",
       "status": "paid",
       "invoice": "580528",
+      "is_summary": 0,
       "source": "ZP2024-0131_2113-15_Kittredge.txt"
     },
     {
@@ -1351,6 +3406,7 @@
       "date": "2024-12-24",
       "status": "paid",
       "invoice": "585997",
+      "is_summary": 0,
       "source": "ZP2024-0116_811_Cedar.txt"
     },
     {
@@ -1362,6 +3418,7 @@
       "date": "2026-02-14",
       "status": "paid",
       "invoice": "632595",
+      "is_summary": 0,
       "source": "ZP2025-0105_2712_TELEGRAPH_Ave.txt"
     },
     {
@@ -1373,6 +3430,7 @@
       "date": "2025-05-02",
       "status": "paid",
       "invoice": "605892",
+      "is_summary": 0,
       "source": "ZP2024-0181_2029_UNIVERSITY.txt"
     },
     {
@@ -1384,6 +3442,7 @@
       "date": "2024-12-19",
       "status": "paid",
       "invoice": "585372",
+      "is_summary": 0,
       "source": "ZP2024-0181_2029_UNIVERSITY.txt"
     },
     {
@@ -1395,6 +3454,7 @@
       "date": "2024-11-22",
       "status": "paid",
       "invoice": "583339",
+      "is_summary": 0,
       "source": "ZP2024-0129_1627_Jaynes_St.txt"
     },
     {
@@ -1406,6 +3466,7 @@
       "date": "2024-09-18",
       "status": "paid",
       "invoice": "579377",
+      "is_summary": 0,
       "source": "ZP2024-0070_2442_Haste.txt"
     },
     {
@@ -1417,6 +3478,7 @@
       "date": "2023-01-13",
       "status": "paid",
       "invoice": "517156",
+      "is_summary": 0,
       "source": "ZP2022-0171_2601_SAN_PABLO_Ave.txt"
     },
     {
@@ -1428,6 +3490,7 @@
       "date": "2022-03-03",
       "status": "paid",
       "invoice": "491262",
+      "is_summary": 0,
       "source": "P2022-0038_2820_San_Pablo.txt"
     },
     {
@@ -1439,6 +3502,7 @@
       "date": "2022-10-04",
       "status": "paid",
       "invoice": "510500",
+      "is_summary": 0,
       "source": "ZP2022-0116_2920_SHATTUCK_Ave.txt"
     },
     {
@@ -1450,6 +3514,7 @@
       "date": "2023-11-28",
       "status": "paid",
       "invoice": "548017",
+      "is_summary": 0,
       "source": "ZP2023-0126_2530_Bancroft.txt"
     },
     {
@@ -1461,6 +3526,7 @@
       "date": "2023-07-18",
       "status": "paid",
       "invoice": "539797",
+      "is_summary": 0,
       "source": "ZP2022-0171_2601_SAN_PABLO_Ave.txt"
     },
     {
@@ -1472,6 +3538,7 @@
       "date": "2023-01-13",
       "status": "paid",
       "invoice": "517156",
+      "is_summary": 0,
       "source": "ZP2022-0171_2601_SAN_PABLO_Ave.txt"
     },
     {
@@ -1483,7 +3550,20 @@
       "date": "2022-10-07",
       "status": "paid",
       "invoice": "510755",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "1701 SAN PABLO AVE",
+      "description": "Total Paid",
+      "amount": 1151.75,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1701_SAN_PABLO.txt"
     },
     {
       "permit_number": "ZP2022-0116",
@@ -1494,6 +3574,7 @@
       "date": "2022-10-04",
       "status": "paid",
       "invoice": "510500",
+      "is_summary": 0,
       "source": "ZP2022-0116_2920_SHATTUCK_Ave.txt"
     },
     {
@@ -1505,6 +3586,7 @@
       "date": "2024-04-10",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -1516,6 +3598,7 @@
       "date": "2022-02-04",
       "status": "paid",
       "invoice": "486258",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -1527,6 +3610,7 @@
       "date": "2022-03-03",
       "status": "paid",
       "invoice": "491262",
+      "is_summary": 0,
       "source": "P2022-0038_2820_San_Pablo.txt"
     },
     {
@@ -1538,7 +3622,20 @@
       "date": "2022-02-17",
       "status": "paid",
       "invoice": "488406",
+      "is_summary": 0,
       "source": "ZP2021-0158_130_BERKELEY_Sq.txt"
+    },
+    {
+      "permit_number": "PLN2025-0038",
+      "permit_type": "Planning",
+      "address": "2330 DURANT Ave",
+      "description": "Total Paid",
+      "amount": 1055.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "PLN2025-0038_2330_DURANT_Ave.txt"
     },
     {
       "permit_number": "ZP2024-0138",
@@ -1549,6 +3646,7 @@
       "date": "2024-11-21",
       "status": "paid",
       "invoice": "583305",
+      "is_summary": 0,
       "source": "ZP2024-0138_2145_GRANT_St.txt"
     },
     {
@@ -1560,6 +3658,7 @@
       "date": "2024-09-18",
       "status": "paid",
       "invoice": "579377",
+      "is_summary": 0,
       "source": "ZP2024-0070_2442_Haste.txt"
     },
     {
@@ -1571,6 +3670,7 @@
       "date": "2023-05-11",
       "status": "paid",
       "invoice": "535755",
+      "is_summary": 0,
       "source": "ZP2023-0064_2037_Durant.txt"
     },
     {
@@ -1582,6 +3682,7 @@
       "date": "2022-02-04",
       "status": "paid",
       "invoice": "486258",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -1593,6 +3694,7 @@
       "date": "2023-06-20",
       "status": "paid",
       "invoice": "538051",
+      "is_summary": 0,
       "source": "ZP2023-0089_2441_LE_CONTE_Ave.txt"
     },
     {
@@ -1604,6 +3706,7 @@
       "date": "2022-03-03",
       "status": "paid",
       "invoice": "491262",
+      "is_summary": 0,
       "source": "P2022-0038_2820_San_Pablo.txt"
     },
     {
@@ -1615,6 +3718,7 @@
       "date": "2022-09-03",
       "status": "paid",
       "invoice": "508922",
+      "is_summary": 0,
       "source": "ZP2022-0116_2920_SHATTUCK_Ave.txt"
     },
     {
@@ -1626,6 +3730,7 @@
       "date": "2023-09-06",
       "status": "paid",
       "invoice": "543110",
+      "is_summary": 0,
       "source": "ZP2023-0126_2530_Bancroft.txt"
     },
     {
@@ -1637,6 +3742,7 @@
       "date": "2021-08-26",
       "status": "paid",
       "invoice": "475179",
+      "is_summary": 0,
       "source": "ZP2021-0158_130_BERKELEY_Sq.txt"
     },
     {
@@ -1648,6 +3754,7 @@
       "date": "2022-12-02",
       "status": "paid",
       "invoice": "513739",
+      "is_summary": 0,
       "source": "ZP2022-0171_2601_SAN_PABLO_Ave.txt"
     },
     {
@@ -1659,6 +3766,7 @@
       "date": "2024-02-08",
       "status": "paid",
       "invoice": "556638",
+      "is_summary": 0,
       "source": "ZP2024-0014__1048_Keith_St.txt"
     },
     {
@@ -1670,6 +3778,7 @@
       "date": "2022-10-07",
       "status": "paid",
       "invoice": "510755",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
     },
     {
@@ -1681,6 +3790,7 @@
       "date": "2023-05-11",
       "status": "paid",
       "invoice": "535755",
+      "is_summary": 0,
       "source": "ZP2023-0064_2037_Durant.txt"
     },
     {
@@ -1692,6 +3802,7 @@
       "date": "2025-01-16",
       "status": "paid",
       "invoice": "589573",
+      "is_summary": 0,
       "source": "ZP2024-0181_2029_UNIVERSITY.txt"
     },
     {
@@ -1703,6 +3814,7 @@
       "date": "2025-02-21",
       "status": "paid",
       "invoice": "595700",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -1714,6 +3826,7 @@
       "date": "2024-02-26",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -1725,6 +3838,7 @@
       "date": "2026-03-19",
       "status": "paid",
       "invoice": "639637",
+      "is_summary": 0,
       "source": "ZP2025-0107_2001_CENTER_St.txt"
     },
     {
@@ -1736,6 +3850,7 @@
       "date": "2025-05-08",
       "status": "paid",
       "invoice": "606427",
+      "is_summary": 0,
       "source": "ZP2024-0162_2425_Durant_Ave.txt"
     },
     {
@@ -1747,6 +3862,7 @@
       "date": "2025-03-12",
       "status": "paid",
       "invoice": "600742",
+      "is_summary": 0,
       "source": "ZP2024-0162_2425_Durant_Ave.txt"
     },
     {
@@ -1758,6 +3874,7 @@
       "date": "2024-12-13",
       "status": "paid",
       "invoice": "584670",
+      "is_summary": 0,
       "source": "ZP2024-0162_2425_Durant_Ave.txt"
     },
     {
@@ -1769,6 +3886,7 @@
       "date": "2024-08-27",
       "status": "paid",
       "invoice": "577941",
+      "is_summary": 0,
       "source": "1701_SAN_PABLO.txt"
     },
     {
@@ -1780,6 +3898,7 @@
       "date": "2024-09-20",
       "status": "paid",
       "invoice": "579539",
+      "is_summary": 0,
       "source": "PLN2024-0054_2372_ELLSWORTH_St.txt"
     },
     {
@@ -1791,6 +3910,7 @@
       "date": "2025-06-23",
       "status": "paid",
       "invoice": "609641",
+      "is_summary": 0,
       "source": "ZP2024-0116_811_Cedar.txt"
     },
     {
@@ -1802,6 +3922,7 @@
       "date": "2025-05-15",
       "status": "paid",
       "invoice": "606882",
+      "is_summary": 0,
       "source": "ZP2024-0129_1627_Jaynes_St.txt"
     },
     {
@@ -1813,7 +3934,152 @@
       "date": "2024-09-18",
       "status": "paid",
       "invoice": "579377",
+      "is_summary": 0,
       "source": "ZP2024-0070_2442_Haste.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "2587 TELEGRAPH Ave",
+      "description": "Total Paid",
+      "amount": 970.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2587_TELEGRAPH_Ave.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "1701 SAN PABLO AVE",
+      "description": "Total Paid",
+      "amount": 970.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1701_SAN_PABLO.txt"
+    },
+    {
+      "permit_number": "PLN2022-0101",
+      "permit_type": "Planning",
+      "address": "1708 HARMON St",
+      "description": "Total Paid",
+      "amount": 970.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1708_HARMON_St.txt"
+    },
+    {
+      "permit_number": "PLN2022-0099",
+      "permit_type": "Planning",
+      "address": "1708 HARMON St",
+      "description": "Total Paid",
+      "amount": 970.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1708_HARMON_St.txt"
+    },
+    {
+      "permit_number": "PLN2021-0037",
+      "permit_type": "Planning",
+      "address": "1708 HARMON St",
+      "description": "Total Paid",
+      "amount": 970.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1708_HARMON_St.txt"
+    },
+    {
+      "permit_number": "PLN2023-0016",
+      "permit_type": "Planning",
+      "address": "2300 ELLSWORTH St",
+      "description": "Total Paid",
+      "amount": 970.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2300_ELLSWORTH_St.txt"
+    },
+    {
+      "permit_number": "PLN2022-0084",
+      "permit_type": "Planning",
+      "address": "2300 ELLSWORTH St",
+      "description": "Total Paid",
+      "amount": 970.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2300_ELLSWORTH_St.txt"
+    },
+    {
+      "permit_number": "PLN2023-0098",
+      "permit_type": "Planning",
+      "address": "2350 TELEGRAPH Ave",
+      "description": "Total Paid",
+      "amount": 970.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2350_TELEGRAPH_Ave.txt"
+    },
+    {
+      "permit_number": "PLN2024-0024",
+      "permit_type": "Planning",
+      "address": "1434 SPRUCE ST",
+      "description": "Total Paid",
+      "amount": 970.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "PLN2024-0024_0_LE_ROY_Ave.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "1598 UNIVERSITY Ave",
+      "description": "Total Paid",
+      "amount": 970.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1598_UNIVERSITY.txt"
+    },
+    {
+      "permit_number": "ZP2022-0011",
+      "permit_type": "Planning",
+      "address": "1598 UNIVERSITY Ave",
+      "description": "Total Paid",
+      "amount": 970.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2022-0011_1598_UNIVERSITY_Ave.txt"
+    },
+    {
+      "permit_number": "PLN2023-0026",
+      "permit_type": "Planning",
+      "address": "2550 SHATTUCK Ave",
+      "description": "Total Paid",
+      "amount": 970.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2550_SHATTUCK_Ave.txt"
     },
     {
       "permit_number": "ZP2022-0116",
@@ -1824,6 +4090,7 @@
       "date": "2022-09-03",
       "status": "paid",
       "invoice": "508922",
+      "is_summary": 0,
       "source": "ZP2022-0116_2920_SHATTUCK_Ave.txt"
     },
     {
@@ -1835,7 +4102,20 @@
       "date": "2010-06-08",
       "status": "paid",
       "invoice": "10277",
+      "is_summary": 0,
       "source": "1701_SAN_PABLO.txt"
+    },
+    {
+      "permit_number": "AUP2004-0166",
+      "permit_type": "Unknown",
+      "address": "1367 University Ave",
+      "description": "Total Paid",
+      "amount": 920.8,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1367_UNIVERSITY_Ave.txt"
     },
     {
       "permit_number": "P2022-0038",
@@ -1846,6 +4126,7 @@
       "date": "2023-09-08",
       "status": "paid",
       "invoice": "543269",
+      "is_summary": 0,
       "source": "P2022-0038_2820_San_Pablo.txt"
     },
     {
@@ -1857,6 +4138,7 @@
       "date": "2022-10-04",
       "status": "paid",
       "invoice": "510500",
+      "is_summary": 0,
       "source": "ZP2022-0116_2920_SHATTUCK_Ave.txt"
     },
     {
@@ -1868,6 +4150,7 @@
       "date": "2022-09-03",
       "status": "paid",
       "invoice": "508922",
+      "is_summary": 0,
       "source": "ZP2022-0116_2920_SHATTUCK_Ave.txt"
     },
     {
@@ -1879,6 +4162,7 @@
       "date": "2022-10-11",
       "status": "paid",
       "invoice": "510896",
+      "is_summary": 0,
       "source": "1701_SAN_PABLO.txt"
     },
     {
@@ -1890,6 +4174,7 @@
       "date": "2023-08-25",
       "status": "paid",
       "invoice": "542442",
+      "is_summary": 0,
       "source": "PLN2023-0065_1740_SAN_PABLO_Ave.txt"
     },
     {
@@ -1901,6 +4186,7 @@
       "date": "2024-06-27",
       "status": "paid",
       "invoice": "573645",
+      "is_summary": 0,
       "source": "ZP2024-0014__1048_Keith_St.txt"
     },
     {
@@ -1912,6 +4198,7 @@
       "date": "2024-12-24",
       "status": "paid",
       "invoice": "585997",
+      "is_summary": 0,
       "source": "ZP2024-0116_811_Cedar.txt"
     },
     {
@@ -1923,7 +4210,32 @@
       "date": "2024-11-05",
       "status": "paid",
       "invoice": "582151",
+      "is_summary": 0,
       "source": "ZP2024-0129_1627_Jaynes_St.txt"
+    },
+    {
+      "permit_number": "ZP2016-0166",
+      "permit_type": "Planning",
+      "address": "1367 University Ave",
+      "description": "Total Paid",
+      "amount": 878.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1367_UNIVERSITY_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2015-0200",
+      "permit_type": "Planning",
+      "address": "1367 University Ave",
+      "description": "Total Paid",
+      "amount": 878.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1367_UNIVERSITY_Ave.txt"
     },
     {
       "permit_number": "UNKNOWN",
@@ -1934,6 +4246,7 @@
       "date": "2010-07-28",
       "status": "paid",
       "invoice": "10519",
+      "is_summary": 0,
       "source": "1701_SAN_PABLO.txt"
     },
     {
@@ -1945,6 +4258,7 @@
       "date": "2023-06-20",
       "status": "paid",
       "invoice": "538051",
+      "is_summary": 0,
       "source": "ZP2023-0089_2441_LE_CONTE_Ave.txt"
     },
     {
@@ -1956,6 +4270,7 @@
       "date": "2023-09-06",
       "status": "paid",
       "invoice": "543110",
+      "is_summary": 0,
       "source": "ZP2023-0126_2530_Bancroft.txt"
     },
     {
@@ -1967,6 +4282,7 @@
       "date": "2024-02-08",
       "status": "paid",
       "invoice": "556638",
+      "is_summary": 0,
       "source": "ZP2024-0014__1048_Keith_St.txt"
     },
     {
@@ -1978,6 +4294,7 @@
       "date": "2026-03-02",
       "status": "paid",
       "invoice": "636386",
+      "is_summary": 0,
       "source": "ZP2025-0107_2001_CENTER_St.txt"
     },
     {
@@ -1989,6 +4306,7 @@
       "date": "2023-11-20",
       "status": "paid",
       "invoice": "547664",
+      "is_summary": 0,
       "source": "ZP2023-0089_2441_LE_CONTE_Ave.txt"
     },
     {
@@ -2000,6 +4318,7 @@
       "date": "2023-06-09",
       "status": "paid",
       "invoice": "559228",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2011,6 +4330,7 @@
       "date": "2022-02-04",
       "status": "paid",
       "invoice": "486258",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2022,6 +4342,7 @@
       "date": "2021-12-09",
       "status": "paid",
       "invoice": "480926",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2033,7 +4354,20 @@
       "date": "2024-09-18",
       "status": "paid",
       "invoice": "579360",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
+    },
+    {
+      "permit_number": "PLN2021-0030",
+      "permit_type": "Planning",
+      "address": "2449 DWIGHT Way",
+      "description": "Total Paid",
+      "amount": 750.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2022-0021_2449_DWIGHT_Way.txt"
     },
     {
       "permit_number": "PLN2021-0054",
@@ -2044,7 +4378,56 @@
       "date": "2021-10-21",
       "status": "paid",
       "invoice": "478368",
+      "is_summary": 0,
       "source": "2001_ASHBY_Ave.txt"
+    },
+    {
+      "permit_number": "PLN2021-0036",
+      "permit_type": "Planning",
+      "address": "2024 ASHBY Ave",
+      "description": "Total Paid",
+      "amount": 750.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2016_ASHBY_Ave.txt"
+    },
+    {
+      "permit_number": "PLN2021-0037",
+      "permit_type": "Planning",
+      "address": "1708 HARMON St",
+      "description": "Total Paid",
+      "amount": 750.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1708_HARMON_St.txt"
+    },
+    {
+      "permit_number": "PLN2019-0021",
+      "permit_type": "Planning",
+      "address": "1367 University Ave",
+      "description": "Total Paid",
+      "amount": 750.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1367_UNIVERSITY_Ave.txt"
+    },
+    {
+      "permit_number": "PLN2021-0055",
+      "permit_type": "Planning",
+      "address": "1752 SHATTUCK AVE",
+      "description": "Total Paid",
+      "amount": 750.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1752_SHATTUCK_Ave.txt"
     },
     {
       "permit_number": "PLN2020-0041",
@@ -2055,7 +4438,32 @@
       "date": "2020-09-25",
       "status": "paid",
       "invoice": "446508",
+      "is_summary": 0,
       "source": "ZP2021-0046_2136_SAN_PABLO_Ave.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "1598 UNIVERSITY Ave",
+      "description": "Total Paid",
+      "amount": 750.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "1598_UNIVERSITY.txt"
+    },
+    {
+      "permit_number": "ZP2022-0011",
+      "permit_type": "Planning",
+      "address": "1598 UNIVERSITY Ave",
+      "description": "Total Paid",
+      "amount": 750.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2022-0011_1598_UNIVERSITY_Ave.txt"
     },
     {
       "permit_number": "ZP2021-0158",
@@ -2066,7 +4474,20 @@
       "date": "2021-08-26",
       "status": "paid",
       "invoice": "475179",
+      "is_summary": 0,
       "source": "ZP2021-0158_130_BERKELEY_Sq.txt"
+    },
+    {
+      "permit_number": "DRCP2019-0015",
+      "permit_type": "Planning",
+      "address": "2136 SAN PABLO AVE",
+      "description": "Total Paid",
+      "amount": 650.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2021-0046_2136_SAN_PABLO_Ave.txt"
     },
     {
       "permit_number": "P2022-0038",
@@ -2077,6 +4498,7 @@
       "date": "2022-03-03",
       "status": "paid",
       "invoice": "491262",
+      "is_summary": 0,
       "source": "P2022-0038_2820_San_Pablo.txt"
     },
     {
@@ -2088,6 +4510,7 @@
       "date": "2022-02-17",
       "status": "paid",
       "invoice": "488406",
+      "is_summary": 0,
       "source": "ZP2021-0158_130_BERKELEY_Sq.txt"
     },
     {
@@ -2099,7 +4522,44 @@
       "date": "2022-10-07",
       "status": "paid",
       "invoice": "510755",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
+    },
+    {
+      "permit_number": "ZP2024-0112",
+      "permit_type": "Planning",
+      "address": "2463 PRINCE ST",
+      "description": "Total Paid",
+      "amount": 630.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2024-0112_3035_COLBY_St.txt"
+    },
+    {
+      "permit_number": "ZP2026-0015",
+      "permit_type": "Planning",
+      "address": "2455 TELEGRAPH Ave / 2506 HASTE St",
+      "description": "Total Paid",
+      "amount": 630.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2026-0015_2455_TELEGRAPH_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2025-0048",
+      "permit_type": "Planning",
+      "address": "2538 DURANT Ave",
+      "description": "Total Paid",
+      "amount": 630.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2538_DURANT_Ave.txt"
     },
     {
       "permit_number": "ZP2022-0019",
@@ -2110,7 +4570,20 @@
       "date": "2025-06-26",
       "status": "paid",
       "invoice": "610591",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2024-0122",
+      "permit_type": "Planning",
+      "address": "3036 REGENT ST",
+      "description": "Total Paid",
+      "amount": 575.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2024-0122_3036_REGENT_St.txt"
     },
     {
       "permit_number": "ZP2024-0008",
@@ -2121,6 +4594,7 @@
       "date": "2024-01-23",
       "status": "paid",
       "invoice": "553845",
+      "is_summary": 0,
       "source": "ZP2024-0008_1614_Sixth_St.txt"
     },
     {
@@ -2132,6 +4606,7 @@
       "date": "2025-01-06",
       "status": "paid",
       "invoice": "588090",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2143,6 +4618,7 @@
       "date": "2025-11-26",
       "status": "paid",
       "invoice": "621279",
+      "is_summary": 0,
       "source": "ZP2025-0107_2001_CENTER_St.txt"
     },
     {
@@ -2154,6 +4630,7 @@
       "date": "2024-11-18",
       "status": "paid",
       "invoice": "582931",
+      "is_summary": 0,
       "source": "ZP2024-0162_2425_Durant_Ave.txt"
     },
     {
@@ -2165,6 +4642,7 @@
       "date": "2024-09-12",
       "status": "paid",
       "invoice": "578986",
+      "is_summary": 0,
       "source": "ZP2024-0131_2113-15_Kittredge.txt"
     },
     {
@@ -2176,6 +4654,19 @@
       "date": "2024-12-13",
       "status": "paid",
       "invoice": "584662",
+      "is_summary": 0,
+      "source": "1701_SAN_PABLO.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "1701 SAN PABLO AVE",
+      "description": "Total Paid",
+      "amount": 500.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
       "source": "1701_SAN_PABLO.txt"
     },
     {
@@ -2187,6 +4678,7 @@
       "date": "2025-06-12",
       "status": "paid",
       "invoice": "609098",
+      "is_summary": 0,
       "source": "ZP2024-0138_2145_GRANT_St.txt"
     },
     {
@@ -2198,6 +4690,7 @@
       "date": "2024-09-24",
       "status": "paid",
       "invoice": "579750",
+      "is_summary": 0,
       "source": "ZP2024-0138_2145_GRANT_St.txt"
     },
     {
@@ -2209,6 +4702,7 @@
       "date": "2024-09-05",
       "status": "paid",
       "invoice": "578412",
+      "is_summary": 0,
       "source": "ZP2024-0116_811_Cedar.txt"
     },
     {
@@ -2220,6 +4714,7 @@
       "date": "2024-12-24",
       "status": "paid",
       "invoice": "585997",
+      "is_summary": 0,
       "source": "ZP2024-0116_811_Cedar.txt"
     },
     {
@@ -2231,6 +4726,7 @@
       "date": "2025-11-25",
       "status": "paid",
       "invoice": "621161",
+      "is_summary": 0,
       "source": "ZP2025-0105_2712_TELEGRAPH_Ave.txt"
     },
     {
@@ -2242,6 +4738,7 @@
       "date": "2025-05-29",
       "status": "paid",
       "invoice": "607931",
+      "is_summary": 0,
       "source": "ZP2024-0181_2029_UNIVERSITY.txt"
     },
     {
@@ -2253,6 +4750,7 @@
       "date": "2025-01-16",
       "status": "paid",
       "invoice": "589573",
+      "is_summary": 0,
       "source": "ZP2024-0181_2029_UNIVERSITY.txt"
     },
     {
@@ -2264,6 +4762,7 @@
       "date": "2024-12-19",
       "status": "paid",
       "invoice": "585372",
+      "is_summary": 0,
       "source": "ZP2024-0181_2029_UNIVERSITY.txt"
     },
     {
@@ -2275,6 +4774,7 @@
       "date": "2024-09-06",
       "status": "paid",
       "invoice": "578479",
+      "is_summary": 0,
       "source": "ZP2024-0129_1627_Jaynes_St.txt"
     },
     {
@@ -2286,6 +4786,7 @@
       "date": "2024-11-05",
       "status": "paid",
       "invoice": "582151",
+      "is_summary": 0,
       "source": "ZP2024-0129_1627_Jaynes_St.txt"
     },
     {
@@ -2297,6 +4798,7 @@
       "date": "2024-09-18",
       "status": "paid",
       "invoice": "579377",
+      "is_summary": 0,
       "source": "ZP2024-0070_2442_Haste.txt"
     },
     {
@@ -2308,6 +4810,7 @@
       "date": "2023-06-09",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2319,6 +4822,7 @@
       "date": "2022-10-04",
       "status": "paid",
       "invoice": "510500",
+      "is_summary": 0,
       "source": "ZP2022-0116_2920_SHATTUCK_Ave.txt"
     },
     {
@@ -2330,6 +4834,7 @@
       "date": "2023-11-28",
       "status": "paid",
       "invoice": "548017",
+      "is_summary": 0,
       "source": "ZP2023-0126_2530_Bancroft.txt"
     },
     {
@@ -2341,6 +4846,7 @@
       "date": "2023-11-28",
       "status": "paid",
       "invoice": "548017",
+      "is_summary": 0,
       "source": "ZP2023-0126_2530_Bancroft.txt"
     },
     {
@@ -2352,6 +4858,7 @@
       "date": "2023-01-13",
       "status": "paid",
       "invoice": "517156",
+      "is_summary": 0,
       "source": "ZP2022-0171_2601_SAN_PABLO_Ave.txt"
     },
     {
@@ -2363,6 +4870,7 @@
       "date": "2023-03-20",
       "status": "paid",
       "invoice": "529636",
+      "is_summary": 0,
       "source": "PLN2023-0025_1914_FIFTH_St.txt"
     },
     {
@@ -2374,6 +4882,7 @@
       "date": "2024-03-12",
       "status": "paid",
       "invoice": "562871",
+      "is_summary": 0,
       "source": "ZP2024-0014__1048_Keith_St.txt"
     },
     {
@@ -2385,6 +4894,7 @@
       "date": "2023-03-16",
       "status": "paid",
       "invoice": "529049",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
     },
     {
@@ -2396,6 +4906,7 @@
       "date": "2023-06-15",
       "status": "paid",
       "invoice": "544034",
+      "is_summary": 0,
       "source": "ZP2023-0064_2037_Durant.txt"
     },
     {
@@ -2407,6 +4918,7 @@
       "date": "2024-10-07",
       "status": "paid",
       "invoice": "580528",
+      "is_summary": 0,
       "source": "ZP2024-0131_2113-15_Kittredge.txt"
     },
     {
@@ -2418,6 +4930,7 @@
       "date": "2026-02-14",
       "status": "paid",
       "invoice": "632595",
+      "is_summary": 0,
       "source": "ZP2025-0105_2712_TELEGRAPH_Ave.txt"
     },
     {
@@ -2429,6 +4942,7 @@
       "date": "2024-09-18",
       "status": "paid",
       "invoice": "579329",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
     },
     {
@@ -2440,6 +4954,7 @@
       "date": "2023-08-23",
       "status": "paid",
       "invoice": "542223",
+      "is_summary": 0,
       "source": "ZP2023-0123_2833_Seventh_St.txt"
     },
     {
@@ -2451,6 +4966,7 @@
       "date": "2023-03-16",
       "status": "paid",
       "invoice": "529049",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
     },
     {
@@ -2462,6 +4978,7 @@
       "date": "2022-06-16",
       "status": "paid",
       "invoice": "504370",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2473,7 +4990,20 @@
       "date": "2022-02-04",
       "status": "paid",
       "invoice": "486258",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
+    },
+    {
+      "permit_number": "PLN2022-0018",
+      "permit_type": "Planning",
+      "address": "2538 DURANT Ave",
+      "description": "Total Paid",
+      "amount": 400.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "2538_DURANT_Ave.txt"
     },
     {
       "permit_number": "UNKNOWN",
@@ -2484,7 +5014,32 @@
       "date": "2010-07-28",
       "status": "paid",
       "invoice": "10519",
+      "is_summary": 0,
       "source": "1701_SAN_PABLO.txt"
+    },
+    {
+      "permit_number": "B2024-03794",
+      "permit_type": "Building",
+      "address": "3030 TELEGRAPH Ave",
+      "description": "Total Paid",
+      "amount": 361.03,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2022-0170_3030_TELEGRAPH_Ave.txt"
+    },
+    {
+      "permit_number": "ZP2023-0079",
+      "permit_type": "Planning",
+      "address": "** 2274 Shattuck Ave",
+      "description": "Total Paid",
+      "amount": 361.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2023-0079_2274_SHATTUCK.txt"
     },
     {
       "permit_number": "ZP2022-0019",
@@ -2495,6 +5050,7 @@
       "date": "2024-04-10",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2506,6 +5062,7 @@
       "date": "2022-07-05",
       "status": "paid",
       "invoice": "505311",
+      "is_summary": 0,
       "source": "P2022-0038_2820_San_Pablo.txt"
     },
     {
@@ -2517,6 +5074,7 @@
       "date": "2024-05-30",
       "status": "paid",
       "invoice": "571737",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2528,6 +5086,7 @@
       "date": "2024-09-26",
       "status": "paid",
       "invoice": "579959",
+      "is_summary": 0,
       "source": "1701_SAN_PABLO.txt"
     },
     {
@@ -2539,6 +5098,7 @@
       "date": "2024-07-31",
       "status": "paid",
       "invoice": "576216",
+      "is_summary": 0,
       "source": "PLN2023-0065_1740_SAN_PABLO_Ave.txt"
     },
     {
@@ -2550,6 +5110,7 @@
       "date": "2024-04-10",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2561,6 +5122,7 @@
       "date": "2023-06-20",
       "status": "paid",
       "invoice": "538051",
+      "is_summary": 0,
       "source": "ZP2023-0089_2441_LE_CONTE_Ave.txt"
     },
     {
@@ -2572,6 +5134,7 @@
       "date": "2023-06-09",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2583,6 +5146,7 @@
       "date": "2023-09-11",
       "status": "paid",
       "invoice": "543336",
+      "is_summary": 0,
       "source": "ZP2023-0089_2441_LE_CONTE_Ave.txt"
     },
     {
@@ -2594,6 +5158,7 @@
       "date": "2023-09-11",
       "status": "paid",
       "invoice": "543338",
+      "is_summary": 0,
       "source": "ZP2022-0171_2601_SAN_PABLO_Ave.txt"
     },
     {
@@ -2605,6 +5170,7 @@
       "date": "2025-05-14",
       "status": "paid",
       "invoice": "606784",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2616,6 +5182,7 @@
       "date": "2025-01-14",
       "status": "paid",
       "invoice": "589147",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2627,6 +5194,7 @@
       "date": "2024-10-28",
       "status": "paid",
       "invoice": "581696",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2638,6 +5206,7 @@
       "date": "2024-09-03",
       "status": "paid",
       "invoice": "578212",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2649,6 +5218,7 @@
       "date": "2024-07-30",
       "status": "paid",
       "invoice": "578120",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2660,6 +5230,7 @@
       "date": "2024-07-10",
       "status": "paid",
       "invoice": "574575",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2671,6 +5242,7 @@
       "date": "2025-03-12",
       "status": "paid",
       "invoice": "600742",
+      "is_summary": 0,
       "source": "ZP2024-0162_2425_Durant_Ave.txt"
     },
     {
@@ -2682,6 +5254,7 @@
       "date": "2024-12-13",
       "status": "paid",
       "invoice": "584670",
+      "is_summary": 0,
       "source": "ZP2024-0162_2425_Durant_Ave.txt"
     },
     {
@@ -2693,6 +5266,7 @@
       "date": "2024-12-13",
       "status": "paid",
       "invoice": "584670",
+      "is_summary": 0,
       "source": "ZP2024-0162_2425_Durant_Ave.txt"
     },
     {
@@ -2704,6 +5278,7 @@
       "date": "2024-11-12",
       "status": "paid",
       "invoice": "582430",
+      "is_summary": 0,
       "source": "P2022-0038_2820_San_Pablo.txt"
     },
     {
@@ -2715,7 +5290,20 @@
       "date": "2025-05-02",
       "status": "paid",
       "invoice": "605892",
+      "is_summary": 0,
       "source": "ZP2024-0181_2029_UNIVERSITY.txt"
+    },
+    {
+      "permit_number": "B2025-01173",
+      "permit_type": "Building",
+      "address": "3030 TELEGRAPH Ave",
+      "description": "Outstanding",
+      "amount": 250.0,
+      "date": "2026-02-26",
+      "status": "outstanding",
+      "invoice": "635284",
+      "is_summary": 0,
+      "source": "ZP2022-0170_3030_TELEGRAPH_Ave.txt"
     },
     {
       "permit_number": "ZP2022-0019",
@@ -2726,6 +5314,7 @@
       "date": "2023-06-09",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2737,6 +5326,7 @@
       "date": "2023-06-09",
       "status": "paid",
       "invoice": "537585",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2748,6 +5338,7 @@
       "date": "2024-02-29",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2759,7 +5350,20 @@
       "date": "2022-10-07",
       "status": "paid",
       "invoice": "510755",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
+    },
+    {
+      "permit_number": "B2023-06437",
+      "permit_type": "Building",
+      "address": "3030 TELEGRAPH Ave",
+      "description": null,
+      "amount": 200.0,
+      "date": "2023-11-29",
+      "status": "paid",
+      "invoice": "548032",
+      "is_summary": 0,
+      "source": "ZP2022-0170_3030_TELEGRAPH_Ave.txt"
     },
     {
       "permit_number": "ZP2022-0019",
@@ -2770,6 +5374,7 @@
       "date": "2025-01-07",
       "status": "paid",
       "invoice": "588090",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2781,6 +5386,7 @@
       "date": "2023-06-09",
       "status": "paid",
       "invoice": "537585",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2792,6 +5398,7 @@
       "date": "2024-04-10",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2803,6 +5410,7 @@
       "date": "2024-04-10",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2814,6 +5422,7 @@
       "date": "2010-06-08",
       "status": "paid",
       "invoice": "10277",
+      "is_summary": 0,
       "source": "1701_SAN_PABLO.txt"
     },
     {
@@ -2825,6 +5434,7 @@
       "date": "2024-04-10",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2836,6 +5446,7 @@
       "date": "2023-09-08",
       "status": "paid",
       "invoice": "543269",
+      "is_summary": 0,
       "source": "P2022-0038_2820_San_Pablo.txt"
     },
     {
@@ -2847,6 +5458,7 @@
       "date": "2024-03-12",
       "status": "paid",
       "invoice": "562871",
+      "is_summary": 0,
       "source": "ZP2024-0014__1048_Keith_St.txt"
     },
     {
@@ -2858,6 +5470,7 @@
       "date": "2024-06-27",
       "status": "paid",
       "invoice": "573645",
+      "is_summary": 0,
       "source": "ZP2024-0014__1048_Keith_St.txt"
     },
     {
@@ -2869,7 +5482,44 @@
       "date": "2024-04-10",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
+    },
+    {
+      "permit_number": "LMIN2020-0004",
+      "permit_type": "Unknown",
+      "address": "2136 SAN PABLO AVE",
+      "description": "Total Paid",
+      "amount": 100.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
+      "source": "ZP2021-0046_2136_SAN_PABLO_Ave.txt"
+    },
+    {
+      "permit_number": "B2017-00252",
+      "permit_type": "Building",
+      "address": "3030 TELEGRAPH Ave",
+      "description": null,
+      "amount": 100.0,
+      "date": "2017-04-10",
+      "status": "paid",
+      "invoice": "335703",
+      "is_summary": 0,
+      "source": "ZP2022-0170_3030_TELEGRAPH_Ave.txt"
+    },
+    {
+      "permit_number": "B2017-00252",
+      "permit_type": "Building",
+      "address": "3030 TELEGRAPH Ave",
+      "description": null,
+      "amount": 100.0,
+      "date": "2017-04-04",
+      "status": "paid",
+      "invoice": "335339",
+      "is_summary": 0,
+      "source": "ZP2022-0170_3030_TELEGRAPH_Ave.txt"
     },
     {
       "permit_number": "ZP2022-0019",
@@ -2880,6 +5530,7 @@
       "date": "2024-04-10",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2891,6 +5542,7 @@
       "date": "2025-05-14",
       "status": "paid",
       "invoice": "606784",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2902,6 +5554,7 @@
       "date": "2025-05-14",
       "status": "paid",
       "invoice": "606784",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2913,6 +5566,7 @@
       "date": "2025-05-14",
       "status": "paid",
       "invoice": "606784",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -2924,6 +5578,7 @@
       "date": "2025-11-26",
       "status": "paid",
       "invoice": "621279",
+      "is_summary": 0,
       "source": "ZP2025-0107_2001_CENTER_St.txt"
     },
     {
@@ -2935,6 +5590,7 @@
       "date": "2024-11-18",
       "status": "paid",
       "invoice": "582931",
+      "is_summary": 0,
       "source": "ZP2024-0162_2425_Durant_Ave.txt"
     },
     {
@@ -2946,6 +5602,7 @@
       "date": "2024-09-12",
       "status": "paid",
       "invoice": "578986",
+      "is_summary": 0,
       "source": "ZP2024-0131_2113-15_Kittredge.txt"
     },
     {
@@ -2957,6 +5614,7 @@
       "date": "2025-06-12",
       "status": "paid",
       "invoice": "609098",
+      "is_summary": 0,
       "source": "ZP2024-0138_2145_GRANT_St.txt"
     },
     {
@@ -2968,6 +5626,7 @@
       "date": "2024-09-24",
       "status": "paid",
       "invoice": "579750",
+      "is_summary": 0,
       "source": "ZP2024-0138_2145_GRANT_St.txt"
     },
     {
@@ -2979,6 +5638,7 @@
       "date": "2024-09-05",
       "status": "paid",
       "invoice": "578412",
+      "is_summary": 0,
       "source": "ZP2024-0116_811_Cedar.txt"
     },
     {
@@ -2990,6 +5650,7 @@
       "date": "2025-11-25",
       "status": "paid",
       "invoice": "621162",
+      "is_summary": 0,
       "source": "ZP2025-0105_2712_TELEGRAPH_Ave.txt"
     },
     {
@@ -3001,6 +5662,7 @@
       "date": "2024-12-19",
       "status": "paid",
       "invoice": "585372",
+      "is_summary": 0,
       "source": "ZP2024-0181_2029_UNIVERSITY.txt"
     },
     {
@@ -3012,6 +5674,7 @@
       "date": "2024-09-06",
       "status": "paid",
       "invoice": "578479",
+      "is_summary": 0,
       "source": "ZP2024-0129_1627_Jaynes_St.txt"
     },
     {
@@ -3023,6 +5686,7 @@
       "date": "2024-04-10",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -3034,6 +5698,7 @@
       "date": "2024-04-10",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -3045,6 +5710,7 @@
       "date": "2022-10-07",
       "status": "paid",
       "invoice": "529049",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
     },
     {
@@ -3056,6 +5722,7 @@
       "date": "2023-06-09",
       "status": "paid",
       "invoice": "537585",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -3067,6 +5734,7 @@
       "date": "2025-01-14",
       "status": "paid",
       "invoice": "589147",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -3078,6 +5746,7 @@
       "date": "2024-10-28",
       "status": "paid",
       "invoice": "581696",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -3089,6 +5758,7 @@
       "date": "2024-07-30",
       "status": "paid",
       "invoice": "578120",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -3100,6 +5770,7 @@
       "date": "2024-07-10",
       "status": "paid",
       "invoice": "574575",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -3111,6 +5782,7 @@
       "date": "2024-04-10",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -3122,6 +5794,7 @@
       "date": "2022-06-16",
       "status": "paid",
       "invoice": "504370",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -3133,6 +5806,19 @@
       "date": "2013-01-04",
       "status": "paid",
       "invoice": "13460",
+      "is_summary": 0,
+      "source": "1701_SAN_PABLO.txt"
+    },
+    {
+      "permit_number": "UNKNOWN",
+      "permit_type": "Unknown",
+      "address": "1701 SAN PABLO AVE",
+      "description": "Total Paid",
+      "amount": 60.0,
+      "date": null,
+      "status": "paid",
+      "invoice": null,
+      "is_summary": 1,
       "source": "1701_SAN_PABLO.txt"
     },
     {
@@ -3144,6 +5830,7 @@
       "date": "2026-03-19",
       "status": "paid",
       "invoice": "639637",
+      "is_summary": 0,
       "source": "ZP2025-0107_2001_CENTER_St.txt"
     },
     {
@@ -3155,6 +5842,7 @@
       "date": "2026-03-02",
       "status": "paid",
       "invoice": "636386",
+      "is_summary": 0,
       "source": "ZP2025-0107_2001_CENTER_St.txt"
     },
     {
@@ -3166,6 +5854,7 @@
       "date": "2024-11-18",
       "status": "paid",
       "invoice": "582931",
+      "is_summary": 0,
       "source": "ZP2024-0162_2425_Durant_Ave.txt"
     },
     {
@@ -3177,6 +5866,7 @@
       "date": "2024-09-12",
       "status": "paid",
       "invoice": "578986",
+      "is_summary": 0,
       "source": "ZP2024-0131_2113-15_Kittredge.txt"
     },
     {
@@ -3188,6 +5878,7 @@
       "date": "2024-08-27",
       "status": "paid",
       "invoice": "577941",
+      "is_summary": 0,
       "source": "1701_SAN_PABLO.txt"
     },
     {
@@ -3199,6 +5890,7 @@
       "date": "2024-09-24",
       "status": "paid",
       "invoice": "579750",
+      "is_summary": 0,
       "source": "ZP2024-0138_2145_GRANT_St.txt"
     },
     {
@@ -3210,6 +5902,7 @@
       "date": "2024-09-20",
       "status": "paid",
       "invoice": "579539",
+      "is_summary": 0,
       "source": "PLN2024-0054_2372_ELLSWORTH_St.txt"
     },
     {
@@ -3221,6 +5914,7 @@
       "date": "2024-09-05",
       "status": "paid",
       "invoice": "578412",
+      "is_summary": 0,
       "source": "ZP2024-0116_811_Cedar.txt"
     },
     {
@@ -3232,6 +5926,7 @@
       "date": "2024-12-24",
       "status": "paid",
       "invoice": "585997",
+      "is_summary": 0,
       "source": "ZP2024-0116_811_Cedar.txt"
     },
     {
@@ -3243,6 +5938,7 @@
       "date": "2026-02-14",
       "status": "paid",
       "invoice": "632595",
+      "is_summary": 0,
       "source": "ZP2025-0105_2712_TELEGRAPH_Ave.txt"
     },
     {
@@ -3254,6 +5950,7 @@
       "date": "2024-12-19",
       "status": "paid",
       "invoice": "585372",
+      "is_summary": 0,
       "source": "ZP2024-0181_2029_UNIVERSITY.txt"
     },
     {
@@ -3265,6 +5962,7 @@
       "date": "2024-09-06",
       "status": "paid",
       "invoice": "578479",
+      "is_summary": 0,
       "source": "ZP2024-0129_1627_Jaynes_St.txt"
     },
     {
@@ -3276,6 +5974,7 @@
       "date": "2024-09-18",
       "status": "paid",
       "invoice": "579377",
+      "is_summary": 0,
       "source": "ZP2024-0070_2442_Haste.txt"
     },
     {
@@ -3287,6 +5986,7 @@
       "date": "2022-02-04",
       "status": "paid",
       "invoice": "486258",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -3298,6 +5998,7 @@
       "date": "2023-06-20",
       "status": "paid",
       "invoice": "538051",
+      "is_summary": 0,
       "source": "ZP2023-0089_2441_LE_CONTE_Ave.txt"
     },
     {
@@ -3309,6 +6010,7 @@
       "date": "2022-03-03",
       "status": "paid",
       "invoice": "491262",
+      "is_summary": 0,
       "source": "P2022-0038_2820_San_Pablo.txt"
     },
     {
@@ -3320,6 +6022,7 @@
       "date": "2022-09-03",
       "status": "paid",
       "invoice": "508922",
+      "is_summary": 0,
       "source": "ZP2022-0116_2920_SHATTUCK_Ave.txt"
     },
     {
@@ -3331,6 +6034,7 @@
       "date": "2024-01-23",
       "status": "paid",
       "invoice": "553845",
+      "is_summary": 0,
       "source": "ZP2024-0008_1614_Sixth_St.txt"
     },
     {
@@ -3342,6 +6046,7 @@
       "date": "2022-04-26",
       "status": "paid",
       "invoice": "499818",
+      "is_summary": 0,
       "source": "1701_SAN_PABLO.txt"
     },
     {
@@ -3353,6 +6058,7 @@
       "date": "2022-10-11",
       "status": "paid",
       "invoice": "510896",
+      "is_summary": 0,
       "source": "1701_SAN_PABLO.txt"
     },
     {
@@ -3364,6 +6070,7 @@
       "date": "2023-09-06",
       "status": "paid",
       "invoice": "543110",
+      "is_summary": 0,
       "source": "ZP2023-0126_2530_Bancroft.txt"
     },
     {
@@ -3375,6 +6082,7 @@
       "date": "2023-08-25",
       "status": "paid",
       "invoice": "542442",
+      "is_summary": 0,
       "source": "PLN2023-0065_1740_SAN_PABLO_Ave.txt"
     },
     {
@@ -3386,6 +6094,7 @@
       "date": "2021-08-26",
       "status": "paid",
       "invoice": "475179",
+      "is_summary": 0,
       "source": "ZP2021-0158_130_BERKELEY_Sq.txt"
     },
     {
@@ -3397,6 +6106,7 @@
       "date": "2022-12-02",
       "status": "paid",
       "invoice": "513739",
+      "is_summary": 0,
       "source": "ZP2022-0171_2601_SAN_PABLO_Ave.txt"
     },
     {
@@ -3408,6 +6118,7 @@
       "date": "2024-02-08",
       "status": "paid",
       "invoice": "556638",
+      "is_summary": 0,
       "source": "ZP2024-0014__1048_Keith_St.txt"
     },
     {
@@ -3419,6 +6130,7 @@
       "date": "2023-08-23",
       "status": "paid",
       "invoice": "542223",
+      "is_summary": 0,
       "source": "ZP2023-0123_2833_Seventh_St.txt"
     },
     {
@@ -3430,6 +6142,7 @@
       "date": "2024-06-11",
       "status": "paid",
       "invoice": "572616",
+      "is_summary": 0,
       "source": "LMSAP2024-0005_2276_SHATTUCK_Ave.txt"
     },
     {
@@ -3441,6 +6154,7 @@
       "date": "2022-10-07",
       "status": "paid",
       "invoice": "510755",
+      "is_summary": 0,
       "source": " ZP2022-0135_2128_Oxford_St.txt"
     },
     {
@@ -3452,6 +6166,7 @@
       "date": "2023-05-11",
       "status": "paid",
       "invoice": "535755",
+      "is_summary": 0,
       "source": "ZP2023-0064_2037_Durant.txt"
     },
     {
@@ -3463,6 +6178,7 @@
       "date": "2010-07-28",
       "status": "paid",
       "invoice": "10519",
+      "is_summary": 0,
       "source": "1701_SAN_PABLO.txt"
     },
     {
@@ -3474,6 +6190,7 @@
       "date": "2010-06-08",
       "status": "paid",
       "invoice": "10277",
+      "is_summary": 0,
       "source": "1701_SAN_PABLO.txt"
     },
     {
@@ -3485,6 +6202,7 @@
       "date": "2024-04-10",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -3496,6 +6214,7 @@
       "date": "2024-04-10",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -3507,6 +6226,7 @@
       "date": "2024-04-10",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -3518,6 +6238,7 @@
       "date": "2024-04-10",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -3529,6 +6250,7 @@
       "date": "2024-04-10",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -3540,6 +6262,7 @@
       "date": "2024-04-10",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -3551,6 +6274,7 @@
       "date": "2024-04-10",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -3562,6 +6286,7 @@
       "date": "2024-04-10",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -3573,6 +6298,7 @@
       "date": "2024-04-10",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -3584,7 +6310,32 @@
       "date": "2023-06-09",
       "status": "paid",
       "invoice": "537585",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
+    },
+    {
+      "permit_number": "B2017-00252",
+      "permit_type": "Building",
+      "address": "3030 TELEGRAPH Ave",
+      "description": null,
+      "amount": 22.0,
+      "date": "2017-04-10",
+      "status": "paid",
+      "invoice": "335703",
+      "is_summary": 0,
+      "source": "ZP2022-0170_3030_TELEGRAPH_Ave.txt"
+    },
+    {
+      "permit_number": "B2017-00252",
+      "permit_type": "Building",
+      "address": "3030 TELEGRAPH Ave",
+      "description": null,
+      "amount": 22.0,
+      "date": "2017-04-04",
+      "status": "paid",
+      "invoice": "335339",
+      "is_summary": 0,
+      "source": "ZP2022-0170_3030_TELEGRAPH_Ave.txt"
     },
     {
       "permit_number": "ZP2022-0019",
@@ -3595,6 +6346,7 @@
       "date": "2024-10-15",
       "status": "paid",
       "invoice": "580892",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -3606,6 +6358,7 @@
       "date": "2023-06-09",
       "status": "paid",
       "invoice": "548180",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -3617,6 +6370,7 @@
       "date": "2024-04-10",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -3628,6 +6382,7 @@
       "date": "2024-04-10",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     },
     {
@@ -3639,6 +6394,7 @@
       "date": "2024-04-10",
       "status": "paid",
       "invoice": "568303",
+      "is_summary": 0,
       "source": "ZP2022-0019_2555_COLLEGE_Ave.txt"
     }
   ]

@@ -217,7 +217,7 @@
         });
 
         // Histogram
-        const procDays = DATA.projects.filter(p => p.proc_days > 0).map(p => p.proc_days);
+        const procDays = DATA.projects.filter(p => p.processing_days > 0).map(p => p.processing_days);
         const bins = [0, 100, 200, 300, 400, 500, 600, 800, 1000];
         const histData = bins.slice(0, -1).map((b, i) => 
             procDays.filter(d => d >= b && d < bins[i+1]).length
@@ -232,8 +232,8 @@
         });
 
         // Scatter Plot
-        const scatterData = DATA.projects.filter(p => p.proc_days > 0 && p.units > 0).map(p => ({
-            x: p.units, y: p.proc_days, label: p.address
+        const scatterData = DATA.projects.filter(p => p.processing_days > 0 && p.units > 0).map(p => ({
+            x: p.units, y: p.processing_days, label: p.address
         }));
         new Chart(document.getElementById('scatterChart'), {
             type: 'scatter',
@@ -246,11 +246,11 @@
 
         // Box Plot (simplified as grouped bar)
         const sizeCategories = { 'Small (1-9)': [], 'Medium (10-49)': [], 'Large (50-99)': [], 'Mega (100+)': [] };
-        DATA.projects.filter(p => p.proc_days > 0).forEach(p => {
-            if (p.units >= 100) sizeCategories['Mega (100+)'].push(p.proc_days);
-            else if (p.units >= 50) sizeCategories['Large (50-99)'].push(p.proc_days);
-            else if (p.units >= 10) sizeCategories['Medium (10-49)'].push(p.proc_days);
-            else sizeCategories['Small (1-9)'].push(p.proc_days);
+        DATA.projects.filter(p => p.processing_days > 0).forEach(p => {
+            if (p.units >= 100) sizeCategories['Mega (100+)'].push(p.processing_days);
+            else if (p.units >= 50) sizeCategories['Large (50-99)'].push(p.processing_days);
+            else if (p.units >= 10) sizeCategories['Medium (10-49)'].push(p.processing_days);
+            else sizeCategories['Small (1-9)'].push(p.processing_days);
         });
         const boxData = Object.entries(sizeCategories).map(([k, v]) => ({
             category: k,
@@ -268,9 +268,9 @@
 
         // Trend Chart
         const yearProcDays = {};
-        DATA.projects.filter(p => p.proc_days > 0 && p.year >= 2020).forEach(p => {
+        DATA.projects.filter(p => p.processing_days > 0 && p.year >= 2020).forEach(p => {
             if (!yearProcDays[p.year]) yearProcDays[p.year] = [];
-            yearProcDays[p.year].push(p.proc_days);
+            yearProcDays[p.year].push(p.processing_days);
         });
         const trendYears = Object.keys(yearProcDays).sort();
         new Chart(document.getElementById('trendChart'), {
@@ -491,6 +491,38 @@
 
     // Gantt Chart
     let ganttSort = 'duration';
+
+    // Get earliest available date for a project
+    function getProjectStartDate(p) {
+        if (p.app_filed) return p.app_filed;
+        if (p.app_complete) return p.app_complete;
+        if (p.entitled) return p.entitled;
+        if (p.bp_issued) return p.bp_issued;
+        if (p.construction_start) return p.construction_start;
+        if (p.co_date) return p.co_date;
+        // Fallback to year field
+        if (p.year) return `${p.year}-01-01`;
+        return '2020-01-01'; // Ultimate fallback
+    }
+
+    // Get status color for Gantt bar
+    function getStatusColor(status) {
+        const colors = {
+            'Approved': 'bg-green-500',
+            'Entitled': 'bg-green-500',
+            'Pending Final Action': 'bg-blue-500',
+            'In Review': 'bg-blue-400',
+            'Under Review': 'bg-blue-400',
+            'Under Construction': 'bg-orange-500',
+            'Completed': 'bg-green-600',
+            'Corrections Pending Applicant': 'bg-yellow-500',
+            'Incomplete Pending Applicant': 'bg-yellow-400',
+            'Withdrawn': 'bg-red-400',
+            'On Hold': 'bg-gray-400'
+        };
+        return colors[status] || 'bg-gray-400';
+    }
+
     function renderGantt() {
         console.log('📊 renderGantt() called');
         try {
@@ -498,7 +530,11 @@
             if (!container) { console.error('❌ ganttChart not found'); return; }
             container.innerHTML = '';
 
-            let projectsWithTimeline = DATA.projects.filter(p => p.app_filed);
+            // Include ALL projects, using earliest available date
+            let projectsWithTimeline = DATA.projects.map(p => ({
+                ...p,
+                startDate: getProjectStartDate(p)
+            }));
 
         // Debug: Log milestone coverage
         const withFiled = DATA.projects.filter(p => p.app_filed).length;
@@ -506,38 +542,32 @@
         const withEntitled = DATA.projects.filter(p => p.entitled).length;
         const withBpIssued = DATA.projects.filter(p => p.bp_issued).length;
         const withCo = DATA.projects.filter(p => p.co_date).length;
-        console.log(`📊 Gantt Debug - Milestone Coverage:
+        console.log(`📊 Gantt Debug - Showing ALL ${DATA.projects.length} projects
   Filed: ${withFiled} projects
   Complete: ${withComplete} projects
   Entitled: ${withEntitled} projects
   BP Issued: ${withBpIssued} projects
   CO: ${withCo} projects`);
 
-        // Log projects with entitled dates
-        const entitledProjects = DATA.projects.filter(p => p.entitled);
-        console.log(`📋 Projects with entitled_date (${entitledProjects.length}):`,
-            entitledProjects.map(p => `${p.address}: ${p.entitled}`));
-
-        if (ganttSort === 'duration') projectsWithTimeline.sort((a, b) => (b.proc_days || 0) - (a.proc_days || 0));
-        else if (ganttSort === 'start') projectsWithTimeline.sort((a, b) => (a.app_filed || '').localeCompare(b.app_filed || ''));
+        // Sort based on user selection
+        if (ganttSort === 'duration') projectsWithTimeline.sort((a, b) => (b.processing_days || 0) - (a.processing_days || 0));
+        else if (ganttSort === 'start') projectsWithTimeline.sort((a, b) => (a.startDate || '').localeCompare(b.startDate || ''));
         else if (ganttSort === 'units') projectsWithTimeline.sort((a, b) => b.units - a.units);
         else if (ganttSort === 'entitled') {
             // Sort to show projects with entitled dates first
             projectsWithTimeline.sort((a, b) => {
                 if (a.entitled && !b.entitled) return -1;
                 if (!a.entitled && b.entitled) return 1;
-                return (b.proc_days || 0) - (a.proc_days || 0);
+                return (b.processing_days || 0) - (a.processing_days || 0);
             });
         }
 
-        const minDate = new Date(Math.min(...projectsWithTimeline.map(p => new Date(p.app_filed || '2025-01-01'))));
+        const minDate = new Date(Math.min(...projectsWithTimeline.map(p => new Date(p.startDate))));
         const maxDate = new Date();
         const totalDays = (maxDate - minDate) / (1000 * 60 * 60 * 24);
 
-        // Show projects with entitled dates first (up to first 60 or all with entitled)
-        const entitledFirst = projectsWithTimeline.filter(p => p.entitled);
-        const others = projectsWithTimeline.filter(p => !p.entitled);
-        const toShow = [...entitledFirst, ...others].slice(0, 60);
+        // Show ALL projects (all 163)
+        const toShow = projectsWithTimeline;
 
         toShow.forEach(p => {
             const row = document.createElement('div');
@@ -546,12 +576,12 @@
             const label = document.createElement('div');
             label.className = 'w-48 flex-shrink-0 pr-2 gantt-label';
             label.textContent = p.address.split(' ').slice(0, 3).join(' ');
-            label.title = `${p.address}\nStatus: ${p.status}\nFiled: ${p.app_filed || 'N/A'}\nComplete: ${p.app_complete || 'N/A'}\nEntitled: ${p.entitled || 'N/A'}\nBP Issued: ${p.bp_issued || 'N/A'}\nCO: ${p.co_date || 'N/A'}`;
+            label.title = `${p.address}\n${p.units} units\nStatus: ${p.status}\nFiled: ${p.app_filed || 'N/A'}\nComplete: ${p.app_complete || 'N/A'}\nEntitled: ${p.entitled || 'N/A'}\nBP Issued: ${p.bp_issued || 'N/A'}\nCO: ${p.co_date || 'N/A'}`;
 
             const bar = document.createElement('div');
             bar.className = 'flex-1 relative h-6';
 
-            const filed = new Date(p.app_filed);
+            const filed = new Date(p.startDate); // Use computed start date
             const complete = p.app_complete ? new Date(p.app_complete) : null;
             const entitled = p.entitled ? new Date(p.entitled) : null;
             const bpIssued = p.bp_issued ? new Date(p.bp_issued) : null;
@@ -1723,7 +1753,7 @@
                 <strong>${p.address}</strong><br>
                 Units: ${p.units}<br>
                 Status: ${p.status}<br>
-                Processing Days: ${p.proc_days || 'N/A'}${vliInfo}${dbInfo}
+                Processing Days: ${p.processing_days || 'N/A'}${vliInfo}${dbInfo}
             `);
 
             marker.addTo(spatialMap);

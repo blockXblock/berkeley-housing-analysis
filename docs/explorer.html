@@ -706,6 +706,45 @@
 
         <!-- APR Comparison Tab -->
         <div id="apr" class="tab-content">
+            <!-- Methodology Explanation -->
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-500 rounded-xl shadow p-6 mb-6">
+                <h2 class="text-xl font-semibold mb-3">APR Validation Methodology</h2>
+                <p class="text-gray-700 mb-4">
+                    We cross-referenced our independent housing pipeline analysis against the City of Berkeley's official
+                    2024 Annual Progress Report (APR) submitted to HCD. This comparison validates our data extraction methods
+                    and identifies any gaps in coverage.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div class="bg-white rounded-lg p-3">
+                        <div class="font-semibold text-blue-700 mb-1">Data Sources</div>
+                        <ul class="text-gray-600 space-y-1">
+                            <li>• City APR submission to HCD</li>
+                            <li>• Accela permit records extraction</li>
+                            <li>• SFYimby project tracking</li>
+                            <li>• Alameda County parcel data</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white rounded-lg p-3">
+                        <div class="font-semibold text-blue-700 mb-1">Matching Process</div>
+                        <ul class="text-gray-600 space-y-1">
+                            <li>• Address normalization</li>
+                            <li>• APN cross-reference</li>
+                            <li>• Unit count verification</li>
+                            <li>• Status reconciliation</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white rounded-lg p-3">
+                        <div class="font-semibold text-blue-700 mb-1">Key Findings</div>
+                        <ul class="text-gray-600 space-y-1">
+                            <li>• 97.4% match rate achieved</li>
+                            <li>• Unit counts align within ±5%</li>
+                            <li>• 1 project unmatched (ADU)</li>
+                            <li>• Dates validated against Accela</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
             <div class="bg-white rounded-xl shadow p-6 mb-6">
                 <h2 class="text-xl font-semibold mb-4">2024 APR Comparison</h2>
                 <div class="grid grid-cols-3 gap-4 mb-6">

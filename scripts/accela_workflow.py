@@ -1328,21 +1328,34 @@ def parse_building_permit_file(text: str) -> dict:
     """
     Parse a Building Permit file from the building/ directory.
 
-    These files contain building permit search results with formats:
+    These files contain building permit search results with multiple formats:
 
-    1. Detailed permit blocks:
+    Format 1 - Detailed permit blocks:
         ADDRESS: 1899 OXFORD ST, Berkeley CA 94709
-
         BUILDING PERMITS FOUND: 1
-
         --- PERMIT 1 ---
         Permit #: B2026-00973
         Type: Building Permit (Demolition)
         Status: Corrections List Issued
-        Date: 2026 (filed 03/10/2026 per fee payment)
-        Description: Demolish 2-story multi-family building (5,104sf).
 
-    2. Compact list format:
+    Format 2 - Simple permit blocks (no delimiters):
+        3035 COLBY ST
+        Permit: B2026-01017
+        Type: Building Permit
+        Status: Under Review
+        Issue Date: 03/11/2026
+        Description: New duplex.
+
+    Format 3 - ALL PERMITS FOUND with summary table:
+        2317 CHANNING WAY
+        ALL PERMITS FOUND (5 total):
+        03/27/2026 | 25TMP-032334 | Temporary Permit | (no status) | 2317 Channing Way
+        HOUSING-RELATED PERMIT:
+        Permit Number: B2022-04242
+        Type: Building Electrical Mechanical Plumbing Permit
+        Status: Issued
+
+    Format 4 - Compact list format:
         Full permit list:
           B2012-02615 | 07/02/2012 | Building Permit | Closed Expired | Description
 
@@ -1358,23 +1371,55 @@ def parse_building_permit_file(text: str) -> dict:
         'permit_count': 0
     }
 
-    # Extract address
+    # =========================================================================
+    # Extract address (multiple formats)
+    # =========================================================================
+
+    # Format 1: ADDRESS: prefix
     for line in lines:
-        if line.startswith('ADDRESS:'):
+        if line.strip().startswith('ADDRESS:'):
             addr = line.replace('ADDRESS:', '').strip()
-            # Remove city/state/zip
             addr = re.sub(r',?\s*(Berkeley|CA|94\d{3}).*$', '', addr, flags=re.IGNORECASE)
             result['address'] = addr.strip()
             break
 
+    # Format 2: BUILDING PERMIT SEARCH: address
+    if not result['address']:
+        for line in lines:
+            if 'BUILDING PERMIT SEARCH:' in line:
+                addr = line.replace('BUILDING PERMIT SEARCH:', '').strip()
+                addr = re.sub(r',?\s*(Berkeley|CA|94\d{3}).*$', '', addr, flags=re.IGNORECASE)
+                result['address'] = addr.strip()
+                break
+
+    # Format 3: Address on first non-empty line (e.g., "3035 COLBY ST" or "2317 CHANNING WAY")
+    if not result['address']:
+        for line in lines[:5]:  # Check first 5 lines
+            line = line.strip()
+            # Skip common headers/comments
+            if not line or line.startswith('#') or line.startswith('cd ') or line.startswith('bash '):
+                continue
+            # Match address pattern: number + street name
+            addr_match = re.match(r'^(\d+[\-\d]*\s+[A-Z][A-Za-z\s]+(?:ST|AVE|WAY|BLVD|DR|RD|LN|CT|PL)?)(?:\s*,.*)?$', line, re.IGNORECASE)
+            if addr_match:
+                addr = addr_match.group(1).strip()
+                addr = re.sub(r',?\s*(Berkeley|CA|94\d{3}).*$', '', addr, flags=re.IGNORECASE)
+                result['address'] = addr.strip().upper()
+                break
+
+    # =========================================================================
     # Extract permit count
+    # =========================================================================
     for line in lines:
-        match = re.search(r'BUILDING PERMITS FOUND:\s*(\d+)', line)
+        # Format: "BUILDING PERMITS FOUND: N" or "ALL PERMITS FOUND (N total):"
+        match = re.search(r'(?:BUILDING\s+)?PERMITS?\s+FOUND[:\s]*\(?(\d+)', line, re.IGNORECASE)
         if match:
             result['permit_count'] = int(match.group(1))
             break
 
-    # Parse detailed permit blocks (--- PERMIT N ---)
+    # =========================================================================
+    # Parse Format 1: Detailed permit blocks (--- PERMIT N ---)
+    # =========================================================================
     current_permit = None
     i = 0
     while i < len(lines):
@@ -1398,7 +1443,7 @@ def parse_building_permit_file(text: str) -> dict:
             i += 1
             continue
 
-        # Parse permit fields
+        # Parse permit fields for Format 1
         if current_permit is not None:
             if line.startswith('Permit #:'):
                 current_permit['permit_number'] = line.replace('Permit #:', '').strip()
@@ -1408,7 +1453,6 @@ def parse_building_permit_file(text: str) -> dict:
                 current_permit['status'] = line.replace('Status:', '').strip()
             elif line.startswith('Date:'):
                 date_str = line.replace('Date:', '').strip()
-                # Try to extract ISO date
                 date_match = re.search(r'(\d{2}/\d{2}/\d{4})', date_str)
                 if date_match:
                     try:
@@ -1429,15 +1473,117 @@ def parse_building_permit_file(text: str) -> dict:
 
         i += 1
 
-    # Don't forget last permit
+    # Don't forget last permit from Format 1
     if current_permit and current_permit.get('permit_number'):
         result['permits'].append(current_permit)
 
-    # Parse compact list format (B2012-02615 | 07/02/2012 | Building Permit | Closed Expired | Desc)
+    # =========================================================================
+    # Parse Format 2: Simple permit blocks (Permit:, Type:, Status:, Issue Date:)
+    # =========================================================================
+    current_permit = None
     for line in lines:
-        # Match: permit_num | date | type | status | description
+        line_stripped = line.strip()
+
+        # Start new permit block when we see "Permit:" (not "Permit Number:" or "Permit #:")
+        if line_stripped.startswith('Permit:') and not line_stripped.startswith('Permit Number:'):
+            if current_permit and current_permit.get('permit_number'):
+                # Don't add duplicates
+                existing = [p for p in result['permits'] if p.get('permit_number') == current_permit.get('permit_number')]
+                if not existing:
+                    result['permits'].append(current_permit)
+            permit_num = line_stripped.replace('Permit:', '').strip()
+            current_permit = {
+                'permit_number': permit_num,
+                'permit_type': None,
+                'status': None,
+                'date': None,
+                'finaled_date': None,
+                'description': None,
+                'job_value': None,
+                'owner': None,
+                'applicant': None
+            }
+        elif current_permit is not None:
+            if line_stripped.startswith('Type:'):
+                current_permit['permit_type'] = line_stripped.replace('Type:', '').strip()
+            elif line_stripped.startswith('Status:'):
+                current_permit['status'] = line_stripped.replace('Status:', '').strip()
+            elif line_stripped.startswith('Issue Date:'):
+                date_str = line_stripped.replace('Issue Date:', '').strip()
+                date_match = re.search(r'(\d{2}/\d{2}/\d{4})', date_str)
+                if date_match:
+                    try:
+                        dt = datetime.strptime(date_match.group(1), '%m/%d/%Y')
+                        current_permit['date'] = dt.strftime('%Y-%m-%d')
+                    except:
+                        current_permit['date'] = date_str
+                else:
+                    current_permit['date'] = date_str
+            elif line_stripped.startswith('Description:'):
+                current_permit['description'] = line_stripped.replace('Description:', '').strip()
+            elif line_stripped.startswith('Total Fees:'):
+                current_permit['job_value'] = line_stripped.replace('Total Fees:', '').strip()
+
+    # Don't forget last permit from Format 2
+    if current_permit and current_permit.get('permit_number'):
+        existing = [p for p in result['permits'] if p.get('permit_number') == current_permit.get('permit_number')]
+        if not existing:
+            result['permits'].append(current_permit)
+
+    # =========================================================================
+    # Parse Format 3: HOUSING-RELATED PERMIT section (Permit Number:, Type:, Status:)
+    # =========================================================================
+    in_housing_section = False
+    current_permit = None
+    for line in lines:
+        line_stripped = line.strip()
+
+        if 'HOUSING-RELATED PERMIT' in line_stripped:
+            in_housing_section = True
+            current_permit = {
+                'permit_number': None,
+                'permit_type': None,
+                'status': None,
+                'date': None,
+                'finaled_date': None,
+                'description': None,
+                'job_value': None,
+                'owner': None,
+                'applicant': None
+            }
+            continue
+
+        if in_housing_section and current_permit is not None:
+            if line_stripped.startswith('Permit Number:'):
+                current_permit['permit_number'] = line_stripped.replace('Permit Number:', '').strip()
+            elif line_stripped.startswith('Type:'):
+                current_permit['permit_type'] = line_stripped.replace('Type:', '').strip()
+            elif line_stripped.startswith('Status:'):
+                current_permit['status'] = line_stripped.replace('Status:', '').strip()
+            elif line_stripped.startswith('Description:'):
+                current_permit['description'] = line_stripped.replace('Description:', '').strip()
+            elif line_stripped.startswith('Total Fees:'):
+                current_permit['job_value'] = line_stripped.replace('Total Fees:', '').strip()
+            elif line_stripped.startswith('Note:'):
+                # End of housing section
+                if current_permit.get('permit_number'):
+                    existing = [p for p in result['permits'] if p.get('permit_number') == current_permit.get('permit_number')]
+                    if not existing:
+                        result['permits'].append(current_permit)
+                in_housing_section = False
+
+    # Don't forget housing permit if section didn't have explicit end
+    if in_housing_section and current_permit and current_permit.get('permit_number'):
+        existing = [p for p in result['permits'] if p.get('permit_number') == current_permit.get('permit_number')]
+        if not existing:
+            result['permits'].append(current_permit)
+
+    # =========================================================================
+    # Parse Format 4a: Compact list (permit | date | type | status | desc)
+    # =========================================================================
+    for line in lines:
         match = re.match(
-            r'^\s*([A-Z]\d{4}-\d+(?:-REV\d+)?)\s*\|\s*'
+            r'^\s*([A-Z]\d{4}-\d+(?:-(?:REV|DEF)\d+)?)\s*\|\s*'
             r'(\d{2}/\d{2}/\d{4})\s*\|\s*'
             r'([^|]+)\s*\|\s*'
             r'([^|]+)\s*\|\s*'
@@ -1446,7 +1592,6 @@ def parse_building_permit_file(text: str) -> dict:
         )
         if match:
             permit_num = match.group(1).strip()
-            # Check if we already have this permit from detailed block
             existing = [p for p in result['permits'] if p.get('permit_number') == permit_num]
             if not existing:
                 try:
@@ -1454,7 +1599,6 @@ def parse_building_permit_file(text: str) -> dict:
                     date_iso = dt.strftime('%Y-%m-%d')
                 except:
                     date_iso = match.group(2).strip()
-
                 result['permits'].append({
                     'permit_number': permit_num,
                     'permit_type': match.group(3).strip(),
@@ -1467,16 +1611,83 @@ def parse_building_permit_file(text: str) -> dict:
                     'applicant': None
                 })
 
+    # =========================================================================
+    # Parse Format 4b: Summary table (date | permit | type | status | address)
+    # =========================================================================
+    for line in lines:
+        # Match: date | permit_num | type | status | address
+        match = re.match(
+            r'^\s*(\d{2}/\d{2}/\d{4})\s*\|\s*'
+            r'([A-Z0-9][\w-]+(?:-REV\d+)?)\s*\|\s*'
+            r'([^|]+)\s*\|\s*'
+            r'([^|]+)\s*\|\s*'
+            r'(.*)$',
+            line.strip()
+        )
+        if match:
+            permit_num = match.group(2).strip()
+            existing = [p for p in result['permits'] if p.get('permit_number') == permit_num]
+            if not existing:
+                try:
+                    dt = datetime.strptime(match.group(1).strip(), '%m/%d/%Y')
+                    date_iso = dt.strftime('%Y-%m-%d')
+                except:
+                    date_iso = match.group(1).strip()
+                result['permits'].append({
+                    'permit_number': permit_num,
+                    'permit_type': match.group(3).strip(),
+                    'status': match.group(4).strip() if match.group(4).strip() != '(no status)' else None,
+                    'date': date_iso,
+                    'finaled_date': None,
+                    'description': None,
+                    'job_value': None,
+                    'owner': None,
+                    'applicant': None
+                })
+
+    # =========================================================================
+    # Parse Format 4c: 4-column table (date | permit | status | desc)
+    # =========================================================================
+    for line in lines:
+        # Match: date | permit_num | status | desc (no type column)
+        match = re.match(
+            r'^\s*(\d{2}/\d{2}/\d{4})\s*\|\s*'
+            r'([A-Z]\d{4}-\d+(?:-(?:REV|DEF)\d+)?)\s*\|\s*'
+            r'([^|]+)\s*\|\s*'
+            r'([^|]*)$',
+            line.strip()
+        )
+        if match:
+            permit_num = match.group(2).strip()
+            existing = [p for p in result['permits'] if p.get('permit_number') == permit_num]
+            if not existing:
+                try:
+                    dt = datetime.strptime(match.group(1).strip(), '%m/%d/%Y')
+                    date_iso = dt.strftime('%Y-%m-%d')
+                except:
+                    date_iso = match.group(1).strip()
+                result['permits'].append({
+                    'permit_number': permit_num,
+                    'permit_type': 'Building Permit',  # Assumed
+                    'status': match.group(3).strip(),
+                    'date': date_iso,
+                    'finaled_date': None,
+                    'description': match.group(4).strip() if match.group(4) else None,
+                    'job_value': None,
+                    'owner': None,
+                    'applicant': None
+                })
+
+    # =========================================================================
     # Extract finaled dates from Processing Status section
+    # =========================================================================
     for i, line in enumerate(lines):
-        if 'Finaled' in line and 'Permit #' not in line:
-            # Look for date in this line or nearby
+        if 'Finaled' in line and 'Permit #' not in line and 'Permit Number' not in line:
             date_match = re.search(r'(\d{2}/\d{2}/\d{4})', line)
             if date_match:
                 try:
                     dt = datetime.strptime(date_match.group(1), '%m/%d/%Y')
                     finaled_date = dt.strftime('%Y-%m-%d')
-                    # Apply to permits with "Finaled" status
                     for permit in result['permits']:
                         if permit['status'] and 'Finaled' in permit['status']:
                             permit['finaled_date'] = finaled_date
@@ -1490,21 +1701,30 @@ def parse_building_filename(filename: str) -> str | None:
     """
     Parse address from building permit filename.
 
-    Expected format: B_1899_OXFORD_St.txt or B_2601_SAN_PABLO_Ave.txt
+    Formats:
+        B_1899_OXFORD_St.txt -> 1899 OXFORD ST
+        B_2601_SAN_PABLO_Ave.txt -> 2601 SAN PABLO AVE
+        B2025-04070_1627_JAYNES_St.txt -> 1627 JAYNES ST
+        B2022-04242_2317_CHANNING_Way.txt -> 2317 CHANNING WAY
+
     Returns address string or None if can't parse.
     """
     name = Path(filename).stem  # Remove .txt extension
 
-    if not name.startswith('B_'):
-        return None
+    # Format 1: B_ADDRESS (e.g., B_1899_OXFORD_St)
+    if name.startswith('B_'):
+        addr_part = name[2:]
+        address = addr_part.replace('_', ' ')
+        return address.upper()
 
-    # Remove B_ prefix
-    addr_part = name[2:]
+    # Format 2: B20XX-NNNNN_ADDRESS (e.g., B2025-04070_1627_JAYNES_St)
+    match = re.match(r'^B20\d{2}-\d+_(.+)$', name)
+    if match:
+        addr_part = match.group(1)
+        address = addr_part.replace('_', ' ')
+        return address.upper()
 
-    # Convert underscores to spaces
-    address = addr_part.replace('_', ' ')
-
-    return address
+    return None
 
 
 def save_building_permit_events(db_path: str, text_file: str) -> dict:
@@ -2244,7 +2464,7 @@ def normalize_address(address: str) -> str:
     # Remove common suffixes
     addr = re.sub(r',?\s*(BERKELEY|CA|94\d{3}).*$', '', addr, flags=re.IGNORECASE)
 
-    # Standardize street types
+    # Standardize street types (both directions for robust matching)
     replacements = [
         (r'\bSTREET\b', 'ST'),
         (r'\bAVENUE\b', 'AVE'),
@@ -2254,12 +2474,36 @@ def normalize_address(address: str) -> str:
         (r'\bLANE\b', 'LN'),
         (r'\bCOURT\b', 'CT'),
         (r'\bPLACE\b', 'PL'),
-        (r'\bWAY\b', 'WY'),
+        (r'\bWAY\b', 'WAY'),  # Keep WAY as WAY (don't abbreviate)
     ]
     for pattern, repl in replacements:
         addr = re.sub(pattern, repl, addr)
 
     return addr.strip()
+
+
+def extract_street_core(address: str) -> tuple:
+    """
+    Extract street number and core street name (without suffix).
+    Returns (street_number, street_name_core) tuple.
+    """
+    if not address:
+        return ('', '')
+
+    addr = normalize_address(address)
+    parts = addr.split()
+
+    if not parts:
+        return ('', '')
+
+    street_num = parts[0].split('-')[0]  # Handle ranges like "2113-15"
+
+    # Join remaining parts, removing common suffixes
+    suffix_pattern = r'\b(ST|AVE|BLVD|DR|RD|LN|CT|PL|WAY|WY|STREET|AVENUE|BOULEVARD|DRIVE|ROAD|LANE|COURT|PLACE)\b'
+    street_name = ' '.join(parts[1:])
+    street_name_core = re.sub(suffix_pattern, '', street_name, flags=re.IGNORECASE).strip()
+
+    return (street_num, street_name_core)
 
 
 def lookup_project_id(conn: sqlite3.Connection, address: str) -> int | None:
@@ -2285,6 +2529,9 @@ def lookup_project_id(conn: sqlite3.Connection, address: str) -> int | None:
     if not street_num.isdigit():
         return None
 
+    # Extract street core (without suffix) for robust matching
+    input_num, input_core = extract_street_core(address)
+
     # Get all projects and compare normalized addresses
     cursor.execute("SELECT DISTINCT id, address_display FROM projects")
     results = cursor.fetchall()
@@ -2294,23 +2541,31 @@ def lookup_project_id(conn: sqlite3.Connection, address: str) -> int | None:
         if normalize_address(addr) == addr_norm:
             return project_id
 
-    # Second pass: match on street number + street name
+    # Second pass: match on street number + street name (case-insensitive)
     for project_id, addr in results:
         addr_upper = addr.upper()
-        if street_num in addr_upper and street_name in addr_upper:
+        if street_num in addr_upper and street_name.upper() in addr_upper:
             return project_id
 
-    # Third pass: fuzzy match on street number only (for address ranges)
+    # Third pass: match on street core (without suffix) - handles St vs ST vs Street
+    for project_id, addr in results:
+        db_num, db_core = extract_street_core(addr)
+        if db_num == input_num and db_core and input_core:
+            # Compare street cores case-insensitively
+            if db_core.upper() == input_core.upper():
+                return project_id
+
+    # Fourth pass: fuzzy match on street number only (for address ranges)
     for project_id, addr in results:
         addr_norm_db = normalize_address(addr)
         addr_parts = addr_norm_db.split()
         if addr_parts and addr_parts[0].split('-')[0] == street_num:
             # Check if street names are similar
             if len(parts) > 1 and len(addr_parts) > 1:
-                if parts[1][:4] == addr_parts[1][:4]:  # Compare first 4 chars of street name
+                if parts[1][:4].upper() == addr_parts[1][:4].upper():
                     return project_id
 
-    # Fourth pass: for address ranges like "2113-15", try matching the second number
+    # Fifth pass: for address ranges like "2113-15", try matching the second number
     if '-' in parts[0]:
         range_parts = parts[0].split('-')
         if len(range_parts) == 2:
@@ -2324,7 +2579,7 @@ def lookup_project_id(conn: sqlite3.Connection, address: str) -> int | None:
                     addr_parts = addr_norm_db.split()
                     if addr_parts and addr_parts[0] == alt_num:
                         if len(parts) > 1 and len(addr_parts) > 1:
-                            if parts[1][:4] == addr_parts[1][:4]:
+                            if parts[1][:4].upper() == addr_parts[1][:4].upper():
                                 return project_id
 
     return None
@@ -2639,8 +2894,8 @@ def save_batch_command(args):
     for txt_file in sorted(txt_files):
         filename = txt_file.name
 
-        # Check if this is a Building permit file (starts with B_)
-        if filename.startswith('B_'):
+        # Check if this is a Building permit file (starts with B_ or B20XX-)
+        if filename.startswith('B_') or re.match(r'^B20\d{2}-', filename):
             # Process as Building permit file
             results = save_building_permit_events(args.db, str(txt_file))
 

@@ -2592,15 +2592,37 @@
     
         // ===== PLAYERS TAB =====
         function initPlayersTab() {
+            console.log('🎭 initPlayersTab() called');
             const players = DATA.players;
-            if (!players) return;
-            
-            // Summary stats
-            document.getElementById('playerDevCount').textContent = players.developers.length;
-            document.getElementById('playerArchCount').textContent = players.architects.length;
-            document.getElementById('playerTotalUnits').textContent = players.developers.reduce((sum, d) => sum + d.units, 0).toLocaleString();
-            const avgDays = players.friction.reduce((sum, f) => sum + f.proc_days, 0) / players.friction.length;
-            document.getElementById('playerAvgDays').textContent = Math.round(avgDays);
+            if (!players) {
+                console.warn('⚠️ DATA.players is missing');
+                return;
+            }
+            console.log('🎭 DATA.players:', {
+                developers: Array.isArray(players.developers) ? players.developers.length + ' items' : typeof players.developers,
+                architects: Array.isArray(players.architects) ? players.architects.length + ' items' : typeof players.architects,
+                friction: Array.isArray(players.friction) ? players.friction.length + ' items' : typeof players.friction
+            });
+
+            // Validate arrays - must be arrays not integers
+            if (!Array.isArray(players.developers)) {
+                console.error('❌ players.developers is not an array:', players.developers);
+                return;
+            }
+
+            // Summary stats with null checks
+            const devCountEl = document.getElementById('playerDevCount');
+            const archCountEl = document.getElementById('playerArchCount');
+            const totalUnitsEl = document.getElementById('playerTotalUnits');
+            const avgDaysEl = document.getElementById('playerAvgDays');
+
+            if (devCountEl) devCountEl.textContent = players.developers.length;
+            if (archCountEl) archCountEl.textContent = Array.isArray(players.architects) ? players.architects.length : 0;
+            if (totalUnitsEl) totalUnitsEl.textContent = players.developers.reduce((sum, d) => sum + (d.units || 0), 0).toLocaleString();
+
+            const frictionArr = Array.isArray(players.friction) ? players.friction : [];
+            const avgDays = frictionArr.length > 0 ? frictionArr.reduce((sum, f) => sum + (f.proc_days || 0), 0) / frictionArr.length : 0;
+            if (avgDaysEl) avgDaysEl.textContent = Math.round(avgDays);
             
             // Developer Chart
             const devTop15 = players.developers.filter(d => d.name !== 'Unknown').slice(0, 15);

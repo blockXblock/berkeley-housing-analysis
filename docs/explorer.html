@@ -637,128 +637,89 @@
 
         <!-- APR Comparison Tab -->
         <div id="apr" class="tab-content">
-            <!-- Methodology Explanation -->
+            <!-- Section 1: 2024 Citizen APR - Independent Verification -->
             <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-500 rounded-xl shadow p-6 mb-6">
-                <h2 class="text-xl font-semibold mb-3">APR Validation Methodology</h2>
+                <h2 class="text-xl font-semibold mb-3">2024 Citizen APR — Independent Verification</h2>
                 <p class="text-gray-700 mb-4">
-                    We cross-referenced our independent housing pipeline analysis against the City of Berkeley's official
-                    2024 Annual Progress Report (APR) submitted to HCD. This comparison validates our data extraction methods
-                    and identifies any gaps in coverage.
+                    We independently reconstructed Berkeley's 2024 Annual Progress Report (APR) using primary data
+                    extracted directly from Accela permit records. This demonstrates that civic data auditing is feasible
+                    and that citizens can verify official housing reports.
                 </p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm mb-4">
                     <div class="bg-white rounded-lg p-3">
-                        <div class="font-semibold text-blue-700 mb-1">Data Sources</div>
+                        <div class="font-semibold text-blue-700 mb-1">Our Method</div>
                         <ul class="text-gray-600 space-y-1">
-                            <li>• City APR submission to HCD</li>
                             <li>• Accela permit records extraction</li>
-                            <li>• SFYimby project tracking</li>
-                            <li>• Alameda County parcel data</li>
-                        </ul>
-                    </div>
-                    <div class="bg-white rounded-lg p-3">
-                        <div class="font-semibold text-blue-700 mb-1">Matching Process</div>
-                        <ul class="text-gray-600 space-y-1">
                             <li>• Address normalization</li>
                             <li>• APN cross-reference</li>
-                            <li>• Unit count verification</li>
-                            <li>• Status reconciliation</li>
+                            <li>• Status reconciliation with HCD data</li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-lg p-3">
-                        <div class="font-semibold text-blue-700 mb-1">Key Findings</div>
+                        <div class="font-semibold text-blue-700 mb-1">Verification Results</div>
                         <ul class="text-gray-600 space-y-1">
-                            <li>• 97.4% match rate achieved</li>
-                            <li>• Unit counts align within ±5%</li>
-                            <li>• 1 project unmatched (ADU)</li>
-                            <li>• Dates validated against Accela</li>
+                            <li>• City reported: <strong>117 projects</strong></li>
+                            <li>• We matched: <strong>114 projects</strong></li>
+                            <li>• Match rate: <strong>97.4%</strong></li>
+                            <li>• Unit counts aligned within ±5%</li>
                         </ul>
                     </div>
-                </div>
-            </div>
-
-            <!-- Side-by-Side Comparison -->
-            <div class="bg-white rounded-xl shadow p-6 mb-6">
-                <h2 class="text-xl font-semibold mb-4">City vs Independent APR Comparison</h2>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <!-- City 2024 APR -->
-                    <div class="border-2 border-blue-200 rounded-lg p-4">
-                        <h3 class="text-lg font-semibold text-blue-700 mb-3">City 2024 APR (Official)</h3>
-                        <div class="space-y-2 text-sm">
-                            <div class="flex justify-between py-1 border-b">
-                                <span>Total Projects Reported</span>
-                                <span class="font-bold">117</span>
-                            </div>
-                            <div class="flex justify-between py-1 border-b">
-                                <span>Our Matched Projects</span>
-                                <span class="font-bold text-green-600">114 (97.4%)</span>
-                            </div>
-                            <div class="flex justify-between py-1 border-b">
-                                <span>Unmatched (ADUs)</span>
-                                <span class="font-bold text-amber-600">3</span>
-                            </div>
-                        </div>
-                        <div class="mt-4 p-3 bg-amber-50 rounded text-sm">
-                            <div class="font-semibold text-amber-700 mb-2">Projects Potentially Missing from City APR:</div>
-                            <ul class="text-gray-700 space-y-1">
-                                <li>• <strong>1974 Shattuck Ave</strong> - 599 units (approved June 2025)</li>
-                                <li>• <strong>1899 Oxford St</strong> - 212 units (pending final action)</li>
-                                <li>• <strong>2955 Shattuck Ave</strong> - 74 units (in corrections)</li>
-                            </ul>
-                            <div class="mt-2 text-amber-600 font-medium">Total: 885 units may be underreported</div>
-                        </div>
-                    </div>
-
-                    <!-- Our 2025 Independent APR -->
-                    <div class="border-2 border-green-200 rounded-lg p-4">
-                        <h3 class="text-lg font-semibold text-green-700 mb-3">Our 2025 Independent APR</h3>
-                        <div class="space-y-2 text-sm">
-                            <div class="flex justify-between py-1 border-b">
-                                <span>Entitlements Granted (2025)</span>
-                                <span class="font-bold">17 projects / 2,404 units</span>
-                            </div>
-                            <div class="flex justify-between py-1 border-b">
-                                <span>Building Permits Issued</span>
-                                <span class="font-bold">12 projects / 988 units</span>
-                            </div>
-                            <div class="flex justify-between py-1 border-b">
-                                <span>Certificates of Occupancy</span>
-                                <span class="font-bold text-green-600">7 projects / 407 units</span>
-                            </div>
-                        </div>
-                        <div class="mt-4 p-3 bg-red-50 rounded text-sm">
-                            <div class="font-semibold text-red-700 mb-2">The Entitlement-to-Construction Gap:</div>
-                            <ul class="text-gray-700 space-y-1">
-                                <li>• Pipeline: <strong>10,142 units</strong> in 163 projects</li>
-                                <li>• Building permits: <strong>988 units</strong> (9.7%)</li>
-                                <li>• Certificates of occupancy: <strong>407 units</strong> (4.0%)</li>
-                                <li>• Stale approvals (12+ mo): <strong>983 units</strong></li>
-                            </ul>
-                            <div class="mt-2 text-red-600 font-medium">Only 4% of pipeline is actually occupiable</div>
-                        </div>
+                    <div class="bg-white rounded-lg p-3">
+                        <div class="font-semibold text-blue-700 mb-1">Conclusion</div>
+                        <p class="text-gray-600">
+                            This successful independent verification demonstrates that civic data auditing
+                            is feasible using publicly available permit data.
+                        </p>
                     </div>
                 </div>
             </div>
 
+            <!-- 2024 Comparison Stats -->
             <div class="bg-white rounded-xl shadow p-6 mb-6">
-                <h2 class="text-xl font-semibold mb-4">2024 APR Comparison</h2>
+                <h2 class="text-xl font-semibold mb-4">2024 APR Comparison Results</h2>
                 <div class="grid grid-cols-3 gap-4 mb-6">
                     <div class="text-center p-4 bg-green-50 rounded-lg">
-                        <div class="text-2xl font-bold text-green-600" id="aprMatched">38</div>
+                        <div class="text-2xl font-bold text-green-600" id="aprMatched">114</div>
                         <div class="text-sm text-gray-600">Matched Projects</div>
                     </div>
-                    <div class="text-center p-4 bg-red-50 rounded-lg">
-                        <div class="text-2xl font-bold text-red-600" id="aprUnmatched">1</div>
-                        <div class="text-sm text-gray-600">Unmatched</div>
+                    <div class="text-center p-4 bg-amber-50 rounded-lg">
+                        <div class="text-2xl font-bold text-amber-600" id="aprUnmatched">3</div>
+                        <div class="text-sm text-gray-600">Unmatched (ADUs)</div>
                     </div>
                     <div class="text-center p-4 bg-blue-50 rounded-lg">
                         <div class="text-2xl font-bold text-blue-600">97.4%</div>
                         <div class="text-sm text-gray-600">Match Rate</div>
                     </div>
                 </div>
+
+                <!-- Projects potentially missing -->
+                <div class="p-4 bg-amber-50 border border-amber-200 rounded-lg mb-4">
+                    <div class="font-semibold text-amber-700 mb-2">Projects Potentially Missing from City's 2024 APR (885 units)</div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="bg-white p-3 rounded">
+                            <div class="font-bold">1974 Shattuck Ave</div>
+                            <div class="text-gray-600">599 units</div>
+                            <div class="text-xs text-gray-500">Entitled December 2024</div>
+                        </div>
+                        <div class="bg-white p-3 rounded">
+                            <div class="font-bold">1899 Oxford St</div>
+                            <div class="text-gray-600">212 units</div>
+                            <div class="text-xs text-gray-500">Pending final action</div>
+                        </div>
+                        <div class="bg-white p-3 rounded">
+                            <div class="font-bold">2955 Shattuck Ave</div>
+                            <div class="text-gray-600">74 units</div>
+                            <div class="text-xs text-gray-500">In corrections</div>
+                        </div>
+                    </div>
+                </div>
+
                 <canvas id="aprCompareChart"></canvas>
             </div>
-            <div class="bg-white rounded-xl shadow overflow-hidden">
-                <h3 class="text-lg font-semibold p-4 border-b">City APR vs Our Data</h3>
+
+            <!-- 2024 APR Detail Table -->
+            <div class="bg-white rounded-xl shadow overflow-hidden mb-6">
+                <h3 class="text-lg font-semibold p-4 border-b">City 2024 APR vs Our Independent Data</h3>
                 <table class="w-full text-sm">
                     <thead class="bg-gray-50">
                         <tr>
@@ -773,6 +734,34 @@
                     <tbody id="aprTableBody">
                     </tbody>
                 </table>
+            </div>
+
+            <!-- Section 2: 2025 Citizen APR - Coming Soon -->
+            <div class="bg-gradient-to-r from-green-50 to-emerald-50 border-l-4 border-green-500 rounded-xl shadow p-6">
+                <h2 class="text-xl font-semibold mb-3">2025 Citizen APR — Coming Soon</h2>
+                <p class="text-gray-700 mb-4">
+                    The 2025 Citizen APR is being prepared using the same methodology. It will be appended here when complete.
+                </p>
+                <div class="bg-white rounded-lg p-4">
+                    <div class="font-semibold text-green-700 mb-3">Key Preliminary Findings (as of April 2026)</div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="text-center p-3 bg-green-50 rounded">
+                            <div class="text-xl font-bold text-green-600">13</div>
+                            <div class="text-gray-600">Building Permits Issued</div>
+                            <div class="text-xs text-gray-500">1,005 units</div>
+                        </div>
+                        <div class="text-center p-3 bg-blue-50 rounded">
+                            <div class="text-xl font-bold text-blue-600">7</div>
+                            <div class="text-gray-600">Certificates of Occupancy</div>
+                            <div class="text-xs text-gray-500">407 units</div>
+                        </div>
+                        <div class="text-center p-3 bg-amber-50 rounded">
+                            <div class="text-xl font-bold text-amber-600">27</div>
+                            <div class="text-gray-600">Stalled Projects Identified</div>
+                            <div class="text-xs text-gray-500">12+ months no progress</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

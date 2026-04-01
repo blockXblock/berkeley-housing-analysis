@@ -2545,13 +2545,29 @@
         if (unitsCell) unitsCell.textContent = stalled.reduce((sum, p) => sum + (p.units || 0), 0).toLocaleString();
     }
 
+    // Initialize export date display
+    function initExportDate() {
+        const exportDateEl = document.getElementById('exportDate');
+        if (exportDateEl && DATA.export_date) {
+            exportDateEl.textContent = DATA.export_date;
+        } else if (exportDateEl && DATA.meta && DATA.meta.export_date) {
+            exportDateEl.textContent = DATA.meta.export_date;
+        } else if (exportDateEl) {
+            exportDateEl.textContent = 'Unknown';
+        }
+    }
+
     // Initialize
     document.addEventListener('DOMContentLoaded', () => {
         console.log('🚀 DOMContentLoaded - Initializing explorer...');
         console.log('📊 DATA check:', {
             projects: DATA.projects ? DATA.projects.length : 'MISSING',
-            events: DATA.events ? Object.keys(DATA.events).length : 'MISSING'
+            events: DATA.events ? Object.keys(DATA.events).length : 'MISSING',
+            export_date: DATA.export_date || 'MISSING'
         });
+
+        // Initialize export date first
+        try { initExportDate(); } catch(e) { console.error('❌ initExportDate failed:', e); }
 
         // Wrap each init function in try-catch to prevent cascade failures
         try { initCharts(); } catch(e) { console.error('❌ initCharts failed:', e); }

@@ -329,7 +329,9 @@ def export_data():
         print(f"  {len(timeline)} months of data")
 
         # Build DATA object
+        export_date = datetime.now().strftime('%Y-%m-%d %H:%M')
         data = {
+            "export_date": export_date,
             "projects": projects,
             "events": events,
             "fees": fees,
@@ -338,11 +340,14 @@ def export_data():
             "timeline": timeline,
             "meta": {
                 "generated": datetime.now().isoformat(),
+                "export_date": export_date,
                 "source": "berkeley_housing_analysis.db",
                 "project_count": len(projects),
                 "event_count": len(events),
                 "total_units": sum(p['units'] for p in projects),
-                "total_fees": fees['total']
+                "total_fees": fees['total'],
+                "linked_fees": fees['linked'],
+                "unlinked_fees": fees['unlinked']
             }
         }
 

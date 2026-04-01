@@ -321,9 +321,22 @@
             const avgFee = DATA.fees.project_count > 0 ? Math.round(DATA.fees.total / DATA.fees.project_count) : 0;
             document.getElementById('avgFeeDisplay').textContent = '$' + avgFee.toLocaleString();
 
-            // Calculate avg fee per unit
-            const projectsWithFees = DATA.projects.filter(p => p.total_fees > 0);
-            const totalUnitsWithFees = projectsWithFees.reduce((sum, p) => sum + p.units, 0);
+            // Calculate avg fee per unit using DATA.fees.by_project
+            let totalUnitsWithFees = 0;
+            if (DATA.fees.by_project) {
+                // Match fee entries to projects and sum their units
+                for (const [permit, feeEntry] of Object.entries(DATA.fees.by_project)) {
+                    const feeAddr = (feeEntry.address || '').toUpperCase().replace(/[,\s]+/g, ' ').trim();
+                    const matchedProject = DATA.projects.find(p => {
+                        const projAddr = (p.address || '').toUpperCase().replace(/[,\s]+/g, ' ').trim();
+                        return feeAddr.includes(projAddr.split(' ').slice(0, 2).join(' ')) ||
+                               (p.permits || '').includes(permit);
+                    });
+                    if (matchedProject) {
+                        totalUnitsWithFees += matchedProject.units || 0;
+                    }
+                }
+            }
             const avgPerUnit = totalUnitsWithFees > 0 ? Math.round(DATA.fees.total / totalUnitsWithFees) : 0;
             document.getElementById('avgFeePerUnitDisplay').textContent = '$' + avgPerUnit.toLocaleString();
 
@@ -583,10 +596,39 @@
             const expandRow = document.createElement('tr');
             expandRow.className = 'expandable-row bg-gray-50';
             expandRow.id = 'expand-' + i;
-            const feeDisplay = p.total_fees > 0
+
+            // Look up fees from DATA.fees.by_project using address or permit
+            let projectFees = 0;
+            let feeCount = 0;
+            if (DATA.fees && DATA.fees.by_project) {
+                // Try to find fees by permit number
+                const permits = (p.permits || '').split(',').map(s => s.trim());
+                for (const permit of permits) {
+                    const feeEntry = DATA.fees.by_project[permit];
+                    if (feeEntry) {
+                        projectFees += feeEntry.total_fees || 0;
+                        feeCount += feeEntry.fee_count || 0;
+                    }
+                }
+                // If no permit match, try address match
+                if (projectFees === 0) {
+                    const addrNorm = (p.address || '').toUpperCase().replace(/[,\s]+/g, ' ').trim();
+                    for (const [key, feeEntry] of Object.entries(DATA.fees.by_project)) {
+                        const feeAddr = (feeEntry.address || '').toUpperCase().replace(/[,\s]+/g, ' ').trim();
+                        if (feeAddr.includes(addrNorm.split(' ').slice(0, 2).join(' '))) {
+                            projectFees += feeEntry.total_fees || 0;
+                            feeCount += feeEntry.fee_count || 0;
+                        }
+                    }
+                }
+            }
+            const displayFees = projectFees || p.total_fees || 0;
+            const feePerUnit = displayFees > 0 && p.units > 0 ? Math.round(displayFees / p.units) : 0;
+
+            const feeDisplay = displayFees > 0
                 ? `<div class="bg-green-50 p-3 rounded-lg mt-2">
-                    <span class="text-green-800 font-semibold">Total Fees: $${p.total_fees.toLocaleString()}</span>
-                    ${p.fee_per_unit ? `<span class="text-green-600 text-sm ml-2">($${p.fee_per_unit.toLocaleString()}/unit)</span>` : ''}
+                    <span class="text-green-800 font-semibold">Total Fees: $${displayFees.toLocaleString()}</span>
+                    ${feePerUnit ? `<span class="text-green-600 text-sm ml-2">($${feePerUnit.toLocaleString()}/unit)</span>` : ''}
                    </div>`
                 : '<p class="text-gray-400 text-sm mt-2">No fee data available</p>';
 
@@ -1592,21 +1634,35 @@
                 return;
             }
 
-            // Top 15 projects by fees
-            const projectsWithFees = DATA.projects
-                .filter(p => p.total_fees > 0)
-                .sort((a, b) => b.total_fees - a.total_fees)
-                .slice(0, 15);
+            // Top 15 projects by fees - use DATA.fees.by_project or large_fees
+            let topFeeData = [];
+            if (DATA.fees.by_project) {
+                topFeeData = Object.values(DATA.fees.by_project)
+                    .sort((a, b) => (b.total_fees || 0) - (a.total_fees || 0))
+                    .slice(0, 15)
+                    .map(f => ({
+                        address: f.address || f.permit_number || 'Unknown',
+                        total_fees: f.total_fees || 0
+                    }));
+            } else if (DATA.fees.large_fees) {
+                topFeeData = DATA.fees.large_fees
+                    .sort((a, b) => (b.amount || 0) - (a.amount || 0))
+                    .slice(0, 15)
+                    .map(f => ({
+                        address: f.address || f.permit_number || 'Unknown',
+                        total_fees: f.amount || 0
+                    }));
+            }
 
             const topFeesCtx = document.getElementById('topFeeProjectsChart');
-            if (topFeesCtx) {
+            if (topFeesCtx && topFeeData.length > 0) {
                 new Chart(topFeesCtx, {
                     type: 'bar',
                     data: {
-                        labels: projectsWithFees.map(p => p.address.split(' ').slice(0, 2).join(' ')),
+                        labels: topFeeData.map(p => p.address.split(' ').slice(0, 2).join(' ')),
                         datasets: [{
                             label: 'Total Fees ($)',
-                            data: projectsWithFees.map(p => p.total_fees),
+                            data: topFeeData.map(p => p.total_fees),
                             backgroundColor: '#22c55e'
                         }]
                     },
@@ -1634,12 +1690,25 @@
                 });
             }
 
-            // Units vs Fees scatter
-            const scatterData = projectsWithFees.map(p => ({
-                x: p.units,
-                y: p.total_fees,
-                label: p.address
-            }));
+            // Units vs Fees scatter - match fee data with project units
+            const scatterData = [];
+            if (DATA.fees.by_project) {
+                for (const [permit, feeEntry] of Object.entries(DATA.fees.by_project)) {
+                    const feeAddr = (feeEntry.address || '').toUpperCase().replace(/[,\s]+/g, ' ').trim();
+                    const matchedProject = DATA.projects.find(p => {
+                        const projAddr = (p.address || '').toUpperCase().replace(/[,\s]+/g, ' ').trim();
+                        return feeAddr.includes(projAddr.split(' ').slice(0, 2).join(' ')) ||
+                               (p.permits || '').includes(permit);
+                    });
+                    if (matchedProject && feeEntry.total_fees > 0) {
+                        scatterData.push({
+                            x: matchedProject.units || 0,
+                            y: feeEntry.total_fees,
+                            label: feeEntry.address || permit
+                        });
+                    }
+                }
+            }
 
             const scatterCtx = document.getElementById('unitsVsFeesChart');
             if (scatterCtx) {
@@ -1679,21 +1748,38 @@
                 });
             }
 
-            // Fee per unit chart
-            const feePerUnitData = projectsWithFees
-                .filter(p => p.fee_per_unit)
-                .sort((a, b) => b.fee_per_unit - a.fee_per_unit)
-                .slice(0, 15);
+            // Fee per unit chart - calculate from fee data matched to projects
+            const feePerUnitData = [];
+            if (DATA.fees.by_project) {
+                for (const [permit, feeEntry] of Object.entries(DATA.fees.by_project)) {
+                    const feeAddr = (feeEntry.address || '').toUpperCase().replace(/[,\s]+/g, ' ').trim();
+                    const matchedProject = DATA.projects.find(p => {
+                        const projAddr = (p.address || '').toUpperCase().replace(/[,\s]+/g, ' ').trim();
+                        return feeAddr.includes(projAddr.split(' ').slice(0, 2).join(' ')) ||
+                               (p.permits || '').includes(permit);
+                    });
+                    if (matchedProject && matchedProject.units > 0 && feeEntry.total_fees > 0) {
+                        feePerUnitData.push({
+                            address: feeEntry.address || permit,
+                            fee_per_unit: Math.round(feeEntry.total_fees / matchedProject.units),
+                            total_fees: feeEntry.total_fees,
+                            units: matchedProject.units
+                        });
+                    }
+                }
+            }
+            feePerUnitData.sort((a, b) => b.fee_per_unit - a.fee_per_unit);
+            const topFeePerUnit = feePerUnitData.slice(0, 15);
 
             const feePerUnitCtx = document.getElementById('feePerUnitChart');
-            if (feePerUnitCtx) {
+            if (feePerUnitCtx && topFeePerUnit.length > 0) {
                 new Chart(feePerUnitCtx, {
                     type: 'bar',
                     data: {
-                        labels: feePerUnitData.map(p => p.address.split(' ').slice(0, 2).join(' ')),
+                        labels: topFeePerUnit.map(p => p.address.split(' ').slice(0, 2).join(' ')),
                         datasets: [{
                             label: 'Fee per Unit ($)',
-                            data: feePerUnitData.map(p => p.fee_per_unit),
+                            data: topFeePerUnit.map(p => p.fee_per_unit),
                             backgroundColor: '#8b5cf6'
                         }]
                     },

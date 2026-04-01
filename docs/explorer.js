@@ -329,15 +329,16 @@
             document.getElementById('avgFeeDisplay').textContent = '$' + avgFee.toLocaleString();
 
             // Calculate avg fee per unit using DATA.fees.by_project
+            // Note: by_project uses address as KEY
             let totalUnitsWithFees = 0;
             if (DATA.fees.by_project) {
                 // Match fee entries to projects and sum their units
-                for (const [permit, feeEntry] of Object.entries(DATA.fees.by_project)) {
-                    const feeAddr = (feeEntry.address || '').toUpperCase().replace(/[,\s]+/g, ' ').trim();
+                for (const [address, feeEntry] of Object.entries(DATA.fees.by_project)) {
+                    const feeAddr = address.toUpperCase().replace(/[,\s]+/g, ' ').trim();
                     const matchedProject = DATA.projects.find(p => {
                         const projAddr = (p.address || '').toUpperCase().replace(/[,\s]+/g, ' ').trim();
                         return feeAddr.includes(projAddr.split(' ').slice(0, 2).join(' ')) ||
-                               (p.permits || '').includes(permit);
+                               projAddr.includes(feeAddr.split(' ').slice(0, 2).join(' '));
                     });
                     if (matchedProject) {
                         totalUnitsWithFees += matchedProject.units || 0;
@@ -628,11 +629,11 @@
                         feeCount += feeEntry.fee_count || 0;
                     }
                 }
-                // If no permit match, try address match
+                // If no permit match, try address match (by_project uses address as KEY)
                 if (projectFees === 0) {
                     const addrNorm = (p.address || '').toUpperCase().replace(/[,\s]+/g, ' ').trim();
-                    for (const [key, feeEntry] of Object.entries(DATA.fees.by_project)) {
-                        const feeAddr = (feeEntry.address || '').toUpperCase().replace(/[,\s]+/g, ' ').trim();
+                    for (const [feeAddress, feeEntry] of Object.entries(DATA.fees.by_project)) {
+                        const feeAddr = feeAddress.toUpperCase().replace(/[,\s]+/g, ' ').trim();
                         if (feeAddr.includes(addrNorm.split(' ').slice(0, 2).join(' '))) {
                             projectFees += feeEntry.total_fees || 0;
                             feeCount += feeEntry.fee_count || 0;
@@ -1655,24 +1656,25 @@
             console.log('💰 DATA.fees.by_project entries:', DATA.fees.by_project ? Object.keys(DATA.fees.by_project).length : 0);
 
             // Top 15 projects by fees - use DATA.fees.by_project or large_fees
+            // Note: by_project uses address as KEY, value has {total_fees, fee_count, units}
             let topFeeData = [];
             if (DATA.fees.by_project) {
-                topFeeData = Object.values(DATA.fees.by_project)
-                    .sort((a, b) => (b.total_fees || 0) - (a.total_fees || 0))
-                    .slice(0, 15)
-                    .map(f => ({
-                        address: f.address || f.permit_number || 'Unknown',
+                topFeeData = Object.entries(DATA.fees.by_project)
+                    .map(([address, f]) => ({
+                        address: address,
                         total_fees: f.total_fees || 0
-                    }));
+                    }))
+                    .sort((a, b) => b.total_fees - a.total_fees)
+                    .slice(0, 15);
                 console.log('💰 topFeeData count:', topFeeData.length);
                 console.log('💰 topFeeData[0]:', topFeeData[0]);
             } else if (DATA.fees.large_fees) {
                 topFeeData = DATA.fees.large_fees
-                    .sort((a, b) => (b.amount || 0) - (a.amount || 0))
+                    .sort((a, b) => (b.total_fees || 0) - (a.total_fees || 0))
                     .slice(0, 15)
                     .map(f => ({
-                        address: f.address || f.permit_number || 'Unknown',
-                        total_fees: f.amount || 0
+                        address: f.address || 'Unknown',
+                        total_fees: f.total_fees || 0
                     }));
             }
 
@@ -1716,20 +1718,21 @@
             }
 
             // Units vs Fees scatter - match fee data with project units
+            // Note: by_project uses address as KEY
             const scatterData = [];
             if (DATA.fees.by_project) {
-                for (const [permit, feeEntry] of Object.entries(DATA.fees.by_project)) {
-                    const feeAddr = (feeEntry.address || '').toUpperCase().replace(/[,\s]+/g, ' ').trim();
+                for (const [address, feeEntry] of Object.entries(DATA.fees.by_project)) {
+                    const feeAddr = address.toUpperCase().replace(/[,\s]+/g, ' ').trim();
                     const matchedProject = DATA.projects.find(p => {
                         const projAddr = (p.address || '').toUpperCase().replace(/[,\s]+/g, ' ').trim();
                         return feeAddr.includes(projAddr.split(' ').slice(0, 2).join(' ')) ||
-                               (p.permits || '').includes(permit);
+                               projAddr.includes(feeAddr.split(' ').slice(0, 2).join(' '));
                     });
                     if (matchedProject && feeEntry.total_fees > 0) {
                         scatterData.push({
                             x: matchedProject.units || 0,
                             y: feeEntry.total_fees,
-                            label: feeEntry.address || permit
+                            label: address
                         });
                     }
                 }
@@ -1774,18 +1777,19 @@
             }
 
             // Fee per unit chart - calculate from fee data matched to projects
+            // Note: by_project uses address as KEY
             const feePerUnitData = [];
             if (DATA.fees.by_project) {
-                for (const [permit, feeEntry] of Object.entries(DATA.fees.by_project)) {
-                    const feeAddr = (feeEntry.address || '').toUpperCase().replace(/[,\s]+/g, ' ').trim();
+                for (const [address, feeEntry] of Object.entries(DATA.fees.by_project)) {
+                    const feeAddr = address.toUpperCase().replace(/[,\s]+/g, ' ').trim();
                     const matchedProject = DATA.projects.find(p => {
                         const projAddr = (p.address || '').toUpperCase().replace(/[,\s]+/g, ' ').trim();
                         return feeAddr.includes(projAddr.split(' ').slice(0, 2).join(' ')) ||
-                               (p.permits || '').includes(permit);
+                               projAddr.includes(feeAddr.split(' ').slice(0, 2).join(' '));
                     });
                     if (matchedProject && matchedProject.units > 0 && feeEntry.total_fees > 0) {
                         feePerUnitData.push({
-                            address: feeEntry.address || permit,
+                            address: address,
                             fee_per_unit: Math.round(feeEntry.total_fees / matchedProject.units),
                             total_fees: feeEntry.total_fees,
                             units: matchedProject.units
@@ -2547,13 +2551,18 @@
 
     // Initialize export date display
     function initExportDate() {
+        const dateValue = DATA.export_date || (DATA.meta && DATA.meta.export_date) || 'Unknown';
+
+        // Update dashboard export date
         const exportDateEl = document.getElementById('exportDate');
-        if (exportDateEl && DATA.export_date) {
-            exportDateEl.textContent = DATA.export_date;
-        } else if (exportDateEl && DATA.meta && DATA.meta.export_date) {
-            exportDateEl.textContent = DATA.meta.export_date;
-        } else if (exportDateEl) {
-            exportDateEl.textContent = 'Unknown';
+        if (exportDateEl) {
+            exportDateEl.textContent = dateValue;
+        }
+
+        // Update header export date
+        const headerExportDateEl = document.getElementById('headerExportDate');
+        if (headerExportDateEl) {
+            headerExportDateEl.textContent = dateValue;
         }
     }
 

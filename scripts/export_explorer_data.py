@@ -130,18 +130,31 @@ def get_events(conn):
     return events
 
 def get_fees(conn, projects):
-    """Aggregate fee data from projects"""
-    # Calculate totals from projects
-    total_fees = sum(p['total_fees'] for p in projects)
-    projects_with_fees = [p for p in projects if p['total_fees'] > 0]
+    """Aggregate fee data from permit_fees table (includes ALL fees, linked and unlinked)"""
+    cursor = conn.cursor()
 
-    # Group by year
+    # Get TOTAL fees from permit_fees table (all $14.1M)
+    cursor.execute("SELECT SUM(amount), COUNT(*) FROM permit_fees")
+    row = cursor.fetchone()
+    total_fees = row[0] or 0
+    total_count = row[1] or 0
+
+    # Get fees linked to projects
+    cursor.execute("SELECT SUM(amount), COUNT(DISTINCT project_id) FROM permit_fees WHERE project_id IS NOT NULL")
+    row = cursor.fetchone()
+    linked_fees = row[0] or 0
+    projects_with_fees_count = row[1] or 0
+
+    # Fees NOT linked to projects (building permits we haven't matched yet)
+    unlinked_fees = total_fees - linked_fees
+
+    # Group by year (from projects that have fees)
     by_year = defaultdict(float)
     for p in projects:
         if p['total_fees'] > 0 and p['year']:
             by_year[str(int(p['year']))] += p['total_fees']
 
-    # Group by project
+    # Group by project (for linked fees)
     by_project = {}
     for p in projects:
         if p['total_fees'] > 0:
@@ -151,20 +164,51 @@ def get_fees(conn, projects):
                 "units": p['units']
             }
 
-    # Large fees (over $50k)
+    # Also add unlinked permits to by_project
+    cursor.execute('''
+        SELECT permit_number, amount
+        FROM permit_fees
+        WHERE project_id IS NULL AND amount > 10000
+        ORDER BY amount DESC
+    ''')
+    for row in cursor.fetchall():
+        by_project[f"Permit: {row[0]}"] = {
+            "total_fees": row[1],
+            "fee_count": 1,
+            "units": 0
+        }
+
+    # Large fees (over $50k) - include both project-linked and permit-only
+    cursor.execute('''
+        SELECT
+            COALESCE(p.address, 'Permit: ' || pf.permit_number) as name,
+            pf.amount,
+            COALESCE(p.net_units, 0) as units
+        FROM permit_fees pf
+        LEFT JOIN projects p ON pf.project_id = p.id
+        WHERE pf.amount >= 50000
+        ORDER BY pf.amount DESC
+        LIMIT 15
+    ''')
     large_fees = [
-        {"address": p['address'], "total_fees": p['total_fees'], "units": p['units']}
-        for p in sorted(projects_with_fees, key=lambda x: x['total_fees'], reverse=True)
-        if p['total_fees'] >= 50000
-    ][:15]
+        {"address": row[0], "total_fees": row[1], "units": row[2]}
+        for row in cursor.fetchall()
+    ]
+
+    # Calculate average per unit for linked projects
+    projects_with_fees = [p for p in projects if p['total_fees'] > 0]
+    total_units_with_fees = sum(p['units'] for p in projects_with_fees) if projects_with_fees else 1
 
     return {
         "total": total_fees,
-        "count": len(projects_with_fees),
+        "linked": linked_fees,
+        "unlinked": unlinked_fees,
+        "count": projects_with_fees_count,
+        "permit_count": total_count,
         "by_year": dict(by_year),
         "by_project": by_project,
         "large_fees": large_fees,
-        "avg_per_unit": total_fees / sum(p['units'] for p in projects_with_fees) if projects_with_fees else 0
+        "avg_per_unit": linked_fees / total_units_with_fees if total_units_with_fees > 0 else 0
     }
 
 def get_staff(conn):

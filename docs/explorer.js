@@ -671,7 +671,7 @@
 
     function toggleRow(i) {
         const row = document.getElementById('expand-' + i);
-        row.classList.toggle('show');
+        if (row) row.classList.toggle('show');
     }
 
     function getStatusColor(status) {
@@ -1213,7 +1213,7 @@
     function switchSankeyView(mode) {
         currentSankeyView = mode;
 
-        // Update button styles
+        // Update button styles - with null checks
         const lifecycleBtn = document.getElementById('lifecycleBtn');
         const annualBtn = document.getElementById('annualBtn');
         const yearSelector = document.getElementById('yearSelector');
@@ -1225,24 +1225,24 @@
         const statsTitle = document.getElementById('statsTitle');
 
         if (mode === 'lifecycle') {
-            lifecycleBtn.className = 'px-3 py-1 text-sm rounded-md bg-blue-500 text-white';
-            annualBtn.className = 'px-3 py-1 text-sm rounded-md text-gray-600 hover:bg-gray-200';
-            yearSelector.classList.add('hidden');
-            lifecycleLegend.classList.remove('hidden');
-            annualLegend.classList.add('hidden');
-            correlationSection.classList.remove('hidden');
-            sankeyTitle.textContent = 'Project Lifecycle: Typical Path from Conception to Occupancy';
-            sankeySubtitle.textContent = 'Average timeline showing median days at each stage. Based on 159 Berkeley housing projects.';
-            statsTitle.textContent = 'Lifecycle Summary';
+            if (lifecycleBtn) lifecycleBtn.className = 'px-3 py-1 text-sm rounded-md bg-blue-500 text-white';
+            if (annualBtn) annualBtn.className = 'px-3 py-1 text-sm rounded-md text-gray-600 hover:bg-gray-200';
+            if (yearSelector) yearSelector.classList.add('hidden');
+            if (lifecycleLegend) lifecycleLegend.classList.remove('hidden');
+            if (annualLegend) annualLegend.classList.add('hidden');
+            if (correlationSection) correlationSection.classList.remove('hidden');
+            if (sankeyTitle) sankeyTitle.textContent = 'Project Lifecycle: Typical Path from Conception to Occupancy';
+            if (sankeySubtitle) sankeySubtitle.textContent = 'Average timeline showing median days at each stage. Based on 159 Berkeley housing projects.';
+            if (statsTitle) statsTitle.textContent = 'Lifecycle Summary';
             try { renderLifecycleSankey(); } catch(e) { console.error('❌ renderLifecycleSankey toggle failed:', e); }
         } else {
-            annualBtn.className = 'px-3 py-1 text-sm rounded-md bg-blue-500 text-white';
-            lifecycleBtn.className = 'px-3 py-1 text-sm rounded-md text-gray-600 hover:bg-gray-200';
-            yearSelector.classList.remove('hidden');
-            lifecycleLegend.classList.add('hidden');
-            annualLegend.classList.remove('hidden');
-            correlationSection.classList.add('hidden');
-            statsTitle.textContent = 'Annual Flow Summary';
+            if (annualBtn) annualBtn.className = 'px-3 py-1 text-sm rounded-md bg-blue-500 text-white';
+            if (lifecycleBtn) lifecycleBtn.className = 'px-3 py-1 text-sm rounded-md text-gray-600 hover:bg-gray-200';
+            if (yearSelector) yearSelector.classList.remove('hidden');
+            if (lifecycleLegend) lifecycleLegend.classList.add('hidden');
+            if (annualLegend) annualLegend.classList.remove('hidden');
+            if (correlationSection) correlationSection.classList.add('hidden');
+            if (statsTitle) statsTitle.textContent = 'Annual Flow Summary';
             try { renderSankey(); } catch(e) { console.error('❌ renderSankey toggle failed:', e); }
         }
     }
@@ -1911,8 +1911,10 @@
             btn.classList.remove('bg-blue-100', 'text-blue-700');
             btn.classList.add('bg-gray-100');
         });
-        event.target.classList.add('bg-blue-100', 'text-blue-700');
-        event.target.classList.remove('bg-gray-100');
+        if (event && event.target) {
+            event.target.classList.add('bg-blue-100', 'text-blue-700');
+            event.target.classList.remove('bg-gray-100');
+        }
 
         // Re-render with current color metric
         colorMapBy(currentColorMetric);
@@ -2482,19 +2484,25 @@
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 setTimeout(() => {
-                    if (document.getElementById('sankey').classList.contains('active') && !document.querySelector('#sankeyChart svg')) {
+                    const sankeyTab = document.getElementById('sankey');
+                    const processTab = document.getElementById('process');
+                    const spatialTab = document.getElementById('spatial');
+                    const costanalTab = document.getElementById('costanal');
+                    const analysisTab = document.getElementById('analysis');
+
+                    if (sankeyTab && sankeyTab.classList.contains('active') && !document.querySelector('#sankeyChart svg')) {
                         try { renderLifecycleSankey(); } catch(e) { console.error('❌ renderLifecycleSankey failed:', e); }
                     }
-                    if (document.getElementById('process').classList.contains('active') && !document.querySelector('#boxPlotChart canvas')) {
+                    if (processTab && processTab.classList.contains('active') && !document.querySelector('#boxPlotChart canvas')) {
                         try { renderProcessAnalysis(); } catch(e) { console.error('❌ renderProcessAnalysis failed:', e); }
                     }
-                    if (document.getElementById('spatial').classList.contains('active') && !spatialMap) {
+                    if (spatialTab && spatialTab.classList.contains('active') && !spatialMap) {
                         try { renderSpatialMap(); } catch(e) { console.error('❌ renderSpatialMap failed:', e); }
                     }
-                    if (document.getElementById('costanal').classList.contains('active') && !costAnalysisCharts.cityCost) {
+                    if (costanalTab && costanalTab.classList.contains('active') && !costAnalysisCharts.cityCost) {
                         try { initCostAnalysis(); } catch(e) { console.error('❌ initCostAnalysis failed:', e); }
                     }
-                    if (document.getElementById('analysis').classList.contains('active') && !document.querySelector('#topFeeProjectsChart canvas')) {
+                    if (analysisTab && analysisTab.classList.contains('active') && !document.querySelector('#topFeeProjectsChart canvas')) {
                         try { renderFeeAnalysis(); } catch(e) { console.error('❌ renderFeeAnalysis failed:', e); }
                     }
                 }, 100);

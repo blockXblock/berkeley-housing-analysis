@@ -1400,19 +1400,19 @@
                 </div>
                 <div class="bg-white rounded-xl shadow p-4 text-center">
                     <div class="text-2xl font-bold text-purple-600" id="playerArchCount">-</div>
-                    <div class="text-xs text-gray-500">Architects Identified</div>
+                    <div class="text-xs text-gray-500">Architects</div>
+                </div>
+                <div class="bg-white rounded-xl shadow p-4 text-center">
+                    <div class="text-2xl font-bold text-amber-600" id="playerOwnerCount">-</div>
+                    <div class="text-xs text-gray-500">Property Owners</div>
                 </div>
                 <div class="bg-white rounded-xl shadow p-4 text-center">
                     <div class="text-2xl font-bold text-green-600" id="playerTotalUnits">-</div>
-                    <div class="text-xs text-gray-500">Total Units</div>
+                    <div class="text-xs text-gray-500">Developer Units</div>
                 </div>
                 <div class="bg-white rounded-xl shadow p-4 text-center">
-                    <div class="text-2xl font-bold text-orange-600" id="playerAvgDays">-</div>
-                    <div class="text-xs text-gray-500">Avg Processing Days</div>
-                </div>
-                <div class="bg-white rounded-xl shadow p-4 text-center">
-                    <div class="text-2xl font-bold text-red-600" id="playerInlieuTotal">$11M</div>
-                    <div class="text-xs text-gray-500">In-Lieu Fees Tracked</div>
+                    <div class="text-2xl font-bold text-red-600" id="playerTotalFees">-</div>
+                    <div class="text-xs text-gray-500">Total Fees Tracked</div>
                 </div>
             </div>
 
@@ -1424,15 +1424,16 @@
                 </div>
                 <div class="bg-white rounded-xl shadow p-6">
                     <h3 class="text-lg font-semibold mb-4">Developer Rankings</h3>
+                    <p class="text-sm text-gray-500 mb-4">Major developers building housing in Berkeley. NX Ventures and Panoramic Interests lead the pipeline.</p>
                     <div class="overflow-x-auto max-h-[350px] overflow-y-auto">
                         <table class="w-full text-sm" id="developerTable">
                             <thead class="bg-gray-50 sticky top-0">
                                 <tr>
-                                    <th class="px-3 py-2 text-left">Developer/Owner</th>
+                                    <th class="px-3 py-2 text-left">Developer</th>
                                     <th class="px-3 py-2 text-right">Projects</th>
-                                    <th class="px-3 py-2 text-right">Units</th>
-                                    <th class="px-3 py-2 text-right">VLI</th>
-                                    <th class="px-3 py-2 text-right">Avg Days</th>
+                                    <th class="px-3 py-2 text-right">Total Units</th>
+                                    <th class="px-3 py-2 text-right">Total Fees</th>
+                                    <th class="px-3 py-2 text-left">Project Addresses</th>
                                 </tr>
                             </thead>
                             <tbody id="developerTableBody"></tbody>
@@ -1444,7 +1445,7 @@
             <!-- Architect Rankings -->
             <div class="bg-white rounded-xl shadow p-6 mb-6">
                 <h3 class="text-lg font-semibold mb-4">Architect Rankings</h3>
-                <p class="text-sm text-gray-500 mb-4">Architects identified from project descriptions. Many projects don't list architects in permit records.</p>
+                <p class="text-sm text-gray-500 mb-4">Known architects from project descriptions. Trachtenberg, Studio KDA, and SDT dominate Berkeley's housing pipeline.</p>
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm">
                         <thead class="bg-gray-50">
@@ -1452,12 +1453,31 @@
                                 <th class="px-4 py-2 text-left">Architect</th>
                                 <th class="px-4 py-2 text-right">Projects</th>
                                 <th class="px-4 py-2 text-right">Total Units</th>
-                                <th class="px-4 py-2 text-right">VLI Units</th>
-                                <th class="px-4 py-2 text-right">Avg Proc. Days</th>
+                                <th class="px-4 py-2 text-right">Total Fees</th>
                                 <th class="px-4 py-2 text-left">Sample Projects</th>
                             </tr>
                         </thead>
                         <tbody id="architectTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Property Owners -->
+            <div class="bg-white rounded-xl shadow p-6 mb-6">
+                <h3 class="text-lg font-semibold mb-4">Property Owners</h3>
+                <p class="text-sm text-gray-500 mb-4">Property owners from parcel records — often LLCs. These are distinct from developers who build the projects.</p>
+                <div class="overflow-x-auto max-h-[400px] overflow-y-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-gray-50 sticky top-0">
+                            <tr>
+                                <th class="px-4 py-2 text-left">Owner</th>
+                                <th class="px-4 py-2 text-right">Projects</th>
+                                <th class="px-4 py-2 text-right">Total Units</th>
+                                <th class="px-4 py-2 text-right">Total Fees</th>
+                                <th class="px-4 py-2 text-left">Project Addresses</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ownersTableBody"></tbody>
                     </table>
                 </div>
             </div>

@@ -2601,7 +2601,7 @@
             console.log('🎭 DATA.players:', {
                 developers: Array.isArray(players.developers) ? players.developers.length + ' items' : typeof players.developers,
                 architects: Array.isArray(players.architects) ? players.architects.length + ' items' : typeof players.architects,
-                friction: Array.isArray(players.friction) ? players.friction.length + ' items' : typeof players.friction
+                owners: Array.isArray(players.owners) ? players.owners.length + ' items' : typeof players.owners
             });
 
             // Validate arrays - must be arrays not integers
@@ -2613,17 +2613,18 @@
             // Summary stats with null checks
             const devCountEl = document.getElementById('playerDevCount');
             const archCountEl = document.getElementById('playerArchCount');
+            const ownerCountEl = document.getElementById('playerOwnerCount');
             const totalUnitsEl = document.getElementById('playerTotalUnits');
-            const avgDaysEl = document.getElementById('playerAvgDays');
+            const totalFeesEl = document.getElementById('playerTotalFees');
 
             if (devCountEl) devCountEl.textContent = players.developers.length;
             if (archCountEl) archCountEl.textContent = Array.isArray(players.architects) ? players.architects.length : 0;
-            if (totalUnitsEl) totalUnitsEl.textContent = players.developers.reduce((sum, d) => sum + (d.units || 0), 0).toLocaleString();
+            if (ownerCountEl) ownerCountEl.textContent = Array.isArray(players.owners) ? players.owners.length : 0;
+            if (totalUnitsEl) totalUnitsEl.textContent = players.developers.reduce((sum, d) => sum + (d.total_units || 0), 0).toLocaleString();
 
-            const frictionArr = Array.isArray(players.friction) ? players.friction : [];
-            const avgDays = frictionArr.length > 0 ? frictionArr.reduce((sum, f) => sum + (f.proc_days || 0), 0) / frictionArr.length : 0;
-            if (avgDaysEl) avgDaysEl.textContent = Math.round(avgDays);
-            
+            const totalDevFees = players.developers.reduce((sum, d) => sum + (d.total_fees || 0), 0);
+            if (totalFeesEl) totalFeesEl.textContent = '$' + (totalDevFees / 1000).toFixed(0) + 'K';
+
             // Developer Chart
             const devTop15 = players.developers.filter(d => d.name !== 'Unknown').slice(0, 15);
             new Chart(document.getElementById('developerChart'), {
@@ -2632,7 +2633,7 @@
                     labels: devTop15.map(d => d.name.substring(0, 20)),
                     datasets: [{
                         label: 'Units',
-                        data: devTop15.map(d => d.units),
+                        data: devTop15.map(d => d.total_units),
                         backgroundColor: '#6366f1'
                     }]
                 },
@@ -2642,40 +2643,69 @@
                     plugins: { legend: { display: false } }
                 }
             });
-            
-            // Developer Table
+
+            // Developer Table - new format: projects is array of addresses
             const devTableBody = document.getElementById('developerTableBody');
-            players.developers.forEach((d, i) => {
-                const row = document.createElement('tr');
-                row.className = i % 2 === 0 ? 'bg-white' : 'bg-gray-50';
-                row.innerHTML = `
-                    <td class="px-3 py-2 text-left font-medium">${d.name.substring(0, 35)}</td>
-                    <td class="px-3 py-2 text-right">${d.projects}</td>
-                    <td class="px-3 py-2 text-right font-bold text-indigo-600">${d.units.toLocaleString()}</td>
-                    <td class="px-3 py-2 text-right ${d.vli > 0 ? 'text-purple-600' : 'text-gray-400'}">${d.vli}</td>
-                    <td class="px-3 py-2 text-right">${d.avg_proc_days || '-'}</td>
-                `;
-                devTableBody.appendChild(row);
-            });
-            
-            // Architect Table
+            if (devTableBody) {
+                devTableBody.innerHTML = '';
+                players.developers.forEach((d, i) => {
+                    const row = document.createElement('tr');
+                    row.className = i % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+                    const projectCount = Array.isArray(d.projects) ? d.projects.length : d.projects;
+                    const projectList = Array.isArray(d.projects) ? d.projects.slice(0, 3).join(', ') : '';
+                    row.innerHTML = `
+                        <td class="px-3 py-2 text-left font-medium">${d.name}</td>
+                        <td class="px-3 py-2 text-right">${projectCount}</td>
+                        <td class="px-3 py-2 text-right font-bold text-indigo-600">${(d.total_units || 0).toLocaleString()}</td>
+                        <td class="px-3 py-2 text-right ${d.total_fees > 0 ? 'text-green-600' : 'text-gray-400'}">$${((d.total_fees || 0) / 1000).toFixed(0)}K</td>
+                        <td class="px-3 py-2 text-left text-xs text-gray-500">${projectList}${projectCount > 3 ? '...' : ''}</td>
+                    `;
+                    devTableBody.appendChild(row);
+                });
+            }
+
+            // Architect Table - new format
             const archTableBody = document.getElementById('architectTableBody');
             if (archTableBody && players.architects && players.architects.length > 0) {
+                archTableBody.innerHTML = '';
                 players.architects.forEach((a, i) => {
                     const row = document.createElement('tr');
                     row.className = i % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+                    const projectCount = Array.isArray(a.projects) ? a.projects.length : a.projects;
+                    const projectList = Array.isArray(a.projects) ? a.projects.slice(0, 3).join(', ') : '';
                     row.innerHTML = `
                         <td class="px-4 py-2 font-medium">${a.name}</td>
-                        <td class="px-4 py-2 text-right">${a.projects}</td>
-                        <td class="px-4 py-2 text-right font-bold text-purple-600">${a.units.toLocaleString()}</td>
-                        <td class="px-4 py-2 text-right ${a.vli > 0 ? 'text-green-600' : 'text-gray-400'}">${a.vli}</td>
-                        <td class="px-4 py-2 text-right">${a.avg_proc_days || '-'}</td>
-                        <td class="px-4 py-2 text-gray-500 text-xs">${(a.addresses || []).slice(0, 2).join(', ')}</td>
+                        <td class="px-4 py-2 text-right">${projectCount}</td>
+                        <td class="px-4 py-2 text-right font-bold text-purple-600">${(a.total_units || 0).toLocaleString()}</td>
+                        <td class="px-4 py-2 text-right ${a.total_fees > 0 ? 'text-green-600' : 'text-gray-400'}">$${((a.total_fees || 0) / 1000).toFixed(0)}K</td>
+                        <td class="px-4 py-2 text-gray-500 text-xs">${projectList}${projectCount > 3 ? '...' : ''}</td>
                     `;
                     archTableBody.appendChild(row);
                 });
             } else if (archTableBody) {
-                archTableBody.innerHTML = '<tr><td colspan="6" class="px-4 py-4 text-gray-500 text-center">Architect data not yet extracted from project descriptions</td></tr>';
+                archTableBody.innerHTML = '<tr><td colspan="5" class="px-4 py-4 text-gray-500 text-center">Architect data not yet extracted from project descriptions</td></tr>';
+            }
+
+            // Owners Table - new section
+            const ownersTableBody = document.getElementById('ownersTableBody');
+            if (ownersTableBody && players.owners && players.owners.length > 0) {
+                ownersTableBody.innerHTML = '';
+                players.owners.forEach((o, i) => {
+                    const row = document.createElement('tr');
+                    row.className = i % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+                    const projectCount = Array.isArray(o.projects) ? o.projects.length : o.projects;
+                    const projectList = Array.isArray(o.projects) ? o.projects.slice(0, 2).join(', ') : '';
+                    row.innerHTML = `
+                        <td class="px-4 py-2 font-medium">${o.name.substring(0, 30)}</td>
+                        <td class="px-4 py-2 text-right">${projectCount}</td>
+                        <td class="px-4 py-2 text-right font-bold text-amber-600">${(o.total_units || 0).toLocaleString()}</td>
+                        <td class="px-4 py-2 text-right ${o.total_fees > 0 ? 'text-green-600' : 'text-gray-400'}">$${((o.total_fees || 0) / 1000).toFixed(0)}K</td>
+                        <td class="px-4 py-2 text-gray-500 text-xs">${projectList}${projectCount > 2 ? '...' : ''}</td>
+                    `;
+                    ownersTableBody.appendChild(row);
+                });
+            } else if (ownersTableBody) {
+                ownersTableBody.innerHTML = '<tr><td colspan="5" class="px-4 py-4 text-gray-500 text-center">Owner data not available</td></tr>';
             }
             
             // Economics Table - use fee data from projects with fees
@@ -2702,34 +2732,47 @@
                 });
             }
             
-            // Slowest Projects Table
+            // Slowest Projects Table - use DATA.projects with processing_days
             const slowestBody = document.getElementById('slowestTableBody');
-            players.friction.slice(0, 15).forEach((f, i) => {
-                const row = document.createElement('tr');
-                row.className = i % 2 === 0 ? 'bg-white' : 'bg-red-50';
-                row.innerHTML = `
-                    <td class="px-3 py-2 font-medium">${f.address}</td>
-                    <td class="px-3 py-2 text-right font-bold text-red-600">${f.proc_days}</td>
-                    <td class="px-3 py-2 text-right">${f.units}</td>
-                    <td class="px-3 py-2 text-xs">${f.status}</td>
-                `;
-                slowestBody.appendChild(row);
-            });
-            
-            // Fastest Projects Table
+            if (slowestBody) {
+                slowestBody.innerHTML = '';
+                const slowestProjects = DATA.projects
+                    .filter(p => p.processing_days && p.processing_days > 0)
+                    .sort((a, b) => b.processing_days - a.processing_days)
+                    .slice(0, 15);
+                slowestProjects.forEach((p, i) => {
+                    const row = document.createElement('tr');
+                    row.className = i % 2 === 0 ? 'bg-white' : 'bg-red-50';
+                    row.innerHTML = `
+                        <td class="px-3 py-2 font-medium">${p.address.substring(0, 25)}</td>
+                        <td class="px-3 py-2 text-right font-bold text-red-600">${p.processing_days}</td>
+                        <td class="px-3 py-2 text-right">${p.units}</td>
+                        <td class="px-3 py-2 text-xs">${p.status}</td>
+                    `;
+                    slowestBody.appendChild(row);
+                });
+            }
+
+            // Fastest Projects Table - use DATA.projects with processing_days
             const fastestBody = document.getElementById('fastestTableBody');
-            const fastest = [...players.friction].sort((a, b) => a.proc_days - b.proc_days);
-            fastest.slice(0, 15).forEach((f, i) => {
-                const row = document.createElement('tr');
-                row.className = i % 2 === 0 ? 'bg-white' : 'bg-green-50';
-                row.innerHTML = `
-                    <td class="px-3 py-2 font-medium">${f.address}</td>
-                    <td class="px-3 py-2 text-right font-bold text-green-600">${f.proc_days}</td>
-                    <td class="px-3 py-2 text-right">${f.units}</td>
-                    <td class="px-3 py-2 text-xs">${f.status}</td>
-                `;
-                fastestBody.appendChild(row);
-            });
+            if (fastestBody) {
+                fastestBody.innerHTML = '';
+                const fastestProjects = DATA.projects
+                    .filter(p => p.processing_days && p.processing_days > 0)
+                    .sort((a, b) => a.processing_days - b.processing_days)
+                    .slice(0, 15);
+                fastestProjects.forEach((p, i) => {
+                    const row = document.createElement('tr');
+                    row.className = i % 2 === 0 ? 'bg-white' : 'bg-green-50';
+                    row.innerHTML = `
+                        <td class="px-3 py-2 font-medium">${p.address.substring(0, 25)}</td>
+                        <td class="px-3 py-2 text-right font-bold text-green-600">${p.processing_days}</td>
+                        <td class="px-3 py-2 text-right">${p.units}</td>
+                        <td class="px-3 py-2 text-xs">${p.status}</td>
+                    `;
+                    fastestBody.appendChild(row);
+                });
+            }
             
             // In-Lieu Fee Analysis - projects with high fees relative to VLI units
             const inlieuBody = document.getElementById('inlieuTableBody');

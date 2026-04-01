@@ -1633,6 +1633,8 @@
                 console.warn('⚠️ No fee data available');
                 return;
             }
+            console.log('💰 DATA.fees.total:', DATA.fees.total);
+            console.log('💰 DATA.fees.by_project entries:', DATA.fees.by_project ? Object.keys(DATA.fees.by_project).length : 0);
 
             // Top 15 projects by fees - use DATA.fees.by_project or large_fees
             let topFeeData = [];
@@ -1644,6 +1646,8 @@
                         address: f.address || f.permit_number || 'Unknown',
                         total_fees: f.total_fees || 0
                     }));
+                console.log('💰 topFeeData count:', topFeeData.length);
+                console.log('💰 topFeeData[0]:', topFeeData[0]);
             } else if (DATA.fees.large_fees) {
                 topFeeData = DATA.fees.large_fees
                     .sort((a, b) => (b.amount || 0) - (a.amount || 0))
@@ -1655,7 +1659,10 @@
             }
 
             const topFeesCtx = document.getElementById('topFeeProjectsChart');
+            console.log('💰 topFeeProjectsChart canvas:', topFeesCtx ? 'found' : 'NOT FOUND');
+            console.log('💰 topFeeData.length:', topFeeData.length);
             if (topFeesCtx && topFeeData.length > 0) {
+                console.log('💰 Creating top fees bar chart...');
                 new Chart(topFeesCtx, {
                     type: 'bar',
                     data: {
@@ -1879,6 +1886,14 @@
                     maxZoom: 20
                 }).addTo(spatialMap);
             }
+
+            // Fix: invalidate size after tab becomes visible (hidden tabs have zero height)
+            setTimeout(() => {
+                if (spatialMap) {
+                    spatialMap.invalidateSize();
+                    console.log('🗺️ Map size invalidated');
+                }
+            }, 150);
 
             // Color by processing days by default
             colorMapBy('processing_days');
@@ -2125,22 +2140,43 @@
     }
 
     function initCostAnalysis() {
-        if (costAnalysisCharts.cityCost) return; // Already initialized
+        console.log('💼 initCostAnalysis() called');
+        console.log('💼 DATA.staff:', DATA.staff ? DATA.staff.length + ' entries' : 'MISSING');
+        console.log('💼 SAMPLE_EVENTS.staff:', SAMPLE_EVENTS.staff ? SAMPLE_EVENTS.staff.length + ' entries' : 'MISSING');
 
-        updateCostAnalysis();
-        updateStaffWorkload();
-        initDevCostCharts();
-        initFeeShareChart();
-        initInLieuFeeChart();
+        if (costAnalysisCharts.cityCost) {
+            console.log('💼 Already initialized, skipping');
+            return;
+        }
+
+        try { updateCostAnalysis(); } catch(e) { console.error('❌ updateCostAnalysis failed:', e); }
+        try { updateStaffWorkload(); } catch(e) { console.error('❌ updateStaffWorkload failed:', e); }
+        try { initDevCostCharts(); } catch(e) { console.error('❌ initDevCostCharts failed:', e); }
+        try { initFeeShareChart(); } catch(e) { console.error('❌ initFeeShareChart failed:', e); }
+        try { initInLieuFeeChart(); } catch(e) { console.error('❌ initInLieuFeeChart failed:', e); }
+
+        console.log('✅ initCostAnalysis() complete');
     }
 
     function updateCostAnalysis() {
-        hourlyRate = parseInt(document.getElementById('hourlyRateSlider').value);
-        document.getElementById('hourlyRateDisplay').textContent = hourlyRate;
+        console.log('📊 updateCostAnalysis() called');
+        const slider = document.getElementById('hourlyRateSlider');
+        if (!slider) {
+            console.warn('⚠️ hourlyRateSlider not found, using default rate');
+            hourlyRate = 95;
+        } else {
+            hourlyRate = parseInt(slider.value);
+        }
+        const display = document.getElementById('hourlyRateDisplay');
+        if (display) display.textContent = hourlyRate;
 
         // Update staff table
         const tbody = document.getElementById('staffCostTable');
-        if (!tbody) return;
+        if (!tbody) {
+            console.warn('⚠️ staffCostTable not found');
+            return;
+        }
+        console.log('📊 staffCostTable found');
 
         let totalHours = 0;
         const rows = SAMPLE_EVENTS.staff.map(s => {
@@ -2211,15 +2247,23 @@
     }
 
     function updateStaffWorkload() {
+        console.log('👥 updateStaffWorkload() called');
         const anonymize = document.getElementById('anonymizeToggle')?.checked || false;
 
         const ctx = document.getElementById('workloadChart');
-        if (!ctx) return;
+        if (!ctx) {
+            console.warn('⚠️ workloadChart canvas not found');
+            return;
+        }
+        console.log('👥 workloadChart canvas found');
 
         if (costAnalysisCharts.workload) costAnalysisCharts.workload.destroy();
 
+        console.log('👥 SAMPLE_EVENTS.staff count:', SAMPLE_EVENTS.staff ? SAMPLE_EVENTS.staff.length : 0);
         const labels = SAMPLE_EVENTS.staff.map((s, i) => anonymize ? `Planner ${String.fromCharCode(65 + i)}` : s.name);
         const data = SAMPLE_EVENTS.staff.map(s => s.events);
+        console.log('👥 Chart labels:', labels.slice(0, 5), '...');
+        console.log('👥 Chart data:', data.slice(0, 5), '...');
 
         costAnalysisCharts.workload = new Chart(ctx, {
             type: 'bar',

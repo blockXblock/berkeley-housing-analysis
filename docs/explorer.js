@@ -473,22 +473,37 @@
             options: { scales: { y: { beginAtZero: true } } }
         });
 
-        // Skyline Chart
+        // Skyline Chart - highlight UC projects in gold
         const topByHeight = [...DATA.projects].filter(p => p.height_stories > 0).sort((a, b) => b.height_stories - a.height_stories).slice(0, 20);
         new Chart(document.getElementById('skylineChart'), {
             type: 'bar',
             data: {
-                labels: topByHeight.map(p => p.address.split(' ').slice(0, 2).join(' ')),
+                labels: topByHeight.map(p => {
+                    const addr = p.address.split(' ').slice(0, 2).join(' ');
+                    return p.is_uc_project ? addr + ' (UC)' : addr;
+                }),
                 datasets: [{
                     label: 'Stories',
                     data: topByHeight.map(p => p.height_stories),
-                    backgroundColor: topByHeight.map((p, i) => `hsl(${210 + i * 5}, 70%, ${50 + i}%)`),
+                    backgroundColor: topByHeight.map(p => p.is_uc_project ? '#FDB515' : '#3B7EA1'),
+                    borderColor: topByHeight.map(p => p.is_uc_project ? '#D4A017' : '#003262'),
+                    borderWidth: topByHeight.map(p => p.is_uc_project ? 3 : 1),
                 }]
             },
             options: {
                 indexAxis: 'x',
                 scales: { y: { beginAtZero: true, title: { display: true, text: 'Stories' } } },
-                plugins: { legend: { display: false } }
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            afterLabel: function(context) {
+                                const p = topByHeight[context.dataIndex];
+                                return p.is_uc_project ? '🏫 UC Berkeley Project' : '';
+                            }
+                        }
+                    }
+                }
             }
         });
 
@@ -568,12 +583,8 @@
             tbody.innerHTML = '';
             console.log(`📋 Rendering ${DATA.projects.length} projects`);
             DATA.projects.sort((a, b) => b.units - a.units).forEach((p, i) => {
-                // Match events by address (normalized comparison)
-                const events = DATA.events ? DATA.events.filter(e =>
-                    e.address && p.address &&
-                    e.address.toUpperCase().replace(/\s+/g, ' ').trim() ===
-                    p.address.toUpperCase().replace(/\s+/g, ' ').trim()
-                ) : [];
+                // Match events by project_id (events have project_id field, not address)
+                const events = DATA.events ? DATA.events.filter(e => e.project_id === p.id) : [];
             const row = document.createElement('tr');
             row.className = 'border-t hover:bg-gray-50 cursor-pointer';
             row.onclick = () => toggleRow(i);
@@ -1831,15 +1842,20 @@
             // Fee summary stats
             const summaryDiv = document.getElementById('feeSummaryStats');
             if (summaryDiv) {
-                const totalFees = DATA.fees.total;
-                const projectCount = DATA.fees.project_count;
+                const totalFees = DATA.fees.total || 0;
+                const projectCount = DATA.fees.project_count || 0;
                 const avgFee = projectCount > 0 ? totalFees / projectCount : 0;
-                const totalUnits = projectsWithFees.reduce((sum, p) => sum + p.units, 0);
+                // Calculate total units from projects that have fee data
+                const projectsWithFees = DATA.projects.filter(p => p.total_fees > 0);
+                const totalUnits = projectsWithFees.reduce((sum, p) => sum + (p.units || 0), 0);
                 const avgPerUnit = totalUnits > 0 ? totalFees / totalUnits : 0;
+                // Find highest single fee
+                const highestFee = DATA.fees.by_project ?
+                    Math.max(...Object.values(DATA.fees.by_project).map(f => f.total_fees || 0)) : 0;
 
                 summaryDiv.innerHTML = `
                     <div class="bg-green-50 rounded-lg p-4 text-center">
-                        <div class="text-2xl font-bold text-green-700">$${totalFees.toLocaleString()}</div>
+                        <div class="text-2xl font-bold text-green-700">$${(totalFees / 1000000).toFixed(1)}M</div>
                         <div class="text-xs text-gray-600">Total Fees Tracked</div>
                     </div>
                     <div class="bg-blue-50 rounded-lg p-4 text-center">
@@ -1847,12 +1863,16 @@
                         <div class="text-xs text-gray-600">Projects with Fee Data</div>
                     </div>
                     <div class="bg-purple-50 rounded-lg p-4 text-center">
-                        <div class="text-2xl font-bold text-purple-700">$${Math.round(avgFee).toLocaleString()}</div>
+                        <div class="text-2xl font-bold text-purple-700">$${Math.round(avgFee / 1000)}K</div>
                         <div class="text-xs text-gray-600">Avg Fee per Project</div>
                     </div>
                     <div class="bg-orange-50 rounded-lg p-4 text-center">
                         <div class="text-2xl font-bold text-orange-700">$${Math.round(avgPerUnit).toLocaleString()}</div>
                         <div class="text-xs text-gray-600">Avg Fee per Unit</div>
+                    </div>
+                    <div class="bg-red-50 rounded-lg p-4 text-center col-span-2 md:col-span-1">
+                        <div class="text-2xl font-bold text-red-700">$${(highestFee / 1000000).toFixed(1)}M</div>
+                        <div class="text-xs text-gray-600">Highest Single Project</div>
                     </div>
                 `;
             }

@@ -156,6 +156,8 @@ We developed a four-tier reliability rating for construction progress data, base
 
 4. **UC Berkeley Projects:** University projects are exempt from city zoning and not included in this analysis.
 
+5. **Building Permit Archival:** Building permits for completed projects appear to be archived and removed from public search in Accela. Projects confirmed as physically completed (2000 University, 2711 Shattuck) return no building permit results in the public portal. This means the public cannot verify construction completion, CO dates, or final fee payments for completed housing.
+
 ---
 
 ## Known Data Gaps

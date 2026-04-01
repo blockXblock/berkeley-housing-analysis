@@ -27,6 +27,8 @@ The City Council of the City of Berkeley hereby finds and declares that:
 
 4. **Technical Barriers to Public Access.** Legitimate data collection efforts by civic technologists and researchers have been blocked by web application firewall (WAF) configurations that cannot distinguish between malicious bots and good-faith civic data projects. These technical barriers violate the spirit of public records laws and impede civic engagement.
 
+5. **Building Permit Archival.** Building permits for completed projects appear to be archived and removed from public search in the City's Accela permitting system. Projects confirmed as physically completed (2000 University, 2711 Shattuck) return no building permit results in the public portal. This means the public cannot verify construction completion, certificate of occupancy dates, or final fee payments for completed housing developments.
+
 **C. Best Practices Exist.** Other California jurisdictions have successfully implemented open data programs:
 
 1. The City and County of San Francisco's Administrative Code Chapter 22D, enacted in 2010 and amended in 2018, established a comprehensive open data program with clear timelines, accountability mechanisms, and technical standards.
@@ -294,6 +296,13 @@ E. **Annual Progress Report Integration.** Permitting systems shall:
    3. Maintain audit trail of changes to APR-reportable fields;
    4. Flag projects approaching or exceeding APR reporting deadlines; and
    5. Generate discrepancy reports comparing system records to submitted APR data.
+
+F. **Permit Record Retention and Public Access.** All permit records shall remain publicly searchable regardless of project status:
+   1. Building permits shall not be archived, removed, or hidden from public search upon project completion, certificate of occupancy issuance, or permit finalization;
+   2. All historical permit records, including those for completed projects, shall remain accessible through the public portal and API;
+   3. Certificate of occupancy dates, final inspection records, and final fee payments shall be publicly searchable;
+   4. The City shall not implement any "archival" or "closed records" policy that removes completed project permits from public view; and
+   5. Any permit record accessible to City staff shall also be accessible to the public through the Open Data Portal, subject only to the exemptions in Section 2.150.020(C).
 
 #### 2.150.070 Vendor Contract Requirements
 

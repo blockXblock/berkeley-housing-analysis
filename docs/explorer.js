@@ -61,23 +61,195 @@
 
 // DATA object is loaded from explorer_data.js
 
+    // ========================================
+    // STANDARDIZED PIPELINE STAGES
+    // ========================================
+    const PIPELINE_STAGES = [
+        'Pre-Application',
+        'Filed',
+        'Under Review',
+        'Entitled',
+        'BP Filed',
+        'BP Issued',
+        'Under Construction',
+        'Completed',
+        'Withdrawn',
+        'Stalled'
+    ];
+
+    const STAGE_COLORS = {
+        'Pre-Application': '#94a3b8',  // slate
+        'Filed': '#60a5fa',            // blue
+        'Under Review': '#fbbf24',     // amber
+        'Entitled': '#34d399',         // emerald
+        'BP Filed': '#a78bfa',         // violet
+        'BP Issued': '#818cf8',        // indigo
+        'Under Construction': '#f97316', // orange
+        'Completed': '#22c55e',        // green
+        'Withdrawn': '#ef4444',        // red
+        'Stalled': '#6b7280'           // gray
+    };
+
+    // Map raw status strings to standardized pipeline stages
+    function normalizeStatus(rawStatus) {
+        if (!rawStatus) return 'Unknown';
+        const s = rawStatus.toLowerCase().trim();
+
+        // Pre-Application
+        if (s.includes('preapp') || s.includes('pre-app') || s.includes('pre app') ||
+            s.includes('sb330 pre') || s === 'pre-application') {
+            return 'Pre-Application';
+        }
+
+        // Filed (new applications)
+        if (s === 'new' || s === 'intake' || s === 'application submitted' ||
+            s === 'filed' || s === 'submitted') {
+            return 'Filed';
+        }
+
+        // Under Review (various review statuses)
+        if (s.includes('completeness review') || s.includes('in review') ||
+            s.includes('under review') || s.includes('corrections') ||
+            s.includes('incomplete') || s.includes('resubmittal') ||
+            s.includes('pending applicant') || s.includes('pending staff') ||
+            s.includes('zab review') || s.includes('pending final') ||
+            s === 'pending' || s === 'on hold') {
+            return 'Under Review';
+        }
+
+        // Entitled (approved at any level)
+        if (s === 'approved' || s === 'entitled' || s.includes('staff approved') ||
+            s.includes('zab approved') || s.includes('council approved') ||
+            s.includes('developer selected')) {
+            return 'Entitled';
+        }
+
+        // BP Filed
+        if (s.includes('building permit') && (s.includes('filed') || s.includes('applied')) ||
+            s === 'plan check' || s === 'bp filed' || s.includes('demolition permits filed')) {
+            return 'BP Filed';
+        }
+
+        // BP Issued
+        if (s === 'issued' || s === 'ready to issue' || s === 'bp issued' ||
+            (s.includes('building permit') && s.includes('issued'))) {
+            return 'BP Issued';
+        }
+
+        // Under Construction
+        if (s.includes('under construction') || s.includes('demolition underway') ||
+            s === 'construction') {
+            return 'Under Construction';
+        }
+
+        // Completed
+        if (s === 'completed' || s === 'finaled' || s.includes('co issued') ||
+            s === 'occupied' || s === 'certificate of occupancy') {
+            return 'Completed';
+        }
+
+        // Withdrawn
+        if (s === 'withdrawn' || s === 'closed' || s === 'expired' || s === 'cancelled') {
+            return 'Withdrawn';
+        }
+
+        // Default to Under Review for unknown statuses in the pipeline
+        return 'Under Review';
+    }
+
+    // Get pipeline stage considering all project fields (status, construction_status, dates)
+    function getPipelineStage(project) {
+        // Check construction_status first (most definitive)
+        const constructionStatus = (project.construction_status || '').toLowerCase();
+        if (constructionStatus === 'completed' || constructionStatus === 'occupied') {
+            return 'Completed';
+        }
+        if (constructionStatus === 'framing' || constructionStatus === 'foundation' ||
+            constructionStatus === 'topped_out' || constructionStatus === 'finishing' ||
+            constructionStatus === 'under_construction') {
+            return 'Under Construction';
+        }
+
+        // Check CO date
+        if (project.co_date) {
+            return 'Completed';
+        }
+
+        // Check for stalled projects (entitled > 12 months with no BP)
+        if (project.entitled && !project.bp_issued) {
+            const entitledDate = new Date(project.entitled);
+            const monthsSinceEntitled = (new Date() - entitledDate) / (1000 * 60 * 60 * 24 * 30);
+            if (monthsSinceEntitled > 12) {
+                return 'Stalled';
+            }
+        }
+
+        // Check BP issued
+        if (project.bp_issued) {
+            return 'Under Construction';  // BP issued implies construction should be underway
+        }
+
+        // Check for BP filed
+        const status = (project.status || '').toLowerCase();
+        if (status.includes('building permit') || status === 'plan check') {
+            return 'BP Filed';
+        }
+
+        // Check entitled
+        if (project.entitled) {
+            return 'Entitled';
+        }
+
+        // Normalize the raw status
+        return normalizeStatus(project.status);
+    }
+
+    // Get color for a pipeline stage
+    function getStageColor(stage) {
+        return STAGE_COLORS[stage] || '#6b7280';
+    }
+
+    // Get status badge color class for Tailwind
+    function getStatusBadgeClass(stage) {
+        const classes = {
+            'Pre-Application': 'bg-slate-100 text-slate-700',
+            'Filed': 'bg-blue-100 text-blue-700',
+            'Under Review': 'bg-amber-100 text-amber-700',
+            'Entitled': 'bg-emerald-100 text-emerald-700',
+            'BP Filed': 'bg-violet-100 text-violet-700',
+            'BP Issued': 'bg-indigo-100 text-indigo-700',
+            'Under Construction': 'bg-orange-100 text-orange-700',
+            'Completed': 'bg-green-100 text-green-700',
+            'Withdrawn': 'bg-red-100 text-red-700',
+            'Stalled': 'bg-gray-100 text-gray-600'
+        };
+        return classes[stage] || 'bg-gray-100 text-gray-600';
+    }
+
+    // ========================================
+    // END STANDARDIZED PIPELINE STAGES
+    // ========================================
+
     // Initialize Charts
     function initCharts() {
         console.log('📊 initCharts() called');
         try {
-        // Status Distribution
+        // Status Distribution (using standardized pipeline stages)
         const statusCounts = {};
         DATA.projects.forEach(p => {
-            const s = p.status || 'Unknown';
-            statusCounts[s] = (statusCounts[s] || 0) + 1;
+            const stage = getPipelineStage(p);
+            statusCounts[stage] = (statusCounts[stage] || 0) + 1;
         });
+        // Sort by pipeline order
+        const orderedStages = PIPELINE_STAGES.filter(s => statusCounts[s] > 0);
+        const stageColors = orderedStages.map(s => getStageColor(s));
         new Chart(document.getElementById('statusChart'), {
             type: 'doughnut',
             data: {
-                labels: Object.keys(statusCounts),
+                labels: orderedStages,
                 datasets: [{
-                    data: Object.values(statusCounts),
-                    backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#6b7280', '#ec4899', '#14b8a6']
+                    data: orderedStages.map(s => statusCounts[s]),
+                    backgroundColor: stageColors
                 }]
             },
             options: { plugins: { legend: { position: 'right' } } }
@@ -392,13 +564,14 @@
             const row = document.createElement('tr');
             row.className = 'border-t hover:bg-gray-50 cursor-pointer';
             row.onclick = () => toggleRow(i);
+            const pipelineStage = getPipelineStage(p);
             row.innerHTML = `
                 <td class="px-4 py-3"><span class="text-gray-400">▶</span></td>
                 <td class="px-4 py-3 font-medium">${p.address}</td>
                 <td class="px-4 py-3 text-right">${p.units.toLocaleString()}</td>
                 <td class="px-4 py-3 text-right">${p.height_stories || '-'}</td>
                 <td class="px-4 py-3 text-center">${p.year || '-'}</td>
-                <td class="px-4 py-3"><span class="px-2 py-1 text-xs rounded-full ${getStatusColor(p.status)}">${p.status || '-'}</span></td>
+                <td class="px-4 py-3"><span class="px-2 py-1 text-xs rounded-full ${getStatusBadgeClass(pipelineStage)}">${pipelineStage}</span></td>
                 <td class="px-4 py-3 text-right">${p.processing_days || '-'}</td>
                 <td class="px-4 py-3 text-center text-xs">${p.app_filed || '-'}</td>
                 <td class="px-4 py-3 text-center text-xs">${p.app_complete || '-'}</td>
@@ -460,12 +633,9 @@
     }
 
     function getStatusColor(status) {
-        if (!status) return 'bg-gray-100';
-        const s = status.toLowerCase();
-        if (s.includes('approved') || s.includes('entitled')) return 'bg-green-100 text-green-800';
-        if (s.includes('review') || s.includes('pending')) return 'bg-yellow-100 text-yellow-800';
-        if (s.includes('incomplete')) return 'bg-red-100 text-red-800';
-        return 'bg-blue-100 text-blue-800';
+        // Use standardized pipeline stage for consistent coloring
+        const stage = typeof status === 'object' ? getPipelineStage(status) : normalizeStatus(status);
+        return getStatusBadgeClass(stage);
     }
 
     let currentSort = { col: 2, asc: false };
@@ -506,21 +676,22 @@
     }
 
     // Get status color for Gantt bar
-    function getStatusColor(status) {
+    function getGanttStatusColor(status) {
+        // Use standardized pipeline stage colors for Gantt chart
+        const stage = normalizeStatus(status);
         const colors = {
-            'Approved': 'bg-green-500',
-            'Entitled': 'bg-green-500',
-            'Pending Final Action': 'bg-blue-500',
-            'In Review': 'bg-blue-400',
-            'Under Review': 'bg-blue-400',
+            'Pre-Application': 'bg-slate-400',
+            'Filed': 'bg-blue-400',
+            'Under Review': 'bg-amber-400',
+            'Entitled': 'bg-emerald-500',
+            'BP Filed': 'bg-violet-500',
+            'BP Issued': 'bg-indigo-500',
             'Under Construction': 'bg-orange-500',
             'Completed': 'bg-green-600',
-            'Corrections Pending Applicant': 'bg-yellow-500',
-            'Incomplete Pending Applicant': 'bg-yellow-400',
             'Withdrawn': 'bg-red-400',
-            'On Hold': 'bg-gray-400'
+            'Stalled': 'bg-gray-400'
         };
-        return colors[status] || 'bg-gray-400';
+        return colors[stage] || 'bg-gray-400';
     }
 
     function renderGantt() {
@@ -728,16 +899,16 @@
         const width = container.clientWidth;
         const height = 550;
 
-        // Define status categories
-        const startCategories = ['New Application', 'Under Review', 'Corrections Pending', 'Pending Final Action', 'Approved', 'Under Construction'];
-        const endCategories = ['Under Review', 'Corrections Pending', 'Pending Final Action', 'Approved', 'Under Construction', 'Completed', 'Stalled'];
+        // Define status categories using standardized pipeline stages
+        const startCategories = ['Filed', 'Under Review', 'Entitled', 'BP Filed', 'BP Issued', 'Under Construction'];
+        const endCategories = ['Under Review', 'Entitled', 'BP Filed', 'BP Issued', 'Under Construction', 'Completed', 'Stalled', 'Withdrawn'];
 
         // Year boundaries
         const yearStart = new Date(`${selectedYear}-01-01`);
         const yearEnd = new Date(`${selectedYear}-12-31`);
         const today = new Date();
 
-        // Determine start-of-year and end-of-year status for each project
+        // Determine start-of-year and end-of-year status for each project (using standardized stages)
         function getStatusAtDate(project, date) {
             const filed = project.app_filed ? new Date(project.app_filed) : null;
             const complete = project.app_complete ? new Date(project.app_complete) : null;
@@ -746,28 +917,39 @@
             const coDate = project.co_date ? new Date(project.co_date) : null;
             const constructionStart = project.construction_start ? new Date(project.construction_start) : null;
             const constructionEnd = project.estimated_completion ? new Date(project.estimated_completion) : null;
-            const constructionStatus = project.construction_status || '';
+            const constructionStatus = (project.construction_status || '').toLowerCase();
 
             // Check construction status first
             if (constructionStatus === 'occupied' || constructionStatus === 'completed') {
                 if (constructionEnd && constructionEnd <= date) return 'Completed';
             }
             if (coDate && coDate <= date) return 'Completed';
-            
-            // Check if under construction
-            if (constructionStart && constructionStart <= date) return 'Under Construction';
-            if (bpIssued && bpIssued <= date) return 'Under Construction';
-            if (entitled && entitled <= date) return 'Approved';
 
-            // Check current status for projects still in review
+            // Check if under construction
+            if (constructionStatus === 'framing' || constructionStatus === 'foundation' ||
+                constructionStatus === 'topped_out' || constructionStatus === 'finishing') {
+                return 'Under Construction';
+            }
+            if (constructionStart && constructionStart <= date) return 'Under Construction';
+            if (bpIssued && bpIssued <= date) return 'BP Issued';
+
+            // Check for BP filed
             const status = (project.status || '').toLowerCase();
-            if (status.includes('pending final')) return 'Pending Final Action';
-            if (status.includes('corrections')) return 'Corrections Pending';
+            if (status.includes('building permit') || status === 'plan check') {
+                return 'BP Filed';
+            }
+
+            if (entitled && entitled <= date) {
+                // Check if stalled (entitled > 12 months with no BP)
+                const monthsSinceEntitled = (date - entitled) / (1000 * 60 * 60 * 24 * 30);
+                if (monthsSinceEntitled > 12 && !bpIssued) return 'Stalled';
+                return 'Entitled';
+            }
 
             if (complete && complete <= date) return 'Under Review';
             if (filed && filed <= date) {
-                // Check if stalled (no activity > 12 months)
-                const lastActivity = entitled || complete || filed;
+                // Check if stalled in review (no progress > 12 months)
+                const lastActivity = complete || filed;
                 const monthsSinceActivity = (date - new Date(lastActivity)) / (1000 * 60 * 60 * 24 * 30);
                 if (monthsSinceActivity > 12 && !entitled) return 'Stalled';
                 return 'Under Review';
@@ -781,7 +963,7 @@
             if (!filed) return null;
 
             // If filed during this year, it's a new application
-            if (filed >= yearStart && filed <= yearEnd) return 'New Application';
+            if (filed >= yearStart && filed <= yearEnd) return 'Filed';
             // If filed before this year, determine status at year start
             if (filed < yearStart) return getStatusAtDate(project, yearStart);
             return null;
@@ -836,14 +1018,13 @@
             const targetIdx = nodes.findIndex(n => n.side === 'end' && n.category === to);
 
             if (sourceIdx >= 0 && targetIdx >= 0 && data.units > 0) {
-                // Determine flow color based on progress
+                // Determine flow color based on progress using standardized stages
                 let flowType = 'same';
-                const startOrder = startCategories.indexOf(from);
-                const endOrder = endCategories.indexOf(to);
-                if (to === 'Completed' || to === 'Approved' || to === 'Under Construction') {
-                    if (from !== to && from !== 'Under Construction' && from !== 'Approved') flowType = 'forward';
+                const forwardStages = ['Entitled', 'BP Filed', 'BP Issued', 'Under Construction', 'Completed'];
+                if (forwardStages.includes(to) && !forwardStages.includes(from)) {
+                    flowType = 'forward';
                 }
-                if (to === 'Stalled') flowType = 'stalled';
+                if (to === 'Stalled' || to === 'Withdrawn') flowType = 'stalled';
                 if (from === to) flowType = 'same';
 
                 links.push({

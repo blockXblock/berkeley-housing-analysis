@@ -250,82 +250,13 @@
                                 <th class="px-4 py-2 text-left">BP Status</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr class="border-b hover:bg-gray-50">
-                                <td class="px-4 py-2 font-medium">2555 COLLEGE Ave</td>
-                                <td class="px-4 py-2 text-right">11</td>
-                                <td class="px-4 py-2">2023-05-31</td>
-                                <td class="px-4 py-2 text-right text-red-600 font-bold">34</td>
-                                <td class="px-4 py-2 text-red-600">None Filed</td>
-                            </tr>
-                            <tr class="border-b hover:bg-gray-50">
-                                <td class="px-4 py-2 font-medium">2480 Bancroft Way</td>
-                                <td class="px-4 py-2 text-right">28</td>
-                                <td class="px-4 py-2">2023-10-02</td>
-                                <td class="px-4 py-2 text-right text-red-600 font-bold">30</td>
-                                <td class="px-4 py-2 text-red-600">None Filed</td>
-                            </tr>
-                            <tr class="border-b hover:bg-gray-50">
-                                <td class="px-4 py-2 font-medium">2136 SAN PABLO Ave</td>
-                                <td class="px-4 py-2 text-right">125</td>
-                                <td class="px-4 py-2">2024-04-01</td>
-                                <td class="px-4 py-2 text-right text-red-600 font-bold">24</td>
-                                <td class="px-4 py-2 text-red-600">None Filed</td>
-                            </tr>
-                            <tr class="border-b hover:bg-gray-50">
-                                <td class="px-4 py-2 font-medium">2833 Seventh St</td>
-                                <td class="px-4 py-2 text-right">3</td>
-                                <td class="px-4 py-2">2024-05-07</td>
-                                <td class="px-4 py-2 text-right text-orange-600 font-bold">23</td>
-                                <td class="px-4 py-2 text-red-600">None Filed</td>
-                            </tr>
-                            <tr class="border-b hover:bg-gray-50">
-                                <td class="px-4 py-2 font-medium">2462 BANCROFT Way</td>
-                                <td class="px-4 py-2 text-right">66</td>
-                                <td class="px-4 py-2">2024-07-01</td>
-                                <td class="px-4 py-2 text-right text-orange-600 font-bold">21</td>
-                                <td class="px-4 py-2 text-red-600">None Filed</td>
-                            </tr>
-                            <tr class="border-b hover:bg-gray-50">
-                                <td class="px-4 py-2 font-medium">2037 DURANT Ave</td>
-                                <td class="px-4 py-2 text-right">74</td>
-                                <td class="px-4 py-2">2024-06-19</td>
-                                <td class="px-4 py-2 text-right text-orange-600 font-bold">21</td>
-                                <td class="px-4 py-2 text-red-600">None Filed</td>
-                            </tr>
-                            <tr class="border-b hover:bg-gray-50">
-                                <td class="px-4 py-2 font-medium">2427 San Pablo</td>
-                                <td class="px-4 py-2 text-right">78</td>
-                                <td class="px-4 py-2">2024-09-16</td>
-                                <td class="px-4 py-2 text-right text-orange-600 font-bold">18</td>
-                                <td class="px-4 py-2 text-red-600">None Filed</td>
-                            </tr>
-                            <tr class="border-b hover:bg-gray-50 bg-yellow-50">
-                                <td class="px-4 py-2 font-medium">2128 Oxford St</td>
-                                <td class="px-4 py-2 text-right font-bold">485</td>
-                                <td class="px-4 py-2">2024-10-04</td>
-                                <td class="px-4 py-2 text-right text-orange-600 font-bold">18</td>
-                                <td class="px-4 py-2 text-red-600">None Filed</td>
-                            </tr>
-                            <tr class="border-b hover:bg-gray-50">
-                                <td class="px-4 py-2 font-medium">1614 Sixth St</td>
-                                <td class="px-4 py-2 text-right">3</td>
-                                <td class="px-4 py-2">2024-10-17</td>
-                                <td class="px-4 py-2 text-right text-yellow-600 font-bold">17</td>
-                                <td class="px-4 py-2 text-red-600">None Filed</td>
-                            </tr>
-                            <tr class="border-b hover:bg-gray-50">
-                                <td class="px-4 py-2 font-medium">2530 BANCROFT Way</td>
-                                <td class="px-4 py-2 text-right">110</td>
-                                <td class="px-4 py-2">2024-12-27</td>
-                                <td class="px-4 py-2 text-right text-yellow-600 font-bold">15</td>
-                                <td class="px-4 py-2 text-red-600">None Filed</td>
-                            </tr>
+                        <tbody id="stalledTableBody">
+                            <!-- Dynamically populated -->
                         </tbody>
                         <tfoot class="bg-gray-100 font-bold">
                             <tr>
-                                <td class="px-4 py-2">Total: 10 projects</td>
-                                <td class="px-4 py-2 text-right">983</td>
+                                <td class="px-4 py-2" id="stalledCountCell">Total: -- projects</td>
+                                <td class="px-4 py-2 text-right" id="stalledUnitsCell">--</td>
                                 <td class="px-4 py-2" colspan="3"></td>
                             </tr>
                         </tfoot>

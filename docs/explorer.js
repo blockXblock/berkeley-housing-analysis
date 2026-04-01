@@ -52,8 +52,15 @@
             }
         });
         // Re-render Sankey if flow section is shown
-        if (sectionId === 'flow' && typeof renderSankey === 'function') {
-            setTimeout(() => renderSankey(), 100);
+        if (sectionId === 'flow') {
+            setTimeout(() => {
+                // Check current view mode and render appropriate Sankey
+                if (currentSankeyView === 'lifecycle' && typeof renderLifecycleSankey === 'function') {
+                    try { renderLifecycleSankey(); } catch(e) { console.error('❌ renderLifecycleSankey failed:', e); }
+                } else if (typeof renderSankey === 'function') {
+                    try { renderSankey(); } catch(e) { console.error('❌ renderSankey failed:', e); }
+                }
+            }, 100);
         }
     }
 
@@ -656,7 +663,7 @@
                         <div>
                             <h4 class="font-semibold mb-2">Timeline Events (${events.length})</h4>
                             <div class="max-h-40 overflow-y-auto text-sm">
-                                ${events.length ? events.slice(0, 20).map(e => `<div class="py-1 border-b"><span class="text-gray-500">${e.date || 'N/A'}</span> - ${e.event || 'Unknown'}</div>`).join('') + (events.length > 20 ? `<div class="text-gray-400 py-1">...and ${events.length - 20} more events</div>` : '') : '<p class="text-gray-500">No events</p>'}
+                                ${events.length ? events.slice(0, 20).map(e => `<div class="py-1 border-b border-gray-200"><span class="text-gray-500">${e.date || 'N/A'}</span> | <span class="text-blue-600">${e.type || 'Unknown'}</span>${e.staff ? ` <span class="text-gray-400">by ${e.staff}</span>` : ''}</div>`).join('') + (events.length > 20 ? `<div class="text-gray-400 py-1 italic">...and ${events.length - 20} more events</div>` : '') : '<p class="text-gray-500">No events recorded</p>'}
                             </div>
                         </div>
                         <div>
@@ -2486,6 +2493,58 @@
         });
     }
 
+    // Render Stalled Projects Table
+    function renderStalledTable() {
+        const tbody = document.getElementById('stalledTableBody');
+        const countCell = document.getElementById('stalledCountCell');
+        const unitsCell = document.getElementById('stalledUnitsCell');
+        if (!tbody) return;
+
+        // Get stalled projects (is_stalled flag or entitled with no BP)
+        const stalled = DATA.projects.filter(p => {
+            if (p.is_stalled) return true;
+            // Also check manually: entitled/approved with no BP
+            const status = (p.status || '').toLowerCase();
+            if (['entitled', 'approved'].includes(status) && p.entitled && !p.bp_issued) {
+                return true;
+            }
+            return false;
+        }).sort((a, b) => {
+            // Sort by entitled date (oldest first)
+            if (a.entitled && b.entitled) return a.entitled.localeCompare(b.entitled);
+            return 0;
+        });
+
+        const today = new Date();
+        let totalUnits = 0;
+
+        tbody.innerHTML = '';
+        stalled.slice(0, 15).forEach((p, i) => {
+            const entitled = p.entitled ? new Date(p.entitled) : null;
+            const monthsStalled = entitled ? Math.round((today - entitled) / (1000 * 60 * 60 * 24 * 30)) : 0;
+            const units = p.units || 0;
+            totalUnits += units;
+
+            const colorClass = monthsStalled > 24 ? 'text-red-600' : monthsStalled > 12 ? 'text-orange-600' : 'text-yellow-600';
+            const isLargest = units === Math.max(...stalled.map(s => s.units || 0));
+            const rowClass = isLargest ? 'border-b hover:bg-gray-50 bg-yellow-50' : 'border-b hover:bg-gray-50';
+
+            const row = document.createElement('tr');
+            row.className = rowClass;
+            row.innerHTML = `
+                <td class="px-4 py-2 font-medium">${p.address}</td>
+                <td class="px-4 py-2 text-right ${isLargest ? 'font-bold' : ''}">${units}</td>
+                <td class="px-4 py-2">${p.entitled || '-'}</td>
+                <td class="px-4 py-2 text-right ${colorClass} font-bold">${monthsStalled}</td>
+                <td class="px-4 py-2 ${p.bp_issued ? 'text-green-600' : 'text-red-600'}">${p.bp_issued ? 'Filed' : 'None Filed'}</td>
+            `;
+            tbody.appendChild(row);
+        });
+
+        if (countCell) countCell.textContent = `Total: ${stalled.length} projects`;
+        if (unitsCell) unitsCell.textContent = stalled.reduce((sum, p) => sum + (p.units || 0), 0).toLocaleString();
+    }
+
     // Initialize
     document.addEventListener('DOMContentLoaded', () => {
         console.log('🚀 DOMContentLoaded - Initializing explorer...');
@@ -2499,6 +2558,7 @@
         try { renderProjectTable(); } catch(e) { console.error('❌ renderProjectTable failed:', e); }
         try { renderGantt(); } catch(e) { console.error('❌ renderGantt failed:', e); }
         try { renderAPRTable(); } catch(e) { console.error('❌ renderAPRTable failed:', e); }
+        try { renderStalledTable(); } catch(e) { console.error('❌ renderStalledTable failed:', e); }
 
         // Lazy load visualizations when tabs are shown
         document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -2578,35 +2638,47 @@
             
             // Architect Table
             const archTableBody = document.getElementById('architectTableBody');
-            players.architects.forEach((a, i) => {
-                const row = document.createElement('tr');
-                row.className = i % 2 === 0 ? 'bg-white' : 'bg-gray-50';
-                row.innerHTML = `
-                    <td class="px-4 py-2 font-medium">${a.name}</td>
-                    <td class="px-4 py-2 text-right">${a.projects}</td>
-                    <td class="px-4 py-2 text-right font-bold text-purple-600">${a.units.toLocaleString()}</td>
-                    <td class="px-4 py-2 text-right ${a.vli > 0 ? 'text-green-600' : 'text-gray-400'}">${a.vli}</td>
-                    <td class="px-4 py-2 text-right">${a.avg_proc_days || '-'}</td>
-                    <td class="px-4 py-2 text-gray-500 text-xs">${a.addresses.slice(0, 2).join(', ')}</td>
-                `;
-                archTableBody.appendChild(row);
-            });
+            if (archTableBody && players.architects && players.architects.length > 0) {
+                players.architects.forEach((a, i) => {
+                    const row = document.createElement('tr');
+                    row.className = i % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+                    row.innerHTML = `
+                        <td class="px-4 py-2 font-medium">${a.name}</td>
+                        <td class="px-4 py-2 text-right">${a.projects}</td>
+                        <td class="px-4 py-2 text-right font-bold text-purple-600">${a.units.toLocaleString()}</td>
+                        <td class="px-4 py-2 text-right ${a.vli > 0 ? 'text-green-600' : 'text-gray-400'}">${a.vli}</td>
+                        <td class="px-4 py-2 text-right">${a.avg_proc_days || '-'}</td>
+                        <td class="px-4 py-2 text-gray-500 text-xs">${(a.addresses || []).slice(0, 2).join(', ')}</td>
+                    `;
+                    archTableBody.appendChild(row);
+                });
+            } else if (archTableBody) {
+                archTableBody.innerHTML = '<tr><td colspan="6" class="px-4 py-4 text-gray-500 text-center">Architect data not yet extracted from project descriptions</td></tr>';
+            }
             
-            // Economics Table
+            // Economics Table - use fee data from projects with fees
             const econTableBody = document.getElementById('economicsTableBody');
-            players.economics.forEach((e, i) => {
-                const row = document.createElement('tr');
-                row.className = i % 2 === 0 ? 'bg-white' : 'bg-gray-50';
-                row.innerHTML = `
-                    <td class="px-3 py-2 font-medium">${e.address}</td>
-                    <td class="px-3 py-2 text-right">${e.units}</td>
-                    <td class="px-3 py-2 text-right ${e.vli > 0 ? 'text-purple-600' : 'text-gray-400'}">${e.vli}</td>
-                    <td class="px-3 py-2 text-right text-green-600">$${(e.annual_revenue / 1000000).toFixed(1)}M</td>
-                    <td class="px-3 py-2 text-right text-orange-600">$${(e.est_fees / 1000000).toFixed(1)}M</td>
-                    <td class="px-3 py-2 text-right">${e.fee_pct}%</td>
-                `;
-                econTableBody.appendChild(row);
-            });
+            if (econTableBody) {
+                const projectsWithFees = DATA.projects
+                    .filter(p => p.total_fees > 0)
+                    .sort((a, b) => b.total_fees - a.total_fees)
+                    .slice(0, 15);
+                projectsWithFees.forEach((p, i) => {
+                    const row = document.createElement('tr');
+                    row.className = i % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+                    const estRevenue = p.units * 2500 * 12; // Est. $2500/mo/unit annual
+                    const feePct = estRevenue > 0 ? ((p.total_fees / estRevenue) * 100).toFixed(1) : 0;
+                    row.innerHTML = `
+                        <td class="px-3 py-2 font-medium">${p.address.substring(0, 25)}</td>
+                        <td class="px-3 py-2 text-right">${p.units}</td>
+                        <td class="px-3 py-2 text-right ${p.vli_units > 0 ? 'text-purple-600' : 'text-gray-400'}">${p.vli_units || 0}</td>
+                        <td class="px-3 py-2 text-right text-green-600">$${(estRevenue / 1000000).toFixed(1)}M</td>
+                        <td class="px-3 py-2 text-right text-orange-600">$${(p.total_fees / 1000).toFixed(0)}K</td>
+                        <td class="px-3 py-2 text-right">${feePct}%</td>
+                    `;
+                    econTableBody.appendChild(row);
+                });
+            }
             
             // Slowest Projects Table
             const slowestBody = document.getElementById('slowestTableBody');
@@ -2637,22 +2709,32 @@
                 fastestBody.appendChild(row);
             });
             
-            // In-Lieu Fee Table
+            // In-Lieu Fee Analysis - projects with high fees relative to VLI units
             const inlieuBody = document.getElementById('inlieuTableBody');
-            players.inlieu.forEach((il, i) => {
-                const row = document.createElement('tr');
-                row.className = 'bg-red-50';
-                row.innerHTML = `
-                    <td class="px-4 py-2 font-medium">${il.address}</td>
-                    <td class="px-4 py-2">${il.developer}</td>
-                    <td class="px-4 py-2 text-right">${il.units}</td>
-                    <td class="px-4 py-2 text-right text-purple-600">${il.vli_built}</td>
-                    <td class="px-4 py-2 text-right font-bold text-red-600">$${(il.inlieu_amount / 1000000).toFixed(0)}M</td>
-                    <td class="px-4 py-2 text-right text-orange-600">${il.units_avoided}</td>
-                    <td class="px-4 py-2 text-xs text-gray-600">${il.notes}</td>
-                `;
-                inlieuBody.appendChild(row);
-            });
+            if (inlieuBody) {
+                // Find projects with fees but few VLI units (potential in-lieu payers)
+                const inlieuCandidates = DATA.projects
+                    .filter(p => p.total_fees > 100000 && p.units > 50)
+                    .sort((a, b) => b.total_fees - a.total_fees)
+                    .slice(0, 10);
+                inlieuCandidates.forEach((p, i) => {
+                    const row = document.createElement('tr');
+                    row.className = i % 2 === 0 ? 'bg-white' : 'bg-orange-50';
+                    const vliBuilt = p.vli_units || 0;
+                    const vliRequired = Math.ceil(p.units * 0.15); // 15% requirement
+                    const unitsAvoided = Math.max(0, vliRequired - vliBuilt);
+                    row.innerHTML = `
+                        <td class="px-4 py-2 font-medium">${p.address.substring(0, 25)}</td>
+                        <td class="px-4 py-2 text-gray-500 text-xs">${(p.description || '').substring(0, 30)}...</td>
+                        <td class="px-4 py-2 text-right">${p.units}</td>
+                        <td class="px-4 py-2 text-right text-purple-600">${vliBuilt}</td>
+                        <td class="px-4 py-2 text-right font-bold text-green-600">$${(p.total_fees / 1000).toFixed(0)}K</td>
+                        <td class="px-4 py-2 text-right text-orange-600">${unitsAvoided}</td>
+                        <td class="px-4 py-2 text-xs text-gray-600">${p.density_bonus ? 'Density Bonus' : 'Standard'}</td>
+                    `;
+                    inlieuBody.appendChild(row);
+                });
+            }
         }
         
         // Initialize Players tab when shown

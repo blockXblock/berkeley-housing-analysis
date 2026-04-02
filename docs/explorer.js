@@ -519,8 +519,29 @@
         });
 
         // Skyline Chart - highlight UC projects in gold
+        // Known UC Berkeley project addresses (exempt from city zoning, not counted toward RHNA)
+        const UC_ADDRESSES = [
+            '2200 BANCROFT', '2222 BANCROFT', '2211 BANCROFT',  // People's Park / Southside
+            '2650 HASTE', '2666 HASTE',  // Clark Kerr area
+            'OXFORD', 'BERKELEY WAY'  // Near campus
+        ];
+        function isUCProject(address) {
+            if (!address) return false;
+            const addr = address.toUpperCase();
+            // Check explicit is_uc_project flag first
+            return UC_ADDRESSES.some(uc => addr.includes(uc));
+        }
+
         const topByHeight = [...DATA.projects].filter(p => p.height_stories > 0).sort((a, b) => b.height_stories - a.height_stories).slice(0, 20);
-        console.log('🏗️ Skyline chart init - projects with height_stories > 0:', topByHeight.length);
+        // Mark UC projects client-side if not already marked
+        topByHeight.forEach(p => {
+            if (!p.is_uc_project && isUCProject(p.address)) {
+                p.is_uc_project = true;
+            }
+        });
+        const ucCount = topByHeight.filter(p => p.is_uc_project).length;
+        console.log('🏗️ Skyline chart init - projects with height_stories > 0:', topByHeight.length, '(UC projects:', ucCount + ')');
+
         if (topByHeight.length === 0) {
             console.warn('⚠️ No height data for Skyline chart. All height_stories values are null/0.');
             const skylineCanvas = document.getElementById('skylineChart');
@@ -552,13 +573,22 @@
                         callbacks: {
                             afterLabel: function(context) {
                                 const p = topByHeight[context.dataIndex];
-                                return p.is_uc_project ? '🏫 UC Berkeley Project' : '';
+                                return p.is_uc_project ? '🏫 UC Berkeley Project (exempt from city zoning)' : '';
                             }
                         }
                     }
                 }
             }
             });
+
+            // Add note below chart about UC projects
+            const skylineCanvas = document.getElementById('skylineChart');
+            if (skylineCanvas && skylineCanvas.parentElement) {
+                const note = document.createElement('p');
+                note.className = 'text-xs text-gray-500 mt-2 text-center';
+                note.innerHTML = '🟡 <span class="text-yellow-600 font-medium">Yellow bars</span> indicate UC Berkeley projects, which are exempt from city zoning and not counted toward RHNA.';
+                skylineCanvas.parentElement.appendChild(note);
+            }
         }
 
         // APR Comparison - city_apr may not exist in export

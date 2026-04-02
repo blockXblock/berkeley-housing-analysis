@@ -1446,7 +1446,8 @@
         currentTimelineSankeyView = mode;
 
         const lifecycleBtn = document.getElementById('timelineLifecycleBtn');
-        const annualBtn = document.getElementById('timelineAnnualBtn');
+        const annualUnitsBtn = document.getElementById('timelineAnnualUnitsBtn');
+        const annualProjectsBtn = document.getElementById('timelineAnnualProjectsBtn');
         const yearSelector = document.getElementById('timelineYearSelector');
         const lifecycleLegend = document.getElementById('timelineLifecycleLegend');
         const annualLegend = document.getElementById('timelineAnnualLegend');
@@ -1454,9 +1455,15 @@
         const subtitle = document.getElementById('timelineSankeySubtitle');
         const statsTitle = document.getElementById('timelineStatsTitle');
 
+        // Reset all buttons
+        const inactiveClass = 'px-3 py-1 text-sm rounded-md text-gray-600 hover:bg-gray-200';
+        const activeClass = 'px-3 py-1 text-sm rounded-md bg-blue-500 text-white';
+        if (lifecycleBtn) lifecycleBtn.className = inactiveClass;
+        if (annualUnitsBtn) annualUnitsBtn.className = inactiveClass;
+        if (annualProjectsBtn) annualProjectsBtn.className = inactiveClass;
+
         if (mode === 'lifecycle') {
-            if (lifecycleBtn) lifecycleBtn.className = 'px-3 py-1 text-sm rounded-md bg-blue-500 text-white';
-            if (annualBtn) annualBtn.className = 'px-3 py-1 text-sm rounded-md text-gray-600 hover:bg-gray-200';
+            if (lifecycleBtn) lifecycleBtn.className = activeClass;
             if (yearSelector) yearSelector.classList.add('hidden');
             if (lifecycleLegend) lifecycleLegend.classList.remove('hidden');
             if (annualLegend) annualLegend.classList.add('hidden');
@@ -1464,22 +1471,30 @@
             if (subtitle) subtitle.textContent = `Median days at each stage. Based on ${DATA.projects.length} Berkeley housing projects.`;
             if (statsTitle) statsTitle.textContent = 'Lifecycle Summary';
             renderTimelineLifecycleSankey();
-        } else {
-            if (annualBtn) annualBtn.className = 'px-3 py-1 text-sm rounded-md bg-blue-500 text-white';
-            if (lifecycleBtn) lifecycleBtn.className = 'px-3 py-1 text-sm rounded-md text-gray-600 hover:bg-gray-200';
+        } else if (mode === 'annual-units') {
+            if (annualUnitsBtn) annualUnitsBtn.className = activeClass;
             if (yearSelector) yearSelector.classList.remove('hidden');
             if (lifecycleLegend) lifecycleLegend.classList.add('hidden');
             if (annualLegend) annualLegend.classList.remove('hidden');
-            if (statsTitle) statsTitle.textContent = 'Annual Flow Summary';
-            renderTimelineAnnualSankey();
+            if (statsTitle) statsTitle.textContent = 'Annual Flow Summary (by Units)';
+            renderTimelineAnnualSankey('units');
+        } else if (mode === 'annual-projects') {
+            if (annualProjectsBtn) annualProjectsBtn.className = activeClass;
+            if (yearSelector) yearSelector.classList.remove('hidden');
+            if (lifecycleLegend) lifecycleLegend.classList.add('hidden');
+            if (annualLegend) annualLegend.classList.remove('hidden');
+            if (statsTitle) statsTitle.textContent = 'Annual Flow Summary (by Projects)';
+            renderTimelineAnnualSankey('projects');
         }
     }
 
     function renderTimelineSankey() {
         if (currentTimelineSankeyView === 'lifecycle') {
             renderTimelineLifecycleSankey();
-        } else {
-            renderTimelineAnnualSankey();
+        } else if (currentTimelineSankeyView === 'annual-units') {
+            renderTimelineAnnualSankey('units');
+        } else if (currentTimelineSankeyView === 'annual-projects') {
+            renderTimelineAnnualSankey('projects');
         }
     }
 
@@ -1707,25 +1722,32 @@
         }
     }
 
-    function renderTimelineAnnualSankey() {
+    function renderTimelineAnnualSankey(mode = 'units') {
         const container = document.getElementById('timelineSankeyChart');
         if (!container) return;
 
         const yearSelect = document.getElementById('timelineSankeyYear');
         const selectedYear = parseInt(yearSelect ? yearSelect.value : '2025');
 
+        const isProjectsMode = mode === 'projects';
         const title = document.getElementById('timelineSankeyTitle');
         const subtitle = document.getElementById('timelineSankeySubtitle');
-        if (title) title.textContent = `Annual Flow: How Projects Moved Through the Pipeline in ${selectedYear}`;
-        if (subtitle) subtitle.textContent = `Status transitions from Jan 1 to Dec 31, ${selectedYear}. Width proportional to unit count.`;
+
+        if (isProjectsMode) {
+            if (title) title.textContent = `Project Flow: How Many Projects Moved Through Berkeley's Permit Process in ${selectedYear}`;
+            if (subtitle) subtitle.textContent = `Administrative workload: ${DATA.projects.length} projects tracked. Width = number of projects at each stage.`;
+        } else {
+            if (title) title.textContent = `Unit Flow: Housing Units Moving Through Berkeley's Pipeline in ${selectedYear}`;
+            if (subtitle) subtitle.textContent = `Status transitions Jan 1 → Dec 31, ${selectedYear}. Width = unit count.`;
+        }
 
         container.innerHTML = '';
 
         const width = container.clientWidth;
         const height = 450;
 
-        // Define status categories
-        const startCategories = ['Filed', 'Under Review', 'Entitled', 'BP Issued', 'Under Construction'];
+        // Define status categories - include Stalled on both sides
+        const startCategories = ['Filed', 'Under Review', 'Entitled', 'BP Issued', 'Under Construction', 'Stalled'];
         const endCategories = ['Under Review', 'Entitled', 'BP Issued', 'Under Construction', 'Completed', 'Stalled'];
 
         const yearStart = new Date(`${selectedYear}-01-01`);
@@ -1741,11 +1763,7 @@
 
             if (coDate && coDate <= date) return 'Completed';
             if (bpIssued && bpIssued <= date) return 'Under Construction';
-            if (entitled && entitled <= date) {
-                const monthsSince = (date - entitled) / (1000 * 60 * 60 * 24 * 30);
-                if (monthsSince > 18 && !bpIssued) return 'Stalled';
-                return 'BP Issued';  // Waiting for BP
-            }
+            if (entitled && entitled <= date) return 'Entitled';
             if (complete && complete <= date) return 'Under Review';
             if (filed && filed <= date) return 'Under Review';
             return null;
@@ -1759,31 +1777,49 @@
             return null;
         }
 
-        function getEndStatus(project) {
+        function getEndStatus(project, startStatus) {
             const filed = project.app_filed ? new Date(project.app_filed) : null;
             if (!filed || filed > yearEnd) return null;
             const effectiveEnd = yearEnd < today ? yearEnd : today;
-            return getStatusAtDate(project, effectiveEnd);
+            const endStatus = getStatusAtDate(project, effectiveEnd);
+
+            // Check if project is stalled (no status change during the year)
+            if (startStatus && endStatus && startStatus === endStatus) {
+                // Same status at start and end = stalled (no progress)
+                return 'Stalled';
+            }
+            return endStatus;
         }
 
-        // Build flow data
+        // Build flow data - track both units and projects
         const flows = {};
-        const startCounts = {};
-        const endCounts = {};
+        const startCountsUnits = {};
+        const startCountsProjects = {};
+        const endCountsUnits = {};
+        const endCountsProjects = {};
 
         DATA.projects.forEach(p => {
             const startStatus = getStartStatus(p);
-            const endStatus = getEndStatus(p);
-            if (!startStatus || !endStatus) return;
+            if (!startStatus) return;
+
+            const endStatus = getEndStatus(p, startStatus);
+            if (!endStatus) return;
 
             const key = `${startStatus}|${endStatus}`;
             if (!flows[key]) flows[key] = { units: 0, projects: 0 };
             flows[key].units += (p.units || 0);
             flows[key].projects += 1;
 
-            startCounts[startStatus] = (startCounts[startStatus] || 0) + (p.units || 0);
-            endCounts[endStatus] = (endCounts[endStatus] || 0) + (p.units || 0);
+            // Track counts for sizing
+            startCountsUnits[startStatus] = (startCountsUnits[startStatus] || 0) + (p.units || 0);
+            startCountsProjects[startStatus] = (startCountsProjects[startStatus] || 0) + 1;
+            endCountsUnits[endStatus] = (endCountsUnits[endStatus] || 0) + (p.units || 0);
+            endCountsProjects[endStatus] = (endCountsProjects[endStatus] || 0) + 1;
         });
+
+        // Use appropriate counts based on mode
+        const startCounts = isProjectsMode ? startCountsProjects : startCountsUnits;
+        const endCounts = isProjectsMode ? endCountsProjects : endCountsUnits;
 
         const activeStartCats = startCategories.filter(c => startCounts[c] > 0);
         const activeEndCats = endCategories.filter(c => endCounts[c] > 0);
@@ -1804,17 +1840,19 @@
             const sourceIdx = nodes.findIndex(n => n.side === 'start' && n.category === from);
             const targetIdx = nodes.findIndex(n => n.side === 'end' && n.category === to);
 
-            if (sourceIdx >= 0 && targetIdx >= 0 && data.units > 0) {
+            const flowValue = isProjectsMode ? data.projects : data.units;
+            if (sourceIdx >= 0 && targetIdx >= 0 && flowValue > 0) {
                 let flowType = 'same';
                 const stages = ['Filed', 'Under Review', 'Entitled', 'BP Issued', 'Under Construction', 'Completed'];
                 if (stages.indexOf(to) > stages.indexOf(from)) flowType = 'forward';
                 if (to === 'Stalled') flowType = 'stalled';
-                if (from === to) flowType = 'same';
+                if (from === to && to !== 'Stalled') flowType = 'same';
 
                 links.push({
                     source: sourceIdx,
                     target: targetIdx,
-                    value: data.units,
+                    value: flowValue,
+                    units: data.units,
                     projects: data.projects,
                     flowType: flowType
                 });
@@ -1854,7 +1892,11 @@
             .attr('stroke-opacity', 0.5)
             .attr('stroke-width', d => Math.max(1, d.width))
             .append('title')
-            .text(d => `${d.source.category} → ${d.target.category}\n${d.projects} projects, ${d.value.toLocaleString()} units`);
+            .text(d => {
+                const primary = isProjectsMode ? `${d.projects} projects` : `${d.units.toLocaleString()} units`;
+                const secondary = isProjectsMode ? `${d.units.toLocaleString()} units` : `${d.projects} projects`;
+                return `${d.source.category} → ${d.target.category}\n${primary} (${secondary})`;
+            });
 
         // Draw nodes
         svg.append('g')
@@ -1868,7 +1910,10 @@
             .attr('fill', d => nodeColors[d.category] || '#9ca3af')
             .attr('rx', 3)
             .append('title')
-            .text(d => `${d.name}\n${d.value?.toLocaleString() || 0} units`);
+            .text(d => {
+                const label = isProjectsMode ? 'projects' : 'units';
+                return `${d.name}\n${d.value?.toLocaleString() || 0} ${label}`;
+            });
 
         // Node labels
         svg.append('g')
@@ -1888,19 +1933,34 @@
         if (statsContainer) {
             const totalProjects = Object.values(flows).reduce((s, f) => s + f.projects, 0);
             const totalUnits = Object.values(flows).reduce((s, f) => s + f.units, 0);
-            const forwardUnits = Object.entries(flows).filter(([k]) => {
+
+            const forwardFlows = Object.entries(flows).filter(([k]) => {
                 const [from, to] = k.split('|');
                 const stages = ['Filed', 'Under Review', 'Entitled', 'BP Issued', 'Under Construction', 'Completed'];
                 return stages.indexOf(to) > stages.indexOf(from);
-            }).reduce((s, [, f]) => s + f.units, 0);
+            });
+            const forwardProjects = forwardFlows.reduce((s, [, f]) => s + f.projects, 0);
+            const forwardUnits = forwardFlows.reduce((s, [, f]) => s + f.units, 0);
+
+            const stalledProjects = endCountsProjects['Stalled'] || 0;
+            const stalledUnits = endCountsUnits['Stalled'] || 0;
+            const completedProjects = endCountsProjects['Completed'] || 0;
+            const completedUnits = endCountsUnits['Completed'] || 0;
 
             statsContainer.innerHTML = '';
-            const statsData = [
+
+            const statsData = isProjectsMode ? [
                 { label: 'Total Projects', value: totalProjects, color: '#3b82f6' },
-                { label: 'Total Units', value: totalUnits.toLocaleString(), color: '#6366f1' },
-                { label: 'Forward Progress', value: `${((forwardUnits/totalUnits)*100).toFixed(0)}%`, color: '#22c55e' },
-                { label: 'Completed', value: (endCounts['Completed'] || 0).toLocaleString(), color: '#10b981' },
-                { label: 'Stalled', value: (endCounts['Stalled'] || 0).toLocaleString(), color: '#ef4444' }
+                { label: 'Forward Progress', value: `${forwardProjects} (${((forwardProjects/totalProjects)*100).toFixed(0)}%)`, color: '#22c55e' },
+                { label: 'No Change', value: totalProjects - forwardProjects - stalledProjects - completedProjects, color: '#eab308' },
+                { label: 'Completed', value: completedProjects, color: '#10b981' },
+                { label: 'Stalled', value: stalledProjects, color: '#ef4444' }
+            ] : [
+                { label: 'Total Units', value: totalUnits.toLocaleString(), color: '#3b82f6' },
+                { label: 'Forward Progress', value: `${forwardUnits.toLocaleString()} (${((forwardUnits/totalUnits)*100).toFixed(0)}%)`, color: '#22c55e' },
+                { label: 'No Change', value: (totalUnits - forwardUnits - stalledUnits - completedUnits).toLocaleString(), color: '#eab308' },
+                { label: 'Completed', value: completedUnits.toLocaleString(), color: '#10b981' },
+                { label: 'Stalled', value: stalledUnits.toLocaleString(), color: '#ef4444' }
             ];
 
             statsData.forEach(stat => {

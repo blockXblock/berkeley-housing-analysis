@@ -46,7 +46,7 @@ def get_projects(conn):
             id, address_display, units, status, permits, filed, complete, entitled,
             bp_issued, co_date, height_stories, height_feet,
             is_uc_project, construction_status, developer, architect, description,
-            latitude, longitude
+            latitude, longitude, density_bonus, vli_units
         FROM projects
         ORDER BY units DESC
     ''')
@@ -75,8 +75,8 @@ def get_projects(conn):
             "longitude": row[18],  # From database
             "unit_category": None,
             "tenure": None,
-            "vli_units": 0,
-            "density_bonus": False,
+            "vli_units": row[20] or 0,  # From database
+            "density_bonus": bool(row[19]),  # From database (1 = True)
             "density_bonus_pct": None,
             "sb330": False,
             "sb35": False,

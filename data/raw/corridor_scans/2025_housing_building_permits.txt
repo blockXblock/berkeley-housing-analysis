@@ -1,38 +1,83 @@
-This is gold. 73 housing permits found and only 31 streets scanned — extrapolating, there could be 150+ total. Save it:
+# 2025 Housing Building Permit Scan
+# Source: Accela Citizen Access - Berkeley
+# Scan Date: 2026-04-01
+# Streets Scanned: 31 of ~100 (partial scan)
 
-```bash
-pbpaste > /Users/johngage/berkeley-data/data/raw/corridor_scans/2025_housing_building_permits.txt
-```
+# MULTIFAMILY & NEW CONSTRUCTION
+B2025-05635 | 2712 TELEGRAPH Ave | 56 units | Corrections List Issued
+B2025-05618 | 2800 TELEGRAPH Ave | 18 units | Corrections List Issued
+B2025-03529 | 2442 HASTE St | 38 units | Issued
+B2025-05447 | 2298 DURANT Ave | 8-story student apartments | Approved w/Conditions
+B2025-02344 | 2138 KITTREDGE St | 66 units Phase 2 | Issued
+B2025-05345 | 2128 OXFORD St | 26-story high-rise | Corrections List Issued
+B2025-05654 | 2372 ELLSWORTH St | 49 units | Corrections List Issued
+B2025-05624 | 1850 BERRYMAN St | 6 units | Corrections List Issued
+B2025-00168 | 2330 BLAKE St | 6 ADUs | Approved w/Conditions
+B2025-05890 | 901 CAMELIA St | 3 live-work | new
+B2025-05892 | 1419 GRANT St | SFD | new
+B2025-04070 | 1627 JAYNES St | house + JADU | Issued
+B2025-05845 | 1745 CEDAR St | SFD | new
+B2025-05846 | 1745 CEDAR St | SFD | new
+B2025-05849 | 1745 CEDAR St | SFD | new
+B2025-05850 | 1745 CEDAR St | SFD | new
+B2025-05852 | 1745 CEDAR St | SFD | new
+B2025-02361 | 811 CEDAR St | 1 dwelling + office | new
+B2025-02283 | 0 VIRGINIA St | SFD + ADU | new
+B2025-00820 | 2217 PARKER St | SFD | new
+B2025-00743 | 1345 PARKER St | ADU rebuild | new
 
-The critical findings for the APR:
+# ADU/JADU PERMITS
+B2025-05891 | 34 ROCK Ln | ADU | new
+B2025-05682 | 1037 CEDAR St | ADU | new
+B2025-00145 | 1616 CEDAR St | ADU | new
+B2025-04535 | 1600 MILVIA St | ADU | new
+B2025-04071 | 1619 WALNUT St | ADU | new
+B2025-00165 | 1320 DERBY St | ADU | new
+B2025-03285 | 2740 PRINCE St | ADU | new
+B2025-03021 | 1626 PRINCE St | ADU | new
+B2025-04651 | 1314 PARKER St | ADU | new
+B2025-01504 | 1331 CARLETON St | ADU | new
+B2025-05502 | 2336 DWIGHT Way | ADU conversion | new
+B2025-04153 | 2338 DWIGHT Way | ADU conversion | new
+B2025-02280 | 1225 DWIGHT Way | ADU conversion | new
+B2025-05928 | 819 SHATTUCK Ave | JADU conversion | new
+B2025-05684 | 1809 MILVIA St | ADU conversion | new
+B2025-05109 | 1232 MILVIA St | ADU conversion | new
+B2025-04925 | 2033 HASTE St | ADU conversion | new
+B2025-05769 | 2435 SAN PABLO Ave | live/work conversion | new
+B2025-05647 | 2201 BLAKE St | ADU conversion | new
+B2025-05146 | 2336 BLAKE St | ADU conversion | new
+B2025-01031 | 1634 BLAKE St | ADU | new
+B2025-04024 | 1139 OXFORD St | ADU | new
+B2025-02740 | 1650 OXFORD St | ADU conversion | new
+B2025-01930 | 1110 OXFORD St | ADU | new
+B2025-05834 | 1117 CHANNING Way | ADU conversion | new
+B2025-01272 | 1609 DERBY St | ADU legalize | new
+B2025-00723 | 2673 DERBY St | ADU conversion | new
+B2025-04877 | 1291 ROSE St | JADU conversion | new
+B2025-02286 | 1913 ROSE St | ADU conversion | new
+B2025-04949 | 2309 PRINCE St | ADU conversion | new
+B2025-04992 | 1260 BANCROFT Way | ADU amnesty | new
+B2025-01253 | 1117 PARKER St | ADU conversion | new
+B2025-01432 | 1411 WARD St | JADU conversion | new
+B2025-00541 | 1225 WARD St | JADU conversion | new
+B2025-00880 | 1360 CALIFORNIA St | ADU conversion | new
+B2025-04746 | 928 CARLETON St | live/work conversion | new
+B2025-05689 | 1821 WARD St | ADU addition | new
+B2025-03595 | 2449 DWIGHT Way | rebuild 24 units fire damage | new
 
-**Multifamily BPs ISSUED in 2025 (RHNA credit):**
-- 2442 HASTE — 38 units — **Issued** ✅
-- 2138 KITTREDGE — 66 units — **Issued** ✅
-
-That's **104 units with BPs Issued in 2025** — not zero.
-
-**Multifamily BPs filed but not yet issued (in Corrections):**
-- 2712 TELEGRAPH — 56 units
-- 2800 TELEGRAPH — 18 units
-- 2128 OXFORD — 26-story
-- 2372 ELLSWORTH — 49 units
-- 1850 BERRYMAN — 6 units
-
-**ADUs:** At least 37 ADU/JADU permits from a partial scan. Extrapolating across all streets, likely 80-120 total — consistent with 2024's 102.
-
-Run in Claude Code:
-
-> Read data/raw/corridor_scans/2025_housing_building_permits.txt. Update the database:
-> 
-> 1. For projects with BP status "Issued" in 2025, set bp_issued_date to 2025:
->    - 2442 HASTE St: bp_issued_date = 2025 (B2025-03529, 38 units)
->    - 2138 KITTREDGE St: bp_issued_date = 2025 (B2025-02344, 66 units, Phase 2)
-> 
-> 2. Count total ADU/JADU permits: new construction ADUs + conversions. Apply ABAG 30/30/30/10 affordability split.
-> 
-> 3. Re-run generate_apr.py --year 2025. The "0 BPs issued in 2025" should now show at least 104 multifamily units + ~37 ADU units.
-> 
-> 4. Re-run export_explorer_data.py.
-> 
-> 5. Push.
+# DEMOLITIONS
+B2025-05906 | 3035 COLBY St | demo duplex
+B2025-05923 | 1311 DERBY St | demo SFR
+B2025-04241 | 1627 JAYNES St | demo SFR
+B2025-05900 | 1745 CEDAR St | demo structure
+B2025-04761 | 2442 HASTE St | demo apartment building
+B2025-05316 | 2298 DURANT Ave | demo commercial
+B2025-04856 | 2529 TELEGRAPH Ave | demo commercial
+B2025-00386 | 2310 ELLSWORTH St | demo apartment
+B2025-00387 | 2306 ELLSWORTH St | demo apartment
+B2025-00388 | 2300 ELLSWORTH St | demo apartment
+B2025-05621 | 1740 SAN PABLO Ave | demo structure
+B2025-05622 | 1740 SAN PABLO Ave | demo structure
+B2025-01388 | 1331 CARLETON St | demo garage
+B2025-00803 | 1345 PARKER St | demo structure

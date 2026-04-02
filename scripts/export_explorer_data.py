@@ -119,18 +119,63 @@ def get_events(conn):
     return events
 
 def get_fees(conn, projects):
-    """Get fee data (placeholder - no permit_fees table yet)"""
-    # No permit_fees table exists, return empty structure
+    """Get fee data from permit_fees table"""
+    cursor = conn.cursor()
+
+    # Get totals
+    cursor.execute('SELECT SUM(amount), COUNT(*), COUNT(DISTINCT permit_number) FROM permit_fees')
+    row = cursor.fetchone()
+    total = row[0] or 0
+    count = row[1] or 0
+    permit_count = row[2] or 0
+
+    # Get linked vs unlinked
+    cursor.execute('SELECT SUM(amount) FROM permit_fees WHERE project_id IS NOT NULL')
+    linked = cursor.fetchone()[0] or 0
+    unlinked = total - linked
+
+    # Get fees by year
+    cursor.execute('''
+        SELECT SUBSTR(date, 1, 4) as year, SUM(amount)
+        FROM permit_fees WHERE date IS NOT NULL
+        GROUP BY year ORDER BY year
+    ''')
+    by_year = {row[0]: row[1] for row in cursor.fetchall()}
+
+    # Get fees by project (top 20)
+    cursor.execute('''
+        SELECT address, SUM(amount) as total
+        FROM permit_fees
+        GROUP BY address
+        ORDER BY total DESC
+        LIMIT 20
+    ''')
+    by_project = {row[0]: row[1] for row in cursor.fetchall()}
+
+    # Get large individual fees (over $100k)
+    cursor.execute('''
+        SELECT address, fee_description, amount, date
+        FROM permit_fees
+        WHERE amount >= 100000
+        ORDER BY amount DESC
+    ''')
+    large_fees = [{"address": row[0], "description": row[1], "amount": row[2], "date": row[3]}
+                  for row in cursor.fetchall()]
+
+    # Calculate avg per unit
+    total_units = sum(p['units'] for p in projects)
+    avg_per_unit = total / total_units if total_units > 0 else 0
+
     return {
-        "total": 0,
-        "linked": 0,
-        "unlinked": 0,
-        "count": 0,
-        "permit_count": 0,
-        "by_year": {},
-        "by_project": {},
-        "large_fees": [],
-        "avg_per_unit": 0
+        "total": total,
+        "linked": linked,
+        "unlinked": unlinked,
+        "count": count,
+        "permit_count": permit_count,
+        "by_year": by_year,
+        "by_project": by_project,
+        "large_fees": large_fees,
+        "avg_per_unit": avg_per_unit
     }
 
 def get_staff(conn):

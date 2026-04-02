@@ -616,28 +616,20 @@
             expandRow.className = 'expandable-row bg-gray-50';
             expandRow.id = 'expand-' + i;
 
-            // Look up fees from DATA.fees.by_project using address or permit
+            // Look up fees from DATA.fees.by_project using address
+            // Note: by_project values are plain numbers (total fee amount), not objects
             let projectFees = 0;
-            let feeCount = 0;
             if (DATA.fees && DATA.fees.by_project) {
-                // Try to find fees by permit number
-                const permits = (p.permits || '').split(',').map(s => s.trim());
-                for (const permit of permits) {
-                    const feeEntry = DATA.fees.by_project[permit];
-                    if (feeEntry) {
-                        projectFees += feeEntry.total_fees || 0;
-                        feeCount += feeEntry.fee_count || 0;
-                    }
-                }
-                // If no permit match, try address match (by_project uses address as KEY)
-                if (projectFees === 0) {
-                    const addrNorm = (p.address || '').toUpperCase().replace(/[,\s]+/g, ' ').trim();
-                    for (const [feeAddress, feeEntry] of Object.entries(DATA.fees.by_project)) {
-                        const feeAddr = feeAddress.toUpperCase().replace(/[,\s]+/g, ' ').trim();
-                        if (feeAddr.includes(addrNorm.split(' ').slice(0, 2).join(' '))) {
-                            projectFees += feeEntry.total_fees || 0;
-                            feeCount += feeEntry.fee_count || 0;
-                        }
+                // Try address match (by_project uses address as KEY, value is total fee amount)
+                const addrNorm = (p.address || '').toUpperCase().replace(/[,\s]+/g, ' ').trim();
+                for (const [feeAddress, feeAmount] of Object.entries(DATA.fees.by_project)) {
+                    const feeAddr = feeAddress.toUpperCase().replace(/[,\s]+/g, ' ').trim();
+                    // Match first two words of address (e.g., "2300 ELLSWORTH")
+                    const addrPrefix = addrNorm.split(' ').slice(0, 2).join(' ');
+                    if (addrPrefix && feeAddr.includes(addrPrefix)) {
+                        // feeAmount is a plain number, not an object
+                        projectFees += (typeof feeAmount === 'number') ? feeAmount : (feeAmount.total_fees || 0);
+                        break; // Only match one address to avoid duplicates
                     }
                 }
             }
@@ -2201,13 +2193,13 @@
             console.log('💰 DATA.fees.by_project entries:', DATA.fees.by_project ? Object.keys(DATA.fees.by_project).length : 0);
 
             // Top 15 projects by fees - use DATA.fees.by_project or large_fees
-            // Note: by_project uses address as KEY, value has {total_fees, fee_count, units}
+            // Note: by_project uses address as KEY, value is total fee amount (number)
             let topFeeData = [];
             if (DATA.fees.by_project) {
                 topFeeData = Object.entries(DATA.fees.by_project)
-                    .map(([address, f]) => ({
+                    .map(([address, feeAmount]) => ({
                         address: address,
-                        total_fees: f.total_fees || 0
+                        total_fees: (typeof feeAmount === 'number') ? feeAmount : (feeAmount.total_fees || 0)
                     }))
                     .sort((a, b) => b.total_fees - a.total_fees)
                     .slice(0, 15);
@@ -2263,20 +2255,21 @@
             }
 
             // Units vs Fees scatter - match fee data with project units
-            // Note: by_project uses address as KEY
+            // Note: by_project uses address as KEY, value is total fee amount (number)
             const scatterData = [];
             if (DATA.fees.by_project) {
-                for (const [address, feeEntry] of Object.entries(DATA.fees.by_project)) {
+                for (const [address, feeAmount] of Object.entries(DATA.fees.by_project)) {
+                    const totalFees = (typeof feeAmount === 'number') ? feeAmount : (feeAmount.total_fees || 0);
                     const feeAddr = address.toUpperCase().replace(/[,\s]+/g, ' ').trim();
                     const matchedProject = DATA.projects.find(p => {
                         const projAddr = (p.address || '').toUpperCase().replace(/[,\s]+/g, ' ').trim();
                         return feeAddr.includes(projAddr.split(' ').slice(0, 2).join(' ')) ||
                                projAddr.includes(feeAddr.split(' ').slice(0, 2).join(' '));
                     });
-                    if (matchedProject && feeEntry.total_fees > 0) {
+                    if (matchedProject && totalFees > 0) {
                         scatterData.push({
                             x: matchedProject.units || 0,
-                            y: feeEntry.total_fees,
+                            y: totalFees,
                             label: address
                         });
                     }
@@ -2322,21 +2315,22 @@
             }
 
             // Fee per unit chart - calculate from fee data matched to projects
-            // Note: by_project uses address as KEY
+            // Note: by_project uses address as KEY, value is total fee amount (number)
             const feePerUnitData = [];
             if (DATA.fees.by_project) {
-                for (const [address, feeEntry] of Object.entries(DATA.fees.by_project)) {
+                for (const [address, feeAmount] of Object.entries(DATA.fees.by_project)) {
+                    const totalFees = (typeof feeAmount === 'number') ? feeAmount : (feeAmount.total_fees || 0);
                     const feeAddr = address.toUpperCase().replace(/[,\s]+/g, ' ').trim();
                     const matchedProject = DATA.projects.find(p => {
                         const projAddr = (p.address || '').toUpperCase().replace(/[,\s]+/g, ' ').trim();
                         return feeAddr.includes(projAddr.split(' ').slice(0, 2).join(' ')) ||
                                projAddr.includes(feeAddr.split(' ').slice(0, 2).join(' '));
                     });
-                    if (matchedProject && matchedProject.units > 0 && feeEntry.total_fees > 0) {
+                    if (matchedProject && matchedProject.units > 0 && totalFees > 0) {
                         feePerUnitData.push({
                             address: address,
-                            fee_per_unit: Math.round(feeEntry.total_fees / matchedProject.units),
-                            total_fees: feeEntry.total_fees,
+                            fee_per_unit: Math.round(totalFees / matchedProject.units),
+                            total_fees: totalFees,
                             units: matchedProject.units
                         });
                     }
@@ -2405,9 +2399,9 @@
                 const projectsWithFees = DATA.projects.filter(p => p.total_fees > 0);
                 const totalUnits = projectsWithFees.reduce((sum, p) => sum + (p.units || 0), 0);
                 const avgPerUnit = totalUnits > 0 ? totalFees / totalUnits : 0;
-                // Find highest single fee
+                // Find highest single fee (by_project values are plain numbers)
                 const highestFee = DATA.fees.by_project ?
-                    Math.max(...Object.values(DATA.fees.by_project).map(f => f.total_fees || 0)) : 0;
+                    Math.max(...Object.values(DATA.fees.by_project).map(f => (typeof f === 'number') ? f : (f.total_fees || 0))) : 0;
 
                 summaryDiv.innerHTML = `
                     <div class="bg-green-50 rounded-lg p-4 text-center">

@@ -1,0 +1,38 @@
+This is gold. 73 housing permits found and only 31 streets scanned — extrapolating, there could be 150+ total. Save it:
+
+```bash
+pbpaste > /Users/johngage/berkeley-data/data/raw/corridor_scans/2025_housing_building_permits.txt
+```
+
+The critical findings for the APR:
+
+**Multifamily BPs ISSUED in 2025 (RHNA credit):**
+- 2442 HASTE — 38 units — **Issued** ✅
+- 2138 KITTREDGE — 66 units — **Issued** ✅
+
+That's **104 units with BPs Issued in 2025** — not zero.
+
+**Multifamily BPs filed but not yet issued (in Corrections):**
+- 2712 TELEGRAPH — 56 units
+- 2800 TELEGRAPH — 18 units
+- 2128 OXFORD — 26-story
+- 2372 ELLSWORTH — 49 units
+- 1850 BERRYMAN — 6 units
+
+**ADUs:** At least 37 ADU/JADU permits from a partial scan. Extrapolating across all streets, likely 80-120 total — consistent with 2024's 102.
+
+Run in Claude Code:
+
+> Read data/raw/corridor_scans/2025_housing_building_permits.txt. Update the database:
+> 
+> 1. For projects with BP status "Issued" in 2025, set bp_issued_date to 2025:
+>    - 2442 HASTE St: bp_issued_date = 2025 (B2025-03529, 38 units)
+>    - 2138 KITTREDGE St: bp_issued_date = 2025 (B2025-02344, 66 units, Phase 2)
+> 
+> 2. Count total ADU/JADU permits: new construction ADUs + conversions. Apply ABAG 30/30/30/10 affordability split.
+> 
+> 3. Re-run generate_apr.py --year 2025. The "0 BPs issued in 2025" should now show at least 104 multifamily units + ~37 ADU units.
+> 
+> 4. Re-run export_explorer_data.py.
+> 
+> 5. Push.

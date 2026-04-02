@@ -1,6 +1,6 @@
 {
   "year": 2025,
-  "generated": "2026-04-01T14:04:49.129468",
+  "generated": "2026-04-01T17:50:04.607349",
   "table_a": {
     "title": "Table A: Applications Deemed Complete in 2025",
     "description": "Projects with completeness review finished between 2025-01-01 and 2025-12-31",
@@ -239,6 +239,50 @@
         "milestone_achieved": "CO Issued"
       },
       {
+        "id": 118,
+        "address": "2138 KITTREDGE St",
+        "apn": "057 202901500",
+        "permits": "ZP2024-0114,B2025-02344",
+        "net_units": 66.0,
+        "vli_units": 5.0,
+        "status": "Entitled",
+        "app_filed_date": "2024-09-05",
+        "app_complete_date": "2024-09-05",
+        "entitled_date": "2025-10-20",
+        "bp_issued_date": "2025-01-01",
+        "co_date": null,
+        "density_bonus": 1,
+        "sb35_flag": 1,
+        "sb330_flag": 1,
+        "ab2011_flag": 1,
+        "developer": null,
+        "architect": null,
+        "construction_status": null,
+        "milestone_achieved": "BP Issued"
+      },
+      {
+        "id": 124,
+        "address": "2442 HASTE St",
+        "apn": "055 188101800",
+        "permits": "ZP2024-0070,B2025-03529",
+        "net_units": 34.0,
+        "vli_units": 2.0,
+        "status": "Entitled",
+        "app_filed_date": "2024-07-03",
+        "app_complete_date": "2024-10-08",
+        "entitled_date": "2025-09-08",
+        "bp_issued_date": "2025-01-01",
+        "co_date": null,
+        "density_bonus": 1,
+        "sb35_flag": 1,
+        "sb330_flag": 1,
+        "ab2011_flag": 1,
+        "developer": null,
+        "architect": "SDT Architects",
+        "construction_status": null,
+        "milestone_achieved": "BP Issued"
+      },
+      {
         "id": 119,
         "address": "1974 SHATTUCK Ave",
         "apn": "057 205300200",
@@ -437,28 +481,6 @@
         "milestone_achieved": "Entitled"
       },
       {
-        "id": 118,
-        "address": "2138 KITTREDGE St",
-        "apn": "057 202901500",
-        "permits": "ZP2024-0114",
-        "net_units": 66.0,
-        "vli_units": 5.0,
-        "status": "Entitled",
-        "app_filed_date": "2024-09-05",
-        "app_complete_date": "2024-09-05",
-        "entitled_date": "2025-10-20",
-        "bp_issued_date": null,
-        "co_date": null,
-        "density_bonus": 1,
-        "sb35_flag": 1,
-        "sb330_flag": 1,
-        "ab2011_flag": 1,
-        "developer": null,
-        "architect": null,
-        "construction_status": null,
-        "milestone_achieved": "Entitled"
-      },
-      {
         "id": 29,
         "address": "2138 KITTREDGE St",
         "apn": "057 202901500",
@@ -499,28 +521,6 @@
         "ab2011_flag": 1,
         "developer": null,
         "architect": null,
-        "construction_status": null,
-        "milestone_achieved": "Entitled"
-      },
-      {
-        "id": 124,
-        "address": "2442 HASTE St",
-        "apn": "055 188101800",
-        "permits": "ZP2024-0070",
-        "net_units": 34.0,
-        "vli_units": 2.0,
-        "status": "Entitled",
-        "app_filed_date": "2024-07-03",
-        "app_complete_date": "2024-10-08",
-        "entitled_date": "2025-09-08",
-        "bp_issued_date": null,
-        "co_date": null,
-        "density_bonus": 1,
-        "sb35_flag": 1,
-        "sb330_flag": 1,
-        "ab2011_flag": 1,
-        "developer": null,
-        "architect": "SDT Architects",
         "construction_status": null,
         "milestone_achieved": "Entitled"
       },
@@ -617,8 +617,8 @@
       "total_projects": 22,
       "total_units": 2667.0,
       "vli_units": 163.0,
-      "entitled_in_year": 17,
-      "bp_issued_in_year": 0,
+      "entitled_in_year": 15,
+      "bp_issued_in_year": 2,
       "co_issued_in_year": 5
     }
   },
@@ -626,6 +626,14 @@
     "title": "Table B: Developer Summary for 2025",
     "description": "Units permitted by developer for projects with BP issued or CO in 2025",
     "developers": [
+      {
+        "developer": "Unknown/Individual",
+        "project_count": 3,
+        "total_units": 111.0,
+        "vli_units": 8.0,
+        "market_rate_units": 103.0,
+        "density_bonus_projects": 3
+      },
       {
         "developer": "Panoramic Interests",
         "project_count": 2,
@@ -649,22 +657,26 @@
         "vli_units": 8.0,
         "market_rate_units": 50.0,
         "density_bonus_projects": 1
-      },
-      {
-        "developer": "Unknown/Individual",
-        "project_count": 1,
-        "total_units": 11.0,
-        "vli_units": 1.0,
-        "market_rate_units": 10.0,
-        "density_bonus_projects": 1
       }
     ],
     "summary": {
       "total_developers": 3,
-      "total_projects": 5,
-      "total_units": 263.0,
-      "total_vli": 134.0
+      "total_projects": 7,
+      "total_units": 363.0,
+      "total_vli": 141.0
     }
+  },
+  "adu_summary": {
+    "title": "ADU/JADU Summary for 2025",
+    "description": "ADU permits issued with ABAG 30/30/30/10 affordability split",
+    "total_adus": 37,
+    "affordability_split": {
+      "very_low_income": 11,
+      "low_income": 11,
+      "moderate_income": 11,
+      "above_moderate_income": 4
+    },
+    "methodology": "ABAG 30/30/30/10 affordability assumption for unpermitted ADUs"
   },
   "rhna_progress": {
     "title": "RHNA Progress Through 2025",
@@ -676,11 +688,11 @@
       "total": 8934
     },
     "progress": {
-      "total_permitted": 1016.0,
-      "vli_permitted": 326.0,
+      "total_permitted": 1116.0,
+      "vli_permitted": 333.0,
       "total_completed": 407.0,
       "vli_completed": 134.0,
-      "percent_of_goal": 11.372285650324603
+      "percent_of_goal": 12.49160510409671
     }
   },
   "stalled_projects": {
@@ -816,7 +828,7 @@
         "developer": null,
         "app_complete_date": "2024-09-05",
         "entitled_date": "2025-10-20",
-        "bp_issued_date": null,
+        "bp_issued_date": "2025-01-01",
         "accela_status_date": "2025-10-20"
       },
       {
@@ -849,7 +861,7 @@
         "developer": null,
         "app_complete_date": "2024-10-08",
         "entitled_date": "2025-09-08",
-        "bp_issued_date": null,
+        "bp_issued_date": "2025-01-01",
         "accela_status_date": "2025-09-08"
       },
       {

@@ -211,6 +211,34 @@ def generate_rhna_progress(conn, year):
         }
     }
 
+def generate_adu_summary(year, adu_count=0):
+    """
+    ADU/JADU Summary with ABAG 30/30/30/10 affordability split
+    ABAG methodology assumes:
+    - 30% Very Low Income
+    - 30% Low Income
+    - 30% Moderate Income
+    - 10% Above Moderate Income
+    """
+    # Apply ABAG 30/30/30/10 split
+    vli = round(adu_count * 0.30)
+    low = round(adu_count * 0.30)
+    mod = round(adu_count * 0.30)
+    above_mod = adu_count - vli - low - mod  # Remainder
+
+    return {
+        "title": f"ADU/JADU Summary for {year}",
+        "description": "ADU permits issued with ABAG 30/30/30/10 affordability split",
+        "total_adus": adu_count,
+        "affordability_split": {
+            "very_low_income": vli,
+            "low_income": low,
+            "moderate_income": mod,
+            "above_moderate_income": above_mod
+        },
+        "methodology": "ABAG 30/30/30/10 affordability assumption for unpermitted ADUs"
+    }
+
 def generate_stalled_projects(conn):
     """
     Stalled Projects Analysis
@@ -266,6 +294,7 @@ def main():
     parser.add_argument('--year', type=int, required=True, help='Reporting year (e.g., 2025)')
     parser.add_argument('--output', type=str, default='data/apr/', help='Output directory')
     parser.add_argument('--format', choices=['json', 'csv', 'both'], default='both', help='Output format')
+    parser.add_argument('--adus', type=int, default=0, help='Number of ADU/JADU permits issued in year')
     args = parser.parse_args()
 
     year = args.year
@@ -301,6 +330,13 @@ def main():
         stalled = generate_stalled_projects(conn)
         print(f"  {stalled['summary']['total_stalled']} stalled, {stalled['summary']['total_units_at_risk']} units at risk")
 
+        print(f"\nGenerating ADU Summary (ABAG 30/30/30/10 split)...")
+        adu_summary = generate_adu_summary(year, args.adus)
+        if args.adus > 0:
+            print(f"  {adu_summary['total_adus']} ADUs: VLI={adu_summary['affordability_split']['very_low_income']}, Low={adu_summary['affordability_split']['low_income']}, Mod={adu_summary['affordability_split']['moderate_income']}, Above={adu_summary['affordability_split']['above_moderate_income']}")
+        else:
+            print("  No ADU count provided (use --adus N to specify)")
+
         # Combine all data
         apr_data = {
             "year": year,
@@ -308,6 +344,7 @@ def main():
             "table_a": table_a,
             "table_a2": table_a2,
             "table_b": table_b,
+            "adu_summary": adu_summary,
             "rhna_progress": rhna,
             "stalled_projects": stalled
         }
@@ -336,6 +373,10 @@ def main():
         print(f"  - Entitled in {year}: {table_a2['summary']['entitled_in_year']}")
         print(f"  - BP Issued in {year}: {table_a2['summary']['bp_issued_in_year']}")
         print(f"  - CO Issued in {year}: {table_a2['summary']['co_issued_in_year']}")
+        if adu_summary['total_adus'] > 0:
+            print(f"\nADU/JADU Permits: {adu_summary['total_adus']} units (ABAG 30/30/30/10 split)")
+            split = adu_summary['affordability_split']
+            print(f"  - Very Low: {split['very_low_income']}, Low: {split['low_income']}, Mod: {split['moderate_income']}, Above Mod: {split['above_moderate_income']}")
         print(f"\nTable B (By Developer): {table_b['summary']['total_developers']} known developers")
         print(f"RHNA Progress: {rhna['progress']['percent_of_goal']:.1f}% of 8,934 unit goal")
         print(f"Stalled: {stalled['summary']['total_stalled']} projects ({stalled['summary']['total_units_at_risk']} units)")

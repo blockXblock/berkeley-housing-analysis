@@ -520,7 +520,15 @@
 
         // Skyline Chart - highlight UC projects in gold
         const topByHeight = [...DATA.projects].filter(p => p.height_stories > 0).sort((a, b) => b.height_stories - a.height_stories).slice(0, 20);
-        new Chart(document.getElementById('skylineChart'), {
+        console.log('🏗️ Skyline chart init - projects with height_stories > 0:', topByHeight.length);
+        if (topByHeight.length === 0) {
+            console.warn('⚠️ No height data for Skyline chart. All height_stories values are null/0.');
+            const skylineCanvas = document.getElementById('skylineChart');
+            if (skylineCanvas && skylineCanvas.parentElement) {
+                skylineCanvas.parentElement.innerHTML = '<div class="text-center text-gray-500 py-8">No building height data available yet.<br><small>Height data needs to be added to the database.</small></div>';
+            }
+        } else {
+            new Chart(document.getElementById('skylineChart'), {
             type: 'bar',
             data: {
                 labels: topByHeight.map(p => {
@@ -550,7 +558,8 @@
                     }
                 }
             }
-        });
+            });
+        }
 
         // APR Comparison - city_apr may not exist in export
         const cityApr = DATA.city_apr || [];
@@ -3415,10 +3424,12 @@
             }
         }
         
-        // Initialize Players tab when shown
+        // Initialize tabs when shown
         const originalShowTab = showTab;
         showTab = function(tabId) {
             originalShowTab(tabId);
+            console.log('🔄 Tab switched to:', tabId);
+
             if (tabId === 'players' && !window.playersInitialized) {
                 initPlayersTab();
                 window.playersInitialized = true;
@@ -3426,6 +3437,22 @@
             if (tabId === 'timeline' && !window.timelineSankeyInitialized) {
                 try { renderTimelineLifecycleSankey(); } catch(e) { console.error('❌ Timeline Sankey init failed:', e); }
                 window.timelineSankeyInitialized = true;
+            }
+            // Spatial: Force Leaflet to recalculate container size after tab is visible
+            if (tabId === 'spatial' && spatialMap) {
+                console.log('🗺️ Spatial tab shown, calling invalidateSize()');
+                setTimeout(() => {
+                    spatialMap.invalidateSize();
+                    console.log('🗺️ invalidateSize() called');
+                }, 200);
+            }
+            // Skyline: Debug logging
+            if (tabId === 'skyline') {
+                const projectsWithHeight = DATA.projects.filter(p => p.height_stories && p.height_stories > 0);
+                console.log('🏗️ Skyline tab - projects with height_stories > 0:', projectsWithHeight.length);
+                if (projectsWithHeight.length === 0) {
+                    console.warn('⚠️ No height data available. height_stories is null for all projects.');
+                }
             }
         };
 

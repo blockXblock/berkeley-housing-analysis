@@ -2514,7 +2514,7 @@
     let spatialMap = null;
     let spatialMarkers = [];
     let currentFilter = 'all';
-    let currentColorMetric = 'processing_days';
+    let currentColorMetric = 'units';
 
     function renderSpatialMap() {
         console.log('🗺️ renderSpatialMap() called');
@@ -2540,8 +2540,8 @@
                 }
             }, 150);
 
-            // Color by processing days by default
-            colorMapBy('processing_days');
+            // Color by units by default (processing_days data not populated)
+            colorMapBy('units');
             console.log('✅ renderSpatialMap() complete');
         } catch (err) {
             console.error('❌ renderSpatialMap error:', err);
@@ -2566,20 +2566,21 @@
     }
 
     function getFilteredProjects() {
-        let filtered = DATA.projects.filter(p => p.latitude && p.longitude);
+        let filtered = DATA.projects.filter(p => getField(p, 'latitude') && getField(p, 'longitude'));
 
         switch (currentFilter) {
             case 'vli':
-                filtered = filtered.filter(p => (p.vli_units || 0) > 0);
+                filtered = filtered.filter(p => (getField(p, 'vli_units') || 0) > 0);
                 break;
             case 'density_bonus':
-                filtered = filtered.filter(p => p.density_bonus === true || p.density_bonus === 'True');
+                const db = p => getField(p, 'density_bonus');
+                filtered = filtered.filter(p => db(p) === true || db(p) === 'True');
                 break;
             case 'approved':
-                filtered = filtered.filter(p => p.status === 'Approved');
+                filtered = filtered.filter(p => getField(p, 'status') === 'Approved' || getField(p, 'status') === 'Entitled');
                 break;
             case 'completed':
-                filtered = filtered.filter(p => p.status === 'Completed' || p.co_date);
+                filtered = filtered.filter(p => getField(p, 'status') === 'Completed' || getField(p, 'co_date'));
                 break;
             default: // 'all'
                 break;
@@ -2595,103 +2596,107 @@
 
             currentColorMetric = metric;
 
-        // Clear existing markers
-        spatialMarkers.forEach(m => spatialMap.removeLayer(m));
-        spatialMarkers = [];
+            // Clear existing markers
+            spatialMarkers.forEach(m => spatialMap.removeLayer(m));
+            spatialMarkers = [];
 
-        // Get filtered projects
-        const projects = getFilteredProjects();
+            // Get filtered projects
+            const projects = getFilteredProjects();
 
-        // Get value range for coloring
-        let values = projects.map(p => p[metric] || 0).filter(v => v > 0);
-        const minVal = values.length ? Math.min(...values) : 0;
-        const maxVal = values.length ? Math.max(...values) : 1;
+            // Get value range for coloring using getField for field name normalization
+            let values = projects.map(p => getField(p, metric) || 0).filter(v => v > 0);
+            const minVal = values.length ? Math.min(...values) : 0;
+            const maxVal = values.length ? Math.max(...values) : 1;
 
-        // Update color button styles
-        document.querySelectorAll('.color-btn').forEach(btn => {
-            btn.classList.remove('bg-blue-100', 'text-blue-700');
-            btn.classList.add('bg-gray-100');
-        });
-        if (event && event.target) {
-            event.target.classList.add('bg-blue-100', 'text-blue-700');
-            event.target.classList.remove('bg-gray-100');
-        }
-
-        // Show/hide affordability legend
-        const legend = document.getElementById('affordabilityLegend');
-        if (legend) {
-            legend.classList.toggle('hidden', metric !== 'affordability');
-        }
-
-        projects.forEach(p => {
-            let color, value;
-            if (metric === 'processing_days') {
-                value = p.processing_days || 0;
-                // Red for long processing, green for fast
-                const ratio = maxVal > minVal ? (value - minVal) / (maxVal - minVal) : 0;
-                const r = Math.round(255 * ratio);
-                const g = Math.round(255 * (1 - ratio));
-                color = `rgb(${r}, ${g}, 50)`;
-            } else if (metric === 'units') {
-                value = p.units || 0;
-                const ratio = maxVal > minVal ? (value - minVal) / (maxVal - minVal) : 0;
-                const intensity = Math.round(100 + 155 * ratio);
-                color = `rgb(59, ${intensity}, 246)`;
-            } else if (metric === 'status') {
-                const statusColors = {
-                    'Approved': '#22c55e',
-                    'Completed': '#10b981',
-                    'In Review': '#f59e0b',
-                    'Under Review': '#f59e0b',
-                    'Corrections Pending': '#ef4444',
-                    'Corrections Pending Applicant': '#ef4444',
-                    'Incomplete Pending Applicant': '#dc2626',
-                    'Pending Final Action': '#8b5cf6',
-                    'Pending': '#6b7280'
-                };
-                color = statusColors[p.status] || '#6b7280';
-                value = p.status;
-            } else if (metric === 'affordability') {
-                // Red = no affordable, Blue = has VLI, Green = has LI/MOD (density bonus without VLI)
-                const hasVLI = (p.vli_units || 0) > 0;
-                const hasDensityBonus = p.density_bonus === true || p.density_bonus === 'True';
-
-                if (hasVLI) {
-                    color = '#3b82f6'; // Blue - has VLI units
-                } else if (hasDensityBonus) {
-                    color = '#22c55e'; // Green - has LI/MOD via density bonus
-                } else {
-                    color = '#ef4444'; // Red - no affordable units
-                }
-                value = hasVLI ? 'VLI' : hasDensityBonus ? 'Density Bonus' : 'Market Rate';
+            // Update color button styles
+            document.querySelectorAll('.color-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-100', 'text-blue-700');
+                btn.classList.add('bg-gray-100');
+            });
+            if (event && event.target) {
+                event.target.classList.add('bg-blue-100', 'text-blue-700');
+                event.target.classList.remove('bg-gray-100');
             }
 
-            const radius = Math.max(6, Math.min(20, Math.sqrt(p.units || 1) * 2));
+            // Show/hide affordability legend
+            const legend = document.getElementById('affordabilityLegend');
+            if (legend) {
+                legend.classList.toggle('hidden', metric !== 'affordability');
+            }
 
-            const vliInfo = (p.vli_units || 0) > 0 ? `<br>VLI Units: ${p.vli_units}` : '';
-            const dbInfo = (p.density_bonus === true || p.density_bonus === 'True') ? '<br>Density Bonus: Yes' : '';
+            projects.forEach(p => {
+                let color, value;
+                if (metric === 'processing_days') {
+                    value = getField(p, 'processing_days') || 0;
+                    // Red for long processing, green for fast
+                    const ratio = maxVal > minVal ? (value - minVal) / (maxVal - minVal) : 0;
+                    const r = Math.round(255 * ratio);
+                    const g = Math.round(255 * (1 - ratio));
+                    color = `rgb(${r}, ${g}, 50)`;
+                } else if (metric === 'units') {
+                    value = getField(p, 'units') || 0;
+                    const ratio = maxVal > minVal ? (value - minVal) / (maxVal - minVal) : 0;
+                    const intensity = Math.round(100 + 155 * ratio);
+                    color = `rgb(59, ${intensity}, 246)`;
+                } else if (metric === 'status') {
+                    const statusColors = {
+                        'Approved': '#22c55e',
+                        'Completed': '#10b981',
+                        'In Review': '#f59e0b',
+                        'Under Review': '#f59e0b',
+                        'Entitled': '#22c55e',
+                        'Corrections Pending': '#ef4444',
+                        'Corrections Pending Applicant': '#ef4444',
+                        'Incomplete Pending Applicant': '#dc2626',
+                        'Pending Final Action': '#8b5cf6',
+                        'Pending': '#6b7280'
+                    };
+                    color = statusColors[getField(p, 'status')] || '#6b7280';
+                    value = getField(p, 'status');
+                } else if (metric === 'affordability') {
+                    // Red = no affordable, Blue = has VLI, Green = has LI/MOD (density bonus without VLI)
+                    const hasVLI = (getField(p, 'vli_units') || 0) > 0;
+                    const hasDensityBonus = getField(p, 'density_bonus') === true || getField(p, 'density_bonus') === 'True';
 
-            const marker = L.circleMarker([parseFloat(p.latitude), parseFloat(p.longitude)], {
-                radius: radius,
-                fillColor: color,
-                color: '#333',
-                weight: 1,
-                opacity: 0.8,
-                fillOpacity: 0.7
-            }).bindPopup(`
-                <strong>${p.address}</strong><br>
-                Units: ${p.units}<br>
-                Status: ${p.status}<br>
-                Processing Days: ${p.processing_days || 'N/A'}${vliInfo}${dbInfo}
-            `);
+                    if (hasVLI) {
+                        color = '#3b82f6'; // Blue - has VLI units
+                    } else if (hasDensityBonus) {
+                        color = '#22c55e'; // Green - has LI/MOD via density bonus
+                    } else {
+                        color = '#ef4444'; // Red - no affordable units
+                    }
+                    value = hasVLI ? 'VLI' : hasDensityBonus ? 'Density Bonus' : 'Market Rate';
+                }
 
-            marker.addTo(spatialMap);
-            spatialMarkers.push(marker);
-        });
+                const radius = Math.max(6, Math.min(20, Math.sqrt(getField(p, 'units') || 1) * 2));
 
-        // Update stats
-        updateSpatialStats(metric, projects);
-        console.log('✅ colorMapBy() complete');
+                const vliUnits = getField(p, 'vli_units') || 0;
+                const vliInfo = vliUnits > 0 ? `<br>VLI Units: ${vliUnits}` : '';
+                const dbVal = getField(p, 'density_bonus');
+                const dbInfo = (dbVal === true || dbVal === 'True') ? '<br>Density Bonus: Yes' : '';
+                const procDays = getField(p, 'processing_days');
+
+                const marker = L.circleMarker([parseFloat(getField(p, 'latitude')), parseFloat(getField(p, 'longitude'))], {
+                    radius: radius,
+                    fillColor: color,
+                    color: '#333',
+                    weight: 1,
+                    opacity: 0.8,
+                    fillOpacity: 0.7
+                }).bindPopup(`
+                    <strong>${getField(p, 'address')}</strong><br>
+                    Units: ${getField(p, 'units')}<br>
+                    Status: ${getField(p, 'status')}<br>
+                    Processing Days: ${procDays || 'N/A'}${vliInfo}${dbInfo}
+                `);
+
+                marker.addTo(spatialMap);
+                spatialMarkers.push(marker);
+            });
+
+            // Update stats
+            updateSpatialStats(metric, projects);
+            console.log('✅ colorMapBy() complete');
         } catch (err) {
             console.error('❌ colorMapBy error:', err);
         }
@@ -2702,12 +2707,14 @@
         if (!container) return;
 
         // Use provided projects or fall back to all projects with coords
-        const allProjects = projects || DATA.projects.filter(p => p.latitude && p.longitude);
+        const allProjects = projects || DATA.projects.filter(p => getField(p, 'latitude') && getField(p, 'longitude'));
 
         // Calculate geographic clusters/stats
-        const downtown = allProjects.filter(p => parseFloat(p.latitude) > 37.865 && parseFloat(p.latitude) < 37.875 && parseFloat(p.longitude) > -122.275 && parseFloat(p.longitude) < -122.260);
-        const southside = allProjects.filter(p => parseFloat(p.latitude) < 37.865);
-        const westBerkeley = allProjects.filter(p => parseFloat(p.longitude) < -122.280);
+        const getLat = p => parseFloat(getField(p, 'latitude'));
+        const getLng = p => parseFloat(getField(p, 'longitude'));
+        const downtown = allProjects.filter(p => getLat(p) > 37.865 && getLat(p) < 37.875 && getLng(p) > -122.275 && getLng(p) < -122.260);
+        const southside = allProjects.filter(p => getLat(p) < 37.865);
+        const westBerkeley = allProjects.filter(p => getLng(p) < -122.280);
         const other = allProjects.filter(p => !downtown.includes(p) && !southside.includes(p) && !westBerkeley.includes(p));
 
         const clusters = [
@@ -2722,7 +2729,7 @@
             'all': 'All Projects',
             'vli': 'VLI Projects',
             'density_bonus': 'Density Bonus',
-            'approved': 'Approved Only',
+            'approved': 'Approved/Entitled',
             'completed': 'Completed Only'
         }[currentFilter] || 'All Projects';
 
@@ -2732,7 +2739,7 @@
             <div class="text-center p-3 bg-gray-50 rounded-lg">
                 <div class="text-xl font-bold text-blue-600">${c.projects.length}</div>
                 <div class="text-xs text-gray-600">${c.name}</div>
-                <div class="text-xs text-gray-400">${c.projects.reduce((s, p) => s + (p.units || 0), 0).toLocaleString()} units</div>
+                <div class="text-xs text-gray-400">${c.projects.reduce((s, p) => s + (getField(p, 'units') || 0), 0).toLocaleString()} units</div>
             </div>
         `).join('');
     }

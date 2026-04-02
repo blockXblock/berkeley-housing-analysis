@@ -1,6 +1,6 @@
 {
   "year": 2025,
-  "generated": "2026-04-01T19:40:41.061130",
+  "generated": "2026-04-01T20:03:32.261862",
   "table_a": {
     "title": "Table A: Applications Deemed Complete in 2025",
     "description": "Projects with completeness review finished between 2025-01-01 and 2025-12-31",
@@ -213,28 +213,6 @@
         "ab2011_flag": 1,
         "developer": "Panoramic Interests",
         "architect": null,
-        "construction_status": "Completed",
-        "milestone_achieved": "CO Issued"
-      },
-      {
-        "id": 161,
-        "address": "2555 COLLEGE Ave",
-        "apn": "055 184702000",
-        "permits": "ZP2022-0019,B2024-02613",
-        "net_units": 11.0,
-        "vli_units": 1.0,
-        "status": "Completed",
-        "app_filed_date": "2022-02-04",
-        "app_complete_date": "2022-07-21",
-        "entitled_date": "2023-05-31",
-        "bp_issued_date": null,
-        "co_date": "2025-07-25",
-        "density_bonus": 1,
-        "sb35_flag": 1,
-        "sb330_flag": 1,
-        "ab2011_flag": 1,
-        "developer": null,
-        "architect": "Trachtenberg Architects",
         "construction_status": "Completed",
         "milestone_achieved": "CO Issued"
       },
@@ -636,12 +614,12 @@
       }
     ],
     "summary": {
-      "total_projects": 23,
-      "total_units": 2740.0,
-      "vli_units": 163.0,
+      "total_projects": 22,
+      "total_units": 2729.0,
+      "vli_units": 162.0,
       "entitled_in_year": 13,
       "bp_issued_in_year": 5,
-      "co_issued_in_year": 5
+      "co_issued_in_year": 4
     }
   },
   "table_b": {
@@ -657,20 +635,20 @@
         "density_bonus_projects": 2
       },
       {
-        "developer": "Unknown/Individual",
-        "project_count": 5,
-        "total_units": 115.0,
-        "vli_units": 8.0,
-        "market_rate_units": 107.0,
-        "density_bonus_projects": 5
-      },
-      {
         "developer": "Panoramic Interests",
         "project_count": 2,
         "total_units": 107.0,
         "vli_units": 39.0,
         "market_rate_units": 68.0,
         "density_bonus_projects": 2
+      },
+      {
+        "developer": "Unknown/Individual",
+        "project_count": 4,
+        "total_units": 104.0,
+        "vli_units": 7.0,
+        "market_rate_units": 97.0,
+        "density_bonus_projects": 4
       },
       {
         "developer": "RCD",
@@ -683,20 +661,20 @@
     ],
     "summary": {
       "total_developers": 3,
-      "total_projects": 10,
-      "total_units": 436.0,
-      "total_vli": 141.0
+      "total_projects": 9,
+      "total_units": 425.0,
+      "total_vli": 140.0
     }
   },
   "adu_summary": {
     "title": "ADU/JADU Summary for 2025",
     "description": "ADU permits issued with ABAG 30/30/30/10 affordability split",
-    "total_adus": 39,
+    "total_adus": 0,
     "affordability_split": {
-      "very_low_income": 12,
-      "low_income": 12,
-      "moderate_income": 12,
-      "above_moderate_income": 3
+      "very_low_income": 0,
+      "low_income": 0,
+      "moderate_income": 0,
+      "above_moderate_income": 0
     },
     "methodology": "ABAG 30/30/30/10 affordability assumption for unpermitted ADUs"
   },

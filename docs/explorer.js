@@ -1,6 +1,43 @@
 // Berkeley Housing Pipeline Explorer
 // Main JavaScript file
 
+    // Field name normalization - handles field name variations between export script and JS
+    // This prevents breakage when export script field names don't match expected names
+    function getField(project, name) {
+        const aliases = {
+            'processing_days': ['processing_days', 'proc_days', 'total_processing_days'],
+            'height': ['height_stories', 'height', 'stories'],
+            'lat': ['latitude', 'lat'],
+            'lng': ['longitude', 'lng', 'lon'],
+            'latitude': ['latitude', 'lat'],
+            'longitude': ['longitude', 'lng', 'lon'],
+            'filed': ['app_filed', 'filed', 'app_filed_date'],
+            'app_filed': ['app_filed', 'filed', 'app_filed_date'],
+            'complete': ['app_complete', 'complete', 'app_complete_date'],
+            'app_complete': ['app_complete', 'complete', 'app_complete_date'],
+            'entitled': ['entitled', 'entitled_date'],
+            'bp_issued': ['bp_issued', 'bp_issued_date'],
+            'co_date': ['co_date', 'co', 'certificate_of_occupancy'],
+            'fees': ['total_fees', 'fees', 'fee_total'],
+            'total_fees': ['total_fees', 'fees', 'fee_total'],
+            'construction_start': ['construction_start', 'const_start', 'build_start'],
+            'construction_end': ['construction_end', 'estimated_completion', 'const_end'],
+            'construction_status': ['construction_status', 'const_status', 'build_status'],
+            'vli_units': ['vli_units', 'vli', 'very_low_income_units'],
+            'density_bonus': ['density_bonus', 'db', 'uses_density_bonus'],
+            'address': ['address', 'address_display', 'location'],
+            'units': ['units', 'total_units', 'unit_count'],
+            'status': ['status', 'project_status', 'current_status'],
+            'year': ['year', 'filed_year', 'application_year']
+        };
+        const fieldsToTry = aliases[name] || [name];
+        for (const alias of fieldsToTry) {
+            const val = project[alias];
+            if (val !== undefined && val !== null && val !== '') return val;
+        }
+        return null;
+    }
+
     console.log("🔵 Script tag started loading");
 
     // Tab switching function
@@ -633,8 +670,8 @@
                     }
                 }
             }
-            const displayFees = projectFees || p.total_fees || 0;
-            const feePerUnit = displayFees > 0 && p.units > 0 ? Math.round(displayFees / p.units) : 0;
+            const displayFees = projectFees || getField(p, 'total_fees') || 0;
+            const feePerUnit = displayFees > 0 && (getField(p, 'units') || 0) > 0 ? Math.round(displayFees / getField(p, 'units')) : 0;
 
             const feeDisplay = displayFees > 0
                 ? `<div class="bg-green-50 p-3 rounded-lg mt-2">
@@ -851,31 +888,34 @@
             }
 
             // Phase 4: Construction (green) - Use construction_start if available, else bp_issued
-            const constructionStart = p.construction_start ? new Date(p.construction_start) : bpIssued;
-            const constructionEnd = p.construction_end ? new Date(p.construction_end) : (coDate || maxDate);
-            
+            const constStartVal = getField(p, 'construction_start');
+            const constEndVal = getField(p, 'construction_end');
+            const constStatusVal = getField(p, 'construction_status');
+            const constructionStart = constStartVal ? new Date(constStartVal) : bpIssued;
+            const constructionEnd = constEndVal ? new Date(constEndVal) : (coDate || maxDate);
+
             if (constructionStart || bpIssued) {
                 const phase4Start = constructionStart || bpIssued;
-                const phase4End = coDate || (p.construction_status === 'occupied' ? new Date(p.construction_end) : maxDate);
+                const phase4End = coDate || (constStatusVal === 'occupied' ? new Date(constEndVal) : maxDate);
                 const startPct4 = (phase4Start - minDate) / (1000 * 60 * 60 * 24) / totalDays * 100;
                 const w4 = (phase4End - phase4Start) / (1000 * 60 * 60 * 24) / totalDays * 100;
                 
                 // Determine label based on construction_status
                 let phase4Label = 'Under Construction';
                 let bgColor = 'bg-green-500';
-                if (p.construction_status === 'occupied' || p.construction_status === 'completed') {
+                if (constStatusVal === 'occupied' || constStatusVal === 'completed') {
                     phase4Label = 'Completed';
                     bgColor = 'bg-green-600';
-                } else if (p.construction_status === 'demolition') {
+                } else if (constStatusVal === 'demolition') {
                     phase4Label = 'Demolition';
                     bgColor = 'bg-yellow-500';
-                } else if (p.construction_status === 'foundation') {
+                } else if (constStatusVal === 'foundation') {
                     phase4Label = 'Foundation';
-                } else if (p.construction_status === 'framing') {
+                } else if (constStatusVal === 'framing') {
                     phase4Label = 'Framing';
-                } else if (p.construction_status === 'topped_out') {
+                } else if (constStatusVal === 'topped_out') {
                     phase4Label = 'Topped Out';
-                } else if (p.construction_status === 'finishing') {
+                } else if (constStatusVal === 'finishing') {
                     phase4Label = 'Finishing';
                 }
                 

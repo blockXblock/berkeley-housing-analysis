@@ -552,23 +552,26 @@
             }
         });
 
-        // APR Comparison
-        const matched = DATA.city_apr.filter(c => c.matched);
-        const unmatched = DATA.city_apr.filter(c => !c.matched);
+        // APR Comparison - city_apr may not exist in export
+        const cityApr = DATA.city_apr || [];
+        const matched = cityApr.filter(c => c.matched);
+        const unmatched = cityApr.filter(c => !c.matched);
         document.getElementById('aprMatched').textContent = matched.length;
         document.getElementById('aprUnmatched').textContent = unmatched.length;
 
-        new Chart(document.getElementById('aprCompareChart'), {
-            type: 'bar',
-            data: {
-                labels: matched.slice(0, 15).map(c => c.address.split(',')[0].substring(0, 20)),
-                datasets: [
-                    { label: 'City APR Units', data: matched.slice(0, 15).map(c => c.units), backgroundColor: '#3b82f6' },
-                    { label: 'Our Units', data: matched.slice(0, 15).map(c => c.our_units), backgroundColor: '#10b981' }
-                ]
-            },
+        if (matched.length > 0) {
+            new Chart(document.getElementById('aprCompareChart'), {
+                type: 'bar',
+                data: {
+                    labels: matched.slice(0, 15).map(c => c.address.split(',')[0].substring(0, 20)),
+                    datasets: [
+                        { label: 'City APR Units', data: matched.slice(0, 15).map(c => c.units), backgroundColor: '#3b82f6' },
+                        { label: 'Our Units', data: matched.slice(0, 15).map(c => c.our_units), backgroundColor: '#10b981' }
+                    ]
+                },
             options: { scales: { y: { beginAtZero: true } } }
-        });
+            });
+        }
 
         // Modular vs Conventional Construction Timeline Comparison
         new Chart(document.getElementById('modularCompareChart'), {
@@ -957,8 +960,14 @@
     // APR Table
     function renderAPRTable() {
         const tbody = document.getElementById('aprTableBody');
+        if (!tbody) return;
         tbody.innerHTML = '';
-        DATA.city_apr.sort((a, b) => b.units - a.units).forEach(c => {
+        const cityApr = DATA.city_apr || [];
+        if (cityApr.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" class="px-4 py-8 text-center text-gray-500">City APR comparison data not available</td></tr>';
+            return;
+        }
+        cityApr.sort((a, b) => b.units - a.units).forEach(c => {
             const diff = c.matched ? c.our_units - c.units : '-';
             const diffClass = diff > 0 ? 'text-green-600' : diff < 0 ? 'text-red-600' : '';
             const row = document.createElement('tr');

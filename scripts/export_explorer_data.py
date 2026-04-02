@@ -40,11 +40,13 @@ def validate_co_date(co_date):
 def get_projects(conn):
     """Get all projects from database"""
     cursor = conn.cursor()
-    # Include height_stories and height_feet in SELECT
+    # Include all columns including UC project flags and construction status
     cursor.execute('''
         SELECT
             id, address_display, units, status, permits, filed, complete, entitled,
-            bp_issued, co_date, height_stories, height_feet
+            bp_issued, co_date, height_stories, height_feet,
+            is_uc_project, construction_status, developer, architect, description,
+            latitude, longitude
         FROM projects
         ORDER BY units DESC
     ''')
@@ -66,11 +68,11 @@ def get_projects(conn):
             "status": row[3],
             "year": row[5][:4] if row[5] else None,  # Extract year from filed date
             "permits": row[4],
-            "description": None,
+            "description": row[16],  # From database
             "num_permits": len(row[4].split(',')) if row[4] else 0,
             "project_size": "Large" if (row[2] or 0) >= 50 else "Medium" if (row[2] or 0) >= 10 else "Small",
-            "latitude": None,
-            "longitude": None,
+            "latitude": row[17],  # From database
+            "longitude": row[18],  # From database
             "unit_category": None,
             "tenure": None,
             "vli_units": 0,
@@ -85,7 +87,7 @@ def get_projects(conn):
             "bp_issued": row[8],
             "co_date": co_date,
             "construction_start": None,
-            "construction_status": None,
+            "construction_status": row[13],  # From database
             "estimated_completion": None,
             "accela_status": None,
             "accela_status_date": None,
@@ -98,10 +100,10 @@ def get_projects(conn):
             "fee_count": 0,
             "permit_type": "Unknown",
             "construction_data_reliability": "Unknown",
-            "is_uc_project": False,
+            "is_uc_project": bool(row[12]),  # From database (1 = True)
             "is_stalled": False,
-            "developer": None,
-            "architect": None
+            "developer": row[14],  # From database
+            "architect": row[15]   # From database
         })
 
     return projects

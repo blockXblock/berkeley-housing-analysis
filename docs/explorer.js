@@ -519,25 +519,12 @@
         });
 
         // Skyline Chart - highlight UC projects in gold
-        // Known UC Berkeley project addresses (exempt from city zoning, not counted toward RHNA)
-        const UC_ADDRESSES = [
-            '2200 BANCROFT', '2222 BANCROFT', '2211 BANCROFT',  // People's Park / Southside
-            '2650 HASTE', '2666 HASTE',  // Clark Kerr area
-            'OXFORD', 'BERKELEY WAY'  // Near campus
-        ];
-        function isUCProject(address) {
-            if (!address) return false;
-            const addr = address.toUpperCase();
-            // Check explicit is_uc_project flag first
-            return UC_ADDRESSES.some(uc => addr.includes(uc));
-        }
-
+        // UC projects are flagged in the database with is_uc_project = 1
         const topByHeight = [...DATA.projects].filter(p => p.height_stories > 0).sort((a, b) => b.height_stories - a.height_stories).slice(0, 20);
-        // Mark UC projects client-side if not already marked
+        // Check UC status using getField for robust field access
         topByHeight.forEach(p => {
-            if (!p.is_uc_project && isUCProject(p.address)) {
-                p.is_uc_project = true;
-            }
+            const ucVal = getField(p, 'is_uc_project');
+            p.is_uc_project = ucVal === true || ucVal === 1 || ucVal === 'True' || ucVal === '1';
         });
         const ucCount = topByHeight.filter(p => p.is_uc_project).length;
         console.log('🏗️ Skyline chart init - projects with height_stories > 0:', topByHeight.length, '(UC projects:', ucCount + ')');

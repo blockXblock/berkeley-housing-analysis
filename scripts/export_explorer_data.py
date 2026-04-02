@@ -24,13 +24,27 @@ BASE_DIR = Path('/Users/johngage/berkeley-data')
 DB_PATH = BASE_DIR / 'data' / 'berkeley_housing_analysis.db'
 OUTPUT_PATH = BASE_DIR / 'docs' / 'explorer_data.js'
 
+def validate_co_date(co_date):
+    """Validate CO date - reject dates before 2020 as likely fake/placeholder data"""
+    if not co_date:
+        return None
+    try:
+        year = int(co_date[:4])
+        if year < 2020:
+            print(f"  ⚠️ Rejecting invalid CO date (before 2020): {co_date}")
+            return None
+        return co_date
+    except (ValueError, TypeError):
+        return None
+
 def get_projects(conn):
     """Get all projects from database"""
     cursor = conn.cursor()
-    # Use actual schema: id, address_display, units, status, permits, filed, complete, entitled, bp_issued, co_date
+    # Include height_stories and height_feet in SELECT
     cursor.execute('''
         SELECT
-            id, address_display, units, status, permits, filed, complete, entitled, bp_issued, co_date
+            id, address_display, units, status, permits, filed, complete, entitled,
+            bp_issued, co_date, height_stories, height_feet
         FROM projects
         ORDER BY units DESC
     ''')
@@ -38,6 +52,9 @@ def get_projects(conn):
     projects = []
 
     for row in cursor.fetchall():
+        # Validate CO date (reject before 2020)
+        co_date = validate_co_date(row[9])
+
         projects.append({
             "id": row[0],
             "address": row[1],
@@ -66,15 +83,15 @@ def get_projects(conn):
             "app_complete": row[6],
             "entitled": row[7],
             "bp_issued": row[8],
-            "co_date": row[9],
+            "co_date": co_date,
             "construction_start": None,
             "construction_status": None,
             "estimated_completion": None,
             "accela_status": None,
             "accela_status_date": None,
             "processing_days": None,
-            "height_stories": None,
-            "height_feet": None,
+            "height_stories": row[10],  # From database
+            "height_feet": row[11],      # From database
             "app_packet_mb": 0,
             "total_fees": 0,
             "fee_per_unit": 0,

@@ -21,93 +21,82 @@ from collections import defaultdict
 
 # Paths
 BASE_DIR = Path('/Users/johngage/berkeley-data')
-DB_PATH = BASE_DIR / 'databases' / 'berkeley_housing_analysis.db'
+DB_PATH = BASE_DIR / 'data' / 'berkeley_housing_analysis.db'
 OUTPUT_PATH = BASE_DIR / 'docs' / 'explorer_data.js'
 
 def get_projects(conn):
     """Get all projects from database"""
     cursor = conn.cursor()
+    # Use actual schema: id, address_display, units, status, permits, filed, complete, entitled, bp_issued, co_date
     cursor.execute('''
         SELECT
-            id, address, apn, permits, net_units, total_units, vli_units, year, status, description,
-            density_bonus, density_bonus_pct, sb35_flag, sb330_flag, ab2011_flag,
-            height_stories, height_feet, latitude, longitude,
-            app_filed_date, app_complete_date, entitled_date, bp_issued_date,
-            construction_start_date, co_date, estimated_completion_date,
-            construction_status, construction_data_reliability,
-            accela_status, accela_status_date, processing_days,
-            is_uc_project, is_stalled, developer, architect, owner,
-            total_fees, fee_count, unit_category, tenure, project_size, app_packet_mb
+            id, address_display, units, status, permits, filed, complete, entitled, bp_issued, co_date
         FROM projects
-        ORDER BY net_units DESC
+        ORDER BY units DESC
     ''')
 
-    columns = [desc[0] for desc in cursor.description]
     projects = []
 
     for row in cursor.fetchall():
-        p = dict(zip(columns, row))
-        # Convert to expected format
         projects.append({
-            "id": p['id'],
-            "address": p['address'],
-            "apn": p['apn'],
-            "owner": p['owner'],
-            "units": p['net_units'] or 0,
-            "new_units": p['total_units'] or p['net_units'] or 0,
+            "id": row[0],
+            "address": row[1],
+            "apn": None,
+            "owner": None,
+            "units": row[2] or 0,
+            "new_units": row[2] or 0,
             "old_units": 0,
-            "status": p['status'],
-            "year": p['year'],
-            "permits": p['permits'],
-            "description": p['description'],
-            "num_permits": len(p['permits'].split(',')) if p['permits'] else 0,
-            "project_size": p['project_size'] or "Unknown",
-            "latitude": p['latitude'],
-            "longitude": p['longitude'],
-            "unit_category": p['unit_category'],
-            "tenure": p['tenure'],
-            "vli_units": p['vli_units'] or 0,
-            "density_bonus": bool(p['density_bonus']),
-            "density_bonus_pct": p['density_bonus_pct'],
-            "sb330": bool(p['sb330_flag']),
-            "sb35": bool(p['sb35_flag']),
-            "ab2011": bool(p['ab2011_flag']),
-            "app_filed": p['app_filed_date'],
-            "app_complete": p['app_complete_date'],
-            "entitled": p['entitled_date'],
-            "bp_issued": p['bp_issued_date'],
-            "co_date": p['co_date'],
-            "construction_start": p['construction_start_date'],
-            "construction_status": p['construction_status'],
-            "estimated_completion": p['estimated_completion_date'],
-            "accela_status": p['accela_status'],
-            "accela_status_date": p['accela_status_date'],
-            "processing_days": p['processing_days'],
-            "height_stories": p['height_stories'],
-            "height_feet": p['height_feet'],
-            "app_packet_mb": p['app_packet_mb'] or 0,
-            "total_fees": p['total_fees'] or 0,
-            "fee_per_unit": (p['total_fees'] or 0) / (p['net_units'] or 1) if p['net_units'] else 0,
-            "fee_count": p['fee_count'] or 0,
+            "status": row[3],
+            "year": row[5][:4] if row[5] else None,  # Extract year from filed date
+            "permits": row[4],
+            "description": None,
+            "num_permits": len(row[4].split(',')) if row[4] else 0,
+            "project_size": "Large" if (row[2] or 0) >= 50 else "Medium" if (row[2] or 0) >= 10 else "Small",
+            "latitude": None,
+            "longitude": None,
+            "unit_category": None,
+            "tenure": None,
+            "vli_units": 0,
+            "density_bonus": False,
+            "density_bonus_pct": None,
+            "sb330": False,
+            "sb35": False,
+            "ab2011": False,
+            "app_filed": row[5],
+            "app_complete": row[6],
+            "entitled": row[7],
+            "bp_issued": row[8],
+            "co_date": row[9],
+            "construction_start": None,
+            "construction_status": None,
+            "estimated_completion": None,
+            "accela_status": None,
+            "accela_status_date": None,
+            "processing_days": None,
+            "height_stories": None,
+            "height_feet": None,
+            "app_packet_mb": 0,
+            "total_fees": 0,
+            "fee_per_unit": 0,
+            "fee_count": 0,
             "permit_type": "Unknown",
-            "construction_data_reliability": p['construction_data_reliability'] or "Unknown",
-            "is_uc_project": bool(p['is_uc_project']),
-            "is_stalled": bool(p['is_stalled']),
-            "developer": p['developer'],
-            "architect": p['architect']
+            "construction_data_reliability": "Unknown",
+            "is_uc_project": False,
+            "is_stalled": False,
+            "developer": None,
+            "architect": None
         })
 
     return projects
 
 def get_events(conn):
-    """Get all permit events linked to projects"""
+    """Get ALL permit events from database"""
     cursor = conn.cursor()
     cursor.execute('''
         SELECT
             project_id, address, permit_number, stage, action,
             event_date, assigned_to, marked_by, comment, stage_status, permit_type
         FROM permit_events
-        WHERE project_id IS NOT NULL
         ORDER BY event_date DESC
     ''')
 
@@ -130,85 +119,18 @@ def get_events(conn):
     return events
 
 def get_fees(conn, projects):
-    """Aggregate fee data from permit_fees table (includes ALL fees, linked and unlinked)"""
-    cursor = conn.cursor()
-
-    # Get TOTAL fees from permit_fees table (all $14.1M)
-    cursor.execute("SELECT SUM(amount), COUNT(*) FROM permit_fees")
-    row = cursor.fetchone()
-    total_fees = row[0] or 0
-    total_count = row[1] or 0
-
-    # Get fees linked to projects
-    cursor.execute("SELECT SUM(amount), COUNT(DISTINCT project_id) FROM permit_fees WHERE project_id IS NOT NULL")
-    row = cursor.fetchone()
-    linked_fees = row[0] or 0
-    projects_with_fees_count = row[1] or 0
-
-    # Fees NOT linked to projects (building permits we haven't matched yet)
-    unlinked_fees = total_fees - linked_fees
-
-    # Group by year (from projects that have fees)
-    by_year = defaultdict(float)
-    for p in projects:
-        if p['total_fees'] > 0 and p['year']:
-            by_year[str(int(p['year']))] += p['total_fees']
-
-    # Group by project (for linked fees)
-    by_project = {}
-    for p in projects:
-        if p['total_fees'] > 0:
-            by_project[p['address']] = {
-                "total_fees": p['total_fees'],
-                "fee_count": p['fee_count'],
-                "units": p['units']
-            }
-
-    # Also add unlinked permits to by_project
-    cursor.execute('''
-        SELECT permit_number, amount
-        FROM permit_fees
-        WHERE project_id IS NULL AND amount > 10000
-        ORDER BY amount DESC
-    ''')
-    for row in cursor.fetchall():
-        by_project[f"Permit: {row[0]}"] = {
-            "total_fees": row[1],
-            "fee_count": 1,
-            "units": 0
-        }
-
-    # Large fees (over $50k) - include both project-linked and permit-only
-    cursor.execute('''
-        SELECT
-            COALESCE(p.address, 'Permit: ' || pf.permit_number) as name,
-            pf.amount,
-            COALESCE(p.net_units, 0) as units
-        FROM permit_fees pf
-        LEFT JOIN projects p ON pf.project_id = p.id
-        WHERE pf.amount >= 50000
-        ORDER BY pf.amount DESC
-        LIMIT 15
-    ''')
-    large_fees = [
-        {"address": row[0], "total_fees": row[1], "units": row[2]}
-        for row in cursor.fetchall()
-    ]
-
-    # Calculate average per unit for linked projects
-    projects_with_fees = [p for p in projects if p['total_fees'] > 0]
-    total_units_with_fees = sum(p['units'] for p in projects_with_fees) if projects_with_fees else 1
-
+    """Get fee data (placeholder - no permit_fees table yet)"""
+    # No permit_fees table exists, return empty structure
     return {
-        "total": total_fees,
-        "linked": linked_fees,
-        "unlinked": unlinked_fees,
-        "count": projects_with_fees_count,
-        "permit_count": total_count,
-        "by_year": dict(by_year),
-        "by_project": by_project,
-        "large_fees": large_fees,
-        "avg_per_unit": linked_fees / total_units_with_fees if total_units_with_fees > 0 else 0
+        "total": 0,
+        "linked": 0,
+        "unlinked": 0,
+        "count": 0,
+        "permit_count": 0,
+        "by_year": {},
+        "by_project": {},
+        "large_fees": [],
+        "avg_per_unit": 0
     }
 
 def get_staff(conn):
@@ -283,12 +205,12 @@ def get_timeline(conn):
     cursor = conn.cursor()
     cursor.execute('''
         SELECT
-            SUBSTR(app_filed_date, 1, 7) as month,
+            SUBSTR(filed, 1, 7) as month,
             COUNT(*) as applications,
-            SUM(net_units) as units
+            SUM(units) as units
         FROM projects
-        WHERE app_filed_date IS NOT NULL
-        GROUP BY SUBSTR(app_filed_date, 1, 7)
+        WHERE filed IS NOT NULL
+        GROUP BY SUBSTR(filed, 1, 7)
         ORDER BY month
     ''')
 

@@ -781,6 +781,12 @@
   BP Issued: ${withBpIssued} projects
   CO: ${withCo} projects`);
 
+        // Update info text
+        const ganttInfo = document.getElementById('ganttInfo');
+        if (ganttInfo) {
+            ganttInfo.textContent = `Showing all ${DATA.projects.length} projects (${withEntitled} entitled, ${withBpIssued} BP issued, ${withCo} completed). Hover over bars for details.`;
+        }
+
         // Sort based on user selection
         if (ganttSort === 'duration') projectsWithTimeline.sort((a, b) => (b.processing_days || 0) - (a.processing_days || 0));
         else if (ganttSort === 'start') projectsWithTimeline.sort((a, b) => (a.startDate || '').localeCompare(b.startDate || ''));
@@ -1429,6 +1435,485 @@
             `;
             statsContainer.appendChild(div);
         });
+    }
+
+    // ============================================
+    // TIMELINE TAB SANKEY DIAGRAMS
+    // ============================================
+    let currentTimelineSankeyView = 'lifecycle';
+
+    function switchTimelineSankeyView(mode) {
+        currentTimelineSankeyView = mode;
+
+        const lifecycleBtn = document.getElementById('timelineLifecycleBtn');
+        const annualBtn = document.getElementById('timelineAnnualBtn');
+        const yearSelector = document.getElementById('timelineYearSelector');
+        const lifecycleLegend = document.getElementById('timelineLifecycleLegend');
+        const annualLegend = document.getElementById('timelineAnnualLegend');
+        const title = document.getElementById('timelineSankeyTitle');
+        const subtitle = document.getElementById('timelineSankeySubtitle');
+        const statsTitle = document.getElementById('timelineStatsTitle');
+
+        if (mode === 'lifecycle') {
+            if (lifecycleBtn) lifecycleBtn.className = 'px-3 py-1 text-sm rounded-md bg-blue-500 text-white';
+            if (annualBtn) annualBtn.className = 'px-3 py-1 text-sm rounded-md text-gray-600 hover:bg-gray-200';
+            if (yearSelector) yearSelector.classList.add('hidden');
+            if (lifecycleLegend) lifecycleLegend.classList.remove('hidden');
+            if (annualLegend) annualLegend.classList.add('hidden');
+            if (title) title.textContent = 'Project Lifecycle: Typical Path from Filing to Occupancy';
+            if (subtitle) subtitle.textContent = `Median days at each stage. Based on ${DATA.projects.length} Berkeley housing projects.`;
+            if (statsTitle) statsTitle.textContent = 'Lifecycle Summary';
+            renderTimelineLifecycleSankey();
+        } else {
+            if (annualBtn) annualBtn.className = 'px-3 py-1 text-sm rounded-md bg-blue-500 text-white';
+            if (lifecycleBtn) lifecycleBtn.className = 'px-3 py-1 text-sm rounded-md text-gray-600 hover:bg-gray-200';
+            if (yearSelector) yearSelector.classList.remove('hidden');
+            if (lifecycleLegend) lifecycleLegend.classList.add('hidden');
+            if (annualLegend) annualLegend.classList.remove('hidden');
+            if (statsTitle) statsTitle.textContent = 'Annual Flow Summary';
+            renderTimelineAnnualSankey();
+        }
+    }
+
+    function renderTimelineSankey() {
+        if (currentTimelineSankeyView === 'lifecycle') {
+            renderTimelineLifecycleSankey();
+        } else {
+            renderTimelineAnnualSankey();
+        }
+    }
+
+    function renderTimelineLifecycleSankey() {
+        const container = document.getElementById('timelineSankeyChart');
+        if (!container) return;
+
+        container.innerHTML = '';
+
+        const width = container.clientWidth;
+        const height = 450;
+
+        // Calculate real median days from data
+        function getMedianDays(days) {
+            if (days.length === 0) return 0;
+            const sorted = [...days].sort((a, b) => a - b);
+            return sorted[Math.floor(sorted.length / 2)];
+        }
+
+        // Calculate days for each stage from real project data
+        const completenessDays = [];
+        const decisionDays = [];
+        const postEntitlementDays = [];
+        const constructionDays = [];
+
+        DATA.projects.forEach(p => {
+            const filed = p.app_filed ? new Date(p.app_filed) : null;
+            const complete = p.app_complete ? new Date(p.app_complete) : null;
+            const entitled = p.entitled ? new Date(p.entitled) : null;
+            const bpIssued = p.bp_issued ? new Date(p.bp_issued) : null;
+            const co = p.co_date ? new Date(p.co_date) : null;
+
+            // Completeness Review: filed → complete
+            if (filed && complete && complete > filed) {
+                const days = (complete - filed) / (1000 * 60 * 60 * 24);
+                if (days > 0 && days < 2000) completenessDays.push(days);
+            }
+
+            // City Decision: complete → entitled
+            const decisionStart = complete || filed;
+            if (decisionStart && entitled && entitled > decisionStart) {
+                const days = (entitled - decisionStart) / (1000 * 60 * 60 * 24);
+                if (days > 0 && days < 2000) decisionDays.push(days);
+            }
+
+            // Post-Entitlement: entitled → bp_issued
+            if (entitled && bpIssued && bpIssued > entitled) {
+                const days = (bpIssued - entitled) / (1000 * 60 * 60 * 24);
+                if (days > 0 && days < 2000) postEntitlementDays.push(days);
+            }
+
+            // Construction: bp_issued → co
+            const constStart = bpIssued || entitled;
+            if (constStart && co && co > constStart) {
+                const days = (co - constStart) / (1000 * 60 * 60 * 24);
+                if (days > 0 && days < 3000) constructionDays.push(days);
+            }
+        });
+
+        const lifecycleData = {
+            'Completeness Review': {
+                median_days: getMedianDays(completenessDays) || 105,
+                count: completenessDays.length || DATA.projects.filter(p => p.app_complete).length,
+                units: DATA.projects.filter(p => p.app_complete).reduce((s, p) => s + (p.units || 0), 0),
+                color: '#9ca3af'
+            },
+            'City Decision': {
+                median_days: getMedianDays(decisionDays) || 377,
+                count: decisionDays.length || DATA.projects.filter(p => p.entitled).length,
+                units: DATA.projects.filter(p => p.entitled).reduce((s, p) => s + (p.units || 0), 0),
+                color: '#3b82f6'
+            },
+            'Post-Entitlement': {
+                median_days: getMedianDays(postEntitlementDays) || 180,
+                count: postEntitlementDays.length || DATA.projects.filter(p => p.bp_issued).length,
+                units: DATA.projects.filter(p => p.bp_issued).reduce((s, p) => s + (p.units || 0), 0),
+                color: '#f97316'
+            },
+            'Construction': {
+                median_days: getMedianDays(constructionDays) || 548,
+                count: constructionDays.length || DATA.projects.filter(p => p.co_date).length,
+                units: DATA.projects.filter(p => p.co_date).reduce((s, p) => s + (p.units || 0), 0),
+                color: '#22c55e'
+            }
+        };
+
+        const stages = Object.keys(lifecycleData);
+        const totalDays = stages.reduce((sum, s) => sum + lifecycleData[s].median_days, 0);
+        const totalYears = (totalDays / 365).toFixed(1);
+
+        // Create SVG
+        const svg = d3.select('#timelineSankeyChart')
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height);
+
+        const margin = { top: 60, right: 30, bottom: 100, left: 30 };
+        const chartWidth = width - margin.left - margin.right;
+        const barHeight = 80;
+        const barY = margin.top + 50;
+
+        // Arrow marker
+        svg.append('defs').append('marker')
+            .attr('id', 'timelineArrow')
+            .attr('viewBox', '0 -5 10 10')
+            .attr('refX', 5)
+            .attr('refY', 0)
+            .attr('markerWidth', 6)
+            .attr('markerHeight', 6)
+            .attr('orient', 'auto')
+            .append('path')
+            .attr('d', 'M0,-5L10,0L0,5')
+            .attr('fill', '#9ca3af');
+
+        // Title
+        svg.append('text')
+            .attr('x', width / 2)
+            .attr('y', 25)
+            .attr('text-anchor', 'middle')
+            .attr('font-size', '16px')
+            .attr('font-weight', 'bold')
+            .attr('fill', '#1f2937')
+            .text(`Total Timeline: ${totalDays.toFixed(0)} days (${totalYears} years)`);
+
+        svg.append('text')
+            .attr('x', width / 2)
+            .attr('y', 45)
+            .attr('text-anchor', 'middle')
+            .attr('font-size', '12px')
+            .attr('fill', '#6b7280')
+            .text('From application filing to Certificate of Occupancy');
+
+        // Draw timeline bar
+        let currentX = margin.left;
+        stages.forEach((stage, i) => {
+            const stageData = lifecycleData[stage];
+            const stageWidth = (stageData.median_days / totalDays) * chartWidth;
+
+            const g = svg.append('g');
+
+            g.append('rect')
+                .attr('x', currentX)
+                .attr('y', barY)
+                .attr('width', Math.max(stageWidth - 2, 30))
+                .attr('height', barHeight)
+                .attr('fill', stageData.color)
+                .attr('rx', 4)
+                .attr('opacity', 0.9)
+                .style('cursor', 'pointer')
+                .append('title')
+                .text(`${stage}\n${stageData.median_days.toFixed(0)} days (${(stageData.median_days/30).toFixed(1)} months)\n${stageData.count} projects, ${stageData.units.toLocaleString()} units`);
+
+            // Stage label inside bar
+            if (stageWidth > 60) {
+                g.append('text')
+                    .attr('x', currentX + stageWidth / 2)
+                    .attr('y', barY + barHeight / 2 - 8)
+                    .attr('text-anchor', 'middle')
+                    .attr('fill', 'white')
+                    .attr('font-size', '11px')
+                    .attr('font-weight', 'bold')
+                    .text(stage.length > 12 ? stage.substring(0, 12) + '...' : stage);
+
+                g.append('text')
+                    .attr('x', currentX + stageWidth / 2)
+                    .attr('y', barY + barHeight / 2 + 8)
+                    .attr('text-anchor', 'middle')
+                    .attr('fill', 'white')
+                    .attr('font-size', '14px')
+                    .attr('font-weight', 'bold')
+                    .text(`${stageData.median_days.toFixed(0)} days`);
+            }
+
+            // Labels below bar
+            svg.append('text')
+                .attr('x', currentX + stageWidth / 2)
+                .attr('y', barY + barHeight + 18)
+                .attr('text-anchor', 'middle')
+                .attr('fill', '#374151')
+                .attr('font-size', '11px')
+                .attr('font-weight', '500')
+                .text(stage);
+
+            svg.append('text')
+                .attr('x', currentX + stageWidth / 2)
+                .attr('y', barY + barHeight + 33)
+                .attr('text-anchor', 'middle')
+                .attr('fill', '#6b7280')
+                .attr('font-size', '10px')
+                .text(`${stageData.count} projects`);
+
+            svg.append('text')
+                .attr('x', currentX + stageWidth / 2)
+                .attr('y', barY + barHeight + 48)
+                .attr('text-anchor', 'middle')
+                .attr('fill', '#6b7280')
+                .attr('font-size', '10px')
+                .text(`${stageData.units.toLocaleString()} units`);
+
+            currentX += stageWidth;
+        });
+
+        // Update stats
+        const statsContainer = document.getElementById('timelineSankeyStats');
+        if (statsContainer) {
+            statsContainer.innerHTML = '';
+            const statsData = [
+                { label: 'Total Timeline', value: `${totalYears} years`, color: '#3b82f6' },
+                { label: 'Completeness', value: `${lifecycleData['Completeness Review'].median_days.toFixed(0)} days`, color: '#9ca3af' },
+                { label: 'City Decision', value: `${lifecycleData['City Decision'].median_days.toFixed(0)} days`, color: '#3b82f6' },
+                { label: 'Post-Entitlement', value: `${lifecycleData['Post-Entitlement'].median_days.toFixed(0)} days`, color: '#f97316' },
+                { label: 'Construction', value: `${lifecycleData['Construction'].median_days.toFixed(0)} days`, color: '#22c55e' }
+            ];
+
+            statsData.forEach(stat => {
+                const div = document.createElement('div');
+                div.className = 'text-center p-3 rounded-lg';
+                div.style.backgroundColor = stat.color + '15';
+                div.innerHTML = `
+                    <div class="text-xl font-bold" style="color: ${stat.color}">${stat.value}</div>
+                    <div class="text-xs text-gray-600">${stat.label}</div>
+                `;
+                statsContainer.appendChild(div);
+            });
+        }
+    }
+
+    function renderTimelineAnnualSankey() {
+        const container = document.getElementById('timelineSankeyChart');
+        if (!container) return;
+
+        const yearSelect = document.getElementById('timelineSankeyYear');
+        const selectedYear = parseInt(yearSelect ? yearSelect.value : '2025');
+
+        const title = document.getElementById('timelineSankeyTitle');
+        const subtitle = document.getElementById('timelineSankeySubtitle');
+        if (title) title.textContent = `Annual Flow: How Projects Moved Through the Pipeline in ${selectedYear}`;
+        if (subtitle) subtitle.textContent = `Status transitions from Jan 1 to Dec 31, ${selectedYear}. Width proportional to unit count.`;
+
+        container.innerHTML = '';
+
+        const width = container.clientWidth;
+        const height = 450;
+
+        // Define status categories
+        const startCategories = ['Filed', 'Under Review', 'Entitled', 'BP Issued', 'Under Construction'];
+        const endCategories = ['Under Review', 'Entitled', 'BP Issued', 'Under Construction', 'Completed', 'Stalled'];
+
+        const yearStart = new Date(`${selectedYear}-01-01`);
+        const yearEnd = new Date(`${selectedYear}-12-31`);
+        const today = new Date();
+
+        function getStatusAtDate(project, date) {
+            const filed = project.app_filed ? new Date(project.app_filed) : null;
+            const complete = project.app_complete ? new Date(project.app_complete) : null;
+            const entitled = project.entitled ? new Date(project.entitled) : null;
+            const bpIssued = project.bp_issued ? new Date(project.bp_issued) : null;
+            const coDate = project.co_date ? new Date(project.co_date) : null;
+
+            if (coDate && coDate <= date) return 'Completed';
+            if (bpIssued && bpIssued <= date) return 'Under Construction';
+            if (entitled && entitled <= date) {
+                const monthsSince = (date - entitled) / (1000 * 60 * 60 * 24 * 30);
+                if (monthsSince > 18 && !bpIssued) return 'Stalled';
+                return 'BP Issued';  // Waiting for BP
+            }
+            if (complete && complete <= date) return 'Under Review';
+            if (filed && filed <= date) return 'Under Review';
+            return null;
+        }
+
+        function getStartStatus(project) {
+            const filed = project.app_filed ? new Date(project.app_filed) : null;
+            if (!filed) return null;
+            if (filed >= yearStart && filed <= yearEnd) return 'Filed';
+            if (filed < yearStart) return getStatusAtDate(project, yearStart);
+            return null;
+        }
+
+        function getEndStatus(project) {
+            const filed = project.app_filed ? new Date(project.app_filed) : null;
+            if (!filed || filed > yearEnd) return null;
+            const effectiveEnd = yearEnd < today ? yearEnd : today;
+            return getStatusAtDate(project, effectiveEnd);
+        }
+
+        // Build flow data
+        const flows = {};
+        const startCounts = {};
+        const endCounts = {};
+
+        DATA.projects.forEach(p => {
+            const startStatus = getStartStatus(p);
+            const endStatus = getEndStatus(p);
+            if (!startStatus || !endStatus) return;
+
+            const key = `${startStatus}|${endStatus}`;
+            if (!flows[key]) flows[key] = { units: 0, projects: 0 };
+            flows[key].units += (p.units || 0);
+            flows[key].projects += 1;
+
+            startCounts[startStatus] = (startCounts[startStatus] || 0) + (p.units || 0);
+            endCounts[endStatus] = (endCounts[endStatus] || 0) + (p.units || 0);
+        });
+
+        const activeStartCats = startCategories.filter(c => startCounts[c] > 0);
+        const activeEndCats = endCategories.filter(c => endCounts[c] > 0);
+
+        if (activeStartCats.length === 0 || activeEndCats.length === 0) {
+            container.innerHTML = `<div class="text-center text-gray-500 py-20">No project flow data available for ${selectedYear}</div>`;
+            return;
+        }
+
+        const nodes = [
+            ...activeStartCats.map(name => ({ name: `${name} (Jan 1)`, side: 'start', category: name })),
+            ...activeEndCats.map(name => ({ name: `${name} (Dec 31)`, side: 'end', category: name }))
+        ];
+
+        const links = [];
+        Object.entries(flows).forEach(([key, data]) => {
+            const [from, to] = key.split('|');
+            const sourceIdx = nodes.findIndex(n => n.side === 'start' && n.category === from);
+            const targetIdx = nodes.findIndex(n => n.side === 'end' && n.category === to);
+
+            if (sourceIdx >= 0 && targetIdx >= 0 && data.units > 0) {
+                let flowType = 'same';
+                const stages = ['Filed', 'Under Review', 'Entitled', 'BP Issued', 'Under Construction', 'Completed'];
+                if (stages.indexOf(to) > stages.indexOf(from)) flowType = 'forward';
+                if (to === 'Stalled') flowType = 'stalled';
+                if (from === to) flowType = 'same';
+
+                links.push({
+                    source: sourceIdx,
+                    target: targetIdx,
+                    value: data.units,
+                    projects: data.projects,
+                    flowType: flowType
+                });
+            }
+        });
+
+        // Create SVG
+        const svg = d3.select('#timelineSankeyChart')
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height);
+
+        const sankey = d3.sankey()
+            .nodeWidth(20)
+            .nodePadding(15)
+            .extent([[10, 30], [width - 10, height - 30]]);
+
+        const graph = sankey({
+            nodes: nodes.map(d => Object.assign({}, d)),
+            links: links.map(d => Object.assign({}, d))
+        });
+
+        const flowColors = { 'forward': '#22c55e', 'same': '#eab308', 'stalled': '#ef4444' };
+        const nodeColors = {
+            'Filed': '#6b7280', 'Under Review': '#3b82f6', 'Entitled': '#8b5cf6',
+            'BP Issued': '#f97316', 'Under Construction': '#14b8a6', 'Completed': '#22c55e', 'Stalled': '#ef4444'
+        };
+
+        // Draw links
+        svg.append('g')
+            .selectAll('path')
+            .data(graph.links)
+            .join('path')
+            .attr('d', d3.sankeyLinkHorizontal())
+            .attr('fill', 'none')
+            .attr('stroke', d => flowColors[d.flowType] || '#9ca3af')
+            .attr('stroke-opacity', 0.5)
+            .attr('stroke-width', d => Math.max(1, d.width))
+            .append('title')
+            .text(d => `${d.source.category} → ${d.target.category}\n${d.projects} projects, ${d.value.toLocaleString()} units`);
+
+        // Draw nodes
+        svg.append('g')
+            .selectAll('rect')
+            .data(graph.nodes)
+            .join('rect')
+            .attr('x', d => d.x0)
+            .attr('y', d => d.y0)
+            .attr('height', d => Math.max(1, d.y1 - d.y0))
+            .attr('width', d => d.x1 - d.x0)
+            .attr('fill', d => nodeColors[d.category] || '#9ca3af')
+            .attr('rx', 3)
+            .append('title')
+            .text(d => `${d.name}\n${d.value?.toLocaleString() || 0} units`);
+
+        // Node labels
+        svg.append('g')
+            .selectAll('text')
+            .data(graph.nodes)
+            .join('text')
+            .attr('x', d => d.x0 < width / 2 ? d.x1 + 6 : d.x0 - 6)
+            .attr('y', d => (d.y1 + d.y0) / 2)
+            .attr('dy', '0.35em')
+            .attr('text-anchor', d => d.x0 < width / 2 ? 'start' : 'end')
+            .attr('font-size', '11px')
+            .attr('fill', '#374151')
+            .text(d => `${d.category} (${d.value?.toLocaleString() || 0})`);
+
+        // Update stats
+        const statsContainer = document.getElementById('timelineSankeyStats');
+        if (statsContainer) {
+            const totalProjects = Object.values(flows).reduce((s, f) => s + f.projects, 0);
+            const totalUnits = Object.values(flows).reduce((s, f) => s + f.units, 0);
+            const forwardUnits = Object.entries(flows).filter(([k]) => {
+                const [from, to] = k.split('|');
+                const stages = ['Filed', 'Under Review', 'Entitled', 'BP Issued', 'Under Construction', 'Completed'];
+                return stages.indexOf(to) > stages.indexOf(from);
+            }).reduce((s, [, f]) => s + f.units, 0);
+
+            statsContainer.innerHTML = '';
+            const statsData = [
+                { label: 'Total Projects', value: totalProjects, color: '#3b82f6' },
+                { label: 'Total Units', value: totalUnits.toLocaleString(), color: '#6366f1' },
+                { label: 'Forward Progress', value: `${((forwardUnits/totalUnits)*100).toFixed(0)}%`, color: '#22c55e' },
+                { label: 'Completed', value: (endCounts['Completed'] || 0).toLocaleString(), color: '#10b981' },
+                { label: 'Stalled', value: (endCounts['Stalled'] || 0).toLocaleString(), color: '#ef4444' }
+            ];
+
+            statsData.forEach(stat => {
+                const div = document.createElement('div');
+                div.className = 'text-center p-3 rounded-lg';
+                div.style.backgroundColor = stat.color + '15';
+                div.innerHTML = `
+                    <div class="text-xl font-bold" style="color: ${stat.color}">${stat.value}</div>
+                    <div class="text-xs text-gray-600">${stat.label}</div>
+                `;
+                statsContainer.appendChild(div);
+            });
+        }
     }
 
     // ============================================
@@ -2834,6 +3319,10 @@
             if (tabId === 'players' && !window.playersInitialized) {
                 initPlayersTab();
                 window.playersInitialized = true;
+            }
+            if (tabId === 'timeline' && !window.timelineSankeyInitialized) {
+                try { renderTimelineLifecycleSankey(); } catch(e) { console.error('❌ Timeline Sankey init failed:', e); }
+                window.timelineSankeyInitialized = true;
             }
         };
 

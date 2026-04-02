@@ -2573,14 +2573,23 @@
                 filtered = filtered.filter(p => (getField(p, 'vli_units') || 0) > 0);
                 break;
             case 'density_bonus':
-                const db = p => getField(p, 'density_bonus');
-                filtered = filtered.filter(p => db(p) === true || db(p) === 'True');
+                filtered = filtered.filter(p => {
+                    const db = getField(p, 'density_bonus');
+                    return db === true || db === 'True' || db === 1 || db === '1';
+                });
                 break;
             case 'approved':
-                filtered = filtered.filter(p => getField(p, 'status') === 'Approved' || getField(p, 'status') === 'Entitled');
+                filtered = filtered.filter(p => {
+                    const status = getField(p, 'status') || '';
+                    return status === 'Approved' || status === 'Entitled' ||
+                           status.includes('Approved') || status.includes('Entitled');
+                });
                 break;
             case 'completed':
-                filtered = filtered.filter(p => getField(p, 'status') === 'Completed' || getField(p, 'co_date'));
+                filtered = filtered.filter(p => {
+                    const status = getField(p, 'status');
+                    return status === 'Completed' || getField(p, 'co_date');
+                });
                 break;
             default: // 'all'
                 break;
@@ -2626,55 +2635,113 @@
 
             projects.forEach(p => {
                 let color, value;
+                const units = getField(p, 'units') || 0;
+                const status = getField(p, 'status') || '';
+                const isUC = getField(p, 'is_uc_project') === true;
+
                 if (metric === 'processing_days') {
                     value = getField(p, 'processing_days') || 0;
-                    // Red for long processing, green for fast
-                    const ratio = maxVal > minVal ? (value - minVal) / (maxVal - minVal) : 0;
-                    const r = Math.round(255 * ratio);
-                    const g = Math.round(255 * (1 - ratio));
-                    color = `rgb(${r}, ${g}, 50)`;
+                    // Green for fast (low days), Red for slow (high days)
+                    if (value === 0) {
+                        color = '#9ca3af'; // Gray if no data
+                    } else {
+                        const ratio = maxVal > minVal ? (value - minVal) / (maxVal - minVal) : 0;
+                        const r = Math.round(255 * ratio);
+                        const g = Math.round(255 * (1 - ratio));
+                        color = `rgb(${r}, ${g}, 50)`;
+                    }
                 } else if (metric === 'units') {
-                    value = getField(p, 'units') || 0;
-                    const ratio = maxVal > minVal ? (value - minVal) / (maxVal - minVal) : 0;
-                    const intensity = Math.round(100 + 155 * ratio);
-                    color = `rgb(59, ${intensity}, 246)`;
+                    value = units;
+                    // Green gradient: 5 color stops based on unit count
+                    if (units < 10) {
+                        color = '#bbf7d0'; // Lightest green - ADUs/small
+                    } else if (units < 50) {
+                        color = '#86efac'; // Light green
+                    } else if (units < 100) {
+                        color = '#4ade80'; // Medium green
+                    } else if (units < 250) {
+                        color = '#22c55e'; // Dark green
+                    } else {
+                        color = '#15803d'; // Darkest green - 250+ units
+                    }
                 } else if (metric === 'status') {
-                    const statusColors = {
-                        'Approved': '#22c55e',
-                        'Completed': '#10b981',
-                        'In Review': '#f59e0b',
-                        'Under Review': '#f59e0b',
-                        'Entitled': '#22c55e',
-                        'Corrections Pending': '#ef4444',
-                        'Corrections Pending Applicant': '#ef4444',
-                        'Incomplete Pending Applicant': '#dc2626',
-                        'Pending Final Action': '#8b5cf6',
-                        'Pending': '#6b7280'
-                    };
-                    color = statusColors[getField(p, 'status')] || '#6b7280';
-                    value = getField(p, 'status');
+                    // UC Projects get purple
+                    if (isUC) {
+                        color = '#8b5cf6'; // Purple for UC
+                    } else {
+                        // Distinct colors per status category
+                        const statusColors = {
+                            // Green = Completed
+                            'Completed': '#10b981',
+                            // Blue = Under Construction
+                            'Under Construction': '#3b82f6',
+                            'Building Permits Filed': '#60a5fa',
+                            'Demolition Underway': '#3b82f6',
+                            'Demolition Permits Filed': '#60a5fa',
+                            // Orange = Entitled/Approved
+                            'Entitled': '#f97316',
+                            'Approved': '#fb923c',
+                            'Pending Final Action': '#fdba74',
+                            // Yellow = Under Review
+                            'Under Review': '#eab308',
+                            'In Review': '#facc15',
+                            'ZAB Review': '#fde047',
+                            'Resubmittal Pending Review': '#fef08a',
+                            'Resubmittal Pending Staff': '#fef9c3',
+                            // Red = Stalled/Corrections
+                            'Corrections Pending': '#ef4444',
+                            'Corrections Pending Applicant': '#f87171',
+                            'Incomplete Pending Applicant': '#fca5a5',
+                            'On Hold': '#dc2626',
+                            'Withdrawn': '#991b1b',
+                            // Gray = Pre-Application/Other
+                            'Pre-Application': '#9ca3af',
+                            'Developer Selected': '#d1d5db',
+                            'Pending': '#6b7280',
+                            'Unknown': '#e5e7eb'
+                        };
+                        color = statusColors[status] || '#6b7280';
+                    }
+                    value = isUC ? 'UC Project' : status;
                 } else if (metric === 'affordability') {
-                    // Red = no affordable, Blue = has VLI, Green = has LI/MOD (density bonus without VLI)
                     const hasVLI = (getField(p, 'vli_units') || 0) > 0;
-                    const hasDensityBonus = getField(p, 'density_bonus') === true || getField(p, 'density_bonus') === 'True';
+                    const db = getField(p, 'density_bonus');
+                    const hasDensityBonus = db === true || db === 'True' || db === 1 || db === '1';
 
                     if (hasVLI) {
                         color = '#3b82f6'; // Blue - has VLI units
                     } else if (hasDensityBonus) {
-                        color = '#22c55e'; // Green - has LI/MOD via density bonus
+                        color = '#22c55e'; // Green - has density bonus
                     } else {
-                        color = '#ef4444'; // Red - no affordable units
+                        color = '#ef4444'; // Red - market rate only
                     }
                     value = hasVLI ? 'VLI' : hasDensityBonus ? 'Density Bonus' : 'Market Rate';
                 }
 
-                const radius = Math.max(6, Math.min(20, Math.sqrt(getField(p, 'units') || 1) * 2));
+                // Circle size based on unit count - small for ADUs, large for 500+ units
+                let radius;
+                if (units < 5) {
+                    radius = 5;      // ADUs - tiny
+                } else if (units < 20) {
+                    radius = 8;      // Small projects
+                } else if (units < 50) {
+                    radius = 11;     // Medium projects
+                } else if (units < 100) {
+                    radius = 14;     // Large projects
+                } else if (units < 250) {
+                    radius = 18;     // Very large projects
+                } else if (units < 500) {
+                    radius = 22;     // Major projects
+                } else {
+                    radius = 28;     // Mega projects (500+)
+                }
 
                 const vliUnits = getField(p, 'vli_units') || 0;
                 const vliInfo = vliUnits > 0 ? `<br>VLI Units: ${vliUnits}` : '';
                 const dbVal = getField(p, 'density_bonus');
-                const dbInfo = (dbVal === true || dbVal === 'True') ? '<br>Density Bonus: Yes' : '';
+                const dbInfo = (dbVal === true || dbVal === 'True' || dbVal === 1) ? '<br>Density Bonus: Yes' : '';
                 const procDays = getField(p, 'processing_days');
+                const ucInfo = isUC ? '<br><strong>UC Project</strong>' : '';
 
                 const marker = L.circleMarker([parseFloat(getField(p, 'latitude')), parseFloat(getField(p, 'longitude'))], {
                     radius: radius,
@@ -2685,8 +2752,8 @@
                     fillOpacity: 0.7
                 }).bindPopup(`
                     <strong>${getField(p, 'address')}</strong><br>
-                    Units: ${getField(p, 'units')}<br>
-                    Status: ${getField(p, 'status')}<br>
+                    Units: ${units}<br>
+                    Status: ${status}${ucInfo}<br>
                     Processing Days: ${procDays || 'N/A'}${vliInfo}${dbInfo}
                 `);
 

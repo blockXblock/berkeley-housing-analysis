@@ -23,7 +23,7 @@ from pathlib import Path
 
 # Paths
 BASE_DIR = Path('/Users/johngage/berkeley-data')
-DB_PATH = BASE_DIR / 'databases' / 'berkeley_housing_analysis.db'
+DB_PATH = BASE_DIR / 'data' / 'berkeley_housing_analysis.db'
 
 def generate_table_a(conn, year):
     """
@@ -32,16 +32,16 @@ def generate_table_a(conn, year):
     """
     cursor = conn.cursor()
 
-    # Projects with app_complete_date in the reporting year
+    # Projects with complete date in the reporting year
     cursor.execute('''
         SELECT
-            id, address, apn, permits, net_units, vli_units, status,
-            app_filed_date, app_complete_date, entitled_date,
+            id, address_display, apn, permits, units, vli_units, status,
+            filed, complete, entitled,
             density_bonus, sb35_flag, sb330_flag, ab2011_flag,
             developer, architect
         FROM projects
-        WHERE app_complete_date LIKE ?
-        ORDER BY app_complete_date
+        WHERE complete LIKE ?
+        ORDER BY complete
     ''', (f'{year}%',))
 
     columns = ['id', 'address', 'apn', 'permits', 'net_units', 'vli_units', 'status',
@@ -78,24 +78,24 @@ def generate_table_a2(conn, year):
     # Projects with entitled, bp_issued, or co_date in the reporting year
     cursor.execute('''
         SELECT
-            id, address, apn, permits, net_units, vli_units, status,
-            app_filed_date, app_complete_date, entitled_date, bp_issued_date, co_date,
+            id, address_display, apn, permits, units, vli_units, status,
+            filed, complete, entitled, bp_issued, co_date,
             density_bonus, sb35_flag, sb330_flag, ab2011_flag,
             developer, architect, construction_status,
             CASE
                 WHEN co_date LIKE ? THEN 'CO Issued'
-                WHEN bp_issued_date LIKE ? THEN 'BP Issued'
-                WHEN entitled_date LIKE ? THEN 'Entitled'
+                WHEN bp_issued LIKE ? THEN 'BP Issued'
+                WHEN entitled LIKE ? THEN 'Entitled'
             END as milestone_achieved
         FROM projects
-        WHERE entitled_date LIKE ? OR bp_issued_date LIKE ? OR co_date LIKE ?
+        WHERE entitled LIKE ? OR bp_issued LIKE ? OR co_date LIKE ?
         ORDER BY
             CASE
                 WHEN co_date LIKE ? THEN 1
-                WHEN bp_issued_date LIKE ? THEN 2
-                WHEN entitled_date LIKE ? THEN 3
+                WHEN bp_issued LIKE ? THEN 2
+                WHEN entitled LIKE ? THEN 3
             END,
-            net_units DESC
+            units DESC
     ''', tuple([f'{year}%'] * 9))
 
     columns = ['id', 'address', 'apn', 'permits', 'net_units', 'vli_units', 'status',
@@ -126,26 +126,117 @@ def generate_table_a2(conn, year):
         }
     }
 
-def generate_table_b(conn, year):
+def generate_table_b(conn, year, adu_count=0):
     """
-    Table B: Developer Summary
-    Units permitted by developer with affordability breakdown
+    Table B: RHNA Progress by Income Level
+    Shows permitted units (BP issued only) through the reporting year against RHNA targets
+    RHNA credit requires building permit issuance, not just entitlement
     """
     cursor = conn.cursor()
 
-    # Developer summary for projects with BP issued or CO in the year
+    # Berkeley's 6th Cycle RHNA allocation (2023-2031)
+    rhna_targets = {
+        "very_low": 1786,
+        "low": 1028,
+        "moderate": 1452,
+        "above_moderate": 4668,
+        "total": 8934
+    }
+
+    # ADU affordability split (ABAG 30/30/30/10)
+    adu_vli = round(adu_count * 0.30)
+    adu_low = round(adu_count * 0.30)
+    adu_mod = round(adu_count * 0.30)
+    adu_above = adu_count - adu_vli - adu_low - adu_mod
+
+    # Get permitted units - ONLY projects with BP issued (RHNA credit requirement)
+    cursor.execute('''
+        SELECT
+            SUM(COALESCE(vli_units, 0)) as vli_units,
+            SUM(units) as total_units
+        FROM projects
+        WHERE bp_issued IS NOT NULL AND bp_issued != ''
+    ''')
+    row = cursor.fetchone()
+    bp_vli = row[0] or 0
+    bp_total = row[1] or 0
+
+    # Income breakdown for BP-issued projects:
+    # - VLI: actual vli_units from database
+    # - Low/Moderate: we have no LI or MOD columns for multifamily, so 0
+    # - Above Moderate: total units minus VLI
+    # Then add ADUs with ABAG 30/30/30/10 split
+    vli_permitted = bp_vli + adu_vli
+    low_permitted = adu_low  # No Low Income data from multifamily projects
+    mod_permitted = adu_mod  # No Moderate Income data from multifamily projects
+    above_mod = (bp_total - bp_vli) + adu_above
+    total_permitted = bp_total + adu_count
+
+    income_levels = [
+        {
+            "income_level": "Very Low",
+            "rhna_target": rhna_targets["very_low"],
+            "permitted": vli_permitted,
+            "percent_of_target": round(vli_permitted / rhna_targets["very_low"] * 100, 1) if rhna_targets["very_low"] > 0 else 0
+        },
+        {
+            "income_level": "Low",
+            "rhna_target": rhna_targets["low"],
+            "permitted": low_permitted,
+            "percent_of_target": round(low_permitted / rhna_targets["low"] * 100, 1) if rhna_targets["low"] > 0 else 0
+        },
+        {
+            "income_level": "Moderate",
+            "rhna_target": rhna_targets["moderate"],
+            "permitted": mod_permitted,
+            "percent_of_target": round(mod_permitted / rhna_targets["moderate"] * 100, 1) if rhna_targets["moderate"] > 0 else 0
+        },
+        {
+            "income_level": "Above Moderate",
+            "rhna_target": rhna_targets["above_moderate"],
+            "permitted": above_mod,
+            "percent_of_target": round(above_mod / rhna_targets["above_moderate"] * 100, 1) if rhna_targets["above_moderate"] > 0 else 0
+        },
+        {
+            "income_level": "Total",
+            "rhna_target": rhna_targets["total"],
+            "permitted": total_permitted,
+            "percent_of_target": round(total_permitted / rhna_targets["total"] * 100, 1) if rhna_targets["total"] > 0 else 0
+        }
+    ]
+
+    return {
+        "title": f"Table B: RHNA Progress by Income Level Through {year}",
+        "description": f"Cumulative permitted units through {year} against 6th Cycle RHNA targets (2023-2031)",
+        "income_levels": income_levels,
+        "summary": {
+            "total_permitted": total_permitted,
+            "total_rhna": rhna_targets["total"],
+            "percent_of_goal": round(total_permitted / rhna_targets["total"] * 100, 1),
+            "adu_count": adu_count
+        }
+    }
+
+def generate_developer_summary(conn, year):
+    """
+    Supplemental: Developer Summary
+    Units permitted (BP issued) by developer with affordability breakdown
+    """
+    cursor = conn.cursor()
+
+    # Developer summary for projects with BP issued only (RHNA credit)
     cursor.execute('''
         SELECT
             COALESCE(developer, 'Unknown/Individual') as developer_name,
             COUNT(*) as project_count,
-            SUM(net_units) as total_units,
+            SUM(units) as total_units,
             SUM(COALESCE(vli_units, 0)) as vli_units,
             SUM(CASE WHEN density_bonus = 1 THEN 1 ELSE 0 END) as density_bonus_projects
         FROM projects
-        WHERE bp_issued_date LIKE ? OR co_date LIKE ?
+        WHERE bp_issued IS NOT NULL AND bp_issued != ''
         GROUP BY COALESCE(developer, 'Unknown/Individual')
         ORDER BY total_units DESC
-    ''', (f'{year}%', f'{year}%'))
+    ''')
 
     rows = []
     for row in cursor.fetchall():
@@ -159,8 +250,8 @@ def generate_table_b(conn, year):
         })
 
     return {
-        "title": f"Table B: Developer Summary for {year}",
-        "description": f"Units permitted by developer for projects with BP issued or CO in {year}",
+        "title": f"Supplemental: Developer Summary Through {year}",
+        "description": f"Units permitted by developer for projects with BP issued or CO",
         "developers": rows,
         "summary": {
             "total_developers": len([r for r in rows if r['developer'] != 'Unknown/Individual']),
@@ -170,44 +261,81 @@ def generate_table_b(conn, year):
         }
     }
 
-def generate_rhna_progress(conn, year):
+def generate_rhna_progress(conn, year, adu_count=0):
     """
     RHNA Progress Summary
-    Compare progress against RHNA allocation
+    RHNA credit requires building permit issuance - NOT just entitlement or pipeline
+    Shows both: 1) RHNA credit (BP issued only) 2) Pipeline (all projects)
     """
     cursor = conn.cursor()
 
     # Berkeley's 6th Cycle RHNA allocation (2023-2031)
     rhna_allocation = {
-        "very_low": 2446,
-        "low": 1408,
-        "moderate": 1416,
-        "above_moderate": 3664,
+        "very_low": 1786,
+        "low": 1028,
+        "moderate": 1452,
+        "above_moderate": 4668,
         "total": 8934
     }
 
-    # Count units by affordability level for all years up to reporting year
+    # RHNA CREDIT: Only projects with BP issued (this is what counts for HCD)
     cursor.execute('''
         SELECT
-            SUM(CASE WHEN bp_issued_date IS NOT NULL OR co_date IS NOT NULL THEN net_units ELSE 0 END) as total_permitted,
-            SUM(CASE WHEN bp_issued_date IS NOT NULL OR co_date IS NOT NULL THEN COALESCE(vli_units, 0) ELSE 0 END) as vli_permitted,
-            SUM(CASE WHEN co_date IS NOT NULL THEN net_units ELSE 0 END) as total_completed,
-            SUM(CASE WHEN co_date IS NOT NULL THEN COALESCE(vli_units, 0) ELSE 0 END) as vli_completed
+            SUM(units) as total_units,
+            SUM(COALESCE(vli_units, 0)) as vli_units
         FROM projects
-        WHERE bp_issued_date <= ? OR co_date <= ?
-    ''', (f'{year}-12-31', f'{year}-12-31'))
+        WHERE bp_issued IS NOT NULL AND bp_issued != ''
+    ''')
+    bp_row = cursor.fetchone()
+    bp_issued_units = bp_row[0] or 0
+    bp_issued_vli = bp_row[1] or 0
 
-    row = cursor.fetchone()
+    # RHNA credit = BP-issued units + ADUs
+    rhna_credit_units = bp_issued_units + adu_count
+    rhna_credit_percent = round(rhna_credit_units / rhna_allocation['total'] * 100, 1)
+
+    # PIPELINE: All projects (for context, not RHNA credit)
+    cursor.execute('''
+        SELECT
+            SUM(units) as total_units,
+            SUM(COALESCE(vli_units, 0)) as vli_units
+        FROM projects
+    ''')
+    pipeline_row = cursor.fetchone()
+    pipeline_units = pipeline_row[0] or 0
+    pipeline_vli = pipeline_row[1] or 0
+
+    # Completed units (CO issued)
+    cursor.execute('''
+        SELECT
+            SUM(units) as total_units,
+            SUM(COALESCE(vli_units, 0)) as vli_units
+        FROM projects
+        WHERE co_date IS NOT NULL AND co_date != ''
+    ''')
+    co_row = cursor.fetchone()
+    completed_units = co_row[0] or 0
+    completed_vli = co_row[1] or 0
 
     return {
         "title": f"RHNA Progress Through {year}",
+        "description": "RHNA credit requires building permit issuance. Pipeline units shown separately.",
         "allocation": rhna_allocation,
-        "progress": {
-            "total_permitted": row[0] or 0,
-            "vli_permitted": row[1] or 0,
-            "total_completed": row[2] or 0,
-            "vli_completed": row[3] or 0,
-            "percent_of_goal": ((row[0] or 0) / rhna_allocation['total'] * 100) if rhna_allocation['total'] > 0 else 0
+        "rhna_credit": {
+            "bp_issued_units": bp_issued_units,
+            "adu_units": adu_count,
+            "total_credit": rhna_credit_units,
+            "vli_units": bp_issued_vli,
+            "percent_of_goal": rhna_credit_percent
+        },
+        "pipeline": {
+            "total_units": pipeline_units,
+            "vli_units": pipeline_vli,
+            "note": "Pipeline units do NOT count toward RHNA until BP is issued"
+        },
+        "completed": {
+            "total_units": completed_units,
+            "vli_units": completed_vli
         }
     }
 
@@ -242,18 +370,20 @@ def generate_adu_summary(year, adu_count=0):
 def generate_stalled_projects(conn):
     """
     Stalled Projects Analysis
-    Projects that haven't progressed in 12+ months
+    Projects entitled but not yet permitted (potential stalled projects)
     """
     cursor = conn.cursor()
 
+    # Get entitled projects without BP issued
     cursor.execute('''
         SELECT
-            id, address, net_units, status, developer,
-            app_complete_date, entitled_date, bp_issued_date,
+            id, address_display, units, status, developer,
+            complete, entitled, bp_issued,
             accela_status_date
         FROM projects
-        WHERE is_stalled = 1
-        ORDER BY net_units DESC
+        WHERE entitled IS NOT NULL AND entitled != ''
+          AND (bp_issued IS NULL OR bp_issued = '')
+        ORDER BY units DESC
     ''')
 
     columns = ['id', 'address', 'net_units', 'status', 'developer',
@@ -265,7 +395,7 @@ def generate_stalled_projects(conn):
 
     return {
         "title": "Stalled Projects",
-        "description": "Projects flagged as stalled (entitled 12+ months without BP, or in review 12+ months)",
+        "description": "Projects entitled but not yet issued building permits",
         "projects": rows,
         "summary": {
             "total_stalled": len(rows),
@@ -318,13 +448,18 @@ def main():
         print(f"  {table_a2['summary']['total_projects']} projects, {table_a2['summary']['total_units']} units")
         print(f"  Entitled: {table_a2['summary']['entitled_in_year']}, BP Issued: {table_a2['summary']['bp_issued_in_year']}, CO Issued: {table_a2['summary']['co_issued_in_year']}")
 
-        print(f"\nGenerating Table B (Developer Summary for {year})...")
-        table_b = generate_table_b(conn, year)
-        print(f"  {table_b['summary']['total_developers']} developers, {table_b['summary']['total_units']} units")
+        print(f"\nGenerating Table B (RHNA Progress by Income Level)...")
+        table_b = generate_table_b(conn, year, args.adus)
+        print(f"  {table_b['summary']['total_permitted']} units permitted, {table_b['summary']['percent_of_goal']}% of RHNA goal")
+
+        print(f"\nGenerating Developer Summary...")
+        developer_summary = generate_developer_summary(conn, year)
+        print(f"  {developer_summary['summary']['total_developers']} developers, {developer_summary['summary']['total_units']} units")
 
         print(f"\nGenerating RHNA Progress through {year}...")
-        rhna = generate_rhna_progress(conn, year)
-        print(f"  {rhna['progress']['total_permitted']} permitted, {rhna['progress']['percent_of_goal']:.1f}% of RHNA goal")
+        rhna = generate_rhna_progress(conn, year, args.adus)
+        print(f"  RHNA Credit: {rhna['rhna_credit']['total_credit']} units ({rhna['rhna_credit']['percent_of_goal']}% of goal)")
+        print(f"  Pipeline (not RHNA credit): {rhna['pipeline']['total_units']} units")
 
         print("\nGenerating Stalled Projects Report...")
         stalled = generate_stalled_projects(conn)
@@ -344,6 +479,7 @@ def main():
             "table_a": table_a,
             "table_a2": table_a2,
             "table_b": table_b,
+            "developer_summary": developer_summary,
             "adu_summary": adu_summary,
             "rhna_progress": rhna,
             "stalled_projects": stalled
@@ -361,7 +497,9 @@ def main():
         if args.format in ['csv', 'both']:
             write_csv(table_a, output_path, f'table_a_{year}.csv')
             write_csv(table_a2, output_path, f'table_a2_{year}.csv')
-            write_csv(table_b, output_path, f'table_b_{year}.csv')
+            # Table B uses income_levels key
+            write_csv({"projects": table_b.get('income_levels', [])}, output_path, f'table_b_{year}.csv')
+            write_csv(developer_summary, output_path, f'developer_summary_{year}.csv')
             write_csv(stalled, output_path, f'stalled_{year}.csv')
 
         # Print summary
@@ -377,8 +515,15 @@ def main():
             print(f"\nADU/JADU Permits: {adu_summary['total_adus']} units (ABAG 30/30/30/10 split)")
             split = adu_summary['affordability_split']
             print(f"  - Very Low: {split['very_low_income']}, Low: {split['low_income']}, Mod: {split['moderate_income']}, Above Mod: {split['above_moderate_income']}")
-        print(f"\nTable B (By Developer): {table_b['summary']['total_developers']} known developers")
-        print(f"RHNA Progress: {rhna['progress']['percent_of_goal']:.1f}% of 8,934 unit goal")
+        print(f"\nTable B (RHNA Progress - BP Issued Only):")
+        for level in table_b['income_levels']:
+            print(f"  {level['income_level']}: {level['permitted']} / {level['rhna_target']} ({level['percent_of_target']}%)")
+        print(f"\nRHNA Credit Summary:")
+        print(f"  BP Issued: {rhna['rhna_credit']['bp_issued_units']} units")
+        print(f"  ADUs: {rhna['rhna_credit']['adu_units']} units")
+        print(f"  Total RHNA Credit: {rhna['rhna_credit']['total_credit']} units = {rhna['rhna_credit']['percent_of_goal']}% of {rhna['allocation']['total']} goal")
+        print(f"\nPipeline (NOT RHNA Credit): {rhna['pipeline']['total_units']} units")
+        print(f"\nDeveloper Summary: {developer_summary['summary']['total_developers']} known developers")
         print(f"Stalled: {stalled['summary']['total_stalled']} projects ({stalled['summary']['total_units_at_risk']} units)")
 
         print(f"\n✓ APR {year} generated successfully!")

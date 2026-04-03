@@ -46,7 +46,7 @@ def get_projects(conn):
             id, address_display, units, status, permits, filed, complete, entitled,
             bp_issued, co_date, height_stories, height_feet,
             is_uc_project, construction_status, developer, architect, description,
-            latitude, longitude, density_bonus, vli_units
+            latitude, longitude, density_bonus, vli_units, processing_days
         FROM projects
         ORDER BY units DESC
     ''')
@@ -91,7 +91,7 @@ def get_projects(conn):
             "estimated_completion": None,
             "accela_status": None,
             "accela_status_date": None,
-            "processing_days": None,
+            "processing_days": row[21],  # From database
             "height_stories": row[10],  # From database
             "height_feet": row[11],      # From database
             "app_packet_mb": 0,

@@ -46,7 +46,9 @@ def get_projects(conn):
             id, address_display, units, status, permits, filed, complete, entitled,
             bp_issued, co_date, height_stories, height_feet,
             is_uc_project, construction_status, developer, architect, description,
-            latitude, longitude, density_bonus, vli_units, processing_days
+            latitude, longitude, density_bonus, vli_units, processing_days,
+            apn, owner, accela_status, accela_status_date, construction_start,
+            estimated_completion, sb35_flag, sb330_flag, ab2011_flag, app_packet_mb
         FROM projects
         ORDER BY units DESC
     ''')
@@ -60,8 +62,8 @@ def get_projects(conn):
         projects.append({
             "id": row[0],
             "address": row[1],
-            "apn": None,
-            "owner": None,
+            "apn": row[22],  # From database
+            "owner": row[23],  # From database
             "units": row[2] or 0,
             "new_units": row[2] or 0,
             "old_units": 0,
@@ -78,23 +80,23 @@ def get_projects(conn):
             "vli_units": row[20] or 0,  # From database
             "density_bonus": bool(row[19]),  # From database (1 = True)
             "density_bonus_pct": None,
-            "sb330": False,
-            "sb35": False,
-            "ab2011": False,
+            "sb330": bool(row[29]),  # From database
+            "sb35": bool(row[28]),   # From database
+            "ab2011": bool(row[30]), # From database
             "app_filed": row[5],
             "app_complete": row[6],
             "entitled": row[7],
             "bp_issued": row[8],
             "co_date": co_date,
-            "construction_start": None,
+            "construction_start": row[26],  # From database
             "construction_status": row[13],  # From database
-            "estimated_completion": None,
-            "accela_status": None,
-            "accela_status_date": None,
+            "estimated_completion": row[27],  # From database
+            "accela_status": row[24],  # From database
+            "accela_status_date": row[25],  # From database
             "processing_days": row[21],  # From database
             "height_stories": row[10],  # From database
             "height_feet": row[11],      # From database
-            "app_packet_mb": 0,
+            "app_packet_mb": row[31] or 0,  # From database
             "total_fees": 0,
             "fee_per_unit": 0,
             "fee_count": 0,

@@ -206,9 +206,9 @@ def get_staff(conn):
         SELECT
             marked_by,
             COUNT(*) as actions,
-            COUNT(DISTINCT project_id) as projects
+            COUNT(DISTINCT address) as projects
         FROM permit_events
-        WHERE marked_by IS NOT NULL AND marked_by != ''
+        WHERE marked_by IS NOT NULL AND length(marked_by) > 3
         GROUP BY marked_by
         ORDER BY actions DESC
     ''')

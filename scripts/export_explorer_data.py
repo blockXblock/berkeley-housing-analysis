@@ -48,7 +48,8 @@ def get_projects(conn):
             is_uc_project, construction_status, developer, architect, description,
             latitude, longitude, density_bonus, vli_units, processing_days,
             apn, owner, accela_status, accela_status_date, construction_start,
-            estimated_completion, sb35_flag, sb330_flag, ab2011_flag, app_packet_mb
+            estimated_completion, sb35_flag, sb330_flag, ab2011_flag, app_packet_mb,
+            total_fees
         FROM projects
         ORDER BY units DESC
     ''')
@@ -97,7 +98,7 @@ def get_projects(conn):
             "height_stories": row[10],  # From database
             "height_feet": row[11],      # From database
             "app_packet_mb": row[31] or 0,  # From database
-            "total_fees": 0,
+            "total_fees": row[32] or 0,  # From database (calculated from permit_fees)
             "fee_per_unit": 0,
             "fee_count": 0,
             "permit_type": "Unknown",

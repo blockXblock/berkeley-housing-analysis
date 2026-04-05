@@ -3372,18 +3372,49 @@
                 devTableBody.innerHTML = '';
                 players.developers.forEach((d, i) => {
                     const row = document.createElement('tr');
+                    const isPanoramic = d.name && d.name.toLowerCase().includes('panoramic');
                     row.className = i % 2 === 0 ? 'bg-white' : 'bg-gray-50';
                     const projectCount = Array.isArray(d.projects) ? d.projects.length : d.projects;
                     const projectList = Array.isArray(d.projects) ? d.projects.slice(0, 3).join(', ') : '';
-                    row.innerHTML = `
-                        <td class="px-3 py-2 text-left font-medium">${d.name}</td>
-                        <td class="px-3 py-2 text-right">${projectCount}</td>
-                        <td class="px-3 py-2 text-right font-bold text-indigo-600">${(d.total_units || 0).toLocaleString()}</td>
-                        <td class="px-3 py-2 text-right ${d.total_fees > 0 ? 'text-green-600' : 'text-gray-400'}">$${((d.total_fees || 0) / 1000).toFixed(0)}K</td>
-                        <td class="px-3 py-2 text-left text-xs text-gray-500">${projectList}${projectCount > 3 ? '...' : ''}</td>
-                    `;
+
+                    if (isPanoramic) {
+                        // Special row for Panoramic Interests with historical context
+                        row.innerHTML = `
+                            <td class="px-3 py-2 text-left">
+                                <div class="font-medium">${d.name}</div>
+                                <div class="text-xs text-gray-500 mt-1">Historical: 24 projects, 700+ units built since 1990</div>
+                                <div class="text-xs text-purple-600">Pioneer in modular/prefab construction</div>
+                            </td>
+                            <td class="px-3 py-2 text-right">${projectCount}</td>
+                            <td class="px-3 py-2 text-right font-bold text-indigo-600">${(d.total_units || 0).toLocaleString()}</td>
+                            <td class="px-3 py-2 text-right ${d.total_fees > 0 ? 'text-green-600' : 'text-gray-400'}">$${((d.total_fees || 0) / 1000).toFixed(0)}K</td>
+                            <td class="px-3 py-2 text-left text-xs text-gray-500">
+                                ${projectList}${projectCount > 3 ? '...' : ''}
+                                <div class="text-purple-600 mt-1">Prefab: 2711 Shattuck (2018), 2274 Shattuck, 2712 Telegraph</div>
+                            </td>
+                        `;
+                    } else {
+                        row.innerHTML = `
+                            <td class="px-3 py-2 text-left font-medium">${d.name}</td>
+                            <td class="px-3 py-2 text-right">${projectCount}</td>
+                            <td class="px-3 py-2 text-right font-bold text-indigo-600">${(d.total_units || 0).toLocaleString()}</td>
+                            <td class="px-3 py-2 text-right ${d.total_fees > 0 ? 'text-green-600' : 'text-gray-400'}">$${((d.total_fees || 0) / 1000).toFixed(0)}K</td>
+                            <td class="px-3 py-2 text-left text-xs text-gray-500">${projectList}${projectCount > 3 ? '...' : ''}</td>
+                        `;
+                    }
                     devTableBody.appendChild(row);
                 });
+                // Add note about pipeline vs historical counts
+                const devTable = devTableBody.closest('table');
+                if (devTable && devTable.parentElement) {
+                    let noteEl = devTable.parentElement.querySelector('.dev-note');
+                    if (!noteEl) {
+                        noteEl = document.createElement('p');
+                        noteEl.className = 'dev-note text-xs text-gray-500 mt-2 italic';
+                        noteEl.textContent = 'Pipeline counts reflect active projects in our database. Historical totals for Panoramic Interests include completed projects from 1990-2026 per the developer\'s website.';
+                        devTable.parentElement.appendChild(noteEl);
+                    }
+                }
             }
 
             // Architect Table - new format

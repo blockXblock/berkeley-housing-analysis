@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berkeley Housing Pipeline - Driving Survey Log</title>
+    <style>
+        @media print {
+            .no-print { display: none !important; }
+            .page-break { page-break-before: always; }
+            body { font-size: 11pt; }
+            .route-section { page-break-inside: avoid; }
+            .project-row { page-break-inside: avoid; }
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            max-width: 11in;
+            margin: 0 auto;
+            padding: 0.5in;
+            line-height: 1.4;
+        }
+
+        h1 {
+            font-size: 24pt;
+            margin-bottom: 5px;
+            border-bottom: 3px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .header-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 12pt;
+        }
+
+        .date-field {
+            border-bottom: 1px solid #000;
+            min-width: 150px;
+            display: inline-block;
+        }
+
+        h2 {
+            font-size: 16pt;
+            background: #2563eb;
+            color: white;
+            padding: 8px 12px;
+            margin: 25px 0 10px 0;
+            border-radius: 4px;
+        }
+
+        .route-stats {
+            font-size: 11pt;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .maps-link {
+            display: inline-block;
+            background: #22c55e;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 10pt;
+            margin-bottom: 15px;
+        }
+
+        .maps-link:hover {
+            background: #16a34a;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 10pt;
+        }
+
+        th {
+            background: #f3f4f6;
+            padding: 6px 4px;
+            text-align: left;
+            font-weight: bold;
+            border: 1px solid #ccc;
+            font-size: 9pt;
+        }
+
+        td {
+            padding: 8px 4px;
+            border: 1px solid #ccc;
+            vertical-align: top;
+        }
+
+        .address-cell {
+            font-weight: bold;
+            font-size: 11pt;
+            min-width: 140px;
+        }
+
+        .units-cell {
+            text-align: center;
+            font-weight: bold;
+            font-size: 12pt;
+            color: #2563eb;
+        }
+
+        .status-cell {
+            font-size: 9pt;
+        }
+
+        .expected-cell {
+            font-size: 9pt;
+            color: #666;
+            font-style: italic;
+        }
+
+        .checkbox-cell {
+            text-align: center;
+            font-size: 8pt;
+            padding: 4px 2px;
+        }
+
+        .checkbox-cell input {
+            width: 16px;
+            height: 16px;
+        }
+
+        .notes-row td {
+            background: #fefce8;
+            padding: 4px 8px;
+        }
+
+        .notes-line {
+            border-bottom: 1px solid #ccc;
+            min-height: 24px;
+            margin-top: 4px;
+        }
+
+        .stalled-row {
+            background: #fef2f2 !important;
+        }
+
+        .stalled-row .address-cell {
+            color: #dc2626;
+        }
+
+        .priority-badge {
+            background: #dc2626;
+            color: white;
+            font-size: 8pt;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-left: 5px;
+        }
+
+        .construction-badge {
+            background: #f59e0b;
+            color: white;
+            font-size: 8pt;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .completed-badge {
+            background: #22c55e;
+            color: white;
+            font-size: 8pt;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .legend {
+            background: #f9fafb;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 10pt;
+        }
+
+        .legend-item {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        .start-point {
+            background: #dbeafe;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 11pt;
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 2px solid #333;
+            font-size: 10pt;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Berkeley Housing Pipeline - Driving Survey Log</h1>
+
+    <div class="header-info">
+        <div>
+            <strong>Surveyor:</strong> <span class="date-field"></span>
+        </div>
+        <div>
+            <strong>Date:</strong> <span class="date-field"></span>
+        </div>
+        <div>
+            <strong>Weather:</strong> <span class="date-field"></span>
+        </div>
+    </div>
+
+    <div class="start-point">
+        <strong>Starting Point:</strong> 2811 Benvenue Avenue, Berkeley CA
+    </div>
+
+    <div class="legend">
+        <strong>Legend:</strong>
+        <span class="legend-item"><span class="priority-badge">VERIFY</span> = Priority verification needed (stalled/pending)</span>
+        <span class="legend-item"><span class="construction-badge">ACTIVE</span> = Under construction</span>
+        <span class="legend-item"><span class="completed-badge">DONE</span> = Completed</span>
+    </div>
+
+    <!-- ROUTE 1: Southside/Telegraph -->
+    <div class="route-section">
+        <h2>Route 1 - Southside / Telegraph</h2>
+        <div class="route-stats">17 projects | Durant, Telegraph, Dwight, Ellsworth, College, Haste, Channing, Bancroft (south of campus)</div>
+
+        <a href="https://www.google.com/maps/dir/2811+Benvenue+Ave,+Berkeley,+CA/2200+Bancroft+Way,+Berkeley,+CA/2462+Bancroft+Way,+Berkeley,+CA/2480+Bancroft+Way,+Berkeley,+CA/2530+Bancroft+Way,+Berkeley,+CA/2680+Bancroft+Way,+Berkeley,+CA/2298+Durant+Ave,+Berkeley,+CA/2037+Durant+Ave,+Berkeley,+CA/2425+Durant+Ave,+Berkeley,+CA/2538+Durant+Ave,+Berkeley,+CA" target="_blank" class="maps-link no-print">Google Maps Route 1A (Bancroft/Durant)</a>
+
+        <a href="https://www.google.com/maps/dir/2538+Durant+Ave,+Berkeley,+CA/2300+Ellsworth+St,+Berkeley,+CA/2127+Dwight+Way,+Berkeley,+CA/2317+Channing+Way,+Berkeley,+CA/2442+Haste+St,+Berkeley,+CA/2587+Telegraph+Ave,+Berkeley,+CA/2800+Telegraph+Ave,+Berkeley,+CA/3030+Telegraph+Ave,+Berkeley,+CA/2555+College+Ave,+Berkeley,+CA" target="_blank" class="maps-link no-print">Google Maps Route 1B (South)</a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:160px">Address</th>
+                    <th style="width:45px">Units</th>
+                    <th style="width:100px">Database Status</th>
+                    <th style="width:100px">Expected to See</th>
+                    <th style="width:30px">Vacant</th>
+                    <th style="width:30px">Demo</th>
+                    <th style="width:30px">Found</th>
+                    <th style="width:30px">Frame</th>
+                    <th style="width:30px">Top</th>
+                    <th style="width:30px">Finish</th>
+                    <th style="width:30px">Occup</th>
+                    <th style="width:30px">None</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 2200 BANCROFT Way -->
+                <tr>
+                    <td class="address-cell">2200 BANCROFT Way <span class="construction-badge">ACTIVE</span></td>
+                    <td class="units-cell">550</td>
+                    <td class="status-cell">Under Construction<br><small>foundation</small></td>
+                    <td class="expected-cell">Foundation/excavation visible</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2462 BANCROFT Way -->
+                <tr class="stalled-row">
+                    <td class="address-cell">2462 BANCROFT Way <span class="priority-badge">VERIFY</span></td>
+                    <td class="units-cell">66</td>
+                    <td class="status-cell">Approved<br><small>Entitled 2024-07</small></td>
+                    <td class="expected-cell">Vacant lot or existing building?</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2480 Bancroft Way -->
+                <tr class="stalled-row">
+                    <td class="address-cell">2480 Bancroft Way <span class="priority-badge">VERIFY</span></td>
+                    <td class="units-cell">28</td>
+                    <td class="status-cell">Approved<br><small>Entitled 2023-10</small></td>
+                    <td class="expected-cell">Entitled 18mo ago - any activity?</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2530 BANCROFT Way -->
+                <tr class="stalled-row">
+                    <td class="address-cell">2530 BANCROFT Way <span class="priority-badge">VERIFY</span></td>
+                    <td class="units-cell">110</td>
+                    <td class="status-cell">Approved<br><small>Entitled 2024-12</small></td>
+                    <td class="expected-cell">Recently entitled - vacant lot?</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2680 BANCROFT Way -->
+                <tr class="stalled-row">
+                    <td class="address-cell">2680 BANCROFT Way <span class="priority-badge">VERIFY</span></td>
+                    <td class="units-cell">37</td>
+                    <td class="status-cell">Approved<br><small>Entitled 2025-06</small></td>
+                    <td class="expected-cell">Just entitled - existing bldg?</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2298 DURANT Ave -->
+                <tr class="stalled-row">
+                    <td class="address-cell">2298 DURANT Ave <span class="priority-badge">VERIFY</span></td>
+                    <td class="units-cell">65</td>
+                    <td class="status-cell">Pending Final Action</td>
+                    <td class="expected-cell">Not yet entitled - existing bldg</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2037 DURANT Ave -->
+                <tr class="stalled-row">
+                    <td class="address-cell">2037 DURANT Ave <span class="priority-badge">VERIFY</span></td>
+                    <td class="units-cell">74</td>
+                    <td class="status-cell">Approved<br><small>Entitled 2024-06</small></td>
+                    <td class="expected-cell">Entitled 1yr ago - any activity?</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2425 DURANT Ave -->
+                <tr class="stalled-row">
+                    <td class="address-cell">2425 DURANT Ave <span class="priority-badge">VERIFY</span></td>
+                    <td class="units-cell">250</td>
+                    <td class="status-cell">Pending Final Action<br><small>Entitled 2025-10</small></td>
+                    <td class="expected-cell">Recently entitled - existing bldg?</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2538 DURANT Ave -->
+                <tr>
+                    <td class="address-cell">2538 DURANT Ave <span class="construction-badge">ACTIVE</span></td>
+                    <td class="units-cell">83</td>
+                    <td class="status-cell">Under Construction<br><small>foundation</small></td>
+                    <td class="expected-cell">Foundation/excavation visible</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2300 ELLSWORTH St -->
+                <tr>
+                    <td class="address-cell">2300 ELLSWORTH St <span class="construction-badge">ACTIVE</span></td>
+                    <td class="units-cell">69</td>
+                    <td class="status-cell">Demolition Underway<br><small>demolition</small></td>
+                    <td class="expected-cell">Active demolition or cleared lot</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2127 DWIGHT Way -->
+                <tr>
+                    <td class="address-cell">2127 DWIGHT Way <span class="completed-badge">DONE</span></td>
+                    <td class="units-cell">58</td>
+                    <td class="status-cell">Completed</td>
+                    <td class="expected-cell">Finished building, likely occupied</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2317 CHANNING Way -->
+                <tr class="stalled-row">
+                    <td class="address-cell">2317 CHANNING Way <span class="priority-badge">VERIFY</span></td>
+                    <td class="units-cell">22</td>
+                    <td class="status-cell">Approved<br><small>BP 2022-11</small></td>
+                    <td class="expected-cell">BP issued 2+ yrs ago - any progress?</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2442 HASTE St -->
+                <tr class="stalled-row">
+                    <td class="address-cell">2442 HASTE St <span class="priority-badge">VERIFY</span></td>
+                    <td class="units-cell">34</td>
+                    <td class="status-cell">Approved<br><small>Entitled 2025-09</small></td>
+                    <td class="expected-cell">Recently entitled - existing bldg?</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2587 TELEGRAPH Ave -->
+                <tr>
+                    <td class="address-cell">2587 TELEGRAPH Ave <span class="construction-badge">ACTIVE</span></td>
+                    <td class="units-cell">52</td>
+                    <td class="status-cell">Under Construction<br><small>topped_out</small></td>
+                    <td class="expected-cell">Structure complete, finishing</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2800 TELEGRAPH Ave -->
+                <tr class="stalled-row">
+                    <td class="address-cell">2800 TELEGRAPH Ave <span class="priority-badge">VERIFY</span></td>
+                    <td class="units-cell">18</td>
+                    <td class="status-cell">Building Permits Filed</td>
+                    <td class="expected-cell">BP filed - existing bldg?</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 3030 TELEGRAPH Ave -->
+                <tr>
+                    <td class="address-cell">3030 TELEGRAPH Ave <span class="completed-badge">DONE</span></td>
+                    <td class="units-cell">144</td>
+                    <td class="status-cell">Completed</td>
+                    <td class="expected-cell">Finished building, likely occupied</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2555 COLLEGE Ave -->
+                <tr>
+                    <td class="address-cell">2555 COLLEGE Ave <span class="completed-badge">DONE</span></td>
+                    <td class="units-cell">12</td>
+                    <td class="status-cell">Completed</td>
+                    <td class="expected-cell">Finished building (Panoramic)</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- ROUTE 2: Downtown Shattuck/Kittredge -->
+    <div class="route-section">
+        <h2>Route 2 - Downtown / Shattuck Corridor</h2>
+        <div class="route-stats">10 projects | Shattuck (1700-2700), Kittredge, Center, Milvia, Oxford, Virginia</div>
+
+        <a href="https://www.google.com/maps/dir/2811+Benvenue+Ave,+Berkeley,+CA/1752+Shattuck+Ave,+Berkeley,+CA/1974+Shattuck+Ave,+Berkeley,+CA/2274+Shattuck+Ave,+Berkeley,+CA/2655+Shattuck+Ave,+Berkeley,+CA/2138+Kittredge+St,+Berkeley,+CA/2100+Milvia+St,+Berkeley,+CA/2109+Virginia+St,+Berkeley,+CA/1899+Oxford+St,+Berkeley,+CA/1950+Oxford+St,+Berkeley,+CA/2128+Oxford+St,+Berkeley,+CA" target="_blank" class="maps-link no-print">Google Maps Route 2</a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:160px">Address</th>
+                    <th style="width:45px">Units</th>
+                    <th style="width:100px">Database Status</th>
+                    <th style="width:100px">Expected to See</th>
+                    <th style="width:30px">Vacant</th>
+                    <th style="width:30px">Demo</th>
+                    <th style="width:30px">Found</th>
+                    <th style="width:30px">Frame</th>
+                    <th style="width:30px">Top</th>
+                    <th style="width:30px">Finish</th>
+                    <th style="width:30px">Occup</th>
+                    <th style="width:30px">None</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 1752 SHATTUCK Ave -->
+                <tr>
+                    <td class="address-cell">1752 SHATTUCK Ave <span class="completed-badge">DONE</span></td>
+                    <td class="units-cell">68</td>
+                    <td class="status-cell">Completed</td>
+                    <td class="expected-cell">Finished building, occupied</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 1974 SHATTUCK Ave -->
+                <tr class="stalled-row">
+                    <td class="address-cell">1974 SHATTUCK Ave <span class="priority-badge">VERIFY</span></td>
+                    <td class="units-cell">599</td>
+                    <td class="status-cell">Approved<br><small>Entitled 2025-06</small></td>
+                    <td class="expected-cell">MAJOR - entitled, any demo started?</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2274 SHATTUCK Ave -->
+                <tr class="stalled-row">
+                    <td class="address-cell">2274 SHATTUCK Ave <span class="priority-badge">VERIFY</span></td>
+                    <td class="units-cell">299</td>
+                    <td class="status-cell">Approved<br><small>Entitled 2025-04</small></td>
+                    <td class="expected-cell">Panoramic prefab - any prep work?</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2655 SHATTUCK Ave -->
+                <tr class="stalled-row">
+                    <td class="address-cell">2655 SHATTUCK Ave <span class="priority-badge">VERIFY</span></td>
+                    <td class="units-cell">97</td>
+                    <td class="status-cell">Pending Final Action<br><small>Entitled 2025-08</small></td>
+                    <td class="expected-cell">Recently entitled - existing bldg?</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2138 KITTREDGE St -->
+                <tr class="stalled-row">
+                    <td class="address-cell">2138 KITTREDGE St <span class="priority-badge">VERIFY</span></td>
+                    <td class="units-cell">66</td>
+                    <td class="status-cell">Approved<br><small>Entitled 2025-10</small></td>
+                    <td class="expected-cell">Recently entitled - existing bldg?</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2100 MILVIA St -->
+                <tr class="stalled-row">
+                    <td class="address-cell">2100 MILVIA St <span class="priority-badge">VERIFY</span></td>
+                    <td class="units-cell">201</td>
+                    <td class="status-cell">Approved<br><small>Entitled 2025-07</small></td>
+                    <td class="expected-cell">Entitled - existing bldg?</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2109 VIRGINIA St -->
+                <tr class="stalled-row">
+                    <td class="address-cell">2109 VIRGINIA St <span class="priority-badge">VERIFY</span></td>
+                    <td class="units-cell">131</td>
+                    <td class="status-cell">Approved<br><small>Entitled 2026-02</small></td>
+                    <td class="expected-cell">Just entitled - existing bldg?</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 1899 OXFORD St -->
+                <tr class="stalled-row">
+                    <td class="address-cell">1899 OXFORD St <span class="priority-badge">VERIFY</span></td>
+                    <td class="units-cell">212</td>
+                    <td class="status-cell">Pending Final Action<br><small>Entitled 2026-02</small></td>
+                    <td class="expected-cell">Just entitled - existing bldg?</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 1950 OXFORD St -->
+                <tr>
+                    <td class="address-cell">1950 OXFORD St <span class="construction-badge">ACTIVE</span></td>
+                    <td class="units-cell">300</td>
+                    <td class="status-cell">Under Construction<br><small>finishing</small></td>
+                    <td class="expected-cell">Structure done, interior finishing</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2128 Oxford St -->
+                <tr class="stalled-row">
+                    <td class="address-cell">2128 Oxford St <span class="priority-badge">VERIFY</span></td>
+                    <td class="units-cell">485</td>
+                    <td class="status-cell">Approved<br><small>Entitled 2024-10</small></td>
+                    <td class="expected-cell">MAJOR - entitled 18mo, any activity?</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- ROUTE 3: University/San Pablo -->
+    <div class="route-section">
+        <h2>Route 3 - University Ave / San Pablo Corridor</h2>
+        <div class="route-stats">10 projects | University Ave, San Pablo Ave heading north/west</div>
+
+        <a href="https://www.google.com/maps/dir/2811+Benvenue+Ave,+Berkeley,+CA/1367+University+Ave,+Berkeley,+CA/1598+University+Ave,+Berkeley,+CA/1740+University+Ave,+Berkeley,+CA/2029+University+Ave,+Berkeley,+CA/1701+San+Pablo+Ave,+Berkeley,+CA/2136+San+Pablo+Ave,+Berkeley,+CA/2147+San+Pablo+Ave,+Berkeley,+CA/2198+San+Pablo+Ave,+Berkeley,+CA/2403+San+Pablo+Ave,+Berkeley,+CA/2427+San+Pablo+Ave,+Berkeley,+CA" target="_blank" class="maps-link no-print">Google Maps Route 3</a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:160px">Address</th>
+                    <th style="width:45px">Units</th>
+                    <th style="width:100px">Database Status</th>
+                    <th style="width:100px">Expected to See</th>
+                    <th style="width:30px">Vacant</th>
+                    <th style="width:30px">Demo</th>
+                    <th style="width:30px">Found</th>
+                    <th style="width:30px">Frame</th>
+                    <th style="width:30px">Top</th>
+                    <th style="width:30px">Finish</th>
+                    <th style="width:30px">Occup</th>
+                    <th style="width:30px">None</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 1367 UNIVERSITY Ave -->
+                <tr>
+                    <td class="address-cell">1367 UNIVERSITY Ave <span class="completed-badge">DONE</span></td>
+                    <td class="units-cell">39</td>
+                    <td class="status-cell">Completed</td>
+                    <td class="expected-cell">Finished building, occupied</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 1598 UNIVERSITY Ave -->
+                <tr>
+                    <td class="address-cell">1598 UNIVERSITY Ave <span class="construction-badge">ACTIVE</span></td>
+                    <td class="units-cell">207</td>
+                    <td class="status-cell">Under Construction<br><small>topped_out</small></td>
+                    <td class="expected-cell">Structure complete, finishing</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 1740 UNIVERSITY Ave -->
+                <tr class="stalled-row">
+                    <td class="address-cell">1740 UNIVERSITY Ave <span class="priority-badge">VERIFY</span></td>
+                    <td class="units-cell">12</td>
+                    <td class="status-cell">Approved</td>
+                    <td class="expected-cell">Entitled - existing bldg?</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2029 UNIVERSITY Ave -->
+                <tr class="stalled-row">
+                    <td class="address-cell">2029 UNIVERSITY Ave <span class="priority-badge">VERIFY</span></td>
+                    <td class="units-cell">240</td>
+                    <td class="status-cell">Pending Final Action<br><small>Entitled 2025-11</small></td>
+                    <td class="expected-cell">Recently entitled - existing bldg?</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 1701 SAN PABLO Ave -->
+                <tr>
+                    <td class="address-cell">1701 SAN PABLO Ave <span class="construction-badge">ACTIVE</span></td>
+                    <td class="units-cell">110</td>
+                    <td class="status-cell">Under Construction<br><small>foundation</small></td>
+                    <td class="expected-cell">Foundation/excavation visible</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2136 SAN PABLO Ave -->
+                <tr class="stalled-row">
+                    <td class="address-cell">2136 SAN PABLO Ave <span class="priority-badge">VERIFY</span></td>
+                    <td class="units-cell">125</td>
+                    <td class="status-cell">Approved<br><small>Entitled 2024-04</small></td>
+                    <td class="expected-cell">Entitled 2yr ago - any activity?</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2147 SAN PABLO Ave -->
+                <tr class="stalled-row">
+                    <td class="address-cell">2147 SAN PABLO Ave <span class="priority-badge">VERIFY</span></td>
+                    <td class="units-cell">15</td>
+                    <td class="status-cell">Pending Final Action<br><small>Entitled 2025-09</small></td>
+                    <td class="expected-cell">Recently entitled - existing bldg?</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2198 SAN PABLO Ave -->
+                <tr class="stalled-row">
+                    <td class="address-cell">2198 SAN PABLO Ave <span class="priority-badge">VERIFY</span></td>
+                    <td class="units-cell">100</td>
+                    <td class="status-cell">Entitled</td>
+                    <td class="expected-cell">Entitled - any activity?</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2403 SAN PABLO Ave -->
+                <tr>
+                    <td class="address-cell">2403 SAN PABLO Ave <span class="construction-badge">ACTIVE</span></td>
+                    <td class="units-cell">36</td>
+                    <td class="status-cell">Under Construction<br><small>foundation</small></td>
+                    <td class="expected-cell">Foundation/excavation visible</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2427 San Pablo -->
+                <tr class="stalled-row">
+                    <td class="address-cell">2427 San Pablo <span class="priority-badge">VERIFY</span></td>
+                    <td class="units-cell">78</td>
+                    <td class="status-cell">Approved<br><small>Entitled 2024-09</small></td>
+                    <td class="expected-cell">Entitled 18mo ago - any activity?</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- ROUTE 4: West Berkeley/Ashby -->
+    <div class="route-section">
+        <h2>Route 4 - West Berkeley / Ashby</h2>
+        <div class="route-stats">3 projects | Ashby Ave, Adeline St, MLK Jr Way, west side</div>
+
+        <a href="https://www.google.com/maps/dir/2811+Benvenue+Ave,+Berkeley,+CA/2001+Ashby+Ave,+Berkeley,+CA/2016+Ashby+Ave,+Berkeley,+CA/2902+Adeline+St,+Berkeley,+CA" target="_blank" class="maps-link no-print">Google Maps Route 4</a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:160px">Address</th>
+                    <th style="width:45px">Units</th>
+                    <th style="width:100px">Database Status</th>
+                    <th style="width:100px">Expected to See</th>
+                    <th style="width:30px">Vacant</th>
+                    <th style="width:30px">Demo</th>
+                    <th style="width:30px">Found</th>
+                    <th style="width:30px">Frame</th>
+                    <th style="width:30px">Top</th>
+                    <th style="width:30px">Finish</th>
+                    <th style="width:30px">Occup</th>
+                    <th style="width:30px">None</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 2001 ASHBY Ave -->
+                <tr>
+                    <td class="address-cell">2001 ASHBY Ave <span class="completed-badge">DONE</span></td>
+                    <td class="units-cell">87</td>
+                    <td class="status-cell">Completed</td>
+                    <td class="expected-cell">Finished building, occupied</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2016 ASHBY Ave -->
+                <tr>
+                    <td class="address-cell">2016 ASHBY Ave <span class="construction-badge">ACTIVE</span></td>
+                    <td class="units-cell">50</td>
+                    <td class="status-cell">Building Permits Filed<br><small>foundation</small></td>
+                    <td class="expected-cell">Foundation/excavation visible</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+
+                <!-- 2902 ADELINE St -->
+                <tr>
+                    <td class="address-cell">2902 ADELINE St <span class="construction-badge">ACTIVE</span></td>
+                    <td class="units-cell">54</td>
+                    <td class="status-cell">Under Construction<br><small>framing</small></td>
+                    <td class="expected-cell">Wood/steel framing visible</td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                </tr>
+                <tr class="notes-row"><td colspan="12">Notes: <div class="notes-line"></div></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        <p><strong>Summary:</strong> 40 projects | 5,267 total units | 4 routes</p>
+        <p><strong>Priority verification (VERIFY):</strong> Entitled projects with no construction activity detected</p>
+        <p><strong>Checkbox key:</strong> Vacant = empty lot | Demo = demolition | Found = foundation | Frame = framing | Top = topped out | Finish = exterior finishing | Occup = occupied | None = no visible activity</p>
+        <p>Generated from Berkeley Housing Pipeline database | <a href="https://blockxblock.github.io/berkeley-housing-analysis/explorer.html" class="no-print">Online Explorer</a></p>
+    </div>
+</body>
+</html>

@@ -360,9 +360,9 @@
 
             // Update fee stats
             document.getElementById('totalFeesDisplay').textContent = '$' + DATA.fees.total.toLocaleString();
-            document.getElementById('feeProjectCount').textContent = 'across ' + DATA.fees.project_count + ' projects';
+            document.getElementById('feeProjectCount').textContent = 'across ' + DATA.fees.permit_count + ' projects';
 
-            const avgFee = DATA.fees.project_count > 0 ? Math.round(DATA.fees.total / DATA.fees.project_count) : 0;
+            const avgFee = DATA.fees.permit_count > 0 ? Math.round(DATA.fees.total / DATA.fees.permit_count) : 0;
             document.getElementById('avgFeeDisplay').textContent = '$' + avgFee.toLocaleString();
 
             // Calculate avg fee per unit using DATA.fees.by_project
@@ -2468,7 +2468,7 @@
             const summaryDiv = document.getElementById('feeSummaryStats');
             if (summaryDiv) {
                 const totalFees = DATA.fees.total || 0;
-                const projectCount = DATA.fees.project_count || 0;
+                const projectCount = DATA.fees.permit_count || 0;
                 const avgFee = projectCount > 0 ? totalFees / projectCount : 0;
                 // Calculate total units from projects that have fee data
                 const projectsWithFees = DATA.projects.filter(p => p.total_fees > 0);

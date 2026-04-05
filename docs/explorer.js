@@ -496,9 +496,10 @@
             options: { scales: { y: { beginAtZero: true } } }
         });
 
-        // Trend Chart
+        // Trend Chart - only include projects that have reached a milestone
+        // Exclude projects still under review (incomplete processing time)
         const yearProcDays = {};
-        DATA.projects.filter(p => p.processing_days > 0 && p.year >= 2020).forEach(p => {
+        DATA.projects.filter(p => p.processing_days > 0 && p.year >= 2020 && (p.entitled || p.bp_issued || p.co_date)).forEach(p => {
             if (!yearProcDays[p.year]) yearProcDays[p.year] = [];
             yearProcDays[p.year].push(p.processing_days);
         });
@@ -517,6 +518,14 @@
             },
             options: { scales: { y: { beginAtZero: true } } }
         });
+        // Add note below trend chart
+        const trendCanvas = document.getElementById('trendChart');
+        if (trendCanvas && trendCanvas.parentElement) {
+            const note = document.createElement('p');
+            note.className = 'text-xs text-gray-500 mt-2 italic';
+            note.textContent = 'Processing time calculated only for projects that have reached entitlement, building permit, or certificate of occupancy. Projects still under review are excluded.';
+            trendCanvas.parentElement.appendChild(note);
+        }
 
         // Skyline Chart - highlight UC projects in gold
         // UC projects are flagged in the database with is_uc_project = 1

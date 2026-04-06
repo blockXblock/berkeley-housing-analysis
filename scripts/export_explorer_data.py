@@ -49,7 +49,7 @@ def get_projects(conn):
             latitude, longitude, density_bonus, vli_units, processing_days,
             apn, owner, accela_status, accela_status_date, construction_start,
             estimated_completion, sb35_flag, sb330_flag, ab2011_flag, app_packet_mb,
-            total_fees
+            total_fees, field_survey_date, field_survey_notes
         FROM projects
         ORDER BY units DESC
     ''')
@@ -106,7 +106,9 @@ def get_projects(conn):
             "is_uc_project": bool(row[12]),  # From database (1 = True)
             "is_stalled": False,
             "developer": row[14],  # From database
-            "architect": row[15]   # From database
+            "architect": row[15],  # From database
+            "field_survey_date": row[33],  # From database
+            "field_survey_notes": row[34]  # From database
         })
 
     return projects

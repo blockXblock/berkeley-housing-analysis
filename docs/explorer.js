@@ -925,11 +925,22 @@
                 bar.innerHTML += `<div class="absolute h-5 bg-blue-300 opacity-60" style="left:${startPct2}%;width:${Math.max(w, 0.5)}%" title="Pending Decision: ${Math.round((maxDate - complete) / (1000 * 60 * 60 * 24))} days"></div>`;
             }
 
+            // Phase 3.5: Demolition (red) - demolition_permit_date to demolition_start_date
+            const demolPermitVal = getField(p, 'demolition_permit_date');
+            const demolStartVal = getField(p, 'demolition_start_date');
+            if (demolPermitVal) {
+                const demolPermit = new Date(demolPermitVal);
+                const demolEnd = demolStartVal ? new Date(demolStartVal) : (bpIssued || maxDate);
+                const startPctDemol = (demolPermit - minDate) / (1000 * 60 * 60 * 24) / totalDays * 100;
+                const wDemol = (demolEnd - demolPermit) / (1000 * 60 * 60 * 24) / totalDays * 100;
+                bar.innerHTML += `<div class="absolute h-5 bg-red-500" style="left:${startPctDemol}%;width:${Math.max(wDemol, 0.5)}%" title="Demolition: ${Math.round((demolEnd - demolPermit) / (1000 * 60 * 60 * 24))} days"></div>`;
+            }
+
             // Phase 4: Construction (green) - Use construction_start if available, else bp_issued
             const constStartVal = getField(p, 'construction_start');
             const constEndVal = getField(p, 'construction_end');
             const constStatusVal = getField(p, 'construction_status');
-            const constructionStart = constStartVal ? new Date(constStartVal) : bpIssued;
+            const constructionStart = constStartVal ? new Date(constStartVal) : (demolStartVal ? new Date(demolStartVal) : bpIssued);
             const constructionEnd = constEndVal ? new Date(constEndVal) : (coDate || maxDate);
 
             if (constructionStart || bpIssued) {
@@ -937,7 +948,7 @@
                 const phase4End = coDate || (constStatusVal === 'occupied' ? new Date(constEndVal) : maxDate);
                 const startPct4 = (phase4Start - minDate) / (1000 * 60 * 60 * 24) / totalDays * 100;
                 const w4 = (phase4End - phase4Start) / (1000 * 60 * 60 * 24) / totalDays * 100;
-                
+
                 // Determine label based on construction_status
                 let phase4Label = 'Under Construction';
                 let bgColor = 'bg-green-500';
@@ -946,7 +957,13 @@
                     bgColor = 'bg-green-600';
                 } else if (constStatusVal === 'demolition') {
                     phase4Label = 'Demolition';
-                    bgColor = 'bg-yellow-500';
+                    bgColor = 'bg-red-500';
+                } else if (constStatusVal === 'site cleared') {
+                    phase4Label = 'Site Cleared';
+                    bgColor = 'bg-red-400';
+                } else if (constStatusVal === 'pre-demolition') {
+                    phase4Label = 'Pre-Demolition';
+                    bgColor = 'bg-red-300';
                 } else if (constStatusVal === 'foundation') {
                     phase4Label = 'Foundation';
                 } else if (constStatusVal === 'framing') {
@@ -956,7 +973,7 @@
                 } else if (constStatusVal === 'finishing') {
                     phase4Label = 'Finishing';
                 }
-                
+
                 bar.innerHTML += `<div class="absolute h-5 ${bgColor} rounded-r" style="left:${startPct4}%;width:${Math.max(w4, 0.5)}%" title="${phase4Label}: ${Math.round((phase4End - phase4Start) / (1000 * 60 * 60 * 24))} days"></div>`;
             }
 
@@ -1364,7 +1381,8 @@
             'Completeness Review': { median_days: 44, count: 51, color: '#60a5fa', description: 'Filed → Complete' },
             'City Decision': { median_days: 377, count: 29, color: '#818cf8', description: 'Complete → Entitled' },
             'Post-Entitlement': { median_days: 180, count: 15, color: '#fb923c', description: 'Entitled → BP Issued' },
-            'Construction': { median_days: 579, count: 15, color: '#22c55e', description: 'BP Issued → CO' }
+            'Demolition': { median_days: 90, count: 11, color: '#ef4444', description: 'Demo Permit → Site Cleared' },
+            'Construction': { median_days: 579, count: 15, color: '#22c55e', description: 'Site Cleared → CO' }
         };
 
         // Calculate total days and proportions
@@ -1594,6 +1612,7 @@
         const completenessDays = [];
         const decisionDays = [];
         const postEntitlementDays = [];
+        const demolitionDays = [];
         const constructionDays = [];
 
         DATA.projects.forEach(p => {
@@ -1602,6 +1621,8 @@
             const entitled = p.entitled ? new Date(p.entitled) : null;
             const bpIssued = p.bp_issued ? new Date(p.bp_issued) : null;
             const co = p.co_date ? new Date(p.co_date) : null;
+            const demoPermit = p.demolition_permit_date ? new Date(p.demolition_permit_date) : null;
+            const demoStart = p.demolition_start_date ? new Date(p.demolition_start_date) : null;
 
             // Completeness Review: filed → complete
             if (filed && complete && complete > filed) {
@@ -1622,8 +1643,14 @@
                 if (days > 0 && days < 2000) postEntitlementDays.push(days);
             }
 
-            // Construction: bp_issued → co
-            const constStart = bpIssued || entitled;
+            // Demolition: demolition_permit_date → demolition_start_date
+            if (demoPermit && demoStart && demoStart > demoPermit) {
+                const days = (demoStart - demoPermit) / (1000 * 60 * 60 * 24);
+                if (days > 0 && days < 1000) demolitionDays.push(days);
+            }
+
+            // Construction: demolition_start_date or bp_issued → co
+            const constStart = demoStart || bpIssued || entitled;
             if (constStart && co && co > constStart) {
                 const days = (co - constStart) / (1000 * 60 * 60 * 24);
                 if (days > 0 && days < 3000) constructionDays.push(days);
@@ -1648,6 +1675,12 @@
                 count: postEntitlementDays.length || DATA.projects.filter(p => p.bp_issued).length,
                 units: DATA.projects.filter(p => p.bp_issued).reduce((s, p) => s + (p.units || 0), 0),
                 color: '#f97316'
+            },
+            'Demolition': {
+                median_days: getMedianDays(demolitionDays) || 90,
+                count: demolitionDays.length || DATA.projects.filter(p => p.demolition_permit_date).length,
+                units: DATA.projects.filter(p => p.demolition_permit_date).reduce((s, p) => s + (p.units || 0), 0),
+                color: '#ef4444'
             },
             'Construction': {
                 median_days: getMedianDays(constructionDays) || 548,
@@ -1782,6 +1815,7 @@
                 { label: 'Completeness', value: `${lifecycleData['Completeness Review'].median_days.toFixed(0)} days`, color: '#9ca3af' },
                 { label: 'City Decision', value: `${lifecycleData['City Decision'].median_days.toFixed(0)} days`, color: '#3b82f6' },
                 { label: 'Post-Entitlement', value: `${lifecycleData['Post-Entitlement'].median_days.toFixed(0)} days`, color: '#f97316' },
+                { label: 'Demolition', value: `${lifecycleData['Demolition'].median_days.toFixed(0)} days`, color: '#ef4444' },
                 { label: 'Construction', value: `${lifecycleData['Construction'].median_days.toFixed(0)} days`, color: '#22c55e' }
             ];
 

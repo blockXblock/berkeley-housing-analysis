@@ -288,6 +288,33 @@ def get_timeline(conn):
 
     return [{"month": row[0], "applications": row[1], "units": row[2] or 0} for row in cursor.fetchall()]
 
+def get_documents(conn):
+    """Get all project documents"""
+    cursor = conn.cursor()
+    cursor.execute('''
+        SELECT
+            id, project_id, title, filename, url, document_type,
+            source, date_added, notes
+        FROM project_documents
+        ORDER BY project_id, date_added DESC
+    ''')
+
+    documents = []
+    for row in cursor.fetchall():
+        documents.append({
+            "id": row[0],
+            "project_id": row[1],
+            "title": row[2],
+            "filename": row[3],
+            "url": row[4],
+            "type": row[5],
+            "source": row[6],
+            "date_added": row[7],
+            "notes": row[8]
+        })
+
+    return documents
+
 def export_data():
     """Main export function"""
     print("=" * 60)
@@ -322,6 +349,10 @@ def export_data():
         timeline = get_timeline(conn)
         print(f"  {len(timeline)} months of data")
 
+        print("Querying documents...")
+        documents = get_documents(conn)
+        print(f"  {len(documents)} documents")
+
         # Build DATA object
         export_date = datetime.now().strftime('%Y-%m-%d %H:%M')
         data = {
@@ -332,6 +363,7 @@ def export_data():
             "staff": staff,
             "players": players,
             "timeline": timeline,
+            "documents": documents,
             "meta": {
                 "generated": datetime.now().isoformat(),
                 "export_date": export_date,
@@ -367,6 +399,7 @@ const DATA = {json.dumps(data, separators=(',', ':'))};
         print(f"Developers: {len(players['developers'])}")
         print(f"Architects: {len(players['architects'])}")
         print(f"Owners: {len(players['owners'])}")
+        print(f"Documents: {len(documents)}")
         print(f"\n✓ Exported to {OUTPUT_PATH}")
 
     except Exception as e:

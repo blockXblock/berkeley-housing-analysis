@@ -718,9 +718,12 @@
                    </div>`
                 : '<p class="text-gray-400 text-sm mt-2">No fee data available</p>';
 
+            // Get documents for this project
+            const docs = DATA.documents ? DATA.documents.filter(d => d.project_id === p.id) : [];
+
             expandRow.innerHTML = `
                 <td colspan="10" class="px-4 py-4">
-                    <div class="grid grid-cols-3 gap-4">
+                    <div class="grid grid-cols-4 gap-4">
                         <div>
                             <h4 class="font-semibold mb-2">Project Details</h4>
                             <p class="text-sm text-gray-600 mb-2">${p.description || 'No description available'}</p>
@@ -731,7 +734,7 @@
                         <div>
                             <h4 class="font-semibold mb-2">Timeline Events (${events.length})</h4>
                             <div class="max-h-40 overflow-y-auto text-sm">
-                                ${events.length ? events.slice(0, 20).map(e => `<div class="py-1 border-b border-gray-200"><span class="text-gray-500">${e.date || 'N/A'}</span> | <span class="text-blue-600">${e.type || 'Unknown'}</span>${e.staff ? ` <span class="text-gray-400">by ${e.staff}</span>` : ''}</div>`).join('') + (events.length > 20 ? `<div class="text-gray-400 py-1 italic">...and ${events.length - 20} more events</div>` : '') : '<p class="text-gray-500">No events recorded</p>'}
+                                ${events.length ? events.slice(0, 15).map(e => `<div class="py-1 border-b border-gray-200"><span class="text-gray-500">${e.date || 'N/A'}</span> | <span class="text-blue-600">${e.type || 'Unknown'}</span>${e.staff ? ` <span class="text-gray-400">by ${e.staff}</span>` : ''}</div>`).join('') + (events.length > 15 ? `<div class="text-gray-400 py-1 italic">...and ${events.length - 15} more events</div>` : '') : '<p class="text-gray-500">No events recorded</p>'}
                             </div>
                         </div>
                         <div>
@@ -742,6 +745,12 @@
                                 <p><strong>Entitled:</strong> ${p.entitled || 'N/A'}</p>
                                 <p><strong>BP Issued:</strong> ${p.bp_issued || 'N/A'}</p>
                                 <p><strong>CO Date:</strong> ${p.co_date || 'N/A'}</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2">Documents (${docs.length})</h4>
+                            <div class="max-h-40 overflow-y-auto text-sm">
+                                ${docs.length ? docs.slice(0, 10).map(d => `<div class="py-1 border-b border-gray-200 truncate" title="${d.filename}"><span class="text-purple-600">${d.filename}</span>${d.notes ? ` <span class="text-gray-400 text-xs">${d.notes}</span>` : ''}</div>`).join('') + (docs.length > 10 ? `<div class="text-gray-400 py-1 italic">...and ${docs.length - 10} more documents</div>` : '') : '<p class="text-gray-500">No documents found</p>'}
                             </div>
                         </div>
                     </div>

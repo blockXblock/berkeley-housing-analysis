@@ -973,6 +973,9 @@
                 } else if (constStatusVal === 'pre-demolition') {
                     phase4Label = 'Pre-Demolition';
                     bgColor = 'bg-red-300';
+                } else if (constStatusVal === 'demolished_vacant') {
+                    phase4Label = 'Demolished Vacant';
+                    bgColor = 'bg-red-800';
                 } else if (constStatusVal === 'foundation') {
                     phase4Label = 'Foundation';
                 } else if (constStatusVal === 'framing') {
@@ -2741,6 +2744,8 @@
                             'Resubmittal Pending Review': '#fef08a',
                             'Resubmittal Pending Staff': '#fef9c3',
                             // Red = Stalled/Corrections
+                            'Stalled': '#7f1d1d',
+                            'Demolished Vacant': '#7f1d1d',
                             'Corrections Pending': '#ef4444',
                             'Corrections Pending Applicant': '#f87171',
                             'Incomplete Pending Applicant': '#fca5a5',
@@ -3244,12 +3249,15 @@
         const unitsCell = document.getElementById('stalledUnitsCell');
         if (!tbody) return;
 
-        // Get stalled projects (is_stalled flag or entitled with no BP)
+        // Get stalled projects (is_stalled flag, entitled with no BP, or demolished_vacant)
         const stalled = DATA.projects.filter(p => {
             if (p.is_stalled) return true;
+            // Demolished vacant sites are the most urgent stalled projects
+            const constStatus = (p.construction_status || '').toLowerCase();
+            if (constStatus === 'demolished_vacant') return true;
             // Also check manually: entitled/approved with no BP
             const status = (p.status || '').toLowerCase();
-            if (['entitled', 'approved'].includes(status) && p.entitled && !p.bp_issued) {
+            if (['entitled', 'approved', 'stalled'].includes(status) && p.entitled && !p.bp_issued) {
                 return true;
             }
             return false;

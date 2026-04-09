@@ -582,7 +582,7 @@
             if (skylineCanvas && skylineCanvas.parentElement) {
                 const note = document.createElement('p');
                 note.className = 'text-xs text-gray-500 mt-2 text-center';
-                note.innerHTML = '🟡 <span class="text-yellow-600 font-medium">Yellow bars</span> indicate UC Berkeley projects, which are exempt from city zoning and not counted toward RHNA.';
+                note.innerHTML = '🟡 <span class="text-yellow-600 font-medium">Yellow bars</span> = UC Berkeley projects (3 projects, ~1,600 beds). UC projects are exempt from city permitting and RHNA.';
                 skylineCanvas.parentElement.appendChild(note);
             }
         }
@@ -871,7 +871,7 @@
         const maxDate = new Date();
         const totalDays = (maxDate - minDate) / (1000 * 60 * 60 * 24);
 
-        // Show ALL projects (all 163)
+        // Show ALL projects (all 170 including UC)
         const toShow = projectsWithTimeline;
 
         toShow.forEach(p => {

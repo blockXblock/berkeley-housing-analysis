@@ -23,6 +23,8 @@
             'construction_start': ['construction_start', 'const_start', 'build_start'],
             'construction_end': ['construction_end', 'estimated_completion', 'const_end'],
             'construction_status': ['construction_status', 'const_status', 'build_status'],
+            'pipeline_stage': ['pipeline_stage', 'stage'],
+            'construction_substage': ['construction_substage', 'substage'],
             'vli_units': ['vli_units', 'vli', 'very_low_income_units'],
             'density_bonus': ['density_bonus', 'db', 'uses_density_bonus'],
             'address': ['address', 'address_display', 'location'],
@@ -106,32 +108,61 @@
 // DATA object is loaded from explorer_data.js
 
     // ========================================
-    // STANDARDIZED PIPELINE STAGES
+    // STANDARDIZED PIPELINE STAGES (from database pipeline_stage column)
     // ========================================
     const PIPELINE_STAGES = [
         'Pre-Application',
-        'Filed',
-        'Under Review',
+        'Application Submitted',
+        'In Review',
+        'Decision Pending',
         'Entitled',
-        'BP Filed',
-        'BP Issued',
+        'Permits Active',
         'Under Construction',
         'Completed',
         'Withdrawn',
-        'Stalled'
+        'Stalled',
+        'Unknown'
     ];
 
+    // Explicit ordering for sorting
+    const PIPELINE_STAGE_ORDER = {
+        'Pre-Application': 1,
+        'Application Submitted': 2,
+        'In Review': 3,
+        'Decision Pending': 4,
+        'Entitled': 5,
+        'Permits Active': 6,
+        'Under Construction': 7,
+        'Completed': 8,
+        'Withdrawn': 9,
+        'Stalled': 10,
+        'Unknown': 11
+    };
+
     const STAGE_COLORS = {
-        'Pre-Application': '#94a3b8',  // slate
-        'Filed': '#60a5fa',            // blue
-        'Under Review': '#fbbf24',     // amber
-        'Entitled': '#34d399',         // emerald
-        'BP Filed': '#a78bfa',         // violet
-        'BP Issued': '#818cf8',        // indigo
-        'Under Construction': '#f97316', // orange
-        'Completed': '#22c55e',        // green
-        'Withdrawn': '#ef4444',        // red
-        'Stalled': '#6b7280'           // gray
+        'Pre-Application': '#94a3b8',      // slate
+        'Application Submitted': '#60a5fa', // blue
+        'In Review': '#fbbf24',            // amber
+        'Decision Pending': '#f59e0b',     // yellow-orange
+        'Entitled': '#34d399',             // emerald
+        'Permits Active': '#a78bfa',       // violet
+        'Under Construction': '#f97316',   // orange
+        'Completed': '#22c55e',            // green
+        'Withdrawn': '#ef4444',            // red
+        'Stalled': '#6b7280',              // gray
+        'Unknown': '#d1d5db'               // light gray
+    };
+
+    // Construction substage colors (for Gantt)
+    const CONSTRUCTION_SUBSTAGE_COLORS = {
+        'Demolition Pending': '#fef3c7',    // amber-100
+        'Demolition': '#fcd34d',            // amber-300
+        'Foundation': '#92400e',            // amber-800
+        'Superstructure': '#f97316',        // orange-500
+        'Enclosure / Rough Systems': '#ea580c', // orange-600
+        'Interior Finishes': '#c2410c',     // orange-700
+        'Final Inspection / CO': '#16a34a', // green-600
+        'Occupied': '#15803d'               // green-700
     };
 
     // Map raw status strings to standardized pipeline stages
@@ -203,6 +234,12 @@
 
     // Get pipeline stage considering all project fields (status, construction_status, dates)
     function getPipelineStage(project) {
+        // Use database pipeline_stage column if available (preferred source)
+        if (project.pipeline_stage && PIPELINE_STAGE_ORDER[project.pipeline_stage]) {
+            return project.pipeline_stage;
+        }
+
+        // Fall back to computed logic for older data
         // Check construction_status first (most definitive)
         const constructionStatus = (project.construction_status || '').toLowerCase();
         if (constructionStatus === 'completed' || constructionStatus === 'occupied') {
@@ -257,17 +294,77 @@
     function getStatusBadgeClass(stage) {
         const classes = {
             'Pre-Application': 'bg-slate-100 text-slate-700',
-            'Filed': 'bg-blue-100 text-blue-700',
-            'Under Review': 'bg-amber-100 text-amber-700',
+            'Application Submitted': 'bg-blue-100 text-blue-700',
+            'In Review': 'bg-amber-100 text-amber-700',
+            'Decision Pending': 'bg-yellow-100 text-yellow-700',
             'Entitled': 'bg-emerald-100 text-emerald-700',
-            'BP Filed': 'bg-violet-100 text-violet-700',
-            'BP Issued': 'bg-indigo-100 text-indigo-700',
+            'Permits Active': 'bg-violet-100 text-violet-700',
             'Under Construction': 'bg-orange-100 text-orange-700',
             'Completed': 'bg-green-100 text-green-700',
             'Withdrawn': 'bg-red-100 text-red-700',
-            'Stalled': 'bg-gray-100 text-gray-600'
+            'Stalled': 'bg-gray-100 text-gray-600',
+            'Unknown': 'bg-gray-50 text-gray-500'
         };
         return classes[stage] || 'bg-gray-100 text-gray-600';
+    }
+
+    // Render pipeline funnel from pipeline_stage data
+    function renderPipelineFunnel() {
+        const container = document.getElementById('pipelineFunnel');
+        if (!container || !DATA || !DATA.projects) return;
+
+        // Aggregate by pipeline_stage using explicit ordering
+        const stageCounts = {};
+        const stageUnits = {};
+        DATA.projects.forEach(p => {
+            const stage = p.pipeline_stage || 'Unknown';
+            stageCounts[stage] = (stageCounts[stage] || 0) + 1;
+            stageUnits[stage] = (stageUnits[stage] || 0) + (p.units || 0);
+        });
+
+        // Get total for percentage calculation
+        const totalUnits = DATA.projects.reduce((sum, p) => sum + (p.units || 0), 0);
+
+        // Filter to stages with data and sort by pipeline order
+        const orderedStages = PIPELINE_STAGES.filter(s => stageCounts[s] > 0)
+            .sort((a, b) => (PIPELINE_STAGE_ORDER[a] || 99) - (PIPELINE_STAGE_ORDER[b] || 99));
+
+        // Generate funnel HTML
+        let html = '';
+        const barColors = {
+            'Pre-Application': 'bg-slate-400',
+            'Application Submitted': 'bg-blue-400',
+            'In Review': 'bg-amber-400',
+            'Decision Pending': 'bg-yellow-500',
+            'Entitled': 'bg-emerald-500',
+            'Permits Active': 'bg-violet-500',
+            'Under Construction': 'bg-orange-500',
+            'Completed': 'bg-green-500',
+            'Withdrawn': 'bg-red-400',
+            'Stalled': 'bg-gray-400',
+            'Unknown': 'bg-gray-300'
+        };
+
+        orderedStages.forEach(stage => {
+            const count = stageCounts[stage];
+            const units = stageUnits[stage];
+            const pct = Math.round((units / totalUnits) * 100);
+            const barWidth = Math.max(pct, 5); // Minimum 5% width for visibility
+            const color = barColors[stage] || 'bg-gray-400';
+
+            html += `
+                <div class="relative">
+                    <div class="flex items-center">
+                        <div class="w-40 text-right pr-4 text-sm font-medium">${stage}</div>
+                        <div class="flex-1 ${color} rounded-r-lg h-10 flex items-center px-4" style="width: ${barWidth}%">
+                            <span class="text-white font-bold text-sm">${count} • ${units.toLocaleString()}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html;
     }
 
     // ========================================
@@ -278,6 +375,9 @@
     function initCharts() {
         console.log('📊 initCharts() called');
         try {
+        // Render pipeline funnel first
+        renderPipelineFunnel();
+
         // Status Distribution (using standardized pipeline stages)
         const statusCounts = {};
         DATA.projects.forEach(p => {

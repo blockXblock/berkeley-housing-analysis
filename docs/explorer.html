@@ -187,48 +187,9 @@
                 <h2 class="text-xl font-semibold mb-4">The Entitlement-to-Construction Gap</h2>
                 <p class="text-gray-600 text-sm mb-4">Berkeley's housing pipeline narrows dramatically from approval to construction.</p>
 
-                <!-- Funnel Chart -->
-                <div class="space-y-3 mb-6">
-                    <div class="relative">
-                        <div class="flex items-center">
-                            <div class="w-32 text-right pr-4 text-sm font-medium">Applications</div>
-                            <div class="flex-1 bg-blue-500 rounded-r-lg h-10 flex items-center px-4" style="width: 100%">
-                                <span class="text-white font-bold text-sm">173 projects • 12,294 units</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="relative">
-                        <div class="flex items-center">
-                            <div class="w-32 text-right pr-4 text-sm font-medium">Entitled</div>
-                            <div class="flex-1 bg-indigo-500 rounded-r-lg h-10 flex items-center px-4" style="width: 46%">
-                                <span class="text-white font-bold text-sm">164 projects • 10,530 units</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="relative">
-                        <div class="flex items-center">
-                            <div class="w-32 text-right pr-4 text-sm font-medium">Building Permits</div>
-                            <div class="flex-1 bg-purple-500 rounded-r-lg h-10 flex items-center px-4" style="width: 15%">
-                                <span class="text-white font-bold text-sm">18 • 1,279</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="relative">
-                        <div class="flex items-center">
-                            <div class="w-32 text-right pr-4 text-sm font-medium">Under Construction</div>
-                            <div class="flex-1 bg-orange-500 rounded-r-lg h-10 flex items-center px-4" style="width: 8%">
-                                <span class="text-white font-bold text-sm">13 • 1,374</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="relative">
-                        <div class="flex items-center">
-                            <div class="w-32 text-right pr-4 text-sm font-medium">COs Issued</div>
-                            <div class="flex-1 bg-green-500 rounded-r-lg h-10 flex items-center px-4" style="width: 7%">
-                                <span class="text-white font-bold text-sm">15 • 908</span>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Funnel Chart (dynamically rendered from pipeline_stage) -->
+                <div id="pipelineFunnel" class="space-y-3 mb-6">
+                    <!-- Populated by JavaScript -->
                 </div>
 
                 <!-- Callout Box -->

@@ -50,7 +50,8 @@ def get_projects(conn):
             apn, owner, accela_status, accela_status_date, construction_start,
             estimated_completion, sb35_flag, sb330_flag, ab2011_flag, app_packet_mb,
             total_fees, field_survey_date, field_survey_notes,
-            demolition_permit_date, demolition_start_date
+            demolition_permit_date, demolition_start_date,
+            pipeline_stage, construction_substage
         FROM projects
         ORDER BY units DESC
     ''')
@@ -111,7 +112,9 @@ def get_projects(conn):
             "field_survey_date": row[33],  # From database
             "field_survey_notes": row[34],  # From database
             "demolition_permit_date": row[35],  # From database
-            "demolition_start_date": row[36]  # From database
+            "demolition_start_date": row[36],  # From database
+            "pipeline_stage": row[37],  # Normalized stage
+            "construction_substage": row[38]  # Construction phase detail
         })
 
     return projects

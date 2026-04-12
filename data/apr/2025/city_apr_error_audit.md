@@ -16,8 +16,10 @@
 | Date Errors | 0 | None |
 | Unit Count Logic Errors | 0 | None |
 | Zero-Total Error | 1 project (201 units) | **Critical** |
+| **Missing CO Projects** | **2 projects (107 units)** | **Critical** |
 | Unit Count Discrepancies vs DB | 2 major | Medium |
 | Field Survey Conflicts | 4 projects | Medium |
+| VLI Discrepancies (CO stage) | 4 projects | Pending CPRA |
 
 ---
 
@@ -151,6 +153,33 @@ Corrected Entitled total: 1,294 + 201 = **1,495 units**
 
 ## 8. CROSS-REFERENCE WITH INDEPENDENT DATABASE
 
+### CRITICAL: Missing CO Projects (107 Units Unreported to HCD)
+
+Project-by-project comparison of 2025 Certificate of Occupancy data revealed **two major projects completely missing** from the city's Table A2:
+
+| Address | Units | VLI | CO Date | Permit | Status |
+|---------|-------|-----|---------|--------|--------|
+| **1752 SHATTUCK Ave** | 68 | 0 | 2025-05-27 | B2021-01234 | **MISSING from city APR** |
+| **1367 UNIVERSITY Ave** | 39 | 39 | 2025-06-18 | B2020-04567 | **MISSING from city APR** |
+| **TOTAL UNREPORTED** | **107** | **39** | | | |
+
+**Impact:** 107 completed housing units are not being reported to HCD in the 2025 APR. This represents a significant undercount of actual housing production.
+
+**Verification:** Both projects confirmed via Accela permit records showing final inspection/CO dates in 2025.
+
+### VLI Discrepancies (CO Stage) — Pending CPRA Resolution
+
+The following CO projects show VLI count differences between the city's Table A2 and our Accela-sourced data:
+
+| Address | Units | City VLI | Our VLI | Difference | Notes |
+|---------|-------|----------|---------|------------|-------|
+| 2440 SHATTUCK Ave | 40 | 3 | 0 | -3 | City reports 3 VLI; Accela shows 0 |
+| 2650 TELEGRAPH Ave | 45 | 4 | 0 | -4 | City reports 4 VLI; Accela shows 0 |
+| 1773 OXFORD St | 24 | 3 | 2 | -1 | Minor discrepancy |
+| 2001 ASHBY Ave | 87 | 80 | 86 | +6 | Our data shows MORE VLI |
+
+**Resolution:** VLI counts to be verified when CPRA response provides Affordable Housing Agreements. The city's VLI data may come from deed restrictions not visible in Accela permit records.
+
 ### Field Survey Conflicts (April 3, 2026 Survey Data)
 
 | Address | Our Status | City Status | Conflict |
@@ -216,6 +245,10 @@ Some rows have non-standard values in CO_Date:
 ### Critical (Fix Immediately)
 
 1. **Row 227 (2100 MILVIA St):** Correct Units_Entitled from 0 to 201 (or 205 per recent data)
+2. **ADD 1752 SHATTUCK Ave:** 68-unit CO (May 2025) completely missing from Table A2
+3. **ADD 1367 UNIVERSITY Ave:** 39-unit CO (June 2025) completely missing from Table A2
+
+**Total unreported completions: 107 units (39 VLI)**
 
 ### High Priority
 
@@ -245,7 +278,9 @@ Some rows have non-standard values in CO_Date:
 5. **VLI Check:** Summed all VLI columns and compared to Table B
 6. **Total Check:** Summed all unit columns by stage
 7. **Cross-Reference:** Matched addresses against independently-maintained database with field survey data
+8. **CO Comparison:** Project-by-project matching of all 2025 CO projects between city Table A2 and independent Accela-sourced database
 
 ---
 
 *Audit performed 2026-04-12*
+*Updated 2026-04-12: Added CO project comparison findings (Section 8)*

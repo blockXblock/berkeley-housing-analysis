@@ -21,7 +21,7 @@ from collections import defaultdict
 
 # Paths
 BASE_DIR = Path('/Users/johngage/berkeley-data')
-DB_PATH = BASE_DIR / 'data' / 'berkeley_housing_analysis.db'
+DB_PATH = BASE_DIR / 'databases' / 'berkeley_housing_analysis.db'
 OUTPUT_PATH = BASE_DIR / 'docs' / 'explorer_data.js'
 
 def validate_co_date(co_date):

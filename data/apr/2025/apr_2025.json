@@ -1,6 +1,6 @@
 {
   "year": 2025,
-  "generated": "2026-04-11T17:28:10.881752",
+  "generated": "2026-04-11T18:57:40.142405",
   "table_a": {
     "title": "Table A: Applications Deemed Complete in 2025",
     "description": "Projects with completeness review finished between 2025-01-01 and 2025-12-31",
@@ -332,8 +332,8 @@
         "apn": "057 205300200",
         "permits": "ZP2023-0040",
         "net_units": 599,
-        "vli_units": 0,
-        "status": "Approved",
+        "vli_units": 58,
+        "status": "Entitled",
         "app_filed_date": "2023-04-25",
         "app_complete_date": "2024-04-11",
         "entitled_date": "2025-06-03",
@@ -377,7 +377,7 @@
         "permits": "ZP2023-0079",
         "net_units": 299,
         "vli_units": 0,
-        "status": "Approved",
+        "status": "Entitled",
         "app_filed_date": "2023-06-29",
         "app_complete_date": "2024-01-04",
         "entitled_date": "2025-04-22",
@@ -441,9 +441,9 @@
         "address": "2100 MILVIA St",
         "apn": "057 202201701",
         "permits": "ZP2023-0163",
-        "net_units": 201,
+        "net_units": 205,
         "vli_units": 0,
-        "status": "Approved",
+        "status": "Entitled",
         "app_filed_date": "2023-12-20",
         "app_complete_date": "2024-05-17",
         "entitled_date": "2025-07-01",
@@ -503,6 +503,28 @@
         "milestone_achieved": "Entitled"
       },
       {
+        "id": 34,
+        "address": "2680 BANCROFT Way",
+        "apn": "055 187100103",
+        "permits": "ZP2023-0096, ZP2024-0029",
+        "net_units": 79,
+        "vli_units": 9,
+        "status": "Entitled",
+        "app_filed_date": "2024-03-19",
+        "app_complete_date": "2024-04-30",
+        "entitled_date": "2025-06-13",
+        "bp_issued_date": null,
+        "co_date": null,
+        "density_bonus": 0,
+        "sb35_flag": 0,
+        "sb330_flag": 0,
+        "ab2011_flag": 0,
+        "developer": null,
+        "architect": null,
+        "construction_status": "pre_demolition",
+        "milestone_achieved": "Entitled"
+      },
+      {
         "id": 113,
         "address": "2138 KITTREDGE St",
         "apn": "057 202901500",
@@ -525,13 +547,35 @@
         "milestone_achieved": "Entitled"
       },
       {
+        "id": 156,
+        "address": "2550 SHATTUCK Ave",
+        "apn": "055 182100101",
+        "permits": "TBD",
+        "net_units": 72,
+        "vli_units": 8,
+        "status": "Entitled",
+        "app_filed_date": "2025-01-01",
+        "app_complete_date": "",
+        "entitled_date": "2025-01-21",
+        "bp_issued_date": null,
+        "co_date": null,
+        "density_bonus": 1,
+        "sb35_flag": 0,
+        "sb330_flag": 0,
+        "ab2011_flag": 0,
+        "developer": null,
+        "architect": null,
+        "construction_status": null,
+        "milestone_achieved": "Entitled"
+      },
+      {
         "id": 118,
         "address": "2138 KITTREDGE St",
         "apn": "057 202901500",
         "permits": "ZP2024-0114",
         "net_units": 66,
         "vli_units": 5,
-        "status": "Approved",
+        "status": "Entitled",
         "app_filed_date": "2024-09-05",
         "app_complete_date": "2024-09-05",
         "entitled_date": "2025-10-20",
@@ -540,6 +584,28 @@
         "density_bonus": 1,
         "sb35_flag": 0,
         "sb330_flag": 1,
+        "ab2011_flag": 0,
+        "developer": null,
+        "architect": null,
+        "construction_status": null,
+        "milestone_achieved": "Entitled"
+      },
+      {
+        "id": 28,
+        "address": "2372 ELLSWORTH St",
+        "apn": "055 188700300",
+        "permits": "PLN2024-0054",
+        "net_units": 63,
+        "vli_units": 0,
+        "status": "Entitled",
+        "app_filed_date": "2024-01-01",
+        "app_complete_date": "",
+        "entitled_date": "2025-11-18",
+        "bp_issued_date": null,
+        "co_date": null,
+        "density_bonus": 0,
+        "sb35_flag": 0,
+        "sb330_flag": 0,
         "ab2011_flag": 0,
         "developer": null,
         "architect": null,
@@ -566,28 +632,6 @@
         "developer": null,
         "architect": null,
         "construction_status": null,
-        "milestone_achieved": "Entitled"
-      },
-      {
-        "id": 34,
-        "address": "2680 BANCROFT Way",
-        "apn": "055 187100103",
-        "permits": "ZP2023-0096, ZP2024-0029",
-        "net_units": 37,
-        "vli_units": 0,
-        "status": "Approved",
-        "app_filed_date": "2024-03-19",
-        "app_complete_date": "2024-04-30",
-        "entitled_date": "2025-06-13",
-        "bp_issued_date": null,
-        "co_date": null,
-        "density_bonus": 0,
-        "sb35_flag": 0,
-        "sb330_flag": 0,
-        "ab2011_flag": 0,
-        "developer": null,
-        "architect": null,
-        "construction_status": "pre_demolition",
         "milestone_achieved": "Entitled"
       },
       {
@@ -680,10 +724,10 @@
       }
     ],
     "summary": {
-      "total_projects": 25,
-      "total_units": 2928,
-      "vli_units": 161,
-      "entitled_in_year": 16,
+      "total_projects": 27,
+      "total_units": 3109,
+      "vli_units": 236,
+      "entitled_in_year": 18,
       "bp_issued_in_year": 1,
       "co_issued_in_year": 8
     }
@@ -812,8 +856,8 @@
       "percent_of_goal": 15.0
     },
     "pipeline": {
-      "total_units": 12316,
-      "vli_units": 913,
+      "total_units": 12362,
+      "vli_units": 973,
       "note": "Pipeline units do NOT count toward RHNA until BP is issued"
     },
     "completed": {
@@ -840,7 +884,7 @@
         "id": 119,
         "address": "1974 SHATTUCK Ave",
         "net_units": 599,
-        "status": "Approved",
+        "status": "Entitled",
         "developer": "NX Ventures",
         "app_complete_date": "2024-04-11",
         "entitled_date": "2025-06-03",
@@ -873,7 +917,7 @@
         "id": 120,
         "address": "2274 SHATTUCK Ave",
         "net_units": 299,
-        "status": "Approved",
+        "status": "Entitled",
         "developer": "Panoramic Interests",
         "app_complete_date": "2024-01-04",
         "entitled_date": "2025-04-22",
@@ -916,8 +960,8 @@
       {
         "id": 121,
         "address": "2100 MILVIA St",
-        "net_units": 201,
-        "status": "Approved",
+        "net_units": 205,
+        "status": "Entitled",
         "developer": "4Terra Investments",
         "app_complete_date": "2024-05-17",
         "entitled_date": "2025-07-01",
@@ -980,6 +1024,17 @@
         "accela_status_date": "2025-08-14"
       },
       {
+        "id": 34,
+        "address": "2680 BANCROFT Way",
+        "net_units": 79,
+        "status": "Entitled",
+        "developer": null,
+        "app_complete_date": "2024-04-30",
+        "entitled_date": "2025-06-13",
+        "bp_issued_date": null,
+        "accela_status_date": "2025-06-13"
+      },
+      {
         "id": 126,
         "address": "2427 San Pablo",
         "net_units": 78,
@@ -1013,6 +1068,17 @@
         "accela_status_date": "2025-10-20"
       },
       {
+        "id": 156,
+        "address": "2550 SHATTUCK Ave",
+        "net_units": 72,
+        "status": "Entitled",
+        "developer": null,
+        "app_complete_date": "",
+        "entitled_date": "2025-01-21",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
         "id": 116,
         "address": "2462 BANCROFT Way",
         "net_units": 66,
@@ -1027,12 +1093,23 @@
         "id": 118,
         "address": "2138 KITTREDGE St",
         "net_units": 66,
-        "status": "Approved",
+        "status": "Entitled",
         "developer": null,
         "app_complete_date": "2024-09-05",
         "entitled_date": "2025-10-20",
         "bp_issued_date": null,
         "accela_status_date": "2025-10-20"
+      },
+      {
+        "id": 28,
+        "address": "2372 ELLSWORTH St",
+        "net_units": 63,
+        "status": "Entitled",
+        "developer": null,
+        "app_complete_date": "",
+        "entitled_date": "2025-11-18",
+        "bp_issued_date": null,
+        "accela_status_date": null
       },
       {
         "id": 29,
@@ -1044,17 +1121,6 @@
         "entitled_date": "2025-10-20",
         "bp_issued_date": null,
         "accela_status_date": "2025-10-20"
-      },
-      {
-        "id": 34,
-        "address": "2680 BANCROFT Way",
-        "net_units": 37,
-        "status": "Approved",
-        "developer": null,
-        "app_complete_date": "2024-04-30",
-        "entitled_date": "2025-06-13",
-        "bp_issued_date": null,
-        "accela_status_date": "2025-06-13"
       },
       {
         "id": 134,
@@ -1168,8 +1234,8 @@
       }
     ],
     "summary": {
-      "total_stalled": 31,
-      "total_units_at_risk": 4508
+      "total_stalled": 33,
+      "total_units_at_risk": 4689
     }
   }
 }

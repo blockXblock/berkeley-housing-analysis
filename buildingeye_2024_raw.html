@@ -1,0 +1,140 @@
+<!doctype html>
+<!--[if IE 8 ]><html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]-->
+<!--[if IE 10 ]><html lang="en" class="ie10"> <![endif]-->
+<!--[if !IE]><!--><html lang="en"><!--<![endif]-->
+<head>
+      <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-title" content="Buildingeye" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="translucent black" />
+		<link href="/images/icon/apple-touch-icon-152x152.png" sizes="152x152" rel="apple-touch-icon" />
+		<link href="/images/icon/apple-touch-icon-144x144.png" sizes="144x144" rel="apple-touch-icon" />
+		<link href="/images/icon/apple-touch-icon-128x128.png" sizes="128x128" rel="apple-touch-icon" />
+		<link href="/images/icon/apple-touch-icon-120x120.png" sizes="120x120" rel="apple-touch-icon" />
+		<link href="/images/icon/apple-touch-icon-114x114.png" sizes="114x114" rel="apple-touch-icon" />
+		<link href="/images/icon/apple-touch-icon-76x76.png" sizes="76x76" rel="apple-touch-icon" />
+		<link href="/images/icon/apple-touch-icon-72x72.png" sizes="72x72" rel="apple-touch-icon" />
+		<link href="/images/icon/apple-touch-icon-57x57.png" sizes="57x57" rel="apple-touch-icon" />
+		<link href="/images/icon/apple-touch-startup-image-1536x2008.png"
+			media="(device-width: 768px) and (device-height: 1024px)
+				and (orientation: portrait)
+				and (-webkit-device-pixel-ratio: 2)"
+			rel="apple-touch-startup-image" />
+		<link href="/images/icon/apple-touch-startup-image-2048x1496.png"
+			media="(device-width: 768px) and (device-height: 1024px)
+				and (orientation: landscape)
+				and (-webkit-device-pixel-ratio: 2)"
+			rel="apple-touch-startup-image" />
+		<link href="/images/icon/apple-touch-startup-image-768x1004.png"
+			media="(device-width: 768px) and (device-height: 1024px)
+				and (orientation: portrait)
+				and (-webkit-device-pixel-ratio: 1)"
+			rel="apple-touch-startup-image" />
+		<link href="/images/icon/apple-touch-startup-image-1024x748.png"
+			media="(device-width: 768px) and (device-height: 1024px)
+				and (orientation: landscape)
+				and (-webkit-device-pixel-ratio: 1)"
+			rel="apple-touch-startup-image" />
+		<link href="/images/icon/apple-touch-startup-image-640x1096.png"
+			media="(device-width: 320px) and (device-height: 568px)
+				and (-webkit-device-pixel-ratio: 2)"
+			rel="apple-touch-startup-image" />
+		<link href="/images/icon/apple-touch-startup-image-640x920.png"
+			media="(device-width: 320px) and (device-height: 480px)
+				and (-webkit-device-pixel-ratio: 2)"
+			rel="apple-touch-startup-image" />
+		<link href="/images/icon/apple-touch-startup-image-320x460.png"
+			media="(device-width: 320px) and (device-height: 480px)
+				and (-webkit-device-pixel-ratio: 1)"
+			rel="apple-touch-startup-image" />
+		<meta name="mobile-web-app-capable" content="yes">
+		<link rel="shortcut icon" sizes="196x196" href="/images/icon/apple-touch-icon-196x196.png" />
+		<link rel="shortcut icon" sizes="128x128" href="/images/icon/apple-touch-icon-128x128.png" /><meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="description" content="Buildingeye.com makes building and planning information easier to find and understand by mapping what's happening in your city" />
+<meta name="keywords" content="Building Permits, Planning Permission " />
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.css" />
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.9/leaflet.draw.css" />
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.5/MarkerCluster.css" />
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.5/MarkerCluster.Default.css" />
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.3.15/slick.css" />
+<link rel="stylesheet" type="text/css" href="/css/mongoose-brown.min.css?v=8812b6e4a7" />
+<link rel="stylesheet" type="text/css" href="/error/asset/d8412b2140.css" />
+<style type="text/css">
+/*<![CDATA[*/
+
+        * {
+            font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+            color: #ffffff !important;
+            background-color: #00b3e9 !important;
+            text-align: center;
+        }
+        
+        ul {
+            list-style-type: none;
+        }
+
+/*]]>*/
+</style>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet-src.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.9/leaflet.draw.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.5/leaflet.markercluster.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.3.15/slick.min.js"></script>
+<script type="text/javascript" src="/js/lib/jquery.ui.touch-punch-improved.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/retina.js/1.3.0/retina.min.js"></script>
+<script type="text/javascript" src="/js/leaflet-e4ba681849.tilelayers.min.js"></script>
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyAL2Yfpb8FCzwC0mLmxlHizzgQ8Ty6Z4vk&amp;sensor=false"></script>
+<script type="text/javascript" src="/js/geocode_api-8e0a172319.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script type="text/javascript" src="/error/asset/constants.js"></script>
+<script type="text/javascript" src="/js/lib/ui.dropdownchecklist-1.5-min.js"></script>
+<script type="text/javascript" src="/js/main_core-jb20220109.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/intro.js/0.9.0/intro.js"></script>
+<script type="text/javascript" src="/js/nu-9c03faa7cb.min.js"></script>
+<title>Buildingeye Local - Error 500</title>
+<link rel="shortcut icon" href="/images/favicon.ico">
+<link rel="canonical" href="/">
+<base href="https://berkeley.buildingeye.com"/>
+<script src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=ck2pxxap5GfU76YGdAUhw7jFGBqADtnV"></script>  <script type="text/javascript">window.console = typeof window.console === 'undefined' ? {log:function(s){}} : window.console;</script>
+<!--[if lt IE 10]>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script type="text/javascript" src="js/lib/rem.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/nwmatcher/1.2.5/nwmatcher.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script>  
+	<script type="text/javascript" src="js/nu-ie.js"></script>
+<![endif]-->
+<!--[if lt IE 9]>
+	<script type="text/javascript" src="js/ie8.js"></script>
+<![endif]--></head>
+<div id="content" class="watermark error404">
+
+    <div class="search_field">
+        <span class="watermark_logo"> </span>
+    </div>
+
+    <h1>&nbsp;</h1>
+    <div class="divide"></div>
+
+    <div class="ooops">
+        <span class="guarda"></span>
+        <h1>Wow! Are we popular today?</h1>
+
+        <img src="images/belogo.png">
+
+        <p>The buildingeye Services Team have been notified of the heavy traffic.<br /> We will have things back to normal soon.<br />Thank you for your patience.</p>
+                
+    </div>
+
+
+    <div class="clear"></div>
+</div>
+
+</html>

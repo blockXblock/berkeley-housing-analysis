@@ -1,0 +1,160 @@
+id,address,permit_number,units,status,construction_status,has_zoning_txt,has_building_txt,has_events,event_count,has_fees,has_attachments,data_completeness_score,what_is_missing
+141,2016 ASHBY Ave,TBD,50.0,Building Permits Filed,foundation,False,False,False,0,False,False,25,"permit_discovery, zoning_events, building_permits, processing_status, fees, attachments"
+142,2350 TELEGRAPH Ave,TBD,48.0,Under Review,,False,False,False,0,False,False,25,"permit_discovery, zoning_events, building_permits, processing_status, fees, attachments"
+143,2902 ADELINE St,TBD,54.0,Under Construction,framing,False,False,False,0,False,False,25,"permit_discovery, zoning_events, building_permits, processing_status, fees, attachments"
+144,2127 DWIGHT Way,TBD,58.0,Under Construction,topped_out,False,False,False,0,False,False,25,"permit_discovery, zoning_events, building_permits, processing_status, fees, attachments"
+145,1708 HARMON St,TBD,80.0,Demolition Permits Filed,,False,False,False,0,False,False,25,"permit_discovery, zoning_events, building_permits, processing_status, fees, attachments"
+146,2800 TELEGRAPH Ave,TBD,18.0,Building Permits Filed,,False,False,False,0,False,False,25,"permit_discovery, zoning_events, building_permits, processing_status, fees, attachments"
+147,2300 ELLSWORTH St,TBD,69.0,Demolition Underway,demolition,False,False,False,0,False,False,25,"permit_discovery, zoning_events, building_permits, processing_status, fees, attachments"
+148,2018 BLAKE St,TBD,12.0,Demolition Permits Filed,,False,False,False,0,False,False,25,"permit_discovery, zoning_events, building_permits, processing_status, fees, attachments"
+149,2198 SAN PABLO Ave,TBD,100.0,Entitled,,False,False,False,0,False,False,25,"permit_discovery, zoning_events, building_permits, processing_status, fees, attachments"
+151,Ashby BART,TBD,618.0,Developer Selected,,False,False,False,0,False,False,25,"permit_discovery, zoning_events, building_permits, processing_status, fees, attachments"
+155,1700 SACRAMENTO St,TBD,85.0,Under Review,,False,False,False,0,False,False,25,"permit_discovery, zoning_events, building_permits, processing_status, fees, attachments"
+156,2550 SHATTUCK Ave,TBD,72.0,ZAB Review,,False,False,False,0,False,False,25,"permit_discovery, zoning_events, building_permits, processing_status, fees, attachments"
+157,2587 TELEGRAPH Ave,TBD,52.0,Under Construction,topped_out,False,False,False,0,False,False,25,"permit_discovery, zoning_events, building_permits, processing_status, fees, attachments"
+159,2403 SAN PABLO Ave,TBD,36.0,Under Construction,foundation,False,False,False,0,False,False,25,"permit_discovery, zoning_events, building_permits, processing_status, fees, attachments"
+160,2344 FULTON St,TBD,18.0,Pre-Application,,False,False,False,0,False,False,25,"permit_discovery, zoning_events, building_permits, processing_status, fees, attachments"
+139,2538 DURANT Ave,TBD,83.0,Under Construction,foundation,False,False,False,0,False,False,30,"permit_discovery, zoning_events, building_permits, processing_status, fees, attachments"
+140,2136 SAN PABLO Ave,TBD,125.0,Approved,,False,False,False,0,False,False,30,"permit_discovery, zoning_events, building_permits, processing_status, fees, attachments"
+150,3030 TELEGRAPH Ave,TBD,144.0,Under Construction,finishing,False,False,False,0,False,False,30,"permit_discovery, zoning_events, building_permits, processing_status, fees, attachments"
+154,2001 ASHBY Ave,TBD,87.0,Completed,occupied,False,False,False,0,False,False,30,"permit_discovery, zoning_events, building_permits, processing_status, fees, attachments"
+158,1367 UNIVERSITY Ave,TBD,39.0,Completed,occupied,False,False,False,0,False,False,30,"permit_discovery, zoning_events, building_permits, processing_status, fees, attachments"
+38,2449 DWIGHT Way,ZP2022-0021,39.0,ZAB Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+39,1790 UNIVERSITY Ave,ZP2023-0070,17.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+40,1710 UNIVERSITY Ave,ZP2021-0127,16.0,Incomplete Pending Applicant,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+43,1015 UNIVERSITY Ave,ZP2022-0120,9.0,Incomplete Pending Applicant,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+44,2428 MILVIA St,PLN2024-0025,8.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+46,1745 CEDAR St,PLN2025-0040,6.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+49,1618 SIXTH St,PLN2025-0068,4.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+51,2942 COLLEGE Ave,ZP2021-0072,4.0,In Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+52,2437 WARRING St,PLN2025-0031,4.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+53,2641 COLLEGE Ave,PLN2025-0061,3.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+54,2205 BLAKE St,PLN2024-0001,3.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+55,2221 FIFTH St,ZP2022-0106,3.0,In Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+56,1650 FIFTH St,PLN2025-0041,3.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+57,3101 SACRAMENTO St,ZP2025-0069,3.0,Corrections Pending Applicant,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+58,1449 CORNELL Ave,PLN2025-0046,3.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+59,1514 WALNUT St,PLN2025-0075,3.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+60,1464 SIXTH St,"PLN2025-0017, PLN2025-0037",3.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+61,2812 EIGHTH St,"PLN2025-0058, PLN2025-0089",3.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+62,2201 BLAKE St,PLN2024-0013,3.0,Approved,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+63,1716 SEVENTH St,PLN2025-0060,2.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+64,1515 DERBY St,PLN2025-0064,2.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+65,1922 FRANCISCO St,PLN2025-0073,2.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+67,1419 GRANT St,"PLN2025-0065, PLN2025-0091",2.0,Pending,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+68,1236 DWIGHT Way,PLN2025-0081,2.0,Pending,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+69,2808 NINTH St,PLN2025-0083,2.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+70,3001 BENVENUE Ave,ZP2025-0068,1.0,Pending Final Action,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+71,40 HILL Rd,ZP2020-0006,1.0,Incomplete Pending Applicant,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+74,2328 GRANT St,PLN2024-0062,1.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+75,1939 MARIN Ave,PLN2024-0061,1.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+76,1731 ADDISON St,ZP2025-0095,1.0,Corrections Pending Applicant,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+77,1420 FIFTH St,ZP2025-0021,1.0,Pending Final Action,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+78,1139 KEELER Ave,ZP2022-0172,1.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+79,1111 ALLSTON Way,PLN2025-0013,1.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+80,659 GRIZZLY PEAK Blvd,ZP2025-0093,1.0,Incomplete Pending Applicant,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+81,1522 JOSEPHINE St,ZP2025-0014,0.0,Corrections Pending Applicant,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+83,1136 KEITH Ave,PLN2024-0047,0.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+84,2705 BENVENUE Ave,ZP2025-0086,-1.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+85,1730 PARKER St,ZP2022-0063,0.0,Incomplete Pending Applicant,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+86,2740 SHASTA Rd,ZP2022-0091,0.0,Incomplete Pending Applicant,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+87,1109 COWPER St,ZP2022-0154,0.0,In Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+88,705 ARLINGTON Ave,ZP2023-0008,0.0,In Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+89,2027 SEVENTH St,ZP2023-0155,0.0,Corrections Pending Applicant,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+90,576 SAN LUIS Rd,ZP2024-0053,0.0,Incomplete Pending Applicant,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+91,2009 ADDISON St,ZP2024-0111,0.0,Resubmittal Pending Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+93,1312 ADDISON St,ZP2024-0125,0.0,Corrections Pending Applicant,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+95,2903 ADELINE St,ZP2025-0006,0.0,Corrections Pending Applicant,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+96,2099 M L KING JR Way,ZP2025-0024,0.0,Incomplete Pending Applicant,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+97,1507 JOSEPHINE St,ZP2025-0025,0.0,Corrections Pending Applicant,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+98,1338 SEVENTH St,ZP2025-0037,0.0,Incomplete Pending Applicant,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+99,2238 SEVENTH St,ZP2025-0057,0.0,Incomplete Pending Applicant,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+100,703 SANTA BARBARA Rd,ZP2025-0058,0.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+101,385 VERMONT Ave,ZP2025-0060,0.0,In Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+102,1246 ROSE St,ZP2025-0076,0.0,Corrections Pending Applicant,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+103,1512 CHANNING Way,ZP2025-0077,0.0,Incomplete Pending Applicant,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+104,1475 CATHERINE Dr,ZP2025-0082,0.0,On Hold,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+105,1187 SHATTUCK Ave,ZP2025-0088,0.0,Pending Final Action,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+106,2016 DELAWARE St A,ZP2025-0090,0.0,Incomplete Pending Applicant,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+107,1123 BLAKE St,ZP2025-0091,0.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+108,830 BANCROFT Way,ZP2025-0096,0.0,Pending Final Action,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+109,2740 SHASTA Rd,ZP2025-0100,0.0,Corrections Pending Applicant,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+110,2143 BLAKE St,ZP2025-0106,0.0,Incomplete Pending Applicant,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+111,411 VASSAR Ave,ZP2025-0109,0.0,Resubmittal Pending Staff,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+112,1621 SACRAMENTO St,ZP2025-0112,1.0,Under Review,,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+135,2150 Kittredge St,B2021-00008,,Completed,occupied,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+136,1951 Shattuck Ave,B2021-04893,,Completed,occupied,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+137,2000 University Ave,B2022-01111,,Completed,occupied,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+138,2099 MLK Jr Way,B2021-03950,,Completed,occupied,False,False,False,0,False,False,35,"zoning_events, building_permits, processing_status, fees, attachments"
+47,1850 BERRYMAN St,"ZP2023-0063, PLN2025-0050, PLN2025-0052",6.0,Incomplete Pending Applicant,,False,False,True,1,False,False,45,"zoning_events, building_permits, fees, attachments"
+50,2420 ASHBY Ave,ZP2024-0147,4.0,Under Review,,False,False,True,1,False,False,45,"zoning_events, building_permits, fees, attachments"
+73,0 LE ROY Ave,PLN2024-0024,1.0,Under Review,,True,False,False,0,True,True,45,"building_permits, processing_status"
+23,2326 DURANT Ave,PLN2024-0023,70.0,Pending,,True,False,False,0,True,True,50,"building_permits, processing_status"
+24,2330 DURANT Ave,"PLN2025-0038, PLN2025-0053, PLN2025-0100",68.0,Under Review,,True,False,False,0,True,True,50,"building_permits, processing_status"
+28,2372 ELLSWORTH St,PLN2024-0054,63.0,Under Review,,True,False,False,0,True,True,50,"building_permits, processing_status"
+32,1740 SAN PABLO Ave,PLN2023-0065,54.0,Under Review,,True,False,False,0,True,True,50,"building_permits, processing_status"
+45,2200 FIFTH St,ZP2025-0085,8.0,Withdrawn,,False,False,True,4,False,False,50,"zoning_events, building_permits, fees, attachments"
+114,2727 HASTE St,ZP2026-0007,45.0,In Review,,False,False,True,4,False,False,50,"zoning_events, building_permits, fees, attachments"
+37,2614 TELEGRAPH Ave,ZP2024-0027,31.0,Corrections Pending Applicant,,False,False,True,9,False,False,55,"zoning_events, building_permits, fees, attachments"
+42,1740 UNIVERSITY Ave,ZP2025-0079,12.0,Approved,,False,False,True,12,False,False,55,"zoning_events, building_permits, fees, attachments"
+152,1598 UNIVERSITY Ave,TBD,207.0,Under Construction,topped_out,True,False,True,56,True,True,55,"permit_discovery, building_permits"
+153,1701 SAN PABLO Ave,TBD,110.0,Under Construction,foundation,True,False,True,16,True,True,55,"permit_discovery, building_permits"
+48,2317 CHANNING Way,PLN2024-0018,5.0,Under Review,,True,False,False,0,True,True,60,"building_permits, processing_status"
+72,5 W PARNASSUS Ct,PLN2025-0048,1.0,Under Review,,True,True,False,0,True,True,60,processing_status
+12,2115 KITTREDGE St,ZP2024-0131,148.0,Incomplete Pending Applicant,,True,False,True,3,True,True,70,building_permits
+25,2455 TELEGRAPH Ave,PLN2025-0066,68.0,Under Review,,True,False,True,4,True,True,70,building_permits
+27,2441 LE CONTE Ave,ZP2023-0089,65.0,Incomplete Pending Applicant,,True,False,True,7,True,True,70,building_permits
+35,2190 SHATTUCK Ave,"ZP2016-0117, ZP2025-0101",452.0,Under Review,,True,False,True,1,True,True,70,building_permits
+36,2733 SAN PABLO Ave,ZP2023-0090,32.0,In Review,,True,False,True,3,True,True,70,building_permits
+66,2204 DWIGHT Way,ZP2024-0059,2.0,Pending Final Action,,True,False,True,3,True,True,70,building_permits
+82,3035 COLBY St,ZP2024-0112,0.0,Approved,,True,False,True,2,True,True,70,building_permits
+115,2455 TELEGRAPH Ave,ZP2026-0015,68.0,Under Review,,True,False,True,3,True,True,70,building_permits
+3,2700 SHATTUCK Ave,ZP2024-0058,359.0,In Review,,True,False,True,8,True,True,75,building_permits
+11,1581 UNIVERSITY Ave,ZP2024-0074,158.0,Corrections Pending Applicant,,True,False,True,10,True,True,75,building_permits
+19,2450 SHATTUCK Ave,ZP2024-0047,94.0,Corrections Pending Applicant,,True,False,True,10,True,True,75,building_permits
+20,2036 BANCROFT Way,ZP2024-0079,85.0,In Review,,True,False,True,7,True,True,75,building_permits
+22,2955 SHATTUCK Ave,ZP2024-0071,74.0,Corrections Pending Applicant,,True,False,True,14,True,True,75,building_permits
+26,2298 DURANT Ave,ZP2024-0126,65.0,Pending Final Action,,True,False,True,9,True,True,75,building_permits
+30,2001 CENTER St,"ZP2025-0107, PLN2025-0039",58.0,In Review,,True,False,True,10,True,True,75,building_permits
+31,2712 TELEGRAPH Ave,ZP2025-0105,57.0,Corrections Pending Applicant,,True,False,True,10,True,True,75,building_permits
+33,130 BERKELEY Sq,ZP2021-0158,50.0,In Review,,True,False,True,6,True,True,75,building_permits
+92,3036 REGENT St,ZP2024-0122,0.0,Corrections Pending Applicant,,True,False,True,12,True,True,75,building_permits
+127,2820 San Pablo,P2022-0038,,Unknown,,True,True,True,9,True,True,75,complete
+130,1048 Keith St,ZP2024-0014,,Approved,,True,False,True,19,True,True,75,building_permits
+2,2276 SHATTUCK Ave,"LMSAP2024-0005, ZP2024-0067",336.0,In Review,,True,False,True,11,True,True,80,building_permits
+4,1914 FIFTH St,"PLN2023-0025, ZP2020-0104",257.0,Under Review,,True,True,True,1,True,True,80,complete
+9,1899 OXFORD St,ZP2024-0075,212.0,Pending Final Action,,True,False,True,18,True,True,80,building_permits
+14,2847 SHATTUCK Ave,"ZP2022-0132, ZP2024-0077",132.0,Incomplete Pending Applicant,,True,True,True,18,True,True,80,complete
+16,2720 SAN PABLO Ave,"ZP2023-0058, ZP2024-0076",113.0,Under Review,,True,True,True,10,True,True,80,complete
+21,2660 BANCROFT Way,ZP2023-0095,78.0,Incomplete Pending Applicant,,True,True,True,1,True,True,80,complete
+117,2317 CHANNING Way,ZP2024-0033,22.0,Approved,,True,False,True,5,True,True,80,building_permits
+1,1750 SACRAMENTO St,"B2025-05534, PLN2024-0010",739.0,Under Review,,True,True,True,21,True,True,85,complete
+6,2029 UNIVERSITY Ave,"ZP2024-0181, ZP2024-0182, PLN2024-0069, PLN2024-0070",240.0,Pending Final Action,,True,False,True,9,True,True,85,building_permits
+7,2601 SAN PABLO Ave,ZP2022-0171,223.0,In Review,,True,True,True,11,True,True,85,complete
+8,2920 SHATTUCK Ave,ZP2022-0116,221.0,In Review,,True,True,True,10,True,True,85,complete
+13,2420 SHATTUCK Ave,ZP2022-0149,132.0,In Review,,True,True,True,22,True,True,85,complete
+17,2109 MILVIA St,ZP2023-0099,105.0,In Review,,True,True,True,11,True,True,85,complete
+29,2138 KITTREDGE St,PLN2024-0011,63.0,Under Review,,True,True,True,4,True,True,85,complete
+113,2138 KITTREDGE St,ZP2026-0006,73.0,Under Review,,True,True,True,1,True,True,85,complete
+116,2462 BANCROFT Way,ZP2023-0107,66.0,Approved,,True,False,True,9,True,True,85,building_permits
+131,811 Cedar,ZP2024-0116,,Approved,,True,True,True,14,True,True,85,complete
+10,3000 SHATTUCK Ave,ZP2022-0046,166.0,In Review,,True,True,True,12,True,True,90,complete
+15,2109 VIRGINIA St,ZP2024-0066,131.0,Approved,,True,True,True,9,True,True,90,complete
+18,2655 SHATTUCK Ave,ZP2024-0057,97.0,Pending Final Action,,True,True,True,11,True,True,90,complete
+34,2680 BANCROFT Way,"ZP2023-0096, ZP2024-0029",37.0,Approved,,True,True,True,11,True,True,90,complete
+41,2147 SAN PABLO Ave,ZP2024-0096,15.0,Pending Final Action,,True,True,True,11,True,True,90,complete
+94,2145 GRANT St,ZP2024-0138,0.0,Pending Final Action,,True,True,True,21,True,True,90,complete
+128,2833 Seventh St,ZP2023-0123,3.0,Approved,,True,True,True,8,True,True,90,complete
+129,1614 Sixth St,ZP2024-0008,3.0,Approved,,True,True,True,10,True,True,90,complete
+132,1627 Jaynes St,ZP2024-0129,,Approved,,True,True,True,10,True,True,90,complete
+133,2128 Oxford St, ZP2022-0135,485.0,Approved,,True,True,True,5,True,True,90,complete
+5,2425 DURANT Ave,"ZP2024-0162, PLN2024-0049",250.0,Pending Final Action,,True,True,True,12,True,True,95,complete
+118,2138 KITTREDGE St,ZP2024-0114,66.0,Approved,,True,True,True,7,True,True,95,complete
+119,1974 SHATTUCK Ave,ZP2023-0040,599.0,Approved,,True,True,True,8,True,True,95,complete
+120,2274 SHATTUCK Ave,ZP2023-0079,227.0,Approved,,True,True,True,12,True,True,95,complete
+121,2100 MILVIA St,ZP2023-0163,201.0,Approved,,True,True,True,7,True,True,95,complete
+122,2530 BANCROFT Way,ZP2023-0126,110.0,Approved,,True,True,True,5,True,True,95,complete
+123,2037 DURANT Ave,ZP2023-0064,74.0,Approved,,True,True,True,5,True,True,95,complete
+124,2442 HASTE St,ZP2024-0070,34.0,Approved,,True,True,True,14,True,True,95,complete
+126,2427 San Pablo,ZP2022-0115,78.0,Approved,,True,True,True,13,True,True,95,complete
+134,2480 Bancroft Way,DRCF2023-0005,28.0,Approved,,True,True,True,7,True,True,95,complete

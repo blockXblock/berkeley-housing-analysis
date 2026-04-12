@@ -1,0 +1,36 @@
+{
+  "description": "Maps Berkeley permit status values to APR APPLICATION_STATUS values",
+  "created": "2026-03-21",
+  "apr_allowed_values": ["Approved", "Pending", "Disapproved"],
+  "source_field": "status",
+  "target_field": "APPLICATION_STATUS",
+  "mapping": {
+    "Approved": "Approved",
+    "Under Review": "Pending",
+    "In Review": "Pending",
+    "Incomplete Pending Applicant": "Pending",
+    "Corrections Pending Applicant": "Pending",
+    "Pending": "Pending",
+    "Pending Final Action": "Pending",
+    "Resubmittal Pending Staff": "Pending",
+    "Resubmittal Pending Review": "Pending",
+    "On Hold": "Pending"
+  },
+  "status_counts": {
+    "Under Review": 40,
+    "Incomplete Pending Applicant": 19,
+    "In Review": 17,
+    "Corrections Pending Applicant": 17,
+    "Pending Final Action": 12,
+    "Approved": 6,
+    "Pending": 3,
+    "Resubmittal Pending Staff": 2,
+    "Resubmittal Pending Review": 1,
+    "On Hold": 1
+  },
+  "notes": [
+    "No projects currently map to 'Disapproved' - Berkeley data doesn't track denials",
+    "All non-Approved statuses mapped to 'Pending' per APR requirements",
+    "6 projects (5%) are Approved; 112 projects (95%) are Pending"
+  ]
+}

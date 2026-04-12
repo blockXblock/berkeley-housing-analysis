@@ -1,8 +1,9 @@
 # City APR vs Database: Project-by-Project Comparison v2
 
-**Generated:** 2026-04-11 11:55
+**Generated:** 2026-04-11 (updated)
 **City Source:** 2026-03-27 Housing Element APR - Table A2
 **Database:** berkeley_housing_analysis.db
+**Last Update:** April 11, 2026 - Added 5 missing CO'd projects, field survey corrections
 
 ---
 
@@ -11,11 +12,31 @@
 | Source | Count | Notes |
 |--------|-------|-------|
 | City APR Table A2 | 235 projects | 178 ADUs, 26 major (5+) |
-| Database | 164 projects | Primarily 5+ unit projects |
-| Matched | 22 projects | Found in both sources |
-| City-only | 213 projects | Need to add/scrape |
-| DB-only (5+ units) | 73 projects | Not in City APR |
-| Discrepancies | 16 projects | Units/VLI mismatch |
+| Database | 175 projects | Primarily 5+ unit projects |
+| Matched | 27 projects | Found in both sources |
+| City-only | 208 projects | Mostly ADUs/SFDs |
+| DB-only (5+ units) | 73 projects | Not in City APR (prior years) |
+| Discrepancies | 12 projects | Units/VLI mismatch |
+
+### April 11, 2026 Updates
+
+**5 missing projects added with 2025 COs:**
+- 2650 Telegraph Ave — 45 units (CO 6/16/2025)
+- 2000 Dwight Way — 113 units (CO 3/15/2025)
+- 2440 Shattuck Ave — 40 units (CO 3/5/2025)
+- 1773 Oxford St — 24 units (CO 5/21/2025)
+- 1698 University Ave — 36 units (CO 5/22/2025)
+
+**Field survey corrections applied (April 3, 2026):**
+- 2317 CHANNING Way: Stalled, demolished_vacant
+- 2538 DURANT Ave: topped_out
+- 2442 HASTE St: demolition started 3/10/2026
+- 2587 TELEGRAPH Ave: topped_out
+- 2480 Bancroft Way: Completed
+- 2680 BANCROFT Way: pre_demolition
+- 2127 DWIGHT Way: Entitled (CO date was incorrect - building still standing)
+- 2300 ELLSWORTH St: framing
+- 3030 TELEGRAPH Ave: finishing, Under Construction
 
 ---
 
@@ -77,19 +98,22 @@ Projects where City APR and database differ:
 
 These need to be added to our database or scraped from Accela:
 
-### Major Projects (5+ units) - 9 projects
+### Major Projects (5+ units) - 4 remaining
 
-| Address | Permit | Units (Ent/BP/CO) | VLI | BP Date | CO Date |
-|---------|--------|-------------------|-----|---------|---------|
-| 1463 Sixth Street | B2024-02508 | 3/3/0 | 0 | 9/18/2025 | nan |
-| 2650 TELEGRAPH Ave | B2021-02225 | 0/0/45 | 4 | nan | 6/16/2025 |
-| 2000 DWIGHT Way | B2021-02404 | 0/0/113 | 0 | nan | 6/17/2025 |
-| St 2001 ASHBY Ave | B2021-02905 | 0/0/87 | 80 | nan | 2/24/2025 |
-| 2440 SHATTUCK Ave | B2022-05117 | 0/0/40 | 3 | nan | 3/5/2025 |
-| 1773 OXFORD St | B2023-02354 | 0/0/24 | 3 | nan | 4/21/2025 |
-| 2435 SAN PABLO Ave | ZP2024-0120 | 1/0/0 | 0 | nan | nan |
-| 1698 UNIVERSITY | B2014-05752 | 0/0/36 | 0 | nan | 5/22/2025 |
-| 1812 UNIVERSITY Ave | B2019-05321 | 0/0/2 | 0 | nan | 9/2/2025 |
+| Address | Permit | Units (Ent/BP/CO) | VLI | BP Date | CO Date | Status |
+|---------|--------|-------------------|-----|---------|---------|--------|
+| 1463 Sixth Street | B2024-02508 | 3/3/0 | 0 | 9/18/2025 | — | Need to add |
+| 2435 SAN PABLO Ave | ZP2024-0120 | 1/0/0 | 0 | — | — | Need to add |
+| 1812 UNIVERSITY Ave | B2019-05321 | 0/0/2 | 0 | — | 9/2/2025 | Need to add |
+
+**✅ ADDED April 11, 2026:**
+| Address | Permit | Units | VLI | BP Date | CO Date |
+|---------|--------|-------|-----|---------|---------|
+| 2650 TELEGRAPH Ave | B2021-02225 | 45 | 0 | 8/2/2023 | 6/16/2025 |
+| 2000 DWIGHT Way | B2021-02404 | 113 | 0 | 4/18/2022 | 3/15/2025 |
+| 2440 SHATTUCK Ave | B2022-02525, B2022-05117 | 40 | 0 | 10/14/2022 | 3/5/2025 |
+| 1773 OXFORD St | B2023-02354 | 24 | 2 | 11/13/2023 | 5/21/2025 |
+| 1698 UNIVERSITY Ave | B2014-05752 | 36 | 0 | 6/20/2017 | 5/22/2025 |
 
 ### Multi-family (2-4 units) - 7 projects
 

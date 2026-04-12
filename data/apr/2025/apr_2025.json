@@ -1,6 +1,6 @@
 {
   "year": 2025,
-  "generated": "2026-04-02T18:14:02.272115",
+  "generated": "2026-04-11T17:28:10.881752",
   "table_a": {
     "title": "Table A: Applications Deemed Complete in 2025",
     "description": "Projects with completeness review finished between 2025-01-01 and 2025-12-31",
@@ -129,6 +129,28 @@
     "description": "Projects that achieved entitlement, building permit, or certificate of occupancy in 2025",
     "projects": [
       {
+        "id": 173,
+        "address": "2000 DWIGHT Way",
+        "apn": null,
+        "permits": "ZP2019-0074, B2021-02404",
+        "net_units": 113,
+        "vli_units": 0,
+        "status": "Completed",
+        "app_filed_date": "2019-05-24",
+        "app_complete_date": "2020-07-01",
+        "entitled_date": "2020-09-30",
+        "bp_issued_date": "2022-04-18",
+        "co_date": "2025-03-15",
+        "density_bonus": 0,
+        "sb35_flag": null,
+        "sb330_flag": null,
+        "ab2011_flag": null,
+        "developer": "Berkeley Ruby WIP Development LLC",
+        "architect": "Trachtenberg Architects",
+        "construction_status": null,
+        "milestone_achieved": "CO Issued"
+      },
+      {
         "id": 154,
         "address": "2001 ASHBY Ave",
         "apn": "053 159101803",
@@ -173,25 +195,47 @@
         "milestone_achieved": "CO Issued"
       },
       {
-        "id": 144,
-        "address": "2127 DWIGHT Way",
-        "apn": "055 189001201",
-        "permits": "TBD",
-        "net_units": 58,
-        "vli_units": 8,
+        "id": 172,
+        "address": "2650 TELEGRAPH Ave",
+        "apn": null,
+        "permits": "ZP2019-0070, B2021-02225",
+        "net_units": 45,
+        "vli_units": 0,
         "status": "Completed",
-        "app_filed_date": "2024-01-01",
-        "app_complete_date": "",
-        "entitled_date": "",
-        "bp_issued_date": "2024-01-01",
-        "co_date": "2025-03-03",
-        "density_bonus": 1,
-        "sb35_flag": 0,
-        "sb330_flag": 0,
-        "ab2011_flag": 0,
-        "developer": "Riaz Capital",
+        "app_filed_date": "2019-05-18",
+        "app_complete_date": "2019-09-20",
+        "entitled_date": "2020-06-16",
+        "bp_issued_date": "2023-08-02",
+        "co_date": "2025-06-16",
+        "density_bonus": 0,
+        "sb35_flag": null,
+        "sb330_flag": null,
+        "ab2011_flag": null,
+        "developer": "2650 TELEGRAPH LP",
         "architect": "Trachtenberg Architects",
-        "construction_status": "Completed",
+        "construction_status": null,
+        "milestone_achieved": "CO Issued"
+      },
+      {
+        "id": 176,
+        "address": "2440 SHATTUCK Ave",
+        "apn": null,
+        "permits": "ZP2021-0201, B2022-02525, B2022-05117",
+        "net_units": 40,
+        "vli_units": 0,
+        "status": "Completed",
+        "app_filed_date": "2021-12-09",
+        "app_complete_date": "2022-02-24",
+        "entitled_date": "2022-06-24",
+        "bp_issued_date": "2022-10-14",
+        "co_date": "2025-03-05",
+        "density_bonus": 0,
+        "sb35_flag": null,
+        "sb330_flag": null,
+        "ab2011_flag": null,
+        "developer": null,
+        "architect": null,
+        "construction_status": null,
         "milestone_achieved": "CO Issued"
       },
       {
@@ -217,6 +261,72 @@
         "milestone_achieved": "CO Issued"
       },
       {
+        "id": 175,
+        "address": "1698 UNIVERSITY Ave",
+        "apn": null,
+        "permits": "DRCF2015-0003, B2014-05752",
+        "net_units": 36,
+        "vli_units": 0,
+        "status": "Completed",
+        "app_filed_date": "2014-12-01",
+        "app_complete_date": "2015-02-26",
+        "entitled_date": "2015-03-20",
+        "bp_issued_date": "2017-06-20",
+        "co_date": "2025-05-22",
+        "density_bonus": 0,
+        "sb35_flag": null,
+        "sb330_flag": null,
+        "ab2011_flag": null,
+        "developer": null,
+        "architect": null,
+        "construction_status": null,
+        "milestone_achieved": "CO Issued"
+      },
+      {
+        "id": 174,
+        "address": "1773 OXFORD St",
+        "apn": null,
+        "permits": "ZP2022-0062, B2023-02354",
+        "net_units": 24,
+        "vli_units": 2,
+        "status": "Completed",
+        "app_filed_date": "2022-05-10",
+        "app_complete_date": "2022-09-21",
+        "entitled_date": "2023-02-17",
+        "bp_issued_date": "2023-11-13",
+        "co_date": "2025-05-21",
+        "density_bonus": 0,
+        "sb35_flag": null,
+        "sb330_flag": null,
+        "ab2011_flag": null,
+        "developer": null,
+        "architect": null,
+        "construction_status": null,
+        "milestone_achieved": "CO Issued"
+      },
+      {
+        "id": 124,
+        "address": "2442 HASTE St",
+        "apn": "055 188101800",
+        "permits": "ZP2024-0070",
+        "net_units": 34,
+        "vli_units": 2,
+        "status": "Under Construction",
+        "app_filed_date": "2024-07-03",
+        "app_complete_date": "2024-10-08",
+        "entitled_date": "2025-09-08",
+        "bp_issued_date": "2025-10-23",
+        "co_date": null,
+        "density_bonus": 0,
+        "sb35_flag": 0,
+        "sb330_flag": 1,
+        "ab2011_flag": 0,
+        "developer": null,
+        "architect": "SDT Architects",
+        "construction_status": "demolition",
+        "milestone_achieved": "BP Issued"
+      },
+      {
         "id": 119,
         "address": "1974 SHATTUCK Ave",
         "apn": "057 205300200",
@@ -227,8 +337,8 @@
         "app_filed_date": "2023-04-25",
         "app_complete_date": "2024-04-11",
         "entitled_date": "2025-06-03",
-        "bp_issued_date": "",
-        "co_date": "",
+        "bp_issued_date": null,
+        "co_date": null,
         "density_bonus": 1,
         "sb35_flag": 0,
         "sb330_flag": 0,
@@ -249,14 +359,36 @@
         "app_filed_date": "2025-08-07",
         "app_complete_date": "2025-08-07",
         "entitled_date": "2025-12-04",
-        "bp_issued_date": "",
-        "co_date": "",
+        "bp_issued_date": null,
+        "co_date": null,
         "density_bonus": 1,
         "sb35_flag": 0,
         "sb330_flag": 1,
         "ab2011_flag": 0,
         "developer": null,
         "architect": null,
+        "construction_status": null,
+        "milestone_achieved": "Entitled"
+      },
+      {
+        "id": 120,
+        "address": "2274 SHATTUCK Ave",
+        "apn": "057 202800300",
+        "permits": "ZP2023-0079",
+        "net_units": 299,
+        "vli_units": 0,
+        "status": "Approved",
+        "app_filed_date": "2023-06-29",
+        "app_complete_date": "2024-01-04",
+        "entitled_date": "2025-04-22",
+        "bp_issued_date": null,
+        "co_date": null,
+        "density_bonus": 1,
+        "sb35_flag": 0,
+        "sb330_flag": 0,
+        "ab2011_flag": 0,
+        "developer": "Panoramic Interests",
+        "architect": "Trachtenberg Architects",
         "construction_status": null,
         "milestone_achieved": "Entitled"
       },
@@ -271,7 +403,7 @@
         "app_filed_date": "2024-11-15",
         "app_complete_date": "2025-03-13",
         "entitled_date": "2025-10-09",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "co_date": null,
         "density_bonus": 1,
         "sb35_flag": 0,
@@ -293,36 +425,14 @@
         "app_filed_date": "2024-12-19",
         "app_complete_date": "2025-06-03",
         "entitled_date": "2025-11-13",
-        "bp_issued_date": "",
-        "co_date": "",
+        "bp_issued_date": null,
+        "co_date": null,
         "density_bonus": 1,
         "sb35_flag": 0,
         "sb330_flag": 0,
         "ab2011_flag": 0,
         "developer": null,
         "architect": null,
-        "construction_status": null,
-        "milestone_achieved": "Entitled"
-      },
-      {
-        "id": 120,
-        "address": "2274 SHATTUCK Ave",
-        "apn": "057 202800300",
-        "permits": "ZP2023-0079",
-        "net_units": 227,
-        "vli_units": 0,
-        "status": "Approved",
-        "app_filed_date": "2023-06-29",
-        "app_complete_date": "2024-01-04",
-        "entitled_date": "2025-04-22",
-        "bp_issued_date": "",
-        "co_date": null,
-        "density_bonus": 1,
-        "sb35_flag": 0,
-        "sb330_flag": 0,
-        "ab2011_flag": 0,
-        "developer": "Panoramic Interests",
-        "architect": "Trachtenberg Architects",
         "construction_status": null,
         "milestone_achieved": "Entitled"
       },
@@ -337,8 +447,8 @@
         "app_filed_date": "2023-12-20",
         "app_complete_date": "2024-05-17",
         "entitled_date": "2025-07-01",
-        "bp_issued_date": "",
-        "co_date": "",
+        "bp_issued_date": null,
+        "co_date": null,
         "density_bonus": 0,
         "sb35_flag": 0,
         "sb330_flag": 0,
@@ -359,8 +469,8 @@
         "app_filed_date": "2022-05-11",
         "app_complete_date": "2022-08-03",
         "entitled_date": "2025-03-11",
-        "bp_issued_date": "",
-        "co_date": "",
+        "bp_issued_date": null,
+        "co_date": null,
         "density_bonus": 1,
         "sb35_flag": 0,
         "sb330_flag": 0,
@@ -381,8 +491,8 @@
         "app_filed_date": "2024-06-12",
         "app_complete_date": "2024-08-19",
         "entitled_date": "2025-08-14",
-        "bp_issued_date": "",
-        "co_date": "",
+        "bp_issued_date": null,
+        "co_date": null,
         "density_bonus": 0,
         "sb35_flag": 0,
         "sb330_flag": 0,
@@ -403,8 +513,8 @@
         "app_filed_date": "2024-09-05",
         "app_complete_date": "2024-09-05",
         "entitled_date": "2025-10-20",
-        "bp_issued_date": "",
-        "co_date": "",
+        "bp_issued_date": null,
+        "co_date": null,
         "density_bonus": 1,
         "sb35_flag": 0,
         "sb330_flag": 1,
@@ -425,8 +535,8 @@
         "app_filed_date": "2024-09-05",
         "app_complete_date": "2024-09-05",
         "entitled_date": "2025-10-20",
-        "bp_issued_date": "",
-        "co_date": "",
+        "bp_issued_date": null,
+        "co_date": null,
         "density_bonus": 1,
         "sb35_flag": 0,
         "sb330_flag": 1,
@@ -447,8 +557,8 @@
         "app_filed_date": "2024-09-05",
         "app_complete_date": "2024-09-05",
         "entitled_date": "2025-10-20",
-        "bp_issued_date": "",
-        "co_date": "",
+        "bp_issued_date": null,
+        "co_date": null,
         "density_bonus": 1,
         "sb35_flag": 0,
         "sb330_flag": 1,
@@ -469,7 +579,7 @@
         "app_filed_date": "2024-03-19",
         "app_complete_date": "2024-04-30",
         "entitled_date": "2025-06-13",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "co_date": null,
         "density_bonus": 0,
         "sb35_flag": 0,
@@ -477,29 +587,7 @@
         "ab2011_flag": 0,
         "developer": null,
         "architect": null,
-        "construction_status": null,
-        "milestone_achieved": "Entitled"
-      },
-      {
-        "id": 124,
-        "address": "2442 HASTE St",
-        "apn": "055 188101800",
-        "permits": "ZP2024-0070",
-        "net_units": 34,
-        "vli_units": 2,
-        "status": "Approved",
-        "app_filed_date": "2024-07-03",
-        "app_complete_date": "2024-10-08",
-        "entitled_date": "2025-09-08",
-        "bp_issued_date": "",
-        "co_date": "",
-        "density_bonus": 0,
-        "sb35_flag": 0,
-        "sb330_flag": 1,
-        "ab2011_flag": 0,
-        "developer": null,
-        "architect": "SDT Architects",
-        "construction_status": null,
+        "construction_status": "pre_demolition",
         "milestone_achieved": "Entitled"
       },
       {
@@ -513,8 +601,8 @@
         "app_filed_date": "2024-07-17",
         "app_complete_date": "2024-08-28",
         "entitled_date": "2025-09-09",
-        "bp_issued_date": "",
-        "co_date": "",
+        "bp_issued_date": null,
+        "co_date": null,
         "density_bonus": 1,
         "sb35_flag": 0,
         "sb330_flag": 0,
@@ -535,8 +623,8 @@
         "app_filed_date": "2024-02-08",
         "app_complete_date": "2024-02-29",
         "entitled_date": "2025-06-04",
-        "bp_issued_date": "",
-        "co_date": "",
+        "bp_issued_date": null,
+        "co_date": null,
         "density_bonus": 0,
         "sb35_flag": 0,
         "sb330_flag": 0,
@@ -557,8 +645,8 @@
         "app_filed_date": "2024-09-05",
         "app_complete_date": "2024-12-19",
         "entitled_date": "2025-07-03",
-        "bp_issued_date": "",
-        "co_date": "",
+        "bp_issued_date": null,
+        "co_date": null,
         "density_bonus": 0,
         "sb35_flag": 0,
         "sb330_flag": 0,
@@ -579,7 +667,7 @@
         "app_filed_date": "2024-09-06",
         "app_complete_date": "2024-10-18",
         "entitled_date": "2025-05-16",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "co_date": null,
         "density_bonus": 0,
         "sb35_flag": 0,
@@ -592,12 +680,12 @@
       }
     ],
     "summary": {
-      "total_projects": 21,
-      "total_units": 2656,
-      "vli_units": 167,
-      "entitled_in_year": 17,
-      "bp_issued_in_year": 0,
-      "co_issued_in_year": 4
+      "total_projects": 25,
+      "total_units": 2928,
+      "vli_units": 161,
+      "entitled_in_year": 16,
+      "bp_issued_in_year": 1,
+      "co_issued_in_year": 8
     }
   },
   "table_b": {
@@ -607,8 +695,8 @@
       {
         "income_level": "Very Low",
         "rhna_target": 1786,
-        "permitted": 353,
-        "percent_of_target": 19.8
+        "permitted": 349,
+        "percent_of_target": 19.5
       },
       {
         "income_level": "Low",
@@ -625,20 +713,20 @@
       {
         "income_level": "Above Moderate",
         "rhna_target": 4668,
-        "permitted": 701,
-        "percent_of_target": 15.0
+        "permitted": 939,
+        "percent_of_target": 20.1
       },
       {
         "income_level": "Total",
         "rhna_target": 8934,
-        "permitted": 1110,
-        "percent_of_target": 12.4
+        "permitted": 1344,
+        "percent_of_target": 15.0
       }
     ],
     "summary": {
-      "total_permitted": 1110,
+      "total_permitted": 1344,
       "total_rhna": 8934,
-      "percent_of_goal": 12.4,
+      "percent_of_goal": 15.0,
       "adu_count": 95
     }
   },
@@ -648,11 +736,19 @@
     "developers": [
       {
         "developer": "Unknown/Individual",
-        "project_count": 10,
-        "total_units": 763,
-        "vli_units": 192,
-        "market_rate_units": 571,
+        "project_count": 14,
+        "total_units": 897,
+        "vli_units": 196,
+        "market_rate_units": 701,
         "density_bonus_projects": 7
+      },
+      {
+        "developer": "Berkeley Ruby WIP Development LLC",
+        "project_count": 1,
+        "total_units": 113,
+        "vli_units": 0,
+        "market_rate_units": 113,
+        "density_bonus_projects": 0
       },
       {
         "developer": "Panoramic Interests",
@@ -671,19 +767,19 @@
         "density_bonus_projects": 1
       },
       {
-        "developer": "Riaz Capital",
+        "developer": "2650 TELEGRAPH LP",
         "project_count": 1,
-        "total_units": 58,
-        "vli_units": 8,
-        "market_rate_units": 50,
-        "density_bonus_projects": 1
+        "total_units": 45,
+        "vli_units": 0,
+        "market_rate_units": 45,
+        "density_bonus_projects": 0
       }
     ],
     "summary": {
-      "total_developers": 3,
-      "total_projects": 14,
-      "total_units": 1015,
-      "total_vli": 325
+      "total_developers": 4,
+      "total_projects": 19,
+      "total_units": 1249,
+      "total_vli": 321
     }
   },
   "adu_summary": {
@@ -709,20 +805,20 @@
       "total": 8934
     },
     "rhna_credit": {
-      "bp_issued_units": 1015,
+      "bp_issued_units": 1249,
       "adu_units": 95,
-      "total_credit": 1110,
-      "vli_units": 325,
-      "percent_of_goal": 12.4
+      "total_credit": 1344,
+      "vli_units": 321,
+      "percent_of_goal": 15.0
     },
     "pipeline": {
-      "total_units": 11235,
-      "vli_units": 911,
+      "total_units": 12316,
+      "vli_units": 913,
       "note": "Pipeline units do NOT count toward RHNA until BP is issued"
     },
     "completed": {
-      "total_units": 407,
-      "vli_units": 134
+      "total_units": 908,
+      "vli_units": 128
     }
   },
   "stalled_projects": {
@@ -737,7 +833,7 @@
         "developer": null,
         "app_complete_date": "",
         "entitled_date": "2026-03-03",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2026-03-03"
       },
       {
@@ -748,7 +844,7 @@
         "developer": "NX Ventures",
         "app_complete_date": "2024-04-11",
         "entitled_date": "2025-06-03",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2025-06-03"
       },
       {
@@ -759,7 +855,7 @@
         "developer": null,
         "app_complete_date": "2023-03-17",
         "entitled_date": "2024-10-04",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2024-10-04"
       },
       {
@@ -770,8 +866,19 @@
         "developer": null,
         "app_complete_date": "2025-08-07",
         "entitled_date": "2025-12-04",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2025-12-23"
+      },
+      {
+        "id": 120,
+        "address": "2274 SHATTUCK Ave",
+        "net_units": 299,
+        "status": "Approved",
+        "developer": "Panoramic Interests",
+        "app_complete_date": "2024-01-04",
+        "entitled_date": "2025-04-22",
+        "bp_issued_date": null,
+        "accela_status_date": "2025-04-22"
       },
       {
         "id": 5,
@@ -781,7 +888,7 @@
         "developer": "Collabhome",
         "app_complete_date": "2025-03-13",
         "entitled_date": "2025-10-09",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2025-12-26"
       },
       {
@@ -792,19 +899,8 @@
         "developer": null,
         "app_complete_date": "2025-06-03",
         "entitled_date": "2025-11-13",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2025-11-17"
-      },
-      {
-        "id": 120,
-        "address": "2274 SHATTUCK Ave",
-        "net_units": 227,
-        "status": "Approved",
-        "developer": "Panoramic Interests",
-        "app_complete_date": "2024-01-04",
-        "entitled_date": "2025-04-22",
-        "bp_issued_date": "",
-        "accela_status_date": "2025-04-22"
       },
       {
         "id": 9,
@@ -814,7 +910,7 @@
         "developer": null,
         "app_complete_date": "2024-10-31",
         "entitled_date": "2026-02-11",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2026-02-11"
       },
       {
@@ -825,7 +921,7 @@
         "developer": "4Terra Investments",
         "app_complete_date": "2024-05-17",
         "entitled_date": "2025-07-01",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2025-07-01"
       },
       {
@@ -836,7 +932,7 @@
         "developer": "NX Ventures",
         "app_complete_date": "2022-08-03",
         "entitled_date": "2025-03-11",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2025-03-11"
       },
       {
@@ -847,7 +943,7 @@
         "developer": null,
         "app_complete_date": "2024-07-03",
         "entitled_date": "2026-02-26",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2026-02-26"
       },
       {
@@ -858,7 +954,7 @@
         "developer": null,
         "app_complete_date": "",
         "entitled_date": "2024-04-01",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": null
       },
       {
@@ -869,7 +965,7 @@
         "developer": null,
         "app_complete_date": "2024-03-12",
         "entitled_date": "2024-12-27",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2024-12-27"
       },
       {
@@ -880,7 +976,7 @@
         "developer": null,
         "app_complete_date": "2024-08-19",
         "entitled_date": "2025-08-14",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2025-08-14"
       },
       {
@@ -891,7 +987,7 @@
         "developer": null,
         "app_complete_date": "2024-02-06",
         "entitled_date": "2024-09-16",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2024-09-16"
       },
       {
@@ -902,7 +998,7 @@
         "developer": null,
         "app_complete_date": "2024-03-29",
         "entitled_date": "2024-06-19",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2024-06-19"
       },
       {
@@ -913,7 +1009,7 @@
         "developer": null,
         "app_complete_date": "2024-09-05",
         "entitled_date": "2025-10-20",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2025-10-20"
       },
       {
@@ -924,7 +1020,7 @@
         "developer": null,
         "app_complete_date": "2024-02-15",
         "entitled_date": "2024-07-01",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2024-07-01"
       },
       {
@@ -935,7 +1031,7 @@
         "developer": null,
         "app_complete_date": "2024-09-05",
         "entitled_date": "2025-10-20",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2025-10-20"
       },
       {
@@ -946,7 +1042,7 @@
         "developer": null,
         "app_complete_date": "2024-09-05",
         "entitled_date": "2025-10-20",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2025-10-20"
       },
       {
@@ -957,29 +1053,18 @@
         "developer": null,
         "app_complete_date": "2024-04-30",
         "entitled_date": "2025-06-13",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2025-06-13"
-      },
-      {
-        "id": 124,
-        "address": "2442 HASTE St",
-        "net_units": 34,
-        "status": "Approved",
-        "developer": null,
-        "app_complete_date": "2024-10-08",
-        "entitled_date": "2025-09-08",
-        "bp_issued_date": "",
-        "accela_status_date": "2025-09-08"
       },
       {
         "id": 134,
         "address": "2480 Bancroft Way",
         "net_units": 28,
-        "status": "Approved",
+        "status": "Completed",
         "developer": null,
         "app_complete_date": "2023-09-12",
         "entitled_date": "2023-10-02",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2023-10-02"
       },
       {
@@ -990,15 +1075,15 @@
         "developer": null,
         "app_complete_date": "2024-08-28",
         "entitled_date": "2025-09-09",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2025-09-09"
       },
       {
         "id": 161,
         "address": "2555 COLLEGE Ave",
-        "net_units": 11,
+        "net_units": 12,
         "status": "Completed",
-        "developer": null,
+        "developer": "Panoramic Interests",
         "app_complete_date": "2022-07-21",
         "entitled_date": "2023-05-31",
         "bp_issued_date": null,
@@ -1012,7 +1097,7 @@
         "developer": null,
         "app_complete_date": "2024-02-26",
         "entitled_date": "2024-05-07",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2024-05-07"
       },
       {
@@ -1023,7 +1108,7 @@
         "developer": null,
         "app_complete_date": "2024-02-22",
         "entitled_date": "2024-10-17",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2024-10-17"
       },
       {
@@ -1034,7 +1119,7 @@
         "developer": null,
         "app_complete_date": "2024-10-24",
         "entitled_date": "2026-03-26",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2026-03-26"
       },
       {
@@ -1045,7 +1130,7 @@
         "developer": null,
         "app_complete_date": "2022-09-29",
         "entitled_date": "2024-12-06",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2024-12-06"
       },
       {
@@ -1056,7 +1141,7 @@
         "developer": null,
         "app_complete_date": "2024-02-29",
         "entitled_date": "2025-06-04",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2025-06-04"
       },
       {
@@ -1067,7 +1152,7 @@
         "developer": null,
         "app_complete_date": "2024-12-19",
         "entitled_date": "2025-07-03",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2025-07-03"
       },
       {
@@ -1078,13 +1163,13 @@
         "developer": null,
         "app_complete_date": "2024-10-18",
         "entitled_date": "2025-05-16",
-        "bp_issued_date": "",
+        "bp_issued_date": null,
         "accela_status_date": "2025-05-16"
       }
     ],
     "summary": {
-      "total_stalled": 32,
-      "total_units_at_risk": 4469
+      "total_stalled": 31,
+      "total_units_at_risk": 4508
     }
   }
 }

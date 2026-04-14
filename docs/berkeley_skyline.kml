@@ -2,7 +2,7 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
     <name>Berkeley Housing Pipeline - 3D Skyline</name>
-    <description>164 housing projects. Heights shown as stories × 3.5m. Generated 2026-04-14.</description>
+    <description>165 housing projects. Heights shown as stories × 3.5m. Generated 2026-04-14.</description>
     <Style id="style_UC_Project">
       <PolyStyle>
         <color>FF00D7FF</color>
@@ -154,6 +154,28 @@
         -122.25737895242521,37.86716921127467,85.3
         -122.25731041300192,37.866676807398164,85.3
         -122.2566210475748,37.86683078872532,85.3
+    </coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+      <Placemark>
+        <name>2556 HASTE St</name>
+        <description><![CDATA[
+<b>2556 HASTE St</b><br/><b>Units:</b> 556<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 12<br/><b>Height:</b> 40.2m<br/><b>Status:</b> Under Construction<br/><b style='color:gold'>UC Berkeley Project</b>
+]]></description>
+        <styleUrl>#style_UC_Project</styleUrl>
+        <Polygon>
+          <extrude>1</extrude>
+          <altitudeMode>relativeToGround</altitudeMode>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>
+        -122.2560,37.8648,40.2
+        -122.2560,37.8660,40.2
+        -122.2570,37.8660,40.2
+        -122.2570,37.8648,40.2
+        -122.2560,37.8648,40.2
     </coordinates>
             </LinearRing>
           </outerBoundaryIs>

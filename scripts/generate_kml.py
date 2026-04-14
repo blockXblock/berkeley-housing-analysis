@@ -173,25 +173,43 @@ def generate_kml():
         description = ''.join(desc_parts)
 
         # Create polygon coordinates with rotation to align with Berkeley street grid
+        # Special case: 2556 HASTE St (People's Park) - full block N-S, half block E-W
+        if '2556 HASTE' in address.upper():
+            # Fixed polygon: NE at Haste & Bowditch, full block to Dwight, half block toward Telegraph
+            coords = f'''
+        -122.2560,37.8648,{height_m}
+        -122.2560,37.8660,{height_m}
+        -122.2570,37.8660,{height_m}
+        -122.2570,37.8648,{height_m}
+        -122.2560,37.8648,{height_m}
+    '''
         # Special case: 2400 BOWDITCH St uses half-block polygon
-        if '2400 BOWDITCH' in address.upper():
+        elif '2400 BOWDITCH' in address.upper():
             # Half-block dimensions: ~55m N-S, ~55m E-W
             dx = 0.00035  # ~55m in longitude at this latitude
             dy = 0.00025  # ~55m in latitude
             center_lon, center_lat = -122.2570, 37.8670
+            se_lon, se_lat = rotate_point(center_lon, center_lat, dx, -dy)
+            ne_lon, ne_lat = rotate_point(center_lon, center_lat, dx, dy)
+            nw_lon, nw_lat = rotate_point(center_lon, center_lat, -dx, dy)
+            sw_lon, sw_lat = rotate_point(center_lon, center_lat, -dx, -dy)
+            coords = f'''
+        {se_lon},{se_lat},{height_m}
+        {ne_lon},{ne_lat},{height_m}
+        {nw_lon},{nw_lat},{height_m}
+        {sw_lon},{sw_lat},{height_m}
+        {se_lon},{se_lat},{height_m}
+    '''
         else:
-            # Standard square footprint
+            # Standard square footprint with rotation
             dx = FOOTPRINT
             dy = FOOTPRINT
             center_lon, center_lat = lng, lat
-
-        # Calculate rotated corners (SE, NE, NW, SW, back to SE)
-        se_lon, se_lat = rotate_point(center_lon, center_lat, dx, -dy)
-        ne_lon, ne_lat = rotate_point(center_lon, center_lat, dx, dy)
-        nw_lon, nw_lat = rotate_point(center_lon, center_lat, -dx, dy)
-        sw_lon, sw_lat = rotate_point(center_lon, center_lat, -dx, -dy)
-
-        coords = f'''
+            se_lon, se_lat = rotate_point(center_lon, center_lat, dx, -dy)
+            ne_lon, ne_lat = rotate_point(center_lon, center_lat, dx, dy)
+            nw_lon, nw_lat = rotate_point(center_lon, center_lat, -dx, dy)
+            sw_lon, sw_lat = rotate_point(center_lon, center_lat, -dx, -dy)
+            coords = f'''
         {se_lon},{se_lat},{height_m}
         {ne_lon},{ne_lat},{height_m}
         {nw_lon},{nw_lat},{height_m}

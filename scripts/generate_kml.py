@@ -173,16 +173,16 @@ def generate_kml():
         description = ''.join(desc_parts)
 
         # Create polygon coordinates with rotation to align with Berkeley street grid
-        # Special case: 2556 HASTE St (People's Park) - 130m E-W, 100m N-S, centered ~40m north
+        # Special case: 2556 HASTE St (People's Park) - 130m E-W, 100m N-S
         if '2556 HASTE' in address.upper():
-            # Center: 37.8658, -122.2565 (moved 40m north from original)
+            # Center: 37.8658, -122.2572 (moved 60m west)
             # 130m E-W = 0.00148° lon, 100m N-S = 0.0009° lat
             coords = f'''
-        -122.25576,37.86535,{height_m}
-        -122.25576,37.86625,{height_m}
-        -122.25724,37.86625,{height_m}
-        -122.25724,37.86535,{height_m}
-        -122.25576,37.86535,{height_m}
+        -122.2564,37.86535,{height_m}
+        -122.2564,37.86625,{height_m}
+        -122.2579,37.86625,{height_m}
+        -122.2579,37.86535,{height_m}
+        -122.2564,37.86535,{height_m}
     '''
         # Special case: 2400 BOWDITCH St uses half-block polygon
         elif '2400 BOWDITCH' in address.upper():

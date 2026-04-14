@@ -2,7 +2,7 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
     <name>Berkeley Housing Pipeline - 3D Skyline</name>
-    <description>164 housing projects. Heights shown as stories × 3.5m. Generated 2026-04-13.</description>
+    <description>164 housing projects. Heights shown as stories × 3.5m. Generated 2026-04-14.</description>
     <Style id="style_UC_Project">
       <PolyStyle>
         <color>FF00D7FF</color>
@@ -138,9 +138,9 @@
     <Folder>
       <name>Housing Projects</name>
       <Placemark>
-        <name>2000 CHANNING Way</name>
+        <name>2400 BOWDITCH St</name>
         <description><![CDATA[
-<b>2000 CHANNING Way</b><br/><b>Units:</b> 750<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 26<br/><b>Height:</b> 85.3m<br/><b>Status:</b> Pre-Application<br/><b style='color:gold'>UC Berkeley Project</b>
+<b>2400 BOWDITCH St</b><br/><b>Units:</b> 750<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 26<br/><b>Height:</b> 85.3m<br/><b>Status:</b> Pre-Application<br/><b style='color:gold'>UC Berkeley Project</b>
 ]]></description>
         <styleUrl>#style_UC_Project</styleUrl>
         <Polygon>
@@ -149,11 +149,11 @@
           <outerBoundaryIs>
             <LinearRing>
               <coordinates>
-        -122.2562,37.866,85.3
-        -122.2558,37.866,85.3
-        -122.2558,37.8664,85.3
-        -122.2562,37.8664,85.3
-        -122.2562,37.866,85.3
+        -122.25680000000001,37.867,85.3
+        -122.2564,37.867,85.3
+        -122.2564,37.867399999999996,85.3
+        -122.25680000000001,37.867399999999996,85.3
+        -122.25680000000001,37.867,85.3
     </coordinates>
             </LinearRing>
           </outerBoundaryIs>

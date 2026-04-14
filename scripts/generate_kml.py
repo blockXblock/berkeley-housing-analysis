@@ -144,14 +144,14 @@ def generate_kml():
         description = ''.join(desc_parts)
 
         # Create polygon coordinates
-        # Special case: 2400 BOWDITCH St uses full block polygon (Channing to Haste, Bowditch to midblock)
+        # Special case: 2400 BOWDITCH St uses half-block polygon (Channing to midblock, Bowditch to midblock)
         if '2400 BOWDITCH' in address.upper():
             coords = f'''
-        -122.2566,37.8660,{height_m}
+        -122.2566,37.8667,{height_m}
         -122.2566,37.8672,{height_m}
-        -122.2576,37.8672,{height_m}
-        -122.2576,37.8660,{height_m}
-        -122.2566,37.8660,{height_m}
+        -122.2573,37.8672,{height_m}
+        -122.2573,37.8667,{height_m}
+        -122.2566,37.8667,{height_m}
     '''
         else:
             # Standard square footprint

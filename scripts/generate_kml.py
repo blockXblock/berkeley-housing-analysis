@@ -13,7 +13,7 @@ DB_PATH = Path('/Users/johngage/berkeley-data/databases/berkeley_housing_analysi
 OUTPUT_PATH = Path('/Users/johngage/berkeley-data/docs/berkeley_skyline.kml')
 
 # Street grid rotation - Berkeley streets run ~350° from true north (10° west of north)
-GRID_ROTATION_DEG = -10  # counterclockwise rotation to align with street grid
+GRID_ROTATION_DEG = 10  # clockwise rotation to align with street grid
 GRID_ROTATION_RAD = math.radians(GRID_ROTATION_DEG)
 LAT_CENTER = 37.87  # approximate center latitude for scaling
 LON_SCALE = math.cos(math.radians(LAT_CENTER))  # ~0.789

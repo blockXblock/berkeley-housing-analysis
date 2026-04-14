@@ -5,11 +5,40 @@ Includes all projects with heights shown as extruded polygons.
 """
 
 import sqlite3
+import math
 from datetime import datetime
 from pathlib import Path
 
 DB_PATH = Path('/Users/johngage/berkeley-data/databases/berkeley_housing_analysis.db')
 OUTPUT_PATH = Path('/Users/johngage/berkeley-data/docs/berkeley_skyline.kml')
+
+# Street grid rotation - Berkeley streets run ~350° from true north (10° west of north)
+GRID_ROTATION_DEG = -10  # counterclockwise rotation to align with street grid
+GRID_ROTATION_RAD = math.radians(GRID_ROTATION_DEG)
+LAT_CENTER = 37.87  # approximate center latitude for scaling
+LON_SCALE = math.cos(math.radians(LAT_CENTER))  # ~0.789
+
+def rotate_point(center_lon, center_lat, dx, dy):
+    """
+    Rotate a point around center by GRID_ROTATION_DEG degrees.
+    dx, dy are offsets in degrees (dy for lat, dx for lon before scaling).
+    Returns (new_lon, new_lat).
+    """
+    # Scale dx for longitude (degrees are narrower at this latitude)
+    dx_scaled = dx / LON_SCALE
+
+    # Rotate
+    cos_a = math.cos(GRID_ROTATION_RAD)
+    sin_a = math.sin(GRID_ROTATION_RAD)
+
+    new_dx = dx_scaled * cos_a - dy * sin_a
+    new_dy = dx_scaled * sin_a + dy * cos_a
+
+    # Scale back and apply to center
+    new_lon = center_lon + new_dx * LON_SCALE
+    new_lat = center_lat + new_dy
+
+    return new_lon, new_lat
 
 # Pipeline stage to style mapping (KML uses AABBGGRR color format)
 # UC Projects get special gold color and render first
@@ -143,24 +172,31 @@ def generate_kml():
 
         description = ''.join(desc_parts)
 
-        # Create polygon coordinates
-        # Special case: 2400 BOWDITCH St uses half-block polygon (Channing to midblock, Bowditch to midblock)
+        # Create polygon coordinates with rotation to align with Berkeley street grid
+        # Special case: 2400 BOWDITCH St uses half-block polygon
         if '2400 BOWDITCH' in address.upper():
-            coords = f'''
-        -122.2566,37.8667,{height_m}
-        -122.2566,37.8672,{height_m}
-        -122.2573,37.8672,{height_m}
-        -122.2573,37.8667,{height_m}
-        -122.2566,37.8667,{height_m}
-    '''
+            # Half-block dimensions: ~55m N-S, ~55m E-W
+            dx = 0.00035  # ~55m in longitude at this latitude
+            dy = 0.00025  # ~55m in latitude
+            center_lon, center_lat = -122.2570, 37.8670
         else:
             # Standard square footprint
-            coords = f'''
-        {lng - FOOTPRINT},{lat - FOOTPRINT},{height_m}
-        {lng + FOOTPRINT},{lat - FOOTPRINT},{height_m}
-        {lng + FOOTPRINT},{lat + FOOTPRINT},{height_m}
-        {lng - FOOTPRINT},{lat + FOOTPRINT},{height_m}
-        {lng - FOOTPRINT},{lat - FOOTPRINT},{height_m}
+            dx = FOOTPRINT
+            dy = FOOTPRINT
+            center_lon, center_lat = lng, lat
+
+        # Calculate rotated corners (SE, NE, NW, SW, back to SE)
+        se_lon, se_lat = rotate_point(center_lon, center_lat, dx, -dy)
+        ne_lon, ne_lat = rotate_point(center_lon, center_lat, dx, dy)
+        nw_lon, nw_lat = rotate_point(center_lon, center_lat, -dx, dy)
+        sw_lon, sw_lat = rotate_point(center_lon, center_lat, -dx, -dy)
+
+        coords = f'''
+        {se_lon},{se_lat},{height_m}
+        {ne_lon},{ne_lat},{height_m}
+        {nw_lon},{nw_lat},{height_m}
+        {sw_lon},{sw_lat},{height_m}
+        {se_lon},{se_lat},{height_m}
     '''
 
         kml_parts.append(f'''

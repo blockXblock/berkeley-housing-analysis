@@ -11,18 +11,21 @@ from pathlib import Path
 DB_PATH = Path('/Users/johngage/berkeley-data/databases/berkeley_housing_analysis.db')
 OUTPUT_PATH = Path('/Users/johngage/berkeley-data/docs/berkeley_skyline.kml')
 
-# Status to style mapping (KML uses AABBGGRR color format)
-STATUS_STYLES = {
-    'Completed': ('ff00ff00', 'Green'),           # Green
-    'Under Construction': ('ffff0000', 'Blue'),   # Blue (KML is BGR)
-    'Finishing': ('ffff8000', 'Light Blue'),      # Light blue
-    'Entitled': ('ff00a5ff', 'Orange'),           # Orange
-    'Under Review': ('ff00a5ff', 'Orange'),       # Orange
-    'Stalled': ('ff0000ff', 'Red'),               # Red
-    'BP Filed': ('ff00a5ff', 'Orange'),           # Orange
-    'Withdrawn': ('ff808080', 'Gray'),            # Gray
-    'Pre-Application': ('ff808080', 'Gray'),      # Gray
-    'Unknown': ('ff808080', 'Gray'),              # Gray
+# Pipeline stage to style mapping (KML uses AABBGGRR color format)
+# UC Projects get special gold color and render first
+PIPELINE_STYLES = {
+    'UC_Project': ('FF00D7FF', 'Gold'),              # Gold - UC projects
+    'Under Construction': ('FF00FF00', 'Green'),     # Green
+    'Completed': ('FFFF0000', 'Blue'),               # Blue
+    'Permits Active': ('FFFFFF00', 'Cyan'),          # Cyan
+    'Entitled': ('FF0080FF', 'Orange'),              # Orange
+    'In Review': ('FF00FFFF', 'Yellow'),             # Yellow
+    'Decision Pending': ('FF00FFFF', 'Yellow'),      # Yellow
+    'Application Submitted': ('FF00FFFF', 'Yellow'), # Yellow
+    'Pre-Application': ('FFC0C0C0', 'Light Gray'),   # Light Gray
+    'Stalled': ('FF0000FF', 'Red'),                  # Red
+    'Withdrawn': ('FF0000FF', 'Red'),                # Red
+    'Unknown': ('FFC0C0C0', 'Light Gray'),           # Light Gray
 }
 
 # Building footprint size (in degrees, roughly 20m)
@@ -45,15 +48,16 @@ def generate_kml():
     cursor = conn.cursor()
 
     # Get all projects with coordinates and heights
+    # UC projects first (render on top), then by units
     cursor.execute('''
         SELECT
             address_display, units, vli_units,
             height_stories, height_feet, status,
             latitude, longitude, pipeline_stage,
-            construction_data_reliability
+            construction_data_reliability, is_uc_project
         FROM projects
         WHERE latitude IS NOT NULL AND longitude IS NOT NULL
-        ORDER BY units DESC
+        ORDER BY is_uc_project DESC, units DESC
     ''')
     projects = cursor.fetchall()
     print(f"Projects with coordinates: {len(projects)}")
@@ -72,9 +76,9 @@ def generate_kml():
     <name>Berkeley Housing Pipeline - 3D Skyline</name>
     <description>''' + f"{len(projects)} housing projects. Heights shown as stories × 3.5m. Generated {datetime.now().strftime('%Y-%m-%d')}." + '''</description>''')
 
-    # Add styles for each status
-    for status, (color, desc) in STATUS_STYLES.items():
-        style_id = get_style_id(status)
+    # Add styles for each pipeline stage
+    for stage, (color, desc) in PIPELINE_STYLES.items():
+        style_id = get_style_id(stage)
         kml_parts.append(f'''
     <Style id="{style_id}">
       <PolyStyle>
@@ -95,8 +99,9 @@ def generate_kml():
 
     # Add each project as a placemark
     projects_added = 0
+    uc_count = 0
     for row in projects:
-        address, units, vli_units, height_stories, height_feet, status, lat, lng, pipeline_stage, reliability = row
+        address, units, vli_units, height_stories, height_feet, status, lat, lng, pipeline_stage, reliability, is_uc_project = row
 
         # Calculate height in meters
         if height_feet:
@@ -112,8 +117,15 @@ def generate_kml():
         # Determine display status
         display_status = pipeline_stage or status or 'Unknown'
 
-        # Get style
-        style_url = get_style_id(status if status in STATUS_STYLES else 'Unknown')
+        # Get style - UC projects get special gold color
+        if is_uc_project:
+            style_key = 'UC_Project'
+            uc_count += 1
+        elif pipeline_stage in PIPELINE_STYLES:
+            style_key = pipeline_stage
+        else:
+            style_key = 'Unknown'
+        style_url = get_style_id(style_key)
 
         # Create description
         desc_parts = [
@@ -124,6 +136,8 @@ def generate_kml():
             f"<b>Height:</b> {height_m}m<br/>",
             f"<b>Status:</b> {display_status}",
         ]
+        if is_uc_project:
+            desc_parts.append("<br/><b style='color:gold'>UC Berkeley Project</b>")
         if reliability == 'estimated_height':
             desc_parts.append("<br/><i>(height estimated from units)</i>")
 
@@ -171,6 +185,7 @@ def generate_kml():
     conn.close()
 
     print(f"\n✓ Generated KML with {projects_added} projects")
+    print(f"  UC projects (gold): {uc_count}")
     print(f"  Output: {OUTPUT_PATH}")
     print(f"  File size: {OUTPUT_PATH.stat().st_size:,} bytes")
 

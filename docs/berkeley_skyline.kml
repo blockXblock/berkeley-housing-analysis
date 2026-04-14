@@ -3,9 +3,9 @@
   <Document>
     <name>Berkeley Housing Pipeline - 3D Skyline</name>
     <description>164 housing projects. Heights shown as stories × 3.5m. Generated 2026-04-13.</description>
-    <Style id="style_Completed">
+    <Style id="style_UC_Project">
       <PolyStyle>
-        <color>ff00ff00</color>
+        <color>FF00D7FF</color>
         <fill>1</fill>
         <outline>1</outline>
       </PolyStyle>
@@ -16,7 +16,7 @@
     </Style>
     <Style id="style_Under_Construction">
       <PolyStyle>
-        <color>ffff0000</color>
+        <color>FF00FF00</color>
         <fill>1</fill>
         <outline>1</outline>
       </PolyStyle>
@@ -25,9 +25,20 @@
         <width>1</width>
       </LineStyle>
     </Style>
-    <Style id="style_Finishing">
+    <Style id="style_Completed">
       <PolyStyle>
-        <color>ffff8000</color>
+        <color>FFFF0000</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+      <LineStyle>
+        <color>ff000000</color>
+        <width>1</width>
+      </LineStyle>
+    </Style>
+    <Style id="style_Permits_Active">
+      <PolyStyle>
+        <color>FFFFFF00</color>
         <fill>1</fill>
         <outline>1</outline>
       </PolyStyle>
@@ -38,7 +49,7 @@
     </Style>
     <Style id="style_Entitled">
       <PolyStyle>
-        <color>ff00a5ff</color>
+        <color>FF0080FF</color>
         <fill>1</fill>
         <outline>1</outline>
       </PolyStyle>
@@ -47,9 +58,9 @@
         <width>1</width>
       </LineStyle>
     </Style>
-    <Style id="style_Under_Review">
+    <Style id="style_In_Review">
       <PolyStyle>
-        <color>ff00a5ff</color>
+        <color>FF00FFFF</color>
         <fill>1</fill>
         <outline>1</outline>
       </PolyStyle>
@@ -58,9 +69,9 @@
         <width>1</width>
       </LineStyle>
     </Style>
-    <Style id="style_Stalled">
+    <Style id="style_Decision_Pending">
       <PolyStyle>
-        <color>ff0000ff</color>
+        <color>FF00FFFF</color>
         <fill>1</fill>
         <outline>1</outline>
       </PolyStyle>
@@ -69,20 +80,9 @@
         <width>1</width>
       </LineStyle>
     </Style>
-    <Style id="style_BP_Filed">
+    <Style id="style_Application_Submitted">
       <PolyStyle>
-        <color>ff00a5ff</color>
-        <fill>1</fill>
-        <outline>1</outline>
-      </PolyStyle>
-      <LineStyle>
-        <color>ff000000</color>
-        <width>1</width>
-      </LineStyle>
-    </Style>
-    <Style id="style_Withdrawn">
-      <PolyStyle>
-        <color>ff808080</color>
+        <color>FF00FFFF</color>
         <fill>1</fill>
         <outline>1</outline>
       </PolyStyle>
@@ -93,7 +93,29 @@
     </Style>
     <Style id="style_Pre_Application">
       <PolyStyle>
-        <color>ff808080</color>
+        <color>FFC0C0C0</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+      <LineStyle>
+        <color>ff000000</color>
+        <width>1</width>
+      </LineStyle>
+    </Style>
+    <Style id="style_Stalled">
+      <PolyStyle>
+        <color>FF0000FF</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+      <LineStyle>
+        <color>ff000000</color>
+        <width>1</width>
+      </LineStyle>
+    </Style>
+    <Style id="style_Withdrawn">
+      <PolyStyle>
+        <color>FF0000FF</color>
         <fill>1</fill>
         <outline>1</outline>
       </PolyStyle>
@@ -104,7 +126,7 @@
     </Style>
     <Style id="style_Unknown">
       <PolyStyle>
-        <color>ff808080</color>
+        <color>FFC0C0C0</color>
         <fill>1</fill>
         <outline>1</outline>
       </PolyStyle>
@@ -118,9 +140,9 @@
       <Placemark>
         <name>2000 CHANNING Way</name>
         <description><![CDATA[
-<b>2000 CHANNING Way</b><br/><b>Units:</b> 750<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 26<br/><b>Height:</b> 85.3m<br/><b>Status:</b> Pre-Application
+<b>2000 CHANNING Way</b><br/><b>Units:</b> 750<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 26<br/><b>Height:</b> 85.3m<br/><b>Status:</b> Pre-Application<br/><b style='color:gold'>UC Berkeley Project</b>
 ]]></description>
-        <styleUrl>#style_Pre_Application</styleUrl>
+        <styleUrl>#style_UC_Project</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -138,11 +160,55 @@
         </Polygon>
       </Placemark>
       <Placemark>
+        <name>2200 BANCROFT Way</name>
+        <description><![CDATA[
+<b>2200 BANCROFT Way</b><br/><b>Units:</b> 550<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 23<br/><b>Height:</b> 77.1m<br/><b>Status:</b> Under Construction<br/><b style='color:gold'>UC Berkeley Project</b>
+]]></description>
+        <styleUrl>#style_UC_Project</styleUrl>
+        <Polygon>
+          <extrude>1</extrude>
+          <altitudeMode>relativeToGround</altitudeMode>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>
+        -122.26480000000001,37.8675,77.1
+        -122.2644,37.8675,77.1
+        -122.2644,37.8679,77.1
+        -122.26480000000001,37.8679,77.1
+        -122.26480000000001,37.8675,77.1
+    </coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+      <Placemark>
+        <name>1950 OXFORD St</name>
+        <description><![CDATA[
+<b>1950 OXFORD St</b><br/><b>Units:</b> 300<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 14<br/><b>Height:</b> 46.9m<br/><b>Status:</b> Completed<br/><b style='color:gold'>UC Berkeley Project</b>
+]]></description>
+        <styleUrl>#style_UC_Project</styleUrl>
+        <Polygon>
+          <extrude>1</extrude>
+          <altitudeMode>relativeToGround</altitudeMode>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>
+        -122.26620000000001,37.8723,46.9
+        -122.2658,37.8723,46.9
+        -122.2658,37.8727,46.9
+        -122.26620000000001,37.8727,46.9
+        -122.26620000000001,37.8723,46.9
+    </coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+      <Placemark>
         <name>1750 SACRAMENTO St</name>
         <description><![CDATA[
 <b>1750 SACRAMENTO St</b><br/><b>Units:</b> 739<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -164,7 +230,7 @@
         <description><![CDATA[
 <b>Ashby BART</b><br/><b>Units:</b> 618<br/><b>VLI Units:</b> 309<br/><b>Stories:</b> 20<br/><b>Height:</b> 70.0m<br/><b>Status:</b> Pre-Application<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Pre_Application</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -204,33 +270,11 @@
         </Polygon>
       </Placemark>
       <Placemark>
-        <name>2200 BANCROFT Way</name>
-        <description><![CDATA[
-<b>2200 BANCROFT Way</b><br/><b>Units:</b> 550<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 23<br/><b>Height:</b> 77.1m<br/><b>Status:</b> Under Construction
-]]></description>
-        <styleUrl>#style_Under_Construction</styleUrl>
-        <Polygon>
-          <extrude>1</extrude>
-          <altitudeMode>relativeToGround</altitudeMode>
-          <outerBoundaryIs>
-            <LinearRing>
-              <coordinates>
-        -122.26480000000001,37.8675,77.1
-        -122.2644,37.8675,77.1
-        -122.2644,37.8679,77.1
-        -122.26480000000001,37.8679,77.1
-        -122.26480000000001,37.8675,77.1
-    </coordinates>
-            </LinearRing>
-          </outerBoundaryIs>
-        </Polygon>
-      </Placemark>
-      <Placemark>
         <name>2128 Oxford St</name>
         <description><![CDATA[
 <b>2128 Oxford St</b><br/><b>Units:</b> 485<br/><b>VLI Units:</b> 47<br/><b>Stories:</b> 26<br/><b>Height:</b> 91.0m<br/><b>Status:</b> Entitled
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Entitled</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -252,7 +296,7 @@
         <description><![CDATA[
 <b>2190 SHATTUCK Ave</b><br/><b>Units:</b> 452<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 34<br/><b>Height:</b> 119.0m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -274,7 +318,7 @@
         <description><![CDATA[
 <b>2700 SHATTUCK Ave</b><br/><b>Units:</b> 359<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 15<br/><b>Height:</b> 52.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -296,7 +340,7 @@
         <description><![CDATA[
 <b>2276 SHATTUCK Ave</b><br/><b>Units:</b> 336<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 18<br/><b>Height:</b> 63.0m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -308,28 +352,6 @@
         -122.26804034145175,37.86793770249066,63.0
         -122.26844034145176,37.86793770249066,63.0
         -122.26844034145176,37.86753770249066,63.0
-    </coordinates>
-            </LinearRing>
-          </outerBoundaryIs>
-        </Polygon>
-      </Placemark>
-      <Placemark>
-        <name>1950 OXFORD St</name>
-        <description><![CDATA[
-<b>1950 OXFORD St</b><br/><b>Units:</b> 300<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 14<br/><b>Height:</b> 46.9m<br/><b>Status:</b> Completed
-]]></description>
-        <styleUrl>#style_Completed</styleUrl>
-        <Polygon>
-          <extrude>1</extrude>
-          <altitudeMode>relativeToGround</altitudeMode>
-          <outerBoundaryIs>
-            <LinearRing>
-              <coordinates>
-        -122.26620000000001,37.8723,46.9
-        -122.2658,37.8723,46.9
-        -122.2658,37.8727,46.9
-        -122.26620000000001,37.8727,46.9
-        -122.26620000000001,37.8723,46.9
     </coordinates>
             </LinearRing>
           </outerBoundaryIs>
@@ -362,7 +384,7 @@
         <description><![CDATA[
 <b>1914 FIFTH St</b><br/><b>Units:</b> 257<br/><b>VLI Units:</b> 26<br/><b>Stories:</b> 15<br/><b>Height:</b> 52.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -384,7 +406,7 @@
         <description><![CDATA[
 <b>2425 DURANT Ave</b><br/><b>Units:</b> 250<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 20<br/><b>Height:</b> 61.0m<br/><b>Status:</b> Decision Pending
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Decision_Pending</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -428,7 +450,7 @@
         <description><![CDATA[
 <b>2601 SAN PABLO Ave</b><br/><b>Units:</b> 223<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -450,7 +472,7 @@
         <description><![CDATA[
 <b>2920 SHATTUCK Ave</b><br/><b>Units:</b> 221<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 10<br/><b>Height:</b> 35.0m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -472,7 +494,7 @@
         <description><![CDATA[
 <b>1899 OXFORD St</b><br/><b>Units:</b> 212<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 23.8m<br/><b>Status:</b> Decision Pending
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Decision_Pending</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -538,7 +560,7 @@
         <description><![CDATA[
 <b>3000 SHATTUCK Ave</b><br/><b>Units:</b> 166<br/><b>VLI Units:</b> 17<br/><b>Stories:</b> 10<br/><b>Height:</b> 34.7m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -560,7 +582,7 @@
         <description><![CDATA[
 <b>1581 UNIVERSITY Ave</b><br/><b>Units:</b> 158<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 48.2m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -582,7 +604,7 @@
         <description><![CDATA[
 <b>2115 KITTREDGE St</b><br/><b>Units:</b> 148<br/><b>VLI Units:</b> 12<br/><b>Stories:</b> 10<br/><b>Height:</b> 35.0m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Application_Submitted</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -626,7 +648,7 @@
         <description><![CDATA[
 <b>2420 SHATTUCK Ave</b><br/><b>Units:</b> 132<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 17<br/><b>Height:</b> 59.5m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -648,7 +670,7 @@
         <description><![CDATA[
 <b>2847 SHATTUCK Ave</b><br/><b>Units:</b> 132<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 9<br/><b>Height:</b> 41.5m<br/><b>Status:</b> Application Submitted
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Application_Submitted</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -670,7 +692,7 @@
         <description><![CDATA[
 <b>2109 VIRGINIA St</b><br/><b>Units:</b> 131<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 39.9m<br/><b>Status:</b> Entitled
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Entitled</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -692,7 +714,7 @@
         <description><![CDATA[
 <b>2136 SAN PABLO Ave</b><br/><b>Units:</b> 125<br/><b>VLI Units:</b> 10<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Entitled
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Entitled</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -714,7 +736,7 @@
         <description><![CDATA[
 <b>2720 SAN PABLO Ave</b><br/><b>Units:</b> 113<br/><b>VLI Units:</b> 9<br/><b>Stories:</b> 10<br/><b>Height:</b> 35.7m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -736,7 +758,7 @@
         <description><![CDATA[
 <b>2530 BANCROFT Way</b><br/><b>Units:</b> 110<br/><b>VLI Units:</b> 11<br/><b>Stories:</b> 12<br/><b>Height:</b> 42.0m<br/><b>Status:</b> Entitled
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Entitled</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -780,7 +802,7 @@
         <description><![CDATA[
 <b>2109 MILVIA St</b><br/><b>Units:</b> 105<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 14<br/><b>Height:</b> 49.0m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -824,7 +846,7 @@
         <description><![CDATA[
 <b>2655 SHATTUCK Ave</b><br/><b>Units:</b> 97<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 25.9m<br/><b>Status:</b> Decision Pending
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Decision_Pending</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -846,7 +868,7 @@
         <description><![CDATA[
 <b>2450 SHATTUCK Ave</b><br/><b>Units:</b> 94<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -890,7 +912,7 @@
         <description><![CDATA[
 <b>2036 BANCROFT Way</b><br/><b>Units:</b> 85<br/><b>VLI Units:</b> 4<br/><b>Stories:</b> 8<br/><b>Height:</b> 25.9m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -912,7 +934,7 @@
         <description><![CDATA[
 <b>1700 SACRAMENTO St</b><br/><b>Units:</b> 85<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -956,7 +978,7 @@
         <description><![CDATA[
 <b>1708 HARMON St</b><br/><b>Units:</b> 80<br/><b>VLI Units:</b> 80<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.5m<br/><b>Status:</b> Permits Active
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Permits_Active</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1000,7 +1022,7 @@
         <description><![CDATA[
 <b>2660 BANCROFT Way</b><br/><b>Units:</b> 78<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Application Submitted
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Application_Submitted</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1022,7 +1044,7 @@
         <description><![CDATA[
 <b>2427 San Pablo</b><br/><b>Units:</b> 78<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 21.3m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Entitled</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1044,7 +1066,7 @@
         <description><![CDATA[
 <b>2955 SHATTUCK Ave</b><br/><b>Units:</b> 74<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 22.9m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1066,7 +1088,7 @@
         <description><![CDATA[
 <b>2037 DURANT Ave</b><br/><b>Units:</b> 74<br/><b>VLI Units:</b> 4<br/><b>Stories:</b> 1<br/><b>Height:</b> 27.4m<br/><b>Status:</b> Entitled
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Entitled</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1088,7 +1110,7 @@
         <description><![CDATA[
 <b>2138 KITTREDGE St</b><br/><b>Units:</b> 73<br/><b>VLI Units:</b> 5<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Entitled</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1132,7 +1154,7 @@
         <description><![CDATA[
 <b>2326 DURANT Ave</b><br/><b>Units:</b> 70<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1154,7 +1176,7 @@
         <description><![CDATA[
 <b>2300 ELLSWORTH St</b><br/><b>Units:</b> 69<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Permits Active
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Permits_Active</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1176,7 +1198,7 @@
         <description><![CDATA[
 <b>2330 DURANT Ave</b><br/><b>Units:</b> 68<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1198,7 +1220,7 @@
         <description><![CDATA[
 <b>2455 TELEGRAPH Ave</b><br/><b>Units:</b> 68<br/><b>VLI Units:</b> 7<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1220,7 +1242,7 @@
         <description><![CDATA[
 <b>2455 TELEGRAPH Ave</b><br/><b>Units:</b> 68<br/><b>VLI Units:</b> 7<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1264,7 +1286,7 @@
         <description><![CDATA[
 <b>2462 BANCROFT Way</b><br/><b>Units:</b> 66<br/><b>VLI Units:</b> 3<br/><b>Stories:</b> 8<br/><b>Height:</b> 26.8m<br/><b>Status:</b> Entitled
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Entitled</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1308,7 +1330,7 @@
         <description><![CDATA[
 <b>2298 DURANT Ave</b><br/><b>Units:</b> 65<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 27.7m<br/><b>Status:</b> Decision Pending
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Decision_Pending</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1330,7 +1352,7 @@
         <description><![CDATA[
 <b>2441 LE CONTE Ave</b><br/><b>Units:</b> 65<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Application_Submitted</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1374,7 +1396,7 @@
         <description><![CDATA[
 <b>2001 CENTER St</b><br/><b>Units:</b> 58<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 30.5m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1418,7 +1440,7 @@
         <description><![CDATA[
 <b>2712 TELEGRAPH Ave</b><br/><b>Units:</b> 57<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1440,7 +1462,7 @@
         <description><![CDATA[
 <b>1740 SAN PABLO Ave</b><br/><b>Units:</b> 54<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1506,7 +1528,7 @@
         <description><![CDATA[
 <b>130 BERKELEY Sq</b><br/><b>Units:</b> 50<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1528,7 +1550,7 @@
         <description><![CDATA[
 <b>2016 ASHBY Ave</b><br/><b>Units:</b> 50<br/><b>VLI Units:</b> 50<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Permits Active
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Permits_Active</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1550,7 +1572,7 @@
         <description><![CDATA[
 <b>2350 TELEGRAPH Ave</b><br/><b>Units:</b> 48<br/><b>VLI Units:</b> 2<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1572,7 +1594,7 @@
         <description><![CDATA[
 <b>2727 HASTE St</b><br/><b>Units:</b> 45<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1594,7 +1616,7 @@
         <description><![CDATA[
 <b>2449 DWIGHT Way</b><br/><b>Units:</b> 39<br/><b>VLI Units:</b> 2<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1682,7 +1704,7 @@
         <description><![CDATA[
 <b>2733 SAN PABLO Ave</b><br/><b>Units:</b> 32<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1704,7 +1726,7 @@
         <description><![CDATA[
 <b>2614 TELEGRAPH Ave</b><br/><b>Units:</b> 31<br/><b>VLI Units:</b> 3<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.4m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1770,7 +1792,7 @@
         <description><![CDATA[
 <b>2800 TELEGRAPH Ave</b><br/><b>Units:</b> 18<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Permits Active<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Permits_Active</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1814,7 +1836,7 @@
         <description><![CDATA[
 <b>1790 UNIVERSITY Ave</b><br/><b>Units:</b> 17<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.1m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1836,7 +1858,7 @@
         <description><![CDATA[
 <b>1710 UNIVERSITY Ave</b><br/><b>Units:</b> 16<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Application Submitted
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Application_Submitted</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1858,7 +1880,7 @@
         <description><![CDATA[
 <b>2147 SAN PABLO Ave</b><br/><b>Units:</b> 15<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 21.3m<br/><b>Status:</b> Decision Pending<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Decision_Pending</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1880,7 +1902,7 @@
         <description><![CDATA[
 <b>1740 UNIVERSITY Ave</b><br/><b>Units:</b> 12<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Entitled</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1902,7 +1924,7 @@
         <description><![CDATA[
 <b>2018 BLAKE St</b><br/><b>Units:</b> 12<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Permits Active
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Permits_Active</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1946,7 +1968,7 @@
         <description><![CDATA[
 <b>1015 UNIVERSITY Ave</b><br/><b>Units:</b> 9<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Application_Submitted</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -1968,7 +1990,7 @@
         <description><![CDATA[
 <b>2428 MILVIA St</b><br/><b>Units:</b> 8<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2012,7 +2034,7 @@
         <description><![CDATA[
 <b>1745 CEDAR St</b><br/><b>Units:</b> 6<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2034,7 +2056,7 @@
         <description><![CDATA[
 <b>1850 BERRYMAN St</b><br/><b>Units:</b> 6<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Application_Submitted</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2056,7 +2078,7 @@
         <description><![CDATA[
 <b>1618 SIXTH St</b><br/><b>Units:</b> 4<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2078,7 +2100,7 @@
         <description><![CDATA[
 <b>2420 ASHBY Ave</b><br/><b>Units:</b> 4<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2100,7 +2122,7 @@
         <description><![CDATA[
 <b>2942 COLLEGE Ave</b><br/><b>Units:</b> 4<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2122,7 +2144,7 @@
         <description><![CDATA[
 <b>2437 WARRING St</b><br/><b>Units:</b> 4<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 7.0m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2144,7 +2166,7 @@
         <description><![CDATA[
 <b>2641 COLLEGE Ave</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2166,7 +2188,7 @@
         <description><![CDATA[
 <b>2205 BLAKE St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2188,7 +2210,7 @@
         <description><![CDATA[
 <b>2221 FIFTH St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2210,7 +2232,7 @@
         <description><![CDATA[
 <b>1650 FIFTH St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2232,7 +2254,7 @@
         <description><![CDATA[
 <b>3101 SACRAMENTO St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2254,7 +2276,7 @@
         <description><![CDATA[
 <b>1449 CORNELL Ave</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 18.3m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2276,7 +2298,7 @@
         <description><![CDATA[
 <b>1514 WALNUT St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2298,7 +2320,7 @@
         <description><![CDATA[
 <b>1464 SIXTH St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2320,7 +2342,7 @@
         <description><![CDATA[
 <b>2812 EIGHTH St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2342,7 +2364,7 @@
         <description><![CDATA[
 <b>2201 BLAKE St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Entitled</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2364,7 +2386,7 @@
         <description><![CDATA[
 <b>2833 Seventh St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 7.0m<br/><b>Status:</b> Entitled
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Entitled</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2386,7 +2408,7 @@
         <description><![CDATA[
 <b>1614 Sixth St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.7m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Entitled</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2408,7 +2430,7 @@
         <description><![CDATA[
 <b>1716 SEVENTH St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2430,7 +2452,7 @@
         <description><![CDATA[
 <b>1515 DERBY St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2452,7 +2474,7 @@
         <description><![CDATA[
 <b>1922 FRANCISCO St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2474,7 +2496,7 @@
         <description><![CDATA[
 <b>2204 DWIGHT Way</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Decision Pending
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Decision_Pending</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2496,7 +2518,7 @@
         <description><![CDATA[
 <b>1419 GRANT St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2518,7 +2540,7 @@
         <description><![CDATA[
 <b>1236 DWIGHT Way</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2540,7 +2562,7 @@
         <description><![CDATA[
 <b>2808 NINTH St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2562,7 +2584,7 @@
         <description><![CDATA[
 <b>3001 BENVENUE Ave</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Decision Pending<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Decision_Pending</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2584,7 +2606,7 @@
         <description><![CDATA[
 <b>40 HILL Rd</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Application_Submitted</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2606,7 +2628,7 @@
         <description><![CDATA[
 <b>5 W PARNASSUS Ct</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2628,7 +2650,7 @@
         <description><![CDATA[
 <b>0 LE ROY Ave</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2650,7 +2672,7 @@
         <description><![CDATA[
 <b>2328 GRANT St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2672,7 +2694,7 @@
         <description><![CDATA[
 <b>1939 MARIN Ave</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2694,7 +2716,7 @@
         <description><![CDATA[
 <b>1731 ADDISON St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2716,7 +2738,7 @@
         <description><![CDATA[
 <b>1420 FIFTH St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Decision Pending<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Decision_Pending</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2738,7 +2760,7 @@
         <description><![CDATA[
 <b>1139 KEELER Ave</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2760,7 +2782,7 @@
         <description><![CDATA[
 <b>1111 ALLSTON Way</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2782,7 +2804,7 @@
         <description><![CDATA[
 <b>659 GRIZZLY PEAK Blvd</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Application_Submitted</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2804,7 +2826,7 @@
         <description><![CDATA[
 <b>1621 SACRAMENTO St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2870,7 +2892,7 @@
         <description><![CDATA[
 <b>1522 JOSEPHINE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2892,7 +2914,7 @@
         <description><![CDATA[
 <b>3035 COLBY St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Entitled</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2914,7 +2936,7 @@
         <description><![CDATA[
 <b>1136 KEITH Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2936,7 +2958,7 @@
         <description><![CDATA[
 <b>1730 PARKER St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Application_Submitted</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2958,7 +2980,7 @@
         <description><![CDATA[
 <b>2740 SHASTA Rd</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Application_Submitted</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -2980,7 +3002,7 @@
         <description><![CDATA[
 <b>1109 COWPER St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3002,7 +3024,7 @@
         <description><![CDATA[
 <b>705 ARLINGTON Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3024,7 +3046,7 @@
         <description><![CDATA[
 <b>2027 SEVENTH St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3046,7 +3068,7 @@
         <description><![CDATA[
 <b>576 SAN LUIS Rd</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Application_Submitted</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3068,7 +3090,7 @@
         <description><![CDATA[
 <b>2009 ADDISON St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Application_Submitted</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3090,7 +3112,7 @@
         <description><![CDATA[
 <b>3036 REGENT St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3112,7 +3134,7 @@
         <description><![CDATA[
 <b>1312 ADDISON St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3134,7 +3156,7 @@
         <description><![CDATA[
 <b>2145 GRANT St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Decision Pending<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Decision_Pending</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3156,7 +3178,7 @@
         <description><![CDATA[
 <b>2903 ADELINE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3178,7 +3200,7 @@
         <description><![CDATA[
 <b>2099 M L KING JR Way</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Application_Submitted</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3200,7 +3222,7 @@
         <description><![CDATA[
 <b>1507 JOSEPHINE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3222,7 +3244,7 @@
         <description><![CDATA[
 <b>1338 SEVENTH St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Application_Submitted</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3244,7 +3266,7 @@
         <description><![CDATA[
 <b>2238 SEVENTH St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Application_Submitted</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3266,7 +3288,7 @@
         <description><![CDATA[
 <b>703 SANTA BARBARA Rd</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3288,7 +3310,7 @@
         <description><![CDATA[
 <b>385 VERMONT Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3310,7 +3332,7 @@
         <description><![CDATA[
 <b>1246 ROSE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3332,7 +3354,7 @@
         <description><![CDATA[
 <b>1512 CHANNING Way</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Application_Submitted</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3354,7 +3376,7 @@
         <description><![CDATA[
 <b>1475 CATHERINE Dr</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3376,7 +3398,7 @@
         <description><![CDATA[
 <b>1187 SHATTUCK Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Decision Pending<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Decision_Pending</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3398,7 +3420,7 @@
         <description><![CDATA[
 <b>2016 DELAWARE St A</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Application_Submitted</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3420,7 +3442,7 @@
         <description><![CDATA[
 <b>1123 BLAKE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3442,7 +3464,7 @@
         <description><![CDATA[
 <b>830 BANCROFT Way</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Decision Pending<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Decision_Pending</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3464,7 +3486,7 @@
         <description><![CDATA[
 <b>2740 SHASTA Rd</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3486,7 +3508,7 @@
         <description><![CDATA[
 <b>2143 BLAKE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Application_Submitted</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3508,7 +3530,7 @@
         <description><![CDATA[
 <b>411 VASSAR Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Application_Submitted</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3552,7 +3574,7 @@
         <description><![CDATA[
 <b>1048 Keith St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Entitled</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3574,7 +3596,7 @@
         <description><![CDATA[
 <b>811 Cedar</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 7.0m<br/><b>Status:</b> Entitled
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Entitled</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3596,7 +3618,7 @@
         <description><![CDATA[
 <b>1627 Jaynes St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled
 ]]></description>
-        <styleUrl>#style_Unknown</styleUrl>
+        <styleUrl>#style_Entitled</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -3706,7 +3728,7 @@
         <description><![CDATA[
 <b>2705 BENVENUE Ave</b><br/><b>Units:</b> -1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>
 ]]></description>
-        <styleUrl>#style_Under_Review</styleUrl>
+        <styleUrl>#style_In_Review</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>

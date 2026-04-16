@@ -12,25 +12,25 @@
 
 | Source | Rows | Total Units | Notes |
 |--------|------|-------------|-------|
-| **Our Table A** | 6 | 877 | Accela-verified applications |
+| **Our Table A** | 6 | 745 | Accela-verified applications |
 | **City Table A** | 16 | 755 | Includes double-count error |
-| **Difference** | +10 | -122 | City has more rows but fewer units |
+| **Difference** | +10 | +10 | City has more rows, similar units |
 
 ---
 
 ## Side-by-Side Comparison
 
-### Our Table A (6 Projects, 877 Units)
+### Our Table A (6 Projects, 745 Units)
 
 | # | Address | APN | Units | VLI | Status | App Complete | Notes |
 |---|---------|-----|-------|-----|--------|--------------|-------|
 | 1 | 2276 SHATTUCK Ave | 057 202800400 | 336 | 0 | In Review | 2025-08-07 | SB330, Density Bonus |
-| 2 | 2425 DURANT Ave | 055 187800701 | 250 | 0 | Pending Final | 2025-03-13 | SB330, Density Bonus |
+| 2 | 2425 DURANT Ave | 055 187800701 | 117 | 0 | Pending Final | 2025-03-13 | SB330, Density Bonus (corrected from 250) |
 | 3 | 2029 UNIVERSITY Ave | 057 205300801 | 240 | 0 | Pending Final | 2025-06-03 | 100% Density Bonus |
 | 4 | 2614 TELEGRAPH Ave | 055 183600800 | 32 | 3 | Corrections | 2025-04-30 | Density Bonus |
 | 5 | 1740 UNIVERSITY Ave | 056 201102200 | 12 | 0 | Approved | 2025-09-15 | Mixed-use conversion |
 | 6 | 2200 FIFTH St | 056 195800301 | 8 | 0 | Withdrawn | 2025-11-24 | Townhouses + R&D |
-| | **TOTAL** | | **877** | **3** | | | |
+| | **TOTAL** | | **745** | **3** | | | |
 
 ### City Table A (16 Projects, 755 Units)
 

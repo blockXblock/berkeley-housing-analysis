@@ -13,8 +13,8 @@
 | Source | Rows | Total Units | Notes |
 |--------|------|-------------|-------|
 | **Our Table A** | 6 | 745 | Accela-verified applications |
-| **City Table A** | 16 | 755 | Includes double-count error |
-| **Difference** | +10 | +10 | City has more rows, similar units |
+| **City Table A** | 17 | 856 | Includes errors (see below) |
+| **Difference** | +11 | +111 | City overstates due to errors |
 
 ---
 
@@ -32,27 +32,28 @@
 | 6 | 2200 FIFTH St | 056 195800301 | 8 | 0 | Withdrawn | 2025-11-24 | Townhouses + R&D |
 | | **TOTAL** | | **745** | **3** | | | |
 
-### City Table A (16 Projects, 755 Units)
+### City Table A (17 Projects, 856 Units)
 
 | # | Address | Units | Status | In Our Data? | Notes |
 |---|---------|-------|--------|--------------|-------|
-| 1 | 2425 DURANT Ave | 68 | Under Review (SMAP) | **NO** | Different project? |
-| 2 | 2029 UNIVERSITY Ave | 160 | Approved | **PARTIAL** | Phase 1 - see error below |
-| 3 | 2029 UNIVERSITY Ave (Phase 2) | 240 | Under Review | **YES** | **DOUBLE-COUNT ERROR** |
-| 4 | 2372 ELLSWORTH St | 49 | Under Review | **NO** | Not in our 2025 Table A |
-| 5 | 2598 TELEGRAPH Ave | 17 | Approved | **NO** | Not in our 2025 Table A |
-| 6 | 2080 ALLSTON Way | 14 | Approved | **NO** | Not in our 2025 Table A |
-| 7 | 2740 SAN PABLO Ave | 13 | Approved | **NO** | Not in our 2025 Table A |
-| 8 | 1685 SOLANO Ave | 10 | Under Review | **NO** | Not in our 2025 Table A |
-| 9 | 1290 SIXTH St | 11 | Under Review | **NO** | Not in our 2025 Table A |
-| 10 | 2055 CENTER St | 49 | Approved | **NO** | Not in our 2025 Table A |
-| 11 | 3000 SHATTUCK Ave | 50 | Under Review | **NO** | Not in our 2025 Table A |
-| 12 | 1701 UNIVERSITY Ave | 35 | Under Review | **NO** | Not in our 2025 Table A |
-| 13 | 2118 DWIGHT Way | 7 | Approved (SB 35) | **NO** | SB 35 streamlined |
-| 14 | 2312 SAN PABLO Ave | 17 | Approved | **NO** | Not in our 2025 Table A |
-| 15 | 1733 UNIVERSITY Ave | 3 | Under Review | **NO** | Small project |
-| 16 | 1740 UNIVERSITY Ave | 12 | Approved | **YES** | Match |
-| | **TOTAL** | **755** | | | |
+| 1 | 2425 DURANT Ave | 169 | Pending | **YES** | **OVERSTATED by 52 units** (actual: 117) |
+| 2 | 2330 DURANT Ave | 68 | Under Review (SMAP) | **NO** | Different project |
+| 3 | 2029 UNIVERSITY Ave | 160 | Approved | **PARTIAL** | Phase 1 - see error below |
+| 4 | 2029 UNIVERSITY Ave (Phase 2) | 240 | Under Review | **YES** | **DOUBLE-COUNT ERROR** |
+| 5 | 2372 ELLSWORTH St | 49 | Under Review | **NO** | Not in our 2025 Table A |
+| 6 | 2598 TELEGRAPH Ave | 17 | Approved | **NO** | Not in our 2025 Table A |
+| 7 | 2080 ALLSTON Way | 14 | Approved | **NO** | Not in our 2025 Table A |
+| 8 | 2740 SAN PABLO Ave | 13 | Approved | **NO** | Not in our 2025 Table A |
+| 9 | 1685 SOLANO Ave | 10 | Under Review | **NO** | Not in our 2025 Table A |
+| 10 | 1290 SIXTH St | 11 | Under Review | **NO** | Not in our 2025 Table A |
+| 11 | 2055 CENTER St | 49 | Approved | **NO** | Not in our 2025 Table A |
+| 12 | 3000 SHATTUCK Ave | 50 | Under Review | **NO** | Not in our 2025 Table A |
+| 13 | 1701 UNIVERSITY Ave | 35 | Under Review | **NO** | Not in our 2025 Table A |
+| 14 | 2118 DWIGHT Way | 7 | Approved (SB 35) | **NO** | SB 35 streamlined |
+| 15 | 2312 SAN PABLO Ave | 17 | Approved | **NO** | Not in our 2025 Table A |
+| 16 | 1733 UNIVERSITY Ave | 3 | Under Review | **NO** | Small project |
+| 17 | 1740 UNIVERSITY Ave | 12 | Approved | **YES** | Match |
+| | **TOTAL** | **856** | | | |
 
 ---
 
@@ -95,21 +96,49 @@ There is no "Phase 1" with 160 units. The City appears to have:
 
 ---
 
+## Critical Error: 2425 Durant Ave Over-Count
+
+### The Problem
+
+The City's Table A reports **169 units** for 2425 DURANT Ave:
+- VLI: 6 units
+- LI: 7 units
+- Mod: 6 units
+- Above Mod: 13 + 137 = 150 units
+- **City Total: 169 units**
+
+### The Reality
+
+The actual project has **117 units**:
+- Permit: ZP2024-0162
+- Source: Accela permit description + Gellerman architectural KML
+- Building: 20-story, 200-ft tall, 135,750 SF
+- Bedrooms: 248 (18 one-bed, 134 two-bed, 96 three-bed)
+- **Actual units: 117**
+
+### Impact
+
+| Metric | City Reported | Actual | Error |
+|--------|---------------|--------|-------|
+| Units at 2425 Durant | 169 | 117 | **+52 over-count** |
+
+---
+
 ## Match Analysis
 
 ### Projects in BOTH Tables
 
-| Address | Our Units | City Units | Match? |
-|---------|-----------|------------|--------|
-| 2029 UNIVERSITY Ave | 240 | 240 (Phase 2) | Yes |
-| 1740 UNIVERSITY Ave | 12 | 12 | Yes |
+| Address | Our Units | City Units | Match? | Notes |
+|---------|-----------|------------|--------|-------|
+| 2425 DURANT Ave | 117 | 169 | **NO** | City overstates by 52 units |
+| 2029 UNIVERSITY Ave | 240 | 240 (Phase 2) | Yes | But city also lists phantom 160-unit entry |
+| 1740 UNIVERSITY Ave | 12 | 12 | Yes | |
 
 ### Projects in Our Table A Only
 
 | Address | Units | Why Not in City Table A? |
 |---------|-------|--------------------------|
 | 2276 SHATTUCK Ave | 336 | App complete Aug 2025 - may be in different table |
-| 2425 DURANT Ave | 250 | City shows 68 units at same address (different project?) |
 | 2614 TELEGRAPH Ave | 32 | App complete Apr 2025 - may be categorized differently |
 | 2200 FIFTH St | 8 | Withdrawn - may be excluded |
 
@@ -117,7 +146,8 @@ There is no "Phase 1" with 160 units. The City appears to have:
 
 | Address | Units | Why Not in Our Table A? |
 |---------|-------|-------------------------|
-| 2029 UNIVERSITY Ave (160) | 160 | **ERROR** - phantom entry |
+| 2029 UNIVERSITY Ave (160) | 160 | **ERROR** - phantom entry (double-count) |
+| 2330 DURANT Ave | 68 | Different project (SMAP) |
 | 2372 ELLSWORTH St | 49 | Prior year application |
 | 2598 TELEGRAPH Ave | 17 | Prior year entitled |
 | 2080 ALLSTON Way | 14 | Prior year entitled |
@@ -130,7 +160,6 @@ There is no "Phase 1" with 160 units. The City appears to have:
 | 2118 DWIGHT Way | 7 | SB 35 streamlined |
 | 2312 SAN PABLO Ave | 17 | Prior year entitled |
 | 1733 UNIVERSITY Ave | 3 | Small project |
-| 2330 DURANT Ave | 68 | SMAP - different tracking |
 
 ---
 
@@ -139,16 +168,17 @@ There is no "Phase 1" with 160 units. The City appears to have:
 | Issue | Count | Units Affected | Severity |
 |-------|-------|----------------|----------|
 | **Double-count (2029 University)** | 1 | +160 | **Critical** |
-| Projects in city but not ours | 13 | ~393 | Medium (prior years) |
-| Projects in ours but not city | 4 | ~626 | Medium (timing) |
-| Unit count mismatch (2425 Durant) | 1 | 182 | Investigate |
+| **Over-count (2425 Durant)** | 1 | +52 | **Critical** |
+| **Total City Over-count** | 2 | **+212** | **Critical** |
+| Projects in city but not ours | 14 | ~393 | Medium (prior years) |
+| Projects in ours but not city | 3 | ~376 | Medium (timing) |
 
 ---
 
 ## Recommendations
 
-1. **Report 2029 University error to City** - 160 phantom units inflating Table A
-2. **Verify 2425 Durant Ave** - City shows 68 units, we show 250 (different projects?)
+1. **Report 2029 University error to City** - 160 phantom units (double-count)
+2. **Report 2425 Durant error to City** - 169 units reported, actual is 117 (+52 over-count)
 3. **Clarify Table A scope** - City includes prior-year applications; we include only 2025 completions
 4. **Add withdrawn projects** - 2200 Fifth St (8 units) was withdrawn, may explain exclusion
 

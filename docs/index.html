@@ -128,34 +128,115 @@
         <h1>Berkeley Housing Pipeline Analysis</h1>
         <p>These several web sites are designed to track every step of our actual housing development from permit application to certificate of occupancy to actual occupation. Originally guilt to prepare Berkeley's Annual Progrss Report to the California Housing and Community Development department using an independent, completely open public database constructed from the City of Berkeley Open.Gov data, we now have outlined a new way to inlist thousands of data science students and instructors to help our overburdened planning offices in every city tell our housing story in a clear and accurate way.  These pages are a first attempt. </p>
         <p>In building our independent APR for 2023, 2024, and 2025, it became clear that the official APR suffered from cumulative double counting, errors in dating of entitlements, of issuance of actual building permits and inspections. Since  of January 1, 2026, here are the differences; When correcting for identified accounting errors and redundant project entries, the actual volume of residential units issued building permits is as follows:
-Year
-Reported Units Permitted
-Deductions (Inaccuracies)
-Actual Unique Units
-2025
-463 units
--200 units
-263 units
-2024
-731 units
--486 units
-245 units
-2023
-431 units
--126 units
-305 units
-2022
-887 units
-0 units
-887 units
-2021
-659 units
-0 units
-659 units
-2020
-733 units
--267 units
-466 units </p>
+</p>
+
+        <table class="permit-table">
+  <caption>
+    Residential units issued building permits after correcting accounting errors and redundant project entries
+  </caption>
+  <thead>
+    <tr>
+      <th scope="col">Year</th>
+      <th scope="col">Reported Units Permitted</th>
+      <th scope="col">Deductions (Inaccuracies)</th>
+      <th scope="col">Actual Unique Units</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">2025</th>
+      <td>463 units</td>
+      <td>-200 units</td>
+      <td>263 units</td>
+    </tr>
+    <tr>
+      <th scope="row">2024</th>
+      <td>731 units</td>
+      <td>-486 units</td>
+      <td>245 units</td>
+    </tr>
+    <tr>
+      <th scope="row">2023</th>
+      <td>431 units</td>
+      <td>-126 units</td>
+      <td>305 units</td>
+    </tr>
+    <tr>
+      <th scope="row">2022</th>
+      <td>887 units</td>
+      <td>0 units</td>
+      <td>887 units</td>
+    </tr>
+    <tr>
+      <th scope="row">2021</th>
+      <td>659 units</td>
+      <td>0 units</td>
+      <td>659 units</td>
+    </tr>
+    <tr>
+      <th scope="row">2020</th>
+      <td>733 units</td>
+      <td>-267 units</td>
+      <td>466 units</td>
+    </tr>
+  </tbody>
+</table>
+        <p> Not huge errors, but when Berkeley is tasked by the State to enable over 1,000 new units to be built each year until 2031, 
+            we are behind in application, behind in entitlements, behind in building permits issued, and, most importantly, behind in buildlings completed, ready for occupancy. The State tracks building permits issued: the real issue is that almost all actual construction is stalled. </p>
+ <table class="completion-table">
+  <caption>
+    Residential units completed after removing identified duplicate entries
+  </caption>
+  <thead>
+    <tr>
+      <th scope="col">Year</th>
+      <th scope="col">Reported Units Completed</th>
+      <th scope="col">Identified Duplicates</th>
+      <th scope="col">Actual Unique Units</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">2025</th>
+      <td>493 units</td>
+      <td>-11 units</td>
+      <td>482 units</td>
+    </tr>
+    <tr>
+      <th scope="row">2024</th>
+      <td>708 units</td>
+      <td>0 identified</td>
+      <td>708 units</td>
+    </tr>
+    <tr>
+      <th scope="row">2023</th>
+      <td>716 units</td>
+      <td>0 identified</td>
+      <td>716 units</td>
+    </tr>
+    <tr>
+      <th scope="row">2022</th>
+      <td>828 units</td>
+      <td>0 identified</td>
+      <td>828 units</td>
+    </tr>
+    <tr>
+      <th scope="row">2021</th>
+      <td>(Broken Summary)</td>
+      <td>N/A</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <th scope="row">2020</th>
+      <td>399 units</td>
+      <td>0 identified</td>
+      <td>399 units</td>
+    </tr>
+  </tbody>
+</table>       
+        
+        
+        
         <div class="stats">
             <div class="stat">
                 <div class="stat-value" id="stat-projects">--</div>

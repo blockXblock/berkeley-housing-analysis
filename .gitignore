@@ -25,3 +25,34 @@ databases/
 berkeleyshops-audience/
 hello-fly/
 .obsidian/
+
+# Obsidian per-user state
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Large binary exports
+*.zip
+*.m4v
+*.mov
+*.mp4
+
+# PDFs — managed via document mirror subsystem (IA + R2), not git
+pdf/
+*.pdf
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+.venv/
+venv/
+
+# SQLite auxiliary files
+*.db-journal
+*.db-wal
+*.db-shm

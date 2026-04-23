@@ -56,3 +56,6 @@ venv/
 *.db-journal
 *.db-wal
 *.db-shm
+
+# Pending review — do not commit until notebook is reconciled
+notebooks/MASTER_ANALYSIS.ipynb

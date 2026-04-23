@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Methodology — Berkeley Housing Pipeline</title>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent: #3182ce;
+            --light: #ebf8ff;
+            --text: #2d3748;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: #f7fafc;
+        }
+        .nav-header {
+            background: var(--primary);
+            padding: 1rem 2rem;
+        }
+        .nav-header a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .nav-header a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+            min-height: calc(100vh - 120px);
+        }
+        h1 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        h2 {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 0.5rem;
+        }
+        h3 {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        p {
+            max-width: 70ch;
+            margin-bottom: 1rem;
+        }
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        strong {
+            color: var(--primary);
+        }
+        code {
+            background: var(--light);
+            padding: 0.15rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.9rem;
+        }
+        blockquote {
+            background: var(--light);
+            border-left: 4px solid var(--accent);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+        blockquote p {
+            margin: 0;
+        }
+        .citation-note {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #e2e8f0;
+            margin: 2rem 0;
+        }
+        a {
+            color: var(--accent);
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .toc {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        .toc h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        .toc ul {
+            margin: 0.5rem 0 0 0;
+        }
+        .toc li {
+            margin-bottom: 0.25rem;
+        }
+        .bucket {
+            background: #f7fafc;
+            border-left: 3px solid var(--accent);
+            padding: 0.75rem 1rem;
+            margin: 0.75rem 0;
+        }
+        .bucket strong {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+        .meta {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+        }
+        footer a { color: var(--light); }
+        @media (max-width: 600px) {
+            .container { padding: 1rem; }
+            h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="nav-header">
+    <a href="index.html">&larr; Back to Berkeley Housing Pipeline</a>
+</div>
+
+<div class="container">
+    <h1>Methodology</h1>
+    <p class="subtitle">How the BlockXBlock Berkeley Housing Pipeline database is built, what it counts, and how to verify or challenge any number.</p>
+
+    <div class="toc">
+        <h3>Contents</h3>
+        <ul>
+            <li><a href="#scope">Scope</a></li>
+            <li><a href="#buckets">What we count, bucket by bucket</a></li>
+            <li><a href="#units">Unit accounting</a></li>
+            <li><a href="#sources">Data sources</a></li>
+            <li><a href="#differences">How this may differ from official counts</a></li>
+            <li><a href="#cadence">Update cadence</a></li>
+            <li><a href="#limitations">Limitations</a></li>
+            <li><a href="#citation">Citation and reuse</a></li>
+            <li><a href="#corrections">Corrections</a></li>
+        </ul>
+    </div>
+
+    <p>The short version: this project is an independent, database-first record of Berkeley's housing development pipeline, assembled from city permit portals, county assessor data, and direct observation. Every headline number on this site traces back to a SQL query against a public database. If a number looks wrong, the query is linked — run it yourself.</p>
+
+    <p>For those unfamiliar with SQL, check out the UC Berkeley classes in data science: <a href="https://www.data8.org/" target="_blank">Data Science 8</a>. Use Claude or Perplexity, or both in tandem, to create SQL queries to explore your questions.</p>
+
+    <hr>
+
+    <h2 id="scope">Scope</h2>
+
+    <p><strong>What's in:</strong> Residential housing projects in the City of Berkeley that appear in the city's permit or planning records and involve five or more housing units. This includes new construction, major infill, mixed-use projects with residential components, and adaptive reuse.</p>
+
+    <p><strong>What's out:</strong></p>
+    <ul>
+        <li>Accessory Dwelling Units (ADUs). Berkeley's ADU pipeline is large and well-covered by the city's own dashboards. ADUs are not in this database; they are tracked via the city's own dedicated ADU dashboards.</li>
+        <li>Single-family home permits (fewer than five units).</li>
+        <li>Demolition-only permits with no replacement housing.</li>
+        <li>Non-residential construction.</li>
+        <li>University of California projects on UC-owned land, which follow a separate entitlement process outside the city's jurisdiction. We flag these where we see them but don't claim completeness.</li>
+    </ul>
+
+    <p><strong>Time range:</strong> Projects are included from their first appearance in any tracked source (typically a planning application filing) through either completion, withdrawal, or five years of inactivity, whichever comes first.</p>
+
+    <hr>
+
+    <h2 id="buckets">What we count, bucket by bucket</h2>
+
+    <p>A project's position in the pipeline is recorded as a lifecycle stage. The database uses the following buckets, each backed by a specific database query you can verify. These stages are analytic buckets derived from city statuses and events, not legal categories:</p>
+
+    <div class="bucket">
+        <strong>Planning review (active)</strong>
+        Projects that have filed an application but do not yet have approval. This includes every sub-state of Berkeley's internal workflow — under staff review, waiting on the applicant, scheduled for ZAB, and so on. The exact definition is encoded as a SQL view in the public database (see <code>v_projects_planning_review</code> in the schema).
+    </div>
+
+    <div class="bucket">
+        <strong>Approved, pre-permit</strong>
+        Projects with planning approval (status <code>Entitled</code> or <code>Approved</code> in city data) but no building permit yet issued. This is the entitlement-to-construction gap.
+    </div>
+
+    <div class="bucket">
+        <strong>Permit-filed, pre-construction</strong>
+        Projects with building permit or demolition permit activity but no observed construction. Includes "Pending Final Action," "Building Permits Filed," and "Demolition Permits Filed" statuses.
+    </div>
+
+    <div class="bucket">
+        <strong>Under construction</strong>
+        Projects with active construction observed or reported. This is the smallest bucket.
+    </div>
+
+    <div class="bucket">
+        <strong>Completed</strong>
+        Projects with Certificate of Occupancy issued within the reporting period.
+    </div>
+
+    <p>A note on the Entitled/Approved distinction: Berkeley's Accela system uses both status strings, seemingly interchangeably, for projects that have received planning approval but have not yet pulled building permits. This database treats them as a single analytic bucket. Query: <code>WHERE status IN ('Entitled', 'Approved')</code>.</p>
+
+    <p>City 'status' strings encode two things: where a project is in its lifecycle, and who the work is waiting on. The database separates these into lifecycle stages and workflow states so questions like "how many projects are stuck waiting on the applicant?" are answerable.</p>
+
+    <p>In this database, "entitled" means a project has received a land-use/planning approval (e.g. Zoning/Use Permit decision). "Finalized" building permits, which indicate that construction work and inspections are complete, are treated as completion events, not as entitlements.</p>
+
+    <hr>
+
+    <h2 id="units">Unit accounting</h2>
+
+    <p>Three unit counts are tracked for every project because they answer different questions:</p>
+
+    <ul>
+        <li><strong>Total units</strong> (<code>units</code>) — the headline count, matching how the city typically reports a project's size.</li>
+        <li><strong>Gross units proposed</strong> (<code>new_units</code>) — new construction unit count, pre-demolition.</li>
+        <li><strong>Units demolished</strong> (<code>old_units</code>) — existing units being removed, for infill projects replacing existing housing.</li>
+        <li><strong>Net new units</strong> (<code>net_new_units</code>) — <code>gross_units_proposed - units_demolished</code>. Net new units is the metric that aligns with California HCD's Annual Progress Report guidance for counting production.</li>
+    </ul>
+
+    <p>Example: if a 20-unit project replaces a 10-unit rent-controlled building, <code>gross_units_proposed = 20</code>, <code>units_demolished = 10</code>, <code>total_units = 20</code>, and <code>net_new_units = 10</code>.</p>
+
+    <p>For greenfield projects on vacant land, all four are equal and <code>units_demolished</code> is zero. For infill projects replacing existing rental housing, <code>total_units</code> and <code>net_new_units</code> can differ substantially, and the difference matters for honest accounting of Berkeley's net housing production.</p>
+
+    <p><strong>Very Low Income (VLI), Low Income (LI), and Moderate Income (MOD)</strong> units are counted from project affordability agreements where they exist, from planning conditions of approval where they don't, and are flagged with a lower confidence value when inferred rather than documented.</p>
+
+    <hr>
+
+    <h2 id="sources">Data sources</h2>
+
+    <h3>City of Berkeley Accela portal</h3>
+    <p>The primary source for planning applications, use permits, design review, building permits, and inspection records. Scraped via a targeted adapter that respects the city's rate limits and records every request. Berkeley is expected to migrate from Accela to Clariti; this database's schema is designed to accommodate the transition.</p>
+
+    <h3>Alameda County Assessor</h3>
+    <p>Primary source for parcel geometry, APNs, and lot sizes. Cross-referenced monthly.</p>
+
+    <h3>HCD Annual Progress Reports</h3>
+    <p>Berkeley's own submissions to the California Department of Housing and Community Development. Used to cross-check and occasionally to correct.</p>
+
+    <h3>Direct observation</h3>
+    <p>Site visits, dated photographs, and correspondence with city staff. Events sourced this way are marked <code>is_inferred = 0</code>, <code>source_type = 'observation'</code> and attributed in the <code>observed_by</code> field. Events from on-the-ground observation are tagged with <code>asserted_by = 'observation'</code> and medium confidence, and they link to photo or note evidence where possible.</p>
+
+    <h3>Public correspondence</h3>
+    <p>Planning Commission packets, ZAB packets, staff reports, CEQA documents. Mirrored to Internet Archive and Cloudflare R2 so the record survives reorganizations of the city's own document storage.</p>
+
+    <p>Every fact in the database carries a provenance record: which source it came from, who or what system asserted it, when, and with what confidence. This is queryable; nothing is a black box.</p>
+
+    <p>The provenance fields are first-class columns in the database, not annotations on this page; you can filter or group by <code>asserted_by</code> and <code>confidence</code> in any query.</p>
+
+    <hr>
+
+    <h2 id="differences">How this may differ from official counts</h2>
+
+    <p>The city of Berkeley and the state of California publish their own housing pipeline numbers. When our counts differ from theirs, the difference is usually traceable to one of the following:</p>
+
+    <p><strong>Methodology differences in what counts as "entitled."</strong> The city's HCD Annual Progress Report follows HCD's statutory definitions, which are specific to the reporting year and exclude some projects (e.g., those entitled in prior years that didn't progress). This database counts all currently-pending entitlements regardless of which year they originated in. Both are correct for their purposes; they answer different questions.</p>
+
+    <p><strong>Timing lag.</strong> City dashboards update on varying schedules. This database updates weekly and is typically more current on the planning-review side. Conversely, the city sometimes has advance information about permit issuances that hasn't appeared in the public Accela feed yet, in which case the city will be more current.</p>
+
+    <p><strong>Inclusion of projects the city doesn't count in a given report.</strong> HCD reporting categorizes projects narrowly; this database includes the full pipeline. So for example a project in design review that has not yet been approved won't appear in an HCD "entitled" count but will appear in our "planning review" bucket.</p>
+
+    <p><strong>Correction of errors.</strong> Where we've found clear data errors in city sources — duplicate project entries, unit counts that don't match the approved plans, addresses that don't resolve — we've corrected them, documented the correction, and flagged the original source. All corrections are logged with <code>asserted_by = 'correction'</code> and a link to the evidence.</p>
+
+    <p><strong>Observations the city doesn't make.</strong> Construction-start dates, topping-out dates, and similar milestones are often not recorded in the city's permit data. We record them when we observe them directly. These carry lower confidence than city-recorded facts and are marked accordingly.</p>
+
+    <p>When in doubt, the city's own published numbers are the authoritative source for what the city has officially reported; this database is the authoritative source for what we have independently observed and documented. Both have value.</p>
+
+    <hr>
+
+    <h2 id="cadence">Update cadence</h2>
+
+    <p>The pipeline will be maintained on the following aspirational cadence, which will improve as we add resources:</p>
+
+    <h3>Daily (automated)</h3>
+    <ul>
+        <li>Accela scraper runs at 03:00 Pacific to pull newly-filed applications, permit status changes, and newly-issued permits. Results written to a staging table; the scraper refuses to overwrite existing records without manual approval.</li>
+        <li>URL verification job checks a rolling sample of document <code>source_url</code> fields to detect link rot. Broken URLs flagged <code>url_status = 'broken'</code> and queued for re-mirroring from the Internet Archive or R2.</li>
+    </ul>
+
+    <h3>Weekly (automated + human review)</h3>
+    <ul>
+        <li>Monday: the week's staging-table rows are reviewed against existing project records. New projects are created; matches to existing projects are applied as updates or new events. Organizations are deduplicated by normalized name.</li>
+        <li>Tuesday: document mirroring pipeline runs. Any PDF referenced in new records is downloaded, SHA-256 hashed, and pushed to all three mirrors (Internet Archive, Cloudflare R2, Google Drive).</li>
+        <li>Wednesday: the validation suite runs. Any failing check blocks the weekly export. Failures are investigated before proceeding.</li>
+        <li>Thursday: if validation passes, CSV/JSON/GeoJSON/KML exports regenerate from the database via the compatibility views. The public Datasette instance is redeployed pointing at the fresh database.</li>
+        <li>Friday: publication snapshot is taken. The full database is dumped to a timestamped file in <code>snapshots/</code>, committed to git, tagged as <code>vYYYY.WW-weekly</code>, and (on a monthly or report-triggered cadence) released to Zenodo with a new DOI.</li>
+    </ul>
+
+    <h3>Monthly (human review)</h3>
+    <ul>
+        <li>Parcel geometry refresh from Alameda County assessor.</li>
+        <li>Site observations: a pass through active-construction projects to photograph and update construction stage.</li>
+        <li>Reconciliation against city HCD APR submissions when they're published.</li>
+    </ul>
+
+    <h3>As-needed</h3>
+    <ul>
+        <li>Project-level correspondence with city staff when data anomalies warrant follow-up.</li>
+        <li>Investigation of reader-submitted corrections.</li>
+        <li>Publication of full Citizen APR reports tied to the city's own APR cycle.</li>
+    </ul>
+
+    <p>The week's activity is summarized in a brief <code>docs/changelog/YYYY-WW.md</code> file so readers can see what moved and why.</p>
+
+    <hr>
+
+    <h2 id="limitations">Limitations</h2>
+
+    <p><strong>Projects outside Accela.</strong> If a project never files with the city — for example, a small-scale rental conversion that doesn't require a permit — we won't see it. This database reflects the pipeline of projects the city can see, which is not the totality of housing activity in Berkeley.</p>
+
+    <p><strong>Accela data quality.</strong> The source system has known data issues: inconsistent status strings, free-form address fields that don't always geocode, permit numbers that don't match across modules. We clean what we can and flag what we can't.</p>
+
+    <p><strong>Subjective boundary decisions.</strong> "When did construction start?" is a judgment call; different observers will draw the line differently. Our observations are dated and attributed so readers can apply their own threshold.</p>
+
+    <p><strong>Historical completeness.</strong> Data coverage is strongest for projects that entered the pipeline after roughly 2019, when Accela became the city's primary system. Earlier projects are represented where documented but shouldn't be treated as a complete record of Berkeley's housing history.</p>
+
+    <p><strong>Demographics, rent, and outcomes.</strong> This database tracks the permit pipeline, not post-occupancy outcomes. It does not include actual rents, tenure stability, or resident demographics. Those questions require different data sources.</p>
+
+    <hr>
+
+    <h2 id="citation">Citation and reuse</h2>
+
+    <p>Every published snapshot of this database is archived on Zenodo with a Digital Object Identifier (DOI). Academic and journalistic citations should reference the specific DOI used, not the live database, because live data changes.</p>
+
+    <p>Zenodo is a public, long-term research data repository operated by CERN, widely used to archive datasets with DOIs so they can be cited like papers.</p>
+
+    <p>The software, schema, and documentation are licensed under Apache License 2.0. The data is licensed under Creative Commons Attribution 4.0 (CC-BY 4.0). Cite as:</p>
+
+    <blockquote>
+        <p>Berkeley Open Data (2026). <em>BlockXBlock Berkeley Housing Pipeline</em> [Version 2026.04-initial]. Zenodo. DOI forthcoming.</p>
+    </blockquote>
+    <p class="citation-note">Note: Zenodo registration is in process; this citation will be updated with a DOI when available.</p>
+
+    <p>Forks for other jurisdictions are encouraged. A cross-city data contract is maintained so other cities can adopt the same schema with their own local vocabulary and source-system adapters.</p>
+
+    <hr>
+
+    <h2 id="corrections">Corrections</h2>
+
+    <p>If you believe a specific number in this database is wrong, please open an issue at the project's GitHub repository with:</p>
+
+    <ol>
+        <li>The project or query in question.</li>
+        <li>The number you're disputing.</li>
+        <li>The source you believe is authoritative.</li>
+        <li>A permalink to the source, if available.</li>
+    </ol>
+
+    <p><a href="https://github.com/blockXblock/berkeley-housing-analysis/issues" target="_blank">Submit a correction on GitHub &rarr;</a></p>
+
+    <p>Corrections with documented sources are applied promptly and logged in the weekly changelog. The correction history is itself part of the database, queryable via the <code>asserted_by = 'correction'</code> filter on any fact table.</p>
+
+    <p>We do not take corrections from anonymous sources when the correction claim lacks documentation. This is not a reflection on the corrector; it's a reflection on the standard of defensibility this database is held to.</p>
+
+    <p class="meta">Last reviewed: 2026-04-23. This methodology page is versioned; its history is in the project's git repository.</p>
+</div>
+
+<footer>
+    <p>Berkeley Housing Pipeline Analysis | <a href="https://github.com/blockXblock/berkeley-housing-analysis">GitHub</a></p>
+    <p style="margin-top: 0.5rem; opacity: 0.8;">Built for California HCD Annual Progress Report compliance</p>
+</footer>
+
+</body>
+</html>

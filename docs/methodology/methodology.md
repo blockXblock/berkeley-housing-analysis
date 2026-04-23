@@ -30,13 +30,11 @@ A project's position in the pipeline is recorded as a lifecycle stage. The datab
 
 **Planning review (active).** Projects that have filed an application but do not yet have approval. This includes every sub-state of Berkeley's internal workflow — under staff review, waiting on the applicant, scheduled for ZAB, and so on.  The exact definition is encoded as a SQL view in the public database (see v_projects_planning_review in the schema).
 
-**Approved, pre-permit.** Projects with planning approval (status `Entitled` or `Approved` in city data) but no building permit yet issued. This is the entitlement-to-construction gap. [Query →](#)
+**Approved, pre-permit.** Projects with planning approval (status `Entitled` or `Approved` in city data) but no building permit yet issued. This is the entitlement-to-construction gap. 
+**Permit-filed, pre-construction.** Projects with building permit or demolition permit activity but no observed construction. Includes "Pending Final Action," "Building Permits Filed," and "Demolition Permits Filed" statuses. 
 
-**Permit-filed, pre-construction.** Projects with building permit or demolition permit activity but no observed construction. Includes "Pending Final Action," "Building Permits Filed," and "Demolition Permits Filed" statuses. [Query →](#)
-
-**Under construction.** Projects with active construction observed or reported. This is the smallest bucket. [Query →](#)
-
-**Completed.** Projects with Certificate of Occupancy issued within the reporting period. [Query →](#)
+**Under construction.** Projects with active construction observed or reported. This is the smallest bucket. 
+**Completed.** Projects with Certificate of Occupancy issued within the reporting period. 
 
 A note on the Entitled/Approved distinction: Berkeley's Accela system uses both status strings, seemingly interchangeably, for projects that have received planning approval but have not yet pulled building permits. This database treats them as a single analytic bucket. Query: `WHERE status IN ('Entitled', 'Approved')`.
 
@@ -101,7 +99,7 @@ When in doubt, the city's own published numbers are the authoritative source for
 
 ## Update cadence
 
-The pipeline is maintained on the following cadence, which will improve as we add resources:
+The pipeline will be maintained on the following aspirational cadence, which will improve as we add resources:
 
 **Daily (automated).**
 - Accela scraper runs at 03:00 Pacific to pull newly-filed applications, permit status changes, and newly-issued permits. Results written to a staging table; the scraper refuses to overwrite existing records without manual approval.
@@ -150,7 +148,8 @@ Zenodo is a public, long-term research data repository operated by CERN, widely 
 
 The software, schema, and documentation are licensed under Apache License 2.0. The data is licensed under Creative Commons Attribution 4.0 (CC-BY 4.0). Cite as:
 
-> Gage, J. et al. (YYYY). *BlockXBlock Berkeley Housing Pipeline* [Version vYYYY.MM-label]. Zenodo. https://doi.org/10.5281/zenodo.XXXXXX
+Berkeley Open Data (2026). BlockXBlock Berkeley Housing Pipeline [Version 2026.04-initial]. Zenodo. DOI forthcoming.
+Note: Zenodo registration is in process; this citation will be updated with a DOI when available.
 
 Forks for other jurisdictions are encouraged. A cross-city data contract is maintained so other cities can adopt the same schema with their own local vocabulary and source-system adapters. See [`docs/new-city-checklist.md`](./new-city-checklist.md).
 
@@ -158,7 +157,7 @@ Forks for other jurisdictions are encouraged. A cross-city data contract is main
 
 ## Corrections
 
-If you believe a specific number in this database is wrong, please open an issue at the project's GitHub repository with:
+If you believe a specific number in this database is wrong, please open an issue at the project's GitHub repository at https://github.com/blockXblock/berkeley-housing-analysis with:
 
 1. The project or query in question.
 2. The number you're disputing.

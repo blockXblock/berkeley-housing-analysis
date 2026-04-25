@@ -2,16 +2,16 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
     <name>Berkeley Housing Pipeline - 3D Skyline</name>
-    <description>165 housing projects. Heights shown as stories × 3.5m. Generated 2026-04-14.</description>
+    <description>165 housing projects. Heights shown as stories × 3.5m. Generated 2026-04-25.</description>
     <Style id="style_UC_Project">
       <PolyStyle>
-        <color>FF00D7FF</color>
+        <color>FF00ECFF</color>
         <fill>1</fill>
         <outline>1</outline>
       </PolyStyle>
       <LineStyle>
-        <color>ff000000</color>
-        <width>1</width>
+        <color>ffffffff</color>
+        <width>2</width>
       </LineStyle>
     </Style>
     <Style id="style_Under_Construction">
@@ -171,11 +171,11 @@
           <outerBoundaryIs>
             <LinearRing>
               <coordinates>
-        -122.256287901838,37.8654874196732,40.2
-        -122.256436112739,37.86622201212742,40.2
-        -122.2580110900322,37.86604851173211,40.2
-        -122.2578656725892,37.8652807639418,40.2
-        -122.256287901838,37.8654874196732,40.2
+        -122.25596,37.86538,40.2
+        -122.25596,37.86612,40.2
+        -122.25750,37.86612,40.2
+        -122.25750,37.86538,40.2
+        -122.25596,37.86538,40.2
     </coordinates>
             </LinearRing>
           </outerBoundaryIs>
@@ -418,28 +418,6 @@
         -122.29952030100048,37.86838298147359,52.5
         -122.29946546946185,37.86798905837238,52.5
         -122.29907154636064,37.86807704770219,52.5
-    </coordinates>
-            </LinearRing>
-          </outerBoundaryIs>
-        </Polygon>
-      </Placemark>
-      <Placemark>
-        <name>2425 DURANT Ave</name>
-        <description><![CDATA[
-<b>2425 DURANT Ave</b><br/><b>Units:</b> 250<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 20<br/><b>Height:</b> 61.0m<br/><b>Status:</b> Decision Pending
-]]></description>
-        <styleUrl>#style_Decision_Pending</styleUrl>
-        <Polygon>
-          <extrude>1</extrude>
-          <altitudeMode>relativeToGround</altitudeMode>
-          <outerBoundaryIs>
-            <LinearRing>
-              <coordinates>
-        -122.25991743894478,37.8677977156807,61.0
-        -122.25997227048342,37.86819163878191,61.0
-        -122.26036619358463,37.8681036494521,61.0
-        -122.260311362046,37.867709726350895,61.0
-        -122.25991743894478,37.8677977156807,61.0
     </coordinates>
             </LinearRing>
           </outerBoundaryIs>
@@ -748,6 +726,28 @@
         -122.29206125731993,37.8670478668857,21.0
         -122.2920064257813,37.86665394378449,21.0
         -122.29161250268008,37.8667419331143,21.0
+    </coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+      <Placemark>
+        <name>2425 DURANT Ave</name>
+        <description><![CDATA[
+<b>2425 DURANT Ave</b><br/><b>Units:</b> 117<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 20<br/><b>Height:</b> 61.0m<br/><b>Status:</b> Decision Pending
+]]></description>
+        <styleUrl>#style_Decision_Pending</styleUrl>
+        <Polygon>
+          <extrude>1</extrude>
+          <altitudeMode>relativeToGround</altitudeMode>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>
+        -122.25991743894478,37.8677977156807,61.0
+        -122.25997227048342,37.86819163878191,61.0
+        -122.26036619358463,37.8681036494521,61.0
+        -122.260311362046,37.867709726350895,61.0
+        -122.25991743894478,37.8677977156807,61.0
     </coordinates>
             </LinearRing>
           </outerBoundaryIs>
@@ -2679,11 +2679,11 @@
           <outerBoundaryIs>
             <LinearRing>
               <coordinates>
-        -122.26477562268008,37.8783470331143,10.5
-        -122.26483045421871,37.87874095621551,10.5
-        -122.26522437731992,37.8786529668857,10.5
-        -122.26516954578129,37.878259043784496,10.5
-        -122.26477562268008,37.8783470331143,10.5
+        -122.25817462268007,37.8762970331143,10.5
+        -122.25822945421871,37.876690956215505,10.5
+        -122.25862337731992,37.8766029668857,10.5
+        -122.25856854578129,37.87620904378449,10.5
+        -122.25817462268007,37.8762970331143,10.5
     </coordinates>
             </LinearRing>
           </outerBoundaryIs>

@@ -43,7 +43,7 @@ def rotate_point(center_lon, center_lat, dx, dy):
 # Pipeline stage to style mapping (KML uses AABBGGRR color format)
 # UC Projects get special gold color and render first
 PIPELINE_STYLES = {
-    'UC_Project': ('FF00D7FF', 'Gold'),              # Gold - UC projects
+    'UC_Project': ('FF00ECFF', 'Very Bright Gold'),    # Very bright gold (#FFEC00)
     'Under Construction': ('FF00FF00', 'Green'),     # Green
     'Completed': ('FFFF0000', 'Blue'),               # Blue
     'Permits Active': ('FFFFFF00', 'Cyan'),          # Cyan
@@ -108,6 +108,15 @@ def generate_kml():
     # Add styles for each pipeline stage
     for stage, (color, desc) in PIPELINE_STYLES.items():
         style_id = get_style_id(stage)
+
+        # UC projects get bright white outline, others get default black
+        if stage == 'UC_Project':
+            line_color = 'ffffffff'  # Pure white
+            line_width = 2
+        else:
+            line_color = 'ff000000'  # Black
+            line_width = 1
+
         kml_parts.append(f'''
     <Style id="{style_id}">
       <PolyStyle>
@@ -116,8 +125,8 @@ def generate_kml():
         <outline>1</outline>
       </PolyStyle>
       <LineStyle>
-        <color>ff000000</color>
-        <width>1</width>
+        <color>{line_color}</color>
+        <width>{line_width}</width>
       </LineStyle>
     </Style>''')
 

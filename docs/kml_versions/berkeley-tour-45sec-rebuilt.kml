@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2"
+     xmlns:gx="http://www.google.com/kml/ext/2.2">
+  <Document>
+    <name>Berkeley Housing Pipeline - Rebuilt 45s Tour</name>
+    <open>1</open>
+
+    <gx:Tour>
+      <name>Berkeley Housing Pipeline - Rebuilt 45s Tour</name>
+      <gx:Playlist>
+
+        <gx:FlyTo>
+          <gx:duration>6.0</gx:duration>
+          <gx:flyToMode>bounce</gx:flyToMode>
+          <Camera>
+            <longitude>-122.2732</longitude>
+            <latitude>37.8690</latitude>
+            <altitude>280</altitude>
+            <heading>78</heading>
+            <tilt>78</tilt>
+            <roll>0</roll>
+            <altitudeMode>absolute</altitudeMode>
+          </Camera>
+        </gx:FlyTo>
+
+        <gx:Wait>
+          <gx:duration>3.0</gx:duration>
+        </gx:Wait>
+
+        <gx:FlyTo>
+          <gx:duration>4.0</gx:duration>
+          <gx:flyToMode>smooth</gx:flyToMode>
+          <Camera>
+            <longitude>-122.2714</longitude>
+            <latitude>37.8691</latitude>
+            <altitude>260</altitude>
+            <heading>96</heading>
+            <tilt>80</tilt>
+            <roll>0</roll>
+            <altitudeMode>absolute</altitudeMode>
+          </Camera>
+        </gx:FlyTo>
+
+        <gx:Wait>
+          <gx:duration>2.0</gx:duration>
+        </gx:Wait>
+
+        <gx:FlyTo>
+          <gx:duration>5.0</gx:duration>
+          <gx:flyToMode>smooth</gx:flyToMode>
+          <Camera>
+            <longitude>-122.2623</longitude>
+            <latitude>37.8652</latitude>
+            <altitude>240</altitude>
+            <heading>112</heading>
+            <tilt>81</tilt>
+            <roll>0</roll>
+            <altitudeMode>absolute</altitudeMode>
+          </Camera>
+        </gx:FlyTo>
+
+        <gx:FlyTo>
+          <gx:duration>5.0</gx:duration>
+          <gx:flyToMode>smooth</gx:flyToMode>
+          <Camera>
+            <longitude>-122.2588</longitude>
+            <latitude>37.8660</latitude>
+            <altitude>220</altitude>
+            <heading>192</heading>
+            <tilt>80</tilt>
+            <roll>0</roll>
+            <altitudeMode>absolute</altitudeMode>
+          </Camera>
+        </gx:FlyTo>
+
+        <gx:FlyTo>
+          <gx:duration>6.0</gx:duration>
+          <gx:flyToMode>smooth</gx:flyToMode>
+          <Camera>
+            <longitude>-122.2686</longitude>
+            <latitude>37.8552</latitude>
+            <altitude>260</altitude>
+            <heading>350</heading>
+            <tilt>77</tilt>
+            <roll>0</roll>
+            <altitudeMode>absolute</altitudeMode>
+          </Camera>
+        </gx:FlyTo>
+
+        <gx:FlyTo>
+          <gx:duration>6.0</gx:duration>
+          <gx:flyToMode>smooth</gx:flyToMode>
+          <Camera>
+            <longitude>-122.2685</longitude>
+            <latitude>37.8769</latitude>
+            <altitude>280</altitude>
+            <heading>6</heading>
+            <tilt>77</tilt>
+            <roll>0</roll>
+            <altitudeMode>absolute</altitudeMode>
+          </Camera>
+        </gx:FlyTo>
+
+        <gx:FlyTo>
+          <gx:duration>3.0</gx:duration>
+          <gx:flyToMode>smooth</gx:flyToMode>
+          <Camera>
+            <longitude>-122.2677</longitude>
+            <latitude>37.8661</latitude>
+            <altitude>300</altitude>
+            <heading>110</heading>
+            <tilt>78</tilt>
+            <roll>0</roll>
+            <altitudeMode>absolute</altitudeMode>
+          </Camera>
+        </gx:FlyTo>
+
+        <gx:FlyTo>
+          <gx:duration>5.0</gx:duration>
+          <gx:flyToMode>smooth</gx:flyToMode>
+          <Camera>
+            <longitude>-122.2790</longitude>
+            <latitude>37.8676</latitude>
+            <altitude>305</altitude>
+            <heading>72</heading>
+            <tilt>72</tilt>
+            <roll>0</roll>
+            <altitudeMode>absolute</altitudeMode>
+          </Camera>
+        </gx:FlyTo>
+
+      </gx:Playlist>
+    </gx:Tour>
+  </Document>
+</kml>

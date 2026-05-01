@@ -2,9 +2,13 @@
 """
 Generate KML file for 3D visualization of Berkeley housing pipeline.
 Includes all projects with heights shown as extruded polygons.
+
+Reads polygon geometries from project_geometries table when available,
+falls back to synthetic squares for projects without stored geometry.
 """
 
 import sqlite3
+import json
 import math
 from datetime import datetime
 from pathlib import Path
@@ -39,6 +43,28 @@ def rotate_point(center_lon, center_lat, dx, dy):
     new_lat = center_lat + new_dy
 
     return new_lon, new_lat
+
+
+def parse_geojson_coords(geojson_str):
+    """
+    Parse GeoJSON string and extract polygon coordinates.
+    Handles both Polygon and MultiPolygon types.
+    Returns list of [lon, lat] coordinate pairs for the exterior ring.
+    """
+    try:
+        geom = json.loads(geojson_str)
+        geom_type = geom.get('type', '')
+
+        if geom_type == 'Polygon':
+            # First ring is exterior
+            return geom['coordinates'][0]
+        elif geom_type == 'MultiPolygon':
+            # Use first polygon's exterior ring
+            return geom['coordinates'][0][0]
+        else:
+            return None
+    except (json.JSONDecodeError, KeyError, IndexError):
+        return None
 
 # Pipeline stage to style mapping (KML uses AABBGGRR color format)
 # UC Projects get special gold color and render first
@@ -76,17 +102,25 @@ def generate_kml():
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
-    # Get all projects with coordinates and heights
+    # Get all projects with coordinates and heights, joined with geometry
+    # Excludes projects with superseded geometry (duplicates)
     # UC projects first (render on top), then by units
     cursor.execute('''
         SELECT
-            address_display, units, vli_units,
-            height_stories, height_feet, status,
-            latitude, longitude, pipeline_stage,
-            construction_data_reliability, is_uc_project
-        FROM projects
-        WHERE latitude IS NOT NULL AND longitude IS NOT NULL
-        ORDER BY is_uc_project DESC, units DESC
+            p.address_display, p.units, p.vli_units,
+            p.height_stories, p.height_feet, p.status,
+            p.latitude, p.longitude, p.pipeline_stage,
+            p.construction_data_reliability, p.is_uc_project,
+            pg.geojson, vgt.code as geometry_type
+        FROM projects p
+        LEFT JOIN project_geometries pg ON p.id = pg.project_id AND pg.is_current = 1
+        LEFT JOIN vocabulary_geometry_types vgt ON pg.geometry_type_id = vgt.id
+        WHERE p.latitude IS NOT NULL AND p.longitude IS NOT NULL
+          AND (
+            pg.id IS NOT NULL  -- has current geometry
+            OR NOT EXISTS (SELECT 1 FROM project_geometries pg2 WHERE pg2.project_id = p.id)  -- OR has no geometry rows at all
+          )
+        ORDER BY p.is_uc_project DESC, p.units DESC
     ''')
     projects = cursor.fetchall()
     print(f"Projects with coordinates: {len(projects)}")
@@ -138,8 +172,11 @@ def generate_kml():
     # Add each project as a placemark
     projects_added = 0
     uc_count = 0
+    using_stored_geom = 0
+    using_synthetic = 0
+
     for row in projects:
-        address, units, vli_units, height_stories, height_feet, status, lat, lng, pipeline_stage, reliability, is_uc_project = row
+        address, units, vli_units, height_stories, height_feet, status, lat, lng, pipeline_stage, reliability, is_uc_project, geojson_str, geometry_type = row
 
         # Calculate height in meters
         if height_feet:
@@ -181,36 +218,24 @@ def generate_kml():
 
         description = ''.join(desc_parts)
 
-        # Create polygon coordinates with rotation to align with Berkeley street grid
-        # Special case: 2556 HASTE St (People's Park) - parcel-verified coordinates from city GIS
-        # NE: Haste & Bowditch, NW: Haste & midblock, SW: Dwight & midblock, SE: Dwight & Bowditch
-        if '2556 HASTE' in address.upper():
-            coords = f'''
-        -122.25596,37.86538,{height_m}
-        -122.25596,37.86612,{height_m}
-        -122.25750,37.86612,{height_m}
-        -122.25750,37.86538,{height_m}
-        -122.25596,37.86538,{height_m}
-    '''
-        # Special case: 2400 BOWDITCH St uses half-block polygon
-        elif '2400 BOWDITCH' in address.upper():
-            # Half-block dimensions: ~55m N-S, ~55m E-W
-            dx = 0.00035  # ~55m in longitude at this latitude
-            dy = 0.00025  # ~55m in latitude
-            center_lon, center_lat = -122.2570, 37.8670
-            se_lon, se_lat = rotate_point(center_lon, center_lat, dx, -dy)
-            ne_lon, ne_lat = rotate_point(center_lon, center_lat, dx, dy)
-            nw_lon, nw_lat = rotate_point(center_lon, center_lat, -dx, dy)
-            sw_lon, sw_lat = rotate_point(center_lon, center_lat, -dx, -dy)
-            coords = f'''
-        {se_lon},{se_lat},{height_m}
-        {ne_lon},{ne_lat},{height_m}
-        {nw_lon},{nw_lat},{height_m}
-        {sw_lon},{sw_lat},{height_m}
-        {se_lon},{se_lat},{height_m}
-    '''
-        else:
-            # Standard square footprint with rotation
+        # Create polygon coordinates
+        # Priority: use stored geometry from project_geometries, fall back to synthetic
+        if geojson_str:
+            polygon_coords = parse_geojson_coords(geojson_str)
+            if polygon_coords:
+                # Build coordinate string from stored geometry
+                coord_lines = []
+                for coord in polygon_coords:
+                    lon, lat_coord = coord[0], coord[1]
+                    coord_lines.append(f"        {lon},{lat_coord},{height_m}")
+                coords = '\n'.join(coord_lines)
+                using_stored_geom += 1
+            else:
+                # Fallback: GeoJSON parsing failed
+                polygon_coords = None
+
+        if not geojson_str or not polygon_coords:
+            # Synthetic square footprint with rotation
             dx = FOOTPRINT
             dy = FOOTPRINT
             center_lon, center_lat = lng, lat
@@ -225,6 +250,7 @@ def generate_kml():
         {sw_lon},{sw_lat},{height_m}
         {se_lon},{se_lat},{height_m}
     '''
+            using_synthetic += 1
 
         kml_parts.append(f'''
       <Placemark>
@@ -260,6 +286,8 @@ def generate_kml():
 
     print(f"\n✓ Generated KML with {projects_added} projects")
     print(f"  UC projects (gold): {uc_count}")
+    print(f"  Using stored geometry: {using_stored_geom}")
+    print(f"  Using synthetic squares: {using_synthetic}")
     print(f"  Output: {OUTPUT_PATH}")
     print(f"  File size: {OUTPUT_PATH.stat().st_size:,} bytes")
 

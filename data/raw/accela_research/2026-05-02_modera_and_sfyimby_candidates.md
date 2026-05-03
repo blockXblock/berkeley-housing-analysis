@@ -7,15 +7,42 @@ addresses_searched:
   - 2131 University Ave
   - 2145 University Ave
   - 1900 Walnut St
+  - 1922 Walnut St
+  - 1924 Walnut St
+  - 1987 Shattuck Ave
   - 1931 San Pablo Ave
   - 2352 Shattuck Ave
   - 2065 Kittredge St
   - 2015 Blake St
   - 2072 Addison St
+keywords_searched:
+  - Modera
+  - Acheson
+  - MacFarlane
 trigger: sfyimby_reconciliation
 ---
 
 # Berkeley Accela Permit Portal Search Results
+
+---
+
+## Unit Count Reconciliation — Resolved
+
+The Modera Acheson Commons project comprises **4 buildings** with a total of **205 residential units**, matching the approved Use Permit UP2010-0078.
+
+| Building | Permit Number | Primary Address | Secondary Address | Units | Type |
+|----------|---------------|-----------------|-------------------|-------|------|
+| A (Acheson) | **B2015-02995** | 2131 University Ave | — | 37 | Rehab (4-story landmark) |
+| B (Ace) | **B2015-02998** | 2145 University Ave | — | 35 | New construction (6-story) |
+| C (Walnut) | **B2015-03000** | 1900 Walnut St | — | 65 | New construction (6-story) |
+| D (MacFarlane) | **B2015-03005** | 2111 University Ave | 1987 Shattuck Ave | 68 | New construction (6-story) |
+| **TOTAL** | | | | **205** | |
+
+**Resolution note:** Building D (MacFarlane) was filed under both 2111 University Ave and 1987 Shattuck Ave addresses, which explains why the initial search for "2111 University Ave" returned no standalone results — the permit was indexed under the Shattuck address. The 4-building total of 205 units matches UP2010-0078 exactly.
+
+**APNs:**
+- 057-2046-008-03 (Buildings A, B, D — University Ave frontage)
+- 057-2046-006-00 (Building C — Walnut St)
 
 ---
 
@@ -25,6 +52,7 @@ trigger: sfyimby_reconciliation
 - **Building A** (Acheson, rehab) → **2131 University Ave** (APN 057-2046-008-03)
 - **Building B** (new 6-story) → **2145 University Ave** (same parcel cluster)
 - **Building C** (new 6-story) → **1900 Walnut St** (APN 057-2046-006-00)
+- **Building D** (MacFarlane, new 6-story) → **2111 University Ave / 1987 Shattuck Ave** (APN 057-2046-008-03)
 
 ---
 

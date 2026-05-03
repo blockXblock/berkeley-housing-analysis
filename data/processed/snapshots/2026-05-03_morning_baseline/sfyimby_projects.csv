@@ -1,0 +1,250 @@
+id,address_raw,address_clean,project_name,units,units_raw,status,date_raw,date_parsed,matched_project_id,match_confidence
+1,"2317 Channing Way","2317 Channing Way",,17,"17 units","zoning permits filed","Oct 17, 2020",2020-10-17,48,exact
+2,"1601 Oxford St (Jordan Court)","1601 Oxford St","Jordan Court",,"units TBD","affordable senior housing groundbreaking","Oct 2, 2020",2020-10-02,,
+3,"2023 Shattuck Ave","2023 Shattuck Ave",,48,"48 units","permits filed","Nov 12, 2020",2020-11-12,,
+4,"2590 Bancroft Way","2590 Bancroft Way",,87,"units TBD → 87 units","design review","Dec 2020",2020-12-01,,
+5,"3000 San Pablo Ave","3000 San Pablo Ave",,,"units TBD","permits filed","Dec 2020",2020-12-01,,
+6,"2015 Blake St","2015 Blake St",,168,"168 units","renderings revealed","Dec 23, 2020",2020-12-23,181,high
+7,"2150/2176 Kittredge St","2150/2176 Kittredge St",,169,"169 units","permits filed","Jan 6, 2021",2021-01-06,,
+8,"3031 Adeline St","3031 Adeline St",,42,"42 units → 64 units","permits submitted","Jan 19, 2021",2021-01-19,,
+9,"2352 Shattuck Ave (Logan Park)","2352 Shattuck Ave","Logan Park",204,"204 units (ph1) + 69 units (ph2)","phase 1 topped out","Mar 11, 2021",2021-03-11,179,high
+10,"2111 University Ave (Modera Berkeley)","2111 University Ave","Modera Berkeley",205,"205 units","construction underway","Mar 13, 2021",2021-03-13,178,high
+11,"2556 Telegraph Ave (The Laureate)","2556 Telegraph Ave","The Laureate",,"units TBD","construction underway","Mar 20, 2021",2021-03-20,,
+12,"2000 University Ave (Studio 2000)","2000 University Ave","Studio 2000",82,"82 units","design review pending","Apr 15, 2021",2021-04-15,137,exact
+13,"2136 San Pablo Ave","2136 San Pablo Ave",,100,"100+ units","renderings revealed","May 18, 2021",2021-05-18,140,exact
+14,"2650 Telegraph Ave","2650 Telegraph Ave",,45,"45 units","demolition permits filed","Jun 13, 2021",2021-06-13,,
+15,"2435 San Pablo Ave (Poet's Place)","2435 San Pablo Ave","Poet's Place",40,"40 sleeping units + manager","permits filed","Jun 21, 2021",2021-06-21,,
+16,"2001 Ashby Ave (Maudelle Building)","2001 Ashby Ave","Maudelle Building",87,"87 affordable units","permit filed","Jul 2021",2021-07-01,154,exact
+17,"2902 Adeline St","2902 Adeline St",,54,"54 units","design review","Jul 14, 2021",2021-07-14,143,exact
+18,"2352 Shattuck Ave ph2","2352 Shattuck Ave ph2",,69,"69 units","permits filed","Jul 28, 2021",2021-07-28,179,high
+19,"2176 Kittredge St","2176 Kittredge St",,165,"165 units","design review → demolition permits","Jul 30, 2021",2021-07-30,,
+20,"1951 Shattuck Ave (Ace Berkeley)","1951 Shattuck Ave","Ace Berkeley",163,"163 units","design review","Aug 19, 2021",2021-08-19,136,exact
+21,"2099 MLK Jr Way","2099 MLK Jr Way",,72,"72 units","permits filed","Sep 13, 2021",2021-09-13,138,exact
+22,"2128 Oxford St / 2132 Center St (The Hub)","2128 Oxford St / 2132 Center St","The Hub",485,"485 units","17-story proposed","Sep 21, 2021",2021-09-21,133,number_street
+23,"People's Park","People's Park",,1113,"~1,113 student + ~100 low-income","UC approved","Oct 5, 2021",2021-10-05,,
+24,"2190 Shattuck Ave","2190 Shattuck Ave",,326,"326 units","18-story redesign","Oct 18, 2021",2021-10-18,35,exact
+25,"2176 Kittredge St","2176 Kittredge St",,165,"165 units","demolition permits filed","Nov 2, 2021",2021-11-02,,
+26,"2421 Fifth St","2421 Fifth St",,,"units TBD","permits filed","Nov 6, 2021",2021-11-06,,
+27,"2435 San Pablo Ave (Poet's Place)","2435 San Pablo Ave","Poet's Place",40,"40 sleeping units + manager","foundation permits","Nov 7, 2021",2021-11-07,,
+28,"1915 Berryman St","1915 Berryman St",,,"units TBD","4-story townhomes proposed","Nov 18, 2021",2021-11-18,,
+29,"2001 Ashby Ave","2001 Ashby Ave",,87,"87 affordable units","6-story proposed","Dec 17, 2021",2021-12-17,154,exact
+30,"130-134 Berkeley Square","130-134 Berkeley Square",,50,"50 units","renderings revealed","Jan 3, 2022",2022-01-03,,
+31,"1367 University Ave","1367 University Ave",,39,"39 affordable units","design review","Jan 18, 2022",2022-01-18,158,exact
+32,"1921 Walnut St (Anchor House)","1921 Walnut St","Anchor House",772,"772 bedrooms",groundbreaking,"Feb 9, 2022",2022-02-09,,
+33,"1201 San Pablo Ave","1201 San Pablo Ave",,66,"66 units","design review","Feb 9, 2022",2022-02-09,,
+34,"2190 Shattuck Ave","2190 Shattuck Ave",,326,"326 units","25-story pre-application","Feb 10, 2022",2022-02-10,35,exact
+35,"2449 Dwight Way","2449 Dwight Way",,,"units TBD","renovation permits","Feb 11, 2022",2022-02-11,38,exact
+36,"2900 Shattuck Ave","2900 Shattuck Ave",,221,"221 units","plans filed","Mar 9, 2022",2022-03-09,,
+37,"1598 University Ave","1598 University Ave",,210,"210 units","renderings published","Mar 17, 2022",2022-03-17,152,exact
+38,"2132 Center St (The Hub)","2132 Center St","The Hub",283,"283 units","renderings updated","Mar 17, 2022",2022-03-17,,
+39,"1931-1941 San Pablo Ave (Rivoli Theatre)","1931-1941 San Pablo Ave","Rivoli Theatre",323,"323 units",pre-application,"Mar 18, 2022",2022-03-18,,
+40,"2147 San Pablo Ave","2147 San Pablo Ave",,128,"128 group living units",pre-application,"Mar 19, 2022",2022-03-19,41,exact
+41,"2000 University Ave (Studio 2000)","2000 University Ave","Studio 2000",82,"82 units","construction expected summer 2022","Mar 21, 2022",2022-03-21,137,exact
+42,"2727 San Pablo Ave","2727 San Pablo Ave",,4,"4 units","design review","Apr 3, 2022",2022-04-03,,
+43,"2015 Blake St","2015 Blake St",,,"units TBD","modifications application","Apr 6, 2022",2022-04-06,181,high
+44,"3000 Shattuck Ave","3000 Shattuck Ave",,156,"156 units","expanded permits","Apr 6, 2022",2022-04-06,10,exact
+45,"2065 Kittredge St","2065 Kittredge St",,188,"188 units","8-story student housing design review","Apr 20, 2022",2022-04-20,180,high
+46,"2440 Shattuck Ave (The Lair)","2440 Shattuck Ave","The Lair",40,"40 units","design review","Apr 21, 2022",2022-04-21,,
+47,"2072 Addison St (The Artisan)","2072 Addison St","The Artisan",66,"66 units","topped out","May 19, 2022",2022-05-19,182,high
+48,"2067 University Ave","2067 University Ave",,50,"50 units","topped out (after fire rebuild)","May 20, 2022",2022-05-20,,
+49,"1652 University Ave","1652 University Ave",,26,"26 units + 2 live-work","5-story pre-application","May 20, 2022",2022-05-20,,
+50,"2601 San Pablo Ave","2601 San Pablo Ave",,242,"242 units","8-story proposed","May 20, 2022",2022-05-20,7,exact
+51,"2099 MLK Jr Way","2099 MLK Jr Way",,72,"72 units","design review","May 18, 2022",2022-05-18,138,exact
+52,"1921 Walnut St (Anchor House)","1921 Walnut St","Anchor House",772,"772 bedrooms","excavation underway","May 18, 2022",2022-05-18,,
+53,"2847 Shattuck Ave","2847 Shattuck Ave",,112,"112 units","preliminary permits","May 22, 2022",2022-05-22,14,exact
+54,"2111 University Ave (Modera Berkeley)","2111 University Ave","Modera Berkeley",205,"205 units","nearly complete","May 23, 2022",2022-05-23,178,high
+55,"2012 Berkeley Way","2012 Berkeley Way",,,"units TBD","100% affordable wrapping up","May 24, 2022",2022-05-24,,
+56,"2113 Kittredge St (California Theatre)","2113 Kittredge St","California Theatre",218,"218 units","15-story proposed","May 27, 2022",2022-05-27,,
+57,"1974 Shattuck Ave","1974 Shattuck Ave",,599,"599 units","26-story pre-application","Jun 9, 2022",2022-06-09,119,exact
+58,"2128 Oxford St (The Hub)","2128 Oxford St","The Hub",485,"485+ units","expanded to 25-story","Jun 10, 2022",2022-06-10,133,exact
+59,"2420 Shattuck Ave","2420 Shattuck Ave",,146,"146 units","renderings revealed","Jun 15, 2022",2022-06-15,13,exact
+60,"2439 Durant Ave","2439 Durant Ave",,,"units TBD","7-story preliminary application","Jun 16, 2022",2022-06-16,,
+61,"2800 Telegraph Ave","2800 Telegraph Ave",,13,"13 units","plans filed","Jun 17, 2022",2022-06-17,146,exact
+62,"2712 Telegraph Ave","2712 Telegraph Ave",,,"units TBD","preliminary application","Jun 19, 2022",2022-06-19,31,exact
+63,"2900 Shattuck Ave","2900 Shattuck Ave",,221,"221 units","10-story renderings","Jun 21, 2022",2022-06-21,,
+64,"1951 Shattuck Ave","1951 Shattuck Ave",,163,"163 units",groundbreaking,"Jun 29, 2022",2022-06-29,136,exact
+65,"2847 Shattuck Ave","2847 Shattuck Ave",,112,"112 units","renderings / permits","Jun 30, 2022",2022-06-30,14,exact
+66,"2538 Durant Ave","2538 Durant Ave",,83,"83 units",pre-application,"Jul 17, 2022",2022-07-17,139,exact
+67,"2959 San Pablo Ave","2959 San Pablo Ave",,48,"48 units",pre-application,"Jul 24, 2022",2022-07-24,,
+68,"2065 Kittredge St","2065 Kittredge St",,188,"188 units","permits filed","Jul 21, 2022",2022-07-21,180,high
+69,"2820 San Pablo Ave / 2821 10th St","2820 San Pablo Ave / 2821 10th St",,,"units TBD",renderings,"Aug 2, 2022",2022-08-02,127,number_street
+70,"2720 San Pablo Ave","2720 San Pablo Ave",,84,"84 units","8-story pre-application","Aug 6, 2022",2022-08-06,16,exact
+71,"2221 Fifth St","2221 Fifth St",,3,"3 units","permits filed","Aug 14, 2022",2022-08-14,55,exact
+72,"2274 Shattuck Ave","2274 Shattuck Ave",,239,"239 units","17-story plans filed","Aug 17, 2022",2022-08-17,120,exact
+73,"1822-1828 San Pablo Ave","1822-1828 San Pablo Ave",,44,"44 units","plans revealed","Aug 18, 2022",2022-08-18,,
+74,"2403 San Pablo Ave","2403 San Pablo Ave",,,"units TBD","4-story meeting","Aug 18, 2022",2022-08-18,159,exact
+75,"1776-1790 University Ave","1776-1790 University Ave",,17,"17 units",pre-application,"Aug 28, 2022",2022-08-28,,
+76,"2136-2154 San Pablo Ave","2136-2154 San Pablo Ave",,,"units TBD",proposed,"Aug 29, 2022",2022-08-29,,
+77,"2427 San Pablo Ave","2427 San Pablo Ave",,,"units TBD","5-story SRO/replacement","Sep 8, 2022",2022-09-08,126,number_street
+78,"1752 Shattuck Ave","1752 Shattuck Ave",,68,"68 units","design review","Sep 15, 2022",2022-09-15,164,exact
+79,"2113 Kittredge St (California Theatre)","2113 Kittredge St","California Theatre",214,"214 units","15-story renderings","Sep 21, 2022",2022-09-21,,
+80,"3031 Telegraph Ave","3031 Telegraph Ave",,127,"127 units","permits filed","Oct 3, 2022",2022-10-03,,
+81,"3030 Telegraph Ave","3030 Telegraph Ave",,174,"174 units",pre-application,"Oct 9, 2022",2022-10-09,150,exact
+82,"1201 San Pablo Ave","1201 San Pablo Ave",,66,"66 units","city council approved","Oct 10, 2022",2022-10-10,,
+83,"2128 Oxford St (The Hub)","2128 Oxford St","The Hub",485,"485 units","26-story updated plans","Oct 14, 2022",2022-10-14,133,exact
+84,"3020 San Pablo Ave","3020 San Pablo Ave",,29,"29 units","4-story permits","Oct 17, 2022",2022-10-17,,
+85,"2300 Ellsworth St","2300 Ellsworth St",,90,"~90 units",pre-application,"Oct 17, 2022",2022-10-17,147,exact
+86,"2440 Shattuck Ave (The Lair)","2440 Shattuck Ave","The Lair",40,"40 units","construction started","Oct 20, 2022",2022-10-20,,
+87,"2370 Shattuck Ave (Logan Park ph2)","2370 Shattuck Ave","Logan Park ph2",69,"69 units ph2 / 135 units ph1","topped out","Oct 24, 2022",2022-10-24,179,high
+88,"2001 Ashby Ave","2001 Ashby Ave",,87,"87 affordable units","foundation visible","Oct 18, 2022",2022-10-18,154,exact
+89,"1708 Harmon St","1708 Harmon St",,80,"80 senior affordable units",pre-application,"Oct 31, 2022",2022-10-31,145,exact
+90,"2480 Bancroft Way (The Edge)","2480 Bancroft Way","The Edge",28,"28 units",pre-application,"Nov 1, 2022",2022-11-01,134,exact
+91,"2190 Shattuck Ave","2190 Shattuck Ave",,326,"326 units","25-story renderings","Nov 1, 2022",2022-11-01,35,exact
+92,"2012 Berkeley Way","2012 Berkeley Way",,,"units TBD","affordable housing opened","Nov 2, 2022",2022-11-02,,
+93,"2420 Shattuck Ave","2420 Shattuck Ave",,132,"132 units","16-story zoning application","Nov 7, 2022",2022-11-07,13,exact
+94,"2462 Bancroft Way","2462 Bancroft Way",,66,"66 units","8-story pre-application","Nov 8, 2022",2022-11-08,116,exact
+95,"2555 College Ave","2555 College Ave",,11,"11 units","4-story proposed","Nov 16, 2022",2022-11-16,161,exact
+96,"2127 Dwight Way","2127 Dwight Way",,58,"58 units","6-story pre-application","Nov 22, 2022",2022-11-22,144,exact
+97,"805 Jones St","805 Jones St",,,"units TBD","duplex plans filed","Dec 4, 2022",2022-12-04,,
+98,"2440 Shattuck Ave (The Lair)","2440 Shattuck Ave","The Lair",40,"40 units","$28.15M construction loan","Dec 10, 2022",2022-12-10,,
+99,"2538 Durant Ave","2538 Durant Ave",,83,"83 units","$10.5M funding secured","Dec 11, 2022",2022-12-11,139,exact
+100,"1998 Shattuck Ave","1998 Shattuck Ave",,599,"599 units","28-story new plans","Dec 14, 2022",2022-12-14,,
+101,"1899 Oxford St","1899 Oxford St",,200,"200+ units","8-story proposed","Dec 16, 2022",2022-12-16,9,exact
+102,"1701 San Pablo Ave","1701 San Pablo Ave",,,"units TBD","100% affordable 6-story proposed","Dec 18, 2022",2022-12-18,153,exact
+103,"2720 San Pablo Ave","2720 San Pablo Ave",,84,"84 units","renderings revealed","Dec 19, 2022",2022-12-19,16,exact
+104,"3120 Shattuck Ave","3120 Shattuck Ave",,,"units TBD","mixed-use preliminary","Dec 20, 2022",2022-12-20,,
+105,"3030 Telegraph Ave","3030 Telegraph Ave",,174,"174 units","new plans","Dec 20, 2022",2022-12-20,150,exact
+106,"2201 San Pablo Ave","2201 San Pablo Ave",,65,"65 units",pre-application,"Jan 3, 2023",2023-01-03,,
+107,"3000 Shattuck Ave","3000 Shattuck Ave",,,"units TBD","design review","Jan 18, 2023",2023-01-18,10,exact
+108,"3031 Adeline St","3031 Adeline St",,64,"64 units","design review","Jan 18, 2023",2023-01-18,,
+109,"2555 College Ave","2555 College Ave",,11,"11 units","public review started","Jan 19, 2023",2023-01-19,161,exact
+110,"2601 San Pablo Ave","2601 San Pablo Ave",,242,"242 units","renderings revealed","Jan 26, 2023",2023-01-26,7,exact
+111,"2800 Telegraph Ave","2800 Telegraph Ave",,16,"16 units",pre-application,"Feb 3, 2023",2023-02-03,146,exact
+112,"2190 Shattuck Ave","2190 Shattuck Ave",,326,"326 units","public meeting","Feb 14, 2023",2023-02-14,35,exact
+113,"3031 Telegraph Ave","3031 Telegraph Ave",,127,"127 units","design review","Feb 16, 2023",2023-02-16,,
+114,"2587 Telegraph Ave","2587 Telegraph Ave",,,"units TBD","8-story preliminary","Feb 20, 2023",2023-02-20,157,exact
+115,"2900 Shattuck Ave","2900 Shattuck Ave",,221,"221 units","renderings revealed","Feb 20, 2023",2023-02-20,,
+116,"1598 University Ave","1598 University Ave",,207,"207 units","renderings revealed","Feb 22, 2023",2023-02-22,152,exact
+117,"2614 Telegraph Ave","2614 Telegraph Ave",,,"units TBD","4-story preliminary","Feb 25, 2023",2023-02-25,37,exact
+118,"2300 Ellsworth St","2300 Ellsworth St",,69,"69 units","planning application","Feb 25, 2023",2023-02-25,147,exact
+119,"2037 Durant Ave","2037 Durant Ave",,74,"74 units","renderings published","Mar 7, 2023",2023-03-07,123,exact
+120,"2712 Telegraph Ave","2712 Telegraph Ave",,,"units TBD","6-story plans increased","Mar 13, 2023",2023-03-13,31,exact
+121,"2462 Bancroft Way","2462 Bancroft Way",,66,"66 units","renderings published","Mar 15, 2023",2023-03-15,116,exact
+122,"2147 San Pablo Ave","2147 San Pablo Ave",,128,"128 group living units","renderings published","Mar 16, 2023",2023-03-16,41,exact
+123,"1974-1998 Shattuck Ave","1974-1998 Shattuck Ave",,599,"599 units","demolition permits","Mar 21, 2023",2023-03-21,,
+124,"2590 Bancroft Way (Bancroft Hub)","2590 Bancroft Way","Bancroft Hub",87,"87 units","topped out","Mar 23, 2023",2023-03-23,,
+125,"3411 Adeline St","3411 Adeline St",,6,"6 units","multifamily planned","Mar 27, 2023",2023-03-27,,
+126,"2000 University Ave (Studio 2000)","2000 University Ave","Studio 2000",82,"82 units","topped out","Mar 29, 2023",2023-03-29,137,exact
+127,"2176 Kittredge St","2176 Kittredge St",,169,"169 units","topped out","Mar 29, 2023",2023-03-29,,
+128,"2115 Kittredge St (California Theatre)","2115 Kittredge St","California Theatre",218,"218 units","renderings revealed","Mar 30, 2023",2023-03-30,12,exact
+129,"2000 Dwight Way","2000 Dwight Way",,113,"113 senior units","construction rising","Mar 30, 2023",2023-03-30,,
+130,"1921 Walnut St (Anchor House)","1921 Walnut St","Anchor House",772,"772 bedrooms","10th floor reached","Mar 31, 2023",2023-03-31,,
+131,"2550 Shattuck Ave","2550 Shattuck Ave",,75,"75 units",pre-application,"Apr 1, 2023",2023-04-01,156,exact
+132,"2190 Shattuck Ave","2190 Shattuck Ave",,326,"326 units","zoning board approved","Apr 4, 2023",2023-04-04,35,exact
+133,"1598 University Ave","1598 University Ave",,207,"207 units","renderings / meeting","Apr 19, 2023",2023-04-19,152,exact
+134,"2660-2680 Bancroft Way","2660-2680 Bancroft Way",,115,"115 units",pre-application,"Apr 22, 2023",2023-04-22,,
+135,"3120 Shattuck Ave","3120 Shattuck Ave",,,"units TBD","renderings published","Apr 24, 2023",2023-04-24,,
+136,"2550 Shattuck Ave","2550 Shattuck Ave",,75,"75 units","renderings published","Apr 27, 2023",2023-04-27,156,exact
+137,"2900 Shattuck Ave","2900 Shattuck Ave",,221,"221 units","renderings published","Apr 29, 2023",2023-04-29,,
+138,"2127 Dwight Way","2127 Dwight Way",,58,"58 units","renderings revealed","May 5, 2023",2023-05-05,144,exact
+139,"2727 San Pablo Ave","2727 San Pablo Ave",,4,"4 units","renderings revealed","May 14, 2023",2023-05-14,,
+140,"2733 San Pablo Ave","2733 San Pablo Ave",,155,"155 units","renderings revealed","May 15, 2023",2023-05-15,36,exact
+141,"3000 Shattuck Ave","3000 Shattuck Ave",,,"units TBD","new renderings / permit","May 15, 2023",2023-05-15,10,exact
+142,"2712 Telegraph Ave","2712 Telegraph Ave",,40,"40 units","renderings / meeting","May 16, 2023",2023-05-16,31,exact
+143,"3030 Telegraph Ave","3030 Telegraph Ave",,144,"144 units","design review","May 18, 2023",2023-05-18,150,exact
+144,"2100 Milvia St","2100 Milvia St",,201,"201 units",pre-application,"May 19, 2023",2023-05-19,121,exact
+145,"2587 Telegraph Ave","2587 Telegraph Ave",,48,"48 units + live/work","renderings revealed","May 19, 2023",2023-05-19,157,exact
+146,"1850 Berryman St","1850 Berryman St",,,"units TBD","permits filed","May 20, 2023",2023-05-20,47,exact
+147,"1598 University Ave","1598 University Ave",,207,"207 units","modified plans","May 22, 2023",2023-05-22,152,exact
+148,"2440 Shattuck Ave (The Lair)","2440 Shattuck Ave","The Lair",40,"40 units","construction at 5th floor","May 23, 2023",2023-05-23,,
+149,"1776-1790 University Ave","1776-1790 University Ave",,17,"17 units","renderings revealed","May 27, 2023",2023-05-27,,
+150,"2538 Durant Ave","2538 Durant Ave",,83,"83 units","permits approved","Jun 3, 2023",2023-06-03,139,exact
+151,"2274 Shattuck Ave","2274 Shattuck Ave",,239,"239 units","renderings published","Jun 6, 2023",2023-06-06,120,exact
+152,"2480 Bancroft Way","2480 Bancroft Way",,125,"125 bedrooms","design review","Jun 13, 2023",2023-06-13,134,exact
+153,"2201 San Pablo Ave","2201 San Pablo Ave",,65,"65 units","details published","Jun 18, 2023",2023-06-18,,
+154,"2441 Le Conte Ave","2441 Le Conte Ave",,65,"65 group living units","zoning permit","Jun 23, 2023",2023-06-23,27,exact
+155,"2555 College Ave","2555 College Ave",,11,"11 units + ADUs",proposed,"Jun 25, 2023",2023-06-25,161,exact
+156,"1752 Shattuck Ave","1752 Shattuck Ave",,68,"68 units","final design review","Jun 29, 2023",2023-06-29,164,exact
+157,"3020 San Pablo Ave","3020 San Pablo Ave",,29,"29 units","updated permits","Jul 1, 2023",2023-07-01,,
+158,"2109 Milvia St","2109 Milvia St",,105,"105 units","14-story plans submitted","Jul 13, 2023",2023-07-13,17,exact
+159,"2660-2680 Bancroft Way","2660-2680 Bancroft Way",,115,"115 units","renderings revealed","Jul 10, 2023",2023-07-10,,
+160,"1752 Shattuck Ave","1752 Shattuck Ave",,68,"68 units","design review meeting","Jul 19, 2023",2023-07-19,164,exact
+161,"2147 San Pablo Ave","2147 San Pablo Ave",,128,"128 units","permit progress","Jul 29, 2023",2023-07-29,41,exact
+162,"2128 Oxford St (The Hub)","2128 Oxford St","The Hub",485,"485 units","environmental review started","Aug 3, 2023",2023-08-03,133,exact
+163,"2100 Milvia St","2100 Milvia St",,201,"201 units","detailed plans published","Aug 9, 2023",2023-08-09,121,exact
+164,"2109 Milvia St","2109 Milvia St",,105,"105 units","property purchased","Aug 10, 2023",2023-08-10,17,exact
+165,"2538 Durant Ave","2538 Durant Ave",,83,"83 units","design review","Aug 16, 2023",2023-08-16,139,exact
+166,"1652 University Ave","1652 University Ave",,26,"26 units","design review","Aug 17, 2023",2023-08-17,,
+167,"2530 Bancroft Way","2530 Bancroft Way",,110,"110 units","preliminary application","Aug 23, 2023",2023-08-23,122,exact
+168,"2530 Bancroft Way","2530 Bancroft Way",,110,"110 units","renderings revealed","Aug 24, 2023",2023-08-24,122,exact
+169,"2037 Kala Bagai Way","2037 Kala Bagai Way",,,"units TBD","office-to-residential proposed","Aug 25, 2023",2023-08-25,,
+170,"2018 Blake St","2018 Blake St",,12,"12 units","co-living renderings","Aug 25, 2023",2023-08-25,148,exact
+171,"2320 Channing Way","2320 Channing Way",,39,"39 units",proposed,"Aug 27, 2023",2023-08-27,,
+172,"3120 Shattuck Ave (Woolsey Gardens)","3120 Shattuck Ave","Woolsey Gardens",,"units TBD","SB35 approved","Aug 30, 2023",2023-08-30,,
+173,"2441 Le Conte Ave","2441 Le Conte Ave",,65,"65 group living units","pre-application / renderings","Sep 14, 2023",2023-09-14,27,exact
+174,"North Berkeley BART (Sacramento St)","North Berkeley BART","Sacramento St",739,"739 units","renderings revealed","Sep 14, 2023",2023-09-14,,
+175,"1652 University Ave","1652 University Ave",,26,"26 units + 2 live-work","draft study","Sep 18, 2023",2023-09-18,,
+176,"2480 Bancroft Way (The Edge)","2480 Bancroft Way","The Edge",28,"28 units","design review","Sep 20, 2023",2023-09-20,134,exact
+177,"2200 Bancroft Way","2200 Bancroft Way",,1400,"1,400 beds","UC dorm pre-development funding","Sep 27, 2023",2023-09-27,165,exact
+178,"1598 University Ave","1598 University Ave",,207,"207 units","city council approved","Sep 28, 2023",2023-09-28,152,exact
+179,"1367 University Ave","1367 University Ave",,39,"39 affordable units",groundbreaking,"Oct 3, 2023",2023-10-03,158,exact
+180,"2127 Dwight Way","2127 Dwight Way",,58,"58 units","design review","Oct 18, 2023",2023-10-18,144,exact
+181,"2420 Shattuck Ave","2420 Shattuck Ave",,132,"132 units","renderings / meeting","Oct 18, 2023",2023-10-18,13,exact
+182,"2136 San Pablo Ave","2136 San Pablo Ave",,100,"100+ units","environmental review","Oct 24, 2023",2023-10-24,140,exact
+183,"2435 Haste St","2435 Haste St",,36,"~36 units","demolition permits","Oct 28, 2023",2023-10-28,,
+184,"2480 Bancroft Way (The Edge)","2480 Bancroft Way","The Edge",28,"28 units","construction starting","Nov 3, 2023",2023-11-03,134,exact
+185,"2700 Shattuck Ave","2700 Shattuck Ave",,300,"~300 units","9-story preliminary plans","Nov 22, 2023",2023-11-22,3,exact
+186,"2450-2480 Shattuck Ave","2450-2480 Shattuck Ave",,,"units TBD","8-story preliminary plans","Nov 1, 2023",2023-11-01,,
+187,"1974-1998 Shattuck Ave","1974-1998 Shattuck Ave",,600,"~600 units","preliminary application","Dec 5, 2023",2023-12-05,,
+188,"2655 Shattuck Ave","2655 Shattuck Ave",,100,"~100 units","8-story plans filed","Dec 6, 2023",2023-12-06,18,exact
+189,"2614 Telegraph Ave","2614 Telegraph Ave",,,"units TBD","4-story preliminary","Dec 8, 2023",2023-12-08,37,exact
+190,"2955 Shattuck Ave","2955 Shattuck Ave",,,"units TBD","8-story preliminary application","Dec 11, 2023",2023-12-11,22,exact
+191,"2660-2680 Bancroft Way","2660-2680 Bancroft Way",,115,"115 units","SB330 preliminary application","Dec 13, 2023",2023-12-13,,
+192,"2109 Virginia St","2109 Virginia St",,132,"132 units","7-story plans filed","Dec 14, 2023",2023-12-14,15,exact
+193,"2100 Milvia St","2100 Milvia St",,201,"201 units","design review / zoning permits","Dec 14, 2023",2023-12-14,121,exact
+194,"2109 Milvia St","2109 Milvia St",,105,"105 units","new renderings / pre-application","Dec 15, 2023",2023-12-15,17,exact
+195,"2733 San Pablo Ave","2733 San Pablo Ave",,155,"155 units",pre-application,"Dec 16, 2023",2023-12-16,36,exact
+196,"2601 San Pablo Ave","2601 San Pablo Ave",,200,"200+ units","preliminary application","Dec 18, 2023",2023-12-18,7,exact
+197,"2587 Telegraph Ave","2587 Telegraph Ave",,200,"200+ bedrooms",renderings,"Dec 19, 2023",2023-12-19,157,exact
+198,"3030 Telegraph Ave","3030 Telegraph Ave",,174,"174 units","new plans","Dec 20, 2023",2023-12-20,150,exact
+199,"2350 Telegraph Ave","2350 Telegraph Ave",,,"units TBD","8-story preliminary","Dec 21, 2023",2023-12-21,142,exact
+200,"1899 Oxford St","1899 Oxford St",,100,"100+ units","7-story preliminary permit","Dec 22, 2023",2023-12-22,9,exact
+201,"2720 San Pablo Ave","2720 San Pablo Ave",,,"units TBD","updated 7-story plans","Jan 3, 2024",2024-01-03,16,exact
+202,"1581 University Ave","1581 University Ave",,100,"100+ units","8-story preliminary application","Jan 4, 2024",2024-01-04,11,exact
+203,"2350-2360 Telegraph Ave","2350-2360 Telegraph Ave",,48,"48 units",renderings,"Jan 8, 2024",2024-01-08,,
+204,"2847 Shattuck Ave","2847 Shattuck Ave",,112,"112 units","SB330 application","Jan 11, 2024",2024-01-11,14,exact
+205,"2127 Dwight Way","2127 Dwight Way",,58,"58 units","demolition permits","Jan 28, 2024",2024-01-28,144,exact
+206,"2018 Blake St","2018 Blake St",,12,"12 units","6-story preliminary application","Jan 29, 2024",2024-01-29,148,exact
+207,"2442 Haste St","2442 Haste St",,36,"~36 units",pre-application,"Feb 12, 2024",2024-02-12,124,exact
+208,"2136 San Pablo Ave","2136 San Pablo Ave",,100,"100+ units","design review","Feb 15, 2024",2024-02-15,140,exact
+209,"North Berkeley BART (Sacramento St)","North Berkeley BART","Sacramento St",739,"739 units",pre-application,"Feb 21, 2024",2024-02-21,,
+210,"2660-2680 Bancroft Way","2660-2680 Bancroft Way",,115,"115 units","zoning permits","Mar 5, 2024",2024-03-05,,
+211,"2614 Telegraph Ave","2614 Telegraph Ave",,19,"19 co-living units","permits filed","Mar 9, 2024",2024-03-09,37,exact
+212,"2274 Shattuck Ave","2274 Shattuck Ave",,227,"227 units","landmark commission decision","Mar 12, 2024",2024-03-12,120,exact
+213,"2435 Haste St","2435 Haste St",,36,"36+ units",renderings,"Mar 17, 2024",2024-03-17,,
+214,"2276 Shattuck Ave","2276 Shattuck Ave",,83,"83 units","18-story preliminary permits","Mar 18, 2024",2024-03-18,2,exact
+215,"2037 Durant Ave","2037 Durant Ave",,74,"74 units","design review","Mar 20, 2024",2024-03-20,123,exact
+216,"2016 Ashby Ave","2016 Ashby Ave",,,"units TBD","affordable 6-story permits","Mar 22, 2024",2024-03-22,141,exact
+217,"2136 San Pablo Ave","2136 San Pablo Ave",,100,"100+ units","city approved","Apr 15, 2024",2024-04-15,140,exact
+218,"2462 Bancroft Way","2462 Bancroft Way",,66,"66 units","planning commission review","Apr 17, 2024",2024-04-17,116,exact
+219,"2450-2480 Shattuck Ave","2450-2480 Shattuck Ave",,100,"~100 units","updated preliminary permits","May 1, 2024",2024-05-01,,
+220,"2128 Oxford St (The Hub)","2128 Oxford St","The Hub",485,"485 units","Draft EIR published","May 7, 2024",2024-05-07,133,exact
+221,"1951 Shattuck Ave (Ace Berkeley)","1951 Shattuck Ave","Ace Berkeley",163,"163 units","construction wrapping up","May 13, 2024",2024-05-13,136,exact
+222,"2655 Shattuck Ave","2655 Shattuck Ave",,100,"~100 units","renderings / permits","May 24, 2024",2024-05-24,18,exact
+223,"2109 Virginia St","2109 Virginia St",,100,"100+ units","formal permits filed","Jun 6, 2024",2024-06-06,15,exact
+224,"2018 Blake St","2018 Blake St",,12,"12 units","demolition permits","Jun 7, 2024",2024-06-07,148,exact
+225,"1130 Oxford St","1130 Oxford St",,,"units TBD","preliminary permits (former school site)","Jan 5, 2026",2026-01-05,,
+226,"2127 Dwight Way","2127 Dwight Way",,58,"58 units","construction topped out","Jan 12, 2026",2026-01-12,144,exact
+227,"2442 Haste St","2442 Haste St",,38,"38 units","design review meeting","Jan 14, 2026",2026-01-14,124,exact
+228,"2138 Kittredge St","2138 Kittredge St",,,"units TBD","modified plans / unit count increased","Jan 16, 2026",2026-01-16,29,exact
+229,"2727 Haste St","2727 Haste St",,45,"45 units","formal application filed","Jan 20, 2026",2026-01-20,114,exact
+230,"1899 Oxford St","1899 Oxford St",,200,"200+ units","zoning board review","Jan 21, 2026",2026-01-21,9,exact
+231,"1740 University Ave","1740 University Ave",,12,"12 units","zoning meeting (commercial-to-residential)","Jan 22, 2026",2026-01-22,42,exact
+232,"2902 Adeline St","2902 Adeline St",,54,"54 units","wood-frame construction rising","Jan 22, 2026",2026-01-22,143,exact
+233,"2147 San Pablo Ave","2147 San Pablo Ave",,100,"~100 affordable units","preliminary permits","Jan 28, 2026",2026-01-28,41,exact
+234,"1521 Holly St","1521 Holly St",,2,"2 units","preliminary permits (Middle Housing)","Jan 29, 2026",2026-01-29,,
+235,"2336 Dwight Way","2336 Dwight Way",,3,"3 units","preliminary permits (Middle Housing)","Feb 8, 2026",2026-02-08,,
+236,"2712-2714 Telegraph Ave","2712-2714 Telegraph Ave",,50,"50 units","demolition permits","Feb 16, 2026",2026-02-16,,
+237,"2455 Telegraph Ave (Amoeba Apartments)","2455 Telegraph Ave","Amoeba Apartments",68,"68 units","zoning permits filed","Feb 18, 2026",2026-02-18,25,exact
+238,"2109 Virginia St","2109 Virginia St",,110,"110 units","city council approved","Feb 20, 2026",2026-02-20,15,exact
+239,"2449 Dwight Way","2449 Dwight Way",,,"units TBD","zoning meeting (8-story partial demo/rebuild)","Feb 25, 2026",2026-02-25,38,exact
+240,"1899 Oxford St","1899 Oxford St",,200,"200+ units","plans approved","Feb 28, 2026",2026-02-28,9,exact
+241,"1708 Harmon St","1708 Harmon St",,,"units TBD","demolition permits","Mar 6, 2026",2026-03-06,145,exact
+242,"2298 Durant Ave","2298 Durant Ave",,,"units TBD","updated preliminary permits (plans decreased)","Mar 10, 2026",2026-03-10,26,exact
+243,"2200 Bancroft Way","2200 Bancroft Way",,1400,"1,400 beds","23-story UC dorm construction started","Mar 10, 2026",2026-03-10,165,exact
+244,"2276 Shattuck Ave","2276 Shattuck Ave",,,"units TBD","zoning board meeting","Mar 11, 2026",2026-03-11,2,exact
+245,"2700 Shattuck Ave","2700 Shattuck Ave",,,"several hundred units","design review meeting","Mar 17, 2026",2026-03-17,3,exact
+246,"1606 Derby St","1606 Derby St",,,"units TBD","preliminary permits (Middle Housing)","Mar 19, 2026",2026-03-19,,
+247,"2200 Fifth St","2200 Fifth St",,8,"8 units","preliminary permits (Middle Housing)","Mar 24, 2026",2026-03-24,45,exact
+248,"Channing Way & Bowditch St (UC Berkeley)","Channing Way & Bowditch St","UC Berkeley",,"units TBD","26-story dorm announced","Mar 26, 2026",2026-03-26,,
+249,"1752 Shattuck Ave","1752 Shattuck Ave",,68,"68 units","construction nearly complete / leasing started","Mar 30, 2026",2026-03-30,164,exact

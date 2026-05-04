@@ -14,7 +14,7 @@ from datetime import datetime
 from pathlib import Path
 
 DB_PATH = Path('/Users/johngage/berkeley-data/databases/berkeley_housing_analysis.db')
-OUTPUT_PATH = Path('/Users/johngage/berkeley-data/docs/berkeley_skyline.kml')
+OUTPUT_PATH = Path('/Users/johngage/berkeley-data/docs/kml_versions/berkeley_skyline_v8_2026-05-03.kml')
 
 # Street grid rotation - Berkeley streets run ~350° from true north (10° west of north)
 GRID_ROTATION_DEG = 10  # clockwise rotation to align with street grid
@@ -67,21 +67,37 @@ def parse_geojson_coords(geojson_str):
         return None
 
 # Pipeline stage to style mapping (KML uses AABBGGRR color format)
-# UC Projects get special gold color and render first
+# Color values are base RGB in BBGGRR format (alpha added at style generation)
 PIPELINE_STYLES = {
-    'UC_Project': ('FF00ECFF', 'Very Bright Gold'),    # Very bright gold (#FFEC00)
-    'Under Construction': ('FF00FF00', 'Green'),     # Green
-    'Completed': ('FFFF0000', 'Blue'),               # Blue
-    'Permits Active': ('FFFFFF00', 'Cyan'),          # Cyan
-    'Entitled': ('FF0080FF', 'Orange'),              # Orange
-    'In Review': ('FF00FFFF', 'Yellow'),             # Yellow
-    'Decision Pending': ('FF00FFFF', 'Yellow'),      # Yellow
-    'Application Submitted': ('FF00FFFF', 'Yellow'), # Yellow
-    'Pre-Application': ('FFC0C0C0', 'Light Gray'),   # Light Gray
-    'Stalled': ('FF0000FF', 'Red'),                  # Red
-    'Withdrawn': ('FF0000FF', 'Red'),                # Red
-    'Unknown': ('FFC0C0C0', 'Light Gray'),           # Light Gray
+    'UC_Project': ('FF00AA', 'Purple'),              # Purple (#AA00FF)
+    'Under Construction': ('FF6229', 'Blue'),        # Blue (#2962FF)
+    'Completed': ('53C800', 'Green'),                # Green (#00C853)
+    'Permits Active': ('FFFF00', 'Cyan'),            # Cyan
+    'Entitled': ('0080FF', 'Orange'),                # Orange
+    'In Review': ('00FFFF', 'Yellow'),               # Yellow
+    'Decision Pending': ('00FFFF', 'Yellow'),        # Yellow
+    'Application Submitted': ('00FFFF', 'Yellow'),   # Yellow
+    'Pre-Application': ('C0C0C0', 'Light Gray'),     # Light Gray
+    'Stalled': ('0000FF', 'Red'),                    # Red
+    'Withdrawn': ('0000FF', 'Red'),                  # Red
+    'Unknown': ('C0C0C0', 'Light Gray'),             # Light Gray
 }
+
+# Line width by geometry source category
+GEOM_LINE_WEIGHTS = {
+    'parcel': 1.5,      # apn_parcel, apn_parcel_merged, apn_parcel_subdivided, site_plan
+    'footprint': 2.5,   # building_footprint, manual_polygon
+    'synthetic': 1.0,   # synthetic_footprint, or no geometry
+}
+
+def get_geom_weight_category(geometry_type):
+    """Map geometry type code to line weight category."""
+    if geometry_type in ('apn_parcel', 'apn_parcel_merged', 'apn_parcel_subdivided', 'site_plan'):
+        return 'parcel'
+    elif geometry_type in ('building_footprint', 'manual_polygon'):
+        return 'footprint'
+    else:
+        return 'synthetic'
 
 # Building footprint size (in degrees, roughly 20m)
 FOOTPRINT = 0.0002
@@ -139,22 +155,18 @@ def generate_kml():
     <name>Berkeley Housing Pipeline - 3D Skyline</name>
     <description>''' + f"{len(projects)} housing projects. Heights shown as stories × 3.5m. Generated {datetime.now().strftime('%Y-%m-%d')}." + '''</description>''')
 
-    # Add styles for each pipeline stage
-    for stage, (color, desc) in PIPELINE_STYLES.items():
-        style_id = get_style_id(stage)
+    # Add styles for each combination of pipeline stage + geometry weight category
+    # Fill: 50% alpha (80), Line: 100% alpha (FF), same base color
+    for stage, (base_color, desc) in PIPELINE_STYLES.items():
+        for weight_cat, line_width in GEOM_LINE_WEIGHTS.items():
+            style_id = f"{get_style_id(stage)}_{weight_cat}"
+            fill_color = f"80{base_color}"   # 50% alpha for fill
+            line_color = f"FF{base_color}"   # 100% alpha for line
 
-        # UC projects get bright white outline, others get default black
-        if stage == 'UC_Project':
-            line_color = 'ffffffff'  # Pure white
-            line_width = 2
-        else:
-            line_color = 'ff000000'  # Black
-            line_width = 1
-
-        kml_parts.append(f'''
+            kml_parts.append(f'''
     <Style id="{style_id}">
       <PolyStyle>
-        <color>{color}</color>
+        <color>{fill_color}</color>
         <fill>1</fill>
         <outline>1</outline>
       </PolyStyle>
@@ -192,7 +204,7 @@ def generate_kml():
         # Determine display status
         display_status = pipeline_stage or status or 'Unknown'
 
-        # Get style - UC projects get special gold color
+        # Get style - UC projects get special purple color
         if is_uc_project:
             style_key = 'UC_Project'
             uc_count += 1
@@ -200,7 +212,10 @@ def generate_kml():
             style_key = pipeline_stage
         else:
             style_key = 'Unknown'
-        style_url = get_style_id(style_key)
+
+        # Determine geometry weight category for line styling
+        geom_weight_cat = get_geom_weight_category(geometry_type)
+        style_url = f"{get_style_id(style_key)}_{geom_weight_cat}"
 
         # Create description
         desc_parts = [
@@ -212,7 +227,7 @@ def generate_kml():
             f"<b>Status:</b> {display_status}",
         ]
         if is_uc_project:
-            desc_parts.append("<br/><b style='color:gold'>UC Berkeley Project</b>")
+            desc_parts.append("<br/><b style='color:purple'>UC Berkeley Project</b>")
         if reliability == 'estimated_height':
             desc_parts.append("<br/><i>(height estimated from units)</i>")
 
@@ -285,7 +300,7 @@ def generate_kml():
     conn.close()
 
     print(f"\n✓ Generated KML with {projects_added} projects")
-    print(f"  UC projects (gold): {uc_count}")
+    print(f"  UC projects (purple): {uc_count}")
     print(f"  Using stored geometry: {using_stored_geom}")
     print(f"  Using synthetic squares: {using_synthetic}")
     print(f"  Output: {OUTPUT_PATH}")

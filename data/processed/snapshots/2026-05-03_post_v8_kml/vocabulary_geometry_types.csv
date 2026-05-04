@@ -1,0 +1,10 @@
+id,code,label,description
+1,apn_parcel,"APN Parcel","Official assessor parcel polygon."
+2,apn_parcel_merged,"APN Parcel (Merged)","Multi-parcel assemblage."
+3,apn_parcel_subdivided,"APN Parcel (Subdivided)","Post-subdivision child parcel."
+4,building_footprint,"Building Footprint","Building footprint; may be hand-edited and street-aligned."
+5,building_3d,"Building 3D Extrusion","Footprint with height for 3D visualization."
+6,site_plan,"Site Plan","Full project site boundary."
+7,centroid_point,"Centroid Point","Project centroid as Point geometry (for mapping)."
+8,manual_polygon,"Manual Polygon","Hand-drawn or hand-edited polygon, typically from Earth Pro round-trip."
+9,synthetic_footprint,"Synthetic Footprint","Generated rectangle from centroid; used as fallback when no parcel data is available."

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>tour-edit-2065-Kittredge-2026-05-03.kml</name>
+	<Style id="style_Entitled_parcel">
+		<LineStyle>
+			<color>ff0080ff</color>
+			<width>1.5</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>800080ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style_Entitled_parcel0">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Entitled_parcel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Entitled_parcel1</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style_Entitled_parcel1">
+		<LineStyle>
+			<color>ff0080ff</color>
+			<width>1.5</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>800080ff</color>
+		</PolyStyle>
+	</Style>
+	<Placemark>
+		<name>2065 Kittredge St</name>
+		<description><![CDATA[<b>2065 Kittredge St</b><br/><b>Units:</b> 189<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled]]></description>
+		<styleUrl>#style_Entitled_parcel0</styleUrl>
+		<Polygon>
+			<extrude>1</extrude>
+			<altitudeMode>relativeToGround</altitudeMode>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-122.2684852557719,37.86847272474038,28 -122.2685428704767,37.86883422983492,28 -122.2688417874279,37.86878848680792,28 -122.268922549586,37.86918411311285,28 -122.2691868580265,37.8691421151169,28 -122.2690361882526,37.86841784704875,28 -122.2684852557719,37.86847272474038,28 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+		<atom:link rel="app" href="https://www.google.com/earth/about/versions/#earth-pro" title="Google Earth Pro 7.3.7.1155"></atom:link>
+	</Placemark>
+</Document>
+</kml>

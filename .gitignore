@@ -36,6 +36,11 @@ hello-fly/
 *.mov
 *.mp4
 
+# Tour source recordings (large uncompressed files, keep local only)
+data/raw/tour_recordings/*.m4v
+data/raw/tour_recordings/*.mov
+data/raw/tour_recordings/*-source.mp4
+
 # PDFs — managed via document mirror subsystem (IA + R2), not git
 pdf/
 *.pdf

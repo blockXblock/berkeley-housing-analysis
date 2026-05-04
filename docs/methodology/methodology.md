@@ -61,6 +61,40 @@ For greenfield projects on vacant land, all four are equal and `units_demolished
 
 ---
 
+## Counting student housing: beds vs. units
+
+UC Berkeley student housing projects (and dormitory-style developments generally) are reported by the developer in **beds**, not dwelling units. A traditional dorm room with two beds in a shared room is counted as 2 beds but may correspond to a fraction of a "unit" for planning purposes. Apartment-style student housing with private bedrooms in shared suites has a different ratio.
+
+To make these projects comparable to apartment-style housing in our pipeline, we apply a conversion factor:
+
+> **Student housing total beds × 0.39 ≈ dwelling units**
+
+This factor is derived from UC Berkeley's own reported conversions for Anchor House (1950 Oxford St), where 772 beds corresponds to 300 units. The ratio varies by project depending on unit configuration (traditional dorms vs. apartment-style suites), but 0.39 is a reasonable central estimate for UC Berkeley projects.
+
+**This is an approximation.** The actual bed-to-unit ratio depends on:
+- Unit mix (studios vs. 2-bed vs. 4-bed suites)
+- Whether beds are in shared or private rooms
+- How the developer defines a "unit" for their reporting
+
+When a UC project reports both beds and units, we use the developer's unit count. When only beds are available, we apply the 0.39 conversion factor and flag the unit count as `confidence = 'low'`.
+
+### UC projects in this database
+
+| Project | Address | Beds | Units | Ratio |
+|---------|---------|------|-------|-------|
+| Channing-Bowditch | 2400 BOWDITCH St | ~1,500 | 750 | 0.50 |
+| People's Park | 2556 HASTE St | 1,113 | 556 | 0.50 |
+| Bancroft-Fulton | 2200 BANCROFT Way | 1,625 | 550 | 0.34 |
+| Anchor House | 1950 OXFORD St | 772 | 300 | 0.39 |
+
+**Note on UC projects and RHNA:** University of California projects on UC-owned land are exempt from city zoning and are not counted toward Berkeley's Regional Housing Needs Allocation (RHNA). They are included in this database for completeness but are flagged as UC projects and excluded from RHNA-reportable totals.
+
+---
+
+Net unit change. We follow HCD's APR methodology and count net change in housing stock. Projects that eliminate units (mergers, demolitions without replacement) are recorded as negative values. This means our totals match RHNA-reportable figures rather than gross-unit-construction figures.
+
+---
+
 ## Data sources
 
 **City of Berkeley Accela portal.** The primary source for planning applications, use permits, design review, building permits, and inspection records. Scraped via a targeted adapter that respects the city's rate limits and records every request. Berkeley is expected to migrate from Accela to Clariti; this database's schema is designed to accommodate the transition.
@@ -170,4 +204,4 @@ We do not take corrections from anonymous sources when the correction claim lack
 
 ---
 
-*Last reviewed: 2026-04-23. This methodology page is versioned; its history is in the project's git repository.*
+*Last reviewed: 2026-05-02. This methodology page is versioned; its history is in the project's git repository.*

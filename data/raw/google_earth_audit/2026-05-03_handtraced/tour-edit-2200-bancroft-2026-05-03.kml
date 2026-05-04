@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>tour-edit-2200-bancroft-2026-05-03.kml</name>
+	<Style id="style_UC_Project_synthetic">
+		<LineStyle>
+			<color>ffff00aa</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>80ff00aa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style_UC_Project_synthetic0">
+		<LineStyle>
+			<color>ffff00aa</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>80ff00aa</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style_UC_Project_synthetic1">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_UC_Project_synthetic0</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_UC_Project_synthetic</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Placemark>
+		<name>2200 BANCROFT Way</name>
+		<description><![CDATA[<b>2200 BANCROFT Way</b><br/><b>Units:</b> 550<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 23<br/><b>Height:</b> 77.1m<br/><b>Status:</b> Under Construction<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
+		<styleUrl>#style_UC_Project_synthetic1</styleUrl>
+		<Polygon>
+			<extrude>1</extrude>
+			<altitudeMode>relativeToGround</altitudeMode>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-122.2653530749287,37.86734094463674,77.09999999999999 -122.2654471995935,37.86781783833246,77.09999999999999 -122.2658107301884,37.86777400642833,77.09999999999999 -122.2657254056444,37.86725787799307,77.09999999999999 -122.2653530749287,37.86734094463674,77.09999999999999 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+		<atom:link rel="app" href="https://www.google.com/earth/about/versions/#earth-pro" title="Google Earth Pro 7.3.7.1155"></atom:link>
+	</Placemark>
+</Document>
+</kml>

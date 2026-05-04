@@ -14,7 +14,7 @@ from datetime import datetime
 from pathlib import Path
 
 DB_PATH = Path('/Users/johngage/berkeley-data/databases/berkeley_housing_analysis.db')
-OUTPUT_PATH = Path('/Users/johngage/berkeley-data/docs/kml_versions/berkeley_skyline_v8_2026-05-03.kml')
+OUTPUT_PATH = Path('/Users/johngage/berkeley-data/docs/kml_versions/berkeley_skyline_v9_2026-05-03.kml')
 
 # Street grid rotation - Berkeley streets run ~350° from true north (10° west of north)
 GRID_ROTATION_DEG = 10  # clockwise rotation to align with street grid

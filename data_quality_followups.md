@@ -114,6 +114,20 @@ Current polygon (13-vertex apn_parcel from April 25 import) extends ~40m east to
 
 ---
 
+### Hand-Traced Footprints Progress (Updated 2026-05-03 evening)
+
+**Completed:**
+- ✓ 1950 Oxford St (project 170) — done 2026-05-03 evening
+- ✓ 1974 Shattuck Ave (project 119) — done 2026-05-03 evening
+- ✓ 2200 Bancroft Way (project 165) — done 2026-05-03 evening
+- ✓ 2065 Kittredge St (project 180) — done 2026-05-03 evening
+
+**Priority queue (iconic projects needing hand-traced footprints):**
+1. **2400 Bowditch St (project 171)** — Next: tomorrow morning. See section below.
+2. 2128 Oxford St / The Hub — UC project, complex site
+3. 2190 Shattuck Ave / The Joseph — distinctive tower shape
+4. Modera buildings — await parcel data refresh first (synthetic fallbacks due to 2019 parcel data)
+
 ### Systematic Polygon Spot-Check Needed
 
 May 3 random spot-check of 6 projects found 3 with visible polygon issues (50%):
@@ -127,6 +141,50 @@ May 3 random spot-check of 6 projects found 3 with visible polygon issues (50%):
 - Pass (no action needed)
 - Need refinement (adjust position, size, or rotation)
 - Need full replacement (wrong parcel, hand-trace required)
+
+---
+
+## Tomorrow's First Task — Fix 2400 Bowditch Polygon
+
+| Field | Value |
+|-------|-------|
+| **Project ID** | 171 |
+| **Address** | 2400 Bowditch St |
+| **Units** | 750 |
+| **Height** | 26 stories |
+| **Status** | Pre-Application |
+| **Type** | UC Berkeley project (Anna Head West site) |
+
+**Issue identified during v9 evening spot-check:**
+Current geometry is a synthetic 20m square placeholder. This is UC Berkeley's largest proposed student housing project (750 beds) and needs an accurate footprint for the KML visualization.
+
+**Resolution plan:**
+1. Obtain architect site plan from UC Capital Projects or SFYIMBY coverage
+2. Hand-trace building footprint in Google Earth Pro
+3. Export KML, round-trip into project_geometries using established workflow
+4. Regenerate as KML v10
+5. Estimated time: 20-30 min
+
+---
+
+## Tour Video Deployment (Next-Session Task)
+
+Compressed Campanile-Adeline-Shattuck tour video is staged at:
+`docs/kml_versions/campanile-adeline-shattuck-compressed.mp4` (69 MB, 4 Mbps, yuv420p, 30fps, faststart enabled)
+
+Source recording at 186 MB also at:
+`docs/kml_versions/campanile-adeline-shattuck.m4v`
+
+**Tomorrow's deployment steps:**
+1. Watch compressed video in QuickTime; compare to source. Verify quality acceptable for home-page embed.
+2. If acceptable: back up existing `docs/berkeley-flyover.mp4`, replace with compressed file (using existing filename so HTML doesn't change).
+3. Move 186 MB source recording to `data/raw/tour_recordings/` (do NOT commit — too large for GitHub).
+4. Add `data/raw/tour_recordings/*.m4v` to `.gitignore`.
+5. Commit, push origin dev.
+6. Verify deployment on berkeleybuild.com (Cloudflare auto-deploys from GitHub).
+
+**Future scaling consideration:**
+10-20 tours at ~70 MB each = 700 MB–1.4 GB in repo history. Investigate Cloudflare R2 or Cloudflare Stream as alternative video hosting before scaling beyond 5 tours.
 
 ---
 

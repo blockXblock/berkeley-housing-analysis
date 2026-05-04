@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>tour-edit-1974-SHATTUCK-2026-05-03 Ave.kml</name>
+	<Style id="style_Entitled_parcel">
+		<LineStyle>
+			<color>ff0080ff</color>
+			<width>1.5</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>800080ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style_Entitled_parcel0">
+		<LineStyle>
+			<color>ff0080ff</color>
+			<width>1.5</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>800080ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style_Entitled_parcel1">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Entitled_parcel0</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Entitled_parcel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Placemark>
+		<name>1974 SHATTUCK Ave</name>
+		<description><![CDATA[<b>1974 SHATTUCK Ave</b><br/><b>Units:</b> 599<br/><b>VLI Units:</b> 58<br/><b>Stories:</b> 28<br/><b>Height:</b> 98.0m<br/><b>Status:</b> Entitled]]></description>
+		<styleUrl>#style_Entitled_parcel1</styleUrl>
+		<Polygon>
+			<extrude>1</extrude>
+			<altitudeMode>relativeToGround</altitudeMode>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-122.2686719879186,37.87287267616308,98.00000000000001 -122.2690361350241,37.87285390297354,98.00000000000001 -122.268933950456,37.87244611934,98.00000000000001 -122.2690904526609,37.87241886123353,98.00000000000001 -122.2690461495803,37.87222041507879,98.00000000000001 -122.2686003850768,37.87228944554767,98.00000000000001 -122.2686719879186,37.87287267616308,98.00000000000001 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+		<atom:link rel="app" href="https://www.google.com/earth/about/versions/#earth-pro" title="Google Earth Pro 7.3.7.1155"></atom:link>
+	</Placemark>
+</Document>
+</kml>

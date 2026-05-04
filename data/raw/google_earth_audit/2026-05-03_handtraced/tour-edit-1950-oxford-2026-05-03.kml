@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>tour-edit-1950-oxford-2026-05-03.kml</name>
+	<Style id="style_UC_Project_synthetic">
+		<LineStyle>
+			<color>ffff00aa</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>80ff00aa</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style_UC_Project_synthetic0">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_UC_Project_synthetic1</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_UC_Project_synthetic</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style_UC_Project_synthetic1">
+		<LineStyle>
+			<color>ffff00aa</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>80ff00aa</color>
+		</PolyStyle>
+	</Style>
+	<Placemark>
+		<name>1950 OXFORD St</name>
+		<description><![CDATA[<b>1950 OXFORD St</b><br/><b>Units:</b> 300<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 14<br/><b>Height:</b> 46.9m<br/><b>Status:</b> Completed<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
+		<styleUrl>#style_UC_Project_synthetic0</styleUrl>
+		<Polygon>
+			<extrude>1</extrude>
+			<altitudeMode>relativeToGround</altitudeMode>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-122.2662788617576,37.87257208642357,47 -122.2663591304847,37.87326413434535,47 -122.2669785623539,37.87317763211071,47 -122.266664583753,37.87255884678478,47 -122.2662788617576,37.87257208642357,47 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+		<atom:link rel="app" href="https://www.google.com/earth/about/versions/#earth-pro" title="Google Earth Pro 7.3.7.1155"></atom:link>
+	</Placemark>
+</Document>
+</kml>

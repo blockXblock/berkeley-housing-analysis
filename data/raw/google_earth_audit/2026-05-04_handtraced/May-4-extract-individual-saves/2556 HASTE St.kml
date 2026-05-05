@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>2556 HASTE St.kml</name>
+	<Style id="style_UC_Project_footprint">
+		<LineStyle>
+			<color>ffff00aa</color>
+			<width>2.5</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>80ff00aa</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style_UC_Project_footprint0">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_UC_Project_footprint</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_UC_Project_footprint1</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style_UC_Project_footprint1">
+		<LineStyle>
+			<color>ffff00aa</color>
+			<width>2.5</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>80ff00aa</color>
+		</PolyStyle>
+	</Style>
+	<Placemark>
+		<name>2556 HASTE St</name>
+		<description><![CDATA[<b>2556 HASTE St</b><br/><b>Units:</b> 556<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 12<br/><b>Height:</b> 40.2m<br/><b>Status:</b> Under Construction<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
+		<styleUrl>#style_UC_Project_footprint0</styleUrl>
+		<Polygon>
+			<extrude>1</extrude>
+			<altitudeMode>relativeToGround</altitudeMode>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-122.257849049515,37.86606393310299,40.2 -122.257798184082,37.86584327228867,40.2 -122.2568112451243,37.86597488893274,40.2 -122.25673268639,37.86547554566393,40.2 -122.2562992779039,37.86551647916642,40.2 -122.2564219708596,37.86623851100116,40.2 -122.257849049515,37.86606393310299,40.2 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+		<atom:link rel="app" href="https://www.google.com/earth/about/versions/#earth-pro" title="Google Earth Pro 7.3.7.1155"></atom:link>
+	</Placemark>
+</Document>
+</kml>

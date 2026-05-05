@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>2400 BOWDITCH St.kml</name>
+	<StyleMap id="style_UC_Project_footprint">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_UC_Project_footprint1</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_UC_Project_footprint0</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style_UC_Project_footprint0">
+		<LineStyle>
+			<color>ffff00aa</color>
+			<width>2.5</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>80ff00aa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style_UC_Project_footprint1">
+		<LineStyle>
+			<color>ffff00aa</color>
+			<width>2.5</width>
+		</LineStyle>
+		<PolyStyle>
+			<color>80ff00aa</color>
+		</PolyStyle>
+	</Style>
+	<Placemark>
+		<name>2400 BOWDITCH St</name>
+		<description><![CDATA[<b>2400 BOWDITCH St</b><br/><b>Units:</b> 750<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 26<br/><b>Height:</b> 85.3m<br/><b>Status:</b> Pre-Application<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
+		<styleUrl>#style_UC_Project_footprint</styleUrl>
+		<Polygon>
+			<extrude>1</extrude>
+			<altitudeMode>relativeToGround</altitudeMode>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-122.2565445419804,37.86641824954469,85.3 -122.2567124763328,37.8670995495654,85.3 -122.2573632984431,37.8670059833901,85.3 -122.2573330308715,37.86677749095411,85.3 -122.2568668192754,37.8668594735373,85.3 -122.2567508474408,37.86639375435853,85.3 -122.2565445419804,37.86641824954469,85.3 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+		<atom:link rel="app" href="https://www.google.com/earth/about/versions/#earth-pro" title="Google Earth Pro 7.3.7.1155"></atom:link>
+	</Placemark>
+</Document>
+</kml>

@@ -36,6 +36,9 @@ hello-fly/
 *.mov
 *.mp4
 
+# Exception: deployed tour videos (compressed for web)
+!docs/videos/*.mp4
+
 # Tour source recordings (large uncompressed files, keep local only)
 data/raw/tour_recordings/*.m4v
 data/raw/tour_recordings/*.mov

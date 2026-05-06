@@ -199,7 +199,8 @@ git push origin main
 - `docs/index.html` - Main site
 - `docs/explorer.html` - Data explorer
 - `docs/berkeley_skyline.kml` - 3D visualization
-- `docs/berkeley-flyover.mp4` - Flyover video
+- `docs/videos/campanile-adeline-shattuck.mp4` - Campanile-Adeline-Shattuck tour video
+- `docs/videos/elmwood-bancroft-shattuck.mp4` - Elmwood-Bancroft-Shattuck tour video
 
 ---
 

@@ -200,7 +200,7 @@ git push origin main
 - `docs/explorer.html` - Data explorer
 - `docs/berkeley_skyline.kml` - 3D visualization
 - `docs/videos/campanile-adeline-shattuck.mp4` - Campanile-Adeline-Shattuck tour video
-- `docs/videos/elmwood-bancroft-shattuck.mp4` - Elmwood-Bancroft-Shattuck tour video
+- `docs/videos/tour-elmwood+college+bancroft+shattuck-s2n.mp4` - Elmwood→College→Bancroft→Shattuck tour (south to north)
 
 ---
 

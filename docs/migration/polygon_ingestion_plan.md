@@ -196,7 +196,22 @@ Prompt for CC:
 > Report: total placemarks, distribution of vertex counts (min/median/max), placemarks with >50 vertices, placemarks with <4 vertices.
 
 Output goes here:
-<!-- CC TO FILL: KML inventory results -->
+**Run date:** 2026-05-08 (CC analysis)
+
+- Total placemarks: 179
+- Placemarks with polygons: 179
+- Placemarks without polygons: 0
+
+Vertex count distribution:
+- Min: 5
+- Max: 22
+- Median: 5
+- Mean: 6.2
+
+- Placemarks with >50 vertices: 0
+- Placemarks with <4 vertices: 0
+
+All polygons have reasonable vertex counts (5–22 range). No vertex-cleanup flagging required at this time.
 
 ### 8b. Match analysis (CC fills)
 
@@ -206,7 +221,24 @@ Prompt for CC:
 > Report: count matched, count multi-building (suffix detected), count quarantined.
 
 Output goes here:
-<!-- CC TO FILL: Match analysis results -->
+**Run date:** 2026-05-08 (CC analysis)
+
+- Total placemarks: 179
+- Exact matches: 175
+- Normalized matches: 1
+- Total matched: 176
+- Multi-building (suffix detected): 3
+- Quarantined (unmatched): 3
+
+Multi-building placemarks:
+- `Ashby BART 1` → base=`Ashby BART`, suffix=`1`
+- `Ashby Bart 2` → base=`Ashby Bart`, suffix=`2`
+- `Ashby BART 3` → base=`Ashby BART`, suffix=`3`
+
+Unmatched placemarks (require human investigation):
+- `(unnamed)` — KML placemark with no name; needs investigation in source
+- `1717 SAN PABLO Ave` — city renumbered 1701 San Pablo to 1717; v2 still has 1701. Will be addressed by addresses-history schema follow-up.
+- `Dharma University` — name rather than address; needs project ID match.
 
 ### 8c. Polygon coverage in v2 (CC fills)
 
@@ -216,7 +248,13 @@ Prompt for CC:
 > Report current state of geometry types in v2 before ingestion.
 
 Output goes here:
-<!-- CC TO FILL: Pre-ingestion v2 geometry coverage -->
+**Run date:** 2026-05-08 (CC analysis)
+
+| geometry_type code | count |
+|--------------------|------:|
+| centroid_point     | 179   |
+
+Current state: v2 has 179 centroid_point geometries only. **No polygon geometries exist yet.** This is expected — the migration script populated centroids from v1 lat/lon, but v1 had no polygon column. Polygons live only in the canonical KML and need this ingestion pipeline to enter v2.
 
 ### 8d. Multi-building candidate identification (CC fills)
 
@@ -226,7 +264,24 @@ Prompt for CC:
 > Report list of detected multi-building placemarks.
 
 Output goes here:
-<!-- CC TO FILL: Multi-building candidates -->
+**Run date:** 2026-05-08 (CC analysis)
+
+- Total placemarks scanned: 179
+- Multi-building candidates detected: 3
+
+Detected multi-building placemarks:
+- `Ashby BART 1` — numeric suffix
+- `Ashby Bart 2` — numeric suffix
+- `Ashby BART 3` — numeric suffix
+
+No `Building [A-Z]`, `Tower`, or `Podium` patterns found. Only Ashby BART has multi-building representation in the current KML.
+
+**Known cases not yet split in KML:**
+- `2400 BOWDITCH St` — currently a single L-shaped polygon; actually two towers with different heights. Needs KML editing to split before ingestion.
+- `2200 BANCROFT Way` — currently a single L-shaped polygon; actually two towers with different heights. Needs KML editing to split before ingestion.
+- Modera Acheson Commons — known to have 4 buildings (including the discovered "Building D"); KML still represents as single polygon.
+
+These cases require GEP editing to create separate placemarks before this ingestion pipeline can split them into structures.
 
 ### 8e. Bounds and sanity checks (CC fills)
 
@@ -236,7 +291,14 @@ Prompt for CC:
 > Flag any polygons that are not closed (first vertex != last vertex).
 
 Output goes here:
-<!-- CC TO FILL: Bounds and sanity check results -->
+**Run date:** 2026-05-08 (CC analysis)
+
+- Total polygons checked: 179
+- Berkeley bounds: lat [37.84, 37.91], lon [-122.32, -122.23]
+- Polygons outside Berkeley bounds: 0
+- Polygons not closed (first vertex != last vertex): 0
+
+All 179 polygons pass bounds and closure checks.
 
 ---
 

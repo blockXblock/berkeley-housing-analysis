@@ -1,7 +1,7 @@
 # Migration Audit Report: v1 → v2
 
-**Generated:** 2026-04-22T12:31:29.246420
-**Asserted By:** migration_v1_to_v2_20260422
+**Generated:** 2026-05-07T16:38:14.449895
+**Asserted By:** migration_v1_to_v2_20260507
 
 ---
 
@@ -9,16 +9,20 @@
 
 | Metric | v1 | v2 | Delta | Notes |
 |--------|---:|---:|------:|-------|
-| projects | 174 | 174 | +0 |  |
-| units | 12717 | 12718 | +1 | -1 → 0 fix |
+| projects | 179 | 179 | +0 |  |
+| units | 14070 | 14071 | +1 | -1 → 0 fix |
 | vli_units | 968 | 968 | +0 |  |
 | permits | 114 | 118 | +4 | project_permits + building_permits |
-| events | 2306 | 2605 | +299 | date columns + permit_events |
+| events | 2306 | 2611 | +305 | date columns + permit_events |
 | documents | 1423 | 1406 | -17 | 17 quarantined |
 
 ## 2. Synthetic Events Created
 
-No synthetic events created.
+**Total:** 1 synthetic entitlement events
+
+| Project ID | Event Date | Event Type | Reason |
+|------------|------------|------------|--------|
+| 179 | 2018 | entitlement_approved | entitled date existed but no entitlement_approved event |
 
 ## 3. Duplicate Address Review Cases
 
@@ -56,7 +60,9 @@ No synthetic events created.
 
 ## 5. Low Confidence / Inferred Rows
 
-No low-confidence rows recorded.
+| Table | Count | Notes |
+|-------|------:|-------|
+| project_events | 1 | Synthetic/inferred data |
 
 ## 6. Classifications / Tags Added
 
@@ -72,7 +78,7 @@ No low-confidence rows recorded.
 
 - Permits: 107 from project_permits + 11 from building_permits = 118 total
 - Project 84: units -1 → 0 (negative value corrected)
-- Events: 334 from date columns + 2271 from permit_events = 2605 total
+- Events: 339 from date columns + 2271 from permit_events = 2610 total
 
 ### Unit Delta (+1) Explanation
 
@@ -94,4 +100,4 @@ Permits in v2 come from two sources:
 
 ---
 
-*Report generated 2026-04-22T12:31:29.246420*
+*Report generated 2026-05-07T16:38:14.449895*

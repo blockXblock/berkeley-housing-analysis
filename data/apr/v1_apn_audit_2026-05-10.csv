@@ -1,0 +1,26 @@
+project_id,address,v1_apn,issue_type,details,suggested_apn
+127,2820 San Pablo,,MISSING_APN,"No APN recorded. Units: 1, Status: Entitled",
+128,2833 Seventh St,,MISSING_APN,"No APN recorded. Units: 3, Status: Approved",
+129,1614 Sixth St,,MISSING_APN,"No APN recorded. Units: 3, Status: Approved",
+130,1048 Keith St,,MISSING_APN,"No APN recorded. Units: 0, Status: Approved",
+131,811 Cedar,,MISSING_APN,"No APN recorded. Units: 0, Status: Approved",
+133,2128 Oxford St,,MISSING_APN,"No APN recorded. Units: 485, Status: Approved",
+165,2200 BANCROFT Way,,MISSING_APN,"No APN recorded. Units: 550, Status: Under Construction",
+170,1950 OXFORD St,,MISSING_APN,"No APN recorded. Units: 300, Status: Completed",
+171,2400 BOWDITCH St,,MISSING_APN,"No APN recorded. Units: 750, Status: Pre-Application",
+177,2556 HASTE St,,MISSING_APN,"No APN recorded. Units: 556, Status: Under Construction",
+72,5 W PARNASSUS Ct,058 224204829,APN_MISMATCH,CPRA permits at this address have different APN(s): 058 223202200,058 223202200
+93,1312 ADDISON St,056 199300100,APN_MISMATCH,CPRA permits at this address have different APN(s): 056 199400401,056 199400401
+139,2538 DURANT Ave,055 187602000,APN_MISMATCH,CPRA permits at this address have different APN(s): 055 187602101,055 187602101
+153,1701 SAN PABLO Ave,058 212701403,APN_MISMATCH,CPRA permits at this address have different APN(s): 058 212901700,058 212901700
+21,2660 BANCROFT Way,55-1871-20,FORMAT_ERROR,"expected 12 digits, found 8; missing space separator; contains non-digit characters",
+33,130 BERKELEY Sq,57-2032-17,FORMAT_ERROR,"expected 12 digits, found 8; missing space separator; contains non-digit characters",
+47,1850 BERRYMAN St,60-2447-36,FORMAT_ERROR,"expected 12 digits, found 8; missing space separator; contains non-digit characters",
+126,2427 San Pablo,056192802200,FORMAT_ERROR,missing space separator,
+132,1627 Jaynes St,059227901600,FORMAT_ERROR,missing space separator,
+134,2480 Bancroft Way,055187802200,FORMAT_ERROR,missing space separator,
+178,2131 University Ave,"057-2046-008-03, 057-2046-008-02, 057-2046-006-00, 057-2046-010-00",FORMAT_ERROR,"expected 12 digits, found 48; space not after 3rd digit; contains non-digit characters",
+179,2352 Shattuck Ave,055-1895-018-05,FORMAT_ERROR,missing space separator; contains non-digit characters,
+180,2065 Kittredge St,057-2027-006-00,FORMAT_ERROR,missing space separator; contains non-digit characters,
+181,2015 Blake St,055-1822-013-3,FORMAT_ERROR,"expected 12 digits, found 11; missing space separator; contains non-digit characters",
+182,2072 Addison St,057-2023-025-00,FORMAT_ERROR,missing space separator; contains non-digit characters,

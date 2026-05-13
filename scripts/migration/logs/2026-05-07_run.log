@@ -1,0 +1,144 @@
+============================================================
+MIGRATION: v1 (flat) → v2 (normalized)
+============================================================
+Source: /Users/johngage/berkeley-data/databases/berkeley_housing_analysis.db
+Target: /Users/johngage/berkeley-data/databases/berkeley_housing_v2.db
+Timestamp: 2026-05-07T16:38:14.449895
+
+=== Creating v2 Database ===
+  Removing existing berkeley_housing_v2.db...
+  Applying core.sql...
+  Applying vocabularies_berkeley.sql...
+  ✓ Schema applied, FK check clean
+
+=== Creating Quarantine Tables ===
+  ✓ Quarantine tables created
+
+=== Migrating Parcels ===
+  ✓ Inserted 163 parcels
+
+=== Migrating Organizations ===
+  ✓ Inserted 56 organizations
+
+=== Migrating Projects (Pass 1) ===
+  ⚠️ Duplicate address, renamed: 2740 SHASTA Rd (id:109)
+  ⚠️ Duplicate address, renamed: 2455 TELEGRAPH Ave (id:115)
+  ⚠️ Duplicate address, renamed: 2138 KITTREDGE St (id:118)
+  ✓ Inserted 179 projects (current_version_id = NULL)
+
+=== Populating Duplicate Address Review Table ===
+  ✓ Added 3 duplicate address pairs for review
+
+=== Migrating Permits ===
+  ✓ Inserted 118 permits (107 from project_permits, 11 from building_permits)
+  ⚠️ Skipped 3 permits (invalid project_id)
+
+=== Migrating Project-Parcel Links ===
+  ✓ Inserted 169 project-parcel links
+
+=== Migrating Project Versions ===
+  ✓ Inserted 179 project versions (is_current=1, source_event_id=NULL)
+  ⚠️ Fixed 1 projects with negative units → 0
+
+=== Migrating Unit Program ===
+  ✓ Inserted 179 unit_program rows (bedroom_count=1 placeholder)
+
+=== Migrating Affordability ===
+  ✓ Inserted 175 affordability rows
+
+=== Migrating Project Events ===
+  ✓ Inserted 339 events from project date columns
+  ✓ Inserted 2271 events from permit_events
+  ⚠️ Skipped 12 events (invalid project_id)
+
+=== Migrating Documents ===
+  ✓ Inserted 1406 documents (url_status='unknown')
+  ⚠️ Quarantined 17 orphan documents
+
+=== Migrating Project Participants ===
+  ✓ Inserted 112 project participants
+
+=== Migrating Project Geometries ===
+  ✓ Inserted 179 centroid geometries
+
+=== Migrating Project Classifications (Flags) ===
+    sb35_approved: 2 projects
+    sb330_protected: 17 projects
+    ab2011_approved: 2 projects
+    uc_project: 4 projects
+    density_bonus: 55 projects
+  ✓ Inserted 80 project classifications
+
+=== Updating current_version_id (Pass 2) ===
+  ✓ Updated 179 projects with current_version_id
+
+=== Updating source_event_id (Pass 2) ===
+  ✓ Updated 179 versions with source_event_id from existing events
+
+=== Creating Synthetic Entitlement Events ===
+  ✓ Created 1 synthetic entitlement events (is_inferred=1, medium confidence)
+  ℹ️ 120 versions still without source_event_id (no entitled date available)
+
+=== Applying Compatibility Views ===
+  ✓ Applied views_compat.sql
+
+============================================================
+VALIDATION
+============================================================
+
+### Count Comparison
+Metric                       v1         v2    Match
+--------------------------------------------------
+projects                    179        179        ✓
+units                     14070      14071        ✓
+vli_units                   968        968        ✓
+permits                     114        118        ✓
+events                     2306       2611        ✓
+documents                  1423       1423        ✓
+
+### Foreign Key Check
+  ✓ No FK violations
+
+### One Current Version Per Project
+  ✓ All projects have exactly one current version
+
+### One Current Geometry Per (project, type)
+  ✓ All (project, geometry_type) pairs have at most one current geometry
+
+### Non-Proposal Versions Missing source_event_id
+  ℹ️ 120 entitled versions without source_event_id
+    (No entitled date available in source data)
+
+### Synthetic Events
+  ℹ️ 1 synthetic inferred events created
+
+### Project Classifications
+    density_bonus: 55 projects
+    sb330_protected: 17 projects
+    uc_project: 4 projects
+    ab2011_approved: 2 projects
+    sb35_approved: 2 projects
+
+### Duplicate Organizations by Normalized Name
+  ✓ No duplicate organizations
+
+### Quarantine Summary
+    Duplicate address pairs for review: 3
+    Orphan documents quarantined: 17
+
+### Compatibility Views
+  ✓ v_projects_flat returns 179 rows
+
+=== Writing Migration Audit Report ===
+  ✓ Written to /Users/johngage/berkeley-data/docs/migration/migration_audit_report.md
+
+=== Writing Reconciliation Notes ===
+  ✓ Written to /Users/johngage/berkeley-data/docs/migration/reconciliation_notes.md
+
+============================================================
+MIGRATION COMPLETE
+============================================================
+v2 database: /Users/johngage/berkeley-data/databases/berkeley_housing_v2.db
+Size: 1,519,616 bytes
+
+Audit reports written to: /Users/johngage/berkeley-data/docs/migration

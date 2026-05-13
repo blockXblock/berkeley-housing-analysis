@@ -112,45 +112,42 @@
     // ========================================
     const PIPELINE_STAGES = [
         'Pre-Application',
-        'Application Submitted',
-        'In Review',
-        'Decision Pending',
+        'Under Review',
         'Entitled',
-        'Permits Active',
+        'Entitled but Inactive',
+        'Building Permits Filed',
+        'Permitted but Inactive',
         'Under Construction',
         'Completed',
         'Withdrawn',
-        'Stalled',
-        'Unknown'
+        'Stalled'
     ];
 
     // Explicit ordering for sorting
     const PIPELINE_STAGE_ORDER = {
         'Pre-Application': 1,
-        'Application Submitted': 2,
-        'In Review': 3,
-        'Decision Pending': 4,
-        'Entitled': 5,
-        'Permits Active': 6,
+        'Under Review': 2,
+        'Entitled': 3,
+        'Entitled but Inactive': 4,
+        'Building Permits Filed': 5,
+        'Permitted but Inactive': 6,
         'Under Construction': 7,
         'Completed': 8,
         'Withdrawn': 9,
-        'Stalled': 10,
-        'Unknown': 11
+        'Stalled': 10
     };
 
     const STAGE_COLORS = {
         'Pre-Application': '#94a3b8',      // slate
-        'Application Submitted': '#60a5fa', // blue
-        'In Review': '#fbbf24',            // amber
-        'Decision Pending': '#f59e0b',     // yellow-orange
+        'Under Review': '#fbbf24',         // amber
         'Entitled': '#34d399',             // emerald
-        'Permits Active': '#a78bfa',       // violet
+        'Entitled but Inactive': '#9ca3af', // gray-400 (muted - stuck)
+        'Building Permits Filed': '#a78bfa', // violet
+        'Permitted but Inactive': '#9ca3af', // gray-400 (muted - stuck)
         'Under Construction': '#f97316',   // orange
         'Completed': '#22c55e',            // green
         'Withdrawn': '#ef4444',            // red
-        'Stalled': '#6b7280',              // gray
-        'Unknown': '#d1d5db'               // light gray
+        'Stalled': '#6b7280'               // gray
     };
 
     // Construction substage colors (for Gantt)
@@ -232,57 +229,10 @@
         return 'Under Review';
     }
 
-    // Get pipeline stage considering all project fields (status, construction_status, dates)
+    // Get pipeline stage from v2 project.status (already computed by export script)
     function getPipelineStage(project) {
-        // Use database pipeline_stage column if available (preferred source)
-        if (project.pipeline_stage && PIPELINE_STAGE_ORDER[project.pipeline_stage]) {
-            return project.pipeline_stage;
-        }
-
-        // Fall back to computed logic for older data
-        // Check construction_status first (most definitive)
-        const constructionStatus = (project.construction_status || '').toLowerCase();
-        if (constructionStatus === 'completed' || constructionStatus === 'occupied') {
-            return 'Completed';
-        }
-        if (constructionStatus === 'framing' || constructionStatus === 'foundation' ||
-            constructionStatus === 'topped_out' || constructionStatus === 'finishing' ||
-            constructionStatus === 'under_construction') {
-            return 'Under Construction';
-        }
-
-        // Check CO date
-        if (project.co_date) {
-            return 'Completed';
-        }
-
-        // Check for stalled projects (entitled > 12 months with no BP)
-        if (project.entitled && !project.bp_issued) {
-            const entitledDate = new Date(project.entitled);
-            const monthsSinceEntitled = (new Date() - entitledDate) / (1000 * 60 * 60 * 24 * 30);
-            if (monthsSinceEntitled > 12) {
-                return 'Stalled';
-            }
-        }
-
-        // Check BP issued
-        if (project.bp_issued) {
-            return 'Under Construction';  // BP issued implies construction should be underway
-        }
-
-        // Check for BP filed
-        const status = (project.status || '').toLowerCase();
-        if (status.includes('building permit') || status === 'plan check') {
-            return 'BP Filed';
-        }
-
-        // Check entitled
-        if (project.entitled) {
-            return 'Entitled';
-        }
-
-        // Normalize the raw status
-        return normalizeStatus(project.status);
+        // v2 export provides correct status directly - no translation needed
+        return project.status || 'Unknown';
     }
 
     // Get color for a pipeline stage
@@ -294,16 +244,15 @@
     function getStatusBadgeClass(stage) {
         const classes = {
             'Pre-Application': 'bg-slate-100 text-slate-700',
-            'Application Submitted': 'bg-blue-100 text-blue-700',
-            'In Review': 'bg-amber-100 text-amber-700',
-            'Decision Pending': 'bg-yellow-100 text-yellow-700',
+            'Under Review': 'bg-amber-100 text-amber-700',
             'Entitled': 'bg-emerald-100 text-emerald-700',
-            'Permits Active': 'bg-violet-100 text-violet-700',
+            'Entitled but Inactive': 'bg-gray-200 text-gray-600',
+            'Building Permits Filed': 'bg-violet-100 text-violet-700',
+            'Permitted but Inactive': 'bg-gray-200 text-gray-600',
             'Under Construction': 'bg-orange-100 text-orange-700',
             'Completed': 'bg-green-100 text-green-700',
             'Withdrawn': 'bg-red-100 text-red-700',
-            'Stalled': 'bg-gray-100 text-gray-600',
-            'Unknown': 'bg-gray-50 text-gray-500'
+            'Stalled': 'bg-gray-100 text-gray-600'
         };
         return classes[stage] || 'bg-gray-100 text-gray-600';
     }

@@ -850,7 +850,7 @@
                         <div>
                             <h4 class="font-semibold mb-2">Documents (${docs.length})</h4>
                             <div class="max-h-40 overflow-y-auto text-sm">
-                                ${docs.length ? docs.slice(0, 10).map(d => `<div class="py-1 border-b border-gray-200 truncate" title="${d.filename}"><span class="text-purple-600">${d.filename}</span>${d.notes ? ` <span class="text-gray-400 text-xs">${d.notes}</span>` : ''}</div>`).join('') + (docs.length > 10 ? `<div class="text-gray-400 py-1 italic">...and ${docs.length - 10} more documents</div>` : '') : '<p class="text-gray-500">No documents found</p>'}
+                                ${docs.length ? docs.slice(0, 10).map(d => `<div class="py-1 border-b border-gray-200 truncate" title="${d.filename}">${d.url ? `<a href="${d.url}" target="_blank" class="text-purple-600 hover:underline">${d.filename}</a>` : `<span class="text-purple-600">${d.filename}</span>`}${d.notes ? ` <span class="text-gray-400 text-xs">${d.notes}</span>` : ''}</div>`).join('') + (docs.length > 10 ? `<div class="text-gray-400 py-1 italic">...and ${docs.length - 10} more documents</div>` : '') : '<p class="text-gray-500">No documents found</p>'}
                             </div>
                         </div>
                     </div>

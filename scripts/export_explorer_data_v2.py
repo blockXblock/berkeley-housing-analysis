@@ -38,8 +38,28 @@ def validate_co_date(co_date):
         return None
 
 def get_projects(conn):
-    """Get all projects from v2 database with derived fields from joined tables"""
+    """Get all projects from v2 database with derived fields from joined tables.
+
+    Includes inactive-state detection:
+    - "Permitted but Inactive": stage=permitted, no construction observed,
+      latest building permit issued > 24 months ago
+    - "Entitled but Inactive": stage=entitled, no building permit issued,
+      latest entitlement > 36 months ago
+
+    Thresholds chosen 2026-05-13:
+    - 24 months for permitted (a building permit unused for 2 years is unusual)
+    - 36 months for entitled (entitled-to-permit takes 18-30 months in California,
+      so 3+ years without permit application is the honest "inactive" signal)
+    """
+    from datetime import date, timedelta
     cursor = conn.cursor()
+
+    # Compute cutoff dates once
+    today = date.today()
+    cutoff_24mo = today - timedelta(days=730)  # ~24 months
+    cutoff_36mo = today - timedelta(days=1095)  # ~36 months
+    cutoff_24mo_str = cutoff_24mo.isoformat()
+    cutoff_36mo_str = cutoff_36mo.isoformat()
 
     # Main query: one row per project with current_version fields joined
     cursor.execute('''
@@ -64,8 +84,6 @@ def get_projects(conn):
         pid = row[0]
         units = row[4] or 0
 
-        # Per-project subqueries for joined data
-
         # APN from primary parcel
         apn_cur = conn.cursor()
         apn_cur.execute('''
@@ -77,7 +95,7 @@ def get_projects(conn):
         apn_row = apn_cur.fetchone()
         apn = apn_row[0] if apn_row else None
 
-        # Owner, developer, architect from project_participants
+        # Owner, developer, architect
         roles = {}
         role_cur = conn.cursor()
         role_cur.execute('''
@@ -104,7 +122,7 @@ def get_projects(conn):
         for (code,) in class_cur.fetchall():
             flags.add(code)
 
-        # VLI units from unit_program_affordability
+        # VLI units
         vli_cur = conn.cursor()
         vli_cur.execute('''
             SELECT SUM(upa.unit_count)
@@ -119,6 +137,7 @@ def get_projects(conn):
         vli_units = vli_row[0] if vli_row and vli_row[0] else 0
 
         # Key event dates (MAX event_date per event_type)
+        # Include construction-related events for inactive detection
         event_cur = conn.cursor()
         event_cur.execute('''
             SELECT vet.code, MAX(pe.event_date)
@@ -132,6 +151,7 @@ def get_projects(conn):
                 'building_permit_issued',
                 'co_issued',
                 'construction_start_observed',
+                'topped_out',
                 'demo_permit_issued'
               )
             GROUP BY vet.code
@@ -149,7 +169,7 @@ def get_projects(conn):
         permits_str = permit_row[0] if permit_row[0] else ''
         num_permits = permit_row[1] or 0
 
-        # Total fees aggregated
+        # Total fees
         fee_cur = conn.cursor()
         fee_cur.execute('''
             SELECT SUM(amount) FROM fees WHERE project_id = ?
@@ -163,13 +183,13 @@ def get_projects(conn):
         bp_issued = event_dates.get('building_permit_issued')
         co_date = validate_co_date(event_dates.get('co_issued'))
         construction_start = event_dates.get('construction_start_observed')
+        topped_out = event_dates.get('topped_out')
         demolition_permit_date = event_dates.get('demo_permit_issued')
 
         # Processing days: filed to entitled
         processing_days = None
         if filed and entitled:
             try:
-                from datetime import date
                 f = date.fromisoformat(filed)
                 e = date.fromisoformat(entitled)
                 processing_days = (e - f).days
@@ -189,6 +209,18 @@ def get_projects(conn):
             'withdrawn': 'Withdrawn'
         }
         status = status_map.get(stage_code, stage_code or 'Unknown')
+
+        # Inactive-state detection (overrides status if criteria met)
+        # "Permitted but Inactive": permit > 24 months old, no construction observed
+        if stage_code == 'permitted':
+            has_construction = bool(construction_start or topped_out or co_date)
+            if not has_construction and bp_issued and bp_issued < cutoff_24mo_str:
+                status = 'Permitted but Inactive'
+
+        # "Entitled but Inactive": entitlement > 36 months old, no building permit
+        if stage_code == 'entitled':
+            if not bp_issued and entitled and entitled < cutoff_36mo_str:
+                status = 'Entitled but Inactive'
 
         # Build output dict matching v1 shape
         projects.append({
@@ -422,10 +454,33 @@ def get_fees(conn, projects):
 def get_staff(conn):
     """Get staff activity from v2 project_events.observed_by.
 
-    Translates v2's observed_by field into v1-compatible staff list.
-    Excludes the migration_v1_to_v2_20260507 tag (synthesized events have no real staff).
+    Cleans v2 data quality issues from Accela scraping:
+    1. Strips scraping artifacts: 'Due', 'Comment', 'Comments' suffixes
+    2. Merges known name truncations into canonical full names
+    3. Drops migration tag, 'Unknown' placeholder, and comment-template strings
+
+    Keeps initials (ADM, AA, MJ, SU, KL), initial+code combinations (MJ PSC,
+    AA CONV), and first-name-only entries (Timothy, Nicole). These represent
+    real activity even though we cannot map them to canonical names without
+    external verification.
     """
+    import re
     cursor = conn.cursor()
+
+    # Confirmed name mappings: variant -> canonical
+    # Verified 2026-05-13 by checking variant patterns against Berkeley staff
+    # who appear at multiple projects in 2024-2025 data
+    NAME_MERGES = {
+        'Jesus': 'Jesus Del Toro',
+        'Jesus Del': 'Jesus Del Toro',
+        'Shanitra': 'Shanitra Roan',
+        'Sharon': 'Sharon Gong',
+        'Mariafelisa': 'Mariafelisa Baber',
+        'Autumn': 'Autumn Maltbie',
+        'Andrew': 'Andrew Cockrell',
+    }
+
+    # Pull raw data
     cursor.execute('''
         SELECT
             observed_by,
@@ -433,20 +488,58 @@ def get_staff(conn):
             COUNT(DISTINCT project_id) as projects
         FROM project_events
         WHERE observed_by IS NOT NULL
-          AND length(observed_by) > 3
           AND observed_by != 'migration_v1_to_v2_20260507'
         GROUP BY observed_by
-        ORDER BY actions DESC
     ''')
 
+    raw_rows = cursor.fetchall()
+
+    # Normalize each name: strip artifacts, apply canonical mapping
+    def normalize(name):
+        if name is None:
+            return None
+        n = name.strip()
+        # Strip scraping artifacts: Due, Comment, Comments (suffix only)
+        n = re.sub(r'\s*(Due|Comment[s]?)\s*$', '', n).strip()
+        # Apply known canonical mapping
+        if n in NAME_MERGES:
+            n = NAME_MERGES[n]
+        return n
+
+    # Detect comment-template strings (not real names)
+    def is_comment_template(name):
+        if not name:
+            return True
+        # Drop entries containing literal "Comment:" pattern (Accela template artifacts)
+        if 'Comment:' in name:
+            return True
+        # Drop entries starting with template prefix
+        if name.startswith('--'):
+            return True
+        return False
+
+    # Aggregate by normalized name
+    normalized = {}
+    for raw_name, actions, projects in raw_rows:
+        norm = normalize(raw_name)
+        # Drop placeholders, empty, and comment-template strings
+        if not norm or norm.lower() == 'unknown':
+            continue
+        if is_comment_template(norm):
+            continue
+        if norm not in normalized:
+            normalized[norm] = {"actions": 0, "projects": 0}
+        normalized[norm]["actions"] += actions
+        normalized[norm]["projects"] += projects
+
+    # Build sorted output
     staff = []
-    for row in cursor.fetchall():
-        if row[0]:  # Skip empty names (defense against blank strings that pass length check)
-            staff.append({
-                "name": row[0],
-                "actions": row[1],
-                "projects": row[2]
-            })
+    for name, data in sorted(normalized.items(), key=lambda x: x[1]["actions"], reverse=True):
+        staff.append({
+            "name": name,
+            "actions": data["actions"],
+            "projects": data["projects"]
+        })
 
     return staff
 

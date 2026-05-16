@@ -233,7 +233,7 @@ Created at the end of a multi-hour session that built:
   `9290c80`)
 - KML L-shape for 2400 Bowditch (Anna Head)
 - UC Berkeley Dormitory Tour KML (5 iterations, recorded as YouTube
-  video CLfV9vLPOJs, embedded on site)
+  video 5VLjGlMuHLU, embedded on site)
 - The permit_role classifier module (`scripts/permit_role_classifier.py`,
   uncommitted as of session end)
 - Discovery of the 50% stage-misclassification rate via 10-project audit

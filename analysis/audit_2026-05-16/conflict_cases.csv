@@ -1,0 +1,2 @@
+source_table,source_id,description,matched_completes_patterns,matched_does_not_complete_patterns,project_id,project_address
+permits,204,New construction of 5-story residential apartment with no parking. Shoring under B2023-04569,\b\d+[- ]?stor(y|ies|ey)\s+(new|mixed[- ]use|multi[- ]family|residential|building)\b,\bshoring\b,174,1773 OXFORD St

@@ -2439,236 +2439,16 @@
 			<color>800000ff</color>
 		</PolyStyle>
 	</Style>
-	<gx:Tour>
-		<name>Berkeley Housing Pipeline - Extended Dramatic Tour</name>
-		<visibility>0</visibility>
-		<gx:Playlist>
-			<gx:FlyTo>
-				<gx:duration>6</gx:duration>
-				<Camera>
-					<longitude>-122.2733</longitude>
-					<latitude>37.87</latitude>
-					<altitude>240</altitude>
-					<heading>88</heading>
-					<tilt>80</tilt>
-					<roll>0</roll>
-					<altitudeMode>absolute</altitudeMode>
-				</Camera>
-			</gx:FlyTo>
-			<gx:Wait><gx:duration>4</gx:duration>
-</gx:Wait>
-			<gx:FlyTo>
-				<gx:duration>5</gx:duration>
-				<gx:flyToMode>smooth</gx:flyToMode>
-				<Camera>
-					<longitude>-122.2618</longitude>
-					<latitude>37.8654</latitude>
-					<altitude>210</altitude>
-					<heading>118</heading>
-					<tilt>82</tilt>
-					<roll>0</roll>
-					<altitudeMode>absolute</altitudeMode>
-				</Camera>
-			</gx:FlyTo>
-			<gx:FlyTo>
-				<gx:duration>4</gx:duration>
-				<gx:flyToMode>smooth</gx:flyToMode>
-				<Camera>
-					<longitude>-122.2598</longitude>
-					<latitude>37.8656</latitude>
-					<altitude>205</altitude>
-					<heading>180</heading>
-					<tilt>82</tilt>
-					<roll>0</roll>
-					<altitudeMode>absolute</altitudeMode>
-				</Camera>
-			</gx:FlyTo>
-			<gx:FlyTo>
-				<gx:duration>4</gx:duration>
-				<gx:flyToMode>smooth</gx:flyToMode>
-				<Camera>
-					<longitude>-122.2598</longitude>
-					<latitude>37.8656</latitude>
-					<altitude>205</altitude>
-					<heading>300</heading>
-					<tilt>82</tilt>
-					<roll>0</roll>
-					<altitudeMode>absolute</altitudeMode>
-				</Camera>
-			</gx:FlyTo>
-			<gx:Wait><gx:duration>5</gx:duration>
-</gx:Wait>
-			<gx:FlyTo>
-				<gx:duration>5</gx:duration>
-				<gx:flyToMode>smooth</gx:flyToMode>
-				<Camera>
-					<longitude>-122.2691</longitude>
-					<latitude>37.8538</latitude>
-					<altitude>182.88</altitude>
-					<heading>336</heading>
-					<tilt>80</tilt>
-					<roll>0</roll>
-					<altitudeMode>absolute</altitudeMode>
-				</Camera>
-			</gx:FlyTo>
-			<gx:FlyTo>
-				<gx:duration>7</gx:duration>
-				<gx:flyToMode>smooth</gx:flyToMode>
-				<Camera>
-					<longitude>-122.2689</longitude>
-					<latitude>37.8607</latitude>
-					<altitude>182.88</altitude>
-					<heading>348</heading>
-					<tilt>80</tilt>
-					<roll>0</roll>
-					<altitudeMode>absolute</altitudeMode>
-				</Camera>
-			</gx:FlyTo>
-			<gx:FlyTo>
-				<gx:duration>8</gx:duration>
-				<gx:flyToMode>smooth</gx:flyToMode>
-				<Camera>
-					<longitude>-122.2684</longitude>
-					<latitude>37.8772</latitude>
-					<altitude>182.88</altitude>
-					<heading>2</heading>
-					<tilt>79</tilt>
-					<roll>0</roll>
-					<altitudeMode>absolute</altitudeMode>
-				</Camera>
-			</gx:FlyTo>
-			<gx:FlyTo>
-				<gx:duration>4</gx:duration>
-				<gx:flyToMode>smooth</gx:flyToMode>
-				<Camera>
-					<longitude>-122.2684</longitude>
-					<latitude>37.8772</latitude>
-					<altitude>182.88</altitude>
-					<heading>182</heading>
-					<tilt>77</tilt>
-					<roll>0</roll>
-					<altitudeMode>absolute</altitudeMode>
-				</Camera>
-			</gx:FlyTo>
-			<gx:Wait><gx:duration>10</gx:duration>
-</gx:Wait>
-			<gx:FlyTo>
-				<gx:duration>5</gx:duration>
-				<gx:flyToMode>smooth</gx:flyToMode>
-				<Camera>
-					<longitude>-122.285</longitude>
-					<latitude>37.8707</latitude>
-					<altitude>195</altitude>
-					<heading>88</heading>
-					<tilt>81</tilt>
-					<roll>0</roll>
-					<altitudeMode>absolute</altitudeMode>
-				</Camera>
-			</gx:FlyTo>
-			<gx:Wait><gx:duration>5</gx:duration>
-</gx:Wait>
-			<gx:FlyTo>
-				<gx:duration>5</gx:duration>
-				<gx:flyToMode>smooth</gx:flyToMode>
-				<Camera>
-					<longitude>-122.2802</longitude>
-					<latitude>37.8707</latitude>
-					<altitude>195</altitude>
-					<heading>88</heading>
-					<tilt>81</tilt>
-					<roll>0</roll>
-					<altitudeMode>absolute</altitudeMode>
-				</Camera>
-			</gx:FlyTo>
-			<gx:Wait><gx:duration>5</gx:duration>
-</gx:Wait>
-			<gx:FlyTo>
-				<gx:duration>5</gx:duration>
-				<gx:flyToMode>smooth</gx:flyToMode>
-				<Camera>
-					<longitude>-122.2756</longitude>
-					<latitude>37.8707</latitude>
-					<altitude>195</altitude>
-					<heading>88</heading>
-					<tilt>81</tilt>
-					<roll>0</roll>
-					<altitudeMode>absolute</altitudeMode>
-				</Camera>
-			</gx:FlyTo>
-			<gx:Wait><gx:duration>5</gx:duration>
-</gx:Wait>
-			<gx:FlyTo>
-				<gx:duration>5</gx:duration>
-				<gx:flyToMode>smooth</gx:flyToMode>
-				<Camera>
-					<longitude>-122.2709</longitude>
-					<latitude>37.8706</latitude>
-					<altitude>195</altitude>
-					<heading>88</heading>
-					<tilt>81</tilt>
-					<roll>0</roll>
-					<altitudeMode>absolute</altitudeMode>
-				</Camera>
-			</gx:FlyTo>
-			<gx:Wait><gx:duration>5</gx:duration>
-</gx:Wait>
-			<gx:FlyTo>
-				<gx:duration>5</gx:duration>
-				<gx:flyToMode>smooth</gx:flyToMode>
-				<Camera>
-					<longitude>-122.2679</longitude>
-					<latitude>37.8706</latitude>
-					<altitude>195</altitude>
-					<heading>88</heading>
-					<tilt>81</tilt>
-					<roll>0</roll>
-					<altitudeMode>absolute</altitudeMode>
-				</Camera>
-			</gx:FlyTo>
-			<gx:Wait><gx:duration>5</gx:duration>
-</gx:Wait>
-			<gx:FlyTo>
-				<gx:duration>5</gx:duration>
-				<gx:flyToMode>smooth</gx:flyToMode>
-				<Camera>
-					<longitude>-122.2642</longitude>
-					<latitude>37.8706</latitude>
-					<altitude>195</altitude>
-					<heading>88</heading>
-					<tilt>81</tilt>
-					<roll>0</roll>
-					<altitudeMode>absolute</altitudeMode>
-				</Camera>
-			</gx:FlyTo>
-			<gx:Wait><gx:duration>5</gx:duration>
-</gx:Wait>
-			<gx:FlyTo>
-				<gx:duration>4</gx:duration>
-				<gx:flyToMode>smooth</gx:flyToMode>
-				<Camera>
-					<longitude>-122.2732</longitude>
-					<latitude>37.87</latitude>
-					<altitude>210</altitude>
-					<heading>90</heading>
-					<tilt>80</tilt>
-					<roll>0</roll>
-					<altitudeMode>absolute</altitudeMode>
-				</Camera>
-			</gx:FlyTo>
-			<gx:Wait><gx:duration>8</gx:duration>
-</gx:Wait>
-		</gx:Playlist>
-	</gx:Tour>
 	<Folder>
 		<name>Housing Projects</name>
 		<visibility>0</visibility>
 		<open>1</open>
 		<Placemark>
-			<name>2400 BOWDITCH St - North</name>
+			<name>2400 Bowditch St · North · 750 units · Pre-Application</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2400 BOWDITCH St</b><br/><b>Units:</b> 750<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 26<br/><b>Height:</b> 85.3m<br/><b>Status:</b> Pre-Application<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
 			<styleUrl>#style_UC_Project_footprint100</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25690599090315,37.866971805244454,85.3</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -2678,14 +2458,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2556 HASTE St</name>
+			<name>2556 Haste St · 556 units · Under Construction</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2556 HASTE St</b><br/><b>Units:</b> 556<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 12<br/><b>Height:</b> 40.2m<br/><b>Status:</b> Under Construction<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
 			<styleUrl>#style_UC_Project_footprint20</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25731023977428,37.866037293193145,40.2</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -2695,14 +2475,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2200 BANCROFT Way - North</name>
+			<name>2200 Bancroft Way · North · 550 units · Under Construction</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2200 BANCROFT Way</b><br/><b>Units:</b> 550- 1,650 students <br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 23<br/><b>Height:</b> 77.1m<br/><b>Status:</b> Under Construction<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
 			<styleUrl>#style_UC_Project_footprint31</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26551745443166,37.867675380012926,77.1</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -2712,14 +2492,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1950 OXFORD St</name>
+			<name>1950 Oxford St · 300 units · Completed</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1950 OXFORD St</b><br/><b>Units:</b> 300<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 14<br/><b>Height:</b> 46.9m<br/><b>Status:</b> Completed<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
 			<styleUrl>#style_UC_Project_footprint1</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26654945040669,37.87281611574529,46.9</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -2729,14 +2509,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1750 SACRAMENTO St</name>
+			<name>1750 Sacramento St · 739 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 739<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.28289080285495,37.874245322298805,28.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -2746,14 +2526,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1974 SHATTUCK Ave</name>
+			<name>1974 Shattuck Ave · 599 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1974 SHATTUCK Ave</b><br/><b>Units:</b> 599<br/><b>VLI Units:</b> 58<br/><b>Stories:</b> 28<br/><b>Height:</b> 98.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_Entitled_footprint</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26886443551932,37.87256772807138,98.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -2763,14 +2543,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2128 Oxford St</name>
+			<name>2128 Oxford St · 485 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2128 Oxford St</b><br/><b>Units:</b> 485<br/><b>VLI Units:</b> 47<br/><b>Stories:</b> 26<br/><b>Height:</b> 91.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_Entitled_synthetic4</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.266143704536,37.87023467662286,91.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -2780,14 +2560,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2190 SHATTUCK Ave</name>
+			<name>2190 Shattuck Ave · 452 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2190 SHATTUCK Ave</b><br/><b>Units:</b> 452<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 34<br/><b>Height:</b> 119.0m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26857370145042,37.86948589549435,119.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -2797,14 +2577,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2700 SHATTUCK Ave</name>
+			<name>2700 Shattuck Ave · 359 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2700 SHATTUCK Ave</b><br/><b>Units:</b> 359<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 15<br/><b>Height:</b> 52.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel7</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.2678653050527,37.85972243205204,52.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -2814,14 +2594,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2276 SHATTUCK Ave</name>
+			<name>2276 Shattuck Ave · 336 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2276 SHATTUCK Ave</b><br/><b>Units:</b> 336<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 18<br/><b>Height:</b> 63.0m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26827759404361,37.867715053083984,63.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -2831,14 +2611,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2274 SHATTUCK Ave</name>
+			<name>2274 Shattuck Ave · 299 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2274 SHATTUCK Ave</b><br/><b>Units:</b> 299<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 17<br/><b>Height:</b> 59.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_Entitled_parcel5</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26843795588307,37.86787043715371,59.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -2848,14 +2628,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1914 FIFTH St</name>
+			<name>1914 Fifth St · 257 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1914 FIFTH St</b><br/><b>Units:</b> 257<br/><b>VLI Units:</b> 26<br/><b>Stories:</b> 15<br/><b>Height:</b> 52.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_synthetic0</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.29925104821655,37.86819942121075,52.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -2865,14 +2645,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2029 UNIVERSITY Ave</name>
+			<name>2029 University Ave · 240 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2029 UNIVERSITY Ave</b><br/><b>Units:</b> 240<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 23<br/><b>Height:</b> 78.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_Entitled_parcel61010</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.2698103290622,37.872240198403695,78.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -2882,14 +2662,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2352 Shattuck Ave</name>
+			<name>2352 Shattuck Ave · 237 units · Completed</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2352 Shattuck Ave</b><br/><b>Units:</b> 237<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Completed]]></description>
 			<styleUrl>#style_Completed_parcel</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26839571649684,37.86618061867801,28.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -2899,14 +2679,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2601 SAN PABLO Ave</name>
+			<name>2601 San Pablo Ave · 223 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2601 SAN PABLO Ave</b><br/><b>Units:</b> 223<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.28864662527994,37.85926185409402,28.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -2916,14 +2696,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2920 SHATTUCK Ave</name>
+			<name>2920 Shattuck Ave · 221 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2920 SHATTUCK Ave</b><br/><b>Units:</b> 221<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 10<br/><b>Height:</b> 35.0m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel512</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26691826590493,37.85641015329668,35.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -2933,14 +2713,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1899 OXFORD St</name>
+			<name>1899 Oxford St · 212 units · Decision Pending</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1899 OXFORD St</b><br/><b>Units:</b> 212<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 23.8m<br/><b>Status:</b> Decision Pending]]></description>
 			<styleUrl>#style_Decision_Pending_parcel1</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.2660521810506,37.87456752225695,23.8</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -2950,14 +2730,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1598 UNIVERSITY Ave</name>
+			<name>1598 University Ave · 207 units · Under Construction</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1598 UNIVERSITY Ave</b><br/><b>Units:</b> 207<br/><b>VLI Units:</b> 21<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Under Construction]]></description>
 			<styleUrl>#style_Under_Construction_parcel2</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27997852336857,37.87037043683552,28.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -2967,14 +2747,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2100 MILVIA St</name>
+			<name>2100 Milvia St · 205 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2100 MILVIA St</b><br/><b>Units:</b> 205<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 15<br/><b>Height:</b> 52.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Entitled_parcel61011</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27112457780126,37.870564925334456,52.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -2984,14 +2764,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2131 University Ave</name>
+			<name>2131 University Ave · 205 units · Completed</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2131 University Ave</b><br/><b>Units:</b> 205<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Completed]]></description>
 			<styleUrl>#style_Completed_synthetic1</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26741102768862,37.8725320351303,21.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3001,14 +2781,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2065 Kittredge St</name>
+			<name>2065 Kittredge St · 189 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2065 Kittredge St</b><br/><b>Units:</b> 189<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_Entitled_footprint10</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26878159815519,37.868767005909696,28.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3018,14 +2798,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2150 Kittredge St</name>
+			<name>2150 Kittredge St · 169 units · Completed</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2150 Kittredge St</b><br/><b>Units:</b> 169<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Completed_parcel0</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26681353307713,37.868334537710496,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3035,14 +2815,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2015 Blake St</name>
+			<name>2015 Blake St · 168 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2015 Blake St</b><br/><b>Units:</b> 168<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_Entitled_parcel61010</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26904005696974,37.863131497667275,24.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3052,14 +2832,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>3000 SHATTUCK Ave</name>
+			<name>3000 Shattuck Ave · 166 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>3000 SHATTUCK Ave</b><br/><b>Units:</b> 166<br/><b>VLI Units:</b> 17<br/><b>Stories:</b> 10<br/><b>Height:</b> 34.7m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26673896132995,37.85499068685183,34.7</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3069,14 +2849,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1951 Shattuck Ave</name>
+			<name>1951 Shattuck Ave · 163 units · Completed</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1951 Shattuck Ave</b><br/><b>Units:</b> 163<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Completed_parcel03</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26811962729457,37.8724720039045,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3086,14 +2866,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1581 UNIVERSITY Ave</name>
+			<name>1581 University Ave · 158 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1581 UNIVERSITY Ave</b><br/><b>Units:</b> 158<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 48.2m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel5818</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.28064703421364,37.87092371769745,48.2</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3103,14 +2883,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2115 KITTREDGE St</name>
+			<name>2115 Kittredge St · 148 units · Application Submitted</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2115 KITTREDGE St</b><br/><b>Units:</b> 148<br/><b>VLI Units:</b> 12<br/><b>Stories:</b> 10<br/><b>Height:</b> 35.0m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel0</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26715136155786,37.86893049842461,35.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3120,14 +2900,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>3030 TELEGRAPH Ave</name>
+			<name>3030 Telegraph Ave · 144 units · Under Construction</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>3030 TELEGRAPH Ave</b><br/><b>Units:</b> 144<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 10<br/><b>Height:</b> 35.0m<br/><b>Status:</b> Under Construction<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Under_Construction_parcel22</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.260406837901,37.85471970985291,35.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3137,14 +2917,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2420 SHATTUCK Ave</name>
+			<name>2420 Shattuck Ave · 132 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2420 SHATTUCK Ave</b><br/><b>Units:</b> 132<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 17<br/><b>Height:</b> 59.5m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel58188</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26796450914678,37.86530779410443,59.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3154,14 +2934,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2847 SHATTUCK Ave</name>
+			<name>2847 Shattuck Ave · 132 units · Application Submitted</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2847 SHATTUCK Ave</b><br/><b>Units:</b> 132<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 9<br/><b>Height:</b> 41.5m<br/><b>Status:</b> Application Submitted]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26635670269891,37.856963380569994,41.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3171,14 +2951,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2109 VIRGINIA St</name>
+			<name>2109 Virginia St · 131 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2109 VIRGINIA St</b><br/><b>Units:</b> 131<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 39.9m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_Entitled_parcel612</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26852053376608,37.877091086745565,39.9</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3188,14 +2968,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2136 SAN PABLO Ave</name>
+			<name>2136 San Pablo Ave · 125 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2136 SAN PABLO Ave</b><br/><b>Units:</b> 125<br/><b>VLI Units:</b> 10<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_Entitled_parcel62</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.29177601862588,37.866856074087764,21.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3205,14 +2985,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2425 DURANT Ave</name>
+			<name>2425 Durant Ave · 117 units · Decision Pending</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2425 DURANT Ave</b><br/><b>Units:</b> 117<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 20<br/><b>Height:</b> 61.0m<br/><b>Status:</b> Decision Pending]]></description>
 			<styleUrl>#style_Decision_Pending_parcel100</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26014428640018,37.867959055036394,61.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3222,14 +3002,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2720 SAN PABLO Ave</name>
+			<name>2720 San Pablo Ave · 113 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2720 SAN PABLO Ave</b><br/><b>Units:</b> 113<br/><b>VLI Units:</b> 9<br/><b>Stories:</b> 10<br/><b>Height:</b> 35.7m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.28867623375004,37.85734740643587,35.7</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3239,14 +3019,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2000 DWIGHT Way</name>
+			<name>2000 Dwight Way · 113 units · Completed</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2000 DWIGHT Way</b><br/><b>Units:</b> 113<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Completed]]></description>
 			<styleUrl>#style_Completed_parcel0</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26959412404601,37.863446395133295,21.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3256,14 +3036,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2530 BANCROFT Way</name>
+			<name>2530 Bancroft Way · 110 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2530 BANCROFT Way</b><br/><b>Units:</b> 110<br/><b>VLI Units:</b> 11<br/><b>Stories:</b> 12<br/><b>Height:</b> 42.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_Entitled_parcel61014</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25821373991934,37.86858860949201,42.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3273,7 +3053,7 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
 			<name>1717 SAN PABLO Ave</name>
@@ -3293,11 +3073,11 @@
 			</Polygon>
 		</Placemark>
 		<Placemark>
-			<name>2109 MILVIA St</name>
+			<name>2109 Milvia St · 105 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2109 MILVIA St</b><br/><b>Units:</b> 105<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 14<br/><b>Height:</b> 49.0m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel581814</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27035952084498,37.870610140364676,49.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3307,14 +3087,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2198 SAN PABLO Ave</name>
+			<name>2198 San Pablo Ave · 100 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2198 SAN PABLO Ave</b><br/><b>Units:</b> 100<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_Entitled_parcel618</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.29161868186893,37.866515402643266,24.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3324,14 +3104,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2655 SHATTUCK Ave</name>
+			<name>2655 Shattuck Ave · 97 units · Decision Pending</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2655 SHATTUCK Ave</b><br/><b>Units:</b> 97<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 25.9m<br/><b>Status:</b> Decision Pending]]></description>
 			<styleUrl>#style_Decision_Pending_parcel00</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26648493902947,37.86072789690659,25.9</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3341,14 +3121,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2450 SHATTUCK Ave</name>
+			<name>2450 Shattuck Ave · 94 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2450 SHATTUCK Ave</b><br/><b>Units:</b> 94<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel6</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26791504573075,37.864610326929565,24.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3358,14 +3138,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2001 ASHBY Ave</name>
+			<name>2001 Ashby Ave · 87 units · Completed</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2001 ASHBY Ave</b><br/><b>Units:</b> 87<br/><b>VLI Units:</b> 86<br/><b>Stories:</b> 1<br/><b>Height:</b> 3.5m<br/><b>Status:</b> Completed]]></description>
 			<styleUrl>#style_Completed_parcel0</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26841096162525,37.85532591248513,3.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3375,14 +3155,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2036 BANCROFT Way</name>
+			<name>2036 Bancroft Way · 85 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2036 BANCROFT Way</b><br/><b>Units:</b> 85<br/><b>VLI Units:</b> 4<br/><b>Stories:</b> 8<br/><b>Height:</b> 25.9m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel2</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.2681596452802,37.86703076562448,25.9</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3392,14 +3172,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1700 SACRAMENTO St</name>
+			<name>1700 Sacramento St · 85 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1700 SACRAMENTO St</b><br/><b>Units:</b> 85<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58189</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.28216052005746,37.87471451380403,24.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3409,14 +3189,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2538 DURANT Ave</name>
+			<name>2538 Durant Ave · 83 units · Under Construction</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2538 DURANT Ave</b><br/><b>Units:</b> 83<br/><b>VLI Units:</b> 5<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Under Construction]]></description>
 			<styleUrl>#style_Under_Construction_parcel22</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25716464976044,37.86772938324897,28.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3426,14 +3206,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2000 University Ave</name>
+			<name>2000 University Ave · 82 units · Completed</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2000 University Ave</b><br/><b>Units:</b> 82<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Completed_parcel0</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27048173840026,37.87159617446581,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3443,14 +3223,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1708 HARMON St</name>
+			<name>1708 Harmon St · 80 units · Permits Active</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1708 HARMON St</b><br/><b>Units:</b> 80<br/><b>VLI Units:</b> 80<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.5m<br/><b>Status:</b> Permits Active]]></description>
 			<styleUrl>#style_Permits_Active_parcel5</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27319093350266,37.84901075054883,17.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3460,14 +3240,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2680 BANCROFT Way</name>
+			<name>2680 Bancroft Way · 79 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2680 BANCROFT Way</b><br/><b>Units:</b> 79<br/><b>VLI Units:</b> 9<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_Entitled_parcel1</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25506492790313,37.86902021604211,28.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3477,14 +3257,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2660 BANCROFT Way</name>
+			<name>2660 Bancroft Way · 78 units · Application Submitted</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2660 BANCROFT Way</b><br/><b>Units:</b> 78<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Application Submitted]]></description>
 			<styleUrl>#style_Application_Submitted_parcel1</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25528195999496,37.868988251778205,28.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3494,14 +3274,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2427 San Pablo</name>
+			<name>2427 San Pablo · 78 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2427 San Pablo</b><br/><b>Units:</b> 78<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 21.3m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Entitled_parcel61010</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.28937079330345,37.861867394125866,21.3</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3511,14 +3291,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2955 SHATTUCK Ave</name>
+			<name>2955 Shattuck Ave · 74 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2955 SHATTUCK Ave</b><br/><b>Units:</b> 74<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 22.9m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel581815</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26609817726565,37.85572309388094,22.9</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3528,14 +3308,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2037 DURANT Ave</name>
+			<name>2037 Durant Ave · 74 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2037 DURANT Ave</b><br/><b>Units:</b> 74<br/><b>VLI Units:</b> 4<br/><b>Stories:</b> 1<br/><b>Height:</b> 27.4m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_Entitled_parcel61012</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26852565750944,37.86691015909018,27.4</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3545,14 +3325,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2138 KITTREDGE St</name>
+			<name>2138 Kittredge St · 66 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2138 KITTREDGE St</b><br/><b>Units:</b> 73<br/><b>VLI Units:</b> 5<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_Entitled_parcel2</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26700080043511,37.868384886360204,28.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3562,14 +3342,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2099 MLK Jr Way</name>
+			<name>2099 Mlk Jr Way · 72 units · Completed</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2099 MLK Jr Way</b><br/><b>Units:</b> 72<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Completed_parcel0</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27260426676625,37.87086361590322,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3579,14 +3359,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2550 SHATTUCK Ave</name>
+			<name>2550 Shattuck Ave · 72 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2550 SHATTUCK Ave</b><br/><b>Units:</b> 72<br/><b>VLI Units:</b> 8<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_Entitled_parcel61010</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26771188496511,37.862746770138166,24.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3596,14 +3376,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2326 DURANT Ave</name>
+			<name>2326 Durant Ave · 70 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2326 DURANT Ave</b><br/><b>Units:</b> 70<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel581828</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26226118833362,37.867132618550464,24.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3613,14 +3393,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2300 ELLSWORTH St</name>
+			<name>2300 Ellsworth St · 69 units · Permits Active</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2300 ELLSWORTH St</b><br/><b>Units:</b> 69<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Permits Active]]></description>
 			<styleUrl>#style_Permits_Active_parcel5</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26394438394102,37.86790362862105,24.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3630,14 +3410,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2330 DURANT Ave</name>
+			<name>2330 Durant Ave · 68 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2330 DURANT Ave</b><br/><b>Units:</b> 68<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel581838</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26208536407337,37.867155157055016,21.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3647,14 +3427,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2455 TELEGRAPH Ave</name>
+			<name>2455 Telegraph Ave · 68 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2455 TELEGRAPH Ave</b><br/><b>Units:</b> 68<br/><b>VLI Units:</b> 7<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel5824</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25825819982535,37.86585957910636,28.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3664,14 +3444,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1752 SHATTUCK Ave</name>
+			<name>1752 Shattuck Ave · 68 units · Completed</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1752 SHATTUCK Ave</b><br/><b>Units:</b> 68<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Completed]]></description>
 			<styleUrl>#style_Completed_parcel0</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26913343141001,37.875364455691894,24.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3681,14 +3461,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2462 BANCROFT Way</name>
+			<name>2462 Bancroft Way · 66 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2462 BANCROFT Way</b><br/><b>Units:</b> 66<br/><b>VLI Units:</b> 3<br/><b>Stories:</b> 8<br/><b>Height:</b> 26.8m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_Entitled_parcel61010</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25999263411613,37.86830475474528,26.8</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3698,14 +3478,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2072 Addison St</name>
+			<name>2072 Addison St · 66 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2072 Addison St</b><br/><b>Units:</b> 66<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_Entitled_parcel610</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26887035685795,37.87087597006873,21.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3715,14 +3495,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2298 DURANT Ave</name>
+			<name>2298 Durant Ave · 65 units · Decision Pending</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2298 DURANT Ave</b><br/><b>Units:</b> 65<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 27.7m<br/><b>Status:</b> Decision Pending]]></description>
 			<styleUrl>#style_Decision_Pending_parcel100</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26374289726652,37.866934415078035,27.7</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3732,14 +3512,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2441 LE CONTE Ave</name>
+			<name>2441 Le Conte Ave · 65 units · Application Submitted</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2441 LE CONTE Ave</b><br/><b>Units:</b> 65<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel47</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26185183073429,37.87706089474836,24.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3749,14 +3529,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>3031 ADELINE St</name>
+			<name>3031 Adeline St · 64 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>3031 ADELINE St</b><br/><b>Units:</b> 64<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel12</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.2688780229624,37.85405218064878,24.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3766,14 +3546,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2372 ELLSWORTH St</name>
+			<name>2372 Ellsworth St · 63 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2372 ELLSWORTH St</b><br/><b>Units:</b> 63<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Entitled_parcel61010</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26367996044917,37.86651716067634,24.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3783,14 +3563,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2001 CENTER St</name>
+			<name>2001 Center St · 58 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2001 CENTER St</b><br/><b>Units:</b> 58<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 30.5m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27032025222984,37.87019871346981,30.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3800,14 +3580,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2127 DWIGHT Way</name>
+			<name>2127 Dwight Way · 58 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2127 DWIGHT Way</b><br/><b>Units:</b> 58<br/><b>VLI Units:</b> 8<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_Entitled_parcel61010</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26690417555498,37.86427204553804,21.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3817,14 +3597,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2712 TELEGRAPH Ave</name>
+			<name>2712 Telegraph Ave · 57 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2712 TELEGRAPH Ave</b><br/><b>Units:</b> 57<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel9</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25933586838926,37.8612057551335,21.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3834,14 +3614,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1740 SAN PABLO Ave</name>
+			<name>1740 San Pablo Ave · 54 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1740 SAN PABLO Ave</b><br/><b>Units:</b> 54<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> In Review- Demolition Permit issued]]></description>
 			<styleUrl>#style_In_Review_parcel50</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.29352910331434,37.87195698977007,21.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3851,14 +3631,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2902 ADELINE St</name>
+			<name>2902 Adeline St · 54 units · Under Construction</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2902 ADELINE St</b><br/><b>Units:</b> 54<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Under Construction]]></description>
 			<styleUrl>#style_Under_Construction_parcel22</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.2689785861204,37.85625521181239,21.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3868,14 +3648,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2587 TELEGRAPH Ave</name>
+			<name>2587 Telegraph Ave · 52 units · Under Construction</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2587 TELEGRAPH Ave</b><br/><b>Units:</b> 52<br/><b>VLI Units:</b> 6<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Under Construction]]></description>
 			<styleUrl>#style_Under_Construction_parcel22</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25821575347523,37.86378945684019,28.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3885,14 +3665,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>130 BERKELEY Sq</name>
+			<name>130 Berkeley Sq · 50 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>130 BERKELEY Sq</b><br/><b>Units:</b> 50<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.2679402754341,37.870847583452445,24.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3902,14 +3682,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2016 ASHBY Ave</name>
+			<name>2016 Ashby Ave · 50 units · Permits Active</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2016 ASHBY Ave</b><br/><b>Units:</b> 50<br/><b>VLI Units:</b> 50<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Permits Active]]></description>
 			<styleUrl>#style_Permits_Active_parcel5</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26820040953228,37.85479588789482,24.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3919,14 +3699,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2350 TELEGRAPH Ave</name>
+			<name>2350 Telegraph Ave · 48 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2350 TELEGRAPH Ave</b><br/><b>Units:</b> 48<br/><b>VLI Units:</b> 2<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25918809854208,37.867596102624674,28.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3936,14 +3716,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2727 HASTE St</name>
+			<name>2727 Haste St · 45 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2727 HASTE St</b><br/><b>Units:</b> 45<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25276991166375,37.8669428152867,21.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3953,14 +3733,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2650 TELEGRAPH Ave</name>
+			<name>2650 Telegraph Ave · 45 units · Completed</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2650 TELEGRAPH Ave</b><br/><b>Units:</b> 45<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.5m<br/><b>Status:</b> Completed]]></description>
 			<styleUrl>#style_Completed_parcel1</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.2593897418134,37.86155774460634,17.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3970,14 +3750,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2435 SAN PABLO Ave</name>
+			<name>2435 San Pablo Ave · 40 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2435 SAN PABLO Ave</b><br/><b>Units:</b> 40<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_synthetic1</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.28939463616129,37.86152034452806,17.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -3987,14 +3767,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2440 SHATTUCK Ave</name>
+			<name>2440 Shattuck Ave · 40 units · Completed</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2440 SHATTUCK Ave</b><br/><b>Units:</b> 40<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Completed]]></description>
 			<styleUrl>#style_Completed_parcel0</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26799404655586,37.864991338779205,28.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4004,14 +3784,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2449 DWIGHT Way</name>
+			<name>2449 Dwight Way · 39 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2449 DWIGHT Way</b><br/><b>Units:</b> 39<br/><b>VLI Units:</b> 2<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25883763468369,37.86530685761784,14.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4021,14 +3801,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1367 UNIVERSITY Ave</name>
+			<name>1367 University Ave · 39 units · Completed</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1367 UNIVERSITY Ave</b><br/><b>Units:</b> 39<br/><b>VLI Units:</b> 39<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Completed]]></description>
 			<styleUrl>#style_Completed_parcel0</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.28516706603088,37.87025568543796,14.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4038,14 +3818,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2403 SAN PABLO Ave</name>
+			<name>2403 San Pablo Ave · 36 units · Under Construction</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2403 SAN PABLO Ave</b><br/><b>Units:</b> 36<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Under Construction]]></description>
 			<styleUrl>#style_Under_Construction_parcel22</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.28968020210273,37.86271346715317,14.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4055,14 +3835,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1698 UNIVERSITY Ave</name>
+			<name>1698 University Ave · 36 units · Completed</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1698 UNIVERSITY Ave</b><br/><b>Units:</b> 36<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.5m<br/><b>Status:</b> Completed]]></description>
 			<styleUrl>#style_Completed_parcel0</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27774259827159,37.87061860538427,17.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4072,14 +3852,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2442 HASTE St</name>
+			<name>2442 Haste St · 34 units · Under Construction</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2442 HASTE St</b><br/><b>Units:</b> 34<br/><b>VLI Units:</b> 2<br/><b>Stories:</b> 8<br/><b>Height:</b> 25.9m<br/><b>Status:</b> Under Construction]]></description>
 			<styleUrl>#style_Under_Construction_parcel22</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25907740971259,37.86567764431634,25.9</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4089,14 +3869,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2733 SAN PABLO Ave</name>
+			<name>2733 San Pablo Ave · 32 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2733 SAN PABLO Ave</b><br/><b>Units:</b> 32<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel55</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.28760428930529,37.85641810849397,28.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4106,14 +3886,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2614 TELEGRAPH Ave</name>
+			<name>2614 Telegraph Ave · 31 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2614 TELEGRAPH Ave</b><br/><b>Units:</b> 31<br/><b>VLI Units:</b> 3<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.4m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_synthetic00</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25915279841328,37.862737148969686,17.4</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4123,14 +3903,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>3000 SAN PABLO Ave</name>
+			<name>3000 San Pablo Ave · 29 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>3000 SAN PABLO Ave</b><br/><b>Units:</b> 29<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.28702466028611,37.85183092682871,17.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4140,14 +3920,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>3020 SAN PABLO Ave</name>
+			<name>3020 San Pablo Ave · 29 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>3020 SAN PABLO Ave</b><br/><b>Units:</b> 29<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.28670476020588,37.85113396298413,17.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4157,14 +3937,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2480 Bancroft Way</name>
+			<name>2480 Bancroft Way · 28 units · Completed</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2480 Bancroft Way</b><br/><b>Units:</b> 28<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Completed]]></description>
 			<styleUrl>#style_Completed_parcel0</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.2596274906918,37.86835886904929,28.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4174,14 +3954,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1773 OXFORD St</name>
+			<name>1773 Oxford St · 24 units · Completed</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1773 OXFORD St</b><br/><b>Units:</b> 24<br/><b>VLI Units:</b> 2<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.5m<br/><b>Status:</b> Completed]]></description>
 			<styleUrl>#style_Completed_parcel0</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26617670841763,37.87555380435894,17.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4191,14 +3971,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2317 CHANNING Way</name>
+			<name>2317 Channing Way · 22 units · Stalled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2317 CHANNING Way</b><br/><b>Units:</b> 22<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 15.2m<br/><b>Status:</b> Stalled]]></description>
 			<styleUrl>#style_Stalled_parcel</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26257757596868,37.866692556803066,15.2</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4208,14 +3988,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2800 TELEGRAPH Ave</name>
+			<name>2800 Telegraph Ave · 18 units · Permits Active</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2800 TELEGRAPH Ave</b><br/><b>Units:</b> 18<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Permits Active<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Permits_Active_parcel1</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25952235614366,37.85934140169242,14.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4225,14 +4005,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2344 FULTON St</name>
+			<name>2344 Fulton St · 18 units · Pre-Application</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2344 FULTON St</b><br/><b>Units:</b> 18<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Pre-Application<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Pre_Application_parcel</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26586974808811,37.86615343456025,14.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4242,14 +4022,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1790 UNIVERSITY Ave</name>
+			<name>1790 University Ave · 17 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1790 UNIVERSITY Ave</b><br/><b>Units:</b> 17<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.1m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27561666698473,37.87093867323345,17.1</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4259,14 +4039,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1710 UNIVERSITY Ave</name>
+			<name>1710 University Ave · 16 units · Application Submitted</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1710 UNIVERSITY Ave</b><br/><b>Units:</b> 16<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Application Submitted]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27711567059391,37.87073027413262,14.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4276,14 +4056,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2147 SAN PABLO Ave</name>
+			<name>2147 San Pablo Ave · 15 units · Decision Pending</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2147 SAN PABLO Ave</b><br/><b>Units:</b> 15<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 21.3m<br/><b>Status:</b> Decision Pending<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Decision_Pending_parcel</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.2910724999658,37.867098202279905,21.3</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4293,14 +4073,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1740 UNIVERSITY Ave</name>
+			<name>1740 University Ave · 12 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1740 UNIVERSITY Ave</b><br/><b>Units:</b> 12<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Entitled_parcel617</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27661456895844,37.87080003347428,14.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4310,14 +4090,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2018 BLAKE St</name>
+			<name>2018 Blake St · 12 units · Permits Active</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2018 BLAKE St</b><br/><b>Units:</b> 12<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Permits Active]]></description>
 			<styleUrl>#style_Permits_Active_parcel</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26882992743356,37.86261561484669,21.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4327,14 +4107,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2555 COLLEGE Ave</name>
+			<name>2555 College Ave · 12 units · Completed</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2555 COLLEGE Ave</b><br/><b>Units:</b> 12<br/><b>VLI Units:</b> 1<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.3m<br/><b>Status:</b> Completed]]></description>
 			<styleUrl>#style_Completed_parcel0</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25353479229099,37.864107222006396,14.3</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4344,14 +4124,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1015 UNIVERSITY Ave</name>
+			<name>1015 University Ave · 9 units · Application Submitted</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1015 UNIVERSITY Ave</b><br/><b>Units:</b> 9<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.29310930235965,37.86916829891887,14.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4361,14 +4141,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2428 MILVIA St</name>
+			<name>2428 Milvia St · 8 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2428 MILVIA St</b><br/><b>Units:</b> 8<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.2700723028069,37.86434161459433,14.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4378,14 +4158,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2200 FIFTH St</name>
+			<name>2200 Fifth St · 8 units · Withdrawn</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2200 FIFTH St</b><br/><b>Units:</b> 8<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Withdrawn]]></description>
 			<styleUrl>#style_Withdrawn_parcel</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.29820422275989,37.86463778380473,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4395,14 +4175,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1745 CEDAR St</name>
+			<name>1745 Cedar St · 6 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1745 CEDAR St</b><br/><b>Units:</b> 6<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27615265227284,37.87773066122993,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4412,14 +4192,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1850 BERRYMAN St</name>
+			<name>1850 Berryman St · 6 units · Application Submitted</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1850 BERRYMAN St</b><br/><b>Units:</b> 6<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted]]></description>
 			<styleUrl>#style_Application_Submitted_synthetic</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27471812453602,37.88297740662286,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4429,14 +4209,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1618 SIXTH St</name>
+			<name>1618 Sixth St · 4 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1618 SIXTH St</b><br/><b>Units:</b> 4<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.29972356145393,37.87333684850317,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4446,14 +4226,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2420 ASHBY Ave</name>
+			<name>2420 Ashby Ave · 4 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2420 ASHBY Ave</b><br/><b>Units:</b> 4<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.2586259711732,37.85595704194167,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4463,14 +4243,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2942 COLLEGE Ave</name>
+			<name>2942 College Ave · 4 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2942 COLLEGE Ave</b><br/><b>Units:</b> 4<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel585</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.2534389224883,37.85747287528726,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4480,14 +4260,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2437 WARRING St</name>
+			<name>2437 Warring St · 4 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2437 WARRING St</b><br/><b>Units:</b> 4<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 7.0m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.250231802293,37.8666076441035,7.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4497,14 +4277,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2641 COLLEGE Ave</name>
+			<name>2641 College Ave · 3 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2641 COLLEGE Ave</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel5810</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25324087799723,37.86250312903989,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4514,14 +4294,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2205 BLAKE St</name>
+			<name>2205 Blake St · 3 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2205 BLAKE St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26480959051489,37.863678961946015,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4531,14 +4311,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2221 FIFTH St</name>
+			<name>2221 Fifth St · 3 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2221 FIFTH St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_synthetic2</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.29711148154315,37.864435277273074,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4548,14 +4328,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1650 FIFTH St</name>
+			<name>1650 Fifth St · 3 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1650 FIFTH St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.30058673769618,37.872251745629384,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4565,14 +4345,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>3101 SACRAMENTO St</name>
+			<name>3101 Sacramento St · 3 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>3101 SACRAMENTO St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27825378082971,37.851340720422535,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4582,14 +4362,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1449 CORNELL Ave</name>
+			<name>1449 Cornell Ave · 3 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1449 CORNELL Ave</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 18.3m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel5817</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.29187994493063,37.87760340823229,18.3</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4599,14 +4379,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1514 WALNUT St</name>
+			<name>1514 Walnut St · 3 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1514 WALNUT St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel584</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26842052325222,37.879713168242205,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4616,14 +4396,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1464 SIXTH St</name>
+			<name>1464 Sixth St · 3 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1464 SIXTH St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.30046614449165,37.87534949842454,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4633,14 +4413,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2812 EIGHTH St</name>
+			<name>2812 Eighth St · 3 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2812 EIGHTH St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.29152198502597,37.85498699400311,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4650,14 +4430,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2201 BLAKE St</name>
+			<name>2201 Blake St · 3 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2201 BLAKE St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_Entitled_parcel61010</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26480959051489,37.863678961946015,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4667,14 +4447,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2833 Seventh St</name>
+			<name>2833 Seventh St · 3 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2833 Seventh St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 7.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_Entitled_synthetic0</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.29168512350479,37.85423854407371,7.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4684,14 +4464,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1614 Sixth St</name>
+			<name>1614 Sixth St · 3 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1614 Sixth St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.7m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Entitled_synthetic6</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.29971151889211,37.87333975003524,10.7</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4701,14 +4481,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1716 SEVENTH St</name>
+			<name>1716 Seventh St · 2 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1716 SEVENTH St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.29812570374405,37.87183320298778,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4718,14 +4498,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1515 DERBY St</name>
+			<name>1515 Derby St · 2 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1515 DERBY St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27950243064865,37.859032281858745,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4735,14 +4515,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1922 FRANCISCO St</name>
+			<name>1922 Francisco St · 2 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1922 FRANCISCO St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27221780289929,37.87494893167526,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4752,14 +4532,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2204 DWIGHT Way</name>
+			<name>2204 Dwight Way · 2 units · Decision Pending</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2204 DWIGHT Way</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Decision Pending]]></description>
 			<styleUrl>#style_Decision_Pending_parcel100</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26485491079184,37.86398409846275,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4769,14 +4549,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1419 GRANT St</name>
+			<name>1419 Grant St · 2 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1419 GRANT St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel581826</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27590276286651,37.88045001922998,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4786,14 +4566,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1236 DWIGHT Way</name>
+			<name>1236 Dwight Way · 2 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1236 DWIGHT Way</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.2857527638519,37.861403790231506,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4803,14 +4583,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2808 NINTH St</name>
+			<name>2808 Ninth St · 2 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2808 NINTH St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel5827</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.29044836979381,37.85529215804136,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4820,14 +4600,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>3001 BENVENUE Ave</name>
+			<name>3001 Benvenue Ave · 1 units · Decision Pending</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>3001 BENVENUE Ave</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Decision Pending<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Decision_Pending_parcel100</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25368752003082,37.85583811962748,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4837,14 +4617,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>40 HILL Rd</name>
+			<name>40 Hill Rd · 1 units · Application Submitted</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>40 HILL Rd</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.2512542671729,37.88935427626,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4854,14 +4634,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>5 W PARNASSUS Ct</name>
+			<name>5 W Parnassus Ct · 1 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>5 W PARNASSUS Ct</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel581813</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25789016844237,37.882410929050806,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4871,14 +4651,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>0 LE ROY Ave</name>
+			<name>0 Le Roy Ave · 1 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>0 LE ROY Ave</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel581831</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.2601905434593,37.882473126106184,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4888,14 +4668,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2328 GRANT St</name>
+			<name>2328 Grant St · 1 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2328 GRANT St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58185</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.2749965574166,37.86584019538649,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4905,14 +4685,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1939 MARIN Ave</name>
+			<name>1939 Marin Ave · 1 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1939 MARIN Ave</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27481602708534,37.889604188161954,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4922,14 +4702,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1731 ADDISON St</name>
+			<name>1731 Addison St · 1 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1731 ADDISON St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27603744850255,37.87041565126292,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4939,14 +4719,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1420 FIFTH St</name>
+			<name>1420 Fifth St · 1 units · Decision Pending</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1420 FIFTH St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Decision Pending<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Decision_Pending_parcel101</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.30196134009928,37.876554363129685,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4956,14 +4736,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1139 KEELER Ave</name>
+			<name>1139 Keeler Ave · 1 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1139 KEELER Ave</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25761674277987,37.889710271156076,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4973,14 +4753,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1111 ALLSTON Way</name>
+			<name>1111 Allston Way · 1 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1111 ALLSTON Way</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel510</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.29062210697528,37.8667907776094,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -4990,14 +4770,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>659 GRIZZLY PEAK Blvd</name>
+			<name>659 Grizzly Peak Blvd · 1 units · Application Submitted</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>659 GRIZZLY PEAK Blvd</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26541471357915,37.90014219830418,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5007,14 +4787,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>3036 REGENT St</name>
+			<name>3036 Regent St · 1 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>3036 REGENT St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25657722487558,37.85417468225866,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5024,14 +4804,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1621 SACRAMENTO St</name>
+			<name>1621 Sacramento St · 1 units · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1621 SACRAMENTO St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.28222991639566,37.876073947900835,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5041,14 +4821,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2820 SAN PABLO Ave</name>
+			<name>2820 San Pablo Ave · 1 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2820 SAN PABLO Ave</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 7.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_Entitled_parcel61010</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.28807089819546,37.8552977461088,7.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5058,14 +4838,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>0 PARKER St</name>
+			<name>0 Parker St · 1 units · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>0 PARKER St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Entitled_parcel61010</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26432693213967,37.86278091676062,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5075,14 +4855,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1522 JOSEPHINE St</name>
+			<name>1522 Josephine St · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1522 JOSEPHINE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27521135485908,37.87853712045937,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5092,14 +4872,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>3035 COLBY St</name>
+			<name>3035 Colby St · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>3035 COLBY St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Entitled_parcel61010</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25726898039393,37.85408431241592,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5109,14 +4889,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1136 KEITH Ave</name>
+			<name>1136 Keith Ave · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1136 KEITH Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel581812</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.2605367162919,37.88850340687009,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5126,14 +4906,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1730 PARKER St</name>
+			<name>1730 Parker St · Application Submitted</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1730 PARKER St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel40</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27465861236325,37.86095262631066,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5143,14 +4923,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2740 SHASTA Rd</name>
+			<name>2740 Shasta Rd · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2740 SHASTA Rd</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25831224302041,37.88641473670213,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5160,14 +4940,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1109 COWPER St</name>
+			<name>1109 Cowper St · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1109 COWPER St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel515</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.29102222731242,37.86763192470967,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5177,14 +4957,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>705 ARLINGTON Ave</name>
+			<name>705 Arlington Ave · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>705 ARLINGTON Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel581832</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27569432563992,37.89746145800234,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5194,14 +4974,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2027 SEVENTH St</name>
+			<name>2027 Seventh St · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2027 SEVENTH St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel54</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.29583612914512,37.867260261350665,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5211,14 +4991,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>576 SAN LUIS Rd</name>
+			<name>576 San Luis Rd · Application Submitted</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>576 SAN LUIS Rd</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.2757535588213,37.90002575017668,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5228,14 +5008,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2009 ADDISON St</name>
+			<name>2009 Addison St · Application Submitted</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2009 ADDISON St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel43</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27003046751577,37.871247278097634,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5245,14 +5025,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1312 ADDISON St</name>
+			<name>1312 Addison St · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1312 ADDISON St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.28413027483359,37.86691121509941,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5262,14 +5042,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2145 GRANT St</name>
+			<name>2145 Grant St · Decision Pending</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2145 GRANT St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Decision Pending<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Decision_Pending_parcel103</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27462913716815,37.868947938720915,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5279,14 +5059,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2903 ADELINE St</name>
+			<name>2903 Adeline St · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2903 ADELINE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26808475637684,37.856348412369606,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5296,14 +5076,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2099 M L KING JR Way</name>
+			<name>2099 M L King Jr Way · Application Submitted</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2099 M L KING JR Way</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27260426676625,37.87086361590322,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5313,14 +5093,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1507 JOSEPHINE St</name>
+			<name>1507 Josephine St · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1507 JOSEPHINE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27469494282968,37.879157003944286,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5330,14 +5110,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1338 SEVENTH St</name>
+			<name>1338 Seventh St · Application Submitted</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1338 SEVENTH St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.3001364435811,37.87827024372781,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5347,14 +5127,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2238 SEVENTH St</name>
+			<name>2238 Seventh St · Application Submitted</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2238 SEVENTH St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.29560340558346,37.864044339587906,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5364,14 +5144,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>703 SANTA BARBARA Rd</name>
+			<name>703 Santa Barbara Rd · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>703 SANTA BARBARA Rd</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27150942087995,37.89786118156595,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5381,14 +5161,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>385 VERMONT Ave</name>
+			<name>385 Vermont Ave · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>385 VERMONT Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27469908378673,37.903275003168915,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5398,14 +5178,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1246 ROSE St</name>
+			<name>1246 Rose St · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1246 ROSE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel580</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.28945657710112,37.87651829151824,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5415,14 +5195,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1512 CHANNING Way</name>
+			<name>1512 Channing Way · Application Submitted</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1512 CHANNING Way</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.28078515053873,37.863905605629604,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5432,14 +5212,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1475 CATHERINE Dr</name>
+			<name>1475 Catherine Dr · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1475 CATHERINE Dr</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.28402170129327,37.878067692291076,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5449,14 +5229,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1187 SHATTUCK Ave</name>
+			<name>1187 Shattuck Ave · Decision Pending</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1187 SHATTUCK Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Decision Pending<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Decision_Pending_parcel100</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26969105672325,37.88604947220025,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5466,14 +5246,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2016 DELAWARE St A</name>
+			<name>2016 Delaware St A · Application Submitted</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2016 DELAWARE St A</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27030398193753,37.874282441557575,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5483,14 +5263,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1123 BLAKE St</name>
+			<name>1123 Blake St · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1123 BLAKE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel581818</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.28810142867019,37.8606353310059,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5500,14 +5280,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>830 BANCROFT Way</name>
+			<name>830 Bancroft Way · Decision Pending</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>830 BANCROFT Way</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Decision Pending<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Decision_Pending_parcel100</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.29573947496395,37.863285721451106,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5517,14 +5297,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2740 SHASTA Rd</name>
+			<name>2740 Shasta Rd · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2740 SHASTA Rd</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25831224302041,37.88641473670213,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5534,14 +5314,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2143 BLAKE St</name>
+			<name>2143 Blake St · Application Submitted</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2143 BLAKE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26546370250284,37.86349073414984,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5551,14 +5331,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>411 VASSAR Ave</name>
+			<name>411 Vassar Ave · Application Submitted</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>411 VASSAR Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27225176637221,37.90434655043581,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5568,14 +5348,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1048 Keith St</name>
+			<name>1048 Keith St · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1048 Keith St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Entitled_synthetic4</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26407480453602,37.88929209662286,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5585,14 +5365,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>811 Cedar</name>
+			<name>811 Cedar · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>811 Cedar</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 7.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_Entitled_synthetic1</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.30017082997347,37.87420569940248,7.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5602,14 +5382,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>1627 Jaynes St</name>
+			<name>1627 Jaynes St · Entitled</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1627 Jaynes St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_Entitled_parcel6105</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27956687700997,37.87830717280857,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5619,14 +5399,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2705 BENVENUE Ave</name>
+			<name>2705 Benvenue Ave · In Review</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2705 BENVENUE Ave</b><br/><b>Units:</b> -1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25441494321731,37.861445425219884,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
@@ -5636,7 +5416,7 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
 			<name>Dharma University</name>
@@ -5657,10 +5437,10 @@
 			</Polygon>
 		</Placemark>
 		<Placemark>
-			<name>Ashby BART 1</name>
+			<name>Ashby Bart · Building 1 · 618 units · Pre-Application</name>
 			<visibility>0</visibility>
 			<styleUrl>#style_In_Review_parcel5819</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27035555769446,37.85398880508518,70.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<tessellate>1</tessellate>
 				<altitudeMode>relativeToGround</altitudeMode>
@@ -5671,13 +5451,13 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>Ashby Bart 2</name>
+			<name>Ashby Bart · Building 2 · 618 units · Pre-Application</name>
 			<visibility>0</visibility>
 			<styleUrl>#style_In_Review_parcel5820</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27032859794272,37.85284851614805,70.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<tessellate>1</tessellate>
 				<altitudeMode>relativeToGround</altitudeMode>
@@ -5688,14 +5468,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>Ashby BART 3</name>
+			<name>Ashby Bart · Building 3 · 618 units · Pre-Application</name>
 			<visibility>0</visibility>
 			<description>Ashby BART 3</description>
 			<styleUrl>#style_In_Review_parcel5829</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.27016217923865,37.85345541889065,70.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<tessellate>1</tessellate>
 				<altitudeMode>relativeToGround</altitudeMode>
@@ -5706,7 +5486,7 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
 			<name>Innovation Zone - North - Bakar</name>
@@ -5743,11 +5523,11 @@
 			</Polygon>
 		</Placemark>
 		<Placemark>
-			<name>2400 Bowditch - South</name>
+			<name>2400 Bowditch St · South · 750 units · Pre-Application</name>
 			<visibility>0</visibility>
 			<description>Anna Head School: 14 stories, wing of project 171. UC Project.</description>
 			<styleUrl>#style_UC_Project_footprint10</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25673937261527,37.86657585474497,85.3</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<tessellate>1</tessellate>
 				<altitudeMode>relativeToGround</altitudeMode>
@@ -5758,14 +5538,14 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2556 Haste- South</name>
+			<name>2556 Haste St · South · 556 units · Under Construction</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2556 HASTE St</b><br/><b>Units:</b> 556<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 12<br/><b>Height:</b> 40.2m<br/><b>Status:</b> Under Construction<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
 			<styleUrl>#style_UC_Project_footprint2</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.25693406638342,37.86564721395722,40.2</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<tessellate>1</tessellate>
 				<altitudeMode>relativeToGround</altitudeMode>
@@ -5776,13 +5556,13 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2200 Bancroft Way - South</name>
+			<name>2200 Bancroft Way · South · 550 units · Under Construction</name>
 			<visibility>0</visibility>
 			<styleUrl>#style_UC_Project_footprint30</styleUrl>
-			<Polygon>
+			<MultiGeometry><Point><coordinates>-122.26536662962917,37.86730874479118,77.1</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<tessellate>1</tessellate>
 				<altitudeMode>relativeToGround</altitudeMode>
@@ -5793,7 +5573,7 @@
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
-			</Polygon>
+			</Polygon></MultiGeometry>
 		</Placemark>
 	</Folder>
 </Document>

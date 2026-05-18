@@ -14,7 +14,10 @@ from datetime import datetime
 from pathlib import Path
 
 DB_PATH = Path('/Users/johngage/berkeley-data/databases/berkeley_housing_analysis.db')
-OUTPUT_PATH = Path('/Users/johngage/berkeley-data/docs/kml_versions/berkeley_skyline_v9_2026-05-03.kml')
+# Output paths: dated archive + stable URL (script writes both)
+_GEOMETRY_DIR = Path('/Users/johngage/berkeley-data/docs/kml_versions/Geometry')
+OUTPUT_PATH = _GEOMETRY_DIR / f"Geometry-{datetime.now().strftime('%Y-%m-%d')}.kml"
+STABLE_OUTPUT_PATH = Path('/Users/johngage/berkeley-data/docs/geometry.kml')
 
 # Street grid rotation - Berkeley streets run ~350° from true north (10° west of north)
 GRID_ROTATION_DEG = 10  # clockwise rotation to align with street grid
@@ -44,6 +47,17 @@ def rotate_point(center_lon, center_lat, dx, dy):
 
     return new_lon, new_lat
 
+
+def polygon_centroid(coords):
+    """
+    Compute simple arithmetic mean of polygon vertex coordinates.
+    Args: coords is a list of [lon, lat] pairs.
+    Returns: (centroid_lon, centroid_lat). Returns (None, None) if empty.
+    """
+    if not coords:
+        return None, None
+    n = len(coords)
+    return (sum(c[0] for c in coords) / n, sum(c[1] for c in coords) / n)
 
 def parse_geojson_coords(geojson_str):
     """
@@ -176,6 +190,20 @@ def generate_kml():
       </LineStyle>
     </Style>''')
 
+    # Add label-only style: hides the default pushpin icon and renders
+    # the Placemark's <name> as white text at the Point coordinates.
+    kml_parts.append('''
+    <Style id="LabelOnly">
+      <IconStyle>
+        <scale>0</scale>
+        <Icon><href></href></Icon>
+      </IconStyle>
+      <LabelStyle>
+        <color>ffffffff</color>
+        <scale>0.9</scale>
+      </LabelStyle>
+    </Style>''')
+
     # Add folder for projects
     kml_parts.append('''
     <Folder>
@@ -216,6 +244,14 @@ def generate_kml():
         # Determine geometry weight category for line styling
         geom_weight_cat = get_geom_weight_category(geometry_type)
         style_url = f"{get_style_id(style_key)}_{geom_weight_cat}"
+
+        # Build label text: "Address · units · stage"
+        address_label = (address or 'unknown address').title()
+        stage_label = (display_status or 'Unknown').replace('_', ' ').title()
+        if units and units > 0:
+            label_text = f"{address_label} · {units} units · {stage_label}"
+        else:
+            label_text = f"{address_label} · {stage_label}"
 
         # Create description
         desc_parts = [
@@ -267,22 +303,36 @@ def generate_kml():
     '''
             using_synthetic += 1
 
+        # Compute label anchor: polygon centroid at building roof altitude.
+        # For synthetic squares, polygon_coords may be None, in which case
+        # we use the project's lat/lng directly.
+        if polygon_coords:
+            label_lon, label_lat = polygon_centroid(polygon_coords)
+        else:
+            label_lon, label_lat = lng, lat
+
         kml_parts.append(f'''
       <Placemark>
-        <name>{address}</name>
+        <name>{label_text}</name>
         <description><![CDATA[
 {description}
 ]]></description>
         <styleUrl>#{style_url}</styleUrl>
-        <Polygon>
-          <extrude>1</extrude>
-          <altitudeMode>relativeToGround</altitudeMode>
-          <outerBoundaryIs>
-            <LinearRing>
-              <coordinates>{coords}</coordinates>
-            </LinearRing>
-          </outerBoundaryIs>
-        </Polygon>
+        <MultiGeometry>
+          <Point>
+            <coordinates>{label_lon},{label_lat},{height_m}</coordinates>
+            <altitudeMode>relativeToGround</altitudeMode>
+          </Point>
+          <Polygon>
+            <extrude>1</extrude>
+            <altitudeMode>relativeToGround</altitudeMode>
+            <outerBoundaryIs>
+              <LinearRing>
+                <coordinates>{coords}</coordinates>
+              </LinearRing>
+            </outerBoundaryIs>
+          </Polygon>
+        </MultiGeometry>
       </Placemark>''')
         projects_added += 1
 
@@ -292,9 +342,13 @@ def generate_kml():
   </Document>
 </kml>''')
 
-    # Write KML file
+    # Write KML file (dated archive + stable URL copy)
     kml_content = ''.join(kml_parts)
+    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(OUTPUT_PATH, 'w') as f:
+        f.write(kml_content)
+    STABLE_OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
+    with open(STABLE_OUTPUT_PATH, 'w') as f:
         f.write(kml_content)
 
     conn.close()
@@ -303,8 +357,9 @@ def generate_kml():
     print(f"  UC projects (purple): {uc_count}")
     print(f"  Using stored geometry: {using_stored_geom}")
     print(f"  Using synthetic squares: {using_synthetic}")
-    print(f"  Output: {OUTPUT_PATH}")
-    print(f"  File size: {OUTPUT_PATH.stat().st_size:,} bytes")
+    print(f"  Dated archive: {OUTPUT_PATH}")
+    print(f"  Stable URL:    {STABLE_OUTPUT_PATH}")
+    print(f"  File size:     {OUTPUT_PATH.stat().st_size:,} bytes")
 
 if __name__ == '__main__':
     generate_kml()

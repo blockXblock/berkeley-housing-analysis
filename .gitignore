@@ -67,3 +67,6 @@ venv/
 
 # Pending review — do not commit until notebook is reconciled
 notebooks/MASTER_ANALYSIS.ipynb
+
+# Accela authentication cookies (never commit)
+experiments/accela_scrape/cookies.txt

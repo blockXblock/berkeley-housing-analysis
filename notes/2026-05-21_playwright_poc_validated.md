@@ -28,9 +28,10 @@ Three iterations of debugging:
    duplicated 81 times each (755 total rows). Reported SUCCESS despite
    error logs documenting an infinite loop.
 
-2. **Fix attempt 1** (CC): switched to Playwrights native `page.click()`
-   with `wait_for_load_state("load")` and runtime dedup tracking. Got 70
-   unique inspections; pagination still failing intermittently.
+2. **Fix attempt 1** (CC): switched to calling `__doPostBack(event_target, '')`
+   directly via `page.evaluate()` instead of JS-evaluated `link.click()`.
+   Added runtime dedup tracking. Got 70 unique inspections; pagination still
+   failing intermittently due to wait conditions.
 
 3. **Fix attempt 2** (CC): improved wait conditions to verify the table
    actually changed (first inspection_id on page must differ from previous
@@ -44,9 +45,10 @@ Three iterations of debugging:
 - **Tab activation:** `&IsToShowInspection=Y` URL parameter is reliable.
   No need to click the Inspections tab.
 
-- **Pagination mechanism:** ASP.NET `__doPostBack` triggered by clicking
-  page-number links. Playwrights native click() handles this; JS-evaluated
-  click() does not.
+- **Pagination mechanism:** ASP.NET `__doPostBack` must be called directly
+  via `page.evaluate(f"__doPostBack('{event_target}', '')")`. JS-evaluated
+  `link.click()` does NOT trigger the postback (the original bug). Playwright's
+  native `page.click()` was not used; the fix is direct `__doPostBack` invocation.
 
 - **Wait condition for pagination:** `wait_for_load_state("load")` plus
   verifying the first row inspection_id changed. Without the verification
@@ -54,6 +56,15 @@ Three iterations of debugging:
 
 - **Rows per page:** Accela shows 5 inspection rows per page. For 553
   inspections thats ~111 pages.
+
+- **Three-state pagination return:** `click_pagination()` returns `'success'`,
+  `'last_page'`, or `'failed'`. The `'last_page'` state distinguishes legitimate
+  run completion (no "Next >" link found) from actual pagination failures. The
+  original code conflated "reached end of data" with "pagination broke."
+
+- **Always use "Next >" link:** Page number anchors (1, 2, 3...) become stale
+  after UpdatePanel refreshes. The "Next >" link is regenerated with a fresh
+  postback target on each page, making it more reliable across postbacks.
 
 - **Anonymous access works.** No login required for inspection data on
   Berkeley Accela. The 3.4MB authenticated CIC view vs 290KB anonymous
@@ -102,6 +113,14 @@ detection risk.
 
 **Anonymous access:** Continue using anonymous mode. Authentication
 adds complexity without unlocking additional data.
+
+## Dead code in POC to address during refactor
+
+`get_postback_target_for_page()` (line 160) is defined but never called.
+`click_pagination()` has its own inline postback-target lookup that searches
+for the "Next >" link specifically. When the POC is refactored into a module
+for the orchestrator, the dead function should be either removed or
+consolidated with the inline logic in `click_pagination()`.
 
 ## What is unresolved
 

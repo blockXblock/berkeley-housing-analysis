@@ -15,9 +15,19 @@ When complete: the queue builder rerun will reclassify those 90 rows from 'pendi
 
 ## Scope of first production run
 
-90 B-permits in scope (completed + under_construction projects in v2, B-prefix, no source_url today). Per the inventory in /tmp/v2_gap_bounding.md from 2026-05-21, these are spread across roughly 30 distinct projects.
+90 B-permits in scope (completed + under_construction projects in v2, B-prefix, no source_url today). Per the inventory in /tmp/v2_gap_bounding.md from 2026-05-21, these are spread across roughly 30 distinct projects (a 2026-05-21 verification in /tmp/b_permit_url_inventory.md confirmed the 90 count and located 35 distinct projects).
 
-Estimated run time: 90 permits x ~30 seconds per permit (search submission, result page parse, CapDetail navigation, field extraction) + 2-10s sleeps = ~1-1.5 hours. Substantially faster than inspection scraping because there's no pagination.
+**Important correction (2026-05-21 browser verification).** The original design assumed each permit-number search returns 1 result. Reality is different: a permit-number search returns the *master* record plus its *sub-records* (REV## revisions, DEF## deferred submittals). Three permits were verified manually:
+
+| permit_number | result count | master capID triplet | status |
+|---|---|---|---|
+| B2019-05575 | 3 | DUB19-00000-00KIL | Finaled |
+| B2021-02225 | 10 | DUB21-00000-00EMR | Finaled |
+| B2021-02404 | 20 | DUB21-00000-00EZS | Finaled |
+
+So the search will routinely return many results per query; the scraper must identify the master deterministically (see "Master Identification Rule" below) rather than blindly clicking the first hit.
+
+Estimated run time (revised): search submission per permit is unchanged (~30s), but each result page now requires parsing N records and visiting the master CapDetail page; based on the three verified permits, ~10 records per permit on average × ~5s per record adds ~50s per permit. Total ~80s per permit × 90 permits = **~2 hours**. Original estimate was 1-1.5h assuming 1 record per permit; revised to ~2h based on master-and-suffix discovery. Still substantially faster than inspection scraping because there's no pagination.
 
 ## What this scraper does NOT do (deliberate non-scope)
 
@@ -61,6 +71,19 @@ Note: separate table from scrape_queue. Different workflow, different failure mo
 - Idempotent (INSERT OR IGNORE on permit_id, same pattern as build_scrape_queue.py)
 - CLI args mirror build_scrape_queue.py
 
+### Master Identification Rule
+
+> **Master identification:**
+> The master record is the one whose displayed permit_number exactly equals the search query. Sub-records have a suffix matching the regex `/-(?:REV|DEF)\d{2}$/` on the displayed permit_number.
+>
+> Sub-record types observed in verification:
+> - `REV##` = building revision
+> - `DEF##` = deferred submittal
+>
+> **capID year drift:** the master's `capID1` reflects its filed year; sub-records may have later years (e.g., a `DUB21` master with `DUB24`/`DUB25` sub-records filed in subsequent project phases). The scraper must therefore not assume sub-record capID1 prefixes match the master's prefix.
+
+The scraper applies this rule to disambiguate the master from its sub-records before any field extraction. If zero records on the results page have a displayed permit_number that exactly equals the search query, the result is `found=false` (no master). If exactly one matches, that record is the master and the rest are sub-records. If more than one record has a displayed permit_number that exactly equals the search query, the result is `ambiguous=true` (should not happen for B-permits but worth handling defensively).
+
 ### 3. URL discovery scraper — experiments/accela_scrape/url_discovery_scraper.py
 
 Public function:
@@ -70,32 +93,75 @@ def discover_url(
     permit_number: str,
     *,
     headless: bool = True,
-    max_runtime_seconds: int = 60,
+    max_runtime_seconds: int = 120,
     debug_dir: pathlib.Path | None = None,
 ) -> dict:
     """
-    Discover the Accela CapDetail URL and core fields for a permit.
+    Discover the Accela CapDetail URL and core fields for a permit,
+    plus any related sub-records (REV / DEF) tied to the same master.
 
-    Returns dict with:
-      permit_number, search_url, found, ambiguous,
-      capid1, capid2, capid3, capid_triplet,
-      capdetail_url, fields (filed_date, issued_date, finaled_date,
-      valuation), errors, metadata
+    Returns a dict shaped like:
+
+        {
+          "permit_number": "B2021-02404",
+          "search_url": "...",
+          "found": true,
+          "ambiguous": false,
+          "master": {
+            "permit_number_displayed": "B2021-02404",
+            "capid_triplet": "DUB21-00000-00EZS",
+            "capid1": "DUB21",
+            "capid2": "00000",
+            "capid3": "00EZS",
+            "capdetail_url": "...",
+            "filed_date": "...",
+            "issued_date": "...",
+            "finaled_date": "...",
+            "valuation": "..."
+          },
+          "related_records": [
+            {
+              "permit_number_displayed": "B2021-02404-REV01",
+              "record_type": "REV",            # REV | DEF
+              "capid_triplet": "DUB24-00000-XXXXX",
+              "capid1": "DUB24",
+              "capid2": "00000",
+              "capid3": "XXXXX",
+              "capdetail_url": "...",
+              "filed_date": "...",
+              "issued_date": "...",
+              "finaled_date": "...",
+              "valuation": "..."
+            },
+            ...
+          ],
+          "errors": [],
+          "metadata": {"records_seen": 20, ...}
+        }
+
+    `found=false` means no record matched the search query.
+    `ambiguous=true` means more than one record on the results page
+    has a displayed permit_number that exactly equals the search query
+    (treated as a hard stop; do not pick).
     """
 ```
 
 Flow:
 1. Navigate to Accela CapHome.aspx with permit-number search query
 2. Submit search
-3. Parse result page:
-   - 0 results -> found=False, ambiguous=False
-   - 1 result -> click into it
-   - 2+ results -> found=True, ambiguous=True; return without selecting (ingest step decides what to do)
-4. On the CapDetail page, extract:
-   - capID1, capID2, capID3 from the URL
+3. Parse result page (apply the Master Identification Rule):
+   - 0 records have displayed permit_number == query -> `found=False`, `ambiguous=False`, no master, no related_records
+   - exactly 1 record matches -> that record is the **master**; all other records on the page are candidates for `related_records` if their displayed permit_number matches `^{query}-(?:REV|DEF)\d{2}$`
+   - 2+ records match the exact query -> `found=True`, `ambiguous=True`; return without selecting (the ingest step or manual review decides)
+4. Click into the master record. On its CapDetail page, extract:
+   - capID1, capID2, capID3 from the URL (build `capid_triplet = capID1-capID2-capID3`)
    - filed_date, issued_date, finaled_date (look for labels like "File Date", "Issued Date", "Finaled Date" in record details)
    - valuation (look for "Total Job Valuation" or similar)
-5. Return the dict; caller writes JSON
+5. For each related sub-record on the results page, either:
+   - capture the capID triplet from the results-page link/href without clicking through (cheap; preferred for the first run), or
+   - visit each sub-record's CapDetail page to capture full fields (more expensive; defer to a later enrichment pass)
+   The first-run strategy is "triplet only, no click-through" — this keeps total runtime near the ~80s/permit estimate above and avoids combinatorial growth on permits with 20+ sub-records.
+6. Return the dict; caller writes JSON
 
 Anti-detection: the orchestrator (next component) handles sleep delays between permits. The scraper itself doesn't sleep.
 
@@ -181,6 +247,8 @@ Total: 4-6 hours focused work. Probably one session if smooth, two if the search
 
 5. **When URL discovery becomes obsolete.** If/when v2 starts getting freshly-scraped Accela data with URLs at ingestion time, this workstream stops being needed for new permits. The 90 permits in today's queue are a backfill task; future permits ideally won't need backfilling.
 
+6. **Sub-record ingest in v2.** The URL discovery scraper now captures master + sub-record triplets. v2's current schema has one row per permit_number, which conflates the master. A separate decision is needed about whether to: (a) one row per Accela record (master + REV/DEF as siblings), (b) one row per master with a separate sub_records table, or (c) one row per master with sub-record capIDs in a JSON column. Defer until URL discovery has run on enough permits to see the sub-record volume distribution.
+
 ## Files (to be created next session)
 
 - scripts/build_url_discovery_queue.py (new)
@@ -196,3 +264,9 @@ Total: 4-6 hours focused work. Probably one session if smooth, two if the search
 - The session that built it: notes/2026-05-21_orchestrator_built.md
 - The pattern this sketch mirrors: notes/2026-05-21_orchestrator_design_sketch.md
 - Field discovery starting point: data/outputs/accela_collection_checklist.csv (112 CapHome search URLs already constructed for various Berkeley addresses)
+
+## References (added 2026-05-21 update)
+
+- **Hand-copied capID triplets from 2026-05-21 browser verification:** `/tmp/hand_copied_capids_2026-05-21.md` (3 verified master triplets — B2019-05575 / B2021-02225 / B2021-02404 — plus sub-record counts and a tentative CapDetail URL template). Sibling CSV at `/tmp/hand_copied_capids_2026-05-21.csv`.
+- **In-scope inventory verifying the 90-permit count:** `/tmp/b_permit_url_inventory.md` (generated 2026-05-21). Confirms 90 in-scope B-permits across 35 distinct projects; documents that 0 capID triplets are recoverable from existing `data/raw/accela_status/` scrape files (those files are clipboard-pasted human-readable record summaries with no URL/capID data).
+- **Source chat for the verification work:** "Building the Berkeley Housing orchestrator from design sketch" (last activity 2026-05-21 evening). The 4th of 5 verification permits attempted in that chat is not captured in either file; only 3 fully-verified triplets are recorded.

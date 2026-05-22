@@ -79,3 +79,23 @@ Reminder: do NOT treat this URL template as canonical until confirmed
 against a live page. The host (`aca-prod.accela.com` vs an alternate),
 the path (`/BERKELEY/...`), and the query-string parameter casing all
 need empirical verification by the URL-discovery scraper.
+
+## Addendum (2026-05-21 evening) — B2019-05574 added
+
+A 4th master capID surfaced from the cic_recon_queue.db's existing
+queue row (id=1, from the 2026-05-20 inspection scraper POC). This
+is the sibling permit to B2019-05575 — both for project 179 (2352
+Shattuck Ave).
+
+| permit_number | master capID triplet | total records | status | notes |
+|---|---|---|---|---|
+| B2019-05574 | DUB19-00000-00KIJ | (not yet counted) | scraped 2026-05-21 (557 inspections) | sibling to B2019-05575 |
+
+CapID3 components differ by one character (00KIJ vs 00KIL),
+consistent with adjacent records filed close in time within the
+same project.
+
+The orchestrator end-to-end test re-ran B2019-05574 on 2026-05-21
+at 17:48-17:53 PT, producing 557 unique inspections (exact match
+to the 2026-05-20 baseline). Output JSON at
+data/raw/accela_inspections/B2019-05574.json (117 KB).

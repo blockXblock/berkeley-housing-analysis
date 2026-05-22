@@ -15,7 +15,7 @@ When complete: the queue builder rerun will reclassify those 90 rows from 'pendi
 
 ## Scope of first production run
 
-90 B-permits in scope (completed + under_construction projects in v2, B-prefix, no source_url today). Per the inventory in /tmp/v2_gap_bounding.md from 2026-05-21, these are spread across roughly 30 distinct projects (a 2026-05-21 verification in /tmp/b_permit_url_inventory.md confirmed the 90 count and located 35 distinct projects).
+90 B-permits in scope (completed + under_construction projects in v2, B-prefix, no source_url today). Per the inventory in /tmp/v2_gap_bounding.md from 2026-05-21, these are spread across roughly 30 distinct projects (a 2026-05-21 verification in notes/b_permit_url_inventory_2026-05-21.md confirmed the 90 count and located 35 distinct projects).
 
 **Important correction (2026-05-21 browser verification).** The original design assumed each permit-number search returns 1 result. Reality is different: a permit-number search returns the *master* record plus its *sub-records* (REV## revisions, DEF## deferred submittals). Three permits were verified manually:
 
@@ -267,6 +267,6 @@ Total: 4-6 hours focused work. Probably one session if smooth, two if the search
 
 ## References (added 2026-05-21 update)
 
-- **Hand-copied capID triplets from 2026-05-21 browser verification:** `/tmp/hand_copied_capids_2026-05-21.md` (3 verified master triplets — B2019-05575 / B2021-02225 / B2021-02404 — plus sub-record counts and a tentative CapDetail URL template). Sibling CSV at `/tmp/hand_copied_capids_2026-05-21.csv`.
-- **In-scope inventory verifying the 90-permit count:** `/tmp/b_permit_url_inventory.md` (generated 2026-05-21). Confirms 90 in-scope B-permits across 35 distinct projects; documents that 0 capID triplets are recoverable from existing `data/raw/accela_status/` scrape files (those files are clipboard-pasted human-readable record summaries with no URL/capID data).
+- **Hand-copied capID triplets from 2026-05-21 browser verification:** `notes/hand_copied_capids_2026-05-21.md` (3 verified master triplets — B2019-05575 / B2021-02225 / B2021-02404 — plus sub-record counts and a tentative CapDetail URL template). Sibling CSV at `notes/hand_copied_capids_2026-05-21.csv`.
+- **In-scope inventory verifying the 90-permit count:** `notes/b_permit_url_inventory_2026-05-21.md` (generated 2026-05-21). Confirms 90 in-scope B-permits across 35 distinct projects; documents that 0 capID triplets are recoverable from existing `data/raw/accela_status/` scrape files (those files are clipboard-pasted human-readable record summaries with no URL/capID data).
 - **Source chat for the verification work:** "Building the Berkeley Housing orchestrator from design sketch" (last activity 2026-05-21 evening). The 4th of 5 verification permits attempted in that chat is not captured in either file; only 3 fully-verified triplets are recorded.

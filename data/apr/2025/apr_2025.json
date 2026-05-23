@@ -1,6 +1,6 @@
 {
   "year": 2025,
-  "generated": "2026-04-11T18:57:40.142405",
+  "generated": "2026-05-23T14:03:30.577081",
   "table_a": {
     "title": "Table A: Applications Deemed Complete in 2025",
     "description": "Projects with completeness review finished between 2025-01-01 and 2025-12-31",
@@ -10,7 +10,7 @@
         "address": "2425 DURANT Ave",
         "apn": "055 187800701",
         "permits": "ZP2024-0162, PLN2024-0049",
-        "net_units": 250,
+        "net_units": 117,
         "vli_units": 0,
         "status": "Pending Final Action",
         "app_filed_date": "2024-11-15",
@@ -48,7 +48,7 @@
         "permits": "ZP2024-0181, ZP2024-0182, PLN2024-0069, PLN2024-0070",
         "net_units": 240,
         "vli_units": 0,
-        "status": "Pending Final Action",
+        "status": "Entitled",
         "app_filed_date": "2024-12-19",
         "app_complete_date": "2025-06-03",
         "entitled_date": "2025-11-13",
@@ -116,7 +116,7 @@
     ],
     "summary": {
       "total_projects": 6,
-      "total_units": 877,
+      "total_units": 744,
       "vli_units": 3,
       "density_bonus": 4,
       "sb35": 0,
@@ -131,7 +131,7 @@
       {
         "id": 173,
         "address": "2000 DWIGHT Way",
-        "apn": null,
+        "apn": "055 182201800",
         "permits": "ZP2019-0074, B2021-02404",
         "net_units": 113,
         "vli_units": 0,
@@ -197,7 +197,7 @@
       {
         "id": 172,
         "address": "2650 TELEGRAPH Ave",
-        "apn": null,
+        "apn": "055 183500901",
         "permits": "ZP2019-0070, B2021-02225",
         "net_units": 45,
         "vli_units": 0,
@@ -219,7 +219,7 @@
       {
         "id": 176,
         "address": "2440 SHATTUCK Ave",
-        "apn": null,
+        "apn": "055 189600500",
         "permits": "ZP2021-0201, B2022-02525, B2022-05117",
         "net_units": 40,
         "vli_units": 0,
@@ -263,7 +263,7 @@
       {
         "id": 175,
         "address": "1698 UNIVERSITY Ave",
-        "apn": null,
+        "apn": "056 200400100",
         "permits": "DRCF2015-0003, B2014-05752",
         "net_units": 36,
         "vli_units": 0,
@@ -285,7 +285,7 @@
       {
         "id": 174,
         "address": "1773 OXFORD St",
-        "apn": null,
+        "apn": "058 218102700",
         "permits": "ZP2022-0062, B2023-02354",
         "net_units": 24,
         "vli_units": 2,
@@ -305,25 +305,25 @@
         "milestone_achieved": "CO Issued"
       },
       {
-        "id": 124,
-        "address": "2442 HASTE St",
-        "apn": "055 188101800",
-        "permits": "ZP2024-0070",
-        "net_units": 34,
-        "vli_units": 2,
-        "status": "Under Construction",
-        "app_filed_date": "2024-07-03",
-        "app_complete_date": "2024-10-08",
-        "entitled_date": "2025-09-08",
-        "bp_issued_date": "2025-10-23",
+        "id": 147,
+        "address": "2300 ELLSWORTH St",
+        "apn": "055 188600100",
+        "permits": "TBD",
+        "net_units": 69,
+        "vli_units": 0,
+        "status": "Demolition Underway",
+        "app_filed_date": "2024-01-01",
+        "app_complete_date": "",
+        "entitled_date": "",
+        "bp_issued_date": "2025-09-04",
         "co_date": null,
-        "density_bonus": 0,
+        "density_bonus": 1,
         "sb35_flag": 0,
-        "sb330_flag": 1,
+        "sb330_flag": 0,
         "ab2011_flag": 0,
-        "developer": null,
-        "architect": "SDT Architects",
-        "construction_status": "demolition",
+        "developer": "Riaz Capital",
+        "architect": "Trachtenberg Architects",
+        "construction_status": "framing",
         "milestone_achieved": "BP Issued"
       },
       {
@@ -393,35 +393,13 @@
         "milestone_achieved": "Entitled"
       },
       {
-        "id": 5,
-        "address": "2425 DURANT Ave",
-        "apn": "055 187800701",
-        "permits": "ZP2024-0162, PLN2024-0049",
-        "net_units": 250,
-        "vli_units": 0,
-        "status": "Pending Final Action",
-        "app_filed_date": "2024-11-15",
-        "app_complete_date": "2025-03-13",
-        "entitled_date": "2025-10-09",
-        "bp_issued_date": null,
-        "co_date": null,
-        "density_bonus": 1,
-        "sb35_flag": 0,
-        "sb330_flag": 1,
-        "ab2011_flag": 0,
-        "developer": "Collabhome",
-        "architect": null,
-        "construction_status": null,
-        "milestone_achieved": "Entitled"
-      },
-      {
         "id": 6,
         "address": "2029 UNIVERSITY Ave",
         "apn": "057 205300801",
         "permits": "ZP2024-0181, ZP2024-0182, PLN2024-0069, PLN2024-0070",
         "net_units": 240,
         "vli_units": 0,
-        "status": "Pending Final Action",
+        "status": "Entitled",
         "app_filed_date": "2024-12-19",
         "app_complete_date": "2025-06-03",
         "entitled_date": "2025-11-13",
@@ -481,6 +459,28 @@
         "milestone_achieved": "Entitled"
       },
       {
+        "id": 5,
+        "address": "2425 DURANT Ave",
+        "apn": "055 187800701",
+        "permits": "ZP2024-0162, PLN2024-0049",
+        "net_units": 117,
+        "vli_units": 0,
+        "status": "Pending Final Action",
+        "app_filed_date": "2024-11-15",
+        "app_complete_date": "2025-03-13",
+        "entitled_date": "2025-10-09",
+        "bp_issued_date": null,
+        "co_date": null,
+        "density_bonus": 1,
+        "sb35_flag": 0,
+        "sb330_flag": 1,
+        "ab2011_flag": 0,
+        "developer": "Collabhome",
+        "architect": null,
+        "construction_status": null,
+        "milestone_achieved": "Entitled"
+      },
+      {
         "id": 18,
         "address": "2655 SHATTUCK Ave",
         "apn": "055 182601802",
@@ -531,7 +531,7 @@
         "permits": "ZP2026-0006",
         "net_units": 73,
         "vli_units": 5,
-        "status": "Under Review",
+        "status": "Amendment Pending",
         "app_filed_date": "2024-09-05",
         "app_complete_date": "2024-09-05",
         "entitled_date": "2025-10-20",
@@ -563,8 +563,8 @@
         "sb35_flag": 0,
         "sb330_flag": 0,
         "ab2011_flag": 0,
-        "developer": null,
-        "architect": null,
+        "developer": "4Terra Investments",
+        "architect": "Trachtenberg Architects",
         "construction_status": null,
         "milestone_achieved": "Entitled"
       },
@@ -613,25 +613,25 @@
         "milestone_achieved": "Entitled"
       },
       {
-        "id": 29,
-        "address": "2138 KITTREDGE St",
-        "apn": "057 202901500",
-        "permits": "PLN2024-0011",
-        "net_units": 63,
-        "vli_units": 5,
-        "status": "Under Review",
-        "app_filed_date": "2024-09-05",
-        "app_complete_date": "2024-09-05",
-        "entitled_date": "2025-10-20",
+        "id": 124,
+        "address": "2442 HASTE St",
+        "apn": "055 188101800",
+        "permits": "ZP2024-0070",
+        "net_units": 34,
+        "vli_units": 2,
+        "status": "Under Construction",
+        "app_filed_date": "2024-07-03",
+        "app_complete_date": "2024-10-08",
+        "entitled_date": "2025-09-08",
         "bp_issued_date": null,
         "co_date": null,
-        "density_bonus": 1,
+        "density_bonus": 0,
         "sb35_flag": 0,
         "sb330_flag": 1,
         "ab2011_flag": 0,
         "developer": null,
-        "architect": null,
-        "construction_status": null,
+        "architect": "SDT Architects",
+        "construction_status": "demolition",
         "milestone_achieved": "Entitled"
       },
       {
@@ -725,8 +725,8 @@
     ],
     "summary": {
       "total_projects": 27,
-      "total_units": 3109,
-      "vli_units": 236,
+      "total_units": 2982,
+      "vli_units": 231,
       "entitled_in_year": 18,
       "bp_issued_in_year": 1,
       "co_issued_in_year": 8
@@ -739,39 +739,39 @@
       {
         "income_level": "Very Low",
         "rhna_target": 1786,
-        "permitted": 349,
-        "percent_of_target": 19.5
+        "permitted": 319,
+        "percent_of_target": 17.9
       },
       {
         "income_level": "Low",
         "rhna_target": 1028,
-        "permitted": 28,
-        "percent_of_target": 2.7
+        "permitted": 0,
+        "percent_of_target": 0.0
       },
       {
         "income_level": "Moderate",
         "rhna_target": 1452,
-        "permitted": 28,
-        "percent_of_target": 1.9
+        "permitted": 0,
+        "percent_of_target": 0.0
       },
       {
         "income_level": "Above Moderate",
         "rhna_target": 4668,
-        "permitted": 939,
-        "percent_of_target": 20.1
+        "permitted": 960,
+        "percent_of_target": 20.6
       },
       {
         "income_level": "Total",
         "rhna_target": 8934,
-        "permitted": 1344,
-        "percent_of_target": 15.0
+        "permitted": 1279,
+        "percent_of_target": 14.3
       }
     ],
     "summary": {
-      "total_permitted": 1344,
+      "total_permitted": 1279,
       "total_rhna": 8934,
-      "percent_of_goal": 15.0,
-      "adu_count": 95
+      "percent_of_goal": 14.3,
+      "adu_count": 0
     }
   },
   "developer_summary": {
@@ -780,11 +780,19 @@
     "developers": [
       {
         "developer": "Unknown/Individual",
-        "project_count": 14,
-        "total_units": 897,
-        "vli_units": 196,
-        "market_rate_units": 701,
-        "density_bonus_projects": 7
+        "project_count": 7,
+        "total_units": 412,
+        "vli_units": 112,
+        "market_rate_units": 300,
+        "density_bonus_projects": 2
+      },
+      {
+        "developer": "NX Ventures",
+        "project_count": 1,
+        "total_units": 207,
+        "vli_units": 21,
+        "market_rate_units": 186,
+        "density_bonus_projects": 1
       },
       {
         "developer": "Berkeley Ruby WIP Development LLC",
@@ -811,6 +819,46 @@
         "density_bonus_projects": 1
       },
       {
+        "developer": "Martin Group / Valiance Capital",
+        "project_count": 1,
+        "total_units": 83,
+        "vli_units": 5,
+        "market_rate_units": 78,
+        "density_bonus_projects": 1
+      },
+      {
+        "developer": "Riaz Capital",
+        "project_count": 1,
+        "total_units": 69,
+        "vli_units": 0,
+        "market_rate_units": 69,
+        "density_bonus_projects": 1
+      },
+      {
+        "developer": "Realtex Group",
+        "project_count": 1,
+        "total_units": 54,
+        "vli_units": 0,
+        "market_rate_units": 54,
+        "density_bonus_projects": 1
+      },
+      {
+        "developer": "Gilbane Development",
+        "project_count": 1,
+        "total_units": 52,
+        "vli_units": 6,
+        "market_rate_units": 46,
+        "density_bonus_projects": 1
+      },
+      {
+        "developer": "CHDC",
+        "project_count": 1,
+        "total_units": 50,
+        "vli_units": 50,
+        "market_rate_units": 0,
+        "density_bonus_projects": 1
+      },
+      {
         "developer": "2650 TELEGRAPH LP",
         "project_count": 1,
         "total_units": 45,
@@ -820,21 +868,21 @@
       }
     ],
     "summary": {
-      "total_developers": 4,
-      "total_projects": 19,
-      "total_units": 1249,
-      "total_vli": 321
+      "total_developers": 10,
+      "total_projects": 18,
+      "total_units": 1279,
+      "total_vli": 319
     }
   },
   "adu_summary": {
     "title": "ADU/JADU Summary for 2025",
     "description": "ADU permits issued with ABAG 30/30/30/10 affordability split",
-    "total_adus": 95,
+    "total_adus": 0,
     "affordability_split": {
-      "very_low_income": 28,
-      "low_income": 28,
-      "moderate_income": 28,
-      "above_moderate_income": 11
+      "very_low_income": 0,
+      "low_income": 0,
+      "moderate_income": 0,
+      "above_moderate_income": 0
     },
     "methodology": "ABAG 30/30/30/10 affordability assumption for unpermitted ADUs"
   },
@@ -849,19 +897,19 @@
       "total": 8934
     },
     "rhna_credit": {
-      "bp_issued_units": 1249,
-      "adu_units": 95,
-      "total_credit": 1344,
-      "vli_units": 321,
-      "percent_of_goal": 15.0
+      "bp_issued_units": 1279,
+      "adu_units": 0,
+      "total_credit": 1279,
+      "vli_units": 319,
+      "percent_of_goal": 14.3
     },
     "pipeline": {
-      "total_units": 12362,
-      "vli_units": 973,
+      "total_units": 14070,
+      "vli_units": 968,
       "note": "Pipeline units do NOT count toward RHNA until BP is issued"
     },
     "completed": {
-      "total_units": 908,
+      "total_units": 1394,
       "vli_units": 128
     }
   },
@@ -896,7 +944,7 @@
         "address": "2128 Oxford St",
         "net_units": 485,
         "status": "Approved",
-        "developer": null,
+        "developer": "Core Spaces",
         "app_complete_date": "2023-03-17",
         "entitled_date": "2024-10-04",
         "bp_issued_date": null,
@@ -925,26 +973,26 @@
         "accela_status_date": "2025-04-22"
       },
       {
-        "id": 5,
-        "address": "2425 DURANT Ave",
-        "net_units": 250,
-        "status": "Pending Final Action",
-        "developer": "Collabhome",
-        "app_complete_date": "2025-03-13",
-        "entitled_date": "2025-10-09",
-        "bp_issued_date": null,
-        "accela_status_date": "2025-12-26"
-      },
-      {
         "id": 6,
         "address": "2029 UNIVERSITY Ave",
         "net_units": 240,
-        "status": "Pending Final Action",
+        "status": "Entitled",
         "developer": null,
         "app_complete_date": "2025-06-03",
         "entitled_date": "2025-11-13",
         "bp_issued_date": null,
         "accela_status_date": "2025-11-17"
+      },
+      {
+        "id": 179,
+        "address": "2352 Shattuck Ave",
+        "net_units": 237,
+        "status": "Completed",
+        "developer": null,
+        "app_complete_date": "2022",
+        "entitled_date": "2018",
+        "bp_issued_date": null,
+        "accela_status_date": null
       },
       {
         "id": 9,
@@ -969,6 +1017,39 @@
         "accela_status_date": "2025-07-01"
       },
       {
+        "id": 178,
+        "address": "2131 University Ave",
+        "net_units": 205,
+        "status": "Completed",
+        "developer": "Mill Creek Residential Trust",
+        "app_complete_date": "2022",
+        "entitled_date": "2013-07-08",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
+        "id": 180,
+        "address": "2065 Kittredge St",
+        "net_units": 189,
+        "status": "Entitled",
+        "developer": null,
+        "app_complete_date": null,
+        "entitled_date": "2021-07-22",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
+        "id": 181,
+        "address": "2015 Blake St",
+        "net_units": 168,
+        "status": "Entitled",
+        "developer": null,
+        "app_complete_date": null,
+        "entitled_date": "2020-07-10",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
         "id": 10,
         "address": "3000 SHATTUCK Ave",
         "net_units": 166,
@@ -984,7 +1065,7 @@
         "address": "2109 VIRGINIA St",
         "net_units": 131,
         "status": "Approved",
-        "developer": null,
+        "developer": "Panoramic Interests",
         "app_complete_date": "2024-07-03",
         "entitled_date": "2026-02-26",
         "bp_issued_date": null,
@@ -995,18 +1076,29 @@
         "address": "2136 SAN PABLO Ave",
         "net_units": 125,
         "status": "Approved",
-        "developer": null,
+        "developer": "Allrise Capital",
         "app_complete_date": "",
         "entitled_date": "2024-04-01",
         "bp_issued_date": null,
         "accela_status_date": null
       },
       {
+        "id": 5,
+        "address": "2425 DURANT Ave",
+        "net_units": 117,
+        "status": "Pending Final Action",
+        "developer": "Collabhome",
+        "app_complete_date": "2025-03-13",
+        "entitled_date": "2025-10-09",
+        "bp_issued_date": null,
+        "accela_status_date": "2025-12-26"
+      },
+      {
         "id": 122,
         "address": "2530 BANCROFT Way",
         "net_units": 110,
         "status": "Approved",
-        "developer": null,
+        "developer": "Landmark Properties",
         "app_complete_date": "2024-03-12",
         "entitled_date": "2024-12-27",
         "bp_issued_date": null,
@@ -1060,7 +1152,7 @@
         "id": 113,
         "address": "2138 KITTREDGE St",
         "net_units": 73,
-        "status": "Under Review",
+        "status": "Amendment Pending",
         "developer": null,
         "app_complete_date": "2024-09-05",
         "entitled_date": "2025-10-20",
@@ -1072,7 +1164,7 @@
         "address": "2550 SHATTUCK Ave",
         "net_units": 72,
         "status": "Entitled",
-        "developer": null,
+        "developer": "4Terra Investments",
         "app_complete_date": "",
         "entitled_date": "2025-01-21",
         "bp_issued_date": null,
@@ -1101,6 +1193,17 @@
         "accela_status_date": "2025-10-20"
       },
       {
+        "id": 182,
+        "address": "2072 Addison St",
+        "net_units": 66,
+        "status": "Entitled",
+        "developer": null,
+        "app_complete_date": null,
+        "entitled_date": "2017-11-30",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
         "id": 28,
         "address": "2372 ELLSWORTH St",
         "net_units": 63,
@@ -1112,15 +1215,15 @@
         "accela_status_date": null
       },
       {
-        "id": 29,
-        "address": "2138 KITTREDGE St",
-        "net_units": 63,
-        "status": "Under Review",
+        "id": 124,
+        "address": "2442 HASTE St",
+        "net_units": 34,
+        "status": "Under Construction",
         "developer": null,
-        "app_complete_date": "2024-09-05",
-        "entitled_date": "2025-10-20",
+        "app_complete_date": "2024-10-08",
+        "entitled_date": "2025-09-08",
         "bp_issued_date": null,
-        "accela_status_date": "2025-10-20"
+        "accela_status_date": "2025-09-08"
       },
       {
         "id": 134,
@@ -1178,6 +1281,17 @@
         "accela_status_date": "2024-10-17"
       },
       {
+        "id": 127,
+        "address": "2820 San Pablo",
+        "net_units": 1,
+        "status": "Entitled",
+        "developer": "Cork-Mayo Investments",
+        "app_complete_date": "2022-09-29",
+        "entitled_date": "2024-12-06",
+        "bp_issued_date": null,
+        "accela_status_date": "2024-12-06"
+      },
+      {
         "id": 94,
         "address": "2145 GRANT St",
         "net_units": 0,
@@ -1187,17 +1301,6 @@
         "entitled_date": "2026-03-26",
         "bp_issued_date": null,
         "accela_status_date": "2026-03-26"
-      },
-      {
-        "id": 127,
-        "address": "2820 San Pablo",
-        "net_units": 0,
-        "status": "Unknown",
-        "developer": null,
-        "app_complete_date": "2022-09-29",
-        "entitled_date": "2024-12-06",
-        "bp_issued_date": null,
-        "accela_status_date": "2024-12-06"
       },
       {
         "id": 130,
@@ -1234,8 +1337,8 @@
       }
     ],
     "summary": {
-      "total_stalled": 33,
-      "total_units_at_risk": 4689
+      "total_stalled": 38,
+      "total_units_at_risk": 5393
     }
   }
 }

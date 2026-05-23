@@ -23,7 +23,7 @@ from pathlib import Path
 
 # Paths
 BASE_DIR = Path('/Users/johngage/berkeley-data')
-DB_PATH = BASE_DIR / 'data' / 'berkeley_housing_analysis.db'
+DB_PATH = BASE_DIR / 'databases' / 'berkeley_housing_analysis.db'
 
 def generate_table_a(conn, year):
     """

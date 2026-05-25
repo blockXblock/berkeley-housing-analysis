@@ -290,7 +290,7 @@ def project_has_completion_evidence(project_id: int, db_connection) -> tuple[boo
 
     Args:
         project_id: The project ID to check.
-        db_connection: A sqlite3.Connection to v2.db.
+        db_connection: A sqlite3.Connection to databases/berkeley_housing_v2.db (the canonical v2 path; do NOT use the bare basename v2.db — that creates a fail-open stub at the working directory).
 
     Returns:
         (has_evidence, classified_events)

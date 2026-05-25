@@ -25,6 +25,8 @@
 
 **Reversibility:** Trivial. Delete the new DB file; original is untouched.
 
+> **Note (added 2026-05-24):** The migration plan originally envisioned renaming `berkeley_housing_analysis.db` → `berkeley_housing_v1.db` at cutover. That rename was deferred indefinitely. The canonical v1 path remains `databases/berkeley_housing_analysis.db`. References to `berkeley_housing_v1.db` below describe a planned-but-unexecuted state. Do not attempt to open `berkeley_housing_v1.db` directly — SQLite will fail-open and create an empty stub.
+
 **Steps:**
 
 1. Create the backup directory:

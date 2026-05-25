@@ -2,7 +2,7 @@
 
 **Status:** Canonical for Track 2 APR generation. Supersedes the 3-tier rule sketched in `notes/2026-05-24_apr_workflow_audit.md` §4.
 
-**Authored:** 2026-05-25 by John in collaboration with chat-Claude. Empirical foundation: 10 Berkeley address verifications run in Claude-in-Chrome against live Accela across 2026-05-24 (6 addresses) and 2026-05-25 (4 addresses). Raw Chrome outputs for the 2026-05-25 batch are saved in `notes/chrome_verifications/2026-05-25/`. The 2026-05-24 batch's raw outputs were chat-only and are now lost; their structured findings are recoverable via session transcript and summarized below.
+**Authored:** 2026-05-25 by John in collaboration with chat-Claude. Empirical foundation: 10 Berkeley address verifications run in Claude-in-Chrome against live Accela across 2026-05-24 (6 addresses) and 2026-05-25 (4 addresses). Raw Chrome outputs for the 2026-05-25 batch are saved in `notes/chrome_verifications/2026-05-25/`. The 2026-05-24 batch's raw outputs were chat-only and are now lost; their structured findings are recoverable via the chat-Claude session transcript dated 2026-05-25-02-38-18 (accessible from within chat-Claude's sandbox, not from this filesystem) and summarized below.
 
 **Result:** 9/9 valid tests pass under v2 wording. The 10th test (2274 Shattuck) didn't apply because the address has no project in v2 — Accela returned only existing-building HVAC/TI work for the Shattuck Cinemas building.
 
@@ -283,7 +283,7 @@ This is the work that makes D4's APR output match HCD's published CY 2025 number
 
 - **Supersedes**: `notes/2026-05-24_apr_workflow_audit.md` §4 (the original 3-tier rule)
 - **Raw Chrome outputs (2026-05-25 batch)**: `notes/chrome_verifications/2026-05-25/{2650_telegraph_ave,2274_shattuck_ave,2067_university_ave,0_virginia}.md`
-- **Raw Chrome outputs (2026-05-24 batch)**: chat-only at the time, recoverable via session transcript `/mnt/transcripts/2026-05-25-02-38-18-berkeley-apr-rule-and-trust-audit.txt`
+- **Raw Chrome outputs (2026-05-24 batch)**: chat-only at the time, recoverable via chat-Claude session transcript dated 2026-05-25-02-38-18 (accessible only from within chat-Claude's sandbox)
 - **Future application target**: `04_reporting/D4_hcd_apr_tables.ipynb` (Track 2 refactor)
 - **HCD APR data source**: `fe505d9b-8c36-42ba-ba30-08bc4f34e022` (HCD CKAN datastore, JURIS_NAME='BERKELEY')
 - **18-mismatch table (the cohort this rule will re-evaluate)**: `notes/2026-05-24_apr_workflow_audit.md` §5

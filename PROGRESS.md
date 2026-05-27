@@ -1,496 +1,456 @@
-# Berkeley Civic Data Infrastructure — Progress Document
+# Berkeley Civic Data Infrastructure — Progress
 
-**Last updated:** 2026-04-30
-**Canonical location:** `~/berkeley-data/PROGRESS.md`
-**Purpose:** Living document that survives across AI sessions and informs anyone returning to this work
-- JG 7pm
----
+**Purpose:** Regenerable session-state artifact. The authoritative latest state for resumption after compaction or a break.
 
-## 1. TL;DR
+**Audience:** Future-me, chat-Claude reading as session context. Optimize for fast re-orientation, not narrative completeness.
 
-This project tracks Berkeley's housing development pipeline and civic data infrastructure. The system currently spans 12 SQLite databases (~72MB total), with active work concentrated in `berkeley_housing_analysis.db` (174 housing projects) while `berkeley.db` (50MB) serves as the authoritative source for parcels, addresses, and zoning. An architectural decision has been made to consolidate toward a single master database (`berkeley.db`) over time. The immediate priority is APN format normalization to enable cross-database joins, followed by promoting hand-edited polygons from Google Earth and resolving remaining duplicate/missing address issues. The KML visualization pipeline is functional and generates `berkeley_skyline.kml` from the `project_geometries` table.
+**Prior version:** `PROGRESS_legacy_2026-04-30.md` (renamed; kept verbatim for reference)
 
 ---
 
-## 2. Architecture Decisions (Canonical)
+## Project state (as of 2026-05-27)
 
-These decisions are settled unless explicitly revisited:
-
-| Decision                                                                                                            | Rationale                                                                                                                             |
-| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| **Master database:** `berkeley.db` will be the single source of truth for all Berkeley civic data                   | Already contains 65K addresses, 29K parcels, zoning districts. Foundational civic data that rarely changes.                           |
-| **Working database during transition:** `berkeley_housing_analysis.db` continues as active housing pipeline tracker | 12+ scripts reference it; all current tooling targets it. Will be consolidated into `berkeley.db` when ready.                         |
-| **Obsolete:** `berkeley_housing_v2.db` and others listed below                                                      | Migration never completed; empty tables; no scripts use them. To be archived then deleted. Was a level 3 normalization with 18 tables |
-| **APN normalization required** for cross-DB joins                                                                   | Format mismatch is critical blocker. Canonical form TBD (likely 12-digit no separators).                                              |
-| **Polygons stored as GeoJSON** in TEXT columns                                                                      | Not WKT, not SpatiaLite extension. Parsed by `shapely.shape()` on read.                                                               |
-| **Per-field provenance** via `project_status_history` + `manual_overrides` pattern                                  | Chosen over fully attribute-level facts table. **Decision made; not yet implemented.**                                                |
-| **Reference data versioning** via `is_current` / `superseded_by` pattern                                            | Applies to parcels, addresses, and operational data like project status.                                                              |
-**Authoritative parcel data source:** Alameda County publishes parcel polygons at data.acgov.org. The City of Berkeley's parcel layer is a clipped copy of the County data, not an independent source. We use the County data directly. Polygons are approximate (±~1m, not legal surveys). When project visualization requires more accurate footprints than the parcel polygon provides (e.g., building footprint within a larger lot), we use `manual_polygon` rows in `project_geometries` as explicit overrides with provenance.
-
-### Why Not berkeley_housing_v2.db?
-
-Despite its cleaner normalized 3NF design with 18 vocabulary tables, `berkeley_housing_v2.db` was abandoned because:
-- Migration never completed (people, assets, external_links tables are empty)
-- No scripts use it (only the migration script references it)
-- Adopting it would require rebuilding all tooling
-
-The pragmatic choice is to improve `berkeley_housing_analysis.db` incrementally, then merge into `berkeley.db`.
+- **Branch:** `dev`, up to date with `origin/dev` at `f7e7ec8`
+- **Working tree:** clean of tracked changes; ~55 untracked files pending triage (see Open follow-ons §4)
+- **Recent commits:** see "Recent commits" section below
+- **What's verified:** D5 (CPRA-first APR) and D6 (D5↔HCD diff) committed and re-validated; HCD CKAN mirror validated against NotebookLM PDF reading (CY 2022/2023/2024 match to the unit); CY 2024 APR cross-check confirms CY 2025 patterns are anomalies, not systematic
+- **What's in flight:** waiting on Planning Module CPRA fulfillment from Berkeley (filed 2026-05-26, statutory ack by ~June 5); D7 (Table A diff) scaffolding to begin when fulfillment arrives
+- **Repo metrics:** v2 schema currently 45 tables / 46 indexes / 9 compat views (originally designed at 34/36/9 — organic growth)
 
 ---
 
-## 3. Database Inventory (Current)
+## Architecture decisions banked
 
-Full analysis: see `docs/database_architecture_review_2026-04-30.md`
-
-### Active Databases (2)
-
-| Database | Size | Last Modified | Role |
-|----------|------|---------------|------|
-| `databases/berkeley.db` | 50MB | Mar 19, 2026 | Master parcel/address/zoning store (29K parcels, 65K addresses, 13K licenses) |
-| `databases/berkeley_housing_analysis.db` | 1.1MB | Apr 25, 2026 | Active housing pipeline (174 projects, 2,306 permit events, 1,423 documents) |
-
-### Staging/Reference Databases (3)
-
-| Database | Size | Last Modified | Role | Fate |
-|----------|------|---------------|------|------|
-| `databases/accela_reports.db` | 288KB | Mar 20, 2026 | Scraped Accela data staging | Keep as staging area |
-| `databases/berkeley_housing_apr.db` | 84KB | Feb 22, 2026 | Frozen APR snapshot | Keep frozen (regulatory record) |
-| `databases/berkeley_address_centric.db` | 14MB | Feb 27, 2026 | Materialized view for mapping | Investigate `news_coverage` (2,024 rows) before archiving |
-
-### Dormant Databases (2)
-
-| Database | Size | Last Modified | Role | Fate |
-|----------|------|---------------|------|------|
-| `databases/berkeley_energy_use.db` | 176KB | Jan 6, 2026 | BESO energy disclosure (520 buildings) | Merge into `berkeley.db` when utility domain expands |
-| `databases/berkeley_housing_v2.db` | 1.4MB | Apr 22, 2026 | Abandoned normalized schema | Archive → delete after 90 days |
-
-### Obsolete Databases (3) — Safe to Delete
-
-| Database | Size | Last Modified | Why Obsolete |
-|----------|------|---------------|--------------|
-| `databases/berkeley_data.db` | 4.1MB | Nov 15, 2025 | Licenses duplicated in `berkeley.db` |
-| `databases/berkeley_housing_map.db` | 56KB | Dec 22, 2025 | Superseded by `project_map` in analysis.db |
-| `databases/housing_projects.db` | 60KB | Dec 14, 2025 | Original prototype; fully superseded |
-
-### Backup Databases (2)
-
-| Database | Size | Created | Purpose |
-|----------|------|---------|---------|
-| `databases/berkeley_housing_analysis_pre_parcel_import_2026-04-25.db` | 1.0MB | Apr 25 | Before 150 parcel polygons imported |
-| `databases/berkeley_housing_analysis_pre_schema_alignment_2026-04-25.db` | 1.1MB | Apr 25 | Before schema alignment changes |
+- **One master `berkeley.db` long-term** for parcels, addresses, zoning, business licenses. `berkeley_housing_analysis.db` (v1) and `berkeley_housing_v2.db` (v2 normalized) continue as working pipeline DBs and will eventually be absorbed
+- **Alameda County is the authoritative parcel source.** City of Berkeley's parcel layer is a clipped copy. Polygons are approximate (±~1m), not legal surveys
+- **GitHub Pages → Cloudflare Pages migration deferred**
+- **v2 normalized schema:** 34 tables / 36 indexes / 9 backward-compatibility views as the original design intent (current state: 45 tables, 46 indexes, 9 views per organic growth). Vocabulary tables replacing hardcoded enums. Provenance mixin (`source_document_id`, `asserted_by`, `asserted_at`, `confidence_type_id`) on all fact-bearing tables
+- **GeoJSON-as-TEXT for portability.** No SpatiaLite, no WKT. Parsed by `shapely.shape(json.loads(geojson))` on read
+- **Reference data versioning** via `is_current` / `superseded_by` pattern (parcels, addresses, project_status)
+- **Per-field provenance** via `project_status_history` + `manual_overrides` pattern (decision made; partially implemented)
+- **CKAN is the oracle** for what Berkeley actually submitted to HCD. **PDFs are the submission medium.** **CPRA-derived D5 is the independent reproduction.** When numbers diverge, CKAN row-level data is the ground truth; PDF column totals may apply different counting rules
+- **Master-permit-only unit counts.** Berkeley populates `UnitsAdded` on every REV sub-permit with the **project's cumulative unit total**, NOT the marginal delta. Summing across master + REVs double-counts (10× for a 9-REV project). Use `master.UnitsAdded - master.UnitsRemoved` only
 
 ---
 
-## 3a. Key Terms
+## Active CPRA requests
 
-| Term | Definition |
-|------|------------|
-| **Canonical KML** | The single authoritative KML file loaded into Earth Pro; regenerated from DB, not hand-edited |
-| **My Places** | Google Earth Pro's local storage for user-created/edited placemarks; NOT version-controlled |
-| **manual_polygon** | Hand-drawn polygon from Earth Pro, imported to DB and given authority over APN-derived shapes |
-| **synthetic_footprint** | Auto-generated 40m square at project centroid; fallback when no parcel polygon available |
-| **apn_parcel** | Polygon derived from county assessor parcel data via APN match |
+- **Planning Module entitlement data 2018-2025** — filed 2026-05-26 to City of Berkeley. **Unblocks D7** (Table A diff). Statutory acknowledgment by ~June 5; full response or 14-day-extension notification by ~June 19
+- **Mayor re Accela API access / Clariti contract / Open Data** — drafted in `docs/letters/`, not sent
+- **HCD re HCD↔Berkeley correspondence** — drafted, not sent
 
 ---
 
-## 4. Current Housing Pipeline Data State
+## Key findings banked
 
-**Source:** `berkeley_housing_analysis.db` as of 2026-04-25
-
-### Project Counts
-
-| Metric | Count |
-|--------|-------|
-| Total projects | 174 |
-| With `apn_parcel` polygons | 149 |
-| With `synthetic_footprint` | 12 |
-| With `manual_polygon` | 2 |
-| With no geometry (missing lat/lon) | 11 |
-| Silently excluded from KML | 11 |
-
-### Geometry Source Breakdown
-
-```
-apn_parcel:         149 projects (86%) — polygons from berkeley_parcels.csv via APN match
-synthetic_footprint: 12 projects (7%)  — 40m square at lat/lon centroid
-manual_polygon:       2 projects (1%)  — hand-drawn in Earth Pro, imported to DB
-no_geometry:         11 projects (6%)  — no lat/lon, cannot generate any polygon
-```
-
-### Duplicate Address Status
-
-| Address | Status | Resolution |
-|---------|--------|------------|
-| 2115 KITTREDGE St | ✅ Resolved | Duplicate rows merged |
-| 2712 TELEGRAPH Ave | ✅ Resolved | Duplicate rows merged |
-| 2740 SHASTA Rd | ⚠️ Pending | Two project rows exist; need to determine which is canonical and archive the other |
-
-### Address Recovery Log
-
-| Address | Issue | Resolution | Date |
-|---------|-------|------------|------|
-| 0 LE ROY Ave | SKIP_NO_MATCH (no APN) | Recovered APN `058 224402501` via Accela investigation | 2026-04-25 |
-
-### Checkpoint Backups
-
-Before major operations on 2026-04-25:
-- `berkeley_housing_analysis_pre_parcel_import_2026-04-25.db` — before polygon import
-- `berkeley_housing_analysis_pre_schema_alignment_2026-04-25.db` — before schema changes
+- **Berkeley `UnitsAdded` REV semantics: cumulative, not marginal.** Every REV sub-permit carries the project's running cumulative unit count. D5's original Cell 7 summation logic double-counted; corrected in commit `2c3b575` (D6 notebook commit). See `notes/research_threads/` and D5's Bug-fix markdown cell
+- **HCD CY 2025 doubling:** 240 exact A2 duplicates; 16 of 32 Table A rows duplicated. Characterized as **submission-level error** (Berkeley submitted twice; HCD load appended), not systematic methodology. Dedup logic in `scripts/build_hcd_mirror.py` handles A2; same methodology applies to Table A
+- **2029 University density-bonus split.** ZP2024-0181 (240 units, bonus version) and ZP2024-0182 (160 units, base version) appear as separate Table A rows in CY 2025. Base+bonus splitting is **not Berkeley's standard practice** and appears specific to CY 2025. v2.projects already de-duplicates such pairs to the bonus version
+- **CY 2024 APR cross-check confirms CY 2025 patterns are anomalies, not systematic.** See `notes/2026-05-26_cy2024_apr_crosscheck.md`
+- **One REV pattern divergence flagged:** 1951 Shattuck `B2021-04893-REV14` appears to use **marginal-delta** REV ("add 7 additional units to the original 156"); needs CKAN cross-check to characterize whether genuinely marginal at source or a PDF-annotation artifact
+- **Berkeley acknowledges reissuance double-counting** as a known APR issue (City Manager memo page 5, March 2025); HCD permits it conditional on annotation
+- **Berkeley has no Socrata building-permits dataset.** Accela web portal is the only live source. Hence the CPRA-and-scrape strategy
+- **~20-30 hand-edited Google Earth building footprints**, NOT the previously-assumed 5. Preservation snapshot at `docs/kml_versions/keep_snapshot_2026-05-01.kml`. Polygon audit pending
+- **HCD mirror validated against NotebookLM PDF audit:** CY 2022/2023/2024 match to the unit (716, 828, 708 respectively); CY 2025 dedup matches within 1 unit (481 vs NotebookLM's 482). CY 2021 PDF was unparseable; CKAN fills the gap. Establishes HCD as a trustworthy oracle
+- **D5↔HCD diff (D6) results:** 5 of 9 spot-checks land in `in_both_clean`. 4 real divergences characterized: net vs gross (2538 Durant: D5 net=71 vs HCD gross=83), stage attribution (2067 University: D5 BP-year vs HCD CO-year), ADU counting (0 Virginia: D5=2 incl. ADU vs HCD=1), pre-CPRA-window misses (2556 Telegraph, 1698 University)
 
 ---
 
-## 5. KML and Visualization State
+## Open follow-ons (prioritized)
 
-### Current Files
+1. **Build CY 2024 D5-equivalent** — programmatic verification of the visual cross-check in `notes/2026-05-26_cy2024_apr_crosscheck.md`. CPRA BP data 2018-2025 already in repo; copy-and-adapt of the D5 notebook
+2. **Row-level check of 1951 Shattuck B2021-04893 / REV14** against CKAN and CPRA BP data — characterize whether this REV is genuinely marginal at source or a PDF-annotation artifact (would partially invalidate the "cumulative semantics" rule if marginal cases exist)
+3. **D7 scaffolding for when Planning Module CPRA fulfillment arrives** — Table A diff: CPRA Planning data → D7 → HCD Table A. Same shape as D5→D6
+4. **Untracked working-tree triage** — sort into commit / gitignore / delete buckets:
+   - `analysis/audit_2026-05-16/` (schema and valuation audit artifacts)
+   - `scripts/processing_status_scraper.py`, `scripts/record_status_scraper.py` (Accela scrapers)
+   - `scripts/generate_apr_v2.py` + `.backup_pre_v2_migration`
+   - `experiments/accela_scrape/`, `experiments/cesium/`, `experiments/maplibre/`
+   - `docs/letters/` (CPRA drafts)
+   - `notebooks/06_polygon_cleanup/`, `notebooks/audit/`, `notebooks/generate_tour.ipynb`
+   - `notes/2026-05-18_*` through `notes/2026-05-23_*` (session notes)
+   - `research/open-policy/`
+   - Daily log markdown files (`2026-05-26.md`, `Daily log started 2026-05-02.md`)
+   - `*.bak` and `*.backup_*` files
+   - `logs/`
+5. **Day-11 CPRA nudge template** — if Berkeley goes silent past ~June 5
 
-| File | Purpose | Status |
-|------|---------|--------|
-| `docs/berkeley_skyline.kml` | Canonical KML for Earth Pro | ✅ Active, generated from `project_geometries` |
-| `scripts/generate_kml.py` | KML generator script | Rewritten 2026-04-25 to read from `project_geometries` table |
-| `docs/kml_versions/` | Archive of 14 prior KML files | Historical reference only |
+### Older follow-ons carried forward from PROGRESS_legacy
 
-### Generator Details
-
-```bash
-# Regenerate KML from current project_geometries
-python scripts/generate_kml.py
-# Output: docs/berkeley_skyline.kml
-```
-
-The script:
-- Reads from `project_geometries` table in `berkeley_housing_analysis.db`
-- Outputs polygons with status-based styling (color by pipeline stage)
-- Silently excludes 9 projects without coordinates
-- Uses KML coordinate order: `lon,lat,alt` (opposite of GeoJSON)
-
-### Google Earth Pro State
-
-| Item | Status | Action Needed |
-|------|--------|---------------|
-| 5 hand-edited polygons in My Places | Not yet in DB | Promote to `manual_polygon` rows (deferred) |
-| Duplicate stacked polygons | Accumulate over time | Periodic cleanup of My Places required |
-| Network link to `berkeley_skyline.kml` | May be stale | Refresh after KML regeneration |
+6. **Promote ~20-30 hand-edited Google Earth polygons** to `manual_polygon` rows. Preservation snapshot exists at `docs/kml_versions/keep_snapshot_2026-05-01.kml`. Polygon audit pending
+7. **APN normalization across `berkeley.db` and `berkeley_housing_analysis.db`.** Three formats in use; blocks cross-DB joins. See Conventions below. Estimated 2-4 hours
+8. **Consolidate active databases.** Merge `berkeley_housing_analysis.db` tables into `berkeley.db` per architectural decision. Estimated 8-12 hours. Deferred until APN normalization complete
+9. **2740 SHASTA duplicate** — two project rows; need to determine canonical
+10. **5 remaining SKIP_NO_MATCH addresses** — Accela lookup workflow
+11. **Investigate `.txt` scrape captures for DB integration** — many .txt files were created during scraping; may contain richer narrative content (owner intent, controversy, design notes) than structured DB columns
+12. **Join `news_coverage` (2,024 rows) to projects** via address-regex matching pass
 
 ---
 
-## 6. Open Work (Priority Order)
+## Discipline rules (carried forward)
 
-### High Priority
-
-1. **Promote 5 hand-edited My Places polygons** to `manual_polygon` rows in `project_geometries`
-   - These are user corrections that should be canonical
-   - Requires: export from Earth Pro, parse KML, insert to DB
-
-2. **Investigate scrape .txt files for DB integration**
-   - Many .txt files were created during scraping that capture per-project information Claude found
-   - May contain richer narrative content (owner intent, controversy, design notes, neighbor objections) than what's in structured DB columns
-   - Tasks:
-     - Inventory all .txt files under `~/berkeley-data/`: locations, count, total size, date range, naming convention
-     - Sample 3-5 representative files to assess content quality
-     - Determine whether project IDs or APNs are recoverable from filenames or content
-     - Decide treatment: (A) preserve as-is with `project_text_captures` index table linking to file paths, (B) extract structured fields and archive originals, (C) full-text search via SQLite FTS5 indexed corpus
-   - **Done when:** decision documented and either implementation completed or explicit deferral with rationale
-
-3. **Join news articles to projects**
-   - The `news_coverage` table in `berkeley_address_centric.db` contains 2,024 article rows that should be joinable to housing projects
-   - Schema: `news_id`, `project_id` (TEXT), `project_name`, `url`, `source`, `date_added`
-   - Tasks:
-     - Design `project_news_links` join table with `match_type` and `confidence` columns to support multiple match semantics (address-mentioned, developer-mentioned, general-coverage, inferred)
-     - Implement initial address-regex matching pass (high-precision low-recall)
-     - Migrate `news_coverage` from `berkeley_address_centric.db` into the housing pipeline DB
-   - **Done when:** join table populated for the high-confidence matches; remaining articles flagged for later manual or AI-assisted matching
-
-4. **Build polygon refinement workflow for featured tour projects**
-   - **Goal:** Achieve accurate building footprints for 10-20 projects that will be featured in flyover tours, while keeping parcel-polygon or synthetic fallback for the remaining ~150 projects.
-   - Tasks:
-     - Inventory project PDFs to determine what kinds of geometric information are extractable (in progress, see `docs/pdf_corpus_analysis_2026-04-30.md` when complete)
-     - Decide tour selection (5-10 tours covering neighborhoods, project types, and status categories)
-     - Identify the specific 10-20 projects that need accurate footprints based on tour selection
-     - Hand-trace building footprints in Google Earth Pro for featured projects, using parcel polygon as ground reference
-     - Round-trip hand-traced polygons into `project_geometries` as `manual_polygon` rows with provenance notes
-     - Regenerate `berkeley_skyline.kml` with improved geometries
-   - **Done when:** 10-20 featured projects have `geometry_type_id=8` (`manual_polygon`) rows with `is_current=1` in `project_geometries`, and the regenerated KML visually matches actual building footprints when reviewed in Earth Pro.
-
-5. **Create flyover tours for berkeleybuild.com**
-   - **Goal:** 5-10 narrative tours embedded on the public site, supporting both pre-rendered video (for performance) and interactive exploration (for engagement).
-   - Tasks:
-     - Inventory existing tour KMLs in `docs/kml_versions/` to identify which can be reused or adapted
-     - Define tour selection: 5-10 tours covering neighborhood, project type, status, and story/theme dimensions
-     - For each tour: write or adapt a tour KML defining camera moves
-     - Record each tour in Earth Pro using screen capture, optionally with voiceover
-     - Encode and embed videos on berkeleybuild.com
-     - Provide downloadable KMLs for advanced users
-     - (Optional, lower priority) Add interactive Cesium or MapLibre embed for in-browser exploration
-   - **Done when:** 5-10 tour videos are embedded on berkeleybuild.com with associated KMLs available for download.
-
-6. **Cross-directory file consolidation**
-   - **Goal:** Move useful files from `~/berkeley_data`, `~/berkeley-data-staging`, `~/berkeley-housing-research`, and `~/berkeley-permit-pipeline` into the canonical `~/berkeley-data` location, archive obsolete copies, and document the consolidated state.
-   - Tasks (deferred from session 2026-04-30):
-     - Review CC's survey report at `docs/cross_directory_survey_2026-04-30.md`
-     - Decide per-file moves vs. archives vs. deletions
-     - Execute moves with explicit per-file decisions
-     - Two specific decisions documented as needing resolution: (a) keep Quartz site for public docs or extract content, (b) continue Obsidian for project notes or consolidate to markdown
-   - **Done when:** only one canonical copy of each useful file exists in `~/berkeley-data`, obsolete copies are archived externally or deleted, and the four legacy directories contain only what's intentionally kept there or are empty.
-
-7. **Investigate 2740 SHASTA duplicate**
-   - Two project rows exist for this address
-   - Need to determine which is canonical and archive the other
-
-8. **APN normalization** across `berkeley.db` and `berkeley_housing_analysis.db`
-   - Current formats incompatible:
-     - `berkeley_housing_analysis.db`: `058 214901904` (space-separated)
-     - `berkeley.db` parcels: `16-1428-2-2` (hyphenated)
-     - `berkeley.db` addresses_arcgis: `055182901100` (no separator)
-   - Blocks cross-database joins
-   - Estimated effort: 2-4 hours
-
-### Medium Priority
-
-9. **Consolidate active databases** per architectural decision
-   - Merge `berkeley_housing_analysis.db` tables into `berkeley.db`
-   - Estimated effort: 8-12 hours (per CC estimate)
-   - Deferred until APN normalization complete
-
-10. **Investigate 5 remaining SKIP_NO_MATCH addresses**
-   - Similar to 0 LE ROY recovery workflow
-   - Requires Accela lookup by permit number
-
-11. **Backfill lat/lon for 11 projects** without coordinates
-   - Currently silently excluded from KML
-   - May require manual geocoding or Accela address lookup
-
-### Lower Priority
-
-12. **Build post-Accela ingestion notebook** (`08_post_accela_pipeline.ipynb`)
-   - Standardize workflow for processing scraped Accela data
-   - Defer until workflow stabilizes
-
-13. **Investigate berkeley_address_centric.db before archiving**
-    - Contains 2,024 `news_coverage` rows — largely addressed by item 3 above
-    - Other tables may still have value
-
-14. **Plan BESO energy data integration**
-    - `berkeley_energy_use.db` has 520 building records
-    - Directly relevant to future utility-domain expansion
-    - Merge into `berkeley.db` when ready
+1. **CC summaries can be wrong; verify artifacts** (file existence, command output) before asserting they exist or contain claimed content
+2. **Never commit/push without explicit instruction;** dev only, no push without "approved"
+3. `/tmp/` first, **promote after verification**
+4. **Validate logic as a script, then package as a notebook.** Same pattern used for D5 and D6
+5. **CKAN is the oracle** for what Berkeley actually submitted; PDFs are the submission; CPRA-derived D5 is the independent reproduction
+6. **Don't extrapolate from single cases to column totals** without row-level data support (the "595 lesson" — claimed PDF correction didn't reduce cleanly from row-level data)
+7. **`.ipynb` editing via Python json module**, never sed/awk. Validate JSON parses after every edit
+8. **Track 1 (path-only fix) vs Track 2 (logic refactor) separation.** Fix the symptom now; carry the refactor as its own task
+9. **Tool selection:** Execution / filesystem / DB queries → Claude Code (CC). Design conversations / multi-step planning / catching reasoning errors → chat-Claude. The two AIs do NOT share state — PROGRESS.md is the bridge
 
 ---
 
-## 7. Conventions Worth Remembering
+## KML and video tour state
 
-### APN Formats
+### Canonical KML
+
+- `docs/berkeley_skyline.kml` — canonical KML loaded into Earth Pro; regenerated from `project_geometries` table, not hand-edited
+- `docs/geometry.kml` — stable URL exposed on site (per commit `9c6bfbc`, May 16)
+- Generator: `scripts/generate_kml.py` — rewritten 2026-04-25 to read from `project_geometries`. Reads polygons with status-based styling (color by pipeline stage); silently excludes projects without coordinates; KML coord order is `lon,lat,alt`
+- `docs/kml_versions/` — historical archive
+- `docs/kml_versions/keep_snapshot_2026-05-01.kml` — **preservation snapshot** of Earth Pro state at the time the polygon discrepancy was discovered (20-30 hand-edited footprints, not 5 as previously assumed)
+
+### Tour KMLs
+
+`docs/tours/` contains the working tour set. Inventory as of 2026-05-27:
+
+| file | role |
+|---|---|
+| `berkeley-overview-tour.kml` | Broad overview tour |
+| `berkeley-tour-45sec-rebuilt.kml`, `berkeley-housing-pipeline-tour-45sec.kml`, `205sec.kml`, `longer.kml`, `longerv2.kml` | Duration-targeted variants |
+| `berkeley-tour-telegraph-shattuck-cedar.kml` | Telegraph/Shattuck/Cedar corridor |
+| `berkeley-tour-extended-dramatic.kml` | Extended scenic narrative |
+| `downtown-berkeley-tour.kml` | Downtown core |
+| `Berkeley Housing Pipeline - 3D Skyline.kml`, `Berkeley Skyline` | Skyline visualizations |
+| `Adeline-Shattuck-s2n`, `Elmwood-Downtown`, `Dormitory`, `Over-200` | Themed tours |
+| `tour-edit-1950-oxford-2026-05-03.kml` | Specific-site tour edit |
+| `README.md` | Tour-set documentation (review for current authoritative tour list) |
+
+### Past video output
+
+- **17-largest-private-projects flyby video** added as first homepage video (commit `e0b813d`)
+- **UC Berkeley Dormitories video** — regenerated and updated (commit `3aab19c`, May 16)
+- **YouTube channel:** @BuildBerkeley2050 (per session notes)
+
+### Research thread: temporal flyby imagery
+
+See `notes/research_threads/temporal_flyby_imagery.md` (8.5 KB, May 25). Captures the concept for KML tours that display **different imagery layers per site** over a fixed sequence:
+- Time-lapse (Google Earth Historical 2010 / 2015 / 2020 / today)
+- Design-vs-reality (architect rendering vs current build)
+- Permitting-lifecycle (existing → demolition → construction → finished)
+- Modular construction (prefab module arrival/lift)
+- Regional comparison (same project type across Berkeley/Oakland/Albany)
+- Civic controversy (sites that drew significant public comment)
+
+Proposed schema addition: `project_visual_assets` table with `project_id`, `source_type_id` (vocabulary), `date_observed`, `file_path`/`url`, `geometry_hint`, provenance mixin. Activation deferred to Phase D refactor.
+
+### Google Earth Pro state caveats
+
+- Hand-edited polygons in "My Places" are **not version-controlled** — only the preservation snapshot at `docs/kml_versions/keep_snapshot_2026-05-01.kml` captures them
+- The "Proj-2" folder previously vanished from Earth Pro (preservation concern still active)
+- People's Park's hand-traced L-shaped footprint was overwritten by the full Alameda County parcel polygon during a KML regeneration — known incident
+- Network link to `berkeley_skyline.kml` may be stale after regeneration; refresh in Earth Pro after each regenerate
+
+### Open work in this area (intersects "Open follow-ons" §6)
+
+- Promote the 20-30 hand-edited polygons to `manual_polygon` rows in `project_geometries` — preserves them in the DB rather than relying on Earth Pro local state
+- Polygon audit comparing keep_snapshot against current Earth Pro state to identify any further changes since May 1
+- Featured-project polygon refinement for tour stops (hand-trace 10-20 buildings vs parcel polygon as ground reference; round-trip into `project_geometries`)
+
+### Past knowledge about generating video tours — methodology snapshot
+
+1. **Sequence stays fixed across tours; imagery selection varies.** A given list of project stops (e.g., "17 largest private projects") can render different thematic tours by swapping imagery layer per stop.
+2. **Camera moves authored in KML** (`<gx:Tour>` elements). Tour KMLs in `docs/tours/` are the working set.
+3. **Recorded in Earth Pro via screen capture**, optionally with voiceover.
+4. **Encoded and embedded on berkeleybuild.com** with downloadable KMLs for advanced users.
+5. **Optional in-browser exploration** via Cesium or MapLibre embed (experiments under `experiments/cesium/` and `experiments/maplibre/`).
+6. **The bug to avoid:** regenerating the canonical KML overwrites hand-traced footprints in Earth Pro's My Places (the People's Park incident). Always check keep_snapshot before regeneration.
+
+---
+
+## Conventions worth remembering
+
+### APN formats
 
 | Source | Format | Example |
-|--------|--------|---------|
-| `projects` table | 12-digit space-separated | `058 214901904` |
-| `berkeley_parcels.csv` | Hyphenated | `58-2149-19-4` |
-| `berkeley.db` parcels | Hyphenated | `16-1428-2-2` |
-| `berkeley.db` addresses_arcgis.apn_norm | No separator | `055182901100` |
+|---|---|---|
+| `berkeley_housing_analysis.db.projects` | 12-digit space-separated | `058 214901904` |
+| `berkeley_parcels.csv` | Hyphenated, variable-width | `58-2149-19-4` |
+| `berkeley.db.parcels` | Hyphenated | `16-1428-2-2` |
+| `berkeley.db.addresses_arcgis.apn_norm` | No separator | `055182901100` |
+| Business license records | `ZZZZZZZZZZZZZ` | Placeholder for mobile/various |
+| CPRA `Parcel Number` | 12-digit space-separated | `055 183500901` (matches v2) |
+| HCD CKAN `APN` field | 12-digit space-separated | `055 183500901` (matches v2/CPRA) |
 
-**Normalization rule:** Strip all non-digits to get canonical 12-digit form. Both `058 214901904` and `58-2149-19-4` normalize to `058214901904`.
+**Normalization rule:** Strip all non-digits to get canonical 12-digit form. Both `058 214901904` and `58-2149-19-4` normalize to `058214901904`. APN is `book(3)-page(4)-parcel(N)-subparcel(N)` per Alameda County convention.
 
-### Geometry Formats
+### Geometry formats
 
-| Context | Format | Coordinate Order |
-|---------|--------|------------------|
-| `project_geometries.geojson` column | GeoJSON TEXT | `[lon, lat]` (standard) |
+| Context | Format | Coordinate order |
+|---|---|---|
+| `project_geometries.geojson` column | GeoJSON TEXT | `[lon, lat]` (GeoJSON standard) |
 | KML output | KML coordinates | `lon,lat,alt` (same as GeoJSON) |
-| Shapely parsing | `shapely.shape(json.loads(geojson))` | N/A |
+| Shapely parsing | `shapely.shape(json.loads(geojson))` | n/a |
 
-### Special Cases
+### Special cases — UC Berkeley projects
 
-**UC Projects (4 known):**
+These intentionally have no APN (UC land is not in the county parcel system). They fall back to `synthetic_footprint` or `manual_polygon` geometry sources.
+
 - 2400 BOWDITCH St
 - 2556 HASTE St
 - 2200 BANCROFT Way
 - 1950 OXFORD St
 
-These intentionally have no APN (UC land is not in county parcel system). They fall back to `synthetic_footprint` or `manual_polygon` geometry sources.
+### Date scoping in CPRA BP fulfillments
+
+CPRA `BP_Annual Permit Report-*.xlsx` files are scoped by `Finaled Date`, NOT by `Submittal Date`. A permit filed in 2014 that finalled in 2025 appears in the 2023-2025 file, not in 2018-2022.
+
+### Header row in CPRA XLSXs
+
+6 banner rows + 1 blank + **header at row 8**. `pd.read_excel(..., header=7)`.
 
 ---
 
-## 8. Known Data Quality Issues
+## Housing pipeline data snapshot
 
-### Critical
+*A snapshot. For current numbers, query `databases/berkeley_housing_v2.db` directly or rebuild D5/D6.*
 
-| Issue | Severity | Status |
-|-------|----------|--------|
-| APN format mismatch blocks cross-DB joins | High | Open — normalization required |
-| 2740 SHASTA has two project rows | Medium | Open — needs investigation |
-
-### Moderate
-
-| Issue | Severity | Status |
-|-------|----------|--------|
-| Project 25 permit mismatch | Medium | Open |
-| — `permits` field says `PLN2025-0066` | | |
-| — `permit_events` point to `ZP2026-0015` | | |
-| — Data entry error in projects table | | |
-| 9 projects without lat/lon excluded from KML | Medium | Open — need geocoding |
-| 5 SKIP_NO_MATCH addresses pending | Medium | Open — need Accela lookup |
-
-### Informational
-
-| Issue | Notes |
-|-------|-------|
-| `berkeley_housing_v2.db` has 17 quarantined documents | Migration artifacts; will be deleted with DB |
-| `berkeley_housing_v2.db` has 3 duplicate address quarantine rows | Migration artifacts; will be deleted with DB |
-| `berkeley_address_centric.db` news_coverage (2,024 rows) | Should investigate before archiving |
+| metric | value | as of |
+|---|---|---|
+| v2.projects total | 181 | 2026-05-24 inventory |
+| v2.permits total | 244 | 2026-05-24 inventory |
+| v2.project_events | 2,347 | 2026-05-24 inventory |
+| v2.fees | 441 | 2026-05-24 inventory |
+| v1.projects total | 179 | 2026-05-24 inventory |
+| CPRA permits 2018-2025 (XLSX) | 30,764 unique | 2026-05-26 |
+| CPRA permits in 2023-2025 file | 14,149 rows | 2026-05-26 |
+| CPRA permits in 2018-2022 file | 18,053 rows | 2026-05-26 |
+| Berkeley rows in HCD CKAN table_a2 | 1,930 (post-dedup) | 2026-05-26 |
+| Berkeley rows in HCD CKAN table_a | 369 | 2026-05-26 |
+| D5 distinct housing projects (CPRA-derived) | 4,078 | 2026-05-26 |
+| D6 diff rows in_both_clean | 13.2% [needs re-check] | 2026-05-26 |
 
 ---
 
-## 9. Workflow Notes for AI Collaboration
+## Recent commits (last 10)
 
-### Tool Selection
+```
+f7e7ec8 notes(d6): CY 2024 APR cross-check confirms CY 2025 doubling is anomaly
+2c3b575 feat(d6): D5↔HCD diff notebook for Table A2 (CY 2018-2025)
+d706c9d feat(hcd): build_hcd_mirror.py — reproducible HCD APR mirror from CKAN
+f9409c9 feat(apr): D5 CPRA-first APR notebook — produces Table A2 CY2018-2025
+cb4ad7d data: add Berkeley CPRA BP fulfillment 2018-2025 + README
+644fa05 docs(co-rule): normalize transcript references; add 4 Chrome verification files
+f940ecd docs(co-rule): v2 master-permit rule + 10-point verification record
+af3dca8 merge: catch dev up to main (May 19-22 work)
+ea9d245 docs(apr): add notebook inventory — D4 confirmed canonical
+d337133 docs(apr): add baseline run report — Track 1 result
+```
 
-| Task Type | Use |
-|-----------|-----|
-| Execution / filesystem work / database queries | Claude Code (CC) |
-| Design conversations / multi-step planning / catching reasoning errors | Chat Claude |
-| Quick lookups / explaining concepts | Either |
-
-### State Management
-
-**The two AIs do NOT share state.** This `PROGRESS.md` is the bridge.
-
-| Rule | Why |
-|------|-----|
-| When state changes, update this doc in the same session | Prevents drift between reality and documentation |
-| When starting a new chat session, paste relevant sections to the AI | AI cannot read files; needs context in conversation |
-| Reference specific sections rather than asking AI to "remember" | AIs have no cross-session memory |
-
-### Session Handoff Checklist
-
-When ending a session that made changes:
-1. Update relevant sections of `PROGRESS.md`
-2. Commit changes to git (if appropriate)
-3. Note any open threads in "Open Work" section
-4. Record decisions in "Recent Decisions Log"
-
-When starting a new session:
-1. Read `PROGRESS.md` yourself first
-2. Paste TL;DR + relevant sections to AI
-3. Reference `docs/database_architecture_review_2026-04-30.md` for detailed analysis
-4. Check "Open Work" for priorities
+Pull current via `git log --oneline -10` for fresher state.
 
 ---
 
-## 10. Recent Decisions Log
+## How to resume
 
-*Most recent first. Include date, decision, and brief rationale.*
-
-### 2026-04-30
-
-- **Featured projects polygon approach:** Decided to feature 10-20 projects with hand-traced building footprints; remaining ~150 projects keep parcel-polygon or synthetic fallback.
-
-- **Parcel data authority confirmed:** Alameda County is the authoritative parcel data source; City of Berkeley parcel layer is a clipped derivative of County data.
-
-- **PDF corpus analysis commissioned:** To inform polygon extraction approach; results will be in `docs/pdf_corpus_analysis_2026-04-30.md`.
-
-- **Cross-directory survey completed:** Survey at `docs/cross_directory_survey_2026-04-30.md`; consolidation deferred to future session.
-
-- **Architecture review committed:** "One master DB, many tables" model selected. `berkeley.db` will absorb `berkeley_housing_analysis.db` tables over time. Rationale: reduces complexity, enables cross-domain queries, matches how civic data actually relates.
-
-- **MCP integration deferred:** Progress doc and session discipline are the priority. MCP can be revisited once workflows stabilize.
-
-- **Per-field provenance pattern selected:** `project_status_history` + `manual_overrides` tables chosen over fully attribute-level facts table. Rationale: simpler to implement, sufficient for current audit needs. **Decision made; not yet implemented.**
-
-- **Database inventory completed:** 12 databases catalogued. 3 marked obsolete (safe to delete), 2 marked dormant, 2 active, 3 staging/reference, 2 backups.
-
-### 2026-04-25
-
-- **Schema migration completed:** v1 → v2-style structure with versioning and 9-type geometry vocabulary.
-
-- **150 parcel polygons imported:** Into `project_geometries` table from `berkeley_parcels.csv` via APN matching.
-
-- **0 LE ROY APN recovered:** Was SKIP_NO_MATCH, recovered as `058 224402501` via Accela investigation.
-
-- **generate_kml.py rewritten:** Now reads from `project_geometries` table instead of flat CSV.
-
-- **NICAR tutorial button:** Merged dev → main and deployed to GitHub Pages.
+- **New chat-Claude session:** paste this PROGRESS.md plus any specific task context
+- **Next session priority:** pick from "Open follow-ons" above
+- **If Planning Module CPRA fulfillment has arrived:** jump to #3 (D7 scaffolding)
+- **If a recent commit's content is unclear:** run `git show <hash>` for full diff; commit messages are descriptive
+- **For methodology questions:** see `output/D6/methodology_notes.md` (auto-regenerated by running the D6 notebook)
+- **For the HCD mirror:** rebuild via `python scripts/build_hcd_mirror.py` (it's gitignored)
+- **For D5/D6 outputs:** rebuild via the notebooks (outputs gitignored)
 
 ---
 
-## Appendix A: File Locations Quick Reference
+## Recent decisions log
+
+*Most recent first. Carrying forward April entries from PROGRESS_legacy.*
+
+### 2026-05-26 — D6 commits and methodology revisions
+
+- **D5 Cell 7 CO_units bug fixed** — was summing UnitsAdded across master + REVs (double-counted because Berkeley populates cumulative not marginal). Corrected to use master only. See commit `f9409c9` Cell 7 bug-fix markdown
+- **D6 (D5↔HCD diff notebook) committed** as `04_reporting/D6_diff_d5_vs_hcd.ipynb` — outputs gitignored
+- **D6 methodology framing finalized as Option B** — drop specific 755/595 numbers, document patterns (base+bonus pairs, CY 2025 doubling) without claiming a derivation that doesn't reduce cleanly from row-level data
+- **Planning Module CPRA filed** to City of Berkeley
+
+### 2026-05-25 — HCD mirror + validation
+
+- **HCD CKAN mirror created** via `scripts/build_hcd_mirror.py`. All 12 APR tables pulled; 8 have Berkeley data; mirror is gitignored (regenerable). See commit `d706c9d`
+- **NotebookLM PDF audit cross-validates HCD CKAN mirror** — CY 2022/2023/2024 match to the unit; CY 2025 within 1 unit. Establishes HCD as a trustworthy oracle
+- **CY 2025 doubling characterized** as a Berkeley submission-level error (draft + final both loaded), 240 exact duplicates in A2 and 16 of 32 duplicates in A. Dedup logic added to `build_hcd_mirror.py`
+
+### 2026-05-24 — Database inventory and forensic diagnostic
+
+- **Full database inventory** (12 → 40 .db files; 28 mostly snapshots/backups + 2 zero-byte path-confusion stubs identified). 3 fossils safely deleted in commit `01032cd`
+- **Data-trust history note** committed at `notes/2026-05-24_data_trust_history.md`; documents three CC data-damage incidents and the defensive posture they justify
+
+### 2026-04-30 (carried forward from PROGRESS_legacy)
+
+- **Featured projects polygon approach:** 10-20 hand-traced footprints for tour features; remaining ~150 keep parcel-polygon or synthetic fallback
+- **Parcel data authority confirmed:** Alameda County is authoritative; City of Berkeley is a clipped derivative
+- **Architecture review committed:** "One master DB, many tables" model. `berkeley.db` will absorb `berkeley_housing_analysis.db` tables over time
+- **Per-field provenance pattern selected:** `project_status_history` + `manual_overrides` over fully attribute-level facts table
+- **Database inventory completed:** 12 databases catalogued
+
+### 2026-04-25 (carried forward from PROGRESS_legacy)
+
+- **Schema migration completed:** v1 → v2-style structure with versioning and 9-type geometry vocabulary
+- **150 parcel polygons imported** into `project_geometries` from `berkeley_parcels.csv`
+- **0 LE ROY APN recovered** as `058 224402501` via Accela investigation
+- **`generate_kml.py` rewritten** to read from `project_geometries` table instead of flat CSV
+- **NICAR tutorial button** merged dev → main and deployed
+
+---
+
+## Appendix A: File locations quick reference
 
 ```
 ~/berkeley-data/
-├── PROGRESS.md                          # This file
-├── databases/
-│   ├── berkeley.db                      # Master (50MB)
-│   ├── berkeley_housing_analysis.db     # Active housing (1.1MB)
+├── PROGRESS.md                          # This file (regenerable session-state artifact)
+├── PROGRESS_legacy_2026-04-30.md        # Prior version, preserved verbatim
+├── databases/                           # All .db files gitignored
+│   ├── berkeley.db                      # Master (50MB) — parcels/addresses/zoning/licenses
+│   ├── berkeley_housing_analysis.db     # Active v1 housing pipeline (1.1MB, 179 projects)
+│   ├── berkeley_housing_v2.db           # Active v2 normalized (1.9MB, 181 projects, 244 permits, 45 tables, 9 views)
+│   ├── hcd_apr_mirror.db                # HCD CKAN mirror (regenerable via scripts/build_hcd_mirror.py)
+│   ├── cic_recon_queue.db               # Scrape queue (URL discovery + scrape + record/processing status)
 │   ├── accela_reports.db                # Staging
-│   ├── berkeley_housing_apr.db          # Frozen APR
-│   ├── berkeley_address_centric.db      # To investigate
+│   ├── berkeley_housing_apr.db          # Frozen APR snapshot
+│   ├── berkeley_address_centric.db      # Materialized view (deferred decision)
 │   ├── berkeley_energy_use.db           # BESO data
-│   ├── berkeley_housing_v2.db           # Obsolete
-│   ├── berkeley_data.db                 # Obsolete
-│   ├── berkeley_housing_map.db          # Obsolete
-│   └── housing_projects.db              # Obsolete
-├── docs/
-│   ├── database_architecture_review_2026-04-30.md
-│   ├── berkeley_skyline.kml             # Canonical KML
-│   └── kml_versions/                    # 12 archived tours
+│   └── backups/, *_pre_*.db             # Pre-operation snapshots
+├── data/
+│   ├── raw/
+│   │   ├── cpra-downloads/              # Berkeley CPRA BP fulfillments 2018-2025 (XLSX + README)
+│   │   ├── accela_inspections/          # 92 JSONs, 6,303 inspection records
+│   │   ├── accela_record_status/        # 107 permits
+│   │   ├── accela_processing_status/    # 107 permits
+│   │   └── accela_url_discovery/        # 102 permits
+│   ├── reference/                       # alameda_lookup_complete.csv, berkeley_parcels.csv, etc.
+│   ├── processed/                       # FINAL.csv and downstream
+│   └── apr/2025/                        # v1 baseline APR outputs
+├── 04_reporting/
+│   ├── D4_hcd_apr_tables.ipynb          # Canonical APR notebook (v1, pre-refactor)
+│   ├── D5_apr_from_cpra.ipynb           # CPRA-first APR (committed f9409c9)
+│   └── D6_diff_d5_vs_hcd.ipynb          # D5↔HCD Table A2 diff (committed 2c3b575)
+├── output/
+│   ├── D5/                              # gitignored; rebuild via D5 notebook
+│   └── D6/                              # gitignored; rebuild via D6 notebook (includes methodology_notes.md)
 ├── scripts/
-│   ├── generate_kml.py                  # KML generator
-│   ├── accela_workflow.py               # Accela processing
-│   └── [12+ other active scripts]
-└── data/
-    ├── processed/
-    │   └── housing_projects_FINAL.csv   # Flat CSV export
-    └── reference/
-        └── berkeley_parcels.csv         # Parcel polygons source
+│   ├── build_hcd_mirror.py              # HCD CKAN mirror builder
+│   ├── generate_apr.py                  # v1 APR generator
+│   ├── generate_kml.py                  # KML generator from project_geometries
+│   ├── permit_role_classifier.py        # Permit role classifier
+│   ├── record_status_scraper.py         # Accela record_status (untracked)
+│   ├── processing_status_scraper.py     # Accela processing_status (untracked)
+│   └── README.md
+├── docs/
+│   ├── berkeley_skyline.kml             # Canonical KML
+│   ├── geometry.kml                     # Stable site URL
+│   ├── kml_versions/                    # Archive + keep_snapshot_2026-05-01.kml
+│   ├── tours/                           # Tour KMLs (see KML section above)
+│   ├── methodology/                     # Methodology docs
+│   ├── migration/                       # v1→v2 migration plan + report
+│   ├── letters/                         # CPRA drafts (untracked)
+│   └── database_architecture_review_2026-04-30.md
+├── notes/
+│   ├── 2026-05-24_data_trust_history.md
+│   ├── 2026-05-24_apr_workflow_audit.md
+│   ├── 2026-05-26_cy2024_apr_crosscheck.md
+│   ├── research_threads/temporal_flyby_imagery.md
+│   └── chrome_verifications/2026-05-25/
+└── analysis/audit_2026-05-16/           # Schema + valuation audit artifacts (untracked)
 ```
 
 ---
 
-## Appendix B: Key Table Schemas
+## Appendix B: Key table schemas
 
-### berkeley_housing_analysis.db.projects (57 columns)
+### v1: `berkeley_housing_analysis.db.projects` (58 columns)
 
-Key columns for common operations:
-
-| Column | Type | Notes |
-|--------|------|-------|
+| column | type | notes |
+|---|---|---|
 | `id` | INTEGER | Primary key |
 | `address_display` | TEXT | Canonical display address |
 | `apn` | TEXT | Format: `058 214901904` |
 | `units` | INTEGER | Total unit count |
 | `status` | TEXT | Pipeline status |
-| `latitude` | REAL | WGS84 |
-| `longitude` | REAL | WGS84 |
+| `latitude` / `longitude` | REAL | WGS84 |
 | `permits` | TEXT | Comma-separated permit numbers |
 | `is_uc_project` | INTEGER | 1 if UC Berkeley project |
+| `filed` / `entitled` / `bp_issued` / `co_date` | TEXT | Stage dates (sparse) |
+| `developer` / `architect` | TEXT | Sparse |
+| `vli_units` / `density_bonus` / `sb35_flag` / `sb330_flag` / `ab2011_flag` | INTEGER | Streamlining/affordability flags |
 
-### berkeley_housing_analysis.db.project_geometries
+### v2: `berkeley_housing_v2.db.projects` (11 columns)
 
-| Column | Type | Notes |
-|--------|------|-------|
-| `id` | INTEGER | Primary key |
-| `project_id` | INTEGER | FK to projects |
-| `geometry_type_id` | INTEGER | FK to vocabulary (1-9) |
-| `geojson` | TEXT | GeoJSON polygon |
-| `height_meters` | REAL | Building height |
-| `base_elevation_meters` | REAL | Ground elevation |
-| `source_document_id` | INTEGER | FK to source document |
-| `version_label` | TEXT | Version identifier |
-| `edited_by` | TEXT | Who edited |
-| `edit_notes` | TEXT | Edit description |
+| column | type | notes |
+|---|---|---|
+| `id` | INTEGER | PK |
+| `city_id` | INTEGER | FK → cities |
+| `canonical_address` | TEXT | Authoritative address |
+| `canonical_name` | TEXT | Project name (sparse) |
+| `normalized_address` | TEXT | For matching |
+| `latitude` / `longitude` | REAL | WGS84 |
+| `current_version_id` | INTEGER | FK → project_versions |
+| `current_stage_type_id` | INTEGER | FK → vocabulary_stage_types |
+| `created_at` / `updated_at` | TEXT | Provenance |
+
+### v2: `berkeley_housing_v2.db.permits` (17 columns)
+
+| column | type | notes |
+|---|---|---|
+| `id` | INTEGER | PK |
+| `project_id` | INTEGER | FK → projects |
+| `permit_number` | TEXT | e.g., `B2021-02225` |
+| `permit_type_id` / `permit_status_type_id` | INTEGER | FK → vocabulary |
+| `filed_date` / `issued_date` / `finaled_date` / `expires_date` | TEXT | Dates (filed: 119/244 populated; finaled: 60/244) |
+| `valuation` | REAL | Job valuation |
+| `source_url` / `description` / `notes` | TEXT | |
+| `source_system` / `source_permit_id` | TEXT | Provenance |
+
+### v2: `berkeley_housing_v2.db.project_geometries`
+
+| column | type | notes |
+|---|---|---|
+| `id` | INTEGER | PK |
+| `project_id` | INTEGER | FK |
+| `geometry_type_id` | INTEGER | FK → vocabulary (8 types: apn_parcel, building_footprint, manual_polygon, synthetic_footprint, etc.) |
+| `geojson` | TEXT | GeoJSON polygon, `[lon, lat]` order |
+| `height_meters` / `base_elevation_meters` | REAL | |
 | `is_current` | INTEGER | 1 if active version |
 | `superseded_by` | INTEGER | FK to replacement geometry |
-| `created_at` | TEXT | Timestamp |
-| `updated_at` | TEXT | Timestamp |
+| Provenance mixin: `source_document_id`, `asserted_by`, `asserted_at`, `confidence_type_id` | | |
 
-### berkeley.db.parcels
+### `berkeley.db.parcels` (Alameda County source)
 
-| Column | Type | Notes |
-|--------|------|-------|
+| column | type | notes |
+|---|---|---|
 | `APN` | TEXT | Format: `16-1428-2-2` |
-| `SitusAddre` | TEXT | Full situs address |
+| `SitusAddre` | TEXT | Situs address (truncated ArcGIS name) |
 | `the_geom` | TEXT | GeoJSON geometry |
-| `Latitude` | TEXT | (stored as text, needs cast) |
-| `Longitude` | TEXT | (stored as text, needs cast) |
+| `Latitude` / `Longitude` | TEXT | Stored as text, needs cast |
+
+### HCD CKAN `table_a2` (mirrored at `databases/hcd_apr_mirror.db`)
+
+70 columns mirroring HCD's APR Table A2 spec exactly. Key columns:
+
+- Identity: `JURIS_NAME`, `CNTY_NAME`, `YEAR`, `APN`, `STREET_ADDRESS`, `JURS_TRACKING_ID`, `UNIT_CAT`, `TENURE`
+- Entitlement income breakdown: `*_INCOME_DR`/`*_INCOME_NDR` for 7 income tiers + `ABOVE_MOD_INCOME`, plus `ENT_APPROVE_DT1`
+- BP income breakdown: `BP_*` parallel set + `BP_ISSUE_DT1`
+- CO income breakdown: `CO_*` parallel set + `CO_ISSUE_DT1`
+- Misc HCD fields: `APPROVE_SB35`, `DENSITY_BONUS_*`, `EXTR_LOW_INCOME_UNITS`, `INFILL_UNITS`, `DEM_DES_UNITS`, etc.
+- HCD-geocoded: `LATITUDE`, `LONGITUDE`, `STD_ADDRESS`, `SCORE`
+
+All columns stored as TEXT; caller-side numeric casting required.
+
+**Known quirks:**
+- HCD's column-name typo: `EXTREMELY_INCOME_NDR` (missing "LOW") — handle this in any unit-summation logic
+- Table I has `JURISDICITON` (HCD's typo for `JURISDICTION`)
+- Table F has `JURISDICTION_NAME` (not `JURISDICTION`)
 
 ---
 
-*End of PROGRESS.md — Last reviewed 2026-04-30*
+*End of PROGRESS.md — Regenerate by re-running the resumption checklist after substantive work.*

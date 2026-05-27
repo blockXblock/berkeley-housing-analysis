@@ -21,6 +21,25 @@ databases/
 output/D5/
 output/D6/
 
+# Scrape outputs and run artifacts (regenerable from scripts in scripts/)
+data/raw/accela_inspections/
+data/raw/accela_processing_status/
+data/raw/accela_record_status/
+data/raw/accela_status/
+data/raw/accela_url_discovery/
+logs/
+
+# Audit run outputs (regenerable from scripts in analysis/audit_2026-05-16/)
+analysis/audit_2026-05-16/*.txt
+analysis/audit_2026-05-16/*.csv
+
+# Accela scrape experiment HTML responses (large; regenerable)
+experiments/accela_scrape/response_*.html
+
+# Letter drafts (keep private; use docs/letters/sent_log.md for metadata)
+docs/letters/*.md
+!docs/letters/sent_log.md
+
 # Keep structure
 !outputs/.gitkeep
 

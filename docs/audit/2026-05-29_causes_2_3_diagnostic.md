@@ -133,39 +133,6 @@ are unaffected. Within in_both:
   unit values now match HCD's
 - Expect substantial in_both_clean increase in CY 2022-2025
 
-## Residual divergence in 8 matched cases — HCD methodology observation
-
-The Cause 2 floor fires on 502 negative-units masters; only 8 of 
-these appear in matched_pairs (the other 494 are in c_unmatched, 
-where D5 has no HCD match). For the 8 matched cases, HCD records 
-+1 unit while D5's pre-fix value was a multi-unit negative. The 
-fix brings D5 to 0; HCD remains at +1.
-
-Examples (CY 2024):
-- B2023-02685: D5 -26 → 0, HCD +1, |delta| 27 → 1
-- B2023-05812: D5 -4 → 0, HCD +1, |delta| 5 → 1
-- B2024-00117: D5 -3 → 0, HCD +1, |delta| 4 → 1
-- B2023-02001: D5 -1 → 0, HCD +1, |delta| 2 → 1
-- (4 more, same pattern)
-
-The fix improved each matched-row delta magnitude substantially 
-but didn't cross the ±0.5 agreement threshold, so these 8 remain 
-in in_both_unit_divergent. The categorical clean/divergent counts 
-in D7's reconciliation ledgers are unchanged.
-
-**What HCD's +1 represents:** for alteration permits that 
-significantly modify a multi-unit building (e.g., B2023-02685 is 
-an alteration of a 28-unit building), HCD records +1 unit. This 
-appears to reflect Berkeley's accounting of net legal units after 
-construction, a quantity not directly computable from CPRA's 
-UnitsAdded/UnitsRemoved fields. D5 cannot reproduce HCD's +1 
-from CPRA data alone.
-
-**Future workstream:** the bijection ledger could surface delta 
-magnitudes (not just categorical clean/divergent) so improvements 
-like this one are visible. The current ledger captures only the 
-agreement-threshold binary.
-
 ## Companion artifacts
 
 - D5 Cell 14 source change: fix(d5) commit

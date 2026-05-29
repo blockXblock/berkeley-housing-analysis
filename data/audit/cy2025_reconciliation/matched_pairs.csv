@@ -11,7 +11,7 @@ hcd_row_id,cpra_permit_number,address_hcd,address_cpra,tracking_id,co_units_hcd,
 1440,B2023-03018,3037 ELLIS St,3037 ELLIS St,B2023-03018,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2025
 1441,B2023-04400,1215 DELAWARE St,1215 DELAWARE St,B2023-04400,1.0,0.0,0.0,0.0,False,True,False,tier_1_tracking_id,True,2025
 1442,B2023-05794,948 FRESNO Ave,948 FRESNO Ave,B2023-05794,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2025
-1443,B2023-05812,1817 SIXTY-SECOND St,1817 SIXTY-SECOND St,B2023-05812,1.0,-4.0,0.0,0.0,False,True,False,tier_1_tracking_id,True,2025
+1443,B2023-05812,1817 SIXTY-SECOND St,1817 SIXTY-SECOND St,B2023-05812,1.0,0.0,0.0,0.0,False,True,False,tier_1_tracking_id,True,2025
 1444,B2024-01247,1619 EDITH St,1619 EDITH St,B2024-01247,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2025
 1445,B2024-01337,1280 BANCROFT Way,1280 BANCROFT Way,B2024-01337,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2025
 1446,B2024-01931,1228 MONTEREY Ave,1228 MONTEREY Ave,B2024-01931,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2025
@@ -200,5 +200,5 @@ hcd_row_id,cpra_permit_number,address_hcd,address_cpra,tracking_id,co_units_hcd,
 1973,B2024-00257,2323 SEVENTH ST,2323 SEVENTH St,B2024-00257,0.0,0.0,2.0,2.0,True,True,True,tier_1_tracking_id,True,2025
 1505,B2024-05515,726 NEILSON St,726 NEILSON St,B2024-01121 / B2024-05515,1.0,0.0,0.0,0.0,False,True,False,tier_2_apn_current,True,2025
 1522,B2022-04242,2317 CHANNING Way,2317 CHANNING Way,ZP2024-0033 / B2022-04242,0.0,0.0,0.0,17.0,True,False,False,tier_2_apn_current,True,2025
-1571,B2024-00117,1208 DELAWARE St,1202 DELAWARE St,B2024-00243 / B2024-00117,1.0,-3.0,0.0,0.0,False,True,False,tier_2_apn_current,True,2025
-1698,B2025-03812,124 AVENIDA DR,124 AVENIDA Dr,B2025-00609 / B2025-03812,0.0,0.0,1.0,-1.0,True,False,False,tier_2_apn_current,True,2025
+1571,B2024-00117,1208 DELAWARE St,1202 DELAWARE St,B2024-00243 / B2024-00117,1.0,0.0,0.0,0.0,False,True,False,tier_2_apn_current,True,2025
+1698,B2025-03812,124 AVENIDA DR,124 AVENIDA Dr,B2025-00609 / B2025-03812,0.0,0.0,1.0,0.0,True,False,False,tier_2_apn_current,True,2025

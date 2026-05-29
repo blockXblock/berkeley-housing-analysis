@@ -47,7 +47,7 @@ hcd_row_id,cpra_permit_number,address_hcd,address_cpra,tracking_id,co_units_hcd,
 1312,B2020-01212,151 Tunnel Rd,151 TUNNEL Rd,B2020-01212,1.0,0.0,0.0,0.0,False,True,False,tier_1_tracking_id,True,2024
 1313,B2024-01247,1619 Edith St,1619 EDITH St,B2024-01247,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2024
 1314,B2022-03940,1625 SEVENTH St,1625 SEVENTH St,B2022-03940,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2024
-1315,B2023-05812,1817 Sixty-Second St,1817 SIXTY-SECOND St,B2023-05812,0.0,0.0,1.0,-4.0,True,False,False,tier_1_tracking_id,True,2024
+1315,B2023-05812,1817 Sixty-Second St,1817 SIXTY-SECOND St,B2023-05812,0.0,0.0,1.0,0.0,True,False,False,tier_1_tracking_id,True,2024
 1316,B2023-04736,2221 Carleton St,2221 CARLETON St,B2023-04736,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2024
 1317,B2022-04803,2516 Mathews St,2516 MATHEWS St,B2022-04803,1.0,0.0,0.0,0.0,False,True,False,tier_1_tracking_id,True,2024
 1318,B2022-01835,1725 BERKELEY Way,1725 BERKELEY Way,B2022-01835,1.0,-1.0,0.0,0.0,False,True,False,tier_1_tracking_id,True,2024
@@ -135,14 +135,14 @@ hcd_row_id,cpra_permit_number,address_hcd,address_cpra,tracking_id,co_units_hcd,
 1460,B2021-03801,1380 GILMAN,1380 GILMAN St,B2021-03801,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2024
 1461,B2023-03756,1381 Ada St,1381 ADA St,B2023-03756,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2024
 1462,B2022-00473,1408 Edith St,1408 EDITH St,B2022-00473,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2024
-1464,B2023-02001,1509 McGee Ave,1509 MCGEE Ave,B2023-02001,0.0,0.0,1.0,-1.0,True,False,False,tier_1_tracking_id,True,2024
+1464,B2023-02001,1509 McGee Ave,1509 MCGEE Ave,B2023-02001,0.0,0.0,1.0,0.0,True,False,False,tier_1_tracking_id,True,2024
 1465,B2023-05250,1514 Blake St,1514 BLAKE St,B2023-05250,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2024
 1466,B2024-01316,1570 Le Roy Ave,1570 LE ROY Ave,B2024-01316,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2024
 1467,B2023-02002,1630 Posen Ave,1630 POSEN Ave,B2023-02002,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2024
 1468,B2020-01101,1712 M L King Jr Way,1712 M L KING JR Way,B2020-01101,1.0,0.0,0.0,0.0,False,True,False,tier_1_tracking_id,True,2024
 1469,B2023-04429,1724 La Vereda Rd,1724 LA VEREDA Rd,B2023-04429,1.0,1.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2024
 1470,B2023-02152,2335 Fifth St,2335 FIFTH St,B2023-02152,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2024
-1471,B2023-02685,2430 Prospect St,2430 PROSPECT St,B2023-02685,1.0,-26.0,1.0,-26.0,False,False,False,tier_1_tracking_id,True,2024
+1471,B2023-02685,2430 Prospect St,2430 PROSPECT St,B2023-02685,1.0,0.0,1.0,0.0,False,False,False,tier_1_tracking_id,True,2024
 1472,B2023-05281,2436 Channing Way,2436 CHANNING Way,B2023-05281,0.0,0.0,2.0,2.0,True,True,True,tier_1_tracking_id,True,2024
 1473,B2024-02927,2800 M L King Jr Way,2800 M L KING JR Way,B2024-02927,0.0,0.0,2.0,2.0,True,True,True,tier_1_tracking_id,True,2024
 1474,B2023-01770,766 Vincente Ave,766 VINCENTE Ave,B2023-01770,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2024
@@ -181,7 +181,7 @@ hcd_row_id,cpra_permit_number,address_hcd,address_cpra,tracking_id,co_units_hcd,
 1223,B2024-05515,726 Neilson St,726 NEILSON St,B2024-01121 / B2024-05515,0.0,0.0,1.0,0.0,True,False,False,tier_2_apn_current,True,2024
 1288,B2023-00117,1027 HEINZ,1025 HEINZ Ave,B2022-02577 / B2023-00117,1.0,0.0,0.0,0.0,False,True,False,tier_2_apn_current,True,2024
 1302,B2023-04389,469 Kentucky Ave,469 KENTUCKY Ave,B2023-04472 / B2023-04389,1.0,0.0,1.0,0.0,False,False,False,tier_2_apn_current,True,2024
-1308,B2024-00117,1208 Delaware St,1202 DELAWARE St,B2024-00243 / B2024-00117,0.0,0.0,1.0,-3.0,True,False,False,tier_2_apn_current,True,2024
+1308,B2024-00117,1208 Delaware St,1202 DELAWARE St,B2024-00243 / B2024-00117,0.0,0.0,1.0,0.0,True,False,False,tier_2_apn_current,True,2024
 1361,B2024-04235,1205 Kains Ave,1205 KAINS Ave,B2024-02503 / B2024-04235,0.0,0.0,1.0,0.0,True,False,False,tier_2_apn_current,True,2024
 1407,B2019-05608,1951 SHATTUCK Ave,1951 SHATTUCK Ave,B2021-04893 / B2019-05608,163.0,163.0,0.0,0.0,True,True,True,tier_2_apn_current,True,2024
 1489,B2023-01905,1423 Acroft Ct,1423 ACROFT Ct,B2021-01581 / B2023-01905,1.0,1.0,0.0,0.0,True,True,True,tier_2_apn_current,True,2024

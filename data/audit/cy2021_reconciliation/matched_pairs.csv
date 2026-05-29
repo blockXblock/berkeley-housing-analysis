@@ -3,7 +3,7 @@ hcd_row_id,cpra_permit_number,address_hcd,address_cpra,tracking_id,co_units_hcd,
 404,B2021-00336,1894 Harmon,1894 HARMON St,B2021-00336,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2021
 405,B2021-02411,2304 Russell,2304 RUSSELL St,B2021-02411,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2021
 406,B2018-02534,2314 Ellsworth,2314 ELLSWORTH St,B2018-02534,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2021
-407,B2020-01236,2629 Woolsey,2629 WOOLSEY St,B2020-01236,1.0,-1.0,0.0,0.0,False,True,False,tier_1_tracking_id,True,2021
+407,B2020-01236,2629 Woolsey,2629 WOOLSEY St,B2020-01236,1.0,0.0,0.0,0.0,False,True,False,tier_1_tracking_id,True,2021
 408,B2020-02678,2335 California,2335 CALIFORNIA St,B2020-02678,1.0,1.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2021
 409,B2020-01409,2325 Sixth,2325 SIXTH St,B2020-01409,0.0,0.0,2.0,1.0,True,False,False,tier_1_tracking_id,True,2021
 412,B2020-03911,2023 Shattuck,2023 SHATTUCK Ave,B2020-03911,0.0,0.0,48.0,0.0,True,False,False,tier_1_tracking_id,True,2021
@@ -60,7 +60,7 @@ hcd_row_id,cpra_permit_number,address_hcd,address_cpra,tracking_id,co_units_hcd,
 478,B2017-01520,1505 Arch,1505 ARCH St,B2017-01520,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2021
 479,B2019-04885,1612 Spruce,1612 SPRUCE St,B2019-04885,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2021
 480,B2020-01519,1620 Delaware,1620 DELAWARE St,B2020-01519,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2021
-481,B2021-00470,1639 Julia,1639 JULIA St,B2021-00470,0.0,0.0,1.0,-1.0,True,False,False,tier_1_tracking_id,True,2021
+481,B2021-00470,1639 Julia,1639 JULIA St,B2021-00470,0.0,0.0,1.0,0.0,True,False,False,tier_1_tracking_id,True,2021
 482,B2021-02612,1720 Sonoma,1720 SONOMA Ave,B2021-02612,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2021
 483,B2021-00818,1813 Parker,1813 PARKER St,B2021-00818,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2021
 486,B2021-01114,1879 Catalina,1879 CATALINA Ave,B2021-01114,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2021

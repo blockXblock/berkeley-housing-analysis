@@ -38,6 +38,7 @@ hcd_row_id,cpra_permit_number,address_hcd,address_cpra,tracking_id,co_units_hcd,
 1296,B2019-05318,1330 Sumit Rd,1330 SUMMIT Rd,B2019-05318,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2024
 1297,B2023-01703,35 Hillcrest Rd,35 HILLCREST Rd,B2023-01703,1.0,0.0,1.0,0.0,False,False,False,tier_1_tracking_id,True,2024
 1300,B2024-02148,917 Channing Way,917 CHANNING Way,B2024-02148,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2024
+1303,B2024-00721,805 Jones St,805 JONES St,B2024-00721,0.0,0.0,2.0,2.0,True,True,True,tier_1_tracking_id,True,2024
 1306,B2024-03947,1132 CARLETON St,1132 CARLETON St,B2024-03947,0.0,0.0,1.0,0.0,True,False,False,tier_1_tracking_id,True,2024
 1307,B2022-02658,1134 Ward St,1134 WARD St,B2022-02658,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2024
 1309,B2024-01337,1280 Bancroft Way,1280 BANCROFT Way,B2024-01337,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2024
@@ -70,6 +71,7 @@ hcd_row_id,cpra_permit_number,address_hcd,address_cpra,tracking_id,co_units_hcd,
 1343,B2024-00594,1329 Curtis St,1329 CURTIS St,B2024-00594,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2024
 1344,B2022-05670,1340 QUEENS Rd,1340 QUEENS Rd,B2022-05670,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2024
 1345,B2023-00762,1933 Grant St,1933 GRANT St,B2023-00762,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2024
+1346,B2024-00797,805 Jones St,805 JONES St,B2024-00797,0.0,0.0,2.0,2.0,True,True,True,tier_1_tracking_id,True,2024
 1347,B2023-02897,2164 OREGON St,2164 OREGON St,B2023-02897,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2024
 1348,B2020-04505,2215 ROOSEVELT,2215 ROOSEVELT Ave,B2020-04505,1.0,0.0,0.0,0.0,False,True,False,tier_1_tracking_id,True,2024
 1349,B2024-03483,2223 Stuart St,2223 STUART St,B2024-03483,0.0,0.0,1.0,0.0,True,False,False,tier_1_tracking_id,True,2024
@@ -114,6 +116,7 @@ hcd_row_id,cpra_permit_number,address_hcd,address_cpra,tracking_id,co_units_hcd,
 1417,B2024-04198,2555 Sacramento St,2555 SACRAMENTO St,B2024-04198,0.0,0.0,1.0,0.0,True,False,False,tier_1_tracking_id,True,2024
 1419,B2021-03815,2631 WEBSTER St,2631 WEBSTER St,B2021-03815,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2024
 1420,B2022-01864,2792 Shasta Rd,2792 SHASTA Rd,B2022-01864,0.0,0.0,1.0,0.0,True,False,False,tier_1_tracking_id,True,2024
+1421,B2023-03743,1200 DWIGHT Way,1200 DWIGHT Way,B2023-03743,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2024
 1422,B2017-03769,1415 Fifth St,1415 FIFTH St,B2017-03769,1.0,0.0,0.0,0.0,False,True,False,tier_1_tracking_id,True,2024
 1423,B2024-00701,805 Jones St,805 JONES St,B2024-00701,0.0,0.0,2.0,2.0,True,True,True,tier_1_tracking_id,True,2024
 1424,B2020-03820,1071 Page St,1071 PAGE St,B2020-03820,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2024
@@ -162,6 +165,8 @@ hcd_row_id,cpra_permit_number,address_hcd,address_cpra,tracking_id,co_units_hcd,
 2075,B2022-04111,2830 Cherry St,2830 CHERRY St,B2022-04111,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2024
 2076,B2023-03018,3037 Ellis St,3037 ELLIS St,B2023-03018,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2024
 2077,B2020-02422,3136 Ellis St,3136 ELLIS St,B2020-02422,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2024
+2078,B2023-04171,98 Avenida Dr,98 AVENIDA Dr,B2023-04171,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2024
+2079,B2021-05014,2421 Fifth St,2421 FIFTH St,B2021-05014,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2024
 2082,B2024-01924,1598 University Ave,1598 UNIVERSITY Ave,B2024-01924,0.0,0.0,207.0,207.0,True,True,True,tier_1_tracking_id,True,2024
 2087,B2022-03577,1216 Haskell St,1216 HASKELL St,B2022-03577,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2024
 2088,B2021-03651,1310 DERBY,1310 DERBY St,B2021-03651,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2024
@@ -175,7 +180,6 @@ hcd_row_id,cpra_permit_number,address_hcd,address_cpra,tracking_id,co_units_hcd,
 2097,B2022-00248,1428 DELAWARE St,1428 DELAWARE St,B2022-00248,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2024
 1223,B2024-05515,726 Neilson St,726 NEILSON St,B2024-01121 / B2024-05515,0.0,0.0,1.0,0.0,True,False,False,tier_2_apn_current,True,2024
 1288,B2023-00117,1027 HEINZ,1025 HEINZ Ave,B2022-02577 / B2023-00117,1.0,0.0,0.0,0.0,False,True,False,tier_2_apn_current,True,2024
-1301,B2023-05397-REV01,1614 SIXTH St,1614 SIXTH St,ZP2024-0008 / B2023-05397-REV01,0.0,0.0,0.0,0.0,True,True,True,tier_2_apn_current,True,2024
 1302,B2023-04389,469 Kentucky Ave,469 KENTUCKY Ave,B2023-04472 / B2023-04389,1.0,0.0,1.0,0.0,False,False,False,tier_2_apn_current,True,2024
 1308,B2024-00117,1208 Delaware St,1202 DELAWARE St,B2024-00243 / B2024-00117,0.0,0.0,1.0,-3.0,True,False,False,tier_2_apn_current,True,2024
 1361,B2024-04235,1205 Kains Ave,1205 KAINS Ave,B2024-02503 / B2024-04235,0.0,0.0,1.0,0.0,True,False,False,tier_2_apn_current,True,2024

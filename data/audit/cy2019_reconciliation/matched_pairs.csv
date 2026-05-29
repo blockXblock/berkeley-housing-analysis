@@ -92,6 +92,7 @@ hcd_row_id,cpra_permit_number,address_hcd,address_cpra,tracking_id,co_units_hcd,
 1169,B2017-02782,791 Hilldale,791 HILLDALE Ave,B2017-02782,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2019
 1170,B2018-00015,809 Folger,809 FOLGER Ave,B2018-00015,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2019
 1171,B2018-03653,926 Channing,926 CHANNING Way,B2018-03653,1.0,0.0,1.0,0.0,False,False,False,tier_1_tracking_id,True,2019
+1172,B2018-03577,1446 Fifth St,1446 FIFTH St,B2018-03577,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2019
 1174,B2018-05107,1237 Channing,1237 CHANNING Way,B2018-05107,0.0,0.0,1.0,0.0,True,False,False,tier_1_tracking_id,True,2019
 1177,B2018-01961,1430 Acton St,1430 ACTON St,B2018-01961,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2019
 1179,B2018-02645,1732 Seventh,1732 SEVENTH St,B2018-02645,0.0,0.0,1.0,0.0,True,False,False,tier_1_tracking_id,True,2019
@@ -99,7 +100,9 @@ hcd_row_id,cpra_permit_number,address_hcd,address_cpra,tracking_id,co_units_hcd,
 1182,B2016-01284,1915 Virginia,1915 VIRGINIA St,B2016-01284,1.0,0.0,0.0,0.0,False,True,False,tier_1_tracking_id,True,2019
 1183,B2018-03289,2130 Derby,2130 DERBY St,B2018-03289,1.0,1.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2019
 1184,B2016-02733,2152 Russell,2152 RUSSELL St,B2016-02733,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2019
+1186,B2018-01574,2212 Tenth,2212 TENTH St,B2018-01574,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2019
 1187,B2019-02824,739 Channing,739 CHANNING Way,B2019-02824,0.0,0.0,4.0,0.0,True,False,False,tier_1_tracking_id,True,2019
+1188,B2018-00016,811 Folger,811 FOLGER Ave,B2018-00016,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2019
 1189,B2015-00442,85 Parnassus,85 PARNASSUS RD,B2015-00442,1.0,0.0,0.0,0.0,False,True,False,tier_1_tracking_id,True,2019
 1190,B2018-04738,1004 Jones,1004 JONES St,B2018-04738,1.0,1.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2019
 1191,B2017-03440,1121 Delaware St,1121 DELAWARE St,B2017-03440,1.0,0.0,0.0,0.0,False,True,False,tier_1_tracking_id,True,2019
@@ -126,6 +129,7 @@ hcd_row_id,cpra_permit_number,address_hcd,address_cpra,tracking_id,co_units_hcd,
 1251,B2017-05247,1420 Dwight,1420 DWIGHT Way,B2017-05247,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2019
 1252,B2017-02462,1421 Ashby,1421 ASHBY Ave,B2017-02462,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2019
 1253,B2017-02347,1432 Spruce St,1432 SPRUCE St,B2017-02347,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2019
+1254,B2018-03127,1446 Fifth St,1446 FIFTH St,B2018-03127,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2019
 1255,B2018-03893,1461 Curtis,1461 CURTIS St,B2018-03893,1.0,1.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2019
 1256,B2019-04236,1615 Francisco,1615 FRANCISCO St,B2019-04236,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2019
 1257,B2018-00510,1516 Le Roy,1516 LE ROY Ave,B2018-00510,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2019
@@ -163,6 +167,7 @@ hcd_row_id,cpra_permit_number,address_hcd,address_cpra,tracking_id,co_units_hcd,
 2042,B2018-02318,1234 Burnett St,1234 BURNETT St,B2018-02318,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2019
 2044,B2019-01663,1331 Sixty-Seventh,1331 SIXTY-SEVENTH St,B2019-01663,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2019
 2045,B2018-05114,1410 Hawthrone Terrace,1410 HAWTHORNE Ter,B2018-05114,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2019
+2046,B2019-01863,1444 Fifth,1444 FIFTH St,B2019-01863,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2019
 2047,B2017-01520,1505 Arch,1505 ARCH St,B2017-01520,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2019
 2049,B2018-01352,1611 Ninth St,1611 NINTH St,B2018-01352,1.0,0.0,0.0,0.0,False,True,False,tier_1_tracking_id,True,2019
 2050,B2017-03281,1612 Virginia St,1612 VIRGINIA St,B2017-03281,1.0,0.0,0.0,0.0,False,True,False,tier_1_tracking_id,True,2019
@@ -175,7 +180,9 @@ hcd_row_id,cpra_permit_number,address_hcd,address_cpra,tracking_id,co_units_hcd,
 2064,B2018-01153,2323 Eighth,2323 EIGHTH St,B2018-01153,0.0,0.0,1.0,0.0,True,False,False,tier_1_tracking_id,True,2019
 2065,B2018-04394,2633 Marin,2633 MARIN Ave,B2018-04394,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2019
 2066,B2018-03492,2732 Claremont,2732 CLAREMONT Blvd,B2018-03492,1.0,1.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2019
+2069,B2018-00018,815 Folger,815 FOLGER Ave,B2018-00018,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2019
 2140,B2017-03691,681 Spruce,681 SPRUCE St,B2017-03691,1.0,1.0,0.0,0.0,True,True,True,tier_1_tracking_id,True,2019
+2142,B2018-00017,813 Folger,813 FOLGER Ave,B2018-00017,0.0,0.0,1.0,1.0,True,True,True,tier_1_tracking_id,True,2019
 1050,B2019-00047,1526 Sixth,1526 SIXTH St,ZP2018-0086 / B2019-00047,0.0,0.0,1.0,0.0,True,False,False,tier_2_apn_current,True,2019
 1067,B2018-02936,1419 Tenth,1419 TENTH St,B2018-04427 / B2018-02936,1.0,0.0,1.0,0.0,False,False,False,tier_2_apn_current,True,2019
 1102,B2018-02626,2815 Channing,2813 CHANNING Way,B2018-02623 / B2018-02626,0.0,0.0,3.0,2.0,True,False,False,tier_2_apn_current,True,2019

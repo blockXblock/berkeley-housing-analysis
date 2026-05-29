@@ -78,7 +78,7 @@ the primary bottleneck.
 ## Late April 2026: v2 Schema Designed
 
 Normalized v2 designed and migrated:
-- 34 tables, 36 indexes
+- 34 core tables, 18 vocabulary tables, 9 backward-compat views, 36 indexes
 - Vocabulary tables replacing hardcoded enums
 - Provenance mixin (source_document_id, asserted_by, asserted_at,
   confidence_type_id) on fact-bearing tables

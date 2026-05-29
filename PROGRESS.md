@@ -268,6 +268,20 @@ Pull current via `git log --oneline -10` for fresher state.
 
 *Most recent first. Carrying forward April entries from PROGRESS_legacy.*
 
+### 2026-05-28 — REV summation fix + CY 2024 bijection ledger
+
+- **REV cumulative-restatement bug diagnosed and fixed** — D5 Cell 14 was summing `UnitsAdded`/`UnitsRemoved` across master + all finaled REVs, multiplying net co_units by (1 + k_revs). Berkeley restates the cumulative count on every family row; fix is master-only aggregation (`co_units = bp_units`). Verified across all 56 CY 2024 masters with ≥2 finaled REVs (54 identical across rows, 2 differ only in sporadic blank NumberUnits, 0 genuinely marginal). Committed `22c5864`; diagnostic at `docs/audit/2026-05-28_adu_diagnostic.md` (commit `df17e7a`)
+- **Correction to the 2026-05-26 entry below** — that entry claimed this CO_units bug was fixed in `f9409c9` ("Corrected to use master only"). Today's diagnostic proved that false: the summation was still live in committed code through `85f95f3`. The fix actually landed today in `22c5864`. (Verify-artifacts discipline caught the stale claim.)
+- **Impact concentrated in CY 2024 (−6,001 net co_units, 6,498→497) and CY 2025 (−5,233, 5,494→261)**; CY 2018–2023 essentially unchanged. 29 CY 2024 in_both rows moved unit_divergent→clean; 43 CY 2025 similarly. d5_only membership unchanged
+- **CY 2024 bijection ledger constructed** — row-level match of Berkeley's HCD Table A2 (228 rows / 708 CO / 731 BP) to D5's CY 2024 output (1,156 masters). 100% of HCD's CO and BP units classified: Tier 1 tracking-ID (534/695), Tier 2 APN (166/4), multi-row same-APN (2/28), year-shift (6/4), no-presence (0/0). Artifacts at `data/audit/cy2024_reconciliation/` (matched_pairs 182, h_unmatched_t2 8, c_unmatched_t2 974, README)
+- **4 under-reports persist post-fix** — 2328 Channing (12u), 2512 Regent (9u), 2028 Essex (1u), 707 Cragmont (1u); 23 net units present in CPRA but absent from HCD any year. Confirmed via tracking-ID, APN, and address cross-checks. In the `c_unmatched_t2` residual
+- **Parcel-collapse undercounting identified in D5** — 28 BP units in CY 2024 (expected larger in CY 2025). D5's one-master-per-parcel grouping drops sibling New-construction permits (separate structures, not REV children). E.g. 805 Jones (3×2-unit), 2421 Fifth, 1330/1340 Haskell. Structural; deferred fix workstream
+- **v1 `generate_apr.py` verified as a curated-projects tracking tool (~21 projects), not a row-level APR reproduction** — runs clean against the May-3 `berkeley_housing_analysis.db`, emits 786 CO / 550 BP / 945 entitled; the 786≈708 closeness is partly the RHNA-exempt UC 1950 Oxford (300u). Not authoritative for APR reconciliation
+- **CY 2025 CPRA coverage verified complete** — 4,195 issued + 3,689 finaled permits across all 12 months, no year-end taper. April-2026 fulfillment captured the full year; CY 2025 bijection is unblocked
+- **Commits on dev, not pushed:** `df17e7a` (diagnostic doc), `22c5864` (D5 fix)
+- **Documentation bundle pending commit (not yet staged):** `docs/audit/2026-05-28_session_summary.md`, `docs/audit/2026-05-28_next_session_priming.md`, and the `data/audit/cy2024_reconciliation/` ledger (README + 3 CSVs). *(Note: no `project_history` doc was created this session — the third bundle artifact is the reconciliation ledger.)*
+- **Collateral from verification runs awaiting cleanup:** `data/apr/2024/*` (v1 run output), `04_reporting/D6_diff_d5_vs_hcd.ipynb` (Phase B rerun), untracked `2026-05-28.md` / `notes/cc_prompts/`
+
 ### 2026-05-26 — D6 commits and methodology revisions
 
 - **D5 Cell 7 CO_units bug fixed** — was summing UnitsAdded across master + REVs (double-counted because Berkeley populates cumulative not marginal). Corrected to use master only. See commit `f9409c9` Cell 7 bug-fix markdown

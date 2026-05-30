@@ -1,182 +1,134 @@
-# Next Session Priming — written 2026-05-29
+# Next Session Priming — written 2026-05-29, revised 2026-05-30 morning
 
-Read this first. It orients the next session to where things stand and
-what to do, without re-deriving context. Full narrative in
-`docs/audit/2026-05-29_session_summary.md`; technical detail in
-`docs/audit/2026-05-29_parcel_collapse_diagnostic.md` and
-`docs/audit/2026-05-29_causes_2_3_diagnostic.md`.
+Read this first. It orients today's session to where things stand and what to do, without re-deriving context. Full narrative in `docs/audit/2026-05-29_session_summary.md`; technical detail in `docs/audit/2026-05-29_causes_2_3_diagnostic.md` and `docs/audit/2026-05-29_parcel_collapse_diagnostic.md`.
 
 ## First action: verify, don't trust
 
-Per "CC summaries can be wrong; verify artifacts" — confirm the git state
-before acting on anything below:
-
-```
-git log --oneline -3
+Per "CC summaries can be wrong; verify artifacts" — confirm the git state before acting on anything below:
+git log --oneline -5
 git status
-```
 
-Expected at session start (if nothing changed in between):
-- **HEAD on `dev` at `17719b4`** (`feat(d7): regenerate reconciliation
-  ledgers post Cause 2/3 fix`).
-- **`origin/dev` at `17719b4`** (today's three pushes are synchronized).
-- **`main` at `e62543a`** — **19 commits behind `dev`** (deferred FF
-  decision: 13 from yesterday's session close + 6 from today).
-- Working tree should hold only standing collateral: D6 notebook M, D7
-  notebook M, `data/apr/2024/*` M, and three untracked items
-  (`2026-05-28.md`, `data/apr/2024/developer_summary_2024.csv`,
-  `notes/cc_prompts/`).
+Expected at start of today's session:
+- HEAD on dev at cc38a99 (docs(audit): session summary and next-session priming)
+- dev = origin/dev (fully synced after yesterday's 4 pushes)
+- main at e62543a, 20 commits behind dev (deferred fast-forward)
+- Working tree: only standing collateral (D6 notebook M, D7 notebook M, data/apr/2024/* M, three untracked items)
 
-If HEAD differs, reconcile before proceeding — do not assume this doc is
-current.
+If HEAD differs, reconcile before proceeding — do not assume this doc is current.
 
-## Tomorrow's three tracks, in priority order
+## Architecture decision revised this morning
 
-### Track 1 — Repository cleanup (the size workstream)
+Yesterday's Track 3 plan landed on **CSV-canonical, SQLite-derived** for CPRA data. After reviewing past project conversations and Simon Willison's Datasette publication patterns, this is reversed: **SQLite is canonical and committed; Datasette-published via existing Fly.io infrastructure; CSV is an auxiliary export.**
 
-Forensic findings give precise targets. Phase B should:
+Rationale: the project's outreach pitch explicitly promises Datasette and SQL access for data journalists. The Fly.io deployment infrastructure already exists (used for the household inventory and the berkeleyshops-audience system). The `datasette-publish-fly` plugin is installed. Datasette Lite gives journalists zero-install browser access via WebAssembly. CSV-canonical would have inserted a build step between clone and use — exactly the friction Simon's pattern is designed to eliminate.
 
-- **Remove `docs/berkeley-flyover.mp4.backup-2026-05-03` from tree**
-  (73 MB, accidentally tracked because `.backup-` suffix escapes
-  `*.mp4` gitignore) + add an explicit `.gitignore` rule for `*.backup-*`
-  or similar.
-- **`git gc --aggressive`** — one-time consolidation. Current state:
-  3,020 loose objects, 0 packs. Estimated on-disk savings: ~10–15%
-  (modest, since the bulk content is already-compressed video/PDF).
-- **Identify canonical alameda lookup CSV** (probably
-  `alameda_lookup_complete.csv`, 59 MB). Move the other two
-  (`address_lookup_normalized.csv` 51 MB, `lookup_corrected.csv` 35 MB)
-  out of tree and out of history. Estimated savings: ~145 MB tracked +
-  ~145 MB history.
-- **Externalize `docs/videos/*.mp4`** (100 MB tracked) and
-  **`site-by-site/*.pdf`** (120 MB tracked) to the existing R2/IA mirror
-  infrastructure (pattern from the `pdf/` directory).
-- **`git filter-repo`** to remove dead `berkeley-flyover.mp4` historical
-  versions (258 MB across 5 dead blobs) and other large dead blobs
-  surfaced by the top-30 analysis.
-- **Verify clone size before/after**. Target trajectory:
-  553 MB → ~150 MB → eventually ~50 MB after full externalization.
+Track 2 (path portability + dependencies) folds into Track 3 because the D5/D6/D7 update to read SQLite is itself the portability fix.
 
-Reference: `docs/audit/2026-05-29_session_summary.md` "Forensic findings
-from the repo-size investigation" section.
+## Today's tracks, in priority order
 
-**History rewrite is safe given today's traffic data**: 492 clones from
-176 unique cloners but only 1 unique web visitor in the last 14 days =
-predominantly bot traffic; human cost of invalidating clones is
-negligible.
+### Track 3 — CPRA SQLite as canonical, Datasette-published (highest priority, absorbs Track 2)
 
-### Track 2 — Path portability + dependencies (W1 + W2)
+**Architecture:** SQLite canonical and committed. CSV auxiliary export (also committed for grep/Excel access). Excel originals stay in `data/raw/cpra-downloads/` for provenance. SQLite gets Datasette-published via Fly.io.
 
-Three notebooks (D5/D6/D7 setup cells) plus ~5 active scripts plus
-README line 15 plus `00_config/config.yaml` line 31. **Adopt the
-`build_hcd_mirror.py` pattern**:
-`REPO_ROOT = Path(__file__).resolve().parent.parent` (scripts), or
-equivalent walk-up for notebooks (`Path.cwd()` ascend until a marker
-file is found). Verify D5 produces byte-identical output post-fix.
+**Three access paths for users:**
 
-**Add `openpyxl` to `requirements.txt`** — currently missing; D5's
-`pd.read_excel(*.xlsx)` would fail on a fresh install with ImportError.
-Pin Python ≥3.10 (notebooks were last run on 3.12.8; nothing in code
-requires that exact version). Optionally prune legacy entries
-(matplotlib/folium/plotly/sqlite-utils/tabulate) not used by the D-series
-— harmless either way.
+1. **Datasette Lite** (zero install) — URL of the form `https://lite.datasette.io/?url=https://raw.githubusercontent.com/blockXblock/berkeley-housing-analysis/main/databases/cpra_permits.db` runs Datasette in the journalist's browser via WebAssembly.
+2. **Fly.io deployed Datasette** (stable URL) — e.g., `cpra.berkeleybuild.com` or `berkeley-cpra.fly.dev`. Persistent, faster than Lite for large queries.
+3. **Local clone** — `git clone` + `datasette databases/cpra_permits.db --metadata datasette-deploy/metadata.json`.
 
-Reference: this morning's Phase A inventory report
-(see session summary's "Forensic findings" section for the catalog).
+**Schema:** single `permits` table, snake_case column names, `permit_number` as primary key, indexes on `parcel_number` / `issuance_date` / `finaled_date` / `work_type` / `adu`, ISO 8601 strings for dates, `source_file` and `ingestion_timestamp` provenance columns, drop the 3 `Unnamed` spacer columns (3, 12, 16) from Excel originals.
 
-### Track 3 — CPRA SQLite conversion + new getting-started page
+**Build pattern mirrors `build_hcd_mirror.py`:**
+- `scripts/build_cpra_db.py` reads Excel → produces SQLite + CSV export
+- Uses `REPO_ROOT = Path(__file__).resolve().parent.parent` for portability
+- Idempotent with atomic table swap
+- `--rebuild` flag for full drop-and-rebuild
 
-**Schema design locked**: single `permits` table, snake_case column
-names, `PermitNumber` as primary key, indexes on `parcel_number` /
-`issuance_date` / `finaled_date` / `work_type` / `adu`, ISO 8601
-dates, `source_file` provenance column, drop the 3 `Unnamed` spacer
-columns (3, 12, 16) from CPRA xlsx.
+**.gitignore exception needed:**
+*.db
+!databases/cpra_permits.db
 
-- **CSV committed as canonical** (`data/raw/cpra-csv/cpra_permits.csv`)
-  — single source of truth, version-controllable, diffable.
-- **SQLite gitignored and rebuilt locally** (`databases/cpra_permits.db`).
-- **Build script** `scripts/build_cpra_db.py` reads CSV → SQLite (mirrors
-  `build_hcd_mirror.py`'s structure: REPO_ROOT derivation, `--rebuild`
-  flag, idempotent transactions, atomic table swap).
-- **Conversion script** `scripts/convert_cpra_xlsx_to_csv.py` reads Excel
-  → CSV (one-time + future updates when CPRA delivers new files).
+The HCD mirror remains gitignored and rebuildable via `scripts/build_hcd_mirror.py`; only the CPRA permits SQLite gets the exception, because it represents the canonical CPRA response and is the file Datasette serves.
 
-**Then the new public page**: `docs/citizen_apr.html` with —
+**Path portability folded in:** The D5/D6/D7 update to read SQLite instead of Excel is itself the portability fix. sqlite3 needs no openpyxl, and the relative-path `databases/cpra_permits.db` works from a clean clone. Hardcoded ROOT paths in D5/D6/D7 setup cells get the `Path(__file__)` treatment in the same change set. README line 15's hardcoded path gets fixed. `requirements.txt` gets openpyxl added (still needed for the Excel-to-SQLite build script) plus Python ≥3.10 pin.
+
+**metadata.json defines canned queries.** Four tiers:
+
+- **Tier 1 (CPRA-only):** new units by year, ADU production by year, large projects (5+ units), demolitions by year, average valuation per unit, submittal-to-issuance time, single-family vs. multifamily by year. ~8 queries.
+- **Tier 2 (CPRA joined with parcels/zoning):** ADU production by council district, units completed in commercial zones by year, pipeline by zoning district, density bonus projects, cumulative units by district. Requires bringing a parcels table into the database with `apn` + `council_district` + `zoning_code`. ~5 queries.
+- **Tier 3 (cross-domain, roadmap):** beds by council district (needs bed-count data), sales tax revenue by zone (needs CDTFA data), affordability tier breakdown (needs Density Bonus Eligibility Statements). Document as roadmap.
+- **Tier 4 (reconciliation against HCD):** projects in CPRA not in any year of HCD submission, CY 2024 reconciliation summary showing our reproduction vs. Berkeley's submission. Makes the audit work directly visible. ~2-3 queries.
+
+Each canned query becomes a clickable named URL endpoint in Datasette and a worked example in the new public page.
+
+**Implementation sequence for today:**
+
+1. Architecture-decision doc — `docs/audit/2026-05-30_cpra_architecture.md` capturing the locked decisions above
+2. `scripts/build_cpra_db.py` — Excel → SQLite + CSV
+3. `.gitignore` exception for `databases/cpra_permits.db`
+4. Run the build; verify SQLite has expected row counts, schema, indexes
+5. `datasette-deploy/metadata.json` with Tier 1, 2, and 4 canned queries
+6. D5/D6/D7 update to read SQLite (portability folded in)
+7. README.md line 15 fix + requirements.txt update
+8. Verify D5 produces byte-identical output post-fix (regression check)
+9. Deploy to Fly.io
+10. Verify the deployed Datasette renders metadata, executes canned queries
+
+### Track 4 — New public page `docs/citizen_apr.html`
+
+After Track 3's SQLite and Datasette deployment land. Page contents:
 - Project introduction
 - Methodology summary
-- The actual numbers (CY 2024: D5 643/576 vs HCD 708/731; CY 2025: 525/329
-  vs 481/444)
-- The 4 confirmed under-reports
-- Gap accounting
-- Clone-and-run instructions for journalists
+- CY 2024 numbers: D5 643 CO / 576 BP vs HCD 708 / 731 (9% / 21% gap)
+- CY 2025 numbers: D5 525 / 329 vs HCD 481 / 444
+- The 4 confirmed under-reports (2328 Channing, 2512 Regent, 2028 Essex, 707 Cragmont)
+- Gap accounting at row level
+- Three access paths from Track 3 with clickable links
+- Canned query examples with explanations
+- Clone-and-run instructions for journalists (assumes git unfamiliarity)
 - Links to D5/D6/D7 in the repo
-- Hypothetical Accela API examples (or link to the Track 4 doc)
 
-### Track 4 (lower priority) — Hypothetical Accela API document
+### Track 1 — Repository cleanup (lower priority, defer if Tracks 3+4 fill the day)
 
-`docs/audit/hypothetical_accela_api.md`. SQLite dialect, scope Table A2,
-inline data-gap flags, include speculation marked as such. Drafted
-against post-Cause-2/3 final state. ~90 minutes if Tracks 1-3 leave time;
-otherwise the next session.
+Per yesterday's forensic findings (`docs/audit/2026-05-29_session_summary.md`):
+- Remove `docs/berkeley-flyover.mp4.backup-2026-05-03` from tree + gitignore (73 MB)
+- `git gc --aggressive` (3,020 loose objects, 0 packs currently)
+- Identify canonical alameda lookup CSV; gitignore or externalize the other two (145 MB)
+- Externalize `docs/videos/*.mp4` and `site-by-site/` PDFs to existing R2/IA mirror infrastructure
+- Optionally `git filter-repo` to remove dead `berkeley-flyover.mp4` historical versions (258 MB)
+- Target: clone size 550 MB → ~150 MB
+
+History rewrite safe per yesterday's clone-traffic analysis (176 cloners but 1 web visitor = predominantly bots).
+
+### Track 5 (lowest priority) — Hypothetical Accela API document
+
+`docs/audit/hypothetical_accela_api.md`. SQLite dialect. Scope to Table A2. Inline data-gap flags. Include speculation marked as such. Drafted against post-Cause-2/3 final state. The canned queries from Track 3 become this doc's worked examples.
 
 ## Known-good ground truth (re-usable anchors)
 
-- **Berkeley CY 2024 HCD Table A2**: 708 net CO, 731 net BP, 228 rows.
-  Triangulated and agreed across Berkeley's PDF (NotebookLM), local HCD
-  mirror, and HCD's CKAN API.
-- **D5 post-all-fixes CY 2024**: 643 CO, 576 BP. Gaps: 65 CO (9%) /
-  155 BP (21%) from HCD.
-- **D5 post-all-fixes CY 2025**: 525 CO, 329 BP. Note: **D5 slightly
-  exceeds HCD's CY 2025 CO of 481** by 44 units — worth examining as a
-  potential D5 over-count or year-routing artifact when CY 2025 bijection
-  is constructed.
-- **8-year aggregate**: D5 = 2,604 CO / 3,296 BP; HCD = 4,011 / 4,509.
-  Pre-CY 2024 years are not yet end-to-end validated; remaining gap
-  reflects bijection coverage, not necessarily a recoverable systematic
-  fix.
-- **4 confirmed under-reports**: 2328 Channing (12u), 2512 Regent (9u),
-  2028 Essex (1u), 707 Cragmont (1u).
-- **The published April 2026 Citizen APR** (169 projects, 11,235 units,
-  12.4% RHNA progress, $14.1M fees) stands as published.
-- **`docs/methodology.html`** unchanged since 2026-04-23; the new
-  `citizen_apr.html` supplements it rather than replacing.
-- **CPRA xlsx schema**: 26 columns, header row 7 (0-indexed), sheet
-  name `BP_Annual Permit Report`. Both files share the same schema; 23
-  meaningful columns + 3 `Unnamed` spacers. D5 reads via
-  `pd.read_excel(..., header=7)` (D5 Cell 4).
-- **`build_hcd_mirror.py` is the portability template**: uses
-  `REPO_ROOT = Path(__file__).resolve().parent.parent`, idempotent
-  per-table atomic swap, `--rebuild` / `--db-path` CLI flags, no
-  hardcoded user path.
+- Berkeley CY 2024 HCD Table A2: 708 net CO, 731 net BP, 228 rows
+- D5 post-all-fixes CY 2024: 643 CO, 576 BP
+- D5 post-all-fixes CY 2025: 525 CO, 329 BP (note: D5 slightly exceeds HCD's CY 2025 CO of 481 — worth examining)
+- Published April 2026 Citizen APR (169 projects, 11,235 units, 12.4% RHNA) stands as-is
+- `docs/methodology.html` unchanged since 2026-04-23; the new `citizen_apr.html` supplements it
+- 4 confirmed under-reports: 2328 Channing (12u), 2512 Regent (9u), 2028 Essex (1u), 707 Cragmont (1u)
 
 ## Do-not-touch
 
-- **`main`** (e62543a, 19 behind dev — deliberate; FF decision deferred).
-- **`docs/methodology.html`** — qualitative page, supplemented by the new
-  `citizen_apr.html`, not replaced.
-- **Standing collateral in working tree**: D6 notebook M, D7 notebook M,
-  `data/apr/2024/*` M, untracked `2026-05-28.md`,
-  `data/apr/2024/developer_summary_2024.csv`, `notes/cc_prompts/`. Leave
-  alone unless explicitly in scope.
-- **The published CY 2025 Citizen APR** (April 2026) stands as-is.
-- **Explorer and Map** remain on v1-derived data (cutover is its own
-  workstream).
+- main (e62543a, 20 behind dev — deliberate)
+- `docs/methodology.html` (qualitative page, supplemented by new page not replaced)
+- Standing collateral in working tree (D6 notebook, D7 notebook, data/apr/2024/*, three untracked items)
 
-## Today's discipline rules (carry forward)
+## Standing rules for CC
 
-1. CC summaries can be wrong; verify artifacts before acting.
-2. Diagnostic docs precede the fix commits that reference them.
-3. Regression test baselines update in the same commit as the code they
-   test.
-4. Predictions are imprecise; actual pipeline measurements are
-   authoritative.
-5. Same-year gating essential for sibling rules (Durant temp-power
-   inheritance pattern).
-6. `git checkout <ref> -- <path>` stages the file in the index, not just
-   the working tree.
-7. Always `git diff --cached --name-only` before every commit.
-8. Visible correction (forward-revert) over silent rewrite for
-   committed-but-unpushed mistakes.
-9. Phase A read-only investigation precedes Phase B implementation.
-10. Working tree standing collateral — leave alone unless explicitly in
-    scope.
+1. CC summaries can be wrong; verify artifacts before acting
+2. Diagnostic docs precede the fix commits that reference them — never "forthcoming companion commit"
+3. Regression test baselines update in the same commit as the code they test
+4. Predictions are imprecise; actual pipeline measurements are authoritative
+5. Same-year gating essential for sibling rules (Durant temp-power inheritance pattern)
+6. `git checkout <ref> -- <path>` stages the file in the index, not just the working tree
+7. Always `git diff --cached --name-only` before every commit
+8. Visible correction over silent rewrite for committed-but-unpushed mistakes
+9. Phase A read-only investigation precedes Phase B implementation
+10. Working tree standing collateral — leave alone unless explicitly in scope
+11. For load-bearing code, byte-accurate edits. For markdown docs we authored, whole-file rewrites are fine.

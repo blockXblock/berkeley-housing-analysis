@@ -126,6 +126,40 @@ recover line (`cp archive/<dir>/<file> <original-path>`). States plainly that
 **every archived DB is a verified copy and fully recoverable**.
 
 ---
-*Phase 1 only — nothing moved. Awaiting John's approval of this table before any
-Phase 2 archive move. DEFERRED batch executes in a later pass after the
-permit-fix + ADU ingestion are pushed-stable.*
+
+## Phase 2 — EXECUTED (NOW batch, 2026-06-01) ✅
+
+Approved by John. Procedure: copy → SHA-256 match → remove original → log to
+`archive/README.md`. **10 files moved, all checksum-verified.**
+
+| order | original | → archived | sha8 |
+|---|---|---|---|
+| 1 (retire) | `databases/berkeley_v2.db` (0-byte) | `archive/retired/` | e3b0c442 |
+| 2 | `databases/housing_projects.db` | `archive/orphans/` | bdeeca14 |
+| 3 | `databases/berkeley_housing_map.db` | `archive/orphans/` | d934dd10 |
+| 4 | `databases/berkeley_energy_use.db` | `archive/orphans/` | 35b59018 |
+| 5 | `databases/berkeley_housing_apr.db` | `archive/orphans/` | c2bd4366 |
+| 6 | `berkeleyshops-audience/audience.db` | `archive/orphans/` | 25000b6c |
+| 7 | `berkeleyshops-audience/archive/audience_2026-03-12.db` | `archive/orphans/` | 3f9e62a8 |
+| 8 | `business_licenses.db` | `archive/orphans/` | 5aeec946 |
+| 9 | `databases/berkeley_data.db` | `archive/orphans/` | 27baf30f |
+| 10 | `data/processed/pipeline.db` | `archive/orphans/` | 61e8e076 |
+
+### Post-execution verification
+- **Inventory: 30 in place + 10 archived = 40** — matches the plan exactly.
+- **Canonical `berkeley_housing_v2.db` sha = `4ad50088` — UNCHANGED.**
+- **All 10 KEEP-IN-PLACE files present** (6 canonical + 4 special).
+- **All 10 archived files have 0 production-script references** — nothing live was archived.
+- **DEFERRED 20 untouched** (all `*_pre_*`, `backups/`, keep_snapshots incl. `keep_snapshot_2026-06-01_pre-permit-fix.db`).
+- **Pre-existing finding (NOT caused by this pass):** `scripts/parse_attachments.py:12`
+  points at `data/berkeley_housing_analysis.db` — a path that **never existed** (the
+  canonical V1 is at `databases/…`). This is the known `/data`-vs-`/databases` path
+  bug; unrelated to archiving. Flagged for a future fix, not touched here.
+
+### Before / after
+- **Before:** 40 DB files. **After NOW batch:** **30 in place** (10 KEEP + 20 DEFERRED) + **10 in `archive/`**.
+- **Next (separate pass, post-push):** archive the 20 DEFERRED reversal points → 10 KEEP-IN-PLACE remain.
+
+*DBs stay gitignored; `archive/README.md` (tracked) is the recovery record — every
+archived DB is a verified copy, recoverable via `cp archive/<dir>/<file> <original>`.
+Audit docs + README committed; **push HELD** for John.*

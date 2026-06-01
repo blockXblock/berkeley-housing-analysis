@@ -2,9 +2,22 @@
 
 **First data-modifying operation in the project.** Two *separate* fixes to
 `berkeley_housing_v2.db`, gated and snapshotted. Pre-change snapshot:
-`databases/keep_snapshot_2026-06-01_pre-permit-fix.db` (1,994,752 bytes, exact
-match, `integrity_check=ok`). Analysis basis:
-`docs/audit/2026-05-31_permit_misclassification_survey.md`.
+`databases/keep_snapshot_2026-06-01_pre-permit-fix.db` (1,994,752 bytes, file
+sha256 `6df7156c…`, v_projects_flat content-hash `430b2691…`, `integrity_check=ok`).
+Analysis basis: `docs/audit/2026-05-31_permit_misclassification_survey.md`.
+
+> **Corrected framing (2026-06-01).** An earlier draft of this note used two
+> framings that the CKAN reconciliation later **refuted**. Both are retracted here:
+> - ❌ *"corrected CY2024 matches the ~708 reference"* — **wrong**: 486 and 708
+>   are **different scopes**, not the same quantity (see below).
+> - ❌ *"the city's 708 is inflated by cross-year duplicates"* — **wrong**: the
+>   city's CKAN CY2024 CO total (708) is **essentially clean**; the cited
+>   "duplicates" are legitimate stage-progression (see "Reconciliation").
+>
+> The verified framing: **486 is the correct, de-duplicated, group-quarters-
+> excluded count of the *major projects we track*; the gap to the city's 708 is
+> small ADU/single-unit completions that are *un-ingested CPRA data we already
+> hold* (recoverable), not duplicates and not a pipeline error.**
 
 ---
 
@@ -16,48 +29,44 @@ demolition), over-promoting pipeline stage and inflating APR CO totals (e.g.
 2138 Kittredge marked "Permitted" on a $690 bathroom-window permit).
 
 **Mechanism (reversible):**
-1. **Populated classification events** in `project_events` — `permit_classified_
-   primary` (type 26, **32 permits**) and `permit_classified_subsidiary` (type 27,
-   **74 permits**), linked by `permit_id`, `source_type='inferred'`, dated
-   2026-06-01. Applied to both BP and CO milestone permits (one classification
-   per permit covers both its events).
-2. **Updated the `v_projects_flat` view** so `bp_issued_date` / `co_issued_date`
-   = `MAX(event_date)` over milestone events whose permit is **NOT**
-   subsidiary-classified. Original view saved at
-   `/tmp/v_projects_flat_ORIGINAL.sql` (restore from snapshot if needed).
-   - Manual `NO_DESC` completion events (no linked permit) are **kept**
-     (researcher-asserted).
-   - HELD projects (179/176) carry no classification → milestones **unchanged**.
+1. **Classification events** populated in `project_events`: `permit_classified_
+   primary` (type 26) and `permit_classified_subsidiary` (type 27), linked by
+   `permit_id`, `source_type='inferred'`, dated 2026-06-01. Applied to both BP
+   and CO milestone permits.
+   - **Initial fix:** 32 primary + 74 subsidiary = **106 events**.
+   - **+1 from the 2352 re-anchor** (below) → **current total: 32 primary /
+     75 subsidiary = 107 classification events** (verified live).
+2. **`v_projects_flat` view updated** so `bp_issued_date` / `co_issued_date` =
+   `MAX(event_date)` over milestone events whose permit is **NOT**
+   subsidiary-classified. Original view saved at `/tmp/v_projects_flat_ORIGINAL.sql`.
+   Manual `NO_DESC` completions (no permit) and HELD projects are kept.
 
-**Classification rule (final, adjudicated):**
-- SUBSIDIARY: solar/PV/modules, window/door, sign, water heater/furnace/heat
-  pump, siding/insulation/drywall, remodel, temp power, meter, washer/dryer,
-  reroof, shoring/grading, EV charger, repair. Solar **overrides** the
-  valuation≥$1M fallback.
-- **Demolish disqualifier:** a leading `demolish/demolition` → SUBSIDIARY,
-  overriding structural keywords (a demo permit can never be a completion).
-  Anchored to leading text so it does not catch "(See demolition Permit…)"
-  cross-references in genuine new-construction permits.
-- PRIMARY: new construction / "new … residence/home/building/ADU" / N-story or
-  N-unit (digit **or** spelled-out) / apartment building / valuation≥$1M w/o
-  alteration keyword.
-- 15 AMBIGUOUS were hand-adjudicated (14 → SUBSIDIARY, 1 → PRIMARY: 2330 Blake
-  6-ADU new construction).
+**Rule:** SUBSIDIARY = solar/PV/modules, window/door, sign, water-heater/furnace/
+heat-pump, siding/insulation/drywall, remodel, temp-power, meter, washer/dryer,
+reroof, shoring/grading, EV-charger, repair (solar overrides the valuation≥$1M
+fallback); **leading `demolish/demolition` is a hard disqualifier** (a demo
+permit can never be a completion). PRIMARY = new construction / "new …
+residence/home/building/ADU" / N-story or N-unit (digit or spelled-out) /
+apartment building / valuation≥$1M w/o alteration keyword. 15 AMBIGUOUS were
+hand-adjudicated (14→SUBSIDIARY, 1→PRIMARY: 2330 Blake 6-ADU new construction).
 
-**Verification at write time (all passed; else rollback):** view returns 181
-rows; 2138 Kittredge `bp_issued`→NULL (bathroom-window dropped); 2555 College
-`co`=2025-07-25 (structural kept); 2150 Kittredge `co`=2024-01-01 (manual kept,
-solar/sign dropped); 2352 Shattuck `co`=2024-12-10 (HELD, unchanged).
+**Write-time verification (all passed; else rollback):** 181 rows; 2138 Kittredge
+`bp_issued`→NULL (bathroom-window dropped); 2555 College `co`=2025-07-25
+(structural kept); 2150 Kittredge `co`=2024-01-01 (manual kept, solar/sign
+dropped). One redundant duplicate classification (permit 149, pre-existing from
+2026-05-20) was removed.
 
-**Note:** permit 149 (B2024-00543) already had a subsidiary classification from a
-prior session (2026-05-20); the redundant 2026-06-01 duplicate was removed.
+### 2352 Shattuck (id179) re-anchored OUT of CY2024
+NotebookLM + the CKAN mirror confirm the city reports **Logan Park's COs in
+CY2022 (127u) and CY2023 (63u) — not 2024.** The record's only 2024 "CO" was
+**`B2024-05208`** — an admin *"revised job card … 64 Modules count instead of
+63"* (solar). Classified **subsidiary** → id179 `co_issued_date` is now **NULL**
+(out of 2024). **`B2440` Shattuck (id176) remains HELD** pending Accela.
 
-## Fix 2 — Group-quarters exclusion (separate, documented)
+## Fix 2 — Group-quarters exclusion (separate, documented counting filter)
 
 **Rule (HCD):** student housing / dormitories cannot count as HCD units. Exclude
 `is_uc_project = true` projects from APR unit totals.
-
-**The 4 UC/group-quarters projects** (`is_uc_project=1`):
 
 | id | project | units | CO'd? |
 |---|---|---|---|
@@ -67,47 +76,68 @@ prior session (2026-05-20); the redundant 2026-06-01 duplicate was removed.
 | 170 | 1950 Oxford St | 300 | **yes, CY2024** |
 | | **total** | **2,156** | only Oxford (300) hits a CO year |
 
-**Reconciliation:** these 2,156 *units* are the same 4 projects the explorer
-validation flagged (2,156). The user's earlier "~5,250 beds across 4 major
-projects" is **beds**, not units — consistent with the documented 2-beds≈1-unit
-approximation (2,156 units ↔ ~4,300–5,250 beds). Same projects; the gap is the
-units-vs-beds representation and does not affect the exclusion (which drops whole
-projects). The exclusion is a **counting filter**, applied at report time, not a
-data mutation.
+(Same 4 projects the explorer validation flagged = 2,156 *units*; the "~5,250
+beds" figure is beds, not units — the 2-beds≈1-unit approximation. Counting
+filter at report time, not a data mutation.)
 
 ---
 
-## Result — APR CO net-units (from re-run `generate_apr_v2.py`)
+## Result — APR CO net-units
 
-| Year | pre-fix | permit-only | permit + GQ | ref |
+| Year | pre-fix | permit-fix | permit + GQ + 2352-out | city CKAN |
 |---|---|---|---|---|
-| **CY2024** (holding 2352) | 1233 | 1023 | **723** | ~708 |
-| CY2024 (excluding 2352) | — | 786 | 486 | — |
-| **CY2025** (holding=excl) | 666 | 497 | **497** | ~482 |
+| **CY2024** | 1233 | 786 (excl. 2352) | **486** | 708 (clean) |
+| **CY2025** | 666 | 497 | **497** | 984 raw → ~482 de-duplicated |
 
-- **CY2024 = 723** (permit+GQ, holding 2352) — **lands near ~708.** ✓
-- **CY2025 = 497** (no UC CO'd in 2025) — **lands near ~482.** ✓
-- Fix 1 alone: 1233→1023 (CY2024), 666→497 (CY2025). Fix 2 removes Oxford's 300
-  from CY2024 (1023→723). The two fixes are independent and separately reversible.
+- **CY2024 = 486** is the correct major-project count: permit-fix applied,
+  group-quarters excluded (−300 Oxford), 2352 re-anchored to its true CY2022–2023.
+- **CY2025 = 497** ≈ the de-duplicated city figure (~482).
+
+## Reconciliation against CKAN — what the gap actually means
+
+A full CO reconciliation (city CKAN ↔ our v2, by APN + address) decomposed the
+486-vs-708 gap into buckets:
+
+| Bucket | CY2024 | meaning |
+|---|---|---|
+| **A** out of scope | **220 u / 96 proj** | small ADU/single-unit completions not in v2 |
+| **B** in v2, have BP, no CO | **0 u** | **the recoverable-from-v2 gap — none** |
+| **C** wrong year | 0 u | no year-misattribution |
+| **D** in v2, correct year | 486 u / 4 proj | we capture these correctly |
+
+- **The 708 is essentially clean in CKAN** (1 trivial within-year dup, +1u). The
+  earlier "cross-year duplicate" examples are **stage-progression**, CO in one
+  year each: 2150 Kittredge (entitled 2020 → BP 2021 → **CO 2024 only**), 1837
+  Berkeley Way (→ **CO 2024 only**), 2555 College (→ **CO 2025**), 2538 Durant
+  (**BP 2024, no CO** — city does *not* report it complete). The real within-year
+  duplication is in **CY2025** (city 984 raw → ~482).
+- **486 is not a "de-duplicated 708"** — it is a clean **major-project subset**;
+  the city's 708 is larger because it includes ~220u of small completions our
+  pipeline (which targets major projects) never ingested.
+
+### The gap is RECOVERABLE — un-ingested CPRA data we already hold
+A follow-up check found **96/96 of the Bucket-A CY2024 completions are present in
+our CPRA file** (`data/raw/cpra-downloads/BP_Annual Permit Report-*.xlsx`), **95/96
+with a 2024 finaled date.** So Bucket A is not "data we never received" — it is
+**un-promoted CPRA permits**, addressable by the planned ADU ingestion (build
+from CPRA + Alameda assessor; CKAN stays the verification target). Bucket B = 0
+means nothing is recoverable *from within v2* — the recovery is at the raw-CPRA
+ingestion layer.
 
 ## 2538 Durant → zero CO (intended)
-
 2538 Durant's only `co_issued` event was a "Demolish Apartment Building" permit —
-a false completion. After the demolish-disqualifier, it has **zero** CO, which is
-**correct**: the April field survey lists it *Under Construction (topped out)*,
-i.e. not complete. The fix removed a spurious completion, not a real one.
+a false completion. After the demolish-disqualifier it has **zero** CO, which is
+**correct**: the April field survey lists it *Under Construction (topped out)*.
 
-## Held — pending Accela (NOT written/classified)
-
-- **2352 Shattuck (id179, 237u)** — CO rests on a "revised job card" (admin).
-  Holding it keeps CY2024 at 723; excluding it → 486. User verifying vs Accela.
-- **2440 Shattuck (id176, 40u)** — solar CO but has a 2023 Phase-II structural
-  permit. Left exactly as-is.
+## Held — pending Accela (NOT classified)
+- **2352 Shattuck (id179)** — resolved by NotebookLM/CKAN to CY2022–2023, so
+  re-anchored out of 2024 (above). Its underlying 2020 Phase-II BP is unchanged.
+- **2440 Shattuck (id176)** — left exactly as-is (solar CO but a 2023 Phase-II
+  structural permit); still held.
 
 ## Reversibility
+Restore the whole DB from `databases/keep_snapshot_2026-06-01_pre-permit-fix.db`
+(content-hash `430b2691…`), or drop the `source_type='inferred'`/2026-06-01
+classification events + recreate the view from `/tmp/v_projects_flat_ORIGINAL.sql`.
 
-Restore the whole DB from `keep_snapshot_2026-06-01_pre-permit-fix.db`, or drop
-the 106 classification events (`source_type='inferred'`, dated 2026-06-01) and
-recreate the view from `/tmp/v_projects_flat_ORIGINAL.sql`.
-
-*Committed to dev; not pushed — pending review of this note + the re-run totals.*
+*Committed to dev. The reproducible write script is `scripts/fix_permit_classification_2026-06-01.py`.*

@@ -3372,18 +3372,34 @@
         const totalUnits = projects.reduce((sum, p) => sum + (p.units || 0), 0);
         const totalVLI = projects.reduce((sum, p) => sum + (getField(p, 'vli_units') || 0), 0);
 
+        // --- Private (city) vs UC group-quarters ---------------------------------
+        // UC student housing is GROUP QUARTERS: excluded from RHNA/APR and measured in
+        // sourced BEDS, never converted to "units" and never folded into a unit total.
+        // (Beds sourced: 2400 Bowditch 1500 + 2200 Bancroft 1625 + 1950 Oxford 772 + 2556 Haste 1113.)
+        const UC_BEDS = 5010;
+        const privateProjects = projects.filter(p => !p.is_uc_project);
+        const privateProjectCount = privateProjects.length;                                  // 362
+        const privateUnits = privateProjects.reduce((s, p) => s + (p.units || 0), 0);        // 12,248
+        const ucProjectCount = projects.filter(p => p.is_uc_project).length;                 // 4
+        // Net-new CO units (completions), PRIVATE, UC-excluded, by year
+        const coUnitsYear = (y) => privateProjects
+            .filter(p => (getField(p, 'co_date') || '').startsWith(y))
+            .reduce((s, p) => s + (p.units || 0), 0);
+        const co2024 = coUnitsYear('2024'), co2025 = coUnitsYear('2025'), co2026 = coUnitsYear('2026');
+        const rhnaCompletions = co2024 + co2025 + co2026;                                    // 1,457 (CY2023 pending)
+
         // Calculate median processing days
         const processingDays = projects.map(p => getField(p, 'processing_days')).filter(d => d && d > 0);
         const medianDays = processingDays.length > 0
             ? processingDays.sort((a, b) => a - b)[Math.floor(processingDays.length / 2)]
             : 0;
 
-        // Count by stage
-        const entitled = projects.filter(p => getField(p, 'entitled') && !getField(p, 'bp_issued')).reduce((sum, p) => sum + (p.units || 0), 0);
-        const bpProjects = projects.filter(p => getField(p, 'bp_issued'));
+        // Count by stage — PRIVATE only (UC group quarters never counted as units)
+        const entitled = privateProjects.filter(p => getField(p, 'entitled') && !getField(p, 'bp_issued')).reduce((sum, p) => sum + (p.units || 0), 0);
+        const bpProjects = privateProjects.filter(p => getField(p, 'bp_issued'));
         const bpUnits = bpProjects.reduce((sum, p) => sum + (p.units || 0), 0);
         const bpVLI = bpProjects.reduce((sum, p) => sum + (getField(p, 'vli_units') || 0), 0);
-        const coProjects = projects.filter(p => getField(p, 'co_date'));
+        const coProjects = privateProjects.filter(p => getField(p, 'co_date'));
         const coUnits = coProjects.reduce((sum, p) => sum + (p.units || 0), 0);
         const coVLI = coProjects.reduce((sum, p) => sum + (getField(p, 'vli_units') || 0), 0);
 
@@ -3417,16 +3433,23 @@
             if (el) el.style.width = `${Math.min(pct, 100)}%`;
         };
 
-        // Top metrics
-        setStatText('stat-project-count', totalProjects);
-        setStatText('stat-total-units', totalUnits);
-        setStatText('stat-vli-units', totalVLI);
+        // Top metrics — PRIVATE only; UC shown separately as BEDS (group quarters)
+        setStatText('stat-project-count', privateProjectCount);
+        setStatText('stat-total-units', privateUnits);
+        setStatText('stat-uc-beds', UC_BEDS);
+        setStatText('stat-uc-bed-count', ucProjectCount);
         setStatText('stat-median-days', medianDays);
 
-        // RHNA progress
-        setStatText('stat-entitled-units', entitled);
-        setStatText('stat-pipeline-units', totalUnits);
-        const rhnaProgressPct = (totalUnits / RHNA_TOTAL) * 100;
+        // Actual unit completions (net-new CO units, UC-excluded), by year
+        setStatText('stat-co-2024', co2024);
+        setStatText('stat-co-2025', co2025);
+        setStatText('stat-co-2026', co2026);
+
+        // RHNA progress — COMPLETIONS-based (private, UC-excluded). NOT pipeline.
+        // CY2023 not yet reconciled, so this is 2024-2026 completions and may rise.
+        setStatText('stat-rhna-completions', rhnaCompletions);
+        const rhnaProgressPct = (rhnaCompletions / RHNA_TOTAL) * 100;   // ~16%
+        setStatText('stat-rhna-pct', rhnaProgressPct.toFixed(0));
         const rhnaProgressBar = document.getElementById('rhna-progress-bar');
         if (rhnaProgressBar) rhnaProgressBar.style.width = `${Math.min(rhnaProgressPct, 100)}%`;
 
@@ -3440,56 +3463,37 @@
         setStatText('stat-co-vli', coVLI);
         setStatText('stat-co-vli-pct', coUnits > 0 ? ((coVLI / coUnits) * 100).toFixed(1) : '0');
 
-        // Insight box
-        setStatText('stat-pipeline-units-2', totalUnits);
+        // Insight box (private units)
+        setStatText('stat-pipeline-units-2', privateUnits);
         setStatText('stat-bp-units-2', bpUnits);
         setStatText('stat-co-units-2', coUnits);
 
-        // RHNA by income level (estimates - actual data would need more fields)
-        setStatText('stat-rhna-vli', totalVLI);
-        setStatText('stat-rhna-vli-pct', ((totalVLI / RHNA_VLI) * 100).toFixed(1));
-        setProgressBar('rhna-vli-bar', (totalVLI / RHNA_VLI) * 100);
-
-        // LI, MOD, Above Mod - estimates based on available data
-        // For now, show VLI as actual and others as calculated placeholders
-        const estimatedLI = Math.round(totalVLI * 0.46); // rough ratio from typical projects
-        const estimatedMod = Math.round(totalVLI * 0.3);
-        const estimatedAbove = totalUnits - totalVLI - estimatedLI - estimatedMod;
-
-        setStatText('stat-rhna-li', estimatedLI);
-        setStatText('stat-rhna-li-pct', ((estimatedLI / RHNA_LI) * 100).toFixed(1));
-        setProgressBar('rhna-li-bar', (estimatedLI / RHNA_LI) * 100);
-
-        setStatText('stat-rhna-mod', estimatedMod);
-        setStatText('stat-rhna-mod-pct', ((estimatedMod / RHNA_MOD) * 100).toFixed(1));
-        setProgressBar('rhna-mod-bar', (estimatedMod / RHNA_MOD) * 100);
-
-        setStatText('stat-rhna-above', estimatedAbove);
-        setStatText('stat-rhna-above-pct', ((estimatedAbove / RHNA_ABOVE) * 100).toFixed(1));
-        setProgressBar('rhna-above-bar', (estimatedAbove / RHNA_ABOVE) * 100);
+        // RHNA-by-income-level panel REMOVED 2026-06-02: it was built on fabricated
+        // "rough ratio" estimates (estimatedLI = totalVLI*0.46, etc.) over the incl-UC
+        // totalUnits — not defensible. The HTML panel is hidden. Restore only with sourced
+        // income-tier completions, never estimates.
 
         // Affordable housing metrics
         setStatText('stat-vli-project-count', vliProjects.length);
         setStatText('stat-db-count', dbProjects.length);
         setStatText('stat-db-units', dbUnits);
 
-        // City + UC breakdown
-        setStatText('stat-city-projects', cityProjects.length);
-        setStatText('stat-city-units', cityUnits);
-        setStatText('stat-uc-projects', ucProjects.length);
-        setStatText('stat-uc-units', ucUnits);
+        // City (private, units) + UC (group quarters, BEDS) breakdown
+        setStatText('stat-city-projects', privateProjectCount);
+        setStatText('stat-city-units', privateUnits);
+        setStatText('stat-uc-projects', ucProjectCount);
+        setStatText('stat-uc-beds-2', UC_BEDS);
         setStatText('stat-combined-projects', totalProjects);
-        setStatText('stat-combined-units', totalUnits);
 
         // Sankey subtitles
         setStatText('stat-sankey-projects', totalProjects);
         setStatText('stat-sankey-projects-2', totalProjects);
 
-        // APR tab stats
-        setStatText('stat-apr-pipeline-units', totalUnits);
-        setStatText('stat-apr-rhna-pct', ((totalUnits / RHNA_TOTAL) * 100).toFixed(0));
+        // APR tab stats — pipeline is PRIVATE units; RHNA % is COMPLETIONS-based (not pipeline)
+        setStatText('stat-apr-pipeline-units', privateUnits);
+        setStatText('stat-apr-rhna-pct', ((rhnaCompletions / RHNA_TOTAL) * 100).toFixed(0));
         setStatText('stat-apr-bp-units', bpUnits);
-        setStatText('stat-apr-bp-pct', ((bpUnits / totalUnits) * 100).toFixed(1));
+        setStatText('stat-apr-bp-pct', privateUnits > 0 ? ((bpUnits / privateUnits) * 100).toFixed(1) : '0');
 
         console.log('✅ populateStats() complete - all statistics populated from DATA');
     }

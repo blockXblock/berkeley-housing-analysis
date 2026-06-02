@@ -178,10 +178,22 @@ def get_projects(conn):
         total_fees = fee_row[0] if fee_row and fee_row[0] else 0
 
         # Derived fields
+        # IMPORTANT: bp_issued / co_date are sourced from v_projects_flat, NOT raw
+        # project_events. The view bakes in the permit-classification fix (subsidiary
+        # permits — solar/siding/demo/etc — are excluded from BP/CO milestones). Reading
+        # raw events here would BYPASS that fix and inflate completion counts
+        # (e.g. CY2024 ~1156 instead of the corrected 709). The other milestones below
+        # (application/entitlement/construction/demo) are not permit-classification-driven
+        # and are fine from raw events.
+        vpf_cur = conn.cursor()
+        vpf_cur.execute(
+            'SELECT bp_issued_date, co_issued_date FROM v_projects_flat WHERE project_id = ?',
+            (pid,))
+        vpf_row = vpf_cur.fetchone()
         filed = event_dates.get('application_submitted')
         entitled = event_dates.get('entitlement_approved')
-        bp_issued = event_dates.get('building_permit_issued')
-        co_date = validate_co_date(event_dates.get('co_issued'))
+        bp_issued = vpf_row[0] if vpf_row else None
+        co_date = validate_co_date(vpf_row[1] if vpf_row else None)
         construction_start = event_dates.get('construction_start_observed')
         topped_out = event_dates.get('topped_out')
         demolition_permit_date = event_dates.get('demo_permit_issued')

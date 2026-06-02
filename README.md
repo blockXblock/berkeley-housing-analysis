@@ -3,7 +3,19 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/blockXblock/berkeley-housing-analysis/HEAD?labpath=MASTER_ANALYSIS.ipynb)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/MASTER_ANALYSIS.ipynb)
 
-> Interactive analysis of **179 housing development projects** in Berkeley, CA (2020-2025)
+> Interactive analysis of housing development projects in Berkeley, CA (2020-2026)
+
+## Reproduce Berkeley's Official APR (one click)
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/DEMO_apr_vs_hcd_colab.ipynb)
+&nbsp;**← Reproduce the CY2024 / CY2025 housing completion counts from primary-source data**
+
+A self-contained, auditable notebook: it fetches two small published completion extracts
+(`data/public/*.csv`) and **derives** Berkeley's certificate-of-occupancy counts live —
+**CY2024 = 709**, **CY2025 = 532** net-new units (private; UC student housing excluded as
+group quarters per HCD) — then compares them against the city's submitted figures from the
+state CKAN portal. No install, no local data. Only the derived extracts are published; the
+full canonical pipeline database stays private.
 
 ## Quick Start
 

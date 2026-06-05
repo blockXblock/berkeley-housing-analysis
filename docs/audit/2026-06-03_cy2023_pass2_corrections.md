@@ -27,17 +27,24 @@ need a refresh when next deployed.
 - **605 Neilson (proj304):** wrong **2025-09-04 → 2023-04-20** (B2020-00481, 1u ADU). Moves it out of CY2025.
 
 ## Documented findings
-- **2352 Shattuck / Logan Park (proj179) — CKAN year error:** both structural permits Finaled
-  **2022** (Ph II 01/14/2022, Ph I 10/06/2022); no 2023 structural Final exists. CKAN's CY2023
-  ~69u is **mis-yeared — Logan Park actually completed 2022** (pre-RHNA-cycle-6, excluded from
-  reported years). Left uncounted (co=None). **CKAN overstates CY2023 by ~69u.** (69u CKAN-derived.)
+- **2352 Shattuck / Logan Park — CORRECTED 2026-06-04 (this line's original framing was WRONG).**
+  Logan Park is **two buildings on two parcels.** The **North Building** (APN …01805, proj179) finaled
+  **2022** (Ph II 01/14/2022 135u, Ph I 10/06/2022) — correctly pre-cycle, uncounted. But there is a
+  **separate South Building** (APN **…04100**, permit **B2021-03302**, **Finaled 2023-08-08, 69u**,
+  permit-stated) that **genuinely completed in 2023 and was MISSING from v2.** So the city is correct
+  and **we *understated* CY2023 by ~69u** — the opposite of the original "CKAN mis-year" claim. The
+  South Building was ingested 2026-06-04 (proj887) → **CY2023 = 700**. See
+  `docs/audit/2026-06-04_logan_south_and_1367univ_fixes.md`. (Both earlier framings — "city mis-year"
+  here, and a later "retract" — were query artifacts; the CPRA permit record settled it.)
 - **2210 MLK (proj362) — HELD:** not in the Accela Building module (legacy/APN-filed); can't
   confirm CKAN-2023 vs its CPRA-backed v2-2025. Left at 2025-03-26 (stays CY2025). Needs a legacy
   permit-DB / APN lookup.
 
-## CY2023 reconciliation
-**631** (441 Pass 1 ADU + 190 Pass 2) vs CKAN 704. Gap = ~69u Logan Park (CKAN mis-year, actually
-2022) + 1u 2210 MLK (held) + small Rule-C-vs-CKAN deltas. **We are more year-accurate than CKAN.**
+## CY2023 reconciliation (UPDATED 2026-06-04)
+Originally **631** (441 Pass 1 ADU + 190 Pass 2). After adding the missing Logan Park South Building
+(+69u, 2026-06-04) → **CY2023 = 700** vs CKAN 704. Remaining gap = 1u (2210 MLK, held) + ~3u Rule-C
+net-new-vs-reported delta. The 73u "gap" was NOT a city overcount — it was **our undercount** (the
+South Building) plus the held MLK and the Rule-C convention. Corrected via primary-permit (CPRA) data.
 
 ## Reversal
 Canonical `a5e63b1b` → **`bdadce65`**. Restore: `cp keep_snapshot_2026-06-03_pre-cy2023-pass2.db

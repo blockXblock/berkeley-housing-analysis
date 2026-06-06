@@ -5,6 +5,11 @@
 earlier PDF-vs-CKAN-only draft of this file — the CPRA and Accela passes materially revised the
 conclusions, especially the "PDF total = 275" reading, now understood to be inflated.)*
 
+**Revised 2026-06-06:** §6 rewritten after a CY2023 majors-completeness pass — the earlier
+"2023 Shattuck / 1173 Hearst are additions" flag is **retracted** (both are present and counted; the
+flag came from a silent query failure), the systematic CPRA↔v2 sweep is recorded, and 2435 San Pablo
+(40u GLA) is adjudicated.
+
 ## Sources
 1. **City PDF (primary filing):** `2022-08-16 - Final - CY 2021 APR (Housing Element) - Berkeley_0.pdf`
    (berkeleyca.gov; saved at `~/berkeley-data-staging/pdf/2022-08-16_CY2021_APR_Berkeley.pdf`).
@@ -98,13 +103,76 @@ resolved cleanly from **CPRA** (which reaches back to 2018): 2628 Shattuck (B201
 South (B2021-03302), and the 1173 Hearst structures (B2020-029xx). **For any pre-2022 verification,
 CPRA is the primary source of record; treat Accela "not found" as non-dispositive for older permits.**
 
-## 6. ⚑ CY2023 follow-up (separate check — flagged, not actioned)
-2023 Shattuck (48u, Finaled 2023-08-16) and 1173 Hearst (~4u net-new, Finaled 2023) surfaced here as
-*mis-yeared 2021 majors* but are genuine **CY2023** completions. **Verified read-only: neither is in v2**
-(by address or APN). So they are **additions, not already in CY2023 = 701** — ingesting 2023 Shattuck
-alone would raise CY2023 by **+48u**. Recommend a dedicated CY2023 majors-completeness pass (gated,
-primary-confirmed) before relying on 701 as final. *(2628 Shattuck and 2580 Bancroft are likewise
-absent from v2 — the CY2021 deferred majors.)*
+## 6. CY2023 majors-completeness pass (run 2026-06-06) — flag RETRACTED + systematic sweep
+
+### 6a. ⚠️ RETRACTION — 2023 Shattuck and 1173 Hearst are PRESENT and COUNTED, not additions
+An earlier version of this doc flagged 2023 Shattuck (48u) and 1173 Hearst as "verified NOT in v2 →
+additions." **That was wrong.** Checked by **APN** (not the errored query), both are already in v2 and
+already inside CY2023 = 701:
+
+| Address | APN | v2 project | Units | CO date | In 701? |
+|---|---|---|--:|---|:--:|
+| 2023 Shattuck | 057 203400800 | **proj 380** | 48 | 2023-08-16 | ✅ yes |
+| 1173 Hearst | 057 208601300 | **proj 379** | 2 | 2023-03-15 | ✅ yes |
+
+**Had the gated add proceeded, it would have DOUBLE-COUNTED 2023 Shattuck (+48u erroneously).**
+
+**Why the original flag was wrong — a silent query failure.** The "not in v2" check used
+`SELECT … stage FROM v_projects_flat …`, but the view's column is `status_code`/`status_label`, not
+`stage`. SQLite errored; with stderr suppressed it returned **zero rows**, which was misread as
+"absent." This is the **same failure class as the phantom "2190"** (a SQL artifact mistaken for data):
+a malformed query producing a clean-looking but false result. **Lesson reinforced: confirm presence by
+APN against a *valid* query before concluding "missing," and never read an empty result from a
+stderr-suppressed query as evidence of absence.**
+
+### 6b. Systematic sweep — v2's MAJOR coverage for 2023–2025 is complete
+CPRA new-construction permits Finaled 2023–25 (units>0), left-joined to v2 CO by APN: 228 unmatched by
+`(apn, permit-year)`, but the split is decisive:
+
+| Class | Total | Majors ≥5u | Small <5u |
+|---|--:|--:|--:|
+| **WRONG_YEAR** (parcel already has a v2 CO in another year) | 192 | 28 | 164 |
+| **APN-ABSENT** (no v2 CO at parcel, any year) | 36 | 2 | 34 |
+
+- **All 28 WRONG_YEAR "majors" are false positives — every one verified already in v2.** They flag only
+  because a *secondary* permit (PV solar, standby generator, tenant improvement, deferred submittal) on
+  the same parcel finaled in a later year. Spot-checked present: 2150 Kittredge (169u), 1951 Shattuck
+  (163u), 3030 Telegraph (144u), 2000 University (82u), 2590 Bancroft (87u), 2100/3000 San Pablo,
+  2072 Addison, 2440 Shattuck (40u), …
+- **The 2 APN-ABSENT "majors":** (i) **2352 Shattuck "Phase I" (69u, B2019-05575)** — *not additional*;
+  it is the same South Building already counted as **proj887** (Phase II, 69u). (ii) **2435 San Pablo**
+  — adjudicated below.
+
+**Conclusion: of ~228 new-construction completions, v2 is missing exactly ONE major — 2435 San Pablo
+(below). The one-at-a-time finds (Logan Park South, etc.) have been systematically swept; no other
+hidden majors.**
+
+### 6c. ADJUDICATION — 2435 San Pablo (CPRA "0 San Pablo", APN 056 192801900) → INCLUDE, 41u, CY2025
+- **Permit B2021-02423** (CPRA): *"New 4-story group living accommodations with **40 sleeping units and
+  one manager's dwelling unit**,"* **OccType R-2 Residential: Permanent, Multi-Unit (3+ Units)**,
+  Work Type New, CO required = Yes, **Finaled 2025-03-20**, val $2.8M.
+- **The city's own APR (CKAN, live + mirror) counts it:** real address **2435 San Pablo**,
+  **UNIT_CAT "5+" (multifamily), Tenure Renter, 41 units** (BP 2022-08-12; no CO row yet — the city's
+  CO filing lags the 2025-03-20 final).
+- **Verdict: INCLUDE — this is private permanent multifamily housing, NOT institutional group quarters.**
+  Reasoning: the UC exclusions (proj 165/170/171/177) are 300–750-unit university dormitories — *institutional
+  group quarters*. 2435 San Pablo is a **private R-2 "Permanent, Multi-Unit" building** that the city
+  classifies as **"5+" multifamily** and counts as **41 dwelling units**. "Group Living Accommodations"
+  here is the *building type* (SRO/co-living), not a group-quarters exclusion trigger; HCD and the city
+  count it as housing. **Count = 41** (40 sleeping units + 1 manager's dwelling), matching the city's BP
+  figure. **Year = CY2025** (Finaled 2025-03-20). Genuinely absent from v2 (parcel not loaded).
+- **Status: open item — NOT ingested.** If accepted via a gated add, **CY2025 531 → 572**. (We'd be
+  ahead of the city's CO filing here, as with 1367 University — permit-confirmed.)
+
+### 6d. Open items — batched as a separate small-completeness pass (held)
+- **1173 Hearst 2nd duplex (+2u):** proj 379 holds one duplex (B2020-02942, 2u); the second
+  (**B2020-02941, 2u, Finaled 2023-03-06**) is genuinely absent — a real **+2u** micro-gap (CY2023 → 703).
+- **34 APN-absent small (<5u):** 2023:5, 2024:11, 2025:18 — genuinely-missing ADUs/duplexes.
+- These are the same "small completeness" class and will be scoped as **one gated pass later**, not a
+  2u write now. **Sweep blind spot:** *same-parcel second buildings* (Hearst 2nd duplex, Logan Park
+  pattern) hide in WRONG_YEAR because the parcel already has a v2 CO — so **true small-miss ≥ 34 plus
+  some same-parcel cases.**
+- **2435 San Pablo (41u, CY2025)** is the only *major* in the open queue, pending the §6c verdict.
 
 ## Artifacts (read-only outputs)
 - `data/apr/2021/cy2021_pdf_table_a2_col12_co.csv` — 95 non-zero Column-12 CO rows from the PDF.

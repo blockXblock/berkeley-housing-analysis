@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>Shattuck building label overlay - roof and side-offset v6 no icons</name>
+  <Style id="roof_label">
+    <IconStyle><scale>0.0</scale><Icon><href>transparent-1x1.png</href></Icon></IconStyle>
+    <LabelStyle><color>ffffffff</color><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="side_label">
+    <IconStyle><scale>0.0</scale><Icon><href>transparent-1x1.png</href></Icon></IconStyle>
+    <LabelStyle><color>ff00ffff</color><scale>1.35</scale></LabelStyle>
+  </Style>
+  <Folder>
+    <name>Roof center labels - white</name>
+    <visibility>0</visibility>
+
+    <Placemark>
+      <name>1974 SHATTUCK Ave · 599u · 28 stories</name>
+      <description><![CDATA[1974 SHATTUCK Ave<br/>599 units · 28 stories<br/>Owner: 1974 SHATTUCK AVENUE LLC<br/>Architect: n/a]]></description>
+      <styleUrl>#roof_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2688644355,37.8725677281,106.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2190 SHATTUCK Ave · 452u 34 stories ·</name>
+      <description><![CDATA[2190 SHATTUCK Ave<br/>452 units · 34 stories<br/>Owner: LMP Shattuck Property Owner LL<br/>Architect: n/a]]></description>
+      <styleUrl>#roof_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2685737015,37.8694858955,127.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2700 SHATTUCK Ave · 359u · 15 stories</name>
+      <description><![CDATA[2700 SHATTUCK Ave<br/>359 units · 15 stories<br/>Owner: n/a<br/>Architect: Studio KDA]]></description>
+      <styleUrl>#roof_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2678653051,37.8597224321,60.5</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2276 SHATTUCK Ave · 336u · 18 stories</name>
+      <description><![CDATA[2276 SHATTUCK Ave<br/>336 units · 18 stories<br/>Owner: n/a<br/>Architect: n/a]]></description>
+      <styleUrl>#roof_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2682775940,37.8677150531,71.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2274 SHATTUCK Ave · 299u · 17 stories</name>
+      <description><![CDATA[2274 SHATTUCK Ave<br/>299 units · 17 stories<br/>Owner: WADE WILLIAM J TR<br/>Architect: Trachtenberg Architects]]></description>
+      <styleUrl>#roof_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2684379559,37.8678704372,67.5</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2352 Shattuck Ave · 237u</name>
+      <description><![CDATA[2352 Shattuck Ave<br/>237 units · 8 stories<br/>Owner: n/a<br/>Architect: n/a]]></description>
+      <styleUrl>#roof_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2683957165,37.8661806187,36.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2920 SHATTUCK Ave · 221u</name>
+      <description><![CDATA[2920 SHATTUCK Ave<br/>221 units · 10 stories<br/>Owner: n/a<br/>Architect: Studio KDA]]></description>
+      <styleUrl>#roof_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2669182659,37.8564101533,43.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>3000 SHATTUCK Ave · 166u</name>
+      <description><![CDATA[3000 SHATTUCK Ave<br/>166 units · 10 stories<br/>Owner: Dev: NX Ventures<br/>Architect: Trachtenberg Architects]]></description>
+      <styleUrl>#roof_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2667389613,37.8549906869,42.7</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>1951 Shattuck Ave · 163u · NX Ventures · Trachtenberg Architects </name>
+      <description><![CDATA[1951 Shattuck Ave<br/>163 units · 3 stories<br/>Owner: n/a<br/>Architect: n/a]]></description>
+      <styleUrl>#roof_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2681196273,37.8724720039,25.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2420 SHATTUCK Ave · 132u</name>
+      <description><![CDATA[2420 SHATTUCK Ave<br/>132 units · 17 stories<br/>Owner: n/a<br/>Architect: Studio KDA]]></description>
+      <styleUrl>#roof_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2679645091,37.8653077941,67.5</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2847 SHATTUCK Ave · 132u</name>
+      <description><![CDATA[2847 SHATTUCK Ave<br/>132 units · 9 stories<br/>Owner: Dev: NX Ventures<br/>Architect: Trachtenberg Architects]]></description>
+      <styleUrl>#roof_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2663567027,37.8569633806,49.5</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2109 VIRGINIA St · 110u</name>
+      <description><![CDATA[2109 VIRGINIA St<br/>110 units · 8 stories<br/>Owner: Dev: Panoramic Interests<br/>Architect: Trachtenberg Architects]]></description>
+      <styleUrl>#roof_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2685205338,37.8770910867,27.3</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2655 SHATTUCK Ave · 97u</name>
+      <description><![CDATA[2655 SHATTUCK Ave<br/>97 units · 8 stories<br/>Owner: n/a<br/>Architect: n/a]]></description>
+      <styleUrl>#roof_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2664849390,37.8607278969,33.9</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2450 SHATTUCK Ave · 94u</name>
+      <description><![CDATA[2450 SHATTUCK Ave<br/>94 units · 7 stories<br/>Owner: n/a<br/>Architect: n/a]]></description>
+      <styleUrl>#roof_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2679150457,37.8646103269,32.5</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2955 SHATTUCK Ave · 74u</name>
+      <description><![CDATA[2955 SHATTUCK Ave<br/>74 units · 2 stories<br/>Owner: n/a<br/>Architect: n/a]]></description>
+      <styleUrl>#roof_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2660981773,37.8557230939,30.9</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>1752 SHATTUCK Ave · 72u</name>
+      <description><![CDATA[1752 SHATTUCK Ave<br/>72 units · 7 stories<br/>Owner: 1752 Shattuck LLC / Panoramic Interests<br/>Architect: Studio KDA]]></description>
+      <styleUrl>#roof_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2691334314,37.8753644557,32.5</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2550 SHATTUCK Ave · 72u</name>
+      <description><![CDATA[2550 SHATTUCK Ave<br/>72 units · 7 stories<br/>Owner: Dev: 4Terra Investments<br/>Architect: Trachtenberg Architects]]></description>
+      <styleUrl>#roof_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2677118850,37.8627467701,32.5</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2701 Shattuck Ave · 57u</name>
+      <description><![CDATA[2701 Shattuck Ave<br/>57 units · n/a stories<br/>Owner: n/a<br/>Architect: n/a]]></description>
+      <styleUrl>#roof_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2666845800,37.8601097600,35.4</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2023 Shattuck Ave · 48u</name>
+      <description><![CDATA[2023 Shattuck Ave<br/>48 units · n/a stories<br/>Owner: n/a<br/>Architect: n/a]]></description>
+      <styleUrl>#roof_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2674876200,37.8716871600,35.4</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2440 SHATTUCK Ave · 40u</name>
+      <description><![CDATA[2440 SHATTUCK Ave<br/>40 units · 8 stories<br/>Owner: n/a<br/>Architect: n/a]]></description>
+      <styleUrl>#roof_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2679940466,37.8649913388,36.0</coordinates>
+      </Point>
+    </Placemark>
+
+  </Folder>
+  <Folder>
+    <name>Street-side floating labels - yellow - 15m AGL</name>
+    <visibility>1</visibility>
+
+    <Placemark>
+      <name>1974 SHATTUCK Ave 
+599 units · 28 stories
+Owner: 1974 SHATTUCK AVENUE LLC
+Dev: NX Ventures
+Arch: Trachtenberg Architects</name>
+      <description><![CDATA[1974 SHATTUCK Ave<br/>599 units · 28 stories<br/>Owner: 1974 SHATTUCK AVENUE LLC<br/>Architect: n/a]]></description>
+      <styleUrl>#side_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2685795067,37.8725881640,15.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2190 SHATTUCK Ave 
+452 units · 34 stories · Dev: Landmark Properties, Ga · Trachtenberg Architects · Myefski Architects
+Owner: LMP Shattuck LLC</name>
+      <description><![CDATA[2190 SHATTUCK Ave<br/>452 units · 34 stories<br/>Owner: LMP Shattuck Property Owner LL<br/>Architect: n/a]]></description>
+      <styleUrl>#side_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2681849125,37.8695091715,15.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2700 SHATTUCK Ave 
+359 units · 15 stories · 
+Dev: Hudson, McDonald
+Arch: Stackhouse De La Pẽna Trachtenberg Architects </name>
+      <description><![CDATA[2700 SHATTUCK Ave<br/>359 units · 15 stories<br/>Owner: n/a<br/>Architect: Stackhouse De La Pẽna Trachtenberg Architects ]]></description>
+      <styleUrl>#side_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2673258356,37.8597547375,15.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2276 SHATTUCK Ave 
+336 units · 18 stories
+Owner: Laksh Lakireddy-Vindium Real Estate · Dev: Pasand Courtyard LLC · Arch: Studio KDA </name>
+      <description><![CDATA[2276 SHATTUCK Ave<br/>336 units · 18 stories<br/>Owner: n/a<br/>Architect: n/a]]></description>
+      <styleUrl>#side_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2679781495,37.8677329810,15.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2274 SHATTUCK Ave 
+299 units · 17 stories
+Owner: WADE WILLIAM J TR ·
+Dev: Panoramic Interests ·
+Arch: Trachtenberg Architects</name>
+      <description><![CDATA[2274 SHATTUCK Ave<br/>299 units · 17 stories<br/>Owner: WADE WILLIAM J TR<br/>Architect: Trachtenberg Architects]]></description>
+      <styleUrl>#side_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2680371364,37.8678944344,15.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2352 Shattuck Ave 
+237 units · 8 stories
+Owner:
+Dev: Austin Group · CA Ventures
+Arch:Niles Bolton Associates</name>
+      <description><![CDATA[2352 Shattuck Ave<br/>237 units · 8 stories<br/>Owner: n/a<br/>Architect: n/a]]></description>
+      <styleUrl>#side_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2679128784,37.8662095277,15.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2920 SHATTUCK Ave 
+221 units · 10 stories · 
+Dev: NX Ventures
+Arch: Trachtenberg Architects</name>
+      <description><![CDATA[2920 SHATTUCK Ave<br/>221 units · 10 stories<br/>Owner: n/a<br/>Architect: Studio KDA]]></description>
+      <styleUrl>#side_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2667411306,37.8564247123,15.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>3000 SHATTUCK Ave 
+166 units · 10 stories
+Dev: NX Ventures
+Arch: Trachtenberg Architects</name>
+      <description><![CDATA[3000 SHATTUCK Ave<br/>166 units · 10 stories<br/>Owner: Dev: NX Ventures<br/>Architect: Trachtenberg Architects]]></description>
+      <styleUrl>#side_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2665582021,37.8550055443,15.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>1951 Shattuck Ave 
+163 units · 3 stories
+Owner/
+Dev: Grosvenor
+Arch: Solomon Cordwell Buenz</name>
+      <description><![CDATA[1951 Shattuck Ave<br/>163 units · 3 stories<br/>Owner: n/a<br/>Architect: n/a]]></description>
+      <styleUrl>#side_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2683443108,37.8724558889,15.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2420 SHATTUCK Ave 
+132 units · 17 stories
+Arch: Studio KDA</name>
+      <description><![CDATA[2420 SHATTUCK Ave<br/>132 units · 17 stories<br/>Owner: n/a<br/>Architect: Studio KDA]]></description>
+      <styleUrl>#side_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2677242635,37.8653221787,15.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2847 SHATTUCK Ave 
+132 units · 9 stories
+Dev: NX Ventures
+Arch: Trachtenberg Architects</name>
+      <description><![CDATA[2847 SHATTUCK Ave<br/>132 units · 9 stories<br/>Owner: Dev: NX Ventures<br/>Architect: Trachtenberg Architects]]></description>
+      <styleUrl>#side_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2666183189,37.8569418783,15.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2109 VIRGINIA St 
+110 units · 8 stories ·
+Dev: Panoramic Interests ·
+Arch: Trachtenberg Architects</name>
+      <description><![CDATA[2109 VIRGINIA St<br/>110 units · 8 stories<br/>Owner:Art Kapoor - Dev: Panoramic Interests<br/>Architect: Trachtenberg Architects]]></description>
+      <styleUrl>#side_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2688308592,37.8770688320,15.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2655 SHATTUCK Ave 
+97 units · 8 stories
+Owner: Joe Kidron of S.H. Kay LLC 
+Dev: S.H. Kay LLC
+Arch: Studion KDA</name>
+      <description><![CDATA[2655 SHATTUCK Ave<br/>97 units · 8 stories<br/>Owner: n/a<br/>Architect: n/a]]></description>
+      <styleUrl>#side_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2669725717,37.8606986965,15.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2450 SHATTUCK Ave 
+94 units · 7 stories ·
+Owner: Gordon Commercial Real Estate ·
+Dev: Austin Group · CA Ventures ·
+Arch:Niles Bolton Associates </name>
+      <description><![CDATA[2450 SHATTUCK Ave<br/>94 units · 7 stories<br/>Owner: n/a<br/>Architect: n/a]]></description>
+      <styleUrl>#side_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2676632411,37.8646254039,15.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2955 SHATTUCK Ave 
+74 units · 2 stories ·
+Owner/Dev/Arch: n/a</name>
+      <description><![CDATA[2955 SHATTUCK Ave<br/>74 units · 2 stories<br/>Owner: n/a<br/>Architect: n/a]]></description>
+      <styleUrl>#side_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2664271713,37.8556960529,15.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>1752 SHATTUCK Ave 
+72 units · 7 stories
+Owner: 1752 Shattuck LLC / Panoramic Interests
+Dev: Panoramic Interests
+Arch: Studio KDA</name>
+      <description><![CDATA[1752 SHATTUCK Ave<br/>72 units · 7 stories<br/>Owner: 1752 Shattuck LLC / Panoramic Interests<br/>Architect: Studio KDA]]></description>
+      <styleUrl>#side_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2688821238,37.8753824788,15.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2550 SHATTUCK Ave 
+72 units · 7 stories
+Dev: 4Terra Investments
+Arch: Trachtenberg Architects</name>
+      <description><![CDATA[2550 SHATTUCK Ave<br/>72 units · 7 stories<br/>Owner: Dev: 4Terra Investments<br/>Architect: Trachtenberg Architects]]></description>
+      <styleUrl>#side_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2674786158,37.8627607380,15.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2701 Shattuck Ave 
+97 units · 8 stories
+Owner: 
+Dev:
+Arch: KDA Associates</name>
+      <description><![CDATA[2701 Shattuck Ave<br/>57 units · n/a stories<br/>Owner: n/a<br/>Architect: n/a]]></description>
+      <styleUrl>#side_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2669924948,37.8600913211,15.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2023 Shattuck Ave 
+48 units · n/a stories
+Owner/Dev/Arch: n/a</name>
+      <description><![CDATA[2023 Shattuck Ave<br/>48 units · n/a stories<br/>Owner: n/a<br/>Architect: n/a]]></description>
+      <styleUrl>#side_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2680892861,37.8716440057,15.0</coordinates>
+      </Point>
+    </Placemark>
+
+    <Placemark>
+      <name>2440 SHATTUCK Ave 
+40 units · 8 stories
+Owner/Dev/Arch: n/a</name>
+      <description><![CDATA[2440 SHATTUCK Ave<br/>40 units · 8 stories<br/>Owner: n/a<br/>Architect: n/a]]></description>
+      <styleUrl>#side_label</styleUrl>
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>-122.2677123756,37.8650082039,15.0</coordinates>
+      </Point>
+    </Placemark>
+
+  </Folder>
+</Document>
+</kml>

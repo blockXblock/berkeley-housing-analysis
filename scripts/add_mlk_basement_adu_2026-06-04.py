@@ -1,0 +1,42 @@
+import sqlite3, sys
+DB='databases/berkeley_housing_v2.db'
+PROV="CPRA BP Annual Permit Report 2023-2025 (B2020-02346, Finaled 2023-01-11, status Finaled) primary-permit-confirmed; 2210 MLK basement ADU 2026-06-04"
+DRY=('--commit' not in sys.argv)
+v=sqlite3.connect(DB); v.row_factory=sqlite3.Row; cur=v.cursor()
+cur.execute("PRAGMA foreign_keys=OFF"); cur.execute("BEGIN")
+try:
+    pre={y:cur.execute(f"SELECT COALESCE(SUM(total_units),0) FROM v_projects_flat WHERE substr(co_issued_date,1,4)='{y}' AND project_id NOT IN (165,170,171,177)").fetchone()[0] for y in ('2018','2019','2020','2021','2022','2023','2024','2025','2026')}
+    p362=cur.execute("SELECT co_issued_date co, total_units u FROM v_projects_flat WHERE project_id=362").fetchone()
+    n0=cur.execute("SELECT COUNT(*) FROM projects").fetchone()[0]
+    PCID=349  # reuse existing 2210 MLK parcel
+    cur.execute("INSERT INTO projects (city_id,canonical_name,canonical_address,normalized_address,latitude,longitude,current_stage_type_id) VALUES (1,?,?,?,?,?,6)",
+                ('2210 MLK basement ADU','2210 M L KING JR Way (basement ADU)','2210|MLK',37.86820377,-122.27301114)); pid=cur.lastrowid
+    cur.execute("INSERT INTO documents (project_id,title,permit_number,source_system,notes) VALUES (?,?,?,?,?)",(pid,'CPRA BP Annual Permit Report 2023-2025','B2020-02346','cpra',PROV)); doc=cur.lastrowid
+    cur.execute("INSERT INTO project_versions (project_id,version_label,version_type_id,effective_date,total_units,is_current,source_document_id,asserted_by,confidence_type_id,description) VALUES (?,?,5,?,?,1,?,?,2,?)",
+                (pid,'as-built (CPRA Finaled)','2023-01-11',1,doc,PROV,'A new 985 sf 5-bed 2-bath ADU at existing basement (B2020-02346). Separate from the detached rear ADU (proj362, B2020-01827, 2025).')); vid=cur.lastrowid
+    cur.execute("UPDATE projects SET current_version_id=? WHERE id=?",(vid,pid))
+    cur.execute("INSERT INTO unit_program (project_version_id,bedroom_count,tenure_type_id,unit_count,source_document_id,asserted_by,confidence_type_id,notes) VALUES (?,NULL,8,?,?,?,2,?)",(vid,1,doc,PROV,'1u net-new ADU; bedroom/tenure Unknown')); up=cur.lastrowid
+    cur.execute("INSERT INTO unit_program_affordability (unit_program_id,income_category_id,unit_count,source_document_id,asserted_by,confidence_type_id) VALUES (?,6,?,?,?,2)",(up,1,doc,PROV))
+    cur.execute("INSERT INTO project_parcels (project_id,parcel_id,is_primary) VALUES (?,?,1)",(pid,PCID))
+    cur.execute("INSERT INTO permits (project_id,source_system,permit_number,permit_type_id,issued_date,finaled_date,valuation,description) VALUES (?,?,?,5,?,?,?,?)",(pid,'cpra','B2020-02346',None,'2023-01-11',None,'New 985 sf 5-bed 2-bath ADU at existing basement')); perm=cur.lastrowid
+    cur.execute("INSERT INTO project_events (project_id,event_type_id,event_date,permit_id,is_inferred,confidence_type_id,source_type,summary) VALUES (?,17,?,?,1,2,'city_portal',?)",(pid,'2023-01-11',perm,'CO from CPRA Finaled 2023-01-11 (B2020-02346, basement ADU). Separate unit from proj362 detached ADU (2025).'))
+    cur.execute("INSERT INTO project_events (project_id,event_type_id,event_date,permit_id,is_inferred,confidence_type_id,source_type,summary) VALUES (?,26,'2026-06-04',?,1,2,'inferred',?)",(pid,perm,'Permit classified PRIMARY (ADU, primary-permit-confirmed)'))
+    post={y:cur.execute(f"SELECT COALESCE(SUM(total_units),0) FROM v_projects_flat WHERE substr(co_issued_date,1,4)='{y}' AND project_id NOT IN (165,170,171,177)").fetchone()[0] for y in pre}
+    new=cur.execute("SELECT co_issued_date co, total_units u, status_label sl FROM v_projects_flat WHERE project_id=?",(pid,)).fetchone()
+    p362b=cur.execute("SELECT co_issued_date co, total_units u FROM v_projects_flat WHERE project_id=362").fetchone()
+    fk=cur.execute("PRAGMA foreign_key_check").fetchall(); integ=cur.execute("PRAGMA integrity_check").fetchone()[0]
+    print("=== VERIFICATION ===")
+    print("  per-year: " + " ".join(f"CY{y}:{pre[y]}->{post[y]}" for y in pre))
+    print(f"  new basement ADU (proj{pid}): co={new['co']} units={new['u']} stage={new['sl']}  (expect 2023-01-11/1/Completed)")
+    print(f"  proj362 detached ADU UNCHANGED: co={p362b['co']} (was {p362['co']}) units={p362b['u']}")
+    print(f"  projects {n0}->{cur.execute('SELECT COUNT(*) FROM projects').fetchone()[0]} | FK={len(fk)} | integrity={integ}")
+    exp={'2018':70,'2019':98,'2020':76,'2021':107,'2022':84,'2023':701,'2024':709,'2025':531,'2026':216}
+    ok=(all(post[y]==exp[y] for y in exp) and new['co']=='2023-01-11' and new['u']==1 and p362b['co']==p362['co'] and len(fk)==0 and integ=='ok')
+    if ok and not DRY:
+        cur.execute("PRAGMA foreign_keys=ON"); v.commit(); print("\nALL CHECKS PASS -> COMMITTED")
+    elif ok:
+        v.rollback(); print("\nALL CHECKS PASS -> DRY RUN rolled back")
+    else:
+        v.rollback(); print("\n*** CHECK FAILED -> ROLLED BACK ***")
+except Exception as e:
+    v.rollback(); print("EXCEPTION -> ROLLED BACK:", repr(e))

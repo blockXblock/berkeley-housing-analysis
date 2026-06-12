@@ -1,0 +1,109 @@
+"""Smoke test for scripts.housing_rules. Run as:
+
+    python -m scripts.housing_rules.test_smoke
+
+Mandatory: this file must pass before any notebook integration. If a test
+fails, fix the underlying classifier or lookup, re-run, repeat until clean.
+
+Tests cover the spec from the Phase B handoff plus additional fail-loud cases
+for the year-based functions (valid_income_tiers_for_year,
+valid_streamlining_provisions_for_year) where the same out-of-range / None-input
+discipline applies.
+"""
+from datetime import date
+
+from scripts.housing_rules.classifiers import (
+    cycle_for_date,
+    is_projection_period,
+    valid_income_tiers_for_year,
+    valid_streamlining_provisions_for_year,
+)
+
+
+def _expect_raises(callable_, exc_type, label):
+    try:
+        result = callable_()
+    except exc_type as e:
+        return  # expected
+    raise AssertionError(f"{label}: expected {exc_type.__name__}, got result {result!r}")
+
+
+def main() -> int:
+    # --- cycle boundary tests (from Phase B handoff, verbatim) ---
+    assert cycle_for_date(date(2022, 12, 31)) == "5th", "deep 5th cycle"
+    assert cycle_for_date(date(2023, 1, 30))  == "5th", "5th cycle's last day before shared boundary"
+    assert cycle_for_date(date(2023, 1, 31))  == "6th", "boundary owned by later cycle (6th)"
+    assert cycle_for_date(date(2023, 2, 1))   == "6th", "day after shared boundary"
+    assert cycle_for_date(date(2031, 1, 31))  == "6th", "6th cycle's last documented day"
+
+    # --- 5th cycle start boundary (added: same convention applies) ---
+    assert cycle_for_date(date(2015, 1, 31))  == "5th", "5th cycle's first day"
+
+    # --- missing data ---
+    assert cycle_for_date(None) is None, "None input -> None output"
+
+    # --- out of range: fail loudly ---
+    _expect_raises(lambda: cycle_for_date(date(2031, 2, 1)),  ValueError, "post-6th raises")
+    _expect_raises(lambda: cycle_for_date(date(2014, 12, 31)), ValueError, "pre-5th raises")
+
+    # --- projection period (verbatim from spec) ---
+    assert is_projection_period(date(2022, 6, 30)) is True,  "projection start boundary"
+    assert is_projection_period(date(2022, 7, 1))  is True,  "deep projection period"
+    assert is_projection_period(date(2023, 1, 30)) is True,  "projection end boundary"
+    assert is_projection_period(date(2023, 1, 31)) is False, "day 1 of 6th cycle proper, NOT projection"
+    assert is_projection_period(date(2022, 6, 29)) is False, "day before projection start"
+    assert is_projection_period(None)              is False, "None -> False (predicate semantics)"
+
+    # --- projection period: bounds beyond window stay False (predicate, doesn't raise) ---
+    assert is_projection_period(date(1999, 1, 1))  is False, "far-past date is False, no raise"
+    assert is_projection_period(date(2099, 1, 1))  is False, "far-future date is False, no raise"
+
+    # --- projection period: non-existent cycle returns False ---
+    assert is_projection_period(date(2022, 7, 1), cycle="7th") is False, \
+        "unknown cycle name returns False, not raise"
+
+    # --- income tiers (verbatim from spec) ---
+    tiers_2024 = valid_income_tiers_for_year(2024)
+    assert "ACUTELY_LOW" not in tiers_2024, "ACUTELY_LOW not yet reportable in 2024"
+    assert "EXTREMELY_LOW" in tiers_2024,  "EXTREMELY_LOW reportable in 2024"
+
+    tiers_2025 = valid_income_tiers_for_year(2025)
+    assert "ACUTELY_LOW" in tiers_2025,    "ACUTELY_LOW first reportable in 2025"
+    assert "EXTREMELY_LOW" in tiers_2025,  "EXTREMELY_LOW still reportable in 2025"
+
+    # --- income tiers: stable across the cycle window ---
+    tiers_2018 = valid_income_tiers_for_year(2018)
+    assert set(tiers_2018) == {"EXTREMELY_LOW", "VLOW", "LOW", "MOD", "ABOVE_MOD"}, \
+        "pre-ACUTELY_LOW tier set in 2018"
+
+    # --- income tiers: out of range raises ---
+    _expect_raises(lambda: valid_income_tiers_for_year(2017), ValueError, "pre-2018 tier lookup raises")
+    _expect_raises(lambda: valid_income_tiers_for_year(2032), ValueError, "post-2031 tier lookup raises")
+
+    # --- streamlining provisions: progressive accumulation by year ---
+    provs_2018 = valid_streamlining_provisions_for_year(2018)
+    assert provs_2018 == ["SB35"], f"only SB35 in 2018, got {provs_2018}"
+
+    provs_2022 = valid_streamlining_provisions_for_year(2022)
+    assert set(provs_2022) == {"SB35", "SB9"}, f"SB35+SB9 in 2022, got {provs_2022}"
+
+    provs_2023 = valid_streamlining_provisions_for_year(2023)
+    assert set(provs_2023) == {"SB35", "SB9", "AB2011", "SB6"}, \
+        f"SB35+SB9+AB2011+SB6 in 2023, got {provs_2023}"
+
+    provs_2024 = valid_streamlining_provisions_for_year(2024)
+    assert set(provs_2024) == {"SB35", "SB9", "AB2011", "SB6", "SB423"}, \
+        f"all five in 2024, got {provs_2024}"
+
+    # --- streamlining: out of range raises ---
+    _expect_raises(lambda: valid_streamlining_provisions_for_year(2017), ValueError,
+                   "pre-SB35 provisions lookup raises")
+    _expect_raises(lambda: valid_streamlining_provisions_for_year(2050), ValueError,
+                   "post-all-sunsets provisions lookup raises")
+
+    print("All smoke tests passed.")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

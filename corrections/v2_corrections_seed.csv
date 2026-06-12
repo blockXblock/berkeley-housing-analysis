@@ -1,0 +1,7 @@
+project_id,version_id,field,expected_old,new_value,source_class,source_quote,observed_date,note
+15,15,height_stories,2,8,description,construct a new 8-story,2026-06-11,demolished-story bug
+15,15,height_feet,131,89.33,document,"89'-4""",2026-06-11,"height per plan set cover (both PDFs), 8-story 89'-4""; Accela narrative said 88'-4"" — drawing supersedes"
+15,15,total_units,131,110,document,"plan set A0.3B unit tables, both PDFs: base 55 + density bonus 55 = 110",2026-06-11,110 confirmed in two dated plan sets; supersedes Accela narrative 131
+22,22,height_stories,2,8,description,proposed project is an 8-story,2026-06-11,demolished-story bug
+123,121,height_stories,1,8,description,construct an 8-story,2026-06-11,demolished-story bug
+11,11,height_feet,158,88.5,description,"7-story, 88'6""",2026-06-11,"units-leaked-into-feet; VERIFY against plan set before write — currently description-sourced, same risk class as proj15's 88-vs-89 catch"

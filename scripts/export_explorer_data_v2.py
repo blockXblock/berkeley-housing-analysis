@@ -122,19 +122,23 @@ def get_projects(conn):
         for (code,) in class_cur.fetchall():
             flags.add(code)
 
-        # VLI units
-        vli_cur = conn.cursor()
-        vli_cur.execute('''
-            SELECT SUM(upa.unit_count)
+        # Affordability income tiers (full breakdown: ELI / VLI / LI / MOD / ABOVE_MOD)
+        tier_cur = conn.cursor()
+        tier_cur.execute('''
+            SELECT vic.code, SUM(upa.unit_count)
             FROM unit_program_affordability upa
             JOIN unit_program up ON up.id = upa.unit_program_id
             JOIN project_versions pv ON pv.id = up.project_version_id
             JOIN vocabulary_income_categories vic ON vic.id = upa.income_category_id
             WHERE pv.project_id = ? AND pv.is_current = 1
-              AND vic.code = 'VLI'
+            GROUP BY vic.code
         ''', (pid,))
-        vli_row = vli_cur.fetchone()
-        vli_units = vli_row[0] if vli_row and vli_row[0] else 0
+        _tiers = {code: (cnt or 0) for code, cnt in tier_cur.fetchall()}
+        eli_units = _tiers.get('ELI', 0)
+        vli_units = _tiers.get('VLI', 0)
+        li_units = _tiers.get('LI', 0)
+        mod_units = _tiers.get('MOD', 0)
+        market_units = _tiers.get('ABOVE_MOD', 0)
 
         # Key event dates (MAX event_date per event_type)
         # Include construction-related events for inactive detection
@@ -253,7 +257,11 @@ def get_projects(conn):
             "longitude": row[3],
             "unit_category": None,
             "tenure": None,
+            "eli_units": eli_units,
             "vli_units": vli_units,
+            "li_units": li_units,
+            "mod_units": mod_units,
+            "market_units": market_units,
             "density_bonus": 'density_bonus' in flags,
             "density_bonus_pct": None,
             "sb330": 'sb330_protected' in flags,

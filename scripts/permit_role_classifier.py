@@ -66,6 +66,10 @@ SUBSIDIARY_LEAD_PATTERNS = [
     r'\s*pv\b',
     r'\s*photovoltaic\b',
     r'\s*solar\s+panel',
+    # "Install … PV/solar …" — a solar permit ON a (possibly new) building is
+    # still a trade permit; reject it BEFORE the body scan can match the new
+    # building it references (e.g. "Install PV on roof of new ADU"). (2026-06-14)
+    r'\s*install\b[\w\s.,()/&\d\'"-]{0,40}?\b(?:photovoltaic|pv|solar)\b',
     # HVAC/mechanical patterns
     r'\s*furnace\b',
     # Electrical service patterns
@@ -135,6 +139,36 @@ COMPLETES_BODY_PATTERNS = [
     r'\bsingle\s+family\s+home\b',
     r'\bnew\s+adus?\b',
     r'\bcomplete\s+interior\s+build[- ]?out\b',
+    # --- FIX A (2026-06-14): ADU completion under-match ---
+    # Creation / conversion / legalization of an accessory dwelling unit is a
+    # housing completion. A creation verb must sit near the ADU token, so a
+    # trade permit that merely mentions an ADU ("re-roof the ADU") is NOT caught
+    # here — and leading-word SUBSIDIARY patterns still reject trade leads first.
+    r'\b(?:new|construct\w*|build\w*|erect\w*|creat\w+|legaliz\w+|propos\w+)\b[\w\s.,;:#&"\'()/\-]{0,70}?\b(?:adus?|accessory\s+dwelling\s+units?|j\.?a\.?d\.?u\.?s?|junior\s+accessory\s+dwelling\s+units?)\b',
+    r'\b(?:convert|conversion)\w*\b[\w\s.,;:#&"\'()/\-]{0,55}?\b(?:in)?to\b[\w\s.,;:#&"\'()/\-]{0,35}?\b(?:adus?|accessory\s+dwelling\s+units?|j\.?a\.?d\.?u\.?s?)\b',
+    r'\b(?:adus?|accessory\s+dwelling\s+units?)\b[\w\s.,;:#&"\'()/\-]{0,40}?\b(?:built|constructed|created|will\s+be\s+built|to\s+be\s+(?:built|constructed))\b',
+    r'\b(?:detached|attached|new|proposed|junior)\s+(?:\w+\s+){0,5}?(?:adus?|accessory\s+dwelling\s+units?)\b',
+    r'\b(?:adus?|accessory\s+dwelling\s+units?)\b[\w\s.,;:#&"\'()/\-]{0,30}?\b(?:in\s+place\s+of|in\s+the\s+(?:rear|backyard)|garage\s+conversion)\b',
+    r'\baddition\s+of\b[\w\s.,;:#&"\'()/\-]{0,30}?\badus?\b',
+    # --- FIX B (2026-06-14): proj219-class named-unit-count under-match ---
+    # "N <type> units" where the TYPE word names housing (apartment/dwelling/
+    # residential/rental/condominium/townhome). Gates on the unit-TYPE word, not
+    # a bare integer — a trade permit's UnitsAdded=1 never reads "N apartment
+    # units". Catches "(57) apartment units", "81 dwelling units", "163 rental
+    # units", parenthetical or plain.
+    r'\(\s*\d+\s*\)\s*(?:[a-z]+\s+){0,2}?(?:apartment|dwelling|residential|rental|condominium|townhome)\s+units?\b',
+    r'\b\d+\s+(?:[a-z]+\s+){0,2}?(?:apartment|dwelling|residential|rental|condominium|townhome)\s+units?\b',
+    # --- FIX C (2026-06-14): new single-family / residence completions ---
+    # Creation verb + a DWELLING token (single-family / residence / house / dwelling /
+    # SFR). Size/story descriptors may sit between, but partial-work phrasing is excluded
+    # by requiring the dwelling token itself: "new second level", "new addition", "new
+    # roof", and "... service to existing residence" carry no dwelling token in position
+    # and stay ambiguous. These are BODY patterns, so the solar/demo/trade SUBSIDIARY
+    # leads still fire first ("demolish single family residence" / "install PV on new
+    # house" reject before reaching here).
+    r'\b(?:new|construct\w*|build\w*|erect\w*)\b[\w\s.,;:#&"\'()/\-]{0,40}?\bsingle[- ]?family\s+(?:home|house|residence|dwelling)\b',
+    r'\bnew\b[\w\s,.\'#()/\-]{0,12}?\b\d[\d,]*\s*(?:sq\.?\s*ft\.?|sf|sqft|square\s+feet)\b[\s,.\'#()/\-]{0,4}\b(?:residence|dwelling|house|sfr)\b',
+    r'\bnew\b[\w\s,.\'#()/\-]{0,10}?\b(?:\d+|one|two|three|four)[- ]?stor(?:y|ies|ey)\b[\w\s,.\'#()/\-]{0,20}?\b(?:residence|dwelling|house|sfr|single[- ]family)\b',
 ]
 
 DOES_NOT_COMPLETE_BODY_PATTERNS = [
@@ -190,7 +224,11 @@ def classify_permit_for_completion(description: Optional[str]) -> str:
     if not desc_stripped:
         return 'ambiguous'
 
-    desc_lower = desc_stripped.lower()
+    # Normalize unicode curly quotes/apostrophes to ASCII so they don't break the
+    # bounded character classes in the patterns (e.g. "20’ tall, ADU"). (2026-06-14)
+    desc_lower = (desc_stripped.lower()
+                  .replace('’', "'").replace('‘', "'")
+                  .replace('“', '"').replace('”', '"'))
 
     # Step B: Check leading subsidiary patterns (re.match = anchored at start)
     for pattern in SUBSIDIARY_LEAD_PATTERNS:

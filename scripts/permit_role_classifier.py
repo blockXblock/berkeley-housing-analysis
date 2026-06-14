@@ -169,6 +169,17 @@ COMPLETES_BODY_PATTERNS = [
     r'\b(?:new|construct\w*|build\w*|erect\w*)\b[\w\s.,;:#&"\'()/\-]{0,40}?\bsingle[- ]?family\s+(?:home|house|residence|dwelling)\b',
     r'\bnew\b[\w\s,.\'#()/\-]{0,12}?\b\d[\d,]*\s*(?:sq\.?\s*ft\.?|sf|sqft|square\s+feet)\b[\s,.\'#()/\-]{0,4}\b(?:residence|dwelling|house|sfr)\b',
     r'\bnew\b[\w\s,.\'#()/\-]{0,10}?\b(?:\d+|one|two|three|four)[- ]?stor(?:y|ies|ey)\b[\w\s,.\'#()/\-]{0,20}?\b(?:residence|dwelling|house|sfr|single[- ]family)\b',
+    # --- FIX D (2026-06-14): manufactured / modular DWELLING completions ---
+    # "manufactured/modular" is overloaded — "manufactured spa", "manufactured roof
+    # truss", "air handling/condensing unit" are equipment/components, NOT dwellings,
+    # and must stay rejected/ambiguous. Gate strictly on DWELLING context: the
+    # manufactured/modular/factory-built token must sit near a dwelling token
+    # (home/dwelling/residence/housing/ADU/accessory dwelling), OR carry the HUD/HCD-
+    # approved + "manufactured unit" signature of a permitted manufactured home. A bare
+    # "manufactured ... unit" with no dwelling/HUD-HCD signal does NOT match.
+    r'\b(?:manufactured|modular|factory[- ]?(?:built|assembled))\b[\w\s.,;:#&"\'()/\-]{0,30}?\b(?:home|dwelling|residence|housing|adus?|accessory\s+dwelling)\b',
+    r'\b(?:home|dwelling|residence|housing|adus?|accessory\s+dwelling)\b[\w\s.,;:#&"\'()/\-]{0,30}?\b(?:manufactured|modular|factory[- ]?(?:built|assembled))\b',
+    r'\b(?:hud|hcd)\b[\w\s.,;:#&/\-]{0,20}?\bapproved\b[\w\s.,;:#&/\-]{0,25}?\bmanufactured\s+unit\b',
 ]
 
 DOES_NOT_COMPLETE_BODY_PATTERNS = [
@@ -476,6 +487,10 @@ NEW_COMPLETES_TEST_CASES = [
      'completes_project', 'audit: Building B leading'),
     ("Phase 2 - Superstructure - Concrete Floor slabs up to 3rd Floor and all wood framing above, exterior facade and complete interior build-out",
      'completes_project', 'audit: Phase 2 superstructure'),
+    ("986 sq ft HUD/HDC approved manufactured unit to be installed on permanent foundation.",
+     'completes_project', 'B2022-05902: manufactured dwelling (Fix D positive). Negatives that '
+     'must stay non-completes: "manufactured roof truss" (B2024-02435), "manufactured spa" '
+     '(B2022-05428) — asserted in CY2024 validation, classify ambiguous not does_not.'),
 ]
 
 NEW_DOES_NOT_COMPLETE_TEST_CASES = [

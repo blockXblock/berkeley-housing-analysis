@@ -191,6 +191,35 @@ COMPLETES_BODY_PATTERNS = [
     r'\b(?:manufactured|modular|factory[- ]?(?:built|assembled))\b[\w\s.,;:#&"\'()/\-]{0,30}?\b(?:home|dwelling|residence|housing|adus?|accessory\s+dwelling)\b',
     r'\b(?:home|dwelling|residence|housing|adus?|accessory\s+dwelling)\b[\w\s.,;:#&"\'()/\-]{0,30}?\b(?:manufactured|modular|factory[- ]?(?:built|assembled))\b',
     r'\b(?:hud|hcd)\b[\w\s.,;:#&/\-]{0,20}?\bapproved\b[\w\s.,;:#&/\-]{0,25}?\bmanufactured\s+unit\b',
+    # --- FIX E (2026-06-14): STEP-3 rescue blind spots (sixth pass) ---
+    # The STEP-3 ambiguous-rescue eyeball exposed 5 families of real residential
+    # completions this classifier was missing (verb/noun forms, abbreviations, typos).
+    # These are BODY patterns, so the subsidiary LEADS still fire first (a trade permit
+    # that merely contains a dwelling noun is rejected by its leading word). Precision
+    # validated: 0 demotions across the 598 prior completes + 68 prior does_not.
+    # E1 — creation verb (incl. conversion-of noun, add/adding, covert-typo) within a
+    #      bounded window of a dwelling/unit noun (incl. condo, duplex, townhouse,
+    #      in-law unit (space or hyphen), Nth/second/additional/junior unit, JADU dots).
+    # NB: verb is 'builds?\b' (not 'build\w*') so the NOUN "building" ("the building will
+    # remain a duplex", "existing building contains") does NOT read as a creation verb;
+    # the gerund is covered by the separate 'building\s+a\s+new' alternative.
+    r'\b(?:new|newly|construct\w*|building\s+a\s+new|builds?\b|erect\w*|creat\w+|add\b|adding\b|addition\s+of|convert\w*|conversion\w*|covert\w*|legaliz\w+|propos\w+|reclassif\w+|change\s+use)\b[\w\s,.\'"#:;&()/\-]{0,70}?\b(?:homes?|houses?|residences?|dwellings?|de?welling\s+units?|condo(?:minium)?s?|duplex|tri-?plex|four-?plex|town\s*houses?|town\s*homes?|adus?|j\.?a\.?d\.?u\.?s?|sadu|accessory\s+dwellings?(?:\s+units?)?|accessory\s+units?|in[\s-]?law\s+units?|(?:second|secondary|additional|junior|jr\.?)\s+(?:dwelling\s+)?units?|\d+(?:st|nd|rd|th)\s+unit|dwelling\s+units?|residential\s+units?|residential\s+building|multi[\s-]?unit\s+residential|apartment\s+units?|living\s+units?|granny\s+(?:units?|flats?)|cottages?)\b',
+    # E2 — dwelling/unit noun FOLLOWED by a made/created/conversion verb (reverse order:
+    #      "single-family dwelling ... constructed", "SECONDARY UNIT CONVERSION").
+    r'\b(?:homes?|houses?|residences?|dwellings?|adus?|j\.?a\.?d\.?u\.?s?|accessory\s+dwellings?(?:\s+units?)?|(?:second|secondary|additional|junior)\s+(?:dwelling\s+)?units?|dwelling\s+units?)\b[\w\s,.\'"#:;&()/\-]{0,20}?\b(?:constructed|built|created|conversion)\b',
+    # E3 — abbreviated single-family residence ("NEW 2889SQFT SINGLE FAMILY RES."),
+    #      including "single family detached house/residence".
+    r'\b(?:new|construct\w*|building\s+a\s+new)\b[\w\s,.\'"#:;&()/\-]{0,30}?\bsingle[\s-]*famil\w*\s+(?:detached\s+)?(?:res\.?\b|residence|home|house|dwelling)',
+    # E4 — ADU with numeric-paren count "(2) ADU" or new/sqft/(N) context, or rear/backyard/
+    #      addition location, or "New residential accessory structure".
+    r'\(\s*\d+\s*\)[\w\s,.\'"#:;&()/\-]{0,12}?\badus?\b',
+    r'(?:\(\s*n\s*\)|\bnew\b|\d[\d,]*\s*(?:sq\.?\s*ft\.?|sf|sqft|square\s+feet))[\w\s,.\'"#:;&()/\-]{0,40}?\b(?:adus?|accessory\s+dwelling|sadu|j\.?a\.?d\.?u\.?s?)\b',
+    r'\badus?\b[\w\s,.\'"#:;&()/\-]{0,18}?\b(?:in\s+(?:back\s*yard|backyard|the\s+rear|rear)|addition)\b',
+    r'\bnew\s+residential\s+accessory\s+structure\b',
+    # E5 — explicit new-unit creation ("CREATION OF NEW UNIT", "create 2 new ... units",
+    #      "second/additional dwelling unit") and conversion INTO residential / in-law unit.
+    r'\bcreation\s+of\s+new\s+unit\b|\bcreate\b[\w\s,.\'"#:;&()/\-]{0,30}?\d+\s+new[\w\s,.\'"#:;&()/\-]{0,20}?\bunits?\b|\b(?:second|additional|new)\s+dwelling\s+unit\b',
+    r'\b(?:in)?to\s+(?:a\s+)?residential\b|\b(?:in)?to\s+in[\s-]?law\s+unit\b',
 ]
 
 DOES_NOT_COMPLETE_BODY_PATTERNS = [
@@ -206,6 +235,28 @@ DOES_NOT_COMPLETE_BODY_PATTERNS = [
     r'\bpatch\s+and\s+repair\s+stucco\b',
     r'\binsulation\b[^.]*\bdrywall\b',
     r'\bdrywall\b[^.]*\binsulation\b',
+    # --- INPUT-2 (2026-06-14, sixth pass): a single, SPECIFIC standalone-solar signal.
+    # A whole-permit "photovoltaic electric power system" is a trade permit (bucket-4
+    # B2023-03611). Broader electrical-service/panel BODY patterns were tried and REJECTED:
+    # they over-rejected genuine completions that merely mention an electrical upgrade
+    # (e.g. "New 749 SqFt detached ADU with a 200A service" → wrongly ambiguous) — the
+    # CAT-2 negative-guard failure. Electrical-service rejection stays LEADING-only (above);
+    # the residual minor permits are left 'ambiguous' (harvest queue), which moves no count
+    # since does_not and ambiguous are both uncounted. ---
+    r'\bphotovoltaic\s+electric\s+power\s+system\b',
+    # electrical/service permit SERVING a separately-built unit: the ADU is the powered
+    # object ("200 amps for ADU", "service to accommodate newly built ADU"), not the built
+    # one. Ordered electrical→for/accommodate→ADU, so an ADU-build that merely mentions an
+    # electrical upgrade ("New ADU ... Upgrade electrical panel" / "Upgrade panel. New
+    # construction of two ADUs") is NOT caught — the ADU token precedes the electrical there.
+    r'(?:\bamps?\b|\belectrical\s+(?:service|panel)\b|\bmeter\b)[\w\s,.\'"#&()/\-]{0,30}?\b(?:for|to\s+accommodate|serving|to\s+serve)\b[\w\s,.\'"#&()/\-]{0,20}?\b(?:adus?|accessory\s+dwelling(?:\s+units?)?)\b',
+    r'\bnewly\s+built\s+adus?\b',
+    # existing-building minor-work, relabel-only, multiplex remodel, seismic upgrade — specific.
+    r'\bbuilding\s+contains\b',
+    r'\bno\s+work\s+to\s+be\s+done\b',
+    r'\b(?:duplex|tri-?plex|four-?plex|building)\s+remodel\b',
+    r'\bremove[\w\s,.\'"#&()/\-]{0,25}?\bfrom\s+scope\b',
+    r'\bseismic\s+upgrade\b',
 ]
 
 NEEDS_MANUAL_VERIFICATION_PATTERNS = [
@@ -505,6 +556,27 @@ NEW_COMPLETES_TEST_CASES = [
     ("Construction of new 390sf detached accessory dwelling unit. Upgrade existing electrical service.",
      'completes_project', 'B2021-05343 CAT-2 negative: ADU build that ALSO mentions an electrical '
      'upgrade — leads with the ADU verb, so the electrical lead must NOT over-reject it.'),
+    # --- FIX E (2026-06-14) positives: one per STEP-3 rescue blind-spot family ---
+    ("Conversion of 845 SF commercial space into residential.",
+     'completes_project', 'E1 blind-spot 1: "Conversion of" NOUN + into residential (B2018-03653)'),
+    ("(N) 699sqft ADU",
+     'completes_project', 'E4 blind-spot 2: bare/(N) ADU, no creation verb (B2016-04204)'),
+    ("505SF ADU in backyard",
+     'completes_project', 'E4 blind-spot 2: ADU + location, no verb (B2019-03683)'),
+    ('**NEW 2,889SQFT SINGLE FAMILY RES. 480SQFT BASEMENT GARAGE. FIRE ZONE 2 PROPERTY.',
+     'completes_project', 'E3 blind-spot 3: abbreviation "SINGLE FAMILY RES." (B2015-03376)'),
+    ('New Condo w/attached garage "C" 2172 sq ft. Added EV Charging Station.',
+     'completes_project', 'E1 blind-spot 3: "condo" in residence vocabulary (B2019-05504)'),
+    ("Remodel (E) workshop to in law unit by adding a new kitchen, new bathroom and, new laundry.",
+     'completes_project', 'E1 blind-spot 4: "in law unit" (space, not hyphen) (B2018-00483)'),
+    ("Covert existing 232SF garage/unpermitted studio into a ADU",
+     'completes_project', 'E1 blind-spot 5: "Covert" typo + garage->ADU (B2021-03341)'),
+    ("Convert garage to an Accessory Dewelling Unit.",
+     'completes_project', 'E1 blind-spot 5: "Dewelling" typo (B2024-03769)'),
+    ("RAISE EXISTING HOUSE THREE (3) FEET. CREATION OF NEW UNIT- 1260 S.F., ADDITION",
+     'completes_project', 'E5: "CREATION OF NEW UNIT" (B2014-02947)'),
+    ("Replace existing garage with one bedroom, one bath second dwelling unit with garage.",
+     'completes_project', 'E5: "second dwelling unit" despite leading "Replace" (B2018-04404)'),
 ]
 
 NEW_DOES_NOT_COMPLETE_TEST_CASES = [
@@ -566,6 +638,23 @@ NEW_DOES_NOT_COMPLETE_TEST_CASES = [
      'does_not_complete_project', 'B2025-02754/proj64 CAT-2 fix: electrical-upgrade leading, ADU is a reference. Same bug class: B2024-00684, B2024-00915.'),
     ("New 400 Amp Service for 2 meters (ADU permit B2022-05577)",
      'does_not_complete_project', 'B2024-00684: electrical service permit referencing a separate ADU permit'),
+    # --- INPUT-2 (2026-06-14) standalone-solar rejection ---
+    ("This is a 18,900 STC WATT Photovoltaic Electric Power System W/ (35) Photovoltaic modules.",
+     'does_not_complete_project', 'INPUT-2: standalone photovoltaic system (bucket-4 B2023-03611)'),
+    # --- INPUT-2 FALSE-POSITIVE BLOCKS: these trade/relabel permits contain a dwelling token
+    # (so a completes pattern also fires) AND a guard — the body scan's both-match rule yields
+    # 'ambiguous', which correctly BLOCKS false-completion (the count-critical goal). They land
+    # in the harvest queue, not does_not; that does_not-vs-ambiguous nicety is count-neutral and
+    # deliberately not forced via fragile leading patterns (would risk the CAT-2 negatives). ---
+    # (asserted in CY2024 validation as ambiguous, not via this completes/does_not suite)
+    # --- CAT-2-class NEGATIVE GUARDS: genuine completions that mention a rejected keyword
+    # but MUST stay completes. If a future INPUT-2 tightening trips these, narrow it. ---
+    ("New 749 SqFt detached Accessory Dwelling Unit with a new water heater & A/C split mini system. Upgrade electrical panel to 200A.",
+     'completes_project', 'NEG GUARD (B2022-00713): ADU build that mentions "Upgrade electrical panel" '
+     '— ADU token leads, electrical is secondary, must NOT be rejected.'),
+    ("7/27/21 - Upgrade electrical service panel to 200-Amps. New construction of two detached Accessory Dwelling Units (ADU).",
+     'completes_project', 'NEG GUARD (B2020-01498): electrical-lead prefix then "New construction of two ADUs" '
+     '— the build must win; "for ADU"-style serving language is absent.'),
 ]
 
 

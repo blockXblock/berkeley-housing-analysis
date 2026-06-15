@@ -50,6 +50,7 @@ compatibility view is **`v_projects_flat`** (what `generate_apr_v2.py` and
 
 ## Tool vocabulary (reserved names — never blur)
 - **HARVESTER** = the Playwright framework (autonomous, `__doPostBack`/pagination/capID-discovery, bulk inspection + PDF-to-R2 retrieval). The tool for **bulk** Accela extraction. (`scripts/scrape_inspections.py` + `experiments/accela_scrape/inspection_scraper.py` / `url_discovery_scraper.py`.)
+  - **A `no-capID` / 0-result is NOT evidence of absence until retried.** These failures are often transient (Accela discovery flakiness) — e.g. 2026-06-15, 5/6 "discovery-failed" large buildings all resolved on a plain retry. **Retry the harvester before concluding a record is missing**, and before escalating to the (more expensive) CIC spot-check. Only a *consistent* post-retry 0-result, or a scrape that returns inspections but no building-final, is a real finding.
 - **SCRAPER = CIC = Claude in Chrome** (interactive, near-manual, one-permit spot-checks). The **OPPOSITE** of harvester. Never call a Playwright job "the scraper."
 - **CPRA INGESTION** = xlsx-feed → v2 load (not browser-based).
 

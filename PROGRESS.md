@@ -64,7 +64,7 @@
 ## Parked
 - Optimizer watchers (ACQUISITION-YIELD) — next sweep.
 - **5-project pre-window CPRA request** (proj175/481/505/525/555 — `B2016/2017` permits the harvester can't reach).
-- **CIC spot-check proj117 / proj32** (the two 0-inspection harvester extractions — rule out an extraction miss; low priority, uncounted either way).
+- **proj117 / proj32 (the two 0-inspection harvester extractions)** — **RETRY THE HARVESTER FIRST** (per the new CLAUDE.md rule: no-capID/0-result is often transient — the 2026-06-15 retry resolved 5/6). Only escalate to CIC if a retry still returns 0. Low priority, uncounted either way.
 - Exclude the **103 D7 planning records** from the completion harvest queue (queue hygiene).
 
 ## Open decisions / risks

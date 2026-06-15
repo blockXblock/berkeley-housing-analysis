@@ -6,6 +6,9 @@
 
 ## Where we are (2026-06-15)
 
+**INGESTION channel loaded (D8) — 38 feed-resident completions appended.** EVIDENCE-layer append (snapshot `keep_snapshot_2026-06-15_pre-ingest.db` sha `67c63383`): +38 permits, +17 new projects, +38 co_events, +17 versions; counted-completed **674 → 705 (+31)** (7 existing-links already counted). ~698 units incl. Acheson Commons + the 44/50/70/82/117/142-unit buildings. Non-circular: selected by feed Finaled-date + own description classifies completes (`112cb03`), never CKAN. 21 existing-links APN-verified (0 mismatch); 18 DECISIONS-holds intact; evidentiary basis from feed Finaled, note "CPRA Finaled <date>". The held REV (B2022-01742-REV01) correctly excluded (master already in v2 — double-count trap).
+- **STEP-6 proof: match ROSE every year (e.g. 2019 84→91, 2021 83→91, 2022 79→88), gap shrank** — BUT we-have/city-lacks went +1 in 2021 and +1 in 2025. Investigated: NOT over-ingestion — both are **year-attribution** (feed finaled-year ≠ city's reported year: B2016-02230 feed-2021/city-2022; B2023-04389 feed-2025/city-2024). Real completions, counting-convention difference. **AWAITING JOHN: accept (recommended — feed date is truth, re-dating to city = circularity) or roll back.** (2025 also has 2 pre-existing independence finds: proj83 SFR + a 39-unit the city lacks.)
+
 **Verdict layer — 8-year backfill COMPLETE.**
 - All **956 permits classified** by `permit_role_classifier @ 112cb03`; verdict+basis materialized into the existing `permits` columns (no new schema).
 - Distribution: **completes 693 · does_not 106 · ambiguous 157**. Basis: **evidentiary 671 · description_only 284 · human_override 1** (≈97% of completes evidentiary).

@@ -121,6 +121,21 @@ SUBSIDIARY_LEAD_PATTERNS = [
     r'\s*phase\s+i\b(?!i)',            # 'Phase I' but not 'Phase II'
     r'\s*unit\s*#[a-z]',
     r'\s*this\s+revision\s+application',
+    # --- PHASE-1 HARDENING (2026-06-15): trade/demo/minor leads the CY2024 reverts exposed.
+    # All leading-anchored (a real dwelling that merely MENTIONS these stays completes via the
+    # body scan); the demo-then-build conjunction is handled by a pre-check above (see classify).
+    # Negative guards for every one are asserted in the self-test suite. ---
+    r'\s*demolition\s+of\b',                                   # demo-ONLY noun form (demo-then-build pre-empted above)
+    r'\s*temp(?:orary)?\s+power\b',                            # "Temp Power", "Temporary Power Service..."
+    r'\s*\d+a?\s+temp\s+power\b',                              # "400A Temp Power"
+    r'\s*power\s+pole\b',
+    r'\s*install\w*[\w\s\d()\'.,\-]{0,22}?temp(?:orary)?\s+power',  # "Install (1) 35' temp power pole"
+    r'\s*\(\d+\)\s*furnace\b',                                 # "(1) Furnace changeout"
+    r'\s*install\s+heat\s+pump\b',
+    r'\s*upgrade\s+(?:the\s+)?(?:existing\s+)?(?:main\s+|sub\s*)?(?:electrical\s+)?(?:service|panel|meter)\b',  # "upgrade main panel 200amp"
+    r'\s*change\s+existing[\w\s,]{0,30}?electrical\s+service\b',  # "Change existing 200 amp...electrical service"
+    r'\s*replace\s+\d+\s*amp\b',                               # "Replace 200amp single meter main"
+    r'\s*add\b[\w\s.,()/&\d\'-]{0,40}?\b(?:pv|solar|photovoltaic)\b',  # "Add 2.64 KW PV solar panels"
 ]
 
 COMPLETES_LEAD_PATTERNS = [
@@ -263,6 +278,23 @@ NEEDS_MANUAL_VERIFICATION_PATTERNS = [
     r'\bcomplete\s+interior\s+build[- ]?out\b',
 ]
 
+# --- DEMO-THEN-BUILD pre-check (PHASE-1 hardening, 2026-06-15) ---
+# A single permit that BOTH demolishes an existing structure AND constructs a new dwelling
+# is a COMPLETION ("Demolish (E) SFR and construct new 4-plex"), NOT a demolition. Berkeley
+# usually splits demo and new-construction into separate permits, so this is rare — but when
+# it occurs, the demo/demolition leading patterns would wrongly reject it. This pre-check
+# (run BEFORE the subsidiary leads) requires the conjunction "demolish/demolition ... and ...
+# construct/build ... new" in the SAME description, and EXCLUDES the reference form
+# ("Demolish apartment building. (Ref. #B2023-02332 New Construction)") where the new
+# construction is a SEPARATE permit — those stay does_not. Gates on full scope, not the
+# "demolition" keyword.
+DEMO_THEN_BUILD_RE = re.compile(
+    r'\b(?:demolish|demolition)\b[\w\s,()/\'"#&.\-]{0,80}?\band\b'
+    r'[\w\s,()/\'"&.\-]{0,25}?\b(?:construct\w*|build\w*)\b[\w\s,()/\'"&.\-]{0,15}?\bnew\b',
+    re.IGNORECASE)
+SEPARATE_PERMIT_REF_RE = re.compile(
+    r'\b(?:ref\.?|see|under)\b[\w\s.#]{0,15}?#?\s*b?\d{4}|permit\s*#', re.IGNORECASE)
+
 
 # ===========================================================================
 # CLASSIFIER FUNCTIONS
@@ -302,6 +334,13 @@ def classify_permit_for_completion(description: Optional[str]) -> str:
     desc_lower = (desc_stripped.lower()
                   .replace('’', "'").replace('‘', "'")
                   .replace('“', '"').replace('”', '"'))
+
+    # Step A2: demo-then-build pre-check (runs BEFORE subsidiary leads). A permit that
+    # demolishes AND constructs a new dwelling in the same scope is a completion; this
+    # pre-empts the demo/demolition subsidiary leads. The separate-permit reference form
+    # is excluded (its new construction is a different permit -> stays does_not below).
+    if DEMO_THEN_BUILD_RE.search(desc_lower) and not SEPARATE_PERMIT_REF_RE.search(desc_lower):
+        return 'completes_project'
 
     # Step B: Check leading subsidiary patterns (re.match = anchored at start)
     for pattern in SUBSIDIARY_LEAD_PATTERNS:
@@ -577,6 +616,16 @@ NEW_COMPLETES_TEST_CASES = [
      'completes_project', 'E5: "CREATION OF NEW UNIT" (B2014-02947)'),
     ("Replace existing garage with one bedroom, one bath second dwelling unit with garage.",
      'completes_project', 'E5: "second dwelling unit" despite leading "Replace" (B2018-04404)'),
+    # --- PHASE-1 HARDENING (2026-06-15) NEGATIVE GUARDS: completions that contain a hardened
+    # trade/demo keyword but MUST stay completes. If a future tightening trips these, narrow it. ---
+    ("Demolish (E) single family residence and construct new 4-unit building.",
+     'completes_project', 'demo-then-build: same-permit demo + construct new -> completion (not demo)'),
+    ("Demolition of existing SFR and construction of new fourplex.",
+     'completes_project', 'demo-then-build (noun form): "demolition of ... and construction of new"'),
+    ("New detached ADU. Provide temporary power during construction.",
+     'completes_project', 'temp-power NEG: ADU build that mentions temp power (leads with the ADU)'),
+    ("New single family residence with rooftop PV solar system.",
+     'completes_project', 'solar NEG: dwelling that mentions PV (leads with New SFR, not "Add ... PV")'),
 ]
 
 NEW_DOES_NOT_COMPLETE_TEST_CASES = [
@@ -655,6 +704,27 @@ NEW_DOES_NOT_COMPLETE_TEST_CASES = [
     ("7/27/21 - Upgrade electrical service panel to 200-Amps. New construction of two detached Accessory Dwelling Units (ADU).",
      'completes_project', 'NEG GUARD (B2020-01498): electrical-lead prefix then "New construction of two ADUs" '
      '— the build must win; "for ADU"-style serving language is absent.'),
+    # --- PHASE-1 HARDENING (2026-06-15) does_not POSITIVES (the CY2024-revert trade/demo/minor forms) ---
+    ("Demolition of an apartment building. (See rebuild on permit #B2023-02354.)",
+     'does_not_complete_project', 'demolition-of, demo-ONLY (rebuild is a SEPARATE permit) (B2023-03067)'),
+    ("Temp Power",
+     'does_not_complete_project', 'temp power (B2024-02120)'),
+    ("Temporary Power Service for construction use. 400 Amps.",
+     'does_not_complete_project', 'temporary power service (B2024-06011)'),
+    ("Install (1) 35' temp power pole and power skid.",
+     'does_not_complete_project', "temp power pole w/ (1) 35' noise prefix (B2024-03794)"),
+    ("(1) Furnace changeout in attic.",
+     'does_not_complete_project', '(N) furnace (B2025-00605)'),
+    ("Install heat pump and duct work.",
+     'does_not_complete_project', 'HVAC heat pump (B2023-05865)'),
+    ("upgrade main panel 200amp",
+     'does_not_complete_project', 'electrical main panel upgrade (B2024-00678)'),
+    ("Change existing 200 amp, single meter electrical service for dual meter 400 amp.",
+     'does_not_complete_project', 'change existing electrical service (B2025-02753-class, leading)'),
+    ("Replace 200amp single meter main with 200 amp double meter main.",
+     'does_not_complete_project', 'replace N amp electrical main (B2022-04548)'),
+    ("Add 2.64 (DC) / 7.60 (AC) KW PV solar panels (6 modules) on the roof.",
+     'does_not_complete_project', 'add PV solar (leading) (B2025-05132)'),
 ]
 
 

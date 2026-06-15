@@ -17,7 +17,12 @@
 **Classifier — Phase-1 hardening done & verified.**
 - `112cb03` (committed dev): sixth-pass FIX-E (ADU/conversion/abbreviation blind-spots) + Phase-1 trade/demo/minor leads + demo-then-build pre-check. **85/85 self-tests**, AGENT-1-VERIFY independent PASS (0 real completions lost, 0 false admitted across 823).
 
-**Sweep — Phase 2-MONITOR calibration on 2018-2019 COMPLETE (all 8 detectors run, read-only).** Flag union below; detector thresholds to be finalized by John before the full 2018-2025 run.
+**Sweep — Phase 2-MONITOR FULL 2018-2025 tuned pass COMPLETE (8 detectors, read-only).** Thresholds confirmed; ran across all 8 years.
+- **ACCURACY**: match 79-94%/yr, **all sub-90 = categorized COVERAGE gap not correctness** (we-have/city-lacks=0 in 7/8 years; 100% evidentiary every year). 2025 has +2 we-have/city-lacks (NEW — investigate).
+- **D8 channel-split (the acquisition list)**: 99 missing completions 8-yr = **69 INGESTION (in feed, load) + 30 ACQUIRE (CPRA request)**. ~70% closes by loading the feed. Completion-match gap is consistent (NOT collapsing in recent years); the housing-permit backlog grows (137→964) but is mostly under-construction/un-matched, not completed.
+- **PLACEHOLDER**: stubs concentrate 2024(46)/2025(51) — recent entitlement-date placeholders (NEW pattern). **D5**: 0-2/yr (consistent). **OUTLIER (de-noised)**: 0 except 2025 proj154 (counted, no completes sibling — NEW). **D6**: 0 all years — structurally under-powered (CPRA vs description NOT independent; needs assessor). **D7/DEPENDENCY**: 103 mis-binned / 0 stale.
+- **NEW patterns (older-year blind spots)**: (1) 2025 +2 city-lacks-we-have; (2) 2024-25 stub concentration; (3) proj154 no-completes-sibling; (4) D6 non-independence.
+- **Calibration calibration (2018-2019 detail)** retained in git history.
 - **D7-SCOPE**: 103 planning records (ZP/PLN/DRCF) mis-binned in the completion-ambiguous set → **real harvest queue = 54 B-permits** (26 terse-candidate + 28 genuine-uncertain), not 157.
 - **PLACEHOLDER**: 91 year-precision event-date stubs (51 `@2025-01-01`, 40 `@2024-01-01`) + 33 zero-unit projects. (CO count already rejects the 2 CO stubs; the rest are entitlement/Table-A date-quality.)
 - **ACCURACY** (vs CKAN reconcile-target): CY2018 **89%**, CY2019 **84%** — gap is **entirely COVERAGE** (we-have/city-lacks = 0; city-has/we-lack = 7/17), **100% evidentiary** on our side. Below-90 = a categorized coverage finding, not a correctness failure.
@@ -34,10 +39,10 @@
 ---
 
 ## Next steps
-1. **Tune detector thresholds** (OUTLIER de-noise: ignore main-completes+subsidiary; ACCURACY: report sub-90 with directional split as a finding; D8: filter to housing-type permits).
-2. **Run the tuned 8-detector pass across full 2018-2025** (fan out to parallel agents per year — they're now correct + independent), surface per-year union, STOP at the watcher gate.
-3. **Phase 3** (per-year, parallel): generate APR via `generate_apr_v2` (reads view) → diff vs CKAN (read-only target) → categorize every disagreement (COVERAGE / CITY-UNDER-REPORT / COUNTING-CONVENTION). Builds on the D7 bijection. AGENT-3-VERIFY per year.
-4. **Phase 4** synthesis: per-year match vs ≥90% (or categorized gap), cross-year pattern, prioritized acquisition list. The day's deliverable.
+1. **WATCHER GATE — John reviews the full-pass union** (esp. the 4 new patterns) before Phase 3. The detector findings feed Phase 3/4 directly: the D8 channel-split (69 ingest / 30 acquire) IS the prioritized acquisition list.
+2. **Phase 3** (per-year): generate APR via `generate_apr_v2` (reads view) → diff vs CKAN (read-only target) → categorize every disagreement (COVERAGE / CITY-UNDER-REPORT / COUNTING-CONVENTION). Builds on the D7 bijection. AGENT-3-VERIFY per year.
+3. **Phase 4** synthesis: per-year match vs ≥90% (with the categorized coverage account already in hand), cross-year pattern, the 69-ingest/30-acquire acquisition list. The deliverable.
+4. **Resolve the 4 new patterns**: investigate 2025's +2 city-lacks-we-have; the proj154 no-completes-sibling; decide on the 2024-25 entitlement date-stub cleanup; rebuild D6 on a genuinely-independent unit source (or retire it).
 
 ## Parked
 - Optimizer watchers (ACQUISITION-YIELD) — next sweep.

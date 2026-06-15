@@ -131,15 +131,15 @@ def generate_table_a2(conn, year):
             architect,
             NULL AS construction_status,
             CASE
-                WHEN co_issued_date LIKE ? THEN 'CO Issued'
+                WHEN (co_issued_date LIKE ? AND co_issued_date <> '2024-01-01') THEN 'CO Issued'
                 WHEN bp_issued_date LIKE ? THEN 'BP Issued'
                 WHEN entitled_date LIKE ? THEN 'Entitled'
             END as milestone_achieved
         FROM v_projects_flat
-        WHERE entitled_date LIKE ? OR bp_issued_date LIKE ? OR co_issued_date LIKE ?
+        WHERE entitled_date LIKE ? OR bp_issued_date LIKE ? OR (co_issued_date LIKE ? AND co_issued_date <> '2024-01-01')
         ORDER BY
             CASE
-                WHEN co_issued_date LIKE ? THEN 1
+                WHEN (co_issued_date LIKE ? AND co_issued_date <> '2024-01-01') THEN 1
                 WHEN bp_issued_date LIKE ? THEN 2
                 WHEN entitled_date LIKE ? THEN 3
             END,

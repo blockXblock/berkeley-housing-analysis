@@ -74,6 +74,17 @@ SUBSIDIARY_LEAD_PATTERNS = [
     r'\s*furnace\b',
     # Electrical service patterns
     r'\s*meter\s+main\s+upgrade\b',
+    # Electrical service / panel / meter permits (2026-06-14 CAT-2 fix). The permit's
+    # PRIMARY scope is the electrical upgrade; a mentioned ADU is the unit being SERVED
+    # (it has its own permit), not built here. Leading-anchored, so a genuine ADU build
+    # that merely also mentions electrical ("New detached ADU including electrical") is
+    # NOT caught — it leads with the ADU verb, not the electrical work.
+    r'\s*electrical\s+service\s+upgrade\b',
+    r'\s*service\s+upgrade\b',
+    r'\s*(?:new\s+)?electrical\s+(?:meter|service|sub-?panel|panel)\b',
+    r'\s*new\s+\d+\s*amp(?:ere)?s?\b',
+    r'\s*(?:main\s+)?(?:electrical\s+)?panel\s+upgrade\b',
+    r'\s*upgrade\s+(?:the\s+)?(?:existing\s+)?(?:electrical\s+)?(?:service|panel|meter)\b',
     # Seismic retrofit patterns
     r'\s*(voluntary\s+)?seismic\s+retrofit\b',
     # Repair patterns
@@ -491,6 +502,9 @@ NEW_COMPLETES_TEST_CASES = [
      'completes_project', 'B2022-05902: manufactured dwelling (Fix D positive). Negatives that '
      'must stay non-completes: "manufactured roof truss" (B2024-02435), "manufactured spa" '
      '(B2022-05428) — asserted in CY2024 validation, classify ambiguous not does_not.'),
+    ("Construction of new 390sf detached accessory dwelling unit. Upgrade existing electrical service.",
+     'completes_project', 'B2021-05343 CAT-2 negative: ADU build that ALSO mentions an electrical '
+     'upgrade — leads with the ADU verb, so the electrical lead must NOT over-reject it.'),
 ]
 
 NEW_DOES_NOT_COMPLETE_TEST_CASES = [
@@ -548,6 +562,10 @@ NEW_DOES_NOT_COMPLETE_TEST_CASES = [
      'does_not_complete_project', 'audit: reconfigure walls'),
     ("Replace windows and doors. Patch and repair stucco to prep for painting.  Fire zone 2",
      'does_not_complete_project', 'audit: patch repair stucco'),
+    ("Electrical service upgrade from 100A-200A service. Two 100A main panel will be installed (One for the main house and the second for the attached ADU - B2025-02754)",
+     'does_not_complete_project', 'B2025-02754/proj64 CAT-2 fix: electrical-upgrade leading, ADU is a reference. Same bug class: B2024-00684, B2024-00915.'),
+    ("New 400 Amp Service for 2 meters (ADU permit B2022-05577)",
+     'does_not_complete_project', 'B2024-00684: electrical service permit referencing a separate ADU permit'),
 ]
 
 

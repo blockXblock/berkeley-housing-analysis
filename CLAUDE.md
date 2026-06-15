@@ -75,6 +75,17 @@ compatibility view is **`v_projects_flat`** (what `generate_apr_v2.py` and
 - **DATA ERRORS** → a new gated write, **not** a re-run of the old script.
 - Sequester only **AFTER** the replacement is live.
 
+## Media disposition rule
+- **`.mp4` video outputs are NOT tracked in the repo** — they live on the
+  **YouTube channel feeding berkeleybuild.com**. `*.mp4` / `*.mp4.backup*` are
+  gitignored. Any stray repo-tracked mp4 (e.g. old `*.mp4.backup-*`) is a stale
+  old-approach artifact → delete.
+- **KML geometry/tour SOURCE lives in `berkeley-data` and IS tracked**
+  (`docs/tours/*.kml`, `docs/kml_versions/*`) — canonical source, not derived.
+  A small asset a KML *references* (e.g. `transparent-1x1.png`, the
+  hide-default-icon trick) is a tracked **input dependency**; an image
+  *rendered from* a KML would be derived → don't track.
+
 ## Discipline (every session)
 - **Verify artifacts, never trust a summary** (CC's or chat-Claude's) — count rows, check dates, `ls` the actual path before asserting it exists. An empty grep ≠ absence; a `.py` check misses a package dir.
 - **Snapshot → read-only preview → STOP-for-John → guarded write** (per-permit `rowcount==1`, verify-or-rollback) **→ fresh-connection fingerprint.**

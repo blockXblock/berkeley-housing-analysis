@@ -360,12 +360,16 @@ def generate_rhna_progress(conn, year, adu_count=0):
 
     # Completed units (CO issued)
     # V2 MIGRATION: Using v_projects_flat
+    # Stub-guard (2026-06-15): exclude the '2024-01-01' v1->v2 migration stub
+    # (proj137 82u + proj138 72u, no real CO) so it doesn't inflate the RHNA
+    # completed total — matches the 3 Table-A2 guards. (4024 -> 3870, -154)
     cursor.execute('''
         SELECT
             SUM(total_units) as total_units,
             SUM(COALESCE(vli_units, 0)) as vli_units
         FROM v_projects_flat
         WHERE co_issued_date IS NOT NULL AND co_issued_date != ''
+          AND co_issued_date <> '2024-01-01'
     ''')
     co_row = cursor.fetchone()
     completed_units = co_row[0] or 0

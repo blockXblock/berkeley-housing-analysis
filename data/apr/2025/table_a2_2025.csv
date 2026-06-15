@@ -23,6 +23,7 @@ id,address,apn,permits,net_units,vli_units,status,app_filed_date,app_complete_da
 355,2436 CHANNING Way,,,2,0,completed,,,,,2025-06-17,,,,,,,,CO Issued
 357,2639 REGENT St,,,2,0,completed,,,,,2025-07-29,,,,,,,,CO Issued
 365,2227 CARLETON St,,,2,0,completed,,,,,2025-09-10,,,,,,,,CO Issued
+83,1136 KEITH Ave,,,1,0,completed,2024-01-01,,,,2025-11-10,,,,,,,,CO Issued
 280,2804 ACTON St,,,1,0,completed,,,,,2025-04-23,,,,,,,,CO Issued
 281,1408 EDITH St,,,1,0,completed,,,,,2025-06-27,,,,,,,,CO Issued
 282,2144 RUSSELL St,,,1,0,completed,,,,,2025-05-28,,,,,,,,CO Issued
@@ -37,6 +38,8 @@ id,address,apn,permits,net_units,vli_units,status,app_filed_date,app_complete_da
 292,1521 SACRAMENTO St,,,1,0,completed,,,,,2025-04-14,,,,,,,,CO Issued
 293,1966 YOSEMITE Rd,,,1,0,completed,,,,,2025-01-24,,,,,,,,CO Issued
 295,1238 STANNAGE Ave,,,1,0,completed,,,,,2025-07-21,,,,,,,,CO Issued
+296,726 NEILSON St,,,1,0,completed,,,,,2025-08-15,,,,,,,,CO Issued
+297,1219 DERBY St,,,1,0,completed,,,,,2025-04-24,,,,,,,,CO Issued
 298,2761 ACTON ST,,,1,0,completed,,,,,2025-08-12,,,,,,,,CO Issued
 300,1182 EUCLID Ave,,,1,0,completed,,,,,2025-05-06,,,,,,,,CO Issued
 301,1426 SPRUCE St,,,1,0,completed,,,,,2025-06-25,,,,,,,,CO Issued
@@ -51,6 +54,7 @@ id,address,apn,permits,net_units,vli_units,status,app_filed_date,app_complete_da
 313,932 COLUSA Ave,,,1,0,completed,,,,,2025-11-13,,,,,,,,CO Issued
 314,2221 CARLETON St,,,1,0,completed,,,,,2025-09-15,,,,,,,,CO Issued
 315,12 PANORAMIC Way,,,1,0,completed,,,,,2025-09-08,,,,,,,,CO Issued
+316,2620 REGENT St,,,1,0,completed,,,,,2025-05-30,,,,,,,,CO Issued
 317,2418 ACTON St,,,1,0,completed,,,,,2025-04-04,,,,,,,,CO Issued
 318,2805 RUSSELL ST,,,1,0,completed,,,,,2025-11-07,,,,,,,,CO Issued
 319,2742 MABEL ST,,,1,0,completed,,,,,2025-10-07,,,,,,,,CO Issued
@@ -60,6 +64,7 @@ id,address,apn,permits,net_units,vli_units,status,app_filed_date,app_complete_da
 325,1327 ORDWAY St,,,1,0,completed,,,,,2025-07-25,,,,,,,,CO Issued
 327,3019 BATEMAN St,,,1,0,completed,,,,,2025-09-15,,,,,,,,CO Issued
 328,1536 LINCOLN St,,,1,0,completed,,,,,2025-02-21,,,,,,,,CO Issued
+329,1208 DELAWARE St,,,1,0,completed,,,,,2025-02-24,,,,,,,,CO Issued
 330,1205 KAINS Ave,,,1,0,completed,,,,,2025-08-27,,,,,,,,CO Issued
 331,1910 BLAKE St,,,1,0,completed,,,,,2025-06-02,,,,,,,,CO Issued
 332,2815 ASHBY AVE,,,1,0,completed,,,,,2025-07-31,,,,,,,,CO Issued
@@ -75,7 +80,6 @@ id,address,apn,permits,net_units,vli_units,status,app_filed_date,app_complete_da
 345,3007 ACTON St,,,1,0,completed,,,,,2025-06-09,,,,,,,,CO Issued
 346,917 CHANNING Way,,,1,0,completed,,,,,2025-10-07,,,,,,,,CO Issued
 347,2325 SIXTH St,,,1,0,completed,,,,,2025-04-14,,,,,,,,CO Issued
-349,1446 FIFTH St,,,1,0,completed,,,,,2025-08-12,,,,,,,,CO Issued
 350,1964 HOPKINS ST,,,1,0,completed,,,,,2025-12-02,,,,,,,,CO Issued
 351,2350 WEST ST,,,1,0,completed,,,,,2025-07-29,,,,,,,,CO Issued
 353,2410 SACRAMENTO St,,,1,0,completed,,,,,2025-04-21,,,,,,,,CO Issued
@@ -92,7 +96,7 @@ id,address,apn,permits,net_units,vli_units,status,app_filed_date,app_complete_da
 367,2710 COLLEGE Ave,,,1,0,completed,,,,,2025-01-17,,,,,,,,CO Issued
 368,3134 CALIFORNIA St,,,1,0,completed,,,,,2025-03-19,,,,,,,,CO Issued
 369,1449 KAINS Ave,,,1,0,completed,,,,,2025-01-31,,,,,,,,CO Issued
-83,1136 KEITH Ave,,,0,0,completed,2024-01-01,,,,2025-11-10,,,,,,,,CO Issued
+208,469 Kentucky Ave,,,0,0,completed,,,,,2025-12-11,,,,,,,,CO Issued
 147,2300 ELLSWORTH St,,,69,0,under_construction,2024-01-01,,2024-10-21,2025-09-04,,,,,,Riaz Capital,Trachtenberg Architects,,BP Issued
 32,1740 SAN PABLO Ave,,,54,0,permitted,2023-01-01,,,2025-12-18,,,,,,,,,BP Issued
 157,2587 TELEGRAPH Ave,,,52,6,withdrawn,2024-01-01,,2025-04-07,2025-04-14,,,,,,Gilbane Development,,,BP Issued

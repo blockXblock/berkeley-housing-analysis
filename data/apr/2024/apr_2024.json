@@ -1,6 +1,6 @@
 {
   "year": 2024,
-  "generated": "2026-06-15T07:25:55.551314",
+  "generated": "2026-06-15T11:50:40.942848",
   "schema_version": "v2 (Stage 1 migration)",
   "table_a": {
     "title": "Table A: Applications Deemed Complete in 2024",
@@ -153,8 +153,8 @@
         "milestone_achieved": "CO Issued"
       },
       {
-        "id": 226,
-        "address": "1837 Berkeley Way",
+        "id": 202,
+        "address": "1027 HEINZ",
         "apn": null,
         "permits": null,
         "net_units": 3,
@@ -164,7 +164,7 @@
         "app_complete_date": null,
         "entitled_date": null,
         "bp_issued_date": null,
-        "co_date": "2024-12-03",
+        "co_date": "2024-11-07",
         "density_bonus": null,
         "sb35_flag": null,
         "sb330_flag": null,
@@ -495,6 +495,28 @@
         "entitled_date": null,
         "bp_issued_date": null,
         "co_date": "2024-12-12",
+        "density_bonus": null,
+        "sb35_flag": null,
+        "sb330_flag": null,
+        "ab2011_flag": null,
+        "developer": null,
+        "architect": null,
+        "construction_status": null,
+        "milestone_achieved": "CO Issued"
+      },
+      {
+        "id": 195,
+        "address": "844 Miramar Ave",
+        "apn": null,
+        "permits": null,
+        "net_units": 1,
+        "vli_units": 0,
+        "status": "completed",
+        "app_filed_date": null,
+        "app_complete_date": null,
+        "entitled_date": null,
+        "bp_issued_date": null,
+        "co_date": "2024-09-12",
         "density_bonus": null,
         "sb35_flag": null,
         "sb330_flag": null,
@@ -869,28 +891,6 @@
         "entitled_date": null,
         "bp_issued_date": null,
         "co_date": "2024-12-06",
-        "density_bonus": null,
-        "sb35_flag": null,
-        "sb330_flag": null,
-        "ab2011_flag": null,
-        "developer": null,
-        "architect": null,
-        "construction_status": null,
-        "milestone_achieved": "CO Issued"
-      },
-      {
-        "id": 220,
-        "address": "1027 BANCROFT Way",
-        "apn": null,
-        "permits": null,
-        "net_units": 1,
-        "vli_units": 0,
-        "status": "completed",
-        "app_filed_date": null,
-        "app_complete_date": null,
-        "entitled_date": null,
-        "bp_issued_date": null,
-        "co_date": "2024-04-24",
         "density_bonus": null,
         "sb35_flag": null,
         "sb330_flag": null,
@@ -2600,12 +2600,12 @@
       "percent_of_goal": 18.7
     },
     "pipeline": {
-      "total_units": 15636,
+      "total_units": 16572,
       "vli_units": 1097,
       "note": "Pipeline units do NOT count toward RHNA until BP is issued"
     },
     "completed": {
-      "total_units": 3073,
+      "total_units": 4024,
       "vli_units": 128
     }
   },

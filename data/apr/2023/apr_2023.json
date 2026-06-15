@@ -1,6 +1,6 @@
 {
   "year": 2023,
-  "generated": "2026-06-15T07:25:56.285533",
+  "generated": "2026-06-15T11:50:40.196054",
   "schema_version": "v2 (Stage 1 migration)",
   "table_a": {
     "title": "Table A: Applications Deemed Complete in 2023",
@@ -835,28 +835,6 @@
         "milestone_achieved": "CO Issued"
       },
       {
-        "id": 391,
-        "address": "1614 Grant St",
-        "apn": null,
-        "permits": null,
-        "net_units": 1,
-        "vli_units": 0,
-        "status": "completed",
-        "app_filed_date": null,
-        "app_complete_date": null,
-        "entitled_date": null,
-        "bp_issued_date": null,
-        "co_date": "2023-07-27",
-        "density_bonus": null,
-        "sb35_flag": null,
-        "sb330_flag": null,
-        "ab2011_flag": null,
-        "developer": null,
-        "architect": null,
-        "construction_status": null,
-        "milestone_achieved": "CO Issued"
-      },
-      {
         "id": 392,
         "address": "1919 Parker St",
         "apn": null,
@@ -1209,28 +1187,6 @@
         "milestone_achieved": "CO Issued"
       },
       {
-        "id": 414,
-        "address": "2350 Prospect St",
-        "apn": null,
-        "permits": null,
-        "net_units": 1,
-        "vli_units": 0,
-        "status": "completed",
-        "app_filed_date": null,
-        "app_complete_date": null,
-        "entitled_date": null,
-        "bp_issued_date": null,
-        "co_date": "2023-09-26",
-        "density_bonus": null,
-        "sb35_flag": null,
-        "sb330_flag": null,
-        "ab2011_flag": null,
-        "developer": null,
-        "architect": null,
-        "construction_status": null,
-        "milestone_achieved": "CO Issued"
-      },
-      {
         "id": 415,
         "address": "2445 Ashby Ave",
         "apn": null,
@@ -1419,28 +1375,6 @@
         "entitled_date": null,
         "bp_issued_date": null,
         "co_date": "2023-12-14",
-        "density_bonus": null,
-        "sb35_flag": null,
-        "sb330_flag": null,
-        "ab2011_flag": null,
-        "developer": null,
-        "architect": null,
-        "construction_status": null,
-        "milestone_achieved": "CO Issued"
-      },
-      {
-        "id": 426,
-        "address": "1825 Berkeley (1)",
-        "apn": null,
-        "permits": null,
-        "net_units": 1,
-        "vli_units": 0,
-        "status": "completed",
-        "app_filed_date": null,
-        "app_complete_date": null,
-        "entitled_date": null,
-        "bp_issued_date": null,
-        "co_date": "2023-12-04",
         "density_bonus": null,
         "sb35_flag": null,
         "sb330_flag": null,
@@ -2464,12 +2398,12 @@
       }
     ],
     "summary": {
-      "total_projects": 111,
-      "total_units": 1057,
+      "total_projects": 108,
+      "total_units": 1054,
       "vli_units": 151,
       "entitled_in_year": 1,
       "bp_issued_in_year": 7,
-      "co_issued_in_year": 103
+      "co_issued_in_year": 100
     }
   },
   "table_b": {
@@ -2644,12 +2578,12 @@
       "percent_of_goal": 18.7
     },
     "pipeline": {
-      "total_units": 15636,
+      "total_units": 16572,
       "vli_units": 1097,
       "note": "Pipeline units do NOT count toward RHNA until BP is issued"
     },
     "completed": {
-      "total_units": 3073,
+      "total_units": 4024,
       "vli_units": 128
     }
   },

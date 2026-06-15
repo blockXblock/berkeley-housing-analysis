@@ -7,7 +7,10 @@
 ## Where we are (2026-06-15)
 
 **INGESTION channel loaded (D8) — 38 feed-resident completions appended.** EVIDENCE-layer append (snapshot `keep_snapshot_2026-06-15_pre-ingest.db` sha `67c63383`): +38 permits, +17 new projects, +38 co_events, +17 versions; counted-completed **674 → 705 (+31)** (7 existing-links already counted). ~698 units incl. Acheson Commons + the 44/50/70/82/117/142-unit buildings. Non-circular: selected by feed Finaled-date + own description classifies completes (`112cb03`), never CKAN. 21 existing-links APN-verified (0 mismatch); 18 DECISIONS-holds intact; evidentiary basis from feed Finaled, note "CPRA Finaled <date>". The held REV (B2022-01742-REV01) correctly excluded (master already in v2 — double-count trap).
-- **STEP-6 proof: match ROSE every year (e.g. 2019 84→91, 2021 83→91, 2022 79→88), gap shrank** — BUT we-have/city-lacks went +1 in 2021 and +1 in 2025. Investigated: NOT over-ingestion — both are **year-attribution** (feed finaled-year ≠ city's reported year: B2016-02230 feed-2021/city-2022; B2023-04389 feed-2025/city-2024). Real completions, counting-convention difference. **AWAITING JOHN: accept (recommended — feed date is truth, re-dating to city = circularity) or roll back.** (2025 also has 2 pre-existing independence finds: proj83 SFR + a 39-unit the city lacks.)
+- **STEP-6 proof: match ROSE every year (2018 89→91, 2019 84→91, 2020 90→92, 2021 83→91, 2022 79→88, 2025 91→93), gap shrank.** we-have/city-lacks +1 in 2021/2025 = year-attribution (NOT over-ingestion). **ACCEPTED by John 2026-06-15** — feed Finaled-date is the truth; re-dating to the city's year would be the circularity the whole session guarded against. The ingest STANDS.
+- **Phase-4 findings logged from this ingest:**
+  - COUNTING-CONVENTION (cycle-boundary year-attribution): **B2016-02230** (056193502800, new SFR — our feed-finaled 2021-04-21 vs city CY2022); **B2023-04389** (062294502800, new 3-story SFR — our feed-finaled 2025-12-11 vs city CY2024). Same real completion, adjacent-year disagreement.
+  - CITY-UNDER-REPORT (independence finds — city's APR lacks ENTIRELY): **APN 057207300500 / B2022-04366** = a **39-unit** building (CO 2025-05-06) the city omits — the headline result; and **proj83 SFR** (063298803800). Both evidence-backed on our side, absent from CKAN.
 
 **Verdict layer — 8-year backfill COMPLETE.**
 - All **956 permits classified** by `permit_role_classifier @ 112cb03`; verdict+basis materialized into the existing `permits` columns (no new schema).
@@ -36,8 +39,8 @@
 - **D6-CONSISTENCY**: under-powered for SFR/ADU years (no multi-unit description counts; assessor lacks reliable unit counts).
 
 **Site / publish state.**
-- Completion display now **derives from `co_date`** (export_explorer_data_v2.py); CO stat == map markers == **672** by construction. Non-v2 export sequestered to `scripts/superseded/`.
-- **NOT pushed:** dev commit `58ffdf4` (the 672 republish) is staged; the **live site still shows the old number**. STEP 5 republish (push + Cloudflare purge) is **pending John** — John owns all irreversible ops.
+- Completion display **derives from `co_date`** (export_explorer_data_v2.py); CO stat == map markers by construction. Non-v2 export sequestered.
+- **The committed `docs/explorer_data.js` (`58ffdf4`) is now STALE — it shows 672 (pre-ingest). Current view = 705.** A republish needs a **regen first** (export_explorer_data_v2 + generate_apr_v2 → 705/the stub-rejected published number), THEN push + Cloudflare purge (John's). Nothing republished yet — the live site still shows the old number.
 
 ---
 

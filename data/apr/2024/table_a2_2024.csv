@@ -1,22 +1,110 @@
 id,address,apn,permits,net_units,vli_units,status,app_filed_date,app_complete_date,entitled_date,bp_issued_date,co_date,density_bonus,sb35_flag,sb330_flag,ab2011_flag,developer,architect,construction_status,milestone_achieved
-135,2150 Kittredge St,057 202901600,B2021-00008,,,Completed,,,,,2024-01-01,1,1,1,1,,,occupied,CO Issued
-136,1951 Shattuck Ave,057 204600100,B2021-04893,,,Completed,,,,,2024-01-01,1,1,1,1,,,occupied,CO Issued
-137,2000 University Ave,057 202501300,B2022-01111,,,Completed,,,,,2024-01-01,1,1,1,1,Read Investments,,occupied,CO Issued
-138,2099 MLK Jr Way,057 202401300,B2021-03950,,,Completed,,,,,2024-01-01,1,1,1,1,,,occupied,CO Issued
-152,1598 UNIVERSITY Ave,056 200300100,TBD,207.0,21.0,Under Construction,,,,2024-01-01,,1,1,1,1,NX Ventures,Trachtenberg Architects,topped_out,BP Issued
-122,2530 BANCROFT Way,055 187701601,"ZP2023-0126,B2024-02577",110.0,11.0,Stalled,2024-03-12,2024-03-12,2024-12-27,2024-01-01,,1,1,1,1,Landmark Properties,,,BP Issued
-139,2538 DURANT Ave,055 187602000,TBD,83.0,5.0,Under Construction,,,,2024-10-01,,1,1,1,1,Martin Group / Valiance Capital,Studio KDA,foundation,BP Issued
-164,1752 SHATTUCK Ave,058 217600101,"ZP2022-0011, B2023-00774, ZP2025-0046,B2023-17477",68.0,0.0,Completed,2022-01-18,2022-05-06,2023-01-12,2024-06-13,2025-05-27,1,1,1,1,Panoramic Interests,Studio KDA,Completed,BP Issued
-144,2127 DWIGHT Way,055 189001201,"TBD,B2024-00332",58.0,8.0,Completed,,,,2024-01-01,2025-03-03,1,1,1,1,Riaz Capital,Trachtenberg Architects,Completed,BP Issued
-143,2902 ADELINE St,053 159800600,"TBD,B2021-17430",54.0,0.0,Under Construction,,,,2024-01-01,,1,1,1,1,Realtex Group,SDT Architects,framing,BP Issued
-157,2587 TELEGRAPH Ave,055 183901901,"TBD,B2024-17735",52.0,6.0,Under Construction,,,,2024-01-01,,1,1,1,1,Gilbane Development,,topped_out,BP Issued
-141,2016 ASHBY Ave,053 159202000,B2024-01268,50.0,50.0,Under Construction,,,,2024-06-01,,1,1,1,1,CHDC,Lowney Architecture,foundation,BP Issued
-159,2403 SAN PABLO Ave,056 192800100,TBD,36.0,0.0,Under Construction,,,,2024-01-01,,1,1,1,1,,,foundation,BP Issued
-128,2833 Seventh St,,"ZP2023-0123,B2015-04143",3.0,0.0,Stalled,2023-09-21,2024-02-26,2024-05-07,2024-01-01,,1,1,1,1,,,,BP Issued
-133,2128 Oxford St,," ZP2022-0135,B2025-05345",485.0,47.0,Stalled,2023-03-17,2023-03-17,2024-10-04,,,1,1,1,1,Core Spaces,,,Entitled
-140,2136 SAN PABLO Ave,056 197701101,TBD,125.0,10.0,Stalled,,,2024-04-01,,,1,1,1,1,Allrise Capital,Trachtenberg Architects,,Entitled
-126,2427 San Pablo,056192802200,"ZP2022-0115,B2017-01477",78.0,0.0,Stalled,2022-10-05,2024-02-06,2024-09-16,,2017-12-31,1,1,1,1,,Studio KDA,,Entitled
-123,2037 DURANT Ave,055 189400200,"ZP2023-0064,B2002-04372",74.0,4.0,Stalled,2024-03-29,2024-03-29,2024-06-19,,,1,1,1,1,,Studio KDA,,Entitled
-116,2462 BANCROFT Way,055 187802000,ZP2023-0107,66.0,3.0,Stalled,2023-08-18,2024-02-15,2024-07-01,,,1,1,1,1,,Studio KDA,,Entitled
-129,1614 Sixth St,,"ZP2024-0008,B2023-05397",3.0,0.0,Stalled,2024-01-25,2024-02-22,2024-10-17,,2023-12-31,1,1,1,1,,,,Entitled
-127,2820 San Pablo,,P2022-0038,,0.0,Stalled,2022-05-06,2022-09-29,2024-12-06,,,1,1,1,1,,,,Entitled
+170,1950 OXFORD St,,,300,0,completed,,,,,2024-08-21,,,,,UC Berkeley,Morris Adjmi Architects,,CO Issued
+135,2150 Kittredge St,,,169,0,completed,2021-01-01,,,,2024-03-20,,,,,,,,CO Issued
+136,1951 Shattuck Ave,,,163,0,completed,2021-01-01,,,,2024-10-24,,,,,,,,CO Issued
+96,2099 M L KING JR Way,,,72,0,completed,2025-01-01,,,2023-07-17,2024-05-17,,,,,,,,CO Issued
+228,2527 SAN PABLO Ave,,,63,0,completed,,,,,2024-04-30,,,,,,,,CO Issued
+219,2701 Shattuck Ave,,,57,0,completed,,,,,2024-07-18,,,,,,,,CO Issued
+202,1027 HEINZ,,,3,0,completed,,,,,2024-11-07,,,,,,,,CO Issued
+190,1341 ADDISON,,,2,0,completed,,,,,2024-10-16,,,,,,,,CO Issued
+200,2226 DWIGHT Way,,,2,0,completed,,,,,2024-06-03,,,,,,,,CO Issued
+224,2233 GRANT St,,,2,0,completed,,,,,2024-03-28,,,,,,,,CO Issued
+234,1912 MONTEREY Ave,,,2,0,completed,,,,,2024-02-28,,,,,,,,CO Issued
+269,2737 FOREST Ave,,,2,0,completed,,,,,2024-03-11,,,,,,,,CO Issued
+274,1683 Oxford St,,,2,0,completed,,,,,2024-07-24,,,,,,,,CO Issued
+185,1609 FIFTH St,,,1,0,completed,,,,,2024-03-04,,,,,,,,CO Issued
+186,1822 WOOLSEY St,,,1,0,completed,,,,,2024-01-03,,,,,,,,CO Issued
+187,1912 STUART St,,,1,0,completed,,,,,2024-04-29,,,,,,,,CO Issued
+188,2024 Prince Street,,,1,0,completed,,,,,2024-11-04,,,,,,,,CO Issued
+189,2150 RUSSELL St,,,1,0,completed,,,,,2024-02-09,,,,,,,,CO Issued
+191,2422 CALIFORNIA St,,,1,0,completed,,,,,2024-03-29,,,,,,,,CO Issued
+192,2425 Prospect St,,,1,0,completed,,,,,2024-07-10,,,,,,,,CO Issued
+193,2818 Webster St,,,1,0,completed,,,,,2024-09-24,,,,,,,,CO Issued
+194,626 Peralta Ave,,,1,0,completed,,,,,2024-12-12,,,,,,,,CO Issued
+195,844 Miramar Ave,,,1,0,completed,,,,,2024-09-12,,,,,,,,CO Issued
+196,921 ENSENADA Ave,,,1,0,completed,,,,,2024-04-29,,,,,,,,CO Issued
+197,0 Cragmont Ave,,,1,0,completed,,,,,2024-10-24,,,,,,,,CO Issued
+198,2312 Eighth St,,,1,0,completed,,,,,2024-12-17,,,,,,,,CO Issued
+199,1709 Sacramento St,,,1,0,completed,,,,,2024-09-24,,,,,,,,CO Issued
+201,2419 Jefferson Ave,,,1,0,completed,,,,,2024-06-26,,,,,,,,CO Issued
+204,2723 Forest Ave,,,1,0,completed,,,,,2024-11-13,,,,,,,,CO Issued
+205,28 Hopkins Ct,,,1,0,completed,,,,,2024-08-20,,,,,,,,CO Issued
+206,35 Hillcrest Rd,,,1,0,completed,,,,,2024-05-13,,,,,,,,CO Issued
+207,483 Boynton Ave,,,1,0,completed,,,,,2024-06-27,,,,,,,,CO Issued
+210,1429 Bancroft Way,,,1,0,completed,,,,,2024-07-02,,,,,,,,CO Issued
+211,151 Tunnel Rd,,,1,0,completed,,,,,2024-07-17,,,,,,,,CO Issued
+212,1625 SEVENTH St,,,1,0,completed,,,,,2024-04-24,,,,,,,,CO Issued
+213,2516 Mathews St,,,1,0,completed,,,,,2024-11-22,,,,,,,,CO Issued
+214,1725 BERKELEY Way,,,1,0,completed,,,,,2024-04-19,,,,,,,,CO Issued
+215,2610 Warring St,,,1,0,completed,,,,,2024-07-25,,,,,,,,CO Issued
+216,3216 California St,,,1,0,completed,,,,,2024-06-12,,,,,,,,CO Issued
+218,886 Arlington Ave,,,1,0,completed,,,,,2024-12-06,,,,,,,,CO Issued
+221,1340 QUEENS Rd,,,1,0,completed,,,,,2024-02-27,,,,,,,,CO Issued
+222,2164 OREGON St,,,1,0,completed,,,,,2024-04-02,,,,,,,,CO Issued
+223,2215 ROOSEVELT,,,1,0,completed,,,,,2024-07-23,,,,,,,,CO Issued
+225,2331 Spaulding Ave,,,1,0,completed,,,,,2024-12-11,,,,,,,,CO Issued
+227,3002 HARPER St,,,1,0,completed,,,,,2024-02-28,,,,,,,,CO Issued
+229,1154 Josephine St,,,1,0,completed,,,,,2024-09-23,,,,,,,,CO Issued
+230,1446 Campus Dr,,,1,0,completed,,,,,2024-08-02,,,,,,,,CO Issued
+231,15 Hillcrest Rd,,,1,0,completed,,,,,2024-05-06,,,,,,,,CO Issued
+232,1655 Belvedere Ave,,,1,0,completed,,,,,2024-05-10,,,,,,,,CO Issued
+233,1655 Tenth St,,,1,0,completed,,,,,2024-11-25,,,,,,,,CO Issued
+236,3120 Deakin St,,,1,0,completed,,,,,2024-12-06,,,,,,,,CO Issued
+237,3122 Eton Ave,,,1,0,completed,,,,,2024-01-31,,,,,,,,CO Issued
+238,956 INDIAN ROCK Ave,,,1,0,completed,,,,,2024-03-01,,,,,,,,CO Issued
+239,1023 Cragmont Ave,,,1,0,completed,,,,,2024-07-29,,,,,,,,CO Issued
+240,1532 Blake St,,,1,0,completed,,,,,2024-05-22,,,,,,,,CO Issued
+241,1570 POSEN Ave,,,1,0,completed,,,,,2024-01-08,,,,,,,,CO Issued
+242,1812 Sixty-Second St,,,1,0,completed,,,,,2024-07-29,,,,,,,,CO Issued
+243,2206 Roosevelt Ave,,,1,0,completed,,,,,2024-08-30,,,,,,,,CO Issued
+244,2303 GRANT St,,,1,0,completed,,,,,2024-09-25,,,,,,,,CO Issued
+246,2631 WEBSTER St,,,1,0,completed,,,,,2024-01-31,,,,,,,,CO Issued
+248,1071 Page St,,,1,0,completed,,,,,2024-05-24,,,,,,,,CO Issued
+249,1067 Park Hills Rd,,,1,0,completed,,,,,2024-12-05,,,,,,,,CO Issued
+250,1128 Parker St,,,1,0,completed,,,,,2024-06-12,,,,,,,,CO Issued
+251,1221 Carrison St,,,1,0,completed,,,,,2024-09-12,,,,,,,,CO Issued
+252,1326 M L King Jr Way,,,1,0,completed,,,,,2024-09-16,,,,,,,,CO Issued
+253,1332 NEILSON St,,,1,0,completed,,,,,2024-02-05,,,,,,,,CO Issued
+254,1380 GILMAN,,,1,0,completed,,,,,2024-07-29,,,,,,,,CO Issued
+255,1381 Ada St,,,1,0,completed,,,,,2024-11-04,,,,,,,,CO Issued
+257,1630 Posen Ave,,,1,0,completed,,,,,2024-07-17,,,,,,,,CO Issued
+258,1712 M L King Jr Way,,,1,0,completed,,,,,2024-10-07,,,,,,,,CO Issued
+259,1724 La Vereda Rd,,,1,0,completed,,,,,2024-07-19,,,,,,,,CO Issued
+260,2335 Fifth St,,,1,0,completed,,,,,2024-05-31,,,,,,,,CO Issued
+261,2430 Prospect St,,,1,0,completed,,,,,2024-12-20,,,,,,,,CO Issued
+263,1231 NEILSON,,,1,0,completed,,,,,2024-09-19,,,,,,,,CO Issued
+264,1242 Kains Ave,,,1,0,completed,,,,,2024-06-10,,,,,,,,CO Issued
+265,1305 SIXTY-SIXTH,,,1,0,completed,,,,,2024-09-06,,,,,,,,CO Issued
+267,1449 ORDWAY St,,,1,0,completed,,,,,2024-04-05,,,,,,,,CO Issued
+268,2433 Acton St,,,1,0,completed,,,,,2024-08-23,,,,,,,,CO Issued
+270,2830 Cherry St,,,1,0,completed,,,,,2024-09-23,,,,,,,,CO Issued
+271,3136 Ellis St,,,1,0,completed,,,,,2024-11-15,,,,,,,,CO Issued
+272,1216 Haskell St,,,1,0,completed,,,,,2024-07-31,,,,,,,,CO Issued
+275,1701 Hopkins St,,,1,0,completed,,,,,2024-07-25,,,,,,,,CO Issued
+276,1709 Francisco St,,,1,0,completed,,,,,2024-12-11,,,,,,,,CO Issued
+277,1325 ALCATRAZ,,,1,0,completed,,,,,2024-10-31,,,,,,,,CO Issued
+278,1332 MILVIA,,,1,0,completed,,,,,2024-07-30,,,,,,,,CO Issued
+279,1428 DELAWARE St,,,1,0,completed,,,,,2024-02-07,,,,,,,,CO Issued
+152,1598 UNIVERSITY Ave,,,207,21,completed,2024-01-01,,2024-07-14,2024-12-16,,,,,,NX Ventures,Trachtenberg Architects,,BP Issued
+150,3030 TELEGRAPH Ave,,,144,0,completed,2024-01-01,,2024-12-10,2024-10-15,2026-01-27,,,,,,,,BP Issued
+139,2538 DURANT Ave,,,83,5,completed,2024-01-01,,2025-10-20,2024-10-01,,,,,,Martin Group / Valiance Capital,Studio KDA,,BP Issued
+164,1752 SHATTUCK Ave,,,72,0,completed,2022-01-18,,2026-02-11,2024-06-13,2026-05-26,,,,,Panoramic Interests,Studio KDA,,BP Issued
+143,2902 ADELINE St,,,54,0,withdrawn,2024-01-01,,2022-05-18,2024-01-01,,,,,,Realtex Group,SDT Architects,,BP Issued
+141,2016 ASHBY Ave,,,50,50,withdrawn,2024-01-01,,2026-02-23,2024-06-01,,,,,,CHDC,Lowney Architecture,,BP Issued
+176,2440 SHATTUCK Ave,,,40,0,completed,2021-12-09,,2022-06-24,2024-11-19,2025-03-05,,,,,,,,BP Issued
+161,2555 COLLEGE Ave,,,12,1,completed,2022-02-04,,2024-04-05,2024-04-26,2025-07-25,,,,,Panoramic Interests,Trachtenberg Architects,,BP Issued
+64,1515 DERBY St,,,2,0,completed,2025-01-01,,,2024-07-24,2025-05-23,,,,,,,,BP Issued
+79,1111 ALLSTON Way,,,1,0,completed,2025-01-01,,,2024-03-20,,,,,,,,,BP Issued
+183,2328 CHANNING Way,,,,0,permitted,,,,2024-09-05,,,,,,,,,BP Issued
+133,2128 Oxford St,,,485,47,entitled,2023-03-17,,2024-10-04,,,,,,,Core Spaces,,,Entitled
+140,2136 SAN PABLO Ave,,,125,10,entitled,2021-03-18,,2024-05-22,,,,,,,Allrise Capital,Trachtenberg Architects,,Entitled
+122,2530 BANCROFT Way,,,110,11,entitled,2024-03-12,,2024-12-27,,,,,,,Landmark Properties,,,Entitled
+126,2427 San Pablo,,,78,0,completed,2022-10-05,,2024-09-16,,,,,,,,Studio KDA,,Entitled
+123,2037 DURANT Ave,,,74,4,entitled,2024-03-29,,2024-06-19,,,,,,,,Studio KDA,,Entitled
+147,2300 ELLSWORTH St,,,69,0,under_construction,2024-01-01,,2024-10-21,2025-09-04,,,,,,Riaz Capital,Trachtenberg Architects,,Entitled
+116,2462 BANCROFT Way,,,66,3,entitled,2023-08-18,,2024-07-01,,,,,,,,Studio KDA,,Entitled
+144,2127 DWIGHT Way,,,58,8,withdrawn,2024-01-01,,2024-10-07,,,,,,,Riaz Capital,Trachtenberg Architects,,Entitled
+159,2403 SAN PABLO Ave,,,36,0,under_construction,2025-01-01,,2024-05-06,2025-06-03,,,,,,,,,Entitled
+128,2833 Seventh St,,,3,0,entitled,2023-09-21,,2024-05-07,,,,,,,,,,Entitled
+129,1614 Sixth St,,,3,0,completed,2024-01-25,,2024-10-17,2025-08-29,,,,,,,,,Entitled
+127,2820 San Pablo,,,1,0,entitled,2022-05-06,,2024-12-06,,,,,,,Cork-Mayo Investments,Studio KDA,,Entitled

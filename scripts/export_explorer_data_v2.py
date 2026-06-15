@@ -25,14 +25,21 @@ DB_PATH = BASE_DIR / 'databases' / 'berkeley_housing_v2.db'
 OUTPUT_PATH = BASE_DIR / 'docs' / 'explorer_data_v2_working.js'
 
 def validate_co_date(co_date):
-    """Validate CO date - reject dates before 2020 as likely fake/placeholder data"""
+    """Validate CO date - reject the v1->v2 migration STUB placeholder, keep all real dates.
+
+    Previously this rejected any date before 2020 as "likely fake", but that wrongly
+    dropped 145 genuine 2018-2019 completions (varied real dates) — our APR spans
+    2018-2025, so real pre-2020 completions must show. The only placeholder in the
+    data is the '2024-01-01' migration stub (2 stub-only projects: proj137/138, whose
+    real completion isn't independently evidenced). Reject that exact stub; keep
+    everything else regardless of year. (2026-06-15)
+    """
     if not co_date:
         return None
+    if co_date == '2024-01-01':  # v1->v2 migration stub placeholder, not a real CO
+        return None
     try:
-        year = int(co_date[:4])
-        if year < 2020:
-            print(f"  ⚠️ Rejecting invalid CO date (before 2020): {co_date}")
-            return None
+        int(co_date[:4])  # sanity: parseable year
         return co_date
     except (ValueError, TypeError):
         return None
@@ -237,6 +244,28 @@ def get_projects(conn):
         if stage_code == 'entitled':
             if not bp_issued and entitled and entitled < cutoff_36mo_str:
                 status = 'Entitled but Inactive'
+
+        # COMPLETION DISPLAY DERIVES FROM THE VERDICT, NOT THE MATERIALIZED STAGE FIELD
+        # (2026-06-15, ADR-001 one-definition principle). The canonical source of truth for
+        # "completed" is a validated CO date (co_issued_date from v_projects_flat, stub-rejected
+        # by validate_co_date). We do NOT maintain a second materialization (current_stage_type_id)
+        # and sync it — that perpetuates drift. So:
+        #   - valid co_date  -> 'Completed' (the published completion set == the CO stat == 672)
+        #   - stage='completed' WITHOUT a valid co_date -> demote to its milestone-derived status
+        #     (these are verdict-corrected false-completions / unverified-ambiguous; never fabricated
+        #     as Completed). current_stage_type_id remains for internal use; it no longer drives the
+        #     published completion display, so the map markers cannot diverge from the CO stat.
+        if co_date:
+            status = 'Completed'
+        elif status == 'Completed':
+            if construction_start or topped_out or bp_issued or num_permits:
+                status = 'Under Construction'
+            elif entitled:
+                status = 'Entitled'
+            elif filed:
+                status = 'Under Review'
+            else:
+                status = 'Pre-Application'
 
         # Build output dict matching v1 shape
         projects.append({

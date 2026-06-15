@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Shattuck Control Points.kml</name>
+	<StyleMap id="m_ylw-pushpin">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#s_ylw-pushpin</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#s_ylw-pushpin_hl</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="s_ylw-pushpin">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<Style id="s_ylw-pushpin_hl">
+		<IconStyle>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<Folder>
+		<name>Shattuck Control Points</name>
+		<open>1</open>
+		<Placemark>
+			<name>N-Shattuck-North</name>
+			<LookAt>
+				<longitude>-122.2697486346342</longitude>
+				<latitude>37.8811015377164</latitude>
+				<altitude>0</altitude>
+				<heading>-173.2584830295124</heading>
+				<tilt>81.07044960451063</tilt>
+				<range>135.9885237764039</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#m_ylw-pushpin</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-122.2695303309991,37.88205043942111,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>N-Shattuck-South</name>
+			<LookAt>
+				<longitude>-122.2682611111477</longitude>
+				<latitude>37.87066762850032</latitude>
+				<altitude>0</altitude>
+				<heading>-16.2825956154032</heading>
+				<tilt>65.40272976684648</tilt>
+				<range>13.30080357740724</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#m_ylw-pushpin</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-122.2682361111111,37.87064722222222,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>S-Shattuck-North</name>
+			<LookAt>
+				<longitude>-122.2680608117156</longitude>
+				<latitude>37.870226535204</latitude>
+				<altitude>0</altitude>
+				<heading>167.8854066033346</heading>
+				<tilt>63.33479427334988</tilt>
+				<range>48.20143771242353</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#m_ylw-pushpin</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-122.2680956221868,37.87033551901721,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>S-Shattuck-South</name>
+			<LookAt>
+				<longitude>-122.2660420018162</longitude>
+				<latitude>37.85208834658406</latitude>
+				<altitude>0</altitude>
+				<heading>167.8866456475859</heading>
+				<tilt>63.33492224188286</tilt>
+				<range>64.07003566362361</range>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+			</LookAt>
+			<styleUrl>#m_ylw-pushpin</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-122.2661377084575,37.85237334488679,0</coordinates>
+			</Point>
+		</Placemark>
+		<atom:link rel="app" href="https://www.google.com/earth/about/versions/#earth-pro" title="Google Earth Pro 7.3.7.1155"></atom:link>
+	</Folder>
+</Document>
+</kml>

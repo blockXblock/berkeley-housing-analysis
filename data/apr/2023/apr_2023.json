@@ -1,6 +1,6 @@
 {
   "year": 2023,
-  "generated": "2026-06-15T13:36:46.902958",
+  "generated": "2026-06-15T17:50:56.837604",
   "schema_version": "v2 (Stage 1 migration)",
   "table_a": {
     "title": "Table A: Applications Deemed Complete in 2023",
@@ -2583,7 +2583,7 @@
       "note": "Pipeline units do NOT count toward RHNA until BP is issued"
     },
     "completed": {
-      "total_units": 3870,
+      "total_units": 3570,
       "vli_units": 128
     }
   },

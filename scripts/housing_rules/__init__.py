@@ -36,3 +36,5 @@ __all__ = [
     "valid_income_tiers_for_year",
     "valid_streamlining_provisions_for_year",
 ]
+
+from .apn import to_canonical_apn, is_canonical_apn  # canonical APN form

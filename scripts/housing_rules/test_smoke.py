@@ -101,8 +101,26 @@ def main() -> int:
     _expect_raises(lambda: valid_streamlining_provisions_for_year(2050), ValueError,
                    "post-all-sunsets provisions lookup raises")
 
+    _check_to_canonical_apn()
+
     print("All smoke tests passed.")
     return 0
+
+
+def _check_to_canonical_apn():
+    from scripts.housing_rules.apn import to_canonical_apn, is_canonical_apn
+    cases = {
+        "55-1895-41": "055189504100", "057204600100": "057204600100",
+        "055-1895-018-05": "055189501805", "057 204600100": "057204600100",
+        "57-2046-1": "057204600100", "05518220133": "055182201303",
+        "57203217": "057203201700", "052 143301000": "052143301000",
+    }
+    for inp, exp in cases.items():
+        assert to_canonical_apn(inp) == exp, f"{inp} -> {to_canonical_apn(inp)} != {exp}"
+    assert to_canonical_apn("057-2046-008-03, 057-2046-008-02") is None  # multi-APN
+    assert to_canonical_apn(None) is None and to_canonical_apn("") is None
+    assert is_canonical_apn("057204600100") and not is_canonical_apn("57-2046-1")
+    print("to_canonical_apn: 8 variants + multi/null + is_canonical — PASS")
 
 
 if __name__ == "__main__":

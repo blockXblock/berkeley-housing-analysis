@@ -126,6 +126,20 @@ compatibility view is **`v_projects_flat`** (what `generate_apr_v2.py` and
   event-based **funnel / pipeline-yield / stage-conversion** metric is **MEANINGLESS**
   for them — they invert the funnel. **A JN must segment this cohort out before any funnel
   analysis** (the detector tags them `expected_co_only_cohort`, severity info).
+- **`berkeley.db.UseCode` does NOT reliably mark multi-unit housing** (verified 2026-06-16): our
+  tracked multi-unit *development* projects sit on **77xx/31xx/32xx/70xx/78xx** parcels
+  (commercial/institutional/mixed codes), while **1xxx = single-family and 2xxx = small old
+  duplexes** (the existing-stock universe is ~20,734 built-housing parcels). So UseCode is a **weak
+  "is-this-housing" signal** — a housing project can carry a commercial code, and a residential code
+  rarely marks a tracked development. **Use `Imps`-magnitude (improvement value) as the
+  build/scale proxy instead** (`shake_detectors.py` block_cohort/usecode checks do this:
+  large-untracked-non-SFR by Imps, NOT a residential-usecode filter).
+- **Assessor `Imps=$0` on a CITY-FINALED completion = REASSESSMENT LAG, not unbuilt** (verified
+  2026-06-16 on all 6 detector HIGH built_vs_vacant cases — proj134/158/161/174/299/358, 2025 COs):
+  a `completes/evidentiary` permit that the City **finaled** proves the building is occupiable
+  regardless of `Imps`; new-construction reassessment lags **1–2 years** (longer than the detector's
+  270-day window), and demo→rebuild drops `Imps` to 0 in the interim. **A finaled permit is the
+  built-signal that overrides `Imps=$0`** — the completion (and the 703) stands.
 
 ## UC student-housing rule (consolidated — primary-sourced)
 - UC projects are **IN the total pipeline count but EXCLUDED from RHNA/APR** — UC is

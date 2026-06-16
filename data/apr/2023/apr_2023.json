@@ -1,6 +1,6 @@
 {
   "year": 2023,
-  "generated": "2026-06-15T18:29:42.705580",
+  "generated": "2026-06-15T18:43:35.228162",
   "schema_version": "v2 (Stage 1 migration)",
   "table_a": {
     "title": "Table A: Applications Deemed Complete in 2023",
@@ -209,6 +209,28 @@
         "entitled_date": null,
         "bp_issued_date": null,
         "co_date": "2023-04-04",
+        "density_bonus": null,
+        "sb35_flag": null,
+        "sb330_flag": null,
+        "ab2011_flag": null,
+        "developer": null,
+        "architect": null,
+        "construction_status": null,
+        "milestone_achieved": "CO Issued"
+      },
+      {
+        "id": 465,
+        "address": "739 Channing Way",
+        "apn": null,
+        "permits": null,
+        "net_units": 4,
+        "vli_units": 0,
+        "status": "completed",
+        "app_filed_date": null,
+        "app_complete_date": null,
+        "entitled_date": null,
+        "bp_issued_date": null,
+        "co_date": "2023-03-28",
         "density_bonus": null,
         "sb35_flag": null,
         "sb330_flag": null,
@@ -2199,28 +2221,6 @@
         "milestone_achieved": "CO Issued"
       },
       {
-        "id": 465,
-        "address": "739 Channing Way",
-        "apn": null,
-        "permits": null,
-        "net_units": 0,
-        "vli_units": 0,
-        "status": "completed",
-        "app_filed_date": null,
-        "app_complete_date": null,
-        "entitled_date": null,
-        "bp_issued_date": null,
-        "co_date": "2023-03-28",
-        "density_bonus": null,
-        "sb35_flag": null,
-        "sb330_flag": null,
-        "ab2011_flag": null,
-        "developer": null,
-        "architect": null,
-        "construction_status": null,
-        "milestone_achieved": "CO Issued"
-      },
-      {
         "id": 173,
         "address": "2000 DWIGHT Way",
         "apn": null,
@@ -2399,7 +2399,7 @@
     ],
     "summary": {
       "total_projects": 108,
-      "total_units": 1054,
+      "total_units": 1058,
       "vli_units": 151,
       "entitled_in_year": 1,
       "bp_issued_in_year": 7,
@@ -2578,12 +2578,12 @@
       "percent_of_goal": 18.7
     },
     "pipeline": {
-      "total_units": 17044,
+      "total_units": 17085,
       "vli_units": 1097,
       "note": "Pipeline units do NOT count toward RHNA until BP is issued"
     },
     "completed": {
-      "total_units": 3570,
+      "total_units": 3611,
       "vli_units": 128
     }
   },
@@ -2966,6 +2966,17 @@
         "accela_status_date": null
       },
       {
+        "id": 94,
+        "address": "2145 GRANT St",
+        "net_units": 1,
+        "status": "entitled",
+        "developer": null,
+        "app_complete_date": null,
+        "entitled_date": "2026-03-26",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
         "id": 127,
         "address": "2820 San Pablo",
         "net_units": 1,
@@ -2973,17 +2984,6 @@
         "developer": "Cork-Mayo Investments",
         "app_complete_date": null,
         "entitled_date": "2024-12-06",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
-        "id": 94,
-        "address": "2145 GRANT St",
-        "net_units": 0,
-        "status": "entitled",
-        "developer": null,
-        "app_complete_date": null,
-        "entitled_date": "2026-03-26",
         "bp_issued_date": null,
         "accela_status_date": null
       },
@@ -3012,7 +3012,7 @@
     ],
     "summary": {
       "total_stalled": 38,
-      "total_units_at_risk": 5329
+      "total_units_at_risk": 5330
     }
   }
 }

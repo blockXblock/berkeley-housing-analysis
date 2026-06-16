@@ -10,15 +10,20 @@ sources**, used to produce/verify the HCD Annual Progress Report (APR) and a
 public explorer (berkeleybuild.com) + Datasette.
 
 ## Canonical database
-**`databases/berkeley_housing_v2.db`** — V2 normalized schema (45 tables):
+**`databases/berkeley_housing_v2.db`** — V2 normalized schema (46 tables):
 `projects → project_versions → unit_program(+affordability) → project_parcels →
 parcels`, plus `project_events` (timeline: entitlement/BP/CO milestones via
 `vocabulary_event_types`), `permits`, `project_classifications`. The flat
 compatibility view is **`v_projects_flat`** (what `generate_apr_v2.py` and
 `export_explorer_data_v2.py` read).
 - **V1 `berkeley_housing_analysis.db`** (flat `projects` table) is frozen/superseded.
-- **`berkeley.db`** = Alameda County **assessor parcels** (coords, `the_geom`,
-  `apn_norm`, UseCode) — a reference store, not the pipeline DB.
+- **`databases/berkeley.db`** = Alameda County **assessor parcels** (29,131 Berkeley
+  parcels; `APN`/`BOOK`/`PAGE`/`PARCEL`/`SUB_PARCEL`, `the_geom`+`Latitude`/`Longitude`,
+  `Imps`/`Land`/`TotalNetValue`, `UseCode`, `LatestDocumentDate`) — a reference store,
+  not the pipeline DB. **Refreshed 2026-06-16 (Feb-2026-current data) from data.acgov.org;
+  `Imps>0` is the built-signal — see rule 4 for the refreshed schema + 3-layer cross-walk.** ⚠ The
+  canonical file is `databases/berkeley.db`; a stray **0-byte `./berkeley.db` at repo
+  root is an empty stub** — ignore it (open the `databases/` one).
 - **`hcd_apr_mirror.db`** = Berkeley's submitted APR mirrored from CKAN — the
   **VERIFICATION TARGET, never a data source** (see rules below).
 - There are ~40 DB files total; most are dated snapshots/backups. Inventory:
@@ -136,7 +141,8 @@ compatibility view is **`v_projects_flat`** (what `generate_apr_v2.py` and
 - **CONSISTENCY / `contested` signals come from independent sources disagreeing — NEVER from CKAN.**
 
 ## Canonical file/package locations (verify by `ls`, never assume)
-- **`housing_rules` = a PACKAGE at `scripts/housing_rules/`** (`lookups.py`, `classifiers.py`, `__init__.py`, `test_smoke.py`) — **NOT a file** (`ls scripts/housing_rules.py` will mislead). Import: `sys.path.insert(0,'scripts'); import housing_rules`. Committed `7165f3b`; smoke test passes via `python -m scripts.housing_rules.test_smoke`. **Cycle boundary**: 6th-cycle start `2023-01-31` (later cycle owns the shared boundary). **Income tiers**: 5 through 2024, `ACUTELY_LOW` added 2025+. **Projection period is a NARROW window** (6th = 2022-06-30→2023-01-30), not the full cycle span — use `is_projection_period` for RHNA-counted comparisons, not `cycle_for_date`.
+- **`housing_rules` = a PACKAGE at `scripts/housing_rules/`** (`lookups.py`, `classifiers.py`, `__init__.py`, `test_smoke.py`) — **NOT a file** (`ls scripts/housing_rules.py` will mislead). Import: `sys.path.insert(0,'scripts'); import housing_rules`. Committed `7165f3b`; smoke test passes via `python -m scripts.housing_rules.test_smoke`. **Income tiers**: 5 through 2024, `ACUTELY_LOW` added 2025+. **RHNA-credit boundary (load-bearing — matches `generate_apr_v2.py`):** a unit is credited to the **6th cycle if its FIRST building permit was issued ON/AFTER `2022-06-30`** (the projection-period START, used as the 6th-cycle lower bound, **NO upper cap before 2031**); before `2022-06-30` = 5th cycle. Credit is on the **BP-ISSUED event, NOT CO/completion**. Use **FIRST-BP issuance = `MIN(non-subsidiary building_permit_issued event)`** per project — **NOT MAX** (the `v_projects_flat.bp_issued_date` MAX field wrongly flips a 5th-cycle-first-permitted project to 6th on a later revision). The `2023-01-31` date is the 6th-cycle **PLANNING-period start** (a DIFFERENT thing from credit-eligibility) — do **NOT** use it for RHNA credit. **`is_projection_period`** (the narrow `2022-06-30→2023-01-30` window) is **NOT** the RHNA-credit filter — credit spans `2022-06-30` through the full cycle.
+- **RHNA-BP credit is COVERAGE-LIMITED:** v2 models **~28 tracked projects with a materialized primary BP** vs Berkeley's **hundreds** of housing BPs (the ADU/infill tail is not modeled as projects). So the tracked-project 6th-cycle figure (**1,198 units / 13.4% as of 2026-06-16**) is an **internal lower bound, NOT Berkeley's actual RHNA progress**. The **RHNA PROGRESS BAR is HELD (not published)** — publishing a coverage-limited number as city progress would understate reality. The **full-city-BP-stream acquisition** (Berkeley open-data/Accela BP feed incl. the ADU/infill tail) is the queued prerequisite for a trustworthy bar. **CO-completion metrics (703, the net-new-CO annual tiles, all-time CO 3,611) ARE complete** (full CPRA feed) and remain the trustworthy headline; only the BP-RHNA side is coverage-limited.
 - **Canonical DB**: `databases/berkeley_housing_v2.db`. **Completion = `v_projects_flat.co_issued_date`** (verdict-driven), **NOT** `status_code`/stage (`current_stage_type_id` is a separate, drift-prone materialization that no longer drives the published completion display).
 - **Served site file**: `docs/explorer_data.js`, generated by **`export_explorer_data_v2.py`** (the v2 script, reads the view). The non-v2 `export_explorer_data.py` is **SUPERSEDED/sequestered** to `scripts/superseded/` — do not run it (it reads raw events and bypasses the verdict fix).
 

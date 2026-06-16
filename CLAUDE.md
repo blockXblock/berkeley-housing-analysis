@@ -135,11 +135,16 @@ compatibility view is **`v_projects_flat`** (what `generate_apr_v2.py` and
   build/scale proxy instead** (`shake_detectors.py` block_cohort/usecode checks do this:
   large-untracked-non-SFR by Imps, NOT a residential-usecode filter).
 - **Assessor `Imps=$0` on a CITY-FINALED completion = REASSESSMENT LAG, not unbuilt** (verified
-  2026-06-16 on all 6 detector HIGH built_vs_vacant cases — proj134/158/161/174/299/358, 2025 COs):
+  2026-06-16 on all 6 then-HIGH built_vs_vacant cases — proj134/158/161/174/299/358, 2025 COs):
   a `completes/evidentiary` permit that the City **finaled** proves the building is occupiable
-  regardless of `Imps`; new-construction reassessment lags **1–2 years** (longer than the detector's
-  270-day window), and demo→rebuild drops `Imps` to 0 in the interim. **A finaled permit is the
-  built-signal that overrides `Imps=$0`** — the completion (and the 703) stands.
+  regardless of `Imps`. **A finaled permit is the built-signal that overrides `Imps=$0`** — the
+  completion (and the 703) stands. **Two distinct `Imps=$0`-but-built sub-cases (both NOT unbuilt):**
+  **(1) pure reassessment-lag** — new construction not yet reassessed (lags **1–2 years**, longer than
+  the detector's 270-day window); **(2) demo→rebuild** — the old building was demolished (a `demol`
+  permit zeros `Imps`) and the new build is finaled but not yet posted (proj174, proj208). The
+  detector now **weights the finaled permit ABOVE Imps**: completion WITH a finaled `completes`
+  permit + `Imps=$0` → `assessor_lag_finaled` / `assessor_lag_demo_rebuild` (low); WITHOUT a finaled
+  permit + `Imps=$0` + not-recent → **HIGH** (the genuinely-suspect wrong-verdict candidate).
 
 ## UC student-housing rule (consolidated — primary-sourced)
 - UC projects are **IN the total pipeline count but EXCLUDED from RHNA/APR** — UC is

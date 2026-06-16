@@ -15539,10 +15539,10 @@
       {
         "check": "built_vs_vacant",
         "key": 134,
-        "severity": "high",
+        "severity": "low",
         "signal": "proj134 completed (CO 2025-07-10, 28u) but parcel 55-1878-22 reads Imps=$0 (vacant)",
-        "classification": "wrong_apn_or_unbuilt",
-        "expected_filter": "completion should be built",
+        "classification": "assessor_lag_finaled",
+        "expected_filter": "built \u2014 City-finaled completes permit overrides Imps=$0 (new-construction reassessment lags 1-2yr); completion stands",
         "resolvability": "needs_harvest",
         "evidence": {
           "co_date": "2025-07-10",
@@ -15552,7 +15552,9 @@
           "usecode": "7705",
           "recent_within_lag": false,
           "is_uc": false,
-          "sibling_parcel_risk": false
+          "sibling_parcel_risk": false,
+          "has_finaled_completes_permit": true,
+          "demo_rebuild": false
         }
       },
       {
@@ -15571,16 +15573,18 @@
           "usecode": "7000",
           "recent_within_lag": true,
           "is_uc": false,
-          "sibling_parcel_risk": false
+          "sibling_parcel_risk": false,
+          "has_finaled_completes_permit": false,
+          "demo_rebuild": true
         }
       },
       {
         "check": "built_vs_vacant",
         "key": 158,
-        "severity": "high",
+        "severity": "low",
         "signal": "proj158 completed (CO 2025-05-06, 39u) but parcel 57-2073-5 reads Imps=$0 (vacant)",
-        "classification": "wrong_apn_or_unbuilt",
-        "expected_filter": "completion should be built",
+        "classification": "assessor_lag_finaled",
+        "expected_filter": "built \u2014 City-finaled completes permit overrides Imps=$0 (new-construction reassessment lags 1-2yr); completion stands",
         "resolvability": "needs_harvest",
         "evidence": {
           "co_date": "2025-05-06",
@@ -15590,16 +15594,18 @@
           "usecode": "3000",
           "recent_within_lag": false,
           "is_uc": false,
-          "sibling_parcel_risk": false
+          "sibling_parcel_risk": false,
+          "has_finaled_completes_permit": true,
+          "demo_rebuild": false
         }
       },
       {
         "check": "built_vs_vacant",
         "key": 161,
-        "severity": "high",
+        "severity": "low",
         "signal": "proj161 completed (CO 2025-07-25, 12u) but parcel 55-1847-20 reads Imps=$0 (vacant)",
-        "classification": "wrong_apn_or_unbuilt",
-        "expected_filter": "completion should be built",
+        "classification": "assessor_lag_finaled",
+        "expected_filter": "built \u2014 City-finaled completes permit overrides Imps=$0 (new-construction reassessment lags 1-2yr); completion stands",
         "resolvability": "needs_harvest",
         "evidence": {
           "co_date": "2025-07-25",
@@ -15609,7 +15615,9 @@
           "usecode": "8100",
           "recent_within_lag": false,
           "is_uc": false,
-          "sibling_parcel_risk": false
+          "sibling_parcel_risk": false,
+          "has_finaled_completes_permit": true,
+          "demo_rebuild": false
         }
       },
       {
@@ -15628,16 +15636,18 @@
           "usecode": "7000",
           "recent_within_lag": true,
           "is_uc": false,
-          "sibling_parcel_risk": false
+          "sibling_parcel_risk": false,
+          "has_finaled_completes_permit": false,
+          "demo_rebuild": false
         }
       },
       {
         "check": "built_vs_vacant",
         "key": 174,
-        "severity": "high",
+        "severity": "low",
         "signal": "proj174 completed (CO 2025-05-21, 24u) but parcel 58-2181-27 reads Imps=$0 (vacant)",
-        "classification": "wrong_apn_or_unbuilt",
-        "expected_filter": "completion should be built",
+        "classification": "assessor_lag_demo_rebuild",
+        "expected_filter": "built \u2014 demo\u2192rebuild: old building demolished (Imps zeroed), new finaled but not yet reassessed; the finaled completes permit proves built",
         "resolvability": "needs_harvest",
         "evidence": {
           "co_date": "2025-05-21",
@@ -15647,7 +15657,9 @@
           "usecode": "7700",
           "recent_within_lag": false,
           "is_uc": false,
-          "sibling_parcel_risk": false
+          "sibling_parcel_risk": false,
+          "has_finaled_completes_permit": true,
+          "demo_rebuild": true
         }
       },
       {
@@ -15655,8 +15667,8 @@
         "key": 208,
         "severity": "low",
         "signal": "proj208 completed (CO 2025-12-11, 1u) but parcel 62-2945-28 reads Imps=$0 (vacant)",
-        "classification": "too_new_county_lag",
-        "expected_filter": "recent completion within County lag",
+        "classification": "assessor_lag_demo_rebuild",
+        "expected_filter": "built \u2014 demo\u2192rebuild: old building demolished (Imps zeroed), new finaled but not yet reassessed; the finaled completes permit proves built",
         "resolvability": "needs_harvest",
         "evidence": {
           "co_date": "2025-12-11",
@@ -15666,16 +15678,18 @@
           "usecode": "2501",
           "recent_within_lag": true,
           "is_uc": false,
-          "sibling_parcel_risk": false
+          "sibling_parcel_risk": false,
+          "has_finaled_completes_permit": true,
+          "demo_rebuild": true
         }
       },
       {
         "check": "built_vs_vacant",
         "key": 299,
-        "severity": "high",
+        "severity": "low",
         "signal": "proj299 completed (CO 2025-07-07, 4u) but parcel 55-1870-3 reads Imps=$0 (vacant)",
-        "classification": "wrong_apn_or_unbuilt",
-        "expected_filter": "completion should be built",
+        "classification": "assessor_lag_finaled",
+        "expected_filter": "built \u2014 City-finaled completes permit overrides Imps=$0 (new-construction reassessment lags 1-2yr); completion stands",
         "resolvability": "needs_harvest",
         "evidence": {
           "co_date": "2025-07-07",
@@ -15685,16 +15699,18 @@
           "usecode": "7000",
           "recent_within_lag": false,
           "is_uc": false,
-          "sibling_parcel_risk": false
+          "sibling_parcel_risk": false,
+          "has_finaled_completes_permit": true,
+          "demo_rebuild": false
         }
       },
       {
         "check": "built_vs_vacant",
         "key": 358,
-        "severity": "high",
+        "severity": "low",
         "signal": "proj358 completed (CO 2025-05-30, 1u) but parcel 55-1822-27 reads Imps=$0 (vacant)",
-        "classification": "wrong_apn_or_unbuilt",
-        "expected_filter": "completion should be built",
+        "classification": "assessor_lag_finaled",
+        "expected_filter": "built \u2014 City-finaled completes permit overrides Imps=$0 (new-construction reassessment lags 1-2yr); completion stands",
         "resolvability": "needs_harvest",
         "evidence": {
           "co_date": "2025-05-30",
@@ -15704,7 +15720,9 @@
           "usecode": "7700",
           "recent_within_lag": false,
           "is_uc": false,
-          "sibling_parcel_risk": false
+          "sibling_parcel_risk": false,
+          "has_finaled_completes_permit": true,
+          "demo_rebuild": false
         }
       },
       {

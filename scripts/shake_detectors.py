@@ -463,9 +463,23 @@ def check_phantoms(ctx):
 
 
 # ============================ ASSESSOR-ORACLE ============================
+def _completion_evidence(ctx, pid):
+    """(has_finaled_completes, demo_rebuild) for a project. A City-FINALED completes permit proves
+       the building is occupiable -> overrides assessor Imps=$0 (the finaled-permit-is-built rule,
+       verified 2026-06-16). demo_rebuild = a demolition permit exists -> Imps may be demo-zeroed."""
+    finaled = ctx.v2.execute(
+        "SELECT COUNT(*) FROM permits WHERE project_id=? AND completion_verdict='completes' AND finaled_date IS NOT NULL AND finaled_date!=''",
+        (pid,)).fetchone()[0]
+    demo = ctx.v2.execute(
+        "SELECT COUNT(*) FROM permits WHERE project_id=? AND (LOWER(description) LIKE '%demol%')", (pid,)).fetchone()[0]
+    return finaled > 0, demo > 0
+
+
 def check_built_vs_vacant(ctx):
-    """completed projects -> parcel Imps>0? Imps=0 on a completion = wrong-APN or recent-lag.
-       Magnitude: Imps should scale with units."""
+    """completed projects -> parcel Imps>0? A City-FINALED completes permit is weighted ABOVE the
+       assessor Imps reading: completion WITH a finaled permit + Imps=$0 => assessor-lag (low/info,
+       the building IS built); completion WITHOUT a finaled permit + Imps=$0 + not-recent => HIGH
+       (genuinely-suspect wrong-verdict candidate). Magnitude: Imps should scale with units."""
     findings = []
     for r in ctx.v2.execute(f"""
             SELECT project_id,total_units,co_issued_date FROM v_projects_flat
@@ -490,16 +504,29 @@ def check_built_vs_vacant(ctx):
         sib = info['canon'] in ctx.collided_keys   # collided canonical key => Imps may be a sibling sub-parcel's
         sib_note = ' | VERIFY: collided canonical key — Imps may be from a sibling sub-parcel' if sib else ''
         if imps <= 0:
-            cls = ('uc_offsite_parcel' if is_uc else ('too_new_county_lag' if recent else 'wrong_apn_or_unbuilt'))
-            sev = 'low' if (recent or is_uc) else 'high'
+            has_finaled, demo = _completion_evidence(ctx, pid)
+            if is_uc:
+                cls, sev, why = 'uc_offsite_parcel', 'info', 'UC group quarters / off-site parcel'
+            elif has_finaled:
+                # FINALED permit proves built -> Imps=$0 is reassessment lag, NOT unbuilt
+                if demo:
+                    cls, why = 'assessor_lag_demo_rebuild', ('built — demo→rebuild: old building demolished (Imps '
+                        'zeroed), new finaled but not yet reassessed; the finaled completes permit proves built')
+                else:
+                    cls, why = 'assessor_lag_finaled', ('built — City-finaled completes permit overrides Imps=$0 '
+                        '(new-construction reassessment lags 1-2yr); completion stands')
+                sev = 'low'
+            elif recent:
+                cls, sev, why = 'too_new_county_lag', 'low', 'recent completion within County lag'
+            else:
+                cls, sev, why = 'wrong_apn_or_unbuilt', 'high', \
+                    'NO finaled permit + Imps=$0 + not-recent => genuinely-suspect verdict (verify built vs mis-verdicted)'
             findings.append(finding('built_vs_vacant', pid, sev,
                 f'proj{pid} completed (CO {co}, {units}u) but parcel {a["apn"]} reads Imps=$0 (vacant)',
                 {'co_date': co, 'units': units, 'apn': a['apn'], 'imps': imps, 'usecode': a['usecode'],
-                 'recent_within_lag': recent, 'is_uc': is_uc, 'sibling_parcel_risk': sib},
-                cls,
-                ('UC group quarters / off-site parcel' if is_uc else
-                 ('recent completion within County lag' if recent else 'completion should be built')) + sib_note,
-                ctx.resolvability(pid)))
+                 'recent_within_lag': recent, 'is_uc': is_uc, 'sibling_parcel_risk': sib,
+                 'has_finaled_completes_permit': has_finaled, 'demo_rebuild': demo},
+                cls, why + sib_note, ctx.resolvability(pid)))
         elif units >= 5 and imps / max(units, 1) < LOW_IMPS_PER_UNIT and not is_uc:
             findings.append(finding('built_vs_vacant', pid, 'medium',
                 f'proj{pid} {units}u completed but Imps ${imps:,.0f} = ${imps/units:,.0f}/unit (suspiciously low)',

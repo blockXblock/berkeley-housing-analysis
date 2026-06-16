@@ -3390,7 +3390,6 @@
             .filter(p => (getField(p, 'co_date') || '').startsWith(y))
             .reduce((s, p) => s + (p.units || 0), 0);
         const co2023 = coUnitsYear('2023'), co2024 = coUnitsYear('2024'), co2025 = coUnitsYear('2025'), co2026 = coUnitsYear('2026');
-        const rhnaCompletions = co2023 + co2024 + co2025 + co2026;                           // 2023-2026 (CY2023 reconciled 2026-06-16)
 
         // Calculate median processing days
         const processingDays = projects.map(p => getField(p, 'processing_days')).filter(d => d && d > 0);
@@ -3450,13 +3449,12 @@
         setStatText('stat-co-2025', co2025);
         setStatText('stat-co-2026', co2026);
 
-        // RHNA progress — COMPLETIONS-based (private, UC-excluded). NOT pipeline.
-        // CY2023 not yet reconciled, so this is 2024-2026 completions and may rise.
-        setStatText('stat-rhna-completions', rhnaCompletions);
-        const rhnaProgressPct = (rhnaCompletions / RHNA_TOTAL) * 100;   // ~16%
-        setStatText('stat-rhna-pct', rhnaProgressPct.toFixed(0));
-        const rhnaProgressBar = document.getElementById('rhna-progress-bar');
-        if (rhnaProgressBar) rhnaProgressBar.style.width = `${Math.min(rhnaProgressPct, 100)}%`;
+        // RHNA progress BAR HELD 2026-06-16: do NOT publish a single "% toward 8,934".
+        // A completions/goal ratio misframes RHNA (credit is earned at BP issuance) and our
+        // BP coverage is tracked-projects only. The completions data is shown as raw per-year
+        // tiles above; the BP-issued units are shown (coverage-noted) in the BP panel below.
+        // The HTML elements stat-rhna-completions / stat-rhna-pct / rhna-progress-bar are
+        // intentionally retired. Restore only after the full city BP stream is acquired.
 
         // Building permits section
         setStatText('stat-bp-units', bpUnits);
@@ -3494,9 +3492,9 @@
         setStatText('stat-sankey-projects', totalProjects);
         setStatText('stat-sankey-projects-2', totalProjects);
 
-        // APR tab stats — pipeline is PRIVATE units; RHNA % is COMPLETIONS-based (not pipeline)
+        // APR tab stats — pipeline is PRIVATE units. RHNA-% line removed 2026-06-16
+        // (stat-apr-rhna-pct retired with the held RHNA progress bar — see above).
         setStatText('stat-apr-pipeline-units', privateUnits);
-        setStatText('stat-apr-rhna-pct', ((rhnaCompletions / RHNA_TOTAL) * 100).toFixed(0));
         setStatText('stat-apr-bp-units', bpUnits);
         setStatText('stat-apr-bp-pct', privateUnits > 0 ? ((bpUnits / privateUnits) * 100).toFixed(1) : '0');
 

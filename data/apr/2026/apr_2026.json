@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "generated": "2026-06-16T12:52:17.140911",
+  "generated": "2026-06-16T14:04:39.189995",
   "schema_version": "v2 (Stage 1 migration)",
   "table_a": {
     "title": "Table A: Applications Deemed Complete in 2026",
@@ -393,11 +393,11 @@
       "total": 8934
     },
     "rhna_credit": {
-      "bp_issued_units": 1671,
+      "bp_issued_units": 1198,
       "adu_units": 0,
-      "total_credit": 1671,
-      "vli_units": 320,
-      "percent_of_goal": 18.7
+      "total_credit": 1198,
+      "vli_units": 234,
+      "percent_of_goal": 13.4
     },
     "pipeline": {
       "total_units": 16808,

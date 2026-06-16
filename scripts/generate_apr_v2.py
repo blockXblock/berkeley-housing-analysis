@@ -350,15 +350,35 @@ def generate_rhna_progress(conn, year, adu_count=0):
         "total": 8934
     }
 
-    # RHNA CREDIT: Only projects with BP issued (this is what counts for HCD)
-    # V2 MIGRATION: Using v_projects_flat
+    # RHNA CREDIT: credited on FIRST building-permit issuance (MIN non-subsidiary BP event),
+    # NOT the view's bp_issued_date (which is MAX -> wrongly flips a 5th-cycle-first-permitted
+    # project to 6th on a later revision). 6th-Cycle boundary = bp_issued >= 2022-06-30 (the
+    # projection-period start; NOT cycle_for_date's 2023-01-31). Computed from project_events
+    # directly (the view's bp_issued_date is sparse/MAX-based). NOTE: COVERAGE-LIMITED — this
+    # is BP-issued units among TRACKED projects only, NOT Berkeley's full permit stream (the
+    # ADU/infill tail isn't modelled as projects). Needs the full-BP-stream acquisition before
+    # any public RHNA-progress figure. (2026-06-16)
     cursor.execute('''
         SELECT
-            SUM(total_units) as total_units,
-            SUM(COALESCE(vli_units, 0)) as vli_units
-        FROM v_projects_flat
-        WHERE bp_issued_date IS NOT NULL AND bp_issued_date != ''
-          AND ''' + UC_EXCLUDE + '''
+            SUM(vpf.total_units) as total_units,
+            SUM(COALESCE(vpf.vli_units, 0)) as vli_units
+        FROM v_projects_flat vpf
+        JOIN (
+            SELECT pe.project_id, MIN(pe.event_date) AS first_bp
+            FROM project_events pe
+            JOIN vocabulary_event_types et ON et.id = pe.event_type_id
+            WHERE et.code = 'building_permit_issued'
+              AND NOT EXISTS (
+                SELECT 1 FROM project_events cc
+                JOIN vocabulary_event_types ct ON ct.id = cc.event_type_id
+                WHERE ct.code = 'permit_classified_subsidiary' AND cc.permit_id = pe.permit_id)
+            GROUP BY pe.project_id
+        ) bp ON bp.project_id = vpf.project_id
+        WHERE bp.first_bp >= '2022-06-30'
+          AND vpf.project_id NOT IN (
+            SELECT pc.project_id FROM project_classifications pc
+            JOIN vocabulary_classification_types vct ON vct.id = pc.classification_type_id
+            WHERE vct.code = 'uc_project')
     ''')
     bp_row = cursor.fetchone()
     bp_issued_units = bp_row[0] or 0

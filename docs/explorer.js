@@ -3389,8 +3389,8 @@
         const coUnitsYear = (y) => privateProjects
             .filter(p => (getField(p, 'co_date') || '').startsWith(y))
             .reduce((s, p) => s + (p.units || 0), 0);
-        const co2024 = coUnitsYear('2024'), co2025 = coUnitsYear('2025'), co2026 = coUnitsYear('2026');
-        const rhnaCompletions = co2024 + co2025 + co2026;                                    // 1,457 (CY2023 pending)
+        const co2023 = coUnitsYear('2023'), co2024 = coUnitsYear('2024'), co2025 = coUnitsYear('2025'), co2026 = coUnitsYear('2026');
+        const rhnaCompletions = co2023 + co2024 + co2025 + co2026;                           // 2023-2026 (CY2023 reconciled 2026-06-16)
 
         // Calculate median processing days
         const processingDays = projects.map(p => getField(p, 'processing_days')).filter(d => d && d > 0);
@@ -3445,6 +3445,7 @@
         setStatText('stat-median-days', medianDays);
 
         // Actual unit completions (net-new CO units, UC-excluded), by year
+        setStatText('stat-co-2023', co2023);
         setStatText('stat-co-2024', co2024);
         setStatText('stat-co-2025', co2025);
         setStatText('stat-co-2026', co2026);

@@ -54,14 +54,28 @@ compatibility view is **`v_projects_flat`** (what `generate_apr_v2.py` and
      **(b)** v2's OWN apn storage is INCONSISTENT (`057 204600100` vs `055-1822-013-3`) —
      normalize both; **(c)** address matching needs ordinal-word↔number (`SIXTH`=`6TH`) +
      house-# tolerance.
-   - **Stale/wrong APNs split into TWO classes:** **CLASS 1 "re-platted"** — new parcel
-     exists at the project's **exact** address (Acheson Bldg D `2111 University`→
-     `57-2046-11-1`); **address-resolvable, stage the re-point.** **CLASS 2 "assessor-
-     lagged new construction"** — too new / no exact-address parcel (nearby parcels
-     vacant/small/wrong-side, e.g. proj136 `1951 Shattuck`, only near-match the too-small
-     `1950 Shattuck` across the street); **NOT resolvable → permit-doc HARVEST only.**
-     **NEVER blanket-re-point by nearest-address/lat-lon** (moves units onto a wrong
-     parcel). The **exact house number** (not ±tolerance) is the safe Class-1 discriminator.
+   - **🔴 `berkeley.db` IS A 2019 SNAPSHOT (max `DATE_UPDAT = 2019-08-26`, ~5 yr stale).**
+     EVERY building completed after 2019 reads **vacant / pre-development / mis-addressed**
+     in it. This is the ROOT CAUSE of address↔APN false-flags and the whole apparent
+     "assessor-lagged" set. **A project APN absent-from / mismatched-against this snapshot
+     is NOT evidence the APN is wrong** — it usually means the building postdates 2019.
+     (2026-06-15: an audit re-pointed 17 APNs against this stale snapshot; 15 were rolled
+     back as false-flags once proj136 — stored APN `057204600100`, the CORRECT 1951
+     Shattuck corner lot the 2019 data shows as "2108 Berkeley Way / vacant" — exposed the
+     flaw.) **Refresh berkeley.db from a CURRENT Alameda snapshot before re-founding any
+     APN audit** (on the acquisition list).
+   - **Stale/wrong APN classes (mismatch ⇒ FLAG-FOR-REVIEW, NEVER auto-re-point):**
+     **(1) re-platted** — old APN superseded, new APN AFFIRMATIVELY documented at the exact
+     address (Acheson Bldg D `2111 University`→`57-2046-11-1`): the **only** safe auto-
+     re-point. **(2) stored-APN-right, assessor-cross-reference-misleading** — corner-lot
+     addressed on its other frontage OR the 2019 snapshot predates the build (proj136):
+     the stored APN is CORRECT; the assessor lookup misleads → **do NOT re-point.**
+     **(3) too-new** — stored APN simply absent from the 2019 snapshot. **Safety rule:**
+     **absent-from-assessor → could be re-platted OR too-new; only affirmatively-documented
+     re-plats are safe.** Everything else → **John-verify against a CURRENT snapshot.**
+     **NEVER blanket-re-point by nearest-address/lat-lon** — it moves units onto a wrong/
+     stale parcel. The project's stored APN is PRIMARY data; a re-point derived against the
+     stale reference is not.
 5. **Never commit/push without instruction.** `dev` branch only; no push until
    John says so. Diagnostic docs land in `docs/audit/` (commit-ready, unpushed).
 6. **`/dev/diskN` numbers are volatile** — re-verify by stable identity before any

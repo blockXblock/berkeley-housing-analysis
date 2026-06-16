@@ -43,6 +43,12 @@ compatibility view is **`v_projects_flat`** (what `generate_apr_v2.py` and
    an explicit go-ahead. Diagnose first; act second.
 4. **APN cross-walk = 12-digit Alameda `apn_norm`**; matcher is
    `normalize_apn()` = strip non-digits. Coords/geometry come from `berkeley.db`.
+   **APNs are NOT stable identifiers** — parcels get **re-platted** and the old APN
+   **vanishes from the assessor**, silently orphaning the join (e.g. Acheson
+   re-platted to `57-2046-8-4/-9/-11-1`; an APN-join block-sweep would miss the
+   308-unit development). **A stale-APN check (project APNs not in current assessor)
+   is a STANDING guard before any APN-join analysis**; re-point dead links by
+   address/geometry match.
 5. **Never commit/push without instruction.** `dev` branch only; no push until
    John says so. Diagnostic docs land in `docs/audit/` (commit-ready, unpushed).
 6. **`/dev/diskN` numbers are volatile** — re-verify by stable identity before any
@@ -53,6 +59,43 @@ compatibility view is **`v_projects_flat`** (what `generate_apr_v2.py` and
   - **A `no-capID` / 0-result is NOT evidence of absence until retried.** These failures are often transient (Accela discovery flakiness) — e.g. 2026-06-15, 5/6 "discovery-failed" large buildings all resolved on a plain retry. **Retry the harvester before concluding a record is missing**, and before escalating to the (more expensive) CIC spot-check. Only a *consistent* post-retry 0-result, or a scrape that returns inspections but no building-final, is a real finding.
 - **SCRAPER = CIC = Claude in Chrome** (interactive, near-manual, one-permit spot-checks). The **OPPOSITE** of harvester. Never call a Playwright job "the scraper."
 - **CPRA INGESTION** = xlsx-feed → v2 load (not browser-based).
+
+## Merge / dedup discipline (shadows vs real ADU pairs)
+- **Soft-retire via `projects.merged_into_id`** (added 2026-06-15) is the STANDING
+  merge method. To merge a phantom duplicate into its real survivor: re-point
+  **unique-evidence** FKs (events/permits/docs) to the survivor, **delete duplicate
+  structural FKs** (the absorbed shares the survivor's parcel/address/geometry —
+  re-pointing those would duplicate them), set `merged_into_id = survivor`, and
+  `v_projects_flat` filters `WHERE p.merged_into_id IS NULL`. Reversible (the
+  absorbed row + its version survive, just filtered out). FK re-point BEFORE retire;
+  verify 0 orphans (no evidence/structural FK points to a retired id).
+- **SHADOW vs ADU-PAIR RULE (never merge a real building away):** a same-APN +
+  same-address + same-units pair is a **shadow** (mergeable duplicate) **ONLY if it
+  does NOT have two distinct real permits with two distinct CO dates.** Two real
+  `completes/evidentiary` permits + two distinct COs = **two real buildings**
+  (main-house + ADU on one lot) — **PROTECT, never merge** (this caught 3 real ADUs
+  from erasure 2026-06-15: 624/869, 645/880, 362/888). If units differ (e.g. 73 vs
+  66) it is a **CONFLICT**, not a clean merge — report, never auto-merge.
+
+## Structural facts (load-bearing for JN-builders — verified 2026-06-15)
+- **`project_events.units_affected` is 100% NULL** → unit-conservation / cross-stage
+  unit-drift is **IMPOSSIBLE from events**; `total_units` (versions / `v_projects_flat`)
+  is the **ONLY** unit signal. (This is the confirmed root cause D6 was under-powered.)
+- **The CO-only import cohort** (~597 projects, contiguous id blocks **185-279 +
+  280-899**, single-/two-unit ADUs ingested from CO/CPRA finaled records) has **NO
+  lifecycle events** (only `co_issued` + inferred `permit_classified_*`). Any
+  event-based **funnel / pipeline-yield / stage-conversion** metric is **MEANINGLESS**
+  for them — they invert the funnel (~764 "completed" vs ~57 "permitted"). **A JN must
+  segment this cohort out before any funnel analysis.**
+
+## UC student-housing rule (consolidated — primary-sourced)
+- UC projects are **IN the total pipeline count but EXCLUDED from RHNA/APR** — UC is
+  exempt from city permitting (UC Regents approve, UC issues its own building permit;
+  Anchor House FAQ, v2 `documents` id 2178). **Filter on the `uc_project`
+  classification flag, NEVER a hardcoded id** (auto-catches the 3 under-construction UC
+  towers 165/171/177 when they complete). **UC counted in BEDS, not units, no ratio**
+  (proj170 Anchor House = **772 beds** / 244 apartments). The exclusion is applied in
+  `generate_apr_v2.py` to all RHNA-counting queries; the pipeline total keeps UC.
 
 ## Data-source roles (role-crossing is the circularity bug)
 - **HCD CKAN mirror (`hcd_apr_mirror.db`) = ORACLE / reconcile-target ONLY.** NEVER a classification or derivation input. Using "the city's APR agrees" as evidence is **circular**.

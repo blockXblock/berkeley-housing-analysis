@@ -569,18 +569,30 @@ def check_scale_sanity(ctx):
 
 
 # ============================ BLOCK COHORTS ============================
-BLINDSPOT_RECENT_YEAR = '2023'        # LatestDocumentDate >= this = recent development (proxy)
-BLINDSPOT_HIGH_IMPS = 2_000_000       # Imps suggesting multi-unit scale (RHNA-relevant)
+# Calibrated against the full run (2026-06-16): the literal "untracked built-housing" universe is
+# ~20,734 parcels = essentially ALL of Berkeley's EXISTING housing stock (we model ~895 development
+# projects, not 30k parcels) — so it is CONTEXT, not a finding queue. Two would-be filters failed:
+#   - LatestDocumentDate >= 2023 is a RECORDING date -> 4,135 old houses that merely sold/refinanced.
+#   - the assessor UseCode taxonomy does NOT cleanly mark "multi-unit": our tracked multi-unit
+#     projects sit on 77xx/31xx/32xx/70xx/78xx (commercial/institutional/mixed) codes, while 1xxx/2xxx
+#     are single-family + small old duplexes.
+# The usable BLIND-SPOT queue = LARGE untracked NON-single-family buildings by improvement value:
+# untracked + Imps >= $3M + UseCode not single-family (not 1xxx). Imprecise (may include large
+# commercial — each finding carries usecode + a 'verify housing-use' note) but it surfaces the real
+# missing-development candidates (e.g. 2125 University = Acheson re-plat, 2352 Shattuck = Logan Park).
+BLINDSPOT_MIN_IMPS = 3_000_000        # large-building threshold for the actionable shortlist
+SFR_USECODE_PREFIX = '1'              # single-family residential codes (1xxx) — excluded from the shortlist
+CENSUS_IMPS_TIERS = [1_000_000, 2_000_000, 3_000_000, 5_000_000]
 
 
 def check_block_cohort(ctx, blocks):
-    """census every assessor parcel on a block (BOOK-PAGE). Census counts ALL untracked-built-housing,
-       but a BLIND-SPOT FINDING is emitted only for parcels showing RECENT development
-       (LatestDocumentDate >= 2023) OR multi-unit-scale Imps — existing old single-family stock is
-       expected-untracked, not signal (we model projects, not every house). LatestDocumentDate is a
-       RECORDING date (may be a sale, not construction) -> finding says 'verify'."""
+    """census every assessor parcel on a block (BOOK-PAGE). Census records the FULL untracked-built-
+       housing universe (context, not a queue). A BLIND-SPOT FINDING is emitted only for the usable
+       shortlist: untracked + non-single-family + Imps >= $3M (large missing-development candidates)."""
     findings = []
     census = {}
+    universe_total = 0
+    tier_counts = {t: 0 for t in CENSUS_IMPS_TIERS}
     tracked_canon = {info['canon'] for pid, info in ctx.primary_apn.items()
                      if pid in ctx.active_ids and info['canon']}
     for book, page in blocks:
@@ -588,29 +600,45 @@ def check_block_cohort(ctx, blocks):
             "SELECT APN,BOOK,PAGE,PARCEL,SUB_PARCEL,Imps,UseCode,SitusAddre,LatestDocumentDate FROM parcels WHERE BOOK=? AND PAGE=?",
             (book, page)).fetchall()
         b = {'block': f'{book}-{page}', 'parcels': len(rows), 'tracked': 0,
-             'untracked_built_housing_total': 0, 'untracked_built_housing_flagged': 0}
+             'untracked_built_housing_total': 0, 'untracked_large_nonsfr_flagged': 0}
         for apn, bk, pg, pa, sub, imps, use, situs, ldd in rows:
             c = canon_bdb_components(bk, pg, pa, sub)
             if c in tracked_canon:
                 b['tracked'] += 1
                 continue
             imps = imps or 0
-            housing = str(use or '')[:1] in ('1', '2')
-            if imps > 0 and housing:
+            use_s = str(use or '')
+            housing_stock = use_s[:1] in ('1', '2')   # the existing-housing universe (context)
+            if imps > 0 and housing_stock:
                 b['untracked_built_housing_total'] += 1
-                recent = bool(ldd and ldd >= BLINDSPOT_RECENT_YEAR)
-                big = imps >= BLINDSPOT_HIGH_IMPS
-                if recent or big:
-                    b['untracked_built_housing_flagged'] += 1
-                    findings.append(finding('block_cohort', f'{book}-{page}:{apn}', 'medium',
-                        f'BLIND SPOT: untracked built-housing parcel {apn} ("{situs}") on block {book}-{page}'
-                        + (f' — recent record {ldd}' if recent else '') + (f' — Imps ${imps:,.0f} (multi-unit scale)' if big else ''),
-                        {'apn': apn, 'situs': situs, 'imps': imps, 'usecode': use,
-                         'latest_doc_date': ldd, 'recent': recent, 'high_imps': big},
-                        'untracked_built_housing',
-                        'qualified by recency/magnitude; LatestDocumentDate is a recording date (verify vs construction)'))
+                universe_total += 1
+            # actionable shortlist: large, NON-single-family, untracked
+            if imps >= BLINDSPOT_MIN_IMPS and use_s[:1] != SFR_USECODE_PREFIX:
+                for t in CENSUS_IMPS_TIERS:
+                    if imps >= t:
+                        tier_counts[t] += 1
+                b['untracked_large_nonsfr_flagged'] += 1
+                sib = (c in ctx.collided_keys)
+                findings.append(finding('block_cohort', f'{book}-{page}:{apn}', 'medium',
+                    f'BLIND SPOT: large untracked building {apn} ("{situs}") on block {book}-{page} — Imps ${imps:,.0f}, UseCode {use_s}',
+                    {'apn': apn, 'situs': situs, 'imps': imps, 'usecode': use_s,
+                     'latest_doc_date': ldd, 'sibling_parcel_risk': sib},
+                    'untracked_large_building',
+                    'verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); '
+                    'a potential MISSING development project — cross-check the stale_apn crosswalk queue'
+                    + (' | collided key — Imps may be a sibling sub-parcel' if sib else '')))
         census[f'{book}-{page}'] = b
-    return findings, {'block_census': census}
+    # sort findings by Imps desc (most significant missing buildings first)
+    findings.sort(key=lambda f: -f['evidence']['imps'])
+    aux = {'block_census': census,
+           'blindspot_summary': {
+               'untracked_built_housing_universe': universe_total,
+               'note_universe': 'this is essentially Berkeley\'s EXISTING housing stock (we model development '
+                                'projects, not all parcels) — CONTEXT, not a finding queue',
+               'shortlist_threshold_imps': BLINDSPOT_MIN_IMPS,
+               'shortlist_count': len(findings),
+               'tier_counts_large_nonsfr': tier_counts}}
+    return findings, aux
 
 
 # ============================ RUNNER ============================

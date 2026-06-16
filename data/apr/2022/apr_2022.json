@@ -1,6 +1,6 @@
 {
   "year": 2022,
-  "generated": "2026-06-15T20:00:09.855059",
+  "generated": "2026-06-15T20:57:08.726415",
   "schema_version": "v2 (Stage 1 migration)",
   "table_a": {
     "title": "Table A: Applications Deemed Complete in 2022",
@@ -2116,8 +2116,8 @@
       "percent_of_goal": 18.7
     },
     "pipeline": {
-      "total_units": 16944,
-      "vli_units": 1090,
+      "total_units": 16808,
+      "vli_units": 1085,
       "note": "Pipeline units do NOT count toward RHNA until BP is issued"
     },
     "completed": {
@@ -2394,17 +2394,6 @@
         "accela_status_date": null
       },
       {
-        "id": 118,
-        "address": "2138 KITTREDGE St (id:118)",
-        "net_units": 66,
-        "status": "entitled",
-        "developer": null,
-        "app_complete_date": null,
-        "entitled_date": "2025-10-20",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
         "id": 182,
         "address": "2072 Addison St",
         "net_units": 66,
@@ -2549,8 +2538,8 @@
       }
     ],
     "summary": {
-      "total_stalled": 38,
-      "total_units_at_risk": 5330
+      "total_stalled": 37,
+      "total_units_at_risk": 5264
     }
   }
 }

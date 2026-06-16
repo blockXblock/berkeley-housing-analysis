@@ -41,19 +41,20 @@ compatibility view is **`v_projects_flat`** (what `generate_apr_v2.py` and
    classifications before any irreversible write.
 3. **Read-only by default.** No merge/archive/delete/ingest/schema-change without
    an explicit go-ahead. Diagnose first; act second.
-4. **APN cross-walk = 12-digit Alameda `apn_norm`**; matcher is
-   `normalize_apn()` = strip non-digits. Coords/geometry come from `berkeley.db`.
+4. **APN cross-walk = 12-digit Alameda APN via the 3-LAYER normalizer (below) — NOT bare
+   strip-non-digits.** (`normalize_apn()` strips v2-side digits only; using it alone for the
+   cross-DB join gave **890/892 false-dead**, 2026-06-15.) Coords/geometry come from `berkeley.db`.
    **APNs are NOT stable identifiers** — parcels get **re-platted** and the old APN
    **vanishes from the assessor**, silently orphaning the join (e.g. Acheson
    re-platted to `57-2046-8-4/-9/-11-1`; an APN-join block-sweep would miss the
    308-unit development). **A stale-APN check (project APNs not in current assessor)
    is a STANDING guard before any APN-join analysis.**
-   - **The naive "strip non-digits" cross-walk is INSUFFICIENT** (it produced 890/892
-     false "dead" 2026-06-15). Three normalization layers: **(a)** assessor hyphen-APN →
-     12-digit segment-pad `book(3)+page(4)+block(3)+sub(2)` (`57-2046-1`→`057204600100`);
-     **(b)** v2's OWN apn storage is INCONSISTENT (`057 204600100` vs `055-1822-013-3`) —
-     normalize both; **(c)** address matching needs ordinal-word↔number (`SIXTH`=`6TH`) +
-     house-# tolerance.
+   - **THE matcher = the 3-layer cross-walk (all three required, not strip-non-digits):**
+     **(a)** assessor hyphen-APN → 12-digit segment-pad `book(3)+page(4)+block(3)+sub(2)`
+     (`57-2046-1`→`057204600100`); **(b)** v2's OWN apn storage is INCONSISTENT
+     (`057 204600100` vs `055-1822-013-3`) — normalize BOTH sides; **(c)** address matching
+     needs ordinal-word↔number (`SIXTH`=`6TH`) + house-# tolerance. Skipping any layer
+     reproduces the 890/892-false-dead trap.
    - **🔴 `berkeley.db` IS A 2019 SNAPSHOT (max `DATE_UPDAT = 2019-08-26`, ~5 yr stale).**
      EVERY building completed after 2019 reads **vacant / pre-development / mis-addressed**
      in it. This is the ROOT CAUSE of address↔APN false-flags and the whole apparent

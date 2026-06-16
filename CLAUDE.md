@@ -47,8 +47,21 @@ compatibility view is **`v_projects_flat`** (what `generate_apr_v2.py` and
    **vanishes from the assessor**, silently orphaning the join (e.g. Acheson
    re-platted to `57-2046-8-4/-9/-11-1`; an APN-join block-sweep would miss the
    308-unit development). **A stale-APN check (project APNs not in current assessor)
-   is a STANDING guard before any APN-join analysis**; re-point dead links by
-   address/geometry match.
+   is a STANDING guard before any APN-join analysis.**
+   - **The naive "strip non-digits" cross-walk is INSUFFICIENT** (it produced 890/892
+     false "dead" 2026-06-15). Three normalization layers: **(a)** assessor hyphen-APN →
+     12-digit segment-pad `book(3)+page(4)+block(3)+sub(2)` (`57-2046-1`→`057204600100`);
+     **(b)** v2's OWN apn storage is INCONSISTENT (`057 204600100` vs `055-1822-013-3`) —
+     normalize both; **(c)** address matching needs ordinal-word↔number (`SIXTH`=`6TH`) +
+     house-# tolerance.
+   - **Stale/wrong APNs split into TWO classes:** **CLASS 1 "re-platted"** — new parcel
+     exists at the project's **exact** address (Acheson Bldg D `2111 University`→
+     `57-2046-11-1`); **address-resolvable, stage the re-point.** **CLASS 2 "assessor-
+     lagged new construction"** — too new / no exact-address parcel (nearby parcels
+     vacant/small/wrong-side, e.g. proj136 `1951 Shattuck`, only near-match the too-small
+     `1950 Shattuck` across the street); **NOT resolvable → permit-doc HARVEST only.**
+     **NEVER blanket-re-point by nearest-address/lat-lon** (moves units onto a wrong
+     parcel). The **exact house number** (not ±tolerance) is the safe Class-1 discriminator.
 5. **Never commit/push without instruction.** `dev` branch only; no push until
    John says so. Diagnostic docs land in `docs/audit/` (commit-ready, unpushed).
 6. **`/dev/diskN` numbers are volatile** — re-verify by stable identity before any

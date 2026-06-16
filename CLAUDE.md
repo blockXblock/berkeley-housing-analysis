@@ -55,22 +55,27 @@ compatibility view is **`v_projects_flat`** (what `generate_apr_v2.py` and
      (`057 204600100` vs `055-1822-013-3`) — normalize BOTH sides; **(c)** address matching
      needs ordinal-word↔number (`SIXTH`=`6TH`) + house-# tolerance. Skipping any layer
      reproduces the 890/892-false-dead trap.
-   - **🔴 `berkeley.db` IS A 2019 SNAPSHOT (max `DATE_UPDAT = 2019-08-26`, ~5 yr stale).**
-     EVERY building completed after 2019 reads **vacant / pre-development / mis-addressed**
-     in it. This is the ROOT CAUSE of address↔APN false-flags and the whole apparent
-     "assessor-lagged" set. **A project APN absent-from / mismatched-against this snapshot
-     is NOT evidence the APN is wrong** — it usually means the building postdates 2019.
-     (2026-06-15: an audit re-pointed 17 APNs against this stale snapshot; 15 were rolled
-     back as false-flags once proj136 — stored APN `057204600100`, the CORRECT 1951
-     Shattuck corner lot the 2019 data shows as "2108 Berkeley Way / vacant" — exposed the
-     flaw.) **Refresh berkeley.db from a CURRENT Alameda snapshot before re-founding any
-     APN audit** (on the acquisition list).
+   - **🟢 `berkeley.db.parcels` REFRESHED 2026-06-16 from data.acgov.org** (Alameda Open Data
+     Hub Parcels, `services5.arcgis.com/ROBnTHSNjoZ2Wm1P/.../Parcels/FeatureServer/0`,
+     Feb-2026 current, 29,131 Berkeley parcels). **It WAS a ≤2019 ArcGIS cache** — note
+     `DATE_UPDAT` is a **sparse per-parcel last-change** field (95% null, max 2019), **NOT a
+     snapshot date**; the "≤2019" was inferred from zero post-2019 changes, and the proj136
+     false-flag arc (an audit re-pointed 17 APNs against the stale cache; **15 rolled back**
+     once proj136's stored `057204600100` proved correct) was its cost. Post-refresh: the
+     **built-signal is `Imps>0`** (improvement $ value — proj136 = $70.4M; NOT
+     `LatestDocumentDate`, which is recording-date and read 2021 for proj136). The
+     **stale-reference guard now SHRINKS to the County's own ~weeks–months processing lag**
+     for late-2025/2026 recordings (it does not vanish). Re-pull from the same endpoint to
+     refresh; the parcel_crosswalk (prior-APN/split-merge lineage) is the queued durable fix.
    - **Stale/wrong APN classes (mismatch ⇒ FLAG-FOR-REVIEW, NEVER auto-re-point):**
      **(1) re-platted** — old APN superseded, new APN AFFIRMATIVELY documented at the exact
      address (Acheson Bldg D `2111 University`→`57-2046-11-1`): the **only** safe auto-
      re-point. **(2) stored-APN-right, assessor-cross-reference-misleading** — corner-lot
-     addressed on its other frontage OR the 2019 snapshot predates the build (proj136):
-     the stored APN is CORRECT; the assessor lookup misleads → **do NOT re-point.**
+     addressed on its other frontage (PERMANENT: County situs `2108 Berkeley Way` persists
+     even in the Feb-2026 refresh while Berkeley assigns `1951 Shattuck` — division of
+     authority, the refresh does NOT fix it; the corner-lot false-positive rule is permanent)
+     OR a stale-cache pre-build (proj136 — dissolved by the refresh): stored APN is CORRECT,
+     the assessor lookup misleads → **do NOT re-point.**
      **(3) too-new** — stored APN simply absent from the 2019 snapshot. **Safety rule:**
      **absent-from-assessor → could be re-platted OR too-new; only affirmatively-documented
      re-plats are safe.** Everything else → **John-verify against a CURRENT snapshot.**

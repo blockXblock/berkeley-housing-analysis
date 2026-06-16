@@ -774,6 +774,31 @@
             const docsShown    = docsLinked.concat(docsUnlinked.slice(0, 10));
             const docsHidden   = Math.max(0, docsUnlinked.length - 10);
 
+            // Assessed value / est. property tax (completed-only). Branch per design:
+            // UC -> omit; value -> "$X assessed (+ est. tax)"; net-taxable=0 -> "Tax-exempt"
+            // (FACTUAL, never "affordable"); completed-no-value -> "pending"; pipeline -> omit.
+            let assessedHtml = '';
+            if (p.is_uc_project) {
+                assessedHtml = '';
+            } else if (p.assessed_value != null) {
+                const av = '$' + Math.round(p.assessed_value).toLocaleString();
+                if (p.assessed_tax_exempt) {
+                    assessedHtml = `<div class="bg-blue-50 p-2 rounded mt-2 text-sm">
+                        <p><strong>Assessed value:</strong> ${av} <span class="text-blue-700 font-medium">· Tax-exempt</span></p>
+                        <p class="text-gray-400 text-xs">assessor net taxable value $0 (exemption type not yet classified)</p>
+                    </div>`;
+                } else {
+                    const tax = p.est_annual_tax ? '~$' + Math.round(p.est_annual_tax).toLocaleString() + '/yr' : null;
+                    assessedHtml = `<div class="bg-blue-50 p-2 rounded mt-2 text-sm">
+                        <p><strong>Assessed value:</strong> ${av}</p>
+                        ${tax ? `<p><strong>Est. property tax:</strong> ${tax} <span class="text-gray-400 text-xs" title="Estimated ad-valorem only (net taxable value × 1.25%). Excludes Berkeley flat parcel levies (school/library/parks bonds) — the real bill is higher.">(est. ad-valorem ⓘ)</span></p>` : ''}
+                        <p class="text-gray-400 text-xs">assessor as of ${p.assessed_as_of_date || 'n/a'}</p>
+                    </div>`;
+                }
+            } else if (p.co_date) {
+                assessedHtml = `<p class="text-gray-400 text-sm mt-2"><strong>Assessed value:</strong> pending (parcel crosswalk / reassessment)</p>`;
+            }
+
             expandRow.innerHTML = `
                 <td colspan="10" class="px-4 py-4">
                     <div class="grid grid-cols-4 gap-4">
@@ -799,6 +824,7 @@
                                 <p><strong>BP Issued:</strong> ${p.bp_issued || 'N/A'}</p>
                                 <p><strong>CO Date:</strong> ${p.co_date || 'N/A'}</p>
                             </div>
+                            ${assessedHtml}
                         </div>
                         <div>
                             <h4 class="font-semibold mb-2">Documents (${docs.length})</h4>
@@ -3448,6 +3474,17 @@
         setStatText('stat-co-2024', co2024);
         setStatText('stat-co-2025', co2025);
         setStatText('stat-co-2026', co2026);
+
+        // Assessed-value civic aggregate (completed-only; est. ad-valorem approximation).
+        const assessedProjects = projects.filter(p => p.assessed_value != null);
+        const completedCount = projects.filter(p => p.co_date).length;   // 703 (incl UC)
+        const totalAssessedTaxable = assessedProjects.reduce((s, p) => s + (p.assessed_net_taxable || 0), 0);
+        const totalEstTax = assessedProjects.reduce((s, p) => s + (p.est_annual_tax || 0), 0);
+        const assessedCoverage = completedCount > 0 ? Math.round(100 * assessedProjects.length / completedCount) : 0;
+        setStatText('stat-assessed-total', '$' + (totalAssessedTaxable / 1e9).toFixed(2) + 'B');
+        setStatText('stat-assessed-tax', '~$' + (totalEstTax / 1e6).toFixed(1) + 'M/yr');
+        setStatText('stat-assessed-coverage', assessedCoverage);
+        setStatText('stat-assessed-count', assessedProjects.length);
 
         // RHNA progress BAR HELD 2026-06-16: do NOT publish a single "% toward 8,934".
         // A completions/goal ratio misframes RHNA (credit is earned at BP issuance) and our

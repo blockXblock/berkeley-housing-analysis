@@ -42,7 +42,11 @@ BASE_DIR = Path('/Users/johngage/berkeley-data')
 DB_PATH = BASE_DIR / 'databases' / 'berkeley_housing_v2.db'
 
 # UC student housing is exempt from city permitting and does NOT count toward the
-# RHNA allocation (documented rule, since 2026-04). Exclude uc_project-classified
+# RHNA allocation (documented rule, since 2026-04). PRIMARY SOURCE: Anchor House FAQ,
+# UC Berkeley Capital Strategies (capitalstrategies.berkeley.edu/anchor-house-faq,
+# v2 documents id 2178) — "UC Regents approve the project and UC Berkeley issues its
+# own building permit," so it is exempt from city permitting and city RHNA. Exclude
+# uc_project-classified
 # projects from ALL RHNA-counting queries (Table A2, RHNA completed, BP-credit,
 # developer summary) — but KEEP them in the total PIPELINE ("in pipeline, excluded
 # from RHNA"). Flag-based (project_classifications), NEVER a hardcoded project id,

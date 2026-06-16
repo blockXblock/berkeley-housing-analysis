@@ -119,12 +119,13 @@ compatibility view is **`v_projects_flat`** (what `generate_apr_v2.py` and
 - **`project_events.units_affected` is 100% NULL** → unit-conservation / cross-stage
   unit-drift is **IMPOSSIBLE from events**; `total_units` (versions / `v_projects_flat`)
   is the **ONLY** unit signal. (This is the confirmed root cause D6 was under-powered.)
-- **The CO-only import cohort** (~597 projects, contiguous id blocks **185-279 +
-  280-899**, single-/two-unit ADUs ingested from CO/CPRA finaled records) has **NO
+- **The CO-only import cohort** (**713 projects** — MEASURED 2026-06-16 by `scripts/shake_detectors.py`,
+  not the earlier stale ~597 estimate; = active projects in id blocks **185-279 + 280-899** with **no
+  pre-CO lifecycle event**, single-/two-unit ADUs ingested from CO/CPRA finaled records) has **NO
   lifecycle events** (only `co_issued` + inferred `permit_classified_*`). Any
   event-based **funnel / pipeline-yield / stage-conversion** metric is **MEANINGLESS**
-  for them — they invert the funnel (~764 "completed" vs ~57 "permitted"). **A JN must
-  segment this cohort out before any funnel analysis.**
+  for them — they invert the funnel. **A JN must segment this cohort out before any funnel
+  analysis** (the detector tags them `expected_co_only_cohort`, severity info).
 
 ## UC student-housing rule (consolidated — primary-sourced)
 - UC projects are **IN the total pipeline count but EXCLUDED from RHNA/APR** — UC is

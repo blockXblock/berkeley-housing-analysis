@@ -1,6 +1,6 @@
 {
   "year": 2021,
-  "generated": "2026-06-15T18:43:33.430997",
+  "generated": "2026-06-15T20:00:09.018269",
   "schema_version": "v2 (Stage 1 migration)",
   "table_a": {
     "title": "Table A: Applications Deemed Complete in 2021",
@@ -2534,8 +2534,8 @@
       "percent_of_goal": 18.7
     },
     "pipeline": {
-      "total_units": 17085,
-      "vli_units": 1097,
+      "total_units": 16944,
+      "vli_units": 1090,
       "note": "Pipeline units do NOT count toward RHNA until BP is issued"
     },
     "completed": {

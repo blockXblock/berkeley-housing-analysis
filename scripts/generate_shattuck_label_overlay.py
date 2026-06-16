@@ -108,7 +108,11 @@ def project_rows():
     rows = con.execute(
         """
         select project_id, address_display, total_units, height_stories, height_feet,
-               owner_current, developer, architect, latitude, longitude
+               owner_current, developer, architect, latitude, longitude,
+               co_issued_date, assessed_value, assessed_net_taxable, est_annual_tax,
+               exists(select 1 from project_classifications pc
+                      where pc.project_id = v_projects_flat.project_id
+                        and pc.classification_type_id = 6) as is_uc
         from v_projects_flat
         where (
               lower(address_display) like '%shattuck%'
@@ -144,19 +148,47 @@ def clean_number(value, fallback="n/a"):
         return clean(value, fallback)
 
 
+def assessed_line(row):
+    """Per-project assessed-value/tax line, branching on completion + value state.
+    completed+value -> "$X assessed · ~$Y/yr (est. ad-valorem)"; completed+exempt (net=0) ->
+    "$X assessed · tax-exempt"; completed+no-value-yet -> "assessed value pending"; pipeline
+    or UC -> None (omit — pipeline has no assessed value; UC is Regents tax-exempt off-grid).
+    "tax-exempt" is shown ONLY when net-taxable == 0; tax is the ad-valorem approx (excludes
+    flat parcel levies)."""
+    # access fields defensively (sqlite3.Row supports keys())
+    keys = row.keys()
+    is_uc = "is_uc" in keys and row["is_uc"]
+    co = row["co_issued_date"] if "co_issued_date" in keys else None
+    assessed = row["assessed_value"] if "assessed_value" in keys else None
+    if is_uc:
+        return None
+    if assessed is not None:
+        net = row["assessed_net_taxable"]
+        if net == 0:
+            return f"${assessed:,.0f} assessed · tax-exempt"
+        tax = row["est_annual_tax"]
+        tax_str = f" · ~${tax:,.0f}/yr (est. ad-valorem)" if tax else ""
+        return f"${assessed:,.0f} assessed{tax_str}"
+    if co:  # completed but no usable value (crosswalk/lag pending)
+        return "assessed value pending"
+    return None  # pipeline -> omit
+
+
 def label_text(row):
     owner = clean(row["owner_current"])
     architect = clean(row["architect"])
     if owner == "n/a" and clean(row["developer"]) != "n/a":
         owner = f"Dev: {clean(row['developer'])}"
-    return "\n".join(
-        [
-            clean(row["address_display"]),
-            f"{clean_number(row['total_units'])} units · {clean_number(row['height_stories'])} stories",
-            f"Owner: {owner}",
-            f"Architect: {architect}",
-        ]
-    )
+    lines = [
+        clean(row["address_display"]),
+        f"{clean_number(row['total_units'])} units · {clean_number(row['height_stories'])} stories",
+        f"Owner: {owner}",
+        f"Architect: {architect}",
+    ]
+    av = assessed_line(row)
+    if av:
+        lines.append(av)
+    return "\n".join(lines)
 
 
 def visible_label_name(row):

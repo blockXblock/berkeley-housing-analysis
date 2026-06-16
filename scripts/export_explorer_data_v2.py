@@ -199,13 +199,24 @@ def get_projects(conn):
         # and are fine from raw events.
         vpf_cur = conn.cursor()
         vpf_cur.execute(
-            'SELECT bp_issued_date, co_issued_date FROM v_projects_flat WHERE project_id = ?',
+            'SELECT bp_issued_date, co_issued_date, assessed_value, assessed_net_taxable, '
+            'assessed_exemption, est_annual_tax, assessed_as_of_date '
+            'FROM v_projects_flat WHERE project_id = ?',
             (pid,))
         vpf_row = vpf_cur.fetchone()
         filed = event_dates.get('application_submitted')
         entitled = event_dates.get('entitlement_approved')
         bp_issued = vpf_row[0] if vpf_row else None
         co_date = validate_co_date(vpf_row[1] if vpf_row else None)
+        # Assessed value (completed-only; NULL for pipeline/UC/crosswalk-pending). Per design:
+        # "tax-exempt" is shown ONLY when net-taxable == 0 (the clear cases), never inferred from
+        # the exemption sign. Tax is the est. ad-valorem approximation (excludes flat parcel levies).
+        assessed_value = vpf_row[2] if vpf_row else None
+        assessed_net = vpf_row[3] if vpf_row else None
+        assessed_exemption = vpf_row[4] if vpf_row else None
+        est_annual_tax = vpf_row[5] if vpf_row else None
+        assessed_as_of = vpf_row[6] if vpf_row else None
+        assessed_tax_exempt = (assessed_value is not None and assessed_net == 0)
         construction_start = event_dates.get('construction_start_observed')
         topped_out = event_dates.get('topped_out')
         demolition_permit_date = event_dates.get('demo_permit_issued')
@@ -302,6 +313,12 @@ def get_projects(conn):
             "entitled": entitled,
             "bp_issued": bp_issued,
             "co_date": co_date,
+            "assessed_value": assessed_value,
+            "assessed_net_taxable": assessed_net,
+            "assessed_exemption": assessed_exemption,
+            "est_annual_tax": est_annual_tax,
+            "assessed_as_of_date": assessed_as_of,
+            "assessed_tax_exempt": assessed_tax_exempt,
             "construction_start": construction_start,
             "construction_status": None,
             "estimated_completion": None,

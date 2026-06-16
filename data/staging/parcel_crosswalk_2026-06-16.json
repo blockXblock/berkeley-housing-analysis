@@ -4,12 +4,12 @@
  "as_of": "2026-02",
  "method": "3-layer crosswalk: improved canon + EXACT-address-only + book/page continuity + imps/scale. Danger rules: never nearest-address; completed+built only; stored APN primary.",
  "summary": {
-  "FALSE_STALE": 3,
-  "LEAVE": 14,
-  "HIGH": 31,
+  "FALSE_STALE": 13,
+  "LEAVE": 11,
+  "HIGH": 25,
   "MULTI_SPLIT": 1,
   "MEDIUM": 10,
-  "LOW": 12
+  "LOW": 11
  },
  "acheson_split": {
   "umbrella": 178,
@@ -112,8 +112,10 @@
    "completed": false,
    "co_date": null,
    "canon": "059234901100",
-   "confidence": "LEAVE",
-   "note": "pipeline/in-review or stub-only \u2014 may be too-new, NOT re-platted; leave"
+   "confidence": "FALSE_STALE",
+   "note": "resolves with component-pad canon \u2014 NOT re-platted (detector canon gap)",
+   "proposed_apn": "59-2349-11",
+   "proposed_imps": 389553.0
   },
   {
    "project_id": 135,
@@ -345,8 +347,10 @@
    "completed": false,
    "co_date": null,
    "canon": "053165803500",
-   "confidence": "LEAVE",
-   "note": "pipeline/in-review or stub-only \u2014 may be too-new, NOT re-platted; leave"
+   "confidence": "FALSE_STALE",
+   "note": "resolves with component-pad canon \u2014 NOT re-platted (detector canon gap)",
+   "proposed_apn": "53-1658-35",
+   "proposed_imps": 390644.0
   },
   {
    "project_id": 197,
@@ -374,7 +378,7 @@
    "n_exact_candidates": 1,
    "n_built": 0,
    "proposed_apn": "56-1938-38",
-   "proposed_canon": "056193800000",
+   "proposed_canon": "056193803800",
    "proposed_imps": 0,
    "proposed_situs": "2312 8TH ST BERKELEY 94710",
    "proposed_usecode": "1620"
@@ -410,20 +414,10 @@
    "completed": true,
    "co_date": "2024-09-25",
    "canon": "055190403300",
-   "confidence": "HIGH",
-   "evidence": [
-    "exact_address",
-    "single_built_parcel",
-    "book_page_continuity",
-    "imps_scale_match"
-   ],
-   "n_exact_candidates": 1,
-   "n_built": 1,
+   "confidence": "FALSE_STALE",
+   "note": "resolves with component-pad canon \u2014 NOT re-platted (detector canon gap)",
    "proposed_apn": "55-1904-33",
-   "proposed_canon": "055190400000",
-   "proposed_imps": 426060.0,
-   "proposed_situs": "2303 GRANT ST BERKELEY 94703",
-   "proposed_usecode": "7300"
+   "proposed_imps": 426060.0
   },
   {
    "project_id": 327,
@@ -463,7 +457,7 @@
    "n_exact_candidates": 1,
    "n_built": 1,
    "proposed_apn": "57-2082-49",
-   "proposed_canon": "057208200000",
+   "proposed_canon": "057208204900",
    "proposed_imps": 383996.0,
    "proposed_situs": "1208 DELAWARE ST BERKELEY 94702",
    "proposed_usecode": "7300"
@@ -496,20 +490,10 @@
    "completed": true,
    "co_date": "2025-01-17",
    "canon": "054170903500",
-   "confidence": "HIGH",
-   "evidence": [
-    "exact_address",
-    "single_built_parcel",
-    "book_page_continuity",
-    "imps_scale_match"
-   ],
-   "n_exact_candidates": 1,
-   "n_built": 1,
+   "confidence": "FALSE_STALE",
+   "note": "resolves with component-pad canon \u2014 NOT re-platted (detector canon gap)",
    "proposed_apn": "54-1709-35",
-   "proposed_canon": "054170900000",
-   "proposed_imps": 1088747.0,
-   "proposed_situs": "2710 COLLEGE AVE BERKELEY 94705",
-   "proposed_usecode": "7300"
+   "proposed_imps": 1088747.0
   },
   {
    "project_id": 376,
@@ -529,7 +513,7 @@
    "n_exact_candidates": 1,
    "n_built": 1,
    "proposed_apn": "59-2325-38",
-   "proposed_canon": "059232500000",
+   "proposed_canon": "059232503800",
    "proposed_imps": 1074570.0,
    "proposed_situs": "1438 5TH ST BERKELEY 94710",
    "proposed_usecode": "7305"
@@ -552,7 +536,7 @@
    "n_exact_candidates": 1,
    "n_built": 1,
    "proposed_apn": "59-2325-32",
-   "proposed_canon": "059232500000",
+   "proposed_canon": "059232503200",
    "proposed_imps": 993582.0,
    "proposed_situs": "764 PAGE ST BERKELEY 94710",
    "proposed_usecode": "1620"
@@ -575,7 +559,7 @@
    "n_exact_candidates": 2,
    "n_built": 1,
    "proposed_apn": "57-2086-88",
-   "proposed_canon": "057208600000",
+   "proposed_canon": "057208608800",
    "proposed_imps": 1083852.0,
    "proposed_situs": "1173 HEARST AVE BERKELEY 94702",
    "proposed_usecode": "1600"
@@ -606,8 +590,10 @@
    "completed": false,
    "co_date": null,
    "canon": "052157309300",
-   "confidence": "LEAVE",
-   "note": "pipeline/in-review or stub-only \u2014 may be too-new, NOT re-platted; leave"
+   "confidence": "FALSE_STALE",
+   "note": "resolves with component-pad canon \u2014 NOT re-platted (detector canon gap)",
+   "proposed_apn": "52-1573-93",
+   "proposed_imps": 201100.0
   },
   {
    "project_id": 398,
@@ -627,7 +613,7 @@
    "n_exact_candidates": 1,
    "n_built": 1,
    "proposed_apn": "57-2089-27",
-   "proposed_canon": "057208900000",
+   "proposed_canon": "057208902700",
    "proposed_imps": 1213800.0,
    "proposed_situs": "1919 9TH ST BERKELEY 94710",
    "proposed_usecode": "7305"
@@ -691,7 +677,7 @@
    "n_exact_candidates": 1,
    "n_built": 1,
    "proposed_apn": "59-2325-44",
-   "proposed_canon": "059232500000",
+   "proposed_canon": "059232504400",
    "proposed_imps": 1046010.0,
    "proposed_situs": "1434 5TH ST BERKELEY 94710",
    "proposed_usecode": "7305"
@@ -745,20 +731,10 @@
    "completed": true,
    "co_date": "2018-10-17",
    "canon": "053166105600",
-   "confidence": "HIGH",
-   "evidence": [
-    "exact_address",
-    "single_built_parcel",
-    "book_page_continuity",
-    "imps_scale_match"
-   ],
-   "n_exact_candidates": 1,
-   "n_built": 1,
+   "confidence": "FALSE_STALE",
+   "note": "resolves with component-pad canon \u2014 NOT re-platted (detector canon gap)",
    "proposed_apn": "53-1661-56",
-   "proposed_canon": "053166100000",
-   "proposed_imps": 928200.0,
-   "proposed_situs": "1030 GRAYSON ST BERKELEY 94710",
-   "proposed_usecode": "7300"
+   "proposed_imps": 928200.0
   },
   {
    "project_id": 493,
@@ -768,20 +744,10 @@
    "completed": true,
    "co_date": "2018-07-03",
    "canon": "058212703100",
-   "confidence": "HIGH",
-   "evidence": [
-    "exact_address",
-    "single_built_parcel",
-    "book_page_continuity",
-    "imps_scale_match"
-   ],
-   "n_exact_candidates": 1,
-   "n_built": 1,
+   "confidence": "FALSE_STALE",
+   "note": "resolves with component-pad canon \u2014 NOT re-platted (detector canon gap)",
    "proposed_apn": "58-2127-31",
-   "proposed_canon": "058212700000",
-   "proposed_imps": 228915.0,
-   "proposed_situs": "1737 10TH ST BERKELEY 94710",
-   "proposed_usecode": "1600"
+   "proposed_imps": 228915.0
   },
   {
    "project_id": 511,
@@ -791,20 +757,10 @@
    "completed": true,
    "co_date": "2018-02-06",
    "canon": "059232602900",
-   "confidence": "HIGH",
-   "evidence": [
-    "exact_address",
-    "single_built_parcel",
-    "book_page_continuity",
-    "imps_scale_match"
-   ],
-   "n_exact_candidates": 2,
-   "n_built": 1,
+   "confidence": "FALSE_STALE",
+   "note": "resolves with component-pad canon \u2014 NOT re-platted (detector canon gap)",
    "proposed_apn": "59-2326-29",
-   "proposed_canon": "059232600000",
-   "proposed_imps": 648551.0,
-   "proposed_situs": "812 PAGE ST BERKELEY 94710",
-   "proposed_usecode": "4101"
+   "proposed_imps": 648551.0
   },
   {
    "project_id": 512,
@@ -834,15 +790,10 @@
    "completed": true,
    "co_date": "2018-09-06",
    "canon": "053165903500",
-   "confidence": "LOW",
-   "evidence": [],
-   "n_exact_candidates": 0,
-   "n_built": 0,
-   "proposed_apn": null,
-   "proposed_canon": null,
-   "proposed_imps": null,
-   "proposed_situs": null,
-   "proposed_usecode": null
+   "confidence": "FALSE_STALE",
+   "note": "resolves with component-pad canon \u2014 NOT re-platted (detector canon gap)",
+   "proposed_apn": "53-1659-35",
+   "proposed_imps": 1070880.0
   },
   {
    "project_id": 545,
@@ -900,7 +851,7 @@
    "n_exact_candidates": 2,
    "n_built": 1,
    "proposed_apn": "56-1921-24",
-   "proposed_canon": "056192100000",
+   "proposed_canon": "056192102400",
    "proposed_imps": 635123.0,
    "proposed_situs": "2440 VALLEY ST BERKELEY 94702",
    "proposed_usecode": "1600"
@@ -923,7 +874,7 @@
    "n_exact_candidates": 2,
    "n_built": 1,
    "proposed_apn": "52-1516-47",
-   "proposed_canon": "052151600000",
+   "proposed_canon": "052151604700",
    "proposed_imps": 1054259.0,
    "proposed_situs": "1310 HASKELL ST BERKELEY 94702",
    "proposed_usecode": "1600"
@@ -966,7 +917,7 @@
    "n_exact_candidates": 2,
    "n_built": 1,
    "proposed_apn": "59-2289-48",
-   "proposed_canon": "059228900000",
+   "proposed_canon": "059228904800",
    "proposed_imps": 758979.0,
    "proposed_situs": "1157 VIRGINIA ST BERKELEY 94702",
    "proposed_usecode": "1600"
@@ -989,7 +940,7 @@
    "n_exact_candidates": 2,
    "n_built": 1,
    "proposed_apn": "58-2121-40",
-   "proposed_canon": "058212100000",
+   "proposed_canon": "058212104000",
    "proposed_imps": 1231252.0,
    "proposed_situs": "912 CEDAR ST BERKELEY 94710",
    "proposed_usecode": "1600"
@@ -1011,7 +962,7 @@
    "n_exact_candidates": 3,
    "n_built": 2,
    "proposed_apn": "56-1974-40",
-   "proposed_canon": "056197400000",
+   "proposed_canon": "056197404000",
    "proposed_imps": 1242618.0,
    "proposed_situs": "2129 9TH ST BERKELEY 94710",
    "proposed_usecode": "1600"
@@ -1034,7 +985,7 @@
    "n_exact_candidates": 2,
    "n_built": 1,
    "proposed_apn": "58-2121-37",
-   "proposed_canon": "058212100000",
+   "proposed_canon": "058212103700",
    "proposed_imps": 818082.0,
    "proposed_situs": "908 CEDAR ST BERKELEY 94710",
    "proposed_usecode": "1600"
@@ -1080,7 +1031,7 @@
    "n_exact_candidates": 1,
    "n_built": 1,
    "proposed_apn": "56-1937-35",
-   "proposed_canon": "056193700000",
+   "proposed_canon": "056193703500",
    "proposed_imps": 1311112.0,
    "proposed_situs": "2325 8TH ST BERKELEY 94710",
    "proposed_usecode": "1600"
@@ -1102,7 +1053,7 @@
    "n_exact_candidates": 5,
    "n_built": 4,
    "proposed_apn": "59-2325-28",
-   "proposed_canon": "059232500000",
+   "proposed_canon": "059232502800",
    "proposed_imps": 1550000.0,
    "proposed_situs": "1444 5TH ST BERKELEY 94710",
    "proposed_usecode": "1600"
@@ -1124,7 +1075,7 @@
    "n_exact_candidates": 5,
    "n_built": 4,
    "proposed_apn": "59-2325-28",
-   "proposed_canon": "059232500000",
+   "proposed_canon": "059232502800",
    "proposed_imps": 1550000.0,
    "proposed_situs": "1444 5TH ST BERKELEY 94710",
    "proposed_usecode": "1600"
@@ -1165,7 +1116,7 @@
    "n_exact_candidates": 1,
    "n_built": 1,
    "proposed_apn": "60-2469-68-1",
-   "proposed_canon": "060246968-100",
+   "proposed_canon": "060246906801",
    "proposed_imps": 1960000.0,
    "proposed_situs": "2702 SHASTA RD BERKELEY 94708",
    "proposed_usecode": "1100"
@@ -1178,20 +1129,10 @@
    "completed": true,
    "co_date": "2022-05-06",
    "canon": "054173304100",
-   "confidence": "HIGH",
-   "evidence": [
-    "exact_address",
-    "single_built_parcel",
-    "book_page_continuity",
-    "imps_scale_match"
-   ],
-   "n_exact_candidates": 1,
-   "n_built": 1,
+   "confidence": "FALSE_STALE",
+   "note": "resolves with component-pad canon \u2014 NOT re-platted (detector canon gap)",
    "proposed_apn": "54-1733-41",
-   "proposed_canon": "054173300000",
-   "proposed_imps": 307696.0,
-   "proposed_situs": "1516 WARD ST BERKELEY 94703",
-   "proposed_usecode": "7300"
+   "proposed_imps": 307696.0
   },
   {
    "project_id": 853,
@@ -1334,7 +1275,7 @@
    "n_exact_candidates": 2,
    "n_built": 1,
    "proposed_apn": "56-1935-37",
-   "proposed_canon": "056193500000",
+   "proposed_canon": "056193503700",
    "proposed_imps": 200380.0,
    "proposed_situs": "2421 9TH ST BERKELEY 94710",
    "proposed_usecode": "1600"

@@ -71,26 +71,33 @@ def canon_v2(apn):
     return d if len(d) == 12 else None
 
 
-def canon_bdb(book, page, parcel, sub):
+def canon_from_apn(apn):
+    """AUTHORITATIVE assessor canon — from the APN STRING (segment-parse), NOT the BOOK/PAGE/
+    PARCEL/SUB_PARCEL columns: those are often NULL for the parcel/sub even when the APN string
+    carries the full number (e.g. '59-2325-38' has PARCEL=SUB=NULL), so component-canon collapses
+    distinct parcels to ...000 -> mis-joins + false-stale. (verified 2026-06-16, parcel_crosswalk)"""
+    if not apn:
+        return None
+    parts = apn.strip().split('-')
+    if len(parts) < 3:
+        return None
     try:
-        return (book or '').strip().zfill(3) + (page or '').strip().zfill(4) \
-            + (parcel or '').strip().zfill(3) + (sub or '').strip().zfill(2)
+        return parts[0].zfill(3) + parts[1].zfill(4) + parts[2].zfill(3) \
+            + (parts[3] if len(parts) >= 4 else '').zfill(2)
     except Exception:
         return None
 
 
 def assessor_index(bdb):
     idx, collided = {}, set()
-    for b, p, pa, s, land, imps, tnv in bdb.execute(
-            "SELECT BOOK,PAGE,PARCEL,SUB_PARCEL,Land,Imps,TotalNetValue FROM parcels"):
-        c = canon_bdb(b, p, pa, s)
+    for apn, land, imps, tnv in bdb.execute(
+            "SELECT APN,Land,Imps,TotalNetValue FROM parcels"):
+        c = canon_from_apn(apn)
         if not c:
             continue
         if c in idx:
             collided.add(c)
-        idx[c] = (land or 0.0, imps or 0.0, tnv or 0.0,
-                  (b or '').strip() + '-' + (p or '').strip() + '-' + (pa or '').strip()
-                  + (('-' + s.strip()) if s and s.strip() else ''))
+        idx[c] = (land or 0.0, imps or 0.0, tnv or 0.0, apn)
     return idx, collided
 
 

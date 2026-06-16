@@ -31,6 +31,16 @@ def canon_improved(apn):
 def canon_bdb(b,p,pa,s):
     try: return b.strip().zfill(3)+p.strip().zfill(4)+(pa or '').strip().zfill(3)+(s or '').strip().zfill(2)
     except: return None
+def canon_from_apn(apn):
+    # AUTHORITATIVE assessor canon — derived from the APN STRING (segment-parse), NOT the
+    # BOOK/PAGE/PARCEL/SUB_PARCEL columns: those columns are often NULL for the parcel/sub even
+    # when the APN string carries the full number (e.g. "59-2325-38" has PARCEL=SUB=NULL), which
+    # made component-canon collapse distinct parcels to ...000. (verified 2026-06-16)
+    if not apn: return None
+    parts=apn.strip().split('-')
+    if len(parts)<3: return None
+    try: return parts[0].zfill(3)+parts[1].zfill(4)+parts[2].zfill(3)+(parts[3] if len(parts)>=4 else '').zfill(2)
+    except: return None
 def norm_addr(a):
     if not a: return ('','')
     s=a.lower(); s=re.sub(r'\s+berkeley\s*,?\s*(ca\s*)?\d{5}.*$','',s); s=re.sub(r'\s+berkeley\s*$','',s)
@@ -40,7 +50,7 @@ def norm_addr(a):
     st=re.sub(r'[^a-z0-9 ]',' ',st); st=re.sub(r'^\s*\d+\s*','',st).strip(); st=re.sub(r'\s+',' ',st); return (num,st)
 by_canon={}; by_addr={}
 for apn,b,p,pa,s,imps,use,situs in bdb.execute("SELECT APN,BOOK,PAGE,PARCEL,SUB_PARCEL,Imps,UseCode,SitusAddre FROM parcels"):
-    c=canon_bdb(b,p,pa,s)
+    c=canon_from_apn(apn) or canon_bdb(b,p,pa,s)   # APN-string canon is authoritative
     if not c: continue
     rec={'apn':apn,'canon':c,'imps':imps or 0,'use':str(use or ''),'situs':situs}
     by_canon[c]=rec

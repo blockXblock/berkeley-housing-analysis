@@ -83,6 +83,7 @@ def get_projects(conn):
         FROM projects p
         LEFT JOIN project_versions pv ON pv.id = p.current_version_id
         LEFT JOIN vocabulary_stage_types vst ON vst.id = p.current_stage_type_id
+        WHERE p.merged_into_id IS NULL
         ORDER BY pv.total_units DESC
     ''')
 

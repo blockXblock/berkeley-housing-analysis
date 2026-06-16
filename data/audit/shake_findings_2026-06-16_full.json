@@ -4,9 +4,9 @@
   "db": {
     "v2": "/Users/johngage/berkeley-data/databases/berkeley_housing_v2.db",
     "assessor": "/Users/johngage/berkeley-data/databases/berkeley.db",
-    "assessor_parcels_indexed": 26454,
-    "assessor_collided_keys": 363,
-    "assessor_collapsed_parcels": 2677
+    "assessor_parcels_indexed": 29119,
+    "assessor_collided_keys": 11,
+    "assessor_collapsed_parcels": 12
   },
   "cohorts": {
     "active_projects": 895,
@@ -22,9 +22,9 @@
   "caveats": [
     {
       "caveat": "assessor_canonical_key_collisions",
-      "collided_keys": 363,
-      "collapsed_parcels": 2677,
-      "note": "363 canonical APN keys (book3+page4+parcel3+sub2) collide, collapsing 2677 assessor sub-parcels (condos sharing book/page/parcel, distinct sub) via last-write-wins. So Imps/LotSize on a collided key may be a SIBLING sub-parcel. built_vs_vacant + scale_sanity findings on collided keys carry sibling_parcel_risk=true and a VERIFY note. Not fixed \u2014 recorded so collided-key findings are not mistaken for clean."
+      "collided_keys": 11,
+      "collapsed_parcels": 12,
+      "note": "11 canonical APN keys (book3+page4+parcel3+sub2) collide, collapsing 12 assessor sub-parcels (condos sharing book/page/parcel, distinct sub) via last-write-wins. So Imps/LotSize on a collided key may be a SIBLING sub-parcel. built_vs_vacant + scale_sanity findings on collided keys carry sibling_parcel_risk=true and a VERIFY note. Not fixed \u2014 recorded so collided-key findings are not mistaken for clean."
     },
     {
       "caveat": "co_only_cohort_measured",
@@ -37,16 +37,16 @@
     }
   ],
   "finding_counts": {
-    "address_apn_consistency": 66,
+    "address_apn_consistency": 69,
     "apn_collisions": 4,
-    "block_cohort": 343,
-    "built_vs_vacant": 10,
+    "block_cohort": 334,
+    "built_vs_vacant": 11,
     "monotonicity": 32,
     "phantoms": 10,
     "shadows": 4,
     "stage_skip": 685,
-    "stale_apn": 71,
-    "usecode_sanity": 7
+    "stale_apn": 33,
+    "usecode_sanity": 10
   },
   "intersections_multi_check": {
     "77": [
@@ -60,10 +60,6 @@
     "136": [
       "address_apn_consistency",
       "stage_skip"
-    ],
-    "168": [
-      "stage_skip",
-      "stale_apn"
     ],
     "197": [
       "stage_skip",
@@ -89,10 +85,6 @@
       "address_apn_consistency",
       "stage_skip"
     ],
-    "219": [
-      "stage_skip",
-      "stale_apn"
-    ],
     "220": [
       "stage_skip",
       "usecode_sanity"
@@ -108,10 +100,6 @@
     "242": [
       "address_apn_consistency",
       "stage_skip"
-    ],
-    "244": [
-      "stage_skip",
-      "stale_apn"
     ],
     "265": [
       "address_apn_consistency",
@@ -130,10 +118,6 @@
       "stage_skip"
     ],
     "327": [
-      "stage_skip",
-      "stale_apn"
-    ],
-    "329": [
       "stage_skip",
       "stale_apn"
     ],
@@ -159,25 +143,9 @@
       "built_vs_vacant",
       "stage_skip"
     ],
-    "367": [
-      "stage_skip",
-      "stale_apn"
-    ],
-    "376": [
-      "stage_skip",
-      "stale_apn"
-    ],
     "377": [
       "address_apn_consistency",
       "stage_skip"
-    ],
-    "378": [
-      "stage_skip",
-      "stale_apn"
-    ],
-    "379": [
-      "stage_skip",
-      "stale_apn"
     ],
     "380": [
       "stage_skip",
@@ -186,14 +154,6 @@
     "390": [
       "address_apn_consistency",
       "stage_skip"
-    ],
-    "398": [
-      "stage_skip",
-      "stale_apn"
-    ],
-    "403": [
-      "stage_skip",
-      "stale_apn"
     ],
     "409": [
       "address_apn_consistency",
@@ -215,17 +175,9 @@
       "stage_skip",
       "usecode_sanity"
     ],
-    "445": [
-      "stage_skip",
-      "stale_apn"
-    ],
     "455": [
       "address_apn_consistency",
       "stage_skip"
-    ],
-    "465": [
-      "stage_skip",
-      "stale_apn"
     ],
     "467": [
       "stage_skip",
@@ -235,25 +187,17 @@
       "address_apn_consistency",
       "stage_skip"
     ],
-    "492": [
-      "stage_skip",
-      "stale_apn"
-    ],
-    "493": [
-      "stage_skip",
-      "stale_apn"
-    ],
     "511": [
       "stage_skip",
-      "stale_apn"
+      "usecode_sanity"
     ],
     "512": [
       "stage_skip",
       "stale_apn"
     ],
     "513": [
-      "stage_skip",
-      "stale_apn"
+      "address_apn_consistency",
+      "stage_skip"
     ],
     "523": [
       "stage_skip",
@@ -279,23 +223,11 @@
       "address_apn_consistency",
       "stage_skip"
     ],
-    "567": [
-      "stage_skip",
-      "stale_apn"
-    ],
-    "570": [
-      "stage_skip",
-      "stale_apn"
-    ],
     "573": [
       "address_apn_consistency",
       "stage_skip"
     ],
     "592": [
-      "stage_skip",
-      "stale_apn"
-    ],
-    "604": [
       "stage_skip",
       "stale_apn"
     ],
@@ -315,10 +247,6 @@
       "address_apn_consistency",
       "stage_skip"
     ],
-    "663": [
-      "stage_skip",
-      "stale_apn"
-    ],
     "669": [
       "address_apn_consistency",
       "stage_skip"
@@ -327,25 +255,13 @@
       "stage_skip",
       "stale_apn"
     ],
-    "702": [
-      "stage_skip",
-      "stale_apn"
-    ],
     "704": [
       "address_apn_consistency",
       "stage_skip"
     ],
-    "707": [
-      "stage_skip",
-      "stale_apn"
-    ],
     "712": [
       "address_apn_consistency",
       "stage_skip"
-    ],
-    "713": [
-      "stage_skip",
-      "stale_apn"
     ],
     "728": [
       "address_apn_consistency",
@@ -371,17 +287,9 @@
       "stage_skip",
       "stale_apn"
     ],
-    "794": [
-      "stage_skip",
-      "stale_apn"
-    ],
     "801": [
       "address_apn_consistency",
       "stage_skip"
-    ],
-    "817": [
-      "stage_skip",
-      "stale_apn"
     ],
     "818": [
       "address_apn_consistency",
@@ -415,22 +323,10 @@
       "address_apn_consistency",
       "stage_skip"
     ],
-    "891": [
-      "stage_skip",
-      "stale_apn"
-    ],
     "892": [
       "address_apn_consistency",
       "built_vs_vacant",
       "stage_skip"
-    ],
-    "895": [
-      "stage_skip",
-      "stale_apn"
-    ],
-    "897": [
-      "stage_skip",
-      "stale_apn"
     ],
     "898": [
       "address_apn_consistency",
@@ -448,10 +344,6 @@
     "902": [
       "address_apn_consistency",
       "stage_skip"
-    ],
-    "903": [
-      "stage_skip",
-      "stale_apn"
     ],
     "904": [
       "stage_skip",
@@ -475,8 +367,9 @@
       "usecode_sanity"
     ],
     "154": [
+      "built_vs_vacant",
       "monotonicity",
-      "stale_apn"
+      "usecode_sanity"
     ],
     "161": [
       "built_vs_vacant",
@@ -903,8 +796,8 @@
       "52-1516": {
         "block": "52-1516",
         "parcels": 44,
-        "tracked": 3,
-        "untracked_built_housing_total": 35,
+        "tracked": 4,
+        "untracked_built_housing_total": 34,
         "untracked_large_nonsfr_flagged": 0
       },
       "52-1517": {
@@ -1288,7 +1181,7 @@
       "52-1573": {
         "block": "52-1573",
         "parcels": 79,
-        "tracked": 2,
+        "tracked": 3,
         "untracked_built_housing_total": 25,
         "untracked_large_nonsfr_flagged": 5
       },
@@ -1421,7 +1314,7 @@
       "53-1591": {
         "block": "53-1591",
         "parcels": 19,
-        "tracked": 1,
+        "tracked": 2,
         "untracked_built_housing_total": 13,
         "untracked_large_nonsfr_flagged": 1
       },
@@ -1673,9 +1566,9 @@
       "53-1633": {
         "block": "53-1633",
         "parcels": 7,
-        "tracked": 0,
+        "tracked": 1,
         "untracked_built_housing_total": 0,
-        "untracked_large_nonsfr_flagged": 1
+        "untracked_large_nonsfr_flagged": 0
       },
       "53-1634": {
         "block": "53-1634",
@@ -1750,14 +1643,14 @@
       "53-1658": {
         "block": "53-1658",
         "parcels": 29,
-        "tracked": 1,
+        "tracked": 2,
         "untracked_built_housing_total": 6,
         "untracked_large_nonsfr_flagged": 0
       },
       "53-1659": {
         "block": "53-1659",
         "parcels": 20,
-        "tracked": 1,
+        "tracked": 2,
         "untracked_built_housing_total": 11,
         "untracked_large_nonsfr_flagged": 1
       },
@@ -1771,7 +1664,7 @@
       "53-1661": {
         "block": "53-1661",
         "parcels": 24,
-        "tracked": 1,
+        "tracked": 2,
         "untracked_built_housing_total": 3,
         "untracked_large_nonsfr_flagged": 0
       },
@@ -2093,7 +1986,7 @@
       "54-1709": {
         "block": "54-1709",
         "parcels": 35,
-        "tracked": 1,
+        "tracked": 2,
         "untracked_built_housing_total": 22,
         "untracked_large_nonsfr_flagged": 0
       },
@@ -2163,9 +2056,9 @@
       "54-1719": {
         "block": "54-1719",
         "parcels": 38,
-        "tracked": 1,
+        "tracked": 2,
         "untracked_built_housing_total": 33,
-        "untracked_large_nonsfr_flagged": 3
+        "untracked_large_nonsfr_flagged": 2
       },
       "54-1720": {
         "block": "54-1720",
@@ -2233,7 +2126,7 @@
       "54-1733": {
         "block": "54-1733",
         "parcels": 34,
-        "tracked": 1,
+        "tracked": 2,
         "untracked_built_housing_total": 24,
         "untracked_large_nonsfr_flagged": 0
       },
@@ -2723,9 +2616,9 @@
       "55-1822": {
         "block": "55-1822",
         "parcels": 15,
-        "tracked": 3,
+        "tracked": 4,
         "untracked_built_housing_total": 1,
-        "untracked_large_nonsfr_flagged": 1
+        "untracked_large_nonsfr_flagged": 0
       },
       "55-1823": {
         "block": "55-1823",
@@ -2996,9 +2889,9 @@
       "55-1864": {
         "block": "55-1864",
         "parcels": 11,
-        "tracked": 0,
+        "tracked": 1,
         "untracked_built_housing_total": 0,
-        "untracked_large_nonsfr_flagged": 2
+        "untracked_large_nonsfr_flagged": 1
       },
       "55-1865": {
         "block": "55-1865",
@@ -3045,7 +2938,7 @@
       "55-1871": {
         "block": "55-1871",
         "parcels": 11,
-        "tracked": 2,
+        "tracked": 3,
         "untracked_built_housing_total": 2,
         "untracked_large_nonsfr_flagged": 0
       },
@@ -3206,9 +3099,9 @@
       "55-1894": {
         "block": "55-1894",
         "parcels": 8,
-        "tracked": 2,
+        "tracked": 3,
         "untracked_built_housing_total": 1,
-        "untracked_large_nonsfr_flagged": 2
+        "untracked_large_nonsfr_flagged": 1
       },
       "55-1895": {
         "block": "55-1895",
@@ -3276,7 +3169,7 @@
       "55-1904": {
         "block": "55-1904",
         "parcels": 30,
-        "tracked": 0,
+        "tracked": 1,
         "untracked_built_housing_total": 18,
         "untracked_large_nonsfr_flagged": 0
       },
@@ -3367,9 +3260,9 @@
       "55-1819": {
         "block": "55-1819",
         "parcels": 3,
-        "tracked": 0,
+        "tracked": 1,
         "untracked_built_housing_total": 0,
-        "untracked_large_nonsfr_flagged": 1
+        "untracked_large_nonsfr_flagged": 0
       },
       "56-1915": {
         "block": "56-1915",
@@ -3416,8 +3309,8 @@
       "56-1921": {
         "block": "56-1921",
         "parcels": 22,
-        "tracked": 0,
-        "untracked_built_housing_total": 17,
+        "tracked": 1,
+        "untracked_built_housing_total": 16,
         "untracked_large_nonsfr_flagged": 0
       },
       "56-1922": {
@@ -3514,8 +3407,8 @@
       "56-1935": {
         "block": "56-1935",
         "parcels": 37,
-        "tracked": 1,
-        "untracked_built_housing_total": 30,
+        "tracked": 2,
+        "untracked_built_housing_total": 29,
         "untracked_large_nonsfr_flagged": 0
       },
       "56-1936": {
@@ -3528,8 +3421,8 @@
       "56-1937": {
         "block": "56-1937",
         "parcels": 32,
-        "tracked": 0,
-        "untracked_built_housing_total": 20,
+        "tracked": 1,
+        "untracked_built_housing_total": 19,
         "untracked_large_nonsfr_flagged": 0
       },
       "56-1938": {
@@ -3584,9 +3477,9 @@
       "56-1945": {
         "block": "56-1945",
         "parcels": 11,
-        "tracked": 0,
+        "tracked": 1,
         "untracked_built_housing_total": 0,
-        "untracked_large_nonsfr_flagged": 1
+        "untracked_large_nonsfr_flagged": 0
       },
       "56-1946": {
         "block": "56-1946",
@@ -4158,9 +4051,9 @@
       "57-2029": {
         "block": "57-2029",
         "parcels": 11,
-        "tracked": 1,
+        "tracked": 2,
         "untracked_built_housing_total": 0,
-        "untracked_large_nonsfr_flagged": 2
+        "untracked_large_nonsfr_flagged": 1
       },
       "57-2030": {
         "block": "57-2030",
@@ -4179,7 +4072,7 @@
       "57-2032": {
         "block": "57-2032",
         "parcels": 12,
-        "tracked": 0,
+        "tracked": 1,
         "untracked_built_housing_total": 0,
         "untracked_large_nonsfr_flagged": 3
       },
@@ -4459,7 +4352,7 @@
       "57-2082": {
         "block": "57-2082",
         "parcels": 43,
-        "tracked": 1,
+        "tracked": 2,
         "untracked_built_housing_total": 20,
         "untracked_large_nonsfr_flagged": 0
       },
@@ -4480,8 +4373,8 @@
       "57-2086": {
         "block": "57-2086",
         "parcels": 66,
-        "tracked": 1,
-        "untracked_built_housing_total": 30,
+        "tracked": 2,
+        "untracked_built_housing_total": 29,
         "untracked_large_nonsfr_flagged": 0
       },
       "57-2087": {
@@ -4501,7 +4394,7 @@
       "57-2089": {
         "block": "57-2089",
         "parcels": 23,
-        "tracked": 0,
+        "tracked": 1,
         "untracked_built_housing_total": 14,
         "untracked_large_nonsfr_flagged": 0
       },
@@ -4725,8 +4618,8 @@
       "58-2121": {
         "block": "58-2121",
         "parcels": 36,
-        "tracked": 3,
-        "untracked_built_housing_total": 27,
+        "tracked": 5,
+        "untracked_built_housing_total": 25,
         "untracked_large_nonsfr_flagged": 0
       },
       "58-2122": {
@@ -4767,8 +4660,8 @@
       "58-2127": {
         "block": "58-2127",
         "parcels": 29,
-        "tracked": 1,
-        "untracked_built_housing_total": 19,
+        "tracked": 2,
+        "untracked_built_housing_total": 18,
         "untracked_large_nonsfr_flagged": 0
       },
       "58-2128": {
@@ -5677,15 +5570,15 @@
       "59-2289": {
         "block": "59-2289",
         "parcels": 42,
-        "tracked": 1,
-        "untracked_built_housing_total": 35,
+        "tracked": 2,
+        "untracked_built_housing_total": 34,
         "untracked_large_nonsfr_flagged": 0
       },
       "59-2290": {
         "block": "59-2290",
         "parcels": 54,
-        "tracked": 0,
-        "untracked_built_housing_total": 40,
+        "tracked": 1,
+        "untracked_built_housing_total": 39,
         "untracked_large_nonsfr_flagged": 0
       },
       "59-2291": {
@@ -5712,9 +5605,9 @@
       "59-2310": {
         "block": "59-2310",
         "parcels": 7,
-        "tracked": 0,
+        "tracked": 1,
         "untracked_built_housing_total": 5,
-        "untracked_large_nonsfr_flagged": 1
+        "untracked_large_nonsfr_flagged": 0
       },
       "59-2311": {
         "block": "59-2311",
@@ -5803,14 +5696,14 @@
       "59-2325": {
         "block": "59-2325",
         "parcels": 30,
-        "tracked": 1,
-        "untracked_built_housing_total": 15,
+        "tracked": 4,
+        "untracked_built_housing_total": 14,
         "untracked_large_nonsfr_flagged": 1
       },
       "59-2326": {
         "block": "59-2326",
         "parcels": 25,
-        "tracked": 2,
+        "tracked": 3,
         "untracked_built_housing_total": 15,
         "untracked_large_nonsfr_flagged": 0
       },
@@ -5950,7 +5843,7 @@
       "59-2349": {
         "block": "59-2349",
         "parcels": 9,
-        "tracked": 0,
+        "tracked": 1,
         "untracked_built_housing_total": 0,
         "untracked_large_nonsfr_flagged": 0
       },
@@ -6398,7 +6291,7 @@
       "60-2447": {
         "block": "60-2447",
         "parcels": 34,
-        "tracked": 1,
+        "tracked": 2,
         "untracked_built_housing_total": 28,
         "untracked_large_nonsfr_flagged": 0
       },
@@ -6496,8 +6389,8 @@
       "60-2469": {
         "block": "60-2469",
         "parcels": 90,
-        "tracked": 2,
-        "untracked_built_housing_total": 77,
+        "tracked": 3,
+        "untracked_built_housing_total": 76,
         "untracked_large_nonsfr_flagged": 0
       },
       "60-2470": {
@@ -8140,15 +8033,15 @@
       }
     },
     "blindspot_summary": {
-      "untracked_built_housing_universe": 20734,
+      "untracked_built_housing_universe": 20722,
       "note_universe": "this is essentially Berkeley's EXISTING housing stock (we model development projects, not all parcels) \u2014 CONTEXT, not a finding queue",
       "shortlist_threshold_imps": 3000000,
-      "shortlist_count": 343,
+      "shortlist_count": 334,
       "tier_counts_large_nonsfr": {
-        "1000000": 343,
-        "2000000": 343,
-        "3000000": 343,
-        "5000000": 207
+        "1000000": 334,
+        "2000000": 334,
+        "3000000": 334,
+        "5000000": 199
       }
     }
   },
@@ -8282,6 +8175,28 @@
           ],
           "county": [
             "2925",
+            "shattuck"
+          ]
+        }
+      },
+      {
+        "check": "address_apn_consistency",
+        "key": 33,
+        "severity": "low",
+        "signal": "proj33 addr \"130 BERKELEY Sq\" vs County situs \"2125 SHATTUCK AVE BERKELEY 94704\" (APN 57-2032-17)",
+        "classification": "expected_corner_lot",
+        "expected_filter": "different street AND number = dual-frontage corner lot (PERMANENT FP) or wrong parcel \u2014 flag-for-review, never auto-fix",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "our_addr": "130 BERKELEY Sq",
+          "county_situs": "2125 SHATTUCK AVE BERKELEY 94704",
+          "apn": "57-2032-17",
+          "our": [
+            "130",
+            "berkeley sq"
+          ],
+          "county": [
+            "2125",
             "shattuck"
           ]
         }
@@ -8882,6 +8797,28 @@
       },
       {
         "check": "address_apn_consistency",
+        "key": 381,
+        "severity": "medium",
+        "signal": "proj381 addr \"2980 College Ave\" vs County situs \"2974 COLLEGE AVE BERKELEY 94705\" (APN 52-1573-93)",
+        "classification": "house_number_discrepancy",
+        "expected_filter": "same street, different house number \u2014 review (possible wrong unit/parcel)",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "our_addr": "2980 College Ave",
+          "county_situs": "2974 COLLEGE AVE BERKELEY 94705",
+          "apn": "52-1573-93",
+          "our": [
+            "2980",
+            "college"
+          ],
+          "county": [
+            "2974",
+            "college"
+          ]
+        }
+      },
+      {
+        "check": "address_apn_consistency",
         "key": 390,
         "severity": "medium",
         "signal": "proj390 addr \"1608 Ward St\" vs County situs \"1614 WARD ST BERKELEY 94703\" (APN 54-1730-21-2)",
@@ -9009,6 +8946,28 @@
           "county": [
             "1504",
             "bonita"
+          ]
+        }
+      },
+      {
+        "check": "address_apn_consistency",
+        "key": 513,
+        "severity": "low",
+        "signal": "proj513 addr \"2817 Eighth St\" vs County situs \"2817 8TH ST  A BERKELEY 94710\" (APN 53-1659-35)",
+        "classification": "street_name_variance",
+        "expected_filter": "same house number, street label/abbrev differs (e.g. MLK = M L King) \u2014 likely same address",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "our_addr": "2817 Eighth St",
+          "county_situs": "2817 8TH ST  A BERKELEY 94710",
+          "apn": "53-1659-35",
+          "our": [
+            "2817",
+            "8th"
+          ],
+          "county": [
+            "2817",
+            "8th a"
           ]
         }
       },
@@ -9794,7 +9753,7 @@
         "severity": "medium",
         "signal": "BLIND SPOT: large untracked building 55-1875-45 (\"2503 HASTE ST BERKELEY 94704\") on block 55-1875 \u2014 Imps $92,023,380, UseCode 7800",
         "classification": "untracked_large_building",
-        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue | collided key \u2014 Imps may be a sibling sub-parcel",
+        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue",
         "resolvability": null,
         "evidence": {
           "apn": "55-1875-45",
@@ -9802,23 +9761,6 @@
           "imps": 92023380.0,
           "usecode": "7800",
           "latest_doc_date": "2022-07-13",
-          "sibling_parcel_risk": true
-        }
-      },
-      {
-        "check": "block_cohort",
-        "key": "59-2310:59-2310-9",
-        "severity": "medium",
-        "signal": "BLIND SPOT: large untracked building 59-2310-9 (\"1500 SAN PABLO AVE BERKELEY 94702\") on block 59-2310 \u2014 Imps $85,756,868, UseCode 7706",
-        "classification": "untracked_large_building",
-        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue",
-        "resolvability": null,
-        "evidence": {
-          "apn": "59-2310-9",
-          "situs": "1500 SAN PABLO AVE BERKELEY 94702",
-          "imps": 85756868.0,
-          "usecode": "7706",
-          "latest_doc_date": "1900-01-01",
           "sibling_parcel_risk": false
         }
       },
@@ -9879,30 +9821,13 @@
         "severity": "medium",
         "signal": "BLIND SPOT: large untracked building 57-2032-21 (\"2121 CENTER ST BERKELEY 94704\") on block 57-2032 \u2014 Imps $73,900,000, UseCode 3900",
         "classification": "untracked_large_building",
-        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue | collided key \u2014 Imps may be a sibling sub-parcel",
+        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue",
         "resolvability": null,
         "evidence": {
           "apn": "57-2032-21",
           "situs": "2121 CENTER ST BERKELEY 94704",
           "imps": 73900000.0,
           "usecode": "3900",
-          "latest_doc_date": "1900-01-01",
-          "sibling_parcel_risk": true
-        }
-      },
-      {
-        "check": "block_cohort",
-        "key": "57-2029:57-2029-17",
-        "severity": "medium",
-        "signal": "BLIND SPOT: large untracked building 57-2029-17 (\"2150 KITTREDGE ST BERKELEY 94720\") on block 57-2029 \u2014 Imps $60,246,300, UseCode 7800",
-        "classification": "untracked_large_building",
-        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue",
-        "resolvability": null,
-        "evidence": {
-          "apn": "57-2029-17",
-          "situs": "2150 KITTREDGE ST BERKELEY 94720",
-          "imps": 60246300.0,
-          "usecode": "7800",
           "latest_doc_date": "1900-01-01",
           "sibling_parcel_risk": false
         }
@@ -10232,23 +10157,6 @@
       },
       {
         "check": "block_cohort",
-        "key": "55-1819:55-1819-9",
-        "severity": "medium",
-        "signal": "BLIND SPOT: large untracked building 55-1819-9 (\"2628 SHATTUCK AVE BERKELEY 94704\") on block 55-1819 \u2014 Imps $36,611,676, UseCode 7705",
-        "classification": "untracked_large_building",
-        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue",
-        "resolvability": null,
-        "evidence": {
-          "apn": "55-1819-9",
-          "situs": "2628 SHATTUCK AVE BERKELEY 94704",
-          "imps": 36611676.0,
-          "usecode": "7705",
-          "latest_doc_date": "1900-01-01",
-          "sibling_parcel_risk": false
-        }
-      },
-      {
-        "check": "block_cohort",
         "key": "56-1979:56-1979-23-1",
         "severity": "medium",
         "signal": "BLIND SPOT: large untracked building 56-1979-23-1 (\"1122 UNIVERSITY AVE BERKELEY 94702\") on block 56-1979 \u2014 Imps $36,493,809, UseCode 7700",
@@ -10397,23 +10305,6 @@
           "imps": 27984268.0,
           "usecode": "7500",
           "latest_doc_date": "2021-10-04",
-          "sibling_parcel_risk": false
-        }
-      },
-      {
-        "check": "block_cohort",
-        "key": "53-1633:53-1633-1-7",
-        "severity": "medium",
-        "signal": "BLIND SPOT: large untracked building 53-1633-1-7 (\"3000 SAN PABLO AVE BERKELEY 94702\") on block 53-1633 \u2014 Imps $27,924,336, UseCode 7700",
-        "classification": "untracked_large_building",
-        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue",
-        "resolvability": null,
-        "evidence": {
-          "apn": "53-1633-1-7",
-          "situs": "3000 SAN PABLO AVE BERKELEY 94702",
-          "imps": 27924336.0,
-          "usecode": "7700",
-          "latest_doc_date": "1900-01-01",
           "sibling_parcel_risk": false
         }
       },
@@ -10725,23 +10616,6 @@
       },
       {
         "check": "block_cohort",
-        "key": "55-1822:55-1822-19-2",
-        "severity": "medium",
-        "signal": "BLIND SPOT: large untracked building 55-1822-19-2 (\"2000 DWIGHT WAY BERKELEY 94704\") on block 55-1822 \u2014 Imps $20,238,000, UseCode 3000",
-        "classification": "untracked_large_building",
-        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue",
-        "resolvability": null,
-        "evidence": {
-          "apn": "55-1822-19-2",
-          "situs": "2000 DWIGHT WAY BERKELEY 94704",
-          "imps": 20238000.0,
-          "usecode": "3000",
-          "latest_doc_date": "2021-12-23",
-          "sibling_parcel_risk": false
-        }
-      },
-      {
-        "check": "block_cohort",
         "key": "53-1627:53-1627-37-1",
         "severity": "medium",
         "signal": "BLIND SPOT: large untracked building 53-1627-37-1 (\"3015 SAN PABLO AVE BERKELEY 94702\") on block 53-1627 \u2014 Imps $19,902,000, UseCode 7700",
@@ -10895,40 +10769,6 @@
       },
       {
         "check": "block_cohort",
-        "key": "55-1894:55-1894-15-1",
-        "severity": "medium",
-        "signal": "BLIND SPOT: large untracked building 55-1894-15-1 (\"2028 BANCROFT WAY BERKELEY 94704\") on block 55-1894 \u2014 Imps $17,850,000, UseCode 7700",
-        "classification": "untracked_large_building",
-        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue",
-        "resolvability": null,
-        "evidence": {
-          "apn": "55-1894-15-1",
-          "situs": "2028 BANCROFT WAY BERKELEY 94704",
-          "imps": 17850000.0,
-          "usecode": "7700",
-          "latest_doc_date": "1900-01-01",
-          "sibling_parcel_risk": false
-        }
-      },
-      {
-        "check": "block_cohort",
-        "key": "54-1719:54-1719-39",
-        "severity": "medium",
-        "signal": "BLIND SPOT: large untracked building 54-1719-39 (\"2701 SHATTUCK AVE BERKELEY 94705\") on block 54-1719 \u2014 Imps $17,284,500, UseCode 7700",
-        "classification": "untracked_large_building",
-        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue",
-        "resolvability": null,
-        "evidence": {
-          "apn": "54-1719-39",
-          "situs": "2701 SHATTUCK AVE BERKELEY 94705",
-          "imps": 17284500.0,
-          "usecode": "7700",
-          "latest_doc_date": "1900-01-01",
-          "sibling_parcel_risk": false
-        }
-      },
-      {
-        "check": "block_cohort",
         "key": "57-2123:57-2123-1",
         "severity": "medium",
         "signal": "BLIND SPOT: large untracked building 57-2123-1 (\"2025 KALA BAGAI WAY BERKELEY 94704\") on block 57-2123 \u2014 Imps $16,932,000, UseCode 7800",
@@ -11069,7 +10909,7 @@
         "severity": "medium",
         "signal": "BLIND SPOT: large untracked building 57-2027-12 (\"2060 ALLSTON WAY  C BERKELEY 94704\") on block 57-2027 \u2014 Imps $14,218,332, UseCode 3900",
         "classification": "untracked_large_building",
-        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue | collided key \u2014 Imps may be a sibling sub-parcel",
+        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue",
         "resolvability": null,
         "evidence": {
           "apn": "57-2027-12",
@@ -11077,7 +10917,7 @@
           "imps": 14218332.0,
           "usecode": "3900",
           "latest_doc_date": "1900-01-01",
-          "sibling_parcel_risk": true
+          "sibling_parcel_risk": false
         }
       },
       {
@@ -11358,7 +11198,7 @@
         "severity": "medium",
         "signal": "BLIND SPOT: large untracked building 57-2120-1 (\"2150 ALLSTON WAY BERKELEY 94704\") on block 57-2118 \u2014 Imps $11,158,652, UseCode 9500",
         "classification": "untracked_large_building",
-        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue | collided key \u2014 Imps may be a sibling sub-parcel",
+        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue",
         "resolvability": null,
         "evidence": {
           "apn": "57-2120-1",
@@ -11366,7 +11206,7 @@
           "imps": 11158652.0,
           "usecode": "9500",
           "latest_doc_date": "2014-12-18",
-          "sibling_parcel_risk": true
+          "sibling_parcel_risk": false
         }
       },
       {
@@ -11800,7 +11640,7 @@
         "severity": "medium",
         "signal": "BLIND SPOT: large untracked building 57-2121-1 (\" FULTON ST BERKELEY 94704\") on block 57-2118 \u2014 Imps $8,472,868, UseCode 7700",
         "classification": "untracked_large_building",
-        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue | collided key \u2014 Imps may be a sibling sub-parcel",
+        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue",
         "resolvability": null,
         "evidence": {
           "apn": "57-2121-1",
@@ -11808,7 +11648,7 @@
           "imps": 8472868.0,
           "usecode": "7700",
           "latest_doc_date": "2007-03-30",
-          "sibling_parcel_risk": true
+          "sibling_parcel_risk": false
         }
       },
       {
@@ -12004,7 +11844,7 @@
         "severity": "medium",
         "signal": "BLIND SPOT: large untracked building 55-1875-43 (\"2503 HASTE ST BERKELEY 94704\") on block 55-1875 \u2014 Imps $7,762,840, UseCode 3900",
         "classification": "untracked_large_building",
-        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue | collided key \u2014 Imps may be a sibling sub-parcel",
+        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue",
         "resolvability": null,
         "evidence": {
           "apn": "55-1875-43",
@@ -12012,7 +11852,7 @@
           "imps": 7762840.0,
           "usecode": "3900",
           "latest_doc_date": "2022-07-13",
-          "sibling_parcel_risk": true
+          "sibling_parcel_risk": false
         }
       },
       {
@@ -12284,23 +12124,6 @@
           "imps": 7133641.0,
           "usecode": "3800",
           "latest_doc_date": "2011-03-09",
-          "sibling_parcel_risk": false
-        }
-      },
-      {
-        "check": "block_cohort",
-        "key": "56-1945:56-1945-12",
-        "severity": "medium",
-        "signal": "BLIND SPOT: large untracked building 56-1945-12 (\"739 CHANNING WAY BERKELEY 94710\") on block 56-1945 \u2014 Imps $7,118,416, UseCode 7700",
-        "classification": "untracked_large_building",
-        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue",
-        "resolvability": null,
-        "evidence": {
-          "apn": "56-1945-12",
-          "situs": "739 CHANNING WAY BERKELEY 94710",
-          "imps": 7118416.0,
-          "usecode": "7700",
-          "latest_doc_date": "1900-01-01",
           "sibling_parcel_risk": false
         }
       },
@@ -13041,7 +12864,7 @@
         "severity": "medium",
         "signal": "BLIND SPOT: large untracked building 52-1519-27 (\"3250 SACRAMENTO ST  A BERKELEY 94702\") on block 52-1519 \u2014 Imps $5,228,353, UseCode 8700",
         "classification": "untracked_large_building",
-        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue | collided key \u2014 Imps may be a sibling sub-parcel",
+        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue",
         "resolvability": null,
         "evidence": {
           "apn": "52-1519-27",
@@ -13049,7 +12872,7 @@
           "imps": 5228353.0,
           "usecode": "8700",
           "latest_doc_date": "1998-12-08",
-          "sibling_parcel_risk": true
+          "sibling_parcel_risk": false
         }
       },
       {
@@ -13109,7 +12932,7 @@
         "severity": "medium",
         "signal": "BLIND SPOT: large untracked building 57-2027-10 (\"2060 ALLSTON WAY  A BERKELEY 94704\") on block 57-2027 \u2014 Imps $5,140,290, UseCode 3900",
         "classification": "untracked_large_building",
-        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue | collided key \u2014 Imps may be a sibling sub-parcel",
+        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue",
         "resolvability": null,
         "evidence": {
           "apn": "57-2027-10",
@@ -13117,7 +12940,7 @@
           "imps": 5140290.0,
           "usecode": "3900",
           "latest_doc_date": "2025-10-10",
-          "sibling_parcel_risk": true
+          "sibling_parcel_risk": false
         }
       },
       {
@@ -13211,7 +13034,7 @@
         "severity": "medium",
         "signal": "BLIND SPOT: large untracked building 52-1519-28 (\"1497 ALCATRAZ AVE  B BERKELEY 94702\") on block 52-1519 \u2014 Imps $5,015,267, UseCode 8700",
         "classification": "untracked_large_building",
-        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue | collided key \u2014 Imps may be a sibling sub-parcel",
+        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue",
         "resolvability": null,
         "evidence": {
           "apn": "52-1519-28",
@@ -13219,7 +13042,7 @@
           "imps": 5015267.0,
           "usecode": "8700",
           "latest_doc_date": "1998-12-08",
-          "sibling_parcel_risk": true
+          "sibling_parcel_risk": false
         }
       },
       {
@@ -13636,7 +13459,7 @@
         "severity": "medium",
         "signal": "BLIND SPOT: large untracked building 57-2120-2 (\" FULTON ST BERKELEY 94704\") on block 57-2118 \u2014 Imps $4,298,874, UseCode 3300",
         "classification": "untracked_large_building",
-        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue | collided key \u2014 Imps may be a sibling sub-parcel",
+        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue",
         "resolvability": null,
         "evidence": {
           "apn": "57-2120-2",
@@ -13644,7 +13467,7 @@
           "imps": 4298874.0,
           "usecode": "3300",
           "latest_doc_date": "2014-12-18",
-          "sibling_parcel_risk": true
+          "sibling_parcel_risk": false
         }
       },
       {
@@ -14516,23 +14339,6 @@
       },
       {
         "check": "block_cohort",
-        "key": "55-1864:55-1864-10-1",
-        "severity": "medium",
-        "signal": "BLIND SPOT: large untracked building 55-1864-10-1 (\"2815 CHANNING WAY BERKELEY 94704\") on block 55-1864 \u2014 Imps $3,578,898, UseCode 7700",
-        "classification": "untracked_large_building",
-        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue",
-        "resolvability": null,
-        "evidence": {
-          "apn": "55-1864-10-1",
-          "situs": "2815 CHANNING WAY BERKELEY 94704",
-          "imps": 3578898.0,
-          "usecode": "7700",
-          "latest_doc_date": "1900-01-01",
-          "sibling_parcel_risk": false
-        }
-      },
-      {
-        "check": "block_cohort",
         "key": "56-1983:56-1983-31-3",
         "severity": "medium",
         "signal": "BLIND SPOT: large untracked building 56-1983-31-3 (\"2235 SAN PABLO AVE BERKELEY 94702\") on block 56-1983 \u2014 Imps $3,552,796, UseCode 4102",
@@ -15030,7 +14836,7 @@
         "severity": "medium",
         "signal": "BLIND SPOT: large untracked building 57-2032-22 (\"2129 CENTER ST BERKELEY 94704\") on block 57-2032 \u2014 Imps $3,277,260, UseCode 3900",
         "classification": "untracked_large_building",
-        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue | collided key \u2014 Imps may be a sibling sub-parcel",
+        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue",
         "resolvability": null,
         "evidence": {
           "apn": "57-2032-22",
@@ -15038,7 +14844,7 @@
           "imps": 3277260.0,
           "usecode": "3900",
           "latest_doc_date": "2023-01-13",
-          "sibling_parcel_risk": true
+          "sibling_parcel_risk": false
         }
       },
       {
@@ -15438,7 +15244,7 @@
         "severity": "medium",
         "signal": "BLIND SPOT: large untracked building 58-2178-27 (\"1625 SHATTUCK AVE BERKELEY 94709\") on block 58-2178 \u2014 Imps $3,047,790, UseCode 9400",
         "classification": "untracked_large_building",
-        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue | collided key \u2014 Imps may be a sibling sub-parcel",
+        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue",
         "resolvability": null,
         "evidence": {
           "apn": "58-2178-27",
@@ -15446,7 +15252,7 @@
           "imps": 3047790.0,
           "usecode": "9400",
           "latest_doc_date": "2015-06-12",
-          "sibling_parcel_risk": true
+          "sibling_parcel_risk": false
         }
       },
       {
@@ -15455,7 +15261,7 @@
         "severity": "medium",
         "signal": "BLIND SPOT: large untracked building 58-2178-28 (\"1625 SHATTUCK AVE BERKELEY 94709\") on block 58-2178 \u2014 Imps $3,047,790, UseCode 9400",
         "classification": "untracked_large_building",
-        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue | collided key \u2014 Imps may be a sibling sub-parcel",
+        "expected_filter": "verify housing-use: UseCode does not cleanly mark multi-unit (may be commercial/institutional); a potential MISSING development project \u2014 cross-check the stale_apn crosswalk queue",
         "resolvability": null,
         "evidence": {
           "apn": "58-2178-28",
@@ -15463,7 +15269,7 @@
           "imps": 3047790.0,
           "usecode": "9400",
           "latest_doc_date": "2015-06-12",
-          "sibling_parcel_risk": true
+          "sibling_parcel_risk": false
         }
       },
       {
@@ -15576,6 +15382,23 @@
           "sibling_parcel_risk": false,
           "has_finaled_completes_permit": false,
           "demo_rebuild": true
+        }
+      },
+      {
+        "check": "built_vs_vacant",
+        "key": 154,
+        "severity": "medium",
+        "signal": "proj154 87u completed but Imps $703,575 = $8,087/unit (suspiciously low)",
+        "classification": "low_magnitude",
+        "expected_filter": "Imps/unit < $20,000 (possible wrong-parcel/partial)",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "co_date": "2025-06-01",
+          "units": 87,
+          "apn": "53-1591-14-1",
+          "imps": 703575.0,
+          "imps_per_unit": 8087,
+          "sibling_parcel_risk": false
         }
       },
       {
@@ -25441,42 +25264,6 @@
     "stale_apn": [
       {
         "check": "stale_apn",
-        "key": 21,
-        "severity": "medium",
-        "signal": "proj21 APN \"55-1871-20\" is not a resolvable 12-digit APN (bad format)",
-        "classification": "bad_format",
-        "expected_filter": "non-12-digit stored APN",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "stored_apn": "55-1871-20"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 33,
-        "severity": "medium",
-        "signal": "proj33 APN \"57-2032-17\" is not a resolvable 12-digit APN (bad format)",
-        "classification": "bad_format",
-        "expected_filter": "non-12-digit stored APN",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "stored_apn": "57-2032-17"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 47,
-        "severity": "medium",
-        "signal": "proj47 APN \"60-2447-36\" is not a resolvable 12-digit APN (bad format)",
-        "classification": "bad_format",
-        "expected_filter": "non-12-digit stored APN",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "stored_apn": "60-2447-36"
-        }
-      },
-      {
-        "check": "stale_apn",
         "key": 79,
         "severity": "medium",
         "signal": "proj79 APN 056198301100 (\"056 198301100\") absent from Feb-2026 assessor",
@@ -25503,36 +25290,6 @@
           "stored_apn": "052 157404601",
           "addr": "3036 REGENT St",
           "co_or_bp": null
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 98,
-        "severity": "medium",
-        "signal": "proj98 APN 059234901100 (\"059 234901100\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "059234901100",
-          "stored_apn": "059 234901100",
-          "addr": "1338 SEVENTH St",
-          "co_or_bp": null
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 135,
-        "severity": "medium",
-        "signal": "proj135 APN 057202901600 (\"057 202901600\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "057202901600",
-          "stored_apn": "057 202901600",
-          "addr": "2150 Kittredge St",
-          "co_or_bp": "2024-03-20"
         }
       },
       {
@@ -25627,21 +25384,6 @@
       },
       {
         "check": "stale_apn",
-        "key": 154,
-        "severity": "medium",
-        "signal": "proj154 APN 053159101803 (\"053 159101803\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "053159101803",
-          "stored_apn": "053 159101803",
-          "addr": "2001 ASHBY Ave",
-          "co_or_bp": "2025-06-01"
-        }
-      },
-      {
-        "check": "stale_apn",
         "key": 163,
         "severity": "medium",
         "signal": "proj163 APN 055182901100 (\"055 182901100\") absent from Feb-2026 assessor",
@@ -25657,44 +25399,17 @@
       },
       {
         "check": "stale_apn",
-        "key": 168,
-        "severity": "medium",
-        "signal": "proj168 APN 053163300101 (\"053 163300101\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "053163300101",
-          "stored_apn": "053 163300101",
-          "addr": "3000 SAN PABLO Ave",
-          "co_or_bp": "2023-06-05"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 173,
-        "severity": "medium",
-        "signal": "proj173 APN 055182201800 (\"055 182201800\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "055182201800",
-          "stored_apn": "055 182201800",
-          "addr": "2000 DWIGHT Way",
-          "co_or_bp": "2025-06-17"
-        }
-      },
-      {
-        "check": "stale_apn",
         "key": 178,
         "severity": "medium",
-        "signal": "proj178 APN \"057-2046-008-03, 057-2046-008-02, 057-2046-006-00, 057-2046-010-00\" is not a resolvable 12-digit APN (bad format)",
-        "classification": "bad_format",
-        "expected_filter": "non-12-digit stored APN",
+        "signal": "proj178 APN 057204600803, (\"057-2046-008-03, 057-2046-008-02, 057-2046-006-00, 057-2046-010-00\") absent from Feb-2026 assessor",
+        "classification": "orphaned_or_replatted_crosswalk_queue",
+        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "stored_apn": "057-2046-008-03, 057-2046-008-02, 057-2046-006-00, 057-2046-010-00"
+          "canon": "057204600803,",
+          "stored_apn": "057-2046-008-03, 057-2046-008-02, 057-2046-006-00, 057-2046-010-00",
+          "addr": "2131 University Ave",
+          "co_or_bp": null
         }
       },
       {
@@ -25731,26 +25446,14 @@
         "check": "stale_apn",
         "key": 181,
         "severity": "medium",
-        "signal": "proj181 APN \"055-1822-013-3\" is not a resolvable 12-digit APN (bad format)",
-        "classification": "bad_format",
-        "expected_filter": "non-12-digit stored APN",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "stored_apn": "055-1822-013-3"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 128,
-        "severity": "medium",
-        "signal": "proj128 APN 053165803500 (\"053 165803500\") absent from Feb-2026 assessor",
+        "signal": "proj181 APN 055182201303 (\"055-1822-013-3\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "053165803500",
-          "stored_apn": "053 165803500",
-          "addr": "2833 Seventh St",
+          "canon": "055182201303",
+          "stored_apn": "055-1822-013-3",
+          "addr": "2015 Blake St",
           "co_or_bp": null
         }
       },
@@ -25786,36 +25489,6 @@
       },
       {
         "check": "stale_apn",
-        "key": 219,
-        "severity": "medium",
-        "signal": "proj219 APN 054171900100 (\"054 171900100\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "054171900100",
-          "stored_apn": "054 171900100",
-          "addr": "2701 Shattuck Ave",
-          "co_or_bp": "2024-07-18"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 244,
-        "severity": "medium",
-        "signal": "proj244 APN 055190403300 (\"055 190403300\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "055190403300",
-          "stored_apn": "055 190403300",
-          "addr": "2303 GRANT St",
-          "co_or_bp": "2024-09-25"
-        }
-      },
-      {
-        "check": "stale_apn",
         "key": 327,
         "severity": "medium",
         "signal": "proj327 APN 052156003200 (\"052 156003200\") absent from Feb-2026 assessor",
@@ -25827,21 +25500,6 @@
           "stored_apn": "052 156003200",
           "addr": "3019 BATEMAN St",
           "co_or_bp": "2025-09-15"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 329,
-        "severity": "medium",
-        "signal": "proj329 APN 057208200200 (\"057 208200200\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "057208200200",
-          "stored_apn": "057 208200200",
-          "addr": "1208 DELAWARE St",
-          "co_or_bp": "2025-02-24"
         }
       },
       {
@@ -25861,66 +25519,6 @@
       },
       {
         "check": "stale_apn",
-        "key": 367,
-        "severity": "medium",
-        "signal": "proj367 APN 054170903500 (\"054 170903500\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "054170903500",
-          "stored_apn": "054 170903500",
-          "addr": "2710 COLLEGE Ave",
-          "co_or_bp": "2025-01-17"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 376,
-        "severity": "medium",
-        "signal": "proj376 APN 059232500500 (\"059 232500500\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "059232500500",
-          "stored_apn": "059 232500500",
-          "addr": "1438 Fifth St",
-          "co_or_bp": "2023-06-22"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 378,
-        "severity": "medium",
-        "signal": "proj378 APN 059232500301 (\"059 232500301\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "059232500301",
-          "stored_apn": "059 232500301",
-          "addr": "764 Page St",
-          "co_or_bp": "2023-01-19"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 379,
-        "severity": "medium",
-        "signal": "proj379 APN 057208601300 (\"057 208601300\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "057208601300",
-          "stored_apn": "057 208601300",
-          "addr": "1173 Hearst Ave",
-          "co_or_bp": "2023-03-15"
-        }
-      },
-      {
-        "check": "stale_apn",
         "key": 380,
         "severity": "medium",
         "signal": "proj380 APN 057203400800 (\"057 203400800\") absent from Feb-2026 assessor",
@@ -25932,51 +25530,6 @@
           "stored_apn": "057 203400800",
           "addr": "2023 Shattuck Ave",
           "co_or_bp": "2023-08-16"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 381,
-        "severity": "medium",
-        "signal": "proj381 APN 052157309300 (\"052 157309300\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "052157309300",
-          "stored_apn": "052 157309300",
-          "addr": "2980 College Ave",
-          "co_or_bp": null
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 398,
-        "severity": "medium",
-        "signal": "proj398 APN 057208901601 (\"057 208901601\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "057208901601",
-          "stored_apn": "057 208901601",
-          "addr": "1919 Ninth St",
-          "co_or_bp": "2023-06-29"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 403,
-        "severity": "medium",
-        "signal": "proj403 APN 055189401500 (\"055 189401500\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "055189401500",
-          "stored_apn": "055 189401500",
-          "addr": "2028 Bancroft Way",
-          "co_or_bp": "2023-07-28"
         }
       },
       {
@@ -25996,36 +25549,6 @@
       },
       {
         "check": "stale_apn",
-        "key": 445,
-        "severity": "medium",
-        "signal": "proj445 APN 059232500400 (\"059 232500400\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "059232500400",
-          "stored_apn": "059 232500400",
-          "addr": "1434 Fifth St",
-          "co_or_bp": "2023-09-20"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 465,
-        "severity": "medium",
-        "signal": "proj465 APN 056194500704 (\"056 194500704\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "056194500704",
-          "stored_apn": "056 194500704",
-          "addr": "739 Channing Way",
-          "co_or_bp": "2023-03-28"
-        }
-      },
-      {
-        "check": "stale_apn",
         "key": 467,
         "severity": "medium",
         "signal": "proj467 APN 056197700605 (\"056 197700605\") absent from Feb-2026 assessor",
@@ -26041,51 +25564,6 @@
       },
       {
         "check": "stale_apn",
-        "key": 492,
-        "severity": "medium",
-        "signal": "proj492 APN 053166105600 (\"053 166105600\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "053166105600",
-          "stored_apn": "053 166105600",
-          "addr": "1030 Grayson St",
-          "co_or_bp": "2018-10-17"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 493,
-        "severity": "medium",
-        "signal": "proj493 APN 058212703100 (\"058 212703100\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "058212703100",
-          "stored_apn": "058 212703100",
-          "addr": "1737 Tenth St",
-          "co_or_bp": "2018-07-03"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 511,
-        "severity": "medium",
-        "signal": "proj511 APN 059232602900 (\"059 232602900\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "059232602900",
-          "stored_apn": "059 232602900",
-          "addr": "812 Page St",
-          "co_or_bp": "2018-02-06"
-        }
-      },
-      {
-        "check": "stale_apn",
         "key": 512,
         "severity": "medium",
         "signal": "proj512 APN 056194302300 (\"056 194302300\") absent from Feb-2026 assessor",
@@ -26097,21 +25575,6 @@
           "stored_apn": "056 194302300",
           "addr": "2411 Fifth St",
           "co_or_bp": "2018-10-30"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 513,
-        "severity": "medium",
-        "signal": "proj513 APN 053165903500 (\"053 165903500\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "053165903500",
-          "stored_apn": "053 165903500",
-          "addr": "2817 Eighth St",
-          "co_or_bp": "2018-09-06"
         }
       },
       {
@@ -26146,36 +25609,6 @@
       },
       {
         "check": "stale_apn",
-        "key": 567,
-        "severity": "medium",
-        "signal": "proj567 APN 056192101001 (\"056 192101001\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "056192101001",
-          "stored_apn": "056 192101001",
-          "addr": "2440 Valley St",
-          "co_or_bp": "2019-11-13"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 570,
-        "severity": "medium",
-        "signal": "proj570 APN 052151602400 (\"052 151602400\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "052151602400",
-          "stored_apn": "052 151602400",
-          "addr": "1310 Haskell St",
-          "co_or_bp": "2019-07-19"
-        }
-      },
-      {
-        "check": "stale_apn",
         "key": 592,
         "severity": "medium",
         "signal": "proj592 APN 056197500900 (\"056 197500900\") absent from Feb-2026 assessor",
@@ -26191,36 +25624,6 @@
       },
       {
         "check": "stale_apn",
-        "key": 604,
-        "severity": "medium",
-        "signal": "proj604 APN 059228902801 (\"059 228902801\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "059228902801",
-          "stored_apn": "059 228902801",
-          "addr": "1157 Virginia St",
-          "co_or_bp": "2019-12-05"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 663,
-        "severity": "medium",
-        "signal": "proj663 APN 058212100400 (\"058 212100400\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "058212100400",
-          "stored_apn": "058 212100400",
-          "addr": "912 Cedar",
-          "co_or_bp": "2020-05-06"
-        }
-      },
-      {
-        "check": "stale_apn",
         "key": 674,
         "severity": "medium",
         "signal": "proj674 APN 056197402300 (\"056 197402300\") absent from Feb-2026 assessor",
@@ -26232,51 +25635,6 @@
           "stored_apn": "056 197402300",
           "addr": "2129 Ninth",
           "co_or_bp": "2020-12-15"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 702,
-        "severity": "medium",
-        "signal": "proj702 APN 058212100300 (\"058 212100300\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "058212100300",
-          "stored_apn": "058 212100300",
-          "addr": "908 Cedar",
-          "co_or_bp": "2020-05-11"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 707,
-        "severity": "medium",
-        "signal": "proj707 APN 055186401000 (\"055 186401000\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "055186401000",
-          "stored_apn": "055 186401000",
-          "addr": "2815 Channing",
-          "co_or_bp": "2021-05-28"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 713,
-        "severity": "medium",
-        "signal": "proj713 APN 056193702300 (\"056 193702300\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "056193702300",
-          "stored_apn": "056 193702300",
-          "addr": "2325 Eighth",
-          "co_or_bp": "2021-05-24"
         }
       },
       {
@@ -26326,36 +25684,6 @@
       },
       {
         "check": "stale_apn",
-        "key": 794,
-        "severity": "medium",
-        "signal": "proj794 APN 060246906800 (\"060 246906800\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "060246906800",
-          "stored_apn": "060 246906800",
-          "addr": "2702 Shasta",
-          "co_or_bp": "2021-03-09"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 817,
-        "severity": "medium",
-        "signal": "proj817 APN 054173304100 (\"054 173304100\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "054173304100",
-          "stored_apn": "054 173304100",
-          "addr": "1516 WARD",
-          "co_or_bp": "2022-05-06"
-        }
-      },
-      {
-        "check": "stale_apn",
         "key": 853,
         "severity": "medium",
         "signal": "proj853 APN 054180202000 (\"054 180202000\") absent from Feb-2026 assessor",
@@ -26367,51 +25695,6 @@
           "stored_apn": "054 180202000",
           "addr": "1516 CARLETON (Unit C)",
           "co_or_bp": "2022-06-09"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 891,
-        "severity": "medium",
-        "signal": "proj891 APN 059229004300 (\"059229004300\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "059229004300",
-          "stored_apn": "059229004300",
-          "addr": "1619 CORNELL AVE",
-          "co_or_bp": "2019-10-24"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 895,
-        "severity": "medium",
-        "signal": "proj895 APN 059231000205 (\"059231000205\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "059231000205",
-          "stored_apn": "059231000205",
-          "addr": "1500 SAN PABLO Ave",
-          "co_or_bp": "2020-09-11"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 897,
-        "severity": "medium",
-        "signal": "proj897 APN 055181900102 (\"055181900102\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "055181900102",
-          "stored_apn": "055181900102",
-          "addr": "2628 SHATTUCK Ave",
-          "co_or_bp": "2021-07-16"
         }
       },
       {
@@ -26442,21 +25725,6 @@
           "stored_apn": "057205302201",
           "addr": "2012 BERKELEY Way",
           "co_or_bp": "2022-09-23"
-        }
-      },
-      {
-        "check": "stale_apn",
-        "key": 903,
-        "severity": "medium",
-        "signal": "proj903 APN 056193502800 (\"056193502800\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
-        "resolvability": "needs_harvest",
-        "evidence": {
-          "canon": "056193502800",
-          "stored_apn": "056193502800",
-          "addr": "2421 NINTH St",
-          "co_or_bp": "2021-04-21"
         }
       },
       {
@@ -26493,6 +25761,21 @@
     "usecode_sanity": [
       {
         "check": "usecode_sanity",
+        "key": 154,
+        "severity": "low",
+        "signal": "proj154 completed housing (87u) on UseCode 3200 (non-residential code)",
+        "classification": "review",
+        "expected_filter": "mixed-use towers may carry a commercial code \u2014 review, not error",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "units": 87,
+          "apn": "53-1591-14-1",
+          "usecode": "3200",
+          "co_date": "2025-06-01"
+        }
+      },
+      {
+        "check": "usecode_sanity",
         "key": 158,
         "severity": "low",
         "signal": "proj158 completed housing (39u) on UseCode 3000 (non-residential code)",
@@ -26504,6 +25787,21 @@
           "apn": "57-2073-5",
           "usecode": "3000",
           "co_date": "2025-05-06"
+        }
+      },
+      {
+        "check": "usecode_sanity",
+        "key": 173,
+        "severity": "low",
+        "signal": "proj173 completed housing (113u) on UseCode 3000 (non-residential code)",
+        "classification": "review",
+        "expected_filter": "mixed-use towers may carry a commercial code \u2014 review, not error",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "units": 113,
+          "apn": "55-1822-19-2",
+          "usecode": "3000",
+          "co_date": "2025-06-17"
         }
       },
       {
@@ -26549,6 +25847,21 @@
           "apn": "56-1944-11",
           "usecode": "3200",
           "co_date": "2023-03-13"
+        }
+      },
+      {
+        "check": "usecode_sanity",
+        "key": 511,
+        "severity": "low",
+        "signal": "proj511 completed housing (1u) on UseCode 4101 (non-residential code)",
+        "classification": "review",
+        "expected_filter": "mixed-use towers may carry a commercial code \u2014 review, not error",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "units": 1,
+          "apn": "59-2326-29",
+          "usecode": "4101",
+          "co_date": "2018-02-06"
         }
       },
       {

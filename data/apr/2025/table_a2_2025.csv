@@ -24,6 +24,7 @@ id,address,apn,permits,net_units,vli_units,status,app_filed_date,app_complete_da
 357,2639 REGENT St,,,2,0,completed,,,,,2025-07-29,,,,,,,,CO Issued
 365,2227 CARLETON St,,,2,0,completed,,,,,2025-09-10,,,,,,,,CO Issued
 83,1136 KEITH Ave,,,1,0,completed,2024-01-01,,,,2025-11-10,,,,,,,,CO Issued
+208,469 Kentucky Ave,,,1,0,completed,,,,,2025-12-11,,,,,,,,CO Issued
 280,2804 ACTON St,,,1,0,completed,,,,,2025-04-23,,,,,,,,CO Issued
 281,1408 EDITH St,,,1,0,completed,,,,,2025-06-27,,,,,,,,CO Issued
 282,2144 RUSSELL St,,,1,0,completed,,,,,2025-05-28,,,,,,,,CO Issued
@@ -96,7 +97,6 @@ id,address,apn,permits,net_units,vli_units,status,app_filed_date,app_complete_da
 367,2710 COLLEGE Ave,,,1,0,completed,,,,,2025-01-17,,,,,,,,CO Issued
 368,3134 CALIFORNIA St,,,1,0,completed,,,,,2025-03-19,,,,,,,,CO Issued
 369,1449 KAINS Ave,,,1,0,completed,,,,,2025-01-31,,,,,,,,CO Issued
-208,469 Kentucky Ave,,,0,0,completed,,,,,2025-12-11,,,,,,,,CO Issued
 147,2300 ELLSWORTH St,,,69,0,under_construction,2024-01-01,,2024-10-21,2025-09-04,,,,,,Riaz Capital,Trachtenberg Architects,,BP Issued
 32,1740 SAN PABLO Ave,,,54,0,permitted,2023-01-01,,,2025-12-18,,,,,,,,,BP Issued
 157,2587 TELEGRAPH Ave,,,52,6,withdrawn,2024-01-01,,2025-04-07,2025-04-14,,,,,,Gilbane Development,,,BP Issued
@@ -116,11 +116,10 @@ id,address,apn,permits,net_units,vli_units,status,app_filed_date,app_complete_da
 10,3000 SHATTUCK Ave,,,166,17,entitled,2022-05-11,,2025-03-11,,,,,,,NX Ventures,Trachtenberg Architects,,Entitled
 5,2425 DURANT Ave,,,117,0,entitled,2024-11-15,,2025-10-09,,,,,,,Collabhome,,,Entitled
 18,2655 SHATTUCK Ave,,,97,0,entitled,2024-06-12,,2025-08-14,,,,,,,,,,Entitled
-139,2538 DURANT Ave,,,83,5,completed,2024-01-01,,2025-10-20,2024-10-01,,,,,,Martin Group / Valiance Capital,Studio KDA,,Entitled
+139,2538 DURANT Ave,,,83,5,under_construction,2024-01-01,,2025-10-20,2024-10-01,,,,,,Martin Group / Valiance Capital,Studio KDA,,Entitled
 34,2680 BANCROFT Way,,,79,9,entitled,2024-03-19,,2025-06-13,,,,,,,,,,Entitled
 113,2138 KITTREDGE St,,,73,5,permitted,2024-09-05,,2025-10-20,,,,,,,,,,Entitled
 156,2550 SHATTUCK Ave,,,72,8,entitled,2025-01-01,,2025-01-21,,,,,,,4Terra Investments,Trachtenberg Architects,,Entitled
-118,2138 KITTREDGE St (id:118),,,66,5,entitled,2024-09-05,,2025-10-20,,,,,,,,,,Entitled
 28,2372 ELLSWORTH St,,,63,0,entitled,2024-01-01,,2025-11-18,,,,,,,,,,Entitled
 124,2442 HASTE St,,,34,2,under_construction,2024-07-03,,2025-09-08,,,,,,,,SDT Architects,,Entitled
 41,2147 SAN PABLO Ave,,,15,0,entitled,2024-07-17,,2025-09-09,,,,,,,,,,Entitled

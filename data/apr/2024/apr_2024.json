@@ -1,6 +1,6 @@
 {
   "year": 2024,
-  "generated": "2026-06-15T13:36:47.776981",
+  "generated": "2026-06-16T12:52:15.521319",
   "schema_version": "v2 (Stage 1 migration)",
   "table_a": {
     "title": "Table A: Applications Deemed Complete in 2024",
@@ -20,28 +20,6 @@
     "title": "Table A2: Permitted Projects in 2024",
     "description": "Projects that achieved entitlement, building permit, or certificate of occupancy in 2024",
     "projects": [
-      {
-        "id": 170,
-        "address": "1950 OXFORD St",
-        "apn": null,
-        "permits": null,
-        "net_units": 300,
-        "vli_units": 0,
-        "status": "completed",
-        "app_filed_date": null,
-        "app_complete_date": null,
-        "entitled_date": null,
-        "bp_issued_date": null,
-        "co_date": "2024-08-21",
-        "density_bonus": null,
-        "sb35_flag": null,
-        "sb330_flag": null,
-        "ab2011_flag": null,
-        "developer": "UC Berkeley",
-        "architect": "Morris Adjmi Architects",
-        "construction_status": null,
-        "milestone_achieved": "CO Issued"
-      },
       {
         "id": 135,
         "address": "2150 Kittredge St",
@@ -1963,7 +1941,7 @@
         "permits": null,
         "net_units": 83,
         "vli_units": 5,
-        "status": "completed",
+        "status": "under_construction",
         "app_filed_date": "2024-01-01",
         "app_complete_date": null,
         "entitled_date": "2025-10-20",
@@ -2420,12 +2398,12 @@
       }
     ],
     "summary": {
-      "total_projects": 109,
-      "total_units": 2685,
+      "total_projects": 108,
+      "total_units": 2385,
       "vli_units": 160,
       "entitled_in_year": 12,
       "bp_issued_in_year": 11,
-      "co_issued_in_year": 86
+      "co_issued_in_year": 85
     }
   },
   "table_b": {
@@ -2600,12 +2578,12 @@
       "percent_of_goal": 18.7
     },
     "pipeline": {
-      "total_units": 16572,
-      "vli_units": 1097,
+      "total_units": 16808,
+      "vli_units": 1085,
       "note": "Pipeline units do NOT count toward RHNA until BP is issued"
     },
     "completed": {
-      "total_units": 3870,
+      "total_units": 3611,
       "vli_units": 128
     }
   },
@@ -2878,17 +2856,6 @@
         "accela_status_date": null
       },
       {
-        "id": 118,
-        "address": "2138 KITTREDGE St (id:118)",
-        "net_units": 66,
-        "status": "entitled",
-        "developer": null,
-        "app_complete_date": null,
-        "entitled_date": "2025-10-20",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
         "id": 182,
         "address": "2072 Addison St",
         "net_units": 66,
@@ -2988,6 +2955,17 @@
         "accela_status_date": null
       },
       {
+        "id": 94,
+        "address": "2145 GRANT St",
+        "net_units": 1,
+        "status": "entitled",
+        "developer": null,
+        "app_complete_date": null,
+        "entitled_date": "2026-03-26",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
         "id": 127,
         "address": "2820 San Pablo",
         "net_units": 1,
@@ -2995,17 +2973,6 @@
         "developer": "Cork-Mayo Investments",
         "app_complete_date": null,
         "entitled_date": "2024-12-06",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
-        "id": 94,
-        "address": "2145 GRANT St",
-        "net_units": 0,
-        "status": "entitled",
-        "developer": null,
-        "app_complete_date": null,
-        "entitled_date": "2026-03-26",
         "bp_issued_date": null,
         "accela_status_date": null
       },
@@ -3033,8 +3000,8 @@
       }
     ],
     "summary": {
-      "total_stalled": 38,
-      "total_units_at_risk": 5329
+      "total_stalled": 37,
+      "total_units_at_risk": 5264
     }
   }
 }

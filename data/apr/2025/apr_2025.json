@@ -1,6 +1,6 @@
 {
   "year": 2025,
-  "generated": "2026-06-15T13:36:48.653198",
+  "generated": "2026-06-16T12:52:16.379764",
   "schema_version": "v2 (Stage 1 migration)",
   "table_a": {
     "title": "Table A: Applications Deemed Complete in 2025",
@@ -561,6 +561,28 @@
         "entitled_date": null,
         "bp_issued_date": null,
         "co_date": "2025-11-10",
+        "density_bonus": null,
+        "sb35_flag": null,
+        "sb330_flag": null,
+        "ab2011_flag": null,
+        "developer": null,
+        "architect": null,
+        "construction_status": null,
+        "milestone_achieved": "CO Issued"
+      },
+      {
+        "id": 208,
+        "address": "469 Kentucky Ave",
+        "apn": null,
+        "permits": null,
+        "net_units": 1,
+        "vli_units": 0,
+        "status": "completed",
+        "app_filed_date": null,
+        "app_complete_date": null,
+        "entitled_date": null,
+        "bp_issued_date": null,
+        "co_date": "2025-12-11",
         "density_bonus": null,
         "sb35_flag": null,
         "sb330_flag": null,
@@ -2155,28 +2177,6 @@
         "milestone_achieved": "CO Issued"
       },
       {
-        "id": 208,
-        "address": "469 Kentucky Ave",
-        "apn": null,
-        "permits": null,
-        "net_units": 0,
-        "vli_units": 0,
-        "status": "completed",
-        "app_filed_date": null,
-        "app_complete_date": null,
-        "entitled_date": null,
-        "bp_issued_date": null,
-        "co_date": "2025-12-11",
-        "density_bonus": null,
-        "sb35_flag": null,
-        "sb330_flag": null,
-        "ab2011_flag": null,
-        "developer": null,
-        "architect": null,
-        "construction_status": null,
-        "milestone_achieved": "CO Issued"
-      },
-      {
         "id": 147,
         "address": "2300 ELLSWORTH St",
         "apn": null,
@@ -2601,7 +2601,7 @@
         "permits": null,
         "net_units": 83,
         "vli_units": 5,
-        "status": "completed",
+        "status": "under_construction",
         "app_filed_date": "2024-01-01",
         "app_complete_date": null,
         "entitled_date": "2025-10-20",
@@ -2679,28 +2679,6 @@
         "ab2011_flag": null,
         "developer": "4Terra Investments",
         "architect": "Trachtenberg Architects",
-        "construction_status": null,
-        "milestone_achieved": "Entitled"
-      },
-      {
-        "id": 118,
-        "address": "2138 KITTREDGE St (id:118)",
-        "apn": null,
-        "permits": null,
-        "net_units": 66,
-        "vli_units": 5,
-        "status": "entitled",
-        "app_filed_date": "2024-09-05",
-        "app_complete_date": null,
-        "entitled_date": "2025-10-20",
-        "bp_issued_date": null,
-        "co_date": null,
-        "density_bonus": null,
-        "sb35_flag": null,
-        "sb330_flag": null,
-        "ab2011_flag": null,
-        "developer": null,
-        "architect": null,
         "construction_status": null,
         "milestone_achieved": "Entitled"
       },
@@ -2816,10 +2794,10 @@
       }
     ],
     "summary": {
-      "total_projects": 127,
-      "total_units": 3314,
-      "vli_units": 243,
-      "entitled_in_year": 18,
+      "total_projects": 126,
+      "total_units": 3249,
+      "vli_units": 238,
+      "entitled_in_year": 17,
       "bp_issued_in_year": 11,
       "co_issued_in_year": 98
     }
@@ -2996,12 +2974,12 @@
       "percent_of_goal": 18.7
     },
     "pipeline": {
-      "total_units": 16572,
-      "vli_units": 1097,
+      "total_units": 16808,
+      "vli_units": 1085,
       "note": "Pipeline units do NOT count toward RHNA until BP is issued"
     },
     "completed": {
-      "total_units": 3870,
+      "total_units": 3611,
       "vli_units": 128
     }
   },
@@ -3274,17 +3252,6 @@
         "accela_status_date": null
       },
       {
-        "id": 118,
-        "address": "2138 KITTREDGE St (id:118)",
-        "net_units": 66,
-        "status": "entitled",
-        "developer": null,
-        "app_complete_date": null,
-        "entitled_date": "2025-10-20",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
         "id": 182,
         "address": "2072 Addison St",
         "net_units": 66,
@@ -3384,6 +3351,17 @@
         "accela_status_date": null
       },
       {
+        "id": 94,
+        "address": "2145 GRANT St",
+        "net_units": 1,
+        "status": "entitled",
+        "developer": null,
+        "app_complete_date": null,
+        "entitled_date": "2026-03-26",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
         "id": 127,
         "address": "2820 San Pablo",
         "net_units": 1,
@@ -3391,17 +3369,6 @@
         "developer": "Cork-Mayo Investments",
         "app_complete_date": null,
         "entitled_date": "2024-12-06",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
-        "id": 94,
-        "address": "2145 GRANT St",
-        "net_units": 0,
-        "status": "entitled",
-        "developer": null,
-        "app_complete_date": null,
-        "entitled_date": "2026-03-26",
         "bp_issued_date": null,
         "accela_status_date": null
       },
@@ -3429,8 +3396,8 @@
       }
     ],
     "summary": {
-      "total_stalled": 38,
-      "total_units_at_risk": 5329
+      "total_stalled": 37,
+      "total_units_at_risk": 5264
     }
   }
 }

@@ -41,6 +41,24 @@ from pathlib import Path
 BASE_DIR = Path('/Users/johngage/berkeley-data')
 DB_PATH = BASE_DIR / 'databases' / 'berkeley_housing_v2.db'
 
+# UC student housing is exempt from city permitting and does NOT count toward the
+# RHNA allocation (documented rule, since 2026-04). PRIMARY SOURCE: Anchor House FAQ,
+# UC Berkeley Capital Strategies (capitalstrategies.berkeley.edu/anchor-house-faq,
+# v2 documents id 2178) — "UC Regents approve the project and UC Berkeley issues its
+# own building permit," so it is exempt from city permitting and city RHNA. Exclude
+# uc_project-classified
+# projects from ALL RHNA-counting queries (Table A2, RHNA completed, BP-credit,
+# developer summary) — but KEEP them in the total PIPELINE ("in pipeline, excluded
+# from RHNA"). Flag-based (project_classifications), NEVER a hardcoded project id,
+# so it auto-catches 2200 Bancroft / 2400 Bowditch / 2556 Haste when they get BPs.
+# (2026-06-15) Effect today: only proj170 (1950 Oxford, 300 beds, CO 2024-08-21)
+# has a milestone -> Table A2 2024 912->612, RHNA completed 3870->3570; BP spots
+# dormant (no UC has a BP yet) but now consistent.
+UC_EXCLUDE = """project_id NOT IN (
+            SELECT pc.project_id FROM project_classifications pc
+            JOIN vocabulary_classification_types vct ON vct.id = pc.classification_type_id
+            WHERE vct.code = 'uc_project')"""
+
 def generate_table_a(conn, year):
     """
     Table A: Projects with applications deemed complete in the reporting year
@@ -136,7 +154,8 @@ def generate_table_a2(conn, year):
                 WHEN entitled_date LIKE ? THEN 'Entitled'
             END as milestone_achieved
         FROM v_projects_flat
-        WHERE entitled_date LIKE ? OR bp_issued_date LIKE ? OR (co_issued_date LIKE ? AND co_issued_date <> '2024-01-01')
+        WHERE (entitled_date LIKE ? OR bp_issued_date LIKE ? OR (co_issued_date LIKE ? AND co_issued_date <> '2024-01-01'))
+          AND ''' + UC_EXCLUDE + '''
         ORDER BY
             CASE
                 WHEN (co_issued_date LIKE ? AND co_issued_date <> '2024-01-01') THEN 1
@@ -205,6 +224,7 @@ def generate_table_b(conn, year, adu_count=0):
             SUM(total_units) as total_units
         FROM v_projects_flat
         WHERE bp_issued_date IS NOT NULL AND bp_issued_date != ''
+          AND ''' + UC_EXCLUDE + '''
     ''')
     row = cursor.fetchone()
     bp_vli = row[0] or 0
@@ -285,6 +305,7 @@ def generate_developer_summary(conn, year):
             SUM(CASE WHEN NULL = 1 THEN 1 ELSE 0 END) as density_bonus_projects
         FROM v_projects_flat
         WHERE bp_issued_date IS NOT NULL AND bp_issued_date != ''
+          AND ''' + UC_EXCLUDE + '''
         GROUP BY COALESCE(developer, 'Unknown/Individual')
         ORDER BY total_units DESC
     ''')
@@ -337,6 +358,7 @@ def generate_rhna_progress(conn, year, adu_count=0):
             SUM(COALESCE(vli_units, 0)) as vli_units
         FROM v_projects_flat
         WHERE bp_issued_date IS NOT NULL AND bp_issued_date != ''
+          AND ''' + UC_EXCLUDE + '''
     ''')
     bp_row = cursor.fetchone()
     bp_issued_units = bp_row[0] or 0
@@ -370,6 +392,7 @@ def generate_rhna_progress(conn, year, adu_count=0):
         FROM v_projects_flat
         WHERE co_issued_date IS NOT NULL AND co_issued_date != ''
           AND co_issued_date <> '2024-01-01'
+          AND ''' + UC_EXCLUDE + '''
     ''')
     co_row = cursor.fetchone()
     completed_units = co_row[0] or 0

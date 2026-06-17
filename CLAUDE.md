@@ -54,11 +54,20 @@ compatibility view is **`v_projects_flat`** (what `generate_apr_v2.py` and
    re-platted to `57-2046-8-4/-9/-11-1`; an APN-join block-sweep would miss the
    308-unit development). **A stale-APN check (project APNs not in current assessor)
    is a STANDING guard before any APN-join analysis.**
+   - **🟢 THE SINGLE CANON FUNCTION (use this, never a new per-script copy):**
+     **`housing_rules.to_canonical_apn(raw, county)`** (`scripts/housing_rules/apn.py`, committed
+     2026-06-16). UPPERCASE, **ALPHANUMERIC-preserving** (APNs are alphanumeric in the general CA
+     case — even Alameda has 25 letter-APNs, book `48A`/`48H`; **NEVER digits-only**), validates the
+     county's REGISTERED pattern from `APN_FORMATS` (Alameda = `^[0-9A-Z]{12,14}$`, book3-page4-parcel3-sub2,
+     parses the APN STRING not the NULL-prone component columns). Normalizes all 30,007 real Alameda APNs
+     to 12 chars. The parcel-IDENTITY model (APN ≠ identity; lineage from recorded maps not strings) is
+     **ADR-003** (`docs/audit/2026-06-16_ADR-003_parcel_identity_model.md`) — the MVP migration is built +
+     preview-verified but **gated-unwritten** as of 2026-06-16 (see PROGRESS.md "IMMEDIATE NEXT ACTION").
    - **THE matcher = the 3-layer cross-walk (all three required, not strip-non-digits):**
-     **(a)** assessor hyphen-APN → 12-digit segment-pad `book(3)+page(4)+block(3)+sub(2)`
+     **(a)** assessor hyphen-APN → 12-char segment-pad `book(3)+page(4)+block(3)+sub(2)`
      (`57-2046-1`→`057204600100`); **(b)** v2's OWN apn storage is INCONSISTENT
-     (`057 204600100` vs `055-1822-013-3`) — normalize BOTH sides; **(c)** address matching
-     needs ordinal-word↔number (`SIXTH`=`6TH`) + house-# tolerance. Skipping any layer
+     (`057 204600100` vs `055-1822-013-3`) — normalize BOTH sides via `to_canonical_apn`; **(c)** address
+     matching needs ordinal-word↔number (`SIXTH`=`6TH`) + house-# tolerance. Skipping any layer
      reproduces the 890/892-false-dead trap.
    - **🟢 `berkeley.db.parcels` REFRESHED 2026-06-16 from data.acgov.org** (Alameda Open Data
      Hub Parcels, `services5.arcgis.com/ROBnTHSNjoZ2Wm1P/.../Parcels/FeatureServer/0`,

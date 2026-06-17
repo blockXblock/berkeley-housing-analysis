@@ -30,6 +30,9 @@ import sqlite3, json, argparse, sys, datetime, re
 from pathlib import Path
 from collections import defaultdict, Counter
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from housing_rules import to_canonical_apn   # the SINGLE canon function (Option B, per-county)
+
 BASE = Path(__file__).resolve().parent.parent
 V2_PATH = BASE / 'databases' / 'berkeley_housing_v2.db'
 BDB_PATH = BASE / 'databases' / 'berkeley.db'   # the REFRESHED assessor ref (NOT ./berkeley.db stub)
@@ -58,43 +61,10 @@ UC_PROJECTS = [165, 170, 171, 177]
 CORNER_LOT_ANCHOR = 136
 
 
-# ============================ CROSSWALK (3-layer, deterministic) ============================
-def _canon_segments(apn):
-    """Segment-parse a hyphen/space-delimited APN -> 12-digit canonical (book3 page4 parcel3 sub2).
-    The authoritative path on BOTH sides: the APN STRING always carries the full parcel/sub number,
-    whereas the assessor's BOOK/PAGE/PARCEL/SUB_PARCEL COLUMNS are often NULL for parcel/sub even
-    when the string has them (e.g. '59-2325-38' -> PARCEL=SUB=NULL). Component-canon collapsed those
-    to ...000 -> false-stale + mis-joins. (fixed across all canon consumers 2026-06-16)"""
-    if not apn:
-        return None
-    parts = re.split(r'[\s\-]+', apn.strip())
-    if len(parts) >= 3:
-        try:
-            return parts[0].zfill(3) + parts[1].zfill(4) + parts[2].zfill(3) \
-                + (parts[3] if len(parts) >= 4 else '').zfill(2)
-        except Exception:
-            pass
-    return None
-
-
-def canon_v2_apn(apn):
-    """v2 stored APN -> 12-digit canonical. Handles both the 12-digit space form ('057 202901700')
-    and the short hyphen form ('55-1871-20') via segment-parse — the latter previously fell through
-    to 'bad format' and false-flagged stale_apn."""
-    if not apn:
-        return None
-    seg = _canon_segments(apn)
-    if seg:
-        return seg
-    d = ''.join(c for c in apn if c.isdigit())
-    if len(d) == 12:
-        return d
-    return None  # genuinely unresolvable -> surfaced by stale_apn/phantoms
-
-
-def canon_from_apn(apn):
-    """assessor APN string -> 12-digit canonical (segment-parse). Authoritative — see _canon_segments."""
-    return _canon_segments(apn)
+# ============================ CROSSWALK ============================
+# The single canon function lives in housing_rules.to_canonical_apn (Option B, per-county,
+# alphanumeric, structure-preserving). Both sides (v2 stored APN + assessor APN string) go
+# through it — no per-script canon copy.
 
 
 def build_assessor_index(bdb):
@@ -107,7 +77,7 @@ def build_assessor_index(bdb):
     collapsed = 0   # parcels overwritten by last-write-wins (lost to a shared canonical key)
     for apn, book, page, parcel, sub, imps, land, situs, use, lot, lat, lon in bdb.execute(
         "SELECT APN,BOOK,PAGE,PARCEL,SUB_PARCEL,Imps,Land,SitusAddre,UseCode,LotSize,Latitude,Longitude FROM parcels"):
-        c = canon_from_apn(apn)
+        c = to_canonical_apn(apn, 'Alameda')
         if not c:
             continue
         if c in idx:
@@ -184,7 +154,7 @@ class Ctx:
         for pid, apn, addr in self.v2.execute("""
                 SELECT pp.project_id, pk.apn, pk.address FROM project_parcels pp
                 JOIN parcels pk ON pk.id=pp.parcel_id WHERE pp.is_primary=1"""):
-            self.primary_apn[pid] = {'apn': apn, 'addr': addr, 'canon': canon_v2_apn(apn)}
+            self.primary_apn[pid] = {'apn': apn, 'addr': addr, 'canon': to_canonical_apn(apn, 'Alameda')}
 
     def resolvability(self, pid):
         return 'has_r2_doc' if pid in self.r2_projects else 'needs_harvest'
@@ -648,7 +618,7 @@ def check_block_cohort(ctx, blocks):
         b = {'block': f'{book}-{page}', 'parcels': len(rows), 'tracked': 0,
              'untracked_built_housing_total': 0, 'untracked_large_nonsfr_flagged': 0}
         for apn, bk, pg, pa, sub, imps, use, situs, ldd in rows:
-            c = canon_from_apn(apn)
+            c = to_canonical_apn(apn, 'Alameda')
             if c in tracked_canon:
                 b['tracked'] += 1
                 continue

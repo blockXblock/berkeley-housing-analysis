@@ -32,6 +32,9 @@ NEVER writes berkeley.db (assessor) — opens it read-only.
 import sqlite3, argparse, datetime, statistics, sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from housing_rules import to_canonical_apn   # the SINGLE canon function (Option B, per-county)
+
 BASE = Path(__file__).resolve().parent.parent
 V2_PATH = BASE / 'databases' / 'berkeley_housing_v2.db'
 BDB_PATH = BASE / 'databases' / 'berkeley.db'
@@ -64,35 +67,11 @@ CREATE INDEX idx_pav_project ON project_assessed_value(project_id);
 """
 
 
-def canon_v2(apn):
-    if not apn:
-        return None
-    d = ''.join(c for c in apn if c.isdigit())
-    return d if len(d) == 12 else None
-
-
-def canon_from_apn(apn):
-    """AUTHORITATIVE assessor canon — from the APN STRING (segment-parse), NOT the BOOK/PAGE/
-    PARCEL/SUB_PARCEL columns: those are often NULL for the parcel/sub even when the APN string
-    carries the full number (e.g. '59-2325-38' has PARCEL=SUB=NULL), so component-canon collapses
-    distinct parcels to ...000 -> mis-joins + false-stale. (verified 2026-06-16, parcel_crosswalk)"""
-    if not apn:
-        return None
-    parts = apn.strip().split('-')
-    if len(parts) < 3:
-        return None
-    try:
-        return parts[0].zfill(3) + parts[1].zfill(4) + parts[2].zfill(3) \
-            + (parts[3] if len(parts) >= 4 else '').zfill(2)
-    except Exception:
-        return None
-
-
 def assessor_index(bdb):
     idx, collided = {}, set()
     for apn, land, imps, tnv in bdb.execute(
             "SELECT APN,Land,Imps,TotalNetValue FROM parcels"):
-        c = canon_from_apn(apn)
+        c = to_canonical_apn(apn, 'Alameda')
         if not c:
             continue
         if c in idx:
@@ -120,7 +99,7 @@ def compute_rows(v2, bdb):
         if not pp:
             skip['no_parcel'] += 1
             continue
-        c = canon_v2(pp[0])
+        c = to_canonical_apn(pp[0], 'Alameda')
         if not c or c not in idx:
             skip['parcel_absent_crosswalk'] += 1
             continue

@@ -17,30 +17,13 @@ LOW (re-platted w/ address renumber, no exact match) / LEAVE (pipeline) / FALSE_
 PHASE 2 (the gated DB write of confirmed-HIGH re-points + the parcel_crosswalk table) is SEPARATE
 and waits for John's review of the HIGH set. This script does not write the DB.
 """
-import sqlite3, json, re
+import sqlite3, json, re, sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from housing_rules import to_canonical_apn   # the SINGLE canon function (Option B, per-county)
 v2=sqlite3.connect('file:databases/berkeley_housing_v2.db?mode=ro',uri=True); v2.row_factory=sqlite3.Row
 bdb=sqlite3.connect('file:databases/berkeley.db?mode=ro',uri=True)
 STUB='2024-01-01'; ASOF='2026-02'
-def canon_improved(apn):
-    if not apn: return None
-    parts=re.split(r'[\s\-]+',apn.strip())
-    if len(parts)>=3:
-        try: return parts[0].zfill(3)+parts[1].zfill(4)+parts[2].zfill(3)+(parts[3] if len(parts)>=4 else '').zfill(2)
-        except: pass
-    d=''.join(c for c in apn if c.isdigit()); return d if len(d)==12 else None
-def canon_bdb(b,p,pa,s):
-    try: return b.strip().zfill(3)+p.strip().zfill(4)+(pa or '').strip().zfill(3)+(s or '').strip().zfill(2)
-    except: return None
-def canon_from_apn(apn):
-    # AUTHORITATIVE assessor canon — derived from the APN STRING (segment-parse), NOT the
-    # BOOK/PAGE/PARCEL/SUB_PARCEL columns: those columns are often NULL for the parcel/sub even
-    # when the APN string carries the full number (e.g. "59-2325-38" has PARCEL=SUB=NULL), which
-    # made component-canon collapse distinct parcels to ...000. (verified 2026-06-16)
-    if not apn: return None
-    parts=apn.strip().split('-')
-    if len(parts)<3: return None
-    try: return parts[0].zfill(3)+parts[1].zfill(4)+parts[2].zfill(3)+(parts[3] if len(parts)>=4 else '').zfill(2)
-    except: return None
 def norm_addr(a):
     if not a: return ('','')
     s=a.lower(); s=re.sub(r'\s+berkeley\s*,?\s*(ca\s*)?\d{5}.*$','',s); s=re.sub(r'\s+berkeley\s*$','',s)
@@ -50,7 +33,7 @@ def norm_addr(a):
     st=re.sub(r'[^a-z0-9 ]',' ',st); st=re.sub(r'^\s*\d+\s*','',st).strip(); st=re.sub(r'\s+',' ',st); return (num,st)
 by_canon={}; by_addr={}
 for apn,b,p,pa,s,imps,use,situs in bdb.execute("SELECT APN,BOOK,PAGE,PARCEL,SUB_PARCEL,Imps,UseCode,SitusAddre FROM parcels"):
-    c=canon_from_apn(apn) or canon_bdb(b,p,pa,s)   # APN-string canon is authoritative
+    c=to_canonical_apn(apn,'Alameda')   # the single canon (Option B)
     if not c: continue
     rec={'apn':apn,'canon':c,'imps':imps or 0,'use':str(use or ''),'situs':situs}
     by_canon[c]=rec
@@ -68,7 +51,7 @@ for f in d['findings_by_check']['stale_apn']:
     R={'project_id':pid,'addr':addr,'stored_apn':raw,'units':units,'completed':bool(completed),'co_date':co}
     if raw and ',' in raw:
         R.update(confidence='MULTI_SPLIT',note='umbrella w/ multiple stored APNs (Acheson) — handle as split'); results.append(R); continue
-    ci=canon_improved(raw); R['canon']=ci
+    ci=to_canonical_apn(raw,'Alameda'); R['canon']=ci
     if ci and ci in by_canon:
         R.update(confidence='FALSE_STALE',note='resolves with component-pad canon — NOT re-platted (detector canon gap)',proposed_apn=by_canon[ci]['apn'],proposed_imps=by_canon[ci]['imps']); results.append(R); continue
     if not completed:
@@ -77,7 +60,7 @@ for f in d['findings_by_check']['stale_apn']:
     if not na[0] or na[0]=='0':
         R.update(confidence='LOW',note='no resolvable house number ("0 X") — John-verify'); results.append(R); continue
     cands=by_addr.get(na,[]); built=[c for c in cands if c['imps']>0]
-    bp=ci[:7] if ci else None; bp_cont=[c for c in built if c['canon'][:7]==bp]
+    bp='-'.join(ci.split('-')[:2]) if ci else None; bp_cont=[c for c in built if '-'.join(c['canon'].split('-')[:2])==bp]   # book-page (B form)
     ev=[]; 
     if cands: ev.append('exact_address')
     if len(built)==1: ev.append('single_built_parcel')
@@ -97,7 +80,7 @@ for f in d['findings_by_check']['stale_apn']:
     results.append(R)
 
 # ---- Acheson split (proj178 umbrella) ----
-ach=[c for c in (by_canon[k] for k in by_canon) if c['canon'][:7]=='0572046' and c['imps']>0]
+ach=[c for c in (by_canon[k] for k in by_canon) if c['canon'].startswith('057-2046') and c['imps']>0]
 ach_b8=[c for c in ach if c['apn'].startswith('57-2046-8') or '2046-8' in c['apn']]
 acheson={'umbrella':178,'stored_apns':'57-2046-8-3/8-2/6-0/10-0','current_built_parcels_block_57-2046':
          [{'apn':c['apn'],'imps':c['imps'],'situs':c['situs']} for c in sorted(ach,key=lambda x:-x['imps'])[:8]]}

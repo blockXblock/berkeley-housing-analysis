@@ -102,25 +102,54 @@ def main() -> int:
                    "post-all-sunsets provisions lookup raises")
 
     _check_to_canonical_apn()
+    _check_sb9_units()
 
     print("All smoke tests passed.")
     return 0
 
 
 def _check_to_canonical_apn():
-    from scripts.housing_rules.apn import to_canonical_apn, is_canonical_apn
-    cases = {
+    from scripts.housing_rules.apn import (to_canonical_apn, is_canonical_apn,
+                                           canonical_length, registered_pattern)
+    cases = {  # the bitten variants + an ALPHANUMERIC Alameda APN (book 48A) -> canonical
         "55-1895-41": "055189504100", "057204600100": "057204600100",
         "055-1895-018-05": "055189501805", "057 204600100": "057204600100",
         "57-2046-1": "057204600100", "05518220133": "055182201303",
         "57203217": "057203201700", "052 143301000": "052143301000",
+        "48A-7075-15": "48A707501500", "48h-7680-1-2": "48H768000102",  # alphanumeric + case-fold
     }
     for inp, exp in cases.items():
-        assert to_canonical_apn(inp) == exp, f"{inp} -> {to_canonical_apn(inp)} != {exp}"
-    assert to_canonical_apn("057-2046-008-03, 057-2046-008-02") is None  # multi-APN
-    assert to_canonical_apn(None) is None and to_canonical_apn("") is None
-    assert is_canonical_apn("057204600100") and not is_canonical_apn("57-2046-1")
-    print("to_canonical_apn: 8 variants + multi/null + is_canonical — PASS")
+        got = to_canonical_apn(inp, "Alameda")
+        assert got == exp, f"{inp} -> {got} != {exp}"
+        assert len(got) == 12, f"Alameda canonical must be 12, got {len(got)} for {inp}"
+    assert canonical_length("Alameda") == 12                       # Alameda's REGISTERED length
+    assert registered_pattern("Alameda") == r'^[0-9A-Z]{12,14}$'   # alphanumeric, NOT digits-only
+    assert to_canonical_apn("057-2046-008-03, 057-2046-008-02", "Alameda") is None  # multi-APN
+    assert to_canonical_apn(None, "Alameda") is None and to_canonical_apn("", "Alameda") is None
+    assert is_canonical_apn("057204600100", "Alameda") and is_canonical_apn("48A707501500", "Alameda")
+    assert not is_canonical_apn("57-2046-1", "Alameda")            # hyphenated raw -> not canonical
+    # generality guard: an unregistered county raises (NOT a silent default-to-12)
+    try:
+        to_canonical_apn("57-2046-1", "Imaginary")
+        raise AssertionError("unregistered county must raise")
+    except ValueError:
+        pass
+    print("to_canonical_apn: 10 variants (incl. 48A alphanumeric) + pattern + multi/null + "
+          "unregistered-raises — PASS")
+
+
+def _check_sb9_units():
+    from scripts.housing_rules.classifiers import sb9_countable_units, is_lot_split_only
+    assert is_lot_split_only("SB 9 lot split — two-lot subdivision")
+    assert is_lot_split_only("Tentative Parcel Map for urban lot split")
+    assert not is_lot_split_only("Construction of a 12-unit apartment building")
+    # lot-split-only permit -> 0 units even if a number is declared
+    assert sb9_countable_units("SB9 lot split", declared_units=2, has_building_or_unit_event=False) == 0
+    # lot split WITH an accompanying building/unit event -> count the units
+    assert sb9_countable_units("SB9 lot split + new duplex", declared_units=2, has_building_or_unit_event=True) == 2
+    # a normal building permit -> count as-is
+    assert sb9_countable_units("New 4-unit building", declared_units=4, has_building_or_unit_event=False) == 4
+    print("sb9_countable_units: lot-split=0 / split+building=units / normal=units — PASS")
 
 
 if __name__ == "__main__":

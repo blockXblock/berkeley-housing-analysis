@@ -154,3 +154,44 @@ def valid_streamlining_provisions_for_year(year: int) -> List[str]:
             f"lookups.STREAMLINING_PROVISIONS if APR coverage should extend here."
         )
     return provs
+
+
+# ---------------------------------------------------------------------------
+# SB 9 unit-count rule (ADR-003): a lot split is NOT a unit-producing event.
+# An SB 9 / parcel-split / lot-line-adjustment permit ALONE contributes 0 units
+# unless an accompanying building / unit event exists. As SB 9 splits accelerate,
+# this prevents systematic unit inflation in the APR counts.
+# ---------------------------------------------------------------------------
+import re as _re
+
+_LOT_SPLIT_RE = _re.compile(
+    r'\b(sb\s*-?\s*9|senate bill 9|lot split|urban lot split|parcel split|'
+    r'lot[\s-]*line adjustment|tentative parcel map|parcel map|subdivision map)\b',
+    _re.IGNORECASE,
+)
+# a description that ALSO clearly involves a building/dwelling cancels the "split-only" read
+_BUILDING_RE = _re.compile(
+    r'\b(new (construction|building|dwelling|duplex|adu|residence|unit)|'
+    r'\d+\s*[- ]?unit|apartment|dwelling unit|build(ing)? permit for)\b',
+    _re.IGNORECASE,
+)
+
+
+def is_lot_split_only(description):
+    """True iff the permit description reads as a lot split / parcel map with NO
+    building/dwelling work in the same description. None/empty -> False."""
+    if not description:
+        return False
+    return bool(_LOT_SPLIT_RE.search(description)) and not bool(_BUILDING_RE.search(description))
+
+
+def sb9_countable_units(description, declared_units, has_building_or_unit_event):
+    """Units this permit should CONTRIBUTE to the APR count.
+
+    A lot-split-only permit -> 0 (a split creates parcels, not dwellings), UNLESS an
+    accompanying building/unit event exists (then the declared units count). Any
+    non-lot-split permit -> its declared units unchanged.
+    """
+    if is_lot_split_only(description) and not has_building_or_unit_event:
+        return 0
+    return declared_units or 0

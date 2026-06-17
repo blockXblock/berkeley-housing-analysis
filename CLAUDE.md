@@ -54,15 +54,21 @@ compatibility view is **`v_projects_flat`** (what `generate_apr_v2.py` and
    re-platted to `57-2046-8-4/-9/-11-1`; an APN-join block-sweep would miss the
    308-unit development). **A stale-APN check (project APNs not in current assessor)
    is a STANDING guard before any APN-join analysis.**
-   - **🟢 THE SINGLE CANON FUNCTION (use this, never a new per-script copy):**
-     **`housing_rules.to_canonical_apn(raw, county)`** (`scripts/housing_rules/apn.py`, committed
-     2026-06-16). UPPERCASE, **ALPHANUMERIC-preserving** (APNs are alphanumeric in the general CA
-     case — even Alameda has 25 letter-APNs, book `48A`/`48H`; **NEVER digits-only**), validates the
-     county's REGISTERED pattern from `APN_FORMATS` (Alameda = `^[0-9A-Z]{12,14}$`, book3-page4-parcel3-sub2,
-     parses the APN STRING not the NULL-prone component columns). Normalizes all 30,007 real Alameda APNs
-     to 12 chars. The parcel-IDENTITY model (APN ≠ identity; lineage from recorded maps not strings) is
-     **ADR-003** (`docs/audit/2026-06-16_ADR-003_parcel_identity_model.md`) — the MVP migration is built +
-     preview-verified but **gated-unwritten** as of 2026-06-16 (see PROGRESS.md "IMMEDIATE NEXT ACTION").
+   - **🟢 THE SINGLE CANON FUNCTION (use this, never a new per-script copy — all 4 consumers import it):**
+     **`housing_rules.to_canonical_apn(raw, county)`** (`scripts/housing_rules/apn.py`). UPPERCASE,
+     **ALPHANUMERIC-preserving** (APNs are alphanumeric in the general CA case — even Alameda has 25
+     letter-APNs, book `48A`/`48H`; **NEVER digits-only**), emits the **OPTION-B STRUCTURE-PRESERVING**
+     canonical (per-segment zero-padded, joined by the county's `canonical_separator`): Alameda →
+     `057-2046-001-00`, `48A-7075-015-00`. Validates the county's REGISTERED `pattern` from `APN_FORMATS`
+     (Alameda `^[0-9A-Z]{3}-[0-9A-Z]{4}-[0-9A-Z]{3,}-[0-9A-Z]{2,}$`; parses the APN STRING, not the
+     NULL-prone component columns). **Generality guard:** county #2 = a registry row, not code.
+   - **🟢 PARCEL-IDENTITY MVP WRITTEN 2026-06-16 (ADR-003, commit `a94b8e6`):** `parcels` now carries
+     **`apn_raw`** (source-faithful, NEVER mutated) + **`apn_normalized`** (the B canonical, enforced by a
+     county-scoped trigger) + `assessing_county`. **`parcel_lineage`** records prior→child events with
+     `status` candidate/confirmed (the 25 Phase-2 re-points are now `apn_renumber` CANDIDATES, NOT facts —
+     lineage stays candidate until confirmed vs a recorded county map). APN ≠ identity; lineage from maps,
+     not string patterns. ADR-003: `docs/audit/2026-06-16_ADR-003_parcel_identity_model.md`; grow MVP→TARGET
+     additively (`schema/parcel_apn_lineage_schema_TARGET.sql`). proj178 Acheson held (`apn_normalized=NULL`).
    - **THE matcher = the 3-layer cross-walk (all three required, not strip-non-digits):**
      **(a)** assessor hyphen-APN → 12-char segment-pad `book(3)+page(4)+block(3)+sub(2)`
      (`57-2046-1`→`057204600100`); **(b)** v2's OWN apn storage is INCONSISTENT

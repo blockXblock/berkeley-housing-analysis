@@ -48,25 +48,28 @@ CREATE INDEX IF NOT EXISTS idx_parcels_apn_norm_lookup
 -- ENFORCEMENT (the teeth): reject anything not matching the ASSESSING COUNTY's
 -- REGISTERED apn_normalized pattern.
 -- *** THIS IS ALAMEDA'S REGISTERED PATTERN, NOT A UNIVERSAL CANONICAL-APN RULE ***
--- Alameda's MEASURED format = UPPERCASE ALPHANUMERIC, 12 chars (book3-page4-parcel3-sub2).
--- It is ALPHANUMERIC, not digits-only: 25 of 30,007 real Alameda APNs carry a book letter
--- (48A/48H) — a digits-only rule would WRONGLY reject real parcels. (APNs are alphanumeric
--- in the general CA case; letter suffixes on subdivided/condo/amended parcels.) The pattern
--- ^[0-9A-Z]{12,14}$ is registered in housing_rules.APN_FORMATS['Alameda'].pattern + the
--- TARGET's jurisdictions.apn_format (which carries char_class + structure, not just widths).
--- 12 = canonical; +2 = future deeper-sub margin. When county #2 arrives (e.g. SF Block-Lot,
--- possibly different char-class/length), ITS pattern is a registry row + its own trigger
--- predicate — DERIVED FROM ITS format, never copied from Alameda. apn_raw is unconstrained.
+-- Alameda's MEASURED canonical = Option B (STRUCTURE-PRESERVING): book3-page4-parcel3-sub2
+-- joined by "-", UPPERCASE ALPHANUMERIC (e.g. 057-2046-001-00, 48A-7075-015-00). Registered as
+-- ^[0-9A-Z]{3}-[0-9A-Z]{4}-[0-9A-Z]{3,}-[0-9A-Z]{2,}$ in housing_rules.APN_FORMATS['Alameda'] +
+-- the TARGET jurisdictions.apn_format. ALPHANUMERIC not digits-only (25/30,007 carry a book
+-- letter 48A/48H); STRUCTURE-PRESERVING not fixed-concat (keeps segment boundaries -> robust to
+-- variable-width / different-structure counties; Option A's concat overflowed + lost boundaries).
+-- SQLite GLOB can't express {3,}, so we validate the FIXED book3-page4- prefix + char-class
+-- (alnum + the one canonical hyphen) + length 15-17 (canonical 15 = 3-1-4-1-3-1-2; +2 future-sub
+-- margin), which admits variable parcel/sub and rejects A-concat/raw/lowercase. When county #2
+-- arrives, ITS predicate is DERIVED FROM ITS registered format, never copied from Alameda.
+-- apn_raw is intentionally unconstrained (source-faithful).
 CREATE TRIGGER IF NOT EXISTS trg_parcels_apn_normalized_canonical_ins
 BEFORE INSERT ON parcels
 FOR EACH ROW
 WHEN NEW.apn_normalized IS NOT NULL
-     AND NEW.assessing_county = 'Alameda'              -- Alameda's registered pattern below
-     AND (NEW.apn_normalized GLOB '*[^0-9A-Z]*'        -- out of Alameda char-class (uppercase alnum) -> reject
-          OR length(NEW.apn_normalized) < 12           -- Alameda canonical = 12 (registered)
-          OR length(NEW.apn_normalized) > 14)          -- +2 future-sub margin
+     AND NEW.assessing_county = 'Alameda'              -- Alameda's registered B pattern below
+     AND NOT (
+         NEW.apn_normalized GLOB '[0-9A-Z][0-9A-Z][0-9A-Z]-[0-9A-Z][0-9A-Z][0-9A-Z][0-9A-Z]-*-*'  -- book3-page4-...-...
+         AND NEW.apn_normalized NOT GLOB '*[^0-9A-Z-]*'         -- only uppercase alnum + the canonical hyphen
+         AND length(NEW.apn_normalized) BETWEEN 15 AND 17)      -- 3-4-3-2 = 15 (+2 future-sub margin)
 BEGIN
-    SELECT RAISE(ABORT, 'apn_normalized must match Alameda registered pattern ^[0-9A-Z]{12,14}$ (uppercase alphanumeric)');
+    SELECT RAISE(ABORT, 'apn_normalized must match Alameda registered pattern book3-page4-parcel3-sub2 hyphenated (e.g. 057-2046-001-00)');
 END;
 
 CREATE TRIGGER IF NOT EXISTS trg_parcels_apn_normalized_canonical_upd
@@ -74,11 +77,12 @@ BEFORE UPDATE OF apn_normalized ON parcels
 FOR EACH ROW
 WHEN NEW.apn_normalized IS NOT NULL
      AND NEW.assessing_county = 'Alameda'
-     AND (NEW.apn_normalized GLOB '*[^0-9A-Z]*'
-          OR length(NEW.apn_normalized) < 12
-          OR length(NEW.apn_normalized) > 14)
+     AND NOT (
+         NEW.apn_normalized GLOB '[0-9A-Z][0-9A-Z][0-9A-Z]-[0-9A-Z][0-9A-Z][0-9A-Z][0-9A-Z]-*-*'
+         AND NEW.apn_normalized NOT GLOB '*[^0-9A-Z-]*'
+         AND length(NEW.apn_normalized) BETWEEN 15 AND 17)
 BEGIN
-    SELECT RAISE(ABORT, 'apn_normalized must match Alameda registered pattern ^[0-9A-Z]{12,14}$ (uppercase alphanumeric)');
+    SELECT RAISE(ABORT, 'apn_normalized must match Alameda registered pattern book3-page4-parcel3-sub2 hyphenated (e.g. 057-2046-001-00)');
 END;
 
 -- ---------------------------------------------------------------------------

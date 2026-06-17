@@ -45,9 +45,12 @@ CREATE TABLE IF NOT EXISTS jurisdictions (
     -- BOE: numeric OR alphanumeric; letter suffixes on subdivided/condo/amended parcels),
     -- separators, canonical length, and the validation PATTERN. NOT just segment widths.
     --   Alameda = {"structure":"book-page-parcel-sub","segment_widths":[3,4,3,2],
-    --              "char_class":"alphanumeric","separators":["-"," "],"total_length":12,
-    --              "pattern":"^[0-9A-Z]{12,14}$"}   (25/30007 carry a book letter, e.g. 48A/48H)
-    --   SF (future) = {"structure":"block-lot", ...}  -- different structure AND char-class
+    --              "char_class":"alphanumeric","input_separators":["-"," "],"canonical_separator":"-",
+    --              "total_length":12,"pattern":"^[0-9A-Z]{3}-[0-9A-Z]{4}-[0-9A-Z]{3,}-[0-9A-Z]{2,}$"}
+    --     canonical is STRUCTURE-PRESERVING (Option B: 057-2046-001-00), NOT a fixed-width concat —
+    --     keeps segment boundaries so variable-width / alphanumeric / different-structure counties
+    --     survive. (25/30007 Alameda APNs carry a book letter, e.g. 48A/48H.)
+    --   SF (future) = {"structure":"block-lot","canonical_separator":"-", ...}  -- different structure
     apn_format          TEXT,
     notes               TEXT,
     created_at          TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,

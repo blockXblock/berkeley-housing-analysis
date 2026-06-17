@@ -32,16 +32,17 @@ APN_FORMATS = {
         'structure': 'book-page-parcel-sub',
         'segment_widths': [3, 4, 3, 2],          # book, page, parcel, sub
         'char_class': 'alphanumeric',            # book may carry a letter (48A/48H); rest numeric
-        'separators': ['-', ' '],
-        'total_length': 12,
-        # registered validation pattern: uppercase alphanumeric, canonical 12 + up to 2 future-sub.
-        'pattern': r'^[0-9A-Z]{12,14}$',
-        # GLOB form of the "any out-of-class character" reject, for the SQLite trigger:
-        'reject_glob': '*[^0-9A-Z]*',
-        'note': 'MEASURED from 30,007 real Alameda APNs: 29,982 all-numeric 12-digit + 25 with a '
-                'book LETTER suffix (48A/48H). Alphanumeric, 12 chars — NOT digits-only, NOT universal.',
+        'input_separators': ['-', ' '],          # accepted on the way in (raw is chaotic)
+        'canonical_separator': '-',              # the ONE separator the canonical form uses (Option B)
+        'total_length': 12,                      # digit count (canonical adds 3 separators -> 15 chars)
+        # registered validation pattern (Option B — STRUCTURE-PRESERVING): one canonical hyphen,
+        # segment widths kept, uppercase alphanumeric, variable parcel/sub for deeper splits.
+        'pattern': r'^[0-9A-Z]{3}-[0-9A-Z]{4}-[0-9A-Z]{3,}-[0-9A-Z]{2,}$',
+        'note': 'MEASURED from 30,007 real Alameda APNs: 29,982 all-numeric + 25 with a book LETTER '
+                '(48A/48H). Canonical = book3-page4-parcel3-sub2 joined by "-" (structure-preserving, '
+                'Option B). NOT digits-only, NOT a fixed-width concat, NOT universal.',
     },
-    # county #2 (e.g. 'San Francisco': Block-Lot, possibly alphanumeric) registers its scheme here.
+    # county #2 (e.g. 'San Francisco': Block-Lot) registers its OWN separator/widths/pattern here.
 }
 
 
@@ -63,12 +64,14 @@ def registered_pattern(county):
 
 
 def to_canonical_apn(apn, county='Alameda'):
-    """Any APN form -> the county's canonical key (alphanumeric, upper-cased), or None.
+    """Any APN form -> the county's canonical key (Option B: structure-preserving), or None.
 
-    For Alameda (book3 page4 parcel3 sub2 = 12 chars, book alphanumeric): handles
-    hyphenated (55-1895-41, 48A-7075-15, 057-2046-008-05, 57-2046-1), 12-char
-    (057204600100), book+spaced-rest (057 204600100), and digit-only legacies. Returns
-    None for empty / multi-APN / out-of-registered-pattern.
+    Folds the chaotic raw forms (hyphen/space/none, mixed widths, case) to ONE canonical
+    form: per-segment zero-padded to the registered widths, joined by the county's canonical
+    separator, upper-cased. For Alameda: book3-page4-parcel3-sub2 with "-".
+      55-1895-41 -> 055-1895-041-00 ; 057 204600100 -> 057-2046-001-00 ;
+      57-2046-1 -> 057-2046-001-00 ; 48A-7075-15 -> 48A-7075-015-00.
+    Returns None for empty / multi-APN / out-of-registered-pattern.
     """
     fmt = county_format(county)
     if apn is None:
@@ -78,24 +81,26 @@ def to_canonical_apn(apn, county='Alameda'):
         return None
     w = fmt['segment_widths']
     total = fmt['total_length']
+    sep = fmt['canonical_separator']
     parts = re.split(r'[\s\-]+', s)
     if len(parts) >= 3:
         sub = parts[3] if len(parts) >= 4 else ''
-        c = parts[0].zfill(w[0]) + parts[1].zfill(w[1]) + parts[2].zfill(w[2]) + sub.zfill(w[3])
+        segs = [parts[0].zfill(w[0]), parts[1].zfill(w[1]), parts[2].zfill(w[2]), sub.zfill(w[3])]
     elif len(parts) == 2:                         # book + concatenated rest ("057 204600100")
-        c = parts[0].zfill(w[0]) + parts[1].zfill(total - w[0])
+        rest = parts[1].zfill(total - w[0])       # split the rest by the registered widths
+        segs = [parts[0].zfill(w[0]), rest[:w[1]], rest[w[1]:w[1] + w[2]], rest[w[1] + w[2]:]]
     else:                                         # single token (only meaningful for all-numeric APNs)
         d = ''.join(ch for ch in s if ch.isdigit())
         if not s.isdigit() or not d:
             return None
-        if len(d) == total:
-            c = d
-        elif len(d) == total - 1:                 # legacy: missing the sub leading zero
-            c = d[:total - w[3]] + d[total - w[3]:].zfill(w[3])
+        if len(d) == total - 1:                   # legacy: missing the sub leading zero
+            d = d[:total - w[3]] + d[total - w[3]:].zfill(w[3])
         elif len(d) == total - 4:                 # legacy: book2 page4 parcel2 (no sub)
-            c = d[:2].zfill(w[0]) + d[2:2 + w[1]] + d[2 + w[1]:].zfill(w[2]) + '0' * w[3]
-        else:
+            d = d[:2].zfill(w[0]) + d[2:2 + w[1]] + d[2 + w[1]:].zfill(w[2]) + '0' * w[3]
+        if len(d) != total:
             return None
+        segs = [d[:w[0]], d[w[0]:w[0] + w[1]], d[w[0] + w[1]:w[0] + w[1] + w[2]], d[w[0] + w[1] + w[2]:]]
+    c = sep.join(segs)
     return c if re.fullmatch(fmt['pattern'], c) else None
 
 

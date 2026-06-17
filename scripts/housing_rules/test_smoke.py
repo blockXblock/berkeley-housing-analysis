@@ -111,23 +111,24 @@ def main() -> int:
 def _check_to_canonical_apn():
     from scripts.housing_rules.apn import (to_canonical_apn, is_canonical_apn,
                                            canonical_length, registered_pattern)
-    cases = {  # the bitten variants + an ALPHANUMERIC Alameda APN (book 48A) -> canonical
-        "55-1895-41": "055189504100", "057204600100": "057204600100",
-        "055-1895-018-05": "055189501805", "057 204600100": "057204600100",
-        "57-2046-1": "057204600100", "05518220133": "055182201303",
-        "57203217": "057203201700", "052 143301000": "052143301000",
-        "48A-7075-15": "48A707501500", "48h-7680-1-2": "48H768000102",  # alphanumeric + case-fold
+    cases = {  # the bitten variants -> the Option-B structure-preserving canonical form
+        "55-1895-41": "055-1895-041-00", "057204600100": "057-2046-001-00",
+        "055-1895-018-05": "055-1895-018-05", "057 204600100": "057-2046-001-00",
+        "57-2046-1": "057-2046-001-00", "05518220133": "055-1822-013-03",
+        "57203217": "057-2032-017-00", "052 143301000": "052-1433-010-00",
+        "48A-7075-15": "48A-7075-015-00", "48h-7680-1-2": "48H-7680-001-02",  # alphanumeric + case-fold
     }
     for inp, exp in cases.items():
         got = to_canonical_apn(inp, "Alameda")
         assert got == exp, f"{inp} -> {got} != {exp}"
-        assert len(got) == 12, f"Alameda canonical must be 12, got {len(got)} for {inp}"
-    assert canonical_length("Alameda") == 12                       # Alameda's REGISTERED length
-    assert registered_pattern("Alameda") == r'^[0-9A-Z]{12,14}$'   # alphanumeric, NOT digits-only
+        assert got.count('-') == 3 and len(got.replace('-', '')) == 12, f"B form malformed for {inp}: {got}"
+    assert canonical_length("Alameda") == 12                       # registered digit count
+    assert registered_pattern("Alameda") == r'^[0-9A-Z]{3}-[0-9A-Z]{4}-[0-9A-Z]{3,}-[0-9A-Z]{2,}$'  # B, structure-preserving
     assert to_canonical_apn("057-2046-008-03, 057-2046-008-02", "Alameda") is None  # multi-APN
     assert to_canonical_apn(None, "Alameda") is None and to_canonical_apn("", "Alameda") is None
-    assert is_canonical_apn("057204600100", "Alameda") and is_canonical_apn("48A707501500", "Alameda")
-    assert not is_canonical_apn("57-2046-1", "Alameda")            # hyphenated raw -> not canonical
+    assert is_canonical_apn("057-2046-001-00", "Alameda") and is_canonical_apn("48A-7075-015-00", "Alameda")
+    assert not is_canonical_apn("057204600100", "Alameda")         # A-form concat -> NOT canonical under B
+    assert not is_canonical_apn("57-2046-1", "Alameda")            # raw -> not canonical
     # generality guard: an unregistered county raises (NOT a silent default-to-12)
     try:
         to_canonical_apn("57-2046-1", "Imaginary")

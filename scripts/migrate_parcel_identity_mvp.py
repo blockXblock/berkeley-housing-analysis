@@ -120,16 +120,17 @@ def trigger_tests(con):
         except sqlite3.IntegrityError as e:
             return f'REJECTED ({str(e)[:55]})'
 
-    r = {
-        'alphanumeric_48A_accepted': ins('48A707501500'),     # real Alameda letter-APN -> ACCEPT
-        'twelve_digit_subparcel_accepted': ins('057204600804'),  # 4-segment sub -> ACCEPT
-        'hyphenated_rejected': ins('57-2046-1'),              # separators -> REJECT
-        'lowercase_rejected': ins('48a707501500'),            # lowercase -> REJECT (out of char-class)
-        'short_10_rejected': ins('0592325038'),               # length<12 -> REJECT
+    r = {  # Option-B forms: structure-preserving hyphenated canonical
+        'alphanumeric_48A_accepted': ins('48A-7075-015-00'),  # real Alameda letter-APN (B) -> ACCEPT
+        'subparcel_accepted': ins('057-2046-008-04'),         # 4-segment sub (B) -> ACCEPT
+        'A_form_concat_rejected': ins('057204600100'),        # Option-A concat (no hyphens) -> REJECT
+        'raw_hyphenated_rejected': ins('57-2046-1'),          # raw (wrong book/page widths) -> REJECT
+        'lowercase_rejected': ins('48a-7075-015-00'),         # lowercase -> REJECT (out of char-class)
+        'short_rejected': ins('059-2325-038'),                # missing sub segment / too short -> REJECT
     }
     # authority-scoped uniqueness: same normalized + same county -> 2nd rejected
-    ins('088888888888', 'Alameda')
-    r['dup_same_county_rejected'] = ins('088888888888', 'Alameda')
+    ins('088-8888-888-00', 'Alameda')
+    r['dup_same_county_rejected'] = ins('088-8888-888-00', 'Alameda')
     cur.execute("ROLLBACK TO t"); cur.execute("RELEASE t")
     return r
 
@@ -154,9 +155,12 @@ def run(mode):
         'mode': mode,
         'backfill': {'rows': n,
                      'apn_raw_preserved_eq_apn': q("SELECT COUNT(*) FROM parcels WHERE apn_raw IS apn"),
-                     'apn_normalized_matches_pattern': q("SELECT COUNT(*) FROM parcels WHERE apn_normalized GLOB '[0-9A-Z]*' AND length(apn_normalized) BETWEEN 12 AND 14"),
+                     'apn_normalized_matches_B_pattern': q(
+                         "SELECT COUNT(*) FROM parcels WHERE "
+                         "apn_normalized GLOB '[0-9A-Z][0-9A-Z][0-9A-Z]-[0-9A-Z][0-9A-Z][0-9A-Z][0-9A-Z]-*-*' "
+                         "AND apn_normalized NOT GLOB '*[^0-9A-Z-]*' AND length(apn_normalized) BETWEEN 15 AND 17"),
                      'apn_normalized_null': q("SELECT COUNT(*) FROM parcels WHERE apn_normalized IS NULL"),
-                     'alphanumeric_letter_apns': q("SELECT COUNT(*) FROM parcels WHERE apn_normalized GLOB '*[A-Z]*'")},
+                     'sample_normalized': [r[0] for r in con.execute("SELECT apn_normalized FROM parcels WHERE apn_normalized IS NOT NULL ORDER BY id LIMIT 3")]},
         'lineage_bootstrapped': q("SELECT COUNT(*) FROM parcel_lineage"),
         'lineage_by_type_status': dict(con.execute("SELECT event_type||'/'||status, COUNT(*) FROM parcel_lineage GROUP BY 1").fetchall()),
         'trigger_tests': trg,

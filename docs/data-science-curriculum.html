@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Science Curriculum — Berkeley Housing Pipeline</title>
+    <style>
+        p { max-width: 80ch; }
+        :root {
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent: #3182ce;
+            --light: #ebf8ff;
+            --text: #2d3748;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: #f7fafc;
+        }
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .hero p { font-size: 1.25rem; opacity: 0.9; max-width: 640px; margin: 0 auto; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 1rem;
+            transition: background 0.2s;
+        }
+        .btn:hover { background: var(--secondary); }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+        .btn-outline:hover { background: var(--accent); color: white; }
+        .section { margin: 3rem 0; }
+        .section h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+        th { background: var(--light); color: var(--primary); }
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .caveat { display: block; margin-top: 0.35rem; color: #744210; font-size: 0.82rem; }
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        footer a { color: var(--light); }
+        @media (max-width: 600px) { .hero h1 { font-size: 1.75rem; } }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Data Science Curriculum</h1>
+        <p>Learn civic data science by answering one real question — <em>is the city building the homes it promised?</em> — from the city's own published data, one checkable step at a time.</p>
+    </div>
+
+    <div class="container">
+        <p style="margin: 1rem 0 1.5rem 0;">This is a hands-on course for a <strong>curious beginner or journalist — you don't need to know how to code to start</strong>. Every notebook runs free in <strong>Google Colab</strong> (nothing to install) or locally in Jupyter, and pulls in Berkeley's open data automatically. Start at the top of the on-ramp and work down; each step shows its work. <a href="index.html">&larr; Back to the main project page</a></p>
+
+        <div class="section">
+            <h2>Getting started (the on-ramp)</h2>
+            <p style="margin-bottom: 1rem;">Eight short notebooks that build the vocabulary from zero — what data, a notebook, a function, a table, a chart, the tools, an AI agent, and the rules an agent follows. Click any one to open it in Colab.</p>
+            <table>
+                <thead>
+                    <tr><th>Module</th><th>Notebook</th><th>What you'll learn</th><th>Run</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge" style="background:#e2e8f0;color:#1a365d;">JN0a</span></td>
+                        <td>Why municipal data</td>
+                        <td>Why "published" isn't the same as "checkable" — and why you can close that gap now.</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN0a_why_data.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge" style="background:#e2e8f0;color:#1a365d;">JN0b</span></td>
+                        <td>What a computational notebook is</td>
+                        <td>A document that runs — so every number carries its proof, and re-running is re-checking.</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN0b_notebook.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge" style="background:#e2e8f0;color:#1a365d;">JN0c</span></td>
+                        <td>What a function is</td>
+                        <td>One named rule, asked the exact same way thirty thousand times.</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN0c_function.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge" style="background:#e2e8f0;color:#1a365d;">JN0d</span></td>
+                        <td>What a pandas DataFrame is</td>
+                        <td>A table you query in code instead of scrolling by eye.</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN0d_dataframe.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge" style="background:#e2e8f0;color:#1a365d;">JN0e</span></td>
+                        <td>One set of numbers, many pictures</td>
+                        <td>A chart is an argument — the same data told several honest ways, including a 3D map.</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN0e_charts.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge" style="background:#e2e8f0;color:#1a365d;">JN0f</span></td>
+                        <td>The tools we use</td>
+                        <td>pandas, matplotlib, SQLite/SQL, and MapLibre — every one open-source and free.</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN0f_tools.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge" style="background:#e2e8f0;color:#1a365d;">JN0g</span></td>
+                        <td>Building with agents</td>
+                        <td>Direct an AI agent in plain English — and verify the answer before you trust it.</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN0g_agents.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge" style="background:#e2e8f0;color:#1a365d;">JN0h</span></td>
+                        <td>The agent instruction file</td>
+                        <td>The standing rules an agent reads first, so it follows your project — not generic defaults.</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN0h_instruction_file.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>The main course</h2>
+            <p style="margin-bottom: 1rem;">Seven notebooks that rebuild Berkeley's housing record from raw permits all the way to a scored Annual Progress Report — checked against the city's own submission to the state.</p>
+            <table>
+                <thead>
+                    <tr><th>Module</th><th>Notebook</th><th>What you'll learn</th><th>Run</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge" style="background:#e2e8f0;color:#1a365d;">JN1</span></td>
+                        <td>Getting the data in the door</td>
+                        <td>Turn the city's messy yearly spreadsheets into one clean, verified table of permits.</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN1_ingest.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge" style="background:#e2e8f0;color:#1a365d;">JN2</span></td>
+                        <td>The address key</td>
+                        <td>Match the same place across sources with a relation, not fragile string-equality.</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN2_address_key.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge" style="background:#e2e8f0;color:#1a365d;">JN3</span></td>
+                        <td>Build the spine + units</td>
+                        <td>Group permits into buildings and count <em>new</em> homes with the corrected unit signal.</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN3_spine_units.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge" style="background:#e2e8f0;color:#1a365d;">JN4</span></td>
+                        <td>Dated milestones + completion stage</td>
+                        <td>Derive each building's stage from dated events — never from a status string.</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN4_events_stage.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge" style="background:#e2e8f0;color:#1a365d;">JN5</span></td>
+                        <td>Year &amp; cycle tagging</td>
+                        <td>One completion date answers three different questions — learn not to conflate them.</td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN5_year_cycle.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge" style="background:#e2e8f0;color:#1a365d;">JN6a</span></td>
+                        <td>Capstone — interrogate the oracle + generate your APR</td>
+                        <td>Verify the city's official report against ground truth, then render your own HCD-form APR.
+                            <span class="caveat">Note: running fully in Colab works; the final "download your APR" step is still being finished.</span></td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN6a_apr_oracle.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge" style="background:#e2e8f0;color:#1a365d;">JN6b</span></td>
+                        <td>Capstone — join, decompose, score</td>
+                        <td>Score your APR against the city's, account for every unit of difference, and rediscover the limitation you planted earlier.
+                            <span class="caveat">Note: running fully in Colab works; the final "download your APR" step is still being finished.</span></td>
+                        <td><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN6b_join_score.ipynb" target="_blank" class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin: 0;">Colab</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p><a href="index.html" class="btn btn-outline">&larr; Back to the main project page</a></p>
+    </div>
+
+    <footer>
+        <p>Berkeley Housing Pipeline — an independent reconstruction from primary sources. <a href="https://github.com/blockXblock/berkeley-housing-analysis" target="_blank">View on GitHub</a></p>
+    </footer>
+</body>
+</html>

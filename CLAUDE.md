@@ -207,7 +207,7 @@ compatibility view is **`v_projects_flat`** (what `generate_apr_v2.py` and
 - **Verify artifacts, never trust a summary** (CC's or chat-Claude's) — count rows, check dates, `ls` the actual path before asserting it exists. An empty grep ≠ absence; a `.py` check misses a package dir.
 - **Snapshot → read-only preview → STOP-for-John → guarded write** (per-permit `rowcount==1`, verify-or-rollback) **→ fresh-connection fingerprint.**
 - **John owns ALL irreversible ops** (push, deploy, Cloudflare purge). Never push/commit without explicit instruction; `dev` only.
-- **`/tmp` first** for uncertain work; validate logic as a script before packaging as a notebook.
+- **`scratch/` first** for uncertain work (a gitignored, reboot-surviving dir at repo root — use dated subdirs like `scratch/2026-06-19/`; do NOT use `/tmp`, which macOS purges on restart — that cost us a session's builders 2026-06-19); validate logic as a script before packaging as a notebook.
 
 ## State-update discipline (the "keeps updating" mechanism — no always-on agent)
 - **At the END of every gated step that changes state, UPDATE `PROGRESS.md`** (current state + next steps) **before reporting to John.** Not optional — it is part of completing a step.

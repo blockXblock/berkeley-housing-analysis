@@ -89,6 +89,13 @@ def to_canonical_apn(apn, county='Alameda'):
     elif len(parts) == 2:                         # book + concatenated rest ("057 204600100")
         rest = parts[1].zfill(total - w[0])       # split the rest by the registered widths
         segs = [parts[0].zfill(w[0]), rest[:w[1]], rest[w[1]:w[1] + w[2]], rest[w[1] + w[2]:]]
+    elif re.fullmatch(r'\d+[A-Z]\d{9}', s):       # single-token ALPHANUMERIC book-letter concat ("048H769000300")
+        # mirrors the numeric concat above but the book carries a letter (48A/48H class).
+        # bn drops its padding zero so book is the 3-char registered form (048->48, +H -> "48H").
+        m = re.fullmatch(r'(\d+)([A-Z])(\d{9})', s)
+        bn, letter, rest = m.groups()
+        book = bn.lstrip('0') + letter
+        segs = [book, rest[:w[1]], rest[w[1]:w[1] + w[2]], rest[w[1] + w[2]:]]
     else:                                         # single token (only meaningful for all-numeric APNs)
         d = ''.join(ch for ch in s if ch.isdigit())
         if not s.isdigit() or not d:
@@ -102,6 +109,28 @@ def to_canonical_apn(apn, county='Alameda'):
         segs = [d[:w[0]], d[w[0]:w[0] + w[1]], d[w[0] + w[1]:w[0] + w[1] + w[2]], d[w[0] + w[1] + w[2]:]]
     c = sep.join(segs)
     return c if re.fullmatch(fmt['pattern'], c) else None
+
+
+def canon_with_reason(apn, county='Alameda'):
+    """Like to_canonical_apn but returns (canonical_or_None, reason).
+
+    reason is None on success, else a short string explaining the refusal — so callers can
+    LOG every rejected APN (raw value + reason) instead of dropping it silently. Reuses
+    to_canonical_apn as the single source of folding truth; only classifies the None cases.
+    """
+    c = to_canonical_apn(apn, county)
+    if c is not None:
+        return c, None
+    if apn is None or not str(apn).strip():
+        return None, 'empty'
+    s = str(apn).strip()
+    if ',' in s:
+        return None, 'multi-APN cell (comma)'
+    digits = ''.join(ch for ch in s if ch.isdigit())
+    total = canonical_length(county)
+    if len(digits) != total:
+        return None, f'wrong digit length ({len(digits)}; need {total})'
+    return None, 'out-of-registered-pattern'
 
 
 def is_canonical_apn(apn, county='Alameda'):

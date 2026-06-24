@@ -131,3 +131,19 @@ The earlier plan was: overwrite every stored APN to a single 12-digit form + a r
   Acheson split becomes candidate lineage + multiple `project_parcels`. (No lossy first-APN
   truncation needed once we stop forcing one canonical APN per row.)
 - Where does confirmed-lineage evidence come from (which county map/record source to harvest)?
+
+## 10. Reconciliation — book-letter (48A/48H) compliance fix (2026-06-24)
+This ADR declared the alphanumeric book-letter class (48A/48H) in scope, but the
+implementation was **doc-vs-code non-compliant**: `to_canonical_apn`'s single-token branch
+stripped non-digits then required `isdigit()`, so the *concatenated* raw form the permit feed
+actually uses (`048H769000300`) returned `None`. Found in the Phase-1a signal forensic.
+- **Scope:** 8 distinct book-letter APNs / 28 permit rows. **All 28 are alterations**
+  (net_units=0), correctly absent from the v3 spine — so this was a **LATENT** defect with
+  **0 current spine impact**, NOT a migration/fidelity data-loss. It would bite a *future*
+  New-construction book-letter hill parcel, and any consumer canonicalizing assessor APNs.
+- **Fix (code-only):** added a single-token alphanumeric branch (mirrors the numeric concat;
+  book → 3-char registered form, e.g. `048H…`→`48H-7690-003-00`), validated against the
+  registered pattern. Delta verified: 8 newly-accepted, 0 others changed, 6 malformed still
+  rejected (now via `canon_with_reason`, logged not silent), idempotent (`canon(canon(x))==canon(x)`).
+- **No v3 write:** verified 0 of the 8 addresses in `s1_projects`/`s0_key_index`; no backfill applies.
+- Status: **doc-vs-code gap CLOSED.** Benefits all `to_canonical_apn` consumers.

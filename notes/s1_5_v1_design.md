@@ -3,21 +3,21 @@
 **Status:** design for review → then a gated build. Chat-Claude produced this; CC builds from it
 under the standing gating discipline. **Verify every count against the LIVE v3 before relying on it.**
 
-**One-line summary:** rework the building-identity discriminator from canon-APN to **master-permit/building-label** (the live `split_multibuilding` is the **superseded, unwired APN rule** — reworked, not merely enabled), producing exactly **1** split on the current spine — 2352 Shattuck/Logan Park — widen `_RB_INCL` by one line, re-key the **three**
+**One-line summary:** rework the building-identity discriminator from canon-APN to **master-permit/building-label** (the live `split_multibuilding` is the **superseded, unwired APN rule** — reworked, not merely enabled), splitting/grouping the **8 validated granular cases** on the current spine — 7 cottage-courts by master-grouping (1030 Grayson, 1222 66th, 1444 5th, 1446 5th, 2129 9th, 2212 10th, 908 Cedar) + 2352 Shattuck/Logan Park by label-consolidation (expected spine **+~12** buildings — measured in the Stage-1 preview, not assumed) — widen `_RB_INCL` by one line, re-key the **three**
 downstream sites that re-derive identity from the address-tuple (S2, S4, S6) so the split doesn't
 re-collapse, re-run the pipeline S1→S9, and surface everything the rule does **not** resolve into
 named held-queues. **This is the largest write in the project: it re-executes the gated DAG from S1
 onward with new building grain.** Treat accordingly — stage-by-stage gates, each preview showing only
 the localized delta.
 
-**Anchor (the settled decision this spec implements):** a building = its **New master construction permit (+ its CO)**; address and APN are M:N attributes, never the key; **routing is by master-permit / building-label, not APN** (`notes/HANDOFF_2026-06-18.md` L40; `scratch/2026-06-25/building_identity_decision_restated.md`). The live `split_multibuilding` is the **superseded, APN-based, unwired** rule — S1.5 **reworks its discriminator** to permit-label; it does **not** merely wire the existing rule. The discriminator is **two steps on disjoint subsets**: (1) **group by New master permit** — for the 8 cottage-court cases (1444/1446 5th, etc.) one master = one building and grouping alone resolves them, with **no label to parse**; (2) **consolidate phase-masters by building-label** — for the 6 phased cases (2352, 1173, 1310, 1516, 1811, 812) one building spans multiple masters (e.g. 2352 South = `B2019-05575` + `B2021-03302`), and the **label/phase consolidator is load-bearing**. The builder must **group-by-master first, then consolidate phase-masters by label** — never assume every case carries a parseable label. Step (2) is **gated on a label-parse reliability check** (precondition: confirm "North/South Building", "Phase I/II" parse reliably from `WorkDescription` across the 6 phased + 8 clean cases).
+**Anchor (the settled decision this spec implements):** a building = its **New master construction permit (+ its CO)**; address and APN are M:N attributes, never the key; **routing is by master-permit / building-label, not APN** (`notes/HANDOFF_2026-06-18.md` L40; `scratch/2026-06-25/building_identity_decision_restated.md`). The live `split_multibuilding` is the **superseded, APN-based, unwired** rule — S1.5 **reworks its discriminator** to permit-label; it does **not** merely wire the existing rule. The discriminator's **backbone is master-grouping** (group by New master permit), validated on the **8 cases this stage resolves**: **7 MASTER-CLEAN cottage-courts** (1 master = 1 building, **no label needed**: 1030 Grayson, 1222 66th, 1444/1446 5th, 2129 9th, 2212 10th, 908 Cedar) + **1 LABEL-CLEAN case — 2352 Shattuck** — where one building spans multiple phase-masters (South = `B2019-05575` + `B2021-03302`) and the **label/phase consolidator is load-bearing** to merge them. **Label-consolidation applies to exactly 1 case (2352).** The 14-case reliability check (`scratch/2026-06-25/label_reliability_14_granular.md`) found the other 5 once-assumed-phased cases (1173, 1310, 1516, 1811, 812) carry **no consolidating labels** and are **AMBIGUOUS — held, not resolved by this stage**; their blocker is **phantom-master prose-exclusion** + missing/extra-master count reconciliation (a separate `_is_realbuild` prose-accuracy job, §5). The builder must **group-by-master first**, apply the label consolidator **only where labels parse** (2352), and **never assume every case carries a parseable label**.
 
 ---
 
 ## 1. SCOPE — what v1 does and does NOT do
 
 ### v1 DOES
-1. **Rework the split discriminator to permit-label, then split.** The live `split_multibuilding` is the superseded APN rule (unwired); rework its discriminator to **master-permit/building-label** so 2352 Shattuck splits into North (135u, master `B2019-05574`) + South (69u, master `B2019-05575`/`B2021-03302`). Spine **1385 → 1386** (+1 building). (APN is carried as an attribute, not the routing key.)
+1. **Rework the split discriminator to permit-label, then split/group the 8 validated granular cases.** The live `split_multibuilding` is the superseded APN rule (unwired); rework its discriminator to **master-permit/building-label**. **7 cottage-courts resolve by master-grouping alone** (1 master = 1 building): 1030 Grayson, 1222 66th, 1444 5th, 1446 5th, 2129 9th, 2212 10th, 908 Cedar. **2352 Shattuck resolves by label-consolidation** into North (135u, master `B2019-05574`) + South (69u, masters `B2019-05575`/`B2021-03302`). Spine delta is **measured in the Stage-1 preview** (expected **~+12**: the 8 collapsed cases → 20 — confirm, do not assume). (APN is carried as an attribute, not the routing key.) *(All 8 validated read-only against `s9_city_building_breakout`, 2026-06-25 — `scratch/2026-06-25/label_reliability_14_granular.md` + the two Stage-1 previews.)*
 2. **Widen `_RB_INCL`** (one line) to include the housing nouns the include-list currently lacks
    (`duplex|triplex|fourplex|town ?house|town ?home|cottage|sfd|single ?family|accessory dwelling`).
 3. **Re-key the 3 downstream sites** (S2 chokepoint, S4 + S6 bucket-joins) from address-tuple to
@@ -26,17 +26,21 @@ the localized delta.
 5. **Create named held-queue tables** for everything the rule doesn't resolve (§5).
 
 ### v1 does NOT (each is named future work, §7)
-- **Does NOT split the 35 single-unit-per-building clusters** (out of the rule's ≥2-units-per-APN
-  scope — they need a *different* future rule, not this one).
+- **Does NOT resolve the 6 AMBIGUOUS granular cases** (0 Grizzly, 1173, 1310 Haskell, 1516 Carleton,
+  1811 63rd, 812 Page) — held pending phantom-master prose-exclusion + count reconciliation (§5).
+- **Does NOT split the single-unit clusters beyond the 7 validated cottage-courts** — the remaining
+  same-parcel single-unit developments stay out of scope (a different future rule, §7).
 - **Does NOT split 1173 Hearst** (a lineage lot-split + MAX-collapse; held, see §5).
 - **Does NOT relax `distinct_years`** (the conservative dual-axis test stays; no current case needs it).
 - **Does NOT build lineage-aware splitting** (the SB 9 / lot-split future work; §7).
 - **Does NOT fix the general MAX-vs-SUM collapse** beyond the one case the rule handles.
 
-**The honest scope statement:** *v1 resolves 1 of the 36 collapse developments (2352 Shattuck),
-proves the re-key machinery on that one validated case, and surfaces the other 35 + 1173 in named
-queues that say why each is held and what would resolve it. It is a minimal, safe first deployment
-of a pipeline-wide re-key — not the building-identity problem solved.*
+**The honest scope statement:** *v1 resolves 8 of the 14 city-granular collapse developments (the 7
+cottage-courts + 2352 Shattuck) — all validated read-only against `s9_city_building_breakout` on
+count, units, and year — proves the re-key machinery on those cases, and surfaces the remaining 6
+granular AMBIGUOUS cases (+ the single-unit clusters) in named queues that say why each is held and
+what would resolve it. It is a minimal, safe deployment of a pipeline-wide re-key — not the
+building-identity problem solved.*
 
 ---
 
@@ -95,58 +99,67 @@ of a pipeline-wide re-key — not the building-identity problem solved.*
 
 ## 3. `_RB_INCL` WIDENING — interaction with 1173 (verify in preview)
 
-The widening makes 1173 Hearst's parent duplexes pass `_is_realbuild`, giving 1173 **2 realbuild APNs**
-(013-00 @ 2u, 088-00 @ 2u) — so it becomes split-**eligible**. **But it must STILL NOT split**, because:
-- `distinct_units` = **False** (both 2u), and
-- `distinct_years` = **False** (013 CO-year {2023}; child 088 has no CO → year set not distinct).
+The widening adds the housing nouns `_is_realbuild` lacks (`duplex|triplex|fourplex|town ?house|cottage|
+sfd|single ?family|accessory dwelling`), so genuine New-construction masters described without
+"story"/"unit" prose are recognized — necessary for the 8 validated cases (e.g. 1173's "new duplex"
+masters and the cottage-court SFDs).
 
-→ **The preview gate MUST assert 1173 stays HELD (not split) after the widening.** This is the safety
-check on the widening. If 1173 ever flips to a split, STOP — the conservative test has been defeated.
+**1173 Hearst stays HELD — not resolved by this stage.** With the widening 1173 has **3 New duplex
+masters**, but they carry **no consolidating labels** and the count ≠ the city's **2** buildings → so
+master-grouping would **over-split** it (3 ≠ 2). Its blocker is **no-consolidating-labels + a
+phantom/missing master** (per the reliability check, `scratch/2026-06-25/label_reliability_14_granular.md`),
+**not** a same-units/same-year test. → **The preview gate MUST assert 1173 stays HELD** (recorded in
+`s1_5_ambiguous_review`; primary home `s1_5_lineage_review`); if it ever auto-splits, STOP.
 
-**Net effect of the widening:** split *count* stays **1** (only 2352). 1173 moves from "invisible to
-the rule (1 realbuild APN)" to "seen but held (2 realbuild APNs, blocked by the dual-axis test)" — it
-becomes the **first real member of the same-units/same-year blind-spot queue** (previously empty). That
-is the *correct, more honest* state, and it gives the future `distinct_years`/CO-sub-model work a
-concrete first test case.
+**Net effect of the widening:** this stage resolves the **8 validated cases** (7 cottage-courts + 2352);
+1173 and the other 5 ambiguous granular cases stay held (§5) pending the phantom-master prose-exclusion
++ count-reconciliation job (§7).
 
 ---
 
 ## 4. GATE CHECKPOINT SHIFTS (each `test_sN_gate.py` updated; verify deltas in preview)
 
-The split is localized to 2352 + the +1 building. Every other row should be **unchanged** — the gates
-exist to prove exactly that (any stage whose preview shows more than the 2352-localized delta is a bug).
+**Per-stage deltas for the 8-case write are MEASURED in the Stage-1 build preview, not asserted here**
+(expected spine **~+12** buildings — the 8 collapsed cases → 20 — **confirm in preview, do not assume**).
+Each `test_sN_gate.py` checkpoint is updated from the preview's measured delta, not from a number in this
+spec. The conservation principle holds: every building **outside the 8** must be unchanged — any stage
+whose preview shows more than the 8-case-localized delta is a bug (STOP).
 
-| stage | checkpoint (current) | expected after S1.5 | nature of change |
-|---|---|---|---|
-| S1 | `s1_projects` 1385 | **1386** | +1 building (2352 → North+South) |
-| S2 | `s2_events` 2236 | **2236** (re-distributed) | 2352's events split across 2 building_ids; **count likely stable, grouping changes** — verify |
-| S3 | `s3_stage` 1385 / completed 951 | **1386** / completed **952** | South building gets its own completed stage |
-| S4 | `s4_units` 1385 | **1386** | North 135 + South 69 as 2 rows (was 1 collapsed) |
-| S4 | `s4_unit_reconcile_resolved` 6 (incl. 2352 FLAG_S8) | **5 or re-typed** | 2352's `FLAG_S8` may resolve once split — verify its disposition |
-| S5 | `s5_affordability` 1406 | **1407** (+1 needs_acquisition) | South building's affordability row |
-| S6 | `s6_confidence` 5549 | **+fact rows** for the new building | per-fact confidence for South |
-| S7 | `s7_cycle` 2236 | **2236** (re-distributed) | North's CO → 2022, South's CO → 2023 (the bug fix); verify the year reassignment |
-| S8 | `s8_reconciliation` 90; `multi_building_development` 1 (2352) | **2352 finding resolves/re-types** | the held multi-building finding for 2352 is now *resolved by split* — update its disposition |
-| S9 | scorecard, breakout, caveats | **2352 line corrects**: 135@2022 + 69@2023 | the iterated scorecard (free; S9 re-reads building_id) |
-
-**The headline scorecard change:** 2352 moves from the collapsed `135@2023` Frankenstein to the correct
-`North 135@2022 + South 69@2023`. This shifts the **2022 and 2023** per-year deltas (recall the current
-scorecard's 2022 −149 / 2023 +129 swing is *the Logan-Park-class artifact* — this split is what corrects
-part of it). **The net +288 may move slightly**; whatever it becomes is the *more correct* number.
-Re-validate against `s9_city_building_breakout` (the answer key: city reports exactly North 135@2022 +
-South 69@2023 — our split should now MATCH it).
+**Headline (pending preview):** the 8 cases move from their collapsed Frankenstein rows to the correct
+per-building rows — for 2352, `135@2023` → `North 135@2022 + South 69@2023`. This shifts the per-year
+scorecard deltas (the 2022/2023 Logan-Park-class swing in particular); **the net may move** — whatever it
+becomes is the *more correct* number. Re-validate all 8 against `s9_city_building_breakout` (the answer key).
 
 ---
 
 ## 5. HELD QUEUES (named tables — surface, never silently drop)
 
-### `s1_5_single_unit_clusters` — the 35 out-of-scope cases
-- The 35 left-collapsed developments (cottage courts / same-parcel single-unit clusters: 1444/1446 5th,
-  the Haskells, 908 Cedar, 1516 Carleton, etc.).
-- **Why held:** each building is a *single* unit on its APN → fails the rule's ≥2-units-per-APN gate.
-  These are out of *this* rule's scope, not a conservative miss.
-- **What resolves them:** a future per-APN-single-dwelling split rule (§7). Until then, the development
-  stays collapsed and **flagged** (already in `s9_identity_caveat` as pending).
+### `s1_5_ambiguous_review` — the 6 AMBIGUOUS granular cases (held this stage)
+The 6 city-granular developments the permit-keyed discriminator does **not** resolve cleanly (reliability
+check 2026-06-25, `scratch/2026-06-25/label_reliability_14_granular.md`). Held pending a separate
+**`_is_realbuild` prose-accuracy job** (phantom-master exclusion) + count reconciliation — **NOT this
+stage**, and **never auto-split** until resolved. Per-case reason:
+- **0 Grizzly Peak** — phantom master: a *"Add storage loft area"* permit typed New 2u is not a building
+  (would over-count vs city 2); + anomalous "0" street number. → prose-exclusion.
+- **1173 Hearst** — 3 New duplex masters, **no consolidating labels**, ≠ city 2 (also the lineage case;
+  **primary home `s1_5_lineage_review`**). → needs labels/lineage, not prose-exclusion.
+- **1310 Haskell** — labels *"Building 1 of 3"* / *"3 of 3"* parse, but **Building 2 is missing** from the
+  New-masters → under-count (2 vs city 3). → find the missing master, not prose-exclusion.
+- **1516 Carleton** — middle master `B2020-01040` is a *"Revision … radiant heat"* mis-typed New (phantom);
+  Unit A/Unit C are clean but count is 3 vs city 2. → prose-exclusion.
+- **1811 63rd** — **no labels**; one master describes a duplex+SFD; master count/units (2 masters/3u) ≠
+  city 3. → needs labels + count reconciliation.
+- **812 Page** — **no building labels** (only addresses 812/806); master `B2016-02796` is *"Deferred MEPS"*
+  (phantom); 3 masters vs city 2. → prose-exclusion.
+- **Net:** prose-exclusion resolves ~3 (0 Grizzly, 1516, 812); the other 3 (1173, 1310, 1811) need
+  label/lineage/missing-master work. Recorded distinctly so the next job isn't mis-scoped as "just prose."
+
+### `s1_5_single_unit_clusters` — the remaining out-of-scope single-unit cases
+- The remaining left-collapsed same-parcel single-unit developments **beyond the 7 validated
+  cottage-courts** (which this stage now resolves by master-grouping). The Haskell cluster etc. remain.
+- **Why held:** out of *this* stage's validated scope (not a conservative miss).
+- **What resolves them:** extend the master-grouping discriminator / a future per-APN-single-dwelling rule
+  (§7). Until then, each stays collapsed and **flagged** (already in `s9_identity_caveat` as pending).
 
 ### `s1_5_lineage_review` — 1173 Hearst (one entry, one honest line)
 - **1173 Hearst = a building-identity case:** genuinely ~3 buildings / ~6 units, recorded as 2u, via
@@ -166,12 +179,13 @@ South 69@2023 — our split should now MATCH it).
 - **Constraint for the future lineage-aware rule:** it MUST drop defunct parent APNs (collapse
   parent→child lineage) before grouping, never peer-group them.
 
-### Note on the one split (honest mechanism)
-- **2352 Shattuck splits correctly, validated against the city's per-building figures** (North 135@2022
-  + South 69@2023, = `s9_city_building_breakout`). **NOTE:** the rule reached this via lineage-blind APN
-  peer-grouping that *coincidentally* matches the parent→child reality here. **This is NOT evidence the
-  rule handles lineage** — 1173 (held) shows the same blindness producing a wrong result. The correct
-  mechanism (lineage-aware splitting on confirmed lineage) is future work.
+### Note on 2352 (honest mechanism)
+- **2352 Shattuck splits correctly via label-consolidation** (North 135@2022 + South 69@2023, =
+  `s9_city_building_breakout`): the discriminator groups `B2019-05574` by its "North Building" label and
+  `B2019-05575`/`B2021-03302` by "South Building", **not** by APN — both North & South Phase-I sit on the
+  same parent APN `018-05`, so APN-grouping would mis-stamp North 2023 (the anti-APN proof,
+  `scratch/2026-06-25` Stage-1 case 2). **This does NOT make the rule lineage-aware:** 1173 (held) shows
+  the discriminator still cannot resolve a no-label lot-split. Lineage-aware splitting remains future work.
 
 ---
 
@@ -182,7 +196,7 @@ the downstream stages (idempotent DROP+rebuild reading the new spine), so S2→S
 
 ```
 snapshot_v3('<stage>')  (refuse-to-clobber)
-  → PREVIEW (read-only): show the delta vs current — EXPECT only the 2352-localized change + the +1 building
+  → PREVIEW (read-only): show the delta vs current — EXPECT only the 8-case-localized change (~+12 buildings, measured here — do not assume)
   → ENFORCED gate: assert no UNEXPECTED change (any stage showing more than the expected delta = STOP)
   → STOP for John  → guarded write  → fresh-connection fingerprint  → idempotency (--no-snapshot)
 ```
@@ -198,13 +212,19 @@ snapshot_v3('<stage>')  (refuse-to-clobber)
 - **John owns every write.** No autonomous chain — gate-by-gate.
 
 **Acceptance gates before S1.5 is "done" (all must hold):**
-1. Spine 1385→1386; **exactly** 2352 split; **0** other buildings split (zero false splits).
-2. 1173 **split-eligible after widening but HELD** (not split) — the dual-axis test still blocks it.
+1. Spine delta **measured in preview** (expected **~+12**); **exactly** the 8 validated cases
+   split/grouped; **0** buildings outside the 8 split (zero false splits).
+1b. **The 7 cottage-courts each reproduce `s9_city_building_breakout`** on building-count, per-building
+   units, AND year (1030 Grayson 2·2u·2018; 1222 66th 2·1u·2019; 1444 5th 4·1u·2021; 1446 5th 4·1u
+   [3×2019 + 1×2025]; 2129 9th 2·1u·2020; 2212 10th 2·1u·2019; 908 Cedar 2·1u·2020).
+2. 1173 **split-eligible after widening but HELD** (not split) — master-grouping would over-split it
+   (3 New masters ≠ the city's 2, no consolidating labels), so it is held in `s1_5_ambiguous_review`
+   (primary home `s1_5_lineage_review`), never auto-split.
 3. North 135@2022 + South 69@2023 in `s7_cycle` (the CO-year bug fixed). **Mechanism: master-permit/building-label routing → S2's per-building `max(final)` over each building's *own* permit family. Assert North's `co_issued` is `2022-01-14` and South's is `2023-08-08` specifically (not just "2 events"). This gate FAILS under canon-APN routing (South's Phase-I `B2019-05575` sits on parent APN `018-05` → North inherits 2023), so passing it is the direct proof that routing is by permit-label, not APN.**
-4. S9 scorecard's 2352 line **matches `s9_city_building_breakout`** (our split = the city's breakout).
-5. Every other building's rows **unchanged** across S2–S8 (conservation — the localized-delta proof).
+4. S9 scorecard's lines for **all 8 cases match `s9_city_building_breakout`** (our split = the city's breakout).
+5. Every building **outside the 8** has rows **unchanged** across S2–S8 (conservation — the localized-delta proof).
 6. S2–S8 gates green with updated checkpoints; idempotency re-run reproduces (run A == run B).
-7. The 3 held-queues populated and counted (35 / 1 / documented-constraint); 36-set still sums.
+7. The held-queues populated and counted (`s1_5_ambiguous_review` 6 [shares 1173 w/ lineage] · `s1_5_lineage_review` 1 · `s1_5_single_unit_clusters` · documented phantom-parent constraint); 36-set still sums.
 8. **`s1_5_meta.lineage_involved_buildings` emitted** — the running count of spine buildings involving a
    `parcel_lineage` APN (the SB 9 trigger gauge, §7b). Currently ~4; tracked every run.
 

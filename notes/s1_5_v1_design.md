@@ -3,21 +3,21 @@
 **Status:** design for review → then a gated build. Chat-Claude produced this; CC builds from it
 under the standing gating discipline. **Verify every count against the LIVE v3 before relying on it.**
 
-**One-line summary:** enable the validated `split_multibuilding` rule (splits exactly **1** building —
-2352 Shattuck/Logan Park — on the current spine), widen `_RB_INCL` by one line, re-key the **three**
+**One-line summary:** rework the building-identity discriminator from canon-APN to **master-permit/building-label** (the live `split_multibuilding` is the **superseded, unwired APN rule** — reworked, not merely enabled), producing exactly **1** split on the current spine — 2352 Shattuck/Logan Park — widen `_RB_INCL` by one line, re-key the **three**
 downstream sites that re-derive identity from the address-tuple (S2, S4, S6) so the split doesn't
 re-collapse, re-run the pipeline S1→S9, and surface everything the rule does **not** resolve into
 named held-queues. **This is the largest write in the project: it re-executes the gated DAG from S1
 onward with new building grain.** Treat accordingly — stage-by-stage gates, each preview showing only
 the localized delta.
 
+**Anchor (the settled decision this spec implements):** a building = its **New master construction permit (+ its CO)**; address and APN are M:N attributes, never the key; **routing is by master-permit / building-label, not APN** (`notes/HANDOFF_2026-06-18.md` L40; `scratch/2026-06-25/building_identity_decision_restated.md`). The live `split_multibuilding` is the **superseded, APN-based, unwired** rule — S1.5 **reworks its discriminator** to permit-label; it does **not** merely wire the existing rule. The discriminator is **two steps on disjoint subsets**: (1) **group by New master permit** — for the 8 cottage-court cases (1444/1446 5th, etc.) one master = one building and grouping alone resolves them, with **no label to parse**; (2) **consolidate phase-masters by building-label** — for the 6 phased cases (2352, 1173, 1310, 1516, 1811, 812) one building spans multiple masters (e.g. 2352 South = `B2019-05575` + `B2021-03302`), and the **label/phase consolidator is load-bearing**. The builder must **group-by-master first, then consolidate phase-masters by label** — never assume every case carries a parseable label. Step (2) is **gated on a label-parse reliability check** (precondition: confirm "North/South Building", "Phase I/II" parse reliably from `WorkDescription` across the 6 phased + 8 clean cases).
+
 ---
 
 ## 1. SCOPE — what v1 does and does NOT do
 
 ### v1 DOES
-1. **Enable the split rule.** Uncomment `split_multibuilding` so 2352 Shattuck splits into North
-   (135u, APN …018-05) + South (69u, APN …041-00). Spine **1385 → 1386** (+1 building).
+1. **Rework the split discriminator to permit-label, then split.** The live `split_multibuilding` is the superseded APN rule (unwired); rework its discriminator to **master-permit/building-label** so 2352 Shattuck splits into North (135u, master `B2019-05574`) + South (69u, master `B2019-05575`/`B2021-03302`). Spine **1385 → 1386** (+1 building). (APN is carried as an attribute, not the routing key.)
 2. **Widen `_RB_INCL`** (one line) to include the housing nouns the include-list currently lacks
    (`duplex|triplex|fourplex|town ?house|town ?home|cottage|sfd|single ?family|accessory dwelling`).
 3. **Re-key the 3 downstream sites** (S2 chokepoint, S4 + S6 bucket-joins) from address-tuple to
@@ -48,14 +48,12 @@ of a pipeline-wide re-key — not the building-identity problem solved.*
 > CC must re-read them in the live tree and confirm the shape before implementing.
 
 ### Site 1 — S1 (`build_s1.py`): enable split + widen include
-- **Uncomment** `# spine = split_multibuilding(spine)` (the validated rule).
+- **Rework `split_multibuilding`'s discriminator** from canon-APN to **master-permit/building-label** (it is the superseded, unwired APN rule — the task is to rework, not merely uncomment), then enable it.
 - **Widen `_RB_INCL`** (one regex line) to add the housing nouns above.
 - **Decision for the build (recommend additive — now strengthened by the S2 routing finding):** the
-  split stage should **materialize the `building_id → {permits, canon_apns}` routing** it computes (write
-  `s1_5_projects` + a permit-assignment table), so S2 *consumes* the routing rather than re-deriving it
-  (see Site 2 — re-derivation risks drift from the split's own assignment). Option (b): a thin `s1_5`
-  step reads `s1_projects`, applies `split_multibuilding`, writes `s1_5_projects` **plus the explicit
-  permit→building_id map**, and S2–S8 re-point to it. This **preserves S1 byte-stable** AND eliminates
+  split stage should **materialize the `building_id → {master_permit(s), member_permits, building_label}` routing** it computes (write
+  `s1_5_projects` + a permit-assignment table; APN carried as an attribute, never the routing key), so S2 *consumes* the routing rather than re-deriving it
+  (see Site 2 — re-derivation risks drift from the split's own assignment). Option (b): a thin `s1_5` step reads `s1_projects`, applies the **reworked (permit-label) `split_multibuilding`**, writes `s1_5_projects` **plus the explicit permit→building_id map** (keyed by master-permit/label), and S2–S8 re-point to it. This **preserves S1 byte-stable** AND eliminates
   the routing-drift risk. Option (a) (modify S1 in place) re-validates S1's gate and still leaves S2 to
   re-derive routing — **less safe**. **Recommend (b).**
 
@@ -71,29 +69,13 @@ of a pipeline-wide re-key — not the building-identity problem solved.*
   permits land on the one surviving `building_id`. That is the re-collapse, mechanically.
 
 - **Fix — BOTH must change together:**
-  1. **`load_spine`** must stop collapsing — expose APN-aware identity (e.g. `smap` maps the 3-tuple →
-     a *list* of `(building_id, canon_apns)`, or a 4-tuple `(number,street,stype,apn) → building_id` for
-     split buildings with a 3-tuple fallback for un-split).
-  2. **`build_events` STEP-2 grouping** must route each permit to its sub-building **by the permit's
-     canon-APN** (available as `r.ParcelNumber → canonicalize_apn`), matching whatever `load_spine` now
-     exposes. **If only `load_spine` is fixed and the grouping key stays the 3-tuple, the grouping
-     re-merges them downstream of the map** — they are coupled.
+  1. **`load_spine`** must stop collapsing — expose **permit-keyed** identity (e.g. `smap` maps the 3-tuple → a *list* of `(building_id, master_permit_ids, building_label)` for split buildings, with a single-building fallback for un-split). APN is **not** the key here.
+  2. **`build_events` STEP-2 grouping** must route each permit to its sub-building **by master-permit / building-label** — attach each permit to the New master permit (and its "North/South Building" / "Phase I/II" label) it belongs to, **not** by `r.ParcelNumber`/canon-APN. **If only `load_spine` is fixed and the grouping key stays the 3-tuple (or is keyed on APN), the grouping re-merges or mis-routes them downstream of the map** — they are coupled. **Why not APN:** South's Phase-I master `B2019-05575` was filed under the **pre-split parent APN `018-05`**, so APN-grouping lands South's events on North (the empirical failure below).
 
-- **⚠ Orphan-routing must match the split EXACTLY.** `split_multibuilding` routes a permit to its
-  APN's sub-building, but permits whose APN is *not* a real-build APN go to `big` (the largest
-  sub-building). S2's re-keyed grouping **must replicate this identical routing** — otherwise a
-  building's *units* (from the split) and its *events* (from S2) attach to different buildings. **This
-  is the strongest argument for the additive-stage approach (Site 1, option b):** have the split stage
-  **materialize** the `building_id → {permits}` (and `→ {canon_apns}`) routing it computes, and have S2
-  **consume that mapping** rather than re-deriving the routing. Re-derivation risks drift from the
-  split; consumption cannot drift. **Recommend: materialize the routing in S1.5, S2 reads it.**
+- **⚠ Orphan-routing must match the split EXACTLY.** The reworked `split_multibuilding` routes each permit to its **master-permit/label** sub-building; a permit with no master of its own attaches to the master/label of its permit-family, falling back to `big` (the largest sub-building) only as a last resort. S2's re-keyed grouping **must replicate this identical routing** — otherwise a building's *units* (from the split) and its *events* (from S2) attach to different buildings. **This is the strongest argument for the additive-stage approach (Site 1, option b):** have the split stage **materialize** the `building_id → {master_permit(s), member permits}` routing it computes, and have S2 **consume that mapping** rather than re-deriving it. Re-derivation risks drift from the split; consumption cannot drift. **Recommend: materialize the (permit-label) routing in S1.5, S2 reads it.**
 
-- **The CO-year bug fixes itself through this routing (the mechanism).** S2's `co_issued` =
-  `max(b['final'])` over the building's master permits. Collapsed 2352's `max` picks the *latest* final
-  across BOTH buildings → South's 2023 stamped on North's 135u (the bug). **Once permits route correctly,
-  North's group → `max` = its real 2022 CO; South's group → 2023.** No separate CO fix needed — but it
-  is **contingent on correct routing**, which is exactly why the routing must not drift (above).
-- **Un-split buildings are unaffected** (one building per bucket → APN routing never triggers).
+- **The CO-year correction depends on permit-label routing — it does NOT "fix itself" via APN routing (RETRACTED).** ⚠ The earlier claim that the CO-year bug self-corrects through this routing is **empirically false under canon-APN routing** (Stage-1 verification, 2026-06-25). S2's `co_issued` = `max(final)` over a building's grouped permits. Under APN routing, North's APN `018-05` carries CO-years **{2022, 2023}** — because South's Phase-I master `B2019-05575` (finaled 2023) was filed under the **pre-split parent APN `018-05`** — so North's `max` lands **2023**, reproducing the exact Frankenstein bug S1.5 exists to fix. The correct dates (**North 2022-01-14 / South 2023-08-08**) arise **only** under master-permit/building-label routing, where `B2019-05574` (North) and `B2019-05575`/`B2021-03302` (South) group by their labels. The North **2022-01-14** date is independently corroborated twice: the Accela inspection trail (2026-06-25) and `PROGRESS.md` L41 (proj179 investigation, 2026-06-16), which records `B2019-05574` = North Building finaled 2022-01-14. (Note: L41's *unit/parcel* figures — North 168u on …41 — are the entitlement North-share on a different parcel framing, **not** the CPRA net_units 135u on `018-05` the pipeline routes on; the citation is for the date only.) **So no separate CO fix is needed — but only because correct (permit-label) routing produces the right per-building `max(final)`; it is contingent on that routing, which APN routing does not deliver.**
+- **Un-split buildings are unaffected** (one building per bucket → the permit-label routing collapses to the single building).
 
 ### Site 3 — S4 (`build_s4.py`): re-key the unit-reconcile joins
 - **Current:** `s1_s4_unit_reconcile` / `s4_unit_reconcile_resolved` join on `bucket`. After a split,
@@ -218,9 +200,7 @@ snapshot_v3('<stage>')  (refuse-to-clobber)
 **Acceptance gates before S1.5 is "done" (all must hold):**
 1. Spine 1385→1386; **exactly** 2352 split; **0** other buildings split (zero false splits).
 2. 1173 **split-eligible after widening but HELD** (not split) — the dual-axis test still blocks it.
-3. North 135@2022 + South 69@2023 in `s7_cycle` (the CO-year bug fixed). **Mechanism: S2's per-building
-   `max(final)` over correctly-routed permits — assert North's `co_issued` event date is 2022 and
-   South's is 2023 specifically (not just "2 events"). This is the direct test that routing is correct.**
+3. North 135@2022 + South 69@2023 in `s7_cycle` (the CO-year bug fixed). **Mechanism: master-permit/building-label routing → S2's per-building `max(final)` over each building's *own* permit family. Assert North's `co_issued` is `2022-01-14` and South's is `2023-08-08` specifically (not just "2 events"). This gate FAILS under canon-APN routing (South's Phase-I `B2019-05575` sits on parent APN `018-05` → North inherits 2023), so passing it is the direct proof that routing is by permit-label, not APN.**
 4. S9 scorecard's 2352 line **matches `s9_city_building_breakout`** (our split = the city's breakout).
 5. Every other building's rows **unchanged** across S2–S8 (conservation — the localized-delta proof).
 6. S2–S8 gates green with updated checkpoints; idempotency re-run reproduces (run A == run B).
@@ -302,9 +282,7 @@ trend is tracked, not rediscovered each session.
 ## 8. WHAT THIS DESIGN ASSUMES / VERIFICATION DEBTS
 
 - **S2's re-key is now designed against the LIVE `build_s2.py`** (read 2026-06-25): the `load_spine`
-  smap collision + `build_events` STEP-2 grouping + the `max(final)` CO mechanism + the
-  `split_multibuilding` orphan-routing-to-`big` are all confirmed in code. The remaining S2 debt is only
-  the *implementation choice* (materialized routing — Site 1 option b), not a reading gap.
+  smap collision + `build_events` STEP-2 grouping + the `max(final)` CO mechanism + the (superseded APN) `split_multibuilding` orphan-routing-to-`big` are all confirmed in code. ⚠ The orphan-routing must be **re-expressed over permit-family** when the discriminator is reworked to permit-label (Sites 1–2) — the APN behavior confirmed in code is the *current* rule, not the target. The remaining S2 debt is the *implementation choice* (materialized permit-label routing — Site 1 option b) plus the **label-parse reliability precondition**, not a reading gap.
 - **S4 and S6 bucket-joins** are designed against the keying digest, not a full read. Lower-risk than S2
   (the fix is a mechanical `bucket → building_id` join swap), but CC should read the live `s4`/`s6`
   bucket-join lines before editing — same discipline.

@@ -45,23 +45,20 @@ vocabulary is abstract; Berkeley is the first ADAPTER, not the template.
 - **Each permit row is a BUNDLE of events** (submitted/issued/finaled/completed), exploded one event
   per present date. Table A2 BP-section = fold permit_issued; CO-section = fold permit_finaled.
 
-## CURRENT STATE (verified 2026-06-26)
-- schema/v4/schema_v4.sql — committed, 27 tables (md5 ab42db76…).
-- notebooks/v4/JN-A_ingestion.ipynb — **RUN CLEAN ON REAL DATA AND COMMITTED (cbcdeee).** First real
-  ingestion succeeded: 85,793 events from 32,202 source rows, all four axes hit their anchors exactly
-  (submittal 32,202 / issuance 31,940 / finaled 21,650 / completed 1), CHECK 1-4 PASS, conserved=1,
-  independent verifier PASS. Structure DISCOVERED (header + columns), preference-scoring picks *Date
-  over *Status, CHECK 4 hard-halts on a known-anchor mismatch. v3 untouched throughout.
-- databases/berkeley_housing_v4.db — built (114.8 MB), gitignored, a build artifact (NOT committed).
-- scripts/verify_jn_a_conservation.py — committed; genuinely independent (counts real date columns by
-  name + checks known anchors, does NOT re-use the discovery heuristic).
-- A superseded hard-coded JN-A is parked at notebooks/v4/_superseded/ (committed).
-- **IMMEDIATE NEXT TOPIC: the SALVAGE conversation** — how the website (Explorer), the curriculum
-  (JN1-JN6b), and four months of APR work get RE-POINTED at the v4 event-stream spine. This is a
-  MIGRATION, not an abandonment: the prior work IS the substrate v4 rebuilds onto a sounder spine. Do
-  NOT propose re-running JN-A (it's done). The downstream notebooks (JN-B typing, JN-C reversible
-  classifier where the phantom-master work lands, JN-D entity projection/fold) are PLANNED, NOT BUILT —
-  and should not be built until salvage clarifies what the curriculum/website need them to output.
+## CURRENT STATE — SUPERSEDED BY HANDOVER_v4_2026-06-26.md
+**READ `notes/v4/HANDOVER_v4_2026-06-26.md` FIRST — it has the live current state.** This section is
+kept for settled-architecture context; the progress below is now behind the handover.
+
+- schema/v4/schema_v4.sql — committed, 27 tables.
+- notebooks/v4/JN-A_ingestion.ipynb — RUN CLEAN, COMMITTED (cbcdeee). 85,793 events, four-axis,
+  conserved, verifier PASS. Settled — do not re-run.
+- notebooks/v4/JN-C_classify.ipynb — **BUILT, RUNS CLEAN, COMMITTED.** Pass 1: #1 housing/non-housing
+  + #2 master-collapse, defers #3. 16 vocabulary tests pass. Reversible labels to event_classifications.
+  Generator at scripts/v4/build_jn_c.py (SOURCE OF TRUTH — edit it, regenerate; never hand-edit .ipynb).
+- **LIVE WORK (see handover):** deflation fix approved-not-implemented (confident SFR/ADU blank units→1;
+  multifamily-blank→flag); then inflation check on the 20-99 band (REV double-count?); then the v4↔HCD
+  ADU bijection (HCD oracle-only, canonical-APN join, no address-collapse). JN-B/JN-D and the SALVAGE
+  conversation remain planned/deferred. Do NOT re-run JN-A or rebuild JN-C from scratch — extend it.
 
 ## THE RUN THAT WORKED (and the finding it surfaced — for reference)
 The first real JN-A run mis-mapped 3 of 4 date axes (bound *Status columns instead of *Date),

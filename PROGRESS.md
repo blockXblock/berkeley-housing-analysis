@@ -4,7 +4,56 @@
 
 ---
 
-## Where we are (2026-06-16)
+## Where we are (2026-06-26) — v4 REBUILD UNDERWAY
+
+**▶ READ `notes/v4/HANDOVER_v4_2026-06-26.md` FIRST.** The project has pivoted to the **v4 event-stream
+rebuild** (see `RESUME_chat-claude_v4.md` for the settled architecture). The S1–S9 / G1 / G2 work below
+is the v3-era lineage — still valid as prior research and the comparison target, but v4 is the live track.
+
+**✅ JN-A DONE, COMMITTED, PUSHED (cbcdeee).** Unconditional CPRA ingestion → event stream: 85,793 events
+from 32,202 rows, four-axis (submittal 32,202 / issuance 31,940 / finaled 21,650 / completed 1),
+conserved, independent verifier PASS. Schema `schema/v4/schema_v4.sql` committed (27 tables). v3 untouched.
+
+**✅ JN-C PASS 1 BUILT, RUNS CLEAN, COMMITTED.** Reversible housing-role classifier (#1 housing/non-housing
++ #2 master-collapse on permit family; #3 phantom-master DEFERRED). Writes only `event_classifications`
+(reversible) + a harvest-queue CSV. 16 vocabulary tests pass (anchored to real prior-research cases).
+Generator: `scripts/v4/build_jn_c.py` (SOURCE OF TRUTH — regenerate, never hand-edit the .ipynb).
+- Role dist: alteration 64,739 · subsidiary 9,597 · ambiguous 7,403 · new_unit 2,964 · demolition 920 ·
+  non_housing 170.
+- Units-vs-v3: CY2024 837 vs 708 (overshoot 129) · CY2025 559 vs 497 · 8-yr 2,868 vs 4,310 (below).
+- Size bands (1/2-4/5-19/20-99/100+): 640/405 · 26/53 · 4/51 · 26/1,492 · 6/867.
+- Harvest queue 1,954 inconclusive; all need Accela (37 R2 docs map elsewhere).
+
+**OPEN (live work — see handover):**
+1. DEFLATION fix APPROVED, not implemented: confident SFR/ADU with blank UnitsAdded → 1 (single-dwelling
+   only; multifamily-blank → flag, not guess). 640 projects→405 units proves the undercount. Likely most
+   of the 8-yr shortfall vs v3.
+2. INFLATION check (after #1): the 20-99 band's 1,492 units / 26 projects — real distinct buildings or
+   REV double-count? (CY2024 u/bldg 8.0, CY2022 6.2 are big-project years where REV-inflation hides.)
+3. v4↔HCD ADU bijection (recon done): only v4 (724 permits) & HCD (`table_a2.UNIT_CAT='ADU'`, 1,160
+   addresses) have a real ADU determination; v3/v2 don't. HCD has MORE — same direction as deflation.
+   Build with canonical-APN join (`to_canonical_apn`, 3-layer), address-from-payload, match-rate-first,
+   NO address-collapse (the ADU-pair protection rule), HCD oracle-only.
+
+**DEFERRED:** harvest-resolution notebook (R2 PDFs + Accela HARVESTER, sweep can be fast/aimed); #3
+phantom-master discriminator (permit-family + building-label); the SALVAGE conversation (re-point
+Explorer + curriculum + APR work at the v4 spine — migration, not abandonment).
+
+---
+
+## Where we are (2026-06-18)
+
+**▶ LATEST SESSION — read `notes/HANDOFF_2026-06-18.md` FIRST.** It captures the post-S8 work not yet folded into the entries below: the **S9 v3-vs-city scorecard (LOCKED, +301)** in `docs/projects/2026-06-17 - Round One.md`; the **building-identity finding** (S1 collapses multi-building developments — 14 cases, 12 same-parcel; APN is not the fix; `build_s1.py` has an UNWIRED split rule; needs an S2–S8 re-key = the proposed "S1.5" stage); the **structures-layer + imagery-corroboration** scoping; the **v2 entity-model survey** (49 tables); and the **curriculum (JN1–JN6b) + R2 hosting + permits_clean exports**. v3/v2 untouched since S8.
+
+**✅ REBUILD S8 DONE — reconciliation matrix (`build_v2_from_sources`, gated write to `berkeley_housing_v3.db`).** Snapshot `keep_snapshot_2026-06-17_pre-s8.db` (refuse-to-clobber, survived idempotency re-run sha-identical `f3eae3cd`). **`s8_reconciliation` = 90 findings across 10 DISTINCT finding_types** — SYNTHESIS (gather, never re-derive): every gathered row copies its basis from a live `_reconcile`/`_overlap`/`_review` source. **Exact-count lock (the drop/double-gather check, re-queried vs LIVE source tables): date_reconcile 3 · stage_reconcile 33 · unit_reconcile 6 · apn_overlap 13 · xaddr_review 22** — all == source. Synthesized: **multi_building_development 1** (2352 Shattuck/proj179, scan-verified single member) · **measurement_basis 4** (UC beds-vs-units) · rhna_scope_question 1 · entitlement_date_gap 1 (soft pointers) · crosscheck_summary 6. **`pending_uc_conversion` = 3 / `needs_acquisition` = 0** (UC beds-only get the DISTINCT disposition — size known in beds, only UC's conversion missing; ad hoc 550/750/556 rejected; 0 v3 units at-risk since no UC residence is in the CPRA spine). **2352 Shattuck appears as BOTH `unit_reconcile` AND `multi_building_development`** (two aspects, not a double-count). VERIFY: integrity ok, idempotent (90), basis copied (nothing re-derived), **wiring guard CALL-spied** (cycle_for_date 6× + normalize_address 44× invoked; net_units deliberately NOT called — gather, not re-derive), Tier-1 568, **live v2 byte-identical (sha `d6a1a960`)**, s0–s7 untouched. All 9 gates (s0–s8) green.
+- **NEW finding recorded — UC beds-vs-units measurement basis:** v2 carried **2,628** bed-derived "units" across the 4 UC residences (550/772/750/556), 3 via an ad hoc bed→unit conversion (the same fabrication class as market=units−vli). v3 excludes all 4 (UC exempt from CPRA). proj170 Anchor House has a sourced unit figure (244 apartments, doc 2178) + 772 beds; 165/171/177 hold beds-only (`pending_uc_conversion`).
+- **Acquisition queue (added):** UC's official bed→unit conversion / unit counts for 165/171/177.
+- **NEXT: S9** — the A2: compare v3's by-cycle completions + BP-credit to the CKAN-mirror oracle (`hcd_apr_mirror.db` = Berkeley's submitted APR). ORACLE GAP: the mirror has NO Table B (RHNA progress absent), so the 492/503 cross-check is soft/text vs the city's separately-published figure. Resume note: `notes/rebuild_resume_S9.md`.
+
+**✅ REBUILD S7 DONE — cycle-scope (`build_v2_from_sources`, gated write to `berkeley_housing_v3.db`).** Snapshot `keep_snapshot_2026-06-17_pre-s7.db` (refuse-to-clobber, survived the idempotency re-run sha-identical). **`s7_cycle` = 2,236 event rows** (1,285 BP + 951 CO), one per `s2_events` BP/CO milestone, tagging the **THREE independent date concepts** the naive `cycle_for_date` conflates: `reporting_year` (Table A/A2 by-year) · `calendar_cycle` (5th/6th @ 2023-01-31) · `in_projection_period` (narrow 2022-06-30→2023-01-30 bool, 162 events) · `rhna_credit_cycle` (building-level, first-BP ≥ 2022-06-30, no cap). **Non-conflation proven: 94 BP events are calendar=5th but credit=6th** (projection-credited). 0 asserted reporting_years (all from is_inferred=0 dates); `is_first_bp` exactly one per BP-building (650 6th / 635 5th credit); **6 CO-only-no-BP → credit NULL flagged** (the 94 no-event pipeline buildings aren't tagged — no event to tag; this corrected Phase A's mislabeled "100"). **S9 cross-check SURFACED, not forced:** cumulative 6th BP-credit 421bldg/1,792u (thru CY2024) · 648/2,419u (thru CY2025) vs city 492/503 — BP is the right milestone (was CO), magnitude doesn't reconcile → S8/S9 scope/population question. VERIFY: integrity ok, idempotent (re-run identical 2,236), Tier-1 568 unchanged, **live v2 byte-identical (sha `d6a1a960…`)**, s0–s6 untouched.
+- **`housing_rules` RE-WIRED (the orphaned policy module) + EXTENDED:** added **`rhna_credit_cycle(first_bp_date)`** to `classifiers.py` (sourcing the 2022-06-30 boundary from `PROJECTION_PERIODS`, NOT `RHNA_CYCLES['6th']`=2023-01-31 — the CLAUDE.md:179 non-conflation). `test_s7_gate.py` carries a **TRIPLE wiring guard that spies on all three functions and asserts each is CALLED** (cycle_for_date 2236× · is_projection_period 2236× · rhna_credit_cycle 1285×), not merely imported. All 8 gates (s0–s7) green; smoke test green.
+- **QUEUED (anti-drift, noted not done):** refactor `generate_apr_v2.generate_rhna_progress` to **import `housing_rules.rhna_credit_cycle`** instead of inlining the 2022-06-30 boundary (S7 now single-sources it).
+- **NEXT: S8** (reconciliation matrix — gathers s2_date_reconcile 3 + s3_stage_reconcile 33 + 2352 Shattuck/Logan-Park + the 492/503 scope question), then **S9** (the A2 vs CKAN-mirror oracle). Resume note: `notes/rebuild_resume_S8.md`.
 
 **✅ G2 DONE — independent-APR narrative (`5cf130f`).** `docs/audit/2026-06-16_G2_independent_apr_narrative.md` — the public/policy story, every claim traceable to a G1 number. Five-point spine: cross-validation (695 matched; 1,119 gap dissolves into 1,223 reconcilable modeling diff, 49u real coverage); proj158 omission (solid; ADUs flagged ambiguous); honest 49u ADU-tail boundary; NOT-more-accurate + full decomposition table; the affordability open-data finding (773 city affordable CO units from deed-restriction docs outside the permit feed = the transparency-ordinance argument). Inflation claim presented as tested-and-withdrawn. NEXT: G2 fronts the JN series.
 

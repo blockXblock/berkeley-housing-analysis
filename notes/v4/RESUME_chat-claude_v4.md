@@ -47,13 +47,30 @@ vocabulary is abstract; Berkeley is the first ADAPTER, not the template.
 
 ## CURRENT STATE (verified 2026-06-26)
 - schema/v4/schema_v4.sql — committed, 27 tables (md5 ab42db76…).
-- notebooks/v4/JN-A_ingestion.ipynb — the CLEAN ingestion notebook (39,683 bytes, 0 escaping bugs,
-  compiles warnings-as-errors, executes clean against synthetic data, conserved=1). Structure is
-  DISCOVERED from the file (header row + columns), NOT hard-coded. Probe numbers are checks only.
-- A superseded hard-coded JN-A is parked at notebooks/v4/_superseded/.
-- NO databases/berkeley_housing_v4.db yet (JN-A hasn't been run on real data).
-- **IMMEDIATE NEXT STEP: run JN-A against the real feed** (CC executes; read STEP 0 byte-check,
-  discovery output, the four anchors, conserved=1, and the independent verifier).
+- notebooks/v4/JN-A_ingestion.ipynb — **RUN CLEAN ON REAL DATA AND COMMITTED (cbcdeee).** First real
+  ingestion succeeded: 85,793 events from 32,202 source rows, all four axes hit their anchors exactly
+  (submittal 32,202 / issuance 31,940 / finaled 21,650 / completed 1), CHECK 1-4 PASS, conserved=1,
+  independent verifier PASS. Structure DISCOVERED (header + columns), preference-scoring picks *Date
+  over *Status, CHECK 4 hard-halts on a known-anchor mismatch. v3 untouched throughout.
+- databases/berkeley_housing_v4.db — built (114.8 MB), gitignored, a build artifact (NOT committed).
+- scripts/verify_jn_a_conservation.py — committed; genuinely independent (counts real date columns by
+  name + checks known anchors, does NOT re-use the discovery heuristic).
+- A superseded hard-coded JN-A is parked at notebooks/v4/_superseded/ (committed).
+- **IMMEDIATE NEXT TOPIC: the SALVAGE conversation** — how the website (Explorer), the curriculum
+  (JN1-JN6b), and four months of APR work get RE-POINTED at the v4 event-stream spine. This is a
+  MIGRATION, not an abandonment: the prior work IS the substrate v4 rebuilds onto a sounder spine. Do
+  NOT propose re-running JN-A (it's done). The downstream notebooks (JN-B typing, JN-C reversible
+  classifier where the phantom-master work lands, JN-D entity projection/fold) are PLANNED, NOT BUILT —
+  and should not be built until salvage clarifies what the curriculum/website need them to output.
+
+## THE RUN THAT WORKED (and the finding it surfaced — for reference)
+The first real JN-A run mis-mapped 3 of 4 date axes (bound *Status columns instead of *Date),
+producing a submittal-only stream. Conservation PASSED anyway (internally consistent) — proving
+conservation guards against LOSS but NOT against MIS-DISCOVERY. The per-axis anchor check caught it.
+Three fixes (all proven on synthetic reproductions before the clean re-run): (1) preference-scoring
+in the column matcher (Date > Status); (2) CHECK 4 hard anchor halt for known cities; (3) a verifier
+that counts real columns independently rather than inheriting the discovery bug. LESSON: anchors guard
+mis-discovery, conservation guards loss — you need both.
 
 ## HARD-WON LESSONS FROM TODAY (do not repeat)
 - **VERIFY THE ACTUAL FILE ON DISK before trusting any error report.** Today an hour was lost because

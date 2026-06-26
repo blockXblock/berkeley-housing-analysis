@@ -30,20 +30,28 @@ python3 -c "raw=open('notebooks/v4/JN-A_ingestion.ipynb').read(); b=chr(92); pri
 - A superseded hard-coded version lives at `notebooks/v4/_superseded/` — do not run it.
 - There is NO `databases/berkeley_housing_v4.db` yet. JN-A creates it fresh.
 
-## THE IMMEDIATE NEXT STEP: run JN-A (the first real ingestion)
-JN-A ingests the CPRA BP feed into a fresh `databases/berkeley_housing_v4.db`. It:
-- DISCOVERS each file's header row and columns (does not hard-code them) and reports what it found;
-- explodes each permit row into one event per present date (submitted/issued/finaled/completed);
-- proves conservation (every source row represented; events == sum of date fields; count > floor).
+## STATUS: JN-A IS DONE (committed cbcdeee, pushed to origin/dev)
+The first real ingestion SUCCEEDED. Do NOT re-run JN-A as if it's pending.
+- notebooks/v4/JN-A_ingestion.ipynb ran clean on the real feed: 85,793 events from 32,202 rows, all
+  four axes at anchor (submittal 32,202 / issuance 31,940 / finaled 21,650 / completed 1), CHECK 1-4
+  PASS, conserved=1, independent verifier PASS. Committed cbcdeee with the verifier and the parked
+  hard-coded version.
+- databases/berkeley_housing_v4.db (114.8 MB) exists, is GITIGNORED, a build artifact — never git add it.
+- v3 untouched throughout (sha aa10052c…).
+- If you need to re-verify: run scripts/verify_jn_a_conservation.py (read-only) — it independently
+  counts the real date columns and checks the known anchors.
 
-**Run rules:**
-- Writes ONLY to a fresh `databases/berkeley_housing_v4.db` (notebook deletes any prior v4 build).
-- **v3 is NEVER touched.** No commit, no push, no `git add` of the .db.
-- Report: discovery output (both files), per-file + total row counts (~32,202), the four anchors
-  (permit_submitted 32,202 / permit_issued 31,940 / permit_finaled 21,650 / permit_completed 1),
-  conserved flag (must be 1, events > 30,764), unparseable fields, duplicate-key stats, out-of-window
-  count. Then run `scripts/verify_jn_a_conservation.py` and paste its verdict.
-- **STOP for John's review. Commit nothing.**
+## THE IMMEDIATE NEXT THING IS A CONVERSATION, NOT A COMMAND
+John and chat-Claude are about to have the SALVAGE conversation: how the existing website (Explorer),
+the curriculum (JN1-JN6b), and four months of APR work get re-pointed at the v4 event-stream spine.
+The downstream notebooks (JN-B typing, JN-C reversible classifier, JN-D projection/fold) are PLANNED,
+NOT BUILT. Do not build or run them until John directs it. Stand by; verify state if asked.
+
+## (historical) THE FIRST RUN'S FINDING — already fixed, for context only
+The very first JN-A run mis-mapped 3 of 4 date axes (matched *Status columns before *Date), so only
+submittal ingested. Conservation passed anyway (it guards loss, not mis-discovery); the per-axis
+anchor check caught it. Fixed via preference-scoring (Date > Status), a CHECK 4 hard anchor halt, and
+an independent verifier. The committed notebook is the FIXED version. This is settled — do not re-open.
 
 ## ABSOLUTE RULES
 - **A conservation FAILURE or a discovery HALT is a real FINDING — report it, do NOT modify the

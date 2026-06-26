@@ -80,6 +80,11 @@ ADU_TERMS = ["adu","jadu","accessory dwelling unit","junior accessory"]
 PERMANENCE_TERMS = ["permanent foundation","wheels removed","on foundation","affixed to foundation",
                     "tongue removed","placed on a foundation"]
 MOVABLE_TERMS = ["tiny home","tiny house","park model","movable","trailer","manufactured home","rv "]
+# multifamily markers: a confident new_unit whose count is BLANK and which looks multifamily must NOT
+# default to 1 (that would under-count a real apartment) - it stays flagged as a count-gap to harvest.
+MULTIFAM_TERMS = ["apartment","multifamily","multi-family","residential building","residential development",
+                  "residential apartment","housing development","story residential","-story residential",
+                  "units","condominium","mixed use","mixed-use","story building"]
 NONHOUSING_TERMS = [
     "re-roof","reroof","siding","hvac","water heater","furnace","temp power","temporary power",
     "tower crane","shoring","abatement","electrical service","solar","photovoltaic"," pv ",
@@ -167,10 +172,22 @@ def classify(work_type, description, adu_flag, occtype, units_added, units_remov
         return "ambiguous",0,"No Work Type - inspect"
     return "ambiguous",0,"Unmatched by vocabulary - inspect"
 
-def net_units(units_added, units_removed, role):
+def net_units(units_added, units_removed, role, description=""):
+    # Non-creating roles contribute 0.
     if role in ("alteration","demolition","non_housing","subsidiary"): return 0
-    ua=_to_int(units_added); 
-    return ua
+    ua=_to_int(units_added)
+    if ua is not None:
+        return ua  # real structured count present - use it (prose-blind, as before)
+    # DEFLATION FIX: a confident new_unit with a BLANK/null UnitsAdded. An SFR or ADU is 1 dwelling by
+    # definition, so a blank count should be 1, not 0 (the 640-projects->405-units undercount). BUT a
+    # MULTIFAMILY permit with a blank count is a real data gap - defaulting it to 1 would under-count a
+    # whole apartment building - so it stays null-and-flagged (a harvest gap), not guessed as 1.
+    desc=_norm(description)
+    if role=="new_unit":
+        if _has(desc, MULTIFAM_TERMS):
+            return None   # multifamily with missing count -> flagged gap, do NOT guess 1
+        return 1          # single dwelling (SFR/ADU/small) with blank count -> 1 by definition
+    return ua             # any other creating role with blank count -> leave as-is
 print("Rule engine ready (11 rules; ADU=Yes needs description corroboration; net_units prose-blind).")
 """)
 md(r"""
@@ -217,6 +234,28 @@ for wt,desc,adu,occ,ua,ur,pn,exp in TESTS:
     print(f"  [{ok}] {pn:<18} expect {exp:<11} got {got:<11} | {desc[:42]}")
 assert not fails, f"VOCAB TEST FAILURES: {fails}"
 print("\nALL VOCABULARY TESTS PASS.")
+
+# DEFLATION-FIX TESTS: net_units defaulting for blank UnitsAdded on confident new_unit.
+NU_TESTS = [
+    # (units_added, role, description) -> expected net_units
+    (None, "new_unit", "Construct a new single-family dwelling", 1),   # blank SFR -> 1
+    (None, "new_unit", "Convert detached garage into ADU", 1),        # blank ADU -> 1
+    ("", "new_unit", "New duplex", 1),                                  # blank small -> 1
+    (None, "new_unit", "New construction of 5-story residential apartment", None),  # blank multifam -> flagged
+    (None, "new_unit", "New 50 unit apartment building", None),        # blank multifam -> flagged
+    ("12", "new_unit", "New apartment", 12),                            # real count preserved
+    ("0", "new_unit", "New SFR", 0),                                    # explicit 0 preserved (not overridden)
+    (None, "alteration", "Re-roof", 0),                                # non-creating -> 0
+    (None, "subsidiary", "REV", 0),                                    # child -> 0
+]
+nu_fails=[]
+for ua, role, desc, exp in NU_TESTS:
+    got = net_units(ua, None, role, desc)
+    flag = "ok" if got==exp else "** FAIL"
+    if got!=exp: nu_fails.append((desc[:40], exp, got))
+    print(f"  [{flag}] net_units({ua!r:<6},{role:<11}) = {str(got):<5} expect {str(exp):<5} | {desc[:38]}")
+assert not nu_fails, f"NET_UNITS TEST FAILURES: {nu_fails}"
+print("DEFLATION-FIX TESTS PASS: blank SFR/ADU->1, blank multifamily->flagged(None), real counts preserved.")
 """)
 md(r"""
 ### What just happened
@@ -249,7 +288,7 @@ for ev_id, payload, desc, raw_units, permit in rows:
     ua   = payload_get(payload,"UnitsAdded")
     ur   = payload_get(payload,"UnitsRemoved")
     role,is_master,note = classify(wt,d,adu,occ,ua,ur,permit)
-    nu = net_units(ua,ur,role)
+    nu = net_units(ua,ur,role,d)
     labels.append((ev_id,role,is_master,nu,CLF_HASH,NOW,"description",note))
 con.execute("DELETE FROM event_classifications")
 con.executemany("INSERT INTO event_classifications (event_id,housing_role,is_master,net_units,classifier_hash,classified_at,basis,basis_note) VALUES (?,?,?,?,?,?,?,?)",labels)
@@ -278,24 +317,32 @@ completions into Berkeley's real size bands - 1 / 2-4 / 5-19 / 20-99 / 100+ unit
 addition, per year, so we see whether units come from a few big towers or the small-housing tail.
 """)
 code(r"""
-# UNIT-summed completions per year (master new_unit, finaled), prose-blind net_units, master-only.
-floor=dict(con.execute('''SELECT strftime('%Y',e.event_date) yr, COALESCE(SUM(c.net_units),0)
+# DEDUP-CORRECT: a permit is ONE building regardless of how many source rows / finaled events it has
+# (JN-A faithfully preserved duplicate rows; the dedup belongs HERE at the counting layer). We collapse
+# to one row per distinct source_record_key first, taking that permit's finaled year and net_units,
+# then aggregate. Without this, cross-file-overlap and within-file-duplicate permits double-count (~47u).
+# One finaled event per permit: MIN(event_id) picks a single representative row per permit.
+con.execute("DROP VIEW IF EXISTS _jnc_finaled_permits")
+con.execute('''CREATE TEMP VIEW _jnc_finaled_permits AS
+  SELECT e.source_record_key AS permit,
+         strftime('%Y', e.event_date) AS yr,
+         c.housing_role AS role, c.is_master AS is_master, c.net_units AS net_units
   FROM events e JOIN event_classifications c ON c.event_id=e.event_id
-  WHERE e.event_type_code='permit_finaled' AND c.housing_role='new_unit' AND c.is_master=1
-  GROUP BY yr''').fetchall())
-ceil=dict(con.execute('''SELECT strftime('%Y',e.event_date) yr, COALESCE(SUM(c.net_units),0)
-  FROM events e JOIN event_classifications c ON c.event_id=e.event_id
-  WHERE e.event_type_code='permit_finaled' AND c.housing_role IN ('new_unit','ambiguous')
-    AND COALESCE(c.net_units,0) >= 0
-  GROUP BY yr''').fetchall())
-# building COUNTS alongside, so we can read avg units/completion (overshoot diagnostic)
-bld=dict(con.execute('''SELECT strftime('%Y',e.event_date) yr, COUNT(DISTINCT e.source_record_key)
-  FROM events e JOIN event_classifications c ON c.event_id=e.event_id
-  WHERE e.event_type_code='permit_finaled' AND c.housing_role='new_unit' AND c.is_master=1
-  GROUP BY yr''').fetchall())
+  WHERE e.event_type_code='permit_finaled'
+    AND e.event_id = (SELECT MIN(e2.event_id) FROM events e2
+                      WHERE e2.source_record_key=e.source_record_key
+                        AND e2.event_type_code='permit_finaled')''')
+
+# UNIT-summed completions per year (master new_unit), prose-blind net_units, master-only, DEDUPED.
+floor=dict(con.execute('''SELECT yr, COALESCE(SUM(net_units),0) FROM _jnc_finaled_permits
+  WHERE role='new_unit' AND is_master=1 GROUP BY yr''').fetchall())
+ceil=dict(con.execute('''SELECT yr, COALESCE(SUM(net_units),0) FROM _jnc_finaled_permits
+  WHERE role IN ('new_unit','ambiguous') AND COALESCE(net_units,0) >= 0 GROUP BY yr''').fetchall())
+bld=dict(con.execute('''SELECT yr, COUNT(*) FROM _jnc_finaled_permits
+  WHERE role='new_unit' AND is_master=1 GROUP BY yr''').fetchall())
 
 V3={"2024":708,"2025":497}  # settled unit refs; earlier per-year not all pinned here
-print("COMPLETIONS BY UNITS (v4 clean rule) vs v3:")
+print("COMPLETIONS BY UNITS (v4 clean rule, DEDUPED by permit) vs v3:")
 print(f"{'year':<6}{'v4 floor':>10}{'v4 ceil':>9}{'bldgs':>7}{'u/bldg':>8}{'v3':>7}   inside?")
 tf=tc=tb=0
 for y in [str(x) for x in range(2018,2026)]:
@@ -305,9 +352,18 @@ for y in [str(x) for x in range(2018,2026)]:
     print(f"{y:<6}{f:>10,}{c:>9,}{b:>7,}{upb:>8.1f}{(str(v) if v else ''):>7}   {inside}")
 print(f"{'TOT':<6}{tf:>10,}{tc:>9,}{tb:>7,}")
 print(f"\nv3 8-yr scorecard ref: 4,310 units (city 4,022; +288..+301). v4 floor={tf:,} ceil={tc:,} units.")
-print("Read: does v3 now fall INSIDE floor..ceiling? u/bldg flags whether a year is big-project- or small-housing-driven.")
+print("Read: does v3 fall INSIDE floor..ceiling? u/bldg flags big-project- vs small-housing-driven years.")
+print("KNOWN deferred inflation NOT removed here: 1951 Shattuck phased double-count (+163, CY2024) - the")
+print("  first #3 phantom-master case. CY2024 corrected for it lands ~v3's 708.")
 
-# SIZE-BAND x TYPE distribution (the shape of how Berkeley adds housing), confident new_unit only.
+# DEFLATION-FIX diagnostic: confident new_unit masters with NULL net_units (multifamily missing a count,
+# flagged not guessed). DEDUPED.
+null_mf = con.execute('''SELECT COUNT(*) FROM _jnc_finaled_permits
+  WHERE role='new_unit' AND is_master=1 AND net_units IS NULL''').fetchone()[0]
+print(f"\nMultifamily count-gap (confident new_unit, finaled, NULL net_units): {null_mf} permits.")
+print("  Apartments missing a unit count - flagged not guessed; add 0 to the sums. Large = a 2nd harvest target.")
+
+# SIZE-BAND x TYPE distribution (shape of how Berkeley adds housing), confident new_unit, DEDUPED.
 def band(u):
     u = u or 0
     if u <= 1: return "1 unit (SFR/ADU)"
@@ -316,14 +372,16 @@ def band(u):
     if u <= 99: return "20-99 (mid-rise)"
     return "100+ (major)"
 
-dist = con.execute('''SELECT e.raw_payload, c.net_units, e.raw_description
-  FROM events e JOIN event_classifications c ON c.event_id=e.event_id
-  WHERE e.event_type_code='permit_finaled' AND c.housing_role='new_unit' AND c.is_master=1''').fetchall()
+dist = con.execute('''SELECT p.net_units, e.raw_payload
+  FROM _jnc_finaled_permits p
+  JOIN events e ON e.source_record_key=p.permit AND e.event_type_code='permit_finaled'
+  WHERE p.role='new_unit' AND p.is_master=1
+    AND e.event_id=(SELECT MIN(e2.event_id) FROM events e2 WHERE e2.source_record_key=p.permit AND e2.event_type_code='permit_finaled')''').fetchall()
 import collections
 band_units = collections.Counter(); band_count = collections.Counter()
-for payload, nu, desc in dist:
+for nu, payload in dist:
     b = band(nu); band_units[b]+=(nu or 0); band_count[b]+=1
-print("\nSIZE-BAND DISTRIBUTION (confident new_unit completions, all years):")
+print("\nSIZE-BAND DISTRIBUTION (confident new_unit completions, all years, DEDUPED):")
 print(f"{'band':<20}{'projects':>10}{'units':>10}")
 for b in ["1 unit (SFR/ADU)","2-4 (small middle)","5-19 (lg middle)","20-99 (mid-rise)","100+ (major)"]:
     print(f"{b:<20}{band_count[b]:>10,}{band_units[b]:>10,}")

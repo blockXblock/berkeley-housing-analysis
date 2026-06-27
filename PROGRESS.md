@@ -24,6 +24,17 @@ Generator: `scripts/v4/build_jn_c.py` (SOURCE OF TRUTH — regenerate, never han
 - Size bands (1/2-4/5-19/20-99/100+): 640/405 · 26/53 · 4/51 · 26/1,492 · 6/867.
 - Harvest queue 1,954 inconclusive; all need Accela (37 R2 docs map elsewhere).
 
+**✅ CLASSIFIER LIFTED to an importable home (2026-06-27) — drift-pattern fix, COMMITTED (dev, unpushed).**
+The v4 `classify` + vocab + 16 tests were trapped as cell-strings inside `build_jn_c.py` (un-importable;
+every consumer exec-extracted from the notebook). Lifted verbatim to **`scripts/housing_rules/permit_role.py`**
+(June-7 architecture; June-18 drift audit). New `housing_rules/test_permit_role.py` (16 vocab + 9 deflation,
+anchored). `__init__` re-exports `classify, net_units`. Consumers re-pointed to import: `build_jn_c.py`
+(imports + renders via `inspect`, + fixed its hardcoded `/home/claude/` output path), `build_jn_d.py`
+(import + positional adapter; also fixed `occurred_at`→`event_date` and added `UnitsRemoved`),
+`scratch/.../harden_relabel.py`. **Proven:** behavior-identical old-vs-new over all 85,793 events (0 mismatches);
+role distribution UNCHANGED after regenerate+execute; JN-D's five HARD asserts pass (842/649/839/584/531-584)
+importing cleanly. Proof harness: `scratch/2026-06-27/permit_role_identity_proof.py`.
+
 **OPEN (live work — see handover):**
 1. DEFLATION fix APPROVED, not implemented: confident SFR/ADU with blank UnitsAdded → 1 (single-dwelling
    only; multifamily-blank → flag, not guess). 640 projects→405 units proves the undercount. Likely most

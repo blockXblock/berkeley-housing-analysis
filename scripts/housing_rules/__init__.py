@@ -10,8 +10,9 @@ Public surface (re-exported from submodules):
     Data:
         RHNA_CYCLES, PROJECTION_PERIODS, INCOME_TIERS, STREAMLINING_PROVISIONS
     Functions:
-        cycle_for_date, is_projection_period,
+        cycle_for_date, is_projection_period, rhna_credit_cycle,
         valid_income_tiers_for_year, valid_streamlining_provisions_for_year
+        classify, net_units  (v4 permit housing-role classifier; see permit_role.py)
 """
 from .lookups import (
     RHNA_CYCLES,
@@ -22,9 +23,12 @@ from .lookups import (
 from .classifiers import (
     cycle_for_date,
     is_projection_period,
+    rhna_credit_cycle,
     valid_income_tiers_for_year,
     valid_streamlining_provisions_for_year,
 )
+
+from .permit_role import classify, net_units  # v4 permit housing-role classifier (lifted from build_jn_c)
 
 __all__ = [
     "RHNA_CYCLES",
@@ -33,8 +37,11 @@ __all__ = [
     "STREAMLINING_PROVISIONS",
     "cycle_for_date",
     "is_projection_period",
+    "rhna_credit_cycle",
     "valid_income_tiers_for_year",
     "valid_streamlining_provisions_for_year",
+    "classify",
+    "net_units",
 ]
 
 from .apn import to_canonical_apn, is_canonical_apn  # canonical APN form

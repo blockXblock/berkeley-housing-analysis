@@ -55,43 +55,21 @@ code(r"""
 from pathlib import Path
 import sqlite3, json, datetime as dt, hashlib, csv
 import pandas as pd
+import sys, os
+# Import the classifier + its vocabulary from its single importable home (June-7 architecture;
+# the June-18 drift fix). This NB demonstrates the real machinery — it does not redefine it.
+sys.path.insert(0, os.path.join(os.path.expanduser("~"), "berkeley-data", "scripts"))
+from housing_rules.permit_role import (
+    classify, net_units, payload_get,
+    HOUSING_TERMS, CONVERSION_TERMS, LEGALIZATION_TERMS, ADU_TERMS,
+    PERMANENCE_TERMS, MOVABLE_TERMS, MULTIFAM_TERMS, NONHOUSING_TERMS,
+)
 
 DB_PATH = Path.home() / "berkeley-data" / "databases" / "berkeley_housing_v4.db"
 V2_PATH = Path.home() / "berkeley-data" / "databases" / "berkeley_housing_v2.db"  # read-only, for has-docs bridge
 
-HOUSING_TERMS = [
-    "single family","single-family","new sfr","single-family dwelling"," sfr",
-    "residential building","residential development","residential apartment",
-    "housing development","student housing","group living","live/work","live-work",
-    "duplex","triplex","fourplex","townhouse","townhome","row house",
-    "dwelling unit","dwellings","accessory dwelling","apartment","multifamily","multi-family",
-    "condominium"," condo",
-]
-CONVERSION_TERMS = [
-    "convert to dwelling","convert to residential","add dwelling unit","convert garage",
-    "convert detached","garage conversion","conversion of upper floor","convert basement",
-    "convert attic","convert existing",
-]
-LEGALIZATION_TERMS = [
-    "legalize","legalization","unpermitted","bring into compliance","ab 2533","legalize existing",
-]
-ADU_TERMS = ["adu","jadu","accessory dwelling unit","junior accessory"]
-# movable-home permanence markers: ONLY these make a movable/park-model count as a dwelling
-PERMANENCE_TERMS = ["permanent foundation","wheels removed","on foundation","affixed to foundation",
-                    "tongue removed","placed on a foundation"]
-MOVABLE_TERMS = ["tiny home","tiny house","park model","movable","trailer","manufactured home","rv "]
-# multifamily markers: a confident new_unit whose count is BLANK and which looks multifamily must NOT
-# default to 1 (that would under-count a real apartment) - it stays flagged as a count-gap to harvest.
-MULTIFAM_TERMS = ["apartment","multifamily","multi-family","residential building","residential development",
-                  "residential apartment","housing development","story residential","-story residential",
-                  "units","condominium","mixed use","mixed-use","story building"]
-NONHOUSING_TERMS = [
-    "re-roof","reroof","siding","hvac","water heater","furnace","temp power","temporary power",
-    "tower crane","shoring","abatement","electrical service","solar","photovoltaic"," pv ",
-    "re-pipe","repipe","window replacement","kitchen remodel","bathroom remodel","deck","fence",
-    "retaining wall",
-]
-print("Vocabulary loaded:", len(HOUSING_TERMS),"housing,",len(CONVERSION_TERMS),"conversion,",
+print("Imported classifier + vocabulary from housing_rules.permit_role:",
+      len(HOUSING_TERMS),"housing,",len(CONVERSION_TERMS),"conversion,",
       len(LEGALIZATION_TERMS),"legalization,",len(NONHOUSING_TERMS),"disqualifiers.")
 """)
 md(r"""
@@ -111,84 +89,15 @@ priority order. Role from description+work-type (prose); `net_units` from the st
 only (prose-blind). `ADU=Yes` requires description corroboration to be confident.
 """)
 code(r"""
-def _norm(s): return " ".join(str(s).split()).strip().lower() if s is not None else ""
-def _has(t, terms): return any(x in t for x in terms)
-def _to_int(v):
-    try:
-        if v is None or str(v).strip().lower() in ("","nan","none"): return None
-        return int(float(str(v).strip()))
-    except Exception: return None
-
-def payload_get(payload, key):
-    try: return json.loads(payload).get(key)
-    except Exception: return None
-
-def classify(work_type, description, adu_flag, occtype, units_added, units_removed, permit_number):
-    wt=_norm(work_type); desc=_norm(description); pn=_norm(permit_number)
-    adu_yes = _norm(adu_flag) in ("yes","y","true","1")
-    occ = _norm(occtype)
-    is_new = wt.startswith("new")
-    alt = any(k in wt for k in ("alteration","addition"))
-    has_adu_lang = _has(desc, ADU_TERMS) or _has(desc, CONVERSION_TERMS) or _has(desc, LEGALIZATION_TERMS)
-
-    # RULE 1 - child sub-permit
-    if "-rev" in pn or "-def" in pn:
-        return "subsidiary",0,"REV/DEF child - counted via master only"
-    # RULE 2 - demolition
-    if "demolition" in wt or "demolish" in wt:
-        return "demolition",0,"Work Type demolition"
-    # RULE 3 - sign
-    if wt=="sign":
-        return "non_housing",0,"Work Type sign"
-    # RULE 4 - movable home: dwelling ONLY with permanence markers, else inconclusive
-    if _has(desc, MOVABLE_TERMS):
-        if _has(desc, PERMANENCE_TERMS):
-            return "new_unit",1,"Movable/park-model with permanence markers - counts as dwelling"
-        return "ambiguous",0,"Movable/tiny/trailer without permanence markers - inspect (may be non-counting RV)"
-    # RULE 5 - ADU=Yes requires description corroboration to be confident
-    if adu_yes:
-        if has_adu_lang:
-            return "new_unit",1,"ADU=Yes corroborated by ADU/conversion/legalization language"
-        # ADU flag but no corroborating language -> inconclusive (the dirty-flag case)
-        return "ambiguous",0,"ADU=Yes but no corroborating description language - inspect"
-    # RULE 6 - New + housing language => confident
-    if is_new and _has(desc, HOUSING_TERMS):
-        return "new_unit",1,"New + housing indicator"
-    # RULE 7 - New + units>0 + no disqualifier => confident
-    ua=_to_int(units_added)
-    if is_new and ua and ua>0 and not _has(desc, NONHOUSING_TERMS):
-        return "new_unit",1,f"New + units={ua}, no disqualifier"
-    # RULE 8 - New but unconfirmed => inconclusive
-    if is_new:
-        return "ambiguous",0,"New but no housing indicator/units - inspect"
-    # RULE 9 - alteration/addition WITH conversion or legalization language => inconclusive
-    if alt and (_has(desc, CONVERSION_TERMS) or _has(desc, LEGALIZATION_TERMS)):
-        return "ambiguous",0,"Alteration with conversion/legalization language - may add a dwelling, inspect"
-    # RULE 10 - plain alteration/addition => non-housing (units floored 0)
-    if alt:
-        return "alteration",0,"Alteration/addition, no dwelling language (units floored 0)"
-    # RULE 11 - blank/unmatched => inconclusive (generous)
-    if wt in ("","nan","none"):
-        return "ambiguous",0,"No Work Type - inspect"
-    return "ambiguous",0,"Unmatched by vocabulary - inspect"
-
-def net_units(units_added, units_removed, role, description=""):
-    # Non-creating roles contribute 0.
-    if role in ("alteration","demolition","non_housing","subsidiary"): return 0
-    ua=_to_int(units_added)
-    if ua is not None:
-        return ua  # real structured count present - use it (prose-blind, as before)
-    # DEFLATION FIX: a confident new_unit with a BLANK/null UnitsAdded. An SFR or ADU is 1 dwelling by
-    # definition, so a blank count should be 1, not 0 (the 640-projects->405-units undercount). BUT a
-    # MULTIFAMILY permit with a blank count is a real data gap - defaulting it to 1 would under-count a
-    # whole apartment building - so it stays null-and-flagged (a harvest gap), not guessed as 1.
-    desc=_norm(description)
-    if role=="new_unit":
-        if _has(desc, MULTIFAM_TERMS):
-            return None   # multifamily with missing count -> flagged gap, do NOT guess 1
-        return 1          # single dwelling (SFR/ADU/small) with blank count -> 1 by definition
-    return ua             # any other creating role with blank count -> leave as-is
-print("Rule engine ready (11 rules; ADU=Yes needs description corroboration; net_units prose-blind).")
+import inspect
+from housing_rules import permit_role
+# Demonstrate the REAL machinery: render the imported classify/net_units source so the curriculum
+# shows exactly the priority-order rule engine that runs — defined once in housing_rules, not here.
+print("classify() imported from:", permit_role.__file__)
+print(inspect.getsource(permit_role.classify))
+print(inspect.getsource(permit_role.net_units))
+print("Rule engine ready (imported from housing_rules.permit_role; ADU=Yes needs description "
+      "corroboration; net_units prose-blind).")
 """)
 md(r"""
 ### What just happened
@@ -205,57 +114,11 @@ Proves the vocabulary on real cases from prior research before classifying anyth
 failure - we never classify with a broken vocabulary.
 """)
 code(r"""
-# (work_type, description, adu_flag, occtype, units_added, units_removed, permit) -> expected_role
-TESTS = [
-  ("New","Construct a one-story single-family dwelling on a vacant lot","No","R-3","1","0","B2025-00820","new_unit"),
-  ("New","Building new Single Family Residence (see PV solar permit)","No","R-3","1","0","B2024-02570","new_unit"),
-  ("New","New construction of 5-story residential apartment. Shoring under separate permit","No","R-2","50","0","B2023-02354","new_unit"),
-  ("Alteration","Replace 760 sq ft of deteriorated siding on the existing two story main residence","No","R-3","0","0","B2025-02413","alteration"),
-  ("Alteration","Re-roof existing single family residence","No","R-3","0","0","B2024-09999","alteration"),
-  ("Other","Temporary power pole for construction staging","No","","83","0","B2020-DURANT","ambiguous"),
-  # ADU cases: flag REQUIRES corroboration
-  ("Alteration","Legalize existing ADU","Yes","R-3","1","0","B2024-07001","new_unit"),     # corroborated by legalize+ADU
-  ("Alteration","Convert detached garage into ADU","Yes","R-3","1","0","B2024-07002","new_unit"),  # corroborated
-  ("Addition/Alteration","Conversion of upper floor into a 410 sf JADU","Yes","R-3","1","0","B2024-07003","new_unit"),  # corroborated
-  ("Alteration","Interior remodel of kitchen and bath","Yes","R-3","0","0","B2024-07050","ambiguous"),  # ADU flag, NO corroboration -> harvest
-  # movable home cases
-  ("New","Install park model tiny home, wheels removed, on permanent foundation","No","R-3","1","0","B2025-07100","new_unit"),
-  ("New","Place movable tiny house on lot","No","R-3","1","0","B2025-07101","ambiguous"),  # no permanence markers
-  ("Demolition","Demolish existing 3-story SFR","No","","0","0","B2023-04472","demolition"),
-  ("Sign","Install wall sign","No","","0","0","B2024-08001","non_housing"),
-  ("New","Revision to approved apartment plans","No","R-2","50","0","B2023-02354-REV1","subsidiary"),
-  ("New","New ground-floor retail shell, no residential","No","B","0","0","B2024-06001","ambiguous"),
-]
-fails=[]
-for wt,desc,adu,occ,ua,ur,pn,exp in TESTS:
-    got,_,note=classify(wt,desc,adu,occ,ua,ur,pn)
-    ok = "ok" if got==exp else "** FAIL"
-    if got!=exp: fails.append((pn,exp,got,desc[:40]))
-    print(f"  [{ok}] {pn:<18} expect {exp:<11} got {got:<11} | {desc[:42]}")
-assert not fails, f"VOCAB TEST FAILURES: {fails}"
-print("\nALL VOCABULARY TESTS PASS.")
-
-# DEFLATION-FIX TESTS: net_units defaulting for blank UnitsAdded on confident new_unit.
-NU_TESTS = [
-    # (units_added, role, description) -> expected net_units
-    (None, "new_unit", "Construct a new single-family dwelling", 1),   # blank SFR -> 1
-    (None, "new_unit", "Convert detached garage into ADU", 1),        # blank ADU -> 1
-    ("", "new_unit", "New duplex", 1),                                  # blank small -> 1
-    (None, "new_unit", "New construction of 5-story residential apartment", None),  # blank multifam -> flagged
-    (None, "new_unit", "New 50 unit apartment building", None),        # blank multifam -> flagged
-    ("12", "new_unit", "New apartment", 12),                            # real count preserved
-    ("0", "new_unit", "New SFR", 0),                                    # explicit 0 preserved (not overridden)
-    (None, "alteration", "Re-roof", 0),                                # non-creating -> 0
-    (None, "subsidiary", "REV", 0),                                    # child -> 0
-]
-nu_fails=[]
-for ua, role, desc, exp in NU_TESTS:
-    got = net_units(ua, None, role, desc)
-    flag = "ok" if got==exp else "** FAIL"
-    if got!=exp: nu_fails.append((desc[:40], exp, got))
-    print(f"  [{flag}] net_units({ua!r:<6},{role:<11}) = {str(got):<5} expect {str(exp):<5} | {desc[:38]}")
-assert not nu_fails, f"NET_UNITS TEST FAILURES: {nu_fails}"
-print("DEFLATION-FIX TESTS PASS: blank SFR/ADU->1, blank multifamily->flagged(None), real counts preserved.")
+# The 16 vocabulary anchors + 9 deflation cases now live as REAL unit tests beside the classifier:
+# scripts/housing_rules/test_permit_role.py. Run them from their home so a vocabulary regression
+# halts the notebook (we never classify with a broken vocabulary).
+from housing_rules.test_permit_role import run as run_permit_role_tests
+run_permit_role_tests()
 """)
 md(r"""
 ### What just happened
@@ -498,5 +361,7 @@ events or v3. Commit nothing until John reviews.*
 
 nb=new_notebook(cells=cells)
 nb.metadata={"kernelspec":{"display_name":"Python 3","language":"python","name":"python3"},"language_info":{"name":"python"}}
-with open("/home/claude/v4/JN-C_classify.ipynb","w") as f: nbf.write(nb,f)
-print("wrote JN-C_classify.ipynb",len(cells),"cells")
+import os as _os
+_NB_OUT = _os.path.join(_os.path.expanduser("~"), "berkeley-data", "notebooks", "v4", "JN-C_classify.ipynb")
+with open(_NB_OUT,"w") as f: nbf.write(nb,f)
+print("wrote", _NB_OUT, len(cells),"cells")

@@ -56,12 +56,30 @@ baseline: cumulative **CO 3,066 vs city 4,022 (−956 before C2)**; **BP 4,911 v
   never become rows, so each ADU is counted once. Verified: our 16 ancillary parcels appear ONCE in city
   data (CO=real count). Our exposure = unconditional all-permits ingestion + classifier over-promoting
   "solar/meter for ADU" → new_unit. NOT a city-side error. (`scratch/2026-06-28/city_apr_grain_probe.py`.)
+- **C-multifamily over-collapse = −199 CO — ✅ DONE.** 3 phased multifamily buildings double-counted (both
+  foundation/podium phase AND completion as new_unit): 057-2025-013 (−81), 055-1819-001 (−78), 056-1928-019
+  (−40, group-living; **reconciles C2-T2** — B2021-04949's 41 re-homed to completion B2021-02423). Demoted the
+  foundation phases → subsidiary/0, kept completions. Protection guard held; PROTECT set (056-1945 B&C 8u,
+  052-1516 3 SFRs) EXCLUDED. Audit `docs/audit/2026-06-28_c_multifamily_collapse_write.md`.
+- **🏗 KEY INSIGHT — phased multifamily is the SYSTEMATIC both-directions error.** The classifier handles
+  multi-phase big buildings inconsistently: sometimes BOTH phases→new_unit (over-count, −199 fixed here),
+  sometimes the completion phase→ambiguous (under-count, +147 held). Same root cause, opposite signs, ~±175
+  each → they largely offset, which is why the net looked like only −100. The fix is one rule: **one building,
+  one count, at the unit-bearing completion phase.**
 - **C4 BP reporting-year ≈ net-zero** (~67% year-shuffle, ~33%/+380 true excess) — alignment, not magnitude. pending.
-- **Reconciliation NOW (C2+C3 done):** 3,066 (incl. ~457 ADUs already) **+ C2 1,036 − C3 Shattuck 163 −
-  C3 tail 17 = 3,922 vs city 4,022 (−100)**. The residual −100 is a **GENUINE under-count** (recall gap +
-  C4 BP timing) — the phantom *inflation* has been stripped, so we're now converging toward the city's
-  (correct) count from below, not masking gaps with double-counts.
-- **CAPSTONE = full-APR reproduction.** Remaining: C3 review/protect tail · C4 (BP realign) · recall-gap.
+- **Reconciliation NOW (C2 + C3 + C-multifamily done):** 3,066 + C2 1,036 − Shattuck 163 − ADU-tail 17 −
+  C-multifamily 199 = **3,723 vs city 4,022 (−299).** Full decomposition of the original gap:
+  **~689 permit#-mismatch NOISE** (net-zero — city credits same parcel, different ID) · **±phase-handling
+  CORRECTED** (−199 over done; **+147 under HELD for Accela**) · **~4 ADU recall** · **~−150 residual** =
+  genuine under-count (real housing city counts that we don't) for the contested-direction investigation.
+  The OVER-collapse *deepens* the headline (−100→−299) **on purpose** — it strips real pipeline double-counts
+  the city never had; the held +147 under would bring it to ~−152.
+- **⚖ PRINCIPLE (load-bearing):** we do **NOT adopt city counts for buildings we can't independently size.**
+  The +147 under-count buildings have NO unit count in our WorkDescriptions (that's why they're `ambiguous`) →
+  counting them needs an **Accela/architect-plan pull (HARVESTER)**, not adopting the city's number. CKAN is
+  reconcile-target only; city-silence is never proof, city-count is never our source.
+- **CAPSTONE = full-APR reproduction.** Remaining: +147 UNDER (Accela-blocked) · C4 BP realign · C3
+  review/protect tail · ~−150 residual contested-direction adjudication.
 
 **Deferred / NOT done (carried forward):** **C3 review/protect tail** (per-parcel, John's call): ~4
 likely-additional ancillary double-counts mis-flagged protect (053-1600-027, 053-1689-006, 060-2429-002,
@@ -73,9 +91,10 @@ B2024-00819 2/1); **OPEN — the REAL ADU recall gap** lives in OTHER bijection 
 a single ADU — the lone possible city-side double); curriculum notebooks; June-25 parcel-identity model
 (ADR-003); capacity JN; discrepancy-framing; **push dev**.
 
-**v4 DB mutation ledger this session (4 gated writes, all reversible, snapshots in `databases/keep_snapshot_2026-06-28_*`):**
-C2-T1 (+907) · C2-T2 (+129) · C3-Shattuck (−163) · C3-tail (−17). Net CO 3,066 → 3,922. DB is gitignored;
-the `docs/audit/2026-06-28_*` records are the durable trail (permits/values/reverse SQL/snapshot paths).
+**v4 DB mutation ledger this session (5 gated writes, all reversible, snapshots in `databases/keep_snapshot_2026-06-28_*`):**
+C2-T1 (+907) · C2-T2 (+129) · C3-Shattuck (−163) · C3-tail (−17) · C-multifamily (−199). Net CO 3,066 → 3,723.
+Post-write sha `9cb9471658e13281`. DB is gitignored; the `docs/audit/2026-06-28_*` records are the durable
+trail (permits/values/reverse SQL/snapshot paths).
 
 ---
 

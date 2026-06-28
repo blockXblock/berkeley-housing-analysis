@@ -114,3 +114,8 @@ output/
 notes/cc_prompts/
 # Persistent scratch — survives reboots (unlike /tmp), git-invisible
 scratch/
+
+# Calibration prototypes — kept on disk, not committed (standing decision)
+scripts/v4/prototype_score*.py
+# Packaged module tarball (derived; source modules are tracked)
+*.tar.gz

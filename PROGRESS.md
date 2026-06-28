@@ -44,19 +44,38 @@ baseline: cumulative **CO 3,066 vs city 4,022 (−956 before C2)**; **BP 4,911 v
   would **DOUBLE-COUNT**. **WHY:** the hardening pass re-ran the SAME `classify` JN-C already materialized,
   so its "584 new_unit" were already-correct classifications, not relabel targets. *Lesson: a relabel
   queue built by re-running the committed classifier finds confirmations, not gaps.* (`scratch/2026-06-28/c1_relabel_review.py`.)
-- **C3 phantom-master = −163 CO** (1951 Shattuck `057-2046-001-00`, two 163u permits, CY2024; −231 upper
-  bound; rest tiny → #3 review). **pending.**
+- **C3 phantom-master Shattuck = −163 CO — ✅ DONE.** 1951 Shattuck `057-2046-001-00`: two 163u permits
+  were one 12-story/179,680-GSF/163-unit building in two phases. **Phase 2 (B2021-04893) → subsidiary to
+  Phase 1 master (B2019-05608)**; CY2024 326→163. Audit `docs/audit/2026-06-28_c3_shattuck_write.md`.
+- **C3 ADU-tail = −17 CO — ✅ DONE.** 16 ADU parcels where an **ancillary** permit (solar/meter/panel/
+  service) was mis-counted `new_unit=1` → demoted to subsidiary/0 (17 demotions; 055-1840-007 had 2 solars).
+  **Protection guard held** (0 dwellings demoted); **3 genuine ADU-pairs PROTECTED**. Audit
+  `docs/audit/2026-06-28_c3_adu_tail_write.md`.
+- **🏙 KEY ARCHITECTURAL INSIGHT — the ADU ancillary double-count is OURS, not the city's.** The city's APR
+  (`hcd_apr_mirror` `table_a2`) is a **curated unit-creating-permit rollup** — ancillary solar/meter permits
+  never become rows, so each ADU is counted once. Verified: our 16 ancillary parcels appear ONCE in city
+  data (CO=real count). Our exposure = unconditional all-permits ingestion + classifier over-promoting
+  "solar/meter for ADU" → new_unit. NOT a city-side error. (`scratch/2026-06-28/city_apr_grain_probe.py`.)
 - **C4 BP reporting-year ≈ net-zero** (~67% year-shuffle, ~33%/+380 true excess) — alignment, not magnitude. pending.
-- **Corrected reconciliation (C2+C3+C4, NOT C1+…):** 3,066 (incl. ~457 ADUs already) **+ C2 1,036 (DONE) =
-  4,102 (+80)** − C3 163 (pending) = **3,939 (−83 vs 4,022)**. Within ~±83 with C2 done + C3 pending.
-- **CAPSTONE = full-APR reproduction.** Remaining sequence: **C3 (phantom/Shattuck) → C4 (BP realign)**.
+- **Reconciliation NOW (C2+C3 done):** 3,066 (incl. ~457 ADUs already) **+ C2 1,036 − C3 Shattuck 163 −
+  C3 tail 17 = 3,922 vs city 4,022 (−100)**. The residual −100 is a **GENUINE under-count** (recall gap +
+  C4 BP timing) — the phantom *inflation* has been stripped, so we're now converging toward the city's
+  (correct) count from below, not masking gaps with double-counts.
+- **CAPSTONE = full-APR reproduction.** Remaining: C3 review/protect tail · C4 (BP realign) · recall-gap.
 
-**Deferred / NOT done (carried forward):** **C3/Shattuck + general #3 building-identity** (incl. B2020-03895;
-102 of-584 on 49 multi-permit ADU parcels); **C4 BP reporting-year map**; **C2 mini-cleanup (gated, NOT a
-relabel):** 9 finaled masters within the 584 at net_units 0/NULL + 2 stored-vs-desc mismatches (B2023-02975
-12/11, B2024-00819 2/1); **OPEN — the REAL ADU recall gap** (if any) lives in OTHER bijection buckets
-(`v4_adu_flag_nonhousing_role` 328…), NOT the 584 — not yet sized; curriculum notebooks; June-25 parcel-identity
-model (ADR-003); capacity JN; discrepancy-framing; **push dev**.
+**Deferred / NOT done (carried forward):** **C3 review/protect tail** (per-parcel, John's call): ~4
+likely-additional ancillary double-counts mis-flagged protect (053-1600-027, 053-1689-006, 060-2429-002,
+061-2611-023) + **8 REVIEW** parcels + **3 confirmed real pairs to KEEP** (052-1542-008, 055-1906-015,
+057-2018-007); B2020-03895 (#3, still pending); **C4 BP reporting-year map**; **C2/C3 mini-cleanup (gated):**
+9 finaled masters within the 584 at net_units 0/NULL + 2 stored-vs-desc mismatches (B2023-02975 12/11,
+B2024-00819 2/1); **OPEN — the REAL ADU recall gap** lives in OTHER bijection buckets
+(`v4_adu_flag_nonhousing_role` 328…), not yet sized; **one-off — 052-1519-022 city anomaly** (city CO=2 for
+a single ADU — the lone possible city-side double); curriculum notebooks; June-25 parcel-identity model
+(ADR-003); capacity JN; discrepancy-framing; **push dev**.
+
+**v4 DB mutation ledger this session (4 gated writes, all reversible, snapshots in `databases/keep_snapshot_2026-06-28_*`):**
+C2-T1 (+907) · C2-T2 (+129) · C3-Shattuck (−163) · C3-tail (−17). Net CO 3,066 → 3,922. DB is gitignored;
+the `docs/audit/2026-06-28_*` records are the durable trail (permits/values/reverse SQL/snapshot paths).
 
 ---
 

@@ -4,6 +4,52 @@
 
 ---
 
+## Where we are (2026-06-27) — CLASSIFIER LIFTED · ADU BIJECTION · SCORER · APR SIZING
+
+**▶ Read `notes/TECHNICAL_HANDOVER_2026-06-27.md` (on-disk truth) + chat-Claude's `HANDOVER_2026-06-27.md`
+(strategy).** Today's arc, dev HEAD = **`aa6ded0`** (UNPUSHED; `dev` ahead of origin by 1).
+
+**✅ CLASSIFIER LIFT (committed aa6ded0, tested).** The v4 `classify` + vocab + tests were lifted out of
+the build_jn_c cell-string into **`scripts/housing_rules/permit_role.py`** (importable; `housing_rules.classify`).
+`test_permit_role.py` = 16 vocab + 9 deflation anchors, **25/25 pass**. Behavior-identical proven at lift-time
+(0 mismatches / 85,793 events); role dist UNCHANGED (alteration 64,739 · subsidiary 9,597 · ambiguous 7,403 ·
+new_unit 2,964 · demolition 920 · non_housing 170). Consumers re-pointed (build_jn_c imports+renders;
+build_jn_d imports; harden_relabel imports). Also fixed: `occurred_at`→`event_date`; build_jn_c `/home/claude`
+output path. ⚠ the proof harness (`scratch/.../permit_role_identity_proof.py`) is now stale (notebook imports,
+no longer defines) — durable re-verify = the 25 tests + the role-dist query.
+
+**✅ ADU BIJECTION + 584 (verified, scratch).** JN-D engine (`scripts/v4/build_jn_d.py`, committed) — HCD-anchored
+ADU bijection, **5 HARD asserts pass: 842 / 649 / 839(99.6% match) / 584 hardened / band 531-584**. The 584 =
+description-corroborated relabel ADUs the v4 ADU-flag missed (442 finaled). 3 genuinely missing from v4.
+
+**✅ TWO-AXIS SCORER + 5 DECISIONS (prototype, NOT persisted).** Built two independent implementations
+(JN `prototype_score_v2.py` + CC `_v2_cc.py`; reconciled ρ=0.90 adu / 0.85 new_housing), then the merged
+**`prototype_score_v3.py` (current)**. Settled decisions: (D1) keep explicit medium band; (D2) weak-only
+converts floor to LOW; (D3) pre-2017 statutory terms ('second unit' etc.) count only behind a creating-context
+guard; (D4) regressions hold (strong-ADU+new_unit high/high, big buildings 23 low/1 high, bound adu≤new_housing
+→ forbidden corner empty). Trunk = new_housing_conf (Imps oracle); branch = adu_conf (HCD+footprint oracles,
+footprint positive-only ≥2 — never dissent). **No D5 / persisted scorer / notebook yet.**
+
+**🔑 FOUR-CORRECTIONS APR SIZING — the trunk-reconciliation plan (computed PRE-relabel).** Full-APR v4-vs-city
+baseline: cumulative **CO 3,066 vs city 4,022 (−956)**; **BP 4,911 vs 4,531 (+380)**; every CY >10% off on ≥1 axis.
+Corrections sized by magnitude:
+- **C2 multifamily count-gap = +864 CO — THE BIGGEST LEVER (~1.9× the relabel)**: 23 new_unit masters with
+  blank UnitsAdded dropped to zero (big apartment buildings 159/152/107/81/78u…); 16/23 recoverable from
+  description, 7 → Accela. Biggest year 2020 (+254).
+- **C1 584 ADU relabel = +457 CO** (in hand, even spread).
+- **C3 phantom-master = −163 CO** (1951 Shattuck `057-2046-001-00`, two 163u permits, CY2024; −231 multi-master
+  upper bound; rest tiny, need #3 review). Lands in CY2024 where v4 is already over → correctly offsets.
+- **C4 BP reporting-year ≈ net-zero** (~67% year-shuffle, ~33%/+380 true excess) — alignment, not magnitude.
+- Net: 3,066 + 457 + 864 − 224 ≈ **4,163 vs city 4,022 (~+3.5%)** → the corrections roughly close the CO gap.
+- **CAPSTONE = a full-APR reproduction** (not just ADUs). Sequence: C2 (count recovery) → C1 (relabel) → C3
+  (phantom/Shattuck) → C4 (BP realign). O'Keefe/capstone target per chat-Claude's handover.
+
+**Deferred / NOT done (carried forward):** apply the 584 relabel (gated write to `event_classifications`);
+C2 multifamily count recovery; C3/Shattuck + general #3 building-identity; C4 BP reporting-year map; curriculum
+notebooks; June-25 parcel-identity model (ADR-003) follow-through; capacity JN; discrepancy-framing; **push dev**.
+
+---
+
 ## Where we are (2026-06-26) — v4 REBUILD UNDERWAY
 
 **▶ READ `notes/v4/HANDOVER_v4_2026-06-26.md` FIRST.** The project has pivoted to the **v4 event-stream

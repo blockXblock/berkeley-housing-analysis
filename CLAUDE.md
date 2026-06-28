@@ -9,6 +9,14 @@ An **independent** reconstruction of Berkeley's housing-production pipeline
 sources**, used to produce/verify the HCD Annual Progress Report (APR) and a
 public explorer (berkeleybuild.com) + Datasette.
 
+## The four versions — read this before the DB sections below
+Lineage v1 → v2 → v3 → v4, with DISTINCT roles (don't conflate file names with roles):
+- **v1** — `databases/berkeley_housing_analysis.db`, the original flat `projects` table. Frozen/superseded.
+- **v2** — `databases/berkeley_housing_v2.db`, the rich **SERVING database**. **Feeds berkeleybuild.com, the APR (`generate_apr_v2.py`), and the Explorer (`export_explorer_data_v2.py`).** Everything in "Canonical database", ADR-001/002, the `@112cb03` verdict layer, and the explorer/RHNA machinery below describes THIS track. **This is what's deployed.**
+- **v3** — the lean, stage-oriented **rebuild pipeline** (reproducible-from-sources; `scripts/build_v2/` S0–S9). It is **the curriculum's world** — students rebuild it from raw sources and compare. NOT a serving DB; never fed the site. Valid prior research + the comparison target.
+- **v4** — `databases/berkeley_housing_v4.db`, the **ACTIVE event-stream rebuild.** Re-grounds housing entities on the **BP/event flow** (entities CONSTRUCTED by classification + oracle-triangulation over 85,793 CPRA events, not parsed/migrated) — built to correct the entity errors in both v2 and v3. **All current analytical work happens here** (the APR reconciliation, the ADU bijection, the scorer). The v4 housing-role classifier is **`housing_rules.permit_role.classify` (commit `aa6ded0`)** — NOT the v2-era `@112cb03` cited below.
+- **Where to look:** active rebuild state = TOP of `PROGRESS.md` (2026-06-27/28). The v2 sections below are accurate for the deployed site. Apparent conflicts = different tracks, not staleness.
+
 ## Canonical database
 **`databases/berkeley_housing_v2.db`** — V2 normalized schema (46 tables):
 `projects → project_versions → unit_program(+affordability) → project_parcels →

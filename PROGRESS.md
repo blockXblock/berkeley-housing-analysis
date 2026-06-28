@@ -20,7 +20,9 @@ no longer defines) — durable re-verify = the 25 tests + the role-dist query.
 
 **✅ ADU BIJECTION + 584 (verified, scratch).** JN-D engine (`scripts/v4/build_jn_d.py`, committed) — HCD-anchored
 ADU bijection, **5 HARD asserts pass: 842 / 649 / 839(99.6% match) / 584 hardened / band 531-584**. The 584 =
-description-corroborated relabel ADUs the v4 ADU-flag missed (442 finaled). 3 genuinely missing from v4.
+description-corroborated ADUs the v4 ADU-FLAG missed — but ⚠ the v4 ROLE classifier did NOT miss them: all
+584 are already `new_unit` with net_units set (442 finaled, ~457 already counted). So the "584 relabel" is a
+PHANTOM, not a recall gap — see the corrected four-corrections note below. 3 genuinely missing from v4.
 
 **✅ TWO-AXIS SCORER + 5 DECISIONS (prototype, NOT persisted).** Built two independent implementations
 (JN `prototype_score_v2.py` + CC `_v2_cc.py`; reconciled ρ=0.90 adu / 0.85 new_housing), then the merged
@@ -30,23 +32,31 @@ guard; (D4) regressions hold (strong-ADU+new_unit high/high, big buildings 23 lo
 → forbidden corner empty). Trunk = new_housing_conf (Imps oracle); branch = adu_conf (HCD+footprint oracles,
 footprint positive-only ≥2 — never dissent). **No D5 / persisted scorer / notebook yet.**
 
-**🔑 FOUR-CORRECTIONS APR SIZING — the trunk-reconciliation plan (computed PRE-relabel).** Full-APR v4-vs-city
-baseline: cumulative **CO 3,066 vs city 4,022 (−956)**; **BP 4,911 vs 4,531 (+380)**; every CY >10% off on ≥1 axis.
-Corrections sized by magnitude:
-- **C2 multifamily count-gap = +864 CO — THE BIGGEST LEVER (~1.9× the relabel)**: 23 new_unit masters with
-  blank UnitsAdded dropped to zero (big apartment buildings 159/152/107/81/78u…); 16/23 recoverable from
-  description, 7 → Accela. Biggest year 2020 (+254).
-- **C1 584 ADU relabel = +457 CO** (in hand, even spread).
-- **C3 phantom-master = −163 CO** (1951 Shattuck `057-2046-001-00`, two 163u permits, CY2024; −231 multi-master
-  upper bound; rest tiny, need #3 review). Lands in CY2024 where v4 is already over → correctly offsets.
-- **C4 BP reporting-year ≈ net-zero** (~67% year-shuffle, ~33%/+380 true excess) — alignment, not magnitude.
-- Net: 3,066 + 457 + 864 − 224 ≈ **4,163 vs city 4,022 (~+3.5%)** → the corrections roughly close the CO gap.
-- **CAPSTONE = a full-APR reproduction** (not just ADUs). Sequence: C2 (count recovery) → C1 (relabel) → C3
-  (phantom/Shattuck) → C4 (BP realign). O'Keefe/capstone target per chat-Claude's handover.
+**🔑 FOUR-CORRECTIONS APR RECONCILIATION — ⚠ C1 CORRECTED (phantom) + C2 DONE.** Full-APR v4-vs-city
+baseline: cumulative **CO 3,066 vs city 4,022 (−956 before C2)**; **BP 4,911 vs 4,531 (+380)**.
+- **C2 multifamily count-gap = +1,036 CO — ✅ DONE (commit `5d8fcdd`, both tranches):** 20 buildings (big
+  apartments 159/152/107/81/78u…); T1 15 permits/907 dwelling, T2 5 permits/129 convention-flagged
+  (live-work+sleeping). Gated reversible writes; audit `docs/audit/2026-06-28_c2_tranche{1,2}_write.md`.
+  **This was the real lever.**
+- **C1 584 ADU relabel = ❌ PHANTOM — NOT a correction (verified 2026-06-28).** The 584 are ALREADY
+  new_unit masters with net_units set, already contributing **~457 to the 3,066 baseline**. The sizing's
+  "+457" was `net_units()` computed on already-counted permits, mis-reported as an addition → a C1 write
+  would **DOUBLE-COUNT**. **WHY:** the hardening pass re-ran the SAME `classify` JN-C already materialized,
+  so its "584 new_unit" were already-correct classifications, not relabel targets. *Lesson: a relabel
+  queue built by re-running the committed classifier finds confirmations, not gaps.* (`scratch/2026-06-28/c1_relabel_review.py`.)
+- **C3 phantom-master = −163 CO** (1951 Shattuck `057-2046-001-00`, two 163u permits, CY2024; −231 upper
+  bound; rest tiny → #3 review). **pending.**
+- **C4 BP reporting-year ≈ net-zero** (~67% year-shuffle, ~33%/+380 true excess) — alignment, not magnitude. pending.
+- **Corrected reconciliation (C2+C3+C4, NOT C1+…):** 3,066 (incl. ~457 ADUs already) **+ C2 1,036 (DONE) =
+  4,102 (+80)** − C3 163 (pending) = **3,939 (−83 vs 4,022)**. Within ~±83 with C2 done + C3 pending.
+- **CAPSTONE = full-APR reproduction.** Remaining sequence: **C3 (phantom/Shattuck) → C4 (BP realign)**.
 
-**Deferred / NOT done (carried forward):** apply the 584 relabel (gated write to `event_classifications`);
-C2 multifamily count recovery; C3/Shattuck + general #3 building-identity; C4 BP reporting-year map; curriculum
-notebooks; June-25 parcel-identity model (ADR-003) follow-through; capacity JN; discrepancy-framing; **push dev**.
+**Deferred / NOT done (carried forward):** **C3/Shattuck + general #3 building-identity** (incl. B2020-03895;
+102 of-584 on 49 multi-permit ADU parcels); **C4 BP reporting-year map**; **C2 mini-cleanup (gated, NOT a
+relabel):** 9 finaled masters within the 584 at net_units 0/NULL + 2 stored-vs-desc mismatches (B2023-02975
+12/11, B2024-00819 2/1); **OPEN — the REAL ADU recall gap** (if any) lives in OTHER bijection buckets
+(`v4_adu_flag_nonhousing_role` 328…), NOT the 584 — not yet sized; curriculum notebooks; June-25 parcel-identity
+model (ADR-003); capacity JN; discrepancy-framing; **push dev**.
 
 ---
 

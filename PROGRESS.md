@@ -97,6 +97,10 @@ many:many to permits (spec `notes/v4/building_identity_layer_spec.md`; prototype
 harvest `scripts/v4/building_identity_calibration_harvest.py`). Validated 9/9 known cases; calibrated across
 the full population (low grouping-conf 364→2, 0 erasures, housing-formation untouched). **Next session:**
 - **build the REAL layer as a committed module** (buildings + permit_building + grouping_log tables) — current is prototype/scratch.
+- **doc graduation:** when the layer is BUILT, its design graduates to a settled ADR at
+  `docs/audit/<date>_ADR-004_building_identity.md` — that's the consolidation point. The in-flight spec
+  stays at `notes/v4/building_identity_layer_spec.md` until then (don't relocate now; moving breaks
+  PROGRESS + the two handover citations written this session).
 - **~104 genuine-hard adjudication set** for John: **47 count-relevant ties** (unit-bearing phased buildings)
   + **28 cross-APN** (re-platted/multi-parcel — which signal wins) + **25 large-cluster** + **4 unlabeled-residual**.
 - **291 unitless-xref cosmetic-tie rule pending** (low-stakes: no count rides on them; resolve by base/earliest-as-representative).

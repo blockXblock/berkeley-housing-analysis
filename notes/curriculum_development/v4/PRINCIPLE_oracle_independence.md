@@ -1,3 +1,6 @@
+> Canonical copy: `docs/methodology/PRINCIPLE_oracle_independence.md`. This is the curriculum /
+> student-facing copy — keep in sync with canonical.
+
 # PRINCIPLE — Oracle Triangulation and Independence
 
 *The conceptual frame inherited by the JN-D build notebook (the ADU bijection) and the

@@ -229,6 +229,11 @@ compatibility view is **`v_projects_flat`** (what `generate_apr_v2.py` and
 - Audit trail (read this for current analytical state): `docs/audit/` — the
   `2026-05-31_*` and `2026-06-01_*` docs are the latest deep arc.
 - `PROGRESS.md` exists but may be stale; prefer the dated audit docs + `git log`.
+- **Doc homes (maturity gradient):** `notes/` = working/in-flight (sketches, specs-in-progress,
+  dated reports, handovers; `notes/v4/` = v4 track). `docs/audit/` = dated analytical records +
+  settled ADRs. `docs/methodology/` = durable principles/definitions/lessons. `docs/` root =
+  published reference. **A design graduates:** sketch → `notes/` → (when built) settled ADR in
+  `docs/audit/`. Durable principles → `docs/methodology/`.
 
 ## Current state pointer
 **Read `PROGRESS.md` (repo root) first** — it is the live current-state snapshot, updated

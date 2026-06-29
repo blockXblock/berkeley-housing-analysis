@@ -91,10 +91,20 @@ B2024-00819 2/1); **OPEN — the REAL ADU recall gap** lives in OTHER bijection 
 a single ADU — the lone possible city-side double); curriculum notebooks; June-25 parcel-identity model
 (ADR-003); capacity JN; discrepancy-framing; **push dev**.
 
-**v4 DB mutation ledger this session (5 gated writes, all reversible, snapshots in `databases/keep_snapshot_2026-06-28_*`):**
-C2-T1 (+907) · C2-T2 (+129) · C3-Shattuck (−163) · C3-tail (−17) · C-multifamily (−199). Net CO 3,066 → 3,723.
-Post-write sha `9cb9471658e13281`. DB is gitignored; the `docs/audit/2026-06-28_*` records are the durable
-trail (permits/values/reverse SQL/snapshot paths).
+**v4 DB mutation ledger (6 gated writes, all reversible, snapshots in `databases/keep_snapshot_*`):**
+C2-T1 (+907) · C2-T2 (+129) · C3-Shattuck (−163) · C3-tail (−17) · C-multifamily (−199) · dedup47 (−47).
+Net CO 3,066 → **3,676 vs city 4,022 (−346, dedup-clean)**. Post-write sha `6389e612ac0c6b04`. DB is
+gitignored; the `docs/audit/2026-06-{28,29}_*` records are the durable trail (permits/values/reverse SQL/snapshots).
+- **dedup47 (2026-06-29):** 4 permits had DUPLICATE finaled-new_unit-master events (CPRA two-file overlap +
+  within-file dups; v4 deduped permit KEYS but not EVENTS). Collapsed to one each (B2014-05786 −44 + 3×−1).
+  The −47 removes a masking over-count; **phase collapses verified clean** (distinct permits, single finaled
+  events). Audit `docs/audit/2026-06-29_dedup47_write.md`.
+- **event-dedup (2026-06-29, structural/CO-neutral):** in-place removed **2,870** cross-file duplicate milestone
+  events (events 85,793 → 82,923; CO unchanged 3,676; 30,764 permits all retained; 0 orphans). 3 tiers: AUTO 2,870 ·
+  REVIEW-HOLD 3 (B2014-05786 cosmetic + B2022-00032 WorkDescription-differs) · DIFFERENT-DATE 12 (possible
+  re-finals, held). Audit `docs/audit/2026-06-29_event_dedup_write.md`. **BP must be counted PERMIT-level**
+  (distinct issued = 30,511 vs event-level ~31,941 pre-dedup; confirm the 4,911 figure uses distinct permits).
+  **DURABLE ingestion fix (dedup at JN-A cell 17) PROPOSED for review, NOT executed** — `scratch/2026-06-29/proposed_jn_a_dedup_fix.py`.
 
 ---
 

@@ -108,10 +108,14 @@ parsing FIRST (the same "read the live data before designing" discipline that ca
    / 6 phased / 22 city-silent; bottleneck = phase-consolidation, not harvest). **Most important for "what next".**
 5. **`scratch/2026-06-25/state_inventory.md`** — current ground truth (harvester drained, S9 exists,
    contested correctly empty). **Read so you don't re-propose done work.**
-6. **The probabilistic-model design** (`building_identity_probabilistic_model.md`, in /mnt/user-data/outputs
-   or wherever John filed it) — a FULLER alternative (mint building_id + confidence from weighted signals).
-   It's a real design but **the measurement showed it's NOT needed for the core fix** (grouping+labels
-   suffices for the checkable cases). Keep as the scaling option; don't build it without John choosing it.
+6. **The probabilistic/confidence-scored layer design** — the FULLER alternative (mint a synthetic
+   building_id + confidence from weighted signals) was REALIZED 2026-06-29 as the calibrated
+   building-identity layer: see **`notes/v4/building_identity_layer_spec.md`** (spec) and
+   **`scripts/v4/building_identity_prototype.py`** + **`scripts/v4/building_identity_calibration_harvest.py`**
+   (prototype-validated 9/9, harvest-calibrated). ⚠ CORRECTION: the earlier reference to a sandbox file
+   `building_identity_probabilistic_model.md` in `/mnt/user-data/outputs` was a GHOST — that path is
+   chat-Claude's sandbox, NOT the repo; no such file was ever bridged. The idea now lives in the real
+   on-disk artifacts above.
 7. **CLAUDE.md** — the standing rules (two-agent workflow, gating discipline, oracle-only mirror, etc.).
 8. **Live code only if building:** `build_s2.py` (the S2 chokepoint — read this session; the re-key is TWO
    coupled edits: load_spine smap + build_events STEP-2 grouping; and the CO-date fixes itself via

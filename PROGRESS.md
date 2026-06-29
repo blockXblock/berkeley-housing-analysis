@@ -91,6 +91,25 @@ B2024-00819 2/1); **OPEN — the REAL ADU recall gap** lives in OTHER bijection 
 a single ADU — the lone possible city-side double); curriculum notebooks; June-25 parcel-identity model
 (ADR-003); capacity JN; discrepancy-framing; **push dev**.
 
+**Building-identity layer (2026-06-29) — DESIGNED + prototype-validated + harvest-calibrated, NOT yet built
+as a committed module:** permits are facts; buildings are synthetic-keyed, confidence-scored CLAIMS linked
+many:many to permits (spec `notes/v4/building_identity_layer_spec.md`; prototype `scripts/v4/building_identity_prototype.py`;
+harvest `scripts/v4/building_identity_calibration_harvest.py`). Validated 9/9 known cases; calibrated across
+the full population (low grouping-conf 364→2, 0 erasures, housing-formation untouched). **Next session:**
+- **build the REAL layer as a committed module** (buildings + permit_building + grouping_log tables) — current is prototype/scratch.
+- **~104 genuine-hard adjudication set** for John: **47 count-relevant ties** (unit-bearing phased buildings)
+  + **28 cross-APN** (re-platted/multi-parcel — which signal wins) + **25 large-cluster** + **4 unlabeled-residual**.
+- **291 unitless-xref cosmetic-tie rule pending** (low-stakes: no count rides on them; resolve by base/earliest-as-representative).
+- **JN-A ingestion dedup patch** (`scratch/2026-06-29/proposed_jn_a_dedup_fix.py`) — ADOPT before next CPRA re-pull.
+- **BP 4,911 re-verify at PERMIT-level** (distinct issued), not event-level (event-dedup exposed ~1,430 inflation).
+- **held for review:** `B2022-00032` canonical-description (WorkDescription differs across the two files) + the **12 different-date finaled** cases (possible legit re-finals, not dupes).
+- **still standing:** +147 Accela harvest (UNDER side), −150 residual, C3 review-tail.
+
+**⚠ LESSON (ghost-doc) — docs authored in chat-Claude's `/mnt/user-data/outputs` are NOT in the repo unless
+John bridges them.** A `building_identity_probabilistic_model.md` was cited in two handovers as if persisted;
+it never existed on disk (sandbox-only). Handovers must NOT cite sandbox paths as persisted — cite a bridged,
+on-disk path or mark "(unbridged sandbox draft)". Refs corrected 2026-06-29 to point to the real artifacts.
+
 **v4 DB mutation ledger (6 gated writes, all reversible, snapshots in `databases/keep_snapshot_*`):**
 C2-T1 (+907) · C2-T2 (+129) · C3-Shattuck (−163) · C3-tail (−17) · C-multifamily (−199) · dedup47 (−47).
 Net CO 3,066 → **3,676 vs city 4,022 (−346, dedup-clean)**. Post-write sha `6389e612ac0c6b04`. DB is

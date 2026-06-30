@@ -359,6 +359,85 @@ docs), each resolution a reversible relabel. Later, #3 lands on this fully-label
 events or v3. Commit nothing until John reviews.*
 """)
 
+# ============================================================ VISUALIZATIONS (derive-from-data, text-sandwiched)
+import os as _osh, subprocess as _sp
+try:
+    _PR_HASH=_sp.check_output(["git","-C",_osh.path.expanduser("~/berkeley-data"),"log","-1","--format=%h","--","scripts/housing_rules/permit_role.py"],text=True).strip()
+except Exception:
+    _PR_HASH="(unknown)"
+
+md("""
+## Visualizations
+Per the viz convention: text-sandwiched, **derive-from-data** (read live from `event_classifications`,
+never hardcoded), with *what-it-could-mislead-about* annotations.
+""")
+
+md("""
+### VIZ 1 — housing_role distribution (the subject)
+**What it shows.** How JN-C labeled every event — `alteration` dominates, then subsidiary / ambiguous /
+new_unit / demolition / non_housing. Log scale (alteration dwarfs the rest). Derives live from
+`event_classifications GROUP BY`, and overlays the **count grain** (master+finaled+new_unit) so the
+events-vs-buildings gap is concrete.
+""")
+code("""
+import sqlite3, os
+import plotly.graph_objects as go
+DBP=os.path.join(os.path.expanduser('~'),'berkeley-data','databases','berkeley_housing_v4.db')
+con=sqlite3.connect(f'file:{DBP}?mode=ro',uri=True)   # READ-ONLY — viz never writes
+dist=con.execute("SELECT housing_role,COUNT(*) FROM event_classifications GROUP BY 1 ORDER BY 2 DESC").fetchall()
+masters=con.execute("SELECT COUNT(*) FROM event_classifications WHERE is_master=1").fetchone()[0]
+counted=con.execute("SELECT COUNT(*) FROM events e JOIN event_classifications c ON c.event_id=e.event_id "
+  "WHERE e.event_type_code='permit_finaled' AND c.housing_role='new_unit' AND c.is_master=1 AND COALESCE(c.net_units,0)>0").fetchone()[0]
+roles=[r for r,_ in dist]; vals=[c for _,c in dist]
+fig=go.Figure(go.Bar(x=vals, y=roles, orientation='h', text=vals, textposition='outside'))
+fig.update_layout(title=f'housing_role over {sum(vals):,} EVENTS · {masters:,} masters · {counted:,} counted-CO buildings',
+   xaxis_type='log', xaxis_title='events (log scale)', yaxis_title='housing_role', height=430)
+fig.show()
+print(f'events={sum(vals):,}  masters={masters:,}  counted-CO={counted:,}')
+""")
+md("""
+**⚠ mislead-guards.** (1) This is a distribution over **EVENTS, not buildings** — the ~2,618 `new_unit`
+events are **NOT 2,618 buildings**; the count grain is **master + finaled + new_unit** (the much smaller
+`counted-CO` number in the title). (2) The ~85% `alteration` is **not noise** — it's *housing-hides-in-
+alteration* (garage/basement → ADU conversions live here), which is exactly why we classify all of it rather
+than filter at intake. (3) Log scale: the bars compress 3 orders of magnitude — read the labels, not the lengths.
+""")
+
+md(f"""
+### VIZ 2 — the `classify()` decision skeleton (structural)
+**What it shows.** The branch order of `housing_rules.permit_role.classify`: payload → non_housing? →
+demolition? → subsidiary? → new_unit? → alteration? → else ambiguous. **Stamped with the classifier's current
+commit `{_PR_HASH}`** (read live at build time, not hardcoded).
+""")
+_c2 = r'''
+from IPython.display import Markdown, display
+m = """```mermaid
+flowchart TD
+  S["event payload (work_type · description · ADU · occtype · units)"] --> NH{non-housing terms or non-residential occtype?}
+  NH -- yes --> RNH([non_housing])
+  NH -- no --> DEM{demolition terms?}
+  DEM -- yes --> RDEM([demolition])
+  DEM -- no --> SUB{REV/DEF child · ancillary · see-permit-X?}
+  SUB -- yes --> RSUB([subsidiary])
+  SUB -- no --> NEW{new-dwelling / ADU terms + unit signal?}
+  NEW -- yes --> RNEW([new_unit])
+  NEW -- no --> ALT{alteration terms?}
+  ALT -- yes --> RALT([alteration])
+  ALT -- no --> RAMB([ambiguous])
+```"""
+display(Markdown(m))
+print("DECISION SKELETON as of permit_role.classify @ HASHSTAMP")
+'''.replace('HASHSTAMP', _PR_HASH)
+code(_c2)
+md(f"""
+**⚠⚠ HIGH DRIFT RISK — read this.** This is a **decision *skeleton*, hand-drawn, as of commit `{_PR_HASH}`**.
+Unlike the quantitative charts it **cannot auto-derive its shape** from the code — so **if
+`housing_rules.permit_role.classify` changes, THIS DIAGRAM LIES until it is regenerated.** The **authoritative
+logic is always `permit_role.classify`** (+ its vocab lists + branch order), never this picture. The skeleton
+also elides the vocab detail (HOUSING_TERMS / CONVERSION_TERMS / ADU_TERMS / NONHOUSING_TERMS) and ordering
+subtleties — use it to *navigate* the logic, then read the function for truth.
+""")
+
 nb=new_notebook(cells=cells)
 nb.metadata={"kernelspec":{"display_name":"Python 3","language":"python","name":"python3"},"language_info":{"name":"python"}}
 import os as _os

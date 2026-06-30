@@ -232,6 +232,109 @@ ud=open(os.path.join(ROOT,'experiments/accela_scrape/url_discovery_scraper.py'))
 print('  discover_url default module is Building:', 'module_hint: str = "Building"' in ud)
 """)
 
+# ============================================================ VISUALIZATIONS
+md("""
+## Visualizations
+Per the viz convention: text-sandwiched, with *what-it-could-mislead-about* annotations. JN-H is a map, so
+VIZ 1–2 are structural diagrams (mermaid — GitHub renders in-notebook; graphviz is the richer option when
+the `dot` binary is installed); VIZ 3 is a small quantitative status (plotly), deriving its total from parts.
+""")
+
+# ---- VIZ 1: harvest data-flow ----
+md("""
+### VIZ 1 — The harvest data flow (the subject is itself a flow)
+**What it shows.** permit# → `discover_url` (Building engine) → capID/CapDetail → attachment grid → download
+PDF → R2 (`source_document_id`) → extract count → gated v4 write → JN-E baseline append. The acquisition
+pipeline made visible.
+""")
+code("""
+from IPython.display import Markdown, display
+display(Markdown('''```mermaid
+flowchart LR
+  P["permit#\\n(B2018-03422 ...)"] --> D["discover_url\\nBuilding engine (default)"]
+  D --> C["capID / CapDetail\\nModule=Building"]
+  C --> G["attachment grid\\n(iframe, JS-generated links)"]
+  G --> PDF["download PDF\\n(live Playwright session)"]
+  PDF --> R2[("R2\\nsource_document_id")]
+  R2 --> X["extract count\\nFROM DOCUMENT CONTENT"]
+  X --> W["gated v4 write\\nnew_unit, net_units=N, basis_note=source_document_id"]
+  W --> B["JN-E re-derives\\n-> NEW baseline appended"]
+  CITY[/"CKAN / city APR (ENUMERATOR)\\nWHICH buildings: 69/55/23"/] -. enumerates only .-> P
+  classDef enum fill:#fdd,stroke:#c00,stroke-dasharray:5 3;
+  class CITY enum;
+```'''))
+print('CITY enumerates WHICH buildings (-> permit#); NO arrow from CITY into X/W/B (the count). That is the guard.')
+""")
+md("""
+**⚠ viz-verifiability — the boundary made visible.** The count flows from the **building's own document**
+(`X`/`W`), and **CKAN/city-APR is a SEPARATE enumerator node** with a dashed arrow only into `permit#` — it
+says *which* buildings to chase (the held 69/55/23), and has **NO arrow into the count** (`X`/`W`/`B`). Same
+circularity guard as JN-E, at the **acquisition** layer: if city-APR ever fed the count, independence is void.
+""")
+
+# ---- VIZ 2: engine vs wrapper ----
+md("""
+### VIZ 2 — Engine vs wrapper (the structural correction, made durable)
+**What it shows.** The B-permit-NATIVE **engine** (discovery/queue/inspection — the **default**) vs the
+ZP-scoped **wrappers** (a past entitlement campaign). This is the durable form of the correction: a future
+reader **sees** the engine is Building-native and does not re-derive the "needs a B-permit fix" error.
+""")
+code("""
+display(Markdown('''```mermaid
+flowchart TB
+  subgraph ENGINE["B-permit-NATIVE ENGINE (Building = DEFAULT)"]
+    UD["url_discovery_scraper.py\\nmodule_hint='Building' DEFAULT"]
+    RUN["run_url_discovery.py"]
+    Q["build_url_discovery_queue.py\\n(queues FROM B-permits)"]
+    INSP["scrape_inspections.py\\n(Module=Building, proven)"]
+  end
+  subgraph WRAP["ZP-SCOPED WRAPPERS (past entitlement campaign)"]
+    HP["harvest_plansets.py\\n:167 forces Planning · :174 SKIP-NOT-ZP\\n<< the ONLY ZP-specific lines >>"]
+    HA["harvest_affordability.py (ZP-discovered)"]
+    DOC["document_download_poc.py\\n(attachment widget — module-agnostic)"]
+  end
+  ENGINE -->|"discovery works AS-IS for B-permits"| WRAP
+  classDef zp fill:#fdd,stroke:#c00;
+  class HP zp;
+```'''))
+print('Engine = Building-native default. Only harvest_plansets:167/174 is ZP-specific (red). NOT a missing feature.')
+""")
+md("""
+**What it could MISLEAD about.** The `ENGINE → WRAPPERS` arrow is *capability flow* (the engine's discovery
+feeds any document wrapper), **not** a claim the wrappers are B-permit-ready — they aren't (the red node is
+the literal ZP block). The point the diagram fixes in place: **B-permit harvest is the default; the ZP-only
+behavior is two lines in one wrapper**, not an engine limitation.
+""")
+
+# ---- VIZ 3: +147 status ----
+md("""
+### VIZ 3 — The +147 held set: grounded vs pending
+**What it shows.** The 3 held buildings and their acquisition status — 1 effectively R2-grounded
+(B2021-03302/2352 Shattuck/proj179), 2 needing a scrape (B2018-03422, B2016-05139). Derives the **+147 total
+from its parts** (69+55+23).
+""")
+code("""
+import plotly.graph_objects as go
+HELD=[('B2021-03302', 69, 'doc in R2 (proj179) — extract-to-confirm'),
+      ('B2018-03422', 55, 'needs Accela scrape'),
+      ('B2016-05139', 23, 'needs Accela scrape')]
+total=sum(u for _,u,_ in HELD)              # DERIVE the +147 from parts
+assert total==147, f'held total {total} != 147'
+colors=['#2ca02c' if 'R2' in s else '#d62728' for _,_,s in HELD]
+fig=go.Figure(go.Bar(x=[p for p,_,_ in HELD], y=[u for _,u,_ in HELD],
+    marker_color=colors, text=[f"{u}u\\n{s}" for _,u,s in HELD], textposition='outside'))
+fig.update_layout(title=f"+{total} held set: green=doc-available · red=needs scrape (city's enumeration, not yet our count)",
+                  yaxis_title="city-claimed units (enumeration target)", height=420)
+fig.show()
+""")
+md("""
+**⚠ viz-verifiability.** The bar heights (69/55/23) are the **city's ENUMERATION**, not yet our independent
+counts — even the green (R2-grounded) building is *doc-available*, **count still to be read from the
+document's content** (the 69 is confirmed only once proj179's plan set / the investigation grounds it).
+"Grounded" = the document exists to extract from; it is **not** "we adopted 69". The colors track
+acquisition status, never count-confirmation.
+""")
+
 # ============================================================ §5
 md("""
 ## §5 — Provenance + verifiability ledger (failure modes)

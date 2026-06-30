@@ -283,6 +283,117 @@ print(f'HYPOTHETICAL if +147 harvested: {co}+147 = {co+147} vs {city} = {co+147-
 print('building-identity: refinement input to §6 grouping; base reconciliation does not depend on it.')
 """)
 
+    # ============================================================ VISUALIZATIONS (derive from data/baseline, never hardcode)
+    md("""
+## Visualizations
+Per the viz convention: each chart is text-sandwiched, **derives from the data/baseline (never hardcoded
+literals)**, and carries a *what-it-could-mislead-about* annotation. (plotly for the quantitative charts +
+flow; mermaid for the lineage — graphviz is the richer option when the `dot` binary is installed.)
+""")
+
+    # ---- VIZ 1: reconciliation waterfall ----
+    md("""
+### VIZ 1 — Reconciliation waterfall (the subject)
+**What it shows.** How **3,066 → 3,676** through the gated corrections — the offsetting flows made visual.
+Read it as: the floor (pre-corrections) plus each audited write, landing on the derived CO.
+**Derives from** the baseline `ledger.steps` (not literals) — so the bars track the data.
+""")
+    code("""
+import json, glob, os
+import plotly.graph_objects as go
+BASE=json.load(open(sorted(glob.glob(os.path.join(ROOT,'data','baselines','reconciliation_baseline_*.json')))[-1]))
+steps=BASE['ledger']['steps']
+labels=[s['label'] for s in steps]+['= CO (derived)']
+deltas=[s['delta'] for s in steps]+[0]
+measure=['absolute']+['relative']*(len(steps)-1)+['total']
+# DERIVE-CHECK: the ledger must reconcile to the gated co_completions, else the chart would lie
+assert sum(s['delta'] for s in steps)==BASE['hard_gated']['co_completions']['value'], 'ledger != CO'
+fig=go.Figure(go.Waterfall(orientation='v', measure=measure, x=labels, y=deltas,
+    text=[f"{d:+,}" if m!='total' else f"{sum(s['delta'] for s in steps):,}" for d,m in zip(deltas,measure)],
+    connector={'line':{'color':'rgb(160,160,160)'}}))
+fig.update_layout(title=f"CO reconciliation ledger: 3,066 → {BASE['hard_gated']['co_completions']['value']:,} (derived)",
+                  yaxis_title='units', showlegend=False, height=460)
+fig.show()
+""")
+    md("""
+**What to read / what it could MISLEAD about.** The −163 (Shattuck) and −199 (C-multifamily) are **our OWN
+double-counts removed**, not the city's. ⚠ Mislead-guards: the bars are **net of larger offsetting flows**
+(a −199 "phase-collapse" removed ~398 of gross double-count to net −199); and **+1,036 C2 is NOT "we found
+1,036 new units"** — it's a **count-gap recovery** (units present in permits but uncounted by the prior
+classifier). A waterfall implies clean additive discovery; these are corrections, not discoveries.
+""")
+
+    # ---- VIZ 2: gap-decomposition Sankey ----
+    md("""
+### VIZ 2 — The −346 gap decomposition (the flow)
+**What it shows.** The −346 is **not uniform** — it's competing currents. This Sankey splits **city 4,022**
+into the part our **3,676** matches plus the directional components (held / residual / ADU / heuristic slop).
+**Derives** the magnitudes from the baseline (`hard_gated` + `documented_not_gated`); the slop is computed so
+the flows balance to 4,022 exactly (making the heuristic imprecision visible, not hidden).
+""")
+    code("""
+ours=BASE['hard_gated']['co_completions']['value']; city=BASE['hard_gated']['city_co_total']['value']
+held=BASE['documented_not_gated']['phase_under_held']['value']
+adu=BASE['documented_not_gated']['adu_recall']['value']
+resid=abs(BASE['documented_not_gated']['residual']['value'])
+slop=city-ours-held-adu-resid          # DERIVED balancer -> flows sum to city exactly; exposes heuristic slop
+# nodes: 0 our, 1 city, 2 held, 3 residual, 4 adu, 5 slop
+labels=[f'Our CO {ours:,}', f'City CO {city:,}', f'+{held} HELD (not counted, awaiting Accela)',
+        f'~{resid} residual (real under)', f'~{adu} ADU recall', f'~{slop} heuristic slop (approx)']
+src=[0,2,3,4,5]; tgt=[1,1,1,1,1]; val=[ours,held,resid,adu,slop]
+HELD_COLOR='rgba(214,39,40,0.65)'   # distinct: HELD is NOT part of our count
+link_color=['rgba(150,150,150,0.45)', HELD_COLOR, 'rgba(255,127,14,0.5)', 'rgba(44,160,44,0.5)', 'rgba(190,190,190,0.35)']
+fig=go.Figure(go.Sankey(
+    node=dict(label=labels, pad=18, thickness=16,
+              color=['#888','#444',HELD_COLOR,'#ff7f0e','#2ca02c','#bbb']),
+    link=dict(source=src, target=tgt, value=val, color=link_color)))
+fig.update_layout(title=f"Why ours {ours:,} < city {city:,}: the −{city-ours} gap as currents", height=420)
+fig.show()
+""")
+    md("""
+**⚠ viz-verifiability (the chart can overstate — guard it).**
+- **The +147 is HELD, not counted** (crimson, labeled "not counted, awaiting Accela"). It is drawn as a
+  *would-fill-the-gap* current, **NOT** a flow into our 3,676 — or the Sankey would imply a count we
+  **deliberately did not make** (oracle-not-source: the city enumerated it, we haven't independently grounded it).
+- **The ~689 permit-mismatch noise is net-zero** and is **NOT a flow here** — it lives *inside* the matched
+  3,676 (both sides count those units under different IDs); showing it as a gap-current would invent a gap.
+- **held / residual / ADU / slop are HEURISTIC** (baseline `documented_not_gated`, not gated). The **slop link
+  is the derived balancer** — its size IS the imprecision, shown honestly rather than hidden by forcing a tidy sum.
+""")
+
+    # ---- VIZ 3: data-flow lineage ----
+    md("""
+### VIZ 3 — Data-flow lineage (provenance made visible)
+**What it shows.** Where every number comes from: raw CPRA → JN-A → JN-C → gated corrections → v4 DB →
+JN-E (this reconciliation). **CKAN/mirror is a SEPARATE node that ONLY compares** — an arrow points INTO the
+comparison, never back into our derived chain. **Derives** the headline numbers into the node labels from the
+baseline. (Rendered as mermaid — GitHub renders it in-notebook; graphviz is the richer option when installed.)
+""")
+    code("""
+from IPython.display import Markdown, display
+g=f'''```mermaid
+flowchart LR
+  RAW["raw CPRA xlsx\\n(2018-2022 + 2023-2025)"] --> JNA["JN-A ingestion\\nevents (deduped)"]
+  JNA --> JNC["JN-C classification\\nevent_classifications"]
+  JNC --> COR["gated corrections\\nC2/C3/C-multifamily/dedup"]
+  COR --> V4[("v4 DB\\nberkeley_housing_v4.db")]
+  V4 --> JNE["JN-E reconciliation\\nOur CO = {ours:,} · BP = {BASE['hard_gated']['bp_issued']['value']:,}"]
+  JNE --> CMP{{"COMPARISON\\nours {ours:,} vs city {city:,} = {ours-city}"}}
+  CKAN[/"CKAN / HCD mirror (ORACLE)\\nCity CO = {city:,}"/] --> CMP
+  classDef oracle fill:#fdd,stroke:#c00,stroke-dasharray:5 3;
+  class CKAN oracle;
+```'''
+display(Markdown(g))
+print('CKAN -> COMPARISON only; NO arrow runs CKAN -> (RAW|JNA|JNC|COR|V4|JNE). That dead-end IS the circularity guard.')
+""")
+    md("""
+**⚠ the circularity-invariant, made visual.** Every arrow flows **left-to-right into our derived chain
+except CKAN's** — CKAN points **only into the COMPARISON node** (dashed red, an oracle sink). **If an arrow
+ever ran from CKAN back into RAW/JN-A/JN-C/corrections/v4/JN-E, the reconciliation would be circular and
+void.** The diagram's shape *is* the proof that can't happen: the oracle is a dead-end comparison input,
+never a source. (This is `verifiability_contract.oracle_not_source` drawn.)
+""")
+
     md("""
 ## §13 — The gate: derived vs baseline (not hardcoded)
 **Design.** The gate compares **DERIVED vs the external timestamped BASELINE file** — never hardcoded

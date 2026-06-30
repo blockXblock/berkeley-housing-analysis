@@ -14,6 +14,19 @@
     "hold_dont_adopt": "A city figure we cannot independently reproduce is HELD, not adopted. Adopting it would be oracle-as-source (circular)."
   },
 
+  "ledger": {
+    "note": "How co_completions (3,676) was reached from the pre-corrections baseline, step by step (each step a gated audited write). Additive documentation of the SAME 3,676 — the deltas SUM to co_completions; not a new result. VIZ 1 (waterfall) derives from this.",
+    "steps": [
+      {"label": "baseline (pre-corrections)", "delta": 3066, "kind": "floor"},
+      {"label": "C2 multifamily count-gap", "delta": 1036, "audit": "2026-06-28_c2_tranche{1,2}_write.md"},
+      {"label": "C3 Shattuck phantom-master", "delta": -163, "audit": "2026-06-28_c3_shattuck_write.md"},
+      {"label": "C3 ADU-tail ancillary", "delta": -17, "audit": "2026-06-28_c3_adu_tail_write.md"},
+      {"label": "C-multifamily phase-collapse", "delta": -199, "audit": "2026-06-28_c_multifamily_collapse_write.md"},
+      {"label": "dedup47 duplicate-file-row", "delta": -47, "audit": "2026-06-29_dedup47_write.md"}
+    ],
+    "reconciles_to": "co_completions (3676) — VIZ 1 asserts sum(deltas) == that value"
+  },
+
   "hard_gated": {
     "co_completions": {
       "value": 3676,

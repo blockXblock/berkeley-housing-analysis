@@ -114,6 +114,14 @@ John bridges them.** A `building_identity_probabilistic_model.md` was cited in t
 it never existed on disk (sandbox-only). Handovers must NOT cite sandbox paths as persisted — cite a bridged,
 on-disk path or mark "(unbridged sandbox draft)". Refs corrected 2026-06-29 to point to the real artifacts.
 
+**⚠ LESSON (deploy-state decay) — PROGRESS deploy-state entries must be VERIFIED against origin
+(`git ls-remote` / `merge-base --is-ancestor`), never carried from memory.** The "a525a3a staged &
+awaiting push" note was stale ~2 weeks: its content had already shipped to origin/main via another path
+(the curriculum merges) and origin/main had moved off the staged base — yet PROGRESS still said "staged,
+clean FF, awaiting push." Deploy state decays SILENTLY (another branch ships your content, the remote
+moves, a /tmp worktree is purged). Re-verify before trusting any staged/pending-deploy note — same family
+as the ghost-doc lesson: memory is a hint, the remote is ground truth.
+
 **v4 DB mutation ledger (6 gated writes, all reversible, snapshots in `databases/keep_snapshot_*`):**
 C2-T1 (+907) · C2-T2 (+129) · C3-Shattuck (−163) · C3-tail (−17) · C-multifamily (−199) · dedup47 (−47).
 Net CO 3,066 → **3,676 vs city 4,022 (−346, dedup-clean)**. Post-write sha `6389e612ac0c6b04`. DB is
@@ -230,7 +238,7 @@ Explorer + curriculum + APR work at the v4 spine — migration, not abandonment)
 - **Caveats recorded in the findings:** 363 collided canonical keys / 2,677 collapsed parcels (sibling-Imps risk tagged); co_only cohort = 713 (measured); LatestDocumentDate is a recording date. CLAUDE.md: UseCode is a weak housing signal (Imps-magnitude is the proxy); finaled-permit overrides Imps=$0.
 - **Detector tuning APPLIED 2026-06-16 (committed):** built_vs_vacant now weights a City-finaled `completes` permit ABOVE the assessor `Imps` reading — completion WITH a finaled permit + `Imps=$0` → `assessor_lag_finaled` / `assessor_lag_demo_rebuild` (low); WITHOUT a finaled permit + not-recent → HIGH. Re-run result: the 6 (134/158/161/174/299/358) all dropped to **low** (174/208 tagged demo→rebuild); **built_vs_vacant now has ZERO HIGH**; the only HIGH anywhere is the 1 shadow_candidate (proj54/62). Demo→rebuild sub-case (`Imps` demo-zeroed, distinct from pure lag, both = built) recorded in CLAUDE.md.
 
-**RHNA-CREDIT METHOD FIXED (backend) + RHNA PROGRESS BAR HELD (front-end) — earlier.** Two-part per John's Decision 1+2. No DB write (generator query + generated artifacts + front-end source only). **Committed to `dev` (`c3e2179` + comment-cleanup `440aa8c`) and merged with the CY2023 fix into the staged dev→main deploy `a525a3a` — push is John's (see *Site / publish state*).**
+**RHNA-CREDIT METHOD FIXED (backend) + RHNA PROGRESS BAR HELD (front-end) — earlier.** Two-part per John's Decision 1+2. No DB write (generator query + generated artifacts + front-end source only). **Committed to `dev` (`c3e2179` + comment-cleanup `440aa8c`); the RHNA fix + CY2023 are now already live on `origin/main`** (rode in via the curriculum merges; a525a3a abandoned-redundant 2026-06-29 — see *Site / publish state*).
 - **Decision 1 — method fixed in `scripts/generate_apr_v2.py` (`generate_rhna_progress`):** RHNA credit now computed from **FIRST building-permit issuance** (`MIN(event_date)` over non-subsidiary `building_permit_issued` events from `project_events`) **+ the `>= 2022-06-30` projection-period boundary** + UC exclusion — replacing the old `v_projects_flat.bp_issued_date` (MAX, no boundary) query that wrongly flipped 5th-cycle-first-permitted projects to 6th on a later revision. **Result: 1,198 units / 234 VLI / 28 projects = 13.4%** (was 1,671 / 320 / 18.7%). Verified: direct query == generator output == regenerated JSON. By-year first-BP: CY2022=62, CY2023=436, CY2024=569, CY2025=131. **⚠ COVERAGE-LIMITED / INTERNAL** — tracked-project BPs only, NOT Berkeley's full ADU/infill permit stream.
 - Regenerated `data/apr/{2021..2026}/apr_<y>.json` — semantic diff vs committed is **ONLY** `rhna_credit` (1671→1198, 18.7→13.4, vli 320→234); every other table byte-identical. Copied in surgically (no collateral file churn).
 - **Decision 2 — front-end de-misframed (don't publish a coverage-limited / completions-as-RHNA bar):**
@@ -239,7 +247,7 @@ Explorer + curriculum + APR work at the v4 spine — migration, not abandonment)
   - **KEPT trustworthy:** net-new-CO annual tiles, 703 completions, all-time CO 3,611, BP-issued raw counts.
 - **BP PANEL DE-MISFRAMED (John approved):** the "Building Permits Issued (RHNA Credit)" panel — the worst instance (a specific FALSE coverage claim on a journalist-facing tool) — fixed in BOTH `explorer.html` and `explorer_v2.html`: (1) **removed** the false **"captures 83% of city's reported BPs"** note (reality ~28 tracked projects, a small fraction not 83%); (2) **relabeled** "Building Permits Issued (RHNA Credit)" → **"Building Permits Issued — Among Tracked Projects"** + dropped the ✓ + added a coverage-limited subtitle; (3) **kept the raw counts** with a coverage note (BP = subset of city volume / not a complete RHNA figure / CO counts from the complete feed). Verified: no "83%" or "RHNA Credit" live text remains in either file; div balance intact (513/513, 499/499).
 - **QUEUED (scope only, don't build):** full city BP-stream acquisition (Berkeley open-data building-permits / Accela BP export incl. the ADU/infill tail) — the prerequisite to ever publish a trustworthy RHNA-progress bar.
-- **DONE → STAGED:** committed `c3e2179`/`440aa8c`, merged with CY2023 `a07147c` into the staged dev→main merge `a525a3a` (worktree, clean fast-forward, verify-on-main gate PASSED). **Awaiting John's push + Cloudflare purge** (irreversible = John's; see *Site / publish state*).
+- **DONE → SHIPPED:** `c3e2179`/`440aa8c` + CY2023 `a07147c` are **live on `origin/main`** (carried in via the curriculum merges; the RHNA bar is HELD on the live site). The a525a3a staging merge was **abandoned-redundant** 2026-06-29 (see *Site / publish state*).
 
 **R1 COMPLETE — assessor refreshed + re-founded audit + 10 verified re-points (earlier).** The Feb-2026 refresh dissolved the staleness: re-ran the stale-APN audit against current data — **23 of 43 Class-2 "assessor-lagged" RESOLVED** to real built parcels (11 of those = permanent corner-lot dual-address). The earlier rollback proved OVER-CONSERVATIVE (the re-points were right, just unverifiable against 2019 data); with current data they verify. **Gated write (snapshot `keep_snapshot_2026-06-16_pre-reapply.db`): re-applied 10 re-points, all verified against Feb-2026 Imps:**
 - **TIER 1 (9):** proj37/98/481/492/493/513 (built condos $130K–$1.07M), **proj899 → 55-1822-9-1 = the $60.1M 82-unit building** (orig APN lacked the `-1` sub-parcel), proj4/55 (In-Review, correct-parcel-vacant-pending).
@@ -351,13 +359,25 @@ Explorer + curriculum + APR work at the v4 spine — migration, not abandonment)
 
 **Site / publish state (2026-06-16) — verified against `git ls-remote`.**
 - Completion display **derives from `co_date`** (`export_explorer_data_v2.py`); CO stat == map markers by construction. Non-v2 export sequestered. **Published completion count = 703** (raw view 705, 2 migration stubs rejected). The committed `docs/explorer_data.js` is **current with the DB** (regen diff = timestamp-only; **895 markers**, dedup'd).
-- **`origin/main` = `7e445a3` (pushed)** carries the **703 publish** (895 markers, income-tiers, R2 links, all-time CO 3,611) via `77459e4` (the dev→main reconcile) + `e6858ee` (merged_into_id export fix).
-- **NEW deploy STAGED, NOT pushed:** dev→main merge **`a525a3a`** (worktree `/tmp/berkeley-main-deploy`) adds the **CY2023 tile fix + RHNA honesty** — held progress bar (no published "% toward goal"), BP panel relabeled **"Among Tracked Projects"** (false 83% removed), generator first-BP + 2022-06-30 method → **1,198 internal/coverage-noted**. Push is a **clean fast-forward `7e445a3→a525a3a`**. **Awaiting John: push (`cd /tmp/berkeley-main-deploy && git push origin main`) + Cloudflare purge** (irreversible = John's). The staged deploy `a525a3a` was built from dev tip `440aa8c`; the CLAUDE.md/PROGRESS.md doc-reconcile commit on top of it is **docs-only (not served, not part of the site deploy)** and will ride the next dev→main merge. origin/dev is behind — push to back up.
+- **`origin/main` = `d50a510` (verified `git ls-remote` 2026-06-29)** carries the 703 publish +
+  income-tiers/R2 links + **the RHNA-honesty + CY2023 fix** (RHNA bar HELD live — `origin/main:docs/explorer.js`
+  has the "RHNA progress BAR HELD" marker; `440aa8c` rode in via the curriculum merges) + the **Data Science
+  Curriculum** (`539173b` + ~9). **The live site is NOT overclaiming RHNA — already fixed.**
+- **~~a525a3a staged deploy~~ ABANDONED 2026-06-29 — REDUNDANT.** Its RHNA + CY2023 payload is **already
+  on `origin/main`** (440aa8c is an ancestor of main). Also stale/non-FF (main moved `7e445a3→d50a510`); the
+  `/tmp/berkeley-main-deploy` worktree is **gone** (purged). **Nothing to push or purge for a525a3a.**
+- **REAL outstanding served deploy = `5530ff3`** (property-tax/assessed-value explorer feature;
+  `docs/explorer.{html,js}`, +54) — the only served change on `dev` not on `origin/main`. John's call;
+  **purge target = `explorer.html` + `explorer.js`** (apr_*.json unchanged → no data purge).
+- **⚠ DIVERGENCE (reconcile before any dev→main):** curriculum (`539173b` + ~9) is **MAIN-ONLY** (never merged
+  back to dev); **dev** has the property-tax feature + this session's v4/docs/notes (not served). `dev→main` is
+  **non-FF and would LOSE the curriculum** — don't blind-push. Fix: merge `origin/main` into `dev` so dev is the
+  superset again, then dev→main is a clean FF.
 
 ---
 
 ## Next steps (current queue, 2026-06-16)
-0. **DEPLOY (John):** push the staged `a525a3a` + Cloudflare purge (see *Site / publish state*); then I record the live state + can clean up the worktree.
+0. **DEPLOY (John):** a525a3a ABANDONED (redundant — already live). Real pending deploy = property-tax feature `5530ff3` (cherry-pick onto main, then purge explorer.html/js). **First reconcile the dev↔main divergence** (curriculum is main-only). See *Site / publish state*.
 1. **`parcel_crosswalk`** (prior-APN + split/merge lineage) — the **durable re-platting fix**; absorbs the **15 orphaned APNs** (Acheson Bldg B/umbrella proj900/178, completed-2022 proj901/904/905, proj349 re-plat) + gives APN-joins a stable identity. R1's refreshed assessor + BOOK/PAGE/PARCEL + LatestDocumentDate is the baseline to diff against. Own session.
 2. **Full-city-BP-stream acquisition** (Berkeley open-data/Accela BP feed incl. the ADU/infill tail) — **the prerequisite for a trustworthy RHNA progress bar** (currently HELD; tracked-project BP credit is coverage-limited at 1,198/13.4%).
 3. **HARVESTER sub-record fix** — `harvest_plansets` scrapes only the MASTER's attachments, never iterates `url_discovery`'s REV/DEF sub-records → misses revision docs on multi-rev projects (ZP + B); also drop the ZP-assert, use module=Building, relax the >5MiB filter for B-permits. proj136 REV14 PDF→R2 waits on this.
@@ -373,7 +393,7 @@ Explorer + curriculum + APR work at the v4 spine — migration, not abandonment)
 - Exclude the **103 D7 planning records** from the completion harvest queue (queue hygiene).
 
 ## Open decisions / risks
-- **Deploy `a525a3a` staged-not-pushed** — see *Site / publish state* for the push + purge (John's). The current site (`origin/main` 7e445a3) already shows 703; the staged deploy adds the CY2023 tile + RHNA honesty.
+- **a525a3a ABANDONED (redundant)** — its RHNA/CY2023 content already shipped to `origin/main` via the curriculum merges. Open deploy item is now `5530ff3` (property-tax) + the dev↔main reconciliation — see *Site / publish state*.
 - **OUTLIER threshold un-tuned** — fires on expected patterns; calibrate before the full run.
 - **D6 needs a third independent unit source** — assessor unit counts unreliable; D6 weak in SFR years.
 - **Year-precision entitlement date stubs** (51 `@2025-01-01` + 40 `@2024-01-01` events) — data-quality issue on the Table-A/cycle side, not yet addressed; affects cycle-segmentation precision.

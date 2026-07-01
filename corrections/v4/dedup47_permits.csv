@@ -1,0 +1,5 @@
+permit,note
+B2014-05786,within-file duplicate finaled-master (44u counted twice); collapse dup finaled event -> keep MIN(event_id) -44
+B2018-03576,cross-file duplicate finaled-master (1u) -1
+B2019-01241,cross-file duplicate finaled-master (1u) -1
+B2020-03494,cross-file duplicate finaled-master (1u) -1

@@ -122,6 +122,27 @@ clean FF, awaiting push." Deploy state decays SILENTLY (another branch ships you
 moves, a /tmp worktree is purged). Re-verify before trusting any staged/pending-deploy note — same family
 as the ghost-doc lesson: memory is a hint, the remote is ground truth.
 
+**⚠ HAZARD (run-audit 2026-07-01) — JN-A and JN-C are DESTRUCTIVE to the corrected v4 DB. NEVER run them
+against the live `berkeley_housing_v4.db`.** JN-A re-ingests → rebuilds `events` to **pre-dedup 85,793**
+(JN-A does NO dedup by design); JN-C `DELETE FROM event_classifications` + re-INSERT → **wipes the
+C2/C3/C-multifamily/dedup47 corrections**. Running either erases the 3,676 corrected state. Run JN-A/JN-C
+**only against a snapshot** (for a from-scratch test), never the live DB. **Safe-to-run-live (read-only):
+JN-E · JN-D-viz · JN-H · verify_jn_a** (JN-D engine is read-only too but heavy + makes a GIS network call).
+Also: **`verify_jn_a_conservation.py` has the only hardcoded absolute paths** (`/Users/johngage/…` DB + FEED)
+— would break off John's machine; worth parameterizing (the generators are portable via `expanduser`).
+
+**⚠ REPRODUCIBILITY GAP (run-audit 2026-07-01) — the notebooks are NOT a complete from-raw pipeline.** From
+raw, the chain reaches only **base-state** (JN-A → 85,793 pre-dedup; JN-C → ~3,066-era classification). The
+corrections that reach **82,923 / 3,676** (event-dedup + C2/C3/C-multifamily/dedup47) live as **OUT-OF-NOTEBOOK
+scratch scripts + `docs/audit/*` gated writes** — JN-E **references** them in its §3 ledger prose and
+**reconciles the result, but does NOT apply them.** So the reconciliation is **reproducible-given-the-
+corrected-DB, NOT reproducible-from-raw-through-notebooks.**
+- **IMPLICATION (every-city goal):** to make the notebooks a complete from-raw pipeline (what a second city
+  needs), fold the dedup + corrections **into the notebook lineage** — e.g. a **JN-B dedup stage** + a
+  **JN-corrections stage** between JN-A and JN-E, or promote the gated scripts into the documented lineage —
+  with the deliberately-**HELD** items (the **+147**) encoded as **hold-not-apply**. This is characterized
+  **next-tier work, NOT a defect** in the current Berkeley result (which is correct and gated).
+
 **v4 DB mutation ledger (6 gated writes, all reversible, snapshots in `databases/keep_snapshot_*`):**
 C2-T1 (+907) · C2-T2 (+129) · C3-Shattuck (−163) · C3-tail (−17) · C-multifamily (−199) · dedup47 (−47).
 Net CO 3,066 → **3,676 vs city 4,022 (−346, dedup-clean)**. Post-write sha `6389e612ac0c6b04`. DB is

@@ -91,6 +91,13 @@ B2024-00819 2/1); **OPEN — the REAL ADU recall gap** lives in OTHER bijection 
 a single ADU — the lone possible city-side double); curriculum notebooks; June-25 parcel-identity model
 (ADR-003); capacity JN; discrepancy-framing; **push dev**.
 
+**▶ CURRICULUM (v4 alignment) — read `notes/curriculum_development/2026-07-01_v4_alignment_not_rebuild.md`.**
+Verdict: **align, not rebuild** — the curriculum already teaches behavioral (JN4 derive-the-stage, imports real
+functions); the gap is it's one generation behind (address-as-identity vs v4 permit-family; v2/v3 numbers;
+rebuilds its own spine). Reframe address-key as the deliberately-planted limitation the student rediscovers.
+⚠ **Active rewrite prototypes already exist in `scratch/jn{2,3,4,6b}_rewrite/`** — the deep-read must check
+THOSE, not just the published `notebooks/curriculum/` (they may already reflect the v4 turn).
+
 **Building-identity layer (2026-06-29) — DESIGNED + prototype-validated + harvest-calibrated, NOT yet built
 as a committed module:** permits are facts; buildings are synthetic-keyed, confidence-scored CLAIMS linked
 many:many to permits (spec `notes/v4/building_identity_layer_spec.md`; prototype `scripts/v4/building_identity_prototype.py`;

@@ -51,8 +51,9 @@ Chain runtime ~18s (nbclient, `/opt/miniconda3/envs/jupyter_env/bin/python` — 
   explicitly CANCELLING the two zombie deployments (both returned the undocumented EMPTY status `""`
   from GET /pages/deployments/{sha} — strong server-side-limbo evidence for the ticket). All our-side
   levers exhausted (content/artifact/branch-policy/env-protection/pipeline-switch/zombie-cancel).
-  **→ JOHN: file the GitHub support ticket** (draft in chat 2026-07-02; run IDs 28600598243 /
-  28602432188 + 4 more; last success 28063409634 June-23; empty-status deployment detail included).
+  **RESOLVED-CAUSE: GitHub confirmed Pages DEGRADED (status yellow) 2026-07-02 9:54 AM PT** — their
+  incident, not us; NO support ticket needed. Auto-retry armed (background: poll status → on green,
+  `gh workflow run "Deploy Pages"` → verify propagation).
   Overnight self-heal retry: `gh workflow run "Deploy Pages"` then
   `curl -s https://berkeleybuild.com/explorer.js | grep -c assessedCoverage` (>0 = live).
 

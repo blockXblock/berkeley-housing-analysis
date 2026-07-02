@@ -70,3 +70,17 @@ city credits (69/55/23) that our WorkDescriptions cannot size. Counting any of t
    Note Berkeley staff-report PDFs have letter-fragmented text layers — whitespace-squash before regex.
 5. **Empty-grid memos (never re-check):** B2018-03422 master + subs; B2016-05139 master + 4 subs;
    UP2006-0119.
+
+## APPLIED (same day — John's go)
+The +69 was applied via the RESOLUTION PATH, not a one-shot: `corrections/v4/grounded_counts.csv`
+(the adjudication ledger — also the anti-re-derivation memory) + `stage_methods.apply_grounded_counts`
+(refuses still-held permits; never overwrites a count; promotes the FINALED event only) + the
+`held_items.json` resolution entry. **Write trace:** snapshot `keep_snapshot_2026-07-02_pre-grounded69.db`
+(integrity ok, size-matched) → guarded write rowcount==1 → fresh-conn verify: B2021-03302 finaled =
+new_unit/master/69 with document provenance in basis_note; **CO 3,676 → 3,745; BP 3,945 and events
+82,923 UNCHANGED**. New baseline APPENDED: `reconciliation_baseline_2026-07-02.json` (co 3,745,
+gap −277, sha b67f2a597e3dcea0; ledger gained the grounded_counts step). JN-E regenerated (gate PASS);
+JN-F gained §5b; **from-raw chain re-validated: rebuild == live == baseline at 3,745, completion-set
+0 diffs.** Held under-side is now **+78** (El Jardin convention-conflict + San Pablo no-docs).
+Reverse: restore the snapshot, or delete the ledger row + re-demote (the write is a single event's
+classification).

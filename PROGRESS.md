@@ -4,6 +4,19 @@
 
 ---
 
+## 2026-07-02 — ⭐ +69 APPLIED via the RESOLUTION PATH — headline now 3,745 vs 4,022 (−277)
+**The first live run of the legitimate-change loop the architecture was built for:** calibration row
+(`corrections/v4/grounded_counts.csv` — the per-permit ADJUDICATION LEDGER, doubling as the
+anti-re-derivation memory) → `apply_grounded_counts` (new stage_methods method; refuses still-held
+permits, never overwrites) → gated live write (snapshot `keep_snapshot_2026-07-02_pre-grounded69.db`,
+rowcount==1, fresh-conn verify) → **NEW baseline appended** (`reconciliation_baseline_2026-07-02.json`:
+co 3,745 / gap −277 / sha b67f2a597e3dcea0) → JN-E regenerated (gate PASS; §3 ledger + §7 held-registry
+now DERIVE from baseline/held_items — literals removed) → JN-F §5b added → **from-raw chain re-validated:
+rebuild == live == baseline at 3,745, completion-set 0 diffs.** Held under-side now **+78**
+(El Jardin 55 convention-conflict, San Pablo 23 no-docs — both John-gated decisions; see below + the
+NumberUnits question: 71 ambiguous finaled permits carry NumberUnits≥3, 1,281 candidate units — decide
+ONCE at classifier level, not permit-by-permit).
+
 ## 2026-07-02 — +147 HARVEST RUN (see docs/audit/2026-07-02_147_harvest_findings.md)
 - **B2021-03302 (Shattuck South): 69 GROUNDED** from the proj179 plan set already in R2 (A.08 Phase II
   unit mix, v2 doc id 2138) — supports a gated **+69** write (−346 → −277), AWAITING JOHN'S GO

@@ -126,7 +126,7 @@ print('CONTRACT:', BASE['verifiability_contract']['oracle_not_source'])
 """)
 
     md("""
-## §2 — The headline: CO 3,676 vs city 4,022 (−346)
+## §2 — The headline: our CO vs the city's (derived below; 3,745 vs 4,022 = −277 as of the 2026-07-02 baseline)
 **Where from.** *Our* CO = finaled `new_unit` master permits with `net_units>0` (the ADR-002 verdict layer,
 classified in JN-C, corrected by the gated writes). *City* CO = the sum of all 11 `CO_*` income-tier columns
 in `table_a2` (the city's curated unit-creating rollup).
@@ -152,8 +152,9 @@ audit trail made runnable — it bridges the original baseline (3,066) to the cu
 **Verifiability:** the ledger arithmetic is asserted; the per-row provenance points at the audit doc.
 """)
     code("""
-ledger=[('baseline (pre-corrections)',3066),('C2 multifamily count-gap',+1036),('C3 Shattuck phantom-master',-163),
-        ('C3 ADU-tail ancillary',-17),('C-multifamily phase-collapse',-199),('dedup47 duplicate-file-row',-47)]
+# the ledger DERIVES from the baseline file (2026-07-02 fix: was an inline literal list that broke
+# on every legitimate baseline append)
+ledger=[(s['label'], s['delta']) for s in BASE['ledger']['steps']]
 run=0
 for name,d in ledger: run+=d; print(f'  {name:34} {d:+6}  -> {run}')
 assert run==co, f'ledger {run} != derived CO {co}'
@@ -189,7 +190,7 @@ print('concern:', BASE['documented_not_gated']['permit_mismatch_noise']['verifia
 Foundation/podium/superstructure are *phases of one building*; counting each = double. The systematic finding:
 the classifier handled phased multifamily **inconsistently** — sometimes both phases→`new_unit` (over),
 sometimes the completion→`ambiguous` (under). **Over** (−199) is already corrected (in §3 ledger, in 3,676);
-**under** (+147) is held → §7.
+**under** side is HELD → §7 (originally +147; +69 resolved via the 2026-07-02 harvest, +78 remains).
 """)
     code("""
 print('phase OVER corrected (in CO):', BASE['documented_not_gated']['phase_over_corrected']['value'], BASE['documented_not_gated']['phase_over_corrected']['status'])
@@ -197,21 +198,27 @@ print('phase UNDER held (NOT in CO):', BASE['documented_not_gated']['phase_under
 """)
 
     md("""
-## §7 — The +147 held under-count (the SHARPEST verifiability cell)  ·  folds `three_multifam_families/siblings.py`
-**Where from.** Three multifamily completion permits classified `ambiguous`: B2021-03302 (+69), B2018-03422
-(+55), B2016-05139 (+23). **The concern, stated plainly:** *our* WorkDescriptions carry **NO unit count** for
-these — so the ONLY source of 69/55/23 is the **city's** filing. **Adopting +147 would be oracle-as-source —
-circular — and is forbidden.** Therefore +147 is **HELD-not-verified**. The ONLY way to verify it independently
-is the **Accela / architect-plan harvest** (a separate work stream). Until then it does not enter our CO.
+## §7 — The held under-count (the SHARPEST verifiability cell)  ·  folds `three_multifam_families/siblings.py` + the 2026-07-02 harvest
+**Where from.** Multifamily completion permits classified `ambiguous` whose counts our pipeline could not
+independently materialize. **The rule:** a count enters our CO only from the **building's own documents**
+(plan set / tabulation) — the city's filing only ENUMERATES which buildings to chase; adopting its number
+would be oracle-as-source. **The registry is CALIBRATION** (`corrections/v4/held_items.json`): held items
+with reasons, resolved items with document provenance. The 2026-07-02 harvest resolved B2021-03302 (69,
+grounded from its plan set's unit-mix table) and re-based the remaining holds: B2018-03422 is a
+**convention conflict** (the building's own record says 0 dwelling units / 254-bed group living — the
+city's 55 matches nothing), B2016-05139 has **no digital documents**. This cell DERIVES the current
+held/resolved state from the registry — it does not hardcode it.
 """)
     code("""
-import re
-ev=pd.read_sql("SELECT e.source_record_key sk, json_extract(e.raw_payload,'$.WorkDescription') wd "
-  "FROM events e WHERE e.source_record_key IN ('B2021-03302','B2018-03422','B2016-05139')", ro(V4)).drop_duplicates('sk')
-for _,r in ev.iterrows():
-    has_count = bool(re.search(r'\\d+\\s*(?:dwelling|residential|rental)?\\s*units?', str(r.wd or ''), re.I))
-    print(f"  {r.sk}: our-text-has-unit-count={has_count}  | {str(r.wd)[:70]}")
-print('=> our text lacks the count; 69/55/23 come ONLY from the city -> HELD-not-verified (+147).')
+import json as _json
+_held=_json.load(open(os.path.join(ROOT,'corrections','v4','held_items.json')))
+for h in _held['held_147']:
+    print(f"  HELD    {h['permit']} (city claims {h['city_count_unadopted']}): {h['reason'][:95]}")
+for h in _held.get('resolved',[]):
+    print(f"  RESOLVED {h['permit']} ({h['city_count_unadopted']}): {h['resolution'][:95]}")
+held_total=sum(h['city_count_unadopted'] for h in _held['held_147'])
+print(f'=> still held (city-enumerated, un-adopted): +{held_total}; resolutions enter CO only via '
+      f'corrections/v4/grounded_counts.csv with document provenance.')
 """)
 
     md("""
@@ -279,7 +286,8 @@ baseline** (it is not a derived current value).
 """)
     code("""
 print(f'CURRENT (derived):     CO {co} vs city {city} = {co-city}')
-print(f'HYPOTHETICAL if +147 harvested: {co}+147 = {co+147} vs {city} = {co+147-city}   # NOT a baseline value')
+_ht=sum(h['city_count_unadopted'] for h in _held['held_147'])
+print(f'HYPOTHETICAL if the remaining +{_ht} held were grounded: {co}+{_ht} = {co+_ht} vs {city} = {co+_ht-city}   # NOT a baseline value')
 print('building-identity: refinement input to §6 grouping; base reconciliation does not depend on it.')
 """)
 
@@ -352,7 +360,7 @@ fig.show()
 """)
     md("""
 **⚠ viz-verifiability (the chart can overstate — guard it).**
-- **The +147 is HELD, not counted** (crimson, labeled "not counted, awaiting Accela"). It is drawn as a
+- **The held under-count is HELD, not counted** (crimson; +78 as of 2026-07-02 — was +147). It is drawn as a
   *would-fill-the-gap* current, **NOT** a flow into our 3,676 — or the Sankey would imply a count we
   **deliberately did not make** (oracle-not-source: the city enumerated it, we haven't independently grounded it).
 - **The ~689 permit-mismatch noise is net-zero** and is **NOT a flow here** — it lives *inside* the matched
@@ -420,9 +428,9 @@ city's analyst, knows the stakes:
 | assumption | what it means | what BREAKS if violated |
 |---|---|---|
 | **oracle-not-source** | CKAN enumerates, never derives | the reconciliation is **circular and void** — you'd be "verifying" the city against itself |
-| **count-once** | one building, one count at completion | phased multifamily **double-counts** (over) or **drops** (under) — the −199/+147 errors |
+| **count-once** | one building, one count at completion | phased multifamily **double-counts** (over) or **drops** (under) — the −199 over / held-under errors |
 | **null-not-zero** | a missing count is unknown, not 0 | fabricated below-market units; silent under/over-statement of affordability |
-| **hold-don't-adopt** | unreproducible city figures are HELD | adopting the +147 makes the number **unverifiable** (oracle-as-source); the gate can no longer protect it |
+| **hold-don't-adopt** | unreproducible city figures are HELD | adopting a held city figure makes the number **unverifiable** (oracle-as-source); resolution goes through grounded_counts.csv with document provenance |
 
 These four are the lesson: the reconciliation is trustworthy **only** while all four hold. The gate (§13)
 enforces the *numbers*; this ledger enforces the *reasoning*.

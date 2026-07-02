@@ -130,12 +130,30 @@ con.commit()
 """)
 
 md(r"""
+## §5b — Grounded counts: the held-item RESOLUTION path (calibration: `grounded_counts.csv`)
+**What this is.** When a held building's count is independently grounded from its OWN documents (the
+2026-07-02 harvest: B2021-03302 = 69 from its plan set's Phase-II unit-mix table), the resolution enters
+the pipeline HERE — as a ledger row in `corrections/v4/grounded_counts.csv` (permit, count, source
+document, corroboration, date) applied by `apply_grounded_counts`. **Never as a one-shot write** (that
+would recreate the reproducibility gap) and **never from the city's number** (the ledger's source column
+must cite the building's document). The method refuses any permit still listed as held (resolve the hold
+in `held_items.json` first — with provenance) and never overwrites an existing count.
+""")
+code(r"""
+print(M.apply_grounded_counts(con))
+ledger.append(("grounded counts (harvest resolutions)", M.co_total(con)))
+print(f"CO -> {ledger[-1][1]:,}")
+con.commit()
+""")
+
+md(r"""
 ## §6 — HELD, encoded (hold-not-apply — the deliberate non-corrections)
-- **+147 UNDER** (`B2021-03302`/69 · `B2018-03422`/55 · `B2016-05139`/23): three phased-multifamily
-  completions we KNOW are under-counted — but our WorkDescriptions carry **no unit count**, so the
-  only available number is the **city's**, and **oracle-is-never-source**. Counting them awaits the
-  Accela/architect-plan harvest (JN-H is the map). The assert below FAILS the notebook if any of the
-  three ever slips into the counted set without that independent grounding.
+- **The held under-side registry is `corrections/v4/held_items.json`** (the assert derives from it —
+  originally +147; B2021-03302/69 RESOLVED 2026-07-02 via grounded_counts; **+78 remains**):
+  `B2018-03422`/55 — a **convention conflict** (the building's own record: 0 dwelling units, 254-bed
+  group living; the city's 55 matches nothing — John's GLA-convention call); `B2016-05139`/23 — **no
+  digital documents** in Accela (post-retry). **Oracle-is-never-source**: the assert below FAILS the
+  notebook if a held permit slips into the counted set without moving through the resolution path.
 - **C1 "584 relabel" — PHANTOM, never applied**: re-running the committed classifier on its own
   output found confirmations, not gaps; applying it would DOUBLE-COUNT (~457 already in the base).
   Encoded here as considered-and-rejected so no future session re-derives it as a TODO.

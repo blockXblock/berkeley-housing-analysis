@@ -4,6 +4,22 @@
 
 ---
 
+## 2026-07-02 — dev↔main RECONCILED + assessed-value DEPLOYED
+- **dev pushed** through the triage commits; then **`origin/main` merged into dev (`a33681c`)** — the 11
+  "main-only" curriculum commits were double-committed duplicates of dev commits (trees verified identical);
+  the only genuinely main-only content was `docs/data-science-curriculum.html` + the index card (already live).
+  The handover's "curriculum is MAIN-ONLY" was STALE. ⚠ the merge-commit message says "content no-op" —
+  slightly wrong (those 2 files came in); recorded here, message left unamended.
+- **dev → main merged (fast-forward to `a33681c`) + pushed = the ASSESSED-VALUE DEPLOY** (John's go, CC ran it).
+  Deploy surface verified pre-merge: only `explorer.{html,js}` + regenerated `explorer_data.js`/`_v2_working.js`
+  + inert audit/methodology markdown. **No cherry-pick needed** (supersedes the old 3-commit cherry-pick plan).
+- **🟢 OPS FACT (John, this session): NO Cloudflare purge is ever needed** — Cloudflare picks up the GitHub
+  change automatically. The "purge explorer files" step in older handovers is obsolete. Note: origin serves
+  `cache-control: max-age=14400`, so propagation can take minutes–hours; verify with a marker grep
+  (`curl -s https://berkeleybuild.com/explorer.js | grep -c assessedCoverage`), don't purge.
+- **main == dev == `a33681c`** at deploy time; branches fully unified going forward. Preference: deploy
+  small/feature-scoped main merges from now on, not 100-commit batches.
+
 ## 2026-07-01 — working-tree triage (CC session)
 - **🔴 FIXED: HEAD was import-broken** — `52c79b4` committed `__init__.py`/`test_s7_gate.py` consuming
   `rhna_credit_cycle` but never the function's source; every commit June-28→July-01 raised ImportError

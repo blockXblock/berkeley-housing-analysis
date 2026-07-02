@@ -4,6 +4,14 @@
 
 ---
 
+## 2026-07-02 — ⭐ EL JARDIN RESOLVED (+55) — headline 3,970 vs 4,022 (−52); held +23; unexplained ~−29
+CIC settled the convention: **in-unit kitchens confirmed** ("Enclave Apartments", Greystar) → co-living
+DWELLING units. The 55/193/254 "conflict" was units/bedrooms/beds of ONE building — **the
+city-mis-enumeration hypothesis is RETRACTED; the city's 55 was right.** Grounded from CPRA
+NumberUnits=55 (permit-stated), convention-flagged; ledger row 4 (checksums 4/294); snapshot
+pre-grounded55; baseline **2026-07-02c** (gap −52, sha 72fc7b54bc42800b); JN-E regen PASS; chain
+re-validated. NOT UC-exempt (city-permitted). **Held: San Pablo 23 only. Day's arc: −346 → −52.**
+
 ## 2026-07-02 — ⭐⭐ NUMBERUNITS STAGE-1: +170 MORE — headline now 3,915 vs 4,022 (−107); residual ~−29
 **The ~−150 residual is SOLVED:** it was chiefly **Logan Park NORTH (135u — entirely uncounted, both
 phases ambiguous)** + **Acheson Commons Bldg B (35u — "35 NEW RES UNIT" in its own description, missed

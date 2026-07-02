@@ -1,0 +1,154 @@
+{
+  "as_of": "2026-07-02c",
+  "v4_sha": "72fc7b54bc42800b",
+  "oracle": "databases/hcd_apr_mirror_2026-06-17_fresh.db (CKAN mirror; mirror==live confirmed 2026-06-17)",
+  "schema_note": "Each figure is an OBJECT (value + provenance + verifiability), not a bare number, so this file is understandable ALONE. JN-E DERIVES each figure from v4+CKAN and ASSERTS derived==value here. Legitimate change = append a NEW timestamped baseline (EVIDENCE-append-only); NEVER hand-edit a value to match drifted code.",
+  "data_flow": "raw CPRA xlsx (BP_Annual Permit Report 2018-2022 + 2023-2025) -> JN-A ingestion (events, one row per permit-milestone; dedup of cross-file overlap) -> JN-C classification (event_classifications: housing_role + net_units, reversible labels) -> gated corrections (C2/C3/C-multifamily/dedup47, each an audited write) -> THIS reconciliation. CKAN does NOT appear anywhere in that chain: it enters ONLY at the comparison step (our derived number vs the city's claim). The single load-bearing invariant: if CKAN ever flows INTO a derived number, the reconciliation is circular and void.",
+  "verifiability_contract": {
+    "oracle_not_source": "CKAN/HCD mirror is the reconcile-TARGET, never a derivation input. We compare to it; we never compute from it. mirror==live was confirmed 2026-06-17.",
+    "city_silence_never_proof": "The city not crediting a unit is NOT evidence we are over; nor is the city crediting a unit evidence we are under. Each side is adjudicated from OUR independent evidence (CPRA + assessor + documents).",
+    "count_once": "One building = one count, at the unit-bearing completion phase. Phases (foundation/podium/superstructure) of one building are NOT separate units.",
+    "null_not_zero": "A missing unit count is UNKNOWN, never 0. Below-market/uncounted gaps are flagged needs-acquisition, never fabricated or zeroed.",
+    "hold_dont_adopt": "A city figure we cannot independently reproduce is HELD, not adopted. Adopting it would be oracle-as-source (circular)."
+  },
+  "ledger": {
+    "note": "How co_completions (3,676) was reached from the pre-corrections baseline, step by step (each step a gated audited write). Additive documentation of the SAME 3,676 \u2014 the deltas SUM to co_completions; not a new result. VIZ 1 (waterfall) derives from this.",
+    "steps": [
+      {
+        "label": "baseline (pre-corrections)",
+        "delta": 3066,
+        "kind": "floor"
+      },
+      {
+        "label": "C2 multifamily count-gap",
+        "delta": 1036,
+        "audit": "2026-06-28_c2_tranche{1,2}_write.md"
+      },
+      {
+        "label": "C3 Shattuck phantom-master",
+        "delta": -163,
+        "audit": "2026-06-28_c3_shattuck_write.md"
+      },
+      {
+        "label": "C3 ADU-tail ancillary",
+        "delta": -17,
+        "audit": "2026-06-28_c3_adu_tail_write.md"
+      },
+      {
+        "label": "C-multifamily phase-collapse",
+        "delta": -199,
+        "audit": "2026-06-28_c_multifamily_collapse_write.md"
+      },
+      {
+        "label": "dedup47 duplicate-file-row",
+        "delta": -47,
+        "audit": "2026-06-29_dedup47_write.md"
+      },
+      {
+        "label": "grounded_counts ledger (69+135+35+55)",
+        "delta": 294,
+        "audit": "2026-07-02_147_harvest_findings.md"
+      }
+    ],
+    "reconciles_to": "co_completions (3970)"
+  },
+  "hard_gated": {
+    "co_completions": {
+      "value": 3970,
+      "derivation": "COUNT/SUM(net_units) of finaled new_unit master permits, net_units>0 (verdict-driven per ADR-002); event_type_code='permit_finaled' AND housing_role='new_unit' AND is_master=1.",
+      "source": "v4 berkeley_housing_v4.db.event_classifications, sha 6389e612",
+      "depends_on": [
+        "dedup being complete (JN-E \u00a79)",
+        "APN canonicalization (housing_rules.to_canonical_apn)",
+        "the ADR-002 verdict layer"
+      ],
+      "what_would_change_it": "a new gated write; harvesting the +147 held under-count; adjudicating the -150 residual",
+      "how_to_reverify": "re-run JN-E \u00a72 against the pinned v4 sha",
+      "uncertainty": "this is our LOWER honest bound vs the city's 4,022 (the -150 residual is real housing we may under-count); NOT a claim the city is wrong",
+      "provenance": "docs/audit/2026-06-28..29_*; JN-E \u00a73 ledger"
+    },
+    "city_co_total": {
+      "value": 4022,
+      "derivation": "SUM of all 11 CO_* income-tier columns over table_a2 (JURIS=BERKELEY). By-year: 2018=229,2019=313,2020=405,2021=331,2022=828,2023=716,2024=708,2025=492.",
+      "source": "CKAN mirror hcd_apr_mirror_2026-06-17_fresh.db.table_a2 (ORACLE \u2014 reconcile-target ONLY)",
+      "depends_on": [
+        "the mirror being current (mirror==live 2026-06-17)"
+      ],
+      "what_would_change_it": "the city filing a corrected/amended APR; a fresh CKAN pull",
+      "how_to_reverify": "re-run JN-E \u00a72 summing CO_* tiers on the pinned mirror",
+      "uncertainty": "this is the city's CLAIM, used only as the comparison target \u2014 it is never an input to our numbers",
+      "provenance": "Berkeley submitted HCD APR Table A2, mirrored from CKAN"
+    },
+    "co_gap": {
+      "value": -52,
+      "derivation": "co_completions - city_co_total = 3676 - 4022 = -346 (DERIVED, not stored)",
+      "source": "computed in JN-E \u00a72 from the two figures above",
+      "depends_on": [
+        "co_completions",
+        "city_co_total"
+      ],
+      "what_would_change_it": "any change to either side",
+      "how_to_reverify": "subtraction in JN-E \u00a72",
+      "uncertainty": "a NET of large offsetting flows (see decomposition), NOT a uniform shortfall",
+      "provenance": "JN-E \u00a72/\u00a712"
+    },
+    "bp_issued": {
+      "value": 3945,
+      "derivation": "SUM(net_units) over FIRST building-permit issuance, PERMIT-level (one row per source_record_key): event_type_code='permit_issued' AND housing_role='new_unit' AND is_master=1, deduped to distinct source_record_key (MIN event_id). Event-level is 3946; the 1-unit gap is one residual dup-permit.",
+      "source": "v4 berkeley_housing_v4.db, sha 6389e612",
+      "depends_on": [
+        "dedup being complete (JN-E \u00a79)",
+        "permit-level COUNT(DISTINCT source_record_key), NOT event-level"
+      ],
+      "what_would_change_it": "the full-city BP-stream acquisition (the ADU/infill tail not modeled as projects)",
+      "how_to_reverify": "re-run JN-E \u00a710 at permit-level on the pinned sha",
+      "uncertainty": "COVERAGE-LIMITED \u2014 tracked-project BPs only, NOT Berkeley's full permit stream; an internal lower bound",
+      "retires": "the prior un-provenanced 4,911 figure \u2014 see JN-E \u00a710 (4,911 had no runnable provenance and was event-inflated; a number you cannot re-derive is a number you cannot trust)",
+      "provenance": "JN-E \u00a710; PROGRESS BP-permit-level note 2026-06-29"
+    }
+  },
+  "documented_not_gated": {
+    "note": "Decomposition of the -346. These are heuristic/held/approximate (NOT exactly-reproducible), so they are DOCUMENTED here with provenance but NOT hard-gated \u2014 JN-E displays them with caveats, the gate only enforces the 4 hard figures above. The signed components do not sum to -346 because the over (-199) and dedup (-47) are ALREADY corrected (folded into co_completions=3676); the under (+147) and residual (-150) are the open delta.",
+    "permit_mismatch_noise": {
+      "value": 689,
+      "sign": "net-zero",
+      "derivation": "reverse-direction triage: our counted completions the city credits under a DIFFERENT permit#/ID (same parcel). Nets to zero \u2014 both sides count the unit, different identifier.",
+      "verifiability_concern": "the MATCHING \u2014 a 'mismatch' could be a real disagreement if the APN/address join is wrong; sized by APN+magnitude, approximate.",
+      "provenance": "scratch/2026-06-28/reverse_overcount_triage.py; JN-E \u00a75"
+    },
+    "phase_over_corrected": {
+      "value": -199,
+      "status": "DONE (in co_completions)",
+      "derivation": "3 phased multifamily buildings double-counted (both phases new_unit); foundation/podium phases demoted to subsidiary/0, completion kept. count-once.",
+      "provenance": "docs/audit/2026-06-28_c_multifamily_collapse_write.md; scratch three_multifam_*; JN-E \u00a76/\u00a79"
+    },
+    "phase_under_held": {
+      "value": 23,
+      "status": "HELD: B2016-05139/23 only (no digital docs; NumberUnits-groundable pending records)",
+      "derivation": "3 multifamily completion permits classified ambiguous (B2021-03302 +69, B2018-03422 +55, B2016-05139 +23). Our WorkDescriptions carry NO unit count, so the ONLY source of 69/55/23 is the city.",
+      "verifiability_concern": "SHARPEST \u2014 adopting +147 = oracle-as-source (circular). The ONLY independent verification path is the Accela/architect-plan harvest; until then these are HELD-not-verified.",
+      "provenance": "scratch/2026-06-28/three_multifam_families.py + three_multifam_siblings.py; JN-E \u00a77"
+    },
+    "adu_recall": {
+      "value": 4,
+      "derivation": "manufactured-home / within-existing-home ADUs held ambiguous; small finaled-CO recall gap.",
+      "verifiability_concern": "lower bound; the broader adu_flag-nonhousing-role bucket is not fully sized.",
+      "provenance": "scratch/2026-06-28/adu_recall_gap_sizing.py; JN-E \u00a78"
+    },
+    "dedup_corrected": {
+      "value": -47,
+      "status": "DONE (in co_completions)",
+      "derivation": "4 permits double-counted via duplicate file-row finaled events (CPRA two-file overlap); collapsed to one (B2014-05786 -44 + 3x-1). Plus the 2,870-event structural dedup (CO-neutral).",
+      "provenance": "docs/audit/2026-06-29_dedup47_write.md + 2026-06-29_event_dedup_write.md; JN-E \u00a79"
+    },
+    "residual": {
+      "value": -29,
+      "status": "mostly RESOLVED 2026-07-02: the ~-150 was chiefly Logan North 135 + Acheson B 35 (ambiguous completions, now grounded); ~-29 remains open",
+      "derivation": "after both directions corrected, the residual is genuine real-housing-the-city-counts-we-don't; structural triage (COVERAGE/DETECTION/TIMING/POSSIBLE_CITY_OVER).",
+      "verifiability_concern": "the sensitive direction \u2014 requires per-permit INDEPENDENT proof (e.g. the 39-unit congregate CITY_UNDER candidate), never CKAN-silence. Not closeable by adoption.",
+      "provenance": "scratch/2026-06-28/structural_gap_triage.py; JN-E \u00a711"
+    }
+  },
+  "supersedes": "reconciliation_baseline_2026-07-02b.json",
+  "change_note": "+55: B2018-03422 (Enclave Apartments, 2501-09 Haste) \u2014 convention resolved by operator evidence (in-unit kitchens -> co-living DWELLING units); the 55/193/254 \"conflict\" was units/bedrooms/beds of one building. Count from CPRA NumberUnits (permit-stated), convention_dependent. City-mis-enumeration hypothesis RETRACTED. Held under-side now +23 (San Pablo only). Snapshot pre-grounded55."
+}

@@ -111,3 +111,17 @@ each carrying NumberUnits=55 — would have triple-counted the contested 55).
 (3 rows, 2 promoted, +69 idempotently verified) → fresh-conn CO 3,915 / BP 3,945 / events 82,923 →
 baseline `reconciliation_baseline_2026-07-02b.json` APPENDED (gap −107, sha c2a1d0543e225c14; residual
 re-based ~−29) → JN-E regenerated (gate PASS) → from-raw chain re-validated.
+
+## EL JARDIN RESOLVED (same day — CIC session settled the convention)
+**Operator evidence (Greystar, "Enclave Apartments"): the quarters have IN-UNIT KITCHENS** — 55 shared
+apartments (12 layouts, 2-7 students each), rented by the bed. So the units are **co-living DWELLING
+units**, not sleeping rooms — and the apparent 55-vs-193-vs-254 conflict was **three AXES of one
+building: 55 apartments / ~193 bedrooms / 254 beds.** The "possible city-side mis-enumeration"
+hypothesis is **RETRACTED — the city's 55 was right**; the zoning GLA label described the USE, not the
+physical configuration. NOT UC-exempt (city-permitted; the UC affiliation is a financial-aid
+classification). Count grounded from CPRA `NumberUnits=55` (permit-stated), convention-flagged
+`co_living_apartments`; operator material used ONLY to settle the convention, per the CIC brief.
+**Write trace:** snapshot `keep_snapshot_2026-07-02_pre-grounded55.db` → apply_grounded_counts (4 rows,
+1 promoted, 3 idempotently verified) → CO **3,915 → 3,970**; baseline `2026-07-02c` APPENDED
+(gap **−52**, sha 72fc7b54bc42800b); JN-E regenerated (gate PASS). **Held under-side now +23**
+(San Pablo only). Remaining unexplained: −52 + 23 = **~−29** (unchanged — El Jardin was never part of it).

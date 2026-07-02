@@ -3,13 +3,6 @@
   "_provenance": "externalized 2026-07-02 from stage_methods.py literals (review finding: calibration-in-code). Semantics from corrections/v4/README.md 'APPLIED vs HELD' + docs/audit/2026-06-28_c_multifamily_collapse_write.md.",
   "held_147": [
     {
-      "permit": "B2018-03422",
-      "city_count_unadopted": 55,
-      "address": "2503 Haste",
-      "reason": "CONVENTION CONFLICT (2026-07-02 harvest): the building (\"El Jardin\") is a GROUP LIVING ACCOMMODATION per its own entitlement record \u2014 0 dwelling units, 254 beds approved (ZAB 2018-07-12), 193 rooms/298 beds (UP2012-0012 2016 resub, sheet A0). The city's 55 (and CPRA NumberUnits=55) matches NOTHING in the building record. Held pending John's GLA counting-convention decision \u2014 possibly a city-side mis-enumeration.",
-      "unblock": "GLA convention adjudication (John) \u2014 documents in hand (scratch/2026-07-02/harvest147/)"
-    },
-    {
       "permit": "B2016-05139",
       "city_count_unadopted": 23,
       "address": "2740 San Pablo",
@@ -32,6 +25,14 @@
       "reason": "phased-multifamily completion classified ambiguous; our WorkDescription carries NO unit count, so the only number is the city's \u2014 oracle-is-never-source. Effectively R2-grounded (proj179 plan sets) pending write-up.",
       "unblock": "Accela/architect-plan harvest (JN-H map)",
       "resolution": "RESOLVED 2026-07-02: 69 grounded from the building's own plan set (proj179 2019-08-26, sheet A.08 Phase II unit mix; v2 doc id 2138), corroborated by CPRA NumberUnits=69. Applied via corrections/v4/grounded_counts.csv (apply_grounded_counts). Audit: docs/audit/2026-07-02_147_harvest_findings.md"
+    },
+    {
+      "permit": "B2018-03422",
+      "city_count_unadopted": 55,
+      "address": "2503 Haste",
+      "reason": "CONVENTION CONFLICT (2026-07-02 harvest): the building (\"El Jardin\") is a GROUP LIVING ACCOMMODATION per its own entitlement record \u2014 0 dwelling units, 254 beds approved (ZAB 2018-07-12), 193 rooms/298 beds (UP2012-0012 2016 resub, sheet A0). The city's 55 (and CPRA NumberUnits=55) matches NOTHING in the building record. Held pending John's GLA counting-convention decision \u2014 possibly a city-side mis-enumeration.",
+      "unblock": "GLA convention adjudication (John) \u2014 documents in hand (scratch/2026-07-02/harvest147/)",
+      "resolution": "RESOLVED 2026-07-02: convention settled by operator evidence (CIC session) \u2014 in-unit kitchens confirmed, so the quarters are co-living DWELLING units, not sleeping rooms; the apparent 55-vs-193-vs-254 conflict was three AXES of one building (55 apartments / ~193 bedrooms / 254 beds). Count 55 grounded from CPRA NumberUnits (permit-stated) via grounded_counts.csv, convention-flagged co_living_apartments. The earlier \"city mis-enumeration\" hypothesis is RETRACTED \u2014 the city was right."
     }
   ]
 }

@@ -141,3 +141,15 @@ def net_units(units_added, units_removed, role, description=""):
             return None   # multifamily with missing count -> flagged gap, do NOT guess 1
         return 1          # single dwelling (SFR/ADU/small) with blank count -> 1 by definition
     return ua             # any other creating role with blank count -> leave as-is
+
+
+def classifier_hash():
+    """THE classifier identity hash — the single source of the recipe (lifted 2026-07-02 from the
+    duplicated copies in build_jn_c cell-4 and stage_methods.classify_all; ADR-002's staleness
+    query `classifier_hash != current` only works if every writer stamps the SAME hash).
+    Hashes the vocabulary the ORIGINAL recipe hashed (4 lists + 'rules-v1') — do NOT add lists
+    here without bumping the version suffix, or identical logic re-stamps as 'stale'."""
+    import hashlib
+    return hashlib.sha256((json.dumps(
+        [HOUSING_TERMS, CONVERSION_TERMS, LEGALIZATION_TERMS, NONHOUSING_TERMS]) + "rules-v1"
+    ).encode()).hexdigest()[:16]

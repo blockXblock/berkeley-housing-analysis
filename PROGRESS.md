@@ -9,7 +9,10 @@ The landmarked 1908 Physicians' Building was OFFICES; the rehab converted floors
 units** (permit text "TO A MIXED USE: 37 RESIDENTIAL UNITS" + NumberUnits=37 + city CO 37 on our exact
 finaled date; press "21 apartments" divergence noted, outweighed). Ledger row 166 (166/504); snapshot
 pre-acheson-a; baseline **2026-07-03e**; chain re-validated at 4,140. **The +41 gap vs the adjudicated
-city IS, unit-for-unit, the one building the city never filed anywhere: the 0-San-Pablo GLA (41u).**
+city IS, unit-for-unit, ONE building: B2021-02423 = 2435 SAN PABLO AVE (the "0 San Pablo" placeholder
+RESOLVED — June-5 §6c + the city's own BP row). Precision fix: the city FILED its BP (CY2022) but
+OMITTED the CO from the CY2025 APR (finaled 2025-03-20; absent from both CY2025 PDF and CKAN) —
+JN-G's first standing watch item.**
 Convention bucket now EMPTY. Remaining open: San Pablo-2740 23 held · Den grain-wait 36/40 · 12
 UNCERTAINs · 20 no-candidate rows · 1145 Amador 1 · income-column extraction · sweep JN packaging.
 

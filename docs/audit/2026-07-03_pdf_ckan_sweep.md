@@ -40,3 +40,14 @@ Extractor reads the printed col-12 total (city sometimes leaves it 0/blank while
 units — that class needs income-column sums to fully resolve); CY2019 print has data-entry inversions;
 2022 BP 882-vs-887 unadjudicated (Bancroft-family); per-address attribution inside multi-address APN
 groups is CKAN's.
+
+## 2026-07-03 addendum: "0 San Pablo" RESOLVED = 2435 San Pablo Ave + a precision fix on the +41
+John's prompt (the 0-prefix is the city's pre-address placeholder) → resolved via the June-5 audit
+§6c and the city's own records: **B2021-02423 = 2435 San Pablo Avenue** (APN 056-1928-019-00; the
+city's CKAN BP row carries the real address, 41u, issued 2022-08-12). **Precision fix to the +41
+narrative:** the city did NOT "never file it anywhere" — it filed the **BP in CY2022**; what it
+omitted is the **CO from the CY2025 APR** (building finaled 2025-03-20; the CY2025 PDF and CKAN both
+lack the CO row — verified against the sweep extract; the only CY2025 row at that address is an
+unrelated 1u entitlement on neighboring sub-parcel -020-01). So the adjudicated-city gap (+41) =
+one completed building whose CO the city omitted from its CY2025 filing. Watch item: a future city
+revision may add it — the JN-G revision watcher's first standing question.

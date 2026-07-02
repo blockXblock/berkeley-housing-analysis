@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-07-03 — ⭐ GRAYSON RESOLVED (+23) — **held_147 IS EMPTY**; CO 4,163 vs adjudicated 4,099 (+64 net, all named)
+John's Accela URLs cracked it: **PREAPP000322 documents a 2740/2748 San Pablo ADDRESS SWAP** (main
+address was 2748; retail 2740; later flipped) — which is why every 2740-based document search was
+empty. The building is **"Grayson Apartments"** (SAHA affordable, 20-60% AMI): the developer's own
+records give **23 apartments incl. 1 manager's unit, completed Oct 2019 == our final 2019-10-23**;
+NumberUnits=23 corroborates. Ledger 167/527; snapshot pre-grayson; baseline **2026-07-03f**; chain
+re-validated at 4,163. **ALL THREE ORIGINAL +147 HOLDS NOW RESOLVED WITH DOCUMENT PROVENANCE**
+(69 plan-set / 55 operator-kitchens / 23 developer-records). The +64 net = named offsetting rows
+(ours-more: the 2435-San-Pablo GLA 41 whose CO the city omitted from CY2025, Den grain-wait;
+city-more: Den 36, Amador 1, ~20 no-candidate rows) — per-row ledger is the comparison, not the net.
+Pending John's word: 1145 Amador +1 (row 162 of the ADU class, PDF-only credit).
+
 ## 2026-07-03 — ACHESON-A RESOLVED (+37) — ours 4,140 vs adjudicated city 4,099 = **+41 = THE GLA**
 The landmarked 1908 Physicians' Building was OFFICES; the rehab converted floors 2-4 to **37 net-new
 units** (permit text "TO A MIXED USE: 37 RESIDENTIAL UNITS" + NumberUnits=37 + city CO 37 on our exact

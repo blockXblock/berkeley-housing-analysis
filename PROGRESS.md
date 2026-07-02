@@ -42,6 +42,14 @@ Chain runtime ~18s (nbclient, `/opt/miniconda3/envs/jupyter_env/bin/python` — 
   (`curl -s https://berkeleybuild.com/explorer.js | grep -c assessedCoverage`), don't purge.
 - **main == dev == `a33681c`** at deploy time; branches fully unified going forward. Preference: deploy
   small/feature-scoped main merges from now on, not 100-commit batches.
+- **⚠ DEPLOY NOT LIVE YET — GitHub Pages deployment backend WEDGED (server-side).** 5 deploy attempts
+  (4 legacy + 1 workflow) all die identically: build OK, artifact OK (106MB), deployment created, then
+  `deployment_queued` forever → 10-min timeout. NOT our content (diff is inert text + explorer files;
+  branch policy fine; env protection fine). **Switched Pages to WORKFLOW build type** (`4b5b649`,
+  `.github/workflows/pages.yml`, static verbatim docs/ upload — behavior-identical, no Jekyll).
+  Site meanwhile serves the June-23 build (stale but healthy). **Retry = `gh workflow run "Deploy Pages"`**;
+  if still wedged, John files GitHub support ticket (run IDs 28600598243 / 28602432188 + 3 more,
+  all 2026-07-02). Verify propagation: `curl -s https://berkeleybuild.com/explorer.js | grep -c assessedCoverage`.
 
 ## 2026-07-01 — working-tree triage (CC session)
 - **🔴 FIXED: HEAD was import-broken** — `52c79b4` committed `__init__.py`/`test_s7_gate.py` consuming

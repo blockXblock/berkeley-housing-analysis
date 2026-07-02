@@ -48,6 +48,11 @@ APN_FORMATS = {
 
 def county_format(county):
     fmt = APN_FORMATS.get(county)
+    if fmt is None and county is not None:
+        # county names are proper nouns; the registry key is title-case. A lowercase key used to
+        # raise, and callers that swallowed the raise silently degraded to no-APN matching
+        # (the 2026-07-03 residual-chase lesson) — resolve case-insensitively instead.
+        fmt = APN_FORMATS.get(str(county).strip().title())
     if fmt is None:
         raise ValueError(f"no registered APN format for assessing county {county!r}")
     return fmt

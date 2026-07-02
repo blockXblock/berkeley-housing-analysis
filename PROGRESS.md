@@ -18,10 +18,15 @@ Per-parcel delta join (canonical APN + address netting) sums EXACTLY to −52 = 
   files elsewhere (city-side inconsistency, our count stands).
 - **Timing (self-resolving):** 1367 University −39 + ~20 single ADUs finaled 2024-25 = city filing lag;
   re-check at next mirror refresh.
-- **⚠ method lesson:** `to_canonical_apn` county key is CASE-SENSITIVE ('Alameda'); a lowercase key +
-  swallowed exception silently degraded matching to address-only (also weakened the 07-02 Stage-1
-  phase-guard — its proposals were independently verified, no damage). Consider case-insensitive lookup
-  in apn.py.
+- **✅ method lesson FIXED (John's duplication catch):** the residual chase was the FOURTH per-script
+  `norm_addr` copy + second full city-vs-ours join (priors: build_parcel_crosswalk.py:27,
+  shake_detectors.py:106, scratch/2026-06-28 triages) — rule 4c existed only as prose. **Lifted:**
+  `housing_rules.normalize_address` (`scripts/housing_rules/address.py`, the shake version with the
+  proj136 Berkeley-Way protection, smoke-tested) + `to_canonical_apn` county lookup now
+  CASE-INSENSITIVE (the lowercase-key silent-degrade bug). **Migration note:** build_parcel_crosswalk +
+  shake_detectors still carry local copies — repoint opportunistically WITH their calibration runs
+  (behavior-identical, but verify). The reconciliation JOIN itself should be lifted into stage_methods
+  when the ADU-recall pass builds (its natural consumer).
 
 ## 2026-07-02 — ⭐ EL JARDIN RESOLVED (+55) — headline 3,970 vs 4,022 (−52); held +23; unexplained ~−29
 CIC settled the convention: **in-unit kitchens confirmed** ("Enclave Apartments", Greystar) → co-living

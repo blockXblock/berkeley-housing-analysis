@@ -45,3 +45,4 @@ __all__ = [
 ]
 
 from .apn import to_canonical_apn, is_canonical_apn  # canonical APN form
+from .address import normalize_address  # THE address normalizer (rule 4c; lifted 2026-07-03)

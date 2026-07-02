@@ -28,7 +28,21 @@ def _expect_raises(callable_, exc_type, label):
     raise AssertionError(f"{label}: expected {exc_type.__name__}, got result {result!r}")
 
 
+def test_normalize_address():
+    from scripts.housing_rules import normalize_address, to_canonical_apn
+    assert normalize_address('2352 SHATTUCK Avenue') == ('2352', 'shattuck')
+    assert normalize_address('1922 Walnut St Berkeley, CA 94709') == ('1922', 'walnut')
+    # street NAMED Berkeley (proj136 corner-lot case): the city-tail strip must not eat it
+    assert normalize_address('2108 Berkeley Way') == ('2108', 'berkeley')
+    assert normalize_address('1234 Sixth Street') == ('1234', '6th')       # ordinal (rule 4c)
+    assert normalize_address(None) == ('', '')
+    # county key is case-insensitive (2026-07-03 lesson: lowercase key silently degraded a matcher)
+    assert to_canonical_apn('057 204600600', 'alameda') == '057-2046-006-00'
+    print("normalize_address: ordinals + city-tail + Berkeley-Way protection + case-insensitive county — PASS")
+
+
 def main() -> int:
+    test_normalize_address()
     # --- cycle boundary tests (from Phase B handoff, verbatim) ---
     assert cycle_for_date(date(2022, 12, 31)) == "5th", "deep 5th cycle"
     assert cycle_for_date(date(2023, 1, 30))  == "5th", "5th cycle's last day before shared boundary"
@@ -155,3 +169,4 @@ def _check_sb9_units():
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

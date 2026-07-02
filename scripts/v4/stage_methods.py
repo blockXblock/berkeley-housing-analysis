@@ -490,3 +490,46 @@ def assert_held(con, held_path=os.path.join(CORR, 'held_items.json')):
                         f'provenance — do not bypass this assert.')
     return {'held_147': [h['permit'] for h in held['held_147']],
             'c1_phantom': held['c1_phantom']}
+
+
+# ---------------------------------------------------------------- grounded counts (harvest results)
+def apply_grounded_counts(con, csv_path=os.path.join(CORR, 'grounded_counts.csv'),
+                          held_path=os.path.join(CORR, 'held_items.json')):
+    """Promote document-grounded completions: each ledger row carries a count read from the
+    BUILDING'S OWN document (plan set / tabulation — never the city APR) with full provenance.
+    This is the resolution path for held items: the permit must have been moved OUT of
+    held_items.json (with a resolution note) BEFORE it can appear here — enforced below.
+    Promotes the FINALED event only (count-once at completion; the BP side is left untouched).
+    Only ever promotes an UNCOUNTED event; never overwrites an existing count."""
+    rows = pd.read_csv(csv_path)
+    cks = _calibration('calibration_checksums.json')['grounded_counts']
+    assert len(rows) == cks['rows'] and int(rows.grounded_count.sum()) == cks['units'], \
+        f'grounded_counts calibration drift: {len(rows)}/{int(rows.grounded_count.sum())} vs pinned ' \
+        f'{cks["rows"]}/{cks["units"]}'
+    still_held = {h['permit'] for h in json.load(open(held_path))['held_147']}
+    changed = 0
+    try:
+        for r in rows.itertuples():
+            p, n = r.source_record_key, int(r.grounded_count)
+            assert p not in still_held, \
+                f'grounded_counts {p}: still listed in held_items.held_147 — resolve the hold ' \
+                f'(move to resolved with provenance) before grounding'
+            state = _finaled_state(con, p)
+            assert len(state) == 1, f'grounded_counts {p}: {len(state)} finaled events (expect 1)'
+            role, is_master, nu, note = state[0]
+            if role == 'new_unit' and is_master == 1 and nu == n and 'grounded_counts' in (note or ''):
+                continue  # idempotent re-run
+            assert (nu or 0) == 0, \
+                f'grounded_counts {p}: finaled event already carries net_units={nu} — refusing to overwrite'
+            rc = con.execute(
+                "UPDATE event_classifications SET housing_role='new_unit', is_master=1, net_units=?, "
+                "basis=?, basis_note=COALESCE(basis_note,'')||' | grounded_counts ('||?||'; src '||?||')' "
+                "WHERE event_id IN (SELECT event_id FROM events WHERE source_record_key=? AND event_type_code='permit_finaled')",
+                (n, 'evidentiary', str(r.source_document)[:180], str(r.source_ref)[:120], p)).rowcount
+            assert rc == 1, f'grounded_counts {p}: rowcount={rc} (expect 1)'
+            changed += rc
+        con.commit()
+    except Exception:
+        con.rollback()
+        raise
+    return {'rows': len(rows), 'promoted': changed}

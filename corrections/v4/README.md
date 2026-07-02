@@ -41,6 +41,10 @@ assumes C2's value is present). Everything else is order-independent. event-dedu
 - **`calibration_checksums.json`** — approved-set integrity pins (the original one-shots' 15/907-style
   HALT guards, re-externalized). The apply_* methods assert these BEFORE writing; a legitimate
   calibration change updates rows + checksums together in one reviewed edit.
+- **`grounded_counts.csv`** — the held-item RESOLUTION ledger (per-permit document-grounded counts with
+  source provenance; the 2026-07-02 harvest's +69). `apply_grounded_counts` refuses permits still held
+  and never overwrites an existing count. This ledger is also the anti-re-derivation MEMORY: an
+  adjudicated permit lives here as data, not as audit prose a future session must know to find.
 - Consumers: **`scripts/v4/stage_methods.py`** (THE importable stage-method home) via the
   `notebooks/v4/JN-B_event_dedup.ipynb` → `JN-C_classify.ipynb` → `JN-F_corrections.ipynb` chain.
 

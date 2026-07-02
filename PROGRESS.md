@@ -4,7 +4,24 @@
 
 ---
 
-## 2026-07-02 — ⭐ REPRODUCIBILITY GAP CLOSED (JN-B + JN-F built, chain-validated; AWAITING JOHN REVIEW)
+## 2026-07-02 — ⭐ REPRODUCIBILITY GAP CLOSED — REVIEWED + COMMITTED (fef0539..2fd168d)
+**Review (8-angle multi-agent + adversarial verify, 14 CONFIRMED findings, ALL FIXED before commit):**
+the one-shot→method lift had weakened every rc==1 halt to `rc<=1` (typo'd calibration would silently
+no-op) → now **verify-or-halt**; C2 checksums (15/907 + exact T2 values) re-pinned via
+`corrections/v4/calibration_checksums.json`; HELD_147/B2020-03895 externalized to `held_items.json`
+(calibration, never code); C3-tail now PROTECT-verifies **before** demoting + all methods rollback-on-
+failure; dedup: NULL-payload differ detection, keeper-survival guard (the old one was provably vacuous),
+CO-neutrality assert, unmatched-hold HALT, temp-TABLE single pass; C2→C-multifamily order coupling now
+ENFORCED (bump halts if run out of order); classifier-hash recipe lifted to
+`housing_rules.permit_role.classifier_hash()` (== live's 743edfb626399efc); **JN-C latent bugs fixed**
+(_norm NameError silently degraded the harvest-queue R2 bridge to all-'unknown'; output path broke
+under parameterization); JN-F gained a **§7b structural gate vs live** (events + completion-set).
+**Re-validated post-hardening:** fresh chain gate PASS · JN-F idempotent re-run PASS (exercises the
+rc==0 verify paths) · negative tests PASS (typo'd permit + order violation both HALT) · smoke + 16+9.
+**Commits:** `fef0539` (classifier_hash) · `98f4d6a` (calibration files) · `ea4fbfe` (stage_methods +
+JN-B/JN-F) · `f54ee9d` (JN-C param + fixes) · `2fd168d` (gitignore). Follow-ups (deferred, small):
+JN-E imports stage_methods metrics (drift risk noted); consolidate the 4 inline live-DB guards; ro()
+proliferation. All notebook chain state below stands.
 **The from-raw pipeline is now real: `raw xlsx → JN-A → JN-B (dedup) → JN-C (classify) → JN-F
 (corrections)` reproduces the corrected live state EXACTLY** — validated twice (methods, then the
 notebook chain): CO 3,676 ✓ · BP 3,945 ✓ · events 82,923 == live ✓ · **per-permit counted-completion

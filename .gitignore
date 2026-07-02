@@ -119,3 +119,8 @@ scratch/
 scripts/v4/prototype_score*.py
 # Packaged module tarball (derived; source modules are tracked)
 *.tar.gz
+
+# Curriculum skip-ingest cache — derived from tracked raw CPRA xlsx by JN1
+# (USE_CLEAN toggle; permits_clean_README.md documents regeneration)
+data/processed/permits_clean.csv
+data/processed/permits_clean.parquet

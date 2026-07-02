@@ -9569,9 +9569,9 @@
     "apn_collisions": [
       {
         "check": "apn_collisions",
-        "key": "055183001400",
+        "key": "055-1830-014-00",
         "severity": "medium",
-        "signal": "APN 055183001400 shared by 2 active projects: [54, 62]",
+        "signal": "APN 055-1830-014-00 shared by 2 active projects: [54, 62]",
         "classification": "duplicate_candidate",
         "expected_filter": "same address, no two-real-permit/two-CO evidence => possible duplicate",
         "resolvability": null,
@@ -9590,9 +9590,9 @@
       },
       {
         "check": "apn_collisions",
-        "key": "057201800700",
+        "key": "057-2018-007-00",
         "severity": "low",
-        "signal": "APN 057201800700 shared by 2 active projects: [362, 888]",
+        "signal": "APN 057-2018-007-00 shared by 2 active projects: [362, 888]",
         "classification": "protected_adu_pair",
         "expected_filter": "ADU-pair rule: 2 real permits + 2 distinct COs = 2 real buildings, never merge",
         "resolvability": null,
@@ -9614,9 +9614,9 @@
       },
       {
         "check": "apn_collisions",
-        "key": "058217001700",
+        "key": "058-2170-017-00",
         "severity": "low",
-        "signal": "APN 058217001700 shared by 2 active projects: [624, 869]",
+        "signal": "APN 058-2170-017-00 shared by 2 active projects: [624, 869]",
         "classification": "protected_adu_pair",
         "expected_filter": "ADU-pair rule: 2 real permits + 2 distinct COs = 2 real buildings, never merge",
         "resolvability": null,
@@ -9638,9 +9638,9 @@
       },
       {
         "check": "apn_collisions",
-        "key": "055190601500",
+        "key": "055-1906-015-00",
         "severity": "low",
-        "signal": "APN 055190601500 shared by 2 active projects: [645, 880]",
+        "signal": "APN 055-1906-015-00 shared by 2 active projects: [645, 880]",
         "classification": "protected_adu_pair",
         "expected_filter": "ADU-pair rule: 2 real permits + 2 distinct COs = 2 real buildings, never merge",
         "resolvability": null,
@@ -16183,9 +16183,9 @@
     "shadows": [
       {
         "check": "shadows",
-        "key": "055183001400|3u",
+        "key": "055-1830-014-00|3u",
         "severity": "high",
-        "signal": "APN 055183001400 + 3u shared by [54, 62]: shadow candidate (no two-real-permit/two-CO evidence)",
+        "signal": "APN 055-1830-014-00 + 3u shared by [54, 62]: shadow candidate (no two-real-permit/two-CO evidence)",
         "classification": "shadow_candidate",
         "expected_filter": "ADU-pair rule: 2 real permits + 2 distinct COs = 2 real buildings, never merge",
         "resolvability": null,
@@ -16204,9 +16204,9 @@
       },
       {
         "check": "shadows",
-        "key": "057201800700|1u",
+        "key": "057-2018-007-00|1u",
         "severity": "low",
-        "signal": "APN 057201800700 + 1u shared by [362, 888]: two real permits + distinct COs => REAL buildings (protect)",
+        "signal": "APN 057-2018-007-00 + 1u shared by [362, 888]: two real permits + distinct COs => REAL buildings (protect)",
         "classification": "protected_adu_pair",
         "expected_filter": "ADU-pair rule: 2 real permits + 2 distinct COs = 2 real buildings, never merge",
         "resolvability": null,
@@ -16238,9 +16238,9 @@
       },
       {
         "check": "shadows",
-        "key": "058217001700|1u",
+        "key": "058-2170-017-00|1u",
         "severity": "low",
-        "signal": "APN 058217001700 + 1u shared by [624, 869]: two real permits + distinct COs => REAL buildings (protect)",
+        "signal": "APN 058-2170-017-00 + 1u shared by [624, 869]: two real permits + distinct COs => REAL buildings (protect)",
         "classification": "protected_adu_pair",
         "expected_filter": "ADU-pair rule: 2 real permits + 2 distinct COs = 2 real buildings, never merge",
         "resolvability": null,
@@ -16272,9 +16272,9 @@
       },
       {
         "check": "shadows",
-        "key": "055190601500|1u",
+        "key": "055-1906-015-00|1u",
         "severity": "low",
-        "signal": "APN 055190601500 + 1u shared by [645, 880]: two real permits + distinct COs => REAL buildings (protect)",
+        "signal": "APN 055-1906-015-00 + 1u shared by [645, 880]: two real permits + distinct COs => REAL buildings (protect)",
         "classification": "protected_adu_pair",
         "expected_filter": "ADU-pair rule: 2 real permits + 2 distinct COs = 2 real buildings, never merge",
         "resolvability": null,
@@ -25266,12 +25266,12 @@
         "check": "stale_apn",
         "key": 79,
         "severity": "medium",
-        "signal": "proj79 APN 056198301100 (\"056 198301100\") absent from Feb-2026 assessor",
+        "signal": "proj79 APN 056-1983-011-00 (\"056 198301100\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "056198301100",
+          "canon": "056-1983-011-00",
           "stored_apn": "056 198301100",
           "addr": "1111 ALLSTON Way",
           "co_or_bp": "2024-03-20"
@@ -25281,12 +25281,12 @@
         "check": "stale_apn",
         "key": 92,
         "severity": "medium",
-        "signal": "proj92 APN 052157404601 (\"052 157404601\") absent from Feb-2026 assessor",
+        "signal": "proj92 APN 052-1574-046-01 (\"052 157404601\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "052157404601",
+          "canon": "052-1574-046-01",
           "stored_apn": "052 157404601",
           "addr": "3036 REGENT St",
           "co_or_bp": null
@@ -25296,12 +25296,12 @@
         "check": "stale_apn",
         "key": 137,
         "severity": "medium",
-        "signal": "proj137 APN 057202501300 (\"057 202501300\") absent from Feb-2026 assessor",
+        "signal": "proj137 APN 057-2025-013-00 (\"057 202501300\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "057202501300",
+          "canon": "057-2025-013-00",
           "stored_apn": "057 202501300",
           "addr": "2000 University Ave",
           "co_or_bp": "2024-01-01"
@@ -25311,12 +25311,12 @@
         "check": "stale_apn",
         "key": 141,
         "severity": "medium",
-        "signal": "proj141 APN 053159202000 (\"053 159202000\") absent from Feb-2026 assessor",
+        "signal": "proj141 APN 053-1592-020-00 (\"053 159202000\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "053159202000",
+          "canon": "053-1592-020-00",
           "stored_apn": "053 159202000",
           "addr": "2016 ASHBY Ave",
           "co_or_bp": "2024-06-01"
@@ -25326,12 +25326,12 @@
         "check": "stale_apn",
         "key": 143,
         "severity": "medium",
-        "signal": "proj143 APN 053159800600 (\"053 159800600\") absent from Feb-2026 assessor",
+        "signal": "proj143 APN 053-1598-006-00 (\"053 159800600\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "053159800600",
+          "canon": "053-1598-006-00",
           "stored_apn": "053 159800600",
           "addr": "2902 ADELINE St",
           "co_or_bp": "2024-01-01"
@@ -25341,12 +25341,12 @@
         "check": "stale_apn",
         "key": 145,
         "severity": "medium",
-        "signal": "proj145 APN 052153300103 (\"052 153300103\") absent from Feb-2026 assessor",
+        "signal": "proj145 APN 052-1533-001-03 (\"052 153300103\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "052153300103",
+          "canon": "052-1533-001-03",
           "stored_apn": "052 153300103",
           "addr": "1708 HARMON St",
           "co_or_bp": null
@@ -25356,12 +25356,12 @@
         "check": "stale_apn",
         "key": 147,
         "severity": "medium",
-        "signal": "proj147 APN 055188600100 (\"055 188600100\") absent from Feb-2026 assessor",
+        "signal": "proj147 APN 055-1886-001-00 (\"055 188600100\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "055188600100",
+          "canon": "055-1886-001-00",
           "stored_apn": "055 188600100",
           "addr": "2300 ELLSWORTH St",
           "co_or_bp": "2025-09-04"
@@ -25371,12 +25371,12 @@
         "check": "stale_apn",
         "key": 152,
         "severity": "medium",
-        "signal": "proj152 APN 056200300100 (\"056 200300100\") absent from Feb-2026 assessor",
+        "signal": "proj152 APN 056-2003-001-00 (\"056 200300100\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "056200300100",
+          "canon": "056-2003-001-00",
           "stored_apn": "056 200300100",
           "addr": "1598 UNIVERSITY Ave",
           "co_or_bp": "2024-12-16"
@@ -25386,12 +25386,12 @@
         "check": "stale_apn",
         "key": 163,
         "severity": "medium",
-        "signal": "proj163 APN 055182901100 (\"055 182901100\") absent from Feb-2026 assessor",
+        "signal": "proj163 APN 055-1829-011-00 (\"055 182901100\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "055182901100",
+          "canon": "055-1829-011-00",
           "stored_apn": "055 182901100",
           "addr": "0 PARKER St",
           "co_or_bp": "2025-07-14"
@@ -25401,27 +25401,24 @@
         "check": "stale_apn",
         "key": 178,
         "severity": "medium",
-        "signal": "proj178 APN 057204600803, (\"057-2046-008-03, 057-2046-008-02, 057-2046-006-00, 057-2046-010-00\") absent from Feb-2026 assessor",
-        "classification": "orphaned_or_replatted_crosswalk_queue",
-        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
+        "signal": "proj178 APN \"057-2046-008-03, 057-2046-008-02, 057-2046-006-00, 057-2046-010-00\" is not a resolvable 12-digit APN (bad format)",
+        "classification": "bad_format",
+        "expected_filter": "non-12-digit stored APN",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "057204600803,",
-          "stored_apn": "057-2046-008-03, 057-2046-008-02, 057-2046-006-00, 057-2046-010-00",
-          "addr": "2131 University Ave",
-          "co_or_bp": null
+          "stored_apn": "057-2046-008-03, 057-2046-008-02, 057-2046-006-00, 057-2046-010-00"
         }
       },
       {
         "check": "stale_apn",
         "key": 179,
         "severity": "medium",
-        "signal": "proj179 APN 055189501805 (\"055-1895-018-05\") absent from Feb-2026 assessor",
+        "signal": "proj179 APN 055-1895-018-05 (\"055-1895-018-05\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "has_r2_doc",
         "evidence": {
-          "canon": "055189501805",
+          "canon": "055-1895-018-05",
           "stored_apn": "055-1895-018-05",
           "addr": "2352 Shattuck Ave",
           "co_or_bp": "2022-01-14"
@@ -25431,12 +25428,12 @@
         "check": "stale_apn",
         "key": 180,
         "severity": "medium",
-        "signal": "proj180 APN 057202700600 (\"057-2027-006-00\") absent from Feb-2026 assessor",
+        "signal": "proj180 APN 057-2027-006-00 (\"057-2027-006-00\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "057202700600",
+          "canon": "057-2027-006-00",
           "stored_apn": "057-2027-006-00",
           "addr": "2065 Kittredge St",
           "co_or_bp": null
@@ -25446,12 +25443,12 @@
         "check": "stale_apn",
         "key": 181,
         "severity": "medium",
-        "signal": "proj181 APN 055182201303 (\"055-1822-013-3\") absent from Feb-2026 assessor",
+        "signal": "proj181 APN 055-1822-013-03 (\"055-1822-013-3\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "055182201303",
+          "canon": "055-1822-013-03",
           "stored_apn": "055-1822-013-3",
           "addr": "2015 Blake St",
           "co_or_bp": null
@@ -25461,12 +25458,12 @@
         "check": "stale_apn",
         "key": 197,
         "severity": "medium",
-        "signal": "proj197 APN 063298602200 (\"063 298602200\") absent from Feb-2026 assessor",
+        "signal": "proj197 APN 063-2986-022-00 (\"063 298602200\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "063298602200",
+          "canon": "063-2986-022-00",
           "stored_apn": "063 298602200",
           "addr": "0 Cragmont Ave",
           "co_or_bp": "2024-10-24"
@@ -25476,12 +25473,12 @@
         "check": "stale_apn",
         "key": 198,
         "severity": "medium",
-        "signal": "proj198 APN 056193800700 (\"056 193800700\") absent from Feb-2026 assessor",
+        "signal": "proj198 APN 056-1938-007-00 (\"056 193800700\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "056193800700",
+          "canon": "056-1938-007-00",
           "stored_apn": "056 193800700",
           "addr": "2312 Eighth St",
           "co_or_bp": "2024-12-17"
@@ -25491,12 +25488,12 @@
         "check": "stale_apn",
         "key": 327,
         "severity": "medium",
-        "signal": "proj327 APN 052156003200 (\"052 156003200\") absent from Feb-2026 assessor",
+        "signal": "proj327 APN 052-1560-032-00 (\"052 156003200\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "052156003200",
+          "canon": "052-1560-032-00",
           "stored_apn": "052 156003200",
           "addr": "3019 BATEMAN St",
           "co_or_bp": "2025-09-15"
@@ -25506,12 +25503,12 @@
         "check": "stale_apn",
         "key": 349,
         "severity": "medium",
-        "signal": "proj349 APN 059232500700 (\"059 232500700\") absent from Feb-2026 assessor",
+        "signal": "proj349 APN 059-2325-007-00 (\"059 232500700\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "059232500700",
+          "canon": "059-2325-007-00",
           "stored_apn": "059 232500700",
           "addr": "1446 FIFTH St",
           "co_or_bp": "2019-12-30"
@@ -25521,12 +25518,12 @@
         "check": "stale_apn",
         "key": 380,
         "severity": "medium",
-        "signal": "proj380 APN 057203400800 (\"057 203400800\") absent from Feb-2026 assessor",
+        "signal": "proj380 APN 057-2034-008-00 (\"057 203400800\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "057203400800",
+          "canon": "057-2034-008-00",
           "stored_apn": "057 203400800",
           "addr": "2023 Shattuck Ave",
           "co_or_bp": "2023-08-16"
@@ -25536,12 +25533,12 @@
         "check": "stale_apn",
         "key": 414,
         "severity": "medium",
-        "signal": "proj414 APN 055186300901 (\"055 186300901\") absent from Feb-2026 assessor",
+        "signal": "proj414 APN 055-1863-009-01 (\"055 186300901\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "055186300901",
+          "canon": "055-1863-009-01",
           "stored_apn": "055 186300901",
           "addr": "2350 Prospect St",
           "co_or_bp": "2021-09-02"
@@ -25551,12 +25548,12 @@
         "check": "stale_apn",
         "key": 467,
         "severity": "medium",
-        "signal": "proj467 APN 056197700605 (\"056 197700605\") absent from Feb-2026 assessor",
+        "signal": "proj467 APN 056-1977-006-05 (\"056 197700605\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "056197700605",
+          "canon": "056-1977-006-05",
           "stored_apn": "056 197700605",
           "addr": "2100 San Pablo Ave",
           "co_or_bp": "2023-05-02"
@@ -25566,12 +25563,12 @@
         "check": "stale_apn",
         "key": 512,
         "severity": "medium",
-        "signal": "proj512 APN 056194302300 (\"056 194302300\") absent from Feb-2026 assessor",
+        "signal": "proj512 APN 056-1943-023-00 (\"056 194302300\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "056194302300",
+          "canon": "056-1943-023-00",
           "stored_apn": "056 194302300",
           "addr": "2411 Fifth St",
           "co_or_bp": "2018-10-30"
@@ -25581,12 +25578,12 @@
         "check": "stale_apn",
         "key": 545,
         "severity": "medium",
-        "signal": "proj545 APN 052145202100 (\"052 145202100\") absent from Feb-2026 assessor",
+        "signal": "proj545 APN 052-1452-021-00 (\"052 145202100\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "052145202100",
+          "canon": "052-1452-021-00",
           "stored_apn": "052 145202100",
           "addr": "1222 Sixty-Sixth St",
           "co_or_bp": "2019-07-26"
@@ -25596,12 +25593,12 @@
         "check": "stale_apn",
         "key": 552,
         "severity": "medium",
-        "signal": "proj552 APN 052157603200 (\"052 157603200\") absent from Feb-2026 assessor",
+        "signal": "proj552 APN 052-1576-032-00 (\"052 157603200\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "052157603200",
+          "canon": "052-1576-032-00",
           "stored_apn": "052 157603200",
           "addr": "3046 Telegraph",
           "co_or_bp": "2019-01-22"
@@ -25611,12 +25608,12 @@
         "check": "stale_apn",
         "key": 592,
         "severity": "medium",
-        "signal": "proj592 APN 056197500900 (\"056 197500900\") absent from Feb-2026 assessor",
+        "signal": "proj592 APN 056-1975-009-00 (\"056 197500900\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "056197500900",
+          "canon": "056-1975-009-00",
           "stored_apn": "056 197500900",
           "addr": "2212 Tenth",
           "co_or_bp": "2019-06-04"
@@ -25626,12 +25623,12 @@
         "check": "stale_apn",
         "key": 674,
         "severity": "medium",
-        "signal": "proj674 APN 056197402300 (\"056 197402300\") absent from Feb-2026 assessor",
+        "signal": "proj674 APN 056-1974-023-00 (\"056 197402300\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "056197402300",
+          "canon": "056-1974-023-00",
           "stored_apn": "056 197402300",
           "addr": "2129 Ninth",
           "co_or_bp": "2020-12-15"
@@ -25641,12 +25638,12 @@
         "check": "stale_apn",
         "key": 740,
         "severity": "medium",
-        "signal": "proj740 APN 059232500605 (\"059 232500605\") absent from Feb-2026 assessor",
+        "signal": "proj740 APN 059-2325-006-05 (\"059 232500605\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "059232500605",
+          "canon": "059-2325-006-05",
           "stored_apn": "059 232500605",
           "addr": "1444 Fifth",
           "co_or_bp": "2021-03-17"
@@ -25656,12 +25653,12 @@
         "check": "stale_apn",
         "key": 751,
         "severity": "medium",
-        "signal": "proj751 APN 059232500600 (\"059 232500600\") absent from Feb-2026 assessor",
+        "signal": "proj751 APN 059-2325-006-00 (\"059 232500600\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "059232500600",
+          "canon": "059-2325-006-00",
           "stored_apn": "059 232500600",
           "addr": "1444 Fifth",
           "co_or_bp": "2021-03-16"
@@ -25671,12 +25668,12 @@
         "check": "stale_apn",
         "key": 783,
         "severity": "medium",
-        "signal": "proj783 APN 052152701100 (\"052 152701100\") absent from Feb-2026 assessor",
+        "signal": "proj783 APN 052-1527-011-00 (\"052 152701100\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "052152701100",
+          "canon": "052-1527-011-00",
           "stored_apn": "052 152701100",
           "addr": "1811 Sixty-Third",
           "co_or_bp": "2021-09-01"
@@ -25686,12 +25683,12 @@
         "check": "stale_apn",
         "key": 853,
         "severity": "medium",
-        "signal": "proj853 APN 054180202000 (\"054 180202000\") absent from Feb-2026 assessor",
+        "signal": "proj853 APN 054-1802-020-00 (\"054 180202000\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "054180202000",
+          "canon": "054-1802-020-00",
           "stored_apn": "054 180202000",
           "addr": "1516 CARLETON (Unit C)",
           "co_or_bp": "2022-06-09"
@@ -25701,12 +25698,12 @@
         "check": "stale_apn",
         "key": 900,
         "severity": "medium",
-        "signal": "proj900 APN 057204600802 (\"057204600802\") absent from Feb-2026 assessor",
+        "signal": "proj900 APN 057-2046-008-02 (\"057204600802\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "057204600802",
+          "canon": "057-2046-008-02",
           "stored_apn": "057204600802",
           "addr": "2145 UNIVERSITY AVE",
           "co_or_bp": "2022-10-20"
@@ -25716,12 +25713,12 @@
         "check": "stale_apn",
         "key": 901,
         "severity": "medium",
-        "signal": "proj901 APN 057205302201 (\"057205302201\") absent from Feb-2026 assessor",
+        "signal": "proj901 APN 057-2053-022-01 (\"057205302201\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "057205302201",
+          "canon": "057-2053-022-01",
           "stored_apn": "057205302201",
           "addr": "2012 BERKELEY Way",
           "co_or_bp": "2022-09-23"
@@ -25731,12 +25728,12 @@
         "check": "stale_apn",
         "key": 904,
         "severity": "medium",
-        "signal": "proj904 APN 058218300100 (\"058218300100\") absent from Feb-2026 assessor",
+        "signal": "proj904 APN 058-2183-001-00 (\"058218300100\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "058218300100",
+          "canon": "058-2183-001-00",
           "stored_apn": "058218300100",
           "addr": "1601 OXFORD St",
           "co_or_bp": "2022-03-09"
@@ -25746,12 +25743,12 @@
         "check": "stale_apn",
         "key": 905,
         "severity": "medium",
-        "signal": "proj905 APN 056194500600 (\"056194500600\") absent from Feb-2026 assessor",
+        "signal": "proj905 APN 056-1945-006-00 (\"056194500600\") absent from Feb-2026 assessor",
         "classification": "orphaned_or_replatted_crosswalk_queue",
         "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
         "resolvability": "needs_harvest",
         "evidence": {
-          "canon": "056194500600",
+          "canon": "056-1945-006-00",
           "stored_apn": "056194500600",
           "addr": "2340 FIFTH St",
           "co_or_bp": "2022-05-13"

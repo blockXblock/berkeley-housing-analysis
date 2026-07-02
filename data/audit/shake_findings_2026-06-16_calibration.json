@@ -1,0 +1,595 @@
+{
+  "generated": "2026-06-16",
+  "scope": "calibration",
+  "db": {
+    "v2": "/Users/johngage/berkeley-data/databases/berkeley_housing_v2.db",
+    "assessor": "/Users/johngage/berkeley-data/databases/berkeley.db",
+    "assessor_parcels_indexed": 29119,
+    "assessor_collided_keys": 11,
+    "assessor_collapsed_parcels": 12
+  },
+  "cohorts": {
+    "active_projects": 895,
+    "merged_soft_retired": 7,
+    "co_only_cohort": 713,
+    "uc_projects": [
+      165,
+      170,
+      171,
+      177
+    ]
+  },
+  "caveats": [
+    {
+      "caveat": "assessor_canonical_key_collisions",
+      "collided_keys": 11,
+      "collapsed_parcels": 12,
+      "note": "11 canonical APN keys (book3+page4+parcel3+sub2) collide, collapsing 12 assessor sub-parcels (condos sharing book/page/parcel, distinct sub) via last-write-wins. So Imps/LotSize on a collided key may be a SIBLING sub-parcel. built_vs_vacant + scale_sanity findings on collided keys carry sibling_parcel_risk=true and a VERIFY note. Not fixed \u2014 recorded so collided-key findings are not mistaken for clean."
+    },
+    {
+      "caveat": "co_only_cohort_measured",
+      "count": 713,
+      "note": "CO-only import cohort (id blocks 185-279 + 280-899 with no pre-CO lifecycle event) = the MEASURED count, not the stale ~597 estimate. Event-funnel/stage metrics are meaningless for these \u2014 segmented out of funnel/stage_skip flagging (tagged info)."
+    },
+    {
+      "caveat": "latest_document_date_is_recording_date",
+      "note": "berkeley.db LatestDocumentDate is a County RECORDING date (may be a sale, not construction). block_cohort blind-spots use it as a recency proxy and say VERIFY; never treat it as a build date."
+    }
+  ],
+  "finding_counts": {
+    "address_apn_consistency": 3,
+    "apn_collisions": 1,
+    "monotonicity": 2,
+    "phantoms": 5,
+    "shadows": 1,
+    "stage_skip": 8,
+    "stale_apn": 1
+  },
+  "intersections_multi_check": {
+    "136": [
+      "address_apn_consistency",
+      "stage_skip"
+    ],
+    "624": [
+      "address_apn_consistency",
+      "stage_skip"
+    ],
+    "869": [
+      "address_apn_consistency",
+      "stage_skip"
+    ]
+  },
+  "aux": {
+    "funnel_by_year": {
+      "2013": {
+        "entitled": 2,
+        "bp": 0,
+        "co": 0,
+        "entitled_non_cohort": 2,
+        "bp_non_cohort": 0,
+        "co_non_cohort": 0
+      },
+      "2015": {
+        "entitled": 1,
+        "bp": 0,
+        "co": 0,
+        "entitled_non_cohort": 1,
+        "bp_non_cohort": 0,
+        "co_non_cohort": 0
+      },
+      "2016": {
+        "entitled": 1,
+        "bp": 0,
+        "co": 0,
+        "entitled_non_cohort": 1,
+        "bp_non_cohort": 0,
+        "co_non_cohort": 0
+      },
+      "2017": {
+        "entitled": 3,
+        "bp": 1,
+        "co": 0,
+        "entitled_non_cohort": 3,
+        "bp_non_cohort": 1,
+        "co_non_cohort": 0
+      },
+      "2018": {
+        "entitled": 0,
+        "bp": 0,
+        "co": 61,
+        "entitled_non_cohort": 0,
+        "bp_non_cohort": 0,
+        "co_non_cohort": 0
+      },
+      "2019": {
+        "entitled": 2,
+        "bp": 0,
+        "co": 101,
+        "entitled_non_cohort": 2,
+        "bp_non_cohort": 0,
+        "co_non_cohort": 0
+      },
+      "2020": {
+        "entitled": 3,
+        "bp": 1,
+        "co": 76,
+        "entitled_non_cohort": 3,
+        "bp_non_cohort": 1,
+        "co_non_cohort": 0
+      },
+      "2021": {
+        "entitled": 4,
+        "bp": 0,
+        "co": 112,
+        "entitled_non_cohort": 4,
+        "bp_non_cohort": 0,
+        "co_non_cohort": 3
+      },
+      "2022": {
+        "entitled": 6,
+        "bp": 4,
+        "co": 89,
+        "entitled_non_cohort": 6,
+        "bp_non_cohort": 4,
+        "co_non_cohort": 5
+      },
+      "2023": {
+        "entitled": 11,
+        "bp": 20,
+        "co": 117,
+        "entitled_non_cohort": 11,
+        "bp_non_cohort": 20,
+        "co_non_cohort": 12
+      },
+      "2024": {
+        "entitled": 20,
+        "bp": 25,
+        "co": 109,
+        "entitled_non_cohort": 20,
+        "bp_non_cohort": 25,
+        "co_non_cohort": 14
+      },
+      "2025": {
+        "entitled": 22,
+        "bp": 33,
+        "co": 111,
+        "entitled_non_cohort": 22,
+        "bp_non_cohort": 33,
+        "co_non_cohort": 21
+      },
+      "2026": {
+        "entitled": 8,
+        "bp": 0,
+        "co": 2,
+        "entitled_non_cohort": 8,
+        "bp_non_cohort": 0,
+        "co_non_cohort": 2
+      }
+    },
+    "co_only_cohort_size": 713,
+    "block_census": {
+      "57--204": {
+        "block": "57--204",
+        "parcels": 0,
+        "tracked": 0,
+        "untracked_built_housing_total": 0,
+        "untracked_large_nonsfr_flagged": 0
+      },
+      "58--217": {
+        "block": "58--217",
+        "parcels": 0,
+        "tracked": 0,
+        "untracked_built_housing_total": 0,
+        "untracked_large_nonsfr_flagged": 0
+      }
+    },
+    "blindspot_summary": {
+      "untracked_built_housing_universe": 0,
+      "note_universe": "this is essentially Berkeley's EXISTING housing stock (we model development projects, not all parcels) \u2014 CONTEXT, not a finding queue",
+      "shortlist_threshold_imps": 3000000,
+      "shortlist_count": 0,
+      "tier_counts_large_nonsfr": {
+        "1000000": 0,
+        "2000000": 0,
+        "3000000": 0,
+        "5000000": 0
+      }
+    }
+  },
+  "findings_by_check": {
+    "address_apn_consistency": [
+      {
+        "check": "address_apn_consistency",
+        "key": 136,
+        "severity": "low",
+        "signal": "proj136 addr \"1951 Shattuck Ave\" vs County situs \"2108 BERKELEY WAY BERKELEY 94704\" (APN 57-2046-1)",
+        "classification": "expected_corner_lot",
+        "expected_filter": "different street AND number = dual-frontage corner lot (PERMANENT FP) or wrong parcel \u2014 flag-for-review, never auto-fix",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "our_addr": "1951 Shattuck Ave",
+          "county_situs": "2108 BERKELEY WAY BERKELEY 94704",
+          "apn": "57-2046-1",
+          "our": [
+            "1951",
+            "shattuck"
+          ],
+          "county": [
+            "2108",
+            "berkeley"
+          ]
+        }
+      },
+      {
+        "check": "address_apn_consistency",
+        "key": 624,
+        "severity": "low",
+        "signal": "proj624 addr \"1711 Mlk Jr Way\" vs County situs \"1711 M L KING JR WAY BERKELEY 94709\" (APN 58-2170-17)",
+        "classification": "street_name_variance",
+        "expected_filter": "same house number, street label/abbrev differs (e.g. MLK = M L King) \u2014 likely same address",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "our_addr": "1711 Mlk Jr Way",
+          "county_situs": "1711 M L KING JR WAY BERKELEY 94709",
+          "apn": "58-2170-17",
+          "our": [
+            "1711",
+            "mlk jr"
+          ],
+          "county": [
+            "1711",
+            "m l king jr"
+          ]
+        }
+      },
+      {
+        "check": "address_apn_consistency",
+        "key": 869,
+        "severity": "low",
+        "signal": "proj869 addr \"1711 Mlk Jr Way\" vs County situs \"1711 M L KING JR WAY BERKELEY 94709\" (APN 58-2170-17)",
+        "classification": "street_name_variance",
+        "expected_filter": "same house number, street label/abbrev differs (e.g. MLK = M L King) \u2014 likely same address",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "our_addr": "1711 Mlk Jr Way",
+          "county_situs": "1711 M L KING JR WAY BERKELEY 94709",
+          "apn": "58-2170-17",
+          "our": [
+            "1711",
+            "mlk jr"
+          ],
+          "county": [
+            "1711",
+            "m l king jr"
+          ]
+        }
+      }
+    ],
+    "apn_collisions": [
+      {
+        "check": "apn_collisions",
+        "key": "058-2170-017-00",
+        "severity": "low",
+        "signal": "APN 058-2170-017-00 shared by 2 active projects: [624, 869]",
+        "classification": "protected_adu_pair",
+        "expected_filter": "ADU-pair rule: 2 real permits + 2 distinct COs = 2 real buildings, never merge",
+        "resolvability": null,
+        "evidence": {
+          "projects": [
+            624,
+            869
+          ],
+          "addresses": {
+            "624": "1711 Mlk Jr Way",
+            "869": "1711 Mlk Jr Way"
+          },
+          "assessor": "58-2170-17",
+          "distinct_co_dates": [
+            "2019-05-30",
+            "2022-01-14"
+          ]
+        }
+      }
+    ],
+    "monotonicity": [
+      {
+        "check": "monotonicity",
+        "key": 96,
+        "severity": "low",
+        "signal": "proj96: building_permit_issued (2023-07-17) precedes application_submitted (2025-01-01) \u2014 out of order",
+        "classification": "date_stub",
+        "expected_filter": "year-precision entitlement-stub class",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "earlier_stage": "application_submitted",
+          "earlier_date": "2025-01-01",
+          "later_stage": "building_permit_issued",
+          "later_date": "2023-07-17"
+        }
+      },
+      {
+        "check": "monotonicity",
+        "key": 113,
+        "severity": "medium",
+        "signal": "proj113: building_permit_issued (2024-10-16) precedes entitlement_approved (2025-10-20) \u2014 out of order",
+        "classification": "review",
+        "expected_filter": "real ordering violation",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "earlier_stage": "entitlement_approved",
+          "earlier_date": "2025-10-20",
+          "later_stage": "building_permit_issued",
+          "later_date": "2024-10-16"
+        }
+      }
+    ],
+    "phantoms": [
+      {
+        "check": "phantoms",
+        "key": 177,
+        "severity": "info",
+        "signal": "active project 177 has ZERO events (UC)",
+        "classification": "uc_no_events",
+        "expected_filter": "UC project (UC issues its own permits) \u2014 expected",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "project_id": 177,
+          "is_uc": true
+        }
+      },
+      {
+        "check": "phantoms",
+        "key": 165,
+        "severity": "info",
+        "signal": "active project 165 has NO primary parcel (UC)",
+        "classification": "uc_no_parcel",
+        "expected_filter": "UC project (UC land / Regents, off city APN grid) \u2014 expected",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "project_id": 165,
+          "is_uc": true
+        }
+      },
+      {
+        "check": "phantoms",
+        "key": 170,
+        "severity": "info",
+        "signal": "active project 170 has NO primary parcel (UC)",
+        "classification": "uc_no_parcel",
+        "expected_filter": "UC project (UC land / Regents, off city APN grid) \u2014 expected",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "project_id": 170,
+          "is_uc": true
+        }
+      },
+      {
+        "check": "phantoms",
+        "key": 171,
+        "severity": "info",
+        "signal": "active project 171 has NO primary parcel (UC)",
+        "classification": "uc_no_parcel",
+        "expected_filter": "UC project (UC land / Regents, off city APN grid) \u2014 expected",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "project_id": 171,
+          "is_uc": true
+        }
+      },
+      {
+        "check": "phantoms",
+        "key": 177,
+        "severity": "info",
+        "signal": "active project 177 has NO primary parcel (UC)",
+        "classification": "uc_no_parcel",
+        "expected_filter": "UC project (UC land / Regents, off city APN grid) \u2014 expected",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "project_id": 177,
+          "is_uc": true
+        }
+      }
+    ],
+    "shadows": [
+      {
+        "check": "shadows",
+        "key": "058-2170-017-00|1u",
+        "severity": "low",
+        "signal": "APN 058-2170-017-00 + 1u shared by [624, 869]: two real permits + distinct COs => REAL buildings (protect)",
+        "classification": "protected_adu_pair",
+        "expected_filter": "ADU-pair rule: 2 real permits + 2 distinct COs = 2 real buildings, never merge",
+        "resolvability": null,
+        "evidence": {
+          "projects": [
+            624,
+            869
+          ],
+          "units": 1,
+          "completing_permits": {
+            "624": [
+              [
+                "B2018-02288",
+                "2019-05-30"
+              ]
+            ],
+            "869": [
+              [
+                "B2019-03245",
+                "2022-01-14"
+              ]
+            ]
+          },
+          "distinct_co_dates": [
+            "2019-05-30",
+            "2022-01-14"
+          ]
+        }
+      }
+    ],
+    "stage_skip": [
+      {
+        "check": "stage_skip",
+        "key": 136,
+        "severity": "medium",
+        "signal": "proj136 completed (CO 2024-10-24) but has NO building_permit_issued event \u2014 genuine gap",
+        "classification": "review",
+        "expected_filter": "not UC, not CO-only cohort",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "co_date": "2024-10-24",
+          "units": 163,
+          "event_types_present": [
+            2,
+            15,
+            17,
+            25,
+            26
+          ]
+        }
+      },
+      {
+        "check": "stage_skip",
+        "key": 362,
+        "severity": "info",
+        "signal": "proj362 completed without a BP event \u2014 CO-only import cohort (event-funnel meaningless)",
+        "classification": "expected_co_only_cohort",
+        "expected_filter": "CO-only cohort (id block, no lifecycle events) \u2014 segmented out",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "co_date": "2025-03-26",
+          "units": 1
+        }
+      },
+      {
+        "check": "stage_skip",
+        "key": 544,
+        "severity": "info",
+        "signal": "proj544 completed without a BP event \u2014 CO-only import cohort (event-funnel meaningless)",
+        "classification": "expected_co_only_cohort",
+        "expected_filter": "CO-only cohort (id block, no lifecycle events) \u2014 segmented out",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "co_date": "2019-07-25",
+          "units": 1
+        }
+      },
+      {
+        "check": "stage_skip",
+        "key": 624,
+        "severity": "info",
+        "signal": "proj624 completed without a BP event \u2014 CO-only import cohort (event-funnel meaningless)",
+        "classification": "expected_co_only_cohort",
+        "expected_filter": "CO-only cohort (id block, no lifecycle events) \u2014 segmented out",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "co_date": "2019-05-30",
+          "units": 1
+        }
+      },
+      {
+        "check": "stage_skip",
+        "key": 645,
+        "severity": "info",
+        "signal": "proj645 completed without a BP event \u2014 CO-only import cohort (event-funnel meaningless)",
+        "classification": "expected_co_only_cohort",
+        "expected_filter": "CO-only cohort (id block, no lifecycle events) \u2014 segmented out",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "co_date": "2020-02-27",
+          "units": 1
+        }
+      },
+      {
+        "check": "stage_skip",
+        "key": 869,
+        "severity": "info",
+        "signal": "proj869 completed without a BP event \u2014 CO-only import cohort (event-funnel meaningless)",
+        "classification": "expected_co_only_cohort",
+        "expected_filter": "CO-only cohort (id block, no lifecycle events) \u2014 segmented out",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "co_date": "2022-01-14",
+          "units": 1
+        }
+      },
+      {
+        "check": "stage_skip",
+        "key": 880,
+        "severity": "info",
+        "signal": "proj880 completed without a BP event \u2014 CO-only import cohort (event-funnel meaningless)",
+        "classification": "expected_co_only_cohort",
+        "expected_filter": "CO-only cohort (id block, no lifecycle events) \u2014 segmented out",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "co_date": "2022-01-24",
+          "units": 1
+        }
+      },
+      {
+        "check": "stage_skip",
+        "key": 888,
+        "severity": "info",
+        "signal": "proj888 completed without a BP event \u2014 CO-only import cohort (event-funnel meaningless)",
+        "classification": "expected_co_only_cohort",
+        "expected_filter": "CO-only cohort (id block, no lifecycle events) \u2014 segmented out",
+        "resolvability": "needs_harvest",
+        "evidence": {
+          "co_date": "2023-01-11",
+          "units": 1
+        }
+      }
+    ],
+    "stale_apn": [
+      {
+        "check": "stale_apn",
+        "key": 179,
+        "severity": "medium",
+        "signal": "proj179 APN 055-1895-018-05 (\"055-1895-018-05\") absent from Feb-2026 assessor",
+        "classification": "orphaned_or_replatted_crosswalk_queue",
+        "expected_filter": "crosswalk queue (prior-APN/re-plat lineage)",
+        "resolvability": "has_r2_doc",
+        "evidence": {
+          "canon": "055-1895-018-05",
+          "stored_apn": "055-1895-018-05",
+          "addr": "2352 Shattuck Ave",
+          "co_or_bp": "2022-01-14"
+        }
+      }
+    ]
+  },
+  "calibration_assertions": {
+    "all_pass": true,
+    "assertions": [
+      {
+        "assertion": "merged_absorbed_not_active_anomaly",
+        "PASS": true,
+        "detail": "0 active-anomaly findings on absorbed ids (expect 0): []"
+      },
+      {
+        "assertion": "no_merged_leak_into_view",
+        "PASS": true,
+        "detail": "0 merged projects leaking (expect 0)"
+      },
+      {
+        "assertion": "proj136_corner_lot_expected",
+        "PASS": true,
+        "detail": "[(136, 'expected_corner_lot')]"
+      },
+      {
+        "assertion": "proj136_passes_built_vs_vacant",
+        "PASS": true,
+        "detail": "expect 0 built_vs_vacant findings for proj136, got 0"
+      },
+      {
+        "assertion": "adu_pairs_not_shadows",
+        "PASS": true,
+        "detail": "0 ADU pairs wrongly flagged shadow_candidate (expect 0)"
+      },
+      {
+        "assertion": "stale_apn_surfaces_crosswalk_queue",
+        "PASS": true,
+        "detail": "32 orphaned/re-plat crosswalk-queue items surfaced"
+      }
+    ]
+  }
+}

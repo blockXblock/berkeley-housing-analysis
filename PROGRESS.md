@@ -4,6 +4,16 @@
 
 ---
 
+## 2026-07-03 — ⭐⭐⭐ PDF↔CKAN SWEEP DONE — adjudicated city ≈4,106 vs our 4,103 (PRELIMINARY)
+Validated extractor (all CY2021 anchors PASS; promoted to scripts/v4/apr_pdf_a2_extract.py); sweep in
+data/audit/pdf_ckan_sweep_2026-07-03.csv; audit docs/audit/2026-07-03_pdf_ckan_sweep.md. **CY2022/24/25
+reconcile PERFECTLY; divergence is all in the early filings** (CY2018 PDF is entitlements-only; CY2019
+print inversions; CY2021 = the known 80u PDF-only + 128u CKAN-only). June-5's "275" hand-sum SUPERSEDED
+(correct 295 — artifact missed 21 ADU rows CKAN confirms). El Jardin's 55 corroborated AGAIN (CY2020
+PDF income col). 2001 Fourth St 152u (our C2 building): in CKAN, absent from the city's own PDF.
+**NEXT SESSION: precise union arithmetic → adjudicated-city baseline entry; San Pablo's CY2019 CKAN row
+vs its hold; income-column extraction for the print-defect class; package as the durable sweep JN.**
+
 ## 2026-07-03 — PDF↔CKAN SWEEP IN FLIGHT (background agent building the validated extractor)
 Naive text-stream extraction FAILED validation (CY2021 read 2,568 vs the known ~275 — it swallowed
 sites-inventory tables; scratch/2026-07-03/apr_pdf_a2_extract.py is the failed attempt, its CSVs are

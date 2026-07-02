@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-07-03 — THE DEN RESOLVED (+40, demote REVERSED) — CO 4,203; the NEVER-FINAL convention set
+Accela: completion permit B2018-01337 = **"Closed Expired"** — it will never final; the building is
+occupied (leasing: 40u/7st/2020) and the city's own CY2021 CO row used the foundation final's DATE.
+**New convention (first instance): completion-expired + occupied → the family's last finaled permit
+carries the completion.** Demote reversed (c_multifamily back to 3 rows, provenance kept); ledger 168
+(+40 on B2019-01789; units from family REV01 + leasing; city 36 = under-read). Baseline **2026-07-03g**
+(ledger subtlety: rebuilds count the 40 natively → grounded step stays 527 numeric; the Den row is
+verification-annotation). Chain re-validated at 4,203. **Ours 4,203 vs adjudicated city 4,099 = +104 —
+dominated by the two city under-filings** (GLA 41 CO omission; Den 36-vs-40 + CKAN drop). Open:
+1145 Amador +1 (awaiting John) · 12 UNCERTAINs · 20 no-candidate rows · sweep-JN + income-column
+refinement · Audit page.
+
 ## 2026-07-03 — ⭐ GRAYSON RESOLVED (+23) — **held_147 IS EMPTY**; CO 4,163 vs adjudicated 4,099 (+64 net, all named)
 John's Accela URLs cracked it: **PREAPP000322 documents a 2740/2748 San Pablo ADDRESS SWAP** (main
 address was 2748; retail 2740; later flipped) — which is why every 2740-based document search was

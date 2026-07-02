@@ -42,3 +42,15 @@ Every line has a name; the +37 same-period figure is dominated by the city's own
 ## Reverse
 Restore the snapshot; or delete the Den row from c_multifamily_collapse.csv + re-promote
 B2019-01789's finaled master to new_unit/40, and delete window_attributions.json (comparison-only).
+
+## 2026-07-03 SUPERSEDE (same day): The Den demote REVERSED — the never-final convention
+Accela (John-prompted check): **B2018-01337 is "Closed Expired"** — the completion permit will NEVER
+final, falsifying the demote's "count returns when it finals" premise. The building is occupied since
+~2021 (leasing records: **40 Units / 7 Stories / Built 2020**), and the city's own CY2021 PDF CO row
+used **the foundation permit's final date (10/25/2021)** — the city also treated that final as the
+building's completion event (their 36 an under-read vs the family's REV01 "each of the 40 units").
+**NEW CONVENTION (first instance): completion-permit-expired-unfinaled + building verifiably occupied
+→ the family's LAST FINALED permit carries the completion** (the Overture's cousin: permits lag
+reality by late-final AND never-final). Mechanics: c_multifamily row removed (back to 3 rows);
+grounded_counts row 168 (+40 on B2019-01789, snapshot pre-den-resolution); CO 4,163 → 4,203; baseline
+2026-07-03g (ledger note: rebuilds count the 40 natively, so the grounded step stays 527 numeric).

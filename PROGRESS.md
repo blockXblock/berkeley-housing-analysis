@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-07-02 — ⭐⭐ NUMBERUNITS STAGE-1: +170 MORE — headline now 3,915 vs 4,022 (−107); residual ~−29
+**The ~−150 residual is SOLVED:** it was chiefly **Logan Park NORTH (135u — entirely uncounted, both
+phases ambiguous)** + **Acheson Commons Bldg B (35u — "35 NEW RES UNIT" in its own description, missed
+because C2 filtered on new_unit role)**. Both grounded multi-source (plan set A.08 / prose + NumberUnits)
+and applied via the grounded_counts ledger (snapshot pre-grounded170; baseline **2026-07-02b**: co 3,915 /
+gap −107 / sha c2a1d0543e225c14; chain re-validated). **NumberUnits rule verdict (John-approved, evidence-
+confirmed): triage+corroborator for new construction ONLY — never auto-count (field=building-size for
+alterations); Stage-2 classifier lift DECLINED.** C2-vs-field validation 14/15 agree (the 1 divergence
+confirms dwellings-only semantics). Phase-subsidiaries recorded (Logan N/S Phase-I, El Jardin exc/found —
+each would have double/triple-counted). Adjudication record `data/audit/numberunits_stage1_2026-07-02.csv`.
+**Remaining under-side: +78 held** (El Jardin GLA convention — John; San Pablo no-docs) **+ ~−29 open.**
+
 ## 2026-07-02 — ⭐ +69 APPLIED via the RESOLUTION PATH — headline now 3,745 vs 4,022 (−277)
 **The first live run of the legitimate-change loop the architecture was built for:** calibration row
 (`corrections/v4/grounded_counts.csv` — the per-permit ADJUDICATION LEDGER, doubling as the

@@ -84,3 +84,30 @@ JN-F gained §5b; **from-raw chain re-validated: rebuild == live == baseline at 
 0 diffs.** Held under-side is now **+78** (El Jardin convention-conflict + San Pablo no-docs).
 Reverse: restore the snapshot, or delete the ledger row + re-demote (the write is a single event's
 classification).
+
+## NUMBERUNITS STAGE-1 PASS (same day — John approved the rule with guards)
+The structured `NumberUnits` field (present in our raw payloads all along) was swept over the 71
+ambiguous finaled events carrying NumberUnits≥3 (2018-2025). Partition record:
+`data/audit/numberunits_stage1_2026-07-02.csv`. **Validation:** 14/15 C2 prose-recovered counts agree
+with the field; the one divergence (B2018-05067: 22 vs 24) is the field counting DWELLINGS and
+excluding live-works — semantics confirmed. **Verdict on the rule:** triage signal + corroborator for
+NEW CONSTRUCTION; never an auto-count (for alterations the field means building size — 31 rejects and
+2 false-positive "strict proposes" prove it). Stage-2 (classifier lift) DECLINED on this evidence.
+
+**Two genuine recoveries applied via the ledger (+170; CO 3,745 → 3,915; gap −277 → −107):**
+- **B2019-05574 — Logan Park NORTH — 135** (plan set A.08 North unit-mix 135 + NumberUnits=135;
+  supersedes the stale "North=168" note). Both North phases sat ambiguous/0 — the building was entirely
+  uncounted. **This was the bulk of the former ~−150 residual.**
+- **B2015-02998 — Acheson Commons Bldg B — 35** (its own WorkDescription "35 NEW RES UNIT" — the C2
+  method's blind spot: the role was ambiguous, outside C2's new_unit filter — + NumberUnits=35;
+  siblings C=65/D=68 counted with matching NumberUnits).
+
+**Phase-subsidiary adjudications (uncounted BY DESIGN — recorded so no future pass re-proposes):**
+B2019-05575 (Logan South Phase I; the counted completion is B2021-03302), B2019-03704 (Logan North
+Phase I; counted completion is B2019-05574), B2018-02244 + B2018-02708 (El Jardin excavation/foundation,
+each carrying NumberUnits=55 — would have triple-counted the contested 55).
+
+**Write trace:** snapshot `keep_snapshot_2026-07-02_pre-grounded170.db` → apply_grounded_counts
+(3 rows, 2 promoted, +69 idempotently verified) → fresh-conn CO 3,915 / BP 3,945 / events 82,923 →
+baseline `reconciliation_baseline_2026-07-02b.json` APPENDED (gap −107, sha c2a1d0543e225c14; residual
+re-based ~−29) → JN-E regenerated (gate PASS) → from-raw chain re-validated.

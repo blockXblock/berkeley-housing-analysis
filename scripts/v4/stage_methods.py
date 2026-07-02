@@ -519,8 +519,11 @@ def apply_grounded_counts(con, csv_path=os.path.join(CORR, 'grounded_counts.csv'
             role, is_master, nu, note = state[0]
             if role == 'new_unit' and is_master == 1 and nu == n and 'grounded_counts' in (note or ''):
                 continue  # idempotent re-run
-            assert (nu or 0) == 0, \
-                f'grounded_counts {p}: finaled event already carries net_units={nu} — refusing to overwrite'
+            # never OVERWRITE a different count; but a role PROMOTION over an equal stored count is
+            # legitimate (the 2026-07-03 ADU-recall class: RULE-9 ambiguous rows whose UnitsAdded was
+            # already right — promoting ambiguous->new_unit at the same value changes no number)
+            assert (nu or 0) in (0, n), \
+                f'grounded_counts {p}: finaled event carries net_units={nu} != ledger {n} — refusing to overwrite'
             rc = con.execute(
                 "UPDATE event_classifications SET housing_role='new_unit', is_master=1, net_units=?, "
                 "basis=?, basis_note=COALESCE(basis_note,'')||' | grounded_counts ('||?||'; src '||?||')' "

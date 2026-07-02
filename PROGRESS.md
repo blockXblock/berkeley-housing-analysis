@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-07-03 — ⭐⭐ ADU-RECALL BATCH APPLIED (+173) — CO 4,143 vs city 4,022 (**+121, SIGN FLIPPED**)
+The RULE-9 inspect-queue, worked: 161 permits grounded in their own WorkDescriptions (3-agent
+adjudication + CC verify caught 2 traps + John sample-audited 30 rows; **2815 Channing amended to
+net +2**). 36 were ambiguous-with-correct-UnitsAdded → equal-value role promotions (method relaxed
+for exactly that; mismatches still halt). 12 UNCERTAIN held for John; 20 no-candidate = open
+city-side questions. Ledger 165 rows/467u; snapshot pre-adu-recall; baseline **2026-07-03**
+(gap +121, sha a7204d688000e1f7); JN-E regen PASS (§2 header now value-free); chain re-validated
+at 4,143 / 0 completion-set diffs. **⚠ FRAMING (audit doc): our CO now EXCEEDS the city's — the
+honest story is line-by-line two-way disagreement, NEVER "we found more housing than the city."**
+Open movers: 1808 University −44 (window-timing), 2510 Channing −40, Acheson-A +37 (convention),
+San Pablo 23 held. Audit: docs/audit/2026-07-03_adu_recall_write.md.
+
 ## 2026-07-03 — THE "~−29 RESIDUAL" DECOMPOSED — it was a NET, not a thing (see
 docs/audit/2026-07-03_residual_decomposition.md + data/audit/residual_address_deltas_2026-07-03.csv)
 Per-parcel delta join (canonical APN + address netting) sums EXACTLY to −52 = **+293 city-more /

@@ -126,7 +126,7 @@ print('CONTRACT:', BASE['verifiability_contract']['oracle_not_source'])
 """)
 
     md("""
-## §2 — The headline: our CO vs the city's (derived below; 3,745 vs 4,022 = −277 as of the 2026-07-02 baseline)
+## §2 — The headline: our CO vs the city's (both derived below; the gate pins the current values)
 **Where from.** *Our* CO = finaled `new_unit` master permits with `net_units>0` (the ADR-002 verdict layer,
 classified in JN-C, corrected by the gated writes). *City* CO = the sum of all 11 `CO_*` income-tier columns
 in `table_a2` (the city's curated unit-creating rollup).

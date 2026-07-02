@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-07-03 — PDF↔CKAN SWEEP IN FLIGHT (background agent building the validated extractor)
+Naive text-stream extraction FAILED validation (CY2021 read 2,568 vs the known ~275 — it swallowed
+sites-inventory tables; scratch/2026-07-03/apr_pdf_a2_extract.py is the failed attempt, its CSVs are
+WRONG). A background agent is building the coordinate-aware (fitz words + column-header x-mapping)
+extractor with HARD anchors: CY2021 CO≈275 incl. B2014-05786/44@8-31-2021, Den 36, 2628 Shattuck 78,
+Bancroft ABSENT; then the per-year CKAN join (canonical-APN + normalize_address) bucketed
+AGREE/DIVERGE/PDF_ONLY/CKAN_ONLY → scratch/2026-07-03/pdf_ckan_sweep.csv + summary. On success this
+becomes the adjudicated city record replacing the leaky "4,022" (then: a durable JN + baseline update).
+
 ## 2026-07-03 — CITY APR PDFs ACQUIRED (CY2015-2025, data/raw/city_apr_pdfs/)
 All 11 primary city filings downloaded from berkeleyca.gov (John's pointer), text-extractable,
 Table A2 per-project columns present 2018-2025. **Unblocks the CY-by-CY PDF↔CKAN completeness sweep**

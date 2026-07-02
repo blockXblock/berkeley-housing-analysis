@@ -4,6 +4,19 @@
 
 ---
 
+## 2026-07-03 (evening) — ⚠ OVERTURE RETRACTED + THE TARGET FINDING (John's NotebookLM catch)
+John's NotebookLM pass over the APR PDFs surfaced what the mirror hid: **the CY2021 city PDF credits
+CO 44 on 8/31/2021 under B2014-05786 — exact match to ours (permit#, date, count).** The window
+attribution is RETRACTED (calibration emptied with provenance; mechanism kept); no DB change; baseline
+**2026-07-03c**. **Elevated finding: CKAN — the source of "city 4,022" — is provably incomplete AND
+partly inflated** (June-5 audit, now binding: CY2021 PDF-only rows 82u incl. Overture 44 + Den 36;
+Bancroft 122-vs-117 explains our +5). **Totals are summaries; the per-row ledger is the comparison.**
+Queued: CY-by-CY PDF↔CKAN completeness sweep. Den demote STANDS (grain + CKAN hole + 36-vs-40 noted).
+June-5's "1812 University net-new 2" line corrected append-only (conflated the conversion permit; the
+family nets 44+2). **⚠ /ground lesson #2: both yesterday adjudications were pre-answered BY NAME in
+the June-5 audit — "check docs/audit" means grep the SUBJECT (address/permit), not the topic.**
+Audit: docs/audit/2026-07-03_overture_retraction_and_ckan_target.md.
+
 ## 2026-07-03 — OVERTURE + DEN ADJUDICATED — CO 4,103; raw +81; **same-period comparison +37**
 The two big ours-more rows, opposite root causes, one batch (audit:
 docs/audit/2026-07-03_window_and_den_writes.md):

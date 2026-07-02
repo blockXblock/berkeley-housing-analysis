@@ -177,3 +177,13 @@ hidden majors.**
 ## Artifacts (read-only outputs)
 - `data/apr/2021/cy2021_pdf_table_a2_col12_co.csv` — 95 non-zero Column-12 CO rows from the PDF.
 - `data/apr/2021/cy2021_pdf_vs_ckan_co_reconciliation.csv` — parcel-level PDF↔CKAN join (117 parcels).
+
+## 2026-07-03 CORRECTION (append-only): the "1812 University net-new 2" line is SUPERSEDED
+The §3 inflation-table row reading 1812 University as "net-new 2 after replacement" **conflated two
+permits of one family**: the CKAN 2-unit rows track **B2019-05321** (the LATER retail→2-studio
+conversion inside the building, BP 2020, CO 2025) — they are NOT the new building's net. The building
+itself is **B2014-05786** ("NEW 36,554 SQFT MIXED USE BLDG, 28,095 RES" — The Overture, replacing two
+shops): permit-stated 44 units, CO'd 8/31/2021 per this PDF's own p20 row. **Net-new for the family =
+44 (new building) + 2 (later conversion) = 46**, not 2. The PDF-only/CKAN-missing finding for this row
+STANDS (CKAN lacks the 44-CO row); the net-vs-gross reading of it is corrected. Full permit-family
+timeline: docs/audit/2026-07-03_overture_retraction_and_ckan_target.md.

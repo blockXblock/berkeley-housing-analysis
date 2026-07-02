@@ -1,20 +1,12 @@
 {
-  "_description": "WINDOW-ATTRIBUTION calibration — permits whose counted completion (permit-finaled grain) demonstrably lags the building's actual completion/occupancy across the comparison-window boundary. The building stays FULLY COUNTED in all-time totals (it is real housing; nothing is demoted); JN-E's 2018-2025 windowed comparison subtracts these units from OUR side so the two records are compared on the same period. Resolution/change = edit this file with provenance.",
-  "_provenance": "created 2026-07-03 (the 1808-University adjudication; docs/audit/2026-07-03_window_and_den_writes.md).",
-  "attributions": [
+  "_description": "WINDOW-ATTRIBUTION calibration \u2014 permits whose counted completion (permit-finaled grain) demonstrably lags actual completion across the comparison-window boundary. Currently EMPTY: the sole entry was retracted same-day (below). Mechanism retained (JN-E \u00a711b derives from this file).",
+  "_provenance": "created 2026-07-03; RETRACTED 2026-07-03 evening.",
+  "retractions": [
     {
       "permit": "B2014-05786",
-      "units": 44,
-      "building": "The Overture, 1808-1812 University Ave (44-unit mixed use)",
-      "counted_finaled": "2021-08-31 (administrative closeout; duplicate row was the dedup47 case)",
-      "attributed_completion": "2016-2017 (pre-window)",
-      "evidence": [
-        "permit issued 2016-01-21 (our event stream)",
-        "listing records: 'built 2016' (Trulia/Zillow, The Overture)",
-        "our TI permit B2017-05238 (submitted 2017-12) fits out 'empty space @ 1812 University - The Overture'",
-        "city credits the 44 NOWHERE in Table A2 2018-2025 (verified by APN and address)",
-        "city's 2025 filing calls it 'existing mixed use building with 44 dwelling units'"
-      ]
+      "retracted": "2026-07-03",
+      "reason": "PREMISE WRONG: the CY2021 city APR PDF (p20, APN 057 201602000, tracking B2014-05786) credits CO 44 units on 8/31/2021 \u2014 the city counted this building IN-window, on exactly our permit-finaled grain and date. The 'city credits it nowhere' finding was an artifact of CKAN INCOMPLETENESS (the mirror lacks the row) \u2014 a defect the 2026-06-05 multi-source audit had already documented, naming this building. The physical early-occupancy evidence (built 2016-17) remains true but is moot for the comparison: both records agree at 2021-08-31/44."
     }
-  ]
+  ],
+  "attributions": []
 }

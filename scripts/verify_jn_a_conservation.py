@@ -14,11 +14,14 @@
 #   (2) the LIVE state == ingestion anchors MINUS the DOCUMENTED deltas — so the ONLY subtractions are the ones
 #       we recorded. Future legitimate corrections re-pass by appending a documented delta, never by editing a
 #       frozen total.
-import sqlite3, glob
+import os, sqlite3, glob
 import pandas as pd
 
-DB         = '/Users/johngage/berkeley-data/databases/berkeley_housing_v4.db'
-FEED       = sorted(glob.glob('/Users/johngage/berkeley-data/data/raw/cpra-downloads/BP_Annual Permit Report-*.xlsx'))
+# Portable paths (was hardcoded /Users/johngage/...). Env overrides let this validate a THROWAWAY rebuild:
+#   BERKELEY_DATA_ROOT (repo root) and JN_A_DB_PATH (the DB to check — a throwaway in a from-raw test).
+_ROOT      = os.environ.get('BERKELEY_DATA_ROOT', os.path.expanduser('~/berkeley-data'))
+DB         = os.environ.get('JN_A_DB_PATH', os.path.join(_ROOT, 'databases', 'berkeley_housing_v4.db'))
+FEED       = sorted(glob.glob(os.path.join(_ROOT, 'data', 'raw', 'cpra-downloads', 'BP_Annual Permit Report-*.xlsx')))
 HEADER_ROW = 7
 DATE_COLS  = {'Submittal Date': 'permit_submitted', 'Issuance Date': 'permit_issued',
               'Finaled Date': 'permit_finaled', 'Completed Date': 'permit_completed'}

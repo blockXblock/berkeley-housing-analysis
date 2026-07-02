@@ -4,6 +4,13 @@
 
 ---
 
+## 2026-07-03 — ⭐ UNION ARITHMETIC FINAL: OURS 4,103 vs ADJUDICATED CITY 4,099 = **+4**
+Adjudicated city = CKAN 4,022 + genuine PDF-only rows (Overture 44 + Den 36 + 1145 Amador 1 + 1912
+Yolo 1; Jefferson/Colusa were year-shuffles already in CKAN) − Bancroft inflation 5 (permit-verified
+117). Baseline **2026-07-03d** carries `city_co_adjudicated` (documented) + JN-E §2 prints it derived
+from BASE. **Eight years of Berkeley housing completions: two independent reconstructions, four units
+apart, every difference named.** New open row: 1145 Amador (city PDF 1u, ours 0 — recall-class).
+
 ## 2026-07-03 — ⭐⭐⭐ PDF↔CKAN SWEEP DONE — adjudicated city ≈4,106 vs our 4,103 (PRELIMINARY)
 Validated extractor (all CY2021 anchors PASS; promoted to scripts/v4/apr_pdf_a2_extract.py); sweep in
 data/audit/pdf_ckan_sweep_2026-07-03.csv; audit docs/audit/2026-07-03_pdf_ckan_sweep.md. **CY2022/24/25

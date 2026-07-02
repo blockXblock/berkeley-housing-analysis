@@ -142,7 +142,9 @@ co = ro(V4).execute("SELECT COALESCE(SUM(x.net_units),0) FROM events e JOIN even
   "AND x.is_master=1 AND COALESCE(x.net_units,0)>0").fetchone()[0]
 ta=pd.read_sql('SELECT * FROM table_a2', ro(HCD)); cc=[c for c in ta.columns if c.startswith('CO_') and 'DT' not in c]
 for c in cc: ta[c]=pd.to_numeric(ta[c],errors='coerce').fillna(0)
-city=int(ta[cc].sum().sum()); print(f'OUR CO={co}  CITY CO={city}  GAP={co-city}')
+city=int(ta[cc].sum().sum()); print(f'OUR CO={co}  CITY CO (CKAN)={city}  GAP={co-city}')
+adj=BASE.get('documented_not_gated',{}).get('city_co_adjudicated')
+if adj: print(f"ADJUDICATED CITY (PDF-CKAN union, per-row): {adj['value']}  ->  ours-vs-adjudicated {co-adj['value']:+d}")
 """)
 
     md("""

@@ -1,0 +1,25 @@
+{
+  "_description": "JN-B event-dedup CALIBRATION — tier-2 HOLD groups (never auto-collapsed). The universal method collapses same-(permit,milestone,date) duplicate events keep-MIN; these groups are excluded. Tier-3 (different-date finaled) is structurally never collapsed because the dedup key includes the date. Source: docs/audit/2026-06-29_event_dedup_write.md.",
+  "_provenance": "externalized 2026-07-02 from the live event-dedup write's held set, so a from-raw rebuild reproduces the live DB exactly (the held duplicates survive in live; without these holds a rebuild would collapse B2014-05786's same-date pair before dedup47 can demote it, landing 1 event short of live).",
+  "tier2_holds": [
+    {
+      "source_record_key": "B2014-05786",
+      "event_type_code": "permit_finaled",
+      "event_date_prefix": "2021-08-31",
+      "reason": "HELD for dedup47: in live, the duplicate finaled-master pair survives with one copy demoted subsidiary/0 by dedup47 (classifications differ new_unit/44 vs subsidiary/0). A rebuild must keep both events and let the dedup47 correction demote the non-MIN copy — collapsing here would diverge from live structure."
+    },
+    {
+      "source_record_key": "B2022-00032",
+      "event_type_code": "permit_issued",
+      "event_date_prefix": "2022-10-04",
+      "reason": "substantive-differ: WorkDescription differs between the two CPRA files — canonical description awaits John's review (also auto-held by the nd_wd>1 guard; listed here so the hold is calibration-visible, not just emergent)."
+    },
+    {
+      "source_record_key": "B2022-00032",
+      "event_type_code": "permit_submitted",
+      "event_date_prefix": "2022-01-04",
+      "reason": "same substantive-differ pair as the issued milestone."
+    }
+  ],
+  "tier3_note": "12 different-date finaled groups (possible legit re-finals) listed in the audit doc; never collapsed by design (key includes date). 3 of them are dedup47 permits whose duplicate is instead DEMOTED by the corrections stage."
+}

@@ -1,0 +1,34 @@
+{
+  "_description": "HOLD-NOT-APPLY calibration — corrections identified but deliberately NOT applied. assert_held() and apply_c2 read this. A hold is RESOLVED by editing this file (moving the permit out with provenance), never by editing code: the methods are universal; which permits are held is Berkeley calibration.",
+  "_provenance": "externalized 2026-07-02 from stage_methods.py literals (review finding: calibration-in-code). Semantics from corrections/v4/README.md 'APPLIED vs HELD' + docs/audit/2026-06-28_c_multifamily_collapse_write.md.",
+  "held_147": [
+    {
+      "permit": "B2021-03302",
+      "city_count_unadopted": 69,
+      "address": "2352 Shattuck (South)",
+      "reason": "phased-multifamily completion classified ambiguous; our WorkDescription carries NO unit count, so the only number is the city's — oracle-is-never-source. Effectively R2-grounded (proj179 plan sets) pending write-up.",
+      "unblock": "Accela/architect-plan harvest (JN-H map)"
+    },
+    {
+      "permit": "B2018-03422",
+      "city_count_unadopted": 55,
+      "address": "2503 Haste",
+      "reason": "same class: ambiguous completion, no independent count in our text.",
+      "unblock": "targeted Accela scrape (Building-native engine)"
+    },
+    {
+      "permit": "B2016-05139",
+      "city_count_unadopted": 23,
+      "address": "2740 San Pablo",
+      "reason": "same class: ambiguous completion, no independent count in our text.",
+      "unblock": "targeted Accela scrape (Building-native engine)"
+    }
+  ],
+  "c2_excluded": [
+    {
+      "permit": "B2020-03895",
+      "reason": "excluded from C2-T1 (the #3 pending case, per the 2026-06-28 C2 write review); stays out of the count-gap recovery until adjudicated."
+    }
+  ],
+  "c1_phantom": "considered-and-rejected, never applied (the 584 were already counted; applying would double-count). Recorded so no future session re-derives it as a TODO."
+}

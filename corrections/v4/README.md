@@ -32,6 +32,18 @@ One true coupling: **`c_multifamily_collapse` must run AFTER `c2_count_recovery`
 056-1928-019 row re-homes the convention flag/count that C2-T2 set on `B2021-04949` (the `bump 40→41` guard
 assumes C2's value is present). Everything else is order-independent. event-dedup is CO-neutral.
 
+## Pipeline-stage calibration (added 2026-07-02 — the JN-B/JN-F build + review hardening)
+- **`event_dedup_holds.json`** — JN-B tier-2 HOLD groups (the universal dedup method never collapses
+  these; a hold matching no group HALTS the stage — calibration drift must be loud).
+- **`held_items.json`** — the HOLD-NOT-APPLY registry (the +147 permits, the C2 exclusion, the
+  C1-phantom record). `assert_held()`/`apply_c2` read it; a hold is RESOLVED by editing this file
+  with provenance, never by editing code.
+- **`calibration_checksums.json`** — approved-set integrity pins (the original one-shots' 15/907-style
+  HALT guards, re-externalized). The apply_* methods assert these BEFORE writing; a legitimate
+  calibration change updates rows + checksums together in one reviewed edit.
+- Consumers: **`scripts/v4/stage_methods.py`** (THE importable stage-method home) via the
+  `notebooks/v4/JN-B_event_dedup.ipynb` → `JN-C_classify.ipynb` → `JN-F_corrections.ipynb` chain.
+
 ## APPLIED vs HELD
 - **APPLIED (→ 3,676):** all five files above (event-dedup is a separate structural write, CO-neutral).
 - **HELD — identified but deliberately NOT applied (a correction notebook must ENCODE these as hold-not-apply):**

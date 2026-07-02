@@ -4,6 +4,25 @@
 
 ---
 
+## 2026-07-03 — THE "~−29 RESIDUAL" DECOMPOSED — it was a NET, not a thing (see
+docs/audit/2026-07-03_residual_decomposition.md + data/audit/residual_address_deltas_2026-07-03.csv)
+Per-parcel delta join (canonical APN + address netting) sums EXACTLY to −52 = **+293 city-more /
+−241 ours-more**. The structure:
+- **⭐ ADU-CONVERSION RECALL GAP (systematic, ~160-220u):** 159 city-credited +1u addresses — **158/159
+  exist in our data as finaled ALTERATION-classified permits** (garage/basement conversions,
+  legalizations). The long-suspected "real ADU recall gap" is measured. NEXT BIG WORK ITEM: C2-style
+  calibration review of those ~160 permits → ledger/method application (would move CO UP ~+160-220).
+- **Four big adjudications:** 1808 University −44 (B2014-05786 — window-timing suspect, building likely
+  CO'd pre-2018); 2510 Channing −40 (B2019-01789 — uninvestigated); Acheson-A rehab +37 (city counts the
+  historic rehab; we say alteration — convention call); 0-San-Pablo 41 = city failed to file a GLA it
+  files elsewhere (city-side inconsistency, our count stands).
+- **Timing (self-resolving):** 1367 University −39 + ~20 single ADUs finaled 2024-25 = city filing lag;
+  re-check at next mirror refresh.
+- **⚠ method lesson:** `to_canonical_apn` county key is CASE-SENSITIVE ('Alameda'); a lowercase key +
+  swallowed exception silently degraded matching to address-only (also weakened the 07-02 Stage-1
+  phase-guard — its proposals were independently verified, no damage). Consider case-insensitive lookup
+  in apn.py.
+
 ## 2026-07-02 — ⭐ EL JARDIN RESOLVED (+55) — headline 3,970 vs 4,022 (−52); held +23; unexplained ~−29
 CIC settled the convention: **in-unit kitchens confirmed** ("Enclave Apartments", Greystar) → co-living
 DWELLING units. The 55/193/254 "conflict" was units/bedrooms/beds of ONE building — **the

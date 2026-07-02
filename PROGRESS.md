@@ -4,6 +4,19 @@
 
 ---
 
+## 2026-07-01 — working-tree triage (CC session)
+- **🔴 FIXED: HEAD was import-broken** — `52c79b4` committed `__init__.py`/`test_s7_gate.py` consuming
+  `rhna_credit_cycle` but never the function's source; every commit June-28→July-01 raised ImportError
+  on `import housing_rules` at clean checkout. Source committed `de5da7e` (smoke + 16+9 tests pass).
+- **Housekeeping committed:** June-13 affordability-corrections rows (`85fb2bc`); shake APN-canon
+  re-run outputs (`6f6eea6`); oracle-independence methodology doc (`4e238a4`); `permits_clean.{csv,parquet}`
+  gitignored as derived cache (`52ff00e`); D6/D7 timestamp-only churn reverted. Tree clean.
+- **CY2025 double-submission evidence preserved** (`35487ad`, `data/audit/hcd_ckan_snapshot_2026-06-16/`):
+  the 2026-06-16 CKAN vintage (table_a2 CY2025 = 126 rows) vs the 2026-05-26 mirror (474) documents the
+  city's double-submission + upstream dedup. John: current reporting is live-queryable from CKAN; the
+  snapshots exist ONLY as evidence of the mistake. ⚠ When the mirror is next re-pulled, the JN-E city-side
+  totals may move → append a new timestamped baseline, don't edit.
+
 ## Where we are (2026-06-27) — CLASSIFIER LIFTED · ADU BIJECTION · SCORER · APR SIZING
 
 **▶ Read `notes/TECHNICAL_HANDOVER_2026-06-27.md` (on-disk truth) + chat-Claude's `HANDOVER_2026-06-27.md`

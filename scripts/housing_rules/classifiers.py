@@ -93,6 +93,61 @@ def is_projection_period(d: Optional[date], cycle: str = "6th") -> bool:
     return False
 
 
+def _projection_start(cycle: str = "6th") -> date:
+    """The projection-period START for a cycle — the RHNA-credit lower bound.
+
+    This is the 2022-06-30 boundary, sourced from PROJECTION_PERIODS, and is
+    DELIBERATELY DISTINCT from RHNA_CYCLES[cycle].start (the 6th's nominal
+    planning-period start, 2023-01-31). CLAUDE.md:179 warns these must never be
+    conflated: RHNA *credit* is earned from the projection start, not the
+    planning start. Fails loudly if the cycle has no registered projection period.
+    """
+    for pp in PROJECTION_PERIODS:
+        if pp["cycle"] == cycle:
+            return pp["start"]
+    raise ValueError(
+        f"no projection period registered for cycle {cycle!r} in "
+        f"lookups.PROJECTION_PERIODS; cannot derive its RHNA-credit boundary."
+    )
+
+
+def rhna_credit_cycle(first_bp_date: Optional[date], cycle: str = "6th") -> Optional[str]:
+    """Which RHNA cycle a unit's progress is CREDITED to, by FIRST building-permit date.
+
+    HCD credits a unit at building-permit issuance (NOT certificate of occupancy);
+    the credit-bearing event is a project's FIRST non-subsidiary BP. A unit is
+    credited to the 6th cycle iff that first BP was issued ON/AFTER the projection
+    start (2022-06-30) — with NO upper cap before the cycle ends; earlier = 5th.
+
+    Args:
+        first_bp_date: the project's FIRST building_permit_issued date
+                       (MIN over non-subsidiary BP events), or None.
+        cycle: the cycle whose credit boundary to test (default "6th").
+
+    Returns:
+        "6th" if first_bp_date >= the cycle's projection start (2022-06-30 for 6th);
+        "5th" if earlier; None when first_bp_date is None (e.g. a CO-only building
+        with no BP event — RHNA credit is not derivable, the caller flags it).
+
+    Boundary provenance (the non-conflation CLAUDE.md:179 makes load-bearing):
+        uses PROJECTION_PERIODS[cycle].start (2022-06-30), NOT
+        RHNA_CYCLES[cycle].start (2023-01-31). The 2023-01-31 date is the 6th
+        cycle's PLANNING-period start — a different thing from credit-eligibility.
+
+    Note: this duplicates the credit boundary currently INLINED in
+    generate_apr_v2.generate_rhna_progress; that script should later be
+    refactored to import this (single-source the boundary). Not done here.
+
+    SQL equivalent:
+        CASE WHEN :first_bp >= (SELECT start_date FROM projection_periods
+                                WHERE cycle = :cycle)
+             THEN '6th' ELSE '5th' END   -- NULL-in -> NULL-out
+    """
+    if first_bp_date is None:
+        return None
+    return "6th" if first_bp_date >= _projection_start(cycle) else "5th"
+
+
 def valid_income_tiers_for_year(year: int) -> List[str]:
     """Return the list of income tier names reportable in APR year `year`.
 

@@ -47,9 +47,14 @@ Chain runtime ~18s (nbclient, `/opt/miniconda3/envs/jupyter_env/bin/python` — 
   `deployment_queued` forever → 10-min timeout. NOT our content (diff is inert text + explorer files;
   branch policy fine; env protection fine). **Switched Pages to WORKFLOW build type** (`4b5b649`,
   `.github/workflows/pages.yml`, static verbatim docs/ upload — behavior-identical, no Jekyll).
-  Site meanwhile serves the June-23 build (stale but healthy). **Retry = `gh workflow run "Deploy Pages"`**;
-  if still wedged, John files GitHub support ticket (run IDs 28600598243 / 28602432188 + 3 more,
-  all 2026-07-02). Verify propagation: `curl -s https://berkeleybuild.com/explorer.js | grep -c assessedCoverage`.
+  Site meanwhile serves the June-23 build (stale but healthy). **6 failures total** — incl. after
+  explicitly CANCELLING the two zombie deployments (both returned the undocumented EMPTY status `""`
+  from GET /pages/deployments/{sha} — strong server-side-limbo evidence for the ticket). All our-side
+  levers exhausted (content/artifact/branch-policy/env-protection/pipeline-switch/zombie-cancel).
+  **→ JOHN: file the GitHub support ticket** (draft in chat 2026-07-02; run IDs 28600598243 /
+  28602432188 + 4 more; last success 28063409634 June-23; empty-status deployment detail included).
+  Overnight self-heal retry: `gh workflow run "Deploy Pages"` then
+  `curl -s https://berkeleybuild.com/explorer.js | grep -c assessedCoverage` (>0 = live).
 
 ## 2026-07-01 — working-tree triage (CC session)
 - **🔴 FIXED: HEAD was import-broken** — `52c79b4` committed `__init__.py`/`test_s7_gate.py` consuming

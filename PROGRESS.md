@@ -4,6 +4,19 @@
 
 ---
 
+## 2026-07-03 — OVERTURE + DEN ADJUDICATED — CO 4,103; raw +81; **same-period comparison +37**
+The two big ours-more rows, opposite root causes, one batch (audit:
+docs/audit/2026-07-03_window_and_den_writes.md):
+- **The Overture (−44 from the COMPARISON only):** permit-final 2021 but built/occupied 2016-17 (5
+  convergent evidence lines) — NEW calibration class `window_attributions.json` + JN-E §11b derive a
+  same-period comparison; the building stays fully counted (grain honesty, not demotion).
+- **The Den (−40 from CO):** count-once violation — 40 counted on the FOUNDATION final while the
+  completion permit B2018-01337 has NEVER finaled (building real/occupied; city credits no CO either).
+  4th c_multifamily row; the count RETURNS automatically when the completion finals in a CPRA pull.
+Baseline **2026-07-03b** (co 4,103 / raw gap +81 / window-adjusted +37 / sha 3a7bea4f22f2d793); chain
+re-validated. Remaining named-open: San Pablo 23 held · Acheson-A +37 convention · 12 UNCERTAINs ·
+20 no-candidate city rows · CY2025 lag (~60u, self-resolving at next mirror refresh).
+
 ## 2026-07-03 — ⭐⭐ ADU-RECALL BATCH APPLIED (+173) — CO 4,143 vs city 4,022 (**+121, SIGN FLIPPED**)
 The RULE-9 inspect-queue, worked: 161 permits grounded in their own WorkDescriptions (3-agent
 adjudication + CC verify caught 2 traps + John sample-audited 30 rows; **2815 Channing amended to

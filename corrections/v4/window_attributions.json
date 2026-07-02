@@ -1,0 +1,20 @@
+{
+  "_description": "WINDOW-ATTRIBUTION calibration — permits whose counted completion (permit-finaled grain) demonstrably lags the building's actual completion/occupancy across the comparison-window boundary. The building stays FULLY COUNTED in all-time totals (it is real housing; nothing is demoted); JN-E's 2018-2025 windowed comparison subtracts these units from OUR side so the two records are compared on the same period. Resolution/change = edit this file with provenance.",
+  "_provenance": "created 2026-07-03 (the 1808-University adjudication; docs/audit/2026-07-03_window_and_den_writes.md).",
+  "attributions": [
+    {
+      "permit": "B2014-05786",
+      "units": 44,
+      "building": "The Overture, 1808-1812 University Ave (44-unit mixed use)",
+      "counted_finaled": "2021-08-31 (administrative closeout; duplicate row was the dedup47 case)",
+      "attributed_completion": "2016-2017 (pre-window)",
+      "evidence": [
+        "permit issued 2016-01-21 (our event stream)",
+        "listing records: 'built 2016' (Trulia/Zillow, The Overture)",
+        "our TI permit B2017-05238 (submitted 2017-12) fits out 'empty space @ 1812 University - The Overture'",
+        "city credits the 44 NOWHERE in Table A2 2018-2025 (verified by APN and address)",
+        "city's 2025 filing calls it 'existing mixed use building with 44 dwelling units'"
+      ]
+    }
+  ]
+}

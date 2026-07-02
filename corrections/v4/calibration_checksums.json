@@ -29,7 +29,7 @@
     "rows": 1
   },
   "c_multifamily": {
-    "rows": 3,
+    "rows": 4,
     "bump_rows": 1
   },
   "dedup47": {
@@ -41,5 +41,9 @@
   "grounded_counts": {
     "rows": 165,
     "units": 467
+  },
+  "window_attributions": {
+    "permits": 1,
+    "units": 44
   }
 }

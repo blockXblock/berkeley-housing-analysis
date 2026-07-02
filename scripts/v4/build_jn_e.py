@@ -278,6 +278,23 @@ print('concern:', BASE['documented_not_gated']['residual']['verifiability_concer
 """)
 
     md("""
+## §11b — Window attributions (same-period comparison, derived from calibration)
+**The lesson of The Overture (1808-1812 University):** our completion grain is the permit-FINALED date,
+which can lag actual occupancy by years (a 2016-built building whose permit closed administratively in
+2021). The city credited such buildings in PRE-window APRs, so comparing raw counts misplaces them.
+`corrections/v4/window_attributions.json` records each adjudicated case WITH its evidence; this cell
+derives the same-period comparison. **The buildings stay fully counted in all-time totals** — this
+adjusts the COMPARISON, never the count.
+""")
+    code("""
+WA=json.load(open(os.path.join(ROOT,'corrections','v4','window_attributions.json')))
+wa_units=sum(a['units'] for a in WA['attributions'])
+for a in WA['attributions']:
+    print(f"  {a['permit']} {a['units']}u — {a['building'][:60]}: attributed {a['attributed_completion']}")
+print(f"window-adjusted comparison: ({co} − {wa_units}) vs {city} = {co-wa_units-city:+d}   (raw: {co-city:+d})")
+""")
+
+    md("""
 ## §12 — Net picture + the building-identity refinement note (HYPOTHETICAL)
 **Building-identity** is the multifamily *refinement input* (it groups permits→buildings); the base
 reconciliation runs **without** it (current classification). The projection below — "if the +147 were

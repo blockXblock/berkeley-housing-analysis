@@ -4,6 +4,14 @@
 
 ---
 
+## 2026-07-03 — CITY APR PDFs ACQUIRED (CY2015-2025, data/raw/city_apr_pdfs/)
+All 11 primary city filings downloaded from berkeleyca.gov (John's pointer), text-extractable,
+Table A2 per-project columns present 2018-2025. **Unblocks the CY-by-CY PDF↔CKAN completeness sweep**
+— the queued work that replaces the CKAN-only "city 4,022" with an adjudicated per-row city record
+(CY2021 already done by the June-5 audit: 4 PDF-only rows/82u, 28 CKAN-only rows/149u, 8 gross-vs-net
+inflations). Sweep design: extend the June-5 method to 2018-2025; output = a per-year, per-row
+city-record adjudication feeding JN-E's comparison.
+
 ## 2026-07-03 (evening) — ⚠ OVERTURE RETRACTED + THE TARGET FINDING (John's NotebookLM catch)
 John's NotebookLM pass over the APR PDFs surfaced what the mirror hid: **the CY2021 city PDF credits
 CO 44 on 8/31/2021 under B2014-05786 — exact match to ours (permit#, date, count).** The window

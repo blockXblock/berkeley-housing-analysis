@@ -1,0 +1,34 @@
+# Workflow-based GitHub Pages deploy — replaced the legacy (Jekyll) pipeline 2026-07-02 after it
+# wedged server-side (4 consecutive deployment_queued timeouts; runs 28600598243/28602432188/...).
+# The site is pure static files served from docs/ (no _config.yml, no front-matter markdown), so a
+# verbatim upload is behavior-identical to what legacy Jekyll produced. docs/CNAME carries the domain.
+name: Deploy Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+      - id: deployment
+        uses: actions/deploy-pages@v4

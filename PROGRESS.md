@@ -4,6 +4,21 @@
 
 ---
 
+## 2026-07-02 — +147 HARVEST RUN (see docs/audit/2026-07-02_147_harvest_findings.md)
+- **B2021-03302 (Shattuck South): 69 GROUNDED** from the proj179 plan set already in R2 (A.08 Phase II
+  unit mix, v2 doc id 2138) — supports a gated **+69** write (−346 → −277), AWAITING JOHN'S GO
+  (snapshot → preview → STOP). held_items.json resolution edit rides with it.
+- **B2018-03422 (2501-09 Haste "El Jardin"): city's 55 CONTRADICTED by the building's own record** —
+  ZAB 2018 + UP2012 plans show a GROUP LIVING ACCOMMODATION: 0 dwelling units, 254 beds approved
+  (193 rooms/298 beds in the 2016 resub). Not a missing count — a CONVENTION conflict / possible
+  city-side mis-enumeration. STAYS HELD pending John's GLA-convention call.
+- **B2016-05139 (2740 San Pablo): NO digital documents exist in Accela** (master+4 subs+UP2006 all
+  empty, post-retry) — stays held at 23; remaining route = CIC/records request.
+- **JN-H feedback:** attachment widget CONFIRMED module-agnostic; NEW rule: harvest documents
+  PLANNING-first (plan sets live on ZP/UP records, not B-permits); APN search (`txtGSParcelNo`) finds
+  what address search misses; empty-grid memos recorded (never re-check).
+- **Deploy note: berkeleybuild.com IS LIVE with assessed-value** (the post-incident retry succeeded).
+
 ## 2026-07-02 — ⭐ REPRODUCIBILITY GAP CLOSED — REVIEWED + COMMITTED (fef0539..2fd168d)
 **Review (8-angle multi-agent + adversarial verify, 14 CONFIRMED findings, ALL FIXED before commit):**
 the one-shot→method lift had weakened every rc==1 halt to `rc<=1` (typo'd calibration would silently

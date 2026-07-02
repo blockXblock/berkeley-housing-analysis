@@ -59,13 +59,27 @@ import sys, os
 # Import the classifier + its vocabulary from its single importable home (June-7 architecture;
 # the June-18 drift fix). This NB demonstrates the real machinery — it does not redefine it.
 sys.path.insert(0, os.path.join(os.path.expanduser("~"), "berkeley-data", "scripts"))
+sys.path.insert(0, os.path.join(os.path.expanduser("~"), "berkeley-data", "scripts", "v4"))
 from housing_rules.permit_role import (
-    classify, net_units, payload_get,
+    classify, net_units, payload_get, _norm,
     HOUSING_TERMS, CONVERSION_TERMS, LEGALIZATION_TERMS, ADU_TERMS,
     PERMANENCE_TERMS, MOVABLE_TERMS, MULTIFAM_TERMS, NONHOUSING_TERMS,
 )
+import stage_methods as SM   # the stage-method home; cell 4 CALLS SM.classify_all, never re-types it
 
-DB_PATH = Path.home() / "berkeley-data" / "databases" / "berkeley_housing_v4.db"
+# DB target PARAMETERIZED (env JN_C_DB_PATH, else the chain-wide PIPELINE_DB_PATH); DEFAULT = the
+# JN-A throwaway rebuild, NEVER the live corrected DB. JN-C DELETE+INSERTs event_classifications —
+# running it against live would WIPE the C2/C3/C-multifamily/dedup47 corrections (the documented
+# hazard). Same guard pattern as JN-A (d3a3077).
+_LIVE   = Path.home() / "berkeley-data" / "databases" / "berkeley_housing_v4.db"
+DB_PATH = Path(os.environ.get("JN_C_DB_PATH") or os.environ.get("PIPELINE_DB_PATH")
+          or str(Path.home() / "berkeley-data" / "scratch" / "jn_a_throwaway" / "berkeley_housing_v4.db"))
+if DB_PATH.resolve() == _LIVE.resolve() and os.environ.get("JN_C_ALLOW_LIVE") != "1":
+    raise SystemExit(
+        f"REFUSED: DB_PATH is the LIVE corrected DB ({_LIVE}).\n"
+        f"JN-C would DELETE+INSERT event_classifications, wiping the C2/C3/C-multifamily/dedup47\n"
+        f"corrections. Point JN_C_DB_PATH at a rebuild (default: the JN-A throwaway), or set\n"
+        f"JN_C_ALLOW_LIVE=1 to override (you almost never want this).")
 V2_PATH = Path.home() / "berkeley-data" / "databases" / "berkeley_housing_v2.db"  # read-only, for has-docs bridge
 
 print("Imported classifier + vocabulary from housing_rules.permit_role:",
@@ -139,25 +153,13 @@ Reads `events`, writes only `event_classifications`. The event stream is never t
 """)
 code(r"""
 con=sqlite3.connect(DB_PATH); con.execute("PRAGMA foreign_keys=ON")
-CLF_HASH=hashlib.sha256((json.dumps([HOUSING_TERMS,CONVERSION_TERMS,LEGALIZATION_TERMS,NONHOUSING_TERMS])+"rules-v1").encode()).hexdigest()[:16]
-NOW=dt.datetime.now(dt.timezone.utc).isoformat()
-rows=con.execute("SELECT event_id, raw_payload, raw_description, raw_units, source_record_key FROM events").fetchall()
-labels=[]
-for ev_id, payload, desc, raw_units, permit in rows:
-    wt   = payload_get(payload,"Work Type")
-    d    = desc if desc is not None else payload_get(payload,"WorkDescription")
-    adu  = payload_get(payload,"ADU")
-    occ  = payload_get(payload,"OccType")
-    ua   = payload_get(payload,"UnitsAdded")
-    ur   = payload_get(payload,"UnitsRemoved")
-    role,is_master,note = classify(wt,d,adu,occ,ua,ur,permit)
-    nu = net_units(ua,ur,role,d)
-    labels.append((ev_id,role,is_master,nu,CLF_HASH,NOW,"description",note))
-con.execute("DELETE FROM event_classifications")
-con.executemany("INSERT INTO event_classifications (event_id,housing_role,is_master,net_units,classifier_hash,classified_at,basis,basis_note) VALUES (?,?,?,?,?,?,?,?)",labels)
-con.commit()
-print(f"Classified {len(labels):,} events (hash={CLF_HASH}).")
-for r,c in con.execute("SELECT housing_role,COUNT(*) FROM event_classifications GROUP BY housing_role ORDER BY 2 DESC"):
+# THE materialization is stage_methods.classify_all — one importable home for the recipe
+# (2026-07-02 review: the loop + hash recipe were duplicated here as a cell-string, the exact
+# aa6ded0 anti-pattern). The hash comes from housing_rules.permit_role.classifier_hash().
+from housing_rules.permit_role import classifier_hash
+dist = SM.classify_all(con)
+print(f"Classified {sum(dist.values()):,} events (hash={classifier_hash()}).")
+for r,c in sorted(dist.items(), key=lambda x: -x[1]):
     print(f"   {r:<12} {c:>7,}")
 """)
 md(r"""
@@ -321,7 +323,9 @@ print(f"  need Accela document-fetch (no R2 doc): {sum(1 for q in queue if q[4]=
 print("First 12:")
 for q in queue[:12]:
     print(f"   {q[1]} {q[0]:<16} docs={q[4]:<7} {str(q[2])[:24]:<24} {str(q[5])[:36]}")
-out=DB_PATH.parent.parent/"output"/"jn_c_harvest_queue.csv"
+# repo-root anchored (2026-07-02 fix: was DB_PATH.parent.parent, which broke when DB_PATH became
+# parameterized — a scratch target sent the queue to gitignored scratch/output/)
+out=Path.home()/"berkeley-data"/"output"/"jn_c_harvest_queue.csv"
 out.parent.mkdir(parents=True,exist_ok=True)
 with open(out,"w",newline="") as f:
     w=csv.writer(f); w.writerow(["permit","finaled_year","address","apn","has_r2_documents","description","basis_note"])
@@ -382,7 +386,7 @@ events-vs-buildings gap is concrete.
 code("""
 import sqlite3, os
 import plotly.graph_objects as go
-DBP=os.path.join(os.path.expanduser('~'),'berkeley-data','databases','berkeley_housing_v4.db')
+DBP=str(DB_PATH)   # the SAME parameterized target this notebook classified (was a hardcoded live path)
 con=sqlite3.connect(f'file:{DBP}?mode=ro',uri=True)   # READ-ONLY — viz never writes
 dist=con.execute("SELECT housing_role,COUNT(*) FROM event_classifications GROUP BY 1 ORDER BY 2 DESC").fetchall()
 masters=con.execute("SELECT COUNT(*) FROM event_classifications WHERE is_master=1").fetchone()[0]

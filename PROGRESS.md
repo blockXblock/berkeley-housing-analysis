@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-07-03 — ACHESON-A RESOLVED (+37) — ours 4,140 vs adjudicated city 4,099 = **+41 = THE GLA**
+The landmarked 1908 Physicians' Building was OFFICES; the rehab converted floors 2-4 to **37 net-new
+units** (permit text "TO A MIXED USE: 37 RESIDENTIAL UNITS" + NumberUnits=37 + city CO 37 on our exact
+finaled date; press "21 apartments" divergence noted, outweighed). Ledger row 166 (166/504); snapshot
+pre-acheson-a; baseline **2026-07-03e**; chain re-validated at 4,140. **The +41 gap vs the adjudicated
+city IS, unit-for-unit, the one building the city never filed anywhere: the 0-San-Pablo GLA (41u).**
+Convention bucket now EMPTY. Remaining open: San Pablo-2740 23 held · Den grain-wait 36/40 · 12
+UNCERTAINs · 20 no-candidate rows · 1145 Amador 1 · income-column extraction · sweep JN packaging.
+
 ## 2026-07-03 — ⭐ UNION ARITHMETIC FINAL: OURS 4,103 vs ADJUDICATED CITY 4,099 = **+4**
 Adjudicated city = CKAN 4,022 + genuine PDF-only rows (Overture 44 + Den 36 + 1145 Amador 1 + 1912
 Yolo 1; Jefferson/Colusa were year-shuffles already in CKAN) − Bancroft inflation 5 (permit-verified

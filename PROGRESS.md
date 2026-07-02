@@ -4,6 +4,29 @@
 
 ---
 
+## 2026-07-02 — ⭐ REPRODUCIBILITY GAP CLOSED (JN-B + JN-F built, chain-validated; AWAITING JOHN REVIEW)
+**The from-raw pipeline is now real: `raw xlsx → JN-A → JN-B (dedup) → JN-C (classify) → JN-F
+(corrections)` reproduces the corrected live state EXACTLY** — validated twice (methods, then the
+notebook chain): CO 3,676 ✓ · BP 3,945 ✓ · events 82,923 == live ✓ · **per-permit counted-completion
+set == live, 0 diffs both directions** ✓ · pre-corrections CO 3,066 independently reproduced ✓.
+Chain runtime ~18s (nbclient, `/opt/miniconda3/envs/jupyter_env/bin/python` — the notebook toolchain env).
+- **NEW (uncommitted, for John's review):** `scripts/v4/stage_methods.py` (THE importable stage-method
+  module — dedup / classify-recipe / 5 correction methods / held-asserts; aa6ded0 lift discipline);
+  `scripts/v4/build_jn_{b,f}.py` → `notebooks/v4/JN-B_event_dedup.ipynb` + `JN-F_corrections.ipynb`
+  (text-sandwiched, viz'd, baseline-gated, hold-not-apply encoded); calibration
+  `corrections/v4/event_dedup_holds.json` (tier-2 holds externalized — the B2014-05786 hold is what
+  makes a rebuild land event-identical to live).
+- **CHANGED (uncommitted):** `build_jn_c.py` — JN-C target PARAMETERIZED (env `JN_C_DB_PATH`, default
+  = the JN-A throwaway) + LIVE-DB REFUSAL guard (the documented wipe hazard, same pattern as JN-A
+  d3a3077); its role-dist viz now reads the parameterized target. `JN-C_classify.ipynb` regenerated.
+- **Validation harness (scratch, stays):** `scratch/2026-07-02/rebuild_from_raw_driver.py` (methods)
+  + `notebook_chain_driver.py` (the 4-notebook chain) + `v4_stage_methods.py` (superseded by the
+  promoted `scripts/v4/stage_methods.py`).
+- **Hazard status shrunk:** JN-A/JN-B/JN-C/JN-F all now default to a throwaway rebuild target and
+  REFUSE the live DB — the "never run JN-A/JN-C against live" hazard is enforced by code, not memory.
+- **HELD unchanged:** +147 (Accela-blocked) · C1-phantom (never-apply) · B2020-03895 · JN-B tier-2/3.
+- **Next:** John review → commit; then the +147 Accela harvest or curriculum deep-read.
+
 ## 2026-07-02 — dev↔main RECONCILED + assessed-value DEPLOYED
 - **dev pushed** through the triage commits; then **`origin/main` merged into dev (`a33681c`)** — the 11
   "main-only" curriculum commits were double-committed duplicates of dev commits (trees verified identical);

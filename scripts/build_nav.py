@@ -37,7 +37,7 @@ ORDER = [
     "JN0a_why_data", "JN0b_notebook", "JN0c_function", "JN0d_dataframe",
     "JN0e_charts", "JN0f_tools", "JN0g_agents", "JN0h_instruction_file",
     "JN1_ingest", "JN2_address_key", "JN3_spine_units", "JN4_events_stage",
-    "JN5_year_cycle", "JN6a_apr_oracle", "JN6b_join_score",
+    "JN5_year_cycle", "JN6a_apr_oracle", "JN6b_join_score", "JN7_rekey_audit",
 ]
 
 # Display titles shown in the nav links (concise; the H1s vary in separator/length).
@@ -58,6 +58,7 @@ TITLES = {
     "JN5_year_cycle":        "JN5 · Year & cycle tagging",
     "JN6a_apr_oracle":       "JN6a · Interrogate the oracle + generate your APR",
     "JN6b_join_score":       "JN6b · Join, decompose, score",
+    "JN7_rekey_audit":       "JN7 · The re-key — and the audit",
 }
 
 

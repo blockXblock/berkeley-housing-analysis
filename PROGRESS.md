@@ -4,6 +4,19 @@
 
 ---
 
+## 2026-07-03 — ⏱ JN-I PERMIT TIMELINES BUILT (`8ca25ac` on dev) — the statutory-clock JN
+**scripts/v4/build_jn_i.py → notebooks/v4/JN-I_permit_timelines.ipynb** + first baseline
+(timelines_baseline_2026-07-03.json, gate re-run PASS). All from v4 events (submitted/issued/
+finaled) + permit_role @743edfb6; NO oracle input. THREE HONESTY RAILS enforced throughout:
+survivors-only feed (waits = lower bounds); elapsed ≠ statutory clock (ADU 60-day = SCREEN:
+compliance floor + explain-tail, never violations); right-censored construction. **HEADLINES:
+housing masters (928) submit→issue median 189d / p90 527d, submit→final median 572d / p90 1,306d;
+ADU median 3d (ministerial fast path visible) BUT 26.7% >60d gross / 12.8% >180d; 2022 = slowest
+housing cohort (251d); 2527 San Pablo (63u) waited 4.9 YEARS for issuance; construction 20-99u
+median 757d / p90 1,745d.** Journalist sequence agreed: timelines → entitled-but-unbuilt (next) →
+BMR/density-bonus (start document acquisition). Queued from JN-I: records-request for
+complete-application dates (turns the ADU screen into a verdict); §5 outlier document pulls.
+
 ## 2026-07-03 — 🏪 LICENSE SNAPSHOT CADENCE LIVE (`5e2baab` on dev) — JN-Business-Health unblocked
 **scripts/v4/license_watch.py** (oracle_watch pattern): city Business Licenses roll = Socrata
 **rwnf-bu3w** on data.cityofberkeley.info (rediscovered via catalog search — the Nov-2025 pull had no

@@ -4,7 +4,25 @@
 
 ---
 
-## 2026-07-03 — 🚪 JN00 "LOOK AT THE DATA FIRST" BUILT (`308a6df` on dev — NOT yet on main)
+## 2026-07-03 — 🏁 JN7 "THE RE-KEY — AND THE AUDIT" BUILT (`49a9bf6` on dev — NOT yet on main)
+The course's FINAL ACT (evaluation item 1). Arc: 7a re-key address→permit-family (1,032 families /
+4,805 face-value u vs address spine 951/4,310 — visibility cuts both ways) → 7b Shattuck RESOLVED
+(family key fixes +69 miss AND year misattribution, then springs the NEW trap: two 69u families
+finaled same day = "Phase I"/"Phase II of South Building" per their own descriptions — IDENTITY IS
+ADJUDICATION, merge with evidence, checkpoint == city exactly) → 7c deferral's "one building" claim
+REFUTED live (62 multi-family addresses; 3 opposite calls: real-pairs KEEP / phases MERGE /
+maintenance-wearing-units DROP — Hopkins water heaters + Derby dual-meter = OUR meter class) →
+7d adjudication-ledger miniature (output/my_adjudications.csv, evidence-per-row, append-only,
+ledger-as-memory) → 7e two of five city-error detectors on the bundled oracle, ANCHOR-VALIDATED
+(B2022-02049, ZP2019-0022) + surfaces the JN-G fresh queue (B2018-02288, ZP2018-0086); other three
+= exercises → ending: 4,229 vs 4,099 + Audit page + JN00 grade-your-AI-answer bookend. Imports ONLY
+tarball-present modules (no housing_rules — stale-tarball-safe). Supporting: JN6b epilogue hands off
+to JN7; 6a/6b headers "of 7"; page: JN7 row + "Eight notebooks" + stale Colab caveats REMOVED (both
+capstones verified end-to-end). Local exec + bare-dir Colab-sim PASS. Generator:
+scratch/2026-07-03/build_jn7.py. Remaining from evaluation: JN-G watch mini-notebook; R2 tarball
+re-upload automation; git-clone README note.
+
+## 2026-07-03 — 🚪 JN00 "LOOK AT THE DATA FIRST" BUILT (`308a6df`, MERGED to main + deployed)
 The curriculum's new FRONT DOOR (John's design: Mosteller plot-before-analysis + ask-an-agent-first).
 Structure: agent-first sandwich cell (save the answer; grade it in JN6b — the answer-key-is-a-
 hypothesis thesis from cell one) → LIGHT 2MB bootstrap (permits_clean.parquet only, fast first

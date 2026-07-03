@@ -2,12 +2,7 @@
   "_description": "HOLD-NOT-APPLY calibration \u2014 corrections identified but deliberately NOT applied. assert_held() and apply_c2 read this. A hold is RESOLVED by editing this file (moving the permit out with provenance), never by editing code: the methods are universal; which permits are held is Berkeley calibration.",
   "_provenance": "externalized 2026-07-02 from stage_methods.py literals (review finding: calibration-in-code). Semantics from corrections/v4/README.md 'APPLIED vs HELD' + docs/audit/2026-06-28_c_multifamily_collapse_write.md.",
   "held_147": [],
-  "c2_excluded": [
-    {
-      "permit": "B2020-03895",
-      "reason": "excluded from C2-T1 (the #3 pending case, per the 2026-06-28 C2 write review); stays out of the count-gap recovery until adjudicated."
-    }
-  ],
+  "c2_excluded": [],
   "c1_phantom": "considered-and-rejected, never applied (the 584 were already counted; applying would double-count). Recorded so no future session re-derives it as a TODO.",
   "resolved": [
     {
@@ -33,6 +28,11 @@
       "reason": "No digital documents exist in Accela (master + 4 subs + UP2006-0119 all empty, post-retry, 2026-07-02). CPRA NumberUnits=23 (structured field) is a groundable primary source pending the NumberUnits classifier decision; plan docs need a records request.",
       "unblock": "NumberUnits convention decision (John), or city records request",
       "resolution": "RESOLVED 2026-07-03: 23 grounded from the developer's own records (SAHA property page: 23 apartments incl. 1 manager; completed Oct 2019 == our final) after John's Accela URLs exposed the 2740/2748 ADDRESS SWAP (PREAPP000322) that had hidden every document. Corroborated by CPRA NumberUnits=23. Applied via grounded_counts.csv row 167. held_147 is now EMPTY."
+    },
+    {
+      "permit": "B2020-03895",
+      "reason": "excluded from C2-T1 (the #3 pending case, per the 2026-06-28 C2 write review); stays out of the count-gap recovery until adjudicated.",
+      "resolution": "RESOLVED 2026-07-03 (no-candidate batch): grounded at 2 from its own description + REV01; city CY2023 credit concordant. Applied via grounded_counts."
     }
   ]
 }

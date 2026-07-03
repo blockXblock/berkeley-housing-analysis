@@ -4,6 +4,17 @@
 
 ---
 
+## 2026-07-03 — ⭐⭐ NO-CANDIDATE BATCH CLOSED (+17) — CO 4,229; **EVERY ROW IN BOTH DIRECTIONS NAMED**
+0 unmatched of 20: 14 recalls + 2 Hearst-amendment upgrades (raw-NumberUnits-corroborated 1→2) + 2
+write-gate diff corrections (Grayson pre-counted → upgrade; 770 Page = matching artifact under its
+re-platted child APN) + **FIVE new city-error classes (8u), all with receipts** (CO-dated-at-issuance;
+meter-permit re-credit; ZP-approval-as-CO; cross-CY duplicate; garage-as-SFD). **B2020-03895 resolved —
+THE HELD FILE IS ENTIRELY EMPTY**; its C2 re-entry tripped the checksum gate exactly as designed
+(deliberate update 15/907→16/909). Ledger 190/597; snapshot pre-nocandidate; baseline **2026-07-03i**
+(ours 4,229 vs adjudicated city 4,099 = **+130, all named**); chain re-validated. Audit:
+docs/audit/2026-07-03_no_candidate_batch.md (incl. the mechanical re-credit detectors for JN-G).
+**NEXT: the Audit page + JN-G — the reconciliation is DONE discovering.**
+
 ## 2026-07-03 — NO-CANDIDATE BATCH IN FLIGHT (background agent; the last 20 rows / 25u)
 Input scratch/2026-07-03/no_candidate_batch.csv; agent runs the full playbook per address (address
 variants/corner rule → assessor situs alias → Accela Building+Planning incl. PREAPP/AAR records →

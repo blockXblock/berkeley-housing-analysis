@@ -522,8 +522,18 @@ def apply_grounded_counts(con, csv_path=os.path.join(CORR, 'grounded_counts.csv'
             # never OVERWRITE a different count; but a role PROMOTION over an equal stored count is
             # legitimate (the 2026-07-03 ADU-recall class: RULE-9 ambiguous rows whose UnitsAdded was
             # already right — promoting ambiguous->new_unit at the same value changes no number)
-            assert (nu or 0) in (0, n), \
-                f'grounded_counts {p}: finaled event carries net_units={nu} != ledger {n} — refusing to overwrite'
+            if role == 'new_unit' and is_master == 1 and 0 < (nu or 0) < n:
+                # UPGRADE path (the 1173-Hearst amendment, John-approved 2026-07-03): the stored count
+                # came from the derive rule's blank-count floor (1) while the permit's OWN structured
+                # NumberUnits states n. Never a downgrade; only when the raw field corroborates exactly.
+                raw_nu = con.execute(
+                    "SELECT CAST(json_extract(raw_payload,'$.NumberUnits') AS INT) FROM events "
+                    "WHERE source_record_key=? AND event_type_code='permit_finaled'", (p,)).fetchone()[0]
+                assert raw_nu == n, \
+                    f'grounded_counts {p}: upgrade {nu}->{n} REFUSED — raw NumberUnits={raw_nu} does not corroborate'
+            else:
+                assert (nu or 0) in (0, n), \
+                    f'grounded_counts {p}: finaled event carries net_units={nu} != ledger {n} — refusing to overwrite'
             rc = con.execute(
                 "UPDATE event_classifications SET housing_role='new_unit', is_master=1, net_units=?, "
                 "basis=?, basis_note=COALESCE(basis_note,'')||' | grounded_counts ('||?||'; src '||?||')' "

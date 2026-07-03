@@ -2,8 +2,8 @@
   "_description": "Approved-set checksums for the corrections/v4 calibration files \u2014 the integrity pins the original gated one-shots asserted before writing (c2_tranche1_write.py's 15/907 HALT, tranche2's exact-value dict). The apply_* methods assert these BEFORE writing; a legitimate calibration change updates the file's rows AND these checksums together (one reviewed edit), so a lone mis-edit halts loudly instead of silently writing wrong counts.",
   "_provenance": "externalized 2026-07-02 (review finding: the checksum guards were dropped in the one-shot -> stage-method lift).",
   "c2_count_recovery": {
-    "t1_permits": 15,
-    "t1_units": 907,
+    "t1_permits": 16,
+    "t1_units": 909,
     "t2_permits": 5,
     "t2_units": 129,
     "t2_values": {
@@ -19,7 +19,8 @@
       "dwelling+live_work",
       "dwelling+townhome",
       "sleeping_units+dwelling"
-    ]
+    ],
+    "_note_2026_07_03": "B2020-03895 (+2) joined T1 when its c2_excluded hold was resolved (no-candidate batch); grounded_counts row 175 carries the adjudication provenance; both paths set 2 idempotently"
   },
   "c3_tail": {
     "targets": 17,
@@ -39,8 +40,8 @@
     "tier2_groups": 3
   },
   "grounded_counts": {
-    "rows": 174,
-    "units": 576
+    "rows": 190,
+    "units": 597
   },
   "window_attributions": {
     "permits": 0,

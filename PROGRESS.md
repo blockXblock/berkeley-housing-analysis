@@ -4,7 +4,22 @@
 
 ---
 
-## 2026-07-03 — 🏁 JN7 "THE RE-KEY — AND THE AUDIT" BUILT (`49a9bf6` on dev — NOT yet on main)
+## 2026-07-03 — 🏪 LICENSE SNAPSHOT CADENCE LIVE (`5e2baab` on dev) — JN-Business-Health unblocked
+**scripts/v4/license_watch.py** (oracle_watch pattern): city Business Licenses roll = Socrata
+**rwnf-bu3w** on data.cityofberkeley.info (rediscovered via catalog search — the Nov-2025 pull had no
+recorded endpoint), NO date fields → churn only observable as snapshot diffs. Seeded Nov-2025
+baseline (12,882 uniq, from data/raw/business_licenses_20251115.csv) + first live cycle 2026-07-03
+(13,058 rows / 12,964 uniq): **+1,880 / −1,798 / ~58 moved. CALIBRATION: recordids STABLE, roll
+presence = currently-valid — Amoeba (BL-000229) absent from the whole Nov roll while operating →
+one-interval 'closed' = renewal-lapse SUSPECT; confirmed closure = absent ≥3 consecutive monthlies.**
+Cadence: scheduled task `berkeley-license-snapshot` (1st/mo 9am, read-only, no-commit; runs while the
+desktop app is open). Holdings review: berkeley.db.licenses 12,882 uniq w/ NAICS+employees+apn_norm
+(joinable to parcels/corridors); Elmwood corridor study prototyped (data/public/elmwood-businesses.md).
+JN-Business-Health now answerable: composition/corridor/static-storefront-vacancy-proxy/ground-floor-
+tenancy TODAY; churn accrues monthly. Queued: Accela BL-record date harvest; CPRA historical roll;
+CDTFA city-level sales tax.
+
+## 2026-07-03 — 🏁 JN7 "THE RE-KEY — AND THE AUDIT" BUILT (`49a9bf6`, MERGED to main + deployed)
 The course's FINAL ACT (evaluation item 1). Arc: 7a re-key address→permit-family (1,032 families /
 4,805 face-value u vs address spine 951/4,310 — visibility cuts both ways) → 7b Shattuck RESOLVED
 (family key fixes +69 miss AND year misattribution, then springs the NEW trap: two 69u families

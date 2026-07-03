@@ -7,23 +7,42 @@ refresh. Send via the City's NextRequest portal (records.cityofberkeley.info) or
 
 ---
 
-## Request 1 — Building-permit report refresh (the same report, newer dates)
+## Request 1 — Building-permit report refresh (mirrors the wording of the fulfilled 2018–2022 request)
 
-> Under the California Public Records Act (Gov. Code § 7920 et seq.), I request:
+> Under the California Public Records Act (Gov. Code § 7920 et seq.), I request a report similar
+> to the Building Permits reports previously produced to me (covering January 1, 2018 through
+> December 31, 2022, and 2023 through 2025), for the subsequent period: **January 1, 2025 through
+> the date this request is fulfilled**, in the same electronic format (Excel).
 >
-> An export of the **BP Annual Permit Report** for all building permits with any activity from
-> **January 1, 2025 through the date this request is fulfilled**, in the same electronic format
-> (Excel) and with the same columns as the reports previously produced to me covering 2018–2022
-> and 2023–2025 (columns including: PermitNumber, Submittal Date, Issuance Status, Issuance Date,
-> Finaled Status, Finaled Date, Completed, Completed Date, Parcel Number, street address fields,
-> JobValuation, WorkDescription, ADU, Detached, Work Type, OccType, SubType, NumberUnits,
-> UnitsAdded, UnitsRemoved, CO Required).
+> Specifically, all building permits with activity during this period (the same scope as the
+> prior productions), including but not limited to:
 >
-> This is a re-run of an existing report with a newer date window; I request it as an electronic
-> record in its native format per § 7922.570.
+> - Permit number
+> - Property address (street number, street name, street type)
+> - APN (Assessor Parcel Number)
+> - Permit type (new construction, addition, ADU, JADU, demolition)
+> - Work description
+> - Number of dwelling units (existing, proposed, added, removed)
+> - Permit application date (submittal date)
+> - Permit issued date (issuance date)
+> - Final inspection date (if applicable)
+> - Certificate of occupancy date / "finalized" date (whichever field Accela maintains for
+>   permit completion)
+> - Current permit status (issued, finaled, expired, cancelled)
+> - Valuation amount (job valuation)
+> - Applicant/contractor name
+> - Total fees assessed
+>
+> Note: the prior productions did not include the last two fields (applicant/contractor name and
+> total fees assessed) although the underlying system maintains them; please include them in this
+> production if at all possible, for the full requested period. I request the export as an
+> electronic record in its native format per § 7922.570.
 
 *(Why: our feed ends with the 2023–2025 production; Middle Housing ordinance and current
-ministerial-path activity live in late-2025/2026 filings.)*
+ministerial-path activity live in late-2025/2026 filings. The 2025 overlap is deliberate — it
+refreshes statuses/finaled dates on permits that have advanced since the last production. The
+contractor + fees fields were requested before but never produced; getting them here would also
+unlock the Players and fee-actuals work without a separate ask.)*
 
 ## Request 2 — Planning pathways, application-completeness dates, and permit fees
 

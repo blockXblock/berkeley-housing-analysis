@@ -4,6 +4,22 @@
 
 ---
 
+## 2026-07-03 — 🎓 CURRICULUM EVALUATED + JN6a COLAB FIX DEPLOYED (live == disk, verified)
+Two-agent deep evaluation of the public curriculum (mechanical exec + pedagogy). **Mechanical: all 15
+notebooks pass locally; 14/15 passed a true Colab-sim; the ONE blocker — JN6a's CONFIG
+`OUTDIR.mkdir(exist_ok=True)` without `parents=True` (dies on Colab before sys.path, 6-cell cascade) —
+FIXED, Colab-sim re-verified, committed `2581e03`, merged dev→main, Pages deploy green** (the merge
+also published JN-G to main). All links/R2 objects/nav verified good. **Pedagogy: the three July-1
+open items settled** — JN3 address-key grouping CONFIRMED as taught identity; JN6b's planted
+limitation IS the deferred per-building re-key (v4 did exactly that re-key and disproved its "only
+one such building" justification); scratch/jn*_rewrite protos = stale June-19 byte-copies (no
+alignment ever started). **Top extension: JN7 "the re-key + the audit"** — resolve the planted
+limitation with v4 permit-family identity, end at the live Audit page (4,229 vs 4,099, every row
+named); down-payment = a JN6b truth-maintenance pass. Non-blocking mechanical queue: R2 modules
+tarball drifting stale (no re-upload automation); git-clone third mode (bootstrap no-ops but
+permits_clean/hcd DBs are gitignored → README note); hardcoded checkpoint literals (4310/783) =
+the anchor-to-what-moves smell. Evidence: scratch/2026-07-03/{curriculum_check,pedagogy_read}/.
+
 ## 2026-07-03 — 🔭 JN-G BUILT + FIRST WATCH RUN (the audit's standing sentry is live)
 **`scripts/v4/oracle_watch.py`** (importable: live CKAN pull via the filtered datastore API — the
 mirror-era download URL 404s now, and live JURIS_NAME went UPPERCASE, both handled robustly) +

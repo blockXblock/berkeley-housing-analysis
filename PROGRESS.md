@@ -4,7 +4,20 @@
 
 ---
 
-## 2026-07-03 — 📖 JN6b TRUTH-MAINTENANCE PASS (committed `2439ac6` on dev — NOT yet on main)
+## 2026-07-03 — 🚪 JN00 "LOOK AT THE DATA FIRST" BUILT (`308a6df` on dev — NOT yet on main)
+The curriculum's new FRONT DOOR (John's design: Mosteller plot-before-analysis + ask-an-agent-first).
+Structure: agent-first sandwich cell (save the answer; grade it in JN6b — the answer-key-is-a-
+hypothesis thesis from cell one) → LIGHT 2MB bootstrap (permits_clean.parquet only, fast first
+picture) → 3 pictures (permits/yr pulse · homes-finaled/yr boom at face value · the SIZE INVERSION:
+most permits 1-unit, most homes from towers) → the Kittredge micro-lesson (subsidiary -DEF/-REV
+permits each repeat the parent's 169u; blind summing gave 9,460 "homes" in 2024 — caught during the
+build BY looking, fixed with base-permits-only) → the YEAR knob (compute→change→recompute) →
+teasers + fast-path fork (JN1 vs JN0a ramp — the proportion fix). All charts carry face-value
+mislead-guards planting JN3/JN6a lessons. Nav ORDER extended; page row added ("Nine short
+notebooks"). Local exec + bare-dir Colab-sim PASS. Generator: scratch/2026-07-03/build_jn00.py
+(scratch; notebook is the durable artifact, curriculum convention). NEXT: JN7 (the re-key + audit).
+
+## 2026-07-03 — 📖 JN6b TRUTH-MAINTENANCE PASS (`2439ac6`, MERGED to main + deployed same day)
 The evaluation's item-2 down-payment: (1) JN6b's superseded "only such case in the data" repaired —
 the informed-flag deferral now reads as right-at-the-time, with a truth-in-hindsight note that the v4
 re-key found a CLASS (ADU pairs, phased projects, the address swap); (2) checkpoint literals (6c/6d +

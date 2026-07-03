@@ -4,6 +4,29 @@
 
 ---
 
+## 2026-07-03 — 🏛 MAYOR-PREP DAY 1 COMPLETE + OAKLAND PROBED (presentation in 5 days)
+**Context: presentation to the mayor on what-works-for-housing (minimize commercial/business
+impact). Plan: Day1 CPRA+harvest → Day2 ministerial/Middle-Housing slice → Day3 corridor overlay →
+Day4 money-flows model → Day5 deck.** DONE TODAY:
+- **CPRA drafts ready** (notes/2026-07-03_cpra_draft_2026_refresh.md, R1 rewritten to mirror John's
+  fulfilled 2018-22 request incl. re-ask of contractor+fees fields the city omitted): **JOHN SENDS
+  via NextRequest** (won't land pre-presentation; announce as in-progress).
+- **HARVESTER grew date-range discovery** (experiments/accela_scrape/date_range_discovery.py +
+  sweep runner; agency-parametrized). Two live calibrations: Accela date mask swallows fill() (JS
+  value-set+change event); presence-waits re-parse old pages (advance = first-link href CHANGE).
+  Months truncate at old end → 4-day windows. **Fresh harvest COMMITTED `a61f00e`: 9,272 unique
+  Building+Planning records 2025-06→2026-07-03**, incl. TMP pending applications (the waiting
+  room). 2 dispositioned flags (weekend; Planning 2026-02-12_15 empty ×3 = flagged).
+- **OAKLAND = viable city #2** (notes/2026-07-03_oakland_probe.md): scraper worked with agency
+  param only; **Download-results export bypasses pagination** (June 2026 = 2,351 records one
+  click, specimen committed fa904a4); status taxonomy exposes Intake-Completed/In-Review (the
+  clock states we CPRA Berkeley for). **CORRECTION/retraction:** CO record type is NICHE (14 in
+  6mo, cannabis-type) — Oakland completion is status-based like Berkeley; public layer carries
+  File Date ONLY (broad-not-deep; dated feed needs Oakland CPRA). **Accela Construct API: needs
+  free developer App ID (John registering); then test anonymous scope for OAKLAND + BERKELEY**
+  (if Berkeley's on, a live dated feed supersedes sweeps).
+- NEXT (Day 2): ministerial/Middle-Housing first-year slice from the fresh harvest.
+
 ## 2026-07-03 — ⏱ JN-I PERMIT TIMELINES BUILT (`8ca25ac` on dev) — the statutory-clock JN
 **scripts/v4/build_jn_i.py → notebooks/v4/JN-I_permit_timelines.ipynb** + first baseline
 (timelines_baseline_2026-07-03.json, gate re-run PASS). All from v4 events (submitted/issued/

@@ -10,6 +10,11 @@ pulls the live roll, snapshots it, diffs unique recordids vs the newest prior sn
 (openings / closings / moved), and appends to data/audit/license_watch_log.csv.
 
 Seed baseline: licenses_2025-11-15.csv (the Nov-2025 pull that also lives in berkeley.db.licenses).
+PRIOR-ART NOTE (searched 2026-07-03): a 2025-vs-early-2026 comparison was DONE once before (John
+observed the 2026 roll dropping hundreds of licenses for inaction/nonpayment; a "14,000 records"
+ingest is referenced in a 2026-05-11 session) but the analysis lived in a chat outside this repo and
+its full 2026 pull was never saved — only a 100-row slice survives (data/raw/business_Licenses.csv,
+2026-02-17). That un-ledgered loss is why this watcher snapshots FIRST and analyzes second.
 Cadence: monthly (scheduled task); running more often is harmless (append-only, identical re-runs no-op).
 
 ⚠ ROLL SEMANTICS (calibrated 2026-07-03 on the first diff): recordids are STABLE business identities,

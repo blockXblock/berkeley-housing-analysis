@@ -1,0 +1,22 @@
+{
+  "_description": "JN-G watch-item calibration — EXPECTED upstream changes in the city's filing, each with what its appearance MEANS for the reconciliation. A fired item is investigated and then RESOLVED by moving it to 'resolved' with provenance (and usually a baseline append). Oracle discipline: a fired watch item triggers ADJUDICATION, never automatic adoption.",
+  "_provenance": "created 2026-07-03 with the two watch items the reconciliation closed on.",
+  "items": [
+    {
+      "id": "grayson-2435-gla-co",
+      "address_contains": "2435 San Pablo",
+      "apn_contains": "056 192801900",
+      "year_min": 2025,
+      "expect": "a CO row of 41 units (the completed SAHA co-living whose certificate the city omitted from its CY2025 APR; finaled 2025-03-20; BP was filed CY2022)",
+      "meaning": "the adjudicated-city total rises ~+41 and the ours-vs-city net converges by the same amount; verify the row's units/date, append a baseline, and regenerate the Audit page"
+    },
+    {
+      "id": "den-2510-channing-row",
+      "address_contains": "2510 Channing",
+      "year_min": 2021,
+      "expect": "the CY2021-era CO row (city PDF had 36 @2021-10-25; the state copy dropped it) appearing in CKAN, possibly corrected to 40",
+      "meaning": "a CKAN-completeness repair; adjudicated city already includes 36 via the PDF union — if CKAN lands at 36 vs our grounded 40, the 4-unit divergence stays documented (their under-read)"
+    }
+  ],
+  "resolved": []
+}

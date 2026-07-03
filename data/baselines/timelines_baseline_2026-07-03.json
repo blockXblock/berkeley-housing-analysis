@@ -1,0 +1,17 @@
+{
+ "as_of": "2026-07-03",
+ "v4_sha": "019c18a",
+ "classifier": "743edfb626399efc",
+ "provenance": "JN-I first derivation from v4 events (permit_submitted/issued/finaled)",
+ "figures": {
+  "n_base_permits": 26549,
+  "n_housing_masters": 928,
+  "n_adu_base": 2881,
+  "review_median_all": 9.0,
+  "review_p90_all": 160.0,
+  "review_median_housing": 189.0,
+  "review_p90_housing": 527.0,
+  "adu_review_median": 3.0,
+  "adu_share_over_60d": 0.2673
+ }
+}

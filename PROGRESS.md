@@ -4,6 +4,13 @@
 
 ---
 
+## 2026-07-03 — NO-CANDIDATE BATCH IN FLIGHT (background agent; the last 20 rows / 25u)
+Input scratch/2026-07-03/no_candidate_batch.csv; agent runs the full playbook per address (address
+variants/corner rule → assessor situs alias → Accela Building+Planning incl. PREAPP/AAR records →
+CKAN tracking-ID chase → city PDFs) and returns verdicts: A recall / B city-error / C unmatched.
+Read-only; verdicts come back for John's gate. On completion the Audit page's completeness claim
+becomes unqualified.
+
 ## 2026-07-03 — ⭐ THE UNCERTAIN DOZEN CLOSED (+9) — CO 4,212; **ZERO uncertain rows remain**
 6 accepts (ledger 174/576; incl. John's AAR find at 961 The Alameda and the untruncated 2980 College
 "(4) residential units"), 6 rejects each a NAMED city divergence (**1023 Cragmont: city credited a

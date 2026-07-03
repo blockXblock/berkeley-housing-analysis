@@ -32,7 +32,10 @@ from datetime import datetime
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeout
 
 DEFAULT_HOST = "https://aca-prod.accela.com"
-CAPHOME_PATH = "/BERKELEY/Cap/CapHome.aspx"
+DEFAULT_AGENCY = "BERKELEY"   # generality guard held 2026-07-03: OAKLAND worked with only this
+                              # changed (18 pages / 408 rows on a 3-day window; NOTE Oakland's grid
+                              # also carries a rich record-type column and a 'Download results'
+                              # link worth using for a bulk path in a parallel project)
 
 # Date inputs on the general search form (candidates tried in order, same
 # convention as url_discovery_scraper's PERMIT_INPUT_SELECTORS).
@@ -57,8 +60,8 @@ GRID_SELECTORS = (
 NEXT_PAGE_TEXT = "Next >"
 
 
-def _build_search_url(module: str) -> str:
-    return f"{DEFAULT_HOST}{CAPHOME_PATH}?module={module}&TabName={module}"
+def _build_search_url(module: str, agency: str = DEFAULT_AGENCY) -> str:
+    return f"{DEFAULT_HOST}/{agency}/Cap/CapHome.aspx?module={module}&TabName={module}"
 
 
 def _fill_first(page, selectors, value, errors) -> bool:
@@ -141,15 +144,16 @@ def _click_next_page(page, errors) -> bool:
 
 def discover_range(start_date: str, end_date: str, module: str = "Building",
                    headless: bool = True, max_pages: int = 200,
-                   debug_dir: pathlib.Path | None = None) -> dict:
-    """Search Berkeley Accela for all `module` records filed start_date..end_date
-    (MM/DD/YYYY). Returns {'status', 'module', 'window', 'pages', 'rows', 'errors'}."""
+                   debug_dir: pathlib.Path | None = None,
+                   agency: str = DEFAULT_AGENCY) -> dict:
+    """Search an Accela agency (default Berkeley) for all `module` records filed
+    start_date..end_date (MM/DD/YYYY). Returns {'status','module','window','pages','rows','errors'}."""
     errors, all_rows = [], []
     with sync_playwright() as pw:
         browser = pw.chromium.launch(headless=headless)
         page = browser.new_page()
         try:
-            page.goto(_build_search_url(module), timeout=60000)
+            page.goto(_build_search_url(module, agency), timeout=60000)
             page.wait_for_load_state("networkidle", timeout=60000)
             if not _fill_first(page, START_DATE_SELECTORS, start_date, errors):
                 _dump(page, debug_dir, module, "no-start-date-input")

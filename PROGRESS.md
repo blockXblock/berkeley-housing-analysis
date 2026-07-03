@@ -4,6 +4,16 @@
 
 ---
 
+## 2026-07-03 — 📖 JN6b TRUTH-MAINTENANCE PASS (committed `2439ac6` on dev — NOT yet on main)
+The evaluation's item-2 down-payment: (1) JN6b's superseded "only such case in the data" repaired —
+the informed-flag deferral now reads as right-at-the-time, with a truth-in-hindsight note that the v4
+re-key found a CLASS (ADU pairs, phased projects, the address swap); (2) checkpoint literals (6c/6d +
+JN6a's 6b) annotated as PINNED TO THE FROZEN BUNDLE (anchor-to-what-moves discipline — reproducibility
+pins, not living-record claims); (3) new EPILOGUE cell — the permit-family re-key + the terminal
+decomposition (4,229 vs adjudicated 4,099, every row named, as-of July 2026) linking the live Audit
+page as the course's destination. Both notebooks re-executed in place, all 4 checkpoints pass.
+**Reaching Colab students requires the dev→main merge (John's call).** JN7 remains the big extension.
+
 ## 2026-07-03 — 🎓 CURRICULUM EVALUATED + JN6a COLAB FIX DEPLOYED (live == disk, verified)
 Two-agent deep evaluation of the public curriculum (mechanical exec + pedagogy). **Mechanical: all 15
 notebooks pass locally; 14/15 passed a true Colab-sim; the ONE blocker — JN6a's CONFIG

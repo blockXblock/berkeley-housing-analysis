@@ -22,9 +22,9 @@ Day4 money-flows model → Day5 deck.** DONE TODAY:
   click, specimen committed fa904a4); status taxonomy exposes Intake-Completed/In-Review (the
   clock states we CPRA Berkeley for). **CORRECTION/retraction:** CO record type is NICHE (14 in
   6mo, cannabis-type) — Oakland completion is status-based like Berkeley; public layer carries
-  File Date ONLY (broad-not-deep; dated feed needs Oakland CPRA). **Accela Construct API: needs
-  free developer App ID (John registering); then test anonymous scope for OAKLAND + BERKELEY**
-  (if Berkeley's on, a live dated feed supersedes sweeps).
+  File Date ONLY (broad-not-deep; dated feed needs Oakland CPRA). **Accela Construct API: ABANDONED
+  2026-07-03** (registration friction; John's call — the API was an optimization, never a
+  dependency; all critical paths work without it: sweeps, Oakland export, CPRAs).
 - NEXT (Day 2): ministerial/Middle-Housing first-year slice from the fresh harvest.
 
 ## 2026-07-03 — ⏱ JN-I PERMIT TIMELINES BUILT (`8ca25ac` on dev) — the statutory-clock JN

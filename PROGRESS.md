@@ -4,6 +4,17 @@
 
 ---
 
+## 2026-07-03 — ⭐ THE UNCERTAIN DOZEN CLOSED (+9) — CO 4,212; **ZERO uncertain rows remain**
+6 accepts (ledger 174/576; incl. John's AAR find at 961 The Alameda and the untruncated 2980 College
+"(4) residential units"), 6 rejects each a NAMED city divergence (**1023 Cragmont: city credited a
+JADU its own revision ELIMINATED — city-error find**), Latham adjudicated unresolvable ±1 (3 entitled
+Latham Lane homes ALL UNBUILT per assessor — entitled≠built in triplicate; stays uncounted). Snapshot
+pre-uncertains; baseline **2026-07-03h** (ours 4,212 vs adjudicated city 4,099 = +113, all named);
+chain re-validated. Audit: docs/audit/2026-07-03_uncertains_resolution.md. **The reconciliation has
+NO unknown rows left** — only documented divergences, the 20 small no-candidate credits, and watch
+items (city's GLA CO, Den CKAN row). NEXT: the Audit page + JN-G; sweep-JN packaging; income-column
+refinement.
+
 ## 2026-07-03 — THE DEN RESOLVED (+40, demote REVERSED) — CO 4,203; the NEVER-FINAL convention set
 Accela: completion permit B2018-01337 = **"Closed Expired"** — it will never final; the building is
 occupied (leasing: 40u/7st/2020) and the city's own CY2021 CO row used the foundation final's DATE.

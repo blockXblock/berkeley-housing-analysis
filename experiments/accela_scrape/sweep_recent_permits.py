@@ -24,13 +24,14 @@ ROOT = pathlib.Path("~/berkeley-data").expanduser()
 OUT = ROOT / "data" / "raw" / "accela" / "date_range"
 LOG = OUT / "_sweep_log.jsonl"
 
+from datetime import timedelta
 WINDOWS = []
-y, m = 2025, 6
-while (y, m) <= (2026, 7):
-    last_day = 3 if (y, m) == (2026, 7) else (date(y + (m == 12), (m % 12) + 1, 1)
-                                              .toordinal() - date(y, m, 1).toordinal())
-    WINDOWS.append((f"{m:02d}/01/{y}", f"{m:02d}/{last_day:02d}/{y}", f"{y}-{m:02d}"))
-    y, m = (y + 1, 1) if m == 12 else (y, m + 1)
+d = date(2025, 6, 1)
+END = date(2026, 7, 3)
+while d <= END:
+    e = min(d + timedelta(days=3), END)          # 4-day windows: months truncated (2026-07-03)
+    WINDOWS.append((d.strftime("%m/%d/%Y"), e.strftime("%m/%d/%Y"), f"{d.isoformat()}_{e.isoformat()}"))
+    d = e + timedelta(days=1)
 
 MODULES = ["Building", "Planning"]
 

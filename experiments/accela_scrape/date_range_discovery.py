@@ -176,11 +176,23 @@ def discover_range(start_date: str, end_date: str, module: str = "Building",
                 _, rows = _parse_grid(grid)
                 all_rows.extend(rows)
                 pages += 1
+                sig_el = page.query_selector("a[href*='CapDetail.aspx']")
+                sig = sig_el.get_attribute("href") if sig_el else None
                 if not _click_next_page(page, errors):
                     break
-                page.wait_for_load_state("networkidle", timeout=60000)
-                page.wait_for_selector("a[href*='CapDetail.aspx']", timeout=45000)
-                time.sleep(0.6)   # be polite to the counter
+                # wait for a REAL advance: the first result link must change. The old page's
+                # links satisfy any presence-wait immediately (calibrated 2026-07-03: presence-
+                # waiting re-parsed the same page -> duplicate rows + months truncated to their
+                # newest tail when the pager stalled at block boundaries).
+                advanced = False
+                for _ in range(40):
+                    time.sleep(0.5)
+                    el = page.query_selector("a[href*='CapDetail.aspx']")
+                    if el and el.get_attribute("href") != sig:
+                        advanced = True
+                        break
+                if not advanced:
+                    break             # pager did not move: treat as last page, never duplicate
             return _result("ok", module, start_date, end_date, pages, all_rows, errors)
         except PlaywrightTimeout as e:
             errors.append(f"timeout: {e}")

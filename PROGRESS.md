@@ -4,6 +4,20 @@
 
 ---
 
+## 2026-07-03 — 🌌 BUILDING BACKFILL COMPLETE (`2b4a231`) — the 2015-2026 permit UNIVERSE + census
+951 windows, **67,175 unique Building permits 2015-01→2026-07** in data/raw/accela/date_range/.
+Verified: 5 empty windows = holidays; 71/76 trunc flags = weekend-starts (benign; 5 weekday queued).
+**THE CENSUS: the CPRA feed covered only 60-78% of base B-permit filings in its OWN years
+(2018-2025) — ~9,000 permits never reached us** (2015-17 low coverage = expected feed scope).
+Triage pool now open: harvest-only finaled dwelling permits (B2025-03880 class) vs the audit's
+city-coverage rows + the ~190u ADU recall gap; abandoned applications = the attrition denominator.
+ALSO TODAY: tour-package generator (`5fb80c8` — docs/geometry.kml = canonical 184-bldg skyline;
+tours are camera-only; 18 packages emitted, README step-0; GES experiment prompt handed to CIC).
+Oakland official CO pull: 17,432u 2018-25, detectors ran, 152-id cross-year adjudication queue.
+Harvest-vs-CPRA significance note (`8632a52`): the feed is a FILTERED SUBSET — harvest=universe,
+CPRA=fields. NEXT: triage the ~9k harvest-only permits (finaled+dwelling first); Planning backfill
+(same runner, later); mayor meeting prep items unchanged (CIC ground-floor check; send CPRAs).
+
 ## 2026-07-03 — 🎤 MAYOR-PREP DAY 5 COMPLETE: deck + one-pager built (`a7d5b17` — ⚠ dev-ONLY)
 **docs/mayor-briefing-2026-07.html** (9 slides, arrow keys, noindex, per-slide source footnotes,
 modeled/preliminary tags visible) + **docs/mayor-briefing-2026-07-onepager.md** (leave-behind).

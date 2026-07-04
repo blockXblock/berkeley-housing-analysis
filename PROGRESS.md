@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-07-03 — 🏘 MAYOR-PREP DAY 2 COMPLETE: the Middle-Housing first-year slice (`d5ac055`)
+Full findings: **notes/2026-07-03_day2_ministerial_slice.md**. Headlines: ZCMH (the ordinance's
+dedicated record type) captured for its ENTIRE life since 2025-11-03 — 28 records ~3.5/mo,
+**15 approved / 0 denied**, approvals ≤~2.5mo (upper bounds; harvest has File Date + status only);
+**two-thirds are ADDITIONS, ~10 add net units (~15-20u yr-one), 1 removes** → works/fast/small, a
+homeowner-flexibility tool not (yet) a production engine. SB9 unused; density bonus 11; SB330
+pre-apps 23; ADU ~20/mo steady; solar ESR 1,076 = biggest ministerial stream. Waiting room visible:
+539 TMP pending; planning 743 approved vs 52 denied (**delay-not-denial**, matches JN-I). ⚠ CROSS-
+CHECK: the CPRA report captures **~40-50% FEWER B-filings/mo than the portal** (Dec-2025 truncated)
+— undocumented filters; Request 1 gained a filter-clarification ¶; deck counts source to harvest.
+NEXT: Day 3 corridor/business overlay (zoning districts + license roll + vacancy proxy).
+
 ## 2026-07-03 — 🏛 MAYOR-PREP DAY 1 COMPLETE + OAKLAND PROBED (presentation in 5 days)
 **Context: presentation to the mayor on what-works-for-housing (minimize commercial/business
 impact). Plan: Day1 CPRA+harvest → Day2 ministerial/Middle-Housing slice → Day3 corridor overlay →

@@ -4,6 +4,19 @@
 
 ---
 
+## 2026-07-03 — 🏙 MAYOR-PREP DAY 3 COMPLETE: corridor/business overlay (`3a7a0ec`)
+Full findings: **notes/2026-07-03_day3_corridor_overlay.md**. A: **44% of completed units 2018+
+from the 10% of projects on corridors** (Shattuck 695u/San Pablo 397u/University 327u/Telegraph
+271u). B (LEAD, caveated): **2/14 biggest corridor completions have a non-rental license at their
+street number** — discovered CONDO-IZED SUB-APNs (project parcel ≠ retail-unit APN, 1500 San Pablo
+specimen → prefix-matching); corner-lot + no-retail + roll-age caveats; **CIC cross-street
+spot-check queued pre-deck**. C: ~29% of 962 corridor commercial parcels license-less; the read is
+the 5× CONTRAST (Solano 6% vs San Pablo 34%; Euclid/Hearst partly institutional). SYNTHESIS: no
+housing-kills-business pattern (housing-heavy corridors have the fullest storefronts); the real
+issue = post-completion ground-floor TENANTING. Zoning open dataset = geometry w/ zero attributes
+(portal-quality exhibit). NEXT: Day 4 money-flows model (fees-from-valuation + Imps increments +
+per-sqft parcel taxes, reconciled to budget).
+
 ## 2026-07-03 — 🏘 MAYOR-PREP DAY 2 COMPLETE: the Middle-Housing first-year slice (`d5ac055`)
 Full findings: **notes/2026-07-03_day2_ministerial_slice.md**. Headlines: ZCMH (the ordinance's
 dedicated record type) captured for its ENTIRE life since 2025-11-03 — 28 records ~3.5/mo,

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>More Homes, Healthy Corridors — a data briefing</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; background:#10202b; color:#eef3f6; }
+  .slide { min-height:100vh; padding:7vh 9vw; display:flex; flex-direction:column; justify-content:center; border-bottom:1px solid #24384a; }
+  h1 { font-size:2.7rem; line-height:1.15; margin-bottom:1.2rem; color:#fff; }
+  h2 { font-size:2rem; margin-bottom:1.4rem; color:#7ec8e3; }
+  h3 { font-size:1.15rem; color:#9fb8c8; font-weight:600; margin:.9rem 0 .35rem; }
+  p, li { font-size:1.18rem; line-height:1.55; max-width:62rem; }
+  ul { margin:.4rem 0 .9rem 1.4rem; }
+  .big { font-size:3.4rem; font-weight:800; color:#ffd166; line-height:1.1; }
+  .num { color:#ffd166; font-weight:700; }
+  .warn { color:#ff9f7f; }
+  .ok { color:#8fd694; }
+  .src { margin-top:auto; padding-top:1.6rem; font-size:.82rem; color:#6d8496; }
+  .kicker { text-transform:uppercase; letter-spacing:.14em; font-size:.85rem; color:#7ec8e3; margin-bottom:.8rem; }
+  table { border-collapse:collapse; margin:.7rem 0 1rem; }
+  td, th { padding:.34rem .9rem; border-bottom:1px solid #2b4356; font-size:1.05rem; text-align:left; }
+  th { color:#9fb8c8; font-weight:600; }
+  .tag { display:inline-block; font-size:.72rem; padding:.12rem .5rem; border-radius:3px; margin-left:.5rem; vertical-align:middle; }
+  .modeled { background:#5a4a1a; color:#ffd166; }
+  .prelim  { background:#5a2e1a; color:#ff9f7f; }
+  .derived { background:#1a4a2e; color:#8fd694; }
+  .foot { font-size:.95rem; color:#9fb8c8; }
+</style>
+</head>
+<body>
+
+<section class="slide">
+  <div class="kicker">A data briefing for the Mayor · July 2026 · berkeleybuild.com</div>
+  <h1>More homes, healthy corridors:<br>what Berkeley's own records say works</h1>
+  <p>An independent, receipt-level reconstruction of Berkeley's housing pipeline from primary
+  sources — every building permit 2018–2026, the assessor's roll, the city's filings to the
+  state — plus a fresh pull of the last 13 months, finished this week.</p>
+  <p style="margin-top:1rem" class="foot">Every number on these slides traces to a public record.
+  The method is published and audited: our count vs the city's official state filing differs by
+  130 units out of ~4,200 — <b>and every row of that difference, in both directions, is named</b>.
+  → <b>berkeleybuild.com/housing-audit.html</b></p>
+  <div class="src">Method &amp; credibility: the Audit page; reconciliation baseline 2026-07-03.</div>
+</section>
+
+<section class="slide">
+  <h2>1 · When Berkeley removes discretion, Berkeley is fast</h2>
+  <p class="big">3 days</p>
+  <p>Median time from application to permit for an ADU — across <span class="num">2,881</span>
+  ADU permits since 2018. The ministerial lane demonstrably works. Solar is the biggest fast lane
+  of all: <span class="num">1,076</span> permits in the last 13 months.</p>
+  <h3>And the new Middle Housing certificate is behaving the same way</h3>
+  <ul>
+    <li><span class="num">15 approved, 0 denied</span> in its first 8 months; approvals landing inside ~2.5 months<span class="tag derived">derived</span></li>
+  </ul>
+  <div class="src">JN-I permit-timelines baseline 2026-07-03 (v4 event stream); Day-2 harvest slice. Speed figures for ZCMH are upper bounds (filing date + current status).</div>
+</section>
+
+<section class="slide">
+  <h2>2 · Middle Housing, year one: it works, it's fast — and it's small</h2>
+  <table>
+    <tr><th>Applications (Nov 2025–Jun 2026)</th><td><span class="num">28</span> (~3.5/month, no growth trend yet)</td></tr>
+    <tr><th>Outcomes</th><td><span class="ok">15 approved · 0 denied</span> · 6 under review</td></tr>
+    <tr><th>What they build</th><td><b>two-thirds are additions/remodels</b> to existing homes</td></tr>
+    <tr><th>Net new units proposed</th><td>~<span class="num">15–20</span> in the entire first year (one application <i>removes</i> a unit)</td></tr>
+  </table>
+  <p>It neither flooded neighborhoods nor failed: today it is a <b>homeowner-flexibility tool</b>
+  more than a housing-production engine. SB 9, meanwhile, is essentially unused in Berkeley
+  (zero applications).</p>
+  <div class="src">Day-2 slice of the fresh Accela harvest (9,272 records, 2025-06→2026-07); ZCMH = the ordinance's dedicated record type, captured for its entire life.</div>
+</section>
+
+<section class="slide">
+  <h2>3 · Where time dies: delay, not denial</h2>
+  <p class="big">189 days <span style="font-size:1.4rem;color:#9fb8c8">median</span> · 527 days <span style="font-size:1.4rem;color:#9fb8c8">90th pct.</span></p>
+  <p>…from application to <i>permit issuance</i> for new-housing projects (928 permits). End to end,
+  the slowest tenth of completed housing takes <span class="num">3.5+ years</span> from application
+  to finished building. One 63-unit building (2527 San Pablo) waited <span class="warn">4.9 years</span>
+  for its permit.</p>
+  <ul>
+    <li>Planning citywide: <span class="num">743 approved vs 52 denied</span> — the city rarely says no; it says <i>wait</i>.</li>
+    <li>The waiting room is real: <span class="num">539</span> applications currently pending/incomplete.</li>
+  </ul>
+  <div class="src">JN-I baseline 2026-07-03; Day-2 harvest. Honesty rail: elapsed time includes applicant-side revisions — these are screens, not violation counts; publishing deemed-complete dates would settle it (see Asks).</div>
+</section>
+
+<section class="slide">
+  <h2>4 · Where the homes actually come from</h2>
+  <p class="big">44% of units · 10% of projects</p>
+  <p>Since 2018, 69 corridor projects produced 1,949 units; 635 residential-fabric projects
+  produced 2,516. The towers carry the totals; the fabric stream (ADUs, Middle Housing) is many
+  hands, small numbers — <b>and touches zero storefronts</b>.</p>
+  <table>
+    <tr><th>Corridor</th><th>Units since 2018</th></tr>
+    <tr><td>Shattuck</td><td>695</td></tr>
+    <tr><td>San Pablo</td><td>397</td></tr>
+    <tr><td>University</td><td>327</td></tr>
+    <tr><td>Telegraph</td><td>271</td></tr>
+  </table>
+  <div class="src">Day-3 overlay: v2 completions (verdict-driven CO dates) × street-name corridor classification (14 named arterials).</div>
+</section>
+
+<section class="slide">
+  <h2>5 · Housing did not hurt the corridors — vacancy is a separate problem</h2>
+  <ul>
+    <li>The corridors with the <b>most new housing</b> (Shattuck, University, Telegraph) sit at the
+      <b class="ok">healthiest end</b> of the business-license table (19–21% of commercial parcels
+      without an active license, vs <span class="warn">34%</span> on San Pablo and 6% on Solano —
+      a 5× spread unrelated to where housing was built).</li>
+    <li>The genuine weak spot: <b>ground floors of new buildings</b>. Preliminary: only
+      <span class="warn">2 of the 14</span> largest corridor completions show an active non-rental
+      business license at their street address<span class="tag prelim">preliminary — field check in progress</span></li>
+    <li>Policy lever: <b>tenanting support and vacancy activation</b>, not housing restriction.
+      The city already taxes empty <i>homes</i> (Measure M); empty <i>storefronts</i> aren't even measured.</li>
+  </ul>
+  <div class="src">Day-3 overlay: Nov-2025 license roll × assessor commercial parcels (institutional parcels inflate some corridor shares; single-snapshot caveat applies — monthly license snapshots now running).</div>
+</section>
+
+<section class="slide">
+  <h2>6 · The money: a building pays once at the counter, then every year forever</h2>
+  <table>
+    <tr><th>Permitted construction</th><td><span class="num">~$250M/year</span> of declared valuation (2022 peak: $338M)<span class="tag derived">derived</span></td></tr>
+    <tr><th>Building fees</th><td>~$4–7M/yr at an illustrative 2% effective rate<span class="tag modeled">modeled — actuals requested</span></td></tr>
+    <tr><th>New tax base</th><td>40+-unit completions since 2018 added <span class="num">$857M</span> of assessed improvements → <span class="num">≥$8.6M/year</span> at the 1% base levy alone<span class="tag derived">derived</span></td></tr>
+  </table>
+  <p>One building — 1951 Shattuck — now carries $70.4M of improvements: ≈<span class="num">$704k/yr</span>
+  in base property tax. Fiscally, <b>one corridor tower ≈ a thousand ADUs</b>; ADUs add homes at
+  near-zero fiscal <i>and</i> commercial footprint. And the $0 rows are honest: new completions
+  awaiting reassessment, and nonprofit projects that are exempt — <b>affordable housing pays in
+  homes, not taxes</b>. The portfolio beats either simplistic story.</p>
+  <div class="src">Day-4 model: CPRA valuations (real) + Feb-2026 assessor roll (real) + illustrative fee rate (labeled). AB-8 share, parcel-tax and transfer-tax rates deliberately not quoted pending confirmation.</div>
+</section>
+
+<section class="slide">
+  <h2>7 · Four asks that cost nothing and change everything</h2>
+  <ul>
+    <li><b>Publish the building-permit feed</b> on the open-data portal the city already runs — it
+      publishes business licenses today, but not a single permit dataset. (Our CPRA comparison
+      found the internal report used for data requests captures <span class="warn">40–50% fewer
+      filings</span> than the public portal shows — undocumented filters.)</li>
+    <li><b>Publish deemed-complete dates</b> — one field, and every statutory-clock question
+      (the ADU 60-day rule, AB 2234) becomes answerable instead of arguable.</li>
+    <li><b>Publish the fee ledger</b> — replace modeled fee figures with actuals.</li>
+    <li><b>Fix the three broken open datasets</b> we hit this week: zoning (geometry, zero
+      attributes), budget (expenses only, ends FY2016), and the permit-report filters above.</li>
+  </ul>
+  <div class="src">Each verified this week against the live portal and Accela; CPRA requests for items 2–3 are filed/in progress.</div>
+</section>
+
+<section class="slide">
+  <h2>8 · This doesn't stop when the meeting ends</h2>
+  <p>The record that produced these slides <b>watches itself</b>: the state filing is re-pulled and
+  diffed on schedule (five mechanical error-detectors, anchor-validated), business licenses snapshot
+  monthly, and the permit stream refreshes by harvest and CPRA. When the city's numbers move, we
+  know the week it happens — and every claim keeps its receipt.</p>
+  <p style="margin-top:1.2rem"><b>berkeleybuild.com</b> · the Audit page · the Explorer · the
+  open curriculum (anyone can rebuild this record — and now, any city's).</p>
+  <div class="src">JN-G revision watcher; license_watch monthly cadence; date-range harvester. Independent reconstruction: CPRA + Alameda assessor only; the state filing is used as a verification target, never a source.</div>
+</section>
+
+<script>
+  document.addEventListener('keydown', e => {
+    const slides = [...document.querySelectorAll('.slide')];
+    const y = window.scrollY + 10;
+    const i = slides.findIndex(s => s.offsetTop + s.offsetHeight > y);
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ')
+      slides[Math.min(i + 1, slides.length - 1)].scrollIntoView({behavior:'smooth'});
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp')
+      slides[Math.max(i - 1, 0)].scrollIntoView({behavior:'smooth'});
+  });
+</script>
+</body>
+</html>

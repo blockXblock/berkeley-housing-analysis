@@ -58,6 +58,22 @@ rather than "everything along corridor Y."
 
 ## Workflow
 
+### 0. Regenerating an old tour with current geometry
+
+Tours are CAMERA-ONLY (no buildings inside); a recorded video shows whatever
+geometry was loaded at record time — which is why older videos show outdated
+skylines. To re-record any tour against the current hand-edited footprints:
+
+```bash
+python scripts/build_tour_package.py docs/tours/<tour>.kml   # or --all
+```
+
+This emits `docs/tours/packages/<tour>__geom-<sha>.kml` — ONE self-contained
+file: the canonical geometry (`docs/geometry.kml`) + the tour's camera path,
+with the geometry source/sha stamped inside. Open the package in Google Earth
+Pro, play, record (steps 2–5 below). Packages are DERIVED — hand-edit
+footprints only in `docs/geometry.kml`, then regenerate.
+
 ### 1. Draft the tour
 
 Two paths:

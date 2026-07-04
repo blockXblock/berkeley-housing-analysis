@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-07-03 — 🎤 MAYOR-PREP DAY 5 COMPLETE: deck + one-pager built (`a7d5b17` — ⚠ dev-ONLY)
+**docs/mayor-briefing-2026-07.html** (9 slides, arrow keys, noindex, per-slide source footnotes,
+modeled/preliminary tags visible) + **docs/mayor-briefing-2026-07-onepager.md** (leave-behind).
+Arc: audit opener → ADU-3d ministerial proof → Middle-Housing works/fast/small → delay-not-denial
+(189d/527d; 743:52; 539 pending) → 44%-from-10% corridors → no-housing-kills-business +
+ground-floor tenanting lever → money (fees once/taxes forever; $857M→≥$8.6M/yr; tower≈1000 ADUs;
+affordable pays in homes) → 4 cost-nothing asks (publish permits feed / deemed-complete dates /
+fee ledger / fix 3 broken datasets) → the-record-watches-itself. **⚠ DO NOT merge dev→main until
+after the meeting (deploys to the public site).** PRE-MEETING QUEUE: (1) CIC ground-floor
+spot-check of the 14 buildings (upgrades slide-5 'preliminary'); (2) John sends the 2 CPRAs;
+(3) rehearse from the deck (open the HTML in a browser; ←/→ keys).
+
 ## 2026-07-03 — 💰 MAYOR-PREP DAY 4 COMPLETE: money-flows model (`171ee9d`)
 Full findings: **notes/2026-07-03_day4_money_flows.md**. Frame: pays once at the counter, then
 every year after completion. ONE-TIME: ~$250M/yr permitted valuation (real; 2022 peak $338M);

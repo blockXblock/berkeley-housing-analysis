@@ -36,10 +36,20 @@ filing: 130 units apart out of ~4,200, every row of difference named in both dir
   ADUs add homes at near-zero fiscal and commercial footprint. Nonprofit projects are tax-exempt —
   **affordable housing pays in homes, not taxes**. The portfolio beats any single-lane story.
 
+## Oakland already shows what Berkeley makes people ask for
+Tested live this week, same Accela software both cities: an Oakland homeowner or developer can
+**download a full month of permit records in one click** (2,351 records, June 2026, with
+descriptions) and see **where every application sits** — *Pending–Incomplete, Intake–Completed,
+In Review* — the statutory-clock states, public. Berkeley shows 10 records a page, statuses
+reduced to *Issued/Finaled*, and the clock states only via records request. Openness is a subsidy
+that costs nothing: applicants who can see the queue plan with confidence. And Oakland hides its
+milestone *dates* — so Berkeley can leapfrog, not just catch up.
+
 ## Four asks that cost nothing
-1. **Publish the building-permit feed** on the city's own open-data portal (it publishes business
-   licenses, but no permits; the internal report used for records requests captures **40–50% fewer
-   filings** than the public portal shows).
+1. **Publish the building-permit feed** — with dates and clock states — on the city's own
+   open-data portal (it publishes business licenses, but no permits; one move leapfrogs Oakland;
+   the internal report used for records requests captures **40–50% fewer filings** than the
+   public portal shows).
 2. **Publish deemed-complete dates** — one field makes every statutory-clock question answerable.
 3. **Publish the permit fee ledger** — replace models with actuals.
 4. **Fix three broken open datasets** found this week: zoning (no attributes), budget (expenses

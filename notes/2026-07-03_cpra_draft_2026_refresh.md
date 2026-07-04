@@ -37,6 +37,12 @@ refresh. Send via the City's NextRequest portal (records.cityofberkeley.info) or
 > total fees assessed) although the underlying system maintains them; please include them in this
 > production if at all possible, for the full requested period. I request the export as an
 > electronic record in its native format per § 7922.570.
+>
+> Please also identify any filter or selection criteria the report applies (permit types, record
+> statuses, or categories excluded): a comparison of the prior production against the public
+> Accela portal's records for the same months indicates the report captures substantially fewer
+> building-permit records than were filed, and I would like to understand the report's intended
+> scope.
 
 *(Why: our feed ends with the 2023–2025 production; Middle Housing ordinance and current
 ministerial-path activity live in late-2025/2026 filings. The 2025 overlap is deliberate — it

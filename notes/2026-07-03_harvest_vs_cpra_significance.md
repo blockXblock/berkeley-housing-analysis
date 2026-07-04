@@ -15,6 +15,16 @@ Program)**.
    the city credits that our record lacked; some of those may be permits the feed simply never
    contained. TO CHECK: sample the named city-only rows against harvest presence (feed-era months
    are beyond the harvest window — the check runs on 2025-06+ rows or awaits the CPRA refresh).
+   **→ RESOLVED 2026-07-03 (post-backfill triage): hypothesis CLOSED — the answer is NO.** With
+   the full 2015–2025 universe in hand: city-APR tracking permits ∩ harvest-only = **0 rows,
+   0 units**. Every B-permit the city ever credited units to WAS in our feed. The audit's
+   city-coverage rows are NOT feed-filter artifacts; the reconciliation stands stronger.
+   Full triage of the 13,721 harvest-only base permits (2018–2025): **8,608 Finaled — but only
+   ~57 dwelling-related, and reading them, nearly all incidental** (solar on an ADU, water
+   heaters, service upgrades); true unit-adding misses are rare singletons (B2025-03880 remains
+   the specimen). The feed's filters excluded trades/minor permits, not housing production.
+   **The real prize is different: 3,687 Closed-Expired applications** — the abandonment/attrition
+   class, now enumerable for entitled-but-unbuilt.
 3. **The harvest strictly supersedes the feed's universe** for the months both cover (330/331) —
    but NOT its depth: the feed carries submittal/issuance/finaled dates, units, valuation, ADU
    flag; the harvest carries file date + status + description. **Complements: harvest = the

@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-07-03 — 💰 MAYOR-PREP DAY 4 COMPLETE: money-flows model (`171ee9d`)
+Full findings: **notes/2026-07-03_day4_money_flows.md**. Frame: pays once at the counter, then
+every year after completion. ONE-TIME: ~$250M/yr permitted valuation (real; 2022 peak $338M);
+fees MODELED @2% illustrative ($4-7M/yr) pending CPRA actuals; ADU median declared valuation $10k.
+RECURRING: **40u+ completions since 2018 = $857M new assessed improvements → ≥$8.6M/yr at the 1%
+base levy alone** (UNDERCOUNT: $0 rows = reassessment lag + WELFARE EXEMPTION — affordable pays in
+homes, not taxes). Specimens: 2580 Bancroft $137.6M; 1951 Shattuck $70.4M (~$704k/yr, one
+building). CONTRAST SLIDE: a tower ≈ a thousand ADUs fiscally; ADUs = homes at near-zero fiscal +
+commercial footprint → portfolio beats either simplistic story. Budget open dataset = expenses-only
+ends FY16 (portal exhibit #3). NEXT: Day 5 deck assembly (JN-I + Day2/3/4 exhibits + Audit-page
+opener + the asks); queued pre-deck: CIC ground-floor spot-check (Day-3 B).
+
 ## 2026-07-03 — 🏙 MAYOR-PREP DAY 3 COMPLETE: corridor/business overlay (`3a7a0ec`)
 Full findings: **notes/2026-07-03_day3_corridor_overlay.md**. A: **44% of completed units 2018+
 from the 10% of projects on corridors** (Shattuck 695u/San Pablo 397u/University 327u/Telegraph

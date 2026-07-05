@@ -4,6 +4,17 @@
 
 ---
 
+## 2026-07-04 — 🗺 PLANNING BACKFILL COMPLETE (`17b3bf1`) — the entitlement universe
+951 windows, **14,897 unique planning records 2015-2026** (PLN/ZP/DR + ZCBP/ZCBL/ZCHO/ZCSTR cert
+streams). Verified: 17 empties = holidays/weekends; 3 weekend flags, 0 weekday. 2015 spike (2,491,
+likely ZCBP bulk — triage later); COVID dip 2020 (873). **The Accela universe now = ~82k records
+2015-2026, both pipeline halves** (entitlement filings → building finals). ALSO: 9k-triage RESOLVED
+(`6a4235b`): city-credited ∩ harvest-only = 0 — feed-filter hypothesis CLOSED, audit stands
+stronger; feed filtered trades not housing; **3,687 Closed-Expired applications = the enumerable
+abandonment class** (entitled-but-unbuilt denominator). NEXT candidates: entitled-but-unbuilt JN
+(both halves now in hand); ZP target list → harvest_affordability; mayor-meeting items (CIC
+ground-floor check; send CPRAs; GES experiment pending CIC).
+
 ## 2026-07-03 — 🌌 BUILDING BACKFILL COMPLETE (`2b4a231`) — the 2015-2026 permit UNIVERSE + census
 951 windows, **67,175 unique Building permits 2015-01→2026-07** in data/raw/accela/date_range/.
 Verified: 5 empty windows = holidays; 71/76 trunc flags = weekend-starts (benign; 5 weekday queued).

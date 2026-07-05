@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-07-04 — ⚰️ JN-J ENTITLED-BUT-UNBUILT BUILT (`c2e752e`) — the finding INVERTS the assumption
+**scripts/v4/build_jn_j.py → notebooks/v4/JN-J_entitled_unbuilt.ipynb** + baseline (gate re-run
+PASS). **WHAT BERKELEY PERMITS, BERKELEY BUILDS: mature cohorts (issued 2015-22) = 95%
+units-weighted survival to final (2,347→2,241; only 106u lost in 7yrs). Housing dies BEFORE
+issuance: 10,855 Closed-Expired building applications 2015-25 (~21-25%/yr; 42% in 2015) + 7.4% of
+14,162 planning apps withdrawn/denied at gate 1.** JN-I+JN-J = delay-not-denial + die-before-
+issuance. Stalled register (≥10u never-finaled: 11proj/830u) mostly in-construction-window and
+**independently RE-FINDS THE DEN** (2510 Channing, Imps $23M built-never-finaled) — machinery
+validates against the audit's adjudicated case. 3 rails (Closed-Expired≠unbuilt/censoring/
+Imps-lag); register=queue. Deck implication: strengthens slide 3 (the process story is the
+pre-issuance gauntlet, not construction failure).
+
 ## 2026-07-04 — 🗺 PLANNING BACKFILL COMPLETE (`17b3bf1`) — the entitlement universe
 951 windows, **14,897 unique planning records 2015-2026** (PLN/ZP/DR + ZCBP/ZCBL/ZCHO/ZCSTR cert
 streams). Verified: 17 empties = holidays/weekends; 3 weekend flags, 0 weekday. 2015 spike (2,491,

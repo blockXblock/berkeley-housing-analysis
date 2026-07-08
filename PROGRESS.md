@@ -4,6 +4,23 @@
 
 ---
 
+## 2026-07-08 — ✅ MAYOR MEETING DELIVERED; deck VERIFIED-STILL-ACCURATE; deck STAYS for the merge
+John presented to the Mayor and told Shoshana O'Keefe the curriculum is near-ready (it IS: 17
+notebooks live on main, Colab-verified 2026-07-03; open items are polish only — R2 tarball
+re-upload, git-clone README note, JN-G mini-notebook extension). **Deck accuracy re-verified
+2026-07-08 against newest baselines:** +130/4,229 (reconciliation 2026-07-03i, still newest),
+189d/527d/928 masters + ADU 3d/2,881 (timelines 2026-07-03, still newest), JN-G watch filing-
+unchanged (last run 7/02), JN-J contradicts nothing (strengthens slide 3), planning backfill
+doesn't touch deck figures (deck sourced to the 13-month harvest, footnoted). Slide-5 ground-floor
+CIC field check NEVER RAN — the "preliminary — field check in progress" tag stays honest; still
+queued. **John's call: LEAVE THE MAYOR DECK IN when dev→main merges** (merge+push = John's op,
+still pending). **NEW DIRECTION QUEUED: the DETAILED FINANCIAL DECK — project-by-project
+estimates of (1) developer costs, (2) developer fees paid to the city, (3) resulting city income
+flows from taxes, (4) profitability.** Builds on the Day-4 money-flows model; fee actuals await
+the filed CPRA (fee ledger); developer-cost + profitability = new modeling territory (pro-forma:
+construction cost, land, revenue assumptions — needs external cost benchmarks, label modeled
+until sourced).
+
 ## 2026-07-04 — ⚰️ JN-J ENTITLED-BUT-UNBUILT BUILT (`c2e752e`) — the finding INVERTS the assumption
 **scripts/v4/build_jn_j.py → notebooks/v4/JN-J_entitled_unbuilt.ipynb** + baseline (gate re-run
 PASS). **WHAT BERKELEY PERMITS, BERKELEY BUILDS: mature cohorts (issued 2015-22) = 95%

@@ -35,5 +35,25 @@ JN6a's oracle works statewide.
 **Caveats kept out of the letter body** (for our own record): the "two knobs"
 claim is literal (JN1's config cell), but a city whose permit ledger lacks
 unit counts would need adaptation at JN3. The Oakland one-click bulk export
-was live-probed 2026-07-03 (deck slide 7 specimen, committed). The DataSF
-claim is not yet live-probed.
+was live-probed 2026-07-03 (deck slide 7 specimen, committed).
+
+**Live-verified 2026-07-08 (all claims stand):**
+- **San Francisco — VERIFIED, better than claimed.** DataSF `i98e-djp9`
+  (Building Permits): 1,291,721 rows via the Socrata API, including
+  `filed_date`, `issued_date`, `existing_units`, `proposed_units`,
+  `estimated_cost`, `description`, `status`, and a native `adu` flag — JN1
+  points at a CSV endpoint and JN3's unit columns exist natively.
+- **Fresno — Accela ACA** (`aca-prod.accela.com/FRESNO`), the same platform
+  as Berkeley and Oakland, so our date-range harvester targets it with a
+  config change; whether its ACA exposes Oakland-style Download-results or
+  Berkeley-style 10-per-page needs an interactive browser probe (CIC job,
+  queued). The letter's CPRA-request framing is the conservative path and
+  stands.
+- **Delano — SmartGov (Granicus), not Accela**
+  (`ci-delano-ca.smartgovcommunity.com`): public portal for viewing
+  applications/inspections, no evident bulk export → the CPRA request the
+  letter describes is the realistic path.
+- **Oracle — VERIFIED statewide.** HCD APR Table A2 on data.ca.gov
+  (resource `fe505d9b`) carries per-year rows 2018–2025 for all three:
+  Fresno ~17,000 rows, Delano ~900, Berkeley ~1,930. JN6a needs only the
+  jurisdiction name changed.

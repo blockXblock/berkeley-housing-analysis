@@ -4,6 +4,34 @@
 
 ---
 
+## 2026-07-09 — 🎬 DECK REBUILT AS THE FULL DATA STORY (17 slides); v4-grounding correction; four-stage scheme
+Deck grew title→one-breath→completions→two-streams→long-road×3→Sankey→original 1-9. (1) **Title slide:**
+John's fact-check wording (permit-level, 2015-2026 building+zoning, County Assessor; "fees paid" HELD out
+pending the CPRA — would contradict slide 6's modeled tag) + scope chart (82,065 records by filing year,
+stacked Building/Planning). (2) **One-breath slide** (graphics: stat tiles, commute-tide arrows 62,113 in/
+35,174 out — LEHD LODES 2022 block-level, scripts in scratch/2026-07-08/ — water pipe ~12 MGD = EBMUD 135 MGD
+12-mo avg × 8.8% pop share; DOF E-5 Jan-2026 pop 127,654/units 55,521/GQ 21,609; IPEDS 13,422 UCB staff;
+fall-2025 enrollment 46,151; DMV-by-ZIP ~63k vehicles; NEXT iterations: power + data flows). (3) **⚠️ THE
+v2-SHORTCUT LESSON (John's correction, remember it):** first "what finished, where" slide used v2 project-level
+(3,693u) because it had addresses — WRONG universe; the v4 fine count (audit 4,229) locates 100% from the
+feed's OWN StreetName/Parcel-Number fields (845 permits). Corridor share corrected 55%→**47.7%/11.1%**
+(the ~750 units v2 lacked were ALL fabric); slide 4 fixed to 48%/11% (Shattuck 590/San Pablo 513/University
+407/Telegraph 150); scratch/2026-07-09/co_corridor_split_v4.py asserts vs baseline. **Count = v4, geometry =
+v2, never swap.** (4) **DEEMED-COMPLETE EXISTS in v2** (`application_complete`, 159 events/68 projects,
+city-portal detail pages; 43/91 majors): majors median filed→complete **84d**, complete→entitled **410d** —
+the consideration stage is where time dies; deck Ask #2 sharpens to "publish it as a BULK FIELD". (5)
+**Four-stage scheme built** (intake/consideration/waiting/construction): size-split slide (80% of units from
+53 permits of 5+u; small stream = metronome 67-135u/yr; ours|city match note 836|828 720|716 715|708 600|492),
+3 Gantt slides (A completed w/ dot-only rows, B under-construction incl. 1701 San Pablo's decade-gray,
+C waiting room), Sankey (87 majors since 2013 → 59 entitled → 37 permitted → 25 completed; **denied 0,
+withdrawn 1** — evidence-first rule: status-withdrawn WITH issued permit stays under-construction, 3 flagged
+to stalled register). Generator: scratch/2026-07-09/gen_deck_slides.py (derive-don't-hardcode, re-runnable).
+ALSO: AB2011 = 3 records/2 developments (NB BART + 1750 Sacramento); density-bonus ≈134 projects/210 records
+(text-citation floors, scratch/2026-07-08/law_citations.py); ADU claims verified (3.0d median exact, 2,881
+exact, 2,112 completions by CO-year on deck slide "removes discretion"). Preview server: .claude/launch.json
+(gitignored) port 8765. NEXT: financial deck (fee-ledger CPRA = critical path); Fresno ACA probe + slide-5
+ground-floor check (CIC queue); planning-harvest backfill of A-row application dates; CO map via payload APNs.
+
 ## 2026-07-08 (later) — 🚀 SITE DEPLOYED ×5 (dev→main→push, John's call each); ADU curve on deck; PL page
 All of today's work is LIVE on berkeleybuild.com (main == dev == `4e58b66`). (1) **Home page:**
 Report-to-the-Mayor badge (navy/gold pill, 80% width) above the videos → `mayor-briefing-2026-07.html`;

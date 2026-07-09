@@ -228,48 +228,281 @@
 </section>
 
 <section class="slide">
-  <h2>The long road — nine big projects, application to keys</h2>
-  <p><span style="color:#7ec8e3">■</span> city process (application → entitlement → building permit)
-  &nbsp; <span style="color:#ffd166">■</span> construction &nbsp;
-  <span style="color:#8fd694">●</span> certificate of occupancy &nbsp;
-  <span style="color:#4a6478">▨</span> entitled — waiting for a building permit</p>
-  <svg viewBox="0 0 700 430" xmlns="http://www.w3.org/2000/svg" style="max-width:44rem; width:100%; margin:.2rem 0;" role="img" aria-label="Timelines of nine major housing projects from application to completion">
-    <line x1="644" y1="18" x2="644" y2="400" stroke="#6d8496" stroke-width="1" stroke-dasharray="3,3"/>
-    <text x="644" y="12" fill="#6d8496" font-size="11" text-anchor="middle" font-family="inherit">today</text>
-    <text x="40" y="30" fill="#8fd694" font-size="13" font-weight="700" font-family="inherit">A · COMPLETED</text>
-    <text x="40" y="46" fill="#9fb8c8" font-size="12" font-family="inherit">2352 Shattuck · 237 units — 26 months, application to keys</text>
-    <rect x="168" y="50" width="63" height="14" fill="#7ec8e3"/><rect x="233" y="50" width="93" height="14" fill="#ffd166"/><circle cx="332" cy="57" r="5" fill="#8fd694"/>
-    <text x="40" y="80" fill="#9fb8c8" font-size="12" font-family="inherit">2000 Dwight · 113 units — 6.1 years</text>
-    <rect x="139" y="84" width="205" height="14" fill="#7ec8e3"/><rect x="346" y="84" width="223" height="14" fill="#ffd166"/><circle cx="575" cy="91" r="5" fill="#8fd694"/>
-    <text x="40" y="114" fill="#9fb8c8" font-size="12" font-family="inherit">1752 Shattuck · 72 units — 4.4 years</text>
-    <rect x="327" y="118" width="170" height="14" fill="#7ec8e3"/><rect x="499" y="118" width="137" height="14" fill="#ffd166"/><circle cx="642" cy="125" r="5" fill="#8fd694"/>
-    <text x="40" y="156" fill="#ffd166" font-size="13" font-weight="700" font-family="inherit">B · UNDER CONSTRUCTION</text>
-    <text x="40" y="172" fill="#9fb8c8" font-size="12" font-family="inherit">2427 San Pablo · 78 units — building since late 2023</text>
-    <rect x="374" y="176" width="65" height="14" fill="#7ec8e3"/><rect x="441" y="176" width="203" height="14" fill="#ffd166"/>
-    <text x="40" y="206" fill="#9fb8c8" font-size="12" font-family="inherit">2441 Le Conte · 65 units</text>
-    <rect x="430" y="210" width="131" height="14" fill="#7ec8e3"/><rect x="563" y="210" width="81" height="14" fill="#ffd166"/>
-    <text x="40" y="240" fill="#9fb8c8" font-size="12" font-family="inherit">2300 Ellsworth · 69 units</text>
-    <rect x="465" y="244" width="77" height="14" fill="#7ec8e3"/><rect x="544" y="244" width="100" height="14" fill="#ffd166"/>
-    <text x="40" y="282" fill="#7ec8e3" font-size="13" font-weight="700" font-family="inherit">C · ENTITLED — IN THE WAITING ROOM</text>
-    <text x="40" y="298" fill="#9fb8c8" font-size="12" font-family="inherit">1750 Sacramento · 739 units — entitled in 3 months (AB 2011 ministerial)</text>
-    <rect x="602" y="302" width="17" height="14" fill="#7ec8e3"/><rect x="619" y="302" width="25" height="14" fill="#4a6478"/>
-    <text x="40" y="332" fill="#9fb8c8" font-size="12" font-family="inherit">1974 Shattuck · 599 units — entitled June 2025</text>
-    <rect x="417" y="336" width="149" height="14" fill="#7ec8e3"/><rect x="566" y="336" width="78" height="14" fill="#4a6478"/>
-    <text x="40" y="366" fill="#9fb8c8" font-size="12" font-family="inherit">2198 San Pablo · 100 units — entitled 2019, still waiting: 7 years</text>
-    <rect x="69" y="370" width="94" height="14" fill="#7ec8e3"/><rect x="163" y="370" width="481" height="14" fill="#4a6478"/>
-    <line x1="40" y1="400" x2="690" y2="400" stroke="#2b4356" stroke-width="1"/>
-    <g fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">
-      <text x="40" y="418">2018</text><text x="110.9" y="418">19</text><text x="181.8" y="418">20</text>
-      <text x="252.7" y="418">21</text><text x="323.6" y="418">22</text><text x="394.5" y="418">23</text>
-      <text x="465.4" y="418">24</text><text x="536.3" y="418">25</text><text x="607.2" y="418">26</text>
-    </g>
-  </svg>
-  <p class="foot">The pattern in one look: construction (gold) runs 1.5–3 years everywhere — that part is normal.
-  The spread lives in the blue and the gray: the same city that entitles a 739-unit ministerial project in
-  3 months has left a 100-unit entitlement waiting 7 years for its building permit.</p>
-  <div class="src">v2 project timelines (filed/entitled/BP/CO dates; first-BP = MIN building_permit_issued event).
-  Nine projects chosen as the largest in each state with clean, ordered milestone dates; year-precision dates
-  (Jan-1) appear where the source records only a year. Bars start at first application activity.</div>
+  <h2>Two streams: the metronome and the towers</h2>
+  <p>The same 4,229 completed homes, split by <b>building size instead of street</b>:
+  <span style="color:#ffd166">■</span> buildings over 4 units delivered <span class="num">3,382</span>
+  units on just <span class="num">53</span> permits; <span style="color:#7ec8e3">■</span> small
+  projects (1–4 units, mostly ADUs) delivered <span class="num">847</span> on
+  <span class="num">792</span>. <b>The small stream is a metronome</b> — 67–135 units every
+  single year, through COVID, rate spikes, everything — while the tower stream swings 4× with the
+  financing cycle. Policy reads: the ministerial lane produces <i>reliability</i>; the big buildings
+  produce <i>volume</i>.</p>
+  <svg viewBox="0 0 700 236" xmlns="http://www.w3.org/2000/svg" style="max-width:44rem; width:100%; margin:.2rem 0;" role="img">
+    <line x1="24" y1="200" x2="690" y2="200" stroke="#2b4356" stroke-width="1"/>
+    <rect x="30" y="187.2" width="62" height="12.8" fill="#7ec8e3"/>
+    <rect x="30" y="154.9" width="62" height="30.2" fill="#ffd166"/>
+    <text x="61" y="149" fill="#eef3f6" font-size="13" font-weight="700" text-anchor="middle" font-family="inherit">225</text>
+    <text x="61" y="218" fill="#9fb8c8" font-size="13" text-anchor="middle" font-family="inherit">2018</text>
+    <rect x="112" y="179.5" width="62" height="20.5" fill="#7ec8e3"/>
+    <rect x="112" y="138.1" width="62" height="39.4" fill="#ffd166"/>
+    <text x="143" y="132" fill="#eef3f6" font-size="13" font-weight="700" text-anchor="middle" font-family="inherit">313</text>
+    <text x="143" y="218" fill="#9fb8c8" font-size="13" text-anchor="middle" font-family="inherit">19</text>
+    <rect x="194" y="184.1" width="62" height="15.9" fill="#7ec8e3"/>
+    <rect x="194" y="120.5" width="62" height="61.6" fill="#ffd166"/>
+    <text x="225" y="114" fill="#eef3f6" font-size="13" font-weight="700" text-anchor="middle" font-family="inherit">405</text>
+    <text x="225" y="218" fill="#9fb8c8" font-size="13" text-anchor="middle" font-family="inherit">20</text>
+    <rect x="276" y="175.9" width="62" height="24.1" fill="#7ec8e3"/>
+    <rect x="276" y="118.6" width="62" height="55.3" fill="#ffd166"/>
+    <text x="307" y="113" fill="#eef3f6" font-size="13" font-weight="700" text-anchor="middle" font-family="inherit">415</text>
+    <text x="307" y="218" fill="#9fb8c8" font-size="13" text-anchor="middle" font-family="inherit">21</text>
+    <rect x="358" y="182.8" width="62" height="17.2" fill="#7ec8e3"/>
+    <rect x="358" y="38.0" width="62" height="142.8" fill="#ffd166"/>
+    <text x="389" y="32" fill="#eef3f6" font-size="13" font-weight="700" text-anchor="middle" font-family="inherit">836</text>
+    <text x="389" y="218" fill="#9fb8c8" font-size="13" text-anchor="middle" font-family="inherit">22</text>
+    <rect x="440" y="175.3" width="62" height="24.7" fill="#7ec8e3"/>
+    <rect x="440" y="60.2" width="62" height="113.1" fill="#ffd166"/>
+    <text x="471" y="54" fill="#eef3f6" font-size="13" font-weight="700" text-anchor="middle" font-family="inherit">720</text>
+    <text x="471" y="218" fill="#9fb8c8" font-size="13" text-anchor="middle" font-family="inherit">23</text>
+    <rect x="522" y="178.9" width="62" height="21.1" fill="#7ec8e3"/>
+    <rect x="522" y="61.2" width="62" height="115.8" fill="#ffd166"/>
+    <text x="553" y="55" fill="#eef3f6" font-size="13" font-weight="700" text-anchor="middle" font-family="inherit">715</text>
+    <text x="553" y="218" fill="#9fb8c8" font-size="13" text-anchor="middle" font-family="inherit">24</text>
+    <rect x="604" y="174.2" width="62" height="25.8" fill="#7ec8e3"/>
+    <rect x="604" y="83.2" width="62" height="89.0" fill="#ffd166"/>
+    <text x="635" y="77" fill="#eef3f6" font-size="13" font-weight="700" text-anchor="middle" font-family="inherit">600</text>
+    <text x="635" y="218" fill="#9fb8c8" font-size="13" text-anchor="middle" font-family="inherit">25</text>
+    </svg>
+  <div class="src">Same universe as the previous slide (v4 finaled new-unit master permits, net units, 2018–2025 —
+  sums to the audit 4,229). Size = net units on the permit. Note vs the corridor slide: size ≠ street — 1,442 units
+  of 5+ buildings stand on non-arterial downtown side streets (Kittredge, Berkeley Way, Milvia…).</div>
+</section>
+
+<section class="slide">
+  <h2>The long road, 1 of 3 — the majors that finished</h2>
+  <p><span style="color:#7ec8e3">■</span> intake (application → deemed complete) &nbsp;<span style="color:#ff9f7f">■</span> consideration (deemed complete → entitlement) &nbsp;<span style="color:#4a6478">■</span> entitled — waiting for building permit &nbsp;<span style="color:#ffd166">■</span> construction &nbsp;<span style="color:#8fd694">●</span> certificate of occupancy</p>
+  <svg viewBox="0 0 700 478" xmlns="http://www.w3.org/2000/svg" style="max-width:44rem; width:100%; margin:.2rem 0;" role="img">
+    <line x1="628" y1="16" x2="628" y2="446" stroke="#6d8496" stroke-width="1" stroke-dasharray="3,3"/>
+    <text x="628" y="12" fill="#6d8496" font-size="11" text-anchor="middle" font-family="inherit">today</text>
+    <text x="40" y="35" fill="#9fb8c8" font-size="12" font-family="inherit">2352 Shattuck Ave · 237 units</text>
+    <rect x="55.8" y="39" width="42.2" height="13" fill="#ff9f7f"/>
+    <rect x="98.0" y="39" width="69.7" height="13" fill="#4a6478"/>
+    <rect x="167.8" y="39" width="106.1" height="13" fill="#ffd166"/>
+    <circle cx="273.9" cy="45.5" r="4.5" fill="#8fd694"/>
+    <text x="40" y="69" fill="#9fb8c8" font-size="12" font-family="inherit">2150 Kittredge St · 169 units ※</text>
+    <rect x="352.7" y="73" width="93.5" height="13" fill="#ffd166"/>
+    <circle cx="446.2" cy="79.5" r="4.5" fill="#8fd694"/>
+    <text x="40" y="103" fill="#9fb8c8" font-size="12" font-family="inherit">1951 Shattuck Ave · 163 units — journey unrecorded in the feed</text>
+    <circle cx="493.5" cy="113.5" r="4.5" fill="#8fd694"/>
+    <text x="40" y="137" fill="#9fb8c8" font-size="12" font-family="inherit">1500 San Pablo Ave · 159 units — journey unrecorded in the feed</text>
+    <circle cx="168.0" cy="147.5" r="4.5" fill="#8fd694"/>
+    <text x="40" y="171" fill="#9fb8c8" font-size="12" font-family="inherit">3030 Telegraph Ave · 144 units ※</text>
+    <rect x="409.2" y="175" width="183.6" height="13" fill="#ffd166"/>
+    <circle cx="592.8" cy="181.5" r="4.5" fill="#8fd694"/>
+    <text x="40" y="205" fill="#9fb8c8" font-size="12" font-family="inherit">2012 Berkeley Way · 142 units — journey unrecorded in the feed</text>
+    <circle cx="328.4" cy="215.5" r="4.5" fill="#8fd694"/>
+    <text x="40" y="239" fill="#9fb8c8" font-size="12" font-family="inherit">2580 Bancroft Way · 117 units — journey unrecorded in the feed</text>
+    <circle cx="263.9" cy="249.5" r="4.5" fill="#8fd694"/>
+    <text x="40" y="273" fill="#9fb8c8" font-size="12" font-family="inherit">2000 Dwight Way · 113 units</text>
+    <rect x="64.9" y="277" width="87.5" height="13" fill="#7ec8e3"/>
+    <rect x="152.4" y="277" width="19.7" height="13" fill="#ff9f7f"/>
+    <rect x="172.1" y="277" width="122.1" height="13" fill="#4a6478"/>
+    <rect x="294.2" y="277" width="250.1" height="13" fill="#ffd166"/>
+    <circle cx="544.3" cy="283.5" r="4.5" fill="#8fd694"/>
+    <text x="40" y="307" fill="#9fb8c8" font-size="12" font-family="inherit">2100 San Pablo Ave · 96 units — journey unrecorded in the feed</text>
+    <circle cx="376.3" cy="317.5" r="4.5" fill="#8fd694"/>
+    <text x="40" y="341" fill="#9fb8c8" font-size="12" font-family="inherit">2001 Ashby Ave · 87 units</text>
+    <rect x="277.6" y="345" width="1.0" height="13" fill="#4a6478"/>
+    <rect x="278.4" y="345" width="262.5" height="13" fill="#ffd166"/>
+    <circle cx="540.9" cy="351.5" r="4.5" fill="#8fd694"/>
+    <text x="40" y="375" fill="#9fb8c8" font-size="12" font-family="inherit">2590 Bancroft Way · 87 units — journey unrecorded in the feed</text>
+    <circle cx="419.0" cy="385.5" r="4.5" fill="#8fd694"/>
+    <text x="40" y="409" fill="#9fb8c8" font-size="12" font-family="inherit">2000 University Ave · 82 units ※</text>
+    <rect x="386.0" y="413" width="43.1" height="13" fill="#ffd166"/>
+    <circle cx="429.1" cy="419.5" r="4.5" fill="#8fd694"/>
+    <line x1="40" y1="448" x2="660" y2="448" stroke="#2b4356"/>
+    <text x="113" y="464" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">2020</text>
+    <text x="192" y="464" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">21</text>
+    <text x="271" y="464" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">22</text>
+    <text x="350" y="464" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">23</text>
+    <text x="429" y="464" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">24</text>
+    <text x="508" y="464" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">25</text>
+    <text x="587" y="464" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">26</text>
+    </svg>
+  <p class="foot">※ early milestones unrecorded in the permit feed (these entered our record at the building
+  permit). Where the full chain exists, the four stages are visible — including the waiting room (gray) even in
+  projects that finished.</p>
+  <div class="src">v2 major projects (≥50 units) with a CO, largest first, capped at 12; stage dates from
+  project_events (deemed-complete = application_complete, scraped from city-portal detail pages; first BP = MIN
+  building_permit_issued). Bars begin at the earliest recorded milestone.</div>
+</section>
+
+<section class="slide">
+  <h2>The long road, 2 of 3 — under construction now</h2>
+  <p><span style="color:#7ec8e3">■</span> intake (application → deemed complete) &nbsp;<span style="color:#ff9f7f">■</span> consideration (deemed complete → entitlement) &nbsp;<span style="color:#4a6478">■</span> entitled — waiting for building permit &nbsp;<span style="color:#ffd166">■</span> construction &nbsp;<span style="color:#8fd694">●</span> certificate of occupancy</p>
+  <svg viewBox="0 0 700 444" xmlns="http://www.w3.org/2000/svg" style="max-width:44rem; width:100%; margin:.2rem 0;" role="img">
+    <line x1="633" y1="16" x2="633" y2="412" stroke="#6d8496" stroke-width="1" stroke-dasharray="3,3"/>
+    <text x="633" y="12" fill="#6d8496" font-size="11" text-anchor="middle" font-family="inherit">today</text>
+    <text x="40" y="35" fill="#9fb8c8" font-size="12" font-family="inherit">1598 University Ave · 207 units</text>
+    <rect x="470.3" y="39" width="49.1" height="13" fill="#ff9f7f"/>
+    <rect x="519.4" y="39" width="113.9" height="13" fill="#ffd166"/>
+    <text x="40" y="69" fill="#9fb8c8" font-size="12" font-family="inherit">1701 San Pablo Ave · 110 units</text>
+    <rect x="49.0" y="73" width="443.8" height="13" fill="#4a6478"/>
+    <rect x="492.8" y="73" width="140.4" height="13" fill="#ffd166"/>
+    <text x="40" y="103" fill="#9fb8c8" font-size="12" font-family="inherit">2538 Durant Ave · 83 units</text>
+    <rect x="464.1" y="107" width="89.2" height="13" fill="#ff9f7f"/>
+    <rect x="553.3" y="107" width="79.9" height="13" fill="#ffd166"/>
+    <text x="40" y="137" fill="#9fb8c8" font-size="12" font-family="inherit">2680 Bancroft Way · 79 units</text>
+    <rect x="529.0" y="141" width="5.2" height="13" fill="#7ec8e3"/>
+    <rect x="534.2" y="141" width="1.0" height="13" fill="#ff9f7f"/>
+    <rect x="534.6" y="141" width="98.6" height="13" fill="#ffd166"/>
+    <text x="40" y="171" fill="#9fb8c8" font-size="12" font-family="inherit">2138 Kittredge St · 73 units</text>
+    <rect x="550.1" y="175" width="1.0" height="13" fill="#7ec8e3"/>
+    <rect x="550.1" y="175" width="5.1" height="13" fill="#ff9f7f"/>
+    <rect x="555.2" y="175" width="78.1" height="13" fill="#ffd166"/>
+    <text x="40" y="205" fill="#9fb8c8" font-size="12" font-family="inherit">2300 Ellsworth St · 69 units</text>
+    <rect x="555.8" y="209" width="39.0" height="13" fill="#4a6478"/>
+    <rect x="594.8" y="209" width="38.4" height="13" fill="#ffd166"/>
+    <text x="40" y="239" fill="#9fb8c8" font-size="12" font-family="inherit">2441 Le Conte Ave · 65 units</text>
+    <rect x="499.0" y="243" width="81.2" height="13" fill="#7ec8e3"/>
+    <rect x="580.2" y="243" width="53.0" height="13" fill="#ffd166"/>
+    <text x="40" y="273" fill="#9fb8c8" font-size="12" font-family="inherit">1740 San Pablo Ave · 54 units ※</text>
+    <rect x="608.1" y="277" width="25.2" height="13" fill="#ffd166"/>
+    <text x="40" y="307" fill="#9fb8c8" font-size="12" font-family="inherit">2902 Adeline St · 54 units</text>
+    <rect x="169.6" y="311" width="276.3" height="13" fill="#ff9f7f"/>
+    <rect x="445.9" y="311" width="73.5" height="13" fill="#4a6478"/>
+    <rect x="519.4" y="311" width="113.9" height="13" fill="#ffd166"/>
+    <text x="40" y="341" fill="#9fb8c8" font-size="12" font-family="inherit">2587 Telegraph Ave · 52 units</text>
+    <rect x="509.3" y="345" width="10.0" height="13" fill="#ff9f7f"/>
+    <rect x="519.4" y="345" width="113.9" height="13" fill="#ffd166"/>
+    <text x="40" y="375" fill="#9fb8c8" font-size="12" font-family="inherit">2016 Ashby Ave · 50 units ※</text>
+    <rect x="538.2" y="379" width="95.0" height="13" fill="#ffd166"/>
+    <line x1="40" y1="414" x2="660" y2="414" stroke="#2b4356"/>
+    <text x="67" y="430" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">2014</text>
+    <text x="112" y="430" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">15</text>
+    <text x="158" y="430" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">16</text>
+    <text x="203" y="430" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">17</text>
+    <text x="248" y="430" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">18</text>
+    <text x="293" y="430" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">19</text>
+    <text x="338" y="430" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">20</text>
+    <text x="384" y="430" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">21</text>
+    <text x="429" y="430" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">22</text>
+    <text x="474" y="430" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">23</text>
+    <text x="519" y="430" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">24</text>
+    <text x="565" y="430" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">25</text>
+    <text x="610" y="430" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">26</text>
+    </svg>
+  <p class="foot">Gold bars run to today. The specimen to see: <b>1701 San Pablo — entitled in 2013,
+  a decade in the gray waiting room</b> before its 2023 building permit.</p>
+  <div class="src">v2 major projects (≥50 units) with a building permit and no CO, largest first, capped at 12.
+  Same stage vocabulary as the previous slide.</div>
+</section>
+
+<section class="slide">
+  <h2>The long road, 3 of 3 — entitled, waiting for a permit</h2>
+  <p><span style="color:#7ec8e3">■</span> intake (application → deemed complete) &nbsp;<span style="color:#ff9f7f">■</span> consideration (deemed complete → entitlement) &nbsp;<span style="color:#4a6478">■</span> entitled — waiting for building permit &nbsp;<span style="color:#ffd166">■</span> construction &nbsp;<span style="color:#8fd694">●</span> certificate of occupancy</p>
+  <svg viewBox="0 0 700 478" xmlns="http://www.w3.org/2000/svg" style="max-width:44rem; width:100%; margin:.2rem 0;" role="img">
+    <line x1="633" y1="16" x2="633" y2="446" stroke="#6d8496" stroke-width="1" stroke-dasharray="3,3"/>
+    <text x="633" y="12" fill="#6d8496" font-size="11" text-anchor="middle" font-family="inherit">today</text>
+    <text x="40" y="35" fill="#9fb8c8" font-size="12" font-family="inherit">1750 Sacramento St · 739 units</text>
+    <rect x="606.4" y="39" width="11.1" height="13" fill="#7ec8e3"/>
+    <rect x="617.5" y="39" width="15.8" height="13" fill="#4a6478"/>
+    <text x="40" y="69" fill="#9fb8c8" font-size="12" font-family="inherit">1974 Shattuck Ave · 599 units</text>
+    <rect x="489.2" y="73" width="43.3" height="13" fill="#7ec8e3"/>
+    <rect x="532.6" y="73" width="51.3" height="13" fill="#ff9f7f"/>
+    <rect x="583.9" y="73" width="49.4" height="13" fill="#4a6478"/>
+    <text x="40" y="103" fill="#9fb8c8" font-size="12" font-family="inherit">2128 Oxford St · 485 units</text>
+    <rect x="484.4" y="107" width="1.0" height="13" fill="#7ec8e3"/>
+    <rect x="484.4" y="107" width="69.8" height="13" fill="#ff9f7f"/>
+    <rect x="554.2" y="107" width="79.0" height="13" fill="#4a6478"/>
+    <text x="40" y="137" fill="#9fb8c8" font-size="12" font-family="inherit">2276 Shattuck Ave · 336 units</text>
+    <rect x="591.9" y="141" width="1.0" height="13" fill="#7ec8e3"/>
+    <rect x="591.9" y="141" width="14.6" height="13" fill="#ff9f7f"/>
+    <rect x="606.5" y="141" width="26.7" height="13" fill="#4a6478"/>
+    <text x="40" y="171" fill="#9fb8c8" font-size="12" font-family="inherit">2274 Shattuck Ave · 299 units</text>
+    <rect x="497.2" y="175" width="23.3" height="13" fill="#7ec8e3"/>
+    <rect x="520.5" y="175" width="58.2" height="13" fill="#ff9f7f"/>
+    <rect x="578.7" y="175" width="54.5" height="13" fill="#4a6478"/>
+    <text x="40" y="205" fill="#9fb8c8" font-size="12" font-family="inherit">2029 University Ave · 240 units</text>
+    <rect x="563.6" y="209" width="20.3" height="13" fill="#7ec8e3"/>
+    <rect x="583.9" y="209" width="20.1" height="13" fill="#ff9f7f"/>
+    <rect x="604.0" y="209" width="29.3" height="13" fill="#4a6478"/>
+    <text x="40" y="239" fill="#9fb8c8" font-size="12" font-family="inherit">1899 Oxford St · 212 units</text>
+    <rect x="542.8" y="243" width="14.8" height="13" fill="#7ec8e3"/>
+    <rect x="557.5" y="243" width="57.5" height="13" fill="#ff9f7f"/>
+    <rect x="615.0" y="243" width="18.2" height="13" fill="#4a6478"/>
+    <text x="40" y="273" fill="#9fb8c8" font-size="12" font-family="inherit">2100 Milvia St · 205 units</text>
+    <rect x="518.6" y="277" width="18.3" height="13" fill="#7ec8e3"/>
+    <rect x="537.0" y="277" width="50.4" height="13" fill="#ff9f7f"/>
+    <rect x="587.3" y="277" width="45.9" height="13" fill="#4a6478"/>
+    <text x="40" y="307" fill="#9fb8c8" font-size="12" font-family="inherit">2131 University Ave · 205 units</text>
+    <rect x="49.0" y="311" width="584.3" height="13" fill="#4a6478"/>
+    <text x="40" y="341" fill="#9fb8c8" font-size="12" font-family="inherit">2065 Kittredge St · 189 units</text>
+    <rect x="410.2" y="345" width="223.1" height="13" fill="#4a6478"/>
+    <text x="40" y="375" fill="#9fb8c8" font-size="12" font-family="inherit">2015 Blake St · 168 units</text>
+    <rect x="363.9" y="379" width="269.4" height="13" fill="#4a6478"/>
+    <text x="40" y="409" fill="#9fb8c8" font-size="12" font-family="inherit">3000 Shattuck Ave · 166 units</text>
+    <rect x="446.3" y="413" width="10.3" height="13" fill="#7ec8e3"/>
+    <rect x="456.6" y="413" width="117.0" height="13" fill="#ff9f7f"/>
+    <rect x="573.6" y="413" width="59.7" height="13" fill="#4a6478"/>
+    <line x1="40" y1="448" x2="660" y2="448" stroke="#2b4356"/>
+    <text x="71" y="464" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">2014</text>
+    <text x="116" y="464" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">15</text>
+    <text x="161" y="464" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">16</text>
+    <text x="206" y="464" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">17</text>
+    <text x="251" y="464" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">18</text>
+    <text x="295" y="464" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">19</text>
+    <text x="340" y="464" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">20</text>
+    <text x="385" y="464" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">21</text>
+    <text x="430" y="464" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">22</text>
+    <text x="475" y="464" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">23</text>
+    <text x="520" y="464" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">24</text>
+    <text x="565" y="464" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">25</text>
+    <text x="610" y="464" fill="#9fb8c8" font-size="12" text-anchor="middle" font-family="inherit">26</text>
+    </svg>
+  <p class="foot">The orange is the finding: for these majors the median <b>consideration</b> stage
+  (deemed complete → entitlement) runs <b>410 days</b> — the back-and-forth intake before it, 84.
+  The clock the law tracks starts at deemed-complete; that's the stage to watch.</p>
+  <div class="src">v2 major projects (≥50 units) entitled with no building permit, largest first, capped at 12.
+  Deemed-complete dates exist for 43 of 91 majors (city-portal detail pages); elapsed time includes lawful
+  tolling (resubmittals, CEQA) — screens, not violation counts.</div>
+</section>
+
+<section class="slide">
+  <h2>The pipeline in one picture — every major application since 2013</h2>
+  <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" style="max-width:44rem; width:100%; margin:.2rem 0;" role="img">
+    <rect x="34" y="40" width="6" height="190" fill="#eef3f6" opacity=".9"/>
+    <polygon points="40,40 250,40 250,168.8505747126437 40,168.8505747126437" fill="#ff9f7f" opacity="0.85"/>
+    <polygon points="40,168.8505747126437 250,198.8505747126437 250,257.816091954023 40,227.81609195402302" fill="#7ec8e3" opacity="0.45"/>
+    <polygon points="40,227.81609195402302 190,285.816091954023 190,288.00000000000006 40,230.00000000000003" fill="#6d8496" opacity="0.35"/>
+    <rect x="250" y="40" width="6" height="129" fill="#eef3f6" opacity=".9"/>
+    <polygon points="256,40 460,40 460,120.80459770114943 256,120.80459770114943" fill="#4a6478" opacity="0.85"/>
+    <polygon points="256,120.80459770114943 460,146.80459770114942 460,194.85057471264366 256,168.8505747126437" fill="#4a6478" opacity="0.45"/>
+    <rect x="460" y="40" width="6" height="81" fill="#eef3f6" opacity=".9"/>
+    <polygon points="466,40 620,40 620,94.59770114942529 466,94.59770114942529" fill="#ffd166" opacity="0.85"/>
+    <polygon points="466,94.59770114942529 620,114.59770114942529 620,140.80459770114942 466,120.80459770114943" fill="#ffd166" opacity="0.45"/>
+    <rect x="620" y="40" width="6" height="55" fill="#8fd694"/>
+    <text x="34" y="18" fill="#eef3f6" font-size="13" font-weight="600" text-anchor="start" font-family="inherit">87 major applications</text>
+    <text x="250" y="32" fill="#ff9f7f" font-size="13" font-weight="600" text-anchor="middle" font-family="inherit">59 entitled</text>
+    <text x="460" y="32" fill="#9fb8c8" font-size="13" font-weight="600" text-anchor="middle" font-family="inherit">37 permitted</text>
+    <text x="628" y="32" fill="#8fd694" font-size="13" font-weight="600" text-anchor="end" font-family="inherit">25 completed</text>
+    <text x="210" y="228" fill="#7ec8e3" font-size="13" font-weight="600" text-anchor="start" font-family="inherit">27 still before entitlement</text>
+    <text x="150" y="293" fill="#6d8496" font-size="13" font-weight="600" text-anchor="start" font-family="inherit">1 withdrawn by applicant</text>
+    <text x="420" y="171" fill="#9fb8c8" font-size="13" font-weight="600" text-anchor="start" font-family="inherit">22 entitled — waiting for permit</text>
+    <text x="614" y="157" fill="#ffd166" font-size="13" font-weight="600" text-anchor="end" font-family="inherit">12 under construction</text>
+    <text x="34" y="282" fill="#8fd694" font-size="14" font-weight="700" font-family="inherit">Denied: 0</text>
+    </svg>
+  <p class="foot">All <span class="num">87</span> major (≥50-unit) housing applications
+  in our record: <span class="num">59</span> entitled, <span class="num">37</span> reached a
+  building permit, <span class="num">25</span> completed (2,458 units delivered) — and
+  <b>not one denied</b>. The pipe doesn't close; it narrows by waiting: 22 entitled projects
+  (4,777 units) sit in the waiting room and 27 (4,087 units proposed) haven't reached
+  entitlement yet. <span class="num">1</span> (58 units) were withdrawn by their applicants —
+  the only exits are voluntary. (Three more permitted projects carry a "withdrawn" status —
+  flagged to the stalled register, kept as under-construction here because their issued permits are
+  hard evidence.)</p>
+  <div class="src">v2 major projects ≥50 units, UC excluded (self-permitted, counted in beds). Band heights ∝
+  project counts. "Still before entitlement" includes applications in intake and under consideration —
+  the harvest shows Berkeley denies almost nothing at any scale (743 approved vs 52 denied citywide).</div>
 </section>
 
 <section class="slide">

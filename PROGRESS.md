@@ -4,6 +4,26 @@
 
 ---
 
+## 2026-07-08 (later) — 🚀 SITE DEPLOYED ×5 (dev→main→push, John's call each); ADU curve on deck; PL page
+All of today's work is LIVE on berkeleybuild.com (main == dev == `4e58b66`). (1) **Home page:**
+Report-to-the-Mayor badge (navy/gold pill, 80% width) above the videos → `mayor-briefing-2026-07.html`;
+Reading box moved below videos; hero subhead in matching badge style ("grow and innovate…stronger
+critical infrastructure"). (2) **Deck slide 1: ADU completion curve** (gold SVG columns) —
+**2,112 ADUs completed by CO/permit-final year 2018-25** (17/50/57/73/173/464/643/635; 83% in
+2023-25; 767 issued-not-yet-finaled), derived read-only from v4, scripts in `scratch/2026-07-08/`.
+Verified same-day: 3-day ADU median (3.0d, 32% same-day) + 2,881 cohort EXACT (classifier hash
+matches baseline); John-phrasing caveats: "issued since 2018-01-01" strictly = 2,857; ~2.5% of
+cohort is ancillary (garage demos) → "ADU-associated" is the safe public verb. (3) **Possibility
+Lab test page** (`docs/possibility-lab-test.html`, linked from deck title slide via gold
+"PL Multi-City Open Data APR Test" badge) + note to Laura/Amy/Lindsay
+(`notes/2026-07-08_possibility_lab_note.md`): the JN1→JN6b curriculum as an any-city APR builder.
+**City data-doors LIVE-VERIFIED 2026-07-08:** SF DataSF API 1,291,721 rows w/ units+ADU fields
+(easiest); Fresno = Accela ACA (harvester applies; download-vs-pagination needs a CIC probe,
+queued); Delano = SmartGov, no bulk export → CPRA is the path; HCD A2 oracle carries all four
+cities per-year 2018-25 (Fresno ~2k rows/yr, Delano ~55-160, Berkeley ~230-260). NEXT (unchanged
++ new): detailed financial deck (fee-ledger CPRA = critical path — SEND the drafted NextRequest
+CPRAs); CIC queue adds the Fresno ACA probe alongside the slide-5 ground-floor check.
+
 ## 2026-07-08 — ✅ MAYOR MEETING DELIVERED; deck VERIFIED-STILL-ACCURATE; deck STAYS for the merge
 John presented to the Mayor and told Shoshana O'Keefe the curriculum is near-ready (it IS: 17
 notebooks live on main, Colab-verified 2026-07-03; open items are polish only — R2 tarball

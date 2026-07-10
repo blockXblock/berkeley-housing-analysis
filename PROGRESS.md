@@ -4,6 +4,12 @@
 
 ---
 
+## 2026-07-10 (later³) — 📄 APR ARTIFACTS 2021-2026 REGENERATED (staged+diffed, then published)
+generate_apr_v2 rerun for all six years → staging → per-file diff vs published BEFORE copying.
+Every diff traced to gated writes #1-#3 (no unrelated drift): re-crediting (2000 Dwight →2022
+pre-boundary; 3030 Telegraph →2023; 1367 University within-year refine) + backfilled filed/BP
+dates on completed-major rows. 24 files updated. CLAUDE.md MIN note committed (`7e4fe3d`).
+
 ## 2026-07-10 (later²) — ✍️ GATED WRITE #3: bp_issued_date MAX→MIN — the RHNA cycle-flip trap CLOSED
 **View fix EXECUTED** (John's go; snapshot `keep_snapshot_2026-07-10_pre-bp-min.db`; one rollback en
 route — an inline `--` comment broke the view SQL; retried commentless): v_projects_flat.bp_issued_date

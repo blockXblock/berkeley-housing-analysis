@@ -4,6 +4,22 @@
 
 ---
 
+## 2026-07-09 (later) — 📓 JN-K COMMITTED (gate PASS) + 🟩 RHNA BAR RESTORED
+**JN-K completion anatomy** (`scripts/v4/build_jn_k.py` → `notebooks/v4/JN-K_completion_anatomy.ipynb`,
+`2528427`): consolidates the deck derivations — located 4,229 (ANCHORED to JN-E's co_completions,
+dynamic not hardcoded), corridor 2,016u/94p vs fabric 2,213u/751p, size 3,382u/53p vs 847u/792p,
+deemed-complete medians 84d/410d, funnel 87→59→37→25 (denied 0/withdrawn 1), 2025 gap +108
+(+101 ours-only incl. 2 GROUP-LIVING bldgs 80u — "omits" not "wrong", sleeping-units definitional
+caveat). Baseline `completion_anatomy_baseline_2026-07-09.json`; re-run gate PASS. 5 honesty rails
+incl. count=v4/geometry=v2. **RHNA BAR RESTORED on explorer.html** (`a5eb6f7`) — the 2026-06-16
+hold's restore condition (full city BP stream) is MET: v4 first-issuance ≥2022-06-30 = **1,959u/424
+permits = 21.9%** of 8,934 (by yr: 340/533/595/489; floor — 2026 lags feed); HCD dashboard's own
+credit 1,608u (18.0%, lags CY2025 APR) shown as dashed marker; tier split = HCD's accounting,
+LABELED (feed has no affordability fields — we cannot tier independently); 9k-triage (6a4235b)
+= the zero-missing-housing-permits evidence. Derivation scratch/2026-07-09/rhna_bar_derivation.py;
+TODO fold into export_explorer_data_v2.py. ⚠ noted, unresolved: index.html's old APR-correction
+table (263/245 "actual") is v1-era, contradicts v4 permit-level (489/595) — John to review.
+
 ## 2026-07-09 — 🎬 DECK REBUILT AS THE FULL DATA STORY (17 slides); v4-grounding correction; four-stage scheme
 Deck grew title→one-breath→completions→two-streams→long-road×3→Sankey→original 1-9. (1) **Title slide:**
 John's fact-check wording (permit-level, 2015-2026 building+zoning, County Assessor; "fees paid" HELD out

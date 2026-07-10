@@ -148,11 +148,16 @@ def get_projects(conn):
         mod_units = _tiers.get('MOD', 0)
         market_units = _tiers.get('ABOVE_MOD', 0)
 
-        # Key event dates (MAX event_date per event_type)
+        # Key event dates (MAX event_date per event_type; application_submitted uses MIN =
+        # FIRST application — fixed 2026-07-10 to match v_projects_flat.filed_date, which was
+        # corrected from the MAX placeholder-shadow trap. app_complete/entitled remain MAX
+        # (changing their semantics is a separate, deliberate decision).
         # Include construction-related events for inactive detection
         event_cur = conn.cursor()
         event_cur.execute('''
-            SELECT vet.code, MAX(pe.event_date)
+            SELECT vet.code,
+                   CASE WHEN vet.code = 'application_submitted'
+                        THEN MIN(pe.event_date) ELSE MAX(pe.event_date) END
             FROM project_events pe
             JOIN vocabulary_event_types vet ON vet.id = pe.event_type_id
             WHERE pe.project_id = ?

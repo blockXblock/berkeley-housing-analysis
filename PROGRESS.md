@@ -4,6 +4,17 @@
 
 ---
 
+## 2026-07-10 (later²) — ✍️ GATED WRITE #3: bp_issued_date MAX→MIN — the RHNA cycle-flip trap CLOSED
+**View fix EXECUTED** (John's go; snapshot `keep_snapshot_2026-07-10_pre-bp-min.db`; one rollback en
+route — an inline `--` comment broke the view SQL; retried commentless): v_projects_flat.bp_issued_date
+= MIN(non-subsidiary building_permit_issued). Preview→exact-set verify: **8 projects** (6 reporting-year
+changes). **The documented trap specimen materialized: proj173 2000 Dwight first-BP 2022-04-18 —
+PRE-boundary — no longer flips to 6th cycle on its 2023 revision.** Consistent w/ v4 RHNA bar (already
+MIN). generate_apr_v2 reporting-year crediting now correct-by-view (next APR regeneration will reflect;
+no published APR artifact regenerated yet — queued). Explorer regenerated+diffed (8 bp dates only,
+no inactive-flag flips)+deployed. CLAUDE.md's bp-MAX warning is now historical (both filed_date and
+bp_issued_date are MIN); CLAUDE.md edit queued as the deliberate canonical-fact change.
+
 ## 2026-07-10 (later) — ✍️ GATED WRITE #2: filed_date MAX→MIN (view + export); explorer republished
 **View fix EXECUTED** (John's go; snapshot `keep_snapshot_2026-07-10_pre-filed-date-min.db`):
 v_projects_flat.filed_date = MIN(application_submitted) (was MAX — the placeholder-shadow trap).

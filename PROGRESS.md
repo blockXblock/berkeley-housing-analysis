@@ -4,6 +4,24 @@
 
 ---
 
+## 2026-07-10 — ✍️ GATED v2 WRITE #1 (application-date backfill) + 'HARD CITY' SLIDE
+**THE GATED WRITE (John's go): 14 project_events rows COMMITTED** (ids 4365-4378; snapshot
+`keep_snapshot_2026-07-09_pre-appdate-backfill.db`; preview → transactional → verify-or-rollback ×2
+(constraint vocab: precision='exact', source_type='document' not cpra_feed) → fresh-connection
+fingerprint OK). 10 application_submitted (city_portal, ZP/PLN record numbers in summaries) + 4
+building_permit_issued (document/CPRA). **Flat now shows 5 filed + 4 BP dates** (proj895 1500 San
+Pablo 2015-03-02 etc.). ⚠ **FOUND: v_projects_flat.filed_date uses MAX(application_submitted)** —
+same trap as the documented bp_issued_date MAX; 5 backfilled dates (proj136/150/96/137/154) are
+recorded as evidence but SHADOWED by Jan-1 placeholder events until the view is fixed to MIN.
+**PROPOSED (gated, John to approve): view fix filed_date MAX→MIN** (and consider bp_issued_date
+MIN per the RHNA rule — check generate_apr_v2 consumers first). **'HARD CITY' SLIDE added**
+(`c10d4b1`, deck now 19 sections): 2022 PMP (214.16 centerline mi = 21.76 arterial/36.99 collector/
+155.41 residential; 448.73 lane-mi; 39.63M sqft; PCI 55); SSMP (~254 mi sewers, 7,200 manholes,
+31,600 laterals, 6" VCP workhorse, 227 mi rehabbed since 1986); WMP 2011 Table 2-2 (6,156 ac;
+streets 848 + sidewalks 182 ac = 17% public pavement; impervious Gilman 34% / Potter 55%);
+asphalt ≈960k tons MODELED (4" avg depth, streets only). Citywide impervious % = NLCD pull queued.
+PDFs mined via pypdf (WebFetch saves binary; pypdf extracts — the PMP/SSMP/WMP path).
+
 ## 2026-07-09 (later still) — 🎓 CURRICULUM LOOSE ENDS CLOSED (Shoshana-ready) + CO MAP
 All three open polish items DONE (`f0d9d66`): (1) **R2 modules tarball re-uploaded + verified**
 (was STALE: 3 outdated housing_rules files, permit_role.py MISSING; now matches repo; upload via

@@ -1,0 +1,30 @@
+{
+ "as_of": "2026-07-10",
+ "v4_sha": "48fbb84",
+ "anchor": "reconciliation_baseline_2026-07-03i.json",
+ "provenance": "APPEND after 2026-07-10 gated writes (evidence-append-only). Deltas vs 2026-07-09: ac_majors_covered 43->44 (proj150 3030 Telegraph deemed-complete 2023-02-24 ingested from ZP2022-0170 workflow, gated write #4); median_intake_days 84->113 (the filed_date MAX->MIN view fix surfaced earlier true application dates for several majors, changing the intake-pair set, plus the new proj150 pair). median_consideration_days unchanged (410). All other figures identical.",
+ "figures": {
+  "co_units_2018_2025": 4229,
+  "co_permits": 845,
+  "corridor_units": 2016,
+  "corridor_permits": 94,
+  "fabric_units": 2213,
+  "fabric_permits": 751,
+  "small_units": 847,
+  "small_permits": 792,
+  "large_units": 3382,
+  "large_permits": 53,
+  "large_units_nonarterial": 1442,
+  "majors_nonuc": 87,
+  "majors_entitled": 59,
+  "majors_permitted": 37,
+  "majors_completed": 25,
+  "majors_withdrawn": 1,
+  "majors_denied": 0,
+  "ac_majors_covered": 44,
+  "median_intake_days": 113,
+  "median_consideration_days": 410,
+  "gap2025_total": 108,
+  "gap2025_ours_only": 101
+ }
+}

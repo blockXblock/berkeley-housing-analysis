@@ -1,6 +1,6 @@
 {
   "year": 2021,
-  "generated": "2026-06-16T14:04:35.034488",
+  "generated": "2026-07-10T14:09:43.507553",
   "schema_version": "v2 (Stage 1 migration)",
   "table_a": {
     "title": "Table A: Applications Deemed Complete in 2021",
@@ -28,10 +28,10 @@
         "net_units": 117,
         "vli_units": 0,
         "status": "completed",
-        "app_filed_date": null,
+        "app_filed_date": "2017-05-26",
         "app_complete_date": null,
         "entitled_date": null,
-        "bp_issued_date": null,
+        "bp_issued_date": "2019-09-24",
         "co_date": "2021-11-29",
         "density_bonus": null,
         "sb35_flag": null,
@@ -2387,20 +2387,20 @@
       {
         "income_level": "Above Moderate",
         "rhna_target": 4668,
-        "permitted": 1351,
-        "percent_of_target": 28.9
+        "permitted": 1869,
+        "percent_of_target": 40.0
       },
       {
         "income_level": "Total",
         "rhna_target": 8934,
-        "permitted": 1671,
-        "percent_of_target": 18.7
+        "permitted": 2189,
+        "percent_of_target": 24.5
       }
     ],
     "summary": {
-      "total_permitted": 1671,
+      "total_permitted": 2189,
       "total_rhna": 8934,
-      "percent_of_goal": 18.7,
+      "percent_of_goal": 24.5,
       "adu_count": 0
     }
   },
@@ -2410,10 +2410,10 @@
     "developers": [
       {
         "developer": "Unknown/Individual",
-        "project_count": 20,
-        "total_units": 788,
+        "project_count": 24,
+        "total_units": 1306,
         "vli_units": 112,
-        "market_rate_units": 676,
+        "market_rate_units": 1194,
         "density_bonus_projects": 0
       },
       {
@@ -2499,8 +2499,8 @@
     ],
     "summary": {
       "total_developers": 10,
-      "total_projects": 32,
-      "total_units": 1671,
+      "total_projects": 36,
+      "total_units": 2189,
       "total_vli": 320
     }
   },
@@ -2527,11 +2527,11 @@
       "total": 8934
     },
     "rhna_credit": {
-      "bp_issued_units": 1198,
+      "bp_issued_units": 1361,
       "adu_units": 0,
-      "total_credit": 1198,
+      "total_credit": 1361,
       "vli_units": 234,
-      "percent_of_goal": 13.4
+      "percent_of_goal": 15.2
     },
     "pipeline": {
       "total_units": 16808,

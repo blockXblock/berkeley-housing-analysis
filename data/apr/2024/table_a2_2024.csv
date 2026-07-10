@@ -1,7 +1,7 @@
 id,address,apn,permits,net_units,vli_units,status,app_filed_date,app_complete_date,entitled_date,bp_issued_date,co_date,density_bonus,sb35_flag,sb330_flag,ab2011_flag,developer,architect,construction_status,milestone_achieved
 135,2150 Kittredge St,,,169,0,completed,2021-01-01,,,,2024-03-20,,,,,,,,CO Issued
-136,1951 Shattuck Ave,,,163,0,completed,2021-01-01,,,,2024-10-24,,,,,,,,CO Issued
-96,2099 M L KING JR Way,,,72,0,completed,2025-01-01,,,2023-07-17,2024-05-17,,,,,,,,CO Issued
+136,1951 Shattuck Ave,,,163,0,completed,2017-10-20,,,2022-09-08,2024-10-24,,,,,,,,CO Issued
+96,2099 M L KING JR Way,,,72,0,completed,2018-10-24,,,2023-07-17,2024-05-17,,,,,,,,CO Issued
 228,2527 SAN PABLO Ave,,,63,0,completed,,,,,2024-04-30,,,,,,,,CO Issued
 219,2701 Shattuck Ave,,,57,0,completed,,,,,2024-07-18,,,,,,,,CO Issued
 202,1027 HEINZ,,,3,0,completed,,,,,2024-11-07,,,,,,,,CO Issued
@@ -84,26 +84,26 @@ id,address,apn,permits,net_units,vli_units,status,app_filed_date,app_complete_da
 277,1325 ALCATRAZ,,,1,0,completed,,,,,2024-10-31,,,,,,,,CO Issued
 278,1332 MILVIA,,,1,0,completed,,,,,2024-07-30,,,,,,,,CO Issued
 279,1428 DELAWARE St,,,1,0,completed,,,,,2024-02-07,,,,,,,,CO Issued
-152,1598 UNIVERSITY Ave,,,207,21,completed,2024-01-01,,2024-07-14,2024-12-16,,,,,,NX Ventures,Trachtenberg Architects,,BP Issued
-150,3030 TELEGRAPH Ave,,,144,0,completed,2024-01-01,,2024-12-10,2024-10-15,2026-01-27,,,,,,,,BP Issued
+152,1598 UNIVERSITY Ave,,,207,21,completed,2024-01-01,,2024-07-14,2024-01-01,,,,,,NX Ventures,Trachtenberg Architects,,BP Issued
 139,2538 DURANT Ave,,,83,5,under_construction,2024-01-01,,2025-10-20,2024-10-01,,,,,,Martin Group / Valiance Capital,Studio KDA,,BP Issued
 164,1752 SHATTUCK Ave,,,72,0,completed,2022-01-18,,2026-02-11,2024-06-13,2026-05-26,,,,,Panoramic Interests,Studio KDA,,BP Issued
 143,2902 ADELINE St,,,54,0,withdrawn,2024-01-01,,2022-05-18,2024-01-01,,,,,,Realtex Group,SDT Architects,,BP Issued
+157,2587 TELEGRAPH Ave,,,52,6,withdrawn,2024-01-01,,2025-04-07,2024-01-01,,,,,,Gilbane Development,,,BP Issued
 141,2016 ASHBY Ave,,,50,50,withdrawn,2024-01-01,,2026-02-23,2024-06-01,,,,,,CHDC,Lowney Architecture,,BP Issued
-176,2440 SHATTUCK Ave,,,40,0,completed,2021-12-09,,2022-06-24,2024-11-19,2025-03-05,,,,,,,,BP Issued
+159,2403 SAN PABLO Ave,,,36,0,under_construction,2025-01-01,,2024-05-06,2024-01-01,,,,,,,,,BP Issued
 161,2555 COLLEGE Ave,,,12,1,completed,2022-02-04,,2024-04-05,2024-04-26,2025-07-25,,,,,Panoramic Interests,Trachtenberg Architects,,BP Issued
 64,1515 DERBY St,,,2,0,completed,2025-01-01,,,2024-07-24,2025-05-23,,,,,,,,BP Issued
 79,1111 ALLSTON Way,,,1,0,completed,2025-01-01,,,2024-03-20,,,,,,,,,BP Issued
 183,2328 CHANNING Way,,,,0,permitted,,,,2024-09-05,,,,,,,,,BP Issued
 133,2128 Oxford St,,,485,47,entitled,2023-03-17,,2024-10-04,,,,,,,Core Spaces,,,Entitled
+150,3030 TELEGRAPH Ave,,,144,0,completed,2022-09-29,,2024-12-10,2023-10-01,2026-01-27,,,,,,,,Entitled
 140,2136 SAN PABLO Ave,,,125,10,entitled,2021-03-18,,2024-05-22,,,,,,,Allrise Capital,Trachtenberg Architects,,Entitled
 122,2530 BANCROFT Way,,,110,11,entitled,2024-03-12,,2024-12-27,,,,,,,Landmark Properties,,,Entitled
 126,2427 San Pablo,,,78,0,completed,2022-10-05,,2024-09-16,,,,,,,,Studio KDA,,Entitled
 123,2037 DURANT Ave,,,74,4,entitled,2024-03-29,,2024-06-19,,,,,,,,Studio KDA,,Entitled
-147,2300 ELLSWORTH St,,,69,0,under_construction,2024-01-01,,2024-10-21,2025-09-04,,,,,,Riaz Capital,Trachtenberg Architects,,Entitled
+147,2300 ELLSWORTH St,,,69,0,under_construction,2023-03-03,,2024-10-21,2025-09-04,,,,,,Riaz Capital,Trachtenberg Architects,,Entitled
 116,2462 BANCROFT Way,,,66,3,entitled,2023-08-18,,2024-07-01,,,,,,,,Studio KDA,,Entitled
 144,2127 DWIGHT Way,,,58,8,withdrawn,2024-01-01,,2024-10-07,,,,,,,Riaz Capital,Trachtenberg Architects,,Entitled
-159,2403 SAN PABLO Ave,,,36,0,under_construction,2025-01-01,,2024-05-06,2025-06-03,,,,,,,,,Entitled
 128,2833 Seventh St,,,3,0,entitled,2023-09-21,,2024-05-07,,,,,,,,,,Entitled
 129,1614 Sixth St,,,3,0,completed,2024-01-25,,2024-10-17,2025-08-29,,,,,,,,,Entitled
 127,2820 San Pablo,,,1,0,entitled,2022-05-06,,2024-12-06,,,,,,,Cork-Mayo Investments,Studio KDA,,Entitled

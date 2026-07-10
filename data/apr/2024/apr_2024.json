@@ -1,6 +1,6 @@
 {
   "year": 2024,
-  "generated": "2026-06-16T14:04:37.570318",
+  "generated": "2026-07-10T14:09:47.974527",
   "schema_version": "v2 (Stage 1 migration)",
   "table_a": {
     "title": "Table A: Applications Deemed Complete in 2024",
@@ -50,10 +50,10 @@
         "net_units": 163,
         "vli_units": 0,
         "status": "completed",
-        "app_filed_date": "2021-01-01",
+        "app_filed_date": "2017-10-20",
         "app_complete_date": null,
         "entitled_date": null,
-        "bp_issued_date": null,
+        "bp_issued_date": "2022-09-08",
         "co_date": "2024-10-24",
         "density_bonus": null,
         "sb35_flag": null,
@@ -72,7 +72,7 @@
         "net_units": 72,
         "vli_units": 0,
         "status": "completed",
-        "app_filed_date": "2025-01-01",
+        "app_filed_date": "2018-10-24",
         "app_complete_date": null,
         "entitled_date": null,
         "bp_issued_date": "2023-07-17",
@@ -1901,7 +1901,7 @@
         "app_filed_date": "2024-01-01",
         "app_complete_date": null,
         "entitled_date": "2024-07-14",
-        "bp_issued_date": "2024-12-16",
+        "bp_issued_date": "2024-01-01",
         "co_date": null,
         "density_bonus": null,
         "sb35_flag": null,
@@ -1909,28 +1909,6 @@
         "ab2011_flag": null,
         "developer": "NX Ventures",
         "architect": "Trachtenberg Architects",
-        "construction_status": null,
-        "milestone_achieved": "BP Issued"
-      },
-      {
-        "id": 150,
-        "address": "3030 TELEGRAPH Ave",
-        "apn": null,
-        "permits": null,
-        "net_units": 144,
-        "vli_units": 0,
-        "status": "completed",
-        "app_filed_date": "2024-01-01",
-        "app_complete_date": null,
-        "entitled_date": "2024-12-10",
-        "bp_issued_date": "2024-10-15",
-        "co_date": "2026-01-27",
-        "density_bonus": null,
-        "sb35_flag": null,
-        "sb330_flag": null,
-        "ab2011_flag": null,
-        "developer": null,
-        "architect": null,
         "construction_status": null,
         "milestone_achieved": "BP Issued"
       },
@@ -2001,6 +1979,28 @@
         "milestone_achieved": "BP Issued"
       },
       {
+        "id": 157,
+        "address": "2587 TELEGRAPH Ave",
+        "apn": null,
+        "permits": null,
+        "net_units": 52,
+        "vli_units": 6,
+        "status": "withdrawn",
+        "app_filed_date": "2024-01-01",
+        "app_complete_date": null,
+        "entitled_date": "2025-04-07",
+        "bp_issued_date": "2024-01-01",
+        "co_date": null,
+        "density_bonus": null,
+        "sb35_flag": null,
+        "sb330_flag": null,
+        "ab2011_flag": null,
+        "developer": "Gilbane Development",
+        "architect": null,
+        "construction_status": null,
+        "milestone_achieved": "BP Issued"
+      },
+      {
         "id": 141,
         "address": "2016 ASHBY Ave",
         "apn": null,
@@ -2023,18 +2023,18 @@
         "milestone_achieved": "BP Issued"
       },
       {
-        "id": 176,
-        "address": "2440 SHATTUCK Ave",
+        "id": 159,
+        "address": "2403 SAN PABLO Ave",
         "apn": null,
         "permits": null,
-        "net_units": 40,
+        "net_units": 36,
         "vli_units": 0,
-        "status": "completed",
-        "app_filed_date": "2021-12-09",
+        "status": "under_construction",
+        "app_filed_date": "2025-01-01",
         "app_complete_date": null,
-        "entitled_date": "2022-06-24",
-        "bp_issued_date": "2024-11-19",
-        "co_date": "2025-03-05",
+        "entitled_date": "2024-05-06",
+        "bp_issued_date": "2024-01-01",
+        "co_date": null,
         "density_bonus": null,
         "sb35_flag": null,
         "sb330_flag": null,
@@ -2155,6 +2155,28 @@
         "milestone_achieved": "Entitled"
       },
       {
+        "id": 150,
+        "address": "3030 TELEGRAPH Ave",
+        "apn": null,
+        "permits": null,
+        "net_units": 144,
+        "vli_units": 0,
+        "status": "completed",
+        "app_filed_date": "2022-09-29",
+        "app_complete_date": null,
+        "entitled_date": "2024-12-10",
+        "bp_issued_date": "2023-10-01",
+        "co_date": "2026-01-27",
+        "density_bonus": null,
+        "sb35_flag": null,
+        "sb330_flag": null,
+        "ab2011_flag": null,
+        "developer": null,
+        "architect": null,
+        "construction_status": null,
+        "milestone_achieved": "Entitled"
+      },
+      {
         "id": 140,
         "address": "2136 SAN PABLO Ave",
         "apn": null,
@@ -2250,7 +2272,7 @@
         "net_units": 69,
         "vli_units": 0,
         "status": "under_construction",
-        "app_filed_date": "2024-01-01",
+        "app_filed_date": "2023-03-03",
         "app_complete_date": null,
         "entitled_date": "2024-10-21",
         "bp_issued_date": "2025-09-04",
@@ -2305,28 +2327,6 @@
         "ab2011_flag": null,
         "developer": "Riaz Capital",
         "architect": "Trachtenberg Architects",
-        "construction_status": null,
-        "milestone_achieved": "Entitled"
-      },
-      {
-        "id": 159,
-        "address": "2403 SAN PABLO Ave",
-        "apn": null,
-        "permits": null,
-        "net_units": 36,
-        "vli_units": 0,
-        "status": "under_construction",
-        "app_filed_date": "2025-01-01",
-        "app_complete_date": null,
-        "entitled_date": "2024-05-06",
-        "bp_issued_date": "2025-06-03",
-        "co_date": null,
-        "density_bonus": null,
-        "sb35_flag": null,
-        "sb330_flag": null,
-        "ab2011_flag": null,
-        "developer": null,
-        "architect": null,
         "construction_status": null,
         "milestone_achieved": "Entitled"
       },
@@ -2399,8 +2399,8 @@
     ],
     "summary": {
       "total_projects": 108,
-      "total_units": 2385,
-      "vli_units": 160,
+      "total_units": 2397,
+      "vli_units": 166,
       "entitled_in_year": 12,
       "bp_issued_in_year": 11,
       "co_issued_in_year": 85
@@ -2431,20 +2431,20 @@
       {
         "income_level": "Above Moderate",
         "rhna_target": 4668,
-        "permitted": 1351,
-        "percent_of_target": 28.9
+        "permitted": 1869,
+        "percent_of_target": 40.0
       },
       {
         "income_level": "Total",
         "rhna_target": 8934,
-        "permitted": 1671,
-        "percent_of_target": 18.7
+        "permitted": 2189,
+        "percent_of_target": 24.5
       }
     ],
     "summary": {
-      "total_permitted": 1671,
+      "total_permitted": 2189,
       "total_rhna": 8934,
-      "percent_of_goal": 18.7,
+      "percent_of_goal": 24.5,
       "adu_count": 0
     }
   },
@@ -2454,10 +2454,10 @@
     "developers": [
       {
         "developer": "Unknown/Individual",
-        "project_count": 20,
-        "total_units": 788,
+        "project_count": 24,
+        "total_units": 1306,
         "vli_units": 112,
-        "market_rate_units": 676,
+        "market_rate_units": 1194,
         "density_bonus_projects": 0
       },
       {
@@ -2543,8 +2543,8 @@
     ],
     "summary": {
       "total_developers": 10,
-      "total_projects": 32,
-      "total_units": 1671,
+      "total_projects": 36,
+      "total_units": 2189,
       "total_vli": 320
     }
   },
@@ -2571,11 +2571,11 @@
       "total": 8934
     },
     "rhna_credit": {
-      "bp_issued_units": 1198,
+      "bp_issued_units": 1361,
       "adu_units": 0,
-      "total_credit": 1198,
+      "total_credit": 1361,
       "vli_units": 234,
-      "percent_of_goal": 13.4
+      "percent_of_goal": 15.2
     },
     "pipeline": {
       "total_units": 16808,

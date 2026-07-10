@@ -1,6 +1,6 @@
 {
   "year": 2023,
-  "generated": "2026-06-16T14:04:36.709029",
+  "generated": "2026-07-10T14:09:46.566062",
   "schema_version": "v2 (Stage 1 migration)",
   "table_a": {
     "title": "Table A: Applications Deemed Complete in 2023",
@@ -28,10 +28,10 @@
         "net_units": 96,
         "vli_units": 0,
         "status": "completed",
-        "app_filed_date": null,
+        "app_filed_date": "2016-02-16",
         "app_complete_date": null,
         "entitled_date": null,
-        "bp_issued_date": null,
+        "bp_issued_date": "2020-07-20",
         "co_date": "2023-05-02",
         "density_bonus": null,
         "sb35_flag": null,
@@ -50,7 +50,7 @@
         "net_units": 87,
         "vli_units": 0,
         "status": "completed",
-        "app_filed_date": null,
+        "app_filed_date": "2019-05-31",
         "app_complete_date": null,
         "entitled_date": null,
         "bp_issued_date": null,
@@ -2221,24 +2221,24 @@
         "milestone_achieved": "CO Issued"
       },
       {
-        "id": 173,
-        "address": "2000 DWIGHT Way",
+        "id": 150,
+        "address": "3030 TELEGRAPH Ave",
         "apn": null,
         "permits": null,
-        "net_units": 113,
+        "net_units": 144,
         "vli_units": 0,
         "status": "completed",
-        "app_filed_date": "2019-05-24",
+        "app_filed_date": "2022-09-29",
         "app_complete_date": null,
-        "entitled_date": "2020-09-30",
-        "bp_issued_date": "2023-08-15",
-        "co_date": "2025-06-17",
+        "entitled_date": "2024-12-10",
+        "bp_issued_date": "2023-10-01",
+        "co_date": "2026-01-27",
         "density_bonus": null,
         "sb35_flag": null,
         "sb330_flag": null,
         "ab2011_flag": null,
-        "developer": "Berkeley Ruby WIP Development LLC",
-        "architect": "Trachtenberg Architects",
+        "developer": null,
+        "architect": null,
         "construction_status": null,
         "milestone_achieved": "BP Issued"
       },
@@ -2272,7 +2272,7 @@
         "net_units": 72,
         "vli_units": 0,
         "status": "completed",
-        "app_filed_date": "2025-01-01",
+        "app_filed_date": "2018-10-24",
         "app_complete_date": null,
         "entitled_date": null,
         "bp_issued_date": "2023-07-17",
@@ -2319,7 +2319,7 @@
         "app_filed_date": "2024-01-01",
         "app_complete_date": null,
         "entitled_date": "2023-03-13",
-        "bp_issued_date": "2023-10-16",
+        "bp_issued_date": "2023-03-13",
         "co_date": "2025-05-06",
         "density_bonus": null,
         "sb35_flag": null,
@@ -2399,7 +2399,7 @@
     ],
     "summary": {
       "total_projects": 108,
-      "total_units": 1058,
+      "total_units": 1089,
       "vli_units": 151,
       "entitled_in_year": 1,
       "bp_issued_in_year": 7,
@@ -2431,20 +2431,20 @@
       {
         "income_level": "Above Moderate",
         "rhna_target": 4668,
-        "permitted": 1351,
-        "percent_of_target": 28.9
+        "permitted": 1869,
+        "percent_of_target": 40.0
       },
       {
         "income_level": "Total",
         "rhna_target": 8934,
-        "permitted": 1671,
-        "percent_of_target": 18.7
+        "permitted": 2189,
+        "percent_of_target": 24.5
       }
     ],
     "summary": {
-      "total_permitted": 1671,
+      "total_permitted": 2189,
       "total_rhna": 8934,
-      "percent_of_goal": 18.7,
+      "percent_of_goal": 24.5,
       "adu_count": 0
     }
   },
@@ -2454,10 +2454,10 @@
     "developers": [
       {
         "developer": "Unknown/Individual",
-        "project_count": 20,
-        "total_units": 788,
+        "project_count": 24,
+        "total_units": 1306,
         "vli_units": 112,
-        "market_rate_units": 676,
+        "market_rate_units": 1194,
         "density_bonus_projects": 0
       },
       {
@@ -2543,8 +2543,8 @@
     ],
     "summary": {
       "total_developers": 10,
-      "total_projects": 32,
-      "total_units": 1671,
+      "total_projects": 36,
+      "total_units": 2189,
       "total_vli": 320
     }
   },
@@ -2571,11 +2571,11 @@
       "total": 8934
     },
     "rhna_credit": {
-      "bp_issued_units": 1198,
+      "bp_issued_units": 1361,
       "adu_units": 0,
-      "total_credit": 1198,
+      "total_credit": 1361,
       "vli_units": 234,
-      "percent_of_goal": 13.4
+      "percent_of_goal": 15.2
     },
     "pipeline": {
       "total_units": 16808,

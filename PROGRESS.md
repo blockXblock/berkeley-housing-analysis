@@ -4,6 +4,20 @@
 
 ---
 
+## 2026-07-09 (later still) — 🎓 CURRICULUM LOOSE ENDS CLOSED (Shoshana-ready) + CO MAP
+All three open polish items DONE (`f0d9d66`): (1) **R2 modules tarball re-uploaded + verified**
+(was STALE: 3 outdated housing_rules files, permit_role.py MISSING; now matches repo; upload via
+.env.r2 + .venv boto3 per upload_harvest_to_r2.py pattern). (2) **curriculum README created**
+(notebooks/curriculum/README.md: Colab vs git-clone paths, sequence table, other-city pointer)
++ git-clone box on the course page. (3) **JN8_watch built** (scratch/2026-07-09/build_jn8.py):
+the watcher coda — pinned mirror vs live CKAN diff; executed clean locally AND bare-dir Colab-sim;
+live verdict NO-DRIFT since 2026-06-17. Bonus lesson baked in: the live portal RESPELLED
+CO_EXTREMELY_INCOME_NDR since our snapshot (schema drift!) — tier columns now found by rule.
+Curriculum = JN00 + JN0a-h + JN1-7 + JN8 (19 notebooks). ALSO earlier: **CO MAP slide**
+(`3de31b1`, deployed): 4,005/4,229u (95%) located via 4-layer crosswalk (12-digit APN 2,047u →
+10-digit condo-ization prefix 733u → v2 geocode 921u → situs+ordinal 304u); 224u/7 permits held
+= the Acheson re-plat class; generator scratch/2026-07-09/gen_co_map.py (idempotent).
+
 ## 2026-07-09 (later) — 📓 JN-K COMMITTED (gate PASS) + 🟩 RHNA BAR RESTORED
 **JN-K completion anatomy** (`scripts/v4/build_jn_k.py` → `notebooks/v4/JN-K_completion_anatomy.ipynb`,
 `2528427`): consolidates the deck derivations — located 4,229 (ANCHORED to JN-E's co_completions,

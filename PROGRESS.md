@@ -4,6 +4,20 @@
 
 ---
 
+## 2026-07-10 (later⁵) — ✍️ GATED WRITE #4: 3030 Telegraph entitlement chain (harvester detail-pull)
+**THE HARVESTER FINDING: Berkeley's portal renders the FULL workflow timeline (deemed-complete, CEQA,
+staff decision, appeal, final) in HIDDEN display:none DOM rows on the Processing Status tab** — read
+textContent, no clicks needed (scratch/2026-07-10/harvest_entitlement_status3.py; three failed
+approaches first: inner_text skips hidden, accordion clicks postback-timeout). Pulled all 6 operative
+ZPs; **5 of 6 already had their events in v2** — only proj150 was truly missing. Write #4 (snapshot
+`keep_snapshot_2026-07-10_pre-3030tel-events.db`, 3 rows ids 4379-4381): ac 2023-02-24 + ent
+2023-06-08 (staff) + 2023-06-30 (final, no appeal). proj141 2016 Ashby EXCLUDED — its "entitlements"
+are PLAN-REVIEW statuses mis-mapped to entitlement_approved (data-quality queue). Explorer
+republished (1 field). **JN-K baseline APPENDED** (`completion_anatomy_baseline_2026-07-10.json`:
+ac coverage 43→44; intake median 84→113 — moved by the filed-MIN fix + new pair; consideration 410
+unchanged); gate re-run PASS. Capped-MAX for entitled_date now CORRECT for all cases — John's call
+whether to adopt. Also: 1598 University was APPEALED (council approved 2023-09-26) — story detail.
+
 ## 2026-07-10 (later⁴) — ⚖️ ENTITLED/APP_COMPLETE SEMANTICS DECIDED: stays MAX (evidence-closed)
 Previewed all three candidate rules on the live data. **MIN disqualified**: grabs stale prior-project
 events (3030 Telegraph entitlement 2017-02-17 vs its 2022 application). **Capped-at-first-BP MAX

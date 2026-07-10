@@ -148,18 +148,22 @@
     <text x="30" y="56" fill="#6d8496" font-size="11" font-family="inherit">(EBMUD, via the Claremont Tunnel)</text>
     <rect x="255" y="42" width="325" height="12" rx="6" fill="#7ec8e3" opacity=".8"/>
     <polygon points="580,34 580,62 612,48" fill="#7ec8e3" opacity=".8"/>
-    <text x="417" y="30" fill="#eef3f6" font-size="15" font-weight="700" text-anchor="middle" font-family="inherit">≈ 12 million gallons a day</text>
-    <text x="417" y="74" fill="#6d8496" font-size="11" text-anchor="middle" font-family="inherit">campus uses ~1.7M of them</text>
+    <text x="417" y="30" fill="#eef3f6" font-size="15" font-weight="700" text-anchor="middle" font-family="inherit">≈ 16 million gallons a day</text>
+    <text x="417" y="74" fill="#6d8496" font-size="11" text-anchor="middle" font-family="inherit">campus uses ~1.9M of them</text>
     <text x="628" y="53" fill="#9fb8c8" font-size="14" font-family="inherit">Berkeley</text>
   </svg>
-  <p class="foot" style="margin-top:.6rem">Next iterations add the other daily flows: power and data.</p>
+  <p class="foot" style="margin-top:.6rem">Behind the tap: EBMUD's local distribution runs
+  <span class="num">250&ndash;400 miles</span> of pressurized water mains under Berkeley's streets, with
+  many tanks and pumping plants lifting water into the hills. Next iterations add the other daily
+  flows: power and data.</p>
   <div class="src">CA Dept. of Finance E-5 (May 2026 release, Jan-1-2026: population, housing units, group quarters);
   UC Berkeley fall-2025 enrollment (Office of Planning &amp; Analysis); faculty/staff: IPEDS 2024-25 (U.S. Dept. of
   Education); beds = UC Housing Initiative pipeline as tracked in our database; commute flows: U.S. Census LEHD
   LODES 2022 (primary jobs, block-level, city boundary); vehicles: CA DMV registrations by ZIP (data.ca.gov,
-  Jan 2026; ZIP boundaries approximate the city — Albany's 94706 excluded); water: EBMUD system demand averaged
-  135 MGD Apr 2025–Mar 2026 (State Water Board monthly supplier reports, data.ca.gov) — Berkeley's share estimated
-  by population (8.8%)<span class="tag derived">derived</span>; campus use 614M gal/yr (UC Sustainability Report 2025).</div>
+  Jan 2026; ZIP boundaries approximate the city — Albany's 94706 excluded); water: Berkeley daily flow ≈16 MGD
+  and campus ≈1.9 MGD (EBMUD/UC distribution figures, updated 2026-07-10 — supersede the earlier population-share
+  estimate of ~12 MGD derived from EBMUD's 135 MGD system demand, State Water Board monthly reports); distribution
+  mains 250–400 mi (EBMUD).</div>
 </section>
 
 <section class="slide">
@@ -753,20 +757,30 @@
 </section>
 
 <section class="slide">
-  <h2>8 · Four asks that cost nothing and change everything</h2>
+  <h2>8 · Five asks that cost almost nothing and change everything</h2>
   <ul>
+    <li><b>Write open data into the Clariti contract.</b> The city's new ~<span class="num">$5 million</span>
+      permit-system contract (Clariti, replacing Accela for permit pipeline data management) <b>must require
+      a public open-data API</b>. With it, independent verification like ours — and every journalist's,
+      student's, and neighbor's — updates in <b>minutes</b> instead of months of records requests and scraping.
+      A data-access clause costs nothing at signing and is nearly impossible to add later.</li>
     <li><b>Publish the building-permit feed</b> — with dates and clock states — on the open-data
       portal the city already runs: it publishes business licenses today, but not a single permit
       dataset, and that one move leapfrogs Oakland. (Our CPRA comparison found the internal report
       used for data requests captures <span class="warn">40–50% fewer filings</span> than the
       public portal shows — undocumented filters.)</li>
     <li><b>Publish deemed-complete dates</b> — one field, and every statutory-clock question
-      (the ADU 60-day rule, AB 2234) becomes answerable instead of arguable.</li>
+      (the ADU 60-day rule, AB 2234) becomes answerable instead of arguable. <b>The data already
+      leaves the building:</b> we found the current Accela portal sends the FULL processing timeline —
+      deemed-complete, CEQA, decision, appeal dates — to every visitor's browser, <i>hidden</i> in the
+      page code (<code>display:none</code>). Showing it is a display setting, not a data project.</li>
     <li><b>Publish the fee ledger</b> — replace modeled fee figures with actuals.</li>
     <li><b>Fix the three broken open datasets</b> we hit this week: zoning (geometry, zero
       attributes), budget (expenses only, ends FY2016), and the permit-report filters above.</li>
   </ul>
-  <div class="src">Each verified this week against the live portal and Accela; CPRA requests for items 2–3 are filed/in progress.</div>
+  <div class="src">Each verified against the live portal and Accela; CPRA requests for the fee/deemed-complete items are
+  filed/in progress. Hidden-timeline finding: Processing Status detail pages, verified 2026-07-10 (ZP2022-0170 et al. —
+  the workflow table ships in hidden DOM rows).</div>
 </section>
 
 <section class="slide">

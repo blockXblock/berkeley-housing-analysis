@@ -110,21 +110,36 @@
                 </div>
             </div>
 
-            <!-- RHNA Progress bar HELD 2026-06-16: a single "% toward the 8,934 goal" is not
-                 honestly publishable yet. RHNA credit is earned at BUILDING-PERMIT issuance, and
-                 our BP coverage is limited to tracked projects (not the city's full ADU/infill
-                 permit stream) — so neither a completions-based nor a BP-based percentage measures
-                 true RHNA progress. The trustworthy pieces are shown below as raw counts:
-                 actual completions by year (full CO feed) and BP-issued units (coverage-noted).
-                 Restore a progress bar only after the full city BP stream is acquired. -->
+            <!-- RHNA Progress bar RESTORED 2026-07-09. It was HELD 2026-06-16 because BP coverage
+                 was ~28 tracked projects; the restore condition (full city BP stream) is met: the
+                 v4 permit-level count covers the complete CPRA feed incl. the ADU/infill tail
+                 (424 permits credited), and the 9k-triage (6a4235b) found zero city-credited
+                 housing permits missing from the feed. Derivation + provenance:
+                 scratch/2026-07-09/rhna_bar_derivation.py (fold into export_explorer_data_v2.py). -->
             <div class="bg-white rounded-xl shadow p-6 mb-8">
-                <h2 class="text-xl font-semibold mb-1">RHNA Progress (6th cycle, 2023-2031)</h2>
-                <p class="text-sm text-gray-600">Target: <strong>8,934 units</strong>. We report the
-                    underlying measures directly rather than a single percentage: <strong>actual completions
-                    by year</strong> (below) and <strong>building-permit-issued units</strong> (further below).
-                    A combined "% toward goal" is intentionally not shown — RHNA credit is earned at
-                    building-permit issuance, and our permit coverage does not yet include the city's full
-                    ADU and small-project permit stream.</p>
+                <h2 class="text-xl font-semibold mb-1">RHNA Progress (6th cycle, 2023&ndash;2031)</h2>
+                <p class="text-sm text-gray-600 mb-4">Target: <strong>8,934 units</strong>. RHNA credit is earned at
+                    <strong>building-permit issuance</strong>. Our independent count — first building permit issued on/after
+                    June 30, 2022, across Berkeley's <em>entire</em> permit stream (every ADU and infill permit included):</p>
+                <div class="relative w-full bg-gray-200 rounded-full h-7 mb-1">
+                    <div class="bg-emerald-500 h-7 rounded-l-full flex items-center justify-end pr-2"
+                         style="width:21.9%"><span class="text-white text-sm font-bold">1,959 units &middot; 21.9%</span></div>
+                    <div class="absolute top-0 h-7 border-l-2 border-dashed border-blue-700" style="left:18%"
+                         title="HCD's own dashboard credit: 1,608 units (18.0%) — lags the CY2025 filing"></div>
+                </div>
+                <p class="text-xs text-gray-500 mb-3">Dashed line: the state's own dashboard credits Berkeley
+                    <strong>1,608 units (18.0%)</strong> — it lags the CY2025 filing. Our count is a floor: 2026 issuances
+                    arrive with the next records release. By year (units first-permitted): 2022&nbsp;(from&nbsp;6/30)&nbsp;340 &middot;
+                    2023&nbsp;533 &middot; 2024&nbsp;595 &middot; 2025&nbsp;489.</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-2">
+                    <div class="bg-purple-50 rounded p-2 text-center"><div class="text-sm font-bold text-purple-700">209 / 2,446</div><div class="text-xs text-gray-500">Very-low income &middot; 9%</div></div>
+                    <div class="bg-purple-50 rounded p-2 text-center"><div class="text-sm font-bold text-purple-700">213 / 1,408</div><div class="text-xs text-gray-500">Low income &middot; 15%</div></div>
+                    <div class="bg-blue-50 rounded p-2 text-center"><div class="text-sm font-bold text-blue-700">105 / 1,416</div><div class="text-xs text-gray-500">Moderate &middot; 7%</div></div>
+                    <div class="bg-gray-50 rounded p-2 text-center"><div class="text-sm font-bold text-gray-700">1,081 / 3,664</div><div class="text-xs text-gray-500">Above-moderate &middot; 30%</div></div>
+                </div>
+                <p class="text-xs text-gray-500">Income-tier split is <strong>HCD's own accounting</strong> (state RHNA dashboard) — the
+                    public permit stream carries no affordability fields, so we cannot tier it independently. UC projects
+                    excluded (counted in beds, exempt from RHNA). As of 2026-07-09.</p>
             </div>
 
             <!-- Actual Unit Completions by year -->

@@ -4,6 +4,19 @@
 
 ---
 
+## 2026-07-10 (later) — ✍️ GATED WRITE #2: filed_date MAX→MIN (view + export); explorer republished
+**View fix EXECUTED** (John's go; snapshot `keep_snapshot_2026-07-10_pre-filed-date-min.db`):
+v_projects_flat.filed_date = MIN(application_submitted) (was MAX — the placeholder-shadow trap).
+Consumers checked first (generate_apr_v2 + export only; MIN = more-correct APR semantics).
+No-collateral verify: EXACTLY 7 projects moved (the 5 shadowed backfills + proj179 2352 Shattuck
+2019-12→2018-06-28 + proj147 2300 Ellsworth 2024→2023-03-03). **Export had its OWN independent
+MAX copy of the trap** (event_dates aggregation) — fixed via CASE scoped to application_submitted;
+app_complete/entitled stay MAX (deliberate-decision queue). **Bonus: killed two NEGATIVE
+processing_days** (proj154 -700d, proj179 -57d → 846/483). explorer_data.js regenerated + diffed
+(7 projects only) + deployed. bp_issued_date still MAX in the view (RHNA rule uses events MIN;
+view field change = separate gate). Earlier today: gated write #1 (14 events) + export republish
+(6 projects) — the full loop harvest→adjudication→DB→site is closed.
+
 ## 2026-07-10 — ✍️ GATED v2 WRITE #1 (application-date backfill) + 'HARD CITY' SLIDE
 **THE GATED WRITE (John's go): 14 project_events rows COMMITTED** (ids 4365-4378; snapshot
 `keep_snapshot_2026-07-09_pre-appdate-backfill.db`; preview → transactional → verify-or-rollback ×2

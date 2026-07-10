@@ -151,7 +151,11 @@ def get_projects(conn):
         # Key event dates (MAX event_date per event_type; application_submitted uses MIN =
         # FIRST application — fixed 2026-07-10 to match v_projects_flat.filed_date, which was
         # corrected from the MAX placeholder-shadow trap. app_complete/entitled remain MAX
-        # (changing their semantics is a separate, deliberate decision).
+        # (DECIDED 2026-07-10: MIN publishes stale prior-project approvals — 3030 Telegraph's
+        # 2017 event; capped-at-BP MAX falls through v2 event-coverage gaps to the same stale
+        # events. MAX = most recent real approval action; stage-ordering consumers apply the
+        # mod-reconciliation rule downstream. The real fix for mod-after-BP anomalies is
+        # ingesting the missing entitlement events — queued as a gated write).
         # Include construction-related events for inactive detection
         event_cur = conn.cursor()
         event_cur.execute('''

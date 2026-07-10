@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-07-10 (later⁴) — ⚖️ ENTITLED/APP_COMPLETE SEMANTICS DECIDED: stays MAX (evidence-closed)
+Previewed all three candidate rules on the live data. **MIN disqualified**: grabs stale prior-project
+events (3030 Telegraph entitlement 2017-02-17 vs its 2022 application). **Capped-at-first-BP MAX
+disqualified**: v2 EVENT-COVERAGE GAPS (the real 2022 approval ZP2022-0170 was never ingested as an
+event) make the cap fall through to the SAME stale 2017 event; also nulls app_complete where only a
+mod record exists (2317 Channing). **MAX stands** = most recent real approval action; stage-ordering
+consumers (JN-K monotonic(), deck generator) apply the mod-reconciliation rule downstream — the right
+layer. **ROOT CAUSE QUEUED as a future gated write: ingest missing entitlement-approval events for
+the ~7 mod-after-BP majors from the planning harvest** (3030 Telegraph ZP2022-0170 2022-12-02, 1598
+University, 2538 Durant, 1752 Shattuck, 2587 Telegraph, 2016 Ashby, 2403 San Pablo). No DB/export
+behavior changed; decision recorded in export comment + CLAUDE.md.
+
 ## 2026-07-10 (later³) — 📄 APR ARTIFACTS 2021-2026 REGENERATED (staged+diffed, then published)
 generate_apr_v2 rerun for all six years → staging → per-file diff vs published BEFORE copying.
 Every diff traced to gated writes #1-#3 (no unrelated drift): re-crediting (2000 Dwight →2022

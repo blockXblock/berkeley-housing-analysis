@@ -130,7 +130,7 @@ html = f"""<!DOCTYPE html>
   two appear on the same project.</p>
   <p class="lg"><span style="color:#ffd166">●</span> developer &nbsp;
   <span style="color:#7ec8e3">●</span> architect &nbsp; <span style="color:#9d8fd8">●</span> owner
-  &nbsp;·&nbsp; {len(nodes)} players · {len(covered)} projects · {cov_units:,} units covered</p>
+  &nbsp;·&nbsp; {len(nodes)} players · {len(covered)} projects · {cov_units:,} units across their projects, all stages</p>
   <svg id="net"></svg>
   <div id="panel">Click a player to see their projects.</div>
 

@@ -115,7 +115,8 @@ html = f"""<!DOCTYPE html>
   td, th {{ padding:.32rem .7rem; border-bottom:1px solid #2b4356; font-size:.92rem; text-align:left; }}
   th {{ color:#9fb8c8; font-weight:600; }}
   td.num, th.num {{ text-align:right; font-variant-numeric:tabular-nums; }}
-  #net {{ width:100%; height:560px; background:#0c1922; border:1px solid #24384a; border-radius:10px; }}
+  #net {{ display:block; width:96vw; margin-left:calc(50% - 48vw); height:72vh; min-height:560px;
+         background:#0c1922; border:1px solid #24384a; border-radius:10px; touch-action:none; }}
   #panel {{ background:#16283a; border:1px solid #24384a; border-radius:8px; padding: .9rem 1.1rem; min-height:3.5rem; margin-top:.6rem; font-size:.95rem; }}
   .lg {{ font-size:.85rem; color:#9fb8c8; margin:.4rem 0 0; }}
   a {{ color:#7ec8e3; }}
@@ -126,12 +127,19 @@ html = f"""<!DOCTYPE html>
   <div class="kicker">A view of the record · berkeleybuild.com · as of {TODAY.isoformat()}</div>
   <h1>The Players — who builds Berkeley</h1>
   <p>The organizations on the record of Berkeley's major housing projects, joined where they share a
-  project. <b>Drag, hover, click.</b> Node size ∝ units across a player's projects; a line means the
+  project. <b>Pinch or ⌘-scroll (or the buttons) to zoom · drag the background to pan · drag nodes · click for details.</b> Node size ∝ units across a player's projects; a line means the
   two appear on the same project.</p>
   <p class="lg"><span style="color:#ffd166">●</span> developer &nbsp;
   <span style="color:#7ec8e3">●</span> architect &nbsp; <span style="color:#9d8fd8">●</span> owner
   &nbsp;·&nbsp; {len(nodes)} players · {len(covered)} projects · {cov_units:,} units across their projects, all stages</p>
-  <svg id="net"></svg>
+  <div style="position:relative;">
+    <svg id="net"></svg>
+    <div style="position:absolute; top:.6rem; right:calc(50% - 48vw + .8rem); display:flex; gap:.35rem;">
+      <button id="zin"  style="width:2rem;height:2rem;border-radius:6px;border:1px solid #33506b;background:#16283a;color:#eef3f6;font-size:1.1rem;cursor:pointer;">+</button>
+      <button id="zout" style="width:2rem;height:2rem;border-radius:6px;border:1px solid #33506b;background:#16283a;color:#eef3f6;font-size:1.1rem;cursor:pointer;">−</button>
+      <button id="zreset" style="height:2rem;padding:0 .5rem;border-radius:6px;border:1px solid #33506b;background:#16283a;color:#9fb8c8;font-size:.8rem;cursor:pointer;">reset</button>
+    </div>
+  </div>
   <div id="panel">Click a player to see their projects.</div>
 
   <h2>The repeat players (2+ projects)</h2>
@@ -155,8 +163,40 @@ html = f"""<!DOCTYPE html>
 const NODES = {json.dumps(nodes)};
 const LINKS = {json.dumps(links)};
 const svg = document.getElementById('net');
-const W = svg.clientWidth || 860, H = 560;
-svg.setAttribute('viewBox', `0 0 ${{W}} ${{H}}`);
+const W = svg.clientWidth || 860, H = svg.clientHeight || 620;
+const vb = {{x: 0, y: 0, w: W, h: H}};
+function setVB() {{ svg.setAttribute('viewBox', `${{vb.x}} ${{vb.y}} ${{vb.w}} ${{vb.h}}`); }}
+setVB();
+function zoomAt(cx, cy, k) {{
+  if (vb.w * k < W/8 || vb.w * k > W*2.5) return;
+  const pt = svg.createSVGPoint(); pt.x = cx; pt.y = cy;
+  const p = pt.matrixTransform(svg.getScreenCTM().inverse());
+  vb.x = p.x - (p.x - vb.x) * k; vb.y = p.y - (p.y - vb.y) * k;
+  vb.w *= k; vb.h *= k; setVB();
+}}
+svg.addEventListener('wheel', ev => {{
+  if (!(ev.ctrlKey || ev.metaKey)) return;   // plain scroll = page scroll; pinch / cmd+scroll = zoom
+  ev.preventDefault();
+  zoomAt(ev.clientX, ev.clientY, ev.deltaY > 0 ? 1.15 : 1/1.15);
+}}, {{passive: false}});
+for (const [id, k] of [['zin', 1/1.3], ['zout', 1.3], ['zreset', 0]]) {{
+  document.getElementById(id).addEventListener('click', () => {{
+    if (!k) {{ vb.x = 0; vb.y = 0; vb.w = W; vb.h = H; setVB(); return; }}
+    const r = svg.getBoundingClientRect();
+    zoomAt(r.x + r.width/2, r.y + r.height/2, k);
+  }});
+}}
+let pan = null;
+svg.addEventListener('pointerdown', ev => {{
+  if (ev.target === svg) {{ pan = {{x: ev.clientX, y: ev.clientY}}; svg.setPointerCapture(ev.pointerId); }}
+}});
+svg.addEventListener('pointermove', ev => {{
+  if (!pan) return;
+  const sx = vb.w / svg.clientWidth;
+  vb.x -= (ev.clientX - pan.x) * sx; vb.y -= (ev.clientY - pan.y) * sx;
+  pan = {{x: ev.clientX, y: ev.clientY}}; setVB();
+}});
+svg.addEventListener('pointerup', () => {{ pan = null; }});
 const N = NODES.map((d,i) => ({{...d,
   x: W/2 + Math.cos(i*2.399) * (120 + (i%7)*28),
   y: H/2 + Math.sin(i*2.399) * (100 + (i%5)*26), vx:0, vy:0,

@@ -4,6 +4,25 @@
 
 ---
 
+## 2026-07-14 (later) — 🔍 INSPECTIONS PASS + SUBSIDIARY ADJUDICATION (the states got REAL)
+**Adjudication reversed the queued 'reclassification':** the 4 suspect subsidiary permits were
+CORRECTLY classified (water heater/$0, seismic retrofit, $690 window, repairs) — the bug was the
+any-BP-event fallback counting majors as permitted on TRADES permits. Harvest-verified (full
+2015-2026 + parcel variants): **2427 San Pablo, 2680 Bancroft, 2441 Le Conte NEVER FILED a primary
+BP**; 2138 Kittredge = phased mid-permitting (demo issued B2024-06135, Phase I approved-w/cond,
+Phase 2 expired). Cascade (722ea18, deployed): JN-K first-BP rule +subsidiary filter → baseline
+APPENDED 2026-07-14 (permitted 37→33, entitled 59→58, gate PASS); deck Sankey 58→33; Gantt B 8 rows;
+pipeline-state waiting room 33proj/**5,111u**; intake-median prose 84→113. **INSPECTIONS PASS**
+(committed, undeployed): all 23 primary permits of states 3/4 harvested (full histories, retry rule
+honored): **16/19 projects ACTIVE** (2403 SP inspected TODAY; 2538 Durant 453 insp; 1598 University
+698; 2902 Adeline 211; 1701 SP 298), **2 IDLE-EVER (2317 Channing 22u, 1740 San Pablo 54u — permits
+issued, ZERO inspections)**, 1 stale (1716 Seventh). Page states corrected: permit-idle 11/87u→3/78u,
+building 8/661→16/670; last-inspection column added; overlay = data/processed/
+inspection_activity_2026-07-14.json (evidence artifact). ALSO: 2700 Shattuck timeline pulled for
+John (deemed complete 2024-10-10, ~21mo in consideration, no decision; portal-vs-v2 filed-date
+discrepancy noted). NEXT harvester passes offered: entitlement-expiration (waiting room countdown),
+live filing check, payments tab.
+
 ## 2026-07-14 — ⏳ PIPELINE-STATE VIEW LIVE-READY + HOME REORG (redesign phase 1)
 **Site redesign started** (proposal notes/2026-07-10_site_redesign_proposal.md): v1-era home text
 ARCHIVED to technical-archive-2026.html (reverification banner; John: only TEXT was meant — old

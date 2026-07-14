@@ -4,6 +4,23 @@
 
 ---
 
+## 2026-07-14 — ⏳ PIPELINE-STATE VIEW LIVE-READY + HOME REORG (redesign phase 1)
+**Site redesign started** (proposal notes/2026-07-10_site_redesign_proposal.md): v1-era home text
+ARCHIVED to technical-archive-2026.html (reverification banner; John: only TEXT was meant — old
+notebook table went along, restore if asked); home top = Mayor badge ("State of Our Housing
+mid-July 2026", 1.35rem) + Audit/Curriculum/Explorer button row + grow-sentence as italic.
+**NEW VIEW: docs/pipeline-state.html** (generator scripts/gen_pipeline_state_page.py — derives from
+v2 at build time, GATE-CHECKED vs JN-K baseline): 80 applied (4,427u) / **29 entitled-waiting
+(4,881u — THE WAITING ROOM)** / 30 permit-no-activity (408u) / 8 building (661u) / 703 complete
+(3,693u) / 2 withdrawn; named registers w/ time-in-state (2131 University 13.0 yrs); 3 policy-lever
+cards (modeled tags, per-state exposure). **ANCHOR CAUGHT: 4 majors (2427 San Pablo 78u, 2680
+Bancroft 79u, 2138 Kittredge 73u, 2441 Le Conte 65u) whose ONLY building_permit_issued event is
+SUBSIDIARY-classified** — suspect (their permit IS primary); any-permit-event rule used + disclosed;
+**reclassification = queued gated write**. Deck also updated earlier: Clariti $5M open-API ask
+(five asks), hidden-timeline fact, water 16 MGD/1.9 campus + 250-400mi mains + Hayward-fault line,
+thick water arrow. NEXT (redesign): nav bar + trust chip; Players view (name-normalization first);
+KML packages for John's Earth Studio flyby session; new home intro copy.
+
 ## 2026-07-10 (later⁵) — ✍️ GATED WRITE #4: 3030 Telegraph entitlement chain (harvester detail-pull)
 **THE HARVESTER FINDING: Berkeley's portal renders the FULL workflow timeline (deemed-complete, CEQA,
 staff decision, appeal, final) in HIDDEN display:none DOM rows on the Processing Status tab** — read

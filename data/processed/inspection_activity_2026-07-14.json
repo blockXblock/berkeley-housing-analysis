@@ -1,0 +1,200 @@
+{
+ "as_of": "2026-07-14",
+ "provenance": "Inspections pass 2026-07-14 (HARVESTER, experiments/accela_scrape/inspection_scraper) over all 23 primary permits of the 19 states-3/4 projects; 0-results retried per the standing rule (2317 Channing + 1740 San Pablo confirmed zero inspections ever). verdict: active = last inspection within 183 days of as_of; idle = none ever; stale = older.",
+ "projects": {
+  "32": {
+   "permits": [
+    "B2022-05881"
+   ],
+   "n": 0,
+   "first": null,
+   "last": null,
+   "finals": 0,
+   "verdict": "idle"
+  },
+  "60": {
+   "permits": [
+    "B2024-02508"
+   ],
+   "n": 6,
+   "first": "2026-05-14",
+   "last": "2026-06-30",
+   "finals": 0,
+   "verdict": "active"
+  },
+  "63": {
+   "permits": [
+    "B2022-01332",
+    "B2022-01386"
+   ],
+   "n": 53,
+   "first": "2023-07-25",
+   "last": "2025-04-25",
+   "finals": 0,
+   "verdict": "stale"
+  },
+  "72": {
+   "permits": [
+    "B2025-01579"
+   ],
+   "n": 12,
+   "first": "2026-02-17",
+   "last": "2026-05-13",
+   "finals": 5,
+   "verdict": "active"
+  },
+  "79": {
+   "permits": [
+    "B2023-00192"
+   ],
+   "n": 50,
+   "first": "2024-04-08",
+   "last": "2026-01-29",
+   "finals": 8,
+   "verdict": "active"
+  },
+  "117": {
+   "permits": [
+    "B2022-04242"
+   ],
+   "n": 0,
+   "first": null,
+   "last": null,
+   "finals": 0,
+   "verdict": "idle"
+  },
+  "129": {
+   "permits": [
+    "B2024-04504",
+    "B2024-06099"
+   ],
+   "n": 47,
+   "first": "2025-09-03",
+   "last": "2026-06-30",
+   "finals": 0,
+   "verdict": "active"
+  },
+  "131": {
+   "permits": [
+    "B2025-02361"
+   ],
+   "n": 16,
+   "first": "2026-01-29",
+   "last": "2026-06-25",
+   "finals": 0,
+   "verdict": "active"
+  },
+  "139": {
+   "permits": [
+    "B2023-02332"
+   ],
+   "n": 453,
+   "first": "2024-10-23",
+   "last": "2026-07-09",
+   "finals": 4,
+   "verdict": "active"
+  },
+  "141": {
+   "permits": [
+    "B2024-01268"
+   ],
+   "n": 7,
+   "first": "2026-04-06",
+   "last": "2026-06-30",
+   "finals": 0,
+   "verdict": "active"
+  },
+  "143": {
+   "permits": [
+    "B2021-04232"
+   ],
+   "n": 211,
+   "first": "2025-05-27",
+   "last": "2026-07-14",
+   "finals": 0,
+   "verdict": "active"
+  },
+  "147": {
+   "permits": [
+    "B2024-05944"
+   ],
+   "n": 145,
+   "first": "2025-10-01",
+   "last": "2026-07-10",
+   "finals": 0,
+   "verdict": "active"
+  },
+  "152": {
+   "permits": [
+    "B2024-00587",
+    "B2024-01924"
+   ],
+   "n": 698,
+   "first": "2024-07-17",
+   "last": "2026-07-10",
+   "finals": 0,
+   "verdict": "active"
+  },
+  "153": {
+   "permits": [
+    "B2024-02966"
+   ],
+   "n": 298,
+   "first": "2025-07-31",
+   "last": "2026-07-01",
+   "finals": 0,
+   "verdict": "active"
+  },
+  "157": {
+   "permits": [
+    "B2024-03583",
+    "B2024-04602"
+   ],
+   "n": 404,
+   "first": "2024-12-10",
+   "last": "2026-06-30",
+   "finals": 22,
+   "verdict": "active"
+  },
+  "159": {
+   "permits": [
+    "B2024-00143"
+   ],
+   "n": 421,
+   "first": "2025-06-10",
+   "last": "2026-07-14",
+   "finals": 0,
+   "verdict": "active"
+  },
+  "163": {
+   "permits": [
+    "B2025-00820"
+   ],
+   "n": 27,
+   "first": "2025-10-09",
+   "last": "2026-07-10",
+   "finals": 0,
+   "verdict": "active"
+  },
+  "183": {
+   "permits": [
+    "B2022-05957"
+   ],
+   "n": 44,
+   "first": "2024-12-20",
+   "last": "2026-05-20",
+   "finals": 0,
+   "verdict": "active"
+  },
+  "184": {
+   "permits": [
+    "B2025-00168"
+   ],
+   "n": 75,
+   "first": "2025-09-25",
+   "last": "2026-07-10",
+   "finals": 0,
+   "verdict": "active"
+  }
+ }
+}

@@ -31,6 +31,10 @@ uc = {r[0] for r in v2.execute("""SELECT project_id FROM project_classifications
 activity = {r[0] for r in v2.execute("""SELECT DISTINCT project_id FROM project_events e
     JOIN vocabulary_event_types t ON t.id=e.event_type_id
     WHERE t.code IN ('construction_start_observed','topped_out')""")}
+# INSPECTION OVERLAY (2026-07-14 harvest of all 23 primary permits in states 3/4):
+# dated inspection evidence outranks events/status for the building-vs-idle split.
+INSPECT = json.load(open(os.path.join(ROOT, 'data/processed/inspection_activity_2026-07-14.json')))
+insp = {int(k): v for k, v in INSPECT['projects'].items()}
 
 def d10(s):
     s = str(s or '')[:10]
@@ -46,7 +50,11 @@ for pid, addr, u, f, e, bp, co, status in v2.execute("""SELECT project_id, addre
     u = u or 0
     f, e, bp, co = d10(f), d10(e), d10(bp), d10(co)
     row = dict(pid=pid, addr=(addr or '').title(), u=u, status=status)
+    iv = insp.get(pid)
+    row['last_insp'] = iv['last'] if iv else None
     if co: STATES[5].append(row | dict(anchor=co))
+    elif bp and iv:   # inspection evidence wins where we have it
+        STATES[4 if iv['verdict'] == 'active' else 3].append(row | dict(anchor=bp))
     elif bp and (pid in activity or status == 'under_construction'):
         STATES[4].append(row | dict(anchor=bp))
     elif bp: STATES[3].append(row | dict(anchor=bp))
@@ -80,9 +88,11 @@ DESC = {
     'deemed-complete → decision (median 410 days for majors).',
  2: 'THE WAITING ROOM. Fully approved and legal to seek a permit — nothing is being built. '
     'Housing dies of waiting here, not denial.',
- 3: 'A permit exists but we see no construction evidence (no start observed, no topping out, '
-    'status not under-construction). Some are mobilizing; the old ones are the stalled shelf.',
- 4: 'Construction evidence on the record. Once building starts, 95% of units reach completion.',
+ 3: 'A permit exists but the inspection record shows no recent activity — verified against every '
+    'permit\'s full inspection history (harvested 2026-07-14). Two projects have permits and have '
+    'NEVER called an inspection.',
+ 4: 'Dated inspection evidence on the record (last inspection within 6 months — several inspected '
+    'this very week). Once building starts, 95% of units reach completion.',
  5: 'Certificate of occupancy issued — keys in doors. The audited count.',
 }
 COLORS = {1: '#7ec8e3', 2: '#4a6478', 3: '#ff9f7f', 4: '#ffd166', 5: '#8fd694'}
@@ -107,15 +117,16 @@ def state_section(i):
     for r in rows[:12]:
         yrs = f"{(TODAY - r['anchor']).days / 365:.1f} yrs" if r.get('anchor') else '—'
         anch = r['anchor'].isoformat() if r.get('anchor') else '—'
+        li = r.get('last_insp') or ('never' if i in (3, 4) and r.get('last_insp') is None and r['pid'] in insp else '—')
         trs.append(f"<tr><td>{esc(r['addr'])}</td><td class='num'>{r['u']:,}</td>"
-                   f"<td>{anch}</td><td class='num'>{yrs}</td></tr>")
+                   f"<td>{anch}</td><td class='num'>{yrs}</td><td>{li if i in (3,4) else ''}</td></tr>")
     more = f"<p class='foot'>…and {len(rows)-12} more (shown: largest 12 by units).</p>" if len(rows) > 12 else ''
     return f"""
 <section>
   <h2><span style="color:{COLORS[i]}">■</span> {i} · {NAMES[i]}</h2>
   <p class="big">{units:,} units <span style="font-size:1.1rem;color:#9fb8c8">across {len(rows):,} projects</span></p>
   <p>{DESC[i]}</p>
-  <table><tr><th>project</th><th>units</th><th>in this state since</th><th>time in state</th></tr>
+  <table><tr><th>project</th><th>units</th><th>in this state since</th><th>time in state</th><th>last inspection</th></tr>
   {''.join(trs)}</table>
   {more}
 </section>"""
@@ -185,8 +196,9 @@ html = f"""<!DOCTYPE html>
   {lever_html}
   <div class="src">Derived {TODAY.isoformat()} from the canonical v2 database (stage dates: first-application /
   entitlement / first non-subsidiary permit / verdict-driven CO — the MIN-semantics fields corrected 2026-07-10);
-  construction activity = observed start / topping-out events, or current under-construction status where events
-  are absent; permit evidence = the view's first non-subsidiary permit ONLY — the 2026-07-14 adjudication removed the
+  construction activity = the harvested inspection record (all 23 primary permits of states 3/4, full histories,
+  2026-07-14 — see data/processed/inspection_activity_2026-07-14.json), falling back to observed-start/topping-out
+  events or status only where no inspection data exists; permit evidence = the view's first non-subsidiary permit ONLY — the 2026-07-14 adjudication removed the
   any-permit-event fallback after harvest verification showed the four affected majors' only permit events were
   trades permits (three have never filed a primary building permit; 2138 Kittredge is phased mid-permitting). The ≥50-unit subset is gate-checked against the audited JN-K funnel baseline ({bl['as_of']}) at
   generation time. Coverage: tracked projects (the full permit-level record lives in

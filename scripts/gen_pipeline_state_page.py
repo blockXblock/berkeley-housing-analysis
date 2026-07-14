@@ -31,12 +31,6 @@ uc = {r[0] for r in v2.execute("""SELECT project_id FROM project_classifications
 activity = {r[0] for r in v2.execute("""SELECT DISTINCT project_id FROM project_events e
     JOIN vocabulary_event_types t ON t.id=e.event_type_id
     WHERE t.code IN ('construction_start_observed','topped_out')""")}
-# any-BP-event fallback (JN-K rule): four majors' ONLY permit event is subsidiary-classified —
-# suspect for 65-79u projects whose permit IS primary; reclassification queued. Without this,
-# real under-construction buildings (2427 San Pablo et al.) vanish from the permitted states.
-bp_any = dict(v2.execute("""SELECT project_id, MIN(substr(event_date,1,10)) FROM project_events e
-    JOIN vocabulary_event_types t ON t.id=e.event_type_id
-    WHERE t.code='building_permit_issued' GROUP BY project_id"""))
 
 def d10(s):
     s = str(s or '')[:10]
@@ -51,7 +45,6 @@ for pid, addr, u, f, e, bp, co, status in v2.execute("""SELECT project_id, addre
     if pid in uc: continue
     u = u or 0
     f, e, bp, co = d10(f), d10(e), d10(bp), d10(co)
-    bp = bp or d10(bp_any.get(pid))
     row = dict(pid=pid, addr=(addr or '').title(), u=u, status=status)
     if co: STATES[5].append(row | dict(anchor=co))
     elif bp and (pid in activity or status == 'under_construction'):
@@ -193,8 +186,9 @@ html = f"""<!DOCTYPE html>
   <div class="src">Derived {TODAY.isoformat()} from the canonical v2 database (stage dates: first-application /
   entitlement / first non-subsidiary permit / verdict-driven CO — the MIN-semantics fields corrected 2026-07-10);
   construction activity = observed start / topping-out events, or current under-construction status where events
-  are absent; permit evidence = the view's first non-subsidiary permit, falling back to any permit-issuance event
-  (four majors' only permit event is subsidiary-classified — suspect, reclassification queued). The ≥50-unit subset is gate-checked against the audited JN-K funnel baseline ({bl['as_of']}) at
+  are absent; permit evidence = the view's first non-subsidiary permit ONLY — the 2026-07-14 adjudication removed the
+  any-permit-event fallback after harvest verification showed the four affected majors' only permit events were
+  trades permits (three have never filed a primary building permit; 2138 Kittredge is phased mid-permitting). The ≥50-unit subset is gate-checked against the audited JN-K funnel baseline ({bl['as_of']}) at
   generation time. Coverage: tracked projects (the full permit-level record lives in
   <a href="housing-audit.html">the Audit</a>). Generator: scripts/gen_pipeline_state_page.py — the page regenerates
   from the record; numbers are never hand-edited. <a href="index.html">← berkeleybuild.com</a></div>

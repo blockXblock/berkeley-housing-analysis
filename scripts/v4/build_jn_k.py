@@ -168,7 +168,13 @@ for pid, u, f, e, bp, cod, status in v2.execute("""SELECT project_id, total_unit
         WHERE total_units >= 50"""):
     bpm = v2.execute("""SELECT MIN(substr(pe.event_date,1,10)) FROM project_events pe
         JOIN vocabulary_event_types v ON pe.event_type_id=v.id
-        WHERE pe.project_id=? AND v.code='building_permit_issued'""", (pid,)).fetchone()[0]
+        WHERE pe.project_id=? AND v.code='building_permit_issued'
+          AND NOT EXISTS (SELECT 1 FROM project_events c JOIN vocabulary_event_types ct
+              ON ct.id=c.event_type_id WHERE ct.code='permit_classified_subsidiary'
+              AND c.permit_id=pe.permit_id)""", (pid,)).fetchone()[0]
+    # subsidiary filter added 2026-07-14: four majors' ONLY permit events were trades permits
+    # (water heater/seismic/window/repairs) — harvest-verified NO primary BP exists for
+    # 2427 San Pablo / 2680 Bancroft / 2441 Le Conte; 2138 Kittredge is phased mid-permitting.
     majors.append(dict(pid=pid, u=u, uc=pid in uc, status=status, f=cl(f), ac=cl(ac_map.get(pid)),
                        e=cl(e), bp=cl(bpm or bp) or cl(bpm or bp, True), co=cl(cod, True)))
 intake = [(m['ac']-m['f']).days for m in majors

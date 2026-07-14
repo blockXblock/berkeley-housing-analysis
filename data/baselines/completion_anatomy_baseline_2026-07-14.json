@@ -1,0 +1,30 @@
+{
+ "as_of": "2026-07-14",
+ "v4_sha": "f2817aa",
+ "anchor": "reconciliation_baseline_2026-07-03i.json",
+ "provenance": "APPEND after the 2026-07-14 subsidiary-evidence adjudication. Deltas vs 2026-07-10: majors_permitted 37->33 and majors_entitled 59->58. Cause: the first-BP rule now excludes subsidiary-classified permits (aligning with v_projects_flat); the four affected majors were counted permitted on TRADES permits (water heater / seismic retrofit / window / repairs). Harvest-verified 2026-07-14 (full 2015-2026 universe + parcel address variants): 2427 San Pablo, 2680 Bancroft, 2441 Le Conte have NO primary building-permit filing at all; 2138 Kittredge is phased mid-permitting (demo issued B2024-06135, Phase I approved-w/conditions B2025-00984, Phase 2 expired B2025-02344). All other figures identical.",
+ "figures": {
+  "co_units_2018_2025": 4229,
+  "co_permits": 845,
+  "corridor_units": 2016,
+  "corridor_permits": 94,
+  "fabric_units": 2213,
+  "fabric_permits": 751,
+  "small_units": 847,
+  "small_permits": 792,
+  "large_units": 3382,
+  "large_permits": 53,
+  "large_units_nonarterial": 1442,
+  "majors_nonuc": 87,
+  "majors_entitled": 58,
+  "majors_permitted": 33,
+  "majors_completed": 25,
+  "majors_withdrawn": 1,
+  "majors_denied": 0,
+  "ac_majors_covered": 44,
+  "median_intake_days": 113,
+  "median_consideration_days": 410,
+  "gap2025_total": 108,
+  "gap2025_ours_only": 101
+ }
+}

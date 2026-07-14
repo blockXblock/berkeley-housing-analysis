@@ -28,14 +28,10 @@ v2 = sqlite3.connect(f"file:{os.path.join(ROOT, 'databases', 'berkeley_housing_v
 activity = {r[0] for r in v2.execute("""SELECT DISTINCT project_id FROM project_events e
     JOIN vocabulary_event_types t ON t.id=e.event_type_id
     WHERE t.code IN ('construction_start_observed','topped_out')""")}
-bp_any = dict(v2.execute("""SELECT project_id, MIN(substr(event_date,1,10)) FROM project_events e
-    JOIN vocabulary_event_types t ON t.id=e.event_type_id
-    WHERE t.code='building_permit_issued' GROUP BY project_id"""))
 STATE_NAMES = {1: 'applied', 2: 'waiting', 3: 'permit-idle', 4: 'building', 5: 'complete', 0: 'withdrawn'}
 proj = {}
 for pid, addr, u, e, bp, co, status in v2.execute("""SELECT project_id, address_display, total_units,
         entitled_date, bp_issued_date, co_issued_date, status_code FROM v_projects_flat"""):
-    bp = bp or bp_any.get(pid)
     if co: st = 5
     elif bp and (pid in activity or status == 'under_construction'): st = 4
     elif bp: st = 3

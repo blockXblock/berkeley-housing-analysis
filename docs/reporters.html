@@ -74,6 +74,12 @@
       of ~4,200, every row named).</li>
     <li>Dates carry precision honestly: a few records only know their year (they appear as Jan-1).
       When something matters for publication, ask us and we'll pull the primary document.</li>
+    <li><b>"SQL query took too long"?</b> The browser workbench caps queries at one second — on this
+      4&nbsp;MB database that almost always means a missing JOIN condition (check your ON clauses, add a
+      LIMIT). For genuinely heavy queries, run Datasette on your own machine with a higher limit:
+      <code>pip install datasette</code>, download the database file below, then
+      <code>datasette berkeley.db --setting sql_time_limit_ms 3500</code>. Or send us the query and
+      we'll bake it into the database as an instant view.</li>
     <li>The database updates when the record does (harvest + records requests); the file you query is
       the dated public mirror at <code>/data/berkeley_housing_v2_public.db</code>.</li>
   </ul>

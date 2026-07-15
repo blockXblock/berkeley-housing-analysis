@@ -164,20 +164,28 @@ def harvest_record(rec, sha_set, stubs):
     proj_dir = f"{STAGE}/{rec['proj']}"
     os.makedirs(proj_dir, exist_ok=True)
 
-    d = discover_url(rec["permit"], module_hint="Planning", headless=True, max_runtime_seconds=120)
-    if not d.get("found"):
-        return [dict(status="DISCOVERY-FAILED", project_id=rec["proj"], permit_number=rec["permit"],
-                     filename="", file_size_mib="", page_count="", classifier_reason="",
-                     grid_displayed_size="", sha256="", suggested_r2_key="",
-                     existing_stub_doc_id="", local_path="")]
-    m = d["master"]
-    if not (m["permit_number_displayed"].startswith("ZP") and m["capid1"].endswith("PLN")):
-        return [dict(status="SKIP-NOT-ZP-PLANNING", project_id=rec["proj"], permit_number=rec["permit"],
-                     filename=m["permit_number_displayed"], file_size_mib="", page_count="",
-                     classifier_reason=f"capid1={m['capid1']}", grid_displayed_size="", sha256="",
-                     suggested_r2_key="", existing_stub_doc_id="", local_path="")]
-    url = m["capdetail_url"]
-    print(f"  [{rec['permit']}] capID {m['capid_triplet']}")
+    # 2026-07-15 fix (the queued harvester items): a record may carry its own detail href
+    # (from the date_range harvest, which enumerates EVERY record incl. -REV/-DEF sub-records
+    # and Building-module permits). With an href we skip discovery AND the ZP-only gate —
+    # the permit-label assert below still guards against wrong-page loads.
+    if rec.get("href"):
+        url = "https://aca-prod.accela.com" + rec["href"]
+        print(f"  [{rec['permit']}] direct href")
+    else:
+        d = discover_url(rec["permit"], module_hint="Planning", headless=True, max_runtime_seconds=120)
+        if not d.get("found"):
+            return [dict(status="DISCOVERY-FAILED", project_id=rec["proj"], permit_number=rec["permit"],
+                         filename="", file_size_mib="", page_count="", classifier_reason="",
+                         grid_displayed_size="", sha256="", suggested_r2_key="",
+                         existing_stub_doc_id="", local_path="")]
+        m = d["master"]
+        if not (m["permit_number_displayed"].startswith("ZP") and m["capid1"].endswith("PLN")):
+            return [dict(status="SKIP-NOT-ZP-PLANNING", project_id=rec["proj"], permit_number=rec["permit"],
+                         filename=m["permit_number_displayed"], file_size_mib="", page_count="",
+                         classifier_reason=f"capid1={m['capid1']}", grid_displayed_size="", sha256="",
+                         suggested_r2_key="", existing_stub_doc_id="", local_path="")]
+        url = m["capdetail_url"]
+        print(f"  [{rec['permit']}] capID {m['capid_triplet']}")
 
     p = sync_playwright().start()
     browser = p.chromium.launch(headless=True)

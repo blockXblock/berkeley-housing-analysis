@@ -1,5 +1,5 @@
 {
- "as_of": "2026-07-14",
+ "as_of": "2026-07-15",
  "rule": "BMC 23.404.060: lapse-ELIGIBLE 1yr after approval unless exercised; a filed BP application protects; declaration is DISCRETIONARY (14-day notice). Tier evidence: new-construction Building records at situs FILED within the current cycle (entitled_date - 2yrs onward). permitted_unlinked = Issued/Finaled primary exists but is not linked in v2 (linkage-gap queue); mobilizing = live application; expired_attempt noted where an application died.",
  "projects": [
   {
@@ -35,6 +35,15 @@
    "filed": "2025-08-07",
    "entitled": "2025-12-04",
    "lapse_eligible_date": "2026-12-04",
+   "tier": "fresh"
+  },
+  {
+   "pid": 3,
+   "addr": "2700 Shattuck Ave",
+   "u": 359,
+   "filed": "2024-06-13",
+   "entitled": "2026-07-09",
+   "lapse_eligible_date": "2027-07-09",
    "tier": "fresh"
   },
   {

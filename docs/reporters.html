@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For Reporters — query Berkeley's housing record directly</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; background:#fdfdfb; color:#24313b; line-height:1.6; }
+  .wrap { max-width: 46rem; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+  .kicker { text-transform:uppercase; letter-spacing:.14em; font-size:.85rem; color:#2c5282; margin-bottom:.8rem; }
+  h1 { font-size:2rem; line-height:1.2; color:#1a365d; margin-bottom:1rem; }
+  h2 { font-size:1.3rem; color:#1a365d; margin:2rem 0 .5rem; }
+  p, li { font-size:1.05rem; margin-bottom:.8rem; }
+  a { color:#2c5282; }
+  .card { background:#f0f6fa; border-left:4px solid #2c5282; border-radius:0 8px 8px 0; padding:1rem 1.4rem; margin:.8rem 0; }
+  .card b { color:#1a365d; }
+  code { background:#eef2f5; padding:.1rem .35rem; border-radius:4px; font-size:.92em; }
+  .foot { font-size:.9rem; color:#6d8496; margin-top:2.5rem; border-top:1px solid #e2e8f0; padding-top:1rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">berkeleybuild.com · for reporters</div>
+  <h1>Query Berkeley's housing record directly — no records request required</h1>
+  <p>Everything on this site derives from one database, rebuilt from primary sources (every permit
+  2015–2026, audited row-by-row against the state filing). That database is public. The links below
+  open it <b>in your browser</b> — a full SQL workbench, no installation, no account — with the
+  question already typed in. Edit anything and re-run.</p>
+
+  <h2>Start with a story: 2700 Shattuck</h2>
+  <p>The ZAB approved the 359-unit mixed-use project this month
+  (<a href="https://www.dailycal.org/news/city/housing/berkeley-zoning-board-approves-shattuck-mixed-use-development-debates-waiving-affordable-housing-requirement/article_3c5c9878-a6f8-4cb6-adb0-53230ef59bb5.html">Daily Cal</a>).
+  Our record adds the clock behind it: SB 330 pre-application <b>Nov 2023</b>, full application
+  <b>May 2024</b>, deemed complete <b>Oct 10, 2024</b> — then <b>21 months under consideration</b>,
+  versus a 410-day median for major projects. And what approval means statistically: entitled major
+  projects enter a waiting room currently holding <b>5,111 units</b>, where 2,334 of them are already
+  past the one-year lapse-eligibility line of BMC 23.404.060.</p>
+  <div class="card"><b><a href="https://lite.datasette.io/?url=https%3A%2F%2Fberkeleybuild.com%2Fdata%2Fberkeley_housing_v2_public.db#/berkeley_housing_v2_public?sql=SELECT%20substr%28e.event_date%2C1%2C10%29%20AS%20date%2C%20t.code%20AS%20event%2C%20COALESCE%28e.summary%2C%27%27%29%20AS%20detail%20FROM%20project_events%20e%20JOIN%20vocabulary_event_types%20t%20ON%20t.id%3De.event_type_id%20JOIN%20v_projects_flat%20f%20ON%20f.project_id%3De.project_id%20WHERE%20f.address_display%20LIKE%20%272700%20SHATTUCK%25%27%20ORDER%20BY%201">▶ 2700 Shattuck — every recorded event</a></b><br>
+    The project's full timeline, straight from the database.</div>
+  <div class="card"><b><a href="https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/press/case_file_2700_shattuck.ipynb">▶ The case-file notebook (Colab)</a></b><br>
+    A guided walkthrough: the timeline, the stage clock vs the medians, the density-bonus/affordability
+    context, and what happens to projects after approval — every number computed in front of you.</div>
+
+  <h2>The standing questions, pre-typed</h2>
+  <div class="card"><b><a href="https://lite.datasette.io/?url=https%3A%2F%2Fberkeleybuild.com%2Fdata%2Fberkeley_housing_v2_public.db#/berkeley_housing_v2_public?sql=SELECT%20address_display%2C%20total_units%2C%20substr%28entitled_date%2C1%2C10%29%20AS%20entitled%20FROM%20v_projects_flat%20WHERE%20entitled_date%20IS%20NOT%20NULL%20AND%20bp_issued_date%20IS%20NULL%20AND%20co_issued_date%20IS%20NULL%20AND%20status_code%21%3D%27withdrawn%27%20ORDER%20BY%20total_units%20DESC">▶ The waiting room</a></b> — every entitled project
+    with no building permit, largest first. (33 projects, 5,111 units as of this writing.)</div>
+  <div class="card"><b><a href="https://lite.datasette.io/?url=https%3A%2F%2Fberkeleybuild.com%2Fdata%2Fberkeley_housing_v2_public.db#/berkeley_housing_v2_public?sql=SELECT%20f.address_display%2C%20f.total_units%2C%20f.status_code%2C%20substr%28f.entitled_date%2C1%2C10%29%20AS%20entitled%20FROM%20project_classifications%20pc%20JOIN%20vocabulary_classification_types%20v%20ON%20pc.classification_type_id%3Dv.id%20JOIN%20v_projects_flat%20f%20ON%20f.project_id%3Dpc.project_id%20WHERE%20v.code%3D%27density_bonus%27%20ORDER%20BY%20f.total_units%20DESC">▶ Density-bonus projects</a></b> — who is using the
+    State Density Bonus (the law behind the 2700 Shattuck waiver debate).</div>
+  <div class="card"><b><a href="https://lite.datasette.io/?url=https%3A%2F%2Fberkeleybuild.com%2Fdata%2Fberkeley_housing_v2_public.db#/berkeley_housing_v2_public?sql=SELECT%20address_display%2C%20total_units%2C%20substr%28filed_date%2C1%2C10%29%20AS%20filed%2C%20substr%28entitled_date%2C1%2C10%29%20AS%20entitled%2C%20CAST%28julianday%28entitled_date%29-julianday%28filed_date%29%20AS%20INT%29%20AS%20days_to_entitle%20FROM%20v_projects_flat%20WHERE%20total_units%3E%3D50%20AND%20filed_date%20IS%20NOT%20NULL%20AND%20entitled_date%20IS%20NOT%20NULL%20ORDER%20BY%20days_to_entitle%20DESC">▶ The stage clock</a></b> — how long each major project
+    took from application to entitlement, slowest first.</div>
+  <div class="card"><b><a href="https://lite.datasette.io/?url=https%3A%2F%2Fberkeleybuild.com%2Fdata%2Fberkeley_housing_v2_public.db">▶ Open the whole database</a></b> — every table, write your own SQL.
+    The main table is <code>v_projects_flat</code>; events are in <code>project_events</code>.</div>
+
+  <h2>Ground rules &amp; citation</h2>
+  <ul>
+    <li>Cite as: <i>"berkeleybuild.com, an independent reconstruction of Berkeley's housing records
+      from city permit data"</i> — and please link the page you used.</li>
+    <li>Every figure traces to a public record; the method and its audit live at
+      <a href="housing-audit.html">the Audit page</a> (our count vs the city's differs by 130 units
+      of ~4,200, every row named).</li>
+    <li>Dates carry precision honestly: a few records only know their year (they appear as Jan-1).
+      When something matters for publication, ask us and we'll pull the primary document.</li>
+    <li>The database updates when the record does (harvest + records requests); the file you query is
+      the dated public mirror at <code>/data/berkeley_housing_v2_public.db</code>.</li>
+  </ul>
+  <p class="foot">Questions, corrections, or a records-request you want cross-checked:
+  via <a href="index.html">berkeleybuild.com</a>. The whole pipeline is open — a reporter who wants
+  to rebuild the record from scratch can: <a href="data-science-curriculum.html">the curriculum</a>.</p>
+</div>
+</body>
+</html>

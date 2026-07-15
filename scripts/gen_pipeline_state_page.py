@@ -35,6 +35,11 @@ activity = {r[0] for r in v2.execute("""SELECT DISTINCT project_id FROM project_
 # dated inspection evidence outranks events/status for the building-vs-idle split.
 INSPECT = json.load(open(os.path.join(ROOT, 'data/processed/inspection_activity_2026-07-14.json')))
 insp = {int(k): v for k, v in INSPECT['projects'].items()}
+# LAPSE/COUNTDOWN OVERLAY (BMC 23.404.060 model + harvest BP-application evidence, 2026-07-14)
+LAPSE = json.load(open(os.path.join(ROOT, 'data/processed/waiting_room_lapse_2026-07-14.json')))
+lapse = {w['pid']: w for w in LAPSE['projects']}
+TIER_LABEL = {'mobilizing': 'MOBILIZING — BP application live', 'fresh': 'fresh (<1 yr entitled)',
+              'lapse_eligible': 'LAPSE-ELIGIBLE', 'permitted_unlinked': 'permit exists (v2 link gap)'}
 
 def d10(s):
     s = str(s or '')[:10]
@@ -87,7 +92,13 @@ DESC = {
  1: 'In intake or under consideration at the planning counter. The clock that matters here is '
     'deemed-complete → decision (median 410 days for majors).',
  2: 'THE WAITING ROOM. Fully approved and legal to seek a permit — nothing is being built. '
-    'Housing dies of waiting here, not denial.',
+    'Housing dies of waiting here, not denial. Under BMC 23.404.060 a permit becomes '
+    'LAPSE-ELIGIBLE one year after approval unless exercised (a filed building-permit '
+    'application protects; the declaration is discretionary). The tiers, from the record: '
+    '{MOB_N} projects ({MOB_U} units) are MOBILIZING with live permit applications; '
+    '{FR_N} ({FR_U}) are fresh; {LE_N} projects ({LE_U} units) are ALREADY LAPSE-ELIGIBLE '
+    '— the city has declared none of them lapsed. ({PU_N} more show an issued permit not yet '
+    'linked in our record — data queue.)',
  3: 'A permit exists but the inspection record shows no recent activity — verified against every '
     'permit\'s full inspection history (harvested 2026-07-14). Two projects have permits and have '
     'NEVER called an inspection.',
@@ -98,8 +109,9 @@ DESC = {
 COLORS = {1: '#7ec8e3', 2: '#4a6478', 3: '#ff9f7f', 4: '#ffd166', 5: '#8fd694'}
 LEVERS = [
  ('Entitlement shot-clock & extension certainty',
-  'Entitled approvals quietly age out. A standing extension policy (with a use-it-or-lose-it '
-  'horizon) makes the waiting room a queue instead of a shelf.', 2),
+  'Entitled approvals quietly age out: 2,334 units are already lapse-eligible under BMC 23.404.060 '
+  'and none has been declared lapsed. A standing extension policy with a use-it-or-lose-it horizon '
+  'makes the waiting room a queue instead of a shelf.', 2),
  ('Defer city fees to certificate of occupancy',
   'Fees due at permit issuance front-load cost onto the exact moment financing is hardest. '
   'Deferral to CO moves the bill to when the building earns.', 2),
@@ -107,6 +119,17 @@ LEVERS = [
   'Contact every permit older than 18 months with no activity: extend the live ones, retire the '
   'dead ones — the register stops hiding both.', 3),
 ]
+
+tier_stats = {}
+for w in LAPSE['projects']:
+    t = w.get('tier', '?')
+    n, u = tier_stats.get(t, (0, 0))
+    tier_stats[t] = (n + 1, u + (w.get('u') or 0))
+def _t(t): return tier_stats.get(t, (0, 0))
+DESC[2] = DESC[2].format(MOB_N=_t('mobilizing')[0], MOB_U=f"{_t('mobilizing')[1]:,}",
+                         FR_N=_t('fresh')[0], FR_U=f"{_t('fresh')[1]:,}",
+                         LE_N=_t('lapse_eligible')[0], LE_U=f"{_t('lapse_eligible')[1]:,}",
+                         PU_N=_t('permitted_unlinked')[0])
 
 def esc(s): return str(s).replace('&', '&amp;').replace('<', '&lt;')
 
@@ -117,16 +140,23 @@ def state_section(i):
     for r in rows[:12]:
         yrs = f"{(TODAY - r['anchor']).days / 365:.1f} yrs" if r.get('anchor') else '—'
         anch = r['anchor'].isoformat() if r.get('anchor') else '—'
-        li = r.get('last_insp') or ('never' if i in (3, 4) and r.get('last_insp') is None and r['pid'] in insp else '—')
+        if i == 2:
+            lw = lapse.get(r['pid'], {})
+            ev = lw.get('evidence'); tier = lw.get('tier', '')
+            extra = TIER_LABEL.get(tier, '')
+            if ev: extra += f" ({ev['pn']})"
+            elif tier == 'lapse_eligible': extra += f" since {lw.get('lapse_eligible_date','')}"
+        else:
+            extra = (r.get('last_insp') or ('never' if i in (3, 4) and r['pid'] in insp else '—')) if i in (3, 4) else ''
         trs.append(f"<tr><td>{esc(r['addr'])}</td><td class='num'>{r['u']:,}</td>"
-                   f"<td>{anch}</td><td class='num'>{yrs}</td><td>{li if i in (3,4) else ''}</td></tr>")
+                   f"<td>{anch}</td><td class='num'>{yrs}</td><td>{extra}</td></tr>")
     more = f"<p class='foot'>…and {len(rows)-12} more (shown: largest 12 by units).</p>" if len(rows) > 12 else ''
     return f"""
 <section>
   <h2><span style="color:{COLORS[i]}">■</span> {i} · {NAMES[i]}</h2>
   <p class="big">{units:,} units <span style="font-size:1.1rem;color:#9fb8c8">across {len(rows):,} projects</span></p>
   <p>{DESC[i]}</p>
-  <table><tr><th>project</th><th>units</th><th>in this state since</th><th>time in state</th><th>last inspection</th></tr>
+  <table><tr><th>project</th><th>units</th><th>in this state since</th><th>time in state</th><th>status evidence</th></tr>
   {''.join(trs)}</table>
   {more}
 </section>"""
@@ -198,7 +228,10 @@ html = f"""<!DOCTYPE html>
   entitlement / first non-subsidiary permit / verdict-driven CO — the MIN-semantics fields corrected 2026-07-10);
   construction activity = the harvested inspection record (all 23 primary permits of states 3/4, full histories,
   2026-07-14 — see data/processed/inspection_activity_2026-07-14.json), falling back to observed-start/topping-out
-  events or status only where no inspection data exists; permit evidence = the view's first non-subsidiary permit ONLY — the 2026-07-14 adjudication removed the
+  events or status only where no inspection data exists; waiting-room tiers = BMC 23.404.060 one-year
+  lapse-eligibility modeled on entitlement dates + building-permit APPLICATIONS found in the 2015-2026 harvest
+  (data/processed/waiting_room_lapse_2026-07-14.json — lapse declaration is discretionary, so 'eligible' is a
+  legal state, not a prediction); permit evidence = the view's first non-subsidiary permit ONLY — the 2026-07-14 adjudication removed the
   any-permit-event fallback after harvest verification showed the four affected majors' only permit events were
   trades permits (three have never filed a primary building permit; 2138 Kittredge is phased mid-permitting). The ≥50-unit subset is gate-checked against the audited JN-K funnel baseline ({bl['as_of']}) at
   generation time. Coverage: tracked projects (the full permit-level record lives in

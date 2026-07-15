@@ -1,0 +1,538 @@
+{
+ "as_of": "2026-07-14",
+ "rule": "BMC 23.404.060: lapse-ELIGIBLE 1yr after approval unless exercised; a filed BP application protects; declaration is DISCRETIONARY (14-day notice). Tier evidence: new-construction Building records at situs FILED within the current cycle (entitled_date - 2yrs onward). permitted_unlinked = Issued/Finaled primary exists but is not linked in v2 (linkage-gap queue); mobilizing = live application; expired_attempt noted where an application died.",
+ "projects": [
+  {
+   "pid": 1,
+   "addr": "1750 Sacramento St",
+   "u": 739,
+   "filed": "2025-12-03",
+   "entitled": "2026-03-03",
+   "records": [
+    {
+     "filed": "2025-12-03",
+     "pn": "B2025-05535",
+     "status": "Pending Payment"
+    },
+    {
+     "filed": "2025-12-03",
+     "pn": "B2025-05534",
+     "status": "Corrections List Issued"
+    }
+   ],
+   "lapse_eligible_date": "2027-03-03",
+   "tier": "mobilizing",
+   "evidence": {
+    "filed": "2025-12-03",
+    "pn": "B2025-05535",
+    "status": "Pending Payment"
+   }
+  },
+  {
+   "pid": 2,
+   "addr": "2276 Shattuck Ave",
+   "u": 336,
+   "filed": "2025-08-07",
+   "entitled": "2025-12-04",
+   "lapse_eligible_date": "2026-12-04",
+   "tier": "fresh"
+  },
+  {
+   "pid": 5,
+   "addr": "2425 Durant Ave",
+   "u": 117,
+   "filed": "2024-11-15",
+   "entitled": "2025-10-09",
+   "lapse_eligible_date": "2026-10-09",
+   "tier": "fresh"
+  },
+  {
+   "pid": 6,
+   "addr": "2029 University Ave",
+   "u": 240,
+   "filed": "2024-12-19",
+   "entitled": "2025-11-13",
+   "lapse_eligible_date": "2026-11-13",
+   "tier": "fresh"
+  },
+  {
+   "pid": 9,
+   "addr": "1899 Oxford St",
+   "u": 212,
+   "filed": "2024-07-03",
+   "entitled": "2026-02-11",
+   "records": [
+    {
+     "filed": "2026-06-02",
+     "pn": "B2026-02298",
+     "status": "Pending Payment"
+    }
+   ],
+   "lapse_eligible_date": "2027-02-11",
+   "tier": "mobilizing",
+   "evidence": {
+    "filed": "2026-06-02",
+    "pn": "B2026-02298",
+    "status": "Pending Payment"
+   }
+  },
+  {
+   "pid": 10,
+   "addr": "3000 Shattuck Ave",
+   "u": 166,
+   "filed": "2022-05-11",
+   "entitled": "2025-03-11",
+   "lapse_eligible_date": "2026-03-11",
+   "tier": "lapse_eligible"
+  },
+  {
+   "pid": 15,
+   "addr": "2109 Virginia St",
+   "u": 110,
+   "filed": "2024-07-03",
+   "entitled": "2026-02-26",
+   "lapse_eligible_date": "2027-02-26",
+   "tier": "fresh"
+  },
+  {
+   "pid": 18,
+   "addr": "2655 Shattuck Ave",
+   "u": 97,
+   "filed": "2024-06-12",
+   "entitled": "2025-08-14",
+   "lapse_eligible_date": "2026-08-14",
+   "tier": "fresh"
+  },
+  {
+   "pid": 28,
+   "addr": "2372 Ellsworth St",
+   "u": 63,
+   "filed": "2024-01-01",
+   "entitled": "2025-11-18",
+   "records": [
+    {
+     "filed": "2025-12-08",
+     "pn": "B2025-05654",
+     "status": "Corrections List Issued"
+    }
+   ],
+   "lapse_eligible_date": "2026-11-18",
+   "tier": "mobilizing",
+   "evidence": {
+    "filed": "2025-12-08",
+    "pn": "B2025-05654",
+    "status": "Corrections List Issued"
+   }
+  },
+  {
+   "pid": 34,
+   "addr": "2680 Bancroft Way",
+   "u": 79,
+   "filed": "2024-03-19",
+   "entitled": "2025-06-13",
+   "lapse_eligible_date": "2026-06-13",
+   "tier": "lapse_eligible"
+  },
+  {
+   "pid": 38,
+   "addr": "2449 Dwight Way",
+   "u": 39,
+   "filed": "2022-01-01",
+   "entitled": "2026-03-19",
+   "records": [
+    {
+     "filed": "2015-12-10",
+     "pn": "B2015-06006",
+     "status": "Closed Expired"
+    },
+    {
+     "filed": "2025-08-25",
+     "pn": "B2025-03595",
+     "status": "Under Review"
+    },
+    {
+     "filed": "2026-02-24",
+     "pn": "B2026-00735",
+     "status": "Issued"
+    }
+   ],
+   "lapse_eligible_date": "2027-03-19",
+   "tier": "permitted_unlinked",
+   "evidence": {
+    "filed": "2026-02-24",
+    "pn": "B2026-00735",
+    "status": "Issued"
+   }
+  },
+  {
+   "pid": 41,
+   "addr": "2147 San Pablo Ave",
+   "u": 15,
+   "filed": "2024-07-17",
+   "entitled": "2025-09-09",
+   "lapse_eligible_date": "2026-09-09",
+   "tier": "fresh"
+  },
+  {
+   "pid": 42,
+   "addr": "1740 University Ave",
+   "u": 12,
+   "filed": "2025-01-01",
+   "entitled": "2026-02-11",
+   "lapse_eligible_date": "2027-02-11",
+   "tier": "fresh"
+  },
+  {
+   "pid": 113,
+   "addr": "2138 Kittredge St",
+   "u": 73,
+   "filed": "2024-09-05",
+   "entitled": "2025-10-20",
+   "records": [
+    {
+     "filed": "2025-06-09",
+     "pn": "B2025-02344",
+     "status": "Closed Expired"
+    },
+    {
+     "filed": "2024-12-31",
+     "pn": "B2024-06135",
+     "status": "Issued"
+    },
+    {
+     "filed": "2025-03-11",
+     "pn": "B2025-00984",
+     "status": "Approved w/Conditions"
+    }
+   ],
+   "lapse_eligible_date": "2026-10-20",
+   "tier": "permitted_unlinked",
+   "evidence": {
+    "filed": "2024-12-31",
+    "pn": "B2024-06135",
+    "status": "Issued"
+   }
+  },
+  {
+   "pid": 116,
+   "addr": "2462 Bancroft Way",
+   "u": 66,
+   "filed": "2023-08-18",
+   "entitled": "2024-07-01",
+   "lapse_eligible_date": "2025-07-01",
+   "tier": "lapse_eligible"
+  },
+  {
+   "pid": 119,
+   "addr": "1974 Shattuck Ave",
+   "u": 599,
+   "filed": "2023-04-25",
+   "entitled": "2025-06-03",
+   "lapse_eligible_date": "2026-06-03",
+   "tier": "lapse_eligible"
+  },
+  {
+   "pid": 120,
+   "addr": "2274 Shattuck Ave",
+   "u": 299,
+   "filed": "2023-06-29",
+   "entitled": "2025-04-22",
+   "lapse_eligible_date": "2026-04-22",
+   "tier": "lapse_eligible"
+  },
+  {
+   "pid": 121,
+   "addr": "2100 Milvia St",
+   "u": 205,
+   "filed": "2023-12-20",
+   "entitled": "2025-07-01",
+   "lapse_eligible_date": "2026-07-01",
+   "tier": "lapse_eligible"
+  },
+  {
+   "pid": 122,
+   "addr": "2530 Bancroft Way",
+   "u": 110,
+   "filed": "2024-03-12",
+   "entitled": "2024-12-27",
+   "records": [
+    {
+     "filed": "2024-05-23",
+     "pn": "B2024-02577",
+     "status": "Closed Expired"
+    },
+    {
+     "filed": "2024-06-27",
+     "pn": "B2024-03190",
+     "status": "Closed Expired"
+    }
+   ],
+   "lapse_eligible_date": "2025-12-27",
+   "expired_attempt": {
+    "filed": "2024-05-23",
+    "pn": "B2024-02577",
+    "status": "Closed Expired"
+   },
+   "tier": "lapse_eligible"
+  },
+  {
+   "pid": 123,
+   "addr": "2037 Durant Ave",
+   "u": 74,
+   "filed": "2024-03-29",
+   "entitled": "2024-06-19",
+   "lapse_eligible_date": "2025-06-19",
+   "tier": "lapse_eligible"
+  },
+  {
+   "pid": 124,
+   "addr": "2442 Haste St",
+   "u": 34,
+   "filed": "2024-07-03",
+   "entitled": "2025-09-08",
+   "records": [
+    {
+     "filed": "2025-08-20",
+     "pn": "B2025-03529",
+     "status": "Issued"
+    },
+    {
+     "filed": "2025-10-23",
+     "pn": "B2025-04761",
+     "status": "Finaled"
+    }
+   ],
+   "lapse_eligible_date": "2026-09-08",
+   "tier": "permitted_unlinked",
+   "evidence": {
+    "filed": "2025-08-20",
+    "pn": "B2025-03529",
+    "status": "Issued"
+   }
+  },
+  {
+   "pid": 126,
+   "addr": "2427 San Pablo",
+   "u": 78,
+   "filed": "2022-10-05",
+   "entitled": "2024-09-16",
+   "records": [
+    {
+     "filed": "2017-04-11",
+     "pn": "B2017-01477",
+     "status": "Finaled"
+    }
+   ],
+   "lapse_eligible_date": "2025-09-16",
+   "tier": "lapse_eligible"
+  },
+  {
+   "pid": 127,
+   "addr": "2820 San Pablo",
+   "u": 1,
+   "filed": "2022-05-06",
+   "entitled": "2024-12-06",
+   "records": [
+    {
+     "filed": "2021-11-29",
+     "pn": "B2021-05376",
+     "status": "Closed Expired"
+    }
+   ],
+   "lapse_eligible_date": "2025-12-06",
+   "tier": "lapse_eligible"
+  },
+  {
+   "pid": 128,
+   "addr": "2833 Seventh St",
+   "u": 3,
+   "filed": "2023-09-21",
+   "entitled": "2024-05-07",
+   "records": [
+    {
+     "filed": "2024-08-19",
+     "pn": "B2024-04066",
+     "status": "Closed Expired"
+    }
+   ],
+   "lapse_eligible_date": "2025-05-07",
+   "expired_attempt": {
+    "filed": "2024-08-19",
+    "pn": "B2024-04066",
+    "status": "Closed Expired"
+   },
+   "tier": "lapse_eligible"
+  },
+  {
+   "pid": 130,
+   "addr": "1048 Keith St",
+   "u": 0,
+   "filed": "2024-02-08",
+   "entitled": "2025-06-04",
+   "records": [
+    {
+     "filed": "2024-03-26",
+     "pn": "B2024-01374",
+     "status": "Issued"
+    },
+    {
+     "filed": "2025-08-13",
+     "pn": "B2025-03418",
+     "status": "Issued"
+    }
+   ],
+   "lapse_eligible_date": "2026-06-04",
+   "tier": "permitted_unlinked",
+   "evidence": {
+    "filed": "2024-03-26",
+    "pn": "B2024-01374",
+    "status": "Issued"
+   }
+  },
+  {
+   "pid": 132,
+   "addr": "1627 Jaynes St",
+   "u": 0,
+   "filed": "2024-09-06",
+   "entitled": "2025-05-16",
+   "records": [
+    {
+     "filed": "2025-09-16",
+     "pn": "B2025-04070",
+     "status": "Issued"
+    }
+   ],
+   "lapse_eligible_date": "2026-05-16",
+   "tier": "permitted_unlinked",
+   "evidence": {
+    "filed": "2025-09-16",
+    "pn": "B2025-04070",
+    "status": "Issued"
+   }
+  },
+  {
+   "pid": 133,
+   "addr": "2128 Oxford St",
+   "u": 485,
+   "filed": "2023-03-17",
+   "entitled": "2024-10-04",
+   "records": [
+    {
+     "filed": "2024-01-23",
+     "pn": "B2024-00318",
+     "status": "Approved w/Conditions"
+    },
+    {
+     "filed": "2025-11-20",
+     "pn": "B2025-05345",
+     "status": "Pending Payment"
+    },
+    {
+     "filed": "2025-11-20",
+     "pn": "B2025-05341",
+     "status": "Corrections List Issued"
+    },
+    {
+     "filed": "2025-08-28",
+     "pn": "B2025-03675",
+     "status": "Approved w/Conditions"
+    }
+   ],
+   "lapse_eligible_date": "2025-10-04",
+   "tier": "mobilizing",
+   "evidence": {
+    "filed": "2024-01-23",
+    "pn": "B2024-00318",
+    "status": "Approved w/Conditions"
+   }
+  },
+  {
+   "pid": 140,
+   "addr": "2136 San Pablo Ave",
+   "u": 125,
+   "filed": "2021-03-18",
+   "entitled": "2024-05-22",
+   "lapse_eligible_date": "2025-05-22",
+   "tier": "lapse_eligible"
+  },
+  {
+   "pid": 149,
+   "addr": "2198 San Pablo Ave",
+   "u": 100,
+   "filed": "2018-05-31",
+   "entitled": "2019-09-25",
+   "lapse_eligible_date": "2020-09-25",
+   "tier": "lapse_eligible"
+  },
+  {
+   "pid": 156,
+   "addr": "2550 Shattuck Ave",
+   "u": 72,
+   "filed": "2025-01-01",
+   "entitled": "2025-01-21",
+   "lapse_eligible_date": "2026-01-21",
+   "tier": "lapse_eligible"
+  },
+  {
+   "pid": 178,
+   "addr": "2131 University Ave",
+   "u": 205,
+   "filed": null,
+   "entitled": "2013-07-08",
+   "records": [
+    {
+     "filed": "2015-06-23",
+     "pn": "B2015-02995",
+     "status": "Finaled"
+    }
+   ],
+   "lapse_eligible_date": "2014-07-08",
+   "tier": "permitted_unlinked",
+   "evidence": {
+    "filed": "2015-06-23",
+    "pn": "B2015-02995",
+    "status": "Finaled"
+   }
+  },
+  {
+   "pid": 180,
+   "addr": "2065 Kittredge St",
+   "u": 189,
+   "filed": null,
+   "entitled": "2021-07-22",
+   "records": [
+    {
+     "filed": "2023-06-21",
+     "pn": "PREAPP001054",
+     "status": "Closed"
+    },
+    {
+     "filed": "2022-11-17",
+     "pn": "B2022-05414",
+     "status": "Closed Expired"
+    },
+    {
+     "filed": "2022-07-14",
+     "pn": "B2022-03273",
+     "status": "Closed Expired"
+    }
+   ],
+   "lapse_eligible_date": "2022-07-22",
+   "expired_attempt": {
+    "filed": "2022-11-17",
+    "pn": "B2022-05414",
+    "status": "Closed Expired"
+   },
+   "tier": "lapse_eligible"
+  },
+  {
+   "pid": 181,
+   "addr": "2015 Blake St",
+   "u": 168,
+   "filed": null,
+   "entitled": "2020-07-10",
+   "lapse_eligible_date": "2021-07-10",
+   "tier": "lapse_eligible"
+  }
+ ]
+}

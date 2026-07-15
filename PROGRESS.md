@@ -4,6 +4,21 @@
 
 ---
 
+## 2026-07-15 — 📐 PLAN-SET TRANCHE 1 LANDED (R2 + documents write; reporters' shelf grew 50 PDFs)
+**Tranche-1 plan-set sweep is IN THE RECORD** (John's go): 50 architect plan sets / 2.20 GB across
+**10 waiting-room majors** uploaded to R2 (`architect_plans/`, 50/50 ok, 0 errors; public URL
+spot-verified 200) → **gated documents write** (snapshot `keep_snapshot_2026-07-15_pre-planset-
+documents.db`): **13 stub UPDATEs** (proj149 2198 San Pablo ×8, proj156 2550 Shattuck ×5 — pre-
+existing rows now carry r2_url+sha256) + **37 INSERTs** (doc ids →2215; type 2 plan_set), per-row
+rowcount asserts, 50 distinct sha256 verified in-transaction, integrity ok. Shelf by project:
+2136 San Pablo 8, 2198 San Pablo 8, 2065 Kittredge 8, 2128 Oxford 7, 2550 Shattuck 5, 2015 Blake 5,
+2425 Durant 3, 2462 Bancroft 3, 2530 Bancroft 2, 2680 Bancroft 1. **Public mirror refreshed**
+(docs/data/berkeley_housing_v2_public.db = cp of canonical; 125 r2-docs total). 8 manifest rows were
+NO-PLANSETS (proj113/123/140/18/28/34 records with no qualifying PDF). Manifest:
+scratch/2026-07-15/tranche1_manifest.csv. **NEXT:** remaining sweep tranches (751-record manifest at
+scratch/2026-07-15/planset_sweep_manifest.json, ~700 records unharvested); reporters.html gained a
+Datasette-timeout FAQ (4c546e2).
+
 ## 2026-07-14 (later) — 🔍 INSPECTIONS PASS + SUBSIDIARY ADJUDICATION (the states got REAL)
 **Adjudication reversed the queued 'reclassification':** the 4 suspect subsidiary permits were
 CORRECTLY classified (water heater/$0, seismic retrofit, $690 window, repairs) — the bug was the

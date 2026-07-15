@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Run the AI on your own computer — a reporter's guide</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; background:#fdfdfb; color:#24313b; line-height:1.6; }
+  .wrap { max-width: 46rem; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+  .kicker { text-transform:uppercase; letter-spacing:.14em; font-size:.85rem; color:#2c5282; margin-bottom:.8rem; }
+  h1 { font-size:2rem; line-height:1.2; color:#1a365d; margin-bottom:1rem; }
+  h2 { font-size:1.3rem; color:#1a365d; margin:2rem 0 .5rem; }
+  p, li { font-size:1.05rem; margin-bottom:.8rem; }
+  ul, ol { margin-left:1.4rem; }
+  a { color:#2c5282; }
+  code, pre { background:#eef2f5; border-radius:6px; font-size:.92em; }
+  code { padding:.1rem .35rem; }
+  pre { padding:.8rem 1rem; overflow-x:auto; margin:.6rem 0 1rem; }
+  .card { background:#f0f6fa; border-left:4px solid #2c5282; border-radius:0 8px 8px 0; padding:1rem 1.4rem; margin:.8rem 0; }
+  .warn { background:#fff8e6; border-left:4px solid #e0c060; border-radius:0 8px 8px 0; padding:1rem 1.4rem; margin:.8rem 0; }
+  .foot { font-size:.9rem; color:#6d8496; margin-top:2.5rem; border-top:1px solid #e2e8f0; padding-top:1rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">berkeleybuild.com · for reporters</div>
+  <h1>Run the AI on your own computer</h1>
+  <p>You've downloaded a project's plan sets from <a href="reporters.html">the documents shelf</a> and
+  you want an AI to help you read them. You have three tiers of choice — and for journalism the
+  difference matters, because it decides <b>who else sees your documents and your questions</b>.</p>
+
+  <h2>Tier 1 — easiest: NotebookLM</h2>
+  <p>Upload the PDFs to <a href="https://notebooklm.google.com">NotebookLM</a>, ask questions, get
+  answers with citations back to the page. Ten minutes, no setup. The trade: Google processes your
+  documents and sees what you're asking about. Fine for public plan sets; wrong for anything
+  involving a source.</p>
+
+  <h2>Tier 2 — independent: an open model on your own laptop</h2>
+  <p>Nothing leaves your machine — no Google, no OpenAI, no Anthropic, no server logs, works on a
+  plane. The open-model world is led by strong Chinese and open-source labs (Qwen, DeepSeek,
+  Kimi/Moonshot, GLM/Z-ai, plus Llama, Gemma, and Mistral), and the tooling has become genuinely
+  easy. Much of this guide follows the working notes of
+  <a href="https://simonwillison.net">Simon Willison</a> — who also happens to have built Datasette,
+  the tool behind our <a href="reporters.html">query pages</a> — and his
+  <a href="https://llm.datasette.io">llm</a> command-line tool.</p>
+
+  <p><b>Setup (Mac, ~15 minutes):</b></p>
+  <pre>brew install ollama          # the local model runner
+ollama pull qwen3:8b          # a strong small model (~5 GB download)
+brew install poppler          # gives you pdftotext
+pip install llm files-to-prompt
+llm install llm-ollama        # connect Simon Willison's llm tool to Ollama</pre>
+
+  <p><b>Pick the model your hardware can carry:</b></p>
+  <ul>
+    <li><b>8–16 GB RAM</b> (most laptops): <code>qwen3:8b</code> or <code>gemma3:12b</code> —
+      capable readers of extracted text.</li>
+    <li><b>32–48 GB</b> (Apple Silicon Pro/Max): <code>qwen3:32b</code> or a DeepSeek-R1 distill —
+      noticeably better reasoning over long documents.</li>
+    <li><b>64 GB+</b>: 70B-class models run comfortably; this tier reads like a good research
+      assistant.</li>
+    <li>Prefer clicking to typing? <a href="https://lmstudio.ai">LM Studio</a> is a free GUI that
+      runs the same models.</li>
+  </ul>
+
+  <p><b>The workflow:</b></p>
+  <pre># 1. extract the text from a downloaded plan set
+pdftotext proj3_plans.pdf plans.txt
+
+# 2. ask questions of it, entirely locally
+files-to-prompt plans.txt | llm -m qwen3:8b \
+  "List every mention of affordable or below-market units, with sheet numbers."</pre>
+
+  <p><b>Plan drawings vs text:</b> plan sets are mostly <i>drawings</i> — <code>pdftotext</code>
+  gets the labels and tables but not the pictures. For the drawings themselves, use a local
+  <b>vision</b> model (<code>ollama pull qwen3-vl</code> and point it at page images), or accept
+  Tier 1 for the graphical sheets.</p>
+
+  <h2>Tier 3 — heavyweight open models by API</h2>
+  <p>The largest open models (Kimi K2, DeepSeek's full releases, GLM's flagships) outgrow laptops
+  but are served cheaply by many independent providers — you keep model choice and price
+  leverage, though you're trusting a server again. A reasonable middle when a document set is
+  huge and non-sensitive.</p>
+
+  <div class="warn"><b>The one rule that outranks the tooling:</b> language models are reading
+  assistants, not sources. They misread tables, invent sheet numbers, and state guesses fluently.
+  Every number or quote that will appear in print gets verified against
+  <a href="reporters.html">the record itself</a> — that habit is the whole reason this project
+  publishes its database.</div>
+
+  <div class="card"><b>Why we wrote this page:</b> a newsroom that depends on any single AI
+  vendor — including the ones we use ourselves — has handed away a piece of its independence.
+  Open models on your own hardware are now good enough for document work, and getting better
+  every quarter.</div>
+
+  <p class="foot"><a href="reporters.html">&larr; Back to the reporters page</a> · Sources and
+  further reading: Simon Willison's <a href="https://simonwillison.net">weblog</a> and
+  <a href="https://llm.datasette.io">llm documentation</a> — the living reference for local-model
+  practice.</p>
+</div>
+</body>
+</html>

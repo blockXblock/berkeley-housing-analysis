@@ -52,6 +52,19 @@
   <div class="card"><b><a href="https://lite.datasette.io/?url=https%3A%2F%2Fberkeleybuild.com%2Fdata%2Fberkeley_housing_v2_public.db">▶ Open the whole database</a></b> — every table, write your own SQL.
     The main table is <code>v_projects_flat</code>; events are in <code>project_events</code>.</div>
 
+  <h2>The documents — the developers' own PDFs</h2>
+  <p>For a growing set of projects we archive the <b>actual submissions</b> — plan sets, resubmittals —
+  as permanent PDFs (the city's own links expire; ours don't, and each file carries a checksum).
+  Download them, then <b>feed them to an AI notebook</b>: NotebookLM is the easy path (upload the
+  PDFs, ask questions, get cited answers), or run a model on your own laptop so nothing leaves
+  your machine — see <a href="reporters-local-models.html">our guide to running open models
+  locally</a>, essential when a story involves sources you must protect.</p>
+  <div class="card"><b><a href="https://lite.datasette.io/?url=https%3A%2F%2Fberkeleybuild.com%2Fdata%2Fberkeley_housing_v2_public.db#/berkeley_housing_v2_public?sql=SELECT%20d.title%2C%20substr%28d.published_date%2C1%2C10%29%20AS%20date%2C%20d.r2_url%20AS%20pdf_url%20FROM%20documents%20d%20WHERE%20d.project_id%3D3%20ORDER%20BY%20d.published_date">▶ 2700 Shattuck — the submitted plans</a></b> — all five
+    archived PDFs for the story's project, with permanent links.</div>
+  <div class="card"><b><a href="https://lite.datasette.io/?url=https%3A%2F%2Fberkeleybuild.com%2Fdata%2Fberkeley_housing_v2_public.db#/berkeley_housing_v2_public?sql=SELECT%20f.address_display%20AS%20project%2C%20d.title%2C%20substr%28d.published_date%2C1%2C10%29%20AS%20date%2C%20d.r2_url%20AS%20pdf_url%20FROM%20documents%20d%20JOIN%20v_projects_flat%20f%20ON%20f.project_id%3Dd.project_id%20WHERE%20d.r2_url%20IS%20NOT%20NULL%20ORDER%20BY%20f.address_display%2C%20d.published_date">▶ Every archived document</a></b> — the full shelf,
+    project by project. Always verify an AI's claims against the record: the database is the
+    ground truth, the model is a reading assistant.</div>
+
   <h2>Ground rules &amp; citation</h2>
   <ul>
     <li>Cite as: <i>"berkeleybuild.com, an independent reconstruction of Berkeley's housing records

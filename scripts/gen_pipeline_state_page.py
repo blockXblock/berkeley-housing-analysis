@@ -189,7 +189,7 @@ html = f"""<!DOCTYPE html>
   <p class="foot">Block width ∝ units. {len(withdrawn)} projects ({sum(r['u'] for r in withdrawn):,} proposed units)
   were withdrawn by their applicants — the only exits are voluntary. UC projects excluded (self-permitted,
   counted in beds).</p>
-  {''.join(state_section(i) for i in (2, 3, 1, 4, 5))}
+  {''.join(state_section(i) for i in (1, 2, 3, 4, 5))}
   <h2>The levers — what could move the stalled states</h2>
   <p>The record tells us the <i>exposure</i> — how many units sit in each state and for how long.
   Whether a lever moves them is policy judgment, so every lever wears its tag.</p>

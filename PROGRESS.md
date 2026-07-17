@@ -4,6 +4,19 @@
 
 ---
 
+## 2026-07-15 (later) — 📐 TRANCHE 2 LANDED + SWEEP-MANIFEST EXHAUSTED (plan sets live on ZP records)
+**Tranche 2** (all 21 remaining sweep-manifest records of the 5 still-doc-less waiting-room majors,
+any record type): **3 plan sets staged & landed — all from proj126 2427 San Pablo ZP2022-0115**
+(2022-09-16 RESUB 22.7MiB/p45, 2022-12-05 RESUB 171.1MiB/**p1606** full set, 2024-07-11 ZAB plans
+14.1MiB/p42) → R2 3/3 ok → gated write 3 INSERTs (snapshot `keep_snapshot_2026-07-15_pre-planset-
+t2-documents.db`; doc ids →2218; 128 r2-docs) → mirror refreshed. **STRUCTURAL FINDING: all 20
+B-records (incl. Acheson's 9 B2015-02995 REV/DEF subs) = NO-PLANSETS — Berkeley attaches plan sets
+to ZONING (ZP) records, NOT building (B) records.** The 751-record sweep manifest is EXHAUSTED for
+waiting-room plan sets; remaining doc-less projects (proj1 1750 Sacramento 739u, proj178 Acheson,
+proj18, proj123, proj38…) have NO ZP records in it → **NEXT: fresh ZP-discovery pass at their
+parcels** (new record discovery, not more manifest tranches). Tranche-1 staging PDFs deleted from
+/tmp after 50/50 sha-in-DB verification (disk was 99%). Manifests: scratch/2026-07-15/tranche{1,2}_manifest.csv.
+
 ## 2026-07-15 — 📐 PLAN-SET TRANCHE 1 LANDED (R2 + documents write; reporters' shelf grew 50 PDFs)
 **Tranche-1 plan-set sweep is IN THE RECORD** (John's go): 50 architect plan sets / 2.20 GB across
 **10 waiting-room majors** uploaded to R2 (`architect_plans/`, 50/50 ok, 0 errors; public URL

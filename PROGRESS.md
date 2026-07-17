@@ -4,6 +4,26 @@
 
 ---
 
+## 2026-07-16 — 📐 TRANCHE 3 LANDED via ZP-DISCOVERY (5 more majors get their plans; engine bug fixed)
+**ZP-discovery pass ran LOCALLY** — no live scrape: scanned the citywide date_range **Planning
+backfill** (2015–2025) by normalized address for the 13 doc-less waiting-room majors; found
+operative ZP/DRCF/DRCP/PLN records for ALL 13 (saved scratch/2026-07-15/zp_discovery_docless.json).
+**Findings:** proj1 1750 Sacramento (739u) is an **AB 2011 ministerial** application (PLN records,
+no ZP — why the parcel manifest missed it); Acheson's only planning record = a 2018 Zoning Research
+Letter. **Tranche 3** (26 records, ≤3/project): **29 staged → 28 landed on R2 + gated write**
+(3 stub UPDATEs ids 49/54/68 + 25 INSERTs; snapshot `keep_snapshot_2026-07-16_pre-planset-t3-
+documents.db`; doc ids →2243; **156 r2-docs**; mirror refreshed). New shelves: **proj1 6 files/412MiB
+(the AB 2011 set)**, proj38 2449 Dwight 6/346MiB, proj127 2820 San Pablo 8/309MiB, proj130 1048
+Keith 7/45MiB, proj124 2442 Haste 1/103MiB. **ENGINE BUG FOUND+FIXED in place** (harvest_plansets.py):
+batch-dedup `os.remove(dest)` deleted a PREVIOUSLY-STAGED file when a sibling record re-served the
+same attachment under the same filename (save_as overwrote dest, dedup then removed it — 2449
+Dwight's DRC Item-6b pair); guard = `_STAGED_PATHS` set, never remove a staged path. The 2 lost
+files were re-harvested (state surgery on DRCF2026-0001), same sha256s. **QUEUED:** proj38's
+SIZE-DEV suspect (0.2MiB staged vs 74MB grid — valid-but-tiny PDF, likely a preview rendition;
+excluded from upload, needs CIC/one-off recheck); 8 projects' records carried NO plan sets
+(proj18/28/42/113/123/128/132/178) — their plans likely live in ZAB agenda packets or pre-2015
+records; Acheson research letter had no attachments.
+
 ## 2026-07-15 (later) — 📐 TRANCHE 2 LANDED + SWEEP-MANIFEST EXHAUSTED (plan sets live on ZP records)
 **Tranche 2** (all 21 remaining sweep-manifest records of the 5 still-doc-less waiting-room majors,
 any record type): **3 plan sets staged & landed — all from proj126 2427 San Pablo ZP2022-0115**

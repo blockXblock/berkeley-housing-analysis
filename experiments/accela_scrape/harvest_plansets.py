@@ -29,6 +29,10 @@ SIZE_MIN = 5 * MIB
 CAP_PLANSETS = 8
 CAP_PAGES = 12
 _BATCH_SHA = set()   # within-batch sha256 dedup (catches same file re-attached under 2 names)
+_STAGED_PATHS = set()  # dest paths already STAGED-OK this run — a dedup delete must never
+                       # remove one (same filename on a sibling record overwrites dest via
+                       # save_as, then the remove would nuke the staged file: 2449 Dwight
+                       # DRCF/DRCP Item-6b pair, 2026-07-16)
 
 RECORDS = [
     dict(proj=9,  permit="ZP2024-0075", addr="1899 Oxford"),
@@ -307,14 +311,16 @@ def download_one(page, frame, target, r, rec, slug, kw, reason, size_b, sha_set,
     base["sha256"] = sha
     # dedup against v2
     if sha in sha_set:
-        os.remove(dest)
+        if dest not in _STAGED_PATHS:
+            os.remove(dest)
         base["status"] = "SKIPPED-DEDUP"
         base["local_path"] = ""
         print(f"    DEDUP  {r['filename'][:50]}  (sha already in v2)")
         return base
     # within-batch dedup — same bytes re-attached under a different filename/date
     if sha in _BATCH_SHA:
-        os.remove(dest)
+        if dest not in _STAGED_PATHS:
+            os.remove(dest)
         base["status"] = "SKIPPED-DEDUP-BATCH"
         base["local_path"] = ""
         print(f"    DEDUP-BATCH  {r['filename'][:46]}  (same sha already staged this run)")
@@ -333,6 +339,7 @@ def download_one(page, frame, target, r, rec, slug, kw, reason, size_b, sha_set,
     date = extract_date(r["filename"])
     base["suggested_r2_key"] = f"architect_plans/proj{rec['proj']}_{slug}_{date}.pdf"
     base["status"] = "STAGED-OK"
+    _STAGED_PATHS.add(dest)
     print(f"    STAGED {base['file_size_mib']}MiB p{base['page_count']}  {r['filename'][:48]}")
     return base
 

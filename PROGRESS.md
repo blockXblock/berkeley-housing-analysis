@@ -4,6 +4,19 @@
 
 ---
 
+## 2026-07-16 (later) — 🔎 proj38 TINY-PDF RECHECK: the CITY's portal serves a WRONG BLOB
+Re-download of ZP2022-0021's "2.A-H ZONING PLANS" slot (grid: 74.24 MB) returned **byte-identical**
+185KB both attempts (sha 8c0f7318…) → consistent post-retry = real finding. The served file is a
+**4-page Testing Engineers Inc. special-inspection cover letter for 1526 RUSSELL ST (Horng
+Residence, B2021-02353)** — a different project entirely: a **blob mixup inside the City's Accela
+document store** (attachment metadata says Dwight plans; served bytes are another record's
+inspection letter). NOT a harvester defect. Adjudication: stays EXCLUDED from documents; the
+CURRENT 2.A-H plans are already shelved (2.A-H_250325 entitlement set, 180MB, landed tranche 3) —
+only the historical 2022-08-30 RESUB version is unobtainable via the portal. Evidence copy:
+scratch/2026-07-15/proj38_wrong-blob_served-for-2.A-H-slot_ZP2022-0021.pdf. Optional: report the
+mixup to the City (John's call — also a journalism-grade data-integrity anecdote: what else does
+the portal mis-serve?).
+
 ## 2026-07-16 — 📐 TRANCHE 3 LANDED via ZP-DISCOVERY (5 more majors get their plans; engine bug fixed)
 **ZP-discovery pass ran LOCALLY** — no live scrape: scanned the citywide date_range **Planning
 backfill** (2015–2025) by normalized address for the 13 doc-less waiting-room majors; found

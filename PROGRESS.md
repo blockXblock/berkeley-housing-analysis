@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-07-16 (later 2) — 📋 ZAB-PACKET PASS LANDED (plans for 2655 Shattuck + 2037 Durant via City packets)
+**6 ZAB staff-report+attachments packets** fetched from berkeleyca.gov (content-verified, not
+filename-trusted: sheet-number + large-format-page scans decided which contain plans) → R2
+`zab_packets/` 6/6 ok → gated write **6 INSERTs, document_type_id=4 zab_packet, source_url =
+the City PDF** (snapshot `keep_snapshot_2026-07-16_pre-zab-packet-documents.db`; doc ids →2249;
+**162 r2-docs**; mirror refreshed). **Plans obtained: proj18 2655 Shattuck (148p, 54 large sheets),
+proj123 2037 Durant (160p, 42 large sheets), proj42 1740 University (reduced A-set inline).**
+Staff-report-only (City posted no plans; DRC/LPC packets checked — also none): proj28 Ellsworth,
+proj113 Kittredge (426p hearing record), proj128 Seventh. No-ZAB: proj132 Jaynes (staff-level SFR).
+**QUEUED: Acheson 2013 packet via records.cityofberkeley.info** (pre-migration era). Manifest:
+scratch/2026-07-15/zab_packet_manifest.csv.
+
 ## 2026-07-16 (later) — 🔎 proj38 TINY-PDF RECHECK: the CITY's portal serves a WRONG BLOB
 Re-download of ZP2022-0021's "2.A-H ZONING PLANS" slot (grid: 74.24 MB) returned **byte-identical**
 185KB both attempts (sha 8c0f7318…) → consistent post-retry = real finding. The served file is a

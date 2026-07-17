@@ -1,7 +1,7 @@
 # CPRA Import Plan (BP_Annual Permit Report → v2)
 **Drafted:** 2026-05-10
 **Status:** 🟡 PLAN — not yet executed
-**Source:** `~/Library/CloudStorage/GoogleDrive-[redacted-email]/My Drive/Corridors/BP-downloads/BP_Annual Permit Report.xlsx`
+**Source:** `BP_Annual Permit Report.xlsx` (local project drive; path redacted from public copy)
 **Target:** `databases/berkeley_housing_v2.db` (`permits`, `project_events`, possibly new tables)
 **Related:** `data/apr/cpra_2023_2025_comparison.md` (full analytical findings), `scripts/cpra_dedup.py` (deduplication module)
 

@@ -1,3 +1,23 @@
+"""
+=============================== SEQUESTERED 2026-07-18 ===============================
+DO NOT RUN. Superseded for labeling by scripts/relabel_geometry_from_v2.py.
+
+WHY: this script read `berkeley_housing_analysis.db` — the FROZEN v1 database
+(see CLAUDE.md: v1 is superseded; `berkeley_housing_v2.db` is canonical). Re-running
+it would REINTRODUCE stale labels. As of 2026-07-18 it was emitting:
+  * 66 of 180 labels with a STALE STAGE (1598 University / 3030 Telegraph read
+    "Under Construction" when v2 says Completed)
+  * 6 stale unit counts (1950 Oxford 300 vs 772, 2733 San Pablo 32 vs 152, ...)
+
+REPLACEMENT: scripts/relabel_geometry_from_v2.py — reads v_projects_flat and edits
+<name> IN PLACE, preserving hand-edited footprints, corrected extrusion heights, and
+no-icon (pushpin-suppressing) styles.
+
+STILL-USEFUL LOGIC (if ever rebuilding from RAW geometry): the MultiGeometry+Point
+wrapping that anchors a label at the polygon centroid + roof altitude. That mechanism
+is sound; only the DB source is wrong. Port it to v2 before any reuse.
+======================================================================================
+"""
 #!/usr/bin/env python3
 """
 Augment a Berkeley Housing Pipeline geometry KML with labels.

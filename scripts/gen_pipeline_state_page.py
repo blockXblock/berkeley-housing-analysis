@@ -133,11 +133,15 @@ DESC[2] = DESC[2].format(MOB_N=_t('mobilizing')[0], MOB_U=f"{_t('mobilizing')[1]
 
 def esc(s): return str(s).replace('&', '&amp;').replace('<', '&lt;')
 
+SECTION_CAP = {4: None}   # None = show ALL rows; under construction (16) shows in full. Others default to 12.
+
 def state_section(i):
     rows = sorted(STATES[i], key=lambda r: -r['u'])
     units = sum(r['u'] for r in rows)
+    cap = SECTION_CAP.get(i, 12)
+    shown = rows if cap is None else rows[:cap]
     trs = []
-    for r in rows[:12]:
+    for r in shown:
         yrs = f"{(TODAY - r['anchor']).days / 365:.1f} yrs" if r.get('anchor') else '—'
         anch = r['anchor'].isoformat() if r.get('anchor') else '—'
         if i == 2:
@@ -150,7 +154,8 @@ def state_section(i):
             extra = (r.get('last_insp') or ('never' if i in (3, 4) and r['pid'] in insp else '—')) if i in (3, 4) else ''
         trs.append(f"<tr><td>{esc(r['addr'])}</td><td class='num'>{r['u']:,}</td>"
                    f"<td>{anch}</td><td class='num'>{yrs}</td><td>{extra}</td></tr>")
-    more = f"<p class='foot'>…and {len(rows)-12} more (shown: largest 12 by units).</p>" if len(rows) > 12 else ''
+    more = (f"<p class='foot'>Showing the {cap} largest by units — {len(rows):,} projects total in this state.</p>"
+            if (cap is not None and len(rows) > cap) else '')
     return f"""
 <section>
   <h2><span style="color:{COLORS[i]}">■</span> {i} · {NAMES[i]}</h2>

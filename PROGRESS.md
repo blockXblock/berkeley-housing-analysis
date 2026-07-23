@@ -4,6 +4,19 @@
 
 ---
 
+## 2026-07-22 — 📐 2587 TELEGRAPH (Gilbane "Pique") ENTITLEMENT PLAN SETS HARVESTED → R2 + gated write
+**5 entitlement plan sets (334 MB) harvested from the PUBLIC ACA portal** (ZP2023-0068 ×2, ZP2024-0170
+×2, DRCP2023-0009 ×1) → R2 → **gated stub-UPDATE of docs 157/163/186/207/210** (snapshot
+`keep_snapshot_2026-07-22_pre-2587tel-b04602-harvest.db`; per-row rowcount==1, integrity ok, fresh
+fingerprint; **162→167 r2-docs**). **DEDUP FOUND: doc 163 (2023-09-13 Revised) == doc 186 (2023-12-21
+DRC ATT1) are BYTE-IDENTICAL** (same sha 7dd7e83f9d — architect submitted the same drawings to ZP and
+DRC) → one R2 object, both rows reference it. **KEY FINDING: the B2024-04602 CONSTRUCTION set is NOT on
+public ACA** — harvester loaded the building record fine (via date_range href, ZP gate bypassed — the tool
+DOES do both record types) but the attachment grid read 0 rows; building-permit plans need authenticated
+access (CIC/CPRA), not the public harvester. The 5 entitlement sets are the same building's design at
+entitlement stage. Runners: scratch/2026-07-21/harvest_2587_{entitlement,drc}.py. **QUEUED:** Valiance
+new-build plan sets (2298 Durant proj26 4/38 on R2; 2538 Durant proj139 0/28) — publicly harvestable same way.
+
 ## 2026-07-16 (later 2) — 📋 ZAB-PACKET PASS LANDED (plans for 2655 Shattuck + 2037 Durant via City packets)
 **6 ZAB staff-report+attachments packets** fetched from berkeleyca.gov (content-verified, not
 filename-trusted: sheet-number + large-format-page scans decided which contain plans) → R2

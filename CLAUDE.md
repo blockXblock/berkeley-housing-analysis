@@ -205,11 +205,17 @@ compatibility view is **`v_projects_flat`** (what `generate_apr_v2.py` and
   **YouTube channel feeding berkeleybuild.com**. `*.mp4` / `*.mp4.backup*` are
   gitignored. Any stray repo-tracked mp4 (e.g. old `*.mp4.backup-*`) is a stale
   old-approach artifact → delete.
-- **KML geometry/tour SOURCE lives in `berkeley-data` and IS tracked**
-  (`docs/tours/*.kml`, `docs/kml_versions/*`) — canonical source, not derived.
-  A small asset a KML *references* (e.g. `transparent-1x1.png`, the
-  hide-default-icon trick) is a tracked **input dependency**; an image
-  *rendered from* a KML would be derived → don't track.
+- **KML SOURCE lives in `kml/` (repo-root, reorganized 2026-07-22) and IS tracked** —
+  **`kml/geometry/`** (building-polygon skyline: canonical `kml/geometry/geometry.kml` +
+  `kml/geometry/versions/` history/control-points), **`kml/tours/`** (camera-only tour KMLs),
+  **`kml/tours/packages/`** (DERIVED tour+geometry merges from `build_tour_package.py`).
+  **`docs/` is the WEB-SERVE target, not KML source:** the ONE public download,
+  `docs/geometry.kml`, is a **republished copy** of `kml/geometry/geometry.kml` (regenerate it
+  whenever the canonical changes — the homepage "Open KML in Google Earth" button + explorer
+  links point at it). `docs/tours.json` (served tour catalog) stays in `docs/`; its content
+  now references `kml/` source paths. Raw hand-traced captures stay as provenance in
+  `data/raw/google_earth_audit/`. A small asset a KML *references* (e.g. `transparent-1x1.png`)
+  is a tracked **input dependency**; an image *rendered from* a KML would be derived → don't track.
 
 ## Discipline (every session)
 - **Verify artifacts, never trust a summary** (CC's or chat-Claude's) — count rows, check dates, `ls` the actual path before asserting it exists. An empty grep ≠ absence; a `.py` check misses a package dir.

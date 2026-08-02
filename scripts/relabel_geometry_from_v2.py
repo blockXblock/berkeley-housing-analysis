@@ -13,7 +13,7 @@ Usage:  python scripts/relabel_geometry_from_v2.py [--apply]   (default: preview
 import re, sqlite3, sys, shutil
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
-GEOM = ROOT / "docs/geometry.kml"
+GEOM = ROOT / "kml/geometry/geometry.kml"   # canonical source (republish to docs/geometry.kml for the served download)
 DB   = ROOT / "databases/berkeley_housing_v2.db"
 norm = lambda s: re.sub(r"[^0-9a-z]", "", s.lower())
 

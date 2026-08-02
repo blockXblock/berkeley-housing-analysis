@@ -15,9 +15,9 @@ from pathlib import Path
 
 DB_PATH = Path('/Users/johngage/berkeley-data/databases/berkeley_housing_analysis.db')
 # Output paths: dated archive + stable URL (script writes both)
-_GEOMETRY_DIR = Path('/Users/johngage/berkeley-data/docs/kml_versions/Geometry')
+_GEOMETRY_DIR = Path('/Users/johngage/berkeley-data/kml/geometry/versions')
 OUTPUT_PATH = _GEOMETRY_DIR / f"Geometry-{datetime.now().strftime('%Y-%m-%d')}.kml"
-STABLE_OUTPUT_PATH = Path('/Users/johngage/berkeley-data/docs/geometry.kml')
+STABLE_OUTPUT_PATH = Path('/Users/johngage/berkeley-data/kml/geometry/geometry.kml')
 
 # Street grid rotation - Berkeley streets run ~350° from true north (10° west of north)
 GRID_ROTATION_DEG = 10  # clockwise rotation to align with street grid

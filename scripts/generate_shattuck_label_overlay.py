@@ -10,9 +10,9 @@ import xml.etree.ElementTree as ET
 # scripts/, so parents[1] is the repository root.
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DB_PATH = REPO_ROOT / "databases/berkeley_housing_v2.db"
-GEOM_PATH = REPO_ROOT / "docs/kml_versions/Geometry/Geometry-2026-05-18-labeled.kml"
-CONTROL_PATH = REPO_ROOT / "docs/tours/Control Points/Shattuck Control Points.kml"
-OUT_PATH = REPO_ROOT / "docs/tours/Control Points/Shattuck-building-label-overlay-v5.kml"
+GEOM_PATH = REPO_ROOT / "kml/geometry/versions/Geometry-2026-05-18-labeled.kml"
+CONTROL_PATH = REPO_ROOT / "kml/geometry/versions/Control-Points__Shattuck Control Points.kml"
+OUT_PATH = REPO_ROOT / "kml/geometry/versions/Shattuck-building-label-overlay-v5.kml"
 SIDE_LABEL_ALT_M = 15.0
 
 

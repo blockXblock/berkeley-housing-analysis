@@ -11,8 +11,8 @@ from pathlib import Path
 from datetime import date
 
 ROOT = Path(__file__).resolve().parents[1]
-GEOM = ROOT / "docs/geometry.kml"
-TOURS = ROOT / "docs/tours"
+GEOM = ROOT / "kml/geometry/geometry.kml"
+TOURS = ROOT / "kml/tours"
 PKGS = TOURS / "packages"
 OUT = ROOT / "docs/tours.json"
 
@@ -95,7 +95,7 @@ orphans = sorted(s for s in pkg_stems if s not in tour_files)
 
 manifest = dict(
     generated=str(date.today()),
-    canonical_geometry=dict(file="docs/geometry.kml", sha=CURRENT_SHA,
+    canonical_geometry=dict(file="kml/geometry/geometry.kml", sha=CURRENT_SHA,
                             buildings=len(re.findall(r"<Polygon>", GEOM.read_text(errors="ignore"))),
                             pushpins_suppressed=True, labels_source="berkeley_housing_v2.db / v_projects_flat"),
     tours=tours,

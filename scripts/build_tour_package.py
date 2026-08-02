@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """build_tour_package.py — recombine a camera-only tour KML with the CANONICAL geometry.
 
-The tour library (docs/tours/*.kml) is camera-only (gx:FlyTo paths, no polygons); the buildings
+The tour library (kml/tours/*.kml) is camera-only (gx:FlyTo paths, no polygons); the buildings
 in a recorded video come from whatever geometry file was loaded in Google Earth at record time.
 Old videos therefore show old skylines. This script makes regeneration deterministic: it splices
 a tour's <gx:Tour> element into the canonical geometry document and emits ONE self-contained
@@ -9,14 +9,14 @@ package KML — open it in Google Earth Pro, press play, re-record. Geometry pro
 file + sha + placemark count) is stamped into the package description so a video can always be
 traced to the skyline it showed.
 
-CANONICAL GEOMETRY: docs/geometry.kml (the hand-edited footprints; verified 2026-07-03 identical
+CANONICAL GEOMETRY: kml/geometry/geometry.kml (served copy republished to docs/geometry.kml) (the hand-edited footprints; verified 2026-07-03 identical
 to kml_versions/Geometry/Geometry-2026-05-18-labeled.kml). Hand-edits continue to land there;
 packages are DERIVED — never hand-edit a package.
 
 Usage:
-  python scripts/build_tour_package.py docs/tours/205sec.kml            # one tour
+  python scripts/build_tour_package.py kml/tours/205sec.kml            # one tour
   python scripts/build_tour_package.py --all                            # every camera-only tour
-Output: docs/tours/packages/<tour-stem>__<geometry-date>.kml
+Output: kml/tours/packages/<tour-stem>__<geometry-date>.kml
 """
 import hashlib
 import pathlib
@@ -25,8 +25,8 @@ import sys
 from xml.dom import minidom
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-GEOMETRY = ROOT / "docs" / "geometry.kml"
-OUTDIR = ROOT / "docs" / "tours" / "packages"
+GEOMETRY = ROOT / "kml" / "geometry" / "geometry.kml"
+OUTDIR = ROOT / "kml" / "tours" / "packages"
 GX_NS = 'xmlns:gx="http://www.google.com/kml/ext/2.2"'
 
 
@@ -66,7 +66,7 @@ def build(tour_path: pathlib.Path) -> pathlib.Path:
 
 
 def camera_only_tours():
-    for fp in sorted((ROOT / "docs" / "tours").rglob("*.kml")):
+    for fp in sorted((ROOT / "kml" / "tours").rglob("*.kml")):
         if "packages" in fp.parts:
             continue
         x = fp.read_text(encoding="utf-8", errors="replace")

@@ -42,5 +42,25 @@ John's next-step direction: build more tours sliced different ways. Each note be
 **#1 (architect)** after confirming the architect data source. **#2 (age)** and **#5 (capacity)**
 are gated on resolving a data source (year-built; lot-area + zoning rules) — flag before starting.
 
-*(Tours are built as camera KMLs over `kml/geometry/geometry.kml`, extruded era/type-colored
-blocks per the panoramic-kennedy-legacy pattern; John records in OBS.)*
+## ⚠️ CAVEAT — the skyline geometry does NOT include ADUs (verified 2026-08-02)
+`kml/geometry/geometry.kml` (184 buildings) is a **curated skyline of significant projects**,
+not a building inventory: **82 are 50+ units; only 17 are ADU-scale (1-unit)**. Against **663**
+one-unit projects in v2 and **~2,881 ADUs** in the v4 CO cohort, the skyline models **<1% of
+ADUs** (and most middle housing). So tours #4 (College Ave ADU+MH) and #5 (capacity) **CANNOT be
+built from geometry.kml** — they need ADU/MH locations from v2/v4 + assessor parcels.
+
+## DECISION — two-layer geometry (2026-08-02)
+Add a **second, GENERATED geometry file** alongside the hand-edited skyline:
+- **`kml/geometry/geometry.kml`** — hand-edited **skyline** (184 majors). CANONICAL for major-building tours (#1, #3).
+- **`kml/geometry/adu-middle-housing.kml`** — **GENERATED** from v4 ADU cohort + **ZCMH** middle-housing
+  records + assessor parcel polygons (`berkeley.db.the_geom`), **type-color-coded** (ADU / duplex /
+  triplex / fourplex). Derived + regenerable via a generator script (NOT hand-edited). Small footprints:
+  use the parcel polygon extruded low, or a generated ~8m marker where no footprint.
+- **Composing for a tour:** load skyline-only, ADU/MH-only, or **both**. To keep self-contained packages,
+  add a `--geometry <file>` (or `--geometry a.kml,b.kml` to merge) option to `build_tour_package.py`.
+  For **College Ave (#4)**, the generator emits a **corridor-filtered subset**.
+- Keep ADU + middle housing in ONE file with type-coded styles (simpler than two files; a tour colors by type).
+
+*(Major-building tours splice `kml/geometry/geometry.kml`; ADU/MH tours splice the generated
+`adu-middle-housing.kml`; both use extruded type-colored blocks per the panoramic-kennedy-legacy
+pattern; John records in OBS.)*

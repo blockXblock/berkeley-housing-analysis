@@ -27,6 +27,10 @@ TESTS = [
   ("Alteration","Convert detached garage into ADU","Yes","R-3","1","0","B2024-07002","new_unit"),  # corroborated
   ("Addition/Alteration","Conversion of upper floor into a 410 sf JADU","Yes","R-3","1","0","B2024-07003","new_unit"),  # corroborated
   ("Alteration","Interior remodel of kitchen and bath","Yes","R-3","0","0","B2024-07050","ambiguous"),  # ADU flag, NO corroboration -> harvest
+  # RULE 5.5 (2026-08-02 conversion fix): ADU created by conversion, ADU flag UNSET -> still new_unit
+  ("Alteration","Convert and enlarge existing garage into a by-right ADU","No","R-3","0","0","B2024-07060","new_unit"),
+  ("Addition","Convert 2nd story to ADU","","R-3","0","0","B2024-07061","new_unit"),
+  ("Alteration","Remodel existing ADU kitchen and bath","No","R-3","0","0","B2024-07062","alteration"),  # existing ADU, adds nothing
   # movable home cases
   ("New","Install park model tiny home, wheels removed, on permanent foundation","No","R-3","1","0","B2025-07100","new_unit"),
   ("New","Place movable tiny house on lot","No","R-3","1","0","B2025-07101","ambiguous"),  # no permanence markers

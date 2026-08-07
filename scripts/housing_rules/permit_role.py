@@ -46,6 +46,13 @@ LEGALIZATION_TERMS = [
     "legalize","legalization","unpermitted","bring into compliance","ab 2533","legalize existing",
 ]
 ADU_TERMS = ["adu","jadu","accessory dwelling unit","junior accessory"]
+# ADU-creation signals (2026-08-02 fix, validated vs HCD APR oracle): an ADU that is CREATED —
+# new detached OR conversion of an existing structure (garage/basement/attic) — ADDS a dwelling,
+# even when Work Type reads alteration/addition and the ADU flag is unset/dirty. The old rules
+# routed these to alteration/ambiguous with net 0 (the block-level undercount vs the APR).
+ADU_CREATE_SIGNAL = ["convert","conversion","into a","into an","into adu","to adu","to an adu",
+                     "new adu","construct","establish","build","garage into","basement into","attic into"]
+ADU_NOT_CREATE = ["demolish","remove","existing adu","repair","remodel of existing"]
 # movable-home permanence markers: ONLY these make a movable/park-model count as a dwelling
 PERMANENCE_TERMS = ["permanent foundation","wheels removed","on foundation","affixed to foundation",
                     "tongue removed","placed on a foundation"]
@@ -66,6 +73,9 @@ NONHOUSING_TERMS = [
 # ---- payload field access + helpers (lifted verbatim from build_jn_c CELL 2) ----
 def _norm(s): return " ".join(str(s).split()).strip().lower() if s is not None else ""
 def _has(t, terms): return any(x in t for x in terms)
+def _adu_creation(desc):
+    # ADU named + a creation/conversion signal + not a removal/remodel-of-existing.
+    return _has(desc, ADU_TERMS) and _has(desc, ADU_CREATE_SIGNAL) and not _has(desc, ADU_NOT_CREATE)
 def _to_int(v):
     try:
         if v is None or str(v).strip().lower() in ("","nan","none"): return None
@@ -104,6 +114,12 @@ def classify(work_type, description, adu_flag, occtype, units_added, units_remov
             return "new_unit",1,"ADU=Yes corroborated by ADU/conversion/legalization language"
         # ADU flag but no corroborating language -> inconclusive (the dirty-flag case)
         return "ambiguous",0,"ADU=Yes but no corroborating description language - inspect"
+    # RULE 5.5 - ADU CREATED by description (2026-08-02 fix): a permit whose description names an ADU
+    # being created (new detached, or conversion of garage/basement/attic) adds a dwelling even when
+    # the ADU flag is unset/dirty and Work Type reads alteration/addition. Placed before the work-type
+    # rules so a conversion-ADU isn't misrouted to alteration/ambiguous (net 0). Validated vs HCD APR.
+    if _adu_creation(desc):
+        return "new_unit",1,"ADU created (new or conversion) - adds a dwelling (2026-08-02 fix)"
     # RULE 6 - New + housing language => confident
     if is_new and _has(desc, HOUSING_TERMS):
         return "new_unit",1,"New + housing indicator"
@@ -151,5 +167,6 @@ def classifier_hash():
     here without bumping the version suffix, or identical logic re-stamps as 'stale'."""
     import hashlib
     return hashlib.sha256((json.dumps(
-        [HOUSING_TERMS, CONVERSION_TERMS, LEGALIZATION_TERMS, NONHOUSING_TERMS]) + "rules-v1"
+        [HOUSING_TERMS, CONVERSION_TERMS, LEGALIZATION_TERMS, NONHOUSING_TERMS,
+         ADU_CREATE_SIGNAL, ADU_NOT_CREATE]) + "rules-v2"   # v2 = 2026-08-02 ADU-conversion fix
     ).encode()).hexdigest()[:16]

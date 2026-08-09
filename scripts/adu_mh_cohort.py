@@ -55,6 +55,31 @@ def _mh_units(desc):
     if "three" in d or "triplex" in d or "3 " in d: return 3, "triplex"
     return 2, "duplex"  # default duplex (2-4 ordinance; conservative)
 
+# ordinal street words -> the assessor's numbered form (Berkeley: "8TH ST", not "EIGHTH STREET")
+ORDINALS = {"FIRST":"1ST","SECOND":"2ND","THIRD":"3RD","FOURTH":"4TH","FIFTH":"5TH","SIXTH":"6TH",
+            "SEVENTH":"7TH","EIGHTH":"8TH","NINTH":"9TH","TENTH":"10TH","ELEVENTH":"11TH","TWELFTH":"12TH"}
+_ST_TYPES = "STREET|ST|AVENUE|AVE|WAY|DRIVE|DR|BOULEVARD|BLVD|ROAD|RD|COURT|CT|PLACE|PL|LANE|LN|TERRACE|CIRCLE|CIR"
+
+_MH_STOP = {"MIDDLE","HOUSING","PREAPP","ZCMH","APPLICATION","PROJECT","MAJOR","RESIDENTIAL","NEW","FOR","THE","AND"}
+
+def _geocode_mh(proj, bd):
+    """Find a house number + street ANYWHERE in the project-name text (handles 'ZCMH:'/'PREAPP -'
+    prefixes, ranges like 1312-1314 by trying both endpoints, ordinal streets, and addresses with no
+    street-type word), then match berkeley.db situs."""
+    text = proj.upper()
+    m = re.search(rf"(\d{{2,5}})(?:-(\d+))?\s+([A-Z0-9][A-Z0-9 .]*?)\s*(?:{_ST_TYPES})\b", text)
+    if not m:  # fallback: number + a plain word, no street-type present
+        m = re.search(r"(\d{2,5})(?:-(\d+))?\s+([A-Z][A-Za-z]{2,})", text)
+        if not m or m.group(3) in _MH_STOP: return None, None
+    n1, n2, name = m.group(1), m.group(2), m.group(3).strip()
+    nums = [n1] + ([n2] if n2 else [])
+    first = ORDINALS.get(name.split()[0], name.split()[0]) if name else ""
+    for n in nums:
+        row = bd.execute("SELECT Latitude,Longitude FROM parcels WHERE SitusAddre LIKE ? AND SitusAddre LIKE ? "
+                         "AND Latitude IS NOT NULL LIMIT 1", (f"{n} %", f"%{first}%")).fetchone()
+        if row: return (float(row[0]), float(row[1])), f"{n} {name}".title()
+    return None, f"{n1} {name}".title()
+
 def mh_cohort(bmap):
     seen = {}
     for f in glob.glob("data/raw/accela/date_range*/Planning_*.jsonl"):
@@ -64,23 +89,19 @@ def mh_cohort(bmap):
             if "MIDDLE HOUSING" not in str(d.get("Description", "")).upper(): continue
             rn = d.get("Record Number", "")
             if rn and rn not in seen: seen[rn] = d
-    out = []
+    bd = sqlite3.connect("databases/berkeley.db")
+    out, missed = [], []
     for rn, d in seen.items():
         proj = str(d.get("Project Name", ""))
-        m = re.search(r"ZCMH:\s*(.+)", proj, re.I)
-        addr = (m.group(1) if m else proj).strip()
-        # geocode by address against berkeley.db situs
-        bd = sqlite3.connect("databases/berkeley.db")
-        num = re.match(r"(\d+)", addr)
-        latlon = None
-        if num:
-            street = re.sub(r"^\d+\s*", "", addr).upper().split()[0] if re.sub(r"^\d+\s*", "", addr) else ""
-            row = bd.execute("SELECT Latitude,Longitude FROM parcels WHERE SitusAddre LIKE ? AND SitusAddre LIKE ? AND Latitude IS NOT NULL LIMIT 1",
-                             (f"{num.group(1)} %", f"%{street}%")).fetchone()
-            if row: latlon = (float(row[0]), float(row[1]))
+        latlon, addr = _geocode_mh(proj, bd)
         units, typ = _mh_units(d.get("Description"))
         if latlon:
-            out.append(dict(key=rn, lat=latlon[0], lon=latlon[1], type=typ, units=units, source="MH", addr=addr, status=d.get("Status","")))
+            out.append(dict(key=rn, lat=latlon[0], lon=latlon[1], type=typ, units=units,
+                            source="MH", addr=addr or proj, status=d.get("Status", "")))
+        else:
+            missed.append(proj)
+    if missed:
+        print(f"  MH ungeocoded ({len(missed)}): " + "; ".join(missed[:6]))
     return out
 
 def main():

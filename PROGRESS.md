@@ -4,6 +4,44 @@
 
 ---
 
+## 2026-08-09 — 📥 CPRA #26-1972 RESPONSE ("2026 Master Permits Log") — RESPONSIVE-BUT-HOLLOW
+**The City's response to Request 2 / item 1 of the mayor-prep CPRA I drafted (`notes/2026-07-03_cpra_draft_2026_refresh.md`)**
+landed via NextRequest (S3 path `.../26-1972/...`). It is the Planning Dept's **internal staff tracking
+spreadsheet** — `scratch/2026-08-09/master_permits_log.xlsx`, 9 sheets, 487 applications (452 addressed,
+451 applicant-named). **VERIFIED live (not memory):** the City filled the 6 fields it maintains by hand —
+Application #, Site Address, Applicant, Description, Date Received, Assigned Planner (93–100% populated) —
+and left **every structured field the request specifically named BLANK: Date Deemed Complete 0/158, New/
+Total/Demolished Units 0/158, Streamlining pathway (SB9/35, AB2011) 0/158, BMR/VLI/density-bonus/Final-
+Action/NOD 0.** VERDICT (stated to John, not over-claimed): **not a failure to respond** — right scope,
+right record types, real data, ~on time — but a **responsive-and-hollow** record. Two readings, unresolved:
+(A) the City doesn't MAINTAIN that data in queryable form → not a CPRA failure (can't compel record creation)
+but the strongest evidence for the mayor-deck open-data ask; (B) the data lives in Accela and they gave the
+hand-log instead → incomplete production, fixable with a narrow follow-up (deemed-complete DOES surface in
+Accela Processing-Status hidden DOM — deck ask #2 — so lean (B) for that ONE field; units/BMR/pathway more
+likely (A)). **Move: one-line follow-up to #26-1972** forcing the City to say which. **Data extracted (NOT a
+DB write):** `data/processed/planning_pipeline_2025.csv` — the 2025 planning-application cohort (ADU/infill/
+pre-app tail we don't model as projects); its 450 applicant names are genuinely-new intel for the sparse v2
+`developer` field. NOTE: distinct from the Clariti CPRA **#26-2306** (filed 2026-08-09, still awaiting response).
+
+## 2026-08-02..09 — 🏘️ ADU/MIDDLE-HOUSING COHORT: classifier v2 fix + APR-validated block counts
+**The conversion-ADU undercount, diagnosed and fixed.** John caught a **circularity** (his per-block ADU
+counts were a human re-read of the map I'd built from v2 — not independent). Broke it with the **HCD APR as
+an external ORACLE** (`hcd_apr_mirror.db` table_a2, UNIT_CAT='ADU' → **842 distinct parcels**; oracle to
+COMPARE against, NEVER merged in — merging would re-close the circle). Diagnosis: **46 conversion-ADUs were
+coded alteration/net-0** (garage/basement→ADU), 27 regex-missed, 3 absent. **FIX (`4eb77df`):** added
+`housing_rules.permit_role` **RULE 5.5** — an ADU *created* (new detached OR conversion) returns
+`new_unit`/net-1 even when Work Type reads alteration/addition and the ADU flag is unset/dirty; classifier
+hash **v1→v2** (`e122a6a6…`). **CONSEQUENCE (queued):** materialized v4 `event_classifications` are now
+STALE under rules-v2 → **a full v4 re-classification is a QUEUED separate gated write.** Cohort derived
+(`c5fce9b`, matcher tightened `4fc9fbe`): **850 ADUs geocoded** (vs APR 842/846 — within 4 citywide, ~93%
+recall) + **26 of 27 Middle-Housing PLN records** (1 miss = 2336 MLK, genuine assessor gap). Middle housing =
+**PLN records with "Middle Housing" in Description — NO `ZCMH` record type** ("ZCMH" is a project-name label).
+Outputs: `data/processed/adu_mh_cohort.csv` → `kml/geometry/adu-middle-housing.kml` (2nd geometry layer; the
+184-building skyline `kml/geometry/geometry.kml` deliberately omits ADUs). Scripts promoted:
+`scripts/adu_mh_cohort.py`, `scripts/gen_adu_middle_housing.py`, `scripts/adu_by_block.py`,
+`scripts/compare_geometry.py`. **Block-level parity is capped by geocoding precision** (berkeley.db parcel
+centroids vs the APR's own points), NOT by classification.
+
 ## 2026-07-22 — 📐 2587 TELEGRAPH (Gilbane "Pique") ENTITLEMENT PLAN SETS HARVESTED → R2 + gated write
 **5 entitlement plan sets (334 MB) harvested from the PUBLIC ACA portal** (ZP2023-0068 ×2, ZP2024-0170
 ×2, DRCP2023-0009 ×1) → R2 → **gated stub-UPDATE of docs 157/163/186/207/210** (snapshot

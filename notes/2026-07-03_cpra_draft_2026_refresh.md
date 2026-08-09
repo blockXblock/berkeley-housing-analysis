@@ -1,9 +1,42 @@
 # CPRA drafts — 2026 refresh + planning pathways + fees (Day 1 of mayor-presentation prep)
 
-**Status: DRAFT for John's review — not sent.** Two separate requests on purpose: #1 is a re-run
-of a report the City has produced before (fast to fulfill, hard to delay); #2 is new material
+**Status: SUBMITTED as NextRequest #26-1972. Request 2 / item 1 — RESPONSE RECEIVED 2026-08-09
+→ RESPONSIVE-BUT-HOLLOW → follow-up drafted (below).** Two separate requests on purpose: #1 is a
+re-run of a report the City has produced before (fast to fulfill, hard to delay); #2 is new material
 (pathway + clock + fee data). Keeping them separate prevents the novel items from slowing the
-refresh. Send via the City's NextRequest portal (records.cityofberkeley.info) or City Clerk email.
+refresh. Sent via the City's NextRequest portal (records.cityofberkeley.info).
+
+---
+
+## RESPONSE + FOLLOW-UP — #26-1972 (added 2026-08-09)
+
+**What landed (Request 2 / item 1, the planning-applications ask):** the Planning Dept's internal
+staff tracking spreadsheet — **"2026 Master Permits Log.xlsx"** (`scratch/2026-08-09/master_permits_log.xlsx`),
+9 sheets, 487 applications. **VERIFIED live:** the City filled the 6 fields it maintains by hand —
+Application #, Site Address, Applicant, Description, Date Received, Assigned Planner (93–100%) — and left
+**every structured field the request named BLANK: Date Deemed Complete 0/158, New/Total/Demolished Units
+0/158, Streamlining pathway 0/158, BMR/VLI/density-bonus/Final-Action/NOD 0.** Verdict: **not a failure to
+respond** (right scope, real data) but **responsive-and-hollow**. Two readings — (A) the City doesn't
+MAINTAIN that data queryably (→ best evidence for the mayor-deck open-data ask), or (B) it lives in Accela
+and they gave the hand-log instead (→ incomplete production; deemed-complete DOES surface on ACA
+Processing-Status pages, so lean B for that one field). Data extracted (NOT a DB write):
+`data/processed/planning_pipeline_2025.csv` (2025 planning-application tail; 450 applicant names).
+Distinct from the Clariti CPRA **#26-2306** (filed 2026-08-09, awaiting response).
+
+**FOLLOW-UP TO SEND (forces the either/or on the record):**
+
+> Re: Request #26-1972 — follow-up on the production received (the "2026 Master Permits Log"). Thank you
+> for the Master Permits Log produced in response to this request. That spreadsheet includes columns for
+> several fields my request specifically sought — **Date Deemed Complete, proposed dwelling-unit counts
+> (new/total/demolished), the approval pathway or streamlining provision (e.g., SB 9, SB 35, AB 2011,
+> Density Bonus, Middle Housing), decision/Final Action and NOD dates, and BMR/affordability counts** —
+> but those columns are **blank across all records**. Because my request sought these as an **export from
+> the City's permitting system (Accela/ACA)**, please either (1) **produce these fields as they are
+> maintained in that system** (the deemed-complete date is the field from which Government Code § 65943 /
+> § 66317's completeness clock runs, and it is displayed on the ACA "Processing Status" pages, so the City
+> appears to maintain it), or (2) **confirm in writing that the City does not maintain these fields in any
+> queryable or exportable form** and identify where, if anywhere, that information is recorded. If some
+> fields fall under (1) and others under (2), please say which is which.
 
 ---
 

@@ -1,4 +1,10 @@
-# CPRA draft — Clariti permit-system contract (RFP 24-11661-C)
+# CPRA — Clariti permit-system contract (RFP 24-11661-C)
+
+> **✅ SUBMITTED 2026-08-09 — City of Berkeley NextRequest Request #26-2306.**
+> Awaiting response. Next: when records land, verify whether a public open-data API / public data
+> access is in the executed agreement + SOW (the staff report named only internal integrations).
+> If absent, it confirms the mayor-deck ask #1. Portal: cityofberkeleyca.nextrequest.com.
+
 
 **Purpose:** verify whether a public open-data API / public data access is (or is not) in the
 executed Clariti contract. The 6-page Council staff report (Item 16, 2026-01-20) names only

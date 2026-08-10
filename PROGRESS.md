@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-08-10 — ✅ GATED WRITE: `planning_applicant` surfaced in `v_projects_flat` (serving view)
+**Added `planning_applicant` as the LAST column of `v_projects_flat`** (the serving view feeding APR +
+explorer) — a `GROUP_CONCAT(DISTINCT a.applicant_name)` correlated subquery over the new side table, so it
+stays **one-row-per-project** (the row-multiplication trap that would corrupt APR counts is structurally
+avoided). Added LAST so no existing column index shifts (positional-access consumers unaffected). Snapshot
+`keep_snapshot_2026-08-10_pre-planning-applicant-view.db` (integrity ok); guarded transactional DROP+CREATE
+with verify-or-rollback — GUARDS: **rows 895→895 unchanged, existing 37 cols identical + planning_applicant
+appended, developer still 39 unchanged, populated on 81 projects** — COMMIT → fresh fingerprint (integrity ok).
+Original view SQL saved `scratch/2026-08-09/v_projects_flat_current.sql` (exact restore if ever needed).
+NOTE: not yet in `export_explorer_data_v2.py` output (the explorer JSON) — surfacing on the SITE is a
+separate export-script edit + regen, not done here.
+
 ## 2026-08-09 (later) — ✅ GATED WRITE: `project_planning_applicant` side table (applicant≠developer)
 **New additive side table** enriching v2 with the #26-1972 planning-log applicant names — **NOT** an
 overwrite of `developer` (applicant = filing agent/owner-of-record, a DIFFERENT role; the 8 conflicts

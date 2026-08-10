@@ -4,6 +4,20 @@
 
 ---
 
+## 2026-08-09 (later) — ✅ GATED WRITE: `project_planning_applicant` side table (applicant≠developer)
+**New additive side table** enriching v2 with the #26-1972 planning-log applicant names — **NOT** an
+overwrite of `developer` (applicant = filing agent/owner-of-record, a DIFFERENT role; the 8 conflicts
+proved it — v2 `developer`='Panoramic Interests' vs log applicant='Austin Springer'/'Isaiah Stackhouse',
+the repeat permit-expediters). Snapshot `keep_snapshot_2026-08-09_pre-planning-applicant.db` (integrity ok);
+read-only preview → John go-ahead → transactional write (per-row rowcount==1, count==107, 0 orphan FKs,
+COMMIT) → fresh-connection fingerprint (integrity ok, developer still 39/895 UNCHANGED). **107 rows → 81
+projects** (73 with an empty developer = net-new intel; 8 developer-already-set, applicant kept alongside via
+`developer_at_load` provenance; multi-app-per-project preserved). Source stamp
+`cpra_26-1972_master_permits_log_2026-08-09`. Reversible (DROP TABLE). Exact rows:
+`scratch/2026-08-09/planning_applicant_INSERT.csv`. **The 339 unmatched planning-log records (the 2025
+ADU/infill pipeline tail) stay in `data/processed/planning_pipeline_2025.csv` only — not projects, so not in
+this table.** NOTE: not yet surfaced in `v_projects_flat`/explorer (a JOIN/agg is a separate decision).
+
 ## 2026-08-09 — 📥 CPRA #26-1972 RESPONSE ("2026 Master Permits Log") — RESPONSIVE-BUT-HOLLOW
 **The City's response to Request 2 / item 1 of the mayor-prep CPRA I drafted (`notes/2026-07-03_cpra_draft_2026_refresh.md`)**
 landed via NextRequest (S3 path `.../26-1972/...`). It is the Planning Dept's **internal staff tracking

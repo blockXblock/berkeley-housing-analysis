@@ -4,6 +4,32 @@
 
 ---
 
+## 2026-08-10 — ✅ NEW JN-L: fiscal flows (property tax from housing COs), baseline-gated
+**`notebooks/v4/JN-L_fiscal_flows.ipynb`** (generator `scripts/v4/build_jn_l.py`, baseline
+`data/baselines/fiscal_flows_baseline_2026-08-10.json` — v2+assessor shas pinned, 13 gated figures).
+Answers John's budget question (new property tax from housing COs / ADUs; Berkeley–County–State split;
+revenue-flow Sankeys; housing-funding sources). **Derived, all read-only:** 704 CO'd projects / 4,465
+units; 660 assessor-matched; tracked enrolled Imps **$335.9M** (reassessment-lag floor); benchmark
+$432K/unit (proj136); 644 ADUs (≤2u, CO-only block) median declared **$114,886**, sum $105.1M.
+**Headline: full-enrollment est ~$1.74B new AV → ~$17.4M/yr total 1% levy → ~$5.7M/yr City GF**
+(32.57% AB-8 share, external-fact w/ provenance); enrolled-now floor $441M → $1.44M/yr GF. Viz: 2 plotly
+Sankeys (FY27 GF flows external-facts; new-housing allocation) + lag bar + mermaid lineage, all
+text-sandwiched. Executed clean (27 cells, 0 errors, in-notebook gate PASS). **Honest gaps recorded:**
+itemized impact/HTF/in-lieu fees NOT materialized in v2 (fees table = $14.1M Accela aggregates, 57
+projects); restriction-type labeling mostly empty (VLI completed=128, density-bonus=180). Queued next
+ingestions: HTF award lists + TCAC allocations (turns the fee links into measurements).
+
+## 2026-08-10 (later) — 🌐 `planning_applicant` WIRED INTO EXPLORER EXPORT (data live, UI pending)
+**`export_explorer_data_v2.py`** now selects `planning_applicant` from `v_projects_flat` and emits it per
+project (two edits: the v_projects_flat query + the output dict, right after `developer`, with a comment that
+it's the filing-agent role, never an overwrite). Regenerated `docs/explorer_data_v2_working.js` → **drift
+check vs the Jul-15 served file: 895 projects, 0 adds/drops, ZERO non-planning_applicant field changes** (the
+ONLY difference is the added field, 81 populated) → promoted (copy) to the served `docs/explorer_data.js`
+(homepage's explorer.html loads THIS; explorer_v2.html loads the working file — both now carry the field;
+served==working). **DATA is live; the UI does NOT render it yet** — explorer.html uses `developer` only for
+its charts/tables; showing `planning_applicant` needs a separate front-end edit (project-detail panel/table).
+Backup of pre-run served file: `scratch/2026-08-09/explorer_data.js.pre`.
+
 ## 2026-08-10 — ✅ GATED WRITE: `planning_applicant` surfaced in `v_projects_flat` (serving view)
 **Added `planning_applicant` as the LAST column of `v_projects_flat`** (the serving view feeding APR +
 explorer) — a `GROUP_CONCAT(DISTINCT a.applicant_name)` correlated subquery over the new side table, so it

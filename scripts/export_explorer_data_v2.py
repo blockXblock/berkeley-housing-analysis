@@ -209,7 +209,7 @@ def get_projects(conn):
         vpf_cur = conn.cursor()
         vpf_cur.execute(
             'SELECT bp_issued_date, co_issued_date, assessed_value, assessed_net_taxable, '
-            'assessed_exemption, est_annual_tax, assessed_as_of_date '
+            'assessed_exemption, est_annual_tax, assessed_as_of_date, planning_applicant '
             'FROM v_projects_flat WHERE project_id = ?',
             (pid,))
         vpf_row = vpf_cur.fetchone()
@@ -345,6 +345,9 @@ def get_projects(conn):
             "is_uc_project": 'uc_project' in flags,
             "is_stalled": stage_code == 'stalled',
             "developer": roles.get('developer_of_record'),
+            # planning_applicant: filing agent/owner-of-record from the CPRA #26-1972 planning log
+            # (a DIFFERENT role from developer — never overwrites it). Sourced from v_projects_flat.
+            "planning_applicant": (vpf_row[7] if vpf_row else None),
             "architect": roles.get('architect_design'),
             "field_survey_date": None,
             "field_survey_notes": None,

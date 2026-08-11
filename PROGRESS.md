@@ -19,6 +19,18 @@ itemized impact/HTF/in-lieu fees NOT materialized in v2 (fees table = $14.1M Acc
 projects); restriction-type labeling mostly empty (VLI completed=128, density-bonus=180). Queued next
 ingestions: HTF award lists + TCAC allocations (turns the fee links into measurements).
 
+## 2026-08-10 (later 2) — 👁️ `planning_applicant` MADE VISIBLE (explorer #spatial map popup) + #26-1972 follow-up SUBMITTED
+**UI:** added an "Applicant: …" line to the explorer's `#spatial` map popup (`docs/explorer.js` colorMapBy,
+mirroring the `vliInfo`/`dbInfo` idiom; shown only for the 81 projects that have it). **VERIFIED** (own static
+server on :8777, browser pane): explorer.js `node --check` OK, page loads with ZERO console errors, and the
+exact popup line renders for all 81 populated projects (reproduced via getField against live DATA). Rendered-
+popup screenshot NOT captured — browser pane returned a 0×0 viewport + the map lazy-inits through the site's
+tab machinery; functional proof stands. **SCOPE NOTE — TWO maps:** explorer.html's `#spatial` tab (explorer.js,
+fed by explorer_data.js) NOW shows it; the standalone `docs/map.html` is a SEPARATE Datasette-backed map
+(`berkeley-housing.fly.dev`, selects only 7 cols) that does NOT load explorer.js — surfacing there needs a
+Datasette refresh + its own popup/SQL edit (queued, not done). **CPRA:** John SUBMITTED the #26-1972 follow-up
+via NextRequest (the blank-fields either/or). **NOT YET DEPLOYED** — all on `dev`; push dev→main is John's.
+
 ## 2026-08-10 (later) — 🌐 `planning_applicant` WIRED INTO EXPLORER EXPORT (data live, UI pending)
 **`export_explorer_data_v2.py`** now selects `planning_applicant` from `v_projects_flat` and emits it per
 project (two edits: the v_projects_flat query + the output dict, right after `developer`, with a comment that

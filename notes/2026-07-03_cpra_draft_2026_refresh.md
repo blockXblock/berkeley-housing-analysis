@@ -23,7 +23,9 @@ Processing-Status pages, so lean B for that one field). Data extracted (NOT a DB
 `data/processed/planning_pipeline_2025.csv` (2025 planning-application tail; 450 applicant names).
 Distinct from the Clariti CPRA **#26-2306** (filed 2026-08-09, awaiting response).
 
-**FOLLOW-UP TO SEND (forces the either/or on the record):**
+**FOLLOW-UP — ✅ SUBMITTED via NextRequest 2026-08-10 (John).** Awaiting the City's either/or reply.
+
+**FOLLOW-UP TEXT (as submitted — forces the either/or on the record):**
 
 > Re: Request #26-1972 — follow-up on the production received (the "2026 Master Permits Log"). Thank you
 > for the Master Permits Log produced in response to this request. That spreadsheet includes columns for

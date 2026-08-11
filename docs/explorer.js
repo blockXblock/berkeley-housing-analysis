@@ -2878,6 +2878,10 @@
                 const dbInfo = (dbVal === true || dbVal === 'True' || dbVal === 1) ? '<br>Density Bonus: Yes' : '';
                 const procDays = getField(p, 'processing_days');
                 const ucInfo = isUC ? '<br><strong>UC Project</strong>' : '';
+                // planning_applicant = filing agent/owner-of-record from the CPRA #26-1972 planning
+                // log (distinct from developer). Shown when present (81 projects).
+                const applicant = getField(p, 'planning_applicant');
+                const applicantInfo = applicant ? `<br>Applicant: ${applicant}` : '';
 
                 const marker = L.circleMarker([parseFloat(getField(p, 'latitude')), parseFloat(getField(p, 'longitude'))], {
                     radius: radius,
@@ -2890,7 +2894,7 @@
                     <strong>${getField(p, 'address')}</strong><br>
                     Units: ${units}<br>
                     Status: ${status}${ucInfo}<br>
-                    Processing Days: ${procDays || 'N/A'}${vliInfo}${dbInfo}
+                    Processing Days: ${procDays || 'N/A'}${vliInfo}${dbInfo}${applicantInfo}
                 `);
 
                 marker.addTo(spatialMap);

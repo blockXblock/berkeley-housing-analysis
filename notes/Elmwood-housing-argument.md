@@ -64,7 +64,7 @@ v4 events, Rent Board). The records exist only in **Accela**. This is why the ha
   `berkeley_fire_hill_zones.geojson`.
 
 ## Open work (turns the argument from strong to airtight)
-- **[[2026-08-12_cpra_corridors_parcel_gis]]** — CPRA **submitted 2026-08-13** for Raimi's parcel database +
+- **[[2026-08-12_cpra_corridors_parcel_gis]]** — CPRA **#26-2367, submitted 2026-08-13** for Raimi's parcel database +
   the soft-site prioritization decision records + feasibility. Parcel-level Elmwood truth.
 - **[[2026-08-12_accela_benvenue_adu_harvest_scope]]** — the Accela ADU/rental/inspection harvest (adapter
   `experiments/accela_scrape/harvest_address.py` written; Benvenue shakeout via Claude-in-Chrome underway).

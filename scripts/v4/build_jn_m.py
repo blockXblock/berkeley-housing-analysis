@@ -197,6 +197,23 @@ print(json.dumps(got,indent=2))
 """)
 
 md(r"""
+## ⚠️ Measuring recent densification — YearBuilt is the wrong noun (definitional guardrail)
+
+The existing-density finding above is **regime-independent and robust** (it's built stock). But do **NOT**
+measure *recent* housing from the assessor's **YearBuilt**: an **ADU adds a dwelling unit without changing
+the building's year built**, so YearBuilt counts new *structures*, not new *units*, and is structurally blind
+to the backyard densification that is the Elmwood story. (An early pass mis-read "3 units since 1995" as
+"frozen" — that was a definitional error; it measured new buildings, not new units.)
+
+**Proof — 2811 / 2822 Benvenue:** two ADUs built, a rental license held, an RHSP inspection + paid fee — and
+**six datasets miss all of it**: assessor YearBuilt (blind), assessor Units (2822 reads 1), business licenses
+(13,004 records, absent), our 2018+ ADU cohort (absent), v4 permit events (absent), Rent Board rent_control
+(absent). The city holds every record; they live in **Accela ACA**, the only complete source.
+
+**The correct temporal metric is `permitted_units_added`** — the ADU/new-dwelling *building-permit* event
+harvested from Accela (`aca-prod.accela.com/BERKELEY/`), never YearBuilt. Pilot scoped against the Benvenue
+block (`notes/2026-08-12_accela_benvenue_adu_harvest_scope.md`); it validates only if 2811 & 2822 light up.
+
 ## Next steps (queued)
 1. **Accela ACA per-parcel zoning harvest** for the corridor parcels → parcel-exact "denser than
    zoned" (our HARVESTER; John logs in). Replaces the WAF-dead Socrata path.

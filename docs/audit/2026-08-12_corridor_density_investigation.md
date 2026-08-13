@@ -29,6 +29,18 @@ rejected); its cause is elsewhere (larger SF lots / owner-builder incentive — 
 blocks (~24%, the hills) are MH-exempt; **every density corridor sits outside it** — MH's 8-units-by-right
 reaches exactly where the hidden density already is.
 
+## ⚠️ The ADU-undercount discovery (Benvenue) — a load-bearing data-quality result
+Measuring *recent* densification from assessor **YearBuilt** is a definitional error: an ADU adds a dwelling
+unit **without changing the building's year built**, so YearBuilt counts new *structures*, not new *units*
+(an early pass wrongly read "3 units since 1995" as "frozen"). Ground truth — **2811 / 2822 Benvenue** (owner
+built two ADUs, holds a rental license, had an RHSP inspection + paid a fee): **six datasets miss all of it** —
+assessor YearBuilt (blind), assessor Units (2822 reads 1), business licenses (13,004 records, absent), our
+2018+ ADU cohort (absent), v4 permit events (absent), Rent Board `rent_control` (1,098 rows, absent). The city
+holds every record; they live in **Accela ACA** — the only complete source. **The correct temporal metric is
+`permitted_units_added`** (the ADU building-permit event, harvested from Accela), never YearBuilt. Harvest
+scoped: `notes/2026-08-12_accela_benvenue_adu_harvest_scope.md` (3 record classes — permits, rental licenses,
+RHSP inspections+fees; validates iff 2811 & 2822 light up).
+
 ## Method
 - **Existing stock** = Census 2020 PL 94-171 (P1_001N pop, H1_001N housing units) joined to TIGER2020
   `tabblock20` on GEOID20. Parse verified vs Berkeley's known 2020 pop 124,321 (got 124,197 for 1,522

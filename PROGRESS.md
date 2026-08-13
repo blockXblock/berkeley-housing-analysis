@@ -19,6 +19,25 @@ itemized impact/HTF/in-lieu fees NOT materialized in v2 (fees table = $14.1M Acc
 projects); restriction-type labeling mostly empty (VLI completed=128, density-bonus=180). Queued next
 ingestions: HTF award lists + TCAC allocations (turns the fee links into measurements).
 
+## 2026-08-12 (later 2) — 🕵️ ADU-UNDERCOUNT DISCOVERY (Benvenue) + Accela harvest scoped; JN-M guardrail
+**Load-bearing data-quality finding.** Measuring recent housing from assessor **YearBuilt is a definitional
+error** — an ADU adds a unit without changing the building's year, so YearBuilt counts new *structures* not
+new *units* (an in-chat pass wrongly called Elmwood "frozen — 3 units since 1995"; corrected). **Ground truth
+2811/2822 Benvenue** (owner built 2 ADUs, holds a rental license, had an RHSP inspection + paid a fee):
+**SIX datasets miss all of it** — assessor YearBuilt (blind), assessor Units (2822=1), business licenses
+(13,004, absent), our 2018+ ADU cohort (absent), v4 events (absent), Rent Board `rent_control` (1,098 rows,
+absent). All the records exist — in **Accela ACA**. **Correct temporal metric = `permitted_units_added`**
+(ADU building-permit event from Accela), NEVER YearBuilt. **JN-M guardrail section added** (retires the
+YearBuilt framing; executes clean, gate PASS). **Accela ADU harvest SCOPED** — `notes/2026-08-12_accela_benvenue_adu_harvest_scope.md`
+(Benvenue block ~50 parcels, 3 record classes: building permits + rental licenses + RHSP inspections/fees;
+validates iff 2811 & 2822 light up; then scales to all ~1,356 Elmwood parcels). Also this session: assessor
+**TaxParcel** pulled from the Berkeley ArcGIS org (curl-accessible, YearBuilt/Units/Beds/LotSize per parcel;
+`scratch/2026-08-12/taxparcels.geojson`) — the temporal + MH-ceiling analysis ran on it (Elmwood MH residential
+headroom ~5,300 units, ~20× the commercial-strip upzoning; those numbers are ad-hoc in scratch, NOT yet in JN-M).
+**QUEUED / NEXT SESSION:** (1) RUN the Benvenue Accela pilot — **John logs into ACA**, check swap first
+(Playwright); (2) consolidate the TaxParcel temporal + MH-ceiling analysis into JN-M as a committed section;
+(3) reconcile assessor Units (85k) vs Census (52k) discrepancy.
+
 ## 2026-08-12 (later) — 🔥 JN-M reframed to MIDDLE HOUSING + fire-exemption overlay (hypothesis disproved)
 **Corrected a stale-regime error (John caught it):** benchmarked against defunct R-1..R-4 du/ac caps when the
 **Middle Housing Ordinance 7,978-N.S. (eff. Nov 1 2025)** superseded them — **8 units by-right / 5,000 sf

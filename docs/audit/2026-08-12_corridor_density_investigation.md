@@ -20,6 +20,15 @@ districts**: College–Elmwood at 15 du/ac is only **~22% of the ~70 du/ac now p
 fire-hazard-EXEMPT** (fire zones are on the Berkeley ArcGIS org, curl-accessible). *(Superseded framing: an
 earlier pass benchmarked against old R-2A=26 / R-1=8.7 caps — obsolete as of Nov 1 2025.)*
 
+## Fire-exemption overlay (§2 in JN-M) — hypothesis DISPROVED
+Overlaid Berkeley Hill/Fire Zones (`data/reference/berkeley_fire_hill_zones.geojson`, from the city ArcGIS
+org; Hill Zone 2-3 = high fire-hazard hills MH exempts) on the corridor blocks. **College–Elmwood = 0/44
+blocks in the fire-hazard zone** (it's flatland) — **both sides fully MH-eligible.** So the ~4× ADU
+concentration on the **East** side is **NOT** a fire-exemption artifact (a tempting story, tested and
+rejected); its cause is elsewhere (larger SF lots / owner-builder incentive — to test). Citywide, ~364/1,522
+blocks (~24%, the hills) are MH-exempt; **every density corridor sits outside it** — MH's 8-units-by-right
+reaches exactly where the hidden density already is.
+
 ## Method
 - **Existing stock** = Census 2020 PL 94-171 (P1_001N pop, H1_001N housing units) joined to TIGER2020
   `tabblock20` on GEOID20. Parse verified vs Berkeley's known 2020 pop 124,321 (got 124,197 for 1,522

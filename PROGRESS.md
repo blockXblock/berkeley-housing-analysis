@@ -19,6 +19,19 @@ itemized impact/HTF/in-lieu fees NOT materialized in v2 (fees table = $14.1M Acc
 projects); restriction-type labeling mostly empty (VLI completed=128, density-bonus=180). Queued next
 ingestions: HTF award lists + TCAC allocations (turns the fee links into measurements).
 
+## 2026-08-12 (later) — 🔥 JN-M reframed to MIDDLE HOUSING + fire-exemption overlay (hypothesis disproved)
+**Corrected a stale-regime error (John caught it):** benchmarked against defunct R-1..R-4 du/ac caps when the
+**Middle Housing Ordinance 7,978-N.S. (eff. Nov 1 2025)** superseded them — **8 units by-right / 5,000 sf
+residential lot (~70 du/ac)**, everywhere residential except high fire-hazard hills. JN-M now benchmarks vs
+the **MH allowance** (College–Elmwood 15 du/ac = **~22% of MH**, was mis-framed "57% of R-2A cap"); existing-
+density finding unchanged (regime-independent). **§2 fire overlay** (Berkeley Hill/Fire Zones from the city
+**ArcGIS org — curl-accessible, NOT Socrata**; `data/reference/berkeley_fire_hill_zones.geojson`): **College–
+Elmwood 0/44 blocks in the fire-hazard zone → both sides fully MH-eligible; the East-side ~4× ADU cluster is
+NOT a fire-exemption artifact** (hypothesis tested + rejected). ~24% of city blocks (hills) are MH-exempt;
+density corridors all sit outside it. New baseline `_mh.json` (15 figures incl. fire). Commits: 72891b7 (MH
+reframe) + this. **OPEN Q:** why ADUs concentrate East-of-College (larger SF lots? owner-builder?). Memory
+note: swap hit 750M-free (near the earlier crash); cleared 783M of re-downloadable Census raw from scratch.
+
 ## 2026-08-12 — 🏙️ CORRIDOR DENSITY CONSOLIDATED → JN-M (committed) + Accela-not-Socrata zoning route
 **The corridor housing-density investigation is now a committed, re-runnable notebook.** JN-M
 (`notebooks/v4/JN-M_corridor_density.ipynb`, generator `scripts/v4/build_jn_m.py`, core

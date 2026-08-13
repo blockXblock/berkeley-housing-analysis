@@ -154,6 +154,35 @@ du/ac caps — so benchmarking existing density against those old caps is meanin
 NOT Socrata (which WAF-blocks this environment). Queued.
 """)
 
+md(r"""
+## §2 — Middle-Housing-eligible vs fire-hazard-EXEMPT
+
+Middle Housing exempts the high fire-hazard hills. So the current-regime map is **eligible vs exempt**, not
+old districts. Overlaying Berkeley's Hill/Fire Zones (city ArcGIS org, curl-accessible — *not* Socrata) on
+the corridor blocks tests a tempting hypothesis: *is the ADU-heavy East side of College inside the fire
+exemption (i.e., the one lever left where MH doesn't reach)?*
+""")
+
+code(r"""
+# --- fire-hazard (MH-exempt) overlay: Hill Zone 2-3 ---
+from block_density_index import fire_exempt_mask
+b = blk.copy(); b["fire_exempt"] = fire_exempt_mask(b)
+print(f"Berkeley blocks in high-fire-hazard (Hill Zone 2-3, MH-exempt): {int(b.fire_exempt.sum())} / {len(b)}")
+ce = b[b.corridor == "College (Elmwood)"]
+for side in ["West", "East"]:
+    s = ce[ce.college_side == side]
+    print(f"  College {side:5}: {len(s):2} blocks | in fire-exempt zone = {int(s.fire_exempt.sum())} | "
+          f"ADUs = {int(s.adu_adds.sum())} | {s.housing_units.sum()/s.acres.sum():.1f} du/ac")
+""")
+
+md(r"""
+**Result — hypothesis disproved.** College–Elmwood is **0 / 44 blocks** in the fire-hazard zone (it's
+flatland) — **both sides are fully MH-eligible.** So the ~4× ADU concentration on the East side is **not** a
+fire-exemption artifact; its cause is elsewhere (larger single-family lots / owner-builder incentive — to
+test next). The density corridors all sit **outside** the ~24% of the city (the hills) that MH exempts —
+i.e., Middle Housing's 8-units-by-right *does* reach exactly where the hidden density already is.
+""")
+
 code(r"""
 # --- BASELINE GATE: derive vs the external timestamped baseline (never hardcode) ---
 base=json.load(open("data/baselines/corridor_density_baseline_2026-08-12_mh.json"))

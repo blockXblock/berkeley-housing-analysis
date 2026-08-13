@@ -1,7 +1,7 @@
 {
   "topic": "corridor_housing_density",
   "created": "2026-08-12",
-  "git_sha": "5d3ea58",
+  "git_sha": "72891b7",
   "sources": {
     "existing_units": "Census 2020 PL 94-171 (P1_001N pop, H1_001N housing units), joined to TIGER2020 tabblock20 on GEOID20; verified vs Berkeley pop 124,321",
     "adu_adds": "housing_rules.permit_role fixed-classifier ADU cohort (data/processed/adu_mh_cohort.csv, ~93% recall vs HCD APR)",
@@ -9,6 +9,8 @@
     "zoned_caps": "CZU: R-2A=26.4, R-1=8.7 du/ac; R-3/R-4/commercial form-based (no du/ac cap)"
   },
   "figures": {
+    "berkeley_blocks_fire_exempt": 364,
+    "college_elmwood_blocks_fire_exempt": 0,
     "n_blocks": 1522,
     "total_housing_units": 52278,
     "total_pop": 124197,

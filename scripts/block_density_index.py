@@ -32,6 +32,10 @@ warnings.filterwarnings("ignore")
 BLOCKS = "data/processed/berkeley_blocks_2020.geojson"
 COHORT = "data/processed/adu_mh_cohort.csv"
 PARCELS_DB = "databases/berkeley.db"
+# Berkeley Hill/Fire Zones (from the city ArcGIS org, curl-accessible). Hill Zone 2-3 ≈ the high
+# fire-hazard hills that the Middle Housing Ordinance EXEMPTS. (Exact MH-exempt boundary depends on the
+# ordinance's cited fire designation; Elmwood is unambiguously flatland, so its result is robust.)
+FIRE_ZONES = "data/reference/berkeley_fire_hill_zones.geojson"
 # city-documented corridor boundary latitudes (verified from parcel situs): Dwight 37.866, Alcatraz 37.851
 DWIGHT, ALCATRAZ = 37.866, 37.851
 # CURRENT regime = the Middle Housing Ordinance (7,978-N.S., effective 2026-11-01 [Nov 1 2025]): up to
@@ -117,11 +121,20 @@ def corridor_summary(blk):
     agg(blk.GEOID20.notna(), "ALL Berkeley")
     return pd.DataFrame(rows)
 
+def fire_exempt_mask(blk):
+    """Boolean Series: block centroid in the high-fire-hazard (Hill Zone 2-3) area MH exempts."""
+    fz = gpd.read_file(FIRE_ZONES).to_crs(4326)
+    hz = fz[fz.PLN_HILL_Z.isin([2, 3])].dissolve().geometry.iloc[0]
+    return blk.geometry.centroid.within(hz)
+
 def figures(blk):
     """The load-bearing derived figures, for the baseline gate (derive, never hardcode)."""
     s = corridor_summary(blk).set_index("cohort")
     g = lambda k, f="du_per_ac": float(s.loc[k, f])
+    fe = fire_exempt_mask(blk)
     return {
+        "berkeley_blocks_fire_exempt": int(fe.sum()),
+        "college_elmwood_blocks_fire_exempt": int((fe & (blk.corridor == "College (Elmwood)")).sum()),
         "n_blocks": int(len(blk)),
         "total_housing_units": int(blk.housing_units.sum()),
         "total_pop": int(blk["pop"].sum()),

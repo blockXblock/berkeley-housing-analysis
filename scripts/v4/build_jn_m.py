@@ -31,6 +31,11 @@ concentrated on exactly the side the map freezes.
 adds = our fixed-classifier ADU cohort; corridors cut at the city's own boundaries (College = Dwight→
 Alcatraz, per the Corridors Zoning Update). Density = units per **land** acre.
 
+> **Current regime = Middle Housing (Ord. 7,978-N.S., effective Nov 1 2025):** up to **8 units by-right on
+> a 5,000 sf residential lot** (≈70 du/ac), everywhere residential except the high fire-hazard hills. This
+> supersedes the old R-1…R-4 du/ac caps — so this notebook benchmarks existing density against the **Middle
+> Housing allowance**, not the defunct districts.
+
 > **Discipline:** every number below is DERIVED and gated against an external timestamped baseline
 > (`data/baselines/corridor_density_baseline_2026-08-12.json`). A legitimate change = append a new
 > baseline, never edit a magic number.
@@ -108,39 +113,50 @@ md(r"""
 """)
 
 code(r"""
-# --- VIZ 2: density vs zoned capacity (the "denser than zoned" chart) ---
+# --- VIZ 2: existing density vs the CURRENT by-right allowance (Middle Housing, eff Nov 1 2025) ---
+from block_density_index import MH_BYRIGHT_DU_AC, MH_RESIDENTIAL
 s=corridor_summary(blk).set_index("cohort")
 order=["College (Elmwood)","Telegraph","Adeline","University","Solano"]
-CAP={"College (Elmwood)":26.4,"Telegraph":np.nan,"Adeline":120,"University":np.nan,"Solano":8.7}
 dua=[float(s.loc[c,"du_per_ac"]) for c in order]; city=float(blk.housing_units.sum()/blk.acres.sum())
-fig,ax=plt.subplots(figsize=(9,5)); y=np.arange(len(order))
+fig,ax=plt.subplots(figsize=(10,5)); y=np.arange(len(order))
 ax.barh(y,dua,color=["#00a0dc","#e6007e","#00897b","#8a2be2","#666"])
+ax.axvline(MH_BYRIGHT_DU_AC,color="#c00",lw=2)
+ax.text(MH_BYRIGHT_DU_AC-1,len(order)-0.5,f"Middle Housing by-right ≈{MH_BYRIGHT_DU_AC:.0f} du/ac\n(8 units / 5,000 sf lot, residential)",
+        ha="right",va="center",fontsize=8,color="#c00")
+ax.axvline(city,ls="--",color="gray"); ax.text(city+.4,-.7,f"citywide {city:.1f}",fontsize=8,color="gray")
 for i,c in enumerate(order):
-    if CAP[c]==CAP[c]: ax.plot([CAP[c]]*2,[i-.4,i+.4],"k",lw=2); ax.text(CAP[c]+.4,i,f"cap {CAP[c]:.0f}",va="center",fontsize=8)
-    else: ax.text(dua[i]+.3,i,"form-based (no du/ac cap)",va="center",fontsize=8,color="#555")
-ax.axvline(city,ls="--",color="gray"); ax.text(city+.2,-.7,f"citywide {city:.1f}",fontsize=8,color="gray")
+    tag = f"{100*dua[i]/MH_BYRIGHT_DU_AC:.0f}% of MH allowance" if c in MH_RESIDENTIAL else "commercial corridor (MH n/a)"
+    ax.text(dua[i]+.5,i,tag,va="center",fontsize=8,color="#555")
 ax.set_yticks(y); ax.set_yticklabels(order); ax.invert_yaxis(); ax.set_xlabel("du / land acre")
-ax.set_title("Corridor density vs indicative zoned capacity",fontweight="bold"); plt.tight_layout(); plt.show()
+ax.set_xlim(0, MH_BYRIGHT_DU_AC*1.08)
+ax.set_title("Existing density vs the CURRENT by-right ceiling (Middle Housing, eff. Nov 1 2025)",fontweight="bold")
+plt.tight_layout(); plt.show()
 """)
 
 md(r"""
-## The "denser than zoned" reading — and its honest limits
+## Reframe: the current regime is Middle Housing, not the old districts
 
-- **College–Elmwood ≈ 57% of its R-2A cap (26 du/ac); its East side (R-1/R-2) at 12.9 ≈ 1.5× the R-1
-  single-family base** — the sharpest "denser than the base zone says," on the side kept low.
-- **Solano** sits near its **R-1 cap (~67%)**; **Adeline** uses only **~10%** of its planned 120-du/ac
-  cap (the corridor the city *is* upzoning has the most unused headroom).
-- **Telegraph / University are form-based** — Berkeley zoning *"does not contain a maximum density in
-  units per acre for the majority of its districts"* (CZU). So a true "vs zoned" for those needs
-  **FAR + height** (realized FAR needs per-parcel building sqft — not yet in hand).
+The **Middle Housing Ordinance (7,978-N.S., effective Nov 1 2025)** allows **up to 8 units by-right on a
+typical 5,000 sf residential lot** (3 stories / 35 ft; ≈52 ft with density bonus) across **all primarily-
+residential Berkeley EXCEPT the high fire-hazard hills.** That **supersedes** the old R-1/R-2/R-2A/R-3/R-4
+du/ac caps — so benchmarking existing density against those old caps is meaningless. The honest story:
 
-**Per-parcel zoning** (to make this parcel-exact rather than corridor-level) is **harvested via Accela
-ACA** (`aca-prod.accela.com/BERKELEY/`), NOT Socrata — Socrata WAF-blocks this environment. Queued.
+- **The existing-density finding stands and is regime-independent** — College–Elmwood ~15 du/ac = 2.2×
+  citywide is the *already-built* hidden multi-unit + backyard-ADU density, whatever the code says.
+- **Against the current ~70 du/ac by-right ceiling, every corridor is far below** — College–Elmwood is
+  only ~**22%** of what Middle Housing now permits. The story flips from "denser than allowed" to
+  **"already dense, and now vastly more is legal by-right."**
+- **The relevant map is now Middle-Housing-eligible vs fire-hazard-EXEMPT** (§2 below), not old districts.
+  ADU-building is the one lever that still works in the exempt hill areas — worth testing whether the
+  East-of-College ADU cluster sits inside the exemption.
+
+**Per-parcel zoning / MH-eligibility** is **harvested via Accela ACA** (`aca-prod.accela.com/BERKELEY/`),
+NOT Socrata (which WAF-blocks this environment). Queued.
 """)
 
 code(r"""
 # --- BASELINE GATE: derive vs the external timestamped baseline (never hardcode) ---
-base=json.load(open("data/baselines/corridor_density_baseline_2026-08-12.json"))
+base=json.load(open("data/baselines/corridor_density_baseline_2026-08-12_mh.json"))
 got=figures(blk); want=base["figures"]; bad={}
 for k,v in want.items():
     if abs(float(got[k])-float(v))>0.05: bad[k]=(got[k],v)

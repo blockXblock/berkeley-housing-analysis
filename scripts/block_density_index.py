@@ -34,8 +34,14 @@ COHORT = "data/processed/adu_mh_cohort.csv"
 PARCELS_DB = "databases/berkeley.db"
 # city-documented corridor boundary latitudes (verified from parcel situs): Dwight 37.866, Alcatraz 37.851
 DWIGHT, ALCATRAZ = 37.866, 37.851
-ZONED_CAP = {"College (Elmwood)": 26.4, "Solano": 8.7, "Adeline": 120.0,
-             "Telegraph": np.nan, "University": np.nan}   # nan = form-based, no du/ac cap
+# CURRENT regime = the Middle Housing Ordinance (7,978-N.S., effective 2026-11-01 [Nov 1 2025]): up to
+# 8 units by-right on a typical 5,000 sf residential lot (3 stories / 35 ft), applies to ALL primarily-
+# residential Berkeley EXCEPT high fire-hazard hill areas. This SUPERSEDES the old R-1/R-2/R-2A/R-3/R-4
+# du/ac caps (8.7/17/26/…), which are obsolete — do NOT benchmark against them.
+MH_BYRIGHT_DU_AC = 8.0 / (5000.0 / 43560.0)   # ≈ 69.7 du/ac (8 units / 5,000 sf lot), by-right
+# corridors whose fabric is primarily residential (MH-applicable); University/Telegraph are commercial
+# corridors with their own standards, so the MH residential allowance is not the right benchmark there.
+MH_RESIDENTIAL = {"College (Elmwood)", "Solano", "Adeline"}
 
 def _f(x):
     try: return float(x)
@@ -92,13 +98,14 @@ def corridor_summary(blk):
     """Per-corridor derived figures (du/ac, pop/ac, ADU/ac, % of indicative zoned cap)."""
     rows = []
     def agg(mask, name, extra=None):
-        s = blk[mask]; hu = s.housing_units.sum(); ac = s.acres.sum()
-        cap = ZONED_CAP.get(name, np.nan)
+        s = blk[mask]; hu = s.housing_units.sum(); ac = s.acres.sum(); dua = hu / ac
+        res = name.strip() in MH_RESIDENTIAL
         r = dict(cohort=name, blocks=int(len(s)), acres=round(ac, 1), units=int(hu),
-                 du_per_ac=round(hu / ac, 2), ppl_per_ac=round(s["pop"].sum() / ac, 2),
+                 du_per_ac=round(dua, 2), ppl_per_ac=round(s["pop"].sum() / ac, 2),
                  adu_adds=int(s.adu_adds.sum()), adu_per_ac=round(s.adu_adds.sum() / ac, 3),
-                 zoned_cap=(None if cap != cap else cap),
-                 pct_of_cap=(None if cap != cap else round(100 * (hu / ac) / cap, 1)))
+                 # headroom under Middle Housing: existing density as a share of the ~70 du/ac by-right
+                 # allowance (residential corridors only; N/A on commercial corridors)
+                 pct_of_mh=(round(100 * dua / MH_BYRIGHT_DU_AC, 1) if res else None))
         if extra: r.update(extra)
         rows.append(r)
     for c in ["College (Elmwood)", "Telegraph", "Adeline", "University", "Solano"]:
@@ -126,6 +133,9 @@ def figures(blk):
         "college_elmwood_adu_adds": int(s.loc["College (Elmwood)", "adu_adds"]),
         "college_east_adu_adds": int(s.loc["  College East", "adu_adds"]),
         "college_west_adu_adds": int(s.loc["  College West", "adu_adds"]),
+        # current-regime benchmark: Middle Housing by-right allowance + College-Elmwood's utilization
+        "mh_byright_du_per_ac": round(MH_BYRIGHT_DU_AC, 1),
+        "college_elmwood_pct_of_mh": round(100 * g("College (Elmwood)") / MH_BYRIGHT_DU_AC, 1),
     }
 
 if __name__ == "__main__":

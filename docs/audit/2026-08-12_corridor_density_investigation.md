@@ -9,8 +9,16 @@ of Berkeley. Consolidated as **JN-M** (`notebooks/v4/JN-M_corridor_density.ipynb
 College–Elmwood (Dwight→Alcatraz) ≈ **15 du/land-acre — 2.2× the citywide median (6.8)** — and exceeds the
 University Ave commercial corridor (6.0). The **East side of College** (kept low-zoned "for fire evacuation")
 carries **~4× the ADU-building rate of the West** (0.44 vs 0.14 ADU/acre) — densification concentrated on the
-side the map freezes. College–Elmwood sits at **~57% of its R-2A cap**; its East (R-1/R-2) at 12.9 ≈ **1.5×
-the R-1 single-family base**. Solano is near its R-1 cap; Adeline uses ~10% of its planned 120-du/ac cap.
+side the map freezes. This existing-density finding is **regime-independent** (it's the already-built stock).
+
+## Current regime = Middle Housing (NOT the old districts)
+The **Middle Housing Ordinance 7,978-N.S. (effective Nov 1 2025)** allows **up to 8 units by-right on a
+typical 5,000 sf residential lot (~70 du/ac)**, everywhere residential **except high fire-hazard hills** —
+superseding the old R-1/R-2/R-2A/R-3/R-4 du/ac caps. So the benchmark is the **MH allowance, not the defunct
+districts**: College–Elmwood at 15 du/ac is only **~22% of the ~70 du/ac now permitted** → the story is
+"already dense, and vastly more is now legal by-right." The relevant map becomes **MH-eligible vs
+fire-hazard-EXEMPT** (fire zones are on the Berkeley ArcGIS org, curl-accessible). *(Superseded framing: an
+earlier pass benchmarked against old R-2A=26 / R-1=8.7 caps — obsolete as of Nov 1 2025.)*
 
 ## Method
 - **Existing stock** = Census 2020 PL 94-171 (P1_001N pop, H1_001N housing units) joined to TIGER2020

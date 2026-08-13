@@ -83,6 +83,29 @@ adds per acre — the *backyard-building rate*. `pct_of_cap` = existing density 
 the avenue centerline.
 """)
 
+md(r"""
+## The Elmwood District vs non-student Berkeley (official neighborhood boundary)
+
+Using the city's own **Elmwood District** neighborhood polygon (from the Berkeley ArcGIS org — not a
+hand-drawn box, which diluted an earlier pass to 7.8), the **district-wide** claim holds: Elmwood is
+**~1.85× denser than non-student Berkeley** (12.8 vs 6.9 du/ac), with a clear majority of its blocks above
+the non-student median. And the commercial strip the CZU height change targets is a **5.3-acre BID** — against
+a 376-acre residential neighborhood. **The argument:** strengthen the century-old *residential* densification
+(multi-unit apartments, single-family→rental conversions, ADUs, Middle Housing), don't rezone 5.3 acres.
+*(Honest bound: "every block denser than everywhere" is NOT supported — ~69%, a supermajority, not all.)*
+""")
+
+code(r"""
+from block_density_index import elmwood_district_mask, nonstudent_mask, bid_commercial_acres
+ed = elmwood_district_mask(blk); ns = nonstudent_mask(blk)
+d_el = blk[ed].housing_units.sum()/blk[ed].acres.sum(); d_ns = blk[ns].housing_units.sum()/blk[ns].acres.sum()
+print(f"Elmwood District:      {int(ed.sum())} blocks, {blk[ed].acres.sum():.0f} ac, {d_el:.1f} du/ac")
+print(f"Non-student Berkeley:  {d_ns:.1f} du/ac   ->   Elmwood = {d_el/d_ns:.2f}x")
+print(f"Elmwood blocks above the non-student median ({blk[ns].dua.median():.1f}): {(blk[ed].dua>blk[ns].dua.median()).mean()*100:.0f}%")
+print(f"Elmwood commercial BID (the CZU height-change target): {bid_commercial_acres()} acres "
+      f"vs the {blk[ed].acres.sum():.0f}-acre residential neighborhood")
+""")
+
 code(r"""
 # --- VIZ 1: choropleth (where) — blocks colored by du/acre, corridors outlined ---
 import matplotlib.pyplot as plt, numpy as np

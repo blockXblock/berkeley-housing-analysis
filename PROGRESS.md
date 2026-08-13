@@ -19,6 +19,24 @@ itemized impact/HTF/in-lieu fees NOT materialized in v2 (fees table = $14.1M Acc
 projects); restriction-type labeling mostly empty (VLI completed=128, density-bonus=180). Queued next
 ingestions: HTF award lists + TCAC allocations (turns the fee links into measurements).
 
+## 2026-08-13 — 🏘️ Elmwood-District boundary (official) into JN-M + Accela address adapter written
+**Argument sharpened with the city's OWN boundaries** (Berkeley ArcGIS org, curl-accessible — `Neighborhoods`
+layer 8, `BID_Elmwood`; preserved to `data/reference/berkeley_neighborhoods.geojson` + `berkeley_bid_elmwood.geojson`):
+**Elmwood District = 12.8 du/ac = 1.85× non-student Berkeley (6.9); 69% of its blocks beat the non-student
+median.** The commercial strip the CZU height-change targets = **5.3-acre BID** vs the 376-ac residential
+neighborhood → the residential path (apartments, SF→rental conversions, ADUs, Middle Housing) dwarfs the
+commercial rezone. **Honest bound: 69% (supermajority), NOT "every block."** Folded into JN-M (new "Elmwood
+District" section + `elmwood_district_mask`/`nonstudent_mask`/`bid_commercial_acres` in block_density_index.py;
+baseline `_mh.json` now 19 figures; notebook executes clean, gate PASS). NOTE: my earlier hand-drawn box gave
+7.8 (diluted by hill-edge/Claremont) — the official boundary is the right one.
+**Accela ADDRESS ADAPTER written** — `experiments/accela_scrape/harvest_address.py` (drives ACA General Search
+by street-no/street-name, reuses the harvester's result-parse + pagination; candidate address selectors +
+`--headful --debug-dir` for the first live selector-confirm; `--storage-state` for John's login on
+Licenses/RHSP). Syntax-OK, NOT yet live-run. **NEXT:** (1) live shakeout of the adapter on Benvenue (John logs
+in for licenses/RHSP; public Building search needs no login) → validate 2811/2822; (2) John submits the Raimi
+CPRA (`notes/2026-08-12_cpra_corridors_parcel_gis.md`) for College=Elmwood parcel data; (3) `Berkeley_Graded_Neighborhoods`
+(HOLC redlining grades) available for the exclusionary-history half of the argument.
+
 ## 2026-08-12 (later 2) — 🕵️ ADU-UNDERCOUNT DISCOVERY (Benvenue) + Accela harvest scoped; JN-M guardrail
 **Load-bearing data-quality finding.** Measuring recent housing from assessor **YearBuilt is a definitional
 error** — an ADU adds a unit without changing the building's year, so YearBuilt counts new *structures* not

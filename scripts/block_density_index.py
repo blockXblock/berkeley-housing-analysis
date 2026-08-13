@@ -36,6 +36,10 @@ PARCELS_DB = "databases/berkeley.db"
 # fire-hazard hills that the Middle Housing Ordinance EXEMPTS. (Exact MH-exempt boundary depends on the
 # ordinance's cited fire designation; Elmwood is unambiguously flatland, so its result is robust.)
 FIRE_ZONES = "data/reference/berkeley_fire_hill_zones.geojson"
+# Official city boundaries (Berkeley ArcGIS org): the "Elmwood District" neighborhood polygon and the
+# Elmwood commercial BID (the ~3-block strip the CZU height change targets).
+NEIGHBORHOODS = "data/reference/berkeley_neighborhoods.geojson"
+BID_ELMWOOD = "data/reference/berkeley_bid_elmwood.geojson"
 # city-documented corridor boundary latitudes (verified from parcel situs): Dwight 37.866, Alcatraz 37.851
 DWIGHT, ALCATRAZ = 37.866, 37.851
 # CURRENT regime = the Middle Housing Ordinance (7,978-N.S., effective 2026-11-01 [Nov 1 2025]): up to
@@ -127,11 +131,28 @@ def fire_exempt_mask(blk):
     hz = fz[fz.PLN_HILL_Z.isin([2, 3])].dissolve().geometry.iloc[0]
     return blk.geometry.centroid.within(hz)
 
+def elmwood_district_mask(blk):
+    """Boolean Series: block centroid within the city's official 'Elmwood District' neighborhood."""
+    n = gpd.read_file(NEIGHBORHOODS).to_crs(4326)
+    el = n[n["Name"].astype(str).str.contains("lmwood", case=False)].dissolve().geometry.iloc[0]
+    return blk.geometry.centroid.within(el)
+
+def nonstudent_mask(blk):
+    """Boolean Series: blocks NOT in the student-housing core (>1.1 km from campus) and not Elmwood."""
+    c = blk.geometry.centroid
+    dcamp = np.hypot((c.y - 37.8715) * 111.32, (c.x + 122.2585) * 111.32 * 0.79)
+    return (dcamp > 1.1) & (~elmwood_district_mask(blk))
+
+def bid_commercial_acres():
+    """Acres of the Elmwood commercial BID (the strip the CZU height change targets)."""
+    return round(float(gpd.read_file(BID_ELMWOOD).to_crs(26910).area.sum() / 4046.8564224), 1)
+
 def figures(blk):
     """The load-bearing derived figures, for the baseline gate (derive, never hardcode)."""
     s = corridor_summary(blk).set_index("cohort")
     g = lambda k, f="du_per_ac": float(s.loc[k, f])
     fe = fire_exempt_mask(blk)
+    _elm = _elmwood_figs(blk)
     return {
         "berkeley_blocks_fire_exempt": int(fe.sum()),
         "college_elmwood_blocks_fire_exempt": int((fe & (blk.corridor == "College (Elmwood)")).sum()),
@@ -149,7 +170,19 @@ def figures(blk):
         # current-regime benchmark: Middle Housing by-right allowance + College-Elmwood's utilization
         "mh_byright_du_per_ac": round(MH_BYRIGHT_DU_AC, 1),
         "college_elmwood_pct_of_mh": round(100 * g("College (Elmwood)") / MH_BYRIGHT_DU_AC, 1),
+        # official Elmwood-District boundary vs non-student Berkeley (the district-wide density claim)
+        "elmwood_district_du_per_ac": _elm[0],
+        "nonstudent_du_per_ac": _elm[1],
+        "elmwood_pct_blocks_above_nonstudent_median": _elm[2],
+        "elmwood_bid_commercial_acres": bid_commercial_acres(),
     }
+
+def _elmwood_figs(blk):
+    ed = elmwood_district_mask(blk); ns = nonstudent_mask(blk)
+    ns_med = float(blk[ns].dua.median())
+    return (round(float(blk[ed].housing_units.sum() / blk[ed].acres.sum()), 1),
+            round(float(blk[ns].housing_units.sum() / blk[ns].acres.sum()), 1),
+            round(float((blk[ed].dua > ns_med).mean() * 100)))
 
 if __name__ == "__main__":
     blk = build()

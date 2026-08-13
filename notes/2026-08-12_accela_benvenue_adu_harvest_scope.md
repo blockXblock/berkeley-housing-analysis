@@ -52,6 +52,18 @@ six datasets records them:**
 - **No-capID/0-result is NOT absence until retried** (transient ACA discovery flakiness — retry before
   concluding a parcel has no permit).
 
+## Pilot RESULT (2026-08-13, via Claude-in-Chrome whole-street capture)
+CIC captured all **577 Benvenue building-permit records (1992–2026)** → `data/raw/benvenue_permits_2026-08-13.csv`.
+Run through `housing_rules.permit_role.classify` (NOT a keyword flag):
+- **6 genuine `new_unit` (ADU) permits** — concentrated at the north/3000s end (2819 basement ADU, 3005, 3019,
+  3020) — vs CIC's keyword flag catching **38** (≈6× over-count). Classifier >> keyword, confirmed.
+- **4 merge/combine records that REDUCE units** (2626 "merge 2→1", 2705 "remove two kitchens") — densification
+  reversed, which a keyword flag scores positive. The classifier catches the sign.
+- 533 ambiguous (conservative) + 35 subsidiary (REV/DEF, netted 0).
+- **Net permitted units on Benvenue ≈ +4 over 30 yr — small.** The lesson: Elmwood density is NOT from
+  permitted new construction; it's pre-1940 stock + unpermitted conversions (2811½, invisible to permits).
+  **=> the bulk harvest must classify, not keyword-flag; and the permitted stream is a FLOOR, not the story.**
+
 ## If the pilot validates (2811 + 2822 resolve)
 Scale the same two-record-class harvest to **all Elmwood corridor parcels** (Dwight→Alcatraz, the ~1,356
 parcels), then citywide — producing the first ADU-aware "units added over 20–30 years" count, and feeding

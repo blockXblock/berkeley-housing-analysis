@@ -19,6 +19,26 @@ itemized impact/HTF/in-lieu fees NOT materialized in v2 (fees table = $14.1M Acc
 projects); restriction-type labeling mostly empty (VLI completed=128, density-bonus=180). Queued next
 ingestions: HTF award lists + TCAC allocations (turns the fee links into measurements).
 
+## 2026-08-12 — 🏙️ CORRIDOR DENSITY CONSOLIDATED → JN-M (committed) + Accela-not-Socrata zoning route
+**The corridor housing-density investigation is now a committed, re-runnable notebook.** JN-M
+(`notebooks/v4/JN-M_corridor_density.ipynb`, generator `scripts/v4/build_jn_m.py`, core
+`scripts/block_density_index.py`) — executes clean, baseline-gated (`data/baselines/corridor_density_baseline_2026-08-12.json`,
+11 figures, derive-not-hardcode). **Finding:** College–Elmwood (Dwight→Alcatraz) ≈ **15 du/land-acre = 2.2×
+citywide median**, > University commercial corridor (6.0); College **East side** (fire-evac low-zoned) has
+**~4× the West's ADU rate**. Existing stock = **Census 2020 PL** (downloaded 76 MB — keyless API dead; parse
+verified vs Berkeley pop 124,321) on TIGER2020 blocks; adds = ADU cohort. Corridors cut at the city's own
+boundaries (College=Dwight→Alcatraz per the **CZU**; north-of-Dwight College is campus/institutional, so
+College=Elmwood). Committed data: `berkeley_blocks_2020.geojson` (1,522 blocks), `block_density_index.csv`,
+`berkeley_block_census_2020.csv`. CZU zoning extract → `docs/audit/2026-08-12_czu_zoning_extract.md`; full
+writeup → `docs/audit/2026-08-12_corridor_density_investigation.md`. Viz (choropleth, comparison, vs-zoned,
+**3D extruded-density KML**) in `scratch/2026-08-12/`.
+**KEY DATA-ROUTE DECISION (John):** Berkeley per-parcel **zoning is harvested via Accela ACA
+(`aca-prod.accela.com/BERKELEY/`), NOT Socrata** — Socrata WAF-blocks this environment (IP-level 403). Zoning
+is form-based (no du/ac cap for most districts; R-2A=26.4, R-1=8.7 exceptions) so "vs zoned" is du/ac for
+R-1/R-2/R-2A + FAR/height for the rest (realized FAR needs building sqft — gap). **QUEUED:** Accela per-parcel
+zoning harvest (our HARVESTER; John logs in) → parcel-exact "denser than zoned". CPRA for Raimi parcel GIS
+drafted (`notes/2026-08-12_cpra_corridors_parcel_gis.md`).
+
 ## 2026-08-10 (later 2) — 👁️ `planning_applicant` MADE VISIBLE (explorer #spatial map popup) + #26-1972 follow-up SUBMITTED
 **UI:** added an "Applicant: …" line to the explorer's `#spatial` map popup (`docs/explorer.js` colorMapBy,
 mirroring the `vliInfo`/`dbInfo` idiom; shown only for the 81 projects that have it). **VERIFIED** (own static

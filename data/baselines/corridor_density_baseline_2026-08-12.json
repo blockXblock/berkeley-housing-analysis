@@ -1,0 +1,25 @@
+{
+  "topic": "corridor_housing_density",
+  "created": "2026-08-12",
+  "git_sha": "4df92d7",
+  "sources": {
+    "existing_units": "Census 2020 PL 94-171 (P1_001N pop, H1_001N housing units), joined to TIGER2020 tabblock20 on GEOID20; verified vs Berkeley pop 124,321",
+    "adu_adds": "housing_rules.permit_role fixed-classifier ADU cohort (data/processed/adu_mh_cohort.csv, ~93% recall vs HCD APR)",
+    "corridor_boundaries": "CZU Existing Conditions Report (Raimi+Assoc 3/5/25): College=Dwight->Alcatraz",
+    "zoned_caps": "CZU: R-2A=26.4, R-1=8.7 du/ac; R-3/R-4/commercial form-based (no du/ac cap)"
+  },
+  "figures": {
+    "n_blocks": 1522,
+    "total_housing_units": 52278,
+    "total_pop": 124197,
+    "citywide_du_per_ac": 7.86,
+    "citywide_median_block_dua": 6.85,
+    "college_elmwood_du_per_ac": 15.14,
+    "college_west_du_per_ac": 18.24,
+    "college_east_du_per_ac": 12.86,
+    "college_elmwood_adu_adds": 62,
+    "college_east_adu_adds": 50,
+    "college_west_adu_adds": 12
+  },
+  "notes": "Per-parcel zoning NOT included (Berkeley zoning is form-based; per-parcel layer to be harvested via Accela ACA, not Socrata which WAF-blocks us). Realized-FAR pending building sqft."
+}

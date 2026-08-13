@@ -1,6 +1,8 @@
 # CPRA draft — Corridors Zoning Update: parcel database, prioritization work product, feasibility
 
-**Status: DRAFT for John's review — not sent.** Submit via Berkeley NextRequest (cityofberkeleyca.nextrequest.com).
+**Status: ✅ SUBMITTED via NextRequest 2026-08-13 (John).** Awaiting response. (Request # to be added.) Highest-priority
+items: 1 (parcel database) + 2 (soft-site prioritization decision records). Fallback if resisted: reproduce the
+improvement-to-land-value soft-site criterion independently from assessor `Imps`/`Land`.
 **Rationale:** the CZU published only PDFs (Existing Conditions 3/5/25, Alternatives 8/15/25, workshop decks).
 Raimi + Associates (with Plan to Place, Yes Duffy Architects, Strategic Economics, Rincon, Kittelson) clearly
 built a **parcel-level GIS database** and **scored/prioritized every parcel** for redevelopment — the color-coded

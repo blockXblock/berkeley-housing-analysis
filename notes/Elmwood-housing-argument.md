@@ -42,10 +42,19 @@ Elmwood density (~15 du/ac in the corridor) is only **~22% of the MH by-right ce
 headroom, right where demand is highest. Zoning caps that used to bind (old R-1/R-2/R-2A) are **defunct**.
 
 **5. The mechanisms are exactly the residential ones — and the data undercounts them.** Apartments (historical,
-59% of Elmwood units are in old apartment parcels), SF→rental conversions, and ADUs. **The ADU undercount is
-proven on John's own parcels** (2811 / 2822 Benvenue: two ADUs, a rental license, an RHSP inspection + paid
-fee) — **six datasets miss all of it** (assessor YearBuilt, assessor Units, business licenses, our ADU cohort,
-v4 events, Rent Board). The records exist only in **Accela**. This is why the harvest matters.
+59% of Elmwood units are in old apartment parcels), SF→rental conversions, and ADUs.
+- **Permitted ADUs ARE visible in Accela** — a whole-street search found **12 ADU permits on Benvenue**
+  (e.g. 3001 "new 2-bedroom ADU", 3019 "new ADU"). So the permitted-ADU count is harvestable (that's the
+  Accela address harvest — [[2026-08-12_accela_benvenue_adu_harvest_scope]]).
+- **The starkest undercount is the UNPERMITTED / thinly-recorded unit.** The owner's rented cottage at
+  **2811½ Benvenue** (parcel 053-1695-026) has **no ADU building permit** (the parcel's only permit is a 2000
+  sewer repair), **no rental license**, and no assessor unit — only a thin RHSP **Owner Inspection Request
+  (RFS-2023-00094, opened 2023-05-02**; owner emailed inspection photos to inspector F. Mares ~2023-05-03; the
+  ACA record logs no completed inspection and no fee). A real, rented dwelling unit with **near-zero record
+  trail** — invisible to *every* dataset including Accela permits. *(An earlier draft wrongly asserted permitted
+  ADUs at 2811 & 2822 that six datasets "missed"; direct Accela search corrected that — 2822 is a different
+  owner, and 2811 has no ADU permit. The real point is subtler and stronger: unpermitted/older conversions are
+  invisible even to the permit stream, so the harvest is a FLOOR, not a full count.)*
 
 ## Honest bounds (so it can't be picked apart)
 - **"Every block denser than everywhere" is NOT supported** — it's ~69%, a supermajority.

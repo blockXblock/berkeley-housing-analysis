@@ -29,17 +29,30 @@ from url_discovery_scraper import (            # reuse the proven machinery
     _walk_all_result_pages, _is_login_or_block, _save_debug,
 )
 
-# ACA General Search address inputs — candidate selectors, first visible wins (mirror PERMIT_INPUT_SELECTORS).
-ADDRESS_STREETNO_SELECTORS = (
-    "input#ctl00_PlaceHolderMain_generalSearchForm_txtGSStreetNumber",
-    "input[name='ctl00$PlaceHolderMain$generalSearchForm$txtGSStreetNumber']",
-    "input[id$='txtGSStreetNumber']",
-    "input[id$='txtGSStreetNo']",
+# ACA General Search address inputs — field ids CONFIRMED live via Claude-in-Chrome (2026-08-13), same
+# across the Building and Business-Licenses modules (both use generalSearchForm). Street number is a
+# From/To PAIR; set both to the same number for one address (From must be <= To or the form errors).
+ADDRESS_STREETNO_FROM_SELECTORS = (
+    "input#ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_ChildControl0",
+    "input[name='ctl00$PlaceHolderMain$generalSearchForm$txtGSNumber$ChildControl0']",
+    "input[id$='txtGSNumber_ChildControl0']",
+)
+ADDRESS_STREETNO_TO_SELECTORS = (
+    "input#ctl00_PlaceHolderMain_generalSearchForm_txtGSNumber_ChildControl1",
+    "input[name='ctl00$PlaceHolderMain$generalSearchForm$txtGSNumber$ChildControl1']",
+    "input[id$='txtGSNumber_ChildControl1']",
 )
 ADDRESS_STREETNAME_SELECTORS = (
     "input#ctl00_PlaceHolderMain_generalSearchForm_txtGSStreetName",
     "input[name='ctl00$PlaceHolderMain$generalSearchForm$txtGSStreetName']",
     "input[id$='txtGSStreetName']",
+)
+# The date window DEFAULTS to ~2 years back — widen Start Date to 1900 or OLD permits are silently missed
+# (this is how the 2000 sewer permit at 2811 Benvenue is even visible).
+START_DATE_SELECTORS = (
+    "input[id$='txtGSStartDate']",
+    "input[id*='StartDate']",
+    "input[id$='txtGSPermitDateFrom']",
 )
 
 def _fill_first(page, selectors, value, errors):
@@ -67,7 +80,11 @@ def search_by_address(page, street_name, street_no=None, module="Building",
         errors.append("could not locate street-name input — refine ADDRESS_STREETNAME_SELECTORS from debug HTML")
         return {"records": [], "blocked": None, "errors": errors, "fill_ok": False}
     if street_no:
-        _fill_first(page, ADDRESS_STREETNO_SELECTORS, str(street_no), errors)
+        # street number is a From/To pair — set both to the same value for a single address
+        _fill_first(page, ADDRESS_STREETNO_FROM_SELECTORS, str(street_no), errors)
+        _fill_first(page, ADDRESS_STREETNO_TO_SELECTORS, str(street_no), errors)
+    # widen the date window (defaults to ~2 years) so pre-2024 permits are not silently dropped
+    _fill_first(page, START_DATE_SELECTORS, "01/01/1900", errors)
     if not _try_click_search(page, errors):
         errors.append("could not click search button")
         return {"records": [], "blocked": None, "errors": errors, "fill_ok": True}

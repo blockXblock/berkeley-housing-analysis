@@ -29,6 +29,7 @@ from housing_rules import to_canonical_apn
 SEC = "data/reference/berkeley_secondary_unit_addresses.geojson"
 TP  = "data/raw/berkeley_taxparcels_2026-08-12.geojson"
 NBH = "data/reference/berkeley_neighborhoods.geojson"
+OWNERS = "data/reference/berkeley_parcel_owners_2026-08-13.csv"   # to drop COMMON-AREA/HOA false positives
 
 def canon(a):
     try: return to_canonical_apn(a, "alameda")
@@ -54,6 +55,12 @@ def build_ghost():
     j = j.sort_values("assessor_units", ascending=False).drop_duplicates("FullAddres", keep="first")
     j["elmwood"] = j.geometry.within(elpoly)
     j["capn"] = j["APN"].map(canon)
+    # exclude COMMON-AREA / HOA parcels (condo/tract common areas the letter-addresses spatially land on —
+    # CIC ground-truth caught 2723 Ashby "COMMON AREA OF TR 3872", a legal apartment assessed on other APNs)
+    own = pd.read_csv(OWNERS)
+    own["capn"] = own.APN.apply(lambda a: canon(a) if pd.notna(a) else None)
+    common = set(own[own.OwnersName.astype(str).str.contains("COMMON AREA|HOMEOWNER|H O A|HOA ", case=False, na=False)].capn.dropna())
+    j = j[~j.capn.isin(common)]
     db = sqlite3.connect("databases/berkeley.db")
     lic = pd.read_sql("SELECT apn, busdesc FROM licenses WHERE b1_per_sub_type='Rental of Real Property'", db)
     lic["capn"] = lic["apn"].map(canon)

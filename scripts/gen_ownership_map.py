@@ -12,7 +12,7 @@ recording) — a proxy for acquisition, not a certified sale date. (2) "trust" i
 because most trusts are family estate-planning, NOT corporate. (3) This is the LATEST transfer only, not the
 full ownership history (that needs the County Recorder deed index).
 
-Inputs: scratch/2026-08-13/parcel_owners.csv (APN,OwnersName,LatestDocu) + committed taxparcels geometry.
+Inputs: data/reference/berkeley_parcel_owners_2026-08-13.csv (APN,OwnersName,LatestDocu) + committed taxparcels geometry.
 Output: docs/maps/berkeley_ownership.html + docs/maps/berkeley_ownership_data.json.
 Usage: python scripts/gen_ownership_map.py
 """
@@ -40,7 +40,7 @@ def owner_type(name):
 def main():
     tp = gpd.read_file("data/raw/berkeley_taxparcels_2026-08-12.geojson")[["APN", "geometry"]]
     tp["capn"] = tp.APN.apply(lambda a: to_canonical_apn(a, "alameda") if a else None)
-    ow = pd.read_csv("scratch/2026-08-13/parcel_owners.csv")
+    ow = pd.read_csv("data/reference/berkeley_parcel_owners_2026-08-13.csv")
     ow["capn"] = ow.APN.apply(lambda a: to_canonical_apn(a, "alameda") if pd.notna(a) else None)
     ow["otype"] = ow.OwnersName.map(owner_type)
     ow["yr"] = pd.to_numeric(ow.LatestDocu, errors="coerce")

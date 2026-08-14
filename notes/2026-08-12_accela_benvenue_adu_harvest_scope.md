@@ -64,6 +64,21 @@ Run through `housing_rules.permit_role.classify` (NOT a keyword flag):
   permitted new construction; it's pre-1940 stock + unpermitted conversions (2811½, invisible to permits).
   **=> the bulk harvest must classify, not keyword-flag; and the permitted stream is a FLOOR, not the story.**
 
+## Ghost-unit GROUND-TRUTH result (2026-08-13, CIC vs Accela permits, 6 Elmwood assessor-undercount parcels)
+**Structural finding that changes the method:** Berkeley Accela ACA has **NO dwelling-unit-count field** anywhere
+(Parcel Info = APN/Block/Lot only; Housing module disabled→citizenserve; Business Licenses→Open Data). So Accela
+corroborates *whether extra dwellings exist* (via lettered permits), NOT *whether the assessor undercounts* — that
+side needs the assessor/Rent-Board data. Also: **online permit history starts ~1998**, so "no lettered permit" is
+weak evidence of absence (pre-1998 / unpermitted units leave no trace).
+**Verdicts (6):** REAL hidden dwelling = **2** (2628 Benvenue "2 rear cottages" + A/B; 2802 Webster permitted
+ground-floor unit B). Legal multi-unit / FALSE POSITIVE = **1** (2723 Ashby = condo/tract common-area, units on
+other APNs). No corroboration = **3** (2705 Piedmont, 2902 Hillegass, 2433 Oregon). **=> the 53-Elmwood /
+444-citywide assessor-undercount count is a HIGH-FALSE-POSITIVE UPPER BOUND; true figure likely ⅓–½.** JN-M §3
+caveat updated to say so. Detector now excludes COMMON-AREA/HOA owners (505 citywide) but 2723 Ashby persists
+(condo-geometry overlap). Also: RPP letter set (A-D) disagreed with Accela (A/B/C/E/F, no D) — RPP addressing may
+be stale. CIC offered to run the remaining 47 (~2 min/parcel) — DEFER; the sample already fixes the FP rate, and
+the Rent Board registry (CPRA #26-2375) closes the assessor/registration side more cheaply.
+
 ## If the pilot validates (2811 + 2822 resolve)
 Scale the same two-record-class harvest to **all Elmwood corridor parcels** (Dwight→Alcatraz, the ~1,356
 parcels), then citywide — producing the first ADU-aware "units added over 20–30 years" count, and feeding

@@ -268,10 +268,15 @@ ax.set_axis_off(); plt.tight_layout(); plt.show()
 """)
 
 md(r"""
-> **What this could mislead about:** each dot is an *address*, not a certified unit — some letter suffixes are
-> legal multi-unit buildings on a duplex-coded parcel (e.g. `2723 Ashby A-D`). The **red (assessor-undercount)**
-> class is the sharpest signal; ground-truthing a sample sets the false-positive rate. And, again: this maps the
-> *discrepancy*, not additional units to add to the Census block totals.
+> **Ground-truth (Claude-in-Chrome vs Accela permits, 6 Elmwood assessor-undercount parcels) — the count is a
+> HIGH-FALSE-POSITIVE UPPER BOUND.** Only **~2 of 6 were confirmable real hidden dwellings** (2628 Benvenue —
+> "2 rear cottages"; 2802 Webster — a permitted ground-floor unit B). **1 was a legal multi-unit apartment**
+> whose units are assessed on other APNs (2723 Ashby — a condo/tract common-area parcel our join snagged), and
+> **3 had no corroboration** (2705 Piedmont, 2902 Hillegass, 2433 Oregon). Two structural limits: **Accela has
+> NO dwelling-unit field** (it corroborates *dwellings*, not *assessor undercount* — that side needs the
+> assessor / Rent-Board data), and **online permits start ~1998**, so "no permit" != "no unit". **So treat the
+> 53 Elmwood / 444 citywide as CANDIDATES — the real figure is likely a third to a half.** Maps the discrepancy,
+> never additive to Census.
 
 ## ⚠️ Measuring recent densification — YearBuilt is the wrong noun (definitional guardrail)
 

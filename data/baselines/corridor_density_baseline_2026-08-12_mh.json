@@ -1,7 +1,7 @@
 {
   "topic": "corridor_housing_density",
   "created": "2026-08-12",
-  "git_sha": "240c374",
+  "git_sha": "e7a72b9",
   "sources": {
     "existing_units": "Census 2020 PL 94-171 (P1_001N pop, H1_001N housing units), joined to TIGER2020 tabblock20 on GEOID20; verified vs Berkeley pop 124,321",
     "adu_adds": "housing_rules.permit_role fixed-classifier ADU cohort (data/processed/adu_mh_cohort.csv, ~93% recall vs HCD APR)",
@@ -32,7 +32,7 @@
     "elmwood_assessor_undercount": 53,
     "elmwood_assessed_multiunit": 163,
     "citywide_assessor_undercount": 444,
-    "citywide_assessed_multiunit": 1783
+    "citywide_assessed_multiunit": 1777
   },
   "notes": "Per-parcel zoning NOT included (Berkeley zoning is form-based; per-parcel layer to be harvested via Accela ACA, not Socrata which WAF-blocks us). Realized-FAR pending building sqft.",
   "regime": "Middle Housing Ordinance 7,978-N.S. effective 2025-11-01 \u2014 8 units by-right / 5,000 sf residential lot (~70 du/ac); supersedes old R-1..R-4 caps; exempts high fire-hazard hills",

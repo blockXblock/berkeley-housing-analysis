@@ -18,8 +18,15 @@ import pandas as pd, sqlite3, geopandas as gpd
 warnings.filterwarnings("ignore"); sys.path.insert(0, "scripts")
 from housing_rules import to_canonical_apn
 
-PDF = "data/raw/berkeley_landmarks_list.pdf"
+PDF = "data/raw/berkeley_landmarks_list.pdf"   # gitignored (*.pdf); auto-downloaded if absent
+PDF_URL = "https://berkeleyca.gov/sites/default/files/documents/COB%20Landmarks%20Updated%20Jan%202023_0.pdf"
 OUT = "data/reference/berkeley_landmark_build_dates.csv"
+
+def _ensure_pdf():
+    if not pathlib.Path(PDF).exists():
+        import urllib.request
+        pathlib.Path(PDF).parent.mkdir(parents=True, exist_ok=True)
+        urllib.request.urlretrieve(PDF_URL, PDF)
 _ST = r"\b(AVE|AVENUE|ST|STREET|WAY|BLVD|RD|DR|PL|CT|LN|TER|CIR|PLACE|COURT|ROAD)\b.*$"
 
 def _key(num, street):
@@ -27,6 +34,7 @@ def _key(num, street):
     return f"{num} {st[0]}" if st else None
 
 def parse_landmarks():
+    _ensure_pdf()
     txt = subprocess.run(["pdftotext", "-layout", PDF, "-"], capture_output=True, text=True).stdout
     rec = re.compile(r"^\s*(\d{2,5})\s"); date = re.compile(r"\b(\d{1,2}/\d{1,2}/\d{4})\b")
     typ = re.compile(r"\b(LM|SM|SOM|HD)\b")

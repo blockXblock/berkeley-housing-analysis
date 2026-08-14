@@ -38,6 +38,46 @@ def _lic_units(s):
     m = re.search(r"(\d+)\s*UNIT", str(s).upper())
     return int(m.group(1)) if m else 1
 
+def build_ghost():
+    """Return a per-parcel GeoDataFrame (geometry = a representative secondary-address point) with columns:
+    capn, n_secondary, assessor_units, cls (assessor_undercount|assessed_multiunit), registered_rental,
+    elmwood, addrs. Condos/apartments/commercial are structurally excluded (join restricted to UseCode 1xxx/2xxx).
+    NOTE: this is a DISCREPANCY signal (what the assessor/zoning under-records), NOT additive to Census totals."""
+    sec = gpd.read_file(SEC).drop_duplicates("FullAddres")
+    tp = gpd.read_file(TP)[["APN", "Units", "UseCode", "geometry"]]
+    tp["Units"] = pd.to_numeric(tp["Units"], errors="coerce")
+    tp = tp.rename(columns={"Units": "assessor_units", "UseCode": "assessor_uc"})
+    nbh = gpd.read_file(NBH).to_crs(4326)
+    elpoly = nbh[nbh.Name.astype(str).str.contains("lmwood", case=False)].dissolve().geometry.iloc[0]
+    j = gpd.sjoin(sec, tp, predicate="within", how="inner")
+    j = j[j.assessor_uc.astype(str).str.match(r"^[12]")].copy()             # low-density residential only
+    j = j.sort_values("assessor_units", ascending=False).drop_duplicates("FullAddres", keep="first")
+    j["elmwood"] = j.geometry.within(elpoly)
+    j["capn"] = j["APN"].map(canon)
+    db = sqlite3.connect("databases/berkeley.db")
+    lic = pd.read_sql("SELECT apn, busdesc FROM licenses WHERE b1_per_sub_type='Rental of Real Property'", db)
+    lic["capn"] = lic["apn"].map(canon)
+    reg = set(lic.capn.dropna())
+    rc = pd.read_sql('SELECT APN FROM rent_control', db); reg |= set(rc["APN"].map(canon).dropna())
+    P = j.groupby("capn").agg(
+        n_secondary=("FullAddres", "nunique"), assessor_units=("assessor_units", "max"),
+        elmwood=("elmwood", "any"), addrs=("FullAddres", lambda s: "; ".join(sorted(set(s))[:4])),
+        geometry=("geometry", "first")).reset_index()
+    P = gpd.GeoDataFrame(P, geometry="geometry", crs=4326)
+    P["cls"] = P.assessor_units.apply(lambda u: "assessor_undercount" if (pd.isna(u) or u <= 1) else "assessed_multiunit")
+    P["registered_rental"] = P.capn.isin(reg)
+    return P
+
+def ghost_figures(P):
+    def n(mask, c): return int(((P.cls == c) & mask).sum())
+    return {
+        "elmwood_ghost_parcels": int(P.elmwood.sum()),
+        "elmwood_assessor_undercount": n(P.elmwood, "assessor_undercount"),
+        "elmwood_assessed_multiunit": n(P.elmwood, "assessed_multiunit"),
+        "citywide_assessor_undercount": n(P.capn.notna(), "assessor_undercount"),
+        "citywide_assessed_multiunit": n(P.capn.notna(), "assessed_multiunit"),
+    }
+
 def main():
     # 1) RPP secondary-unit addresses -> parcel (spatial), dedup by address
     sec = gpd.read_file(SEC).drop_duplicates("FullAddres")

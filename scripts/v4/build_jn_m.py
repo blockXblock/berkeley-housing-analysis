@@ -211,7 +211,7 @@ code(r"""
 base=json.load(open("data/baselines/corridor_density_baseline_2026-08-12_mh.json"))
 got=figures(blk); want=base["figures"]; bad={}
 for k,v in want.items():
-    if abs(float(got[k])-float(v))>0.05: bad[k]=(got[k],v)
+    if k in got and abs(float(got[k])-float(v))>0.05: bad[k]=(got[k],v)   # ghost figures are gated in §3
 if bad:
     raise AssertionError(f"figures drifted vs baseline {base['created']} @ {base['git_sha']}: {bad}\n"
                          "-> DIAGNOSE (computed vs baseline, likely cause) then APPEND a new timestamped baseline, do not edit magic numbers.")
@@ -220,6 +220,59 @@ print(json.dumps(got,indent=2))
 """)
 
 md(r"""
+## §3 — Ghost units: what the assessor and the zoning map under-record
+
+The city assigns an official **address** to a dwelling unit even when it was never permitted or licensed. So
+Berkeley's RPP address layer carries **secondary-unit addresses** (½ / A-B / rear / cottage) — a signal of
+units-on-the-ground. Cross-referenced against the assessor (restricted to low-density-residential parcels, so
+**condos/apartments are structurally excluded** — they're assessed, not hidden):
+
+- **Elmwood: 53 parcels the assessor calls single-family/duplex carry a secondary-unit address it doesn't count**
+  (assessor-undercount), + 163 where the assessor *does* count the extra unit (assessed-multiunit, e.g. 2811½
+  Benvenue — a real unpermitted cottage the assessor records as unit 2).
+- Citywide: 444 assessor-undercount + 1,783 assessed-multiunit.
+
+> **Counting rule (load-bearing):** this is a **DISCREPANCY** signal — *where the parcel/zoning data under-records
+> reality* — **NOT additive to the block housing-unit totals.** Existing units per block stay anchored on the
+> **Census** (`HOUSING20`), which counts condos and most units already. Ghost units show that the "single-family"
+> label is wrong on the ground; they are **candidates** (a letter suffix is a strong-but-imperfect unit proxy)
+> pending ground-truth. Never sum them onto Census.
+""")
+
+code(r"""
+from ghost_units import build_ghost, ghost_figures
+gP = build_ghost(); gfig = ghost_figures(gP)
+import json; print(json.dumps(gfig, indent=2))
+# baseline gate for the ghost figures (derive vs baseline, never hardcode)
+_b = json.load(open("data/baselines/corridor_density_baseline_2026-08-12_mh.json"))["figures"]
+_bad = {k: (gfig[k], _b[k]) for k in gfig if abs(gfig[k]-_b[k]) > 0}
+assert not _bad, f"ghost figures drifted vs baseline: {_bad} -> diagnose then append a new baseline"
+print("ghost baseline gate PASS")
+""")
+
+code(r"""
+# --- VIZ 3: the reveal — Elmwood 'single-family/duplex' parcels that carry a hidden secondary-unit address ---
+import matplotlib.pyplot as plt, geopandas as gpd
+elg = gP[gP.elmwood].to_crs(3857)
+nb = gpd.read_file("data/reference/berkeley_neighborhoods.geojson").to_crs(3857)
+elb = nb[nb.Name.astype(str).str.contains("lmwood", case=False)]
+fig, ax = plt.subplots(figsize=(9, 10))
+elb.boundary.plot(ax=ax, edgecolor="#00a0dc", linewidth=2)
+for cls, col, lbl in [("assessed_multiunit", "#888", "assessed (assessor counts it)"),
+                      ("assessor_undercount", "#e6194b", "assessor-undercount (hidden)")]:
+    s = elg[elg.cls == cls]
+    s.plot(ax=ax, color=col, markersize=18, label=f"{lbl} — {len(s)}")
+ax.legend(loc="lower left", fontsize=9, title="Elmwood secondary-unit addresses")
+ax.set_title("Ghost units in the Elmwood — units the parcel data under-records\n(red = the assessor still calls it single-family/duplex)", fontweight="bold")
+ax.set_axis_off(); plt.tight_layout(); plt.show()
+""")
+
+md(r"""
+> **What this could mislead about:** each dot is an *address*, not a certified unit — some letter suffixes are
+> legal multi-unit buildings on a duplex-coded parcel (e.g. `2723 Ashby A-D`). The **red (assessor-undercount)**
+> class is the sharpest signal; ground-truthing a sample sets the false-positive rate. And, again: this maps the
+> *discrepancy*, not additional units to add to the Census block totals.
+
 ## ⚠️ Measuring recent densification — YearBuilt is the wrong noun (definitional guardrail)
 
 The existing-density finding above is **regime-independent and robust** (it's built stock). But do **NOT**

@@ -1,6 +1,6 @@
 # CPRA draft — Berkeley Rent Board full unit-registration database
 
-**Status: DRAFT for John's review — not sent.** Submit to the **Berkeley Rent Stabilization Board** (a separate
+**Status: ✅ SUBMITTED 2026-08-13 — NextRequest Request #26-2375.** Awaiting response. Submitted to the **Berkeley Rent Stabilization Board** (a separate
 agency; records via rentboard.berkeleyca.gov or NextRequest). **Rationale:** the Rent Board registers ~19,000
 rental units and counts *actual* dwelling units **regardless of whether the unit was ever permitted** — so it is
 the single best source for finding the hundreds of unrecorded/converted/backyard units (like 2811½ Benvenue)

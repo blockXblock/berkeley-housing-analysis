@@ -19,6 +19,24 @@ itemized impact/HTF/in-lieu fees NOT materialized in v2 (fees table = $14.1M Acc
 projects); restriction-type labeling mostly empty (VLI completed=128, density-bonus=180). Queued next
 ingestions: HTF award lists + TCAC allocations (turns the fee links into measurements).
 
+## 2026-08-13 (later) — 👻 GHOST-UNIT DETECTOR built + calibrated (RPP address layer = the breakthrough)
+**The unit that's unpermitted/unlicensed still gets a city ADDRESS.** `RPP_Addresses` (Berkeley ArcGIS,
+curl-accessible) carries secondary-unit addresses (½ / letter / rear / cottage) — the master inventory of
+units-on-the-ground that permits + licenses + Rent Board miss. `scripts/ghost_units.py` (rewritten) joins it
+to the assessor + license + rent-board data and labels each parcel: **ELMWOOD 370 parcels w/ a secondary-unit
+address (849 addrs) → 120 assessor-undercount + 250 assessed-multiunit (~139 unregistered); CITYWIDE 3,919
+parcels / 10,607 addrs → 1,101 undercount + 2,818 assessed-multiunit.** CALIBRATED: 2811 Benvenue =
+assessed_multiunit (assessor=2, has 2811½ address, NOT a registered rental) — correcting the earlier
+'invisible to all six' overclaim: the cottage is unpermitted+unlicensed but ASSESSED+ADDRESSED. Layer saved
+`data/reference/berkeley_secondary_unit_addresses.geojson` (~7,260 citywide). CAVEAT: a secondary ADDRESS is a
+strong-but-imperfect proxy for a dwelling unit (some letter-suffixes = commercial/legit multiunit) — the
+`assessor_undercount` class is the sharpest signal; treat counts as candidates. Benvenue permit pilot (577
+records via CIC, `data/raw/benvenue_permits_2026-08-13.csv`) through the classifier: only 6 real ADUs, ~+4 net
+/30yr — permits are a FLOOR. **QUEUED (John's ordered list):** Rent Board CPRA (drafted, submit) → website +
+JN-M map updates surfacing ghost units → Datasette queries for the unit categories → JN-curriculum update
+(findings-from-unexpected-places, data-journalist tips). Memory: swap dipping ~500-790M — hold heavy geopandas/
+Playwright for fresh passes.
+
 ## 2026-08-13 — 🏘️ Elmwood-District boundary (official) into JN-M + Accela address adapter written
 **Argument sharpened with the city's OWN boundaries** (Berkeley ArcGIS org, curl-accessible — `Neighborhoods`
 layer 8, `BID_Elmwood`; preserved to `data/reference/berkeley_neighborhoods.geojson` + `berkeley_bid_elmwood.geojson`):

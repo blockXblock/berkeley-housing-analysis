@@ -1,18 +1,23 @@
 #!/usr/bin/env python3
-"""ghost_units.py — find parcels renting MORE dwelling units than the assessor records ("ghost units").
+"""ghost_units.py — inventory Berkeley's "ghost" dwelling units and label which system misses each.
 
-Principle (from the Benvenue investigation): building permits and the assessor miss unpermitted / older
-conversions, but the city REGULATES RENTALS regardless of permit status — so the rental-regulation datasets
-count *actual* units. A parcel where a rental signal exceeds the assessor's unit count is a candidate hidden
-unit. This detector uses the data we already hold; the fully-invisible class (a rented unit with NO rental
-record at all, e.g. 2811½ Benvenue) is NOT flaggable here and needs the RHSP harvest + full Rent Board registry.
+Principle (from the Benvenue investigation): the city assigns an official ADDRESS to a dwelling unit even
+when it was never permitted or licensed. So the RPP address layer (secondary-unit addresses: fractional
+"½", letter "A"/"B", "Rear", "Cottage") is the master inventory of units-on-the-ground — including
+unpermitted backyard conversions like 2811½ Benvenue that permits, business licenses, and the Rent Board
+miss. Cross-referencing that inventory against each other system tells you WHICH system missed each unit.
 
-Signals (per parcel, joined on canonical APN):
-  - assessor units .............. TaxParcel `Units` (scratch/2026-08-12/taxparcels.geojson)
-  - business-license units ...... berkeley.db `licenses` busdesc "RES. RENTAL - N UNITS" / "RENTAL .../N UNITS"
-  - rent-board units ............ berkeley.db `rent_control` Number_of_total_units_on_the_pr (PARTIAL: 1,098 rows)
-Ghost gap = max(rental signals) - assessor units, where > 0. Plus: SFR-coded (UseCode 1xxx) parcels that
-carry ANY rental record = "rented single-family" candidates (conversions).
+Signals (per parcel):
+  - secondary-unit addresses ... data/reference/berkeley_secondary_unit_addresses.geojson (RPP, dedup'd)
+  - assessor units ............. scratch/2026-08-12/taxparcels.geojson (`Units`, `UseCode`)
+  - business-license units ..... berkeley.db `licenses` "RES. RENTAL - N UNITS"
+  - rent-board units ........... berkeley.db `rent_control` (PARTIAL registry; the Rent Board CPRA closes it)
+
+Classes (for a parcel carrying >=1 secondary-unit address):
+  - assessor_undercount ... assessor says <=1 unit -> the assessor genuinely missed the secondary unit(s).
+  - assessed_multiunit .... assessor already counts >=2 -> the unit is assessed but may be unpermitted /
+                            unlicensed / unregistered (the 2811½ class — visible to the assessor, not to
+                            the permit/license systems).
 
 Usage: python scripts/ghost_units.py
 """
@@ -21,60 +26,68 @@ import pandas as pd, geopandas as gpd
 warnings.filterwarnings("ignore"); sys.path.insert(0, "scripts")
 from housing_rules import to_canonical_apn
 
+SEC = "data/reference/berkeley_secondary_unit_addresses.geojson"
+TP  = "scratch/2026-08-12/taxparcels.geojson"
+NBH = "data/reference/berkeley_neighborhoods.geojson"
+
 def canon(a):
     try: return to_canonical_apn(a, "alameda")
     except Exception: return None
 
-def _units_from_busdesc(s):
+def _lic_units(s):
     m = re.search(r"(\d+)\s*UNIT", str(s).upper())
-    return int(m.group(1)) if m else (1 if "RENTAL" in str(s).upper() else 0)
+    return int(m.group(1)) if m else 1
 
 def main():
-    # 1) assessor units per parcel + Elmwood tag
-    tp = gpd.read_file("scratch/2026-08-12/taxparcels.geojson")
+    # 1) RPP secondary-unit addresses -> parcel (spatial), dedup by address
+    sec = gpd.read_file(SEC).drop_duplicates("FullAddres")
+    tp = gpd.read_file(TP)[["APN", "Units", "UseCode", "geometry"]]
     tp["Units"] = pd.to_numeric(tp["Units"], errors="coerce")
-    tp["capn"] = tp["APN"].map(canon)
-    tp["sfr"] = tp["UseCode"].astype(str).str.startswith("1")
-    el = gpd.read_file("data/reference/berkeley_neighborhoods.geojson").to_crs(4326)
-    elpoly = el[el["Name"].astype(str).str.contains("lmwood", case=False)].dissolve().geometry.iloc[0]
-    tp = tp.to_crs(4326); tp["elmwood"] = tp.geometry.centroid.within(elpoly)
-    A = tp[["capn", "Units", "sfr", "elmwood"]].dropna(subset=["capn"]).groupby("capn").agg(
-        assessor_units=("Units", "max"), sfr=("sfr", "any"), elmwood=("elmwood", "any")).reset_index()
+    tp = tp.rename(columns={"Units": "assessor_units", "UseCode": "assessor_uc"})
+    nbh = gpd.read_file(NBH).to_crs(4326)
+    elpoly = nbh[nbh.Name.astype(str).str.contains("lmwood", case=False)].dissolve().geometry.iloc[0]
+    j = gpd.sjoin(sec, tp, predicate="within", how="inner")
+    j["elmwood"] = j.geometry.within(elpoly)
+    j["capn"] = j["APN"].map(canon)
 
+    # per-parcel rollup
+    P = j.groupby("capn").agg(
+        n_secondary=("FullAddres", "nunique"),
+        assessor_units=("assessor_units", "max"),
+        assessor_uc=("assessor_uc", "first"),
+        elmwood=("elmwood", "any"),
+        addrs=("FullAddres", lambda s: "; ".join(sorted(set(s))[:4])),
+    ).reset_index()
+
+    # 2) attach license / rent-board unit counts
     db = sqlite3.connect("databases/berkeley.db")
-    # 2) business-license rental units per parcel
     lic = pd.read_sql("SELECT apn, busdesc FROM licenses WHERE b1_per_sub_type='Rental of Real Property'", db)
-    lic["capn"] = lic["apn"].map(canon); lic["lic_units"] = lic["busdesc"].map(_units_from_busdesc)
-    L = lic.dropna(subset=["capn"]).groupby("capn")["lic_units"].max().reset_index()
-    # 3) rent-board units per parcel (partial registry)
-    rc = pd.read_sql('SELECT APN, Number_of_total_units_on_the_pr AS rb_units FROM rent_control', db)
-    rc["capn"] = rc["APN"].map(canon); rc["rb_units"] = pd.to_numeric(rc["rb_units"], errors="coerce")
-    R = rc.dropna(subset=["capn"]).groupby("capn")["rb_units"].max().reset_index()
+    lic["capn"] = lic["apn"].map(canon); lic["lic_units"] = lic["busdesc"].map(_lic_units)
+    P = P.merge(lic.groupby("capn")["lic_units"].max().reset_index(), on="capn", how="left")
+    rc = pd.read_sql('SELECT APN, Number_of_total_units_on_the_pr AS rb FROM rent_control', db)
+    rc["capn"] = rc["APN"].map(canon); rc["rb"] = pd.to_numeric(rc["rb"], errors="coerce")
+    P = P.merge(rc.groupby("capn")["rb"].max().reset_index(), on="capn", how="left")
 
-    df = A.merge(L, on="capn", how="left").merge(R, on="capn", how="left")
-    df["rental_signal"] = df[["lic_units", "rb_units"]].max(axis=1)
-    df["ghost_gap"] = (df["rental_signal"] - df["assessor_units"]).clip(lower=0)
-    df["has_rental_record"] = df[["lic_units", "rb_units"]].notna().any(axis=1)
+    # 3) classify
+    P["cls"] = P["assessor_units"].apply(lambda u: "assessor_undercount" if (pd.isna(u) or u <= 1) else "assessed_multiunit")
+    P["registered_rental"] = P[["lic_units", "rb"]].notna().any(axis=1)
 
-    def report(mask, name):
-        d = df[mask]
-        ghosts = d[d.ghost_gap > 0]
-        sfr_rented = d[d.sfr & d.has_rental_record & (d.assessor_units <= 1)]
-        print(f"\n=== {name} ({len(d)} parcels) ===")
-        print(f"  ghost-gap parcels (rental signal > assessor units): {len(ghosts)}  (+{int(ghosts.ghost_gap.sum())} units)")
-        print(f"  rented single-family (UseCode 1xxx + a rental record, assessor<=1): {len(sfr_rented)} parcels")
-    report(df.elmwood, "ELMWOOD DISTRICT")
-    report(df.capn.notna(), "ALL BERKELEY")
+    def rpt(mask, name):
+        d = P[mask]
+        print(f"\n=== {name} — {len(d)} parcels carry a secondary-unit address ({int(d.n_secondary.sum())} such addresses) ===")
+        print(d.cls.value_counts().to_string())
+        print(f"  of the assessed_multiunit, registered as a rental (license/rent-board): "
+              f"{int(P[mask & (P.cls=='assessed_multiunit')].registered_rental.sum())}")
+    rpt(P.elmwood, "ELMWOOD DISTRICT")
+    rpt(P.capn.notna(), "ALL BERKELEY")
 
-    # calibration honesty: is 2811.5 Benvenue (053-1695-026) flaggable here?
     c = canon("53-1695-26")
-    row = df[df.capn == c]
-    print(f"\n2811 Benvenue ({c}): ", end="")
-    if len(row): print(f"assessor={row.assessor_units.iloc[0]}, rental_record={bool(row.has_rental_record.iloc[0])}, ghost_gap={row.ghost_gap.iloc[0]}")
-    print("  -> NOT flaggable from held data (no license, no rent-board row) — its only signal is the RHSP")
-    print("     record in Accela. This class needs the RHSP harvest + full Rent Board registry (the CPRA).")
-    df[df.ghost_gap > 0].sort_values("ghost_gap", ascending=False).to_csv("scratch/2026-08-12/ghost_units.csv", index=False)
-    print("\nwrote scratch/2026-08-12/ghost_units.csv")
+    r = P[P.capn == c]
+    if len(r):
+        print(f"\nCALIBRATION 2811 Benvenue ({c}): class={r.cls.iloc[0]}, assessor_units={r.assessor_units.iloc[0]}, "
+              f"secondary_addrs=[{r.addrs.iloc[0]}], registered_rental={bool(r.registered_rental.iloc[0])}")
+    P.sort_values(["elmwood", "n_secondary"], ascending=False).to_csv("scratch/2026-08-12/ghost_units.csv", index=False)
+    print("\nwrote scratch/2026-08-12/ghost_units.csv (per-parcel ghost inventory)")
 
 if __name__ == "__main__":
     main()

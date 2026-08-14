@@ -19,6 +19,28 @@ itemized impact/HTF/in-lieu fees NOT materialized in v2 (fees table = $14.1M Acc
 projects); restriction-type labeling mostly empty (VLI completed=128, density-bonus=180). Queued next
 ingestions: HTF award lists + TCAC allocations (turns the fee links into measurements).
 
+## 2026-08-13 (maps + landmark correction) — construction time-lapse, ownership map, YearBuilt override
+**Three deliverables + a data-quality finding, all committed:**
+- **Landmark build-date correction layer** (`data/reference/berkeley_landmark_build_dates.csv`, generator
+  `scripts/gen_landmark_corrections.py`): parsed the City Designated Landmarks PDF → 318 landmarks, 188 matched.
+  **FINDING: assessor `YearBuilt` mis-dates/gaps 70% of matched landmarks (median 8yr).** Calibrated: 2811
+  Benvenue = **Westenberg House, 1903** (assessor said 1925). Use as a primary-source YearBuilt override.
+- **Construction time-lapse** (`docs/maps/berkeley_construction_timelapse.html` + `_data.json`, gen
+  `gen_yearbuilt_timelapse.py`): 25,471 parcels appear by (landmark-corrected) YearBuilt on a play/slider.
+  **Build-out curve: 828 by 1900 → 13,902 by 1925 (55% of all standing today) → froze.** Shows STRUCTURES not
+  units-added (ADUs invisible to YearBuilt).
+- **Ownership map** (`docs/maps/berkeley_ownership.html` + `_data.json`, gen `gen_ownership_map.py`): tenure +
+  owner-type toggle from TaxParcel OwnersName + LatestDocu. 92% individual, **5.8% investor (LLC/Corp/LP)**,
+  median tenure 17yr. The unit-aware answer to the SF Chronicle's Regrid snapshot.
+- **VIEWING maps:** the two big maps STREAM a sibling `_data.json`, so `file://` double-click is blocked by
+  browser CORS — **serve them** (`python3 -m http.server` in repo root → open the docs/maps/ URL) or view on
+  deploy. The small ghost/hidden-units map is self-contained (double-click OK). In-app browser pane can't render
+  the 3.4MB streamed maps (memory) — verified data+logic correct via JS; renders fine in real Chrome.
+- **QUEUED:** the **Census-decade block-growth movie** is the ONE non-data-in-hand item — needs 2000/2010 Census
+  block housing (older file formats) + a block-boundary crosswalk (Census redraws blocks each decade). A focused
+  acquisition sub-project, deliberately deferred. Also queued: ownership × ghost-units × density overlay; full
+  transfer HISTORY (County Recorder deed index / Regrid/ATTOM) for the ownership-turnover movie.
+
 ## ✅ FIXED (2026-08-13) — ghost_units.py multi-match bug (root cause: condo/stacked parcels)
 **Root cause:** condos = many APN records sharing ONE footprint (3109 College: 7 APNs, 6 dup-geoms), so a
 secondary-address point matched up to **66 parcels** — inflating counts and mis-flagging assessed condos as

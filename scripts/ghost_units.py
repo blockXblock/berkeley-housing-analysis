@@ -27,7 +27,7 @@ warnings.filterwarnings("ignore"); sys.path.insert(0, "scripts")
 from housing_rules import to_canonical_apn
 
 SEC = "data/reference/berkeley_secondary_unit_addresses.geojson"
-TP  = "scratch/2026-08-12/taxparcels.geojson"
+TP  = "data/raw/berkeley_taxparcels_2026-08-12.geojson"
 NBH = "data/reference/berkeley_neighborhoods.geojson"
 
 def canon(a):

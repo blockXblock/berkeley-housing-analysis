@@ -41,6 +41,27 @@ ingestions: HTF award lists + TCAC allocations (turns the fee links into measure
   acquisition sub-project, deliberately deferred. Also queued: ownership × ghost-units × density overlay; full
   transfer HISTORY (County Recorder deed index / Regrid/ATTOM) for the ownership-turnover movie.
 
+## 2026-08-13 END OF DAY — read this first tomorrow
+**Where we are:** a full day of maps + validation, all committed (latest `74a8048`). Three interactive maps
+(serve via `python3 -m http.server` in repo root — the two big ones stream a sibling `_data.json` so `file://`
+won't work): `docs/maps/berkeley_construction_timelapse.html` (build-out by YearBuilt, landmark-corrected),
+`berkeley_ownership.html` (tenure + owner-type toggle), `elmwood_hidden_units_map.html` (self-contained ghost units).
+**Two findings tightened today (cite carefully):**
+- **Owner-type FIXED:** assessor TRS/TTEE abbrevs were hiding trusts -> corrected split is **individual 70%,
+  trust 23% (mostly FAMILY estate-planning), investor 5.7%, institutional 1.7%** (was wrongly "92% individual").
+- **Ghost counts are CANDIDATES, not a count.** CIC ground-truthed 6 Elmwood assessor-undercount parcels vs Accela
+  permits: only **~2/6 confirmable real** (2628 Benvenue rear cottages, 2802 Webster unit B). **53 Elmwood / 444
+  citywide are HIGH-FALSE-POSITIVE UPPER BOUNDS — true figure ~1/3-1/2.** Accela has NO unit field; permits ~1998+.
+  The 601-address RPP inventory is solid; the "assessor-missed" subset is FP-heavy. JN-M §3 says this.
+**OPEN / NEXT (John's call):**
+- **Census-decade block-growth movie** — the one real acquisition (2000/2010 Census block housing + block-boundary
+  crosswalk). Deferred, scoped.
+- **Regrid free access** (offered, later) -> automate the 28k-parcel Chronicle-vs-ours cross-check + transfer
+  HISTORY for the ownership-turnover movie. 8-address comparison set ready for CIC spot-check meanwhile.
+- **CPRAs pending:** #26-2375 (Rent Board registry — closes the assessor side of the ghost count), #26-2367 (Raimi
+  CZU parcel GIS), #26-2306 (Clariti), #26-1972 follow-up.
+- Highest-value analysis queued: **ownership x ghost-units x density** (who densifies vs who consolidates).
+
 ## ✅ FIXED (2026-08-13) — ghost_units.py multi-match bug (root cause: condo/stacked parcels)
 **Root cause:** condos = many APN records sharing ONE footprint (3109 College: 7 APNs, 6 dup-geoms), so a
 secondary-address point matched up to **66 parcels** — inflating counts and mis-flagging assessed condos as

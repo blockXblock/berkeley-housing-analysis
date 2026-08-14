@@ -19,6 +19,25 @@ itemized impact/HTF/in-lieu fees NOT materialized in v2 (fees table = $14.1M Acc
 projects); restriction-type labeling mostly empty (VLI completed=128, density-bonus=180). Queued next
 ingestions: HTF award lists + TCAC allocations (turns the fee links into measurements).
 
+## 🐛 FIX FIRST (2026-08-13) — ghost_units.py point→parcel spatial-join MULTI-MATCH bug
+**`scripts/ghost_units.py`: the `gpd.sjoin(sec, tp, predicate="within")` matches each secondary-address point
+to MORE THAN ONE parcel** → inflates per-parcel counts. Evidence: Elmwood secondary-address count jumped from
+the clean dedup **601 → 849**, citywide **7,260 → 10,607**; and a 6-row "ghost sample" came out DEGENERATE
+(every row showed the same four addresses `3109/3111 COLLEGE AVE A/B/C`, some with `assessor_units=0`).
+- **SOLID (trust):** the secondary-address INVENTORY — **601 Elmwood / 7,260 citywide** (clean dedup on
+  `FullAddres`), in `data/reference/berkeley_secondary_unit_addresses.geojson`. And the calibration (2811½
+  present; 2811 = assessed_multiunit).
+- **PROVISIONAL (do NOT cite yet):** the per-parcel class counts — **120 Elmwood assessor-undercount /
+  1,101 citywide** are inflated by the multi-match.
+- **FIX:** make the point→parcel join 1:1 (a point belongs to ONE parcel). Likely cause = overlapping/duplicate
+  parcel polygons in taxparcels, or boundary points. Options: `drop_duplicates('FullAddres')` AFTER the sjoin
+  keeping one parcel per address; or dedup taxparcels by APN/geometry first; or `sjoin` then group so each
+  address counts once. Re-verify the 120/1,101 after.
+- **NEXT-SESSION ORDER:** (1) fix the join + re-verify counts; (2) regenerate a clean ghost sample → ground-truth
+  ~6 via CIC (false-positive rate on "secondary address ≠ guaranteed unit"); (3) verify `docs/maps/elmwood_hidden_units_map.html`
+  in the preview; (4) build the JN-M "Ghost units" reveal section (zoning-says ↔ actual toggle) + assessor-undercount
+  class coloring. The quick map colors by address-TYPE (unaffected by the bug — it uses the clean 601 inventory).
+
 ## 2026-08-13 (later) — 👻 GHOST-UNIT DETECTOR built + calibrated (RPP address layer = the breakthrough)
 **The unit that's unpermitted/unlicensed still gets a city ADDRESS.** `RPP_Addresses` (Berkeley ArcGIS,
 curl-accessible) carries secondary-unit addresses (½ / letter / rear / cottage) — the master inventory of

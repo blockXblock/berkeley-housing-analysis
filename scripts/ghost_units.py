@@ -47,6 +47,12 @@ def main():
     nbh = gpd.read_file(NBH).to_crs(4326)
     elpoly = nbh[nbh.Name.astype(str).str.contains("lmwood", case=False)].dissolve().geometry.iloc[0]
     j = gpd.sjoin(sec, tp, predicate="within", how="inner")
+    # FIX (2026-08-13, multi-match bug): condo/stacked parcels share one footprint, so a point matched up to
+    # 66 APNs. Restrict to LOW-DENSITY RESIDENTIAL parcels (UseCode 1xxx SFR / 2xxx duplex) — this is where a
+    # secondary address means a HIDDEN unit; it structurally excludes condos/apartments/commercial (where many
+    # addresses = many assessed units by design). Then dedup so each address maps to ONE parcel.
+    j = j[j.assessor_uc.astype(str).str.match(r"^[12]")].copy()
+    j = j.sort_values("assessor_units", ascending=False).drop_duplicates("FullAddres", keep="first")
     j["elmwood"] = j.geometry.within(elpoly)
     j["capn"] = j["APN"].map(canon)
 

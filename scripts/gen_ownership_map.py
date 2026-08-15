@@ -1,18 +1,27 @@
 #!/usr/bin/env python3
-"""gen_ownership_map.py — Berkeley parcel ownership map: tenure (years held) + owner type.
+"""gen_ownership_map.py — Berkeley parcel map: last-recorded-document recency + owner type.
 
-The SF Chronicle's California map shows the CURRENT owner (Regrid snapshot). This adds the two things we
-already hold to make it Berkeley-specific and time-aware:
-  - TENURE: 2026 - LatestDocu (year of the last recorded document ≈ when the current owner acquired it).
-  - OWNER TYPE: classified from OwnersName — individual / investor(LLC-Corp-LP) / trust / institutional.
 Two toggle modes over the same points; Elmwood outlined. Streams a separate data.json (small HTML).
+  - LAST RECORDED DOCUMENT: 2026 - year(berkeley.db.LatestDocumentDate) = years since ANY document
+    (sale, refinance, or transfer) was last recorded on the parcel. Read as recent FINANCIAL/OWNERSHIP
+    ACTIVITY, useful as a strain/refi signal — NOT "years owned."
+  - OWNER TYPE: classified from OwnersName — individual / investor(LLC-Corp-LP) / trust / institutional.
 
-HONESTY RAILS: (1) LatestDocu is the last *document* year (usually the last sale, but can be a refi/other
-recording) — a proxy for acquisition, not a certified sale date. (2) "trust" is separated from "investor"
-because most trusts are family estate-planning, NOT corporate. (3) This is the LATEST transfer only, not the
-full ownership history (that needs the County Recorder deed index).
+⚠ CORRECTION 2026-08-14 (calibrated on a KNOWN-TRUTH parcel): this map ORIGINALLY labeled the date as
+"tenure / years held." That was WRONG on two counts, caught when 2811 Benvenue (owned since 1988) showed
+as "5 yr": (1) the old source (owners CSV 'LatestDocu') is a STALE 2017-capped extract; (2) more
+fundamentally, LatestDocumentDate is the last recorded document of ANY kind — the 2020-22 values are
+the pandemic REFINANCE boom (2021 alone = ~9% of parcels, impossible as sales), NOT acquisitions.
+A refi/trust transfer resets the date without changing ownership, so "years owned" is systematically
+understated. TRUE years-owned needs the County Recorder deed index WITH document type (grant deed = sale
+vs deed of trust = loan) — the Phase-2 deed-history acquisition. Here we now use the FRESH berkeley.db
+date and label it honestly as recording recency.
 
-Inputs: data/reference/berkeley_parcel_owners_2026-08-13.csv (APN,OwnersName,LatestDocu) + committed taxparcels geometry.
+OWNER-NAME/TYPE still come from the owners CSV (the county Assessor site hides owner names; the CSV is
+the ArcGIS TaxParcel owner layer). Its NAMES are usable; its DATE column is not (superseded above).
+
+Inputs: data/reference/berkeley_parcel_owners_2026-08-13.csv (APN,OwnersName) + committed taxparcels
+geometry + databases/berkeley.db (LatestDocumentDate, situs address).
 Output: docs/maps/berkeley_ownership.html + docs/maps/berkeley_ownership_data.json.
 Usage: python scripts/gen_ownership_map.py
 """
@@ -43,25 +52,25 @@ def main():
     ow = pd.read_csv("data/reference/berkeley_parcel_owners_2026-08-13.csv")
     ow["capn"] = ow.APN.apply(lambda a: to_canonical_apn(a, "alameda") if pd.notna(a) else None)
     ow["otype"] = ow.OwnersName.map(owner_type)
-    ow["yr"] = pd.to_numeric(ow.LatestDocu, errors="coerce")
-    ow["tenure"] = (2026 - ow.yr).where(ow.yr.between(1900, 2026))
-    # address per parcel for click popups (situs address from berkeley.db)
+    # address + FRESH recorded-document date per parcel from berkeley.db (the CSV date is stale+invalid — see docstring)
     import sqlite3
-    _adf = pd.read_sql("SELECT APN, SitusStree, SitusStr_1 FROM parcels", sqlite3.connect("databases/berkeley.db"))
+    _adf = pd.read_sql("SELECT APN, SitusStree, SitusStr_1, LatestDocumentDate FROM parcels", sqlite3.connect("databases/berkeley.db"))
     _adf["capn"] = _adf.APN.apply(lambda a: to_canonical_apn(a, "alameda") if pd.notna(a) else None)
     _adf["addr"] = (_adf.SitusStree.fillna("").astype(str).str.strip() + " " + _adf.SitusStr_1.fillna("").astype(str).str.strip()).str.strip()
-    ow = ow.merge(_adf.dropna(subset=["capn"]).drop_duplicates("capn")[["capn", "addr"]], on="capn", how="left")
-    g = tp.merge(ow[["capn", "otype", "tenure", "OwnersName", "addr"]].dropna(subset=["capn"]).drop_duplicates("capn"), on="capn", how="inner")
-    g = g[g.tenure.notna()].to_crs(4326)
+    _dy = pd.to_datetime(_adf.LatestDocumentDate, errors="coerce").dt.year         # 1900-01-01 = NULL placeholder
+    _adf["recency"] = (2026 - _dy).where(_dy.between(1901, 2026))                   # YEARS SINCE LAST RECORDED DOCUMENT (not tenure)
+    ow = ow.merge(_adf.dropna(subset=["capn"]).drop_duplicates("capn")[["capn", "addr", "recency"]], on="capn", how="left")
+    g = tp.merge(ow[["capn", "otype", "recency", "OwnersName", "addr"]].dropna(subset=["capn"]).drop_duplicates("capn"), on="capn", how="inner")
+    g = g[g.recency.notna()].to_crs(4326)
     c = g.geometry.centroid
     feats = [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [round(x, 5), round(y, 5)]},
               "properties": {"t": int(min(t, 99)), "o": int(o),
                              "a": str(ad) if pd.notna(ad) else "", "n": str(nm) if pd.notna(nm) else ""}}
-             for x, y, t, o, ad, nm in zip(c.x, c.y, g.tenure, g.otype, g.addr, g.OwnersName)]
+             for x, y, t, o, ad, nm in zip(c.x, c.y, g.recency, g.otype, g.addr, g.OwnersName)]
     counts = pd.Series([f["properties"]["o"] for f in feats]).value_counts().to_dict()
     lab = {0: "individual", 1: "investor (LLC/Corp/LP)", 2: "trust", 3: "institutional"}
     print(f"parcels mapped: {len(feats)} | owner types: " + ", ".join(f"{lab[k]}={counts.get(k,0)}" for k in range(4)))
-    print(f"  median tenure: {pd.Series([f['properties']['t'] for f in feats]).median():.0f} yr")
+    print(f"  median years-since-last-recorded-document: {pd.Series([f['properties']['t'] for f in feats]).median():.0f} yr")
     el = gpd.read_file("data/reference/berkeley_neighborhoods.geojson").to_crs(4326)
     elb = json.loads(el[el.Name.astype(str).str.contains("lmwood", case=False)][["geometry"]].to_json())
 
@@ -77,14 +86,14 @@ def main():
 .cap{color:#555;font-size:11px;margin-top:6px;max-width:320px}</style></head>
 <body><div id="map"></div>
 <div class="panel"><b>Who owns Berkeley</b><br>
-<div style="margin:6px 0"><button id="bT" class="on" onclick="mode('t')">Tenure (years held)</button><button id="bO" onclick="mode('o')">Owner type</button></div>
+<div style="margin:6px 0"><button id="bT" class="on" onclick="mode('t')">Last recorded document</button><button id="bO" onclick="mode('o')">Owner type</button></div>
 <div id="legend"></div>
-<div class="cap" id="cap">Color = how long the current owner has held each parcel (last recorded document year). Elmwood outlined.</div></div>
+<div class="cap" id="cap">Color = years since the last document (sale, refinance, or transfer) was recorded — a recent-financial-activity signal, NOT years owned. Elmwood outlined.</div></div>
 <script>
 let FEATS={features:[]};
 const TEN=['step',['get','t'],'#d7301f',5,'#fd8d3c',15,'#fee391',30,'#74add1',60,'#4575b4'];
 const OWN=['match',['get','o'],1,'#d7301f',2,'#984ea3',3,'#377eb8','#bdbdbd'];
-const LT='<div><span class="sw" style="background:#d7301f"></span>&lt;5 yr</div><div><span class="sw" style="background:#fd8d3c"></span>5-15</div><div><span class="sw" style="background:#fee391"></span>15-30</div><div><span class="sw" style="background:#74add1"></span>30-60</div><div><span class="sw" style="background:#4575b4"></span>60+ (long-held)</div>';
+const LT='<div style="font-weight:600;margin-bottom:2px">Yrs since last recorded document</div><div><span class="sw" style="background:#d7301f"></span>&lt;5 yr (recent sale/refi/transfer)</div><div><span class="sw" style="background:#fd8d3c"></span>5-15</div><div><span class="sw" style="background:#fee391"></span>15-30</div><div><span class="sw" style="background:#74add1"></span>30-60</div><div><span class="sw" style="background:#4575b4"></span>60+ (no recording in decades)</div>';
 const LO='<div><span class="sw" style="background:#bdbdbd"></span>individual</div><div><span class="sw" style="background:#d7301f"></span>investor (LLC/Corp/LP)</div><div><span class="sw" style="background:#984ea3"></span>trust</div><div><span class="sw" style="background:#377eb8"></span>institutional</div>';
 const map=new maplibregl.Map({container:'map',center:[-122.273,37.871],zoom:12.4,
  style:{version:8,sources:{c:{type:'raster',tiles:['https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'],tileSize:256,attribution:'© OSM © CARTO'}},layers:[{id:'bg',type:'raster',source:'c'}]}});
@@ -92,7 +101,7 @@ function mode(m){
   document.getElementById('bT').className=m=='t'?'on':''; document.getElementById('bO').className=m=='o'?'on':'';
   map.setPaintProperty('pts','circle-color', m=='t'?TEN:OWN);
   document.getElementById('legend').innerHTML = m=='t'?LT:LO;
-  document.getElementById('cap').textContent = m=='t'? 'Color = how long the current owner has held each parcel (last recorded document year). Elmwood outlined.' : 'Color = owner type, classified from the owner name. Trust is separated from investor (most trusts are family estate-planning). Elmwood outlined.';
+  document.getElementById('cap').textContent = m=='t'? 'Color = years since the last document (sale, refinance, or transfer) was recorded on the parcel — the 2020-22 wave is the pandemic refi boom. A recent-financial-activity signal, NOT years owned. Elmwood outlined.' : 'Color = owner type, classified from the owner name. Trust is separated from investor (most trusts are family estate-planning). Elmwood outlined.';
 }
 map.on('load',()=>{
  map.addSource('el',{type:'geojson',data:__ELB__});
@@ -103,7 +112,7 @@ map.on('load',()=>{
  map.on('click','pts',e=>{ const p=e.features[0].properties, a=p.a||'(address unavailable)';
    const q=encodeURIComponent(a+' Berkeley CA'), TY=['individual','investor (LLC/Corp/LP)','trust','institutional'];
    new maplibregl.Popup().setLngLat(e.lngLat).setHTML(
-     '<b>'+a+'</b>'+(p.n?'<br>'+p.n:'')+'<br>'+TY[p.o]+' · held '+p.t+' yr'
+     '<b>'+a+'</b>'+(p.n?'<br>'+p.n:'')+'<br>'+TY[p.o]+'<br>last recorded document: '+(2026-p.t)+' ('+p.t+' yr ago)'
      +'<br><a href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Open in Google Maps ↗</a>').addTo(map); });
  map.on('mouseenter','pts',()=>map.getCanvas().style.cursor='pointer');
  map.on('mouseleave','pts',()=>map.getCanvas().style.cursor='');

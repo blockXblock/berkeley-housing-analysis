@@ -1,0 +1,69 @@
+<!doctype html><html><head><meta charset="utf-8"><title>What a $300M bond costs each owner</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+<style>body,html,#map{margin:0;height:100%;font-family:system-ui}
+.panel{position:absolute;top:12px;left:12px;width:340px;background:rgba(255,255,255,.95);padding:12px 15px;border-radius:8px;box-shadow:0 1px 8px rgba(0,0,0,.35);font-size:13px}
+.panel h3{margin:0 0 6px} .panel button{font-size:12px;padding:5px 9px;margin:2px 3px 2px 0;cursor:pointer;border:1px solid #999;background:#fff;border-radius:5px}
+.panel button.on{background:#111;color:#fff;border-color:#111}
+.big{font-size:22px;font-weight:700} .sub{color:#555;font-size:11px}
+#legend{margin-top:8px} .sw{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.cap{color:#444;font-size:11px;margin-top:8px;line-height:1.35}
+.stat{background:#f4f4f4;border-radius:6px;padding:7px 9px;margin-top:8px;font-size:12px}</style></head>
+<body><div id="map"></div>
+<div class="panel"><h3>A new $300M city bond</h3>
+<div class="sub">$300M · 30 yr · 5% → 19.5M/yr, spread across 29B of assessed value = <b>$67 per $100,000</b> of assessed value.</div>
+<div style="margin:8px 0 2px"><b>Show each parcel by:</b></div>
+<div>
+<button id="b_c" class="on" onclick="mode('c')">Annual cost (ad-valorem bond)</button>
+<button id="b_d" onclick="mode('d')">Flat-tax vs ad-valorem</button>
+<button id="b_t" onclick="mode('t')">Last recorded document (refi/transfer)</button></div>
+<div id="legend"></div>
+<div class="stat" id="stat"></div>
+<div class="cap" id="cap"></div></div>
+<script>
+const S={"base_b": 29.011946685, "annual_m": 19.51543052408297, "rate_100k": 67.26687711091445, "n": 27618, "med_av": 448.0, "p10": 84.0, "p90": 1220.0, "flat": 707, "ineq": 14.523809523809524, "recent5": 27.413281193424577};
+let FEATS={features:[]};
+const usd=x=>'$'+Math.round(x).toLocaleString();
+const COST=['step',['get','c'],'#2c7fb8',200,'#7fcdbb',500,'#ffffb2',1000,'#fd8d3c',2500,'#e31a1c'];
+const DELTA=['step',['get','d'],'#b2182b',-400,'#ef8a62',-100,'#f7f7f7',100,'#67a9cf',400,'#2166ac']; // red=flat costs you MORE
+const TEN=['step',['get','t'],'#e31a1c',5,'#fd8d3c',15,'#ffffb2',30,'#74add1',60,'#4575b4'];
+const LC='<div><span class="sw" style="background:#2c7fb8"></span>&lt;$200/yr</div><div><span class="sw" style="background:#7fcdbb"></span>$200–500</div><div><span class="sw" style="background:#ffffb2"></span>$500–1,000</div><div><span class="sw" style="background:#fd8d3c"></span>$1,000–2,500</div><div><span class="sw" style="background:#e31a1c"></span>$2,500+ /yr</div>';
+const LD='<div><span class="sw" style="background:#2166ac"></span>flat tax cheaper for you (you\'re high-value)</div><div><span class="sw" style="background:#f7f7f7;border:1px solid #ccc"></span>about the same</div><div><span class="sw" style="background:#b2182b"></span>flat tax costs you MORE (you\'re long-held/low-value)</div>';
+const LT='<div><span class="sw" style="background:#e31a1c"></span>&lt;5 yr (recent sale/refi/transfer)</div><div><span class="sw" style="background:#fd8d3c"></span>5–15</div><div><span class="sw" style="background:#ffffb2"></span>15–30</div><div><span class="sw" style="background:#74add1"></span>30–60</div><div><span class="sw" style="background:#4575b4"></span>60+ (no recording in decades)</div>';
+const CAP={
+ c:'Ad-valorem bond: each parcel pays rate × its assessed value. Red parcels — recently sold, high assessed value — pay many times what pale long-held parcels pay for the identical bond.',
+ d:'Same $300M raised as a FLAT parcel tax ('+usd(S.flat)+'/parcel). Red = you\'d pay MORE under a flat tax (long-held, low assessed value); blue = you\'d pay LESS (recent, high value). The flat tax shifts burden onto long-held owners.',
+ t:'Years since the LAST RECORDED DOCUMENT (sale, refinance, or transfer) — NOT years owned. The red 2020-22 bulge is the pandemic refinance wave (2811 Benvenue, owned since 1988, shows here as 2021 from a refi/trust recording). Read as recent financial/ownership activity — a strain/leverage signal — not tenure.'};
+function stat(m){
+ if(m=='c') return '<span class="big">'+usd(S.med_av)+'/yr</span> median parcel<br>'+
+   'range '+usd(S.p10)+' – '+usd(S.p90)+' (a '+Math.round(S.ineq)+'× spread for the same bond)';
+ if(m=='d') return '<span class="big">'+usd(S.flat)+'/yr</span> flat, every parcel<br>vs ad-valorem median '+usd(S.med_av)+' — flat tax is uniform by parcel, blind to value';
+ return '<span class="big">'+Math.round(S.recent5)+'%</span> of parcels recorded a document in the last 5 years (the refi wave) — a financial-activity signal, <b>not</b> years owned';
+}
+function mode(m){
+ for(const k of ['c','d','t']) document.getElementById('b_'+k).className = k==m?'on':'';
+ map.setPaintProperty('pts','circle-color', m=='c'?COST:m=='d'?DELTA:TEN);
+ document.getElementById('legend').innerHTML = m=='c'?LC:m=='d'?LD:LT;
+ document.getElementById('cap').textContent = CAP[m];
+ document.getElementById('stat').innerHTML = stat(m);
+}
+const map=new maplibregl.Map({container:'map',center:[-122.273,37.871],zoom:12.3,
+ style:{version:8,sources:{c:{type:'raster',tiles:['https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'],tileSize:256,attribution:'© OSM © CARTO'}},layers:[{id:'bg',type:'raster',source:'c'}]}});
+map.on('load',()=>{
+ map.addSource('el',{type:'geojson',data:{"type": "FeatureCollection", "features": [{"id": "18", "type": "Feature", "properties": {}, "geometry": {"type": "Polygon", "coordinates": [[[-122.244239443633, 37.8604958003685], [-122.244601401743, 37.8589301551739], [-122.250835129898, 37.8513319404014], [-122.252310187298, 37.8509005750423], [-122.252829419044, 37.8508252396896], [-122.253144867428, 37.8537131122829], [-122.256118795434, 37.8533191766006], [-122.260153616028, 37.8527833970578], [-122.259454220056, 37.8578630157591], [-122.25819515546, 37.8651281851049], [-122.254691919714, 37.865697087542], [-122.250979088794, 37.8658767408977], [-122.250856205395, 37.8657429352649], [-122.250451483401, 37.865460855717], [-122.25035336816, 37.8646882040237], [-122.250120346314, 37.8623334549733], [-122.246213771725, 37.8625677880274], [-122.244473032032, 37.8626722048491], [-122.244239443633, 37.8604958003685]]]}}]}});
+ map.addLayer({id:'elw',type:'line',source:'el',paint:{'line-color':'#111','line-width':1.5,'line-dasharray':[2,2]}});
+ map.addSource('p',{type:'geojson',data:'bond_incidence_data.json'});
+ map.addLayer({id:'pts',type:'circle',source:'p',paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,1.6,15,4.5],'circle-color':COST,'circle-opacity':0.82}});
+ fetch('bond_incidence_data.json').then(r=>r.json()).then(d=>{FEATS=d;}); mode('c');
+ map.on('click','pts',e=>{const p=e.features[0].properties,a=p.a||'(address unavailable)';
+   const t=p.t<0?'unknown':(2026-p.t)+' ('+p.t+' yr ago)';
+   new maplibregl.Popup().setLngLat(e.lngLat).setHTML(
+     '<b>'+a+'</b><br>assessed value: '+usd(p.v*1000)
+     +'<br>ad-valorem bond: <b>'+usd(p.c)+'/yr</b>'
+     +'<br>flat parcel tax: '+usd(S.flat)+'/yr'
+     +'<br>last recorded document: '+t).addTo(map);});
+ map.on('mouseenter','pts',()=>map.getCanvas().style.cursor='pointer');
+ map.on('mouseleave','pts',()=>map.getCanvas().style.cursor='');
+});
+</script></body></html>

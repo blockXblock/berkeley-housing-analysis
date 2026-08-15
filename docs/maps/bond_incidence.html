@@ -58,11 +58,18 @@ map.on('load',()=>{
  fetch('bond_incidence_data.json').then(r=>r.json()).then(d=>{FEATS=d;}); mode('c');
  map.on('click','pts',e=>{const p=e.features[0].properties,a=p.a||'(address unavailable)';
    const t=p.t<0?'unknown':(2026-p.t)+' ('+p.t+' yr ago)';
+   const q=encodeURIComponent(a+' Berkeley CA');
    new maplibregl.Popup().setLngLat(e.lngLat).setHTML(
-     '<b>'+a+'</b><br>assessed value: '+usd(p.v*1000)
-     +'<br>ad-valorem bond: <b>'+usd(p.c)+'/yr</b>'
+     '<b>'+a+'</b>'
+     +(p.own?'<br>owner: '+p.own+(p.ot?' <span style="color:#777">('+p.ot+')</span>':''):'')
+     +(p.yb?'<br>built: '+p.yb:'')+(p.ub?' &middot; '+p.ub.replace(/_/g,' '):'')
+     +'<br>assessed value: '+usd(p.v*1000)
+     +'<hr style="margin:5px 0;border:none;border-top:1px solid #ddd">'
+     +'ad-valorem bond: <b>'+usd(p.c)+'/yr</b>'
      +'<br>flat parcel tax: '+usd(S.flat)+'/yr'
-     +'<br>last recorded document: '+t).addTo(map);});
+     +'<br>last recorded document: '+t
+     +'<br><a href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Street view ↗</a>'
+     ).addTo(map);});
  map.on('mouseenter','pts',()=>map.getCanvas().style.cursor='pointer');
  map.on('mouseleave','pts',()=>map.getCanvas().style.cursor='');
 });

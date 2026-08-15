@@ -49,6 +49,15 @@ def main():
     p["addr"] = (p.SitusStree.fillna("").astype(str).str.strip() + " " +
                  p.SitusStr_1.fillna("").astype(str).str.strip()).str.strip()
 
+    # ---- inline parcel card from parcel_facts.db (owner + use + build year) ----
+    # propinfo.acgov.org (assessor/tax record) can't be deep-linked and hides owner names, so we show the
+    # county-record facts INLINE in the popup. Built by scripts/build_parcel_facts.py.
+    from housing_rules import to_canonical_apn
+    p["capn"] = p.APN.apply(lambda a: to_canonical_apn(a, "alameda") if pd.notna(a) else None)
+    pf = pd.read_sql("SELECT capn, owner_name, owner_type, use_bucket, build_year FROM parcel_facts",
+                     sqlite3.connect("databases/parcel_facts.db"))
+    p = p.merge(pf.drop_duplicates("capn"), on="capn", how="left")
+
     # ---- the levy math ----
     tot_av = p.TotalNetValue.sum()
     annual = PRINCIPAL * INTEREST / (1 - (1 + INTEREST) ** -TERM_YEARS)   # level debt service
@@ -77,11 +86,14 @@ def main():
     print(f"flat parcel tax (same $): ${cost_flat}/parcel (uniform)")
     print(f"recorded a document in last 5yr (refi/transfer/sale): {recent5:.0f}% of parcels")
 
+    def _s(v): return "" if pd.isna(v) else str(v)
     feats = [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [round(x, 5), round(y, 5)]},
               "properties": {"v": int(av / 1000), "c": int(c), "d": int(d), "t": int(t) if pd.notna(t) else -1,
-                             "a": a}}
-             for x, y, av, c, d, t, a in zip(p.Longitude, p.Latitude, p.TotalNetValue, p.cost_av,
-                                             p.delta, p.tenure, p.addr)]
+                             "a": a, "own": _s(ow), "ot": _s(otp), "ub": _s(ub),
+                             "yb": int(yb) if pd.notna(yb) else 0}}
+             for x, y, av, c, d, t, a, ow, otp, ub, yb in zip(
+                 p.Longitude, p.Latitude, p.TotalNetValue, p.cost_av, p.delta, p.tenure, p.addr,
+                 p.owner_name, p.owner_type, p.use_bucket, p.build_year)]
 
     import geopandas as gpd
     el = gpd.read_file("data/reference/berkeley_neighborhoods.geojson").to_crs(4326)
@@ -148,11 +160,18 @@ map.on('load',()=>{
  fetch('bond_incidence_data.json').then(r=>r.json()).then(d=>{FEATS=d;}); mode('c');
  map.on('click','pts',e=>{const p=e.features[0].properties,a=p.a||'(address unavailable)';
    const t=p.t<0?'unknown':(2026-p.t)+' ('+p.t+' yr ago)';
+   const q=encodeURIComponent(a+' Berkeley CA');
    new maplibregl.Popup().setLngLat(e.lngLat).setHTML(
-     '<b>'+a+'</b><br>assessed value: '+usd(p.v*1000)
-     +'<br>ad-valorem bond: <b>'+usd(p.c)+'/yr</b>'
+     '<b>'+a+'</b>'
+     +(p.own?'<br>owner: '+p.own+(p.ot?' <span style="color:#777">('+p.ot+')</span>':''):'')
+     +(p.yb?'<br>built: '+p.yb:'')+(p.ub?' &middot; '+p.ub.replace(/_/g,' '):'')
+     +'<br>assessed value: '+usd(p.v*1000)
+     +'<hr style="margin:5px 0;border:none;border-top:1px solid #ddd">'
+     +'ad-valorem bond: <b>'+usd(p.c)+'/yr</b>'
      +'<br>flat parcel tax: '+usd(S.flat)+'/yr'
-     +'<br>last recorded document: '+t).addTo(map);});
+     +'<br>last recorded document: '+t
+     +'<br><a href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Street view ↗</a>'
+     ).addTo(map);});
  map.on('mouseenter','pts',()=>map.getCanvas().style.cursor='pointer');
  map.on('mouseleave','pts',()=>map.getCanvas().style.cursor='');
 });

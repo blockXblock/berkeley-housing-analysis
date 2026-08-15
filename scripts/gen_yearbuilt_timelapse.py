@@ -30,13 +30,19 @@ def main():
     lmmap = lm[lm.apn.notna() & lm.name_year.notna()].drop_duplicates("apn").set_index("apn").name_year
     tp["year"] = tp.apply(lambda r: int(lmmap[r.capn]) if (r.capn in lmmap.index) else r.YearBuilt, axis=1)
     tp["corrected"] = tp.capn.isin(lmmap.index)
+    # address per parcel (for click popups) — join situs address from berkeley.db by canonical APN
+    import sqlite3
+    _adf = pd.read_sql("SELECT APN, SitusStree, SitusStr_1 FROM parcels", sqlite3.connect("databases/berkeley.db"))
+    _adf["capn"] = _adf.APN.apply(lambda a: to_canonical_apn(a, "alameda") if pd.notna(a) else None)
+    _adf["addr"] = (_adf.SitusStree.fillna("").astype(str).str.strip() + " " + _adf.SitusStr_1.fillna("").astype(str).str.strip()).str.strip()
+    AMAP = dict(_adf.dropna(subset=["capn"]).drop_duplicates("capn")[["capn", "addr"]].values)
     n_total = len(tp); n_nodate = int((~tp.year.between(1850, 2026)).sum())
     g = tp[tp.year.between(1850, 2026)].to_crs(4326)
     c = g.geometry.centroid
     feats = [{"type": "Feature",
               "geometry": {"type": "Point", "coordinates": [round(x, 5), round(y, 5)]},
-              "properties": {"y": int(yr), "u": int(min(u, 9)), "c": int(cr)}}
-             for x, y, yr, u, cr in zip(c.x, c.y, g.year, g.Units, g.corrected)]
+              "properties": {"y": int(yr), "u": int(min(u, 9)), "c": int(cr), "a": AMAP.get(cp, "")}}
+             for x, y, yr, u, cr, cp in zip(c.x, c.y, g.year, g.Units, g.corrected, g.capn)]
     cx, cy = g.to_crs(4326).unary_union.centroid.coords[0] if False else (-122.273, 37.871)
     n_shown = len(feats)
     print(f"parcels: {n_total} | shown (dated 1850-2026): {n_shown} | no build date (excluded): {n_nodate} | landmark-corrected: {int(tp.corrected.sum())}")
@@ -81,6 +87,14 @@ map.on('load',()=>{{
    'circle-color':['step',['get','u'],'#9ecae1',2,'#fd8d3c',3,'#d7301f'],
    'circle-opacity':0.8}}}});
  fetch('berkeley_construction_data.json').then(r=>r.json()).then(d=>{{ FEATS=d; setYear(1850); }});
+ map.on('click','pts',e=>{{ const p=e.features[0].properties, a=p.a||'(address unavailable)';
+   const q=encodeURIComponent(a+' Berkeley CA');
+   new maplibregl.Popup().setLngLat(e.lngLat).setHTML(
+     '<b>'+a+'</b><br>Built '+p.y+(p.c=='1'||p.c===1?' <span style="color:#0074D9">(landmark-corrected)</span>':'')
+     +'<br>'+p.u+' unit'+(p.u==1?'':'s')+' in structure'
+     +'<br><a href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Open in Google Maps ↗</a>').addTo(map); }});
+ map.on('mouseenter','pts',()=>map.getCanvas().style.cursor='pointer');
+ map.on('mouseleave','pts',()=>map.getCanvas().style.cursor='');
 }});
 document.getElementById('slider').oninput=e=>{{ setYear(+e.target.value); }};
 document.getElementById('play').onclick=()=>{{

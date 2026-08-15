@@ -33,5 +33,12 @@ map.on('load',()=>{
  map.addSource('p',{type:'geojson',data:'berkeley_ownership_data.json'});
  map.addLayer({id:'pts',type:'circle',source:'p',paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,1.6,15,4],'circle-color':TEN,'circle-opacity':0.82}});
  fetch('berkeley_ownership_data.json').then(r=>r.json()).then(d=>{FEATS=d;}); mode('t');
+ map.on('click','pts',e=>{ const p=e.features[0].properties, a=p.a||'(address unavailable)';
+   const q=encodeURIComponent(a+' Berkeley CA'), TY=['individual','investor (LLC/Corp/LP)','trust','institutional'];
+   new maplibregl.Popup().setLngLat(e.lngLat).setHTML(
+     '<b>'+a+'</b>'+(p.n?'<br>'+p.n:'')+'<br>'+TY[p.o]+' · held '+p.t+' yr'
+     +'<br><a href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Open in Google Maps ↗</a>').addTo(map); });
+ map.on('mouseenter','pts',()=>map.getCanvas().style.cursor='pointer');
+ map.on('mouseleave','pts',()=>map.getCanvas().style.cursor='');
 });
 </script></body></html>

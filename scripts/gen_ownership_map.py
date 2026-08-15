@@ -45,12 +45,19 @@ def main():
     ow["otype"] = ow.OwnersName.map(owner_type)
     ow["yr"] = pd.to_numeric(ow.LatestDocu, errors="coerce")
     ow["tenure"] = (2026 - ow.yr).where(ow.yr.between(1900, 2026))
-    g = tp.merge(ow[["capn", "otype", "tenure"]].dropna(subset=["capn"]).drop_duplicates("capn"), on="capn", how="inner")
+    # address per parcel for click popups (situs address from berkeley.db)
+    import sqlite3
+    _adf = pd.read_sql("SELECT APN, SitusStree, SitusStr_1 FROM parcels", sqlite3.connect("databases/berkeley.db"))
+    _adf["capn"] = _adf.APN.apply(lambda a: to_canonical_apn(a, "alameda") if pd.notna(a) else None)
+    _adf["addr"] = (_adf.SitusStree.fillna("").astype(str).str.strip() + " " + _adf.SitusStr_1.fillna("").astype(str).str.strip()).str.strip()
+    ow = ow.merge(_adf.dropna(subset=["capn"]).drop_duplicates("capn")[["capn", "addr"]], on="capn", how="left")
+    g = tp.merge(ow[["capn", "otype", "tenure", "OwnersName", "addr"]].dropna(subset=["capn"]).drop_duplicates("capn"), on="capn", how="inner")
     g = g[g.tenure.notna()].to_crs(4326)
     c = g.geometry.centroid
     feats = [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [round(x, 5), round(y, 5)]},
-              "properties": {"t": int(min(t, 99)), "o": int(o)}}
-             for x, y, t, o in zip(c.x, c.y, g.tenure, g.otype)]
+              "properties": {"t": int(min(t, 99)), "o": int(o),
+                             "a": str(ad) if pd.notna(ad) else "", "n": str(nm) if pd.notna(nm) else ""}}
+             for x, y, t, o, ad, nm in zip(c.x, c.y, g.tenure, g.otype, g.addr, g.OwnersName)]
     counts = pd.Series([f["properties"]["o"] for f in feats]).value_counts().to_dict()
     lab = {0: "individual", 1: "investor (LLC/Corp/LP)", 2: "trust", 3: "institutional"}
     print(f"parcels mapped: {len(feats)} | owner types: " + ", ".join(f"{lab[k]}={counts.get(k,0)}" for k in range(4)))
@@ -93,6 +100,13 @@ map.on('load',()=>{
  map.addSource('p',{type:'geojson',data:'berkeley_ownership_data.json'});
  map.addLayer({id:'pts',type:'circle',source:'p',paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,1.6,15,4],'circle-color':TEN,'circle-opacity':0.82}});
  fetch('berkeley_ownership_data.json').then(r=>r.json()).then(d=>{FEATS=d;}); mode('t');
+ map.on('click','pts',e=>{ const p=e.features[0].properties, a=p.a||'(address unavailable)';
+   const q=encodeURIComponent(a+' Berkeley CA'), TY=['individual','investor (LLC/Corp/LP)','trust','institutional'];
+   new maplibregl.Popup().setLngLat(e.lngLat).setHTML(
+     '<b>'+a+'</b>'+(p.n?'<br>'+p.n:'')+'<br>'+TY[p.o]+' · held '+p.t+' yr'
+     +'<br><a href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Open in Google Maps ↗</a>').addTo(map); });
+ map.on('mouseenter','pts',()=>map.getCanvas().style.cursor='pointer');
+ map.on('mouseleave','pts',()=>map.getCanvas().style.cursor='');
 });
 </script></body></html>""".replace("__ELB__", json.dumps(elb))
 

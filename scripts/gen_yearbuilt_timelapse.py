@@ -100,7 +100,7 @@ document.getElementById('slider').oninput=e=>{{ setYear(+e.target.value); }};
 document.getElementById('play').onclick=()=>{{
   playing=!playing; document.getElementById('play').textContent=playing?'❚❚ pause':'▶ play';
   if(playing){{ if(year>=2026) setYear(1850);
-    timer=setInterval(()=>{{ if(year>=2026){{clearInterval(timer);playing=false;document.getElementById('play').textContent='▶ play';return;}} setYear(year+1); }}, 60); }}
+    timer=setInterval(()=>{{ if(year>=2026){{clearInterval(timer);playing=false;document.getElementById('play').textContent='▶ play';return;}} setYear(year+1); }}, 180); }}
   else clearInterval(timer);
 }};
 </script></body></html>"""

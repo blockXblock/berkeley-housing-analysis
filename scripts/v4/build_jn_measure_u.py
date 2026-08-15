@@ -74,10 +74,13 @@ cells.append(md(r"""## S1 — Load the assessed-value base
 
 **Assumption.** The ad-valorem base is the sum of gross `TotalNetValue` over parcels with
 positive assessed value (~27.6k parcels, ~$29B — the gate pins the exact figures).
-**Why gross:** homeowner's ($7k), nonprofit and veteran exemptions are *not* modeled (v1
-honesty rail carried over from the incidence map); they shrink the net base slightly, so our
-per-$100k rate is, if anything, a slight *under*statement.
-**Plan.** Read the assessor snapshot, filter `TotalNetValue > 0`, report n and the total."""))
+**Base is bill-consistent NET assessed value (verified 2026-08-15 against a real bill):**
+`TotalNetValue` nets out exemptions — on the oracle parcel 53-1695-26 (2811 Benvenue) it
+equals Land + Imps − the $7,000 homeowner's exemption and matches the county tax bill's net
+AV **to the dollar**. The v1 "gross base" honesty rail is retired; the code cell asserts the
+identity so a future snapshot that breaks it halts here.
+**Plan.** Read the assessor snapshot, filter `TotalNetValue > 0`, report n and the total,
+and assert the oracle-parcel identity."""))
 
 cells.append(code(r"""import sqlite3, json, os, sys, warnings
 import pandas as pd, numpy as np
@@ -99,7 +102,14 @@ DERIVED = {}          # accumulates every gated figure
 DERIVED["n_parcels"] = N_PARCELS
 DERIVED["total_av_b"] = TOTAL_AV/1e9
 print(f"parcels with AV>0: {N_PARCELS:,}")
-print(f"total assessed value (gross): ${TOTAL_AV/1e9:.3f} B")"""))
+print(f"total assessed value (bill-consistent net): ${TOTAL_AV/1e9:.3f} B")
+# oracle check (2026-08-15): the FY26 county bill for 53-1695-26 (2811 Benvenue) shows
+# net AV $728,900 = Land 220,700 + Imps 515,200 - $7,000 homeowner's exemption.
+o = p[p.APN == "53-1695-26"].iloc[0]
+assert abs((o.Land + o.Imps - 7000) - o.TotalNetValue) < 1, \
+    "TotalNetValue no longer bill-consistent net AV on the oracle parcel — investigate snapshot"
+print(f"oracle 53-1695-26: Land+Imps-$7k = ${o.Land+o.Imps-7000:,.0f} == TotalNetValue "
+      f"${o.TotalNetValue:,.0f}  (matches the actual FY26 bill's net AV)")"""))
 
 cells.append(md(r"""**Found / verify.** The printed n and total must match the baseline (gate, §8) —
 the same snapshot that feeds `docs/maps/bond_incidence.html`, so the JN and the public map
@@ -238,8 +248,13 @@ cells.append(md(r"""## S4 — The hidden assumption: who grows the base
 
 **Assumption.** Under Prop 13, a parcel that does not change hands grows at most **2%/yr**
 (the inflation cap). Citywide base growth beyond 2% must therefore come from
-**reassessment at sale** (acquisition-value reset) and **new construction** — by arithmetic
-necessity, not conjecture.
+**reassessment at sale** (acquisition-value reset), **new construction** (including
+improvement-triggered reassessment), and — cyclically — **Prop-8 decline-in-value
+restorations**, which can exceed 2%/yr *without a sale* until a previously-reduced parcel
+regains its factored base value (observed on the oracle parcel 2811 Benvenue: +10.4% in one
+year, no sale). Restorations are bounded by the factored base, so the *structural* wedge is
+turnover + construction; the arithmetic necessity is only that none of the excess growth can
+come from sitting owners at the cap.
 **Plan.** (a) Decompose the implied growth `g_avg`/`g_peak` into the 2%-cap component vs the
 newcomer wedge. (b) Ground the new-construction share with in-hand evidence: v2-pipeline
 projects (5+ units, CO ≥ 2018) joined to the assessor via the canonical APN crosswalk
@@ -320,7 +335,8 @@ fig.show()"""))
 
 cells.append(md(r"""**What this chart shows / could mislead about.** The orange wedge is an **arithmetic
 residual** (implied growth minus the statutory 2% cap), not an observed count of sales — the
-honest claim is "must come from turnover + construction," not "we watched it happen."
+honest claim is "must come from turnover + construction (+ cyclical Prop-8 restorations,
+bounded — see the S4 assumption)," not "we watched it happen."
 Dollars are nominal; the base *level* is not a wealth measure. The wedge share printed above
 (~half to two-thirds of all growth, depending on which official figure you solve against) is
 the load-bearing number: **the advertised $22.14 average is financed by the future buyers and
@@ -410,8 +426,14 @@ fig.show()"""))
 cells.append(md(r"""**What this could mislead about.** AV is acquisition-based (Prop 13): the x-ranking is
 **not a wealth ranking** — a long-held low-AV parcel may hold far more equity than a recently
 bought high-AV one; that inversion is the *point* of the incidence story, not a flaw in it.
-Exemptions are unmodeled (small). The decile bars use the today's-base benchmark; at the
-City's disclosed peak rate every bar scales by ~0.52 and every *share* is unchanged."""))
+The base is bill-consistent net AV (S1). The decile bars use the today's-base benchmark; at
+the City's disclosed peak rate every bar scales by ~0.52 and every *share* is unchanged.
+**Whole-bill context (from the reconciled FY26 bill, 53-1695-26, total $21,064):** ad-valorem
+lines are only ~43% of a Berkeley tax bill; the majority is **flat / square-footage parcel
+charges** (BSEP, library, parks, fire) whose regressivity runs the **opposite** direction — a
+long-tenured owner of a large low-AV house pays nearly the same flat stack as a recent buyer
+of the identical one. This JN characterizes the ad-valorem channel **Measure U adds to**, not
+the whole bill; publishing the ad-valorem finding without this context invites that rebuttal."""))
 
 # ----------------------------------------------------------------------------- S6 maps
 cells.append(md(r"""## S6 — The parcel-by-parcel load, mapped
@@ -573,8 +595,16 @@ cells.append(md(r"""## Conclusions
 3. **The burden is concentrated on the same newcomers.** Top 1% of parcels ≈ a fifth of the
    bond; single-family p90/p10 ≈ 15×; the map of heaviest payers is a map of recent sales and
    recent construction.
-4. **Open to make this certifiable** (from the hand-off, unchanged): TRA per-district base,
-   reconstruction of an actual tax bill (the oracle), exemption modeling.
+4. **Scale check on one real parcel** (53-1695-26, net AV $728,900, FY26 bill $21,064):
+   Measure U adds **$161/yr** at the advertised average, **$255** at the disclosed peak,
+   **~$511** at the today's-base benchmark — 0.8–2.4% of the bill, of which ~57% is flat /
+   square-footage charges outside the ad-valorem channel entirely. Including this keeps the
+   incidence argument honest about magnitude.
+5. **Open to make this certifiable:** TRA per-district base; full line-item bill
+   reconstruction (one bill now partially reconciled: the net-AV identity is verified, and
+   the existing city GO rate was observed *declining* $60.90 → $49.00 per $100k FY25→FY26 —
+   consistent with, not contradicting, the City's $44.13 combined-average claim); modeling
+   of the remaining exemption classes (nonprofit, veteran, welfare).
 
 *Provenance: assessor Feb-2026 snapshot; Resolution 72,338-N.S. Exhibit B; gate baseline
 `data/baselines/measure_u_reconciliation_baseline_2026-08-15.json`; generator

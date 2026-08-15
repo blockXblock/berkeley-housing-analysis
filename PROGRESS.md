@@ -4,6 +4,16 @@
 
 ---
 
+## 2026-08-15 — ✅ Measure U analysis: city claims, incidence, V2050 comparison, JN-MeasureU (this session)
+**The Nov 2026 $300M GO bond is Measure U. Full analysis for the Berkeley-2050 op-ed effort; JN committed (`80f386d`, `c29a9ac`), note un-committed for review.**
+
+- **Consolidated analysis note** (`notes/2026-08-15_bond_measure_u_city_claims_incidence_v2050.md`, UNCOMMITTED):
+  §1 city pro-bond claims inventory (C1–C15, sourced) · §2 incidence (top 1% pay 20.3%, SFR p90/p10 15.4×, apartments 22.3%, 2018+ completions ~4%) · §3 bond-vs-Vision-2050 (cites the name, inverts plan→prioritize→ask; consumes the whole $250–300M/25–30yr envelope) · §4 Larry Henry's lifecycle sort v0 (durable ≈15% / catch-up ≈55% / new-O&M ≈30%; debt to FY2066/67 outlives short-lived assets).
+- **JN-MeasureU** (`scripts/v4/build_jn_measure_u.py` → `notebooks/v4/JN-MeasureU.ipynb`, baseline `data/baselines/measure_u_reconciliation_baseline_2026-08-15.json`, gate PASS): TRS reconciliation — implied borrow rate **5.36%** from the TRS's own $610M (map's 5.0% is slightly low → today's-base benchmark **$70.11/$100k**, not $67.30); $22.14 avg ⇔ avg base $68.7B = 2.37× today; g_avg **4.54%**/g_peak 5.08% ⇒ **newcomer wedge 56–61%** of assumed base growth; frozen-2% counterfactual **1.58×** the advertised rate. Charts + 2 in-JN parcel maps + env-gated agent-verify cell (`JN_RUN_AGENT=1`).
+- **Benvenue amendment** (`c29a9ac`, from the parallel CC's 2811-Benvenue bill reconciliation): `TotalNetValue` verified **bill-consistent NET AV** (oracle assert Land+Imps−$7k, to the dollar); Prop-8 restorations added as a bounded third wedge channel; whole-bill guard (ad-valorem ≈43% of a real $21,064 bill; flat/sqft stack runs the OPPOSITE regressivity direction); worked example $161/$255/~$511 = 0.8–2.4% of the bill.
+- **Key official facts** (Res. 72,338-N.S. + TRS Exhibit B): $22.14 avg / $35 peak (FY2040-41) / $610M total DS / $100M every 5 yrs from 2027 / final FY2066/67; poll 64% vs 66.7% needed; ballot arguments were due **8/14**, rebuttals due **8/21 noon** (pro authors: Ishii, Blackaby, Tregub, Taplin).
+- **NEXT:** John reviews/commits the note; possible rebuttal draft (8/21 deadline) + letter-to-Mayor w/ Larry's 5 lifecycle questions; re-run `gen_bond_incidence.py` with `INTEREST=0.0536` + add a "city assumptions" mode; TRA/rate-book acquisition (shared with the maps track).
+
 ## 2026-08-14 — ✅ Bond-incidence map, structure-history schema, teaching JN, parcel_facts ingest
 **A full session on municipal-bond visualization + the open-data schema behind it. All committed on `dev`, nothing pushed.**
 
@@ -14,7 +24,8 @@
 - **Structure-history schema design** (`notes/2026-08-14_structure_history_open_data_design.md`): identity spine (structure↔parcel↔owner, temporal crosswalks, lineage) + provenance/assertion stream + **§7 the full taxation/bond model** (TRA, taxing_entity, levy-with-base, measure/bond, tax_bill_line, scenario layer) + **§8 UrbanSim borrowings** (building-type crosswalk, versioned zoning table). UrbanSim (Waddell/UDST, BSD-3) validates the parcel→building→unit spine; our provenance/temporal/lineage layers are the additions.
 - **Teaching JN-Feasibility** (`3a2ac07`, gen `scripts/v4/build_jn_feasibility.py` → `notebooks/v4/JN-Feasibility.ipynb`): "build UrbanSim's pro-forma, open/Datasette." Transparent SqFtProForma reimplementation; Elmwood baseline-vs-upzone; derive-and-gate (`data/baselines/feasibility_baseline_2026-08-14.json`); executes clean, gate PASS. Lesson: result is calibration-dominated (0-flip artifact). **Waddell outreach drafted** (`notes/2026-08-14_waddell_outreach.md`, for John to send — calibration + feasibility asks).
 - **Hand-off for the bond-analyst CC** (`13bf7b9`): `notes/2026-08-14_bond_maps_handoff.md` — every script/data link, the levy math, the FOUR link targets (only Street View deep-links; assessor/tax = ingest-inline), the map architecture, open items.
-- **NEXT:** propagate the inline parcel card to the construction + ownership popups (same `parcel_facts.db` join); harvest `propinfo.acgov.org` 35-yr value history + parcel lineage; acquire TRA + tax-rate book; evaluate Regrid (deed history + deep-linkable pages); spatial cut to the true 5.3-ac Elmwood strip for the feasibility model.
+- **✅ inline parcel card now on ALL 3 maps** (`6e82e8a`): construction + ownership popups join `parcel_facts.db` too — owner+type, landmark-corrected build year, use bucket, assessed value, Street-View link. Consistent card across bond/construction/ownership.
+- **NEXT:** harvest `propinfo.acgov.org` 35-yr value history + parcel lineage (into parcel_facts); acquire TRA + tax-rate book; evaluate Regrid (deed history + deep-linkable pages); spatial cut to the true 5.3-ac Elmwood strip for the feasibility model. ⚠ Note a parallel session's Measure-U bond files exist (`scripts/v4/build_jn_measure_u.py`, `notebooks/v4/JN-MeasureU.ipynb`, dated 2026-08-15) — coordinate ownership.
 - **Viewing:** the 3 big maps STREAM a sibling `_data.json` → serve them (`cd docs/maps && python3 -m http.server 8777`); `file://` and the CC in-app pane can't render them (memory), real Chrome does.
 
 ## 2026-08-10 — ✅ NEW JN-L: fiscal flows (property tax from housing COs), baseline-gated

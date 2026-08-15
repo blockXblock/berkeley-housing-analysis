@@ -1,0 +1,37 @@
+{
+  "topic": "elmwood_upzoning_feasibility",
+  "created": "2026-08-14",
+  "git_sha": "45b521f",
+  "note": "METHOD DEMO \u2014 calibration figures are placeholder-derived. Structural figures (elmwood_parcels, commercial_parcels, commercial_acres) are data-stable; feasibility figures MOVE with the Step-4 calibration constants. A legitimate calibration change = APPEND a new baseline, never edit.",
+  "calibration_placeholders": {
+    "RENT_SQFT_YR": 45.0,
+    "CAP_RATE": 0.045,
+    "FINANCING": 1.1,
+    "PARKING_LOSS": 0.15,
+    "EFFICIENCY": 0.82,
+    "UNIT_SQFT": 950,
+    "FT_PER_STORY": 11.0,
+    "COVERAGE": 0.72,
+    "cost_per_sqft": "400/560/720 by height",
+    "zoning_baseline": "FAR2.0/30ft",
+    "zoning_upzone": "FAR3.5/55ft",
+    "land_cost": "assessed Land (Prop-13 proxy, understates market)",
+    "commercial_id": "UseCode leading-digit 3 (approximate)"
+  },
+  "sources": {
+    "geometry": "data/raw/berkeley_taxparcels_2026-08-12.geojson (lot area from geometry, EPSG:2227)",
+    "land_use": "databases/berkeley.db parcels (Land, UseCode)",
+    "boundary": "data/reference/berkeley_neighborhoods.geojson (Elmwood)"
+  },
+  "figures": {
+    "elmwood_parcels": 2311,
+    "commercial_parcels": 109,
+    "commercial_acres": 31.4,
+    "baseline_feasible": 108,
+    "baseline_net_units": 1668,
+    "upzone_feasible": 107,
+    "upzone_net_units": 3155,
+    "upzone_flips": 0,
+    "upzone_flip_units": 0
+  }
+}

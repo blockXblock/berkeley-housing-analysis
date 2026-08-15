@@ -381,3 +381,45 @@ as assertion-vs-verdict and candidate-vs-confirmed: hypotheticals are flagged, i
 **Near-term, without waiting on the rate book:** we can already estimate an ad-valorem bond's incidence
 using total district AV (Land+Imps, in hand) as the base — an approximate but directionally-honest
 per-parcel share, enough to draft the op-ed's central chart while the exact TRA rates are acquired.
+
+---
+
+## 8. Borrowed from UrbanSim (validated prior art) — three concrete additions
+
+UrbanSim's schema is snapshot-only (it overwrites a replaced building, keeps no history — see the
+prior-art note in §0), so we do **not** take its temporal model; our event-stream + `parcel_lineage`
+is already more capable there. But three of its design choices are worth adopting outright:
+
+1. **Two-level building-type vocabulary** — a *curated crosswalk* rather than trusting the raw assessor
+   `UseCode` (which we KNOW is a weak housing signal). `building_type(code, label, general_bucket)` maps
+   ~14 detailed codes → 5–6 analytic buckets (Residential / Mixed / Office / Retail / Institutional /
+   Industrial). This operationalizes "UseCode is weak" as a maintained lookup, not a one-off filter.
+
+2. **Zoning as its own parcel-keyed, VERSIONED table** (never a column on the parcel):
+   ```sql
+   CREATE TABLE zoning (
+     zoning_id TEXT PRIMARY KEY, zone_code TEXT,             -- 'C-E' (Elmwood commercial), 'R-1S', ...
+     max_far REAL, max_height_ft REAL, max_dua REAL,         -- the density envelope
+     allow_residential INTEGER, allow_commercial INTEGER,    -- per-use permission flags
+     scenario TEXT, effective_from TEXT                      -- 'baseline' | 'elmwood_upzone_2026' | ...
+   );
+   CREATE TABLE parcel_zoning (parcel_id TEXT, zoning_id TEXT, scenario TEXT);
+   ```
+   Payoff: **an upzoning is a new scenario row, not an edit.** Baseline-vs-proposal is a table swap —
+   exactly what a feasibility or bond what-if needs (mirrors UrbanSim's `conditional_upzone` max()-override).
+
+3. **Per-use rent/price fields** on the structure (`residential_rent_sqft`, `nonres_rent_sqft`) — needed
+   only once we add feasibility, and derived (like UrbanSim) as a *local quantile* of observed values,
+   not a per-parcel appraisal.
+
+### The feasibility hook (optional module — the Elmwood upzoning question)
+UrbanSim's `SqFtProForma` (BSD-3, [source](https://github.com/UDST/developer/blob/master/developer/sqftproforma.py))
+answers *"does development pencil out under this zoning?"* We reuse the **method** — a transparent
+reimplementation (cited), legible enough to teach — driven by the zoning table above: run the pro-forma
+under `scenario='baseline'`, then `scenario='elmwood_upzone'`; **parcels that flip to profit > 0 are the
+housing the upzone unlocks.** This is FORWARD/counterfactual — orthogonal to the backward/observed
+history DB — so it's a separate feature, and it is **calibration-bound (Berkeley costs / rents / cap
+rate), not code-bound.** The pro-forma math (documented from the source): `bulk = FAR × lot`;
+`cost = bulk × cost_per_sqft(height-tier) + land + financing`;
+`revenue = bulk × (1−parking) × efficiency × rent ÷ cap_rate`; `profit = revenue − cost`, maximized over
+the FAR grid capped by `min(max_far, max_height/ft_per_story × coverage)`.

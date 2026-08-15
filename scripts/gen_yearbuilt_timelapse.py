@@ -36,12 +36,22 @@ def main():
     _adf["capn"] = _adf.APN.apply(lambda a: to_canonical_apn(a, "alameda") if pd.notna(a) else None)
     _adf["addr"] = (_adf.SitusStree.fillna("").astype(str).str.strip() + " " + _adf.SitusStr_1.fillna("").astype(str).str.strip()).str.strip()
     AMAP = dict(_adf.dropna(subset=["capn"]).drop_duplicates("capn")[["capn", "addr"]].values)
+    # inline parcel card (owner/type/use/assessed) from parcel_facts.db — consistent across all 3 maps
+    _pf = pd.read_sql("SELECT capn, owner_name, owner_type, use_bucket, assessed_total FROM parcel_facts",
+                      sqlite3.connect("databases/parcel_facts.db"))
+    PF = {r.capn: (r.owner_name, r.owner_type, r.use_bucket, r.assessed_total) for r in _pf.itertuples()}
+    def _card(cp):
+        t = PF.get(cp)
+        if not t: return {"own": "", "ot": "", "ub": "", "av": 0}
+        o, ot, ub, av = t
+        return {"own": "" if pd.isna(o) else str(o), "ot": "" if pd.isna(ot) else str(ot),
+                "ub": "" if pd.isna(ub) else str(ub), "av": int(av / 1000) if pd.notna(av) else 0}
     n_total = len(tp); n_nodate = int((~tp.year.between(1850, 2026)).sum())
     g = tp[tp.year.between(1850, 2026)].to_crs(4326)
     c = g.geometry.centroid
     feats = [{"type": "Feature",
               "geometry": {"type": "Point", "coordinates": [round(x, 5), round(y, 5)]},
-              "properties": {"y": int(yr), "u": int(min(u, 9)), "c": int(cr), "a": AMAP.get(cp, "")}}
+              "properties": {"y": int(yr), "u": int(min(u, 9)), "c": int(cr), "a": AMAP.get(cp, ""), **_card(cp)}}
              for x, y, yr, u, cr, cp in zip(c.x, c.y, g.year, g.Units, g.corrected, g.capn)]
     cx, cy = g.to_crs(4326).unary_union.centroid.coords[0] if False else (-122.273, 37.871)
     n_shown = len(feats)
@@ -90,9 +100,12 @@ map.on('load',()=>{{
  map.on('click','pts',e=>{{ const p=e.features[0].properties, a=p.a||'(address unavailable)';
    const q=encodeURIComponent(a+' Berkeley CA');
    new maplibregl.Popup().setLngLat(e.lngLat).setHTML(
-     '<b>'+a+'</b><br>Built '+p.y+(p.c=='1'||p.c===1?' <span style="color:#0074D9">(landmark-corrected)</span>':'')
+     '<b>'+a+'</b>'
+     +(p.own?'<br>owner: '+p.own+(p.ot?' <span style="color:#777">('+p.ot+')</span>':''):'')
+     +'<br>Built '+p.y+(p.c=='1'||p.c===1?' <span style="color:#0074D9">(landmark-corrected)</span>':'')+(p.ub?' &middot; '+p.ub.replace(/_/g,' '):'')
      +'<br>'+p.u+' unit'+(p.u==1?'':'s')+' in structure'
-     +'<br><a href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Open in Google Maps ↗</a>').addTo(map); }});
+     +(p.av?'<br>assessed value: $'+(p.av*1000).toLocaleString():'')
+     +'<br><a href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Street view ↗</a>').addTo(map); }});
  map.on('mouseenter','pts',()=>map.getCanvas().style.cursor='pointer');
  map.on('mouseleave','pts',()=>map.getCanvas().style.cursor='');
 }});

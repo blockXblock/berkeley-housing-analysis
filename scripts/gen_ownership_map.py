@@ -63,10 +63,21 @@ def main():
     g = tp.merge(ow[["capn", "otype", "recency", "OwnersName", "addr"]].dropna(subset=["capn"]).drop_duplicates("capn"), on="capn", how="inner")
     g = g[g.recency.notna()].to_crs(4326)
     c = g.geometry.centroid
+    # inline parcel card (built/use/assessed) from parcel_facts.db — consistent across all 3 maps
+    _pf = pd.read_sql("SELECT capn, use_bucket, build_year, assessed_total FROM parcel_facts",
+                      sqlite3.connect("databases/parcel_facts.db"))
+    PF = {r.capn: (r.use_bucket, r.build_year, r.assessed_total) for r in _pf.itertuples()}
+    def _card(cp):
+        t = PF.get(cp)
+        if not t: return {"ub": "", "yb": 0, "av": 0}
+        ub, yb, av = t
+        return {"ub": "" if pd.isna(ub) else str(ub), "yb": int(yb) if pd.notna(yb) else 0,
+                "av": int(av / 1000) if pd.notna(av) else 0}
     feats = [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [round(x, 5), round(y, 5)]},
               "properties": {"t": int(min(t, 99)), "o": int(o),
-                             "a": str(ad) if pd.notna(ad) else "", "n": str(nm) if pd.notna(nm) else ""}}
-             for x, y, t, o, ad, nm in zip(c.x, c.y, g.recency, g.otype, g.addr, g.OwnersName)]
+                             "a": str(ad) if pd.notna(ad) else "", "n": str(nm) if pd.notna(nm) else "",
+                             **_card(cp)}}
+             for x, y, t, o, ad, nm, cp in zip(c.x, c.y, g.recency, g.otype, g.addr, g.OwnersName, g.capn)]
     counts = pd.Series([f["properties"]["o"] for f in feats]).value_counts().to_dict()
     lab = {0: "individual", 1: "investor (LLC/Corp/LP)", 2: "trust", 3: "institutional"}
     print(f"parcels mapped: {len(feats)} | owner types: " + ", ".join(f"{lab[k]}={counts.get(k,0)}" for k in range(4)))
@@ -112,8 +123,11 @@ map.on('load',()=>{
  map.on('click','pts',e=>{ const p=e.features[0].properties, a=p.a||'(address unavailable)';
    const q=encodeURIComponent(a+' Berkeley CA'), TY=['individual','investor (LLC/Corp/LP)','trust','institutional'];
    new maplibregl.Popup().setLngLat(e.lngLat).setHTML(
-     '<b>'+a+'</b>'+(p.n?'<br>'+p.n:'')+'<br>'+TY[p.o]+'<br>last recorded document: '+(2026-p.t)+' ('+p.t+' yr ago)'
-     +'<br><a href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Open in Google Maps ↗</a>').addTo(map); });
+     '<b>'+a+'</b>'+(p.n?'<br>owner: '+p.n:'')+' <span style="color:#777">('+TY[p.o]+')</span>'
+     +(p.yb?'<br>built: '+p.yb:'')+(p.ub?' &middot; '+p.ub.replace(/_/g,' '):'')
+     +(p.av?'<br>assessed value: $'+(p.av*1000).toLocaleString():'')
+     +'<br>last recorded document: '+(2026-p.t)+' ('+p.t+' yr ago)'
+     +'<br><a href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Street view ↗</a>').addTo(map); });
  map.on('mouseenter','pts',()=>map.getCanvas().style.cursor='pointer');
  map.on('mouseleave','pts',()=>map.getCanvas().style.cursor='');
 });

@@ -38,9 +38,12 @@ map.on('load',()=>{
  map.on('click','pts',e=>{ const p=e.features[0].properties, a=p.a||'(address unavailable)';
    const q=encodeURIComponent(a+' Berkeley CA');
    new maplibregl.Popup().setLngLat(e.lngLat).setHTML(
-     '<b>'+a+'</b><br>Built '+p.y+(p.c=='1'||p.c===1?' <span style="color:#0074D9">(landmark-corrected)</span>':'')
+     '<b>'+a+'</b>'
+     +(p.own?'<br>owner: '+p.own+(p.ot?' <span style="color:#777">('+p.ot+')</span>':''):'')
+     +'<br>Built '+p.y+(p.c=='1'||p.c===1?' <span style="color:#0074D9">(landmark-corrected)</span>':'')+(p.ub?' &middot; '+p.ub.replace(/_/g,' '):'')
      +'<br>'+p.u+' unit'+(p.u==1?'':'s')+' in structure'
-     +'<br><a href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Open in Google Maps ↗</a>').addTo(map); });
+     +(p.av?'<br>assessed value: $'+(p.av*1000).toLocaleString():'')
+     +'<br><a href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Street view ↗</a>').addTo(map); });
  map.on('mouseenter','pts',()=>map.getCanvas().style.cursor='pointer');
  map.on('mouseleave','pts',()=>map.getCanvas().style.cursor='');
 });

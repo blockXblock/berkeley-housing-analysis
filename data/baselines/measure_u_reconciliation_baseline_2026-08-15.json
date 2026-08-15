@@ -1,0 +1,54 @@
+{
+  "created": "2026-08-15",
+  "provenance": {
+    "assessor": "databases/berkeley.db (Alameda, Feb-2026 refresh)",
+    "official": "Resolution 72,338-N.S. Exhibit B (TRS) + impartial analysis, berkeleyca.gov",
+    "v2": "databases/berkeley_housing_v2.db v_projects_flat completions >=2018, 5+ units",
+    "generator": "scripts/v4/build_jn_measure_u.py"
+  },
+  "official": {
+    "principal": 300000000,
+    "avg_rate_100k": 22.14,
+    "peak_rate_100k": 35.0,
+    "peak_first_fy": 2040,
+    "total_debt_service": 610000000,
+    "avg_annual_revenue": 15200000,
+    "tranche": 100000000,
+    "tranche_years": [
+      2027,
+      2032,
+      2037
+    ],
+    "final_fy": 2066,
+    "base_year": 2026
+  },
+  "derived": {
+    "n_parcels": 27618,
+    "total_av_b": 29.011946685,
+    "implied_borrow_rate_pct": 5.3643340190029445,
+    "ds_peak_m": 20.333333333318674,
+    "total_interest_m": 310.0,
+    "rate_today_100k": 70.08607024578458,
+    "base_peak_impl_b": 58.095238095196216,
+    "g_peak_pct": 5.084887058557475,
+    "base_avg_impl_b": 68.65401987353206,
+    "base_avg_multiple": 2.366405144023932,
+    "g_avg_pct": 4.535260491582448,
+    "wedge_share_avg_pct": 55.90109975574615,
+    "wedge_share_peak_pct": 60.66775963815846,
+    "avg_rate_frozen_100k": 34.95972752680143,
+    "newcon_projects_matched": 33,
+    "newcon_units_matched": 2237,
+    "newcon_av_b": 1.01834512,
+    "newcon_share_of_base_pct": 3.5100888990896753,
+    "top1_share_pct": 20.31981465431264,
+    "top5_share_pct": 32.568528925655585,
+    "top10_share_pct": 42.29030985826107,
+    "top25_share_pct": 63.30298031153989,
+    "top50_share_pct": 85.12358044821768,
+    "median_cost_all": 466.5493028424901,
+    "sfr_n": 17297,
+    "sfr_median_cost": 467.52665309206753,
+    "sfr_p90_p10": 15.360629483123303
+  }
+}

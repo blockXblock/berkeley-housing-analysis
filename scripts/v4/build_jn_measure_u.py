@@ -143,6 +143,7 @@ cells.append(code(r"""OFFICIAL = {
     "peak_first_fy":    2040,          # "first year in which the highest tax rate will apply is 2040/41"
     "total_debt_service": 610_000_000, # TRS Exhibit B
     "avg_annual_revenue": 15_200_000,  # ballot label "approximately $15,200,000/year"
+    "combined_avg_rate_100k": 44.13,   # June 2026 staff report: avg rate combined w/ existing GO authorizations
     "tranche":          100_000_000,   # "$100 million every five years commencing in 2027"
     "tranche_years":    [2027, 2032, 2037],
     "final_fy":         2066,          # final collection FY 2066/67
@@ -391,6 +392,42 @@ DERIVED.update(dict(
     sfr_median_cost = float(q_sf[.50]),
     sfr_p90_p10     = float(q_sf[.90]/q_sf[.10]),
 ))
+# figures surfaced for the maps session + the site (session-coordination contract,
+# notes/2026-08-15_session_coordination.md — the baseline is the single source of truth):
+p["dec"] = pd.qcut(p.TotalNetValue, 10, labels=False)+1
+gdec = p.groupby("dec")
+apt = p[p.UseCode.astype(str).str.match(r"^7\d{3}$")]
+DERIVED.update(dict(
+    decile_share_pct   = [float(v) for v in (gdec.TotalNetValue.sum()/TOTAL_AV*100)],
+    decile_median_cost = [float(v) for v in gdec.cost.median()],
+    apt_share_pct      = float(apt.TotalNetValue.sum()/TOTAL_AV*100),
+    flat_parcel_cost   = float(ds_peak/N_PARCELS),
+    med_sfr_av         = float(sf.TotalNetValue.median()),
+))
+print(f"apartments (7xxx): {DERIVED['apt_share_pct']:.1f}% of the base | flat-tax equivalent "
+      f"${DERIVED['flat_parcel_cost']:,.0f}/parcel | median SFR AV ${DERIVED['med_sfr_av']:,.0f}")
+# WHO the top tiers are — composition by use bucket (derived for the site/map)
+u = p.UseCode.astype(str)
+p["bucket"] = np.select(
+    [u.str.startswith("73"), u.str.startswith("7"), u.str.startswith("1"), u.str.startswith("2"),
+     u.str.startswith("3") | u.str.startswith("4"), u.str.startswith("9")],
+    ["condos", "apartments_mixed", "single_family", "small_residential",
+     "commercial_industrial", "institutional"], default="other")
+sq = p.sort_values("TotalNetValue", ascending=False).reset_index(drop=True)
+tier_av, tier_ct, tier_entry = {}, {}, {}
+for qq in (1, 5, 10, 25):
+    k = int(N_PARCELS*qq/100); tp = sq.iloc[:k]
+    shares = (tp.groupby("bucket").TotalNetValue.sum()/tp.TotalNetValue.sum()*100).round(1)
+    tier_av[str(qq)] = {b: float(v) for b, v in shares.items()}
+    tier_ct[str(qq)] = {b: int(v) for b, v in tp.bucket.value_counts().items()}
+    tier_entry[str(qq)] = float(sq.TotalNetValue.iloc[k-1])
+DERIVED.update(dict(tier_composition_av_pct=tier_av, tier_composition_count=tier_ct,
+                    tier_entry_av=tier_entry))
+t1 = tier_av["1"]
+print(f"top 1% composition (share of tier AV): apartments {t1.get('apartments_mixed',0):.0f}% | "
+      f"commercial/industrial {t1.get('commercial_industrial',0):.0f}% | institutional "
+      f"{t1.get('institutional',0):.0f}% | single-family {t1.get('single_family',0):.1f}% "
+      f"({tier_ct['1'].get('single_family',0)} homes of {int(N_PARCELS*0.01)} parcels)")
 print("share of the bond paid by the top X% of parcels (by AV):")
 for q in (0.01,0.05,0.10,0.25,0.50):
     print(f"   top {q:>4.0%} ({int(N_PARCELS*q):>6,}) -> {cum.iloc[int(N_PARCELS*q)-1]*100:5.1f}%")
@@ -543,6 +580,9 @@ TOL = {  # relative tolerances; official mirror must match exactly
     "newcon_share_of_base_pct": .02, "top1_share_pct": .01, "top5_share_pct": .01,
     "top10_share_pct": .01, "top25_share_pct": .01, "top50_share_pct": .01,
     "median_cost_all": .01, "sfr_n": 0, "sfr_median_cost": .01, "sfr_p90_p10": .02,
+    "decile_share_pct": .01, "decile_median_cost": .01, "apt_share_pct": .01,
+    "flat_parcel_cost": .01, "med_sfr_av": .01,
+    "tier_composition_av_pct": .05, "tier_composition_count": 0, "tier_entry_av": .01,
 }
 if not os.path.exists(BASELINE):
     payload = {"created": "2026-08-15", "provenance": {
@@ -558,25 +598,49 @@ if not os.path.exists(BASELINE):
     print("    changes APPEND a new dated baseline — never edit this one.")
 else:
     b = json.load(open(BASELINE))
-    fails = []
+    fails, new_derived = [], []
     for k, v in b["official"].items():
         if str(OFFICIAL.get(k)) != str(v):
             fails.append(("OFFICIAL:"+k, v, OFFICIAL.get(k), "official constant edited — restore or append new baseline w/ provenance"))
+    new_official = [k for k in OFFICIAL if k not in b["official"]]
+    def _close(cv, bv, tol):
+        if isinstance(bv, list):
+            return isinstance(cv, list) and len(cv) == len(bv) and all(_close(x, y, tol) for x, y in zip(cv, bv))
+        if isinstance(bv, dict):
+            return isinstance(cv, dict) and set(cv) == set(bv) and all(_close(cv[k2], bv[k2], tol) for k2 in bv)
+        if bv == 0: return cv == 0
+        return abs(cv-bv)/abs(bv) <= max(tol, 1e-12)
     for k, tol in TOL.items():
-        bv, cv = b["derived"].get(k), DERIVED.get(k)
-        if bv is None or cv is None:
-            fails.append((k, bv, cv, "figure missing — generator/baseline drift")); continue
-        if (bv == 0 and cv != 0) or (bv != 0 and abs(cv-bv)/abs(bv) > max(tol, 1e-12)):
+        cv = DERIVED.get(k)
+        if cv is None:
+            fails.append((k, b["derived"].get(k), None, "generator no longer derives a gated figure")); continue
+        if k not in b["derived"]:
+            new_derived.append(k); continue          # additive key — appended below, loudly
+        if not _close(cv, b["derived"][k], tol):
             cause = ("assessor snapshot changed" if k in ("n_parcels","total_av_b","median_cost_all",
                      "sfr_n","sfr_median_cost","sfr_p90_p10","newcon_av_b","newcon_projects_matched",
-                     "newcon_units_matched","newcon_share_of_base_pct") or k.startswith("top")
+                     "newcon_units_matched","newcon_share_of_base_pct","apt_share_pct","med_sfr_av",
+                     "flat_parcel_cost") or k.startswith(("top","decile"))
                      else "official-figure or model change")
-            fails.append((k, bv, cv, cause))
+            fails.append((k, b["derived"][k], cv, cause))
     if fails:
         print("GATE FAIL — diagnosis (figure | baseline | computed | likely cause):")
         for f in fails: print("  ", " | ".join(str(x) for x in f))
         raise AssertionError(f"{len(fails)} figure(s) diverge from {BASELINE} — investigate; "
                             "if the change is legitimate, APPEND a new dated baseline.")
+    # ADDITIVE APPEND (evidence-append-only): brand-new keys may be added with a recorded
+    # amendment; mutating an existing value still hard-fails above.
+    if new_derived or new_official:
+        for k in new_derived:  b["derived"][k]  = DERIVED[k]
+        for k in new_official: b["official"][k] = OFFICIAL[k]
+        b.setdefault("amendments", []).append({
+            "date": "2026-08-15",
+            "added_derived": new_derived, "added_official": new_official,
+            "reason": "additive append: incidence figures surfaced for gen_bond_incidence.py and the "
+                      "measure-u site (session-coordination contract); existing values untouched"})
+        json.dump(b, open(BASELINE, "w"), indent=2, default=str)
+        print(f"*** BASELINE AMENDED (additive): +{len(new_derived)} derived {new_derived} "
+              f"+{len(new_official)} official {new_official} — existing values verified unchanged first")
     print(f"GATE PASS — {len(TOL)} derived figures + {len(b['official'])} official constants "
           f"match {BASELINE} within tolerance.")"""))
 

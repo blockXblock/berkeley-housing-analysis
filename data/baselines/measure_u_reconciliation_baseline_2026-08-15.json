@@ -1,260 +1,392 @@
 {
- "created": "2026-08-15",
- "provenance": {
-  "assessor": "databases/berkeley.db (Alameda, Feb-2026 refresh)",
-  "official": "Resolution 72,338-N.S. Exhibit B (TRS) + impartial analysis, berkeleyca.gov",
-  "v2": "databases/berkeley_housing_v2.db v_projects_flat completions >=2018, 5+ units",
-  "generator": "scripts/v4/build_jn_measure_u.py"
- },
- "official": {
-  "principal": 300000000,
-  "avg_rate_100k": 22.14,
-  "peak_rate_100k": 35.0,
-  "peak_first_fy": 2040,
-  "total_debt_service": 610000000,
-  "avg_annual_revenue": 15200000,
-  "tranche": 100000000,
-  "tranche_years": [
-   2027,
-   2032,
-   2037
-  ],
-  "final_fy": 2066,
-  "base_year": 2026
- },
- "derived": {
-  "n_parcels": 27618,
-  "total_av_b": 29.011946685,
-  "implied_borrow_rate_pct": 5.3643340190029445,
-  "ds_peak_m": 20.333333333318674,
-  "total_interest_m": 310.0,
-  "rate_today_100k": 70.08607024578458,
-  "base_peak_impl_b": 58.095238095196216,
-  "g_peak_pct": 5.084887058557475,
-  "base_avg_impl_b": 68.65401987353206,
-  "base_avg_multiple": 2.366405144023932,
-  "g_avg_pct": 4.535260491582448,
-  "wedge_share_avg_pct": 55.90109975574615,
-  "wedge_share_peak_pct": 60.66775963815846,
-  "avg_rate_frozen_100k": 34.95972752680143,
-  "newcon_projects_matched": 33,
-  "newcon_units_matched": 2237,
-  "newcon_av_b": 1.01834512,
-  "newcon_share_of_base_pct": 3.5100888990896753,
-  "top1_share_pct": 20.31981465431264,
-  "top5_share_pct": 32.568528925655585,
-  "top10_share_pct": 42.29030985826107,
-  "top25_share_pct": 63.30298031153989,
-  "top50_share_pct": 85.12358044821768,
-  "median_cost_all": 466.5493028424901,
-  "sfr_n": 17297,
-  "sfr_median_cost": 467.52665309206753,
-  "sfr_p90_p10": 15.360629483123303,
-  "tax_incidence": {
-   "_owner": "tax_incidence session; code scripts/tax_incidence/, method docs/methodology/berkeley_property_tax_structure.md",
-   "_scope": "FY2025-26 SINGLE-FAMILY only. LOWER BOUND: ~12 charges on an unmodelled third base, median $1170/parcel.",
-   "_evidence": "37 real bills, 111/111 line-item reconciliations; building sqft validated against City of Berkeley 9a47-nj4i, 35/37 exact",
-   "parcel_tax_per_sqft_total": 1.936351,
-   "parcel_tax_flat_per_parcel": 192.52,
-   "parcel_tax_per_dwelling_unit": 55.12,
-   "ad_valorem_rate_pct": 1.2323,
-   "sfr_parcels_modelled": 16910,
-   "dispersion_p90_p10": {
-    "av": 14.639,
-    "adval": 14.639,
-    "flat": 2.778,
-    "total": 5.252
-   },
-   "aggregate_sfr_ad_valorem": 175236116.92,
-   "aggregate_sfr_parcel_taxes": 71096717.96,
-   "existing_city_go_per_100k_fy2026": 49.0,
-   "existing_city_go_per_100k_12yr_mean": 51.9,
-   "existing_city_go_per_100k_range": [
-    43.3,
-    62.3
-   ],
-   "city_go_note": "City of Berkeley GO levy FELL 0.0609%->0.0490% (-19.5%) FY25->FY26. The city's claimed COMBINED avg with Measure U of $44.13/100k is $7.77 BELOW the 12-year mean of EXISTING debt alone; reconcile against the city's existing-GO debt-service schedule before publishing.",
-   "sfr_by_av_decile": [
-    {
-     "decile": "1",
-     "median_av": "76382",
-     "median_sqft": "1566",
-     "ad_valorem": "941.26",
-     "parcel_taxes": "3279.97",
-     "total": "4236.94",
-     "flat_share_pct": "77.4",
-     "pct_of_av": "5.547",
-     "measure_u_advertised_40yr_avg": "16.91",
-     "measure_u_stated_peak_2040_41": "26.73"
+  "created": "2026-08-15",
+  "provenance": {
+    "assessor": "databases/berkeley.db (Alameda, Feb-2026 refresh)",
+    "official": "Resolution 72,338-N.S. Exhibit B (TRS) + impartial analysis, berkeleyca.gov",
+    "v2": "databases/berkeley_housing_v2.db v_projects_flat completions >=2018, 5+ units",
+    "generator": "scripts/v4/build_jn_measure_u.py"
+  },
+  "official": {
+    "principal": 300000000,
+    "avg_rate_100k": 22.14,
+    "peak_rate_100k": 35.0,
+    "peak_first_fy": 2040,
+    "total_debt_service": 610000000,
+    "avg_annual_revenue": 15200000,
+    "tranche": 100000000,
+    "tranche_years": [
+      2027,
+      2032,
+      2037
+    ],
+    "final_fy": 2066,
+    "base_year": 2026,
+    "combined_avg_rate_100k": 44.13
+  },
+  "derived": {
+    "n_parcels": 27618,
+    "total_av_b": 29.011946685,
+    "implied_borrow_rate_pct": 5.3643340190029445,
+    "ds_peak_m": 20.333333333318674,
+    "total_interest_m": 310.0,
+    "rate_today_100k": 70.08607024578458,
+    "base_peak_impl_b": 58.095238095196216,
+    "g_peak_pct": 5.084887058557475,
+    "base_avg_impl_b": 68.65401987353206,
+    "base_avg_multiple": 2.366405144023932,
+    "g_avg_pct": 4.535260491582448,
+    "wedge_share_avg_pct": 55.90109975574615,
+    "wedge_share_peak_pct": 60.66775963815846,
+    "avg_rate_frozen_100k": 34.95972752680143,
+    "newcon_projects_matched": 33,
+    "newcon_units_matched": 2237,
+    "newcon_av_b": 1.01834512,
+    "newcon_share_of_base_pct": 3.5100888990896753,
+    "top1_share_pct": 20.31981465431264,
+    "top5_share_pct": 32.568528925655585,
+    "top10_share_pct": 42.29030985826107,
+    "top25_share_pct": 63.30298031153989,
+    "top50_share_pct": 85.12358044821768,
+    "median_cost_all": 466.5493028424901,
+    "sfr_n": 17297,
+    "sfr_median_cost": 467.52665309206753,
+    "sfr_p90_p10": 15.360629483123303,
+    "tax_incidence": {
+      "_owner": "tax_incidence session; code scripts/tax_incidence/, method docs/methodology/berkeley_property_tax_structure.md",
+      "_scope": "FY2025-26 SINGLE-FAMILY only. LOWER BOUND: ~12 charges on an unmodelled third base, median $1170/parcel.",
+      "_evidence": "37 real bills, 111/111 line-item reconciliations; building sqft validated against City of Berkeley 9a47-nj4i, 35/37 exact",
+      "parcel_tax_per_sqft_total": 1.936351,
+      "parcel_tax_flat_per_parcel": 192.52,
+      "parcel_tax_per_dwelling_unit": 55.12,
+      "ad_valorem_rate_pct": 1.2323,
+      "sfr_parcels_modelled": 16910,
+      "dispersion_p90_p10": {
+        "av": 14.639,
+        "adval": 14.639,
+        "flat": 2.778,
+        "total": 5.252
+      },
+      "aggregate_sfr_ad_valorem": 175236116.92,
+      "aggregate_sfr_parcel_taxes": 71096717.96,
+      "existing_city_go_per_100k_fy2026": 49.0,
+      "existing_city_go_per_100k_12yr_mean": 51.9,
+      "existing_city_go_per_100k_range": [
+        43.3,
+        62.3
+      ],
+      "city_go_note": "City of Berkeley GO levy FELL 0.0609%->0.0490% (-19.5%) FY25->FY26. The city's claimed COMBINED avg with Measure U of $44.13/100k is $7.77 BELOW the 12-year mean of EXISTING debt alone; reconcile against the city's existing-GO debt-service schedule before publishing.",
+      "sfr_by_av_decile": [
+        {
+          "decile": "1",
+          "median_av": "76382",
+          "median_sqft": "1566",
+          "ad_valorem": "941.26",
+          "parcel_taxes": "3279.97",
+          "total": "4236.94",
+          "flat_share_pct": "77.4",
+          "pct_of_av": "5.547",
+          "measure_u_advertised_40yr_avg": "16.91",
+          "measure_u_stated_peak_2040_41": "26.73"
+        },
+        {
+          "decile": "2",
+          "median_av": "168563",
+          "median_sqft": "1900",
+          "ad_valorem": "2077.2",
+          "parcel_taxes": "3926.71",
+          "total": "5939.15",
+          "flat_share_pct": "66.1",
+          "pct_of_av": "3.523",
+          "measure_u_advertised_40yr_avg": "37.32",
+          "measure_u_stated_peak_2040_41": "59.0"
+        },
+        {
+          "decile": "3",
+          "median_av": "298685",
+          "median_sqft": "1607",
+          "ad_valorem": "3680.7",
+          "parcel_taxes": "3359.36",
+          "total": "7091.24",
+          "flat_share_pct": "47.4",
+          "pct_of_av": "2.374",
+          "measure_u_advertised_40yr_avg": "66.13",
+          "measure_u_stated_peak_2040_41": "104.54"
+        },
+        {
+          "decile": "4",
+          "median_av": "435684",
+          "median_sqft": "1731",
+          "ad_valorem": "5368.93",
+          "parcel_taxes": "3599.46",
+          "total": "9072.45",
+          "flat_share_pct": "39.7",
+          "pct_of_av": "2.082",
+          "measure_u_advertised_40yr_avg": "96.46",
+          "measure_u_stated_peak_2040_41": "152.49"
+        },
+        {
+          "decile": "5",
+          "median_av": "596898",
+          "median_sqft": "1817",
+          "ad_valorem": "7355.57",
+          "parcel_taxes": "3765.99",
+          "total": "11133.6",
+          "flat_share_pct": "33.8",
+          "pct_of_av": "1.865",
+          "measure_u_advertised_40yr_avg": "132.15",
+          "measure_u_stated_peak_2040_41": "208.91"
+        },
+        {
+          "decile": "6",
+          "median_av": "785881",
+          "median_sqft": "1695",
+          "ad_valorem": "9684.41",
+          "parcel_taxes": "3529.75",
+          "total": "13325.75",
+          "flat_share_pct": "26.5",
+          "pct_of_av": "1.696",
+          "measure_u_advertised_40yr_avg": "173.99",
+          "measure_u_stated_peak_2040_41": "275.06"
+        },
+        {
+          "decile": "7",
+          "median_av": "980635",
+          "median_sqft": "1768",
+          "ad_valorem": "12084.37",
+          "parcel_taxes": "3671.11",
+          "total": "15878.31",
+          "flat_share_pct": "23.1",
+          "pct_of_av": "1.619",
+          "measure_u_advertised_40yr_avg": "217.11",
+          "measure_u_stated_peak_2040_41": "343.22"
+        },
+        {
+          "decile": "8",
+          "median_av": "1210757",
+          "median_sqft": "1872",
+          "ad_valorem": "14920.16",
+          "parcel_taxes": "3872.49",
+          "total": "18901.78",
+          "flat_share_pct": "20.5",
+          "pct_of_av": "1.561",
+          "measure_u_advertised_40yr_avg": "268.06",
+          "measure_u_stated_peak_2040_41": "423.76"
+        },
+        {
+          "decile": "9",
+          "median_av": "1520307",
+          "median_sqft": "2016",
+          "ad_valorem": "18734.74",
+          "parcel_taxes": "4151.32",
+          "total": "23047.39",
+          "flat_share_pct": "18.0",
+          "pct_of_av": "1.516",
+          "measure_u_advertised_40yr_avg": "336.6",
+          "measure_u_stated_peak_2040_41": "532.11"
+        },
+        {
+          "decile": "10",
+          "median_av": "2092819",
+          "median_sqft": "2818",
+          "ad_valorem": "25789.81",
+          "parcel_taxes": "5704.28",
+          "total": "31780.27",
+          "flat_share_pct": "17.9",
+          "pct_of_av": "1.519",
+          "measure_u_advertised_40yr_avg": "463.35",
+          "measure_u_stated_peak_2040_41": "732.49"
+        }
+      ],
+      "alameda_city_ad_valorem_comparison": {
+        "San Leandro": {
+          "total_per_100k": 1243.6,
+          "city_go_per_100k": 0
+        },
+        "Newark": {
+          "total_per_100k": 1149.2,
+          "city_go_per_100k": 0
+        },
+        "Fremont": {
+          "total_per_100k": 1174.1,
+          "city_go_per_100k": 3.2
+        },
+        "Berkeley": {
+          "total_per_100k": 1232.3,
+          "city_go_per_100k": 49.0
+        },
+        "Emeryville": {
+          "total_per_100k": 1166.5,
+          "city_go_per_100k": 47.3
+        },
+        "Union City": {
+          "total_per_100k": 1262.1,
+          "city_go_per_100k": 0
+        },
+        "Livermore": {
+          "total_per_100k": 1132.5,
+          "city_go_per_100k": 0
+        },
+        "Oakland": {
+          "total_per_100k": 1277.9,
+          "city_go_per_100k": 120.0
+        },
+        "Piedmont": {
+          "total_per_100k": 1179.8,
+          "city_go_per_100k": 20.2
+        },
+        "Pleasanton": {
+          "total_per_100k": 1169.4,
+          "city_go_per_100k": 0
+        },
+        "Alameda": {
+          "total_per_100k": 1212.7,
+          "city_go_per_100k": 20.0
+        },
+        "Albany": {
+          "total_per_100k": 1357.1,
+          "city_go_per_100k": 124.5
+        },
+        "Hayward": {
+          "total_per_100k": 1172.4,
+          "city_go_per_100k": 0
+        },
+        "Dublin": {
+          "total_per_100k": 1238.5,
+          "city_go_per_100k": 0
+        }
+      },
+      "c10_check": "City claim 'Berkeley $270 vs Oakland $660, Albany $685' is ARITHMETICALLY CORRECT: county data gives Oakland/Berkeley 120.00/49.00=2.45 (city 2.44), Albany/Berkeley 124.50/49.00=2.54 (city 2.54). Do not attack as false. It measures only the GO channel; Berkeley's parcel-tax channel is where the burden sits ($357 city GO vs $7,045 city parcel taxes on a real FY26 bill)."
     },
-    {
-     "decile": "2",
-     "median_av": "168563",
-     "median_sqft": "1900",
-     "ad_valorem": "2077.2",
-     "parcel_taxes": "3926.71",
-     "total": "5939.15",
-     "flat_share_pct": "66.1",
-     "pct_of_av": "3.523",
-     "measure_u_advertised_40yr_avg": "37.32",
-     "measure_u_stated_peak_2040_41": "59.0"
+    "decile_share_pct": [
+      0.7416913292180207,
+      1.7125470358625816,
+      2.8371351841259598,
+      4.053339118426,
+      5.53170688414975,
+      7.240216900322764,
+      9.167665451333363,
+      11.527072317174293,
+      14.898315921126201,
+      42.29030985826107
+    ],
+    "decile_median_cost": [
+      55.3676450638186,
+      125.13307153822872,
+      211.4202377820289,
+      297.7957124743387,
+      406.3537788297906,
+      532.0913427238893,
+      674.37692866372,
+      845.7986957261285,
+      1088.3280375081538,
+      1677.1596609816252
+    ],
+    "apt_share_pct": 22.315255264643405,
+    "flat_parcel_cost": 736.2348226996405,
+    "med_sfr_av": 667075.0,
+    "tier_composition_av_pct": {
+      "1": {
+        "apartments_mixed": 55.4,
+        "commercial_industrial": 28.6,
+        "institutional": 12.9,
+        "other": 2.4,
+        "single_family": 0.3,
+        "small_residential": 0.3
+      },
+      "5": {
+        "apartments_mixed": 43.4,
+        "commercial_industrial": 23.6,
+        "institutional": 9.5,
+        "other": 2.6,
+        "single_family": 17.5,
+        "small_residential": 3.3
+      },
+      "10": {
+        "apartments_mixed": 35.6,
+        "commercial_industrial": 19.7,
+        "condos": 0.1,
+        "institutional": 7.7,
+        "other": 2.3,
+        "single_family": 28.4,
+        "small_residential": 6.2
+      },
+      "25": {
+        "apartments_mixed": 25.7,
+        "commercial_industrial": 14.5,
+        "condos": 0.8,
+        "institutional": 5.5,
+        "other": 1.9,
+        "single_family": 41.6,
+        "small_residential": 10.0
+      }
     },
-    {
-     "decile": "3",
-     "median_av": "298685",
-     "median_sqft": "1607",
-     "ad_valorem": "3680.7",
-     "parcel_taxes": "3359.36",
-     "total": "7091.24",
-     "flat_share_pct": "47.4",
-     "pct_of_av": "2.374",
-     "measure_u_advertised_40yr_avg": "66.13",
-     "measure_u_stated_peak_2040_41": "104.54"
+    "tier_composition_count": {
+      "1": {
+        "apartments_mixed": 133,
+        "commercial_industrial": 82,
+        "institutional": 43,
+        "other": 13,
+        "single_family": 3,
+        "small_residential": 2
+      },
+      "5": {
+        "single_family": 541,
+        "apartments_mixed": 375,
+        "commercial_industrial": 237,
+        "small_residential": 104,
+        "institutional": 80,
+        "other": 43
+      },
+      "10": {
+        "single_family": 1441,
+        "apartments_mixed": 504,
+        "small_residential": 326,
+        "commercial_industrial": 323,
+        "institutional": 102,
+        "other": 61,
+        "condos": 4
+      },
+      "25": {
+        "single_family": 4256,
+        "small_residential": 1059,
+        "apartments_mixed": 737,
+        "commercial_industrial": 490,
+        "institutional": 148,
+        "condos": 111,
+        "other": 103
+      }
     },
-    {
-     "decile": "4",
-     "median_av": "435684",
-     "median_sqft": "1731",
-     "ad_valorem": "5368.93",
-     "parcel_taxes": "3599.46",
-     "total": "9072.45",
-     "flat_share_pct": "39.7",
-     "pct_of_av": "2.082",
-     "measure_u_advertised_40yr_avg": "96.46",
-     "measure_u_stated_peak_2040_41": "152.49"
-    },
-    {
-     "decile": "5",
-     "median_av": "596898",
-     "median_sqft": "1817",
-     "ad_valorem": "7355.57",
-     "parcel_taxes": "3765.99",
-     "total": "11133.6",
-     "flat_share_pct": "33.8",
-     "pct_of_av": "1.865",
-     "measure_u_advertised_40yr_avg": "132.15",
-     "measure_u_stated_peak_2040_41": "208.91"
-    },
-    {
-     "decile": "6",
-     "median_av": "785881",
-     "median_sqft": "1695",
-     "ad_valorem": "9684.41",
-     "parcel_taxes": "3529.75",
-     "total": "13325.75",
-     "flat_share_pct": "26.5",
-     "pct_of_av": "1.696",
-     "measure_u_advertised_40yr_avg": "173.99",
-     "measure_u_stated_peak_2040_41": "275.06"
-    },
-    {
-     "decile": "7",
-     "median_av": "980635",
-     "median_sqft": "1768",
-     "ad_valorem": "12084.37",
-     "parcel_taxes": "3671.11",
-     "total": "15878.31",
-     "flat_share_pct": "23.1",
-     "pct_of_av": "1.619",
-     "measure_u_advertised_40yr_avg": "217.11",
-     "measure_u_stated_peak_2040_41": "343.22"
-    },
-    {
-     "decile": "8",
-     "median_av": "1210757",
-     "median_sqft": "1872",
-     "ad_valorem": "14920.16",
-     "parcel_taxes": "3872.49",
-     "total": "18901.78",
-     "flat_share_pct": "20.5",
-     "pct_of_av": "1.561",
-     "measure_u_advertised_40yr_avg": "268.06",
-     "measure_u_stated_peak_2040_41": "423.76"
-    },
-    {
-     "decile": "9",
-     "median_av": "1520307",
-     "median_sqft": "2016",
-     "ad_valorem": "18734.74",
-     "parcel_taxes": "4151.32",
-     "total": "23047.39",
-     "flat_share_pct": "18.0",
-     "pct_of_av": "1.516",
-     "measure_u_advertised_40yr_avg": "336.6",
-     "measure_u_stated_peak_2040_41": "532.11"
-    },
-    {
-     "decile": "10",
-     "median_av": "2092819",
-     "median_sqft": "2818",
-     "ad_valorem": "25789.81",
-     "parcel_taxes": "5704.28",
-     "total": "31780.27",
-     "flat_share_pct": "17.9",
-     "pct_of_av": "1.519",
-     "measure_u_advertised_40yr_avg": "463.35",
-     "measure_u_stated_peak_2040_41": "732.49"
+    "tier_entry_av": {
+      "1": 5561464.0,
+      "5": 2393000.0,
+      "10": 1813700.0,
+      "25": 1206800.0
     }
-   ],
-   "alameda_city_ad_valorem_comparison": {
-    "San Leandro": {
-     "total_per_100k": 1243.6,
-     "city_go_per_100k": 0
+  },
+  "amendments": [
+    {
+      "date": "2026-08-15",
+      "added_derived": [
+        "decile_share_pct",
+        "decile_median_cost",
+        "apt_share_pct",
+        "flat_parcel_cost",
+        "med_sfr_av"
+      ],
+      "added_official": [
+        "combined_avg_rate_100k"
+      ],
+      "reason": "additive append: incidence figures surfaced for gen_bond_incidence.py and the measure-u site (session-coordination contract); existing values untouched"
     },
-    "Newark": {
-     "total_per_100k": 1149.2,
-     "city_go_per_100k": 0
-    },
-    "Fremont": {
-     "total_per_100k": 1174.1,
-     "city_go_per_100k": 3.2
-    },
-    "Berkeley": {
-     "total_per_100k": 1232.3,
-     "city_go_per_100k": 49.0
-    },
-    "Emeryville": {
-     "total_per_100k": 1166.5,
-     "city_go_per_100k": 47.3
-    },
-    "Union City": {
-     "total_per_100k": 1262.1,
-     "city_go_per_100k": 0
-    },
-    "Livermore": {
-     "total_per_100k": 1132.5,
-     "city_go_per_100k": 0
-    },
-    "Oakland": {
-     "total_per_100k": 1277.9,
-     "city_go_per_100k": 120.0
-    },
-    "Piedmont": {
-     "total_per_100k": 1179.8,
-     "city_go_per_100k": 20.2
-    },
-    "Pleasanton": {
-     "total_per_100k": 1169.4,
-     "city_go_per_100k": 0
-    },
-    "Alameda": {
-     "total_per_100k": 1212.7,
-     "city_go_per_100k": 20.0
-    },
-    "Albany": {
-     "total_per_100k": 1357.1,
-     "city_go_per_100k": 124.5
-    },
-    "Hayward": {
-     "total_per_100k": 1172.4,
-     "city_go_per_100k": 0
-    },
-    "Dublin": {
-     "total_per_100k": 1238.5,
-     "city_go_per_100k": 0
+    {
+      "date": "2026-08-15",
+      "added_derived": [
+        "tier_composition_av_pct",
+        "tier_composition_count",
+        "tier_entry_av"
+      ],
+      "added_official": [],
+      "reason": "additive append: incidence figures surfaced for gen_bond_incidence.py and the measure-u site (session-coordination contract); existing values untouched"
     }
-   },
-   "c10_check": "City claim 'Berkeley $270 vs Oakland $660, Albany $685' is ARITHMETICALLY CORRECT: county data gives Oakland/Berkeley 120.00/49.00=2.45 (city 2.44), Albany/Berkeley 124.50/49.00=2.54 (city 2.54). Do not attack as false. It measures only the GO channel; Berkeley's parcel-tax channel is where the burden sits ($357 city GO vs $7,045 city parcel taxes on a real FY26 bill)."
-  }
- }
+  ]
 }

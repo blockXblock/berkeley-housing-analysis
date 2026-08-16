@@ -40,7 +40,8 @@ map.on('load',()=>{
      +(p.yb?'<br>built: '+p.yb:'')+(p.ub?' &middot; '+p.ub.replace(/_/g,' '):'')
      +(p.av?'<br>assessed value: $'+(p.av*1000).toLocaleString():'')
      +'<br>last recorded document: '+(2026-p.t)+' ('+p.t+' yr ago)'
-     +'<br><a href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Street view ↗</a>').addTo(map); });
+     +'<br><a href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Street view ↗</a>'
+     +' &middot; <a href="https://www.sfchronicle.com/projects/2025/ca-property-map/?search='+encodeURIComponent(a+', Berkeley')+'" target="_blank" rel="noopener">SF Chronicle ↗</a>').addTo(map); });
  map.on('mouseenter','pts',()=>map.getCanvas().style.cursor='pointer');
  map.on('mouseleave','pts',()=>map.getCanvas().style.cursor='');
 });

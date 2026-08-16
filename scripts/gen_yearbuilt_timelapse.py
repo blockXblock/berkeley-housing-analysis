@@ -105,7 +105,8 @@ map.on('load',()=>{{
      +'<br>Built '+p.y+(p.c=='1'||p.c===1?' <span style="color:#0074D9">(landmark-corrected)</span>':'')+(p.ub?' &middot; '+p.ub.replace(/_/g,' '):'')
      +'<br>'+p.u+' unit'+(p.u==1?'':'s')+' in structure'
      +(p.av?'<br>assessed value: $'+(p.av*1000).toLocaleString():'')
-     +'<br><a href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Street view ↗</a>').addTo(map); }});
+     +'<br><a href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Street view ↗</a>'
+     +' &middot; <a href="https://www.sfchronicle.com/projects/2025/ca-property-map/?search='+encodeURIComponent(a+', Berkeley')+'" target="_blank" rel="noopener">SF Chronicle ↗</a>').addTo(map); }});
  map.on('mouseenter','pts',()=>map.getCanvas().style.cursor='pointer');
  map.on('mouseleave','pts',()=>map.getCanvas().style.cursor='');
 }});

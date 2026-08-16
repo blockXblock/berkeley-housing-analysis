@@ -36,12 +36,12 @@ const S={"base_b": 29.011946685, "annual_m": 20.33333333331867, "rate_100k": 70.
 let FEATS={features:[]}, MODE='c', RATE=S.rate_today;
 const usd=x=>'$'+Math.round(x).toLocaleString();
 // cost = assessed value × rate/$100k. v = AV/1000, so cost = v × rate_per_100k / 100. Rate is selectable.
-const costExpr=r=>['step',['*',['get','v'],r/100],'#2c7fb8',200,'#7fcdbb',500,'#ffffb2',1000,'#fd8d3c',2500,'#e31a1c'];
+const costExpr=r=>['step',['*',['get','v'],r/100],'#2c7fb8',200,'#7fcdbb',500,'#fec44f',1000,'#fd8d3c',2500,'#e31a1c'];
 const DELTA=['step',['get','d'],'#b2182b',-400,'#ef8a62',-100,'#f7f7f7',100,'#67a9cf',400,'#2166ac']; // red=flat costs you MORE
-const TEN=['step',['get','t'],'#e31a1c',5,'#fd8d3c',15,'#ffffb2',30,'#74add1',60,'#4575b4'];
-const LC='<div><span class="sw" style="background:#2c7fb8"></span>&lt;$200/yr</div><div><span class="sw" style="background:#7fcdbb"></span>$200–500</div><div><span class="sw" style="background:#ffffb2"></span>$500–1,000</div><div><span class="sw" style="background:#fd8d3c"></span>$1,000–2,500</div><div><span class="sw" style="background:#e31a1c"></span>$2,500+ /yr</div>';
+const TEN=['step',['get','t'],'#e31a1c',5,'#fd8d3c',15,'#fec44f',30,'#74add1',60,'#4575b4'];
+const LC='<div><span class="sw" style="background:#2c7fb8"></span>&lt;$200/yr</div><div><span class="sw" style="background:#7fcdbb"></span>$200–500</div><div><span class="sw" style="background:#fec44f"></span>$500–1,000</div><div><span class="sw" style="background:#fd8d3c"></span>$1,000–2,500</div><div><span class="sw" style="background:#e31a1c"></span>$2,500+ /yr</div>';
 const LD='<div><span class="sw" style="background:#2166ac"></span>flat tax cheaper for you (high-value)</div><div><span class="sw" style="background:#f7f7f7;border:1px solid #ccc"></span>about the same</div><div><span class="sw" style="background:#b2182b"></span>flat tax costs you MORE (long-held/low-value)</div>';
-const LT='<div><span class="sw" style="background:#e31a1c"></span>&lt;5 yr (recent sale/refi/transfer)</div><div><span class="sw" style="background:#fd8d3c"></span>5–15</div><div><span class="sw" style="background:#ffffb2"></span>15–30</div><div><span class="sw" style="background:#74add1"></span>30–60</div><div><span class="sw" style="background:#4575b4"></span>60+ (no recording in decades)</div>';
+const LT='<div><span class="sw" style="background:#e31a1c"></span>&lt;5 yr (recent sale/refi/transfer)</div><div><span class="sw" style="background:#fd8d3c"></span>5–15</div><div><span class="sw" style="background:#fec44f"></span>15–30</div><div><span class="sw" style="background:#74add1"></span>30–60</div><div><span class="sw" style="background:#4575b4"></span>60+ (no recording in decades)</div>';
 const CAPd='Same $300M raised as a FLAT parcel tax ('+usd(S.flat)+'/parcel). Red = you would pay MORE under a flat tax (long-held, low assessed value); blue = LESS (recent, high value). A flat tax shifts burden onto long-held owners.';
 const CAPt='Years since the LAST RECORDED DOCUMENT (sale, refinance, transfer) — NOT years owned. The red 2020-22 bulge is the pandemic refinance wave (2811 Benvenue, owned since 1988, shows as 2021 from a refi/trust recording). A financial-activity signal, not tenure.';
 const OO=['match',['get','oo'],1,'#1a9850','#e34a33'];
@@ -83,7 +83,7 @@ map.on('load',()=>{
  map.addSource('el',{type:'geojson',data:{"type": "FeatureCollection", "features": [{"id": "18", "type": "Feature", "properties": {}, "geometry": {"type": "Polygon", "coordinates": [[[-122.244239443633, 37.8604958003685], [-122.244601401743, 37.8589301551739], [-122.250835129898, 37.8513319404014], [-122.252310187298, 37.8509005750423], [-122.252829419044, 37.8508252396896], [-122.253144867428, 37.8537131122829], [-122.256118795434, 37.8533191766006], [-122.260153616028, 37.8527833970578], [-122.259454220056, 37.8578630157591], [-122.25819515546, 37.8651281851049], [-122.254691919714, 37.865697087542], [-122.250979088794, 37.8658767408977], [-122.250856205395, 37.8657429352649], [-122.250451483401, 37.865460855717], [-122.25035336816, 37.8646882040237], [-122.250120346314, 37.8623334549733], [-122.246213771725, 37.8625677880274], [-122.244473032032, 37.8626722048491], [-122.244239443633, 37.8604958003685]]]}}]}});
  map.addLayer({id:'elw',type:'line',source:'el',paint:{'line-color':'#111','line-width':1.5,'line-dasharray':[2,2]}});
  map.addSource('p',{type:'geojson',data:'bond_incidence_data.json'});
- map.addLayer({id:'pts',type:'circle',source:'p',paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,1.6,15,4.5],'circle-color':costExpr(S.rate_today),'circle-opacity':0.82}});
+ map.addLayer({id:'pts',type:'circle',source:'p',paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,1.8,15,5],'circle-color':costExpr(S.rate_today),'circle-opacity':0.9,'circle-stroke-color':'rgba(45,45,45,0.6)','circle-stroke-width':['interpolate',['linear'],['zoom'],11,0.3,15,0.8]}});
  fetch('bond_incidence_data.json').then(r=>r.json()).then(d=>{FEATS=d;}); mode('c');
  map.on('click','pts',e=>{const p=e.features[0].properties,a=p.a||'(address unavailable)';
    const t=p.t<0?'unknown':(2026-p.t)+' ('+p.t+' yr ago)';

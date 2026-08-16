@@ -102,9 +102,9 @@ def main():
 <div class="cap" id="cap">Color = years since the last document (sale, refinance, or transfer) was recorded — a recent-financial-activity signal, NOT years owned. Elmwood outlined.</div><div style="margin-top:8px;font-size:11px"><a href="https://www.sfchronicle.com/projects/2025/ca-property-map/" target="_blank" rel="noopener" style="color:#0074D9;text-decoration:none">↗ Compare: SF Chronicle statewide owner map</a></div></div>
 <script>
 let FEATS={features:[]};
-const TEN=['step',['get','t'],'#d7301f',5,'#fd8d3c',15,'#fee391',30,'#74add1',60,'#4575b4'];
+const TEN=['step',['get','t'],'#d7301f',5,'#fd8d3c',15,'#fec44f',30,'#74add1',60,'#4575b4'];
 const OWN=['match',['get','o'],1,'#d7301f',2,'#984ea3',3,'#377eb8','#bdbdbd'];
-const LT='<div style="font-weight:600;margin-bottom:2px">Yrs since last recorded document</div><div><span class="sw" style="background:#d7301f"></span>&lt;5 yr (recent sale/refi/transfer)</div><div><span class="sw" style="background:#fd8d3c"></span>5-15</div><div><span class="sw" style="background:#fee391"></span>15-30</div><div><span class="sw" style="background:#74add1"></span>30-60</div><div><span class="sw" style="background:#4575b4"></span>60+ (no recording in decades)</div>';
+const LT='<div style="font-weight:600;margin-bottom:2px">Yrs since last recorded document</div><div><span class="sw" style="background:#d7301f"></span>&lt;5 yr (recent sale/refi/transfer)</div><div><span class="sw" style="background:#fd8d3c"></span>5-15</div><div><span class="sw" style="background:#fec44f"></span>15-30</div><div><span class="sw" style="background:#74add1"></span>30-60</div><div><span class="sw" style="background:#4575b4"></span>60+ (no recording in decades)</div>';
 const LO='<div><span class="sw" style="background:#bdbdbd"></span>individual</div><div><span class="sw" style="background:#d7301f"></span>investor (LLC/Corp/LP)</div><div><span class="sw" style="background:#984ea3"></span>trust</div><div><span class="sw" style="background:#377eb8"></span>institutional</div>';
 const map=new maplibregl.Map({container:'map',center:[-122.273,37.871],zoom:12.4,
  style:{version:8,sources:{c:{type:'raster',tiles:['https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'],tileSize:256,attribution:'© OSM © CARTO'}},layers:[{id:'bg',type:'raster',source:'c'}]}});
@@ -118,7 +118,7 @@ map.on('load',()=>{
  map.addSource('el',{type:'geojson',data:__ELB__});
  map.addLayer({id:'elw',type:'line',source:'el',paint:{'line-color':'#0074D9','line-width':2}});
  map.addSource('p',{type:'geojson',data:'berkeley_ownership_data.json'});
- map.addLayer({id:'pts',type:'circle',source:'p',paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,1.6,15,4],'circle-color':TEN,'circle-opacity':0.82}});
+ map.addLayer({id:'pts',type:'circle',source:'p',paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,1.8,15,4.5],'circle-color':TEN,'circle-opacity':0.9,'circle-stroke-color':'rgba(45,45,45,0.55)','circle-stroke-width':['interpolate',['linear'],['zoom'],11,0.3,15,0.7]}});
  fetch('berkeley_ownership_data.json').then(r=>r.json()).then(d=>{FEATS=d;}); mode('t');
  map.on('click','pts',e=>{ const p=e.features[0].properties, a=p.a||'(address unavailable)';
    const q=encodeURIComponent(a+' Berkeley CA'), TY=['individual','investor (LLC/Corp/LP)','trust','institutional'];

@@ -179,12 +179,12 @@ const S=__STATS__;
 let FEATS={features:[]}, MODE='c', RATE=S.rate_today;
 const usd=x=>'$'+Math.round(x).toLocaleString();
 // cost = assessed value × rate/$100k. v = AV/1000, so cost = v × rate_per_100k / 100. Rate is selectable.
-const costExpr=r=>['step',['*',['get','v'],r/100],'#2c7fb8',200,'#7fcdbb',500,'#ffffb2',1000,'#fd8d3c',2500,'#e31a1c'];
+const costExpr=r=>['step',['*',['get','v'],r/100],'#2c7fb8',200,'#7fcdbb',500,'#fec44f',1000,'#fd8d3c',2500,'#e31a1c'];
 const DELTA=['step',['get','d'],'#b2182b',-400,'#ef8a62',-100,'#f7f7f7',100,'#67a9cf',400,'#2166ac']; // red=flat costs you MORE
-const TEN=['step',['get','t'],'#e31a1c',5,'#fd8d3c',15,'#ffffb2',30,'#74add1',60,'#4575b4'];
-const LC='<div><span class="sw" style="background:#2c7fb8"></span>&lt;$200/yr</div><div><span class="sw" style="background:#7fcdbb"></span>$200–500</div><div><span class="sw" style="background:#ffffb2"></span>$500–1,000</div><div><span class="sw" style="background:#fd8d3c"></span>$1,000–2,500</div><div><span class="sw" style="background:#e31a1c"></span>$2,500+ /yr</div>';
+const TEN=['step',['get','t'],'#e31a1c',5,'#fd8d3c',15,'#fec44f',30,'#74add1',60,'#4575b4'];
+const LC='<div><span class="sw" style="background:#2c7fb8"></span>&lt;$200/yr</div><div><span class="sw" style="background:#7fcdbb"></span>$200–500</div><div><span class="sw" style="background:#fec44f"></span>$500–1,000</div><div><span class="sw" style="background:#fd8d3c"></span>$1,000–2,500</div><div><span class="sw" style="background:#e31a1c"></span>$2,500+ /yr</div>';
 const LD='<div><span class="sw" style="background:#2166ac"></span>flat tax cheaper for you (high-value)</div><div><span class="sw" style="background:#f7f7f7;border:1px solid #ccc"></span>about the same</div><div><span class="sw" style="background:#b2182b"></span>flat tax costs you MORE (long-held/low-value)</div>';
-const LT='<div><span class="sw" style="background:#e31a1c"></span>&lt;5 yr (recent sale/refi/transfer)</div><div><span class="sw" style="background:#fd8d3c"></span>5–15</div><div><span class="sw" style="background:#ffffb2"></span>15–30</div><div><span class="sw" style="background:#74add1"></span>30–60</div><div><span class="sw" style="background:#4575b4"></span>60+ (no recording in decades)</div>';
+const LT='<div><span class="sw" style="background:#e31a1c"></span>&lt;5 yr (recent sale/refi/transfer)</div><div><span class="sw" style="background:#fd8d3c"></span>5–15</div><div><span class="sw" style="background:#fec44f"></span>15–30</div><div><span class="sw" style="background:#74add1"></span>30–60</div><div><span class="sw" style="background:#4575b4"></span>60+ (no recording in decades)</div>';
 const CAPd='Same $300M raised as a FLAT parcel tax ('+usd(S.flat)+'/parcel). Red = you would pay MORE under a flat tax (long-held, low assessed value); blue = LESS (recent, high value). A flat tax shifts burden onto long-held owners.';
 const CAPt='Years since the LAST RECORDED DOCUMENT (sale, refinance, transfer) — NOT years owned. The red 2020-22 bulge is the pandemic refinance wave (2811 Benvenue, owned since 1988, shows as 2021 from a refi/trust recording). A financial-activity signal, not tenure.';
 const OO=['match',['get','oo'],1,'#1a9850','#e34a33'];
@@ -226,7 +226,7 @@ map.on('load',()=>{
  map.addSource('el',{type:'geojson',data:__ELB__});
  map.addLayer({id:'elw',type:'line',source:'el',paint:{'line-color':'#111','line-width':1.5,'line-dasharray':[2,2]}});
  map.addSource('p',{type:'geojson',data:'bond_incidence_data.json'});
- map.addLayer({id:'pts',type:'circle',source:'p',paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,1.6,15,4.5],'circle-color':costExpr(S.rate_today),'circle-opacity':0.82}});
+ map.addLayer({id:'pts',type:'circle',source:'p',paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,1.8,15,5],'circle-color':costExpr(S.rate_today),'circle-opacity':0.9,'circle-stroke-color':'rgba(45,45,45,0.6)','circle-stroke-width':['interpolate',['linear'],['zoom'],11,0.3,15,0.8]}});
  fetch('bond_incidence_data.json').then(r=>r.json()).then(d=>{FEATS=d;}); mode('c');
  map.on('click','pts',e=>{const p=e.features[0].properties,a=p.a||'(address unavailable)';
    const t=p.t<0?'unknown':(2026-p.t)+' ('+p.t+' yr ago)';

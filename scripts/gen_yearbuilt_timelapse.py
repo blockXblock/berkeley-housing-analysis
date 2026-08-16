@@ -93,9 +93,9 @@ map.on('load',()=>{{
  map.addLayer({{id:'elw',type:'line',source:'el',paint:{{'line-color':'#0074D9','line-width':2}}}});
  map.addSource('p',{{type:'geojson',data:'berkeley_construction_data.json'}});
  map.addLayer({{id:'pts',type:'circle',source:'p',paint:{{
-   'circle-radius':['interpolate',['linear'],['zoom'],11,1.6,15,4],
+   'circle-radius':['interpolate',['linear'],['zoom'],11,1.8,15,4.5],
    'circle-color':['step',['get','u'],'#9ecae1',2,'#fd8d3c',3,'#d7301f'],
-   'circle-opacity':0.8}}}});
+   'circle-opacity':0.9,'circle-stroke-color':'rgba(45,45,45,0.5)','circle-stroke-width':['interpolate',['linear'],['zoom'],11,0.3,15,0.7]}}}});
  fetch('berkeley_construction_data.json').then(r=>r.json()).then(d=>{{ FEATS=d; setYear(1850); }});
  map.on('click','pts',e=>{{ const p=e.features[0].properties, a=p.a||'(address unavailable)';
    const q=encodeURIComponent(a+' Berkeley CA');

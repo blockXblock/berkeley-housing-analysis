@@ -89,8 +89,11 @@ def main():
         "rate_today": round(OFF.get("rate_today_100k", rate * 1e5), 1),
         "rate_peak": OFF.get("peak_rate_100k", 0), "rate_avg": OFF.get("avg_rate_100k", 0),
         "base_mult": round(OFF.get("base_avg_multiple", 0), 2), "peak_fy": OFF.get("peak_first_fy", 0),
-        # who pays: owner-occupied vs rental/other SHARE of the bond (homeowner-exemption proxy)
-        "oo_share": round(100 * p.loc[p.owner_occupied == 1, "cost_av"].sum() / p.cost_av.sum(), 1),
+        # who pays: owner-occupied share of the bond. READ the gated figure from B2050BIS's baseline
+        # (owner_occupied_share_pct, derived from the same $7k-exemption definition) so map + site show ONE
+        # number; fall back to computing it if the baseline is absent.
+        "oo_share": round(OFF.get("owner_occupied_share_pct",
+                          100 * p.loc[p.owner_occupied == 1, "cost_av"].sum() / p.cost_av.sum()), 1),
         "n_parcels": n, "flat_lit": round(OFF.get("flat_parcel_cost", cost_flat)),
         # concentration + top-1% composition (from B2050BIS baseline)
         "top1": round(OFF.get("top1_share_pct", 0), 1), "top10": round(OFF.get("top10_share_pct", 0), 1),

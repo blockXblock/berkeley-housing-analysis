@@ -58,12 +58,20 @@ def main():
                      sqlite3.connect("databases/parcel_facts.db"))
     p = p.merge(pf.drop_duplicates("capn"), on="capn", how="left")
 
-    # ---- the levy math ----
+    # ---- OFFICIAL figures: single source of truth is B2050BIS's reconciliation baseline (CONTRACT: the map
+    #      READS official numbers, never hardcodes them). Fallback to the 5%/30yr assumption if it's absent. ----
+    BASELINE = "data/baselines/measure_u_reconciliation_baseline_2026-08-15.json"
+    OFF = {}
+    if os.path.exists(BASELINE):
+        _b = json.load(open(BASELINE)); OFF = {**_b.get("official", {}), **_b.get("derived", {})}
+
+    # ---- the levy math (today's-base rate reconciled to the baseline; else 5%/30yr) ----
     tot_av = p.TotalNetValue.sum()
-    annual = PRINCIPAL * INTEREST / (1 - (1 + INTEREST) ** -TERM_YEARS)   # level debt service
-    rate = annual / tot_av                                                # $ per $1 AV
+    rate = (OFF["rate_today_100k"] / 1e5) if OFF.get("rate_today_100k") else \
+           (PRINCIPAL * INTEREST / (1 - (1 + INTEREST) ** -TERM_YEARS)) / tot_av
+    annual = rate * tot_av                                                # peak-year debt service on TODAY's base
     n = len(p)
-    p["cost_av"] = (rate * p.TotalNetValue).round(0)                      # ad-valorem annual cost
+    p["cost_av"] = (rate * p.TotalNetValue).round(0)                      # ad-valorem annual cost (today's-base rate)
     cost_flat = round(annual / n)                                          # flat parcel-tax annual cost
     p["delta"] = cost_flat - p.cost_av        # >0: flat costs you MORE (low-AV long-held); <0: flat cheaper
 
@@ -77,10 +85,13 @@ def main():
         "n": n, "med_av": p.cost_av.median(), "p10": p.cost_av.quantile(.10), "p90": p.cost_av.quantile(.90),
         "flat": cost_flat, "ineq": p.cost_av.quantile(.90) / max(p.cost_av.quantile(.10), 1),
         "recent5": recent5,
+        "rate_today": round(OFF.get("rate_today_100k", rate * 1e5), 1),
+        "rate_peak": OFF.get("peak_rate_100k", 0), "rate_avg": OFF.get("avg_rate_100k", 0),
+        "base_mult": round(OFF.get("base_avg_multiple", 0), 2), "peak_fy": OFF.get("peak_first_fy", 0),
     }
     print(f"tax base (total AV): ${stats['base_b']:.2f}B over {n:,} parcels")
-    print(f"$300M / 30yr / 5% -> ${stats['annual_m']:.1f}M annual debt service; "
-          f"ad-valorem rate = ${stats['rate_100k']:.0f} per $100k AV")
+    print(f"today's-base rate (from baseline) = ${stats['rate_100k']:.0f}/$100k -> ${stats['annual_m']:.1f}M/yr peak DS; "
+          f"city advertises ${stats['rate_avg']}/avg, ${stats['rate_peak']}/peak (base {stats['base_mult']}x today)")
     print(f"ad-valorem annual cost: median ${stats['med_av']:.0f}, p10 ${stats['p10']:.0f}, "
           f"p90 ${stats['p90']:.0f}  ({stats['ineq']:.0f}x spread)")
     print(f"flat parcel tax (same $): ${cost_flat}/parcel (uniform)")
@@ -114,41 +125,57 @@ def main():
 .stat{background:#f4f4f4;border-radius:6px;padding:7px 9px;margin-top:8px;font-size:12px}</style></head>
 <body><div id="map"></div>
 <div class="panel"><h3>A new $300M city bond</h3>
-<div class="sub">$300M · 30 yr · 5% → __ANNUAL__M/yr, spread across __BASE__B of assessed value = <b>$__RATE__ per $100,000</b> of assessed value.</div>
+<div class="sub">$300M GO bond (Measure U). On today's <b>$__BASE__B</b> base, peak debt service ≈ $__ANNUAL__M/yr = <b>$__RATE__ per $100,000</b>. The city advertises $__AVG__ avg / $__PEAK__ peak — toggle the rate below.</div>
 <div style="margin:8px 0 2px"><b>Show each parcel by:</b></div>
 <div>
 <button id="b_c" class="on" onclick="mode('c')">Annual cost (ad-valorem bond)</button>
 <button id="b_d" onclick="mode('d')">Flat-tax vs ad-valorem</button>
 <button id="b_t" onclick="mode('t')">Last recorded document (refi/transfer)</button></div>
+<div id="rates" style="margin:6px 0 2px"><span class="sub">rate:</span>
+<button id="r_today" class="on" onclick="setRate(S.rate_today)">today $__RATE__</button>
+<button id="r_peak" onclick="setRate(S.rate_peak)">city peak $__PEAK__</button>
+<button id="r_avg" onclick="setRate(S.rate_avg)">city avg $__AVG__</button></div>
 <div id="legend"></div>
 <div class="stat" id="stat"></div>
 <div class="cap" id="cap"></div></div>
 <script>
 const S=__STATS__;
-let FEATS={features:[]};
+let FEATS={features:[]}, MODE='c', RATE=S.rate_today;
 const usd=x=>'$'+Math.round(x).toLocaleString();
-const COST=['step',['get','c'],'#2c7fb8',200,'#7fcdbb',500,'#ffffb2',1000,'#fd8d3c',2500,'#e31a1c'];
+// cost = assessed value × rate/$100k. v = AV/1000, so cost = v × rate_per_100k / 100. Rate is selectable.
+const costExpr=r=>['step',['*',['get','v'],r/100],'#2c7fb8',200,'#7fcdbb',500,'#ffffb2',1000,'#fd8d3c',2500,'#e31a1c'];
 const DELTA=['step',['get','d'],'#b2182b',-400,'#ef8a62',-100,'#f7f7f7',100,'#67a9cf',400,'#2166ac']; // red=flat costs you MORE
 const TEN=['step',['get','t'],'#e31a1c',5,'#fd8d3c',15,'#ffffb2',30,'#74add1',60,'#4575b4'];
 const LC='<div><span class="sw" style="background:#2c7fb8"></span>&lt;$200/yr</div><div><span class="sw" style="background:#7fcdbb"></span>$200–500</div><div><span class="sw" style="background:#ffffb2"></span>$500–1,000</div><div><span class="sw" style="background:#fd8d3c"></span>$1,000–2,500</div><div><span class="sw" style="background:#e31a1c"></span>$2,500+ /yr</div>';
-const LD='<div><span class="sw" style="background:#2166ac"></span>flat tax cheaper for you (you\\'re high-value)</div><div><span class="sw" style="background:#f7f7f7;border:1px solid #ccc"></span>about the same</div><div><span class="sw" style="background:#b2182b"></span>flat tax costs you MORE (you\\'re long-held/low-value)</div>';
+const LD='<div><span class="sw" style="background:#2166ac"></span>flat tax cheaper for you (high-value)</div><div><span class="sw" style="background:#f7f7f7;border:1px solid #ccc"></span>about the same</div><div><span class="sw" style="background:#b2182b"></span>flat tax costs you MORE (long-held/low-value)</div>';
 const LT='<div><span class="sw" style="background:#e31a1c"></span>&lt;5 yr (recent sale/refi/transfer)</div><div><span class="sw" style="background:#fd8d3c"></span>5–15</div><div><span class="sw" style="background:#ffffb2"></span>15–30</div><div><span class="sw" style="background:#74add1"></span>30–60</div><div><span class="sw" style="background:#4575b4"></span>60+ (no recording in decades)</div>';
-const CAP={
- c:'Ad-valorem bond: each parcel pays rate × its assessed value. Red parcels — recently sold, high assessed value — pay many times what pale long-held parcels pay for the identical bond.',
- d:'Same $300M raised as a FLAT parcel tax ('+usd(S.flat)+'/parcel). Red = you\\'d pay MORE under a flat tax (long-held, low assessed value); blue = you\\'d pay LESS (recent, high value). The flat tax shifts burden onto long-held owners.',
- t:'Years since the LAST RECORDED DOCUMENT (sale, refinance, or transfer) — NOT years owned. The red 2020-22 bulge is the pandemic refinance wave (2811 Benvenue, owned since 1988, shows here as 2021 from a refi/trust recording). Read as recent financial/ownership activity — a strain/leverage signal — not tenure.'};
+const CAPd='Same $300M raised as a FLAT parcel tax ('+usd(S.flat)+'/parcel). Red = you would pay MORE under a flat tax (long-held, low assessed value); blue = LESS (recent, high value). A flat tax shifts burden onto long-held owners.';
+const CAPt='Years since the LAST RECORDED DOCUMENT (sale, refinance, transfer) — NOT years owned. The red 2020-22 bulge is the pandemic refinance wave (2811 Benvenue, owned since 1988, shows as 2021 from a refi/trust recording). A financial-activity signal, not tenure.';
+function rateLbl(){return RATE==S.rate_avg?'city avg $'+S.rate_avg:(RATE==S.rate_peak?'city peak $'+S.rate_peak:"today\\'s base $"+Math.round(S.rate_today));}
+function rateNote(){
+ if(RATE==S.rate_avg) return 'City-advertised AVERAGE ($'+S.rate_avg+'/$100k). It looks low only because it is levied on a projected ~'+S.base_mult.toFixed(1)+'× larger FUTURE base (Prop-13 growth from future sales + new construction). The same debt service on today\\'s base is $'+Math.round(S.rate_today)+'.';
+ if(RATE==S.rate_peak) return 'City-disclosed PEAK ($'+S.rate_peak+'/$100k, first applying FY'+S.peak_fy+'-41). Still levied on a larger future base than today\\'s.';
+ return 'TODAY\\'S-BASE rate ($'+Math.round(S.rate_today)+'/$100k): what current parcels would pay to service the bond now. The city advertises $'+S.rate_avg+' avg / $'+S.rate_peak+' peak — lower only because those assume a ~'+S.base_mult.toFixed(1)+'× larger future base.';
+}
 function stat(m){
- if(m=='c') return '<span class="big">'+usd(S.med_av)+'/yr</span> median parcel<br>'+
-   'range '+usd(S.p10)+' – '+usd(S.p90)+' (a '+Math.round(S.ineq)+'× spread for the same bond)';
- if(m=='d') return '<span class="big">'+usd(S.flat)+'/yr</span> flat, every parcel<br>vs ad-valorem median '+usd(S.med_av)+' — flat tax is uniform by parcel, blind to value';
+ const f=RATE/S.rate_today;
+ if(m=='c') return '<span class="big">'+usd(S.med_av*f)+'/yr</span> median parcel · '+rateLbl()+'<br>range '+usd(S.p10*f)+' – '+usd(S.p90*f)+' ('+Math.round(S.ineq)+'× spread for the same bond)';
+ if(m=='d') return '<span class="big">'+usd(S.flat)+'/yr</span> flat, every parcel<br>vs ad-valorem median '+usd(S.med_av)+' — a flat tax is blind to value';
  return '<span class="big">'+Math.round(S.recent5)+'%</span> of parcels recorded a document in the last 5 years (the refi wave) — a financial-activity signal, <b>not</b> years owned';
 }
-function mode(m){
+function mode(m){ MODE=m;
  for(const k of ['c','d','t']) document.getElementById('b_'+k).className = k==m?'on':'';
- map.setPaintProperty('pts','circle-color', m=='c'?COST:m=='d'?DELTA:TEN);
- document.getElementById('legend').innerHTML = m=='c'?LC:m=='d'?LD:LT;
- document.getElementById('cap').textContent = CAP[m];
+ document.getElementById('rates').style.display = m=='c'?'block':'none';
+ map.setPaintProperty('pts','circle-color', m=='c'?costExpr(RATE):(m=='d'?DELTA:TEN));
+ document.getElementById('legend').innerHTML = m=='c'?LC:(m=='d'?LD:LT);
+ document.getElementById('cap').innerHTML = m=='c'?('Ad-valorem: each parcel pays rate × its assessed value. <i>'+rateNote()+'</i>'):(m=='d'?CAPd:CAPt);
  document.getElementById('stat').innerHTML = stat(m);
+}
+function setRate(r){ RATE=r;
+ document.getElementById('r_today').className=(Math.abs(r-S.rate_today)<1e-9)?'on':'';
+ document.getElementById('r_peak').className=(r==S.rate_peak)?'on':'';
+ document.getElementById('r_avg').className=(r==S.rate_avg)?'on':'';
+ if(MODE=='c') mode('c');
 }
 const map=new maplibregl.Map({container:'map',center:[-122.273,37.871],zoom:12.3,
  style:{version:8,sources:{c:{type:'raster',tiles:['https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'],tileSize:256,attribution:'© OSM © CARTO'}},layers:[{id:'bg',type:'raster',source:'c'}]}});
@@ -156,7 +183,7 @@ map.on('load',()=>{
  map.addSource('el',{type:'geojson',data:__ELB__});
  map.addLayer({id:'elw',type:'line',source:'el',paint:{'line-color':'#111','line-width':1.5,'line-dasharray':[2,2]}});
  map.addSource('p',{type:'geojson',data:'bond_incidence_data.json'});
- map.addLayer({id:'pts',type:'circle',source:'p',paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,1.6,15,4.5],'circle-color':COST,'circle-opacity':0.82}});
+ map.addLayer({id:'pts',type:'circle',source:'p',paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,1.6,15,4.5],'circle-color':costExpr(S.rate_today),'circle-opacity':0.82}});
  fetch('bond_incidence_data.json').then(r=>r.json()).then(d=>{FEATS=d;}); mode('c');
  map.on('click','pts',e=>{const p=e.features[0].properties,a=p.a||'(address unavailable)';
    const t=p.t<0?'unknown':(2026-p.t)+' ('+p.t+' yr ago)';
@@ -167,7 +194,7 @@ map.on('load',()=>{
      +(p.yb?'<br>built: '+p.yb:'')+(p.ub?' &middot; '+p.ub.replace(/_/g,' '):'')
      +'<br>assessed value: '+usd(p.v*1000)
      +'<hr style="margin:5px 0;border:none;border-top:1px solid #ddd">'
-     +'ad-valorem bond: <b>'+usd(p.c)+'/yr</b>'
+     +'ad-valorem bond: <b>'+usd(p.v*RATE/100)+'/yr</b> <span style="color:#777">('+rateLbl()+')</span>'
      +'<br>flat parcel tax: '+usd(S.flat)+'/yr'
      +'<br>last recorded document: '+t
      +'<br><a href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Street view ↗</a>'
@@ -177,7 +204,8 @@ map.on('load',()=>{
 });
 </script></body></html>""".replace("__ELB__", json.dumps(elb)).replace("__STATS__", js_stats) \
         .replace("__ANNUAL__", f"{stats['annual_m']:.1f}").replace("__BASE__", f"{stats['base_b']:.0f}") \
-        .replace("__RATE__", f"{stats['rate_100k']:.0f}")
+        .replace("__RATE__", f"{stats['rate_100k']:.0f}") \
+        .replace("__PEAK__", f"{stats['rate_peak']:.0f}").replace("__AVG__", f"{stats['rate_avg']:.0f}")
 
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     json.dump({"type": "FeatureCollection", "features": feats}, open(DATA, "w"))

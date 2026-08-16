@@ -38,6 +38,10 @@ def main():
                     "UseCode,LatestDocumentDate FROM parcels", db)
     for c in ["Latitude", "Longitude", "Land", "Imps", "TotalNetValue"]:
         a[c] = pd.to_numeric(a[c], errors="coerce")
+    # owner-occupancy proxy: the $7,000 HOMEOWNER'S EXEMPTION is applied only to owner-occupied homes,
+    # so (Land+Imps) - TotalNetValue == 7000 flags owner-occupied. ~0 = rental/investor (or unfiled);
+    # UNDERcounts owner-occupancy (some eligible owners never file). Primary-source, better than mailing addr.
+    a["owner_occupied"] = (((a.Land + a.Imps) - a.TotalNetValue).round() == 7000).astype(int)
     a["capn"] = a.APN.map(canon)
     a["address"] = (a.SitusStree.fillna("").astype(str).str.strip() + " "
                     + a.SitusStr_1.fillna("").astype(str).str.strip()).str.strip()
@@ -69,8 +73,8 @@ def main():
     f["build_year_source"] = f.lm_year.notna().map({True: "landmark", False: "assessor"})
 
     out = (f[["capn", "APN", "address", "Latitude", "Longitude", "owner_name", "owner_type", "UseCode",
-              "use_bucket", "Units", "build_year", "build_year_source", "Land", "Imps", "TotalNetValue",
-              "LatestDocumentDate", "doc_year"]]
+              "use_bucket", "Units", "build_year", "build_year_source", "owner_occupied", "Land", "Imps",
+              "TotalNetValue", "LatestDocumentDate", "doc_year"]]
            .rename(columns={"APN": "apn_raw", "Latitude": "lat", "Longitude": "lon", "UseCode": "use_code",
                             "Units": "units", "Land": "assessed_land", "Imps": "assessed_imps",
                             "TotalNetValue": "assessed_total", "LatestDocumentDate": "last_recorded_doc",

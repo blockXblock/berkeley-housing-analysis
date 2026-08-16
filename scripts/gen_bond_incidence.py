@@ -54,9 +54,10 @@ def main():
     # county-record facts INLINE in the popup. Built by scripts/build_parcel_facts.py.
     from housing_rules import to_canonical_apn
     p["capn"] = p.APN.apply(lambda a: to_canonical_apn(a, "alameda") if pd.notna(a) else None)
-    pf = pd.read_sql("SELECT capn, owner_name, owner_type, use_bucket, build_year FROM parcel_facts",
+    pf = pd.read_sql("SELECT capn, owner_name, owner_type, use_bucket, build_year, owner_occupied FROM parcel_facts",
                      sqlite3.connect("databases/parcel_facts.db"))
     p = p.merge(pf.drop_duplicates("capn"), on="capn", how="left")
+    p["owner_occupied"] = p.owner_occupied.fillna(0).astype(int)
 
     # ---- OFFICIAL figures: single source of truth is B2050BIS's reconciliation baseline (CONTRACT: the map
     #      READS official numbers, never hardcodes them). Fallback to the 5%/30yr assumption if it's absent. ----
@@ -88,6 +89,15 @@ def main():
         "rate_today": round(OFF.get("rate_today_100k", rate * 1e5), 1),
         "rate_peak": OFF.get("peak_rate_100k", 0), "rate_avg": OFF.get("avg_rate_100k", 0),
         "base_mult": round(OFF.get("base_avg_multiple", 0), 2), "peak_fy": OFF.get("peak_first_fy", 0),
+        # who pays: owner-occupied vs rental/other SHARE of the bond (homeowner-exemption proxy)
+        "oo_share": round(100 * p.loc[p.owner_occupied == 1, "cost_av"].sum() / p.cost_av.sum(), 1),
+        "n_parcels": n, "flat_lit": round(OFF.get("flat_parcel_cost", cost_flat)),
+        # concentration + top-1% composition (from B2050BIS baseline)
+        "top1": round(OFF.get("top1_share_pct", 0), 1), "top10": round(OFF.get("top10_share_pct", 0), 1),
+        "bottom50": round(100 - OFF.get("top50_share_pct", 0), 1), "apt_share": round(OFF.get("apt_share_pct", 0), 1),
+        "tier1": (OFF.get("tier_composition_av_pct", {}) or {}).get("1", {}),
+        "tier1_entry": OFF.get("tier_entry_av", {}).get("1", 0) if OFF.get("tier_entry_av") else 0,
+        "tier1_sfr_n": (OFF.get("tier_composition_count", {}) or {}).get("1", {}).get("single_family", 0),
     }
     print(f"tax base (total AV): ${stats['base_b']:.2f}B over {n:,} parcels")
     print(f"today's-base rate (from baseline) = ${stats['rate_100k']:.0f}/$100k -> ${stats['annual_m']:.1f}M/yr peak DS; "
@@ -101,10 +111,10 @@ def main():
     feats = [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [round(x, 5), round(y, 5)]},
               "properties": {"v": int(av / 1000), "c": int(c), "d": int(d), "t": int(t) if pd.notna(t) else -1,
                              "a": a, "own": _s(ow), "ot": _s(otp), "ub": _s(ub),
-                             "yb": int(yb) if pd.notna(yb) else 0}}
-             for x, y, av, c, d, t, a, ow, otp, ub, yb in zip(
+                             "yb": int(yb) if pd.notna(yb) else 0, "oo": int(oo)}}
+             for x, y, av, c, d, t, a, ow, otp, ub, yb, oo in zip(
                  p.Longitude, p.Latitude, p.TotalNetValue, p.cost_av, p.delta, p.tenure, p.addr,
-                 p.owner_name, p.owner_type, p.use_bucket, p.build_year)]
+                 p.owner_name, p.owner_type, p.use_bucket, p.build_year, p.owner_occupied)]
 
     import geopandas as gpd
     el = gpd.read_file("data/reference/berkeley_neighborhoods.geojson").to_crs(4326)
@@ -122,22 +132,28 @@ def main():
 .big{font-size:22px;font-weight:700} .sub{color:#555;font-size:11px}
 #legend{margin-top:8px} .sw{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px;vertical-align:middle}
 .cap{color:#444;font-size:11px;margin-top:8px;line-height:1.35}
-.stat{background:#f4f4f4;border-radius:6px;padding:7px 9px;margin-top:8px;font-size:12px}</style></head>
+.stat{background:#f4f4f4;border-radius:6px;padding:7px 9px;margin-top:8px;font-size:12px}
+.tag{background:#111;color:#fff;border-radius:6px;padding:8px 11px;margin:-2px 0 8px;font-size:12.5px;line-height:1.35}
+.who{background:#fff7ec;border:1px solid #f0d8b0;border-radius:6px;padding:8px 10px;margin-top:8px;font-size:11.5px;line-height:1.4}</style></head>
 <body><div id="map"></div>
-<div class="panel"><h3>A new $300M city bond</h3>
-<div class="sub">$300M GO bond (Measure U). On today's <b>$__BASE__B</b> base, peak debt service ≈ $__ANNUAL__M/yr = <b>$__RATE__ per $100,000</b>. The city advertises $__AVG__ avg / $__PEAK__ peak — toggle the rate below.</div>
-<div style="margin:8px 0 2px"><b>Show each parcel by:</b></div>
+<div class="panel">
+<div class="tag">🔎 Every dot is a parcel — click it for its <b>property tax, owner, and bond cost</b>. Find where you live.</div>
+<h3>Measure U — a new $300M city bond</h3>
+<div class="sub">Levied on <b>$__BASE__B</b> of assessed value; peak debt service ≈ $__ANNUAL__M/yr. The city advertises <b>$__AVG__ per $100k</b> average; on <i>today's</i> base the same bond is <b>$__RATE__</b>. Costs below are the actual annual dollars per parcel — toggle the rate to see the city's figures.</div>
+<div style="margin:8px 0 2px"><b>Color each parcel by:</b></div>
 <div>
-<button id="b_c" class="on" onclick="mode('c')">Annual cost (ad-valorem bond)</button>
-<button id="b_d" onclick="mode('d')">Flat-tax vs ad-valorem</button>
-<button id="b_t" onclick="mode('t')">Last recorded document (refi/transfer)</button></div>
+<button id="b_c" class="on" onclick="mode('c')">Annual $ cost</button>
+<button id="b_o" onclick="mode('o')">Owner-occupied vs rental</button>
+<button id="b_d" onclick="mode('d')">Flat vs ad-valorem</button>
+<button id="b_t" onclick="mode('t')">Recorded-doc recency</button></div>
 <div id="rates" style="margin:6px 0 2px"><span class="sub">rate:</span>
 <button id="r_today" class="on" onclick="setRate(S.rate_today)">today $__RATE__</button>
 <button id="r_peak" onclick="setRate(S.rate_peak)">city peak $__PEAK__</button>
 <button id="r_avg" onclick="setRate(S.rate_avg)">city avg $__AVG__</button></div>
 <div id="legend"></div>
 <div class="stat" id="stat"></div>
-<div class="cap" id="cap"></div></div>
+<div class="cap" id="cap"></div>
+<div class="who" id="who"></div></div>
 <script>
 const S=__STATS__;
 let FEATS={features:[]}, MODE='c', RATE=S.rate_today;
@@ -151,6 +167,9 @@ const LD='<div><span class="sw" style="background:#2166ac"></span>flat tax cheap
 const LT='<div><span class="sw" style="background:#e31a1c"></span>&lt;5 yr (recent sale/refi/transfer)</div><div><span class="sw" style="background:#fd8d3c"></span>5–15</div><div><span class="sw" style="background:#ffffb2"></span>15–30</div><div><span class="sw" style="background:#74add1"></span>30–60</div><div><span class="sw" style="background:#4575b4"></span>60+ (no recording in decades)</div>';
 const CAPd='Same $300M raised as a FLAT parcel tax ('+usd(S.flat)+'/parcel). Red = you would pay MORE under a flat tax (long-held, low assessed value); blue = LESS (recent, high value). A flat tax shifts burden onto long-held owners.';
 const CAPt='Years since the LAST RECORDED DOCUMENT (sale, refinance, transfer) — NOT years owned. The red 2020-22 bulge is the pandemic refinance wave (2811 Benvenue, owned since 1988, shows as 2021 from a refi/trust recording). A financial-activity signal, not tenure.';
+const OO=['match',['get','oo'],1,'#1a9850','#e34a33'];
+const LO='<div><span class="sw" style="background:#1a9850"></span>owner-occupied (has $7k homeowner\\'s exemption)</div><div><span class="sw" style="background:#e34a33"></span>rental / non-owner-occupied / commercial</div>';
+const CAPo='Owner-occupied (green) vs everything else (red), flagged by the $7,000 homeowner\\'s exemption — a FLOOR (some owner-occupiers never file). Tax on rentals & commercial is largely passed through to tenants, so renters bear it indirectly.';
 function rateLbl(){return RATE==S.rate_avg?'city avg $'+S.rate_avg:(RATE==S.rate_peak?'city peak $'+S.rate_peak:"today\\'s base $"+Math.round(S.rate_today));}
 function rateNote(){
  if(RATE==S.rate_avg) return 'City-advertised AVERAGE ($'+S.rate_avg+'/$100k). It looks low only because it is levied on a projected ~'+S.base_mult.toFixed(1)+'× larger FUTURE base (Prop-13 growth from future sales + new construction). The same debt service on today\\'s base is $'+Math.round(S.rate_today)+'.';
@@ -160,15 +179,16 @@ function rateNote(){
 function stat(m){
  const f=RATE/S.rate_today;
  if(m=='c') return '<span class="big">'+usd(S.med_av*f)+'/yr</span> median parcel · '+rateLbl()+'<br>range '+usd(S.p10*f)+' – '+usd(S.p90*f)+' ('+Math.round(S.ineq)+'× spread for the same bond)';
- if(m=='d') return '<span class="big">'+usd(S.flat)+'/yr</span> flat, every parcel<br>vs ad-valorem median '+usd(S.med_av)+' — a flat tax is blind to value';
+ if(m=='o') return '<span class="big">'+S.oo_share+'%</span> of the bond falls on owner-occupied homes<br>the other '+(100-S.oo_share).toFixed(1)+'% is on rentals & commercial — largely tenant-borne via pass-through';
+ if(m=='d') return '<span class="big">'+usd(S.flat_lit)+'/yr</span> flat, every parcel<br>vs ad-valorem median '+usd(S.med_av)+' — a flat tax is blind to value';
  return '<span class="big">'+Math.round(S.recent5)+'%</span> of parcels recorded a document in the last 5 years (the refi wave) — a financial-activity signal, <b>not</b> years owned';
 }
 function mode(m){ MODE=m;
- for(const k of ['c','d','t']) document.getElementById('b_'+k).className = k==m?'on':'';
+ for(const k of ['c','o','d','t']) document.getElementById('b_'+k).className = k==m?'on':'';
  document.getElementById('rates').style.display = m=='c'?'block':'none';
- map.setPaintProperty('pts','circle-color', m=='c'?costExpr(RATE):(m=='d'?DELTA:TEN));
- document.getElementById('legend').innerHTML = m=='c'?LC:(m=='d'?LD:LT);
- document.getElementById('cap').innerHTML = m=='c'?('Ad-valorem: each parcel pays rate × its assessed value. <i>'+rateNote()+'</i>'):(m=='d'?CAPd:CAPt);
+ map.setPaintProperty('pts','circle-color', m=='c'?costExpr(RATE):m=='o'?OO:m=='d'?DELTA:TEN);
+ document.getElementById('legend').innerHTML = m=='c'?LC:m=='o'?LO:m=='d'?LD:LT;
+ document.getElementById('cap').innerHTML = m=='c'?('Ad-valorem: each parcel pays rate × its assessed value. <i>'+rateNote()+'</i>'):m=='o'?CAPo:m=='d'?CAPd:CAPt;
  document.getElementById('stat').innerHTML = stat(m);
 }
 function setRate(r){ RATE=r;
@@ -177,6 +197,9 @@ function setRate(r){ RATE=r;
  document.getElementById('r_avg').className=(r==S.rate_avg)?'on':'';
  if(MODE=='c') mode('c');
 }
+(function(){ var w='<b>Who actually pays.</b> The bond is levied on <b>'+S.n_parcels.toLocaleString()+' taxable parcels</b> — not on Berkeley\\'s ~124,000 residents. Roughly 45,000 are UC students who rent or live in dorms and own no parcel; renters bear property tax only indirectly, through rent. The top 10% of parcels carry <b>'+S.top10+'%</b> of the bond; the bottom half pays <b>'+S.bottom50+'%</b>.';
+ if(S.tier1&&S.tier1.apartments_mixed!==undefined) w+=' And the biggest payers are <b>not homeowners</b>: the top 1% (parcels over $'+(S.tier1_entry/1e6).toFixed(1)+'M assessed) are <b>'+Math.round(S.tier1.apartments_mixed)+'% apartment buildings, '+Math.round(S.tier1.commercial_industrial)+'% commercial, '+Math.round(S.tier1.institutional)+'% institutional</b> — just '+S.tier1_sfr_n+' single-family homes. Apartments alone are <b>'+S.apt_share+'%</b> of the bond, passed through to renters.';
+ document.getElementById('who').innerHTML=w; })();
 const map=new maplibregl.Map({container:'map',center:[-122.273,37.871],zoom:12.3,
  style:{version:8,sources:{c:{type:'raster',tiles:['https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'],tileSize:256,attribution:'© OSM © CARTO'}},layers:[{id:'bg',type:'raster',source:'c'}]}});
 map.on('load',()=>{
@@ -192,10 +215,11 @@ map.on('load',()=>{
      '<b>'+a+'</b>'
      +(p.own?'<br>owner: '+p.own+(p.ot?' <span style="color:#777">('+p.ot+')</span>':''):'')
      +(p.yb?'<br>built: '+p.yb:'')+(p.ub?' &middot; '+p.ub.replace(/_/g,' '):'')
+     +(p.oo?'<br><span style="color:#1a9850">owner-occupied</span> (homeowner\\'s exemption)':'<br><span style="color:#c0392b">rental / non-owner-occupied</span>')
      +'<br>assessed value: '+usd(p.v*1000)
      +'<hr style="margin:5px 0;border:none;border-top:1px solid #ddd">'
-     +'ad-valorem bond: <b>'+usd(p.v*RATE/100)+'/yr</b> <span style="color:#777">('+rateLbl()+')</span>'
-     +'<br>flat parcel tax: '+usd(S.flat)+'/yr'
+     +'your Measure U bond cost: <b>'+usd(p.v*RATE/100)+'/yr</b> <span style="color:#777">('+rateLbl()+')</span>'
+     +'<br>if it were a flat parcel tax: '+usd(S.flat_lit)+'/yr'
      +'<br>last recorded document: '+t
      +'<br><a href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Street view ↗</a>'
      ).addTo(map);});

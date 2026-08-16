@@ -4,6 +4,23 @@
 
 ---
 
+## 2026-08-16 [maps] — ⚖️ DECISION (provenance, NOT a bug): publish ALL owner names on the public bond map
+**John's deliberate, informed decision — do NOT "fix" this in a future session.** The public bond map
+(`docs/maps/bond_incidence.html` + `_data.json`) publishes the owner NAME for every parcel, including
+**~19,060 individuals and ~6,300 family trusts (personal names), and 11,853 named individuals who are also
+owner-occupied** (name + home address + lives-here). John chose this with all three options and the counts
+in front of him, and the §6254.21 asymmetry (Alameda redacts assessee names online; we do not) — on the
+basis that the **SF Chronicle publishes owner names for every CA parcel statewide** (Regrid;
+sfchronicle.com/projects/2025/ca-property-map/), so it is established data-journalism practice, and the maps
+are framed as a **neutral tool**, not advocacy. A future session finding name+address pairs in a served file
+must NOT assume it's an oversight and redact it. **Reversal is a dormant one-flag switch**
+(`REDACT_PERSONAL_NAMES=False` in `gen_bond_incidence.py`; set True → name-shape-redacts personal names,
+keeps corporate/institutional) for an individual opt-out request — a config change, not a re-derivation.
+Advocacy stays separate & private (see the neutral-vs-advocacy split): `docs/measure-u` was relocated to
+`team/measure-u` (out of the public deploy); the negotiation briefing + team site ship as private Claude
+Artifacts. Owner-occupied SHARE (42.5%) is type-level (no names) and the map now READS it from the gated
+baseline key `owner_occupied_share_pct`.
+
 ## 2026-08-15 — ✅ Compensation: Berkeley vs the 13 other Alameda cities (GCC 2024)
 **Answers John's staffing/pay/overtime/pension question. Result CUTS AGAINST the "Berkeley overpays" framing — do not build an argument on it. Committed on `dev`.**
 

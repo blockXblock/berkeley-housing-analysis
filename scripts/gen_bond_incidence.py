@@ -36,6 +36,23 @@ INTEREST = 0.05
 OUT = "docs/maps/bond_incidence.html"
 DATA = "docs/maps/bond_incidence_data.json"   # streamed sibling (serve; file:// blocks the fetch)
 
+# ---- Owner-name publication ----
+# DECISION 2026-08-16 (John, informed — see PROGRESS.md): PUBLISH ALL owner names, Chronicle-style, on the
+# public bond map. Individual names (incl. ~6,300 family trusts) and corporate/institutional names all ship.
+# This flag is a DORMANT one-switch reversal: set True to name-shape-redact PERSONAL names (keeping
+# corporate/institutional), e.g. to honor an individual opt-out — a config change, not a re-derivation.
+REDACT_PERSONAL_NAMES = False
+import re
+_ENTITY = re.compile(r"\b(LLC|L\.L\.C|INC|CORP|CORPORATION|COMPANY|LTD|LP|L\.P|LLP|PARTNER|ASSOC|PROPERT|HOLDING|"
+                     r"VENTURE|CAPITAL|REALTY|MANAGEMENT|INVEST|ENTERPRISE|GROUP|DEVELOPMENT|UNIVERSITY|REGENTS|"
+                     r"CITY OF|COUNTY|STATE OF|CHURCH|SCHOOL|DISTRICT|FOUNDATION|CONGREGATION|TEMPLE|SOCIETY|"
+                     r"INSTITUTE|COOPERATIVE|CO-OP|MINISTRIES|DIOCESE|PARISH|HOUSING AUTH|AUTHORITY|COMMISSION|"
+                     r"HOSPITAL|BANK|ASSN|ASSOCIATION|NATIONAL|FEDERAL|& CO)\b")
+def _display_owner(name):
+    if not REDACT_PERSONAL_NAMES or not name:
+        return name
+    return name if _ENTITY.search(str(name).upper()) else "(individual owner — name withheld)"
+
 def main():
     db = sqlite3.connect("databases/berkeley.db")
     p = pd.read_sql("SELECT APN,Latitude,Longitude,Land,Imps,TotalNetValue,SitusStree,SitusStr_1,"
@@ -113,7 +130,7 @@ def main():
     def _s(v): return "" if pd.isna(v) else str(v)
     feats = [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [round(x, 5), round(y, 5)]},
               "properties": {"v": int(av / 1000), "c": int(c), "d": int(d), "t": int(t) if pd.notna(t) else -1,
-                             "a": a, "own": _s(ow), "ot": _s(otp), "ub": _s(ub),
+                             "a": a, "own": _s(_display_owner(ow)), "ot": _s(otp), "ub": _s(ub),
                              "yb": int(yb) if pd.notna(yb) else 0, "oo": int(oo)}}
              for x, y, av, c, d, t, a, ow, otp, ub, yb, oo in zip(
                  p.Longitude, p.Latitude, p.TotalNetValue, p.cost_av, p.delta, p.tenure, p.addr,

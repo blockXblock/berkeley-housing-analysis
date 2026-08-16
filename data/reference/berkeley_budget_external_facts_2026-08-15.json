@@ -1,0 +1,83 @@
+{
+  "as_of": "2026-08-15",
+  "what": "City of Berkeley citywide (all-funds) budget figures for the measure-u site Sankeys. EXTERNAL FACTS with provenance (JN-L pattern) — published numbers, not derivations. Two vintages, deliberately NOT combined into one flow: revenues = FY2025 ACTUALS (the only citywide revenue-by-TYPE source the city publishes, ACFR); spending = FY2027 ADOPTED budget.",
+  "sources": {
+    "ACFR": "Annual Comprehensive Financial Report FY2025 (year ended 6/30/2025), https://berkeleyca.gov/sites/default/files/2026-01/annual-comprehensive-financial-report-fy2025.pdf",
+    "ADOPT": "2026-06-23 Council Special Item 01, Adoption of FY 2027 and 2028 Biennial Budget + FY 2027-2031 CIP (Exhibit A financial summaries), https://berkeleyca.gov/sites/default/files/2026-06/2026-06-23%20Special%20Item%2001%20Adoption%20of%20Fiscal%20Years%202027%20and%202028.pdf",
+    "PRES": "2026-05-14 Budget & Finance Policy Committee, Proposed FY 2027 & FY 2028 Biennial Budget presentation, https://berkeleyca.gov/sites/default/files/legislative-body-meeting-attachments/5.14.26%20Item2%20FY%2027%20-%20FY%2028%20PROPOSED%20BIENNIAL%20BUDGET%20-%20Presentation.pdf",
+    "BOOK": "FY 2025 & 2026 Adopted Biennial Budget book, https://berkeleyca.gov/sites/default/files/documents/FY-2025-2026-Proposed-Biennial-Budget.pdf",
+    "JAN22": "2026-01-22 BFPC FY 2027 and FY 2028 Budget Update slides, https://berkeleyca.gov/sites/default/files/legislative-body-meeting-attachments/Item%2002%20BFPC-FY2728%20Budget%20Update_Final_01.22.26.pdf"
+  },
+  "revenues_fy2025_actual": {
+    "_source": "ACFR MD&A Statement of Activities summary, pp.11-12. Citywide = governmental + business-type activities. Total $619,580,456. The FY27/28 budget publishes NO all-funds revenue-by-type table (only by fund type) — FY2025 actuals are the latest citywide by-type picture. BSEP is a school-district tax and is NOT in city statements. Parking fines are not broken out citywide (GF budgets ~$6.65M/yr, inside charges/other).",
+    "total": 619580456,
+    "property_tax_general": 148363839,
+    "property_tax_debt_service": 18134546,
+    "parcel_tax_library": 26466731,
+    "parcel_tax_parks": 18689255,
+    "parcel_tax_fire": 16245151,
+    "parcel_tax_paramedic": 3967274,
+    "sales_tax": 19962225,
+    "utility_users_tax": 19446965,
+    "business_license_tax": 31576067,
+    "transient_occupancy_tax": 7868392,
+    "other_taxes": 31479208,
+    "charges_for_services": 175162915,
+    "grants_operating": 44337052,
+    "grants_capital": 13251223,
+    "state_subventions": 390334,
+    "investment_earnings": 41326795,
+    "miscellaneous": 2063021
+  },
+  "spend_fy2027_adopted": {
+    "_source": "ADOPT Exhibit A: by category PDF p.139 (PRES slide 35); by department PDF p.137 (PRES slide 33). All-funds net budget FY2027 = $905,190,026 (PRES slide-35 header typo '$905,190,206' — table total is correct and consistent).",
+    "total": 905190026,
+    "by_category": {
+      "salaries_benefits": 411465568,
+      "internal_services_all_others": 231752638,
+      "services_materials": 172184300,
+      "capital_outlay": 89787521
+    },
+    "by_department": {
+      "Public Works": 234458957,
+      "Health, Housing & Community Services": 165498829,
+      "Police": 106898286,
+      "Non-Departmental": 98535848,
+      "Fire": 79042106,
+      "Parks, Recreation & Waterfront": 52169781,
+      "Planning and Development": 34391855,
+      "Library": 34365131,
+      "City Manager": 23081446,
+      "Information Technology": 19978807,
+      "City Attorney": 11740854,
+      "Finance": 11585018,
+      "Rent Board": 9579554,
+      "Mayor and Council": 7542519,
+      "Human Resources": 6700330,
+      "City Clerk": 4387560,
+      "City Auditor": 4014900,
+      "Office of the Director of Police Accountability": 1218244
+    }
+  },
+  "pensions": {
+    "_source": "ACFR Schedule of Plan Contributions, pp.155-157 (FY2025 actual employer contributions = actuarially determined); rates p.110; net pension liability MD&A p.10. GF-only budget figures: JAN22 slide 9. No citywide FY27 pension dollar line is published.",
+    "calpers_fy2025_actual": {"miscellaneous": 41867118, "fire": 13425919, "police": 22585256, "total": 77878293},
+    "employer_rates_pct_of_payroll": {"miscellaneous": 38.23, "fire": 57.21, "police": 87.04},
+    "net_pension_liability_2025_06_30": 686433892,
+    "gf_pension_budget_fy2027": 58300000
+  },
+  "enterprise_funds_fy2026_adopted": {
+    "_source": "BOOK Summary by Funding Source, book pp.44-52 (FY2026 adopted; FY27 enterprise detail not re-published in the adoption exhibits). Inside Public Works except Marina (PRW) and Permit Center (Planning).",
+    "zero_waste": 60948736,
+    "sanitary_sewer": 32870225,
+    "permit_service_center": 26725504,
+    "parking_meter": 9920570,
+    "marina": 8689864,
+    "clean_storm_water": 7947976
+  },
+  "debt_service_funds_expenditure_fy2026": 13363356,
+  "ab8_allocation_of_1pct": {
+    "_source": "City 32.57% exact (City revenue memo, AB-8 share); schools/county/special approximate from AB-8 structure (Alameda Auditor-Controller glossary). Same facts as JN-L baseline.",
+    "city": 0.3257, "schools_incl_eraf": 0.45, "county": 0.15, "special_districts": 0.0743
+  }
+}

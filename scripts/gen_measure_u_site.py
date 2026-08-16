@@ -45,6 +45,12 @@ apt_share = D["apt_share_pct"]
 # tier composition (who the top tiers are)
 tc, ct, te = D["tier_composition_av_pct"], D["tier_composition_count"], D["tier_entry_av"]
 
+# citywide budget external facts (Sankeys) — published figures w/ provenance, JN-L pattern
+BUDGET_FACTS = "data/reference/berkeley_budget_external_facts_2026-08-15.json"
+BF = json.load(open(BUDGET_FACTS))
+REV, SP = BF["revenues_fy2025_actual"], BF["spend_fy2027_adopted"]
+PEN, ENT = BF["pensions"], BF["enterprise_funds_fy2026_adopted"]
+
 # citywide tax structure (tax_incidence session's block, mirrored into this baseline)
 TI = D["tax_incidence"]
 psf = TI["parcel_tax_per_sqft_total"]; flat_pt = TI["parcel_tax_flat_per_parcel"]
@@ -139,6 +145,96 @@ wedge_cap = 2.0 / g_avg * 100
 t1, c1 = tc["1"], ct["1"]
 t25, c25 = tc["25"], ct["25"]
 
+# ---- Sankey data (all values from the external-facts file; residuals derived) ----
+BLUE, ORANGE, GREEN, GRAY, INK, MUT = "#3b6fb6", "#e07b39", "#2e7d5b", "#8a8f98", "#30343b", "#a5a9b0"
+M = lambda x: x / 1e6
+
+def sankey(groups, total_label, total, reverse=False):
+    """groups: [(group_label, color, [(item_label, value), ...])]. Singleton groups render
+    as one node. reverse=False: items->group->total; True: total->group->items."""
+    nodes, colors, links = [], [], []
+    def add(lab, col):
+        nodes.append(lab); colors.append(col); return len(nodes) - 1
+    t = add(total_label, INK)
+    for glab, gcol, items in groups:
+        gsum = sum(v for _, v in items)
+        g = add(f"{glab} — ${M(gsum):,.0f}M", gcol)
+        links.append((g, t, gsum) if not reverse else (t, g, gsum))
+        if len(items) > 1:
+            for ilab, v in items:
+                i = add(f"{ilab} ${M(v):,.0f}M", gcol)
+                links.append((i, g, v) if not reverse else (g, i, v))
+    return {"node": {"label": nodes, "color": colors, "pad": 12, "thickness": 14,
+                     "line": {"width": 0}},
+            "link": {"source": [a for a, _, _ in links], "target": [b for _, b, _ in links],
+                     "value": [round(M(v), 2) for _, _, v in links],
+                     "color": "rgba(138,143,152,.28)"}}
+
+rev_listed = sum(v for k, v in REV.items() if k not in ("total", "_source"))
+rev_resid = REV["total"] - rev_listed
+rev_groups = [
+    ("Property taxes on VALUE", BLUE,
+     [("General 1% share", REV["property_tax_general"]), ("Voter debt levies", REV["property_tax_debt_service"])]),
+    ("Property taxes on SIZE (parcel taxes)", ORANGE,
+     [("Library", REV["parcel_tax_library"]), ("Parks", REV["parcel_tax_parks"]),
+      ("Fire / EMS", REV["parcel_tax_fire"]), ("Paramedic", REV["parcel_tax_paramedic"])]),
+    ("Other taxes", GRAY,
+     [("Business license", REV["business_license_tax"]), ("Sales tax", REV["sales_tax"]),
+      ("Utility users", REV["utility_users_tax"]), ("Hotel tax", REV["transient_occupancy_tax"]),
+      ("Other taxes", REV["other_taxes"])]),
+    ("Fees & charges for services", GREEN, [("Fees & charges", REV["charges_for_services"])]),
+    ("Grants & intergovernmental", MUT,
+     [("Operating grants", REV["grants_operating"]), ("Capital grants", REV["grants_capital"]),
+      ("State subventions", REV["state_subventions"])]),
+    ("Interest & investment earnings", MUT, [("Interest", REV["investment_earnings"])]),
+    ("Miscellaneous & other", MUT, [("Misc", REV["miscellaneous"] + rev_resid)]),
+]
+rev_sankey = sankey(rev_groups, f"All city revenues FY2025 — ${M(REV['total']):,.0f}M", REV["total"])
+
+cat, dep = SP["by_category"], SP["by_department"]
+pen_total = PEN["calpers_fy2025_actual"]["total"]
+top10 = ["Public Works", "Health, Housing & Community Services", "Police", "Non-Departmental",
+         "Fire", "Parks, Recreation & Waterfront", "Planning and Development", "Library",
+         "City Manager", "Information Technology"]
+small_sum = sum(v for k, v in dep.items() if k not in top10)
+pw = dep["Public Works"]
+pw_other = pw - ENT["zero_waste"] - ENT["sanitary_sewer"]
+spend_left = [
+    ("Salaries & benefits", BLUE,
+     [("Wages & other benefits (approx.)", cat["salaries_benefits"] - pen_total),
+      ("Pensions — CalPERS employer (FY25 actual)", pen_total)]),
+    ("Internal services, transfers, debt service & other", GRAY,
+     [("Internal & other", cat["internal_services_all_others"])]),
+    ("Services & materials", MUT, [("Services & materials", cat["services_materials"])]),
+    ("Capital outlay", GREEN, [("Capital", cat["capital_outlay"])]),
+]
+spend_right = [
+    ("Public Works", ORANGE,
+     [("Zero Waste (FY26 adopted)", ENT["zero_waste"]), ("Sanitary sewer (FY26 adopted)", ENT["sanitary_sewer"]),
+      ("Streets, facilities, engineering & other", pw_other)]),
+    ("Health, Housing & Community Services", GREEN, [("HHCS", dep["Health, Housing & Community Services"])]),
+    ("Police", BLUE, [("Police", dep["Police"])]),
+    ("Non-Departmental (transfers, debt service, insurance)", GRAY, [("Non-Dept", dep["Non-Departmental"])]),
+    ("Fire", BLUE, [("Fire", dep["Fire"])]),
+    ("Parks, Recreation & Waterfront", GREEN, [("PRW", dep["Parks, Recreation & Waterfront"])]),
+    ("Planning + Library + City Manager + IT", MUT,
+     [("Planning", dep["Planning and Development"]), ("Library", dep["Library"]),
+      ("City Manager", dep["City Manager"]), ("IT", dep["Information Technology"])]),
+    ("8 smaller departments", MUT, [("Smaller depts", small_sum)]),
+]
+total_lab = f"FY2027 all-funds budget — ${M(SP['total']):,.0f}M"
+sk_l = sankey(spend_left, total_lab, SP["total"])
+sk_r = sankey(spend_right, total_lab, SP["total"], reverse=True)
+# merge the two halves around the shared total node (index 0 in each)
+off = len(sk_l["node"]["label"]) - 1
+spend_sankey = {"node": {"label": sk_l["node"]["label"] + sk_r["node"]["label"][1:],
+                         "color": sk_l["node"]["color"] + sk_r["node"]["color"][1:],
+                         "pad": 12, "thickness": 14, "line": {"width": 0}},
+                "link": {"source": sk_l["link"]["source"] + [s if s == 0 else s + off for s in sk_r["link"]["source"]],
+                         "target": sk_l["link"]["target"] + [t2 if t2 == 0 else t2 + off for t2 in sk_r["link"]["target"]],
+                         "value": sk_l["link"]["value"] + sk_r["link"]["value"],
+                         "color": "rgba(138,143,152,.28)"}}
+
 html = f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Measure U, Examined — Berkeley's $300M Infrastructure Bond</title>
@@ -155,10 +251,13 @@ claims; measures the measure against the City's own <b>Vision&nbsp;2050</b> fram
 conditions under which the Vision&nbsp;2050 professionals support it. Every figure is derived from primary
 sources — the resolution, the Tax Rate Statement, {TI['_evidence'].split(';')[0]}, and the
 {n:,}-parcel assessor roll — by a re-runnable, gate-checked pipeline.</p>
+<p class="lede" style="margin-top:10px;font-weight:600"><a href="#maps">Explore Berkeley parcel by parcel</a> —
+these maps show the property tax, ownership, and Measure U bond impact for every parcel.
+<b>Find where you live.</b></p>
 </div></header>
 
 <nav><div class="wrap">
-<a href="#taxes-now">Taxes today</a><a href="#measure">The measure</a><a href="#rates">One levy, three rates</a>
+<a href="#taxes-now">Taxes today</a><a href="#budget">City budget</a><a href="#measure">The measure</a><a href="#rates">One levy, three rates</a>
 <a href="#burden">Who pays</a><a href="#arguments">The arguments</a><a href="#v2050">Vision 2050</a>
 <a href="#oversight">Oversight</a><a href="#timing">Timing</a><a href="#maps">Maps</a><a href="#method">Method</a>
 </div></nav>
@@ -208,6 +307,38 @@ channel alone varies {disp['av']:.0f}× between similar homes; the size channel 
 {disp['flat']:.1f}×; the total bill varies {disp['total']:.1f}×. <b>The two channels pull in opposite
 directions — and Berkeley leans on the size channel harder than any other Alameda County city.</b> Any honest
 debate about a new tax has to say which channel it uses and who that lands on. Measure U uses channel 1.</div>
+</div></section>
+
+<section id="budget"><div class="wrap">
+<h2>The whole city budget, in two pictures</h2>
+<p class="sub">Measure U lands inside a much bigger money picture. First: every dollar the City took in during
+FY2025 — the most recent year Berkeley publishes citywide revenue by <i>type</i>. Second: every dollar of the
+newly adopted FY2027 budget, read two ways at once. Hover any band for the amount.</p>
+<h3>Where the money comes from — ${M(REV['total']):,.0f}M (FY2025 actual)</h3>
+<div id="sankeyRev" style="height:500px;max-width:1020px"></div>
+<div class="note"><b>How to read this honestly.</b> These are FY2025 <i>actuals</i> — the FY27/28 budget
+publishes citywide revenue only by fund, not by type. Note the two property channels from
+<a href="#taxes-now">the opening section</a> arriving as real money: value-based taxes
+(${M(REV['property_tax_general']+REV['property_tax_debt_service']):,.0f}M) and size-based parcel taxes
+(${M(REV['parcel_tax_library']+REV['parcel_tax_parks']+REV['parcel_tax_fire']+REV['parcel_tax_paramedic']):,.0f}M).
+Three things the picture can't show: the county splits property owners' 1% base tax <i>before</i> any of this
+(roughly 33% city / 45% schools / 15% county / 7% special districts — “county services” are funded upstream
+of the city budget); parking fines (~$6.7M/yr budgeted) aren't broken out citywide and sit inside
+fees/other; and BSEP — the largest parcel tax on a Berkeley bill — is a school-district tax that never
+enters the city's books. FY2025's interest earnings were unusually strong.</div>
+<h3>Where the money goes — ${M(SP['total']):,.0f}M (FY2027 adopted)</h3>
+<div id="sankeySpend" style="height:560px;max-width:1020px"></div>
+<div class="note"><b>How to read this honestly.</b> The two sides of the center node are the City's two
+separately-published breakdowns of the <i>same</i> ${M(SP['total']):,.0f}M — by spending category (left) and
+by department (right). Berkeley does not publish the cross-table (which department's dollars are salaries vs
+materials), so no band crosses the center. The pension slice is the FY2025 <i>actual</i> citywide CalPERS
+employer payment (${M(pen_total):,.0f}M — at rates now running 38% of payroll for miscellaneous employees,
+57% for fire, 87% for police, against a net pension liability of ${PEN['net_pension_liability_2025_06_30']/1e6:,.0f}M);
+the FY27 figure will be larger, but only a General-Fund number (${PEN['gf_pension_budget_fy2027']/1e6:,.0f}M) is
+budgeted. Zero Waste and sanitary-sewer figures are FY2026 adopted (FY27 enterprise detail isn't republished).
+Debt-service interest sits inside Non-Departmental (~${BF['debt_service_funds_expenditure_fy2026']/1e6:,.0f}M
+ran through dedicated debt-service funds in FY26). Measure U's future debt service would appear as a new
+voter-debt levy on the revenue side and inside Non-Departmental here.</div>
 </div></section>
 
 <section id="measure"><div class="wrap">
@@ -450,9 +581,9 @@ over 25–30 years; flags public tax fatigue</li>
 from file://). Click any dot for the parcel's facts.</p>
 <div class="cards">
 <a class="card" href="../maps/bond_incidence.html"><h4>What the bond costs each parcel</h4>
-<p>All {n:,} assessed parcels: annual ad-valorem cost at the official rates, flat-tax comparison, and
-recorded-document recency. The incidence argument, made spatial — the heaviest payers are the newest
-buildings and sales.</p>
+<p>Every dot is a parcel — click it for its property tax, owner, and bond cost in actual dollars per year at
+the official rates, plus a flat-tax comparison and an owner-occupied-vs-rental view. The incidence argument,
+made spatial — the heaviest payers are the newest buildings and sales. Find where you live.</p>
 <span class="go">Open the bond-incidence map →</span></a>
 <a class="card" href="../maps/berkeley_construction_timelapse.html"><h4>Berkeley, built over time</h4>
 <p>Every structure at its build year (landmark-corrected), as a time-lapse — the 75 years in which the
@@ -491,7 +622,17 @@ schedule.</li>
 <footer><div class="wrap">Measure U, Examined · berkeleybuild.com · built from public records, August 2026 ·
 figures derived from the {n:,}-parcel Alameda assessor roll, the county tax-rate tables, and the City's own
 filed documents.</div></footer>
+__SANKEY_SCRIPTS__
 </body></html>"""
+
+SANKEY_JS = """<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<script>
+const SK_LAYOUT={font:{family:'system-ui',size:12,color:'#30343b'},paper_bgcolor:'rgba(0,0,0,0)',margin:{l:8,r:8,t:8,b:8}};
+Plotly.newPlot('sankeyRev',[Object.assign({type:'sankey',orientation:'h',valueformat:',.1f',valuesuffix:'M'},__REV__)],SK_LAYOUT,{displayModeBar:false,responsive:true});
+Plotly.newPlot('sankeySpend',[Object.assign({type:'sankey',orientation:'h',valueformat:',.1f',valuesuffix:'M'},__SPEND__)],SK_LAYOUT,{displayModeBar:false,responsive:true});
+</script>"""
+html = html.replace("__SANKEY_SCRIPTS__",
+                    SANKEY_JS.replace("__REV__", json.dumps(rev_sankey)).replace("__SPEND__", json.dumps(spend_sankey)))
 
 os.makedirs(os.path.dirname(OUT), exist_ok=True)
 open(OUT, "w").write(html)

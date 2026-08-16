@@ -62,10 +62,13 @@ claims; measures the measure against the City's own <b>Vision&nbsp;2050</b> fram
 conditions under which the Vision&nbsp;2050 professionals support it. Every figure is derived from primary
 sources — the resolution, the Tax Rate Statement, 37 real bills, 111/111 line-item reconciliations, and the
 27,618-parcel assessor roll — by a re-runnable, gate-checked pipeline.</p>
+<p class="lede" style="margin-top:10px;font-weight:600"><a href="#maps">Explore Berkeley parcel by parcel</a> —
+these maps show the property tax, ownership, and Measure U bond impact for every parcel.
+<b>Find where you live.</b></p>
 </div></header>
 
 <nav><div class="wrap">
-<a href="#taxes-now">Taxes today</a><a href="#measure">The measure</a><a href="#rates">One levy, three rates</a>
+<a href="#taxes-now">Taxes today</a><a href="#budget">City budget</a><a href="#measure">The measure</a><a href="#rates">One levy, three rates</a>
 <a href="#burden">Who pays</a><a href="#arguments">The arguments</a><a href="#v2050">Vision 2050</a>
 <a href="#oversight">Oversight</a><a href="#timing">Timing</a><a href="#maps">Maps</a><a href="#method">Method</a>
 </div></nav>
@@ -115,6 +118,38 @@ channel alone varies 15× between similar homes; the size channel varies only
 2.8×; the total bill varies 5.3×. <b>The two channels pull in opposite
 directions — and Berkeley leans on the size channel harder than any other Alameda County city.</b> Any honest
 debate about a new tax has to say which channel it uses and who that lands on. Measure U uses channel 1.</div>
+</div></section>
+
+<section id="budget"><div class="wrap">
+<h2>The whole city budget, in two pictures</h2>
+<p class="sub">Measure U lands inside a much bigger money picture. First: every dollar the City took in during
+FY2025 — the most recent year Berkeley publishes citywide revenue by <i>type</i>. Second: every dollar of the
+newly adopted FY2027 budget, read two ways at once. Hover any band for the amount.</p>
+<h3>Where the money comes from — $620M (FY2025 actual)</h3>
+<div id="sankeyRev" style="height:500px;max-width:1020px"></div>
+<div class="note"><b>How to read this honestly.</b> These are FY2025 <i>actuals</i> — the FY27/28 budget
+publishes citywide revenue only by fund, not by type. Note the two property channels from
+<a href="#taxes-now">the opening section</a> arriving as real money: value-based taxes
+($166M) and size-based parcel taxes
+($65M).
+Three things the picture can't show: the county splits property owners' 1% base tax <i>before</i> any of this
+(roughly 33% city / 45% schools / 15% county / 7% special districts — “county services” are funded upstream
+of the city budget); parking fines (~$6.7M/yr budgeted) aren't broken out citywide and sit inside
+fees/other; and BSEP — the largest parcel tax on a Berkeley bill — is a school-district tax that never
+enters the city's books. FY2025's interest earnings were unusually strong.</div>
+<h3>Where the money goes — $905M (FY2027 adopted)</h3>
+<div id="sankeySpend" style="height:560px;max-width:1020px"></div>
+<div class="note"><b>How to read this honestly.</b> The two sides of the center node are the City's two
+separately-published breakdowns of the <i>same</i> $905M — by spending category (left) and
+by department (right). Berkeley does not publish the cross-table (which department's dollars are salaries vs
+materials), so no band crosses the center. The pension slice is the FY2025 <i>actual</i> citywide CalPERS
+employer payment ($78M — at rates now running 38% of payroll for miscellaneous employees,
+57% for fire, 87% for police, against a net pension liability of $686M);
+the FY27 figure will be larger, but only a General-Fund number ($58M) is
+budgeted. Zero Waste and sanitary-sewer figures are FY2026 adopted (FY27 enterprise detail isn't republished).
+Debt-service interest sits inside Non-Departmental (~$13M
+ran through dedicated debt-service funds in FY26). Measure U's future debt service would appear as a new
+voter-debt levy on the revenue side and inside Non-Departmental here.</div>
 </div></section>
 
 <section id="measure"><div class="wrap">
@@ -357,9 +392,9 @@ over 25–30 years; flags public tax fatigue</li>
 from file://). Click any dot for the parcel's facts.</p>
 <div class="cards">
 <a class="card" href="../maps/bond_incidence.html"><h4>What the bond costs each parcel</h4>
-<p>All 27,618 assessed parcels: annual ad-valorem cost at the official rates, flat-tax comparison, and
-recorded-document recency. The incidence argument, made spatial — the heaviest payers are the newest
-buildings and sales.</p>
+<p>Every dot is a parcel — click it for its property tax, owner, and bond cost in actual dollars per year at
+the official rates, plus a flat-tax comparison and an owner-occupied-vs-rental view. The incidence argument,
+made spatial — the heaviest payers are the newest buildings and sales. Find where you live.</p>
 <span class="go">Open the bond-incidence map →</span></a>
 <a class="card" href="../maps/berkeley_construction_timelapse.html"><h4>Berkeley, built over time</h4>
 <p>Every structure at its build year (landmark-corrected), as a time-lapse — the 75 years in which the
@@ -398,4 +433,10 @@ schedule.</li>
 <footer><div class="wrap">Measure U, Examined · berkeleybuild.com · built from public records, August 2026 ·
 figures derived from the 27,618-parcel Alameda assessor roll, the county tax-rate tables, and the City's own
 filed documents.</div></footer>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<script>
+const SK_LAYOUT={font:{family:'system-ui',size:12,color:'#30343b'},paper_bgcolor:'rgba(0,0,0,0)',margin:{l:8,r:8,t:8,b:8}};
+Plotly.newPlot('sankeyRev',[Object.assign({type:'sankey',orientation:'h',valueformat:',.1f',valuesuffix:'M'},{"node": {"label": ["All city revenues FY2025 \u2014 $620M", "Property taxes on VALUE \u2014 $166M", "General 1% share $148M", "Voter debt levies $18M", "Property taxes on SIZE (parcel taxes) \u2014 $65M", "Library $26M", "Parks $19M", "Fire / EMS $16M", "Paramedic $4M", "Other taxes \u2014 $110M", "Business license $32M", "Sales tax $20M", "Utility users $19M", "Hotel tax $8M", "Other taxes $31M", "Fees & charges for services \u2014 $175M", "Grants & intergovernmental \u2014 $58M", "Operating grants $44M", "Capital grants $13M", "State subventions $0M", "Interest & investment earnings \u2014 $41M", "Miscellaneous & other \u2014 $3M"], "color": ["#30343b", "#3b6fb6", "#3b6fb6", "#3b6fb6", "#e07b39", "#e07b39", "#e07b39", "#e07b39", "#e07b39", "#8a8f98", "#8a8f98", "#8a8f98", "#8a8f98", "#8a8f98", "#8a8f98", "#2e7d5b", "#a5a9b0", "#a5a9b0", "#a5a9b0", "#a5a9b0", "#a5a9b0", "#a5a9b0"], "pad": 12, "thickness": 14, "line": {"width": 0}}, "link": {"source": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21], "target": [0, 1, 1, 0, 4, 4, 4, 4, 0, 9, 9, 9, 9, 9, 0, 0, 16, 16, 16, 0, 0], "value": [166.5, 148.36, 18.13, 65.37, 26.47, 18.69, 16.25, 3.97, 110.33, 31.58, 19.96, 19.45, 7.87, 31.48, 175.16, 57.98, 44.34, 13.25, 0.39, 41.33, 2.91], "color": "rgba(138,143,152,.28)"}})],SK_LAYOUT,{displayModeBar:false,responsive:true});
+Plotly.newPlot('sankeySpend',[Object.assign({type:'sankey',orientation:'h',valueformat:',.1f',valuesuffix:'M'},{"node": {"label": ["FY2027 all-funds budget \u2014 $905M", "Salaries & benefits \u2014 $411M", "Wages & other benefits (approx.) $334M", "Pensions \u2014 CalPERS employer (FY25 actual) $78M", "Internal services, transfers, debt service & other \u2014 $232M", "Services & materials \u2014 $172M", "Capital outlay \u2014 $90M", "Public Works \u2014 $234M", "Zero Waste (FY26 adopted) $61M", "Sanitary sewer (FY26 adopted) $33M", "Streets, facilities, engineering & other $141M", "Health, Housing & Community Services \u2014 $165M", "Police \u2014 $107M", "Non-Departmental (transfers, debt service, insurance) \u2014 $99M", "Fire \u2014 $79M", "Parks, Recreation & Waterfront \u2014 $52M", "Planning + Library + City Manager + IT \u2014 $112M", "Planning $34M", "Library $34M", "City Manager $23M", "IT $20M", "8 smaller departments \u2014 $57M"], "color": ["#30343b", "#3b6fb6", "#3b6fb6", "#3b6fb6", "#8a8f98", "#a5a9b0", "#2e7d5b", "#e07b39", "#e07b39", "#e07b39", "#e07b39", "#2e7d5b", "#3b6fb6", "#8a8f98", "#3b6fb6", "#2e7d5b", "#a5a9b0", "#a5a9b0", "#a5a9b0", "#a5a9b0", "#a5a9b0", "#a5a9b0"], "pad": 12, "thickness": 14, "line": {"width": 0}}, "link": {"source": [1, 2, 3, 4, 5, 6, 0, 7, 7, 7, 0, 0, 0, 0, 0, 0, 16, 16, 16, 16, 0], "target": [0, 1, 1, 0, 0, 0, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21], "value": [411.47, 333.59, 77.88, 231.75, 172.18, 89.79, 234.46, 60.95, 32.87, 140.64, 165.5, 106.9, 98.54, 79.04, 52.17, 111.82, 34.39, 34.37, 23.08, 19.98, 56.77], "color": "rgba(138,143,152,.28)"}})],SK_LAYOUT,{displayModeBar:false,responsive:true});
+</script>
 </body></html>

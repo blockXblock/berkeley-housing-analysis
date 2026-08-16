@@ -1,0 +1,58 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Berkeley built, year by year</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+<style>body,html,#map{margin:0;height:100%;font-family:system-ui}
+.panel{position:absolute;top:12px;left:12px;right:12px;background:rgba(255,255,255,.94);padding:10px 14px;border-radius:8px;box-shadow:0 1px 6px rgba(0,0,0,.3);font-size:13px}
+.yr{font-size:26px;font-weight:700} #play{font-size:15px;padding:3px 12px;margin-right:10px;cursor:pointer}
+#slider{width:60%;vertical-align:middle} .cap{color:#555;font-size:11px}
+.legend{position:absolute;bottom:16px;left:12px;background:#fff;padding:8px 10px;border-radius:8px;box-shadow:0 1px 6px rgba(0,0,0,.3);font-size:12px}
+.sw{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}</style></head>
+<body><div id="map"></div>
+<div class="panel"><span class="yr" id="ylab">1850</span> &nbsp; <button id="play">▶ play</button>
+<input type="range" id="slider" min="1850" max="2026" value="1850" step="1">
+<span id="count"></span>
+<div class="cap">Each dot = a parcel's <b>main structure</b> at its YearBuilt (landmark-corrected). Shows construction, NOT ADUs/units added later. 3,399 parcels have no build date (excluded). Elmwood outlined.</div><div style="margin-top:8px;font-size:11px"><a href="https://www.sfchronicle.com/projects/2025/ca-property-map/" target="_blank" rel="noopener" style="color:#0074D9;text-decoration:none">↗ Compare: SF Chronicle statewide owner map</a></div></div>
+<div class="legend"><b>Units in structure</b>
+<div><span class="sw" style="background:#9ecae1"></span>1 (single-family)</div>
+<div><span class="sw" style="background:#fd8d3c"></span>2</div>
+<div><span class="sw" style="background:#d7301f"></span>3+</div></div>
+<script>
+let FEATS={features:[]};   // filled by fetch (streamed from the data file, not inlined)
+const map=new maplibregl.Map({container:'map',center:[-122.273,37.871],zoom:12.4,
+ style:{version:8,sources:{c:{type:'raster',tiles:['https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'],tileSize:256,attribution:'© OSM © CARTO'}},layers:[{id:'bg',type:'raster',source:'c'}]}});
+let year=1850, playing=false, timer=null;
+function setYear(y){ year=y; document.getElementById('ylab').textContent=y; document.getElementById('slider').value=y;
+  map.setFilter('pts',['<=',['get','y'],y]);
+  const n=FEATS.features.filter(f=>f.properties.y<=y).length;
+  document.getElementById('count').textContent=n.toLocaleString()+' structures built'; }
+map.on('load',()=>{
+ map.addSource('el',{type:'geojson',data:{"type": "FeatureCollection", "features": [{"id": "18", "type": "Feature", "properties": {}, "geometry": {"type": "Polygon", "coordinates": [[[-122.244239443633, 37.8604958003685], [-122.244601401743, 37.8589301551739], [-122.250835129898, 37.8513319404014], [-122.252310187298, 37.8509005750423], [-122.252829419044, 37.8508252396896], [-122.253144867428, 37.8537131122829], [-122.256118795434, 37.8533191766006], [-122.260153616028, 37.8527833970578], [-122.259454220056, 37.8578630157591], [-122.25819515546, 37.8651281851049], [-122.254691919714, 37.865697087542], [-122.250979088794, 37.8658767408977], [-122.250856205395, 37.8657429352649], [-122.250451483401, 37.865460855717], [-122.25035336816, 37.8646882040237], [-122.250120346314, 37.8623334549733], [-122.246213771725, 37.8625677880274], [-122.244473032032, 37.8626722048491], [-122.244239443633, 37.8604958003685]]]}}]}});
+ map.addLayer({id:'elw',type:'line',source:'el',paint:{'line-color':'#0074D9','line-width':2}});
+ map.addSource('p',{type:'geojson',data:'berkeley_construction_data.json'});
+ map.addLayer({id:'pts',type:'circle',source:'p',paint:{
+   'circle-radius':['interpolate',['linear'],['zoom'],11,1.6,15,4],
+   'circle-color':['step',['get','u'],'#9ecae1',2,'#fd8d3c',3,'#d7301f'],
+   'circle-opacity':0.8}});
+ fetch('berkeley_construction_data.json').then(r=>r.json()).then(d=>{ FEATS=d; setYear(1850); });
+ map.on('click','pts',e=>{ const p=e.features[0].properties, a=p.a||'(address unavailable)';
+   const q=encodeURIComponent(a+' Berkeley CA');
+   new maplibregl.Popup().setLngLat(e.lngLat).setHTML(
+     '<b>'+a+'</b>'
+     +(p.own?'<br>owner: '+p.own+(p.ot?' <span style="color:#777">('+p.ot+')</span>':''):'')
+     +'<br>Built '+p.y+(p.c=='1'||p.c===1?' <span style="color:#0074D9">(landmark-corrected)</span>':'')+(p.ub?' &middot; '+p.ub.replace(/_/g,' '):'')
+     +'<br>'+p.u+' unit'+(p.u==1?'':'s')+' in structure'
+     +(p.av?'<br>assessed value: $'+(p.av*1000).toLocaleString():'')
+     +'<br><a href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Street view ↗</a>'
+     +' &middot; <a href="https://www.sfchronicle.com/projects/2025/ca-property-map/?search='+encodeURIComponent(a+', Berkeley')+'" target="_blank" rel="noopener">SF Chronicle ↗</a>').addTo(map); });
+ map.on('mouseenter','pts',()=>map.getCanvas().style.cursor='pointer');
+ map.on('mouseleave','pts',()=>map.getCanvas().style.cursor='');
+});
+document.getElementById('slider').oninput=e=>{ setYear(+e.target.value); };
+document.getElementById('play').onclick=()=>{
+  playing=!playing; document.getElementById('play').textContent=playing?'❚❚ pause':'▶ play';
+  if(playing){ if(year>=2026) setYear(1850);
+    timer=setInterval(()=>{ if(year>=2026){clearInterval(timer);playing=false;document.getElementById('play').textContent='▶ play';return;} setYear(year+1); }, 180); }
+  else clearInterval(timer);
+};
+</script></body></html>

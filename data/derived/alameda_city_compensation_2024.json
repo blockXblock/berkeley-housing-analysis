@@ -1,0 +1,393 @@
+{
+ "source": "CA State Controller GCC 2024 City raw export",
+ "county": "Alameda",
+ "ft_threshold": 60000,
+ "caveats": {
+  "ual_flag": "IncludesUnfundedLiability is unreliable; convention inferred empirically",
+  "ft_proxy": "RegularPay >= $60,000 approximates full-time; not an FTE count",
+  "service_mix": "raw staff-per-capita reflects WHAT a city does; Berkeley runs health/library/rent-board functions most peers do not",
+  "scope": "compensation only -- says nothing about total budget or capital spending"
+ },
+ "cities": {
+  "Alameda": {
+   "population": 79020.0,
+   "rows": 1191,
+   "ft_proxy": 512,
+   "ft_per_1000": 6.48,
+   "ft_per_1000_excl_special": null,
+   "total_wages": 86055553.0,
+   "wages_per_capita": 1089.04,
+   "median_ft_regular_pay": 113806.0,
+   "overtime_pct_of_regular": 9.32,
+   "db_pension_pct_of_regular": 14.5,
+   "ual_flag_reported": "False",
+   "ual_convention_inferred": "normal_cost_only",
+   "ual_inference_median_pct": 12.4
+  },
+  "Albany": {
+   "population": 20578.0,
+   "rows": 174,
+   "ft_proxy": 108,
+   "ft_per_1000": 5.25,
+   "ft_per_1000_excl_special": null,
+   "total_wages": 18463702.0,
+   "wages_per_capita": 897.25,
+   "median_ft_regular_pay": 112292.0,
+   "overtime_pct_of_regular": 12.36,
+   "db_pension_pct_of_regular": 14.79,
+   "ual_flag_reported": "False",
+   "ual_convention_inferred": "normal_cost_only",
+   "ual_inference_median_pct": 15.9
+  },
+  "Berkeley": {
+   "population": 128348.0,
+   "rows": 2753,
+   "ft_proxy": 1338,
+   "ft_per_1000": 10.42,
+   "ft_per_1000_excl_special": 8.2,
+   "total_wages": 199774312.0,
+   "wages_per_capita": 1556.51,
+   "median_ft_regular_pay": 95257.5,
+   "overtime_pct_of_regular": 14.79,
+   "db_pension_pct_of_regular": 48.98,
+   "ual_flag_reported": "False",
+   "ual_convention_inferred": "includes_ual",
+   "ual_inference_median_pct": 36.3
+  },
+  "Dublin": {
+   "population": 74691.0,
+   "rows": 422,
+   "ft_proxy": 100,
+   "ft_per_1000": 1.34,
+   "ft_per_1000_excl_special": null,
+   "total_wages": 16043734.0,
+   "wages_per_capita": 214.8,
+   "median_ft_regular_pay": 117111.5,
+   "overtime_pct_of_regular": 0.24,
+   "db_pension_pct_of_regular": 5.81,
+   "ual_flag_reported": "False",
+   "ual_convention_inferred": "normal_cost_only",
+   "ual_inference_median_pct": 4.7
+  },
+  "Emeryville": {
+   "population": 13471.0,
+   "rows": 283,
+   "ft_proxy": 122,
+   "ft_per_1000": 9.06,
+   "ft_per_1000_excl_special": null,
+   "total_wages": 21919766.0,
+   "wages_per_capita": 1627.18,
+   "median_ft_regular_pay": 127800.0,
+   "overtime_pct_of_regular": 6.68,
+   "db_pension_pct_of_regular": 13.34,
+   "ual_flag_reported": "False",
+   "ual_convention_inferred": "normal_cost_only",
+   "ual_inference_median_pct": 13.4
+  },
+  "Fremont": {
+   "population": 232619.0,
+   "rows": 1676,
+   "ft_proxy": 872,
+   "ft_per_1000": 3.75,
+   "ft_per_1000_excl_special": null,
+   "total_wages": 155489433.0,
+   "wages_per_capita": 668.43,
+   "median_ft_regular_pay": 128792.5,
+   "overtime_pct_of_regular": 15.67,
+   "db_pension_pct_of_regular": 14.11,
+   "ual_flag_reported": "False",
+   "ual_convention_inferred": "normal_cost_only",
+   "ual_inference_median_pct": 5.9
+  },
+  "Hayward": {
+   "population": 162359.0,
+   "rows": 1017,
+   "ft_proxy": 817,
+   "ft_per_1000": 5.03,
+   "ft_per_1000_excl_special": null,
+   "total_wages": 148700222.25,
+   "wages_per_capita": 915.87,
+   "median_ft_regular_pay": 129704.0,
+   "overtime_pct_of_regular": 15.54,
+   "db_pension_pct_of_regular": 12.95,
+   "ual_flag_reported": "False",
+   "ual_convention_inferred": "normal_cost_only",
+   "ual_inference_median_pct": 8.3
+  },
+  "Livermore": {
+   "population": 85899.0,
+   "rows": 618,
+   "ft_proxy": 361,
+   "ft_per_1000": 4.2,
+   "ft_per_1000_excl_special": null,
+   "total_wages": 61400956.0,
+   "wages_per_capita": 714.8,
+   "median_ft_regular_pay": 114061.0,
+   "overtime_pct_of_regular": 6.85,
+   "db_pension_pct_of_regular": 39.81,
+   "ual_flag_reported": "True",
+   "ual_convention_inferred": "includes_ual",
+   "ual_inference_median_pct": 36.0
+  },
+  "Newark": {
+   "population": 48886.0,
+   "rows": 410,
+   "ft_proxy": 159,
+   "ft_per_1000": 3.25,
+   "ft_per_1000_excl_special": null,
+   "total_wages": 27203081.0,
+   "wages_per_capita": 556.46,
+   "median_ft_regular_pay": 120177.0,
+   "overtime_pct_of_regular": 10.16,
+   "db_pension_pct_of_regular": 40.57,
+   "ual_flag_reported": "False",
+   "ual_convention_inferred": "includes_ual",
+   "ual_inference_median_pct": 38.0
+  },
+  "Oakland": {
+   "population": 426457.0,
+   "rows": 6163,
+   "ft_proxy": 3719,
+   "ft_per_1000": 8.72,
+   "ft_per_1000_excl_special": null,
+   "total_wages": 674728519.0,
+   "wages_per_capita": 1582.17,
+   "median_ft_regular_pay": 114965.0,
+   "overtime_pct_of_regular": 20.24,
+   "db_pension_pct_of_regular": 47.24,
+   "ual_flag_reported": "True",
+   "ual_convention_inferred": "includes_ual",
+   "ual_inference_median_pct": 43.1
+  },
+  "Piedmont": {
+   "population": 10806.0,
+   "rows": 301,
+   "ft_proxy": 97,
+   "ft_per_1000": 8.98,
+   "ft_per_1000_excl_special": null,
+   "total_wages": 16798123.0,
+   "wages_per_capita": 1554.52,
+   "median_ft_regular_pay": 115584.0,
+   "overtime_pct_of_regular": 14.36,
+   "db_pension_pct_of_regular": 14.96,
+   "ual_flag_reported": "False",
+   "ual_convention_inferred": "normal_cost_only",
+   "ual_inference_median_pct": 16.0
+  },
+  "Pleasanton": {
+   "population": 77232.0,
+   "rows": 952,
+   "ft_proxy": 459,
+   "ft_per_1000": 5.94,
+   "ft_per_1000_excl_special": null,
+   "total_wages": 82197770.0,
+   "wages_per_capita": 1064.3,
+   "median_ft_regular_pay": 129452.0,
+   "overtime_pct_of_regular": 16.39,
+   "db_pension_pct_of_regular": 27.09,
+   "ual_flag_reported": "False",
+   "ual_convention_inferred": "normal_cost_only",
+   "ual_inference_median_pct": 14.6
+  },
+  "San Leandro": {
+   "population": 87813.0,
+   "rows": 659,
+   "ft_proxy": 315,
+   "ft_per_1000": 3.59,
+   "ft_per_1000_excl_special": null,
+   "total_wages": 48464396.0,
+   "wages_per_capita": 551.9,
+   "median_ft_regular_pay": 109807.0,
+   "overtime_pct_of_regular": 7.38,
+   "db_pension_pct_of_regular": 55.43,
+   "ual_flag_reported": "True",
+   "ual_convention_inferred": "includes_ual",
+   "ual_inference_median_pct": 48.9
+  },
+  "Union City": {
+   "population": 66657.0,
+   "rows": 409,
+   "ft_proxy": 217,
+   "ft_per_1000": 3.26,
+   "ft_per_1000_excl_special": null,
+   "total_wages": 34402003.0,
+   "wages_per_capita": 516.1,
+   "median_ft_regular_pay": 114427.0,
+   "overtime_pct_of_regular": 7.71,
+   "db_pension_pct_of_regular": 14.68,
+   "ual_flag_reported": "False",
+   "ual_convention_inferred": "normal_cost_only",
+   "ual_inference_median_pct": 14.2
+  }
+ },
+ "job_classes": {
+  "police_officer": {
+   "Alameda": {
+    "n": 45,
+    "median_base": 124651.0,
+    "median_overtime": 14366.0,
+    "ot_pct_of_base": 11.5
+   },
+   "Albany": {
+    "n": 13,
+    "median_base": 114137.0,
+    "median_overtime": 18159.0,
+    "ot_pct_of_base": 15.9
+   },
+   "Berkeley": {
+    "n": 93,
+    "median_base": 113860.0,
+    "median_overtime": 36248.0,
+    "ot_pct_of_base": 31.8
+   },
+   "Emeryville": {
+    "n": 29,
+    "median_base": 145616.0,
+    "median_overtime": 15949.0,
+    "ot_pct_of_base": 11.0
+   },
+   "Fremont": {
+    "n": 78,
+    "median_base": 132774.5,
+    "median_overtime": 34589.0,
+    "ot_pct_of_base": 26.1
+   },
+   "Hayward": {
+    "n": 114,
+    "median_base": 150723.0,
+    "median_overtime": 27695.0,
+    "ot_pct_of_base": 18.4
+   },
+   "Livermore": {
+    "n": 60,
+    "median_base": 132369.0,
+    "median_overtime": 27758.5,
+    "ot_pct_of_base": 21.0
+   },
+   "Newark": {
+    "n": 35,
+    "median_base": 149466.0,
+    "median_overtime": 36340.0,
+    "ot_pct_of_base": 24.3
+   },
+   "Piedmont": {
+    "n": 11,
+    "median_base": 118828.0,
+    "median_overtime": 26094.0,
+    "ot_pct_of_base": 22.0
+   },
+   "Pleasanton": {
+    "n": 59,
+    "median_base": 138592.0,
+    "median_overtime": 11369.0,
+    "ot_pct_of_base": 8.2
+   },
+   "San Leandro": {
+    "n": 45,
+    "median_base": 129115.0,
+    "median_overtime": 27508.0,
+    "ot_pct_of_base": 21.3
+   },
+   "Union City": {
+    "n": 47,
+    "median_base": 127205.0,
+    "median_overtime": 20508.0,
+    "ot_pct_of_base": 16.1
+   }
+  },
+  "police_sergeant": {
+   "Alameda": {
+    "n": 15,
+    "median_base": 165411.0,
+    "median_overtime": 26921.0,
+    "ot_pct_of_base": 16.3
+   },
+   "Berkeley": {
+    "n": 28,
+    "median_base": 143393.5,
+    "median_overtime": 50177.0,
+    "ot_pct_of_base": 35.0
+   },
+   "Fremont": {
+    "n": 20,
+    "median_base": 140869.0,
+    "median_overtime": 75458.5,
+    "ot_pct_of_base": 53.6
+   },
+   "Hayward": {
+    "n": 25,
+    "median_base": 187419.0,
+    "median_overtime": 24702.0,
+    "ot_pct_of_base": 13.2
+   },
+   "Livermore": {
+    "n": 13,
+    "median_base": 163558.0,
+    "median_overtime": 30619.0,
+    "ot_pct_of_base": 18.7
+   },
+   "Newark": {
+    "n": 8,
+    "median_base": 187873.0,
+    "median_overtime": 79872.0,
+    "ot_pct_of_base": 42.5
+   },
+   "Pleasanton": {
+    "n": 13,
+    "median_base": 169321.0,
+    "median_overtime": 33443.0,
+    "ot_pct_of_base": 19.8
+   },
+   "San Leandro": {
+    "n": 11,
+    "median_base": 171399.0,
+    "median_overtime": 34210.0,
+    "ot_pct_of_base": 20.0
+   },
+   "Union City": {
+    "n": 14,
+    "median_base": 168433.0,
+    "median_overtime": 37169.5,
+    "ot_pct_of_base": 22.1
+   }
+  },
+  "firefighter": {
+   "Alameda": {
+    "n": 62,
+    "median_base": 112907.0,
+    "median_overtime": 23788.0,
+    "ot_pct_of_base": 21.1
+   },
+   "Albany": {
+    "n": 9,
+    "median_base": 113120.0,
+    "median_overtime": 54897.0,
+    "ot_pct_of_base": 48.5
+   },
+   "Berkeley": {
+    "n": 37,
+    "median_base": 98275.0,
+    "median_overtime": 48310.0,
+    "ot_pct_of_base": 49.2
+   },
+   "Fremont": {
+    "n": 24,
+    "median_base": 133433.0,
+    "median_overtime": 30771.0,
+    "ot_pct_of_base": 23.1
+   },
+   "Oakland": {
+    "n": 140,
+    "median_base": 133110.0,
+    "median_overtime": 59888.5,
+    "ot_pct_of_base": 45.0
+   },
+   "Pleasanton": {
+    "n": 9,
+    "median_base": 119323.0,
+    "median_overtime": 58213.0,
+    "ot_pct_of_base": 48.8
+   }
+  }
+ }
+}

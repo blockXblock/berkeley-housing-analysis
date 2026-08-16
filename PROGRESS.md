@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-08-15 — ✅ Compensation: Berkeley vs the 13 other Alameda cities (GCC 2024)
+**Answers John's staffing/pay/overtime/pension question. Result CUTS AGAINST the "Berkeley overpays" framing — do not build an argument on it. Committed on `dev`.**
+
+- **`scripts/compensation/compare_alameda_cities.py`** + `docs/audit/2026-08-15_berkeley_vs_alameda_cities_compensation.md` + `data/derived/alameda_city_compensation_2024.json`. Source: CA State Controller **GCC 2024 City** export (17,028 Alameda rows, 14 cities). **The 96MB CSV is NOT committed** — WAF blocks curl/scripted nav, download manually from gcc.sco.ca.gov. **2025 file was never obtained; everything is FY2024.**
+- **THREE CORRECTIONS, each of which produced a wrong answer first:** (1) **`IncludesUnfundedLiability` IS UNRELIABLE** — Berkeley reports `False` but its safety plans show **103–128% of regular pay** (impossible as normal cost) and 31.6% vs Pleasanton's 14.3% at the *same* formula; the flag disagrees for **Berkeley and Newark**. Trusting it makes Berkeley a **false 3.3× outlier**. Convention is now inferred empirically. (2) **Berkeley position strings carry a job-class prefix + shift suffix** (`8019 Police Officer`) — raw matching silently drops Berkeley from every comparison and looks like "no data". (3) **Staff-per-capita is service mix** — 21% of Berkeley FT is HHCS/Library/Rent Board, functions peers don't run.
+- **FINDINGS:** staffing **10.42 FT/1,000** (highest in county; **8.20** excluding health/library/rent-board vs Oakland 8.72, Fremont 3.75); payroll **$1,557/resident** vs Fremont $668. **Berkeley pays the LOWEST public-safety base in the county** — police officer **12th of 12** ($113,860 vs $130,742 median), sergeant 8th of 9, firefighter 6th of 6 — while carrying the **HIGHEST overtime** (officer 31.8%, firefighter 49.2% of base). Classic vacancy/minimum-staffing-backfill signature. Pension, compared only within the inferred convention: **49.0%, 2nd of 5, at the group median (47.2%)** — NOT an outlier.
+- **SCOPE GUARD:** GCC is compensation only — **no budget, no revenue, no capital spend**. It CANNOT support "operating costs crowd out infrastructure"; that needs the city's budget documents (not done). It also refutes any "Berkeley salaries are out of line" argument, using the State Controller's own data.
+- **NEXT:** obtain 2025 City data for a 2-year trend; pull Berkeley adopted budget for the crowd-out question; the $40.5M "staffing and implementation resources" inside the $313M program (C13) is where compensation and the bond actually meet.
+
 ## 2026-08-15 — ✅ Property-tax reconstruction: the FIXED-CHARGE layer, citywide model, county convergence (tax_incidence session)
 **The majority of a Berkeley tax bill is NOT ad valorem, and it appears in no dataset. It is now reconstructed, validated against two independent external sources, and modelled citywide. Committed on `dev`.**
 
@@ -18,7 +27,7 @@
 - **PRIVACY:** bill PDFs + parcel-level extracts stay **OUTSIDE the repo** (`~/Desktop/Alameda/`) — household AV, payment dates, delinquency history. Only de-identified derived structure is committed.
 - **NEXT / OPEN:** (1) **staffing/pay/overtime/pension cross-city comparison is BLOCKED** — CA State Controller GCC (`gcc.sco.ca.gov/RawExport/2024_City.zip`) refuses curl and browser navigation (WAF); needs a manual browser download, same pattern as the bills. (2) per-dwelling-unit rates rest on **one** multi-unit observation — sample duplexes to confirm. (3) extend the model to apartments (renter pass-through). (4) consider switching the parcel join to `databases/parcel_facts.db` (maps session) — **not** done here because berkeley.db `TotalNetValue` already matched all 37 bills to the dollar.
 
-## 2026-08-15 — ✅ Measure U analysis: city claims, incidence, V2050 comparison, JN-MeasureU (parallel session)
+## 2026-08-15 [B2050BIS] — ✅ Measure U analysis: city claims, incidence, V2050 comparison, JN-MeasureU
 **The Nov 2026 $300M GO bond is Measure U. Full analysis for the Berkeley-2050 op-ed effort; JN committed (`80f386d`, `c29a9ac`), note un-committed for review.**
 
 - **Consolidated analysis note** (`notes/2026-08-15_bond_measure_u_city_claims_incidence_v2050.md`, UNCOMMITTED):

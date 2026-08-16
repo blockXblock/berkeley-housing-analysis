@@ -153,7 +153,7 @@ def main():
 <div id="legend"></div>
 <div class="stat" id="stat"></div>
 <div class="cap" id="cap"></div>
-<div class="who" id="who"></div></div>
+<div class="who" id="who"></div><div style="margin-top:8px;font-size:11px"><a href="https://www.sfchronicle.com/projects/2025/ca-property-map/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">↗ Compare: SF Chronicle statewide owner map</a></div></div>
 <script>
 const S=__STATS__;
 let FEATS={features:[]}, MODE='c', RATE=S.rate_today;

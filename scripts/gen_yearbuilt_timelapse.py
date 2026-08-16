@@ -74,7 +74,7 @@ def main():
 <div class="panel"><span class="yr" id="ylab">1850</span> &nbsp; <button id="play">▶ play</button>
 <input type="range" id="slider" min="1850" max="2026" value="1850" step="1">
 <span id="count"></span>
-<div class="cap">Each dot = a parcel's <b>main structure</b> at its YearBuilt (landmark-corrected). Shows construction, NOT ADUs/units added later. {n_nodate:,} parcels have no build date (excluded). Elmwood outlined.</div></div>
+<div class="cap">Each dot = a parcel's <b>main structure</b> at its YearBuilt (landmark-corrected). Shows construction, NOT ADUs/units added later. {n_nodate:,} parcels have no build date (excluded). Elmwood outlined.</div><div style="margin-top:8px;font-size:11px"><a href="https://www.sfchronicle.com/projects/2025/ca-property-map/" target="_blank" rel="noopener" style="color:#0074D9;text-decoration:none">↗ Compare: SF Chronicle statewide owner map</a></div></div>
 <div class="legend"><b>Units in structure</b>
 <div><span class="sw" style="background:#9ecae1"></span>1 (single-family)</div>
 <div><span class="sw" style="background:#fd8d3c"></span>2</div>

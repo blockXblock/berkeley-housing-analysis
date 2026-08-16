@@ -1,0 +1,30 @@
+{
+ "topic": "berkeley_tax_incidence",
+ "created": "2026-08-15",
+ "v4_sha": "50fcb7cceb04a905f4e71fd7a590ae44de60a292",
+ "provenance": {
+  "bills": "37 FY2025-26 Alameda secured bills (36 stratified SFR + 1 reference), parsed by scripts/tax_incidence/parse_bills.py; 111/111 line-item reconciliations pass",
+  "rate_schedule": "scripts/tax_incidence/derive_rate_schedule.py",
+  "assessor": "databases/berkeley.db parcels (Feb-2026 refresh)",
+  "city_sqft": "data.cityofberkeley.info 9a47-nj4i, 29,167 rows",
+  "county_rates": "data/raw/alameda_tax_rates_2025.json"
+ },
+ "figures": {
+  "per_sqft_total": 1.936351,
+  "flat_total": 192.52,
+  "per_dwelling_unit_total": 55.12,
+  "ad_valorem_rate": 0.012323,
+  "sfr_parcels_modelled": 16910,
+  "dispersion_p90_p10": {
+   "av": 14.639,
+   "adval": 14.639,
+   "flat": 2.778,
+   "total": 5.252
+  },
+  "aggregate_sfr_ad_valorem": 175236116.92,
+  "aggregate_sfr_parcel_taxes": 71096717.96,
+  "sqft_validation_exact": 35,
+  "sqft_validation_matched": 37
+ },
+ "note": "LOWER BOUND: ~12 charges on a third base are unmodelled (median $1,170/parcel). A legitimate change APPENDS a new timestamped baseline; never edit these numbers."
+}

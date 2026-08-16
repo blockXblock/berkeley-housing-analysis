@@ -1,0 +1,58 @@
+{
+ "fiscal_year": "2025-2026",
+ "derived_by": "derive_rate_schedule.py",
+ "v4_sha": "50fcb7cceb04a905f4e71fd7a590ae44de60a292",
+ "sample_n": 37,
+ "anchor": {
+  "item": "SCHL ED PROGS/BSEP",
+  "rate": 0.54,
+  "authority": "BUSD Measure H (2024)"
+ },
+ "per_sqft_of_improvements": {
+  "SCHL ED PROGS/BSEP": 0.54,
+  "CITY LANDSCP/PARK": 0.265202,
+  "FIRE/WILDFIRE PREV": 0.129902,
+  "PHYS DISABLED": 0.022292,
+  "CITY LIBRARY SVC": 0.298002,
+  "FIRE/EMG SRVC TAX": 0.066952,
+  "SCHOOL MAINTENANCE": 0.106503,
+  "SCH EDUCATOR/BERRA": 0.145092,
+  "PARAMEDIC SUPPLMNT": 0.047403,
+  "STREET REPAIR 2024": 0.255003,
+  "LIBRARY RELIEF2024": 0.06
+ },
+ "per_sqft_total": 1.936351,
+ "flat_per_parcel": {
+  "2018 STREET LIGHT": 19.08,
+  "PERALTA 2018MEAS E": 48.0,
+  "SFBRA MEASURE AA": 12.0,
+  "EBRPD CFD NO A/C-3": 12.0,
+  "AC TRANSIT MEAS VV": 96.0,
+  "EAST BAY TRAIL LLD": 5.44
+ },
+ "flat_total": 192.52,
+ "per_dwelling_unit": {
+  "CSA PARAMEDIC": 41.4,
+  "VEC CNTRL MSR A 84": 5.92,
+  "HAZ WASTE PROGRAM": 7.8
+ },
+ "per_dwelling_unit_total": 55.12,
+ "per_dwelling_unit_confidence": "LOW -- identified from a single multi-unit parcel (53-1695-26, 2 units). Sample more duplexes to confirm.",
+ "not_modelled": {
+  "items": [
+   "EBMUD WETWEATHER",
+   "2018 STORM WATER",
+   "CLEAN STORM WATER",
+   "MOSQ MSR K 1982",
+   "VECTOR CNTRL ASMT",
+   "MOSQUITO ASMT 2008"
+  ],
+  "median_residual_per_parcel": 1170.05
+ },
+ "ad_valorem_rate_all_berkeley_TRAs": 0.012323,
+ "validation": {
+  "matched": 37,
+  "exact": 35,
+  "source": "data.cityofberkeley.info 9a47-nj4i"
+ }
+}

@@ -17,7 +17,10 @@ JN and notes carry the full identification).
 import json, os
 
 BASELINE = "data/baselines/measure_u_reconciliation_baseline_2026-08-15.json"
-OUT = "docs/measure-u/index.html"
+# ⚠ TEAM-ONLY OUTPUT (John's call, 2026-08-15): docs/ is the berkeleybuild.com deploy root, so
+# this site must NOT live there. It is generated into team/ (non-deployed) and shared with the
+# team as a default-private Claude Artifact. Do not retarget back under docs/.
+OUT = "team/measure-u/index.html"
 
 b = json.load(open(BASELINE))
 O, D = b["official"], b["derived"]
@@ -237,7 +240,7 @@ spend_sankey = {"node": {"label": sk_l["node"]["label"] + sk_r["node"]["label"][
 
 html = f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Measure U, Examined — Berkeley's $300M Infrastructure Bond</title>
+<title>Measure U, Examined</title>
 <meta name="description" content="Independent analysis of Berkeley's November 2026 $300M infrastructure bond: what Berkeley pays now, the official numbers reconciled, who pays, Vision 2050 compliance, oversight, and parcel-by-parcel maps.">
 <style>{CSS}</style></head><body>
 
@@ -431,6 +434,10 @@ via pass-through</span></div>
 ~0.1% of parcels</span></div>
 <div class="tile"><b>{usd(flat)}</b><span>what the same money as a flat per-parcel tax would cost everyone —
 which would instead land hardest on long-held small homes</span></div>
+<div class="tile"><b>{D['owner_occupied_share_pct']:.1f}%+</b><span>of the bond is on owner-occupied homes
+({D['owner_occupied_parcels']:,} parcels with the homeowner's exemption — a floor, since eligible owners who
+never file are missed). The rest, at most {100-D['owner_occupied_share_pct']:.1f}%, falls on rentals,
+commercial, and institutions — largely tenant-borne.</span></div>
 </div>
 <h3>What it adds to a real bill</h3>
 <table><tr><th>Basis</th><th>Median single-family home (assessed at {usd(med_sfr_av)})</th>
@@ -580,15 +587,15 @@ over 25–30 years; flags public tax fatigue</li>
 <p class="sub">Interactive, parcel-by-parcel. Each streams a data file — open from this site (they don't run
 from file://). Click any dot for the parcel's facts.</p>
 <div class="cards">
-<a class="card" href="../maps/bond_incidence.html"><h4>What the bond costs each parcel</h4>
+<a class="card" href="https://berkeleybuild.com/maps/bond_incidence.html"><h4>What the bond costs each parcel</h4>
 <p>Every dot is a parcel — click it for its property tax, owner, and bond cost in actual dollars per year at
 the official rates, plus a flat-tax comparison and an owner-occupied-vs-rental view. The incidence argument,
 made spatial — the heaviest payers are the newest buildings and sales. Find where you live.</p>
 <span class="go">Open the bond-incidence map →</span></a>
-<a class="card" href="../maps/berkeley_construction_timelapse.html"><h4>Berkeley, built over time</h4>
+<a class="card" href="https://berkeleybuild.com/maps/berkeley_construction_timelapse.html"><h4>Berkeley, built over time</h4>
 <p>Every structure at its build year (landmark-corrected), as a time-lapse — the 75 years in which the
 infrastructure now on the ballot aged.</p><span class="go">Open the construction time-lapse →</span></a>
-<a class="card" href="../maps/berkeley_ownership.html"><h4>Ownership &amp; recording activity</h4>
+<a class="card" href="https://berkeleybuild.com/maps/berkeley_ownership.html"><h4>Ownership &amp; recording activity</h4>
 <p>Owner type (individual / trust / investor / institutional) and years since the last recorded document —
 the financial-activity texture beneath the assessment roll.</p><span class="go">Open the ownership map →</span></a>
 </div>
@@ -625,18 +632,37 @@ filed documents.</div></footer>
 __SANKEY_SCRIPTS__
 </body></html>"""
 
-SANKEY_JS = """<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+import glob
+_plotly = glob.glob("/opt/miniconda3/envs/jupyter_env/lib/python3.1*/site-packages/plotly/package_data/plotly.min.js")
+if _plotly:
+    PLOTLY_TAG = "<script>" + open(_plotly[0]).read() + "</script>"   # inlined: Artifact CSP blocks CDNs
+else:
+    PLOTLY_TAG = '<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>'
+    print("WARNING: local plotly.min.js not found — falling back to CDN (will NOT render as an Artifact)")
+
+SANKEY_JS = """__PLOTLY_TAG__
 <script>
 const SK_LAYOUT={font:{family:'system-ui',size:12,color:'#30343b'},paper_bgcolor:'rgba(0,0,0,0)',margin:{l:8,r:8,t:8,b:8}};
 Plotly.newPlot('sankeyRev',[Object.assign({type:'sankey',orientation:'h',valueformat:',.1f',valuesuffix:'M'},__REV__)],SK_LAYOUT,{displayModeBar:false,responsive:true});
 Plotly.newPlot('sankeySpend',[Object.assign({type:'sankey',orientation:'h',valueformat:',.1f',valuesuffix:'M'},__SPEND__)],SK_LAYOUT,{displayModeBar:false,responsive:true});
 </script>"""
 html = html.replace("__SANKEY_SCRIPTS__",
-                    SANKEY_JS.replace("__REV__", json.dumps(rev_sankey)).replace("__SPEND__", json.dumps(spend_sankey)))
+                    SANKEY_JS.replace("__PLOTLY_TAG__", PLOTLY_TAG)
+                             .replace("__REV__", json.dumps(rev_sankey)).replace("__SPEND__", json.dumps(spend_sankey)))
 
 os.makedirs(os.path.dirname(OUT), exist_ok=True)
 open(OUT, "w").write(html)
 print(f"wrote {OUT} ({len(html)/1024:.0f} KB)")
+
+# Artifact variant: Claude Artifacts wrap content in their own document skeleton, so this
+# copy strips the outer wrappers (title/meta/style stay at top — the title is scanned there).
+art = (html.replace('<!doctype html><html lang="en"><head><meta charset="utf-8">\n'
+                    '<meta name="viewport" content="width=device-width,initial-scale=1">\n', '')
+           .replace('</head><body>', '')
+           .replace('</body></html>', ''))
+ART = os.path.join(os.path.dirname(OUT), "artifact.html")
+open(ART, "w").write(art)
+print(f"wrote {ART} ({len(art)/1024:.0f} KB, wrapper-less for Artifact publish)")
 print(f"channels: adval {adval_pct:.2f}% | psf ${psf:.2f} | d1 total {usd(d1['total'])} ({d1['flat_share_pct']:.0f}% flat, "
       f"{d1['pct_of_av']:.1f}% of AV) vs d10 {usd(d10['total'])} ({d10['flat_share_pct']:.0f}%, {d10['pct_of_av']:.1f}%)")
 print(f"top1: apts {t1.get('apartments_mixed',0):.0f}% / ci {t1.get('commercial_industrial',0):.0f}% / "

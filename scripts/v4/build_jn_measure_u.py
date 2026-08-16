@@ -423,6 +423,19 @@ for qq in (1, 5, 10, 25):
     tier_entry[str(qq)] = float(sq.TotalNetValue.iloc[k-1])
 DERIVED.update(dict(tier_composition_av_pct=tier_av, tier_composition_count=tier_ct,
                     tier_entry_av=tier_entry))
+# OWNER-OCCUPIED share (definition per maps session, scripts/build_parcel_facts.py, adopted
+# 2026-08-15): owner_occupied = the $7,000 HOMEOWNER'S EXEMPTION flag — the assessor grants
+# it only to owner-occupied homes: round((Land+Imps) - TotalNetValue) == 7000. Same identity
+# as the S1 Benvenue oracle. CAVEAT (carry everywhere): a FLOOR on owner-occupancy — eligible
+# owners who never file are missed — so the rental+commercial share is a CEILING.
+oo = ((p.Land.fillna(0) + p.Imps.fillna(0) - p.TotalNetValue).round(0) == 7000)
+DERIVED.update(dict(
+    owner_occupied_parcels   = int(oo.sum()),
+    owner_occupied_share_pct = float(p.loc[oo, "TotalNetValue"].sum()/TOTAL_AV*100),
+))
+print(f"owner-occupied (homeowner's-exemption flag): {int(oo.sum()):,} parcels carry "
+      f"{DERIVED['owner_occupied_share_pct']:.1f}% of the ad-valorem bond (a FLOOR; "
+      f"rental+commercial <= {100-DERIVED['owner_occupied_share_pct']:.1f}%)")
 t1 = tier_av["1"]
 print(f"top 1% composition (share of tier AV): apartments {t1.get('apartments_mixed',0):.0f}% | "
       f"commercial/industrial {t1.get('commercial_industrial',0):.0f}% | institutional "
@@ -583,6 +596,7 @@ TOL = {  # relative tolerances; official mirror must match exactly
     "decile_share_pct": .01, "decile_median_cost": .01, "apt_share_pct": .01,
     "flat_parcel_cost": .01, "med_sfr_av": .01,
     "tier_composition_av_pct": .05, "tier_composition_count": 0, "tier_entry_av": .01,
+    "owner_occupied_parcels": 0, "owner_occupied_share_pct": .01,
 }
 if not os.path.exists(BASELINE):
     payload = {"created": "2026-08-15", "provenance": {

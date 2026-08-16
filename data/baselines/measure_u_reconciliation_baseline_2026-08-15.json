@@ -361,7 +361,9 @@
       "5": 2393000.0,
       "10": 1813700.0,
       "25": 1206800.0
-    }
+    },
+    "owner_occupied_parcels": 16024,
+    "owner_occupied_share_pct": 42.546568980777785
   },
   "amendments": [
     {
@@ -384,6 +386,15 @@
         "tier_composition_av_pct",
         "tier_composition_count",
         "tier_entry_av"
+      ],
+      "added_official": [],
+      "reason": "additive append: incidence figures surfaced for gen_bond_incidence.py and the measure-u site (session-coordination contract); existing values untouched"
+    },
+    {
+      "date": "2026-08-15",
+      "added_derived": [
+        "owner_occupied_parcels",
+        "owner_occupied_share_pct"
       ],
       "added_official": [],
       "reason": "additive append: incidence figures surfaced for gen_bond_incidence.py and the measure-u site (session-coordination contract); existing values untouched"

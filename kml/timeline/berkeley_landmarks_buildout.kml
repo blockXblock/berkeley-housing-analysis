@@ -1,12 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2">
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
 <Document>
   <name>Berkeley Built — Landmark Buildings by Year</name>
-  <description><![CDATA[181 City-designated landmarks, each carrying a TimeSpan that begins at its true build year. Drag the Google Earth TIME SLIDER (top toolbar) to watch the landmarks appear chronologically and accumulate; click any placemark, then use Street View / 3D / historical imagery.]]></description>
+  <description><![CDATA[181 City-designated landmarks, each carrying a TimeSpan that begins at its true build year. Play the tour "▶ Berkeley landmarks build-out" (double-click it in the Places panel) for a hands-free decade-by-decade flight while the buildings appear, or drag the TIME SLIDER yourself; click any placemark for Street View / 3D / historical imagery.]]></description>
   <Style id="lm">
     <IconStyle><scale>0.9</scale><color>ff4fc4fe</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle>
     <LabelStyle><scale>0.7</scale></LabelStyle>
   </Style>
+  <gx:Tour>
+    <name>▶ Berkeley landmarks build-out (auto-fly)</name>
+    <gx:Playlist>
+      <gx:FlyTo><gx:duration>3</gx:duration><gx:flyToMode>bounce</gx:flyToMode>
+        <LookAt><longitude>-122.264205</longitude><latitude>37.870522</latitude><altitude>0</altitude><heading>0</heading><tilt>45</tilt><range>13000</range><altitudeMode>relativeToGround</altitudeMode><gx:TimeStamp><when>1850-07-01T00:00:00Z</when></gx:TimeStamp></LookAt>
+      </gx:FlyTo>
+      <gx:Wait><gx:duration>1.5</gx:duration></gx:Wait>
+      <gx:FlyTo><gx:duration>4.5</gx:duration><gx:flyToMode>bounce</gx:flyToMode>
+        <LookAt><longitude>-122.297798</longitude><latitude>37.870437</latitude><altitude>0</altitude><heading>0</heading><tilt>58</tilt><range>2800</range><altitudeMode>relativeToGround</altitudeMode><gx:TimeStamp><when>1859-07-01T00:00:00Z</when></gx:TimeStamp></LookAt>
+      </gx:FlyTo>
+      <gx:Wait><gx:duration>2.5</gx:duration></gx:Wait>
+      <gx:FlyTo><gx:duration>4.5</gx:duration><gx:flyToMode>bounce</gx:flyToMode>
+        <LookAt><longitude>-122.264765</longitude><latitude>37.874154</latitude><altitude>0</altitude><heading>25</heading><tilt>58</tilt><range>2800</range><altitudeMode>relativeToGround</altitudeMode><gx:TimeStamp><when>1869-07-01T00:00:00Z</when></gx:TimeStamp></LookAt>
+      </gx:FlyTo>
+      <gx:Wait><gx:duration>2.5</gx:duration></gx:Wait>
+      <gx:FlyTo><gx:duration>4.5</gx:duration><gx:flyToMode>bounce</gx:flyToMode>
+        <LookAt><longitude>-122.276332</longitude><latitude>37.869145</latitude><altitude>0</altitude><heading>50</heading><tilt>58</tilt><range>2800</range><altitudeMode>relativeToGround</altitudeMode><gx:TimeStamp><when>1879-07-01T00:00:00Z</when></gx:TimeStamp></LookAt>
+      </gx:FlyTo>
+      <gx:Wait><gx:duration>2.5</gx:duration></gx:Wait>
+      <gx:FlyTo><gx:duration>4.5</gx:duration><gx:flyToMode>bounce</gx:flyToMode>
+        <LookAt><longitude>-122.265900</longitude><latitude>37.866750</latitude><altitude>0</altitude><heading>75</heading><tilt>58</tilt><range>2800</range><altitudeMode>relativeToGround</altitudeMode><gx:TimeStamp><when>1889-07-01T00:00:00Z</when></gx:TimeStamp></LookAt>
+      </gx:FlyTo>
+      <gx:Wait><gx:duration>2.5</gx:duration></gx:Wait>
+      <gx:FlyTo><gx:duration>4.5</gx:duration><gx:flyToMode>bounce</gx:flyToMode>
+        <LookAt><longitude>-122.262469</longitude><latitude>37.869030</latitude><altitude>0</altitude><heading>100</heading><tilt>58</tilt><range>2800</range><altitudeMode>relativeToGround</altitudeMode><gx:TimeStamp><when>1899-07-01T00:00:00Z</when></gx:TimeStamp></LookAt>
+      </gx:FlyTo>
+      <gx:Wait><gx:duration>2.5</gx:duration></gx:Wait>
+      <gx:FlyTo><gx:duration>4.5</gx:duration><gx:flyToMode>bounce</gx:flyToMode>
+        <LookAt><longitude>-122.262430</longitude><latitude>37.867405</latitude><altitude>0</altitude><heading>125</heading><tilt>58</tilt><range>2800</range><altitudeMode>relativeToGround</altitudeMode><gx:TimeStamp><when>1909-07-01T00:00:00Z</when></gx:TimeStamp></LookAt>
+      </gx:FlyTo>
+      <gx:Wait><gx:duration>2.5</gx:duration></gx:Wait>
+      <gx:FlyTo><gx:duration>4.5</gx:duration><gx:flyToMode>bounce</gx:flyToMode>
+        <LookAt><longitude>-122.265128</longitude><latitude>37.873439</latitude><altitude>0</altitude><heading>150</heading><tilt>58</tilt><range>2800</range><altitudeMode>relativeToGround</altitudeMode><gx:TimeStamp><when>1919-07-01T00:00:00Z</when></gx:TimeStamp></LookAt>
+      </gx:FlyTo>
+      <gx:Wait><gx:duration>2.5</gx:duration></gx:Wait>
+      <gx:FlyTo><gx:duration>4.5</gx:duration><gx:flyToMode>bounce</gx:flyToMode>
+        <LookAt><longitude>-122.262703</longitude><latitude>37.871993</latitude><altitude>0</altitude><heading>175</heading><tilt>58</tilt><range>2800</range><altitudeMode>relativeToGround</altitudeMode><gx:TimeStamp><when>1929-07-01T00:00:00Z</when></gx:TimeStamp></LookAt>
+      </gx:FlyTo>
+      <gx:Wait><gx:duration>2.5</gx:duration></gx:Wait>
+      <gx:FlyTo><gx:duration>4.5</gx:duration><gx:flyToMode>bounce</gx:flyToMode>
+        <LookAt><longitude>-122.266748</longitude><latitude>37.872491</latitude><altitude>0</altitude><heading>200</heading><tilt>58</tilt><range>2800</range><altitudeMode>relativeToGround</altitudeMode><gx:TimeStamp><when>1939-07-01T00:00:00Z</when></gx:TimeStamp></LookAt>
+      </gx:FlyTo>
+      <gx:Wait><gx:duration>2.5</gx:duration></gx:Wait>
+      <gx:FlyTo><gx:duration>4.5</gx:duration><gx:flyToMode>bounce</gx:flyToMode>
+        <LookAt><longitude>-122.262882</longitude><latitude>37.882413</latitude><altitude>0</altitude><heading>225</heading><tilt>58</tilt><range>2800</range><altitudeMode>relativeToGround</altitudeMode><gx:TimeStamp><when>1959-07-01T00:00:00Z</when></gx:TimeStamp></LookAt>
+      </gx:FlyTo>
+      <gx:Wait><gx:duration>2.5</gx:duration></gx:Wait>
+      <gx:FlyTo><gx:duration>4.5</gx:duration><gx:flyToMode>bounce</gx:flyToMode>
+        <LookAt><longitude>-122.259868</longitude><latitude>37.864262</latitude><altitude>0</altitude><heading>250</heading><tilt>58</tilt><range>2800</range><altitudeMode>relativeToGround</altitudeMode><gx:TimeStamp><when>1979-07-01T00:00:00Z</when></gx:TimeStamp></LookAt>
+      </gx:FlyTo>
+      <gx:Wait><gx:duration>2.5</gx:duration></gx:Wait>
+      <gx:FlyTo><gx:duration>4.5</gx:duration><gx:flyToMode>bounce</gx:flyToMode>
+        <LookAt><longitude>-122.264205</longitude><latitude>37.870522</latitude><altitude>0</altitude><heading>0</heading><tilt>45</tilt><range>13000</range><altitudeMode>relativeToGround</altitudeMode><gx:TimeStamp><when>1979-07-01T00:00:00Z</when></gx:TimeStamp></LookAt>
+      </gx:FlyTo>
+      <gx:Wait><gx:duration>3</gx:duration></gx:Wait>
+    </gx:Playlist>
+  </gx:Tour>
   <Placemark>
     <name>834 Delaware Street (1853)</name>
     <description><![CDATA[<b>834 Delaware Street</b><br>Built <b>1853</b> (City landmark date)<br>Designated 6/17/1985 &middot; LM]]></description>

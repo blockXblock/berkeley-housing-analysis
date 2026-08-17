@@ -57,17 +57,42 @@ def main():
             f"    <Point><coordinates>{r.Longitude:.6f},{r.Latitude:.6f},0</coordinates></Point>\n"
             "  </Placemark>")
 
+    # ---- auto-fly gx:Tour: fly decade-by-decade while the globe clock advances (buildings pop in) ----
+    m["decade"] = (m.name_year // 10 * 10).astype(int)
+    clon0, clat0 = float(m.Longitude.mean()), float(m.Latitude.mean())
+    ymax = int(m.name_year.max())
+
+    def flyto(lon, lat, rng, tilt, heading, year, dur, mode="bounce"):
+        return (f'      <gx:FlyTo><gx:duration>{dur}</gx:duration><gx:flyToMode>{mode}</gx:flyToMode>\n'
+                f'        <LookAt><longitude>{lon:.6f}</longitude><latitude>{lat:.6f}</latitude><altitude>0</altitude>'
+                f'<heading>{heading}</heading><tilt>{tilt}</tilt><range>{rng}</range>'
+                '<altitudeMode>relativeToGround</altitudeMode>'
+                f'<gx:TimeStamp><when>{year:04d}-07-01T00:00:00Z</when></gx:TimeStamp></LookAt>\n'
+                '      </gx:FlyTo>')
+    wait = lambda d: f'      <gx:Wait><gx:duration>{d}</gx:duration></gx:Wait>'
+
+    fly = [flyto(clon0, clat0, 13000, 45, 0, 1850, 3), wait(1.5)]           # open: empty Berkeley, 1850
+    for i, dec in enumerate(sorted(m.decade.unique())):                     # one stop per decade with landmarks
+        g = m[m.decade == dec]
+        fly += [flyto(float(g.Longitude.mean()), float(g.Latitude.mean()), 2800, 58,
+                      (i * 25) % 360, int(min(dec + 9, ymax)), 4.5), wait(2.5)]
+    fly += [flyto(clon0, clat0, 13000, 45, 0, ymax, 4.5), wait(3)]          # close: pull back, all shown
+    tour = ('  <gx:Tour>\n    <name>▶ Berkeley landmarks build-out (auto-fly)</name>\n'
+            '    <gx:Playlist>\n' + "\n".join(fly) + '\n    </gx:Playlist>\n  </gx:Tour>\n')
+
     kml = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
-        '<kml xmlns="http://www.opengis.net/kml/2.2">\n<Document>\n'
+        '<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">\n<Document>\n'
         '  <name>Berkeley Built — Landmark Buildings by Year</name>\n'
-        f'  <description><![CDATA[{len(m)} City-designated landmarks, each carrying a TimeSpan that begins at '
-        'its true build year. Drag the Google Earth TIME SLIDER (top toolbar) to watch the landmarks appear '
-        'chronologically and accumulate; click any placemark, then use Street View / 3D / historical imagery.]]></description>\n'
+        f'  <description><![CDATA[{len(m)} City-designated landmarks, each carrying a TimeSpan that begins at its '
+        'true build year. Play the tour "▶ Berkeley landmarks build-out" (double-click it in the Places panel) for a '
+        'hands-free decade-by-decade flight while the buildings appear, or drag the TIME SLIDER yourself; click any '
+        'placemark for Street View / 3D / historical imagery.]]></description>\n'
         f'  <Style id="lm">\n'
         f'    <IconStyle><scale>0.9</scale><color>{GOLD}</color>'
         '<Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle>\n'
         '    <LabelStyle><scale>0.7</scale></LabelStyle>\n  </Style>\n'
+        + tour
         + "\n".join(pms) +
         "\n</Document>\n</kml>\n")
 

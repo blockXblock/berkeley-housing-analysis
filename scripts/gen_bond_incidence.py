@@ -226,7 +226,7 @@ map.on('load',()=>{
  map.addSource('el',{type:'geojson',data:__ELB__});
  map.addLayer({id:'elw',type:'line',source:'el',paint:{'line-color':'#111','line-width':1.5,'line-dasharray':[2,2]}});
  map.addSource('p',{type:'geojson',data:'bond_incidence_data.json'});
- map.addLayer({id:'pts',type:'circle',source:'p',paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,1.8,15,5],'circle-color':costExpr(S.rate_today),'circle-opacity':0.9,'circle-stroke-color':'rgba(45,45,45,0.6)','circle-stroke-width':['interpolate',['linear'],['zoom'],11,0.3,15,0.8]}});
+ map.addLayer({id:'pts',type:'circle',source:'p',paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,1.8,15,5],'circle-color':costExpr(S.rate_today),'circle-opacity':0.9,'circle-stroke-color':'rgba(20,20,20,0.9)','circle-stroke-width':['interpolate',['linear'],['zoom'],11,0.6,15,1.2]}});
  fetch('bond_incidence_data.json').then(r=>r.json()).then(d=>{FEATS=d;}); mode('c');
  map.on('click','pts',e=>{const p=e.features[0].properties,a=p.a||'(address unavailable)';
    const t=p.t<0?'unknown':(2026-p.t)+' ('+p.t+' yr ago)';

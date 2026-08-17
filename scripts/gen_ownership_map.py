@@ -118,7 +118,7 @@ map.on('load',()=>{
  map.addSource('el',{type:'geojson',data:__ELB__});
  map.addLayer({id:'elw',type:'line',source:'el',paint:{'line-color':'#0074D9','line-width':2}});
  map.addSource('p',{type:'geojson',data:'berkeley_ownership_data.json'});
- map.addLayer({id:'pts',type:'circle',source:'p',paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,1.8,15,4.5],'circle-color':TEN,'circle-opacity':0.9,'circle-stroke-color':'rgba(45,45,45,0.55)','circle-stroke-width':['interpolate',['linear'],['zoom'],11,0.3,15,0.7]}});
+ map.addLayer({id:'pts',type:'circle',source:'p',paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,1.8,15,4.5],'circle-color':TEN,'circle-opacity':0.9,'circle-stroke-color':'rgba(20,20,20,0.9)','circle-stroke-width':['interpolate',['linear'],['zoom'],11,0.6,15,1.2]}});
  fetch('berkeley_ownership_data.json').then(r=>r.json()).then(d=>{FEATS=d;}); mode('t');
  map.on('click','pts',e=>{ const p=e.features[0].properties, a=p.a||'(address unavailable)';
    const q=encodeURIComponent(a+' Berkeley CA'), TY=['individual','investor (LLC/Corp/LP)','trust','institutional'];

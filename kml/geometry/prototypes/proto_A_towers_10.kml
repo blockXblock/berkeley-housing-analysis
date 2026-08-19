@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>proto_A_towers_10</name>
+  <Style id="poly2"><PolyStyle><color>b02c34d0</color><outline>1</outline></PolyStyle><LineStyle><color>e6ffffff</color><width>1.1</width></LineStyle><IconStyle><scale>0</scale></IconStyle></Style>
+  <Style id="lab2"><IconStyle><scale>0</scale></IconStyle><LabelStyle><scale>0.9</scale><color>ff2c34d0</color></LabelStyle></Style>
+  <Placemark><styleUrl>#poly2</styleUrl><description><![CDATA[<b>2190 SHATTUCK Ave</b><br/><b>Units:</b> 452<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 34<br/><b>Height:</b> 119.0m<br/><b>Status:</b> In Review]]></description><Polygon>
+				<extrude>1</extrude>
+				<altitudeMode>relativeToGround</altitudeMode>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-122.2682510776356,37.86942256562457,119 -122.2682738755158,37.86965158945649,119 -122.2690744986648,37.86960750656637,119 -122.2690179778003,37.86932525019976,119 -122.2682510776356,37.86942256562457,119 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon></Placemark>
+  <Placemark><name>2190 Shattuck Ave · 452u</name><styleUrl>#lab2</styleUrl><Region><LatLonAltBox><west>-122.269074</west><east>-122.268251</east><south>37.869325</south><north>37.869652</north></LatLonAltBox><Lod><minLodPixels>250</minLodPixels><maxLodPixels>-1</maxLodPixels></Lod></Region><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.268574,37.869486,119.0</coordinates></Point></Placemark>
+  <Placemark><styleUrl>#poly2</styleUrl><description><![CDATA[<b>1974 SHATTUCK Ave</b><br/><b>Units:</b> 599<br/><b>VLI Units:</b> 58<br/><b>Stories:</b> 28<br/><b>Height:</b> 98.0m<br/><b>Status:</b> Entitled]]></description><Polygon>
+				<extrude>1</extrude>
+				<altitudeMode>relativeToGround</altitudeMode>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-122.2686719879186,37.87287267616308,98.00000000000001 -122.2690361350241,37.87285390297354,98.00000000000001 -122.268933950456,37.87244611934,98.00000000000001 -122.2690904526609,37.87241886123353,98.00000000000001 -122.2690461495803,37.87222041507879,98.00000000000001 -122.2686003850768,37.87228944554767,98.00000000000001 -122.2686719879186,37.87287267616308,98.00000000000001 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon></Placemark>
+  <Placemark><name>1974 Shattuck Ave · 599u</name><styleUrl>#lab2</styleUrl><Region><LatLonAltBox><west>-122.269090</west><east>-122.268600</east><south>37.872220</south><north>37.872873</north></LatLonAltBox><Lod><minLodPixels>250</minLodPixels><maxLodPixels>-1</maxLodPixels></Lod></Region><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.268864,37.872568,98.00000000000001</coordinates></Point></Placemark>
+  <Placemark><styleUrl>#poly2</styleUrl><description><![CDATA[<b>2128 Oxford St</b><br/><b>Units:</b> 485<br/><b>VLI Units:</b> 47<br/><b>Stories:</b> 26<br/><b>Height:</b> 91.0m<br/><b>Status:</b> Entitled]]></description><Polygon>
+				<extrude>1</extrude>
+				<altitudeMode>relativeToGround</altitudeMode>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-122.2659642026801,37.8701123031143,91 -122.2660190342187,37.8705062262155,91 -122.2664129573199,37.8704182368857,91 -122.2663581257813,37.87002431378449,91 -122.2659642026801,37.8701123031143,91 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon></Placemark>
+  <Placemark><name>2128 Oxford St · 485u</name><styleUrl>#lab2</styleUrl><Region><LatLonAltBox><west>-122.266413</west><east>-122.265964</east><south>37.870024</south><north>37.870506</north></LatLonAltBox><Lod><minLodPixels>250</minLodPixels><maxLodPixels>-1</maxLodPixels></Lod></Region><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.266144,37.870235,91.0</coordinates></Point></Placemark>
+  <Placemark><styleUrl>#poly2</styleUrl><description><![CDATA[<b>2400 BOWDITCH St</b><br/><b>Units:</b> 750<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 26<br/><b>Height:</b> 85.3m<br/><b>Status:</b> Pre-Application<br/><b style='color:purple'>UC Berkeley Project</b>]]></description><Polygon>
+				<extrude>1</extrude>
+				<altitudeMode>relativeToGround</altitudeMode>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-122.2566233632381,37.86710234487586,85.3 -122.2573632984431,37.8670059833901,85.3 -122.2573330308715,37.86677749095411,85.3 -122.2565868987249,37.86687086212635,85.3 -122.2566233632381,37.86710234487586,85.3 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon></Placemark>
+  <Placemark><name>2400 Bowditch St · 750u</name><styleUrl>#lab2</styleUrl><Region><LatLonAltBox><west>-122.257363</west><east>-122.256587</east><south>37.866777</south><north>37.867102</north></LatLonAltBox><Lod><minLodPixels>250</minLodPixels><maxLodPixels>-1</maxLodPixels></Lod></Region><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.256906,37.866972,85.3</coordinates></Point></Placemark>
+  <Placemark><styleUrl>#poly2</styleUrl><description><![CDATA[<b>2200 BANCROFT Way</b><br/><b>Units:</b> 550- 1,650 students <br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 23<br/><b>Height:</b> 77.1m<br/><b>Status:</b> Under Construction<br/><b style='color:purple'>UC Berkeley Project</b>]]></description><Polygon>
+				<extrude>1</extrude>
+				<altitudeMode>relativeToGround</altitudeMode>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-122.2653175656431,37.86760604584239,79.5 -122.265364775851,37.86782808374297,79.5 -122.2658107301884,37.86777400642833,79.5 -122.2657766348327,37.86756271820855,79.5 -122.2653175656431,37.86760604584239,79.5 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon></Placemark>
+  <Placemark><name>2200 Bancroft Way · 550u</name><styleUrl>#lab2</styleUrl><Region><LatLonAltBox><west>-122.265811</west><east>-122.265318</east><south>37.867563</south><north>37.867828</north></LatLonAltBox><Lod><minLodPixels>250</minLodPixels><maxLodPixels>-1</maxLodPixels></Lod></Region><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.265517,37.867675,79.5</coordinates></Point></Placemark>
+  <Placemark><styleUrl>#poly2</styleUrl><description><![CDATA[<b>2029 UNIVERSITY Ave</b><br/><b>Units:</b> 240<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 23<br/><b>Height:</b> 78.0m<br/><b>Status:</b> Entitled]]></description><Polygon>
+				<extrude>1</extrude>
+				<altitudeMode>relativeToGround</altitudeMode>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-122.2696446143454,37.87213473114895,78 -122.2699970338518,37.87209237054999,78 -122.270058002845,37.87239703808411,78 -122.2697073799234,37.87244212108648,78 -122.2696446143454,37.87213473114895,78 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon></Placemark>
+  <Placemark><name>2029 University Ave · 240u</name><styleUrl>#lab2</styleUrl><Region><LatLonAltBox><west>-122.270058</west><east>-122.269645</east><south>37.872092</south><north>37.872442</north></LatLonAltBox><Lod><minLodPixels>250</minLodPixels><maxLodPixels>-1</maxLodPixels></Lod></Region><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.269810,37.872240,78.0</coordinates></Point></Placemark>
+  <Placemark><styleUrl>#poly2</styleUrl><description><![CDATA[<b>2276 SHATTUCK Ave</b><br/><b>Units:</b> 336<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 18<br/><b>Height:</b> 63.0m<br/><b>Status:</b> In Review]]></description><Polygon>
+				<extrude>1</extrude>
+				<altitudeMode>relativeToGround</altitudeMode>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-122.2683982098763,37.86760063152184,63 -122.268447246836,37.86784023737008,63 -122.2680844913283,37.86788481305854,63 -122.2680598123012,37.86764895194761,63 -122.2683982098763,37.86760063152184,63 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon></Placemark>
+  <Placemark><name>2276 Shattuck Ave · 336u</name><styleUrl>#lab2</styleUrl><Region><LatLonAltBox><west>-122.268447</west><east>-122.268060</east><south>37.867601</south><north>37.867885</north></LatLonAltBox><Lod><minLodPixels>250</minLodPixels><maxLodPixels>-1</maxLodPixels></Lod></Region><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.268278,37.867715,63.0</coordinates></Point></Placemark>
+  <Placemark><styleUrl>#poly2</styleUrl><description><![CDATA[<b>2425 DURANT Ave</b><br/><b>Units:</b> 117<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 20<br/><b>Height:</b> 61.0m<br/><b>Status:</b> Decision Pending]]></description><Polygon>
+				<extrude>1</extrude>
+				<altitudeMode>relativeToGround</altitudeMode>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-122.2599930122489,37.86779779616973,61 -122.2602413878907,37.8677653188486,61 -122.260317962351,37.86811738479477,61 -122.2602404724875,37.86812751695053,61 -122.260079871174,37.868148517285,61 -122.2599930122489,37.86779779616973,61 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon></Placemark>
+  <Placemark><name>2425 Durant Ave · 117u</name><styleUrl>#lab2</styleUrl><Region><LatLonAltBox><west>-122.260318</west><east>-122.259993</east><south>37.867765</south><north>37.868149</north></LatLonAltBox><Lod><minLodPixels>250</minLodPixels><maxLodPixels>-1</maxLodPixels></Lod></Region><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.260144,37.867959,61.0</coordinates></Point></Placemark>
+  <Placemark><styleUrl>#poly2</styleUrl><description><![CDATA[<b>2274 SHATTUCK Ave</b><br/><b>Units:</b> 299<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 17<br/><b>Height:</b> 59.5m<br/><b>Status:</b> Entitled]]></description><Polygon>
+				<extrude>1</extrude>
+				<altitudeMode>relativeToGround</altitudeMode>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-122.2684171238047,37.86795742455347,59.5 -122.2684332273109,37.86805124906881,59.5 -122.268859822865,37.86799611537222,59.5 -122.2687902514216,37.86754875692188,59.5 -122.2683982098763,37.86760063152184,59.5 -122.268447246836,37.86784023737008,59.5 -122.2680844913283,37.86788481305854,59.5 -122.2680941057001,37.86799728196314,59.5 -122.2684171238047,37.86795742455347,59.5 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon></Placemark>
+  <Placemark><name>2274 Shattuck Ave · 299u</name><styleUrl>#lab2</styleUrl><Region><LatLonAltBox><west>-122.268860</west><east>-122.268084</east><south>37.867549</south><north>37.868051</north></LatLonAltBox><Lod><minLodPixels>250</minLodPixels><maxLodPixels>-1</maxLodPixels></Lod></Region><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.268438,37.867870,59.5</coordinates></Point></Placemark>
+  <Placemark><styleUrl>#poly2</styleUrl><description><![CDATA[<b>2420 SHATTUCK Ave</b><br/><b>Units:</b> 132<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 17<br/><b>Height:</b> 59.5m<br/><b>Status:</b> In Review]]></description><Polygon>
+				<extrude>1</extrude>
+				<altitudeMode>relativeToGround</altitudeMode>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-122.2678165376415,37.86536521967802,59.5 -122.2682069442377,37.8653181731219,59.5 -122.2681855131924,37.86521823350147,59.5 -122.2677970130208,37.86527212454276,59.5 -122.2678165376415,37.86536521967802,59.5 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon></Placemark>
+  <Placemark><name>2420 Shattuck Ave · 132u</name><styleUrl>#lab2</styleUrl><Region><LatLonAltBox><west>-122.268207</west><east>-122.267797</east><south>37.865218</south><north>37.865365</north></LatLonAltBox><Lod><minLodPixels>250</minLodPixels><maxLodPixels>-1</maxLodPixels></Lod></Region><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.267965,37.865308,59.5</coordinates></Point></Placemark>
+</Document>
+</kml>

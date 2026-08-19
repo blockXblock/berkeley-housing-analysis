@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document>
+<name>Footprint compare: hand-trace vs county parcel</name>
+<Style id="hand"><PolyStyle><color>662222dd</color><outline>1</outline></PolyStyle><LineStyle><color>ff2222dd</color><width>2.5</width></LineStyle></Style>
+<Style id="parcel"><PolyStyle><color>4422cc22</color><outline>1</outline></PolyStyle><LineStyle><color>ff22cc22</color><width>2.5</width></LineStyle></Style>
+<Placemark><styleUrl>#hand</styleUrl><Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode><outerBoundaryIs><LinearRing><coordinates>-122.268251,37.869423,14 -122.268274,37.869652,14 -122.269074,37.869608,14 -122.269018,37.869325,14 -122.268251,37.869423,14</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark>
+<Placemark><styleUrl>#parcel</styleUrl><Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode><outerBoundaryIs><LinearRing><coordinates>-122.269018,37.869325,12 -122.269067,37.869579,12 -122.268670,37.869615,12 -122.268274,37.869652,12 -122.268251,37.869423,12 -122.269018,37.869325,12</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark>
+<Placemark><styleUrl>#hand</styleUrl><Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode><outerBoundaryIs><LinearRing><coordinates>-122.268398,37.867601,14 -122.268447,37.867840,14 -122.268084,37.867885,14 -122.268060,37.867649,14 -122.268398,37.867601,14</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark>
+<Placemark><styleUrl>#parcel</styleUrl><Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode><outerBoundaryIs><LinearRing><coordinates>-122.268398,37.867601,12 -122.268447,37.867840,12 -122.268084,37.867885,12 -122.268060,37.867649,12 -122.268398,37.867601,12</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark>
+</Document></kml>

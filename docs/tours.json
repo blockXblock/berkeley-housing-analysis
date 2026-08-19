@@ -1,261 +1,171 @@
 {
- "generated": "2026-08-01",
- "canonical_geometry": {
-  "file": "kml/geometry/geometry.kml",
-  "sha": "5bb87b9b029c",
-  "buildings": 184,
-  "pushpins_suppressed": true,
-  "labels_source": "berkeley_housing_v2.db / v_projects_flat"
- },
- "tours": [
-  {
-   "id": "205sec",
-   "title": "205sec",
-   "tour_kml": "kml/tours/205sec.kml",
-   "source_kml_missing": false,
-   "package": "kml/tours/packages/205sec__geom-5bb87b9b029c.kml",
-   "package_geometry_sha": "5bb87b9b029c",
-   "flyto_legs": 19,
-   "duration_s": 216.0,
-   "video": null,
-   "needs_rerecord": null
+  "generated": "2026-08-01",
+  "canonical_geometry": {
+    "file": "kml/geometry/geometry.kml",
+    "sha": "5bb87b9b029c",
+    "buildings": 184,
+    "pushpins_suppressed": true,
+    "labels_source": "berkeley_housing_v2.db / v_projects_flat"
   },
-  {
-   "id": "Shattuck-centerline-flight-with-2190-and-2276-orbits",
-   "title": "June 2026 Shattuck Avenue Building Pipeline",
-   "tour_kml": "kml/tours/Shattuck-centerline-flight-with-2190-and-2276-orbits.kml",
-   "source_kml_missing": false,
-   "package": "kml/tours/packages/Shattuck-centerline-flight-with-2190-and-2276-orbits__geom-5bb87b9b029c.kml",
-   "package_geometry_sha": "5bb87b9b029c",
-   "flyto_legs": 112,
-   "duration_s": 443.6,
-   "video": {
-    "youtube": "X0IMsbbhjGk"
-   },
-   "recorded": "2026-06-09",
-   "recorded_geometry_era": "2026-06-09 no-icons era",
-   "has_pushpins": false,
-   "mapping_inferred": true,
-   "needs_rerecord": true
-  },
-  {
-   "id": "berkeley-housing-pipeline-tour-45sec",
-   "title": "berkeley housing pipeline tour 45sec",
-   "tour_kml": "kml/tours/berkeley-housing-pipeline-tour-45sec.kml",
-   "source_kml_missing": false,
-   "package": "kml/tours/packages/berkeley-housing-pipeline-tour-45sec__geom-5bb87b9b029c.kml",
-   "package_geometry_sha": "5bb87b9b029c",
-   "flyto_legs": 12,
-   "duration_s": 62.0,
-   "video": null,
-   "needs_rerecord": null
-  },
-  {
-   "id": "berkeley-overview-tour",
-   "title": "berkeley overview tour",
-   "tour_kml": "kml/tours/berkeley-overview-tour.kml",
-   "source_kml_missing": false,
-   "package": "kml/tours/packages/berkeley-overview-tour__geom-5bb87b9b029c.kml",
-   "package_geometry_sha": "5bb87b9b029c",
-   "flyto_legs": 6,
-   "duration_s": 15.0,
-   "video": null,
-   "needs_rerecord": null
-  },
-  {
-   "id": "berkeley-tour-45sec-rebuilt",
-   "title": "berkeley tour 45sec rebuilt",
-   "tour_kml": "kml/tours/berkeley-tour-45sec-rebuilt.kml",
-   "source_kml_missing": false,
-   "package": "kml/tours/packages/berkeley-tour-45sec-rebuilt__geom-5bb87b9b029c.kml",
-   "package_geometry_sha": "5bb87b9b029c",
-   "flyto_legs": 8,
-   "duration_s": 45.0,
-   "video": null,
-   "needs_rerecord": null
-  },
-  {
-   "id": "berkeley-tour-extended-dramatic",
-   "title": "berkeley tour extended dramatic",
-   "tour_kml": "kml/tours/berkeley-tour-extended-dramatic.kml",
-   "source_kml_missing": false,
-   "package": "kml/tours/packages/berkeley-tour-extended-dramatic__geom-5bb87b9b029c.kml",
-   "package_geometry_sha": "5bb87b9b029c",
-   "flyto_legs": 15,
-   "duration_s": 134.0,
-   "video": null,
-   "needs_rerecord": null
-  },
-  {
-   "id": "berkeley-tour-telegraph-shattuck-cedar",
-   "title": "berkeley tour telegraph shattuck cedar",
-   "tour_kml": "kml/tours/berkeley-tour-telegraph-shattuck-cedar.kml",
-   "source_kml_missing": false,
-   "package": "kml/tours/packages/berkeley-tour-telegraph-shattuck-cedar__geom-5bb87b9b029c.kml",
-   "package_geometry_sha": "5bb87b9b029c",
-   "flyto_legs": 9,
-   "duration_s": 51.0,
-   "video": null,
-   "needs_rerecord": null
-  },
-  {
-   "id": "downtown-berkeley-tour",
-   "title": "downtown berkeley tour",
-   "tour_kml": "kml/tours/downtown-berkeley-tour.kml",
-   "source_kml_missing": false,
-   "package": "kml/tours/packages/downtown-berkeley-tour__geom-5bb87b9b029c.kml",
-   "package_geometry_sha": "5bb87b9b029c",
-   "flyto_legs": 4,
-   "duration_s": 10.0,
-   "video": null,
-   "needs_rerecord": null
-  },
-  {
-   "id": "longer",
-   "title": "longer",
-   "tour_kml": "kml/tours/longer.kml",
-   "source_kml_missing": false,
-   "package": "kml/tours/packages/longer__geom-5bb87b9b029c.kml",
-   "package_geometry_sha": "5bb87b9b029c",
-   "flyto_legs": 19,
-   "duration_s": 216.0,
-   "video": null,
-   "needs_rerecord": null
-  },
-  {
-   "id": "longerv2",
-   "title": "longerv2",
-   "tour_kml": "kml/tours/longerv2.kml",
-   "source_kml_missing": false,
-   "package": "kml/tours/packages/longerv2__geom-5bb87b9b029c.kml",
-   "package_geometry_sha": "5bb87b9b029c",
-   "flyto_legs": 19,
-   "duration_s": 216.0,
-   "video": null,
-   "needs_rerecord": null
-  },
-  {
-   "id": "tour-adeline+shattuck-s2n",
-   "title": "Adeline & Shattuck Corridor",
-   "tour_kml": "kml/tours/tour-adeline+shattuck-s2n.kml",
-   "source_kml_missing": false,
-   "package": "kml/tours/packages/tour-adeline+shattuck-s2n__geom-5bb87b9b029c.kml",
-   "package_geometry_sha": "5bb87b9b029c",
-   "flyto_legs": 13,
-   "duration_s": 145.5,
-   "video": {
-    "youtube": "3OQjzk9dIOw"
-   },
-   "recorded": "2026-05-18",
-   "recorded_geometry_era": "2026-05-18",
-   "has_pushpins": true,
-   "mapping_inferred": true,
-   "needs_rerecord": true
-  },
-  {
-   "id": "tour-elmwood+college+bancroft+shattuck-s2n",
-   "title": "Elmwood / College / Bancroft / Shattuck",
-   "tour_kml": "kml/tours/tour-elmwood+college+bancroft+shattuck-s2n.kml",
-   "source_kml_missing": false,
-   "package": "kml/tours/packages/tour-elmwood+college+bancroft+shattuck-s2n__geom-5bb87b9b029c.kml",
-   "package_geometry_sha": "5bb87b9b029c",
-   "flyto_legs": 8,
-   "duration_s": 64.0,
-   "video": {
-    "youtube": null,
-    "mp4": "videos/tour-elmwood+college+bancroft+shattuck-s2n.mp4"
-   },
-   "recorded": "2026-05-06",
-   "recorded_geometry_era": "pre-2026-05-14",
-   "has_pushpins": true,
-   "mapping_inferred": false,
-   "needs_rerecord": true
-  },
-  {
-   "id": "tour-private-pipeline-over-200-units-2026-05-16",
-   "title": "Berkeley's 17 Largest Private Housing Projects",
-   "tour_kml": "kml/tours/tour-private-pipeline-over-200-units-2026-05-16.kml",
-   "source_kml_missing": false,
-   "package": "kml/tours/packages/tour-private-pipeline-over-200-units-2026-05-16__geom-5bb87b9b029c.kml",
-   "package_geometry_sha": "5bb87b9b029c",
-   "flyto_legs": 211,
-   "duration_s": 527.6,
-   "video": {
-    "youtube": "5VLjGlMuHLU"
-   },
-   "recorded": "2026-05-16",
-   "recorded_geometry_era": "2026-05-17-ish",
-   "has_pushpins": true,
-   "mapping_inferred": true,
-   "needs_rerecord": true
-  },
-  {
-   "id": "uc_dormitory_tour_2026-05-14",
-   "title": "UC Berkeley New Student Housing",
-   "tour_kml": "kml/tours/uc_dormitory_tour_2026-05-14.kml",
-   "source_kml_missing": false,
-   "package": "kml/tours/packages/uc_dormitory_tour_2026-05-14__geom-5bb87b9b029c.kml",
-   "package_geometry_sha": "5bb87b9b029c",
-   "flyto_legs": 18,
-   "duration_s": 47.0,
-   "video": {
-    "youtube": "LAW1WIUF_ks"
-   },
-   "recorded": "2026-05-14",
-   "recorded_geometry_era": "pre-2026-05-17",
-   "has_pushpins": true,
-   "mapping_inferred": true,
-   "needs_rerecord": true
-  },
-  {
-   "id": "uc_dormitory_tour_2026-05-14 (1)",
-   "title": "uc_dormitory_tour_2026 05 14 (1)",
-   "tour_kml": "kml/tours/uc_dormitory_tour_2026-05-14 (1).kml",
-   "source_kml_missing": false,
-   "package": "kml/tours/packages/uc_dormitory_tour_2026-05-14 (1)__geom-5bb87b9b029c.kml",
-   "package_geometry_sha": "5bb87b9b029c",
-   "flyto_legs": 18,
-   "duration_s": 47.0,
-   "video": null,
-   "needs_rerecord": null
-  },
-  {
-   "id": "uc_dormitory_tour_2026-05-14 (2)",
-   "title": "uc_dormitory_tour_2026 05 14 (2)",
-   "tour_kml": "kml/tours/uc_dormitory_tour_2026-05-14 (2).kml",
-   "source_kml_missing": false,
-   "package": "kml/tours/packages/uc_dormitory_tour_2026-05-14 (2)__geom-5bb87b9b029c.kml",
-   "package_geometry_sha": "5bb87b9b029c",
-   "flyto_legs": 18,
-   "duration_s": 53.0,
-   "video": null,
-   "needs_rerecord": null
-  },
-  {
-   "id": "uc_dormitory_tour_2026-05-14 (3)",
-   "title": "uc_dormitory_tour_2026 05 14 (3)",
-   "tour_kml": "kml/tours/uc_dormitory_tour_2026-05-14 (3).kml",
-   "source_kml_missing": false,
-   "package": "kml/tours/packages/uc_dormitory_tour_2026-05-14 (3)__geom-5bb87b9b029c.kml",
-   "package_geometry_sha": "5bb87b9b029c",
-   "flyto_legs": 18,
-   "duration_s": 65.0,
-   "video": null,
-   "needs_rerecord": null
-  },
-  {
-   "id": "uc_dormitory_tour_2026-05-14 (4)",
-   "title": "uc_dormitory_tour_2026 05 14 (4)",
-   "tour_kml": "kml/tours/uc_dormitory_tour_2026-05-14 (4).kml",
-   "source_kml_missing": false,
-   "package": "kml/tours/packages/uc_dormitory_tour_2026-05-14 (4)__geom-5bb87b9b029c.kml",
-   "package_geometry_sha": "5bb87b9b029c",
-   "flyto_legs": 18,
-   "duration_s": 65.0,
-   "video": null,
-   "needs_rerecord": null
-  }
- ],
- "orphan_packages": [],
- "misfiled_in_tours_dir": []
+  "tours": [
+    {
+      "id": "Shattuck-centerline-flight-with-2190-and-2276-orbits",
+      "title": "June 2026 Shattuck Avenue Building Pipeline",
+      "tour_kml": "kml/tours/Shattuck-centerline-flight-with-2190-and-2276-orbits.kml",
+      "source_kml_missing": false,
+      "package": "kml/tours/packages/Shattuck-centerline-flight-with-2190-and-2276-orbits__geom-5bb87b9b029c.kml",
+      "package_geometry_sha": "5bb87b9b029c",
+      "flyto_legs": 112,
+      "duration_s": 443.6,
+      "video": {
+        "youtube": "X0IMsbbhjGk"
+      },
+      "recorded": "2026-06-09",
+      "recorded_geometry_era": "2026-06-09 no-icons era",
+      "has_pushpins": false,
+      "mapping_inferred": true,
+      "needs_rerecord": true
+    },
+    {
+      "id": "berkeley-housing-pipeline-tour-45sec",
+      "title": "berkeley housing pipeline tour 45sec",
+      "tour_kml": "kml/tours/berkeley-housing-pipeline-tour-45sec.kml",
+      "source_kml_missing": false,
+      "package": "kml/tours/packages/berkeley-housing-pipeline-tour-45sec__geom-5bb87b9b029c.kml",
+      "package_geometry_sha": "5bb87b9b029c",
+      "flyto_legs": 12,
+      "duration_s": 62.0,
+      "video": null,
+      "needs_rerecord": null
+    },
+    {
+      "id": "berkeley-overview-tour",
+      "title": "berkeley overview tour",
+      "tour_kml": "kml/tours/berkeley-overview-tour.kml",
+      "source_kml_missing": false,
+      "package": "kml/tours/packages/berkeley-overview-tour__geom-5bb87b9b029c.kml",
+      "package_geometry_sha": "5bb87b9b029c",
+      "flyto_legs": 6,
+      "duration_s": 15.0,
+      "video": null,
+      "needs_rerecord": null
+    },
+    {
+      "id": "berkeley-tour-extended-dramatic",
+      "title": "berkeley tour extended dramatic",
+      "tour_kml": "kml/tours/berkeley-tour-extended-dramatic.kml",
+      "source_kml_missing": false,
+      "package": "kml/tours/packages/berkeley-tour-extended-dramatic__geom-5bb87b9b029c.kml",
+      "package_geometry_sha": "5bb87b9b029c",
+      "flyto_legs": 15,
+      "duration_s": 134.0,
+      "video": null,
+      "needs_rerecord": null
+    },
+    {
+      "id": "berkeley-tour-telegraph-shattuck-cedar",
+      "title": "berkeley tour telegraph shattuck cedar",
+      "tour_kml": "kml/tours/berkeley-tour-telegraph-shattuck-cedar.kml",
+      "source_kml_missing": false,
+      "package": "kml/tours/packages/berkeley-tour-telegraph-shattuck-cedar__geom-5bb87b9b029c.kml",
+      "package_geometry_sha": "5bb87b9b029c",
+      "flyto_legs": 9,
+      "duration_s": 51.0,
+      "video": null,
+      "needs_rerecord": null
+    },
+    {
+      "id": "downtown-berkeley-tour",
+      "title": "downtown berkeley tour",
+      "tour_kml": "kml/tours/downtown-berkeley-tour.kml",
+      "source_kml_missing": false,
+      "package": "kml/tours/packages/downtown-berkeley-tour__geom-5bb87b9b029c.kml",
+      "package_geometry_sha": "5bb87b9b029c",
+      "flyto_legs": 4,
+      "duration_s": 10.0,
+      "video": null,
+      "needs_rerecord": null
+    },
+    {
+      "id": "longerv2",
+      "title": "Berkeley Housing Pipeline — Longer Corridors",
+      "tour_kml": "kml/tours/longerv2.kml",
+      "source_kml_missing": false,
+      "package": "kml/tours/packages/longerv2__geom-5bb87b9b029c.kml",
+      "package_geometry_sha": "5bb87b9b029c",
+      "flyto_legs": 19,
+      "duration_s": 216.0,
+      "video": null,
+      "needs_rerecord": null
+    },
+    {
+      "id": "tour-adeline+shattuck-s2n",
+      "title": "Adeline & Shattuck Corridor",
+      "tour_kml": "kml/tours/tour-adeline+shattuck-s2n.kml",
+      "source_kml_missing": false,
+      "package": "kml/tours/packages/tour-adeline+shattuck-s2n__geom-5bb87b9b029c.kml",
+      "package_geometry_sha": "5bb87b9b029c",
+      "flyto_legs": 13,
+      "duration_s": 145.5,
+      "video": {
+        "youtube": "3OQjzk9dIOw"
+      },
+      "recorded": "2026-05-18",
+      "recorded_geometry_era": "2026-05-18",
+      "has_pushpins": true,
+      "mapping_inferred": true,
+      "needs_rerecord": true
+    },
+    {
+      "id": "tour-elmwood+college+bancroft+shattuck-s2n",
+      "title": "Elmwood / College / Bancroft / Shattuck",
+      "tour_kml": "kml/tours/tour-elmwood+college+bancroft+shattuck-s2n.kml",
+      "source_kml_missing": false,
+      "package": "kml/tours/packages/tour-elmwood+college+bancroft+shattuck-s2n__geom-5bb87b9b029c.kml",
+      "package_geometry_sha": "5bb87b9b029c",
+      "flyto_legs": 8,
+      "duration_s": 64.0,
+      "video": {
+        "youtube": null,
+        "mp4": "videos/tour-elmwood+college+bancroft+shattuck-s2n.mp4"
+      },
+      "recorded": "2026-05-06",
+      "recorded_geometry_era": "pre-2026-05-14",
+      "has_pushpins": true,
+      "mapping_inferred": false,
+      "needs_rerecord": true
+    },
+    {
+      "id": "tour-private-pipeline-over-200-units-2026-05-16",
+      "title": "Berkeley's 17 Largest Private Housing Projects",
+      "tour_kml": "kml/tours/tour-private-pipeline-over-200-units-2026-05-16.kml",
+      "source_kml_missing": false,
+      "package": "kml/tours/packages/tour-private-pipeline-over-200-units-2026-05-16__geom-5bb87b9b029c.kml",
+      "package_geometry_sha": "5bb87b9b029c",
+      "flyto_legs": 211,
+      "duration_s": 527.6,
+      "video": {
+        "youtube": "5VLjGlMuHLU"
+      },
+      "recorded": "2026-05-16",
+      "recorded_geometry_era": "2026-05-17-ish",
+      "has_pushpins": true,
+      "mapping_inferred": true,
+      "needs_rerecord": true
+    },
+    {
+      "id": "uc_dormitory_tour_2026-05-14 (4)",
+      "title": "UC Berkeley New Student Housing",
+      "tour_kml": "kml/tours/uc_dormitory_tour_2026-05-14 (4).kml",
+      "source_kml_missing": false,
+      "package": "kml/tours/packages/uc_dormitory_tour_2026-05-14 (4)__geom-5bb87b9b029c.kml",
+      "package_geometry_sha": "5bb87b9b029c",
+      "flyto_legs": 18,
+      "duration_s": 65.0,
+      "video": null,
+      "needs_rerecord": null
+    }
+  ],
+  "orphan_packages": [],
+  "misfiled_in_tours_dir": []
 }

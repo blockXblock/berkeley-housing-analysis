@@ -646,6 +646,7 @@ const SK_LAYOUT={font:{family:'system-ui',size:12,color:'#30343b'},paper_bgcolor
 Plotly.newPlot('sankeyRev',[Object.assign({type:'sankey',orientation:'h',valueformat:',.1f',valuesuffix:'M'},__REV__)],SK_LAYOUT,{displayModeBar:false,responsive:true});
 Plotly.newPlot('sankeySpend',[Object.assign({type:'sankey',orientation:'h',valueformat:',.1f',valuesuffix:'M'},__SPEND__)],SK_LAYOUT,{displayModeBar:false,responsive:true});
 </script>"""
+html_base = html      # pre-script template (token intact) — the artifact variant builds from this
 html = html.replace("__SANKEY_SCRIPTS__",
                     SANKEY_JS.replace("__PLOTLY_TAG__", PLOTLY_TAG)
                              .replace("__REV__", json.dumps(rev_sankey)).replace("__SPEND__", json.dumps(spend_sankey)))
@@ -654,12 +655,38 @@ os.makedirs(os.path.dirname(OUT), exist_ok=True)
 open(OUT, "w").write(html)
 print(f"wrote {OUT} ({len(html)/1024:.0f} KB)")
 
-# Artifact variant: Claude Artifacts wrap content in their own document skeleton, so this
-# copy strips the outer wrappers (title/meta/style stay at top — the title is scanned there).
-art = (html.replace('<!doctype html><html lang="en"><head><meta charset="utf-8">\n'
-                    '<meta name="viewport" content="width=device-width,initial-scale=1">\n', '')
-           .replace('</head><body>', '')
-           .replace('</body></html>', ''))
+# Artifact variant: Claude Artifacts wrap content in their own document skeleton (strip the
+# outer wrappers; title/meta/style stay at top) AND the platform refuses to publicly share
+# the multi-MB inlined-Plotly version — so the artifact gets STATIC SVG Sankeys (kaleido)
+# and no script at all. Falls back to the inlined interactive form if kaleido is missing.
+def _sankey_svg(sk, w, h):
+    import plotly.graph_objects as go
+    fig = go.Figure(go.Sankey(node=dict(sk["node"]), link=dict(sk["link"]),
+                              orientation="h", valueformat=",.1f", valuesuffix="M"))
+    fig.update_layout(font=dict(family="Arial", size=13, color="#30343b"),
+                      paper_bgcolor="rgba(0,0,0,0)", margin=dict(l=8, r=8, t=8, b=8))
+    return fig.to_image(format="svg", width=w, height=h).decode()
+
+art = html_base
+try:
+    rev_svg = _sankey_svg(rev_sankey, 1000, 500)
+    spend_svg = _sankey_svg(spend_sankey, 1000, 560)
+    art = (art.replace('<div id="sankeyRev" style="height:500px;max-width:1020px"></div>',
+                       f'<div style="max-width:1020px;overflow-x:auto">{rev_svg}</div>')
+              .replace('<div id="sankeySpend" style="height:560px;max-width:1020px"></div>',
+                       f'<div style="max-width:1020px;overflow-x:auto">{spend_svg}</div>')
+              .replace("Hover any band for the amount.", "Amounts are labeled in $ millions.")
+              .replace("__SANKEY_SCRIPTS__", ""))
+    print("artifact Sankeys: static SVG (kaleido)")
+except Exception as e:
+    print(f"WARNING: static SVG render failed ({e}) — artifact falls back to inlined Plotly (large)")
+    art = art.replace("__SANKEY_SCRIPTS__",
+                      SANKEY_JS.replace("__PLOTLY_TAG__", PLOTLY_TAG)
+                               .replace("__REV__", json.dumps(rev_sankey)).replace("__SPEND__", json.dumps(spend_sankey)))
+art = (art.replace('<!doctype html><html lang="en"><head><meta charset="utf-8">\n'
+                   '<meta name="viewport" content="width=device-width,initial-scale=1">\n', '')
+          .replace('</head><body>', '')
+          .replace('</body></html>', ''))
 ART = os.path.join(os.path.dirname(OUT), "artifact.html")
 open(ART, "w").write(art)
 print(f"wrote {ART} ({len(art)/1024:.0f} KB, wrapper-less for Artifact publish)")

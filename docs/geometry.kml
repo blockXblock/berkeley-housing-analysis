@@ -2927,14 +2927,12 @@
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2190 SHATTUCK Ave</b><br/><b>Units:</b> 452<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 34<br/><b>Height:</b> 119.0m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel</styleUrl>
-			<MultiGeometry><Point><coordinates>-122.26857370145042,37.86948589549435,119.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
+			<MultiGeometry><Point><coordinates>-122.2686526,37.8694947,119.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
 					<LinearRing>
-						<coordinates>
-							-122.2682510776356,37.86942256562457,119 -122.2682738755158,37.86965158945649,119 -122.2690744986648,37.86960750656637,119 -122.2690179778003,37.86932525019976,119 -122.2682510776356,37.86942256562457,119 
-						</coordinates>
+						<coordinates>-122.2690180,37.8693253,119.0 -122.2690674,37.8695793,119.0 -122.2682739,37.8696516,119.0 -122.2682511,37.8694226,119.0 -122.2690180,37.8693253,119.0</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
 			</Polygon></MultiGeometry>

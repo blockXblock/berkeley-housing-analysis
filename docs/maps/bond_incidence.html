@@ -16,7 +16,7 @@
 <div class="panel">
 <div class="tag">🔎 Every dot is a parcel — click it for its <b>property tax, owner, and bond cost</b>. Find where you live.</div>
 <h3>Measure U — a new $300M city bond</h3>
-<div class="sub">Levied on <b>$29B</b> of assessed value; peak debt service ≈ $20.3M/yr. The city advertises <b>$22 per $100k</b> average; on <i>today's</i> base the same bond is <b>$70</b>. Costs below are the actual annual dollars per parcel — toggle the rate to see the city's figures.</div>
+<div class="sub">Levied on <b>$31B</b> of assessed value; peak debt service ≈ $20.3M/yr. The city advertises <b>$22 per $100k</b> average; on <i>today's</i> base the same bond is <b>$67</b>. Costs below are the actual annual dollars per parcel — toggle the rate to see the city's figures.</div>
 <div style="margin:8px 0 2px"><b>Color each parcel by:</b></div>
 <div>
 <button id="b_c" class="on" onclick="mode('c')">Annual $ cost</button>
@@ -24,7 +24,7 @@
 <button id="b_d" onclick="mode('d')">Flat vs ad-valorem</button>
 <button id="b_t" onclick="mode('t')">Recorded-doc recency</button></div>
 <div id="rates" style="margin:6px 0 2px"><span class="sub">rate:</span>
-<button id="r_today" class="on" onclick="setRate(S.rate_today)">today $70</button>
+<button id="r_today" class="on" onclick="setRate(S.rate_today)">today $67</button>
 <button id="r_peak" onclick="setRate(S.rate_peak)">city peak $35</button>
 <button id="r_avg" onclick="setRate(S.rate_avg)">city avg $22</button></div>
 <div id="legend"></div>
@@ -32,7 +32,7 @@
 <div class="cap" id="cap"></div>
 <div class="who" id="who"></div><div style="margin-top:8px;font-size:11px"><a href="https://www.sfchronicle.com/projects/2025/ca-property-map/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">↗ Compare: SF Chronicle statewide owner map</a></div></div>
 <script>
-const S={"base_b": 29.011946685, "annual_m": 20.33333333331867, "rate_100k": 70.08607024578458, "n": 27618, "med_av": 467.0, "p10": 88.0, "p90": 1271.0, "flat": 736, "ineq": 14.443181818181818, "recent5": 27.413281193424577, "rate_today": 70.1, "rate_peak": 35.0, "rate_avg": 22.14, "base_mult": 2.37, "peak_fy": 2040, "oo_share": 42.5, "n_parcels": 27618, "flat_lit": 736, "top1": 20.3, "top10": 42.3, "bottom50": 14.9, "apt_share": 22.3, "tier1": {"apartments_mixed": 55.4, "commercial_industrial": 28.6, "institutional": 12.9, "other": 2.4, "single_family": 0.3, "small_residential": 0.3}, "tier1_entry": 5561464.0, "tier1_sfr_n": 3};
+const S={"base_b": 30.51500513, "annual_m": 20.333333333318674, "rate_100k": 66.63388469605239, "n": 27661, "med_av": 465.0, "p10": 87.0, "p90": 1256.0, "flat": 735, "ineq": 14.436781609195402, "recent5": 28.039477965366398, "rate_today": 66.6, "rate_peak": 35.0, "rate_avg": 22.14, "base_mult": 2.25, "peak_fy": 2040, "oo_share": 41.9, "n_parcels": 27661, "flat_lit": 735, "top1": 20.9, "top10": 42.7, "bottom50": 14.9, "apt_share": 22.0, "tier1": {"apartments_mixed": 52.7, "commercial_industrial": 31.1, "institutional": 12.8, "other": 2.3, "single_family": 0.6, "small_residential": 0.5}, "tier1_entry": 5818954.0, "tier1_sfr_n": 6};
 let FEATS={features:[]}, MODE='c', RATE=S.rate_today;
 const usd=x=>'$'+Math.round(x).toLocaleString();
 // cost = assessed value × rate/$100k. v = AV/1000, so cost = v × rate_per_100k / 100. Rate is selectable.

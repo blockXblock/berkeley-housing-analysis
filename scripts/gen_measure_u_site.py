@@ -16,7 +16,7 @@ JN and notes carry the full identification).
 """
 import json, os
 
-BASELINE = "data/baselines/measure_u_reconciliation_baseline_2026-08-15.json"
+BASELINE = "data/baselines/measure_u_reconciliation_baseline_2026-08-21.json"
 # ⚠ TEAM-ONLY OUTPUT (John's call, 2026-08-15): docs/ is the berkeleybuild.com deploy root, so
 # this site must NOT live there. It is generated into team/ (non-deployed) and shared with the
 # team as a default-private Claude Artifact. Do not retarget back under docs/.

@@ -78,7 +78,7 @@ def main():
 
     # ---- OFFICIAL figures: single source of truth is B2050BIS's reconciliation baseline (CONTRACT: the map
     #      READS official numbers, never hardcodes them). Fallback to the 5%/30yr assumption if it's absent. ----
-    BASELINE = "data/baselines/measure_u_reconciliation_baseline_2026-08-15.json"
+    BASELINE = "data/baselines/measure_u_reconciliation_baseline_2026-08-21.json"
     OFF = {}
     if os.path.exists(BASELINE):
         _b = json.load(open(BASELINE)); OFF = {**_b.get("official", {}), **_b.get("derived", {})}

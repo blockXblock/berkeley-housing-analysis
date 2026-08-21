@@ -583,7 +583,7 @@ later mismatch the cell **diagnoses (figure, baseline, computed, likely cause) a
 the legitimate response to a real change (new assessor snapshot, corrected TRS) is a **new
 appended timestamped baseline**, never an edit of the old one."""))
 
-cells.append(code(r"""BASELINE = "data/baselines/measure_u_reconciliation_baseline_2026-08-15.json"
+cells.append(code(r"""BASELINE = "data/baselines/measure_u_reconciliation_baseline_2026-08-21.json"
 TOL = {  # relative tolerances; official mirror must match exactly
     "n_parcels": 0, "total_av_b": .005, "implied_borrow_rate_pct": .01, "ds_peak_m": .01,
     "total_interest_m": .001, "rate_today_100k": .01, "base_peak_impl_b": .01,

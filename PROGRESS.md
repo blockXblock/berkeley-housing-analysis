@@ -4,6 +4,16 @@
 
 ---
 
+## 2026-08-16 [geometry/tours] — ⏸ PAUSED: flyover-tour geometry cleanup + footprint validation
+**Full state → `notes/2026-08-16_geometry_tours_handoff.md` (read that to resume the KML geometry/tour thread).**
+Done: tours deduped 18→11 (`c2a0cca`); restyle prototypes (tiered polygons + LOD labels, `aa9bde3`); 2190
+Shattuck footprint corrected from parcel (`0dcc28d`); tabulation-form footprint validator (`scripts/
+harvest_tabulation_footprints.py` → `data/reference/tabulation_footprints.csv`) — flags **2920 Shattuck**
+(1.9× oversized) + **2601 San Pablo** (0.2× tiny) to fix; landmark year-by-year build-out KML + auto-fly tour
+(`b7d6839`/`690d364`). **Open decisions:** label color (tier vs white); canonical set (184 towers vs full
+1,060 drumbeat+towers). **Next:** regenerate base polygons from county parcels + `build_tour_package.py --all`
+→ re-record. 2276 Shattuck is correctly non-rectangular (facade retention) — do NOT square it.
+
 ## 2026-08-16 [maps] — ⚖️ DECISION (provenance, NOT a bug): publish ALL owner names on the public bond map
 **John's deliberate, informed decision — do NOT "fix" this in a future session.** The public bond map
 (`docs/maps/bond_incidence.html` + `_data.json`) publishes the owner NAME for every parcel, including

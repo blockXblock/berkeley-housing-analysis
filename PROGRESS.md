@@ -44,6 +44,21 @@ baseline key `owner_occupied_share_pct`.
 - **PRIVACY:** bill PDFs + parcel-level extracts stay **OUTSIDE the repo** (`~/Desktop/Alameda/`) — household AV, payment dates, delinquency history. Only de-identified derived structure is committed.
 - **NEXT / OPEN:** (1) **staffing/pay/overtime/pension cross-city comparison is BLOCKED** — CA State Controller GCC (`gcc.sco.ca.gov/RawExport/2024_City.zip`) refuses curl and browser navigation (WAF); needs a manual browser download, same pattern as the bills. (2) per-dwelling-unit rates rest on **one** multi-unit observation — sample duplexes to confirm. (3) extend the model to apartments (renter pass-through). (4) consider switching the parcel join to `databases/parcel_facts.db` (maps session) — **not** done here because berkeley.db `TotalNetValue` already matched all 37 bills to the dollar.
 
+## 2026-08-20 [B2050BIS] — ✅ Berkeley 2050 history site + founding provenance established
+**`docs/berkeley2050/`** (`6dee000`+`cd60e23`, public at berkeleybuild.com/berkeley2050/ on push): the
+initiative's history + document library. **PROVENANCE FOUND** (John's `Desktop/Berkeley-2050/Beginnings/`):
+Gage & Wozniak presented **"Infrastructure2050" to the City Council March 7, 2017** — deck's closing ask =
+develop the vision w/ UC Berkeley + Berkeley Lab, citizen planning process (7 months before Arreguín's 2017
+State of the City; 18 months before Measure R, which passed 84.64%). Six founding docs published under
+`founding/` (2 PDFs force-added past the global `*.pdf` ignore). Apr-12-2017 Gage→Eric Schmidt letter
+(named, per John) documents the $2B concept + early supporters; Aug-24-2017 "Berkeley Drawdown Solutions"
+maps Paul Hawken's Drawdown ranking to Berkeley measures. ABAG: NO endorsement exists — site states the
+accurate connection (Arreguín's concurrent ABAG presidency; Plan Bay Area 2050 alignment). Also this arc:
+Measure-U rebuttal-vs-endorsement advice (hold signatures for post-resolution October endorsement); argument-
+against filing UNCONFIRMED (not posted anywhere; Clerk or Mayor's office are the only sources; rebuttals due
+8/21 noon); ver-3 Ray memo + Mayor cover note Drive-shared to Ray; evidence-site Artifact v3 (static-SVG,
+share-clean) shared to all 8 V2050 members via Drive transmittal.
+
 ## 2026-08-15 [B2050BIS] — ✅ Measure U analysis: city claims, incidence, V2050 comparison, JN-MeasureU
 **The Nov 2026 $300M GO bond is Measure U. Full analysis for the Berkeley-2050 op-ed effort; JN committed (`80f386d`, `c29a9ac`), note un-committed for review.**
 

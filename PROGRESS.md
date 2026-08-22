@@ -4,6 +4,40 @@
 
 ---
 
+## 2026-08-22 [geometry/tours] — 🔬 Footprints: three findings + an OCR harvester (read-only; nothing rendered yet)
+**Audit `343e601` · harvester `5e5ecdd`. Read `docs/audit/2026-08-22_building_footprint_vs_parcel_findings.md`.**
+**Nothing written to the DB, `geometry.kml`, or the tours.**
+
+1. **139/184 tour polygons ARE the parcel boundary** (match to <7%, most <1%). v2 already records this —
+   `vocabulary_geometry_types` separates `apn_parcel` (**157 current**) from `building_footprint` (**9**) —
+   and `generate_kml.py` reads `geometry_type_id` then extrudes both identically. **A rendering defect, not a
+   data defect.** 2740 Shasta = APN 60-2469-7, a 0.87-acre hillside lot (a 1949 single-family house) extruded
+   to 10.5m, duplicated, with a zero-length vertex. **Unifies the fix-list:** the OVERSIZED flags are exactly
+   `1/lot_coverage` (2920 Shattuck 1.91 vs 1/0.52=1.92). **Inverts hand-off §5 step 2** — parcel-substitution
+   is only safe at HIGH lot coverage; in the hills it re-affirms the error.
+2. **72/176 heights sit at the 10.5m default**; 71 projects carry `height_stories=3.0` from
+   `migration_v1_to_v2_20260507`. Five real mid-rises are drawn 3 stories tall (2150 Kittredge 169u,
+   1951 Shattuck 163u, 2000 University 82u, 2099 MLK 72u, 2009 Addison 45u). Also
+   `relabel_geometry_from_v2.py` rewrites `<name>` but NOT `<description>`, so popups contradict labels.
+3. **REJECTED — footprints from City taxable sqft (`9a47-nj4i`).** Join is excellent (100% APN-resolved,
+   41% nominally derivable) but fails **12x–100x on 6 of 6** vs the tabulation forms. Taxable sqft describes
+   the building **being demolished**, and "taxable" excludes affordable/UC/not-yet-reassessed. **Do not re-attempt.**
+
+**Harvester `scripts/harvest_planset_tabulations.py` (NEW).** The zoning table is vector/raster, NOT text
+(2920 Shattuck p2: 47,650 paths, 0 matching strings) — so `pdftotext`/PyMuPDF can never read it; **OCR can**,
+and it yields **footprint AND height** together, from the **PROPOSED** column. Validation vs the 9 known forms
+(8 testable): **3 EXACT, 1 new self-consistent, 1 flagged mismatch, 3 no-reading (other architects' layouts).**
+**The extractor SELF-VALIDATES:** derived `footprint/lot_area` matches the separately-OCR'd coverage on every
+good reading (52/52, 73/74, 97/95) and diverges on the bad one (100 vs 68) — a discriminator that works
+**without** an oracle, which is what the other 25 projects need. **NOT scaled past the 8 oracle projects**
+(~50% yield). Trap found & fixed: overlapping strips truncate the PROPOSED column, and first-match-wins
+returned 2920 Shattuck as the **existing** building (13,648/45%/36'/3) — plausible and wrong.
+
+**NEXT:** (a) raise yield — locate the sheet by OCR'd header bbox instead of page scan (fixes proj35/36/119);
+(b) **make `generate_kml.py` respect `geometry_type_id`** (parcels flat, footprints extruded) — highest-value
+single fix, independent of the harvest; (c) commit the parcel-vs-building survey as a standing check;
+(d) STILL OPEN, John's call: label colour (tier vs white) + canonical set (184 vs 1,060).
+
 ## 2026-08-16 [geometry/tours] — ⏸ PAUSED: flyover-tour geometry cleanup + footprint validation
 **Full state → `notes/2026-08-16_geometry_tours_handoff.md` (read that to resume the KML geometry/tour thread).**
 Done: tours deduped 18→11 (`c2a0cca`); restyle prototypes (tiered polygons + LOD labels, `aa9bde3`); 2190

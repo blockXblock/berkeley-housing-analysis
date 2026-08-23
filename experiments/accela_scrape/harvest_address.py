@@ -47,13 +47,18 @@ ADDRESS_STREETNAME_SELECTORS = (
     "input[name='ctl00$PlaceHolderMain$generalSearchForm$txtGSStreetName']",
     "input[id$='txtGSStreetName']",
 )
-# The date window DEFAULTS to ~2 years back — widen Start Date to 1900 or OLD permits are silently missed
-# (this is how the 2000 sewer permit at 2811 Benvenue is even visible).
+# The date window DEFAULTS to ~2 years back — in the BUILDING module we widen Start Date to 1900 or OLD
+# permits are silently missed (this is how the 2000 sewer permit at 2811 Benvenue is even visible).
+# CAUTION: the PLANNING module's General Search ERRORS (redirect to Error.aspx, 0 records) whenever ANY
+# date is supplied — verified 2026-08-23: 2441 Le Conte returns 4 records (incl. ZP2023-0089) with NO date
+# and Error.aspx with a date. Planning's default window already reaches 2021 ZP records, so we skip the
+# date fill there. Modules that need (and tolerate) the date widening are listed in DATE_WIDEN_MODULES.
 START_DATE_SELECTORS = (
     "input[id$='txtGSStartDate']",
     "input[id*='StartDate']",
     "input[id$='txtGSPermitDateFrom']",
 )
+DATE_WIDEN_MODULES = {"building", "licenses", "enforcement"}  # NOT planning (date errors the search)
 
 def _fill_first(page, selectors, value, errors):
     for sel in selectors:
@@ -83,8 +88,10 @@ def search_by_address(page, street_name, street_no=None, module="Building",
         # street number is a From/To pair — set both to the same value for a single address
         _fill_first(page, ADDRESS_STREETNO_FROM_SELECTORS, str(street_no), errors)
         _fill_first(page, ADDRESS_STREETNO_TO_SELECTORS, str(street_no), errors)
-    # widen the date window (defaults to ~2 years) so pre-2024 permits are not silently dropped
-    _fill_first(page, START_DATE_SELECTORS, "01/01/1900", errors)
+    # widen the date window (defaults to ~2 years) so pre-2024 permits are not silently dropped — but
+    # ONLY in modules that tolerate a date (Planning errors out on ANY date; see START_DATE_SELECTORS note)
+    if module.lower() in DATE_WIDEN_MODULES:
+        _fill_first(page, START_DATE_SELECTORS, "01/01/1900", errors)
     if not _try_click_search(page, errors):
         errors.append("could not click search button")
         return {"records": [], "blocked": None, "errors": errors, "fill_ok": True}

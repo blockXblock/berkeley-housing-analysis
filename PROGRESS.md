@@ -4,9 +4,9 @@
 
 ---
 
-## 2026-08-23 [team-analysis] — 🏗️ Plan-set harvest: 4 big projects' architect plans staged (local only; awaiting John's R2/ingest go-ahead)
+## 2026-08-23 [team-analysis] — 🏗️ Plan-set harvest: 4 big projects' architect plans HARVESTED + INGESTED to R2/v2 (gated write DONE, John-approved)
 **Harvest list `0cd3011` · driver `85d533e`. Manifest: `scratch/2026-08-23/harvest_stage_batch2/manifest.csv`.**
-**NOTHING to R2 or the DB yet — local staging only. R2 upload + v2 ingest is the next GATED step (John reviews manifest first).**
+**✅ DONE (John approved 2026-08-23): 12 plan-set PDFs uploaded to R2 (bucket `berkeleybuild-pdf`, all HTTP 200) + ingested to `v2.documents` as `plan_set` (document_type_id=2), documents 2111→2123 (+12). Snapshot `keep_snapshot_2026-08-23_pre-planset-ingest.db`. The geometry OCR (`vdt.code='plan_set'`) now picks them up.**
 
 **What John asked:** start the 13-project Accela harvest for the big (≥45u) multi-parcel skyline projects that lack a harvested architect plan set (from `data/reference/harvest_priority_plansets.csv`, the ranked list).
 
@@ -19,7 +19,7 @@
 
 **Tools (committed dev):** `scripts/gen_harvest_priority.py` (ranked list, keys from `permits.permit_number` not `documents`), `scripts/harvest_plansets_batch2.py` (reuses `experiments/accela_scrape/harvest_plansets.py`'s proven engine; targets Planning/ZP; stages to `scratch/`). Runs in `.venv` (Playwright + Chromium). UC projects (1950 Oxford, 2200 Bancroft) flagged — self-permitted, harvest from UC not Accela.
 
-**NEXT:** (a) **John's gated call** — review the manifest, then R2-upload + v2-ingest the 12 staged plan sets (tag `plan_set` so the geometry session's OCR picks them up). (b) Phase-2 discovery for the 12 pure-BP projects + 8 NO-PLANSETS: find each one's sibling/original ZP record (needs the Planning-module address search fixed, or read related-records off the BP CapDetail). (c) Hand the 4 landed plan sets to the geometry session for footprint OCR (local scratch paths, or after ingest). Division synced with `berkeley-data-b6`: me = proposed/pipeline plan sets, them = already-built via Overture + the `generate_kml.py` `geometry_type_id` rendering fix.
+**NEXT:** (a) ✅ DONE — R2 upload + v2 ingest (`experiments/accela_scrape/upload_harvest_to_r2.py --manifest …`; `scripts/ingest_plansets_batch2.py --commit`). (b) Geometry session runs footprint OCR on the 4 projects (now `plan_set` in v2/R2). (c) **Phase-2 discovery** for the 12 pure-BP projects + 8 NO-PLANSETS: find each one's sibling/original ZP record — BLOCKED on the Planning-module address search (`harvest_address.py` selectors are Building-only; 0 results in Planning even for known addresses), or read related-records off the BP CapDetail. Division synced with `berkeley-data-b6` (since restarted): me = proposed/pipeline plan sets, them = already-built via Overture + the `generate_kml.py` `geometry_type_id` rendering fix.
 
 ## 2026-08-22 [geometry/tours] — 🔬 Footprints: three findings + an OCR harvester (read-only; nothing rendered yet)
 **Audit `343e601` · harvester `5e5ecdd`. Read `docs/audit/2026-08-22_building_footprint_vs_parcel_findings.md`.**

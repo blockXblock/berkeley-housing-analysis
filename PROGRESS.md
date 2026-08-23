@@ -4,9 +4,10 @@
 
 ---
 
-## 2026-08-23 [team-analysis] — 🏗️ Phase-2 plan-set + tabulation harvest UNDERWAY (staging; John approved go/full-scope; ingest still gated)
-**Tooling `cdd2d24` (Planning search fix) + phase-2 harvester/discovery committed. Stage: `scratch/2026-08-23/harvest_stage_phase2/`.**
-**I OWN the 1.E/tabulation-form retrieval for the WHOLE tour set (named by John via berkeley-data-da). Nothing ingested yet — staging only.**
+## 2026-08-23 [team-analysis] — 🏗️ Phase-2 harvest: BATCH-1 INGESTED (45 files / 12 projects); full-171 sweep next
+**Tooling `cdd2d24`/`5babbb3`. Stage `scratch/2026-08-23/harvest_stage_phase2/`. Snapshot `keep_snapshot_2026-08-23_pre-phase2-ingest.db`.**
+**✅ INGESTED (John approved go + full scope): 45 files to R2/v2 — 31 plan_set + 14 tabulation forms across 12 projects (5,38,39,40,66,139,143,144,146,148,149,157). documents 2123→2168. NEW doc type id=25 `tabulation_form`. I OWN 1.E retrieval for the WHOLE tour set (named by John via berkeley-data-da).**
+**⚠ Cross-run R2 key-collision guard: `proj_slug_date` keys can clash with prior-harvest objects — 5 caught here (would've linked wrong content), re-keyed with sha8 + re-verified all 45 R2 objects match local before ingest. Bake sha8 into keys for future batches.**
 
 **Pipeline (both proven this session):**
 1. `scripts/discover_planning_records.py` — address → the project's Planning (ZP/DRCP) record. Uses the **Planning address-search fix** (`27a24f7`): the search errored on ANY date value (Building's date-widening mis-applied); gated date-fill to `DATE_WIDEN_MODULES`. Fresh browser context per project (avoids the earlier session-contamination bug where interleaved attachment loads made `DRCF2021-0006` false-match 5 addresses).

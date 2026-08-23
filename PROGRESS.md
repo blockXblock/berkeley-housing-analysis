@@ -4,6 +4,23 @@
 
 ---
 
+## 2026-08-23 [team-analysis] — 🏗️ Plan-set harvest: 4 big projects' architect plans staged (local only; awaiting John's R2/ingest go-ahead)
+**Harvest list `0cd3011` · driver `85d533e`. Manifest: `scratch/2026-08-23/harvest_stage_batch2/manifest.csv`.**
+**NOTHING to R2 or the DB yet — local staging only. R2 upload + v2 ingest is the next GATED step (John reviews manifest first).**
+
+**What John asked:** start the 13-project Accela harvest for the big (≥45u) multi-parcel skyline projects that lack a harvested architect plan set (from `data/reference/harvest_priority_plansets.csv`, the ranked list).
+
+**KEY FINDING (verified live, changed the whole approach):** architect **Project Plans sets (with the zoning-tabulation / footprint page) are attached to the PLANNING (ZP) record, NOT the Building permit.** 1951 Shattuck's $50M construction BP `B2021-04893` has **0 attachments** in the public ACA portal; `ZP2023-0089` (2441 Le Conte) carries a 162 MB Project Plans set + a TAB form. So the original "13 BP-record" targeting was wrong — pivoted to the **12 projects whose ZP number we already hold** (the CSV's `zoning_records`). **Accela address-search is broken in the Planning module** (0 results even for known addresses — the `harvest_address.py` selectors are Building-only), so we can only harvest ZP records whose number we already have.
+
+**RESULT — 4 of 12 ZP-known projects yielded plan sets (12 PDFs, ~1.1 GB, all valid %PDF):**
+- proj27 2441 Le Conte (65u) — 2 sets, 337 MiB · proj20 2036 Bancroft (85u) — 3 sets, 201 MiB
+- proj22 2955 Shattuck (74u) — 6 sets, 513 MiB · proj114 2727 Haste (45u) — 1 set, 26 MiB
+- **8 NO-PLANSETS** (verified genuine on proj12: its `ZP2024-0131` is an incomplete Use-Permit *modification* with only a letter — the full plan set is under a sibling/original permit): proj12/16/19/21/25/31/33/123.
+
+**Tools (committed dev):** `scripts/gen_harvest_priority.py` (ranked list, keys from `permits.permit_number` not `documents`), `scripts/harvest_plansets_batch2.py` (reuses `experiments/accela_scrape/harvest_plansets.py`'s proven engine; targets Planning/ZP; stages to `scratch/`). Runs in `.venv` (Playwright + Chromium). UC projects (1950 Oxford, 2200 Bancroft) flagged — self-permitted, harvest from UC not Accela.
+
+**NEXT:** (a) **John's gated call** — review the manifest, then R2-upload + v2-ingest the 12 staged plan sets (tag `plan_set` so the geometry session's OCR picks them up). (b) Phase-2 discovery for the 12 pure-BP projects + 8 NO-PLANSETS: find each one's sibling/original ZP record (needs the Planning-module address search fixed, or read related-records off the BP CapDetail). (c) Hand the 4 landed plan sets to the geometry session for footprint OCR (local scratch paths, or after ingest). Division synced with `berkeley-data-b6`: me = proposed/pipeline plan sets, them = already-built via Overture + the `generate_kml.py` `geometry_type_id` rendering fix.
+
 ## 2026-08-22 [geometry/tours] — 🔬 Footprints: three findings + an OCR harvester (read-only; nothing rendered yet)
 **Audit `343e601` · harvester `5e5ecdd`. Read `docs/audit/2026-08-22_building_footprint_vs_parcel_findings.md`.**
 **Nothing written to the DB, `geometry.kml`, or the tours.**

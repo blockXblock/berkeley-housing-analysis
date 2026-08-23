@@ -54,6 +54,10 @@ BF = json.load(open(BUDGET_FACTS))
 REV, SP = BF["revenues_fy2025_actual"], BF["spend_fy2027_adopted"]
 PEN, ENT = BF["pensions"], BF["enterprise_funds_fy2026_adopted"]
 
+# the rest of the November ballot — sourced dataset (full texts + impartial analyses)
+BALLOT = json.load(open("data/reference/ballot_measures_2026.json"))
+MEAS = {m["letter"]: m for m in BALLOT["measures"]}
+
 # citywide tax structure (tax_incidence session's block, mirrored into this baseline)
 TI = D["tax_incidence"]
 psf = TI["parcel_tax_per_sqft_total"]; flat_pt = TI["parcel_tax_flat_per_parcel"]
@@ -143,6 +147,24 @@ life_stack = "".join(f'<div style="width:{v/life_tot*100:.1f}%;background:{c}" t
                      for lab, v, c, _ in LIFE)
 life_leg = "".join(f'<span><span class="dot" style="background:{c}"></span>{lab} — ~${v}M ({v/life_tot*100:.0f}%): {d}</span>'
                    for lab, v, c, d in LIFE)
+
+# ballot-section derived tokens (rates x citywide medians from the tax_incidence block)
+med_sqft_d5 = float(dec[5]["median_sqft"]); d1_sqft = float(dec[1]["median_sqft"])
+y_med = MEAS["Y"]["res_rate_sqft"] * med_sqft_d5
+z_med = MEAS["Z"]["res_rate_sqft"] * med_sqft_d5
+u_med_avg_d5 = float(dec[5]["measure_u_advertised_40yr_avg"])
+u_d1 = float(dec[1]["measure_u_advertised_40yr_avg"])
+yz_d1 = (MEAS["Y"]["res_rate_sqft"] + MEAS["Z"]["res_rate_sqft"]) * d1_sqft
+d1_total = float(dec[1]["total"])
+new_tax_yr1 = sum(m["revenue_yr1"] for m in BALLOT["measures"]) + 1000000 - MEAS["AA"]["revenue_yr1"]  # AA counted as its +$1M net
+gf_net = MEAS["V"]["revenue_yr1"] - MEAS["AA"].get("gf_loss", 0)
+CHAN_LABEL = {"value": "on VALUE", "size": "on SIZE", "buy": "on what you BUY", "none": "—"}
+ballot_rows = "".join(
+    f'<tr><td><b>{m["letter"]}</b> — {m["name"]}</td><td>{CHAN_LABEL[m["channel"]]}</td>'
+    f'<td>{m["mechanism"]}</td>'
+    f'<td>{("$" + format(m["revenue_yr1"]//1000000, ",") + "." + str(m["revenue_yr1"]%1000000//100000) + "M/yr") if m["revenue_yr1"] else "—"}</td>'
+    f'<td>{m["threshold"]}</td><td class="small">{m["fund"]}</td></tr>'
+    for m in BALLOT["measures"])
 
 wedge_cap = 2.0 / g_avg * 100
 t1, c1 = tc["1"], ct["1"]
@@ -260,7 +282,7 @@ these maps show the property tax, ownership, and Measure U bond impact for every
 </div></header>
 
 <nav><div class="wrap">
-<a href="#taxes-now">Taxes today</a><a href="#budget">City budget</a><a href="#measure">The measure</a><a href="#rates">One levy, three rates</a>
+<a href="#taxes-now">Taxes today</a><a href="#ballot">The ballot</a><a href="#budget">City budget</a><a href="#measure">The measure</a><a href="#rates">One levy, three rates</a>
 <a href="#burden">Who pays</a><a href="#arguments">The arguments</a><a href="#v2050">Vision 2050</a>
 <a href="#oversight">Oversight</a><a href="#timing">Timing</a><a href="#maps">Maps</a><a href="#method">Method</a>
 </div></nav>
@@ -342,6 +364,38 @@ budgeted. Zero Waste and sanitary-sewer figures are FY2026 adopted (FY27 enterpr
 Debt-service interest sits inside Non-Departmental (~${BF['debt_service_funds_expenditure_fy2026']/1e6:,.0f}M
 ran through dedicated debt-service funds in FY26). Measure U's future debt service would appear as a new
 voter-debt levy on the revenue side and inside Non-Departmental here.</div>
+</div></section>
+
+<section id="ballot"><div class="wrap">
+<h2>The rest of the November ballot</h2>
+<p class="sub">Measure U shares the ballot with six other measures. Mapped onto the three channels above,
+the pattern is stark: <b>if everything passes, all three channels rise at once</b> — and the two new
+parcel taxes cost the median homeowner more per year than the $300 million bond does.</p>
+<table><tr><th>Measure</th><th>Channel</th><th>Mechanism</th><th>Revenue</th><th>Vote needed</th><th>Where it goes</th></tr>
+{ballot_rows}</table>
+<div class="facts" style="margin-top:20px">
+<div class="tile"><b>${y_med + z_med:,.0f}/yr</b><span>Measures Y + Z combined on the median home
+({med_sqft_d5:,.0f} sq ft) — more than Measure U's ${u_med_avg_d5:,.0f} at the advertised average</span></div>
+<div class="tile"><b>${yz_d1:,.0f}/yr</b><span>Y + Z on the lowest-assessed tenth of homes (longest-held) —
+{yz_d1/d1_total*100:.0f}% added to their whole bill, where Measure U adds only ${u_d1:,.0f}</span></div>
+<div class="tile"><b>~${new_tax_yr1/1e6:,.0f}M/yr</b><span>total new taxation if V, Y, Z and AA all pass —
+before Measure U's debt service ramps toward ${ds_peak_m:.0f}M</span></div>
+<div class="tile warn"><b>+${gf_net/1e6:.1f}M</b><span>net General Fund relief from the whole ballot
+(V's ${MEAS["V"]["revenue_yr1"]/1e6:.1f}M minus AA's ${MEAS["AA"]["gf_loss"]/1e6:.1f}M defection) —
+against the ${BALLOT["gf_deficit_fy27"]/1e6:.0f}M deficit</span></div>
+</div>
+<div class="note"><b>Three structural facts no city document examines together.</b>
+(1) <b>The two property channels rise in opposite directions:</b> Y and Z are size-based and land
+hardest on long-held, low-assessed homes — the lowest-assessed tenth would pay ~${yz_d1:,.0f}/yr for
+Y+Z but only ${u_d1:,.0f} for Measure U — while U's ad-valorem burden lands on recent buyers and new
+buildings. Together the ballot raises taxes on both Berkeleys at once.
+(2) <b>The threshold inversion:</b> the council-placed bond needs two-thirds, while Y, Z and AA — all
+citizen-initiative special taxes — claim simple majorities under the <i>Upland</i> doctrine. The
+largest ask faces the highest bar.
+(3) <b>The sleeper:</b> Measure AA quietly converts the existing 1¢ soda tax's unrestricted General
+Fund revenue into restricted special-fund money — a ~${MEAS["AA"]["gf_loss"]/1e6:.1f}M/yr General Fund
+loss on a ballot the City justifies by its deficits. Meanwhile Y and Z each carry
+highest-vote-wins clauses against overlapping tax measures that no official analysis has examined.</div>
 </div></section>
 
 <section id="measure"><div class="wrap">

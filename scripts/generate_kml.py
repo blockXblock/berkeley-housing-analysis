@@ -8,6 +8,7 @@ falls back to synthetic squares for projects without stored geometry.
 """
 
 import sqlite3
+import sys
 import json
 import math
 from datetime import datetime
@@ -218,16 +219,35 @@ def generate_kml():
     for row in projects:
         address, units, vli_units, height_stories, height_feet, status, lat, lng, pipeline_stage, reliability, is_uc_project, geojson_str, geometry_type = row
 
+        # --- IS THIS POLYGON A BUILDING, OR JUST THE LOT? ---------------------
+        # vocabulary_geometry_types distinguishes apn_parcel (the LOT) from
+        # building_footprint (the BUILDING). Extruding a parcel renders the whole lot
+        # as a solid block: 2740 Shasta is a 0.87-acre hillside PARCEL (a 1949
+        # single-family house) drawn as a three-storey mass covering nearly an acre.
+        # Measured 2026-08-22: 139/184 tour polygons match their parcel to <7%.
+        # See docs/audit/2026-08-22_building_footprint_vs_parcel_findings.md
+        is_building = geometry_type in ('building_footprint', 'building_3d')
+
         # Calculate height in meters
         if height_feet:
             height_m = height_feet * 0.3048
+            height_src = 'height_feet'
         elif height_stories:
             height_m = height_stories * 3.5  # 3.5m per story
+            height_src = 'stories x 3.5'
         else:
             height_m = 10.5  # Default 3 stories
+            height_src = 'DEFAULT (no height data)'
 
         # Round height
         height_m = round(height_m, 1)
+
+        # A parcel is a SITE outline: draw it flat on the ground, never extruded as a
+        # fake building. Honest -- "a site in review" is real information; a building
+        # that does not exist is not.
+        if not is_building:
+            height_m = 0.0
+            height_src = f'{height_src} SUPPRESSED (polygon is a {geometry_type or "parcel"}, not a building)'
 
         # Determine display status
         display_status = pipeline_stage or status or 'Unknown'
@@ -259,7 +279,7 @@ def generate_kml():
             f"<b>Units:</b> {units or 0}<br/>",
             f"<b>VLI Units:</b> {vli_units or 0}<br/>",
             f"<b>Stories:</b> {height_stories or 'est.'}<br/>",
-            f"<b>Height:</b> {height_m}m<br/>",
+            f"<b>Height:</b> {height_m}m ({height_src})<br/>",
             f"<b>Status:</b> {display_status}",
         ]
         if is_uc_project:
@@ -348,8 +368,18 @@ def generate_kml():
     with open(OUTPUT_PATH, 'w') as f:
         f.write(kml_content)
     STABLE_OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    with open(STABLE_OUTPUT_PATH, 'w') as f:
-        f.write(kml_content)
+    # kml/geometry/geometry.kml is the HAND-EDITED CANONICAL: it carries hand-traced
+    # footprints, the 2190 Shattuck parcel correction (0dcc28d), and 2276 Shattuck's
+    # genuinely non-rectangular facade-retention building. Regenerating over it DESTROYS
+    # all of that. Require an explicit opt-in.
+    if '--overwrite-canonical' in sys.argv:
+        with open(STABLE_OUTPUT_PATH, 'w') as f:
+            f.write(kml_content)
+        print(f"OVERWROTE hand-edited canonical: {STABLE_OUTPUT_PATH}")
+    else:
+        print(f"WROTE {OUTPUT_PATH}\n"
+              f"DID NOT touch the hand-edited canonical {STABLE_OUTPUT_PATH}\n"
+              f"  (pass --overwrite-canonical to replace it -- this DISCARDS every hand edit)")
 
     conn.close()
 

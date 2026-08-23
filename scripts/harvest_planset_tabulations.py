@@ -48,7 +48,12 @@ FIELDS = [
 # a value token: 12,345 | 45% | 125'-2" | 11
 NUM = re.compile(r"(\d{1,3}(?:,\d{3})+|\d{1,3}\s*%|\d+\s*'\s*-?\s*\d*\s*\"?|\d{1,6}(?:\.\d+)?)")
 # text that terminates the data columns (compliance column)
-TAIL = re.compile(r"COMPLIES|WAIVER|CONCESSION|SEE\s*TABLE|N\s*/?\s*A", re.I)
+# NOTE: "N/A" is a legitimate CELL VALUE (an allowed-column entry), NOT a row terminator.
+# Treating it as one truncated 3030 Telegraph's 4-column row at the N/A and returned the
+# EXISTING footprint (27,024 sf) instead of the PROPOSED (19,811 sf) -- the same
+# demolished-building error, arriving from a new direction. Only compliance-column text
+# terminates a row.
+TAIL = re.compile(r"COMPLIES|WAIVER|CONCESSION|SEE\s*TABLE", re.I)
 CODEREF = re.compile(r"BMC\s*[\d.]+[A-Z.\d]*", re.I)
 
 

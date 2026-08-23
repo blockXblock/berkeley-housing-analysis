@@ -25,7 +25,10 @@ building being demolished).
 READ-ONLY. Writes only data/reference/planset_tabulations.csv. No DB or KML writes.
 Usage:  python scripts/harvest_planset_tabulations.py [--projects 8,9,10] [--limit N] [--scan-pages N]
 """
-import argparse, csv, os, re, sqlite3, subprocess, sys
+import argparse, csv, math, os, re, sqlite3, subprocess, sys
+
+PARCELS = "data/raw/berkeley_taxparcels_2026-08-12.geojson"
+CELL = 0.002
 
 SCRATCH = "scratch/2026-08-22/plansets"
 OUT     = "data/reference/planset_tabulations.csv"
@@ -98,6 +101,18 @@ def find_sheet(pdf, scan_pages, dpi_scan=150):
     return None
 
 
+def read_sheet_cached(pdf, page, pid, dpi=400):
+    """OCR is the expensive step and its output never changes for a fixed (pdf, page).
+    Cache it so validation logic can be re-run in seconds instead of an hour."""
+    cache = f"{SCRATCH}/ocr_proj{pid}_p{page}.txt"
+    if os.path.exists(cache) and os.path.getsize(cache) > 200:
+        return open(cache, errors="ignore").read()
+    txt = read_sheet(pdf, page, dpi)
+    with open(cache, "w") as fh:
+        fh.write(txt)
+    return txt
+
+
 def read_sheet(pdf, page, dpi=400):
     """OCR the sheet in vertical strips (a full E-size sheet at 400dpi is too wide for one pass)."""
     import fitz
@@ -120,7 +135,7 @@ def read_sheet(pdf, page, dpi=400):
 BOUNDS = {
     "footprint_sf":      (200, 400_000),
     "lot_area_sf":       (500, 900_000),
-    "lot_coverage_pct":  (1, 100),
+    "lot_coverage_pct":  (15, 100),   # <15% on an urban infill site is noise, not a reading
     "height_ft":         (8, 900),
     "stories":           (1, 60),
     "gross_floor_sf":    (500, 3_000_000),
@@ -180,6 +195,89 @@ def extract(text):
     return out, evidence, sorted(low)
 
 
+def parcel_index():
+    """Berkeley county tax parcels, bucketed for point-in-polygon lookup."""
+    import collections, json
+    gj = json.load(open(PARCELS))
+    idx = collections.defaultdict(list)
+    for f in gj["features"]:
+        g = f["geometry"]
+        polys = [g["coordinates"]] if g["type"] == "Polygon" else (
+                 g["coordinates"] if g["type"] == "MultiPolygon" else [])
+        for poly in polys:
+            r = poly[0]
+            xs = [q[0] for q in r]; ys = [q[1] for q in r]
+            for cx in range(int(min(xs)/CELL), int(max(xs)/CELL)+1):
+                for cy in range(int(min(ys)/CELL), int(max(ys)/CELL)+1):
+                    idx[(cx, cy)].append((f, r))
+    return idx
+
+
+def ring_area_sf(r):
+    lat0 = sum(q[1] for q in r)/len(r); R = 6371000.0
+    pts = [(math.radians(q[0])*R*math.cos(math.radians(lat0)), math.radians(q[1])*R) for q in r]
+    a = sum(pts[i][0]*pts[(i+1) % len(pts)][1] - pts[(i+1) % len(pts)][0]*pts[i][1]
+            for i in range(len(pts)))
+    return abs(a)/2*10.7639
+
+
+def point_in(pt, r):
+    x, y = pt; c = False; j = len(r)-1
+    for i in range(len(r)):
+        xi, yi = r[i][:2]; xj, yj = r[j][:2]
+        if ((yi > y) != (yj > y)) and (x < (xj-xi)*(y-yi)/((yj-yi) or 1e-12)+xi):
+            c = not c
+        j = i
+    return c
+
+
+def parcel_for(idx, lon, lat):
+    """(APN, parcel_area_sf) for the parcel containing the project's coordinate."""
+    if lon is None or lat is None:
+        return None, None
+    for f, r in idx.get((int(lon/CELL), int(lat/CELL)), []):
+        if point_in((lon, lat), r):
+            return f["properties"].get("APN"), ring_area_sf(r)
+    return None, None
+
+
+def verdict(rec):
+    """TWO INDEPENDENT checks. The LOW-CONFIDENCE flag only proves a row was captured
+    completely -- it says nothing about whether the VALUES are right. 2680 Bancroft
+    came back unflagged with a lot area 39% off the county parcel, and 2274 Shattuck
+    unflagged with a physically impossible 1.1% lot coverage. So:
+      (a) EXTERNAL -- OCR'd lot area vs the county parcel polygon (independent source)
+      (b) INTERNAL -- derived footprint/lot vs the separately-OCR'd lot coverage
+    """
+    fp, lot, cov, par = (rec.get("footprint_sf"), rec.get("lot_area_sf"),
+                         rec.get("lot_coverage_pct"), rec.get("parcel_sf"))
+    checks, notes = [], []
+    if lot and par:
+        ratio = lot/par
+        rec["lot_vs_parcel"] = round(ratio, 3)
+        ok = 0.90 <= ratio <= 1.10
+        checks.append(ok)
+        notes.append(f"lot/parcel={ratio:.2f}{'' if ok else ' MISMATCH'}")
+    if fp and lot:
+        der = fp/lot*100
+        rec["derived_coverage_pct"] = round(der, 1)
+        if cov:
+            ok = abs(der-cov) <= 10
+            checks.append(ok)
+            notes.append(f"derived_cov={der:.0f}% vs stated {cov:.0f}%{'' if ok else ' MISMATCH'}")
+    # a footprint bigger than its own lot is impossible
+    if fp and par and fp > par*1.10:
+        checks.append(False); notes.append("footprint EXCEEDS parcel")
+    if not checks:
+        rec["verdict"] = "UNVERIFIED"
+    elif all(checks):
+        rec["verdict"] = "PASS" if not rec.get("low_confidence") else "PASS(flagged fields)"
+    else:
+        rec["verdict"] = "SUSPECT"
+    rec["checks"] = "; ".join(notes)
+    return rec
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--projects", help="comma-separated project_ids (default: all with a plan set)")
@@ -188,9 +286,11 @@ def main():
     a = ap.parse_args()
 
     os.makedirs(SCRATCH, exist_ok=True)
+    pidx = parcel_index()
     v2 = sqlite3.connect("databases/berkeley_housing_v2.db"); v2.row_factory = sqlite3.Row
     q = """select d.project_id, d.title, d.page_count, d.file_size_bytes, d.r2_url,
-                  v.address_display, v.status_label, v.total_units, v.height_stories
+                  v.address_display, v.status_label, v.total_units, v.height_stories,
+                  v.latitude, v.longitude
            from documents d
            left join vocabulary_document_types vdt on vdt.id = d.document_type_id
            left join v_projects_flat v on v.project_id = d.project_id
@@ -224,23 +324,25 @@ def main():
             results.append(dict(project_id=pid, address=r["address_display"], status=r["status_label"],
                                 units=r["total_units"], sheet_page=None, note="zoning sheet not located"))
             continue
-        vals, ev, low = extract(read_sheet(pdf, pg))
+        vals, ev, low = extract(read_sheet_cached(pdf, pg, pid))
         ev_txt = " || ".join(f"{k}: {v}" for k, v in sorted(ev.items()))
         rec = dict(project_id=pid, address=r["address_display"], status=r["status_label"],
                    units=r["total_units"], db_stories=r["height_stories"], sheet_page=pg + 1,
                    note="", low_confidence=",".join(low), doc_title=r["title"], evidence=ev_txt, **{f: vals.get(f) for f, _ in FIELDS})
-        # internal consistency: footprint ≈ lot_area × coverage
-        if rec.get("lot_area_sf") and rec.get("lot_coverage_pct") and rec.get("footprint_sf"):
-            implied = rec["lot_area_sf"] * rec["lot_coverage_pct"] / 100.0
-            rec["coverage_check"] = round(rec["footprint_sf"] / implied, 3) if implied else None
+        apn, par = parcel_for(pidx, r["longitude"], r["latitude"])
+        rec["apn"], rec["parcel_sf"] = apn, (round(par) if par else None)
+        verdict(rec)
         results.append(rec)
         print(f"proj{pid:<5} p{pg+1:<3} {str(r['address_display'])[:26]:28} "
               f"fp={rec.get('footprint_sf')} cov={rec.get('lot_coverage_pct')} "
               f"lot={rec.get('lot_area_sf')} ht={rec.get('height_ft')} st={rec.get('stories')}"
+              + f"  [{rec.get('verdict')}]"
+              + (f" {rec.get('checks')}" if rec.get("checks") else "")
               + (f"  LOW:{','.join(low)}" if low else ""), flush=True)
 
     cols = ["project_id", "address", "status", "units", "db_stories", "sheet_page"] + \
-           [f for f, _ in FIELDS] + ["coverage_check", "low_confidence", "note", "doc_title", "evidence"]
+           [f for f, _ in FIELDS] + ["apn", "parcel_sf", "lot_vs_parcel", "derived_coverage_pct",
+            "verdict", "checks", "low_confidence", "note", "doc_title", "evidence"]
     os.makedirs("data/reference", exist_ok=True)
     with open(OUT, "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=cols, extrasaction="ignore")

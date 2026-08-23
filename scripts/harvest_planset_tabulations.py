@@ -54,7 +54,11 @@ NUM = re.compile(r"(\d{1,3}(?:,\d{3})+|\d{1,3}\s*%|\d+\s*'\s*-?\s*\d*\s*\"?|\d{1
 # demolished-building error, arriving from a new direction. Only compliance-column text
 # terminates a row.
 TAIL = re.compile(r"COMPLIES|WAIVER|CONCESSION|SEE\s*TABLE", re.I)
-CODEREF = re.compile(r"BMC\s*[\d.]+[A-Z.\d]*", re.I)
+# Code/table citations carry digits that leak into the value tokens. Matching only
+# "BMC 23.204..." missed "TABLE 23.204-8", which is how 3030 Telegraph's storey row
+# ("3  4*  TABLE 23.204-8  4  9") yielded 9 storeys for a building the same sheet
+# describes four times as 5-STORY (and GFA/footprint = 94,664/19,811 = 4.8 confirms 5).
+CODEREF = re.compile(r"(?:BMC|TABLE|SECTION|SEC\.|CHAPTER|PER)\s*[\d]+[\d.\-A-Z]*", re.I)
 
 
 def ocr(png, psm=6):
@@ -178,6 +182,31 @@ def extract_text_first(pdf, page):
         found.setdefault(field, []).append([v for _, v in vals])
     return found
 
+
+
+def storeys_from_gfa(gross_floor_sf, footprint_sf):
+    """GROSS FLOOR AREA / FOOTPRINT ~= STOREYS.
+
+    A free third validator: no external data, no parcel join, no tabulation cross-check.
+    It independently caught BOTH of the errors John found on 2026-08-23:
+      3030 Telegraph  94,664 / 19,811 = 4.8  -> 5 storeys (parser had said 9)
+      2036 Bancroft   80,343 / 11,610 = 6.9  -> ~8 storeys, the NEW tower on APN -16
+                      98,865 / 24,535 = 4.0  -> exactly the RETAINED building's stated 4
+    Use it to sanity-check any storey reading, and to catch the case where a multi-parcel
+    project has one NEW building and one RETAINED ("NO CHANGE") building whose footprints
+    must NOT be summed.
+    """
+    if not gross_floor_sf or not footprint_sf:
+        return None
+    return gross_floor_sf / footprint_sf
+
+
+def storeys_agree(stated, gross_floor_sf, footprint_sf, tol=1.5):
+    """True/False/None — does a stated storey count survive the GFA/footprint check?"""
+    implied = storeys_from_gfa(gross_floor_sf, footprint_sf)
+    if implied is None or not stated:
+        return None
+    return abs(stated - implied) <= tol
 
 def conservation_ok(existing, proposed, tol=0.005):
     """A LOT LINE ADJUSTMENT moves lot area between parcels -- it cannot create it.

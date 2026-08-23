@@ -4,6 +4,23 @@
 
 ---
 
+## 2026-08-23 [team-analysis] — 🏗️ Phase-2 plan-set + tabulation harvest UNDERWAY (staging; John approved go/full-scope; ingest still gated)
+**Tooling `cdd2d24` (Planning search fix) + phase-2 harvester/discovery committed. Stage: `scratch/2026-08-23/harvest_stage_phase2/`.**
+**I OWN the 1.E/tabulation-form retrieval for the WHOLE tour set (named by John via berkeley-data-da). Nothing ingested yet — staging only.**
+
+**Pipeline (both proven this session):**
+1. `scripts/discover_planning_records.py` — address → the project's Planning (ZP/DRCP) record. Uses the **Planning address-search fix** (`27a24f7`): the search errored on ANY date value (Building's date-widening mis-applied); gated date-fill to `DATE_WIDEN_MODULES`. Fresh browser context per project (avoids the earlier session-contamination bug where interleaved attachment loads made `DRCF2021-0006` false-match 5 addresses).
+2. `scripts/harvest_by_record.py` — enumerate a record's attachment grid → fetch plan set (>5MiB) **AND the 1.E tabulation form** via a tabulation branch (`/1\.E|tabulation/i`, no size floor) monkeypatched in-process (shared engine untouched). Own stage dir so it runs alongside the geometry session's batch2.
+
+**KEY FINDINGS:**
+- **Building-permit attachment grids are EMPTY in public ACA** (proj143 `B2021-04232` = 0 rows, same as 1951 Shattuck's BP). Plan sets + 1.E live on the **Planning (ZP/DRCP)** record. So catalogued "Plans B…" docs (source_url NULL) are NOT re-fetchable from the BP — must find the project's ZP.
+- **The 25 catalogued 1.E forms came from one-off per-record scrapes of ~16 projects** (source_system = `ZP…_<addr>.txt`), never a systematic sweep. So (B) "155 of 171 structures have no 1.E" is a **queue-size problem**: Berkeley requires Form 1.E per application → the forms exist on the ZP records, just never enumerated. My harvester surfaces them.
+- The record number is often recoverable from `documents.source_system` (not just title) — turned 6 more "no-record" projects into harvestable.
+
+**STAGED SO FAR (phase2 stage, growing):** ~20+ plan sets + tabulation forms across proj38/39/40/66/139/143/144… incl. proj38 2449 Dwight's 2025-12-10 1.E, proj66 2204 Dwight TAB, proj40 tab, proj143 10 plan sets. Building records → NO-PLANSETS (expected/empty).
+
+**NEXT:** (a) finish the discovered-records harvest (running); (b) get berkeley-data-da's canonical **171-tour-structure project_id list** to scope the full sweep; (c) discover+harvest across all 171 minus the geometry session's in-flight subset (proj3/120/121/150/140/15/45), polite batches; (d) **ONE gated R2/ingest** of the full phase-2 stage (tag `plan_set` + a tabulation type) — John's go. Extraction/OCR + footprint validators = berkeley-data-da's lane; I stay on fetch.
+
 ## 2026-08-23 [team-analysis] — 🏗️ Plan-set harvest: 4 big projects' architect plans HARVESTED + INGESTED to R2/v2 (gated write DONE, John-approved)
 **Harvest list `0cd3011` · driver `85d533e`. Manifest: `scratch/2026-08-23/harvest_stage_batch2/manifest.csv`.**
 **✅ DONE (John approved 2026-08-23): 12 plan-set PDFs uploaded to R2 (bucket `berkeleybuild-pdf`, all HTTP 200) + ingested to `v2.documents` as `plan_set` (document_type_id=2), documents 2111→2123 (+12). Snapshot `keep_snapshot_2026-08-23_pre-planset-ingest.db`. The geometry OCR (`vdt.code='plan_set'`) now picks them up.**

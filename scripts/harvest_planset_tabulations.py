@@ -86,6 +86,106 @@ def parse_row(line):
     return val, toks[-1]
 
 
+
+# ---------------------------------------------------------------------------
+# TEXT-FIRST EXTRACTION  (added 2026-08-23)
+#
+# "The zoning table is vector/raster, so OCR is required" is TRACHTENBERG-SPECIFIC,
+# not universal. 2920 Shattuck p2 genuinely has 0 matching strings among 47,650 vector
+# paths -- but 2036 Bancroft's sheet returned 1,116 words from get_text(), including
+# every label, with NO OCR at all. Only the label->value join needed spatial work,
+# because labels and values sit in separate text blocks on the same visual row.
+#
+# So: try text, fall back to OCR. OCR is ~1-2 min/project; this is milliseconds.
+# ---------------------------------------------------------------------------
+LABEL_RX = re.compile(
+    r"LOT\s*AREA|LOT\s*COVERAGE|BUILDING\s*FOOTPRINT|MAX\s*BLDG\.?\s*HEIGHT|"
+    r"BUILDING\s*HEIGHT|#\s*STORIES|BUILDING\s*STORIES|GROSS\s*FLOOR\s*AREA", re.I)
+
+
+
+def _field_of(label):
+    k = label.upper()
+    return ("footprint_sf" if "FOOTPRINT" in k else
+            "lot_coverage_pct" if "COVERAGE" in k else
+            "lot_area_sf" if ("LOT" in k and "AREA" in k) else
+            "gross_floor_sf" if "GROSS" in k else
+            "stories" if "STORIES" in k else "height_ft")
+
+
+def text_rows(pdf, page):
+    """Rebuild visual rows from the text layer: [(text, x0, y0, x1, y1)]."""
+    import fitz
+    doc = fitz.open(pdf)
+    try:
+        pg = doc[page]
+        buckets = {}
+        for x0, y0, x1, y1, word, b, l, n in pg.get_text("words"):
+            buckets.setdefault((b, l), []).append((x0, y0, x1, y1, word))
+    finally:
+        doc.close()
+    out = []
+    for v in buckets.values():
+        v.sort(key=lambda t: t[0])
+        out.append((" ".join(t[4] for t in v), min(t[0] for t in v), min(t[1] for t in v),
+                    max(t[2] for t in v), max(t[3] for t in v)))
+    return out
+
+
+def extract_text_first(pdf, page):
+    """Label->value by SPATIAL ROW MATCH. Returns {field: [values left-to-right]}.
+
+    Values are kept as an ORDERED LIST because the columns are
+    EXISTING | ALLOWED | PROPOSED -- the caller must pick PROPOSED (the last), never
+    the first. Taking the first returns the building being DEMOLISHED.
+    """
+    rows = text_rows(pdf, page)
+    if not rows:
+        return {}
+    found = {}
+    for txt, x0, y0, x1, y1 in rows:
+        m = LABEL_RX.search(txt)
+        if not m:
+            continue
+        cy = (y0 + y1) / 2
+        vals = []
+        for t2, a0, b0, a1, b1 in rows:
+            if a0 <= x1 - 2:                       # must be to the RIGHT of the label
+                continue
+            if abs((b0 + b1) / 2 - cy) > 6:        # same visual row
+                continue
+            if LABEL_RX.search(t2):
+                continue
+            for tok in NUM.findall(t2):
+                v = to_number(tok)
+                if v is None:
+                    continue
+                # reject out-of-range tokens: BMC code refs (23.204), dimension strings and
+                # stray drawing numerals otherwise pollute the height/storey rows.
+                lo, hi = BOUNDS.get(_field_of(m.group(0)), (None, None))
+                if lo is not None and not (lo <= v <= hi):
+                    continue
+                vals.append((a0, v))
+        if not vals:
+            continue
+        vals.sort()
+        field = _field_of(m.group(0))
+        found.setdefault(field, []).append([v for _, v in vals])
+    return found
+
+
+def conservation_ok(existing, proposed, tol=0.005):
+    """A LOT LINE ADJUSTMENT moves lot area between parcels -- it cannot create it.
+    Sum(existing lots) == Sum(proposed lots) therefore PROVES the column order, for free,
+    on any multi-parcel project. Verified on 2036 Bancroft: 6,595+37,696 == 14,582+29,709
+    == 44,291 sf. Where it does not apply, fall back to: derived footprint/lot must
+    reproduce the sheet's own stated coverage %."""
+    if not existing or not proposed:
+        return None
+    a, b = sum(existing), sum(proposed)
+    return abs(a - b) <= tol * max(a, b)
+
+
 def find_sheet(pdf, scan_pages, dpi_scan=150):
     """Page index (0-based) of the zoning-data sheet, or None."""
     import fitz

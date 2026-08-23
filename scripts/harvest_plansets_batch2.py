@@ -38,13 +38,20 @@ CSV = "data/reference/harvest_priority_plansets.csv"
 ZP = re.compile(r"\b(?:ZP|UP|DRCP|DRCF|LMSAP)\d{4}-\d{3,4}\b", re.I)
 
 
-def build_records():
+def build_records(csv_path=CSV):
     """Derive the harvest record list from the CSV: every non-UC project that carries a ZP
     (Planning) record number. First ZP per project. NOT hardcoded — reflects the CSV."""
-    df = pd.read_csv(CSV)
+    df = pd.read_csv(csv_path)
     recs = []
     for _, r in df.iterrows():
-        if r.get("is_uc"):
+        # NaN is TRUTHY: an EMPTY is_uc cell silently skipped every record as "UC"
+        # (cost a whole harvest run, 2026-08-23). Treat NaN/blank/"False" as not-UC.
+        uc = r.get("is_uc")
+        if isinstance(uc, float) and uc != uc:      # NaN
+            uc = False
+        if str(uc).strip().lower() in ("", "nan", "false", "0", "no"):
+            uc = False
+        if uc:
             continue
         z = str(r.get("zoning_records") or "")
         m = ZP.findall(z)
@@ -64,6 +71,7 @@ def build_records():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--only", default="", help="comma-separated project ids (default: all)")
+    ap.add_argument("--csv", default=CSV, help="record source (default: the harvest-priority list)")
     a = ap.parse_args()
     only = {int(x) for x in a.only.split(",") if x.strip()} if a.only else None
 
@@ -72,7 +80,7 @@ def main():
     st = H.load_state()
     done = set(st["completed"])
 
-    recs = [r for r in build_records() if (only is None or r["proj"] in only)]
+    recs = [r for r in build_records(a.csv) if (only is None or r["proj"] in only)]
     print(f"harvesting {len(recs)} ZP(Planning) record(s); stage={STAGE}")
     for i, rec in enumerate(recs):
         if rec["permit"] in done:

@@ -3552,7 +3552,7 @@
 		<Placemark>
 			<name>2538 Durant Ave · 83 units · Under Construction</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2538 DURANT Ave</b><br/><b>Units:</b> 83<br/><b>VLI Units:</b> 5<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Under Construction]]></description>
+			<description><![CDATA[<b>2538 DURANT Ave</b><br/><b>Units:</b> 83<br/><b>VLI Units:</b> 5<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Under Construction<br/><i>Footprint 10,465 sf from the architect tabulation's 'PROPOSED BUILDING - LOT COVERAGE DIAGRAM' (lot 12,792 sf); 10,465/12,792 = 81.8% reproduces the stated 82%. The 10,935 sf / 85% block is the existing condition. Was 6,275 sf. NOTE: MULTI-PARCEL SITE - the stated lot (12,792 sf) is 2.04x the single county parcel (6,275 sf), so extent across the second parcel is approximate; area and position are right.</i>]]></description>
 			<styleUrl>#style_Under_Construction_parcel22</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.25716464976044,37.86772938324897,28.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -3560,7 +3560,7 @@
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2570697371308,37.86759881421826,28 -122.257235537346,37.86757712164093,28 -122.2573078261212,37.86792282007067,28 -122.2571404110734,37.86794934609672,28 -122.2570697371308,37.86759881421826,28 
+							-122.2570351595889,37.8675512467223,28.0 -122.2572492818359,37.8675232319010,28.0 -122.2573426389824,37.8679696832187,28.0 -122.2571264312641,37.8680039401845,28.0 -122.2570351595889,37.8675512467223,28.0 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
@@ -3603,7 +3603,7 @@
 		<Placemark>
 			<name>2680 Bancroft Way · 79 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2680 BANCROFT Way</b><br/><b>Units:</b> 79<br/><b>VLI Units:</b> 9<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled]]></description>
+			<description><![CDATA[<b>2680 BANCROFT Way</b><br/><b>Units:</b> 79<br/><b>VLI Units:</b> 9<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled<br/><i>Footprint 5,215 sf = the NEW 8-storey building on APN 055-1871-001-03 (lot 7,150 sf); 5,215/7,150 = 72.9% reproduces the sheet's stated 73%. The 5,261 sf on APN 55-1871-20 is an EXISTING 4-storey building RETAINED ('NO CHANGE' in its lot, footprint, storey and height rows) and is NOT part of this figure. Was 7,469 sf.</i>]]></description>
 			<styleUrl>#style_Entitled_parcel1</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.25506492790313,37.86902021604211,28.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -3611,7 +3611,7 @@
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2550096322798,37.86916541937588,28 -122.2552234613528,37.86913050470943,28 -122.2551439672279,37.86880805511557,28 -122.2549379463754,37.86883168163379,28 -122.2550096322798,37.86916541937588,28 
+							-122.2550209944442,37.8691355829431,28.0 -122.2551996733779,37.8691064076991,28.0 -122.2551332468379,37.8688369637512,28.0 -122.2549610925759,37.8688567064412,28.0 -122.2550209944442,37.8691355829431,28.0 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
@@ -3875,7 +3875,7 @@
 		<Placemark>
 			<name>2441 Le Conte Ave · 65 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2441 LE CONTE Ave</b><br/><b>Units:</b> 65<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2441 LE CONTE Ave</b><br/><b>Units:</b> 65<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i><br/><i>Footprint 5,902 sf derived from the architect tabulation (lot 12,830 x 46% coverage). County parcel 13,023 sf agrees with the stated lot (0.99); 5,902/13,023 = 45.3% reproduces the stated 46%. Was the parcel polygon (13,455 sf).</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel47</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.26185183073429,37.87706089474836,24.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -3883,7 +3883,7 @@
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2617455343742,37.87722523043028,24.5 -122.2620857572782,37.87717826116437,24.5 -122.2620090270651,37.87679279853877,24.5 -122.2616733005797,37.87688295317811,24.5 -122.2617455343742,37.87722523043028,24.5 
+							-122.2617904056342,37.8771558588252,24.5 -122.2620157329360,37.8771247514017,24.5 -122.2619649150407,37.8768694621419,24.5 -122.2617425656863,37.8769291709427,24.5 -122.2617904056342,37.8771558588252,24.5 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>

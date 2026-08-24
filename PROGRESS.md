@@ -39,6 +39,64 @@
 
 **NEXT:** (a) ✅ DONE — R2 upload + v2 ingest (`experiments/accela_scrape/upload_harvest_to_r2.py --manifest …`; `scripts/ingest_plansets_batch2.py --commit`). (b) Geometry session runs footprint OCR on the 4 projects (now `plan_set` in v2/R2). (c) **Phase-2 discovery** for the 12 pure-BP projects + 8 NO-PLANSETS: find each one's ZP record via Planning address search — **UNBLOCKED 2026-08-23 (`27a24f7`)**: the search errored on any date value (Building's date-widening mis-applied to Planning, which redirects to Error.aspx on a date); fixed by gating date-fill to `DATE_WIDEN_MODULES`. Verified — 2441 Le Conte/1951 Shattuck/2150 Kittredge all return Planning records. REMAINING wrinkle: each address returns MULTIPLE Planning records (ZP/DRCP/UP/DRSA/PLN/ZCBL) and `_parse_result_rows` reports type as "OTHER" — a phase-2 harvest must, per project, check each candidate's attachments and keep the one(s) holding the architect plan set (corner lots like 1951 Shattuck may also file under the other frontage). Division synced with `berkeley-data-b6` (since restarted): me = proposed/pipeline plan sets, them = already-built via Overture + the `generate_kml.py` `geometry_type_id` rendering fix.
 
+## 2026-08-23 [geometry/tours] — 🎯 Stated footprints: 3 polygons + 5 heights corrected; the 1.E is the source that works
+**Commits `28fd4a6` `3282d11` `341202b` `11483f1` `c64055f` `423f3c2` `f8690da` `3c001e6`. Nothing pushed.**
+
+**RUNNING TOTAL (derived, `scripts/gen_tour_structures.py`):** 184 placemarks → 171 v2 projects.
+Footprints: **3 corrected from an architect tabulation** (2920 Shattuck 10,232sf · 3030 Telegraph
+19,811sf · 2036 Bancroft 11,610sf) · **137 still the county PARCEL** · 36 other. Heights: **5
+corrected** (1951 Shattuck 12, 2000 University 8, 2099 MLK 7, 2009 Addison 7 from Overture
+`num_floors`; 3030 Telegraph 5 + 63ft from its tabulation) · **67 still on the 3.0-storey
+`migration_v1_to_v2_20260507` default**. Stated-footprint supply **8 → 17 of 171** via the
+John-approved Phase-2 ingest (`5babbb3`).
+
+**⛔ THREE SOURCES ELIMINATED — do not re-attempt.** City taxable sqft (`9a47-nj4i`), Overture/
+aerial footprints, and existing-condition site plans **all return the building being DEMOLISHED**
+for a pipeline project (taxable sqft wrong 12–100× on 6/6; Overture 0.16–0.43× on 4/5). *No
+observational source can describe an unbuilt building* — only the architect's tabulation can.
+
+**⚠ PLAN-SET ZONING TABLES ARE A DEAD END AT SCALE: 33 plan sets → 1 footprint; 25 → 0**
+(`3c001e6`, per-project table in `data/reference/stated_footprints.csv`). Too architect-variable
+(sheet number, 3 vs 4 columns, text vs 47,650 vector paths). **The STANDALONE 1.E FORM IS THE
+SOURCE THAT WORKS** — 197KB, `pdftotext` reads it directly, a standard City form with consistent
+fields (Lot Area · Footprint/Lot Area · Building Height (# Stories) · units · FAR). Every 1.E
+extraction has succeeded; ~1000× cheaper than OCR-ing a 150MB plan set. **Supply, not extraction,
+is the constraint.**
+
+**🔑 COLUMN ORDER IS THE HAZARD:** tabulations run `EXISTING | ALLOWED | PROPOSED` (sometimes 4
+cols). Taking the wrong one yields the demolished building — *plausible and wrong*. It happened
+**four** ways: strip truncation · first-match-wins · `N/A` treated as a row terminator · a
+**degenerate validator** that passed "BUILDING STORIES 1" for a 110-unit building. **Every real
+error was caught by a cross-check, none by better parsing.** Validator stack (`scripts/
+harvest_planset_tabulations.py`): polygon/parcel <0.95 · OCR'd lot vs county parcel · derived
+footprint/lot vs stated coverage% · **GFA/footprint ≈ storeys** · **Σ(existing lots)==Σ(proposed
+lots)** proves column order free on any lot-line-adjustment · **PASS requires ≥2 independent,
+non-degenerate checks**. **Multi-APN footprints are NEVER summed** — 2036 Bancroft's APN -017-04
+reads "NO CHANGE" (an EXISTING 4-storey building RETAINED); the new tower is 11,610sf on -016
+alone. 3 projects held as `NEEDS-MANUAL-SPLIT`.
+
+**🚫 `generate_kml.py` OVERWRITES the hand-edited canonical `geometry.kml`** — it now refuses
+without `--overwrite-canonical` (`28fd4a6`), and respects `geometry_type_id` so a parcel renders
+FLAT, not extruded as a fake building. **Not re-run**; geometry.kml edits are surgical only.
+**`v_projects_flat` joins `pv.id = p.current_version_id`, NOT `project_versions.is_current`** —
+setting `is_current` alone changes nothing the site sees (a write rolled back on this).
+
+**Archaeology:** the pre-2026-05-03 skyline was **not** calculated footprints — all 159 polygons
+were identical ~16,810sf synthetic squares; v7 replaced them with parcels, helping 127 and
+inflating 18. *Ratio-to-a-previous-version is not evidence of error; only the stated footprint
+arbitrates.*
+
+**Overture Berkeley pull** (`data/raw/overture_buildings_berkeley_2026-08-19.parquet`, UNTRACKED,
+13MB): 62,651 buildings, 44,470 with height, 2,069 with `num_floors`; duckdb httpfs+spatial over
+an **explicit https URL list** (s3:// globs don't list, HTTP globs rejected). Useful for BUILT
+heights only.
+
+**NEXT:** (a) John's call on **2441 Le Conte 13,455→5,902sf** (lot 12,830×46%, parcel 13,023,
+0.99) and the 3 multi-APN splits; (b) `berkeley-data-5e` owns 1.E retrieval — harvesting 37
+high-priority no-plan-set projects (77 candidate records), **advised to treat the 1.E as PRIMARY
+and the plan set as fallback**; (c) STILL OPEN, John's: label colour (tier vs white) and canonical
+set (184 vs 1,060).
+
 ## 2026-08-22 [geometry/tours] — 🔬 Footprints: three findings + an OCR harvester (read-only; nothing rendered yet)
 **Audit `343e601` · harvester `5e5ecdd`. Read `docs/audit/2026-08-22_building_footprint_vs_parcel_findings.md`.**
 **Nothing written to the DB, `geometry.kml`, or the tours.**

@@ -42,6 +42,11 @@ def build(tour_path: pathlib.Path) -> pathlib.Path:
     geom = GEOMETRY.read_text(encoding="utf-8", errors="replace")
     tour = extract_tour(tour_path)
     sha = hashlib.sha256(GEOMETRY.read_bytes()).hexdigest()[:12]
+    # GEOM_STAMP: a package must SAY which geometry it carries. Google Earth shows only
+    # the <name>, and geometry.kml called itself "Geometry-2026-05-18-labeled-no-icon"
+    # for months after its content had moved on -- so a stale layer and a current one
+    # looked identical in My Places. 2026-08-24: names now carry date + sha.
+
     n_pm = len(re.findall(r"<Placemark", geom))
 
     out = geom

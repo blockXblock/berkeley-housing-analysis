@@ -34,17 +34,19 @@ H.MANIFEST = f"{STAGE}/manifest.csv"
 TAB_RE = re.compile(r"1\.E|tabulation", re.I)
 
 
-def enable_tabulation_branch():
-    """Monkeypatch H.classify (this process only) to also stage 1.E / tabulation forms, no size floor."""
+def enable_tabulation_branch(only=False):
+    """Monkeypatch H.classify (this process only). Default: plan sets AND 1.E/tabulation forms.
+    only=True → 1.E-PRIMARY: stage ONLY tabulation forms, skip plan sets entirely (fast; the
+    standalone 1.E parses cleanly every time while plan-set zoning tables yield ~0 — geometry
+    session's measured 33->1 / 25->0). Use for the camera-gap sweep where Accela time matters."""
     _orig = H.classify
     def classify(fn, size_bytes):
-        ok, kw, reason = _orig(fn, size_bytes)
-        if ok:
-            return ok, kw, reason
         if TAB_RE.search(fn or ""):
             mib = f" +{size_bytes/H.MIB:.2f}MiB" if size_bytes else ""
             return (True, "tabulation", f"tabulation form{mib}")
-        return ok, kw, reason
+        if only:
+            return (False, None, "1.E-only mode: plan set skipped")
+        return _orig(fn, size_bytes)
     H.classify = classify
 
 
@@ -60,10 +62,12 @@ def main():
     ap.add_argument("--csv", required=True, help="queue CSV: project_id,permit,address,module")
     ap.add_argument("--only", default="", help="comma-separated project ids (default: all)")
     ap.add_argument("--no-tabulation", action="store_true", help="disable the 1.E/tabulation branch")
+    ap.add_argument("--tabulation-only", action="store_true",
+                    help="1.E-PRIMARY: stage ONLY tabulation forms, skip plan sets (fast camera-gap sweep)")
     a = ap.parse_args()
     only = {int(x) for x in a.only.split(",") if x.strip()} if a.only else None
     if not a.no_tabulation:
-        enable_tabulation_branch()
+        enable_tabulation_branch(only=a.tabulation_only)
 
     q = pd.read_csv(a.csv)
     if only is not None:

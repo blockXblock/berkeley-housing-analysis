@@ -20,7 +20,13 @@
 
 **STAGED SO FAR (phase2 stage, growing):** ~20+ plan sets + tabulation forms across proj38/39/40/66/139/143/144… incl. proj38 2449 Dwight's 2025-12-10 1.E, proj66 2204 Dwight TAB, proj40 tab, proj143 10 plan sets. Building records → NO-PLANSETS (expected/empty).
 
-**NEXT:** (a) finish the discovered-records harvest (running); (b) get berkeley-data-da's canonical **171-tour-structure project_id list** to scope the full sweep; (c) discover+harvest across all 171 minus the geometry session's in-flight subset (proj3/120/121/150/140/15/45), polite batches; (d) **ONE gated R2/ingest** of the full phase-2 stage (tag `plan_set` + a tabulation type) — John's go. Extraction/OCR + footprint validators = berkeley-data-da's lane; I stay on fetch.
+**CAMERA-PROXIMITY PIVOT (geometry session, committed):** `data/reference/camera_proximity.csv` (`8ac2323`) ranks structures by what the flyover cameras actually approach (427 gx:FlyTo waypoints × centroids) — a FAR better harvest target than units (a 739u building can be rank-99/never-seen; a 50u one rank-1/178s-dwell). `harvest_target=1` = 80 camera-visible projects lacking a 1.E. Canonical tour list: `data/reference/tour_structures_171.csv` (`e2eefff`, now with `is_uc`).
+
+**1.E-PRIMARY STRATEGY (measured, John-directed):** the geometry session's two parser runs got **33 plan sets → 1 usable footprint, 25 → 0** — plan-set zoning tables are too architect-variable. The **standalone 1.E form never fails** (197KB, plain-text pdftotext, standard city fields: footprint+coverage+height+stories). So: **1.E is the prize, plan set is fallback.** `harvest_by_record.py --tabulation-only` (`74c3281`) stages ONLY 1.E forms, skips big plan-set downloads — fast + Accela-economical for the camera gap.
+
+**STATUS:** tower high-tier harvest done + resumed 1.E-primary; ~23 tabulation forms + plan sets staged (12 ingested in batch-1). Camera-gap = **48 projects** (`scratch/2026-08-23/camera_gap_queue.csv`, non-UC, non-peer) to discover+harvest **1.E-primary** next. **proj135 2150 Kittredge (169u, camera rank 10, 135s dwell, NO footprint OR height)** = the single highest-value MANUAL target — its entitlement isn't under its street address (needs corner/APN detective work).
+
+**NEXT:** (a) ingest the tower batch (plan_set + tabulation_form); (b) discover+harvest the 48-project camera gap 1.E-primary; (c) proj135 manual detective; (d) final ingest. Peer in-flight (skip): proj3/120/121/140/15/45. Extraction/OCR + footprint validators + geometry.kml = geometry session's lane; I stay on fetch.
 
 ## 2026-08-23 [team-analysis] — 🏗️ Plan-set harvest: 4 big projects' architect plans HARVESTED + INGESTED to R2/v2 (gated write DONE, John-approved)
 **Harvest list `0cd3011` · driver `85d533e`. Manifest: `scratch/2026-08-23/harvest_stage_batch2/manifest.csv`.**

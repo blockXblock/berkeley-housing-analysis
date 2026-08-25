@@ -4,6 +4,28 @@
 
 ---
 
+## 2026-08-25 [measure-u/ballot] — 📄 COMPLETE argument record read (13 primaries + 12 rebuttals); analysis rewritten; Wozniak fully tracked
+**John supplied the second Clerk Dropbox link → 13 primaries at `data/raw/ballot_args_2026/primary/` (W in-favor only; no one opposed W). Analysis REWRITTEN to cover all 25: `notes/2026-08-24_filed_rebuttals_analysis.md` (UNCOMMITTED).**
+**WOZNIAK TRACKED:** absent from ALL primaries; enters only in the rebuttal round — QUOTED endorser on U-pro ("Any suggestion that Vision 2050 recommendations are not the basis for Measure U, is false") + FULL SIGNATORY on V-pro. Sequence proven: the Aug-13 Argument Against U praised V2050 and said its recommendations "have not been implemented or meaningfully incorporated into Measure U"; Clerk transmits primaries to the opposing side Aug 14; Gordon recruited Aug 14–20 to deny it. **V2050 TUG-OF-WAR: both campaigns claim V2050 in opposite absolutes; the group's measured finding is the only accurate statement → Evaluation No. 1 is now the referee.**
+**NEW from primaries:** ⚠ City Auditor **Jenny Wong is a full SIGNER** of the U and V primary campaign arguments (independence problem for Eval-1 Q4); Z-anti's regional-bank history (~$40M shared / Berkeley ~$2.5M → now $58.3M alone) is the opposition's strongest filing; X primary-anti = REALTORS president + BPOA ED (the "lobbyists" jibe was aimed at them; BPOA's "committed not to oppose" claim contradicted on the record); AA GF-loss ~$1.2M/yr appears in NONE of the 25 documents — group-unique. 33-vs-35 project-count discrepancy to reconcile.
+
+## _superseded 2026-08-24 [measure-u/ballot] — 📄 All 12 filed rebuttals READ + ANALYZED; primary arguments still to obtain
+**Analysis: `notes/2026-08-24_filed_rebuttals_analysis.md` (UNCOMMITTED, awaiting John review). Source: 12 scanned PDFs (no text layer — read visually) from the CITY CLERK's Dropbox share (Clerk-made, not John's), local copy `scratchpad/ballot_args/` (session scratchpad — copy into `data/raw/` before it matters, scratchpads are session-scoped).**
+
+**Why never found online:** arguments are CONFIDENTIAL until deadline (EC 9286; primaries due Aug 14 noon, rebuttals Aug 21 noon), 10-day public review starts the day after; the City never posted them — berkeleyca.gov ballot page still carries only full texts + impartial analyses (re-verified 2026-08-24). Distribution is via Clerk Dropbox links emailed from **elections@berkeleyca.gov**.
+
+**KEY FINDINGS (full detail in the notes file):**
+- **Two campaigns, not twelve:** YES on U+V = one Ishii-authored operation (LWV, Treasurer Levy, Auditor Wong, IAFF 1227). NO on U, V, AND Z = **Affordable Berkeley** (Isabelle Gaston, the 2022 Measure L opposition), rotating 4-person signer pool.
+- **⚠ GORDON WOZNIAK IS IN THE YES CAMPAIGN'S FILINGS** — quoted in the U pro-rebuttal ("Any suggestion that Vision 2050 recommendations are not the basis for Measure U, is false") and a FULL SIGNATORY on the V pro-rebuttal. Direct conflict with the group's "independent, campaign-unaffiliated" posture (op-ed 5 co-author) AND with the group's own published V2050-gap analysis. **JOHN DECISION PENDING before Evaluation No. 1 goes public.**
+- Both U campaigns misstate their own numbers in opposite directions: YES "$1.5B backlog" (city's own figure $2.0–2.1B); NO "$550–600M with interest" (TRS implies ~$610M).
+- No-on-U rebuttal = the group's lifecycle/priorities critique nearly verbatim → conflation risk for Evaluation No. 1.
+- **Neither AA side mentions the ~$1.2M/yr GF loss** (AA suspends the 1¢ general tax) — the group's analysis is the only place that fact exists.
+- The rebuttals imply the primary Argument Against U invoked Vision 2050 (why the campaign recruited Wozniak) — confirming we need the primaries.
+
+**Transmittal letter (supplied 2026-08-24):** From Mark Numainville, City Clerk (mnumainville@berkeleyca.gov, 510-981-6909), Fri Aug 21 3:14 PM, To: elections@berkeleyca.gov (filers BCC'd) — "All rebuttal arguments for and against Berkeley ballot measures are in a folder in Dropbox." John has it as a FORWARD → his forwarder is on the Clerk's filer list. A matching ~Aug 14–15 email with the PRIMARY-arguments folder almost certainly exists (the Clerk "immediately transmits" primaries to opposing parties per the instructions PDF). PDFs preserved at `data/raw/ballot_args_2026/` (moved off volatile scratchpad; *.pdf gitignored — `git add -f` if we decide to track).
+
+**NEXT:** (a) **obtain the PRIMARY arguments** — ask John's forwarder for the ~Aug 14 Clerk email, or email the Clerk directly (draft below in chat). (b) John decides Wozniak handling. (c) Fold signer lists + rebuttal analysis into the evidence site + Evaluation No. 1 context. (d) Commit the notes file after John review.
+
 ## 2026-08-23 [team-analysis] — 🏗️ Phase-2 harvest: BATCH-1 INGESTED (45 files / 12 projects); full-171 sweep next
 **Tooling `cdd2d24`/`5babbb3`. Stage `scratch/2026-08-23/harvest_stage_phase2/`. Snapshot `keep_snapshot_2026-08-23_pre-phase2-ingest.db`.**
 **✅ INGESTED (John approved go + full scope): 45 files to R2/v2 — 31 plan_set + 14 tabulation forms across 12 projects (5,38,39,40,66,139,143,144,146,148,149,157). documents 2123→2168. NEW doc type id=25 `tabulation_form`. I OWN 1.E retrieval for the WHOLE tour set (named by John via berkeley-data-da).**

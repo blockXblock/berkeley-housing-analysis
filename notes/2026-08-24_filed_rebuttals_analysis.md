@@ -232,7 +232,8 @@ Rent Board budget >$8M, ADU-chilling, fee-waiver burden-shift.
 |---|---|---|---|
 | "$1.5B infrastructure backlog" | U pro rebuttal | City CIP $2.0–2.1B | Understates the City's own figure |
 | "$550–600M with interest" | U anti (both rounds) | TRS ⇒ ~$610M | Understates; official number is worse |
-| "35 potential projects, none committed" | U anti primary | Our list: 33 projects, no binding commitment | Direction correct; count to reconcile |
+| "35 potential projects, none committed" | U anti primary | 35 = Dec action version; 36 = July packet | Accurate for the version cited |
+| "$25 million for King Pool" | U anti primary | Feb outreach version: $25M new pool; filed program: $5M repair | Stale version, not fabrication — the scope was cut ~80% after outreach |
 | "Seawalls… sea-level rise" | U pro primary | Minor shoreline item in the list | Overstated framing |
 | "Independent oversight" (Wong) | U pro (both rounds) | Advisory-only committee; Wong signed the campaign argument | Overstated + independence problem |
 | Wozniak: "V2050 is the basis for U; any suggestion otherwise is false" | U pro rebuttal | Partial implementation; major omissions | Contradicted by our comparison |
@@ -285,14 +286,34 @@ Rent Board budget >$8M, ADU-chilling, fee-waiver burden-shift.
    items** = the July 2026 council packet pp. 61–63 ($272.5M); our reference JSON
    models 33 (some sub-items merged). The opposition's "35" cites the December
    action — accurate for that version.
-7. **King Pool "$25 million" — VERIFIED FALSE (2026-08-25).** The city's own
-   12-2-25 list reads, with the word spelled out: "King Pool **(25 Meter)** &
-   Locker Room — **$5,000,000**," scope "replaces concrete decking and piping…
-   extend the useful life." The July 2026 packet carries the same $5.0M. No city
-   document prices King Pool at $25M; the closest historical figure is the
-   ~$23M **citywide** pools bond concept (2008–2010), which covered King,
-   Willard, West Campus and the warm pool together. Affordable Berkeley's filed
-   "$25 million for King Pool" is a misreading of the 25-*meter* pool length —
-   a documented, citable error in their argument. (Also confirmed in the same
-   city document: Old City Hall full seismic = $13,942,000; Willard Pool appears
-   nowhere in the list.)
+7. **King Pool "$25 million" — TWO-VERSION FINDING (corrected 2026-08-25;
+   supersedes the same-day "verified false" verdict, which John's paper copy
+   disproved).** Two same-titled versions of "Potential Bond Measure Projects
+   (per 12-2-25 City Council Action)" exist:
+   - **(a) The February 2026 outreach/commission version** (in the Feb 19, 2026
+     Transportation & Infrastructure Commission packet; local copy
+     `data/raw/ballot_args_2026/TI_Commission_packet_2026-02-19_with_25M_King_version.pdf`):
+     "King Pool (25 Meter) & Locker Room — **$25,000,000** — Full
+     Replacement/Modernization. Replaces existing locker rooms and **builds new
+     25 Meter pool to replace existing 25 yard and dive pools.** 25 Meter pool
+     will double programmatic use of existing facility." Frances Albrier $30.0M;
+     Parks subtotal **$107,600,000**. This is the version presented to
+     commissions and community meetings.
+   - **(b) The filed-program version** (the PDF currently served at the
+     berkeleyca.gov /2026-02/ URL + the July 2026 council packet pp. 61–63 —
+     the $272.5M program the TRS math is built on): same line title, now
+     **$5,000,000**, scope "replaces concrete decking and piping." Albrier
+     $36.85M; Parks subtotal $90,697,000.
+
+   **So between the February community outreach and the July filing, the
+   flagship aquatics project was cut ~80% — from a new 25-meter pool to a
+   decking-and-piping repair — while keeping the "(25 Meter)" title** (the
+   existing King pool is 25 *yards*; the title is a leftover from the
+   replacement scope). Affordable Berkeley's "$25 million for King Pool" cites
+   the outreach-phase version — stale against the filed program, but NOT a
+   fabrication. The deeper finding cuts against the City: **the list shown at
+   community meetings materially differs from the filed program** (King down
+   $20M, Albrier up $6.85M, Parks down $16.9M) — a documented before/after that
+   proves the no-binding-commitment critique. Willard **Pool** appears in
+   neither version (the packet's "Willard Clubhouse" items are a different
+   facility). Old City Hall full seismic = $13,942,000 (filed version).

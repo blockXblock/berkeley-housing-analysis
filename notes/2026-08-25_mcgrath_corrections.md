@@ -7,23 +7,36 @@ numbers need correction before you present, and there is stronger, citable
 ammunition you're not yet using. Everything below is verified against the City's
 own filed documents.
 
-## One error you must fix
+## King Pool: get the two versions right — it's a stronger point than either number
 
-**King Pool is $5 million, not $25 million.** We verified this against the
-City's own list — "35 Potential Bond Measure Projects (per 12-2-25 City Council
-Action)" (berkeleyca.gov, posted February 2026). Item 2 reads, with the word
-spelled out: **"King Pool (25 Meter) & Locker Room — $5,000,000"**, scope
-"replaces concrete decking and piping… extend the useful life of the facility."
-The July 2026 council packet carries the same $5.0M, abbreviated "(25m)" — a
-25-*meter* pool, which is how Affordable Berkeley's filed ballot argument
-misread it as "$25 million." No city document prices King Pool at $25M; the
-closest historical figure is the ~$23M *citywide* pools bond concept of
-2008–2010, which covered King, Willard, West Campus and the warm pool together.
-If you repeat the $25M figure, the campaign can discredit your whole
-presentation with one slide. Your underlying point survives at $5M: **Willard
-Pool appears nowhere in the 35-project list** — money goes to King's decking
-while Willard stays lost. That absence is verifiable by anyone who opens the
-document.
+There are **two versions of the City's own project list**, both titled
+"Potential Bond Measure Projects (per 12-2-25 City Council Action)," and they
+disagree about King Pool by a factor of five:
+
+- **The version presented at the February 2026 community meetings and
+  commissions** (in the Feb 19, 2026 Transportation & Infrastructure Commission
+  agenda packet): "King Pool (25 Meter) & Locker Room — **$25,000,000** — Full
+  Replacement/Modernization… **builds new 25 Meter pool to replace existing 25
+  yard and dive pools.**" Parks subtotal: $107.6M.
+- **The filed bond program** (the PDF now served on berkeleyca.gov and the July
+  2026 council packet — the list the $300M program math is built on): the same
+  line title, now **$5,000,000** — "replaces concrete decking and piping."
+  Parks subtotal: $90.7M.
+
+**Between the public outreach and the filing, the flagship aquatics project was
+cut roughly 80% — from a new pool to a repair — with the "(25 Meter)" name left
+in place** (the existing King pool is 25 *yards*). Frances Albrier moved the
+other direction, $30.0M → $36.85M.
+
+So do not say "$25 million for King Pool" as the filed opposition argument does
+— the campaign will "correct" you with the $5M line and use it to dismiss the
+rest. Say the stronger, fully documented thing instead: *"The $25 million
+replacement pool the public was shown in February became a $5 million repair in
+the filed list. The list can change at any time — because it already has."*
+That is your "list could change" argument proven with the City's own
+before-and-after. And **Willard Pool appears in neither version** — the only
+Willard items anywhere in the City's lists are for the Willard *Clubhouse*, a
+different facility.
 
 ## Corrections to other figures
 

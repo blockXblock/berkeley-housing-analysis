@@ -277,5 +277,22 @@ Rent Board budget >$8M, ADU-chilling, fee-waiver burden-shift.
 5. **Republication care:** the Y gift/vote allegation (rebuttal), the X
    "bad-faith lobbyists" line, and the Berkeley Rep salary/programming claims
    are litigation-adjacent — attribute strictly as contested campaign claims.
-6. **Reconcile the 33-vs-35 project count** against the Council referral item
-   before the evidence site cites either number as "the list."
+6. **Project-count reconciliation (RESOLVED 2026-08-25).** The counts are
+   successive versions of one evolving list: **35** = "35 Potential Bond Measure
+   Projects (per 12-2-25 City Council Action)" (berkeleyca.gov, posted Feb 2026;
+   local copy `data/raw/ballot_args_2026/Potential_Bond_Measure_Projects_per_12-2-25_council_action.pdf`
+   — its item numbers have gaps, showing a selection from a longer menu); **36
+   items** = the July 2026 council packet pp. 61–63 ($272.5M); our reference JSON
+   models 33 (some sub-items merged). The opposition's "35" cites the December
+   action — accurate for that version.
+7. **King Pool "$25 million" — VERIFIED FALSE (2026-08-25).** The city's own
+   12-2-25 list reads, with the word spelled out: "King Pool **(25 Meter)** &
+   Locker Room — **$5,000,000**," scope "replaces concrete decking and piping…
+   extend the useful life." The July 2026 packet carries the same $5.0M. No city
+   document prices King Pool at $25M; the closest historical figure is the
+   ~$23M **citywide** pools bond concept (2008–2010), which covered King,
+   Willard, West Campus and the warm pool together. Affordable Berkeley's filed
+   "$25 million for King Pool" is a misreading of the 25-*meter* pool length —
+   a documented, citable error in their argument. (Also confirmed in the same
+   city document: Old City Hall full seismic = $13,942,000; Willard Pool appears
+   nowhere in the list.)

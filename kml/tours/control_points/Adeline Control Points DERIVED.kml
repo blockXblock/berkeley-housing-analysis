@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+<Document>
+	<name>Adeline Control Points DERIVED · 4 points · N->S</name>
+	<description><![CDATA[Derived from county parcel geometry, no Google Earth required.
+Flight order is N->S — the order of these placemarks IS the flight order.]]></description>
+	<Style id="s_ylw-pushpin"><IconStyle><scale>1.1</scale>
+		<Icon><href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href></Icon></IconStyle></Style>
+	<StyleMap id="m_ylw-pushpin">
+		<Pair><key>normal</key><styleUrl>#s_ylw-pushpin</styleUrl></Pair>
+		<Pair><key>highlight</key><styleUrl>#s_ylw-pushpin</styleUrl></Pair></StyleMap>
+	<Folder><name>Adeline Control Points</name><open>1</open>
+	<Placemark>
+		<name>Adeline-CP01</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing Adeline
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2679770326285,37.8588249999999,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>Adeline-CP02</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing Adeline
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2685161152620,37.8577749999999,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>Adeline-CP03</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing Adeline
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2685161152620,37.8528749999999,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>Adeline-CP04</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing Adeline
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2690551978955,37.8486749999999,0</coordinates></Point>
+	</Placemark>
+	</Folder>
+</Document>
+</kml>

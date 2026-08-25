@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+<Document>
+	<name>San Pablo Control Points DERIVED · 10 points · N->S</name>
+	<description><![CDATA[Derived from county parcel geometry, no Google Earth required.
+Flight order is N->S — the order of these placemarks IS the flight order.]]></description>
+	<Style id="s_ylw-pushpin"><IconStyle><scale>1.1</scale>
+		<Icon><href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href></Icon></IconStyle></Style>
+	<StyleMap id="m_ylw-pushpin">
+		<Pair><key>normal</key><styleUrl>#s_ylw-pushpin</styleUrl></Pair>
+		<Pair><key>highlight</key><styleUrl>#s_ylw-pushpin</styleUrl></Pair></StyleMap>
+	<Folder><name>San Pablo Control Points</name><open>1</open>
+	<Placemark>
+		<name>SanPablo-CP01</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing San Pablo
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2950558994030,37.8811749999997,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>SanPablo-CP02</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing San Pablo
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2950194951195,37.8776749999998,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>SanPablo-CP03</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing San Pablo
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2936640414055,37.8738249999998,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>SanPablo-CP04</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing San Pablo
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2927460954675,37.8710249999998,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>SanPablo-CP05</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing San Pablo
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2910530665410,37.8657749999999,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>SanPablo-CP06</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing San Pablo
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2902738995795,37.8633249999999,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>SanPablo-CP07</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing San Pablo
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2896170742895,37.8612249999999,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>SanPablo-CP08</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing San Pablo
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2888088472015,37.8587749999999,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>SanPablo-CP09</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing San Pablo
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2880450023615,37.8563249999999,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>SanPablo-CP10</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing San Pablo
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2863492501300,37.8503750000000,0</coordinates></Point>
+	</Placemark>
+	</Folder>
+</Document>
+</kml>

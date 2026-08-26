@@ -252,9 +252,11 @@ def main():
             lon = A[0] + (B[0]-A[0])*f
             lat = A[1] + (B[1]-A[1])*f
             dur = (seg/n) / a.speed
-            body.append(flyto(lon, lat, cruise, hdg, a.tilt, dur))
-            total += dur
-            # when the cruise passes a target, orbit it once
+            # ORBIT CHECK COMES FIRST. Emitting the cruise waypoint before testing for the circle
+            # crossing flew the camera PAST the tangent point and then jumped it BACKWARDS onto
+            # the entry -- a 133-157 degree reversal on every orbit (measured, 6 of 6 on Shattuck,
+            # 2026-08-26). The entry lies between prev and this waypoint, so the orbit must be
+            # emitted BEFORE we advance to it.
             for name, (blon, blat, roof, rad) in targets:
                 if name in orbited:
                     continue
@@ -275,6 +277,9 @@ def main():
                 orbited.add(name)
                 print(f"  orbit: {name}  roof {roof:.1f} m -> {alt:.1f} m, r {orad:.0f} m, "
                       f"enter {entry:.0f}deg, {'CW' if cw else 'CCW'} (building {side})")
+            # now advance along the corridor
+            body.append(flyto(lon, lat, cruise, hdg, a.tilt, dur))
+            total += dur
 
     # STAMP THE NAME. Google Earth treats a loaded KML as a SNAPSHOT, not a live link: re-opening
     # a regenerated file leaves the stale copy in the sidebar and gives no hint it is stale. Same

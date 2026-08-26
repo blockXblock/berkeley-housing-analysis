@@ -368,9 +368,26 @@ def main():
                 bsec = a.orbit_secs * 0.30
                 LEAD = 80.0                        # degrees swept while easing onto the rim
                 th_rim = th_now + sgn*LEAD
-                # ease OUT from wherever we are onto the orbit rim
-                for w in spiral((blon, blat), max(r_now, 8.0), th_now, orad, th_rim,
-                                cruise, alt, a.tilt, 72.0, hdg, 12, bsec):
+                # EASE THE DIRECTION IN, not just the radius. The spiral's first step already
+                # runs tangentially around the building, which is 43-54 deg off the flight
+                # heading -- so the camera swerved that far in ONE waypoint (cruise step 43.6 m
+                # at 3 deg, then orbit step 4.0 m at 43 deg). No reversal, but it reads as one.
+                # For the first stretch we blend each spiral position against where the camera
+                # would have been had it just carried straight on, so the turn is spread out.
+                sp = spiral((blon, blat), max(r_now, 8.0), th_now, orad, th_rim,
+                            cruise, alt, a.tilt, 72.0, hdg, 16, bsec)
+                k3 = math.cos(math.radians(lat)); hr3 = math.radians(hdg)
+                travel = a.speed * (bsec/16)            # metres the camera covers per step
+                EASE = 8                                 # steps over which to fold the turn in
+                for j, w in enumerate(sp):
+                    if j < EASE:
+                        e = (j+1)/EASE
+                        e = e*e*(3-2*e)
+                        straight = (lon + ((travel*(j+1))*math.sin(hr3)/111320.0)/k3,
+                                    lat + ((travel*(j+1))*math.cos(hr3)/111320.0))
+                        w = (straight[0] + (w[0]-straight[0])*e,
+                             straight[1] + (w[1]-straight[1])*e,
+                             w[2], w[3], w[4], w[5])
                     body.append(flyto(*w)); total += w[5]
                 # the orbit proper
                 for j in range(1, 31):

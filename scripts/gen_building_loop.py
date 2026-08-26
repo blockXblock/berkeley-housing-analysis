@@ -65,8 +65,13 @@ def cam(lon, lat, alt, hdg, tilt, dur, mode="smooth"):
 
 
 def build(name, lon, lat, roof, rad, label, plan_secs, spiral_secs, close_secs, turns):
-    orad = max(rad*2.2, 60.0)
-    plan_alt = max(roof*3.0, 180.0)          # high enough that the label sits clear
+    # RADIUS MUST ACCOUNT FOR HEIGHT, NOT JUST PLAN EXTENT (John, 2026-08-26). A circumradius
+    # rule alone put 2200 Bancroft -- 79.5 m tall -- at a 60 m orbit, where the camera cranes
+    # almost straight up and the tower will not fit the frame. Adding a height term (1.3x) keeps
+    # the whole structure in shot: a building roughly fills the vertical field when the orbit
+    # radius is a little over its height.
+    orad = max(rad*2.2, roof*1.3, 60.0)
+    plan_alt = max(roof*3.0, orad*2.2, 180.0)          # high enough that the label sits clear
     eye_alt = roof + 10.0
     k = math.cos(math.radians(lat))
     body = []
@@ -121,9 +126,9 @@ def main():
     ap.add_argument("--address"); ap.add_argument("--out")
     ap.add_argument("--all-over", type=int, help="generate for every building with >= N units")
     ap.add_argument("--outdir", default="kml/tours/loops")
-    ap.add_argument("--plan-secs", type=float, default=6.0)
-    ap.add_argument("--spiral-secs", type=float, default=14.0)
-    ap.add_argument("--close-secs", type=float, default=12.0)
+    ap.add_argument("--plan-secs", type=float, default=11.0)
+    ap.add_argument("--spiral-secs", type=float, default=26.0)
+    ap.add_argument("--close-secs", type=float, default=22.0)
     ap.add_argument("--turns", type=float, default=1.25)
     a = ap.parse_args()
     B = buildings()

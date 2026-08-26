@@ -3650,7 +3650,7 @@
 		<Placemark>
 			<name>2955 Shattuck Ave · 74 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2955 SHATTUCK Ave</b><br/><b>Units:</b> 74<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 22.9m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2955 SHATTUCK Ave</b><br/><b>Units:</b> 74<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 22.9m<br/><b>Status:</b> In Review<br/><i>Footprint 8,654 sf derived from the project's own plan set (2025-06-26 Plans 2955 Shattuck: lot 16,968 sf x 51% coverage), applied to the county parcel outline 2026-08-26. REPLACES a DEGENERATE 1,113 sf sliver — 4 vertices with a 3.1 m side, rendering as a triangle — which gave 30 sf per unit for 74 units, off by more than tenfold. The lot reading was LOW-CONFIDENCE and its 16,968 sf exceeds the single county parcel (12,207 sf), so this is likely a multi-parcel site and the extent is approximate; area and position are sound. Height still reads 2 storeys in v2, which is also wrong for 74 units.</i>]]></description>
 			<styleUrl>#style_In_Review_parcel581815</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.26609817726565,37.85572309388094,22.9</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -3658,7 +3658,7 @@
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2660165016097,37.8557557679286,22.9 -122.2660510374353,37.85575113063698,22.9 -122.2662133320259,37.85572878240878,22.9 -122.2661935136476,37.85562402050176,22.9 -122.2660165016097,37.8557557679286,22.9 
+							-122.2660626116540,37.8558464211329,22.9 -122.2660430227981,37.8557588306934,22.9 -122.2660721012959,37.8557549261834,22.9 -122.2662087502076,37.8557361094068,22.9 -122.2661920635152,37.8556479019041,22.9 -122.2663869197165,37.8556235944306,22.9 -122.2664254592010,37.8558947624272,22.9 -122.2660837657486,37.8559386147750,22.9 -122.2660626116540,37.8558464211329,22.9 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>

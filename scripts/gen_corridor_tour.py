@@ -23,7 +23,9 @@ Usage:
 """
 import argparse, math, os, re
 
-CRUISE_M = 20.0
+CRUISE_M = 25.0          # raised from 20 m per John 2026-08-26 -- at 20 m with tilt 88 the
+                         # camera sits very low and Earth Pro can render unlit terrain
+                         # underside before tiles stream in
 ORBIT_CLEARANCE_M = 10.0        # above roof
 ORBIT_RADIUS_MULT = 1.9         # orbit radius as a multiple of the building's effective radius
 GEOM = "kml/geometry/geometry.kml"
@@ -103,8 +105,12 @@ def main():
     ap.add_argument("--speed", type=float, default=12.0)
     ap.add_argument("--orbit-secs", type=float, default=16.0)
     ap.add_argument("--tilt", type=float, default=88.0)
+    ap.add_argument("--cruise", type=float, default=CRUISE_M,
+                    help="cruise altitude in metres above ground (default 25)")
     a = ap.parse_args()
 
+    global CRUISE_M
+    CRUISE_M = a.cruise
     cps = read_points(a.control_points)
     assert len(cps) >= 2, f"need >=2 control points, found {len(cps)}"
     blds = buildings()

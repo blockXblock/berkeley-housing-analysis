@@ -168,6 +168,17 @@ def circle_entry_angle(a, b, centre, radius_m):
     return None
 
 
+def seg_perp_m(p, a, b):
+    """Perpendicular distance in metres from p to the segment a-b."""
+    k = math.cos(math.radians(p[1])); M = 111320.0
+    ax, ay = (a[0]-p[0])*k*M, (a[1]-p[1])*M
+    bx, by = (b[0]-p[0])*k*M, (b[1]-p[1])*M
+    dx, dy = bx-ax, by-ay
+    L2 = dx*dx + dy*dy
+    t = 0.0 if L2 == 0 else max(0.0, min(1.0, -(ax*dx + ay*dy)/L2))
+    return math.hypot(ax + dx*t, ay + dy*t)
+
+
 def polar(centre, pt):
     """(radius_m, bearing_deg) of pt relative to centre."""
     k = math.cos(math.radians(centre[1]))
@@ -281,6 +292,14 @@ def main():
             continue
         targets.append(max(hit, key=lambda kv: kv[1][3]))     # largest match
 
+    # TRUE closest approach of the whole path to each target. Measuring against only the
+    # current segment gave 275 m for 2550 Shattuck -- the orbit triggered on a segment far
+    # from the building, so 'closest' was nonsense. This is per-target, over every segment.
+    closest_m = {}
+    for nm, (bx, by, _r, _rad) in targets:
+        closest_m[nm] = min(seg_perp_m((bx, by), cps[i][:2], cps[i+1][:2])
+                            for i in range(len(cps)-1))
+
     body, total = [], 0.0
     # establishing shot: from the first point, looking down the corridor
     hdg0 = bearing(cps[0][:2], cps[1][:2])
@@ -305,7 +324,17 @@ def main():
             for name, (blon, blat, roof, rad) in targets:
                 if name in orbited:
                     continue
-                orad = max(rad*ORBIT_RADIUS_MULT, 55.0)
+                # TANGENT RADIUS (John, 2026-08-26): use the path's OWN closest approach as the
+                # orbit radius wherever it is safe. Then the flight is tangent to the circle by
+                # construction -- the camera is already at orbit radius when it arrives, the
+                # spiral has no radius to make up, and the 'detect, retreat, advance' vanishes.
+                # Enlarged only as far as the building itself demands (1.35x its own radius).
+                dmin = closest_m[name]
+                # a hair MORE than the closest approach: at exactly tangent the line/circle
+                # discriminant is ~0 and the crossing test misses it entirely (2655 Shattuck
+                # silently lost its orbit). 3% + 1 m keeps it effectively tangent while
+                # guaranteeing a detectable crossing.
+                orad = max(dmin*1.03 + 1.0, rad*1.35, 30.0)
                 # ENTER WHERE THE PATH ACTUALLY MEETS THE CIRCLE, not at an arbitrary angle.
                 prev = (A[0] + (B[0]-A[0])*((s-1)/n), A[1] + (B[1]-A[1])*((s-1)/n))
                 entry = circle_entry_angle(prev, (lon, lat), (blon, blat), orad)

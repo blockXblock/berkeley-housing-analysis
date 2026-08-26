@@ -276,6 +276,9 @@ def main():
     ap.add_argument("--speed", type=float, default=12.0)
     ap.add_argument("--orbit-secs", type=float, default=16.0)
     ap.add_argument("--tilt", type=float, default=88.0)
+    ap.add_argument("--orbit-dir", choices=["continue","flip"], default="continue",
+                    help="continue = sweep the way the flight is already going; "
+                         "flip = the opposite sense (John's proposal, 2026-08-26)")
     ap.add_argument("--cruise", type=float, default=25.0,
                     help="cruise altitude in metres above ground (default 25)")
     a = ap.parse_args()
@@ -348,15 +351,20 @@ def main():
                     continue
                 alt = roof + ORBIT_CLEARANCE_M
                 # turn TOWARD the building: right-hand targets clockwise, left-hand anticlockwise
-                cw = orbit_direction_cw(entry, hdg)
                 side = "right" if side_of_path(A, B, (blon, blat)) > 0 else "left"
-                sgn = 1 if cw else -1
                 r_now, th_now = polar((blon, blat), (lon, lat))
                 # The sweep must continue the flight from th_now, the camera's ACTUAL bearing
                 # from the building -- not from `entry`, the bearing where the straight line
                 # crossed the circle. Those differ, and choosing the direction from `entry` sent
                 # the spiral backwards whenever they disagreed. That was the residual retreat.
                 cw = orbit_direction_cw(th_now, hdg)
+                if a.orbit_dir == "flip":
+                    cw = not cw
+                # sgn MUST be derived AFTER cw is final. It was computed from the earlier
+                # `entry`-based cw and never updated, so the th_now retreat fix claimed in
+                # e3003d1 was a NO-OP: the console printed the corrected direction while the
+                # geometry kept using the old one. That is why the retreat survived the fix.
+                sgn = 1 if cw else -1
                 bsec = a.orbit_secs * 0.30
                 LEAD = 80.0                        # degrees swept while easing onto the rim
                 th_rim = th_now + sgn*LEAD

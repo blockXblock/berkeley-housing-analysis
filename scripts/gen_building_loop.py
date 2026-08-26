@@ -1,0 +1,158 @@
+#!/usr/bin/env python3
+"""gen_building_loop.py — a standalone reveal for ONE building: look down, then spiral in.
+
+WHY STANDALONE. Every failure in the corridor-tour work came from joining a loop to a flight
+path: the manoeuvre had to be inserted at a position the camera had already passed, in seven
+different disguises. A loop with NO corridor has no join, so that whole class of bug cannot
+occur. These clips are meant to be cut into the corridor footage in an editor, which also lets
+the length of each building's moment be an editorial choice rather than a geometric one.
+
+THE SHOT (John's spec, 2026-08-26): "vertical spirals and look-down-through-building that shows
+the building labels and data".
+  1. PLAN VIEW   - high above, camera straight down. The footprint reads as a shape and the
+                   placemark label sits legibly beside it.
+  2. SPIRAL IN   - descend and tilt up while circling, so the flat plan becomes a solid mass.
+  3. EYE LEVEL   - a final turn at roof + clearance, the building filling the frame.
+
+Altitudes derive from the building's own extrusion in geometry.kml, so a corrected height
+changes the shot automatically.
+
+Usage:
+  python scripts/gen_building_loop.py --address "2190 SHATTUCK" --out kml/tours/loops/2190.kml
+  python scripts/gen_building_loop.py --all-over 100 --outdir kml/tours/loops
+"""
+import argparse, math, os, re
+
+GEOM = "kml/geometry/geometry.kml"
+M = 111320.0
+
+
+def buildings():
+    """{ADDRESS: (lon, lat, roof_m, circumradius_m, label)}"""
+    out = {}
+    for pm in re.findall(r"<Placemark>.*?</Placemark>", open(GEOM, errors="replace").read(), re.S):
+        ad = re.search(r"<b>([^<]*)</b><br/>", pm)
+        nm = re.search(r"<name>([^<]*)</name>", pm)
+        po = re.search(r"<Polygon>.*?</Polygon>", pm, re.S)
+        if not (ad and po):
+            continue
+        cs = re.search(r"<coordinates>\s*(.*?)\s*</coordinates>", po.group(0), re.S).group(1)
+        ring, roof = [], 0.0
+        for tok in cs.split():
+            p = tok.split(",")
+            ring.append((float(p[0]), float(p[1])))
+            if len(p) > 2:
+                roof = float(p[2])
+        if len(ring) < 4:
+            continue
+        r = ring[:-1]
+        lon = sum(p[0] for p in r)/len(r); lat = sum(p[1] for p in r)/len(r)
+        k = math.cos(math.radians(lat))
+        rad = max(math.hypot((p[0]-lon)*k, (p[1]-lat)) for p in r) * M
+        out[ad.group(1).upper().strip()] = (lon, lat, roof, rad,
+                                            nm.group(1) if nm else ad.group(1))
+    return out
+
+
+def cam(lon, lat, alt, hdg, tilt, dur, mode="smooth"):
+    return (f"\t\t\t<gx:FlyTo>\n\t\t\t\t<gx:duration>{dur:.2f}</gx:duration>\n"
+            f"\t\t\t\t<gx:flyToMode>{mode}</gx:flyToMode>\n\t\t\t\t<Camera>\n"
+            f"\t\t\t\t\t<longitude>{lon:.10f}</longitude>\n\t\t\t\t\t<latitude>{lat:.10f}</latitude>\n"
+            f"\t\t\t\t\t<altitude>{alt:.1f}</altitude>\n\t\t\t\t\t<heading>{hdg:.2f}</heading>\n"
+            f"\t\t\t\t\t<tilt>{tilt:.1f}</tilt>\n\t\t\t\t\t<roll>0</roll>\n"
+            f"\t\t\t\t\t<altitudeMode>relativeToGround</altitudeMode>\n"
+            f"\t\t\t\t</Camera>\n\t\t\t</gx:FlyTo>\n")
+
+
+def build(name, lon, lat, roof, rad, label, plan_secs, spiral_secs, close_secs, turns):
+    orad = max(rad*2.2, 60.0)
+    plan_alt = max(roof*3.0, 180.0)          # high enough that the label sits clear
+    eye_alt = roof + 10.0
+    k = math.cos(math.radians(lat))
+    body = []
+
+    # 1. PLAN VIEW — straight down, holding, so the footprint and label can be read
+    n1 = 12
+    for j in range(n1):
+        hdg = 360.0*j/n1*0.25                # a slow quarter-turn so it is not static
+        body.append(cam(lon, lat, plan_alt, hdg, 0.0, plan_secs/n1,
+                        "bounce" if j == 0 else "smooth"))
+
+    # 2. SPIRAL IN — descend, tilt up, and swing out to the orbit radius while turning
+    n2 = int(36*turns)
+    for j in range(1, n2+1):
+        f = j/n2
+        e = f*f*(3-2*f)
+        th = 360.0*turns*f
+        r = orad*e                            # from directly overhead out to the rim
+        a = plan_alt + (eye_alt-plan_alt)*e
+        tilt = 0.0 + (72.0-0.0)*e
+        clon = lon + (r*math.sin(math.radians(th))/M)/k
+        clat = lat + (r*math.cos(math.radians(th))/M)
+        body.append(cam(clon, clat, a, (th+180) % 360, tilt, spiral_secs/n2))
+
+    # 3. EYE LEVEL — one clean turn at the rim with the building filling the frame
+    n3 = 36
+    start = 360.0*turns
+    for j in range(1, n3+1):
+        th = start + 360.0*(j/n3)
+        clon = lon + (orad*math.sin(math.radians(th))/M)/k
+        clat = lat + (orad*math.cos(math.radians(th))/M)
+        body.append(cam(clon, clat, eye_alt, (th+180) % 360, 72.0, close_secs/n3))
+
+    total = plan_secs + spiral_secs + close_secs
+    disp = f"{label} · loop"
+    kml = (f'<?xml version="1.0" encoding="UTF-8"?>\n'
+           f'<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">\n'
+           f'<Document>\n\t<name>{disp}</name>\n'
+           f'\t<description><![CDATA[Standalone building loop, generated by '
+           f'scripts/gen_building_loop.py. Plan view {plan_alt:.0f} m -> spiral -> '
+           f'{turns:.1f} turns -> eye level {eye_alt:.0f} m at radius {orad:.0f} m. '
+           f'Altitudes derive from this building\'s extrusion height ({roof:.1f} m), so a '
+           f'corrected height re-cuts the shot. Load alongside geometry.kml.]]></description>\n'
+           f'\t<gx:Tour>\n\t\t<name>{disp}</name>\n\t\t<gx:Playlist>\n'
+           + "".join(body) +
+           f'\t\t</gx:Playlist>\n\t</gx:Tour>\n</Document>\n</kml>\n')
+    return kml, total, orad, plan_alt, eye_alt
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--address"); ap.add_argument("--out")
+    ap.add_argument("--all-over", type=int, help="generate for every building with >= N units")
+    ap.add_argument("--outdir", default="kml/tours/loops")
+    ap.add_argument("--plan-secs", type=float, default=6.0)
+    ap.add_argument("--spiral-secs", type=float, default=14.0)
+    ap.add_argument("--close-secs", type=float, default=12.0)
+    ap.add_argument("--turns", type=float, default=1.25)
+    a = ap.parse_args()
+    B = buildings()
+
+    picks = []
+    if a.address:
+        hits = [(k, v) for k, v in B.items() if a.address.upper() in k]
+        if not hits:
+            raise SystemExit(f"not found: {a.address}")
+        picks = [max(hits, key=lambda kv: kv[1][3])]
+    else:
+        import sqlite3
+        c = sqlite3.connect("databases/berkeley_housing_v2.db")
+        units = {(r[0] or "").upper().strip(): (r[1] or 0) for r in
+                 c.execute("select address_display,total_units from v_projects_flat")}
+        picks = [(k, v) for k, v in B.items() if units.get(k, 0) >= (a.all_over or 0)]
+        picks.sort(key=lambda kv: -units.get(kv[0], 0))
+
+    os.makedirs(a.outdir, exist_ok=True)
+    for name, (lon, lat, roof, rad, label) in picks:
+        kml, total, orad, pa, ea = build(name, lon, lat, roof, rad, label,
+                                         a.plan_secs, a.spiral_secs, a.close_secs, a.turns)
+        slug = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
+        path = a.out if (a.out and a.address) else f"{a.outdir}/{slug}.kml"
+        open(path, "w").write(kml)
+        print(f"  {name[:26]:28} roof {roof:>5.1f} m · r {orad:>5.0f} m · "
+              f"plan {pa:>4.0f} m -> eye {ea:>5.1f} m · {total:.0f}s -> {path}")
+    print(f"\n{len(picks)} loop(s)")
+
+
+if __name__ == "__main__":
+    main()

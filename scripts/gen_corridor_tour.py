@@ -168,45 +168,48 @@ def circle_entry_angle(a, b, centre, radius_m):
     return None
 
 
-def blend_in(line_pt, line_hdg, centre, radius_m, start_deg, clockwise,
-             cruise_alt, orbit_alt, steps, secs, arc_deg=70.0):
-    """A FILLET from the straight corridor onto the circle.
+def polar(centre, pt):
+    """(radius_m, bearing_deg) of pt relative to centre."""
+    k = math.cos(math.radians(centre[1]))
+    e = (pt[0]-centre[0])*k*111320.0
+    n = (pt[1]-centre[1])*111320.0
+    return math.hypot(e, n), (math.degrees(math.atan2(e, n)) + 360) % 360
 
-    Entering at the point where the line CROSSES the circle leaves a kink: the flight is
-    travelling along its bearing, the circle wants a tangent, and the two differ by the entry
-    turn (23-47 deg measured on Shattuck). No single waypoint jumps -- position and heading
-    steps stay ~10 m and ~10 deg -- but the CURVATURE changes instantly, which reads as the
-    camera snapping sideways.
 
-    So we spend the last stretch of approach easing between the two: position is interpolated
-    from where the straight line would have carried us to the corresponding point on the
-    circle, and heading from the cruise bearing to facing the centroid. Both on a smoothstep,
-    so the camera leaves the line and joins the circle tangentially.
+def from_polar(centre, r_m, th_deg):
+    k = math.cos(math.radians(centre[1]))
+    r = math.radians(th_deg)
+    return (centre[0] + (r_m*math.sin(r)/111320.0)/k,
+            centre[1] + (r_m*math.cos(r)/111320.0))
+
+
+def spiral(centre, r0, th0, r1, th1, alt0, alt1, tilt0, tilt1, hdg0, steps, secs,
+           face_at_end=True):
+    """Sweep from (r0,th0) to (r1,th1) about a centre, easing radius, altitude and tilt.
+
+    WHY A SPIRAL AND NOT A TANGENTIAL FILLET: these corridors run 25-40 m from their towers
+    while the orbit radius is 55 m or more, so the flight is INSIDE the circle at closest
+    approach. There is no tangential entry from inside a circle -- every fillet attempt had
+    to double back to reach the rim (measured: 25 waypoint-turns over 90 degrees). A spiral
+    simply grows the radius while it sweeps, so the camera eases outward onto the orbit
+    without ever reversing.
     """
     out = []
-    k = math.cos(math.radians(centre[1]))
-    sgn = 1 if clockwise else -1
-    for j in range(steps):
-        f = j / steps
-        e = f*f*(3-2*f)                                    # smoothstep
-        # where the circle is, walking BACK from the entry against the orbit direction
-        th = start_deg - sgn*arc_deg*(1-f)
-        rad = math.radians(th)
-        cx = centre[0] + (radius_m*math.sin(rad)/111320.0)/k
-        cy = centre[1] + (radius_m*math.cos(rad)/111320.0)
-        # where the straight corridor would have been at the same moment
-        back_m = radius_m*math.radians(arc_deg)*(1-f)
-        hr = math.radians(line_hdg)
-        lx = line_pt[0] - (back_m*math.sin(hr)/111320.0)/k
-        ly = line_pt[1] - (back_m*math.cos(hr)/111320.0)
-        lon = lx + (cx-lx)*e
-        lat = ly + (cy-ly)*e
+    dth = ((th1 - th0 + 540) % 360) - 180
+    for j in range(1, steps+1):
+        f = j/steps
+        e = f*f*(3-2*f)
+        th = th0 + dth*f
+        r = r0 + (r1-r0)*e
+        lon, lat = from_polar(centre, r, th)
         face = (th + 180.0) % 360.0
-        dhh = ((face - line_hdg + 540) % 360) - 180        # shortest way round
-        hdg = (line_hdg + dhh*e) % 360
-        alt = cruise_alt + (orbit_alt-cruise_alt)*e
-        tilt = 88.0 + (72.0-88.0)*e
-        out.append((lon, lat, alt, hdg, tilt, secs/steps))
+        if face_at_end:
+            dh = ((face - hdg0 + 540) % 360) - 180
+            hdg = (hdg0 + dh*e) % 360
+        else:
+            hdg = face
+        out.append((lon, lat, alt0 + (alt1-alt0)*e,
+                    hdg, tilt0 + (tilt1-tilt0)*e, secs/steps))
     return out
 
 
@@ -229,10 +232,15 @@ def orbit_waypoints(centre, radius_m, alt, start_deg, clockwise, steps, secs,
         lat = centre[1] + (radius_m*math.cos(rad)/111320.0)
         heading = (th + 180.0) % 360.0                  # face the centroid
         # ease altitude/tilt in and out so the join is continuous
-        # the fillet already carried altitude/tilt to orbit values, so hold them steady
-        # through the circle and let the matching fillet on the way out unwind them
-        a = alt
-        tilt = 72.0
+        if f < ramp_frac:
+            e = f/ramp_frac
+        elif f > 1-ramp_frac:
+            e = (1-f)/ramp_frac
+        else:
+            e = 1.0
+        e = e*e*(3-2*e)                                  # smoothstep
+        a = cruise_alt + (alt - cruise_alt)*e
+        tilt = 88.0 + (72.0 - 88.0)*e
         out.append((lon, lat, a, heading, tilt, secs/steps))
     return out
 
@@ -307,22 +315,26 @@ def main():
                 # turn TOWARD the building: right-hand targets clockwise, left-hand anticlockwise
                 cw = orbit_direction_cw(entry, hdg)
                 side = "right" if side_of_path(A, B, (blon, blat)) > 0 else "left"
-                blend_secs = a.orbit_secs * 0.28
-                for olon, olat, oalt, ohdg, otilt, odur in blend_in(
-                        (lon, lat), hdg, (blon, blat), orad, entry, cw,
-                        cruise, alt, 12, blend_secs):
-                    body.append(flyto(olon, olat, oalt, ohdg, otilt, odur))
-                    total += odur
-                for olon, olat, oalt, ohdg, otilt, odur in orbit_waypoints(
-                        (blon, blat), orad, alt, entry, cw, 36, a.orbit_secs, cruise):
-                    body.append(flyto(olon, olat, oalt, ohdg, otilt, odur))
-                    total += odur
-                # unwind: the mirror of the fillet, walked forwards off the circle
-                for olon, olat, oalt, ohdg, otilt, odur in reversed(blend_in(
-                        (lon, lat), hdg, (blon, blat), orad, entry, cw,
-                        cruise, alt, 12, blend_secs)):
-                    body.append(flyto(olon, olat, oalt, ohdg, otilt, odur))
-                    total += odur
+                sgn = 1 if cw else -1
+                r_now, th_now = polar((blon, blat), (lon, lat))
+                bsec = a.orbit_secs * 0.30
+                LEAD = 80.0                        # degrees swept while easing onto the rim
+                th_rim = th_now + sgn*LEAD
+                # ease OUT from wherever we are onto the orbit rim
+                for w in spiral((blon, blat), max(r_now, 8.0), th_now, orad, th_rim,
+                                cruise, alt, a.tilt, 72.0, hdg, 12, bsec):
+                    body.append(flyto(*w)); total += w[5]
+                # the orbit proper
+                for j in range(1, 31):
+                    th = th_rim + sgn*(360.0 - 2*LEAD)*(j/30)
+                    q = from_polar((blon, blat), orad, th)
+                    body.append(flyto(q[0], q[1], alt, (th+180) % 360, 72.0, a.orbit_secs/30))
+                    total += a.orbit_secs/30
+                # ease back IN to the corridor, releasing on the cruise heading
+                th_end = th_rim + sgn*(360.0 - 2*LEAD)
+                for w in spiral((blon, blat), orad, th_end, max(r_now, 8.0), th_end + sgn*LEAD,
+                                alt, cruise, 72.0, a.tilt, hdg, 12, bsec, face_at_end=False):
+                    body.append(flyto(w[0], w[1], w[2], w[3], w[4], w[5])); total += w[5]
                 orbited.add(name)
                 print(f"  orbit: {name}  roof {roof:.1f} m -> {alt:.1f} m, r {orad:.0f} m, "
                       f"enter {entry:.0f}deg, {'CW' if cw else 'CCW'} (building {side})")

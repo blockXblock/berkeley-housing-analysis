@@ -1,0 +1,46 @@
+project_id,address,units,status,db_stories,footprint_sf,footprint_source,lot_area_sf,coverage_pct,stories,gfa_sf,sf_per_unit,proposed_col,col_basis,raw_units_row,raw_coverage_row,verdict,checks,doc_title
+35,2190 SHATTUCK Ave,452,In Review,34.0,19767,lot x coverage,19967.0,99.0,34.0,,1487,1,units row: 452 matches v2 452,0|452,95|99,PASS,fp/lot=99% vs 99%; 1487 sf/unit,Tabulation Form 1.E (2190 Shattuck)
+13,2420 SHATTUCK Ave,132,In Review,17.0,6783.0,stated,,73.0,17.0,77733.0,874,1,FALLBACK second column (units row absent or no match),,84|73,WEAK,874 sf/unit,Affordable Housing Tabulation Form 1.E (2420 Shattuck)
+2,2276 SHATTUCK Ave,336,Entitled,18.0,9853,lot x coverage,10948.0,90.0,18.0,,528,1,FALLBACK second column (units row absent or no match),0|83,93|90,PASS,fp/lot=90% vs 90%; 528 sf/unit,6-11-2024 4. 2276 Shattuck  Ave Tabulation Form
+139,2538 DURANT Ave,83,Under Construction,8.0,,,,,,,,,,,,NO-READ,,
+147,2300 ELLSWORTH St,69,Under Construction,7.0,12640,lot x coverage,16000.0,79.0,7.0,,1282,1,units row: 69 matches v2 69,12|69|69,66|79|100,PASS,fp/lot=79% vs 79%; 1282 sf/unit,3.1 Tabulation Form - 2300-2310 Ellsworth (03.13.24)
+123,2037 DURANT Ave,74,Entitled,1.0,,,,,,,,,,,,NO-READ,,
+52,2437 WARRING St,4,In Review,2.0,4255,lot x coverage,5750.0,74.0,6.0,,6382,1,FALLBACK second column (units row absent or no match),8|23,35|74|100,SUSPECT,fp/lot=74% vs 74%; 6382 sf/unit,2026-04-27 Tabulation Form 2437 Warring
+26,2298 DURANT Ave,65,In Review,8.0,7438,lot x coverage,8471.0,87.8,1.0,,114,1,FALLBACK second column (units row absent or no match),0|45|30,28|87.8|100,SUSPECT,fp/lot=88% vs 88%; 114 sf/unit,2026-04-03 E. Tabulation Form
+38,2449 DWIGHT Way,39,Entitled,4.0,8961,lot x coverage,10300.0,87.0,8.0,,1838,1,FALLBACK second column (units row absent or no match),24|63,87|87,PASS,fp/lot=87% vs 87%; 1838 sf/unit,2025-12-10 RESUB 1.E 2449 Dwight Tabulation Form 2025 1204
+8,2920 SHATTUCK Ave,242,In Review,10.0,10232.0,stated,,52.0,11.0,131583.0,465,1,FALLBACK second column (units row absent or no match),,39|52|45,WEAK,465 sf/unit,2025-10-03_RESUB_Tabulation Form_2920 Shattuck
+5,2425 DURANT Ave,117,Entitled,20.0,8288,lot x coverage,9750.0,85.0,20.0,,1417,1,FALLBACK second column (units row absent or no match),19|169|150,46|85|100,PASS,fp/lot=85% vs 85%; 1417 sf/unit,2025-08-27  2425 Durant Tabulation Form
+22,2955 SHATTUCK Ave,74,In Review,2.0,15611,lot x coverage,16968.0,92.0,8.0,,1688,1,units row: 74 matches v2 74,0|74,51|92|35,PASS,fp/lot=92% vs 92%; 1688 sf/unit,2025-05-25 1E Tabulation Form Nov 2019
+124,2442 HASTE St,34,Under Construction,8.0,5468,lot x coverage,6750.0,81.0,8.0,,1287,1,FALLBACK second column (units row absent or no match),4|38,25|81|100,PASS,fp/lot=81% vs 81%; 1287 sf/unit,2025-04-29 1E Tabulation Form 250415
+15,2109 VIRGINIA St,110,Entitled,8.0,2.0,stated,2.0,95.0,8.0,,0,1,units row: 110 matches v2 110,0|110,23|95|100|35,SUSPECT,fp/lot=100% vs 95%; 0 sf/unit,2025-04-11_1.E - 2341 - Tabulation_Form
+9,1899 OXFORD St,212,Entitled,7.0,16505,lot x coverage,22304.0,74.0,8.0,,623,1,units row: 222 matches v2 212,8|222,12|74|40,PASS,fp/lot=74% vs 74%; 623 sf/unit,2025-02-28_Tabulation Form_1899 Oxfrord_ZP2024-0075
+113,2138 KITTREDGE St,73,Permitted,8.0,5743.0,stated,6750.0,85.0,,,,1,FALLBACK second column (units row absent or no match),3|66,28|85|85,WEAK,fp/lot=85% vs 85%,2025-02-18 RESUB 1E - TABULATION FORM - REVISED 2138 Kittredge
+6,2029 UNIVERSITY Ave,240,Entitled,23.0,11270,lot x coverage,12385.0,91.0,23.0,,1080,1,FALLBACK second column (units row absent or no match),0|160,54|91,PASS,fp/lot=91% vs 91%; 1080 sf/unit,2024-12-19 7. 2029 University Ave Tabulation Form Student Housing
+157,2587 TELEGRAPH Ave,52,Withdrawn,8.0,16708.0,stated,,,8.0,111398.0,2570,1,units row: 53 matches v2 52,0|53,,SUSPECT,2570 sf/unit,2024-11-22 1E 2587 Telegraph Tabulation Form
+28,2372 ELLSWORTH St,63,Entitled,7.0,7702,lot x coverage,9750.0,79.0,7.0,,856,1,FALLBACK second column (units row absent or no match),0|49,46|79|94,PASS,fp/lot=79% vs 79%; 856 sf/unit,2024-11-19 Tabulation Form 2372 Ellsworth ZP2024-0169
+66,2204 DWIGHT Way,2,In Review,3.0,1944,lot x coverage,5400.0,36.0,2.0,,1944,0,units row: 2 matches v2 2,2|4,36|45|100,PASS,fp/lot=36% vs 36%; 1944 sf/unit,2024-05-24 Tabulation Form 2204 Dwight ZP2024-0059
+36,2733 SAN PABLO Ave,152,In Review,8.0,12337.0,stated,,65.0,8.0,86047.0,649,1,FALLBACK second column (units row absent or no match),,49|65|100,WEAK,649 sf/unit,2023-12-13_1.E - 2203 - Tabulation_Form
+133,2128 Oxford St,485,Entitled,26.0,12654383,lot x coverage,35573.0,35573.0,,,,1,FALLBACK second column (units row absent or no match),16|456,17895|35573,WEAK,fp/lot=35573% vs 35573%,2023-11-03 RESUB 1.E Tabulation Form 11-01-23
+27,2441 LE CONTE Ave,65,Completed,7.0,9109,lot x coverage,12830.0,71.0,5.0,,701,1,FALLBACK second column (units row absent or no match),0|0,46|71|45|40|35,PASS,fp/lot=71% vs 71%; 701 sf/unit,2023-10-24 1E Tabulation Form Nov 2019
+144,2127 DWIGHT Way,58,Withdrawn,6.0,15875,lot x coverage,24300.0,65.33,6.0,,1642,1,FALLBACK second column (units row absent or no match),16|66|0,24.72|65.33|35,PASS,fp/lot=65% vs 65%; 1642 sf/unit,2023-10-09 Revised Tabulation Form  2127-2159 Dwight
+119,1974 SHATTUCK Ave,599,Entitled,28.0,24973.0,stated,,88.0,28.0,411330.0,1167,1,FALLBACK second column (units row absent or no match),,80|88|100,WEAK,1167 sf/unit,2023-07-21_RESUB_1.E - 2209 - Tabulation_Form_1974 Shattuck
+7,2601 SAN PABLO Ave,223,In Review,8.0,18706.0,stated,,65.0,8.0,129658.0,671,1,FALLBACK second column (units row absent or no match),,28|65|100,WEAK,671 sf/unit,2023-06-09_1.E - 2023 - Tabulation_Form_New
+134,2480 Bancroft Way,28,Completed,8.0,5330,lot x coverage,6500.0,82.0,8.0,,1523,1,units row: 28 matches v2 28,0|28,90.5|82,PASS,fp/lot=82% vs 82%; 1523 sf/unit,2023-05-01 RESUB Tabulation Form 2480 Bancroft
+12,2115 KITTREDGE St,148,In Review,10.0,12650.0,stated,,,17.0,158340.0,1453,1,FALLBACK second column (units row absent or no match),,,WEAK,1453 sf/unit,2023-03-07 RESUB 1E Revised Tabulation Form 2115 Kittredge
+181,2015 Blake St,168,Entitled,7.0,3046,lot x coverage,5857.0,52.0,2.0,3953.0,36,1,FALLBACK second column (units row absent or no match),2020|7,2|52|35,SUSPECT,fp/lot=52% vs 52%; 36 sf/unit,2023-02-09 RESUB 12. Revised Tabulation Forms 2015 Blake
+40,1710 UNIVERSITY Ave,16,In Review,4.0,,,,,,,,,,,,NO-READ,,
+10,3000 SHATTUCK Ave,166,Entitled,10.0,9173.0,stated,,68.0,3.0,81330.0,166,1,FALLBACK second column (units row absent or no match),,68,SUSPECT,166 sf/unit,2022-07-08_RESUB_Tabulation_Form_3000 Shattuck
+180,2065 Kittredge St,189,Entitled,8.0,,,,,,,,,,,,NO-READ,,
+148,2018 BLAKE St,12,Permitted,6.0,16,lot x coverage,5189.0,0.3,6.0,,8,1,units row: 12 matches v2 12,1|12|0.3,50|0.3,SUSPECT,fp/lot=0% vs 0%; 8 sf/unit,2021-10-18 RESUB Plan Check 2 Tabulation Form 2018 Blake
+381,2980 College Ave,4,Completed,,3575.0,stated,7150.0,,,2.0,,0,units row: 3 matches v2 4,3|4,,UNVERIFIED,,2020-09-17 RESUB Tabulation Form 2980 College
+158,1367 UNIVERSITY Ave,39,Completed,4.0,2543.0,stated,,49.0,3.0,11330.0,196,1,FALLBACK second column (units row absent or no match),,49,SUSPECT,196 sf/unit,2020-01-31 RESUB 0 - Revised Tabulation Form 1367 University
+173,2000 DWIGHT Way,113,Completed,6.0,22177.0,stated,,78.0,3.0,86059.0,589,1,FALLBACK second column (units row absent or no match),,44|78|45|40,WEAK,589 sf/unit,2019-12-18 RESUB 03-REVISED-2.1 Tabulation Form 2000 Dwight
+149,2198 SAN PABLO Ave,100,Entitled,7.0,9800.0,stated,,100.0,6.0,29400.0,588,1,FALLBACK second column (units row absent or no match),0|57|42|57,90|100|100,WEAK,588 sf/unit,2019-04-02 RESUB Revised Tabulation Form 2198 San Pablo
+16,2720 SAN PABLO Ave,113,In Review,10.0,,,,98.0,6.0,37800.0,,1,FALLBACK second column (units row absent or no match),,19|98,UNVERIFIED,,2019-03-22 RESUB Revised Tabulation Form 3.21.19 2720 San Pablo
+136,1951 Shattuck Ave,163,Completed,12.0,16588,lot x coverage,17424.0,95.2,,179680.0,,1,FALLBACK second column (units row absent or no match),,90.9|95.2,WEAK,fp/lot=95% vs 95%,2018-09-12 RESUB  Tabulation Form  1951 Shattuck
+91,2009 ADDISON St,45,Completed,7.0,,,,,,,,,,,,NO-READ,,
+898,2597 TELEGRAPH Ave,10,Completed,,,,,,,,,,,,,NO-READ,,
+890,2539 TELEGRAPH Ave,70,Completed,,14788.0,stated,16679.0,89.0,,7103.0,,1,FALLBACK second column (units row absent or no match),,64|89,WEAK,fp/lot=89% vs 89%,2014-08-21 DRC ATT3 2539 Telegraph Tabulation Form
+894,2631 DURANT Ave,56,Completed,,,,,,,,,,,,,NO-READ,,
+219,2701 Shattuck Ave,57,Completed,,,,,,,,,,,,,NO-READ,,
+172,2650 TELEGRAPH Ave,45,Completed,5.0,9261.0,stated,,85.0,5.0,34448.0,1029,1,units row: 45 matches v2 45,0|45,26.3|85,WEAK,1029 sf/unit,00 -1758 - Tabulation Form Revised R1

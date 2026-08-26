@@ -113,6 +113,78 @@ def dist_m(a, b):
     return 2*R*math.asin(math.sqrt(h))
 
 
+
+def side_of_path(a, b, target):
+    """Which side of the flight direction does the target lie on?
+    +1 = RIGHT of travel, -1 = LEFT. Cross product of the heading vector with the
+    vector to the target, in a local flat frame."""
+    k = math.cos(math.radians(a[1]))
+    hx, hy = (b[0]-a[0])*k, (b[1]-a[1])
+    tx, ty = (target[0]-a[0])*k, (target[1]-a[1])
+    cross = hx*ty - hy*tx
+    return -1 if cross > 0 else 1          # cross>0 means target is LEFT of heading
+
+
+def circle_entry_angle(a, b, centre, radius_m):
+    """Where does the segment a->b first cross the circle of radius_m about centre?
+    Returns the BEARING FROM THE CENTRE to that crossing, in degrees, or None.
+
+    Entering the orbit at the point where the flight path actually MEETS the circle is
+    what makes it smooth: the camera arrives on the circle already travelling along it,
+    instead of cutting to an arbitrary start angle and back again."""
+    k = math.cos(math.radians(centre[1]))
+    M = 111320.0
+    ax, ay = (a[0]-centre[0])*k*M, (a[1]-centre[1])*M
+    bx, by = (b[0]-centre[0])*k*M, (b[1]-centre[1])*M
+    dx, dy = bx-ax, by-ay
+    A = dx*dx + dy*dy
+    if A == 0:
+        return None
+    B = 2*(ax*dx + ay*dy)
+    C = ax*ax + ay*ay - radius_m*radius_m
+    disc = B*B - 4*A*C
+    if disc < 0:
+        return None                        # the segment never reaches the circle
+    r = math.sqrt(disc)
+    for t in sorted(((-B - r)/(2*A), (-B + r)/(2*A))):
+        if 0.0 <= t <= 1.0:
+            px, py = ax + dx*t, ay + dy*t
+            return (math.degrees(math.atan2(px, py)) + 360) % 360   # bearing from centre
+    return None
+
+
+def orbit_waypoints(centre, radius_m, alt, start_deg, clockwise, steps, secs,
+                    cruise_alt, ramp_frac=0.18):
+    """One full circle, entered and left at start_deg.
+
+    - direction follows which side the building is on, so the camera turns TOWARD it
+    - the camera looks at the centroid throughout
+    - altitude and tilt EASE between cruise and orbit values over the first and last
+      ramp_frac of the circle, so there is no step change at the join
+    """
+    out = []
+    k = math.cos(math.radians(centre[1]))
+    for j in range(steps + 1):
+        f = j / steps
+        th = start_deg + (360.0 * f) * (1 if clockwise else -1)
+        rad = math.radians(th)
+        lon = centre[0] + (radius_m*math.sin(rad)/111320.0)/k
+        lat = centre[1] + (radius_m*math.cos(rad)/111320.0)
+        heading = (th + 180.0) % 360.0                  # face the centroid
+        # ease altitude/tilt in and out so the join is continuous
+        if f < ramp_frac:
+            e = f/ramp_frac
+        elif f > 1-ramp_frac:
+            e = (1-f)/ramp_frac
+        else:
+            e = 1.0
+        e = e*e*(3-2*e)                                  # smoothstep
+        a = cruise_alt + (alt - cruise_alt)*e
+        tilt = 88.0 + (72.0 - 88.0)*e
+        out.append((lon, lat, a, heading, tilt, secs/steps))
+    return out
+
+
 def flyto(lon, lat, alt, hdg, tilt, dur, mode="smooth"):
     return (f"\t\t\t<gx:FlyTo>\n\t\t\t\t<gx:duration>{dur:.2f}</gx:duration>\n"
             f"\t\t\t\t<gx:flyToMode>{mode}</gx:flyToMode>\n\t\t\t\t<Camera>\n"
@@ -171,24 +243,22 @@ def main():
             for name, (blon, blat, roof, rad) in targets:
                 if name in orbited:
                     continue
-                if dist_m((lon, lat), (blon, blat)) < 90:
-                    alt = roof + ORBIT_CLEARANCE_M
-                    orad = max(rad*ORBIT_RADIUS_MULT, 55.0)
-                    steps = 24
-                    for j in range(steps+1):
-                        th = 2*math.pi*j/steps
-                        k = math.cos(math.radians(blat))
-                        olon = blon + (orad*math.sin(th)/111320)/k
-                        olat = blat + (orad*math.cos(th)/111320)
-                        # look inward at the building
-                        ohdg = (math.degrees(th) + 180) % 360
-                        body.append(flyto(olon, olat, alt, ohdg, 72.0, a.orbit_secs/steps))
-                        total += a.orbit_secs/steps
-                    orbited.add(name)
-                    print(f"  orbit: {name}  roof {roof:.1f} m -> altitude {alt:.1f} m, radius {orad:.0f} m")
-                    # resume the cruise heading
-                    body.append(flyto(lon, lat, cruise, hdg, a.tilt, 1.5))
-                    total += 1.5
+                orad = max(rad*ORBIT_RADIUS_MULT, 55.0)
+                # ENTER WHERE THE PATH ACTUALLY MEETS THE CIRCLE, not at an arbitrary angle.
+                prev = (A[0] + (B[0]-A[0])*((s-1)/n), A[1] + (B[1]-A[1])*((s-1)/n))
+                entry = circle_entry_angle(prev, (lon, lat), (blon, blat), orad)
+                if entry is None:
+                    continue
+                alt = roof + ORBIT_CLEARANCE_M
+                # turn TOWARD the building: right-hand targets clockwise, left-hand anticlockwise
+                cw = side_of_path(A, B, (blon, blat)) > 0
+                for olon, olat, oalt, ohdg, otilt, odur in orbit_waypoints(
+                        (blon, blat), orad, alt, entry, cw, 36, a.orbit_secs, cruise):
+                    body.append(flyto(olon, olat, oalt, ohdg, otilt, odur))
+                    total += odur
+                orbited.add(name)
+                print(f"  orbit: {name}  roof {roof:.1f} m -> {alt:.1f} m, r {orad:.0f} m, "
+                      f"enter {entry:.0f}deg, {'CW (building right)' if cw else 'CCW (building left)'}")
 
     # STAMP THE NAME. Google Earth treats a loaded KML as a SNAPSHOT, not a live link: re-opening
     # a regenerated file leaves the stale copy in the sidebar and gives no hint it is stale. Same

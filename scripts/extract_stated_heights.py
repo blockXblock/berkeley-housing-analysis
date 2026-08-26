@@ -19,12 +19,15 @@ FILES = "scratch/2026-08-23/tab_files.json"
 OUT = "data/reference/stated_heights.csv"
 
 
+# a single feet value: NN' or NN'-M" — NO internal whitespace, so it can't span to the next column
+FEET_TOKEN = re.compile(r"\d+'(?:[-–]\d+\"?)?")
+
+
 def feet(s):
-    """'360'-9\"' -> 360.75 ; '56'-4\"' -> 56.33 ; '38'' -> 38.0"""
-    m = re.search(r"(\d+)\s*'\s*[-–]?\s*(\d+)?\s*\"?", s)
+    """'360'-9\"' -> 360.8 ; '56'-4\"' -> 56.3 ; '38'' -> 38.0"""
+    m = re.match(r"(\d+)'(?:[-–](\d+))?", s)
     if not m:
-        m2 = re.search(r"(\d+(?:\.\d+)?)", s)
-        return float(m2.group(1)) if m2 else None
+        return None
     ft = float(m.group(1)); inch = float(m.group(2)) if m.group(2) else 0
     return round(ft + inch / 12, 1)
 
@@ -37,7 +40,7 @@ def ints_on(line):
 
 
 def feet_on(line):
-    return [feet(m) for m in re.findall(r"\d+\s*'\s*[-–]?\s*\d*\s*\"?", line) if feet(m)]
+    return [feet(m) for m in FEET_TOKEN.findall(line) if feet(m)]
 
 
 def areas_on(line):

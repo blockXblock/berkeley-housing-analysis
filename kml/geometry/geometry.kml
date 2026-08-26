@@ -3042,7 +3042,7 @@
 		<Placemark>
 			<name>2601 San Pablo Ave · 223 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2601 SAN PABLO Ave</b><br/><b>Units:</b> 223<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2601 SAN PABLO Ave</b><br/><b>Units:</b> 223<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review<br/><i>Footprint 18,706 sf from the project's own Tabulation Form 1.E (2023-06-09), PROPOSED column: 8 storeys, 65% lot coverage, 129,658 sf gross floor area. Column identified by two independent checks - it is the only one matching v2's 8 storeys, and its 581 sf per unit across 223 units is the only plausible figure (the existing column gives 49, the permitted-maximum column 386). REPLACES a 3,668 sf polygon that gave 132 sf per unit. MULTI-PARCEL ASSEMBLY: 18,706 sf at 65% implies a 28,778 sf lot against a single county parcel of 3,669 sf, so the footprint spans several lots and the extent here is approximate; area is the architect's own.</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.28864662527994,37.85926185409402,28.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -3050,7 +3050,7 @@
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2885402191163,37.85921677438314,28 -122.2887681300361,37.85918584168565,28 -122.2888131650484,37.85932937353871,28 -122.2885713930826,37.85936050647946,28 -122.2885402191163,37.85921677438314,28 
+							-122.2883728788662,37.8591458795230,28.0 -122.2888875300951,37.8590760296413,28.0 -122.2889892247592,37.8594001424334,28.0 -122.2884432735629,37.8594704444893,28.0 -122.2883728788662,37.8591458795230,28.0 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
@@ -3380,7 +3380,7 @@
 		<Placemark>
 			<name>2000 Dwight Way · 113 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2000 DWIGHT Way</b><br/><b>Units:</b> 113<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Completed]]></description>
+			<description><![CDATA[<b>2000 DWIGHT Way</b><br/><b>Units:</b> 113<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Completed<br/><i>Footprint 22,177 sf from the project's own Tabulation Form 2.1 (2019-12-18), PROPOSED column: 6 storeys, 86,059 sf gross floor area - matching v2's 6 storeys and the applicant statement's 'new 6-story Senior Housing building'. 762 sf per unit. REPLACES a 3,639 sf polygon that gave 193 sf per unit. MULTI-PARCEL: implied footprint far exceeds the single 3,639 sf county parcel, so extent is approximate; area is the architect's own. Note the form states 126 units against v2's 113 - a different filing vintage, not reconciled here.</i>]]></description>
 			<styleUrl>#style_Completed_parcel0</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.26959412404601,37.863446395133295,21.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -3388,7 +3388,7 @@
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2695034243705,37.86338423421613,21 -122.2696484736413,37.86336420783969,21 -122.2696674424711,37.86336117638604,21 -122.2696935322575,37.86358327434223,21 -122.2695484471651,37.86360124379956,21 -122.2695034243705,37.86338423421613,21 
+							-122.2693435686815,37.8632746773055,21.0 -122.2697016557516,37.8632252376466,21.0 -122.2697484846164,37.8632177538148,21.0 -122.2698128931800,37.8637660530649,21.0 -122.2694547176761,37.8638104147518,21.0 -122.2693435686815,37.8632746773055,21.0 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>

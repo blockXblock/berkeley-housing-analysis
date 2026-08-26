@@ -117,12 +117,27 @@ def dist_m(a, b):
 def side_of_path(a, b, target):
     """Which side of the flight direction does the target lie on?
     +1 = RIGHT of travel, -1 = LEFT. Cross product of the heading vector with the
-    vector to the target, in a local flat frame."""
+    vector to the target, in a local flat frame. Kept for reporting; the orbit
+    DIRECTION is decided by orbit_direction_cw() below."""
     k = math.cos(math.radians(a[1]))
     hx, hy = (b[0]-a[0])*k, (b[1]-a[1])
     tx, ty = (target[0]-a[0])*k, (target[1]-a[1])
     cross = hx*ty - hy*tx
     return -1 if cross > 0 else 1          # cross>0 means target is LEFT of heading
+
+
+def orbit_direction_cw(entry_deg, flight_hdg_deg):
+    """CONTINUE IN THE DIRECTION OF FLIGHT out of the tangent point (John, 2026-08-26).
+
+    A point on the circle is centre + r*(sin th, cos th) in (east, north), so INCREASING th
+    runs clockwise. Its tangent is d/dth = (cos th, -sin th). The flight heading vector is
+    (sin h, cos h). Their dot product is sin(h - th): positive means clockwise carries the
+    camera ONWARD along its current heading, negative means it would double back.
+
+    This is the general form of "right -> clockwise, left -> anticlockwise" -- it yields the
+    same answer for a path passing beside a building, but stays correct where the side test
+    is ambiguous, e.g. a path aimed nearly at the centroid."""
+    return math.sin(math.radians(flight_hdg_deg - entry_deg)) > 0
 
 
 def circle_entry_angle(a, b, centre, radius_m):
@@ -251,14 +266,15 @@ def main():
                     continue
                 alt = roof + ORBIT_CLEARANCE_M
                 # turn TOWARD the building: right-hand targets clockwise, left-hand anticlockwise
-                cw = side_of_path(A, B, (blon, blat)) > 0
+                cw = orbit_direction_cw(entry, hdg)
+                side = "right" if side_of_path(A, B, (blon, blat)) > 0 else "left"
                 for olon, olat, oalt, ohdg, otilt, odur in orbit_waypoints(
                         (blon, blat), orad, alt, entry, cw, 36, a.orbit_secs, cruise):
                     body.append(flyto(olon, olat, oalt, ohdg, otilt, odur))
                     total += odur
                 orbited.add(name)
                 print(f"  orbit: {name}  roof {roof:.1f} m -> {alt:.1f} m, r {orad:.0f} m, "
-                      f"enter {entry:.0f}deg, {'CW (building right)' if cw else 'CCW (building left)'}")
+                      f"enter {entry:.0f}deg, {'CW' if cw else 'CCW'} (building {side})")
 
     # STAMP THE NAME. Google Earth treats a loaded KML as a SNAPSHOT, not a live link: re-opening
     # a regenerated file leaves the stale copy in the sidebar and gives no hint it is stale. Same

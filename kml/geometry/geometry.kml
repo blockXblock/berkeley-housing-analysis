@@ -3650,7 +3650,7 @@
 		<Placemark>
 			<name>2955 Shattuck Ave · 74 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2955 SHATTUCK Ave</b><br/><b>Units:</b> 74<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 22.9m<br/><b>Status:</b> In Review<br/><i>Footprint 8,654 sf derived from the project's own plan set (2025-06-26 Plans 2955 Shattuck: lot 16,968 sf x 51% coverage), applied to the county parcel outline 2026-08-26. REPLACES a DEGENERATE 1,113 sf sliver — 4 vertices with a 3.1 m side, rendering as a triangle — which gave 30 sf per unit for 74 units, off by more than tenfold. The lot reading was LOW-CONFIDENCE and its 16,968 sf exceeds the single county parcel (12,207 sf), so this is likely a multi-parcel site and the extent is approximate; area and position are sound. Height still reads 2 storeys in v2, which is also wrong for 74 units.</i>]]></description>
+			<description><![CDATA[<b>2955 SHATTUCK Ave</b><br/><b>Units:</b> 74<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review<br/><i>Footprint 15,610 sf and height 8 storeys from the project's own Tabulation Form 1.E (2025-05-25), PROPOSED column: lot 16,968 sf x 92% coverage. CORRECTS AN EARLIER EDIT OF MINE THAT TOOK THE EXISTING COLUMN (51% -> 8,654 sf) from a plan set, when a 1.E was on R2 all along. The units row settles the column order beyond doubt: 0 existing, 74 proposed. Before either edit the polygon was a degenerate 1,113 sf sliver. Lot 16,968 sf exceeds the single county parcel (12,207 sf), so this is a multi-parcel site and the extent is approximate; area and height are the architect's own.</i>]]></description>
 			<styleUrl>#style_In_Review_parcel581815</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.26609817726565,37.85572309388094,22.9</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -3658,7 +3658,7 @@
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2660626116540,37.8558464211329,22.9 -122.2660430227981,37.8557588306934,22.9 -122.2660721012959,37.8557549261834,22.9 -122.2662087502076,37.8557361094068,22.9 -122.2661920635152,37.8556479019041,22.9 -122.2663869197165,37.8556235944306,22.9 -122.2664254592010,37.8558947624272,22.9 -122.2660837657486,37.8559386147750,22.9 -122.2660626116540,37.8558464211329,22.9 
+							-122.2660208510782,37.8558708739947,28.0 -122.2659945418186,37.8557532336576,28.0 -122.2660335963582,37.8557479896164,28.0 -122.2662171257951,37.8557227173155,28.0 -122.2661947143523,37.8556042482176,28.0 -122.2664564204169,37.8555716015110,28.0 -122.2665081817504,37.8559357998724,28.0 -122.2660492625673,37.8559946967681,28.0 -122.2660208510782,37.8558708739947,28.0 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>

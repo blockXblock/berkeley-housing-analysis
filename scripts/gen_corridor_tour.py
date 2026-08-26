@@ -33,14 +33,42 @@ R = 6371000.0
 
 
 def read_points(path):
-    """Control points in DOCUMENT ORDER — that order is the flight order."""
-    t = open(path, errors="replace").read()
+    """Control points in DOCUMENT ORDER — that order is the flight order.
+
+    Accepts BOTH shapes Google Earth Pro produces:
+      * PUSHPINS  — a Placemark per point, each with a <Point><coordinates>lon,lat,alt.
+      * A PATH    — one Placemark whose <LineString><coordinates> holds the whole polyline.
+        The Path tool ("Add > Path") is far the better way to draw a corridor: you click
+        along the street once per bend instead of opening a properties dialog per pushpin,
+        and every vertex is a control point, so a curving street traces exactly.
+
+    A KMZ is a zip containing doc.kml; it is unpacked transparently, because Earth Pro's
+    Save Place As defaults to KMZ and that has already cost us one round trip.
+    """
+    if path.lower().endswith(".kmz"):
+        import zipfile
+        with zipfile.ZipFile(path) as z:
+            inner = next(n for n in z.namelist() if n.lower().endswith(".kml"))
+            t = z.read(inner).decode("utf-8", "replace")
+    else:
+        t = open(path, errors="replace").read()
+
     pts = []
     for pm in re.findall(r"<Placemark>.*?</Placemark>", t, re.S):
         nm = re.search(r"<name>([^<]*)</name>", pm)
-        m = re.search(r"<coordinates>\s*(-?[\d.]+)\s*,\s*(-?[\d.]+)", pm)
+        label = nm.group(1) if nm else ""
+        ls = re.search(r"<LineString>.*?<coordinates>\s*(.*?)\s*</coordinates>", pm, re.S)
+        if ls:                                   # a PATH: every vertex is a control point
+            for i, tok in enumerate(ls.group(1).split()):
+                c = tok.split(",")
+                if len(c) >= 2:
+                    pts.append((float(c[0]), float(c[1]), f"{label}-v{i+1:02d}"))
+            continue
+        m = re.search(r"<Point>.*?<coordinates>\s*(-?[\d.]+)\s*,\s*(-?[\d.]+)", pm, re.S)
+        if not m:                                # tolerate a bare <coordinates> with no <Point>
+            m = re.search(r"<coordinates>\s*(-?[\d.]+)\s*,\s*(-?[\d.]+)", pm)
         if m:
-            pts.append((float(m.group(1)), float(m.group(2)), nm.group(1) if nm else ""))
+            pts.append((float(m.group(1)), float(m.group(2)), label))
     return pts
 
 

@@ -2925,14 +2925,14 @@
 		<Placemark>
 			<name>2190 Shattuck Ave · 452 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2190 SHATTUCK Ave</b><br/><b>Units:</b> 452<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 34<br/><b>Height:</b> 119.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2190 SHATTUCK Ave</b><br/><b>Units:</b> 452<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 34<br/><b>Height:</b> 110.0m<br/><b>Status:</b> In Review<br/><i>Footprint 19,767 sf and 34 storeys / 361 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 20,117 sf at 119.0 m. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_In_Review_parcel</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.2686526,37.8694947,119.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
 					<LinearRing>
-						<coordinates>-122.2690180,37.8693253,119.0 -122.2690674,37.8695793,119.0 -122.2682739,37.8696516,119.0 -122.2682511,37.8694226,119.0 -122.2690180,37.8693253,119.0</coordinates>
+						<coordinates>-122.2690148061334,37.8693267806814,110.0 -122.2690637743408,37.8695785605333,110.0 -122.2682772101184,37.8696502285778,110.0 -122.2682546094073,37.8694232302074,110.0 -122.2690148061334,37.8693267806814,110.0</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
 			</Polygon></MultiGeometry>
@@ -2957,7 +2957,7 @@
 		<Placemark>
 			<name>2276 Shattuck Ave · 336 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2276 SHATTUCK Ave</b><br/><b>Units:</b> 336<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 18<br/><b>Height:</b> 63.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2276 SHATTUCK Ave</b><br/><b>Units:</b> 336<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 18<br/><b>Height:</b> 62.7m<br/><b>Status:</b> In Review<br/><i>Footprint 9,853 sf and 18 storeys / 206 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 8,936 sf at 63.0 m. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.26827759404361,37.867715053083984,63.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -2965,7 +2965,7 @@
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2683982098763,37.86760063152184,63 -122.268447246836,37.86784023737008,63 -122.2680844913283,37.86788481305854,63 -122.2680598123012,37.86764895194761,63 -122.2683982098763,37.86760063152184,63 
+							-122.2684057545305,37.8675934743261,62.7 -122.2684572453432,37.8678450702638,62.7 -122.2680763372278,37.8678918765593,62.7 -122.2680504232403,37.8676442127489,62.7 -122.2684057545305,37.8675934743261,62.7 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
@@ -3076,7 +3076,7 @@
 		<Placemark>
 			<name>1899 Oxford St · 212 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1899 OXFORD St</b><br/><b>Units:</b> 212<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Decision Pending<br/><i>Footprint 16,505 sf and 8 storeys from the project's own Tabulation Form 1.E, PROPOSED column — identified by the form's DWELLING-UNITS row matching v2's count, not by column position. Was 15,406 sf at 23.8 m. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>1899 OXFORD St</b><br/><b>Units:</b> 212<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 24.0m<br/><b>Status:</b> Decision Pending<br/><i>Footprint 16,505 sf and 8 storeys from the project's own Tabulation Form 1.E, PROPOSED column — identified by the form's DWELLING-UNITS row matching v2's count, not by column position. Was 15,406 sf at 23.8 m. 2026-08-26.</i><br/><i>Footprint 16,505 sf and 8 storeys / 79 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 16,505 sf at 28.0 m. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_Decision_Pending_parcel1</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.2660521810506,37.87456752225695,23.8</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -3084,7 +3084,7 @@
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2659309498138,37.8747643460495,28.0 -122.2662878733770,37.8747259841142,28.0 -122.2662199236990,37.8742820613729,28.0 -122.2658861209281,37.8743091336566,28.0 -122.2659309498138,37.8747643460495,28.0 
+							-122.2659309492900,37.8747643468999,24.0 -122.2662878740974,37.8747259848309,24.0 -122.2662199241825,37.8742820605421,24.0 -122.2658861202480,37.8743091329202,24.0 -122.2659309492900,37.8747643468999,24.0 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
@@ -3650,7 +3650,7 @@
 		<Placemark>
 			<name>2955 Shattuck Ave · 74 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2955 SHATTUCK Ave</b><br/><b>Units:</b> 74<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review<br/><i>Footprint 15,610 sf and height 8 storeys from the project's own Tabulation Form 1.E (2025-05-25), PROPOSED column: lot 16,968 sf x 92% coverage. CORRECTS AN EARLIER EDIT OF MINE THAT TOOK THE EXISTING COLUMN (51% -> 8,654 sf) from a plan set, when a 1.E was on R2 all along. The units row settles the column order beyond doubt: 0 existing, 74 proposed. Before either edit the polygon was a degenerate 1,113 sf sliver. Lot 16,968 sf exceeds the single county parcel (12,207 sf), so this is a multi-parcel site and the extent is approximate; area and height are the architect's own.</i>]]></description>
+			<description><![CDATA[<b>2955 SHATTUCK Ave</b><br/><b>Units:</b> 74<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 25.9m<br/><b>Status:</b> In Review<br/><i>Footprint 15,610 sf and height 8 storeys from the project's own Tabulation Form 1.E (2025-05-25), PROPOSED column: lot 16,968 sf x 92% coverage. CORRECTS AN EARLIER EDIT OF MINE THAT TOOK THE EXISTING COLUMN (51% -> 8,654 sf) from a plan set, when a 1.E was on R2 all along. The units row settles the column order beyond doubt: 0 existing, 74 proposed. Before either edit the polygon was a degenerate 1,113 sf sliver. Lot 16,968 sf exceeds the single county parcel (12,207 sf), so this is a multi-parcel site and the extent is approximate; area and height are the architect's own.</i><br/><i>Footprint 15,611 sf and 8 storeys / 85 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 15,611 sf at 28.0 m. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_In_Review_parcel581815</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.26609817726565,37.85572309388094,22.9</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -3658,7 +3658,7 @@
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2660208510782,37.8558708739947,28.0 -122.2659945418186,37.8557532336576,28.0 -122.2660335963582,37.8557479896164,28.0 -122.2662171257951,37.8557227173155,28.0 -122.2661947143523,37.8556042482176,28.0 -122.2664564204169,37.8555716015110,28.0 -122.2665081817504,37.8559357998724,28.0 -122.2660492625673,37.8559946967681,28.0 -122.2660208510782,37.8558708739947,28.0 
+							-122.2660208487544,37.8558708753554,25.9 -122.2659945391208,37.8557532333461,25.9 -122.2660335942155,37.8557479892304,25.9 -122.2662171262612,37.8557227165703,25.9 -122.2661947144998,37.8556042457884,25.9 -122.2664564242844,37.8555715986178,25.9 -122.2665081863537,37.8559358021560,25.9 -122.2660492606473,37.8559946998889,25.9 -122.2660208487544,37.8558708753554,25.9 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
@@ -3752,7 +3752,7 @@
 		<Placemark>
 			<name>2300 Ellsworth St · 69 units · Under Construction</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2300 ELLSWORTH St</b><br/><b>Units:</b> 69<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Permits Active<br/><i>Footprint 12,640 sf and 7 storeys from the project's own Tabulation Form 1.E, PROPOSED column — identified by the form's DWELLING-UNITS row matching v2's count, not by column position. Was 6,547 sf at 24.5 m. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>2300 ELLSWORTH St</b><br/><b>Units:</b> 69<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 22.9m<br/><b>Status:</b> Permits Active<br/><i>Footprint 12,640 sf and 7 storeys from the project's own Tabulation Form 1.E, PROPOSED column — identified by the form's DWELLING-UNITS row matching v2's count, not by column position. Was 6,547 sf at 24.5 m. 2026-08-26.</i><br/><i>Footprint 12,640 sf and 7 storeys / 75 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 12,640 sf at 24.5 m. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_Permits_Active_parcel5</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.26394438394102,37.86790362862105,24.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -3760,7 +3760,7 @@
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2637133120159,37.8678272328915,24.5 -122.2642004898724,37.8677646165909,24.5 -122.2642520398634,37.8680090733858,24.5 -122.2637671045880,37.8680649726060,24.5 -122.2637133120159,37.8678272328915,24.5 
+							-122.2637133126157,37.8678272330898,22.9 -122.2642004893896,37.8677646169284,22.9 -122.2642520392660,37.8680090731800,22.9 -122.2637671050683,37.8680649722760,22.9 -122.2637133126157,37.8678272330898,22.9 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
@@ -3854,7 +3854,7 @@
 		<Placemark>
 			<name>2298 Durant Ave · 65 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2298 DURANT Ave</b><br/><b>Units:</b> 65<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 27.7m<br/><b>Status:</b> Decision Pending]]></description>
+			<description><![CDATA[<b>2298 DURANT Ave</b><br/><b>Units:</b> 65<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 25.9m<br/><b>Status:</b> Decision Pending<br/><i>Footprint 7,438 sf and 7 storeys / 85 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 8,903 sf at 27.7 m. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_Decision_Pending_parcel100</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.26374289726652,37.866934415078035,27.7</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -3862,7 +3862,7 @@
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2635902336494,37.86685263834067,27.7 -122.2639218122931,37.86680855303636,27.7 -122.26397280918,37.86705912096451,27.7 -122.2636393975607,37.86709912470797,27.7 -122.2635902336494,37.86685263834067,27.7 
+							-122.2636066407854,37.8668614270886,25.9 -122.2639097109684,37.8668211321495,25.9 -122.2639563232462,37.8670501567544,25.9 -122.2636515776831,37.8670867210569,25.9 -122.2636066407854,37.8668614270886,25.9 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
@@ -3871,7 +3871,7 @@
 		<Placemark>
 			<name>2441 Le Conte Ave · 65 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2441 LE CONTE Ave</b><br/><b>Units:</b> 65<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i><br/><i>Footprint 5,902 sf derived from the architect tabulation (lot 12,830 x 46% coverage). County parcel 13,023 sf agrees with the stated lot (0.99); 5,902/13,023 = 45.3% reproduces the stated 46%. Was the parcel polygon (13,455 sf).</i>]]></description>
+			<description><![CDATA[<b>2441 LE CONTE Ave</b><br/><b>Units:</b> 65<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.2m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i><br/><i>Footprint 5,902 sf derived from the architect tabulation (lot 12,830 x 46% coverage). County parcel 13,023 sf agrees with the stated lot (0.99); 5,902/13,023 = 45.3% reproduces the stated 46%. Was the parcel polygon (13,455 sf).</i><br/><i>Footprint 9,109 sf and 5 storeys / 56 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 5,902 sf at 24.5 m. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel47</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.26185183073429,37.87706089474836,24.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -3879,7 +3879,7 @@
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2617904056342,37.8771558588252,24.5 -122.2620157329360,37.8771247514017,24.5 -122.2619649150407,37.8768694621419,24.5 -122.2617425656863,37.8769291709427,24.5 -122.2617904056342,37.8771558588252,24.5 
+							-122.2617690817008,37.8771888259291,17.2 -122.2620490102367,37.8771501805654,17.2 -122.2619858781666,37.8768330297001,17.2 -122.2617096491932,37.8769072071169,17.2 -122.2617690817008,37.8771888259291,17.2 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
@@ -3905,7 +3905,7 @@
 		<Placemark>
 			<name>2372 Ellsworth St · 63 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2372 ELLSWORTH St</b><br/><b>Units:</b> 63<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2372 ELLSWORTH St</b><br/><b>Units:</b> 63<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 25.8m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i><br/><i>Footprint 7,702 sf and 7 storeys / 84 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 9,756 sf at 24.5 m. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_Entitled_parcel61010</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.26367996044917,37.86651716067634,24.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -3913,7 +3913,7 @@
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.263757097711,37.86636603608657,24.5 -122.2638276524073,37.86671037783683,24.5 -122.2635633720858,37.86674318237073,24.5 -122.2634945823308,37.866400171001,24.5 -122.263757097711,37.86636603608657,24.5 
+							-122.2637463487208,37.8663870951272,25.8 -122.2638090380434,37.8666930499707,25.8 -122.2635742194530,37.8667221974849,25.8 -122.2635130983177,37.8664174247123,25.8 -122.2637463487208,37.8663870951272,25.8 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
@@ -4092,7 +4092,7 @@
 		<Placemark>
 			<name>2650 Telegraph Ave · 45 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2650 TELEGRAPH Ave</b><br/><b>Units:</b> 45<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.5m<br/><b>Status:</b> Completed<br/><i>Footprint 9,261 sf and 5 storeys from the project's own Tabulation Form 1.E, PROPOSED column — identified by the form's DWELLING-UNITS row matching v2's count, not by column position. Was 11,476 sf at 17.5 m. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>2650 TELEGRAPH Ave</b><br/><b>Units:</b> 45<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 18.1m<br/><b>Status:</b> Completed<br/><i>Footprint 9,261 sf and 5 storeys from the project's own Tabulation Form 1.E, PROPOSED column — identified by the form's DWELLING-UNITS row matching v2's count, not by column position. Was 11,476 sf at 17.5 m. 2026-08-26.</i><br/><i>Footprint 9,261 sf and 5 storeys / 60 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 9,261 sf at 17.5 m. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_Completed_parcel1</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.2593897418134,37.86155774460634,17.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -4100,7 +4100,7 @@
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2594709491569,37.8614318583025,17.5 -122.2594906873178,37.8615425993891,17.5 -122.2595150973205,37.8616532710750,17.5 -122.2595169522669,37.8616655811589,17.5 -122.2591058886992,37.8617210576860,17.5 -122.2591467374902,37.8614749318313,17.5 -122.2594709491569,37.8614318583025,17.5 
+							-122.2594709489874,37.8614318585652,18.1 -122.2594906871137,37.8615425994575,18.1 -122.2595150970735,37.8616532709491,18.1 -122.2595169520167,37.8616655810114,18.1 -122.2591058891704,37.8617210574411,18.1 -122.2591467378898,37.8614749320184,18.1 -122.2594709489874,37.8614318585652,18.1 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
@@ -4449,7 +4449,7 @@
 		<Placemark>
 			<name>2018 Blake St · 12 units · Permitted</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2018 BLAKE St</b><br/><b>Units:</b> 12<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Permits Active]]></description>
+			<description><![CDATA[<b>2018 BLAKE St</b><br/><b>Units:</b> 12<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 19.8m<br/><b>Status:</b> Permits Active<br/><i>Footprint RESTORED to 4,547 sf 2026-08-26 after a bad automated write set it to 16 sf: the 1.E parser returned 16 for the footprint (a stray token, not a measurement) and it was applied without a plausibility floor. Height 19.8 m / 6 storeys from the 1.E stands -- both parsers agreed on storeys. Footprint here is the pre-existing polygon, NOT a stated value.</i>]]></description>
 			<styleUrl>#style_Permits_Active_parcel</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.26882992743356,37.86261561484669,21.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -4457,7 +4457,7 @@
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2688077024503,37.86275877898005,21 -122.2689284935812,37.86273911476908,21 -122.2688667444597,37.86240150722207,21 -122.2687389942263,37.86241989428217,21 -122.2688077024503,37.86275877898005,21 
+							-122.2688076463589,37.8627591402995,19.8 -122.2689286813727,37.8627394363842,19.8 -122.2688668075762,37.8624011471925,19.8 -122.2687387994095,37.8624195713772,19.8 -122.2688076463589,37.8627591402995,19.8 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
@@ -4891,7 +4891,7 @@
 		<Placemark>
 			<name>2204 Dwight Way · 2 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2204 DWIGHT Way</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 7.0m<br/><b>Status:</b> Decision Pending<br/><i>Footprint 1,944 sf and 2 storeys from the project's own Tabulation Form 1.E, PROPOSED column — identified by the form's DWELLING-UNITS row matching v2's count, not by column position. Was 5,715 sf at 10.5 m. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>2204 DWIGHT Way</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.7m<br/><b>Status:</b> Decision Pending<br/><i>Footprint 1,944 sf and 2 storeys from the project's own Tabulation Form 1.E, PROPOSED column — identified by the form's DWELLING-UNITS row matching v2's count, not by column position. Was 5,715 sf at 10.5 m. 2026-08-26.</i><br/><i>Footprint 2,430 sf and 3 storeys / 35 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 1,944 sf at 7.0 m. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_Decision_Pending_parcel100</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.26485491079184,37.86398409846275,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -4899,7 +4899,7 @@
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2648139619499,37.8639162227720,7.0 -122.2648945346461,37.8639058084506,7.0 -122.2649411231092,37.8641225814605,7.0 -122.2648555053913,37.8641334736972,7.0 -122.2648139619499,37.8639162227720,7.0 
+							-122.2648066057422,37.8639040293214,10.7 -122.2648966892843,37.8638923856877,10.7 -122.2649487770755,37.8641347467044,10.7 -122.2648530529945,37.8641469246668,10.7 -122.2648066057422,37.8639040293214,10.7 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>

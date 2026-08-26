@@ -51,7 +51,7 @@ def rows_of(txt):
                 # 2 storeys for a 69-unit building instead of 7 -- the units and coverage rows on
                 # the same form were fine, so nothing else flagged it. Take the RANGE's upper
                 # bound as the single existing value.
-                tail = re.sub(r"(\d+)\s*[/-]\s*(\d+)", lambda m: m.group(2), tail)
+                tail = re.sub(r"(\d+)\s*[/+-]\s*(\d+)", lambda m: m.group(2), tail)
                 vals = []
                 for m in NUM.finditer(tail):
                     v = float(m.group(1).replace(",", ""))
@@ -99,10 +99,28 @@ def main():
         # THE UNITS ROW PINS THE PROPOSED COLUMN
         col, how = None, ""
         if "units" in R and p["total_units"]:
-            for i, v in enumerate(R["units"]):
-                if abs(v - p["total_units"]) <= max(2, 0.05*p["total_units"]):
+            U = R["units"]
+            for i, v in enumerate(U):
+                if abs(v - p["total_units"]) > max(2, 0.05*p["total_units"]):
+                    continue
+                # A MATCH ON COLUMN 0 IS A TRAP. v2's total_units can still hold the count of
+                # the building STANDING TODAY, so matching it picks EXISTING. 2204 Dwight reads
+                # units "2 | 4" and storeys "2 | 3": v2 says 2 units, so the naive match chose
+                # column 0 and I drew the building being replaced. If a later column carries a
+                # LARGER unit count, that is the proposal.
+                if i == 0 and any(x > v for x in U[1:]):
+                    j = max(range(1, len(U)), key=lambda z: U[z])
+                    col, how = j, (f"units row: v2 {p['total_units']} matches EXISTING; "
+                                   f"proposed taken as the larger {U[j]:.0f}")
+                else:
                     col, how = i, f"units row: {v:.0f} matches v2 {p['total_units']}"
-                    break
+                break
+            if col is None:
+                # v2 matched nothing; if the row looks like new construction (0 existing), the
+                # proposal is simply the largest entry
+                if U and U[0] == 0 and len(U) > 1:
+                    j = max(range(1, len(U)), key=lambda z: U[z])
+                    col, how = j, f"units row: 0 existing, proposed taken as {U[j]:.0f}"
         if col is None:
             col, how = 1, "FALLBACK second column (units row absent or no match)"
         rec["proposed_col"], rec["col_basis"] = col, how
@@ -121,6 +139,12 @@ def main():
         rec["raw_coverage_row"] = "|".join(f"{x:g}" for x in R.get("coverage", []))
 
         # derive footprint from lot x coverage when the form does not state it outright
+        # PLAUSIBILITY FLOOR. A stray token can come back as a "footprint" of 16 sf, and
+        # applying that shrank 2018 Blake from 4,547 sf to 16 before anything caught it. No
+        # building has a footprint under 200 sf; reject rather than propagate.
+        if rec["footprint_sf"] is not None and rec["footprint_sf"] < 200:
+            rec["footprint_reject"] = f"{rec['footprint_sf']:g} sf implausible"
+            rec["footprint_sf"] = None
         if not rec["footprint_sf"] and rec["lot_area_sf"] and rec["coverage_pct"]:
             rec["footprint_sf"] = round(rec["lot_area_sf"]*rec["coverage_pct"]/100)
             rec["footprint_source"] = "lot x coverage"
@@ -147,7 +171,7 @@ def main():
 
     cols = ["project_id","address","units","status","db_stories","footprint_sf","footprint_source",
             "lot_area_sf","coverage_pct","stories","gfa_sf","sf_per_unit","proposed_col",
-            "col_basis","raw_units_row","raw_coverage_row","verdict","checks","doc_title"]
+            "col_basis","footprint_reject","raw_units_row","raw_coverage_row","verdict","checks","doc_title"]
     os.makedirs("data/reference", exist_ok=True)
     with open(OUT, "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=cols, extrasaction="ignore")

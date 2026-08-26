@@ -168,6 +168,48 @@ def circle_entry_angle(a, b, centre, radius_m):
     return None
 
 
+def blend_in(line_pt, line_hdg, centre, radius_m, start_deg, clockwise,
+             cruise_alt, orbit_alt, steps, secs, arc_deg=70.0):
+    """A FILLET from the straight corridor onto the circle.
+
+    Entering at the point where the line CROSSES the circle leaves a kink: the flight is
+    travelling along its bearing, the circle wants a tangent, and the two differ by the entry
+    turn (23-47 deg measured on Shattuck). No single waypoint jumps -- position and heading
+    steps stay ~10 m and ~10 deg -- but the CURVATURE changes instantly, which reads as the
+    camera snapping sideways.
+
+    So we spend the last stretch of approach easing between the two: position is interpolated
+    from where the straight line would have carried us to the corresponding point on the
+    circle, and heading from the cruise bearing to facing the centroid. Both on a smoothstep,
+    so the camera leaves the line and joins the circle tangentially.
+    """
+    out = []
+    k = math.cos(math.radians(centre[1]))
+    sgn = 1 if clockwise else -1
+    for j in range(steps):
+        f = j / steps
+        e = f*f*(3-2*f)                                    # smoothstep
+        # where the circle is, walking BACK from the entry against the orbit direction
+        th = start_deg - sgn*arc_deg*(1-f)
+        rad = math.radians(th)
+        cx = centre[0] + (radius_m*math.sin(rad)/111320.0)/k
+        cy = centre[1] + (radius_m*math.cos(rad)/111320.0)
+        # where the straight corridor would have been at the same moment
+        back_m = radius_m*math.radians(arc_deg)*(1-f)
+        hr = math.radians(line_hdg)
+        lx = line_pt[0] - (back_m*math.sin(hr)/111320.0)/k
+        ly = line_pt[1] - (back_m*math.cos(hr)/111320.0)
+        lon = lx + (cx-lx)*e
+        lat = ly + (cy-ly)*e
+        face = (th + 180.0) % 360.0
+        dhh = ((face - line_hdg + 540) % 360) - 180        # shortest way round
+        hdg = (line_hdg + dhh*e) % 360
+        alt = cruise_alt + (orbit_alt-cruise_alt)*e
+        tilt = 88.0 + (72.0-88.0)*e
+        out.append((lon, lat, alt, hdg, tilt, secs/steps))
+    return out
+
+
 def orbit_waypoints(centre, radius_m, alt, start_deg, clockwise, steps, secs,
                     cruise_alt, ramp_frac=0.18):
     """One full circle, entered and left at start_deg.
@@ -187,15 +229,10 @@ def orbit_waypoints(centre, radius_m, alt, start_deg, clockwise, steps, secs,
         lat = centre[1] + (radius_m*math.cos(rad)/111320.0)
         heading = (th + 180.0) % 360.0                  # face the centroid
         # ease altitude/tilt in and out so the join is continuous
-        if f < ramp_frac:
-            e = f/ramp_frac
-        elif f > 1-ramp_frac:
-            e = (1-f)/ramp_frac
-        else:
-            e = 1.0
-        e = e*e*(3-2*e)                                  # smoothstep
-        a = cruise_alt + (alt - cruise_alt)*e
-        tilt = 88.0 + (72.0 - 88.0)*e
+        # the fillet already carried altitude/tilt to orbit values, so hold them steady
+        # through the circle and let the matching fillet on the way out unwind them
+        a = alt
+        tilt = 72.0
         out.append((lon, lat, a, heading, tilt, secs/steps))
     return out
 
@@ -270,8 +307,20 @@ def main():
                 # turn TOWARD the building: right-hand targets clockwise, left-hand anticlockwise
                 cw = orbit_direction_cw(entry, hdg)
                 side = "right" if side_of_path(A, B, (blon, blat)) > 0 else "left"
+                blend_secs = a.orbit_secs * 0.28
+                for olon, olat, oalt, ohdg, otilt, odur in blend_in(
+                        (lon, lat), hdg, (blon, blat), orad, entry, cw,
+                        cruise, alt, 12, blend_secs):
+                    body.append(flyto(olon, olat, oalt, ohdg, otilt, odur))
+                    total += odur
                 for olon, olat, oalt, ohdg, otilt, odur in orbit_waypoints(
                         (blon, blat), orad, alt, entry, cw, 36, a.orbit_secs, cruise):
+                    body.append(flyto(olon, olat, oalt, ohdg, otilt, odur))
+                    total += odur
+                # unwind: the mirror of the fillet, walked forwards off the circle
+                for olon, olat, oalt, ohdg, otilt, odur in reversed(blend_in(
+                        (lon, lat), hdg, (blon, blat), orad, entry, cw,
+                        cruise, alt, 12, blend_secs)):
                     body.append(flyto(olon, olat, oalt, ohdg, otilt, odur))
                     total += odur
                 orbited.add(name)

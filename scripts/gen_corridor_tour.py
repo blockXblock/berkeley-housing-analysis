@@ -334,7 +334,13 @@ def main():
                 # discriminant is ~0 and the crossing test misses it entirely (2655 Shattuck
                 # silently lost its orbit). 3% + 1 m keeps it effectively tangent while
                 # guaranteeing a detectable crossing.
-                orad = max(dmin*1.03 + 1.0, rad*1.35, 30.0)
+                # rad is the CIRCUMRADIUS of the footprint (furthest vertex from the
+                # centroid) -- we treat the building as a CIRCLE in plan, not a sphere; the
+                # extrusion height plays no part in it. A 1.35x circumradius orbit still let the
+                # camera clip the extruded mass, because a long thin footprint fills far more of
+                # the frame than its circumradius suggests and the near plane cuts into it.
+                # 2.2x with a 60 m floor keeps the whole tower in shot.
+                orad = max(dmin*1.03 + 1.0, rad*2.2, 60.0)
                 # ENTER WHERE THE PATH ACTUALLY MEETS THE CIRCLE, not at an arbitrary angle.
                 prev = (A[0] + (B[0]-A[0])*((s-1)/n), A[1] + (B[1]-A[1])*((s-1)/n))
                 entry = circle_entry_angle(prev, (lon, lat), (blon, blat), orad)
@@ -346,6 +352,11 @@ def main():
                 side = "right" if side_of_path(A, B, (blon, blat)) > 0 else "left"
                 sgn = 1 if cw else -1
                 r_now, th_now = polar((blon, blat), (lon, lat))
+                # The sweep must continue the flight from th_now, the camera's ACTUAL bearing
+                # from the building -- not from `entry`, the bearing where the straight line
+                # crossed the circle. Those differ, and choosing the direction from `entry` sent
+                # the spiral backwards whenever they disagreed. That was the residual retreat.
+                cw = orbit_direction_cw(th_now, hdg)
                 bsec = a.orbit_secs * 0.30
                 LEAD = 80.0                        # degrees swept while easing onto the rim
                 th_rim = th_now + sgn*LEAD

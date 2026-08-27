@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <Document>
-	<name>Berkeley Housing Geometry · 2026-08-26 · 196 buildings · geom-cb78e26cf9fc</name>
+	<name>Berkeley Housing Geometry · 2026-08-26 · 196 buildings · geom-7acb5da80306</name>
 	<visibility>0</visibility>
 	<open>1</open>
 	<description>177 housing projects. Heights shown as stories × 3.5m. Generated 2026-05-03.</description>
@@ -3228,7 +3228,7 @@
 		<Placemark>
 			<name>2115 Kittredge St · 148 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2115 KITTREDGE St</b><br/><b>Units:</b> 148<br/><b>VLI Units:</b> 12<br/><b>Stories:</b> 10<br/><b>Height:</b> 35.0m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2115 KITTREDGE St</b><br/><b>Units:</b> 148<br/><b>VLI Units:</b> 12<br/><b>Stories:</b> 10<br/><b>Height:</b> 35.0m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel0</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.26715136155786,37.86893049842461,35.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -3245,7 +3245,7 @@
 		<Placemark>
 			<name>3030 Telegraph Ave · 144 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>3030 TELEGRAPH Ave</b><br/><b>Units:</b> 144<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 19.2m<br/><b>Status:</b> Under Construction<br/><i>(height estimated from units)</i><br/><i>Footprint 19,811 sf and height 63 ft / 5 storeys from the architect zoning tabulation (ZP2022-0170 plan set, 2026-08-23). Was the county PARCEL polygon (27,531 sf) at a 10-storey placeholder. Validated: implied lot 27,138 vs parcel 27,397; GFA/footprint 94,664/19,811 = 4.8 storeys.</i>]]></description>
+			<description><![CDATA[<b>3030 TELEGRAPH Ave</b><br/><b>Units:</b> 144<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 19.2m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i><br/><i>Footprint 19,811 sf and height 63 ft / 5 storeys from the architect zoning tabulation (ZP2022-0170 plan set, 2026-08-23). Was the county PARCEL polygon (27,531 sf) at a 10-storey placeholder. Validated: implied lot 27,138 vs parcel 27,397; GFA/footprint 94,664/19,811 = 4.8 storeys.</i>]]></description>
 			<styleUrl>#style_Under_Construction_parcel22</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.260406837901,37.85471970985291,19.2</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -3617,7 +3617,7 @@
 		<Placemark>
 			<name>2427 San Pablo · 78 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2427 San Pablo</b><br/><b>Units:</b> 78<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 21.3m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2427 San Pablo</b><br/><b>Units:</b> 78<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 21.3m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Entitled_parcel61010</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.28937079330345,37.861867394125866,21.3</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -3855,7 +3855,7 @@
 		<Placemark>
 			<name>2441 Le Conte Ave · 65 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2441 LE CONTE Ave</b><br/><b>Units:</b> 65<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.2m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i><br/><i>Footprint 5,902 sf derived from the architect tabulation (lot 12,830 x 46% coverage). County parcel 13,023 sf agrees with the stated lot (0.99); 5,902/13,023 = 45.3% reproduces the stated 46%. Was the parcel polygon (13,455 sf).</i><br/><i>Footprint 9,109 sf and 5 storeys / 56 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 5,902 sf at 24.5 m. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>2441 LE CONTE Ave</b><br/><b>Units:</b> 65<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.2m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i><br/><i>Footprint 5,902 sf derived from the architect tabulation (lot 12,830 x 46% coverage). County parcel 13,023 sf agrees with the stated lot (0.99); 5,902/13,023 = 45.3% reproduces the stated 46%. Was the parcel polygon (13,455 sf).</i><br/><i>Footprint 9,109 sf and 5 storeys / 56 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 5,902 sf at 24.5 m. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel47</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.26185183073429,37.87706089474836,17.2</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -4246,7 +4246,7 @@
 		<Placemark>
 			<name>3000 San Pablo Ave · 78 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>3000 SAN PABLO Ave</b><br/><b>Units:</b> 29<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>3000 SAN PABLO Ave</b><br/><b>Units:</b> 78<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.5m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.28702466028611,37.85183092682871,17.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -4331,7 +4331,7 @@
 		<Placemark>
 			<name>2800 Telegraph Ave · 18 units · Permitted</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2800 TELEGRAPH Ave</b><br/><b>Units:</b> 18<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Permits Active<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2800 TELEGRAPH Ave</b><br/><b>Units:</b> 18<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Permitted<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Permits_Active_parcel1</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.25952235614366,37.85934140169242,14.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -4399,7 +4399,7 @@
 		<Placemark>
 			<name>2147 San Pablo Ave · 15 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2147 SAN PABLO Ave</b><br/><b>Units:</b> 15<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 21.3m<br/><b>Status:</b> Decision Pending<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2147 SAN PABLO Ave</b><br/><b>Units:</b> 15<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 21.3m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Decision_Pending_parcel</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.2910724999658,37.867098202279905,21.3</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -4467,7 +4467,7 @@
 		<Placemark>
 			<name>1015 University Ave · 9 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1015 UNIVERSITY Ave</b><br/><b>Units:</b> 9<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1015 UNIVERSITY Ave</b><br/><b>Units:</b> 9<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.29310930235965,37.86916829891887,14.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -4620,7 +4620,7 @@
 		<Placemark>
 			<name>2641 College Ave · 3 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2641 COLLEGE Ave</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2641 COLLEGE Ave</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel5810</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.25324087799723,37.86250312903989,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -4739,7 +4739,7 @@
 		<Placemark>
 			<name>1464 Sixth St · 3 units · Permitted</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1464 SIXTH St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1464 SIXTH St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Permitted<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.30046614449165,37.87534949842454,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -4807,7 +4807,7 @@
 		<Placemark>
 			<name>1614 Sixth St · 3 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1614 Sixth St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.7m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1614 Sixth St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.7m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Entitled_synthetic6</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.29971151889211,37.87333975003524,10.7</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -4824,7 +4824,7 @@
 		<Placemark>
 			<name>1716 Seventh St · 2 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1716 SEVENTH St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1716 SEVENTH St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.29812570374405,37.87183320298778,7</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -4841,7 +4841,7 @@
 		<Placemark>
 			<name>1515 Derby St · 2 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1515 DERBY St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1515 DERBY St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.27950243064865,37.859032281858745,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -4892,7 +4892,7 @@
 		<Placemark>
 			<name>1419 Grant St · 2 units · Permitted</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1419 GRANT St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1419 GRANT St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Permitted<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel581826</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.27590276286651,37.88045001922998,7</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -4943,7 +4943,7 @@
 		<Placemark>
 			<name>3001 Benvenue Ave · 1 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>3001 BENVENUE Ave</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Decision Pending<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>3001 BENVENUE Ave</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Decision_Pending_parcel100</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.25368752003082,37.85583811962748,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -4960,7 +4960,7 @@
 		<Placemark>
 			<name>40 Hill Rd · 1 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>40 HILL Rd</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>40 HILL Rd</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.2512542671729,37.88935427626,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -4977,7 +4977,7 @@
 		<Placemark>
 			<name>5 W Parnassus Ct · 1 units · Permitted</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>5 W PARNASSUS Ct</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>5 W PARNASSUS Ct</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Permitted<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel581813</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.25789016844237,37.882410929050806,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -5062,7 +5062,7 @@
 		<Placemark>
 			<name>1420 Fifth St · 1 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1420 FIFTH St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Decision Pending<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1420 FIFTH St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Decision_Pending_parcel101</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.30196134009928,37.876554363129685,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -5096,7 +5096,7 @@
 		<Placemark>
 			<name>1111 Allston Way · 1 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1111 ALLSTON Way</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1111 ALLSTON Way</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel510</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.29062210697528,37.8667907776094,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -5113,7 +5113,7 @@
 		<Placemark>
 			<name>659 Grizzly Peak Blvd · 1 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>659 GRIZZLY PEAK Blvd</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>659 GRIZZLY PEAK Blvd</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.26541471357915,37.90014219830418,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -5130,7 +5130,7 @@
 		<Placemark>
 			<name>3036 Regent St · 1 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>3036 REGENT St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>3036 REGENT St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.25657722487558,37.85417468225866,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -5181,7 +5181,7 @@
 		<Placemark>
 			<name>0 Parker St · 1 units · Permitted</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>0 PARKER St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>0 PARKER St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Permitted<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Entitled_parcel61010</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.26432693213967,37.86278091676062,3.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -5232,7 +5232,7 @@
 		<Placemark>
 			<name>1136 Keith Ave · 1 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1136 KEITH Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1136 KEITH Ave</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel581812</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.2605367162919,37.88850340687009,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -5249,7 +5249,7 @@
 		<Placemark>
 			<name>1730 Parker St · 0 units · Permitted</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1730 PARKER St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1730 PARKER St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Permitted<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel40</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.27465861236325,37.86095262631066,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -5266,7 +5266,7 @@
 		<Placemark>
 			<name>1109 Cowper St · 0 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1109 COWPER St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1109 COWPER St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel515</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.29102222731242,37.86763192470967,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -5283,7 +5283,7 @@
 		<Placemark>
 			<name>705 Arlington Ave · 0 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>705 ARLINGTON Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>705 ARLINGTON Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel581832</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.27569432563992,37.89746145800234,7</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -5317,7 +5317,7 @@
 		<Placemark>
 			<name>576 San Luis Rd · 0 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>576 SAN LUIS Rd</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 6.1m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>576 SAN LUIS Rd</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 6.1m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.2757535588213,37.90002575017668,6.1</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -5334,7 +5334,7 @@
 		<Placemark>
 			<name>2009 Addison St · 45 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2009 ADDISON St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i><br/><i>Height corrected 24.5m / 7 storeys from v2 (Overture num_floors), 2026-08-26. Was the 10.5m migration placeholder for a 45-unit building.</i>]]></description>
+			<description><![CDATA[<b>2009 ADDISON St</b><br/><b>Units:</b> 45<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Completed<br/><i>(7 storeys — DRC Staff Report DRCP2017-0001)</i><br/><i>Height corrected 24.5m / 7 storeys from v2 (7 storeys — DRC Staff Report DRCP2017-0001), 2026-08-26. Was the 10.5m migration placeholder for a 45-unit building.</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel43</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.27003046751577,37.871247278097634,24.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -5366,7 +5366,7 @@
 		<Placemark>
 			<name>2145 Grant St · 1 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2145 GRANT St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Decision Pending<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2145 GRANT St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Decision_Pending_parcel103</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.27462913716815,37.868947938720915,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -5417,7 +5417,7 @@
 		<Placemark>
 			<name>1338 Seventh St · 0 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1338 SEVENTH St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1338 SEVENTH St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.3001364435811,37.87827024372781,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -5434,7 +5434,7 @@
 		<Placemark>
 			<name>2238 Seventh St · 0 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2238 SEVENTH St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2238 SEVENTH St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.29560340558346,37.864044339587906,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -5485,7 +5485,7 @@
 		<Placemark>
 			<name>1246 Rose St · 0 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1246 ROSE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1246 ROSE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel580</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.28945657710112,37.87651829151824,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -5502,7 +5502,7 @@
 		<Placemark>
 			<name>1512 Channing Way · 0 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1512 CHANNING Way</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1512 CHANNING Way</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.28078515053873,37.863905605629604,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -5536,7 +5536,7 @@
 		<Placemark>
 			<name>1187 Shattuck Ave · 0 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1187 SHATTUCK Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Decision Pending<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1187 SHATTUCK Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Decision_Pending_parcel100</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.26969105672325,37.88604947220025,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -5553,7 +5553,7 @@
 		<Placemark>
 			<name>2016 Delaware St A · 0 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2016 DELAWARE St A</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2016 DELAWARE St A</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.27030398193753,37.874282441557575,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -5587,7 +5587,7 @@
 		<Placemark>
 			<name>830 Bancroft Way · 0 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>830 BANCROFT Way</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Decision Pending<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>830 BANCROFT Way</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Decision_Pending_parcel100</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.29573947496395,37.863285721451106,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -5621,7 +5621,7 @@
 		<Placemark>
 			<name>2143 Blake St · 0 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2143 BLAKE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2143 BLAKE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.26546370250284,37.86349073414984,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -5638,7 +5638,7 @@
 		<Placemark>
 			<name>411 Vassar Ave · 0 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>411 VASSAR Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>411 VASSAR Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.27225176637221,37.90434655043581,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -5706,7 +5706,7 @@
 		<Placemark>
 			<name>2705 Benvenue Ave · 0 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2705 BENVENUE Ave</b><br/><b>Units:</b> -1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2705 BENVENUE Ave</b><br/><b>Units:</b> -1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.25441494321731,37.861445425219884,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>

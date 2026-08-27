@@ -13,13 +13,20 @@ CANONICAL GEOMETRY: kml/geometry/geometry.kml (served copy republished to docs/g
 to kml_versions/Geometry/Geometry-2026-05-18-labeled.kml). Hand-edits continue to land there;
 packages are DERIVED — never hand-edit a package.
 
+Every rebuild changes the geometry sha, so every package FILENAME changes, which silently
+orphans the served catalog docs/tours.json -- its entries keep pointing at the previous
+generation. That is not hypothetical: on 2026-08-26 all 11 catalog entries pointed at
+geom-5bb87b9b029c while the packages on disk were geom-eedc7a00b1fd, so every tour download
+the site offered had been a 404 for some time. So --all now REPOINTS the catalog itself, and
+refuses to write a catalog whose targets do not exist on disk.
+
 Usage:
   python scripts/build_tour_package.py kml/tours/205sec.kml            # one tour
   python scripts/build_tour_package.py --all                            # every camera-only tour
 Output: kml/tours/packages/<tour-stem>__<geometry-date>.kml
 """
 import hashlib
-import sys
+import json
 import pathlib
 import re
 import sys
@@ -84,11 +91,38 @@ def camera_only_tours():
             yield fp
 
 
+def repoint_catalog(sha: str) -> None:
+    """Point docs/tours.json at the generation just built. Verify BEFORE writing."""
+    cat = ROOT / "docs" / "tours.json"
+    if not cat.exists():
+        return
+    raw = cat.read_text(encoding="utf-8")
+    out = re.sub(r"geom-[0-9a-f]{12}", f"geom-{sha}", raw)
+    entries = json.loads(out)
+    entries = entries if isinstance(entries, list) else entries.get("tours", [])
+    missing = [e["package"] for e in entries
+               if e.get("package") and not (ROOT / e["package"]).exists()]
+    if missing:
+        print(f"  catalog NOT updated — {len(missing)} entry would 404:", file=sys.stderr)
+        for m in missing:
+            print(f"    {m}", file=sys.stderr)
+        raise SystemExit(1)
+    if out != raw:
+        cat.write_text(out, encoding="utf-8")
+        print(f"catalog: docs/tours.json repointed to geom-{sha} ({len(entries)} entries verified)")
+    else:
+        print(f"catalog: docs/tours.json already at geom-{sha}")
+
+
 if __name__ == "__main__":
     args = sys.argv[1:]
     targets = list(camera_only_tours()) if args == ["--all"] else [pathlib.Path(a) for a in args]
     if not targets:
         raise SystemExit("usage: build_tour_package.py <tour.kml> [...] | --all")
+    built = []
     for t in targets:
         dest = build(t)
+        built.append(dest)
         print(f"packaged: {dest.relative_to(ROOT)}")
+    if args == ["--all"] and built:
+        repoint_catalog(re.search(r"__geom-([0-9a-f]{12})\.kml$", built[0].name).group(1))

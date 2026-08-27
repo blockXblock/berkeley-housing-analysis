@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <Document>
-	<name>Berkeley Housing Geometry · 2026-08-26 · 198 buildings · geom-2217af39d953</name>
+	<name>Berkeley Housing Geometry · 2026-08-26 · 198 buildings · geom-2a97a81f0654</name>
 	<visibility>0</visibility>
 	<open>1</open>
 	<description>177 housing projects. Heights shown as stories × 3.5m. Generated 2026-05-03.</description>
@@ -3145,7 +3145,7 @@
 		<Placemark>
 			<name>2150 Kittredge St · 169 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2150 Kittredge St</b><br/><b>Units:</b> 169<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2150 Kittredge St</b><br/><b>Units:</b> 169<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i><br/><i>Footprint 32,581 sf and 7 storeys / 24.5 m, resolved 2026-08-26 WITHOUT a Tabulation Form. Height from the project's own building permit B2021-00008 ($35.8M, 169 units), which describes '(5) floors of Type III-A over (2) floors + basement Type I' - a 5-over-2 podium, 7 storeys. Footprint from the assessor parcel APN 57-2029-17, RE-PLATTED after construction so absent from the 2026-08-12 taxparcel snapshot but present in berkeley.db with $61.5M of improvements confirming the built building. Replaces a 7,100 sf polygon at the 10.5 m migration placeholder - WRONG ON BOTH COUNTS, and the only building in the geometry still failing the floor-area-per-unit test (126 sf/unit; now 1,350 gross incl. ground-floor retail and a two-floor parking podium).</i>]]></description>
 			<styleUrl>#style_Completed_parcel0</styleUrl>
 			<MultiGeometry><Point><coordinates>-122.26681353307713,37.868334537710496,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
@@ -3153,7 +3153,7 @@
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2667128478688,37.86819513897487,10.5 -122.2668924683713,37.86817183885958,10.5 -122.266961933351,37.86854231117494,10.5 -122.2667875679257,37.86856826056821,10.5 -122.2667128478688,37.86819513897487,10.5 
+							-122.2662079255790,37.8682555632085,24.5 -122.2665029556750,37.8682205516608,24.5 -122.2665505385370,37.8682149046812,24.5 -122.2665445252150,37.8681830552257,24.5 -122.2664813008870,37.8678482408217,24.5 -122.2666526051200,37.8678279121576,24.5 -122.2667203722280,37.8681867747311,24.5 -122.2667218445670,37.8681945761182,24.5 -122.2668931505970,37.8681742468405,24.5 -122.2669623909420,37.8685409097869,24.5 -122.2663938382160,37.8686083817540,24.5 -122.2663762355940,37.8686080724021,24.5 -122.2663597753200,37.8686031383511,24.5 -122.2663463489710,37.8685941466103,24.5 -122.2663374994740,37.8685821304894,24.5 -122.2662246153790,37.8683439419226,24.5 -122.2662079255790,37.8682555632085,24.5 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>

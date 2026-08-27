@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+	<name>Bancroft street labels · scale 2.5 · 20 m</name>
+	<open>1</open>
+	<Style id="cross"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>2.5</scale><color>ffffffff</color></LabelStyle></Style>
+	<Style id="own"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>3.125</scale><color>ffffffff</color></LabelStyle></Style>
+	<Placemark><name>Bancroft</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.293753572466,37.86402842,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Bancroft</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.285581454057,37.86491597,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Bancroft</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2692372172388,37.8672308471615,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Bancroft</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2610650988298,37.86838541,20.0</coordinates></Point></Placemark>
+	<Placemark><name>8Th St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.293753572466,37.86402842,20.0</coordinates></Point></Placemark>
+	<Placemark><name>9Th St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.29270177405195,37.86418845784508,20.0</coordinates></Point></Placemark>
+	<Placemark><name>10Th St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.29164027466841,37.86434997175463,20.0</coordinates></Point></Placemark>
+	<Placemark><name>San Pablo Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2903147425648,37.864551659928544,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Curtis St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.28832487722516,37.864737488939326,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Browning St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.28770637460232,37.86477772735586,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Bonar St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.28621965325003,37.86487445016805,20.0</coordinates></Point></Placemark>
+	<Placemark><name>West St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.28549867653379,37.86493824120694,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Acton St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.28400966778659,37.86533885746928,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Sacramento St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.28175794832774,37.8659446802592,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Spaulding Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.28024791652447,37.86613902058901,20.0</coordinates></Point></Placemark>
+	<Placemark><name>California St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.27960430320182,37.866202841615255,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Jefferson Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.27786361803538,37.86637544884662,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Mcgee Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.27723056843081,37.866438222369176,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Roosevelt Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.27619713932359,37.866540697727984,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Grant St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.275017825634,37.86665763907659,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Mckinley Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.27343701471338,37.86681439309597,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Martin Luther King Jr Way</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.272769088884,37.86688062496282,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Shattuck Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26824359702331,37.867312836138034,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Fulton St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26628872249938,37.86747414340512,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Ellsworth St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26349113382376,37.86790009128463,20.0</coordinates></Point></Placemark>
+</Document>
+</kml>

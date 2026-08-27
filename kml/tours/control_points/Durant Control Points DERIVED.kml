@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+	<name>Durant Control Points DERIVED · 13 points</name>
+	<open>1</open>
+	<Style id="s_ylw-pushpin"><IconStyle><scale>1.1</scale><Icon><href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href></Icon></IconStyle></Style>
+	<StyleMap id="m_ylw-pushpin"><Pair><key>normal</key><styleUrl>#s_ylw-pushpin</styleUrl></Pair><Pair><key>highlight</key><styleUrl>#s_ylw-pushpin</styleUrl></Pair></StyleMap>
+	<Folder><name>Durant</name><open>1</open>
+		<Placemark><name>DUR01</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.26909262800868,37.86618045406547,0</coordinates></Point></Placemark>
+		<Placemark><name>DUR02</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.26669262800868,37.86706880103412,0</coordinates></Point></Placemark>
+		<Placemark><name>DUR03</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.26549262800869,37.86673143388632,0</coordinates></Point></Placemark>
+		<Placemark><name>DUR04</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.26429262800869,37.86682219793444,0</coordinates></Point></Placemark>
+		<Placemark><name>DUR05</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.26309262800869,37.867516531012896,0</coordinates></Point></Placemark>
+		<Placemark><name>DUR06</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.2618926280087,37.86767914241777,0</coordinates></Point></Placemark>
+		<Placemark><name>DUR07</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.2606926280087,37.86791806781831,0</coordinates></Point></Placemark>
+		<Placemark><name>DUR08</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.2594926280087,37.867988850688995,0</coordinates></Point></Placemark>
+		<Placemark><name>DUR09</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.2582926280087,37.867711042440405,0</coordinates></Point></Placemark>
+		<Placemark><name>DUR10</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.2570926280087,37.86788367378466,0</coordinates></Point></Placemark>
+		<Placemark><name>DUR11</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.25589262800871,37.86857088977123,0</coordinates></Point></Placemark>
+		<Placemark><name>DUR12</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.25469262800871,37.86863419333751,0</coordinates></Point></Placemark>
+		<Placemark><name>DUR13</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.25349262800871,37.86849466615483,0</coordinates></Point></Placemark>
+	</Folder>
+</Document>
+</kml>

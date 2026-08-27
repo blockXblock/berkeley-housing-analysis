@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+	<name>Adeline street labels · scale 2.5 · 20 m</name>
+	<open>1</open>
+	<Style id="cross"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>2.5</scale><color>ffffffff</color></LabelStyle></Style>
+	<Style id="own"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>3.125</scale><color>ffffffff</color></LabelStyle></Style>
+	<Placemark><name>Adeline</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2679770326285,37.8588249999999,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Adeline</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.268516115262,37.8528749999999,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Adeline</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2690551978955,37.8486749999999,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Alcatraz Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26897236829902,37.849320326492716,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Harmon St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2689277908814,37.84966762974889,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Woolsey St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26864923633626,37.85183785193181,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Essex St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.268516115262,37.85327674051298,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Emerson St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.268516115262,37.8544909283263,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Russell St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.268516115262,37.85638818286678,20.0</coordinates></Point></Placemark>
+</Document>
+</kml>

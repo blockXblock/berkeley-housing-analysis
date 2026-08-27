@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+	<name>San Pablo street labels · scale 2.5 · 20 m</name>
+	<open>1</open>
+	<Style id="cross"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>2.5</scale><color>ffffffff</color></LabelStyle></Style>
+	<Style id="own"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>3.125</scale><color>ffffffff</color></LabelStyle></Style>
+	<Placemark><name>San Pablo</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2964028386927,37.88226805163902,20.0</coordinates></Point></Placemark>
+	<Placemark><name>San Pablo</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2949623393998,37.87786890203066,20.0</coordinates></Point></Placemark>
+	<Placemark><name>San Pablo</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2936640414055,37.8738249999998,20.0</coordinates></Point></Placemark>
+	<Placemark><name>San Pablo</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.291141456602,37.8659570532667,20.0</coordinates></Point></Placemark>
+	<Placemark><name>San Pablo</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2896170742895,37.8612249999999,20.0</coordinates></Point></Placemark>
+	<Placemark><name>San Pablo</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2880450023615,37.8563249999999,20.0</coordinates></Point></Placemark>
+	<Placemark><name>San Pablo</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2859992607551,37.85006675219736,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Ashby Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.286586361901,37.85186278765203,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Carleton St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.28862688017487,37.85819134846249,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Parker St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.289070667368,37.85956866234735,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Dwight Way</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.28948272915021,37.860817756050615,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Channing Way</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.29003028494475,37.862546115963674,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Bancroft Way</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.29076892611674,37.86482684504375,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Allston Way</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.29134235636003,37.86659155695117,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Addison St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.29187012796082,37.868258423195975,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Hearst Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.29260565134017,37.870581433929175,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Delaware St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.29288879008698,37.87146025976618,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Cedar St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.29417617669942,37.87542018459091,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Jones St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.29438914504081,37.87608353238318,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Page St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.29481414718087,37.87740731708042,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Camelia St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.29518727539809,37.87855583545273,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Harrison St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.29636724944955,37.882159365431505,20.0</coordinates></Point></Placemark>
+</Document>
+</kml>

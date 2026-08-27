@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+	<name>College-Bancroft Path S-N-W · 23 points</name>
+	<open>1</open>
+	<Style id="s_ylw-pushpin"><IconStyle><scale>1.1</scale><Icon><href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href></Icon></IconStyle></Style>
+	<StyleMap id="m_ylw-pushpin"><Pair><key>normal</key><styleUrl>#s_ylw-pushpin</styleUrl></Pair><Pair><key>highlight</key><styleUrl>#s_ylw-pushpin</styleUrl></Pair></StyleMap>
+	<Folder><name>College then Bancroft</name><open>1</open>
+		<Placemark><name>CB01</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.25468420872353,37.8455,0</coordinates></Point></Placemark>
+		<Placemark><name>CB02</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.2527444441232,37.85143698557442,0</coordinates></Point></Placemark>
+		<Placemark><name>CB03</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.25235237351914,37.85263698557442,0</coordinates></Point></Placemark>
+		<Placemark><name>CB04</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.25297446763317,37.85383698557442,0</coordinates></Point></Placemark>
+		<Placemark><name>CB05</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.25311455361351,37.855036985574415,0</coordinates></Point></Placemark>
+		<Placemark><name>CB06</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.25323214937242,37.85623698557441,0</coordinates></Point></Placemark>
+		<Placemark><name>CB07</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.2533033884694,37.85743698557441,0</coordinates></Point></Placemark>
+		<Placemark><name>CB08</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.25337301598876,37.85863698557441,0</coordinates></Point></Placemark>
+		<Placemark><name>CB09</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.25316459516476,37.859836985574404,0</coordinates></Point></Placemark>
+		<Placemark><name>CB10</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.25379027445508,37.8610369855744,0</coordinates></Point></Placemark>
+		<Placemark><name>CB11</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.2532604364224,37.8622369855744,0</coordinates></Point></Placemark>
+		<Placemark><name>CB12</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.25331916827568,37.863436985574396,0</coordinates></Point></Placemark>
+		<Placemark><name>CB13</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.2541360036686,37.86463698557439,0</coordinates></Point></Placemark>
+		<Placemark><name>CB14</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.25375238171976,37.86583698557439,0</coordinates></Point></Placemark>
+		<Placemark><name>CB15</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.2537860793227,37.86703698557439,0</coordinates></Point></Placemark>
+		<Placemark><name>CB16</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.25411691357048,37.868236985574384,0</coordinates></Point></Placemark>
+		<Placemark><name>CB17</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.25425457409956,37.86943698557438,0</coordinates></Point></Placemark>
+		<Placemark><name>CB18</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.25653678708261,37.86869405,0</coordinates></Point></Placemark>
+		<Placemark><name>CB19</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.25881900006564,37.868555068805186,0</coordinates></Point></Placemark>
+		<Placemark><name>CB20</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.26110121304868,37.8683781854932,0</coordinates></Point></Placemark>
+		<Placemark><name>CB21</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.26338342603172,37.86792163780287,0</coordinates></Point></Placemark>
+		<Placemark><name>CB22</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.26566563901477,37.867525557392476,0</coordinates></Point></Placemark>
+		<Placemark><name>CB23</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.2679478519978,37.8673372396592,0</coordinates></Point></Placemark>
+	</Folder>
+</Document>
+</kml>

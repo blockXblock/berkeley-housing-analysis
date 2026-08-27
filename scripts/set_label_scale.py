@@ -57,6 +57,11 @@ def main():
     def fix(m):
         nonlocal added, updated, iconed
         sid, body = m.group(1), m.group(2)
+        if sid.endswith("_nolabel"):
+            # split_label_lod.py's suppressed twins. Their LabelStyle scale of 0 is what stops
+            # the polygon drawing a SECOND copy of every label; restyling them here would put
+            # all 196 labels back on screen twice.
+            return f'<Style id="{sid}">{body}</Style>' 
         if "<LabelStyle>" in body:
             updated += 1
             body = re.sub(r"<LabelStyle>.*?</LabelStyle>",

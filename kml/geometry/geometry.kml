@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <Document>
-	<name>Berkeley Housing Geometry · 2026-08-27 · 392 buildings · geom-08799a5c0004</name>
+	<name>Berkeley Housing Geometry · 2026-08-27 · 392 buildings · geom-5d10e38d6307</name>
 	<visibility>0</visibility>
 	<open>1</open>
 	<description>177 housing projects. Heights shown as stories × 3.5m. Generated 2026-05-03.</description>
@@ -5122,6 +5122,836 @@
 		<LabelStyle><scale>0</scale></LabelStyle>
 		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
+	<StyleMap id="style_Application_Submitted_parcel0_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Application_Submitted_parcel_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Application_Submitted_parcel3_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Application_Submitted_parcel1_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Application_Submitted_parcel5_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Application_Submitted_parcel2_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Application_Submitted_parcel40_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Application_Submitted_parcel44_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Application_Submitted_parcel4_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Application_Submitted_parcel43_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Application_Submitted_parcel45_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Application_Submitted_parcel42_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Application_Submitted_parcel47_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Application_Submitted_parcel46_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Application_Submitted_parcel41_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Completed_parcel_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Completed_parcel4_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Completed_parcel5_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Completed_parcel03_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Completed_parcel05_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Completed_parcel08_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Completed_parcel04_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Completed_parcel00_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Completed_parcel02_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Completed_parcel07_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Completed_parcel01_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Completed_parcel06_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Completed_parcel1_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Completed_parcel2_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Completed_parcel3_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Completed_synthetic1_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Completed_synthetic_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Completed_synthetic0_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Decision_Pending_parcel_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Decision_Pending_parcel0_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Decision_Pending_parcel3_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Decision_Pending_parcel00_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Decision_Pending_parcel2_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Decision_Pending_parcel1000_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Decision_Pending_parcel1_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Decision_Pending_parcel12_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Decision_Pending_parcel11_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Decision_Pending_parcel101_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Decision_Pending_parcel102_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Decision_Pending_parcel10_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Decision_Pending_parcel103_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Decision_Pending_parcel104_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Decision_Pending_parcel105_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Entitled_footprint1_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Entitled_footprint20_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Entitled_footprint00_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Entitled_footprint10_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Entitled_footprint2_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Entitled_footprint0_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Entitled_parcel1_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Entitled_parcel8_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Entitled_parcel3_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Entitled_parcel2_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Entitled_parcel7_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Entitled_parcel0_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Entitled_parcel5_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Entitled_parcel4_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Entitled_parcel_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Entitled_parcel61014_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Entitled_parcel6100_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Entitled_parcel6104_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Entitled_parcel61011_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Entitled_parcel6109_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Entitled_parcel61013_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Entitled_parcel610_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Entitled_parcel6103_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Entitled_parcel6106_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Entitled_parcel6105_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Entitled_parcel6102_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Entitled_parcel6101_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Entitled_parcel61012_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Entitled_parcel6107_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Entitled_parcel6108_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Entitled_parcel612_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Entitled_parcel611_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Entitled_parcel61_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Entitled_parcel617_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Entitled_parcel614_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Entitled_parcel613_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Entitled_parcel618_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Entitled_parcel615_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Entitled_parcel616_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Entitled_parcel62_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Entitled_parcel60_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Entitled_parcel6_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Entitled_synthetic0_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Entitled_synthetic8_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Entitled_synthetic_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Entitled_synthetic6_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Entitled_synthetic5_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Entitled_synthetic3_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Entitled_synthetic1_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Entitled_synthetic7_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Entitled_synthetic2_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel14_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel0_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel12_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel16_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel10_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel2_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel13_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel8_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel50_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel517_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel57_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel510_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel5_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel56_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel512_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel511_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel51_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel515_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel53_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel59_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel54_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel516_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel514_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel55_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel513_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel52_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel580_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel5825_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel5823_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel5810_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel5815_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel5812_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel5817_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel5811_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel587_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel58189_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel581837_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel581833_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel581826_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel581834_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel581829_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel581814_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel58181_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel581823_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel58188_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel581839_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel581825_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel58185_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel581827_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel58182_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel5818_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel58186_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel581840_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel581813_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel581821_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel581811_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel581812_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel581810_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel581836_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel581828_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel581819_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel581835_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel581818_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel581841_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel581824_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel581831_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel581820_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel58183_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel581832_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel581817_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel581816_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel581838_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel581830_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel58184_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel581815_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel58180_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel581822_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel5819_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel5816_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel5813_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel5820_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel583_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel581_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel5824_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel5828_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel5821_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel5827_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel5826_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel5822_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel5829_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel589_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel5814_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel584_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel588_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel586_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel585_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel582_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel58_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel6_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel15_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel4_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel7_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel17_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel3_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_parcel9_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_parcel1_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_parcel11_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_synthetic00_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_synthetic20_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_synthetic10_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_synthetic1_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_synthetic4_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_synthetic3_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_In_Review_synthetic2_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_In_Review_synthetic_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_In_Review_synthetic5_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Permits_Active_parcel1_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Permits_Active_parcel4_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Permits_Active_parcel3_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Permits_Active_parcel_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Permits_Active_parcel2_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Permits_Active_parcel0_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_UC_Project_footprint1_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_UC_Project_footprint_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_UC_Project_footprint0_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_UC_Project_footprint100_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_UC_Project_footprint50_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_UC_Project_footprint4_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_UC_Project_footprint10_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_UC_Project_footprint5_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_UC_Project_footprint40_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_UC_Project_footprint20_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_UC_Project_footprint000_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_UC_Project_footprint301_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_UC_Project_footprint2_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_UC_Project_footprint00_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_UC_Project_footprint300_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_UC_Project_footprint31_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_UC_Project_footprint34_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_UC_Project_footprint32_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_UC_Project_footprint30_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_UC_Project_footprint33_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_UC_Project_footprint3_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Under_Construction_parcel0_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Under_Construction_parcel1_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Under_Construction_parcel_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style_Under_Construction_parcel2_nolabel">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style_Under_Construction_parcel21_nolabel</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style_Under_Construction_parcel20_nolabel</styleUrl>
+		</Pair>
+	</StyleMap>
 	<Folder>
 		<name>Housing Projects</name>
 		<visibility>0</visibility>

@@ -52,6 +52,16 @@ def split(g: str, min_lod: int, max_lod: int, fade: int, min_box_m: float):
             b = "<LabelStyle><scale>0</scale></LabelStyle>" + b
         nolabel.append(f'\t<Style id="{sid}_nolabel">{b}</Style>\n')
 
+    # STYLEMAPS NEED TWINS TOO. 83 of the 196 placemarks point at a <StyleMap>, not a <Style>.
+    # The first cut only twinned <Style> elements, so 80 polygon placemarks ended up naming a
+    # '#..._nolabel' that did not exist and Earth fell back to its DEFAULT white/grey fill --
+    # every In Review project turned grey. A twin map repoints both its pairs at the twins.
+    for sid, body in re.findall(r'<StyleMap id="([^"]+)">(.*?)</StyleMap>', g, re.S):
+        if sid.endswith("_nolabel"):
+            continue
+        b2 = re.sub(r"<styleUrl>#([^<]+)</styleUrl>", r"<styleUrl>#\1_nolabel</styleUrl>", body)
+        nolabel.append(f'\t<StyleMap id="{sid}_nolabel">{b2}</StyleMap>\n')
+
     n = 0
     synth = [0]
 
@@ -106,6 +116,16 @@ def split(g: str, min_lod: int, max_lod: int, fade: int, min_box_m: float):
     out = re.sub(r"\t*<Placemark>.*?</Placemark>", one, g, flags=re.S)
     last = out.rindex("</Style>") + len("</Style>\n")
     out = out[:last] + "".join(nolabel) + out[last:]
+
+    # GATE: refuse to emit a file whose placemarks name styles that are not in it. A dangling
+    # styleUrl does not error in Earth -- it silently renders the default, which is how the
+    # In Review projects went grey without anything complaining.
+    defined = set(re.findall(r'<Style id="([^"]+)"', out)) | set(re.findall(r'<StyleMap id="([^"]+)"', out))
+    dangling = sorted({u for u in re.findall(r"<styleUrl>#([^<]+)</styleUrl>", out)
+                       if u not in defined})
+    if dangling:
+        raise SystemExit(f"REFUSING TO WRITE: {len(dangling)} styleUrl(s) resolve to nothing, "
+                         f"Earth would render them default grey: {dangling[:5]}")
     return out, n, synth[0]
 
 
@@ -132,6 +152,7 @@ def unsplit(g: str):
         return re.sub(r"<styleUrl>#([^<]+)_nolabel</styleUrl>", r"<styleUrl>#\1</styleUrl>", pm)
     g = re.sub(r"\t*<Placemark>.*?</Placemark>", restore, g, flags=re.S)
     g = re.sub(r'\t*<Style id="[^"]+_nolabel">.*?</Style>\n?', "", g, flags=re.S)
+    g = re.sub(r'\t*<StyleMap id="[^"]+_nolabel">.*?</StyleMap>\n?', "", g, flags=re.S)
     return g, len(labels)
 
 

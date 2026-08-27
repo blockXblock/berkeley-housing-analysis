@@ -15,6 +15,19 @@ So a storey count is only accepted when it sits AFTER a construction verb and is
 a demolition or existing-condition phrase. Where both appear the CONSTRUCTION one wins; where
 only a demolition figure exists, nothing is returned.
 
+TWO FURTHER TRAPS, both found 2026-08-26 by auditing the promoted values.
+
+(a) ANNOTATIONS ARE NOT DESCRIPTIONS. Some v2 descriptions carry a bracketed provenance note
+that quotes the OLD, WRONG value -- proj137 ends "[... placeholder (3.0), which drew this
+82-unit building as 3 storeys / 10.5m.]". Read naively that yields 3 storeys for an 8-storey
+building, i.e. the extractor re-learns the very error the note records. Text inside [...] is
+therefore excluded.
+
+(b) STATED FEET BEAT STOREYS x 3.5, the same rule the 1.E forms taught. A description that says
+"two-story 28 feet tall" gives a measured height; 2 x 3.5 = 7.0 m would contradict it at 8.5 m.
+Where the construction clause states feet, that wins, and the storey count is kept only as the
+fallback.
+
 Output: data/reference/storeys_from_permits.csv   READ-ONLY.
 """
 import csv, re, sqlite3, sys
@@ -30,10 +43,27 @@ STOREY = re.compile(
     r"|(?P<w>\b(" + "|".join(NUM) + r")\s*[-\s]?\s*stor\w+)", re.I)
 
 
+FEET = re.compile(r"(\d{1,3}(?:\.\d)?)\s*(?:feet|foot|ft\b)\s*(?:tall|high|in height)", re.I)
+
+
+def in_annotation(text, i):
+    """True if position i sits inside a bracketed provenance note, which quotes stale values."""
+    return text.rfind("[", 0, i) > text.rfind("]", 0, i)
+
+
+def stated_feet(text):
+    """[(feet, span_start, snippet)] — heights the description states outright."""
+    return [(float(m.group(1)), m.start(), text[max(0, m.start()-70):m.end()+12])
+            for m in FEET.finditer(text)
+            if not in_annotation(text, m.start()) and 6 <= float(m.group(1)) <= 700]
+
+
 def candidates(text):
     """[(storeys, span_start, snippet)] — every storey figure in the text."""
     out = []
     for m in STOREY.finditer(text):
+        if in_annotation(text, m.start()):
+            continue
         if m.group("over"):
             v = int(m.group(2)) + int(m.group(3))          # 5-over-2 podium = 7
         elif m.group("n"):
@@ -87,14 +117,20 @@ def main():
             pick = max(t[0] for t in unk); basis = "unqualified (no demolition nearby)"
         else:
             basis = "ONLY demolition figures — rejected"
+        feet = [f for f in stated_feet(txt) if classify(f[2]) == "build"]
+        h_m = round(max(f[0] for f in feet) * 0.3048, 1) if feet else (
+              round(pick * 3.5, 1) if pick else None)
+        if feet:
+            basis += " · height from STATED FEET (beats storeys x 3.5)"
         rows.append(dict(project_id=p["project_id"], address=p["address_display"],
                          units=p["total_units"], status=p["status_label"],
-                         storeys=pick, basis=basis,
+                         storeys=pick, height_m=h_m,
+                         feet_stated=(max(f[0] for f in feet) if feet else ""), basis=basis,
                          all_figures="; ".join(f"{v}({t})" for v, t, _ in tagged),
                          snippet=(build or unk or tagged)[0][2].replace("\n", " ")[:150]))
     with open("data/reference/storeys_from_permits.csv", "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=["project_id","address","units","status","storeys",
-                                           "basis","all_figures","snippet"])
+                                           "height_m","feet_stated","basis","all_figures","snippet"])
         w.writeheader(); [w.writerow(r) for r in rows]
     got = [r for r in rows if r["storeys"]]
     print(f"scanned {len(rows)} projects with a storey figure · resolved {len(got)}")

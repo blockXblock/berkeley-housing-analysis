@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <Document>
-	<name>Berkeley Housing Geometry · 2026-08-26 · 196 buildings · geom-e112113faf25</name>
+	<name>Berkeley Housing Geometry · 2026-08-26 · 196 buildings · geom-0b7c694255b6</name>
 	<visibility>0</visibility>
 	<open>1</open>
 	<description>177 housing projects. Heights shown as stories × 3.5m. Generated 2026-05-03.</description>
@@ -4501,15 +4501,15 @@
 		<Placemark>
 			<name>2200 Fifth St · 8 units · Withdrawn</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2200 FIFTH St</b><br/><b>Units:</b> 8<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Withdrawn]]></description>
+			<description><![CDATA[<b>2200 FIFTH St</b><br/><b>Units:</b> 8<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.4m<br/><b>Status:</b> Withdrawn]]></description>
 			<styleUrl>#style_Withdrawn_parcel</styleUrl>
-			<MultiGeometry><Point><coordinates>-122.29820422275989,37.86463778380473,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
+			<MultiGeometry><Point><coordinates>-122.29820422275989,37.86463778380473,10.4</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2978934610282,37.86453872729266,10.5 -122.2983070750677,37.86445002534158,10.5 -122.2983537011781,37.86458665546985,10.5 -122.2984347165825,37.86457031288079,10.5 -122.2985225959539,37.864836094511,10.5 -122.2980245484807,37.86494394384462,10.5 -122.2978934610282,37.86453872729266,10.5 
+							-122.2978934610282,37.86453872729266,10.4 -122.2983070750677,37.86445002534158,10.4 -122.2983537011781,37.86458665546985,10.4 -122.2984347165825,37.86457031288079,10.4 -122.2985225959539,37.864836094511,10.4 -122.2980245484807,37.86494394384462,10.4 -122.2978934610282,37.86453872729266,10.4 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
@@ -5198,15 +5198,15 @@
 		<Placemark>
 			<name>1522 Josephine St · 0 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1522 JOSEPHINE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1522 JOSEPHINE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 8.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<MultiGeometry><Point><coordinates>-122.27521135485908,37.87853712045937,7</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
+			<MultiGeometry><Point><coordinates>-122.27521135485908,37.87853712045937,8.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2750209422674,37.87851581068767,7 -122.2754805243573,37.87846084023148,7 -122.2754986764271,37.87856768009149,7 -122.2750356889762,37.87862546059855,7 -122.2750209422674,37.87851581068767,7 
+							-122.2750209422674,37.87851581068767,8.5 -122.2754805243573,37.87846084023148,8.5 -122.2754986764271,37.87856768009149,8.5 -122.2750356889762,37.87862546059855,8.5 -122.2750209422674,37.87851581068767,8.5 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
@@ -5317,15 +5317,15 @@
 		<Placemark>
 			<name>576 San Luis Rd · 0 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>576 SAN LUIS Rd</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>576 SAN LUIS Rd</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 6.1m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
-			<MultiGeometry><Point><coordinates>-122.2757535588213,37.90002575017668,7</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
+			<MultiGeometry><Point><coordinates>-122.2757535588213,37.90002575017668,6.1</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2755873947399,37.90007837616216,7 -122.2758859073701,37.89987818039231,7 -122.2760082761299,37.89992165868265,7 -122.2756988211267,37.90017215948414,7 -122.2755873947399,37.90007837616216,7 
+							-122.2755873947399,37.90007837616216,6.1 -122.2758859073701,37.89987818039231,6.1 -122.2760082761299,37.89992165868265,6.1 -122.2756988211267,37.90017215948414,6.1 -122.2755873947399,37.90007837616216,6.1 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>

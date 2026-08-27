@@ -28,8 +28,23 @@ M = 111320.0
 
 
 def buildings():
-    """{ADDRESS: (lon, lat, roof_m, circumradius_m, label)}"""
-    out = {}
+    """{ADDRESS: (lon, lat, roof_m, circumradius_m, label)} — ONE ENTRY PER SITE.
+
+    SITES, NOT LAST-WINS (fixed 2026-08-26). This dict used to be built with a plain
+    `out[address] = ...` inside the placemark loop, so when several placemarks share one
+    address the LAST one in document order silently won. That is not a rare case: it is
+    exactly the multi-building projects. 1750 Sacramento St carries all 13 North Berkeley
+    BART buildings, so the "1750 Sacramento · 739 units" loop was orbiting *Avalon Walk-up
+    E* — a 10.5 m three-storey block at a 14 m radius, 96 m north of the site centre, with
+    the eight-storey buildings out of frame entirely. Ashby BART (5 buildings) picked MLK
+    Building E and missed the Adeline Tower; 2556 Haste picked the shorter South wing.
+
+    So a shared address is now aggregated into ONE SITE: centroid over the union of every
+    ring, roof = the TALLEST member (the shot has to clear the tallest thing in it), radius
+    = the circumradius of the union. A one-placemark address behaves exactly as before.
+    """
+    groups = {}
+    order = []
     for pm in re.findall(r"<Placemark>.*?</Placemark>", open(GEOM, errors="replace").read(), re.S):
         ad = re.search(r"<b>([^<]*)</b><br/>", pm)
         nm = re.search(r"<name>([^<]*)</name>", pm)
@@ -42,16 +57,45 @@ def buildings():
             p = tok.split(",")
             ring.append((float(p[0]), float(p[1])))
             if len(p) > 2:
-                roof = float(p[2])
+                roof = max(roof, float(p[2]))
         if len(ring) < 4:
             continue
-        r = ring[:-1]
-        lon = sum(p[0] for p in r)/len(r); lat = sum(p[1] for p in r)/len(r)
-        k = math.cos(math.radians(lat))
-        rad = max(math.hypot((p[0]-lon)*k, (p[1]-lat)) for p in r) * M
-        out[ad.group(1).upper().strip()] = (lon, lat, roof, rad,
-                                            nm.group(1) if nm else ad.group(1))
+        k = ad.group(1).upper().strip()
+        if k not in groups:
+            groups[k] = []
+            order.append(k)
+        groups[k].append((ring[:-1], roof, nm.group(1) if nm else ad.group(1)))
+
+    out = {}
+    for k in order:
+        members = groups[k]
+        pts = [p for ring, _, _ in members for p in ring]
+        lon = sum(p[0] for p in pts)/len(pts)
+        lat = sum(p[1] for p in pts)/len(pts)
+        kk = math.cos(math.radians(lat))
+        rad = max(math.hypot((p[0]-lon)*kk, (p[1]-lat)) for p in pts) * M
+        roof = max(m[1] for m in members)
+        out[k] = (lon, lat, roof, rad, site_label(members))
     return out
+
+
+def site_label(members):
+    """A multi-building site must not be titled after one of its buildings.
+
+    Naming the site after its tallest member ("North Berkeley BART: Avalon (8 st)") reads as
+    a claim about one building. Use the members' COMMON NAME PREFIX instead — the 13 BART
+    names share "North Berkeley BART: ", the two 2556 Haste names share "2556 Haste St · " —
+    and say how many buildings are in the shot. A unit count is carried through only when
+    every member agrees on it, so it can never be a single wing's number.
+    """
+    if len(members) == 1:
+        return members[0][2]
+    names = [m[2] for m in members]
+    pre = os.path.commonprefix(names).rstrip()
+    pre = re.sub(r"[:·,\-]+$", "", pre).strip() or names[0]
+    units = {u.group(1) for u in (re.search(r"(\d+) units", n) for n in names) if u}
+    unit_part = f" · {units.pop()} units" if len(units) == 1 else ""
+    return f"{pre}{unit_part} · {len(members)} buildings · site"
 
 
 def cam(lon, lat, alt, hdg, tilt, dur, mode="smooth"):

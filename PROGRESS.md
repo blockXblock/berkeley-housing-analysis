@@ -4,6 +4,24 @@
 
 ---
 
+## 2026-08-26 [tours/cameras — session berkeley-data-2c] — 🎥 building loops: 3 were orbiting the wrong building (site-collision bug) — FIXED, 53 packages rebuilt · UNCOMMITTED, awaiting John review
+
+**`scripts/gen_building_loop.py` indexed placemarks as `out[address] = ...`, so where several placemarks share ONE address the LAST in document order silently won.** That is not an edge case — it is precisely the multi-building projects, and it had put three loops on the wrong building:
+- **1750 Sacramento (North Berkeley BART, 739 u, 13 buildings)** — the loop was orbiting **Avalon Walk-up E**, a 10.5 m three-storey block, at a **14 m radius, 96 m north of the site centre**. The eight-storey buildings were out of frame for the entire 59 s. Now a **site loop**: centroid of all 13, roof 28.0 m, radius 235 m (farthest corner is 107 m — every building is inside the orbit, verified).
+- **Ashby BART (618 u, 5 buildings)** — was orbiting **MLK Building E**, 104 m north of centre, missing the Adeline Tower entirely. Now roof 28.0 m, radius 286 m.
+- **2556 Haste (556 u, 2 buildings)** — was orbiting the shorter **South** wing (35.0 m) rather than the 40.2 m main mass. Now roof 40.2 m, radius 177 m.
+- **2065 Kittredge** — height was stale at 28.0 m; the loops were generated at `7f58ba7` and **six geometry-correcting commits landed after them**, so the loop set never saw b26b561's 1.E-precedence sweep. Re-cut at the corrected **26.5 m**.
+
+**A shared address is now aggregated into ONE SITE** (centroid over the union of rings, roof = TALLEST member — the shot must clear the tallest thing in it, radius = circumradius of the union); a one-placemark address behaves exactly as before. **Verification: regenerating all 28 loops rewrote exactly these 4 — the other 24 came out byte-identical**, so no reviewed shot was silently re-cut. Site loops are titled from the members' common name prefix (`North Berkeley BART · 13 buildings · site`), never after one member; a unit count is carried through only when every member agrees on it.
+
+`build_tour_package.py --all` re-run: 53 packages, catalog verified (11 entries, 0 missing). It also corrected one package that had embedded a stale geometry name-stamp (`geom-cb78e26cf9fc` vs the current `geom-7acb5da80306`) — a two-pass artifact of `stamp_geometry.py` rewriting the name it hashes.
+
+**MEASURED, NOT APPLIED — the eye-level pass uses a CONSTANT tilt of 72°, and six loops now look above their subject.** The aim tilt (camera pointed at the site's mid-height) is `atan2(radius, eye_alt − roof/2)`: ashby-bart 85.2°, 1750-sacramento 84.2°, 2556-haste 80.3°, **2150-kittredge 79.6°, 2352-shattuck 79.1°, 2065-kittredge 77.6°** — the last three are pre-existing, wide low-footprint buildings where a 121–125 m orbit already over-shot. For the other 22 the aim tilt is 61–76°, i.e. the constant 72° is close enough. **Fix would be one line — `tilt = max(72.0, aim)` — but it re-cuts 6 shots, so it is JOHN'S CALL, not applied.** The two BART site loops ship correctly framed in plan and spiral; only their final orbit sits ~13° high.
+
+**NOT FIXED (same class, needs a different key):** **2200 Bancroft South** and **2400 Bowditch South** carry plain-text descriptions with **no `<b>ADDRESS</b>` balloon**, so `buildings()` skips them entirely — those two loops frame only the North tower of a 550/750-unit pair. Matching would have to move from address to name prefix. Flagging, not changing.
+
+**Files (uncommitted, dev):** `scripts/gen_building_loop.py`, 4 loop KMLs, 5 packages. Nothing pushed.
+
 ## 2026-08-26 [geometry/tours — session berkeley-data-2b] — ✅ heights promoted, dups merged, all 53 tour packages rebuilt
 **Owns geometry.kml + tour packages. Division with berkeley-data-07 unchanged (heights mine, 1.E wins ties; footprints theirs; I promote).**
 

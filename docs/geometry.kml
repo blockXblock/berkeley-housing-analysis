@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <Document>
-	<name>Berkeley Housing Geometry · 2026-08-26 · 198 buildings · geom-a3ef6eb08784</name>
+	<name>Berkeley Housing Geometry · 2026-08-26 · 198 buildings · geom-f8225ae1e926</name>
 	<visibility>0</visibility>
 	<open>1</open>
 	<description>177 housing projects. Heights shown as stories × 3.5m. Generated 2026-05-03.</description>
@@ -3130,13 +3130,13 @@
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2065 Kittredge St</b><br/><b>Units:</b> 189<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_Entitled_footprint10</styleUrl>
-			<MultiGeometry><Point><coordinates>-122.26878159815519,37.868767005909696,28.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
+			<MultiGeometry><Point><coordinates>-122.26878159815519,37.868767005909696,26.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2684704666583,37.86850112472327,28 -122.2685428704767,37.86883422983492,28 -122.2688417874279,37.86878848680792,28 -122.268922549586,37.86918411311285,28 -122.2691868580265,37.8691421151169,28 -122.2690361882526,37.86841784704875,28 -122.2684704666583,37.86850112472327,28 
+							-122.2684704666583,37.86850112472327,26.5 -122.2685428704767,37.86883422983492,26.5 -122.2688417874279,37.86878848680792,26.5 -122.268922549586,37.86918411311285,26.5 -122.2691868580265,37.8691421151169,26.5 -122.2690361882526,37.86841784704875,26.5 -122.2684704666583,37.86850112472327,26.5 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
@@ -3332,13 +3332,13 @@
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2425 DURANT Ave</b><br/><b>Units:</b> 117<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 20<br/><b>Height:</b> 61.0m<br/><b>Status:</b> Decision Pending]]></description>
 			<styleUrl>#style_Decision_Pending_parcel100</styleUrl>
-			<MultiGeometry><Point><coordinates>-122.26014428640018,37.867959055036394,61.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
+			<MultiGeometry><Point><coordinates>-122.26014428640018,37.867959055036394,63.4</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2599930122489,37.86779779616973,61 -122.2602413878907,37.8677653188486,61 -122.260317962351,37.86811738479477,61 -122.2602404724875,37.86812751695053,61 -122.260079871174,37.868148517285,61 -122.2599930122489,37.86779779616973,61 
+							-122.2599930122489,37.86779779616973,63.4 -122.2602413878907,37.8677653188486,63.4 -122.260317962351,37.86811738479477,63.4 -122.2602404724875,37.86812751695053,63.4 -122.260079871174,37.868148517285,63.4 -122.2599930122489,37.86779779616973,63.4 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
@@ -3349,13 +3349,13 @@
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2720 SAN PABLO Ave</b><br/><b>Units:</b> 113<br/><b>VLI Units:</b> 9<br/><b>Stories:</b> 10<br/><b>Height:</b> 35.7m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<MultiGeometry><Point><coordinates>-122.28867623375004,37.85734740643587,35.7</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
+			<MultiGeometry><Point><coordinates>-122.28867623375004,37.85734740643587,20.1</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2885780863559,37.85748227996431,35.7 -122.2884939590864,37.85723140912825,35.7 -122.2888240747898,37.85714287019837,35.7 -122.2889069621622,37.85739819292412,35.7 -122.2885780863559,37.85748227996431,35.7 
+							-122.2885780863559,37.85748227996431,20.1 -122.2884939590864,37.85723140912825,20.1 -122.2888240747898,37.85714287019837,20.1 -122.2889069621622,37.85739819292412,20.1 -122.2885780863559,37.85748227996431,20.1 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
@@ -4129,13 +4129,13 @@
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2449 DWIGHT Way</b><br/><b>Units:</b> 39<br/><b>VLI Units:</b> 2<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<MultiGeometry><Point><coordinates>-122.25883763468369,37.86530685761784,14.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
+			<MultiGeometry><Point><coordinates>-122.25883763468369,37.86530685761784,25.7</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2589295486942,37.86515259089632,14 -122.2589915345704,37.86542908280077,14 -122.2589759998851,37.86543137705787,14 -122.2586254514512,37.86547848352895,14 -122.258573724807,37.86519702052679,14 -122.2589295486942,37.86515259089632,14 
+							-122.2589295486942,37.86515259089632,25.7 -122.2589915345704,37.86542908280077,25.7 -122.2589759998851,37.86543137705787,25.7 -122.2586254514512,37.86547848352895,25.7 -122.258573724807,37.86519702052679,25.7 -122.2589295486942,37.86515259089632,25.7 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
@@ -4605,13 +4605,13 @@
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2437 WARRING St</b><br/><b>Units:</b> 4<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 7.0m<br/><b>Status:</b> In Review]]></description>
 			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<MultiGeometry><Point><coordinates>-122.250231802293,37.8666076441035,7.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
+			<MultiGeometry><Point><coordinates>-122.250231802293,37.8666076441035,18.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2500807588333,37.86655723923688,7 -122.2504710851602,37.86650612135452,7 -122.2504951513369,37.86664516805629,7 -122.250154852925,37.86668729610788,7 -122.2501082066693,37.86669280062856,7 -122.2500807588333,37.86655723923688,7 
+							-122.2500807588333,37.86655723923688,18.5 -122.2504710851602,37.86650612135452,18.5 -122.2504951513369,37.86664516805629,18.5 -122.250154852925,37.86668729610788,18.5 -122.2501082066693,37.86669280062856,18.5 -122.2500807588333,37.86655723923688,18.5 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>

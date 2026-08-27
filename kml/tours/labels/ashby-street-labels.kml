@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+	<name>Ashby street labels · scale 2.5 · 20 m</name>
+	<open>1</open>
+	<Style id="cross"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>2.5</scale><color>ffffffff</color></LabelStyle></Style>
+	<Style id="own"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>3.125</scale><color>ffffffff</color></LabelStyle></Style>
+	<Placemark><name>Ashby</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.29043557018629,37.85141022131465,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Ashby</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2856355701863,37.85222804309311,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Ashby</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.27963557018631,37.85347094126125,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Ashby</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.27483557018633,37.85367682496009,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Ashby</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.27003557018634,37.85466058895309,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Ashby</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26523557018635,37.85522447012172,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Ashby</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26043557018636,37.856337430602906,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Ashby</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25563557018637,37.85692549113075,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Ashby</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25083557018638,37.85789200532465,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Ashby</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2460355701864,37.85827504561541,20.0</coordinates></Point></Placemark>
+	<Placemark><name>9Th St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.28934417846715,37.852172221663814,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Mabel St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.28334285745692,37.85310658992176,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Acton St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.28119250365943,37.85332123014176,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Dohr St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2806824071393,37.85337027984259,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Stanton St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.28020572268268,37.85341611671673,20.0</coordinates></Point></Placemark>
+	<Placemark><name>California St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.27712808306477,37.853480182164425,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Sacramento St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.27871508364042,37.85361948246772,20.0</coordinates></Point></Placemark>
+	<Placemark><name>King St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.27391561038068,37.85403859221411,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Ellis St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.27290558084825,37.85423042941833,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Harper St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.27250014917337,37.85427581260898,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Martin Luther King Jr Way</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.27136777288773,37.85440256848932,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Adeline St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2697023361204,37.854697541557485,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Wheeler St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26414351810034,37.85534948007982,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Fulton St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26320589099178,37.855501991261185,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Shattuck Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26626883972588,37.85554921826077,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Deakin St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26237291453897,37.85579251505311,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Telegraph Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2593642886869,37.8564555090763,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Benvenue Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2543830014354,37.856690232486216,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Florence St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25802442327283,37.85672334170603,20.0</coordinates></Point></Placemark>
+	<Placemark><name>College Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25330696586948,37.85681793354905,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Hillegass Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2553847854354,37.85687502125025,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Claremont Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.24498652244185,37.85786477102279,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Piedmont Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25096866268358,37.857872242932594,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Pine Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.24810371803973,37.858069038543604,20.0</coordinates></Point></Placemark>
+</Document>
+</kml>

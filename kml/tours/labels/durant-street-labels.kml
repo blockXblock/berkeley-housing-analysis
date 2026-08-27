@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+	<name>Durant street labels · scale 2.5 · 20 m</name>
+	<open>1</open>
+	<Style id="cross"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>2.5</scale><color>ffffffff</color></LabelStyle></Style>
+	<Style id="own"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>3.125</scale><color>ffffffff</color></LabelStyle></Style>
+	<Placemark><name>Durant</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26909262800868,37.86618045406547,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Durant</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26429262800869,37.86682219793444,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Durant</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2594926280087,37.867988850688995,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Durant</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25469262800871,37.86863419333751,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Shattuck Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2671952234937,37.866882768044306,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Fulton St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26620879333875,37.86693277609862,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Ellsworth St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26395671024137,37.86701656361568,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Telegraph Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2593441081089,37.86795446731129,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Bowditch St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25693614087969,37.867973290831955,20.0</coordinates></Point></Placemark>
+	<Placemark><name>College Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2541287088551,37.868568624961874,20.0</coordinates></Point></Placemark>
+</Document>
+</kml>

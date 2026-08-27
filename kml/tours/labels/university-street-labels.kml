@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+	<name>University street labels · scale 2.5 · 20 m</name>
+	<open>1</open>
+	<Style id="cross"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>2.5</scale><color>ffffffff</color></LabelStyle></Style>
+	<Style id="own"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>3.125</scale><color>ffffffff</color></LabelStyle></Style>
+	<Placemark><name>University</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2925341635511,37.8691644321616,20.0</coordinates></Point></Placemark>
+	<Placemark><name>University</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2865341635512,37.8698318426229,20.0</coordinates></Point></Placemark>
+	<Placemark><name>University</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2817341635512,37.8705060907943,20.0</coordinates></Point></Placemark>
+	<Placemark><name>University</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2765341635512,37.8710766544151,20.0</coordinates></Point></Placemark>
+	<Placemark><name>University</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2685341635512,37.87191220248,20.0</coordinates></Point></Placemark>
+	<Placemark><name>San Pablo Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2924462909937,37.86917110086247,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Curtis St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.28978508914595,37.86941277452776,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Acton St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.28471428100984,37.870087478555334,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Sacramento St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.28217525106604,37.870444131950485,20.0</coordinates></Point></Placemark>
+	<Placemark><name>California St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.27991704208114,37.87067264952465,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Mcgee Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.27722108182697,37.87100472847608,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Grant St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.27558928523028,37.87120637523569,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Martin Luther King Jr Way</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.27315294113563,37.871534871287146,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Milvia St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.27091000546818,37.87175257239302,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Shattuck Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26867789790967,37.8719025451337,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Kala Bagai Way</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2685341635512,37.87191220248,20.0</coordinates></Point></Placemark>
+</Document>
+</kml>

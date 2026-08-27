@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+	<name>Telegraph street labels · scale 2.5 · 20 m</name>
+	<open>1</open>
+	<Style id="cross"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>2.5</scale><color>ffffffff</color></LabelStyle></Style>
+	<Style id="own"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>3.125</scale><color>ffffffff</color></LabelStyle></Style>
+	<Placemark><name>Telegraph</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.260102015711,37.852875,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Telegraph</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.259419556296,37.8581249999999,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Telegraph</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2586723424875,37.8637249999999,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Telegraph</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.259036647508,37.8682749999998,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Woolsey St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.260102015711,37.852875,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Prince St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2600070788825,37.85398516519255,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Webster St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25993105733455,37.85479032181871,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Ashby Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25971707202648,37.85653845305212,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Russell St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.259564737098,37.85735080174847,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Oregon St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25934052151919,37.85874402209441,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Stuart St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25924805140579,37.8594682734378,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Derby St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25902978751974,37.8611136928182,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Carleton St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2588277185099,37.8625899037289,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Parker St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25879066423894,37.8628606029278,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Dwight Way</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25866086658105,37.865308711948764,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Haste St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25866164958298,37.86620862124675,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Channing Way</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25877660121499,37.866756022092815,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Durant Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25893193100747,37.86759444660388,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Bancroft Way</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.259036647508,37.8682749999998,20.0</coordinates></Point></Placemark>
+</Document>
+</kml>

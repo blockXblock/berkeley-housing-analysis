@@ -31,10 +31,31 @@ TYPE = {"AV": "Ave", "ST": "St", "WY": "Way", "BL": "Blvd", "DR": "Dr",
 
 
 def path_of(cp):
+    """Accept BOTH control-point shapes this project uses.
+
+    A hand-drawn Google Earth Path is one Placemark holding a LineString. Everything
+    derive_street_centreline.py emits -- Adeline, Bancroft, Oxford, San Pablo, Telegraph,
+    University -- is instead a folder of numbered Point placemarks, and so is the
+    College-Bancroft route. Reading only the LineString silently excluded six of the seven
+    corridors from ever getting street signs.
+    """
     x = open(cp, encoding="utf-8", errors="replace").read()
     ls = re.search(r"<LineString>.*?</LineString>", x, re.S)
-    cs = re.search(r"<coordinates>\s*(.*?)\s*</coordinates>", ls.group(0), re.S).group(1)
-    return [(float(t.split(",")[0]), float(t.split(",")[1])) for t in cs.split()]
+    if ls:
+        cs = re.search(r"<coordinates>\s*(.*?)\s*</coordinates>", ls.group(0), re.S).group(1)
+        return [(float(t.split(",")[0]), float(t.split(",")[1])) for t in cs.split()]
+    pins = []
+    for pm in re.findall(r"<Placemark>.*?</Placemark>", x, re.S):
+        pt = re.search(r"<Point>.*?<coordinates>\s*([^<]*?)\s*</coordinates>", pm, re.S)
+        nm = re.search(r"<name>([^<]*)</name>", pm)
+        if pt:
+            c = pt.group(1).split(",")
+            pins.append(((nm.group(1) if nm else ""), float(c[0]), float(c[1])))
+    if not pins:
+        raise SystemExit(f"{cp}: no LineString and no Point placemarks")
+    # order by NAME, not file order -- Earth reshuffles placemarks as they are edited
+    pins.sort(key=lambda q: q[0])
+    return [(lon, lat) for _, lon, lat in pins]
 
 
 def project(p, path):

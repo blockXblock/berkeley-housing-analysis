@@ -76,9 +76,16 @@ def pack(site_poly_ft, specs):
         side = math.sqrt(footprint_sf(units, stories))  # feet
         side = min(side, cw * 0.8, ch * 0.8)  # keep inside its cell
         rect = box(cx - side / 2, cy - side / 2, cx + side / 2, cy + side / 2)
-        rect = rect.intersection(site_poly_ft) if not site_poly_ft.contains(rect) else rect
-        if rect.area < 500:  # clipped away — keep the un-clipped rect so a building always shows
-            rect = box(cx - side / 2, cy - side / 2, cx + side / 2, cy + side / 2)
+        # CONTAINMENT: if the building's centroid falls outside the site parcel (skinny/triangular
+        # sites like Ashby's West Lot), slide it toward the site centroid until it sits inside —
+        # so a regenerate never reintroduces an out-of-site "stray" building.
+        if not site_poly_ft.contains(rect.centroid):
+            sc = site_poly_ft.centroid
+            for f in (0.25, 0.5, 0.7, 0.85, 0.95):
+                cand = box(cx + (sc.x - cx) * f - side / 2, cy + (sc.y - cy) * f - side / 2,
+                           cx + (sc.x - cx) * f + side / 2, cy + (sc.y - cy) * f + side / 2)
+                if site_poly_ft.contains(cand.centroid):
+                    rect = cand; break
         out.append((name, stories, units, rect))
     return out
 

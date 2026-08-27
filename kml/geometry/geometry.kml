@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <Document>
-	<name>Berkeley Housing Geometry · 2026-08-26 · 196 buildings · geom-0b7c694255b6</name>
+	<name>Berkeley Housing Geometry · 2026-08-26 · 196 buildings · geom-cb78e26cf9fc</name>
 	<visibility>0</visibility>
 	<open>1</open>
 	<description>177 housing projects. Heights shown as stories × 3.5m. Generated 2026-05-03.</description>
@@ -3551,14 +3551,14 @@
 		<Placemark>
 			<name>2000 University Ave · 82 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2000 University Ave</b><br/><b>Units:</b> 82<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i><br/><i>Height corrected 28.0m / 8 storeys from v2 (Overture num_floors), 2026-08-26. Was the 10.5m migration placeholder for a 82-unit building.</i>]]></description>
+			<description><![CDATA[<b>2000 University Ave</b><br/><b>Units:</b> 82<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 25.6m<br/><b>Status:</b> Completed<br/><i>(8 storeys / 84 ft — DRC Staff Report DRCF2022-0001)</i><br/><i>Height corrected 28.0m / 8 storeys from v2 (Overture num_floors), 2026-08-26. Was the 10.5m migration placeholder for a 82-unit building.</i>]]></description>
 			<styleUrl>#style_Completed_parcel0</styleUrl>
-			<MultiGeometry><Point><coordinates>-122.27048173840026,37.87159617446581,28.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
+			<MultiGeometry><Point><coordinates>-122.27048173840026,37.87159617446581,25.6</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
 					<LinearRing>
-						<coordinates>-122.270396957898,37.87149925005609,28.0 -122.2705802418811,37.87148413456205,28.0 -122.2706071079295,37.87173850398432,28.0 -122.2704274263947,37.87175973367047,28.0 -122.270396957898,37.87149925005609,28.0</coordinates>
+						<coordinates>-122.270396957898,37.87149925005609,25.6 -122.2705802418811,37.87148413456205,25.6 -122.2706071079295,37.87173850398432,25.6 -122.2704274263947,37.87175973367047,25.6 -122.270396957898,37.87149925005609,25.6</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
 			</Polygon></MultiGeometry>

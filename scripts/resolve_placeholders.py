@@ -25,18 +25,29 @@ M_PER_STORY = 3.5
 OUTDIR = "data/reference/placeholder_geojson"
 
 
+CONSTRUCT = re.compile(r"construct|erect|\bbuild\b|\bnew\b|propose|addition|convert", re.I)
+DEMO = re.compile(r"demolish|\bdemo\b|remove|existing|\(e\)", re.I)
+
+
 def stories_from_desc(desc):
+    """Story count from a permit description, GUARDING the demolition/existing-vs-proposed trap:
+    descriptions lead with the demolished building ('Demolish existing 1-story ... construct a new
+    3-story') — the first figure is what's torn down. Only accept a figure in the CONSTRUCTION clause;
+    demolition-only yields nothing. (Same trap as the 1.E existing|proposed columns, new costume.)"""
     d = str(desc or "")
-    # "(5) floors ... over (2) floors [+ basement]" -> sum
+    # "(5) floors over (2) floors" podium notation is always construction -> sum
     m = re.search(r"\(?(\d+)\)?\s*floors?.*?over.*?\(?(\d+)\)?\s*floors?", d, re.I)
     if m:
         return int(m.group(1)) + int(m.group(2))
-    # "levels 2-12" -> top level
-    m = re.search(r"levels?\s*\d+\s*[-–]\s*(\d+)", d, re.I)
+    # split on the construction verb; take story figures only from the construction side
+    cm = CONSTRUCT.search(d)
+    if not cm:
+        return None  # demolition-only / no construction verb -> no new building
+    tail = d[cm.start():]
+    m = re.search(r"levels?\s*\d+\s*[-–]\s*(\d+)", tail, re.I)          # "levels 2-12" -> 12
     if m:
         return int(m.group(1))
-    # "12 story" / "12-story" / "(12) story"
-    m = re.search(r"\(?(\d+)\)?\s*[-\s]?stor(?:y|ies)", d, re.I)
+    m = re.search(r"\(?(\d+)\)?\s*[-\s]?stor(?:y|ies)", tail, re.I)      # "3-story" after "construct"
     if m and int(m.group(1)) <= 60:
         return int(m.group(1))
     return None

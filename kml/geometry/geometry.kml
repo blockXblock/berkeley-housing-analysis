@@ -2871,23 +2871,7 @@
 				</outerBoundaryIs>
 			</Polygon></MultiGeometry>
 		</Placemark>
-		<Placemark>
-			<name>1750 Sacramento St · 739 units · Entitled</name>
-			<visibility>0</visibility>
-			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 739<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review]]></description>
-			<styleUrl>#style_In_Review_parcel58187</styleUrl>
-			<MultiGeometry><Point><coordinates>-122.28289080285495,37.874245322298805,28.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
-				<extrude>1</extrude>
-				<altitudeMode>relativeToGround</altitudeMode>
-				<outerBoundaryIs>
-					<LinearRing>
-						<coordinates>
-							-122.2825388957474,37.873963734114,28 -122.2833232633541,37.87387017609439,28 -122.2834046755,37.87466276383535,28 -122.2826482839259,37.87476620333629,28 -122.2825388957474,37.873963734114,28 
-						</coordinates>
-					</LinearRing>
-				</outerBoundaryIs>
-			</Polygon></MultiGeometry>
-		</Placemark>
+		
 		<Placemark>
 			<name>1974 Shattuck Ave · 599 units · Entitled</name>
 			<visibility>0</visibility>
@@ -5786,58 +5770,9 @@
 				</outerBoundaryIs>
 			</Polygon>
 		</Placemark>
-		<Placemark>
-			<name>Ashby Bart · Building 1 · 618 units · Pre-Application</name>
-			<visibility>0</visibility>
-			<styleUrl>#style_In_Review_parcel5819</styleUrl>
-			<MultiGeometry><Point><coordinates>-122.27035555769446,37.85398880508518,70.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
-				<extrude>1</extrude>
-				<tessellate>1</tessellate>
-				<altitudeMode>relativeToGround</altitudeMode>
-				<outerBoundaryIs>
-					<LinearRing>
-						<coordinates>
-							-122.2706646314134,37.85387553024245,24 -122.269852255889,37.85392078740944,24 -122.2698585123805,37.85417144666508,24 -122.270737757376,37.85410073086648,24 -122.2706646314134,37.85387553024245,24 
-						</coordinates>
-					</LinearRing>
-				</outerBoundaryIs>
-			</Polygon></MultiGeometry>
-		</Placemark>
-		<Placemark>
-			<name>Ashby Bart · Building 2 · 618 units · Pre-Application</name>
-			<visibility>0</visibility>
-			<styleUrl>#style_In_Review_parcel5820</styleUrl>
-			<MultiGeometry><Point><coordinates>-122.27032859794272,37.85284851614805,70.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
-				<extrude>1</extrude>
-				<tessellate>1</tessellate>
-				<altitudeMode>relativeToGround</altitudeMode>
-				<outerBoundaryIs>
-					<LinearRing>
-						<coordinates>
-							-122.2704758764557,37.85270560323494,24 -122.270251970336,37.85264638725582,24 -122.2700917251839,37.85306206415954,24 -122.2703475412823,37.85312292285501,24 -122.2704758764557,37.85270560323494,24 
-						</coordinates>
-					</LinearRing>
-				</outerBoundaryIs>
-			</Polygon></MultiGeometry>
-		</Placemark>
-		<Placemark>
-			<name>Ashby Bart · Building 3 · 618 units · Pre-Application</name>
-			<visibility>0</visibility>
-			<description>Ashby BART 3</description>
-			<styleUrl>#style_In_Review_parcel5829</styleUrl>
-			<MultiGeometry><Point><coordinates>-122.27016217923865,37.85345541889065,70.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
-				<extrude>1</extrude>
-				<tessellate>1</tessellate>
-				<altitudeMode>relativeToGround</altitudeMode>
-				<outerBoundaryIs>
-					<LinearRing>
-						<coordinates>
-							-122.2703199624122,37.85333677330851,24 -122.2700905551469,37.85327426675852,24 -122.2699143416752,37.85363641583382,24 -122.2701660745468,37.85369286524384,24 -122.2703199624122,37.85333677330851,24 
-						</coordinates>
-					</LinearRing>
-				</outerBoundaryIs>
-			</Polygon></MultiGeometry>
-		</Placemark>
+		
+		
+		
 		<Placemark>
 			<name>Innovation Zone - North - Bakar</name>
 			<visibility>0</visibility>
@@ -5926,5 +5861,149 @@
 			</Polygon></MultiGeometry>
 		</Placemark>
 	</Folder>
+		<Placemark>
+			<name>North Berkeley BART: Bridge 1 (8 st)</name>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Pre-Application<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Bridge 1 (8 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<styleUrl>#style_Pre_Application_parcel</styleUrl>
+			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs><LinearRing><coordinates>-122.284246,37.873212,28.0 -122.284239,37.872932,28.0 -122.284516,37.872928,28.0 -122.284548,37.873208,28.0 -122.284246,37.873212,28.0</coordinates></LinearRing></outerBoundaryIs>
+    </Polygon>
+		</Placemark>
+		<Placemark>
+			<name>North Berkeley BART: Bridge 2 (8 st)</name>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Pre-Application<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Bridge 2 (8 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<styleUrl>#style_Pre_Application_parcel</styleUrl>
+			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs><LinearRing><coordinates>-122.284120,37.873214,28.0 -122.283767,37.873220,28.0 -122.283761,37.872988,28.0 -122.284114,37.872943,28.0 -122.284120,37.873214,28.0</coordinates></LinearRing></outerBoundaryIs>
+    </Polygon>
+		</Placemark>
+		<Placemark>
+			<name>North Berkeley BART: Avalon (8 st)</name>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Pre-Application<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Avalon (8 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<styleUrl>#style_Pre_Application_parcel</styleUrl>
+			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs><LinearRing><coordinates>-122.283641,37.873222,28.0 -122.283287,37.873227,28.0 -122.283283,37.873048,28.0 -122.283636,37.873004,28.0 -122.283641,37.873222,28.0</coordinates></LinearRing></outerBoundaryIs>
+    </Polygon>
+		</Placemark>
+		<Placemark>
+			<name>North Berkeley BART: EBALDC (6 st)</name>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Pre-Application<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: EBALDC (6 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<styleUrl>#style_Pre_Application_parcel</styleUrl>
+			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs><LinearRing><coordinates>-122.284254,37.873563,21.0 -122.284247,37.873283,21.0 -122.284555,37.873278,21.0 -122.284587,37.873558,21.0 -122.284254,37.873563,21.0</coordinates></LinearRing></outerBoundaryIs>
+    </Polygon>
+		</Placemark>
+		<Placemark>
+			<name>North Berkeley BART: Insight (6 st)</name>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Pre-Application<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Insight (6 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<styleUrl>#style_Pre_Application_parcel</styleUrl>
+			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs><LinearRing><coordinates>-122.283768,37.873290,21.0 -122.283775,37.873570,21.0 -122.284129,37.873565,21.0 -122.284122,37.873284,21.0 -122.283768,37.873290,21.0</coordinates></LinearRing></outerBoundaryIs>
+    </Polygon>
+		</Placemark>
+		<Placemark>
+			<name>North Berkeley BART: Bridge 2 Walk-up A (3 st)</name>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Pre-Application<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Bridge 2 Walk-up A (3 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<styleUrl>#style_Pre_Application_parcel</styleUrl>
+			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs><LinearRing><coordinates>-122.283334,37.873331,10.5 -122.283339,37.873542,10.5 -122.283605,37.873538,10.5 -122.283600,37.873327,10.5 -122.283334,37.873331,10.5</coordinates></LinearRing></outerBoundaryIs>
+    </Polygon>
+		</Placemark>
+		<Placemark>
+			<name>North Berkeley BART: Bridge 2 Walk-up B (3 st)</name>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Pre-Application<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Bridge 2 Walk-up B (3 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<styleUrl>#style_Pre_Application_parcel</styleUrl>
+			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs><LinearRing><coordinates>-122.284301,37.873667,10.5 -122.284306,37.873878,10.5 -122.284571,37.873874,10.5 -122.284566,37.873663,10.5 -122.284301,37.873667,10.5</coordinates></LinearRing></outerBoundaryIs>
+    </Polygon>
+		</Placemark>
+		<Placemark>
+			<name>North Berkeley BART: Bridge 2 Walk-up C (3 st)</name>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Pre-Application<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Bridge 2 Walk-up C (3 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<styleUrl>#style_Pre_Application_parcel</styleUrl>
+			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs><LinearRing><coordinates>-122.283822,37.873675,10.5 -122.283827,37.873885,10.5 -122.284092,37.873881,10.5 -122.284087,37.873671,10.5 -122.283822,37.873675,10.5</coordinates></LinearRing></outerBoundaryIs>
+    </Polygon>
+		</Placemark>
+		<Placemark>
+			<name>North Berkeley BART: Avalon Walk-up A (3 st)</name>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Pre-Application<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Avalon Walk-up A (3 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<styleUrl>#style_Pre_Application_parcel</styleUrl>
+			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs><LinearRing><coordinates>-122.283357,37.873693,10.5 -122.283361,37.873881,10.5 -122.283599,37.873877,10.5 -122.283594,37.873689,10.5 -122.283357,37.873693,10.5</coordinates></LinearRing></outerBoundaryIs>
+    </Polygon>
+		</Placemark>
+		<Placemark>
+			<name>North Berkeley BART: Avalon Walk-up B (3 st)</name>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Pre-Application<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Avalon Walk-up B (3 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<styleUrl>#style_Pre_Application_parcel</styleUrl>
+			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs><LinearRing><coordinates>-122.284323,37.874029,10.5 -122.284328,37.874217,10.5 -122.284566,37.874213,10.5 -122.284561,37.874025,10.5 -122.284323,37.874029,10.5</coordinates></LinearRing></outerBoundaryIs>
+    </Polygon>
+		</Placemark>
+		<Placemark>
+			<name>North Berkeley BART: Avalon Walk-up C (3 st)</name>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Pre-Application<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Avalon Walk-up C (3 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<styleUrl>#style_Pre_Application_parcel</styleUrl>
+			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs><LinearRing><coordinates>-122.283844,37.874036,10.5 -122.283849,37.874224,10.5 -122.284086,37.874221,10.5 -122.284082,37.874032,10.5 -122.283844,37.874036,10.5</coordinates></LinearRing></outerBoundaryIs>
+    </Polygon>
+		</Placemark>
+		<Placemark>
+			<name>North Berkeley BART: Avalon Walk-up D (3 st)</name>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Pre-Application<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Avalon Walk-up D (3 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<styleUrl>#style_Pre_Application_parcel</styleUrl>
+			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs><LinearRing><coordinates>-122.283365,37.874043,10.5 -122.283370,37.874232,10.5 -122.283607,37.874228,10.5 -122.283603,37.874040,10.5 -122.283365,37.874043,10.5</coordinates></LinearRing></outerBoundaryIs>
+    </Polygon>
+		</Placemark>
+		<Placemark>
+			<name>North Berkeley BART: Avalon Walk-up E (3 st)</name>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Pre-Application<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Avalon Walk-up E (3 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<styleUrl>#style_Pre_Application_parcel</styleUrl>
+			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs><LinearRing><coordinates>-122.284332,37.874379,10.5 -122.284569,37.874376,10.5 -122.284573,37.874512,10.5 -122.284336,37.874543,10.5 -122.284332,37.874379,10.5</coordinates></LinearRing></outerBoundaryIs>
+    </Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Ashby BART: Adeline Tower (8 st)</name>
+			<description><![CDATA[<b>Ashby BART</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Pre-Application<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — Ashby BART: Adeline Tower (8 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<styleUrl>#style_Pre_Application_parcel</styleUrl>
+			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs><LinearRing><coordinates>-122.270321,37.852517,28.0 -122.270320,37.852482,28.0 -122.270463,37.852107,28.0 -122.270720,37.852103,28.0 -122.270764,37.852510,28.0 -122.270321,37.852517,28.0</coordinates></LinearRing></outerBoundaryIs>
+    </Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Ashby BART: Building B (7 st)</name>
+			<description><![CDATA[<b>Ashby BART</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Pre-Application<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — Ashby BART: Building B (7 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<styleUrl>#style_Pre_Application_parcel</styleUrl>
+			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs><LinearRing><coordinates>-122.2699198992708,37.8527151103640,24.5 -122.2699288992708,37.8531211103640,24.5 -122.2704408992708,37.8531131103640,24.5 -122.2704318992708,37.8527071103640,24.5 -122.2699198992708,37.8527151103640,24.5</coordinates></LinearRing></outerBoundaryIs>
+    </Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Ashby BART: MLK Building C (6 st)</name>
+			<description><![CDATA[<b>Ashby BART</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Pre-Application<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — Ashby BART: MLK Building C (6 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<styleUrl>#style_Pre_Application_parcel</styleUrl>
+			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs><LinearRing><coordinates>-122.270338,37.853360,21.0 -122.270329,37.852947,21.0 -122.270811,37.852940,21.0 -122.270856,37.853352,21.0 -122.270338,37.853360,21.0</coordinates></LinearRing></outerBoundaryIs>
+    </Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Ashby BART: MLK Building D (6 st)</name>
+			<description><![CDATA[<b>Ashby BART</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Pre-Application<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — Ashby BART: MLK Building D (6 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<styleUrl>#style_Pre_Application_parcel</styleUrl>
+			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs><LinearRing><coordinates>-122.270178,37.852950,21.0 -122.270187,37.853362,21.0 -122.269985,37.853365,21.0 -122.270142,37.852950,21.0 -122.270178,37.852950,21.0</coordinates></LinearRing></outerBoundaryIs>
+    </Polygon>
+		</Placemark>
+		<Placemark>
+			<name>Ashby BART: MLK Building E (6 st)</name>
+			<description><![CDATA[<b>Ashby BART</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Pre-Application<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — Ashby BART: MLK Building E (6 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<styleUrl>#style_Pre_Application_parcel</styleUrl>
+			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
+      <outerBoundaryIs><LinearRing><coordinates>-122.270357,37.853794,21.0 -122.270366,37.854194,21.0 -122.270870,37.854186,21.0 -122.270861,37.853786,21.0 -122.270357,37.853794,21.0</coordinates></LinearRing></outerBoundaryIs>
+    </Polygon>
+		</Placemark>
 </Document>
 </kml>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+<Document>
+	<name>University Control Points DERIVED · 10 points · W->E</name>
+	<Style id="s_ylw-pushpin"><IconStyle><scale>1.1</scale>
+		<Icon><href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href></Icon></IconStyle></Style>
+	<StyleMap id="m_ylw-pushpin">
+		<Pair><key>normal</key><styleUrl>#s_ylw-pushpin</styleUrl></Pair>
+		<Pair><key>highlight</key><styleUrl>#s_ylw-pushpin</styleUrl></Pair></StyleMap>
+	<Folder><name>University Control Points</name><open>1</open>
+	<Placemark>
+		<name>University-CP01</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing University
+(east-west corridor). Accurate to a few metres — check in Earth Pro
+before a final recording, or draw a Path instead, which needed no correction on Shattuck.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2925341635511,37.8691644321616,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>University-CP02</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing University
+(east-west corridor). Accurate to a few metres — check in Earth Pro
+before a final recording, or draw a Path instead, which needed no correction on Shattuck.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2905341635511,37.8693162133562,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>University-CP03</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing University
+(east-west corridor). Accurate to a few metres — check in Earth Pro
+before a final recording, or draw a Path instead, which needed no correction on Shattuck.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2865341635512,37.8698318426229,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>University-CP04</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing University
+(east-west corridor). Accurate to a few metres — check in Earth Pro
+before a final recording, or draw a Path instead, which needed no correction on Shattuck.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2817341635512,37.8705060907943,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>University-CP05</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing University
+(east-west corridor). Accurate to a few metres — check in Earth Pro
+before a final recording, or draw a Path instead, which needed no correction on Shattuck.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2801341635512,37.8706438516473,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>University-CP06</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing University
+(east-west corridor). Accurate to a few metres — check in Earth Pro
+before a final recording, or draw a Path instead, which needed no correction on Shattuck.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2781341635512,37.8709091213817,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>University-CP07</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing University
+(east-west corridor). Accurate to a few metres — check in Earth Pro
+before a final recording, or draw a Path instead, which needed no correction on Shattuck.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2765341635512,37.8710766544151,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>University-CP08</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing University
+(east-west corridor). Accurate to a few metres — check in Earth Pro
+before a final recording, or draw a Path instead, which needed no correction on Shattuck.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2745341635512,37.8713512311891,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>University-CP09</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing University
+(east-west corridor). Accurate to a few metres — check in Earth Pro
+before a final recording, or draw a Path instead, which needed no correction on Shattuck.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2721341635512,37.8716703226188,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>University-CP10</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing University
+(east-west corridor). Accurate to a few metres — check in Earth Pro
+before a final recording, or draw a Path instead, which needed no correction on Shattuck.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2685341635512,37.8719122024800,0</coordinates></Point>
+	</Placemark>
+	</Folder>
+</Document>
+</kml>

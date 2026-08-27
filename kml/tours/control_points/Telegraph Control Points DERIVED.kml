@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+<Document>
+	<name>Telegraph Control Points DERIVED · 10 points · S->N</name>
+	<description><![CDATA[Derived from county parcel geometry, no Google Earth required.
+Flight order is S->N — the order of these placemarks IS the flight order.]]></description>
+	<Style id="s_ylw-pushpin"><IconStyle><scale>1.1</scale>
+		<Icon><href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href></Icon></IconStyle></Style>
+	<StyleMap id="m_ylw-pushpin">
+		<Pair><key>normal</key><styleUrl>#s_ylw-pushpin</styleUrl></Pair>
+		<Pair><key>highlight</key><styleUrl>#s_ylw-pushpin</styleUrl></Pair></StyleMap>
+	<Folder><name>Telegraph Control Points</name><open>1</open>
+	<Placemark>
+		<name>Telegraph-CP01</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing Telegraph
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2601020157110,37.8528750000000,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>Telegraph-CP02</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing Telegraph
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2600458059970,37.8535750000000,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>Telegraph-CP03</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing Telegraph
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2598805739110,37.8553249999999,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>Telegraph-CP04</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing Telegraph
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2597477234070,37.8563749999999,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>Telegraph-CP05</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing Telegraph
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2594195562960,37.8581249999999,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>Telegraph-CP06</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing Telegraph
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2591514349595,37.8602249999999,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>Telegraph-CP07</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing Telegraph
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2586723424875,37.8637249999999,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>Telegraph-CP08</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing Telegraph
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2586545892775,37.8661749999999,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>Telegraph-CP09</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing Telegraph
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2588750843945,37.8672249999999,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>Telegraph-CP10</name>
+		<description><![CDATA[DERIVED from the gap between the parcel rows facing Telegraph
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2590366475080,37.8682749999998,0</coordinates></Point>
+	</Placemark>
+	</Folder>
+</Document>
+</kml>

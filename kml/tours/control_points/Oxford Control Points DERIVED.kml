@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+<Document>
+	<name>Oxford Control Points DERIVED · 6 points · N->S</name>
+	<Style id="s_ylw-pushpin"><IconStyle><scale>1.1</scale>
+		<Icon><href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href></Icon></IconStyle></Style>
+	<StyleMap id="m_ylw-pushpin">
+		<Pair><key>normal</key><styleUrl>#s_ylw-pushpin</styleUrl></Pair>
+		<Pair><key>highlight</key><styleUrl>#s_ylw-pushpin</styleUrl></Pair></StyleMap>
+	<Folder><name>Oxford Control Points</name><open>1</open>
+	<Placemark>
+		<name>Oxford-CP01</name>
+		<description><![CDATA[Derived from the median position of the housing fronting Oxford.
+Approximate -- offset from the true centreline by roughly half a lot. Drag onto the roadway in
+Earth Pro, or draw a Path instead (Shattuck's hand-drawn path needed no correction).]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2686179500000,37.8871512950000,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>Oxford-CP02</name>
+		<description><![CDATA[Derived from the median position of the housing fronting Oxford.
+Approximate -- offset from the true centreline by roughly half a lot. Drag onto the roadway in
+Earth Pro, or draw a Path instead (Shattuck's hand-drawn path needed no correction).]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2675484500000,37.8826483550000,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>Oxford-CP03</name>
+		<description><![CDATA[Derived from the median position of the housing fronting Oxford.
+Approximate -- offset from the true centreline by roughly half a lot. Drag onto the roadway in
+Earth Pro, or draw a Path instead (Shattuck's hand-drawn path needed no correction).]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2663716800000,37.8781454150000,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>Oxford-CP04</name>
+		<description><![CDATA[Derived from the median position of the housing fronting Oxford.
+Approximate -- offset from the true centreline by roughly half a lot. Drag onto the roadway in
+Earth Pro, or draw a Path instead (Shattuck's hand-drawn path needed no correction).]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2662178300000,37.8758939450000,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>Oxford-CP05</name>
+		<description><![CDATA[Derived from the median position of the housing fronting Oxford.
+Approximate -- offset from the true centreline by roughly half a lot. Drag onto the roadway in
+Earth Pro, or draw a Path instead (Shattuck's hand-drawn path needed no correction).]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2660590208378,37.8736424750000,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>Oxford-CP06</name>
+		<description><![CDATA[Derived from the median position of the housing fronting Oxford.
+Approximate -- offset from the true centreline by roughly half a lot. Drag onto the roadway in
+Earth Pro, or draw a Path instead (Shattuck's hand-drawn path needed no correction).]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2660000000000,37.8713910050000,0</coordinates></Point>
+	</Placemark>
+	</Folder>
+</Document>
+</kml>

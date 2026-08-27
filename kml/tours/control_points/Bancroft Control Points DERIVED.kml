@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+<Document>
+	<name>Bancroft Control Points DERIVED · 8 points · W->E</name>
+	<Style id="s_ylw-pushpin"><IconStyle><scale>1.1</scale>
+		<Icon><href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href></Icon></IconStyle></Style>
+	<StyleMap id="m_ylw-pushpin">
+		<Pair><key>normal</key><styleUrl>#s_ylw-pushpin</styleUrl></Pair>
+		<Pair><key>highlight</key><styleUrl>#s_ylw-pushpin</styleUrl></Pair></StyleMap>
+	<Folder><name>Bancroft Control Points</name><open>1</open>
+	<Placemark>
+		<name>Bancroft-CP01</name>
+		<description><![CDATA[Derived from the median position of the housing fronting Bancroft.
+Approximate -- offset from the true centreline by roughly half a lot. Drag onto the roadway in
+Earth Pro, or draw a Path instead (Shattuck's hand-drawn path needed no correction).]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2937535724660,37.8640284200000,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>Bancroft-CP02</name>
+		<description><![CDATA[Derived from the median position of the housing fronting Bancroft.
+Approximate -- offset from the true centreline by roughly half a lot. Drag onto the roadway in
+Earth Pro, or draw a Path instead (Shattuck's hand-drawn path needed no correction).]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2896675132615,37.8646501400000,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>Bancroft-CP03</name>
+		<description><![CDATA[Derived from the median position of the housing fronting Bancroft.
+Approximate -- offset from the true centreline by roughly half a lot. Drag onto the roadway in
+Earth Pro, or draw a Path instead (Shattuck's hand-drawn path needed no correction).]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2855814540570,37.8649159700000,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>Bancroft-CP04</name>
+		<description><![CDATA[Derived from the median position of the housing fronting Bancroft.
+Approximate -- offset from the true centreline by roughly half a lot. Drag onto the roadway in
+Earth Pro, or draw a Path instead (Shattuck's hand-drawn path needed no correction).]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2814953948524,37.8660153200000,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>Bancroft-CP05</name>
+		<description><![CDATA[Derived from the median position of the housing fronting Bancroft.
+Approximate -- offset from the true centreline by roughly half a lot. Drag onto the roadway in
+Earth Pro, or draw a Path instead (Shattuck's hand-drawn path needed no correction).]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2692372172388,37.8672308471615,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>Bancroft-CP06</name>
+		<description><![CDATA[Derived from the median position of the housing fronting Bancroft.
+Approximate -- offset from the true centreline by roughly half a lot. Drag onto the roadway in
+Earth Pro, or draw a Path instead (Shattuck's hand-drawn path needed no correction).]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2651511580343,37.8675680100000,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>Bancroft-CP07</name>
+		<description><![CDATA[Derived from the median position of the housing fronting Bancroft.
+Approximate -- offset from the true centreline by roughly half a lot. Drag onto the roadway in
+Earth Pro, or draw a Path instead (Shattuck's hand-drawn path needed no correction).]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2610650988298,37.8683854100000,0</coordinates></Point>
+	</Placemark>
+	<Placemark>
+		<name>Bancroft-CP08</name>
+		<description><![CDATA[Derived from the median position of the housing fronting Bancroft.
+Approximate -- offset from the true centreline by roughly half a lot. Drag onto the roadway in
+Earth Pro, or draw a Path instead (Shattuck's hand-drawn path needed no correction).]]></description>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Point><gx:drawOrder>1</gx:drawOrder><coordinates>-122.2569790396252,37.8686940500000,0</coordinates></Point>
+	</Placemark>
+	</Folder>
+</Document>
+</kml>

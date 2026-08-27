@@ -123,6 +123,10 @@ def repoint_catalog(sha: str) -> None:
         return
     raw = cat.read_text(encoding="utf-8")
     out = re.sub(r"geom-[0-9a-f]{12}", f"geom-{sha}", raw)
+    # the sha ALSO lives in its own field, which the path substitution above never touched --
+    # every entry claimed 5bb87b9b029c while its package path said something else. A catalog
+    # that contradicts itself is how the 404 went unnoticed for so long.
+    out = re.sub(r'("package_geometry_sha":\s*")[0-9a-f]{12}(")', rf"\g<1>{sha}\g<2>", out)
     entries = json.loads(out)
     entries = entries if isinstance(entries, list) else entries.get("tours", [])
     missing = [e["package"] for e in entries

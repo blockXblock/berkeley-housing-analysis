@@ -37,6 +37,12 @@ def main():
     ap.add_argument("--scale", type=float, required=True, help="LabelStyle scale; 1.0 = Earth default")
     ap.add_argument("--colour", default=None, help="KML aabbggrr; omit to leave colour alone")
     ap.add_argument("--file", default=GEOM)
+    ap.add_argument("--lift", type=float, default=0.05,
+                    help="raise each label's anchor above its own roof by max(3 m, roof*LIFT). "
+                         "THE LABELS FLICKER AT 0 (John, 2026-08-26): 171 of 174 anchors sat at EXACTLY the "
+                         "roof altitude, so the billboard is depth-tested against the coplanar roof face and "
+                         "flips in and out as the camera moves. Lifting it clear stops the z-fight. Pass 0 to "
+                         "disable.")
     ap.add_argument("--icon-scale", type=float, default=0.4,
                     help="IconStyle scale for the transparent marker; 0 disables the icon and, "
                          "as measured, breaks the label scaling")
@@ -68,12 +74,29 @@ def main():
         return f'<Style id="{sid}">{body}</Style>'
 
     out = re.sub(r'<Style id="([^"]+)">(.*?)</Style>', fix, g, flags=re.S)
+
+    lifted = 0
+    if a.lift:
+        def raise_anchor(m):
+            nonlocal lifted
+            pm = m.group(0)
+            po = re.search(r"<Polygon>.*?<coordinates>\s*(.*?)\s*</coordinates>", pm, re.S)
+            pt = re.search(r"(<Point><coordinates>)([^<]*)(</coordinates>)", pm)
+            if not (po and pt):
+                return pm
+            roof = max(float(t.split(",")[2]) for t in po.group(1).split())
+            lon, lat, _ = pt.group(2).split(",")
+            z = round(roof + max(3.0, roof * a.lift), 1)
+            lifted += 1
+            return pm.replace(pt.group(0), f"{pt.group(1)}{lon},{lat},{z}{pt.group(3)}")
+        out = re.sub(r"<Placemark>.*?</Placemark>", raise_anchor, out, flags=re.S)
     if out == g:
         print("no change")
         return
     open(a.file, "w", encoding="utf-8").write(out)
     print(f"{a.file}: LabelStyle scale {a.scale} on {added + updated} styles "
-          f"({added} added, {updated} updated); transparent icon at {a.icon_scale} on {iconed}")
+          f"({added} added, {updated} updated); transparent icon at {a.icon_scale} on {iconed}; "
+          f"label anchors lifted clear of the roof on {lifted}")
     import shutil
     src = "kml/tours/labels/transparent-1x1.png"
     dst = os.path.join(os.path.dirname(a.file) or ".", "transparent-1x1.png")

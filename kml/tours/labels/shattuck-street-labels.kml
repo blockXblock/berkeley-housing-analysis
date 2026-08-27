@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+	<name>Shattuck street labels · scale 2.5 · 20 m</name>
+	<open>1</open>
+	<Style id="cross"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>2.5</scale><color>ffffffff</color></LabelStyle></Style>
+	<Style id="own"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>3.125</scale><color>ffffffff</color></LabelStyle></Style>
+	<Placemark><name>Shattuck</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2662397646028,37.85309648771825,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Shattuck</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2669248619521,37.8585440871279,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Shattuck</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2679779801877,37.8689598973571,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Shattuck</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2693802027764,37.88079796570526,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Shattuck</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2712972035455,37.88547548247935,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Shattuck</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2724199130695,37.88902564536743,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Woolsey St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2662397646028,37.85309648771825,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Prince St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2662397646028,37.85309648771825,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Essex St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26630814505899,37.853640219690284,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Emerson St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26644239840273,37.85470774452726,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Ashby Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26654238200062,37.8555027710872,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Oregon St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26684787766432,37.85793194118811,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Ward St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26702735907615,37.859308105788806,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Carleton St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2671391256208,37.861557950196,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Parker St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26715948967853,37.861737640079376,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Blake St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2673647658861,37.863548971508976,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Dwight Way</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26739192107357,37.86378858546672,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Haste St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26748854982598,37.864641225421146,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Channing Way</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26764538996504,37.86602516307593,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Durant Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26775701470862,37.8670101257697,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Bancroft Way</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2678464075598,37.867798917041924,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Kittredge St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26790343536581,37.86830212322735,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Allston Way</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2679681798172,37.86966051000045,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Center St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2682057852421,37.87052180314162,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Addison St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26829364448761,37.87129057222345,20.0</coordinates></Point></Placemark>
+	<Placemark><name>University Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26842765596538,37.87246317369682,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Berkeley Way</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26850029105941,37.87309873133477,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Hearst Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2686247774484,37.874187988206984,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Delaware St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26867610244202,37.87463708230051,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Virginia St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26891752519435,37.87674953326214,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Cedar St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26913506322131,37.878652992690704,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Vine St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.26929120470898,37.88001923192279,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Rose St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.27059126137476,37.882097697738125,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Berryman St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2710667900778,37.8838268585084,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Eunice St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.27147623878444,37.88580022168005,20.0</coordinates></Point></Placemark>
+</Document>
+</kml>

@@ -29,13 +29,34 @@ import hashlib
 import json
 import pathlib
 import re
+import shutil
 import sys
+import zipfile
 from xml.dom import minidom
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 GEOMETRY = ROOT / "kml" / "geometry" / "geometry.kml"
 OUTDIR = ROOT / "kml" / "tours" / "packages"
 GX_NS = 'xmlns:gx="http://www.google.com/kml/ext/2.2"'
+ICON = ROOT / "kml" / "tours" / "labels" / "transparent-1x1.png"
+
+
+def write_kmz(kml_path: pathlib.Path) -> pathlib.Path:
+    """A .kmz twin of the package, with the label icon zipped inside.
+
+    THE LABELS NEED AN IMAGE. geometry.kml's styles point at transparent-1x1.png -- without it
+    Earth ignores the LabelStyle scale (measured 2026-08-26: a ladder of seven settings flown
+    down Shattuck; scale only bites when the IconStyle has a real image). The href is RELATIVE,
+    and Earth can fail to resolve a sibling file and fall back to a NETWORK fetch, which is what
+    John hit. A KMZ resolves it internally, so the .kmz is the copy to open and to publish; the
+    .kml stays for diffing and for anything that reads the package as text.
+    """
+    dest = kml_path.with_suffix(".kmz")
+    with zipfile.ZipFile(dest, "w", zipfile.ZIP_DEFLATED) as z:
+        z.writestr("doc.kml", kml_path.read_text(encoding="utf-8"))
+        if ICON.exists():
+            z.write(ICON, ICON.name)
+    return dest
 
 
 def extract_tour(tour_path: pathlib.Path) -> str:
@@ -79,6 +100,10 @@ def build(tour_path: pathlib.Path) -> pathlib.Path:
     OUTDIR.mkdir(parents=True, exist_ok=True)
     dest = OUTDIR / f"{tour_path.stem}__geom-{sha}.kml"
     dest.write_text(out, encoding="utf-8")
+    # the .kml twin needs the icon as a sibling; the .kmz carries its own copy
+    if ICON.exists() and not (OUTDIR / ICON.name).exists():
+        shutil.copy(ICON, OUTDIR / ICON.name)
+    write_kmz(dest)
     return dest
 
 

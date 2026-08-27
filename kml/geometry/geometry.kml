@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <Document>
-	<name>Berkeley Housing Geometry · 2026-08-26 · 196 buildings · geom-7acb5da80306</name>
+	<name>Berkeley Housing Geometry · 2026-08-26 · 196 buildings · geom-3378dd2b2d20</name>
 	<visibility>0</visibility>
 	<open>1</open>
 	<description>177 housing projects. Heights shown as stories × 3.5m. Generated 2026-05-03.</description>
@@ -15,7 +15,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Application_Submitted_parcel0">
 		<Pair>
@@ -46,7 +47,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Application_Submitted_parcel3">
 		<LineStyle>
@@ -57,7 +59,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Application_Submitted_parcel40">
 		<Pair>
@@ -78,7 +81,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Application_Submitted_parcel42">
 		<LineStyle>
@@ -89,7 +93,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Application_Submitted_parcel48">
 		<LineStyle>
@@ -100,7 +105,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Application_Submitted_parcel43">
 		<Pair>
@@ -121,7 +127,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Application_Submitted_parcel45">
 		<LineStyle>
@@ -132,7 +139,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Application_Submitted_parcel46">
 		<LineStyle>
@@ -143,7 +151,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Application_Submitted_parcel4">
 		<LineStyle>
@@ -154,7 +163,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Application_Submitted_parcel47">
 		<Pair>
@@ -175,7 +185,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Application_Submitted_synthetic">
 		<LineStyle>
@@ -185,7 +196,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Completed_parcel">
 		<Pair>
@@ -226,7 +238,8 @@
 			<color>80e800cd</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Completed_parcel08">
 		<LineStyle>
@@ -237,7 +250,8 @@
 			<color>8053c800</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Completed_parcel01">
 		<LineStyle>
@@ -248,7 +262,8 @@
 			<color>80a5328f</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Completed_parcel02">
 		<LineStyle>
@@ -259,7 +274,8 @@
 			<color>80e800cd</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Completed_parcel05">
 		<LineStyle>
@@ -270,7 +286,8 @@
 			<color>8053c800</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Completed_parcel06">
 		<LineStyle>
@@ -281,7 +298,8 @@
 			<color>80a5328f</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Completed_parcel0">
 		<LineStyle>
@@ -292,7 +310,8 @@
 			<color>8053c800</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Completed_parcel07">
 		<Pair>
@@ -323,7 +342,8 @@
 			<color>8053c800</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Completed_parcel3">
 		<LineStyle>
@@ -334,7 +354,8 @@
 			<color>8053c800</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Completed_parcel4">
 		<LineStyle>
@@ -345,7 +366,8 @@
 			<color>8053c800</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Completed_parcel5">
 		<LineStyle>
@@ -356,7 +378,8 @@
 			<color>8053c800</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Completed_synthetic">
 		<LineStyle>
@@ -366,7 +389,8 @@
 			<color>8053c800</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Completed_synthetic0">
 		<LineStyle>
@@ -376,7 +400,8 @@
 			<color>8053c800</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Completed_synthetic1">
 		<Pair>
@@ -407,7 +432,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Decision_Pending_parcel00">
 		<Pair>
@@ -438,7 +464,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Decision_Pending_parcel104">
 		<LineStyle>
@@ -449,7 +476,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Decision_Pending_parcel101">
 		<Pair>
@@ -470,7 +498,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Decision_Pending_parcel103">
 		<Pair>
@@ -491,7 +520,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Decision_Pending_parcel10">
 		<LineStyle>
@@ -502,7 +532,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Decision_Pending_parcel1000">
 		<LineStyle>
@@ -513,7 +544,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Decision_Pending_parcel11">
 		<LineStyle>
@@ -524,7 +556,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Decision_Pending_parcel12">
 		<LineStyle>
@@ -535,7 +568,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Decision_Pending_parcel2">
 		<LineStyle>
@@ -546,7 +580,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Decision_Pending_parcel3">
 		<LineStyle>
@@ -557,7 +592,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_footprint">
 		<LineStyle>
@@ -568,7 +604,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_footprint0">
 		<LineStyle>
@@ -579,7 +616,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_footprint00">
 		<LineStyle>
@@ -590,7 +628,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Entitled_footprint1">
 		<Pair>
@@ -621,7 +660,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_footprint20">
 		<LineStyle>
@@ -632,7 +672,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_parcel">
 		<LineStyle>
@@ -643,7 +684,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_parcel0">
 		<LineStyle>
@@ -654,7 +696,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Entitled_parcel1">
 		<Pair>
@@ -685,7 +728,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_parcel4">
 		<LineStyle>
@@ -696,7 +740,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Entitled_parcel5">
 		<Pair>
@@ -717,7 +762,8 @@
 			<color>590080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_parcel60">
 		<LineStyle>
@@ -728,7 +774,8 @@
 			<color>590080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_parcel61">
 		<LineStyle>
@@ -739,7 +786,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Entitled_parcel61014">
 		<Pair>
@@ -760,7 +808,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_parcel6106">
 		<LineStyle>
@@ -771,7 +820,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_parcel61010">
 		<LineStyle>
@@ -782,7 +832,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_parcel6108">
 		<LineStyle>
@@ -793,7 +844,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_parcel6104">
 		<LineStyle>
@@ -804,7 +856,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_parcel6107">
 		<LineStyle>
@@ -815,7 +868,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Entitled_parcel61011">
 		<Pair>
@@ -846,7 +900,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Entitled_parcel6105">
 		<Pair>
@@ -867,7 +922,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_parcel6100">
 		<LineStyle>
@@ -878,7 +934,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Entitled_parcel61012">
 		<Pair>
@@ -899,7 +956,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_parcel6103">
 		<LineStyle>
@@ -910,7 +968,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_parcel611">
 		<LineStyle>
@@ -921,7 +980,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Entitled_parcel612">
 		<Pair>
@@ -942,7 +1002,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_parcel614">
 		<LineStyle>
@@ -953,7 +1014,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_parcel615">
 		<LineStyle>
@@ -964,7 +1026,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_parcel616">
 		<LineStyle>
@@ -975,7 +1038,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Entitled_parcel617">
 		<Pair>
@@ -1016,7 +1080,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_parcel8">
 		<LineStyle>
@@ -1027,7 +1092,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Entitled_synthetic0">
 		<Pair>
@@ -1047,7 +1113,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_synthetic8">
 		<LineStyle>
@@ -1057,7 +1124,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_synthetic7">
 		<LineStyle>
@@ -1067,7 +1135,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Entitled_synthetic6">
 		<Pair>
@@ -1087,7 +1156,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_synthetic">
 		<LineStyle>
@@ -1097,7 +1167,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Entitled_synthetic2">
 		<LineStyle>
@@ -1107,7 +1178,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Entitled_synthetic1">
 		<Pair>
@@ -1127,7 +1199,8 @@
 			<color>800080ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel">
 		<Pair>
@@ -1148,7 +1221,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel1">
 		<LineStyle>
@@ -1159,7 +1233,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel10">
 		<LineStyle>
@@ -1170,7 +1245,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel11">
 		<LineStyle>
@@ -1181,7 +1257,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel12">
 		<Pair>
@@ -1202,7 +1279,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel14">
 		<LineStyle>
@@ -1213,7 +1291,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel15">
 		<LineStyle>
@@ -1224,7 +1303,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel16">
 		<LineStyle>
@@ -1235,7 +1315,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel17">
 		<LineStyle>
@@ -1246,7 +1327,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel2">
 		<Pair>
@@ -1267,7 +1349,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel4">
 		<LineStyle>
@@ -1278,7 +1361,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel5">
 		<LineStyle>
@@ -1289,7 +1373,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel50">
 		<Pair>
@@ -1310,7 +1395,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel510">
 		<Pair>
@@ -1331,7 +1417,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel512">
 		<Pair>
@@ -1352,7 +1439,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel514">
 		<LineStyle>
@@ -1363,7 +1451,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel515">
 		<Pair>
@@ -1384,7 +1473,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel517">
 		<LineStyle>
@@ -1395,7 +1485,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel52">
 		<LineStyle>
@@ -1406,7 +1497,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel53">
 		<LineStyle>
@@ -1417,7 +1509,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel54">
 		<Pair>
@@ -1448,7 +1541,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel57">
 		<LineStyle>
@@ -1459,7 +1553,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel58">
 		<LineStyle>
@@ -1470,7 +1565,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel580">
 		<Pair>
@@ -1491,7 +1587,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel5810">
 		<Pair>
@@ -1512,7 +1609,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel5812">
 		<LineStyle>
@@ -1523,7 +1621,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel5813">
 		<LineStyle>
@@ -1534,7 +1633,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel5814">
 		<LineStyle>
@@ -1545,7 +1645,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel5815">
 		<LineStyle>
@@ -1556,7 +1657,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel5816">
 		<LineStyle>
@@ -1567,7 +1669,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel5817">
 		<Pair>
@@ -1598,7 +1701,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel581825">
 		<LineStyle>
@@ -1609,7 +1713,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel581834">
 		<LineStyle>
@@ -1620,7 +1725,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel581841">
 		<LineStyle>
@@ -1631,7 +1737,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel581826">
 		<Pair>
@@ -1652,7 +1759,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel581814">
 		<Pair>
@@ -1693,7 +1801,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel5818">
 		<Pair>
@@ -1734,7 +1843,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel581824">
 		<LineStyle>
@@ -1745,7 +1855,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel581817">
 		<LineStyle>
@@ -1756,7 +1867,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel581811">
 		<LineStyle>
@@ -1767,7 +1879,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel581828">
 		<Pair>
@@ -1798,7 +1911,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel581840">
 		<LineStyle>
@@ -1809,7 +1923,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel581839">
 		<LineStyle>
@@ -1820,7 +1935,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel58184">
 		<LineStyle>
@@ -1831,7 +1947,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel58187">
 		<LineStyle>
@@ -1842,7 +1959,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel581830">
 		<LineStyle>
@@ -1853,7 +1971,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel581819">
 		<LineStyle>
@@ -1864,7 +1983,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel581831">
 		<Pair>
@@ -1885,7 +2005,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel581832">
 		<Pair>
@@ -1906,7 +2027,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel58186">
 		<LineStyle>
@@ -1917,7 +2039,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel581822">
 		<LineStyle>
@@ -1928,7 +2051,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel581816">
 		<LineStyle>
@@ -1939,7 +2063,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel581838">
 		<Pair>
@@ -1970,7 +2095,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel581820">
 		<LineStyle>
@@ -1981,7 +2107,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel58181">
 		<LineStyle>
@@ -1992,7 +2119,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel581823">
 		<LineStyle>
@@ -2003,7 +2131,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel58183">
 		<LineStyle>
@@ -2014,7 +2143,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel58182">
 		<LineStyle>
@@ -2025,7 +2155,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel581833">
 		<LineStyle>
@@ -2036,7 +2167,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel5819">
 		<Pair>
@@ -2057,7 +2189,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel5820">
 		<Pair>
@@ -2078,7 +2211,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel5822">
 		<LineStyle>
@@ -2089,7 +2223,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel5823">
 		<LineStyle>
@@ -2100,7 +2235,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel5824">
 		<Pair>
@@ -2121,7 +2257,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel5826">
 		<LineStyle>
@@ -2132,7 +2269,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel5827">
 		<Pair>
@@ -2153,7 +2291,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel5829">
 		<Pair>
@@ -2174,7 +2313,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel584">
 		<Pair>
@@ -2205,7 +2345,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel587">
 		<LineStyle>
@@ -2216,7 +2357,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel588">
 		<LineStyle>
@@ -2227,7 +2369,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel589">
 		<LineStyle>
@@ -2238,7 +2381,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_parcel59">
 		<LineStyle>
@@ -2249,7 +2393,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel6">
 		<Pair>
@@ -2280,7 +2425,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_parcel9">
 		<Pair>
@@ -2300,7 +2446,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_synthetic0">
 		<LineStyle>
@@ -2310,7 +2457,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_synthetic00">
 		<Pair>
@@ -2340,7 +2488,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_In_Review_synthetic2">
 		<Pair>
@@ -2360,7 +2509,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_synthetic3">
 		<LineStyle>
@@ -2370,7 +2520,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_synthetic4">
 		<LineStyle>
@@ -2380,7 +2531,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_In_Review_synthetic5">
 		<LineStyle>
@@ -2390,7 +2542,8 @@
 			<color>8000ffff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Permits_Active_parcel2">
 		<LineStyle>
@@ -2401,7 +2554,8 @@
 			<color>80ffff00</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Permits_Active_parcel1">
 		<Pair>
@@ -2422,7 +2576,8 @@
 			<color>80ffff00</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Permits_Active_parcel4">
 		<LineStyle>
@@ -2433,7 +2588,8 @@
 			<color>800880fd</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Permits_Active_parcel3">
 		<LineStyle>
@@ -2444,7 +2600,8 @@
 			<color>800880fd</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Permits_Active_parcel">
 		<Pair>
@@ -2465,7 +2622,8 @@
 			<color>80ffff00</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Pre_Application_parcel">
 		<LineStyle>
@@ -2476,7 +2634,8 @@
 			<color>80c0c0c0</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Stalled_parcel">
 		<LineStyle>
@@ -2487,7 +2646,8 @@
 			<color>800000ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_UC_Project_footprint">
 		<LineStyle>
@@ -2498,7 +2658,8 @@
 			<color>80ff00aa</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_UC_Project_footprint0">
 		<LineStyle>
@@ -2509,7 +2670,8 @@
 			<color>80ff00aa</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_UC_Project_footprint00">
 		<LineStyle>
@@ -2520,7 +2682,8 @@
 			<color>80ff00aa</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_UC_Project_footprint000">
 		<LineStyle>
@@ -2531,7 +2694,8 @@
 			<color>80ff00aa</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_UC_Project_footprint1">
 		<Pair>
@@ -2592,7 +2756,8 @@
 			<color>80ff00aa</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_UC_Project_footprint32">
 		<LineStyle>
@@ -2603,7 +2768,8 @@
 			<color>80ff00aa</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_UC_Project_footprint31">
 		<Pair>
@@ -2624,7 +2790,8 @@
 			<color>80ff00aa</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_UC_Project_footprint30">
 		<Pair>
@@ -2645,7 +2812,8 @@
 			<color>80ff00aa</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_UC_Project_footprint301">
 		<LineStyle>
@@ -2656,7 +2824,8 @@
 			<color>80ff00aa</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_UC_Project_footprint300">
 		<LineStyle>
@@ -2667,7 +2836,8 @@
 			<color>80ff00aa</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_UC_Project_footprint40">
 		<LineStyle>
@@ -2678,7 +2848,8 @@
 			<color>80ff00aa</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_UC_Project_footprint4">
 		<LineStyle>
@@ -2689,7 +2860,8 @@
 			<color>80ff00aa</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_UC_Project_footprint50">
 		<LineStyle>
@@ -2700,7 +2872,8 @@
 			<color>80ff00aa</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_UC_Project_footprint5">
 		<LineStyle>
@@ -2711,7 +2884,8 @@
 			<color>80ff00aa</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Under_Construction_parcel">
 		<LineStyle>
@@ -2722,7 +2896,8 @@
 			<color>80ff6229</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Under_Construction_parcel0">
 		<Pair>
@@ -2743,7 +2918,8 @@
 			<color>80ff6229</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Under_Construction_parcel22">
 		<LineStyle>
@@ -2754,7 +2930,8 @@
 			<color>80ff6229</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Under_Construction_parcel20">
 		<LineStyle>
@@ -2765,7 +2942,8 @@
 			<color>80ff6229</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<StyleMap id="style_Under_Construction_parcel2">
 		<Pair>
@@ -2786,7 +2964,8 @@
 			<color>80ff6229</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Style id="style_Withdrawn_parcel">
 		<LineStyle>
@@ -2797,7 +2976,8 @@
 			<color>800000ff</color>
 		</PolyStyle>
 	
-		<IconStyle><scale>0</scale></IconStyle>
+		<LabelStyle><scale>5.0</scale></LabelStyle>
+		<IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>
 	</Style>
 	<Folder>
 		<name>Housing Projects</name>
@@ -3043,15 +3223,15 @@
 		<Placemark>
 			<name>2920 Shattuck Ave · 242 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2920 SHATTUCK Ave</b><br/><b>Units:</b> 221<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 10<br/><b>Height:</b> 35.0m<br/><b>Status:</b> In Review<br/><i>Footprint 10,232 sf from the architect Tabulation Form (lot 19,586 x 52% coverage), 2026-08-23. Was the county PARCEL polygon (19,510 sf).</i>]]></description>
+			<description><![CDATA[<b>2920 SHATTUCK Ave</b><br/><b>Units:</b> 242<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 11<br/><b>Height:</b> 38.2m<br/><b>Status:</b> In Review<br/><i>All figures from the project's own Tabulation Form 1.E dated 09/22/2025 (documents 2162), PROPOSED column: 242 dwelling units, 11 stories, 125'-2" average AND maximum height = 38.2 m, footprint 10,232 sf, lot 19,586 sf, coverage 52%. FEET BEAT STOREYS x 3.5 where a form states a height, so 38.2 m, not 11 x 3.5. Moved 4.97 m EAST 2026-08-26: the polygon had been synthesised as a box from the AREA alone and sat 5.0 m west of the Shattuck frontage of APN 53-1590-5-1, floating behind the sidewalk. The 1.E states a FRONT YARD SETBACK of "VARIES; 0 to 2'", so the east face belongs on the property line. Was 10 storeys / 35.0 m and a stale 221-unit body against a 242 label.</i>]]></description>
 			<styleUrl>#style_In_Review_parcel512</styleUrl>
-			<MultiGeometry><Point><coordinates>-122.26691826590493,37.85641015329668,35.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
+			<MultiGeometry><Point><coordinates>-122.26686172008853,37.85641015329668,38.2</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2668474514399,37.8565630244853,35.0 -122.2670937739455,37.8565294974406,35.0 -122.2670431859252,37.8561433618196,35.0 -122.2667967283614,37.8561714195574,35.0 -122.2668474514399,37.8565630244853,35.0 
+							-122.2667909056235,37.8565630244853,38.2 -122.2670372281291,37.8565294974406,38.2 -122.2669866401088,37.8561433618196,38.2 -122.26674018254499,37.8561714195574,38.2 -122.2667909056235,37.8565630244853,38.2 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
@@ -3498,18 +3678,17 @@
 			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2036 Bancroft Way · 85 units · In Review</name>
+			<name>2036 Bancroft Way · 87 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2036 BANCROFT Way</b><br/><b>Units:</b> 85<br/><b>VLI Units:</b> 4<br/><b>Stories:</b> 8<br/><b>Height:</b> 25.9m<br/><b>Status:</b> In Review<br/><i>Footprint 11,610 sf = the NEW 8-storey tower on APN 055-1894-016 from the architect zoning tabulation (2025-10-02 plan set). Was 30,705 sf, the county parcel. NOTE: POSITION IS APPROXIMATE - the polygon sits on APN 055-1894-017-04, which retains an EXISTING 4-storey building (24,535 sf); the new tower belongs on APN -016, which reaches its 14,582 sf only after a lot line adjustment not yet recorded by the county. Area and height are correct; exact placement awaits the recorded LLA.</i>]]></description>
+			<description><![CDATA[<b>2036 BANCROFT Way</b><br/><b>Units:</b> 87<br/><b>VLI Units:</b> 4<br/><b>Stories:</b> 8<br/><b>Height:</b> 25.9m<br/><b>Status:</b> In Review<br/><i>Position MEASURED OFF SHEET A100 PROPOSED SITE PLAN (1"=10'-0") of the 2025-10-02 RESUB Entitlement Plan Set (documents 2253), not derived. Its key map dimensions the enlarged parcel directly: APN 55-1894-16 = <b>113'-1" along Bancroft x 130'-0" deep</b>, with 118'-10" remaining from its east edge to Shattuck Ave. Plan note 1: "A LOT LINE ADJUSTMENT FOR PARCELS (APN: 55-1894-16) &amp; (APN: 55-1894-17-4) WILL BE SUBMITTED FOR APPROVAL" — the tabulation books it as -016 growing 6,595 -&gt; 14,582 sf while -017-04 shrinks 37,696 -&gt; 29,709 sf (7,987 sf transfers, both sides matching exactly). Building placed to the sheet's dimensioned setbacks: <b>0' required on the east, (P) 7'-0" side setback on the west</b>, front 0'-0" per the tabulation, giving 32.3 x 33.4 m = 11,608 sf against the stated 11,610 and a 6.3 m rear gap against the drawing's 5'-0" minimum. West property line is -016's EXISTING line against 2028 Bancroft, unchanged by the adjustment. 8 storeys / 85 ft = 25.9 m. -017-04 retains the existing 4-storey 2300-2350 Shattuck building (office &amp; retail, HT 45'+/-, footprint 31,115 -&gt; 24,535 sf, height NO CHANGE). Units 87 per the plan set unit table (31 studio + 8 one-bed + 13 two-bed + 35 three-bed; 8 below-market-rate). SUPERSEDES a 30.8 x 35.0 m ring derived from lot area alone — right area, wrong shape — and before that a 11,636 sf box floating in the interior of -017-04, touching no street.</i>]]></description>
 			<styleUrl>#style_In_Review_parcel2</styleUrl>
-			<MultiGeometry><Point><coordinates>-122.2681596452802,37.86703076562448,25.9</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
+			<MultiGeometry><Point><coordinates>-122.26856926266572,37.86725848611434,25.9</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2680609926231,37.8668926566555,25.9 -122.2681066380746,37.8673328104564,25.9 -122.2683718583915,37.8673016727043,25.9 -122.2682893062682,37.8668622134526,25.9 -122.2680609926231,37.8668926566555,25.9 
-						</coordinates>
+							-122.26878039760649,37.86738096114307,25.9 -122.26841816252386,37.86743189846606,25.9 -122.26835812772495,37.8671360110856,25.9 -122.26872036280758,37.86708507376261,25.9 -122.26878039760649,37.86738096114307,25.9 </coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
 			</Polygon></MultiGeometry>
@@ -3634,15 +3813,15 @@
 		<Placemark>
 			<name>2955 Shattuck Ave · 74 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2955 SHATTUCK Ave</b><br/><b>Units:</b> 74<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 25.9m<br/><b>Status:</b> In Review<br/><i>Footprint 15,610 sf and height 8 storeys from the project's own Tabulation Form 1.E (2025-05-25), PROPOSED column: lot 16,968 sf x 92% coverage. CORRECTS AN EARLIER EDIT OF MINE THAT TOOK THE EXISTING COLUMN (51% -> 8,654 sf) from a plan set, when a 1.E was on R2 all along. The units row settles the column order beyond doubt: 0 existing, 74 proposed. Before either edit the polygon was a degenerate 1,113 sf sliver. Lot 16,968 sf exceeds the single county parcel (12,207 sf), so this is a multi-parcel site and the extent is approximate; area and height are the architect's own.</i><br/><i>Footprint 15,611 sf and 8 storeys / 85 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 15,611 sf at 28.0 m. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>2955 SHATTUCK Ave</b><br/><b>Units:</b> 74<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 25.9m<br/><b>Status:</b> In Review<br/><i>Footprint 15,610 sf and height 8 storeys from the project's own Tabulation Form 1.E (2025-05-25), PROPOSED column: lot 16,968 sf x 92% coverage. CORRECTS AN EARLIER EDIT OF MINE THAT TOOK THE EXISTING COLUMN (51% -> 8,654 sf) from a plan set, when a 1.E was on R2 all along. The units row settles the column order beyond doubt: 0 existing, 74 proposed. Before either edit the polygon was a degenerate 1,113 sf sliver. Lot 16,968 sf exceeds the single county parcel (12,207 sf), so this is a multi-parcel site and the extent is approximate; area and height are the architect's own. Moved 1.84 m EAST 2026-08-26: the footprint's WEST edge (its Shattuck frontage — 2955 is on the EAST side of the street) overhung the property line into the roadway. Site is TWO parcels, 53-1589-18-1 (2925 Shattuck, 12,235 sf) + 53-1589-19 (2921 Shattuck, 4,831 sf) = 17,066 sf against the 1.E's stated 16,968 sf lot; at 92% coverage the building nearly fills the site, so placement error shows up immediately as a street intrusion.</i><br/><i>Footprint 15,611 sf and 8 storeys / 85 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 15,611 sf at 28.0 m. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_In_Review_parcel581815</styleUrl>
-			<MultiGeometry><Point><coordinates>-122.26609817726565,37.85572309388094,25.9</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
+			<MultiGeometry><Point><coordinates>-122.2660772427984,37.85572309388094,25.9</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2660208487544,37.8558708753554,25.9 -122.2659945391208,37.8557532333461,25.9 -122.2660335942155,37.8557479892304,25.9 -122.2662171262612,37.8557227165703,25.9 -122.2661947144998,37.8556042457884,25.9 -122.2664564242844,37.8555715986178,25.9 -122.2665081863537,37.8559358021560,25.9 -122.2660492606473,37.8559946998889,25.9 -122.2660208487544,37.8558708753554,25.9 
+							-122.26599991428715,37.8558708753554,25.9 -122.26597360465355,37.8557532333461,25.9 -122.26601265974826,37.8557479892304,25.9 -122.26619619179395,37.8557227165703,25.9 -122.26617378003256,37.8556042457884,25.9 -122.26643548981716,37.8555715986178,25.9 -122.26648725188646,37.8559358021560,25.9 -122.26602832618006,37.8559946998889,25.9 -122.26599991428715,37.8558708753554,25.9 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>

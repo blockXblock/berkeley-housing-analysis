@@ -35,6 +35,10 @@ def stories_from_desc(desc):
     3-story') — the first figure is what's torn down. Only accept a figure in the CONSTRUCTION clause;
     demolition-only yields nothing. (Same trap as the 1.E existing|proposed columns, new costume.)"""
     d = str(desc or "")
+    # GUARD (3rd trap): strip bracketed provenance annotations — our own audit trail now lives inside
+    # v2 text and QUOTES the old wrong value ("[... Prior value was the placeholder (3.0) ...]"), which
+    # a naive parser re-learns as fact. Never read a story figure out of an annotation.
+    d = re.sub(r"\[[^\]]*\]", " ", d)
     # "(5) floors over (2) floors" podium notation is always construction -> sum
     m = re.search(r"\(?(\d+)\)?\s*floors?.*?over.*?\(?(\d+)\)?\s*floors?", d, re.I)
     if m:

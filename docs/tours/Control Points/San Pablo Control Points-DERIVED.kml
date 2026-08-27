@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>San Pablo Control Points-DERIVED.kml</name>
+	<StyleMap id="m_ylw-pushpin">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#s_ylw-pushpin1</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#s_ylw-pushpin5</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="m_ylw-pushpin0">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#s_ylw-pushpin7</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#s_ylw-pushpin7</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="m_ylw-pushpin1">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#s_ylw-pushpin3</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#s_ylw-pushpin4</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="m_ylw-pushpin2">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#s_ylw-pushpin6</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#s_ylw-pushpin2</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="m_ylw-pushpin3">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#s_ylw-pushpin</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#s_ylw-pushpin0</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="s_ylw-pushpin">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="s_ylw-pushpin0">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="s_ylw-pushpin1">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="s_ylw-pushpin2">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="s_ylw-pushpin3">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="s_ylw-pushpin4">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="s_ylw-pushpin5">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="s_ylw-pushpin6">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="s_ylw-pushpin7">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Folder>
+		<name>San Pablo Control Points</name>
+		<open>1</open>
+		<Placemark>
+			<name>SanPablo-CP01</name>
+			<description>DERIVED from the gap between the parcel rows facing San Pablo
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.</description>
+			<styleUrl>#m_ylw-pushpin3</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-122.2964028386927,37.88226805163902,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>SanPablo-CP02</name>
+			<description>DERIVED from the gap between the parcel rows facing San Pablo
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.</description>
+			<styleUrl>#m_ylw-pushpin1</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-122.2949623393998,37.87786890203066,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>SanPablo-CP03</name>
+			<description>DERIVED from the gap between the parcel rows facing San Pablo
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.</description>
+			<styleUrl>#m_ylw-pushpin0</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-122.2936640414055,37.8738249999998,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>SanPablo-CP04</name>
+			<description>DERIVED from the gap between the parcel rows facing San Pablo
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.</description>
+			<styleUrl>#m_ylw-pushpin0</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-122.2927460954675,37.8710249999998,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>SanPablo-CP05</name>
+			<description>DERIVED from the gap between the parcel rows facing San Pablo
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.</description>
+			<styleUrl>#m_ylw-pushpin</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-122.291141456602,37.8659570532667,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>SanPablo-CP06</name>
+			<description>DERIVED from the gap between the parcel rows facing San Pablo
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.</description>
+			<styleUrl>#m_ylw-pushpin0</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-122.2902738995795,37.8633249999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>SanPablo-CP07</name>
+			<description>DERIVED from the gap between the parcel rows facing San Pablo
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.</description>
+			<styleUrl>#m_ylw-pushpin0</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-122.2896170742895,37.8612249999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>SanPablo-CP08</name>
+			<description>DERIVED from the gap between the parcel rows facing San Pablo
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.</description>
+			<styleUrl>#m_ylw-pushpin0</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-122.2888088472015,37.8587749999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>SanPablo-CP09</name>
+			<description>DERIVED from the gap between the parcel rows facing San Pablo
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.</description>
+			<styleUrl>#m_ylw-pushpin0</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-122.2880450023615,37.8563249999999,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>SanPablo-CP10</name>
+			<description>DERIVED from the gap between the parcel rows facing San Pablo
+(midpoint of west-parcel east edge and east-parcel west edge, rolling-median smoothed).
+Accurate to a few metres. Check once in Earth Pro before a final recording.</description>
+			<styleUrl>#m_ylw-pushpin2</styleUrl>
+			<Point>
+				<gx:drawOrder>1</gx:drawOrder>
+				<coordinates>-122.2859992607551,37.85006675219736,0</coordinates>
+			</Point>
+		</Placemark>
+		<atom:link rel="app" href="https://www.google.com/earth/about/versions/#earth-pro" title="Google Earth Pro 7.3.7.1155"></atom:link>
+	</Folder>
+</Document>
+</kml>

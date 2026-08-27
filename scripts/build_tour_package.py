@@ -19,6 +19,7 @@ Usage:
 Output: kml/tours/packages/<tour-stem>__<geometry-date>.kml
 """
 import hashlib
+import sys
 import pathlib
 import re
 import sys
@@ -41,6 +42,10 @@ def extract_tour(tour_path: pathlib.Path) -> str:
 def build(tour_path: pathlib.Path) -> pathlib.Path:
     geom = GEOMETRY.read_text(encoding="utf-8", errors="replace")
     tour = extract_tour(tour_path)
+    # keep the geometry's own name honest before packaging it — a package that embeds a
+    # mislabelled geometry propagates the lie to every tour.
+    import subprocess as _sp
+    _sp.run([sys.executable, 'scripts/stamp_geometry.py'], capture_output=True)
     sha = hashlib.sha256(GEOMETRY.read_bytes()).hexdigest()[:12]
     # GEOM_STAMP: a package must SAY which geometry it carries. Google Earth shows only
     # the <name>, and geometry.kml called itself "Geometry-2026-05-18-labeled-no-icon"

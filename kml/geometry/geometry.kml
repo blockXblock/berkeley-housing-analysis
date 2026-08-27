@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <Document>
-	<name>Berkeley Housing Geometry · 2026-08-26 · 198 buildings · geom-f8225ae1e926</name>
+	<name>Berkeley Housing Geometry · 2026-08-26 · 196 buildings · geom-e112113faf25</name>
 	<visibility>0</visibility>
 	<open>1</open>
 	<description>177 housing projects. Heights shown as stories × 3.5m. Generated 2026-05-03.</description>
@@ -3683,17 +3683,17 @@
 			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2099 Mlk Jr Way · 72 units · Completed</name>
+			<name>2099 MLK Jr Way · 72 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2099 MLK Jr Way</b><br/><b>Units:</b> 72<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Completed<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2099 MLK Jr Way</b><br/><b>Units:</b> 72<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Completed<br/><i>(7 storeys, building permit B2021-03950)</i>]]></description>
 			<styleUrl>#style_Completed_parcel0</styleUrl>
-			<MultiGeometry><Point><coordinates>-122.27260426676625,37.87086361590322,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
+			<MultiGeometry><Point><coordinates>-122.27260426676625,37.87086361590322,24.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
 					<LinearRing>
 						<coordinates>
-							-122.2724593419027,37.87072941316434,10.5 -122.2727754389462,37.87068964799388,10.5 -122.2728190673195,37.87106530189369,10.5 -122.2725081437602,37.87110430329983,10.5 -122.2724593419027,37.87072941316434,10.5 
+							-122.2724593419027,37.87072941316434,24.5 -122.2727754389462,37.87068964799388,24.5 -122.2728190673195,37.87106530189369,24.5 -122.2725081437602,37.87110430329983,24.5 -122.2724593419027,37.87072941316434,24.5 
 						</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
@@ -5264,23 +5264,6 @@
 			</Polygon></MultiGeometry>
 		</Placemark>
 		<Placemark>
-			<name>2740 Shasta Rd · 0 units · In Review</name>
-			<visibility>0</visibility>
-			<description><![CDATA[<b>2740 SHASTA Rd</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i>]]></description>
-			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
-			<MultiGeometry><Point><coordinates>-122.25831224302041,37.88641473670213,10.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
-				<extrude>1</extrude>
-				<altitudeMode>relativeToGround</altitudeMode>
-				<outerBoundaryIs>
-					<LinearRing>
-						<coordinates>
-							-122.2579708371979,37.88654290907646,10.5 -122.2579067509549,37.88625133656897,10.5 -122.2579752006197,37.88621338127207,10.5 -122.2583240855227,37.88601988672094,10.5 -122.2583538195581,37.88605009238004,10.5 -122.2584307602861,37.88612825196846,10.5 -122.2584307659085,37.88612825831292,10.5 -122.2584859767301,37.88618433459213,10.5 -122.2585260406167,37.88622504129849,10.5 -122.2585374466151,37.88623662890824,10.5 -122.2585909013661,37.88629092845228,10.5 -122.258693761313,37.88677454261325,10.5 -122.2585895934608,37.88676648249412,10.5 -122.2584973632489,37.88675000553771,10.5 -122.2583682100211,37.88671141170391,10.5 -122.2583000149726,37.88668495913674,10.5 -122.2582122475448,37.88663819793578,10.5 -122.2581054890759,37.88659378471049,10.5 -122.2579747581975,37.88656139128314,10.5 -122.2579708371979,37.88654290907646,10.5 
-						</coordinates>
-					</LinearRing>
-				</outerBoundaryIs>
-			</Polygon></MultiGeometry>
-		</Placemark>
-		<Placemark>
 			<name>1109 Cowper St · 0 units · Completed</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>1109 COWPER St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
@@ -5410,21 +5393,6 @@
 						<coordinates>
 							-122.2679960853905,37.85627626657994,10.5 -122.2682499657071,37.8562449897447,10.5 -122.268166830552,37.85646323598519,10.5 -122.2680148148441,37.85648130295828,10.5 -122.2679960853905,37.85627626657994,10.5 
 						</coordinates>
-					</LinearRing>
-				</outerBoundaryIs>
-			</Polygon></MultiGeometry>
-		</Placemark>
-		<Placemark>
-			<name>2099 M L King Jr Way · 72 units · Completed</name>
-			<visibility>0</visibility>
-			<description><![CDATA[<b>2099 M L KING JR Way</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Application Submitted<br/><i>(height estimated from units)</i><br/><i>Height corrected 24.5m / 7 storeys from v2 (Overture num_floors), 2026-08-26. Was the 10.5m migration placeholder for a 72-unit building.</i>]]></description>
-			<styleUrl>#style_Application_Submitted_parcel48</styleUrl>
-			<MultiGeometry><Point><coordinates>-122.27260426676625,37.87086361590322,24.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point><Polygon>
-				<extrude>1</extrude>
-				<altitudeMode>relativeToGround</altitudeMode>
-				<outerBoundaryIs>
-					<LinearRing>
-						<coordinates>-122.2724593419027,37.87072941316434,24.5 -122.2727754389462,37.87068964799388,24.5 -122.2728190673195,37.87106530189369,24.5 -122.2725081437602,37.87110430329983,24.5 -122.2724593419027,37.87072941316434,24.5</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
 			</Polygon></MultiGeometry>

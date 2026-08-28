@@ -19,10 +19,16 @@ itself.
   python scripts/sync_status_from_v2.py --dry-run
   python scripts/sync_status_from_v2.py
 """
-import argparse, re, sqlite3, collections
+import argparse, collections, re, sqlite3
 
 GEOM = "kml/geometry/geometry.kml"
 DB = "databases/berkeley_housing_v2.db"
+
+# Figures the MAP is ahead of v2 on, from a primary source. Syncing these would REGRESS a
+# verified correction, so they are held until v2 catches up (the data lane's write, not mine).
+HOLD_UNITS = {
+    "2036 BANCROFT WAY": (87, "plan set A100 unit table: 31 studio + 8 1-bd + 13 2-bd + 35 3-bd"),
+}
 
 
 def main():
@@ -39,6 +45,13 @@ def main():
             "where address_display is not null"):
         rows[addr.upper().strip()].append((units, status))
     v2 = {k: v[0] for k, v in rows.items() if len(v) == 1}
+    uc = set()
+    for addr, in sqlite3.connect(a.db).execute(
+            "select f.address_display from project_classifications pc "
+            "join vocabulary_classification_types t on t.id=pc.classification_type_id "
+            "join v_projects_flat f on f.project_id=pc.project_id where t.code='uc_project'"):
+        if addr:
+            uc.add(addr.upper().strip())
 
     # address -> what the label currently claims, taken from the POLYGON twin
     changes = {}
@@ -47,17 +60,39 @@ def main():
             continue
         ad = re.search(r"<b>([^<]*)</b><br/>", pm)
         nm = re.search(r"<name>([^<]*)</name>", pm)
-        if not (ad and nm):
+        # DO NOT REQUIRE THE DESCRIPTION ADDRESS. 2200 Bancroft South and 2400 Bowditch South
+        # carry plain-text descriptions with no <b>ADDRESS</b>, so requiring one skipped them
+        # and left one wing reading "550 units" while its twin read "1625 beds" -- the same
+        # project disagreeing with itself across two placemarks.
+        if not nm:
             continue
-        key = ad.group(1).upper().strip()
+        key = (ad.group(1) if ad else nm.group(1).split("·")[0]).upper().strip()
+        if key not in v2:
+            key = nm.group(1).split("·")[0].upper().strip()
         if key not in v2:
             continue
         units, status = v2[key]
         parts = [p.strip() for p in nm.group(1).split("·")]
-        if len(parts) < 2 or parts[-1] == status:
+        if len(parts) < 2:
             continue
-        parts[-1] = status
-        changes[nm.group(1)] = (" · ".join(parts), status, parts[-1])
+        before = list(parts)
+        if parts[-1] != status:
+            parts[-1] = status
+        # UC IS COUNTED IN BEDS, NOT UNITS, AND CARRIES NO RATIO (CLAUDE.md). A private student
+        # project is not uc_project and stays in units -- The Valiant is the case in point.
+        noun = "beds" if key in uc else "units"
+        for i, p in enumerate(parts):
+            m = re.match(r"^(\d+)\s+(units|beds)$", p)
+            if not m:
+                continue
+            want = units
+            if key in HOLD_UNITS and HOLD_UNITS[key][0] != units:
+                want = HOLD_UNITS[key][0]        # map is ahead of v2, from a primary source
+            if want is not None and (int(m.group(1)) != want or m.group(2) != noun):
+                parts[i] = f"{want} {noun}"
+        if parts == before:
+            continue
+        changes[nm.group(1)] = (" · ".join(parts), status, None)
 
     if not changes:
         print("no status labels are out of step with v2")

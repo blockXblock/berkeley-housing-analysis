@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <Document>
-	<name>Berkeley Housing Geometry · 2026-08-28 · 392 buildings · geom-b2ac534ffca2</name>
+	<name>Berkeley Housing Geometry · 2026-08-28 · 392 buildings · geom-ff63b9864759</name>
 	<visibility>0</visibility>
 	<open>1</open>
 	<description>177 housing projects. Heights shown as stories × 3.5m. Generated 2026-05-03.</description>
@@ -5264,6 +5264,66 @@
 	<Style id="style_status_UC_Project_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ffff00aa</color><width>1.5</width></LineStyle><PolyStyle><color>80ff00aa</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
 	<Style id="style_status_BART_Project"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ffff00ff</color><width>1.5</width></LineStyle><PolyStyle><color>80ff00ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
 	<Style id="style_status_BART_Project_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ffff00ff</color><width>1.5</width></LineStyle><PolyStyle><color>80ff00ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Pre_Application"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ff9e9e9e</color><width>1.5</width></LineStyle><PolyStyle><color>809e9e9e</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Pre_Application_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ff9e9e9e</color><width>1.5</width></LineStyle><PolyStyle><color>809e9e9e</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_In_Review"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ff00d4ff</color><width>1.5</width></LineStyle><PolyStyle><color>8000d4ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_In_Review_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ff00d4ff</color><width>1.5</width></LineStyle><PolyStyle><color>8000d4ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Entitled"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ff0080ff</color><width>1.5</width></LineStyle><PolyStyle><color>800080ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Entitled_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ff0080ff</color><width>1.5</width></LineStyle><PolyStyle><color>800080ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Permitted"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ffffe500</color><width>1.5</width></LineStyle><PolyStyle><color>80ffe500</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Permitted_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ffffe500</color><width>1.5</width></LineStyle><PolyStyle><color>80ffe500</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Under_Construction"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ffff6229</color><width>1.5</width></LineStyle><PolyStyle><color>80ff6229</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Under_Construction_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ffff6229</color><width>1.5</width></LineStyle><PolyStyle><color>80ff6229</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Completed"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ff53c800</color><width>1.5</width></LineStyle><PolyStyle><color>8053c800</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Completed_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ff53c800</color><width>1.5</width></LineStyle><PolyStyle><color>8053c800</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Stalled"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ff0000ff</color><width>1.5</width></LineStyle><PolyStyle><color>800000ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Stalled_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ff0000ff</color><width>1.5</width></LineStyle><PolyStyle><color>800000ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Withdrawn"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ff3a00b0</color><width>1.5</width></LineStyle><PolyStyle><color>803a00b0</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Withdrawn_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ff3a00b0</color><width>1.5</width></LineStyle><PolyStyle><color>803a00b0</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_UC_Project"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ffff00aa</color><width>1.5</width></LineStyle><PolyStyle><color>80ff00aa</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_UC_Project_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ffff00aa</color><width>1.5</width></LineStyle><PolyStyle><color>80ff00aa</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_BART_Project"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ffff00ff</color><width>1.5</width></LineStyle><PolyStyle><color>80ff00ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_BART_Project_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ffff00ff</color><width>1.5</width></LineStyle><PolyStyle><color>80ff00ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Pre_Application"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ff9e9e9e</color><width>1.5</width></LineStyle><PolyStyle><color>809e9e9e</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Pre_Application_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ff9e9e9e</color><width>1.5</width></LineStyle><PolyStyle><color>809e9e9e</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_In_Review"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ff00d4ff</color><width>1.5</width></LineStyle><PolyStyle><color>8000d4ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_In_Review_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ff00d4ff</color><width>1.5</width></LineStyle><PolyStyle><color>8000d4ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Entitled"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ff0080ff</color><width>1.5</width></LineStyle><PolyStyle><color>800080ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Entitled_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ff0080ff</color><width>1.5</width></LineStyle><PolyStyle><color>800080ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Permitted"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ffffe500</color><width>1.5</width></LineStyle><PolyStyle><color>80ffe500</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Permitted_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ffffe500</color><width>1.5</width></LineStyle><PolyStyle><color>80ffe500</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Under_Construction"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ffff6229</color><width>1.5</width></LineStyle><PolyStyle><color>80ff6229</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Under_Construction_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ffff6229</color><width>1.5</width></LineStyle><PolyStyle><color>80ff6229</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Completed"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ff53c800</color><width>1.5</width></LineStyle><PolyStyle><color>8053c800</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Completed_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ff53c800</color><width>1.5</width></LineStyle><PolyStyle><color>8053c800</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Stalled"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ff0000ff</color><width>1.5</width></LineStyle><PolyStyle><color>800000ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Stalled_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ff0000ff</color><width>1.5</width></LineStyle><PolyStyle><color>800000ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Withdrawn"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ff3a00b0</color><width>1.5</width></LineStyle><PolyStyle><color>803a00b0</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Withdrawn_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ff3a00b0</color><width>1.5</width></LineStyle><PolyStyle><color>803a00b0</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_UC_Project"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ffff00aa</color><width>1.5</width></LineStyle><PolyStyle><color>80ff00aa</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_UC_Project_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ffff00aa</color><width>1.5</width></LineStyle><PolyStyle><color>80ff00aa</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_BART_Project"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ffff00ff</color><width>1.5</width></LineStyle><PolyStyle><color>80ff00ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_BART_Project_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ffff00ff</color><width>1.5</width></LineStyle><PolyStyle><color>80ff00ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Pre_Application"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ff9e9e9e</color><width>1.5</width></LineStyle><PolyStyle><color>809e9e9e</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Pre_Application_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ff9e9e9e</color><width>1.5</width></LineStyle><PolyStyle><color>809e9e9e</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_In_Review"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ff00d4ff</color><width>1.5</width></LineStyle><PolyStyle><color>8000d4ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_In_Review_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ff00d4ff</color><width>1.5</width></LineStyle><PolyStyle><color>8000d4ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Entitled"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ff0080ff</color><width>1.5</width></LineStyle><PolyStyle><color>800080ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Entitled_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ff0080ff</color><width>1.5</width></LineStyle><PolyStyle><color>800080ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Permitted"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ffffe500</color><width>1.5</width></LineStyle><PolyStyle><color>80ffe500</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Permitted_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ffffe500</color><width>1.5</width></LineStyle><PolyStyle><color>80ffe500</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Under_Construction"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ffff6229</color><width>1.5</width></LineStyle><PolyStyle><color>80ff6229</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Under_Construction_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ffff6229</color><width>1.5</width></LineStyle><PolyStyle><color>80ff6229</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Completed"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ff53c800</color><width>1.5</width></LineStyle><PolyStyle><color>8053c800</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Completed_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ff53c800</color><width>1.5</width></LineStyle><PolyStyle><color>8053c800</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Stalled"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ff0000ff</color><width>1.5</width></LineStyle><PolyStyle><color>800000ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Stalled_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ff0000ff</color><width>1.5</width></LineStyle><PolyStyle><color>800000ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Withdrawn"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ff3a00b0</color><width>1.5</width></LineStyle><PolyStyle><color>803a00b0</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_Withdrawn_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ff3a00b0</color><width>1.5</width></LineStyle><PolyStyle><color>803a00b0</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_UC_Project"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ffff00aa</color><width>1.5</width></LineStyle><PolyStyle><color>80ff00aa</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_UC_Project_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ffff00aa</color><width>1.5</width></LineStyle><PolyStyle><color>80ff00aa</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_BART_Project"><LabelStyle><scale>3.0</scale></LabelStyle><LineStyle><color>ffff00ff</color><width>1.5</width></LineStyle><PolyStyle><color>80ff00ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
+	<Style id="style_status_BART_Project_nolabel"><LabelStyle><scale>0</scale></LabelStyle><LineStyle><color>ffff00ff</color><width>1.5</width></LineStyle><PolyStyle><color>80ff00ff</color></PolyStyle><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle></Style>
 	<StyleMap id="style_Application_Submitted_parcel0_nolabel">
 		<Pair>
 			<key>normal</key>
@@ -6101,7 +6161,7 @@
 		<Placemark>
 			<name>2400 Bowditch St · North · 750 units · Pre-Application</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2400 BOWDITCH St</b><br/><b>Units:</b> 750<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 26<br/><b>Height:</b> 85.3m<br/><b>Status:</b> In Review<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
+			<description><![CDATA[<b>2400 BOWDITCH St</b><br/><b>Units:</b> 750<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 26<br/><b>Height:</b> 85.3m<br/><b>Status:</b> Entitled<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
 			<styleUrl>#style_status_UC_Project_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6124,7 +6184,7 @@
 		<Placemark>
 			<name>2556 Haste St · 556 units · Under Construction</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2556 HASTE St</b><br/><b>Units:</b> 556<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 12<br/><b>Height:</b> 40.2m<br/><b>Status:</b> In Review<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
+			<description><![CDATA[<b>2556 HASTE St</b><br/><b>Units:</b> 556<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 12<br/><b>Height:</b> 40.2m<br/><b>Status:</b> Entitled<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
 			<styleUrl>#style_status_UC_Project_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6147,7 +6207,7 @@
 		<Placemark>
 			<name>2200 Bancroft Way · North · 550 units · Under Construction</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2200 BANCROFT Way</b><br/><b>Units:</b> 550- 1,650 students <br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 23<br/><b>Height:</b> 77.1m<br/><b>Status:</b> In Review<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
+			<description><![CDATA[<b>2200 BANCROFT Way</b><br/><b>Units:</b> 550- 1,650 students <br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 23<br/><b>Height:</b> 77.1m<br/><b>Status:</b> Entitled<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
 			<styleUrl>#style_status_UC_Project_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6170,7 +6230,7 @@
 		<Placemark>
 			<name>1950 Oxford St · 772 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1950 OXFORD St</b><br/><b>Units:</b> 300<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 14<br/><b>Height:</b> 46.9m<br/><b>Status:</b> In Review<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
+			<description><![CDATA[<b>1950 OXFORD St</b><br/><b>Units:</b> 300<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 14<br/><b>Height:</b> 46.9m<br/><b>Status:</b> Entitled<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
 			<styleUrl>#style_status_UC_Project_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6194,7 +6254,7 @@
 		<Placemark>
 			<name>1974 Shattuck Ave · 599 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1974 SHATTUCK Ave</b><br/><b>Units:</b> 599<br/><b>VLI Units:</b> 58<br/><b>Stories:</b> 28<br/><b>Height:</b> 98.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>1974 SHATTUCK Ave</b><br/><b>Units:</b> 599<br/><b>VLI Units:</b> 58<br/><b>Stories:</b> 28<br/><b>Height:</b> 98.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6217,7 +6277,7 @@
 		<Placemark>
 			<name>2128 Oxford St · 485 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2128 Oxford St</b><br/><b>Units:</b> 485<br/><b>VLI Units:</b> 47<br/><b>Stories:</b> 26<br/><b>Height:</b> 91.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2128 Oxford St</b><br/><b>Units:</b> 485<br/><b>VLI Units:</b> 47<br/><b>Stories:</b> 26<br/><b>Height:</b> 91.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6240,7 +6300,7 @@
 		<Placemark>
 			<name>2190 Shattuck Ave · 452 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2190 SHATTUCK Ave</b><br/><b>Units:</b> 452<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 34<br/><b>Height:</b> 110.0m<br/><b>Status:</b> In Review<br/><i>Footprint 19,767 sf and 34 storeys / 361 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 20,117 sf at 119.0 m. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>2190 SHATTUCK Ave</b><br/><b>Units:</b> 452<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 34<br/><b>Height:</b> 110.0m<br/><b>Status:</b> Entitled<br/><i>Footprint 19,767 sf and 34 storeys / 361 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 20,117 sf at 119.0 m. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6261,7 +6321,7 @@
 		<Placemark>
 			<name>2700 Shattuck Ave · 359 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2700 SHATTUCK Ave</b><br/><b>Units:</b> 359<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 15<br/><b>Height:</b> 52.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2700 SHATTUCK Ave</b><br/><b>Units:</b> 359<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 15<br/><b>Height:</b> 52.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6284,7 +6344,7 @@
 		<Placemark>
 			<name>2276 Shattuck Ave · 336 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2276 SHATTUCK Ave</b><br/><b>Units:</b> 336<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 18<br/><b>Height:</b> 62.7m<br/><b>Status:</b> In Review<br/><i>Footprint 9,853 sf and 18 storeys / 206 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 8,936 sf at 63.0 m. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>2276 SHATTUCK Ave</b><br/><b>Units:</b> 336<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 18<br/><b>Height:</b> 62.7m<br/><b>Status:</b> Entitled<br/><i>Footprint 9,853 sf and 18 storeys / 206 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 8,936 sf at 63.0 m. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6307,7 +6367,7 @@
 		<Placemark>
 			<name>2274 Shattuck Ave · 299 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2274 SHATTUCK Ave</b><br/><b>Units:</b> 299<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 17<br/><b>Height:</b> 59.5m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2274 SHATTUCK Ave</b><br/><b>Units:</b> 299<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 17<br/><b>Height:</b> 59.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6330,7 +6390,7 @@
 		<Placemark>
 			<name>1914 Fifth St · 257 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1914 FIFTH St</b><br/><b>Units:</b> 257<br/><b>VLI Units:</b> 26<br/><b>Stories:</b> 15<br/><b>Height:</b> 52.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1914 FIFTH St</b><br/><b>Units:</b> 257<br/><b>VLI Units:</b> 26<br/><b>Stories:</b> 15<br/><b>Height:</b> 52.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6353,7 +6413,7 @@
 		<Placemark>
 			<name>2029 University Ave · 240 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2029 UNIVERSITY Ave</b><br/><b>Units:</b> 240<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 23<br/><b>Height:</b> 78.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2029 UNIVERSITY Ave</b><br/><b>Units:</b> 240<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 23<br/><b>Height:</b> 78.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6376,7 +6436,7 @@
 		<Placemark>
 			<name>2352 Shattuck Ave · 237 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2352 Shattuck Ave</b><br/><b>Units:</b> 237<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2352 Shattuck Ave</b><br/><b>Units:</b> 237<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6399,7 +6459,7 @@
 		<Placemark>
 			<name>2601 San Pablo Ave · 223 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2601 SAN PABLO Ave</b><br/><b>Units:</b> 223<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review<br/><i>Footprint 18,706 sf from the project's own Tabulation Form 1.E (2023-06-09), PROPOSED column: 8 storeys, 65% lot coverage, 129,658 sf gross floor area. Column identified by two independent checks - it is the only one matching v2's 8 storeys, and its 581 sf per unit across 223 units is the only plausible figure (the existing column gives 49, the permitted-maximum column 386). REPLACES a 3,668 sf polygon that gave 132 sf per unit. MULTI-PARCEL ASSEMBLY: 18,706 sf at 65% implies a 28,778 sf lot against a single county parcel of 3,669 sf, so the footprint spans several lots and the extent here is approximate; area is the architect's own.</i>]]></description>
+			<description><![CDATA[<b>2601 SAN PABLO Ave</b><br/><b>Units:</b> 223<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled<br/><i>Footprint 18,706 sf from the project's own Tabulation Form 1.E (2023-06-09), PROPOSED column: 8 storeys, 65% lot coverage, 129,658 sf gross floor area. Column identified by two independent checks - it is the only one matching v2's 8 storeys, and its 581 sf per unit across 223 units is the only plausible figure (the existing column gives 49, the permitted-maximum column 386). REPLACES a 3,668 sf polygon that gave 132 sf per unit. MULTI-PARCEL ASSEMBLY: 18,706 sf at 65% implies a 28,778 sf lot against a single county parcel of 3,669 sf, so the footprint spans several lots and the extent here is approximate; area is the architect's own.</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6422,7 +6482,7 @@
 		<Placemark>
 			<name>2920 Shattuck Ave · 242 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2920 SHATTUCK Ave</b><br/><b>Units:</b> 242<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 11<br/><b>Height:</b> 38.2m<br/><b>Status:</b> In Review<br/><i>All figures from the project's own Tabulation Form 1.E dated 09/22/2025 (documents 2162), PROPOSED column: 242 dwelling units, 11 stories, 125'-2" average AND maximum height = 38.2 m, footprint 10,232 sf, lot 19,586 sf, coverage 52%. FEET BEAT STOREYS x 3.5 where a form states a height, so 38.2 m, not 11 x 3.5. Moved 4.97 m EAST 2026-08-26: the polygon had been synthesised as a box from the AREA alone and sat 5.0 m west of the Shattuck frontage of APN 53-1590-5-1, floating behind the sidewalk. The 1.E states a FRONT YARD SETBACK of "VARIES; 0 to 2'", so the east face belongs on the property line. Was 10 storeys / 35.0 m and a stale 221-unit body against a 242 label.</i>]]></description>
+			<description><![CDATA[<b>2920 SHATTUCK Ave</b><br/><b>Units:</b> 242<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 11<br/><b>Height:</b> 38.2m<br/><b>Status:</b> Entitled<br/><i>All figures from the project's own Tabulation Form 1.E dated 09/22/2025 (documents 2162), PROPOSED column: 242 dwelling units, 11 stories, 125'-2" average AND maximum height = 38.2 m, footprint 10,232 sf, lot 19,586 sf, coverage 52%. FEET BEAT STOREYS x 3.5 where a form states a height, so 38.2 m, not 11 x 3.5. Moved 4.97 m EAST 2026-08-26: the polygon had been synthesised as a box from the AREA alone and sat 5.0 m west of the Shattuck frontage of APN 53-1590-5-1, floating behind the sidewalk. The 1.E states a FRONT YARD SETBACK of "VARIES; 0 to 2'", so the east face belongs on the property line. Was 10 storeys / 35.0 m and a stale 221-unit body against a 242 label.</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6445,7 +6505,7 @@
 		<Placemark>
 			<name>1899 Oxford St · 212 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1899 OXFORD St</b><br/><b>Units:</b> 212<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 24.0m<br/><b>Status:</b> In Review<br/><i>Footprint 16,505 sf and 8 storeys from the project's own Tabulation Form 1.E, PROPOSED column — identified by the form's DWELLING-UNITS row matching v2's count, not by column position. Was 15,406 sf at 23.8 m. 2026-08-26.</i><br/><i>Footprint 16,505 sf and 8 storeys / 79 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 16,505 sf at 28.0 m. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>1899 OXFORD St</b><br/><b>Units:</b> 212<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 24.0m<br/><b>Status:</b> Entitled<br/><i>Footprint 16,505 sf and 8 storeys from the project's own Tabulation Form 1.E, PROPOSED column — identified by the form's DWELLING-UNITS row matching v2's count, not by column position. Was 15,406 sf at 23.8 m. 2026-08-26.</i><br/><i>Footprint 16,505 sf and 8 storeys / 79 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 16,505 sf at 28.0 m. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6468,7 +6528,7 @@
 		<Placemark>
 			<name>1598 University Ave · 207 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1598 UNIVERSITY Ave</b><br/><b>Units:</b> 207<br/><b>VLI Units:</b> 21<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>1598 UNIVERSITY Ave</b><br/><b>Units:</b> 207<br/><b>VLI Units:</b> 21<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6491,7 +6551,7 @@
 		<Placemark>
 			<name>2100 Milvia St · 205 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2100 MILVIA St</b><br/><b>Units:</b> 205<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 15<br/><b>Height:</b> 52.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2100 MILVIA St</b><br/><b>Units:</b> 205<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 15<br/><b>Height:</b> 52.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6514,7 +6574,7 @@
 		<Placemark>
 			<name>2131 University Ave · 205 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2131 University Ave</b><br/><b>Units:</b> 205<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2131 University Ave</b><br/><b>Units:</b> 205<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6537,7 +6597,7 @@
 		<Placemark>
 			<name>2065 Kittredge St · 189 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2065 Kittredge St</b><br/><b>Units:</b> 189<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2065 Kittredge St</b><br/><b>Units:</b> 189<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6560,7 +6620,7 @@
 		<Placemark>
 			<name>2150 Kittredge St · 169 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2150 Kittredge St</b><br/><b>Units:</b> 169<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i><br/><i>Footprint 32,581 sf and 7 storeys / 24.5 m, resolved 2026-08-26 WITHOUT a Tabulation Form. Height from the project's own building permit B2021-00008 ($35.8M, 169 units), which describes '(5) floors of Type III-A over (2) floors + basement Type I' - a 5-over-2 podium, 7 storeys. Footprint from the assessor parcel APN 57-2029-17, RE-PLATTED after construction so absent from the 2026-08-12 taxparcel snapshot but present in berkeley.db with $61.5M of improvements confirming the built building. Replaces a 7,100 sf polygon at the 10.5 m migration placeholder - WRONG ON BOTH COUNTS, and the only building in the geometry still failing the floor-area-per-unit test (126 sf/unit; now 1,350 gross incl. ground-floor retail and a two-floor parking podium).</i>]]></description>
+			<description><![CDATA[<b>2150 Kittredge St</b><br/><b>Units:</b> 169<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i><br/><i>Footprint 32,581 sf and 7 storeys / 24.5 m, resolved 2026-08-26 WITHOUT a Tabulation Form. Height from the project's own building permit B2021-00008 ($35.8M, 169 units), which describes '(5) floors of Type III-A over (2) floors + basement Type I' - a 5-over-2 podium, 7 storeys. Footprint from the assessor parcel APN 57-2029-17, RE-PLATTED after construction so absent from the 2026-08-12 taxparcel snapshot but present in berkeley.db with $61.5M of improvements confirming the built building. Replaces a 7,100 sf polygon at the 10.5 m migration placeholder - WRONG ON BOTH COUNTS, and the only building in the geometry still failing the floor-area-per-unit test (126 sf/unit; now 1,350 gross incl. ground-floor retail and a two-floor parking podium).</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6583,7 +6643,7 @@
 		<Placemark>
 			<name>2015 Blake St · 168 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2015 Blake St</b><br/><b>Units:</b> 168<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2015 Blake St</b><br/><b>Units:</b> 168<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6606,7 +6666,7 @@
 		<Placemark>
 			<name>3000 Shattuck Ave · 166 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>3000 SHATTUCK Ave</b><br/><b>Units:</b> 166<br/><b>VLI Units:</b> 17<br/><b>Stories:</b> 10<br/><b>Height:</b> 34.7m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>3000 SHATTUCK Ave</b><br/><b>Units:</b> 166<br/><b>VLI Units:</b> 17<br/><b>Stories:</b> 10<br/><b>Height:</b> 34.7m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6629,7 +6689,7 @@
 		<Placemark>
 			<name>1951 Shattuck Ave · 163 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1951 Shattuck Ave</b><br/><b>Units:</b> 163<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 12<br/><b>Height:</b> 42.0m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i><br/><i>Height corrected 42.0m / 12 storeys from v2 (Overture num_floors), 2026-08-26. Was the 10.5m migration placeholder for a 163-unit building.</i>]]></description>
+			<description><![CDATA[<b>1951 Shattuck Ave</b><br/><b>Units:</b> 163<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 12<br/><b>Height:</b> 42.0m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i><br/><i>Height corrected 42.0m / 12 storeys from v2 (Overture num_floors), 2026-08-26. Was the 10.5m migration placeholder for a 163-unit building.</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6650,7 +6710,7 @@
 		<Placemark>
 			<name>1581 University Ave · 158 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1581 UNIVERSITY Ave</b><br/><b>Units:</b> 158<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 48.2m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>1581 UNIVERSITY Ave</b><br/><b>Units:</b> 158<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 48.2m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6673,7 +6733,7 @@
 		<Placemark>
 			<name>2115 Kittredge St · 148 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2115 KITTREDGE St</b><br/><b>Units:</b> 148<br/><b>VLI Units:</b> 12<br/><b>Stories:</b> 10<br/><b>Height:</b> 35.0m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2115 KITTREDGE St</b><br/><b>Units:</b> 148<br/><b>VLI Units:</b> 12<br/><b>Stories:</b> 10<br/><b>Height:</b> 35.0m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6696,7 +6756,7 @@
 		<Placemark>
 			<name>3030 Telegraph Ave · 144 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>3030 TELEGRAPH Ave</b><br/><b>Units:</b> 144<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 19.2m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i><br/><i>Footprint 19,811 sf and height 63 ft / 5 storeys from the architect zoning tabulation (ZP2022-0170 plan set, 2026-08-23). Was the county PARCEL polygon (27,531 sf) at a 10-storey placeholder. Validated: implied lot 27,138 vs parcel 27,397; GFA/footprint 94,664/19,811 = 4.8 storeys.</i>]]></description>
+			<description><![CDATA[<b>3030 TELEGRAPH Ave</b><br/><b>Units:</b> 144<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 19.2m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i><br/><i>Footprint 19,811 sf and height 63 ft / 5 storeys from the architect zoning tabulation (ZP2022-0170 plan set, 2026-08-23). Was the county PARCEL polygon (27,531 sf) at a 10-storey placeholder. Validated: implied lot 27,138 vs parcel 27,397; GFA/footprint 94,664/19,811 = 4.8 storeys.</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6719,7 +6779,7 @@
 		<Placemark>
 			<name>2420 Shattuck Ave · 132 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2420 SHATTUCK Ave</b><br/><b>Units:</b> 132<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 17<br/><b>Height:</b> 59.5m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2420 SHATTUCK Ave</b><br/><b>Units:</b> 132<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 17<br/><b>Height:</b> 59.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6742,7 +6802,7 @@
 		<Placemark>
 			<name>2847 Shattuck Ave · 132 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2847 SHATTUCK Ave</b><br/><b>Units:</b> 132<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 9<br/><b>Height:</b> 41.5m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2847 SHATTUCK Ave</b><br/><b>Units:</b> 132<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 9<br/><b>Height:</b> 41.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6765,7 +6825,7 @@
 		<Placemark>
 			<name>2109 Virginia St · 110 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2109 VIRGINIA St</b><br/><b>Units:</b> 110<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 27.2m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2109 VIRGINIA St</b><br/><b>Units:</b> 110<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 27.2m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6788,7 +6848,7 @@
 		<Placemark>
 			<name>2136 San Pablo Ave · 125 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2136 SAN PABLO Ave</b><br/><b>Units:</b> 125<br/><b>VLI Units:</b> 10<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2136 SAN PABLO Ave</b><br/><b>Units:</b> 125<br/><b>VLI Units:</b> 10<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6811,7 +6871,7 @@
 		<Placemark>
 			<name>2425 Durant Ave · 117 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2425 DURANT Ave</b><br/><b>Units:</b> 117<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 20<br/><b>Height:</b> 61.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2425 DURANT Ave</b><br/><b>Units:</b> 117<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 20<br/><b>Height:</b> 61.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6834,7 +6894,7 @@
 		<Placemark>
 			<name>2720 San Pablo Ave · 113 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2720 SAN PABLO Ave</b><br/><b>Units:</b> 113<br/><b>VLI Units:</b> 9<br/><b>Stories:</b> 10<br/><b>Height:</b> 35.7m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2720 SAN PABLO Ave</b><br/><b>Units:</b> 113<br/><b>VLI Units:</b> 9<br/><b>Stories:</b> 10<br/><b>Height:</b> 35.7m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6857,7 +6917,7 @@
 		<Placemark>
 			<name>2000 Dwight Way · 113 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2000 DWIGHT Way</b><br/><b>Units:</b> 113<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> In Review<br/><i>Footprint 22,177 sf from the project's own Tabulation Form 2.1 (2019-12-18), PROPOSED column: 6 storeys, 86,059 sf gross floor area - matching v2's 6 storeys and the applicant statement's 'new 6-story Senior Housing building'. 762 sf per unit. REPLACES a 3,639 sf polygon that gave 193 sf per unit. MULTI-PARCEL: implied footprint far exceeds the single 3,639 sf county parcel, so extent is approximate; area is the architect's own. Note the form states 126 units against v2's 113 - a different filing vintage, not reconciled here.</i>]]></description>
+			<description><![CDATA[<b>2000 DWIGHT Way</b><br/><b>Units:</b> 113<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Entitled<br/><i>Footprint 22,177 sf from the project's own Tabulation Form 2.1 (2019-12-18), PROPOSED column: 6 storeys, 86,059 sf gross floor area - matching v2's 6 storeys and the applicant statement's 'new 6-story Senior Housing building'. 762 sf per unit. REPLACES a 3,639 sf polygon that gave 193 sf per unit. MULTI-PARCEL: implied footprint far exceeds the single 3,639 sf county parcel, so extent is approximate; area is the architect's own. Note the form states 126 units against v2's 113 - a different filing vintage, not reconciled here.</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6880,7 +6940,7 @@
 		<Placemark>
 			<name>2530 Bancroft Way · 110 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2530 BANCROFT Way</b><br/><b>Units:</b> 110<br/><b>VLI Units:</b> 11<br/><b>Stories:</b> 12<br/><b>Height:</b> 42.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2530 BANCROFT Way</b><br/><b>Units:</b> 110<br/><b>VLI Units:</b> 11<br/><b>Stories:</b> 12<br/><b>Height:</b> 42.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6903,7 +6963,7 @@
 		<Placemark>
 			<name>1717 SAN PABLO Ave</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1701- 1717 SAN PABLO Ave</b><br/><b>Units:</b> 110<br/><b>VLI Units:</b> 110<br/><b>Stories:</b> 10<br/><b>Height:</b> 35.0m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1701- 1717 SAN PABLO Ave</b><br/><b>Units:</b> 110<br/><b>VLI Units:</b> 110<br/><b>Stories:</b> 10<br/><b>Height:</b> 35.0m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Under_Construction_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6926,7 +6986,7 @@
 		<Placemark>
 			<name>2109 Milvia St · 105 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2109 MILVIA St</b><br/><b>Units:</b> 105<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 14<br/><b>Height:</b> 49.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2109 MILVIA St</b><br/><b>Units:</b> 105<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 14<br/><b>Height:</b> 49.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6949,7 +7009,7 @@
 		<Placemark>
 			<name>2198 San Pablo Ave · 100 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2198 SAN PABLO Ave</b><br/><b>Units:</b> 100<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2198 SAN PABLO Ave</b><br/><b>Units:</b> 100<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6972,7 +7032,7 @@
 		<Placemark>
 			<name>2655 Shattuck Ave · 97 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2655 SHATTUCK Ave</b><br/><b>Units:</b> 97<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 25.9m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2655 SHATTUCK Ave</b><br/><b>Units:</b> 97<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 25.9m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6995,7 +7055,7 @@
 		<Placemark>
 			<name>2450 Shattuck Ave · 94 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2450 SHATTUCK Ave</b><br/><b>Units:</b> 94<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2450 SHATTUCK Ave</b><br/><b>Units:</b> 94<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7018,7 +7078,7 @@
 		<Placemark>
 			<name>2001 Ashby Ave · 87 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2001 ASHBY Ave</b><br/><b>Units:</b> 87<br/><b>VLI Units:</b> 86<br/><b>Stories:</b> 1<br/><b>Height:</b> 3.5m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2001 ASHBY Ave</b><br/><b>Units:</b> 87<br/><b>VLI Units:</b> 86<br/><b>Stories:</b> 1<br/><b>Height:</b> 3.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7041,7 +7101,7 @@
 		<Placemark>
 			<name>2036 Bancroft Way · 87 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2036 BANCROFT Way</b><br/><b>Units:</b> 87<br/><b>VLI Units:</b> 4<br/><b>Stories:</b> 8<br/><b>Height:</b> 25.9m<br/><b>Status:</b> In Review<br/><i>Position MEASURED OFF SHEET A100 PROPOSED SITE PLAN (1"=10'-0") of the 2025-10-02 RESUB Entitlement Plan Set (documents 2253), not derived. Its key map dimensions the enlarged parcel directly: APN 55-1894-16 = <b>113'-1" along Bancroft x 130'-0" deep</b>, with 118'-10" remaining from its east edge to Shattuck Ave. Plan note 1: "A LOT LINE ADJUSTMENT FOR PARCELS (APN: 55-1894-16) &amp; (APN: 55-1894-17-4) WILL BE SUBMITTED FOR APPROVAL" — the tabulation books it as -016 growing 6,595 -&gt; 14,582 sf while -017-04 shrinks 37,696 -&gt; 29,709 sf (7,987 sf transfers, both sides matching exactly). Building placed to the sheet's dimensioned setbacks: <b>0' required on the east, (P) 7'-0" side setback on the west</b>, front 0'-0" per the tabulation, giving 32.3 x 33.4 m = 11,608 sf against the stated 11,610 and a 6.3 m rear gap against the drawing's 5'-0" minimum. West property line is -016's EXISTING line against 2028 Bancroft, unchanged by the adjustment. 8 storeys / 85 ft = 25.9 m. -017-04 retains the existing 4-storey 2300-2350 Shattuck building (office &amp; retail, HT 45'+/-, footprint 31,115 -&gt; 24,535 sf, height NO CHANGE). Units 87 per the plan set unit table (31 studio + 8 one-bed + 13 two-bed + 35 three-bed; 8 below-market-rate). SUPERSEDES a 30.8 x 35.0 m ring derived from lot area alone — right area, wrong shape — and before that a 11,636 sf box floating in the interior of -017-04, touching no street.</i>]]></description>
+			<description><![CDATA[<b>2036 BANCROFT Way</b><br/><b>Units:</b> 87<br/><b>VLI Units:</b> 4<br/><b>Stories:</b> 8<br/><b>Height:</b> 25.9m<br/><b>Status:</b> Entitled<br/><i>Position MEASURED OFF SHEET A100 PROPOSED SITE PLAN (1"=10'-0") of the 2025-10-02 RESUB Entitlement Plan Set (documents 2253), not derived. Its key map dimensions the enlarged parcel directly: APN 55-1894-16 = <b>113'-1" along Bancroft x 130'-0" deep</b>, with 118'-10" remaining from its east edge to Shattuck Ave. Plan note 1: "A LOT LINE ADJUSTMENT FOR PARCELS (APN: 55-1894-16) &amp; (APN: 55-1894-17-4) WILL BE SUBMITTED FOR APPROVAL" — the tabulation books it as -016 growing 6,595 -&gt; 14,582 sf while -017-04 shrinks 37,696 -&gt; 29,709 sf (7,987 sf transfers, both sides matching exactly). Building placed to the sheet's dimensioned setbacks: <b>0' required on the east, (P) 7'-0" side setback on the west</b>, front 0'-0" per the tabulation, giving 32.3 x 33.4 m = 11,608 sf against the stated 11,610 and a 6.3 m rear gap against the drawing's 5'-0" minimum. West property line is -016's EXISTING line against 2028 Bancroft, unchanged by the adjustment. 8 storeys / 85 ft = 25.9 m. -017-04 retains the existing 4-storey 2300-2350 Shattuck building (office &amp; retail, HT 45'+/-, footprint 31,115 -&gt; 24,535 sf, height NO CHANGE). Units 87 per the plan set unit table (31 studio + 8 one-bed + 13 two-bed + 35 three-bed; 8 below-market-rate). SUPERSEDES a 30.8 x 35.0 m ring derived from lot area alone — right area, wrong shape — and before that a 11,636 sf box floating in the interior of -017-04, touching no street.</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7063,7 +7123,7 @@
 		<Placemark>
 			<name>1700 Sacramento St · 85 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1700 SACRAMENTO St</b><br/><b>Units:</b> 85<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1700 SACRAMENTO St</b><br/><b>Units:</b> 85<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7086,7 +7146,7 @@
 		<Placemark>
 			<name>2538 Durant Ave · 83 units · Under Construction</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2538 DURANT Ave</b><br/><b>Units:</b> 83<br/><b>VLI Units:</b> 5<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review<br/><i>Footprint 10,465 sf from the architect tabulation's 'PROPOSED BUILDING - LOT COVERAGE DIAGRAM' (lot 12,792 sf); 10,465/12,792 = 81.8% reproduces the stated 82%. The 10,935 sf / 85% block is the existing condition. Was 6,275 sf. NOTE: MULTI-PARCEL SITE - the stated lot (12,792 sf) is 2.04x the single county parcel (6,275 sf), so extent across the second parcel is approximate; area and position are right.</i>]]></description>
+			<description><![CDATA[<b>2538 DURANT Ave</b><br/><b>Units:</b> 83<br/><b>VLI Units:</b> 5<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled<br/><i>Footprint 10,465 sf from the architect tabulation's 'PROPOSED BUILDING - LOT COVERAGE DIAGRAM' (lot 12,792 sf); 10,465/12,792 = 81.8% reproduces the stated 82%. The 10,935 sf / 85% block is the existing condition. Was 6,275 sf. NOTE: MULTI-PARCEL SITE - the stated lot (12,792 sf) is 2.04x the single county parcel (6,275 sf), so extent across the second parcel is approximate; area and position are right.</i>]]></description>
 			<styleUrl>#style_status_Under_Construction_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7109,7 +7169,7 @@
 		<Placemark>
 			<name>2000 University Ave · 82 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2000 University Ave</b><br/><b>Units:</b> 82<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 25.6m<br/><b>Status:</b> In Review<br/><i>(8 storeys / 84 ft — DRC Staff Report DRCF2022-0001)</i><br/><i>Height corrected 28.0m / 8 storeys from v2 (Overture num_floors), 2026-08-26. Was the 10.5m migration placeholder for a 82-unit building.</i>]]></description>
+			<description><![CDATA[<b>2000 University Ave</b><br/><b>Units:</b> 82<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 25.6m<br/><b>Status:</b> Entitled<br/><i>(8 storeys / 84 ft — DRC Staff Report DRCF2022-0001)</i><br/><i>Height corrected 28.0m / 8 storeys from v2 (Overture num_floors), 2026-08-26. Was the 10.5m migration placeholder for a 82-unit building.</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7130,7 +7190,7 @@
 		<Placemark>
 			<name>1708 Harmon St · 80 units · Permitted</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1708 HARMON St</b><br/><b>Units:</b> 80<br/><b>VLI Units:</b> 80<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.5m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>1708 HARMON St</b><br/><b>Units:</b> 80<br/><b>VLI Units:</b> 80<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Permitted_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7153,7 +7213,7 @@
 		<Placemark>
 			<name>2680 Bancroft Way · 79 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2680 BANCROFT Way</b><br/><b>Units:</b> 79<br/><b>VLI Units:</b> 9<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review<br/><i>Footprint 5,215 sf = the NEW 8-storey building on APN 055-1871-001-03 (lot 7,150 sf); 5,215/7,150 = 72.9% reproduces the sheet's stated 73%. The 5,261 sf on APN 55-1871-20 is an EXISTING 4-storey building RETAINED ('NO CHANGE' in its lot, footprint, storey and height rows) and is NOT part of this figure. Was 7,469 sf.</i>]]></description>
+			<description><![CDATA[<b>2680 BANCROFT Way</b><br/><b>Units:</b> 79<br/><b>VLI Units:</b> 9<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled<br/><i>Footprint 5,215 sf = the NEW 8-storey building on APN 055-1871-001-03 (lot 7,150 sf); 5,215/7,150 = 72.9% reproduces the sheet's stated 73%. The 5,261 sf on APN 55-1871-20 is an EXISTING 4-storey building RETAINED ('NO CHANGE' in its lot, footprint, storey and height rows) and is NOT part of this figure. Was 7,469 sf.</i>]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7176,7 +7236,7 @@
 		<Placemark>
 			<name>2660 Bancroft Way · 78 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2660 BANCROFT Way</b><br/><b>Units:</b> 78<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2660 BANCROFT Way</b><br/><b>Units:</b> 78<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7199,7 +7259,7 @@
 		<Placemark>
 			<name>2427 San Pablo · 78 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2427 San Pablo</b><br/><b>Units:</b> 78<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 21.3m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2427 San Pablo</b><br/><b>Units:</b> 78<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 21.3m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7222,7 +7282,7 @@
 		<Placemark>
 			<name>2955 Shattuck Ave · 74 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2955 SHATTUCK Ave</b><br/><b>Units:</b> 74<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 25.9m<br/><b>Status:</b> In Review<br/><i>Footprint 15,610 sf and height 8 storeys from the project's own Tabulation Form 1.E (2025-05-25), PROPOSED column: lot 16,968 sf x 92% coverage. CORRECTS AN EARLIER EDIT OF MINE THAT TOOK THE EXISTING COLUMN (51% -> 8,654 sf) from a plan set, when a 1.E was on R2 all along. The units row settles the column order beyond doubt: 0 existing, 74 proposed. Before either edit the polygon was a degenerate 1,113 sf sliver. Lot 16,968 sf exceeds the single county parcel (12,207 sf), so this is a multi-parcel site and the extent is approximate; area and height are the architect's own. Moved 1.84 m EAST 2026-08-26: the footprint's WEST edge (its Shattuck frontage — 2955 is on the EAST side of the street) overhung the property line into the roadway. Site is TWO parcels, 53-1589-18-1 (2925 Shattuck, 12,235 sf) + 53-1589-19 (2921 Shattuck, 4,831 sf) = 17,066 sf against the 1.E's stated 16,968 sf lot; at 92% coverage the building nearly fills the site, so placement error shows up immediately as a street intrusion.</i><br/><i>Footprint 15,611 sf and 8 storeys / 85 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 15,611 sf at 28.0 m. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>2955 SHATTUCK Ave</b><br/><b>Units:</b> 74<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 25.9m<br/><b>Status:</b> Entitled<br/><i>Footprint 15,610 sf and height 8 storeys from the project's own Tabulation Form 1.E (2025-05-25), PROPOSED column: lot 16,968 sf x 92% coverage. CORRECTS AN EARLIER EDIT OF MINE THAT TOOK THE EXISTING COLUMN (51% -> 8,654 sf) from a plan set, when a 1.E was on R2 all along. The units row settles the column order beyond doubt: 0 existing, 74 proposed. Before either edit the polygon was a degenerate 1,113 sf sliver. Lot 16,968 sf exceeds the single county parcel (12,207 sf), so this is a multi-parcel site and the extent is approximate; area and height are the architect's own. Moved 1.84 m EAST 2026-08-26: the footprint's WEST edge (its Shattuck frontage — 2955 is on the EAST side of the street) overhung the property line into the roadway. Site is TWO parcels, 53-1589-18-1 (2925 Shattuck, 12,235 sf) + 53-1589-19 (2921 Shattuck, 4,831 sf) = 17,066 sf against the 1.E's stated 16,968 sf lot; at 92% coverage the building nearly fills the site, so placement error shows up immediately as a street intrusion.</i><br/><i>Footprint 15,611 sf and 8 storeys / 85 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 15,611 sf at 28.0 m. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7245,7 +7305,7 @@
 		<Placemark>
 			<name>2037 Durant Ave · 74 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2037 DURANT Ave</b><br/><b>Units:</b> 74<br/><b>VLI Units:</b> 4<br/><b>Stories:</b> 1<br/><b>Height:</b> 27.4m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2037 DURANT Ave</b><br/><b>Units:</b> 74<br/><b>VLI Units:</b> 4<br/><b>Stories:</b> 1<br/><b>Height:</b> 27.4m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7268,7 +7328,7 @@
 		<Placemark>
 			<name>2138 Kittredge St · 73 units · Permitted</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2138 KITTREDGE St</b><br/><b>Units:</b> 73<br/><b>VLI Units:</b> 5<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2138 KITTREDGE St</b><br/><b>Units:</b> 73<br/><b>VLI Units:</b> 5<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Permitted_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7291,7 +7351,7 @@
 		<Placemark>
 			<name>2099 MLK Jr Way · 72 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2099 MLK Jr Way</b><br/><b>Units:</b> 72<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> In Review<br/><i>(7 storeys, building permit B2021-03950)</i>]]></description>
+			<description><![CDATA[<b>2099 MLK Jr Way</b><br/><b>Units:</b> 72<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Entitled<br/><i>(7 storeys, building permit B2021-03950)</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7314,7 +7374,7 @@
 		<Placemark>
 			<name>2550 Shattuck Ave · 72 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2550 SHATTUCK Ave</b><br/><b>Units:</b> 72<br/><b>VLI Units:</b> 8<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2550 SHATTUCK Ave</b><br/><b>Units:</b> 72<br/><b>VLI Units:</b> 8<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7337,7 +7397,7 @@
 		<Placemark>
 			<name>2326 Durant Ave · 70 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2326 DURANT Ave</b><br/><b>Units:</b> 70<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2326 DURANT Ave</b><br/><b>Units:</b> 70<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7360,7 +7420,7 @@
 		<Placemark>
 			<name>2300 Ellsworth St · 69 units · Under Construction</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2300 ELLSWORTH St</b><br/><b>Units:</b> 69<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 22.9m<br/><b>Status:</b> In Review<br/><i>Footprint 12,640 sf and 7 storeys from the project's own Tabulation Form 1.E, PROPOSED column — identified by the form's DWELLING-UNITS row matching v2's count, not by column position. Was 6,547 sf at 24.5 m. 2026-08-26.</i><br/><i>Footprint 12,640 sf and 7 storeys / 75 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 12,640 sf at 24.5 m. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>2300 ELLSWORTH St</b><br/><b>Units:</b> 69<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 22.9m<br/><b>Status:</b> Entitled<br/><i>Footprint 12,640 sf and 7 storeys from the project's own Tabulation Form 1.E, PROPOSED column — identified by the form's DWELLING-UNITS row matching v2's count, not by column position. Was 6,547 sf at 24.5 m. 2026-08-26.</i><br/><i>Footprint 12,640 sf and 7 storeys / 75 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 12,640 sf at 24.5 m. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_Under_Construction_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7383,7 +7443,7 @@
 		<Placemark>
 			<name>2330 Durant Ave · 68 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2330 DURANT Ave</b><br/><b>Units:</b> 68<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2330 DURANT Ave</b><br/><b>Units:</b> 68<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7406,7 +7466,7 @@
 		<Placemark>
 			<name>2455 Telegraph Ave · 68 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2455 TELEGRAPH Ave</b><br/><b>Units:</b> 68<br/><b>VLI Units:</b> 7<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2455 TELEGRAPH Ave</b><br/><b>Units:</b> 68<br/><b>VLI Units:</b> 7<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7429,7 +7489,7 @@
 		<Placemark>
 			<name>1752 Shattuck Ave · 72 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1752 SHATTUCK Ave</b><br/><b>Units:</b> 68<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>1752 SHATTUCK Ave</b><br/><b>Units:</b> 68<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7452,7 +7512,7 @@
 		<Placemark>
 			<name>2462 Bancroft Way · 66 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2462 BANCROFT Way</b><br/><b>Units:</b> 66<br/><b>VLI Units:</b> 3<br/><b>Stories:</b> 8<br/><b>Height:</b> 26.8m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2462 BANCROFT Way</b><br/><b>Units:</b> 66<br/><b>VLI Units:</b> 3<br/><b>Stories:</b> 8<br/><b>Height:</b> 26.8m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7475,7 +7535,7 @@
 		<Placemark>
 			<name>2072 Addison St · 66 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2072 Addison St</b><br/><b>Units:</b> 66<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2072 Addison St</b><br/><b>Units:</b> 66<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7498,7 +7558,7 @@
 		<Placemark>
 			<name>2298 Durant Ave · 65 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2298 DURANT Ave</b><br/><b>Units:</b> 65<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 25.9m<br/><b>Status:</b> In Review<br/><i>Footprint 7,438 sf and 7 storeys / 85 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 8,903 sf at 27.7 m. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>2298 DURANT Ave</b><br/><b>Units:</b> 65<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 25.9m<br/><b>Status:</b> Entitled<br/><i>Footprint 7,438 sf and 7 storeys / 85 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 8,903 sf at 27.7 m. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7521,7 +7581,7 @@
 		<Placemark>
 			<name>2441 Le Conte Ave · 65 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2441 LE CONTE Ave</b><br/><b>Units:</b> 65<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.2m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i><br/><i>Footprint 5,902 sf derived from the architect tabulation (lot 12,830 x 46% coverage). County parcel 13,023 sf agrees with the stated lot (0.99); 5,902/13,023 = 45.3% reproduces the stated 46%. Was the parcel polygon (13,455 sf).</i><br/><i>Footprint 9,109 sf and 5 storeys / 56 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 5,902 sf at 24.5 m. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>2441 LE CONTE Ave</b><br/><b>Units:</b> 65<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.2m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i><br/><i>Footprint 5,902 sf derived from the architect tabulation (lot 12,830 x 46% coverage). County parcel 13,023 sf agrees with the stated lot (0.99); 5,902/13,023 = 45.3% reproduces the stated 46%. Was the parcel polygon (13,455 sf).</i><br/><i>Footprint 9,109 sf and 5 storeys / 56 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 5,902 sf at 24.5 m. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7544,7 +7604,7 @@
 		<Placemark>
 			<name>3031 Adeline St · 64 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>3031 ADELINE St</b><br/><b>Units:</b> 64<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>3031 ADELINE St</b><br/><b>Units:</b> 64<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7567,7 +7627,7 @@
 		<Placemark>
 			<name>2372 Ellsworth St · 63 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2372 ELLSWORTH St</b><br/><b>Units:</b> 63<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 25.8m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i><br/><i>Footprint 7,702 sf and 7 storeys / 84 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 9,756 sf at 24.5 m. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>2372 ELLSWORTH St</b><br/><b>Units:</b> 63<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 25.8m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i><br/><i>Footprint 7,702 sf and 7 storeys / 84 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 9,756 sf at 24.5 m. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7590,7 +7650,7 @@
 		<Placemark>
 			<name>2001 Center St · 58 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2001 CENTER St</b><br/><b>Units:</b> 58<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 30.5m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2001 CENTER St</b><br/><b>Units:</b> 58<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 30.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7613,7 +7673,7 @@
 		<Placemark>
 			<name>2127 Dwight Way · 58 units · Withdrawn</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2127 DWIGHT Way</b><br/><b>Units:</b> 58<br/><b>VLI Units:</b> 8<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2127 DWIGHT Way</b><br/><b>Units:</b> 58<br/><b>VLI Units:</b> 8<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Withdrawn_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7636,7 +7696,7 @@
 		<Placemark>
 			<name>2712 Telegraph Ave · 57 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2712 TELEGRAPH Ave</b><br/><b>Units:</b> 57<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2712 TELEGRAPH Ave</b><br/><b>Units:</b> 57<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7659,7 +7719,7 @@
 		<Placemark>
 			<name>1740 San Pablo Ave · 54 units · Permitted</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1740 SAN PABLO Ave</b><br/><b>Units:</b> 54<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>1740 SAN PABLO Ave</b><br/><b>Units:</b> 54<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Permitted_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7682,7 +7742,7 @@
 		<Placemark>
 			<name>2902 Adeline St · 54 units · Withdrawn</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2902 ADELINE St</b><br/><b>Units:</b> 54<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2902 ADELINE St</b><br/><b>Units:</b> 54<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Withdrawn_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7705,7 +7765,7 @@
 		<Placemark>
 			<name>2587 Telegraph Ave · 52 units · Withdrawn</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2587 TELEGRAPH Ave</b><br/><b>Units:</b> 52<br/><b>VLI Units:</b> 6<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2587 TELEGRAPH Ave</b><br/><b>Units:</b> 52<br/><b>VLI Units:</b> 6<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Withdrawn_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7728,7 +7788,7 @@
 		<Placemark>
 			<name>130 Berkeley Sq · 50 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>130 BERKELEY Sq</b><br/><b>Units:</b> 50<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>130 BERKELEY Sq</b><br/><b>Units:</b> 50<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7751,7 +7811,7 @@
 		<Placemark>
 			<name>2016 Ashby Ave · 50 units · Withdrawn</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2016 ASHBY Ave</b><br/><b>Units:</b> 50<br/><b>VLI Units:</b> 50<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2016 ASHBY Ave</b><br/><b>Units:</b> 50<br/><b>VLI Units:</b> 50<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Withdrawn_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7774,7 +7834,7 @@
 		<Placemark>
 			<name>2350 Telegraph Ave · 48 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2350 TELEGRAPH Ave</b><br/><b>Units:</b> 48<br/><b>VLI Units:</b> 2<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2350 TELEGRAPH Ave</b><br/><b>Units:</b> 48<br/><b>VLI Units:</b> 2<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7797,7 +7857,7 @@
 		<Placemark>
 			<name>2727 Haste St · 45 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2727 HASTE St</b><br/><b>Units:</b> 45<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2727 HASTE St</b><br/><b>Units:</b> 45<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7820,7 +7880,7 @@
 		<Placemark>
 			<name>2650 Telegraph Ave · 45 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2650 TELEGRAPH Ave</b><br/><b>Units:</b> 45<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 18.1m<br/><b>Status:</b> In Review<br/><i>Footprint 9,261 sf and 5 storeys from the project's own Tabulation Form 1.E, PROPOSED column — identified by the form's DWELLING-UNITS row matching v2's count, not by column position. Was 11,476 sf at 17.5 m. 2026-08-26.</i><br/><i>Footprint 9,261 sf and 5 storeys / 60 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 9,261 sf at 17.5 m. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>2650 TELEGRAPH Ave</b><br/><b>Units:</b> 45<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 18.1m<br/><b>Status:</b> Entitled<br/><i>Footprint 9,261 sf and 5 storeys from the project's own Tabulation Form 1.E, PROPOSED column — identified by the form's DWELLING-UNITS row matching v2's count, not by column position. Was 11,476 sf at 17.5 m. 2026-08-26.</i><br/><i>Footprint 9,261 sf and 5 storeys / 60 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 9,261 sf at 17.5 m. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7843,7 +7903,7 @@
 		<Placemark>
 			<name>2435 San Pablo Ave · 40 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2435 SAN PABLO Ave</b><br/><b>Units:</b> 40<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2435 SAN PABLO Ave</b><br/><b>Units:</b> 40<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7866,7 +7926,7 @@
 		<Placemark>
 			<name>2440 Shattuck Ave · 40 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2440 SHATTUCK Ave</b><br/><b>Units:</b> 40<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2440 SHATTUCK Ave</b><br/><b>Units:</b> 40<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7889,7 +7949,7 @@
 		<Placemark>
 			<name>2449 Dwight Way · 39 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2449 DWIGHT Way</b><br/><b>Units:</b> 39<br/><b>VLI Units:</b> 2<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2449 DWIGHT Way</b><br/><b>Units:</b> 39<br/><b>VLI Units:</b> 2<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7912,7 +7972,7 @@
 		<Placemark>
 			<name>1367 University Ave · 39 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1367 UNIVERSITY Ave</b><br/><b>Units:</b> 39<br/><b>VLI Units:</b> 39<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>1367 UNIVERSITY Ave</b><br/><b>Units:</b> 39<br/><b>VLI Units:</b> 39<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7935,7 +7995,7 @@
 		<Placemark>
 			<name>2403 San Pablo Ave · 36 units · Under Construction</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2403 SAN PABLO Ave</b><br/><b>Units:</b> 36<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2403 SAN PABLO Ave</b><br/><b>Units:</b> 36<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Under_Construction_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7958,7 +8018,7 @@
 		<Placemark>
 			<name>1698 University Ave · 36 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1698 UNIVERSITY Ave</b><br/><b>Units:</b> 36<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.5m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>1698 UNIVERSITY Ave</b><br/><b>Units:</b> 36<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -7981,7 +8041,7 @@
 		<Placemark>
 			<name>2442 Haste St · 34 units · Under Construction</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2442 HASTE St</b><br/><b>Units:</b> 34<br/><b>VLI Units:</b> 2<br/><b>Stories:</b> 8<br/><b>Height:</b> 25.9m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2442 HASTE St</b><br/><b>Units:</b> 34<br/><b>VLI Units:</b> 2<br/><b>Stories:</b> 8<br/><b>Height:</b> 25.9m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Under_Construction_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8004,7 +8064,7 @@
 		<Placemark>
 			<name>2733 San Pablo Ave · 152 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2733 SAN PABLO Ave</b><br/><b>Units:</b> 32<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2733 SAN PABLO Ave</b><br/><b>Units:</b> 32<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8025,10 +8085,10 @@
 			<Point><coordinates>-122.28760428930529,37.85641810849397,31.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point>
 		</Placemark>
 		<Placemark>
-			<name>2614 Telegraph Ave · 31 units · In Review</name>
+			<name>2614 Telegraph Ave · 31 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2614 TELEGRAPH Ave</b><br/><b>Units:</b> 31<br/><b>VLI Units:</b> 3<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.4m<br/><b>Status:</b> In Review]]></description>
-			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
+			<description><![CDATA[<b>2614 TELEGRAPH Ave</b><br/><b>Units:</b> 31<br/><b>VLI Units:</b> 3<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.4m<br/><b>Status:</b> Entitled</description>
+			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
@@ -8042,15 +8102,15 @@
 			</Polygon>
 		</Placemark>
 		<Placemark>
-			<name>2614 Telegraph Ave · 31 units · In Review</name>
-			<styleUrl>#style_status_In_Review</styleUrl>
+			<name>2614 Telegraph Ave · 31 units · Entitled</name>
+			<styleUrl>#style_status_Entitled</styleUrl>
 			<Region><LatLonAltBox><north>37.862938888354776</north><south>37.86257956388478</south><east>-122.25895622572999</east><west>-122.25941136444352</west></LatLonAltBox><Lod><minLodPixels>128</minLodPixels><maxLodPixels>-1</maxLodPixels><minFadeExtent>64</minFadeExtent></Lod></Region>
 			<Point><coordinates>-122.25915279841328,37.862737148969686,20.4</coordinates><altitudeMode>relativeToGround</altitudeMode></Point>
 		</Placemark>
 		<Placemark>
 			<name>3000 San Pablo Ave · 78 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>3000 SAN PABLO Ave</b><br/><b>Units:</b> 78<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>3000 SAN PABLO Ave</b><br/><b>Units:</b> 78<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8073,7 +8133,7 @@
 		<Placemark>
 			<name>3020 San Pablo Ave · 29 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>3020 SAN PABLO Ave</b><br/><b>Units:</b> 29<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>3020 SAN PABLO Ave</b><br/><b>Units:</b> 29<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8096,7 +8156,7 @@
 		<Placemark>
 			<name>2480 Bancroft Way · 28 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2480 Bancroft Way</b><br/><b>Units:</b> 28<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review<br/><i>Footprint 5,330 sf and 8 storeys from the project's own Tabulation Form 1.E, PROPOSED column — identified by the form's DWELLING-UNITS row matching v2's count, not by column position. Was 6,500 sf at 28.0 m. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>2480 Bancroft Way</b><br/><b>Units:</b> 28<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled<br/><i>Footprint 5,330 sf and 8 storeys from the project's own Tabulation Form 1.E, PROPOSED column — identified by the form's DWELLING-UNITS row matching v2's count, not by column position. Was 6,500 sf at 28.0 m. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8119,7 +8179,7 @@
 		<Placemark>
 			<name>1773 Oxford St · 24 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1773 OXFORD St</b><br/><b>Units:</b> 24<br/><b>VLI Units:</b> 2<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.5m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>1773 OXFORD St</b><br/><b>Units:</b> 24<br/><b>VLI Units:</b> 2<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8140,10 +8200,10 @@
 			<Point><coordinates>-122.26617670841763,37.87555380435894,20.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point>
 		</Placemark>
 		<Placemark>
-			<name>2317 Channing Way · 22 units · Stalled</name>
+			<name>2317 Channing Way · 22 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2317 CHANNING Way</b><br/><b>Units:</b> 22<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 15.2m<br/><b>Status:</b> In Review]]></description>
-			<styleUrl>#style_status_Stalled_nolabel</styleUrl>
+			<description><![CDATA[<b>2317 CHANNING Way</b><br/><b>Units:</b> 22<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 15.2m<br/><b>Status:</b> Entitled</description>
+			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
@@ -8157,15 +8217,15 @@
 			</Polygon>
 		</Placemark>
 		<Placemark>
-			<name>2317 Channing Way · 22 units · Stalled</name>
-			<styleUrl>#style_status_Stalled</styleUrl>
+			<name>2317 Channing Way · 22 units · Entitled</name>
+			<styleUrl>#style_status_Entitled</styleUrl>
 			<Region><LatLonAltBox><north>37.86687442600704</north><south>37.8665070815042</south><east>-122.26236613105738</east><west>-122.26282129420065</west></LatLonAltBox><Lod><minLodPixels>128</minLodPixels><maxLodPixels>-1</maxLodPixels><minFadeExtent>64</minFadeExtent></Lod></Region>
 			<Point><coordinates>-122.26257757596868,37.866692556803066,18.2</coordinates><altitudeMode>relativeToGround</altitudeMode></Point>
 		</Placemark>
 		<Placemark>
 			<name>2800 Telegraph Ave · 18 units · Under Construction</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2800 TELEGRAPH Ave</b><br/><b>Units:</b> 18<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Under Construction<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2800 TELEGRAPH Ave</b><br/><b>Units:</b> 18<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Under_Construction_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8188,7 +8248,7 @@
 		<Placemark>
 			<name>2344 Fulton St · 18 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2344 FULTON St</b><br/><b>Units:</b> 18<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2344 FULTON St</b><br/><b>Units:</b> 18<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8211,7 +8271,7 @@
 		<Placemark>
 			<name>1790 University Ave · 17 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1790 UNIVERSITY Ave</b><br/><b>Units:</b> 17<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.1m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>1790 UNIVERSITY Ave</b><br/><b>Units:</b> 17<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.1m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8234,7 +8294,7 @@
 		<Placemark>
 			<name>1710 University Ave · 16 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1710 UNIVERSITY Ave</b><br/><b>Units:</b> 16<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>1710 UNIVERSITY Ave</b><br/><b>Units:</b> 16<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8257,7 +8317,7 @@
 		<Placemark>
 			<name>2147 San Pablo Ave · 15 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2147 SAN PABLO Ave</b><br/><b>Units:</b> 15<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 21.3m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2147 SAN PABLO Ave</b><br/><b>Units:</b> 15<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 21.3m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8280,7 +8340,7 @@
 		<Placemark>
 			<name>1740 University Ave · 12 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1740 UNIVERSITY Ave</b><br/><b>Units:</b> 12<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1740 UNIVERSITY Ave</b><br/><b>Units:</b> 12<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8303,7 +8363,7 @@
 		<Placemark>
 			<name>2018 Blake St · 12 units · Permitted</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2018 BLAKE St</b><br/><b>Units:</b> 12<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 19.8m<br/><b>Status:</b> In Review<br/><i>Footprint RESTORED to 4,547 sf 2026-08-26 after a bad automated write set it to 16 sf: the 1.E parser returned 16 for the footprint (a stray token, not a measurement) and it was applied without a plausibility floor. Height 19.8 m / 6 storeys from the 1.E stands -- both parsers agreed on storeys. Footprint here is the pre-existing polygon, NOT a stated value.</i>]]></description>
+			<description><![CDATA[<b>2018 BLAKE St</b><br/><b>Units:</b> 12<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 19.8m<br/><b>Status:</b> Entitled<br/><i>Footprint RESTORED to 4,547 sf 2026-08-26 after a bad automated write set it to 16 sf: the 1.E parser returned 16 for the footprint (a stray token, not a measurement) and it was applied without a plausibility floor. Height 19.8 m / 6 storeys from the 1.E stands -- both parsers agreed on storeys. Footprint here is the pre-existing polygon, NOT a stated value.</i>]]></description>
 			<styleUrl>#style_status_Permitted_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8326,7 +8386,7 @@
 		<Placemark>
 			<name>2555 College Ave · 12 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2555 COLLEGE Ave</b><br/><b>Units:</b> 12<br/><b>VLI Units:</b> 1<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.3m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2555 COLLEGE Ave</b><br/><b>Units:</b> 12<br/><b>VLI Units:</b> 1<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.3m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8349,7 +8409,7 @@
 		<Placemark>
 			<name>1015 University Ave · 9 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1015 UNIVERSITY Ave</b><br/><b>Units:</b> 9<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1015 UNIVERSITY Ave</b><br/><b>Units:</b> 9<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8372,7 +8432,7 @@
 		<Placemark>
 			<name>2428 Milvia St · 8 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2428 MILVIA St</b><br/><b>Units:</b> 8<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2428 MILVIA St</b><br/><b>Units:</b> 8<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8395,7 +8455,7 @@
 		<Placemark>
 			<name>2200 Fifth St · 8 units · Withdrawn</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2200 FIFTH St</b><br/><b>Units:</b> 8<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.4m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2200 FIFTH St</b><br/><b>Units:</b> 8<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.4m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Withdrawn_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8418,7 +8478,7 @@
 		<Placemark>
 			<name>1745 Cedar St · 6 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1745 CEDAR St</b><br/><b>Units:</b> 6<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>1745 CEDAR St</b><br/><b>Units:</b> 6<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8441,7 +8501,7 @@
 		<Placemark>
 			<name>1850 Berryman St · 6 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1850 BERRYMAN St</b><br/><b>Units:</b> 6<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>1850 BERRYMAN St</b><br/><b>Units:</b> 6<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8464,7 +8524,7 @@
 		<Placemark>
 			<name>1618 Sixth St · 4 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1618 SIXTH St</b><br/><b>Units:</b> 4<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>1618 SIXTH St</b><br/><b>Units:</b> 4<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8487,7 +8547,7 @@
 		<Placemark>
 			<name>2420 Ashby Ave · 4 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2420 ASHBY Ave</b><br/><b>Units:</b> 4<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2420 ASHBY Ave</b><br/><b>Units:</b> 4<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8510,7 +8570,7 @@
 		<Placemark>
 			<name>2942 College Ave · 4 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2942 COLLEGE Ave</b><br/><b>Units:</b> 4<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2942 COLLEGE Ave</b><br/><b>Units:</b> 4<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8533,7 +8593,7 @@
 		<Placemark>
 			<name>2437 Warring St · 4 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2437 WARRING St</b><br/><b>Units:</b> 4<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 7.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2437 WARRING St</b><br/><b>Units:</b> 4<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 7.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8556,7 +8616,7 @@
 		<Placemark>
 			<name>2641 College Ave · 3 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2641 COLLEGE Ave</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2641 COLLEGE Ave</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8579,7 +8639,7 @@
 		<Placemark>
 			<name>2205 Blake St · 3 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2205 BLAKE St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2205 BLAKE St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8602,7 +8662,7 @@
 		<Placemark>
 			<name>2221 Fifth St · 3 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2221 FIFTH St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2221 FIFTH St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8625,7 +8685,7 @@
 		<Placemark>
 			<name>1650 Fifth St · 3 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1650 FIFTH St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1650 FIFTH St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8648,7 +8708,7 @@
 		<Placemark>
 			<name>3101 Sacramento St · 3 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>3101 SACRAMENTO St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>3101 SACRAMENTO St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8671,7 +8731,7 @@
 		<Placemark>
 			<name>1449 Cornell Ave · 3 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1449 CORNELL Ave</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 18.3m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>1449 CORNELL Ave</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 18.3m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8694,7 +8754,7 @@
 		<Placemark>
 			<name>1514 Walnut St · 3 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1514 WALNUT St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1514 WALNUT St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8717,7 +8777,7 @@
 		<Placemark>
 			<name>1464 Sixth St · 3 units · Permitted</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1464 SIXTH St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1464 SIXTH St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Permitted_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8740,7 +8800,7 @@
 		<Placemark>
 			<name>2812 Eighth St · 3 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2812 EIGHTH St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2812 EIGHTH St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8763,7 +8823,7 @@
 		<Placemark>
 			<name>2201 Blake St · 3 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2201 BLAKE St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2201 BLAKE St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8786,7 +8846,7 @@
 		<Placemark>
 			<name>2833 Seventh St · 3 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2833 Seventh St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 7.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2833 Seventh St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 7.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8809,7 +8869,7 @@
 		<Placemark>
 			<name>1614 Sixth St · 3 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1614 Sixth St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.7m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1614 Sixth St</b><br/><b>Units:</b> 3<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.7m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8832,7 +8892,7 @@
 		<Placemark>
 			<name>1716 Seventh St · 2 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1716 SEVENTH St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1716 SEVENTH St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8855,7 +8915,7 @@
 		<Placemark>
 			<name>1515 Derby St · 2 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1515 DERBY St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1515 DERBY St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8878,7 +8938,7 @@
 		<Placemark>
 			<name>1922 Francisco St · 2 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1922 FRANCISCO St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>1922 FRANCISCO St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8901,7 +8961,7 @@
 		<Placemark>
 			<name>2204 Dwight Way · 2 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2204 DWIGHT Way</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.7m<br/><b>Status:</b> In Review<br/><i>Footprint 1,944 sf and 2 storeys from the project's own Tabulation Form 1.E, PROPOSED column — identified by the form's DWELLING-UNITS row matching v2's count, not by column position. Was 5,715 sf at 10.5 m. 2026-08-26.</i><br/><i>Footprint 2,430 sf and 3 storeys / 35 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 1,944 sf at 7.0 m. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>2204 DWIGHT Way</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.7m<br/><b>Status:</b> Entitled<br/><i>Footprint 1,944 sf and 2 storeys from the project's own Tabulation Form 1.E, PROPOSED column — identified by the form's DWELLING-UNITS row matching v2's count, not by column position. Was 5,715 sf at 10.5 m. 2026-08-26.</i><br/><i>Footprint 2,430 sf and 3 storeys / 35 ft from the Tabulation Form 1.E, PROPOSED column. Read INDEPENDENTLY by two sessions and agreeing; column identified by the form's dwelling-units row. Was 1,944 sf at 7.0 m. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8924,7 +8984,7 @@
 		<Placemark>
 			<name>1419 Grant St · 2 units · Permitted</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1419 GRANT St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1419 GRANT St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Permitted_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8947,7 +9007,7 @@
 		<Placemark>
 			<name>1236 Dwight Way · 2 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1236 DWIGHT Way</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1236 DWIGHT Way</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8970,7 +9030,7 @@
 		<Placemark>
 			<name>2808 Ninth St · 2 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2808 NINTH St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2808 NINTH St</b><br/><b>Units:</b> 2<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -8993,7 +9053,7 @@
 		<Placemark>
 			<name>3001 Benvenue Ave · 1 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>3001 BENVENUE Ave</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>3001 BENVENUE Ave</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9016,7 +9076,7 @@
 		<Placemark>
 			<name>40 Hill Rd · 1 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>40 HILL Rd</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>40 HILL Rd</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9039,7 +9099,7 @@
 		<Placemark>
 			<name>5 W Parnassus Ct · 1 units · Permitted</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>5 W PARNASSUS Ct</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>5 W PARNASSUS Ct</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Permitted_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9062,7 +9122,7 @@
 		<Placemark>
 			<name>0 Le Roy Ave · 1 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>0 LE ROY Ave</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>0 LE ROY Ave</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9085,7 +9145,7 @@
 		<Placemark>
 			<name>2328 Grant St · 1 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2328 GRANT St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2328 GRANT St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9108,7 +9168,7 @@
 		<Placemark>
 			<name>1939 Marin Ave · 1 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1939 MARIN Ave</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1939 MARIN Ave</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9129,10 +9189,10 @@
 			<Point><coordinates>-122.27481602708534,37.889604188161954,13.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point>
 		</Placemark>
 		<Placemark>
-			<name>1731 Addison St · 1 units · In Review</name>
+			<name>1731 Addison St · 1 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1731 ADDISON St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
-			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
+			<description><![CDATA[<b>1731 ADDISON St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
+			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
@@ -9146,15 +9206,15 @@
 			</Polygon>
 		</Placemark>
 		<Placemark>
-			<name>1731 Addison St · 1 units · In Review</name>
-			<styleUrl>#style_status_In_Review</styleUrl>
+			<name>1731 Addison St · 1 units · Entitled</name>
+			<styleUrl>#style_status_Entitled</styleUrl>
 			<Region><LatLonAltBox><north>37.8706534758533</north><south>37.87024659707811</south><east>-122.27583134622782</east><west>-122.27628653237039</west></LatLonAltBox><Lod><minLodPixels>128</minLodPixels><maxLodPixels>-1</maxLodPixels><minFadeExtent>64</minFadeExtent></Lod></Region>
 			<Point><coordinates>-122.27603744850255,37.87041565126292,13.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point>
 		</Placemark>
 		<Placemark>
 			<name>1420 Fifth St · 1 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1420 FIFTH St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1420 FIFTH St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9177,7 +9237,7 @@
 		<Placemark>
 			<name>1139 Keeler Ave · 1 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1139 KEELER Ave</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1139 KEELER Ave</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9200,7 +9260,7 @@
 		<Placemark>
 			<name>1111 Allston Way · 1 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1111 ALLSTON Way</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1111 ALLSTON Way</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9221,10 +9281,10 @@
 			<Point><coordinates>-122.29062210697528,37.8667907776094,13.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point>
 		</Placemark>
 		<Placemark>
-			<name>659 Grizzly Peak Blvd · 1 units · In Review</name>
+			<name>659 Grizzly Peak Blvd · 1 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>659 GRIZZLY PEAK Blvd</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
-			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
+			<description><![CDATA[<b>659 GRIZZLY PEAK Blvd</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
+			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
@@ -9238,15 +9298,15 @@
 			</Polygon>
 		</Placemark>
 		<Placemark>
-			<name>659 Grizzly Peak Blvd · 1 units · In Review</name>
-			<styleUrl>#style_status_In_Review</styleUrl>
+			<name>659 Grizzly Peak Blvd · 1 units · Entitled</name>
+			<styleUrl>#style_status_Entitled</styleUrl>
 			<Region><LatLonAltBox><north>37.90030157014177</north><south>37.899942245671774</south><east>-122.2652470769679</east><west>-122.2657036973033</west></LatLonAltBox><Lod><minLodPixels>128</minLodPixels><maxLodPixels>-1</maxLodPixels><minFadeExtent>64</minFadeExtent></Lod></Region>
 			<Point><coordinates>-122.26541471357915,37.90014219830418,13.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point>
 		</Placemark>
 		<Placemark>
 			<name>3036 Regent St · 1 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>3036 REGENT St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>3036 REGENT St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9267,10 +9327,10 @@
 			<Point><coordinates>-122.25657722487558,37.85417468225866,13.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point>
 		</Placemark>
 		<Placemark>
-			<name>1621 Sacramento St · 1 units · In Review</name>
+			<name>1621 Sacramento St · 1 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1621 SACRAMENTO St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
-			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
+			<description><![CDATA[<b>1621 SACRAMENTO St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
+			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
@@ -9284,15 +9344,15 @@
 			</Polygon>
 		</Placemark>
 		<Placemark>
-			<name>1621 Sacramento St · 1 units · In Review</name>
-			<styleUrl>#style_status_In_Review</styleUrl>
+			<name>1621 Sacramento St · 1 units · Entitled</name>
+			<styleUrl>#style_status_Entitled</styleUrl>
 			<Region><LatLonAltBox><north>37.87626128944544</north><south>37.87590196497544</south><east>-122.28203041953319</east><west>-122.28248564063782</west></LatLonAltBox><Lod><minLodPixels>128</minLodPixels><maxLodPixels>-1</maxLodPixels><minFadeExtent>64</minFadeExtent></Lod></Region>
 			<Point><coordinates>-122.28222991639566,37.876073947900835,13.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point>
 		</Placemark>
 		<Placemark>
 			<name>2820 San Pablo Ave · 1 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2820 SAN PABLO Ave</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 7.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>2820 SAN PABLO Ave</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 7.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9315,7 +9375,7 @@
 		<Placemark>
 			<name>0 Parker St · 1 units · Permitted</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>0 PARKER St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>0 PARKER St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Permitted_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9336,10 +9396,10 @@
 			<Point><coordinates>-122.26432693213967,37.86278091676062,6.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point>
 		</Placemark>
 		<Placemark>
-			<name>1522 Josephine St · 0 units · In Review</name>
+			<name>1522 Josephine St · 0 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1522 JOSEPHINE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 8.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
-			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
+			<description><![CDATA[<b>1522 JOSEPHINE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 8.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
+			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
@@ -9353,15 +9413,15 @@
 			</Polygon>
 		</Placemark>
 		<Placemark>
-			<name>1522 Josephine St · 0 units · In Review</name>
-			<styleUrl>#style_status_In_Review</styleUrl>
+			<name>1522 Josephine St · 0 units · Entitled</name>
+			<styleUrl>#style_status_Entitled</styleUrl>
 			<Region><LatLonAltBox><north>37.87872281265001</north><south>37.878363488180014</south><east>-122.27502094226742</east><west>-122.2754986764271</west></LatLonAltBox><Lod><minLodPixels>128</minLodPixels><maxLodPixels>-1</maxLodPixels><minFadeExtent>64</minFadeExtent></Lod></Region>
 			<Point><coordinates>-122.27521135485908,37.87853712045937,11.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point>
 		</Placemark>
 		<Placemark>
 			<name>3035 Colby St · 0 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>3035 COLBY St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>3035 COLBY St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9384,7 +9444,7 @@
 		<Placemark>
 			<name>1136 Keith Ave · 1 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1136 KEITH Ave</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1136 KEITH Ave</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9407,7 +9467,7 @@
 		<Placemark>
 			<name>1730 Parker St · 0 units · Permitted</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1730 PARKER St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1730 PARKER St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Permitted_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9430,7 +9490,7 @@
 		<Placemark>
 			<name>1109 Cowper St · 0 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1109 COWPER St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1109 COWPER St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9453,7 +9513,7 @@
 		<Placemark>
 			<name>705 Arlington Ave · 0 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>705 ARLINGTON Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>705 ARLINGTON Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9476,7 +9536,7 @@
 		<Placemark>
 			<name>2027 Seventh St · 0 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2027 SEVENTH St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2027 SEVENTH St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9499,7 +9559,7 @@
 		<Placemark>
 			<name>576 San Luis Rd · 0 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>576 SAN LUIS Rd</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 6.1m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>576 SAN LUIS Rd</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 6.1m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9522,7 +9582,7 @@
 		<Placemark>
 			<name>2009 Addison St · 45 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2009 ADDISON St</b><br/><b>Units:</b> 45<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> In Review<br/><i>(7 storeys — DRC Staff Report DRCP2017-0001)</i><br/><i>Height corrected 24.5m / 7 storeys from v2 (7 storeys — DRC Staff Report DRCP2017-0001), 2026-08-26. Was the 10.5m migration placeholder for a 45-unit building.</i>]]></description>
+			<description><![CDATA[<b>2009 ADDISON St</b><br/><b>Units:</b> 45<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Entitled<br/><i>(7 storeys — DRC Staff Report DRCP2017-0001)</i><br/><i>Height corrected 24.5m / 7 storeys from v2 (7 storeys — DRC Staff Report DRCP2017-0001), 2026-08-26. Was the 10.5m migration placeholder for a 45-unit building.</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9543,7 +9603,7 @@
 		<Placemark>
 			<name>1312 Addison St · 0 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1312 ADDISON St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1312 ADDISON St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9566,7 +9626,7 @@
 		<Placemark>
 			<name>2145 Grant St · 1 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2145 GRANT St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2145 GRANT St</b><br/><b>Units:</b> 1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9589,7 +9649,7 @@
 		<Placemark>
 			<name>2903 Adeline St · 0 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2903 ADELINE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2903 ADELINE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9612,7 +9672,7 @@
 		<Placemark>
 			<name>1507 Josephine St · 0 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1507 JOSEPHINE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1507 JOSEPHINE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9635,7 +9695,7 @@
 		<Placemark>
 			<name>1338 Seventh St · 0 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1338 SEVENTH St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1338 SEVENTH St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9658,7 +9718,7 @@
 		<Placemark>
 			<name>2238 Seventh St · 0 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2238 SEVENTH St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2238 SEVENTH St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9681,7 +9741,7 @@
 		<Placemark>
 			<name>703 Santa Barbara Rd · 0 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>703 SANTA BARBARA Rd</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>703 SANTA BARBARA Rd</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9704,7 +9764,7 @@
 		<Placemark>
 			<name>385 Vermont Ave · 0 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>385 VERMONT Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>385 VERMONT Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9727,7 +9787,7 @@
 		<Placemark>
 			<name>1246 Rose St · 0 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1246 ROSE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1246 ROSE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9750,7 +9810,7 @@
 		<Placemark>
 			<name>1512 Channing Way · 0 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1512 CHANNING Way</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1512 CHANNING Way</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9773,7 +9833,7 @@
 		<Placemark>
 			<name>1475 Catherine Dr · 0 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1475 CATHERINE Dr</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1475 CATHERINE Dr</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9796,7 +9856,7 @@
 		<Placemark>
 			<name>1187 Shattuck Ave · 0 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1187 SHATTUCK Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1187 SHATTUCK Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9819,7 +9879,7 @@
 		<Placemark>
 			<name>2016 Delaware St A · 0 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2016 DELAWARE St A</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2016 DELAWARE St A</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9842,7 +9902,7 @@
 		<Placemark>
 			<name>1123 Blake St · 0 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1123 BLAKE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1123 BLAKE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9865,7 +9925,7 @@
 		<Placemark>
 			<name>830 Bancroft Way · 0 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>830 BANCROFT Way</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>830 BANCROFT Way</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9888,7 +9948,7 @@
 		<Placemark>
 			<name>2740 Shasta Rd · 0 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2740 SHASTA Rd</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2740 SHASTA Rd</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9911,7 +9971,7 @@
 		<Placemark>
 			<name>2143 Blake St · 0 units · In Review</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2143 BLAKE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2143 BLAKE St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_In_Review_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9934,7 +9994,7 @@
 		<Placemark>
 			<name>411 Vassar Ave · 0 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>411 VASSAR Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>411 VASSAR Ave</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9957,7 +10017,7 @@
 		<Placemark>
 			<name>1048 Keith St · 0 units · Entitled</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1048 Keith St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>1048 Keith St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -9980,7 +10040,7 @@
 		<Placemark>
 			<name>811 Cedar · 0 units · Permitted</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>811 Cedar</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 7.0m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>811 Cedar</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 2<br/><b>Height:</b> 7.0m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Permitted_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -10003,7 +10063,7 @@
 		<Placemark>
 			<name>1627 Jaynes St · 0 units · Permitted</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1627 Jaynes St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review]]></description>
+			<description><![CDATA[<b>1627 Jaynes St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled]]></description>
 			<styleUrl>#style_status_Permitted_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -10026,7 +10086,7 @@
 		<Placemark>
 			<name>2705 Benvenue Ave · 0 units · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2705 BENVENUE Ave</b><br/><b>Units:</b> -1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>(height estimated from units)</i>]]></description>
+			<description><![CDATA[<b>2705 BENVENUE Ave</b><br/><b>Units:</b> -1<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>(height estimated from units)</i>]]></description>
 			<styleUrl>#style_status_Completed_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -10146,7 +10206,7 @@
 		<Placemark>
 			<name>2556 Haste St · South · 556 units · Under Construction</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2556 HASTE St</b><br/><b>Units:</b> 556<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 12<br/><b>Height:</b> 40.2m<br/><b>Status:</b> In Review<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
+			<description><![CDATA[<b>2556 HASTE St</b><br/><b>Units:</b> 556<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 12<br/><b>Height:</b> 40.2m<br/><b>Status:</b> Entitled<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
 			<styleUrl>#style_status_UC_Project_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -10193,7 +10253,7 @@
 	</Folder>
 		<Placemark>
 			<name>North Berkeley BART: Bridge 1 (8 st)</name>
-			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Bridge 1 (8 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Bridge 1 (8 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_BART_Project_nolabel</styleUrl>
 			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
       <outerBoundaryIs><LinearRing><coordinates>-122.284246,37.873212,28.0 -122.284239,37.872932,28.0 -122.284516,37.872928,28.0 -122.284548,37.873208,28.0 -122.284246,37.873212,28.0</coordinates></LinearRing></outerBoundaryIs>
@@ -10207,7 +10267,7 @@
 		</Placemark>
 		<Placemark>
 			<name>North Berkeley BART: Bridge 2 (8 st)</name>
-			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Bridge 2 (8 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Bridge 2 (8 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_BART_Project_nolabel</styleUrl>
 			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
       <outerBoundaryIs><LinearRing><coordinates>-122.284120,37.873214,28.0 -122.283767,37.873220,28.0 -122.283761,37.872988,28.0 -122.284114,37.872943,28.0 -122.284120,37.873214,28.0</coordinates></LinearRing></outerBoundaryIs>
@@ -10221,7 +10281,7 @@
 		</Placemark>
 		<Placemark>
 			<name>North Berkeley BART: Avalon (8 st)</name>
-			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Avalon (8 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Avalon (8 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_BART_Project_nolabel</styleUrl>
 			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
       <outerBoundaryIs><LinearRing><coordinates>-122.283641,37.873222,28.0 -122.283287,37.873227,28.0 -122.283283,37.873048,28.0 -122.283636,37.873004,28.0 -122.283641,37.873222,28.0</coordinates></LinearRing></outerBoundaryIs>
@@ -10235,7 +10295,7 @@
 		</Placemark>
 		<Placemark>
 			<name>North Berkeley BART: EBALDC (6 st)</name>
-			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> In Review<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: EBALDC (6 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Entitled<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: EBALDC (6 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_BART_Project_nolabel</styleUrl>
 			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
       <outerBoundaryIs><LinearRing><coordinates>-122.284254,37.873563,21.0 -122.284247,37.873283,21.0 -122.284555,37.873278,21.0 -122.284587,37.873558,21.0 -122.284254,37.873563,21.0</coordinates></LinearRing></outerBoundaryIs>
@@ -10249,7 +10309,7 @@
 		</Placemark>
 		<Placemark>
 			<name>North Berkeley BART: Insight (6 st)</name>
-			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> In Review<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Insight (6 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Entitled<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Insight (6 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_BART_Project_nolabel</styleUrl>
 			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
       <outerBoundaryIs><LinearRing><coordinates>-122.283768,37.873290,21.0 -122.283775,37.873570,21.0 -122.284129,37.873565,21.0 -122.284122,37.873284,21.0 -122.283768,37.873290,21.0</coordinates></LinearRing></outerBoundaryIs>
@@ -10263,7 +10323,7 @@
 		</Placemark>
 		<Placemark>
 			<name>North Berkeley BART: Bridge 2 Walk-up A (3 st)</name>
-			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Bridge 2 Walk-up A (3 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Bridge 2 Walk-up A (3 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_BART_Project_nolabel</styleUrl>
 			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
       <outerBoundaryIs><LinearRing><coordinates>-122.283334,37.873331,10.5 -122.283339,37.873542,10.5 -122.283605,37.873538,10.5 -122.283600,37.873327,10.5 -122.283334,37.873331,10.5</coordinates></LinearRing></outerBoundaryIs>
@@ -10277,7 +10337,7 @@
 		</Placemark>
 		<Placemark>
 			<name>North Berkeley BART: Bridge 2 Walk-up B (3 st)</name>
-			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Bridge 2 Walk-up B (3 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Bridge 2 Walk-up B (3 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_BART_Project_nolabel</styleUrl>
 			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
       <outerBoundaryIs><LinearRing><coordinates>-122.284301,37.873667,10.5 -122.284306,37.873878,10.5 -122.284571,37.873874,10.5 -122.284566,37.873663,10.5 -122.284301,37.873667,10.5</coordinates></LinearRing></outerBoundaryIs>
@@ -10291,7 +10351,7 @@
 		</Placemark>
 		<Placemark>
 			<name>North Berkeley BART: Bridge 2 Walk-up C (3 st)</name>
-			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Bridge 2 Walk-up C (3 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Bridge 2 Walk-up C (3 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_BART_Project_nolabel</styleUrl>
 			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
       <outerBoundaryIs><LinearRing><coordinates>-122.283822,37.873675,10.5 -122.283827,37.873885,10.5 -122.284092,37.873881,10.5 -122.284087,37.873671,10.5 -122.283822,37.873675,10.5</coordinates></LinearRing></outerBoundaryIs>
@@ -10305,7 +10365,7 @@
 		</Placemark>
 		<Placemark>
 			<name>North Berkeley BART: Avalon Walk-up A (3 st)</name>
-			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Avalon Walk-up A (3 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Avalon Walk-up A (3 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_BART_Project_nolabel</styleUrl>
 			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
       <outerBoundaryIs><LinearRing><coordinates>-122.283357,37.873693,10.5 -122.283361,37.873881,10.5 -122.283599,37.873877,10.5 -122.283594,37.873689,10.5 -122.283357,37.873693,10.5</coordinates></LinearRing></outerBoundaryIs>
@@ -10319,7 +10379,7 @@
 		</Placemark>
 		<Placemark>
 			<name>North Berkeley BART: Avalon Walk-up B (3 st)</name>
-			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Avalon Walk-up B (3 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Avalon Walk-up B (3 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_BART_Project_nolabel</styleUrl>
 			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
       <outerBoundaryIs><LinearRing><coordinates>-122.284323,37.874029,10.5 -122.284328,37.874217,10.5 -122.284566,37.874213,10.5 -122.284561,37.874025,10.5 -122.284323,37.874029,10.5</coordinates></LinearRing></outerBoundaryIs>
@@ -10333,7 +10393,7 @@
 		</Placemark>
 		<Placemark>
 			<name>North Berkeley BART: Avalon Walk-up C (3 st)</name>
-			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Avalon Walk-up C (3 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Avalon Walk-up C (3 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_BART_Project_nolabel</styleUrl>
 			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
       <outerBoundaryIs><LinearRing><coordinates>-122.283844,37.874036,10.5 -122.283849,37.874224,10.5 -122.284086,37.874221,10.5 -122.284082,37.874032,10.5 -122.283844,37.874036,10.5</coordinates></LinearRing></outerBoundaryIs>
@@ -10347,7 +10407,7 @@
 		</Placemark>
 		<Placemark>
 			<name>North Berkeley BART: Avalon Walk-up D (3 st)</name>
-			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Avalon Walk-up D (3 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Avalon Walk-up D (3 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_BART_Project_nolabel</styleUrl>
 			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
       <outerBoundaryIs><LinearRing><coordinates>-122.283365,37.874043,10.5 -122.283370,37.874232,10.5 -122.283607,37.874228,10.5 -122.283603,37.874040,10.5 -122.283365,37.874043,10.5</coordinates></LinearRing></outerBoundaryIs>
@@ -10361,7 +10421,7 @@
 		</Placemark>
 		<Placemark>
 			<name>North Berkeley BART: Avalon Walk-up E (3 st)</name>
-			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> In Review<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Avalon Walk-up E (3 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>1750 SACRAMENTO St</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 3<br/><b>Height:</b> 10.5m<br/><b>Status:</b> Entitled<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — North Berkeley BART: Avalon Walk-up E (3 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_BART_Project_nolabel</styleUrl>
 			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
       <outerBoundaryIs><LinearRing><coordinates>-122.284332,37.874379,10.5 -122.284569,37.874376,10.5 -122.284573,37.874512,10.5 -122.284336,37.874543,10.5 -122.284332,37.874379,10.5</coordinates></LinearRing></outerBoundaryIs>
@@ -10375,7 +10435,7 @@
 		</Placemark>
 		<Placemark>
 			<name>Ashby BART: Adeline Tower (8 st)</name>
-			<description><![CDATA[<b>Ashby BART</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> In Review<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — Ashby BART: Adeline Tower (8 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>Ashby BART</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Entitled<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — Ashby BART: Adeline Tower (8 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_BART_Project_nolabel</styleUrl>
 			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
       <outerBoundaryIs><LinearRing><coordinates>-122.270321,37.852517,28.0 -122.270320,37.852482,28.0 -122.270463,37.852107,28.0 -122.270720,37.852103,28.0 -122.270764,37.852510,28.0 -122.270321,37.852517,28.0</coordinates></LinearRing></outerBoundaryIs>
@@ -10389,7 +10449,7 @@
 		</Placemark>
 		<Placemark>
 			<name>Ashby BART: Building B (7 st)</name>
-			<description><![CDATA[<b>Ashby BART</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> In Review<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — Ashby BART: Building B (7 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>Ashby BART</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Entitled<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — Ashby BART: Building B (7 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_BART_Project_nolabel</styleUrl>
 			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
       <outerBoundaryIs><LinearRing><coordinates>-122.2699198992708,37.8527151103640,24.5 -122.2699288992708,37.8531211103640,24.5 -122.2704408992708,37.8531131103640,24.5 -122.2704318992708,37.8527071103640,24.5 -122.2699198992708,37.8527151103640,24.5</coordinates></LinearRing></outerBoundaryIs>
@@ -10403,7 +10463,7 @@
 		</Placemark>
 		<Placemark>
 			<name>Ashby BART: MLK Building C (6 st)</name>
-			<description><![CDATA[<b>Ashby BART</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> In Review<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — Ashby BART: MLK Building C (6 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>Ashby BART</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Entitled<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — Ashby BART: MLK Building C (6 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_BART_Project_nolabel</styleUrl>
 			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
       <outerBoundaryIs><LinearRing><coordinates>-122.270338,37.853360,21.0 -122.270329,37.852947,21.0 -122.270811,37.852940,21.0 -122.270856,37.853352,21.0 -122.270338,37.853360,21.0</coordinates></LinearRing></outerBoundaryIs>
@@ -10417,7 +10477,7 @@
 		</Placemark>
 		<Placemark>
 			<name>Ashby BART: MLK Building D (6 st)</name>
-			<description><![CDATA[<b>Ashby BART</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> In Review<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — Ashby BART: MLK Building D (6 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>Ashby BART</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Entitled<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — Ashby BART: MLK Building D (6 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_BART_Project_nolabel</styleUrl>
 			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
       <outerBoundaryIs><LinearRing><coordinates>-122.270178,37.852950,21.0 -122.270187,37.853362,21.0 -122.269985,37.853365,21.0 -122.270142,37.852950,21.0 -122.270178,37.852950,21.0</coordinates></LinearRing></outerBoundaryIs>
@@ -10431,7 +10491,7 @@
 		</Placemark>
 		<Placemark>
 			<name>Ashby BART: MLK Building E (6 st)</name>
-			<description><![CDATA[<b>Ashby BART</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> In Review<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — Ashby BART: MLK Building E (6 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
+			<description><![CDATA[<b>Ashby BART</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Entitled<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — Ashby BART: MLK Building E (6 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_BART_Project_nolabel</styleUrl>
 			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
       <outerBoundaryIs><LinearRing><coordinates>-122.270357,37.853794,21.0 -122.270366,37.854194,21.0 -122.270870,37.854186,21.0 -122.270861,37.853786,21.0 -122.270357,37.853794,21.0</coordinates></LinearRing></outerBoundaryIs>

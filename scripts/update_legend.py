@@ -21,6 +21,7 @@ GEOM = "kml/geometry/geometry.kml"
 PAGE = "docs/index.html"
 MARK = "Colour shows where each project stands"
 
+
 # display colour (readable on white) and the phrase, in pipeline order
 GLOSS = [
     ("Pre-Application",    "#7a7a7a", "yellow" and "grey",  "at pre-application"),
@@ -36,45 +37,71 @@ GLOSS = [
 ]
 
 
+UNSLUG = {}
+
+
 def census(path):
+    """(stage counts from the FILL, agency counts from the OUTLINE).
+
+    Since 2026-08-28 a style id is style_status_<Stage>[__<Agency>], because fill carries the
+    stage and outline carries the agency. Counting the whole id as one bucket would put every UC
+    and BART building back into an agency-only category the map no longer has.
+    """
     g = open(path, encoding="utf-8", errors="replace").read()
-    c = collections.Counter()
+    stage, agency = collections.Counter(), collections.Counter()
     for pm in re.findall(r"<Placemark>.*?</Placemark>", g, re.S):
         if "<Polygon>" not in pm:
             continue
         su = re.search(r"<styleUrl>#style_status_([^<]+)</styleUrl>", pm)
-        if su:
-            c[su.group(1).replace("_nolabel", "").replace("_", " ")] += 1
-    return c
-
-
-def sentence(c):
-    parts = []
-    for status, hexc, word, phrase in GLOSS:
-        if not c.get(status.replace("-", "-")) and not c.get(status):
+        if not su:
             continue
-        parts.append(f'<span style="color:{hexc}">{word}</span> {phrase}')
-    agency = [p for p in parts if "UC Berkeley" in p or "BART" in p]
-    stages = [p for p in parts if p not in agency]
-    s = f" <b>Colour shows where each project stands:</b> {' &middot; '.join(stages)}"
-    if agency:
-        # an em-dash, not a full stop: the agency clause opens with a <span>, so a sentence
-        # break would leave a lowercase colour word starting a sentence
-        s += (f" &mdash; {' and '.join(agency)} are permitted by their own agency rather than the City")
-    return s + ". Warm colours are paper stages, cool colours are physical ones."
+        head, _, tail = su.group(1).replace("_nolabel", "").partition("__")
+        # slug back to the GLOSS spelling: the id turns "Pre-Application" into
+        # "Pre_Application", so a plain underscore->space swap yields "Pre Application" and
+        # silently drops grey from the legend while seven buildings are wearing it.
+        stage[UNSLUG.get(head, head.replace("_", " "))] += 1
+        if tail:
+            agency[UNSLUG.get(tail, tail.replace("_", " "))] += 1
+    return stage, agency
+
+
+
+def sentence(stage, agency):
+    """Stage clause from the fills; a second clause for the outlines, only if any exist."""
+    stages = [f'<span style="color:{h}">{w}</span> {p}'
+              for st, h, w, p in GLOSS if not st.endswith("Project") and stage.get(st)]
+    s = (f" <b>Colour shows where each project stands:</b> {' &middot; '.join(stages)}."
+         " Warm colours are paper stages, cool colours are physical ones.")
+    ag = [f'<span style="color:{h}">{w}</span> for {p}'
+          for st, h, w, p in GLOSS if st.endswith("Project") and agency.get(st)]
+    if ag:
+        s += (" A thick outline marks a project permitted by its own agency rather than by the"
+              f" City &mdash; {' and '.join(ag)}; the fill still shows the stage.")
+    return s
+
+
+def _build_unslug():
+    for st, *_ in GLOSS:
+        UNSLUG[re.sub(r"[^A-Za-z0-9]+", "_", st).strip("_")] = st
 
 
 def main():
+    _build_unslug()
     ap = argparse.ArgumentParser()
     ap.add_argument("--geometry", default=GEOM)
     ap.add_argument("--page", default=PAGE)
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
-    c = census(a.geometry)
-    print("census on the map:")
-    for status, *_ in GLOSS:
-        print(f"  {status:<20} {c.get(status,0):>3}{'   (absent — omitted from the legend)' if not c.get(status) else ''}")
-    new = sentence(c)
+    stage, agency = census(a.geometry)
+    print("stage (fill):")
+    for st, *_ in GLOSS:
+        if not st.endswith("Project"):
+            print(f"  {st:<20} {stage.get(st,0):>3}{'   (absent — omitted)' if not stage.get(st) else ''}")
+    print("agency (outline):")
+    for st, *_ in GLOSS:
+        if st.endswith("Project"):
+            print(f"  {st:<20} {agency.get(st,0):>3}{'   (absent — omitted)' if not agency.get(st) else ''}")
+    new = sentence(stage, agency)
     print("\nlegend:\n ", re.sub(r"<[^>]+>", "", new).strip())
     if a.dry_run:
         return

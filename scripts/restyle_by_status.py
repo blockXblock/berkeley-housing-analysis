@@ -31,6 +31,8 @@ DB = "databases/berkeley_housing_v2.db"
 ICON = ('<Icon><href>transparent-1x1.png</href></Icon>'
         '<hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/>')
 
+STATUS_BY_ADDR = {}
+
 PALETTE = [                      # order is the pipeline order, and the legend's order
     ("Pre-Application",    "9e9e9e"),
     ("In Review",          "ffd400"),
@@ -54,8 +56,9 @@ EXPLICIT = {
 }
 
 
-def slug(s):
-    return "style_status_" + re.sub(r"[^A-Za-z0-9]+", "_", s).strip("_")
+def slug(s, agency=None):
+    out = "style_status_" + re.sub(r"[^A-Za-z0-9]+", "_", s).strip("_")
+    return out + ("__" + re.sub(r"[^A-Za-z0-9]+", "_", agency).strip("_") if agency else "")
 
 
 def agency_exempt(db=DB):
@@ -81,22 +84,40 @@ def agency_exempt(db=DB):
 
 
 def classify(name, pm, exempt):
+    """-> (status, agency or None). AGENCY IS AN OUTLINE, NOT A FILL (John, 2026-08-28).
+
+    Colouring UC and BART buildings purple/magenta outright cost their status entirely: 27
+    buildings, 2,928 units, including 2200 Bancroft with excavation and foundations underway
+    and 2556 Haste at 556 units under construction -- all reading as "agency" and nothing else.
+    Fill now carries the stage and the outline carries the agency, so both are legible at once.
+    Their status is not in their label (a BART placemark is named "North Berkeley BART: Bridge 1
+    (8 st)"), so it comes from v2 by address, same as everything else.
+    """
+    agency = None
     if "BART" in name:
-        return "BART Project"
+        agency = "BART Project"
     # address from the description balloon, else from the head of the label. BOTH are needed:
     # 2400 Bowditch South and 2200 Bancroft South carry plain-text descriptions with no
     # <b>ADDRESS</b>, so a description-only lookup drops two UC wings onto their label's status.
     ad = re.search(r"<b>([^<]*)</b><br/>", pm)
-    for cand in ([ad.group(1)] if ad else []) + [name.split("·")[0]]:
-        key = cand.upper().strip()
-        if key in exempt:
-            return exempt[key]
-    if name in EXPLICIT:
-        return EXPLICIT[name]
+    cands = ([ad.group(1)] if ad else []) + [name.split("·")[0]]
+    if agency is None:
+        for cand in cands:
+            if cand.upper().strip() in exempt:
+                agency = exempt[cand.upper().strip()]
+                break
+    # the stage itself
     parts = [p.strip() for p in name.split("·")]
     if len(parts) > 1 and parts[-1] in COLOUR:
-        return parts[-1]
-    return None
+        return parts[-1], agency
+    for cand in cands:                      # agency buildings carry no stage in their label
+        st = STATUS_BY_ADDR.get(cand.upper().strip())
+        if st in COLOUR:
+            return st, agency
+    if name in EXPLICIT:
+        e = EXPLICIT[name]
+        return (e, agency) if e in COLOUR else (None, agency or e)
+    return (None, agency)
 
 
 def kml_colour(rgb, alpha):
@@ -115,30 +136,55 @@ def main():
 
     # classify from the POLYGON twins, then apply to both twins by name
     exempt = agency_exempt(a.db)
+    seen = collections.Counter()
+    for addr, st in sqlite3.connect(a.db).execute(
+            "select address_display, status_label from v_projects_flat where address_display is not null"):
+        seen[addr.upper().strip()] += 1
+        STATUS_BY_ADDR[addr.upper().strip()] = st
+    for k, n in seen.items():
+        if n > 1:
+            STATUS_BY_ADDR.pop(k, None)     # ambiguous address, do not guess
     status_of, unknown = {}, []
     for pm in re.findall(r"<Placemark>.*?</Placemark>", g, re.S):
         nm = re.search(r"<name>([^<]*)</name>", pm)
         if not nm or "<Polygon>" not in pm:
             continue
-        s = classify(nm.group(1), pm, exempt)
-        (status_of.setdefault(nm.group(1), s) if s else unknown.append(nm.group(1)))
+        st, agency = classify(nm.group(1), pm, exempt)
+        if st is None and agency is None:
+            unknown.append(nm.group(1))
+        else:
+            status_of.setdefault(nm.group(1), (st, agency))
     if unknown:
         raise SystemExit(f"REFUSING: {len(unknown)} building(s) have no resolvable status: {unknown[:5]}")
 
-    counts = collections.Counter(status_of.values())
-    print(f"{'status':<22} {'bldgs':>5}  colour")
+    counts = collections.Counter(st for st, _ in status_of.values())
+    ag = collections.Counter(a for _, a in status_of.values() if a)
+    print(f"{'status (fill)':<22} {'bldgs':>5}  colour")
     for s, rgb in PALETTE:
+        if s.endswith("Project"):
+            continue
         print(f"  {s:<20} {counts.get(s,0):>5}  #{rgb}")
+    print(f"{'agency (outline)':<22} {'bldgs':>5}")
+    for k, v in ag.most_common():
+        print(f"  {k:<20} {v:>5}  #{COLOUR[k]}")
+    nofill = sum(1 for st, _ in status_of.values() if st is None)
+    if nofill:
+        print(f"  ({nofill} agency building(s) with no resolvable stage keep an agency fill)")
     if a.dry_run:
         return
 
+    # one style per (fill, outline) pair actually used -- FILL is the stage, OUTLINE the agency
     styles = []
-    for s, rgb in PALETTE:
-        common = (f"<LineStyle><color>{kml_colour(rgb,255)}</color><width>1.5</width></LineStyle>"
-                  f"<PolyStyle><color>{kml_colour(rgb,a.fill_alpha)}</color></PolyStyle>"
+    for st, agency in sorted({v for v in status_of.values()}, key=lambda t: (t[0] or "", t[1] or "")):
+        fill_rgb = COLOUR[st] if st else COLOUR[agency]
+        line_rgb = COLOUR[agency] if agency else fill_rgb
+        sid = slug(st or agency, agency if st else None)
+        common = (f"<LineStyle><color>{kml_colour(line_rgb,255)}</color>"
+                  f"<width>{3.0 if agency else 1.5}</width></LineStyle>"
+                  f"<PolyStyle><color>{kml_colour(fill_rgb,a.fill_alpha)}</color></PolyStyle>"
                   f"<IconStyle><scale>0.4</scale>{ICON}</IconStyle>")
-        styles.append(f'\t<Style id="{slug(s)}"><LabelStyle><scale>{a.label_scale}</scale></LabelStyle>{common}</Style>\n')
-        styles.append(f'\t<Style id="{slug(s)}_nolabel"><LabelStyle><scale>0</scale></LabelStyle>{common}</Style>\n')
+        styles.append(f'\t<Style id="{sid}"><LabelStyle><scale>{a.label_scale}</scale></LabelStyle>{common}</Style>\n')
+        styles.append(f'\t<Style id="{sid}_nolabel"><LabelStyle><scale>0</scale></LabelStyle>{common}</Style>\n')
     g = re.sub(r'(<Style id="[^"]+_nolabel">.*?</Style>\n)(?!.*<Style id="[^"]+_nolabel">)',
                lambda m: m.group(1) + "".join(styles), g, count=1, flags=re.S)
 
@@ -150,7 +196,8 @@ def main():
             return pm
         poly = "<Polygon>" in pm
         n[0 if poly else 1] += 1
-        sid = slug(status_of[nm.group(1)]) + ("_nolabel" if poly else "")
+        st, agency = status_of[nm.group(1)]
+        sid = slug(st or agency, agency if st else None) + ("_nolabel" if poly else "")
         return re.sub(r"<styleUrl>#[^<]+</styleUrl>", f"<styleUrl>#{sid}</styleUrl>", pm)
     g = re.sub(r"<Placemark>.*?</Placemark>", point, g, flags=re.S)
 

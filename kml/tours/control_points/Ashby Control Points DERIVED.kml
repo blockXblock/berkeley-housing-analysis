@@ -6,6 +6,10 @@
 	<Style id="s_ylw-pushpin"><IconStyle><scale>1.1</scale><Icon><href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href></Icon></IconStyle></Style>
 	<StyleMap id="m_ylw-pushpin"><Pair><key>normal</key><styleUrl>#s_ylw-pushpin</styleUrl></Pair><Pair><key>highlight</key><styleUrl>#s_ylw-pushpin</styleUrl></Pair></StyleMap>
 	<Folder><name>Ashby</name><open>1</open>
+		<Placemark><name>A004W</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.2942,37.85008,0</coordinates></Point></Placemark>
+		<Placemark><name>A003W</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.29704,37.84939,0</coordinates></Point></Placemark>
+		<Placemark><name>A002W</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.301,37.84842,0</coordinates></Point></Placemark>
+		<Placemark><name>A001W</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.305,37.84744,0</coordinates></Point></Placemark>
 		<Placemark><name>ASH01</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.29043557018629,37.85141022131465,0</coordinates></Point></Placemark>
 		<Placemark><name>ASH02</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.2880355701863,37.85308588075562,0</coordinates></Point></Placemark>
 		<Placemark><name>ASH03</name><styleUrl>#m_ylw-pushpin</styleUrl><Point><coordinates>-122.2856355701863,37.85222804309311,0</coordinates></Point></Placemark>

@@ -5,6 +5,8 @@
 	<open>1</open>
 	<Style id="cross"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>2.5</scale><color>ffffffff</color></LabelStyle></Style>
 	<Style id="own"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>3.125</scale><color>ffffffff</color></LabelStyle></Style>
+	<Placemark><name>Ashby</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.305,37.84744,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Ashby</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.29704,37.84939,20.0</coordinates></Point></Placemark>
 	<Placemark><name>Ashby</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.29043557018629,37.85141022131465,20.0</coordinates></Point></Placemark>
 	<Placemark><name>Ashby</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2856355701863,37.85222804309311,20.0</coordinates></Point></Placemark>
 	<Placemark><name>Ashby</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.27963557018631,37.85347094126125,20.0</coordinates></Point></Placemark>
@@ -15,6 +17,7 @@
 	<Placemark><name>Ashby</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25563557018637,37.85692549113075,20.0</coordinates></Point></Placemark>
 	<Placemark><name>Ashby</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25083557018638,37.85789200532465,20.0</coordinates></Point></Placemark>
 	<Placemark><name>Ashby</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2460355701864,37.85827504561541,20.0</coordinates></Point></Placemark>
+	<Placemark><name>7Th St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2917513764041,37.850945260201414,20.0</coordinates></Point></Placemark>
 	<Placemark><name>9Th St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.28934417846715,37.852172221663814,20.0</coordinates></Point></Placemark>
 	<Placemark><name>Mabel St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.28334285745692,37.85310658992176,20.0</coordinates></Point></Placemark>
 	<Placemark><name>Acton St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.28119250365943,37.85332123014176,20.0</coordinates></Point></Placemark>

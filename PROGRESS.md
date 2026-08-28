@@ -432,6 +432,67 @@ won't work): `docs/maps/berkeley_construction_timelapse.html` (build-out by Year
   CZU parcel GIS), #26-2306 (Clariti), #26-1972 follow-up.
 - Highest-value analysis queued: **ownership x ghost-units x density** (who densifies vs who consolidates).
 
+### 2026-08-27 — STATUS RECONCILIATION (gated write #1: proj3, proj77) + harvest underway
+Geometry session (berkeley-data-84) restyled all 196 geometry.kml buildings so COLOUR=STATUS, so a wrong
+`status_label` is now a visibly wrong map. Mechanism: `v_projects_flat.status_label` ← `projects.current_stage_type_id`
+→ `vocabulary_stage_types` (1 Pre-App…6 Completed). Diagnosed 7 flagged projects from RAW events+permits+verdicts
+(not the drift-prone derived dates). **WROTE (snapshot `keep_snapshot_2026-08-27_pre-status-reconcile.db`, txn per-row
+verify + fresh-conn fingerprint):** proj3 2700 Shattuck In Review→**Entitled**; proj77 1420 Fifth In Review→**Completed**.
+**HELD (raw records overturned the derived-date reading — diagnose-first paid off):** proj34 2680 Bancroft = NO CHANGE
+("BP" is a seismic retrofit, verdict does_not; Entitled correct); proj139 2538 Durant (CO implausibly fast for 8-story);
+proj160 2344 Fulton (its "co_issued" is a **washer/dryer** permit, verdict ambiguous — false signal); proj94 2145 Grant
+(2021 ADU + 2026 new entitlement conflated). proj146 2800 Telegraph = eyewitness demolition, ZERO v2 evidence. → Full
+corridor Accela harvest (John-approved; ACA back up) for 146 + verify 139/160/94 + post-2026-05 movement on Shattuck/
+University/Bancroft/Durant/Telegraph. Pinged geometry re proj3/77.
+**Gated write #2 (batch2, snapshot keep_snapshot_2026-08-27_pre-status-reconcile-batch2.db):** proj146 2800 Telegraph
+Permitted→**Under Construction** (John eyewitness demolition + demo permit B2026-00307 issued 2026-07-28; **CONVENTION
+SET: physical site work = Under Construction**); proj160 2344 Fulton Pre-Application→**In Review** (Accela ZP2026-0068
+use permit Under Review). proj94 = KEEP Entitled (ZP2024-0138 UPPH Approved; 2021 CO is a separate completed ADU).
+proj139 still HELD (CO needs construction-permit verification).
+**HARVESTER (`scripts/harvest_status.py`):** Accela status harvest via search_by_address + CapDetail regex parse
+("Record Status:\xa0<value>"). **Reliable for PLANNING/entitlement only — aca-prod Building module returns 0 for every
+address** (Berkeley building permits live on permits.cityofberkeley.info / Clariti, NOT aca-prod). Construction status
+needs the CPRA feed (3mo stale) or web (Perplexity out-performed ACA on 2800 Telegraph's B-permits). Output
+`data/reference/status_harvest_2026-08-27.csv`.
+**🟢 DATA-SOURCE BREAKTHROUGH (2026-08-27) — AgencyCounter/Building Eye JSON API:** `berkeley.agencycounter.com`
+(off Berkeley's Research-Permit-Records page) exposes a clean JSON API mirroring Berkeley's Accela permit data,
+searchable BY ADDRESS (fixes the aca-prod Building-search-returns-0 dead end), COMPLETE (planning+building), and
+DAILY-FRESH. Flow: `/api/address/predict` → `POST /api/search/location` → `POST /api/search/detail` (POSTs need an
+`Agency-Counter-Tenant` header). Per-record: agency_reference (permit#), status_text, all dates, description,
+module_code, record_type, total_fee, parcel id, `update_date`, + full `workflow[]` (each review step, date, result,
+reviewer). 2800 Telegraph confirmed: B2026-00307 demo ISSUED 2026-07-28, B2025-05618 BP Approved-w-Conditions (not
+issued), DRCF2026-0003 Application Complete. **CLARITI CLAIM NOT CONFIRMED** — every record is tagged `source:"accela"`
+and current to today; Berkeley's official Permits Online still → aca-prod Accela. Memory [[agencycounter-permit-api]].
+**HARVEST-STRATEGY UPDATE:** built `scripts/harvest_agencycounter.py` (headless requests on the JSON API).
+**SWEEP DONE (130 non-terminal projects):** 79 address-resolved (50 AGREE w/ v2, validated; 29 disagreed → 12 real
+candidates after filtering ~23 false signals: ZCBL/ZCBP cert-"Approved" ≠ entitlement, 1990s finaled permits ≠ new
+building), 51 FLAGGED (35 re-platted parcels, 16 no-records). **Gated write #3 (batch3): 6 Tier-1 In Review/Stalled →
+Entitled** (proj37/117/76/80/112/81, each an approved ZP). Tier-2 (6 demo-permitted) held for field confirmation:
+**2128 Oxford (485u) → STAYS Entitled** (John field: nothing happening — mirror of 2800 Telegraph where he saw demo).
+**Session status-correction total: 12.** ⚠️ **NOT RE-RECORD-READY:** the 31 BIGGEST corridor projects (2400 Bowditch
+750, Ashby BART 618, 1974 Shattuck 599, People's Park 556, 2200 Bancroft 550, 2700 Shattuck 359…) are the FLAGGED
+(re-platted/UC) set — AgencyCounter can't resolve them by address, so their labels are UNVERIFIED. These are the
+visually-dominant flyover towers. **NEXT WORK ITEM: resolve the 31 re-platted/UC big developments** (new address/parcel
+or record-number lookup) before a trustworthy flyby re-record.
+**→ RESOLVED 2026-08-27 via NEWS/FIELD (not scraping — automated lookup proved noisy for re-platted big
+projects; SFYimby/Berkeleyside/field-obs are faster + reliable):** spot-checked ~17 of the biggest corridor
+projects; **ALL confirm v2 or were corrected.** Corrected: 2800 Telegraph→UC (field), 2538 Durant→Completed
+(The Valiant opened). CONFIRMED CORRECT (approved-but-not-broken-ground — rates/financing stalled Berkeley
+construction citywide, v2 rightly = Entitled): 1974 Shattuck 599, 2276 Shattuck 336, 2029 University 240,
+2274 Shattuck 299, 1899 Oxford 212 (222→216u), 3000 Shattuck 166, 2425 Durant 117 (→169u), 2015 Blake 168
+(→198u), 2700 Shattuck 359. Pre-Application confirmed (early review): 2400 Bowditch 750/UC (SEIR), Ashby
+BART 618 (construction 2028-29). UC/field-confirmed UNDER CONSTRUCTION: 2200 Bancroft 550 (excavation+
+foundations), People's Park 556. **The re-platting flag was a LOOKUP limitation, NOT a label error.** Minor:
+2065 Kittredge 189 has a BP (Feb-2023) but stalled/no-groundbreak → arguably Permitted/Stalled vs Entitled
+(still not-blue, cosmetic). **VERDICT: MAP IS RE-RECORD-READY** — big-tower labels accurate; active ones
+field-confirmed; dormant ones confirmed dormant. Session status-correction total: 13.
+
+**PHYSICALLY-ACTIVE COUNT (2026-08-27):** ~21 projects / 1,114 units have a construction/demo/BP signal + no CO + not
+withdrawn (tier-1 "construction observed" = 5 proj / 848u, all already labelled Under Construction). But only **8 carry
+the Under-Construction label** — 15 active projects are labelled Permitted/Entitled/In Review → the map ~2.5x
+undercounts activity. NOT mass-flipping (permit≠crews-on-site; the 2800 Telegraph lesson). Count MISSES 2800 Telegraph
+itself (its demo permit not yet ingested) → true active ≥22; the stale CPRA feed is the limiter.
+
 ### 2026-08-27 — BLOCK HEADROOM model built (`scripts/block_headroom.py`)
 Maximum housing headroom by census block = max units ADDABLE to existing housing (zoning-envelope
 ceiling, NOT a production forecast — feasibility is separate/calibration-dominated). Foundation:

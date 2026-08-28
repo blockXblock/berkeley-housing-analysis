@@ -5,8 +5,37 @@
      tour:     kml/tours/university-w2e.kml
      geometry: kml/geometry/geometry.kml sha256:d8b0ba53995b placemarks:392 -->
 <gx:Tour>
-		<name>University Ave W-to-E · 08-27 16:35 · cp-9cb915</name>
+		<name>University Ave W-to-E · swoop · 08-27 16:35 · cp-9cb915</name>
 		<gx:Playlist>
+<!--SWOOP-INTRO-->
+			<gx:FlyTo>
+				<gx:duration>0.10</gx:duration>
+				<gx:flyToMode>bounce</gx:flyToMode>
+				<Camera>
+					<longitude>-122.2931005267</longitude>
+					<latitude>37.8691214606</latitude>
+					<altitude>100.0</altitude>
+					<heading>84.51</heading>
+					<tilt>69.4</tilt>
+					<roll>0</roll>
+					<altitudeMode>relativeToGround</altitudeMode>
+				</Camera>
+			</gx:FlyTo>
+			<gx:Wait><gx:duration>8.00</gx:duration></gx:Wait>
+			<gx:FlyTo>
+				<gx:duration>4.00</gx:duration>
+				<gx:flyToMode>smooth</gx:flyToMode>
+				<Camera>
+					<longitude>-122.2925341636</longitude>
+					<latitude>37.8691644322</latitude>
+					<altitude>25.0</altitude>
+					<heading>84.51</heading>
+					<tilt>88.0</tilt>
+					<roll>0</roll>
+					<altitudeMode>relativeToGround</altitudeMode>
+				</Camera>
+			</gx:FlyTo>
+<!--/SWOOP-INTRO-->
 			<gx:FlyTo>
 				<gx:duration>0.10</gx:duration>
 				<gx:flyToMode>bounce</gx:flyToMode>
@@ -3725,6 +3754,22 @@
 					<altitudeMode>relativeToGround</altitudeMode>
 				</Camera>
 			</gx:FlyTo>
+				<!--SWOOP-OUTRO-->
+			<gx:FlyTo>
+				<gx:duration>4.00</gx:duration>
+				<gx:flyToMode>smooth</gx:flyToMode>
+				<Camera>
+					<longitude>-122.2679672235</longitude>
+					<latitude>37.8719503337</latitude>
+					<altitude>100.0</altitude>
+					<heading>265.13</heading>
+					<tilt>69.4</tilt>
+					<roll>0</roll>
+					<altitudeMode>relativeToGround</altitudeMode>
+				</Camera>
+			</gx:FlyTo>
+			<gx:Wait><gx:duration>8.00</gx:duration></gx:Wait>
+<!--/SWOOP-OUTRO-->
 		</gx:Playlist>
 	</gx:Tour>
 	<name>Berkeley Housing Geometry · 2026-08-28 · 392 buildings · geom-eee624256656</name>

@@ -52,6 +52,13 @@ def main():
     a = ap.parse_args()
 
     x = open(a.tour, encoding="utf-8", errors="replace").read()
+    # STRIP ANY PREVIOUS SWOOP BEFORE READING THE START POINT. Reading first and stripping later
+    # meant a re-run took the OLD VANTAGE as the start and built a new one 50 m behind and 75 m
+    # above THAT: Durant compounded 25 -> 100 -> 175 -> 250 -> 325 m over four applications. The
+    # marker counts and the total duration stay identical while this happens, which is exactly
+    # why the first idempotence test passed -- it checked structure, never coordinates.
+    x = re.sub(r"<!--SWOOP-INTRO-->.*?<!--/SWOOP-INTRO-->\n?", "", x, flags=re.S)
+    x = re.sub(r"<!--SWOOP-OUTRO-->.*?<!--/SWOOP-OUTRO-->\n?", "", x, flags=re.S)
     first = re.search(r"<gx:FlyTo>.*?</gx:FlyTo>", x, re.S)
     if not first:
         raise SystemExit(f"{a.tour}: no <gx:FlyTo>")
@@ -87,8 +94,6 @@ def main():
     # IDEMPOTENT BY MARKER. Applying this twice would prepend two openings, and the tour is now
     # written back IN PLACE, so a re-run is expected rather than exceptional. Strip any swoop
     # this script previously added before adding the new one.
-    x = re.sub(r"<!--SWOOP-INTRO-->.*?<!--/SWOOP-INTRO-->\n?", "", x, flags=re.S)
-    x = re.sub(r"<!--SWOOP-OUTRO-->.*?<!--/SWOOP-OUTRO-->\n?", "", x, flags=re.S)
     out = x.replace("<gx:Playlist>",
                     "<gx:Playlist>\n<!--SWOOP-INTRO-->\n" + intro.rstrip("\n") + "\n<!--/SWOOP-INTRO-->", 1)
 

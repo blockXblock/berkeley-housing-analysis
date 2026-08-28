@@ -5,8 +5,37 @@
      tour:     kml/tours/ashby-w2e-cruise.kml
      geometry: kml/geometry/geometry.kml sha256:d8b0ba53995b placemarks:392 -->
 <gx:Tour>
-		<name>Ashby Ave W-to-E · I-80 to the Claremont (no orbits) · 08-28 07:28 · cp-287eb7</name>
+		<name>Ashby Ave W-to-E · I-80 to the Claremont (no orbits) · swoop · 08-28 07:28 · cp-287eb7</name>
 		<gx:Playlist>
+<!--SWOOP-INTRO-->
+			<gx:FlyTo>
+				<gx:duration>0.10</gx:duration>
+				<gx:flyToMode>bounce</gx:flyToMode>
+				<Camera>
+					<longitude>-122.2936563204</longitude>
+					<latitude>37.8502120699</latitude>
+					<altitude>100.0</altitude>
+					<heading>252.90</heading>
+					<tilt>69.4</tilt>
+					<roll>0</roll>
+					<altitudeMode>relativeToGround</altitudeMode>
+				</Camera>
+			</gx:FlyTo>
+			<gx:Wait><gx:duration>8.00</gx:duration></gx:Wait>
+			<gx:FlyTo>
+				<gx:duration>4.00</gx:duration>
+				<gx:flyToMode>smooth</gx:flyToMode>
+				<Camera>
+					<longitude>-122.2942000000</longitude>
+					<latitude>37.8500800000</latitude>
+					<altitude>25.0</altitude>
+					<heading>252.90</heading>
+					<tilt>88.0</tilt>
+					<roll>0</roll>
+					<altitudeMode>relativeToGround</altitudeMode>
+				</Camera>
+			</gx:FlyTo>
+<!--/SWOOP-INTRO-->
 			<gx:FlyTo>
 				<gx:duration>0.10</gx:duration>
 				<gx:flyToMode>bounce</gx:flyToMode>
@@ -2256,6 +2285,22 @@
 					<altitudeMode>relativeToGround</altitudeMode>
 				</Camera>
 			</gx:FlyTo>
+				<!--SWOOP-OUTRO-->
+			<gx:FlyTo>
+				<gx:duration>4.00</gx:duration>
+				<gx:flyToMode>smooth</gx:flyToMode>
+				<Camera>
+					<longitude>-122.2443257924</longitude>
+					<latitude>37.8576063755</latitude>
+					<altitude>100.0</altitude>
+					<heading>296.35</heading>
+					<tilt>69.4</tilt>
+					<roll>0</roll>
+					<altitudeMode>relativeToGround</altitudeMode>
+				</Camera>
+			</gx:FlyTo>
+			<gx:Wait><gx:duration>8.00</gx:duration></gx:Wait>
+<!--/SWOOP-OUTRO-->
 		</gx:Playlist>
 	</gx:Tour>
 	<name>Berkeley Housing Geometry · 2026-08-28 · 392 buildings · geom-eee624256656</name>

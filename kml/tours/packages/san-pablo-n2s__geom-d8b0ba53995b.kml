@@ -5,8 +5,37 @@
      tour:     kml/tours/san-pablo-n2s.kml
      geometry: kml/geometry/geometry.kml sha256:d8b0ba53995b placemarks:392 -->
 <gx:Tour>
-		<name>San Pablo N-to-S · 08-26 17:11 · cp-32deda</name>
+		<name>San Pablo N-to-S · swoop · 08-26 17:11 · cp-32deda</name>
 		<gx:Playlist>
+<!--SWOOP-INTRO-->
+			<gx:FlyTo>
+				<gx:duration>0.10</gx:duration>
+				<gx:flyToMode>bounce</gx:flyToMode>
+				<Camera>
+					<longitude>-122.2965452273</longitude>
+					<latitude>37.8827029201</latitude>
+					<altitude>100.0</altitude>
+					<heading>165.51</heading>
+					<tilt>69.4</tilt>
+					<roll>0</roll>
+					<altitudeMode>relativeToGround</altitudeMode>
+				</Camera>
+			</gx:FlyTo>
+			<gx:Wait><gx:duration>8.00</gx:duration></gx:Wait>
+			<gx:FlyTo>
+				<gx:duration>4.00</gx:duration>
+				<gx:flyToMode>smooth</gx:flyToMode>
+				<Camera>
+					<longitude>-122.2964028387</longitude>
+					<latitude>37.8822680516</latitude>
+					<altitude>25.0</altitude>
+					<heading>165.51</heading>
+					<tilt>88.0</tilt>
+					<roll>0</roll>
+					<altitudeMode>relativeToGround</altitudeMode>
+				</Camera>
+			</gx:FlyTo>
+<!--/SWOOP-INTRO-->
 			<gx:FlyTo>
 				<gx:duration>0.10</gx:duration>
 				<gx:flyToMode>bounce</gx:flyToMode>
@@ -4258,6 +4287,22 @@
 					<altitudeMode>relativeToGround</altitudeMode>
 				</Camera>
 			</gx:FlyTo>
+				<!--SWOOP-OUTRO-->
+			<gx:FlyTo>
+				<gx:duration>4.00</gx:duration>
+				<gx:flyToMode>smooth</gx:flyToMode>
+				<Camera>
+					<longitude>-122.2858571266</longitude>
+					<latitude>37.8496318445</latitude>
+					<altitude>100.0</altitude>
+					<heading>345.53</heading>
+					<tilt>69.4</tilt>
+					<roll>0</roll>
+					<altitudeMode>relativeToGround</altitudeMode>
+				</Camera>
+			</gx:FlyTo>
+			<gx:Wait><gx:duration>8.00</gx:duration></gx:Wait>
+<!--/SWOOP-OUTRO-->
 		</gx:Playlist>
 	</gx:Tour>
 	<name>Berkeley Housing Geometry · 2026-08-28 · 392 buildings · geom-eee624256656</name>

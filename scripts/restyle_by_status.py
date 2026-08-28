@@ -24,9 +24,10 @@ no status in their label and are resolved explicitly below.
   python scripts/restyle_by_status.py
   python scripts/restyle_by_status.py --dry-run
 """
-import argparse, re, collections
+import argparse, collections, re, sqlite3
 
 GEOM = "kml/geometry/geometry.kml"
+DB = "databases/berkeley_housing_v2.db"
 ICON = ('<Icon><href>transparent-1x1.png</href></Icon>'
         '<hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/>')
 
@@ -57,11 +58,39 @@ def slug(s):
     return "style_status_" + re.sub(r"[^A-Za-z0-9]+", "_", s).strip("_")
 
 
-def classify(name, pm):
+def agency_exempt(db=DB):
+    """{ADDRESS: 'UC Project'|'BART Project'} from v2's OWN CLASSIFICATION FLAGS.
+
+    NOT from the existing styleUrl. An earlier version read '#style_UC_Project' out of the
+    placemark, which worked exactly once: after the first restyle those placemarks carry
+    '#style_status_UC_Project', the check silently failed, and seven UC buildings fell through
+    to whatever status their label happened to end with -- 2400 Bowditch to Pre-Application,
+    2200 Bancroft and 2556 Haste to Under Construction, 1950 Oxford to Completed. Reading the
+    flag is both correct (CLAUDE.md: filter on the flag, never a hardcoded id or a style name)
+    and idempotent.
+    """
+    out = {}
+    for addr, code in sqlite3.connect(db).execute(
+            "select f.address_display, t.code from project_classifications pc "
+            "join vocabulary_classification_types t on t.id=pc.classification_type_id "
+            "join v_projects_flat f on f.project_id=pc.project_id "
+            "where t.code in ('uc_project','bart_project')"):
+        if addr:
+            out[addr.upper().strip()] = "UC Project" if code == "uc_project" else "BART Project"
+    return out
+
+
+def classify(name, pm, exempt):
     if "BART" in name:
         return "BART Project"
-    if re.search(r"<styleUrl>#style_UC_Project", pm):
-        return "UC Project"
+    # address from the description balloon, else from the head of the label. BOTH are needed:
+    # 2400 Bowditch South and 2200 Bancroft South carry plain-text descriptions with no
+    # <b>ADDRESS</b>, so a description-only lookup drops two UC wings onto their label's status.
+    ad = re.search(r"<b>([^<]*)</b><br/>", pm)
+    for cand in ([ad.group(1)] if ad else []) + [name.split("·")[0]]:
+        key = cand.upper().strip()
+        if key in exempt:
+            return exempt[key]
     if name in EXPLICIT:
         return EXPLICIT[name]
     parts = [p.strip() for p in name.split("·")]
@@ -77,6 +106,7 @@ def kml_colour(rgb, alpha):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--file", default=GEOM)
+    ap.add_argument("--db", default=DB)
     ap.add_argument("--label-scale", type=float, default=3.0)
     ap.add_argument("--fill-alpha", type=int, default=128)
     ap.add_argument("--dry-run", action="store_true")
@@ -84,12 +114,13 @@ def main():
     g = open(a.file, encoding="utf-8", errors="replace").read()
 
     # classify from the POLYGON twins, then apply to both twins by name
+    exempt = agency_exempt(a.db)
     status_of, unknown = {}, []
     for pm in re.findall(r"<Placemark>.*?</Placemark>", g, re.S):
         nm = re.search(r"<name>([^<]*)</name>", pm)
         if not nm or "<Polygon>" not in pm:
             continue
-        s = classify(nm.group(1), pm)
+        s = classify(nm.group(1), pm, exempt)
         (status_of.setdefault(nm.group(1), s) if s else unknown.append(nm.group(1)))
     if unknown:
         raise SystemExit(f"REFUSING: {len(unknown)} building(s) have no resolvable status: {unknown[:5]}")

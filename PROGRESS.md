@@ -6,6 +6,16 @@
 
 ---
 
+## 2026-08-28 [geometry/tours] — 🎨 colours now MEAN the status; fill=stage + outline=agency; 61 packages
+**Deployed generation `geom-d8b0ba53995b`.** The map's colours had drifted until they encoded almost nothing — 106 buildings shared one yellow holding In Review x75, Completed x18, Entitled x8, Permitted x5, and only 16 of 39 Completed buildings were green. The homepage legend was in consequence FALSE for about a third of the map. Now: **one colour per status, derived from v2's `status_label`, no exceptions** (`restyle_by_status.py`), and the **legend is GENERATED from the geometry census** (`update_legend.py`) so it can never again describe a colour a viewer cannot find — it already dropped grey and red on its own when Pre-Application and Stalled emptied.
+**PALETTE IS ORDINAL:** warm = paper stages (In Review yellow, Entitled orange), cool = physical (Permitted cyan, Under Construction blue), Completed green; off-ramps red/dark-red; **agency = a double-width OUTLINE, not a fill** (John, 2026-08-28) — purple UC, magenta BART. The fill-only version cost 27 buildings / 2,928 units their status entirely, including 2200 Bancroft with excavation underway reading as "agency" and nothing else.
+**UC IS LABELLED IN BEDS, NOT UNITS** (CLAUDE.md rule, 4 uc_project developments only): 2200 Bancroft 1,625 · 2400 Bowditch 1,500 · 2556 Haste 1,100 · 1950 Oxford 772. A private student project (The Valiant) is not `uc_project` and stays in units.
+**HOLD_UNITS: 2036 Bancroft stays at 87** — the MAP IS AHEAD OF v2 there (87 from the plan set's own unit table; v2's 85 is a migration placeholder whose `unit_program` reads "Bedroom distribution unknown; placed as 1BR for schema compliance"). A blind sync would have regressed a primary-sourced correction. Data lane is gating the v2 fix.
+**LABELS:** anchors lifted clear of their roofs (171 of 174 sat coplanar and flickered), and each placemark split into a polygon that always draws plus a label carrying a `<Region>`/`<Lod>`, so text appears only when a building is close enough to read — 125-150 labels used to compete for one screen at 2 km. 196 placemarks -> 392.
+**TOURS: 61 packages**, `.kml` plus self-contained `.kmz` (the label icon is referenced by a relative href Earth cannot always resolve; a KMZ carries it inside). New corridors: **Ashby I-80→Claremont, Durant, College→Bancroft, University I-80→campus** (John's own drawn path, extended west on the ACTUAL street bearing rather than the drawn segment's, which would have landed 100 m off). Street signs for all eight corridors.
+**THREE GUARDS EARNED THE HARD WAY, all now in code:** `build_tour_package.py --all` repoints the catalog AND prunes superseded generations itself (hand-pruning picked the wrong generation twice — once by frequency on a 53-53 tie, once alphabetically — each time leaving the catalog pointing at files that no longer existed); the splitter REFUSES to write a dangling `styleUrl` (a missing `_nolabel` StyleMap twin silently turned every In Review project grey and no structural check caught it); `.kmz` timestamps are pinned so rebuilds are byte-reproducible.
+**LESSON WORTH KEEPING: structural checks are not evidence for a RENDERING change.** Placemark counts, well-formedness, extrude counts and round-trip equality all passed on a file whose skyline had lost its status colours. Appearance needs an appearance-level assertion — resolve the colour through the StyleMap and compare — or John's eye, which found it in one pass.
+
 ## STANDING: WHO OWNS WHAT (lanes, not session names) — read this before messaging a peer
 
 **SESSION NAMES ROTATE MID-SESSION AND ARE USELESS AS ADDRESSES.** One session was `berkeley-data-84`, then `c9`, then `6f`, then `1d`, all in a single sitting; its peer went `60` → `99`. A ping addressed from memory BOUNCES, silently. This file already names six sessions that no longer exist (`2b`, `2c`, `07`, `da`, `b6`, `5e`) — treat every such reference below as historical, never as an address.
@@ -21,26 +31,6 @@
 - **BUILDING DATA / HARVEST.** Owns the Accela/Clariti harvesters, CPRA ingestion, and **all gated v2 writes** (snapshot → read-only preview → STOP-for-John → guarded write). Adjudicates status. Pings the geometry lane whenever a `status_label` changes.
 
 **The handoff contract:** data lane changes a status in v2 → pings geometry lane → geometry lane re-derives colours, rebuilds packages, re-stamps the catalog. Geometry lane NEVER infers a status change from absence of evidence; the data lane NEVER mass-flips on a permit alone (2800 Telegraph: a permit is not crews, and no permit is not no crews).
----
-
-## 🎥 2026-08-27 → GEOMETRY/TOURS SESSION: **READY FOR VIDEO REDO** (from the building-data session)
-The status reconciliation is COMPLETE and John has cleared the flyby re-record. Action for you on restart:
-**re-derive from v2 directly** (`sync_status_from_v2.py` → `restyle_by_status.py` → `build_tour_package.py --all`), then John records.
-- **11 status_label reclassifications are in v2** (verify directly, don't trust this list): →Entitled: 2700 Shattuck,
-  2614 Telegraph, 2317 Channing (un-stalled), 1731 Addison, 659 Grizzly Peak, 1621 Sacramento, 1522 Josephine; →Completed:
-  1420 Fifth, 2538 Durant (The Valiant opened); →Under Construction: 2800 Telegraph; →In Review: 2344 Fulton.
-- **UC BED COUNTS corrected in v2** — proj177 People's Park 1,100, proj165 Bancroft-Fulton 1,625, proj171 Channing-Bowditch
-  1,500, proj170 Anchor House 772. **LABEL these as "N beds" not "N units"** (keyed on the `uc_project` flag — those 4 rows
-  only; a private student project like The Valiant is NOT uc_project → stays units).
-- **Big-tower READINESS: VERIFIED.** ~17 largest corridor projects spot-checked vs news/field — all confirm v2 or were
-  corrected. The re-platting flag was a lookup limitation, NOT a label error. Durant/Bancroft/Ashby/Shattuck/University/
-  Telegraph orbits are all trustworthy. **2200 Bancroft (proj165) is field-confirmed Under Construction (excavation+
-  foundations now) — keep it blue.**
-- **Not blocking, still not-blue either way:** 2065 Kittredge (Permitted/Stalled vs Entitled, John's call); 5 Tier-2
-  demo-permitted projects await a field/news check before any blue flip (2372 Ellsworth, 2712 Telegraph, 2449 Dwight,
-  2808 Ninth, 2328 Grant).
-Full detail in the *STATUS RECONCILIATION* section below. — building-data session (berkeley-data-99, 2026-08-27)
-
 ---
 
 ## 2026-08-26 [tours/cameras — session berkeley-data-2c] — 🎥 building loops: 3 were orbiting the wrong building (site-collision bug) — FIXED, 53 packages rebuilt · UNCOMMITTED, awaiting John review

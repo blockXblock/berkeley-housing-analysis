@@ -432,6 +432,52 @@ won't work): `docs/maps/berkeley_construction_timelapse.html` (build-out by Year
   CZU parcel GIS), #26-2306 (Clariti), #26-1972 follow-up.
 - Highest-value analysis queued: **ownership x ghost-units x density** (who densifies vs who consolidates).
 
+### 2026-08-27 — BLOCK HEADROOM model built (`scripts/block_headroom.py`)
+Maximum housing headroom by census block = max units ADDABLE to existing housing (zoning-envelope
+ceiling, NOT a production forecast — feasibility is separate/calibration-dominated). Foundation:
+`development_potential` (per-zone caps + `middle_housing_eligible`) + `parcel_zones` (APN→zone) +
+lot area from `parcels.the_geom` (LotSize is empty post-refresh, only 73/29k) + UseCode for existing
+units/parcel (1xxx→1, 2xxx→2) + `berkeley_blocks_2020.geojson` existing units. **KEY CORRECTION:** the
+Middle Housing Ordinance (7,978-N.S., eff 2026-11-01) is a **FLAT PER-LOT CAP — up to 8 units by-right,
+12 w/ density bonus — NOT a lot-size-scaling density** (verified vs ordinance + city/BuildABetterBerkeley
+explainers 2026-08-27). The linear 8-per-5000sf reading (from block_density_index's du/ac) FABRICATED
+1,302 units on an 18-ac R-2 parcel; the flat cap holds every lot ≤8 (max single-block MH headroom now
+866, was 20,618). **APN join = parse the APN STRING (98.6%), NOT digits-zfill (0%) or the NULL-prone
+PARCEL column (3,025 null).** RESULTS (citywide addable): **MH by-right (solid) 104,866; MH+bonus
+166,622; height-governed corridor 205,928 (SOFT — assumption-driven + inflated by UC's 53,378 [exempt]
+and West-Berkeley industrial); total ~311k** vs 52,278 existing. **Elmwood: 4,804 existing → +12,755
+MH by-right (~2.65×), +8,293 corridor.** Outputs `data/reference/block_headroom.csv` (1,522 blocks) +
+`neighborhood_headroom.csv`. Lead with MH-by-right (ordinance-grounded); corridor is a soft upper bound.
+**MAP built** `scripts/gen_headroom_map.py` → `docs/maps/headroom.html` + `headroom_data.json` (MapLibre,
+house stack; 4 metric toggles, block popups, district ranking panel, affordability panel). UI-first init
+(control panel renders independent of basemap tiles); verified UI + choropleth render (sandbox slow on
+external CARTO tiles = production-parity w/ bond_incidence). **FINDINGS for John's Elmwood argument:**
+(1) **Citywide could ~TRIPLE** under MH by-right: 52,278 → 157,144 (3.01×); **Elmwood 3.66×** (more than
+triples). (2) **ADU-per-block claim CORRECTED**: Elmwood is **3rd (0.99/block)**, behind Terrace View
+(1.47, but 0 MH headroom, hillside) + Northbrae (1.02) — but co-LEADS among large flatland districts with
+real MH capacity. (3) MH total headroom rank: South Berkeley (22,181) > Central (15,234) > **Elmwood
+(12,755)**; Elmwood's edge = strongest COMBO of demonstrated ADU appetite + capacity. Affordability
+caveat stands (by-right MH = market-rate on-site; fee-not-units). Map NOT deployed (John's call).
+NOT committed yet (John reviewing the model/assumptions).
+
+### 2026-08-27 — Rent Board registry has NO public bulk endpoint (CPRA #26-2375 IS the route)
+Exhaustive search for a live bulk source of the full Rent Board registry (~40k registered units w/ APN) — **none exists.**
+Swept the on-prem ArcGIS `gis.cityofberkeley.info` (all 33 services — no rent layer); ArcGIS Online public search (empty);
+ArcGIS Hub domains (don't exist). **Re-examined Accela (John's steer)**: Berkeley's ACA modules are Building, Planning,
+Licenses, Public Works, Enforcement (+ a Short-Term-Rental zoning permit under Planning) — the ONLY rent-related record
+type is the landlord **business license** ("Rental of Real Property," 3,379 recs w/ unit counts, prefix `BL`, which we
+already have). **The long-term Rent Board registry is NOT in Accela** — Berkeley explicitly moved it to a separate system
+called **Slate** (the `rentregistry.cityofberkeley.info` app; backend `rentregistry-api.cityofberkeley.info`, APPID `myFD`),
+which is **single-property-lookup only** (no bulk export, no bulk feature layer in its JS bundles). Berkeley is the
+Socrata exception among Accela cities — but Socrata still doesn't carry this (and is banned: John — no Berkeley data).
+The repo's `rent_control` table (berkeley.db,
+1,098 rows / **139 distinct parcels**) is an ORPHANED partial with no source URL anywhere in the repo, and this copy has
+**no numeric unit-count column** (only `Unit_Address` text) — so RC-units-per-parcel can't be computed from it at all.
+**→ CPRA #26-2375 is the only path to the full registry** (already pending). `neighborhood_density_augmented.csv`'s
+`rc_units_per_parcel_PARTIAL` is a placeholder (currently 0/NaN) until that CPRA returns. The **rental** column in that
+table (14,078 units, 3,137 parcels) is license-derived (`data/license_snapshots/`, busdesc "RES. RENTAL - N UNITS") and
+is the usable rental-coverage proxy meanwhile. See memory [[no-socrata-for-berkeley]].
+
 ## ✅ FIXED (2026-08-13) — ghost_units.py multi-match bug (root cause: condo/stacked parcels)
 **Root cause:** condos = many APN records sharing ONE footprint (3109 College: 7 APNs, 6 dup-geoms), so a
 secondary-address point matched up to **66 parcels** — inflating counts and mis-flagging assessed condos as

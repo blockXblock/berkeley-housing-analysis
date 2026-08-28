@@ -84,7 +84,13 @@ def main():
              + f"\t\t\t<gx:Wait><gx:duration>{a.hold:.2f}</gx:duration></gx:Wait>\n"
              + flyto(a.descend, "smooth", lon, lat, alt, hdg, float(re.search(r"<tilt>([-\d.]+)</tilt>", cam).group(1))))
 
-    out = x.replace("<gx:Playlist>", "<gx:Playlist>\n" + intro.rstrip("\n"), 1)
+    # IDEMPOTENT BY MARKER. Applying this twice would prepend two openings, and the tour is now
+    # written back IN PLACE, so a re-run is expected rather than exceptional. Strip any swoop
+    # this script previously added before adding the new one.
+    x = re.sub(r"<!--SWOOP-INTRO-->.*?<!--/SWOOP-INTRO-->\n?", "", x, flags=re.S)
+    x = re.sub(r"<!--SWOOP-OUTRO-->.*?<!--/SWOOP-OUTRO-->\n?", "", x, flags=re.S)
+    out = x.replace("<gx:Playlist>",
+                    "<gx:Playlist>\n<!--SWOOP-INTRO-->\n" + intro.rstrip("\n") + "\n<!--/SWOOP-INTRO-->", 1)
 
     if not a.no_outro:
         # THE MIRROR: beyond the END, facing back the way we came.
@@ -99,9 +105,19 @@ def main():
                        olon, olat, ealt + a.rise, back_hdg, tilt)
                  + f"\t\t\t<gx:Wait><gx:duration>"
                    f"{(a.outro_hold if a.outro_hold is not None else a.hold):.2f}</gx:duration></gx:Wait>\n")
-        out = out.replace("</gx:Playlist>", outro + "\t\t</gx:Playlist>", 1)
-    out = re.sub(r"(<name>)([^<]*?)( · \d\d-\d\d \d\d:\d\d · cp-[0-9a-f]{6})(</name>)",
+        out = out.replace("</gx:Playlist>",
+                          "<!--SWOOP-OUTRO-->\n" + outro + "<!--/SWOOP-OUTRO-->\n\t\t</gx:Playlist>", 1)
+    # only once -- the playlist is marker-guarded but the NAME is not, and a re-run stacked it
+    # into "... · swoop · swoop".
+    out = re.sub(r"(<name>)((?:(?! · swoop)[^<])*?)( · \d\d-\d\d \d\d:\d\d · cp-[0-9a-f]{6})(</name>)",
                  r"\1\2 · swoop\3\4", out)
+    # A REGENERATION FROM gen_corridor_tour.py SILENTLY DROPS THE SWOOP. Say so in the file.
+    note = (f" SWOOP APPLIED by scripts/add_intro_swoop.py: {a.hold:.0f}s hold {a.back:.0f}m back / "
+            f"{a.rise:.0f}m up, descend {a.descend:.0f}s"
+            + ("" if a.no_outro else f", mirrored close beyond the end. ")
+            + "RE-RUNNING gen_corridor_tour.py FOR THIS CORRIDOR REMOVES IT -- re-apply this script after.")
+    if "SWOOP APPLIED" not in out:
+        out = out.replace("]]></description>", note + "]]></description>", 1)
     os.makedirs(os.path.dirname(a.out) or ".", exist_ok=True)
     open(a.out, "w", encoding="utf-8").write(out)
     print(f"wrote {a.out}")

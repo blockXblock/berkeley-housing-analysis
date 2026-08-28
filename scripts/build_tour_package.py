@@ -52,10 +52,19 @@ def write_kmz(kml_path: pathlib.Path) -> pathlib.Path:
     .kml stays for diffing and for anything that reads the package as text.
     """
     dest = kml_path.with_suffix(".kmz")
+    # FIXED TIMESTAMPS. A zip records the current time per member, so an otherwise identical
+    # rebuild produced 61 byte-different .kmz files and showed up as 61 modified files in git
+    # every single time. The package's provenance is the geometry sha in its own filename, not
+    # a mtime, so pinning the epoch makes the output reproducible and the diff honest.
+    EPOCH = (1980, 1, 1, 0, 0, 0)
     with zipfile.ZipFile(dest, "w", zipfile.ZIP_DEFLATED) as z:
-        z.writestr("doc.kml", kml_path.read_text(encoding="utf-8"))
+        zi = zipfile.ZipInfo("doc.kml", EPOCH)
+        zi.compress_type = zipfile.ZIP_DEFLATED
+        z.writestr(zi, kml_path.read_text(encoding="utf-8"))
         if ICON.exists():
-            z.write(ICON, ICON.name)
+            zi = zipfile.ZipInfo(ICON.name, EPOCH)
+            zi.compress_type = zipfile.ZIP_DEFLATED
+            z.writestr(zi, ICON.read_bytes())
     return dest
 
 

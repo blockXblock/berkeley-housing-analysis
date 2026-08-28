@@ -19,7 +19,7 @@
 					<altitudeMode>relativeToGround</altitudeMode>
 				</Camera>
 			</gx:FlyTo>
-			<gx:Wait><gx:duration>5.00</gx:duration></gx:Wait>
+			<gx:Wait><gx:duration>8.00</gx:duration></gx:Wait>
 			<gx:FlyTo>
 				<gx:duration>4.00</gx:duration>
 				<gx:flyToMode>smooth</gx:flyToMode>
@@ -2815,6 +2815,20 @@
 					<altitudeMode>relativeToGround</altitudeMode>
 				</Camera>
 			</gx:FlyTo>
+					<gx:FlyTo>
+				<gx:duration>4.00</gx:duration>
+				<gx:flyToMode>smooth</gx:flyToMode>
+				<Camera>
+					<longitude>-122.2518186661</longitude>
+					<latitude>37.8687752128</latitude>
+					<altitude>100.0</altitude>
+					<heading>255.67</heading>
+					<tilt>69.4</tilt>
+					<roll>0</roll>
+					<altitudeMode>relativeToGround</altitudeMode>
+				</Camera>
+			</gx:FlyTo>
+			<gx:Wait><gx:duration>8.00</gx:duration></gx:Wait>
 		</gx:Playlist>
 	</gx:Tour>
 </Document>

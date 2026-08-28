@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""add_intro_swoop.py — open a corridor tour from a raised vantage behind the start.
+"""add_intro_swoop.py — open AND close a corridor tour from a raised vantage.
 
 JOHN'S SPEC (2026-08-28): "move 50 m directly west from the starting point, and go up 50 m.
 When the tour starts, hold for 5 s from this vantage point, so the viewer can see where we are
@@ -21,7 +21,13 @@ TILT IS AIMED DOWN THE STREET, NOT AT THE START POINT. From 50 m up and 50 m bac
 start would be a 45-degree look at the pavement, which shows the viewer nothing about where the
 flight goes. The default aims at a point --look-ahead metres along the route.
 
-  python scripts/add_intro_swoop.py kml/tours/durant-w2e.kml --out kml/tours/durant-w2e-swoop.kml
+THE OUTRO IS THE MIRROR (John, 2026-08-28): "turn and go up to look back where we came from."
+Same distance and rise, but BEYOND the end rather than behind the start, and facing the reciprocal
+heading, so the closing shot frames the ground just flown. Opening and closing are then the same
+move read forwards and backwards.
+
+  python scripts/add_intro_swoop.py kml/tours/durant-w2e.kml --out kml/tours/durant-w2e-swoop.kml \
+      --hold 8 --rise 75 --look-ahead 150
 """
 import argparse, math, os, re
 
@@ -38,6 +44,11 @@ def main():
     ap.add_argument("--descend", type=float, default=4.0, help="seconds to fly down onto the start point")
     ap.add_argument("--look-ahead", type=float, default=300.0,
                     help="aim the vantage at a point this far along the route; 0 aims at the start point")
+    ap.add_argument("--outro-hold", type=float, default=None,
+                    help="seconds held at the closing vantage; defaults to --hold, mirroring the open")
+    ap.add_argument("--ascend", type=float, default=None,
+                    help="seconds to climb and turn onto the closing vantage; defaults to --descend")
+    ap.add_argument("--no-outro", action="store_true", help="open only, no closing shot")
     a = ap.parse_args()
 
     x = open(a.tour, encoding="utf-8", errors="replace").read()
@@ -74,6 +85,21 @@ def main():
              + flyto(a.descend, "smooth", lon, lat, alt, hdg, float(re.search(r"<tilt>([-\d.]+)</tilt>", cam).group(1))))
 
     out = x.replace("<gx:Playlist>", "<gx:Playlist>\n" + intro.rstrip("\n"), 1)
+
+    if not a.no_outro:
+        # THE MIRROR: beyond the END, facing back the way we came.
+        last = list(re.finditer(r"<gx:FlyTo>.*?</gx:FlyTo>", x, re.S))[-1].group(0)
+        lg = lambda tag: float(re.search(rf"<{tag}>([-\d.]+)</{tag}>", last).group(1))
+        elon, elat, ealt, ehdg = lg("longitude"), lg("latitude"), lg("altitude"), lg("heading")
+        ek = math.cos(math.radians(elat))
+        olon = elon + (a.back * math.sin(math.radians(ehdg)) / M) / ek
+        olat = elat + (a.back * math.cos(math.radians(ehdg)) / M)
+        back_hdg = (ehdg + 180.0) % 360.0
+        outro = (flyto(a.ascend if a.ascend is not None else a.descend, "smooth",
+                       olon, olat, ealt + a.rise, back_hdg, tilt)
+                 + f"\t\t\t<gx:Wait><gx:duration>"
+                   f"{(a.outro_hold if a.outro_hold is not None else a.hold):.2f}</gx:duration></gx:Wait>\n")
+        out = out.replace("</gx:Playlist>", outro + "\t\t</gx:Playlist>", 1)
     out = re.sub(r"(<name>)([^<]*?)( · \d\d-\d\d \d\d:\d\d · cp-[0-9a-f]{6})(</name>)",
                  r"\1\2 · swoop\3\4", out)
     os.makedirs(os.path.dirname(a.out) or ".", exist_ok=True)
@@ -83,6 +109,10 @@ def main():
           f"(bearing {back_brg:.0f}deg), {a.rise:.0f} m above it")
     print(f"  tilt     {tilt:.1f}deg, aimed {a.look_ahead:.0f} m down the route")
     print(f"  timing   {a.hold:.0f} s hold, then {a.descend:.0f} s descent onto the start point")
+    if not a.no_outro:
+        print(f"  outro    {a.ascend if a.ascend is not None else a.descend:.0f} s climb beyond the end, "
+              f"turned {180}deg to face back, then "
+              f"{(a.outro_hold if a.outro_hold is not None else a.hold):.0f} s hold")
     print(f"  total    {sum(float(v) for v in re.findall(r'<gx:duration>([\d.]+)', out)):.0f} s "
           f"(was {sum(float(v) for v in re.findall(r'<gx:duration>([\d.]+)', x)):.0f} s)")
 

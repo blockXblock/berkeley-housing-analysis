@@ -9,6 +9,24 @@
  },
  "tours": [
   {
+   "id": "university-880-uc",
+   "title": "University Avenue — from the Bay to UC Berkeley",
+   "tour_kml": "kml/tours/university-880-uc.kml",
+   "source_kml_missing": false,
+   "package": "kml/tours/packages/university-880-uc__geom-40cecbb2c9f4.kml",
+   "package_geometry_sha": "40cecbb2c9f4",
+   "flyto_legs": 342,
+   "duration_s": 465.6,
+   "video": {
+    "youtube": "EAz7HmY0y-Q"
+   },
+   "recorded": "2026-08-27",
+   "recorded_geometry_era": "geom-40cecbb2c9f4 · labels 3.0 + Region/Lod, BART magenta",
+   "has_pushpins": false,
+   "mapping_inferred": false,
+   "needs_rerecord": false
+  },
+  {
    "id": "shattuck-s2n-cruise",
    "title": "Shattuck Avenue, South to North — August 2026",
    "tour_kml": "kml/tours/shattuck-s2n-cruise.kml",

@@ -485,7 +485,13 @@ BART 618 (construction 2028-29). UC/field-confirmed UNDER CONSTRUCTION: 2200 Ban
 foundations), People's Park 556. **The re-platting flag was a LOOKUP limitation, NOT a label error.** Minor:
 2065 Kittredge 189 has a BP (Feb-2023) but stalled/no-groundbreak → arguably Permitted/Stalled vs Entitled
 (still not-blue, cosmetic). **VERDICT: MAP IS RE-RECORD-READY** — big-tower labels accurate; active ones
-field-confirmed; dormant ones confirmed dormant. Session status-correction total: 13.
+field-confirmed; dormant ones confirmed dormant. **Session status reclassifications: 11** (corrected from an earlier
+mis-count "12/13"): proj3/77, 146/160, 37/117/76/80/112/81, 139.
+**UC BED-COUNT FIX (snapshot keep_snapshot_2026-08-27_pre-uc-bedcounts.db, verified):** UC now counted in BEDS
+(primary-sourced): proj177 People's Park 556→1,100, proj165 2200 Bancroft 550→**1,625** (Bancroft-Fulton), proj171
+2400 Bowditch 750→1,500 (approx); proj170 Anchor House 772 already beds. **TODO: DISPLAY must label uc_project totals
+"beds" not "units"** (geometry labels + explorer, keyed on uc_project flag) — numbers fixed, wording pending (geometry
+session offline; it reads v2 directly on restart).
 
 **PHYSICALLY-ACTIVE COUNT (2026-08-27):** ~21 projects / 1,114 units have a construction/demo/BP signal + no CO + not
 withdrawn (tier-1 "construction observed" = 5 proj / 848u, all already labelled Under Construction). But only **8 carry

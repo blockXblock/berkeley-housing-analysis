@@ -143,6 +143,30 @@ def repoint_catalog(sha: str) -> None:
         print(f"catalog: docs/tours.json already at geom-{sha}")
 
 
+def prune(sha: str) -> None:
+    """Delete packages from superseded generations. ONLY after the catalog is verified.
+
+    THIS BELONGS HERE AND NOT IN A HUMAN'S HANDS. Pruning by hand went wrong twice, the same
+    way both times -- picking the generation to KEEP by a heuristic instead of by the sha that
+    was actually just built. Once by frequency, where 53 old against 53 new was a tie and the
+    NEW set lost; once alphabetically, where geom-9c… sorted before geom-d8… and again the new
+    set lost. Both left docs/tours.json pointing at files that no longer existed: the exact
+    sitewide tour-download 404 the repoint guard exists to prevent.
+
+    Ordering is the safety property. repoint_catalog() runs first and exits non-zero if any
+    entry would 404, so by the time this runs the catalog is known good and `sha` is known to
+    be the generation it names. Nothing is inferred.
+    """
+    gone = 0
+    for f in sorted(OUTDIR.iterdir()):
+        m = re.search(r"__geom-([0-9a-f]{12})\.km[lz]$", f.name)
+        if m and m.group(1) != sha:
+            f.unlink()
+            gone += 1
+    if gone:
+        print(f"pruned {gone} file(s) from superseded generations; kept geom-{sha}")
+
+
 if __name__ == "__main__":
     args = sys.argv[1:]
     targets = list(camera_only_tours()) if args == ["--all"] else [pathlib.Path(a) for a in args]
@@ -154,4 +178,6 @@ if __name__ == "__main__":
         built.append(dest)
         print(f"packaged: {dest.relative_to(ROOT)}")
     if args == ["--all"] and built:
-        repoint_catalog(re.search(r"__geom-([0-9a-f]{12})\.kml$", built[0].name).group(1))
+        sha = re.search(r"__geom-([0-9a-f]{12})\.kml$", built[0].name).group(1)
+        repoint_catalog(sha)
+        prune(sha)

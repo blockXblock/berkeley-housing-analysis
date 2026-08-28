@@ -2,6 +2,45 @@
 
 **Purpose:** The live current-state snapshot. Read this first (after `CLAUDE.md`) at session start. Updated at the end of every gated step (see *State-update discipline* in `CLAUDE.md`). This file is canonical; auto-loaded memory is a hint, not ground truth — verify against the DB / `git log`.
 
+
+
+---
+
+## STANDING: WHO OWNS WHAT (lanes, not session names) — read this before messaging a peer
+
+**SESSION NAMES ROTATE MID-SESSION AND ARE USELESS AS ADDRESSES.** One session was `berkeley-data-84`, then `c9`, then `6f`, then `1d`, all in a single sitting; its peer went `60` → `99`. A ping addressed from memory BOUNCES, silently. This file already names six sessions that no longer exist (`2b`, `2c`, `07`, `da`, `b6`, `5e`) — treat every such reference below as historical, never as an address.
+
+**Three rules that actually work:**
+1. **Call `ListAgents` immediately before every send.** Never address a peer from memory or from a name earlier in the same thread.
+2. **Lead every message with your LANE, not your name.** A lane survives renaming; a name does not. A message from an unfamiliar `berkeley-data-XX` that opens with a lane is a teammate.
+3. **Record LANES here, never session names.** `CLAUDE.md` makes this file the first thing read at session start, so it is the only channel that survives both renaming and compaction. It is how a rehydrated agent rediscovers that the other lane exists at all.
+
+**THE TWO STANDING LANES:**
+
+- **GEOMETRY / TOURS.** Owns `kml/` (geometry, tours, control points, labels, the 61 tour packages `.kml` + self-contained `.kmz`), `docs/geometry.kml` + `.kmz`, `docs/tours.json`, and the homepage video blocks in `docs/index.html`. Derives building COLOUR from v2's `status_label` — never edits v2. Toolchain: `sync_status_from_v2.py` → `restyle_by_status.py` → `update_legend.py` → `build_tour_package.py --all`. Whole cycle ≈ 2 minutes per status change.
+- **BUILDING DATA / HARVEST.** Owns the Accela/Clariti harvesters, CPRA ingestion, and **all gated v2 writes** (snapshot → read-only preview → STOP-for-John → guarded write). Adjudicates status. Pings the geometry lane whenever a `status_label` changes.
+
+**The handoff contract:** data lane changes a status in v2 → pings geometry lane → geometry lane re-derives colours, rebuilds packages, re-stamps the catalog. Geometry lane NEVER infers a status change from absence of evidence; the data lane NEVER mass-flips on a permit alone (2800 Telegraph: a permit is not crews, and no permit is not no crews).
+---
+
+## 🎥 2026-08-27 → GEOMETRY/TOURS SESSION: **READY FOR VIDEO REDO** (from the building-data session)
+The status reconciliation is COMPLETE and John has cleared the flyby re-record. Action for you on restart:
+**re-derive from v2 directly** (`sync_status_from_v2.py` → `restyle_by_status.py` → `build_tour_package.py --all`), then John records.
+- **11 status_label reclassifications are in v2** (verify directly, don't trust this list): →Entitled: 2700 Shattuck,
+  2614 Telegraph, 2317 Channing (un-stalled), 1731 Addison, 659 Grizzly Peak, 1621 Sacramento, 1522 Josephine; →Completed:
+  1420 Fifth, 2538 Durant (The Valiant opened); →Under Construction: 2800 Telegraph; →In Review: 2344 Fulton.
+- **UC BED COUNTS corrected in v2** — proj177 People's Park 1,100, proj165 Bancroft-Fulton 1,625, proj171 Channing-Bowditch
+  1,500, proj170 Anchor House 772. **LABEL these as "N beds" not "N units"** (keyed on the `uc_project` flag — those 4 rows
+  only; a private student project like The Valiant is NOT uc_project → stays units).
+- **Big-tower READINESS: VERIFIED.** ~17 largest corridor projects spot-checked vs news/field — all confirm v2 or were
+  corrected. The re-platting flag was a lookup limitation, NOT a label error. Durant/Bancroft/Ashby/Shattuck/University/
+  Telegraph orbits are all trustworthy. **2200 Bancroft (proj165) is field-confirmed Under Construction (excavation+
+  foundations now) — keep it blue.**
+- **Not blocking, still not-blue either way:** 2065 Kittredge (Permitted/Stalled vs Entitled, John's call); 5 Tier-2
+  demo-permitted projects await a field/news check before any blue flip (2372 Ellsworth, 2712 Telegraph, 2449 Dwight,
+  2808 Ninth, 2328 Grant).
+Full detail in the *STATUS RECONCILIATION* section below. — building-data session (berkeley-data-99, 2026-08-27)
+
 ---
 
 ## 2026-08-26 [tours/cameras — session berkeley-data-2c] — 🎥 building loops: 3 were orbiting the wrong building (site-collision bug) — FIXED, 53 packages rebuilt · UNCOMMITTED, awaiting John review

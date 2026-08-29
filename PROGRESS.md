@@ -6,6 +6,37 @@
 
 ---
 
+## 2026-08-29 — the deploy gate now blocks the push
+
+**What was wrong.** The gate was a heredoc inside a shell pipeline. A pipeline
+exits with its LAST command's status, so a failed assertion never reached
+`set -e` and the push went ahead regardless (2026-08-28, caught only by reading
+the output by eye). A check that cannot stop anything is decoration.
+
+**Now.** `scripts/deploy_gate.py` is a script that exits non-zero, reads the
+**staged** tree (`git show :path`, not the working tree — the working tree is not
+what gets pushed), and prints all 15 checks pass-or-fail before its verdict.
+`scripts/deploy.sh` runs it as a plain command under `set -euo pipefail`, with a
+trap that restores the tree and leaves main untouched on any failure.
+
+Verified in both directions, not just the happy one: three deliberate violations
+(advocacy content from `notes/` staged; a video added with no legend and no
+catalog entry; a catalog entry naming a package not on disk) each returned exit 1
+with main still at `origin/main`; a clean deploy returned 0.
+
+**What the gate found on its first honest run.** Patrick Kennedy (`2mVF8kdjY-U`)
+and the Adeline–Shattuck YouTube version (`LAW1WIUF_ks`) are on the homepage but
+had no catalog entry — nothing recorded what geometry they show. Both now have
+one, with `recorded_geometry_era` written as **UNKNOWN rather than guessed**:
+they predate the catalog and no tour KML in the library corresponds to them, so
+the generation they show cannot be recovered, only replaced by a re-recording.
+Both carry `needs_rerecord: true`.
+
+**Still open:** re-path Ashby (26.1° RMS weave) and Adeline (16.1°); redraw
+University's west end to start west of I-80 (the published EAz7HmY0y-Q still has
+the 490 m doubling-back); re-record University and the three May/June videos; the
+Bay/marina tour awaits John's drawn path.
+
 ## 2026-08-28 [geometry/tours] — 🎬 swoops on all 21 corridor tours; John redrawing the weaving paths
 **WAITING ON JOHN: hand-drawn paths to replace the derived ones.** Workflow proven three times (Shattuck, University, Durant): John draws a Path in Earth Pro, saves to `kml/tours/control_points/`, names the file, and tells me. Then ONE command rebuilds everything: **`scripts/rebuild_corridor.py <control-points> --slug X --name "..." --street Y --orbit "..."`** — tour, swoop, cruise, swoop, street signs, kmz, packages. It exists because the four steps have a REQUIRED ORDER and `gen_corridor_tour.py` writes from scratch, so running it after the swoop silently removes the swoop.
 **WEAVE MEASURED, so the redraw list is objective** (bearing change per vertex, RMS): College-Bancroft 30.6° (mine, an L-route, worst), Ashby 26.1°, old derived Durant 25.9° (superseded), Adeline 16.1°, Bancroft 9.3°, Oxford 4.4°, Telegraph 4.4°, **San Pablo 0.6° — needs nothing, John hand-corrected those control points earlier and it shows.** Hand-drawn paths sit at 16-22°, which is the street's own geometry, not weave.

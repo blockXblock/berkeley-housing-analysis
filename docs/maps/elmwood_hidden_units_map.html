@@ -14,7 +14,7 @@
 <div><span class="sw" style="background:#911eb4"></span>rear / cottage</div></div>
 <script>
 const map=new maplibregl.Map({container:'map',center:[-122.2528,37.8588],zoom:14.2,
- style:{version:8,sources:{carto:{type:'raster',tiles:['https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'],tileSize:256,attribution:'© OSM © CARTO'}},layers:[{id:'bg',type:'raster',source:'carto'}]}});
+ style:{version:8,sources:{carto:{type:'raster',tiles:['https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'],tileSize:256,attribution:'Tiles © Esri — Esri, HERE, Garmin, © OpenStreetMap contributors'}},layers:[{id:'bg',type:'raster',source:'carto'}]}});
 map.on('load',()=>{
  map.addSource('el',{type:'geojson',data:{"type": "FeatureCollection", "features": [{"id": "0", "type": "Feature", "properties": {}, "geometry": {"type": "Polygon", "coordinates": [[[-122.244239443633, 37.8604958003685], [-122.244601401743, 37.8589301551739], [-122.250835129898, 37.8513319404014], [-122.252310187298, 37.8509005750423], [-122.252829419044, 37.8508252396896], [-122.253144867428, 37.8537131122829], [-122.256118795434, 37.8533191766006], [-122.260153616028, 37.8527833970578], [-122.259454220056, 37.8578630157591], [-122.25819515546, 37.8651281851049], [-122.254691919714, 37.865697087542], [-122.250979088794, 37.8658767408977], [-122.250856205395, 37.8657429352649], [-122.250451483401, 37.865460855717], [-122.25035336816, 37.8646882040237], [-122.250120346314, 37.8623334549733], [-122.246213771725, 37.8625677880274], [-122.244473032032, 37.8626722048491], [-122.244239443633, 37.8604958003685]]]}}]}});
  map.addLayer({id:'el-line',type:'line',source:'el',paint:{'line-color':'#00a0dc','line-width':2.5}});

@@ -20,7 +20,7 @@ const OWN=['match',['get','o'],1,'#d7301f',2,'#984ea3',3,'#377eb8','#bdbdbd'];
 const LT='<div style="font-weight:600;margin-bottom:2px">Yrs since last recorded document</div><div><span class="sw" style="background:#d7301f"></span>&lt;5 yr (recent sale/refi/transfer)</div><div><span class="sw" style="background:#fd8d3c"></span>5-15</div><div><span class="sw" style="background:#fec44f"></span>15-30</div><div><span class="sw" style="background:#74add1"></span>30-60</div><div><span class="sw" style="background:#4575b4"></span>60+ (no recording in decades)</div>';
 const LO='<div><span class="sw" style="background:#bdbdbd"></span>individual</div><div><span class="sw" style="background:#d7301f"></span>investor (LLC/Corp/LP)</div><div><span class="sw" style="background:#984ea3"></span>trust</div><div><span class="sw" style="background:#377eb8"></span>institutional</div>';
 const map=new maplibregl.Map({container:'map',center:[-122.273,37.871],zoom:12.4,
- style:{version:8,sources:{c:{type:'raster',tiles:['https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'],tileSize:256,attribution:'© OSM © CARTO'}},layers:[{id:'bg',type:'raster',source:'c'}]}});
+ style:{version:8,sources:{c:{type:'raster',tiles:['https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'],tileSize:256,attribution:'Tiles © Esri — Esri, HERE, Garmin, © OpenStreetMap contributors'}},layers:[{id:'bg',type:'raster',source:'c'}]}});
 function mode(m){
   document.getElementById('bT').className=m=='t'?'on':''; document.getElementById('bO').className=m=='o'?'on':'';
   map.setPaintProperty('pts','circle-color', m=='t'?TEN:OWN);

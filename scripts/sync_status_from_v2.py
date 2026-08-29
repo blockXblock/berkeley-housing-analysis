@@ -24,11 +24,15 @@ import argparse, collections, re, sqlite3
 GEOM = "kml/geometry/geometry.kml"
 DB = "databases/berkeley_housing_v2.db"
 
-# Figures the MAP is ahead of v2 on, from a primary source. Syncing these would REGRESS a
-# verified correction, so they are held until v2 catches up (the data lane's write, not mine).
-HOLD_UNITS = {
-    "2036 BANCROFT WAY": (87, "plan set A100 unit table: 31 studio + 8 1-bd + 13 2-bd + 35 3-bd"),
-}
+# Figures the MAP is ahead of v2 on, from a primary source. Syncing one of these would REGRESS a
+# verified correction, so it is held until v2 catches up -- the data lane's write, not mine.
+#
+# EMPTY as of 2026-08-28. 2036 Bancroft was held at 87 against v2's 85, which turned out to be a
+# migration placeholder (unit_program read "Bedroom distribution unknown; placed as 1BR for schema
+# compliance"). The data lane has since committed 87 with the real bedroom mix, so the hold is
+# released and a sync is a no-op there. The mechanism stays: the map can be ahead of v2 whenever a
+# primary source is read before v2 is updated, and a blind sync would quietly undo it.
+HOLD_UNITS = {}
 
 
 def main():

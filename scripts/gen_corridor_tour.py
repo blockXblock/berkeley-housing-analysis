@@ -272,6 +272,13 @@ def main():
     ap.add_argument("--name", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--orbit", default="", help="comma-separated address fragments to orbit")
+    ap.add_argument("--orbit-at", action="append", default=[], metavar="LAT,LON,ALT,RADIUS[,LABEL]",
+                    help="orbit a BARE COORDINATE rather than a named building. --orbit matches "
+                         "names in geometry.kml, and there is nothing west of I-80 -- the yacht "
+                         "harbour, a park, an intersection, the Campanile all have no placemark to "
+                         "name. ALT is the orbit altitude in metres above ground and RADIUS the "
+                         "orbit radius; both are what you want to see, not internal figures. "
+                         "Repeatable.")
     ap.add_argument("--spacing", type=float, default=40.0)
     ap.add_argument("--speed", type=float, default=12.0)
     ap.add_argument("--orbit-secs", type=float, default=16.0)
@@ -294,6 +301,19 @@ def main():
             print(f"  !! orbit target not found in geometry: {frag}")
             continue
         targets.append(max(hit, key=lambda kv: kv[1][3]))     # largest match
+
+    for spec in a.orbit_at:
+        parts = [p.strip() for p in spec.split(",")]
+        if len(parts) < 4:
+            raise SystemExit(f"--orbit-at needs LAT,LON,ALT,RADIUS[,LABEL], got {spec!r}")
+        blat, blon, oalt, orad_want = (float(v) for v in parts[:4])
+        label = (parts[4] if len(parts) > 4 else f"({blat:.5f},{blon:.5f})").upper()
+        # Back out the internals from what the user actually wants to see. Downstream computes
+        # alt = roof + ORBIT_CLEARANCE_M and orad = max(dmin*1.03+1, rad*2.2, 60), so a radius
+        # below the 60 m floor or below the path's own closest approach will be widened -- the
+        # floor exists because a tighter circle cranes the camera almost straight up.
+        targets.append((label, (blon, blat, oalt - ORBIT_CLEARANCE_M, orad_want / 2.2)))
+        print(f"  orbit-at: {label} at {blat:.5f},{blon:.5f} — altitude {oalt:.0f} m, radius {orad_want:.0f} m")
 
     # TRUE closest approach of the whole path to each target. Measuring against only the
     # current segment gave 275 m for 2550 Shattuck -- the orbit triggered on a segment far

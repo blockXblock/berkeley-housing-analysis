@@ -9,6 +9,24 @@
  },
  "tours": [
   {
+   "id": "bancroft-e2w",
+   "title": "Bancroft Way &mdash; College to San Pablo",
+   "tour_kml": "kml/tours/bancroft-e2w.kml",
+   "source_kml_missing": false,
+   "package": "kml/tours/packages/bancroft-e2w__geom-77fe41d9244e.kml",
+   "package_geometry_sha": "77fe41d9244e",
+   "flyto_legs": 289,
+   "duration_s": 472.1,
+   "video": {
+    "youtube": "3K7ttEaZUZ4"
+   },
+   "recorded": "2026-08-29",
+   "recorded_geometry_era": "geom-77fe41d9244e · swoops",
+   "has_pushpins": false,
+   "mapping_inferred": false,
+   "needs_rerecord": false
+  },
+  {
    "id": "university-880-uc",
    "title": "University Avenue — from the Bay to UC Berkeley",
    "tour_kml": "kml/tours/university-880-uc.kml",

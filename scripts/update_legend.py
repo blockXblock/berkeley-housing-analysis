@@ -90,6 +90,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--geometry", default=GEOM)
     ap.add_argument("--page", default=PAGE)
+    ap.add_argument("--tail", default=None,
+                    help="closing sentence appended AFTER the legend on every video. Defaults to "
+                         "the site pointer; pass '' to omit.")
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
     stage, agency = census(a.geometry)
@@ -101,19 +104,31 @@ def main():
     for st, *_ in GLOSS:
         if st.endswith("Project"):
             print(f"  {st:<20} {agency.get(st,0):>3}{'   (absent — omitted)' if not agency.get(st) else ''}")
-    new = sentence(stage, agency)
+    TAIL = (" Elsewhere on BerkeleyBuild.com: the architects\u2019 own plan sets and the "
+            "affordability tabulations filed with them, and for every project in the pipeline the "
+            "full permit timeline \u2014 when it was filed, when it was approved, when the building "
+            "permit issued, and when it was finished.")
+    new = sentence(stage, agency) + (TAIL if a.tail is None else a.tail)
     print("\nlegend:\n ", re.sub(r"<[^>]+>", "", new).strip())
     if a.dry_run:
         return
     h = open(a.page, encoding="utf-8").read()
     n = 0
     def swap(m):
+        """Rewrite the legend on any block that is a VIDEO block, whether or not it has one.
+
+        This used to bail out when the marker was absent, so it could only ever UPDATE an
+        existing legend -- a newly published video got none at all, and the Bancroft flyover
+        went live without one. The guard is now "is this a video block", tested by looking for
+        a YouTube embed just after it, rather than "does it already say what I am about to say".
+        """
         nonlocal n
         body = m.group(2)
-        if MARK not in body:
+        tail_of_page = h[m.end():m.end() + 900]
+        if "youtube.com/embed" not in tail_of_page:
             return m.group(0)
         n += 1
-        head = body[:body.index(" <b>Colour shows")] if " <b>Colour shows" in body else body.split(MARK)[0]
+        head = body[:body.index(" <b>Colour shows")] if " <b>Colour shows" in body else body
         return m.group(1) + head.rstrip() + new + m.group(3)
     h = re.sub(r"(<h3>.*?</h3>\s*<p>)(.*?)(</p>)", swap, h, flags=re.S)
     open(a.page, "w", encoding="utf-8").write(h)

@@ -17,7 +17,7 @@ so John can hand over a drawn path and get back something recordable.
 of I-80, so a marina or harbour orbit cannot be expressed this way -- it needs a bare
 coordinate, which gen_corridor_tour.py does not yet accept.
 """
-import argparse, subprocess, sys, zipfile, os
+import argparse, pathlib, subprocess, sys, zipfile, os
 
 def run(cmd, quiet=True):
     r = subprocess.run(cmd, capture_output=True, text=True)
@@ -53,7 +53,16 @@ def main():
         cmd = [py, "scripts/gen_corridor_tour.py", cp, "--name", title, "--out", out]
         if orbit:
             cmd += ["--orbit", orbit]
-        print(run(cmd).strip().splitlines()[-2] if orbit else f"wrote {out}")
+        # RUN IT, THEN REPORT. This was `print(run(cmd)... if orbit else f"wrote {out}")`, and a
+        # conditional expression only evaluates the branch it takes -- so on the cruise pass the
+        # generator was never invoked and the script printed "wrote" over a file it had not
+        # written. Every cruise this script claimed to build was actually the previous one, left
+        # untouched: bancroft-w2e-cruise was still built from the DERIVED path after John had
+        # replaced it.
+        stdout = run(cmd)
+        print(stdout.strip().splitlines()[-2] if orbit else f"wrote {out}")
+        if not pathlib.Path(out).exists():
+            raise SystemExit(f"generator reported success but {out} does not exist")
         if not a.no_swoop:
             run([py, "scripts/add_intro_swoop.py", out, "--out", out,
                  "--hold", str(a.hold), "--rise", str(a.rise), "--look-ahead", str(a.look_ahead)])

@@ -131,7 +131,12 @@ def repoint_catalog(sha: str) -> None:
     if not cat.exists():
         return
     raw = cat.read_text(encoding="utf-8")
-    out = re.sub(r"geom-[0-9a-f]{12}", f"geom-{sha}", raw)
+    # SCOPED TO THE PACKAGE FIELDS. A blanket substitution over the whole file also rewrote
+    # recorded_geometry_era -- the field whose entire job is to record which generation a video
+    # was FLOWN AGAINST -- to the current sha on every rebuild. So every entry claimed it had
+    # been recorded against whatever was newest, and the one piece of data that says "this video
+    # is stale" was being erased by the build that made it stale.
+    out = re.sub(r'("package"\s*:\s*"[^"]*?)geom-[0-9a-f]{12}', rf"\g<1>geom-{sha}", raw)
     # the sha ALSO lives in its own field, which the path substitution above never touched --
     # every entry claimed 5bb87b9b029c while its package path said something else. A catalog
     # that contradicts itself is how the 404 went unnoticed for so long.

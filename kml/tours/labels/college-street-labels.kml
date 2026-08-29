@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+	<name>College street labels · scale 2.5 · 20 m</name>
+	<open>1</open>
+	<Style id="cross"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>2.5</scale><color>ffffffff</color></LabelStyle></Style>
+	<Style id="own"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>3.125</scale><color>ffffffff</color></LabelStyle></Style>
+	<Placemark><name>College</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2524745979443,37.85101889848271,20.0</coordinates></Point></Placemark>
+	<Placemark><name>College</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2529300364686,37.85568747186598,20.0</coordinates></Point></Placemark>
+	<Placemark><name>College</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2539117795758,37.86559287614087,20.0</coordinates></Point></Placemark>
+	<Placemark><name>College</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2546119561878,37.86921250913845,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Alcatraz Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25247479853041,37.851020954635125,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Woolsey St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25277627223495,37.85411127756056,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Webster St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25292380905859,37.85562363642152,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Ashby Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25309489048088,37.857275895965664,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Russell St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25319048516029,37.858235761704485,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Stuart St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25336614335373,37.860021426605755,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Derby St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25355311923757,37.8619306229878,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Parker St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25369834946484,37.86341355767846,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Dwight Way</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25390342304657,37.86550754826294,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Haste St</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2540616916636,37.866367861666575,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Durant Ave</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25450621965342,37.86866589355268,20.0</coordinates></Point></Placemark>
+	<Placemark><name>Bancroft Way</name><styleUrl>#cross</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.25455785176989,37.86893281094079,20.0</coordinates></Point></Placemark>
+</Document>
+</kml>

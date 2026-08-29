@@ -9,6 +9,24 @@
  },
  "tours": [
   {
+   "id": "shattuck-s2n-path",
+   "title": "Shattuck Avenue — South to North, past the towers",
+   "tour_kml": "kml/tours/shattuck-s2n-path.kml",
+   "source_kml_missing": false,
+   "package": "kml/tours/packages/shattuck-s2n-path__geom-77fe41d9244e.kml",
+   "package_geometry_sha": "77fe41d9244e",
+   "flyto_legs": 280,
+   "duration_s": 445.0,
+   "video": {
+    "youtube": "t3uTMT5ZxzA"
+   },
+   "recorded": "2026-08-29",
+   "recorded_geometry_era": "geom-77fe41d9244e · swoops",
+   "has_pushpins": false,
+   "mapping_inferred": false,
+   "needs_rerecord": false
+  },
+  {
    "id": "bancroft-e2w",
    "title": "Bancroft Way — Piedmont to Aquatic Park",
    "tour_kml": "kml/tours/bancroft-e2w.kml",
@@ -53,14 +71,12 @@
    "package_geometry_sha": "77fe41d9244e",
    "flyto_legs": 103,
    "duration_s": 344.4,
-   "video": {
-    "youtube": "hP0WHQIxM8s"
-   },
+   "video": null,
    "recorded": "2026-08-27",
-   "recorded_geometry_era": "geom-0cc83edd59a0 · labels 5.0, anchors coplanar (flickered)",
+   "recorded_geometry_era": "geom-0cc83edd59a0 · labels 5.0, anchors coplanar (flickered) · SUPERSEDED 2026-08-29 by t3uTMT5ZxzA on shattuck-s2n-path",
    "has_pushpins": false,
    "mapping_inferred": false,
-   "needs_rerecord": true
+   "needs_rerecord": false
   },
   {
    "id": "Shattuck-centerline-flight-with-2190-and-2276-orbits",

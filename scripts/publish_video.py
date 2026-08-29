@@ -20,7 +20,7 @@ CAT = ROOT / "docs" / "tours.json"
 PAGE = ROOT / "docs" / "index.html"
 GEOM = ROOT / "kml" / "geometry" / "geometry.kml"
 
-BLOCK = '''    <div style="margin: 20px 0;">
+BLOCK = '''    <div style="margin: 20px auto; max-width: 1000px; padding: 0 1.5rem;">
   <h3>{title}</h3>
   <p>{blurb}</p>
   <div style="border-radius: 8px; overflow: hidden; position: relative; padding-bottom: 56.25%; height: 0;">
@@ -82,9 +82,9 @@ def main():
     CAT.write_text(json.dumps(cat, indent=1, ensure_ascii=False))
 
     h = PAGE.read_text()
-    h = re.sub(r'    <div style="margin: 20px 0;">\s*<h3>[^<]*</h3>.*?youtube\.com/embed/'
+    h = re.sub(r'    <div style="margin: 20px auto; max-width: 1000px; padding: 0 1.5rem;">\s*<h3>[^<]*</h3>.*?youtube\.com/embed/'
                + re.escape(vid) + r'.*?</div>\s*</div>\n', "", h, flags=re.S)   # replace, never duplicate
-    blocks = list(re.finditer(r'    <div style="margin: 20px 0;">\s*<h3>', h))
+    blocks = list(re.finditer(r'    <div style="margin: 20px auto; max-width: 1000px; padding: 0 1.5rem;">\s*<h3>', h))
     if not blocks:
         raise SystemExit("could not find a video block to anchor against in docs/index.html")
     at = blocks[min(max(a.position, 1) - 1, len(blocks) - 1)].start()

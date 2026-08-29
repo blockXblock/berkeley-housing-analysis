@@ -74,6 +74,9 @@ def main():
              "recorded": a.recorded or datetime.date.today().isoformat(),
              "recorded_geometry_era": era, "has_pushpins": False,
              "mapping_inferred": False, "needs_rerecord": False}
+    # the catalog is DATA, the homepage is HTML. An entity like &mdash; renders on the page but
+    # is literal text anywhere else that reads the catalog, so unescape it on the way in.
+    entry["title"] = __import__("html").unescape(entry["title"])
     cat["tours"] = [t for t in cat["tours"] if t["id"] != a.tour]
     cat["tours"].insert(0, entry)
     CAT.write_text(json.dumps(cat, indent=1, ensure_ascii=False))

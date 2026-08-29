@@ -526,9 +526,13 @@ field-confirmed; dormant ones confirmed dormant. **Session status reclassificati
 mis-count "12/13"): proj3/77, 146/160, 37/117/76/80/112/81, 139.
 **UC BED-COUNT FIX (snapshot keep_snapshot_2026-08-27_pre-uc-bedcounts.db, verified):** UC now counted in BEDS
 (primary-sourced): proj177 People's Park 556→1,100, proj165 2200 Bancroft 550→**1,625** (Bancroft-Fulton), proj171
-2400 Bowditch 750→1,500 (approx); proj170 Anchor House 772 already beds. **TODO: DISPLAY must label uc_project totals
-"beds" not "units"** (geometry labels + explorer, keyed on uc_project flag) — numbers fixed, wording pending (geometry
-session offline; it reads v2 directly on restart).
+2400 Bowditch 750→1,500 (approx); proj170 Anchor House 772 already beds. **DONE — geometry lane applied the "N beds"
+labels** (uc_project only, both wings each; no UC placemark still says "units"; The Valiant stays units, not uc_project).
+**proj20 2036 Bancroft 85→87 COMMITTED** (snapshot keep_snapshot_2026-08-27_pre-proj20-units.db; verified total/unit_program/
+affordability all =87, VLI held 4; bedroom mix 31 studio/8 1BR/13 2BR/35 3BR from plan-set doc 2253 recorded in notes) —
+v2 was BEHIND the map here (map was primary-sourced ahead); now matches, geometry HOLD_UNITS released.
+**2065 Kittredge (189u) → John's call: LEAVE ENTITLED** (no write; BP Feb-2023 but never broke ground; v2 holds no BP row).
+Both open items closed; map record-ready (geometry: 61 packages, 0 labels out of step w/ v2).
 
 **PHYSICALLY-ACTIVE COUNT (2026-08-27):** ~21 projects / 1,114 units have a construction/demo/BP signal + no CO + not
 withdrawn (tier-1 "construction observed" = 5 proj / 848u, all already labelled Under Construction). But only **8 carry

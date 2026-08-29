@@ -76,8 +76,8 @@ const METRICS={
 };
 let cur="mh_byright";
 const map=new maplibregl.Map({container:'map',center:[-122.273,37.874],zoom:12.2,minzoom:10,maxzoom:17,
- style:{version:8,sources:{c:{type:'raster',tiles:['https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'],
- tileSize:256,attribution:'© OpenStreetMap © CARTO'}},layers:[{id:'bg',type:'raster',source:'c'}]}});
+ style:{version:8,sources:{c:{type:'raster',tiles:['https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'],
+ tileSize:256,attribution:'Tiles © Esri — Esri, HERE, Garmin, © OpenStreetMap contributors'}},layers:[{id:'bg',type:'raster',source:'c'}]}});
 
 function fillExpr(m){const e=["step",["coalesce",["get",m.prop],0],m.colors[0]];
  for(let i=1;i<m.stops.length;i++){e.push(m.stops[i],m.colors[i]);}return e;}

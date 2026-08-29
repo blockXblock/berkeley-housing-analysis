@@ -2659,9 +2659,8 @@
             // Initialize map if not exists
             if (!spatialMap) {
                 spatialMap = L.map('spatialMap').setView([37.867, -122.267], 14);
-                L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-                    attribution: '&copy; OpenStreetMap &copy; CARTO',
-                    subdomains: 'abcd',
+                L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+                    attribution: 'Tiles &copy; Esri &mdash; Esri, HERE, Garmin, &copy; OpenStreetMap contributors',
                     maxZoom: 20
                 }).addTo(spatialMap);
             }

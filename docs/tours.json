@@ -9,6 +9,24 @@
  },
  "tours": [
   {
+   "id": "university-880-uc",
+   "title": "University Avenue — Berkeley Harbor to UC Berkeley at Oxford Street",
+   "tour_kml": "kml/tours/university-880-uc.kml",
+   "source_kml_missing": false,
+   "package": "kml/tours/packages/university-880-uc__geom-00d2f3888a8d.kml",
+   "package_geometry_sha": "00d2f3888a8d",
+   "flyto_legs": 345,
+   "duration_s": 489.0,
+   "video": {
+    "youtube": "nRN1zDxOzy4"
+   },
+   "recorded": "2026-08-29",
+   "recorded_geometry_era": "geom-00d2f3888a8d · swoops",
+   "has_pushpins": false,
+   "mapping_inferred": false,
+   "needs_rerecord": false
+  },
+  {
    "id": "1581-university-ave",
    "title": "1581 university ave",
    "tour_kml": null,
@@ -738,24 +756,6 @@
    "has_pushpins": true,
    "mapping_inferred": true,
    "needs_rerecord": true
-  },
-  {
-   "id": "university-880-uc",
-   "title": "university 880 uc",
-   "tour_kml": "kml/tours/university-880-uc.kml",
-   "source_kml_missing": false,
-   "package": "kml/tours/packages/university-880-uc__geom-00d2f3888a8d.kml",
-   "package_geometry_sha": "00d2f3888a8d",
-   "flyto_legs": 345,
-   "duration_s": 489.0,
-   "video": {
-    "youtube": "EAz7HmY0y-Q"
-   },
-   "needs_rerecord": true,
-   "recorded": "2026-08-27",
-   "recorded_geometry_era": "geom-40cecbb2c9f4 · labels 3.0 + Region/Lod, BART magenta",
-   "has_pushpins": false,
-   "mapping_inferred": false
   },
   {
    "id": "university-880-uc-cruise",

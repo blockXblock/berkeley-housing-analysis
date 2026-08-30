@@ -43,6 +43,12 @@ def main():
     ap.add_argument("--blurb", default=None, help="paragraph text; the colour legend is appended by update_legend.py")
     ap.add_argument("--position", type=int, default=1, help="1 = first video on the page")
     ap.add_argument("--recorded", default=None, help="YYYY-MM-DD; defaults to today")
+    ap.add_argument("--replaces", default=None,
+                    help="id or URL of the video this one supersedes. The existing block is EDITED "
+                         "IN PLACE -- same position, same paragraph, same legend -- and only the "
+                         "video id and title change. Re-recording a corridor is the common case, "
+                         "and rebuilding the block from scratch would silently drop the copy and "
+                         "the colour legend that update_legend.py had put there.")
     a = ap.parse_args()
     vid = re.sub(r"^.*(?:youtu\.be/|v=|embed/)", "", a.youtube).split("&")[0].split("?")[0]
     if not re.fullmatch(r"[A-Za-z0-9_-]{11}", vid):
@@ -82,6 +88,29 @@ def main():
     CAT.write_text(json.dumps(cat, indent=1, ensure_ascii=False))
 
     h = PAGE.read_text()
+    if a.replaces:
+        old = re.sub(r"^.*(?:youtu\.be/|v=|embed/)", "", a.replaces).split("&")[0].split("?")[0]
+        if not re.fullmatch(r"[A-Za-z0-9_-]{11}", old):
+            raise SystemExit(f"--replaces does not look like a YouTube id: {old!r}")
+        # SPLIT ON THE DELIMITER, never a regex spanning blocks. A regex written to match one
+        # block once deleted FOUR (2026-08-28); splitting and asserting a single hit cannot.
+        D = '<div style="margin: 20px auto; max-width: 1000px; padding: 0 1.5rem;">'
+        parts = h.split(D)
+        hit = [i for i, b in enumerate(parts) if f"embed/{old}" in b]
+        if len(hit) != 1:
+            raise SystemExit(f"expected exactly 1 block for {old}, found {len(hit)} — refusing to edit")
+        i = hit[0]; blk = parts[i]
+        blk = blk.replace(old, vid)                       # src, playlist= and the title attribute
+        blk = re.sub(r"<h3>.*?</h3>", f"<h3>{a.title}</h3>", blk, count=1, flags=re.S)
+        if a.blurb:
+            blk = re.sub(r"<p[^>]*>.*?</p>", f"<p>{a.blurb}</p>", blk, count=1, flags=re.S)
+        if old in blk or f"embed/{vid}" not in blk:
+            raise SystemExit("swap did not take — refusing to write")
+        parts[i] = blk
+        PAGE.write_text(D.join(parts))
+        print(f"catalog : {a.tour} -> {vid}, {dur:.0f} s, era {era}")
+        print(f"homepage: {old} -> {vid} in place (position unchanged, paragraph and legend kept)")
+        return
     h = re.sub(r'    <div style="margin: 20px auto; max-width: 1000px; padding: 0 1.5rem;">\s*<h3>[^<]*</h3>.*?youtube\.com/embed/'
                + re.escape(vid) + r'.*?</div>\s*</div>\n', "", h, flags=re.S)   # replace, never duplicate
     blocks = list(re.finditer(r'    <div style="margin: 20px auto; max-width: 1000px; padding: 0 1.5rem;">\s*<h3>', h))

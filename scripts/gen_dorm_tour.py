@@ -39,30 +39,44 @@ def transit(lon, lat, alt, hdg, secs):
     return cam(lon, lat, alt, hdg, 62.0, secs)
 
 
-def spiral(lon, lat, roof, rad, plan_secs, spiral_secs, close_secs, turns):
-    """The three-part shot, identical in geometry to gen_building_loop.build()."""
+def spiral(lon, lat, roof, rad, orbit_secs, turns, drop_m, rise_m):
+    """ONE DESCENDING ORBIT — a true spiral, and never a look-down.
+
+    John, 2026-08-30: "eliminate the orbits looking straight down on the buildings ... do one
+    orbit, drop the elevation by 20 metres, then rise an additional 25 m to fly to the next."
+
+    The previous shot opened each building with a PLAN VIEW: twelve cameras at tilt 0, circling
+    a quarter turn while pointing straight down. It was inherited from gen_building_loop, where
+    a standalone clip has to establish the footprint before it means anything. In a continuous
+    tour it just reads as an extra rotation over a roof, and four of them made the film crawl.
+
+    What is left is the part that was doing the work: a single turn that descends `drop_m` while
+    the camera tilts further up, so the tower resolves from a shape into a mass. The orbit ENDS
+    at roof + 10 m, which is where the next leg lifts from.
+
+    Returns (legs, end_lon, end_lat, end_alt) so the transit can rise from where the orbit
+    actually finished rather than from a recomputed guess.
+    """
     orad = max(rad * 2.2, roof * 1.3, 60.0)
-    plan_alt = max(roof * 3.0, orad * 2.2, 180.0)
-    eye_alt = roof + 10.0
+    end_alt = roof + 10.0
+    start_alt = end_alt + drop_m
     k = math.cos(math.radians(lat))
-    out = []
-    n1 = 12
-    for j in range(n1):
-        out.append(cam(lon, lat, plan_alt, 360.0 * j / n1 * 0.25, 0.0, plan_secs / n1))
-    n2 = int(36 * turns)
-    for j in range(1, n2 + 1):
-        f = j / n2; e = f * f * (3 - 2 * f); th = 360.0 * turns * f
-        r = orad * e; a = plan_alt + (eye_alt - plan_alt) * e; tilt = 72.0 * e
-        out.append(cam(lon + (r * math.sin(math.radians(th)) / M) / k,
-                       lat + (r * math.cos(math.radians(th)) / M),
-                       a, (th + 180) % 360, tilt, spiral_secs / n2))
-    n3 = 36
-    for j in range(1, n3 + 1):
-        th = 360.0 * turns + 360.0 * (j / n3)
+    out, n = [], int(48 * turns)
+    for j in range(n + 1):
+        f = j / n
+        e = f * f * (3 - 2 * f)                    # ease in and out of the descent
+        th = 360.0 * turns * f
+        alt = start_alt + (end_alt - start_alt) * e
+        tilt = 66.0 + 10.0 * e                     # 66 deg to 76 deg -- never anywhere near 0
         out.append(cam(lon + (orad * math.sin(math.radians(th)) / M) / k,
                        lat + (orad * math.cos(math.radians(th)) / M),
-                       eye_alt, (th + 180) % 360, 72.0, close_secs / n3))
-    return out, orad, plan_alt, eye_alt
+                       alt, (th + 180) % 360, tilt, orbit_secs / n,
+                       "bounce" if j == 0 else "smooth"))
+    th_end = 360.0 * turns
+    return (out,
+            lon + (orad * math.sin(math.radians(th_end)) / M) / k,
+            lat + (orad * math.cos(math.radians(th_end)) / M),
+            end_alt)
 
 
 def main():
@@ -71,10 +85,13 @@ def main():
     # SLOWER THAN THE STANDALONE LOOPS (John, 2026-08-29: "make the spirals slower"). The May
     # tour orbited each building in 10 s over four corner positions; gen_building_loop's own
     # defaults are 11/26/22. These are slower again, so the mass of each tower reads.
-    ap.add_argument("--plan-secs", type=float, default=14.0)
-    ap.add_argument("--spiral-secs", type=float, default=42.0)
-    ap.add_argument("--close-secs", type=float, default=30.0)
-    ap.add_argument("--turns", type=float, default=1.25)
+    ap.add_argument("--orbit-secs", type=float, default=48.0,
+                    help="seconds for the single descending orbit at each building")
+    ap.add_argument("--turns", type=float, default=1.0)
+    ap.add_argument("--drop", type=float, default=20.0,
+                    help="metres the camera descends over the orbit (John: 20)")
+    ap.add_argument("--rise", type=float, default=25.0,
+                    help="metres to climb after the orbit before crossing to the next (John: 25)")
     ap.add_argument("--transit-secs", type=float, default=12.0)
     ap.add_argument("--open-secs", type=float, default=10.0)
     a = ap.parse_args()
@@ -101,21 +118,34 @@ def main():
     body.append(cam(CAMPANILE[0] + 200 / (M * math.cos(math.radians(CAMPANILE[1]))),
                     CAMPANILE[1], 95.0, 270.0, 75.0, a.open_secs, "bounce"))
     total = a.open_secs
-    for name, (lon, lat, roof, rad, label) in picks:
+    for idx, (name, (lon, lat, roof, rad, label)) in enumerate(picks):
         k = math.cos(math.radians(lat))
-        body.append(transit(lon + 260 / (M * k), lat, max(roof * 1.6, 150.0), 270.0, a.transit_secs))
-        legs, orad, pa, ea = spiral(lon, lat, roof, rad,
-                                    a.plan_secs, a.spiral_secs, a.close_secs, a.turns)
+        orad = max(rad * 2.2, roof * 1.3, 60.0)
+        # APPROACH: come in at the altitude the orbit starts from, so the first orbit camera
+        # is a continuation rather than a jump.
+        if idx:
+            body.append(cam(lon + (orad * 1.8 / M) / k, lat, roof + 10.0 + a.drop,
+                            270.0, 70.0, a.transit_secs))
+            total += a.transit_secs
+        legs, elon, elat, ealt = spiral(lon, lat, roof, rad, a.orbit_secs, a.turns,
+                                        a.drop, a.rise)
         body += legs
-        total += a.transit_secs + a.plan_secs + a.spiral_secs + a.close_secs
-        lines.append(f"    {label[:52]:<52} roof {roof:5.1f} m  orbit r {orad:4.0f} m  plan {pa:4.0f} m")
+        total += a.orbit_secs
+        # LIFT IN PLACE before crossing -- John asked for the climb to be its own move, so the
+        # cut to the next building reads as leaving one and arriving at another, not a drift.
+        if idx < len(picks) - 1:
+            body.append(cam(elon, elat, ealt + a.rise, 270.0, 70.0, 4.0))
+            total += 4.0
+        lines.append(f"    {label[:50]:<50} roof {roof:5.1f} m  orbit r {orad:4.0f} m  "
+                     f"{ealt + a.drop:5.0f} -> {ealt:4.0f} m")
 
     stamp = datetime.datetime.now().strftime("%m-%d %H:%M")
     disp = f"UC Berkeley Student Housing · {len(picks)} projects · spirals · {stamp}"
-    desc = (f"Every UC housing project flagged uc_project in v2, largest first, flown north to "
-            f"south. Opens east of the Campanile, then at each site: plan view "
-            f"{a.plan_secs:.0f} s, spiral in {a.spiral_secs:.0f} s over {a.turns} turns, close "
-            f"orbit {a.close_secs:.0f} s. UC housing is counted in BEDS, not units. Altitudes "
+    desc = (f"Every UC housing project flagged uc_project in v2, flown north to south. Opens "
+            f"east of the Campanile, then at each site ONE DESCENDING ORBIT: {a.orbit_secs:.0f} s "
+            f"for {a.turns} turn, dropping {a.drop:.0f} m to roof + 10 m with the camera tilted "
+            f"66-76 degrees throughout -- no look-down. It then climbs {a.rise:.0f} m before "
+            f"crossing to the next. UC housing is counted in BEDS, not units. Altitudes "
             f"derive from each building's extrusion in geometry.kml, so a corrected height "
             f"re-cuts the shot. Camera-only: run build_tour_package.py to splice the geometry.")
     kml = ('<?xml version="1.0" encoding="UTF-8"?>\n'

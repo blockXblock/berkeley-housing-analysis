@@ -9,6 +9,24 @@
  },
  "tours": [
   {
+   "id": "uc-dormitories",
+   "title": "UC Berkeley Student Housing — 5,010 Beds in Four Projects",
+   "tour_kml": "kml/tours/uc-dormitories.kml",
+   "source_kml_missing": false,
+   "package": "kml/tours/packages/uc-dormitories__geom-a4dc36f6df26.kml",
+   "package_geometry_sha": "a4dc36f6df26",
+   "flyto_legs": 246,
+   "duration_s": 327.0,
+   "video": {
+    "youtube": "3o-nkCZn7-E"
+   },
+   "recorded": "2026-08-30",
+   "recorded_geometry_era": "geom-a4dc36f6df26",
+   "has_pushpins": false,
+   "mapping_inferred": false,
+   "needs_rerecord": false
+  },
+  {
    "id": "san-pablo-n2s",
    "title": "San Pablo Avenue — North to South",
    "tour_kml": "kml/tours/san-pablo-n2s.kml",
@@ -743,18 +761,6 @@
    "needs_rerecord": null
   },
   {
-   "id": "uc-dormitories",
-   "title": "uc dormitories",
-   "tour_kml": "kml/tours/uc-dormitories.kml",
-   "source_kml_missing": false,
-   "package": "kml/tours/packages/uc-dormitories__geom-a4dc36f6df26.kml",
-   "package_geometry_sha": "a4dc36f6df26",
-   "flyto_legs": 377,
-   "duration_s": 401.1,
-   "video": null,
-   "needs_rerecord": null
-  },
-  {
    "id": "uc_dormitory_tour_2026-05-14 (4)",
    "title": "UC Berkeley New Student Housing",
    "tour_kml": "kml/tours/uc_dormitory_tour_2026-05-14 (4).kml",
@@ -763,14 +769,17 @@
    "package_geometry_sha": "a4dc36f6df26",
    "flyto_legs": 18,
    "duration_s": 65.0,
-   "video": {
-    "youtube": "5VLjGlMuHLU"
-   },
+   "video": null,
    "recorded": "2026-05-14",
    "recorded_geometry_era": "pre-2026-05-17",
    "has_pushpins": true,
    "mapping_inferred": true,
-   "needs_rerecord": true
+   "needs_rerecord": false,
+   "superseded_video": {
+    "youtube": "5VLjGlMuHLU",
+    "removed": "2026-08-30",
+    "reason": "the 65-second May 2026 hand-written tour; replaced by 3o-nkCZn7-E flown on the rebuilt uc-dormitories tour"
+   }
   },
   {
    "id": "university-880-uc-cruise",

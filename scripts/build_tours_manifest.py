@@ -45,7 +45,9 @@ PUBLISHED = {
     title="Berkeley's 17 Largest Private Housing Projects", youtube="3OQjzk9dIOw",
     recorded="2026-05-16", geometry_era="2026-05-17-ish", pushpins=True, inferred=True),
  "uc_dormitory_tour_2026-05-14 (4)": dict(
-    title="UC Berkeley New Student Housing", youtube="5VLjGlMuHLU",
+    # SUPERSEDED 2026-08-30 by 3o-nkCZn7-E on the rebuilt uc-dormitories tour. Left with
+    # youtube=None so a regeneration cannot re-publish the 65-second May flight.
+    title="UC Berkeley New Student Housing", youtube=None,
     recorded="2026-05-14", geometry_era="pre-2026-05-17", pushpins=True, inferred=True),
  "tour-elmwood+college+bancroft+shattuck-s2n": dict(
     title="Elmwood / College / Bancroft / Shattuck", youtube=None,

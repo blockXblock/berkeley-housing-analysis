@@ -6,6 +6,43 @@
 
 ---
 
+## 2026-08-29 — UC harvest: Bancroft corrected from the Regents, Bowditch deliberately left unsettled
+
+All four UC projects now carry a source document. Before today only Anchor House did.
+
+**2200 Bancroft — the bed count was right, two other fields were not.** UC Regents
+item F3, 19 March 2025, is the approved scope: ~583 units containing ~1,625 beds
+(508 triples, 21 doubles, 21 singles, 28 RA units, five staff apartments),
+~353,000 gsf / 222,000 asf, ~500-seat dining commons, budget $443,503,000,
+construction Jan 2026 → summer 2028. Corrected `height_feet` 253 → **263**,
+`building_sqft` null → **353,000**, unit placeholder 550 → **583**. v2 had also
+never recorded the **ten-storey Durant wing** (~134 ft) — the building is
+L-shaped with two heights, not a single 23-storey tower.
+
+**2400 Bowditch — left at 1,500 on purpose.** UC Capital Strategies says "more
+than 1,500 beds"; **SOM, the design architect, says "up to 2,000"**. The project
+holds only preliminary-plans funding ($10,130,000) with no approved scope, so
+nothing is settled. v2 keeps 1,500 as the **documented lower bound**, both
+sources are recorded so the disagreement stays visible rather than being averaged
+away, and confidence drops to medium. `building_sqft` null → 550,000. The site
+description was also wrong: bounded by Channing, Bowditch and Haste — **not
+Telegraph**, which is People's Park's western boundary copied onto the wrong
+project. `height_feet` 280 is flagged in-description as unverified; neither UC
+nor SOM publishes a height in feet.
+
+Both affordability rows dropped to confidence LOW — filing UC dormitory beds
+under ABOVE_MOD is a migration artifact, not a finding.
+
+*Pattern worth keeping:* every one of these errors came from a V1 migration
+record whose figures nobody had ever checked against a source. Where a
+description existed it was usually right and the FIELD was wrong (Haste 1,113 vs
+1100; Bancroft's Durant wing). **Read the description before trusting the field
+on any `migration_v1_to_v2` row.**
+
+**Still open:** the People's Park SAHA building has no record of its own, so both
+polygons read "1113 beds · Under Construction". 2400 Bowditch's bed count needs
+re-checking when the Regents approve scope.
+
 ## 2026-08-29 — People's Park: 1,113 beds and a second building v2 never modelled
 
 John asked whether 2556 Haste is really 1,100 beds across both buildings. It is

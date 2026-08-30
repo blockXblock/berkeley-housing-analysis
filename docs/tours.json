@@ -9,6 +9,24 @@
  },
  "tours": [
   {
+   "id": "san-pablo-n2s",
+   "title": "San Pablo Avenue — North to South",
+   "tour_kml": "kml/tours/san-pablo-n2s.kml",
+   "source_kml_missing": false,
+   "package": "kml/tours/packages/san-pablo-n2s__geom-a4dc36f6df26.kml",
+   "package_geometry_sha": "a4dc36f6df26",
+   "flyto_legs": 330,
+   "duration_s": 434.2,
+   "video": {
+    "youtube": "9XqjpjGJctY"
+   },
+   "recorded": "2026-08-30",
+   "recorded_geometry_era": "geom-a4dc36f6df26 · swoops",
+   "has_pushpins": false,
+   "mapping_inferred": false,
+   "needs_rerecord": false
+  },
+  {
    "id": "durant-w2e",
    "title": "Durant Avenue — Milvia to Piedmont",
    "tour_kml": "kml/tours/durant-w2e.kml",
@@ -589,18 +607,6 @@
    "needs_rerecord": null
   },
   {
-   "id": "san-pablo-n2s",
-   "title": "san pablo n2s",
-   "tour_kml": "kml/tours/san-pablo-n2s.kml",
-   "source_kml_missing": false,
-   "package": "kml/tours/packages/san-pablo-n2s__geom-a4dc36f6df26.kml",
-   "package_geometry_sha": "a4dc36f6df26",
-   "flyto_legs": 330,
-   "duration_s": 434.2,
-   "video": null,
-   "needs_rerecord": null
-  },
-  {
    "id": "san-pablo-n2s-cruise",
    "title": "san pablo n2s cruise",
    "tour_kml": "kml/tours/san-pablo-n2s-cruise.kml",
@@ -675,14 +681,17 @@
    "package_geometry_sha": "a4dc36f6df26",
    "flyto_legs": 13,
    "duration_s": 145.5,
-   "video": {
-    "youtube": "LAW1WIUF_ks"
-   },
+   "video": null,
    "recorded": "2026-05-18",
    "recorded_geometry_era": "2026-05-18",
    "has_pushpins": true,
    "mapping_inferred": true,
-   "needs_rerecord": true
+   "needs_rerecord": true,
+   "superseded_video": {
+    "youtube": "LAW1WIUF_ks",
+    "removed": "2026-08-30",
+    "reason": "taken off the site pending a re-record on current geometry"
+   }
   },
   {
    "id": "tour-elmwood+college+bancroft+shattuck-s2n",

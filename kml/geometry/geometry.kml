@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <Document>
-	<name>Berkeley Housing Geometry · 2026-08-29 · 392 buildings · geom-eee624256656</name>
+	<name>Berkeley Housing Geometry · 2026-08-29 · 392 buildings · geom-4c3c68b7ea0c</name>
 	<visibility>0</visibility>
 	<open>1</open>
 	<description>177 housing projects. Heights shown as stories × 3.5m. Generated 2026-05-03.</description>
@@ -10298,7 +10298,7 @@
 		<Placemark>
 			<name>2400 Bowditch St · South · 1500 beds · Pre-Application</name>
 			<visibility>0</visibility>
-			<description>Anna Head School: 14 stories, wing of project 171. UC Project.</description>
+			<description><![CDATA[<b>2400 BOWDITCH St</b><br/><b>Height:</b> 45.0m<br/><b>Status:</b> Pre-Application<br/>Anna Head School site · 14 stories · South building of this project<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
 			<styleUrl>#style_status_Pre_Application__UC_Project_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -10345,6 +10345,7 @@
 		</Placemark>
 		<Placemark>
 			<name>2200 Bancroft Way · South · 1625 beds · Under Construction</name>
+			<description><![CDATA[<b>2200 BANCROFT Way</b><br/><b>Height:</b> 36.0m<br/><b>Status:</b> Under Construction<br/>South building of this project<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
 			<visibility>0</visibility>
 			<styleUrl>#style_status_Under_Construction__UC_Project_nolabel</styleUrl>
 			<Polygon>

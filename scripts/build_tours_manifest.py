@@ -9,6 +9,9 @@ Usage: python scripts/build_tours_manifest.py [--write]
 import json, re, hashlib, sys, subprocess
 from pathlib import Path
 from datetime import date
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+from stamp_geometry import geometry_sha as _geometry_sha
 
 ROOT = Path(__file__).resolve().parents[1]
 GEOM = ROOT / "kml/geometry/geometry.kml"
@@ -16,7 +19,7 @@ TOURS = ROOT / "kml/tours"
 PKGS = TOURS / "packages"
 OUT = ROOT / "docs/tours.json"
 
-CURRENT_SHA = hashlib.sha256(GEOM.read_bytes()).hexdigest()[:12]
+CURRENT_SHA = _geometry_sha(str(GEOM))
 
 # Published videos. geometry_sha_at_record: the canonical sha when it was recorded;
 # null = predates sha stamping (inferred from commit date). Mappings marked inferred

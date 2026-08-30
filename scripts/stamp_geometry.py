@@ -18,12 +18,25 @@ SRC = "kml/geometry/geometry.kml"
 PUB = "docs/geometry.kml"
 
 
+def geometry_sha(path=SRC):
+    """The sha of the GEOMETRY, with the document name stripped out.
+
+    THE ONE DEFINITION. Everything that names a package, repoints the catalog or reports
+    staleness must call this rather than hashing the file's bytes. The stamped name carries
+    TODAY'S DATE, so a whole-file hash changes at midnight even though no building moved --
+    on 2026-08-30 that silently invalidated all 133 packages, refused a publish, and would
+    have renamed and redeployed 43 MB of identical files every single day. A fingerprint that
+    changes when nothing changed is worse than none: it trains you to ignore it.
+    """
+    t = open(path).read()
+    body = re.sub(r"(<Document>\s*<name>)([^<]*)(</name>)", r"\1\3", t, count=1)
+    return hashlib.sha256(body.encode()).hexdigest()[:12]
+
+
 def main():
     t = open(SRC).read()
     n = t.count("<Placemark")
-    # hash the GEOMETRY, not the file: strip the name line so restamping is idempotent
-    body = re.sub(r"(<Document>\s*<name>)([^<]*)(</name>)", r"\1\3", t, count=1)
-    sha = hashlib.sha256(body.encode()).hexdigest()[:12]
+    sha = geometry_sha()
     name = f"Berkeley Housing Geometry · {datetime.date.today().isoformat()} · {n} buildings · geom-{sha}"
     m = re.search(r"(<Document>\s*<name>)([^<]*)(</name>)", t)
     if not m:

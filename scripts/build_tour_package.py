@@ -33,6 +33,9 @@ import shutil
 import sys
 import zipfile
 from xml.dom import minidom
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+from stamp_geometry import geometry_sha as _geometry_sha
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 GEOMETRY = ROOT / "kml" / "geometry" / "geometry.kml"
@@ -83,7 +86,7 @@ def build(tour_path: pathlib.Path) -> pathlib.Path:
     # mislabelled geometry propagates the lie to every tour.
     import subprocess as _sp
     _sp.run([sys.executable, 'scripts/stamp_geometry.py'], capture_output=True)
-    sha = hashlib.sha256(GEOMETRY.read_bytes()).hexdigest()[:12]
+    sha = _geometry_sha(str(GEOMETRY))
     # GEOM_STAMP: a package must SAY which geometry it carries. Google Earth shows only
     # the <name>, and geometry.kml called itself "Geometry-2026-05-18-labeled-no-icon"
     # for months after its content had moved on -- so a stale layer and a current one

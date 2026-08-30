@@ -15,6 +15,9 @@ path. Anything reading this field before 2026-08-28 was reading a lie.
   python scripts/tour_staleness.py --json
 """
 import argparse, datetime, hashlib, json, os, pathlib, re, subprocess
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+from stamp_geometry import geometry_sha as _geometry_sha
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CAT = ROOT / "docs" / "tours.json"
@@ -23,7 +26,7 @@ GEOM = ROOT / "kml" / "geometry" / "geometry.kml"
 
 def current_sha():
     subprocess.run(["python3", str(ROOT / "scripts" / "stamp_geometry.py")], capture_output=True)
-    return hashlib.sha256(GEOM.read_bytes()).hexdigest()[:12]
+    return _geometry_sha(str(GEOM))
 
 
 def audit():

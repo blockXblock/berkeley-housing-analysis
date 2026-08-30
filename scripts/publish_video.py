@@ -14,6 +14,9 @@ being erased by the build until 2026-08-28.
       --title "Durant Avenue — Milvia to College" --position 1
 """
 import argparse, datetime, hashlib, json, pathlib, re, subprocess
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+from stamp_geometry import geometry_sha as _geometry_sha
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CAT = ROOT / "docs" / "tours.json"
@@ -58,7 +61,7 @@ def main():
     if not tour.exists():
         raise SystemExit(f"no such tour: {tour}")
     subprocess.run(["python3", str(ROOT / "scripts/stamp_geometry.py")], capture_output=True)
-    sha = hashlib.sha256(GEOM.read_bytes()).hexdigest()[:12]
+    sha = _geometry_sha(str(GEOM))
     pkg = ROOT / f"kml/tours/packages/{a.tour}__geom-{sha}.kml"
     if not pkg.exists():
         raise SystemExit(f"no package for the CURRENT geometry: {pkg.name}\n"

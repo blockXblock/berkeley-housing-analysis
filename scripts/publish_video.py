@@ -88,6 +88,7 @@ def main():
     CAT.write_text(json.dumps(cat, indent=1, ensure_ascii=False))
 
     h = PAGE.read_text()
+    plain = re.sub(r"&[a-z]+;", "-", a.title)
     if a.replaces:
         old = re.sub(r"^.*(?:youtu\.be/|v=|embed/)", "", a.replaces).split("&")[0].split("?")[0]
         if not re.fullmatch(r"[A-Za-z0-9_-]{11}", old):
@@ -102,6 +103,10 @@ def main():
         i = hit[0]; blk = parts[i]
         blk = blk.replace(old, vid)                       # src, playlist= and the title attribute
         blk = re.sub(r"<h3>.*?</h3>", f"<h3>{a.title}</h3>", blk, count=1, flags=re.S)
+        # the iframe's title attribute is the accessible name -- a screen reader announces it,
+        # so leaving the superseded video's title there is a real defect, not cosmetic
+        blk = re.sub(r'(<iframe[^>]*?\btitle=")[^"]*(")', lambda m: m.group(1) + plain + m.group(2),
+                     blk, count=1, flags=re.S)
         if a.blurb:
             blk = re.sub(r"<p[^>]*>.*?</p>", f"<p>{a.blurb}</p>", blk, count=1, flags=re.S)
         if old in blk or f"embed/{vid}" not in blk:
@@ -117,7 +122,6 @@ def main():
     if not blocks:
         raise SystemExit("could not find a video block to anchor against in docs/index.html")
     at = blocks[min(max(a.position, 1) - 1, len(blocks) - 1)].start()
-    plain = re.sub(r"&[a-z]+;", "-", a.title)
     blurb = a.blurb or f"A flyover of the {a.title} corridor."
     h = h[:at] + BLOCK.format(title=a.title, blurb=blurb, vid=vid, plain=plain) + h[at:]
     PAGE.write_text(h)

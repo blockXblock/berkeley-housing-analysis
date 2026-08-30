@@ -73,28 +73,21 @@ def read_points(path):
 
 
 def buildings():
-    """{ADDRESS: (lon, lat, roof_m, effective_radius_m)} from the canonical geometry."""
-    out = {}
-    for pm in re.findall(r"<Placemark>.*?</Placemark>", open(GEOM, errors="replace").read(), re.S):
-        ad = re.search(r"<b>([^<]*)</b><br/>", pm)
-        po = re.search(r"<Polygon>.*?</Polygon>", pm, re.S)
-        if not (ad and po):
-            continue
-        cs = re.search(r"<coordinates>\s*(.*?)\s*</coordinates>", po.group(0), re.S).group(1)
-        ring, roof = [], 0.0
-        for tok in cs.split():
-            p = tok.split(",")
-            ring.append((float(p[0]), float(p[1])))
-            if len(p) > 2:
-                roof = float(p[2])
-        if len(ring) < 4:
-            continue
-        r = ring[:-1]
-        lon = sum(p[0] for p in r)/len(r); lat = sum(p[1] for p in r)/len(r)
-        k = math.cos(math.radians(lat))
-        rad = max(math.hypot((p[0]-lon)*k, p[1]-lat) for p in r) * 111320
-        out[ad.group(1).upper().strip()] = (lon, lat, roof, rad)
-    return out
+    """{ADDRESS: (lon, lat, roof_m, effective_radius_m)} — ONE ENTRY PER SITE.
+
+    DELEGATES to gen_building_loop.buildings(). This function used to keep its own copy that
+    did `out[address] = ...`, so for an address carrying several placemarks the LAST one in
+    document order silently won -- the very bug fixed in gen_building_loop on 2026-08-26 and
+    never propagated here. It turned dangerous on 2026-08-29: giving 2200 Bancroft South and
+    2400 Bowditch South the balloon addresses they were missing means those addresses now have
+    two polygons each, so a regeneration would have orbited the 36 m south wing of Berkeley's
+    tallest building instead of the 79.5 m tower. Delegating means the site rule has ONE
+    implementation and a fix cannot fail to reach the corridor tours again.
+    """
+    import sys, os
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from gen_building_loop import buildings as site_buildings
+    return {k: v[:4] for k, v in site_buildings().items()}
 
 
 def bearing(a, b):

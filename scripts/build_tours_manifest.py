@@ -36,7 +36,10 @@ PUBLISHED = {
     title="June 2026 Shattuck Avenue Building Pipeline", youtube="X0IMsbbhjGk",
     recorded="2026-06-09", geometry_era="2026-06-09 no-icons era", pushpins=False, inferred=True),
  "tour-adeline+shattuck-s2n": dict(
-    title="Adeline & Shattuck Corridor", youtube="LAW1WIUF_ks",
+    # REMOVED FROM THE SITE 2026-08-30, pending a re-record: the path weaves and the
+    # recording predates the status colours. Left here with youtube=None so a regeneration
+    # cannot quietly re-publish it; the id is preserved in the catalog's superseded_video.
+    title="Adeline & Shattuck Corridor", youtube=None,
     recorded="2026-05-18", geometry_era="2026-05-18", pushpins=True, inferred=True),
  "tour-private-pipeline-over-200-units-2026-05-16": dict(
     title="Berkeley's 17 Largest Private Housing Projects", youtube="3OQjzk9dIOw",

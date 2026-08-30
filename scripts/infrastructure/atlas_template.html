@@ -1,0 +1,620 @@
+<title>Berkeley Pole and Pipe Atlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
+
+<style>
+/* ============================================================
+   Palette: the APWA Uniform Color Code — the actual paint and
+   flag colours used to mark buried utilities before excavation.
+   Red = electric. Yellow = gas. Blue = potable water.
+   Green = sewer and drain. Those are not decorative choices.
+   ============================================================ */
+:root{
+  --elec:#C4321F;  --elec-soft:#E2705C;
+  --gas:#C08A00;   --gas-soft:#E0AE24;
+  --water:#1553B0; --water-soft:#4D8BE0;
+  --sewer:#0F7038; --sewer-soft:#3E9C63;
+  --storm:#0E7C93; --storm-soft:#3AA3B8;
+  --uud:#7A5AA6;
+
+  /* neutrals: graphite with a blue bias, like drafting film */
+  --ground:#EDF0F2;
+  --plate:#F7F9FA;
+  --sheet:#FFFFFF;
+  --rule:#C7D0D6;
+  --rule-soft:#DEE5E9;
+  --ink:#14202A;
+  --ink-2:#3C4A56;
+  --ink-3:#6B7A87;
+  --mapbg:#FBFCFC;
+  --mapgrid:#E4EAEE;
+  --shadow:0 1px 2px rgba(20,32,42,.06),0 8px 24px -12px rgba(20,32,42,.18);
+  --lw:1;            /* map line-weight multiplier */
+  --dot:.72;         /* map point-alpha */
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --elec:#FF6A50;  --elec-soft:#B33A28;
+    --gas:#F0C13C;   --gas-soft:#9C7A12;
+    --water:#5C9DF5; --water-soft:#2B5FA8;
+    --sewer:#48C77E; --sewer-soft:#227A47;
+    --storm:#43BDD6; --storm-soft:#1B6E80;
+    --uud:#A98BD4;
+    --ground:#0C1218;
+    --plate:#121B23;
+    --sheet:#16202A;
+    --rule:#2A3946;
+    --rule-soft:#1E2B36;
+    --ink:#E8EEF2;
+    --ink-2:#AEBDC8;
+    --ink-3:#7C8D9A;
+    --mapbg:#080D12;
+    --mapgrid:#151F27;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px -14px rgba(0,0,0,.7);
+    --lw:1.08;
+    --dot:.85;
+  }
+}
+:root[data-theme="dark"]{
+  --elec:#FF6A50;  --elec-soft:#B33A28;
+  --gas:#F0C13C;   --gas-soft:#9C7A12;
+  --water:#5C9DF5; --water-soft:#2B5FA8;
+  --sewer:#48C77E; --sewer-soft:#227A47;
+  --storm:#43BDD6; --storm-soft:#1B6E80;
+  --uud:#A98BD4;
+  --ground:#0C1218;
+  --plate:#121B23;
+  --sheet:#16202A;
+  --rule:#2A3946;
+  --rule-soft:#1E2B36;
+  --ink:#E8EEF2;
+  --ink-2:#AEBDC8;
+  --ink-3:#7C8D9A;
+  --mapbg:#080D12;
+  --mapgrid:#151F27;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px -14px rgba(0,0,0,.7);
+  --lw:1.08;
+  --dot:.85;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16.5px; line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1220px; margin:0 auto; padding:0 24px 96px}
+
+h1,h2,h3,.dsp{font-family:"Archivo Narrow","Arial Narrow",Helvetica,sans-serif; text-wrap:balance;}
+h2{font-size:clamp(1.5rem,2.7vw,2.05rem); font-weight:700; letter-spacing:-.005em; margin:0 0 .3rem; line-height:1.16}
+h3{font-size:1.16rem; font-weight:700; margin:0 0 .35rem; line-height:1.25}
+p{margin:0 0 1rem; max-width:66ch}
+a{color:var(--water); text-underline-offset:2px}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--water); outline-offset:2px; border-radius:2px}
+code,.num{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace; font-variant-numeric:tabular-nums}
+code{font-size:.86em; background:var(--rule-soft); padding:.08em .34em; border-radius:2px; color:var(--ink-2)}
+.lbl{font-family:"IBM Plex Mono",monospace; font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); font-weight:500}
+
+/* ---------- Title block: the provenance stamp on an as-built drawing ---------- */
+.titleblock{
+  border-bottom:2px solid var(--ink); background:var(--plate);
+  padding:34px 0 0;
+}
+.titleblock .wrap{padding-bottom:0}
+.tb-top{display:flex; flex-wrap:wrap; gap:12px 40px; align-items:flex-end; justify-content:space-between}
+.tb-name{font-size:clamp(2.1rem,5.4vw,3.5rem); font-weight:700; line-height:.98; letter-spacing:-.015em; margin:.15rem 0 .2rem}
+.tb-sub{max-width:60ch; color:var(--ink-2); margin:0 0 6px}
+.tb-grid{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  border-top:1px solid var(--rule); margin-top:22px;
+}
+.tb-cell{padding:11px 16px 13px; border-right:1px solid var(--rule-soft)}
+.tb-cell:last-child{border-right:0}
+.tb-cell .lbl{display:block; margin-bottom:2px}
+.tb-cell .v{font-family:"IBM Plex Mono",monospace; font-size:.83rem; color:var(--ink); font-variant-numeric:tabular-nums}
+
+/* ---------- Map plate ---------- */
+.plate{
+  background:var(--sheet); border:1px solid var(--rule); border-radius:3px;
+  box-shadow:var(--shadow); overflow:hidden; margin:26px 0 0;
+}
+.plate-head{
+  display:flex; flex-wrap:wrap; gap:10px 18px; align-items:baseline;
+  justify-content:space-between; padding:13px 18px; border-bottom:1px solid var(--rule-soft);
+}
+.map-shell{position:relative; background:var(--mapbg)}
+#map{display:block; width:100%; height:min(74vh,720px); touch-action:none; cursor:grab}
+#map.drag{cursor:grabbing}
+.map-note{
+  position:absolute; left:14px; bottom:12px; font-family:"IBM Plex Mono",monospace;
+  font-size:.63rem; letter-spacing:.05em; color:var(--ink-3); pointer-events:none;
+  background:color-mix(in srgb,var(--mapbg) 82%,transparent); padding:3px 7px; border-radius:2px;
+}
+.zoombar{position:absolute; right:12px; bottom:12px; display:flex; gap:6px}
+.zoombar button{
+  width:32px; height:32px; font-size:1rem; line-height:1; cursor:pointer;
+  background:var(--sheet); color:var(--ink); border:1px solid var(--rule); border-radius:3px;
+  font-family:"IBM Plex Mono",monospace;
+}
+.zoombar button:hover{background:var(--rule-soft)}
+
+/* ---------- Legend / layer switches ---------- */
+.legend{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(178px,1fr));
+  border-top:1px solid var(--rule-soft);
+}
+.sw{
+  display:flex; align-items:center; gap:10px; padding:11px 15px; cursor:pointer;
+  border-right:1px solid var(--rule-soft); border-bottom:1px solid var(--rule-soft);
+  background:none; text-align:left; font:inherit; color:var(--ink); width:100%;
+}
+.sw:hover{background:var(--rule-soft)}
+.sw[aria-pressed="false"]{opacity:.42}
+.sw .key{width:22px; height:0; border-top-width:3px; border-top-style:solid; flex:none; border-radius:2px}
+.sw .key.pt{height:9px; width:9px; border-top:0; border-radius:50%}
+.sw .t{display:flex; flex-direction:column; line-height:1.24; min-width:0}
+.sw .t b{font-family:"Archivo Narrow",sans-serif; font-weight:600; font-size:.95rem}
+.sw .t span{font-family:"IBM Plex Mono",monospace; font-size:.68rem; color:var(--ink-3); font-variant-numeric:tabular-nums}
+
+/* ---------- Sections ---------- */
+section{margin-top:60px}
+.eyebrow{display:flex; align-items:center; gap:12px; margin-bottom:14px}
+.eyebrow::after{content:""; flex:1; height:1px; background:var(--rule)}
+
+.lede{font-size:1.09rem; color:var(--ink-2)}
+
+.stat-row{display:grid; grid-template-columns:repeat(auto-fit,minmax(168px,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule); margin:22px 0 26px}
+.stat{background:var(--sheet); padding:16px 18px 18px}
+.stat .n{font-family:"Archivo Narrow",sans-serif; font-weight:700; font-size:2.15rem; line-height:1; letter-spacing:-.01em; font-variant-numeric:tabular-nums; display:block}
+.stat .k{margin-top:6px; display:block; font-size:.88rem; color:var(--ink-2); line-height:1.35}
+.stat.e .n{color:var(--elec)} .stat.w .n{color:var(--water)} .stat.g .n{color:var(--gas)} .stat.s .n{color:var(--sewer)}
+
+.cols{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:30px 40px}
+
+table{border-collapse:collapse; width:100%; font-size:.9rem}
+.scroll{overflow-x:auto; border:1px solid var(--rule); background:var(--sheet); border-radius:3px}
+th,td{text-align:left; padding:8px 13px; border-bottom:1px solid var(--rule-soft); vertical-align:top}
+thead th{
+  font-family:"IBM Plex Mono",monospace; font-size:.65rem; letter-spacing:.11em;
+  text-transform:uppercase; color:var(--ink-3); font-weight:500;
+  border-bottom:1px solid var(--rule); white-space:nowrap; background:var(--plate);
+  position:sticky; top:0;
+}
+tbody tr:last-child td{border-bottom:0}
+td.n{text-align:right; font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; white-space:nowrap}
+td code{white-space:nowrap; font-size:.78em}
+
+.tag{
+  display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:.63rem;
+  letter-spacing:.07em; text-transform:uppercase; padding:2px 7px; border-radius:2px;
+  border:1px solid currentColor; white-space:nowrap;
+}
+.tag.open{color:var(--sewer)} .tag.shut{color:var(--elec)} .tag.part{color:var(--gas)}
+
+.card{background:var(--sheet); border:1px solid var(--rule); border-radius:3px; padding:20px 22px 22px}
+.card.flag{border-left:3px solid var(--elec)}
+.card.good{border-left:3px solid var(--sewer)}
+
+blockquote{
+  margin:20px 0; padding:2px 0 2px 20px; border-left:3px solid var(--elec);
+  color:var(--ink-2); font-style:italic; max-width:62ch;
+}
+blockquote b{font-style:normal; color:var(--ink)}
+
+ul{padding-left:1.15rem; max-width:66ch} li{margin-bottom:.42rem}
+
+footer{margin-top:70px; padding-top:22px; border-top:1px solid var(--rule); color:var(--ink-3); font-size:.85rem}
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+</style>
+
+<header class="titleblock">
+  <div class="wrap">
+    <div class="tb-top">
+      <div>
+        <span class="lbl">City of Berkeley &middot; overhead and buried utilities &middot; sheet 1</span>
+        <h1 class="tb-name">Berkeley Pole and Pipe Atlas</h1>
+        <p class="tb-sub">Everything about Berkeley's poles, wires and pipes that is public today &mdash; drawn from the City's own GIS server, counted, and verified against the source. Plus the one thing that is not public, and what it would take to get it.</p>
+      </div>
+    </div>
+    <div class="tb-grid">
+      <div class="tb-cell"><span class="lbl">Retrieved</span><span class="v">2026-08-30</span></div>
+      <div class="tb-cell"><span class="lbl">Source</span><span class="v">gis.cityofberkeley.info</span></div>
+      <div class="tb-cell"><span class="lbl">Layers swept</span><span class="v">504</span></div>
+      <div class="tb-cell"><span class="lbl">Features drawn</span><span class="v" id="tb-feat">&mdash;</span></div>
+      <div class="tb-cell"><span class="lbl">Verification</span><span class="v">count-matched</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ================= MAP PLATE ================= -->
+  <div class="plate">
+    <div class="plate-head">
+      <div>
+        <h3 style="margin:0">The city drawn only from its infrastructure</h3>
+        <span class="lbl">No basemap. Every line and dot below is a real asset record.</span>
+      </div>
+      <span class="lbl" id="scalebar">scale &mdash;</span>
+    </div>
+    <div class="map-shell">
+      <canvas id="map"></canvas>
+      <div class="map-note">drag to pan &middot; scroll or pinch to zoom</div>
+      <div class="zoombar">
+        <button id="zin" title="Zoom in" aria-label="Zoom in">+</button>
+        <button id="zout" title="Zoom out" aria-label="Zoom out">&minus;</button>
+        <button id="zrst" title="Reset view" aria-label="Reset view" style="width:auto;padding:0 9px;font-size:.7rem">RESET</button>
+      </div>
+    </div>
+    <div class="legend" id="legend"></div>
+  </div>
+  <p class="lbl" style="margin-top:10px">Colours follow the APWA uniform colour code &mdash; the paint utilities actually spray on the street before digging. Red is electric, yellow gas, blue water, green sewer.</p>
+
+  <!-- ================= THE FINDING ================= -->
+  <section>
+    <div class="eyebrow"><span class="lbl">Finding 01</span></div>
+    <h2>About 4,500 Berkeley utility poles are already public &mdash; nobody had looked</h2>
+    <p class="lede">The project began from the premise that city streetlights are downloadable and utility poles are not. The first half is right. The second turns out to be only half right.</p>
+
+    <p>Berkeley's streetlight layer carries a field called <code>POLEMAT</code> &mdash; pole material. The City does not erect wooden poles to hold up streetlights; it uses metal standards. So when a city streetlight record says its pole is wood, it is almost always a light hung on somebody else's pole &mdash; a joint-use PG&amp;E/AT&amp;T distribution pole.</p>
+
+    <div class="stat-row" id="stats"></div>
+
+    <div class="cols">
+      <div>
+        <h3>What comes attached to them</h3>
+        <p>Of the 4,499 wood-pole records, <b>4,456 carry a <code>UTIL_PN</code></b> &mdash; a utility pole number &mdash; giving <b>4,428 distinct pole IDs</b>, overwhelmingly in PG&amp;E's <code>B####</code> Berkeley series, at 4,487 distinct coordinates. Each also carries a PG&amp;E <code>SAID</code> and <code>SPID</code> (service agreement and service point), a nearest address, and a mounting height.</p>
+        <p>The layer separately records <code>FIELD_PN</code>, the tag physically read off the pole during the 2014 Tanko Lighting LED conversion audit. It agrees with the utility's own number on <b>95.6%</b> of wood poles; the disagreements are mostly prefix noise (<code>BMI451</code> against <code>MI451</code>).</p>
+      </div>
+      <div>
+        <div class="card good">
+          <span class="lbl">Independent check</span>
+          <h3 style="margin-top:6px">Wood poles avoid the undergrounded blocks &mdash; exactly as they should</h3>
+          <p style="margin-bottom:.6rem">If <code>POLEMAT=Wood</code> really is a proxy for &ldquo;an overhead utility pole stands here,&rdquo; wood poles should be scarce inside Berkeley's Underground Utility Districts, where the wires are buried. Testing all 7,969 lights against the 3,449 UUD parcels:</p>
+          <div class="scroll" style="border:0">
+            <table>
+              <thead><tr><th>Streetlight pole</th><th class="n">within 30 m of a UUD parcel</th></tr></thead>
+              <tbody>
+                <tr><td><b style="color:var(--elec)">Wood</b> (utility poles)</td><td class="n">545 / 4,499 &nbsp;=&nbsp; <b>12.1%</b></td></tr>
+                <tr><td>Metal (city standards)</td><td class="n">2,261 / 3,304 &nbsp;=&nbsp; <b>68.4%</b></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="margin:.7rem 0 0">Wood poles are <b>5.6&times; less likely</b> to sit in an undergrounded district. Two independent City datasets, never built to be compared, agree. That is the strongest confirmation available without asking PG&amp;E.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card flag" style="margin-top:26px">
+      <span class="lbl">Limits of this number &mdash; read before quoting it</span>
+      <ul style="margin:.6rem 0 0">
+        <li><b>It is a floor, not a count.</b> This method only finds utility poles that happen to carry a city streetlight. Poles mid-block, on unlit blocks, and in rear lots are invisible to it. The real total is higher &mdash; by an unknown amount.</li>
+        <li><b>Wood is strong evidence, not proof</b> of joint-use ownership. Confirming it means spot-checking a sample against street imagery and asking PG&amp;E to verify the <code>B####</code> series.</li>
+        <li><b>Two records of 7,969 have null geometry</b> in the shapefile, but both carry latitude and longitude attributes, so all 7,969 are placeable. Nothing was dropped.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= TRANSFORMERS ================= -->
+  <section>
+    <div class="eyebrow"><span class="lbl">Finding 02 &middot; the load-bearing gap</span></div>
+    <h2>There is no transformer layer. Anywhere.</h2>
+    <p class="lede">All 504 layers on Berkeley's GIS server were enumerated and counted. Not one of them is a transformer. The city that hosts the poles does not hold a record of what hangs on them.</p>
+
+    <p>Every route to a per-pole Berkeley transformer inventory was checked. Here is precisely where each one stops.</p>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Route</th><th>Status</th><th>Where it stops</th></tr></thead>
+        <tbody>
+          <tr><td><b>PG&amp;E JUMP</b><br><span class="lbl">Joint Use Map Portal</span></td><td><span class="tag shut">Closed</span></td><td>Restricted by PG&amp;E's own terms to utilities and communications infrastructure providers in the service territory, plus their contracted vendors under NDA. Members may download up to 1,000 poles at a time. We are not eligible.</td></tr>
+          <tr><td><b>CPUC pole databases</b><br><span class="lbl">D.21-10-019, Track 2</span></td><td><span class="tag shut">Closed</span></td><td>Requires AT&amp;T, PG&amp;E, SCE, SDG&amp;E and Verizon to build pole-attachment databases (20 fields, phased in Aug 2023 &ndash; Apr 2024) &mdash; but the decision expressly does <b>not</b> intend them to be public. Access is for attachers and authorised users.</td></tr>
+          <tr><td><b>PG&amp;E ICA map / GRIP</b><br><span class="lbl">Integration Capacity Analysis</span></td><td><span class="tag part">Gated</span></td><td>The 2020 public ArcGIS web map for PG&amp;E's ICA layers is now token-protected &mdash; every query returns <code>499 Token Required</code>, tested 2026-08-30. Bulk downloads run through the Grid Resource Integration Portal by division. <b>Worth pursuing:</b> closest thing to a public distribution-network dataset; eligibility needs checking.</td></tr>
+          <tr><td><b>EPA PCB transformer registry</b><br><span class="lbl">TSCA, 40 CFR 761.30(a)</span></td><td><span class="tag part">Public, wrong scope</span></td><td>Registration is triggered only by <b>PCB Transformers</b> at 500 ppm and above. Pole-mounted distribution units are almost all <b>PCB-Contaminated</b> (50&ndash;499 ppm), which does not trigger registration. Expect near-zero Berkeley pole-mounted entries.</td></tr>
+          <tr><td><b>CPUC GO 165 reports</b><br><span class="lbl">inspection recordkeeping</span></td><td><span class="tag part">Partly public</span></td><td>GO 165 requires records of equipment inspected, inspector, date, problems found and scheduled correction. Historic annual reports sit at <code>files.cpuc.ca.gov/ESRB_Audits/GO165/</code>; recent years need a records request. These describe <i>condition</i>, not an asset register.</td></tr>
+          <tr><td><b>PG&amp;E WMP filings</b><br><span class="lbl">Wildfire Mitigation Plan</span></td><td><span class="tag open">Public PDFs</span></td><td>Contain programme-level equipment counts and describe replacement of overhead distribution line transformers. Granularity is system- or region-level. Not yet mined &mdash; queued.</td></tr>
+          <tr><td><b>PG&amp;E 2027 GRC</b><br><span class="lbl">A.25-05-009 exhibits</span></td><td><span class="tag open">Public filings</span></td><td>The most likely public home of a <b>distribution transformer unit count and age distribution</b>. Not surfaced by search; needs direct mining of <code>docs.cpuc.ca.gov</code>. Queued.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="margin-top:34px">Why the manufacture year is the field that decides everything</h3>
+    <blockquote>Under <b>40 CFR 761.2</b>, any mineral-oil-filled electrical equipment manufactured <b>before 2 July 1979</b> whose PCB concentration has not been established <b>must be assumed to be PCB-contaminated</b> &mdash; at or above 50 ppm. All pole-top and pad-mounted distribution transformers made before that date must also be assumed mineral-oil filled.</blockquote>
+    <p>This is the spine of the security story, and it is a regulation rather than an allegation. <b>Every pre-July-1979 pole-mounted transformer still hanging over a Berkeley street is, by federal rule, presumed PCB-contaminated unless PG&amp;E has tested it.</b> Two fields &mdash; manufacture year and test status &mdash; convert &ldquo;thousands of ageing transformers&rdquo; into a defensible number. They are the first ask in the data request.</p>
+
+    <div class="card flag" style="margin-top:24px">
+      <span class="lbl">What we are deliberately not doing</span>
+      <p style="margin:.6rem 0 0">We are <b>not</b> publishing an estimated Berkeley transformer count. A customers-per-transformer ratio would be a fabricated number wearing the costume of a finding. There are two honest routes to a real one: <b>ask PG&amp;E</b> (the drafted request), or <b>count them from imagery</b> &mdash; pole-mounted transformers are visually unmistakable, and the ~4,400 pole coordinates above are a ready-made sample frame for a stratified survey with a stated confidence interval. That fallback is publishable precisely because its method is stated.</p>
+    </div>
+  </section>
+
+  <!-- ================= WHAT WE PULLED ================= -->
+  <section>
+    <div class="eyebrow"><span class="lbl">Holdings</span></div>
+    <h2>What is now on disk, and what is in it</h2>
+    <p class="lede">Eight layers retrieved in full. Every one was checked twice: the server's own row count, and the number of features actually written.</p>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Layer</th><th class="n">Features</th><th>Verified</th><th>What it carries</th></tr></thead>
+        <tbody>
+          <tr><td><b>Street lights</b><br><span class="lbl">PubWorks/26</span></td><td class="n">7,969</td><td><span class="tag open">exact</span></td><td>Pole material, utility pole number, PG&amp;E service IDs, lamp, wattage, mounting height, condition, LED conversion history</td></tr>
+          <tr><td><b>Sanitary sewer laterals</b><br><span class="lbl">PubWorks/22</span></td><td class="n">29,484</td><td><span class="tag open">exact</span></td><td>The pipe from each building to the main &mdash; the densest layer in the city</td></tr>
+          <tr><td><b>EBMUD water mains</b><br><span class="lbl">PubWorks/27</span></td><td class="n">13,396</td><td><span class="tag open">exact</span></td><td>Install year, nominal diameter, pressure zone, lining material</td></tr>
+          <tr><td><b>Sanitary sewer mains</b><br><span class="lbl">PubWorks/20</span></td><td class="n">7,744</td><td><span class="tag open">exact</span></td><td>Material, diameter, rehab year, rehab spec, 12-year plan year, planning cost, upstream/downstream elevation</td></tr>
+          <tr><td><b>Sanitary sewer manholes</b><br><span class="lbl">PubWorks/19</span></td><td class="n">7,615</td><td><span class="tag open">exact</span></td><td>Node identity linking main to main (3 null geometries)</td></tr>
+          <tr><td><b>Storm sewer mains</b><br><span class="lbl">PubWorks/24</span></td><td class="n">6,680</td><td><span class="tag open">exact</span></td><td>Material, diameter, pipe shape (egg, box, horseshoe), creek-culvert flag</td></tr>
+          <tr><td><b>PG&amp;E gas pipelines</b><br><span class="lbl">Police/PublicSafety/13</span></td><td class="n">5,411<br><span class="lbl">322 in Berkeley</span></td><td><span class="tag part">regional</span></td><td>Install date, outside diameter, maximum operating pressure, High Consequence Area flag, transmission vs distribution. <b>Not a Berkeley layer</b> &mdash; see the note below the table.</td></tr>
+          <tr><td><b>Underground Utility Districts</b><br><span class="lbl">PubWorks/44</span></td><td class="n">3,449</td><td><span class="tag open">exact</span></td><td>Parcels where the wires are buried &mdash; the negative space of the pole network</td></tr>
+          <tr><td><b>Storm sewer manholes</b><br><span class="lbl">PubWorks/23</span></td><td class="n">1,240</td><td><span class="tag open">exact</span></td><td>Storm system nodes</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card flag" style="margin:16px 0 0">
+      <span class="lbl">One layer is not what its host implies</span>
+      <p style="margin:.6rem 0 0">The <b>PG&amp;E gas pipeline</b> layer is served from Berkeley's public-safety map, but it is <b>regional</b>: it runs east to longitude &minus;121.56 and south to latitude 37.46, out past the Central Valley. Only <b>322 of its 5,411 features touch Berkeley</b>. Anyone quoting 5,411 as a Berkeley figure would be wrong by a factor of seventeen. The map above is clipped to the in-city features; the holdings table reports both numbers. It also carries only <b>transmission and 60-psig-and-above distribution</b> &mdash; the low-pressure street mains that serve individual houses are not public at all.</p>
+    </div>
+    <p class="lbl" style="margin-top:14px">Also enumerated but not yet pulled: storm inlets (4,791), storm structures (1,183), storm discharge points (1,040), creek culverts (378), lift stations (7).</p>
+
+    <h3 style="margin-top:38px">The pipes are old, and the records say so</h3>
+    <div class="cols" style="margin-top:14px">
+      <div>
+        <div class="card">
+          <span class="lbl" style="color:var(--water)">EBMUD water mains &middot; 13,396 segments</span>
+          <p style="margin:.5rem 0 .8rem"><b>63% were laid before 1960.</b> The single biggest decade is the 1930s (2,621 segments, 20%). The oldest segment on record dates to the <b>1860s</b>. Material type is 100% null in the public layer &mdash; an honest gap, and a good first question for EBMUD.</p>
+          <div id="spark-water"></div>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <span class="lbl" style="color:var(--gas)">PG&amp;E gas &middot; 322 segments in Berkeley</span>
+          <p style="margin:.5rem 0 .8rem"><b>48% were installed before 1980</b>; the largest decades are the 1980s and 1960s. <b>46 segments</b> sit in a <b>High Consequence Area</b>. About <b>38 miles</b> of line. Two warnings: the layer holds only <b>60 psig and above</b> &mdash; the low-pressure mains that actually feed houses are not in it &mdash; and its records were last modified between 2007 and <b>2016</b>, so it is a snapshot, not today's network.</p>
+          <div id="spark-gas"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card good" style="margin-top:24px">
+      <span class="lbl">The contrast worth building the story on</span>
+      <p style="margin:.6rem 0 0">Berkeley's sanitary sewer has a <b>funded, scheduled, court-supervised rehabilitation programme</b> &mdash; the layer carries rehab years, rehab specs, a twelve-year plan and a planning cost for each segment, and 4,939 of 7,744 mains are already HDPE, meaning they have been relined. The pipes are being fixed on a clock. The transformers overhead have no such clock, no such register, and no public count at all. That asymmetry is the story.</p>
+    </div>
+  </section>
+
+  <!-- ================= NEXT ================= -->
+  <section>
+    <div class="eyebrow"><span class="lbl">Next</span></div>
+    <h2>What happens now</h2>
+    <div class="cols">
+      <div>
+        <h3>Drafted and waiting for review</h3>
+        <ul>
+          <li><b>PG&amp;E data request</b> &mdash; built around the 4,428 pole IDs we already hold, so the ask is &ldquo;attach transformer attributes to these poles,&rdquo; not &ldquo;send us your pole database.&rdquo; Asks for count per pole, kVA, <b>manufacture year</b>, fluid type and PCB test status.</li>
+          <li><b>CPUC Public Records Act request</b> &mdash; scoped only to records the Commission already holds: GO 165 reports, WMP data tables, the pole-and-conduit proceeding record, GRC asset exhibits.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Cheaper things to try first</h3>
+        <ul>
+          <li>Mine the <b>2027 GRC exhibits</b> and the <b>WMP</b> PDFs directly for a transformer unit count and age curve &mdash; both are already public.</li>
+          <li>Check whether <b>GRIP registration</b> is genuinely open, or restricted to interconnection applicants.</li>
+          <li>Pull the remaining storm layers, and add the <b>Accela asset service</b>, which mirrors public works assets under a different schema.</li>
+          <li>Spot-check a sample of wood poles against street imagery &mdash; validating the pole finding and producing the first real transformers-per-pole rate at the same time.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p style="max-width:none"><b>Sources.</b> All spatial data retrieved 2026-08-30 from the City of Berkeley ArcGIS REST server (<code>gis.cityofberkeley.info/arcgis/rest/services</code>), including the PG&amp;E gas and EBMUD water layers as republished by the City. OSM comparison via Overpass. Regulatory citations: 40 CFR 761.2 and 761.30(a); CPUC D.21-10-019; CPUC General Order 165. Counts stated here were verified against each layer's own <code>returnCountOnly</code> response and against the feature count written to disk.</p>
+    <p style="max-width:none"><b>Map geometry</b> is quantised to roughly 0.9 m for drawing. This collapses sub-metre stubs &mdash; 218 of 13,396 water lines, 10 of 6,680 storm lines, and a comparable share of gas stubs &mdash; none longer than 1.5 m. Feature counts quoted in the tables are the full retrieved counts, not the drawn ones.</p>
+  </footer>
+</main>
+
+<script>
+const DATA = /*__BUNDLE__*/;
+
+/* ---------- layer definitions: order = draw order (bottom first) ---------- */
+const LAYERS = [
+  {id:'uud',   kind:'poly', name:'Undergrounded districts', tok:'--uud',   w:0.9, sub:'3,449 parcels',      on:false},
+  {id:'storm', kind:'line', name:'Storm drains',            tok:'--storm', w:0.9, sub:'6,680 mains',        on:false},
+  {id:'sewer', kind:'line', name:'Sanitary sewer',          tok:'--sewer', w:0.9, sub:'7,744 mains',        on:false},
+  {id:'water', kind:'line', name:'Water mains',             tok:'--water', w:0.9, sub:'13,396 · EBMUD',     on:true},
+  {id:'gas',   kind:'line', name:'Gas mains',               tok:'--gas',   w:1.1, sub:'322 in-city · PG&E',       on:true},
+  {id:'lights_city', kind:'pt', name:'City streetlights',   tok:'--ink-3', w:1.5, sub:'3,470 metal etc.',   on:true},
+  {id:'poles_wood',  kind:'pt', name:'Utility poles (wood)',tok:'--elec',  w:2.0, sub:'4,499 joint-use',    on:true},
+];
+const state = Object.fromEntries(LAYERS.map(l => [l.id, l.on]));
+
+/* ---------- projection ---------- */
+const cv = document.getElementById('map'), ctx = cv.getContext('2d');
+let B = null;                              // data bbox in quantised units
+function computeBBox(){
+  let x0=1e18,y0=1e18,x1=-1e18,y1=-1e18;
+  const seePt = (x,y)=>{ if(x<x0)x0=x; if(x>x1)x1=x; if(y<y0)y0=y; if(y>y1)y1=y; };
+  for(const L of LAYERS){
+    const d = DATA[L.id]; if(!d) continue;
+    if(L.kind==='pt'){ for(let i=0;i<d.length;i+=2) seePt(d[i],d[i+1]); }
+    else for(const e of d){
+      let i = (L.kind==='poly') ? 0 : 1;     // lines carry a leading decade code
+      let x=e[i], y=e[i+1]; seePt(x,y);
+      for(let j=i+2;j<e.length;j+=2){ x+=e[j]; y+=e[j+1]; seePt(x,y); }
+    }
+  }
+  return {x0,y0,x1,y1};
+}
+const LATSCALE = Math.cos(37.87*Math.PI/180);   // equirectangular correction
+let view = {s:1, tx:0, ty:0};                    // screen = s*(proj) + t
+
+function fitView(){
+  const w = cv.clientWidth, h = cv.clientHeight;
+  const dw = (B.x1-B.x0)*LATSCALE, dh = (B.y1-B.y0);
+  const pad = 22;
+  const s = Math.min((w-2*pad)/dw, (h-2*pad)/dh);
+  view.s = s;
+  view.tx = (w - dw*s)/2 - B.x0*LATSCALE*s;
+  view.ty = (h + dh*s)/2 + B.y0*s;             // y flips
+  base = s;
+}
+let base = 1;
+const px = x => x*LATSCALE*view.s + view.tx;
+const py = y => view.ty - y*view.s;
+
+/* ---------- colours pulled from the live token set ---------- */
+let C = {};
+function readTokens(){
+  const cs = getComputedStyle(document.documentElement);
+  C = {}; for(const L of LAYERS) C[L.id] = cs.getPropertyValue(L.tok).trim();
+  C.grid = cs.getPropertyValue('--mapgrid').trim();
+  C.bg   = cs.getPropertyValue('--mapbg').trim();
+  C.lw   = parseFloat(cs.getPropertyValue('--lw')) || 1;
+  C.dot  = parseFloat(cs.getPropertyValue('--dot')) || .75;
+}
+
+function draw(){
+  const dpr = Math.min(window.devicePixelRatio||1, 2);
+  const w = cv.clientWidth, h = cv.clientHeight;
+  if(cv.width !== Math.round(w*dpr)){ cv.width = Math.round(w*dpr); cv.height = Math.round(h*dpr); }
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.fillStyle = C.bg; ctx.fillRect(0,0,w,h);
+  ctx.lineCap='round'; ctx.lineJoin='round';
+
+  const z = view.s/base;                                  // zoom relative to fit
+  for(const L of LAYERS){
+    if(!state[L.id]) continue;
+    const d = DATA[L.id]; if(!d) continue;
+    ctx.strokeStyle = C[L.id]; ctx.fillStyle = C[L.id];
+
+    if(L.kind==='pt'){
+      const r = Math.max(0.7, Math.min(4.2, L.w*0.62*Math.pow(z,0.62))) * C.lw;
+      ctx.globalAlpha = C.dot;
+      ctx.beginPath();
+      for(let i=0;i<d.length;i+=2){
+        const X=px(d[i]), Y=py(d[i+1]);
+        if(X<-8||X>w+8||Y<-8||Y>h+8) continue;
+        ctx.moveTo(X+r,Y); ctx.arc(X,Y,r,0,6.2832);
+      }
+      ctx.fill(); ctx.globalAlpha = 1;
+      continue;
+    }
+
+    const poly = L.kind==='poly';
+    ctx.globalAlpha = poly ? 0.5 : 0.88;
+    ctx.lineWidth = Math.max(0.35, L.w*Math.pow(z,0.42)*0.85) * C.lw;
+    ctx.beginPath();
+    for(const e of d){
+      let i = poly ? 0 : 1;
+      let qx=e[i], qy=e[i+1];
+      let X=px(qx), Y=py(qy);
+      ctx.moveTo(X,Y);
+      for(let j=i+2;j<e.length;j+=2){
+        qx+=e[j]; qy+=e[j+1];
+        ctx.lineTo(px(qx), py(qy));
+      }
+      if(poly) ctx.closePath();
+    }
+    ctx.stroke(); ctx.globalAlpha = 1;
+  }
+  updateScale();
+}
+
+function updateScale(){
+  // one quantised unit = 1e-5 deg; metres per unit in x
+  const mPerUnitX = 111320*Math.cos(37.87*Math.PI/180)/1e5;
+  const pxPerM = (view.s*LATSCALE)/mPerUnitX;
+  const targets = [100,200,500,1000,2000,5000];
+  let best = targets[0];
+  for(const t of targets) if(t*pxPerM < 190) best = t;
+  const label = best>=1000 ? (best/1000)+' km' : best+' m';
+  document.getElementById('scalebar').textContent = 'scale bar ≈ ' + Math.round(best*pxPerM) + ' px = ' + label;
+}
+
+/* ---------- interaction ---------- */
+let drag=null;
+cv.addEventListener('pointerdown', e=>{ drag={x:e.clientX,y:e.clientY,tx:view.tx,ty:view.ty}; cv.setPointerCapture(e.pointerId); cv.classList.add('drag'); });
+cv.addEventListener('pointermove', e=>{ if(!drag) return; view.tx = drag.tx + (e.clientX-drag.x); view.ty = drag.ty + (e.clientY-drag.y); draw(); });
+const endDrag = e=>{ drag=null; cv.classList.remove('drag'); };
+cv.addEventListener('pointerup', endDrag); cv.addEventListener('pointercancel', endDrag);
+
+function zoomAt(cx, cy, k){
+  const nx = (cx - view.tx)/view.s, ny = (view.ty - cy)/view.s;
+  view.s = Math.max(base*0.6, Math.min(base*90, view.s*k));
+  view.tx = cx - nx*view.s; view.ty = cy + ny*view.s;
+  draw();
+}
+cv.addEventListener('wheel', e=>{
+  e.preventDefault();
+  const r = cv.getBoundingClientRect();
+  zoomAt(e.clientX-r.left, e.clientY-r.top, Math.exp(-e.deltaY*0.0016));
+}, {passive:false});
+document.getElementById('zin').onclick  = ()=> zoomAt(cv.clientWidth/2, cv.clientHeight/2, 1.5);
+document.getElementById('zout').onclick = ()=> zoomAt(cv.clientWidth/2, cv.clientHeight/2, 1/1.5);
+document.getElementById('zrst').onclick = ()=>{ fitView(); draw(); };
+
+/* pinch */
+let pinch=null;
+cv.addEventListener('touchstart', e=>{ if(e.touches.length===2){ pinch=dist(e); } }, {passive:true});
+cv.addEventListener('touchmove', e=>{
+  if(e.touches.length===2 && pinch){
+    e.preventDefault();
+    const d=dist(e), r=cv.getBoundingClientRect();
+    zoomAt((e.touches[0].clientX+e.touches[1].clientX)/2-r.left,
+           (e.touches[0].clientY+e.touches[1].clientY)/2-r.top, d/pinch);
+    pinch=d;
+  }
+}, {passive:false});
+cv.addEventListener('touchend', ()=>{ pinch=null; });
+function dist(e){ return Math.hypot(e.touches[0].clientX-e.touches[1].clientX, e.touches[0].clientY-e.touches[1].clientY); }
+
+/* ---------- legend ---------- */
+const legend = document.getElementById('legend');
+for(const L of LAYERS.slice().reverse()){
+  const b = document.createElement('button');
+  b.className='sw'; b.setAttribute('aria-pressed', String(state[L.id]));
+  const isPt = L.kind==='pt';
+  b.innerHTML = `<span class="key${isPt?' pt':''}" style="${isPt?'background':'border-top-color'}:var(${L.tok})"></span>`+
+                `<span class="t"><b>${L.name}</b><span>${L.sub}</span></span>`;
+  b.onclick = ()=>{ state[L.id] = !state[L.id]; b.setAttribute('aria-pressed', String(state[L.id])); draw(); };
+  legend.appendChild(b);
+}
+
+/* ---------- stats derived from the data, never typed in ---------- */
+const nWood = DATA.poles_wood.length/2, nCity = DATA.lights_city.length/2;
+document.getElementById('stats').innerHTML = [
+  ['e', nWood.toLocaleString(), 'wood poles carrying a city streetlight — almost certainly joint-use PG&E/AT&T utility poles'],
+  ['',  nCity.toLocaleString(), 'metal, fibreglass and concrete standards the City owns outright'],
+  ['',  (nWood+nCity).toLocaleString(), 'streetlights in total, matching the server’s own count exactly'],
+  ['e', '0', 'transformers recorded in any of Berkeley’s 504 public GIS layers'],
+].map(([c,n,k])=>`<div class="stat ${c}"><span class="n">${n}</span><span class="k">${k}</span></div>`).join('');
+
+let drawn = nWood + nCity;
+for(const L of LAYERS) if(L.kind!=='pt' && DATA[L.id]) drawn += DATA[L.id].length;
+document.getElementById('tb-feat').textContent = drawn.toLocaleString();
+
+/* ---------- decade sparks ---------- */
+function spark(el, layer, note){
+  const d = DATA[layer], by = new Map();
+  for(const e of d){ const k=e[0]; if(k>=0) by.set(k,(by.get(k)||0)+1); }
+  const keys=[...by.keys()].sort((a,b)=>a-b), max=Math.max(...by.values());
+  const tok = layer==='water' ? '--water' : '--gas';
+  el.innerHTML = `<div style="display:flex;align-items:flex-end;gap:3px;height:56px">`+
+    keys.map(k=>`<div title="${k}s: ${by.get(k)} segments" style="flex:1;min-width:0;background:var(${tok});opacity:${k<1960?1:.42};height:${Math.max(3,by.get(k)/max*56)}px;border-radius:1px 1px 0 0"></div>`).join('')+
+    `</div><div style="display:flex;justify-content:space-between;margin-top:5px" class="lbl"><span>${keys[0]}s</span><span>${note}</span><span>${keys[keys.length-1]}s</span></div>`;
+}
+spark(document.getElementById('spark-water'),'water','solid = pre-1960');
+spark(document.getElementById('spark-gas'),'gas','solid = pre-1960');
+
+/* ---------- boot + theme reactivity ---------- */
+B = (function(){
+  const m = DATA.meta && DATA.meta.bbox;
+  return m ? {x0:m[0], y0:m[1], x1:m[2], y1:m[3]} : computeBBox();
+})();
+function boot(){ readTokens(); fitView(); draw(); }
+boot();
+addEventListener('resize', ()=>{ const z=view.s/base; fitView(); view.s=base*z; draw(); });
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ()=>{ readTokens(); draw(); });
+new MutationObserver(()=>{ readTokens(); draw(); })
+  .observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
+document.fonts && document.fonts.ready.then(draw);
+</script>

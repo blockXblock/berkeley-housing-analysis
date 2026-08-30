@@ -132,3 +132,9 @@ scripts/verify_jn_a_base_conservation.py
 # published public mirror (the ONE deliberately-public database copy; see docs/reporters.html)
 !docs/data/berkeley_housing_v2_public.db
 experiments/accela_scrape/debug_dr/
+
+# Infrastructure raw GeoJSON pulls (~68 MB, re-fetchable in minutes).
+# Regenerate: scripts/infrastructure/pull_arcgis_layer.py <layer_url> <out.geojson>
+# The layer inventory + OSM comparison JSONs ARE tracked — they are the small,
+# citable catalogue that the findings note references.
+data/raw/infrastructure/*.geojson

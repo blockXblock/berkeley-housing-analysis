@@ -6,6 +6,19 @@
 
 ---
 
+## 2026-08-30 — ⚠ INFRASTRUCTURE LANE: your update_legend.py edit was destroyed
+
+The old `scripts/deploy.sh` reset the working tree on its failure path, discarding the
+infrastructure lane's unstaged edit to `scripts/update_legend.py` (the wiring to
+`scripts/viz/stage_legend_svg`). Not recoverable — it was never staged. `scripts/viz/` and
+`docs/svg/` survive untouched. Details and the one hunk I could recover verbatim:
+**`notes/infrastructure/2026-08-30_update_legend_edit_lost.md`**.
+
+Cause removed in `97b2e7c`: deploy now builds its commit in a throwaway worktree and moves
+`main` with `update-ref` — it never checks out a branch and never resets. Its guard also no
+longer blocks on files outside `docs/` and `kml/`, so one lane's in-flight work cannot stop
+another's deploy.
+
 ## 2026-08-29 — UC harvest: Bancroft corrected from the Regents, Bowditch deliberately left unsettled
 
 All four UC projects now carry a source document. Before today only Anchor House did.

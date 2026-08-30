@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <Document>
-	<name>Berkeley Housing Geometry · 2026-08-29 · 392 buildings · geom-4c3c68b7ea0c</name>
+	<name>Berkeley Housing Geometry · 2026-08-29 · 392 buildings · geom-a4dc36f6df26</name>
 	<visibility>0</visibility>
 	<open>1</open>
 	<description>177 housing projects. Heights shown as stories × 3.5m. Generated 2026-05-03.</description>
@@ -6277,7 +6277,7 @@
 		<Placemark>
 			<name>2400 Bowditch St · North · 1500 beds · Pre-Application</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2400 BOWDITCH St</b><br/><b>Units:</b> 750<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 26<br/><b>Height:</b> 85.3m<br/><b>Status:</b> Pre-Application<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
+			<description><![CDATA[<b>2400 BOWDITCH St</b><br/><b>Units:</b> 750<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 26<br/><b>Height:</b> 85.3m<br/><b>Status:</b> Under Construction<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
 			<styleUrl>#style_status_Pre_Application__UC_Project_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -6298,7 +6298,7 @@
 			<Point><coordinates>-122.25690599090315,37.866971805244454,89.6</coordinates><altitudeMode>relativeToGround</altitudeMode></Point>
 		</Placemark>
 		<Placemark>
-			<name>2556 Haste St · 1100 beds · Under Construction</name>
+			<name>2556 Haste St · 1113 beds · Under Construction</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2556 HASTE St</b><br/><b>Units:</b> 556<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 12<br/><b>Height:</b> 40.2m<br/><b>Status:</b> Under Construction<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
 			<styleUrl>#style_status_Under_Construction__UC_Project_nolabel</styleUrl>
@@ -6315,7 +6315,7 @@
 			</Polygon>
 		</Placemark>
 		<Placemark>
-			<name>2556 Haste St · 1100 beds · Under Construction</name>
+			<name>2556 Haste St · 1113 beds · Under Construction</name>
 			<styleUrl>#style_status_Under_Construction__UC_Project</styleUrl>
 			<Region><LatLonAltBox><north>37.86623851100116</north><south>37.86583391331153</south><east>-122.2563916751489</east><west>-122.25792278944522</west></LatLonAltBox><Lod><minLodPixels>128</minLodPixels><maxLodPixels>-1</maxLodPixels><minFadeExtent>64</minFadeExtent></Lod></Region>
 			<Point><coordinates>-122.25731023977428,37.866037293193145,43.2</coordinates><altitudeMode>relativeToGround</altitudeMode></Point>
@@ -6346,7 +6346,7 @@
 		<Placemark>
 			<name>1950 Oxford St · 772 beds · Completed</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>1950 OXFORD St</b><br/><b>Units:</b> 300<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 14<br/><b>Height:</b> 46.9m<br/><b>Status:</b> Completed<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
+			<description><![CDATA[<b>1950 OXFORD St</b><br/><b>Units:</b> 300<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 14<br/><b>Height:</b> 46.9m<br/><b>Status:</b> Under Construction<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
 			<styleUrl>#style_status_Completed__UC_Project_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -10298,7 +10298,7 @@
 		<Placemark>
 			<name>2400 Bowditch St · South · 1500 beds · Pre-Application</name>
 			<visibility>0</visibility>
-			<description><![CDATA[<b>2400 BOWDITCH St</b><br/><b>Height:</b> 45.0m<br/><b>Status:</b> Pre-Application<br/>Anna Head School site · 14 stories · South building of this project<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
+			<description><![CDATA[<b>2400 BOWDITCH St</b><br/><b>Height:</b> 45.0m<br/><b>Status:</b> Under Construction<br/>Anna Head School site · 14 stories · South building of this project<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
 			<styleUrl>#style_status_Pre_Application__UC_Project_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
@@ -10320,7 +10320,7 @@
 			<Point><coordinates>-122.25673937261527,37.86657585474497,48.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point>
 		</Placemark>
 		<Placemark>
-			<name>2556 Haste St · South · 1100 beds · Under Construction</name>
+			<name>2556 Haste St · South · 1113 beds · Under Construction</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2556 HASTE St</b><br/><b>Units:</b> 556<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 12<br/><b>Height:</b> 40.2m<br/><b>Status:</b> Under Construction<br/><b style='color:purple'>UC Berkeley Project</b>]]></description>
 			<styleUrl>#style_status_Under_Construction__UC_Project_nolabel</styleUrl>
@@ -10338,7 +10338,7 @@
 			</Polygon>
 		</Placemark>
 		<Placemark>
-			<name>2556 Haste St · South · 1100 beds · Under Construction</name>
+			<name>2556 Haste St · South · 1113 beds · Under Construction</name>
 			<styleUrl>#style_status_Under_Construction__UC_Project</styleUrl>
 			<Region><LatLonAltBox><north>37.86596617140792</north><south>37.86543481224203</south><east>-122.25668725732676</east><west>-122.25714241401322</west></LatLonAltBox><Lod><minLodPixels>128</minLodPixels><maxLodPixels>-1</maxLodPixels><minFadeExtent>64</minFadeExtent></Lod></Region>
 			<Point><coordinates>-122.25693406638342,37.86564721395722,38.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point>

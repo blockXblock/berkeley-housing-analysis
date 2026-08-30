@@ -103,6 +103,11 @@ def main():
                     help="metres to climb after the orbit before crossing to the next (John: 25)")
     ap.add_argument("--transit-secs", type=float, default=16.0)
     ap.add_argument("--open-secs", type=float, default=10.0)
+    ap.add_argument("--outro-rise", type=float, default=75.0,
+                    help="metres the closing swoop climbs (matches the corridor tours' 75 m)")
+    ap.add_argument("--outro-secs", type=float, default=12.0)
+    ap.add_argument("--outro-hold", type=float, default=8.0,
+                    help="seconds held on the final westward view (the corridor tours hold 8 s)")
     ap.add_argument("--turn-secs", type=float, default=9.0,
                     help="seconds to climb 25 m AND swing round to face the next building")
     ap.add_argument("--approach-secs", type=float, default=26.0,
@@ -125,8 +130,18 @@ def main():
     if not picks:
         raise SystemExit("no UC buildings found in geometry.kml")
 
-    # NORTH TO SOUTH, the order the May tour used and the order the campus reads in.
-    picks.sort(key=lambda kv: -kv[1][1])
+    # ORDER IS JOHN'S, NOT THE LATITUDE'S (2026-08-30: "change the order of the last two
+    # buildings. do 2556 Haste, then 2400 Bowditch"). A plain north-to-south sort always puts
+    # Bowditch before Haste, so the sequence has to be stated. Anything NOT named here -- the
+    # next UC tower to get flagged uc_project -- still falls in by latitude, so the tour keeps
+    # picking up new projects on its own rather than being frozen to these four.
+    ORDER = ["1950 OXFORD", "2200 BANCROFT", "2556 HASTE", "2400 BOWDITCH"]
+    def rank(kv):
+        for i, head in enumerate(ORDER):
+            if head in kv[0]:
+                return (0, i, 0)
+        return (1, 0, -kv[1][1])          # unlisted: after the named ones, north to south
+    picks.sort(key=rank)
 
     body, lines = [], []
     # Opening: east of the Campanile at 95 m, looking west over the campus.
@@ -176,6 +191,23 @@ def main():
                 body.append(cam(elon, elat, ealt + a.rise * e,
                                 (end_h + delta * e) % 360, 76.0, a.turn_secs / n))
             total += a.turn_secs
+        else:
+            # CLOSING SWOOP. Climb away from the last building and turn to look west, over the
+            # campus and the bay behind it -- the reverse of the opening, which came in from the
+            # east looking west at the Campanile. Interpolated the short way round like the
+            # inter-building turns, and tilting toward the horizon as it rises so the last thing
+            # the film does is lift its eyes rather than stare down at a roof.
+            end_h = (th0 + 180) % 360
+            delta = (270.0 - end_h + 540) % 360 - 180
+            n = 14
+            for q in range(1, n + 1):
+                f = q / n
+                e = f * f * (3 - 2 * f)
+                body.append(cam(elon, elat, ealt + a.outro_rise * e,
+                                (end_h + delta * e) % 360, 76.0 + 6.0 * e,
+                                a.outro_secs / n))
+            body.append(cam(elon, elat, ealt + a.outro_rise, 270.0, 82.0, a.outro_hold))
+            total += a.outro_secs + a.outro_hold
         lines.append(f"    {label[:48]:<48} roof {roof:5.1f} m  r {orad:4.0f} m  "
                      f"{ealt + a.drop:5.0f}->{ealt:4.0f} m  enter {th0:5.1f}deg")
         prev_pos = here

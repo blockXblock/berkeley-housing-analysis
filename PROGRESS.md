@@ -6,6 +6,45 @@
 
 ---
 
+## 2026-08-29 — People's Park: 1,113 beds and a second building v2 never modelled
+
+John asked whether 2556 Haste is really 1,100 beds across both buildings. It is
+not. v2 already contained the evidence against itself — the version description
+read "1,113 beds ... Includes supportive housing component" while `total_units`
+said 1100, a V1 migration record with no source document, permit or event. The
+absence of a permit is expected, not a gap: **UC is exempt from city permitting**,
+so the CPRA stream carries other Haste addresses (2211, 1947, 2110) and nothing
+at 2556. For UC projects the city record cannot corroborate anything; UC's own
+documents are the primary source.
+
+**The facts** (documents id 2384, type `official_source`, same pattern as the
+Anchor House FAQ): student building = Judith E. Heumann House, 148 apartments,
+1,113 beds, opening autumn 2027. Second building = ~100 permanent supportive and
+affordable apartments, Satellite Affordable Housing Associates, construction
+beginning only after Heumann House opens. **1,113 beds PLUS ~100 apartments.**
+
+**Written** against snapshot `keep_snapshot_2026-08-29_pre-proj177-peoples-park-beds.db`:
+`total_units` 1100→1113; `unit_program` 556→148 apartments at 7.52 beds (the 556
+was a placeholder the row itself called "1BR for schema compliance" — and it is
+what the page had been printing as "556 units"); affordability count follows with
+confidence LOW, since filing UC dormitory apartments under ABOVE_MOD is a
+migration artifact. First attempt rolled back on a CHECK constraint and re-ran.
+UC total 4,997 → **5,010 beds**.
+
+**A correction of my own:** the page copy I "fixed" earlier the same day said
+"just under 5,000: 4,997 beds", derived from the bad figure. John's original
+"over 5,000" had been right. Corrected to 5,010 with the SAHA building named
+separately. *Lesson: deriving from v2 is not the same as verifying — v2's own
+description contradicted its own field, and I read the field.*
+
+**OPEN, needs a modelling decision not a field edit:** v2 holds ONE project for a
+two-building site, so both polygons read "1113 beds · Under Construction" —
+right for Heumann House, wrong three ways for the SAHA building (not 1,113, not
+beds, not under construction). Hand-editing the label is undone by the next
+`sync_status_from_v2.py`; the second building needs its own record. The same
+question applies to 2200 Bancroft and 2400 Bowditch, whose figures are also
+unsourced migration records that merely happen to agree with their descriptions.
+
 ## 2026-08-29 — the deploy gate now blocks the push
 
 **What was wrong.** The gate was a heredoc inside a shell pipeline. A pipeline

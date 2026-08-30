@@ -39,23 +39,32 @@ def transit(lon, lat, alt, hdg, secs):
     return cam(lon, lat, alt, hdg, 62.0, secs)
 
 
-def spiral(lon, lat, roof, rad, orbit_secs, turns, drop_m, rise_m):
-    """ONE DESCENDING ORBIT — a true spiral, and never a look-down.
+def bearing(a, b):
+    """Compass bearing from point a to point b, both (lon, lat)."""
+    k = math.cos(math.radians(a[1]))
+    return (math.degrees(math.atan2((b[0] - a[0]) * k, b[1] - a[1])) + 360) % 360
+
+
+def spiral(lon, lat, roof, rad, orbit_secs, turns, drop_m, th0):
+    """ONE DESCENDING ORBIT, entered from azimuth th0 — never a look-down, never a snap.
 
     John, 2026-08-30: "eliminate the orbits looking straight down on the buildings ... do one
-    orbit, drop the elevation by 20 metres, then rise an additional 25 m to fly to the next."
+    orbit, drop the elevation by 20 metres, then rise an additional 25 m."
+    And then: "why, after each orbit, does the camera move to the right and look up? can it look
+    in the direction of the flight to the next building?"
 
-    The previous shot opened each building with a PLAN VIEW: twelve cameras at tilt 0, circling
-    a quarter turn while pointing straight down. It was inherited from gen_building_loop, where
-    a standalone clip has to establish the footprint before it means anything. In a continuous
-    tour it just reads as an extra rotation over a roof, and four of them made the film crawl.
+    Both of those were one bug. Every orbit used to start at azimuth 0 and the legs between
+    buildings were hardcoded to heading 270. A full turn ends the camera heading 180, so the
+    lift snapped 90 degrees clockwise -- the swing to the right -- and changed tilt at the same
+    time, which is the lurch that read as looking up.
 
-    What is left is the part that was doing the work: a single turn that descends `drop_m` while
-    the camera tilts further up, so the tower resolves from a shape into a mass. The orbit ENDS
-    at roof + 10 m, which is where the next leg lifts from.
+    THE FIX IS TO ENTER THE CIRCLE WHERE YOU ARRIVE. A camera sitting at azimuth th0 from the
+    building looks back at it on heading (th0 + 180). So entering at th0 = the bearing from this
+    building BACK toward wherever the camera came from makes that opening heading exactly the
+    direction of travel. The approach, the entry and the first orbit camera all point the same
+    way, and there is nothing to snap.
 
-    Returns (legs, end_lon, end_lat, end_alt) so the transit can rise from where the orbit
-    actually finished rather than from a recomputed guess.
+    Returns (legs, end_lon, end_lat, end_alt) — the climb lifts from where the orbit really ended.
     """
     orad = max(rad * 2.2, roof * 1.3, 60.0)
     end_alt = roof + 10.0
@@ -64,15 +73,15 @@ def spiral(lon, lat, roof, rad, orbit_secs, turns, drop_m, rise_m):
     out, n = [], int(48 * turns)
     for j in range(n + 1):
         f = j / n
-        e = f * f * (3 - 2 * f)                    # ease in and out of the descent
-        th = 360.0 * turns * f
+        e = f * f * (3 - 2 * f)
+        th = th0 + 360.0 * turns * f
         alt = start_alt + (end_alt - start_alt) * e
-        tilt = 66.0 + 10.0 * e                     # 66 deg to 76 deg -- never anywhere near 0
+        tilt = 66.0 + 10.0 * e
         out.append(cam(lon + (orad * math.sin(math.radians(th)) / M) / k,
                        lat + (orad * math.cos(math.radians(th)) / M),
                        alt, (th + 180) % 360, tilt, orbit_secs / n,
-                       "bounce" if j == 0 else "smooth"))
-    th_end = 360.0 * turns
+                       "smooth"))
+    th_end = th0 + 360.0 * turns
     return (out,
             lon + (orad * math.sin(math.radians(th_end)) / M) / k,
             lat + (orad * math.cos(math.radians(th_end)) / M),
@@ -92,8 +101,14 @@ def main():
                     help="metres the camera descends over the orbit (John: 20)")
     ap.add_argument("--rise", type=float, default=25.0,
                     help="metres to climb after the orbit before crossing to the next (John: 25)")
-    ap.add_argument("--transit-secs", type=float, default=12.0)
+    ap.add_argument("--transit-secs", type=float, default=16.0)
     ap.add_argument("--open-secs", type=float, default=10.0)
+    ap.add_argument("--turn-secs", type=float, default=9.0,
+                    help="seconds to climb 25 m AND swing round to face the next building")
+    ap.add_argument("--approach-secs", type=float, default=26.0,
+                    help="the opening run from the Campanile to the first building. John asked "
+                         "for this to be slower: it had been no leg at all, cutting straight "
+                         "from the establishing shot into the first orbit.")
     a = ap.parse_args()
 
     B = buildings()
@@ -115,29 +130,55 @@ def main():
 
     body, lines = [], []
     # Opening: east of the Campanile at 95 m, looking west over the campus.
-    body.append(cam(CAMPANILE[0] + 200 / (M * math.cos(math.radians(CAMPANILE[1]))),
-                    CAMPANILE[1], 95.0, 270.0, 75.0, a.open_secs, "bounce"))
+    ck = math.cos(math.radians(CAMPANILE[1]))
+    open_pos = (CAMPANILE[0] + 200 / (M * ck), CAMPANILE[1])
+    body.append(cam(open_pos[0], open_pos[1], 95.0, 270.0, 75.0, a.open_secs, "bounce"))
     total = a.open_secs
+
+    prev_pos = open_pos
     for idx, (name, (lon, lat, roof, rad, label)) in enumerate(picks):
+        here = (lon, lat)
         k = math.cos(math.radians(lat))
         orad = max(rad * 2.2, roof * 1.3, 60.0)
-        # APPROACH: come in at the altitude the orbit starts from, so the first orbit camera
-        # is a continuation rather than a jump.
-        if idx:
-            body.append(cam(lon + (orad * 1.8 / M) / k, lat, roof + 10.0 + a.drop,
-                            270.0, 70.0, a.transit_secs))
-            total += a.transit_secs
-        legs, elon, elat, ealt = spiral(lon, lat, roof, rad, a.orbit_secs, a.turns,
-                                        a.drop, a.rise)
+        # Enter the circle on the side we are arriving from, so the first orbit camera is
+        # already looking along the flight path. th0 = bearing from the building back to us.
+        th0 = bearing(here, prev_pos)
+        travel = (th0 + 180) % 360                      # the direction we are actually going
+        entry = (lon + (orad * math.sin(math.radians(th0)) / M) / k,
+                 lat + (orad * math.cos(math.radians(th0)) / M))
+        # THE RUN IN. A slow leg that arrives exactly at the orbit's first camera, facing the
+        # way it is travelling -- the opening one is longer because it sets the film up.
+        secs = a.approach_secs if idx == 0 else a.transit_secs
+        body.append(cam(entry[0], entry[1], roof + 10.0 + a.drop, travel, 70.0, secs))
+        total += secs
+
+        legs, elon, elat, ealt = spiral(lon, lat, roof, rad, a.orbit_secs, a.turns, a.drop, th0)
         body += legs
         total += a.orbit_secs
-        # LIFT IN PLACE before crossing -- John asked for the climb to be its own move, so the
-        # cut to the next building reads as leaving one and arriving at another, not a drift.
+
+        # THE CLIMB. 25 m, and it turns to face the NEXT building rather than a fixed compass
+        # heading, so the camera looks where it is about to fly instead of swinging away.
         if idx < len(picks) - 1:
-            body.append(cam(elon, elat, ealt + a.rise, 270.0, 70.0, 4.0))
-            total += 4.0
-        lines.append(f"    {label[:50]:<50} roof {roof:5.1f} m  orbit r {orad:4.0f} m  "
-                     f"{ealt + a.drop:5.0f} -> {ealt:4.0f} m")
+            nxt = picks[idx + 1][1]
+            look = bearing(here, (nxt[0], nxt[1]))
+            # TURN THROUGH THE CLIMB, DO NOT SNAP AT THE TOP OF IT. The orbit finishes looking
+            # back along the way it came in; the next leg has to look the other way. That turn
+            # is wanted -- John asked the camera to face where it is flying -- but done in one
+            # leg it was a 103 degree jerk. Spread over the climb it reads as the camera coming
+            # round to pick up the next building. Interpolated the short way round, so a turn
+            # across due north goes 350 -> 10 rather than the long way through 180.
+            end_h = (th0 + 180) % 360
+            delta = (look - end_h + 540) % 360 - 180
+            n = 10
+            for q in range(1, n + 1):
+                f = q / n
+                e = f * f * (3 - 2 * f)
+                body.append(cam(elon, elat, ealt + a.rise * e,
+                                (end_h + delta * e) % 360, 76.0, a.turn_secs / n))
+            total += a.turn_secs
+        lines.append(f"    {label[:48]:<48} roof {roof:5.1f} m  r {orad:4.0f} m  "
+                     f"{ealt + a.drop:5.0f}->{ealt:4.0f} m  enter {th0:5.1f}deg")
+        prev_pos = here
 
     stamp = datetime.datetime.now().strftime("%m-%d %H:%M")
     disp = f"UC Berkeley Student Housing · {len(picks)} projects · spirals · {stamp}"

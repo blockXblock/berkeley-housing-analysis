@@ -91,12 +91,19 @@ def main():
     ap.add_argument("control_points")
     ap.add_argument("--name", required=True, help="the corridor's own street, excluded from crossings")
     ap.add_argument("--out", required=True)
-    ap.add_argument("--scale", type=float, default=2.0, help="LabelStyle scale (font size)")
+    ap.add_argument("--scale", type=float, default=1.5,
+                    help="LabelStyle scale (font size). Dropped from 2.0 when the building "
+                         "labels went to 2.0 on two lines -- street names must stay BELOW the "
+                         "buildings, which are the subject.")
     ap.add_argument("--alt", type=float, default=20.0, help="metres above ground")
     ap.add_argument("--reach", type=float, default=80.0, help="how far off the path to look for a street")
     ap.add_argument("--spread", type=float, default=200.0,
                     help="max along-corridor spread of a street's nearby points; above this it is parallel, not crossing. MEASURED on Shattuck: true crossings 59-139 m (Bancroft 59, Center 59, Blake 92, University 115, Parker 129, Vine 139), parallels 675-708 m (Walnut, Henry). 200 separates them cleanly; 90 was cutting University and Parker out.")
-    ap.add_argument("--colour", default="ffffffff", help="KML aabbggrr")
+    # AMBER, NOT WHITE (John, 2026-08-30: "different style or color for street names ...
+    # sometimes hard to see which label is for which building"). Street signs and building
+    # labels were both plain white at similar sizes, so the eye had nothing to sort them by.
+    # A warm amber reads as signage and lets the white building labels sit in front of it.
+    ap.add_argument("--colour", default="ff50c4ff", help="KML aabbggrr (default amber)")
     ap.add_argument("--every", type=float, default=400.0, help="metres between repeats of the corridor's own name")
     ap.add_argument("--own-mult", type=float, default=1.25,
                     help="corridor-name scale as a multiple of --scale. STREET SIGNS ARE CONTEXT AND THE "

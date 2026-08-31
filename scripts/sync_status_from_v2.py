@@ -20,6 +20,12 @@ itself.
   python scripts/sync_status_from_v2.py
 """
 import argparse, collections, re, sqlite3
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+# THE label format lives in label_format.py. Splitting on "·" here and rejoining with " · "
+# would flatten the two-line fold every time this ran -- the same duplicated-rule failure as
+# buildings() and the geometry sha.
+from label_format import parts as label_parts, compose as label_compose
 
 GEOM = "kml/geometry/geometry.kml"
 DB = "databases/berkeley_housing_v2.db"
@@ -76,7 +82,7 @@ def main():
         if key not in v2:
             continue
         units, status = v2[key]
-        parts = [p.strip() for p in nm.group(1).split("·")]
+        parts = label_parts(nm.group(1))          # understands the two-line fold
         if len(parts) < 2:
             continue
         before = list(parts)
@@ -96,7 +102,7 @@ def main():
                 parts[i] = f"{want} {noun}"
         if parts == before:
             continue
-        changes[nm.group(1)] = (" · ".join(parts), status, None)
+        changes[nm.group(1)] = (label_compose(parts), status, None)   # re-folds on the way out
 
     if not changes:
         print("no status labels are out of step with v2")

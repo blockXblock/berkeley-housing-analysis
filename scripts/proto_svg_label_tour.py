@@ -27,7 +27,20 @@ GEOM = ROOT / "kml/geometry/geometry.kml"
 TOUR = ROOT / "kml/tours/uc-dormitories.kml"
 IMGS = ROOT / "scratch/2026-08-31/svg-labels"
 OUT = ROOT / "scratch/2026-08-31/UC-dorm-svg-labels.kmz"
-LIFT = 34.0          # metres above the roof anchor the box floats -- see note in main()
+# ANCHOR AND SIZE, both learned from watching it (John, 2026-08-31): "the labels are far above
+# the structure. they are not visible at all during the spiral. during the flight between
+# buildings, they are visible as large rectangles far away."
+#
+# The orbit camera sits at roof + 10 to roof + 30 m and tilts 66-76 degrees -- close to level,
+# looking at the building. A label at roof + 34 is ABOVE that view axis, so it leaves the top of
+# frame exactly when the building is being examined. Dropping the anchor onto the building's own
+# upper facade puts it in the middle of the shot AND makes it look attached rather than moored
+# above. Earth draws icons as billboards over the scene, so it is not occluded by the wall.
+#
+# Icon scale is SCREEN size, near enough independent of distance -- which is why 7.0 read as a
+# large rectangle from far away. Halved.
+LIFT_FRACTION = 0.80    # anchor at this fraction of roof height: on the upper facade
+ICON_SCALE = 3.5
 
 
 def main():
@@ -61,14 +74,14 @@ def main():
         lon = sum(p[0] for p in pts) / len(pts); lat = sum(p[1] for p in pts) / len(pts)
         roof = max(p[2] for p in pts if len(p) > 2)
         icon_styles.append(
-            f'<Style id="lbl_{slug}"><IconStyle><scale>7.0</scale>'
+            f'<Style id="lbl_{slug}"><IconStyle><scale>{ICON_SCALE}</scale>'
             f'<Icon><href>{png.name}</href></Icon>'
             f'<hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>'
             f'<LabelStyle><scale>0</scale></LabelStyle></Style>')
         label_pms.append(
             f'<Placemark id="pm_{slug}"><name></name><visibility>0</visibility>'
             f'<styleUrl>#lbl_{slug}</styleUrl>'
-            f'<Point><coordinates>{lon!r},{lat!r},{roof + LIFT:.1f}</coordinates>'
+            f'<Point><coordinates>{lon!r},{lat!r},{roof * LIFT_FRACTION:.1f}</coordinates>'
             f'<altitudeMode>relativeToGround</altitudeMode></Point></Placemark>')
 
     # --- switch each label on at BUILDING-IN and off at BUILDING-OUT ---
@@ -76,7 +89,14 @@ def main():
         return (f'\t\t\t<gx:AnimatedUpdate><gx:duration>0</gx:duration><Update><targetHref/>'
                 f'<Change><Placemark targetId="pm_{slug}"><visibility>{vis}</visibility>'
                 f'</Placemark></Change></Update></gx:AnimatedUpdate>\n')
-    tour = re.sub(r"\t*<!--BUILDING-IN ([a-z0-9-]+)-->\n", lambda m: upd(m.group(1), 1), tour)
+    # ON AT THE ORBIT, NOT THE APPROACH. The marker sits before the run-in, so switching there
+    # put the label on screen for the whole crossing -- a billboard hanging over open sky, which
+    # is what John saw as "large rectangles far away". Skip past the approach FlyTo so the label
+    # arrives with the building.
+    def on_after_approach(m):
+        return ""
+    tour = re.sub(r"(\t*<!--BUILDING-IN ([a-z0-9-]+)-->\n)(\s*<gx:FlyTo>.*?</gx:FlyTo>\n)",
+                  lambda m: m.group(3) + upd(m.group(2), 1), tour, flags=re.S)
     tour = re.sub(r"\t*<!--BUILDING-OUT ([a-z0-9-]+)-->\n", lambda m: upd(m.group(1), 0), tour)
 
     doc = ('<?xml version="1.0" encoding="UTF-8"?>\n'

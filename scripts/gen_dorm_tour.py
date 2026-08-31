@@ -39,6 +39,10 @@ def transit(lon, lat, alt, hdg, secs):
     return cam(lon, lat, alt, hdg, 62.0, secs)
 
 
+def slugify(a):
+    return re.sub(r"[^a-z0-9]+", "-", str(a).lower()).strip("-")
+
+
 def bearing(a, b):
     """Compass bearing from point a to point b, both (lon, lat)."""
     k = math.cos(math.radians(a[1]))
@@ -164,6 +168,10 @@ def main():
         # THE RUN IN. A slow leg that arrives exactly at the orbit's first camera, facing the
         # way it is travelling -- the opening one is longer because it sets the film up.
         secs = a.approach_secs if idx == 0 else a.transit_secs
+        # BOUNDARY MARKERS. Harmless comments, but they let a post-processor find where each
+        # building's segment begins and ends -- which is how the label-visibility prototype
+        # knows when to switch a label on and off without re-deriving the flight.
+        body.append(f"\t\t\t<!--BUILDING-IN {slugify(name)}-->\n")
         body.append(cam(entry[0], entry[1], roof + 10.0 + a.drop, travel, 70.0, secs))
         total += secs
 
@@ -208,6 +216,7 @@ def main():
                                 a.outro_secs / n))
             body.append(cam(elon, elat, ealt + a.outro_rise, 270.0, 82.0, a.outro_hold))
             total += a.outro_secs + a.outro_hold
+        body.append(f"\t\t\t<!--BUILDING-OUT {slugify(name)}-->\n")
         lines.append(f"    {label[:48]:<48} roof {roof:5.1f} m  r {orad:4.0f} m  "
                      f"{ealt + a.drop:5.0f}->{ealt:4.0f} m  enter {th0:5.1f}deg")
         prev_pos = here

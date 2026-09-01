@@ -58,6 +58,20 @@ def main():
     ap.add_argument("--tour", required=True, help="tour stem in kml/tours/")
     ap.add_argument("--street", default=None, help="street-label set to fold in, e.g. shattuck")
     ap.add_argument("--out", default=None)
+    ap.add_argument("--all", action="store_true",
+                    help="label EVERY building the flight passes, not only the orbit targets. A "
+                         "label appears when the camera comes within --radius of its building and "
+                         "goes when it leaves, so the screen still carries only what is at hand.")
+    ap.add_argument("--radius", type=float, default=260.0,
+                    help="metres: how close the camera must come before a label is lit")
+    ap.add_argument("--max-labels", type=int, default=0,
+                    help="cap how many labels may be lit at once; the NEAREST win. 0 = no cap. "
+                         "Radius alone is not enough downtown, where 260 m can enclose fifteen "
+                         "projects and the screen fills with boxes -- the very problem the "
+                         "one-at-a-time rule was meant to solve.")
+    ap.add_argument("--move-every", type=int, default=2,
+                    help="reposition a visible label every Nth leg. 1 is smoothest; 2 halves the "
+                         "file for no visible difference outside an orbit.")
     a = ap.parse_args()
 
     tour_path = pathlib.Path(f"kml/tours/{a.tour}.kml")
@@ -80,13 +94,29 @@ def main():
         targets.append((lo, hi, addr, v))
         print(f"    legs {lo:>3}-{hi:<3} -> {v[4].splitlines()[0][:46]}")
 
+    # --- ALL MODE: every site the flight actually passes, lit by proximity ---
+    if a.all:
+        near = {}
+        for addr, v in SITES.items():
+            if not re.search(r"\d", v[4]):
+                continue
+            k = math.cos(math.radians(v[1]))
+            dmin = min(math.hypot((c[0] - v[0]) * k * 111320, (c[1] - v[1]) * 111320) for c in cams)
+            if dmin <= a.radius:
+                near[addr] = v
+        print(f"    {len(near)} building(s) come within {a.radius:.0f} m of this flight")
+        targets = [(None, None, addr, v) for addr, v in near.items()]
+
     # render just those labels
     IMGS.mkdir(parents=True, exist_ok=True)
+    # ONE subprocess, not one per label. Each invocation pays Python startup and a full read of
+    # v2 -- about 1.3 s -- so 58 labels cost 80 s of process churn and almost no rasterising.
+    cmd = [sys.executable, "scripts/gen_svg_labels.py", "--outdir", str(IMGS)]
     for _, _, addr, _ in targets:
-        subprocess.run([sys.executable, "scripts/gen_svg_labels.py", "--address", addr,
-                        "--outdir", str(IMGS)], capture_output=True)
+        cmd += ["--address", addr]
+    subprocess.run(cmd, capture_output=True)
 
-    styles, pms, imgs, updates = [], [], [], {}
+    styles, pms, imgs = [], [], []
     for lo, hi, addr, v in targets:
         s = slugify(addr); png = IMGS / f"{s}.png"
         if not png.exists():
@@ -100,10 +130,6 @@ def main():
                    f'<styleUrl>#lbl_{s}</styleUrl><Point>'
                    f'<coordinates>{v[0]!r},{v[1]!r},{v[2] * LIFT_FRACTION:.1f}</coordinates>'
                    f'<altitudeMode>relativeToGround</altitudeMode></Point></Placemark>')
-        updates[lo] = ("on", s)
-        updates[hi] = ("off", s)
-        for i in range(lo, hi + 1):
-            updates.setdefault(i, ("move", s, addr))
 
     def vis(s, v, secs=0.0):
         return (f'\t\t\t<gx:AnimatedUpdate><gx:duration>{secs:.2f}</gx:duration><Update><targetHref/>'
@@ -118,16 +144,39 @@ def main():
                 f'</Change></Update></gx:AnimatedUpdate>\n')
 
     # rebuild the playlist leg by leg
+    live = set()          # which labels are currently lit (all-mode)
     out, li, moves = [], 0, 0
     for tok in re.split(r"(<gx:FlyTo>.*?</gx:FlyTo>\n?)", tour, flags=re.S):
         if not tok.startswith("<gx:FlyTo>"):
             out.append(tok); continue
+        if a.all:
+            # PROXIMITY, NOT SPANS. Light a label when the camera comes inside --radius of its
+            # building and drop it when it leaves, so a corridor shows what is beside it rather
+            # than every project in the city at once.
+            cand = []
+            for _, _, addr, v in targets:
+                k = math.cos(math.radians(v[1]))
+                dm = math.hypot((cams[li][0] - v[0]) * k * 111320,
+                                (cams[li][1] - v[1]) * 111320)
+                if dm <= a.radius:
+                    cand.append((dm, addr))
+            cand.sort()
+            if a.max_labels:
+                cand = cand[:a.max_labels]
+            want = {addr for _, addr in cand}
+            for addr in want - live:
+                out.append(vis(slugify(addr), 1))
+            for addr in live - want:
+                out.append(vis(slugify(addr), 0))
+            live = want
         for lo, hi, addr, v in targets:
-            if li == lo:
+            if lo is not None and li == lo:
                 out.append(vis(slugify(addr), 1))
         # position the label on the camera's side for this leg
         for lo, hi, addr, v in targets:
-            if lo <= li <= hi:
+            in_span = (lo is not None and lo <= li <= hi)
+            in_near = (a.all and addr in live and li % max(a.move_every, 1) == 0)
+            if in_span or in_near:
                 blon, blat, roof, rad = v[0], v[1], v[2], v[3]
                 clon, clat = cams[li]
                 k = math.cos(math.radians(blat))
@@ -140,7 +189,7 @@ def main():
                 moves += 1
         out.append(tok)
         for lo, hi, addr, v in targets:
-            if li == hi:
+            if lo is not None and li == hi:
                 out.append(vis(slugify(addr), 0))
         li += 1
     tour = "".join(out)
@@ -178,7 +227,7 @@ def main():
             if p.exists():
                 zi2 = zipfile.ZipInfo(p.name, EPOCH); zi2.compress_type = zipfile.ZIP_DEFLATED
                 z.writestr(zi2, p.read_bytes())
-    dest = pathlib.Path.home() / "Desktop" / f"{a.tour} SVG labels.kmz"
+    dest = pathlib.Path.home() / "Desktop" / f"{out_path.stem}.kmz"
     shutil.copy(out_path, dest)
     print(f"  {len(kept)} polygons, {len(pms)} boxed labels, {moves} repositions")
     print(f"  {out_path} ({out_path.stat().st_size/1024:.0f} KB) -> {dest}")

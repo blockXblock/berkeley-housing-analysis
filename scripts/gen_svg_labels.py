@@ -107,6 +107,7 @@ def main():
     ap.add_argument("--uc", action="store_true", help="only uc_project buildings")
     ap.add_argument("--address", action="append", default=[], help="match by address fragment")
     ap.add_argument("--outdir", default="scratch/2026-08-31/svg-labels")
+    ap.add_argument("--force", action="store_true", help="re-render even if the PNG exists")
     a = ap.parse_args()
     out = pathlib.Path(a.outdir); out.mkdir(parents=True, exist_ok=True)
 
@@ -121,6 +122,12 @@ def main():
     made = 0
     for r in picks:
         s = slug(r["address_display"])
+        # CACHE. Rasterising 58 labels through qlmanage takes two minutes, and a rebuild that
+        # only changes the tour re-renders every one of them. Skip a PNG that already exists;
+        # delete the file (or the directory) to force a re-render after a data change.
+        if (out / f"{s}.png").exists() and not a.force:
+            made += 1
+            continue
         (tmp / f"{s}.svg").write_text(svg(r), encoding="utf-8")
         # qlmanage renders the SVG; alpha survives, and a square canvas needs no crop
         subprocess.run(["qlmanage", "-t", "-s", str(W), "-o", str(tmp), str(tmp / f"{s}.svg")],

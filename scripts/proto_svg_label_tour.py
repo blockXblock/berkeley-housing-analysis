@@ -45,9 +45,16 @@ OUT = ROOT / "scratch/2026-08-31/UC-dorm-svg-labels.kmz"
 # Icon scale is SCREEN size, near enough independent of distance -- which is why 7.0 read as a
 # large rectangle from far away. Halved.
 LIFT_FRACTION = 0.80    # anchor at this fraction of roof height: level with the upper facade
-ICON_SCALE = 3.5
+# The image is now CROPPED to the box, so the same number renders about three times larger --
+# two-thirds of the old icon was transparent padding that IconStyle was faithfully scaling.
+# 2.5 on the cropped image is roughly twice the apparent size of 3.5 on the padded one.
+ICON_SCALE = 2.5
 MARGIN_M = 14.0         # how far OUTSIDE the footprint's bounding circle the label rides
-STEP = 4                # move the label every Nth orbit camera
+# EVERY camera, not every fourth. At STEP 4 the label jumped 30 degrees of arc at a time with
+# no transition, which reads as a stutter against a camera that is moving smoothly. Updating on
+# every leg makes each move about 7.5 degrees, and the update carries the leg's own duration so
+# Earth has something to interpolate over rather than snapping.
+STEP = 1
 
 # THE LABEL RIDES THE NEAR SIDE. (John, 2026-08-31: "the labels ... sink inside building as the
 # flight approaches ... since the geometry of each building, or set of buildings is complex --
@@ -127,8 +134,8 @@ def main():
     tour = re.sub(r"\t*<!--BUILDING-OUT ([a-z0-9-]+)-->\n", lambda m: upd(m.group(1), 0), tour)
 
     # --- MOVE THE LABEL TO THE CAMERA'S SIDE, EVERY STEP CAMERAS ---
-    def move(slug, lon, lat, alt):
-        return (f'\t\t\t<gx:AnimatedUpdate><gx:duration>0</gx:duration><Update><targetHref/>'
+    def move(slug, lon, lat, alt, secs=0.0):
+        return (f'\t\t\t<gx:AnimatedUpdate><gx:duration>{secs:.2f}</gx:duration><Update><targetHref/>'
                 f'<Change><Placemark targetId="pm_{slug}"><Point>'
                 f'<coordinates>{lon:.8f},{lat:.8f},{alt:.1f}</coordinates>'
                 f'<altitudeMode>relativeToGround</altitudeMode></Point></Placemark>'
@@ -153,8 +160,9 @@ def main():
                 dx, dy = (clon - lon) * k, (clat - lat)
                 d = math.hypot(dx, dy) or 1e-9
                 r = (rad + MARGIN_M) / 111320.0          # ride just outside the bounding circle
+                dur = re.search(r"<gx:duration>([0-9.]+)</gx:duration>", tok)
                 out.append(move(cur, lon + dx / d * r / k, lat + dy / d * r,
-                                roof * LIFT_FRACTION))
+                                roof * LIFT_FRACTION, float(dur.group(1)) if dur else 0.0))
                 n_moves += 1
             idx += 1
         out.append(tok)

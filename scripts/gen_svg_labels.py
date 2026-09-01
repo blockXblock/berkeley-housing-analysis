@@ -129,7 +129,14 @@ def main():
         if not png.exists():
             print(f"  FAILED to rasterise {s}")
             continue
+        # CROP THE PADDING. qlmanage emits a square, so a 300 px box inside a 900 px canvas is
+        # two-thirds transparent -- and IconStyle scale sizes the whole image, so two-thirds of
+        # the scale was being spent on nothing. That is why the label read as too small at a
+        # size that had looked too large before. The box is centred by construction, so a
+        # centred crop to the box height lands exactly on it.
         shutil.copy(png, out / f"{s}.png")
+        subprocess.run(["sips", "-c", str(BOX_H), str(W), str(out / f"{s}.png")],
+                       capture_output=True)
         made += 1
         print(f"  {out / (s + '.png')}   {' | '.join(x for x in lines_for(r) if x)[:88]}")
     shutil.rmtree(tmp, ignore_errors=True)

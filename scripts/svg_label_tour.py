@@ -83,6 +83,7 @@ def main():
     cams = [(float(m.group(1)), float(m.group(2))) for m in
             (re.search(r"<longitude>([-\d.]+)</longitude>\s*<latitude>([-\d.]+)</latitude>", l) for l in legs)]
     spans = orbits(tour)
+    orbit_of = {}
     print(f"  {len(legs)} legs, {len(spans)} orbit(s) detected")
 
     # which site is each orbit about?
@@ -105,6 +106,11 @@ def main():
             if dmin <= a.radius:
                 near[addr] = v
         print(f"    {len(near)} building(s) come within {a.radius:.0f} m of this flight")
+        # KEEP THE ORBIT SPANS. --all used to replace targets outright, which threw away which
+        # legs are an orbit -- so the building being orbited moved on the same every-other-leg
+        # cadence as everything else and visibly stuttered, while orbits-only stayed smooth.
+        # John caught exactly that. The spans are retained and used for cadence below.
+        orbit_of = {addr: (lo, hi) for lo, hi, addr, _ in targets}
         targets = [(None, None, addr, v) for addr, v in near.items()]
 
     # render just those labels
@@ -175,7 +181,14 @@ def main():
         # position the label on the camera's side for this leg
         for lo, hi, addr, v in targets:
             in_span = (lo is not None and lo <= li <= hi)
-            in_near = (a.all and addr in live and li % max(a.move_every, 1) == 0)
+            # THE BUILDING BEING ORBITED MOVES EVERY LEG. It is the subject of the shot and the
+            # camera sweeps fastest around it, so half-rate updates read as a stutter. Everything
+            # else -- passed at a distance, drifting slowly across frame -- is fine at half rate,
+            # which is what keeps the file small.
+            olo, ohi = orbit_of.get(addr, (None, None))
+            being_orbited = olo is not None and olo <= li <= ohi
+            in_near = (a.all and addr in live
+                       and (being_orbited or li % max(a.move_every, 1) == 0))
             if in_span or in_near:
                 blon, blat, roof, rad = v[0], v[1], v[2], v[3]
                 clon, clat = cams[li]

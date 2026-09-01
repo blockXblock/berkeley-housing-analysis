@@ -15,7 +15,8 @@ so John can hand over a drawn path and get back something recordable.
 
 --orbit targets are matched against building names in geometry.kml. There are NO buildings west
 of I-80, so a marina or harbour orbit cannot be expressed this way -- it needs a bare
-coordinate, which gen_corridor_tour.py does not yet accept.
+coordinate -- gen_corridor_tour.py takes --orbit-at for exactly that, and this
+forwards it.
 """
 import argparse, pathlib, subprocess, sys, zipfile, os
 
@@ -36,6 +37,10 @@ def main():
     ap.add_argument("--name", required=True, help="tour title, without the (no orbits) suffix")
     ap.add_argument("--street", required=True, help="corridor street name, excluded from its own signs")
     ap.add_argument("--orbit", default="", help="comma-separated building-name fragments")
+    ap.add_argument("--orbit-at", action="append", default=[],
+                    help="LAT,LON,ALT,RADIUS[,LABEL] — an orbit on a bare coordinate. Needed when "
+                         "the subject is not one named building: two towers 21 m apart read as one "
+                         "site from the air, and a marina has no building at all. Repeatable.")
     ap.add_argument("--hold", type=float, default=8.0)
     ap.add_argument("--rise", type=float, default=75.0)
     ap.add_argument("--look-ahead", type=float, default=150.0)
@@ -53,6 +58,11 @@ def main():
         cmd = [py, "scripts/gen_corridor_tour.py", cp, "--name", title, "--out", out]
         if orbit:
             cmd += ["--orbit", orbit]
+        # bare-coordinate orbits ride along with the named ones -- but ONLY on the orbit pass;
+        # the cruise variant is defined by having no orbits at all
+        if orbit:
+            for oa in a.orbit_at:
+                cmd += ["--orbit-at", oa]
         # RUN IT, THEN REPORT. This was `print(run(cmd)... if orbit else f"wrote {out}")`, and a
         # conditional expression only evaluates the branch it takes -- so on the cruise pass the
         # generator was never invoked and the script printed "wrote" over a file it had not
@@ -70,7 +80,7 @@ def main():
     stem = a.labels or a.street.lower().replace(" ", "-")
     lab = f"kml/tours/labels/{stem}-street-labels.kml"
     print(run([py, "scripts/gen_street_labels.py", cp, "--name", a.street,
-               "--out", lab, "--scale", "2.5", "--alt", "20"]).splitlines()[1].strip())
+               "--out", lab, "--scale", "1.5", "--alt", "20"]).splitlines()[1].strip())
     with zipfile.ZipFile(lab[:-4] + ".kmz", "w", zipfile.ZIP_DEFLATED) as z:
         z.writestr("doc.kml", open(lab, encoding="utf-8").read())
         z.write("kml/tours/labels/transparent-1x1.png", "transparent-1x1.png")

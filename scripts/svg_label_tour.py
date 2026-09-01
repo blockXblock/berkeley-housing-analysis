@@ -82,7 +82,26 @@ def main():
     legs = re.findall(r"<gx:FlyTo>.*?</gx:FlyTo>\n?", tour, re.S)
     cams = [(float(m.group(1)), float(m.group(2))) for m in
             (re.search(r"<longitude>([-\d.]+)</longitude>\s*<latitude>([-\d.]+)</latitude>", l) for l in legs)]
-    spans = orbits(tour)
+    # PREFER EXPLICIT MARKERS. gen_dorm_tour.py brackets each building with BUILDING-IN/OUT
+    # comments. Heading-sweep detection is a fallback for tours that have none -- and on the dorm
+    # tour it fails outright, merging all four orbits into one because the turns BETWEEN
+    # buildings are gentle enough to look like more of the same sweep.
+    marks = re.findall(r"<!--BUILDING-(IN|OUT) ([a-z0-9-]+)-->", tour)
+    if marks:
+        legs_seen, spans, open_at = 0, [], {}
+        for tok in re.split(r"(<gx:FlyTo>.*?</gx:FlyTo>|<!--BUILDING-(?:IN|OUT) [a-z0-9-]+-->)",
+                            tour, flags=re.S):
+            if tok.startswith("<!--BUILDING-IN"):
+                open_at[re.search(r"IN ([a-z0-9-]+)", tok).group(1)] = legs_seen
+            elif tok.startswith("<!--BUILDING-OUT"):
+                nm = re.search(r"OUT ([a-z0-9-]+)", tok).group(1)
+                if nm in open_at:
+                    spans.append((open_at.pop(nm), max(legs_seen - 1, 0)))
+            elif tok.startswith("<gx:FlyTo>"):
+                legs_seen += 1
+        print(f"  using {len(spans)} BUILDING marker span(s) from the tour")
+    else:
+        spans = orbits(tour)
     orbit_of = {}
     print(f"  {len(legs)} legs, {len(spans)} orbit(s) detected")
 

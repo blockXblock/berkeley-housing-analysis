@@ -50,11 +50,22 @@ document. ▶ Load it and look at the provenance first — always.""")
 code("""import json, pandas as pd
 from pathlib import Path
 
+FNAME = "berkeley_budget_external_facts_2026-08-15.json"
 REPO = Path.cwd()
-while not (REPO / "data" / "reference").exists():   # find repo root from notebook cwd
+while not (REPO / "data" / "reference" / FNAME).exists() and REPO != REPO.parent:
     REPO = REPO.parent
 
-FACTS = json.load(open(REPO / "data" / "reference" / "berkeley_budget_external_facts_2026-08-15.json"))
+local = REPO / "data" / "reference" / FNAME
+if local.exists():
+    FACTS = json.load(open(local))
+else:
+    # Google Colab / standalone: fetch the facts file from the public repo
+    import urllib.request
+    URL = ("https://raw.githubusercontent.com/blockXblock/"
+           "berkeley-housing-analysis/main/data/reference/" + FNAME)
+    FACTS = json.loads(urllib.request.urlopen(URL).read())
+    print("(facts file fetched from GitHub — Colab/standalone mode)")
+
 print("facts as of:", FACTS["as_of"])
 for k, v in FACTS["sources"].items():
     print(f"  {k}: {v[:95]}")""")

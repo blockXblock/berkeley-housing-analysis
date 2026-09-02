@@ -6,6 +6,62 @@
 
 ---
 
+## 2026-09-02 — the 1.E hunt is CLOSED: the corpus is as complete as Accela allows
+
+**Result: 25 records enumerated, 0 tabulation forms.** The negative is worth more than the hunt.
+
+**How the number collapsed.** 847 active projects have no tabulation form; 768 had never been
+visited by any harvest. But **752 of those have <10 units** — the CO-only ADU cohort (713
+`completed`, matching CLAUDE.md's 713): no Planning entitlement record, no inclusionary trigger,
+so no 1.E exists. Six more are **UC/BART, agency-exempt**: 2200 Bancroft, 2400 Bowditch, 2556
+Haste, 1950 Oxford, Ashby BART — the four largest never-visited projects by unit count, which
+look like the richest targets and are impossible ones. **Actionable set: 13.**
+
+**Discovery then harvest.** `experiments/accela_scrape/harvest_address.py` ran live for the
+FIRST time (its docstring warned the ACA selectors were unconfirmed) — **it works, fill_ok=True.**
+5 of 13 projects resolved to 25 Planning records; 8 returned zero, retried with street-name
+variants, still zero — real absence, not a query artifact. All 25 enumerated: **25/25
+NO-PLANSETS.**
+
+**Renumbering finding.** None of the 25 carry `ZP/AUP/DRCP/DRCF`. Berkeley Planning now issues
+**`PLN`** (12), with `ZCBL` (8), `ZCBP` (3), `DRSA`/`DRSL` (2). A harvest keyed to the old
+prefixes will silently miss every current record.
+
+**Standing conclusion:** the 1.E gap is NOT a harvesting gap. Do not re-run without a new
+source — a CPRA request, not the scraper.
+
+---
+
+## 2026-09-02 — nine 1.E forms were filed as "other" (GATED WRITE — this entry was lost once)
+
+**The write.** 9 rows re-typed `document_type_id` 23 -> 25 via
+`scripts/fix_tabulation_doc_types.py` (transactional, per-row rowcount==1). type-25 **71 -> 80**,
+projects with a tabulation form **41 -> 45**. Snapshot
+`keep_snapshot_2026-09-02_pre-tabulation-retype.db`; integrity_check ok. Committed `0367cab`
+(the script only — see the collision note below).
+
+Among them **2190 Shattuck (452 units) and 1974 Shattuck (599 units)**, the two towers the
+homepage calls the tallest in the pipeline. Their affordability tabulations were in hand all
+along, filed where a coverage query could not see them.
+
+**NOT a blanket update.** type 23 is a catch-all: `documents` id 1412 is a Phase I
+**Environmental Site Assessment** appendix. A sweeping `UPDATE ... WHERE document_type_id=23`
+would have relabelled an environmental report as an affordability form. Excluded by id, and the
+transaction ASSERTS it is still type 23 before committing.
+
+**STANDING LESSON: measure 1.E coverage across document types, never on type 25 alone.** A
+target list built on 25 alone counted three already-covered projects as missing.
+
+**⚠ CONCURRENT-LANE COLLISION (2026-09-02, ~15:40–16:30).** This entry was written twice and
+lost twice to another session editing `PROGRESS.md` at the same time. The first loss was
+silent and dangerous: `git add PROGRESS.md` staged nothing because the other lane had already
+overwritten the file, and the commit still reported success because a second file in the same
+commit had changed. **The DB write and the scripts were never at risk — they were committed.
+Only the narrative record died.** If you edit PROGRESS.md while another lane is running, write
+and commit in one step, then VERIFY the commit actually contains the file.
+
+---
+
 ## 2026-09-02 — applicant and architect written; ⚠ JN-L NEEDS ANOTHER BASELINE APPEND
 
 **For the JN-L lane** (your session name rotated and the socket I replied to is gone, so this is

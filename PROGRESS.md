@@ -6,6 +6,56 @@
 
 ---
 
+## 2026-09-02 — 5.44 GB reclaimed from `scratch/`, verified against R2 first
+
+**Why.** The startup disk hit 100% (118 MB free of 228 GB) mid-session and commands
+began failing with ENOSPC. Cache clearing bought 6.9 GB; this was the durable half.
+
+**What was deleted.** 128 harvested plan-set files under `scratch/2026-08-23/`
+(`harvest_stage_phase2`, `harvest_stage_batch2`, `extract25`, `extract`) and
+`scratch/2026-08-22/plansets`. Every one verified three ways before removal:
+sha256 matched a `documents` row carrying an `r2_url`; HTTP HEAD on that URL
+returned 200; `Content-Length` matched the local byte size. All 128 passed, no
+failures. Recovery manifest (path, bytes, sha256, r2_url) is committed at
+`notes/2026-09-02_r2_verified_deletion_manifest.tsv`, and the recovery path was
+PROVEN after the fact by re-fetching a deleted file and matching its hash.
+
+**What was deliberately KEPT — 17 files, 463 MB.** These are NOT in R2:
+5 harvested plan-set PDFs (3030 Telegraph 2023-06-08; 2115 Kittredge 2022-10-31
+and 2023-01-27; 2700 Shattuck 2026-06-30 and 2026-08-20) plus 12 derived PNG/txt
+crops. **The 5 PDFs are a real gap in the mirror and should be uploaded.**
+`experiments/accela_scrape/upload_harvest_to_r2.py` reads its manifest from
+`/tmp/harvest_stage/manifest.csv` — and macOS purges `/tmp` on restart, which is
+the likely reason the August harvest was never uploaded. Fix the path when uploading.
+
+**Gated write, same day.** The 5 kept PDFs were uploaded to R2 and registered:
+`documents` 2250 -> 2255 (ids 2389-2393, all `document_type_id 2` plan_set), r2 coverage
+301 -> 306, `integrity_check ok`. Snapshot `keep_snapshot_2026-09-02_pre-r2-plan-set-docs.db`.
+New machinery: `scripts/upload_pdfs_to_r2.py` (file-driven, not manifest-driven; reads
+`.env.r2`; address slug from the DB; verifies every upload; refuses `/` or `:` in a key).
+**It caught a real collision:** `proj12_2115-kittredge-st_2023-01-27.pdf` was already held by a
+DIFFERENT document — the 141 KB Zoning Tabulation Form, `documents` id 2307 — because 2115
+Kittredge filed a tabulation form AND a revised plan set on the same date and the
+proj+address+date convention maps both to one key. A plain upload would have destroyed 2307 and
+silently broken its published URL. Verified intact at 140,886 B.
+
+**1.E status (asked 2026-09-02): no new ones found.** The 1.E corpus is 71 tabulation forms
+across 41 projects, **all 71 already in R2**. A follow-up audit of the 64 small PDFs that the
+first sweep's 1 MB threshold had skipped found **zero** unmirrored. The open question is
+COVERAGE, not mirroring: the August 1E harvest visited 118 projects and only 19 came away with
+a form. The harvest was correctly aimed (1,020 ZP records queried vs 36 B), and 93 of the 99
+projects without a form WERE queried on a ZP record and returned nothing — so this is absence
+at the source, not mis-targeting. Per the retry rule in CLAUDE.md a 0-result is not evidence of
+absence until retried, so those 93 are a re-harvest candidate, not a closed finding.
+
+**Still open (not done):** the 18 v4 snapshots in `databases/` (2.1 GB, of which
+~1.8 GB is 15 intermediate pre-write states from the 28 Jun – 3 Jul arc). These are
+GITIGNORED — no backup — so they are held pending John's call on whether v4 restarts.
+Note `berkeley_housing_v4.db` has not been modified since 2026-07-02, while CLAUDE.md
+still calls v4 "the ACTIVE" track; that line likely needs a correction either way.
+
+---
+
 ## 2026-09-02 — owner of record for 824 projects, from data we already had
 
 **John was right and I was wrong.** I looked only at `berkeley.db.parcels`, found no

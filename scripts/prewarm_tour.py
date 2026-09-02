@@ -22,6 +22,29 @@ ceiling, not something this script can fix.
 import argparse, math, re, subprocess, sys, time, pathlib
 
 
+def require_earth_ready():
+    """Refuse to touch Earth unless it is ALREADY running and answering.
+
+    NEVER POLL A STARTING EARTH. On 2026-09-01 a readiness loop called osascript every 4 s
+    while Earth was initialising; each call segfaulted it inside aeProcessAppleEvent, the call
+    relaunched it, and it crashed again -- 19 crash reports in 73 seconds. AppleScript against a
+    fully-started Earth is fine (the Durant and Shattuck warms ran clean), so the rule is simply
+    to require readiness rather than wait for it, and to stop dead rather than retry.
+    """
+    import subprocess as sp
+    if sp.run(["pgrep", "-f", "Google Earth Pro"], capture_output=True).returncode:
+        raise SystemExit("Google Earth is not running. Start it, let the globe finish drawing, "
+                         "then run this again.\n  (Do NOT let this script launch it: addressing "
+                         "Earth while it initialises crashes it.)")
+    r = sp.run(["osascript", "-e",
+                'tell application "Google Earth Pro" to GetStreamingProgress'],
+               capture_output=True, text=True)
+    if r.returncode or not r.stdout.strip().isdigit():
+        raise SystemExit(f"Earth is running but not answering yet ({r.stderr.strip()[:60]}). "
+                         "Give it a few seconds and run this again -- retrying in a loop is what "
+                         "crashed it 19 times.")
+
+
 def osa(script):
     r = subprocess.run(["osascript", "-e", script], capture_output=True, text=True)
     if r.returncode:
@@ -80,6 +103,7 @@ def main():
     path = pathlib.Path(f"kml/tours/{a.tour}.kml")
     if not path.exists():
         raise SystemExit(f"no such tour: {path}")
+    require_earth_ready()
     cams = cameras(path)
     if not cams:
         raise SystemExit(f"{path}: no <Camera> elements")

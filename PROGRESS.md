@@ -6,6 +6,42 @@
 
 ---
 
+## 2026-09-02 — owner of record for 824 projects, from data we already had
+
+**John was right and I was wrong.** I looked only at `berkeley.db.parcels`, found no
+owner column, and told him the assessor carried no owner names. It carries them in
+`data/reference/berkeley_parcel_owners_2026-08-13.csv` (28,850 APNs) and in
+`berkeley.db.addresses_arcgis` (64,887 rows with `OwnerName`). A wrong conclusion
+from looking in one place.
+
+**The write.** Joined through `housing_rules.apn.to_canonical_apn` — the CSV holds
+hyphenated assessor APNs (`59-2289-30-1`), the ArcGIS table space-separated ones
+(`016 142505700`), and neither joins to v2 raw. 813 organizations created, 824
+`project_participants` rows at role `owner_current`. **Coverage 28 → 852 of 895
+active projects (3% → 95%).** Snapshot `keep_snapshot_2026-09-02_pre-owner-join.db`;
+integrity_check ok. Assessor capitalisation preserved (source-faithful), and each
+row records that APNs are not stable identifiers, so this is current-as-of the
+2026-08-13 file rather than a historical claim.
+
+**The 43 still without an owner** are mostly UC and institutional land — 2556 Haste
+(People's Park), 1950 Oxford (Anchor House), 2131 University — plus a few whose APN
+has no row in the parcel file. Those need the re-plat check, not another source.
+
+**Still open: architect and developer.** Coverage is 44/895 and 39/895. Three
+sources, ranked by cost:
+- **Plan-set title blocks** carry `OWNER:` and `ARCHITECT:` as labelled fields —
+  proven by extracting *Studio KDA* for 2449 Dwight. 301 R2 documents cover only 71
+  projects (the rest are resubmissions), so it is 71 downloads at ~54 MB each,
+  ≈3.8 GB from our own bucket. Would fill about 41 architects.
+- **Accela** yields Owner in plain HTML with NO JavaScript — verified on a live
+  record. Its value is `Licensed Professional`, which is where an architect appears.
+  But only 2 permits carry a `source_url`, so anything wider needs capID discovery
+  first. That is a real build, not a script tweak.
+- **SFYIMBY** names both architect and developer, including firms no city record
+  holds (2190 Shattuck: SDT design, Myefski of record, Landmark Properties owner).
+  Secondary source, and projects change architects between versions — 2190 has had
+  four — so it needs recording with a date and a provenance flag, never as primary.
+
 ## 2026-09-01 — image labels shipped; three of six corridors re-recorded
 
 **The label system.** KML cannot fold text — Earth renders a `<name>` as one line

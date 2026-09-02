@@ -6,6 +6,60 @@
 
 ---
 
+## 2026-09-01 — image labels shipped; three of six corridors re-recorded
+
+**The label system.** KML cannot fold text — Earth renders a `<name>` as one line
+however long — so a label is now a rendered PNG carrying four lines: address;
+beds or units and status in the status colour; storeys, height, floor area;
+architect and date. `gen_svg_labels.py` writes the SVG directly (it is just XML)
+and rasterises with `qlmanage`, which is already on the machine and preserves
+alpha. No image library is installed. Dates print to their RECORDED PRECISION —
+a year-precision `filed_date` prints as "filed 2024", never an invented day.
+
+`svg_label_tour.py` applies it to any tour: it finds the orbits from the camera
+track (or from gen_dorm_tour's BUILDING markers, which are preferred because the
+heading heuristic merges all four dorm orbits into one), lights each label by
+proximity capped at the nearest five, and **moves the label to the camera's
+bearing at the footprint's circumradius plus 14 m on every leg**. That last part
+is the general fix: Earth DEPTH-TESTS icons against 3D geometry, so any fixed
+anchor is swallowed as the camera closes. Riding the near side needs only a
+centroid and a bounding radius, so it works for a slab, an L of two blocks, or
+the thirteen buildings of North Berkeley BART.
+
+**Re-recorded and published (unpushed):** Durant `OVluqsM-QzQ`, UC dormitories
+`y4jJtWDL8lA`, University `lAdvfKcatk0` — all 1920×1080 @ 29.97, encoder quality 3.
+**Remaining:** Bancroft, San Pablo, and Shattuck.
+
+**SHATTUCK IS BROKEN AND I DO NOT KNOW WHY.** Movie Maker hung twice at 2.0 and
+2.5 min of a 7:40 render — 39 minutes with zero bytes written at 205% CPU. Things
+RULED OUT: the label volume (University rendered clean at 718 repositions against
+Shattuck's 800); pre-warming (Shattuck was warmed before both failures, and UC
+dormitories rendered clean with no warm at all); machine memory (the rate
+recovered while swap was higher and free memory lower); sleep (`caffeinate` held
+it awake). The only Shattuck variant to get past the failure point was
+ORBITS-ONLY at 176 repositions — which also contains the new `--orbit-at` pair
+orbit, so that is not obviously the culprit either. Next test if it recurs: the
+cruise variant, which has no orbits.
+
+**The write rate is a poor health signal.** University ran 10 → 6 → 8 → 1.5 → 8
+MB/min and finished; cost per frame tracks scene complexity along the route, not
+machine health. Only a flatline of many minutes has ever predicted a real
+failure. I twice drew wrong conclusions from a slow rate — including advising a
+cancel that would have thrown away a good render.
+
+**I crashed Google Earth 19 times.** `prewarm_tour.py` addressed Earth over
+AppleScript while it was still starting, in a loop calling `osascript` every 4 s;
+each call segfaulted it inside `aeProcessAppleEvent` and the call relaunched it.
+19 crash reports in 73 seconds. The script now REQUIRES Earth to be already up
+and answering, and stops dead rather than retrying. It must never launch Earth.
+
+**Standing operational notes.** Earth's disk cache is pinned at its 2048 MB
+maximum and full, so loading a second corridor evicts the first — record one at a
+time. Never kill Earth between recordings (60 MB when idle, and the cache is on
+disk); deleting Temporary Places is the part that matters, because every package
+draws the same 196 buildings. Movie Maker settings persist only once a render
+runs; `ResolutionPreset = 0` is the Custom slot.
+
 ## 2026-08-30 — ⚠ INFRASTRUCTURE LANE: your update_legend.py edit was destroyed
 
 The old `scripts/deploy.sh` reset the working tree on its failure path, discarding the

@@ -9,6 +9,24 @@
  },
  "tours": [
   {
+   "id": "bancroft-e2w",
+   "title": "Bancroft Way — Piedmont to Aquatic Park",
+   "tour_kml": "kml/tours/bancroft-e2w.kml",
+   "source_kml_missing": false,
+   "package": "kml/tours/packages/bancroft-e2w__geom-3b3f51826e15.kml",
+   "package_geometry_sha": "3b3f51826e15",
+   "flyto_legs": 289,
+   "duration_s": 472.1,
+   "video": {
+    "youtube": "wJXZHuRk71o"
+   },
+   "recorded": "2026-09-02",
+   "recorded_geometry_era": "geom-3b3f51826e15 · swoops",
+   "has_pushpins": false,
+   "mapping_inferred": false,
+   "needs_rerecord": false
+  },
+  {
    "id": "university-880-uc",
    "title": "University Avenue — Berkeley Harbor to UC Berkeley at Oxford Street",
    "tour_kml": "kml/tours/university-880-uc.kml",
@@ -425,24 +443,6 @@
    "duration_s": 577.8,
    "video": null,
    "needs_rerecord": null
-  },
-  {
-   "id": "bancroft-e2w",
-   "title": "bancroft e2w",
-   "tour_kml": "kml/tours/bancroft-e2w.kml",
-   "source_kml_missing": false,
-   "package": "kml/tours/packages/bancroft-e2w__geom-3b3f51826e15.kml",
-   "package_geometry_sha": "3b3f51826e15",
-   "flyto_legs": 289,
-   "duration_s": 472.1,
-   "video": {
-    "youtube": "3K7ttEaZUZ4"
-   },
-   "needs_rerecord": false,
-   "recorded": "2026-08-29",
-   "recorded_geometry_era": "geom-77fe41d9244e · swoops",
-   "has_pushpins": false,
-   "mapping_inferred": false
   },
   {
    "id": "bancroft-e2w-cruise",

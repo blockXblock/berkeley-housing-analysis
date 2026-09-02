@@ -6,6 +6,43 @@
 
 ---
 
+## 2026-09-02 — applicant and architect written; ⚠ JN-L NEEDS ANOTHER BASELINE APPEND
+
+**For the JN-L lane** (your session name rotated and the socket I replied to is gone, so this is
+the durable channel you named): **v2 changed again — 40 participant rows — so JN-L's gate will
+halt and want another appended baseline.** Snapshot
+`keep_snapshot_2026-09-02_pre-applicant-architect.db`, integrity_check ok.
+
+    34 applicant rows      (role 18, was 0)
+    6  architect rows      (5 architect_design, 1 architect_record)
+    24 organizations created
+
+Role coverage now: `owner_current` 852, `architect_design` 49, `developer_of_record` 39,
+`applicant` 34, `architect_record` 1.
+
+**Your tabulation-form tip was right about the field and wrong about who is in it**, which
+matters if anything downstream reads it. 34 of 45 forms fill *Applicant's Name*, but on these
+forms the applicant is usually the **ARCHITECT filing on the owner's behalf**, not the developer
+— ISAIAH STACKHOUSE appears 9 times, Studio KDA staff 7 times; only a minority are development
+entities (Riaz Capital, Gilbane, Laconia, Core Berkeley Oxford). They are written to role
+`applicant`, NOT `developer_of_record`, and each row's note says so. **Do not read applicant as
+developer.** `developer_of_record` is unchanged at 39.
+
+Useful side effect: several applicants independently corroborate the architect. 2190 Shattuck's
+form says "Isaiah Stackhouse, SDT Architects" — a third confirmation after the plan-set title
+block (STACKHOUSE DE LA PEÑA TRACHTENBERG ARCHITECTS) and SFYIMBY's "SDT Architects". SDT is
+the initials.
+
+The 6 architects came from plan-set title blocks, written to the role each block actually states
+(`DESIGN ARCHITECT` vs `ARCHITECT OF RECORD`), with document id and plan-set date, and
+**confidence 2 rather than 1** for the two whose evidence is a name on the sheet rather than a
+labelled field (1974 Shattuck, 2352 Shattuck).
+
+**Confirmed dead end, do not re-test:** the CPRA `BP_Annual` feed carries no applicant, agent,
+contractor or professional column — the JN-L lane read both header rows directly. Lenders and
+equity have no repo source; CTCAC staff reports cover the LIHTC subset, market-rate needs
+fee-based recorder data.
+
 ## 2026-09-02 — 5.44 GB reclaimed from `scratch/`, verified against R2 first
 
 **Why.** The startup disk hit 100% (118 MB free of 228 GB) mid-session and commands

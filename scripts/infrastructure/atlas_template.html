@@ -224,6 +224,7 @@ footer{margin-top:70px; padding-top:22px; border-top:1px solid var(--rule); colo
       <div class="tb-cell"><span class="lbl">Layers swept</span><span class="v">504</span></div>
       <div class="tb-cell"><span class="lbl">Features drawn</span><span class="v" id="tb-feat">&mdash;</span></div>
       <div class="tb-cell"><span class="lbl">Verification</span><span class="v">count-matched</span></div>
+      <div class="tb-cell"><span class="lbl">Filings read</span><span class="v">2,887 pp &middot; 2026-09-02</span></div>
     </div>
   </div>
 </header>
@@ -330,6 +331,66 @@ footer{margin-top:70px; padding-top:22px; border-top:1px solid var(--rule); colo
     </div>
   </section>
 
+  <!-- ================= THE FILINGS ================= -->
+  <section>
+    <div class="eyebrow"><span class="lbl">Finding 03 &middot; from PG&amp;E's own filings</span></div>
+    <h2>67,000 overloaded transformers, replaced at about 450 a year</h2>
+    <p class="lede">The inventory is not public. But 2,887 pages of PG&amp;E's rate case and wildfire plan are, and they say more than expected &mdash; including Berkeley by name, twice.</p>
+
+    <blockquote>PG&amp;E is currently tracking over <b>67,000 overloaded service transformers</b> in the system, but because the CBR is low, PG&amp;E is limiting transformer replacements to between <b>400 and 488 transformers per year</b>.
+    <br><span class="lbl" style="font-style:normal">Exhibit (PG&amp;E-4), 2027 General Rate Case, p. 9-35</span></blockquote>
+
+    <div class="stat-row">
+      <div class="stat e"><span class="n">137&ndash;168</span><span class="k">years to clear that backlog at PG&amp;E&rsquo;s own stated replacement rate</span></div>
+      <div class="stat"><span class="n">67,000</span><span class="k">overloaded service transformers PG&amp;E says it is already tracking</span></div>
+      <div class="stat"><span class="n">~450</span><span class="k">replaced per year, because the cost-benefit ratio is low</span></div>
+      <div class="stat"><span class="n">1937</span><span class="k">install year of three 4 kV transformers at Ridge Substation, Berkeley</span></div>
+    </div>
+
+    <p>CBR is cost-benefit ratio. The arithmetic is not a gotcha &mdash; the sentence exists to justify a funding request &mdash; but it is the finding the project was looking for: the utility knows where 67,000 overloaded transformers are, and has decided that replacing about 450 a year is what the economics support. The same testimony forecasts a further <b>5,000 to 9,400 newly overloaded</b> transformers from EV charging alone between 2027 and 2030.</p>
+
+    <div class="cols" style="margin-top:8px">
+      <div>
+        <h3>Berkeley is named twice</h3>
+        <p>Berkeley is one of PG&amp;E's legacy <b>4 kV systems</b> &mdash; networks dating "from at least the 1930s," found "especially in California's oldest downtown areas, such as San Francisco, Oakland, <b>Berkeley</b>, San Jose, Stockton, Santa Cruz, and Monterey." The East Bay 4 kV group runs from Richmond to Hayward, and over <b>350,000 customers</b> system-wide are still served at 4 kV.</p>
+        <p>Then PG&amp;E published a photograph of Berkeley's oldest transformers to make its own case. Figure 9-9 of the Electric Distribution testimony is captioned <b>"Three 4 kV transformers at Ridge Substation, Berkeley, installed in 1937."</b> Two pages earlier, the filing cites the U.S. Department of the Interior for the proposition that a transformer's average expected life is <b>about 40 years</b>.</p>
+        <p><b>Eighty-nine years old, against a forty-year design life</b> &mdash; and it is the utility making the point, not us. The 4 kV conversion programme starts in 2027 at $29M, rising to about $170M a year through 2030, on a stated <b>15-to-20-year</b> timeframe to convert all of it.</p>
+      </div>
+      <div>
+        <div class="card">
+          <span class="lbl">The maintenance posture, verbatim</span>
+          <blockquote style="margin:.6rem 0 .2rem">Distribution overhead transformers are partly proactively managed and <b>generally run to condition</b>.
+          <br><span class="lbl" style="font-style:normal">2023&ndash;2025 Wildfire Mitigation Plan, p. 512</span></blockquote>
+          <p style="margin:.8rem 0 0">Run to condition means replaced on failure, or on an inspection finding. Not on a schedule. The filing names the conditions watched for: corrosion, physical damage, and <b>leaking oil</b>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card flag" style="margin-top:26px">
+      <span class="lbl">A correction this project has to absorb: the fire premise is the weak one</span>
+      <p style="margin:.6rem 0 .9rem">We expected aging transformers to be a leading wildfire risk. <b>PG&amp;E's own wildfire risk model does not support that.</b> From the Wildfire Distribution Risk Model v3 target dataset:</p>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Failure subset</th><th class="n">Outage events</th><th class="n">Ignitions</th><th class="n">Ignitions per outage</th></tr></thead>
+          <tbody>
+            <tr><td>Support structure &mdash; electrical</td><td class="n">2,096</td><td class="n">582</td><td class="n"><b>27.77%</b></td></tr>
+            <tr><td>Voltage control equipment</td><td class="n">502</td><td class="n">99</td><td class="n">19.72%</td></tr>
+            <tr><td>Primary conductor</td><td class="n">12,343</td><td class="n">974</td><td class="n">7.89%</td></tr>
+            <tr><td><b>All causes</b></td><td class="n"><b>113,884</b></td><td class="n"><b>4,197</b></td><td class="n"><b>3.69%</b></td></tr>
+            <tr><td><b style="color:var(--elec)">Transformer &mdash; equipment failure</b></td><td class="n">8,809</td><td class="n">62</td><td class="n"><b>0.70%</b></td></tr>
+            <tr><td><b style="color:var(--elec)">Transformer &mdash; leaking</b></td><td class="n">1,126</td><td class="n">0</td><td class="n"><b>0.00%</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin:.9rem 0 0">Transformers sit among the <b>lowest</b> ignition rates in the model, well under the 3.69% average, and leaking units produced <b>zero ignitions in 1,126 events</b>. Leading with wildfire would be contradicted by the utility's own filing. What survives is stronger and cleaner: <b>1,126 recorded leaks</b> is an oil-on-the-ground number that stands whether or not anything burns; <b>67,000 against 450 a year</b> is a scandal on its own arithmetic; and <b>1937 equipment</b> is simply old.</p>
+    </div>
+
+    <div class="card good" style="margin-top:22px">
+      <span class="lbl">What this unlocks</span>
+      <p style="margin:.6rem 0 0">We refused to estimate a Berkeley transformer count because any customers-per-transformer ratio would have been invented. It no longer has to be: PG&amp;E's rebuttal testimony states that the <b>average number of customers per residential transformer is 7</b>. With a Census housing-unit denominator that becomes a derivation from two cited numbers. Two cautions travel with it, and must be printed alongside any figure: the ratio is <b>residential only</b>, and it does <b>not separate overhead from underground</b> &mdash; in a city that has already buried 49% of its arterials, it would overstate the pole-mounted count.</p>
+    </div>
+  </section>
+
   <!-- ================= WHAT WE PULLED ================= -->
   <section>
     <div class="eyebrow"><span class="lbl">Holdings</span></div>
@@ -392,12 +453,13 @@ footer{margin-top:70px; padding-top:22px; border-top:1px solid var(--rule); colo
         <ul>
           <li><b>PG&amp;E data request</b> &mdash; built around the 4,428 pole IDs we already hold, so the ask is &ldquo;attach transformer attributes to these poles,&rdquo; not &ldquo;send us your pole database.&rdquo; Asks for count per pole, kVA, <b>manufacture year</b>, fluid type and PCB test status.</li>
           <li><b>CPUC Public Records Act request</b> &mdash; scoped only to records the Commission already holds: GO 165 reports, WMP data tables, the pole-and-conduit proceeding record, GRC asset exhibits.</li>
+          <li><b>Both now sharper.</b> Ask PG&amp;E for <b>the Berkeley subset of its own 67,000</b> &mdash; breaking out a published number by city is a far smaller ask than an asset register &mdash; plus the Ridge Substation record and Berkeley's place in the 4 kV conversion schedule.</li>
         </ul>
       </div>
       <div>
         <h3>Cheaper things to try first</h3>
         <ul>
-          <li>Mine the <b>2027 GRC exhibits</b> and the <b>WMP</b> PDFs directly for a transformer unit count and age curve &mdash; both are already public.</li>
+          <li><s>Mine the 2027 GRC exhibits and the WMP</s> &mdash; <b>done 2026-09-02</b>, see Finding 03. Still missing from them: a system-wide unit count, and the age curve, which is an image (Figure 9-8, p. 9-55) that needs reading by eye.</li>
           <li>Check whether <b>GRIP registration</b> is genuinely open, or restricted to interconnection applicants.</li>
           <li>Pull the remaining storm layers, and add the <b>Accela asset service</b>, which mirrors public works assets under a different schema.</li>
           <li>Spot-check a sample of wood poles against street imagery &mdash; validating the pole finding and producing the first real transformers-per-pole rate at the same time.</li>
@@ -407,7 +469,7 @@ footer{margin-top:70px; padding-top:22px; border-top:1px solid var(--rule); colo
   </section>
 
   <footer>
-    <p style="max-width:none"><b>Sources.</b> All spatial data retrieved 2026-08-30 from the City of Berkeley ArcGIS REST server (<code>gis.cityofberkeley.info/arcgis/rest/services</code>), including the PG&amp;E gas and EBMUD water layers as republished by the City. OSM comparison via Overpass. Regulatory citations: 40 CFR 761.2 and 761.30(a); CPUC D.21-10-019; CPUC General Order 165. Counts stated here were verified against each layer's own <code>returnCountOnly</code> response and against the feature count written to disk.</p>
+    <p style="max-width:none"><b>Sources.</b> All spatial data retrieved 2026-08-30 from the City of Berkeley ArcGIS REST server (<code>gis.cityofberkeley.info/arcgis/rest/services</code>), including the PG&amp;E gas and EBMUD water layers as republished by the City. OSM comparison via Overpass. Filings read 2026-09-02 (2,887 pages, extracted with pdftotext): PG&amp;E 2027 General Rate Case A.25-05-009 Exhibits (PG&amp;E-4) Electric Distribution, (PG&amp;E-18) rebuttal and (PG&amp;E-30) errata, via docs.cpuc.ca.gov; PG&amp;E 2023&ndash;2025 Wildfire Mitigation Plan rev. 4. Regulatory citations: 40 CFR 761.2 and 761.30(a); CPUC D.21-10-019; CPUC General Order 165. Counts stated here were verified against each layer's own <code>returnCountOnly</code> response and against the feature count written to disk.</p>
     <p style="max-width:none"><b>Map geometry</b> is quantised to roughly 0.9 m for drawing. This collapses sub-metre stubs &mdash; 218 of 13,396 water lines, 10 of 6,680 storm lines, and a comparable share of gas stubs &mdash; none longer than 1.5 m. Feature counts quoted in the tables are the full retrieved counts, not the drawn ones.</p>
   </footer>
 </main>

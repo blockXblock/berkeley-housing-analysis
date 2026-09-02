@@ -142,3 +142,7 @@ data/raw/infrastructure/*.geojson
 # PG&E/CPUC filing PDFs (2,887 pp, re-downloadable from docs.cpuc.ca.gov and pge.com;
 # the URLs are listed in notes/infrastructure/2026-09-02_pge_filings_transformer_findings.md)
 scratch/**/pge_filings/
+
+# Archival OCR text pulled from the Internet Archive (~130 MB, re-fetchable with
+# scripts/infrastructure/fetch_ia_journals.sh)
+scratch/**/journals/

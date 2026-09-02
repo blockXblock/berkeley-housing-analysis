@@ -26,16 +26,27 @@ GEOM = ROOT / "kml" / "geometry" / "geometry.kml"
 BLOCK = '''    <div style="margin: 20px auto; max-width: 1000px; padding: 0 1.5rem;">
   <h3>{title}</h3>
   <p>{blurb}</p>
-  <div style="border-radius: 8px; overflow: hidden; position: relative; padding-bottom: 56.25%; height: 0;">
-    <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-            src="https://www.youtube.com/embed/{vid}?autoplay=1&mute=1&loop=1&playlist={vid}&controls=1&modestbranding=1&rel=0"
+  <div class="vfacade" data-yt="{vid}">
+    <button type="button" class="vfacade-btn" aria-label="Play video: {plain}">
+      <img src="https://i.ytimg.com/vi/{vid}/maxresdefault.jpg" alt=""
+           loading="lazy" decoding="async" width="1280" height="720">
+      <span class="vfacade-play" aria-hidden="true"></span>
+    </button>
+    <noscript><iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+            src="https://www.youtube.com/embed/{vid}?rel=0&modestbranding=1"
             title="{plain}"
             frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
-    </div>
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe></noscript>
+  </div>
 </div>
 '''
+
+# A published flyover is a POSTER, not a running player. Nine autoplaying loops cost the
+# homepage 7.3 s of load and ran video far below the fold for readers who never scrolled to
+# them. The canonical embed URL stays in the markup (inside <noscript>) because this script
+# and update_legend.py both identify a video block by that literal string -- and because a
+# reader without JS should still get the video, not an inert picture.
 
 
 def main():

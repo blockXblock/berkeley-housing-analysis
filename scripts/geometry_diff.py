@@ -53,7 +53,17 @@ def rendered(t):
         if not n:
             continue
         po = re.search(r"<Polygon>.*?<coordinates>\s*(.*?)\s*</coordinates>", pm, re.S)
-        out[n.group(1).strip()] = (" ".join(po.group(1).split()) if po else None)
+        ring = " ".join(po.group(1).split()) if po else None
+        key = n.group(1).strip()
+        # A BUILDING IS TWO PLACEMARKS. Since split_label_lod.py, every building is an extruded
+        # Polygon plus a label Point that carries the SAME <name>. The label has no <Polygon>,
+        # so a plain assignment let it overwrite the polygon's ring with None -- all 197 of
+        # them. That silently disabled everything downstream: visible_change_for() skipped every
+        # changed building ("none within 250 m of this flight" for every tour, always), and
+        # `moved` compared None against None, so a building changing shape or HEIGHT was never
+        # detected at all. Keep the ring; never let a label clobber it.
+        if ring is not None or key not in out:
+            out[key] = ring
     return out
 
 

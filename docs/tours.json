@@ -9,6 +9,24 @@
  },
  "tours": [
   {
+   "id": "university-880-uc",
+   "title": "University Avenue — Berkeley Harbor to UC Berkeley at Oxford Street",
+   "tour_kml": "kml/tours/university-880-uc.kml",
+   "source_kml_missing": false,
+   "package": "kml/tours/packages/university-880-uc__geom-3b3f51826e15.kml",
+   "package_geometry_sha": "3b3f51826e15",
+   "flyto_legs": 345,
+   "duration_s": 489.0,
+   "video": {
+    "youtube": "lAdvfKcatk0"
+   },
+   "recorded": "2026-09-01",
+   "recorded_geometry_era": "geom-3b3f51826e15 · swoops",
+   "has_pushpins": false,
+   "mapping_inferred": false,
+   "needs_rerecord": false
+  },
+  {
    "id": "uc-dormitories",
    "title": "UC Berkeley Student Housing — 5,010 Beds in Four Projects",
    "tour_kml": "kml/tours/uc-dormitories.kml",
@@ -58,24 +76,6 @@
    },
    "recorded": "2026-08-30",
    "recorded_geometry_era": "geom-a4dc36f6df26 · swoops",
-   "has_pushpins": false,
-   "mapping_inferred": false,
-   "needs_rerecord": false
-  },
-  {
-   "id": "university-880-uc",
-   "title": "University Avenue — Berkeley Harbor to UC Berkeley at Oxford Street",
-   "tour_kml": "kml/tours/university-880-uc.kml",
-   "source_kml_missing": false,
-   "package": "kml/tours/packages/university-880-uc__geom-3b3f51826e15.kml",
-   "package_geometry_sha": "3b3f51826e15",
-   "flyto_legs": 345,
-   "duration_s": 489.0,
-   "video": {
-    "youtube": "nRN1zDxOzy4"
-   },
-   "recorded": "2026-08-29",
-   "recorded_geometry_era": "geom-00d2f3888a8d · swoops",
    "has_pushpins": false,
    "mapping_inferred": false,
    "needs_rerecord": false

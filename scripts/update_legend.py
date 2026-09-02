@@ -15,10 +15,14 @@ anyone remembering to add it.
   python scripts/update_legend.py --dry-run
   python scripts/update_legend.py
 """
-import argparse, collections, re
+import argparse, collections, os, re, sys
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "viz"))
+import stage_legend_svg
 
 GEOM = "kml/geometry/geometry.kml"
 PAGE = "docs/index.html"
+SVG_DIR = "docs/svg"
 MARK = "Colour shows where each project stands"
 
 
@@ -93,6 +97,8 @@ def main():
     ap.add_argument("--tail", default=None,
                     help="closing sentence appended AFTER the legend on every video. Defaults to "
                          "the site pointer; pass '' to omit.")
+    ap.add_argument("--svg-dir", default=SVG_DIR,
+                    help="where the two legend SVGs are written; pass '' to skip them.")
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
     stage, agency = census(a.geometry)
@@ -112,6 +118,25 @@ def main():
     print("\nlegend:\n ", re.sub(r"<[^>]+>", "", new).strip())
     if a.dry_run:
         return
+    if a.svg_dir:
+        # Count ONLY what the picture explains. Two Bakar Innovation Zone polygons carry an
+        # AGENCY fill with no stage (a leftover of the pre-2026-08-28 styling, when the fill
+        # carried the agency), so the map holds more polygons than the legend has meanings.
+        # Folding them into the headline would make the number quietly disagree with the chips.
+        shown = {g[0] for g in GLOSS if not g[0].endswith("Project")}
+        total = sum(v for k, v in stage.items() if k in shown)
+        skipped = sum(v for k, v in stage.items() if k not in shown)
+        if skipped:
+            print(f"  note: {skipped} polygon(s) carry an agency fill with no stage — "
+                  f"excluded from the legend total")
+        label = f"{total} buildings on the flyovers"
+        os.makedirs(a.svg_dir, exist_ok=True)
+        for fname, fn in (("stage_legend.svg", stage_legend_svg.wide),
+                          ("stage_legend_narrow.svg", stage_legend_svg.narrow)):
+            out = os.path.join(a.svg_dir, fname)
+            open(out, "w", encoding="utf-8").write(fn(GLOSS, stage, agency, label))
+            print(f"wrote {out}  ({os.path.getsize(out):,} bytes)")
+
     h = open(a.page, encoding="utf-8").read()
     n = 0
     def swap(m):

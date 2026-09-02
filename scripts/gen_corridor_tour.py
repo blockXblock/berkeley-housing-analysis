@@ -26,7 +26,10 @@ import argparse, math, os, re
 CRUISE_M = 25.0          # raised from 20 m per John 2026-08-26 -- at 20 m with tilt 88 the
                          # camera sits very low and Earth Pro can render unlit terrain
                          # underside before tiles stream in
-ORBIT_CLEARANCE_M = 10.0        # above roof
+# ABOVE THE ROOF, and enough to be clear of it. At 10 m the camera was level with or under the
+# roofline of the tall towers once the spiral had descended; 25 m keeps it looking down on the
+# mass rather than threading past it.
+ORBIT_CLEARANCE_M = 25.0        # above roof
 ORBIT_RADIUS_MULT = 1.9         # orbit radius as a multiple of the building's effective radius
 GEOM = "kml/geometry/geometry.kml"
 R = 6371000.0
@@ -356,7 +359,16 @@ def main():
                 # camera clip the extruded mass, because a long thin footprint fills far more of
                 # the frame than its circumradius suggests and the near plane cuts into it.
                 # 2.2x with a 60 m floor keeps the whole tower in shot.
-                orad = max(dmin*1.03 + 1.0, rad*2.2, 60.0)
+                # HEIGHT BELONGS IN THE RADIUS. Without a height term a tall tower on a small
+                # footprint gets the TIGHTEST orbit of the flight -- exactly backwards. On
+                # Shattuck that gave 2190 (110 m roof) a 77 m radius with the camera 14 m BELOW
+                # its roofline, and 1974 (98 m) a 92 m radius 10 m below: the only two orbits of
+                # the four that put the camera inside the skyline at close range, and the only
+                # two where Movie Maker hung -- three renders, always at those two orbits.
+                # gen_building_loop already carries a 1.3x height term for the same reason.
+                # Widening costs nothing in legibility now that the label rides near the flight
+                # line rather than the roofline (John, 2026-09-02).
+                orad = max(dmin*1.03 + 1.0, rad*2.2, roof*1.35, 60.0)
                 # ENTER WHERE THE PATH ACTUALLY MEETS THE CIRCLE, not at an arbitrary angle.
                 prev = (A[0] + (B[0]-A[0])*((s-1)/n), A[1] + (B[1]-A[1])*((s-1)/n))
                 entry = circle_entry_angle(prev, (lon, lat), (blon, blat), orad)

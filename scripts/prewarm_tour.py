@@ -21,6 +21,13 @@ ceiling, not something this script can fix.
 """
 import argparse, math, re, subprocess, sys, time, pathlib
 
+# LINE-BUFFERED. Redirected to a file, Python block-buffers stdout, so a warm running in the
+# background showed an EMPTY progress file for minutes and looked hung when it was fine.
+try:
+    sys.stdout.reconfigure(line_buffering=True)
+except AttributeError:
+    pass
+
 
 def require_earth_ready():
     """Refuse to touch Earth unless it is ALREADY running and answering.

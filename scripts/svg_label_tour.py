@@ -30,7 +30,41 @@ from xml.dom import minidom
 
 GEOM = pathlib.Path("kml/geometry/geometry.kml")
 IMGS = pathlib.Path("scratch/2026-08-31/svg-labels")
-LIFT_FRACTION = 0.86     # nudged up from 0.80: at 0.80 the box could land on Earth's own
+# AT THE ROOFLINE. The history of this number is the whole problem in miniature: roof + 34 m
+# floated free of the building and left frame during orbits; 0.80 of roof sank into the mass and
+# could land on Earth's "Image Landsat / Copernicus" strip; 0.86 still centred the box on the
+# facade, which on 2530 Bancroft put it 5.9 m below a 42 m roofline and reading as pinned to the
+# wall (John, 2026-09-02: "bring it up so we can see it"). At 1.0 the box straddles the roof
+# edge -- upper half against sky, lower half against the building -- which is where a label
+# belongs and is legible from a camera looking slightly down. It stays outside the mass because
+# it rides the circumradius, so raising it costs no occlusion.
+# TWO HEIGHTS, because the two situations are opposites (John, 2026-09-02).
+#
+# ORBITED: the camera is close and tilted slightly down, so the box wants its TOP just under the
+# roofline -- "so we see it for most of an orbit". Anchored ORBIT_DROP metres below the roof.
+#
+# PASSED BY: the building is distant and off to the side, and a label below the roofline is read
+# against the skyline behind it. Lifting it PASS_RISE metres clear of the roof puts it against
+# sky, which is what makes it catch the eye at range -- John's "how can we see it as we pass by".
+#
+# Neither can be exact: the box is drawn at a fixed SCREEN size, so its height in metres depends
+# on camera distance. These are tuned for the orbit radius, and are single numbers to change.
+# NEVER FAR ABOVE THE CAMERA. A label at the roofline of a 98 m tower sits 70 m above a cruise
+# camera flying at 25 m, so you have to look up to find it -- "for tall buildings, it is too hard
+# to see the labels" (John, 2026-09-02). The height is therefore capped near the CAMERA'S OWN
+# altitude: a short building still gets its roofline, because the cap is above it and does
+# nothing, while a tower's label drops to just above the flight line where the eye already is.
+# During an orbit the camera is at roof + 10, so the cap is above the roof and the orbit height
+# is untouched.
+ABOVE_FLIGHT = 12.0
+ORBIT_DROP = 5.0
+# AT THE ROOFLINE, NOT ABOVE IT. This was 14 m, on my reasoning that a distant label reads better
+# against sky than against the city behind it. On screen that just looked like the box floating
+# free of its building (John, 2026-09-02: "they are now floating 10m above each structure"), which
+# is the same complaint that killed the original roof + 34 m anchor. Bancroft, the take he kept,
+# sits every label exactly at the roofline -- so that is where they go.
+PASS_RISE = 0.0
+LIFT_FRACTION = 1.00     # fallback for the static placemark; the animation overrides it
                          # "Image Landsat / Copernicus" strip at the bottom of frame
 MARGIN_M = 14.0
 ICON_SCALE = 2.5
@@ -69,6 +103,16 @@ def main():
                          "Radius alone is not enough downtown, where 260 m can enclose fifteen "
                          "projects and the screen fills with boxes -- the very problem the "
                          "one-at-a-time rule was meant to solve.")
+    ap.add_argument("--orbit-focus", type=int, default=1,
+                    help="labels lit DURING an orbit. 1 = only the building being orbited. On a "
+                         "dense corridor the nearest-five set stays saturated through an orbit, so "
+                         "the subject is one box among five identical ones and does not read as "
+                         "the subject at all (John on Bancroft, 2026-09-01).")
+    ap.add_argument("--hysteresis", type=float, default=1.35,
+                    help="a lit label stays lit until the camera is this multiple of --radius "
+                         "away. Without it, a building sitting near the boundary switches on and "
+                         "off leg after leg -- Bancroft toggled 0.40 times per leg against "
+                         "University's 0.27, which is the flicker John saw as randomness.")
     ap.add_argument("--move-every", type=int, default=2,
                     help="reposition a visible label every Nth leg. 1 is smoothest; 2 halves the "
                          "file for no visible difference outside an orbit.")
@@ -178,17 +222,25 @@ def main():
             # PROXIMITY, NOT SPANS. Light a label when the camera comes inside --radius of its
             # building and drop it when it leaves, so a corridor shows what is beside it rather
             # than every project in the city at once.
-            cand = []
-            for _, _, addr, v in targets:
-                k = math.cos(math.radians(v[1]))
-                dm = math.hypot((cams[li][0] - v[0]) * k * 111320,
-                                (cams[li][1] - v[1]) * 111320)
-                if dm <= a.radius:
-                    cand.append((dm, addr))
-            cand.sort()
-            if a.max_labels:
-                cand = cand[:a.max_labels]
-            want = {addr for _, addr in cand}
+            # inside an orbit, the subject owns the screen
+            here_orbit = next((ad for ad, (lo2, hi2) in orbit_of.items() if lo2 <= li <= hi2), None)
+            if a.orbit_focus and here_orbit:
+                want = {here_orbit}
+            else:
+                cand = []
+                for _, _, addr, v in targets:
+                    k = math.cos(math.radians(v[1]))
+                    dm = math.hypot((cams[li][0] - v[0]) * k * 111320,
+                                    (cams[li][1] - v[1]) * 111320)
+                    # HYSTERESIS: a label already lit holds until well past the radius, so a
+                    # building hovering at the boundary cannot flicker on and off each leg.
+                    limit = a.radius * (a.hysteresis if addr in live else 1.0)
+                    if dm <= limit:
+                        cand.append((dm, addr))
+                cand.sort()
+                if a.max_labels:
+                    cand = cand[:a.max_labels]
+                want = {addr for _, addr in cand}
             for addr in want - live:
                 out.append(vis(slugify(addr), 1))
             for addr in live - want:
@@ -216,8 +268,12 @@ def main():
                 d = math.hypot(dx, dy) or 1e-9
                 r = (rad + MARGIN_M) / 111320.0
                 dur = re.search(r"<gx:duration>([0-9.]+)</gx:duration>", tok)
+                alt = (roof - ORBIT_DROP) if being_orbited else (roof + PASS_RISE)
+                cam_alt = re.search(r"<altitude>([-\d.]+)</altitude>", tok)
+                if cam_alt:
+                    alt = min(alt, float(cam_alt.group(1)) + ABOVE_FLIGHT)
                 out.append(move(slugify(addr), blon + dx / d * r / k, blat + dy / d * r,
-                                roof * LIFT_FRACTION, float(dur.group(1)) if dur else 0.0))
+                                max(alt, 8.0), float(dur.group(1)) if dur else 0.0))
                 moves += 1
         out.append(tok)
         for lo, hi, addr, v in targets:

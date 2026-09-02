@@ -25,8 +25,11 @@ be inventing a day the city never recorded, so a year-precision date prints as t
 import argparse, os, pathlib, re, shutil, sqlite3, subprocess, sys, tempfile
 
 DB = "databases/berkeley_housing_v2.db"
-W = 900                     # square canvas; the box is centred in it
-BOX_H = 300
+# 20% LARGER (John, 2026-09-02). Everything scales together -- canvas, box and type -- so the
+# proportions are unchanged and only the rendered pixel count grows. IconStyle scale stays put.
+SCALE = 1.20
+W = int(900 * SCALE)        # square canvas; the box is centred in it
+BOX_H = int(300 * SCALE)
 STATUS_RGB = {"Pre-Application": "9e9e9e", "In Review": "ffd400", "Entitled": "ff8000",
               "Permitted": "00e5ff", "Under Construction": "2962ff", "Completed": "00c853",
               "Stalled": "ff0000", "Withdrawn": "b0003a"}
@@ -62,38 +65,83 @@ def lines_for(r):
         l3.append(f"{int(r['height_feet'])} ft")
     if r["building_sqft"]:
         l3.append(f"{int(r['building_sqft']):,} sq ft")
-    l4 = []
+    # WHO BUILT IT (John, 2026-09-02: "add the architect name or developer or owner or all
+    # three, if it fits"). Coverage is partial -- architect 11/21, developer 11/21, owner 8/21
+    # on the over-200-unit set -- so each line carries whichever of them exist, labelled, and a
+    # project with none simply has fewer lines. Owner strings are raw assessor names and can be
+    # long, so they are trimmed rather than allowed to run off the box.
+    l4, l5 = [], []
     if r["architect"]:
-        l4.append(str(r["architect"]))
-    # a year-precision date is printed as a YEAR -- see the module docstring
+        l4.append(str(r["architect"])[:38])
     for col, word in (("co_issued_date", "completed"), ("bp_issued_date", "permitted"),
                       ("filed_date", "filed")):
         d = r[col]
         if d:
+            # a year-precision date is printed as a YEAR -- see the module docstring
             l4.append(f"{word} {d[:4]}" if d.endswith("-01-01") else f"{word} {d}")
             break
-    return l1, " · ".join(l2), " · ".join(l3), " · ".join(l4)
+    if r["developer"]:
+        l5.append(f"dev {str(r['developer'])[:30]}")
+    if r["owner_current"] and str(r["owner_current"]).strip().upper() != str(r["developer"] or "").strip().upper():
+        l5.append(f"owner {str(r['owner_current'])[:22]}")
+    return l1, " · ".join(l2), " · ".join(l3), " · ".join(l4), " · ".join(l5)
 
 
 def svg(r):
-    l1, l2, l3, l4 = lines_for(r)
+    l1, l2, l3, l4, l5 = lines_for(r)
     accent = STATUS_RGB.get(str(r["status_label"]), "ffffff")
-    top = (W - BOX_H) // 2
-    body = [f'<rect x="0" y="{top}" width="{W}" height="{BOX_H}" rx="26" '
-            f'fill="#0d1117" fill-opacity="0.82" stroke="#{accent}" stroke-opacity="0.95" stroke-width="6"/>',
-            f'<rect x="0" y="{top}" width="14" height="{BOX_H}" rx="7" fill="#{accent}"/>']
-    y = top + 78
-    body.append(f'<text x="44" y="{y}" font-family="Helvetica,Arial,sans-serif" font-size="62" '
-                f'font-weight="700" fill="#ffffff">{esc(l1)}</text>')
-    y += 66
-    body.append(f'<text x="44" y="{y}" font-family="Helvetica,Arial,sans-serif" font-size="46" '
-                f'font-weight="600" fill="#{accent}">{esc(l2)}</text>')
-    for text in (l3, l4):
+    # SIZE THE BOX TO ITS CONTENT. A fixed height either clips a project with a full team or
+    # leaves a slab of empty panel under one with none.
+    # MEASURE, THEN SIZE. A formula guessing the height left 8 px under the last baseline and
+    # clipped the descenders of the team line. Lay the lines out first, then make the box fit
+    # what is actually there.
+    S = SCALE
+    pad, x0 = int(34 * S), int(44 * S)
+    rows, y = [], pad + int(52 * S)
+    rows.append((y, int(62 * S), 700, "#ffffff", l1))
+    y += int(60 * S); rows.append((y, int(46 * S), 600, f"#{accent}", l2))
+    for text in (l3, l4, l5):
         if not text:
             continue
-        y += 56
-        body.append(f'<text x="44" y="{y}" font-family="Helvetica,Arial,sans-serif" '
-                    f'font-size="40" fill="#c2ccd8">{esc(text)}</text>')
+        y += int(52 * S); rows.append((y, int(38 * S), 400, "#c2ccd8", text))
+    box_h = y + pad
+    globals()["BOX_H"] = box_h
+    top = (W - box_h) // 2
+    body = [f'<rect x="0" y="{top}" width="{W}" height="{box_h}" rx="{int(26*SCALE)}" '
+            f'fill="#0d1117" fill-opacity="0.86" stroke="#{accent}" stroke-opacity="0.95" '
+            f'stroke-width="{int(6*SCALE)}"/>',
+            f'<rect x="0" y="{top}" width="{int(14*SCALE)}" height="{box_h}" '
+            f'rx="{int(7*SCALE)}" fill="#{accent}"/>']
+    def line(x, y, size, weight, fill, text, outline=True):
+        """Text with a thin dark stroke UNDER the fill.
+
+        John, 2026-09-02: "try making the font sharper, more legible, perhaps by adding a thin
+        outline to each character". Painting a stroked copy first and the solid fill over it
+        keeps the letterforms their true weight -- stroking the visible glyph instead would fatten
+        it and blur small type. The stroke gives every character its own edge, so the address
+        stays readable where the box crosses a bright roof or pale sky rather than the dark
+        panel it was designed against.
+        """
+        f = (f'font-family="Helvetica,Arial,sans-serif" font-size="{size}" '
+             f'font-weight="{weight}"')
+        out = []
+        if outline:
+            out.append(f'<text x="{x}" y="{y}" {f} fill="none" stroke="#05080d" '
+                       f'stroke-width="{max(size*0.09,2.5):.1f}" stroke-opacity="0.85" '
+                       f'stroke-linejoin="round">{esc(text)}</text>')
+        out.append(f'<text x="{x}" y="{y}" {f} fill="{fill}">{esc(text)}</text>')
+        return out
+
+    for ry, size, weight, fill, text in rows:
+        # Helvetica averages a bit over half its point size per character; trim to what the box
+        # can actually hold so a long owner string cannot run off the right edge.
+        # 0.46 measured off a rendered label: "Trachtenberg Architects · filed 2023-12-20" is
+        # 42 characters and occupies 837 px at 46 px type. The first guess of 0.52 ellipsised
+        # lines with room to spare.
+        fits = int((W - x0 * 2) / (size * 0.46))
+        if len(text) > fits:
+            text = text[:max(fits - 1, 4)].rstrip(" ·") + "\u2026"
+        body += line(x0, top + ry, size, weight, fill, text)
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{W}" '
             f'viewBox="0 0 {W} {W}">' + "".join(body) + "</svg>")
 

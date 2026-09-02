@@ -9,6 +9,24 @@
  },
  "tours": [
   {
+   "id": "uc-dormitories",
+   "title": "UC Berkeley Student Housing — 5,010 Beds in Four Projects",
+   "tour_kml": "kml/tours/uc-dormitories.kml",
+   "source_kml_missing": false,
+   "package": "kml/tours/packages/uc-dormitories__geom-3b3f51826e15.kml",
+   "package_geometry_sha": "3b3f51826e15",
+   "flyto_legs": 246,
+   "duration_s": 327.0,
+   "video": {
+    "youtube": "y4jJtWDL8lA"
+   },
+   "recorded": "2026-09-01",
+   "recorded_geometry_era": "geom-3b3f51826e15",
+   "has_pushpins": false,
+   "mapping_inferred": false,
+   "needs_rerecord": false
+  },
+  {
    "id": "durant-w2e",
    "title": "Durant Avenue — Milvia to Piedmont",
    "tour_kml": "kml/tours/durant-w2e.kml",
@@ -22,24 +40,6 @@
    },
    "recorded": "2026-09-01",
    "recorded_geometry_era": "geom-3b3f51826e15 · swoops",
-   "has_pushpins": false,
-   "mapping_inferred": false,
-   "needs_rerecord": false
-  },
-  {
-   "id": "uc-dormitories",
-   "title": "UC Berkeley Student Housing — 5,010 Beds in Four Projects",
-   "tour_kml": "kml/tours/uc-dormitories.kml",
-   "source_kml_missing": false,
-   "package": "kml/tours/packages/uc-dormitories__geom-3b3f51826e15.kml",
-   "package_geometry_sha": "3b3f51826e15",
-   "flyto_legs": 246,
-   "duration_s": 327.0,
-   "video": {
-    "youtube": "3o-nkCZn7-E"
-   },
-   "recorded": "2026-08-30",
-   "recorded_geometry_era": "geom-a4dc36f6df26",
    "has_pushpins": false,
    "mapping_inferred": false,
    "needs_rerecord": false

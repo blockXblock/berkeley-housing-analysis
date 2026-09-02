@@ -80,15 +80,19 @@ def lines_for(r):
             # a year-precision date is printed as a YEAR -- see the module docstring
             l4.append(f"{word} {d[:4]}" if d.endswith("-01-01") else f"{word} {d}")
             break
+    # A LINE EACH. Sharing one line, "dev NX Ventures · owner 1974 SHATTUCK AVENUE LLC" ran to
+    # the ellipsis and the owner -- the part only we have -- was the half that got cut. The box
+    # grows by one line instead, which costs nothing since it is sized to its content.
+    l6 = []
     if r["developer"]:
-        l5.append(f"dev {str(r['developer'])[:30]}")
+        l5.append(f"dev {str(r['developer'])[:34]}")
     if r["owner_current"] and str(r["owner_current"]).strip().upper() != str(r["developer"] or "").strip().upper():
-        l5.append(f"owner {str(r['owner_current'])[:22]}")
-    return l1, " · ".join(l2), " · ".join(l3), " · ".join(l4), " · ".join(l5)
+        l6.append(f"owner {str(r['owner_current'])[:40]}")
+    return l1, " · ".join(l2), " · ".join(l3), " · ".join(l4), " · ".join(l5), " · ".join(l6)
 
 
 def svg(r):
-    l1, l2, l3, l4, l5 = lines_for(r)
+    l1, l2, l3, l4, l5, l6 = lines_for(r)
     accent = STATUS_RGB.get(str(r["status_label"]), "ffffff")
     # SIZE THE BOX TO ITS CONTENT. A fixed height either clips a project with a full team or
     # leaves a slab of empty panel under one with none.
@@ -100,7 +104,7 @@ def svg(r):
     rows, y = [], pad + int(52 * S)
     rows.append((y, int(62 * S), 700, "#ffffff", l1))
     y += int(60 * S); rows.append((y, int(46 * S), 600, f"#{accent}", l2))
-    for text in (l3, l4, l5):
+    for text in (l3, l4, l5, l6):
         if not text:
             continue
         y += int(52 * S); rows.append((y, int(38 * S), 400, "#c2ccd8", text))
@@ -135,12 +139,19 @@ def svg(r):
     for ry, size, weight, fill, text in rows:
         # Helvetica averages a bit over half its point size per character; trim to what the box
         # can actually hold so a long owner string cannot run off the right edge.
-        # 0.46 measured off a rendered label: "Trachtenberg Architects · filed 2023-12-20" is
-        # 42 characters and occupies 837 px at 46 px type. The first guess of 0.52 ellipsised
-        # lines with room to spare.
-        fits = int((W - x0 * 2) / (size * 0.46))
-        if len(text) > fits:
-            text = text[:max(fits - 1, 4)].rstrip(" ·") + "\u2026"
+        # WIDTH PER CHARACTER, NOT PER STRING. A flat 0.46 em is right for mixed-case text and
+        # badly wrong for the assessor's owner names, which are ALL CAPITALS and about a third
+        # wider -- "owner 1974 SHATTUCK AVENUE LLC" measured under the limit and still ran off
+        # the box. Capitals and digits are counted at 0.60 em, lowercase at 0.46, spaces and
+        # punctuation at 0.30.
+        def width(t):
+            return sum(0.60 if c.isupper() or c.isdigit() else
+                       0.30 if c in " ·.,-" else 0.46 for c in t) * size
+        avail = W - x0 * 2
+        if width(text) > avail:
+            while len(text) > 4 and width(text + "\u2026") > avail:
+                text = text[:-1]
+            text = text.rstrip(" ·") + "\u2026"
         body += line(x0, top + ry, size, weight, fill, text)
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{W}" '
             f'viewBox="0 0 {W} {W}">' + "".join(body) + "</svg>")

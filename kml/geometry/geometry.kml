@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <Document>
-	<name>Berkeley Housing Geometry · 2026-09-02 · 392 buildings · geom-3b3f51826e15</name>
+	<name>Berkeley Housing Geometry · 2026-09-02 · 394 buildings · geom-a3d103322890</name>
 	<visibility>0</visibility>
 	<open>1</open>
 	<description>177 housing projects. Heights shown as stories × 3.5m. Generated 2026-05-03.</description>
@@ -7367,6 +7367,31 @@ North · 1625 beds · Under Construction</name>
 			<styleUrl>#style_status_Completed</styleUrl>
 			<Region><LatLonAltBox><north>37.8680039401845</north><south>37.867523231901</south><east>-122.25696131454112</east><west>-122.25741648403016</west></LatLonAltBox><Lod><minLodPixels>128</minLodPixels><maxLodPixels>-1</maxLodPixels><minFadeExtent>64</minFadeExtent></Lod></Region>
 			<Point><coordinates>-122.25716464976044,37.86772938324897,31.0</coordinates><altitudeMode>relativeToGround</altitudeMode></Point>
+		</Placemark>
+		<Placemark>
+			<name>2526 Durant Ave
+44 units · Completed</name>
+			<visibility>0</visibility>
+			<description><![CDATA[<b>2526 DURANT Ave</b><br/><b>Units:</b> 44<br/><b>Stories:</b> 5<br/><b>Height:</b> 17.5m<br/><b>Status:</b> Completed<br/><i>Footprint is county assessor parcel 55-1876-17 — no architect tabulation has been harvested for this project. (height estimated from units)</i>]]></description>
+			<styleUrl>#style_status_Completed_nolabel</styleUrl>
+			<Polygon>
+				<extrude>1</extrude>
+				<altitudeMode>relativeToGround</altitudeMode>
+				<outerBoundaryIs>
+					<LinearRing>
+						<coordinates>
+							-122.257847298942,37.8678565365262,17.5 -122.257590732012,37.8678890271993,17.5 -122.257519690544,37.8675364775263,17.5 -122.257776256576,37.8675039874069,17.5 -122.257847298942,37.8678565365262,17.5 
+						</coordinates>
+					</LinearRing>
+				</outerBoundaryIs>
+			</Polygon>
+		</Placemark>
+		<Placemark>
+			<name>2526 Durant Ave
+44 units · Completed</name>
+			<styleUrl>#style_status_Completed</styleUrl>
+			<Region><LatLonAltBox><north>37.8678890271993</north><south>37.86750398740689</south><east>-122.25745591007063</east><west>-122.25791107941535</west></LatLonAltBox><Lod><minLodPixels>128</minLodPixels><maxLodPixels>-1</maxLodPixels><minFadeExtent>64</minFadeExtent></Lod></Region>
+			<Point><coordinates>-122.25768349474299,37.867696507303094,20.5</coordinates><altitudeMode>relativeToGround</altitudeMode></Point>
 		</Placemark>
 		<Placemark>
 			<name>2000 University Ave

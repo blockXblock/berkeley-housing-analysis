@@ -3,8 +3,8 @@
 <Document>
 	<name>Durant street labels · scale 2.5 · 20 m</name>
 	<open>1</open>
-	<Style id="cross"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>2.5</scale><color>ffffffff</color></LabelStyle></Style>
-	<Style id="own"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>3.125</scale><color>ffffffff</color></LabelStyle></Style>
+	<Style id="cross"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>1.5</scale><color>ff50c4ff</color></LabelStyle></Style>
+	<Style id="own"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>1.875</scale><color>ff50c4ff</color></LabelStyle></Style>
 	<Placemark><name>Durant</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.270061172471,37.86638853933225,20.0</coordinates></Point></Placemark>
 	<Placemark><name>Durant</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2568374921786,37.86809550034905,20.0</coordinates></Point></Placemark>
 	<Placemark><name>Durant</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2523699325399,37.86866404388398,20.0</coordinates></Point></Placemark>

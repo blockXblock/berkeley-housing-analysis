@@ -3,8 +3,8 @@
 <Document>
 	<name>University street labels · scale 2.5 · 20 m</name>
 	<open>1</open>
-	<Style id="cross"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>2.5</scale><color>ffffffff</color></LabelStyle></Style>
-	<Style id="own"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>3.125</scale><color>ffffffff</color></LabelStyle></Style>
+	<Style id="cross"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>1.5</scale><color>ff50c4ff</color></LabelStyle></Style>
+	<Style id="own"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>1.875</scale><color>ff50c4ff</color></LabelStyle></Style>
 	<Placemark><name>University</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.3149,37.86679098260025,20.0</coordinates></Point></Placemark>
 	<Placemark><name>University</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.3095,37.86695892260026,20.0</coordinates></Point></Placemark>
 	<Placemark><name>University</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.304,37.86712997260027,20.0</coordinates></Point></Placemark>

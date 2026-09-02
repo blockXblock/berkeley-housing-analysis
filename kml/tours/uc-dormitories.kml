@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
 <Document>
-	<name>UC Berkeley Student Housing · 4 projects · spirals · 08-30 13:16</name>
+	<name>UC Berkeley Student Housing · 4 projects · spirals · 08-31 16:32</name>
 	<description><![CDATA[Every UC housing project flagged uc_project in v2, flown north to south. Opens east of the Campanile, then at each site ONE DESCENDING ORBIT: 48 s for 1.0 turn, dropping 20 m to roof + 10 m with the camera tilted 66-76 degrees throughout -- no look-down. It then climbs 25 m before crossing to the next. UC housing is counted in BEDS, not units. Altitudes derive from each building's extrusion in geometry.kml, so a corrected height re-cuts the shot. Camera-only: run build_tour_package.py to splice the geometry.]]></description>
 	<gx:Tour>
-		<name>UC Berkeley Student Housing · 4 projects · spirals · 08-30 13:16</name>
+		<name>UC Berkeley Student Housing · 4 projects · spirals · 08-31 16:32</name>
 		<gx:Playlist>
 			<gx:FlyTo>
 				<gx:duration>10.00</gx:duration>
@@ -19,6 +19,7 @@
 					<altitudeMode>relativeToGround</altitudeMode>
 				</Camera>
 			</gx:FlyTo>
+			<!--BUILDING-IN 1950-oxford-st-->
 			<gx:FlyTo>
 				<gx:duration>26.00</gx:duration>
 				<gx:flyToMode>smooth</gx:flyToMode>
@@ -799,6 +800,8 @@
 					<altitudeMode>relativeToGround</altitudeMode>
 				</Camera>
 			</gx:FlyTo>
+			<!--BUILDING-OUT 1950-oxford-st-->
+			<!--BUILDING-IN 2200-bancroft-way-->
 			<gx:FlyTo>
 				<gx:duration>16.00</gx:duration>
 				<gx:flyToMode>smooth</gx:flyToMode>
@@ -1579,6 +1582,8 @@
 					<altitudeMode>relativeToGround</altitudeMode>
 				</Camera>
 			</gx:FlyTo>
+			<!--BUILDING-OUT 2200-bancroft-way-->
+			<!--BUILDING-IN 2556-haste-st-->
 			<gx:FlyTo>
 				<gx:duration>16.00</gx:duration>
 				<gx:flyToMode>smooth</gx:flyToMode>
@@ -2359,6 +2364,8 @@
 					<altitudeMode>relativeToGround</altitudeMode>
 				</Camera>
 			</gx:FlyTo>
+			<!--BUILDING-OUT 2556-haste-st-->
+			<!--BUILDING-IN 2400-bowditch-st-->
 			<gx:FlyTo>
 				<gx:duration>16.00</gx:duration>
 				<gx:flyToMode>smooth</gx:flyToMode>
@@ -3204,6 +3211,7 @@
 					<altitudeMode>relativeToGround</altitudeMode>
 				</Camera>
 			</gx:FlyTo>
+			<!--BUILDING-OUT 2400-bowditch-st-->
 		</gx:Playlist>
 	</gx:Tour>
 </Document>

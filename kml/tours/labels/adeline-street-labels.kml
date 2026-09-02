@@ -3,8 +3,8 @@
 <Document>
 	<name>Adeline street labels · scale 2.5 · 20 m</name>
 	<open>1</open>
-	<Style id="cross"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>2.5</scale><color>ffffffff</color></LabelStyle></Style>
-	<Style id="own"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>3.125</scale><color>ffffffff</color></LabelStyle></Style>
+	<Style id="cross"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>1.5</scale><color>ff50c4ff</color></LabelStyle></Style>
+	<Style id="own"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>1.875</scale><color>ff50c4ff</color></LabelStyle></Style>
 	<Placemark><name>Adeline</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2679770326285,37.8588249999999,20.0</coordinates></Point></Placemark>
 	<Placemark><name>Adeline</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.268516115262,37.8528749999999,20.0</coordinates></Point></Placemark>
 	<Placemark><name>Adeline</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2690551978955,37.8486749999999,20.0</coordinates></Point></Placemark>

@@ -3,8 +3,8 @@
 <Document>
 	<name>College street labels · scale 2.5 · 20 m</name>
 	<open>1</open>
-	<Style id="cross"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>2.5</scale><color>ffffffff</color></LabelStyle></Style>
-	<Style id="own"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>3.125</scale><color>ffffffff</color></LabelStyle></Style>
+	<Style id="cross"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>1.5</scale><color>ff50c4ff</color></LabelStyle></Style>
+	<Style id="own"><IconStyle><scale>0.4</scale><Icon><href>transparent-1x1.png</href></Icon><hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle><LabelStyle><scale>1.875</scale><color>ff50c4ff</color></LabelStyle></Style>
 	<Placemark><name>College</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2524745979443,37.85101889848271,20.0</coordinates></Point></Placemark>
 	<Placemark><name>College</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2529300364686,37.85568747186598,20.0</coordinates></Point></Placemark>
 	<Placemark><name>College</name><styleUrl>#own</styleUrl><Point><altitudeMode>relativeToGround</altitudeMode><coordinates>-122.2539117795758,37.86559287614087,20.0</coordinates></Point></Placemark>

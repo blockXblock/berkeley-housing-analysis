@@ -26,7 +26,7 @@ V2 = os.path.join(ROOT, 'databases', 'berkeley_housing_v2.db')
 ASSESSOR = os.path.join(ROOT, 'databases', 'berkeley.db')
 NB_OUT = os.path.join(ROOT, 'notebooks', 'v4', 'JN-L_fiscal_flows.ipynb')
 BASELINE_GLOB = os.path.join(ROOT, 'data', 'baselines', 'fiscal_flows_baseline_*.json')
-BASELINE_DATE = '2026-08-10'
+BASELINE_DATE = '2026-09-02'
 
 ADU_BLOCK = (185, 899)  # CO-only import cohort id block (CLAUDE.md structural fact)
 
@@ -220,7 +220,7 @@ def write_baseline(derived, v2s, ass):
     base = {
         'as_of': BASELINE_DATE,
         'v2_sha': v2s, 'assessor_sha': ass,
-        'assessor_note': 'berkeley.db = Feb-2026 Alameda Open Data pull (2026-06-16 refresh)',
+        'assessor_note': 'berkeley.db = 2026-08-21 Alameda Open Data refresh (2026-27 roll, post-Lindheim); appended after the 2026-08-10 baseline: tracked_imps_m 335.9->439.8 and benchmark 432->441 as the new roll enrolled ~\$104M more completed construction (reassessment lag closing); v2 drift = Aug plan-set/tabulation ingests + owner join.',
         'hard_gated': {k: {'value': derived[k], 'what_would_change_it': w} for k, w in HARD_KEYS.items()},
         'rounded_gated': {k: {'value': derived[k], 'what_would_change_it': w} for k, w in ROUNDED_KEYS.items()},
         'derived_context': {'tracked_units': derived['tracked_units'],
@@ -314,6 +314,20 @@ def file_sha(path):
     with open(path, 'rb') as f:
         for b in iter(lambda: f.read(1 << 20), b''): h.update(b)
     return h.hexdigest()[:16]
+
+_missing = [q for q in (V2, ASSESSOR) if not os.path.exists(q)]
+if _missing:
+    print("=" * 74)
+    print("JN-L is an INVESTIGATION notebook: it derives everything live from the")
+    print("project's local databases, which are not distributed publicly:")
+    for q in _missing: print("   missing:", q)
+    print()
+    print("On Colab/GitHub this notebook is READ-ONLY — reopen the link (without")
+    print("running) to see the saved charts and prose.")
+    print("For a notebook that RUNS anywhere, start with curriculum module FIN1:")
+    print("https://colab.research.google.com/drive/1tc0oJSf4b5Iv2rNkLz3nAIk947W7LUvA")
+    print("=" * 74)
+    raise SystemExit("JN-L: local databases required — stopping cleanly (not an error).")
 
 BASE = json.load(open(sorted(glob.glob(os.path.join(ROOT, 'data', 'baselines', 'fiscal_flows_baseline_*.json')))[-1]))
 print('baseline as_of:', BASE['as_of'])

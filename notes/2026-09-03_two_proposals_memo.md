@@ -1,16 +1,14 @@
-# Two September Proposals, One Election: an Independent Assessment
+# Two September Proposals, One Election — Draft Analysis
 
-**Vision 2050 working group · September 3, 2026**
-*Prepared for the Mayor's office. The working group operates as independent
-advisors — affiliated with no campaign — evaluating Measure U and its
-implementation on the evidence. Attachment: our amended draft of the
-September 29 referral.*
+**DRAFT for discussion · September 3, 2026 · not reviewed or approved by
+the Vision 2050 working group**
+*An amended draft of the September 29 referral accompanies this note.*
 
 ---
 
 ## Two proposals, each the missing half of the other
 
-**The Mayor's referral commissions plans without discipline; our draft
+**The Mayor's referral commissions plans without discipline; the draft
 resolution imposes discipline without commissioning plans.** Only the
 referral is likely to pass as written — in a form that history says will
 then stall.
@@ -27,54 +25,62 @@ But a referral is Council's weakest instrument: no return date, no
 milestones, no resources, no connection to Measure U proceeds, no audit
 role, a dashboard that "should… could." It cites a **$1.5B** backlog where
 the City's own March 17 presentation said **$1.87B** — every internal
-inconsistency becomes an opposition slide. And its own footnote concedes
-the hard fact: Council already *adopted* an asset management plan and
-policy in May 2022. Asking the City Manager to develop what Council adopted
-four years ago is an implicit admission that adoption changed nothing —
-with no account of why this round differs.
+inconsistency becomes an opposition slide.
 
-**Our draft resolution** is the mirror image: operative language attached
+**And the referral's own precedent is the strongest argument against it.**
+On May 10, 2022, the City Council adopted the Vision 2050 Strategic Asset
+Management Plan and Asset Management Policy — an instruction to the City
+Manager of exactly this kind, cited in this referral's own footnotes. Four
+years later there is no program plan, no lifecycle costing in practice,
+and the largest aquatics project on the bond list was re-scoped by 80%
+under that adopted policy with no asset-management rationale ever
+published. The last instruction like this one was simply ignored, without
+consequence to anyone. Any honest assessment of the new referral must
+start from that base rate: **adopted, then ignored, is the default outcome
+— and nothing in the current draft changes the incentives that produced
+it.** That is precisely why the amendments below add a deadline and attach
+the requirements to the money: an instruction with no clock and no funds
+at stake has already been tested in Berkeley, and it failed.
+
+**The draft resolution** is the mirror image: operative language attached
 to actual money — ranked list before issuance, lifecycle analysis per
 project, debt term matched to asset life, maintenance funded before
 construction, Auditor audits per series, a required quarterly public
 dashboard. Its honest weaknesses: it has no Council sponsor; a resolution
 cannot truly bind a future Council (the force is political and
 reputational); it costs real staff effort; and it never commissions the
-citywide Program Plan that Vision 2050 also demands.
+citywide Program Plan.
 
-**The realistic path is a merger** — and we have drafted it (attached):
-the Mayor's item, her framing and authorship intact, amended in five
-places: a 120-day / pre-issuance **deadline**; one binding line — **no
-Measure U proceeds spent on a project until the Program Plan's
-prioritization has been applied to it**; the **City Auditor audits each
-bond series**; the dashboard becomes **required**, quarterly, with budget,
-schedule, change orders, and a **published change log**; and the backlog
-figure corrected to the staff's own $1.87B.
+**The realistic path is a merger** — the accompanying amended draft: the
+Mayor's item, her framing and authorship intact, amended in five places: a
+120-day / pre-issuance **deadline**; one binding line — **no Measure U
+proceeds spent on a project until the Program Plan's prioritization has
+been applied to it**; the **City Auditor audits each bond series**; the
+dashboard becomes **required**, quarterly, with budget, schedule, change
+orders, and a **published change log**; and the backlog figure corrected
+to the staff's own $1.87B.
 
 ## What else the campaign can do about the opposition's strongest argument
 
 The serious opposition case (made most capably by Jim McGrath at
 Wellstone) has three load-bearing beams: *nothing is binding; the list
 already changed silently; there is no maintenance plan.* Each has a
-countermove that costs the campaign little:
+countermove that costs little:
 
-1. **Pass the amended referral.** The single strongest move — it converts
-   "nothing is binding" from true to answered, before the election, on the
-   record.
+1. **Pass the amended referral.** It converts "nothing is binding" from
+   true to answered, before the election, on the record.
 2. **Own the King Pool story instead of leaving it to be discovered.** The
    re-scope from a $25M replacement (February outreach list) to a $5M
-   repair (filed list) has a *defensible* rationale sitting in the Parks
+   repair (filed list) has a *defensible* rationale in the Parks
    Commission's own April report: the City does not own the land, the
    lease is a year short of the City Attorney's bar for bond-funded
-   construction, and the category had a $100M cap. Told publicly — "we cut
-   it because spending $25M on land we don't control would have been
-   irresponsible; here is the change log" — the silent-change attack
-   becomes evidence of responsive management. The failure was never the
-   re-scope; it was the silence. A published version history of the
-   project list ends that entire line of attack.
+   construction, and the category had a $100M cap. Told publicly, the
+   silent-change attack becomes evidence of responsive management. The
+   failure was never the re-scope; it was the silence. A published version
+   history of the project list ends that entire line of attack.
 3. **Use one backlog number.** $1.87B, cited to the March 17 presentation.
 4. **Answer maintenance with a number.** Publish an O&M estimate for the
-   built projects and name the funding source. Our derived estimate is
+   built projects and name the funding source. A derived estimate is
    $1.6–3.3M/yr — small enough to commit to, large enough that silence
    looks evasive.
 5. **Operationalize the Auditor.** The City Auditor signed the campaign's
@@ -88,12 +94,27 @@ countermove that costs the campaign little:
    and defuses the opposition's most potent South Berkeley material —
    Willard.
 
-One further observation, offered as friends of the measure: campaign
-materials that answer the critics with *absolutes* — "any suggestion
-otherwise is false" — spend credibility the campaign will need in October.
-The persuadable voter is not looking for certainty; they are looking for
-evidence that someone is minding the store. Process commitments provide
-it; assertions do not.
+8. **Consult the Vision 2050 community — the omission that caused most of
+   this.** The City built the project list, ran its outreach, revised the
+   list, and drafted this referral without ever engaging the community
+   that spent years of volunteer work producing Vision 2050 — the people
+   with the deepest command of the asset-management framework the City
+   says it is implementing. The result was avoidable on every front: the
+   list's divergences from the plan went unexplained and became the
+   opposition's central argument; the re-scopes surprised the plan's own
+   authors; and both campaigns now fight over Vision 2050's mantle in the
+   ballot arguments because the City never established, with the plan's
+   community, what implementation actually meant. That was an unforced
+   error, and it is still correctable: a standing consultation — even an
+   informal one — between staff and the Vision 2050 community, before the
+   September meeting and through bond implementation, costs nothing and
+   closes the credibility gap no mailer can.
+
+One further observation: campaign materials that answer the critics with
+*absolutes* — "any suggestion otherwise is false" — spend credibility the
+campaign will need in October. The persuadable voter is not looking for
+certainty; they are looking for evidence that someone is minding the
+store. Process commitments provide it; assertions do not.
 
 ## The honest political frame: words versus flexibility
 
@@ -160,25 +181,26 @@ maybe-projects" does not need to convert anyone; it needs to move one in
 ten of the people who supported Measure L, in an electorate where 18,130
 No votes already exist and roughly 15,500 suffice.
 
-**Assessment: not lost, but structurally closer to losing than 72%
-suggests — and the losing scenario requires no new opposition, only the
-activation of the one that already voted.** Measure L failed without a
-dollar spent against it; U starts 13 points higher because it was built to
-fix L's defects, and Berkeley's bond history outside L is lopsidedly yes.
-The decisive variable is whether the persuadable middle — including the
-new-assessed-value households above — sees something real adopted in
-September, or another recital. The persuadable third of Berkeley is not
-against infrastructure; it is against signing blank checks at $500 a year
-while a neighbor signs the same check for $60.
+## Outlook
 
-## What we are asking
+A September action with real teeth would help — that is the hopeful part.
+The persuadable third of Berkeley is not against infrastructure; it is
+against signing blank checks, and a deadline-bound referral with audit,
+dashboard, and prioritization requirements is the kind of visible,
+verifiable step that could hold several points of the margin U needs.
 
-Adopt the referral **as amended** (attached). Every element of the
-amendment is something the campaign has already publicly claimed to
-support; the amendment makes the claims operative, gives the Yes campaign
-its strongest October answer, and gives voters the thing the polling says
-they need. Our group's Evaluation of Measure U will be published before the
-election; whether the September meeting produces commitments or
-aspirations will be reflected in it — that is what independent evaluation
-means, and it is the most useful thing we can offer both the City and the
-voters.
+But the hope should be sized honestly. These are process reforms; they
+discipline how $300M of capital is spent and do not touch the City's $31M
+structural operating deficit, which will still be there — and growing — the
+morning after the election, whatever passes. Their financial impact is
+slight relative to the problem the voters are being asked to help solve.
+And Measure U does not arrive alone: the same ballot asks Berkeley
+businesses and property owners for a half-cent sales tax, two new parcel
+taxes, and a doubled soda tax, so the cumulative-burden argument writes
+itself and lands on precisely the constituencies with the means to fund
+the opposition the November math describes. The 2022 precedent — adopted,
+then ignored — remains the reason a skeptical voter is entitled to
+discount any September promise. A referral with a clock, money at stake,
+and a public change log is the strongest available answer to that
+skepticism. It is an improvement in the odds, not a guarantee of the
+outcome.

@@ -180,19 +180,36 @@ def main():
             elif tok.startswith("<gx:FlyTo>"):
                 legs_seen += 1
         print(f"  using {len(spans)} BUILDING marker span(s) from the tour")
+        # THE MARKER NAMES THE BUILDING -- USE IT. Matching a span to the nearest site by camera
+        # centroid is right for a FULL orbit, where the mean camera position is the building's
+        # centre. gen_hop_tour flies a QUARTER turn, whose mean sits about a radius off to one
+        # side and lands on a neighbour: the private-200 tour lit 2036 Bancroft, 2037 Durant and
+        # 130 Berkeley Sq, none of which is among its fifteen subjects. The label then rode a
+        # building the camera was not looking at, which is why John saw labels appear and vanish.
+        span_slug = {}
+        for (lo, hi), (_, nm) in zip(spans, [m for m in marks if m[0] == "IN"]):
+            span_slug[(lo, hi)] = nm
     else:
         spans = orbits(tour)
+        span_slug = {}
     orbit_of = {}
     print(f"  {len(legs)} legs, {len(spans)} orbit(s) detected")
 
     # which site is each orbit about?
     targets = []
     for lo, hi in spans:
+        want = span_slug.get((lo, hi))
+        if want:
+            hit = [(k, v) for k, v in SITES.items() if slugify(k) == want]
+            if hit:
+                targets.append((lo, hi, hit[0][0], hit[0][1]))
+                print(f"    legs {lo:>3}-{hi:<3} -> {hit[0][1][4].splitlines()[0][:46]}  (from marker)")
+                continue
         seg = cams[lo:hi + 1]
         clon = sum(p[0] for p in seg) / len(seg); clat = sum(p[1] for p in seg) / len(seg)
         addr, v = min(SITES.items(), key=lambda kv: (kv[1][0] - clon) ** 2 + (kv[1][1] - clat) ** 2)
         targets.append((lo, hi, addr, v))
-        print(f"    legs {lo:>3}-{hi:<3} -> {v[4].splitlines()[0][:46]}")
+        print(f"    legs {lo:>3}-{hi:<3} -> {v[4].splitlines()[0][:46]}  (nearest)")
 
     # --- ALL MODE: every site the flight actually passes, lit by proximity ---
     if a.all:

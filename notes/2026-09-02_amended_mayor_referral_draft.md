@@ -1,4 +1,4 @@
-# DRAFT — Amended version of the Mayor's referral (Vision 2050 working group edit)
+# DRAFT — Amended version of the September 29 referral (for discussion)
 
 **ACTION CALENDAR**
 September 29, 2026

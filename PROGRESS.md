@@ -6,6 +6,24 @@
 
 ---
 
+## 2026-09-02 — architect rows version-scoped (and what that does not fix)
+
+The 6 plan-set architect rows now carry `project_version_id`, so a later revision can record a
+different architect without either row becoming ambiguous. Snapshot
+`keep_snapshot_2026-09-02_pre-version-scope.db`; integrity_check ok. The 34 `applicant` rows are
+deliberately left unscoped for now — same treatment is available if wanted.
+
+**What this does NOT capture, and it matters.** Every one of those six projects has exactly ONE
+version in v2, all labelled "Initial migration". So scoping buys future safety, not history:
+2190 Shattuck has had **four** architects across its schemes (WRNS, Trachtenberg, SDT design,
+Myefski of record) and v2 has nowhere to put three of them. Recording that history needs real
+`project_versions` rows per scheme, which is a modelling job, not a field edit. Until then every
+architect row means "as of that plan set's date", which is what each row's note says.
+
+**For the JN-L lane:** this write changes no figure JN-L derives — it sets a foreign key on six
+existing rows and adds no units, valuations or parcels — so it should NOT trip the conservation
+gate the way the owner join did. Flagging it rather than leaving it to be discovered.
+
 ## 2026-09-02 — the 1.E hunt is CLOSED: the corpus is as complete as Accela allows
 
 **Result: 25 records enumerated, 0 tabulation forms.** The negative is worth more than the hunt.

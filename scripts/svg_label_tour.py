@@ -44,15 +44,44 @@ def site_rings(geom_path):
     return out
 
 
-def reach(ring, lon, lat, ux, uy):
-    """How far the footprint extends from its centroid along unit vector (ux, uy), in metres."""
+# SOFTNESS of the support function, in metres. The support function of a polygon,
+# h(u) = max_i (r_i . u), is a max of sinusoids: continuous, but with a CORNER wherever the
+# winning vertex changes. Those corners are what makes a swept label jerk -- 2700 Shattuck's
+# h swings 24.5 to 68.2 m over a revolution with 4 vertex switches, 1750 Sacramento 54.2 to
+# 108.0 m with 9. Replacing the hard max with a log-sum-exp soft max,
+#
+#     h_a(u) = (1/a) log SUM exp(a * r_i . u)
+#
+# gives a C-infinity function that converges to h as a grows. SOFT_M is 1/a expressed in metres:
+# small = faithful and cornered, large = smooth and slightly outside the true hull.
+SOFT_M = 3.0
+
+# THE OTHER HALF OF THE JERK IS THE ANGLE, NOT THE MAGNITUDE. Softening h(u) smooths how FAR the
+# label sits; it does nothing about the DIRECTION. When the camera passes near a building's
+# centroid the bearing to it is ill-conditioned -- a small camera movement swings it wildly -- and
+# the label teleports to the far side. Measured on Shattuck: mean step 8 m, worst step 60 m, which
+# is the label crossing the whole building in one leg. The label's angular position is therefore a
+# RATE-LIMITED FOLLOWER of the camera bearing: it turns toward the camera at no more than
+# MAX_TURN_DEG per leg, so a flip becomes a swing and the step is bounded by radius * the limit.
+MAX_TURN_DEG = 12.0
+
+
+def reach(ring, lon, lat, ux, uy, soft=SOFT_M):
+    """How far the footprint extends along unit vector (ux, uy), smoothed at the corners.
+
+    Returns the SOFT support function of the vertex set. With soft=0 this is the exact support
+    function -- the max over vertices -- which is what a hard-edged offset needs. With soft > 0
+    the corners are rounded, which is what a MOVING label needs, because the corner is the jerk.
+    """
     k = math.cos(math.radians(lat))
-    best = 0.0
-    for x, y in ring:
-        d = ((x - lon) * k * 111320.0) * ux + ((y - lat) * 111320.0) * uy
-        if d > best:
-            best = d
-    return best
+    ds = [((x - lon) * k * 111320.0) * ux + ((y - lat) * 111320.0) * uy for x, y in ring]
+    if not ds:
+        return 0.0
+    if soft <= 0:
+        return max(max(ds), 0.0)
+    m = max(ds)
+    # subtract the max before exponentiating -- otherwise exp overflows on a large footprint
+    return max(m + soft * math.log(sum(math.exp((d - m) / soft) for d in ds)), 0.0)
 from gen_svg_labels import slug as slugify
 from xml.dom import minidom
 
@@ -277,6 +306,8 @@ def main():
     STILL_BELOW = 150.0
     sweep = {}
     for lo, hi, addr, v in targets:
+        if lo is None:            # --all mode: proximity targets carry no span
+            continue
         hs = [h for h in headings[lo:hi + 1]]
         tot = 0.0
         for i in range(1, len(hs)):
@@ -288,6 +319,7 @@ def main():
 
     # rebuild the playlist leg by leg
     live = set()          # which labels are currently lit (all-mode)
+    bear = {}             # last bearing actually used per label, for rate limiting
     out, li, moves = [], 0, 0
     for tok in re.split(r"(<gx:FlyTo>.*?</gx:FlyTo>\n?)", tour, flags=re.S):
         if not tok.startswith("<gx:FlyTo>"):
@@ -319,6 +351,7 @@ def main():
                 out.append(vis(slugify(addr), 1))
             for addr in live - want:
                 out.append(vis(slugify(addr), 0))
+                bear.pop(addr, None)
             live = want
         for lo, hi, addr, v in targets:
             if lo is not None and li == lo:
@@ -342,9 +375,20 @@ def main():
                 k = math.cos(math.radians(blat))
                 dx, dy = (clon - blon) * k, clat - blat
                 d = math.hypot(dx, dy) or 1e-9
+                # rate-limit the bearing, then measure the reach along the bearing we will use
+                want = math.degrees(math.atan2(dx, dy)) % 360.0
+                prev = bear.get(addr)
+                if prev is None:
+                    use = want
+                else:
+                    delta = (want - prev + 540.0) % 360.0 - 180.0
+                    use = (prev + max(-MAX_TURN_DEG, min(MAX_TURN_DEG, delta))) % 360.0
+                bear[addr] = use
+                ux, uy = math.sin(math.radians(use)), math.cos(math.radians(use))
                 ring = RINGS.get(addr.upper().strip())
-                out_m = (reach(ring, blon, blat, dx / d, dy / d) if ring else rad) + MARGIN_M
+                out_m = (reach(ring, blon, blat, ux, uy) if ring else rad) + MARGIN_M
                 r = out_m / 111320.0
+                dx, dy, d = ux, uy, 1.0
                 dur = re.search(r"<gx:duration>([0-9.]+)</gx:duration>", tok)
                 alt = (roof - ORBIT_DROP) if being_orbited else (roof + PASS_RISE)
                 cam_alt = re.search(r"<altitude>([-\d.]+)</altitude>", tok)

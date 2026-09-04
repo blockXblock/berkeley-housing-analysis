@@ -131,7 +131,10 @@ LIFT_FRACTION = 1.00     # fallback for the static placemark; the animation over
 # BEARING -- how far the footprint actually extends that way -- plus a small margin. A compact
 # site barely moves; a big one gains its label back.
 MARGIN_M = 8.0
-ICON_SCALE = 2.5
+# John has Earth's own Icon/Label Size on "large" and still reads the box as small at 2.5, so
+# 3.2. The image itself is 1080 px wide; scale multiplies its on-screen size and Earth's
+# preference multiplies again on top.
+ICON_SCALE = 3.2
 
 
 def orbits(tour):
@@ -364,9 +367,14 @@ def main():
                 out.append(vis(slugify(addr), 1))
         # position the label on the camera's side for this leg
         for lo, hi, addr, v in targets:
-            # a still label is written once, at the middle of its span
+            # A STILL LABEL IS PLACED AT THE START OF ITS SPAN, AIMED FROM THE MIDDLE. Writing
+            # it at the middle leg left it at the placemark's initial position -- the building's
+            # own CENTROID, i.e. inside the building -- for the whole first half of its span.
+            # 2700 Shattuck lit at leg 15, was not placed until leg 22 and went dark at 30: it
+            # spent half its life buried and then appeared briefly (John, 2026-09-02: "very late
+            # to appear ... vanishes quickly").
             in_span = (lo is not None and lo <= li <= hi
-                       and ((lo, hi) not in still or li == (lo + hi) // 2))
+                       and ((lo, hi) not in still or li == lo))
             # THE BUILDING BEING ORBITED MOVES EVERY LEG. It is the subject of the shot and the
             # camera sweeps fastest around it, so half-rate updates read as a stutter. Everything
             # else -- passed at a distance, drifting slowly across frame -- is fine at half rate,
@@ -377,7 +385,10 @@ def main():
                        and (being_orbited or li % max(a.move_every, 1) == 0))
             if in_span or in_near:
                 blon, blat, roof, rad = v[0], v[1], v[2], v[3]
-                clon, clat = cams[li]
+                # for a still label, aim from the MIDDLE of the arc so one placement serves the
+                # whole span; for a swept one, from this leg
+                aim = (lo + hi) // 2 if (lo is not None and (lo, hi) in still) else li
+                clon, clat = cams[min(aim, len(cams) - 1)]
                 k = math.cos(math.radians(blat))
                 dx, dy = (clon - blon) * k, clat - blat
                 d = math.hypot(dx, dy) or 1e-9

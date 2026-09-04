@@ -84,6 +84,7 @@ SOFT_M = 3.0
 # RATE-LIMITED FOLLOWER of the camera bearing: it turns toward the camera at no more than
 # MAX_TURN_DEG per leg, so a flip becomes a swing and the step is bounded by radius * the limit.
 MAX_TURN_DEG = 12.0
+MAX_RISE_M = 6.0        # metres a label may climb or fall per leg
 
 
 def reach(ring, lon, lat, ux, uy, soft=SOFT_M):
@@ -277,6 +278,16 @@ def main():
         targets.append((lo, hi, addr, v))
         print(f"    legs {lo:>3}-{hi:<3} -> {v[4].splitlines()[0][:46]}  (nearest)")
 
+    # WHICH SPANS ARE A SUBJECT. This MUST be computed before the --all branch below, which
+    # replaces targets with proximity entries carrying (None, None). It used to be computed
+    # after, from the replaced list, so in --all mode orbit_of came out EMPTY: being_orbited was
+    # false for every building including the one being orbited, so the subject moved on the
+    # every-other-leg cadence meant for distant pass-bys and stuttered through its own orbit
+    # (John, 2026-09-04: "2190 flutters"), and --orbit-focus never fired because here_orbit was
+    # always None. The comment on the --all branch claimed the spans were "retained and used for
+    # cadence below" -- they were retained in spans, but nothing read them.
+    orbit_of = {addr: (lo, hi) for lo, hi, addr, _ in targets if lo is not None}
+
     # --- ALL MODE: every site the flight actually passes, lit by proximity ---
     if a.all:
         near = {}
@@ -299,7 +310,7 @@ def main():
     # BUILDING markers) had an empty orbit_of: being_orbited was always False, every subject got
     # the PASS-BY height of roof + 0, and the box centred on the roofline with half of it against
     # the sky. John: "the labels are floating above the building again, not on the face."
-    orbit_of = {addr: (lo, hi) for lo, hi, addr, _ in targets if lo is not None}
+    # (built ABOVE, before --all replaces targets -- see there for why)
 
     # render just those labels
     IMGS.mkdir(parents=True, exist_ok=True)
@@ -368,7 +379,21 @@ def main():
     if still:
         print(f"    {len(still)} span(s) sweep < {STILL_BELOW:.0f} deg — label placed once, not swept")
 
+    # THE LEG OF CLOSEST APPROACH, per building. A pass-by is not an orbit: the camera only ever
+    # sees one side of it, so sweeping the label round the footprint every other leg just drags it
+    # across the face and, on the way past, round toward the back -- John, 2026-09-04: "2947 moves
+    # right, away from the flight path". Aim it once, from where the camera will be at its
+    # nearest, and leave it. The still rule already existed for short spans but could never apply
+    # here, because --all targets carry no span at all.
+    closest = {}
+    for _, _, addr, v in targets:
+        kk = math.cos(math.radians(v[1]))
+        closest[addr] = min(range(len(cams)),
+                            key=lambda i: ((cams[i][0] - v[0]) * kk) ** 2 + (cams[i][1] - v[1]) ** 2)
+
     # rebuild the playlist leg by leg
+    lastalt = {}          # last altitude used per label, for the vertical rate limit
+    just_lit = set()      # labels switched on THIS leg -- they must be placed on it
     live = set()          # which labels are currently lit (all-mode)
     bear = {}             # last bearing actually used per label, for rate limiting
     out, li, moves = [], 0, 0
@@ -398,11 +423,13 @@ def main():
                 if a.max_labels:
                     cand = cand[:a.max_labels]
                 want = {addr for _, addr in cand}
-            for addr in want - live:
+            just_lit = want - live
+            for addr in just_lit:
                 out.append(vis(slugify(addr), 1))
             for addr in live - want:
                 out.append(vis(slugify(addr), 0))
                 bear.pop(addr, None)
+                lastalt.pop(addr, None)
             live = want
         for lo, hi, addr, v in targets:
             if lo is not None and li == lo:
@@ -423,13 +450,30 @@ def main():
             # which is what keeps the file small.
             olo, ohi = orbit_of.get(addr, (None, None))
             being_orbited = olo is not None and olo <= li <= ohi
+            # A LABEL MUST BE PLACED ON THE LEG IT LIGHTS. The static placemark sits at the
+            # centroid at LIFT_FRACTION x roof -- inside the building, at roof height -- and is
+            # only ever meant as a fallback the animation overrides. But a label lit on an odd
+            # leg was not moved until the next even one, so it showed at that fallback first.
+            # 2420 Shattuck (roof 59.5 m) is lit for so few legs that the fallback was most of
+            # what John saw: "2420 is too high to see".
+            #
+            # A PASS-BY IS PLACED ONCE. Only the orbit subject is swept; everything else is
+            # aimed from closest approach and left, so it cannot crawl round the footprint.
+            pass_by = a.all and addr in live and not being_orbited
             in_near = (a.all and addr in live
-                       and (being_orbited or li % max(a.move_every, 1) == 0))
+                       and (addr in just_lit
+                            or (being_orbited and True)
+                            or (not pass_by and li % max(a.move_every, 1) == 0)))
             if in_span or in_near:
                 blon, blat, roof, rad = v[0], v[1], v[2], v[3]
                 # for a still label, aim from the MIDDLE of the arc so one placement serves the
                 # whole span; for a swept one, from this leg
-                aim = (lo + hi) // 2 if (lo is not None and (lo, hi) in still) else li
+                if pass_by:
+                    aim = closest.get(addr, li)
+                elif lo is not None and (lo, hi) in still:
+                    aim = (lo + hi) // 2
+                else:
+                    aim = li
                 clon, clat = cams[min(aim, len(cams) - 1)]
                 k = math.cos(math.radians(blat))
                 dx, dy = (clon - blon) * k, clat - blat
@@ -460,6 +504,17 @@ def main():
                                       (ly - cams[aim][1]) * 111320.0)
                     axis = cam_alt - dcam * math.tan(math.radians(max(0.0, 90.0 - tilt)))
                     alt = min(max(axis + FRAME_LIFT, FLOOR_M), roof, cam_alt + ABOVE_FLIGHT)
+                # RATE-LIMIT THE CLIMB, exactly as the bearing is rate-limited. The view axis
+                # moves fast when tilt and camera altitude change together, and the roof cap
+                # binds and releases between legs, so the height could jump the tower's whole
+                # facade in a single leg: 2190 Shattuck ranged 29.5 m to 110.0 m -- 110.0 being
+                # its roof exactly -- which is the vertical half of "2190 flutters". A label may
+                # climb or fall MAX_RISE_M per leg and no more; it still tracks the axis, just
+                # not instantly.
+                prev_alt = lastalt.get(addr)
+                if prev_alt is not None:
+                    alt = max(prev_alt - MAX_RISE_M, min(prev_alt + MAX_RISE_M, alt))
+                lastalt[addr] = alt
                 out.append(move(slugify(addr), blon + dx / d * r / k, blat + dy / d * r,
                                 max(alt, 8.0), float(dur.group(1)) if dur else 0.0))
                 moves += 1

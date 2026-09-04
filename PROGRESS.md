@@ -6,6 +6,67 @@
 
 ---
 
+## 2026-09-04 — 2128 Oxford corrected to the ZAB-approved plan set (485 → 456), and v2's first real second version
+
+The three competing numbers turned out to be three different quantities, not a disagreement:
+
+| Figure | What it actually is |
+|---|---|
+| **485** | the **2023 SB330 application** count. Entered via `migration_v1_to_v2_20260507` with **no source document**; its version description is verbatim the application text ("26-story… 485 dwelling units (includes 5 ELI and 42 VLI)"). Both affordability rows carried confidence 3. |
+| **463** | the **density-bonus ceiling**, not a count. Base 333 units at max residential density + 130 bonus units (12% VLI = 40 units, earning a 38.75% bonus). |
+| **456** | the **proposed and approved** total — seven under its own ceiling. |
+
+**456 is confirmed by two independent primary sources:** the City's own **1.E Tabulation Form**
+(doc 2350, 2023-11-03: "Number of Dwelling Units — existing 16, proposed 456") and the
+**ZAB hearing plan set** (doc 2188, 2024-09-12, zoning-compliance table). The downloaded PDF was
+identity-checked by SHA256 against the stored hash for doc 2188 — exact match.
+
+The same zoning table also corrected the height: **27 stories / 285'-4"** (v2 had 26 stories and a
+null height_feet). Zoning allows 180'; the excess is a state density-bonus waiver. The level
+schedule corroborates (L01, L1.5, L02, L03-05, L08-22, L23-24, L25, L26).
+
+**This is the first genuine second version in v2.** Rather than mutating version 130, the write
+APPENDS `project_versions` id **906** ("ZAB-approved plan set", type 3 *entitled*, sourced to doc
+2188, confidence 1) and repoints `projects.current_version_id`. Version 130 survives untouched as
+application-era history — which is exactly the modelling gap the 2026-09-02 architect-scoping entry
+flagged as unfilled. It is now filled for one project.
+
+**Affordability HELD at 47 VLI / 409 market by John's instruction.** The approved density-bonus
+table names 40 VLI, but that is the *qualifying minimum* for the 38.75% bonus, not a cap on
+delivery. 47 is itself unverified (the application's 5 ELI + 42 VLI, collapsed to VLI by the
+migration), so those two rows carry **no source document and confidence 3**, while `total_units`
+above them is confidence 1. A version whose total is verified and whose split is not — recorded as
+such rather than smoothed over.
+
+Snapshot `keep_snapshot_2026-09-04_pre-proj133-zab-version.db`; integrity_check ok before and after.
+Two attempts rolled back cleanly first (the partial unique index
+`idx_one_current_version_per_project` requires demoting the old `is_current` *before* inserting the
+new row; then a placeholder-count error) — the guarded-write pattern caught both with no partial
+state. Guards after commit: one `is_current` flag, affordability sum 456 = unit_program total 456,
+zero orphaned `current_version_id`.
+
+**Effect on the ≥200-unit cohort:** 21 projects, **10,925 → 10,896 units**. No project crossed the
+threshold. For the 15-project subset reported to John on 2026-09-02: **4,558 → 4,529**, entitled
+**2,735 → 2,706**.
+
+**Plan-set verification status of the four largest private projects (this arc's other output):**
+- **1974 Shattuck — 599 CONFIRMED**, plan set matches v2 exactly.
+- **2700 Shattuck — 359 CONFIRMED**, 2026-08-20 scope: "8-story mixed-use residential development
+  with 359 dwelling units… with State of California density bonus".
+- **2190 Shattuck — consistent but unverified on units.** Feb-2026 scope confirms the 34-storey
+  density-bonus increase and the architect v2 already carries; the 452 count was not independently
+  checked.
+- **2128 Oxford — corrected, above.**
+
+**For the JN lane:** this one DOES move derived figures (total_units, height, market_units on
+proj133; any ≥200 or citywide unit sum). A new timestamped baseline must be appended —
+`total_units` for proj133 is now 456, not 485.
+
+**Not yet done downstream:** `docs/explorer_data.js` re-export, the 2128 Oxford label PNG
+(units, storeys and height all appear on it), and re-recording any tour that flies it.
+
+---
+
 ## 2026-09-02 — architect rows version-scoped (and what that does not fix)
 
 The 6 plan-set architect rows now carry `project_version_id`, so a later revision can record a

@@ -160,6 +160,8 @@ def main():
     RINGS = site_rings(str(GEOM))
 
     legs = re.findall(r"<gx:FlyTo>.*?</gx:FlyTo>\n?", tour, re.S)
+    headings = [float(re.search(r"<heading>([-\d.]+)</heading>", l).group(1))
+                if re.search(r"<heading>([-\d.]+)</heading>", l) else 0.0 for l in legs]
     cams = [(float(m.group(1)), float(m.group(2))) for m in
             (re.search(r"<longitude>([-\d.]+)</longitude>\s*<latitude>([-\d.]+)</latitude>", l) for l in legs)]
     # PREFER EXPLICIT MARKERS. gen_dorm_tour.py brackets each building with BUILDING-IN/OUT
@@ -265,6 +267,25 @@ def main():
                 f'<altitudeMode>relativeToGround</altitudeMode></Point></Placemark>'
                 f'</Change></Update></gx:AnimatedUpdate>\n')
 
+    # A SHORT ARC DOES NOT NEED A MOVING LABEL. Sweeping the label round the building every leg
+    # is right for a full orbit, where the camera sees every face. On gen_hop_tour's QUARTER turn
+    # the camera only ever sees one side, so moving the label just drags it across sloping ground
+    # -- and altitudes are relativeToGround, so the label bobs -- and can swing it out of frame
+    # entirely (John, 2026-09-02: "2920 jumps up and down, 2700 is missing"). For any span
+    # sweeping less than STILL_BELOW degrees the label is placed ONCE, on the bearing the camera
+    # holds at the middle of the arc, and left there.
+    STILL_BELOW = 150.0
+    sweep = {}
+    for lo, hi, addr, v in targets:
+        hs = [h for h in headings[lo:hi + 1]]
+        tot = 0.0
+        for i in range(1, len(hs)):
+            tot += abs((hs[i] - hs[i - 1] + 540) % 360 - 180)
+        sweep[(lo, hi)] = tot
+    still = {k for k, t in sweep.items() if t < STILL_BELOW}
+    if still:
+        print(f"    {len(still)} span(s) sweep < {STILL_BELOW:.0f} deg — label placed once, not swept")
+
     # rebuild the playlist leg by leg
     live = set()          # which labels are currently lit (all-mode)
     out, li, moves = [], 0, 0
@@ -304,7 +325,9 @@ def main():
                 out.append(vis(slugify(addr), 1))
         # position the label on the camera's side for this leg
         for lo, hi, addr, v in targets:
-            in_span = (lo is not None and lo <= li <= hi)
+            # a still label is written once, at the middle of its span
+            in_span = (lo is not None and lo <= li <= hi
+                       and ((lo, hi) not in still or li == (lo + hi) // 2))
             # THE BUILDING BEING ORBITED MOVES EVERY LEG. It is the subject of the shot and the
             # camera sweeps fastest around it, so half-rate updates read as a stutter. Everything
             # else -- passed at a distance, drifting slowly across frame -- is fine at half rate,

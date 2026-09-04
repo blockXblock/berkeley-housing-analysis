@@ -27,6 +27,26 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from gen_building_loop import buildings as site_buildings
 
 
+def normkey(a):
+    """A slug-insensitive address key, for matching GEOMETRY names to DB addresses.
+
+    The label PNGs are named from v2's address_display; the targets are named from the geometry
+    file. They are usually the same string and occasionally are not, and when they differ the
+    label is silently dropped from the tour. 2099 M L KING JR Way in v2 is "2099 MLK Jr Way" in
+    the geometry, so its label -- a completed 72-unit building the flight passes -- never
+    appeared. Squash case, punctuation and spacing, then fold the one street name in Berkeley
+    that is written four different ways into a single token. Longest alias first, or MLKING
+    would never match because MLK has already consumed its prefix.
+    """
+    k = re.sub(r"[^A-Z0-9]", "", str(a).upper())
+    # Fold only the NAME, never the "JR" that follows it. Including MLKINGJR in this list ate
+    # the JR on the v2 side ("2099MLKWAY") and not on the geometry side ("2099MLKJRWAY"), so the
+    # two still failed to match -- the fix has to leave both sides with the same remainder.
+    for alias in ("MARTINLUTHERKING", "MLKING"):
+        k = k.replace(alias, "MLK")
+    return k
+
+
 def site_rings(geom_path):
     """{ADDRESS: [(lon, lat), ...]} — every footprint vertex of a site, for reach-by-bearing."""
     import collections
@@ -290,11 +310,21 @@ def main():
         cmd += ["--address", addr]
     subprocess.run(cmd, capture_output=True)
 
+    # Index what was actually rendered, by normalised key, so a geometry name that differs
+    # cosmetically from v2's address_display still finds its label instead of being skipped.
+    by_norm = {}
+    for f in IMGS.glob("*.png"):
+        by_norm.setdefault(normkey(f.stem.replace("-", " ")), f)
+
     styles, pms, imgs = [], [], []
     for lo, hi, addr, v in targets:
         s = slugify(addr); png = IMGS / f"{s}.png"
         if not png.exists():
-            print(f"    no image for {s} — skipped"); continue
+            alt = by_norm.get(normkey(addr))
+            if alt is None:
+                print(f"    no image for {s} — skipped"); continue
+            print(f"    {s} -> {alt.stem} (matched on normalised address)")
+            png = alt
         imgs.append(png)
         styles.append(f'<Style id="lbl_{s}"><IconStyle><scale>{ICON_SCALE}</scale>'
                       f'<Icon><href>{png.name}</href></Icon>'

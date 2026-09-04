@@ -85,6 +85,20 @@ SOFT_M = 3.0
 # MAX_TURN_DEG per leg, so a flip becomes a swing and the step is bounded by radius * the limit.
 MAX_TURN_DEG = 12.0
 MAX_RISE_M = 6.0        # metres a label may climb or fall per leg
+# THE RADIAL PUMP. The support function of an elongated footprint is not a circle, and 2700
+# Shattuck's swings from 36 m to 77 m -- half-width to half-diagonal. Riding it exactly, the
+# label breathed in and out FOUR times per orbit, once per corner (John, 2026-09-04: "2700 does
+# stutter"). SOFT_M cannot fix this: it rounds corners over a 3 m scale and the swing is 41 m --
+# the oscillation is the shape itself, not a corner artifact.
+#
+# The constraint is one-sided. The label must stay OUTSIDE the footprint or Earth depth-tests it
+# away behind the building, so reach may only be smoothed UPWARD. Riding the circumradius is the
+# fully-smoothed end of that and puts the box 71-79 m off a short face, which John rejected on
+# 2026-09-02. A FLOOR is the middle: never closer than this fraction of the site's own maximum
+# reach, so a long building's swing collapses to the top quarter of its range while a compact one
+# -- where max and min are nearly equal anyway -- is untouched.
+REACH_FLOOR_FRAC = 0.75
+MAX_REACH_M = 3.0       # metres the reach may change per leg, after the floor
 
 
 def reach(ring, lon, lat, ux, uy, soft=SOFT_M):
@@ -385,6 +399,16 @@ def main():
     # right, away from the flight path". Aim it once, from where the camera will be at its
     # nearest, and leave it. The still rule already existed for short spans but could never apply
     # here, because --all targets carry no span at all.
+    # Each site's own maximum reach, sampled round the compass once, for the floor above.
+    maxreach = {}
+    for _, _, addr, v in targets:
+        ring = RINGS.get(addr.upper().strip())
+        if ring:
+            maxreach[addr] = max(reach(ring, v[0], v[1], math.sin(math.radians(t)),
+                                       math.cos(math.radians(t))) for t in range(0, 360, 5))
+        else:
+            maxreach[addr] = v[3]
+
     closest = {}
     for _, _, addr, v in targets:
         kk = math.cos(math.radians(v[1]))
@@ -393,6 +417,7 @@ def main():
 
     # rebuild the playlist leg by leg
     lastalt = {}          # last altitude used per label, for the vertical rate limit
+    lastreach = {}        # last reach used per label, for the radial rate limit
     just_lit = set()      # labels switched on THIS leg -- they must be placed on it
     live = set()          # which labels are currently lit (all-mode)
     bear = {}             # last bearing actually used per label, for rate limiting
@@ -430,6 +455,7 @@ def main():
                 out.append(vis(slugify(addr), 0))
                 bear.pop(addr, None)
                 lastalt.pop(addr, None)
+                lastreach.pop(addr, None)
             live = want
         for lo, hi, addr, v in targets:
             if lo is not None and li == lo:
@@ -490,6 +516,11 @@ def main():
                 ux, uy = math.sin(math.radians(use)), math.cos(math.radians(use))
                 ring = RINGS.get(addr.upper().strip())
                 out_m = (reach(ring, blon, blat, ux, uy) if ring else rad) + MARGIN_M
+                out_m = max(out_m, REACH_FLOOR_FRAC * maxreach.get(addr, rad))
+                prev_r = lastreach.get(addr)
+                if prev_r is not None:
+                    out_m = max(prev_r - MAX_REACH_M, min(prev_r + MAX_REACH_M, out_m))
+                lastreach[addr] = out_m
                 r = out_m / 111320.0
                 dx, dy, d = ux, uy, 1.0
                 dur = re.search(r"<gx:duration>([0-9.]+)</gx:duration>", tok)

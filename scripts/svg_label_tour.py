@@ -257,8 +257,14 @@ def main():
         # legs are an orbit -- so the building being orbited moved on the same every-other-leg
         # cadence as everything else and visibly stuttered, while orbits-only stayed smooth.
         # John caught exactly that. The spans are retained and used for cadence below.
-        orbit_of = {addr: (lo, hi) for lo, hi, addr, _ in targets}
         targets = [(None, None, addr, v) for addr, v in near.items()]
+
+    # WHICH SPANS ARE A SUBJECT — needed in EVERY mode, not just --all. This lived inside the
+    # --all branch, so a tour built without it (private-200, whose fifteen subjects come from
+    # BUILDING markers) had an empty orbit_of: being_orbited was always False, every subject got
+    # the PASS-BY height of roof + 0, and the box centred on the roofline with half of it against
+    # the sky. John: "the labels are floating above the building again, not on the face."
+    orbit_of = {addr: (lo, hi) for lo, hi, addr, _ in targets if lo is not None}
 
     # render just those labels
     IMGS.mkdir(parents=True, exist_ok=True)

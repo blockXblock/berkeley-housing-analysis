@@ -25,6 +25,34 @@ WHAT IT DOES, and why each part is there (all of it learned by John watching it)
 import argparse, math, os, pathlib, re, shutil, subprocess, sys, zipfile
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from gen_building_loop import buildings as site_buildings
+
+
+def site_rings(geom_path):
+    """{ADDRESS: [(lon, lat), ...]} — every footprint vertex of a site, for reach-by-bearing."""
+    import collections
+    out = collections.defaultdict(list)
+    g = open(geom_path, errors="replace").read()
+    for pm in re.findall(r"<Placemark>.*?</Placemark>", g, re.S):
+        ad = re.search(r"<b>([^<]*)</b><br/>", pm)
+        po = re.search(r"<Polygon>.*?<coordinates>\s*(.*?)\s*</coordinates>", pm, re.S)
+        if not (ad and po):
+            continue
+        for tok in po.group(1).split():
+            c = tok.split(",")
+            if len(c) >= 2:
+                out[ad.group(1).upper().strip()].append((float(c[0]), float(c[1])))
+    return out
+
+
+def reach(ring, lon, lat, ux, uy):
+    """How far the footprint extends from its centroid along unit vector (ux, uy), in metres."""
+    k = math.cos(math.radians(lat))
+    best = 0.0
+    for x, y in ring:
+        d = ((x - lon) * k * 111320.0) * ux + ((y - lat) * 111320.0) * uy
+        if d > best:
+            best = d
+    return best
 from gen_svg_labels import slug as slugify
 from xml.dom import minidom
 
@@ -66,7 +94,14 @@ ORBIT_DROP = 5.0
 PASS_RISE = 0.0
 LIFT_FRACTION = 1.00     # fallback for the static placemark; the animation overrides it
                          # "Image Landsat / Copernicus" strip at the bottom of frame
-MARGIN_M = 14.0
+# HUG THE NEAR FACE, DO NOT ORBIT THE WHOLE SITE. The label used to sit at the footprint's
+# CIRCUMRADIUS plus a margin -- a circle wide enough to clear the site in every direction. That
+# is correct for occlusion and badly wrong for large or long sites: 2700 Shattuck's label stood
+# 79 m from its centre, out over the street, which reads as floating in the sky rather than
+# sitting on the building (John, 2026-09-02). The offset is now measured ALONG THE CAMERA'S
+# BEARING -- how far the footprint actually extends that way -- plus a small margin. A compact
+# site barely moves; a big one gains its label back.
+MARGIN_M = 8.0
 ICON_SCALE = 2.5
 
 
@@ -122,6 +157,7 @@ def main():
     tour = re.search(r"<gx:Tour>.*?</gx:Tour>", tour_path.read_text(errors="replace"), re.S).group(0)
     g = GEOM.read_text(errors="replace")
     SITES = site_buildings()
+    RINGS = site_rings(str(GEOM))
 
     legs = re.findall(r"<gx:FlyTo>.*?</gx:FlyTo>\n?", tour, re.S)
     cams = [(float(m.group(1)), float(m.group(2))) for m in
@@ -266,7 +302,9 @@ def main():
                 k = math.cos(math.radians(blat))
                 dx, dy = (clon - blon) * k, clat - blat
                 d = math.hypot(dx, dy) or 1e-9
-                r = (rad + MARGIN_M) / 111320.0
+                ring = RINGS.get(addr.upper().strip())
+                out_m = (reach(ring, blon, blat, dx / d, dy / d) if ring else rad) + MARGIN_M
+                r = out_m / 111320.0
                 dur = re.search(r"<gx:duration>([0-9.]+)</gx:duration>", tok)
                 alt = (roof - ORBIT_DROP) if being_orbited else (roof + PASS_RISE)
                 cam_alt = re.search(r"<altitude>([-\d.]+)</altitude>", tok)

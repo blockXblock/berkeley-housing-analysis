@@ -113,7 +113,19 @@ IMGS = pathlib.Path("scratch/2026-08-31/svg-labels")
 # nothing, while a tower's label drops to just above the flight line where the eye already is.
 # During an orbit the camera is at roof + 10, so the cap is above the roof and the orbit height
 # is untouched.
-ABOVE_FLIGHT = 12.0
+# AIM AT WHERE THE CAMERA IS LOOKING, NOT AT THE BUILDING. Every height rule before this one was
+# relative to the ROOF -- roof - 5, roof + 14, capped at camera + 12 -- and all of them ignored
+# that the camera is TILTED. At tilt 74 the view axis falls 16 degrees below horizontal, so 84 m
+# out the centre of frame is at 21 m altitude while the camera itself is at 45 m. Labels placed
+# near the roof therefore sat +27 m above the middle of the picture: 2700 Shattuck clipped the
+# top edge and 2274 was lit for its whole span and never visible at all (John, 2026-09-02).
+#
+# The label now goes on the VIEW AXIS at its own distance, lifted FRAME_LIFT metres so it rides
+# slightly high in frame rather than dead centre over the street, and clamped to the building it
+# names: never above the roof, never below FLOOR_M.
+FRAME_LIFT = 9.0
+FLOOR_M = 8.0
+ABOVE_FLIGHT = 12.0      # retained only as an upper guard
 ORBIT_DROP = 5.0
 # AT THE ROOFLINE, NOT ABOVE IT. This was 14 m, on my reasoning that a distant label reads better
 # against sky than against the city behind it. On screen that just looked like the box floating
@@ -407,10 +419,17 @@ def main():
                 r = out_m / 111320.0
                 dx, dy, d = ux, uy, 1.0
                 dur = re.search(r"<gx:duration>([0-9.]+)</gx:duration>", tok)
+                ca = re.search(r"<altitude>([-\d.]+)</altitude>", tok)
+                ct = re.search(r"<tilt>([-\d.]+)</tilt>", tok)
                 alt = (roof - ORBIT_DROP) if being_orbited else (roof + PASS_RISE)
-                cam_alt = re.search(r"<altitude>([-\d.]+)</altitude>", tok)
-                if cam_alt:
-                    alt = min(alt, float(cam_alt.group(1)) + ABOVE_FLIGHT)
+                if ca and ct:
+                    cam_alt = float(ca.group(1)); tilt = float(ct.group(1))
+                    # horizontal distance from the camera to where the label will stand
+                    lx = blon + ux * r / k; ly = blat + uy * r
+                    dcam = math.hypot((lx - cams[aim][0]) * k * 111320.0,
+                                      (ly - cams[aim][1]) * 111320.0)
+                    axis = cam_alt - dcam * math.tan(math.radians(max(0.0, 90.0 - tilt)))
+                    alt = min(max(axis + FRAME_LIFT, FLOOR_M), roof, cam_alt + ABOVE_FLIGHT)
                 out.append(move(slugify(addr), blon + dx / d * r / k, blat + dy / d * r,
                                 max(alt, 8.0), float(dur.group(1)) if dur else 0.0))
                 moves += 1

@@ -79,6 +79,33 @@ def main():
         gone = [t["package"] for t in cat["tours"] if t.get("package") and not os.path.exists(t["package"])]
         check(not gone, "every catalog package exists on disk", f"{len(gone)} missing")
 
+    # 4. THE SERVED DATA IS NOT STALE. export_explorer_data_v2.py writes
+    #    docs/explorer_data_v2_working.js; docs/explorer.html -- the page every link on the site
+    #    points at -- reads docs/explorer_data.js. Promotion between them is a manual copy, and
+    #    on 2026-09-04 it emerged that it had not happened since the owner join landed: the live
+    #    explorer had 28 owners populated out of 895 projects while the working file had 852.
+    #    Nothing caught it. The export prints a cheerful success line about a file nobody serves,
+    #    and this gate passed 15/15 while shipping month-old data.
+    #
+    #    Compare the two directly. Byte-identical is the only safe state; anything else means an
+    #    export ran and was never promoted. The header carries a "Generated:" line that differs
+    #    on every run, so compare the DATA and report the dates when they disagree.
+    served, working = staged("docs/explorer_data.js"), staged("docs/explorer_data_v2_working.js")
+    if served is None or working is None:
+        check(served is not None, "docs/explorer_data.js is present")
+    else:
+        def gen(t):
+            m = re.search(r"Generated:\s*(.+)", t)
+            return m.group(1).strip() if m else "unknown"
+        def payload(t):
+            i = t.find("DATA =")
+            return t[i:] if i >= 0 else t
+        fresh = payload(served) == payload(working)
+        check(fresh, "served explorer data matches the latest export",
+              f"served {gen(served)} vs working {gen(working)} — "
+              "run scripts/export_explorer_data_v2.py, then "
+              "cp docs/explorer_data_v2_working.js docs/explorer_data.js")
+
     print()
     if FAIL:
         print(f"DEPLOY BLOCKED — {len(FAIL)} check(s) failed:")

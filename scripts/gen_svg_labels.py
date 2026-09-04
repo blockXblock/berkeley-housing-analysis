@@ -22,12 +22,15 @@ be inventing a day the city never recorded, so a year-precision date prints as t
 
   python scripts/gen_svg_labels.py --uc --outdir scratch/2026-08-31/svg-labels
 """
-import argparse, os, pathlib, re, shutil, sqlite3, subprocess, sys, tempfile
+import argparse, hashlib, os, pathlib, re, shutil, sqlite3, subprocess, sys, tempfile
 
 DB = "databases/berkeley_housing_v2.db"
-# 20% LARGER (John, 2026-09-02). Everything scales together -- canvas, box and type -- so the
-# proportions are unchanged and only the rendered pixel count grows. IconStyle scale stays put.
-SCALE = 1.20
+# LARGER AGAIN (John, 2026-09-04: "the labels are still hard to read"). Everything scales
+# together -- canvas, box and type -- so the proportions are unchanged and only the rendered
+# pixel count grows. IconStyle scale stays put, and Earth draws the icon from its native pixel
+# size, so a bigger render is both SHARPER (no upscaling blur) and physically larger on screen.
+# 1.20 -> 1.60 is a third again on both counts.
+SCALE = 1.60
 W = int(900 * SCALE)        # square canvas; the box is centred in it
 BOX_H = int(300 * SCALE)
 STATUS_RGB = {"Pre-Application": "9e9e9e", "In Review": "ffd400", "Entitled": "ff8000",
@@ -181,13 +184,22 @@ def main():
     made = 0
     for r in picks:
         s = slug(r["address_display"])
-        # CACHE. Rasterising 58 labels through qlmanage takes two minutes, and a rebuild that
-        # only changes the tour re-renders every one of them. Skip a PNG that already exists;
-        # delete the file (or the directory) to force a re-render after a data change.
-        if (out / f"{s}.png").exists() and not a.force:
+        # CACHE, KEYED ON CONTENT (not on the filename). Rasterising 58 labels through qlmanage
+        # takes two minutes, so a rebuild that only changes the tour must not re-render them all.
+        # But the original test was "does <slug>.png exist" -- a filename the DATA never touches,
+        # so a corrected unit count or storey height left the old PNG in place forever and the
+        # tour silently kept showing the superseded figure. 2128 Oxford went to press at 485
+        # units / 26 storeys, rendered at 11:19, an hour and a half before the write that made it
+        # 456 / 27. Hashing the SVG makes the cache self-invalidating: the label re-renders when
+        # and only when something it DISPLAYS has changed.
+        body = svg(r)
+        digest = hashlib.sha256(body.encode("utf-8")).hexdigest()[:16]
+        stamp = out / f"{s}.sha"
+        if ((out / f"{s}.png").exists() and stamp.exists()
+                and stamp.read_text().strip() == digest and not a.force):
             made += 1
             continue
-        (tmp / f"{s}.svg").write_text(svg(r), encoding="utf-8")
+        (tmp / f"{s}.svg").write_text(body, encoding="utf-8")
         # qlmanage renders the SVG; alpha survives, and a square canvas needs no crop
         subprocess.run(["qlmanage", "-t", "-s", str(W), "-o", str(tmp), str(tmp / f"{s}.svg")],
                        capture_output=True)
@@ -203,6 +215,8 @@ def main():
         shutil.copy(png, out / f"{s}.png")
         subprocess.run(["sips", "-c", str(BOX_H), str(W), str(out / f"{s}.png")],
                        capture_output=True)
+        # Stamp LAST, so an interrupted or failed render leaves no stamp and re-renders next run.
+        stamp.write_text(digest)
         made += 1
         print(f"  {out / (s + '.png')}   {' | '.join(x for x in lines_for(r) if x)[:88]}")
     shutil.rmtree(tmp, ignore_errors=True)

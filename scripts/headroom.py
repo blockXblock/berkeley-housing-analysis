@@ -139,11 +139,24 @@ def main():
     for n in note:
         print(f"  · {n}")
     print()
+    # SAY WHAT TO DO, NOT JUST WHETHER. The first wording was a bare GO / NO, and "NO" reads as
+    # ambiguous the moment a reboot is the remedy -- no what? John asked exactly that. The verdict
+    # is an answer to "can I record right now", and when it is no the next action must be spelled
+    # out in the same breath.
     if ok:
-        print("  GO — safe to record. Earth + one terminal, one tour loaded, record immediately.")
+        print("  READY TO RECORD.")
+        print("  Earth + one terminal, load ONE tour package, record immediately.")
     else:
-        print("  NO — fix the above first. Order: close browsers, quit Earth gracefully "
-              "(kill <pid>, never -9), free boot disk, then REBOOT.")
+        print("  NOT READY TO RECORD — reboot before trying.")
+        print("  Why a reboot: only a restart empties swap, and the swap ceiling will not")
+        print("  recover while the machine is up. Before restarting:")
+        print("    1. quit Chrome and any other browser")
+        print("    2. quit Google Earth gracefully — `kill <pid>`, never `kill -9`,")
+        print("       or Movie Maker loses its resolution and output-path settings")
+        if d["disk_free_gb"] < DISK_MIN_GB:
+            print(f"    3. free {DISK_MIN_GB - d['disk_free_gb']:.1f} GB more on the boot disk "
+                  "— this is what caps the swap ceiling")
+        print("    then reboot, and run this again.")
     sys.exit(0 if ok else 1)
 
 

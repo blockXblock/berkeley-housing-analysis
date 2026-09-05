@@ -64,7 +64,11 @@ Best → least effective, from the measured sessions:
    A runaway `mds` caused the July 18 kernel panic.
 7. **Free boot-disk space** so swap can grow (see the hazard box above). This is the
    only sense in which swap can be "maximized."
-8. Monitoring one-liners:
+8. **`python3 scripts/headroom.py`** — this checklist as one command with a GO / NO-GO verdict.
+   Exits non-zero when the machine is unfit, so it can gate a recording script. `--history` shows
+   how the swap ceiling and boot disk have moved between runs, which is how the Sep 5 contraction
+   became visible. Run it before every recording session.
+9. Monitoring one-liners:
    ```bash
    sysctl vm.swapusage          # swap total/used/free
    memory_pressure | head -5    # system pressure %

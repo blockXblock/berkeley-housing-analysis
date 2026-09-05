@@ -31,6 +31,18 @@ DB = "databases/berkeley_housing_v2.db"
 # size, so a bigger render is both SHARPER (no upscaling blur) and physically larger on screen.
 # 1.20 -> 1.60 is a third again on both counts.
 SCALE = 1.60
+# OPAQUE, AND RENDERED FAITHFULLY. Tested against real frames from the Shattuck recording
+# (2026-09-04): at 0.86 the panel picks up whatever is behind it -- over a sunlit building you can
+# read the street labels and rooflines THROUGH the text, which is the same illegibility the glyph
+# outlines were added to fight, arriving from the other side. Over sky it was fine; over buildings
+# it was not, so 1.0 it is.
+#
+# The renderer had to change with it. qlmanage is macOS Quick Look and FLATTENS alpha against a
+# light background: it rendered the old 0.86 panel as a washed (47,51,56) grey rather than
+# #0d1117. Every label in every video shipped before today is that grey. cairosvg at 1.0 gives
+# the true (13,17,23) -- same opacity John approved, materially more contrast under white text,
+# and faster (0.31 s/label against 0.53 s).
+PANEL_OPACITY = 1.0
 W = int(900 * SCALE)        # square canvas; the box is centred in it
 BOX_H = int(300 * SCALE)
 STATUS_RGB = {"Pre-Application": "9e9e9e", "In Review": "ffd400", "Entitled": "ff8000",
@@ -115,7 +127,7 @@ def svg(r):
     globals()["BOX_H"] = box_h
     top = (W - box_h) // 2
     body = [f'<rect x="0" y="{top}" width="{W}" height="{box_h}" rx="{int(26*SCALE)}" '
-            f'fill="#0d1117" fill-opacity="0.86" stroke="#{accent}" stroke-opacity="0.95" '
+            f'fill="#0d1117" fill-opacity="{PANEL_OPACITY}" stroke="#{accent}" stroke-opacity="0.95" '
             f'stroke-width="{int(6*SCALE)}"/>',
             f'<rect x="0" y="{top}" width="{int(14*SCALE)}" height="{box_h}" '
             f'rx="{int(7*SCALE)}" fill="#{accent}"/>']
@@ -160,6 +172,21 @@ def svg(r):
             f'viewBox="0 0 {W} {W}">' + "".join(body) + "</svg>")
 
 
+def normkey(a):
+    """A slug-insensitive address key, for matching GEOMETRY names to v2 addresses.
+
+    Lives here, not in svg_label_tour, because BOTH need it and a second copy is how the two
+    drift apart. The tour matches rendered PNGs by this key; this module matches --address
+    requests by it. Without the second half, a target named from the geometry never renders at
+    all: "2099 MLK Jr Way" is not a substring of v2's "2099 M L KING JR Way", so the label was
+    simply never made and the building went through the flight unlabelled.
+    """
+    k = re.sub(r"[^A-Z0-9]", "", str(a).upper())
+    for alias in ("MARTINLUTHERKING", "MLKING"):
+        k = k.replace(alias, "MLK")
+    return k
+
+
 def slug(a):
     return re.sub(r"[^a-z0-9]+", "-", str(a).lower()).strip("-")
 
@@ -170,13 +197,37 @@ def main():
     ap.add_argument("--address", action="append", default=[], help="match by address fragment")
     ap.add_argument("--outdir", default="scratch/2026-08-31/svg-labels")
     ap.add_argument("--force", action="store_true", help="re-render even if the PNG exists")
+    ap.add_argument("--raster", choices=("qlmanage", "cairosvg", "auto"), default="auto",
+                    help="auto prefers cairosvg (faithful) and falls back to qlmanage (flattens "
+                         "alpha) when it is not installed, so a machine without the venv still "
+                         "builds -- with a warning, because the output differs.")
+    ap.add_argument("--venv", default="scratch/2026-09-04/svgvenv/bin/python",
+                    help="python that has cairosvg (PEP 668 blocks a system install)")
+    ap.add_argument("--panel-opacity", type=float, default=None,
+                    help="override the panel fill-opacity, e.g. 1.0 for a fully opaque box")
     a = ap.parse_args()
+    if a.panel_opacity is not None:
+        globals()["PANEL_OPACITY"] = a.panel_opacity
+    raster, venv = a.raster, a.venv
+    if raster in ("auto", "cairosvg"):
+        ok = subprocess.run([venv, "-c", "import cairosvg"], capture_output=True).returncode == 0
+        if ok:
+            raster = "cairosvg"
+        elif raster == "cairosvg":
+            raise SystemExit(f"cairosvg not importable from {venv}")
+        else:
+            raster = "qlmanage"
+            print("  WARNING: cairosvg not found; falling back to qlmanage, which FLATTENS "
+                  "alpha and renders the panel a lighter grey than designed.")
+    print(f"  rasteriser: {raster}   panel opacity: {PANEL_OPACITY}")
     out = pathlib.Path(a.outdir); out.mkdir(parents=True, exist_ok=True)
 
     picks = rows(a.uc)
     if a.address:
+        want_norm = {normkey(f) for f in a.address}
         picks = [r for r in picks
-                 if any(f.upper() in str(r["address_display"]).upper() for f in a.address)]
+                 if any(f.upper() in str(r["address_display"]).upper() for f in a.address)
+                 or normkey(r["address_display"]) in want_norm]
     if not picks:
         raise SystemExit("nothing matched")
 
@@ -201,8 +252,15 @@ def main():
             continue
         (tmp / f"{s}.svg").write_text(body, encoding="utf-8")
         # qlmanage renders the SVG; alpha survives, and a square canvas needs no crop
-        subprocess.run(["qlmanage", "-t", "-s", str(W), "-o", str(tmp), str(tmp / f"{s}.svg")],
-                       capture_output=True)
+        if raster == "cairosvg":
+            png = tmp / f"{s}.svg.png"
+            subprocess.run([venv, "-c",
+                            "import sys,cairosvg;cairosvg.svg2png(url=sys.argv[1],"
+                            "write_to=sys.argv[2],output_width=int(sys.argv[3]))",
+                            str(tmp / f"{s}.svg"), str(png), str(W)], capture_output=True)
+        else:
+            subprocess.run(["qlmanage", "-t", "-s", str(W), "-o", str(tmp), str(tmp / f"{s}.svg")],
+                           capture_output=True)
         png = tmp / f"{s}.svg.png"
         if not png.exists():
             print(f"  FAILED to rasterise {s}")

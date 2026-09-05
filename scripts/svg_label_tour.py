@@ -28,26 +28,6 @@ from gen_building_loop import buildings as site_buildings
 from stamp_geometry import geometry_sha
 
 
-def normkey(a):
-    """A slug-insensitive address key, for matching GEOMETRY names to DB addresses.
-
-    The label PNGs are named from v2's address_display; the targets are named from the geometry
-    file. They are usually the same string and occasionally are not, and when they differ the
-    label is silently dropped from the tour. 2099 M L KING JR Way in v2 is "2099 MLK Jr Way" in
-    the geometry, so its label -- a completed 72-unit building the flight passes -- never
-    appeared. Squash case, punctuation and spacing, then fold the one street name in Berkeley
-    that is written four different ways into a single token. Longest alias first, or MLKING
-    would never match because MLK has already consumed its prefix.
-    """
-    k = re.sub(r"[^A-Z0-9]", "", str(a).upper())
-    # Fold only the NAME, never the "JR" that follows it. Including MLKINGJR in this list ate
-    # the JR on the v2 side ("2099MLKWAY") and not on the geometry side ("2099MLKJRWAY"), so the
-    # two still failed to match -- the fix has to leave both sides with the same remainder.
-    for alias in ("MARTINLUTHERKING", "MLKING"):
-        k = k.replace(alias, "MLK")
-    return k
-
-
 def site_rings(geom_path):
     """{ADDRESS: [(lon, lat), ...]} — every footprint vertex of a site, for reach-by-bearing."""
     import collections
@@ -118,11 +98,11 @@ def reach(ring, lon, lat, ux, uy, soft=SOFT_M):
     m = max(ds)
     # subtract the max before exponentiating -- otherwise exp overflows on a large footprint
     return max(m + soft * math.log(sum(math.exp((d - m) / soft) for d in ds)), 0.0)
-from gen_svg_labels import slug as slugify
+from gen_svg_labels import slug as slugify, normkey
 from xml.dom import minidom
 
 GEOM = pathlib.Path("kml/geometry/geometry.kml")
-IMGS = pathlib.Path("scratch/2026-08-31/svg-labels")
+IMGS = pathlib.Path("scratch/2026-08-31/svg-labels")   # overridable with --imgs
 # AT THE ROOFLINE. The history of this number is the whole problem in miniature: roof + 34 m
 # floated free of the building and left frame during orbits; 0.80 of roof sank into the mass and
 # could land on Earth's "Image Landsat / Copernicus" strip; 0.86 still centred the box on the
@@ -207,6 +187,15 @@ def main():
     ap.add_argument("--tour", required=True, help="tour stem in kml/tours/")
     ap.add_argument("--street", default=None, help="street-label set to fold in, e.g. shattuck")
     ap.add_argument("--out", default=None)
+    ap.add_argument("--tag", default="",
+                    help="suffix for the package filename AND the Movie Maker tour name. Two "
+                         "builds of one route otherwise carry identical tour names and appear as "
+                         "two indistinguishable rows in Movie Maker's list.")
+    ap.add_argument("--imgs", default=None,
+                    help="label PNG directory; use a separate one to compare renderers")
+    ap.add_argument("--label-args", default="",
+                    help="extra args passed straight to gen_svg_labels.py, e.g. "
+                         "\'--raster cairosvg --panel-opacity 1.0\'")
     ap.add_argument("--all", action="store_true",
                     help="label EVERY building the flight passes, not only the orbit targets. A "
                          "label appears when the camera comes within --radius of its building and "
@@ -232,6 +221,9 @@ def main():
                     help="reposition a visible label every Nth leg. 1 is smoothest; 2 halves the "
                          "file for no visible difference outside an orbit.")
     a = ap.parse_args()
+    global IMGS
+    if a.imgs:
+        IMGS = pathlib.Path(a.imgs)
 
     tour_path = pathlib.Path(f"kml/tours/{a.tour}.kml")
     tour = re.search(r"<gx:Tour>.*?</gx:Tour>", tour_path.read_text(errors="replace"), re.S).group(0)
@@ -332,6 +324,7 @@ def main():
     # ONE subprocess, not one per label. Each invocation pays Python startup and a full read of
     # v2 -- about 1.3 s -- so 58 labels cost 80 s of process churn and almost no rasterising.
     cmd = [sys.executable, "scripts/gen_svg_labels.py", "--outdir", str(IMGS)]
+    cmd += a.label_args.split()
     for _, _, addr, _ in targets:
         cmd += ["--address", addr]
     subprocess.run(cmd, capture_output=True)
@@ -582,7 +575,7 @@ def main():
     tourname = re.search(r"(<gx:Tour>.{0,300}?<name>)([^<]*)(</name>)", tour, re.S)
     if tourname:
         stem = tourname.group(2).split(" · ")[0]
-        mark = f"{stem} · LABELLED · {len(pms)} buildings"
+        mark = f"{stem} · LABELLED · {len(pms)} buildings" + (f" · {a.tag}" if a.tag else "")
         tour = tour[:tourname.start(2)] + mark + tour[tourname.end(2):]
 
     sha = geometry_sha()
@@ -600,7 +593,7 @@ def main():
     # geometry_sha(), so a package built here is named exactly as build_tour_package.py names its
     # own and a stale one is visible by its name alone.
     out_path = pathlib.Path(
-        a.out or f"kml/tours/packages/{a.tour}-labelled__geom-{sha}.kmz")
+        a.out or f"kml/tours/packages/{a.tour}-labelled{'-' + a.tag if a.tag else ''}__geom-{sha}.kmz")
     out_path.parent.mkdir(parents=True, exist_ok=True)
     EPOCH = (1980, 1, 1, 0, 0, 0)
     with zipfile.ZipFile(out_path, "w", zipfile.ZIP_DEFLATED) as z:

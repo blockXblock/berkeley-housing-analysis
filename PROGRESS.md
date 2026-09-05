@@ -6,6 +6,86 @@
 
 ---
 
+## 2026-09-04 — owner join reached the site; the label engine's placement faults found and fixed
+
+**The owner join had never been published.** `export_explorer_data_v2.py` writes
+`docs/explorer_data_v2_working.js`; `docs/explorer.html` -- the page every link on the site points
+at -- reads `docs/explorer_data.js`. Promotion between them is a manual copy nobody had run. The
+live explorer was serving data whose own header read **2026-08-10**: 28 owners populated out of
+895 projects, against 852 in the working file. The export prints a cheerful success line about a
+file nobody serves, and `deploy_gate.py` passed 15/15 while shipping month-old data.
+
+Promoted and deployed (`db51945`, main `2129539`, pushed): owners 28 -> 852, architects 44 -> 49,
+plus 2128 Oxford's corrected 456 units / 27 storeys. Shape was checked BEFORE copying -- both files
+declare the same `DATA` variable and the same 9 top-level keys -- rather than discovering a break
+after. The deploy also carried `docs/methodology/geometry_and_tours.md` and the recovered
+`kml/tours/panoramic-kennedy-legacy.kml`, both committed earlier and never published.
+
+**A gate check now blocks it (`2001854`), negative-tested against the real pre-promotion file** --
+it FAILS and names both dates and the two commands that fix it. A gate that has never fired is not
+evidence of anything.
+
+**The same bug was in the labels, and had already shipped a wrong number.** `gen_svg_labels.py`
+cached on "does `<slug>.png` exist" -- a filename no data change can touch. `2128-oxford-st.png`
+was rendered at 11:19 saying *485 units / 26 storeys*, ninety minutes before the write that made it
+456 / 27; any tour built after would still have shown 485. The cache now hashes the SVG into a
+`.sha` sidecar and re-renders when and only when something DISPLAYED changes. All 894 re-rendered.
+SCALE 1.20 -> 1.60 (John: "still hard to read"); John also set Earth to Large, so size is settled --
+do not raise it again without asking.
+
+### Four placement faults, all found by John watching, all real bugs rather than tuning (`145899a`)
+
+- **`orbit_of` was EMPTY in `--all` mode.** It was built from `targets` AFTER the `--all` branch
+  replaces them with proximity entries carrying `(None, None)`. So `being_orbited` was false for
+  every building *including the one being orbited*: the subject moved on the every-other-leg cadence
+  meant for distant pass-bys, and `--orbit-focus` never fired. The comment directly above claimed
+  the spans were "retained and used for cadence below" -- they were retained in `spans`, and nothing
+  read them. **A comment asserting a fix is not the fix.** 2190: 15 placements -> 59.
+- **A label now places on the leg it lights.** The static placemark sits at the centroid at roof
+  height (`LIFT_FRACTION 1.00`) as a fallback for the animation to override, but a label lit on an
+  odd leg was not moved until the next even one and showed there first. 2420 Shattuck (roof 59.5 m)
+  is lit so briefly that the fallback was most of what was on screen.
+- **A pass-by is placed once, from closest approach.** The still rule existed for short spans but
+  could never apply in `--all`, whose targets carry no span to measure.
+- **The climb is rate-limited**, as the bearing already was.
+
+### The radial pump (`6796d35`) — worth remembering, because the obvious fix is wrong
+
+2700 Shattuck's label breathed in and out **four times per orbit, once per corner**, 36 m to 77 m.
+Everything else was smooth: 59 placements over 59 legs, bearing at 6.4 deg/leg against a 12 deg cap.
+`SOFT_M` cannot fix it -- it rounds corners over a 3 m scale and the swing is 41 m. **The
+oscillation is the shape of the support function itself**, not a corner artifact: half-width 36 m,
+half-diagonal 77 m.
+
+**The constraint is one-sided, and that is the whole lesson.** The label must stay OUTSIDE the
+footprint or Earth depth-tests it away behind the building, so reach may only be smoothed UPWARD.
+Blending toward the mean -- the obvious move -- sinks it into the mass at the long ends. Fully
+smoothed upward IS the circumradius circle, already rejected 2026-09-02 for standing 71-79 m off a
+short face. So: a floor at **0.75 of each site's own max reach** plus a **3 m/leg radial limit**.
+2700 swing 41 -> 24 m; 2190 30 -> 18 m. **Damped, not eliminated** -- `REACH_FLOOR_FRAC` is the
+taste dial (0.85 would give ~11 m swing at ~12 m further off short faces).
+
+Also fixed (`a17b4c6`): geometry names are matched to v2 addresses on a normalised key, so
+2099 M L KING JR Way ("2099 MLK Jr Way" in the geometry) stopped being silently dropped.
+
+### Where it stands
+
+`kml/tours/packages/shattuck-s2n-path-labelled__geom-a3d103322890.kmz` -- 60 labels, 9.2 MB, with
+John to record. **First package built on current geometry**; every other package is still
+`geom-3b3f51826e15`. Its inner tour was renamed "Shattuck Ave S-to-N · LABELLED · 60 buildings"
+because the unlabelled package carries an IDENTICAL tour name and Movie Maker would list two
+indistinguishable rows.
+
+**Queued, in order:** (1) `svg_label_tour.py` should write the package directly -- sha name,
+distinguishing tour name -- instead of scratch/ + Desktop needing hand-placement (John: after he
+records). (2) The 2274/2276 overlap: two real buildings 21 m apart, both labelled, boxes likely
+colliding; fix is a vertical stagger for close pairs. (3) Six tours still on the OLD engine and the
+smaller labels: private-200, bancroft-e2w, uc-dormitories, san-pablo-n2s, durant-w2e,
+university-880-uc. (4) 2190 Shattuck's 452 units still unverified against its plan set. (5) JN lane
+must append a new baseline -- proj133 is 456, not 485.
+
+---
+
 ## 2026-09-04 — 2128 Oxford corrected to the ZAB-approved plan set (485 → 456), and v2's first real second version
 
 The three competing numbers turned out to be three different quantities, not a disagreement:

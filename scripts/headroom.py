@@ -62,7 +62,9 @@ def read():
 
     du = shutil.disk_usage("/")
     d["disk_free_gb"] = du.free / 1024**3
-    d["uptime_days"] = (time.time() - float(re.search(r"sec = (\d+)", sh("sysctl -n kern.boottime")).group(1))) / 86400
+    boot = float(re.search(r"sec = (\d+)", sh("sysctl -n kern.boottime")).group(1))
+    d["boot_epoch"] = boot
+    d["uptime_days"] = (time.time() - boot) / 86400
     d["load_1m"] = float(sh("sysctl -n vm.loadavg").split()[1])
     return d
 
@@ -73,7 +75,14 @@ def verdict(d, prev):
     if d["disk_free_gb"] < DISK_MIN_GB:
         bad.append(f"boot disk {d['disk_free_gb']:.1f} GB free, want >= {DISK_MIN_GB:.0f} — "
                    "this is what caps the swap ceiling")
-    if d["swap_total_gb"] < SWAP_TOTAL_MIN_GB:
+    # ZERO SWAP IS THE BEST STATE, NOT THE WORST. After a reboot macOS has created no swapfile at
+    # all -- /private/var/vm holds only sleepimage -- and vm.swapusage reports 0.00M total. The
+    # first version read that as a collapsed ceiling and told John to reboot a machine he had just
+    # rebooted twice. A ceiling only means anything once one exists.
+    if d["swap_total_gb"] == 0:
+        note.append("no swapfile yet — macOS has not needed one since boot, which is the "
+                    "healthiest state there is")
+    elif d["swap_total_gb"] < SWAP_TOTAL_MIN_GB:
         bad.append(f"swap CEILING only {d['swap_total_gb']:.1f} GB — too small for a 1080p "
                    "encoder; free boot disk, then reboot")
     if d["swap_used_frac"] > SWAP_USED_MAX:
@@ -83,9 +92,19 @@ def verdict(d, prev):
                    "Movie Maker will fail to allocate an encoder")
     if d["uptime_days"] > UPTIME_MAX_DAYS:
         note.append(f"up {d['uptime_days']:.1f} days — swap does not clear without a reboot")
+    # A high load in the first ten minutes after boot is Spotlight, Time Machine and the neural
+    # engine settling, not a problem. Measured 2026-09-05: 124.9 at one minute, 18.6 at four.
     if d["load_1m"] > 8:
-        note.append(f"load average {d['load_1m']:.1f} — something is already working hard")
-    if prev and d["swap_total_gb"] < prev.get("swap_total_gb", 0) - 0.4:
+        if d["uptime_days"] * 1440 < 10:
+            note.append(f"load average {d['load_1m']:.1f}, but only "
+                        f"{d['uptime_days']*1440:.0f} min since boot — post-boot settling "
+                        "(Spotlight, Time Machine, neural engine); give it a few minutes")
+        else:
+            note.append(f"load average {d['load_1m']:.1f} — something is already working hard")
+    # Compare ceilings only WITHIN one boot. Across a restart the ceiling legitimately drops to
+    # zero, which is the reboot working, not the disk squeezing it.
+    same_boot = prev and prev.get("boot_epoch") == d["boot_epoch"]
+    if same_boot and d["swap_total_gb"] > 0 and d["swap_total_gb"] < prev.get("swap_total_gb", 0) - 0.4:
         bad.append(f"swap ceiling SHRANK {prev['swap_total_gb']:.1f} -> {d['swap_total_gb']:.1f} GB "
                    "since the last check — the disk is squeezing it")
     return (not bad), bad, note

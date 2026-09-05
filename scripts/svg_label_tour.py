@@ -25,6 +25,7 @@ WHAT IT DOES, and why each part is there (all of it learned by John watching it)
 import argparse, math, os, pathlib, re, shutil, subprocess, sys, zipfile
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from gen_building_loop import buildings as site_buildings
+from stamp_geometry import geometry_sha
 
 
 def normkey(a):
@@ -572,14 +573,34 @@ def main():
             imgs.append(pathlib.Path("kml/tours/labels/transparent-1x1.png"))
             print(f"    folded in {a.street} street signs")
 
+    # NAME THE TOUR FOR MOVIE MAKER'S LIST, NOT FOR US. Movie Maker shows saved tours by their
+    # <gx:Tour><name>, and the unlabelled package of the same route carries an IDENTICAL name --
+    # two indistinguishable rows, no way to know which one has labels (John, 2026-09-04). Mark
+    # the labelled build in the name itself, with the label count, which is the thing that
+    # differs. Nothing here changes what Movie Maker can FIND: it lists what is loaded in Places
+    # and has no notion of a directory. The package path is for the file picker and the catalog.
+    tourname = re.search(r"(<gx:Tour>.{0,300}?<name>)([^<]*)(</name>)", tour, re.S)
+    if tourname:
+        stem = tourname.group(2).split(" · ")[0]
+        mark = f"{stem} · LABELLED · {len(pms)} buildings"
+        tour = tour[:tourname.start(2)] + mark + tour[tourname.end(2):]
+
+    sha = geometry_sha()
     doc = ('<?xml version="1.0" encoding="UTF-8"?>\n'
            '<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">\n'
-           f'<Document>\n\t<name>{a.tour} · SVG labels · one at a time</name>\n'
+           f'<Document>\n\t<name>{a.tour} · LABELLED · geom-{sha}</name>\n'
            + geom_styles + "".join(styles) + "\n" + tour + "\n"
            + "".join(kept) + "".join(pms) + street + "\n</Document>\n</kml>\n")
     minidom.parseString(doc)
 
-    out_path = pathlib.Path(a.out or f"scratch/2026-08-31/{a.tour}-svg-labels.kmz")
+    # WRITE THE PACKAGE DIRECTLY. This used to land in scratch/ plus a Desktop copy, and every
+    # build then had to be hand-placed into kml/tours/packages/ under the __geom-<sha> convention
+    # -- a manual step that is easy to skip and impossible to notice having skipped, which is the
+    # same class of bug as the unpromoted explorer data. The sha comes from the SHARED
+    # geometry_sha(), so a package built here is named exactly as build_tour_package.py names its
+    # own and a stale one is visible by its name alone.
+    out_path = pathlib.Path(
+        a.out or f"kml/tours/packages/{a.tour}-labelled__geom-{sha}.kmz")
     out_path.parent.mkdir(parents=True, exist_ok=True)
     EPOCH = (1980, 1, 1, 0, 0, 0)
     with zipfile.ZipFile(out_path, "w", zipfile.ZIP_DEFLATED) as z:
@@ -589,10 +610,11 @@ def main():
             if p.exists():
                 zi2 = zipfile.ZipInfo(p.name, EPOCH); zi2.compress_type = zipfile.ZIP_DEFLATED
                 z.writestr(zi2, p.read_bytes())
-    dest = pathlib.Path.home() / "Desktop" / f"{out_path.stem}.kmz"
-    shutil.copy(out_path, dest)
     print(f"  {len(kept)} polygons, {len(pms)} boxed labels, {moves} repositions")
-    print(f"  {out_path} ({out_path.stat().st_size/1024:.0f} KB) -> {dest}")
+    print(f"  {out_path} ({out_path.stat().st_size/1024:.0f} KB)")
+    print(f'  tour name in Movie Maker: "{mark if tourname else "(unnamed)"}"')
+    print(f"  LOAD IT to record -- Movie Maker lists what is in Places, not what is on disk:")
+    print(f"    open {out_path}")
 
 
 if __name__ == "__main__":

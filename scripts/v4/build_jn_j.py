@@ -57,6 +57,8 @@ imported classifier, base permits only), keeping issued/finaled dates and units.
 code(r'''
 import os, sys, json, glob, sqlite3, subprocess
 import pandas as pd
+import plotly.io as pio
+pio.renderers.default = 'notebook_connected'  # so figures embed in the nbconvert HTML export
 ROOT = os.path.expanduser('~/berkeley-data')
 sys.path.insert(0, os.path.join(ROOT, 'scripts'))
 sys.path.insert(0, os.path.join(ROOT, 'scripts', 'build_v2'))
@@ -195,6 +197,48 @@ died = st.isin(['Withdrawn', 'Denied'])
 print(f'\n=== Planning applications 2015-2025: {len(pp):,}; withdrawn {int(st.eq("Withdrawn").sum()):,} '
       f'+ denied {int(st.eq("Denied").sum()):,} = {died.mean():.1%} die at the first gate '
       f'(approved-family statuses: {int(st.str.startswith("Approved").sum()):,})')
+""")
+
+md(r"""
+## §4b — The inflow is collapsing (the front of the funnel)
+📝 §2–§4 measure what happens to housing *once applied for*. But the funnel has a front door, and it is
+closing. Here is the **volume of large-project applications** (50+ units) filed with the City each year —
+the unit-tagged pipeline from v2, UC excluded. Watch the rise through the 2023–24 peak and the collapse
+after. ▶ Play animates the year-by-year build.
+""")
+code(r"""
+import plotly.graph_objects as go
+v2 = sqlite3.connect(f"file:{os.path.join(ROOT,'databases','berkeley_housing_v2.db')}?mode=ro", uri=True)
+ucp = {r[0] for r in v2.execute("SELECT c.project_id FROM project_classifications c "
+       "JOIN vocabulary_classification_types t ON t.id=c.classification_type_id WHERE t.code='uc_project'")}
+pf = pd.read_sql("SELECT project_id,total_units,filed_date FROM v_projects_flat WHERE total_units>=50", v2)
+pf = pf[~pf.project_id.isin(ucp)].copy()
+pf['yr'] = pd.to_datetime(pf.filed_date, errors='coerce').dt.year
+tr = (pf[(pf.yr >= 2015) & (pf.yr <= 2026)].groupby(pf.yr.astype('Int64')).size()
+      .reindex(range(2015, 2027), fill_value=0))
+years = [str(y) for y in tr.index]; vals = [int(v) for v in tr.values]
+cols = ['#b5371f' if v >= 20 else '#e0863a' if v >= 6 else '#c9c3b6' for v in vals]
+pk = max(vals)
+frames = [go.Frame(data=[go.Bar(x=years[:i+1], y=vals[:i+1], marker_color=cols[:i+1],
+          text=[str(v) for v in vals[:i+1]], textposition='outside')], name=years[i]) for i in range(len(years))]
+fig = go.Figure(data=[go.Bar(x=[years[0]], y=[vals[0]], marker_color=[cols[0]])], frames=frames)
+fig.update_layout(title='Large-project applications (50+ units) filed per year — the collapse',
+    yaxis_title='applications', yaxis_range=[0, pk+4], height=400, template='plotly_white', bargap=0.3,
+    updatemenus=[dict(type='buttons', x=0.02, y=1.15, buttons=[dict(label='▶ Play', method='animate',
+        args=[None, {'frame': {'duration': 380}, 'transition': {'duration': 160}}])])])
+i24, i25, i26 = years.index('2024'), years.index('2025'), years.index('2026')
+fig.add_annotation(x='2024', y=vals[i24], text=f'peak {vals[i24]}', showarrow=True, arrowhead=2, yshift=12)
+print(f"Large-project (50+u) applications: 2024 peak {vals[i24]} -> 2025 {vals[i25]} "
+      f"({(vals[i25]-vals[i24])/max(1,vals[i24]):+.0%}) -> 2026 {vals[i26]}* (partial year + ingestion gap)")
+fig.show()
+""")
+
+md(r"""
+📝 **What this could mislead:** 2026 is a **partial year** *and* undercounted — the City permit feed lags
+~8 months, so recent applications aren't yet ingested, and this figure counts only tracked 50+-unit projects.
+News coverage confirms only small new proposals, no towers. But the **2024→2025 drop is on fully-resolved
+years** and is real. Read this as the *inflow*; §2–§4 are what becomes of it once inside the pipeline.
+The two stories together: **applications collapsing while the approved-but-unbuilt backlog stays full.**
 """)
 
 md(r"""

@@ -1,0 +1,17 @@
+{
+ "as_of": "2026-09-01",
+ "v4_sha": "db51945",
+ "classifier": "e122a6a61b423955",
+ "provenance": "JN-J baseline APPEND 2026-09-01: permit_role classifier updated since 2026-07-04 (743edfb->e122a6a) reclassified permits \u2014 housing_masters 928->1042, mature_units_issued 2347->2444, finaled 2241->2326, not-finaled 106->118. closed_expired(10855)/planning_apps(14162)/stalled(11,830) unchanged. Legitimate method+data drift per JN-J's assumptions ledger.",
+ "figures": {
+  "housing_masters": 1042,
+  "mature_units_issued_2015_2022": 2444,
+  "mature_units_finaled": 2326,
+  "mature_units_not_finaled": 118,
+  "stalled_register_projects_10u": 11,
+  "stalled_register_units": 830,
+  "closed_expired_building_apps": 10855,
+  "planning_apps_2015_2025": 14162,
+  "planning_first_gate_death_share": 0.0738
+ }
+}

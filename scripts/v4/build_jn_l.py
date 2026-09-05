@@ -26,13 +26,44 @@ V2 = os.path.join(ROOT, 'databases', 'berkeley_housing_v2.db')
 ASSESSOR = os.path.join(ROOT, 'databases', 'berkeley.db')
 NB_OUT = os.path.join(ROOT, 'notebooks', 'v4', 'JN-L_fiscal_flows.ipynb')
 BASELINE_GLOB = os.path.join(ROOT, 'data', 'baselines', 'fiscal_flows_baseline_*.json')
-BASELINE_DATE = '2026-09-02'
+BASELINE_DATE = '2026-09-04'
+# Itemized per-permit fee snapshot — the AgencyCounter total_fee layer that FILLS the §8 data gap
+# ("itemized impact/HTF/inclusionary fees NOT MATERIALIZED in v2"). DATED + frozen (append-on-change):
+# a re-harvest writes a NEW dated file + a NEW baseline. scripts/harvest_permit_fees.py produces it.
+FEES_SNAPSHOT_GLOB = os.path.join(ROOT, 'data', 'reference', 'permit_fees_*.csv')
 
 ADU_BLOCK = (185, 899)  # CO-only import cohort id block (CLAUDE.md structural fact)
 
 
 def ro(p):
     return sqlite3.connect(f'file:{p}?mode=ro', uri=True)
+
+
+def itemized_fees():
+    """Aggregate the newest per-permit fee snapshot (AgencyCounter total_fee) into gated figures.
+    Returns None if no snapshot exists yet (the §8b gate keys are then skipped). A 'new-construction
+    BP' = record_type 'Building Permit' whose description does NOT start 'Demolition' — the fee that
+    scales with project size; demolition BPs are the small fixed-ish charges."""
+    import csv as _csv
+    paths = sorted(glob.glob(FEES_SNAPSHOT_GLOB))
+    if not paths:
+        return None
+    rows = list(_csv.DictReader(open(paths[-1])))
+    def fee(r):
+        try:
+            return float(r.get('total_fee') or 0)
+        except ValueError:
+            return 0.0
+    fees = [fee(r) for r in rows if fee(r) > 0]
+    newbuild = [fee(r) for r in rows if r.get('record_type') == 'Building Permit'
+                and not (r.get('description') or '').lstrip().startswith('Demolition')]
+    return {
+        'itemized_fee_snapshot': os.path.basename(paths[-1]),
+        'itemized_fee_permits': len(fees),
+        'itemized_fee_projects': len({r['project_id'] for r in rows if fee(r) > 0}),
+        'itemized_fee_total_k': round(sum(fees) / 1e3),
+        'itemized_bp_max_k': round(max(newbuild) / 1e3) if newbuild else 0,
+    }
 
 
 def file_sha(path):
@@ -152,6 +183,11 @@ def derive():
             FROM unit_program_affordability ua
             JOIN vocabulary_restriction_types rt ON rt.id = ua.restriction_type_id
             WHERE rt.code = 'density_bonus'""").fetchone()[0]
+
+        # itemized per-permit fee layer (AgencyCounter total_fee snapshot — fills the §8 data gap)
+        itf = itemized_fees()
+        if itf:
+            d.update(itf)
     return d, file_sha(V2), file_sha(ASSESSOR)
 
 
@@ -165,6 +201,8 @@ HARD_KEYS = {
     'vli_completed_units': 'affordability rows added/corrected on completed projects',
     'density_bonus_units': 'restriction-type labeling progress',
     'fees_projects': 'fee ingestion progress (Accela harvest)',
+    'itemized_fee_permits': 'a NEW dated permit_fees_*.csv snapshot (re-harvest) → append a new baseline',
+    'itemized_fee_projects': 'a NEW dated permit_fees_*.csv snapshot (re-harvest) → append a new baseline',
 }
 ROUNDED_KEYS = {
     'tracked_imps_m': 'County reassessment posts (EXPECTED to rise: 1-2yr lag on 2024-26 COs)',
@@ -172,6 +210,8 @@ ROUNDED_KEYS = {
     'cohort_valuation_sum_m': 'valuation corrections',
     'benchmark_per_unit_k': 'a larger project becomes fully enrolled (benchmark ratchets up)',
     'fees_total_m': 'fee ingestion progress',
+    'itemized_fee_total_k': 'a NEW dated permit_fees snapshot (re-harvest) → append a new baseline',
+    'itemized_bp_max_k': 'a larger new-construction BP fee appears in a re-harvest → append a new baseline',
 }
 
 EXTERNAL_FACTS = {
@@ -225,7 +265,12 @@ def write_baseline(derived, v2s, ass):
         'rounded_gated': {k: {'value': derived[k], 'what_would_change_it': w} for k, w in ROUNDED_KEYS.items()},
         'derived_context': {'tracked_units': derived['tracked_units'],
                             'tracked_per_year': derived['tracked_per_year'],
-                            'benchmark_project_id': derived['benchmark_project_id']},
+                            'benchmark_project_id': derived['benchmark_project_id'],
+                            'itemized_fee_snapshot': derived.get('itemized_fee_snapshot')},
+        'append_note': ("appended after 2026-09-02: all §2-§8 gated figures UNCHANGED (v2 sha drift only, "
+                        "from this session's UC bed-count + Jaynes status writes, which do not touch COs/"
+                        "valuations/fees); adds the §8b itemized per-permit fee layer from the frozen "
+                        "AgencyCounter snapshot " + str(derived.get('itemized_fee_snapshot')) + "."),
         'external_facts': EXTERNAL_FACTS,
         'estimation_params': ESTIMATION_PARAMS,
     }
@@ -303,6 +348,8 @@ gate (§10) will say so.
     code("""
 import os, sqlite3, json, glob, hashlib, statistics
 import pandas as pd
+import plotly.io as pio
+pio.renderers.default = 'notebook_connected'   # so plotly figures survive nbconvert-to-HTML export
 ROOT = os.path.expanduser('~/berkeley-data')
 V2 = os.path.join(ROOT, 'databases', 'berkeley_housing_v2.db')
 ASSESSOR = os.path.join(ROOT, 'databases', 'berkeley.db')
@@ -632,6 +679,75 @@ into measurements.
 """)
 
     md("""
+## §8b — The itemized permit-fee layer: what each permit actually charged (fills the §8 gap)
+**Assumption + plan.** §8's `fees` table is v2's *aggregate* layer — a single un-itemized "total paid"
+per project ($14.1M across 57 projects), which cannot say what the city charged for a specific permit.
+This section reads a **dated, frozen AgencyCounter snapshot** (`data/reference/permit_fees_*.csv`,
+harvested by `scripts/harvest_permit_fees.py`) that carries **`total_fee` PER PERMIT** — the itemized
+grain v2 lacks. **What to read:** the fiscal engine is the **new-construction Building Permit fee**, and
+it scales with project size — the 124-unit tower at 1750 Sacramento was charged ~$665K, while a
+demolition permit is a few thousand. **Why it matters (the link to §4b):** the big BP fee is charged at
+permit issuance, so the large-project **application collapse of 2024→2026 (JN-J §4b) is a leading
+indicator of a coming decline in this fee stream** — fewer towers applying now means fewer $600K BP
+fees landing in two years.
+""")
+    code("""
+import plotly.graph_objects as go
+snap = sorted(glob.glob(os.path.join(ROOT, 'data', 'reference', 'permit_fees_*.csv')))[-1]
+fees = pd.read_csv(snap)
+fees = fees[fees.total_fee > 0].copy()
+
+def fee_class(r):
+    d = str(r.description or '').lstrip()
+    if r.record_type == 'Building Permit' and not d.startswith('Demolition'):
+        return 'New-construction BP'
+    if d.startswith('Demolition') or 'Demolition' in str(r.record_type):
+        return 'Demolition'
+    return 'Other (mech/elec/plumb/misc)'
+fees['klass'] = fees.apply(fee_class, axis=1)
+
+by_class = fees.groupby('klass').total_fee.agg(['count', 'sum']).sort_values('sum', ascending=False)
+nb_sum = float(fees.loc[fees.klass == 'New-construction BP', 'total_fee'].sum())
+print(f'ITEMIZED PERMIT-FEE SNAPSHOT  <-  {os.path.basename(snap)}  (frozen, gated in §10)')
+print(f'  {len(fees)} fee-bearing permits across {fees.project_id.nunique()} projects  |  total ${fees.total_fee.sum():,.0f}')
+print(f'  new-construction BP fees carry ${nb_sum:,.0f} = {nb_sum/fees.total_fee.sum()*100:.0f}% of the itemized total')
+print()
+for k, r in by_class.iterrows():
+    print(f'   {k:34} {int(r["count"]):>3} permits   ${r["sum"]:>12,.0f}')
+
+# top fee-bearing permits — the shape of the charge
+COLOR = {'New-construction BP': '#b5371f', 'Demolition': '#c9975a', 'Other (mech/elec/plumb/misc)': '#9aa0a6'}
+top = fees.sort_values('total_fee', ascending=False).head(15).iloc[::-1]
+label = [f"{a[:20]} · {p}" for a, p in zip(top.address, top.permit)]
+fig = go.Figure(go.Bar(
+    x=top.total_fee, y=label, orientation='h',
+    marker_color=[COLOR[k] for k in top.klass],
+    text=[f'${v/1e3:.0f}K' for v in top.total_fee], textposition='outside',
+    customdata=top[['klass', 'units', 'permit_status']].values,
+    hovertemplate='%{y}<br>$%{x:,.0f}<br>%{customdata[0]} · %{customdata[1]}u · %{customdata[2]}<extra></extra>'))
+fig.update_layout(
+    title=f'Itemized city permit fees — top 15 charges  ({os.path.basename(snap)})',
+    xaxis_title='total fee charged ($)', height=520,
+    margin=dict(l=8, r=60, t=54, b=40), plot_bgcolor='white',
+    annotations=[dict(x=0.98, y=0.06, xref='paper', yref='paper', showarrow=False, align='right',
+                      font=dict(size=11, color='#6b6b6b'),
+                      text='red = new-construction BP (scales with size) · tan = demolition · grey = other trades')])
+fig.show()
+""")
+    md("""
+📝 **What this snapshot could mislead about.** (1) **`total_fee` is populated on only a MINORITY of
+AgencyCounter records** — mostly the active/recent permits where the fee was computed — so this is the
+itemized *slice we can see*, **complementary to** v2's broader $14.1M aggregate (§8), **not a replacement
+and not a figure to sum against it**. (2) These are amounts **charged on the permit record, not a
+cash-flow ledger** — timing of collection differs. (3) The chart is **truncated to the top 15**; the long
+tail of small trade permits is real but fiscally minor (see the by-class totals printed above). (4)
+**No party names.** AgencyCounter carries no applicant/owner/developer identity, so this cannot yet be
+drawn as a *payer → city* flow — the who-pays-whom network needs the **Accela CapDetail Contacts harvest**
+(the queued next step). (5) The snapshot is **dated and frozen**; a re-harvest writes a NEW dated file and
+appends a NEW baseline — §10 gates the permit/project counts and the max BP fee so a silent change halts.
+""")
+
+    md("""
 ## §9 — Data lineage: how every figure in this JN was produced
 ```mermaid
 flowchart LR
@@ -647,7 +763,9 @@ flowchart LR
     X -.-> S7[§7 allocation Sankey]
     S5 --> S7
     V2 -->|fees + affordability| S8[§8 funding sources]
+    FEE[permit_fees_*.csv AgencyCounter total_fee snapshot] --> S8B[§8b itemized permit fees]
     BL[(fiscal_flows_baseline_*.json)] ==>|gate §10| S2
+    BL ==> S8B
     BL ==> S3
     BL ==> S4
 ```
@@ -678,6 +796,10 @@ derived_now = {
     'cohort_valuation_sum_m': round(cohort_val/1e6, 1),
     'benchmark_per_unit_k': round(bench_per_unit/1e3),
     'fees_total_m': round(fees_total/1e6, 1),
+    'itemized_fee_permits': int((fees.total_fee > 0).sum()),
+    'itemized_fee_projects': int(fees.loc[fees.total_fee > 0, 'project_id'].nunique()),
+    'itemized_fee_total_k': round(float(fees.total_fee.sum())/1e3),
+    'itemized_bp_max_k': round(float(fees.loc[fees.klass == 'New-construction BP', 'total_fee'].max())/1e3),
 }
 failures = []
 for section in ('hard_gated', 'rounded_gated'):

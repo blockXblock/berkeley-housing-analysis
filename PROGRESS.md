@@ -6,6 +6,35 @@
 
 ---
 
+## 2026-09-05 — JN-L §8b: the itemized per-permit fee layer (live AgencyCounter total_fee, gated)
+
+**The gap JN-L named is now filled.** §8 has always carried v2's *aggregate* fee layer — one
+un-itemized "total paid" per project ($14.1M / 57 projects) — and flagged the per-permit itemized
+fees as "NOT MATERIALIZED in v2 (data gap)". `scripts/harvest_permit_fees.py` swept the 112
+reportable non-UC projects (>=20u) through the AgencyCounter JSON API and pulled `total_fee` per
+building permit into a **dated, frozen snapshot** `data/reference/permit_fees_2026-09-01.csv`:
+**131 fee-bearing permits across 60 projects, $1.76M**. The fiscal signal is clean —
+**new-construction Building Permit fees carry 87% of it** ($1.53M / 42 permits; the 124-unit
+1750 Sacramento tower alone was charged ~$665K), while 36 demolition permits are $204K and 53
+other-trade permits $26K.
+
+**New JN-L §8b** (`build_jn_l.py`) reads the frozen snapshot, classifies BP/demo/other, plots the
+top-15 charges (plotly), and **links the fee stream to JN-J §4b**: the big BP fee is charged at
+permit issuance, so the 2024->2026 large-project *application* collapse is a leading indicator of a
+coming BP-fee-revenue decline. The text-sandwich after-note is honest about the limits —
+`total_fee` is populated on only a MINORITY of records (complementary to, not a replacement for,
+the $14.1M aggregate), no cash-flow timing, and **no party names** (the who-pays->city network still
+needs the Accela CapDetail *Contacts* harvest — queued next step).
+
+**Discipline held.** 4 gated figures added (`itemized_fee_permits` 131, `itemized_fee_projects` 60,
+`itemized_fee_total_k` 1763, `itemized_bp_max_k` 665); baseline **appended**
+`data/baselines/fiscal_flows_baseline_2026-09-04.json` — all §2-§8 figures UNCHANGED (v2 sha drift
+only, from this session's UC bed-count + Jaynes writes, which don't touch COs/valuations/fees), per
+the `append_note`. Notebook executes clean (30 cells), gate PASSES in-notebook, all 4 plotly figures
+survive HTML export (added `pio.renderers.default='notebook_connected'` to setup, same fix as JN-J).
+
+---
+
 ## 2026-09-04 — owner join reached the site; the label engine's placement faults found and fixed
 
 **The owner join had never been published.** `export_explorer_data_v2.py` writes

@@ -335,7 +335,7 @@ def main():
     for f in IMGS.glob("*.png"):
         by_norm.setdefault(normkey(f.stem.replace("-", " ")), f)
 
-    styles, pms, imgs = [], [], []
+    styles, pms, imgs, extra_imgs = {}, {}, {}, []
     for lo, hi, addr, v in targets:
         s = slugify(addr); png = IMGS / f"{s}.png"
         if not png.exists():
@@ -344,17 +344,25 @@ def main():
                 print(f"    no image for {s} — skipped"); continue
             print(f"    {s} -> {alt.stem} (matched on normalised address)")
             png = alt
-        imgs.append(png)
-        styles.append(f'<Style id="lbl_{s}"><IconStyle><scale>{ICON_SCALE}</scale>'
+        imgs[s] = png
+        styles[s] = (f'<Style id="lbl_{s}"><IconStyle><scale>{ICON_SCALE}</scale>'
                       f'<Icon><href>{png.name}</href></Icon>'
                       f'<hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/></IconStyle>'
                       f'<LabelStyle><scale>0</scale></LabelStyle></Style>')
-        pms.append(f'<Placemark id="pm_{s}"><name></name><visibility>0</visibility>'
+        pms[s] = (f'<Placemark id="pm_{s}"><name></name><visibility>0</visibility>'
                    f'<styleUrl>#lbl_{s}</styleUrl><Point>'
                    f'<coordinates>{v[0]!r},{v[1]!r},{v[2] * LIFT_FRACTION:.1f}</coordinates>'
                    f'<altitudeMode>relativeToGround</altitudeMode></Point></Placemark>')
 
+    # WHICH LABELS ARE EVER SHOWN. With --max-labels a building can be inside --radius for the
+    # whole flight and still never reach the nearest-N, so its style, placemark and PNG ride along
+    # in the package and are never drawn: 14 of 44 on bancroft-e2w, about a third of the file. Earth
+    # has to parse and load all of it. Record what actually lights and ship only that.
+    used = set()
+
     def vis(s, v, secs=0.0):
+        if v:
+            used.add(s)
         return (f'\t\t\t<gx:AnimatedUpdate><gx:duration>{secs:.2f}</gx:duration><Update><targetHref/>'
                 f'<Change><Placemark targetId="pm_{s}"><visibility>{v}</visibility></Placemark>'
                 f'</Change></Update></gx:AnimatedUpdate>\n')
@@ -563,7 +571,7 @@ def main():
             st = sp.read_text(errors="replace")
             street = ("".join(re.findall(r"<Style id=\"[^\"]*\">.*?</Style>", st, re.S))
                       + "".join(re.findall(r"<Placemark>.*?</Placemark>", st, re.S)))
-            imgs.append(pathlib.Path("kml/tours/labels/transparent-1x1.png"))
+            extra_imgs.append(pathlib.Path("kml/tours/labels/transparent-1x1.png"))
             print(f"    folded in {a.street} street signs")
 
     # NAME THE TOUR FOR MOVIE MAKER'S LIST, NOT FOR US. Movie Maker shows saved tours by their
@@ -572,18 +580,25 @@ def main():
     # the labelled build in the name itself, with the label count, which is the thing that
     # differs. Nothing here changes what Movie Maker can FIND: it lists what is loaded in Places
     # and has no notion of a directory. The package path is for the file picker and the catalog.
+    dropped = [k for k in pms if k not in used]
+    if dropped:
+        print(f"    {len(dropped)} label(s) never lit — not packaged")
+    styles = "".join(v for k, v in styles.items() if k in used)
+    pms_s = "".join(v for k, v in pms.items() if k in used)
+    imgs = [v for k, v in imgs.items() if k in used] + extra_imgs
+
     tourname = re.search(r"(<gx:Tour>.{0,300}?<name>)([^<]*)(</name>)", tour, re.S)
     if tourname:
         stem = tourname.group(2).split(" · ")[0]
-        mark = f"{stem} · LABELLED · {len(pms)} buildings" + (f" · {a.tag}" if a.tag else "")
+        mark = f"{stem} · LABELLED · {len(used)} buildings" + (f" · {a.tag}" if a.tag else "")
         tour = tour[:tourname.start(2)] + mark + tour[tourname.end(2):]
 
     sha = geometry_sha()
     doc = ('<?xml version="1.0" encoding="UTF-8"?>\n'
            '<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">\n'
            f'<Document>\n\t<name>{a.tour} · LABELLED · geom-{sha}</name>\n'
-           + geom_styles + "".join(styles) + "\n" + tour + "\n"
-           + "".join(kept) + "".join(pms) + street + "\n</Document>\n</kml>\n")
+           + geom_styles + styles + "\n" + tour + "\n"
+           + "".join(kept) + pms_s + street + "\n</Document>\n</kml>\n")
     minidom.parseString(doc)
 
     # WRITE THE PACKAGE DIRECTLY. This used to land in scratch/ plus a Desktop copy, and every
@@ -603,7 +618,7 @@ def main():
             if p.exists():
                 zi2 = zipfile.ZipInfo(p.name, EPOCH); zi2.compress_type = zipfile.ZIP_DEFLATED
                 z.writestr(zi2, p.read_bytes())
-    print(f"  {len(kept)} polygons, {len(pms)} boxed labels, {moves} repositions")
+    print(f"  {len(kept)} polygons, {len(used)} boxed labels, {moves} repositions")
     print(f"  {out_path} ({out_path.stat().st_size/1024:.0f} KB)")
     print(f'  tour name in Movie Maker: "{mark if tourname else "(unnamed)"}"')
     print(f"  LOAD IT to record -- Movie Maker lists what is in Places, not what is on disk:")

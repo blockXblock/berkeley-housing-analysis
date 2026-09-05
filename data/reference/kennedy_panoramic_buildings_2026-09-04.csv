@@ -13,6 +13,10 @@
 #                     own published figure for its own building)
 #   tour_caption    = the hand-written caption already in the tour KML; origin unrecorded
 #   assessor        = Alameda County, berkeley.db parcels, refreshed 2026-06-16 (primary)
+# REMOVED 2026-09-05: Panoramic Legacy. John's footprint move put it 25 m from proj15
+#   (2109 Virginia St, 110 units, 8 storeys, Entitled, Panoramic Interests), which the
+#   Berkeleyside council story corroborates. It was never absent from v2 -- the nearest-parcel
+#   match had it on 1690 Shattuck, the wrong side of the street. 9 in v2, 14 absent.
 # confidence: high = developer-published and unit count explicit; medium = tour caption only;
 #             none = not established
 #
@@ -24,11 +28,10 @@ University Lofts,1801 University Ave,1801 University Ave,057-2060-051-00,1997,29
 The Berkeleyan,1910 Oxford St,1910 Oxford St,057-2047-002-01,1998,56,,housing,developer_site,high,
 GAIA Building,2116 Allston Way,2116 Allston Way,057-2030-002-00,2001,91,19,housing,developer_site,high,"91 apartments (19 low-income)"
 ARTech,2001 Addison St,2002 Addison St ~APPROX LOC,057-2025-010-01,2002,21,,housing,tour_caption,medium,developer publishes 2002 Addison which does not exist in the assessor
-Acton Courtyard,1375 University Ave,1370 University Ave ~APPROX LOC,057-2073-004-00,2004,71,20,housing,developer_site,high,"71 apartments (20 low-income); developer publishes 1370 University, not in assessor"
+Acton Courtyard,2002 Acton St,2002 Acton St,056-1995-028-01,2004,71,20,housing,developer_site,high,"71 apartments (20 low-income). CORRECTED 2026-09-05: John moved the footprint 56 m S and it landed on 56-1995-28-1, situs 2002 ACTON ST, Imps $18.6M -- credible for 71 units, and the reason it is called ACTON Courtyard. The old match (1375 University, $447k) was the nearest-parcel method picking a neighbour."
 Fine Arts Building,2115 Haste St,2110 Haste St ~APPROX LOC,055-1891-010-00,2004,100,20,housing,developer_site,high,"100 apartments (20 low-income); assessed Imps $1.17M is implausible for 100 units — UNRESOLVED"
 Touriel Building,2004 University Ave,2004 University Ave,057-2025-014-00,2004,35,,housing,developer_site,high,"35 apartments"
 Bachenheimer Building,2119 University Ave,2119 University Ave,057-2046-009-00,2004,44,7,housing,developer_site,high,"44 apartments (7 low-income)"
 UC Storage,2721 Shattuck Ave,2721 Shattuck Ave,054-1719-037-00,2006,0,,storage,developer_site,high,NOT HOUSING — 800 storage units
 2130 Center,2130 Center St,2130 Center St,057-2031-011-00,2009,0,,commercial,developer_site,high,NOT HOUSING — commercial historic renovation
 Shattuck Studios,2711 Shattuck Ave,2711 Shattuck Ave,054-1719-038-00,2018,22,,housing,tour_caption,medium,
-Panoramic Legacy,1690 Shattuck Ave,1685 Shattuck Ave ~APPROX LOC,058-2174-006-02,2028,,,housing,assessor,none,proposed; unit count not published — developer lists 1685 Shattuck which is not in the assessor

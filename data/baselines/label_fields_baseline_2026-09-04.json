@@ -1,0 +1,57 @@
+{
+  "n_projects": 895,
+  "coverage": {
+    "address": 895,
+    "units": 865,
+    "status": 895,
+    "storeys": 174,
+    "height": 30,
+    "filed": 169,
+    "architect": 50,
+    "developer": 39,
+    "owner": 852
+  },
+  "lines_filled": {
+    "3": 73,
+    "4": 658,
+    "5": 132,
+    "6": 32
+  },
+  "anchors": {
+    "2128 Oxford St": {
+      "lines": [
+        "2128 Oxford St",
+        "456 units \u00b7 Entitled",
+        "27 storeys \u00b7 285 ft",
+        "filed 2023-03-17",
+        "dev Core Spaces",
+        "owner Core Berkeley Oxford LLC"
+      ],
+      "sha": "d9c6f031339b34b7"
+    },
+    "1974 SHATTUCK Ave": {
+      "lines": [
+        "1974 Shattuck Ave",
+        "599 units \u00b7 Entitled",
+        "28 storeys",
+        "Trachtenberg Architects \u00b7 filed 2023-04-25",
+        "dev NX Ventures",
+        "owner 1974 SHATTUCK AVENUE LLC"
+      ],
+      "sha": "7e387b793d3dbec7"
+    },
+    "2700 SHATTUCK Ave": {
+      "lines": [
+        "2700 Shattuck Ave",
+        "359 units \u00b7 Entitled",
+        "15 storeys",
+        "Studio KDA \u00b7 filed 2024-06-13",
+        "owner 2700 SHATTUCK LLC"
+      ],
+      "sha": "4ef0c5a37fa73461"
+    }
+  },
+  "v2_sha": "31a4423bff5b4697",
+  "written_at": "2026-09-04T22:03:09",
+  "provenance": "Derived by scripts/v4/build_jn_n.py from v_projects_flat (merged_into_id IS NULL) and gen_svg_labels.lines_for()."
+}

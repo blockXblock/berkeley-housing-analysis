@@ -17,21 +17,43 @@
 #   (2109 Virginia St, 110 units, 8 storeys, Entitled, Panoramic Interests), which the
 #   Berkeleyside council story corroborates. It was never absent from v2 -- the nearest-parcel
 #   match had it on 1690 Shattuck, the wrong side of the street. 9 in v2, 14 absent.
+# mechanism = HOW THE NUMBER WAS PRODUCED, which is a different question from where we found it.
+#   Added 2026-09-05. `source` says which document we read; `mechanism` says what process generated
+#   the figure, because that is what determines whether two sources agreeing means anything. Two
+#   records with the SAME mechanism share a blind spot, so their agreement is nearly uninformative
+#   (this is why CKAN is a verification target and never a source). See
+#   docs/methodology/PRINCIPLE_oracle_independence.md.
+#
+#   developer_self_report           the developer published a figure about its own building. One
+#                                   administrative witness. May be marketing, may be pre-revision.
+#   hand_caption_origin_unrecorded  someone typed it into the tour KML and did not say from where.
+#                                   Probably derived from the developer site -- so it is NOT an
+#                                   independent second witness, and treating it as one would be the
+#                                   exact error the independence principle warns about.
+#   assessor_valuation              a tax valuation. An independent ADMINISTRATIVE consequence of a
+#                                   building existing -- medium independence, coarse signal, blind
+#                                   for 1-2 years after completion (reassessment lag).
+#
+#   Not present in this file but on the ladder above these: aerial imagery (independent PHYSICAL,
+#   high independence, atemporal) and direct observation of the imagery, which is what corrected
+#   Acton Courtyard, Fine Arts and Panoramic Legacy on 2026-09-05 when every administrative source
+#   agreed with itself and was wrong.
+#
 # confidence: high = developer-published and unit count explicit; medium = tour caption only;
 #             none = not established
 #
-tour_name,address,tour_address,apn,year,units,affordable,use,source,confidence,note
-Henry Court,1509 Henry St,1509 Henry St,059-2263-032-00,1990,6,,housing,tour_caption,medium,assessor situs has no house number
-Westside Place,2714 9th St,2714 9th St,054-1746-032-00,1993,7,,housing,tour_caption,medium,CONDOMINIUM across ~7 parcels; traced parcel 054-1746-036-00 is Imps $0 and likely common area — UNRESOLVED
-Shattuck Lofts,1849 Shattuck Ave,1849 Shattuck Ave,057-2049-039-00,1995,24,,housing,tour_caption,medium,
-University Lofts,1801 University Ave,1801 University Ave,057-2060-051-00,1997,29,,housing,tour_caption,medium,
-The Berkeleyan,1910 Oxford St,1910 Oxford St,057-2047-002-01,1998,56,,housing,developer_site,high,
-GAIA Building,2116 Allston Way,2116 Allston Way,057-2030-002-00,2001,91,19,housing,developer_site,high,"91 apartments (19 low-income)"
-ARTech,2001 Addison St,2002 Addison St ~APPROX LOC,057-2025-010-01,2002,21,,housing,tour_caption,medium,developer publishes 2002 Addison which does not exist in the assessor
-Acton Courtyard,2002 Acton St,2002 Acton St,056-1995-028-01,2004,71,20,housing,developer_site,high,"71 apartments (20 low-income). CORRECTED 2026-09-05: John moved the footprint 56 m S and it landed on 56-1995-28-1, situs 2002 ACTON ST, Imps $18.6M -- credible for 71 units, and the reason it is called ACTON Courtyard. The old match (1375 University, $447k) was the nearest-parcel method picking a neighbour."
-Fine Arts Building,2451 Shattuck Ave,2451 Shattuck Ave,055-1890-013-02,2004,100,20,housing,developer_site,high,"100 apartments (20 low-income). RESOLVED 2026-09-05: the implausible $1.17M was the wrong parcel. 55-1890-13-2, situs 2451 SHATTUCK AVE, Imps $42.9M -- the old Fine Arts Cinema site, and in scale with GAIA 91u/$41.4M. 2110 Haste is the side-street frontage of a corner building."
-Touriel Building,2004 University Ave,2004 University Ave,057-2025-014-00,2004,35,,housing,developer_site,high,"35 apartments"
-Bachenheimer Building,2119 University Ave,2119 University Ave,057-2046-009-00,2004,44,7,housing,developer_site,high,"44 apartments (7 low-income)"
-UC Storage,2721 Shattuck Ave,2721 Shattuck Ave,054-1719-037-00,2006,0,,storage,developer_site,high,NOT HOUSING — 800 storage units
-2130 Center,2130 Center St,2130 Center St,057-2031-011-00,2009,0,,commercial,developer_site,high,NOT HOUSING — commercial historic renovation
-Shattuck Studios,2711 Shattuck Ave,2711 Shattuck Ave,054-1719-038-00,2018,22,,housing,tour_caption,medium,
+tour_name,address,tour_address,apn,year,units,affordable,use,source,confidence,mechanism,note
+Henry Court,1509 Henry St,1509 Henry St,059-2263-032-00,1990,6,,housing,tour_caption,medium,hand_caption_origin_unrecorded,assessor situs has no house number
+Westside Place,2714 9th St,2714 9th St,054-1746-032-00,1993,7,,housing,tour_caption,medium,hand_caption_origin_unrecorded,CONDOMINIUM across ~7 parcels; traced parcel 054-1746-036-00 is Imps $0 and likely common area — UNRESOLVED
+Shattuck Lofts,1849 Shattuck Ave,1849 Shattuck Ave,057-2049-039-00,1995,24,,housing,tour_caption,medium,hand_caption_origin_unrecorded,
+University Lofts,1801 University Ave,1801 University Ave,057-2060-051-00,1997,29,,housing,tour_caption,medium,hand_caption_origin_unrecorded,
+The Berkeleyan,1910 Oxford St,1910 Oxford St,057-2047-002-01,1998,56,,housing,developer_site,high,developer_self_report,
+GAIA Building,2116 Allston Way,2116 Allston Way,057-2030-002-00,2001,91,19,housing,developer_site,high,developer_self_report,"91 apartments (19 low-income)"
+ARTech,2001 Addison St,2002 Addison St ~APPROX LOC,057-2025-010-01,2002,21,,housing,tour_caption,medium,hand_caption_origin_unrecorded,developer publishes 2002 Addison which does not exist in the assessor
+Acton Courtyard,2002 Acton St,2002 Acton St,056-1995-028-01,2004,71,20,housing,developer_site,high,developer_self_report,"71 apartments (20 low-income). CORRECTED 2026-09-05: John moved the footprint 56 m S and it landed on 56-1995-28-1, situs 2002 ACTON ST, Imps $18.6M -- credible for 71 units, and the reason it is called ACTON Courtyard. The old match (1375 University, $447k) was the nearest-parcel method picking a neighbour."
+Fine Arts Building,2451 Shattuck Ave,2451 Shattuck Ave,055-1890-013-02,2004,100,20,housing,developer_site,high,developer_self_report,"100 apartments (20 low-income). RESOLVED 2026-09-05: the implausible $1.17M was the wrong parcel. 55-1890-13-2, situs 2451 SHATTUCK AVE, Imps $42.9M -- the old Fine Arts Cinema site, and in scale with GAIA 91u/$41.4M. 2110 Haste is the side-street frontage of a corner building."
+Touriel Building,2004 University Ave,2004 University Ave,057-2025-014-00,2004,35,,housing,developer_site,high,developer_self_report,"35 apartments"
+Bachenheimer Building,2119 University Ave,2119 University Ave,057-2046-009-00,2004,44,7,housing,developer_site,high,developer_self_report,"44 apartments (7 low-income)"
+UC Storage,2721 Shattuck Ave,2721 Shattuck Ave,054-1719-037-00,2006,0,,storage,developer_site,high,developer_self_report,NOT HOUSING — 800 storage units
+2130 Center,2130 Center St,2130 Center St,057-2031-011-00,2009,0,,commercial,developer_site,high,developer_self_report,NOT HOUSING — commercial historic renovation
+Shattuck Studios,2711 Shattuck Ave,2711 Shattuck Ave,054-1719-038-00,2018,22,,housing,tour_caption,medium,hand_caption_origin_unrecorded,

@@ -1,0 +1,34 @@
+# Panoramic Interests / Patrick Kennedy — the buildings in kml/tours/panoramic-kennedy-legacy.kml
+# that v2 does NOT hold. Established 2026-09-04; method and open questions in
+# notes/2026-09-04_kennedy_panoramic_archival.md
+#
+# WHY THIS FILE EXISTS. v2 is built from CPRA permits (2018-2025) + the Alameda assessor. These
+# buildings completed 1990-2018, before that feed begins, so v2 cannot see them. Their unit counts
+# come from the developer's own project pages -- a SECONDARY source, which rule 1 does not admit
+# into v2. Recording them here keeps them out of the canonical DB while still making them
+# derivable: a label generator reads this file, it does not hardcode the numbers.
+#
+# source values:
+#   developer_site  = panoramic.com project page, fetched 2026-09-04 (secondary, but the developer's
+#                     own published figure for its own building)
+#   tour_caption    = the hand-written caption already in the tour KML; origin unrecorded
+#   assessor        = Alameda County, berkeley.db parcels, refreshed 2026-06-16 (primary)
+# confidence: high = developer-published and unit count explicit; medium = tour caption only;
+#             none = not established
+#
+tour_name,address,tour_address,apn,year,units,affordable,use,source,confidence,note
+Henry Court,1509 Henry St,1509 Henry St,059-2263-032-00,1990,6,,housing,tour_caption,medium,assessor situs has no house number
+Westside Place,2714 9th St,2714 9th St,054-1746-032-00,1993,7,,housing,tour_caption,medium,CONDOMINIUM across ~7 parcels; traced parcel 054-1746-036-00 is Imps $0 and likely common area — UNRESOLVED
+Shattuck Lofts,1849 Shattuck Ave,1849 Shattuck Ave,057-2049-039-00,1995,24,,housing,tour_caption,medium,
+University Lofts,1801 University Ave,1801 University Ave,057-2060-051-00,1997,29,,housing,tour_caption,medium,
+The Berkeleyan,1910 Oxford St,1910 Oxford St,057-2047-002-01,1998,56,,housing,developer_site,high,
+GAIA Building,2116 Allston Way,2116 Allston Way,057-2030-002-00,2001,91,19,housing,developer_site,high,"91 apartments (19 low-income)"
+ARTech,2001 Addison St,2002 Addison St ~APPROX LOC,057-2025-010-01,2002,21,,housing,tour_caption,medium,developer publishes 2002 Addison which does not exist in the assessor
+Acton Courtyard,1375 University Ave,1370 University Ave ~APPROX LOC,057-2073-004-00,2004,71,20,housing,developer_site,high,"71 apartments (20 low-income); developer publishes 1370 University, not in assessor"
+Fine Arts Building,2115 Haste St,2110 Haste St ~APPROX LOC,055-1891-010-00,2004,100,20,housing,developer_site,high,"100 apartments (20 low-income); assessed Imps $1.17M is implausible for 100 units — UNRESOLVED"
+Touriel Building,2004 University Ave,2004 University Ave,057-2025-014-00,2004,35,,housing,developer_site,high,"35 apartments"
+Bachenheimer Building,2119 University Ave,2119 University Ave,057-2046-009-00,2004,44,7,housing,developer_site,high,"44 apartments (7 low-income)"
+UC Storage,2721 Shattuck Ave,2721 Shattuck Ave,054-1719-037-00,2006,0,,storage,developer_site,high,NOT HOUSING — 800 storage units
+2130 Center,2130 Center St,2130 Center St,057-2031-011-00,2009,0,,commercial,developer_site,high,NOT HOUSING — commercial historic renovation
+Shattuck Studios,2711 Shattuck Ave,2711 Shattuck Ave,054-1719-038-00,2018,22,,housing,tour_caption,medium,
+Panoramic Legacy,1690 Shattuck Ave,1685 Shattuck Ave ~APPROX LOC,058-2174-006-02,2028,,,housing,assessor,none,proposed; unit count not published — developer lists 1685 Shattuck which is not in the assessor

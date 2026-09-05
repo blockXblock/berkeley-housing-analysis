@@ -27,8 +27,40 @@ GEOM = "kml/geometry/geometry.kml"
 M = 111320.0
 
 
-def buildings():
+def placemark_name(pm):
+    """The building's identity, however this KML happens to record it.
+
+    Two conventions are in play and both are legitimate. The canonical geometry.kml puts the
+    ADDRESS in a CDATA description as <b>2116 ALLSTON WAY</b><br/>. panoramic-kennedy-legacy.kml
+    puts the PROJECT NAME in <name> ("GAIA Building (2001) - 91 units") and the address in a plain
+    <description>. Parsing only the first found NOTHING in the second, which is why a
+    self-contained tour could not be labelled at all. Address first where it exists, because that
+    is what v2 joins on; the project name only when there is no address to be had.
+
+    Lives here rather than in svg_label_tour because both this module and that one need it, and a
+    second copy is how the two drift apart -- the same reason normkey moved into gen_svg_labels.
+    """
+    m = re.search(r"<b>([^<]*)</b><br/>", pm)
+    if m:
+        return m.group(1).upper().strip()
+    m = re.search(r"<description>(?!<!\[CDATA)([^<]+)</description>", pm)
+    if m and re.search(r"\d", m.group(1)):
+        return m.group(1).upper().strip()
+    # The <name> fallback REQUIRES a digit. Without that guard it swept three unaddressed
+    # placemarks in the canonical geometry into the site list -- DHARMA UNIVERSITY and two
+    # INNOVATION ZONEs -- which had never been label targets and would have become them
+    # silently. A generalisation that changes the behaviour of the path it was not written for
+    # is a regression, however harmless it looks.
+    m = re.search(r"<name>([^<]+)</name>", pm)
+    return m.group(1).upper().strip() if m and re.search(r"\d", m.group(1)) else None
+
+
+def buildings(geom=None):
     """{ADDRESS: (lon, lat, roof_m, circumradius_m, label)} — ONE ENTRY PER SITE.
+
+    `geom` defaults to the canonical geometry.kml. Pass a path to read a SELF-CONTAINED tour
+    instead -- panoramic-kennedy-legacy.kml carries its own 23 polygons, none of which are in the
+    canonical file, so with the path hardcoded the label engine could not see a single one of them.
 
     SITES, NOT LAST-WINS (fixed 2026-08-26). This dict used to be built with a plain
     `out[address] = ...` inside the placemark loop, so when several placemarks share one
@@ -45,11 +77,11 @@ def buildings():
     """
     groups = {}
     order = []
-    for pm in re.findall(r"<Placemark>.*?</Placemark>", open(GEOM, errors="replace").read(), re.S):
-        ad = re.search(r"<b>([^<]*)</b><br/>", pm)
+    for pm in re.findall(r"<Placemark>.*?</Placemark>", open(geom or GEOM, errors="replace").read(), re.S):
+        ad_s = placemark_name(pm)
         nm = re.search(r"<name>([^<]*)</name>", pm)
         po = re.search(r"<Polygon>.*?</Polygon>", pm, re.S)
-        if not (ad and po):
+        if not (ad_s and po):
             continue
         cs = re.search(r"<coordinates>\s*(.*?)\s*</coordinates>", po.group(0), re.S).group(1)
         ring, roof = [], 0.0
@@ -60,11 +92,11 @@ def buildings():
                 roof = max(roof, float(p[2]))
         if len(ring) < 4:
             continue
-        k = ad.group(1).upper().strip()
+        k = ad_s
         if k not in groups:
             groups[k] = []
             order.append(k)
-        groups[k].append((ring[:-1], roof, nm.group(1) if nm else ad.group(1)))
+        groups[k].append((ring[:-1], roof, nm.group(1) if nm else ad_s))
 
     out = {}
     for k in order:

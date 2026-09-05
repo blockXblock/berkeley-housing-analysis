@@ -28,20 +28,40 @@ from gen_building_loop import buildings as site_buildings
 from stamp_geometry import geometry_sha
 
 
+def placemark_name(pm):
+    """The building's identity, however this KML happens to record it.
+
+    Two conventions are in play and both are legitimate. The canonical geometry.kml puts the
+    ADDRESS in a CDATA description as <b>2116 ALLSTON WAY</b><br/>. panoramic-kennedy-legacy.kml
+    puts the PROJECT NAME in <name> ("GAIA Building (2001) · 91 units") and the address in a plain
+    <description>. Parsing only the first found nothing at all in the second, which is why a
+    self-contained tour could not be labelled. Address first where it exists, because that is what
+    v2 joins on; the project name only when there is no address to be had.
+    """
+    m = re.search(r"<b>([^<]*)</b><br/>", pm)
+    if m:
+        return m.group(1).upper().strip()
+    m = re.search(r"<description>(?!<!\[CDATA)([^<]+)</description>", pm)
+    if m and re.search(r"\d", m.group(1)):
+        return m.group(1).upper().strip()
+    m = re.search(r"<name>([^<]+)</name>", pm)
+    return m.group(1).upper().strip() if m else None
+
+
 def site_rings(geom_path):
     """{ADDRESS: [(lon, lat), ...]} — every footprint vertex of a site, for reach-by-bearing."""
     import collections
     out = collections.defaultdict(list)
     g = open(geom_path, errors="replace").read()
     for pm in re.findall(r"<Placemark>.*?</Placemark>", g, re.S):
-        ad = re.search(r"<b>([^<]*)</b><br/>", pm)
+        ad = placemark_name(pm)
         po = re.search(r"<Polygon>.*?<coordinates>\s*(.*?)\s*</coordinates>", pm, re.S)
         if not (ad and po):
             continue
         for tok in po.group(1).split():
             c = tok.split(",")
             if len(c) >= 2:
-                out[ad.group(1).upper().strip()].append((float(c[0]), float(c[1])))
+                out[ad].append((float(c[0]), float(c[1])))
     return out
 
 
@@ -187,6 +207,10 @@ def main():
     ap.add_argument("--tour", required=True, help="tour stem in kml/tours/")
     ap.add_argument("--street", default=None, help="street-label set to fold in, e.g. shattuck")
     ap.add_argument("--out", default=None)
+    ap.add_argument("--geom", default=None,
+                    help="geometry KML to take building footprints from. Defaults to the canonical "
+                         "kml/geometry/geometry.kml; point it at a self-contained tour (e.g. the "
+                         "Kennedy tour, which carries its own 23 polygons) to label that instead.")
     ap.add_argument("--tag", default="",
                     help="suffix for the package filename AND the Movie Maker tour name. Two "
                          "builds of one route otherwise carry identical tour names and appear as "
@@ -227,9 +251,12 @@ def main():
 
     tour_path = pathlib.Path(f"kml/tours/{a.tour}.kml")
     tour = re.search(r"<gx:Tour>.*?</gx:Tour>", tour_path.read_text(errors="replace"), re.S).group(0)
-    g = GEOM.read_text(errors="replace")
-    SITES = site_buildings()
-    RINGS = site_rings(str(GEOM))
+    geom_path = pathlib.Path(a.geom) if a.geom else GEOM
+    g = geom_path.read_text(errors="replace")
+    SITES = site_buildings(str(geom_path))
+    RINGS = site_rings(str(geom_path))
+    if a.geom:
+        print(f"    geometry from {geom_path} ({len(SITES)} sites)")
 
     legs = re.findall(r"<gx:FlyTo>.*?</gx:FlyTo>\n?", tour, re.S)
     headings = [float(re.search(r"<heading>([-\d.]+)</heading>", l).group(1))
@@ -589,11 +616,21 @@ def main():
 
     tourname = re.search(r"(<gx:Tour>.{0,300}?<name>)([^<]*)(</name>)", tour, re.S)
     if tourname:
-        stem = tourname.group(2).split(" · ")[0]
-        mark = f"{stem} · LABELLED · {len(used)} buildings" + (f" · {a.tag}" if a.tag else "")
+        # KEEP THE OTHER SEGMENTS. Taking only [0] threw away "20% slower" on the retimed
+        # Kennedy tour -- the one fact distinguishing it from the original in Movie Maker's list,
+        # and the reason it was rebuilt at all. Drop only a previous LABELLED marker so rebuilds
+        # do not stack them.
+        segs = [x for x in tourname.group(2).split(" · ")
+                if not x.startswith("LABELLED") and not x.endswith("buildings")]
+        mark = " · ".join(segs + [f"LABELLED · {len(used)} buildings"]
+                          + ([a.tag] if a.tag else []))
         tour = tour[:tourname.start(2)] + mark + tour[tourname.end(2):]
 
-    sha = geometry_sha()
+    # THE SHA MUST NAME THE GEOMETRY THIS PACKAGE CARRIES. With --geom it was still stamping the
+    # CANONICAL sha, so panoramic-kennedy-legacy -- which carries its own 23 polygons and none of
+    # the canonical 175 -- was published as __geom-a3d103322890, a fingerprint for geometry that
+    # is not in the file. A fingerprint that names the wrong thing is worse than none.
+    sha = geometry_sha(str(geom_path))
     doc = ('<?xml version="1.0" encoding="UTF-8"?>\n'
            '<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">\n'
            f'<Document>\n\t<name>{a.tour} · LABELLED · geom-{sha}</name>\n'

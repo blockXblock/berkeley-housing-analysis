@@ -9,14 +9,19 @@ a wrong answer; both are unlikely to be wrong in the same direction.
   2. INDEPENDENT PHYSICAL — distance to the nearest Overture building footprint, and its area.
      Catches a footprint drawn where no building stands. Blind to buildings that do not exist yet
      or post-date the imagery, so a miss here is a QUESTION, never a verdict.
-  3. COVERAGE — the traced footprint's AREA against the Overture building it sits inside.
-     Checks 1 and 2 both verify LOCATION and are both blind to a footprint that is on the right
-     lot, next to the right building, and drawn at half size. That is exactly how 2451 Shattuck
-     (Fine Arts) and 2002 Addison (ARTech) shipped cut-short until John caught them by flying the
-     tour, 2026-09-06. This compares the traced area to the Overture footprint the trace's centroid
-     falls INSIDE (point-in-polygon, so a shed next door cannot be the match) and flags a trace far
-     smaller than the mapped building. It is a QUESTION, not a verdict — Overture has its own
-     errors, and a genuine multi-building site can legitimately trace one wing.
+  3. COVERAGE — the traced footprint's AREA against a known building area, flagged when the trace
+     is far smaller (an incomplete trace: right lot, right building, drawn at half size — how Fine
+     Arts and ARTech shipped cut-short until John caught them by flying, 2026-09-06). TWO area
+     oracles, preferred in this order:
+       a. ARCHITECT FILING (data/reference/tabulation_footprints.csv) — the footprint the architect
+          tabulated on the permit set. Primary-source, it is DESIGN INTENT, so it works for PROPOSED
+          buildings Overture cannot see. Only ~9 projects have it today (the tabulation-form harvest
+          of 2026-08-22); the 80 tabulation_form PDFs in v2 are not yet parsed into areas.
+       b. OVERTURE — the building the trace's centroid falls INSIDE (point-in-polygon, so a shed
+          next door cannot be the match). Covers built structures; blind to the not-yet-built.
+     Only the UNDER direction is flagged; over-size is noise (Overture undercounts, real towers
+     fill their lots). A flag is a QUESTION, not a verdict: a real multi-building site can trace one
+     wing, and both oracles have their own errors.
 
 BOTH SIDES OF THE APN JOIN MUST BE CANONICALISED. The first run of this check produced a nearly
 empty parcel column because the reference CSV holds 059-2263-032-00 and the assessor holds
@@ -36,6 +41,7 @@ import gen_svg_labels as G
 ASSESSOR = "databases/berkeley.db"
 V2 = "databases/berkeley_housing_v2.db"
 OVERTURE = "data/raw/overture_buildings_berkeley_2026-08-19.parquet"
+ARCHITECT_AREAS = "data/reference/tabulation_footprints.csv"
 PARCEL_TOL_M = 40.0
 BLDG_TOL_M = 30.0
 TINY_M2 = 60.0
@@ -115,6 +121,17 @@ def main():
         if c and la not in (None, ""):
             par[c] = (float(lo), float(la))
 
+    # architect-tabulated footprint areas, keyed by normalised address (sq ft -> m2)
+    arch = {}
+    if os.path.exists(ARCHITECT_AREAS):
+        for r in csv.DictReader(open(ARCHITECT_AREAS)):
+            fp = r.get("footprint_sf", "").strip()
+            if fp:
+                try:
+                    arch[G.normkey(r["address"])] = float(fp) / 10.7639
+                except ValueError:
+                    pass
+
     claim = {}
     if a.refs:
         for r in csv.DictReader(l for l in open(a.refs) if not l.startswith("#")):
@@ -147,8 +164,9 @@ def main():
                        for i in range(len(p)))) / 2
 
     print(f"  {len(sites)} footprints · {len(par):,} parcels canonicalised\n")
-    print(f"  {'building':26} {'→parcel':>8} {'→bldg':>6} {'traced':>7} {'overture':>8} {'cover':>6}  note")
-    print(f"  {'-'*26} {'-'*8} {'-'*6} {'-'*7} {'-'*8} {'-'*6}  {'-'*26}")
+    print(f"  {len(arch)} architect-tabulated footprint(s) loaded\n")
+    print(f"  {'building':26} {'→parcel':>8} {'traced':>7} {'ref area':>9} {'src':>4} {'cover':>6}  note")
+    print(f"  {'-'*26} {'-'*8} {'-'*7} {'-'*9} {'-'*4} {'-'*6}  {'-'*26}")
     flags = 0
     for k in sorted(sites):
         lon, lat = sites[k][0], sites[k][1]
@@ -180,7 +198,16 @@ def main():
                             contain_area = a_i
             ov_area = contain_area or near_area
         traced_area = traced.get(k, (None, None, None))[2] or 0.0
-        cover = (traced_area / ov_area) if ov_area else None
+
+        # Prefer the ARCHITECT filing as the reference area (primary-source, covers proposed
+        # buildings); fall back to the Overture footprint (built only). Record which, because the
+        # note's authority differs -- "vs architect filing" is a stronger claim than "vs imagery".
+        arch_area = arch.get(G.normkey(k))
+        if arch_area:
+            ref_area, src = arch_area, "arch"
+        else:
+            ref_area, src = (ov_area or 0.0), "ovt"
+        cover = (traced_area / ref_area) if ref_area else None
 
         note = []
         if dp is None:
@@ -189,17 +216,17 @@ def main():
             note.append("OFF PARCEL"); flags += 1
         if bd is not None and bd > BLDG_TOL_M:
             note.append("no building near"); flags += 1
-        if ov_area and ov_area < TINY_M2:
+        if src == "ovt" and ref_area and ref_area < TINY_M2:
             note.append("mapped bldg tiny — unbuilt or newer than imagery?")
         elif cover is not None and cover < COVERAGE_MIN:
-            note.append(f"INCOMPLETE? traces {cover*100:.0f}% of the mapped building"); flags += 1
+            oracle = "the architect filing" if src == "arch" else "the mapped building"
+            note.append(f"INCOMPLETE? traces {cover*100:.0f}% of {oracle}"); flags += 1
         print(f"  {k[:26]:26} {(f'{dp:7.0f}m' if dp is not None else '       -')} "
-              f"{(f'{bd:5.0f}m' if bd is not None else '     -')} "
-              f"{traced_area:7.0f} {ov_area:8.0f} "
+              f"{traced_area:7.0f} {(f'{ref_area:9.0f}' if ref_area else '        -')} {src:>4} "
               f"{(f'{cover*100:5.0f}%' if cover is not None else '     -')}  {', '.join(note)}")
-    print(f"\n  {flags} flag(s). INCOMPLETE? and the tiny note are questions for the eye, not")
-    print(f"  failures: Overture under-maps small/shaded buildings, and a real multi-building")
-    print(f"  site can legitimately trace one wing. Flying the tour is still the final check.")
+    print(f"\n  {flags} flag(s). src=arch is the architect's tabulated footprint (primary, covers")
+    print(f"  proposed); src=ovt is the Overture building (built only). INCOMPLETE?/tiny are")
+    print(f"  questions for the eye -- a multi-building site can trace one wing. Flying is the last check.")
 
 
 if __name__ == "__main__":

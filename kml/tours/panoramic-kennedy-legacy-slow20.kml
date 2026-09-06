@@ -7,7 +7,7 @@
   <Style id="e_recent"><LineStyle><color>ffe3c800</color><width>2</width></LineStyle><PolyStyle><color>8ce3c800</color></PolyStyle><LabelStyle><scale>1.8</scale><color>fff0dc50</color></LabelStyle><IconStyle><scale>0</scale></IconStyle></Style>
   <Style id="e_proposed"><LineStyle><color>ff78eb78</color><width>2</width></LineStyle><PolyStyle><color>4d78eb78</color></PolyStyle><LabelStyle><scale>1.8</scale><color>ff96f596</color></LabelStyle><IconStyle><scale>0</scale></IconStyle></Style>
   <gx:Tour><name>▶ Play: Kennedy/Panoramic 1990→2028 · 20% slower</name><gx:Playlist>
-      <gx:FlyTo><gx:duration>4.800</gx:duration><gx:flyToMode>smooth</gx:flyToMode>
+      <gx:FlyTo><gx:duration>4.800</gx:duration><gx:flyToMode>bounce</gx:flyToMode>
         <Camera><longitude>-122.287746</longitude><latitude>37.877936</latitude><altitude>900</altitude>
           <heading>120.0</heading><tilt>63.4</tilt><altitudeMode>relativeToGround</altitudeMode></Camera></gx:FlyTo>
       <gx:Wait><gx:duration>1.200</gx:duration></gx:Wait>

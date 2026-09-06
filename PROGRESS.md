@@ -35,6 +35,39 @@ survive HTML export (added `pio.renderers.default='notebook_connected'` to setup
 
 ---
 
+## 2026-09-06 — branch hygiene fixed; Kennedy video shipped; deploy is now an exact mirror
+
+**The tangle was mostly an illusion, and nothing was lost.** Local dev held everything (the new
+Kennedy video committed 2026-09-05 as `ded45ec`), but was 54 commits ahead of a 3-day-old
+origin/dev and 256 ahead of main — so the "disappeared chat" had simply committed locally and never
+pushed. Pushed dev → origin (`8b7b82f..ded45ec`); origin/dev is current and the work is backed up.
+
+**The real bug: `deploy.sh` was additive.** `git checkout "$DEV" -- docs kml` updated and added but
+never DELETED files dev had removed, so main accumulated every tour package ever deployed — 398 dead
+KML files, 2.4M lines, none referenced by the live tours.json. Fixed: it now `git rm -rq docs kml`
+then restores dev's exact set, so **main === dev for docs/+kml, deletions and all**. No exclude
+list.
+
+**Measure U decision (reverses the earlier caution):** John re-read
+`docs/berkeley2050/evaluation-1-measure-u.html` and confirmed it is legitimate to keep PUBLIC — in
+the Vision 2050 context it is a coherent historical comparison to the 2022 Measure L bond, not
+advocacy. The selective-push machinery that was meant to withhold it never actually did (it was live
+all along). With nothing to withhold, the deploy rule collapses to "public site = all of dev's
+docs/+kml." `team/measure-u/` stays deliberately non-deployed (internal evidence site, distinct from
+the published evaluation).
+
+**Deployed (`94beaff..e81a533`, pushed):** the new Kennedy/Panoramic video `9t5bdNZwhFA` replaces
+the old cut, and the 398 dead packages are dropped. All 16 gate checks pass, including "every
+catalog package exists on disk." main now mirrors dev exactly (blank docs/+kml diff). Cloudflare
+redeploys from origin/main on its own; propagation can lag a few hours.
+
+**The clean workflow, going forward:** dev = the whole world, push freely as backup. `main` = a pure
+exact mirror of dev's docs/+kml, regenerated each deploy via `scripts/deploy.sh` (deliberate publish
+step, gated, no auto-publish of half-finished work). No private repo, no exclude list, no selective
+push.
+
+---
+
 ## 2026-09-04 — owner join reached the site; the label engine's placement faults found and fixed
 
 **The owner join had never been published.** `export_explorer_data_v2.py` writes

@@ -160,3 +160,25 @@ This is a living list. Every new fault we hit reconstructing the pipeline is app
 dated requirement with its evidence. By the time the Clariti schema is under negotiation, the
 document is the accumulated, evidence-backed specification — not a wishlist, a bug report against
 the old system written as requirements for the new one.
+
+---
+
+## Appended faults (living log)
+
+**2026-09-06 — the public record is only reachable by fragile scraping, and the scrape breaks.**
+Reconstructing document coverage for the Panoramic buildings, the permit-NUMBER discovery path
+(search a known ZP/BP number → record detail) works headless. But the ADDRESS search — the only way
+to ask "what records exist at this address?" without already knowing the record number — redirected
+to `Error.aspx` on a date-widened General Search in the Building module, returning zero even for
+addresses that certainly have permits (2811 Benvenue, 2274 Shattuck). It had worked three weeks
+earlier only through an interactive browser session. So the single most basic public question —
+*what has ever been filed at this address?* — depends on browser automation that silently breaks
+when the vendor changes the portal. **Requirement H1 restated with teeth:** a stable, documented,
+versioned public API with an address-lookup endpoint that returns every record, document and
+structure at a location — so that neither the public nor the city has to scrape its own system.
+
+**2026-09-06 — the tabulation-form data was recoverable for only ~13 of 45 projects by parsing.**
+Even with every form in hand as a PDF, layout variation defeated reliable extraction for ~30 of 42
+(a year "2020" parsed as a unit count; footprints off by column). The data the city already
+collected on its own form could not be trusted back out of the PDF. **Requirement C1 restated:**
+capture the 1.E fields as structured data at submission; the PDF is provenance, not the datastore.

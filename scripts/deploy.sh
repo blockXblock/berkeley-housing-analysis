@@ -29,10 +29,18 @@ trap 'rc=$?; [ $rc -ne 0 ] && echo; [ $rc -ne 0 ] && echo "DEPLOY ABORTED (exit 
 git worktree add -q --detach "$WT" main
 git show "$DEV":scripts/deploy_gate.py > "$GATE"
 cd "$WT"
-git checkout "$DEV" -- docs kml          # selective: only the site and its KML source cross
+# EXACT MIRROR, not additive. This was a bare `git checkout "$DEV" -- docs kml`, which updates and
+# adds files but never REMOVES ones dev deleted -- so main accumulated every tour package ever
+# deployed (398 dead KML files / 2.4M lines by 2026-09-05, none of them referenced by the live
+# tours.json). Clear docs/ and kml/ first, then restore dev's exact set, so main ends up as docs+kml
+# EXACTLY as dev has them -- deletions and all. There is no exclude list: everything in dev's docs/
+# and kml/ is publishable (the Measure U evaluation included -- John, 2026-09-05).
+git rm -rq docs kml
+git checkout "$DEV" -- docs kml
+git add -A docs kml
 
-echo "staged for main:"
-git diff --cached --stat | sed 's/^/  /'
+echo "staged for main (full docs/+kml mirror of dev; deletions are stale packages):"
+git diff --cached --stat | tail -25 | sed 's/^/  /'
 echo
 python3 "$GATE"
 echo

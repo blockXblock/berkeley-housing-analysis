@@ -58,7 +58,14 @@ START_DATE_SELECTORS = (
     "input[id*='StartDate']",
     "input[id$='txtGSPermitDateFrom']",
 )
-DATE_WIDEN_MODULES = {"building", "licenses", "enforcement"}  # NOT planning (date errors the search)
+# DATE WIDENING IS DISABLED (2026-09-06). Accela now errors the General Search (redirect to
+# Error.aspx) whenever the Start Date is filled in ANY module, including Building — tested live:
+# a no-date search for 2274 Shattuck returns 7 records, the same search with StartDate 01/01/1900
+# (or 1980/1990/2000/2010, or a full start+end range) errors. And no-date already returns FULL
+# history, not a 2-year window: no-date searches found GAIA (2116 Allston, 2001) and the Berkeleyan
+# (1910 Oxford, 1998). So the widening the old comment added to "catch old permits" is both broken
+# and unnecessary. Leave empty; if Accela reverts to requiring a date, re-add the tolerant module(s).
+DATE_WIDEN_MODULES = frozenset()  # was {"building","licenses","enforcement"}; Accela errors on any date now
 
 def _fill_first(page, selectors, value, errors):
     for sel in selectors:

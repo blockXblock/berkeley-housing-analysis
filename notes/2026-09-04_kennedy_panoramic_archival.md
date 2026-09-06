@@ -173,3 +173,38 @@ The two genuine zeros (Henry Court 1990, Westside Place 1993) are the oldest and
 reachable in Accela and can be harvested — they need not come only from the developer's website.
 The harvest workflow (discover_url by permit number, or address search → record → attachments) is
 now unblocked.
+
+### Address→record discovery for the 9 (2026-09-06) — and the real coverage cliff
+
+Ran the fixed address search for all 9 historic buildings that returned records, and inventoried
+every Accela record number (full list: `data/reference/kennedy_historic_accela_records_2026-09-06.json`).
+**All 54 records are Building-module (B-) permits — none are Planning (ZP) records**, because
+Berkeley's Planning module post-dates these buildings' entitlements.
+
+The important nuance: having records ≠ having the ORIGINAL construction documents. Classifying each
+B-permit's year against the building's completion year:
+
+| building | built | records | construction-era permit | plans recoverable from Accela? |
+|---|---|---|---|---|
+| Fine Arts | 2004 | 12 | **B2006-04062** | likely |
+| UC Storage | 2006 | 19 | **B2008-00223** | likely |
+| 2130 Center | 2009 | 13 | **B2010-02709** | likely |
+| Shattuck Studios | 2018 | 4 | **B2016-05441** | likely |
+| GAIA | 2001 | 10 | none (earliest B2007) | **no — predates Accela** |
+| Berkeleyan | 1998 | 5 | none (earliest B2020) | **no** |
+| Shattuck Lofts | 1995 | 10 | none (earliest B2015) | **no** |
+| University Lofts | 1997 | 2 | none (earliest B2021) | **no** |
+| ARTech | 2002 | 4 | none (earliest B2016) | **no** |
+
+**The coverage cliff is ~2005-2006 and it is about the ORIGINAL construction record specifically.**
+Later maintenance/renovation permits exist for all 9, but the architect plan set + 1.E tabulation
+for the five buildings completed before ~2005 (GAIA, Berkeleyan, Shattuck Lofts, University Lofts,
+ARTech) are not in Accela — they are paper-archive or developer-website only. Four buildings
+(Fine Arts, UC Storage, 2130 Center, Shattuck Studios) have a construction-era B-permit worth
+harvesting for documents. Also surfaced: 3 non-permit records (GAIA ESR-2022-01017 + PREAPP000535;
+Shattuck Lofts PREAPP000155).
+
+**Net:** the harvest target for original plans is 4 buildings, not 9. This is itself a Clariti
+requirement — a permit system should not lose the construction record when the vendor's digital
+coverage begins; retro-digitisation of pre-2005 paper permits is part of a complete built-environment
+record.

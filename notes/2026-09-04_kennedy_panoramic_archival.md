@@ -136,3 +136,40 @@ Machine-readable parcel map: `scratch/2026-09-04/kennedy_parcel_map.json`.
 [UC Storage](https://www.panoramic.com/project/uc-storage/) ·
 [2130 Center](https://www.panoramic.com/project/2130-center/) ·
 [Berkeleyside, Equity Residential purchase](https://www.berkeleyside.org/2015/11/16/equity-residential-to-sell-8-berkeley-apartment-buildings)
+
+---
+
+## Accela probe of the historic Panoramic buildings (2026-09-06)
+
+After fixing the address-search harness (Accela now errors on any date fill — commit e01d2d2),
+probed the pre-2018 Panoramic buildings in the Building module. **The earlier assumption of a
+"coverage cliff before 2010" was WRONG — Accela holds most of them:**
+
+| building | address searched | Building records |
+|---|---|---|
+| GAIA (2001) | 2116 Allston | 10 |
+| Fine Arts (2004) | 2451 Shattuck | 12 |
+| Berkeleyan (1998) | 1910 Oxford | 5 |
+| Shattuck Lofts (1995) | 1849 Shattuck | 10 |
+| University Lofts (1997) | 1801 University | 2 |
+| ARTech (2002) | 2001 Addison | 4 |
+| UC Storage (2006) | 2721 Shattuck | 19 |
+| 2130 Center (2009) | 2130 Center | 13 |
+| Shattuck Studios (2018) | 2711 Shattuck | 4 |
+| Henry Court (1990) | 1509 Henry | 0 |
+| Westside Place (1993) | 2714 9th | 0 |
+| Acton Courtyard (2004) | 2002 Acton | **0 — suspect** |
+| Touriel (2004) | 2004 University | **0 — suspect** |
+| Bachenheimer (2004) | 2119 University | **0 — suspect** |
+
+**9 of 14 have Accela records.** The three 2004 zeros (Acton, Touriel, Bachenheimer) are almost
+certainly ADDRESS false-negatives, not true absences — these are substantial buildings, and it is
+the same marketing-vs-assessed-vs-Accela address divergence documented above (Accela may index a
+corner building on its other frontage, or a different street number). A probe by exact street
+number can miss them; a street-name-only search or the alternate frontage would likely find them.
+The two genuine zeros (Henry Court 1990, Westside Place 1993) are the oldest and smallest.
+
+**Consequence:** the architect plans / tabulation data for the historic Panoramic buildings are
+reachable in Accela and can be harvested — they need not come only from the developer's website.
+The harvest workflow (discover_url by permit number, or address search → record → attachments) is
+now unblocked.

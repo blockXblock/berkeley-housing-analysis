@@ -14,7 +14,7 @@
           Campanile (-122.2578, 37.8723) is the foreground subject. -->
     <gx:FlyTo>
       <gx:duration>0</gx:duration>
-      <gx:flyToMode>smooth</gx:flyToMode>
+      <gx:flyToMode>bounce</gx:flyToMode>
       <Camera>
         <longitude>-122.2555</longitude>
         <latitude>37.8723</latitude>

@@ -180,10 +180,22 @@ def normkey(a):
     requests by it. Without the second half, a target named from the geometry never renders at
     all: "2099 MLK Jr Way" is not a substring of v2's "2099 M L KING JR Way", so the label was
     simply never made and the building went through the flight unlabelled.
+
+    Normalises three ways the SAME address is written differently between the geometry file and
+    v2, each of which silently dropped a real building until it was found the hard way:
+      - MLK, spelled four ways (found via 2099 MLK on Shattuck).
+      - a STREET-TYPE SUFFIX present on one side and not the other: the geometry says
+        "2820 SAN PABLO AVE" and v2 "2820 San Pablo", so a 110-unit and a 1-unit building on
+        San Pablo shipped as broken icons (2026-09-06). Strip a trailing Ave/St/Way/Blvd/etc.
+      - a HOUSE-NUMBER RANGE: the geometry says "1701- 1717 San Pablo", v2 "1701 San Pablo Ave".
+        Collapse "1701-1717" to its first number.
     """
-    k = re.sub(r"[^A-Z0-9]", "", str(a).upper())
+    k = str(a).upper()
+    k = re.sub(r"\b(\d+)\s*-\s*\d+\b", r"\1", k)          # 1701-1717 -> 1701 (house-number range)
+    k = re.sub(r"[^A-Z0-9]", "", k)
     for alias in ("MARTINLUTHERKING", "MLKING"):
         k = k.replace(alias, "MLK")
+    k = re.sub(r"(AVENUE|AVE|STREET|ST|BOULEVARD|BLVD|WAY|DRIVE|DR|PLACE|PL|COURT|CT|ROAD|RD|LANE|LN|TERRACE|TER|CIRCLE|CIR)$", "", k)
     return k
 
 

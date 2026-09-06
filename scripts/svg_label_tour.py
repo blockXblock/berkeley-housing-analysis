@@ -381,6 +381,17 @@ def main():
                    f'<coordinates>{v[0]!r},{v[1]!r},{v[2] * LIFT_FRACTION:.1f}</coordinates>'
                    f'<altitudeMode>relativeToGround</altitudeMode></Point></Placemark>')
 
+    # ONLY LIGHT WHAT HAS AN IMAGE. A target that got no style above (no rendered label, and no
+    # normalised-key fallback) must be dropped from the playlist entirely -- otherwise the leg loop
+    # still emits its visibility and move updates by slugify(addr), producing an orphan placemark
+    # with no icon: the camera flies to it and shows nothing. That is exactly the "we fly there but
+    # there is no label" symptom, and it shipped on san-pablo (1701 & 2820 San Pablo) 2026-09-06
+    # before this guard. styles is keyed by slugify(addr), so a target survives iff it rendered.
+    before = len(targets)
+    targets = [t for t in targets if slugify(t[2]) in styles]
+    if len(targets) < before:
+        print(f"    dropped {before - len(targets)} target(s) with no label image (not lit)")
+
     # WHICH LABELS ARE EVER SHOWN. With --max-labels a building can be inside --radius for the
     # whole flight and still never reach the nearest-N, so its style, placemark and PNG ride along
     # in the package and are never drawn: 14 of 44 on bancroft-e2w, about a third of the file. Earth

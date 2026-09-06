@@ -6,6 +6,25 @@
 
 ---
 
+---
+
+## 2026-09-06 — historic Panoramic buildings added to v2 (reconstructed_secondary)
+
+12 pre-2018 Panoramic Interests buildings (506 units) added as full project entities (ids 906-917,
+Completed), the housing subset of the Kennedy tour's 14 historic buildings; the 2 non-housing
+(UC Storage, 2130 Center) excluded. They predate the CPRA feed, so each is tagged with the NEW
+`reconstructed_secondary` classification + confidence (MEDIUM developer-site / LOW tour-caption) +
+an as-built version description naming the source — every metric can filter them, every record shows
+its origin. Affordability captured where known (GAIA 19 LI, Fine Arts 20, Acton 20, Bachenheimer 7).
+Snapshot keep_snapshot_2026-09-06_pre-panoramic-historic-entities.db; view-verified; v_projects_flat
+895 -> 907. Explorer re-exported + promoted (shown on site per John). RHNA unaffected (all completed
+pre-2022, no BP events). Also this session: 12 tabulation-form structures written; Accela probe/
+harness fixed; Clariti requirements doc; branch-hygiene exact-mirror deploy.
+
+**Still open:** harvest the 4 construction-era Accela B-records (Fine Arts B2006-04062, UC Storage
+B2008-00223, 2130 Center B2010-02709, Shattuck Studios B2016-05441) for documents to attach — needs
+the Building-module doc harvester (harvest_plansets is Planning-only).
+
 ## 2026-09-05 — JN-L §8b: the itemized per-permit fee layer (live AgencyCounter total_fee, gated)
 
 **The gap JN-L named is now filled.** §8 has always carried v2's *aggregate* fee layer — one

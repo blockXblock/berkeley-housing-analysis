@@ -18,6 +18,11 @@ import argparse
 import sqlite3
 import json
 import csv
+import sys
+from pathlib import Path as _Path
+
+sys.path.insert(0, str(_Path(__file__).resolve().parent))
+from housing_rules import RHNA_ALLOCATIONS
 from datetime import datetime
 from pathlib import Path
 
@@ -134,14 +139,9 @@ def generate_table_b(conn, year, adu_count=0):
     """
     cursor = conn.cursor()
 
-    # Berkeley's 6th Cycle RHNA allocation (2023-2031)
-    rhna_targets = {
-        "very_low": 1786,
-        "low": 1028,
-        "moderate": 1452,
-        "above_moderate": 4668,
-        "total": 8934
-    }
+    # THE allocation, from the city's own APR Table B (housing_rules citation [10]).
+    # Was 1,786/1,028/1,452/4,668 inline here — sums to 8,934 but matches no filing.
+    rhna_targets = RHNA_ALLOCATIONS["6th"]
 
     # ADU affordability split (ABAG 30/30/30/10)
     adu_vli = round(adu_count * 0.30)
@@ -270,13 +270,7 @@ def generate_rhna_progress(conn, year, adu_count=0):
     cursor = conn.cursor()
 
     # Berkeley's 6th Cycle RHNA allocation (2023-2031)
-    rhna_allocation = {
-        "very_low": 1786,
-        "low": 1028,
-        "moderate": 1452,
-        "above_moderate": 4668,
-        "total": 8934
-    }
+    rhna_allocation = RHNA_ALLOCATIONS["6th"]
 
     # RHNA CREDIT: Only projects with BP issued (this is what counts for HCD)
     cursor.execute('''

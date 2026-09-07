@@ -26,13 +26,16 @@ import sqlite3, argparse, sys, json
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from housing_rules import to_canonical_apn  # noqa (kept for harness symmetry / future PRIOR_APN normalize)
+from housing_rules import RHNA_ALLOCATIONS
 
 STUB_CO_DATE = '2024-01-01'
 
 # ---- per-CITY config (NOT hardcoded into the form — the form/columns are statewide) ----
 BERKELEY = {
     'JURIS_NAME': 'Berkeley', 'CNTY_NAME': 'Alameda', 'assessing_county': 'Alameda',
-    'rhna': {'very_low': 1786, 'low': 1028, 'moderate': 1452, 'above_moderate': 4668, 'total': 8934},
+    # THE allocation, from the city's own APR Table B (housing_rules citation [10]).
+    # Was 1,786/1,028/1,452/4,668 here — sums to 8,934 but matches no filing.
+    'rhna': RHNA_ALLOCATIONS['6th'],
     'cycle6_projection_start': '2022-06-30',   # first-BP >= this = 6th-cycle credit
 }
 # OAKLAND = {... same form, different rhna allocations + names ...}  # the per-city swap

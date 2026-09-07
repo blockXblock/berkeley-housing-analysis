@@ -61,6 +61,21 @@ stores values verbatim as they appear in the cited source.
     Source: California Legislative Information; Holland & Knight "California's
             2024 Housing Laws" briefing (2023-10)
 
+[10] Berkeley Housing Element APR, Table B ("Regional Housing Needs Allocation
+     Progress"), column 1, "RHNA Allocation by Income Level". Identical in the
+     CY2023, CY2024 and CY2025 filings — verified in all three:
+         data/raw/city_apr_pdfs/cy{2023,2024,2025}_apr_berkeley.pdf
+         Very Low 2,446 · Low 1,408 · Moderate 1,416 · Above Moderate 3,664
+         Total RHNA 8,934
+     Corroborated inside the same table: the Extremely-Low need of 1,223 is
+     stated there as "assumed to be half of the very low-income RHNA", which
+     only holds for VLI = 2,446.
+     Acutely-Low and Extremely-Low carry a "0" allocation: per the form's own
+     note, jurisdictions whose 6th-cycle determination predates AB 3093
+     (2024-09-19) were not allocated those tiers, and units reported in them
+     count toward Very-Low progress.
+     Used for: RHNA_ALLOCATIONS["6th"]
+
 CONVENTIONS
 -----------
 - RHNA_CYCLES.{start, end} are stored verbatim from the cited source. When the
@@ -123,6 +138,28 @@ RHNA_CYCLES = [
 #       source_citation TEXT,
 #       PRIMARY KEY (cycle)
 #   );
+# Berkeley's RHNA allocation by income tier — THE allocation, from the city's own
+# filing [10]. Any percent-of-goal on the site or in the APR divides by these.
+#
+# WHY THIS IS HERE: three different allocations were in circulation — this one, plus
+# 1,786/1,028/1,452/4,668 (in generate_apr_v2.py and the explorer's APR table) and
+# 1,786/825/1,416/5,261 (dead constants in explorer.js). The first two both sum to
+# 8,934, which is why the wrong one survived review for so long: the total looked
+# right while every tier was wrong. Neither appears in any Berkeley filing. Import
+# from here; do not re-type an allocation into a script.
+RHNA_ALLOCATIONS = {
+    "6th": {
+        "very_low": 2446,
+        "low": 1408,
+        "moderate": 1416,
+        "above_moderate": 3664,
+        "total": 8934,
+        "region": "ABAG/Bay Area",
+        "source_citation": "[10] Berkeley APR Table B, CY2023/CY2024/CY2025 (identical)",
+    },
+}
+
+
 PROJECTION_PERIODS = [
     {
         "cycle": "6th",

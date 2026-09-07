@@ -945,6 +945,14 @@ def export_data():
         documents = get_documents(conn)
         print(f"  {len(documents)} documents")
 
+        # The RHNA allocation travels WITH the data. Three different allocations had
+        # been re-typed into the site and the APR generator; now there is one, sourced
+        # to the city's own APR Table B (housing_rules citation [10]).
+        import sys as _sys
+        _sys.path.insert(0, str(BASE_DIR / 'scripts'))
+        from housing_rules import RHNA_ALLOCATIONS
+        rhna = dict(RHNA_ALLOCATIONS['6th'])
+
         print("Comparing against the city's APR filing...")
         city_apr, city_apr_meta = get_city_apr(conn)
         if city_apr_meta.get("available"):
@@ -965,6 +973,7 @@ def export_data():
             "players": players,
             "timeline": timeline,
             "documents": documents,
+            "rhna": rhna,
             "city_apr": city_apr,
             "city_apr_meta": city_apr_meta,
             "meta": {

@@ -3505,12 +3505,24 @@
         const dbProjects = projects.filter(p => getField(p, 'density_bonus'));
         const dbUnits = dbProjects.reduce((sum, p) => sum + (p.units || 0), 0);
 
-        // RHNA constants
-        const RHNA_TOTAL = 8934;
-        const RHNA_VLI = 1786;
-        const RHNA_LI = 825;
-        const RHNA_MOD = 1416;
-        const RHNA_ABOVE = 5261;
+        // RHNA allocation: DATA.rhna, exported from housing_rules.RHNA_ALLOCATIONS and
+        // sourced to the city's own APR Table B. Five dead constants stood here reading
+        // 1,786/825/1,416/5,261 — no Berkeley filing carries that set and it does not sum
+        // to 8,934. Nothing referenced them, which is exactly how they survived.
+        const RHNA = DATA.rhna || {};
+        document.querySelectorAll('[data-rhna]').forEach(el => {
+            const v = RHNA[el.dataset.rhna];
+            if (v) el.textContent = v.toLocaleString();
+        });
+        document.querySelectorAll('[data-rhna-pct]').forEach(el => {
+            const target = RHNA[el.dataset.rhnaPct];
+            const credited = Number(el.dataset.rhnaNum);
+            if (target && !isNaN(credited)) el.textContent = Math.round(credited / target * 100);
+        });
+        const rhnaTotalEl = document.getElementById('rhnaTotal');
+        if (rhnaTotalEl && RHNA.total) rhnaTotalEl.textContent = RHNA.total.toLocaleString();
+        const rhnaAllocNote = document.getElementById('rhnaAllocNote');
+        if (rhnaAllocNote && RHNA.total) rhnaAllocNote.textContent = RHNA.total.toLocaleString();
 
         // Helper to safely set text content
         const setStatText = (id, value) => {

@@ -34,8 +34,12 @@ import argparse
 import sqlite3
 import json
 import csv
+import sys
 from datetime import datetime
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from housing_rules import RHNA_ALLOCATIONS
 
 # Paths - V2 DATABASE
 BASE_DIR = Path('/Users/johngage/berkeley-data')
@@ -202,13 +206,11 @@ def generate_table_b(conn, year, adu_count=0):
     cursor = conn.cursor()
 
     # Berkeley's 6th Cycle RHNA allocation (2023-2031)
-    rhna_targets = {
-        "very_low": 1786,
-        "low": 1028,
-        "moderate": 1452,
-        "above_moderate": 4668,
-        "total": 8934
-    }
+    # THE allocation, from the city's own APR Table B (housing_rules citation [10]).
+    # This block previously read 1,786/1,028/1,452/4,668 — a set that sums to 8,934
+    # but matches no Berkeley filing, so every tier percentage it produced was wrong
+    # while the total looked right. Import it; never re-type it.
+    rhna_targets = RHNA_ALLOCATIONS["6th"]
 
     # ADU affordability split (ABAG 30/30/30/10)
     adu_vli = round(adu_count * 0.30)
@@ -342,13 +344,7 @@ def generate_rhna_progress(conn, year, adu_count=0):
     cursor = conn.cursor()
 
     # Berkeley's 6th Cycle RHNA allocation (2023-2031)
-    rhna_allocation = {
-        "very_low": 1786,
-        "low": 1028,
-        "moderate": 1452,
-        "above_moderate": 4668,
-        "total": 8934
-    }
+    rhna_allocation = RHNA_ALLOCATIONS["6th"]  # see the note in generate_table_b
 
     # RHNA CREDIT: credited on FIRST building-permit issuance (MIN non-subsidiary BP event),
     # NOT the view's bp_issued_date (which is MAX -> wrongly flips a 5th-cycle-first-permitted

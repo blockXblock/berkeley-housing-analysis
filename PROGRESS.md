@@ -86,6 +86,20 @@ parcels, so it is a partial extract. **This raises the value of pending CPRA #26
 Board registry): it carries owner and manager names for the rental stock, which is exactly the cohort
 the county withholds and the one that breaks portfolio grouping.
 
+**TWO CPRA DRAFTS WRITTEN (not sent).** `notes/2026-09-07_cpra_assessor_roll_with_names.md` and
+`notes/2026-09-07_cpra_recorder_grantor_grantee_index.md`. The Assessor one is deliberately tiny: we
+already ingest **every other column** of that exact published table, so it asks for **one added field**
+(assessee name) on a dataset the county already publishes — and we can show we load it correctly.
+The Recorder one turns on a single rule: **ask for the INDEX, never the IMAGES** — Gov. Code § 27301
+restricts document *images* online but not the index, and images are where the cost and the objections
+live. **Document type is the prize**: it separates a grant deed (a sale) from a deed of trust (a
+refinance), which is the only way to get true years-owned — the figure this project has now got wrong
+TWICE from two different fields (the 2017 `LatestDocu`, and `Mailing_Address_Effective_Date`, which
+says 2021 for a parcel owned since 1988). Both drafts flag that the CPRA was recodified in 2023, so
+the § 6250-series numbers in every online template are stale; verify sections and current officeholders
+before sending. Expected pushback (bulk-personal-information; images) is answered in the Recorder draft:
+the index is already sold in bulk to the aggregators who supply Zillow and the Chronicle's map.
+
 **OPEN / NEXT:** (a) **`aff877f` back-port — a regeneration trap.** That commit edited three served
 map HTMLs but only ONE generator (`gen_bond_incidence.py`); `gen_ownership_map.py` and
 `gen_yearbuilt_timelapse.py` never got the clipboard handler or the Regrid link, so **re-running

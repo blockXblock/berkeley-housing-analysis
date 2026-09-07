@@ -190,3 +190,13 @@ render finished.
 **Standing hazard, re-measured Sep 5:** boot disk **7.3 GB free of 228 GB** — a third of the
 ≥20 GB the checklist asks for, and now demonstrably capping swap. Freeing boot-disk space has
 moved from hygiene to the binding constraint.
+
+**2026-09-07 — Google Earth's cache overran its own cap to 8 GB and froze GE + starved the disk.**
+GE froze at 100% CPU after 1.9 days uptime, mid-render. Root cause was disk, not RAM: boot disk had
+fallen to 4.9 GB (from 19 GB earlier the same session). The eater was
+`~/Library/Caches/Google Earth` at **8.0 GB — 4× its 2,048 MB `Cache.DiskCacheSize` cap.** GE does
+not reliably honour the cap; repeated freezes/kills leave orphaned cache files that accumulate.
+`rm -rf ~/Library/Caches/Google\ Earth/*` (GE not running) recovered 8 GB instantly; it re-streams
+(cold tiles on next load — fine when you're rebooting anyway). **Add the GE cache to the disk-eater
+checklist** alongside Downloads/Desktop. Graceful `kill <pid>` (SIGTERM) still worked on the frozen
+process — Movie Maker settings preserved; no `-9` needed.

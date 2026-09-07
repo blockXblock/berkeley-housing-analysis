@@ -637,21 +637,65 @@
             }
         }
 
-        // APR Comparison - city_apr may not exist in export
+        // APR Comparison — our completions vs the city's filed completions.
+        // Written by get_city_apr() in export_explorer_data_v2.py; every figure below
+        // comes from city_apr_meta so the cards cannot drift from the rows they head.
         const cityApr = DATA.city_apr || [];
-        const matched = cityApr.filter(c => c.matched);
-        const unmatched = cityApr.filter(c => !c.matched);
-        document.getElementById('aprMatched').textContent = matched.length;
-        document.getElementById('aprUnmatched').textContent = unmatched.length;
+        const aprMeta = DATA.city_apr_meta || {};
+        const matched = cityApr.filter(c => c.bucket === 'matched');
+        const cityOnly = cityApr.filter(c => c.bucket === 'city_only');
+        const oursOnly = cityApr.filter(c => c.bucket === 'ours_only');
+        const setApr = (id, v) => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = typeof v === 'number' ? v.toLocaleString() : (v || '—');
+        };
+        setApr('aprMatched', matched.length);
+        setApr('aprCityOnly', cityOnly.length);
+        setApr('aprCityOnlyUnits', aprMeta.city_only_units);
+        setApr('aprOursOnly', oursOnly.length);
+        setApr('aprOursOnlyUnits', aprMeta.ours_only_units);
+        setApr('aprMatchRate', aprMeta.match_rate);
+        setApr('aprYears', aprMeta.years);
+        setApr('aprYears2', aprMeta.years);
+        setApr('aprMirrorPulled', (aprMeta.mirror_pulled || '').slice(0, 10));
+        setApr('aprMultiRow', aprMeta.multi_row_projects);
+        setApr('aprCityUnits', aprMeta.city_units);
+        setApr('aprOurUnits', aprMeta.our_units);
+        setApr('aprMissingUnits', aprMeta.ours_only_units);
+        setApr('aprVerifCityRows', aprMeta.available
+            ? aprMeta.city_rows_folded + aprMeta.city_only_rows : null);
+        setApr('aprVerifMatched', matched.length);
+        setApr('aprVerifRate', aprMeta.match_rate);
+        setApr('aprVerifUnmatched', cityOnly.length + oursOnly.length);
+
+        // The omissions panel: our completions the city's filing does not carry.
+        const missingCards = document.getElementById('aprMissingCards');
+        if (missingCards && !aprMeta.available) {
+            // No mirror on disk: say nothing rather than claiming a clean comparison.
+            missingCards.innerHTML = '<div class="text-gray-500">Comparison unavailable — '
+                + (aprMeta.reason || 'the state APR mirror was not read') + '.</div>';
+        } else if (missingCards) {
+            missingCards.innerHTML = oursOnly.length === 0
+                ? '<div class="text-gray-600">None — the city\'s filing carries every completion we do.</div>'
+                : oursOnly.sort((a, b) => b.our_units - a.our_units).map(r => `
+                    <div class="bg-white p-3 rounded">
+                        <div class="font-bold">${r.address}</div>
+                        <div class="text-gray-600">${r.our_units.toLocaleString()} unit${r.our_units === 1 ? '' : 's'}</div>
+                        <div class="text-xs text-gray-500">${r.status}</div>
+                    </div>`).join('');
+        }
 
         if (matched.length > 0) {
+            // Biggest first: the chart holds 15 of 695 matched projects, so an unsorted
+            // slice would show whichever happened to come back first, not what matters.
+            const top = [...matched].sort((a, b) => b.units - a.units).slice(0, 15);
             new Chart(document.getElementById('aprCompareChart'), {
                 type: 'bar',
                 data: {
-                    labels: matched.slice(0, 15).map(c => c.address.split(',')[0].substring(0, 20)),
+                    labels: top.map(c => c.address.split(',')[0].substring(0, 20)),
                     datasets: [
-                        { label: 'City APR Units', data: matched.slice(0, 15).map(c => c.units), backgroundColor: '#3b82f6' },
-                        { label: 'Our Units', data: matched.slice(0, 15).map(c => c.our_units), backgroundColor: '#10b981' }
+                        { label: 'City APR units', data: top.map(c => c.units), backgroundColor: '#3b82f6' },
+                        { label: 'Our units', data: top.map(c => c.our_units), backgroundColor: '#10b981' }
                     ]
                 },
             options: { scales: { y: { beginAtZero: true } } }
@@ -1114,12 +1158,18 @@
         cityApr.sort((a, b) => b.units - a.units).forEach(c => {
             const diff = c.matched ? c.our_units - c.units : '-';
             const diffClass = diff > 0 ? 'text-green-600' : diff < 0 ? 'text-red-600' : '';
+            // Where the city filed several permits against one of our projects, say so on
+            // the row — otherwise the negative difference reads as us undercounting when it
+            // is our project model collapsing what the city files per permit.
+            const permits = c.city_rows > 1
+                ? ` <span class="text-xs text-gray-500">(${c.city_rows} city permits)</span>` : '';
             const row = document.createElement('tr');
-            row.className = 'border-t hover:bg-gray-50' + (c.matched ? '' : ' bg-red-50');
+            row.className = 'border-t hover:bg-gray-50'
+                + (c.bucket === 'city_only' ? ' bg-red-50' : c.bucket === 'ours_only' ? ' bg-purple-50' : '');
             row.innerHTML = `
-                <td class="px-4 py-2">${c.address}</td>
-                <td class="px-4 py-2 text-center">${c.units}</td>
-                <td class="px-4 py-2 text-center">${c.matched ? c.our_units : '-'}</td>
+                <td class="px-4 py-2">${c.address}${permits}</td>
+                <td class="px-4 py-2 text-center">${c.bucket === 'ours_only' ? '—' : c.units.toLocaleString()}</td>
+                <td class="px-4 py-2 text-center">${c.our_units === null ? '—' : c.our_units.toLocaleString()}</td>
                 <td class="px-4 py-2 text-center ${diffClass}">${diff !== '-' ? (diff > 0 ? '+' : '') + diff : diff}</td>
                 <td class="px-4 py-2">${c.status}</td>
                 <td class="px-4 py-2 text-center">${c.matched ? '✓' : '✗'}</td>

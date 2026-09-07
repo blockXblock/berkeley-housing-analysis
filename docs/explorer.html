@@ -787,10 +787,10 @@
                     <div class="bg-white rounded-lg p-3">
                         <div class="font-semibold text-blue-700 mb-1">Verification Results</div>
                         <ul class="text-gray-600 space-y-1">
-                            <li>• City reported: <strong>117 projects</strong></li>
-                            <li>• We matched: <strong>114 projects</strong></li>
-                            <li>• Match rate: <strong>97.4%</strong></li>
-                            <li>• Unit counts aligned within ±5%</li>
+                            <li>• City filed: <strong><span id="aprVerifCityRows">--</span> completion rows</strong></li>
+                            <li>• We matched: <strong><span id="aprVerifMatched">--</span> projects</strong></li>
+                            <li>• Match rate: <strong><span id="aprVerifRate">--</span>%</strong></li>
+                            <li>• Unmatched both ways: <strong><span id="aprVerifUnmatched">--</span></strong></li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-lg p-3">
@@ -805,50 +805,55 @@
 
             <!-- 2024 Comparison Stats -->
             <div class="bg-white rounded-xl shadow p-6 mb-6">
-                <h2 class="text-xl font-semibold mb-4">2024 APR Comparison Results</h2>
-                <div class="grid grid-cols-3 gap-4 mb-6">
+                <h2 class="text-xl font-semibold mb-1">Our Record vs the City's APR Filing</h2>
+                <p class="text-sm text-gray-600 mb-4">Completions compared to completions &mdash; the city's Table A2
+                    certificate-of-occupancy rows for <span id="aprYears">--</span>, matched to our projects by parcel
+                    (current APN, then prior APN where a parcel was re-platted, then address). State mirror pulled
+                    <span id="aprMirrorPulled">--</span>. UC group quarters excluded from both sides.</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                     <div class="text-center p-4 bg-green-50 rounded-lg">
-                        <div class="text-2xl font-bold text-green-600" id="aprMatched">114</div>
-                        <div class="text-sm text-gray-600">Matched Projects</div>
+                        <div class="text-2xl font-bold text-green-600" id="aprMatched">--</div>
+                        <div class="text-sm text-gray-600">Matched projects</div>
                     </div>
                     <div class="text-center p-4 bg-amber-50 rounded-lg">
-                        <div class="text-2xl font-bold text-amber-600" id="aprUnmatched">3</div>
-                        <div class="text-sm text-gray-600">Unmatched (ADUs)</div>
+                        <div class="text-2xl font-bold text-amber-600" id="aprCityOnly">--</div>
+                        <div class="text-sm text-gray-600">In the city's filing only</div>
+                        <div class="text-xs text-gray-500"><span id="aprCityOnlyUnits">--</span> units</div>
+                    </div>
+                    <div class="text-center p-4 bg-purple-50 rounded-lg">
+                        <div class="text-2xl font-bold text-purple-600" id="aprOursOnly">--</div>
+                        <div class="text-sm text-gray-600">In our record only</div>
+                        <div class="text-xs text-gray-500"><span id="aprOursOnlyUnits">--</span> units</div>
                     </div>
                     <div class="text-center p-4 bg-blue-50 rounded-lg">
-                        <div class="text-2xl font-bold text-blue-600">97.4%</div>
-                        <div class="text-sm text-gray-600">Match Rate</div>
+                        <div class="text-2xl font-bold text-blue-600"><span id="aprMatchRate">--</span>%</div>
+                        <div class="text-sm text-gray-600">Match rate</div>
                     </div>
                 </div>
 
                 <!-- Projects potentially missing -->
                 <div class="p-4 bg-amber-50 border border-amber-200 rounded-lg mb-4">
-                    <div class="font-semibold text-amber-700 mb-2">Projects Potentially Missing from City's 2024 APR (885 units)</div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                        <div class="bg-white p-3 rounded">
-                            <div class="font-bold">1974 Shattuck Ave</div>
-                            <div class="text-gray-600">599 units</div>
-                            <div class="text-xs text-gray-500">Entitled December 2024</div>
-                        </div>
-                        <div class="bg-white p-3 rounded">
-                            <div class="font-bold">1899 Oxford St</div>
-                            <div class="text-gray-600">212 units</div>
-                            <div class="text-xs text-gray-500">Pending final action</div>
-                        </div>
-                        <div class="bg-white p-3 rounded">
-                            <div class="font-bold">2955 Shattuck Ave</div>
-                            <div class="text-gray-600">74 units</div>
-                            <div class="text-xs text-gray-500">In corrections</div>
-                        </div>
-                    </div>
+                    <div class="font-semibold text-amber-700 mb-2">Completions in our record that the city's filing does not carry
+                        (<span id="aprMissingUnits">--</span> units)</div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm" id="aprMissingCards"></div>
+                </div>
+
+                <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg mb-4 text-sm text-blue-900">
+                    <strong>Reading the difference column.</strong> On <span id="aprMultiRow">--</span> projects the city
+                    filed more than one permit against what we model as a single project (split parcels, phased
+                    buildings). Those rows sum the city's permits, so the difference reads negative &mdash; that is our
+                    under-granularity, not the city over-counting. We checked: the city does <em>not</em> inflate.
+                    Across <span id="aprYears2">--</span> the city's filing totals <span id="aprCityUnits">--</span>
+                    completed units against our <span id="aprOurUnits">--</span>; the gap is decomposed in
+                    <code>scripts/reconcile_apr_vs_city.py</code>.
                 </div>
 
                 <canvas id="aprCompareChart"></canvas>
             </div>
 
-            <!-- 2024 APR Detail Table -->
+            <!-- City-vs-ours detail table (rows from DATA.city_apr) -->
             <div class="bg-white rounded-xl shadow overflow-hidden mb-6">
-                <h3 class="text-lg font-semibold p-4 border-b">City 2024 APR vs Our Independent Data</h3>
+                <h3 class="text-lg font-semibold p-4 border-b">Every row named: the city's filing vs our record</h3>
                 <table class="w-full text-sm">
                     <thead class="bg-gray-50">
                         <tr>

@@ -24,6 +24,11 @@ BASE_DIR = Path('/Users/johngage/berkeley-data')
 DB_PATH = BASE_DIR / 'databases' / 'berkeley_housing_v2.db'
 OUTPUT_PATH = BASE_DIR / 'docs' / 'explorer_data_v2_working.js'
 
+# Last APR year the HCD mirror carries a full filing for. The city files in the
+# spring for the prior calendar year, so our side is bounded to the same window —
+# otherwise our in-progress current year reads as "the city omitted these".
+MIRROR_LAST_YEAR = '2025'
+
 def validate_co_date(co_date):
     """Validate CO date - reject the v1->v2 migration STUB placeholder, keep all real dates.
 
@@ -739,6 +744,169 @@ def get_documents(conn):
 
     return documents
 
+def get_city_apr(conn):
+    """DATA.city_apr — our record vs the city's own APR filing, row by row.
+
+    The explorer's APR tab has always read DATA.city_apr; no exporter ever wrote it,
+    so the table rendered "City APR comparison data not available" and the comparison
+    chart drew nothing. This fills it.
+
+    WHAT THIS IS (and the three rules it obeys):
+      - hcd_apr_mirror is the VERIFICATION TARGET, never a data source (CLAUDE.md rule 1).
+        Here it is used only as the thing we are compared AGAINST — the legitimate use.
+      - MILESTONE-ALIGNED: CO <-> CO. Table A2 carries entitlement, BP and CO unit
+        groups; summing them triple-counts a project that passed several milestones in
+        one year, so we compare completions to completions and nothing else.
+      - LINEAGE-AWARE join: city APN -> our current APN -> our prior APN (parcel_lineage)
+        -> normalized address. A bare APN join reproduces the 890/892 false-dead trap
+        (CLAUDE.md rule 4); re-platted parcels are the reason the prior-APN hop exists.
+
+    The buckets reproduce scripts/reconcile_apr_vs_city.py (the audited G1 engine) to the
+    unit — that script stays the analytical home and the place the aggregate-gap
+    decomposition is explained; this function is the serving projection of it.
+
+    Returns (rows, meta). Rows carry a `bucket`:
+      matched    — one row per OUR project, city units summed over its city rows
+      ours_only  — we have a completion the city's filing does not
+      city_only  — the city filed a completion we do not carry
+    `city_rows` > 1 marks the city filing several permits against one of our projects:
+    that is OUR under-granularity, not city inflation (the G1 airtight check refuted
+    "the city multi-counts"), so it is surfaced rather than silently folded away.
+    """
+    import sys
+    sys.path.insert(0, str(BASE_DIR / 'scripts'))
+    from housing_rules import to_canonical_apn
+    from housing_rules.address import normalize_address
+
+    mirror_path = BASE_DIR / 'databases' / 'hcd_apr_mirror.db'
+    if not mirror_path.exists():
+        return [], {"available": False,
+                    "reason": f"mirror not present at {mirror_path.name}"}
+
+    def num(x):
+        try:
+            return float(x or 0)
+        except (TypeError, ValueError):
+            return 0.0
+
+    def canon(apn):
+        try:
+            return to_canonical_apn(apn, 'Alameda')
+        except Exception:
+            return None          # unparseable APN -> fall through to the address hop
+
+    def addr_key(raw):
+        house, street = normalize_address(raw)
+        return f"{house} {street}" if house and street else None
+
+    # ---- our completions: UC excluded (group quarters, exempt from RHNA/APR) -------
+    ours, by_current, by_prior, by_address = {}, {}, {}, {}
+    for pid, apn, address, units, status, co_date in conn.execute('''
+        SELECT vpf.project_id, pk.apn, vpf.address_display, vpf.total_units,
+               vpf.status_label, vpf.co_issued_date
+        FROM v_projects_flat vpf
+        JOIN project_parcels pp ON pp.project_id = vpf.project_id AND pp.is_primary = 1
+        JOIN parcels pk ON pk.id = pp.parcel_id
+        WHERE vpf.co_issued_date > ''
+          AND vpf.co_issued_date <> '2024-01-01'          -- the v1->v2 migration stub
+          AND substr(vpf.co_issued_date, 1, 4) <= ?       -- mirror window; no half-year
+          AND vpf.project_id NOT IN (
+              SELECT pc.project_id FROM project_classifications pc
+              JOIN vocabulary_classification_types vct ON vct.id = pc.classification_type_id
+              WHERE vct.code = 'uc_project')
+    ''', (MIRROR_LAST_YEAR,)):
+        prior_row = conn.execute('''
+            SELECT pl.parent_apn_raw FROM parcel_lineage pl
+            JOIN parcels pk ON pk.id = pl.child_parcel_id
+            JOIN project_parcels pp ON pp.parcel_id = pk.id AND pp.is_primary = 1
+            WHERE pp.project_id = ? LIMIT 1''', (pid,)).fetchone()
+        current = canon(apn)
+        prior = canon(prior_row[0]) if prior_row and prior_row[0] else None
+        key = addr_key(address)
+        ours[pid] = {"address": address, "units": units or 0,
+                     "status": status, "co_date": co_date}
+        if current:
+            by_current[current] = pid
+        if prior:
+            by_prior[prior] = pid
+        if key:
+            by_address[key] = pid
+
+    # ---- the city's filed completions ---------------------------------------------
+    CO_COLS = ['CO_VLOW_INCOME_DR', 'CO_VLOW_INCOME_NDR', 'CO_LOW_INCOME_DR',
+               'CO_LOW_INCOME_NDR', 'CO_MOD_INCOME_DR', 'CO_MOD_INCOME_NDR',
+               'CO_ABOVE_MOD_INCOME', 'CO_EXTREMELY_LOW_INCOME_DR',
+               'CO_EXTREMELY_INCOME_NDR']
+    mirror = sqlite3.connect(f'file:{mirror_path}?mode=ro', uri=True)
+    try:
+        city_rows = [
+            {"apn": canon(apn), "address": address, "date": co_date,
+             "units": sum(num(v) for v in cols)}
+            for apn, address, co_date, *cols in mirror.execute(
+                f'''SELECT APN, STREET_ADDRESS, CO_ISSUE_DT1, {",".join(CO_COLS)}
+                    FROM table_a2
+                    WHERE JURIS_NAME LIKE '%erkeley%' AND CO_ISSUE_DT1 > '' ''')
+        ]
+        pulled_at = mirror.execute(
+            'SELECT MAX(pulled_at) FROM _pull_metadata').fetchone()[0]
+        year_min, year_max = mirror.execute(
+            "SELECT MIN(YEAR), MAX(YEAR) FROM table_a2 WHERE CO_ISSUE_DT1 > ''").fetchone()
+    finally:
+        mirror.close()
+
+    # ---- match: current APN -> prior APN -> address --------------------------------
+    by_project, city_only = {}, []
+    for row in city_rows:
+        key = addr_key(row["address"]) if row["address"] else None
+        pid = (by_current.get(row["apn"])
+               or by_prior.get(row["apn"])
+               or (by_address.get(key) if key else None))
+        if pid:
+            by_project.setdefault(pid, []).append(row)
+        else:
+            city_only.append(row)
+
+    rows = []
+    for pid, filed in by_project.items():
+        rows.append({"address": ours[pid]["address"],
+                     "units": round(sum(r["units"] for r in filed)),
+                     "our_units": ours[pid]["units"],
+                     "matched": True, "bucket": "matched",
+                     "status": ours[pid]["status"],
+                     "city_rows": len(filed)})
+    for pid, project in ours.items():
+        if pid not in by_project:
+            rows.append({"address": project["address"], "units": 0,
+                         "our_units": project["units"],
+                         "matched": False, "bucket": "ours_only",
+                         "status": project["status"], "city_rows": 0})
+    for row in city_only:
+        rows.append({"address": (row["address"] or '').split(',')[0],
+                     "units": round(row["units"]), "our_units": None,
+                     "matched": False, "bucket": "city_only",
+                     "status": "In the city's filing only", "city_rows": 1})
+
+    matched = [r for r in rows if r["bucket"] == "matched"]
+    ours_only = [r for r in rows if r["bucket"] == "ours_only"]
+    only_city = [r for r in rows if r["bucket"] == "city_only"]
+    meta = {
+        "available": True,
+        "milestone": "certificate of occupancy",
+        "years": f"{year_min}–{year_max}",
+        "mirror_pulled": pulled_at,
+        "matched_projects": len(matched),
+        "ours_only_projects": len(ours_only),
+        "ours_only_units": sum(r["our_units"] for r in ours_only),
+        "city_only_rows": len(only_city),
+        "city_only_units": sum(r["units"] for r in only_city),
+        "city_rows_folded": sum(r["city_rows"] for r in matched),
+        "multi_row_projects": len([r for r in matched if r["city_rows"] > 1]),
+        "match_rate": round(100.0 * len(matched) / len(rows), 1) if rows else 0.0,
+        "our_units": sum(p["units"] for p in ours.values()),
+        "city_units": round(sum(r["units"] for r in city_rows)),
+    }
+    return rows, meta
+
 def export_data():
     """Main export function"""
     print("=" * 60)
@@ -777,6 +945,15 @@ def export_data():
         documents = get_documents(conn)
         print(f"  {len(documents)} documents")
 
+        print("Comparing against the city's APR filing...")
+        city_apr, city_apr_meta = get_city_apr(conn)
+        if city_apr_meta.get("available"):
+            print(f"  {city_apr_meta['matched_projects']} matched · "
+                  f"{city_apr_meta['ours_only_projects']} ours-only · "
+                  f"{city_apr_meta['city_only_rows']} city-only")
+        else:
+            print(f"  SKIPPED: {city_apr_meta.get('reason')}")
+
         # Build DATA object
         export_date = datetime.now().strftime('%Y-%m-%d %H:%M')
         data = {
@@ -788,6 +965,8 @@ def export_data():
             "players": players,
             "timeline": timeline,
             "documents": documents,
+            "city_apr": city_apr,
+            "city_apr_meta": city_apr_meta,
             "meta": {
                 "generated": datetime.now().isoformat(),
                 "export_date": export_date,

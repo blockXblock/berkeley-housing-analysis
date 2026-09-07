@@ -35,6 +35,11 @@ occupancy, absentee ownership, portfolio grouping, and turnover — from data th
 ABSENTEE is a PROXY, not a fact: mailing city != BERKELEY. An out-of-town owner who mails to a local
 property manager reads as local; a Berkeley owner with a PO box elsewhere reads as absentee.
 
+NAMED OWNERS come from a CITY source, never the county: Berkeley rental business licences (see
+LICENCES). Every name carries `named_owner_source`, because a 2025 licence and a 2017 assessor
+extract are different claims and must never be displayed as though they were the same one. Parcels
+with no licence read `named_owner_source='none'` — unknown WITH provenance, per CLAUDE.md rule 1.
+
 READ-ONLY on berkeley.db and the canonical v2 DB. Writes only NEW tables into databases/parcel_facts.db
 (assessor_roll, ownership_transfers, owner_signals, source_provenance) — the `parcel_facts` table that
 build_parcel_facts.py owns is never touched, and that script's to_sql(if_exists="replace") replaces only
@@ -58,6 +63,12 @@ DB = "databases/parcel_facts.db"
 # a real portfolio from a property manager's mail drop (see classify_portfolios), which is the one
 # way mailing-address grouping goes badly wrong. Optional: absent, portfolio_class reads 'unchecked'.
 OWNERS_2017 = "data/reference/berkeley_parcel_owners_2026-08-13.csv"
+# City of Berkeley business licences. A rental licence names the OWNER of the rental property, and
+# it is a CURRENT (Nov-2025) primary source from a DIFFERENT agency than the county — so it is the
+# one named-owner layer we hold that is neither frozen at 2017 nor licensed from a vendor.
+# VALIDATED: across 2,945 parcels present in both, 78% of licence names share a name token with the
+# 2017 assessor name — independent confirmation that the licensee is the owner, not a tenant.
+LICENCES = "data/raw/business_licenses_20251115.json"
 PAGE = 2000                                    # = the services' maxRecordCount
 
 # Oracles — stable identities, not moving totals (CLAUDE.md: anchor to what stays true).
@@ -288,7 +299,46 @@ def classify_portfolios(roll):
     return out, len(names)
 
 
-def build_signals(roll, transfers, city, portfolios):
+def load_licences():
+    """Rental business licences, keyed by canonical APN.
+
+    Coverage is the point: these land on 605 of the 1,334 `agent_or_servicer` parcels and 532
+    `unverified` ones — precisely the cases where mailing-address grouping cannot say who the owner
+    is. A licence is filed BY the owner, so it cuts straight through the manager's mail drop.
+
+    `busdesc` also encodes the unit count ('RES. RENTAL - 4 UNITS'), kept as licensed_rental_units:
+    an independently-sourced unit figure for the rental stock, useful to the ghost-units work.
+    Commercial rental licences name a commercial property's owner — kept, but tagged, since they say
+    nothing about housing."""
+    try:
+        with open(LICENCES) as fh:
+            rows = json.load(fh)
+    except FileNotFoundError:
+        return {}
+    rows = rows if isinstance(rows, list) else list(rows.values())[0]
+    out = {}
+    for r in rows:
+        desc = s(r.get("busdesc")).upper()
+        if "RENTAL" not in desc and "DWELL" not in desc:
+            continue
+        cp = canon(r.get("apn_normalized") or r.get("apn"))
+        name = s(r.get("b1_business_name")) or s(r.get("dba"))
+        if not cp or not name:
+            continue
+        m = re.search(r"(\d+)\s*UNITS?", desc)
+        kind = "commercial" if desc.startswith("COMMERCIAL") else "residential"
+        cur = out.get(cp)
+        # One parcel can carry several licences. Prefer a RESIDENTIAL licence (it is the one that
+        # speaks to housing) and, within that, the one declaring the most units.
+        if cur is None or (kind == "residential" and cur["kind"] == "commercial") or \
+           (kind == cur["kind"] and (int(m.group(1)) if m else 0) > (cur["units"] or 0)):
+            out[cp] = dict(name=name.upper(), kind=kind,
+                           units=int(m.group(1)) if m else None, desc=desc, count=0)
+        out[cp]["count"] += 1
+    return out
+
+
+def build_signals(roll, transfers, city, portfolios, licences):
     """One row per parcel: the honest ownership signals, each traceable to a source column."""
     portfolio = Counter(r["mailing_key"] for r in roll if r["mailing_key"])
     last = {}
@@ -300,6 +350,7 @@ def build_signals(roll, transfers, city, portfolios):
     for r in roll:
         mk, lt = r["mailing_key"], last.get(r["capn"])
         pcls, pdist, pnamed = portfolios.get(mk, ("unchecked", 0, 0)) if mk else (None, None, None)
+        lic = licences.get(r["capn"])
         # HOEX is FILED, not inferred: the $7,000 homeowner's exemption applies only to an
         # owner-occupied home. It UNDERCOUNTS owner-occupancy (eligible owners who never filed).
         occ = 1 if (r["hoex"] or 0) > 0 else 0
@@ -319,6 +370,17 @@ def build_signals(roll, transfers, city, portfolios):
             total_net_value=r["total_net_value"], use_code=r["use_code"],
             last_transfer_date=lt["transfer_date"] if lt else None,
             last_transfer_value=lt["transfer_value"] if lt else None,
+            # NAMED OWNER, WITH ITS PROVENANCE ATTACHED (CLAUDE.md rule 1: unknown-with-provenance,
+            # never a bare fill). The county publishes no names, so every name here comes from a
+            # City source and says so. `named_owner_source` is the whole point of the column — a
+            # 2025 licence and a 2017 assessor extract are not the same claim and must never be
+            # displayed as if they were.
+            licensed_owner_name=lic["name"] if lic else None,
+            licensed_owner_kind=lic["kind"] if lic else None,
+            licensed_rental_units=lic["units"] if lic else None,
+            licence_count=lic["count"] if lic else 0,
+            named_owner=lic["name"] if lic else None,
+            named_owner_source="business_licence_2025-11-15" if lic else "none",
             roll=r["roll"]))
     return sig
 
@@ -378,6 +440,12 @@ def verify(roll, transfers, signals, city):
         ok = False
         notes.append("FAIL transfers: none fetched")
 
+    named = [g for g in signals if g["named_owner"]]
+    on_hard = sum(1 for g in named if g["portfolio_class"] in ("agent_or_servicer", "unverified"))
+    notes.append(f"--  named owners (Berkeley rental licences, {LICENCES[-13:-5]}): {len(named):,} "
+                 f"parcels, of which {on_hard:,} sit on keys mailing-address grouping could not "
+                 f"resolve")
+
     occ = sum(s["owner_occupied_hoex"] for s in signals)
     abs_ = sum(1 for s in signals if s["absentee_mailing"] == 1)
     notes.append(f"--  signals: {occ:,} owner-occupied (HOEX filed) | {abs_:,} absentee mailing "
@@ -416,7 +484,10 @@ def main():
     portfolios, n_names = classify_portfolios(roll)
     if n_names is None:
         print(f"  NOTE: {OWNERS_2017} absent — portfolios cannot be validated (class='unchecked')")
-    signals = build_signals(roll, transfers, a.city, portfolios)
+    licences = load_licences()
+    if not licences:
+        print(f"  NOTE: {LICENCES} absent — no named-owner layer (named_owner_source='none')")
+    signals = build_signals(roll, transfers, a.city, portfolios, licences)
     if bad1 or bad2:
         print(f"  (skipped un-canonicalizable APNs: {bad1} roll, {bad2} transfer rows)")
 

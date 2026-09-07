@@ -65,6 +65,27 @@ Latest_Document_Date, and reads 2021 on 2811 Benvenue, owned since 1988. Same ar
 document type. Also added: retry-with-backoff on the county API after a transient HTTP 304 arrived
 mid-pagination on a fetch that had just succeeded twice (harvester rule: retry before believing).
 
+**NAMED-OWNER LAYER WIRED IN (same session).** The county publishes no names, but the CITY does:
+`data/raw/business_licenses_20251115.json` holds **3,286 rental business licences, every one carrying
+an APN**, and a rental licence is filed BY the owner. Validated before use — across 2,945 parcels
+present in both, **78% of licence names share a name token with the 2017 assessor name**, independent
+confirmation that the licensee is the owner and not a tenant. Now on `owner_signals` as
+`named_owner` + **`named_owner_source`** (`business_licence_2025-11-15` or `none` — unknown WITH
+provenance; a 2025 licence and a 2017 extract are different claims and must never render alike):
+**2,925 parcels named** (2,298 residential / 627 commercial), **1,137 of them on keys mailing-address
+grouping could not resolve**. Also parsed `licensed_rental_units` from the licence description
+('RES. RENTAL - 4 UNITS') on 1,640 parcels — an independently-sourced unit count for the rental
+stock, useful to the ghost-units work. It works: on the 2941 Telegraph mail drop the layer returns
+KURDYS DOUGLAS, NENE RANCH LLC, S & C LLC and T AND W PARTNERS on separate parcels — proving
+separate owners behind one manager, which is what the classifier could only infer.
+
+**Cross-checked the Rent Board extract too** (`data/reference/rent_control.csv`): it carries
+`Owner_Name` AND `Manager_Name` as separate fields — the distinction we had to infer — and confirms
+the mail drops independently (2941 Telegraph: 3 different owners, ONE manager, Sam Sorokin). Only 139
+parcels, so it is a partial extract. **This raises the value of pending CPRA #26-2375** (the full Rent
+Board registry): it carries owner and manager names for the rental stock, which is exactly the cohort
+the county withholds and the one that breaks portfolio grouping.
+
 **OPEN / NEXT:** (a) **`aff877f` back-port — a regeneration trap.** That commit edited three served
 map HTMLs but only ONE generator (`gen_bond_incidence.py`); `gen_ownership_map.py` and
 `gen_yearbuilt_timelapse.py` never got the clipboard handler or the Regrid link, so **re-running

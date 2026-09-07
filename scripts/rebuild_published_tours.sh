@@ -8,6 +8,8 @@ set -euo pipefail
 cd "$(git rev-parse --show-toplevel)"
 IMG=scratch/2026-08-31/svg-labels          # shared canonical-geometry label cache
 TOURS=(
+  "shattuck-s2n-path|shattuck|3"
+  "bancroft-e2w|bancroft|3"
   "tour-private-pipeline-over-200-units-2026-05-16||3"
   "university-880-uc|university-880-uc|3"
   "uc-dormitories||3"

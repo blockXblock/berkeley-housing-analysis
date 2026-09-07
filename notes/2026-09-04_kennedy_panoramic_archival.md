@@ -208,3 +208,22 @@ Shattuck Lofts PREAPP000155).
 requirement — a permit system should not lose the construction record when the vendor's digital
 coverage begins; retro-digitisation of pre-2005 paper permits is part of a complete built-environment
 record.
+
+### Building-record document harvest (2026-09-06) — no plan sets, as the rule predicts
+
+Ran the Building-module document harvester (discover_url module_hint="Building" → harvest_record with
+the detail href, which skips the ZP-only gate — the mechanism generalizes across record types, per
+generalize_test.py) on the 4 construction-era B-records: Fine Arts B2006-04062, Shattuck Studios
+B2016-05441, UC Storage B2008-00223, 2130 Center B2010-02709.
+
+**All 4 discovered cleanly; all 4 returned NO-PLANSETS. Zero documents.** This is the
+`plansets-on-zp-not-bp` rule confirmed: plan sets attach to the Planning (ZP) record, not the
+Building (BP) record. The historic buildings' Planning records predate Accela's digital Planning
+module, and their Building records don't carry the architect plans.
+
+**Conclusion for the historic Panoramic buildings: no architect plans are recoverable from Accela.**
+The developer-website figures (already in the v2 entities at MEDIUM confidence) are the best
+available source; the tour-caption figures (LOW) remain unverified. This is not a gap to keep
+chasing — it is a hard limit of Accela's coverage for pre-2005 construction, and itself a Clariti
+requirement (retro-digitise pre-2005 permits + attach plans to a project, not scattered by record
+type).

@@ -10,6 +10,9 @@
 
 ## 2026-09-06 — historic Panoramic buildings added to v2 (reconstructed_secondary)
 
+**Update:** UC Storage (proj918) + 2130 Center (proj919) also added as NON-RESIDENTIAL
+entities (0 units, tagged non_residential + reconstructed_secondary) per John — total 909.
+
 12 pre-2018 Panoramic Interests buildings (506 units) added as full project entities (ids 906-917,
 Completed), the housing subset of the Kennedy tour's 14 historic buildings; the 2 non-housing
 (UC Storage, 2130 Center) excluded. They predate the CPRA feed, so each is tagged with the NEW

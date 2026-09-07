@@ -28,23 +28,11 @@ Usage: python scripts/gen_ownership_map.py
 import geopandas as gpd, pandas as pd, json, os, re, sys, warnings
 warnings.filterwarnings("ignore"); sys.path.insert(0, "scripts")
 from housing_rules import to_canonical_apn
+from housing_rules.owner_name import owner_type, LABELS as OWNER_LABELS
 OUT = "docs/maps/berkeley_ownership.html"
 DATA = "docs/maps/berkeley_ownership_data.json"
 
-INVESTOR = re.compile(r"\b(LLC|L\.L\.C|INC|CORP|COMPANY|LTD|LP|L\.P|LLP|PARTNERS|PARTNERSHIP|PROPERTIES|"
-                      r"HOLDINGS|VENTURES|CAPITAL|REALTY|MANAGEMENT|INVESTMENTS?|ENTERPRISES|GROUP|ASSOCIATES|& CO)\b")
-# trust — incl. assessor abbreviations TRS/TTEE, and 'X TR' only in trust context (NOT bare 'TR' = tract)
-TRUST = re.compile(r"\b(TRUST|TRUSTEE|TTEE|TRS|REVOCABLE|(?:FAMILY|LIVING|REV|FAM|LV|JOINT|SURVIVORS?)\s+TR)\b")
-INSTIT = re.compile(r"\b(UNIVERSITY|REGENTS|CITY OF|COUNTY|STATE OF|CHURCH|SCHOOL|DISTRICT|CALIFORNIA|"
-                    r"HOUSING AUTH|FOUNDATION|ASSOCIATION|ASSN|CONGREGATION|TEMPLE|SOCIETY|INSTITUTE|"
-                    r"COOPERATIVE|CO-OP|MINISTRIES|DIOCESE|PARISH|NONPROFIT|COMMONS)\b")
-
-def owner_type(name):
-    n = str(name).upper()
-    if INSTIT.search(n): return 3
-    if TRUST.search(n): return 2
-    if INVESTOR.search(n): return 1
-    return 0            # individual
+# owner_type now lives in housing_rules.owner_name — imported above, never re-typed here.
 
 def main():
     tp = gpd.read_file("data/raw/berkeley_taxparcels_2026-08-12.geojson")[["APN", "geometry"]]
@@ -79,7 +67,7 @@ def main():
                              **_card(cp)}}
              for x, y, t, o, ad, nm, cp in zip(c.x, c.y, g.recency, g.otype, g.addr, g.OwnersName, g.capn)]
     counts = pd.Series([f["properties"]["o"] for f in feats]).value_counts().to_dict()
-    lab = {0: "individual", 1: "investor (LLC/Corp/LP)", 2: "trust", 3: "institutional"}
+    lab = OWNER_LABELS   # from housing_rules.owner_name, so the legend cannot drift from the classifier
     print(f"parcels mapped: {len(feats)} | owner types: " + ", ".join(f"{lab[k]}={counts.get(k,0)}" for k in range(4)))
     print(f"  median years-since-last-recorded-document: {pd.Series([f['properties']['t'] for f in feats]).median():.0f} yr")
     el = gpd.read_file("data/reference/berkeley_neighborhoods.geojson").to_crs(4326)

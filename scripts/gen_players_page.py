@@ -17,10 +17,13 @@ Run: /opt/miniconda3/envs/jupyter_env/bin/python scripts/gen_players_page.py
 import json
 import os
 import sqlite3
+import sys
 from collections import defaultdict
 from datetime import date
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(ROOT, 'scripts'))
+from housing_rules.owner_name import is_organisation
 TODAY = date.today()
 v2 = sqlite3.connect(f"file:{os.path.join(ROOT, 'databases', 'berkeley_housing_v2.db')}?mode=ro", uri=True)
 
@@ -45,11 +48,30 @@ players = {}   # name -> {roles, projects:set}
 for name, role, pid in v2.execute("""SELECT o.name, rt.code, pp.project_id
         FROM project_participants pp
         JOIN vocabulary_role_types rt ON rt.id=pp.role_type_id
-        JOIN organizations o ON o.id=pp.organization_id"""):
+        JOIN organizations o ON o.id=pp.organization_id
+        WHERE o.merged_into_id IS NULL"""):
     p = players.setdefault(name, dict(roles=set(), projects=set()))
     p['roles'].add({'developer_of_record': 'developer', 'architect_design': 'architect',
                     'owner_current': 'owner'}.get(role, role))
     p['projects'].add(pid)
+
+# WHO GETS A NODE. Owners outnumber professionals 20:1 on the record, and most are natural
+# persons — 835 of 876 nodes were owner-only when this page was first regenerated against the
+# full owner layer, the large majority of them named private homeowners. A social network graph
+# of named individuals is not what this page is for, and is a different act from the ownership
+# MAP, where a name sits on its own parcel as a record of title. So: a player is anyone with a
+# professional role (developer, architect, applicant...), plus owners that are ORGANISATIONS —
+# companies and institutions. Individuals and family trusts are excluded; housing_rules.
+# owner_name.is_organisation draws that line, and family trusts fall on the person side of it
+# because a family trust is a wrapper around natural persons. (Decision: John, 2026-09-07.)
+def is_player(name, roles):
+    return bool(set(roles) - {'owner'}) or is_organisation(name)
+
+
+# Apply the filter HERE, before edges are built, so a line can never connect to a player
+# the page does not show.
+_excluded = {n for n, p in players.items() if not is_player(n, p['roles'])}
+players = {n: p for n, p in players.items() if n not in _excluded}
 
 by_project = defaultdict(list)
 for name, p in players.items():
@@ -71,6 +93,7 @@ def color(roles):
         if r in roles: return ROLE_COLOR[r]
     return '#9fb8c8'
 
+n_excluded = len(_excluded)
 nodes = []
 for name, p in sorted(players.items(), key=lambda kv: -sum(proj[i]['u'] for i in kv[1]['projects'])):
     units = sum(proj[i]['u'] for i in p['projects'])
@@ -142,11 +165,24 @@ html = f"""<!DOCTYPE html>
   <table><tr><th>player</th><th>roles</th><th class="num">projects</th><th class="num">units</th><th>pipeline mix</th></tr>
   {table_rows}</table>
 
+  <h2>Players Notes — the stories behind the record</h2>
+  <p>This network shows who appears on the record; the <a href="players-notes/">Players Notes
+  series</a> tells their stories. <b>Note № 1: <a href="players-notes/roots-and-reckoning/">Roots
+  &amp; Reckoning</a></b> — Indian-origin families shaping Berkeley, from the city's 1916 invention
+  of exclusionary zoning to the rise and fall of Lakireddy Bali Reddy, once Berkeley's largest
+  private landlord. An interactive, fully sourced timeline.</p>
+
   <h2>What this view does not know yet</h2>
   <p><b>The money is missing.</b> Construction lenders live on deeds of trust at the County
   Recorder; investors in LLC filings with the Secretary of State. Neither is loaded yet — this
   page will say so until they are. Coverage is majors-heavy: the neighborhood fabric's hundreds
-  of small builders and homeowners aren't named in the record. And a line between two players
+  of small builders and homeowners aren't named in the record.</p>
+  <p><b>Who appears here.</b> Everyone with a professional role — developer, architect, applicant —
+  plus owners that are <i>organisations</i>: companies and institutions. Owners who are private
+  individuals, including family trusts, are deliberately left out: {n_excluded:,} of them hold title to
+  projects in this record, and a network graph of named householders is not what this view is for.
+  Their parcels are still shown, as title records rather than as players, on
+  <a href="maps/berkeley_ownership.html">the ownership map</a>. And a line between two players
   means they <i>appear on the same project</i> — the record does not know who hired whom.</p>
 
   <div class="src">Derived {TODAY.isoformat()} from the canonical v2 database (organizations ×
@@ -268,5 +304,21 @@ for (const n of N) {{
 </html>
 """
 out = os.path.join(ROOT, 'docs', 'players.html')
+
+# Re-stamp the site_meta block. A generator that writes a whole fresh page silently
+# STRIPS the <!-- BEGIN site_meta --> block (description, canonical, Open Graph,
+# favicon) that scripts/site_meta.py puts in, and site_meta's own main() sys.exits on a
+# missing Pillow before it can put it back. block() has no image dependency, so call it
+# here and the page is never served without its identity. (2026-09-07)
+try:
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('site_meta', os.path.join(ROOT, 'scripts', 'site_meta.py'))
+    site_meta = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(site_meta)
+    html = html.replace('</head>', site_meta.block('players.html') + '</head>', 1)
+except Exception as e:                                  # never block the page on metadata
+    print(f'  WARNING: site_meta block not applied ({e})')
+
 open(out, 'w').write(html)
 print('wrote', out, f'({len(html)//1024}KB)')
+print(f'  excluded {n_excluded} individual/family-trust owner(s); {len(nodes)} players shown')

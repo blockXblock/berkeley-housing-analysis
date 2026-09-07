@@ -686,8 +686,17 @@ filed documents.</div></footer>
 __SANKEY_SCRIPTS__
 </body></html>"""
 
-import glob
-_plotly = glob.glob("/opt/miniconda3/envs/jupyter_env/lib/python3.1*/site-packages/plotly/package_data/plotly.min.js")
+import os.path
+# Resolve plotly's bundled minified JS from the RUNNING interpreter, not a hardcoded
+# conda path (2026-09-07, env consolidation): the old glob pinned this script to
+# /opt/miniconda3/envs/jupyter_env and silently fell back to the CDN anywhere else,
+# which does not render as an Artifact.
+try:
+    import plotly
+    _p = os.path.join(os.path.dirname(plotly.__file__), "package_data", "plotly.min.js")
+    _plotly = [_p] if os.path.exists(_p) else []
+except ImportError:
+    _plotly = []
 if _plotly:
     PLOTLY_TAG = "<script>" + open(_plotly[0]).read() + "</script>"   # inlined: Artifact CSP blocks CDNs
 else:

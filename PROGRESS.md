@@ -8,6 +8,74 @@
 
 ---
 
+## 2026-09-07 — the ownership layer has machinery at last: county assessor feeds, and what they can't say
+
+**The owner-name file was never refreshable, and the reason is now settled.** `data/reference/
+berkeley_parcel_owners_2026-08-13.csv` (the spine of the ownership dot-map and of `parcel_facts`)
+came from the **City of Berkeley ArcGIS `TaxParcel` layer** — the source URL commit `ef84640`
+recorded as "unknown — maps-session asset". Found it:
+`services1.arcgis.com/IYiCpZoSIq9lAxi8/.../TaxParcel/FeatureServer/0`. Its `editingInfo.lastEditDate`
+is **2017-11-09**. The layer is FROZEN. The known caveat ("its `LatestDocu` is a stale 2017 extract")
+understated it: **the whole layer is 2017, names included**, so the live map's owner names and its
+70/23/5.7% owner-type split are a nine-year-old roll. Refreshing from that source would buy nothing.
+
+**The county publishes no owner names — verified three ways, not assumed.** Parcels layer: no name
+field. Secured roll: HAS an `Attention_Name` column, populated on **0 of 29,163** Berkeley parcels.
+Transfer list: rows typed TRANSFEROR/TRANSFEREE with **no name column at all**. Names remain a
+Regrid/Recorder acquisition (the Regrid free-access offer expired; John has sent a new request).
+
+**But the county does maintain most of what the names were WANTED for, in two tables nobody had
+found** (same org as the Parcels feed, 226 services on it):
+- `Assessor_Office_Secured_Tax_Roll_<vintage>` — one per roll year 2019-20 onward. **Mailing address,
+  HOEX/OTEX, TRA_Primary/Secondary**, Latest_Document prefix+series+date. TRA and exemptions are
+  items #1 and #3 of the bond-map open list, which the notes said needed an Auditor-Controller
+  acquisition. Also on the org: `Property_Tax_Rates_2020..2025` (the rate book).
+- `Assessor_Office_Ownership_Transfer_List` — two-year rolling, **4,392 Berkeley documents**
+  2023-03-31..2025-03-17, with `doc_prefix`+`doc_series` (the Recorder key) and a transfer-tax-derived
+  **price on 1,286 of them**. This is the transfer history that was queued as "needs Regrid/Recorder".
+
+**NEW MACHINERY: `scripts/refresh_parcel_owners.py`** (preview by default; `--commit` snapshots,
+writes transactionally, verifies in-transaction, rolls back on failure). Writes four NEW tables into
+`parcel_facts.db` — `assessor_roll` (29,163), `ownership_transfers` (4,392), `owner_signals` (29,163),
+`source_provenance` — and never touches the `parcel_facts` table `build_parcel_facts.py` owns.
+Snapshot `keep_snapshot_2026-09-07_pre-owner-signals.db`. Gates: roll-count invariant, the **net-AV
+identity** (land+imps+fixtures+bpp+hpp-hoex-otex == total_net_value) at **100.0000% of 29,163**, and
+two stable oracles — 2811 Benvenue (HOEX $7,000, mails to itself) and 1146 Keeler (HOEX $0, mails to
+**Los Gatos**, the Lindheim parcel). Signals: **16,148 owner-occupied by filed HOEX · 6,317 absentee
+mailing · 7,002 parcels in a multi-parcel mailing group.**
+
+**THE FINDING THAT GOVERNS HOW THIS MAY BE PUBLISHED: mailing-address grouping conflates OWNER with
+AGENT.** Validated against the 2017 names (whose proper role turns out to be **validator, never the
+map's spine**): 2180 Milvia = 176/178 CITY OF BERKELEY and 1111 Franklin = 52/53 UC REGENTS, both
+clean — institutions mail to themselves, and grouping even absorbs name variants for free. But
+**2278 Shattuck is 25 DISTINCT owners behind 44 parcels** and 2941 Telegraph is 31 behind 42 — those
+are property managers' mail drops. "One owner holds 47 parcels on Shattuck" would be false. So every
+key is classified and the class travels WITH the row: **1,175 single_owner · 1,334 agent_or_servicer ·
+798 mixed · 3,695 unverified · 22,161 single_parcel**. Only `single_owner` may be described publicly
+as one owner's holdings. An **evidence floor** (>=3 names and >=30% coverage) was necessary: PO Box
+4747, Oak Brook IL — 173 parcels, exactly ONE 2017 name — first classified `single_owner` on that
+single row; the floor moved 1,532 parcels out of confident classes.
+
+**Two traps recorded in the script, both previously paid for here:** (a) the roll is a **VINTAGE**,
+published 2025-07-07 and a year behind the live Parcels feed (Keeler reads $1,123,631 vs $2,411,800
+live — the exact staleness Dan Lindheim reported) — historical panel, NOT a current-value source;
+`berkeley.db` stays that. (b) `Mailing_Address_Effective_Date` **IS NOT TENURE** — it equals
+Latest_Document_Date, and reads 2021 on 2811 Benvenue, owned since 1988. Same artefact as the
+2026-08-14 "years held" correction. True years-owned still needs the Recorder deed index WITH
+document type. Also added: retry-with-backoff on the county API after a transient HTTP 304 arrived
+mid-pagination on a fetch that had just succeeded twice (harvester rule: retry before believing).
+
+**OPEN / NEXT:** (a) **`aff877f` back-port — a regeneration trap.** That commit edited three served
+map HTMLs but only ONE generator (`gen_bond_incidence.py`); `gen_ownership_map.py` and
+`gen_yearbuilt_timelapse.py` never got the clipboard handler or the Regrid link, so **re-running
+either silently reverts a shipped feature.** Must be fixed BEFORE any data refresh touches those two
+maps. (b) Re-base the ownership map on `owner_signals` (owner-occupied / absentee / classified
+portfolios / 2023-25 turnover) and label the 2017 names honestly, or retire them from the spine.
+(c) The gated refresh cascade (assessor -> parcel_facts -> maps -> explorer -> promote) plus a
+maps-staleness check in `deploy_gate.py`, which today guards `explorer_data.js` only. (d) Regrid, when
+the new request lands, narrows to exactly two things: **names**, and history **before March 2023** —
+check the licence terms against the standing publish-all-names decision (`gen_bond_incidence.py:40`).
+
 ## 2026-09-06 — historic Panoramic buildings added to v2 (reconstructed_secondary)
 
 **Update:** UC Storage (proj918) + 2130 Center (proj919) also added as NON-RESIDENTIAL

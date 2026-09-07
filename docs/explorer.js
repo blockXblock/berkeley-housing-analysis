@@ -631,7 +631,8 @@
             if (skylineCanvas && skylineCanvas.parentElement) {
                 const note = document.createElement('p');
                 note.className = 'text-xs text-gray-500 mt-2 text-center';
-                note.innerHTML = '🟡 <span class="text-yellow-600 font-medium">Yellow bars</span> = UC Berkeley projects (3 projects, ~1,600 beds). UC projects are exempt from city permitting and RHNA.';
+                const ucBedsCharted = topByHeight.filter(p => p.is_uc_project).reduce((acc, p) => acc + (p.units || 0), 0);
+                note.innerHTML = '🟡 <span class="text-yellow-600 font-medium">Yellow bars</span> = UC Berkeley projects (' + ucCount + ' projects, ' + ucBedsCharted.toLocaleString() + ' beds). UC projects are exempt from city permitting and RHNA.';
                 skylineCanvas.parentElement.appendChild(note);
             }
         }
@@ -3410,10 +3411,18 @@
         // sourced BEDS, never converted to "units" and never folded into a unit total.
         // (Beds sourced: 2400 Bowditch 1500 + 2200 Bancroft 1625 + 1950 Oxford 772 + 2556 Haste 1113.)
         const UC_BEDS = 5010;
+        const UC_EXISTING_BEDS = 9800;  // sourced: students in UC housing today
         const privateProjects = projects.filter(p => !p.is_uc_project);
-        const privateProjectCount = privateProjects.length;                                  // 362
-        const privateUnits = privateProjects.reduce((s, p) => s + (p.units || 0), 0);        // 12,248
-        const ucProjectCount = projects.filter(p => p.is_uc_project).length;                 // 4
+        const privateProjectCount = privateProjects.length;
+        const privateUnits = privateProjects.reduce((s, p) => s + (p.units || 0), 0);
+        const ucProjectsAll = projects.filter(p => p.is_uc_project);
+        const ucProjectCount = ucProjectsAll.length;
+        // Beds still to come = UC projects NOT yet complete. A completed one (Anchor
+        // House) is already inside the 9,800 existing-beds figure, so counting it as
+        // "would add" would double-count it.
+        const ucPipeline = ucProjectsAll.filter(p => (getField(p, 'status') || '') !== 'Completed');
+        const ucPipelineBeds = ucPipeline.reduce((s, p) => s + (p.units || 0), 0);
+        const ucPipelinePct = Math.round(ucPipelineBeds / UC_EXISTING_BEDS * 100);
         // Net-new CO units (completions), PRIVATE, UC-excluded, by year
         const coUnitsYear = (y) => privateProjects
             .filter(p => (getField(p, 'co_date') || '').startsWith(y))
@@ -3527,6 +3536,13 @@
         setStatText('stat-uc-projects', ucProjectCount);
         setStatText('stat-uc-beds-2', UC_BEDS);
         setStatText('stat-combined-projects', totalProjects);
+        setStatText('stat-city-projects-2', privateProjectCount);
+        setStatText('stat-city-units-2', privateUnits);
+        setStatText('stat-uc-projects-2', ucProjectCount);
+        setStatText('stat-uc-beds-3', UC_BEDS);
+        setStatText('stat-uc-pipeline-projects', ucPipeline.length);
+        setStatText('stat-uc-pipeline-beds', ucPipelineBeds);
+        setStatText('stat-uc-pipeline-pct', ucPipelinePct);
 
         // Sankey subtitles
         setStatText('stat-sankey-projects', totalProjects);

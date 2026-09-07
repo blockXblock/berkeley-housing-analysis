@@ -1,0 +1,155 @@
+{
+  "baseline": "env_migration",
+  "revision": 3,
+  "created": "2026-09-07T15:20:41",
+  "supersedes": "env_migration_baseline_2026-09-07_rev2.json (rev 2). APPENDED, never edited.",
+  "change_under_test": "pandas 2.3.3 -> 3.0.5 (D1). THE SINGLE VARIABLE. Interpreter held at py3.14.0 on the .venv-new side throughout.",
+  "gate_result": "PASS 13/13 \u2014 every artifact byte-identical under normalization, INCLUDING all 4 pandas-sensitive ones. No diffs to diagnose.",
+  "git": {
+    "sha": "d42be5023c16ffefb5cbc794bb9c0181dd165214",
+    "branch": "dev"
+  },
+  "gate_widened": "Widened from 11 to 13 artifacts on John's call: added gen_ownership_map.py and gen_headroom_map.py, which carry the only genuinely pandas-heavy classification path in the repo.",
+  "triage_split": {
+    "no_pandas_red_flag_if_diff": [
+      "export_explorer_data_v2",
+      "generate_apr_v2",
+      "gen_pipeline_state_page",
+      "site_meta",
+      "gen_measure_u_site"
+    ],
+    "pandas_sensitive": [
+      "block_headroom (pandas+geopandas+numpy)",
+      "gen_ownership_map (pandas+geopandas)",
+      "gen_headroom_map (pandas+geopandas)"
+    ]
+  },
+  "artifacts": {
+    "docs/explorer_data_v2_working.js": {
+      "bytes": 3217748,
+      "sha256_normalized": "bbe5953f8977289be8114c780c0c3974148c190afd78fdf8a0e8a603a24d1c46",
+      "pandas_sensitive": false,
+      "matches_pandas_2_baseline": true
+    },
+    "docs/pipeline-state.html": {
+      "bytes": 19031,
+      "sha256_normalized": "ff088bd0d4a08be5d34789b7f883521a4b4547d50b3a767f7023bd4b4acf9499",
+      "pandas_sensitive": false,
+      "matches_pandas_2_baseline": true
+    },
+    "team/measure-u/index.html": {
+      "bytes": 4883180,
+      "sha256_normalized": "aaeef24d22b49306f82897ed104be9a6c7eb68653d37330e11615a508f364d0f",
+      "pandas_sensitive": false,
+      "matches_pandas_2_baseline": true
+    },
+    "team/measure-u/artifact.html": {
+      "bytes": 88275,
+      "sha256_normalized": "58b3e3283dfaaa85db3b564e6ef64a4e022cf43746d9fbc55c69006dba680198",
+      "pandas_sensitive": false,
+      "matches_pandas_2_baseline": true
+    },
+    "data/reference/block_headroom.csv": {
+      "bytes": 84038,
+      "sha256_normalized": "462dcc76501b9b041da69f00c78688580e3f55a13ff3b8f789590283dfca1415",
+      "pandas_sensitive": true,
+      "matches_pandas_2_baseline": true
+    },
+    "data/reference/neighborhood_headroom.csv": {
+      "bytes": 1863,
+      "sha256_normalized": "4c7e76693feff4863ab8fac331fdfab4e98e3e8777798326719edaf2d287d619",
+      "pandas_sensitive": true,
+      "matches_pandas_2_baseline": true
+    },
+    "docs/maps/berkeley_ownership.html": {
+      "bytes": 6193,
+      "sha256_normalized": "bc07765fefd8dc27ffb9b76f2b2865582d375e6aa374ed34e07f2cc086b73733",
+      "pandas_sensitive": true,
+      "matches_pandas_2_baseline": true
+    },
+    "docs/maps/berkeley_ownership_data.json": {
+      "bytes": 6520916,
+      "sha256_normalized": "440d2ca056b5101d38ed45bc27f1e5921d99e7fe7ea193177b642589f9c2d98d",
+      "pandas_sensitive": true,
+      "matches_pandas_2_baseline": true
+    },
+    "docs/maps/headroom.html": {
+      "bytes": 129847,
+      "sha256_normalized": "49e4c72e11a4a6d448134f69245f294c7465ce526220ee18840535e8eb646d95",
+      "pandas_sensitive": true,
+      "matches_pandas_2_baseline": true
+    },
+    "docs/maps/headroom_data.json": {
+      "bytes": 1518493,
+      "sha256_normalized": "31d91aa7023eb1ca1d09c062bca966d65ef33ed12aeb0d2c32419f023d666e10",
+      "pandas_sensitive": true,
+      "matches_pandas_2_baseline": true
+    }
+  },
+  "invariants_verified_under_pandas_3": {
+    "owner_classification": {
+      "individual": 19997,
+      "trust": 6412,
+      "investor": 1724,
+      "institutional": 737,
+      "sum": 28870,
+      "OwnersName_nulls": 0,
+      "NAN_tripwire_rows": 0,
+      "status": "UNCHANGED"
+    },
+    "block_headroom": {
+      "rows": 1522,
+      "parcels": 29029,
+      "units_per_block": 52278,
+      "headroom_mh_byright": 104866,
+      "headroom_mh_bonus": 166622,
+      "headroom_corridor_est": 205928,
+      "numeric_nulls": 0
+    },
+    "neighborhood_headroom": {
+      "rows": 24,
+      "blocks": 1516,
+      "parcels": 29016,
+      "existing_units": 52223,
+      "numeric_nulls": 0
+    },
+    "cross_file_identity": "headroom_mh_byright/bonus/corridor_est identical across both files \u2014 OK",
+    "deliberate_remainder": {
+      "blocks": 6,
+      "parcels": 13,
+      "status": "constant"
+    }
+  },
+  "findings": [
+    "F15 pandas 3.0.5 is OUTPUT-NEUTRAL across all 13 artifacts. Consistent with S1.5's measurement of ZERO breaking-pattern hits across 196 pandas-importing files \u2014 the code never used the idioms 3.0 changed.",
+    "F16 The NaN tripwire in gen_ownership_map.py (ow.OwnersName.map(owner_type); str(name).upper() turns NaN into 'NAN' -> INDIVIDUAL, the class EXCLUDED from the players page) did NOT fire: 0 nulls in 28,870 rows under both pandas versions, distribution identical. Still latent \u2014 it fails toward silent under-counting if a null ever appears. Reported by berkeley-data-65.",
+    "F17 pyarrow-backed strings did not alter any serialized output, despite being pandas 3.0's headline change. The generators write via json/csv, which normalize dtype away."
+  ],
+  "apr": {
+    "apr_2025.json": {
+      "bytes": 94669,
+      "sha256_normalized": "ec551cb3eecc8ea38d063d097c34dd65535ff2f8c981f5fe2124a0d8119165c4",
+      "matches_pandas_2_baseline": true
+    },
+    "developer_summary_2025.csv": {
+      "bytes": 436,
+      "sha256_normalized": "74a448f29070a413ce1be9cc3affa339bd58a642ec396bd7724d7db78271f1f1",
+      "matches_pandas_2_baseline": true
+    },
+    "stalled_2025.csv": {
+      "bytes": 2213,
+      "sha256_normalized": "10b2cf7dcbd76af0d02a403953573798ca1137c4e6561af2114aa6eee9953486",
+      "matches_pandas_2_baseline": true
+    },
+    "table_a2_2025.csv": {
+      "bytes": 10181,
+      "sha256_normalized": "85a18f24fc4a87c4309940c748f18d6efc2d3840737c3228c4ae8a8e4a7bf035",
+      "matches_pandas_2_baseline": true
+    },
+    "table_b_2025.csv": {
+      "bytes": 168,
+      "sha256_normalized": "6b16643f0979ae09fa026428723c0edb977e8a8ea98f4e3855e1647ef4d60acd",
+      "matches_pandas_2_baseline": true
+    }
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "baseline": "env_migration",
+  "created": "2026-09-07T14:53:46",
+  "purpose": "Phase-0 golden outputs for the conda->uv/venv consolidation. Phase 2 (py3.14 + pandas 2.3.3) must reproduce every normalized hash below.",
+  "git": {
+    "sha": "ec8a9cc5b37a3481dfda43a77712c07badca0a5f",
+    "branch": "dev",
+    "dirty_tracked": "2"
+  },
+  "captured_under": {
+    "python": "Python 3.12.8",
+    "pandas": "2.3.3",
+    "numpy": "2.3.5",
+    "env": "/opt/miniconda3/envs/jupyter_env",
+    "freeze": "data/baselines/env_freeze_jupyter_env_2026-09-07.txt"
+  },
+  "hash_method": "sha256 after stripping ISO dates/timestamps (all generators embed a generation time; raw byte hashes give false failures)",
+  "artifacts": [
+    {
+      "path": "docs/explorer_data_v2_working.js",
+      "bytes": 3217095,
+      "sha256_raw": "0507711b0b79371f069bfde875010649563929f928b87df2ae30aafb990255aa",
+      "sha256_normalized": "7bc6e07e4ec7574ee4b34ec6815dc94fa4402a15cd759b9cd22ccf3a4a261b8b",
+      "build": "python scripts/export_explorer_data_v2.py",
+      "reproduced_2026_09_07": true,
+      "note": "served copy docs/explorer_data.js is byte-identical to this"
+    },
+    {
+      "path": "docs/explorer_data.js",
+      "bytes": 3217095,
+      "sha256_raw": "0507711b0b79371f069bfde875010649563929f928b87df2ae30aafb990255aa",
+      "sha256_normalized": "7bc6e07e4ec7574ee4b34ec6815dc94fa4402a15cd759b9cd22ccf3a4a261b8b",
+      "build": null,
+      "reproduced_2026_09_07": true,
+      "note": "served file; copy of the working file"
+    },
+    {
+      "path": "docs/pipeline-state.html",
+      "bytes": 19031,
+      "sha256_raw": "ce36db621d7a28dcaf235a3e72bbb861fa4501f940cd575d1b54bc97560ce985",
+      "sha256_normalized": "ff088bd0d4a08be5d34789b7f883521a4b4547d50b3a767f7023bd4b4acf9499",
+      "build": "python scripts/gen_pipeline_state_page.py && python scripts/site_meta.py",
+      "reproduced_2026_09_07": true,
+      "note": "TWO-STEP: site_meta.py injects 19 lines of canonical/OG/Twitter meta. Step 1 alone silently strips all SEO metadata."
+    },
+    {
+      "path": "team/measure-u/index.html",
+      "bytes": 4883180,
+      "sha256_raw": "2ffd7da369ed8f843bacb7113396db8abcfa33b2a0beefd79088e946f08d94ed",
+      "sha256_normalized": "aaeef24d22b49306f82897ed104be9a6c7eb68653d37330e11615a508f364d0f",
+      "build": "python scripts/gen_measure_u_site.py",
+      "reproduced_2026_09_07": true,
+      "note": "generator hardcodes a conda plotly.min.js path at line 690 - breaks on migration (Phase 4.1)"
+    },
+    {
+      "path": "team/measure-u/artifact.html",
+      "bytes": 88275,
+      "sha256_raw": "1e4d82dafd91d3b1ffbaedb8a8bd48a55a86fddba4d4e4742a6ff872c7b7c4f0",
+      "sha256_normalized": "1e4d82dafd91d3b1ffbaedb8a8bd48a55a86fddba4d4e4742a6ff872c7b7c4f0",
+      "build": "python scripts/gen_measure_u_site.py",
+      "reproduced_2026_09_07": true,
+      "note": "same run as index.html"
+    },
+    {
+      "path": "data/reference/block_headroom.csv",
+      "bytes": 84038,
+      "sha256_raw": "462dcc76501b9b041da69f00c78688580e3f55a13ff3b8f789590283dfca1415",
+      "sha256_normalized": "462dcc76501b9b041da69f00c78688580e3f55a13ff3b8f789590283dfca1415",
+      "build": "python scripts/block_headroom.py",
+      "reproduced_2026_09_07": true,
+      "note": ""
+    },
+    {
+      "path": "data/reference/neighborhood_headroom.csv",
+      "bytes": 1863,
+      "sha256_raw": "4c7e76693feff4863ab8fac331fdfab4e98e3e8777798326719edaf2d287d619",
+      "sha256_normalized": "4c7e76693feff4863ab8fac331fdfab4e98e3e8777798326719edaf2d287d619",
+      "build": "python scripts/block_headroom.py",
+      "reproduced_2026_09_07": true,
+      "note": ""
+    }
+  ],
+  "apr": {
+    "apr_2025.json": {
+      "bytes": 94363,
+      "sha256_normalized": "a34d0527deac23f2e733687757d3d5b3209f2ec668aa44b5752d73f32dd729de"
+    },
+    "developer_summary_2025.csv": {
+      "bytes": 436,
+      "sha256_normalized": "74a448f29070a413ce1be9cc3affa339bd58a642ec396bd7724d7db78271f1f1"
+    },
+    "stalled_2025.csv": {
+      "bytes": 2213,
+      "sha256_normalized": "10b2cf7dcbd76af0d02a403953573798ca1137c4e6561af2114aa6eee9953486"
+    },
+    "table_a2_2025.csv": {
+      "bytes": 9919,
+      "sha256_normalized": "e4519c1ead173394e8a4e8cefb67e582ce3d26e488e43d5d8a0ee6512a92ddb4"
+    },
+    "table_b_2025.csv": {
+      "bytes": 168,
+      "sha256_normalized": "6b16643f0979ae09fa026428723c0edb977e8a8ea98f4e3855e1647ef4d60acd"
+    },
+    "_note": "Regenerated 2026-09-07 with 'generate_apr_v2.py --year 2025'. The committed data/apr/2025/ set is STALE (Jul 10): RHNA tier allocations were redistributed (Very Low 1786->2446, Low 1028->1408, Moderate 1452->1416, Above Moderate 4668->3664; total 8934 unchanged). This regenerated set, not the July files, is the baseline."
+  },
+  "findings": [
+    "F1 All generators embed generation timestamps -> the gate MUST normalize them. A raw byte hash would be a permanent false-failure generator.",
+    "F2 docs/pipeline-state.html requires a TWO-STEP build (gen_pipeline_state_page.py THEN site_meta.py). Running only the generator strips 19 lines of SEO/OpenGraph metadata from the served page.",
+    "F3 site_meta.py also rewrites docs/og-card.png and docs/apple-touch-icon.png on every run (non-deterministic bytes). Restored via git checkout; exclude from the hash gate.",
+    "F4 data/apr/2025/ is stale vs the live DB (see apr._note). Expected drift, not a defect.",
+    "F5 export_explorer_data_v2.py writes docs/explorer_data_v2_working.js, NOT docs/explorer_data.js as CLAUDE.md states. The two are byte-identical today, so a copy step exists outside the script.",
+    "F6 5/5 core generators reproduce under normalized hashing. No tracked file left modified."
+  ]
+}

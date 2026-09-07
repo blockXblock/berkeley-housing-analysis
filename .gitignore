@@ -146,3 +146,7 @@ scratch/**/pge_filings/
 # Archival OCR text pulled from the Internet Archive (~130 MB, re-fetchable with
 # scripts/infrastructure/fetch_ia_journals.sh)
 scratch/**/journals/
+
+# env consolidation (2026-09-07) — staging venv, not tracked
+.venv-new/
+uv.lock.tmp

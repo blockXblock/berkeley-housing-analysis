@@ -1,0 +1,40 @@
+[project]
+name = "berkeley-data"
+version = "0.1.0"
+description = "Independent reconstruction of Berkeley's housing-production pipeline"
+requires-python = ">=3.14"
+dependencies = [
+  # core — pandas is the ONE pin that moves at Phase 2b (D1): 2.3.3 -> 3.0.5
+  "pandas==3.0.5",
+  "numpy",
+  "pyarrow",
+  # viz
+  "matplotlib", "seaborn",
+  # plotly is INLINED into team/measure-u/*.html — pinned to the Phase-0 baseline
+  # version so Phase 2 compares like with like. Bump deliberately, like pandas.
+  "plotly==6.5.0",
+  # kaleido is NEVER imported — plotly calls it internally for fig.to_image(). An
+  # import-based dependency scan cannot see it. Without it gen_measure_u_site.py
+  # silently degrades team/measure-u/artifact.html from an 86KB static-SVG build to
+  # a 4.8MB inlined-Plotly one that the Artifact platform refuses to share.
+  # Pinned to the Phase-0 baseline version, same reasoning as plotly.
+  "kaleido==1.3.0",
+  # geo
+  "geopandas", "shapely", "pyproj", "folium",
+  # fetch / parse
+  "requests", "beautifulsoup4", "lxml", "openpyxl", "pymupdf", "pillow",
+  "playwright", "browser-cookie3", "sodapy", "python-dotenv",
+  # match — D7: rapidfuzz replaces fuzzywuzzy
+  "rapidfuzz",
+  # cloud
+  "boto3",
+  # notebook toolchain
+  "nbformat", "nbconvert", "ipykernel", "jupyterlab", "ipywidgets",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["scripts*"]

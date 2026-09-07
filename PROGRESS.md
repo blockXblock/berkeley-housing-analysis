@@ -8,6 +8,144 @@
 
 ---
 
+## 2026-09-07 — Phase 0 done: golden-output baseline captured for the Python-environment consolidation
+
+**Plan:** `notes/2026-09-07_python_env_consolidation_plan.md` (rev 2, uncommitted). Decisions
+**D1-D7 SETTLED** by John: one uv-managed `.venv`, **Python 3.14.0**, **pandas 3.0.5** (staged via
+2.3.3), canonical import `from scripts.housing_rules import ...`, PEP 723 for `scratch/` one-offs,
+drop the vestigial stack (TF/Keras, duckdb, tabula-py, sqlite-utils - all zero import sites),
+`fitz`->`pymupdf`, `fuzzywuzzy`->`rapidfuzz`.
+
+**Why:** three envs (`.venv` py3.12/pandas 3.0.5, conda `jupyter_env` py3.12/pandas 2.3.3, conda
+`base`) plus two more found later (a stray py3.14 `scratch/2026-09-04/svgvenv`, Homebrew 3.14). The
+split tracks nothing. Measured dependency surface is **29 packages, not 239** - both envs ~85%
+ballast. Conda earns nothing here: all domain packages (`geopandas`, `pyogrio`, `pyarrow`,
+`datasette`, `pymupdf`) are already PyPI-installed *inside* the conda env.
+
+**Phase 0 (this step) - baseline captured, `data/baselines/env_migration_baseline_2026-09-07.json`.**
+5/5 core generators reproduce. **No tracked file left modified.** Six findings, three load-bearing:
+- **F1** Every generator embeds a generation timestamp. The gate **must normalize timestamps** - a
+  raw byte hash would be a permanent false-failure generator (exactly the anti-pattern CLAUDE.md
+  warns about). Hashes in the baseline are normalized.
+- **F2** `docs/pipeline-state.html` needs a **TWO-STEP** build: `gen_pipeline_state_page.py` **then**
+  `site_meta.py`. Running only the generator silently strips **19 lines** of canonical/OpenGraph/
+  Twitter metadata from the served page. Previously undocumented.
+- **F5** `export_explorer_data_v2.py` writes `docs/explorer_data_v2_working.js`, **not**
+  `docs/explorer_data.js` as CLAUDE.md states. Byte-identical today, so a copy step exists outside
+  the script - worth locating before Phase 4.
+- F3 `site_meta.py` also rewrites `docs/og-card.png` + `apple-touch-icon.png` non-deterministically
+  (restored; excluded from the gate). F4 `data/apr/2025/` is stale vs the live DB - RHNA tier
+  allocations were redistributed after Jul 10 (Very Low 1786->2446, Above Mod 4668->3664, total 8934
+  unchanged); the regenerated set in `data/baselines/apr_2025_regen_2026-09-07/` is the baseline.
+
+**Verified by execution, not inference:** full stack installs and imports on **Python 3.14.0** (all
+27 modules, zero failures); reads the Overture parquet (62,651 rows - the file `.venv` cannot open
+today), `v_projects_flat`, and a geopandas reprojection. Benchmarked on `parcels` (29,134 rows):
+pandas 2.3.3 -> 3.0.5 gives **36.2 MB -> 16.1 MB deep memory (-56%)**, load 0.49s -> 0.21s, string
+ops 0.023s -> 0.009s. pandas 2.3.3 also confirmed to have a working cp314 wheel, so the staged plan
+is viable.
+
+**Phase 1 DONE (same day).** `pyproject.toml` + `uv.lock` (139 pkgs resolved) authored; `uv sync
+--no-install-project` into **`.venv-new`** = **Python 3.14.0 / pandas 2.3.3 / numpy 2.5.3, 132 pkgs**.
+All four gates pass: **imports 29/29**; `housing_rules` **test_smoke + test_permit_role (19+9) PASS**
+under the D2 canonical form `python -m scripts.housing_rules.*`; **Playwright chromium launches** off
+the shared cache with no re-download; real data OK (Overture parquet 62,651 rows, `v_projects_flat`
+909, geopandas reproject 3,000 parcels). Kernel `berkeley-data` registered. **`.venv` (114 pkgs,
+inode-verified) and `jupyter_env` (208 pkgs) UNTOUCHED.** `.venv-new/` gitignored.
+
+**Phase 2 DONE (same day) - GATE PASSES 11/11.** `jupyter_env` (py3.12.8) vs **`.venv-new`
+(py3.14.0)**, same DB, same code, pandas held at 2.3.3 in both: every artifact byte-identical under
+normalization (explorer, pipeline-state, measure-u index+artifact, both headroom CSVs, all 5 APR
+outputs). **The environment is output-neutral.** Baseline APPENDED as
+`data/baselines/env_migration_baseline_2026-09-07_rev2.json` (rev 1 kept, never edited).
+
+**A concurrent writer confounded the first attempt - worth recording.** Session `berkeley-data-65`
+merged duplicate `organizations` rows (DB write **14:59**, between my Phase-0 capture at 14:50 and
+Phase-2 run at 15:03) and committed `67d03cc`/`ec8a9cc`/`492614a`/`29034ab`, legitimately changing 4
+of the 5 golden generators. 4 artifacts differed. **Isolated by re-running the BASELINE env against
+the SAME post-write DB**: 7 of 8 then matched, proving the diffs were data, not interpreter. That
+one-artifact residue was real and is F8 below.
+
+**New findings (F7-F14, in the rev-2 baseline):**
+- **F8 `kaleido` was missing from the first `pyproject.toml`.** It is **never imported** - plotly
+  calls it internally for `fig.to_image()` - so **AST import-scanning cannot see it**. Without it
+  `gen_measure_u_site.py` silently degraded `team/measure-u/artifact.html` from 88KB static-SVG to a
+  **4.8MB inlined-Plotly** build the Artifact platform refuses to share. Only a WARNING. Now pinned
+  `kaleido==1.3.0`. **Lesson: the S1.1 import-derived dependency set has a blind spot for runtime-only
+  backends.**
+- **F9 `plotly` must be PINNED (`==6.5.0`)** - it is **inlined into** the output HTML, so its version
+  is a controlled input, not a free-floating dep. uv resolved 7.0.0, whose `plotly.min.js` differs by
+  ~545KB.
+- **F10 `artifact.html` is nondeterministic within a SINGLE interpreter** - plotly stamps random SVG
+  element ids per render. The normalizer now strips them; without that the gate false-fails forever.
+- **F11** `gen_measure_u_site.py:690` conda plotly glob **FIXED** (Phase 4.1 pulled forward), verified
+  output-neutral under `jupyter_env` before keeping.
+- **F12** Checked and NOT needed despite living in `jupyter_env`: `xlrd` (0 `.xls` files), 
+  `python-levenshtein` (fuzzywuzzy's backend, dropped by D7), `sqlite-fts4` (datasette, out of scope).
+- **F13 (from berkeley-data-65)** `gen_pipeline_state_page.py` emits **date-derived** "years waiting"
+  figures, so that page **cannot byte-match across days** even with timestamps stripped. Same-day gate
+  was unaffected; needs field-wise compare or an `--as-of` pin before cross-day use.
+- **F14** A peer reported `site_meta.py` `main()` sys.exits on missing Pillow, making the two-step a
+  no-op. **Not true in either env here** - Pillow 11.0.0 / 12.3.0, and Phase 0 observed `main()` write
+  `og-card.png` and stamp 15 pages. Live code, unreachable branch.
+
+**Phase 2b DONE (same day) - GATE PASSES 13/13, gate WIDENED on John's call.** pandas **2.3.3 ->
+3.0.5** as the single variable (interpreter held at py3.14.0 on the new side): **every artifact
+byte-identical**, including all four pandas-sensitive ones. **No diffs to diagnose.** Baseline
+appended as `env_migration_baseline_2026-09-07_rev3.json`.
+
+**Gate widened 11 -> 13** by adding `gen_ownership_map.py` + `gen_headroom_map.py` - the only
+genuinely pandas-heavy classification path in the repo, previously unmeasured.
+
+**Triage split (verified by AST, after BOTH sessions' greps failed):** 9 artifacts come from
+generators that import **no pandas at all** (`export_explorer_data_v2`, `generate_apr_v2`,
+`gen_pipeline_state_page`, `site_meta`, `gen_measure_u_site`) - a diff there would have been a RED
+FLAG, not a pandas artefact. Only 4 are pandas-sensitive (`block_headroom` = pandas+geopandas+numpy;
+the two maps = pandas+geopandas). `block_headroom.py:41` is `import numpy as np, pandas as pd,
+geopandas as gpd` - a combined import that BOTH sessions' regexes scored as zero. **Lesson: parse,
+don't grep - and derive the scan SET from the gate, never from memory.**
+
+**Invariants asserted field-wise under pandas 3.0.5, not just byte-hashed:** owner classification
+19,997 individual / 6,412 trust / 1,724 investor / 737 institutional = 28,870, **0 nulls, 0 NaN-
+tripwire rows**; block_headroom 1,522 rows / 29,029 parcels / 52,278 units / 104,866 by-right /
+166,622 bonus / 205,928 corridor; neighborhood 24 / 1,516 / 29,016 / 52,223; the three cross-file
+identities hold; the deliberate remainder stays 6 blocks / 13 parcels; 0 numeric nulls throughout.
+
+- **F15** pandas 3.0.5 is output-neutral - consistent with S1.5's measured **zero** breaking-pattern
+  hits across 196 pandas-importing files. The code never used the idioms 3.0 changed.
+- **F16** The NaN tripwire in `gen_ownership_map.py` did NOT fire (0 nulls / 28,870 rows, both
+  versions). **Still latent**: `str(name).upper()` maps NaN -> `'NAN'` -> INDIVIDUAL, the class
+  EXCLUDED from the players page and greyed on the map, so it fails toward silent under-counting.
+  Credit berkeley-data-65.
+- **F17** pyarrow-backed strings - pandas 3.0's headline change - altered no serialized output; the
+  generators write via json/csv, which normalize dtype away. The 56% memory win is real but invisible
+  at the artefact boundary.
+
+**Next: Phase 3** - editable install; rewrite the 92 `sys.path` sites to `from scripts.housing_rules
+import ...` (D2); add `__init__.py` to `scripts/v4`, `scripts/migration`, `scripts/finance_curriculum`;
+D6 `fitz`->`pymupdf` (5 sites); D7 `fuzzywuzzy`->`rapidfuzz` (2 sites). Then Phase 4 retirement
+(13 `Run:` banners, MASTER_ANALYSIS kernelspec, requirements.txt, the `.venv`/`.venv-new` swap) and
+Phase 5 decommission. **A FIFTH interpreter exists**: bare `python3` = Homebrew 3.14.0 with NO Pillow,
+which is what berkeley-data-65 was using - it silently no-ops `site_meta.py`'s `main()`. Phase 3 makes
+`python3` and the project env converge. Superseded next-step (Phase 2b run) - was: bump `pandas==2.3.3` -> **`3.0.5`** in `pyproject.toml` (the ONE variable), re-run
+the same 11 artifacts, and diagnose every diff. A diff here is EXPECTED and must be explained, then
+appended as rev 3 - never hand-edited. After that: **Phase 3** (editable install; rewrite the 92
+`sys.path` sites to `from scripts.housing_rules import ...`; add `__init__.py` to `scripts/v4`,
+`scripts/migration`, `scripts/finance_curriculum`; D6 `fitz`->`pymupdf`; D7 `fuzzywuzzy`->`rapidfuzz`),
+then Phase 4 retirement and Phase 5 decommission. Superseded next-step (Phase 2 run) - was: re-run the Phase-0 generators under `.venv-new` and compare NORMALIZED hashes
+against `data/baselines/env_migration_baseline_2026-09-07.json`. Expect byte-identical (modulo
+timestamps); any diff is diagnosed, not accepted. Remember **F2**: `pipeline-state.html` needs the
+TWO-STEP build, and **`gen_measure_u_site.py:690` will FAIL** on `.venv-new` - it globs a hardcoded
+conda plotly path (Phase 4.1 fix, may need pulling forward). Then **Phase 2b** bumps pandas to 3.0.5
+as the only variable. Superseded next-step (Phase 1 authoring) - was: author `pyproject.toml` (draft at Appendix A of the plan), `uv lock`/`sync` into
+**`.venv-new`** at py3.14 + pandas **2.3.3**, verify imports + `housing_rules` smoke tests. Nothing
+switches over. Then **Phase 2** reproduces the baseline above; **Phase 2b** bumps pandas to 3.0.5
+with pandas as the only variable. `jupyter_env` and the old `.venv` stay untouched until Phase 5.
+
+---
+
+---
+
 ## 2026-09-07 — the ownership layer has machinery at last: county assessor feeds, and what they can't say
 
 **The owner-name file was never refreshable, and the reason is now settled.** `data/reference/

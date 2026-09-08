@@ -6,8 +6,37 @@
      tour:     kml/tours/telegraph-s2n.kml
      geometry: kml/geometry/geometry.kml sha256:922b4150979c placemarks:394 -->
 <gx:Tour>
-		<name>Telegraph S-to-N · swoop · 09-08 09:45 · cp-081ac7</name>
+		<name>Telegraph S-to-N · swoop · 09-08 11:24 · cp-081ac7</name>
 		<gx:Playlist>
+<!--SWOOP-INTRO-->
+			<gx:FlyTo>
+				<gx:duration>0.10</gx:duration>
+				<gx:flyToMode>bounce</gx:flyToMode>
+				<Camera>
+					<longitude>-122.2604888205</longitude>
+					<latitude>37.8506004569</latitude>
+					<altitude>100.0</altitude>
+					<heading>6.30</heading>
+					<tilt>69.4</tilt>
+					<roll>0</roll>
+					<altitudeMode>relativeToGround</altitudeMode>
+				</Camera>
+			</gx:FlyTo>
+			<gx:Wait><gx:duration>8.00</gx:duration></gx:Wait>
+			<gx:FlyTo>
+				<gx:duration>4.00</gx:duration>
+				<gx:flyToMode>smooth</gx:flyToMode>
+				<Camera>
+					<longitude>-122.2604264000</longitude>
+					<latitude>37.8510469000</latitude>
+					<altitude>25.0</altitude>
+					<heading>6.30</heading>
+					<tilt>88.0</tilt>
+					<roll>0</roll>
+					<altitudeMode>relativeToGround</altitudeMode>
+				</Camera>
+			</gx:FlyTo>
+<!--/SWOOP-INTRO-->
 			<gx:FlyTo>
 				<gx:duration>0.10</gx:duration>
 				<gx:flyToMode>bounce</gx:flyToMode>
@@ -1425,6 +1454,22 @@
 					<altitudeMode>relativeToGround</altitudeMode>
 				</Camera>
 			</gx:FlyTo>
+		<!--SWOOP-OUTRO-->
+			<gx:FlyTo>
+				<gx:duration>4.00</gx:duration>
+				<gx:flyToMode>smooth</gx:flyToMode>
+				<Camera>
+					<longitude>-122.2593206538</longitude>
+					<latitude>37.8692686897</latitude>
+					<altitude>100.0</altitude>
+					<heading>170.73</heading>
+					<tilt>69.4</tilt>
+					<roll>0</roll>
+					<altitudeMode>relativeToGround</altitudeMode>
+				</Camera>
+			</gx:FlyTo>
+			<gx:Wait><gx:duration>8.00</gx:duration></gx:Wait>
+<!--/SWOOP-OUTRO-->
 		</gx:Playlist>
 	</gx:Tour>
 	<visibility>0</visibility>

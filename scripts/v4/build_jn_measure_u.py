@@ -46,7 +46,7 @@ timestamped baseline `data/baselines/measure_u_reconciliation_baseline_2026-08-1
 gate (§8). A mismatch DIAGNOSES and HALTS. CKAN/HCD plays no role here. Nothing in any chart
 is hardcoded — charts read the derived variables.
 
-**How to run.** From repo root, `jupyter_env` python. The optional agent-verification cell (§7)
+**How to run.** From repo root, `.venv/bin/python` (was `jupyter_env` until the 2026-09-07 env consolidation). The optional agent-verification cell (§7)
 is inert unless `JN_RUN_AGENT=1`."""))
 
 cells.append(md(r"""## Data flow (lineage)

@@ -151,7 +151,36 @@ appears, every real package identical). **DELETE THAT .pth at Phase 5** when jup
 **Verified both interpreters:** both `housing_rules` suites pass, and all 15 gate artifacts reproduce
 the rev-3 baseline byte-identically under `.venv-new` AND `jupyter_env`.
 
-**Next: Phase 4** - retirement. 13 `Run:` banners still name the conda interpreter; `MASTER_ANALYSIS
+**Phase 4 DONE (same day) - THE SWAP IS LIVE.** Commit `b543e54`.
+
+**`.venv` is now Python 3.14.0 / pandas 3.0.5 / 137 pkgs**, built from `uv.lock` with the project
+installed editable. **Rebuilt from the lock, NOT renamed** - 52 console scripts hardcode the venv
+path in their shebangs, so `mv .venv-new .venv` would have silently broken `jupyter`, `playwright`
+and 50 others. Old env preserved as **`.venv-old`** (gitignored). Kernel `berkeley-data` re-pointed.
+
+Retired: **13 `Run:` banners** -> `.venv/bin/python`; `MASTER_ANALYSIS.ipynb` kernelspec (the ONLY
+notebook pinning an env); **`requirements.txt`** rewritten as a pointer (it listed 14 packages against
+real envs of 114/239 - fiction); `block_headroom.py`'s false "the repo .venv has geopandas" claim;
+3 handover notes; `build_jn_measure_u.py`'s run instruction.
+
+**NOT done, deliberately:** `.claude/settings.local.json` still names the conda path. Stale entries
+only cause extra prompts; **adding allow-rules widens what runs without asking - John's call**, not a
+migration side effect.
+
+**Verified after the swap:** both `housing_rules` suites pass; **all 15 gate artifacts reproduce the
+rev-3 baseline byte-identically** under the new `.venv`.
+
+**THE FIFTH-INTERPRETER PROBLEM IS GONE:** bare `python3` is Homebrew 3.14.0 - now the SAME version
+as `.venv`. Typing the obvious command and using the project env no longer diverge.
+
+**Next: Phase 5** - decommission, after a full working cycle (an APR/explorer regeneration + a harvest
++ a JN rebuild) proves the new env in anger. Then: delete **`.venv-new`** (now a redundant 3.14
+duplicate - itself a fifth-interpreter hazard, so worth removing sooner), **`.venv-old`**, the
+`_berkeley_data_repo_root.pth` in jupyter_env's site-packages, and finally `jupyter_env` itself.
+**Still queued and NOT a migration side effect:** `docs/housing-audit.html` is regenerable again
+(`build_audit_page.py` needs pandas, which bare python3 lacked) - it is pinned to
+`reconciliation_baseline_2026-07-03i.json` and its 4,229/4,099 figures are a published claim, so
+**John calls that regeneration.** Superseded next-step (Phase 4) - was: retirement. 13 `Run:` banners still name the conda interpreter; `MASTER_ANALYSIS
 .ipynb` kernelspec; `requirements.txt` (still fiction - 14 packages vs a real 29); the wrong
 `.venv`-has-geopandas note at `block_headroom.py:37-38`; `.claude/settings.local.json` permission
 entries; and the **`.venv` -> `.venv-old`, `.venv-new` -> `.venv` swap**. Then Phase 5 decommission

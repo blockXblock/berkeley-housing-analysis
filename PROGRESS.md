@@ -8,6 +8,47 @@
 
 ---
 
+## 2026-09-07 — R2 hygiene: bucket root emptied, colon keys retired, a duplicate proven and dropped
+
+**All non-conforming R2 keys are gone.** 3 root-level objects and 2 colon keys -> **zero of each**.
+Bucket now **314 objects / 10.36 GB**.
+
+- **`2026-02-18_RESUB_UP MOD PLANS_2190 Shattuck.pdf`** (142.4 MB, spaces, bucket root) — a hand
+  upload. **A plain rename was impossible**: `architect_plans/proj35_2190-shattuck_2026-02-18.pdf`
+  already existed at 141.5 MB and is what `documents.2148` publishes. Re-keyed with the
+  disambiguating token the uploader itself specifies (`_up-mod-plans`), then **proven redundant and
+  deleted** (below). Nothing referenced the root key: 0 `documents` rows, and the `explorer_data.js`
+  hit was 2148's TITLE, not a link.
+- **Two `architect_plans:proj15_...` colon keys** — the scar `upload_pdfs_to_r2.py:26` documents.
+  These WERE live (`documents` 615/617 + the site). Sequence: copy to slash keys -> **gated DB
+  write** -> regenerate explorer -> confirm both replacements HTTP 200 -> **only then** delete. The
+  published URL never pointed at a deleted object. Snapshot
+  `keep_snapshot_2026-09-07_pre-colon-key-fix.db`; rowcount asserted ==2 in-transaction; 2,255
+  documents / 306 r2_urls unchanged. Commit `44a25b3`.
+  - **Preview caught a predicate bug**: `LIKE '%architect_plans%3A%'` matched **3** rows because `%`
+    is a LIKE wildcard and `documents.2258`'s hash `3f03a426` contains "3a". A no-op, but wrong;
+    `instr()` gives 2. **This is what the read-only preview step is for.**
+
+**THE TWO 2190 SHATTUCK FILES WERE THE SAME DOCUMENT.** Opened both: **44 pages, 482 annotations,
+271 images, and text identical on every page (0 differing)**. The 879 KB delta is entirely a
+**macOS Preview re-save on 2026-05-01** (`Quartz PDFContext, AppendMode 1.1` -> the `/Prev` trailer)
+of the Bluebeam original from 2026-02-18 08:15:38. **The re-save added nothing**, so the duplicate
+was deleted; local copy kept at `scratch/2026-09-07/shattuck_compare/`.
+
+**PRIMARY-SOURCE ARCHITECT CONFIRMATION (matters beyond hygiene).** The 2190 Shattuck title block
+reads **"consent of SDT ARCHITECTS"** with `2421 Fourth Street, Berkeley` / `TrachtenbergArch.com`
+— i.e. **Stackhouse De la Peña Trachtenberg Architects from the DRAWINGS**, not the applicant field
+v2 had been crediting. Independently corroborates today's organizations merge. Job **2129**; sheets
+**A0.0-A2.2**; revisions **10.22.2025** (SB330 / UP Modification) and **02.13.2026**.
+
+**boto3 / the R2 write path is now fully exercised** — `copy_object` + `delete_object` against live
+142 MB objects, each verified by ContentLength and public HTTP 200 before any deletion. That closes
+the last untested dependency from the working cycle except `sodapy` and `openpyxl`.
+
+---
+
+---
+
 ## 2026-09-07 — Phase 0 done: golden-output baseline captured for the Python-environment consolidation
 
 **Plan:** `notes/2026-09-07_python_env_consolidation_plan.md` (rev 2, uncommitted). Decisions

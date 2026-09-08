@@ -151,3 +151,6 @@ scratch/**/journals/
 .venv-new/
 uv.lock.tmp
 .venv-old/
+
+# OAuth client secrets and cached tokens — never commit
+.secrets/

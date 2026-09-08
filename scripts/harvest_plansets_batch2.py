@@ -25,7 +25,6 @@ Resumable (state.json records completed permits). Polite (5-15s between records)
 import sys, os, time, random, argparse, re
 import pandas as pd
 
-sys.path.insert(0, "experiments/accela_scrape")
 import harvest_plansets as H   # the proven engine
 
 # stage under scratch/ (reboot-surviving) — override the engine's /tmp constants

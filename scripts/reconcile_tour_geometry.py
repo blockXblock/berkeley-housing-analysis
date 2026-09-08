@@ -23,9 +23,8 @@ coordinate the pipeline inherited. So position and height are reconciled SEPARAT
 """
 import argparse, math, os, re, sys
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import gen_svg_labels as G
-from gen_building_loop import buildings, placemark_name
+from scripts.gen_building_loop import buildings, placemark_name
 
 M_PER_STOREY = 3.5      # the project's own convention
 

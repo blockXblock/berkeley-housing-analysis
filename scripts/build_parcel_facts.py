@@ -15,9 +15,8 @@ Run: python scripts/build_parcel_facts.py   # (re)builds databases/parcel_facts.
 """
 import sqlite3, sys, warnings
 import pandas as pd, geopandas as gpd
-warnings.filterwarnings("ignore"); sys.path.insert(0, "scripts")
-from housing_rules import to_canonical_apn
-from gen_ownership_map import owner_type            # DRY: the one owner-type classifier
+from scripts.housing_rules import to_canonical_apn
+from scripts.gen_ownership_map import owner_type            # DRY: the one owner-type classifier
 
 OWNTYPE = {0: "individual", 1: "investor", 2: "trust", 3: "institutional"}
 OUT = "databases/parcel_facts.db"

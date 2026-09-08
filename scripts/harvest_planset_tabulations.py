@@ -124,7 +124,7 @@ def _field_of(label):
 
 def text_rows(pdf, page):
     """Rebuild visual rows from the text layer: [(text, x0, y0, x1, y1)]."""
-    import fitz
+    import pymupdf as fitz  # D6 (2026-09-07): bare `fitz` alias deprecated upstream
     doc = fitz.open(pdf)
     try:
         pg = doc[page]
@@ -222,7 +222,7 @@ def conservation_ok(existing, proposed, tol=0.005):
 
 def find_sheet(pdf, scan_pages, dpi_scan=150):
     """Page index (0-based) of the zoning-data sheet, or None."""
-    import fitz
+    import pymupdf as fitz  # D6 (2026-09-07): bare `fitz` alias deprecated upstream
     doc = fitz.open(pdf)
     try:
         for i in range(min(len(doc), scan_pages)):
@@ -249,7 +249,7 @@ def read_sheet_cached(pdf, page, pid, dpi=400):
 
 def read_sheet(pdf, page, dpi=400):
     """OCR the sheet in vertical strips (a full E-size sheet at 400dpi is too wide for one pass)."""
-    import fitz
+    import pymupdf as fitz  # D6 (2026-09-07): bare `fitz` alias deprecated upstream
     doc = fitz.open(pdf)
     pg = doc[page]; r = pg.rect
     text = []

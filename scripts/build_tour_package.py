@@ -34,8 +34,7 @@ import sys
 import zipfile
 from xml.dom import minidom
 import sys as _sys, os as _os
-_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
-from stamp_geometry import geometry_sha as _geometry_sha
+from scripts.stamp_geometry import geometry_sha as _geometry_sha
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 GEOMETRY = ROOT / "kml" / "geometry" / "geometry.kml"

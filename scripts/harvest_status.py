@@ -15,7 +15,6 @@ Resumable (per-project state), polite (randomised delays). Run in the project .v
 import sys, os, re, json, time, random, argparse, sqlite3
 import pandas as pd
 
-sys.path.insert(0, "experiments/accela_scrape")
 from harvest_address import search_by_address
 from url_discovery_scraper import _extract_field_from_capdetail
 from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout

@@ -16,8 +16,7 @@ which already says beds.
   python scripts/gen_dorm_tour.py --out kml/tours/uc-dormitories.kml
 """
 import argparse, math, os, re, sqlite3, sys, datetime
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from gen_building_loop import buildings, cam, M
+from scripts.gen_building_loop import buildings, cam, M
 
 CAMPANILE = (-122.2578, 37.8723)          # the opening subject, as in the May tour
 

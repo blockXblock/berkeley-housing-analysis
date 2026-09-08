@@ -15,8 +15,7 @@ Usage: python scripts/gen_landmark_corrections.py   (needs pdftotext on PATH)
 """
 import re, csv, subprocess, sys, warnings, pathlib
 import pandas as pd, sqlite3, geopandas as gpd
-warnings.filterwarnings("ignore"); sys.path.insert(0, "scripts")
-from housing_rules import to_canonical_apn
+from scripts.housing_rules import to_canonical_apn
 
 PDF = "data/raw/berkeley_landmarks_list.pdf"   # gitignored (*.pdf); auto-downloaded if absent
 PDF_URL = "https://berkeleyca.gov/sites/default/files/documents/COB%20Landmarks%20Updated%20Jan%202023_0.pdf"

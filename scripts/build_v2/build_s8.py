@@ -22,7 +22,6 @@ import sqlite3, sys, os, argparse
 from collections import Counter
 from datetime import date
 HERE = os.path.dirname(__file__)
-sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(HERE, '..'))
 import s0_keys
 from s0_keys import normalize_address
 import housing_predicates  # single-source predicate module; net_units NOT called by design (gather, not re-derive)

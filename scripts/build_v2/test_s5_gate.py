@@ -9,7 +9,6 @@ market-by-subtraction bug, or the wiring re-appears. Asserts:
 Run: python scripts/build_v2/test_s5_gate.py
 """
 import sys, os, sqlite3
-sys.path.insert(0, os.path.dirname(__file__)); sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 import build_s5, s0_keys, gating
 from build_s5 import genuine_cited, V3
 

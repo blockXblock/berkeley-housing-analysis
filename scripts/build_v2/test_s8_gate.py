@@ -17,7 +17,6 @@ Run: python scripts/build_v2/test_s8_gate.py
 """
 import sys, os, sqlite3
 from collections import Counter
-sys.path.insert(0, os.path.dirname(__file__)); sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 import build_s8, s0_keys, gating, housing_predicates
 import housing_rules as hr
 from build_s8 import V3, SOURCE_COUNTS, SYNTH_COUNTS

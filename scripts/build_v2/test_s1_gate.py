@@ -11,7 +11,6 @@ Runs the real S1 derivation against live CPRA + v3.s0_key_index and asserts the 
 Run: python -m scripts.build_v2.test_s1_gate   (or: python scripts/build_v2/test_s1_gate.py)
 """
 import sys, os
-sys.path.insert(0, os.path.dirname(__file__)); sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 import build_s1
 import s0_keys
 from build_s1 import build_spine, classify, load_s0_index, tier1_check, scan_attaches, normalize_address, is_housing, net_units

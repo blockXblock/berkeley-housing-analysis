@@ -31,7 +31,7 @@ import argparse, csv, importlib.util, json, math, os, re, sqlite3, subprocess, s
 
 H = importlib.util.spec_from_file_location("h", "scripts/harvest_planset_tabulations.py")
 h = importlib.util.module_from_spec(H); H.loader.exec_module(h)
-import fitz
+import pymupdf as fitz  # D6 (2026-09-07): the bare `fitz` alias is deprecated upstream
 
 CACHE = "scratch/2026-08-23/extract25"; os.makedirs(CACHE, exist_ok=True)
 h.SCRATCH = CACHE

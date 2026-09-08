@@ -12,7 +12,7 @@ markers; the deflation blank-count cases). Lifted verbatim with the classifier (
 try:  # dual-path: `python -m scripts.housing_rules.test_permit_role` (from repo root) OR scripts/ on sys.path
     from scripts.housing_rules.permit_role import classify, net_units
 except ImportError:
-    from housing_rules.permit_role import classify, net_units
+    from scripts.housing_rules.permit_role import classify, net_units
 
 # (work_type, description, adu_flag, occtype, units_added, units_removed, permit) -> expected_role
 TESTS = [

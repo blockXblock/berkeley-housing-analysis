@@ -21,9 +21,8 @@ skyline is unchanged, but nothing is labelled except the building in shot.
   python scripts/proto_svg_label_tour.py
 """
 import math, os, pathlib, re, shutil, subprocess, sys, zipfile
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from gen_building_loop import buildings as site_buildings
-from gen_svg_labels import slug as slugify
+from scripts.gen_building_loop import buildings as site_buildings
+from scripts.gen_svg_labels import slug as slugify
 
 SITES = site_buildings()
 

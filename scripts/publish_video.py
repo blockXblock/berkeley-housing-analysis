@@ -15,8 +15,7 @@ being erased by the build until 2026-08-28.
 """
 import argparse, datetime, hashlib, json, pathlib, re, subprocess
 import sys as _sys, os as _os
-_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
-from stamp_geometry import geometry_sha as _geometry_sha
+from scripts.stamp_geometry import geometry_sha as _geometry_sha
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CAT = ROOT / "docs" / "tours.json"

@@ -28,7 +28,7 @@ import re
 import statistics
 from collections import defaultdict
 
-import fitz
+import pymupdf as fitz  # D6 (2026-09-07): the bare `fitz` alias is deprecated upstream
 
 os.chdir(os.path.expanduser('~/berkeley-data'))
 OUT_DIR = 'scratch/2026-07-03'

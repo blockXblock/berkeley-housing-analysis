@@ -15,7 +15,6 @@ Read-only. Run in the .venv: .venv/bin/python scripts/refresh_inspections.py
 """
 import sys, os, json, csv, datetime, traceback
 
-sys.path.insert(0, "experiments/accela_scrape")
 from url_discovery_scraper import discover_url
 from inspection_scraper import scrape_inspections
 
@@ -55,7 +54,9 @@ def main():
                "permit": permit, "permit_status": r["status"]}
         try:
             disc = discover_url(permit, module_hint="Building")
-            url = (disc or {}).get("capdetail_url") if isinstance(disc, dict) else None
+            # the CapDetail URL lives under master (discover_url auto-redirects to it); it already
+            # carries &IsToShowInspection=. The top-level capdetail_url stays None on auto-redirect.
+            url = ((disc or {}).get("master") or {}).get("capdetail_url") if isinstance(disc, dict) else None
             if not url:
                 rec.update(n_inspections=-1, last_date=None, last_type=None, last_result="no capdetail_url")
             else:

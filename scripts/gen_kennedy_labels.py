@@ -18,9 +18,8 @@ a unit count taken from a ZAB packet. It does not have it.
 """
 import argparse, csv, glob, os, pathlib, subprocess, sys, tempfile
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import gen_svg_labels as G
-from gen_building_loop import buildings
+from scripts.gen_building_loop import buildings
 
 TOUR = "kml/tours/panoramic-kennedy-legacy.kml"
 CSV_GLOB = "data/reference/kennedy_panoramic_buildings_*.csv"

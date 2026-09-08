@@ -17,8 +17,7 @@ Trigger tests always run in a SAVEPOINT that rolls back (test rows never persist
 """
 import sqlite3, argparse, shutil, sys, json, os
 from pathlib import Path
-sys.path.insert(0, 'scripts')
-from housing_rules import to_canonical_apn  # the ONE canon function (alphanumeric, per-county)
+from scripts.housing_rules import to_canonical_apn  # the ONE canon function (alphanumeric, per-county)
 
 LIVE = 'databases/berkeley_housing_v2.db'
 SCHEMA = 'schema/parcel_apn_lineage_schema_MVP.sql'

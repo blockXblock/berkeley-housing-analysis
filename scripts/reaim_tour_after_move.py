@@ -18,8 +18,7 @@ which would discard whatever the tour author framed by hand.
 """
 import argparse, math, re, subprocess, sys, os
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from gen_building_loop import placemark_name
+from scripts.gen_building_loop import placemark_name
 
 GEOM = "kml/tours/panoramic-kennedy-legacy.kml"
 CLAIM_RADIUS_M = 200.0     # beyond this a waypoint is a transit leg, owned by nobody

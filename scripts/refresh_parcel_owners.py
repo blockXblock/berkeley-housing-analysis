@@ -52,8 +52,7 @@ Run:  python scripts/refresh_parcel_owners.py            # PREVIEW — fetches, 
 import argparse, csv, datetime, json, re, shutil, sqlite3, sys, time, urllib.error, urllib.parse, urllib.request
 from collections import Counter, defaultdict
 
-sys.path.insert(0, "scripts")
-from housing_rules import to_canonical_apn
+from scripts.housing_rules import to_canonical_apn
 
 ORG = "https://services5.arcgis.com/ROBnTHSNjoZ2Wm1P/arcgis/rest/services"
 ROLL_PREFIX = "Assessor_Office_Secured_Tax_Roll_"

@@ -18,8 +18,7 @@ screen, tucked under the roofline, moving every leg.
   python scripts/gen_hop_tour.py --min-units 200 --exclude-agency --out kml/tours/private-200.kml
 """
 import argparse, datetime, math, os, re, sqlite3, sys
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from gen_building_loop import buildings as site_buildings
+from scripts.gen_building_loop import buildings as site_buildings
 
 M = 111320.0
 DB = "databases/berkeley_housing_v2.db"

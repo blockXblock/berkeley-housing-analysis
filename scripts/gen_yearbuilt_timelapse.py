@@ -15,8 +15,7 @@ Output: docs/maps/berkeley_construction_timelapse.html (self-contained; MapLibre
 Usage: python scripts/gen_yearbuilt_timelapse.py
 """
 import geopandas as gpd, pandas as pd, json, os, sys, warnings
-warnings.filterwarnings("ignore"); sys.path.insert(0, "scripts")
-from housing_rules import to_canonical_apn
+from scripts.housing_rules import to_canonical_apn
 OUT = "docs/maps/berkeley_construction_timelapse.html"
 DATA = "docs/maps/berkeley_construction_data.json"   # streamed, not inlined (25k points)
 

@@ -21,8 +21,7 @@ import csv
 import sys
 from pathlib import Path as _Path
 
-sys.path.insert(0, str(_Path(__file__).resolve().parent))
-from housing_rules import RHNA_ALLOCATIONS
+from scripts.housing_rules import RHNA_ALLOCATIONS
 from datetime import datetime
 from pathlib import Path
 

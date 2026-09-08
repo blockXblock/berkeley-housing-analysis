@@ -13,8 +13,7 @@ Open it in Google Earth (Pro: File > Open; Earth web: New project > Import KML),
 """
 import sqlite3, sys, os, html
 import pandas as pd
-sys.path.insert(0, "scripts")
-from housing_rules import to_canonical_apn
+from scripts.housing_rules import to_canonical_apn
 
 OUT = "kml/timeline/berkeley_landmarks_buildout.kml"
 GOLD = "ff4fc4fe"   # KML aabbggrr for #fec44f (matches the web map's gold)

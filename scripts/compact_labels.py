@@ -8,8 +8,7 @@ so this can be run repeatedly and after sync_status_from_v2.py.
   python scripts/compact_labels.py --scale 2.0
 """
 import argparse, os, re, sys
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from label_format import parts, compose, is_folded
+from scripts.label_format import parts, compose, is_folded
 
 GEOM = "kml/geometry/geometry.kml"
 

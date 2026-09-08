@@ -38,8 +38,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from housing_rules import RHNA_ALLOCATIONS
+from scripts.housing_rules import RHNA_ALLOCATIONS
 
 # Paths - V2 DATABASE
 BASE_DIR = Path('/Users/johngage/berkeley-data')

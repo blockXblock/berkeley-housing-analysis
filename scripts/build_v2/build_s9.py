@@ -26,14 +26,13 @@ from collections import defaultdict, Counter
 from datetime import date
 import pandas as pd
 HERE = os.path.dirname(__file__)
-sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(HERE, '..'))
 import s0_keys
 from s0_keys import normalize_address
 import housing_predicates
 from housing_predicates import is_housing, net_units
 from gating import snapshot_v3
 import housing_rules as hr
-from cpra_dedup import extract_master_permit
+from scripts.cpra_dedup import extract_master_permit
 
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 V3 = os.path.join(ROOT, 'databases', 'berkeley_housing_v3.db')

@@ -4,7 +4,6 @@
 `reconstructed_secondary`, Panoramic developer, description stating the real use. No unit_program
 (no dwellings to describe). Snapshot: keep_snapshot_2026-09-06_pre-nonhousing-entities.db"""
 import json, sqlite3, sys, datetime
-sys.path.insert(0,'scripts'); from housing_rules.apn import to_canonical_apn
 DB="databases/berkeley_housing_v2.db"; NOW=datetime.datetime.now().isoformat()
 BY="panoramic_historic_reconstruction_2026-09-06"
 TARGETS={"UC Storage":"UC Storage — 800 self-storage units (NOT dwellings), completed 2006. "

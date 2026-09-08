@@ -33,9 +33,8 @@ three-layer cross-walk, skipped, producing exactly the false-dead it warns about
 """
 import argparse, csv, math, os, re, sqlite3, sys
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from gen_building_loop import buildings
-from housing_rules.apn import to_canonical_apn
+from scripts.gen_building_loop import buildings
+from scripts.housing_rules.apn import to_canonical_apn
 import gen_svg_labels as G
 
 ASSESSOR = "databases/berkeley.db"
@@ -86,7 +85,7 @@ def point_in(verts, x, y):
 
 def traced_footprints(geom_path):
     """{placemark_name: (centroid_lon, centroid_lat, area_m2)} for every polygon in the geom."""
-    from gen_building_loop import placemark_name
+    from scripts.gen_building_loop import placemark_name
     out = {}
     txt = open(geom_path, errors="replace").read()
     for pm in re.findall(r"<Placemark.*?</Placemark>", txt, re.S):

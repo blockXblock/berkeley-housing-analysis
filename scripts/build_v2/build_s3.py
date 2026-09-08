@@ -22,7 +22,6 @@ S3 derives stage from s2_events only; it does not need the housing predicates (n
 import sqlite3, sys, os, argparse
 from collections import defaultdict, Counter
 HERE = os.path.dirname(__file__)
-sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(HERE, '..'))
 from s0_keys import normalize_address
 from gating import snapshot_v3                          # the SHARED snapshot helper (refuses to clobber)
 

@@ -15,14 +15,13 @@ Design (from the S0 acceptance gate, 2026-06-17):
   (distinct permit-family AND distinct CO date), generalized to ANY >1-hit, not a whitelist.
 """
 import re, sys, os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))   # scripts/ for housing_rules
 
 
 def canonicalize_apn(raw, county='Alameda'):
     """THE single APN canon for the v2-rebuild — the one entry point S0-write, S1-match, and both
     gate tests import. Delegates to the project's canonical housing_rules.to_canonical_apn (NEVER a
     fork / never strip-non-digits); returns Option-B dashed (e.g. '057-2016-021-01') or None."""
-    from housing_rules import to_canonical_apn
+    from scripts.housing_rules import to_canonical_apn
     try:
         return to_canonical_apn(raw, county)
     except Exception:

@@ -14,7 +14,6 @@ loads interleaved) and a FRESH browser context per project. Run in .venv:
 import sys, os, time, re, argparse, random
 import pandas as pd, sqlite3
 
-sys.path.insert(0, "experiments/accela_scrape")
 from harvest_address import search_by_address
 from playwright.sync_api import sync_playwright
 

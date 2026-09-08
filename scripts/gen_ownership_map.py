@@ -26,9 +26,8 @@ Output: docs/maps/berkeley_ownership.html + docs/maps/berkeley_ownership_data.js
 Usage: python scripts/gen_ownership_map.py
 """
 import geopandas as gpd, pandas as pd, json, os, re, sys, warnings
-warnings.filterwarnings("ignore"); sys.path.insert(0, "scripts")
-from housing_rules import to_canonical_apn
-from housing_rules.owner_name import owner_type, LABELS as OWNER_LABELS
+from scripts.housing_rules import to_canonical_apn
+from scripts.housing_rules.owner_name import owner_type, LABELS as OWNER_LABELS
 OUT = "docs/maps/berkeley_ownership.html"
 DATA = "docs/maps/berkeley_ownership_data.json"
 

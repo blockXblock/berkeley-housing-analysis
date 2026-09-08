@@ -27,7 +27,6 @@ Output: docs/maps/bond_incidence.html (+ _data.json). Serve to view (file:// blo
 """
 import sqlite3, json, os, sys, warnings
 import pandas as pd, numpy as np
-warnings.filterwarnings("ignore"); sys.path.insert(0, "scripts")
 
 # ---- bond assumptions (explicit, adjustable) ----
 PRINCIPAL = 300_000_000      # $300M
@@ -69,7 +68,7 @@ def main():
     # ---- inline parcel card from parcel_facts.db (owner + use + build year) ----
     # propinfo.acgov.org (assessor/tax record) can't be deep-linked and hides owner names, so we show the
     # county-record facts INLINE in the popup. Built by scripts/build_parcel_facts.py.
-    from housing_rules import to_canonical_apn
+    from scripts.housing_rules import to_canonical_apn
     p["capn"] = p.APN.apply(lambda a: to_canonical_apn(a, "alameda") if pd.notna(a) else None)
     pf = pd.read_sql("SELECT capn, owner_name, owner_type, use_bucket, build_year, owner_occupied FROM parcel_facts",
                      sqlite3.connect("databases/parcel_facts.db"))

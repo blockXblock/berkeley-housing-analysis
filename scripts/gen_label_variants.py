@@ -23,8 +23,7 @@ Each variant is a complete geometry document -- load one at a time and look at d
   python scripts/gen_label_variants.py
 """
 import os, re, shutil, sys, zipfile, pathlib
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from label_format import parts
+from scripts.label_format import parts
 
 GEOM = pathlib.Path("kml/geometry/geometry.kml")
 OUT = pathlib.Path("scratch/2026-08-30/label-variants")

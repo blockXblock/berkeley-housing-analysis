@@ -13,9 +13,8 @@ Imports s0_keys (the single canon) — never reimplements key logic (anti-drift)
 import sqlite3, sys, os, argparse, hashlib
 from collections import defaultdict
 HERE = os.path.dirname(__file__)
-sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(HERE, '..'))
 from s0_keys import normalize_address, disambiguate_distinct, canonicalize_apn
-from cpra_dedup import extract_master_permit
+from scripts.cpra_dedup import extract_master_permit
 
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 V2 = os.path.join(ROOT, 'databases', 'berkeley_housing_v2.db')

@@ -21,11 +21,10 @@ itself.
 """
 import argparse, collections, re, sqlite3
 import sys as _sys, os as _os
-_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
 # THE label format lives in label_format.py. Splitting on "·" here and rejoining with " · "
 # would flatten the two-line fold every time this ran -- the same duplicated-rule failure as
 # buildings() and the geometry sha.
-from label_format import parts as label_parts, compose as label_compose
+from scripts.label_format import parts as label_parts, compose as label_compose
 
 GEOM = "kml/geometry/geometry.kml"
 DB = "databases/berkeley_housing_v2.db"

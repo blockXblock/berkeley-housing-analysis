@@ -23,8 +23,7 @@ it is the default here; Google is available for corroboration where a key exists
 """
 import argparse, json, math, os, sys, urllib.parse, urllib.request, collections
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from gen_building_loop import buildings
+from scripts.gen_building_loop import buildings
 
 RADIUS_M = 45.0
 

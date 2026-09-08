@@ -14,11 +14,10 @@ Imports s0_keys + housing_predicates + gating. --preview is READ-ONLY.
 import sqlite3, sys, os, argparse
 import pandas as pd
 HERE = os.path.dirname(__file__)
-sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(HERE, '..'))
 from s0_keys import normalize_address
 from housing_predicates import net_units
 from gating import snapshot_v3
-from cpra_dedup import extract_master_permit
+from scripts.cpra_dedup import extract_master_permit
 
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 V3 = os.path.join(ROOT, 'databases', 'berkeley_housing_v3.db')

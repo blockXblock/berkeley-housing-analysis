@@ -24,11 +24,10 @@ import sqlite3, sys, os, re, glob, argparse
 from collections import defaultdict, Counter
 import pandas as pd
 HERE = os.path.dirname(__file__)
-sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(HERE, '..'))
 from s0_keys import normalize_address                 # THE address-key canon (one definition, imported)
 from housing_predicates import is_housing, net_units   # THE shared housing predicates (same as S1, no drift)
 from gating import snapshot_v3                          # the SHARED snapshot helper (refuses to clobber)
-from cpra_dedup import extract_master_permit           # collapses -REV/-DEF suffixes to the master permit
+from scripts.cpra_dedup import extract_master_permit           # collapses -REV/-DEF suffixes to the master permit
 
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 V3 = os.path.join(ROOT, 'databases', 'berkeley_housing_v3.db')

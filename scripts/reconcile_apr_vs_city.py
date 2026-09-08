@@ -22,8 +22,7 @@ docs outside the permit feed; we cannot -> the open-data argument). Quality boun
 completeness (the 607-unit re-plat chunk shrinks toward 0 as the crosswalk's held re-plats land).
 """
 import sqlite3, sys, re
-sys.path.insert(0,'scripts')
-from housing_rules import to_canonical_apn as cap
+from scripts.housing_rules import to_canonical_apn as cap
 v2=sqlite3.connect('file:databases/berkeley_housing_v2.db?mode=ro',uri=True)
 mir=sqlite3.connect('file:databases/hcd_apr_mirror.db?mode=ro',uri=True)
 def num(x):

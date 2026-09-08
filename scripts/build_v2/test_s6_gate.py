@@ -10,7 +10,6 @@ Run: python scripts/build_v2/test_s6_gate.py
 """
 import sys, os, sqlite3
 from collections import defaultdict, Counter
-sys.path.insert(0, os.path.dirname(__file__)); sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 import build_s6, s0_keys, gating
 from build_s6 import derive_confidence, V3
 

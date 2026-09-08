@@ -34,8 +34,7 @@ from pathlib import Path
 import pandas as pd
 
 # Add parent directory to path for cpra_dedup import
-sys.path.insert(0, str(Path(__file__).parent.parent))
-from cpra_dedup import load_cpra, dedupe_permits, normalize_apn
+from scripts.cpra_dedup import load_cpra, dedupe_permits, normalize_apn
 
 try:
     from rapidfuzz import fuzz

@@ -19,8 +19,7 @@ and waits for John's review of the HIGH set. This script does not write the DB.
 """
 import sqlite3, json, re, sys
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from housing_rules import to_canonical_apn   # the SINGLE canon function (Option B, per-county)
+from scripts.housing_rules import to_canonical_apn   # the SINGLE canon function (Option B, per-county)
 v2=sqlite3.connect('file:databases/berkeley_housing_v2.db?mode=ro',uri=True); v2.row_factory=sqlite3.Row
 bdb=sqlite3.connect('file:databases/berkeley.db?mode=ro',uri=True)
 STUB='2024-01-01'; ASOF='2026-02'

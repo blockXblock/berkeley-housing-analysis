@@ -25,7 +25,6 @@ import sqlite3, sys, os, argparse
 from collections import defaultdict, Counter
 from datetime import date
 HERE = os.path.dirname(__file__)
-sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(HERE, '..'))
 from s0_keys import normalize_address
 import housing_predicates  # noqa: F401 (shared-module wiring; net_units single-source)
 from gating import snapshot_v3

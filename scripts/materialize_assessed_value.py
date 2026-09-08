@@ -32,8 +32,7 @@ NEVER writes berkeley.db (assessor) — opens it read-only.
 import sqlite3, argparse, datetime, statistics, sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from housing_rules import to_canonical_apn   # the SINGLE canon function (Option B, per-county)
+from scripts.housing_rules import to_canonical_apn   # the SINGLE canon function (Option B, per-county)
 
 BASE = Path(__file__).resolve().parent.parent
 V2_PATH = BASE / 'databases' / 'berkeley_housing_v2.db'

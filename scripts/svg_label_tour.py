@@ -23,9 +23,8 @@ WHAT IT DOES, and why each part is there (all of it learned by John watching it)
   python scripts/svg_label_tour.py --tour shattuck-s2n-path --street shattuck
 """
 import argparse, math, os, pathlib, re, shutil, subprocess, sys, zipfile
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from gen_building_loop import buildings as site_buildings
-from stamp_geometry import geometry_sha
+from scripts.gen_building_loop import buildings as site_buildings
+from scripts.stamp_geometry import geometry_sha
 
 
 def placemark_name(pm):
@@ -118,7 +117,7 @@ def reach(ring, lon, lat, ux, uy, soft=SOFT_M):
     m = max(ds)
     # subtract the max before exponentiating -- otherwise exp overflows on a large footprint
     return max(m + soft * math.log(sum(math.exp((d - m) / soft) for d in ds)), 0.0)
-from gen_svg_labels import slug as slugify, normkey
+from scripts.gen_svg_labels import slug as slugify, normkey
 from xml.dom import minidom
 
 GEOM = pathlib.Path("kml/geometry/geometry.kml")

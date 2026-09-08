@@ -9,7 +9,6 @@ findings separation / wiring drifts. Asserts:
 Run: python scripts/build_v2/test_s3_gate.py
 """
 import sys, os, sqlite3
-sys.path.insert(0, os.path.dirname(__file__)); sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 import build_s3, s0_keys, gating
 from build_s3 import derive_all, v1_stages, reconcile_vs_v1, normalize_address, RANK, V2
 

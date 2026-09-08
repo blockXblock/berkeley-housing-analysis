@@ -88,8 +88,7 @@ def buildings():
     implementation and a fix cannot fail to reach the corridor tours again.
     """
     import sys, os
-    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-    from gen_building_loop import buildings as site_buildings
+    from scripts.gen_building_loop import buildings as site_buildings
     return {k: v[:4] for k, v in site_buildings().items()}
 
 

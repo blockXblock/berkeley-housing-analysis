@@ -30,7 +30,6 @@ ROOT = os.path.expanduser('~/berkeley-data')
 V2 = os.path.join(ROOT, 'databases', 'berkeley_housing_v2.db')
 NB_OUT = os.path.join(ROOT, 'notebooks', 'v4', 'JN-N_labels.ipynb')
 BASELINE_GLOB = os.path.join(ROOT, 'data', 'baselines', 'label_fields_baseline_*.json')
-sys.path.insert(0, os.path.join(ROOT, 'scripts'))
 
 # The six lines a label can carry, and the v2 column each one needs. This mapping IS the subject of
 # the notebook: it is the editorial decision, written down.

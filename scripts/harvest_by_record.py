@@ -22,7 +22,6 @@ gated step). Resumable, polite (5-15s between records). Run in .venv:
 import sys, os, time, random, argparse, re
 import pandas as pd
 
-sys.path.insert(0, "experiments/accela_scrape")
 import harvest_plansets as H
 from url_discovery_scraper import discover_url
 

@@ -18,8 +18,7 @@ HCD  = os.path.join(ROOT, 'databases', 'hcd_apr_mirror_2026-06-17_fresh.db')
 ENGINE = os.path.join(ROOT, 'scripts', 'v4', 'build_jn_d.py')
 CSV  = os.path.join(ROOT, 'scratch', '2026-06-26', 'jn_d_out', 'jn_d_bijection_oracled.csv')
 NB_OUT = os.path.join(ROOT, 'notebooks', 'v4', 'JN-D_bijection_viz.ipynb')
-sys.path.insert(0, os.path.join(ROOT, 'scripts'))
-from housing_rules import to_canonical_apn
+from scripts.housing_rules import to_canonical_apn
 def C(r):
     try: return to_canonical_apn(r, 'Alameda') or None
     except Exception: return None

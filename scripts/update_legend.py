@@ -17,7 +17,6 @@ anyone remembering to add it.
 """
 import argparse, collections, os, re, sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "viz"))
 import stage_legend_svg
 
 GEOM = "kml/geometry/geometry.kml"

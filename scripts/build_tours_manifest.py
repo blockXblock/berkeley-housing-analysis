@@ -10,8 +10,7 @@ import json, re, hashlib, sys, subprocess
 from pathlib import Path
 from datetime import date
 import sys as _sys, os as _os
-_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
-from stamp_geometry import geometry_sha as _geometry_sha
+from scripts.stamp_geometry import geometry_sha as _geometry_sha
 
 ROOT = Path(__file__).resolve().parents[1]
 GEOM = ROOT / "kml/geometry/geometry.kml"

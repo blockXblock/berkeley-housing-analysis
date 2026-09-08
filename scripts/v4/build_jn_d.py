@@ -55,8 +55,7 @@ EXP = dict(hcd_anchor=842,            # (HARD) HCD ADU canonical APNs
            known_footprint_parcel='060-2417-056-00', known_footprint_count=3)  # GIS sanity
 
 def ro(p): return sqlite3.connect(f'file:{p}?mode=ro', uri=True)
-sys.path.insert(0, os.path.join(ROOT, 'scripts'))
-import housing_rules
+from scripts import housing_rules
 def C(raw):
     try: return housing_rules.to_canonical_apn(raw, 'Alameda') or None
     except Exception: return None

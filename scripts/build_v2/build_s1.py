@@ -17,11 +17,10 @@ import sqlite3, sys, os, argparse, re
 from collections import defaultdict
 import pandas as pd
 HERE = os.path.dirname(__file__)
-sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(HERE, '..'))
 from s0_keys import normalize_address, AddressKey, canonicalize_apn
 from housing_predicates import is_housing, net_units    # the shared housing predicates (single source)
 from gating import snapshot_v3                           # the SHARED snapshot helper (refuses to clobber)
-from cpra_dedup import extract_master_permit
+from scripts.cpra_dedup import extract_master_permit
 
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 V3 = os.path.join(ROOT, 'databases', 'berkeley_housing_v3.db')

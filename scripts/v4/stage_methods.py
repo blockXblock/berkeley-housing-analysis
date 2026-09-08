@@ -189,8 +189,7 @@ def classify_all(con):
     Returns dict(role -> count)."""
     import sys
     import datetime as dt
-    sys.path.insert(0, os.path.join(ROOT, 'scripts'))
-    from housing_rules.permit_role import classify, net_units, payload_get, classifier_hash
+    from scripts.housing_rules.permit_role import classify, net_units, payload_get, classifier_hash
     clf_hash = classifier_hash()
     now = dt.datetime.now(dt.timezone.utc).isoformat()
     labels = []

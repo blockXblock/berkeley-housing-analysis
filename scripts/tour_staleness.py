@@ -16,8 +16,7 @@ path. Anything reading this field before 2026-08-28 was reading a lie.
 """
 import argparse, datetime, hashlib, json, os, pathlib, re, subprocess, sys
 import sys as _sys, os as _os
-_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
-from stamp_geometry import geometry_sha as _geometry_sha
+from scripts.stamp_geometry import geometry_sha as _geometry_sha
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CAT = ROOT / "docs" / "tours.json"
@@ -89,9 +88,8 @@ def visible_change_for(flown_sha, tour_path, radius_m=250.0):
     # NO SILENT except HERE. The first version of this swallowed a NameError and returned
     # None, so the report printed the old sha-mismatch line and looked like it was working.
     # A checker that fails quietly is worse than no checker.
-    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     try:
-        from geometry_diff import versions, diff, rendered
+        from scripts.geometry_diff import versions, diff, rendered
     except ImportError as e:
         print(f"  (cannot judge visible change: {e})", file=sys.stderr)
         return None

@@ -11,11 +11,10 @@ s0_keys, housing_predicates, cpra_dedup; observes parcel_lineage (v2) as CANDIDA
 """
 import sqlite3, sys, os, argparse, re
 from collections import defaultdict
-sys.path.insert(0, os.path.dirname(__file__)); sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 import build_s1
 from s0_keys import normalize_address
-from cpra_dedup import extract_master_permit
-from housing_rules.apn import to_canonical_apn
+from scripts.cpra_dedup import extract_master_permit
+from scripts.housing_rules.apn import to_canonical_apn
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 V3 = os.path.join(ROOT, 'databases', 'berkeley_housing_v3.db')

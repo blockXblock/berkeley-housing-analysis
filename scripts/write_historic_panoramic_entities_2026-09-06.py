@@ -9,8 +9,7 @@ John). Sources: developer website (confidence MEDIUM) or the tour's own caption 
 Snapshot: keep_snapshot_2026-09-06_pre-panoramic-historic-entities.db
 """
 import json, sqlite3, sys, datetime
-sys.path.insert(0,'scripts')
-from housing_rules.apn import to_canonical_apn
+from scripts.housing_rules.apn import to_canonical_apn
 DB="databases/berkeley_housing_v2.db"; NOW=datetime.datetime.now().isoformat()
 BY="panoramic_historic_reconstruction_2026-09-06"
 SRCURL={"developer_site":"panoramic.com project page (developer self-report)",

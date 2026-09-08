@@ -43,7 +43,6 @@ import statistics
 import subprocess
 import sys
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from parse_bills import parse  # noqa: E402
 
 BILLS = os.path.expanduser(sys.argv[1] if len(sys.argv) > 1 else "~/Desktop/Alameda/parcels")
@@ -108,8 +107,7 @@ def classify(bills, units=None):
 
 def city_sqft():
     """City of Berkeley taxable square footage, keyed by canonical APN."""
-    sys.path.insert(0, "scripts")
-    import housing_rules
+    from scripts import housing_rules
     raw = subprocess.run(["curl", "-s", "--max-time", "120", CITY_SQFT_API],
                          capture_output=True, text=True).stdout
     out = {}
@@ -163,8 +161,7 @@ def main():
     # independent validation against the City's own dataset
     try:
         cs = city_sqft()
-        sys.path.insert(0, "scripts")
-        import housing_rules
+        from scripts import housing_rules
         hits = [(b["apn"], sq[b["apn"]], cs.get(housing_rules.to_canonical_apn(b["apn"], "alameda")))
                 for b in bills]
         cmp_ = [(a, d, c) for a, d, c in hits if c]

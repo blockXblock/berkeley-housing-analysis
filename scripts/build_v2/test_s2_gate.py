@@ -8,7 +8,6 @@ wiring drifts. Runs the real S2 assembly and asserts the acceptance gate:
 Run: python scripts/build_v2/test_s2_gate.py
 """
 import sys, os
-sys.path.insert(0, os.path.dirname(__file__)); sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 import build_s2, s0_keys, housing_predicates
 from build_s2 import assemble, normalize_address
 

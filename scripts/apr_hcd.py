@@ -24,9 +24,8 @@ The STRUCTURE matches HCD exactly; the cells carry what v2 actually knows.
 """
 import sqlite3, argparse, sys, json
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from housing_rules import to_canonical_apn  # noqa (kept for harness symmetry / future PRIOR_APN normalize)
-from housing_rules import RHNA_ALLOCATIONS
+from scripts.housing_rules import to_canonical_apn  # noqa (kept for harness symmetry / future PRIOR_APN normalize)
+from scripts.housing_rules import RHNA_ALLOCATIONS
 
 STUB_CO_DATE = '2024-01-01'
 

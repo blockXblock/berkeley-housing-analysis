@@ -774,9 +774,8 @@ def get_city_apr(conn):
     "the city multi-counts"), so it is surfaced rather than silently folded away.
     """
     import sys
-    sys.path.insert(0, str(BASE_DIR / 'scripts'))
-    from housing_rules import to_canonical_apn
-    from housing_rules.address import normalize_address
+    from scripts.housing_rules import to_canonical_apn
+    from scripts.housing_rules.address import normalize_address
 
     mirror_path = BASE_DIR / 'databases' / 'hcd_apr_mirror.db'
     if not mirror_path.exists():
@@ -949,8 +948,7 @@ def export_data():
         # been re-typed into the site and the APR generator; now there is one, sourced
         # to the city's own APR Table B (housing_rules citation [10]).
         import sys as _sys
-        _sys.path.insert(0, str(BASE_DIR / 'scripts'))
-        from housing_rules import RHNA_ALLOCATIONS
+        from scripts.housing_rules import RHNA_ALLOCATIONS
         rhna = dict(RHNA_ALLOCATIONS['6th'])
 
         print("Comparing against the city's APR filing...")

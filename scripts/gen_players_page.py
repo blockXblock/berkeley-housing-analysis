@@ -22,8 +22,7 @@ from collections import defaultdict
 from datetime import date
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(ROOT, 'scripts'))
-from housing_rules.owner_name import is_organisation
+from scripts.housing_rules.owner_name import is_organisation
 TODAY = date.today()
 v2 = sqlite3.connect(f"file:{os.path.join(ROOT, 'databases', 'berkeley_housing_v2.db')}?mode=ro", uri=True)
 

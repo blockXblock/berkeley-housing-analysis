@@ -13,9 +13,8 @@ NOT the block-level truth — geocoding is parcel-centroid precision (the APR's 
 but the APR is the oracle, never a data source). Output feeds gen_adu_middle_housing.py.
 """
 import sqlite3, sys, json, glob, re, csv
-sys.path.insert(0, "scripts")
-from housing_rules import to_canonical_apn
-from housing_rules.permit_role import _adu_creation
+from scripts.housing_rules import to_canonical_apn
+from scripts.housing_rules.permit_role import _adu_creation
 
 def canon(a):
     try: return to_canonical_apn(a, "alameda")

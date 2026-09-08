@@ -47,8 +47,7 @@ MEASURE_U = {"advertised_40yr_avg": 22.14, "stated_peak_2040_41": 35.00}
 
 
 def canon():
-    sys.path.insert(0, "scripts")
-    import housing_rules
+    from scripts import housing_rules
     return housing_rules.to_canonical_apn
 
 

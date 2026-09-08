@@ -70,7 +70,6 @@ from pathlib import Path
 # package; use the namespace-package path trick that scrape_inspections.py
 # also uses.
 _REPO_ROOT = Path(__file__).parent.parent
-sys.path.insert(0, str(_REPO_ROOT / "experiments" / "accela_scrape"))
 from url_discovery_scraper import discover_url  # noqa: E402
 
 from playwright.sync_api import sync_playwright  # noqa: E402

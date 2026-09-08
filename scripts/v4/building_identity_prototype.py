@@ -4,8 +4,7 @@ import sqlite3, os, sys, re
 import pandas as pd
 ROOT=os.path.expanduser('~/berkeley-data'); OUT=os.path.join(ROOT,'scratch','2026-06-29')
 def ro(p): return sqlite3.connect(f'file:{p}?mode=ro',uri=True)
-sys.path.insert(0,os.path.join(ROOT,'scripts'))
-from housing_rules import to_canonical_apn
+from scripts.housing_rules import to_canonical_apn
 def C(r):
     try: return to_canonical_apn(r,'Alameda') or None
     except Exception: return None

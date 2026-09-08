@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <Document>
-	<name>Berkeley Housing Geometry · 2026-09-02 · 394 buildings · geom-a3d103322890</name>
+	<name>Berkeley Housing Geometry · 2026-09-08 · 394 buildings · geom-922b4150979c</name>
 	<visibility>0</visibility>
 	<open>1</open>
 	<description>177 housing projects. Heights shown as stories × 3.5m. Generated 2026-05-03.</description>
@@ -6932,9 +6932,7 @@ North · 1625 beds · Under Construction</name>
 				<altitudeMode>relativeToGround</altitudeMode>
 				<outerBoundaryIs>
 					<LinearRing>
-						<coordinates>
-							-122.2601363225377,37.8546482720348,19.2 -122.2605948366012,37.8545895890141,19.2 -122.2606048106568,37.8546383688506,19.2 -122.2606097961724,37.8546633451697,19.2 -122.2605848931718,37.8546660451616,19.2 -122.2605965429107,37.8547235345847,19.2 -122.2606447106800,37.8549575725789,19.2 -122.2600836127696,37.8550276880394,19.2 -122.2601313792862,37.8546488954279,19.2 -122.2601363225377,37.8546482720348,19.2 
-						</coordinates>
+						<coordinates>-122.2600306571035,37.85506648532266,19.2 -122.2606483614488,37.85497644220201,19.2 -122.2605948366012,37.8545895890141,19.2 -122.2600825818592,37.85464175955417,19.2 -122.2600306571035,37.85506648532266,19.2</coordinates>
 					</LinearRing>
 				</outerBoundaryIs>
 			</Polygon>
@@ -8243,7 +8241,7 @@ North · 1625 beds · Under Construction</name>
 		</Placemark>
 		<Placemark>
 			<name>2449 Dwight Way
-39 units · Entitled</name>
+39 units · Under Construction</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2449 DWIGHT Way</b><br/><b>Units:</b> 39<br/><b>VLI Units:</b> 2<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Under Construction]]></description>
 			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
@@ -8261,7 +8259,7 @@ North · 1625 beds · Under Construction</name>
 		</Placemark>
 		<Placemark>
 			<name>2449 Dwight Way
-39 units · Entitled</name>
+39 units · Under Construction</name>
 			<styleUrl>#style_status_Entitled</styleUrl>
 			<Region><LatLonAltBox><north>37.865495199447636</north><south>37.86513587497764</south><east>-122.25855505239657</east><west>-122.25901020698082</west></LatLonAltBox><Lod><minLodPixels>128</minLodPixels><maxLodPixels>-1</maxLodPixels><minFadeExtent>64</minFadeExtent></Lod></Region>
 			<Point><coordinates>-122.25883763468369,37.86530685761784,28.7</coordinates><altitudeMode>relativeToGround</altitudeMode></Point>
@@ -10928,7 +10926,7 @@ South · 1625 beds · Under Construction</name>
 			<description><![CDATA[<b>Ashby BART</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 8<br/><b>Height:</b> 28.0m<br/><b>Status:</b> Under Construction<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — Ashby BART: Adeline Tower (8 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_Pre_Application__BART_Project_nolabel</styleUrl>
 			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
-      <outerBoundaryIs><LinearRing><coordinates>-122.270321,37.852517,28.0 -122.270320,37.852482,28.0 -122.270463,37.852107,28.0 -122.270720,37.852103,28.0 -122.270764,37.852510,28.0 -122.270321,37.852517,28.0</coordinates></LinearRing></outerBoundaryIs>
+      <outerBoundaryIs><LinearRing><coordinates>-122.2707262484259,37.85255189590644,28 -122.27072,37.852103,28 -122.270463,37.852107,28 -122.270321,37.852517,28 -122.2707262484259,37.85255189590644,28</coordinates></LinearRing></outerBoundaryIs>
     </Polygon>
 		</Placemark>
 		<Placemark>
@@ -10942,7 +10940,7 @@ South · 1625 beds · Under Construction</name>
 			<description><![CDATA[<b>Ashby BART</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 7<br/><b>Height:</b> 24.5m<br/><b>Status:</b> Under Construction<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — Ashby BART: Building B (7 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_Pre_Application__BART_Project_nolabel</styleUrl>
 			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
-      <outerBoundaryIs><LinearRing><coordinates>-122.2699198992708,37.8527151103640,24.5 -122.2699288992708,37.8531211103640,24.5 -122.2704408992708,37.8531131103640,24.5 -122.2704318992708,37.8527071103640,24.5 -122.2699198992708,37.8527151103640,24.5</coordinates></LinearRing></outerBoundaryIs>
+      <outerBoundaryIs><LinearRing><coordinates>-122.270199665278,37.8526852141754,24.5 -122.2701281437068,37.85289292949312,24.5 -122.2706808968636,37.85289741267806,24.5 -122.2706620714691,37.85267306671867,24.5 -122.270199665278,37.8526852141754,24.5</coordinates></LinearRing></outerBoundaryIs>
     </Polygon>
 		</Placemark>
 		<Placemark>
@@ -10956,7 +10954,7 @@ South · 1625 beds · Under Construction</name>
 			<description><![CDATA[<b>Ashby BART</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Under Construction<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — Ashby BART: MLK Building C (6 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_Pre_Application__BART_Project_nolabel</styleUrl>
 			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
-      <outerBoundaryIs><LinearRing><coordinates>-122.270338,37.853360,21.0 -122.270329,37.852947,21.0 -122.270811,37.852940,21.0 -122.270856,37.853352,21.0 -122.270338,37.853360,21.0</coordinates></LinearRing></outerBoundaryIs>
+      <outerBoundaryIs><LinearRing><coordinates>-122.2706406248653,37.85369639839555,21 -122.270716275638,37.85306375747145,21 -122.2705265373647,37.85303127508107,21 -122.2704350135316,37.8536424596691,21 -122.2706406248653,37.85369639839555,21</coordinates></LinearRing></outerBoundaryIs>
     </Polygon>
 		</Placemark>
 		<Placemark>
@@ -10970,7 +10968,7 @@ South · 1625 beds · Under Construction</name>
 			<description><![CDATA[<b>Ashby BART</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Under Construction<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — Ashby BART: MLK Building D (6 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_Pre_Application__BART_Project_nolabel</styleUrl>
 			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
-      <outerBoundaryIs><LinearRing><coordinates>-122.270178,37.852950,21.0 -122.270187,37.853362,21.0 -122.269985,37.853365,21.0 -122.270142,37.852950,21.0 -122.270178,37.852950,21.0</coordinates></LinearRing></outerBoundaryIs>
+      <outerBoundaryIs><LinearRing><coordinates>-122.2700810289985,37.85308767061489,21 -122.2699292382412,37.85360419487623,21 -122.2701092654448,37.8536592947378,21 -122.2702420432416,37.8531390823056,21 -122.2700810289985,37.85308767061489,21</coordinates></LinearRing></outerBoundaryIs>
     </Polygon>
 		</Placemark>
 		<Placemark>
@@ -10984,7 +10982,7 @@ South · 1625 beds · Under Construction</name>
 			<description><![CDATA[<b>Ashby BART</b><br/><b>Units:</b> 0<br/><b>VLI Units:</b> 0<br/><b>Stories:</b> 6<br/><b>Height:</b> 21.0m<br/><b>Status:</b> Under Construction<br/><i>BART JOINT-DEVELOPMENT PLACEHOLDER — Ashby BART: MLK Building E (6 st). Massing from the published master plan, packed onto the real site parcels and sized by unit count; ORIENTATION IS A REGULAR GRID, NOT THE REAL SITE PLAN. Counts and heights are right, placement is approximate. BART self-permits on its own land, so there is no city Form 1.E for these. Source: data/reference/bart_developments.csv. 2026-08-26.</i>]]></description>
 			<styleUrl>#style_status_Pre_Application__BART_Project_nolabel</styleUrl>
 			<Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode>
-      <outerBoundaryIs><LinearRing><coordinates>-122.270357,37.853794,21.0 -122.270366,37.854194,21.0 -122.270870,37.854186,21.0 -122.270861,37.853786,21.0 -122.270357,37.853794,21.0</coordinates></LinearRing></outerBoundaryIs>
+      <outerBoundaryIs><LinearRing><coordinates>-122.2699596476169,37.85380855518564,21 -122.2699183923136,37.85405336093987,21 -122.2707674539057,37.85408263905389,21 -122.2707855228274,37.85384839520017,21 -122.2699596476169,37.85380855518564,21</coordinates></LinearRing></outerBoundaryIs>
     </Polygon>
 		</Placemark>
 		<Placemark>

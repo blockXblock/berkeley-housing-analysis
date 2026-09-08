@@ -137,7 +137,7 @@
                  scratch/2026-07-09/rhna_bar_derivation.py (fold into export_explorer_data_v2.py). -->
             <div class="bg-white rounded-xl shadow p-6 mb-8">
                 <h2 class="text-xl font-semibold mb-1">RHNA Progress (6th cycle, 2023&ndash;2031)</h2>
-                <p class="text-sm text-gray-600 mb-4">Target: <strong>8,934 units</strong>. RHNA credit is earned at
+                <p class="text-sm text-gray-600 mb-4">Target: <strong><span id="rhnaTotal">8,934</span> units</strong>. RHNA credit is earned at
                     <strong>building-permit issuance</strong>. Our independent count — first building permit issued on/after
                     June 30, 2022, across Berkeley's <em>entire</em> permit stream (every ADU and infill permit included):</p>
                 <div class="relative w-full bg-gray-200 rounded-full h-7 mb-1">
@@ -149,12 +149,12 @@
                 <p class="text-xs text-gray-500 mb-3">Dashed line: the state's own dashboard credits Berkeley
                     <strong>1,608 units (18.0%)</strong> — it lags the CY2025 filing. Our count is a floor: 2026 issuances
                     arrive with the next records release. By year (units first-permitted): 2022&nbsp;(from&nbsp;6/30)&nbsp;340 &middot;
-                    2023&nbsp;533 &middot; 2024&nbsp;595 &middot; 2025&nbsp;489.</p>
+                    2023&nbsp;533 &middot; 2024&nbsp;595 &middot; 2025&nbsp;489 &middot; 2026&nbsp;2 (feed&nbsp;lag).</p>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-2">
-                    <div class="bg-purple-50 rounded p-2 text-center"><div class="text-sm font-bold text-purple-700">209 / 2,446</div><div class="text-xs text-gray-500">Very-low income &middot; 9%</div></div>
-                    <div class="bg-purple-50 rounded p-2 text-center"><div class="text-sm font-bold text-purple-700">213 / 1,408</div><div class="text-xs text-gray-500">Low income &middot; 15%</div></div>
-                    <div class="bg-blue-50 rounded p-2 text-center"><div class="text-sm font-bold text-blue-700">105 / 1,416</div><div class="text-xs text-gray-500">Moderate &middot; 7%</div></div>
-                    <div class="bg-gray-50 rounded p-2 text-center"><div class="text-sm font-bold text-gray-700">1,081 / 3,664</div><div class="text-xs text-gray-500">Above-moderate &middot; 30%</div></div>
+                    <div class="bg-purple-50 rounded p-2 text-center"><div class="text-sm font-bold text-purple-700">209 / <span data-rhna="very_low">--</span></div><div class="text-xs text-gray-500">Very-low income &middot; <span data-rhna-pct="very_low" data-rhna-num="209">--</span>%</div></div>
+                    <div class="bg-purple-50 rounded p-2 text-center"><div class="text-sm font-bold text-purple-700">213 / <span data-rhna="low">--</span></div><div class="text-xs text-gray-500">Low income &middot; <span data-rhna-pct="low" data-rhna-num="213">--</span>%</div></div>
+                    <div class="bg-blue-50 rounded p-2 text-center"><div class="text-sm font-bold text-blue-700">105 / <span data-rhna="moderate">--</span></div><div class="text-xs text-gray-500">Moderate &middot; <span data-rhna-pct="moderate" data-rhna-num="105">--</span>%</div></div>
+                    <div class="bg-gray-50 rounded p-2 text-center"><div class="text-sm font-bold text-gray-700">1,081 / <span data-rhna="above_moderate">--</span></div><div class="text-xs text-gray-500">Above-moderate &middot; <span data-rhna-pct="above_moderate" data-rhna-num="1081">--</span>%</div></div>
                 </div>
                 <p class="text-xs text-gray-500">Income-tier split is <strong>HCD's own accounting</strong> (state RHNA dashboard) — the
                     public permit stream carries no affordability fields, so we cannot tier it independently. UC projects
@@ -312,41 +312,14 @@
             <div class="bg-white rounded-xl shadow p-6 mb-8">
                 <h2 class="text-xl font-semibold mb-4">Affordable Housing Metrics</h2>
 
-                <!-- RHNA by Income Level — HIDDEN 2026-06-02: was fabricated "rough ratio" estimates (totalVLI*0.46 etc.) over incl-UC totals; not defensible. Restore only with sourced income-tier completions. -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6" style="display:none">
-                    <div class="bg-purple-50 rounded-lg p-4 border border-purple-200">
-                        <div class="text-xs text-purple-600 font-medium">Very Low Income (VLI)</div>
-                        <div class="text-2xl font-bold text-purple-700"><span id="stat-rhna-vli">--</span></div>
-                        <div class="text-xs text-gray-500">of 1,786 RHNA (<span id="stat-rhna-vli-pct">--</span>%)</div>
-                        <div class="h-2 bg-gray-200 rounded-full mt-2">
-                            <div id="rhna-vli-bar" class="h-full bg-purple-500 rounded-full" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
-                        <div class="text-xs text-blue-600 font-medium">Low Income (LI)</div>
-                        <div class="text-2xl font-bold text-blue-700"><span id="stat-rhna-li">--</span></div>
-                        <div class="text-xs text-gray-500">of 825 RHNA (<span id="stat-rhna-li-pct">--</span>%)</div>
-                        <div class="h-2 bg-gray-200 rounded-full mt-2">
-                            <div id="rhna-li-bar" class="h-full bg-blue-500 rounded-full" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    <div class="bg-green-50 rounded-lg p-4 border border-green-200">
-                        <div class="text-xs text-green-600 font-medium">Moderate Income (MOD)</div>
-                        <div class="text-2xl font-bold text-green-700"><span id="stat-rhna-mod">--</span></div>
-                        <div class="text-xs text-gray-500">of 1,416 RHNA (<span id="stat-rhna-mod-pct">--</span>%)</div>
-                        <div class="h-2 bg-gray-200 rounded-full mt-2">
-                            <div id="rhna-mod-bar" class="h-full bg-green-500 rounded-full" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                        <div class="text-xs text-gray-600 font-medium">Above Moderate</div>
-                        <div class="text-2xl font-bold text-gray-700"><span id="stat-rhna-above">--</span></div>
-                        <div class="text-xs text-gray-500">of 5,261 RHNA (<span id="stat-rhna-above-pct">--</span>%)</div>
-                        <div class="h-2 bg-gray-200 rounded-full mt-2">
-                            <div id="rhna-above-bar" class="h-full bg-gray-500 rounded-full" style="width: 0%"></div>
-                        </div>
-                    </div>
-                </div>
+                <!-- The per-tier RHNA cards that stood here were hidden 2026-06-02 as fabricated
+                     ("rough ratio" estimates over incl-UC totals) and never restored. They are
+                     deleted 2026-09-07 rather than left dormant: their denominators read
+                     1,786/825/1,416/5,261, a set that appears in no Berkeley filing and does not
+                     even sum to 8,934, and hidden markup carrying wrong numbers is a trap for
+                     whoever un-hides it. The allocation now lives once, in
+                     housing_rules.RHNA_ALLOCATIONS, sourced to the city's APR Table B. Restore
+                     tier cards only with sourced income-tier completions, reading DATA.rhna. -->
 
                 <!-- Stacked Bar Chart -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -403,8 +376,8 @@
                         <div class="flex items-start"><span class="text-yellow-600 mr-2">🏫</span><strong>2556 Haste St:</strong> 1,113 beds (sourced)</div>
                     </div>
                     <div class="bg-indigo-100 rounded p-3 text-sm text-indigo-900">
-                        <strong>Combined:</strong> <span id="stat-combined-projects">--</span> projects total = <span id="stat-city-projects-2">362</span> private (12,248 units) + 4 UC (5,010 beds, group quarters)<br>
-                        <span class="text-xs">Note: UC Berkeley currently houses approximately 9,800 students in university housing. These three projects would add ~2,800 beds, increasing UC housing capacity by 29%. UC projects are exempt from city permitting and are not counted toward Berkeley's RHNA allocation of 8,934 units.</span>
+                        <strong>Combined:</strong> <span id="stat-combined-projects">--</span> projects total = <span id="stat-city-projects-2">--</span> private (<span id="stat-city-units-2">--</span> units) + <span id="stat-uc-projects-2">--</span> UC (<span id="stat-uc-beds-3">--</span> beds, group quarters)<br>
+                        <span class="text-xs">Note: UC Berkeley currently houses approximately 9,800 students in university housing. The <span id="stat-uc-pipeline-projects">--</span> UC projects not yet complete would add <span id="stat-uc-pipeline-beds">--</span> beds, increasing UC housing capacity by <span id="stat-uc-pipeline-pct">--</span>%. UC projects are exempt from city permitting and are not counted toward Berkeley's RHNA allocation of 8,934 units.</span>
                     </div>
                 </div>
 
@@ -787,10 +760,10 @@
                     <div class="bg-white rounded-lg p-3">
                         <div class="font-semibold text-blue-700 mb-1">Verification Results</div>
                         <ul class="text-gray-600 space-y-1">
-                            <li>• City reported: <strong>117 projects</strong></li>
-                            <li>• We matched: <strong>114 projects</strong></li>
-                            <li>• Match rate: <strong>97.4%</strong></li>
-                            <li>• Unit counts aligned within ±5%</li>
+                            <li>• City filed: <strong><span id="aprVerifCityRows">--</span> completion rows</strong></li>
+                            <li>• We matched: <strong><span id="aprVerifMatched">--</span> projects</strong></li>
+                            <li>• Match rate: <strong><span id="aprVerifRate">--</span>%</strong></li>
+                            <li>• Unmatched both ways: <strong><span id="aprVerifUnmatched">--</span></strong></li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-lg p-3">
@@ -805,50 +778,55 @@
 
             <!-- 2024 Comparison Stats -->
             <div class="bg-white rounded-xl shadow p-6 mb-6">
-                <h2 class="text-xl font-semibold mb-4">2024 APR Comparison Results</h2>
-                <div class="grid grid-cols-3 gap-4 mb-6">
+                <h2 class="text-xl font-semibold mb-1">Our Record vs the City's APR Filing</h2>
+                <p class="text-sm text-gray-600 mb-4">Completions compared to completions &mdash; the city's Table A2
+                    certificate-of-occupancy rows for <span id="aprYears">--</span>, matched to our projects by parcel
+                    (current APN, then prior APN where a parcel was re-platted, then address). State mirror pulled
+                    <span id="aprMirrorPulled">--</span>. UC group quarters excluded from both sides.</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                     <div class="text-center p-4 bg-green-50 rounded-lg">
-                        <div class="text-2xl font-bold text-green-600" id="aprMatched">114</div>
-                        <div class="text-sm text-gray-600">Matched Projects</div>
+                        <div class="text-2xl font-bold text-green-600" id="aprMatched">--</div>
+                        <div class="text-sm text-gray-600">Matched projects</div>
                     </div>
                     <div class="text-center p-4 bg-amber-50 rounded-lg">
-                        <div class="text-2xl font-bold text-amber-600" id="aprUnmatched">3</div>
-                        <div class="text-sm text-gray-600">Unmatched (ADUs)</div>
+                        <div class="text-2xl font-bold text-amber-600" id="aprCityOnly">--</div>
+                        <div class="text-sm text-gray-600">In the city's filing only</div>
+                        <div class="text-xs text-gray-500"><span id="aprCityOnlyUnits">--</span> units</div>
+                    </div>
+                    <div class="text-center p-4 bg-purple-50 rounded-lg">
+                        <div class="text-2xl font-bold text-purple-600" id="aprOursOnly">--</div>
+                        <div class="text-sm text-gray-600">In our record only</div>
+                        <div class="text-xs text-gray-500"><span id="aprOursOnlyUnits">--</span> units</div>
                     </div>
                     <div class="text-center p-4 bg-blue-50 rounded-lg">
-                        <div class="text-2xl font-bold text-blue-600">97.4%</div>
-                        <div class="text-sm text-gray-600">Match Rate</div>
+                        <div class="text-2xl font-bold text-blue-600"><span id="aprMatchRate">--</span>%</div>
+                        <div class="text-sm text-gray-600">Match rate</div>
                     </div>
                 </div>
 
                 <!-- Projects potentially missing -->
                 <div class="p-4 bg-amber-50 border border-amber-200 rounded-lg mb-4">
-                    <div class="font-semibold text-amber-700 mb-2">Projects Potentially Missing from City's 2024 APR (885 units)</div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                        <div class="bg-white p-3 rounded">
-                            <div class="font-bold">1974 Shattuck Ave</div>
-                            <div class="text-gray-600">599 units</div>
-                            <div class="text-xs text-gray-500">Entitled December 2024</div>
-                        </div>
-                        <div class="bg-white p-3 rounded">
-                            <div class="font-bold">1899 Oxford St</div>
-                            <div class="text-gray-600">212 units</div>
-                            <div class="text-xs text-gray-500">Pending final action</div>
-                        </div>
-                        <div class="bg-white p-3 rounded">
-                            <div class="font-bold">2955 Shattuck Ave</div>
-                            <div class="text-gray-600">74 units</div>
-                            <div class="text-xs text-gray-500">In corrections</div>
-                        </div>
-                    </div>
+                    <div class="font-semibold text-amber-700 mb-2">Completions in our record that the city's filing does not carry
+                        (<span id="aprMissingUnits">--</span> units)</div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm" id="aprMissingCards"></div>
+                </div>
+
+                <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg mb-4 text-sm text-blue-900">
+                    <strong>Reading the difference column.</strong> On <span id="aprMultiRow">--</span> projects the city
+                    filed more than one permit against what we model as a single project (split parcels, phased
+                    buildings). Those rows sum the city's permits, so the difference reads negative &mdash; that is our
+                    under-granularity, not the city over-counting. We checked: the city does <em>not</em> inflate.
+                    Across <span id="aprYears2">--</span> the city's filing totals <span id="aprCityUnits">--</span>
+                    completed units against our <span id="aprOurUnits">--</span>; the gap is decomposed in
+                    <code>scripts/reconcile_apr_vs_city.py</code>.
                 </div>
 
                 <canvas id="aprCompareChart"></canvas>
             </div>
 
-            <!-- 2024 APR Detail Table -->
+            <!-- City-vs-ours detail table (rows from DATA.city_apr) -->
             <div class="bg-white rounded-xl shadow overflow-hidden mb-6">
-                <h3 class="text-lg font-semibold p-4 border-b">City 2024 APR vs Our Independent Data</h3>
+                <h3 class="text-lg font-semibold p-4 border-b">Every row named: the city's filing vs our record</h3>
                 <table class="w-full text-sm">
                     <thead class="bg-gray-50">
                         <tr>
@@ -872,26 +850,20 @@
                     Independent analysis of Berkeley's 2025 housing production using primary data from Accela permits and field verification.
                 </p>
 
-                <!-- RHNA Progress Table -->
-                <div class="bg-white rounded-lg p-4 mb-4">
-                    <div class="font-semibold text-green-700 mb-3">RHNA Progress (Building Permits Issued Only)</div>
-                    <table class="w-full text-sm">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-3 py-2 text-left">Income Level</th>
-                                <th class="px-3 py-2 text-center">Permitted</th>
-                                <th class="px-3 py-2 text-center">RHNA Target</th>
-                                <th class="px-3 py-2 text-center">% of Goal</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-t"><td class="px-3 py-2">Very Low Income</td><td class="px-3 py-2 text-center font-medium">349</td><td class="px-3 py-2 text-center text-gray-500">1,786</td><td class="px-3 py-2 text-center text-green-600">19.5%</td></tr>
-                            <tr class="border-t"><td class="px-3 py-2">Low Income</td><td class="px-3 py-2 text-center font-medium">28</td><td class="px-3 py-2 text-center text-gray-500">1,028</td><td class="px-3 py-2 text-center text-amber-600">2.7%</td></tr>
-                            <tr class="border-t"><td class="px-3 py-2">Moderate Income</td><td class="px-3 py-2 text-center font-medium">28</td><td class="px-3 py-2 text-center text-gray-500">1,452</td><td class="px-3 py-2 text-center text-amber-600">1.9%</td></tr>
-                            <tr class="border-t"><td class="px-3 py-2">Above Moderate</td><td class="px-3 py-2 text-center font-medium">939</td><td class="px-3 py-2 text-center text-gray-500">4,668</td><td class="px-3 py-2 text-center text-green-600">20.1%</td></tr>
-                            <tr class="border-t bg-gray-50 font-semibold"><td class="px-3 py-2">Total</td><td class="px-3 py-2 text-center">1,344</td><td class="px-3 py-2 text-center">8,934</td><td class="px-3 py-2 text-center text-blue-600">15.0%</td></tr>
-                        </tbody>
-                    </table>
+                <!-- The RHNA table that stood here published the v2 tracked-project BP count
+                     (1,344 units / 15.0%) against an allocation — 1,786/1,028/1,452/4,668 — that
+                     appears in no Berkeley filing. Both halves were wrong. The count is the
+                     COVERAGE-LIMITED one: v2 models ~28 tracked projects with a materialized
+                     primary BP, against Berkeley's hundreds of housing BPs, so it understates
+                     real progress and must not be published as city progress. The RHNA bar at the
+                     top of the Dashboard is the full-permit-stream count and is the single RHNA
+                     account on this site. Removed 2026-09-07. -->
+                <div class="bg-white rounded-lg p-4 mb-4 text-sm text-gray-700">
+                    <span class="font-semibold text-green-700">RHNA progress</span> is reported once,
+                    on the Dashboard tab &mdash; counted across Berkeley's entire building-permit
+                    stream rather than the subset of projects tracked here, and measured against the
+                    <span id="rhnaAllocNote">8,934</span>-unit 6th-cycle allocation the city files
+                    with HCD.
                 </div>
 
                 <!-- Summary Stats -->

@@ -725,6 +725,7 @@ def get_documents(conn):
             d.notes
         FROM documents d
         LEFT JOIN vocabulary_document_types vdt ON vdt.id = d.document_type_id
+        WHERE d.merged_into_id IS NULL   -- retired duplicates stay in the table, off the site
         ORDER BY d.project_id, d.created_at DESC
     ''')
 

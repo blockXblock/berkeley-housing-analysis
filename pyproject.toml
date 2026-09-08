@@ -37,4 +37,8 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-include = ["scripts*"]
+include = ["scripts*", "experiments*"]
+# experiments/accela_scrape holds the harvester engine (url_discovery_scraper,
+# inspection_scraper, harvest_address, harvest_plansets) that scripts/ imports.
+# Without it here, `from experiments...` resolves only when cwd happens to be on
+# sys.path — which is never true for `python scripts/foo.py`.

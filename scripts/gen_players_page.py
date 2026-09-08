@@ -12,7 +12,7 @@ project, not contract knowledge; investors and construction lenders are NOT yet 
 the record (County Recorder deeds of trust + SOS filings — acquisition queued).
 
 MACHINERY: re-run after v2 changes, commit docs/players.html.
-Run: /opt/miniconda3/envs/jupyter_env/bin/python scripts/gen_players_page.py
+Run: .venv/bin/python scripts/gen_players_page.py
 """
 import json
 import os

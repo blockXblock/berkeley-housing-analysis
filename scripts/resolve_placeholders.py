@@ -12,7 +12,7 @@ FOOTPRINT:
 
 Output: data/reference/placeholder_corrections.csv (+ per-project geojson in the same dir) for the
 geometry session to promote into geometry.kml. Read-only on v2; writes only to data/reference/.
-Run: /opt/miniconda3/envs/jupyter_env/bin/python scripts/resolve_placeholders.py
+Run: .venv/bin/python scripts/resolve_placeholders.py
 """
 import sqlite3, re, json, os
 import pandas as pd

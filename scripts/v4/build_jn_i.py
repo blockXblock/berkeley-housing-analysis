@@ -10,7 +10,7 @@ House pattern: markdown(assumption+plan) -> code -> markdown(found+verify); deri
 external timestamped baseline (data/baselines/timelines_baseline_<date>.json, carrying v4 sha +
 classifier hash) — NEVER hardcoded answers in logic; plotly viz with text-sandwich mislead-guards.
 
-Run:  /opt/miniconda3/envs/jupyter_env/bin/python scripts/v4/build_jn_i.py   # emits the notebook
+Run:  .venv/bin/python scripts/v4/build_jn_i.py   # emits the notebook
 """
 import os
 

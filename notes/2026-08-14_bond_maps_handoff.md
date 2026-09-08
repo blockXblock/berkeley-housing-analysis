@@ -175,7 +175,7 @@ mechanism, `measure`/bond, `tax_bill_line`, the scenario layer). **§8** is what
 
 ## 8. Environment & discipline
 
-- **Python:** `/opt/miniconda3/envs/jupyter_env/bin/python` (geopandas, pandas, plotly, nbformat, nbconvert).
+- **Python:** `.venv/bin/python (was /opt/miniconda3/envs/jupyter_env/bin/python until the 2026-09-07 env consolidation)` (geopandas, pandas, plotly, nbformat, nbconvert).
 - **Serve a map:** `cd docs/maps && python3 -m http.server 8777`.
 - **Run a generator:** `python scripts/gen_<map>.py` **from repo root** (paths are repo-root-relative).
 - **Notebooks execute from repo root** — `ExecutePreprocessor(...).preprocess(nb, {'metadata':{'path':'.'}})`, not `nbconvert --execute` (which uses the notebook's dir and breaks relative paths).

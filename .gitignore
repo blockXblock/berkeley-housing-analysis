@@ -150,3 +150,4 @@ scratch/**/journals/
 # env consolidation (2026-09-07) — staging venv, not tracked
 .venv-new/
 uv.lock.tmp
+.venv-old/

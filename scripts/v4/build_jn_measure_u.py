@@ -13,7 +13,7 @@ asserts derived figures against data/baselines/measure_u_reconciliation_baseline
 Official TRS figures are SOURCE DATA (published constants w/ provenance), not derived
 results — they live in one OFFICIAL dict and are mirrored into the baseline to guard edits.
 
-Run:  /opt/miniconda3/envs/jupyter_env/bin/python scripts/v4/build_jn_measure_u.py
+Run:  .venv/bin/python scripts/v4/build_jn_measure_u.py
 (from repo root; executes the notebook via ExecutePreprocessor with path='.')
 """
 import nbformat as nbf

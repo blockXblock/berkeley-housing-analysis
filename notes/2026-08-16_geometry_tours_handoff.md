@@ -96,7 +96,7 @@ projects (ADUs / Middle Housing) vs the few big towers. John records the final v
 - Data: `data/reference/tabulation_footprints.csv` · `data/raw/berkeley_taxparcels_2026-08-12.geojson` (parcel polygons) · `databases/berkeley.db` (parcel lat/lon)
 
 ## 7. Env & discipline
-- Python: `/opt/miniconda3/envs/jupyter_env/bin/python`. PDF tools: `pdftotext`, `pymupdf`.
+- Python: `.venv/bin/python (was /opt/miniconda3/envs/jupyter_env/bin/python until the 2026-09-07 env consolidation)`. PDF tools: `pdftotext`, `pymupdf`.
 - APN joins: `housing_rules.to_canonical_apn(raw,"alameda")`.
 - `geometry.kml` is the **hand-edited canonical** — edit it surgically; packages are DERIVED (regenerate,
   never hand-edit). git is the snapshot. `dev` only; **John owns all pushes/deploys**.

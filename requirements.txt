@@ -1,29 +1,12 @@
-# Berkeley Housing Analysis - Dependencies
-# Install with: pip install -r requirements.txt
-
-# Core data analysis
-pandas>=1.3.0
-numpy>=1.21.0
-
-# Visualization
-matplotlib>=3.5.0
-folium>=0.12.0
-plotly>=5.0.0
-
-# Database
-sqlite-utils>=3.0
-
-# Jupyter
-jupyter>=1.0.0
-jupyterlab>=3.0.0
-nbconvert>=6.0.0
-
-# Utilities
-tabulate>=0.8.0
-PyYAML>=5.4.0
-requests>=2.25.0
-
-# Optional: Datasette deployment
-# datasette>=0.60.0
-# datasette-cluster-map>=0.17.0
-# datasette-publish-fly>=1.0.0
+# SUPERSEDED 2026-09-07 — dependencies now live in pyproject.toml + uv.lock.
+#
+# This file listed 14 packages while the real environments carried 114 and 239;
+# it had drifted into fiction. The measured dependency surface is 29 packages,
+# derived by AST-scanning every import in the repo (see
+# notes/2026-09-07_python_env_consolidation_plan.md S1.1).
+#
+# Set up the environment with:
+#     uv sync
+#
+# which builds .venv from uv.lock: Python 3.14.0, pandas 3.0.5.
+# Kept as a pointer so anything looking for requirements.txt finds its way.

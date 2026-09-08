@@ -5,7 +5,7 @@ baseline + the correction-store files, and the page carries its as-of stamp + ba
 baseline append regenerates the page truthfully (run this script after any reconciliation change).
 Prose is static; figures are injected.
 
-Run:  /opt/miniconda3/envs/jupyter_env/bin/python scripts/v4/build_audit_page.py
+Run:  .venv/bin/python scripts/v4/build_audit_page.py
 """
 import glob
 import html

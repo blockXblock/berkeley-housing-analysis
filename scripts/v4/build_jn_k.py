@@ -11,7 +11,7 @@ House pattern (JN-E exemplar): markdown(assumption+plan) -> code -> markdown(fou
 derive-and-compare to data/baselines/completion_anatomy_baseline_<date>.json; viz with
 mislead-guards; assumptions ledger. Read-only everywhere; writes only its baseline.
 
-Run:  /opt/miniconda3/envs/jupyter_env/bin/python scripts/v4/build_jn_k.py
+Run:  .venv/bin/python scripts/v4/build_jn_k.py
 """
 import os
 

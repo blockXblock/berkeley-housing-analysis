@@ -16,7 +16,7 @@ COMPLETENESS CAVEAT (measured): address-lookup misses permits filed under a CHAN
 (re-platting) — 2538 Durant returns only pre-demolition permits, not its new 8-story BP. The harvester
 FLAGS such cases (newest record older than the project's v2 activity) rather than silently dropping them.
 
-Run: /opt/miniconda3/envs/jupyter_env/bin/python scripts/harvest_agencycounter.py [--ids 1,2] [--all-nonterminal]
+Run: .venv/bin/python scripts/harvest_agencycounter.py [--ids 1,2] [--all-nonterminal]
 Resumable; polite. Output: data/reference/agencycounter_status_2026-08-27.csv
 """
 import sys, os, re, json, time, random, argparse, sqlite3

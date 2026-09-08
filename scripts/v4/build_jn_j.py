@@ -11,7 +11,7 @@ House pattern: markdown(assumption+plan) -> code -> markdown(found+verify); deri
 data/baselines/entitled_unbuilt_baseline_<date>.json; plotly viz with mislead-guards; assumptions
 ledger. Read-only everywhere; writes only its baseline on first run.
 
-Run:  /opt/miniconda3/envs/jupyter_env/bin/python scripts/v4/build_jn_j.py
+Run:  .venv/bin/python scripts/v4/build_jn_j.py
 """
 import os
 

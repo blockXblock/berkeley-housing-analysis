@@ -11,7 +11,7 @@ Inputs:  data/reference/block_headroom.csv  (per-block headroom, from block_head
          data/processed/berkeley_blocks_2020.geojson  (block polygons)
          data/reference/berkeley_neighborhoods.geojson  (district polygons + Name)
 Outputs: docs/maps/headroom_data.json (blocks w/ headroom props + district), docs/maps/headroom.html
-Run: /opt/miniconda3/envs/jupyter_env/bin/python scripts/gen_headroom_map.py
+Run: .venv/bin/python scripts/gen_headroom_map.py
 """
 import json
 import pandas as pd, geopandas as gpd

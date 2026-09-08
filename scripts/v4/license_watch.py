@@ -25,7 +25,7 @@ plainly operating). So a one-interval 'closed' is a SUSPECT, not a closure: the 
 K consecutive monthly snapshots (K>=3 spans any renewal grace window) — that persistence rule lives
 in the JN analysis layer; this watcher stays mechanical and just records what the city said when.
 
-Run:  /opt/miniconda3/envs/jupyter_env/bin/python scripts/v4/license_watch.py
+Run:  .venv/bin/python scripts/v4/license_watch.py
 """
 import csv
 import glob

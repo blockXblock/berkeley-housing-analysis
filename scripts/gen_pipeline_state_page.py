@@ -14,7 +14,7 @@ ANCHOR: the >=50u subset of these bins must equal JN-K's audited funnel figures
 (completion_anatomy_baseline_* latest) — mismatch halts generation.
 
 MACHINERY: re-run after any v2 change, then commit docs/pipeline-state.html.
-Run: /opt/miniconda3/envs/jupyter_env/bin/python scripts/gen_pipeline_state_page.py
+Run: .venv/bin/python scripts/gen_pipeline_state_page.py
 """
 import glob
 import json

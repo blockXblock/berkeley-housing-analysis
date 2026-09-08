@@ -34,8 +34,8 @@ The MAX assumes redevelopment (demolish existing to rebuild to envelope), exactl
 ("or demolish and add multiunits") — so existing units are subtracted at the BLOCK level.
 
 Read-only. Output: data/reference/block_headroom.csv (per block) + data/reference/
-neighborhood_headroom.csv (rollup). Run: /opt/miniconda3/envs/jupyter_env/bin/python scripts/block_headroom.py
-(or the repo .venv with geopandas).
+neighborhood_headroom.csv (rollup). Run: .venv/bin/python scripts/block_headroom.py
+(the repo .venv; it carries pandas + geopandas + numpy).
 """
 import sqlite3, warnings
 import numpy as np, pandas as pd, geopandas as gpd

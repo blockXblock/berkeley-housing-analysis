@@ -15,7 +15,7 @@ of rectangular footprints, sized by units, extruded to stories x 3.5 m (matching
 convention). Output: kml/geometry/bart_placeholders.kml (extruded) + data/reference/bart_developments.csv.
 Placeholder only — orientation/placement is approximate; the geometry session refines + integrates to tours.
 
-Run: /opt/miniconda3/envs/jupyter_env/bin/python scripts/gen_bart_placeholders.py
+Run: .venv/bin/python scripts/gen_bart_placeholders.py
 """
 import geopandas as gpd, pandas as pd, math, warnings
 from shapely.geometry import Point, Polygon, box

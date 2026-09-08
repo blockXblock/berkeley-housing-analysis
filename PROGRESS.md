@@ -35,11 +35,30 @@ Bucket now **314 objects / 10.36 GB**.
 of the Bluebeam original from 2026-02-18 08:15:38. **The re-save added nothing**, so the duplicate
 was deleted; local copy kept at `scratch/2026-09-07/shattuck_compare/`.
 
-**PRIMARY-SOURCE ARCHITECT CONFIRMATION (matters beyond hygiene).** The 2190 Shattuck title block
-reads **"consent of SDT ARCHITECTS"** with `2421 Fourth Street, Berkeley` / `TrachtenbergArch.com`
-— i.e. **Stackhouse De la Peña Trachtenberg Architects from the DRAWINGS**, not the applicant field
-v2 had been crediting. Independently corroborates today's organizations merge. Job **2129**; sheets
+**PRIMARY-SOURCE ARCHITECT READING.** The 2190 Shattuck title block reads **"consent of SDT
+ARCHITECTS"** with `2421 Fourth Street, Berkeley` / `TrachtenbergArch.com`. Job **2129**; sheets
 **A0.0-A2.2**; revisions **10.22.2025** (SB330 / UP Modification) and **02.13.2026**.
+**CORRECTION (same day):** an earlier draft of this entry said v2 had been crediting proj35 from the
+applicant field. **Wrong** — verified in the DB: proj35 already carried an `architect_design` row
+asserted by **`planset_title_block_2026-09-02`**, i.e. someone had already read it off the drawings.
+It *also* has a separate `applicant` row from `tabulation_form_applicant_2026-09-02`. So this
+extraction **corroborates an existing drawings-based reading**; it does not replace a guess.
+
+**THE FINDING THAT MATTERS IS ABOUT PROVENANCE, NOT THIS PROJECT (from berkeley-data-65, scope
+verified here).** Of **50** architect rows in `project_participants` (roles 5/6): **44 are
+`migration_v1_to_v2_20260507`**, only **6 are `planset_title_block_2026-09-02`**. Checked against
+plan-set title blocks, the split is stark:
+
+| provenance | agree | DISAGREE | unread |
+|---|---|---|---|
+| `migration_v1_to_v2_20260507` | 13 | **9** | 1 |
+| `planset_title_block_2026-09-02` | 6 | **0** | 0 |
+
+**Every disagreement is a migration row (~41% wrong); every drawings-sourced row is right, 6/6.** So
+the defect is bounded and fixable: **the v1->v2 migration's architect attributions are unreliable;
+re-derive from the drawings.** ~21 migration rows covering **5,374 units** have a plan set on R2 and
+are unchecked — at the observed rate roughly **nine more are wrong**. The 6/6 doubles as validation
+of the OCR method. **QUEUED, John's call — a content correction, not a migration side effect.**
 
 **boto3 / the R2 write path is now fully exercised** — `copy_object` + `delete_object` against live
 142 MB objects, each verified by ContentLength and public HTTP 200 before any deletion. That closes

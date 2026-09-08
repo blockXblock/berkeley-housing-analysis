@@ -121,7 +121,44 @@ identities hold; the deliberate remainder stays 6 blocks / 13 parcels; 0 numeric
   generators write via json/csv, which normalize dtype away. The 56% memory win is real but invisible
   at the artefact boundary.
 
-**Next: Phase 3** - editable install; rewrite the 92 `sys.path` sites to `from scripts.housing_rules
+**Phase 3 DONE (same day) - 107 sys.path insertions removed, 15/15 gate still green.** Commits
+`7252802` (package markers) + `e7edc0c` (the rewrite, 83 files, 75+/156-).
+
+- **5 `__init__.py`** added (`scripts/v4`, `migration`, `finance_curriculum`, `tax_incidence`,
+  `build_v2`) - verified purely additive before proceeding.
+- **Editable install** into `.venv-new`; `from scripts.housing_rules import ...` now resolves from
+  ANY cwd.
+- **Rewrite: 107 sites gone** (87 lines - 20 `build_v2/` files carried TWO per line), **76 imports
+  re-pointed**, 0 syntax errors, 0 residual sites. **Done by AST, not regex** - the parse caught
+  **6 aliased `import sys as _sys`** and **9 function-local** sites a literal rewrite would skip.
+- **8 of 9 function-local sites deleted, 1 preserved**: `tour_staleness.visible_change_for()` has a
+  real `except ImportError` + degraded return + a comment recording why ("A checker that fails
+  quietly is worse than no checker"). Guard untouched; only the path line and import target moved.
+- **D6 done**: `import fitz` -> `import pymupdf as fitz`, 3 files / 4 sites (two function-local, so
+  an anchored sed missed them first pass). **D7 needs no action** - `fuzzywuzzy` survives only in an
+  archived notebook that pip-installs it on demand, never in `scripts/`.
+
+**THE SEQUENCING TRAP THAT NEARLY BROKE EVERYTHING (found by testing, not assumption):** running
+`python scripts/foo.py` sets `sys.path[0]` to **`scripts/`, NOT the repo root**, so the rewritten
+`from scripts.x import y` fails with `ModuleNotFoundError: No module named 'scripts'` under any
+interpreter WITHOUT the editable install. A rewrite before the swap would have broken every
+generator for the other live session. **The plan's Phase 3-before-Phase-4 order was WRONG.**
+Resolved on John's call (option 1) by putting the repo root on `jupyter_env`'s path:
+**`/opt/miniconda3/envs/jupyter_env/lib/python3.12/site-packages/_berkeley_data_repo_root.pth`**
+- ONE file, fully reversible, **zero dependency changes** (freeze-diffed: only `berkeley-data==0.1.0`
+appears, every real package identical). **DELETE THAT .pth at Phase 5** when jupyter_env retires.
+
+**Verified both interpreters:** both `housing_rules` suites pass, and all 15 gate artifacts reproduce
+the rev-3 baseline byte-identically under `.venv-new` AND `jupyter_env`.
+
+**Next: Phase 4** - retirement. 13 `Run:` banners still name the conda interpreter; `MASTER_ANALYSIS
+.ipynb` kernelspec; `requirements.txt` (still fiction - 14 packages vs a real 29); the wrong
+`.venv`-has-geopandas note at `block_headroom.py:37-38`; `.claude/settings.local.json` permission
+entries; and the **`.venv` -> `.venv-old`, `.venv-new` -> `.venv` swap**. Then Phase 5 decommission
+(including that .pth). **Also queued**: `scripts/v4/build_audit_page.py` is now runnable again, so
+`docs/housing-audit.html` becomes regenerable - it is pinned to `reconciliation_baseline_2026-07-03i
+.json` and its 4,229/4,099 figures are a published claim, so **John calls that regeneration; it is
+not a migration side effect.** Superseded next-step (Phase 3) - was: editable install; rewrite the 92 `sys.path` sites to `from scripts.housing_rules
 import ...` (D2); add `__init__.py` to `scripts/v4`, `scripts/migration`, `scripts/finance_curriculum`;
 D6 `fitz`->`pymupdf` (5 sites); D7 `fuzzywuzzy`->`rapidfuzz` (2 sites). Then Phase 4 retirement
 (13 `Run:` banners, MASTER_ANALYSIS kernelspec, requirements.txt, the `.venv`/`.venv-new` swap) and

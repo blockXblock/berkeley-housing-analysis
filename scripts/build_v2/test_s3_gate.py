@@ -9,8 +9,8 @@ findings separation / wiring drifts. Asserts:
 Run: python scripts/build_v2/test_s3_gate.py
 """
 import sys, os, sqlite3
-import build_s3, s0_keys, gating
-from build_s3 import derive_all, v1_stages, reconcile_vs_v1, normalize_address, RANK, V2
+from scripts.build_v2 import build_s3, s0_keys, gating
+from scripts.build_v2.build_s3 import derive_all, v1_stages, reconcile_vs_v1, normalize_address, RANK, V2
 
 FAILS = []
 def check(c, m):

@@ -14,7 +14,7 @@ loads interleaved) and a FRESH browser context per project. Run in .venv:
 import sys, os, time, re, argparse, random
 import pandas as pd, sqlite3
 
-from harvest_address import search_by_address
+from experiments.accela_scrape.harvest_address import search_by_address
 from playwright.sync_api import sync_playwright
 
 OUT = "scratch/2026-08-23/phase2_discovered_queue.csv"

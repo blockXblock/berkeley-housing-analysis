@@ -8,8 +8,8 @@ wiring drifts. Runs the real S2 assembly and asserts the acceptance gate:
 Run: python scripts/build_v2/test_s2_gate.py
 """
 import sys, os
-import build_s2, s0_keys, housing_predicates
-from build_s2 import assemble, normalize_address
+from scripts.build_v2 import build_s2, s0_keys, housing_predicates
+from scripts.build_v2.build_s2 import assemble, normalize_address
 
 FAILS = []
 def check(c, m):

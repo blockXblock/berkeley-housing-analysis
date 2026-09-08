@@ -31,7 +31,7 @@ from pathlib import Path
 # inspection_scraper lives in experiments/accela_scrape/
 # Resolve its path relative to this script's repo location.
 _REPO_ROOT = Path(__file__).parent.parent
-from inspection_scraper import scrape_inspections
+from experiments.accela_scrape.inspection_scraper import scrape_inspections
 
 
 # Default paths (relative to script location)

@@ -15,8 +15,8 @@ Read-only. Output: data/reference/staff_report_sizing.csv. Run in .venv (single 
 import sys, os, time, re, json, random
 import pandas as pd
 
-import harvest_plansets as H
-from harvest_address import search_by_address
+from experiments.accela_scrape import harvest_plansets as H
+from experiments.accela_scrape.harvest_address import search_by_address
 from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout
 
 OUT = "data/reference/staff_report_sizing.csv"

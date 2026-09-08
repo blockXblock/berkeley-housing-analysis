@@ -22,8 +22,8 @@ S3 derives stage from s2_events only; it does not need the housing predicates (n
 import sqlite3, sys, os, argparse
 from collections import defaultdict, Counter
 HERE = os.path.dirname(__file__)
-from s0_keys import normalize_address
-from gating import snapshot_v3                          # the SHARED snapshot helper (refuses to clobber)
+from scripts.build_v2.s0_keys import normalize_address
+from scripts.build_v2.gating import snapshot_v3                          # the SHARED snapshot helper (refuses to clobber)
 
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 V3 = os.path.join(ROOT, 'databases', 'berkeley_housing_v3.db')

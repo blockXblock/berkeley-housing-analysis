@@ -17,7 +17,7 @@ anyone remembering to add it.
 """
 import argparse, collections, os, re, sys
 
-import stage_legend_svg
+from scripts.viz import stage_legend_svg
 
 GEOM = "kml/geometry/geometry.kml"
 PAGE = "docs/index.html"

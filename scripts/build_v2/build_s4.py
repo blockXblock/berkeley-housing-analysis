@@ -14,9 +14,9 @@ Imports s0_keys + housing_predicates + gating. --preview is READ-ONLY.
 import sqlite3, sys, os, argparse
 import pandas as pd
 HERE = os.path.dirname(__file__)
-from s0_keys import normalize_address
-from housing_predicates import net_units
-from gating import snapshot_v3
+from scripts.build_v2.s0_keys import normalize_address
+from scripts.build_v2.housing_predicates import net_units
+from scripts.build_v2.gating import snapshot_v3
 from scripts.cpra_dedup import extract_master_permit
 
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))

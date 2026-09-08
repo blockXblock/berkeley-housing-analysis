@@ -43,7 +43,7 @@ import statistics
 import subprocess
 import sys
 
-from parse_bills import parse  # noqa: E402
+from scripts.tax_incidence.parse_bills import parse  # noqa: E402
 
 BILLS = os.path.expanduser(sys.argv[1] if len(sys.argv) > 1 else "~/Desktop/Alameda/parcels")
 EXTRA = os.path.expanduser("~/Desktop/Alameda/2026-06-29-Alameda_County-Property-Tax.pdf")

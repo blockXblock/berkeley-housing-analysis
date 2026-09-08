@@ -7,8 +7,8 @@ logic / canonical units / wiring drifts. Asserts:
 Run: python scripts/build_v2/test_s4_gate.py
 """
 import sys, os, sqlite3
-import build_s4, s0_keys, housing_predicates, gating
-from build_s4 import resolve_reconcile, normalize_address, V3
+from scripts.build_v2 import build_s4, s0_keys, housing_predicates, gating
+from scripts.build_v2.build_s4 import resolve_reconcile, normalize_address, V3
 
 FAILS = []
 def check(c, m):

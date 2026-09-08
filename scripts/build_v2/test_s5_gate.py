@@ -9,8 +9,8 @@ market-by-subtraction bug, or the wiring re-appears. Asserts:
 Run: python scripts/build_v2/test_s5_gate.py
 """
 import sys, os, sqlite3
-import build_s5, s0_keys, gating
-from build_s5 import genuine_cited, V3
+from scripts.build_v2 import build_s5, s0_keys, gating
+from scripts.build_v2.build_s5 import genuine_cited, V3
 
 FAILS = []
 def check(c, m):

@@ -17,9 +17,9 @@ import sqlite3, sys, os, argparse, re
 from collections import defaultdict
 import pandas as pd
 HERE = os.path.dirname(__file__)
-from s0_keys import normalize_address, AddressKey, canonicalize_apn
-from housing_predicates import is_housing, net_units    # the shared housing predicates (single source)
-from gating import snapshot_v3                           # the SHARED snapshot helper (refuses to clobber)
+from scripts.build_v2.s0_keys import normalize_address, AddressKey, canonicalize_apn
+from scripts.build_v2.housing_predicates import is_housing, net_units    # the shared housing predicates (single source)
+from scripts.build_v2.gating import snapshot_v3                           # the SHARED snapshot helper (refuses to clobber)
 from scripts.cpra_dedup import extract_master_permit
 
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))

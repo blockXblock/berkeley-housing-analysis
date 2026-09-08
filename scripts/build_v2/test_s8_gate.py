@@ -17,9 +17,9 @@ Run: python scripts/build_v2/test_s8_gate.py
 """
 import sys, os, sqlite3
 from collections import Counter
-import build_s8, s0_keys, gating, housing_predicates
+from scripts.build_v2 import build_s8, s0_keys, gating, housing_predicates
 import housing_rules as hr
-from build_s8 import V3, SOURCE_COUNTS, SYNTH_COUNTS
+from scripts.build_v2.build_s8 import V3, SOURCE_COUNTS, SYNTH_COUNTS
 
 FAILS = []
 def check(c, m):

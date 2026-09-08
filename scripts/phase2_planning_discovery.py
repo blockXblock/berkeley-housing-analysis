@@ -14,8 +14,8 @@ engine. Resumable (per-project). Polite (delays between record loads + projects)
 import sys, os, time, re, json, random
 import pandas as pd
 
-import harvest_plansets as H
-from harvest_address import search_by_address   # takes a page — no nested sync_playwright
+from experiments.accela_scrape import harvest_plansets as H
+from experiments.accela_scrape.harvest_address import search_by_address   # takes a page — no nested sync_playwright
 from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout
 
 CSV_IN = "data/reference/harvest_priority_plansets.csv"

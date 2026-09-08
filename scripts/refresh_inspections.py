@@ -15,8 +15,8 @@ Read-only. Run in the .venv: .venv/bin/python scripts/refresh_inspections.py
 """
 import sys, os, json, csv, datetime, traceback
 
-from url_discovery_scraper import discover_url
-from inspection_scraper import scrape_inspections
+from experiments.accela_scrape.url_discovery_scraper import discover_url
+from experiments.accela_scrape.inspection_scraper import scrape_inspections
 
 TARGETS = "scratch/2026-08-27/granular_inspection_targets.csv"
 OUTDIR = "data/raw/accela_inspections"

@@ -18,7 +18,7 @@ TWO distinct predicates — keep them distinct, it matters (see build_v2_lessons
                      but EXISTING stock on a plain alteration -> 0 (else a 4,239-unit over-count).
 """
 import re
-from s0_keys import is_adu                              # the ONE ADU-flag reader (bool/np.bool/'Yes')
+from scripts.build_v2.s0_keys import is_adu                              # the ONE ADU-flag reader (bool/np.bool/'Yes')
 
 
 def _f(x):

@@ -26,11 +26,11 @@ from collections import defaultdict, Counter
 from datetime import date
 import pandas as pd
 HERE = os.path.dirname(__file__)
-import s0_keys
-from s0_keys import normalize_address
-import housing_predicates
-from housing_predicates import is_housing, net_units
-from gating import snapshot_v3
+from scripts.build_v2 import s0_keys
+from scripts.build_v2.s0_keys import normalize_address
+from scripts.build_v2 import housing_predicates
+from scripts.build_v2.housing_predicates import is_housing, net_units
+from scripts.build_v2.gating import snapshot_v3
 import housing_rules as hr
 from scripts.cpra_dedup import extract_master_permit
 

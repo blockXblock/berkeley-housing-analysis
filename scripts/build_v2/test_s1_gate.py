@@ -11,10 +11,10 @@ Runs the real S1 derivation against live CPRA + v3.s0_key_index and asserts the 
 Run: python -m scripts.build_v2.test_s1_gate   (or: python scripts/build_v2/test_s1_gate.py)
 """
 import sys, os
-import build_s1
-import s0_keys
-from build_s1 import build_spine, classify, load_s0_index, tier1_check, scan_attaches, normalize_address, is_housing, net_units
-from s0_keys import is_adu
+from scripts.build_v2 import build_s1
+from scripts.build_v2 import s0_keys
+from scripts.build_v2.build_s1 import build_spine, classify, load_s0_index, tier1_check, scan_attaches, normalize_address, is_housing, net_units
+from scripts.build_v2.s0_keys import is_adu
 import numpy as _np
 
 FAILS = []
@@ -27,7 +27,7 @@ check(build_s1.normalize_address is s0_keys.normalize_address,
 check(build_s1.AddressKey is s0_keys.AddressKey, "WIRING: build_s1.AddressKey is not s0_keys.AddressKey")
 check(build_s1.canonicalize_apn is s0_keys.canonicalize_apn,
       "WIRING: build_s1.canonicalize_apn is NOT s0_keys.canonicalize_apn (APN-canon reimplementation/drift)")
-import housing_predicates as _hp
+from scripts.build_v2 import housing_predicates as _hp
 check(build_s1.is_housing is _hp.is_housing and build_s1.net_units is _hp.net_units,
       "WIRING: build_s1 must use the shared housing_predicates.is_housing/net_units (no inline copy)")
 check(_hp.is_adu is s0_keys.is_adu, "WIRING: housing_predicates must use the shared s0_keys.is_adu")

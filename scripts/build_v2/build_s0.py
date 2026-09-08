@@ -13,7 +13,7 @@ Imports s0_keys (the single canon) — never reimplements key logic (anti-drift)
 import sqlite3, sys, os, argparse, hashlib
 from collections import defaultdict
 HERE = os.path.dirname(__file__)
-from s0_keys import normalize_address, disambiguate_distinct, canonicalize_apn
+from scripts.build_v2.s0_keys import normalize_address, disambiguate_distinct, canonicalize_apn
 from scripts.cpra_dedup import extract_master_permit
 
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))

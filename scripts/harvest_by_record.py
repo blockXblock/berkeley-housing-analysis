@@ -22,8 +22,8 @@ gated step). Resumable, polite (5-15s between records). Run in .venv:
 import sys, os, time, random, argparse, re
 import pandas as pd
 
-import harvest_plansets as H
-from url_discovery_scraper import discover_url
+from experiments.accela_scrape import harvest_plansets as H
+from experiments.accela_scrape.url_discovery_scraper import discover_url
 
 STAGE = "scratch/2026-08-23/harvest_stage_phase2"
 H.STAGE = STAGE

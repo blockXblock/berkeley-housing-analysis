@@ -22,10 +22,10 @@ import sqlite3, sys, os, argparse
 from collections import Counter
 from datetime import date
 HERE = os.path.dirname(__file__)
-import s0_keys
-from s0_keys import normalize_address
-import housing_predicates  # single-source predicate module; net_units NOT called by design (gather, not re-derive)
-from gating import snapshot_v3
+from scripts.build_v2 import s0_keys
+from scripts.build_v2.s0_keys import normalize_address
+from scripts.build_v2 import housing_predicates  # single-source predicate module; net_units NOT called by design (gather, not re-derive)
+from scripts.build_v2.gating import snapshot_v3
 import housing_rules as hr
 
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))

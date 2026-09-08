@@ -11,8 +11,8 @@ s0_keys, housing_predicates, cpra_dedup; observes parcel_lineage (v2) as CANDIDA
 """
 import sqlite3, sys, os, argparse, re
 from collections import defaultdict
-import build_s1
-from s0_keys import normalize_address
+from scripts.build_v2 import build_s1
+from scripts.build_v2.s0_keys import normalize_address
 from scripts.cpra_dedup import extract_master_permit
 from scripts.housing_rules.apn import to_canonical_apn
 

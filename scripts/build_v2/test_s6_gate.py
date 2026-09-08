@@ -10,8 +10,8 @@ Run: python scripts/build_v2/test_s6_gate.py
 """
 import sys, os, sqlite3
 from collections import defaultdict, Counter
-import build_s6, s0_keys, gating
-from build_s6 import derive_confidence, V3
+from scripts.build_v2 import build_s6, s0_keys, gating
+from scripts.build_v2.build_s6 import derive_confidence, V3
 
 FAILS = []
 def check(c, m):

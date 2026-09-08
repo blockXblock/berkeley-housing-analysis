@@ -15,9 +15,9 @@ Run: python scripts/build_v2/test_s9_gate.py
 """
 import sys, os, sqlite3
 from collections import Counter
-import build_s9, s0_keys, gating, housing_predicates, cpra_dedup
+import cpra_dedup; from scripts.build_v2 import build_s9, s0_keys, gating, housing_predicates
 import housing_rules as hr
-from build_s9 import V3, MIRROR
+from scripts.build_v2.build_s9 import V3, MIRROR
 
 FAILS = []
 def check(c, m):

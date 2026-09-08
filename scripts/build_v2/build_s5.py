@@ -20,8 +20,8 @@ Imports s0_keys + housing_predicates + gating. --preview is READ-ONLY.
 import sqlite3, sys, os, argparse
 from collections import defaultdict
 HERE = os.path.dirname(__file__)
-from s0_keys import normalize_address
-from gating import snapshot_v3
+from scripts.build_v2.s0_keys import normalize_address
+from scripts.build_v2.gating import snapshot_v3
 
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 V3 = os.path.join(ROOT, 'databases', 'berkeley_housing_v3.db')

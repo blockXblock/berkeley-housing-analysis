@@ -14,9 +14,9 @@ Run: python scripts/build_v2/test_s7_gate.py
 """
 import sys, os, sqlite3
 from collections import defaultdict
-import build_s7, s0_keys, gating, housing_predicates
+from scripts.build_v2 import build_s7, s0_keys, gating, housing_predicates
 import housing_rules as hr
-from build_s7 import V3
+from scripts.build_v2.build_s7 import V3
 
 FAILS = []
 def check(c, m):

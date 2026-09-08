@@ -7,7 +7,7 @@ This is the anti-drift guard: every later stage imports s0_keys; this test is wh
 silent change to normalize_address / AddressKey.matches / disambiguate_distinct.
 """
 import sys, os
-from s0_keys import normalize_address as N, disambiguate_distinct as D, canonicalize_apn
+from scripts.build_v2.s0_keys import normalize_address as N, disambiguate_distinct as D, canonicalize_apn
 
 FAILS = []
 def check(cond, msg):

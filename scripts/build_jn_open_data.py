@@ -70,20 +70,18 @@ something an outside party reconstructs years later.
 """)
 
 code(r"""
-# ── BOOTSTRAP ────────────────────────────────────────────────────────────────
-# Runs anywhere. In Colab it clones the public repo; locally it uses what you have.
-import os, sys, subprocess, sqlite3
+# ── SETUP ────────────────────────────────────────────────────────────────────
+# Runs anywhere with no setup. The figures below are EMBEDDED with their provenance,
+# because the reconstruction database is not distributed with the public repository
+# (databases/ is gitignored — the repo carries code, not data). If you DO have the
+# repo and its databases locally, every figure is re-derived from source and checked.
+import os, sqlite3
 import pandas as pd
 
-REPO = "https://github.com/blockXblock/berkeley-housing-analysis.git"
-if not os.path.exists("databases/berkeley_housing_v3.db"):
-    if not os.path.exists("berkeley-housing-analysis"):
-        print("cloning the public repo (a few minutes — it carries the databases)...")
-        subprocess.run(["git","clone","--depth","1",REPO], check=True)
-    os.chdir("berkeley-housing-analysis")
-print("working directory:", os.getcwd())
 V3 = "databases/berkeley_housing_v3.db"
-print("reconstruction db present:", os.path.exists(V3))
+HAVE_REPO = os.path.exists(V3)
+print("reconstruction database present:", HAVE_REPO)
+print("mode:", "RE-DERIVING from source" if HAVE_REPO else "using embedded figures (derived 2026-09-09)")
 """)
 
 md(r"""
@@ -113,6 +111,16 @@ can be re-run from the stage before it. Nothing is hand-edited.
 **The two ends are what matter.** S0 starts from files anyone can request under the Public Records Act.
 S9 ends at a table that says, year by year, how far the reconstruction sits from what the city told the
 state — and S8 says *why*.
+
+> **A note on what this notebook can and cannot hand you.** The public repository carries the *code*,
+> not the *data* — the databases are gitignored, as they should be. So the figures below travel with
+> this notebook as **embedded values with their provenance attached**, and it runs anywhere with no
+> setup. If you have the repository and its databases locally, the same cells **re-derive every figure
+> from source** and tell you whether the embedded copy still agrees.
+>
+> **The curriculum in §5a is the runnable version.** Those notebooks fetch the actual primary sources —
+> the raw CPRA permit spreadsheets and the HCD APR mirror — from public object storage, so a student
+> builds the reconstruction rather than reading someone else's numbers.
 """)
 
 code(r"""
@@ -137,11 +145,30 @@ worth making.
 """)
 
 code(r"""
-con = sqlite3.connect(f"file:{V3}?mode=ro", uri=True)
-SQL = ("SELECT reporting_year AS year, v3_co_units AS reconstruction, "
-       "city_co_units AS city_filed, delta, v3_co_buildings AS buildings "
-       "FROM s9_scorecard ORDER BY reporting_year")
-score = pd.read_sql(SQL, con)
+# S9 SCORECARD — CO completions per reporting year: reconstruction vs the city's filed APR.
+# Derived 2026-09-09 from databases/berkeley_housing_v3.db (table s9_scorecard).
+EMBEDDED_SCORECARD = [
+    {"year": 2018, "reconstruction": 228, "city_filed": 229, "delta": -1, "buildings": 65},
+    {"year": 2019, "reconstruction": 309, "city_filed": 313, "delta": -4, "buildings": 98},
+    {"year": 2020, "reconstruction": 398, "city_filed": 405, "delta": -7, "buildings": 77},
+    {"year": 2021, "reconstruction": 368, "city_filed": 331, "delta": 37, "buildings": 116},
+    {"year": 2022, "reconstruction": 679, "city_filed": 828, "delta": -149, "buildings": 101},
+    {"year": 2023, "reconstruction": 845, "city_filed": 716, "delta": 129, "buildings": 162},
+    {"year": 2024, "reconstruction": 783, "city_filed": 708, "delta": 75, "buildings": 141},
+    {"year": 2025, "reconstruction": 700, "city_filed": 492, "delta": 208, "buildings": 191},
+]
+score = pd.DataFrame(EMBEDDED_SCORECARD)
+
+if HAVE_REPO:                       # re-derive and prove the embedded copy still matches
+    con = sqlite3.connect(f"file:{V3}?mode=ro", uri=True)
+    SQL = ("SELECT reporting_year AS year, v3_co_units AS reconstruction, "
+           "city_co_units AS city_filed, delta, v3_co_buildings AS buildings "
+           "FROM s9_scorecard ORDER BY reporting_year")
+    live = pd.read_sql(SQL, con)
+    agree = live.reset_index(drop=True).equals(score.reset_index(drop=True))
+    print("re-derived from source:", "AGREES with embedded" if agree else "DRIFTED — refresh the notebook")
+    score = live
+
 score["abs_delta"] = score.delta.abs()
 print(score.to_string(index=False))
 
@@ -184,14 +211,40 @@ sometimes, which **RHNA cycle** they count toward.
 """)
 
 code(r"""
-types = pd.read_sql("SELECT finding_type, COUNT(*) n FROM s8_reconciliation "
-                    "GROUP BY 1 ORDER BY n DESC", con)
-print(types.to_string(index=False))
+# S8 — every disagreement the pipeline found, by type (90 findings), and one worked case.
+EMBEDDED_FINDING_TYPES = [
+    ("stage_reconcile", 33),
+    ("xaddr_review", 22),
+    ("apn_overlap", 13),
+    ("crosscheck_summary", 6),
+    ("unit_reconcile", 6),
+    ("measurement_basis", 4),
+    ("date_reconcile", 3),
+    ("entitlement_date_gap", 1),
+    ("multi_building_development", 1),
+    ("rhna_scope_question", 1),
+]
+EMBEDDED_EXAMPLE = {
+    "subject":      "B2018-03576",
+    "v3_value":     "CPRA 2020-01-10 (is_inferred=0)",
+    "other_value":  "v2 2025-08-12",
+    "other_source": "v2",
+    "magnitude":    "2041d; reporting-year 2020->2025; CALENDAR_CYCLE 5th->6th",
+}
+types = pd.DataFrame(EMBEDDED_FINDING_TYPES, columns=["finding_type","n"])
+example = EMBEDDED_EXAMPLE
 
+if HAVE_REPO:
+    types = pd.read_sql("SELECT finding_type, COUNT(*) n FROM s8_reconciliation "
+                        "GROUP BY 1 ORDER BY n DESC", con)
+    example = pd.read_sql("SELECT subject, v3_value, other_value, other_source, magnitude "
+                          "FROM s8_reconciliation WHERE finding_type='date_reconcile' LIMIT 1",
+                          con).iloc[0].to_dict()
+
+print(types.to_string(index=False))
+print(f"\n  total findings: {int(types.n.sum())}")
 print("\n── a worked date disagreement ─────────────────────────────────────────")
-ex = pd.read_sql("SELECT subject, v3_value, other_value, other_source, magnitude "
-                 "FROM s8_reconciliation WHERE finding_type='date_reconcile' LIMIT 1", con)
-for k, v in ex.iloc[0].items():
+for k, v in example.items():
     print(f"  {k:<14} {v}")
 """)
 

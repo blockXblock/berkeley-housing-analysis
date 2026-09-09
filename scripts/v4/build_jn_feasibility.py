@@ -8,7 +8,7 @@ running a baseline-vs-upzone scenario on the Elmwood commercial strip — then c
 lesson that the result is dominated by CALIBRATION, not code.
 
 Markdown-in-source (the text cells ARE the deliverable). Every figure is DERIVED and gated against an
-external timestamped baseline (data/baselines/feasibility_baseline_2026-08-14.json) — never hardcoded.
+external timestamped baseline (data/baselines/feasibility_baseline_2026-09-08.json) — never hardcoded.
 
 Run:  python scripts/v4/build_jn_feasibility.py     # (re)writes the .ipynb  (run from repo root)
 """
@@ -42,7 +42,7 @@ same method UrbanSim uses, reimplemented so every assumption is visible.
 > **method**, not the code — a transparent reimplementation legible enough to teach.
 
 > **Discipline:** every figure is DERIVED from the data and gated against an external timestamped baseline
-> (`data/baselines/feasibility_baseline_2026-08-14.json`). *Structural* figures (parcel/acre counts) are
+> (`data/baselines/feasibility_baseline_2026-09-08.json`). *Structural* figures (parcel/acre counts) are
 > stable; *calibration* figures move with the assumptions. A legitimate change = **append a new baseline**,
 > never edit a magic number.
 """)
@@ -155,14 +155,21 @@ This is a transparent reimplementation of UrbanSim's `SqFtProForma`. The math, s
 - `FAR = min(max_far, (max_height / ft_per_story) × coverage)` — **zoning binds** the buildable ratio
 - `bulk = FAR × lot_sqft` — gross buildable floor area
 - `cost = bulk × cost_per_sqft(height-tier) × financing + land_cost`
-- `value = bulk × (1 − parking) × efficiency × rent ÷ cap_rate` — income, capitalized
+- `noi = bulk × (1 − parking) × efficiency × rent × (1 − opex)` — **net** operating income
+- `value = noi ÷ cap_rate` — income, capitalized
 - `profit = value − cost` — **feasible if > 0**
+
+**The opex line is load-bearing and was missing until 2026-09-08.** A cap rate is applied to NET
+operating income, not to gross rent. Capitalising gross rent overstated value by `1/(1−opex)` — about
+**1.5×** at a normal 35% apartment opex ratio — which made *every* parcel pencil regardless of land and
+hid what the model was actually sensitive to. See the sensitivity note after Step 5.
 
 Every constant is a **labeled placeholder**. A student changes one and re-runs — that is the exercise.
 """)
 code(r"""
 # CALIBRATION — LABELED PLACEHOLDERS (replace with real Berkeley data / Waddell before any claim)
-RENT_SQFT_YR, CAP_RATE, FINANCING = 45.0, 0.045, 1.10     # ~$3.75/sqft/mo rent; 4.5% cap; soft-cost mult
+RENT_SQFT_YR, CAP_RATE, FINANCING = 45.0, 0.045, 1.10     # ~$3.75/sqft/mo GROSS rent; 4.5% cap; soft-cost mult
+OPEX_RATIO = 0.35                                         # operating expenses as a share of gross rent
 PARKING_LOSS, EFFICIENCY, UNIT_SQFT = 0.15, 0.82, 950     # floor-area losses; avg dwelling incl common
 FT_PER_STORY, COVERAGE = 11.0, 0.72                       # height->stories; footprint share of lot
 def cost_per_sqft(h): return 400 if h <= 45 else 560 if h <= 85 else 720   # wood -> podium -> highrise
@@ -172,7 +179,8 @@ def proforma(lot_sqft, land_cost, max_far, max_height):
     bulk = far * lot_sqft
     cost = bulk * cost_per_sqft(max_height) * FINANCING + land_cost
     rentable = bulk * (1 - PARKING_LOSS) * EFFICIENCY
-    value = rentable * RENT_SQFT_YR / CAP_RATE
+    noi = rentable * RENT_SQFT_YR * (1 - OPEX_RATIO)              # cap rates apply to NOI, not gross rent
+    value = noi / CAP_RATE
     return value - cost, rentable / UNIT_SQFT                     # (profit, potential units)
 """)
 
@@ -213,7 +221,7 @@ from **calibration** figures (feasibility counts — they *move* when the assump
 calibration figure drifts, that is not a bug: **append a new baseline**, don't edit the number.
 """)
 code(r"""
-base = json.load(open("data/baselines/feasibility_baseline_2026-08-14.json"))
+base = json.load(open("data/baselines/feasibility_baseline_2026-09-08.json"))
 STRUCTURAL = {"elmwood_parcels", "commercial_parcels", "commercial_acres"}
 bad = []
 for k, v in fig.items():
@@ -269,15 +277,36 @@ lunch. (4) Above all: the result is **calibration-dominated** — see Step 8.
 md(r"""
 ## Step 8 — The real lesson: the model is only as good as its calibration
 
-Under these placeholder inputs, **almost every parcel already pencils at baseline**, so the upzone flips
-*zero* additional parcels — it only stacks more units onto already-feasible lots. **That zero is an
-artifact, not a finding**, and it is the most important thing to learn here. Two inputs drive it:
+**The upzone flips zero parcels. That zero is robust — but not for the reason first supposed, and the
+story of how it was tested is the lesson.**
 
-1. **Land cost = assessed value.** Prop-13 assessed land is far below market for prime College Ave retail,
-   so acquisition looks cheap and everything "pencils." Real market land → far fewer baseline-feasible
-   parcels → the upzone question becomes real.
-2. **The commercial set is too broad** (UseCode 3x ≈ the acreage printed in Step 2, vs the true ~5.3-ac
+An earlier version of this notebook predicted: *"Land cost = assessed value; Prop-13 assessed land is far
+below market, so acquisition looks cheap and everything pencils. Real market land → far fewer
+baseline-feasible parcels."* **That prediction was tested on 2026-09-08 and is false.**
+
+A land-value surface was built from the **4,187 Berkeley parcels transferred since 2024** — Prop-13 resets
+assessment to market on sale, so recent sales are a market observation. Elmwood came out at **$63.98/sqft
+market against $25.63 assessed, 2.5×**. Substituting it changed the answer by **one parcel**.
+
+Solving `profit = 0` for land shows why: break-even land is **$505/sqft** under baseline zoning. Assessed
+and market land are both **1–2% of it**. Land was never binding.
+
+**What was binding was an error in the math, not the calibration:** `value = rentable × rent ÷ cap_rate`
+capitalised **gross** rent. Cap rates apply to **NOI**. At 4.5% that implied $1,000 per rentable sqft against
+$440 all-in construction — a 2.3× ratio under which everything pencils no matter what land costs. The
+`OPEX_RATIO` line in Step 4 is the fix.
+
+With opex deducted the strip becomes knife-edge at baseline (break-even land ≈ $26/sqft against a $25.63
+assessed basis) and the upzone break-even goes **negative**: 55ft forces podium construction at $560/sqft,
+and the extra FAR does not cover the cost step. **So the zero survives the fix, with its meaning inverted** —
+before, nothing flipped because everything already pencilled; after, nothing flips because upzoning to 55ft
+is counterproductive at these construction costs.
+
+Two caveats still standing:
+1. **The commercial set is too broad** (UseCode 3x ≈ the acreage printed in Step 2, vs the true ~5.3-ac
    strip). A spatial cut to the College frontage tightens it.
+2. **`OPEX_RATIO = 0.35` is itself a placeholder.** The result is knife-edge around it — 30% pencils, 35%
+   does not — so this input now deserves the scrutiny land wrongly received.
 
 **This is the transferable lesson of every land-use model, UrbanSim included:** the code is small and
 cheap; the *calibration* — real construction costs, rents by use, cap rate, and land acquisition — is the

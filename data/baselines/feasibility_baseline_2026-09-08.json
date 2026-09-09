@@ -1,0 +1,59 @@
+{
+  "topic": "elmwood_upzoning_feasibility",
+  "created": "2026-09-08",
+  "git_sha": "c9f242f",
+  "supersedes": "feasibility_baseline_2026-08-14.json (kept; EVIDENCE-append-only)",
+  "why_appended": "The pro-forma capitalised GROSS rent. Cap rates apply to NOI, so value was overstated by 1/(1-opex) ~ 1.5x, which made almost every parcel pencil and hid the model's real sensitivities. Added OPEX_RATIO=0.35 and deducted it before capitalising. Structural figures (elmwood_parcels, commercial_parcels, commercial_acres) are UNCHANGED \u2014 only calibration-dependent figures moved.",
+  "figure_changes": {
+    "baseline_feasible": {
+      "was": 108,
+      "now": 54
+    },
+    "baseline_net_units": {
+      "was": 1668,
+      "now": 1316
+    },
+    "upzone_feasible": {
+      "was": 107,
+      "now": 0
+    },
+    "upzone_net_units": {
+      "was": 3155,
+      "now": 0
+    }
+  },
+  "note": "METHOD DEMO \u2014 calibration figures remain placeholder-derived. The result is now KNIFE-EDGE around OPEX_RATIO: 30% opex and the strip pencils, 35% and it does not. That input now deserves the scrutiny land wrongly received.",
+  "land_basis_test_2026_09_08": "A market land surface built from 4,187 parcels transferred 2024+ (Prop-13 resets assessment to market on sale) put Elmwood at $63.98/sqft vs $25.63 assessed, 2.5x. Substituting it changed baseline_feasible by ONE parcel. Break-even land is $505/sqft under baseline zoning, so both bases are 1-2% of it. LAND WAS NEVER BINDING \u2014 the prior baseline's stated expectation was disproved.",
+  "calibration_placeholders": {
+    "RENT_SQFT_YR": 45.0,
+    "CAP_RATE": 0.045,
+    "FINANCING": 1.1,
+    "PARKING_LOSS": 0.15,
+    "EFFICIENCY": 0.82,
+    "UNIT_SQFT": 950,
+    "FT_PER_STORY": 11.0,
+    "COVERAGE": 0.72,
+    "cost_per_sqft": "400/560/720 by height",
+    "zoning_baseline": "FAR2.0/30ft",
+    "zoning_upzone": "FAR3.5/55ft",
+    "land_cost": "assessed Land (Prop-13 proxy, understates market)",
+    "commercial_id": "UseCode leading-digit 3 (approximate)",
+    "OPEX_RATIO": 0.35
+  },
+  "sources": {
+    "geometry": "data/raw/berkeley_taxparcels_2026-08-12.geojson (lot area from geometry, EPSG:2227)",
+    "land_use": "databases/berkeley.db parcels (Land, UseCode)",
+    "boundary": "data/reference/berkeley_neighborhoods.geojson (Elmwood)"
+  },
+  "figures": {
+    "elmwood_parcels": 2311,
+    "commercial_parcels": 109,
+    "commercial_acres": 31.4,
+    "baseline_feasible": 54,
+    "baseline_net_units": 1316,
+    "upzone_feasible": 0,
+    "upzone_net_units": 0,
+    "upzone_flips": 0,
+    "upzone_flip_units": 0
+  }
+}

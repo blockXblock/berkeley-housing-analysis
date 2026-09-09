@@ -369,8 +369,8 @@ pro-forma above charges nobody for.**
 **Why the delay is structural, not incompetence.** A market-rate deal in Berkeley needs entitlement
 (commonly 1–3 years through Zoning Adjustments Board, design review, and any appeal), then building
 permit, then 18–30 months of construction. But a project with any affordability — which in Berkeley is
-most of them, via inclusionary requirements or density-bonus concessions — must **stack subsidy from
-several agencies at once**:
+most of them, via inclusionary requirements or density-bonus concessions — has had to **stack subsidy
+from several agencies at once**:
 
 | layer | typical sources | rhythm |
 |---|---|---|
@@ -379,7 +379,30 @@ several agencies at once**:
 | County | Alameda County A1 bond funds | periodic NOFAs |
 | City | Berkeley Housing Trust Fund (Measure U1 revenue), Measure O | periodic NOFAs |
 
-**Four features of that table generate years, and they compound:**
+> ⚠️ **THE STATE LAYER OF THAT TABLE IS BEING DISMANTLED AS OF 2026 — read it as the pre-reform
+> baseline, not as current practice.** [AB 179](https://calmatters.digitaldemocracy.org/bills/ca_202520260ab179),
+> signed 13 July 2026, stood up the **California Housing and Homelessness Agency (CHHA)** on 1 July
+> 2026 — the state's first standalone housing agency — with a **Housing Development and Finance
+> Committee (HDFC)** administering the multifamily affordable-housing subsidy programs under the
+> Governor's control, and AHSC's housing allocation moving to HDFC with an infill focus. Its
+> **"One-Stop Shop"** explicitly targets the arrangement described above, in which a developer files
+> separate applications to separate state programs each with its own timeline, scoring and readiness
+> bar. The Terner Center's analysis of the reform is
+> [here](https://ternercenter.berkeley.edu/research-and-policy/california-governors-budget-proposal-advances-a-one-stop-shop-for-affordable-housing/).
+>
+> **What this does and does not change in the argument below.** The *mechanism* is being consolidated:
+> the state rows collapse toward a single counterparty, so points 1–3 weaken at the state layer. The
+> *conclusion* does not: federal LIHTC and CDLAC rounds, county NOFAs and city NOFAs are untouched, and
+> the state's own estimate of the saving — **$60,000–$70,000 per unit** — is quoted for the One-Stop
+> Shop **and** impact-fee changes *together*, i.e. it is partly a time saving, which is exactly the cost
+> this notebook argues is invisible. **AB 179 is the strongest available evidence FOR the claim in this
+> section: California just legislated against process time because process time is expensive.**
+>
+> Whether consolidation actually compresses the calendar is an empirical question with no answer yet —
+> the agency is weeks old. Anyone re-running this notebook after the first HDFC award cycles should
+> revisit the delay table below with real elapsed times rather than these assumptions.
+
+**Four features of that table generate years, and they compound — with the state layer now in flux:**
 
 1. **Rounds are discrete.** Miss a filing window and the *minimum* cost is twelve months. Not a delay
    in the deal — a delay in being allowed to ask.

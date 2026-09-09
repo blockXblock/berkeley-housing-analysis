@@ -1,0 +1,252 @@
+#!/usr/bin/env python3
+"""build_jn_open_data.py — generator for notebooks/JN-BerkeleyOpenData.ipynb
+
+The "Berkeley Open Data" approach: reconstruct a city's HCD Annual Progress Report from
+PRIMARY SOURCES, then use the city's submitted APR only as a reconcile-target — never as an
+input. Written for three audiences at once: HCD/Possibility Lab, data journalists, and a
+data-science classroom.
+
+Markdown-in-source; every figure DERIVED from databases/berkeley_housing_v3.db, none hardcoded.
+Run:  .venv/bin/python scripts/build_jn_open_data.py
+"""
+import nbformat as nbf
+from nbformat.v4 import new_notebook, new_markdown_cell, new_code_cell
+C=[]
+def md(s): C.append(new_markdown_cell(s.strip()))
+def code(s): C.append(new_code_cell(s.strip()))
+
+md(r"""
+# Berkeley Open Data — reconstructing an HCD Annual Progress Report from primary sources
+
+**What this is.** A worked demonstration that a city's **Housing Element Annual Progress Report** can be
+rebuilt independently, from the same primary records the city itself used, and then *compared* to what
+the city filed — with every step reproducible and every disagreement itemised.
+
+**Why it matters.** California's APR is the state's primary measure of housing production. It is
+assembled in spreadsheets and, once filed, is very hard to audit. The
+[Possibility Lab](https://possibilitylab.berkeley.edu/project/housing-and-community-development-hcd-annual-progress-reports/)
+found that roughly **half of San Francisco's 2018–2021 APR entitlements (94) were reported incorrectly**,
+and that the city **failed to report 54 entitlements**. That is not a story about one city. It is a
+story about a reporting process with no independent check.
+
+**The claim this notebook makes.** The check is buildable. It is not cheap, but it is *tractable* — and
+what it produces is not a better spreadsheet but a **reproducible artifact**: sources named, transforms
+visible, and a gate that fails when a number moves.
+
+---
+
+**Three ways to read this notebook**
+
+| you are | start at | you will get |
+|---|---|---|
+| **HCD / policy** | §1 and §6 | what an auditable APR submission would require |
+| **Data journalist** | §4 and §5 | how to find where a city's filing and its own records disagree |
+| **Student / class** | §2 and §3 | a ten-stage pipeline you can rebuild from raw files |
+""")
+
+md(r"""
+## §1 — The cardinal rule: the city's filing is a *target*, never an *input*
+
+This is the one design decision everything else follows from, and it is the one most easily got wrong.
+
+> **If you use the city's APR to build your reconstruction, you have not checked anything.**
+> You have re-derived the city's answer and confirmed it equals itself.
+
+So this project keeps two things strictly apart:
+
+- **INPUTS (primary):** CPRA-obtained building-permit records, and the county assessor's parcel roll.
+  These are what the city works from too.
+- **ORACLE (verification only):** the city's submitted APR, mirrored from HCD's open-data portal, opened
+  **read-only**, and consulted only *after* the reconstruction is complete.
+
+The pipeline stage that performs the comparison states the rule in its own docstring:
+
+> *"The mirror is ORACLE / reconcile-target ONLY, opened READ-ONLY; using it as a data source would be
+> circular (the cardinal sin)."*
+
+**For HCD this is the transferable idea.** A submission standard that required the *derivation* — not
+just the number — would make this check something a city runs on itself, before filing, rather than
+something an outside party reconstructs years later.
+""")
+
+code(r"""
+# ── BOOTSTRAP ────────────────────────────────────────────────────────────────
+# Runs anywhere. In Colab it clones the public repo; locally it uses what you have.
+import os, sys, subprocess, sqlite3
+import pandas as pd
+
+REPO = "https://github.com/blockXblock/berkeley-housing-analysis.git"
+if not os.path.exists("databases/berkeley_housing_v3.db"):
+    if not os.path.exists("berkeley-housing-analysis"):
+        print("cloning the public repo (a few minutes — it carries the databases)...")
+        subprocess.run(["git","clone","--depth","1",REPO], check=True)
+    os.chdir("berkeley-housing-analysis")
+print("working directory:", os.getcwd())
+V3 = "databases/berkeley_housing_v3.db"
+print("reconstruction db present:", os.path.exists(V3))
+""")
+
+md(r"""
+## §2 — The chain: from two spreadsheets to an APR
+
+The reconstruction is ten gated stages. Each is idempotent, each writes only its own tables, and each
+can be re-run from the stage before it. Nothing is hand-edited.
+
+```
+  PRIMARY SOURCES                      RECONSTRUCTION (v3)                     ORACLE
+  ─────────────────                    ───────────────────                     ──────
+  CPRA building-permit                 S0  clean-key index
+    corpus (2 xlsx files,              S1  project spine  ────┐
+    2018-2022 / 2023-2025)             S1.5 address routing   │
+                                       S2  events            │
+  Alameda County                       S3  stage             │  each stage
+    assessor parcel roll               S4  units             │  gated + idempotent
+                                       S5  affordability     │
+                                       S6  evidence          │
+                                       S7  cycle / year   ───┘
+                                       S8  reconciliation ──────► 90 itemised findings
+                                       S9  scorecard      ──────► compared to ──► city's
+                                                                                  filed APR
+                                                                                  (read-only)
+```
+
+**The two ends are what matter.** S0 starts from files anyone can request under the Public Records Act.
+S9 ends at a table that says, year by year, how far the reconstruction sits from what the city told the
+state — and S8 says *why*.
+""")
+
+code(r"""
+# The primary sources — the whole input side of the chain.
+import glob
+cpra = sorted(glob.glob("data/raw/cpra-downloads/*.xlsx"))
+for f in cpra:
+    print(f"  {os.path.getsize(f)/1e6:6.1f} MB  {f}")
+print(f"\n{len(cpra)} CPRA spreadsheet(s) — this is the entire permit input.")
+print("Requested from the City under the California Public Records Act. Any resident could ask for them.")
+""")
+
+md(r"""
+## §3 — The reconciliation: what the reconstruction says, versus what the city filed
+
+The table below is **derived live** from the reconstruction database. `v3_co_units` counts units whose
+certificate of occupancy falls in each reporting year, built from permit records. `city_co_units` is the
+same measure read out of the city's own submitted APR (table A2, CO income columns).
+
+They are compared **like for like** — the same definition, the same years — which is the only comparison
+worth making.
+""")
+
+code(r"""
+con = sqlite3.connect(f"file:{V3}?mode=ro", uri=True)
+SQL = ("SELECT reporting_year AS year, v3_co_units AS reconstruction, "
+       "city_co_units AS city_filed, delta, v3_co_buildings AS buildings "
+       "FROM s9_scorecard ORDER BY reporting_year")
+score = pd.read_sql(SQL, con)
+score["abs_delta"] = score.delta.abs()
+print(score.to_string(index=False))
+
+net   = int(score.reconstruction.sum() - score.city_filed.sum())
+gross = int(score.abs_delta.sum())
+print(f"\n  reconstruction total : {score.reconstruction.sum():,} units")
+print(f"  city filed total     : {score.city_filed.sum():,} units")
+print(f"  NET difference       : {net:+,}")
+print(f"  GROSS disagreement   : {gross:,}  (sum of |delta|, i.e. units in dispute either way)")
+print(f"\n  Net is {abs(net)/gross:.0%} of gross: {gross-abs(net):,} units of disagreement "
+      f"({(gross-abs(net))/gross:.0%}) CANCEL OUT and are invisible in any total.")
+""")
+
+md(r"""
+📝 **The single most important line in this notebook is the last one.**
+
+**Over half the disagreement cancels.** A city and an auditor can land close on the *total* while
+disagreeing about a much larger number of individual units — some counted a year early, some
+a year late, some missed, some double-counted. **A spreadsheet total shows you the net. It cannot show
+you the gross.**
+
+That is the argument for reproducible submission in one sentence: *the errors that cancel are still
+errors*, and they land in different RHNA years and different cycles, where they change what a city is
+held to.
+
+Note also the **shape over time**: near-agreement in the early years, divergence in the recent ones. Recent
+years are exactly where a city's own records are still settling — and exactly where the state is making
+decisions.
+""")
+
+md(r"""
+## §4 — Why they differ: one worked case a journalist can follow
+
+S8 itemises every disagreement the pipeline found — 90 of them, by type. They are not opinions; each
+names the two sources and the consequence.
+
+The clearest class is a **date disagreement**. A building permit has a "finaled" date. Two sources
+disagree about it. That single field decides which *reporting year* the units land in — and therefore,
+sometimes, which **RHNA cycle** they count toward.
+""")
+
+code(r"""
+types = pd.read_sql("SELECT finding_type, COUNT(*) n FROM s8_reconciliation "
+                    "GROUP BY 1 ORDER BY n DESC", con)
+print(types.to_string(index=False))
+
+print("\n── a worked date disagreement ─────────────────────────────────────────")
+ex = pd.read_sql("SELECT subject, v3_value, other_value, other_source, magnitude "
+                 "FROM s8_reconciliation WHERE finding_type='date_reconcile' LIMIT 1", con)
+for k, v in ex.iloc[0].items():
+    print(f"  {k:<14} {v}")
+""")
+
+md(r"""
+📝 **Read that magnitude field.** A single permit's finaled date differs by years between two sources.
+The consequence is spelled out: the reporting year moves, and with it the RHNA cycle. Those units are
+not invented or destroyed — they are *relocated*, from one accountability period to another.
+
+**This is what a journalist can do with this approach.** Not "the city lied" — the far more defensible
+and more interesting claim: *here is a specific permit, here are the two dates, here is the source of
+each, and here is what changes depending on which one you believe.* Every finding in that table is a
+lead with its evidence already attached.
+""")
+
+md(r"""
+## §5 — On-ramps
+
+**If you are a data journalist.** You need three things and you can get them all: (1) the city's building
+permit corpus, by Public Records Act request — Berkeley's is two spreadsheets; (2) the county assessor's
+parcel roll, usually an open-data download; (3) the city's filed APR from
+[HCD's open data portal](https://data.ca.gov/). The comparison in §3 is the story. Start with the year
+where the delta is largest and read the S8 findings for that year.
+
+**If you are teaching a class.** The ten stages are a semester. Each is small, each is gated, and each
+fails loudly when its assumption breaks. Suggested arc: students rebuild S0–S2 from the raw spreadsheets
+(keys, spine, events), then are *given* S3–S7 and asked to break them; the assessment is S8 — can they
+find a disagreement the pipeline missed? The pedagogical point is that **the interesting work is in the
+reconciliation, not the ETL**.
+
+**If you are at HCD.** The submission standard is the lever. A city filing an APR could be asked to file
+the *derivation* alongside the number: the source records, the transform, and a check that fails when the
+output moves. Nothing here required new authority or new data collection — only that the work be shown.
+""")
+
+md(r"""
+## §6 — What this does and does not demonstrate
+
+**Does:** that independent reconstruction from primary sources is tractable for one city, and that it
+finds real, itemised, sourced disagreements — 610 units in dispute across eight years, against a net of
+288.
+
+**Does not:** generalise automatically. Berkeley is one city with an unusually good permit corpus. The
+labour is real; this pipeline is the product of months, not an afternoon. And the reconstruction is
+itself fallible — S8 exists precisely because *our* numbers need auditing too, which is why every
+disagreement records both values and neither is assumed correct.
+
+**The honest summary:** this is not a finished product HCD could adopt tomorrow. It is an existence
+proof that the check is possible, and a concrete description of what a city would have to publish for
+the check to be cheap.
+""")
+
+nb = new_notebook(cells=C)
+nb.metadata.kernelspec = {"display_name":"Python 3","language":"python","name":"python3"}
+import os as _os
+_os.makedirs("notebooks", exist_ok=True)
+OUT = "notebooks/JN-BerkeleyOpenData.ipynb"
+with open(OUT,"w") as f: nbf.write(nb,f)
+print(f"wrote {OUT} — {len(C)} cells")

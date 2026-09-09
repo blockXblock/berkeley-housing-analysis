@@ -67,6 +67,19 @@ The pipeline stage that performs the comparison states the rule in its own docst
 **For HCD this is the transferable idea.** A submission standard that required the *derivation* — not
 just the number — would make this check something a city runs on itself, before filing, rather than
 something an outside party reconstructs years later.
+
+> **A footnote on the oracle itself: published datasets change, and a reader holding one snapshot
+> cannot tell which one they have.** This project keeps *dated* mirrors rather than a single live
+> pull, each carrying its retrieval timestamp and source URL. That is not defensive bookkeeping — the
+> mirrors we hold genuinely differ from one another. Open-data portals are re-published, re-ingested
+> and corrected as a matter of routine, usually without an erratum, a version marker or a changelog,
+> so two analysts pulling the same resource weeks apart can compute different totals from what they
+> each reasonably believe is *the* dataset, and neither has any way to notice.
+>
+> This cuts against a reconstruction as much as for it. It means "the city's filing says X" is only
+> meaningful with a date attached — and it is why the comparison in §3 names the mirror it used
+> rather than describing it as the APR. **Record which snapshot you scored against, or your
+> reconciliation is not reproducible either.**
 """)
 
 code(r"""

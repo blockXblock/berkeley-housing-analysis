@@ -80,8 +80,16 @@ import pandas as pd
 
 V3 = "databases/berkeley_housing_v3.db"
 HAVE_REPO = os.path.exists(V3)
-print("reconstruction database present:", HAVE_REPO)
-print("mode:", "RE-DERIVING from source" if HAVE_REPO else "using embedded figures (derived 2026-09-09)")
+
+if HAVE_REPO:
+    print("MODE: full — reconstruction database found.")
+    print("      Every figure below is re-derived from source and checked against the embedded copy.")
+else:
+    print("MODE: portable — running with figures embedded from the 2026-09-09 derivation.")
+    print("      This is the expected path outside the project. Nothing is missing and nothing failed:")
+    print("      the public repository carries CODE, not DATA (databases/ is gitignored), so the")
+    print("      numbers travel with the notebook instead. Provenance is recorded beside each one.")
+    print("      To rebuild them from the raw permit records yourself, see the curriculum in \u00a75a.")
 """)
 
 md(r"""

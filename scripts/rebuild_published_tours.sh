@@ -15,12 +15,15 @@ TOURS=(
   "uc-dormitories||3"
   "durant-w2e|durant|3"
   "san-pablo-n2s|san-pablo|3"
+  "telegraph-s2n|telegraph|3"
+  "adeline-n2s|adeline|3"
+  "ashby-w2e|ashby|3"
 )
 for row in "${TOURS[@]}"; do
   IFS='|' read -r stem street maxl <<< "$row"
   echo "=== $stem ==="
   args=(--tour "$stem" --all --max-labels "$maxl" --imgs "$IMG")
   [ -n "$street" ] && args+=(--street "$street")
-  python3 scripts/svg_label_tour.py "${args[@]}" 2>&1 | tail -4
+  .venv/bin/python scripts/svg_label_tour.py "${args[@]}" 2>&1 | tail -4
   echo
 done

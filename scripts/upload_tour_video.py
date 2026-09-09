@@ -19,7 +19,7 @@ Usage:
   python scripts/upload_tour_video.py --tour telegraph-s2n --video ... --dry-run
   python scripts/upload_tour_video.py --tour telegraph-s2n --set-id dQw4w9WgXcQ   # no upload
 """
-import argparse, json, pathlib, re, sys, datetime
+import argparse, json, pathlib, re, socket, sys, datetime
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 TOURS = ROOT / "docs/tours.json"
@@ -97,6 +97,7 @@ def upload(video_path, title, description, privacy):
     except ImportError:
         sys.exit("missing deps. Install into the project venv:\n"
                  "  .venv/bin/pip install google-api-python-client google-auth-oauthlib")
+    socket.setdefaulttimeout(300)   # default is short; a stalled chunk killed a 670 MB upload
     creds = None
     if TOKEN.exists():
         creds = Credentials.from_authorized_user_file(str(TOKEN), SCOPES)
@@ -119,7 +120,7 @@ def upload(video_path, title, description, privacy):
     req = yt.videos().insert(part="snippet,status", body=body, media_body=media)
     resp = None
     while resp is None:
-        status, resp = req.next_chunk()
+        status, resp = req.next_chunk(num_retries=5)
         if status:
             print(f"  upload {int(status.progress() * 100):3d}%", end="\r", flush=True)
     print()

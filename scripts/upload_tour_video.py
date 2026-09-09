@@ -133,6 +133,8 @@ def main():
     ap.add_argument("--video", help="path to the recorded .m4v/.mp4 (on the T7)")
     ap.add_argument("--set-id", help="skip the upload; just repoint the site at this existing id")
     ap.add_argument("--privacy", default="unlisted", choices=["private", "unlisted", "public"])
+    ap.add_argument("--recorded", help="ISO date the video was recorded; also stamps the era")
+    ap.add_argument("--era", help="geometry sha the recording was flown against, e.g. geom-a3d103322890")
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
 
@@ -145,7 +147,8 @@ def main():
     print(f"tour     : {entry['id']}")
     print(f"title    : {title}")
     print(f"current  : {old or '(none published)'}")
-    print(f"privacy  : {a.privacy}")
+    if not a.set_id:                     # on --set-id nothing is uploaded, so the
+        print(f"privacy  : {a.privacy}") # default privacy flag is not what YouTube holds
 
     if a.set_id:
         new_id = a.set_id
@@ -169,6 +172,21 @@ def main():
         print("DRY RUN — site not edited.")
         return
     n_h, n_j = swap_site_id(old, new_id)
+    # --set-id used to swap the id and leave `recorded`/`recorded_geometry_era` describing the
+    # PREVIOUS video: the large-projects entry claimed a May recording for a September file.
+    # Provenance that silently describes the wrong footage is worse than none.
+    if a.recorded or a.era:
+        d = json.loads(TOURS.read_text())
+        entries = d if isinstance(d, list) else d.get("tours", d)
+        for e in (entries.values() if isinstance(entries, dict) else entries):
+            if e.get("id") == entry["id"]:
+                if a.recorded:
+                    e["recorded"] = a.recorded
+                    e["needs_rerecord"] = False
+                if a.era:
+                    e["recorded_geometry_era"] = a.era
+        TOURS.write_text(json.dumps(d, indent=2, ensure_ascii=False) + "\n")
+        print(f"provenance: recorded={a.recorded or 'unchanged'}  era={a.era or 'unchanged'}")
     print(f"site     : {n_h} ref(s) updated in docs/index.html, {n_j} in docs/tours.json")
     if old and n_h == 0:
         print("  !! WARNING: the old id was not in index.html — that page may not embed this tour")

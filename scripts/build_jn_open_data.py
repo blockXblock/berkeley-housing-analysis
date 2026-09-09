@@ -227,6 +227,41 @@ output moves. Nothing here required new authority or new data collection — onl
 """)
 
 md(r"""
+## §5a — The same reconstruction, taught: an 18-notebook curriculum
+
+This notebook shows the *result*. The pipeline behind it has also been written as a course — eighteen
+notebooks that walk a student from "what is a dataframe" to scoring their own reconstructed APR against
+the city's filing. It was built for high-school and undergraduate data science.
+
+**Every one runs in Colab with no setup.** Each begins with a bootstrap cell that fetches the data from
+public object storage — the raw CPRA permit spreadsheets, the HCD APR mirror, and a cleaned permit
+table — and no-ops if the repository happens to be local. Nothing to install, nothing to request.
+
+| | notebook | what it teaches |
+|---|---|---|
+| **Foundations** | [JN00 · Look at the data first](https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN00_look_first.ipynb) | look before you model |
+| | [JN0a · Why data](https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN0a_why_data.ipynb) · [JN0b · What a notebook is](https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN0b_notebook.ipynb) · [JN0c · Functions](https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN0c_function.ipynb) · [JN0d · DataFrames](https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN0d_dataframe.ipynb) | the tools, from zero |
+| | [JN0e · Many pictures](https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN0e_charts.ipynb) · [JN0f · Our tools](https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN0f_tools.ipynb) · [JN0g · Building with agents](https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN0g_agents.ipynb) · [JN0h · The instruction file](https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN0h_instruction_file.ipynb) | charts, tooling, and working with AI agents |
+| **The build** | [JN1 · Getting the data in the door](https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN1_ingest.ipynb) | ingest the raw permit corpus, mess and all |
+| | [JN2 · The address key](https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN2_address_key.ipynb) | the join nobody warns you about |
+| | [JN3 · From permits to buildings](https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN3_spine_units.ipynb) | a spine, and how many units |
+| | [JN4 · When is a building actually *done*?](https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN4_events_stage.ipynb) | events and stage |
+| | [JN5 · One date, three questions](https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN5_year_cycle.ipynb) | reporting year vs RHNA cycle |
+| **The check** | [JN6a · Interrogate the oracle](https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN6a_apr_oracle.ipynb) | read the city's filing *without* using it |
+| | [JN6b · Did we get it right?](https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN6b_join_score.ipynb) | score your APR against the city's |
+| | [JN7 · The re-key audit](https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN7_rekey_audit.ipynb) | finish what you flagged |
+| | [JN8 · The record watches itself](https://colab.research.google.com/github/blockXblock/berkeley-housing-analysis/blob/main/notebooks/curriculum/JN8_watch.ipynb) | make the check permanent |
+
+**Note the shape of the arc.** Nine notebooks of foundations and build; then **four on the check**. JN6a
+teaches the cardinal rule from §1 as a *skill* — how to read the city's filing to score against it while
+never letting it contaminate your own numbers. JN8 ends not with an answer but with a watcher, because
+the interesting property of a reconstruction is that it can be re-run when the source changes.
+
+**For a classroom that is the assessment**: not "did you get 4,310?" but "when the city files again, does
+your check still fire?"
+""")
+
+md(r"""
 ## §6 — What this does and does not demonstrate
 
 **Does:** that independent reconstruction from primary sources is tractable for one city, and that it

@@ -185,6 +185,91 @@ def proforma(lot_sqft, land_cost, max_far, max_height):
 """)
 
 md(r"""
+## Step 4a — Why the opex line changes the answer (and what a cap rate actually means)
+
+The single line `noi = rentable * RENT_SQFT_YR * (1 - OPEX_RATIO)` moved this model from
+"everything pencils" to "half of it pencils, and the upzone makes it worse." It is worth understanding
+exactly why, because the mistake it corrects is the most common error in amateur pro-formas.
+
+**An income property's arithmetic runs down a ladder, and every rung loses money:**
+
+| rung | what it is | why it shrinks |
+|---|---|---|
+| Gross Potential Rent | every unit, full year, asking rent | the number in a listing |
+| − vacancy & collection loss | 5%ish | turnover gaps, non-payment |
+| = Effective Gross Income | what actually arrives | |
+| − **operating expenses** | **30–40%** | see below |
+| = **Net Operating Income (NOI)** | what the building earns | **this is what gets valued** |
+
+**A cap rate is defined on NOI.** "4.5% cap" means an investor pays $100 for $4.50 of *NOI* — not
+$4.50 of rent. Capitalising gross rent is the same category error as valuing a restaurant at an
+earnings multiple applied to its food sales.
+
+**Where the 30–40% goes**, and why California is at the high end:
+- **Property tax** — Proposition 13 assesses *new construction at market*, so a new building pays
+  roughly 1.25% of full value every year, forever. This is the largest single line, and it is the one
+  most often forgotten by people who think Prop 13 makes California cheap. It does — for the *old*
+  building being replaced, not the new one.
+- **Insurance** — rising steeply across California; no longer a rounding error.
+- **Management** — 4–5% of EGI for a professional operator.
+- **Maintenance, turnover, utilities, reserves** — the rest.
+- Berkeley adds its own: rent-board registration fees, seismic obligations, and a local regulatory
+  overhead that is small per unit but real.
+
+**The arithmetic of the fix.** At `OPEX_RATIO = 0.35`, capitalised value falls from `$45/0.045 =
+$1,000` per rentable sqft to `$29.25/0.045 = $650`. That is a **35% haircut on the asset**, and the
+developer's entire margin lives inside a band far narrower than 35%. Which is why removing the error
+does not shave the result — it inverts it.
+
+**The lesson generalises past this notebook:** when a model says *everything* is feasible, the fault is
+almost never in the world. It is in the revenue line.
+""")
+
+md(r"""
+## Step 4b — How a developer actually decides (the model's `profit > 0` is not how)
+
+This notebook asks `profit > 0`. **No developer asks that.** A deal that clears zero by a dollar is a
+deal nobody funds. Understanding the real test explains why "feasible" parcels sit undeveloped for
+decades, which is the thing a zoning debate most needs to explain.
+
+**1. Yield on cost, compared to the exit cap rate.** The developer computes
+
+> `yield on cost = stabilised NOI ÷ total development cost`
+
+and compares it to the cap rate the finished building would sell at. The difference is **the spread**,
+quoted in basis points. Build at a 6.0% yield on cost and sell at a 4.5% cap and you have a **150 bps
+spread** — that gap *is* the profit, because it is what turns cost into value.
+
+**The rule of thumb: you need 100–150 bps.** Below that, nobody takes construction risk — the same
+money can buy an existing, leased, de-risked building at the cap rate and skip three years of
+uncertainty. **A project can be wildly "profitable" by `profit > 0` and still be uninvestable**, and
+most marginal projects are exactly there.
+
+**2. Residual land value — developers solve the equation backwards.** They do not ask "can I afford
+this land?" They fix the required yield and solve for what the land *can* be worth:
+
+> `residual land value = (stabilised NOI ÷ required yield on cost) − construction − soft costs − fees − profit`
+
+If the residual comes in under what the owner will accept, **there is no deal at any zoning**. This is
+the mechanism behind the result in Step 8: Elmwood's binding constraint was never the land price the
+model charged, it was that the revenue could not support the building in the first place.
+
+**3. The capital stack imposes its own tests, and each is a veto.**
+- **Construction lender:** 60–65% loan-to-cost, and a **debt service coverage ratio** of 1.20–1.25 at
+  stabilisation. Fail the DSCR and the loan shrinks regardless of profit.
+- **Equity:** 15–20% IRR and a 1.6–2.0× multiple over roughly five years. Equity is the expensive
+  money and it sets the hurdle.
+- **Both must clear simultaneously.** A deal can pass the lender and fail equity, and it is dead.
+
+**4. Risk is priced, not assumed away.** Entitlement risk (will it be approved, and after how many
+hearings), construction risk (fixed-price contract or not), lease-up risk (how fast to stabilisation),
+and interest-rate risk on the exit cap. Each widens the spread a developer demands.
+
+**So read this notebook's `feasible` column as a *ceiling*, not a forecast.** It marks parcels that
+are not obviously impossible. The set that actually gets built is a strict — and much smaller — subset.
+""")
+
+md(r"""
 ## Step 5 — Run baseline vs. upzone, derive the figures
 """)
 code(r"""
@@ -272,6 +357,107 @@ red and green bars against each other. (2) These units are a **potential ceiling
 assume every feasible parcel redevelops fully to housing. (3) The parcels are **occupied retail** —
 "feasible" means *a developer could profit by demolishing the shops*, which is a policy choice, not a free
 lunch. (4) Above all: the result is **calibration-dominated** — see Step 8.
+""")
+
+md(r"""
+## Step 7a — The missing variable: time, and the cost of assembling money
+
+Every number so far is **static**. The model builds the building instantly. Real projects spend years
+between "the parcel pencils" and "someone pours concrete," and **that interval has a price the
+pro-forma above charges nobody for.**
+
+**Why the delay is structural, not incompetence.** A market-rate deal in Berkeley needs entitlement
+(commonly 1–3 years through Zoning Adjustments Board, design review, and any appeal), then building
+permit, then 18–30 months of construction. But a project with any affordability — which in Berkeley is
+most of them, via inclusionary requirements or density-bonus concessions — must **stack subsidy from
+several agencies at once**:
+
+| layer | typical sources | rhythm |
+|---|---|---|
+| Federal | **LIHTC 9%** (competitive; roughly one in three or four applications wins) or **4% credits + tax-exempt bonds** via CDLAC, now itself oversubscribed | annual or a few rounds a year |
+| State | AHSC, IIG, MHP, HHAP, No Place Like Home | own rounds, own scoring |
+| County | Alameda County A1 bond funds | periodic NOFAs |
+| City | Berkeley Housing Trust Fund (Measure U1 revenue), Measure O | periodic NOFAs |
+
+**Four features of that table generate years, and they compound:**
+
+1. **Rounds are discrete.** Miss a filing window and the *minimum* cost is twelve months. Not a delay
+   in the deal — a delay in being allowed to ask.
+2. **Sources must close together.** Each wants the others committed first; a single late award holds
+   the whole stack.
+3. **Each has its own readiness bar** — site control, entitlement, a certain design maturity — so the
+   applicant spends real money *before* learning whether the ask succeeds.
+4. **Losing a competitive round is normal, not exceptional.** A 9% LIHTC application that scores just
+   below the line re-applies next year, with a full year of escalation in the meantime.
+
+**Assembling four to eight sources routinely takes two to five years** — on top of entitlement.
+
+**What that costs, in three ways at once:**
+- **Carrying cost.** Land and predevelopment equity are committed and earning nothing. That capital's
+  opportunity cost is 8–12% a year.
+- **Escalation.** Construction costs rise 4–6% a year. The building you priced is not the building you
+  will buy.
+- **Expiry risk.** Entitlements and awards lapse; some must be re-won on new rules.
+
+These are multiplicative, not additive: **three years at a 10% cost of capital is a 1.33× multiplier on
+everything committed at the start** — and it is applied to a margin that Step 4b said lives inside a
+100–150 bps band.
+
+**This is the honest answer to "why doesn't it get built if it pencils?"** Often the static pro-forma is
+right and the *dynamic* one is not. The cell below charges the model for time and shows how few years it
+takes to erase the Elmwood result entirely.
+""")
+code(r"""
+# TIME COST — derived from the same constants as Step 4, nothing hardcoded.
+# A delay of N years: construction costs escalate, and committed capital earns nothing.
+ESCALATION, CARRY = 0.05, 0.10          # cost inflation/yr; opportunity cost of committed capital/yr
+
+def proforma_delayed(lot_sqft, land_cost, max_far, max_height, years):
+    far  = min(max_far, (max_height / FT_PER_STORY) * COVERAGE)
+    bulk = far * lot_sqft
+    build = bulk * cost_per_sqft(max_height) * FINANCING * (1 + ESCALATION) ** years
+    carried_land = land_cost * (1 + CARRY) ** years          # land tied up, earning nothing
+    rentable = bulk * (1 - PARKING_LOSS) * EFFICIENCY
+    value = rentable * RENT_SQFT_YR * (1 - OPEX_RATIO) / CAP_RATE
+    return value - (build + carried_land)
+
+rows = []
+for yrs in [0, 1, 2, 3, 4, 5]:
+    prof = comm.apply(lambda p: proforma_delayed(p.lot_sqft, p.Land, 2.0, 30.0, yrs), axis=1)
+    psf  = prof / comm.lot_sqft                      # profit per sqft of LOT — the margin, not a count
+    rows.append({"years_of_delay": yrs,
+                 "baseline_feasible": int((prof > 0).sum()),
+                 "share_of_109": round(100 * (prof > 0).mean(), 1),
+                 "median_margin_$_per_lot_sqft": round(psf.median(), 2)})
+delay = pd.DataFrame(rows)
+print(delay.to_string(index=False))
+print(f"\nEscalation {ESCALATION:.0%}/yr on construction, {CARRY:.0%}/yr carry on land.")
+print("The COUNT falls off a cliff; the MARGIN column shows why — it was never far from zero.")
+print("Read this against Step 7: the upzone was already infeasible at year 0.")
+""")
+md(r"""
+📝 **What the delay table shows, and what it must not be read as saying.**
+
+The feasible count does not decay gently — it **falls off a cliff between year 0 and year 1**, and the
+margin column explains why. At year 0 the median parcel clears by only a few dollars per square foot of
+lot; one year of escalation on ~$864/sqft of construction costs more than that entire margin. **The
+cliff is the finding.** A result that survives on a margin this thin was never robust, and reporting
+only the binary count would have hidden that.
+
+It falls because **cost escalates while revenue in this model does not**. That asymmetry is the point but also the caveat: rents rise too, and a fair dynamic
+model would trend both. Treat the table as *the shape of the risk*, not a forecast — a project whose
+margin sits in a 100–150 bps band cannot absorb several years of one-sided escalation, and the years
+are not optional when the money must come from six agencies with their own calendars.
+
+**The policy reading.** Two levers change this picture, and only one of them is zoning:
+- **Zoning** decides whether a building is *legal*. Step 8 shows the Elmwood upzone does not make it
+  *financeable* — at these construction costs it makes it worse.
+- **Process time** decides whether a financeable building survives long enough to exist. Aligning
+  application windows, granting by-right approval where a project already conforms, and shortening the
+  gap between award rounds all attack the multiplier directly.
+
+For the marginal project, **the calendar is a bigger lever than the height limit** — and unlike the
+height limit, it costs nothing to grant.
 """)
 
 md(r"""

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <Document>
-	<name>Berkeley Housing Geometry · 2026-09-08 · 394 buildings · geom-922b4150979c</name>
+	<name>Berkeley Housing Geometry · 2026-09-09 · 394 buildings · geom-85a0a9cf4a83</name>
 	<visibility>0</visibility>
 	<open>1</open>
 	<description>177 housing projects. Heights shown as stories × 3.5m. Generated 2026-05-03.</description>
@@ -8244,7 +8244,7 @@ North · 1625 beds · Under Construction</name>
 39 units · Under Construction</name>
 			<visibility>0</visibility>
 			<description><![CDATA[<b>2449 DWIGHT Way</b><br/><b>Units:</b> 39<br/><b>VLI Units:</b> 2<br/><b>Stories:</b> 4<br/><b>Height:</b> 14.0m<br/><b>Status:</b> Under Construction]]></description>
-			<styleUrl>#style_status_Entitled_nolabel</styleUrl>
+			<styleUrl>#style_status_Under_Construction_nolabel</styleUrl>
 			<Polygon>
 				<extrude>1</extrude>
 				<altitudeMode>relativeToGround</altitudeMode>
@@ -8260,7 +8260,7 @@ North · 1625 beds · Under Construction</name>
 		<Placemark>
 			<name>2449 Dwight Way
 39 units · Under Construction</name>
-			<styleUrl>#style_status_Entitled</styleUrl>
+			<styleUrl>#style_status_Under_Construction</styleUrl>
 			<Region><LatLonAltBox><north>37.865495199447636</north><south>37.86513587497764</south><east>-122.25855505239657</east><west>-122.25901020698082</west></LatLonAltBox><Lod><minLodPixels>128</minLodPixels><maxLodPixels>-1</maxLodPixels><minFadeExtent>64</minFadeExtent></Lod></Region>
 			<Point><coordinates>-122.25883763468369,37.86530685761784,28.7</coordinates><altitudeMode>relativeToGround</altitudeMode></Point>
 		</Placemark>

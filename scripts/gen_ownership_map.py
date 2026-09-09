@@ -17,13 +17,32 @@ understated. TRUE years-owned needs the County Recorder deed index WITH document
 vs deed of trust = loan) — the Phase-2 deed-history acquisition. Here we now use the FRESH berkeley.db
 date and label it honestly as recording recency.
 
-OWNER-NAME/TYPE still come from the owners CSV (the county Assessor site hides owner names; the CSV is
-the ArcGIS TaxParcel owner layer). Its NAMES are usable; its DATE column is not (superseded above).
+⚠ CORRECTION 2026-09-07 — THE OWNER NAMES ARE A 2017 ROLL. The line below used to read "its NAMES
+are usable; its DATE column is not." That understated it. The owners CSV comes from the City of
+Berkeley ArcGIS `TaxParcel` layer, whose editingInfo.lastEditDate is 2017-11-09: the WHOLE LAYER is
+frozen at 2017, names included — not just the date column. So every owner name and the entire
+owner-type split on this map are a nine-year-old roll, and the page now SAYS SO rather than
+presenting them as current. Refreshing from that source would buy nothing; it has not moved since 2017.
+The county publishes no owner names at all (verified three ways: the Parcels layer has no name field;
+the secured roll's Attention_Name is populated on 0 of 29,163 Berkeley parcels; the transfer list has
+no name column). The one fresher name source we hold is parcel_facts.owner_signals.named_owner, from
+2025 city rental business licences — but it covers 2,925 of 29,163 parcels (10%), so it cannot replace
+the 2017 layer for a whole-city map; mixing them silently would present two different vintages as one.
+
+The RECENCY colouring is a different and CURRENT vintage: it reads berkeley.db.LatestDocumentDate
+(Feb-2026 assessor refresh). Two vintages on one page is exactly why each mode states its own.
 
 Inputs: data/reference/berkeley_parcel_owners_2026-08-13.csv (APN,OwnersName) + committed taxparcels
 geometry + databases/berkeley.db (LatestDocumentDate, situs address).
 Output: docs/maps/berkeley_ownership.html + docs/maps/berkeley_ownership_data.json.
-Usage: python scripts/gen_ownership_map.py
+⚠ GENERATOR DRIFT REPAIRED 2026-09-07. Three fixes had been applied to the OUTPUT html and never
+to this generator, so re-running it silently reverted all three — and one of them was a live-site
+breakage: 3b49994 replaced the CARTO basemap because CARTO was serving "API KEY Required" tiles,
+aff877f made the Chronicle link copy the address to the clipboard, e779531 added the Regrid link.
+All three now live HERE, so the generator is safe to run. If you fix something on the served map,
+fix it in this file — a generated page that has been hand-edited is a trap for the next run.
+
+Usage: .venv/bin/python scripts/gen_ownership_map.py
 """
 import geopandas as gpd, pandas as pd, json, os, re, sys, warnings
 from scripts.housing_rules import to_canonical_apn
@@ -86,7 +105,9 @@ def main():
 <div class="panel"><b>Who owns Berkeley</b><br>
 <div style="margin:6px 0"><button id="bT" class="on" onclick="mode('t')">Last recorded document</button><button id="bO" onclick="mode('o')">Owner type</button></div>
 <div id="legend"></div>
-<div class="cap" id="cap">Color = years since the last document (sale, refinance, or transfer) was recorded — a recent-financial-activity signal, NOT years owned. Elmwood outlined.</div><div style="margin-top:8px;font-size:11px"><a href="https://www.sfchronicle.com/projects/2025/ca-property-map/" target="_blank" rel="noopener" style="color:#0074D9;text-decoration:none">↗ Compare: SF Chronicle statewide owner map</a></div></div>
+<div class="cap" id="cap">Color = years since the last document (sale, refinance, or transfer) was recorded — a recent-financial-activity signal, NOT years owned. Elmwood outlined.</div><div class="cap" style="margin-top:6px;border-top:1px solid #ddd;padding-top:5px">
+<b>Two vintages on this map.</b> Owner names and owner type: City of Berkeley parcel layer, <b>frozen at 2017-11-09</b>. Recording recency: Alameda County assessor, <b>current to Feb 2026</b>. The county publishes no owner names, so 2017 is the newest whole-city roll that exists; ownership will have changed on many parcels since.</div>
+<div style="margin-top:8px;font-size:11px"><a href="https://www.sfchronicle.com/projects/2025/ca-property-map/" target="_blank" rel="noopener" style="color:#0074D9;text-decoration:none">↗ Compare: SF Chronicle statewide owner map</a></div></div>
 <script>
 let FEATS={features:[]};
 const TEN=['step',['get','t'],'#d7301f',5,'#fd8d3c',15,'#fec44f',30,'#74add1',60,'#4575b4'];
@@ -94,12 +115,12 @@ const OWN=['match',['get','o'],1,'#d7301f',2,'#984ea3',3,'#377eb8','#bdbdbd'];
 const LT='<div style="font-weight:600;margin-bottom:2px">Yrs since last recorded document</div><div><span class="sw" style="background:#d7301f"></span>&lt;5 yr (recent sale/refi/transfer)</div><div><span class="sw" style="background:#fd8d3c"></span>5-15</div><div><span class="sw" style="background:#fec44f"></span>15-30</div><div><span class="sw" style="background:#74add1"></span>30-60</div><div><span class="sw" style="background:#4575b4"></span>60+ (no recording in decades)</div>';
 const LO='<div><span class="sw" style="background:#bdbdbd"></span>individual</div><div><span class="sw" style="background:#d7301f"></span>investor (LLC/Corp/LP)</div><div><span class="sw" style="background:#984ea3"></span>trust</div><div><span class="sw" style="background:#377eb8"></span>institutional</div>';
 const map=new maplibregl.Map({container:'map',center:[-122.273,37.871],zoom:12.4,
- style:{version:8,sources:{c:{type:'raster',tiles:['https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'],tileSize:256,attribution:'© OSM © CARTO'}},layers:[{id:'bg',type:'raster',source:'c'}]}});
+ style:{version:8,sources:{c:{type:'raster',tiles:['https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'],tileSize:256,attribution:'Tiles © Esri — Esri, HERE, Garmin, © OpenStreetMap contributors'}},layers:[{id:'bg',type:'raster',source:'c'}]}});
 function mode(m){
   document.getElementById('bT').className=m=='t'?'on':''; document.getElementById('bO').className=m=='o'?'on':'';
   map.setPaintProperty('pts','circle-color', m=='t'?TEN:OWN);
   document.getElementById('legend').innerHTML = m=='t'?LT:LO;
-  document.getElementById('cap').textContent = m=='t'? 'Color = years since the last document (sale, refinance, or transfer) was recorded on the parcel — the 2020-22 wave is the pandemic refi boom. A recent-financial-activity signal, NOT years owned. Elmwood outlined.' : 'Color = owner type, classified from the owner name. Trust is separated from investor (most trusts are family estate-planning). Elmwood outlined.';
+  document.getElementById('cap').textContent = m=='t'? 'Color = years since the last document (sale, refinance, or transfer) was recorded on the parcel — the 2020-22 wave is the pandemic refi boom. A recent-financial-activity signal, NOT years owned. Elmwood outlined.' : 'Color = owner type, classified from the owner name. Trust is separated from investor (most trusts are family estate-planning). \u26a0 THE OWNER NAMES ARE FROM 2017 \u2014 the City parcel layer they come from has not been edited since 2017-11-09, so names and this split are a nine-year-old roll, not current ownership. The county publishes no owner names. Elmwood outlined.';
 }
 map.on('load',()=>{
  map.addSource('el',{type:'geojson',data:__ELB__});
@@ -115,7 +136,7 @@ map.on('load',()=>{
      +(p.av?'<br>assessed value: $'+(p.av*1000).toLocaleString():'')
      +'<br>last recorded document: '+(2026-p.t)+' ('+p.t+' yr ago)'
      +'<br><a href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Street view ↗</a>'
-     +' &middot; <a href="https://www.sfchronicle.com/projects/2025/ca-property-map/?search='+encodeURIComponent(a+', Berkeley')+'" target="_blank" rel="noopener">SF Chronicle ↗</a>').addTo(map); });
+     +' &middot; <a href="https://www.sfchronicle.com/projects/2025/ca-property-map/?search='+encodeURIComponent(a+', Berkeley')+'" target="_blank" rel="noopener" data-addr="'+encodeURIComponent(a+', Berkeley')+'" onclick="try{navigator.clipboard.writeText(decodeURIComponent(this.dataset.addr))}catch(e){}" title="Opens the Chronicle owner map; the address is copied to your clipboard so you can paste it into the search box.">SF Chronicle ↗</a>'+' &middot; <a href="https://app.regrid.com/us/ca/alameda/berkeley" target="_blank" rel="noopener" data-addr="'+encodeURIComponent(a+', Berkeley')+'" onclick="try{navigator.clipboard.writeText(decodeURIComponent(this.dataset.addr))}catch(e){}" title="Opens Regrid Berkeley parcel map; address copied to clipboard, paste into the search box for free parcel data (APN, sale price, assessed value, building).">Regrid ↗</a>').addTo(map); });
  map.on('mouseenter','pts',()=>map.getCanvas().style.cursor='pointer');
  map.on('mouseleave','pts',()=>map.getCanvas().style.cursor='');
 });

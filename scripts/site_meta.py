@@ -32,8 +32,8 @@ DESC = {
  "explorer.html": ("Pipeline Explorer",
    "Every tracked Berkeley housing project: dates, units, affordability, assessed value and "
    "RHNA cycle, searchable and sortable."),
- "explorer_v2.html": ("Pipeline Explorer",
-   "Every tracked Berkeley housing project: dates, units, affordability and RHNA cycle."),
+ "explorer_v2.html": ("Moved — Pipeline Explorer",
+   "This page has moved to the Pipeline Explorer at berkeleybuild.com/explorer.html."),
  "housing-audit.html": ("The Housing Audit",
    "Our count against the City's own submitted APR, row by row, with every difference named "
    "and sourced."),
@@ -125,9 +125,17 @@ def touch_icon(path, size=180):
     return path
 
 
+# Pages that are REDIRECT STUBS: their canonical must point at the page they redirect TO,
+# never at themselves, or we would tell search engines the retired URL is the real one.
+# explorer_v2.html retired 2026-09-07 (it served current data through outdated page code,
+# including an RHNA allocation that appears in no Berkeley filing).
+REDIRECTS = {"explorer_v2.html": "explorer.html"}
+
+
 def block(page):
     short, desc = DESC.get(page, (NAME, "Berkeley's housing pipeline, from the city's own records."))
-    url = f"{SITE}/" if page == "index.html" else f"{SITE}/{page}"
+    target = REDIRECTS.get(page, page)
+    url = f"{SITE}/" if target == "index.html" else f"{SITE}/{target}"
     t = f"{short} — {NAME}" if page != "index.html" else f"{NAME} — Berkeley's housing pipeline"
     return "\n".join([
         BEGIN,
@@ -148,6 +156,7 @@ def block(page):
         f'<meta name="twitter:title" content="{t}">',
         f'<meta name="twitter:description" content="{desc}">',
         f'<meta name="twitter:image" content="{SITE}/og-card.png">',
+        *(['<meta name="robots" content="noindex">'] if page in REDIRECTS else []),
         END, ""])
 
 

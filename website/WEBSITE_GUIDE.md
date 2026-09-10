@@ -26,7 +26,8 @@ berkeleybuild.com is **two layers**:
 | `docs/explorer.html` | Explorer **app shell**: tabs + viz (Tailwind / Chart.js / D3-Sankey / Leaflet via CDN). | edit directly |
 | `docs/explorer.js` | Explorer **client logic** (~184 KB). | edit directly |
 | `docs/explorer_data.js` | **GENERATED** `const DATA = {projects, events, fees, staff, players, timeline, documents}` (~1.5 MB). | re-run exporter |
-| `docs/map.html`, `docs/methodology.html`, `docs/explorer_v2.html` | secondary / legacy pages | edit directly |
+| `docs/map.html`, `docs/methodology.html` | secondary / legacy pages | edit directly |
+| `docs/explorer_v2.html` | **REDIRECT STUB** to `explorer.html` (retired 2026-09-07 — it served current data through outdated page code). | do not restore; rebuild from `explorer_data.js` if ever wanted |
 | `docs/geometry.kml`, `docs/tours/*` | Google Earth geometry + tours | `generate_kml.py` |
 | `docs/videos/*.mp4` | local flyover videos | hand-added |
 

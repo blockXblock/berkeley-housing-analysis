@@ -21,6 +21,16 @@ bill PDFs (OUTSIDE the repo)            berkeley.db parcels      City taxable sq
    model_citywide.py  ------> data/derived/berkeley_sfr_tax_by_decile_2025-26.csv
 ```
 
+Added 2026-09-15 (both read `berkeley.db.taxable_sqft`, the City sqft loaded as a table):
+
+```
+score_prop13.py        parcels + taxable_sqft + HOEX -> per-parcel Prop 13 discount vs own block
+                         -> scratch/<date>/prop13_parcels_*.csv      (household AV: local only)
+                         -> data/derived/berkeley_prop13_by_block_2025-26.csv   (n>=8, publishable)
+city_owned_parcels.py  addresses_arcgis owner names -> every publicly owned parcel with zoning,
+                         lot + building sqft -> data/derived/berkeley_public_owned_parcels.csv
+```
+
 `build_sampling_frame.py` produced the stratified parcel list that the bills were pulled
 for; rerun it to draw a new sample.
 
@@ -29,6 +39,8 @@ for; rerun it to draw a new sample.
 ```bash
 python -m scripts.tax_incidence.derive_rate_schedule   # bills  -> rate schedule
 python -m scripts.tax_incidence.model_citywide         # schedule -> citywide model
+python -m scripts.tax_incidence.score_prop13           # per-parcel Prop 13 score + block map data
+python -m scripts.tax_incidence.city_owned_parcels     # publicly owned parcel list
 ```
 
 Requires `pdftotext` (`brew install poppler`) and network access for the City sqft API.

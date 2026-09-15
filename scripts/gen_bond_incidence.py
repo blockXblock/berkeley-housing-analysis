@@ -23,6 +23,16 @@ NOT modeled in v1 — the base is gross TotalNetValue. (3) The bond's annual deb
 as the district base; the exact figure must be validated against the county tax-rate book + actual
 bills before publication. Directionally honest; not a certified rate.
 
+ADDED 2026-09-15 (three upgrades, all DERIVED from tables already in hand):
+  (a) PROP 13 POSITION per single-family lot — the parcel's AV/sqft vs its own block's p90 (scoring imported
+      from scripts/tax_incidence/score_prop13.py; sqft = berkeley.db.taxable_sqft, the City's own base). Shows
+      neighbor-vs-neighbor: the same bond, the same street, a 30x spread. Block rings from
+      data/derived/berkeley_prop13_by_block_2025-26.csv (n>=8 blocks only).
+  (b) TRUE SALES 2023-2025 from parcel_facts.db.ownership_transfers (County Ownership Transfer List, a 2-yr
+      rolling window) — replaces "recorded-doc recency" as the recent-buyer signal. Sales BEFORE 2023 are
+      simply outside the window: "not sold since 2023" != "long-held".
+  (c) SQFT-BASED ALTERNATIVE: the same $ raised per taxable building sqft (how Berkeley's own parcel taxes are
+      levied), alongside the flat-per-parcel alternative.
 Output: docs/maps/bond_incidence.html (+ _data.json). Serve to view (file:// blocks the streamed fetch).
 """
 import sqlite3, json, os, sys, warnings
@@ -75,6 +85,32 @@ def main():
     p = p.merge(pf.drop_duplicates("capn"), on="capn", how="left")
     p["owner_occupied"] = p.owner_occupied.fillna(0).astype(int)
 
+    # ---- (a) Prop 13 position: IMPORT the scorer, never re-derive (scripts/tax_incidence/score_prop13.py) ----
+    from scripts.tax_incidence import score_prop13 as sp
+    sched = json.load(open(sp.SCHEDULE))
+    scored, _ = sp.score(sp.load(db), sched)
+    p13 = pd.DataFrame([{"APN": r["apn"], "p13_disc": r["discount"], "p13_ref": r["ref_level"],
+                         "p13_ben": r["benefit_usd"]} for r in scored])
+    p = p.merge(p13, on="APN", how="left")
+    blk = pd.read_csv("data/derived/berkeley_prop13_by_block_2025-26.csv")
+    # taxable building sqft (City base for the per-sqft parcel taxes)
+    sq = pd.read_sql("SELECT county_apn AS APN, bldsqfttaxable AS sqft FROM taxable_sqft WHERE county_apn IS NOT NULL", db)
+    p = p.merge(sq.drop_duplicates("APN"), on="APN", how="left")
+
+    # ---- (b) true sales: latest County-recorded ownership transfer per parcel (2023-2025 window) ----
+    tr = pd.read_sql("SELECT capn, substr(transfer_date,1,4) AS sold_yr, transfer_value FROM ownership_transfers "
+                     "WHERE transfer_date >= '2023'", sqlite3.connect("databases/parcel_facts.db"))
+    tr["transfer_value"] = pd.to_numeric(tr.transfer_value, errors="coerce")
+    tr = tr.sort_values(["capn", "sold_yr"]).groupby("capn").agg(sold_yr=("sold_yr", "max"),
+                                                                    sold_val=("transfer_value", "max")).reset_index()
+    p = p.merge(tr, on="capn", how="left")
+    # VERIFIED 2026-09-15: transfers WITH a recorded value sit at market (median 98% of block p90 AV/sqft);
+    # transfers WITHOUT one are indistinguishable from unsold parcels (43% vs 40%) -- trust / parent-child /
+    # inter-family changes of ownership that do not reassess. Only PRICED transfers count as a sale;
+    # unpriced ones are kept separately as "ownership transfer, not a market sale".
+    p["xfer_yr"] = pd.to_numeric(p.sold_yr, errors="coerce").fillna(0).astype(int)
+    p["sold_yr"] = p.xfer_yr.where(p.sold_val.fillna(0) > 0, 0)
+
     # ---- OFFICIAL figures: single source of truth is B2050BIS's reconciliation baseline (CONTRACT: the map
     #      READS official numbers, never hardcodes them). Fallback to the 5%/30yr assumption if it's absent. ----
     BASELINE = "data/baselines/measure_u_reconciliation_baseline_2026-08-21.json"
@@ -91,13 +127,33 @@ def main():
     p["cost_av"] = (rate * p.TotalNetValue).round(0)                      # ad-valorem annual cost (today's-base rate)
     cost_flat = round(annual / n)                                          # flat parcel-tax annual cost
     p["delta"] = cost_flat - p.cost_av        # >0: flat costs you MORE (low-AV long-held); <0: flat cheaper
+    # (c) same $ raised on taxable building sqft -- the base Berkeley's own parcel taxes use
+    rate_sqft = annual / p.sqft.fillna(0).sum()
+    p["cost_sq"] = (rate_sqft * p.sqft.fillna(0)).round(0)
+    p["delta_sq"] = p.cost_sq - p.cost_av      # >0: a sqft tax costs you MORE than ad valorem
 
     # ---- headline stats (DERIVED, printed + injected — never hardcoded in the HTML) ----
     # NOTE: `tenure` here is YEARS SINCE LAST RECORDED DOCUMENT (refi/transfer/sale), NOT years owned.
     # We do NOT compute a "recent-buyer vs long-held" cost ratio off it — that would mislabel refinancers
     # as recent buyers (retracted 2026-08-14 after 2811 Benvenue, owned since 1988, showed as 5 yr).
     recent5 = float((p.tenure < 5).mean() * 100)      # % of parcels with a recording in the last 5 yr (the refi wave)
+    blkref = p[p.p13_ref == "block"]
+    sold = p[p.sold_yr > 0]
     stats = {
+        # (a) Prop 13 position (single-family lots, block-referenced)
+        "p13_n": int(len(blkref)), "p13_blocks": int(len(blk)),
+        "p13_med_pct": round(100 * (1 - blkref.p13_disc.median()), 0),
+        "p13_under25": round(100 * (blkref.p13_disc > 0.75).mean(), 1),
+        "p13_spread_med": round(blk.av_sqft_max_over_min.median(), 1),
+        "p13_benefit_m": round(blkref.p13_ben.sum() / 1e6, 0),
+        # (b) true sales 2023-2025
+        "sold_n": int(len(sold)), "sold_pct": round(100 * len(sold) / n, 1),
+        "xfer_n": int(((p.xfer_yr > 0) & (p.sold_yr == 0)).sum()),
+        "sold_med": round(sold.cost_av.median(), 0), "unsold_med": round(p[p.sold_yr == 0].cost_av.median(), 0),
+        "sold_sfr_med": round(sold[sold.use_bucket == "residential_sf"].cost_av.median(), 0),
+        "unsold_sfr_med": round(p[(p.sold_yr == 0) & (p.use_bucket == "residential_sf")].cost_av.median(), 0),
+        # (c) sqft alternative
+        "rate_sqft": round(rate_sqft, 4), "sq_med": round(p.loc[p.sqft > 0, "cost_sq"].median(), 0),
         "base_b": tot_av / 1e9, "annual_m": annual / 1e6, "rate_100k": rate * 100_000,
         "n": n, "med_av": p.cost_av.median(), "p10": p.cost_av.quantile(.10), "p90": p.cost_av.quantile(.90),
         "flat": cost_flat, "ineq": p.cost_av.quantile(.90) / max(p.cost_av.quantile(.10), 1),
@@ -125,15 +181,32 @@ def main():
           f"p90 ${stats['p90']:.0f}  ({stats['ineq']:.0f}x spread)")
     print(f"flat parcel tax (same $): ${cost_flat}/parcel (uniform)")
     print(f"recorded a document in last 5yr (refi/transfer/sale): {recent5:.0f}% of parcels")
+    print(f"Prop 13: {stats['p13_n']:,} SFR lots on {stats['p13_blocks']} blocks; median assessed at "
+          f"{stats['p13_med_pct']:.0f}% of block market; {stats['p13_under25']}% under 25%; "
+          f"block max/min median {stats['p13_spread_med']}x; benefit ${stats['p13_benefit_m']:.0f}M/yr")
+    print(f"sold 2023-25: {stats['sold_n']:,} parcels ({stats['sold_pct']}%); median bond cost sold "
+          f"${stats['sold_med']:.0f} vs not-sold ${stats['unsold_med']:.0f} (SFR: ${stats['sold_sfr_med']:.0f} vs ${stats['unsold_sfr_med']:.0f})")
+    print(f"sqft alternative: ${rate_sqft:.4f}/sqft -> median ${stats['sq_med']:.0f}/yr")
 
     def _s(v): return "" if pd.isna(v) else str(v)
     feats = [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [round(x, 5), round(y, 5)]},
               "properties": {"v": int(av / 1000), "c": int(c), "d": int(d), "t": int(t) if pd.notna(t) else -1,
                              "a": a, "own": _s(_display_owner(ow)), "ot": _s(otp), "ub": _s(ub),
-                             "yb": int(yb) if pd.notna(yb) else 0, "oo": int(oo)}}
-             for x, y, av, c, d, t, a, ow, otp, ub, yb, oo in zip(
+                             "yb": int(yb) if pd.notna(yb) else 0, "oo": int(oo),
+                             "sq": int(sqf) if pd.notna(sqf) else 0, "ds": int(dsq) if pd.notna(dsq) else 0,
+                             "pd": round(float(pdisc), 2) if (pd.notna(pdisc) and pref == "block") else -9,
+                             "pb": int(pben) if pd.notna(pben) else 0,
+                             "sy": int(sy), "sv": int(sv) if (pd.notna(sv) and sv > 0) else 0,
+                             "xy": int(xy) if not sy else 0}}
+             for x, y, av, c, d, t, a, ow, otp, ub, yb, oo, sqf, dsq, pdisc, pref, pben, sy, sv, xy in zip(
                  p.Longitude, p.Latitude, p.TotalNetValue, p.cost_av, p.delta, p.tenure, p.addr,
-                 p.owner_name, p.owner_type, p.use_bucket, p.build_year, p.owner_occupied)]
+                 p.owner_name, p.owner_type, p.use_bucket, p.build_year, p.owner_occupied,
+                 p.sqft, p.delta_sq, p.p13_disc, p.p13_ref, p.p13_ben, p.sold_yr, p.sold_val, p.xfer_yr)]
+    blk_feats = [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [round(r.lon, 5), round(r.lat, 5)]},
+                  "properties": {"b": r.block, "n": int(r.n_sfr), "sp": float(r.av_sqft_max_over_min),
+                                 "md": float(r.median_discount), "u25": float(r.share_under_25pct),
+                                 "ben": int(r.benefit_usd_total), "ct": int(r.median_county_av_tax),
+                                 "st": int(r.median_city_sqft_tax)}} for r in blk.itertuples()]
 
     import geopandas as gpd
     el = gpd.read_file("data/reference/berkeley_neighborhoods.geojson").to_crs(4326)
@@ -163,8 +236,13 @@ def main():
 <div>
 <button id="b_c" class="on" onclick="mode('c')">Annual $ cost</button>
 <button id="b_o" onclick="mode('o')">Owner-occupied vs rental</button>
-<button id="b_d" onclick="mode('d')">Flat vs ad-valorem</button>
+<button id="b_d" onclick="mode('d')">Flat / sqft vs ad-valorem</button>
+<button id="b_p" onclick="mode('p')">Prop 13 vs neighbors</button>
+<button id="b_s" onclick="mode('s')">Sold 2023–25</button>
 <button id="b_t" onclick="mode('t')">Recorded-doc recency</button></div>
+<div id="alts" style="margin:4px 0 2px;display:none"><span class="sub">compare ad-valorem with:</span>
+<button id="a_flat" class="on" onclick="setAlt('flat')">flat per parcel</button>
+<button id="a_sq" onclick="setAlt('sq')">per building sqft</button></div>
 <div id="rates" style="margin:6px 0 2px"><span class="sub">rate:</span>
 <button id="r_today" class="on" onclick="setRate(S.rate_today)">today $__RATE__</button>
 <button id="r_peak" onclick="setRate(S.rate_peak)">city peak $__PEAK__</button>
@@ -175,12 +253,23 @@ def main():
 <div class="who" id="who"></div><div style="margin-top:8px;font-size:11px"><a href="https://www.sfchronicle.com/projects/2025/ca-property-map/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">↗ Compare: SF Chronicle statewide owner map</a></div></div>
 <script>
 const S=__STATS__;
-let FEATS={features:[]}, MODE='c', RATE=S.rate_today;
+let FEATS={features:[]}, MODE='c', RATE=S.rate_today, ALT='flat';
 const usd=x=>'$'+Math.round(x).toLocaleString();
 // cost = assessed value × rate/$100k. v = AV/1000, so cost = v × rate_per_100k / 100. Rate is selectable.
 const costExpr=r=>['step',['*',['get','v'],r/100],'#2c7fb8',200,'#7fcdbb',500,'#fec44f',1000,'#fd8d3c',2500,'#e31a1c'];
 const DELTA=['step',['get','d'],'#b2182b',-400,'#ef8a62',-100,'#f7f7f7',100,'#67a9cf',400,'#2166ac']; // red=flat costs you MORE
 const TEN=['step',['get','t'],'#e31a1c',5,'#fd8d3c',15,'#fec44f',30,'#74add1',60,'#4575b4'];
+const DSQ=['step',['get','ds'],'#b2182b',-400,'#ef8a62',-100,'#f7f7f7',100,'#67a9cf',400,'#2166ac']; // red = sqft tax costs you MORE
+// pd = 1 - (AV/sqft)/(block p90 AV/sqft); -9 = not a scored single-family lot (grey)
+const P13=['case',['<',['get','pd'],-1],'#d9d9d9',['step',['get','pd'],'#2c7fb8',0.25,'#7fcdbb',0.5,'#fec44f',0.75,'#e31a1c']];
+const SOLD=['case',['>',['get','sy'],0],['match',['get','sy'],2023,'#fd8d3c',2024,'#e31a1c',2025,'#99000d','#cfd8dc'],['>',['get','xy'],0],'#9e9ac8','#cfd8dc'];
+const BLK=['step',['get','sp'],'#74add1',10,'#fec44f',30,'#fd8d3c',60,'#e31a1c'];
+const LP='<div><span class="sw" style="background:#2c7fb8"></span>near market (assessed &gt;75% of block level)</div><div><span class="sw" style="background:#7fcdbb"></span>50–75%</div><div><span class="sw" style="background:#fec44f"></span>25–50%</div><div><span class="sw" style="background:#e31a1c"></span>under 25% — deep Prop 13</div><div><span class="sw" style="background:#d9d9d9"></span>not a scored single-family lot</div><div style="margin-top:4px"><span class="sw" style="background:#fff;border:2px solid #e31a1c"></span>block ring (zoom in to see): highest/lowest AV per sqft on the block (blue &lt;10× → red 60×+); click a ring</div>';
+const LS='<div><span class="sw" style="background:#99000d"></span>sold 2025</div><div><span class="sw" style="background:#e31a1c"></span>sold 2024</div><div><span class="sw" style="background:#fd8d3c"></span>sold 2023</div><div><span class="sw" style="background:#9e9ac8"></span>ownership transfer 2023–25 with NO price (trust / family — not a market sale)</div><div><span class="sw" style="background:#cfd8dc"></span>no County-recorded transfer in the window</div>';
+const LQ='<div><span class="sw" style="background:#2166ac"></span>sqft tax cheaper for you (high value per sqft)</div><div><span class="sw" style="background:#f7f7f7;border:1px solid #ccc"></span>about the same</div><div><span class="sw" style="background:#b2182b"></span>sqft tax costs you MORE (big building, low assessed value)</div>';
+const CAPp='Each single-family lot\\'s assessed value per sqft against the TOP of its own block (p90 ≈ recent-sale level). Same street, same bond: the house assessed at 20% of its neighbor pays one-fifth the bond. Sqft is the City\\'s taxable square footage. Blocks with fewer than 8 single-family lots are grey. <b>Assessed value is NOT wealth</b> — a deep discount means an old purchase, not a poor household.';
+const CAPs='Parcels with a County-recorded ownership transfer AND a recorded price in 2023–2025 (Assessor Ownership Transfer List, a two-year rolling window) — the actual recent buyers, reassessed to purchase price, so they pay the most per house. Transfers with no price (purple) are trust / parent-child / inter-family changes that do NOT reassess — verified: they sit at the same assessed level as unsold parcels. Not-sold-in-window ≠ long-held: sales before 2023 are outside the window.';
+const CAPq='Same $300M raised on TAXABLE BUILDING SQFT ('+'$'+S.rate_sqft.toFixed(2)+'/sqft/yr) — the base Berkeley\\'s own voter-approved parcel taxes use. Red = you would pay MORE under a sqft tax (big house, low assessed value); blue = LESS. Tracks building size, not purchase date.';
 const LC='<div><span class="sw" style="background:#2c7fb8"></span>&lt;$200/yr</div><div><span class="sw" style="background:#7fcdbb"></span>$200–500</div><div><span class="sw" style="background:#fec44f"></span>$500–1,000</div><div><span class="sw" style="background:#fd8d3c"></span>$1,000–2,500</div><div><span class="sw" style="background:#e31a1c"></span>$2,500+ /yr</div>';
 const LD='<div><span class="sw" style="background:#2166ac"></span>flat tax cheaper for you (high-value)</div><div><span class="sw" style="background:#f7f7f7;border:1px solid #ccc"></span>about the same</div><div><span class="sw" style="background:#b2182b"></span>flat tax costs you MORE (long-held/low-value)</div>';
 const LT='<div><span class="sw" style="background:#e31a1c"></span>&lt;5 yr (recent sale/refi/transfer)</div><div><span class="sw" style="background:#fd8d3c"></span>5–15</div><div><span class="sw" style="background:#fec44f"></span>15–30</div><div><span class="sw" style="background:#74add1"></span>30–60</div><div><span class="sw" style="background:#4575b4"></span>60+ (no recording in decades)</div>';
@@ -199,17 +288,25 @@ function stat(m){
  const f=RATE/S.rate_today;
  if(m=='c') return '<span class="big">'+usd(S.med_av*f)+'/yr</span> median parcel · '+rateLbl()+'<br>range '+usd(S.p10*f)+' – '+usd(S.p90*f)+' ('+Math.round(S.ineq)+'× spread for the same bond)';
  if(m=='o') return '<span class="big">'+S.oo_share+'%</span> of the bond falls on owner-occupied homes<br>the other '+(100-S.oo_share).toFixed(1)+'% is on rentals & commercial — largely tenant-borne via pass-through';
+ if(m=='d'&&ALT=='sq') return '<span class="big">'+usd(S.sq_med)+'/yr</span> median parcel on a sqft base<br>vs ad-valorem median '+usd(S.med_av)+' — a sqft tax tracks building size, not purchase date';
  if(m=='d') return '<span class="big">'+usd(S.flat_lit)+'/yr</span> flat, every parcel<br>vs ad-valorem median '+usd(S.med_av)+' — a flat tax is blind to value';
+ if(m=='p') return '<span class="big">'+S.p13_med_pct+'%</span> — the median house is assessed at '+S.p13_med_pct+'% of its own block\\'s market level<br>'+S.p13_under25+'% are under 25%; within a typical block the spread is <b>'+S.p13_spread_med+'×</b> ('+S.p13_n.toLocaleString()+' lots, '+S.p13_blocks+' blocks; ≈ $'+S.p13_benefit_m+'M/yr of ad-valorem tax not levied)';
+ if(m=='s') return '<span class="big">'+S.sold_n.toLocaleString()+'</span> parcels sold at a recorded price 2023–25 ('+S.sold_pct+'%; another '+S.xfer_n.toLocaleString()+' changed hands with no price — not sales)<br>median bond cost, single-family: <b>'+usd(S.sold_sfr_med)+'/yr</b> if bought since 2023 vs '+usd(S.unsold_sfr_med)+' if not';
  return '<span class="big">'+Math.round(S.recent5)+'%</span> of parcels recorded a document in the last 5 years (the refi wave) — a financial-activity signal, <b>not</b> years owned';
 }
 function mode(m){ MODE=m;
- for(const k of ['c','o','d','t']) document.getElementById('b_'+k).className = k==m?'on':'';
+ for(const k of ['c','o','d','p','s','t']) document.getElementById('b_'+k).className = k==m?'on':'';
  document.getElementById('rates').style.display = m=='c'?'block':'none';
- map.setPaintProperty('pts','circle-color', m=='c'?costExpr(RATE):m=='o'?OO:m=='d'?DELTA:TEN);
- document.getElementById('legend').innerHTML = m=='c'?LC:m=='o'?LO:m=='d'?LD:LT;
- document.getElementById('cap').innerHTML = m=='c'?('Ad-valorem: each parcel pays rate × its assessed value. <i>'+rateNote()+'</i>'):m=='o'?CAPo:m=='d'?CAPd:CAPt;
+ document.getElementById('alts').style.display = m=='d'?'block':'none';
+ map.setPaintProperty('pts','circle-color', m=='c'?costExpr(RATE):m=='o'?OO:m=='d'?(ALT=='sq'?DSQ:DELTA):m=='p'?P13:m=='s'?SOLD:TEN);
+ map.setLayoutProperty('blk','visibility', m=='p'?'visible':'none');
+ map.setPaintProperty('pts','circle-opacity', m=='s'?['case',['>',['get','sy'],0],1,['>',['get','xy'],0],0.7,0.25]:0.9);
+ map.setPaintProperty('pts','circle-stroke-opacity', m=='s'?['case',['>',['get','sy'],0],1,0.15]:1);
+ document.getElementById('legend').innerHTML = m=='c'?LC:m=='o'?LO:m=='d'?(ALT=='sq'?LQ:LD):m=='p'?LP:m=='s'?LS:LT;
+ document.getElementById('cap').innerHTML = m=='c'?('Ad-valorem: each parcel pays rate × its assessed value. <i>'+rateNote()+'</i>'):m=='o'?CAPo:m=='d'?(ALT=='sq'?CAPq:CAPd):m=='p'?CAPp:m=='s'?CAPs:CAPt;
  document.getElementById('stat').innerHTML = stat(m);
 }
+function setAlt(a){ ALT=a; document.getElementById('a_flat').className=a=='flat'?'on':''; document.getElementById('a_sq').className=a=='sq'?'on':''; mode('d'); }
 function setRate(r){ RATE=r;
  document.getElementById('r_today').className=(Math.abs(r-S.rate_today)<1e-9)?'on':'';
  document.getElementById('r_peak').className=(r==S.rate_peak)?'on':'';
@@ -220,12 +317,20 @@ function setRate(r){ RATE=r;
  if(S.tier1&&S.tier1.apartments_mixed!==undefined) w+=' And the biggest payers are <b>not homeowners</b>: the top 1% (parcels over $'+(S.tier1_entry/1e6).toFixed(1)+'M assessed) are <b>'+Math.round(S.tier1.apartments_mixed)+'% apartment buildings, '+Math.round(S.tier1.commercial_industrial)+'% commercial, '+Math.round(S.tier1.institutional)+'% institutional</b> — just '+S.tier1_sfr_n+' single-family homes. Apartments alone are <b>'+S.apt_share+'%</b> of the bond, passed through to renters.';
  document.getElementById('who').innerHTML=w; })();
 const map=new maplibregl.Map({container:'map',center:[-122.273,37.871],zoom:12.3,
- style:{version:8,sources:{c:{type:'raster',tiles:['https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'],tileSize:256,attribution:'© OSM © CARTO'}},layers:[{id:'bg',type:'raster',source:'c'}]}});
+ style:{version:8,sources:{c:{type:'raster',tiles:['https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'],tileSize:256,attribution:'Tiles © Esri — Esri, HERE, Garmin, © OpenStreetMap contributors'}},layers:[{id:'bg',type:'raster',source:'c'}]}});
 map.on('load',()=>{
  map.addSource('el',{type:'geojson',data:__ELB__});
  map.addLayer({id:'elw',type:'line',source:'el',paint:{'line-color':'#111','line-width':1.5,'line-dasharray':[2,2]}});
  map.addSource('p',{type:'geojson',data:'bond_incidence_data.json'});
  map.addLayer({id:'pts',type:'circle',source:'p',paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,1.8,15,5],'circle-color':costExpr(S.rate_today),'circle-opacity':0.9,'circle-stroke-color':'rgba(20,20,20,0.9)','circle-stroke-width':['interpolate',['linear'],['zoom'],11,0.6,15,1.2]}});
+ map.addSource('b',{type:'geojson',data:__BLK__});
+ map.addLayer({id:'blk',type:'circle',source:'b',minzoom:13.5,layout:{visibility:'none'},paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,7,15,26],'circle-color':'rgba(0,0,0,0)','circle-stroke-color':BLK,'circle-stroke-width':['interpolate',['linear'],['zoom'],11,1.5,15,3]}});
+ map.on('click','blk',e=>{const b=e.features[0].properties;
+   new maplibregl.Popup().setLngLat(e.lngLat).setHTML('<b>Block '+b.b+'</b> — '+b.n+' single-family lots'
+     +'<br>highest / lowest assessed $ per sqft: <b>'+b.sp.toFixed(0)+'×</b>'
+     +'<br>median lot assessed at '+Math.round(100*(1-b.md))+'% of block market; '+Math.round(100*b.u25)+'% under 25%'
+     +'<br>ad-valorem tax not levied on this block: ≈ '+usd(b.ben)+'/yr'
+     +'<br>median county AV tax '+usd(b.ct)+' · median city sqft taxes '+usd(b.st)).addTo(map);});
  fetch('bond_incidence_data.json').then(r=>r.json()).then(d=>{FEATS=d;}); mode('c');
  map.on('click','pts',e=>{const p=e.features[0].properties,a=p.a||'(address unavailable)';
    const t=p.t<0?'unknown':(2026-p.t)+' ('+p.t+' yr ago)';
@@ -239,6 +344,9 @@ map.on('load',()=>{
      +'<hr style="margin:5px 0;border:none;border-top:1px solid #ddd">'
      +'your Measure U bond cost: <b>'+usd(p.v*RATE/100)+'/yr</b> <span style="color:#777">('+rateLbl()+')</span>'
      +'<br>if it were a flat parcel tax: '+usd(S.flat_lit)+'/yr'
+     +(p.sq?'<br>if it were a sqft tax: '+usd(p.v*RATE/100+p.ds)+'/yr <span style="color:#777">('+p.sq.toLocaleString()+' taxable sqft)</span>':'')
+     +(p.pd>-1?'<br>Prop 13: assessed at <b>'+Math.round(100*(1-p.pd))+'%</b> of this block\\'s market level — ≈ '+usd(p.pb)+'/yr of ad-valorem tax not levied':'')
+     +(p.sy?'<br><b>sold '+p.sy+' for '+usd(p.sv)+'</b> (County ownership transfer)':(p.xy?'<br>ownership transfer '+p.xy+', no recorded price — trust / family, not a market sale':''))
      +'<br>last recorded document: '+t
      +'<br><a href="https://www.google.com/maps/search/?api=1&query='+q+'" target="_blank" rel="noopener">Street view ↗</a>'
      +' &middot; <a href="https://www.sfchronicle.com/projects/2025/ca-property-map/?search='+encodeURIComponent(a+', Berkeley')+'" target="_blank" rel="noopener" data-addr="'+encodeURIComponent(a+', Berkeley')+'" onclick="try{navigator.clipboard.writeText(decodeURIComponent(this.dataset.addr))}catch(e){}" title="Opens the Chronicle owner map; the address is copied to your clipboard so you can paste it into the search box.">SF Chronicle ↗</a>'+' &middot; <a href="https://app.regrid.com/us/ca/alameda/berkeley" target="_blank" rel="noopener" data-addr="'+encodeURIComponent(a+', Berkeley')+'" onclick="try{navigator.clipboard.writeText(decodeURIComponent(this.dataset.addr))}catch(e){}" title="Opens Regrid Berkeley parcel map; address copied to clipboard, paste into the search box for free parcel data (APN, sale price, assessed value, building).">Regrid ↗</a>'
@@ -246,7 +354,7 @@ map.on('load',()=>{
  map.on('mouseenter','pts',()=>map.getCanvas().style.cursor='pointer');
  map.on('mouseleave','pts',()=>map.getCanvas().style.cursor='');
 });
-</script></body></html>""".replace("__ELB__", json.dumps(elb)).replace("__STATS__", js_stats) \
+</script></body></html>""".replace("__ELB__", json.dumps(elb)).replace("__BLK__", json.dumps({"type": "FeatureCollection", "features": blk_feats})).replace("__STATS__", js_stats) \
         .replace("__ANNUAL__", f"{stats['annual_m']:.1f}").replace("__BASE__", f"{stats['base_b']:.0f}") \
         .replace("__RATE__", f"{stats['rate_100k']:.0f}") \
         .replace("__PEAK__", f"{stats['rate_peak']:.0f}").replace("__AVG__", f"{stats['rate_avg']:.0f}")

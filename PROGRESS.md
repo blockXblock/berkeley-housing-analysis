@@ -8,6 +8,62 @@
 
 ---
 
+## 2026-09-15 — `berkeley.db` gains `taxable_sqft` (City per-parcel building/lot sqft); Prop 13 block map now derivable
+
+**Gated write #1 on `berkeley.db`:** new table **`taxable_sqft`** (29,167 rows; City of Berkeley
+Taxable Square Footage, `data.cityofberkeley.info` 9a47-nj4i, City-updated 2026-08-14; raw at
+`data/raw/berkeley_taxable_sqft_2026-09-15.csv`). `apn_raw` + `apn_normalized` (via
+`housing_rules.to_canonical_apn`) + `county_apn` (29,113 matched to `parcels.APN`; 54 unmatched =
+County-lag tail, kept with NULL). Snapshot `keep_snapshot_2026-09-15_pre-taxable-sqft.db`. Additive,
+no existing table touched. This is the sqft the City's 11 per-sqft parcel taxes are levied on
+(validated 35/37 exact vs bills, `docs/methodology/berkeley_property_tax_structure.md`) — so it feeds
+BOTH the city parcel-tax layer and a per-parcel Prop 13 discount score.
+
+**Findings (scratch, read-only, `scratch/2026-09-14/`):**
+- **No purchase-date field exists.** `LatestDocumentDate` re-confirmed NOT tenure (retracted 2026-08-14).
+  Prop 13 benefit is measured WITHOUT it: each SFR's AV/sqft vs its block's p90 AV/sqft.
+- 14,972 SFR on 638 blocks (>=8 SFR): **median house assessed at 42% of block market level**; 33% under
+  25%. Within-block AV/sqft max/min **median 30x**. Implied ad-valorem benefit ~**$189M/yr** SFR-only.
+  HOEX owner-occupied median discount 62% vs 45% non-HOEX.
+- County AV tax p90/p10 **14.8x** vs city sqft-taxes **2.7x** on the same 15k parcels — reproduces the
+  37-bill methodology figures (14.6x / 2.8x) citywide.
+- Publicly owned parcels (owner name in `addresses_arcgis`, all use code 0300): **City of Berkeley 209
+  parcels** (193 acres excluding the 4,378-ac Marina/tidelands parcel 60-2545-1), UC Regents 53 / 506 ac,
+  BUSD 35 / 103 ac, BART 19 / 19 ac, EBMUD 14 / 22 ac, BHA 8. John wants the City-owned set tracked
+  (buildable? water/power use? area).
+- Wallman quality-of-life attributes: 7/10 derivable now (address, type, owner_occ via HOEX,
+  grocery/drugstore/retail via `licenses` NAICS, campus distance, transit via GTFS fetch); GAPS =
+  `date_built`, `parking_spaces`. Table: `scratch/2026-09-14/wallman_attributes_table.md`.
+- Doc error to fix: `berkeley_property_tax_structure.md:45` says UseCode 1150 = SFR w/ 2nd unit; County
+  legend (`scratch/2026-09-14/usecodes.tsv`) says 1150 = Historical residential; ADU codes are
+  1200/1201/2501/2502.
+
+**Built (same day):** `scripts/tax_incidence/score_prop13.py` (16,852 SFR-lot parcels scored, 651
+blocks with n>=8 -> `data/derived/berkeley_prop13_by_block_2025-26.csv`; parcel rows to scratch only)
+and `scripts/tax_incidence/city_owned_parcels.py` (372 publicly owned parcels ->
+`data/derived/berkeley_public_owned_parcels.csv`: City 204 / 4,570 ac incl. Marina, UC 53, BUSD 35,
+EBRPD 31, BART 19, EBMUD 14, BHA 8). Uncommitted pending John's review.
+
+**Bond map upgraded (same day, `scripts/gen_bond_incidence.py` -> `docs/maps/bond_incidence.html`, NOT pushed):**
+three new views — **Prop 13 vs neighbors** (per-lot discount vs own block, scoring IMPORTED from
+`score_prop13.py`; 651 block rings, minzoom 13.5), **Sold 2023–25** (true County ownership transfers),
+**per-building-sqft alternative** sub-toggle ($0.23/sqft raises the same $20.3M; median $462 vs $465
+ad valorem). Popup adds sqft, Prop 13 line, sale year+price. Generator basemap re-synced to the published
+Esri fix (it had drifted back to broken CARTO tiles). **KEY VERIFICATION:** ownership transfers WITH a
+recorded price sit at market (98% of block p90); transfers WITHOUT one are indistinguishable from unsold
+(43% vs 40%) = trust/family changes that do not reassess -> ONLY priced transfers count as sales
+(1,219 = 4.4%; 2,001 unpriced shown separately). **Result: SFR bought since 2023 pays median $992/yr
+vs $442 for the rest — 2.2x.** Rendered + checked headless via Playwright (`scratch/2026-09-15/shots/`);
+Chrome extension connection was unavailable. Local preview: `python3 -m http.server 8765` in `docs/`.
+
+**Next:** (1) John eyeballs the three modes -> commit generator + map + scripts + derived CSVs on dev.
+(2) block polygons instead of rings (needs block polygons — union parcel geometry per
+book-page). (2) GTFS fetch for transit-headway attribute. (3) fix the 1150 doc line. (4) facility/park
+flag for City parcels (City open data "City-owned properties" layer, if it exists) before any
+"buildable" call.
+
+---
+
 ## 2026-09-07 — R2 hygiene: bucket root emptied, colon keys retired, a duplicate proven and dropped
 
 **All non-conforming R2 keys are gone.** 3 root-level objects and 2 colon keys -> **zero of each**.

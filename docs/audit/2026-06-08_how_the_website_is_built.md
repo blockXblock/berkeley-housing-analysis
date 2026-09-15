@@ -24,7 +24,8 @@ one script-generated data file.**
 | `docs/explorer.html` (121 KB) | **The Explorer app shell** — tabs + visualizations (Tailwind, Chart.js, D3-Sankey, Leaflet, all via CDN). | **Edit directly.** Stable; the data script is written so this "doesn't need changes". |
 | `docs/explorer.js` (184 KB) | The Explorer's **client-side logic** (tab rendering, charts, map). | **Edit directly** (Claude-authored JS). |
 | `docs/explorer_data.js` (1.56 MB) | **GENERATED data blob** — `const DATA = {projects, events, fees, staff, players, timeline, documents}`. | **Re-run the exporter** (below). |
-| also: `map.html`, `methodology.html`, `explorer_v2.html` (older) | secondary/legacy pages | edit directly |
+| also: `map.html`, `methodology.html` | secondary/legacy pages | edit directly |
+| `explorer_v2.html` | **REDIRECT STUB** to `explorer.html` since 2026-09-07 (it loaded the regenerated working data file, so it served current numbers through pre-fix page code). | do not edit; do not restore |
 
 Load chain: `explorer.html` → `<script src="explorer_data.js">` (generated) → `<script
 src="explorer.js">` (authored).

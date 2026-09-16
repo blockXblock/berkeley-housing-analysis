@@ -1,3 +1,11 @@
+---
+title: "The v1→v2 migration's architect attributions are wrong ~41% of the time"
+date: 2026-09-07
+type: note
+status: record
+area: audit
+---
+
 # The v1→v2 migration's architect attributions are wrong ~41% of the time
 
 **2026-09-07** · read-only finding · no corrections applied

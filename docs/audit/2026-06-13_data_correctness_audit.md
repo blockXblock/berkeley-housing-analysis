@@ -1,3 +1,11 @@
+---
+title: "Berkeley Housing v2 — Data-Correctness Audit (read-only ground truth)"
+date: 2026-06-13
+type: diagnostic
+status: record
+area: audit
+---
+
 # Berkeley Housing v2 — Data-Correctness Audit (read-only ground truth)
 
 **Date:** 2026-06-13 · **Authority:** live `databases/berkeley_housing_v2.db` (not docs/summaries) · **No writes, no fixes.**

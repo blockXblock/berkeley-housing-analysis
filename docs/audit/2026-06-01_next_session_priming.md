@@ -1,3 +1,11 @@
+---
+title: "Next-Session Priming — 2026-06-01"
+date: 2026-06-01
+type: session
+status: record
+area: audit
+---
+
 # Next-Session Priming — 2026-06-01
 
 **First action for a fresh session:** read `CLAUDE.md`, then this doc, then

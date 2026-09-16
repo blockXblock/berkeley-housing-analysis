@@ -1,3 +1,11 @@
+---
+title: "Load 2 — Pipeline Front-Half (parsed from accela_status scrapes) — 2026-06-06"
+date: 2026-06-06
+type: report
+status: record
+area: audit
+---
+
 # Load 2 — Pipeline Front-Half (parsed from accela_status scrapes) — 2026-06-06
 
 **Twelfth data-modifying operation.** Loaded 18 front-half stage rows parsed from the collected ZP

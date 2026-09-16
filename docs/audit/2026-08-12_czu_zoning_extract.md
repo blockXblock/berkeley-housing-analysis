@@ -1,3 +1,11 @@
+---
+title: "CZU zoning tables — extracted from Corridors Existing Conditions Report (Raimi + Assoc, 3/5/2025)"
+date: 2026-08-12
+type: report
+status: record
+area: audit
+---
+
 # CZU zoning tables — extracted from Corridors Existing Conditions Report (Raimi + Assoc, 3/5/2025)
 
 Source PDF: `czu_existing_conditions_2025.pdf` (berkeleyca.gov). Corridors = **College, North Shattuck, Solano** — the city's "high-resource areas" targeted for AFFH upzoning.

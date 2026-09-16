@@ -1,3 +1,11 @@
+---
+title: "The PDF↔CKAN completeness sweep (CY2018-2025) — the adjudicated city record takes shape"
+date: 2026-07-03
+type: diagnostic
+status: record
+area: audit
+---
+
 # The PDF↔CKAN completeness sweep (CY2018-2025) — the adjudicated city record takes shape
 
 **Date:** 2026-07-03 · **Who:** background agent (validated extractor) + CC · **Read-only.**

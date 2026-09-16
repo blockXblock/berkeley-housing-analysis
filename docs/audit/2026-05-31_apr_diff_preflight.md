@@ -1,3 +1,11 @@
+---
+title: "APR v1-vs-v2 Diff Pre-flight — 2026-05-31"
+date: 2026-05-31
+type: diagnostic
+status: record
+area: audit
+---
+
 # APR v1-vs-v2 Diff Pre-flight — 2026-05-31
 
 **Purpose:** Before the APR pilot diff (`generate_apr.py` on v1 vs

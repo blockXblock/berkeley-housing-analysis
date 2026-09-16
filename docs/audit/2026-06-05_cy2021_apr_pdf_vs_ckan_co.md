@@ -1,3 +1,11 @@
+---
+title: "CY2021 CO — Multi-Source Audit (City PDF · State CKAN · Accela · CPRA) — 2026-06-05"
+date: 2026-06-05
+type: note
+status: record
+area: audit
+---
+
 # CY2021 CO — Multi-Source Audit (City PDF · State CKAN · Accela · CPRA) — 2026-06-05
 
 **Read-only analysis. No canonical DB touched.** Reconciles Berkeley's CY2021 Certificate-of-Occupancy

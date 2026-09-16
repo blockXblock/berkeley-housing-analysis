@@ -1,3 +1,11 @@
+---
+title: "v1 → v2 Migration Checklist — 2026-05-31"
+date: 2026-05-31
+type: design
+status: record
+area: audit
+---
+
 # v1 → v2 Migration Checklist — 2026-05-31
 
 **Scope:** Read-only analysis. No scripts or databases modified. Maps every

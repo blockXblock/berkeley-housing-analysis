@@ -1,3 +1,11 @@
+---
+title: "How berkeleybuild.com Is Built — Durable Summary — 2026-06-08"
+date: 2026-06-08
+type: note
+status: record
+area: audit
+---
+
 # How berkeleybuild.com Is Built — Durable Summary — 2026-06-08
 
 Written so we don't re-derive this every time. Reconciles the question "is the site hand-written or

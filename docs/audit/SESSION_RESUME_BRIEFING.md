@@ -1,3 +1,11 @@
+---
+title: "SESSION RESUME BRIEFING — Berkeley project"
+date: 
+type: session
+status: record
+area: audit
+---
+
 # SESSION RESUME BRIEFING — Berkeley project
 
 **Last updated: 2026-06-01**

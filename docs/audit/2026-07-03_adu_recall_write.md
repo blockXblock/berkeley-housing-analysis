@@ -1,3 +1,11 @@
+---
+title: "ADU-conversion recall batch — 161 permits / +173 units (gated write, John-approved as amended)"
+date: 2026-07-03
+type: write
+status: applied
+area: audit
+---
+
 # ADU-conversion recall batch — 161 permits / +173 units (gated write, John-approved as amended)
 
 **Date:** 2026-07-03 · **Who:** 3-agent description adjudication + CC verify pass; John sample-audited

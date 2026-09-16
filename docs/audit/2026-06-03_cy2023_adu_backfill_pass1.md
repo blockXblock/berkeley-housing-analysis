@@ -1,3 +1,11 @@
+---
+title: "CY2023 ADU Backfill — Pass 1 (Bucket A) — 2026-06-03"
+date: 2026-06-03
+type: report
+status: record
+area: audit
+---
+
 # CY2023 ADU Backfill — Pass 1 (Bucket A) — 2026-06-03
 
 **Fourth data-modifying operation** on `berkeley_housing_v2.db`. Ingested the **103

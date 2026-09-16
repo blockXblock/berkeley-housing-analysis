@@ -1,3 +1,11 @@
+---
+title: "C2 Tranche 1 — net_units write (audit record)"
+date: 2026-06-28
+type: write
+status: applied
+area: audit
+---
+
 # C2 Tranche 1 — net_units write (audit record)
 
 **Date:** 2026-06-28

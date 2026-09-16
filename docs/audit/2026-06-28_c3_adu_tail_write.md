@@ -1,3 +1,11 @@
+---
+title: "C3 ADU-tail — ancillary double-count demotion (audit record)"
+date: 2026-06-28
+type: write
+status: applied
+area: audit
+---
+
 # C3 ADU-tail — ancillary double-count demotion (audit record)
 
 **Date:** 2026-06-28

@@ -1,3 +1,11 @@
+---
+title: "Data-Journalist Demo — Verified Readiness Ground Truth — 2026-06-07"
+date: 2026-06-07
+type: diagnostic
+status: record
+area: audit
+---
+
 # Data-Journalist Demo — Verified Readiness Ground Truth — 2026-06-07
 
 **Read-only assessment run by Claude Code against the live repo** (canonical `berkeley_housing_v2.db`

@@ -1,3 +1,11 @@
+---
+title: "Logan Park South Building + 1367 University Fixes — 2026-06-04"
+date: 2026-06-04
+type: note
+status: record
+area: audit
+---
+
 # Logan Park South Building + 1367 University Fixes — 2026-06-04
 
 **Seventh data-modifying operation.** Two fixes, both **primary-permit-confirmed from CPRA** (no

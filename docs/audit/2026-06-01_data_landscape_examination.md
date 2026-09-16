@@ -1,3 +1,11 @@
+---
+title: "Data Landscape Examination — 2026-06-01"
+date: 2026-06-01
+type: diagnostic
+status: record
+area: audit
+---
+
 # Data Landscape Examination — 2026-06-01
 
 **Read-only, fact-gathering only.** Complete inventory of all data stores + raw-

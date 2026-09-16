@@ -1,3 +1,11 @@
+---
+title: "Explorer v2 Cutover Validation — 2026-05-31"
+date: 2026-05-31
+type: diagnostic
+status: record
+area: audit
+---
+
 # Explorer v2 Cutover Validation — 2026-05-31
 
 **Goal:** Determine whether berkeleybuild.com can be cut over to current v2 data.

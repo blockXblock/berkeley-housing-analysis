@@ -1,3 +1,11 @@
+---
+title: "Completion display derives from the verdict (co_date), not the stage field"
+date: 2026-06-15
+type: note
+status: record
+area: audit
+---
+
 # Completion display derives from the verdict (co_date), not the stage field
 
 **Date:** 2026-06-15 · **Principle:** ADR-001 (one definition, derived from the canonical source) applied to the explorer's "Completed" display.

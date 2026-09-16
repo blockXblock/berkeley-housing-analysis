@@ -1,0 +1,39 @@
+filters:
+  and:
+    - file.folder == "docs/audit"
+views:
+  - type: table
+    name: All audit docs
+    order:
+      - file.name
+      - title
+      - date
+      - type
+      - status
+    sort:
+      - property: type
+        direction: ASC
+      - property: date
+        direction: DESC
+  - type: table
+    name: Settled (ADRs + applied writes)
+    filters:
+      or:
+        - status == "settled"
+        - type == "write"
+    order:
+      - file.name
+      - title
+      - date
+      - type
+      - status
+  - type: table
+    name: Diagnostics
+    filters:
+      and:
+        - type == "diagnostic"
+    order:
+      - file.name
+      - title
+      - date
+      - status

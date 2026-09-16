@@ -1,3 +1,11 @@
+---
+title: "Canned Query Catalog for CPRA Datasette Publication"
+date: 2026-05-30
+type: report
+status: record
+area: audit
+---
+
 # Canned Query Catalog for CPRA Datasette Publication
 
 Drafted 2026-05-30 morning, ahead of Track 3 implementation. These queries will be encoded in `datasette-deploy/metadata.json` once `databases/cpra_permits.db` is built. They become both:

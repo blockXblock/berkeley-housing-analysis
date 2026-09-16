@@ -1,3 +1,11 @@
+---
+title: "APR Pilot Results — v1 vs v2 generator — 2026-05-31"
+date: 2026-05-31
+type: diagnostic
+status: record
+area: audit
+---
+
 # APR Pilot Results — v1 vs v2 generator — 2026-05-31
 
 **Goal:** Validate `generate_apr_v2.py` (reads `berkeley_housing_v2.db` via

@@ -1,3 +1,11 @@
+---
+title: "Pre-Policy ADU Backfill 2018-2022 — SOLID set — 2026-06-03"
+date: 2026-06-03
+type: note
+status: record
+area: audit
+---
+
 # Pre-Policy ADU Backfill 2018-2022 — SOLID set — 2026-06-03
 
 **Sixth data-modifying operation.** Ingested the pre-policy (2018-2022) ADU/small completions

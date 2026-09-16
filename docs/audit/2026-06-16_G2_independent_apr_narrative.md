@@ -1,3 +1,11 @@
+---
+title: "An independent check on Berkeley's housing numbers — what matched, what didn't, and what neither of us can see"
+date: 2026-06-16
+type: note
+status: record
+area: audit
+---
+
 # An independent check on Berkeley's housing numbers — what matched, what didn't, and what neither of us can see
 
 *A reproducibility note fronting the Berkeley housing-data series. Every number here traces to the

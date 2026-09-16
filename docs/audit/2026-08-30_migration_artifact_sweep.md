@@ -1,3 +1,11 @@
+---
+title: "Migration-artifact sweep of v2 — 2026-08-30"
+date: 2026-08-30
+type: diagnostic
+status: record
+area: audit
+---
+
 # Migration-artifact sweep of v2 — 2026-08-30
 
 **Why.** Every data error found on 29 August came from a `migration_v1_to_v2` row whose

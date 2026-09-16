@@ -1,3 +1,11 @@
+---
+title: "ADU / REV Summation Diagnostic — 2026-05-28"
+date: 2026-05-28
+type: diagnostic
+status: record
+area: audit
+---
+
 # ADU / REV Summation Diagnostic — 2026-05-28
 
 ## Headline

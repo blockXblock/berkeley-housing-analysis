@@ -1,3 +1,11 @@
+---
+title: "Architecture Decisions of Record — Berkeley Housing Pipeline"
+date: 
+type: note
+status: record
+area: audit
+---
+
 # Architecture Decisions of Record — Berkeley Housing Pipeline
 
 **Status:** Living document. The single home for cross-cutting architecture/data-model decisions.

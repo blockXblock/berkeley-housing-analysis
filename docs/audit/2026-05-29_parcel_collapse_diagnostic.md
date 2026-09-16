@@ -1,3 +1,11 @@
+---
+title: "Parcel-Collapse Diagnostic — 2026-05-29"
+date: 2026-05-29
+type: diagnostic
+status: record
+area: audit
+---
+
 # Parcel-Collapse Diagnostic — 2026-05-29
 
 ## Headline

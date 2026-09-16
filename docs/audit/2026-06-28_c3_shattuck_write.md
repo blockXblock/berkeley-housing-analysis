@@ -1,3 +1,11 @@
+---
+title: "C3 Shattuck — phantom-master collapse (audit record)"
+date: 2026-06-28
+type: write
+status: applied
+area: audit
+---
+
 # C3 Shattuck — phantom-master collapse (audit record)
 
 **Date:** 2026-06-28

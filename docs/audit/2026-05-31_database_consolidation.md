@@ -1,3 +1,11 @@
+---
+title: "Database Inventory & Consolidation Analysis — 2026-05-31"
+date: 2026-05-31
+type: note
+status: record
+area: audit
+---
+
 # Database Inventory & Consolidation Analysis — 2026-05-31
 
 **Scope:** Read-only diagnostic of all SQLite databases on the internal drive

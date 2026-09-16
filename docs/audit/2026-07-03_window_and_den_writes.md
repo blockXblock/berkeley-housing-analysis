@@ -1,3 +1,11 @@
+---
+title: "Two adjudications, one batch: The Overture (window-attributed) + The Den (phase demote)"
+date: 2026-07-03
+type: write
+status: applied
+area: audit
+---
+
 # Two adjudications, one batch: The Overture (window-attributed) + The Den (phase demote)
 
 **Date:** 2026-07-03 · **Who:** CC adjudication (local records + Accela + web corroboration), John's go

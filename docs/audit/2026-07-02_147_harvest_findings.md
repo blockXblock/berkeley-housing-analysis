@@ -1,3 +1,11 @@
+---
+title: "The +147 harvest — independent grounding of the held under-count (findings)"
+date: 2026-07-02
+type: diagnostic
+status: record
+area: audit
+---
+
 # The +147 harvest — independent grounding of the held under-count (findings)
 
 **Date:** 2026-07-02 · **Who:** CC (harvester + R2 extraction), per the JN-H map · **Status:** READ-ONLY

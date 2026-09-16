@@ -1,3 +1,11 @@
+---
+title: "Permit Reclassification + Group-Quarters Exclusion — 2026-06-01"
+date: 2026-06-01
+type: note
+status: record
+area: audit
+---
+
 # Permit Reclassification + Group-Quarters Exclusion — 2026-06-01
 
 **First data-modifying operation in the project.** Two *separate* fixes to

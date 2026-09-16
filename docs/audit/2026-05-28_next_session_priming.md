@@ -1,3 +1,11 @@
+---
+title: "Next Session Priming — written 2026-05-28"
+date: 2026-05-28
+type: session
+status: record
+area: audit
+---
+
 # Next Session Priming — written 2026-05-28
 
 Read this first. It orients the next session to where things stand and

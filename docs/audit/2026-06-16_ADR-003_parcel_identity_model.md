@@ -1,3 +1,11 @@
+---
+title: "ADR-003 — Parcel-identity model (APN ≠ identity; lineage from maps, not strings)"
+date: 2026-06-16
+type: adr
+status: settled
+area: audit
+---
+
 # ADR-003 — Parcel-identity model (APN ≠ identity; lineage from maps, not strings)
 
 **Status:** PROPOSED (design + migration assessment only — NOT built). 2026-06-16.

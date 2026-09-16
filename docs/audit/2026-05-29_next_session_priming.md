@@ -1,3 +1,11 @@
+---
+title: "Next Session Priming — written 2026-05-29, revised 2026-05-30 morning"
+date: 2026-05-29
+type: session
+status: record
+area: audit
+---
+
 # Next Session Priming — written 2026-05-29, revised 2026-05-30 morning
 
 Read this first. It orients today's session to where things stand and what to do, without re-deriving context. Full narrative in `docs/audit/2026-05-29_session_summary.md`; technical detail in `docs/audit/2026-05-29_causes_2_3_diagnostic.md` and `docs/audit/2026-05-29_parcel_collapse_diagnostic.md`.

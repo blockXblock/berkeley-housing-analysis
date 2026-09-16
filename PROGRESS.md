@@ -8,6 +8,44 @@
 
 ---
 
+## 2026-09-16 — Bond map answers Friedman: rate 2×2, six-base bill decomposition, % of bill (NOT committed, NOT pushed)
+
+**Trigger:** E. Friedman's 2026-09-15 review of the bond map (Gmail `1a0a6d4c1ebdc604`; captured with the
+response in `notes/2026-09-16_bond_map_friedman_comments_and_tax_bases.md`): show the bond as a PERCENT, let the
+reader pick the denominator (whole bill / City levies / existing City GO), and our $67 is not the counterpart of
+the City's $22.14 — on the City's own $15.2M avg debt service, today's base gives **$49.81**.
+
+**Finding — the six bases of a Berkeley bill (37 FY25-26 SFR bills, `scratch/2026-09-16/third_base_test.txt`):**
+the old "$1,170 unmodelled" residual = **lot-area charges + service fees**. Clean Storm Water = $0.00911/lot-sqft
+(CV 0.000); EBMUD wet weather 3 lot tiers ($159.90/$249.72/$570.70 at 5k/10k); 2018 storm water 2 tiers
+($60.74/$73.44 at 10k); ZERO WASTE = garbage cart ($544–1,214 by cart size — a household choice, NOT a tax, not
+derivable); street lighting ~$16 by zone; lead abatement $10 on pre-1978. **34/37 bills within $1** ex service fees
+(the 3 misses: 2 known sqft-mismatch parcels + 1 lead anomaly). Median SFR bill: **ad valorem 64% · building-sqft
+30% · lot 3% · flat/unit 2% · service fees 3%.** Existing City GO levy = **$49.00/$100k** (TRA 13-0).
+
+**Built:**
+- `scripts/tax_incidence/decompose.py` — THE decomposition function (av, bld sqft, lot sqft, units, build year →
+  $ by base + `bill` / `city_levies` / `city_go` denominators), issuer tags for the City-only subset. SFR only.
+- `data/baselines/measure_u_reconciliation_baseline_2026-09-16.json` — APPENDED (never edited): `rate_today_avg_100k`
+  = 49.81, `existing_city_go_rate_100k` = 49.0. Generator now globs the latest baseline.
+- `scripts/gen_bond_incidence.py` → `docs/maps/bond_incidence.html`: rate row is the honest 2×2 (**today avg $50**
+  DEFAULT · today peak $67 · city avg $22 · city peak $35); new mode **"% of your tax bill"** with denominator
+  toggle (whole bill / City of Berkeley levies) on 16,918 SFR parcels; popup shows all three percentages; the
+  GO ratio is a constant (both ad valorem: $50/$49 = 102%) so it is stated, not mapped; **"Which rate is right? →"**
+  overlay carries the 2×2 table + `bond_tranches.svg`. Median SFR at today's avg: **2.7% of bill · 13.6% more to
+  the City · 102% more City GO tax** (Friedman's own bill: 2.5–3.4% / 10.6–14.3% / 102.7–138.7%).
+- Rendered + checked headless (`scratch/2026-09-16/shots/`, 0 page errors). Preview: `http://localhost:8766/maps/bond_incidence.html`
+  (server left running in `docs/`).
+
+**Note:** default rate changed $67 → $50, so the headline "median parcel" moves $465 → $348. John's call.
+
+**Next:** (1) John eyeballs → commit tranche script + svg + decompose + baseline + generator + map + note on dev.
+(2) fold lot-area tiers + Zero Waste into `derive_rate_schedule.py` and retire the "$1,170 unmodelled" line in
+`docs/methodology/berkeley_property_tax_structure.md`. (3) 3+ duplex + 3+ apartment bills for non-SFR rates.
+(4) an "exempt AV" figure for Friedman's parcels-leaving-the-roll point (seed: the 372 public parcels).
+
+---
+
 ## 2026-09-15 — `berkeley.db` gains `taxable_sqft` (City per-parcel building/lot sqft); Prop 13 block map now derivable
 
 **Gated write #1 on `berkeley.db`:** new table **`taxable_sqft`** (29,167 rows; City of Berkeley

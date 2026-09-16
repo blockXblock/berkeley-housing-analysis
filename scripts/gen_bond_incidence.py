@@ -94,8 +94,10 @@ def main():
     p = p.merge(p13, on="APN", how="left")
     blk = pd.read_csv("data/derived/berkeley_prop13_by_block_2025-26.csv")
     # taxable building sqft (City base for the per-sqft parcel taxes)
-    sq = pd.read_sql("SELECT county_apn AS APN, bldsqfttaxable AS sqft FROM taxable_sqft WHERE county_apn IS NOT NULL", db)
+    sq = pd.read_sql("SELECT county_apn AS APN, bldsqfttaxable AS sqft, lotsqft AS lot FROM taxable_sqft WHERE county_apn IS NOT NULL", db)
     p = p.merge(sq.drop_duplicates("APN"), on="APN", how="left")
+    un = pd.read_sql("SELECT capn, units FROM parcel_facts", sqlite3.connect("databases/parcel_facts.db"))
+    p = p.merge(un.drop_duplicates("capn"), on="capn", how="left")
 
     # ---- (b) true sales: latest County-recorded ownership transfer per parcel (2023-2025 window) ----
     tr = pd.read_sql("SELECT capn, substr(transfer_date,1,4) AS sold_yr, transfer_value FROM ownership_transfers "
@@ -113,7 +115,8 @@ def main():
 
     # ---- OFFICIAL figures: single source of truth is B2050BIS's reconciliation baseline (CONTRACT: the map
     #      READS official numbers, never hardcodes them). Fallback to the 5%/30yr assumption if it's absent. ----
-    BASELINE = "data/baselines/measure_u_reconciliation_baseline_2026-08-21.json"
+    import glob
+    BASELINE = sorted(glob.glob("data/baselines/measure_u_reconciliation_baseline_*.json"))[-1]
     OFF = {}
     if os.path.exists(BASELINE):
         _b = json.load(open(BASELINE)); OFF = {**_b.get("official", {}), **_b.get("derived", {})}
@@ -125,6 +128,21 @@ def main():
     annual = rate * tot_av                                                # peak-year debt service on TODAY's base
     n = len(p)
     p["cost_av"] = (rate * p.TotalNetValue).round(0)                      # ad-valorem annual cost (today's-base rate)
+
+    # ---- (d) the SIX BASES of a Berkeley bill, per single-family parcel (IMPORTED: scripts/tax_incidence/decompose.py).
+    #      Gives the three denominators a voter needs (E. Friedman, 2026-09-15): the whole bill, the City of Berkeley's
+    #      own levies, and the existing City GO-bond tax. Single-family only -- non-SFR rates differ. Bill EXCLUDES the
+    #      garbage-cart and street-lighting service fees (not taxes, not derivable). ----
+    from scripts.tax_incidence import decompose as DC
+    sched_dc = DC.load_schedule()
+    sfr = p.use_bucket.eq("residential_sf") & p.sqft.gt(0) & p.lot.gt(0)
+    dc = [DC.decompose(av, sqf, lt, u, sched_dc, build_year=(by if pd.notna(by) else None)) if ok else None
+          for ok, av, sqf, lt, u, by in zip(sfr, p.TotalNetValue, p.sqft.fillna(0), p.lot.fillna(0), p.units.fillna(1), p.build_year)]
+    p["bill"] = [d["bill"] if d else 0 for d in dc]
+    p["city_levies"] = [d["city_levies"] if d else 0 for d in dc]
+    p["city_go"] = [d["city_go"] if d else 0 for d in dc]
+    bill_shares = pd.DataFrame([{k: d[k] / d["bill"] for k in ("ad_valorem", "building_sqft", "lot_sqft", "per_unit", "flat", "use_category")}
+                                for d in dc if d]).median()
     cost_flat = round(annual / n)                                          # flat parcel-tax annual cost
     p["delta"] = cost_flat - p.cost_av        # >0: flat costs you MORE (low-AV long-held); <0: flat cheaper
     # (c) same $ raised on taxable building sqft -- the base Berkeley's own parcel taxes use
@@ -159,6 +177,15 @@ def main():
         "flat": cost_flat, "ineq": p.cost_av.quantile(.90) / max(p.cost_av.quantile(.10), 1),
         "recent5": recent5,
         "rate_today": round(OFF.get("rate_today_100k", rate * 1e5), 1),
+        # today's-base AVERAGE: the City's own $15.2M avg debt service / today's base -- the apples-to-apples
+        # counterpart of the City's $22.14 average (rate_today is the PEAK counterpart of its $35 peak)
+        "rate_today_avg": round(OFF.get("rate_today_avg_100k", rate * 1e5), 1),
+        "city_go_rate": OFF.get("existing_city_go_rate_100k", DC.CITY_GO_BOND_RATE * 1e5),
+        "bill_n": int(sfr.sum()),
+        "bill_pct_med": round(100 * (p.loc[sfr, "cost_av"] / p.loc[sfr, "bill"]).median(), 1),
+        "city_pct_med": round(100 * (p.loc[sfr, "cost_av"] / p.loc[sfr, "city_levies"]).median(), 1),
+        "go_pct_med": round(100 * (p.loc[sfr, "cost_av"] / p.loc[sfr, "city_go"]).median(), 1),
+        "bill_shares": {k: round(100 * v) for k, v in bill_shares.items()},
         "rate_peak": OFF.get("peak_rate_100k", 0), "rate_avg": OFF.get("avg_rate_100k", 0),
         "base_mult": round(OFF.get("base_avg_multiple", 0), 2), "peak_fy": OFF.get("peak_first_fy", 0),
         # who pays: owner-occupied share of the bond. READ the gated figure from B2050BIS's baseline
@@ -197,11 +224,13 @@ def main():
                              "pd": round(float(pdisc), 2) if (pd.notna(pdisc) and pref == "block") else -9,
                              "pb": int(pben) if pd.notna(pben) else 0,
                              "sy": int(sy), "sv": int(sv) if (pd.notna(sv) and sv > 0) else 0,
-                             "xy": int(xy) if not sy else 0}}
-             for x, y, av, c, d, t, a, ow, otp, ub, yb, oo, sqf, dsq, pdisc, pref, pben, sy, sv, xy in zip(
+                             "xy": int(xy) if not sy else 0,
+                             "bl": int(bl), "cl": int(cl), "cg": int(cg)}}
+             for x, y, av, c, d, t, a, ow, otp, ub, yb, oo, sqf, dsq, pdisc, pref, pben, sy, sv, xy, bl, cl, cg in zip(
                  p.Longitude, p.Latitude, p.TotalNetValue, p.cost_av, p.delta, p.tenure, p.addr,
                  p.owner_name, p.owner_type, p.use_bucket, p.build_year, p.owner_occupied,
-                 p.sqft, p.delta_sq, p.p13_disc, p.p13_ref, p.p13_ben, p.sold_yr, p.sold_val, p.xfer_yr)]
+                 p.sqft, p.delta_sq, p.p13_disc, p.p13_ref, p.p13_ben, p.sold_yr, p.sold_val, p.xfer_yr,
+                 p.bill, p.city_levies, p.city_go)]
     blk_feats = [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [round(r.lon, 5), round(r.lat, 5)]},
                   "properties": {"b": r.block, "n": int(r.n_sfr), "sp": float(r.av_sqft_max_over_min),
                                  "md": float(r.median_discount), "u25": float(r.share_under_25pct),
@@ -231,10 +260,11 @@ def main():
 <div class="panel">
 <div class="tag">🔎 Every dot is a parcel — click it for its <b>property tax, owner, and bond cost</b>. Find where you live.</div>
 <h3>Measure U — a new $300M city bond</h3>
-<div class="sub">Levied on <b>$__BASE__B</b> of assessed value; peak debt service ≈ $__ANNUAL__M/yr. The city advertises <b>$__AVG__ per $100k</b> average; on <i>today's</i> base the same bond is <b>$__RATE__</b>. Costs below are the actual annual dollars per parcel — toggle the rate to see the city's figures.</div>
+<div class="sub">Levied on <b>$__BASE__B</b> of assessed value. The city advertises <b>$__AVG__ per $100k</b> average / <b>$__PEAK__</b> peak — on a base it projects will roughly double. On <i>today's</i> base the same bond is <b>$__TAVG__</b> average / <b>$__RATE__</b> peak. Costs below are annual dollars per parcel — toggle the rate. <a href="#" onclick="document.getElementById('why').style.display='block';return false">Which rate is right? →</a></div>
 <div style="margin:8px 0 2px"><b>Color each parcel by:</b></div>
 <div>
 <button id="b_c" class="on" onclick="mode('c')">Annual $ cost</button>
+<button id="b_b" onclick="mode('b')">% of your tax bill</button>
 <button id="b_o" onclick="mode('o')">Owner-occupied vs rental</button>
 <button id="b_d" onclick="mode('d')">Flat / sqft vs ad-valorem</button>
 <button id="b_p" onclick="mode('p')">Prop 13 vs neighbors</button>
@@ -243,20 +273,39 @@ def main():
 <div id="alts" style="margin:4px 0 2px;display:none"><span class="sub">compare ad-valorem with:</span>
 <button id="a_flat" class="on" onclick="setAlt('flat')">flat per parcel</button>
 <button id="a_sq" onclick="setAlt('sq')">per building sqft</button></div>
+<div id="dens" style="margin:4px 0 2px;display:none"><span class="sub">bond as a % of:</span>
+<button id="d_bill" class="on" onclick="setDen('bill')">whole tax bill</button>
+<button id="d_city" onclick="setDen('city')">City of Berkeley levies only</button></div>
 <div id="rates" style="margin:6px 0 2px"><span class="sub">rate:</span>
-<button id="r_today" class="on" onclick="setRate(S.rate_today)">today $__RATE__</button>
-<button id="r_peak" onclick="setRate(S.rate_peak)">city peak $__PEAK__</button>
-<button id="r_avg" onclick="setRate(S.rate_avg)">city avg $__AVG__</button></div>
+<button id="r_tavg" class="on" onclick="setRate(S.rate_today_avg)">today avg $__TAVG__</button>
+<button id="r_today" onclick="setRate(S.rate_today)">today peak $__RATE__</button>
+<button id="r_avg" onclick="setRate(S.rate_avg)">city avg $__AVG__</button>
+<button id="r_peak" onclick="setRate(S.rate_peak)">city peak $__PEAK__</button></div>
 <div id="legend"></div>
 <div class="stat" id="stat"></div>
 <div class="cap" id="cap"></div>
 <div class="who" id="who"></div><div style="margin-top:8px;font-size:11px"><a href="https://www.sfchronicle.com/projects/2025/ca-property-map/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">↗ Compare: SF Chronicle statewide owner map</a></div></div>
+<div id="why" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:20" onclick="if(event.target===this)this.style.display='none'"><div style="background:#fff;max-width:1000px;margin:3vh auto;padding:16px 20px;border-radius:10px;max-height:94vh;overflow:auto;font-size:13px;line-height:1.45">
+<div style="float:right"><button onclick="document.getElementById('why').style.display='none'">close ✕</button></div>
+<h3 style="margin:0 0 6px">$__AVG__, $__PEAK__, $__TAVG__, $__RATE__ — which is it?</h3>
+<p>All four are the <b>same $300M bond</b> with the same debt service. They differ only in <b>which year</b> and <b>which tax base</b> you divide by. A rate per $100k is a quotient, not a price: the dollars to be raised are fixed; the rate moves with the base.</p>
+<table style="border-collapse:collapse;margin:6px 0 10px"><tr><th></th><th style="padding:3px 10px;text-align:left">City's projected base<br><span style="font-weight:400;color:#666">grows ~__MULT__× from future sales + new construction</span></th><th style="padding:3px 10px;text-align:left">Today's base<br><span style="font-weight:400;color:#666">$__BASE__B, the parcels that exist now</span></th></tr>
+<tr><td style="padding:3px 10px"><b>average year</b></td><td style="padding:3px 10px">$__AVG__ <span style="color:#666">(the City's advertised figure)</span></td><td style="padding:3px 10px">$__TAVG__</td></tr>
+<tr><td style="padding:3px 10px"><b>peak years</b> (all three tranches outstanding)</td><td style="padding:3px 10px">$__PEAK__ <span style="color:#666">(the City's disclosed peak, from FY__PEAKFY__)</span></td><td style="padding:3px 10px">$__RATE__</td></tr></table>
+<p>The City's numbers are lower only because they assume owners who do not yet exist — future buyers reassessed to purchase price, and new construction — will carry roughly half of it. If the base grows as projected, a long-held owner's rate drifts <i>down</i> each year and newcomers make up the difference. If it does not, the rate is the right-hand column.</p>
+<img src="bond_tranches.svg" alt="Measure U: debt service by tranche, the assessed-value base, and the rate per $100k on each base" style="width:100%;height:auto;border:1px solid #eee;border-radius:6px">
+<p style="color:#666;font-size:11.5px">Every number is derived from the City's official figures (Resolution 72,338-N.S. Exhibit B) and the Alameda County assessor roll; figure generated by <code>scripts/viz/bond_tranches_svg.py</code>. Direct link: <a href="bond_tranches.svg">bond_tranches.svg</a></p>
+</div></div>
 <script>
 const S=__STATS__;
-let FEATS={features:[]}, MODE='c', RATE=S.rate_today, ALT='flat';
+let FEATS={features:[]}, MODE='c', RATE=S.rate_today_avg, ALT='flat', DEN='bill';
 const usd=x=>'$'+Math.round(x).toLocaleString();
 // cost = assessed value × rate/$100k. v = AV/1000, so cost = v × rate_per_100k / 100. Rate is selectable.
 const costExpr=r=>['step',['*',['get','v'],r/100],'#2c7fb8',200,'#7fcdbb',500,'#fec44f',1000,'#fd8d3c',2500,'#e31a1c'];
+// bond ÷ denominator, in %. bl = whole bill (ex garbage/lighting service fees), cl = City of Berkeley levies; 0 = not a single-family parcel (grey)
+const pctExpr=(r,k)=>['case',['<=',['get',k],0],'#d9d9d9',['step',['*',100,['/',['*',['get','v'],r/100],['get',k]]], ...(k=='bl'?['#2c7fb8',2,'#7fcdbb',3,'#fec44f',4,'#fd8d3c',6,'#e31a1c']:['#2c7fb8',8,'#7fcdbb',12,'#fec44f',16,'#fd8d3c',25,'#e31a1c'])]];
+const LB='<div><span class="sw" style="background:#2c7fb8"></span>&lt;2% of the bill</div><div><span class="sw" style="background:#7fcdbb"></span>2–3%</div><div><span class="sw" style="background:#fec44f"></span>3–4%</div><div><span class="sw" style="background:#fd8d3c"></span>4–6%</div><div><span class="sw" style="background:#e31a1c"></span>6%+</div><div><span class="sw" style="background:#d9d9d9"></span>not a single-family parcel</div>';
+const LBc='<div><span class="sw" style="background:#2c7fb8"></span>&lt;8% more to the City</div><div><span class="sw" style="background:#7fcdbb"></span>8–12%</div><div><span class="sw" style="background:#fec44f"></span>12–16%</div><div><span class="sw" style="background:#fd8d3c"></span>16–25%</div><div><span class="sw" style="background:#e31a1c"></span>25%+</div><div><span class="sw" style="background:#d9d9d9"></span>not a single-family parcel</div>';
 const DELTA=['step',['get','d'],'#b2182b',-400,'#ef8a62',-100,'#f7f7f7',100,'#67a9cf',400,'#2166ac']; // red=flat costs you MORE
 const TEN=['step',['get','t'],'#e31a1c',5,'#fd8d3c',15,'#fec44f',30,'#74add1',60,'#4575b4'];
 const DSQ=['step',['get','ds'],'#b2182b',-400,'#ef8a62',-100,'#f7f7f7',100,'#67a9cf',400,'#2166ac']; // red = sqft tax costs you MORE
@@ -273,20 +322,27 @@ const CAPq='Same $300M raised on TAXABLE BUILDING SQFT ('+'$'+S.rate_sqft.toFixe
 const LC='<div><span class="sw" style="background:#2c7fb8"></span>&lt;$200/yr</div><div><span class="sw" style="background:#7fcdbb"></span>$200–500</div><div><span class="sw" style="background:#fec44f"></span>$500–1,000</div><div><span class="sw" style="background:#fd8d3c"></span>$1,000–2,500</div><div><span class="sw" style="background:#e31a1c"></span>$2,500+ /yr</div>';
 const LD='<div><span class="sw" style="background:#2166ac"></span>flat tax cheaper for you (high-value)</div><div><span class="sw" style="background:#f7f7f7;border:1px solid #ccc"></span>about the same</div><div><span class="sw" style="background:#b2182b"></span>flat tax costs you MORE (long-held/low-value)</div>';
 const LT='<div><span class="sw" style="background:#e31a1c"></span>&lt;5 yr (recent sale/refi/transfer)</div><div><span class="sw" style="background:#fd8d3c"></span>5–15</div><div><span class="sw" style="background:#fec44f"></span>15–30</div><div><span class="sw" style="background:#74add1"></span>30–60</div><div><span class="sw" style="background:#4575b4"></span>60+ (no recording in decades)</div>';
+const CAPb=()=>DEN=='bill'
+ ?'Measure U as a share of the parcel\\'s WHOLE current tax bill (ad valorem + every parcel tax; garbage-cart and street-lighting service fees excluded — not taxes). Single-family parcels only: the parcel-tax rates are validated on single-family bills. A bill has six bases — assessed value (~'+S.bill_shares.ad_valorem+'%), building sqft (~'+S.bill_shares.building_sqft+'%), lot area, dwelling units, flat, use category — and this bond lands entirely on the first.'
+ :'Measure U as a share of what the parcel already pays to the <b>City of Berkeley itself</b> — its existing GO-bond levy ($'+S.city_go_rate+'/$100k), its 8 per-sqft taxes (parks, library, fire, streets, paramedic, disabled access), stormwater and street-light charges. Not schools, county, BART, AC Transit, Peralta, EBMUD. The voter\\'s question: how much MORE am I handing this specific body?';
 const CAPd='Same $300M raised as a FLAT parcel tax ('+usd(S.flat)+'/parcel). Red = you would pay MORE under a flat tax (long-held, low assessed value); blue = LESS (recent, high value). A flat tax shifts burden onto long-held owners.';
 const CAPt='Years since the LAST RECORDED DOCUMENT (sale, refinance, transfer) — NOT years owned. The red 2020-22 bulge is the pandemic refinance wave (2811 Benvenue, owned since 1988, shows as 2021 from a refi/trust recording). A financial-activity signal, not tenure.';
 const OO=['match',['get','oo'],1,'#1a9850','#e34a33'];
 const LO='<div><span class="sw" style="background:#1a9850"></span>owner-occupied (has $7k homeowner\\'s exemption)</div><div><span class="sw" style="background:#e34a33"></span>rental / non-owner-occupied / commercial</div>';
 const CAPo='Owner-occupied (green) vs everything else (red), flagged by the $7,000 homeowner\\'s exemption — a FLOOR (some owner-occupiers never file). Tax on rentals & commercial is largely passed through to tenants, so renters bear it indirectly.';
-function rateLbl(){return RATE==S.rate_avg?'city avg $'+S.rate_avg:(RATE==S.rate_peak?'city peak $'+S.rate_peak:"today\\'s base $"+Math.round(S.rate_today));}
+function rateLbl(){return RATE==S.rate_avg?'city avg $'+S.rate_avg:RATE==S.rate_peak?'city peak $'+S.rate_peak:RATE==S.rate_today_avg?"today\\'s base, avg $"+Math.round(S.rate_today_avg):"today\\'s base, peak $"+Math.round(S.rate_today);}
 function rateNote(){
+ if(RATE==S.rate_today_avg) return 'TODAY\\'S-BASE AVERAGE ($'+Math.round(S.rate_today_avg)+'/$100k): the City\\'s own average annual debt service divided by today\\'s base — the apples-to-apples counterpart of its advertised $'+S.rate_avg+', which assumes a ~'+S.base_mult.toFixed(1)+'× larger future base. Peak years (all three tranches outstanding) are $'+Math.round(S.rate_today)+'.';
  if(RATE==S.rate_avg) return 'City-advertised AVERAGE ($'+S.rate_avg+'/$100k). It looks low only because it is levied on a projected ~'+S.base_mult.toFixed(1)+'× larger FUTURE base (Prop-13 growth from future sales + new construction). The same debt service on today\\'s base is $'+Math.round(S.rate_today)+'.';
  if(RATE==S.rate_peak) return 'City-disclosed PEAK ($'+S.rate_peak+'/$100k, first applying FY'+S.peak_fy+'-41). Still levied on a larger future base than today\\'s.';
- return 'TODAY\\'S-BASE rate ($'+Math.round(S.rate_today)+'/$100k): what current parcels would pay to service the bond now. The city advertises $'+S.rate_avg+' avg / $'+S.rate_peak+' peak — lower only because those assume a ~'+S.base_mult.toFixed(1)+'× larger future base.';
+ return 'TODAY\\'S-BASE PEAK ($'+Math.round(S.rate_today)+'/$100k): the years all three $100M tranches are outstanding, on today\\'s base — the counterpart of the City\\'s $'+S.rate_peak+' peak, which assumes a larger future base. Average over the life: $'+Math.round(S.rate_today_avg)+'.';
 }
 function stat(m){
  const f=RATE/S.rate_today;
  if(m=='c') return '<span class="big">'+usd(S.med_av*f)+'/yr</span> median parcel · '+rateLbl()+'<br>range '+usd(S.p10*f)+' – '+usd(S.p90*f)+' ('+Math.round(S.ineq)+'× spread for the same bond)';
+ if(m=='b'){const g=Math.round(100*RATE/S.city_go_rate); return DEN=='bill'
+   ?'<span class="big">'+(S.bill_pct_med*f).toFixed(1)+'%</span> of the median single-family tax bill · '+rateLbl()+'<br>('+S.bill_n.toLocaleString()+' single-family parcels; whole bill excl. garbage & lighting fees)'
+   :'<span class="big">'+(S.city_pct_med*f).toFixed(1)+'%</span> more to the City of Berkeley, median single-family parcel · '+rateLbl()+'<br>and <b>'+g+'%</b> more City GO-bond tax than today\\'s — for every parcel, because both are levied on assessed value';}
  if(m=='o') return '<span class="big">'+S.oo_share+'%</span> of the bond falls on owner-occupied homes<br>the other '+(100-S.oo_share).toFixed(1)+'% is on rentals & commercial — largely tenant-borne via pass-through';
  if(m=='d'&&ALT=='sq') return '<span class="big">'+usd(S.sq_med)+'/yr</span> median parcel on a sqft base<br>vs ad-valorem median '+usd(S.med_av)+' — a sqft tax tracks building size, not purchase date';
  if(m=='d') return '<span class="big">'+usd(S.flat_lit)+'/yr</span> flat, every parcel<br>vs ad-valorem median '+usd(S.med_av)+' — a flat tax is blind to value';
@@ -295,23 +351,26 @@ function stat(m){
  return '<span class="big">'+Math.round(S.recent5)+'%</span> of parcels recorded a document in the last 5 years (the refi wave) — a financial-activity signal, <b>not</b> years owned';
 }
 function mode(m){ MODE=m;
- for(const k of ['c','o','d','p','s','t']) document.getElementById('b_'+k).className = k==m?'on':'';
- document.getElementById('rates').style.display = m=='c'?'block':'none';
+ for(const k of ['c','b','o','d','p','s','t']) document.getElementById('b_'+k).className = k==m?'on':'';
+ document.getElementById('rates').style.display = (m=='c'||m=='b')?'block':'none';
+ document.getElementById('dens').style.display = m=='b'?'block':'none';
  document.getElementById('alts').style.display = m=='d'?'block':'none';
- map.setPaintProperty('pts','circle-color', m=='c'?costExpr(RATE):m=='o'?OO:m=='d'?(ALT=='sq'?DSQ:DELTA):m=='p'?P13:m=='s'?SOLD:TEN);
+ map.setPaintProperty('pts','circle-color', m=='c'?costExpr(RATE):m=='b'?pctExpr(RATE,DEN=='bill'?'bl':'cl'):m=='o'?OO:m=='d'?(ALT=='sq'?DSQ:DELTA):m=='p'?P13:m=='s'?SOLD:TEN);
  map.setLayoutProperty('blk','visibility', m=='p'?'visible':'none');
  map.setPaintProperty('pts','circle-opacity', m=='s'?['case',['>',['get','sy'],0],1,['>',['get','xy'],0],0.7,0.25]:0.9);
  map.setPaintProperty('pts','circle-stroke-opacity', m=='s'?['case',['>',['get','sy'],0],1,0.15]:1);
- document.getElementById('legend').innerHTML = m=='c'?LC:m=='o'?LO:m=='d'?(ALT=='sq'?LQ:LD):m=='p'?LP:m=='s'?LS:LT;
- document.getElementById('cap').innerHTML = m=='c'?('Ad-valorem: each parcel pays rate × its assessed value. <i>'+rateNote()+'</i>'):m=='o'?CAPo:m=='d'?(ALT=='sq'?CAPq:CAPd):m=='p'?CAPp:m=='s'?CAPs:CAPt;
+ document.getElementById('legend').innerHTML = m=='c'?LC:m=='b'?(DEN=='bill'?LB:LBc):m=='o'?LO:m=='d'?(ALT=='sq'?LQ:LD):m=='p'?LP:m=='s'?LS:LT;
+ document.getElementById('cap').innerHTML = m=='c'?('Ad-valorem: each parcel pays rate × its assessed value. <i>'+rateNote()+'</i>'):m=='b'?CAPb():m=='o'?CAPo:m=='d'?(ALT=='sq'?CAPq:CAPd):m=='p'?CAPp:m=='s'?CAPs:CAPt;
  document.getElementById('stat').innerHTML = stat(m);
 }
+function setDen(d){ DEN=d; document.getElementById('d_bill').className=d=='bill'?'on':''; document.getElementById('d_city').className=d=='city'?'on':''; mode('b'); }
 function setAlt(a){ ALT=a; document.getElementById('a_flat').className=a=='flat'?'on':''; document.getElementById('a_sq').className=a=='sq'?'on':''; mode('d'); }
 function setRate(r){ RATE=r;
  document.getElementById('r_today').className=(Math.abs(r-S.rate_today)<1e-9)?'on':'';
+ document.getElementById('r_tavg').className=(Math.abs(r-S.rate_today_avg)<1e-9)?'on':'';
  document.getElementById('r_peak').className=(r==S.rate_peak)?'on':'';
  document.getElementById('r_avg').className=(r==S.rate_avg)?'on':'';
- if(MODE=='c') mode('c');
+ if(MODE=='c'||MODE=='b') mode(MODE);
 }
 (function(){ var w='<b>Who actually pays.</b> The bond is levied on <b>'+S.n_parcels.toLocaleString()+' taxable parcels</b> — not on Berkeley\\'s ~124,000 residents. Roughly 45,000 are UC students who rent or live in dorms and own no parcel; renters bear property tax only indirectly, through rent. The top 10% of parcels carry <b>'+S.top10+'%</b> of the bond; the bottom half pays <b>'+S.bottom50+'%</b>.';
  if(S.tier1&&S.tier1.apartments_mixed!==undefined) w+=' And the biggest payers are <b>not homeowners</b>: the top 1% (parcels over $'+(S.tier1_entry/1e6).toFixed(1)+'M assessed) are <b>'+Math.round(S.tier1.apartments_mixed)+'% apartment buildings, '+Math.round(S.tier1.commercial_industrial)+'% commercial, '+Math.round(S.tier1.institutional)+'% institutional</b> — just '+S.tier1_sfr_n+' single-family homes. Apartments alone are <b>'+S.apt_share+'%</b> of the bond, passed through to renters.';
@@ -322,7 +381,7 @@ map.on('load',()=>{
  map.addSource('el',{type:'geojson',data:__ELB__});
  map.addLayer({id:'elw',type:'line',source:'el',paint:{'line-color':'#111','line-width':1.5,'line-dasharray':[2,2]}});
  map.addSource('p',{type:'geojson',data:'bond_incidence_data.json'});
- map.addLayer({id:'pts',type:'circle',source:'p',paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,1.8,15,5],'circle-color':costExpr(S.rate_today),'circle-opacity':0.9,'circle-stroke-color':'rgba(20,20,20,0.9)','circle-stroke-width':['interpolate',['linear'],['zoom'],11,0.6,15,1.2]}});
+ map.addLayer({id:'pts',type:'circle',source:'p',paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,1.8,15,5],'circle-color':costExpr(S.rate_today_avg),'circle-opacity':0.9,'circle-stroke-color':'rgba(20,20,20,0.9)','circle-stroke-width':['interpolate',['linear'],['zoom'],11,0.6,15,1.2]}});
  map.addSource('b',{type:'geojson',data:__BLK__});
  map.addLayer({id:'blk',type:'circle',source:'b',minzoom:13.5,layout:{visibility:'none'},paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,7,15,26],'circle-color':'rgba(0,0,0,0)','circle-stroke-color':BLK,'circle-stroke-width':['interpolate',['linear'],['zoom'],11,1.5,15,3]}});
  map.on('click','blk',e=>{const b=e.features[0].properties;
@@ -345,6 +404,7 @@ map.on('load',()=>{
      +'your Measure U bond cost: <b>'+usd(p.v*RATE/100)+'/yr</b> <span style="color:#777">('+rateLbl()+')</span>'
      +'<br>if it were a flat parcel tax: '+usd(S.flat_lit)+'/yr'
      +(p.sq?'<br>if it were a sqft tax: '+usd(p.v*RATE/100+p.ds)+'/yr <span style="color:#777">('+p.sq.toLocaleString()+' taxable sqft)</span>':'')
+     +(p.bl>0?'<br>Measure U = <b>'+(100*p.v*RATE/100/p.bl).toFixed(1)+'%</b> of this parcel\\'s tax bill · <b>'+(100*p.v*RATE/100/p.cl).toFixed(1)+'%</b> more to the City of Berkeley · <b>'+Math.round(100*p.v*RATE/100/p.cg)+'%</b> more City GO-bond tax <span style="color:#777">(bill ≈ '+usd(p.bl)+', of which City ≈ '+usd(p.cl)+'; garbage & lighting fees excluded)</span>':'<br><span style="color:#777">percent-of-bill shown for single-family parcels only</span>')
      +(p.pd>-1?'<br>Prop 13: assessed at <b>'+Math.round(100*(1-p.pd))+'%</b> of this block\\'s market level — ≈ '+usd(p.pb)+'/yr of ad-valorem tax not levied':'')
      +(p.sy?'<br><b>sold '+p.sy+' for '+usd(p.sv)+'</b> (County ownership transfer)':(p.xy?'<br>ownership transfer '+p.xy+', no recorded price — trust / family, not a market sale':''))
      +'<br>last recorded document: '+t
@@ -356,7 +416,8 @@ map.on('load',()=>{
 });
 </script></body></html>""".replace("__ELB__", json.dumps(elb)).replace("__BLK__", json.dumps({"type": "FeatureCollection", "features": blk_feats})).replace("__STATS__", js_stats) \
         .replace("__ANNUAL__", f"{stats['annual_m']:.1f}").replace("__BASE__", f"{stats['base_b']:.0f}") \
-        .replace("__RATE__", f"{stats['rate_100k']:.0f}") \
+        .replace("__RATE__", f"{stats['rate_100k']:.0f}").replace("__TAVG__", f"{stats['rate_today_avg']:.0f}") \
+        .replace("__MULT__", f"{stats['base_mult']:.1f}").replace("__PEAKFY__", f"{stats['peak_fy']}") \
         .replace("__PEAK__", f"{stats['rate_peak']:.0f}").replace("__AVG__", f"{stats['rate_avg']:.0f}")
 
     os.makedirs(os.path.dirname(OUT), exist_ok=True)

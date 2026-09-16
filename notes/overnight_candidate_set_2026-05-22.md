@@ -1,3 +1,11 @@
+---
+title: "Overnight candidate set — inventory"
+date: 
+type: note
+status: record
+area: notes
+---
+
 # Overnight candidate set — inventory
 
 **Generated:** 2026-05-22T23:10:02

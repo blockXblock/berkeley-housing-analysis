@@ -1,3 +1,11 @@
+---
+title: "CPRA source audit — Part 1: structural inventory of the source file"
+date: 
+type: diagnostic
+status: record
+area: notes
+---
+
 # CPRA source audit — Part 1: structural inventory of the source file
 
 **Generated:** 2026-05-22T14:06:10

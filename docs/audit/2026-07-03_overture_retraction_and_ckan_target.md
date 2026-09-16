@@ -1,3 +1,11 @@
+---
+title: "The Overture retraction + the comparison-target finding (CKAN is provably incomplete)"
+date: 2026-07-03
+type: note
+status: record
+area: audit
+---
+
 # The Overture retraction + the comparison-target finding (CKAN is provably incomplete)
 
 **Date:** 2026-07-03 (evening) · **Trigger:** John's NotebookLM pass over the city APR PDFs surfaced a

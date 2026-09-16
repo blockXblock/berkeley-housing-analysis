@@ -1,3 +1,11 @@
+---
+title: Website fragility diagnosis (in progress)
+date: 2026-05-22
+type: diagnostic
+status: open
+area: notes
+---
+
 # Website fragility diagnosis (in progress)
 
 **Date:** 2026-05-22

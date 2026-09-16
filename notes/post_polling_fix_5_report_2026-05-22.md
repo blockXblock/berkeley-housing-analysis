@@ -1,3 +1,11 @@
+---
+title: "URL discovery — 5 stubborn permits recovered after polling-loop fix"
+date: 
+type: report
+status: record
+area: notes
+---
+
 # URL discovery — 5 stubborn permits recovered after polling-loop fix
 
 **Generated:** 2026-05-22T17:02:09

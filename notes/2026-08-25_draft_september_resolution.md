@@ -1,3 +1,11 @@
+---
+title: DRAFT — For Council Action, September 2026
+date: 2026-08-25
+type: diagnostic
+status: open
+area: notes
+---
+
 # DRAFT — For Council Action, September 2026
 
 ## Resolution No. ______–N.S.

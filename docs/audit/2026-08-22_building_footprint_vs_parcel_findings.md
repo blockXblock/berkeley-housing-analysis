@@ -1,3 +1,11 @@
+---
+title: "Building footprints vs. parcels — three findings in the tour geometry"
+date: 2026-08-22
+type: diagnostic
+status: record
+area: audit
+---
+
 # Building footprints vs. parcels — three findings in the tour geometry
 
 **Date:** 2026-08-22 · **Branch:** `dev` · **Status:** diagnostic complete, read-only (no DB or KML writes)

@@ -1,3 +1,11 @@
+---
+title: Note to the Possibility Lab — the JN sequence as a multi-city APR builder
+date: 2026-07-08
+type: note
+status: open
+area: notes
+---
+
 # Note to the Possibility Lab — the JN sequence as a multi-city APR builder
 
 *Drafted 2026-07-08 for Laura, Amy, and Lindsay (Possibility Lab). Web version:

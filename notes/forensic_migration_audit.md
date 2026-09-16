@@ -1,3 +1,11 @@
+---
+title: "FORENSIC AUDIT — `migrate_v1_to_v2.py` and the factual provenance of every value in v2"
+date: 
+type: diagnostic
+status: record
+area: notes
+---
+
 # FORENSIC AUDIT — `migrate_v1_to_v2.py` and the factual provenance of every value in v2
 
 **Type:** Read-only forensic investigation. **NO writes, NO fixes, NO scraping.** Stage findings only.

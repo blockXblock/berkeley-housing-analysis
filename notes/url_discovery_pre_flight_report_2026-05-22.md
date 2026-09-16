@@ -1,3 +1,11 @@
+---
+title: "URL discovery orchestrator pre-flight report"
+date: 
+type: diagnostic
+status: record
+area: notes
+---
+
 # URL discovery orchestrator pre-flight report
 
 **Generated:** 2026-05-22T08:27:54

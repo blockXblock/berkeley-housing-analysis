@@ -1,3 +1,11 @@
+---
+title: "URL discovery orchestrator — consecutive-failures fix"
+date: 
+type: report
+status: record
+area: notes
+---
+
 # URL discovery orchestrator — consecutive-failures fix
 
 **Generated:** 2026-05-22T13:13:43

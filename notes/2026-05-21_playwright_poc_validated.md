@@ -1,3 +1,11 @@
+---
+title: "Playwright POC validated — Accela inspection extraction"
+date: 2026-05-21
+type: note
+status: record
+area: notes
+---
+
 # Playwright POC validated — Accela inspection extraction
 
 **Date:** 2026-05-21

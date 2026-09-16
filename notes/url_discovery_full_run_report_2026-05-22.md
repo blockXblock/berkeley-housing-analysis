@@ -1,3 +1,11 @@
+---
+title: "URL discovery full run report"
+date: 
+type: diagnostic
+status: record
+area: notes
+---
+
 # URL discovery full run report
 
 **Generated:** 2026-05-22T13:08:48

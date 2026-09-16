@@ -1,3 +1,11 @@
+---
+title: "CO derivation rule v2 — master-permit identification + tier rule"
+date: 2026-05-25
+type: note
+status: record
+area: notes
+---
+
 # CO derivation rule v2 — master-permit identification + tier rule
 
 **Status:** Canonical for Track 2 APR generation. Supersedes the 3-tier rule sketched in `notes/2026-05-24_apr_workflow_audit.md` §4.

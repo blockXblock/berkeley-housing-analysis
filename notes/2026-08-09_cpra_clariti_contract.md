@@ -1,3 +1,11 @@
+---
+title: CPRA — Clariti permit-system contract (RFP 24-11661-C)
+date: 2026-08-09
+type: note
+status: open
+area: notes
+---
+
 # CPRA — Clariti permit-system contract (RFP 24-11661-C)
 
 > **✅ SUBMITTED 2026-08-09 — City of Berkeley NextRequest Request #26-2306.**

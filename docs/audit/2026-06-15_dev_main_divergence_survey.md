@@ -1,3 +1,11 @@
+---
+title: "dev ↔ main Divergence Survey — 2026-06-15"
+date: 2026-06-15
+type: diagnostic
+status: record
+area: audit
+---
+
 # dev ↔ main Divergence Survey — 2026-06-15
 
 **Purpose:** Read-only reconciliation survey performed after a cherry-pick to

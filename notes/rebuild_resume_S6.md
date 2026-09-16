@@ -1,3 +1,11 @@
+---
+title: "REBUILD RESUME — next stage is S6 (build_v2_from_sources)"
+date: 
+type: note
+status: record
+area: notes
+---
+
 # REBUILD RESUME — next stage is S6 (build_v2_from_sources)
 
 Read this + `build_v2_from_sources_spec.md` + `build_v2_lessons.md` before acting. SIX gated stages (S0–S5)

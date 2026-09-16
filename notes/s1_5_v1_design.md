@@ -1,3 +1,11 @@
+---
+title: "S1.5 v1 — Building-identity split (DESIGN SPEC, design-only; nothing runs)"
+date: 
+type: note
+status: record
+area: notes
+---
+
 # S1.5 v1 — Building-identity split (DESIGN SPEC, design-only; nothing runs)
 
 **Status:** design for review → then a gated build. Chat-Claude produced this; CC builds from it

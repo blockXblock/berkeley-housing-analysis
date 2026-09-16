@@ -1,3 +1,11 @@
+---
+title: "Label experiment: MultiGeometry+Point survives GE Pro round-trip"
+date: 2026-05-17
+type: note
+status: record
+area: notes
+---
+
 # Label experiment: MultiGeometry+Point survives GE Pro round-trip
 
 **Date:** 2026-05-17 evening

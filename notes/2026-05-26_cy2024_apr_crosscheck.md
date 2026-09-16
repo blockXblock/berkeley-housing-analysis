@@ -1,3 +1,11 @@
+---
+title: "CY 2024 APR Cross-Check — Notes"
+date: 2026-05-26
+type: diagnostic
+status: record
+area: notes
+---
+
 # CY 2024 APR Cross-Check — Notes
 
 **Date:** 2026-05-26

@@ -1,3 +1,11 @@
+---
+title: "Inspection scraper orchestrator — design sketch"
+date: 2026-05-21
+type: design
+status: record
+area: notes
+---
+
 # Inspection scraper orchestrator — design sketch
 
 **Date:** 2026-05-21

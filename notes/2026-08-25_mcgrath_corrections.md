@@ -1,3 +1,11 @@
+---
+title: Notes on Your Wellstone Draft — Corrections and Stronger Citations
+date: 2026-08-25
+type: note
+status: open
+area: notes
+---
+
 # Notes on Your Wellstone Draft — Corrections and Stronger Citations
 
 **From the Vision 2050 working group · August 25, 2026**

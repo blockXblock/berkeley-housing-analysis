@@ -1,3 +1,11 @@
+---
+title: "Accela pipeline reconnaissance and architecture findings"
+date: 2026-05-19
+type: diagnostic
+status: record
+area: notes
+---
+
 # Accela pipeline reconnaissance and architecture findings
 
 **Date:** 2026-05-19

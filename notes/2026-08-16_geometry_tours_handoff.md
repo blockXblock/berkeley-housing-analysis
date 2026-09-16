@@ -1,3 +1,11 @@
+---
+title: "Hand-off — KML geometry, flyover tours & building footprints (for the next CC)"
+date: 2026-08-16
+type: session
+status: record
+area: notes
+---
+
 # Hand-off — KML geometry, flyover tours & building footprints (for the next CC)
 
 **Written:** 2026-08-16. **For:** a Claude Code session dedicated to the KML geometry / tour / footprint

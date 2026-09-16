@@ -1,3 +1,11 @@
+---
+title: "TECHNICAL HANDOVER — 2026-06-27 (on-disk ground truth)"
+date: 
+type: session
+status: record
+area: notes
+---
+
 # TECHNICAL HANDOVER — 2026-06-27 (on-disk ground truth)
 
 CC's on-disk complement to chat-Claude's strategy handover (`notes/HANDOVER_2026-06-27.md` — being

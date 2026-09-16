@@ -1,3 +1,11 @@
+---
+title: "CPRA source-data inventory"
+date: 
+type: diagnostic
+status: record
+area: notes
+---
+
 # CPRA source-data inventory
 
 **Generated:** 2026-05-22T13:54:00

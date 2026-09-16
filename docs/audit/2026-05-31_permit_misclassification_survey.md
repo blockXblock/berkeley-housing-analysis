@@ -1,3 +1,11 @@
+---
+title: "Permit-Misclassification Systemic Survey — 2026-05-31"
+date: 2026-05-31
+type: diagnostic
+status: record
+area: audit
+---
+
 # Permit-Misclassification Systemic Survey — 2026-05-31
 
 **Scope:** Read-only survey of the full v2 dataset to scope the permit-

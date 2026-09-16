@@ -1,3 +1,11 @@
+---
+title: "APR baseline run (2026-05-24)"
+date: 2026-05-24
+type: report
+status: record
+area: notes
+---
+
 # APR baseline run (2026-05-24)
 
 **Generated:** 2026-05-23T14:05:36

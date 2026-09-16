@@ -1,3 +1,11 @@
+---
+title: "Observation: Accela Related Records relation graph is empty for ZP2018-0135"
+date: 2026-05-19
+type: diagnostic
+status: record
+area: notes
+---
+
 # Observation: Accela Related Records relation graph is empty for ZP2018-0135
 
 **Date:** 2026-05-19

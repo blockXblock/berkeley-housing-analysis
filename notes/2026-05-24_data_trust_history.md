@@ -1,3 +1,11 @@
+---
+title: "Data trust history: documented patterns of CC data damage, the defensive posture they justify, and the 2026-05-24 inventory that confirmed scope"
+date: 2026-05-24
+type: note
+status: record
+area: notes
+---
+
 # Data trust history: documented patterns of CC data damage, the defensive posture they justify, and the 2026-05-24 inventory that confirmed scope
 
 **Generated**: 2026-05-24

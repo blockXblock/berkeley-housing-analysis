@@ -1,3 +1,11 @@
+---
+title: "Corridor housing-density investigation (2026-08-12)"
+date: 2026-08-12
+type: diagnostic
+status: record
+area: audit
+---
+
 # Corridor housing-density investigation (2026-08-12)
 
 **Question:** does College Ave / Elmwood carry more multi-unit housing per block than its "single-family"

@@ -1,3 +1,11 @@
+---
+title: "Structure-History Open Data — schema & architecture design"
+date: 2026-08-14
+type: note
+status: record
+area: notes
+---
+
 # Structure-History Open Data — schema & architecture design
 
 **Status:** design sketch (notes/ — in-flight). Author: CC + John, 2026-08-14.

@@ -1,3 +1,11 @@
+---
+title: "Tour roadmap — next-session queue (2026-07-22)"
+date: 
+type: note
+status: record
+area: notes
+---
+
 # Tour roadmap — next-session queue (2026-07-22)
 
 John's next-step direction: build more tours sliced different ways. Each note below flags the

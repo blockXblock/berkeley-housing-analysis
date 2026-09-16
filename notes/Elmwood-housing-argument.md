@@ -1,3 +1,11 @@
+---
+title: "Elmwood Housing Argument"
+date: 
+type: note
+status: record
+area: notes
+---
+
 # Elmwood Housing Argument
 
 > **Thesis.** Raising the commercial-zoning height limits in the ~3-block Elmwood commercial district, to

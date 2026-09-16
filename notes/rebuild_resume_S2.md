@@ -1,3 +1,11 @@
+---
+title: "REBUILD RESUME — next stage is S2 (build_v2_from_sources)"
+date: 
+type: note
+status: record
+area: notes
+---
+
 # REBUILD RESUME — next stage is S2 (build_v2_from_sources)
 
 Read this + `build_v2_from_sources_spec.md` + `forensic_migration_audit.md` before acting. The forensic

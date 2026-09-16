@@ -1,3 +1,11 @@
+---
+title: "REBUILD RESUME — next stage is S9 (build_v2_from_sources)"
+date: 
+type: note
+status: record
+area: notes
+---
+
 # REBUILD RESUME — next stage is S9 (build_v2_from_sources)
 
 > **CANONICAL resume doc for the rebuild. Single source going forward** — chat-Claude does not write

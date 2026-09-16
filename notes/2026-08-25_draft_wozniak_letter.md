@@ -1,3 +1,11 @@
+---
+title: "DRAFT — To Gordon Wozniak, from the Vision 2050 working group"
+date: 2026-08-25
+type: note
+status: record
+area: notes
+---
+
 # DRAFT — To Gordon Wozniak, from the Vision 2050 working group
 
 Dear Gordon,

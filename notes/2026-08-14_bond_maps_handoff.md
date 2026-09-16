@@ -1,3 +1,11 @@
+---
+title: "Hand-off — Municipal-bond incidence maps + the Berkeley structure maps (for the next CC)"
+date: 2026-08-14
+type: session
+status: record
+area: notes
+---
+
 # Hand-off — Municipal-bond incidence maps + the Berkeley structure maps (for the next CC)
 
 **Written:** 2026-08-14. **For:** a Claude Code session picking up municipal-bond analysis and turning

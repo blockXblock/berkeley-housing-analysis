@@ -1,3 +1,11 @@
+---
+title: "KML → v2 Geometry Import Results (v2 — Schema Fix)"
+date: 
+type: diagnostic
+status: record
+area: notes
+---
+
 # KML → v2 Geometry Import Results (v2 — Schema Fix)
 
 **Generated:** 2026-05-21T15:31:15.556927

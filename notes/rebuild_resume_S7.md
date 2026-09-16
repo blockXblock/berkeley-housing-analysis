@@ -1,3 +1,11 @@
+---
+title: "REBUILD RESUME — next stage is S7 (build_v2_from_sources)"
+date: 
+type: note
+status: record
+area: notes
+---
+
 > **SUPERSEDED — S7 is DONE.** The canonical resume doc is now **`notes/rebuild_resume_S8.md`** (the single
 > source going forward; live-DB-grounded). This file is a historical snapshot from when S7 was next; some of
 > its carry-forward counts are stale (e.g. apn_overlap 11 / xaddr 21 → live **13 / 22**). Do not rely on it.

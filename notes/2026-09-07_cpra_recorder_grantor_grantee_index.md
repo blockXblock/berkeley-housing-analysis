@@ -1,3 +1,11 @@
+---
+title: "CPRA draft — Alameda County Recorder: grantor/grantee index (INDEX ONLY, no images)"
+date: 2026-09-07
+type: note
+status: open
+area: notes
+---
+
 # CPRA draft — Alameda County Recorder: grantor/grantee index (INDEX ONLY, no images)
 
 **Status: DRAFT 2026-09-07 — not sent.** To the **Alameda County Clerk-Recorder** (Auditor-Controller/

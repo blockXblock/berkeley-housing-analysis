@@ -1,3 +1,11 @@
+---
+title: "Session Summary — 2026-05-28"
+date: 2026-05-28
+type: session
+status: record
+area: audit
+---
+
 # Session Summary — 2026-05-28
 
 ## Starting state

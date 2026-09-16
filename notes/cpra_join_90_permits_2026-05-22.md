@@ -1,3 +1,11 @@
+---
+title: "CPRA × URL-discovery join — analytical summary"
+date: 
+type: note
+status: record
+area: notes
+---
+
 # CPRA × URL-discovery join — analytical summary
 
 **Generated:** 2026-05-22T14:23:41

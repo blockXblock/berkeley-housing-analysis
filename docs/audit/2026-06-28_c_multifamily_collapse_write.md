@@ -1,3 +1,11 @@
+---
+title: "C-multifamily over-collapse — phased-building double-count fix (audit record)"
+date: 2026-06-28
+type: write
+status: applied
+area: audit
+---
+
 # C-multifamily over-collapse — phased-building double-count fix (audit record)
 
 **Date:** 2026-06-28

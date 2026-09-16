@@ -1,3 +1,11 @@
+---
+title: "Harvest vs the CPRA feed — what the +40–65% actually is (2026-07-03)"
+date: 2026-07-03
+type: report
+status: record
+area: notes
+---
+
 # Harvest vs the CPRA feed — what the +40–65% actually is (2026-07-03)
 
 Diagnostic (Sept 2025, base B-permits): harvest **544**, CPRA feed **331**, overlap **330**

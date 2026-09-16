@@ -1,3 +1,11 @@
+---
+title: "Database Consolidation Plan — Phase 1 (PROPOSE) — 2026-06-01"
+date: 2026-06-01
+type: design
+status: record
+area: audit
+---
+
 # Database Consolidation Plan — Phase 1 (PROPOSE) — 2026-06-01
 
 **Read-only proposal. Nothing moved.** Turns the facts in

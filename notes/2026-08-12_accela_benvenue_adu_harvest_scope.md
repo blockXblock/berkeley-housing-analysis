@@ -1,3 +1,11 @@
+---
+title: "Accela ADU harvest — Benvenue block pilot (scope)"
+date: 2026-08-12
+type: report
+status: record
+area: notes
+---
+
 # Accela ADU harvest — Benvenue block pilot (scope)
 
 **Goal:** measure the *real* ADU/rental densification of the Elmwood — the kind YearBuilt, assessor Units,

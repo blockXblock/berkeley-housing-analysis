@@ -1,3 +1,11 @@
+---
+title: Two September Proposals, One Election — Draft Analysis
+date: 2026-09-03
+type: note
+status: open
+area: notes
+---
+
 # Two September Proposals, One Election — Draft Analysis
 
 **DRAFT for discussion · September 3, 2026 · not reviewed or approved by

@@ -1,3 +1,11 @@
+---
+title: "Session-close note: 2026-05-23"
+date: 2026-05-23
+type: session
+status: record
+area: notes
+---
+
 # Session-close note: 2026-05-23
 
 **Session arc:** What started as "ingest the 92 inspection JSONs + analyze stages for 100 projects" became a foundational investigation that surfaced significant findings about Berkeley's permit-state ontology, the v2 schema's implicit assumptions, and the data infrastructure we need before stage analysis can be trustworthy.

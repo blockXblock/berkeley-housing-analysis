@@ -1,3 +1,11 @@
+---
+title: "URL discovery resume report"
+date: 
+type: diagnostic
+status: record
+area: notes
+---
+
 # URL discovery resume report
 
 **Generated:** 2026-05-22T13:36:15

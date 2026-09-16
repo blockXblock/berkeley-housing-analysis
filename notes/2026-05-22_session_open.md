@@ -1,3 +1,11 @@
+---
+title: "Session open — 2026-05-22"
+date: 2026-05-22
+type: session
+status: record
+area: notes
+---
+
 # Session open — 2026-05-22
 
 Continuing from 2026-05-21 (commits ff63fb9 through 8b7b65f, all pushed

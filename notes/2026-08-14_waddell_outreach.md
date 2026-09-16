@@ -1,3 +1,11 @@
+---
+title: Outreach draft — Paul Waddell (UrbanSim / UC Berkeley CED)
+date: 2026-08-14
+type: note
+status: open
+area: notes
+---
+
 # Outreach draft — Paul Waddell (UrbanSim / UC Berkeley CED)
 
 **Status:** DRAFT for John to review, personalize, and send himself (sending is John's call, not CC's).

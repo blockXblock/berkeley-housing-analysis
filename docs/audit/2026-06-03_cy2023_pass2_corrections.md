@@ -1,3 +1,11 @@
+---
+title: "CY2023 Pass 2 — Major-Project Corrections — 2026-06-03"
+date: 2026-06-03
+type: note
+status: record
+area: audit
+---
+
 # CY2023 Pass 2 — Major-Project Corrections — 2026-06-03
 
 **Fifth data-modifying operation.** Corrected 4 existing v2 projects with Accela-verified

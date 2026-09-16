@@ -1,3 +1,11 @@
+---
+title: "project_stages — Per-Project Pipeline Timeline (derived layer) — 2026-06-06"
+date: 2026-06-06
+type: note
+status: record
+area: audit
+---
+
 # project_stages — Per-Project Pipeline Timeline (derived layer) — 2026-06-06
 
 **Ninth & tenth data-modifying operations** (additive table + spot-check correction). Adds a

@@ -1,3 +1,11 @@
+---
+title: "Berkeley Housing — Data-Journalist Demo Prep (next-session priming) — 2026-06-07"
+date: 2026-06-07
+type: note
+status: record
+area: audit
+---
+
 # Berkeley Housing — Data-Journalist Demo Prep (next-session priming) — 2026-06-07
 
 **How to use this doc:** It primes a fresh assistant session for the data-journalist demo.

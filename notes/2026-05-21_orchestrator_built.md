@@ -1,3 +1,11 @@
+---
+title: "Orchestrator built — JSON staging pipeline operational"
+date: 2026-05-21
+type: note
+status: record
+area: notes
+---
+
 # Orchestrator built — JSON staging pipeline operational
 
 **Date:** 2026-05-21

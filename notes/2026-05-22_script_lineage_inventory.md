@@ -1,3 +1,11 @@
+---
+title: "Script Lineage Inventory"
+date: 2026-05-22
+type: diagnostic
+status: record
+area: notes
+---
+
 # Script Lineage Inventory
 
 **Generated:** 2026-05-21

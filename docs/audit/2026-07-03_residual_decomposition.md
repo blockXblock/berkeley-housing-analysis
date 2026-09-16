@@ -1,3 +1,11 @@
+---
+title: "The −52 gap, fully decomposed — the \"~−29 residual\" was a NET, not a thing"
+date: 2026-07-03
+type: diagnostic
+status: record
+area: audit
+---
+
 # The −52 gap, fully decomposed — the "~−29 residual" was a NET, not a thing
 
 **Date:** 2026-07-03 · **Who:** CC (read-only analysis; no writes) · **Inputs:** live v4 (CO 3,970,

@@ -1,3 +1,11 @@
+---
+title: The Filed Ballot Arguments — Primary + Rebuttal Analysis (all 25 documents)
+date: 2026-08-24
+type: diagnostic
+status: open
+area: notes
+---
+
 # The Filed Ballot Arguments — Primary + Rebuttal Analysis (all 25 documents)
 
 **Dates:** 2026-08-24 (12 rebuttals) / 2026-08-25 (13 primaries; full rewrite).

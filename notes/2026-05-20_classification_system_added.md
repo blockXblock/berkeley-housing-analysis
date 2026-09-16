@@ -1,3 +1,11 @@
+---
+title: "Classification system added (Option C event-based approach)"
+date: 2026-05-20
+type: note
+status: record
+area: notes
+---
+
 # Classification system added (Option C event-based approach)
 
 **Date:** 2026-05-20

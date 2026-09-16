@@ -1,3 +1,11 @@
+---
+title: "APR notebook inventory + path-fix audit (2026-05-24)"
+date: 2026-05-24
+type: diagnostic
+status: record
+area: notes
+---
+
 # APR notebook inventory + path-fix audit (2026-05-24)
 
 **Generated:** 2026-05-23T14:12:29

@@ -1,3 +1,11 @@
+---
+title: "Archival research — the 23 buildings in the Panoramic/Kennedy tour"
+date: 2026-09-04
+type: note
+status: record
+area: notes
+---
+
 # Archival research — the 23 buildings in the Panoramic/Kennedy tour
 
 **2026-09-04.** Purpose: `kml/tours/panoramic-kennedy-legacy.kml` carries its own 23 hand-traced

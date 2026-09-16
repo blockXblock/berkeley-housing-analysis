@@ -1,3 +1,11 @@
+---
+title: "berkeleybuild.com redesign proposal — \"One record, many views\""
+date: 2026-07-10
+type: note
+status: record
+area: notes
+---
+
 # berkeleybuild.com redesign proposal — "One record, many views"
 
 *Drafted 2026-07-10 in response to John's direction: archive the stale v1-era home text

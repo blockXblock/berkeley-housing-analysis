@@ -1,3 +1,11 @@
+---
+title: "C2 Tranche 2 — net_units write (convention-dependent live-work / sleeping units)"
+date: 2026-06-28
+type: write
+status: applied
+area: audit
+---
+
 # C2 Tranche 2 — net_units write (convention-dependent live-work / sleeping units)
 
 **Date:** 2026-06-28

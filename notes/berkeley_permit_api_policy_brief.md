@@ -1,3 +1,11 @@
+---
+title: "Policy brief: open API access to Berkeley permit data"
+date: 
+type: note
+status: record
+area: notes
+---
+
 # Policy brief: open API access to Berkeley permit data
 
 **To:** Members of the Berkeley City Council

@@ -1,3 +1,11 @@
+---
+title: "Day 3 — Corridor / business overlay (mayor-prep)"
+date: 2026-07-03
+type: note
+status: record
+area: notes
+---
+
 # Day 3 — Corridor / business overlay (mayor-prep)
 
 Method: street-name corridor classification (the 14 named commercial arterials — SHATTUCK,

@@ -1,3 +1,11 @@
+---
+title: "P1 Public-Facing Artifacts — Root-Cause Diagnosis — 2026-05-31"
+date: 2026-05-31
+type: diagnostic
+status: record
+area: audit
+---
+
 # P1 Public-Facing Artifacts — Root-Cause Diagnosis — 2026-05-31
 
 **Scope:** Read-only diagnosis of the two P1 artifacts from the explorer cutover

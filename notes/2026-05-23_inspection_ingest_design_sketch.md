@@ -1,3 +1,11 @@
+---
+title: "Inspection Ingest Design Sketch (2026-05-23)"
+date: 2026-05-23
+type: design
+status: record
+area: notes
+---
+
 # Inspection Ingest Design Sketch (2026-05-23)
 
 **Status:** Design complete. Ready for CC build.

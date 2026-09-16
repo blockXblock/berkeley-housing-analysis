@@ -1,3 +1,11 @@
+---
+title: "Causes 2 and 3 Diagnostic — 2026-05-29"
+date: 2026-05-29
+type: diagnostic
+status: record
+area: audit
+---
+
 # Causes 2 and 3 Diagnostic — 2026-05-29
 
 ## Background

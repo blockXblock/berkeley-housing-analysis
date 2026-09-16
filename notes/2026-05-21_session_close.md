@@ -1,3 +1,11 @@
+---
+title: "Session close — 2026-05-21"
+date: 2026-05-21
+type: session
+status: record
+area: notes
+---
+
 # Session close — 2026-05-21
 
 ## Headline

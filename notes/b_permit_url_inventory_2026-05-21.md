@@ -1,3 +1,11 @@
+---
+title: "In-scope B-permit URL inventory"
+date: 
+type: diagnostic
+status: record
+area: notes
+---
+
 # In-scope B-permit URL inventory
 
 **Generated:** 2026-05-21T16:46:07

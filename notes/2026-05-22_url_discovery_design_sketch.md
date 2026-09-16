@@ -1,3 +1,11 @@
+---
+title: "URL discovery scraper — design sketch"
+date: 2026-05-22
+type: design
+status: record
+area: notes
+---
+
 # URL discovery scraper — design sketch
 
 **Date:** 2026-05-22

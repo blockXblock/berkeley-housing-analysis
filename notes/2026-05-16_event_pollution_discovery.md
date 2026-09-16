@@ -1,3 +1,11 @@
+---
+title: "Discovery: project_events pollution from v1->v2 migration"
+date: 2026-05-16
+type: diagnostic
+status: record
+area: notes
+---
+
 # Discovery: project_events pollution from v1->v2 migration
 
 **Date:** 2026-05-16 (session 16:00-end)

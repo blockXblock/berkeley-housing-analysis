@@ -1,3 +1,11 @@
+---
+title: "Inventory: berkeley_housing_analysis.db"
+date: 2026-05-22
+type: diagnostic
+status: record
+area: notes
+---
+
 # Inventory: berkeley_housing_analysis.db
 
 ## Database used

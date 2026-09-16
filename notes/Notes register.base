@@ -1,0 +1,27 @@
+filters:
+  and:
+    - file.inFolder("notes")
+views:
+  - type: table
+    name: All notes
+    order:
+      - file.name
+      - title
+      - date
+      - type
+      - status
+    sort:
+      - property: status
+        direction: ASC
+      - property: date
+        direction: DESC
+  - type: kanban
+    name: By status
+    groupBy:
+      property: status
+      direction: ASC
+    order:
+      - file.name
+      - title
+      - date
+      - type

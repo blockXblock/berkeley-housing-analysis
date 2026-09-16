@@ -1,3 +1,11 @@
+---
+title: "STEP 3 — CPRA-evidentiary re-derivation (verdict-layer write)"
+date: 2026-06-14
+type: note
+status: record
+area: audit
+---
+
 # STEP 3 — CPRA-evidentiary re-derivation (verdict-layer write)
 
 **Date:** 2026-06-14 · **Scope:** verdict layer only (evidence untouched) · **Snapshot:** `databases/keep_snapshot_2026-06-14_pre-step3.db` (sha256 `a09f50f8de3676a005ab81ebc19d2961b65b441f6fb38e7cf75a374e0650bf07`)

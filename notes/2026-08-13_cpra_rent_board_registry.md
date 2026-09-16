@@ -1,3 +1,11 @@
+---
+title: "CPRA draft — Berkeley Rent Board full unit-registration database"
+date: 2026-08-13
+type: note
+status: record
+area: notes
+---
+
 # CPRA draft — Berkeley Rent Board full unit-registration database
 
 **Status: ✅ SUBMITTED 2026-08-13 — NextRequest Request #26-2375.** Awaiting response. Submitted to the **Berkeley Rent Stabilization Board** (a separate

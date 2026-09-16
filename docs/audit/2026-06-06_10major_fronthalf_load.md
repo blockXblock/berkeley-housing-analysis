@@ -1,3 +1,11 @@
+---
+title: "10-Major Front-Half Load + project_stages schema widening — 2026-06-06"
+date: 2026-06-06
+type: report
+status: record
+area: audit
+---
+
 # 10-Major Front-Half Load + project_stages schema widening — 2026-06-06
 
 **Eleventh data-modifying operation.** Loaded Chrome-verified, BP-cross-checked front-half stage dates

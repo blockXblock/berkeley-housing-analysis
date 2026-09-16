@@ -1,3 +1,11 @@
+---
+title: "URL discovery scraper — results-page pagination fix"
+date: 
+type: diagnostic
+status: record
+area: notes
+---
+
 # URL discovery scraper — results-page pagination fix
 
 **Generated:** 2026-05-22T08:10:41

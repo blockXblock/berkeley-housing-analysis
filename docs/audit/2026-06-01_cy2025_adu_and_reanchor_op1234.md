@@ -1,3 +1,11 @@
+---
+title: "CY2025 ADU Ingest + Re-anchors + Corrected ADU Classification — 2026-06-01"
+date: 2026-06-01
+type: note
+status: record
+area: audit
+---
+
 # CY2025 ADU Ingest + Re-anchors + Corrected ADU Classification — 2026-06-01
 
 **Third data-modifying operation** on `berkeley_housing_v2.db`. One gated

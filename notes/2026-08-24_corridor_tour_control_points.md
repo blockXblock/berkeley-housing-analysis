@@ -1,3 +1,11 @@
+---
+title: "Corridor flyover tours — control points, and how to correct them"
+date: 2026-08-24
+type: note
+status: record
+area: notes
+---
+
 # Corridor flyover tours — control points, and how to correct them
 
 **For John.** Three new tours: **A San Pablo N→S · B Adeline N→S · C Telegraph S→N**, each

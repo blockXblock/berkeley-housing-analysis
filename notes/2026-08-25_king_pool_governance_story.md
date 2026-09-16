@@ -1,3 +1,11 @@
+---
+title: "Who Did What: the King Pool Re-Scope and the Bond List's Governance Trail"
+date: 2026-08-25
+type: note
+status: record
+area: notes
+---
+
 # Who Did What: the King Pool Re-Scope and the Bond List's Governance Trail
 
 **Date:** 2026-08-25 · **For:** Vision 2050 working group

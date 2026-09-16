@@ -1,3 +1,11 @@
+---
+title: "CPRA draft — Alameda County Assessor: secured assessment roll WITH assessee name"
+date: 2026-09-07
+type: note
+status: open
+area: notes
+---
+
 # CPRA draft — Alameda County Assessor: secured assessment roll WITH assessee name
 
 **Status: DRAFT 2026-09-07 — not sent.** To the **Alameda County Assessor's Office** (1221 Oak Street,

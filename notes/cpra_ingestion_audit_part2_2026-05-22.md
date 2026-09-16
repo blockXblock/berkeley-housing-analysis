@@ -1,3 +1,11 @@
+---
+title: "CPRA ingestion-script audit — Part 2"
+date: 
+type: diagnostic
+status: record
+area: notes
+---
+
 # CPRA ingestion-script audit — Part 2
 
 **Generated:** 2026-05-22T14:15:18

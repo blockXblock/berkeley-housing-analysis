@@ -1,3 +1,11 @@
+---
+title: "Post-fix full-rerun characterization (57 permits)"
+date: 
+type: report
+status: record
+area: notes
+---
+
 # Post-fix full-rerun characterization (57 permits)
 
 **Generated:** 2026-05-22T16:48:37

@@ -1,3 +1,11 @@
+---
+title: "APR workflow audit (2026-05-24)"
+date: 2026-05-24
+type: diagnostic
+status: record
+area: notes
+---
+
 # APR workflow audit (2026-05-24)
 
 **Generated:** 2026-05-23 (reconstructed from disk artifacts)

@@ -1,3 +1,11 @@
+---
+title: "Queue promotion: url_discovery_queue from /tmp/ to canonical"
+date: 
+type: report
+status: record
+area: notes
+---
+
 # Queue promotion: url_discovery_queue from /tmp/ to canonical
 
 **Generated:** 2026-05-22T17:13:27

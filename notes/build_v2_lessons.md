@@ -1,3 +1,11 @@
+---
+title: "Building a database from raw sources — lessons (the course spine)"
+date: 
+type: note
+status: record
+area: notes
+---
+
 # Building a database from raw sources — lessons (the course spine)
 
 A student-facing teaching note, one per stage of the `build_v2_from_sources` rebuild. This is **not**

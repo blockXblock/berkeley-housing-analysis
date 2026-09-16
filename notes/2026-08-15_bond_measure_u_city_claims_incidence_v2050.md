@@ -1,3 +1,11 @@
+---
+title: "Measure U ($300M GO bond, Nov 2026): the city's case, who actually pays, and the Vision 2050 comparison"
+date: 2026-08-15
+type: note
+status: open
+area: notes
+---
+
 # Measure U ($300M GO bond, Nov 2026): the city's case, who actually pays, and the Vision 2050 comparison
 
 **Date:** 2026-08-15 · **Status:** working analysis for the Berkeley-2050 op-ed effort

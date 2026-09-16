@@ -1,3 +1,11 @@
+---
+title: "Python environment consolidation — migration plan (DRAFT, not executed)"
+date: 2026-09-07
+type: design
+status: record
+area: notes
+---
+
 # Python environment consolidation — migration plan (DRAFT, not executed)
 
 **Date:** 2026-09-07 · **Status:** proposal, awaiting John's go-ahead · **Nothing has been changed.**

@@ -1,3 +1,11 @@
+---
+title: "url_discovery_queue: insert 15 B-permits (permitted stage)"
+date: 
+type: report
+status: record
+area: notes
+---
+
 # url_discovery_queue: insert 15 B-permits (permitted stage)
 
 **Generated:** 2026-05-22T23:14:45

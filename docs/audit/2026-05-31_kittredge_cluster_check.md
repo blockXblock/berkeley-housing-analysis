@@ -1,3 +1,11 @@
+---
+title: "Kittredge Street Cluster — v2 vs Real-World Check — 2026-05-31"
+date: 2026-05-31
+type: diagnostic
+status: record
+area: audit
+---
+
 # Kittredge Street Cluster — v2 vs Real-World Check — 2026-05-31
 
 **Scope:** Read-only. Checks whether v2's Kittredge records (2065/2115/2138/2150/

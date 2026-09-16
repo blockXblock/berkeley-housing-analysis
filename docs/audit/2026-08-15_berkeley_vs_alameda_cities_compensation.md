@@ -1,3 +1,11 @@
+---
+title: "Berkeley staffing, pay, overtime and pensions vs the other 13 Alameda County cities"
+date: 2026-08-15
+type: note
+status: record
+area: audit
+---
+
 # Berkeley staffing, pay, overtime and pensions vs the other 13 Alameda County cities
 
 **Date:** 2026-08-15 · **Status:** analytical record. **Compensation only — see §5 before using this on the bond.**

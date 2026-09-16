@@ -1,3 +1,11 @@
+---
+title: "Day 4 — Money flows to the city: fees, then taxes (mayor-prep)"
+date: 2026-07-03
+type: note
+status: record
+area: notes
+---
+
 # Day 4 — Money flows to the city: fees, then taxes (mayor-prep)
 
 Frame: **a building pays the city once at the counter, then every year after completion.**

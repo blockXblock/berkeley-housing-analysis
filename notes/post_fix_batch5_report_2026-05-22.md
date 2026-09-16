@@ -1,3 +1,11 @@
+---
+title: "Post-fix batch-of-5 verification report"
+date: 
+type: report
+status: record
+area: notes
+---
+
 # Post-fix batch-of-5 verification report
 
 **Generated:** 2026-05-22T15:13:02

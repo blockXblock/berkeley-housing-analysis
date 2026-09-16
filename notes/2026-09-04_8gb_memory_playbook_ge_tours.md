@@ -1,3 +1,11 @@
+---
+title: "The 8 GB playbook — memory, swap, and Google Earth tour recording"
+date: 2026-09-04
+type: note
+status: record
+area: notes
+---
+
 # The 8 GB playbook — memory, swap, and Google Earth tour recording
 
 *Consolidated 2026-09-04 from the chat record across five sessions (July 18 kernel panic;

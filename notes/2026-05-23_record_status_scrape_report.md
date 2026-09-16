@@ -1,3 +1,11 @@
+---
+title: "Record-status scrape report (2026-05-23, 107 permits)"
+date: 2026-05-23
+type: report
+status: record
+area: notes
+---
+
 # Record-status scrape report (2026-05-23, 107 permits)
 
 **Generated:** 2026-05-23T11:21:36

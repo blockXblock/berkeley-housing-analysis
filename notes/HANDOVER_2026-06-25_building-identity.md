@@ -1,3 +1,11 @@
+---
+title: "HANDOVER — Berkeley Housing Pipeline, building-identity / S1.5 (2026-06-25, end of session)"
+date: 
+type: session
+status: record
+area: notes
+---
+
 # HANDOVER — Berkeley Housing Pipeline, building-identity / S1.5 (2026-06-25, end of session)
 
 **To:** the next chat-Claude. **From:** chat-Claude, end of a long S1.5 session.

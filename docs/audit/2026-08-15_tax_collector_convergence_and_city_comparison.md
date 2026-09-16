@@ -1,3 +1,11 @@
+---
+title: "Why Berkeley's property taxes rose in FY2025-26 — our reconstruction and the County Tax Collector's, compared"
+date: 2026-08-15
+type: note
+status: record
+area: audit
+---
+
 # Why Berkeley's property taxes rose in FY2025-26 — our reconstruction and the County Tax Collector's, compared
 
 **Date:** 2026-08-15 · **Status:** analytical record, supports the Berkeley-2050 / Measure U work

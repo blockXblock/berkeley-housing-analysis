@@ -1,3 +1,11 @@
+---
+title: "Day 2 — Ministerial path & Middle Housing first-year slice (mayor-prep)"
+date: 2026-07-03
+type: note
+status: record
+area: notes
+---
+
 # Day 2 — Ministerial path & Middle Housing first-year slice (mayor-prep)
 
 Source: the fresh Accela harvest (`data/raw/accela/date_range/`, 9,275 unique records,

@@ -1,3 +1,11 @@
+---
+title: "Prompt: Continuing the permit_role classifier and stage-derivation fix"
+date: 
+type: session
+status: record
+area: notes
+---
+
 # Prompt: Continuing the permit_role classifier and stage-derivation fix
 
 **Save location:** `docs/methodology/permit_classifier_session_handoff.md`

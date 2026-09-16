@@ -1,3 +1,6 @@
+---
+status: open
+---
 # Public Records Act request — CPUC: pole and transformer records for Berkeley
 
 **Status:** DRAFT, not sent. John reviews and sends.

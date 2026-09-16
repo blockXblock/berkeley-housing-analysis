@@ -1,3 +1,11 @@
+---
+title: "HCD APR mirror — table coverage gaps"
+date: 2026-05-27
+type: note
+status: record
+area: notes
+---
+
 # HCD APR mirror — table coverage gaps
 
 **Date:** 2026-05-27

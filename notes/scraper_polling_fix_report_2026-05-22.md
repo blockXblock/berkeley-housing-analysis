@@ -1,3 +1,11 @@
+---
+title: "URL discovery scraper — polling-loop fix for auto-redirect timing flakiness"
+date: 
+type: report
+status: record
+area: notes
+---
+
 # URL discovery scraper — polling-loop fix for auto-redirect timing flakiness
 
 **Generated:** 2026-05-22T16:54:56

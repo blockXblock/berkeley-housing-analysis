@@ -1,3 +1,11 @@
+---
+title: "Session coordination — this maps/data session ⇄ B2050BIS (Berkeley-2050 Bond Issue Support)"
+date: 2026-08-15
+type: session
+status: record
+area: notes
+---
+
 # Session coordination — this maps/data session ⇄ B2050BIS (Berkeley-2050 Bond Issue Support)
 
 **Written:** 2026-08-14/15. **Why:** two Claude Code sessions are working the same repo on branch `dev` at the

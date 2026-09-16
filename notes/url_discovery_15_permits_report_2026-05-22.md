@@ -1,3 +1,11 @@
+---
+title: "URL discovery run: 15 B-permits (permitted stage)"
+date: 
+type: diagnostic
+status: record
+area: notes
+---
+
 # URL discovery run: 15 B-permits (permitted stage)
 
 **Generated:** 2026-05-22T23:24:28

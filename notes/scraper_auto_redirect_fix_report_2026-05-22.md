@@ -1,3 +1,11 @@
+---
+title: "URL discovery scraper — single-result auto-redirect fix"
+date: 
+type: report
+status: record
+area: notes
+---
+
 # URL discovery scraper — single-result auto-redirect fix
 
 **Generated:** 2026-05-22T15:06:22

@@ -1,3 +1,11 @@
+---
+title: "In-place event-dedup — collapse cross-file duplicate milestone events (audit record)"
+date: 2026-06-29
+type: write
+status: applied
+area: audit
+---
+
 # In-place event-dedup — collapse cross-file duplicate milestone events (audit record)
 
 **Date:** 2026-06-29 · **Who:** CC, gated + confirmed by John. · **NOT a re-ingest** (all manual classification preserved).

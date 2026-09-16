@@ -1,3 +1,11 @@
+---
+title: Measure U — Rebuttal draft (pro side) + the commitments that justify support
+date: 2026-08-15
+type: note
+status: open
+area: notes
+---
+
 # Measure U — Rebuttal draft (pro side) + the commitments that justify support
 
 **Date:** 2026-08-15 · **Posture:** the Vision 2050 group SUPPORTS Measure U, conditioned on

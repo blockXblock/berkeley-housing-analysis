@@ -1,3 +1,11 @@
+---
+title: "CPRA drafts — 2026 refresh + planning pathways + fees (Day 1 of mayor-presentation prep)"
+date: 2026-07-03
+type: note
+status: record
+area: notes
+---
+
 # CPRA drafts — 2026 refresh + planning pathways + fees (Day 1 of mayor-presentation prep)
 
 **Status: SUBMITTED as NextRequest #26-1972. Request 2 / item 1 — RESPONSE RECEIVED 2026-08-09

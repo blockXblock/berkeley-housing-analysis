@@ -1,3 +1,11 @@
+---
+title: "The no-candidate batch — the reconciliation's last 20 rows, all adjudicated (0 unmatched)"
+date: 2026-07-03
+type: note
+status: record
+area: audit
+---
+
 # The no-candidate batch — the reconciliation's last 20 rows, all adjudicated (0 unmatched)
 
 **Date:** 2026-07-03 · **Who:** background agent (full playbook) + CC write-gate verification + John's

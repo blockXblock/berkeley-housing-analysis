@@ -1,3 +1,11 @@
+---
+title: "build_v2_from_sources — REBUILD SPECIFICATION (design only, nothing runs)"
+date: 
+type: design
+status: record
+area: notes
+---
+
 # build_v2_from_sources — REBUILD SPECIFICATION (design only, nothing runs)
 
 **Purpose.** Re-derive v2's factual content from primary-source **structured columns**, replacing the migration's

@@ -1,3 +1,11 @@
+---
+title: "Hand-copied Accela capID triplets — 2026-05-21 browser verification"
+date: 
+type: note
+status: record
+area: notes
+---
+
 # Hand-copied Accela capID triplets — 2026-05-21 browser verification
 
 **Generated:** 2026-05-21T17:15:03

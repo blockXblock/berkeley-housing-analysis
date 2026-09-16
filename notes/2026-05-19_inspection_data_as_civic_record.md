@@ -1,3 +1,11 @@
+---
+title: "2026-05-19_inspection_data_as_civic_record"
+date: 2026-05-19
+type: design
+status: record
+area: notes
+---
+
 Inspection data as permanent civic record
 Date: 2026-05-19
 Status: Strategic vision document. Surfaced during Accela pipeline reconnaissance. Not yet a committed workstream.

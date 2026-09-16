@@ -1,3 +1,11 @@
+---
+title: "The UNCERTAIN dozen — fully adjudicated (zero uncertain rows remain)"
+date: 2026-07-03
+type: diagnostic
+status: record
+area: audit
+---
+
 # The UNCERTAIN dozen — fully adjudicated (zero uncertain rows remain)
 
 **Date:** 2026-07-03 · **Who:** CC + John (his Accela finds resolved four of the hardest) ·

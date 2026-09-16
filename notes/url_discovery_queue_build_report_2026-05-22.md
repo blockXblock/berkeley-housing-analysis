@@ -1,3 +1,11 @@
+---
+title: "url_discovery_queue build report"
+date: 
+type: diagnostic
+status: record
+area: notes
+---
+
 # url_discovery_queue build report
 
 **Generated:** 2026-05-22T07:45:07

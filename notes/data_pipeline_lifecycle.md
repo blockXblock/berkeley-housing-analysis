@@ -1,3 +1,11 @@
+---
+title: "Data pipeline lifecycle"
+date: 
+type: note
+status: record
+area: notes
+---
+
 # Data pipeline lifecycle
 
 **Status:** Conceptual reference. Pipeline is partially built as of 2026-05-21. Updates expected as remaining components ship.

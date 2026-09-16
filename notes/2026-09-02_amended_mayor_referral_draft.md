@@ -1,3 +1,11 @@
+---
+title: DRAFT — Amended version of the September 29 referral (for discussion)
+date: 2026-09-02
+type: note
+status: open
+area: notes
+---
+
 # DRAFT — Amended version of the September 29 referral (for discussion)
 
 **ACTION CALENDAR**

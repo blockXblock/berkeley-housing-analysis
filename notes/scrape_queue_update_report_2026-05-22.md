@@ -1,3 +1,11 @@
+---
+title: "scrape_queue update — 90 pending_url_discovery → pending"
+date: 
+type: report
+status: record
+area: notes
+---
+
 # scrape_queue update — 90 pending_url_discovery → pending
 
 **Generated:** 2026-05-22T17:36:51

@@ -1,3 +1,11 @@
+---
+title: "In-browser 3D triage: Cesium vs MapLibre GL JS"
+date: 2026-05-18
+type: diagnostic
+status: record
+area: notes
+---
+
 # In-browser 3D triage: Cesium vs MapLibre GL JS
 
 **Date:** 2026-05-18 (evening)

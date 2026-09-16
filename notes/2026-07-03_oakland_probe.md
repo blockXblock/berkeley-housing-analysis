@@ -1,3 +1,11 @@
+---
+title: Oakland parallel-project probe — findings (2026-07-03)
+date: 2026-07-03
+type: note
+status: open
+area: notes
+---
+
 # Oakland parallel-project probe — findings (2026-07-03)
 
 Probes: Socrata catalog (API), Accela ACA via the date-range scraper (agency param), and a CIC

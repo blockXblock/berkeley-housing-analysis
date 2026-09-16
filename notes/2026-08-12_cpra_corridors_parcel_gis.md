@@ -1,3 +1,11 @@
+---
+title: "CPRA draft — Corridors Zoning Update: parcel database, prioritization work product, feasibility"
+date: 2026-08-12
+type: note
+status: record
+area: notes
+---
+
 # CPRA draft — Corridors Zoning Update: parcel database, prioritization work product, feasibility
 
 **Status: ✅ SUBMITTED via NextRequest 2026-08-13 (John) — Request #26-2367.** Awaiting response. Highest-priority

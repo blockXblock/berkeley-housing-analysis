@@ -1,3 +1,11 @@
+---
+title: "Session resume — Accela plan-set harvest → R2 → v2 → Explorer (2026-06-12)"
+date: 2026-06-12
+type: session
+status: record
+area: audit
+---
+
 # Session resume — Accela plan-set harvest → R2 → v2 → Explorer (2026-06-12)
 
 **For the next Claude.** This session built and proved an Accela document byte-fetch

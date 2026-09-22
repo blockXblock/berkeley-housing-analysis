@@ -1,6 +1,8 @@
 # Berkeley Housing Pipeline - Datasette
 
-Interactive database tracking 115 Berkeley housing projects (5,470 units) with permit timeline data.
+Interactive database of the Berkeley housing pipeline — **909 projects**, rebuilt from the canonical v2 database, plus the Corridors Zoning Update parcel data obtained under CPRA #26-2367.
+
+**Regenerate with `.venv/bin/python scripts/gen_datasette_dbs.py` — do not hand-build.** The previous databases were built by hand in Feb/Mar 2026, had no generator, and silently went stale (163 projects served while v2 held 909).
 
 **Live Site:** https://berkeley-housing.fly.dev
 

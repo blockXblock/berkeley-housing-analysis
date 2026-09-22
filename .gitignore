@@ -107,6 +107,13 @@ output/
 *.bak
 .env.r2
 *.env.r2
+# Any env file, not just the R2 one. Added 2026-09-22: the rule above named a single
+# file, so a new .env.cloudflare (or .env anything) would NOT have been ignored and a
+# credential could have been committed. Catch the whole family.
+.env
+.env.*
+*.env
+!.env.example
 # Video outputs live on the YouTube channel feeding berkeleybuild.com, not the repo
 *.mp4
 *.mp4.backup*

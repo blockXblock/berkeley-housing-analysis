@@ -201,10 +201,22 @@ compatibility view is **`v_projects_flat`** (what `generate_apr_v2.py` and
 - Sequester only **AFTER** the replacement is live.
 
 ## Media disposition rule
-- **`.mp4` video outputs are NOT tracked in the repo** — they live on the
-  **YouTube channel feeding berkeleybuild.com**. `*.mp4` / `*.mp4.backup*` are
-  gitignored. Any stray repo-tracked mp4 (e.g. old `*.mp4.backup-*`) is a stale
-  old-approach artifact → delete.
+- **Two classes of `.mp4`, and the difference is load-bearing:**
+  - **FULL-LENGTH tour renders** (minutes long, 200–700 MB) are **NOT tracked** — they live on the
+    **YouTube channel feeding berkeleybuild.com**, and the masters stay on
+    **`/Volumes/T7-2025/Berkeley-Tours/`** (`New/1-*.m4v` = the current labelled, pushpin-free set,
+    rendered 2026-09-07/08). A stray `*.mp4.backup-*` is a stale old-approach artifact → delete.
+  - **SHORT web-served loops** (hero/teaser: **≤20 s, ≤5 MB**, silent, `+faststart`) **ARE tracked,
+    deliberately**, in `docs/videos/` — the page must serve them itself, so they cannot live on
+    YouTube. `*.mp4` is gitignored (`.gitignore:111`), so each one needs an explicit **`git add -f`**
+    or it silently fails to deploy. ⚠ **NEVER delete a tracked mp4 in `docs/videos/` as a "stale
+    artifact" without grepping `docs/index.html` first** — the live site depends on them. (The old
+    blanket rule said every repo-tracked mp4 was stale; that was false and would have deleted two
+    served videos. Corrected 2026-09-22.)
+  - **Inventory (2026-09-22):** `hero-shattuck-loop.mp4` (2.71 MB, cut from the current
+    2026-09-07 Shattuck render — keep) · `campanile-adeline-shattuck.mp4` (69 MB) and
+    `tour-elmwood+college+bancroft+shattuck-s2n.mp4` (31 MB), both **`needs_rerecord: true`**,
+    pushpin-era, and both **autoplaying below the fold** — retire to YouTube once re-recorded.
 - **KML SOURCE lives in `kml/` (repo-root, reorganized 2026-07-22) and IS tracked** —
   **`kml/geometry/`** (building-polygon skyline: canonical `kml/geometry/geometry.kml` +
   `kml/geometry/versions/` history/control-points), **`kml/tours/`** (camera-only tour KMLs),

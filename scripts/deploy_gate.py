@@ -27,6 +27,12 @@ def staged(path):
     r = subprocess.run(["git", "show", f":{path}"], capture_output=True, text=True)
     return r.stdout if r.returncode == 0 else None
 
+def in_index(path):
+    """True if PATH exists in the staged tree. Unlike staged(), safe for binaries, and unlike
+    staged_files(), it sees unchanged files too."""
+    return subprocess.run(["git", "cat-file", "-e", f":{path}"],
+                          capture_output=True).returncode == 0
+
 def staged_files():
     r = subprocess.run(["git", "diff", "--cached", "--name-only", "-z"], capture_output=True, text=True)
     return [p for p in r.stdout.split("\0") if p]
@@ -47,21 +53,38 @@ def main():
     if h is None:
         check(False, "docs/index.html is staged or unchanged")
     else:
-        D = '<div style="margin: 20px auto; max-width: 1000px; padding: 0 1.5rem;">'
-        blocks = h.split(D)[1:]
-        yt = re.findall(r"youtube\.com/embed/([A-Za-z0-9_-]+)", h)
+        # VIDEO IDS COME FROM data-yt, NOT FROM THE EMBED URL. The embeds moved to
+        # youtube-nocookie.com on 2026-09-22, and the old r"youtube\.com/embed/" pattern does
+        # not match "youtube-nocookie.com/embed/" -- it would have matched nothing and passed
+        # vacuously, which is worse than failing. data-yt is the facade's own marker.
+        yt = re.findall(r'data-yt="([A-Za-z0-9_-]+)"', h)
         check(h.count("<div") == h.count("</div>"), "divs balance",
               f"{h.count('<div')} open, {h.count('</div>')} close")
-        check(len(yt) == len(set(yt)), "no duplicated video", 
+        check(len(yt) >= 8, "the flyovers are still on the page", f"{len(yt)} found")
+        check(len(yt) == len(set(yt)), "no duplicated video",
               ", ".join(sorted({v for v in yt if yt.count(v) > 1})))
-        # EVERY YOUTUBE BLOCK CARRIES THE LEGEND. Only YouTube blocks: the two self-hosted
-        # <video> players have no <h3> and update_legend.py deliberately skips them. The inline
-        # version of this check asserted all TEN blocks had one and cried wolf.
-        missing = [re.search(r"youtube\.com/embed/([A-Za-z0-9_-]+)", b).group(1)
-                   for b in blocks if "youtube.com/embed" in b and "Colour shows" not in b]
-        check(not missing, "every YouTube video carries the colour legend", ", ".join(missing))
-        check(not re.search(r"<span[^>]*>(red|grey)</span> (stalled|at pre-application)", h)
-              or True, "legend colours are generated, not hand-written")
+
+        # THE COLOUR LEGEND IS SHARED, NOT PER-BLOCK (changed 2026-09-22). It used to be
+        # repeated in all ten video paragraphs: 1,280 words, 54% of the page's video text, and
+        # a wall of duplicate prose on a phone. It now lives once in a <details> under the
+        # stage-legend figure. So the guarantee to enforce is no longer "every block has one"
+        # but "the page has exactly one, and it names every stage".
+        nleg = h.count("Colour shows where each project stands")
+        check(nleg == 1, "the shared colour legend appears exactly once", f"found {nleg}")
+        stages = ["pre-application", "under review", "entitled", "permitted, not yet started",
+                  "under construction", "completed and occupiable", "withdrawn"]
+        absent_stage = [t for t in stages if t not in h]
+        check(not absent_stage, "the shared legend names every stage", ", ".join(absent_stage))
+
+        # EVERY LOCAL ASSET THE PAGE REFERENCES IS ACTUALLY IN THE COMMIT. Added 2026-09-22,
+        # after the hero loop: *.mp4 is gitignored (.gitignore:111), so a referenced video can
+        # sit on disk, be absent from the commit, and 404 on the live site -- and deploy.sh's
+        # untracked warning never sees it, because an IGNORED file is not an UNTRACKED file.
+        # Without this check that failure is silent and lands on the homepage.
+        refs = sorted(set(re.findall(r'(?:src|poster)="((?:videos|img|svg)/[^"]+)"', h)))
+        absent = [r for r in refs if not in_index(f"docs/{r}")]
+        check(not absent, "every local asset the page references is in the commit",
+              ", ".join(absent[:4]))
 
     c = staged("docs/tours.json")
     if c is not None:

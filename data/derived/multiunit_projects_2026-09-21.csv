@@ -1,294 +1,288 @@
-project_key,address,apn,units_best,units_source,planning_records,planning_status,planning_filed,building_records,building_status,building_filed,first_bp_issued,last_finaled,status_asof,v2_project_id,v2_match_basis,v2_units,v2_status,v2_bp_issued,v2_co,not_in_v2,needs_status_refresh,units_disagree,n_records,address_missing,address_borrowed
-addr|1750|sacramento,1750 SACRAMENTO St,,739,description,PLN2024-0010,Approved,2024-02-20,B2025-05534;B2026-03228,Corrections List Issued,2026-07-30,,,2026-09-21,1,address+permit,739,Entitled,,,0,0,0,3,0,0
-addr|1998|shattuck,1998 Shattuck,,599,description,ZP2022-0175;PLN2022-0118;PLN2023-0083,Closed,2023-11-30,,,,,,2026-07-08,,,,,,,1,0,0,3,0,0
-addr|98|shattuck,98 SHATTUCK,,599,description,DRCP2023-0003;ZP2023-0040,Approved,2023-03-17,,,,,,2026-07-08,119,permit,599,Entitled,,,0,1,0,2,0,0
-addr|2128|oxford,2128 OXFORD St,,551,description,DRCP2021-0016;ZP2021-0162;PLN2022-0056;DRCP2022-0014;ZP2022-0135;DRCF2024-0006,Approved,2024-12-09,,,,,,2026-07-08,133,address,456,Entitled,,,0,1,1,6,0,0
-addr|2190|shattuck,2190 SHATTUCK Ave,,326,description,PLN2022-0010;ZP2022-0026,Approved,2022-02-23,,,,,,2026-09-21,35,address,452,In Review,,,0,0,1,2,0,0
-addr|1931|san pablo,1931 SAN PABLO Ave,,323,description,PLN2022-0026,Closed,2022-03-17,,,,,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|2700|shattuck,2700 SHATTUCK,,293,description,PLN2023-0081;DRCP2024-0006;ZP2024-0058,Approved,2024-05-14,,,,,,2026-07-08,3,address+permit,359,Entitled,,,0,1,1,3,0,0
-addr|1900|4th,1900 Fourth Street,,260,description,ZP2018-0052,Closed,2018-03-08,,,,,,2026-07-08,,,,,,,1,0,0,1,0,0
-addr|1914|5th,1914 FIFTH St,,257,description,ZP2020-0104;PLN2020-0044;PLN2022-0039,Closed,2022-05-03,,,,,,2026-09-21,4,address+permit,257,In Review,,,0,0,0,3,0,0
-addr|2601|san pablo,2601 SAN PABLO Ave,,242,description,PLN2021-0004;ZP2021-0066;PLN2022-0048;ZP2022-0171;PLN2023-0089,Closed,2023-12-08,,,,,,2026-09-21,7,address+permit,223,In Review,,,0,0,1,5,0,0
-addr|2029|university apartments,2029 UNIVERSITY AVENUE APARTMENTS,,240,description,PLN2024-0069,Under Review,2024-12-10,,,,,,2026-09-21,6,permit,240,Entitled,,,0,0,0,1,0,0
-addr|2029|university,2029 University Avenue,,240,description,ZP2024-0182;ZP2024-0181;DRCP2025-0002;DRCP2025-0001,Approved,2025-01-09,,,,,,2026-07-08,6,address+permit,240,Entitled,,,0,1,0,4,0,0
-addr|2274|shattuck,2274 SHATTUCK Ave,,239,description,PLN2022-0072;DRCP2023-0008;ZP2023-0079,Approved,2023-05-30,,,,,,2026-07-08,120,address+permit,299,Entitled,,,0,1,1,3,0,0
-addr|1899|oxford,1899 OXFORD St,,222,description,PLN2023-0100;DRCP2024-0011;ZP2024-0075;ZP2026-0077,Under Review,2026-08-11,B2026-02298,Under Review,2026-06-02,,,2026-07-08,9,address+permit,212,Entitled,,,0,1,1,5,0,0
-addr|2920|shattuck,2920 SHATTUCK Ave,,221,description,PLN2022-0016;DRCP2022-0013;ZP2022-0116;PLN2023-0096,Closed,2023-12-18,,,,,,2026-07-08,8,address+permit,242,In Review,,,0,1,1,4,0,0
-addr|2015|blake,2015 BLAKE St,,219,description,ZP2018-0239;PLN2020-0023;ZP2020-0072;PLN2022-0120;ZP2022-0178,Approved,2022-12-19,,,,,,2026-07-08,181,address,168,Entitled,,,0,1,1,5,0,0
-addr|2113|kittredge,2113 KITTREDGE,,214,description,PLN2022-0067,Closed,2022-07-28,,,,,,2026-07-08,12,address~10,148,In Review,,,0,0,1,1,0,0
-addr|2115|kittredge,2115 KITTREDGE,,214,description,ZP2022-0144;ZP2024-0131,Incomplete Pending Applicant,2024-09-16,,,,,,2026-07-08,12,address+permit,148,In Review,,,0,1,1,2,0,0
-apn|056-2003-001-00,1598 UNIVERSITY Ave,056-2003-001-00,207,cpra_UnitsAdded,PLN2022-0008;DRCP2022-0008;ZP2022-0099;PLN2023-0038;DRCF2024-0004,Approved,2024-05-02,B2024-01924,Issued,2024-04-19,2024-12-16,,2026-09-21,152,address+apn+permit,207,Completed,2024-01-01,,0,0,0,6,0,0
-addr|2100|milvia,2100 Milvia,,201,description,PLN2023-0045;ZP2023-0163,Approved,2023-12-12,,,,,,2026-07-08,121,address+permit,205,Entitled,,,0,1,1,2,0,0
-addr|2108|milvia,2108 MILVIA,,201,description,DRCP2023-0018,Approved,2023-12-12,,,,,,2026-07-08,17;121,address~10,105,In Review,,,0,1,1,1,0,0
-addr|2065|kittredge,2065 KITTREDGE St,,189,description,PLN2021-0031;ZP2021-0193;DRCF2023-0002,Approved,2023-06-28,,,,,,2026-07-08,180,address,189,Entitled,,,0,1,0,3,0,0
-addr|1500|san pablo,1500 SAN PABLO Ave,,170,description,DRCF2017-0003,Approved,2017-03-30,,,,,,2026-09-21,895,address,159,Completed,,2020-09-11,0,0,1,1,0,0
-addr|1500|spa,1500 SPA,,170,description,ZP2015-0043;DRCP2015-0004,Approved,2015-03-05,,,,,,2026-07-08,,,,,,,1,1,0,2,0,0
-apn|057-2029-016-00,2150 KITTREDGE St,057-2029-016-00,169,cpra_UnitsAdded,DRSA2023-0004,Approved,2023-03-21,B2021-00008,Finaled,2021-01-04,2021-10-27,2024-03-20,2026-07-08,135,address+permit,169,Completed,,2024-03-20,0,0,0,2,0,0
-addr|2176|kittredge,2176 KITTREDGE St,,165,description,DRCP2019-0001;ZP2019-0027;DRCF2021-0004,Approved,2021-07-01,,,,,,2026-09-21,,,,,,,1,0,0,3,0,0
-apn|057-2046-001-00,1951 SHATTUCK Ave,057-2046-001-00,163,cpra_UnitsAdded,PLN2017-0057;ZP2018-0137;DRCP2018-0005,Approved,2018-07-06,B2019-05608;B2021-04893,Finaled,2021-10-27,2022-09-08,2024-10-24,2026-07-08,136,address+apn+permit,163,Completed,2022-09-08,2024-10-24,0,1,0,5,0,0
-addr|2029|university student housing,2029 University student housing,,160,description,PLN2024-0070,Under Review,2024-12-10,,,,,,2026-09-21,6,permit,240,Entitled,,,0,0,1,1,0,0
-addr|1581|university,1581 UNIVERSITY,,158,description,PLN2023-0099;DRCP2024-0010;ZP2024-0074,Incomplete Pending Applicant,2024-06-17,,,,,,2026-07-08,11,address+permit,158,In Review,,,0,1,0,3,0,0
-addr|3000|shattuck,3000 SHATTUCK Ave,,156,description,PLN2021-0069,Closed,2021-12-10,,,,,,2026-09-21,10,address,166,Entitled,,,0,0,1,1,0,0
-addr|2001|4th,2001 FOURTH St,,152,description,DRCP2015-0017;ZP2015-0157,Approved,2015-07-14,,,,,,2026-09-21,,,,,,,1,0,0,2,0,0
-addr|2733|san pablo,2733 SAN PABLO,,152,description,PLN2023-0092,Closed,2023-12-13,,,,,,2026-07-08,36,address,152,In Review,,,0,0,0,1,0,0
-addr|2420|shattuck,2420 SHATTUCK Ave,,146,description,PLN2022-0036;DRCP2022-0018;ZP2022-0149;PLN2023-0090,Closed,2023-12-08,,,,,,2026-09-21,13,address+permit,132,In Review,,,0,0,1,4,0,0
-addr|2330|webster,2330 Webster,,144,description,ZP2022-0170,Approved,2022-12-02,,,,,,2026-07-08,150,permit,144,Completed,2023-10-01,2026-01-27,0,1,0,1,0,0
-apn|052-1576-027-01,3030 TELEGRAPH Ave,052-1576-027-01,144,cpra_UnitsAdded,PLN2022-0086;DRCP2022-0020;DRCF2024-0001,Approved,2024-03-28,B2023-06416,Finaled,2023-12-19,2024-10-15,2026-04-16,2026-07-08,150,address+apn+permit,144,Completed,2023-10-01,2026-01-27,0,1,0,4,0,0
-apn|057-2053-022-01,2012 BERKELEY Way,057-2053-022-01,142,cpra_UnitsAdded,PLN2018-0048,Pending,2018-10-26,B2019-03862,Finaled,2019-09-12,2020-07-06,2022-09-23,2026-07-08,901,address+apn+permit,142,Completed,2020-07-06,2022-09-23,0,0,0,2,0,0
-addr|2847|shattuck,2847 SHATTUCK Ave,,136,description,PLN2022-0031;ZP2022-0132;DRCP2022-0016;PLN2023-0102;DRCP2024-0013;ZP2024-0077,Incomplete Pending Applicant,2024-06-18,,,,,,2026-09-21,14,address+permit,132,In Review,,,0,0,1,6,0,0
-addr|2109|virginia,2109 VIRGINIA,,132,description,PLN2023-0091;DRCP2024-0007;ZP2024-0066,Approved,2024-06-04,,,,,,2026-07-08,15,address+permit,110,Entitled,,,0,1,1,3,0,0
-addr|2136|san pablo,2136 SAN PABLO Ave,,126,description,DRCP2019-0015;ZP2019-0179;PLN2020-0041;DRCP2021-0002;ZP2021-0046,Approved,2021-03-18,,,,,,2026-09-21,140,address+permit,125,Entitled,,,0,0,0,5,0,0
-addr|2425|durant,2425 DURANT AVENUE,,117,description,PLN2024-0049,Under Review,2024-08-08,,,,,,2026-09-21,5,address+permit,117,Entitled,,,0,0,0,1,0,0
-apn|055-1877-019-02,2580 BANCROFT Way,055-1877-019-02,117,cpra_UnitsAdded,ZP2017-0083,Approved,2017-05-26,B2019-00478,Finaled,2019-02-04,2019-09-24,2021-11-29,2026-07-08,896,address+apn+permit,117,Completed,2019-09-24,2021-11-29,0,0,0,2,0,0
-addr|2720|san pablo,2720 SAN PABLO,,117,description,PLN2022-0069;DRCP2023-0005;PLN2023-0101;DRCP2024-0012;ZP2024-0076,Incomplete Pending Applicant,2024-06-18,,,,,,2026-07-08,16,address,113,In Review,,,0,1,1,5,0,0
-apn|055-1822-018-00,2000 DWIGHT Way,055-1822-018-00,113,cpra_UnitsAdded,DRCP2019-0005;ZP2019-0074,Void,2019-04-24,B2021-02404,Finaled,2021-06-10,2023-08-15,2025-06-17,2026-07-08,173,address+permit,113,Completed,2022-04-18,2025-06-17,0,1,0,3,0,0
-addr|2480|shattuck,2480 SHATTUCK,,111,description,PLN2023-0073,Closed,2023-10-30,,,,,,2026-07-08,,,,,,,1,0,0,1,0,0
-apn|058-2129-017-00,1701 SAN PABLO Ave,058-2129-017-00,110,cpra_UnitsAdded,,,,B2024-02966,Issued,2024-06-17,2025-05-06,,2026-09-21,153,address+apn+permit,110,Under Construction,2023-06-01,,0,0,0,1,0,0
-addr|2530|bancroft,2530 BANCROFT,,110,description,PLN2023-0059;DRCP2023-0014;ZP2023-0126,Approved,2023-09-06,,,,,,2026-07-08,122,address+permit,110,Entitled,,,0,1,0,3,0,0
-addr|3031|telegraph com,3031 TELEGRAPH Ave COM,,110,description,PLN2020-0025;ZP2020-0069,Approved,2020-07-06,,,,,,2026-09-21,,,,,,,1,0,0,2,0,0
-addr|2109|milvia,2109 MILVIA,,105,description,PLN2023-0001;ZP2023-0003,Closed,2023-01-10,,,,,,2026-07-08,17,address,105,In Review,,,0,0,0,2,0,0
-addr|1200|san pablo,1200 SAN PABLO Ave,,104,description,DRCP2019-0016;ZP2019-0192,Approved,2019-12-02,,,,,,2026-09-21,,,,,,,1,0,0,2,0,0
-addr|2655|shattuck,2655 SHATTUCK Ave,,97,description,PLN2023-0086;DRCP2024-0005;ZP2024-0057,Approved,2024-05-22,,,,,,2026-07-08,18,address+permit,97,Entitled,,,0,1,0,3,0,0
-apn|056-1977-006-05,2100 SAN PABLO Ave,056-1977-006-05,96,cpra_UnitsAdded,DRCF2018-0007;DRCP2018-0010;ZP2018-0222,Approved,2018-11-26,B2019-03689,Finaled,2019-08-30,2020-07-20,2023-05-02,2026-07-08,467,apn+permit,96,Completed,2020-07-20,2023-05-02,0,1,0,4,0,0
-addr|1835|san pablo,1835 San Pablo Avenue,,95,description,DRCP2018-0009;ZP2018-0220,Approved,2018-11-19,,,,,,2026-07-08,,,,,,,1,1,0,2,0,0
-addr|3031|telegraph,3031 Telegraph Avenue,,95,description,PLN2018-0050,Pending,2018-11-01,,,,,,2026-09-21,150,address~10,144,Completed,2023-10-01,2026-01-27,0,0,1,1,0,0
-addr|2147|san pablo,2147 SAN PABLO Ave,,94,description,DRCP2021-0008;ZP2021-0073;PLN2022-0020;DRCP2022-0011;PLN2026-0032,Under Review,2026-01-26,,,,,,2026-09-21,41,address,15,Entitled,,,0,0,1,5,0,0
-addr|80|shattuck,80 Shattuck,,94,description,DRCP2024-0004;ZP2024-0047,Incomplete Pending Applicant,2024-04-26,,,,,,2026-09-21,19,permit,94,In Review,,,0,0,0,2,0,0
-addr|2801|adeline,2801 Adeline,,90,description,DRCP2020-0010;ZP2020-0118,Withdrawn,2020-10-16,,,,,,2026-07-08,,,,,,,1,0,0,2,0,0
-apn|053-1591-018-03,2001 ASHBY Ave,053-1591-018-03,87,cpra_UnitsAdded,,,,B2021-02905,Finaled,2021-07-02,2022-02-04,2025-02-24,2026-07-08,154,address+permit,87,Completed,2022-02-04,2025-06-01,0,0,0,1,0,0
-addr|2036|bancroft,2036 BANCROFT,,87,description,ZP2024-0079,In Review,2024-06-19,,,,,,2026-09-21,20,address+permit,87,In Review,,,0,0,0,1,0,0
-addr|2590|bancroft,2590 BANCROFT Way,,87,description,ZP2019-0100,Approved,2019-05-31,,,,,,2026-09-21,404,address,87,Completed,,2023-11-15,0,0,0,1,0,0
-addr|1709|shattuck,1709 SHATTUCK Ave,,85,description,DRCP2021-0003;ZP2021-0048,Approved,2021-03-19,,,,,,2026-09-21,,,,,,,1,0,0,2,0,0
-addr|2720|san pablo density bonus project,2720 San Pablo Density Bonus Project,,84,description,ZP2023-0058,Under Review,2023-05-03,,,,,,2026-09-21,16,permit,113,In Review,,,0,0,1,1,0,0
-apn|055-1876-021-01,2538 DURANT Ave,055-1876-021-01,83,cpra_UnitsAdded,PLN2022-0065,Closed,2022-07-11,B2023-02332;B2024-06011,Issued,2024-12-20,2024-09-24,,2026-07-08,139,address+apn+permit,83,Completed,2024-10-01,,0,1,0,3,0,0
-addr|1708|harmon,1708 HARMON St,,82,description,PLN2021-0037;PLN2022-0099;PLN2022-0101,Closed,2022-10-27,,,,,,2026-09-21,145,address,80,Permitted,,,0,0,1,3,0,0
-apn|055-1822-009-00,2035 BLAKE St,055-1822-009-00,82,cpra_UnitsAdded,,,,B2016-00895,Finaled,2016-03-01,2017-08-10,2022-04-20,2026-07-08,899,address+permit,82,Completed,,2022-04-20,0,0,0,1,0,0
-apn|057-2025-013-00,2000 UNIVERSITY Ave,057-2025-013-00,81,cpra_UnitsAdded,DRCP2020-0008;ZP2020-0102;PLN2020-0045;DRCP2020-0011;ZP2020-0134;DRCF2022-0001,Approved,2022-04-04,B2022-01111,Finaled,2022-03-14,2022-12-22,2024-04-09,2026-07-08,137,address+apn,82,Completed,,2024-01-01,0,1,0,7,0,0
-addr|2955|shattuck,2955 SHATTUCK Ave,,80,description,PLN2023-0085;DRCP2024-0009;ZP2024-0071,Application Complete,2024-06-11,,,,,,2026-09-21,22,address+permit,74,In Review,,,0,0,1,3,0,0
-addr|2680|bancroft,2680 Bancroft,,79,description,PLN2023-0033;ZP2023-0096;ZP2024-0029,Approved,2024-03-04,,,,,,2026-07-08,34,address+permit,79,Entitled,,,0,1,0,3,0,0
-addr|2427|san pablo,2427 SAN PABLO Ave,,78,description,PLN2022-0014;ZP2022-0115,Approved,2022-09-02,,,,,,2026-09-21,126,address+permit,78,Completed,,,0,0,0,2,0,0
-apn|055-1819-001-02,2628 SHATTUCK Ave,055-1819-001-02,78,cpra_UnitsAdded,ZP2018-0050,Approved,2018-03-06,B2019-01950,Finaled,2019-05-09,2020-05-05,2021-07-16,2026-07-08,897,address+permit,78,Completed,,2021-07-16,0,1,0,2,0,0
-addr|2660|bancroft,2660 BANCROFT,,78,description,PLN2023-0034,Closed,2023-04-14,,,,,,2026-07-08,21,address,78,In Review,,,0,0,0,1,0,0
-apn|053-1633-001-01,3000 SAN PABLO Ave,053-1633-001-01,78,cpra_UnitsAdded,ZP2019-0155;DRCF2021-0002,Approved,2021-03-02,B2020-04316,Finaled,2020-12-09,2021-09-30,2023-06-05,2026-07-08,168,address+permit,78,Completed,,2023-06-05,0,1,0,3,0,0
-addr|2556|telegraph,2556 Telegraph,,76,description,ZP2015-0096,Approved,2015-04-21,,,,,,2026-07-08,,,,,,,1,1,0,1,0,0
-addr|2550|shattuck,2550 SHATTUCK Ave,,75,description,PLN2023-0026;DRCP2023-0015;ZP2023-0138,Approved,2023-09-25,,,,,,2026-07-08,156,address,72,Entitled,,,0,1,1,3,0,0
-addr|2037|durant,2037 DURANT Ave,,74,description,PLN2021-0024;DRCP2023-0006;ZP2023-0064,Approved,2023-05-11,,,,,,2026-07-08,123,address+permit,74,Entitled,,,0,1,0,3,0,0
-apn|058-2176-001-01,1752 SHATTUCK Ave,058-2176-001-01,72,cpra_UnitsAdded,PLN2021-0055;DRCP2022-0001;ZP2022-0011;DRCF2023-0001,Approved,2023-06-27,B2023-00774,Issued,2023-02-22,2024-06-13,,2026-07-08,152;164,address+apn+permit,207,Completed,2024-01-01,,0,1,1,5,0,0
-apn|057-2024-013-00,2099 M L KING JR Way,057-2024-013-00,72,cpra_UnitsAdded,,,,B2021-03950,Finaled,2021-09-02,2023-07-17,2024-05-17,2026-07-08,96,address+apn+permit,72,Completed,2023-07-17,2024-05-17,0,0,0,1,0,0
-addr|2099|mlk,2099 MLK,,72,description,ZP2019-0081,Approved,2019-05-02,,,,,,2026-07-08,,,,,,,1,1,0,1,0,0
-addr|2631|durant,2631 DURANT Ave,,71,description,DRCF2016-0006;ZP2021-0011,Withdrawn,2021-01-21,,,,,,2026-09-21,894,address,56,Completed,,2020-08-12,0,0,1,2,0,0
-addr|2334|durant,2334 DURANT,,70,description,PLN2024-0023,Pending,2024-03-25,,,,,,2026-09-21,23;24,address~10,70,In Review,,,0,0,0,1,0,0
-apn|055-1839-020-00,2539 TELEGRAPH Ave,055-1839-020-00,70,cpra_UnitsAdded,,,,B2016-03471,Finaled,2016-07-22,2017-07-12,2019-09-30,2026-07-08,890,address+apn+permit,70,Completed,,2019-09-30,0,0,0,1,0,0
-apn|055-1886-001-00,2300 ELLSWORTH St,055-1886-001-00,69,cpra_UnitsAdded,PLN2022-0084,Closed,2022-09-26,B2024-05944,Issued,2024-12-17,2025-09-04,,2026-09-21,147,address+apn+permit,69,Under Construction,2025-09-04,,0,0,0,2,0,0
-addr|2310|ellsworth,2310 ELLSWORTH,,69,description,ZP2023-0024,Approved,2023-02-17,,,,,,2026-07-08,147;704,address~10,69,Under Construction,2025-09-04,,0,1,0,1,0,0
-apn|057-2046-010-00,2111 UNIVERSITY AVE,057-2046-010-00,68,cpra_UnitsAdded,,,,B2015-03005,Finaled,2015-06-23,2018-06-27,2022-03-04,2026-07-08,902,address+permit,68,Completed,,2022-03-04,0,0,0,1,0,0
-addr|2159|dwight,2159 DWIGHT,,68,description,PLN2022-0109;DRCP2023-0004;ZP2023-0057,Approved,2023-04-26,,,,,,2026-07-08,,,,,,,1,1,0,3,0,0
-addr|2330|durant,2330 DURANT Ave,,68,description,PLN2025-0053;PLN2025-0038;PLN2025-0100,Pending,2025-11-14,,,,,,2026-09-21,24,address,68,In Review,,,0,0,0,3,0,0
-addr|2455|telegraph,2455 TELEGRAPH AVE,,68,description,PLN2025-0066;ZP2026-0015,Pending Final Action,2026-02-10,,,,,,2026-09-21,25,address+permit,68,In Review,,,0,0,0,2,0,0
-addr|1201|san pablo,1201 SAN PABLO Ave,,66,description,ZP2018-0136;PLN2021-0012;DRCP2021-0007;ZP2021-0070,Approved,2021-05-06,,,,,,2026-09-21,,,,,,,1,0,0,4,0,0
-apn|057-2023-025-00,2072 ADDISON St,057-2023-025-00,66,cpra_UnitsAdded,,,,B2018-04293,Finaled,2018-10-26,2020-01-29,2023-07-18,2026-07-08,182,address+apn+permit,66,Completed,,2023-07-18,0,0,0,1,0,0
-addr|2138|kittredge,2138 KITTREDGE St,,66,description,PLN2024-0011;ZP2024-0114;DRCP2024-0015;DRCF2026-0002,Approved,2026-04-02,B2025-00984,Issued,2025-03-11,,,2026-07-08,113,address,73,Permitted,,,0,1,1,5,0,0
-addr|2462|bancroft,2462 BANCROFT,,66,description,PLN2022-0104;DRCP2023-0013;ZP2023-0107;PLN2023-0080,Closed,2023-11-16,,,,,,2026-07-08,116,address+permit,66,Entitled,,,0,1,0,4,0,0
-apn|057-2046-006-00,1900 WALNUT ST,057-2046-006-00,65,cpra_UnitsAdded,,,,B2015-03000,Finaled,2015-06-23,2018-06-27,2022-10-25,2026-07-08,,,,,,,1,0,0,1,0,0
-addr|2201|san pablo,2201 SAN PABLO,,65,description,PLN2022-0112;PLN2026-0141,Under Review,2026-06-03,,,,,,2026-07-08,149,address~10,100,Entitled,,,0,1,1,2,0,0
-addr|3120|shattuck,3120 Shattuck,,65,description,PLN2026-0184,Pending,2026-09-17,,,,,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|2372|ellsworth,2372 ELLSWORTH St,,63,description,PLN2024-0054;ZP2024-0169,Approved,2024-11-19,B2025-05654,Approved w/Conditions,2025-12-08,,,2026-07-08,28,address,63,Entitled,,,0,1,0,3,0,0
-apn|054-1781-015-01,2527 SAN PABLO Ave,054-1781-015-01,63,cpra_UnitsAdded,PLN2015-0054;ZP2016-0207,Approved,2016-10-21,B2018-03255,Finaled,2018-08-17,2023-07-21,2024-04-30,2026-07-08,228,apn+permit,63,Completed,,2024-04-30,0,0,0,3,0,0
-addr|2712|telegraph,2712 TELEGRAPH Ave,,60,description,PLN2022-0061;DRCP2022-0021;ZP2022-0179;PLN2023-0018;ZP2025-0105;ZP2026-0076,Under Review,2026-08-11,B2025-05635,Under Review,2025-12-08,,,2026-07-08,31,address+permit,57,In Review,,,0,1,1,7,0,0
-addr|2001|center,2001 CENTER STREET,,58,description,PLN2025-0039;ZP2025-0107,Corrections Pending Applicant,2025-11-26,,,,,,2026-09-21,30,address+permit,58,In Review,,,0,0,0,2,0,0
-addr|2127|dwight,2127 DWIGHT Way,,58,description,DRCF2024-0002,Approved,2024-03-28,,,,,,2026-09-21,144,address,58,Withdrawn,,,0,0,0,1,0,0
-addr|800|university,800 UNIVERSITY,,58,description,ZP2015-0125,Closed,2015-05-28,,,,,,2026-07-08,,,,,,,1,0,0,1,0,0
-apn|054-1719-001-00,2701 SHATTUCK Ave,054-1719-001-00,57,cpra_UnitsAdded,,,,B2020-01991,Finaled,2020-06-30,2022-06-22,2024-07-18,2026-07-08,219,address+permit,57,Completed,,2024-07-18,0,0,0,1,0,0
-apn|053-1598-006-00,2902 ADELINE St,053-1598-006-00,57,cpra_UnitsAdded,DRCP2015-0019;DRCF2021-0005,Approved,2021-07-01,B2021-04232,Issued,2021-09-20,2025-02-27,,2026-07-08,143,address+apn+permit,54,Withdrawn,2024-01-01,,0,1,1,3,0,0
-addr|2198|san pablo,2198 SAN PABLO Ave,,56,description,ZP2018-0112,Approved,2018-05-31,,,,,,2026-09-21,149,address,100,Entitled,,,0,0,1,1,0,0
-addr|2276|shattuck,2276 SHATTUCK Ave,,56,description,PLN2023-0093;ZP2024-0067,Pending Final Action,2024-06-05,,,,,,2026-09-21,2,address+permit,336,Entitled,,,0,0,1,2,0,0
-apn|058-2127-014-03,1740 SAN PABLO Ave,058-2127-014-03,54,cpra_UnitsAdded,PLN2020-0049;PLN2023-0065,Under Review,2023-08-25,B2022-05881,Issued,2022-12-16,2025-12-18,,2026-09-21,32,address+apn+permit,54,Permitted,2025-12-18,,0,0,0,3,0,0
-addr|2587|telegraph,2587 TELEGRAPH AVE,,52,description,ZP2023-0068;DRCP2023-0009;DRCF2024-0005;ZP2024-0170,Approved,2024-11-26,,,,,,2026-07-08,157,address,52,Withdrawn,2024-01-01,,0,1,0,4,0,0
-addr|2449|dwight,2449 DWIGHT Way,,51,description,DRCP2022-0003;ZP2022-0021;DRCF2026-0001,Approved,2026-04-02,B2025-03595,Corrections List Issued,2025-08-25,,,2026-07-08,38,address,39,Under Construction,,,0,1,1,4,0,1
-addr|130|berkeley sq,130 BERKELEY Sq,,50,description,ZP2021-0110;PLN2021-0032;ZP2021-0158;DRCP2021-0019,In Review,2021-11-05,,,,,,2026-09-21,33,address+permit,50,In Review,,,0,0,0,4,0,0
-addr|1946|russell,1946 Russell,,50,description,ZP2015-0177,Approved,2015-08-17,,,,,,2026-07-08,,,,,,,1,1,0,1,0,0
-apn|053-1592-020-00,2016 ASHBY Ave,053-1592-020-00,50,cpra_UnitsAdded,,,,B2024-01268,Issued,2024-03-20,2026-03-26,,2026-09-21,141,address+apn+permit,50,Withdrawn,2024-06-01,,0,0,0,1,0,0
-apn|057-2053-005-00,2067 UNIVERSITY Ave,057-2053-005-00,50,cpra_UnitsAdded,,,,B2017-02610,Finaled,2017-06-15,2018-10-10,2023-08-10,2026-07-08,466,address+apn+permit,50,Completed,,2023-08-10,0,0,0,1,0,0
-addr|2121|durant,2121 DURANT Ave,,50,description,DRCP2015-0001;ZP2015-0014;DRCF2017-0007,Approved,2017-07-20,,,,,,2026-09-21,,,,,,,1,0,0,3,0,0
-apn|055-1893-018-00,2124 BANCROFT Way,055-1893-018-00,50,cpra_UnitsAdded,,,,B2016-04483,Finaled,2016-09-22,2017-11-06,2019-11-15,2026-07-08,892,address+apn+permit,50,Completed,,2019-11-15,0,0,0,1,0,0
-addr|2023|shattuck,2023 Shattuck,,48,description,DRCF2021-0003;DRCP2019-0002;ZP2019-0041,Approved,2019-03-05,,,,,,2026-07-08,380,address,48,Completed,,2023-08-16,0,1,0,3,0,0
-addr|2959|san pablo,2959 San Pablo,,48,description,PLN2022-0066,Withdrawn,2022-07-15,,,,,,2026-07-08,,,,,,,1,0,0,1,0,0
-apn|057-2025-023-00,2009 ADDISON St,057-2025-023-00,45,cpra_UnitsAdded,,,,B2019-02956,Finaled,2019-07-18,2021-06-24,2023-04-04,2026-07-08,91,address+apn+permit,45,Completed,,2023-04-04,0,0,0,1,0,0
-addr|2298|durant,2298 DURANT,,45,description,PLN2026-0074,Under Review,2026-03-06,,,,,,2026-09-21,26,address,65,In Review,,,0,0,1,1,0,0
-apn|055-1835-009-01,2650 TELEGRAPH Ave,055-1835-009-01,45,cpra_UnitsAdded,DRCP2019-0004;ZP2019-0070;DRCF2021-0007,Approved,2021-08-31,B2021-02225,Finaled,2021-05-28,2023-08-02,2025-06-16,2026-07-08,172,address+apn+permit,45,Completed,2023-08-02,2025-06-16,0,0,0,4,0,0
-addr|2727|haste,2727 HASTE STREET,,45,description,PLN2025-0055;ZP2026-0007,In Review,2026-01-15,,,,,,2026-07-08,114,address+permit,45,In Review,,,0,1,0,2,0,0
-addr|1486|university,1486 University,,44,description,ZP2016-0216;DRCP2016-0015,Withdrawn,2016-10-28,,,,,,2026-07-08,,,,,,,1,0,0,2,0,0
-apn|057-2016-021-01,1808 UNIVERSITY AVE,057-2016-021-01,44,cpra_UnitsAdded,,,,B2014-05786,Finaled,2014-12-29,2016-01-21,2021-08-31,,307,apn,2,Completed,,2025-09-02,0,0,1,1,0,0
-addr|1820|san pablo,1820 SAN PABLO Ave,,44,description,PLN2020-0030;PLN2021-0013,Pending,2021-03-18,,,,,,2026-09-21,,,,,,,1,0,0,2,0,0
-apn|055-1876-017-00,2526 DURANT AVE,055-1876-017-00,44,cpra_UnitsAdded,,,,B2014-02844,Finaled,2014-06-25,2016-02-16,2019-06-14,,893,address+apn+permit,44,Completed,,2019-06-14,0,0,0,1,0,0
-addr|3031|adeline,3031 adeline,,42,description,DRCP2017-0009,Approved,2017-05-24,,,,,,2026-07-08,166,address,64,In Review,,,0,1,1,1,0,0
-apn|056-1928-019-00,,056-1928-019-00,40,cpra_UnitsAdded,,,,B2021-02423,Finaled,2021-06-11,2022-08-12,2025-03-20,2026-07-08,,,,,,,1,0,0,1,1,0
-addr|1110|university,1110 UNIVERSITY Ave,,40,description,DRCP2017-0004;ZP2017-0035,Approved,2017-03-03,,,,,,2026-09-21,,,,,,,1,0,0,2,0,0
-addr|1499|alcatraz,1499 ALCATRAZ Ave,,40,description,,,,B2026-03320,Under Review,2026-08-06,,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|2032|francisco,2032 FRANCISCO STREET,,40,description,PLN2026-0155,Under Review,2026-07-07,,,,,,2026-09-21,577,address~10,1,Completed,,2019-07-30,0,0,1,1,0,0
-apn|055-1896-005-00,2440 SHATTUCK Ave,055-1896-005-00,40,cpra_UnitsAdded,DRCP2021-0020;ZP2021-0201;DRCF2022-0003,Approved,2022-07-12,B2022-05117,Finaled,2022-11-01,2023-08-03,2025-03-05,2026-07-08,176,address+apn+permit,40,Completed,2022-10-14,2025-03-05,0,0,0,4,0,0
-apn|055-1875-008-00,2510 CHANNING Way,055-1875-008-00,40,cpra_UnitsAdded,ZP2017-0003;DRCP2017-0002;ZP2018-0061,Approved,2018-03-19,B2018-01337,Closed Expired,2018-04-05,2020-01-27,,2026-07-08,,,,,,,1,1,0,4,0,1
-apn|057-2073-005-00,1367 UNIVERSITY Ave,057-2073-005-00,39,cpra_UnitsAdded,PLN2019-0021;DRCP2019-0014;ZP2019-0173;DRCF2021-0010,Approved,2021-11-29,B2022-04366,Finaled,2022-09-20,2023-10-16,2025-05-06,2026-07-08,158,address+apn+permit,39,Completed,2023-03-13,2025-05-06,0,1,0,5,0,1
-addr|2320|channing,2320 CHANNING,,39,description,PLN2023-0061,Closed,2023-08-24,,,,,,2026-07-08,117;183,address~10,22,Entitled,2022-11-01,,0,0,1,1,0,0
-apn|055-1881-018-00,2442 HASTE St,055-1881-018-00,38,cpra_UnitsAdded,PLN2024-0009;DRCP2024-0008;ZP2024-0070;DRCF2025-0003,Approved,2025-12-19,B2025-03529;B2026-03747,Issued,2026-09-01,2026-05-20,,2026-07-08,124,address+apn+permit,34,Under Construction,,,0,1,1,6,0,0
-addr|1601|oxford,1601 OXFORD St,,37,description,ZP2018-0035,Approved,2018-02-16,,,,,,2026-09-21,904,address,37,Completed,,2022-03-09,0,0,0,1,0,0
-addr|2028|bancroft,2028 BANCROFT Way,,37,description,DRCP2017-0012;ZP2017-0103;DRCF2020-0002,Approved,2020-03-05,,,,,,2026-09-21,403,address,37,Completed,,2023-07-28,0,0,0,3,0,0
-addr|2435|haste,2435 Haste,,37,description,PLN2020-0052;PLN2021-0051;ZP2021-0210,Approved,2021-11-30,,,,,,2026-09-21,124,address~10,34,Under Construction,,,0,0,1,3,0,0
-apn|056-2004-001-00,1698 UNIVERSITY AVE,056-2004-001-00,36,cpra_UnitsAdded,DRCF2015-0003,Approved,2015-03-11,B2014-05752,Finaled,2014-12-19,2017-06-20,2025-05-22,2026-07-07,175,address+apn,36,Completed,2017-06-20,2025-05-22,0,1,0,2,0,0
-apn|056-1928-001-00,2403 SAN PABLO Ave,056-1928-001-00,36,cpra_UnitsAdded,DRCF2024-0003,Approved,2024-04-08,B2024-00143,Issued,2024-01-10,2025-06-03,,2026-09-21,159,address+apn+permit,36,Under Construction,2024-01-01,,0,0,0,2,0,0
-addr|2601|college,2601 COLLEGE Ave,,36,description,,,,B2026-03665,Corrections List Issued,2026-08-26,,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|2542|durant,2542 DURANT Ave,,32,description,ZP2016-0172;DRCP2016-0020;DRCF2019-0005,Approved,2019-09-06,,,,,,2026-07-08,139,address~10,83,Completed,2024-10-01,,0,1,1,3,0,1
-addr|2614|telegraph,2614 TELEGRAPH Ave,,32,description,ZP2024-0027;DRCP2024-0002,Approved,2024-03-06,,,,,,2026-09-21,37,address+permit,31,Entitled,,,0,0,0,2,0,0
-apn|055-1878-022-00,2480 BANCROFT Way,055-1878-022-00,28,cpra_UnitsAdded,PLN2022-0091;DRCP2022-0017;ZP2022-0148;DRCF2023-0005,Approved,2023-09-08,B2022-05880,Finaled,2022-12-16,2023-12-13,2025-07-10,2026-07-08,134,address+apn+permit,28,Completed,,2025-07-10,0,1,0,5,0,0
-addr|2577|san pablo,2577 SAN PABLO Ave,,28,description,,,,B2026-03411,Under Review,2026-08-12,,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|1650|alcatraz,1650 ALCATRAZ Ave,,27,description,PLN2020-0001,Closed,2020-01-03,,,,,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|1652|university,1652 UNIVERSITY Ave,,26,description,DRCP2020-0003;ZP2020-0041;PLN2022-0047;DRCP2022-0010;ZP2022-0110,Approved,2022-08-18,,,,,,2026-07-08,,,,,,,1,1,0,5,0,0
-apn|058-2181-027-00,1773 OXFORD St,058-2181-027-00,24,cpra_UnitsAdded,ZP2022-0062,Approved,2022-05-10,B2023-02354,Finaled,2023-05-08,2023-11-13,2025-05-21,2026-07-08,174,address+apn+permit,24,Completed,2023-11-13,2025-05-21,0,1,0,2,0,0
-addr|2330|prince,2330 PRINCE ST,,23,description,ZP2026-0040,In Review,2026-03-20,,,,,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|2437|warring,2437 WARRING STREET,,23,description,PLN2026-0115,Under Review,2026-04-30,,,,,,2026-09-21,52,address,4,In Review,,,0,0,1,1,0,0
-addr|2236|channing,2236 CHANNING Way,,22,description,ZP2017-0015,Approved,2017-02-03,,,,,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|2439|durant,2439 DURANT Ave,,22,description,DRCP2021-0018;ZP2021-0192;PLN2021-0066,Pending,2021-12-08,,,,,,2026-09-21,,,,,,,1,0,0,3,0,0
-addr|2417|carleton com,2417 CARLETON St COM,,19,description,PLN2023-0084,Closed,2023-12-01,,,,,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|2344|fulton,2344 FULTON STREET,,18,description,PLN2025-0019,Closed,2025-05-01,,,,,,2026-07-08,160,address,18,In Review,,,0,0,0,1,0,0
-addr|2800|telegraph,2800 TELEGRAPH Ave,,18,description,PLN2022-0060;DRCP2022-0009;ZP2022-0107;PLN2023-0008;DRCF2026-0003,Application Complete,2026-05-07,B2025-05618,Issued,2025-12-05,,,2026-07-08,146,address,18,Under Construction,,,0,1,0,6,0,0
-addr|1790|university,1790 UNIVERSITY Ave,,17,description,PLN2022-0075;DRCP2023-0007;ZP2023-0070,Application Complete,2023-05-20,,,,,,2026-09-21,39,address+permit,17,In Review,,,0,0,0,3,0,0
-apn|055-1884-006-00,2317 CHANNING Way,055-1884-006-00,17,cpra_UnitsAdded,ZP2019-0217;PLN2020-0032;ZP2020-0090;PLN2024-0018;ZP2024-0033,Under Review,2024-03-13,B2022-04242,Issued,2022-09-12,2025-09-08,,2026-07-08,117,address+apn+permit,22,Entitled,2022-11-01,,0,1,1,6,0,0
-addr|2425|prospect,2425 PROSPECT St,,17,description,ZP2018-0144,Withdrawn,2018-07-06,,,,,,2026-09-21,192,address,1,Completed,,2024-07-10,0,0,1,1,0,0
-addr|3031|telegraph 100,3031 TELEGRAPH Ave 100,,17,description,ZP2022-0126,Approved,2022-09-23,,,,,,2026-09-21,,,,,,,1,0,0,1,0,0
-apn|057-2061-010-00,1717 UNIVERSITY Ave,057-2061-010-00,15,cpra_UnitsAdded,DRCP2016-0007;ZP2016-0101;DRCP2018-0011,Approved,2018-12-05,B2020-00206,Finaled,2020-01-17,2020-10-28,2023-04-04,2026-07-08,428,address+apn+permit,15,Completed,,2023-04-04,0,1,0,4,0,0
-addr|2737|durant,2737 Durant Avenue,,15,description,PLN2016-0007;ZP2020-0016,Approved,2020-02-05,,,,,,2026-07-08,299,address,4,Completed,,2025-07-07,0,1,1,2,0,0
-apn|056-1945-006-00,2340 FIFTH St,056-1945-006-00,14,cpra_UnitsAdded,,,,B2018-02291,Finaled,2018-06-12,2019-05-30,2022-05-13,2026-07-08,905,address+apn+permit,14,Completed,,2022-05-13,0,0,0,1,0,0
-apn|055-1883-027-00,2328 CHANNING Way,055-1883-027-00,13,cpra_UnitsAdded,ZP2020-0052,Approved,2020-06-05,B2022-05957,Issued,2022-12-21,2024-09-05,,2026-09-21,183,address+permit,,Permitted,2024-09-05,,0,0,0,2,0,0
-addr|1740|university,1740 UNIVERSITY Ave,,12,description,ZP2025-0079,Approved,2025-08-19,B2026-03396,Under Review,2026-08-11,,,2026-07-08,42,address+permit,12,Entitled,,,0,1,0,2,0,0
-addr|2018|blake,2018 BLAKE St,,12,description,ZP2021-0095,Approved,2021-06-02,,,,,,2026-09-21,148,address,12,Permitted,,,0,0,0,1,0,0
-addr|2336|blake,2336 BLAKE St,,12,description,,,,B2026-03426,Corrections List Issued,2026-08-12,,,2026-09-21,184,address~10,,Permitted,2025-07-30,,0,0,0,1,0,0
-apn|055-1847-020-00,2555 COLLEGE Ave,055-1847-020-00,12,cpra_UnitsAdded,PLN2021-0067;ZP2022-0019,Approved,2022-02-04,B2023-02975,Finaled,2023-06-09,2024-04-26,2025-07-25,2026-07-08,161,address+apn+permit,12,Completed,2024-04-26,2025-07-25,0,0,0,3,0,0
-addr|2709|channing,2709 CHANNING Way,,12,description,PLN2026-0118,Under Review,2026-04-07,,,,,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|1650|shattuck,1650 SHATTUCK Ave,,11,description,PLN2019-0020,Closed,2019-04-26,,,,,,2026-09-21,,,,,,,1,0,0,1,0,0
-apn|055-1896-021-00,2012 CHANNING Way,055-1896-021-00,11,cpra_UnitsAdded,,,,B2025-03731,Finaled,2025-09-02,2025-09-03,2025-12-04,2026-07-08,,,,,,,1,0,0,1,0,0
-addr|1130|bancroft,1130 BANCROFT Way,,10,description,,,,B2026-01302,Approved w/Conditions,2026-03-31,,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|1850|arch,1850 ARCH St,,10,description,ZP2019-0212,Approved,2019-12-20,,,,,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|1862|arch,1862 ARCH St,,10,description,ZP2019-0213,Approved,2019-12-20,B2026-01187,Issued,2026-03-23,,,2026-09-21,,,,,,,1,0,0,2,0,0
-addr|2338|dwight,2338 DWIGHT,,10,description,ZP2026-0091,Under Review,2026-09-15,,,,,,2026-09-21,,,,,,,1,0,0,1,0,0
-apn|055-1837-003-00,2597 TELEGRAPH Ave,055-1837-003-00,10,cpra_UnitsAdded,DRCP2015-0002;ZP2015-0018,Withdrawn,2015-01-27,B2017-01850,Finaled,2017-05-03,2018-08-09,2021-11-10,2026-07-08,898,address+apn+permit,10,Completed,,2021-11-10,0,1,0,3,0,0
-addr|2747|san pablo,2747 SAN PABLO Ave,,10,description,PLN2015-0016;ZP2015-0115,Withdrawn,2015-05-15,,,,,,2026-09-21,,,,,,,1,0,0,2,0,0
-addr|2200|5th,2200 FIFTH ST,,8,description,PLN2026-0083,Closed,2026-03-19,,,,,,2026-07-08,45,address,8,Withdrawn,,,0,0,0,1,0,0
-apn|058-2181-017-00,2235 HEARST Ave,058-2181-017-00,8,cpra_UnitsAdded,,,,B2024-04593,Finaled,2024-09-23,2024-09-27,2024-11-25,2026-07-08,437,address~10,1,Completed,,,0,0,1,1,0,0
-addr|1632|prince,1632 Prince,,7,description,ZP2019-0084,Withdrawn,2019-05-07,,,,,,2026-07-08,714,address,1,Completed,,2021-11-09,0,0,1,1,0,0
-addr|2215|cedar,2215 CEDAR St,,7,description,ZP2017-0133,Approved,2017-08-08,,,,,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|1745|cedar,1745 CEDAR St,,6,description,PLN2025-0047;PLN2025-0040,Closed,2025-06-27,,,,,,2026-07-08,46,address,6,In Review,,,0,0,0,2,0,0
-addr|1850|berryman,1850 BERRYMAN St,,6,description,ZP2023-0063;PLN2025-0050;PLN2025-0052,Under Review,2025-08-01,B2025-05624,Corrections List Issued,2025-12-08,,,2026-09-21,47,address+permit,6,In Review,,,0,0,0,4,0,0
-apn|057-2023-017-01,2002 ADDISON St,057-2023-017-01,6,cpra_UnitsAdded,ZP2015-0135,Approved,2015-06-10,B2016-03148,Finaled,2016-07-01,2018-02-01,2018-08-28,2026-07-08,889,address+apn+permit,6,Completed,,2018-08-28,0,1,0,2,0,0
-addr|2212|ashby,2212 ASHBY Ave,,6,description,,,,B2024-01675,Finaled,2024-04-08,,,2026-09-21,,,,,,,1,0,0,1,0,0
-apn|055-1832-026-01,2330 BLAKE St,055-1832-026-01,6,cpra_UnitsAdded,,,,B2025-00168,Issued,2025-01-14,2025-07-30,,2026-09-21,184,address+permit,,Permitted,2025-07-30,,0,0,0,1,0,0
-addr|2371|san pablo,2371 SAN PABLO Ave,,6,description,ZP2019-0089,Closed,2019-05-15,,,,,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|2649|benvenue,2649 BENVENUE Ave,,6,description,,,,B2025-02762,Issued,2025-07-03,,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|2716|haste,2716 HASTE St,,6,description,,,,B2024-01060,Closed Expired,2024-03-08,,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|1720|delaware,1720 Delaware Street,,5,description,ZP2018-0014,Approved,2018-01-19,,,,,,2026-07-08,,,,,,,1,1,0,1,0,0
-addr|1922|10th,1922 TENTH,,5,description,PLN2026-0147,Under Review,2026-06-24,,,,,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|1940|haste,1940 Haste,,5,description,ZP2015-0168,Withdrawn,2015-07-08,,,,,,2026-07-08,726,address~10,1,Completed,,2021-10-22,0,0,1,1,0,0
-addr|2217|california,2217 CALIFORNIA St,,5,description,,,,B2026-01944,Finaled,2026-05-11,,,2026-09-21,,,,,,,1,0,0,1,0,0
-apn|052-1572-006-00,2918 FLORENCE St,052-1572-006-00,5,cpra_UnitsAdded,,,,B2025-00752,Corrections List Issued,2025-02-25,,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|3020|college,3020 College Avenue,,5,description,ZP2019-0093,Approved,2019-05-21,,,,,,2026-07-08,480,address~10,1,Completed,,2018-06-14,0,1,1,1,0,0
-addr|1122|university,1122 UNIVERSITY Ave,,4,description,,,,B2026-03975,Under Review,2026-09-15,,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|1711|m l king jr,1711 M L KING JR Way,,4,description,ZP2017-0179,Approved,2017-11-17,,,,,,2026-09-21,,,,,,,1,0,0,1,0,0
-apn|053-1601-016-00,1841 PRINCE St,053-1601-016-00,4,cpra_UnitsAdded,,,,B2022-06004,Finaled,2022-12-22,2022-12-23,2023-12-13,2026-07-08,,,,,,,1,0,0,1,0,0
-addr|2319|roosevelt,2319 ROOSEVELT Ave,,4,description,,,,B2018-01151,Issued,2018-03-24,,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|2420|ashby,2420 Ashby,,4,description,ZP2024-0147,In Review,2024-10-08,,,,,,2026-09-21,50,address+permit,4,In Review,,,0,0,0,1,0,0
-addr|2701|prince,2701 PRINCE St,,4,description,ZP2016-0072,Approved,2016-04-13,,,,,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|2705|benvenue,2705 BENVENUE,,4,description,ZP2025-0086,Approved,2025-09-05,,,,,,2026-07-08,84,address,0,Completed,,,0,1,1,1,0,0
-addr|2714|alcatraz,2714 ALCATRAZ Ave,,4,description,ZP2018-0034,Approved,2018-02-16,,,,,,2026-09-21,439,address~10,1,Completed,,2023-03-28,0,0,1,1,0,0
-addr|2727|san pablo,2727 SAN PABLO Ave,,4,description,ZP2022-0033,Closed,2022-03-01,,,,,,2026-09-21,16;36,address~10,113,In Review,,,0,0,1,1,0,0
-addr|2795|san pablo,2795 SAN PABLO Ave,,4,description,PLN2018-0029;ZP2019-0048,Approved,2019-03-15,,,,,,2026-09-21,,,,,,,1,0,0,2,0,0
-addr|2812|8th,2812 EIGHTH STREET,,4,description,PLN2025-0058,Under Review,2025-09-11,,,,,,2026-09-21,61,address,3,In Review,,,0,0,0,1,0,0
-addr|2817|8th,2817 EIGHTH St,,4,description,ZP2015-0204,Approved,2015-09-24,,,,,,2026-09-21,513,address,4,Completed,,2018-09-06,0,0,0,1,0,0
-addr|3014|college,3014 COLLEGE Ave,,4,description,ZP2016-0214,Approved,2016-10-27,,,,,,2026-09-21,480,address~10,1,Completed,,2018-06-14,0,0,1,1,0,0
-apn|053-1660-024-00,1025 HEINZ Ave,053-1660-024-00,3,cpra_UnitsAdded,,,,B2023-00117,Finaled,2023-01-12,2023-01-24,2024-11-19,2026-07-08,202,apn+permit,3,Completed,,2024-11-07,0,0,0,1,0,0
-addr|1629|stuart a,1629 STUART St A,,3,description,ZP2018-0127,Approved,2018-06-20,,,,,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|1825|berkeley,1825 Berkeley Way,,3,description,ZP2018-0085,Approved,2018-05-03,,,,,,2026-07-08,426,address,1,Completed,,2022-03-11,0,1,1,1,0,0
-apn|057-2063-007-00,1837 BERKELEY Way,057-2063-007-00,3,cpra_UnitsAdded,,,,B2022-01345,Finaled,2022-03-28,2023-03-09,2024-12-03,2026-07-08,226,address+apn+permit,3,Completed,,2021-04-06,0,0,0,1,0,0
-addr|1920|vine,1920 Vine Street,,3,description,ZP2019-0172,Approved,2019-10-18,,,,,,2026-07-08,,,,,,,1,1,0,1,0,0
-addr|2112|grant,2112 GRANT St,,3,description,,,,B2026-03505,Issued,2026-08-18,,,2026-09-21,,,,,,,1,0,0,1,0,0
-apn|055-1830-015-00,2200 DWIGHT Way,055-1830-015-00,3,cpra_UnitsAdded,,,,B2021-03292,Closed Expired,2021-07-23,2022-12-06,,2026-07-08,66,address~10,2,In Review,,,0,0,0,1,0,0
-addr|2225|hearst,2225 HEARST Ave,,3,description,PLN2021-0045,Pending,2021-09-15,,,,,,2026-09-21,437,address,1,Completed,,,0,0,1,1,0,0
-addr|2336|dwight,2336 DWIGHT,,3,description,PLN2026-0035,Closed,2026-01-29,,,,,,2026-07-08,,,,,,,1,0,0,1,0,0
-apn|056-1943-020-00,2421 FIFTH St,056-1943-020-00,3,cpra_UnitsAdded,DRSL2020-0007;ZP2020-0043,Approved,2020-05-13,B2021-04907,Issued,2021-10-27,2024-04-18,,2026-09-21,427;512,address~10,2,Completed,,2023-03-13,0,0,0,3,0,0
-addr|2930|mlk jr,2930 MLK JR WAY,,3,description,PLN2026-0177,Under Review,2026-08-21,,,,,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|3101|sacramento,3101 SACRAMENTO STREET,,3,description,ZP2025-0069,Pending Final Action,2025-07-28,,,,,,2026-09-21,57,address,3,In Review,,,0,0,0,1,0,0
-apn|063-2969-034-37,,063-2969-034-37,2,cpra_UnitsAdded,,,,B2019-05488,Finaled,2019-12-18,2020-09-08,2022-08-08,2026-07-08,828,apn+permit,2,Completed,,2022-08-08,0,0,0,1,1,0
-apn|059-2287-020-00,0 VIRGINIA St 94702,059-2287-020-00,2,cpra_UnitsAdded,,,,B2025-02283,Issued,2025-06-04,2025-10-10,,2026-09-21,,,,,,,1,0,0,1,0,0
-apn|053-1661-003-03,1030 GRAYSON St,053-1661-003-03,2,cpra_UnitsAdded,ZP2015-0141;DRSL2015-0027,Approved,2015-10-15,B2017-03295,Finaled,2017-07-28,2018-02-01,2018-10-17,2026-07-08,492,address,2,Completed,,2018-10-17,0,1,0,3,0,0
-apn|057-2086-088-00,1173 HEARST Ave,057-2086-088-00,2,cpra_UnitsAdded,ZP2016-0028,Approved,2016-02-02,B2024-01117,Issued,2024-03-12,2025-02-25,,2026-07-08,379,address+apn,2,Completed,,2023-03-15,0,1,0,2,0,0
-addr|1220|carleton,1220 Carleton Street,,2,description,ZP2017-0070,Approved,2017-05-05,,,,,,2026-07-08,385,address~10,1,Completed,,2023-10-23,0,1,0,1,0,0
-apn|060-2429-024-00,1300 MONTEREY Ave,060-2429-024-00,2,cpra_UnitsAdded,,,,B2024-00824,Finaled,2024-02-22,2024-07-23,2025-10-21,2026-07-08,343,address+apn+permit,2,Completed,,2025-10-21,0,0,0,1,0,0
-apn|060-2487-031-00,131 AVENIDA Dr,060-2487-031-00,2,cpra_UnitsAdded,,,,B2022-03366,Finaled,2022-07-20,2022-11-08,2023-08-15,2026-07-08,402,address+apn+permit,2,Completed,,2023-08-15,0,0,0,1,0,0
-apn|053-1623-012-01,1331 ASHBY Ave,053-1623-012-01,2,cpra_UnitsAdded,,,,B2018-05100,Issued (CPRA; not in census),2018-12-21,2023-04-04,,2026-07-07,,,,,,,1,0,0,1,0,0
-addr|1341|addison,1341 ADDISON STREET,,2,description,ZP2022-0089,Approved,2022-06-27,,,,,,2026-07-08,190,address,2,Completed,,2024-10-16,0,1,0,1,0,0
-addr|1400|sixty 7th,1400 SIXTY-SEVENTH St,,2,description,,,,B2026-03321,Issued,2026-08-06,,,2026-09-21,,,,,,,1,0,0,1,0,0
-apn|054-1794-014-01,1403 CARLETON St,054-1794-014-01,2,cpra_UnitsAdded,,,,B2023-04424,Finaled,2023-08-28,2024-08-21,2026-03-27,2026-07-08,,,,,,,1,0,0,1,0,0
-apn|056-1998-040-00,1423 ACROFT Ct,056-1998-040-00,2,cpra_UnitsAdded,,,,B2023-01905,Finaled,2023-04-17,2023-04-17,2024-02-23,2026-07-08,266,address+apn+permit,2,Completed,,,0,0,0,1,0,0
-apn|059-2249-030-02,1471 SCENIC AVE,059-2249-030-02,2,cpra_UnitsAdded,,,,B2014-01391,Finaled,2014-03-28,,2026-02-24,2026-07-07,,,,,,,1,0,0,1,0,0
-apn|052-1536-011-00,1515 HARMON St,052-1536-011-00,2,cpra_UnitsAdded,,,,B2022-03494,Finaled,2022-07-28,2022-12-06,2025-05-13,2026-07-08,302,address+apn+permit,2,Completed,,2025-05-13,0,0,0,1,0,0
-apn|058-2245-009-03,1581 LE ROY Ave,058-2245-009-03,2,cpra_UnitsAdded,,,,B2020-03077,Issued,2020-09-15,2021-07-13,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|1636|hearst,1636 Hearst,,2,description,ZP2018-0075,Approved,2018-04-17,,,,,,2026-07-08,,,,,,,1,1,0,1,0,0
-apn|058-2179-008-00,1650 OXFORD St,058-2179-008-00,2,cpra_UnitsAdded,,,,B2024-02435,Issued,2024-05-16,2024-11-12,,2026-09-21,,,,,,,1,0,0,1,0,0
-apn|058-2187-019-00,1677 ARCH St,058-2187-019-00,2,cpra_UnitsAdded,,,,B2021-03071,Finaled,2021-07-13,2021-11-16,2022-04-20,2026-07-08,864,address+apn+permit,2,Completed,,2022-04-20,0,0,0,1,0,0
-apn|058-2183-015-00,1683 OXFORD St,058-2183-015-00,2,cpra_UnitsAdded,,,,B2021-02315,Finaled,2021-06-04,2022-08-08,2024-07-24,2026-07-08,274,address+apn+permit,2,Completed,,2024-07-24,0,0,0,1,0,0
-apn|058-2123-019-00,1729 EIGHTH St,058-2123-019-00,2,cpra_UnitsAdded,,,,B2024-03463,Issued,2024-07-15,2025-08-11,,2026-09-21,,,,,,,1,0,0,1,0,0
-apn|058-2150-003-00,1732 CALIFORNIA St,058-2150-003-00,2,cpra_UnitsAdded,,,,B2024-02212,Issued,2024-05-06,2024-12-30,,2026-09-21,,,,,,,1,0,0,1,0,0
-apn|052-1527-011-00,1811 SIXTY-THIRD St,052-1527-011-00,2,cpra_UnitsAdded,,,,B2019-03765,Finaled,2019-09-05,2020-01-28,2021-09-16,2026-07-08,783,apn+permit,2,Completed,,2021-09-01,0,0,0,1,0,0
-apn|057-2095-013-02,1817 SIXTH St,057-2095-013-02,2,cpra_UnitsAdded,,,,B2021-00200,Closed Expired,2021-01-15,2021-08-25,,2026-07-08,,,,,,,1,0,0,1,0,0
-apn|052-1526-009-00,1817 SIXTY-SECOND St,052-1526-009-00,2,cpra_UnitsAdded,,,,B2023-05812,Finaled,2023-11-09,2024-03-12,2025-06-24,2026-07-08,286,apn+permit,2,Completed,,2025-06-24,0,0,0,1,0,0
-apn|058-2191-002-00,1828 EUCLID Ave,058-2191-002-00,2,cpra_UnitsAdded,,,,B2021-03440,Finaled,2021-08-03,2023-09-27,2025-05-22,2026-07-08,352,address+apn+permit,2,Completed,,2025-05-22,0,0,0,1,0,0
-addr|1915|virginia,1915 Virginia Street,,2,description,ZP2015-0146,Approved,2015-06-29,,,,,,2026-07-08,589,address,1,Completed,,2019-01-23,0,1,0,1,0,0
-addr|2003|prince,2003 PRINCE St,,2,description,ZP2019-0195,Withdrawn,2019-12-06,,,,,,2026-09-21,,,,,,,1,0,0,1,0,0
-apn|055-1895-009-00,2021 CHANNING Way,055-1895-009-00,2,cpra_UnitsAdded,,,,B2024-02481,Finaled,2024-05-17,2025-04-29,2026-04-27,2026-07-08,,,,,,,1,0,0,1,0,0
-addr|2025|durant,2025 DURANT Ave,,2,description,DRCP2017-0011;ZP2017-0102,Approved,2017-06-30,,,,,,2026-09-21,,,,,,,1,0,0,2,0,0
-apn|057-2030-002-00,2116 ALLSTON Way,057-2030-002-00,2,cpra_UnitsAdded,,,,B2020-02394,Finaled,2020-07-28,2021-01-21,2021-10-29,2026-07-08,775;911,address+apn+permit,2,Completed,,2021-10-29,0,0,0,1,0,0
-apn|055-1825-024-01,2124 PARKER St,055-1825-024-01,2,cpra_UnitsAdded,,,,B2024-03840,Issued,2024-08-06,2025-04-09,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|2127|woolsey,2127 WOOLSEY St,,2,description,,,,B2026-02222,Corrections List Issued,2026-05-27,,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|2128|ward,2128 WARD St,,2,description,ZP2018-0237,Approved,2018-12-18,,,,,,2026-09-21,,,,,,,1,0,0,1,0,0
-apn|056-2006-010-00,2132 MCGEE Ave,056-2006-010-00,2,cpra_UnitsAdded,,,,B2020-03292,Finaled,2020-09-29,2022-02-09,2025-02-20,2026-07-08,337,address+apn+permit,2,Completed,,2025-02-20,0,0,0,1,0,0
-addr|2210|m l king jr,2210 M L KING JR Way,,2,description,ZP2016-0194,Approved,2016-10-11,,,,,,2026-09-21,,,,,,,1,0,0,1,0,0
-apn|055-1887-011-00,2211 CHANNING Way,055-1887-011-00,2,cpra_UnitsAdded,,,,B2024-02377,Issued,2024-05-14,2025-12-01,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|2212|10th,2212 TENTH St,,2,description,ZP2016-0129,Approved,2016-06-28,,,,,,2026-09-21,592,address,1,Completed,,2019-06-04,0,0,0,1,0,0
-apn|055-1887-010-00,2215 CHANNING Way,055-1887-010-00,2,cpra_UnitsAdded,,,,B2024-02487,Issued,2024-05-17,2025-12-01,,2026-09-21,,,,,,,1,0,0,1,0,0
-addr|2219|mckinley,2219 MCKINLEY Ave,,2,description,,,,B2026-03339,Corrections List Issued,2026-08-07,,,2026-09-21,803,address~10,1,Completed,,2021-12-09,0,0,0,1,0,0
-apn|059-2257-006-00,2220 ROSE St,059-2257-006-00,2,cpra_UnitsAdded,,,,B2024-06085,Finaled,2024-12-30,2024-12-30,,2026-09-21,,,,,,,1,0,0,1,0,0
-apn|055-1830-022-00,2226 DWIGHT Way,055-1830-022-00,2,cpra_UnitsAdded,,,,B2022-03844,Finaled,2022-08-18,2023-05-18,2024-06-03,2026-07-08,200,address+apn+permit,2,Completed,,2024-06-03,0,0,0,1,0,0
-apn|055-1828-011-00,2227 CARLETON St,055-1828-011-00,2,cpra_UnitsAdded,,,,B2023-04737,Finaled,2023-09-14,2024-09-04,2025-09-10,2026-07-08,365,address+apn+permit,2,Completed,,2025-09-10,0,0,0,1,0,0
-apn|057-2014-019-01,2233 GRANT St,057-2014-019-01,2,cpra_UnitsAdded,,,,B2020-02423,Finaled,2020-07-30,2021-12-15,2024-03-28,2026-07-08,224,address+apn+permit,2,Completed,,2024-03-28,0,0,0,1,0,0
-apn|056-1938-029-00,2323 SEVENTH St,056-1938-029-00,2,cpra_UnitsAdded,,,,B2024-00257,Issued,2024-01-18,2025-06-17,,2026-09-21,,,,,,,1,0,0,1,0,0
-apn|055-1884-005-00,2325 CHANNING Way,055-1884-005-00,2,cpra_UnitsAdded,,,,B2024-04276,Issued,2024-09-03,2025-06-02,,2026-09-21,117;183,address~10,22,Entitled,2022-11-01,,0,0,1,1,0,0
-apn|055-1905-011-03,2326 GRANT St,055-1905-011-03,2,cpra_UnitsAdded,,,,B2024-05037,Issued,2024-10-18,2024-11-06,,2026-09-21,74,address~10,1,In Review,,,0,0,0,1,0,0
-addr|2327|5th,2327 Fifth Street,,2,description,DRSL2020-0001;ZP2020-0009,Approved,2020-01-23,,,,,,2026-07-08,260,address~10,1,Completed,,2024-05-31,0,1,0,2,0,0
-apn|053-1689-009-00,2327 OREGON St,053-1689-009-00,2,cpra_UnitsAdded,,,,B2022-04721,Finaled,2022-10-12,2023-03-07,2025-02-28,2026-07-08,294,address+apn+permit,2,Completed,,2025-02-28,0,0,0,1,0,0
-apn|056-1937-022-00,2331 EIGHTH St,056-1937-022-00,2,cpra_UnitsAdded,,,,B2024-04179,Issued,2024-08-26,2026-01-20,,2026-09-21,713,address~10,1,Completed,,2021-05-24,0,0,0,1,0,0
-addr|2337|grant,2337 Grant Street,,2,description,ZP2022-0163,Withdrawn,2022-11-18,,,,,,2026-07-08,74,address~10,1,In Review,,,0,0,0,1,0,0
-apn|053-1689-006-02,2339 OREGON St,053-1689-006-02,2,cpra_UnitsAdded,,,,B2020-01498,Finaled,2020-05-19,2021-03-03,2023-03-10,2026-07-08,420,address+apn+permit,2,Completed,,2023-03-10,0,0,0,1,0,0
-apn|061-2551-026-03,2371 OAK St,061-2551-026-03,2,cpra_UnitsAdded,,,,B2023-01529,Issued (CPRA; not in census),2023-03-30,2025-09-18,,2026-07-07,,,,,,,1,0,0,1,0,0
-apn|056-1943-023-00,2411 FIFTH St,056-1943-023-00,2,cpra_UnitsAdded,,,,B2017-01029,Finaled,2017-03-13,2017-08-02,2018-10-30,2026-07-08,512,address+apn+permit,2,Completed,,2018-10-30,0,0,0,1,0,0
-addr|2418|ashby,2418 ASHBY Ave,,2,description,,,,B2026-03288,Issued,2026-08-05,,,2026-09-21,50,address~10,4,In Review,,,0,0,1,1,0,0
-addr|2435|virginia,2435 VIRGINIA St,,2,description,ZP2018-0113,Approved,2018-05-31,,,,,,2026-09-21,,,,,,,1,0,0,1,0,0
-apn|055-1880-022-01,2436 CHANNING Way,055-1880-022-01,2,cpra_UnitsAdded,,,,B2023-05281,Finaled,2023-10-16,2024-04-17,2025-06-17,2026-07-08,355,address+apn+permit,2,Completed,,2025-06-17,0,0,0,1,0,0
-apn|055-1847-028-00,2519 COLLEGE Ave,055-1847-028-00,2,cpra_UnitsAdded,,,,B2021-00697,Finaled,2021-02-19,2021-06-14,2023-05-11,2026-07-08,396,address+apn+permit,2,Completed,,2023-05-11,0,0,0,1,0,0
-apn|055-1845-010-00,2618 COLLEGE Ave,055-1845-010-00,2,cpra_UnitsAdded,,,,B2021-05671,Finaled,2021-12-16,2024-08-01,2025-07-25,2026-07-08,348,address+apn+permit,2,Completed,,2025-07-25,0,0,0,1,0,0
-apn|055-1848-024-00,2619 COLLEGE Ave,055-1848-024-00,2,cpra_UnitsAdded,,,,B2024-00819,Finaled,2024-02-22,2024-09-13,2025-06-24,2026-07-08,321,address+apn+permit,2,Completed,,2025-06-24,0,0,0,1,0,0
-apn|055-1841-009-00,2620 HILLEGASS Ave,055-1841-009-00,2,cpra_UnitsAdded,,,,B2024-04291,Finaled,2024-09-03,2025-08-20,,2026-09-21,,,,,,,1,0,0,1,0,0
-apn|055-1840-007-00,2620 REGENT St,055-1840-007-00,2,cpra_UnitsAdded,,,,B2024-01193,Finaled,2024-03-15,2024-06-14,2025-05-30,2026-07-08,316,address+apn+permit,1,Completed,,2025-05-30,0,0,0,1,0,0
-apn|055-1848-023-00,2623 COLLEGE Ave,055-1848-023-00,2,cpra_UnitsAdded,,,,B2023-06132,Issued,2023-11-30,2025-10-14,,2026-09-21,321;348,address~10,2,Completed,,2025-06-24,0,0,0,1,0,0
-apn|055-1841-024-00,2631 REGENT St,055-1841-024-00,2,cpra_UnitsAdded,,,,B2023-02659,Finaled,2023-05-22,2024-01-16,2025-06-03,2026-07-08,326,address+apn+permit,2,Completed,,2025-06-03,0,0,0,1,0,0
-apn|055-1841-021-00,2639 REGENT St,055-1841-021-00,2,cpra_UnitsAdded,,,,B2023-06071,Finaled,2023-11-27,2024-06-11,2025-07-29,2026-07-08,357,address+apn+permit,2,Completed,,2025-07-29,0,0,0,1,0,0
-apn|055-1870-008-00,2701 DURANT Ave,055-1870-008-00,2,cpra_UnitsAdded,,,,B2022-01079,Issued (CPRA; not in census),2022-03-10,2023-05-01,,2026-07-07,,,,,,,1,0,0,1,0,0
-apn|052-1563-036-00,2708 PRINCE St,052-1563-036-00,2,cpra_UnitsAdded,,,,B2024-06003,Issued,2024-12-20,2025-07-11,,2026-09-21,508,address~10,1,Completed,,2018-06-11,0,0,0,1,0,0
-apn|054-1708-005-00,2737 FOREST Ave,054-1708-005-00,2,cpra_UnitsAdded,,,,B2021-02307,Finaled,2021-06-04,2022-11-10,2024-03-11,2026-07-08,269,address+apn+permit,2,Completed,,2024-03-11,0,0,0,1,0,0
-apn|053-1677-008-00,2800 M L KING JR Way,053-1677-008-00,2,cpra_UnitsAdded,,,,B2024-02927,Finaled,2024-06-12,2024-10-22,,2026-09-21,,,,,,,1,0,0,1,0,0
-apn|061-2561-001-00,2808 NINTH St,061-2561-001-00,2,cpra_UnitsAdded,,,,B2026-00031,Issued,2026-01-06,2026-06-01,,2026-09-21,69,address,2,In Review,,,0,0,0,1,0,0
-apn|053-1674-016-00,2817 CALIFORNIA St,053-1674-016-00,2,cpra_UnitsAdded,,,,B2022-04445,Finaled,2022-09-26,2022-11-09,2023-01-10,2026-07-08,,,,,,,1,0,0,1,0,0
-apn|052-1433-012-00,3353 M L KING JR Way,052-1433-012-00,2,cpra_UnitsAdded,,,,B2017-02082,Finaled,2017-05-16,2019-08-07,2022-09-28,2026-07-08,841,apn+permit,2,Completed,,2022-09-28,0,0,0,1,0,0
-addr|3359|m l king jr,3359 M L King Jr,,2,description,ZP2015-0184,Approved,2015-08-25,,,,,,2026-07-08,,,,,,,1,1,0,1,0,0
-apn|052-1434-003-00,3411 ADELINE St,052-1434-003-00,2,cpra_UnitsAdded,,,,B2020-02735,Finaled,2020-08-21,2020-12-16,2026-04-16,2026-07-08,,,,,,,1,0,0,1,0,0
-apn|059-2325-004-00,776 PAGE St,059-2325-004-00,2,cpra_UnitsAdded,,,,B2021-05043;B2021-05365,Finaled,2021-11-29,2022-06-03,2023-09-20,2026-07-08,445,permit,2,Completed,,2023-09-20,0,0,0,2,0,0
-apn|059-2326-012-00,805 JONES St,059-2326-012-00,2,cpra_UnitsAdded,DRCP2022-0019,Approved,2022-11-17,B2024-00701;B2024-00721;B2024-00797,Issued,2024-02-22,2024-09-06,,2026-07-08,,,,,,,1,1,0,4,0,0
-apn|056-1936-005-00,944 CHANNING Way,056-1936-005-00,2,cpra_UnitsAdded,,,,B2024-01429,Issued,2024-03-28,2025-09-24,,2026-09-21,,,,,,,1,0,0,1,0,0
-apn|063-3120-063-00,945 CRESTON Rd,063-3120-063-00,2,cpra_UnitsAdded,,,,B2023-04951,Issued,2023-09-25,2025-10-23,,2026-09-21,,,,,,,1,0,0,1,0,0
+project_key,address,apn,units_best,units_source,planning_records,planning_status,planning_filed,building_records,building_status,building_filed,first_bp_issued,last_finaled,status_asof,v2_project_id,v2_match_basis,v2_units,v2_status,v2_bp_issued,v2_co,not_in_v2,needs_status_refresh,possible_v2_match,units_disagree,n_records,address_missing,address_borrowed
+apn|058-2149-019-04,1750 SACRAMENTO St,058-2149-019-04,739,description,PLN2024-0010,Approved,2024-02-20,B2025-05534;B2026-03228,Corrections List Issued,2026-07-30,,,2026-09-21,1,address+apn+permit,739,Entitled,,,0,0,,0,3,0,0
+apn|057-2053-003-01,1998 Shattuck,057-2053-003-01,599,description,ZP2022-0175;PLN2022-0118;PLN2023-0083,Closed,2023-11-30,,,,,,2026-07-08,,,,,,,1,0,"119(599u,block,=units);466(50u,block);901(142u,block)",0,3,0,0
+addr|98|shattuck,98 SHATTUCK,,599,description,DRCP2023-0003;ZP2023-0040,Approved,2023-03-17,,,,,,2026-07-08,119,permit,599,Entitled,,,0,1,,0,2,0,0
+apn|057-2031-001-01,2128 OXFORD St,057-2031-001-01,551,description,DRCP2021-0016;ZP2021-0162;PLN2022-0056;DRCP2022-0014;ZP2022-0135;DRCF2024-0006,Approved,2024-12-09,,,,,,2026-07-08,133,address+apn,456,Entitled,,,0,1,,1,6,0,0
+addr|2190|shattuck,2190 SHATTUCK Ave,,326,description,PLN2022-0010;ZP2022-0026,Approved,2022-02-23,,,,,,2026-09-21,35,address,452,In Review,,,0,0,,1,2,0,0
+addr|1931|san pablo,1931 SAN PABLO Ave,,323,description,PLN2022-0026,Closed,2022-03-17,,,,,,2026-09-21,,,,,,,1,0,,0,1,0,0
+apn|054-1723-001-00,2700 SHATTUCK,054-1723-001-00,293,description,PLN2023-0081;DRCP2024-0006;ZP2024-0058,Approved,2024-05-14,,,,,,2026-07-08,3,address+apn+permit,359,Entitled,,,0,1,,1,3,0,0
+apn|057-2101-001-03,1900 Fourth Street,057-2101-001-03,260,description,ZP2018-0052,Closed,2018-03-08,,,,,,2026-07-08,,,,,,,1,0,,0,1,0,0
+addr|1914|5th,1914 FIFTH St,,257,description,ZP2020-0104;PLN2020-0044;PLN2022-0039,Closed,2022-05-03,,,,,,2026-09-21,4,address+permit,257,In Review,,,0,0,,0,3,0,0
+addr|2601|san pablo,2601 SAN PABLO Ave,,242,description,PLN2021-0004;ZP2021-0066;PLN2022-0048;ZP2022-0171;PLN2023-0089,Closed,2023-12-08,,,,,,2026-09-21,7,address+permit,223,In Review,,,0,0,,1,5,0,0
+addr|2029|university apartments,2029 UNIVERSITY AVENUE APARTMENTS,,240,description,PLN2024-0069,Under Review,2024-12-10,,,,,,2026-09-21,6,permit,240,Entitled,,,0,0,,0,1,0,0
+apn|057-2053-008-01,2029 University Avenue,057-2053-008-01,240,description,ZP2024-0182;ZP2024-0181;DRCP2025-0002;DRCP2025-0001,Approved,2025-01-09,,,,,,2026-07-08,6,address+apn+permit,240,Entitled,,,0,1,,0,4,0,0
+apn|057-2028-003-00,2274 SHATTUCK Ave,057-2028-003-00,239,description,PLN2022-0072;DRCP2023-0008;ZP2023-0079,Approved,2023-05-30,,,,,,2026-07-08,120,address+apn+permit,299,Entitled,,,0,1,,1,3,0,0
+apn|058-2181-019-05,1899 OXFORD St,058-2181-019-05,222,description,PLN2023-0100;DRCP2024-0011;ZP2024-0075;ZP2026-0077,Under Review,2026-08-11,B2026-02298,Under Review,2026-06-02,,,2026-07-08,9,address+apn+permit,212,Entitled,,,0,1,,1,5,0,0
+apn|053-1590-005-01,2920 SHATTUCK Ave,053-1590-005-01,221,description,PLN2022-0016;DRCP2022-0013;ZP2022-0116;PLN2023-0096,Closed,2023-12-18,,,,,,2026-07-08,8,address+apn+permit,242,In Review,,,0,1,,1,4,0,0
+apn|055-1822-013-04,2015 BLAKE St,055-1822-013-04,219,description,ZP2018-0239;PLN2020-0023;ZP2020-0072;PLN2022-0120;ZP2022-0178,Approved,2022-12-19,,,,,,2026-07-08,181,address+apn,168,Entitled,,,0,1,,1,5,0,0
+apn|057-2030-009-00,2113 KITTREDGE,057-2030-009-00,214,description,PLN2022-0067,Closed,2022-07-28,,,,,,2026-07-08,12,apn,148,In Review,,,0,0,,1,1,0,0
+apn|057-2030-008-00,2115 KITTREDGE,057-2030-008-00,214,description,ZP2022-0144;ZP2024-0131,Incomplete Pending Applicant,2024-09-16,,,,,,2026-07-08,12,address+apn+permit,148,In Review,,,0,1,,1,2,0,0
+apn|056-2003-001-00,1598 UNIVERSITY Ave,056-2003-001-00,207,cpra_UnitsAdded,PLN2022-0008;DRCP2022-0008;ZP2022-0099;PLN2023-0038;DRCF2024-0004,Approved,2024-05-02,B2024-01924,Issued,2024-04-19,2024-12-16,,2026-09-21,152,address+apn+permit,207,Completed,2024-01-01,,0,0,,0,6,0,0
+apn|057-2022-017-01,2100 Milvia,057-2022-017-01,201,description,PLN2023-0045;ZP2023-0163,Approved,2023-12-12,,,,,,2026-07-08,121,address+apn+permit,205,Entitled,,,0,1,,1,2,0,0
+apn|057-2022-003-01,2108 MILVIA,057-2022-003-01,201,description,DRCP2023-0018,Approved,2023-12-12,,,,,,2026-07-08,17;121,address~10,105,In Review,,,0,1,,1,1,0,0
+apn|057-2027-006-00,2065 KITTREDGE St,057-2027-006-00,189,description,PLN2021-0031;ZP2021-0193;DRCF2023-0002,Approved,2023-06-28,,,,,,2026-07-08,180,address+apn,189,Entitled,,,0,1,,0,3,0,0
+apn|059-2310-002-05,1500 SAN PABLO AVE,059-2310-002-05,170,description,ZP2015-0043;DRCP2015-0004;DRCF2017-0003,Approved,2017-03-30,,,,,,2026-07-08,895,address+apn,159,Completed,,2020-09-11,0,1,,1,3,0,0
+apn|057-2029-016-00,2150 KITTREDGE St,057-2029-016-00,169,cpra_UnitsAdded,DRSA2023-0004,Approved,2023-03-21,B2021-00008,Finaled,2021-01-04,2021-10-27,2024-03-20,2026-07-08,135,address+apn+permit,169,Completed,,2024-03-20,0,0,,0,2,0,0
+addr|2176|kittredge,2176 KITTREDGE St,,165,description,DRCP2019-0001;ZP2019-0027;DRCF2021-0004,Approved,2021-07-01,,,,,,2026-09-21,,,,,,,1,0,"135(169u,street);113(73u,street)",0,3,0,0
+apn|057-2046-001-00,1951 SHATTUCK Ave,057-2046-001-00,163,cpra_UnitsAdded,PLN2017-0057;ZP2018-0137;DRCP2018-0005,Approved,2018-07-06,B2019-05608;B2021-04893,Finaled,2021-10-27,2022-09-08,2024-10-24,2026-07-08,136,address+apn+permit,163,Completed,2022-09-08,2024-10-24,0,1,,0,5,0,0
+addr|2029|university student housing,2029 University student housing,,160,description,PLN2024-0070,Under Review,2024-12-10,,,,,,2026-09-21,6,permit,240,Entitled,,,0,0,,1,1,0,0
+apn|057-2071-006-01,1581 UNIVERSITY,057-2071-006-01,158,description,PLN2023-0099;DRCP2024-0010;ZP2024-0074,Incomplete Pending Applicant,2024-06-17,,,,,,2026-07-08,11,address+apn+permit,158,In Review,,,0,1,,0,3,0,0
+addr|3000|shattuck,3000 SHATTUCK Ave,,156,description,PLN2021-0069,Closed,2021-12-10,,,,,,2026-09-21,10,address,166,Entitled,,,0,0,,1,1,0,0
+addr|2001|4th,2001 FOURTH St,,152,description,DRCP2015-0017;ZP2015-0157,Approved,2015-07-14,,,,,,2026-09-21,,,,,,,1,0,,0,2,0,0
+apn|054-1742-032-00,2733 SAN PABLO,054-1742-032-00,152,description,PLN2023-0092,Closed,2023-12-13,,,,,,2026-07-08,36,address+apn,152,In Review,,,0,0,,0,1,0,0
+addr|2420|shattuck,2420 SHATTUCK Ave,,146,description,PLN2022-0036;DRCP2022-0018;ZP2022-0149;PLN2023-0090,Closed,2023-12-08,,,,,,2026-09-21,13,address+permit,132,In Review,,,0,0,,1,4,0,0
+apn|052-1576-027-01,3030 TELEGRAPH Ave,052-1576-027-01,144,cpra_UnitsAdded,PLN2022-0086;DRCP2022-0020;ZP2022-0170;DRCF2024-0001,Approved,2024-03-28,B2023-06416,Finaled,2023-12-19,2024-10-15,2026-04-16,2026-07-08,150,address+apn+permit,144,Completed,2023-10-01,2026-01-27,0,1,,0,5,0,0
+apn|057-2053-022-01,2012 BERKELEY Way,057-2053-022-01,142,cpra_UnitsAdded,PLN2018-0048,Pending,2018-10-26,B2019-03862,Finaled,2019-09-12,2020-07-06,2022-09-23,2026-07-08,901,address+apn+permit,142,Completed,2020-07-06,2022-09-23,0,0,,0,2,0,0
+apn|053-1686-020-00,2847 SHATTUCK Ave,053-1686-020-00,136,description,PLN2022-0031;ZP2022-0132;DRCP2022-0016;PLN2023-0102;DRCP2024-0013;ZP2024-0077,Incomplete Pending Applicant,2024-06-18,,,,,,2026-09-21,14,address+apn+permit,132,In Review,,,0,0,,1,6,0,0
+apn|058-2178-018-00,2109 VIRGINIA,058-2178-018-00,132,description,PLN2023-0091;DRCP2024-0007;ZP2024-0066,Approved,2024-06-04,,,,,,2026-07-08,15,address+apn+permit,110,Entitled,,,0,1,,1,3,0,0
+addr|2136|san pablo,2136 SAN PABLO Ave,,126,description,DRCP2019-0015;ZP2019-0179;PLN2020-0041;DRCP2021-0002;ZP2021-0046,Approved,2021-03-18,,,,,,2026-09-21,140,address+permit,125,Entitled,,,0,0,,0,5,0,0
+apn|055-1878-007-01,2425 DURANT AVENUE,055-1878-007-01,117,description,PLN2024-0049,Under Review,2024-08-08,,,,,,2026-09-21,5,address+apn+permit,117,Entitled,,,0,0,,0,1,0,0
+apn|055-1877-019-02,2580 BANCROFT Way,055-1877-019-02,117,cpra_UnitsAdded,ZP2017-0083,Approved,2017-05-26,B2019-00478,Finaled,2019-02-04,2019-09-24,2021-11-29,2026-07-08,896,address+apn+permit,117,Completed,2019-09-24,2021-11-29,0,0,,0,2,0,0
+apn|054-1744-007-00,2720 SAN PABLO,054-1744-007-00,117,description,PLN2022-0069;DRCP2023-0005;PLN2023-0101;DRCP2024-0012;ZP2024-0076,Incomplete Pending Applicant,2024-06-18,,,,,,2026-07-08,16,address+apn,113,In Review,,,0,1,,1,5,0,0
+apn|055-1822-018-00,2000 DWIGHT Way,055-1822-018-00,113,cpra_UnitsAdded,DRCP2019-0005;ZP2019-0074,Void,2019-04-24,B2021-02404,Finaled,2021-06-10,2023-08-15,2025-06-17,2026-07-08,173,address+permit,113,Completed,2022-04-18,2025-06-17,0,1,,0,3,0,0
+apn|055-1897-001-03,2480 SHATTUCK,055-1897-001-03,111,description,PLN2023-0073,Closed,2023-10-30,,,,,,2026-07-08,,,,,,,1,0,"19(94u,block);914(100u,street);176(40u,street)",0,1,0,0
+apn|058-2129-017-00,1701 SAN PABLO Ave,058-2129-017-00,110,cpra_UnitsAdded,,,,B2024-02966,Issued,2024-06-17,2025-05-06,,2026-09-21,153,address+apn+permit,110,Under Construction,2023-06-01,,0,0,,0,1,0,0
+apn|055-1877-016-01,2530 BANCROFT,055-1877-016-01,110,description,PLN2023-0059;DRCP2023-0014;ZP2023-0126,Approved,2023-09-06,,,,,,2026-07-08,122,address+apn+permit,110,Entitled,,,0,1,,0,3,0,0
+apn|052-1574-104-00,3031 Telegraph Avenue,052-1574-104-00,110,description,PLN2018-0050;PLN2020-0025;ZP2020-0069,Approved,2020-07-06,,,,,,2026-09-21,150,address~10,144,Completed,2023-10-01,2026-01-27,0,0,,1,3,0,0
+apn|057-2023-016-01,2109 MILVIA,057-2023-016-01,105,description,PLN2023-0001;ZP2023-0003,Closed,2023-01-10,,,,,,2026-07-08,17,address+apn,105,In Review,,,0,0,,0,2,0,0
+addr|1200|san pablo,1200 SAN PABLO Ave,,104,description,DRCP2019-0016;ZP2019-0192,Approved,2019-12-02,,,,,,2026-09-21,,,,,,,1,0,,0,2,0,0
+apn|055-1826-018-02,2655 SHATTUCK Ave,055-1826-018-02,97,description,PLN2023-0086;DRCP2024-0005;ZP2024-0057,Approved,2024-05-22,,,,,,2026-07-08,18,address+apn+permit,97,Entitled,,,0,1,,0,3,0,0
+apn|056-1977-006-05,2100 SAN PABLO Ave,056-1977-006-05,96,cpra_UnitsAdded,DRCF2018-0007;DRCP2018-0010;ZP2018-0222,Approved,2018-11-26,B2019-03689,Finaled,2019-08-30,2020-07-20,2023-05-02,2026-07-08,467,apn+permit,96,Completed,2020-07-20,2023-05-02,0,1,,0,4,0,0
+apn|057-2086-025-01,1835 San Pablo Avenue,057-2086-025-01,95,description,DRCP2018-0009;ZP2018-0220,Approved,2018-11-19,,,,,,2026-07-08,,,,,,,1,1,"338(1u,block);379(2u,block)",0,2,0,0
+addr|2147|san pablo,2147 SAN PABLO Ave,,94,description,DRCP2021-0008;ZP2021-0073;PLN2022-0020;DRCP2022-0011;PLN2026-0032,Under Review,2026-01-26,,,,,,2026-09-21,41,address,15,Entitled,,,0,0,,1,5,0,0
+addr|80|shattuck,80 Shattuck,,94,description,DRCP2024-0004;ZP2024-0047,Incomplete Pending Applicant,2024-04-26,,,,,,2026-09-21,19,permit,94,In Review,,,0,0,,0,2,0,0
+apn|053-1684-001-00,2801 Adeline,053-1684-001-00,90,description,DRCP2020-0010;ZP2020-0118,Withdrawn,2020-10-16,,,,,,2026-07-08,,,,,,,1,0,,0,2,0,0
+apn|053-1591-018-03,2001 ASHBY Ave,053-1591-018-03,87,cpra_UnitsAdded,,,,B2021-02905,Finaled,2021-07-02,2022-02-04,2025-02-24,2026-07-08,154,address+apn+permit,87,Completed,2022-02-04,2025-06-01,0,0,,0,1,0,0
+apn|055-1894-017-04,2036 BANCROFT,055-1894-017-04,87,description,ZP2024-0079,In Review,2024-06-19,,,,,,2026-09-21,20,address+apn+permit,87,In Review,,,0,0,,0,1,0,0
+addr|2590|bancroft,2590 BANCROFT Way,,87,description,ZP2019-0100,Approved,2019-05-31,,,,,,2026-09-21,404,address,87,Completed,,2023-11-15,0,0,,0,1,0,0
+addr|1709|shattuck,1709 SHATTUCK Ave,,85,description,DRCP2021-0003;ZP2021-0048,Approved,2021-03-19,,,,,,2026-09-21,,,,,,,1,0,"164(72u,street)",0,2,0,0
+addr|2720|san pablo density bonus project,2720 San Pablo Density Bonus Project,,84,description,ZP2023-0058,Under Review,2023-05-03,,,,,,2026-09-21,16,permit,113,In Review,,,0,0,,1,1,0,0
+apn|055-1876-021-01,2538 DURANT Ave,055-1876-021-01,83,cpra_UnitsAdded,ZP2016-0172;DRCP2016-0020;DRCF2019-0005;PLN2022-0065,Closed,2022-07-11,B2023-02332;B2024-06011,Issued,2024-12-20,2024-09-24,,2026-07-08,139,address+apn+permit,83,Completed,2024-10-01,,0,1,,0,6,0,1
+addr|1708|harmon,1708 HARMON St,,82,description,PLN2021-0037;PLN2022-0099;PLN2022-0101,Closed,2022-10-27,,,,,,2026-09-21,145,address,80,Permitted,,,0,0,,1,3,0,0
+apn|055-1822-009-00,2035 BLAKE St,055-1822-009-00,82,cpra_UnitsAdded,,,,B2016-00895,Finaled,2016-03-01,2017-08-10,2022-04-20,2026-07-08,899,address+permit,82,Completed,,2022-04-20,0,0,,0,1,0,0
+apn|057-2025-013-00,2000 UNIVERSITY Ave,057-2025-013-00,81,cpra_UnitsAdded,DRCP2020-0008;ZP2020-0102;PLN2020-0045;DRCP2020-0011;ZP2020-0134;DRCF2022-0001,Approved,2022-04-04,B2022-01111,Finaled,2022-03-14,2022-12-22,2024-04-09,2026-07-08,137,address+apn,82,Completed,,2024-01-01,0,1,,0,7,0,0
+apn|053-1589-018-01,2955 SHATTUCK Ave,053-1589-018-01,80,description,PLN2023-0085;DRCP2024-0009;ZP2024-0071,Application Complete,2024-06-11,,,,,,2026-09-21,22,address+apn+permit,74,In Review,,,0,0,,1,3,0,0
+apn|055-1871-001-03,2680 Bancroft,055-1871-001-03,79,description,PLN2023-0033;ZP2023-0096;ZP2024-0029,Approved,2024-03-04,,,,,,2026-07-08,34,address+apn+permit,79,Entitled,,,0,1,,0,3,0,0
+addr|2427|san pablo,2427 SAN PABLO Ave,,78,description,PLN2022-0014;ZP2022-0115,Approved,2022-09-02,,,,,,2026-09-21,126,address+permit,78,Completed,,,0,0,,0,2,0,0
+apn|055-1819-001-02,2628 SHATTUCK Ave,055-1819-001-02,78,cpra_UnitsAdded,ZP2018-0050,Approved,2018-03-06,B2019-01950,Finaled,2019-05-09,2020-05-05,2021-07-16,2026-07-08,897,address+apn+permit,78,Completed,,2021-07-16,0,1,,0,2,0,0
+addr|2660|bancroft,2660 BANCROFT,,78,description,PLN2023-0034,Closed,2023-04-14,,,,,,2026-07-08,21,address,78,In Review,,,0,0,,0,1,0,0
+apn|053-1633-001-01,3000 SAN PABLO Ave,053-1633-001-01,78,cpra_UnitsAdded,ZP2019-0155;DRCF2021-0002,Approved,2021-03-02,B2020-04316,Finaled,2020-12-09,2021-09-30,2023-06-05,2026-07-08,168,address+apn+permit,78,Completed,,2023-06-05,0,1,,0,3,0,0
+apn|055-1837-001-00,2556 Telegraph,055-1837-001-00,76,description,ZP2015-0096,Approved,2015-04-21,,,,,,2026-07-08,,,,,,,1,1,"898(10u,block);890(70u,street);157(52u,street)",0,1,0,0
+apn|055-1821-001-01,2550 SHATTUCK Ave,055-1821-001-01,75,description,PLN2023-0026;DRCP2023-0015;ZP2023-0138,Approved,2023-09-25,,,,,,2026-07-08,156,address+apn,72,Entitled,,,0,1,,1,3,0,0
+apn|055-1894-002-00,2037 DURANT Ave,055-1894-002-00,74,description,PLN2021-0024;DRCP2023-0006;ZP2023-0064,Approved,2023-05-11,,,,,,2026-07-08,123,address+apn+permit,74,Entitled,,,0,1,,0,3,0,0
+apn|058-2176-001-01,1752 SHATTUCK Ave,058-2176-001-01,72,cpra_UnitsAdded,PLN2021-0055;DRCP2022-0001;ZP2022-0011;DRCF2023-0001,Approved,2023-06-27,B2023-00774,Issued,2023-02-22,2024-06-13,,2026-07-08,152;164,address+apn+permit,207,Completed,2024-01-01,,0,1,,1,5,0,0
+apn|057-2024-013-00,2099 M L KING JR Way,057-2024-013-00,72,cpra_UnitsAdded,ZP2019-0081,Approved,2019-05-02,B2021-03950,Finaled,2021-09-02,2023-07-17,2024-05-17,2026-07-08,96,address+apn+permit,72,Completed,2023-07-17,2024-05-17,0,1,,0,2,0,0
+addr|2631|durant,2631 DURANT Ave,,71,description,DRCF2016-0006;ZP2021-0011,Withdrawn,2021-01-21,,,,,,2026-09-21,894,address,56,Completed,,2020-08-12,0,0,,1,2,0,0
+apn|055-1884-018-00,2334 DURANT,055-1884-018-00,70,description,PLN2024-0023,Pending,2024-03-25,,,,,,2026-09-21,23;24,address~10,70,In Review,,,0,0,,0,1,0,0
+apn|055-1839-020-00,2539 TELEGRAPH Ave,055-1839-020-00,70,cpra_UnitsAdded,,,,B2016-03471,Finaled,2016-07-22,2017-07-12,2019-09-30,2026-07-08,890,address+apn+permit,70,Completed,,2019-09-30,0,0,,0,1,0,0
+apn|055-1886-001-00,2300 ELLSWORTH St,055-1886-001-00,69,cpra_UnitsAdded,PLN2022-0084,Closed,2022-09-26,B2024-05944,Issued,2024-12-17,2025-09-04,,2026-09-21,147,address+apn+permit,69,Under Construction,2025-09-04,,0,0,,0,2,0,0
+apn|055-1886-002-00,2310 ELLSWORTH,055-1886-002-00,69,description,ZP2023-0024,Approved,2023-02-17,,,,,,2026-07-08,147;704,address~10,69,Under Construction,2025-09-04,,0,1,,0,1,0,0
+apn|057-2046-010-00,2111 UNIVERSITY AVE,057-2046-010-00,68,cpra_UnitsAdded,,,,B2015-03005,Finaled,2015-06-23,2018-06-27,2022-03-04,2026-07-08,902,address+permit,68,Completed,,2022-03-04,0,0,,0,1,0,0
+apn|055-1890-007-00,2159 DWIGHT,055-1890-007-00,68,description,PLN2022-0109;DRCP2023-0004;ZP2023-0057,Approved,2023-04-26,,,,,,2026-07-08,,,,,,,1,1,"144(58u,block);914(100u,block);66(2u,street)",0,3,0,0
+apn|055-1884-017-00,2330 DURANT Ave,055-1884-017-00,68,description,PLN2025-0053;PLN2025-0038;PLN2025-0100,Pending,2025-11-14,,,,,,2026-09-21,24,address+apn,68,In Review,,,0,0,,0,3,0,0
+apn|055-1875-029-00,2455 TELEGRAPH AVE,055-1875-029-00,68,description,PLN2025-0066;ZP2026-0015,Pending Final Action,2026-02-10,,,,,,2026-09-21,25,address+apn+permit,68,In Review,,,0,0,,0,2,0,0
+addr|1201|san pablo,1201 SAN PABLO Ave,,66,description,ZP2018-0136;PLN2021-0012;DRCP2021-0007;ZP2021-0070,Approved,2021-05-06,,,,,,2026-09-21,,,,,,,1,0,,0,4,0,0
+apn|057-2023-025-00,2072 ADDISON St,057-2023-025-00,66,cpra_UnitsAdded,,,,B2018-04293,Finaled,2018-10-26,2020-01-29,2023-07-18,2026-07-08,182,address+apn+permit,66,Completed,,2023-07-18,0,0,,0,1,0,0
+apn|057-2029-015-00,2138 KITTREDGE St,057-2029-015-00,66,description,PLN2024-0011;ZP2024-0114;DRCP2024-0015;DRCF2026-0002,Approved,2026-04-02,B2025-00984,Issued,2025-03-11,,,2026-07-08,113,address+apn,73,Permitted,,,0,1,,1,5,0,0
+apn|055-1878-020-00,2462 BANCROFT,055-1878-020-00,66,description,PLN2022-0104;DRCP2023-0013;ZP2023-0107;PLN2023-0080,Closed,2023-11-16,,,,,,2026-07-08,116,address+apn+permit,66,Entitled,,,0,1,,0,4,0,0
+apn|057-2046-006-00,1900 WALNUT ST,057-2046-006-00,65,cpra_UnitsAdded,,,,B2015-03000,Finaled,2015-06-23,2018-06-27,2022-10-25,2026-07-08,,,,,,,1,0,"178(205u,block);916(44u,block);900(35u,block)",0,1,0,0
+apn|056-1983-038-01,2201 SAN PABLO,056-1983-038-01,65,description,PLN2022-0112;PLN2026-0141,Under Review,2026-06-03,,,,,,2026-07-08,149,address~10,100,Entitled,,,0,1,,1,2,0,0
+apn|052-1554-004-00,3120 Shattuck,052-1554-004-00,65,description,PLN2026-0184,Pending,2026-09-17,,,,,,2026-09-21,,,,,,,1,0,"188(1u,block)",0,1,0,0
+apn|055-1887-003-00,2372 ELLSWORTH St,055-1887-003-00,63,description,PLN2024-0054;ZP2024-0169,Approved,2024-11-19,B2025-05654,Approved w/Conditions,2025-12-08,,,2026-07-08,28,address+apn,63,Entitled,,,0,1,,0,3,0,0
+apn|054-1781-015-01,2527 SAN PABLO Ave,054-1781-015-01,63,cpra_UnitsAdded,PLN2015-0054;ZP2016-0207,Approved,2016-10-21,B2018-03255,Finaled,2018-08-17,2023-07-21,2024-04-30,2026-07-08,228,apn+permit,63,Completed,,2024-04-30,0,0,,0,3,0,0
+apn|054-1714-005-01,2712 TELEGRAPH Ave,054-1714-005-01,60,description,PLN2022-0061;DRCP2022-0021;ZP2022-0179;PLN2023-0018;ZP2025-0105;ZP2026-0076,Under Review,2026-08-11,B2025-05635,Under Review,2025-12-08,,,2026-07-08,31,address+apn+permit,57,In Review,,,0,1,,1,7,0,0
+apn|057-2023-013-00,2001 CENTER STREET,057-2023-013-00,58,description,PLN2025-0039;ZP2025-0107,Corrections Pending Applicant,2025-11-26,,,,,,2026-09-21,30,address+apn+permit,58,In Review,,,0,0,,0,2,0,0
+addr|2127|dwight,2127 DWIGHT Way,,58,description,DRCF2024-0002,Approved,2024-03-28,,,,,,2026-09-21,144,address,58,Withdrawn,,,0,0,,0,1,0,0
+apn|056-1961-017-00,800 UNIVERSITY,056-1961-017-00,58,description,ZP2015-0125,Closed,2015-05-28,,,,,,2026-07-08,,,,,,,1,0,,0,1,0,0
+apn|054-1719-001-00,2701 SHATTUCK Ave,054-1719-001-00,57,cpra_UnitsAdded,,,,B2020-01991,Finaled,2020-06-30,2022-06-22,2024-07-18,2026-07-08,219,address+apn+permit,57,Completed,,2024-07-18,0,0,,0,1,0,0
+apn|053-1598-006-00,2902 ADELINE St,053-1598-006-00,57,cpra_UnitsAdded,DRCP2015-0019;DRCF2021-0005,Approved,2021-07-01,B2021-04232,Issued,2021-09-20,2025-02-27,,2026-07-08,143,address+apn+permit,54,Withdrawn,2024-01-01,,0,1,,1,3,0,0
+addr|2198|san pablo,2198 SAN PABLO Ave,,56,description,ZP2018-0112,Approved,2018-05-31,,,,,,2026-09-21,149,address,100,Entitled,,,0,0,,1,1,0,0
+addr|2276|shattuck,2276 SHATTUCK Ave,,56,description,PLN2023-0093;ZP2024-0067,Pending Final Action,2024-06-05,,,,,,2026-09-21,2,address+permit,336,Entitled,,,0,0,,1,2,0,0
+apn|058-2127-014-03,1740 SAN PABLO Ave,058-2127-014-03,54,cpra_UnitsAdded,PLN2020-0049;PLN2023-0065,Under Review,2023-08-25,B2022-05881,Issued,2022-12-16,2025-12-18,,2026-09-21,32,address+apn+permit,54,Permitted,2025-12-18,,0,0,,0,3,0,0
+apn|055-1839-019-01,2587 TELEGRAPH AVE,055-1839-019-01,52,description,ZP2023-0068;DRCP2023-0009;DRCF2024-0005;ZP2024-0170,Approved,2024-11-26,,,,,,2026-07-08,157,address+apn,52,Withdrawn,2024-01-01,,0,1,,0,4,0,0
+apn|055-1881-004-00,2449 DWIGHT Way,055-1881-004-00,51,description,DRCP2022-0003;ZP2022-0021;DRCF2026-0001,Approved,2026-04-02,B2025-03595,Corrections List Issued,2025-08-25,,,2026-07-08,38,address+apn,39,Under Construction,,,0,1,,1,4,0,1
+addr|130|berkeley sq,130 BERKELEY Sq,,50,description,ZP2021-0110;PLN2021-0032;ZP2021-0158;DRCP2021-0019,In Review,2021-11-05,,,,,,2026-09-21,33,address+permit,50,In Review,,,0,0,,0,4,0,0
+apn|053-1598-005-01,1946 Russell,053-1598-005-01,50,description,ZP2015-0177,Approved,2015-08-17,,,,,,2026-07-08,,,,,,,1,1,"779(2u,block);143(54u,block)",0,1,0,0
+apn|053-1592-020-00,2016 ASHBY Ave,053-1592-020-00,50,cpra_UnitsAdded,,,,B2024-01268,Issued,2024-03-20,2026-03-26,,2026-09-21,141,address+apn+permit,50,Withdrawn,2024-06-01,,0,0,,0,1,0,0
+apn|057-2053-005-00,2067 UNIVERSITY Ave,057-2053-005-00,50,cpra_UnitsAdded,,,,B2017-02610,Finaled,2017-06-15,2018-10-10,2023-08-10,2026-07-08,466,address+apn+permit,50,Completed,,2023-08-10,0,0,,0,1,0,0
+addr|2121|durant,2121 DURANT Ave,,50,description,DRCP2015-0001;ZP2015-0014;DRCF2017-0007,Approved,2017-07-20,,,,,,2026-09-21,,,,,,,1,0,,0,3,0,0
+apn|055-1893-018-00,2124 BANCROFT Way,055-1893-018-00,50,cpra_UnitsAdded,,,,B2016-04483,Finaled,2016-09-22,2017-11-06,2019-11-15,2026-07-08,892,address+apn+permit,50,Completed,,2019-11-15,0,0,,0,1,0,0
+apn|057-2034-008-00,2023 Shattuck,057-2034-008-00,48,description,DRCF2021-0003;DRCP2019-0002;ZP2019-0041,Approved,2019-03-05,,,,,,2026-07-08,380,address+apn,48,Completed,,2023-08-16,0,1,,0,3,0,0
+apn|053-1629-019-01,2959 San Pablo,053-1629-019-01,48,description,PLN2022-0066,Withdrawn,2022-07-15,,,,,,2026-07-08,,,,,,,1,0,"168(78u,street)",0,1,0,0
+apn|057-2025-023-00,2009 ADDISON St,057-2025-023-00,45,cpra_UnitsAdded,,,,B2019-02956,Finaled,2019-07-18,2021-06-24,2023-04-04,2026-07-08,91,address+apn+permit,45,Completed,,2023-04-04,0,0,,0,1,0,0
+apn|055-1887-001-00,2298 DURANT,055-1887-001-00,45,description,PLN2026-0074,Under Review,2026-03-06,,,,,,2026-09-21,26,address+apn,65,In Review,,,0,0,,1,1,0,0
+apn|055-1835-009-01,2650 TELEGRAPH Ave,055-1835-009-01,45,cpra_UnitsAdded,DRCP2019-0004;ZP2019-0070;DRCF2021-0007,Approved,2021-08-31,B2021-02225,Finaled,2021-05-28,2023-08-02,2025-06-16,2026-07-08,172,address+apn+permit,45,Completed,2023-08-02,2025-06-16,0,0,,0,4,0,0
+apn|055-1868-005-00,2727 HASTE STREET,055-1868-005-00,45,description,PLN2025-0055;ZP2026-0007,In Review,2026-01-15,,,,,,2026-07-08,114,address+apn+permit,45,In Review,,,0,1,,0,2,0,0
+apn|056-1996-026-01,1486 University,056-1996-026-01,44,description,ZP2016-0216;DRCP2016-0015,Withdrawn,2016-10-28,,,,,,2026-07-08,,,,,,,1,0,,0,2,0,0
+apn|057-2016-021-01,1808 UNIVERSITY AVE,057-2016-021-01,44,cpra_UnitsAdded,,,,B2014-05786,Finaled,2014-12-29,2016-01-21,2021-08-31,,307,apn,2,Completed,,2025-09-02,0,0,,1,1,0,0
+addr|1820|san pablo,1820 SAN PABLO Ave,,44,description,PLN2020-0030;PLN2021-0013,Pending,2021-03-18,,,,,,2026-09-21,,,,,,,1,0,,0,2,0,0
+apn|055-1876-017-00,2526 DURANT AVE,055-1876-017-00,44,cpra_UnitsAdded,,,,B2014-02844,Finaled,2014-06-25,2016-02-16,2019-06-14,,893,address+apn+permit,44,Completed,,2019-06-14,0,0,,0,1,0,0
+apn|053-1595-009-03,3031 adeline,053-1595-009-03,42,description,DRCP2017-0009,Approved,2017-05-24,,,,,,2026-07-08,166,address+apn,64,In Review,,,0,1,,1,1,0,0
+apn|056-1928-019-00,,056-1928-019-00,40,cpra_UnitsAdded,,,,B2021-02423,Finaled,2021-06-11,2022-08-12,2025-03-20,2026-07-08,,,,,,,1,0,"167(40u,block,=units);126(78u,block);159(36u,block)",0,1,1,0
+addr|1110|university,1110 UNIVERSITY Ave,,40,description,DRCP2017-0004;ZP2017-0035,Approved,2017-03-03,,,,,,2026-09-21,,,,,,,1,0,,0,2,0,0
+apn|052-1519-027-00,1499 ALCATRAZ Ave,052-1519-027-00,40,description,,,,B2026-03320,Under Review,2026-08-06,,,2026-09-21,,,,,,,1,0,"774(1u,block);762(1u,street)",0,1,0,0
+apn|058-2176-027-00,2032 FRANCISCO STREET,058-2176-027-00,40,description,PLN2026-0155,Under Review,2026-07-07,,,,,,2026-09-21,577,address~10,1,Completed,,2019-07-30,0,0,,1,1,0,0
+apn|055-1896-005-00,2440 SHATTUCK Ave,055-1896-005-00,40,cpra_UnitsAdded,DRCP2021-0020;ZP2021-0201;DRCF2022-0003,Approved,2022-07-12,B2022-05117,Finaled,2022-11-01,2023-08-03,2025-03-05,2026-07-08,176,address+apn+permit,40,Completed,2022-10-14,2025-03-05,0,0,,0,4,0,0
+apn|055-1875-008-00,2510 CHANNING Way,055-1875-008-00,40,cpra_UnitsAdded,ZP2017-0003;DRCP2017-0002;ZP2018-0061,Approved,2018-03-19,B2018-01337,Closed Expired,2018-04-05,2020-01-27,,2026-07-08,,,,,,,1,1,"177(1113u,block);25(68u,block);171(1500u,block)",0,4,0,1
+apn|057-2073-005-00,1367 UNIVERSITY Ave,057-2073-005-00,39,cpra_UnitsAdded,PLN2019-0021;DRCP2019-0014;ZP2019-0173;DRCF2021-0010,Approved,2021-11-29,B2022-04366,Finaled,2022-09-20,2023-10-16,2025-05-06,2026-07-08,158,address+apn+permit,39,Completed,2023-03-13,2025-05-06,0,1,,0,5,0,1
+apn|055-1883-026-00,2320 CHANNING,055-1883-026-00,39,description,PLN2023-0061,Closed,2023-08-24,,,,,,2026-07-08,117;183,address~10,22,Entitled,2022-11-01,,0,0,,1,1,0,0
+apn|055-1881-018-00,2442 HASTE St,055-1881-018-00,38,cpra_UnitsAdded,PLN2024-0009;DRCP2024-0008;ZP2024-0070;DRCF2025-0003,Approved,2025-12-19,B2025-03529;B2026-03747,Issued,2026-09-01,2026-05-20,,2026-07-08,124,address+apn+permit,34,Under Construction,,,0,1,,1,6,0,0
+addr|1601|oxford,1601 OXFORD St,,37,description,ZP2018-0035,Approved,2018-02-16,,,,,,2026-09-21,904,address,37,Completed,,2022-03-09,0,0,,0,1,0,0
+addr|2028|bancroft,2028 BANCROFT Way,,37,description,DRCP2017-0012;ZP2017-0103;DRCF2020-0002,Approved,2020-03-05,,,,,,2026-09-21,403,address,37,Completed,,2023-07-28,0,0,,0,3,0,0
+apn|055-1880-007-00,2435 Haste,055-1880-007-00,37,description,PLN2020-0052;PLN2021-0051;ZP2021-0210,Approved,2021-11-30,,,,,,2026-09-21,124,address~10,34,Under Construction,,,0,0,,1,3,0,0
+apn|056-2004-001-00,1698 UNIVERSITY AVE,056-2004-001-00,36,cpra_UnitsAdded,DRCF2015-0003,Approved,2015-03-11,B2014-05752,Finaled,2014-12-19,2017-06-20,2025-05-22,2026-07-07,175,address+apn,36,Completed,2017-06-20,2025-05-22,0,1,,0,2,0,0
+apn|056-1928-001-00,2403 SAN PABLO Ave,056-1928-001-00,36,cpra_UnitsAdded,DRCF2024-0003,Approved,2024-04-08,B2024-00143,Issued,2024-01-10,2025-06-03,,2026-09-21,159,address+apn+permit,36,Under Construction,2024-01-01,,0,0,,0,2,0,0
+apn|055-1848-064-00,2601 COLLEGE Ave,055-1848-064-00,36,description,,,,B2026-03665,Corrections List Issued,2026-08-26,,,2026-09-21,,,,,,,1,0,"321(2u,block);53(3u,block);348(2u,street)",0,1,0,0
+addr|2614|telegraph,2614 TELEGRAPH Ave,,32,description,ZP2024-0027;DRCP2024-0002,Approved,2024-03-06,,,,,,2026-09-21,37,address+permit,31,Entitled,,,0,0,,0,2,0,0
+apn|055-1878-022-00,2480 BANCROFT Way,055-1878-022-00,28,cpra_UnitsAdded,PLN2022-0091;DRCP2022-0017;ZP2022-0148;DRCF2023-0005,Approved,2023-09-08,B2022-05880,Finaled,2022-12-16,2023-12-13,2025-07-10,2026-07-08,134,address+apn+permit,28,Completed,,2025-07-10,0,1,,0,5,0,0
+apn|054-1784-017-00,2577 SAN PABLO Ave,054-1784-017-00,28,description,,,,B2026-03411,Under Review,2026-08-12,,,2026-09-21,,,,,,,1,0,"603(1u,block);7(223u,street)",0,1,0,0
+addr|1650|alcatraz,1650 ALCATRAZ Ave,,27,description,PLN2020-0001,Closed,2020-01-03,,,,,,2026-09-21,,,,,,,1,0,,0,1,0,0
+apn|056-2004-020-00,1652 UNIVERSITY Ave,056-2004-020-00,26,description,DRCP2020-0003;ZP2020-0041;PLN2022-0047;DRCP2022-0010;ZP2022-0110,Approved,2022-08-18,,,,,,2026-07-08,,,,,,,1,1,"175(36u,block);152(207u,street);40(16u,street)",0,5,0,0
+apn|058-2181-027-00,1773 OXFORD St,058-2181-027-00,24,cpra_UnitsAdded,ZP2022-0062,Approved,2022-05-10,B2023-02354,Finaled,2023-05-08,2023-11-13,2025-05-21,2026-07-08,174,address+apn+permit,24,Completed,2023-11-13,2025-05-21,0,1,,0,2,0,0
+apn|052-1557-001-00,2330 PRINCE ST,052-1557-001-00,23,description,ZP2026-0040,In Review,2026-03-20,,,,,,2026-09-21,,,,,,,1,0,,0,1,0,0
+apn|055-1865-014-01,2437 WARRING STREET,055-1865-014-01,23,description,PLN2026-0115,Under Review,2026-04-30,,,,,,2026-09-21,52,address+apn,4,In Review,,,0,0,,1,1,0,0
+addr|2236|channing,2236 CHANNING Way,,22,description,ZP2017-0015,Approved,2017-02-03,,,,,,2026-09-21,,,,,,,1,0,,0,1,0,0
+apn|055-1878-004-00,2439 DURANT Ave,055-1878-004-00,22,description,DRCP2021-0018;ZP2021-0192;PLN2021-0066,Pending,2021-12-08,,,,,,2026-09-21,,,,,,,1,0,"116(66u,block);5(117u,block);134(28u,block)",0,3,0,0
+addr|2417|carleton,2417 CARLETON St,,19,description,PLN2023-0084,Closed,2023-12-01,,,,,,2026-09-21,,,,,,,1,0,,0,1,0,0
+apn|057-2086-013-00,1173 Hearst,057-2086-013-00,18,description,ZP2016-0028,Approved,2016-02-02,,,,,,2026-07-08,379,address+apn,2,Completed,,2023-03-15,0,1,,1,1,0,0
+apn|055-1892-004-00,2344 FULTON STREET,055-1892-004-00,18,description,PLN2025-0019,Closed,2025-05-01,,,,,,2026-07-08,160,address+apn,18,In Review,,,0,0,,0,1,0,0
+apn|053-1689-001-00,2800 TELEGRAPH Ave,053-1689-001-00,18,description,PLN2022-0060;DRCP2022-0009;ZP2022-0107;PLN2023-0008;DRCF2026-0003,Application Complete,2026-05-07,B2025-05618,Issued,2025-12-05,,,2026-07-08,146,address+apn,18,Under Construction,,,0,1,,0,6,0,0
+addr|1790|university,1790 UNIVERSITY Ave,,17,description,PLN2022-0075;DRCP2023-0007;ZP2023-0070,Application Complete,2023-05-20,,,,,,2026-09-21,39,address+permit,17,In Review,,,0,0,,0,3,0,0
+apn|055-1884-006-00,2317 CHANNING Way,055-1884-006-00,17,cpra_UnitsAdded,ZP2019-0217;PLN2020-0032;ZP2020-0090;PLN2024-0018;ZP2024-0033,Under Review,2024-03-13,B2022-04242,Issued,2022-09-12,2025-09-08,,2026-07-08,117,address+apn+permit,22,Entitled,2022-11-01,,0,1,,1,6,0,0
+addr|2425|prospect,2425 PROSPECT St,,17,description,ZP2018-0144,Withdrawn,2018-07-06,,,,,,2026-09-21,192,address,1,Completed,,2024-07-10,0,0,,1,1,0,0
+addr|3031|telegraph 100,3031 TELEGRAPH Ave 100,,17,description,ZP2022-0126,Approved,2022-09-23,,,,,,2026-09-21,,,,,,,1,0,,0,1,0,0
+apn|057-2061-010-00,1717 UNIVERSITY Ave,057-2061-010-00,15,cpra_UnitsAdded,DRCP2016-0007;ZP2016-0101;DRCP2018-0011,Approved,2018-12-05,B2020-00206,Finaled,2020-01-17,2020-10-28,2023-04-04,2026-07-08,428,address+apn+permit,15,Completed,,2023-04-04,0,1,,0,4,0,0
+apn|055-1870-003-00,2737 Durant Avenue,055-1870-003-00,15,description,PLN2016-0007;ZP2020-0016,Approved,2020-02-05,,,,,,2026-07-08,299,address+apn,4,Completed,,2025-07-07,0,1,,1,2,0,0
+apn|056-1945-006-00,2340 FIFTH St,056-1945-006-00,14,cpra_UnitsAdded,,,,B2018-02291,Finaled,2018-06-12,2019-05-30,2022-05-13,2026-07-08,465;905,address+apn+permit,4,Completed,,2023-03-28,0,0,,1,1,0,0
+apn|055-1883-027-00,2328 CHANNING Way,055-1883-027-00,13,cpra_UnitsAdded,ZP2020-0052,Approved,2020-06-05,B2022-05957,Issued,2022-12-21,2024-09-05,,2026-09-21,183,address+apn+permit,,Permitted,2024-09-05,,0,0,,0,2,0,0
+apn|056-2011-022-00,1740 UNIVERSITY Ave,056-2011-022-00,12,description,ZP2025-0079,Approved,2025-08-19,B2026-03396,Under Review,2026-08-11,,,2026-07-08,42,address+apn+permit,12,Entitled,,,0,1,,0,2,0,0
+addr|2018|blake,2018 BLAKE St,,12,description,ZP2021-0095,Approved,2021-06-02,,,,,,2026-09-21,148,address,12,Permitted,,,0,0,,0,1,0,0
+apn|055-1832-007-02,2336 BLAKE St,055-1832-007-02,12,description,,,,B2026-03426,Corrections List Issued,2026-08-12,,,2026-09-21,184,address~10,,Permitted,2025-07-30,,0,0,,0,1,0,0
+apn|055-1847-020-00,2555 COLLEGE Ave,055-1847-020-00,12,cpra_UnitsAdded,PLN2021-0067;ZP2022-0019,Approved,2022-02-04,B2023-02975,Finaled,2023-06-09,2024-04-26,2025-07-25,2026-07-08,161,address+apn+permit,12,Completed,2024-04-26,2025-07-25,0,0,,0,3,0,0
+addr|2709|channing,2709 CHANNING Way,,12,description,PLN2026-0118,Under Review,2026-04-07,,,,,,2026-09-21,,,,,,,1,0,,0,1,0,0
+addr|1650|shattuck,1650 SHATTUCK Ave,,11,description,PLN2019-0020,Closed,2019-04-26,,,,,,2026-09-21,,,,,,,1,0,,0,1,0,0
+apn|055-1896-021-00,2012 CHANNING Way,055-1896-021-00,11,cpra_UnitsAdded,,,,B2025-03731,Finaled,2025-09-02,2025-09-03,2025-12-04,2026-07-08,,,,,,,1,0,"176(40u,block);13(132u,block)",0,1,0,0
+apn|056-1926-028-00,1130 BANCROFT Way,056-1926-028-00,10,description,,,,B2026-01302,Approved w/Conditions,2026-03-31,,,2026-09-21,,,,,,,1,0,"748(1u,block);334(1u,block)",0,1,0,0
+addr|1850|arch,1850 ARCH St,,10,description,ZP2019-0212,Approved,2019-12-20,,,,,,2026-09-21,,,,,,,1,0,,0,1,0,0
+apn|058-2182-019-01,1862 ARCH St,058-2182-019-01,10,description,ZP2019-0213,Approved,2019-12-20,B2026-01187,Issued,2026-03-23,,,2026-09-21,,,,,,,1,0,,0,2,0,0
+apn|055-1831-029-00,2336 DWIGHT,055-1831-029-00,10,description,PLN2026-0035;ZP2026-0091,Under Review,2026-09-15,,,,,,2026-07-08,,,,,,,1,1,,0,2,0,0
+apn|055-1837-003-00,2597 TELEGRAPH Ave,055-1837-003-00,10,cpra_UnitsAdded,DRCP2015-0002;ZP2015-0018,Withdrawn,2015-01-27,B2017-01850,Finaled,2017-05-03,2018-08-09,2021-11-10,2026-07-08,898,address+apn+permit,10,Completed,,2021-11-10,0,1,,0,3,0,0
+addr|2747|san pablo,2747 SAN PABLO Ave,,10,description,PLN2015-0016;ZP2015-0115,Withdrawn,2015-05-15,,,,,,2026-09-21,,,,,,,1,0,"36(152u,street);16(113u,street)",0,2,0,0
+apn|056-1958-003-01,2200 FIFTH ST,056-1958-003-01,8,description,PLN2026-0083,Closed,2026-03-19,,,,,,2026-07-08,45,address+apn,8,Withdrawn,,,0,0,,0,1,0,0
+apn|058-2181-017-00,2235 HEARST Ave,058-2181-017-00,8,cpra_UnitsAdded,,,,B2024-04593,Finaled,2024-09-23,2024-09-27,2024-11-25,2026-07-08,437,address~10,1,Completed,,,0,0,,1,1,0,0
+apn|052-1545-031-00,1632 Prince,052-1545-031-00,7,description,ZP2019-0084,Withdrawn,2019-05-07,,,,,,2026-07-08,714,address+apn,1,Completed,,2021-11-09,0,0,,1,1,0,0
+addr|2215|cedar,2215 CEDAR St,,7,description,ZP2017-0133,Approved,2017-08-08,,,,,,2026-09-21,,,,,,,1,0,,0,1,0,0
+apn|059-2275-016-00,1745 CEDAR St,059-2275-016-00,6,description,PLN2025-0047;PLN2025-0040,Closed,2025-06-27,,,,,,2026-07-08,46,address+apn,6,In Review,,,0,0,,0,2,0,0
+addr|1850|berryman,1850 BERRYMAN St,,6,description,ZP2023-0063;PLN2025-0050;PLN2025-0052,Under Review,2025-08-01,B2025-05624,Corrections List Issued,2025-12-08,,,2026-09-21,47,address+permit,6,In Review,,,0,0,,0,4,0,0
+apn|057-2023-017-01,2002 ADDISON St,057-2023-017-01,6,cpra_UnitsAdded,ZP2015-0135,Approved,2015-06-10,B2016-03148,Finaled,2016-07-01,2018-02-01,2018-08-28,2026-07-08,889,address+apn+permit,6,Completed,,2018-08-28,0,1,,0,2,0,0
+apn|052-1583-004-00,2212 ASHBY Ave,052-1583-004-00,6,description,,,,B2024-01675,Finaled,2024-04-08,,,2026-09-21,,,,,,,1,0,,0,1,0,0
+apn|055-1832-026-01,2330 BLAKE St,055-1832-026-01,6,cpra_UnitsAdded,,,,B2025-00168,Issued,2025-01-14,2025-07-30,,2026-09-21,184,address+apn+permit,,Permitted,2025-07-30,,0,0,,0,1,0,0
+addr|2371|san pablo,2371 SAN PABLO Ave,,6,description,ZP2019-0089,Closed,2019-05-15,,,,,,2026-09-21,,,,,,,1,0,"159(36u,street);126(78u,street)",0,1,0,0
+apn|055-1845-019-00,2649 BENVENUE Ave,055-1845-019-00,6,description,,,,B2025-02762,Issued,2025-07-03,,,2026-09-21,,,,,,,1,0,"348(2u,block);84(0u,street)",0,1,0,0
+apn|055-1867-017-00,2716 HASTE St,055-1867-017-00,6,description,,,,B2024-01060,Closed Expired,2024-03-08,,,2026-09-21,,,,,,,1,0,"335(1u,block);114(45u,street)",0,1,0,0
+apn|057-2065-024-00,1720 Delaware Street,057-2065-024-00,5,description,ZP2018-0014,Approved,2018-01-19,,,,,,2026-07-08,,,,,,,1,1,,0,1,0,0
+apn|057-2089-009-05,1922 TENTH,057-2089-009-05,5,description,PLN2026-0147,Under Review,2026-06-24,,,,,,2026-09-21,,,,,,,1,0,"398(1u,block)",0,1,0,0
+apn|055-1898-029-00,1940 Haste,055-1898-029-00,5,description,ZP2015-0168,Withdrawn,2015-07-08,,,,,,2026-07-08,726,address~10,1,Completed,,2021-10-22,0,0,,1,1,0,0
+apn|056-2007-032-00,2217 CALIFORNIA St,056-2007-032-00,5,description,,,,B2026-01944,Finaled,2026-05-11,,,2026-09-21,,,,,,,1,0,,0,1,0,0
+apn|052-1572-006-00,2918 FLORENCE St,052-1572-006-00,5,cpra_UnitsAdded,,,,B2025-00752,Corrections List Issued,2025-02-25,,,2026-09-21,,,,,,,1,0,,0,1,0,0
+apn|052-1562-010-00,3020 College Avenue,052-1562-010-00,5,description,ZP2019-0093,Approved,2019-05-21,,,,,,2026-07-08,480,address~10,1,Completed,,2018-06-14,0,1,,1,1,0,0
+apn|056-1979-023-01,1122 UNIVERSITY Ave,056-1979-023-01,4,description,,,,B2026-03975,Under Review,2026-09-15,,,2026-09-21,,,,,,,1,0,,0,1,0,0
+addr|1711|m l king jr,1711 M L KING JR Way,,4,description,ZP2017-0179,Approved,2017-11-17,,,,,,2026-09-21,624,address,1,Completed,,2019-05-30,0,0,,1,1,0,0
+apn|053-1601-016-00,1841 PRINCE St,053-1601-016-00,4,cpra_UnitsAdded,,,,B2022-06004,Finaled,2022-12-22,2022-12-23,2023-12-13,2026-07-08,,,,,,,1,0,"441(1u,block)",0,1,0,0
+apn|055-1905-030-00,2319 ROOSEVELT Ave,055-1905-030-00,4,description,,,,B2018-01151,Issued,2018-03-24,,,2026-09-21,,,,,,,1,0,"74(1u,block)",0,1,0,0
+apn|052-1573-078-02,2420 Ashby,052-1573-078-02,4,description,ZP2024-0147,In Review,2024-10-08,,,,,,2026-09-21,50,address+apn+permit,4,In Review,,,0,0,,0,1,0,0
+addr|2701|prince,2701 PRINCE St,,4,description,ZP2016-0072,Approved,2016-04-13,,,,,,2026-09-21,,,,,,,1,0,"508(1u,street);509(1u,street)",0,1,0,0
+apn|054-1709-028-00,2705 BENVENUE,054-1709-028-00,4,description,ZP2025-0086,Approved,2025-09-05,,,,,,2026-07-08,84,address+apn,0,Completed,,,0,1,,1,1,0,0
+addr|2714|alcatraz,2714 ALCATRAZ Ave,,4,description,ZP2018-0034,Approved,2018-02-16,,,,,,2026-09-21,439,address~10,1,Completed,,2023-03-28,0,0,,1,1,0,0
+addr|2727|san pablo,2727 SAN PABLO Ave,,4,description,ZP2022-0033,Closed,2022-03-01,,,,,,2026-09-21,16;36,address~10,113,In Review,,,0,0,,1,1,0,0
+addr|2795|san pablo,2795 SAN PABLO Ave,,4,description,PLN2018-0029;ZP2019-0048,Approved,2019-03-15,,,,,,2026-09-21,,,,,,,1,0,"127(1u,street)",0,2,0,0
+apn|053-1658-005-03,2812 EIGHTH STREET,053-1658-005-03,4,description,PLN2025-0058,Under Review,2025-09-11,,,,,,2026-09-21,61,address+apn,3,In Review,,,0,0,,0,1,0,0
+addr|2817|8th,2817 EIGHTH St,,4,description,ZP2015-0204,Approved,2015-09-24,,,,,,2026-09-21,513,address,4,Completed,,2018-09-06,0,0,,0,1,0,0
+addr|3014|college,3014 COLLEGE Ave,,4,description,ZP2016-0214,Approved,2016-10-27,,,,,,2026-09-21,480,address~10,1,Completed,,2018-06-14,0,0,,1,1,0,0
+apn|053-1660-024-00,1025 HEINZ Ave,053-1660-024-00,3,cpra_UnitsAdded,,,,B2023-00117,Finaled,2023-01-12,2023-01-24,2024-11-19,2026-07-08,202,apn+permit,3,Completed,,2024-11-07,0,0,,0,1,0,0
+addr|1629|stuart a,1629 STUART St A,,3,description,ZP2018-0127,Approved,2018-06-20,,,,,,2026-09-21,,,,,,,1,0,,0,1,0,0
+apn|057-2063-011-00,1825 Berkeley Way,057-2063-011-00,3,description,ZP2018-0085,Approved,2018-05-03,,,,,,2026-07-08,426,address+apn,1,Completed,,2022-03-11,0,1,,1,1,0,0
+apn|057-2063-007-00,1837 BERKELEY Way,057-2063-007-00,3,cpra_UnitsAdded,,,,B2022-01345,Finaled,2022-03-28,2023-03-09,2024-12-03,2026-07-08,226,address+apn+permit,3,Completed,,2021-04-06,0,0,,0,1,0,0
+apn|059-2268-005-00,1920 Vine Street,059-2268-005-00,3,description,ZP2019-0172,Approved,2019-10-18,,,,,,2026-07-08,,,,,,,1,1,"468(2u,block,=units)",0,1,0,0
+apn|056-2012-008-00,2112 GRANT St,056-2012-008-00,3,description,,,,B2026-03505,Issued,2026-08-18,,,2026-09-21,,,,,,,1,0,"520(1u,block);614(1u,block);94(1u,street)",0,1,0,0
+apn|055-1830-015-00,2200 DWIGHT Way,055-1830-015-00,3,cpra_UnitsAdded,,,,B2021-03292,Closed Expired,2021-07-23,2022-12-06,,2026-07-08,66,address~10,2,In Review,,,0,0,,0,1,0,0
+addr|2225|hearst,2225 HEARST Ave,,3,description,PLN2021-0045,Pending,2021-09-15,,,,,,2026-09-21,437,address,1,Completed,,,0,0,,1,1,0,0
+apn|056-1943-020-00,2421 FIFTH St,056-1943-020-00,3,cpra_UnitsAdded,DRSL2020-0007;ZP2020-0043,Approved,2020-05-13,B2021-04907,Issued,2021-10-27,2024-04-18,,2026-09-21,427;512,address~10,2,Completed,,2023-03-13,0,0,,0,3,0,0
+addr|2930|m l king jr jr,2930 M L KING JR WAY JR WAY,,3,description,PLN2026-0177,Under Review,2026-08-21,,,,,,2026-09-21,,,,,,,1,0,,0,1,0,0
+apn|052-1542-017-00,3101 SACRAMENTO STREET,052-1542-017-00,3,description,ZP2025-0069,Pending Final Action,2025-07-28,,,,,,2026-09-21,57,address+apn,3,In Review,,,0,0,,0,1,0,0
+apn|063-2969-034-37,,063-2969-034-37,2,cpra_UnitsAdded,,,,B2019-05488,Finaled,2019-12-18,2020-09-08,2022-08-08,2026-07-08,828,apn+permit,2,Completed,,2022-08-08,0,0,,0,1,1,0
+apn|059-2287-020-00,0 VIRGINIA St 94702,059-2287-020-00,2,cpra_UnitsAdded,,,,B2025-02283,Issued,2025-06-04,2025-10-10,,2026-09-21,,,,,,,1,0,,0,1,0,0
+apn|053-1661-003-03,1030 GRAYSON St,053-1661-003-03,2,cpra_UnitsAdded,ZP2015-0141;DRSL2015-0027,Approved,2015-10-15,B2017-03295,Finaled,2017-07-28,2018-02-01,2018-10-17,2026-07-08,492,address,2,Completed,,2018-10-17,0,1,,0,3,0,0
+apn|057-2086-088-00,1173 HEARST Ave,057-2086-088-00,2,cpra_UnitsAdded,,,,B2024-01117,Issued,2024-03-12,2025-02-25,,2026-09-21,379,address+apn,2,Completed,,2023-03-15,0,0,,0,1,0,0
+apn|054-1787-022-00,1220 Carleton Street,054-1787-022-00,2,description,ZP2017-0070,Approved,2017-05-05,,,,,,2026-07-08,385,address~10,1,Completed,,2023-10-23,0,1,,0,1,0,0
+apn|060-2429-024-00,1300 MONTEREY Ave,060-2429-024-00,2,cpra_UnitsAdded,,,,B2024-00824,Finaled,2024-02-22,2024-07-23,2025-10-21,2026-07-08,343,address+apn+permit,2,Completed,,2025-10-21,0,0,,0,1,0,0
+apn|060-2487-031-00,131 AVENIDA Dr,060-2487-031-00,2,cpra_UnitsAdded,,,,B2022-03366,Finaled,2022-07-20,2022-11-08,2023-08-15,2026-07-08,402,address+apn+permit,2,Completed,,2023-08-15,0,0,,0,1,0,0
+apn|053-1623-012-01,1331 ASHBY Ave,053-1623-012-01,2,cpra_UnitsAdded,,,,B2018-05100,Issued (CPRA; not in census),2018-12-21,2023-04-04,,2026-07-07,,,,,,,1,0,,0,1,0,0
+apn|056-1995-010-01,1341 ADDISON STREET,056-1995-010-01,2,description,ZP2022-0089,Approved,2022-06-27,,,,,,2026-07-08,190,address+apn,2,Completed,,2024-10-16,0,1,,0,1,0,0
+apn|052-1540-020-01,1400 SIXTY-SEVENTH St,052-1540-020-01,2,description,,,,B2026-03321,Issued,2026-08-06,,,2026-09-21,,,,,,,1,0,,0,1,0,0
+apn|054-1794-014-01,1403 CARLETON St,054-1794-014-01,2,cpra_UnitsAdded,,,,B2023-04424,Finaled,2023-08-28,2024-08-21,2026-03-27,2026-07-08,,,,,,,1,0,"759(1u,block,=units)",0,1,0,0
+apn|056-1998-040-00,1423 ACROFT Ct,056-1998-040-00,2,cpra_UnitsAdded,,,,B2023-01905,Finaled,2023-04-17,2023-04-17,2024-02-23,2026-07-08,266,address+apn+permit,2,Completed,,,0,0,,0,1,0,0
+apn|059-2249-030-02,1471 SCENIC AVE,059-2249-030-02,2,cpra_UnitsAdded,,,,B2014-01391,Finaled,2014-03-28,,2026-02-24,2026-07-07,,,,,,,1,0,"650(1u,block,=units)",0,1,0,0
+apn|052-1536-011-00,1515 HARMON St,052-1536-011-00,2,cpra_UnitsAdded,,,,B2022-03494,Finaled,2022-07-28,2022-12-06,2025-05-13,2026-07-08,302,address+apn+permit,2,Completed,,2025-05-13,0,0,,0,1,0,0
+apn|058-2245-009-03,1581 LE ROY Ave,058-2245-009-03,2,cpra_UnitsAdded,,,,B2020-03077,Issued,2020-09-15,2021-07-13,,2026-09-21,,,,,,,1,0,,0,1,0,0
+apn|057-2069-024-00,1636 Hearst,057-2069-024-00,2,description,ZP2018-0075,Approved,2018-04-17,,,,,,2026-07-08,,,,,,,1,1,,0,1,0,0
+apn|058-2179-008-00,1650 OXFORD St,058-2179-008-00,2,cpra_UnitsAdded,,,,B2024-02435,Issued,2024-05-16,2024-11-12,,2026-09-21,,,,,,,1,0,"274(2u,street,=units);904(37u,street)",0,1,0,0
+apn|058-2187-019-00,1677 ARCH St,058-2187-019-00,2,cpra_UnitsAdded,,,,B2021-03071,Finaled,2021-07-13,2021-11-16,2022-04-20,2026-07-08,864,address+apn+permit,2,Completed,,2022-04-20,0,0,,0,1,0,0
+apn|058-2183-015-00,1683 OXFORD St,058-2183-015-00,2,cpra_UnitsAdded,,,,B2021-02315,Finaled,2021-06-04,2022-08-08,2024-07-24,2026-07-08,274,address+apn+permit,2,Completed,,2024-07-24,0,0,,0,1,0,0
+apn|058-2123-019-00,1729 EIGHTH St,058-2123-019-00,2,cpra_UnitsAdded,,,,B2024-03463,Issued,2024-07-15,2025-08-11,,2026-09-21,,,,,,,1,0,"830(1u,block,=units)",0,1,0,0
+apn|058-2150-003-00,1732 CALIFORNIA St,058-2150-003-00,2,cpra_UnitsAdded,,,,B2024-02212,Issued,2024-05-06,2024-12-30,,2026-09-21,,,,,,,1,0,,0,1,0,0
+apn|052-1527-011-00,1811 SIXTY-THIRD St,052-1527-011-00,2,cpra_UnitsAdded,,,,B2019-03765,Finaled,2019-09-05,2020-01-28,2021-09-16,2026-07-08,783,apn+permit,2,Completed,,2021-09-01,0,0,,0,1,0,0
+apn|057-2095-013-02,1817 SIXTH St,057-2095-013-02,2,cpra_UnitsAdded,,,,B2021-00200,Closed Expired,2021-01-15,2021-08-25,,2026-07-08,,,,,,,1,0,,0,1,0,0
+apn|052-1526-009-00,1817 SIXTY-SECOND St,052-1526-009-00,2,cpra_UnitsAdded,,,,B2023-05812,Finaled,2023-11-09,2024-03-12,2025-06-24,2026-07-08,286,apn+permit,2,Completed,,2025-06-24,0,0,,0,1,0,0
+apn|058-2191-002-00,1828 EUCLID Ave,058-2191-002-00,2,cpra_UnitsAdded,,,,B2021-03440,Finaled,2021-08-03,2023-09-27,2025-05-22,2026-07-08,352,address+apn+permit,2,Completed,,2025-05-22,0,0,,0,1,0,0
+apn|058-2171-019-00,1915 Virginia Street,058-2171-019-00,2,description,ZP2015-0146,Approved,2015-06-29,,,,,,2026-07-08,589,address+apn,1,Completed,,2019-01-23,0,1,,0,1,0,0
+addr|2003|prince,2003 PRINCE St,,2,description,ZP2019-0195,Withdrawn,2019-12-06,,,,,,2026-09-21,,,,,,,1,0,"188(1u,street,=units);771(1u,street,=units)",0,1,0,0
+apn|055-1895-009-00,2021 CHANNING Way,055-1895-009-00,2,cpra_UnitsAdded,,,,B2024-02481,Finaled,2024-05-17,2025-04-29,2026-04-27,2026-07-08,,,,,,,1,0,"179(237u,block)",0,1,0,0
+addr|2025|durant,2025 DURANT Ave,,2,description,DRCP2017-0011;ZP2017-0102,Approved,2017-06-30,,,,,,2026-09-21,,,,,,,1,0,"123(74u,street)",0,2,0,0
+apn|057-2030-002-00,2116 ALLSTON Way,057-2030-002-00,2,cpra_UnitsAdded,,,,B2020-02394,Finaled,2020-07-28,2021-01-21,2021-10-29,2026-07-08,775;911,address+apn+permit,2,Completed,,2021-10-29,0,0,,0,1,0,0
+apn|055-1825-024-01,2124 PARKER St,055-1825-024-01,2,cpra_UnitsAdded,,,,B2024-03840,Issued,2024-08-06,2025-04-09,,2026-09-21,,,,,,,1,0,,0,1,0,0
+apn|052-1555-007-00,2127 WOOLSEY St,052-1555-007-00,2,description,,,,B2026-02222,Corrections List Issued,2026-05-27,,,2026-09-21,,,,,,,1,0,,0,1,0,0
+addr|2128|ward,2128 WARD St,,2,description,ZP2018-0237,Approved,2018-12-18,,,,,,2026-09-21,,,,,,,1,0,"777(1u,street,=units)",0,1,0,0
+apn|056-2006-010-00,2132 MCGEE Ave,056-2006-010-00,2,cpra_UnitsAdded,,,,B2020-03292,Finaled,2020-09-29,2022-02-09,2025-02-20,2026-07-08,337,address+apn+permit,2,Completed,,2025-02-20,0,0,,0,1,0,0
+addr|2210|m l king jr,2210 M L KING JR Way,,2,description,ZP2016-0194,Approved,2016-10-11,,,,,,2026-09-21,888,address,1,Completed,,2023-01-11,0,0,,0,1,0,0
+apn|055-1887-011-00,2211 CHANNING Way,055-1887-011-00,2,cpra_UnitsAdded,,,,B2024-02377,Issued,2024-05-14,2025-12-01,,2026-09-21,,,,,,,1,0,"26(65u,block);28(63u,block)",0,1,0,0
+addr|2212|10th,2212 TENTH St,,2,description,ZP2016-0129,Approved,2016-06-28,,,,,,2026-09-21,592,address,1,Completed,,2019-06-04,0,0,,0,1,0,0
+apn|055-1887-010-00,2215 CHANNING Way,055-1887-010-00,2,cpra_UnitsAdded,,,,B2024-02487,Issued,2024-05-17,2025-12-01,,2026-09-21,,,,,,,1,0,"26(65u,block);28(63u,block)",0,1,0,0
+apn|057-2018-028-00,2219 MCKINLEY Ave,057-2018-028-00,2,description,,,,B2026-03339,Corrections List Issued,2026-08-07,,,2026-09-21,803,address~10,1,Completed,,2021-12-09,0,0,,0,1,0,0
+apn|059-2257-006-00,2220 ROSE St,059-2257-006-00,2,cpra_UnitsAdded,,,,B2024-06085,Finaled,2024-12-30,2024-12-30,,2026-09-21,,,,,,,1,0,"301(1u,block,=units);802(1u,street,=units)",0,1,0,0
+apn|055-1830-022-00,2226 DWIGHT Way,055-1830-022-00,2,cpra_UnitsAdded,,,,B2022-03844,Finaled,2022-08-18,2023-05-18,2024-06-03,2026-07-08,200,address+apn+permit,2,Completed,,2024-06-03,0,0,,0,1,0,0
+apn|055-1828-011-00,2227 CARLETON St,055-1828-011-00,2,cpra_UnitsAdded,,,,B2023-04737,Finaled,2023-09-14,2024-09-04,2025-09-10,2026-07-08,365,address+apn+permit,2,Completed,,2025-09-10,0,0,,0,1,0,0
+apn|057-2014-019-01,2233 GRANT St,057-2014-019-01,2,cpra_UnitsAdded,,,,B2020-02423,Finaled,2020-07-30,2021-12-15,2024-03-28,2026-07-08,224,address+apn+permit,2,Completed,,2024-03-28,0,0,,0,1,0,0
+apn|056-1938-029-00,2323 SEVENTH St,056-1938-029-00,2,cpra_UnitsAdded,,,,B2024-00257,Issued,2024-01-18,2025-06-17,,2026-09-21,,,,,,,1,0,"346(1u,block,=units);198(1u,block,=units)",0,1,0,0
+apn|055-1884-005-00,2325 CHANNING Way,055-1884-005-00,2,cpra_UnitsAdded,,,,B2024-04276,Issued,2024-09-03,2025-06-02,,2026-09-21,117;183,address~10,22,Entitled,2022-11-01,,0,0,,1,1,0,0
+apn|055-1905-011-03,2326 GRANT St,055-1905-011-03,2,cpra_UnitsAdded,,,,B2024-05037,Issued,2024-10-18,2024-11-06,,2026-09-21,74,address~10,1,In Review,,,0,0,,0,1,0,0
+apn|056-1942-022-00,2327 Fifth Street,056-1942-022-00,2,description,DRSL2020-0001;ZP2020-0009,Approved,2020-01-23,,,,,,2026-07-08,260,address~10,1,Completed,,2024-05-31,0,1,,0,2,0,0
+apn|053-1689-009-00,2327 OREGON St,053-1689-009-00,2,cpra_UnitsAdded,,,,B2022-04721,Finaled,2022-10-12,2023-03-07,2025-02-28,2026-07-08,294,address+apn+permit,2,Completed,,2025-02-28,0,0,,0,1,0,0
+apn|056-1937-022-00,2331 EIGHTH St,056-1937-022-00,2,cpra_UnitsAdded,,,,B2024-04179,Issued,2024-08-26,2026-01-20,,2026-09-21,713,address~10,1,Completed,,2021-05-24,0,0,,0,1,0,0
+apn|055-1904-020-00,2337 Grant Street,055-1904-020-00,2,description,ZP2022-0163,Withdrawn,2022-11-18,,,,,,2026-07-08,74,address~10,1,In Review,,,0,0,,0,1,0,0
+apn|053-1689-006-02,2339 OREGON St,053-1689-006-02,2,cpra_UnitsAdded,,,,B2020-01498,Finaled,2020-05-19,2021-03-03,2023-03-10,2026-07-08,420,address+apn+permit,2,Completed,,2023-03-10,0,0,,0,1,0,0
+apn|061-2551-026-03,2371 OAK St,061-2551-026-03,2,cpra_UnitsAdded,,,,B2023-01529,Issued (CPRA; not in census),2023-03-30,2025-09-18,,2026-07-07,,,,,,,1,0,,0,1,0,0
+apn|056-1943-023-00,2411 FIFTH St,056-1943-023-00,2,cpra_UnitsAdded,,,,B2017-01029,Finaled,2017-03-13,2017-08-02,2018-10-30,2026-07-08,512,address+apn+permit,2,Completed,,2018-10-30,0,0,,0,1,0,0
+apn|052-1573-077-01,2418 ASHBY Ave,052-1573-077-01,2,description,,,,B2026-03288,Issued,2026-08-05,,,2026-09-21,50,address~10,4,In Review,,,0,0,,1,1,0,0
+addr|2435|virginia,2435 VIRGINIA St,,2,description,ZP2018-0113,Approved,2018-05-31,,,,,,2026-09-21,,,,,,,1,0,"616(1u,street,=units)",0,1,0,0
+apn|055-1880-022-01,2436 CHANNING Way,055-1880-022-01,2,cpra_UnitsAdded,,,,B2023-05281,Finaled,2023-10-16,2024-04-17,2025-06-17,2026-07-08,355,address+apn+permit,2,Completed,,2025-06-17,0,0,,0,1,0,0
+apn|055-1847-028-00,2519 COLLEGE Ave,055-1847-028-00,2,cpra_UnitsAdded,,,,B2021-00697,Finaled,2021-02-19,2021-06-14,2023-05-11,2026-07-08,396,address+apn+permit,2,Completed,,2023-05-11,0,0,,0,1,0,0
+apn|055-1845-010-00,2618 COLLEGE Ave,055-1845-010-00,2,cpra_UnitsAdded,,,,B2021-05671,Finaled,2021-12-16,2024-08-01,2025-07-25,2026-07-08,348,address+apn+permit,2,Completed,,2025-07-25,0,0,,0,1,0,0
+apn|055-1848-024-00,2619 COLLEGE Ave,055-1848-024-00,2,cpra_UnitsAdded,,,,B2024-00819,Finaled,2024-02-22,2024-09-13,2025-06-24,2026-07-08,321,address+apn+permit,2,Completed,,2025-06-24,0,0,,0,1,0,0
+apn|055-1841-009-00,2620 HILLEGASS Ave,055-1841-009-00,2,cpra_UnitsAdded,,,,B2024-04291,Finaled,2024-09-03,2025-08-20,,2026-09-21,,,,,,,1,0,"357(2u,block,=units);326(2u,block,=units)",0,1,0,0
+apn|055-1840-007-00,2620 REGENT St,055-1840-007-00,2,cpra_UnitsAdded,,,,B2024-01193,Finaled,2024-03-15,2024-06-14,2025-05-30,2026-07-08,316,address+apn+permit,1,Completed,,2025-05-30,0,0,,0,1,0,0
+apn|055-1848-023-00,2623 COLLEGE Ave,055-1848-023-00,2,cpra_UnitsAdded,,,,B2023-06132,Issued,2023-11-30,2025-10-14,,2026-09-21,321;348,address~10,2,Completed,,2025-06-24,0,0,,0,1,0,0
+apn|055-1841-024-00,2631 REGENT St,055-1841-024-00,2,cpra_UnitsAdded,,,,B2023-02659,Finaled,2023-05-22,2024-01-16,2025-06-03,2026-07-08,326,address+apn+permit,2,Completed,,2025-06-03,0,0,,0,1,0,0
+apn|055-1841-021-00,2639 REGENT St,055-1841-021-00,2,cpra_UnitsAdded,,,,B2023-06071,Finaled,2023-11-27,2024-06-11,2025-07-29,2026-07-08,357,address+apn+permit,2,Completed,,2025-07-29,0,0,,0,1,0,0
+apn|055-1870-008-00,2701 DURANT Ave,055-1870-008-00,2,cpra_UnitsAdded,,,,B2022-01079,Issued (CPRA; not in census),2022-03-10,2023-05-01,,2026-07-07,,,,,,,1,0,"299(4u,block);400(2u,street,=units)",0,1,0,0
+apn|052-1563-036-00,2708 PRINCE St,052-1563-036-00,2,cpra_UnitsAdded,,,,B2024-06003,Issued,2024-12-20,2025-07-11,,2026-09-21,508,address~10,1,Completed,,2018-06-11,0,0,,0,1,0,0
+apn|054-1708-005-00,2737 FOREST Ave,054-1708-005-00,2,cpra_UnitsAdded,,,,B2021-02307,Finaled,2021-06-04,2022-11-10,2024-03-11,2026-07-08,269,address+apn+permit,2,Completed,,2024-03-11,0,0,,0,1,0,0
+apn|053-1677-008-00,2800 M L KING JR Way,053-1677-008-00,2,cpra_UnitsAdded,,,,B2024-02927,Finaled,2024-06-12,2024-10-22,,2026-09-21,,,,,,,1,0,"419(1u,block,=units)",0,1,0,0
+apn|061-2561-001-00,2808 NINTH St,061-2561-001-00,2,cpra_UnitsAdded,,,,B2026-00031,Issued,2026-01-06,2026-06-01,,2026-09-21,69,address,2,In Review,,,0,0,,0,1,0,0
+apn|053-1674-016-00,2817 CALIFORNIA St,053-1674-016-00,2,cpra_UnitsAdded,,,,B2022-04445,Finaled,2022-09-26,2022-11-09,2023-01-10,2026-07-08,,,,,,,1,0,"854(1u,block,=units);423(1u,street,=units)",0,1,0,0
+apn|052-1433-012-00,3353 M L KING JR Way,052-1433-012-00,2,cpra_UnitsAdded,ZP2015-0184,Approved,2015-08-25,B2017-02082,Finaled,2017-05-16,2019-08-07,2022-09-28,2026-07-08,841,apn+permit,2,Completed,,2022-09-28,0,1,,0,2,0,0
+apn|052-1434-003-00,3411 ADELINE St,052-1434-003-00,2,cpra_UnitsAdded,,,,B2020-02735,Finaled,2020-08-21,2020-12-16,2026-04-16,2026-07-08,,,,,,,1,0,,0,1,0,0
+apn|059-2325-004-00,776 PAGE St,059-2325-004-00,2,cpra_UnitsAdded,,,,B2021-05043;B2021-05365,Finaled,2021-11-29,2022-06-03,2023-09-20,2026-07-08,445,permit,2,Completed,,2023-09-20,0,0,,0,2,0,0
+apn|059-2326-012-00,805 JONES St,059-2326-012-00,2,cpra_UnitsAdded,DRCP2022-0019,Approved,2022-11-17,B2024-00701;B2024-00721;B2024-00797,Issued,2024-02-22,2024-09-06,,2026-07-08,,,,,,,1,1,"498(1u,block,=units);60(3u,block,=units);511(1u,block,=units)",0,4,0,0
+apn|056-1936-005-00,944 CHANNING Way,056-1936-005-00,2,cpra_UnitsAdded,,,,B2024-01429,Issued,2024-03-28,2025-09-24,,2026-09-21,,,,,,,1,0,"584(1u,block,=units);346(1u,street,=units)",0,1,0,0
+apn|063-3120-063-00,945 CRESTON Rd,063-3120-063-00,2,cpra_UnitsAdded,,,,B2023-04951,Issued,2023-09-25,2025-10-23,,2026-09-21,,,,,,,1,0,,0,1,0,0

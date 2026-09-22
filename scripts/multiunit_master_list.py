@@ -115,8 +115,19 @@ _JUNK = re.compile(r"\s*(?:,| - |–|\(|\bfinal\b|\bpreliminary\b|\bdesign revie
                    r"\*|\bview additional\b|\bpdr\b|\bpre[- ]?app\b|\bsb ?\d{2,4}\b|\bab ?\d{3,4}\b|\bunit\b|\bapt\b|#).*$", re.I)
 
 
+# Planner shorthand that appears in Project Name fields and blocks the APN lookup.
+_ALIAS = [(re.compile(r"\bSPA\b", re.I), "SAN PABLO AVE"),
+          (re.compile(r"\bMLK\b", re.I), "M L KING JR WAY"),
+          (re.compile(r"\bML KING\b", re.I), "M L KING JR"),
+          (re.compile(r"\bMARTIN LUTHER KING(?: JR)?\b", re.I), "M L KING JR"),
+          (re.compile(r"\s+(?:COM|RES|MU|BLDG|BUILDING|PH\s*\d+)\s*$", re.I), "")]
+
+
 def clean_address(raw):
-    return _JUNK.sub("", str(raw or "")).strip()
+    a = _JUNK.sub("", str(raw or "")).strip()
+    for rx, rep in _ALIAS:
+        a = rx.sub(rep, a)
+    return a.strip()
 
 
 def addr_key(raw):
@@ -165,6 +176,42 @@ def load_cpra():
 
 
 RECORD_STATUS = ROOT / "data/raw/accela_record_status"
+ASSESSOR = ROOT / "databases/berkeley.db"
+
+
+def load_address_apn():
+    """(house number, street) -> canonical APN, from berkeley.db `addresses_arcgis` (65,459 City situs
+    addresses, each carrying its parcel's APN). This is what lets a Planning record — which carries NO
+    parcel number — be grouped with the building permits on the same parcel. Keys that resolve to more
+    than one APN are dropped (a handful; ambiguous is worse than absent)."""
+    if not ASSESSOR.exists():
+        print("  ! berkeley.db missing — address->APN resolution skipped", file=sys.stderr)
+        return {}
+    con = sqlite3.connect(ASSESSOR)
+    m = {}
+    for fa, apn in con.execute("select FullAddress, APN from addresses_arcgis "
+                               "where APN is not null and FullAddress is not null"):
+        c = to_canonical_apn(apn)
+        if not c:
+            continue
+        k = addr_key(fa)
+        if k:
+            m.setdefault(k, set()).add(c)
+    con.close()
+    return {k: next(iter(v)) for k, v in m.items() if len(v) == 1}
+
+
+def resolve_apns(records, a2a):
+    """Fill each record's APN from its address where the source did not supply one."""
+    n = 0
+    for r in records:
+        if r["apn"]:
+            continue
+        k = addr_key(r["address"])
+        if k and k in a2a:
+            r["apn"] = a2a[k]; r["apn_source"] = "address_lookup"; n += 1
+    return n
+
 
 
 def load_record_status():
@@ -199,7 +246,7 @@ def overlay_record_status(records, rs):
     return n
 
 
-def load_v2():
+def load_v2(a2a):
     con = sqlite3.connect(V2)
     con.row_factory = sqlite3.Row
     projects = {r["project_id"]: dict(r) for r in con.execute(
@@ -216,7 +263,18 @@ def load_v2():
         if k:
             by_addr[k].add(pid)
     con.close()
-    return projects, by_permit, by_apn, by_addr
+    by_block = defaultdict(set)
+    for apn, pids in by_apn.items():
+        by_block["-".join(apn.split("-")[:2])] |= pids
+    # v2 projects whose parcel link is missing still have an address — resolve it to an APN so they can
+    # be matched on the same key as the source records (this is what found 1974 == 1998 Shattuck).
+    for pid, p in projects.items():
+        k = addr_key(p["address_normalized"] or p["address_display"])
+        if k and k in a2a:
+            by_apn[a2a[k]].add(pid)
+    for apn, pids in list(by_apn.items()):
+        by_block["-".join(apn.split("-")[:2])] |= pids
+    return projects, by_permit, by_apn, by_addr, by_block
 
 
 # ----------------------------------------------------------------------------- candidates
@@ -322,7 +380,7 @@ def group_projects(records):
 
 
 def match_v2(recs, apn, akey, v2):
-    projects, by_permit, by_apn, by_addr = v2
+    projects, by_permit, by_apn, by_addr, _ = v2
     hits, basis = set(), []
     for r in recs:
         if r["record"] in by_permit:
@@ -339,6 +397,40 @@ def match_v2(recs, apn, akey, v2):
     return sorted(hits), "+".join(sorted(set(basis)))
 
 
+def v2_candidates(v2, apn, akey, units):
+    """Review CANDIDATES for a row that matched nothing, ranked. NEVER an automatic merge.
+
+    Why this exists: one project can occupy several parcels with several street numbers. 1998 Shattuck
+    (599u) is v2 119, stored as 1974 Shattuck — and v2 links only ONE of the project's parcels
+    (057-2053-002-00), while 1998 sits on 057-2053-003-01. Address equality and APN equality both fail;
+    the ASSESSOR BLOCK (book-page, 057-2053) catches it, and the matching unit count confirms it.
+    Adjacent parcels on a block are also, often, genuinely different projects — hence review, not merge.
+    """
+    projects, _, _, by_addr, by_block = v2
+    num, street = akey if akey else ("", "")
+    out = {}
+    def add(pid, why, dist):
+        vu = projects[pid]["total_units"]
+        same_units = vu is not None and units and abs(int(vu) - int(units)) <= 1
+        rank = (0 if (why == "block" and same_units) else 1 if why == "block" else 2 if same_units else 3, dist)
+        prev = out.get(pid)
+        if not prev or rank < prev[0]:
+            out[pid] = (rank, why, vu, same_units)
+    if apn:
+        for pid in by_block.get("-".join(apn.split("-")[:2]), ()):
+            add(pid, "block", 0)
+    if num.isdigit():
+        for (n2, s2), pids in by_addr.items():
+            if s2 != street or not n2.isdigit():
+                continue
+            d = abs(int(n2) - int(num))
+            if d <= 60:
+                for pid in pids:
+                    add(pid, "street", d)
+    ranked = sorted(out.items(), key=lambda kv: kv[1][0])[:3]
+    return [(pid, why, vu, same_units) for pid, (_, why, vu, same_units) in ranked]
+
+
 def build(min_units, today):
     print("loading census …", file=sys.stderr)
     census_b = load_census("Building", "Permit Number")
@@ -347,14 +439,16 @@ def build(min_units, today):
     print("loading CPRA productions …", file=sys.stderr)
     cpra = load_cpra()
     print(f"  {len(cpra):,} permits (latest production wins)", file=sys.stderr)
-    v2 = load_v2()
-
     records = (cpra_candidates(cpra, census_b, min_units)
                + census_building_candidates(census_b, cpra, min_units)
                + planning_candidates(census_p, min_units))
+    a2a = load_address_apn()
+    n_apn = resolve_apns(records, a2a)
+    print(f"  address->APN resolver: {len(a2a):,} keys; {n_apn} records gained an APN", file=sys.stderr)
     rs = load_record_status()
     n_over = overlay_record_status(records, rs)
     print(f"  per-record status snapshots: {len(rs):,} loaded, {n_over} records overlaid", file=sys.stderr)
+    v2 = load_v2(a2a)
     groups = group_projects(records)
 
     rows = []
@@ -390,6 +484,9 @@ def build(min_units, today):
             v2_units=v2p["total_units"] if v2p else "", v2_status=v2p["status_label"] if v2p else "",
             v2_bp_issued=v2p["bp_issued_date"] if v2p else "", v2_co=v2p["co_issued_date"] if v2p else "",
             not_in_v2=int(not v2_ids), needs_status_refresh=int(active and stale),
+            possible_v2_match=";".join(
+                f"{pid}({vu}u,{why}{',=units' if su else ''})"
+                for pid, why, vu, su in (v2_candidates(v2, apn, akey, best["units"]) if not v2_ids else [])),
             units_disagree=int(bool(v2p) and v2p["total_units"] is not None and abs(int(v2p["total_units"]) - best["units"]) > 1),
             n_records=len(recs), address_missing=int(not addr),
             address_borrowed=int(any(r.get("address_borrowed") for r in recs)),
@@ -424,6 +521,12 @@ def main():
     print(f"  needs_status_refresh (active, status older than 30d): {sum(1 for r in rows if r['needs_status_refresh'])}")
     print(f"  units_disagree with v2 (>1): {sum(1 for r in rows if r['units_disagree'])}   address_missing: {sum(1 for r in rows if r['address_missing'])}")
     print(f"  planning-only (no building record): {sum(1 for r in rows if r['planning_records'] and not r['building_records'])}")
+    cand = [r for r in rows if r["not_in_v2"] and r["possible_v2_match"]]
+    strong = [r for r in cand if "block,=units" in r["possible_v2_match"]]
+    print(f"  not-in-v2 WITH a same-street candidate: {len(cand)} ({len(strong)} same assessor block AND same units)"
+          f"  -> REVIEW, never auto-merge")
+    print(f"  clean 'not in v2' (no candidate at all): {sum(1 for r in rows if r['not_in_v2'] and not r['possible_v2_match'])}"
+          f"   of which >=5u: {sum(1 for r in rows if r['not_in_v2'] and not r['possible_v2_match'] and r['units_best']>=5)}")
     print(f"\n{rf.name}: {len(records)} records")
 
 

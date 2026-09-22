@@ -26,10 +26,26 @@ text in `docs/index.html` is untouched.
    (DFW would have approved of that distinction, having written a whole essay about how a
    usage rule is a political fact about who gets to be understood.)
 3. **The last sentence of each entry stays sincere.** This is the *E Unibus Pluram* point
-   and the whole reason to use this voice on this material: the essay's argument is that
-   irony is a solvent that dissolves everything including the ground you need to stand on
-   to say something true. A housing dataset is exactly the kind of thing that invites the
-   knowing shrug. The rewrite refuses the shrug.
+   and the whole reason to use this voice on this material: irony is a solvent that
+   dissolves everything including the ground you need to stand on to say something true.
+   A housing dataset is exactly the kind of thing that invites the knowing shrug. The
+   rewrite refuses the shrug.
+
+**The governing idea (revised 2026-09-22).** Everything here now serves one proposition,
+and it is deliberately not a partisan one:
+
+> Almost nobody — on any side — knows how Berkeley actually builds housing, or how a Berkeley
+> merchant actually keeps a shop open. People reason from intuition instead, because intuition
+> is free and the records are not. Intuition is quick, it feels like knowledge, and it sorts
+> you onto a team. Once you are on a team you inherit its predictions, and the predictions
+> turn out to be wrong — not because the people holding them are foolish, but because the
+> process they are predicting has stages, durations and failure modes that nobody looking at
+> a street can see.
+
+So the captions are not for winning a dispute. They exist because a person standing on College
+Avenue or San Pablo, looking at a building and forming a confident view of what will happen
+there, is missing information that exists, is public, and is on this site. That framing also
+keeps the page defensible: it implies no villain, and it is equally uncomfortable for everyone.
 
 **Why this voice actually fits the material** (rather than being a costume). Three moves
 transfer cleanly:
@@ -39,8 +55,8 @@ transfer cleanly:
   representation *while* the representation is running — which is precisely what an honest
   caption on a rendering has to do.
 - **Precision as a moral act.** *Authority and American Usage* is 60 pages arguing that a
-  definition is never neutral. "Entitled" vs. "permitted" vs. "built" is the same fight,
-  with money on it.
+  definition is never neutral. "Entitled" vs. "permitted" vs. "built" is the same problem,
+  with money and five years riding on which word you thought you heard.
 - **The footnote as second, more honest voice.** These read as bracketed asides below;
   on the page they'd be `<small>` or a disclosure.
 
@@ -82,7 +98,8 @@ highest ratio in this collection and still under a third. **324 are entitled**, 
 the stage where a project has the city's permission and has not spent the money; 177 are
 still in review; 91 are under construction; **52 were withdrawn**, and withdrawn is worth
 sitting with, because it is the only stage on the legend that means somebody looked at the
-arithmetic and walked away. The largest thing on the street is **3030 Telegraph, 144
+arithmetic and walked away. Approval is not construction. Nothing you can see from the street
+tells you which approved building will be abandoned by the people who asked for it. The largest thing on the street is **3030 Telegraph, 144
 units**, completed January 2026, and the flight makes a full orbit of it. At Dwight the
 camera follows the dog-leg the avenue itself makes through the intersection — a detail
 nobody asked for, included because the street does it and the model should not be more
@@ -113,10 +130,13 @@ Associates, which start construction only after the student building opens in au
 And now the part that matters more than any of the numbers: **none of this is in
 Berkeley's permit system and none of it counts toward Berkeley's state housing targets**.
 The Regents approve these; the University issues its own building permits; the city is a
-spectator with a view. So when you are told what Berkeley has or has not built, ask first
-whether the 5,010 beds in this video were in the denominator, because they are legally
-required not to be, and the gap between what a place is visibly doing and what a place is
-officially credited with is not an accounting curiosity. It is most of the fight.
+spectator with a view. Which produces a specific and very common error: a person walks past
+four enormous cranes, concludes Berkeley is building plenty, and is looking at buildings that
+by law are not Berkeley's to count. Someone else reads the city's official total, concludes
+Berkeley builds nothing, and has not been told the 5,010 beds were excluded before the number
+reached them. Both of them are reasoning honestly from what they can see. Neither has been
+given the one fact that reconciles it — and you cannot get that fact by looking at the street,
+only by reading the permits.
 
 > *Data bindings:* `{{total_beds}}` 5,010 · per-project beds/status · `{{sat_units}}` ~100
 > · exemption rule from the `uc_project` classification flag, never a hardcoded id
@@ -156,10 +176,10 @@ are looking at was made, offered because a rendering that hides its sources is j
 picture. **Heights are taken from each project's own filings** — not estimated from the
 model, not scaled off a photograph, but read off the drawings the developer submitted to
 the city, which means they are as accurate as the applicant was and no more. And **street
-names are labelled at every crossing**, which sounds like a nicety and is actually the
-whole navigational contract: a flyover with no labels is a mood piece, and a mood piece
-about housing is worse than useless, because the one thing everybody in this argument
-already has plenty of is a feeling.
+names are labelled at every crossing**, which sounds like a nicety and is actually the whole
+navigational contract: a flyover with no labels is a mood piece, and a mood piece is exactly
+what nobody needs more of here. Feelings about this avenue are abundant and cheap. What is
+scarce is knowing which building is which, who filed it, and when.
 
 > *Data bindings:* orbit list `{{orbits}}` · heights sourced from project filings (schema
 > note, not a figure)
@@ -252,10 +272,11 @@ is absent, and UC is 5,010 beds, so the thing you are looking at is the city's h
 minus its single largest producer of housing, because the University is exempt from city
 permitting and does not count toward the city's targets. **Planned** — which means unit
 counts as filed, not as built, and a project's plan can shrink at permit, shrink again at
-revision, or never be built at all. Neither word is a hedge. Each one is the precise term
-for a real legal distinction, and the reason to spell them out rather than smooth them
-away is that a number stripped of its qualifiers travels faster and lands harder and is
-wrong.
+revision, or never be built at all. Neither word is a hedge. Each one is the precise term for a real legal distinction, and the
+reason to spell them out rather than smooth them away is that a number stripped of its
+qualifiers travels faster, lands harder, and produces confident predictions that do not come
+true. "Berkeley approved 3,000 homes" and "Berkeley built 3,000 homes" are different sentences
+about different worlds, and only one of them is a place anybody can live.
 
 > *Data bindings:* `{{project_count}}` 17 · threshold `{{min_units}}` 200 · filter:
 > `uc_project` flag excluded (never a hardcoded id) · "planned" = filed unit count
@@ -276,16 +297,17 @@ camera does not adjudicate that. It goes up the street.
 ## 12. Elmwood to Shattuck via College & Bancroft
 
 From the Elmwood Theater north up College Avenue, then west along Bancroft to Shattuck.
-Residential fabric, then commercial fabric, then downtown, in one continuous move — and
-the continuity is the reason to watch it, because this route is the exact ground of the
-argument the city has been having since 2025. Look at what is under the camera between the
-theater and Ashby: two- and three-storey commercial frontage, then, immediately behind it,
-a neighbourhood that has been adding homes for a century in ways no aerial can see — flats
-cut out of houses, cottages behind houses, units that exist and are rented and appear in
-no dataset. The corridor is what gets drawn. The neighbourhood is where the housing has
-actually been going. A flyover, being a device for looking at frontage, is structurally
-incapable of showing you the second thing, and you should hold that limitation in mind for
-the whole three minutes, including and especially the parts where the video is beautiful.
+Residential fabric, then commercial fabric, then downtown, in one continuous move. Watch the
+stretch between the theater and Ashby: two- and three-storey commercial frontage, and then,
+immediately behind it, a neighbourhood that has been adding homes for a century in ways no
+aerial can see — flats cut out of houses, cottages behind houses, units that are occupied and
+rented and appear in no dataset. This is the exact spot where intuition fails hardest in both
+directions. Look at the frontage and the neighbourhood appears frozen, which it is not. Look
+at the storefronts and they appear permanent, which they also are not: a shop's survival turns
+on a lease term, an insurance renewal and a landlord's tax basis, none of which are visible
+from any altitude. A flyover is a device for looking at frontage. It cannot show you either of
+the things that actually determine what happens here — and that limitation is worth holding
+for the whole three minutes, including and especially the parts where the video is beautiful.
 
 ---
 

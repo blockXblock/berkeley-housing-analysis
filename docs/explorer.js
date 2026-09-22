@@ -764,7 +764,8 @@
                 const events = DATA.events ? DATA.events.filter(e => e.project_id === p.id) : [];
             const row = document.createElement('tr');
             row.className = 'border-t hover:bg-gray-50 cursor-pointer';
-            row.onclick = () => toggleRow(i);
+            row.dataset.projectId = p.id;
+            row.onclick = () => toggleRow(i, p.id);
             const pipelineStage = getPipelineStage(p);
             row.innerHTML = `
                 <td class="px-4 py-3"><span class="text-gray-400">▶</span></td>
@@ -888,9 +889,31 @@
         }
     }
 
-    function toggleRow(i) {
+    function toggleRow(i, projectId) {
         const row = document.getElementById('expand-' + i);
-        if (row) row.classList.toggle('show');
+        if (!row) return;
+        const open = row.classList.toggle('show');
+        // Keep the URL in sync: ?project=<id> is the deep link for an open row
+        if (projectId !== undefined && history.replaceState) {
+            const url = new URL(location.href);
+            if (open) url.searchParams.set('project', projectId); else url.searchParams.delete('project');
+            history.replaceState(null, '', url);
+        }
+    }
+
+    // Deep link: explorer.html?project=<id> opens the Projects tab with that row expanded.
+    function openProjectDeepLink() {
+        const id = new URLSearchParams(location.search).get('project');
+        if (!id) return false;
+        const row = document.querySelector(`#projectTableBody tr[data-project-id="${CSS.escape(id)}"]`);
+        if (!row) { console.warn('⚠️ deep link: no project with id', id); return false; }
+        showTab('projects');
+        row.style.display = '';
+        const expandRow = row.nextElementSibling;
+        if (expandRow && expandRow.classList.contains('expandable-row')) expandRow.classList.add('show');
+        row.classList.add('bg-yellow-50');
+        setTimeout(() => row.scrollIntoView({ behavior: 'smooth', block: 'center' }), 50);
+        return true;
     }
 
     function getStatusColor(status) {
@@ -3637,6 +3660,7 @@
         // Wrap each init function in try-catch to prevent cascade failures
         try { initCharts(); } catch(e) { console.error('❌ initCharts failed:', e); }
         try { renderProjectTable(); } catch(e) { console.error('❌ renderProjectTable failed:', e); }
+        try { openProjectDeepLink(); } catch(e) { console.error('❌ openProjectDeepLink failed:', e); }
         try { renderGantt(); } catch(e) { console.error('❌ renderGantt failed:', e); }
         try { renderAPRTable(); } catch(e) { console.error('❌ renderAPRTable failed:', e); }
         try { renderStalledTable(); } catch(e) { console.error('❌ renderStalledTable failed:', e); }

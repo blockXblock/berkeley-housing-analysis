@@ -25,9 +25,16 @@ OUT = ROOT / "data" / "raw" / "accela" / "date_range"
 LOG = OUT / "_sweep_log.jsonl"
 
 from datetime import timedelta
+import argparse
+# Re-runnable: --start/--end (ISO dates) extend the store forward; defaults = the original 2025-06 .. 2026-07-03
+# sweep. 2026-09-21: re-pointed at 2026-07-04 .. today to refresh the census (existing windows are skipped).
+_ap = argparse.ArgumentParser()
+_ap.add_argument("--start", default="2025-06-01")
+_ap.add_argument("--end", default="2026-07-03")
+_args = _ap.parse_args()
 WINDOWS = []
-d = date(2025, 6, 1)
-END = date(2026, 7, 3)
+d = date.fromisoformat(_args.start)
+END = date.fromisoformat(_args.end)
 while d <= END:
     e = min(d + timedelta(days=3), END)          # 4-day windows: months truncated (2026-07-03)
     WINDOWS.append((d.strftime("%m/%d/%Y"), e.strftime("%m/%d/%Y"), f"{d.isoformat()}_{e.isoformat()}"))

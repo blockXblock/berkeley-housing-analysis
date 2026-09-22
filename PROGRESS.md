@@ -8,6 +8,82 @@
 
 ---
 
+## 2026-09-21 — Multi-unit master list: three CPRA productions never fetched; Accela census refreshed to today (NOT committed)
+
+**Trigger:** the Excalidraw stage-duration drawing shows 40 of 214 multi-unit projects — a milestone-COVERAGE
+limit (`bp_issued` on 36/909, `entitled` on 59), not export staleness. Full plan + CPRA drafts:
+`notes/2026-09-21_multiunit_master_list_plan.md`.
+
+**Found (Gmail, read-only):** the July BP refresh was NextRequest **#26-1971** (the 07-03 note mis-recorded it as
+#26-1972) and was **fulfilled 2026-07-07 with 3 xlsx** — never downloaded. Likewise **#26-2375** Rent Board
+registry (fulfilled 08-17; the 08-27 entry below still says "pending") and **#26-2367** corridors geodatabase
+(08-26). All behind NextRequest sign-in; John retrieving today → `data/raw/cpra-downloads/`, `data/raw/rent_board/`,
+`data/raw/corridors/` (dirs created). #26-2321 answered 09-04: the City "does not have a way to track" streamlining
+provisions — do not re-ask. Memory note `nextrequest-fulfilments-go-unfetched` written.
+
+**Premises corrected:** CPRA BP feed = 8 yrs (2016/2018–2025), `Issued`-only — expired/cancelled absent by
+construction. NO planning feed exists (~100 hand-pulled ZP/PL/DR/ZC in v2).
+
+**Accela census (`data/raw/accela/date_range/`, built 07-03/04) carries STATUS:** 61,818 building permits
+2015–2026-07 (Finaled 39,772 · Closed Expired 12,889 · Issued 7,820) + 13,230 planning (2,287 Zoning Permits).
+Cross vs CPRA's 5,380 issued-not-finaled primaries: 5,204 found → **3,694 Closed Expired, 1,277 Issued, 230 Finaled**.
+First-pass multi-unit universe: 132 ZP/UP ≥5u, 92 CPRA new-construction ≥2u, 23 active B records ≥2u not in CPRA.
+
+**Sweep run today** (`sweep_recent_permits.py`, now takes `--start/--end`; defaults unchanged): 2026-07-04 → 09-21,
+40/40 windows ok, 0 empty, 0 retries → +1,203 building / +196 planning records (append-only). New multi-unit filings
+NOT in v2: PLN2026-0155 (2032 Francisco, SB330 40u), PLN2026-0184 (3120 Shattuck, SB35 mod 65u), ZP2026-0091
+(2336-38 Dwight, 10u). Unit-count mods on tracked projects: ZP2026-0077 1899 Oxford 222u (v2: 212), ZP2026-0076
+2712 Telegraph 60u (v2: 57); B2026-03228 1750 Sacramento 124u phase BP (v2: 739u, no BP date); B2026-03747 temp
+power at 2442 Haste (v2 "Under Construction", `bp_issued_date` NULL). **Caveat:** the grid keys on FILING date —
+older records keep their July status; a per-record status pass (~100 multi-unit records) is queued after Track C.
+
+**#26-1971 retrieved (2 of 3 files):** `BP_Annual Permit Report-2025-2026-07-07.xlsx` (Post Date 1/1/2025–7/7/2026;
+8,035 permits, 2,133 new, 2,097 issued + 1,946 finaled in 2026 — closes the 2026 gap to July 7; e.g. 2442 Haste
+B2025-03529 38u issued 2026-05-20, 2016 Ashby B2024-01268 50u issued 2026-03-26) and `..._2023-2025_rerun-2026-07-07.xlsx`
+(same window re-run: +278 Finaled statuses, 167 issuance dates changed — a 3rd snapshot). **No status column delivered**
+→ CPRA Request B stays live. Third file (`BP_Annual Permit Report.xlsx`) would not download — ask for re-release.
+Ledger in `data/raw/cpra-downloads/README.md`. Not ingested.
+
+**Track C BUILT (read-only):** `scripts/multiunit_master_list.py` → `data/derived/multiunit_projects_2026-09-21.csv`
+(+ `multiunit_records_`): census (Building 62,999 / Planning 14,900) + 4 CPRA productions (32,897 permits, latest wins;
+roles via `housing_rules.permit_role`) + v2 matched by permit / canonical APN / `normalize_address` (+ ±10 house-number
+tolerance flagged `address~10`); Planning records grouped by shared verbatim description when address-less. **390 projects
+≥2u (281 ≥5u, 170 ≥50u) from 547 records; 182 in v2, 208 not.** Worklist not-in-v2 ≥5u = 151: **20 filed 2022+ with
+address** (1998 Shattuck 599u ZP2022-0175 Closed; 2480 Shattuck 111u; 2159 Dwight 68u Approved; 3120 Shattuck 65u;
+1652 University 26u Approved; 2330 Prince 23u In Review; 2338 Dwight 10u …), 48 filed 2022+ address-less (need the
+detail pass), 83 pre-2022 (39 Approved — v2's pre-2022 coverage gap). 45 unit disagreements vs v2 flagged (description
+counts vs v2, review not error). 228 active records carry a July status → per-record pass.
+
+**All three productions RETRIEVED (evening):** #26-2367 corridors gdb — 99 component files fetched via the per-document
+`/download` endpoint (needs signed-in session cookie + browser UA + Referer + ~1.5 s pacing; the tokenized email links only
+open the viewer) → `data/raw/corridors/raimi_corridors.gdb/` (5.0 MB, **8 layers**: housing_element_sites 382 = the 6th-cycle
+sites inventory, project_area_parcels_data 495, dev_potential 335, Opportunity_Sites 258 w/ 63 fields, rent_controlled 1,098,
+use/zoning_gplu, ZoningDistricts 42; UTM 10N; README there). #26-2375 Rent Board → `data/raw/rent_board/`: **41,279
+registered units on 11,618 APNs** (Unit Designation 73%, Type of Coverage, unit counts, bedrooms, tenancy start, rents) +
+112,353-row tenancy history (README there). Session cookie file in `scratch/2026-09-21/` — delete after use.
+
+**Also found + retrieved: #26-2306 Clariti/RFP production (48 files, 107 MB, released 08-13, never downloaded)** →
+`data/raw/clariti_rfp/` (README there): RFP forms, Appendices C–G, scoring guide + vendor scores, draft .mpp schedule, six
+competing vendors' proposals. **Missing from the production: the executed Clariti contract and Clariti's own proposal** →
+follow-up on the thread. #26-1638 (06-05, closed in 80 min, no docs) unidentified — check on portal.
+
+**Track D RUN (evening): `scripts/refresh_record_status.py`** — per-record CapDetail re-read (plain HTTP via
+`record_status_scraper.parse_record_info`; the census `capdetail_href` is a complete URL, no discovery needed) on the 307
+active/address-less multi-unit records: **307/307 ok, 0 failed, 25 statuses changed vs the July census** (5 Issued→Finaled
+incl. 2538 Durant, 2212 Ashby; 2716 Haste Approved→**Closed Expired**; 2700 Shattuck ZP2024-0058 In Review→**Appealed**;
+2955 Shattuck / 3101 Sacramento / 2455 Telegraph → Pending Final Action; 1750 Sacramento PLN2024-0010 Closed→Approved).
+Snapshots → `data/raw/accela_record_status/<rec>.json` + append-only `_history.jsonl`. Master list now OVERLAYS these
+(`status_source=capdetail`, work_location fills the address): **293 projects ≥2u** (was 390 — address-less Planning rows
+merged), **194 in v2 / 99 not (55 ≥5u; 24 filed 2022+)**, address_missing 157→2, needs_status_refresh 228→77.
+
+**Next:** (A) ~~John downloads the 3 productions~~ done except #26-1971's third file (ask for re-release) → verify sizes/sheets → README ledger. (B) `scripts/multiunit_master_list.py`
+→ `data/derived/multiunit_projects_<date>.csv` (ZP + B + census status + CPRA dates + units + `not_in_v2`). (C) send CPRA
+Request A (Master Permits Log 2018–2025, named artifact); hold Request B (all-status BP report) until #26-1971 is read.
+(D) per-record status pass. (E) gated v2 ingestion from the list; re-export; the drawing grows. Also uncommitted from an
+earlier session today: `docs/explorer.js` `?project=` deep link + `scripts/excalidraw_stage_durations.py`.
+
+---
+
 ## 2026-09-16 — Bond map answers Friedman: rate 2×2, six-base bill decomposition, % of bill (NOT committed, NOT pushed)
 
 **Trigger:** E. Friedman's 2026-09-15 review of the bond map (Gmail `1a0a6d4c1ebdc604`; captured with the

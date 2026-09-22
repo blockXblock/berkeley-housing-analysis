@@ -8,6 +8,61 @@
 
 ---
 
+## 2026-09-22 — DEPLOYED: hero loop first, one shared legend, Google out of the page-load path
+
+**Shipped to main `a637153`** (from dev `1c30f2f`), gate 18/18 PASS. Live propagation lags the push
+(Fastly `max-age=600` + Cloudflare) — verify with a hard refresh, not immediately.
+
+**The homepage problem, measured:** it autoplayed **99.7 MB below the fold** (`campanile-adeline-shattuck.mp4`
+69 MB + `tour-elmwood+college+bancroft+shattuck-s2n.mp4` 31 MB — both `needs_rerecord: true`, pushpin-era,
+both invisible to a visitor), and repeated the 128-word colour legend **10×** = 1,280 words, **54% of the
+page's video text**.
+
+**Done:** hero `docs/videos/hero-shattuck-loop.mp4` — 17 s / **2.71 MB** / seamless (tail crossfades into its
+own head, verified first-vs-last frame), cut from the current 2026-09-07 `1-Shattuck-S-N.m4v` render at
+214–232 s (2190 Shattuck + 6 boxes + street labels in frame). Muted/playsinline/poster, holds on the poster
+under `prefers-reduced-motion`, sits **above the buttons** — first thing a visitor sees (John's call).
+Legend → one `<details>`. Two mp4 blocks removed from the page (files untouched on disk). `id="tours"` added.
+**10 YouTube thumbnails self-hosted** to `docs/img/thumbs/` — `i.ytimg.com` was handing Google every visitor's
+IP + Referer on page load, before any click; `<noscript>` iframes → `youtube-nocookie`. **The page now makes
+zero third-party requests on load.** First paint mobile **102 MB → 3.0 MB**; HTML −18%; visible words 2,400 → 1,866.
+`docs/explorer.js` `?project=<id>` deep link (`ca03ea8`) shipped in the same deploy.
+
+**Two gate bugs found and fixed (`scripts/deploy_gate.py`) — the real reason to run a gate, not read a diff:**
+(1) the per-block "every YouTube video carries the colour legend" assertion would have **blocked this deploy**;
+replaced by "exactly one shared legend, naming every stage". (2) video ids came from `youtube\.com/embed`, which
+**does not match `youtube-nocookie.com/embed`** — after the privacy change that check would have passed
+**vacuously**; ids now come from `data-yt`. (3) NEW check: *every local asset the page references is in the
+commit* — `*.mp4` is gitignored (`.gitignore:111`), so the hero could have sat on disk, been absent from the
+commit and **404'd on the homepage**, with `deploy.sh`'s untracked warning blind to it because *ignored ≠ untracked*.
+
+**`CLAUDE.md` media rule CORRECTED** (`436cfa2`): it said every repo-tracked `.mp4` was "a stale old-approach
+artifact → delete" — false, and following it literally would have deleted two videos the live site served.
+Now distinguishes full-length renders (YouTube + T7 masters, never tracked) from short web-served loops
+(≤20 s / ≤5 MB, tracked deliberately, need `git add -f`), with a dated inventory.
+
+**Videos 8–12 still need RE-RECORDING** — content, not text. All five have source KMLs (`tours.json` calls
+Kennedy `unsourced`; **that is wrong** — `kml/tours/panoramic-kennedy-legacy.kml` exists; re-point that entry).
+#9 June Shattuck is "no-icons era" = **no labels**; #10 recorded 09-07 but `has_pushpins`; #11/#12 May 2026,
+pushpins. Re-record from existing KML via `build_tour_package.py` → YouTube (that is what finally retires the
+two 100 MB local mp4s).
+
+**Also this session (not deployed):** `notes/2026-09-22_dfw_voice_video_prose_trial.md` — all 12 flyover texts
+in DFW's voice, **status for-review**. Measured finding: where the original had substance the rewrite expands
+1.3–1.8×; where it had a stub, **4.6–16.9×** — the voice only works where there was already a conceptual knot.
+Recommendation: apply to 4 entries (UC #3, San Pablo #7, 17-Largest #10, Elmwood #12), not 12, behind a
+`<details>` so the essay is opt-in. `notes/2026-09-22_save_berkeley_shops_event_survey.md` — Aug 2025 → Sep 2026
+chronology; corrects **Raimi + Associates** (City's $600k CZU consultant) vs **Rohini Kumar** (SBS treasurer),
+and dates the ignition to the **20 Aug 2025 corridor-specific Workshop #2**, not the generic 1 May workshop.
+
+**Housekeeping:** permission allowlist pruned 258 → 39 rules (195 dead one-shot exact strings) + 24 read-only
+prefixes in `.claude/settings.json`; `git push`/`merge`/`gh api`/`python3 -c` wildcards removed as dangerous.
+
+**Next:** (A) re-record #8–#12 + re-point the Kennedy catalog entry. (B) decide the DFW trim-to-four.
+(C) optional: deck-sentence + `<details>` two-tier text for the 7 current tours.
+
+---
+
 ## 2026-09-21 — Multi-unit master list: three CPRA productions never fetched; Accela census refreshed to today (NOT committed)
 
 **Trigger:** the Excalidraw stage-duration drawing shows 40 of 214 multi-unit projects — a milestone-COVERAGE

@@ -136,6 +136,72 @@ Snapshots → `data/raw/accela_record_status/<rec>.json` + append-only `_history
 (`status_source=capdetail`, work_location fills the address): **293 projects ≥2u** (was 390 — address-less Planning rows
 merged), **194 in v2 / 99 not (55 ≥5u; 24 filed 2022+)**, address_missing 157→2, needs_status_refresh 228→77.
 
+## 2026-09-23 — PHASE 2: the inspection trail VALIDATES the verdict layer (382/388 exact-day)
+
+**Phase 2 ran overnight under `caffeinate -ims`.** 505 succeeded, then the orchestrator's safety guard tripped
+(5 consecutive `ERR_TIMED_OUT` — a network/Accela blip, not blocking: aca-prod answers 200 in 0.14 s this morning).
+Guard worked as designed. The 6 timeouts were requeued per the retry rule and the remaining **238 are running now**.
+Inspection files **117 -> 774**.
+
+**`data/derived/co_from_inspections_2026-09-23.csv` — 502 projects from 774 permits:**
+| class | projects | units |
+|---|---|---|
+| fills_gap | **48** | **741** |
+| agrees (+-7d) | 388 | 2,116 |
+| disagrees_small / large | 5 / 14 | 121 / 525 |
+| no_building_final | 47 | 1,439 |
+
+**THE HEADLINE IS THE AGREEMENT, not the corrections.** Of 388 projects where both v2 and the inspection trail
+carry a date, **382 are the EXACT SAME DAY** (mean |delta| 0.05 d, max 6). The ADR-002 verdict layer
+(`permit_role_classifier @ 112cb03`) is independently corroborated to the day in 98.5% of overlapping cases.
+The inspection trail's value is therefore NOT replacement — it is the **gaps** and the **conflicts**.
+
+- **48 gap-fills close 44 of the 72 `Completed`-with-no-date projects** (741 units) — 61% of the APR gap.
+- **14 `disagrees_large`, 8 of them multi-permit** = the multi-building problem, not error: proj179 Acheson
+  (+1061 d), proj226 1837 Berkeley Way (+1337 d), proj544 1157 Francisco (+1203 d), proj91 2009 Addison (+556 d).
+  The **6 single-permit large disagreements are the real review set**: proj154 2001 Ashby 87u (v2 2025-06-01 vs
+  insp 2025-02-24), proj385 1222 Carleton (v2 date **1,319 days AFTER** the final), proj903, proj624.
+- **88 permits v2 does not track have approved building finals — 483 units** (22 adding >=2, 10 adding >=5),
+  spread across CO years 2018-2026 (15 already in 2026): B2019-05608 **1951 Shattuck 163u CO 2024-10-24**,
+  B2022-01111 2000 University 81u, B2015-03000 1900 Walnut 65u, B2021-02423 40u. **Completed housing absent
+  from the serving DB** — this is the same population as the master list's not-in-v2 set, now with dated COs.
+
+**ADUs verify identically** (76 ADU permits harvested, 48 with a Building Final row, 45 Approved; same full
+sequence). **BUT: 2,765 of 3,351 ADU-flagged primary permits carry a BLANK `UnitsAdded`** and so fall outside
+every units-based target list, including Phase 2's. `housing_rules.classify` rates **320 of them confident
+`new_unit`** (real housing) and 2,445 `ambiguous` (dirty flag). **Phase 2b = those 320 (~3.4 h), queued after
+Phase 2 finishes** — a second Playwright process now would double the load on Accela.
+
+**CLARITI (#26-2306) — two findings from the appendices we already hold:**
+1. **The `_vfinal` appendices ARE Clariti's own responses** (C Features, D Reporting, E Interfaces). Earlier note
+   that "Clariti's proposal was not produced" was too broad: the **executed contract** and the **narrative
+   proposal** are what is missing.
+2. **Appendix D requires the new system to PRINT a Certificate of Occupancy AND a Temporary CO**, with named
+   fields (permit no., address, APN, owner, occupancy group, construction type, sprinklers, occupancy load, code
+   edition; TCO adds outstanding items + completion deadline). Clariti committed to both. So the replacement
+   system **is specified to issue COs** — which sits oddly beside our working assumption that Berkeley issues none.
+3. **ZERO open-data requirements.** Searched all four City-authored appendices for open data / Socrata / CKAN /
+   bulk export / public API / machine-readable: **no matching requirement**. Appendix E's interface list
+   (CitizenServe, Alameda Assessor, Consumer Affairs, RealQuest, BuildingEye, SAIRA, Accela, ERMA, FUND$) has no
+   public bulk-data feed. **A $5,359,128 permit-system replacement was specified without one.** Citable fact.
+
+**Written:** `docs/methodology/verifying_a_large_multiunit_project.md` (the six checks: identity/parcel set by
+assessor block, entitlement, BP via `net_units`, inspection trail, dated CO per PERMIT, assessor corroboration;
+what each can and cannot settle; escalation ladder). CPRA note gains **Request C** (does the City issue COs; if
+not, confirm in writing that the building-permit final is the operative occupiable determination — converts OUR
+rule into THE CITY'S) and **Request D** (contract data-ownership/export terms, BuildingEye feed continuation, and
+the **Accela cutover date** — when Accela goes dark the census and inspection trail may go with it).
+
+**Flagged:** the AgencyCounter/BuildingEye JSON API (the 2026-08-27 "data-source breakthrough") now returns **0
+records** for addresses that certainly have permits — it changed with the buildingeye -> agencycounter rebrand.
+Not blocking; needs its own look.
+
+**Next:** finish Phase 2 (238 running) -> Phase 2b (320 blank-UnitsAdded ADUs) -> the gated write (build the
+`inspections` table = Layer A, never built; add approved Building Final as ADR-001's top tier; backfill 48 gaps)
+-> John reviews the 6 single-permit conflicts + the 88 untracked completions.
+
+---
+
 ## 2026-09-22 — CO FROM THE INSPECTION TRAIL: the completion signal the CPRA feed cannot give (read-only)
 
 **The problem John named:** the APR needs a CO year per project, but `Finaled Status='Finaled'` carries NO date on

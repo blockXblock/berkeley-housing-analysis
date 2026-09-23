@@ -40,6 +40,13 @@ OUT = ROOT / "data/derived"
 
 BUILDING_FINAL = "Building 1200 Building Final"
 PASSING = "Approved"                      # NOT 'Partially Approved', NOT 'Site Cancellation'
+# ROLE GATE (added 2026-09-23 after John questioned proj4, 1914 Fifth St). An approved Building Final
+# is only a COMPLETION if the permit could create a dwelling. proj4's three "finals" are a warehouse
+# DEMOLITION, a site-work demo and a parking-lot grading permit — all finaled in 2017, none of them a
+# 257-unit building becoming occupiable. Measured across the harvest: 19 of 834 permits producing an
+# approved Building Final are demolition/non-housing, 93 are alterations, 58 ambiguous.
+# Only housing_rules.permit_role.classify == 'new_unit' sets a date; the rest are reported, not used.
+CO_ROLES = {"new_unit"}
 
 
 def _iso(s):
@@ -51,8 +58,35 @@ def _iso(s):
     return None
 
 
-def read_inspections():
-    """permit -> {co, n_inspections, n_final_rows, final_results}. co = LAST approved building final."""
+def permit_roles():
+    """permit -> role, from the CPRA feed where the permit is in it, else the census description."""
+    import pandas as pd, warnings
+    warnings.filterwarnings("ignore")
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from housing_rules.permit_role import classify
+    from multiunit_master_list import load_census
+    cp = pd.concat([pd.read_excel(f, header=7) for f in
+                    glob.glob(str(ROOT / "data/raw/cpra-downloads/BP_Annual*.xlsx"))]
+                   ).drop_duplicates("PermitNumber", keep="last").set_index("PermitNumber")
+    census = load_census("Building", "Permit Number")
+    roles = {}
+    for pn in set(cp.index) | set(census):
+        if pn in cp.index:
+            r = cp.loc[pn]
+            if getattr(r, "ndim", 1) > 1:
+                r = r.iloc[0]
+            roles[pn] = classify(r.get("Work Type"), r.get("WorkDescription"), r.get("ADU"),
+                                 r.get("OccType"), r.get("UnitsAdded"), r.get("UnitsRemoved"), pn)[0]
+        else:
+            roles[pn] = classify(None, (census.get(pn) or {}).get("Description"),
+                                 None, None, None, None, pn)[0]
+    return roles
+
+
+def read_inspections(roles=None):
+    """permit -> {co, role, n_inspections, n_final_rows, final_results}. co = LAST approved building
+    final, and ONLY when the permit's role can create a dwelling (see CO_ROLES)."""
+    roles = roles or {}
     out = {}
     for f in sorted(INSPECTIONS.glob("*.json")):
         try:
@@ -66,7 +100,10 @@ def read_inspections():
         finals = [i for i in ins if str(i.get("type_code", "")).strip() == BUILDING_FINAL]
         dates = sorted(x for x in (_iso(i.get("date")) for i in finals
                                    if i.get("result") == PASSING) if x)
-        out[pn] = dict(co=dates[-1] if dates else None, n_inspections=len(ins),
+        role = roles.get(pn, "unknown")
+        if role not in CO_ROLES:
+            dates = []                     # finaled, but not a dwelling-creating permit
+        out[pn] = dict(co=dates[-1] if dates else None, role=role, n_inspections=len(ins),
                        n_final_rows=len(finals),
                        final_results=";".join(sorted({str(i.get("result")) for i in finals})),
                        scraped=str(d.get("extraction_timestamp") or "")[:10])
@@ -79,7 +116,8 @@ def main():
     ap.add_argument("--date", default=dt.date.today().isoformat())
     a = ap.parse_args()
 
-    insp = read_inspections()
+    roles = permit_roles()
+    insp = read_inspections(roles)
     con = sqlite3.connect(V2)
     con.row_factory = sqlite3.Row
     permit_to_project = {}
@@ -104,7 +142,8 @@ def main():
         latest = max(cos.values()) if cos else None
         v2co = (p["co_issued_date"] or "")[:10] or None
         if not cos:
-            cls = "no_building_final"
+            cls = ("final_but_not_housing" if any(v["n_final_rows"] and v.get("role") not in CO_ROLES
+                                                  for v in permits.values()) else "no_building_final")
             delta = ""
         elif not v2co:
             cls, delta = "fills_gap", ""
@@ -121,6 +160,9 @@ def main():
             multi_permit=int(len(cos) > 1),
             per_permit=";".join(f"{k}={v}" for k, v in sorted(cos.items())),
             final_results_seen=";".join(sorted({v["final_results"] for v in permits.values() if v["final_results"]})),
+            roles_seen=";".join(sorted({v.get("role","?") for v in permits.values()})),
+            excluded_by_role=int(bool(permits) and not cos and any(
+                v["n_final_rows"] and v.get("role") not in CO_ROLES for v in permits.values())),
         ))
     rows.sort(key=lambda r: (r["classification"], -(r["units"] or 0)))
 
@@ -136,7 +178,8 @@ def main():
         counts[r["classification"]][1] += r["units"] or 0
     print(f"{f.name}: {len(rows)} projects from {len(insp)} harvested permits "
           f"({len(untracked)} permits not tracked by v2)")
-    for k in ("fills_gap", "agrees", "disagrees_small", "disagrees_large", "no_building_final"):
+    for k in ("fills_gap", "agrees", "disagrees_small", "disagrees_large", "no_building_final",
+              "final_but_not_housing"):
         n, u = counts[k]
         print(f"  {k:18} {n:>4} projects  {u:>6} units")
     con = sqlite3.connect(V2)

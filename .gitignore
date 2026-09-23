@@ -161,3 +161,12 @@ uv.lock.tmp
 
 # OAuth client secrets and cached tokens — never commit
 .secrets/
+
+# Participant research: public-record comment data that includes personal email
+# addresses of private individuals. Public records, but not ours to republish --
+# the analysis is committed, the identities stay local. (2026-09-22)
+data/private/
+
+# CZU source PDFs: 288 MB of published City documents, re-fetchable with
+# scripts/fetch_czu_documents.py (manifest carries sha256). Analysis is committed; bulk stays out.
+data/raw/czu/*.pdf

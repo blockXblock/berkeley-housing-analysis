@@ -95,8 +95,13 @@ older records keep their July status; a per-record status pass (~100 multi-unit 
 **#26-1971 retrieved (2 of 3 files):** `BP_Annual Permit Report-2025-2026-07-07.xlsx` (Post Date 1/1/2025–7/7/2026;
 8,035 permits, 2,133 new, 2,097 issued + 1,946 finaled in 2026 — closes the 2026 gap to July 7; e.g. 2442 Haste
 B2025-03529 38u issued 2026-05-20, 2016 Ashby B2024-01268 50u issued 2026-03-26) and `..._2023-2025_rerun-2026-07-07.xlsx`
-(same window re-run: +278 Finaled statuses, 167 issuance dates changed — a 3rd snapshot). **No status column delivered**
-→ CPRA Request B stays live. Third file (`BP_Annual Permit Report.xlsx`) would not download — ask for re-release.
+(same window re-run: +278 Finaled statuses; dates did NOT move — 0 real Finaled-Date changes, 1 Issuance-Date change.
+An earlier "167" here was a NaT!=NaT string-compare artifact, corrected 2026-09-22.). **No status column delivered**
+→ CPRA Request B stays live. Third file RETRIEVED 2026-09-22 (`..._2018-2022_rerun-2026-07-07.xlsx`, 3.63 MB): it was never broken — the browser
+click failed but the `/download` endpoint served it with a signed-in session. It is the 2018-22 re-run, identical
+permit set, 0 real date changes, 6 gained Finaled Status. **All #26-1971 files are now on disk; no re-release needed.**
+Finding: `Finaled Status='Finaled'` with NO Finaled Date grew 706 -> 985 in the 2023-25 window between productions —
+all 278 newly-finaled rows lack a date, so Finaled Status alone is not a completion signal.
 Ledger in `data/raw/cpra-downloads/README.md`. Not ingested.
 
 **Track C BUILT (read-only):** `scripts/multiunit_master_list.py` → `data/derived/multiunit_projects_2026-09-21.csv`

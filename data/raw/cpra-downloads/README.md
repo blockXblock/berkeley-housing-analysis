@@ -100,16 +100,20 @@ These files are the planned foundation for the D5 (CPRA-first) APR generation wo
 
 ## 2026-07-07 production — NextRequest **26-1971** (BP refresh; retrieved 2026-09-21, 11 weeks late)
 
-Request filed 2026-07-03 (the 07-03 note mis-cited it as #26-1972). Granted 2026-07-07 with THREE files; two
-retrieved so far (the third, `BP_Annual Permit Report.xlsx`, would not download from the request page — re-release
-to be asked for). **Same 23-column schema; NO status column** — the request's "current permit status (issued,
+Request filed 2026-07-03 (the 07-03 note mis-cited it as #26-1972). Granted 2026-07-07 with THREE files;
+**all three now retrieved** (the third on 2026-09-22 — it had failed in the browser, but the file was never broken:
+the per-document `/download` endpoint served it normally with a signed-in session, 3.63 MB. Document ids 66458673/4/5). **A self-contradiction to watch:** rows with `Finaled Status='Finaled'` but NO Finaled Date grew from **706 to 985**
+in the 2023-25 window between the two productions — all 278 newly-"finaled" permits arrived without a date. Do not
+treat `Finaled Status` as a completion signal on its own.
+
+**Same 23-column schema; NO status column** — the request's "current permit status (issued,
 finaled, expired, cancelled)" item was not honoured (still `Issued`-only) → the all-status ask stays open.
 
 | local file | City name | banner | rows | unique permits | notes |
 |---|---|---|---|---|---|
 | `BP_Annual Permit Report-2025-2026-07-07.xlsx` | `(2).xlsx` | For Post Date **1/1/2025 to 7/7/2026** | 8,039 | 8,035 | **THE NEW WINDOW.** 2,133 permits in no prior production; 2,097 issued in 2026, 1,946 finaled in 2026. Issuance through 2026-07-07, finaled through 2026-07-06. Overlaps 2025 with the 2023-25 file (deliberate — a status refresh). |
-| `BP_Annual Permit Report-2023-2025_rerun-2026-07-07.xlsx` | `(1).xlsx` | For Post Date 1/1/2023 to 12/31/2025 | 14,151 | 14,145 | A **re-run of the 2023-25 report as of 2026-07-07** — NOT a duplicate: +2 REV rows, **278 permits gained Finaled Status**, 167 Issuance Dates changed vs the ~2026-04-20 production. Third snapshot point for the finaled time series (keep both). |
-| *(not retrieved)* | `BP_Annual Permit Report.xlsx` | ? (probably the 2018-22 re-run) | | | download link dead on 2026-09-21; ask Planning to re-release. |
+| `BP_Annual Permit Report-2023-2025_rerun-2026-07-07.xlsx` | `(1).xlsx` | For Post Date 1/1/2023 to 12/31/2025 | 14,151 | 14,145 | A **re-run of the 2023-25 report as of 2026-07-07**: +2 REV rows and **278 permits gained `Finaled Status='Finaled'`** vs the ~2026-04-20 production. **Dates did NOT move**: 0 real Finaled-Date changes, 1 Issuance-Date change (an earlier note here said 167 — that was a `NaT != NaT` string-comparison artifact, corrected 2026-09-22 by normalising both sides to dates before comparing). |
+| `BP_Annual Permit Report-2018-2022_rerun-2026-07-07.xlsx` | `BP_Annual Permit Report.xlsx` | For Post Date 1/1/2018 to 12/31/2022 | 18,053 | — | **Retrieved 2026-09-22.** The 2018-22 re-run. Identical permit set to the 2026-05-20 production; **0 real date changes**, 6 rows gained Finaled Status. As expected for a closed window — kept for completeness, carries nothing new. |
 
 Neither file has been ingested into v2/v4 (as of 2026-09-21). The 2025-2026 file closes the 2026 gap to July 7;
 the Accela date-range census (`data/raw/accela/date_range/`) covers filings July 8 → today.

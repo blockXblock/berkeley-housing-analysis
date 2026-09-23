@@ -54,7 +54,7 @@ BUILDING_FINAL = "Building 1200 Building Final"
 _NEWCON = re.compile(
     r"\bnew construction\b|\bconstruct(?:ion of)?\s+(?:a\s+)?new\b|\bnew\s+\d+[- ]stor(?:y|ey)\b"
     r"|\bphase\s+[iv1-9]+\b.*\b(?:unit|multifamily|multi[- ]family|apartment|residential)\b"
-    r"|\b\d{1,3}[- ]unit\b.*\b(?:building|bldg|multifamily|multi[- ]family|apartment)\b"
+    r"|\(?\d{1,3}\)?[- ]unit[s]?\b.*\b(?:building|bldg|multifamily|multi[- ]family|apartment|condominium|project)\b"
     r"|\b(?:multifamily|multi[- ]family)\s+building\b|\bnew\s+(?:sfd|single[- ]family|duplex|adu)\b", re.I)
 _DEMO = re.compile(r"\bdemo(?:lish|lition)?\b", re.I)
 
@@ -70,7 +70,12 @@ def is_new_construction(desc, cpra_row=None, permit_number=""):
         if str(cpra_row.get("Work Type") or "").strip().lower().startswith("new"):
             return True
     d = str(desc or "")
-    if _DEMO.search(d[:80]) and not _NEWCON.search(d):
+    # A description that OPENS with demolition is a demolition permit, full stop. Do not let a later
+    # mention of new construction override it: 2403 San Pablo's demo permits all end "...to be removed
+    # FOR NEW CONSTRUCTION", which is the reason for the demolition, not a claim that this permit
+    # builds anything. Read the other way round (2026-09-23) it credited three demolitions with the
+    # 36-unit building's completion, while the real permit B2024-00143 tested False.
+    if _DEMO.search(d[:80]):
         return False
     return bool(_NEWCON.search(d))
 

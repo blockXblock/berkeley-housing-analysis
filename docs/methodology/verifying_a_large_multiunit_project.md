@@ -82,6 +82,32 @@ posts. `Imps=$0` + no finaled permit + not recent = the genuinely suspect case.
 Harvester (bulk Playwright) → retry once → per-record CapDetail read → **only then** the CIC/Chrome
 spot-check, which is the expensive, near-manual last resort. Never start at CIC.
 
+## Three traps that text inference walks into (all found by ground truth, 2026-09-23)
+
+Each of these produced a confident, wrong answer that only John's local knowledge caught. Treat any
+role or status derived from permit description text as a SCREEN, never as evidence.
+
+1. **A finaled permit is not a finaled building.** 1914 Fifth St has three approved Building Finals
+   (2017) — a warehouse demolition, a site-work demo and a parking-lot grading permit. The site is a
+   parking lot today. *Guard:* only a permit that can create a dwelling may carry a completion.
+2. **A demolition's stated REASON is not the permit's purpose.** 2403 San Pablo's demolition permits
+   read "...All structures and paving on site to be removed **for new construction**." A pattern
+   matching "new construction" credited three demolitions with the building's completion — while the
+   real 36-unit permit, `B2024-00143` ("Privately funded, 4-story, mixed use, (36) unit condominium
+   project"), tested negative because "(36) unit" carries a parenthesis. The test was exactly
+   backwards. *Guard:* a description that OPENS with demolition is a demolition, whatever follows.
+3. **`Imps > 0` does not transfer from parcels to projects.** On a redevelopment site the assessor's
+   improvement value is the EXISTING building: 2700 Shattuck $11.9M, Ashby BART $5.5M, 2127 Dwight
+   $22.7M — all pre-project structures. A first pass flagged 19 projects / 2,463 units as
+   probably-built on that basis; every one was wrong. *Guard:* Imps means something only once a
+   new-construction permit exists and the project is past entitlement.
+
+**The standing conclusion:** the strongest evidence in this pipeline is structured (CPRA `Work Type` +
+`UnitsAdded` through `classify`, inspection `type_code` + `result` + date). Free-text descriptions are
+written by applicants to describe intent, not to be parsed. And **`field_survey_date` /
+`field_survey_notes` exist in `v_projects_flat` and are unused** — they are the right home for the
+ground truth that caught all three of these.
+
 ## Known unresolved
 - **Multi-building projects have no home in the schema.** One `co_issued_date` per project cannot
   represent two buildings finaled 19 months apart. Until the model carries buildings, report per permit

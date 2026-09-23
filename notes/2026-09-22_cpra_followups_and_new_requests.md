@@ -18,7 +18,17 @@ with every structured column blank.
 
 ---
 
-## 1. FOLLOW-UP on #26-1971 — the third file will not download
+## 0. STATUS 2026-09-22 (evening) — two items closed by retrieval, two new asks added
+
+- **#26-1971 third file: CLOSED.** It downloaded fine from the `/download` endpoint with a signed-in
+  session; it is the 2018-22 re-run and carries nothing new. **Do not send §1.**
+- **#26-2306: NARROWED.** The `_vfinal` appendices turn out to be **Clariti's own responses** (Appendix C
+  Features, D Reporting, E Interfaces), so we DO have Clariti's commitments. What is still missing is the
+  **executed contract** and Clariti's **narrative proposal**. §2 stands, with the scope corrected below.
+- **NEW §6** (CO/TCO configuration) and **NEW §7** (open-data gap) — both provoked by what the Clariti
+  appendices say, and do not say.
+
+## 1. ~~FOLLOW-UP on #26-1971~~ — RESOLVED 2026-09-22, do not send
 
 > Re: request #26-1971. Thank you for the production of 7 July 2026. Of the three files released, two downloaded
 > successfully (`BP_Annual Permit Report (1).xlsx` and `(2).xlsx`). The third, `BP_Annual Permit Report.xlsx`, does not
@@ -38,6 +48,9 @@ with every structured column blank.
 >    Statement of Work, the software subscription/licence agreement and any data-processing addendum or amendments; and
 > 2. **Clariti's own proposal** in response to RFP 24-11661-C.
 >
+> (I have the Appendix C/D/E responses Clariti submitted; it is the contract and the narrative proposal
+> that are absent.)
+>
 > These are the records that address items 4 and 5 of my request — data ownership, bulk export and portability, open-data
 > and API provisions, and the City's right to extract and republish its own permit data. Please produce them, or, if any
 > portion is withheld, identify the exemption relied on for that portion and produce the remainder (Gov. Code § 7922.525).
@@ -54,6 +67,69 @@ with every structured column blank.
 > open-data portal, where no records request would be needed at all. Offered as feedback only — no further records sought.
 
 ---
+
+## 6. NEW REQUEST C — the CO / Temporary CO configuration (provoked by Appendix D)
+
+**Why this is new information.** Appendix D of the City's own RFP requires the new system to produce a
+**"Certificate of Occupancy"** and a **"Temporary Certificate of Occupancy"** as *printed forms*, with
+named fields: Building Permit Number, Address, APN, Building Owner, Owner Address, Occupancy Group, Type
+of Construction, Use Classification, Automatic Sprinkler (Y/N), Design Occupancy Load, Edition of Building
+Code, Permit Description, Special Conditions and Limitations — and for the TCO, a **List of Outstanding
+Items** and a **Completion Deadline Date**. Clariti answered "available" and offered its document/letter
+generator. So Berkeley's permit system is *specified to issue COs*. That sits oddly beside the working
+assumption — ours and the APR's — that Berkeley finals permits and issues no CO. Both can be true (COs for
+certain occupancies, permit-final for the rest), but we should not guess which.
+
+> Under the California Public Records Act, regarding certificates of occupancy:
+>
+> 1. Does the City **currently issue** Certificates of Occupancy or Temporary Certificates of Occupancy for
+>    residential projects? If so, please produce a **list of all COs and TCOs issued from January 1, 2018
+>    through fulfilment**, with the certificate number or identifier, the associated building permit
+>    number, the address and APN, the date issued, and the number of dwelling units covered.
+> 2. If COs are recorded in the permitting system, identify the **record type, document type or field**
+>    where they are stored, and whether they are retrievable as a report or export.
+> 3. If the City does **not** currently issue them, please confirm that in writing, and state whether the
+>    **building-permit final inspection** (Accela inspection type "Building 1200 Building Final") is the
+>    City's operative determination that a residential building may be occupied.
+> 4. Appendix D of RFP 24-11661-C requires the replacement system to generate both forms. Please produce
+>    any **policy, procedure or configuration decision** on when a CO or TCO will be issued under the new
+>    system, and from what date.
+>
+> Item 3 is the one I most need: it establishes, on the record, which artifact marks a dwelling as
+> occupiable. My analysis of Berkeley housing completions depends on that definition, and I would rather
+> use the City's than my own.
+
+*(Why it matters to us: our completion rule — approved `Building 1200 Building Final` — is OUR rule. A
+written answer to item 3 converts it into the City's rule, which is what the Possibility Lab and any
+reviewer would need. Cheap for the City: three sentences.)*
+
+## 7. NEW REQUEST D — open data in the Clariti procurement (the gap, on the record)
+
+**The finding:** searched all four City-authored appendices (C Features, D Reporting, E Interfaces, F Data
+Migration) for *open data, data.cityofberkeley, Socrata, CKAN, bulk export, public API, machine-readable*.
+**Zero matching requirements.** Appendix E lists every interface the City asked for — CitizenServe,
+Alameda County Assessor (batch permits issued and finaled), Dept of Consumer Affairs, RealQuest,
+BuildingEye, SAIRA, Accela, ERMA, FUND$ — and **no open-data or public bulk-data interface is among them**.
+The public-facing requirement is a *citizen portal* (apply, pay, track your own permit), not public data.
+So a **$5,359,128 permit-system replacement was specified without a public bulk-data or API requirement.**
+
+> Under the California Public Records Act, regarding public data access under the Clariti permit system
+> (RFP 24-11661-C):
+>
+> 1. Any records — staff reports, memoranda, evaluation notes, email, or contract provisions — addressing
+>    **public access to permit data in bulk**, an **open-data feed or API**, or publication of permit data
+>    to the City's open-data portal under the new system.
+> 2. The provisions of the executed agreement addressing **data ownership**, the City's right to
+>    **extract, export and republish** its own data, and any limitation the vendor places on that right.
+> 3. Whether the City intends to **continue the BuildingEye / AgencyCounter data feed** (listed as an
+>    interface in Appendix E) after the Clariti cutover, and any decision record on that.
+> 4. The **cutover date** and any plan for **historical permit data** (pre-cutover records) — whether it
+>    migrates into Clariti, remains in Accela, or is archived, and how the public will reach it.
+>
+> If the City has made no decision on item 1, please say so; that answer is itself responsive.
+
+*(Item 4 is operationally urgent for us: when Accela is switched off, the date-range census and the
+inspection trail — our only source for dated completions — may go with it. We need to know the date.)*
 
 ## 4. NEW REQUEST A — the Planning "Master Permits Log", prior years
 

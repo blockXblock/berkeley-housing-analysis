@@ -136,6 +136,39 @@ Snapshots → `data/raw/accela_record_status/<rec>.json` + append-only `_history
 (`status_source=capdetail`, work_location fills the address): **293 projects ≥2u** (was 390 — address-less Planning rows
 merged), **194 in v2 / 99 not (55 ≥5u; 24 filed 2022+)**, address_missing 157→2, needs_status_refresh 228→77.
 
+## 2026-09-23 (later) — PHASES 2 + 2b COMPLETE: 1,300 inspection files; 128 ADU completions no units-list could find
+
+**Phase 2: 743/743 succeeded.** The 6 network timeouts that tripped the consecutive-failure guard ALL succeeded on
+retry — the CLAUDE.md retry rule doing exactly what it says (a failure is not evidence until retried).
+**Phase 2b: 288 succeeded, 21 skipped (`requires_auth` — Accela gates those records behind a login).**
+Inspection files **117 -> 1,300**.
+
+**`data/derived/co_from_inspections_2026-09-23.csv` — 653 projects from 1,300 permits:**
+| class | projects | units |
+|---|---|---|
+| fills_gap | **52** | **745** |
+| agrees (+-7d) | **530** | 2,259 |
+| disagrees_small / large | 5 / 15 | 121 / 526 |
+| no_building_final | 51 | 1,443 |
+
+**The agreement HELD as the sample grew 4.5x** (388 -> 530 projects, still essentially all exact-day). ADR-002's
+`permit_role_classifier @ 112cb03` is independently corroborated at scale. The trail's value is gaps + conflicts.
+
+**PHASE 2b PAID OFF — the ADU blind spot was real.** Of 299 harvested ADU permits carrying a BLANK `UnitsAdded`
+(invisible to every units-based target list), **139 have a Building Final row and 128 an APPROVED one — 128 dated
+ADU completions**, spread 2018-2026 (2024: 22, 2025: 21, 2026: 15). None would have been found by filtering on
+`UnitsAdded`. This is the ADU/infill tail that CLAUDE.md flags as the reason the RHNA bar is coverage-limited —
+now with dates.
+
+**564 harvested permits are not in v2 at all** (up from 197 -> 361 -> 564 as the harvest grew).
+
+**Next:** the gated write, proposed as ONE step: build the `inspections` table (Layer A, designed 2026-05-23, never
+built — 1,300 files still homeless), add approved `Building 1200 Building Final` as ADR-001's top completion tier,
+backfill the 52 gap-fills. Then John reviews the 6 single-permit conflicts and the untracked completions.
+Still open from 2026-09-21: the PUSH decision (rent-board PII on a public repo) and 5 CPRA sends.
+
+---
+
 ## 2026-09-23 — PHASE 2: the inspection trail VALIDATES the verdict layer (382/388 exact-day)
 
 **Phase 2 ran overnight under `caffeinate -ims`.** 505 succeeded, then the orchestrator's safety guard tripped

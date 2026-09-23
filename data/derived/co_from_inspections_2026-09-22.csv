@@ -1,19 +1,24 @@
 project_id,address,units,v2_status,v2_co_date,inspection_co_date,classification,delta_days,n_permits_with_inspections,n_permits_with_approved_final,multi_permit,per_permit,final_results_seen
+135,2150 Kittredge St,169,Completed,2024-03-20,2024-03-20,agrees,0,3,2,1,B2021-00008=2024-03-20;B2023-01578=2024-03-05,Approved;Approved;Cancelled;Disapproved;Partially Approved;Site Cancellation
+136,1951 Shattuck Ave,163,Completed,2024-10-24,2024-10-24,agrees,0,1,1,0,B2021-04893=2024-10-24,Approved;Partially Approved
 901,2012 BERKELEY Way,142,Completed,2022-09-23,2022-09-21,agrees,-2,1,1,0,B2019-03862=2022-09-21,Approved
 173,2000 DWIGHT Way,113,Completed,2025-06-17,2025-06-17,agrees,0,2,2,1,B2021-02404=2025-06-17;B2023-00675=2025-03-27,Approved;Disapproved;Approved;Disapproved;Site Cancellation
 467,2100 San Pablo Ave,96,Completed,2023-05-02,2023-05-02,agrees,0,1,1,0,B2019-03689=2023-05-02,Approved;Cancelled;Partially Approved;Site Cancellation
 899,2035 BLAKE St,82,Completed,2022-04-20,2022-04-20,agrees,0,1,1,0,B2016-00895=2022-04-20,Approved;Cancelled
 897,2628 SHATTUCK Ave,78,Completed,2021-07-16,2021-07-16,agrees,0,1,1,0,B2019-01950=2021-07-16,Approved;Disapproved;Partially Approved;Rescheduled;Site Cancellation
+168,3000 SAN PABLO Ave,78,Completed,2023-06-05,2023-06-05,agrees,0,1,1,0,B2020-04316=2023-06-05,Approved;Cancelled;Disapproved;Partially Approved;Site Cancellation
 96,2099 M L KING JR Way,72,Completed,2024-05-17,2024-05-17,agrees,0,2,1,0,B2021-03950=2024-05-17,Approved;Cancelled;Partially Approved;Rescheduled;Site Cancellation
 164,1752 SHATTUCK Ave,72,Completed,2026-05-26,2026-05-26,agrees,0,1,1,0,B2023-00774=2026-05-26,Approved;Cancelled;Disapproved;Partially Approved;Site Cancellation
 890,2539 TELEGRAPH Ave,70,Completed,2019-09-30,2019-09-30,agrees,0,1,1,0,B2016-03471=2019-09-30,Approved;Disapproved;Partially Approved;Site Cancellation
 902,2111 UNIVERSITY AVE,68,Completed,2022-03-04,2022-03-04,agrees,0,1,1,0,B2015-03005=2022-03-04,Approved;Cancelled;Site Cancellation
 182,2072 Addison St,66,Completed,2023-07-18,2023-07-18,agrees,0,1,1,0,B2018-04293=2023-07-18,Approved;Cancelled;Disapproved;Partially Approved;Site Cancellation
 228,2527 SAN PABLO Ave,63,Completed,2024-04-30,2024-04-30,agrees,0,1,1,0,B2018-03255=2024-04-30,Approved;Partially Approved;Site Cancellation
+219,2701 Shattuck Ave,57,Completed,2024-07-18,2024-07-18,agrees,0,1,1,0,B2020-01991=2024-07-18,Approved;Cancelled;Partially Approved;Rescheduled;Site Cancellation
 892,2124 BANCROFT Way,50,Completed,2019-11-15,2019-11-15,agrees,0,1,1,0,B2016-04483=2019-11-15,Approved;Disapproved;Partially Approved;Site Cancellation
 466,2067 University Ave,50,Completed,2023-08-10,2023-08-10,agrees,0,1,1,0,B2017-02610=2023-08-10,Approved;Cancelled
 172,2650 TELEGRAPH Ave,45,Completed,2025-06-16,2025-06-16,agrees,0,3,1,0,B2021-02225=2025-06-16,Approved;Cancelled;Disapproved;Site Cancellation
 176,2440 SHATTUCK Ave,40,Completed,2025-03-05,2025-03-06,agrees,1,5,3,1,B2022-05117=2025-03-06;B2023-03611=2024-10-22;B2024-01853=2025-03-04,Approved;Approved;Partially Approved
+158,1367 UNIVERSITY Ave,39,Completed,2025-05-06,2025-05-06,agrees,0,1,1,0,B2022-04366=2025-05-06,Approved;Partially Approved
 134,2480 Bancroft Way,28,Completed,2025-07-10,2025-07-14,agrees,4,3,2,1,B2022-05880=2025-07-14;B2024-01572=2025-04-28,Approved;Cancelled;Approved;Cancelled;Disapproved;Partially Approved;Site Cancellation
 174,1773 OXFORD St,24,Completed,2025-05-21,2025-05-21,agrees,0,4,3,1,B2023-02354=2025-05-21;B2023-03067=2023-10-23;B2023-04569=2025-05-12,Approved;Approved;Disapproved;Site Cancellation;Approved;Partially Approved;Site Cancellation
 428,1717 University Ave,15,Completed,2023-04-04,2023-04-04,agrees,0,1,1,0,B2020-00206=2023-04-04,Approved;Cancelled;Disapproved;Partially Approved;Rescheduled;Site Cancellation
@@ -30,19 +35,46 @@ project_id,address,units,v2_status,v2_co_date,inspection_co_date,classification,
 307,1812 UNIVERSITY Ave,2,Completed,2025-09-02,2025-09-02,agrees,0,1,1,0,B2019-05321=2025-09-02,Approved;Disapproved
 828,0 LATHAM,2,Completed,2022-08-08,2022-08-08,agrees,0,1,1,0,B2019-05488=2022-08-08,Approved;Cancelled;Site Cancellation
 420,2339 Oregon St,2,Completed,2023-03-10,2023-03-10,agrees,0,1,1,0,B2020-01498=2023-03-10,Approved;Disapproved
+775,2116 Allston,2,Completed,2021-10-29,2021-10-29,agrees,0,1,1,0,B2020-02394=2021-10-29,Approved;Cancelled;Disapproved;Partially Approved
+224,2233 GRANT St,2,Completed,2024-03-28,2024-03-28,agrees,0,1,1,0,B2020-02423=2024-03-28,Approved;Cancelled;Disapproved
+337,2132 MCGEE Ave,2,Completed,2025-02-20,2025-02-20,agrees,0,1,1,0,B2020-03292=2025-02-20,Approved;Disapproved
+396,2519 College Ave,2,Completed,2023-05-11,2023-05-11,agrees,0,1,1,0,B2021-00697=2023-05-11,Approved;Disapproved;Site Cancellation
+269,2737 FOREST Ave,2,Completed,2024-03-11,2024-03-11,agrees,0,1,1,0,B2021-02307=2024-03-11,Approved;Disapproved
+274,1683 Oxford St,2,Completed,2024-07-24,2024-07-24,agrees,0,1,1,0,B2021-02315=2024-07-24,Approved;Disapproved
+864,1677 ARCH,2,Completed,2022-04-20,2022-04-20,agrees,0,1,1,0,B2021-03071=2022-04-20,Approved;Site Cancellation
+352,1828 EUCLID Ave,2,Completed,2025-05-22,2025-05-22,agrees,0,1,1,0,B2021-03440=2025-05-22,Approved;Disapproved
+445,1434 Fifth St,2,Completed,2023-09-20,2023-09-20,agrees,0,1,1,0,B2021-05365=2023-09-20,Approved
+348,2618 COLLEGE Ave,2,Completed,2025-07-25,2025-07-25,agrees,0,1,1,0,B2021-05671=2025-07-25,Approved;Cancelled;Disapproved;Rescheduled
+402,131 Avenida Dr,2,Completed,2023-08-15,2023-08-15,agrees,0,1,1,0,B2022-03366=2023-08-15,Approved;Disapproved
+302,1515 HARMON St,2,Completed,2025-05-13,2025-05-13,agrees,0,1,1,0,B2022-03494=2025-05-13,Approved;Disapproved
+200,2226 DWIGHT Way,2,Completed,2024-06-03,2024-06-03,agrees,0,1,1,0,B2022-03844=2024-06-03,Approved
+294,2327 OREGON St,2,Completed,2025-02-28,2025-02-28,agrees,0,1,1,0,B2022-04721=2025-02-28,Approved;Disapproved
+326,2631 REGENT St,2,Completed,2025-06-03,2025-06-03,agrees,0,1,1,0,B2023-02659=2025-06-03,Approved;Disapproved
 64,1515 DERBY St,2,Completed,2025-05-23,2025-05-23,agrees,0,2,1,0,B2023-04430=2025-05-23,Approved;Disapproved
+365,2227 CARLETON St,2,Completed,2025-09-10,2025-09-10,agrees,0,1,1,0,B2023-04737=2025-09-10,Approved;Cancelled;Disapproved;Rescheduled
+355,2436 CHANNING Way,2,Completed,2025-06-17,2025-06-17,agrees,0,1,1,0,B2023-05281=2025-06-17,Approved;Cancelled;Disapproved;Rescheduled;Site Cancellation
+286,1817 SIXTY-SECOND St,2,Completed,2025-06-24,2025-06-24,agrees,0,1,1,0,B2023-05812=2025-06-24,Approved
+357,2639 REGENT St,2,Completed,2025-07-29,2025-07-29,agrees,0,1,1,0,B2023-06071=2025-07-29,Approved;Disapproved
+321,2619 COLLEGE AVE,2,Completed,2025-06-24,2025-06-24,agrees,0,1,1,0,B2024-00819=2025-06-24,Approved;Cancelled;Disapproved;Rescheduled
+343,1300 MONTEREY Ave,2,Completed,2025-10-21,2025-10-21,agrees,0,1,1,0,B2024-00824=2025-10-21,Approved;Disapproved
 555,2740 Elmwood,1,Completed,2019-05-24,2019-05-24,agrees,0,1,1,0,B2017-02662=2019-05-24,Approved;Disapproved;Partially Approved
 715,1031 Channing,1,Completed,2021-11-10,2021-11-10,agrees,0,1,1,0,B2020-01889=2021-11-10,Approved
 83,1136 KEITH Ave,1,Completed,2025-11-10,2025-11-10,agrees,0,6,4,1,B2024-02569=2025-09-15;B2024-02570=2025-11-10;B2024-02712=2025-08-18;B2025-02220=2025-10-14,Approved;Disapproved;Approved;Disapproved;Site Cancellation
-179,2352 Shattuck Ave,237,Completed,2022-01-14,2024-12-10,disagrees_large,1061,4,3,1,B2019-05574=2022-01-14;B2019-05575=2023-08-08;B2024-05208=2024-12-10,Approved;Cancelled;Approved;Partially Approved;Site Cancellation
+316,2620 REGENT St,1,Completed,2025-05-30,2025-05-30,agrees,0,1,1,0,B2024-01193=2025-05-30,Approved;Cancelled;Disapproved;Rescheduled;Site Cancellation
+179,2352 Shattuck Ave,237,Completed,2022-01-14,2024-12-10,disagrees_large,1061,5,4,1,B2019-05574=2022-01-14;B2019-05575=2023-08-08;B2021-03302=2023-08-08;B2024-05208=2024-12-10,Approved;Approved;Cancelled;Approved;Partially Approved;Site Cancellation
 150,3030 TELEGRAPH Ave,144,Completed,2026-01-27,2026-04-16,disagrees_large,79,4,3,1,B2023-06416=2026-04-16;B2023-06442=2025-08-25;B2023-06443=2025-08-25,Approved
+154,2001 ASHBY Ave,87,Completed,2025-06-01,2025-02-24,disagrees_large,-97,1,1,0,B2021-02905=2025-02-24,Approved;Cancelled;Disapproved;Partially Approved;Site Cancellation
 91,2009 ADDISON St,45,Completed,2023-04-04,2024-10-11,disagrees_large,556,2,2,1,B2019-02956=2023-04-04;B2023-03256=2024-10-11,Approved;Approved;Cancelled;Disapproved
-135,2150 Kittredge St,169,Completed,2024-03-20,2024-03-05,disagrees_small,-15,2,1,0,B2023-01578=2024-03-05,Approved
+226,1837 Berkeley Way,3,Completed,2021-04-06,2024-12-03,disagrees_large,1337,1,1,0,B2022-01345=2024-12-03,Approved;Cancelled;Disapproved;Rescheduled
+544,1157 Francisco St,1,Completed,2019-07-25,2022-11-09,disagrees_large,1203,1,1,0,B2021-02937=2022-11-09,Approved;Disapproved
 896,2580 BANCROFT Way,117,Completed,2021-11-29,2021-10-05,disagrees_small,-55,1,1,0,B2019-00478=2021-10-05,Approved;Cancelled;Disapproved;Partially Approved;Site Cancellation
+329,1208 DELAWARE St,1,Completed,2025-02-24,2025-01-21,disagrees_small,-34,1,1,0,B2024-00117=2025-01-21,Approved;Cancelled
 4,1914 FIFTH St,257,In Review,,2017-09-27,fills_gap,,3,3,1,B2015-02460=2017-07-18;B2015-02468=2017-07-18;B2015-03857=2017-09-27,Approved;Approved;Partially Approved
 152,1598 UNIVERSITY Ave,207,Completed,,2024-08-21,fills_gap,,4,1,0,B2024-01602=2024-08-21,Approved
 13,2420 SHATTUCK Ave,132,In Review,,2017-08-03,fills_gap,,4,2,1,B2015-05395=2017-07-27;B2016-01435=2017-08-03,Approved;Approved;Approved with Conditions
 139,2538 DURANT Ave,83,Completed,,2026-04-14,fills_gap,,4,2,1,B2023-01880=2025-08-11;B2025-00875=2026-04-14,Approved;Partially Approved;Approved;Partially Approved;Site Cancellation
+160,2344 FULTON St,18,In Review,,2025-07-21,fills_gap,,1,1,0,B2025-02352=2025-07-21,Approved
+381,2980 College Ave,4,Completed,,2023-11-15,fills_gap,,1,1,0,B2021-04563=2023-11-15,Approved;Disapproved
 129,1614 Sixth St,3,Completed,,2024-03-19,fills_gap,,3,1,0,B2023-05397=2024-03-19,Approved;Disapproved
 53,2641 COLLEGE Ave,3,Completed,,2025-07-24,fills_gap,,3,2,1,B2024-03884=2025-07-08;B2025-02413=2025-07-24,Approved;Approved;Disapproved
 63,1716 SEVENTH St,2,Completed,,2026-03-06,fills_gap,,6,3,1,B2022-01278=2023-07-06;B2025-05132=2026-03-06;B2025-05133=2026-03-05,Approved
@@ -61,7 +93,16 @@ project_id,address,units,v2_status,v2_co_date,inspection_co_date,classification,
 748,2310 Curtis,1,Completed,,2021-07-07,fills_gap,,1,1,0,B2019-05408=2021-07-07,Approved
 806,3108 DEAKIN,1,Completed,,2022-01-19,fills_gap,,1,1,0,B2019-05540=2022-01-19,Approved
 761,1821 Woolsey,1,Completed,,2021-07-07,fills_gap,,1,1,0,B2020-01376=2021-07-07,Approved;Cancelled
+399,1600 Walnut St,1,Completed,,2023-11-16,fills_gap,,1,1,0,B2020-02078=2023-11-16,Approved;Disapproved
+796,1854 San Ramon,1,Completed,,2021-12-06,fills_gap,,1,1,0,B2020-03985=2021-12-06,Approved;Disapproved
+421,2432 Oregon St,1,Completed,,2023-07-28,fills_gap,,1,1,0,B2021-04655=2023-07-28,Approved;Disapproved
+437,2225 Hearst Ave,1,Completed,,2023-08-04,fills_gap,,1,1,0,B2022-01040=2023-08-04,Approved;Disapproved
+256,1517 VIRGINIA,1,Completed,,2024-09-12,fills_gap,,1,1,0,B2022-01742=2024-09-12,Approved;Cancelled;Disapproved;Rescheduled;Site Cancellation
+217,85 Hazel Rd,1,Completed,,2024-05-16,fills_gap,,1,1,0,B2022-04367=2024-05-16,Approved;Disapproved
+245,26 Rock Ln,1,Completed,,2024-09-09,fills_gap,,1,1,0,B2022-06033=2024-09-09,Approved;Disapproved
+333,1300 KAINS AVE,1,Completed,,2025-09-05,fills_gap,,1,1,0,B2023-00112=2025-09-05,Approved;Disapproved
 79,1111 ALLSTON Way,1,Completed,,2026-01-29,fills_gap,,3,2,1,B2023-00192=2026-01-29;B2025-03358=2025-09-25,Approved;Disapproved;Approved;Rescheduled
+262,766 Vincente Ave,1,Completed,,2024-07-17,fills_gap,,1,1,0,B2023-01770=2024-07-17,Approved;Disapproved
 92,3036 REGENT St,1,Completed,,2023-08-09,fills_gap,,2,1,0,B2023-03308=2023-08-09,Approved;Cancelled;Disapproved
 71,40 HILL Rd,1,Completed,,2025-09-29,fills_gap,,2,2,1,B2025-00897=2025-05-09;B2025-03189=2025-09-29,Approved;Cancelled;Disapproved;Approved;Cancelled;Disapproved;Rescheduled;Site Cancellation
 90,576 SAN LUIS Rd,0,Completed,,2026-04-29,fills_gap,,4,1,0,B2025-00709=2026-04-29,Approved;Disapproved;Disapproved
@@ -71,17 +112,27 @@ project_id,address,units,v2_status,v2_co_date,inspection_co_date,classification,
 102,1246 ROSE St,0,Completed,,2024-10-15,fills_gap,,1,1,0,B2024-01323=2024-10-15,Approved;Cancelled;Disapproved
 111,411 VASSAR Ave,0,Completed,,2025-11-17,fills_gap,,2,2,1,B2024-05470=2025-11-17;B2025-00685=2025-11-17,Approved;Cancelled;Disapproved;Rescheduled;Site Cancellation
 132,1627 Jaynes St,0,Under Construction,,2026-03-18,fills_gap,,1,1,0,B2025-04241=2026-03-18,Approved;Cancelled;Disapproved
+1,1750 SACRAMENTO St,739,Entitled,,,no_building_final,,2,0,0,,
 153,1701 SAN PABLO Ave,110,Under Construction,,,no_building_final,,2,0,0,,
 137,2000 University Ave,82,Completed,2024-01-01,,no_building_final,,1,0,0,,
 126,2427 San Pablo,78,Completed,,,no_building_final,,1,0,0,,
 147,2300 ELLSWORTH St,69,Under Construction,,,no_building_final,,3,0,0,,
 27,2441 LE CONTE Ave,65,Completed,,,no_building_final,,1,0,0,,
+143,2902 ADELINE St,54,Withdrawn,,,no_building_final,,1,0,0,,
 32,1740 SAN PABLO Ave,54,Permitted,,,no_building_final,,1,0,0,,
+141,2016 ASHBY Ave,50,Withdrawn,,,no_building_final,,1,0,0,,
 893,2526 DURANT AVE,44,Completed,2019-06-14,,no_building_final,,1,0,0,,Cancelled;Disapproved;Partially Approved
 159,2403 SAN PABLO Ave,36,Under Construction,,,no_building_final,,3,0,0,,
 117,2317 CHANNING Way,22,Entitled,,,no_building_final,,1,0,0,,
+202,1027 HEINZ,3,Completed,2024-11-07,,no_building_final,,1,0,0,,
+60,1464 SIXTH St,3,Permitted,,,no_building_final,,1,0,0,,
+400,2718 Durant Ave,2,Completed,2023-01-05,,no_building_final,,1,0,0,,
+266,1423 Acroft Ct,2,Completed,,,no_building_final,,1,0,0,,
 638,811 Folger,1,Completed,,,no_building_final,,1,0,0,,
 573,1626 Sixty-Second,1,Completed,2019-10-17,,no_building_final,,1,0,0,,
+235,2819 Benvenue Ave,1,Completed,,,no_building_final,,1,0,0,,
+273,1310 DERBY,1,Completed,,,no_building_final,,1,0,0,,
 70,3001 BENVENUE Ave,1,Completed,,,no_building_final,,1,0,0,,
 183,2328 CHANNING Way,,Permitted,,,no_building_final,,1,0,0,,
 88,705 ARLINGTON Ave,0,Completed,,,no_building_final,,3,0,0,,
+184,2330 BLAKE St,,Permitted,,,no_building_final,,1,0,0,,

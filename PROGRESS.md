@@ -136,6 +136,60 @@ Snapshots → `data/raw/accela_record_status/<rec>.json` + append-only `_history
 (`status_source=capdetail`, work_location fills the address): **293 projects ≥2u** (was 390 — address-less Planning rows
 merged), **194 in v2 / 99 not (55 ≥5u; 24 filed 2022+)**, address_missing 157→2, needs_status_refresh 228→77.
 
+## 2026-09-22 — CO FROM THE INSPECTION TRAIL: the completion signal the CPRA feed cannot give (read-only)
+
+**The problem John named:** the APR needs a CO year per project, but `Finaled Status='Finaled'` carries NO date on
+2,060 primary permits (706 -> 985 in the 2023-25 window between two productions), 402 of 915 units-adding permits have
+no `Finaled Date`, and `Completed`/`Completed Date` ship empty. **v2 marks 72 projects `Completed` with NO
+`co_issued_date` at all — 1,200 units with no year to report.**
+
+**THE RULE (proposed, NOT yet written):** Berkeley finals permits rather than issuing a CO, and the occupiable moment is
+an inspection — **`Building 1200 Building Final`, result `Approved`**, dated. Two traps encoded: only `Approved` counts
+(the row can be `Site Cancellation` — the 2026-05-19 recon note caught one), and inspections-without-a-building-final is
+reported as a FINDING, never guessed (CLAUDE.md).
+
+**Why it waited:** it was named four times — the 2026-05-19 recon, the 2026-05-23 ingest sketch (Layer C: *"'Building
+Final' -> completed ... why deferred: its own design conversation"*), CLAUDE.md's harvester rule, and the 2026-06 large-
+building runs (used as CORROBORATION, staged-not-written). **Layer A was never built either — v2 still has no
+`inspections` table**, so 6,303 records sat as loose JSON for four months. The real blocker was a phantom cost estimate:
+30,764 permits x 38s = 320 h. **Only 915 of 28,390 primary permits add a unit** — so it is a 95-minute job.
+
+**Built:** `scripts/derive_co_from_inspections.py` (per-project reconcile: fills_gap / agrees +-7d / disagrees_small /
+disagrees_large / no_building_final) and `scripts/build_co_inspection_queue.py` (Phase-1 queue for the Playwright
+harvester; CapDetail URLs from the date-range census, no discovery pass; own queue DB, `cic_recon_queue.db` untouched).
+
+**Phase 1 RUN: 152/152 succeeded, 0 failed** (108 multi-unit UnitsAdded>=2 + 44 ADR-002 `ambiguous` verdicts).
+Inspection files 117 -> 269. `data/derived/co_from_inspections_2026-09-22.csv`:
+| class | projects | units |
+|---|---|---|
+| **fills_gap** (v2 has no CO date) | **43** | **736** |
+| agrees (+-7d) | 62 | 1,788 |
+| disagrees_small / large | 2 / 6 | 118 / 517 |
+| no_building_final | 24 | 1,418 |
+
+**39 of the 72 `Completed`-with-no-date projects are now fillable** — 54% of the APR gap, from one harvest.
+
+**Findings needing eyes (flagged, NOT acted on):**
+- **4 projects not marked Completed but carrying approved building finals** — proj4 1914 Fifth (257u, "In Review",
+  THREE permits finaled Jul-Sep 2017), proj13 2420 Shattuck (132u, "In Review", two 2017 finals), proj160 2344 Fulton
+  (18u), proj132 1627 Jaynes. Either nine-year-old stale statuses or finals belonging to unrelated permits at the address.
+- **Every `disagrees_large` is a MULTI-BUILDING project forced into one date field** — proj179 Acheson (North 2022-01-14
+  vs South 2023-08-08, +1061d), proj91 2009 Addison (+556d), proj150 3030 Telegraph (+79d). The known Frankenstein
+  problem, now visible per permit.
+- **13 projects marked `Completed` have inspections but NO building-final**, incl. proj126 2427 San Pablo (78u, no v2 date
+  AND no final) and proj137 2000 University (82u, v2 date `2024-01-01` — the ONLY Jan-1 date in v2, i.e. a placeholder,
+  not a pattern: checked).
+- **29 permits v2 does not track at all have approved building finals — 424 units, 22 of them adding >=2 units**:
+  B2019-05608 1951 Shattuck 163u (CO 2024-10-24), B2022-01111 2000 University 81u, B2015-03000 1900 Walnut 65u,
+  B2021-02423 40u, B2024-05284 2307 Piedmont 10u... These are COMPLETED HOUSING absent from the serving DB.
+
+**Next:** (A) Phase 2 — the remaining ~767 units-adding permits (6-8 h background). (B) **Gated write, proposed as ONE
+step so this is not a fifth deferral:** build the `inspections` table (Layer A, never built), add "approved Building
+Final" as the top tier of ADR-001 completion precedence, and backfill the 43 gap-fills. (C) John reviews the 4 status
+anomalies + the 29 untracked completions before any of it lands.
+
+---
+
 **Next:** (A) ~~John downloads the 3 productions~~ done except #26-1971's third file (ask for re-release) → verify sizes/sheets → README ledger. (B) `scripts/multiunit_master_list.py`
 → `data/derived/multiunit_projects_<date>.csv` (ZP + B + census status + CPRA dates + units + `not_in_v2`). (C) send CPRA
 Request A (Master Permits Log 2018–2025, named artifact); hold Request B (all-status BP report) until #26-1971 is read.

@@ -50,6 +50,7 @@ project_id,address,units,v2_status,v2_co_date,inspection_co_date,classification,
 302,1515 HARMON St,2,Completed,2025-05-13,2025-05-13,agrees,0,1,1,0,B2022-03494=2025-05-13,Approved;Disapproved
 200,2226 DWIGHT Way,2,Completed,2024-06-03,2024-06-03,agrees,0,1,1,0,B2022-03844=2024-06-03,Approved
 294,2327 OREGON St,2,Completed,2025-02-28,2025-02-28,agrees,0,1,1,0,B2022-04721=2025-02-28,Approved;Disapproved
+190,1341 ADDISON,2,Completed,2024-10-16,2024-10-16,agrees,0,1,1,0,B2023-01652=2024-10-16,Approved;Disapproved
 326,2631 REGENT St,2,Completed,2025-06-03,2025-06-03,agrees,0,1,1,0,B2023-02659=2025-06-03,Approved;Disapproved
 64,1515 DERBY St,2,Completed,2025-05-23,2025-05-23,agrees,0,2,1,0,B2023-04430=2025-05-23,Approved;Disapproved
 365,2227 CARLETON St,2,Completed,2025-09-10,2025-09-10,agrees,0,1,1,0,B2023-04737=2025-09-10,Approved;Cancelled;Disapproved;Rescheduled
@@ -275,6 +276,7 @@ project_id,address,units,v2_status,v2_co_date,inspection_co_date,classification,
 454,1253 Carrison St,1,Completed,2023-04-26,2023-04-26,agrees,0,1,1,0,B2020-03209=2023-04-26,Approved;Disapproved
 804,2820 Piedmont,1,Completed,2021-07-20,2021-07-20,agrees,0,1,1,0,B2020-03267=2021-07-20,Approved;Rescheduled
 848,1623 RUSSELL,1,Completed,2022-08-04,2022-08-04,agrees,0,1,1,0,B2020-03294=2022-08-04,Approved;Disapproved
+808,828 CHANNING,1,Completed,2022-04-25,2022-04-25,agrees,0,1,1,0,B2020-03543=2022-04-25,Approved
 777,2148 Ward,1,Completed,2021-05-06,2021-05-06,agrees,0,1,1,0,B2020-03619=2021-05-06,Approved;Disapproved
 738,831 Page,1,Completed,2021-12-01,2021-12-01,agrees,0,1,1,0,B2020-03633=2021-12-01,Approved;Disapproved
 803,2223 Mckinley,1,Completed,2021-12-09,2021-12-09,agrees,0,1,1,0,B2020-03753=2021-12-09,Approved;Disapproved;Partially Approved
@@ -386,7 +388,75 @@ project_id,address,units,v2_status,v2_co_date,inspection_co_date,classification,
 189,2150 RUSSELL St,1,Completed,2024-02-09,2024-02-09,agrees,0,1,1,0,B2022-05356=2024-02-09,Approved;Disapproved
 324,2026 ESSEX St,1,Completed,2025-01-08,2025-01-08,agrees,0,1,1,0,B2022-05608=2025-01-08,Approved;Cancelled
 221,1340 QUEENS Rd,1,Completed,2024-02-27,2024-02-27,agrees,0,1,1,0,B2022-05670=2024-02-27,Approved
+354,2455 ASHBY Ave,1,Completed,2025-02-06,2025-02-06,agrees,0,1,1,0,B2022-05864=2025-02-06,Approved;Disapproved
+233,1655 Tenth St,1,Completed,2024-11-25,2024-11-25,agrees,0,1,1,0,B2022-05902=2024-11-25,Approved;Cancelled
+282,2144 RUSSELL St,1,Completed,2025-05-28,2025-05-28,agrees,0,1,1,0,B2022-06045=2025-05-28,Approved
+275,1701 Hopkins St,1,Completed,2024-07-25,2024-07-25,agrees,0,1,1,0,B2023-00291=2024-07-25,Approved;Disapproved
+325,1327 ORDWAY St,1,Completed,2025-07-25,2025-07-25,agrees,0,1,1,0,B2023-00391=2025-07-25,Approved;Cancelled;Disapproved
+187,1912 STUART St,1,Completed,2024-04-29,2024-04-29,agrees,0,1,1,0,B2023-00520=2024-04-29,Approved;Cancelled;Disapproved;Rescheduled
+231,15 Hillcrest Rd,1,Completed,2024-05-06,2024-05-06,agrees,0,1,1,0,B2023-00606=2024-05-06,Approved
+244,2303 GRANT St,1,Completed,2024-09-25,2024-09-25,agrees,0,1,1,0,B2023-01058=2024-09-25,Approved
+215,2610 Warring St,1,Completed,2024-07-25,2024-07-25,agrees,0,1,1,0,B2023-01199=2024-07-25,Approved;Disapproved
+305,2607 PIEDMONT Ave,1,Completed,2025-04-21,2025-04-21,agrees,0,1,1,0,B2023-01656=2025-04-21,Approved;Disapproved;Rescheduled
+236,3120 Deakin St,1,Completed,2024-12-06,2024-12-06,agrees,0,1,1,0,B2023-01911=2024-12-06,Approved;Disapproved
+339,1168 MILLER Ave,1,Completed,2025-03-28,2025-03-28,agrees,0,1,1,0,B2023-01963=2025-03-28,Approved;Disapproved
+185,1609 FIFTH St,1,Completed,2024-03-04,2024-03-04,agrees,0,1,1,0,B2023-01998=2024-03-04,Approved
+257,1630 Posen Ave,1,Completed,2024-07-17,2024-07-17,agrees,0,1,1,0,B2023-02002=2024-07-17,Approved;Disapproved;Rescheduled
+260,2335 Fifth St,1,Completed,2024-05-31,2024-05-31,agrees,0,1,1,0,B2023-02152=2024-05-31,Approved;Disapproved;Rescheduled
+306,1140 THE ALAMEDA,1,Completed,2025-08-08,2025-08-08,agrees,0,1,1,0,B2023-02425=2025-08-08,Approved
+198,2312 Eighth St,1,Completed,2024-12-17,2024-12-17,agrees,0,1,1,0,B2023-02556=2024-12-17,Approved
+261,2430 Prospect St,1,Completed,2024-12-20,2024-12-20,agrees,0,1,1,0,B2023-02685=2024-12-20,Approved;Cancelled;Disapproved;Partially Approved;Rescheduled;Site Cancellation
+196,921 ENSENADA Ave,1,Completed,2024-04-29,2024-04-29,agrees,0,1,1,0,B2023-02857=2024-04-29,Approved
+222,2164 OREGON St,1,Completed,2024-04-02,2024-04-02,agrees,0,1,1,0,B2023-02897=2024-04-02,Approved;Partially Approved
+283,3037 ELLIS St,1,Completed,2025-08-01,2025-08-01,agrees,0,1,1,0,B2023-03018=2025-08-01,Approved;Disapproved;Rescheduled
+276,1709 Francisco St,1,Completed,2024-12-11,2024-12-11,agrees,0,1,1,0,B2023-03055=2024-12-11,Approved;Disapproved
+340,1520 TENTH St,1,Completed,2025-03-18,2025-03-18,agrees,0,1,1,0,B2023-03106=2025-03-18,Approved;Disapproved
+216,3216 California St,1,Completed,2024-06-12,2024-06-12,agrees,0,1,1,0,B2023-03241=2024-06-12,Approved;Disapproved
+313,932 COLUSA Ave,1,Completed,2025-11-13,2025-11-13,agrees,0,1,1,0,B2023-03347=2025-11-13,Approved;Disapproved
+267,1449 ORDWAY St,1,Completed,2024-04-05,2024-04-05,agrees,0,1,1,0,B2023-03417=2024-04-05,Approved;Disapproved
+341,1615 MCGEE Ave,1,Completed,2025-02-18,2025-02-18,agrees,0,1,1,0,B2023-03480=2025-02-18,Approved;Disapproved
+364,8 BROOKSIDE Ave,1,Completed,2025-06-04,2025-06-04,agrees,0,1,1,0,B2023-03522=2025-06-04,Approved;Disapproved
+249,1067 Park Hills Rd,1,Completed,2024-12-05,2024-12-04,agrees,-1,1,1,0,B2023-03560=2024-12-04,Approved;Disapproved
+295,1238 STANNAGE Ave,1,Completed,2025-07-21,2025-07-21,agrees,0,1,1,0,B2023-03731=2025-07-21,Approved;Disapproved
+255,1381 Ada St,1,Completed,2024-11-04,2024-11-04,agrees,0,1,1,0,B2023-03756=2024-11-04,Approved;Disapproved
+327,3019 BATEMAN St,1,Completed,2025-09-15,2025-09-15,agrees,0,1,1,0,B2023-03857=2025-09-15,Approved;Disapproved;Rescheduled
+328,1536 LINCOLN St,1,Completed,2025-02-21,2025-02-21,agrees,0,1,1,0,B2023-03870=2025-02-21,Approved;Cancelled;Disapproved
+259,1724 La Vereda Rd,1,Completed,2024-07-19,2024-07-19,agrees,0,1,1,0,B2023-04429=2024-07-19,Approved;Disapproved
+218,886 Arlington Ave,1,Completed,2024-12-06,2024-12-06,agrees,0,1,1,0,B2023-04456=2024-12-06,Approved;Disapproved
+314,2221 CARLETON St,1,Completed,2025-09-15,2025-09-15,agrees,0,1,1,0,B2023-04736=2025-09-15,Approved;Disapproved
+369,1449 KAINS Ave,1,Completed,2025-01-31,2025-01-31,agrees,0,1,1,0,B2023-04863=2025-01-31,Approved;Disapproved;Rescheduled
+242,1812 Sixty-Second St,1,Completed,2024-07-29,2024-07-29,agrees,0,1,1,0,B2023-04866=2024-07-29,Approved
+232,1655 Belvedere Ave,1,Completed,2024-05-10,2024-05-10,agrees,0,1,1,0,B2023-05114=2024-05-10,Approved
+252,1326 M L King Jr Way,1,Completed,2024-09-16,2024-09-16,agrees,0,1,1,0,B2023-05179=2024-09-16,Approved;Cancelled;Disapproved;Rescheduled
+356,737 JONES St,1,Completed,2025-05-23,2025-05-23,agrees,0,1,1,0,B2023-05338=2025-05-23,Approved;Disapproved
+237,3122 Eton Ave,1,Completed,2024-01-31,2024-01-31,agrees,0,1,1,0,B2023-05730=2024-01-31,Approved;Cancelled
+285,948 FRESNO Ave,1,Completed,2025-01-28,2025-01-28,agrees,0,1,1,0,B2023-05794=2025-01-28,Approved;Disapproved;Partially Approved;Rescheduled
+329,1208 DELAWARE St,1,Completed,2025-02-24,2025-02-24,agrees,0,2,2,1,B2024-00117=2025-01-21;B2024-00243=2025-02-24,Approved;Cancelled;Approved;Cancelled;Disapproved;Partially Approved
+367,2710 COLLEGE Ave,1,Completed,2025-01-17,2025-01-17,agrees,0,1,1,0,B2024-00176=2025-01-17,Approved;Cancelled;Disapproved;Rescheduled
+342,1329 CURTIS St,1,Completed,2025-03-25,2025-03-25,agrees,0,1,1,0,B2024-00594=2025-03-25,Approved;Disapproved
+315,12 PANORAMIC Way,1,Completed,2025-09-08,2025-09-08,agrees,0,1,1,0,B2024-00772=2025-09-08,Approved;Cancelled;Rescheduled
+334,2312 CURTIS ST,1,Completed,2025-08-05,2025-08-05,agrees,0,1,1,0,B2024-00955=2025-08-05,Approved
+310,1529 SPRUCE ST,1,Completed,2025-04-04,2025-04-04,agrees,0,1,1,0,B2024-00975=2025-04-04,Approved;Disapproved
 316,2620 REGENT St,1,Completed,2025-05-30,2025-05-30,agrees,0,1,1,0,B2024-01193=2025-05-30,Approved;Cancelled;Disapproved;Rescheduled;Site Cancellation
+287,1619 EDITH St,1,Completed,2025-08-15,2025-08-15,agrees,0,1,1,0,B2024-01247=2025-08-15,Approved
+344,1570 LE ROY Ave,1,Completed,2025-07-28,2025-07-21,agrees,-7,1,1,0,B2024-01316=2025-07-21,Approved
+288,1280 BANCROFT Way,1,Completed,2025-08-14,2025-08-14,agrees,0,1,1,0,B2024-01337=2025-08-14,Approved;Disapproved
+345,3007 ACTON St,1,Completed,2025-06-09,2025-06-09,agrees,0,1,1,0,B2024-01527=2025-06-09,Approved;Disapproved;Rescheduled
+297,1219 DERBY St,1,Completed,2025-04-24,2025-04-24,agrees,0,1,1,0,B2024-01564=2025-04-24,Approved
+289,1228 MONTEREY Ave,1,Completed,2025-10-15,2025-10-15,agrees,0,1,1,0,B2024-01931=2025-10-15,Approved;Disapproved;Site Cancellation
+346,917 CHANNING Way,1,Completed,2025-10-07,2025-10-07,agrees,0,1,1,0,B2024-02148=2025-10-07,Approved;Disapproved
+361,2735 WALLACE ST,1,Completed,2025-12-01,2025-12-01,agrees,0,1,1,0,B2024-02286=2025-12-01,Approved;Partially Approved
+290,1016 FRESNO Ave,1,Completed,2025-03-18,2025-03-18,agrees,0,1,1,0,B2024-02618=2025-03-18,Approved;Disapproved;Rescheduled
+318,2805 RUSSELL ST,1,Completed,2025-11-07,2025-11-07,agrees,0,1,1,0,B2024-03194=2025-11-07,Approved;Disapproved;Rescheduled
+332,2815 ASHBY AVE,1,Completed,2025-07-31,2025-07-31,agrees,0,1,1,0,B2024-03769=2025-07-31,Approved;Disapproved
+335,2715 DWIGHT WAY,1,Completed,2025-11-14,2025-11-14,agrees,0,1,1,0,B2024-03777=2025-11-14,Approved;Disapproved
+319,2742 MABEL ST,1,Completed,2025-10-07,2025-10-07,agrees,0,1,1,0,B2024-03873=2025-10-07,Approved;Disapproved
+309,1522 HARMON ST,1,Completed,2025-09-22,2025-09-22,agrees,0,1,1,0,B2024-04977=2025-09-22,Approved;Disapproved
+298,2761 ACTON ST,1,Completed,2025-08-12,2025-08-12,agrees,0,1,1,0,B2024-05116=2025-08-12,Approved
+351,2350 WEST ST,1,Completed,2025-07-29,2025-07-29,agrees,0,1,1,0,B2024-05217=2025-07-29,Approved;Cancelled
+320,2410 JEFFERSON AVE,1,Completed,2025-10-22,2025-10-22,agrees,0,1,1,0,B2024-05755=2025-10-22,Approved
+336,1355 ACTON ST,1,Completed,2025-07-18,2025-07-18,agrees,0,1,1,0,B2024-05992=2025-07-18,Approved;Disapproved
+350,1964 HOPKINS ST,1,Completed,2025-12-02,2025-12-02,agrees,0,1,1,0,B2025-00158=2025-12-02,Approved;Disapproved;Rescheduled
 179,2352 Shattuck Ave,237,Completed,2022-01-14,2024-12-10,disagrees_large,1061,5,4,1,B2019-05574=2022-01-14;B2019-05575=2023-08-08;B2021-03302=2023-08-08;B2024-05208=2024-12-10,Approved;Approved;Cancelled;Approved;Partially Approved;Site Cancellation
 150,3030 TELEGRAPH Ave,144,Completed,2026-01-27,2026-04-16,disagrees_large,79,4,3,1,B2023-06416=2026-04-16;B2023-06442=2025-08-25;B2023-06443=2025-08-25,Approved
 154,2001 ASHBY Ave,87,Completed,2025-06-01,2025-02-24,disagrees_large,-97,1,1,0,B2021-02905=2025-02-24,Approved;Cancelled;Disapproved;Partially Approved;Site Cancellation
@@ -405,7 +475,7 @@ project_id,address,units,v2_status,v2_co_date,inspection_co_date,classification,
 349,1446 FIFTH St,1,Completed,2019-12-30,2020-01-10,disagrees_small,11,2,2,1,B2018-02503=2019-12-30;B2018-03576=2020-01-10,Approved;Cancelled;Disapproved;Rescheduled;Site Cancellation;Approved;Disapproved;Site Cancellation
 708,1315 Milvia,1,Completed,2021-08-26,2021-10-06,disagrees_small,41,1,1,0,B2020-03702=2021-10-06,Approved;Disapproved;Partially Approved
 192,2425 Prospect St,1,Completed,2024-07-10,2024-07-24,disagrees_small,14,1,1,0,B2021-05291=2024-07-24,Approved;Disapproved;Partially Approved
-329,1208 DELAWARE St,1,Completed,2025-02-24,2025-01-21,disagrees_small,-34,1,1,0,B2024-00117=2025-01-21,Approved;Cancelled
+359,20 BROOKSIDE Ave,1,Completed,2025-06-10,2025-05-22,disagrees_small,-19,1,1,0,B2024-01983=2025-05-22,Approved;Disapproved;Rescheduled;Site Cancellation
 4,1914 FIFTH St,257,In Review,,2017-09-27,fills_gap,,3,3,1,B2015-02460=2017-07-18;B2015-02468=2017-07-18;B2015-03857=2017-09-27,Approved;Approved;Partially Approved
 152,1598 UNIVERSITY Ave,207,Completed,,2024-08-21,fills_gap,,4,1,0,B2024-01602=2024-08-21,Approved
 13,2420 SHATTUCK Ave,132,In Review,,2017-08-03,fills_gap,,4,2,1,B2015-05395=2017-07-27;B2016-01435=2017-08-03,Approved;Approved;Approved with Conditions
@@ -447,6 +517,7 @@ project_id,address,units,v2_status,v2_co_date,inspection_co_date,classification,
 262,766 Vincente Ave,1,Completed,,2024-07-17,fills_gap,,1,1,0,B2023-01770=2024-07-17,Approved;Disapproved
 92,3036 REGENT St,1,Completed,,2023-08-09,fills_gap,,2,1,0,B2023-03308=2023-08-09,Approved;Cancelled;Disapproved
 71,40 HILL Rd,1,Completed,,2025-09-29,fills_gap,,2,2,1,B2025-00897=2025-05-09;B2025-03189=2025-09-29,Approved;Cancelled;Disapproved;Approved;Cancelled;Disapproved;Rescheduled;Site Cancellation
+72,5 W PARNASSUS Ct,1,Permitted,,2026-05-13,fills_gap,,1,1,0,B2025-01579=2026-05-13,Approved;Disapproved
 90,576 SAN LUIS Rd,0,Completed,,2026-04-29,fills_gap,,4,1,0,B2025-00709=2026-04-29,Approved;Disapproved;Disapproved
 84,2705 BENVENUE Ave,0,Completed,,2024-02-14,fills_gap,,1,1,0,B2023-00595=2024-02-14,Approved;Disapproved
 105,1187 SHATTUCK Ave,0,Completed,,2023-08-17,fills_gap,,1,1,0,B2023-02115=2023-08-17,Approved;Disapproved
@@ -497,7 +568,9 @@ project_id,address,units,v2_status,v2_co_date,inspection_co_date,classification,
 273,1310 DERBY,1,Completed,,,no_building_final,,1,0,0,,
 214,1725 BERKELEY Way,1,Completed,2024-04-19,,no_building_final,,1,0,0,,
 448,1417 Northside Ave,1,Completed,2023-05-31,,no_building_final,,1,0,0,,
+296,726 NEILSON St,1,Completed,2025-08-15,,no_building_final,,1,0,0,,
 70,3001 BENVENUE Ave,1,Completed,,,no_building_final,,1,0,0,,
+163,0 PARKER St,1,Permitted,,,no_building_final,,1,0,0,,
 183,2328 CHANNING Way,,Permitted,,,no_building_final,,1,0,0,,
 88,705 ARLINGTON Ave,0,Completed,,,no_building_final,,3,0,0,,
 184,2330 BLAKE St,,Permitted,,,no_building_final,,1,0,0,,

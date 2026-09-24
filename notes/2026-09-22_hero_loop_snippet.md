@@ -12,7 +12,7 @@ area: notes
 **Poster:** `docs/videos/hero-shattuck-loop.jpg` — 0.16 MB
 
 **Source:** `/Volumes/T7-2025/Berkeley-Tours/New/1-Shattuck-S-N.m4v` (rendered 2026-09-07, the current
-labelled pushpin-free geometry), seconds **214–232** — the downtown stretch where 2190 Shattuck
+labeled pushpin-free geometry), seconds **214–232** — the downtown stretch where 2190 Shattuck
 (452 u, In Review), 2115 Kittredge (146 u) and half a dozen further boxes are in frame at once with
 Durant / Bancroft / Kittredge / Shattuck street labels.
 
@@ -29,13 +29,13 @@ Durant / Bancroft / Kittredge / Shattuck street labels.
   <video id="heroVideo"
          autoplay muted loop playsinline preload="auto"
          poster="videos/hero-shattuck-loop.jpg"
-         aria-label="Aerial flight north along Shattuck Avenue through downtown Berkeley. Translucent coloured blocks mark each project in the housing pipeline; 2190 Shattuck, 452 units, is labelled in the foreground."
+         aria-label="Aerial flight north along Shattuck Avenue through downtown Berkeley. Translucent colored blocks mark each project in the housing pipeline; 2190 Shattuck, 452 units, is labeled in the foreground."
          style="width:100%;height:auto;display:block;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.12);background:#111;">
     <source src="videos/hero-shattuck-loop.mp4" type="video/mp4">
   </video>
   <figcaption style="margin:.6rem auto 0;text-align:center;color:#4a5568;font-size:.95rem;line-height:1.5;">
-    Every coloured block is a project in Berkeley&rsquo;s housing pipeline. Warm colours are still on
-    paper; cool colours exist. <a href="#tours" style="color:#1a365d;">See the corridor by corridor &rarr;</a>
+    Every colored block is a project in Berkeley&rsquo;s housing pipeline. Warm colors are still on
+    paper; cool colors exist. <a href="#tours" style="color:#1a365d;">See the corridor by corridor &rarr;</a>
   </figcaption>
 </figure>
 <script>

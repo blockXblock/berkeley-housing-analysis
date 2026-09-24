@@ -19,8 +19,8 @@ text in `docs/index.html` is untouched.
    units or 9% built, the rewrite says 3,690 and 9%. I did not round, soften, or invent a
    single figure. Values that are data-bound are marked `{{like_this}}` in the *Data
    bindings* line under each entry — see the engineering note at the bottom.
-2. **The colour legend survives intact.** Per the comment at `docs/index.html:296`, the
-   per-video prose legend is what a screen reader reads. Every colour→stage mapping, the
+2. **The color legend survives intact.** Per the comment at `docs/index.html:296`, the
+   per-video prose legend is what a screen reader reads. Every color→stage mapping, the
    warm/cool gloss, and the thick-outline/agency rule are preserved verbatim in a closing
    paragraph. The DFW register is applied to the body, not to the accessibility apparatus.
    (DFW would have approved of that distinction, having written a whole essay about how a
@@ -68,7 +68,7 @@ Before the camera moves, one thing worth fixing in your head: almost none of thi
 The flight runs east to west, Piedmont Avenue at the campus edge, through downtown, out
 across the flats to Aquatic Park, and it will name **thirty buildings** as it reaches
 them — address, homes, storeys, height, who is developing it, who owns the ground
-underneath — and the cumulative effect of all that labelling, which is the thing to watch
+underneath — and the cumulative effect of all that labeling, which is the thing to watch
 yourself for, is to make the street feel *done*. It isn't. The thirty are **3,690 units**,
 of which 1,625 are student beds in the one UC tower rising at Bancroft and Fulton, leaving
 **2,065 homes** for people who are not undergraduates. Of those, **325** are finished —
@@ -91,7 +91,7 @@ want the street to be real.
 
 Telegraph south to north — Woolsey Street at the Oakland line, up past Ashby and Dwight,
 through the Southside blocks under the campus, to the UC edge at Bancroft — and
-**seventeen buildings** labelled as the camera reaches each one. Seventeen is a small
+**seventeen buildings** labeled as the camera reaches each one. Seventeen is a small
 enough number that you can hold the whole street in your head, which makes this the tour
 to learn the vocabulary on. **905 units** total. **261** of them exist: **29% built**, the
 highest ratio in this collection and still under a third. **324 are entitled**, which is
@@ -146,7 +146,7 @@ only by reading the permits.
 ## 4. Shattuck Avenue — South to North, past the towers
 
 This is the big one, and bigness is its own rhetorical problem. Shattuck south to north,
-Woolsey through downtown to Rose: **sixty buildings**, each labelled as the camera reaches
+Woolsey through downtown to Rose: **sixty buildings**, each labeled as the camera reaches
 it, **9,347 units**, of which 2,397 are UC student beds, leaving **6,950 homes along a
 single street** — a number large enough that it stops being a number and becomes a mood.
 So here is the corrective, stated plainly: **23% of it is built.** **2,147 units** are
@@ -157,7 +157,7 @@ queue. The flight orbits the four largest: **2700 Shattuck, 359 units**; **2276 
 units** and **1974 Shattuck at 98 m and 599 units**. Notice what the orbit does to a
 tower. It gives it mass, shadow, a sun angle, four sides — all the sensory furniture of a
 building that is there. Two of those four are paper. The video cannot show you the
-difference; the colour can, and does, which is why the legend below is not decoration.
+difference; the color can, and does, which is why the legend below is not decoration.
 Current to September 2026.
 
 > *Data bindings:* `{{building_count}}` 60 · `{{total_units}}` 9,347 · `{{uc_beds}}` 2,397
@@ -176,7 +176,7 @@ are looking at was made, offered because a rendering that hides its sources is j
 picture. **Heights are taken from each project's own filings** — not estimated from the
 model, not scaled off a photograph, but read off the drawings the developer submitted to
 the city, which means they are as accurate as the applicant was and no more. And **street
-names are labelled at every crossing**, which sounds like a nicety and is actually the whole
+names are labeled at every crossing**, which sounds like a nicety and is actually the whole
 navigational contract: a flyover with no labels is a mood piece, and a mood piece is exactly
 what nobody needs more of here. Feelings about this avenue are abundant and cheap. What is
 scarce is knowing which building is which, who filed it, and when.
@@ -199,7 +199,7 @@ total "in view" becomes roughly **2,500 homes and 3,100 student beds** — a num
 times the street's own, produced entirely by moving the camera. Nobody is cheating. It is
 simply that *in view* and *on this street* are different claims, and a flyover blurs them
 by construction, and you should know which one a number is before you repeat it. Heights
-come from each project's own filings; street names are labelled at every crossing.
+come from each project's own filings; street names are labeled at every crossing.
 
 > *Data bindings:* `{{on_street_projects}}` 6 · orbits w/ units+stage · `{{in_view_homes}}`
 > ~2,500 · `{{in_view_beds}}` ~3,100 — **flag:** in-view totals are camera-frustum-derived,
@@ -217,7 +217,7 @@ finished.** Twelve of the eighteen are still on paper: **568 units under review,
 entitled but not yet permitted.** Which is why this tour looks wrong if you have watched
 the downtown ones first. Downtown reads cool — blues and greens, construction and
 completion. San Pablo reads warm, orange and yellow the length of the avenue, and warm on
-this legend means paper. That is not a rendering artefact or a colour-grading choice. It
+this legend means paper. That is not a rendering artefact or a color-grading choice. It
 is a three-kilometre picture of a street where the permission has been granted and the
 building has not started, and the distance between those two facts, measured in years and
 in interest rates and in whether anybody ever breaks ground, is the actual subject of this
@@ -299,10 +299,10 @@ camera does not adjudicate that. It goes up the street.
 From the Elmwood Theater north up College Avenue, then west along Bancroft to Shattuck.
 Residential fabric, then commercial fabric, then downtown, in one continuous move. Watch the
 stretch between the theater and Ashby: two- and three-storey commercial frontage, and then,
-immediately behind it, a neighbourhood that has been adding homes for a century in ways no
+immediately behind it, a neighborhood that has been adding homes for a century in ways no
 aerial can see — flats cut out of houses, cottages behind houses, units that are occupied and
 rented and appear in no dataset. This is the exact spot where intuition fails hardest in both
-directions. Look at the frontage and the neighbourhood appears frozen, which it is not. Look
+directions. Look at the frontage and the neighborhood appears frozen, which it is not. Look
 at the storefronts and they appear permanent, which they also are not: a shop's survival turns
 on a lease term, an insurance renewal and a landlord's tax basis, none of which are visible
 from any altitude. A flyover is a device for looking at frontage. It cannot show you either of
@@ -313,10 +313,10 @@ for the whole three minutes, including and especially the parts where the video 
 
 ## The legend (appended verbatim to each entry; unchanged from the live site)
 
-> **Colour shows where each project stands:** grey at pre-application · yellow under
+> **Color shows where each project stands:** grey at pre-application · yellow under
 > review · orange entitled (approved, no building permit yet) · cyan permitted, not yet
 > started · blue under construction · green completed and occupiable · dark red withdrawn.
-> Warm colours are paper stages, cool colours are physical ones. A thick outline marks a
+> Warm colors are paper stages, cool colors are physical ones. A thick outline marks a
 > project permitted by its own agency rather than by the City — purple for UC Berkeley and
 > magenta for BART joint development; the fill still shows the stage. Elsewhere on
 > BerkeleyBuild.com: the architects' own plan sets and the affordability tabulations filed
@@ -348,7 +348,7 @@ above are built so the numbers sit in slots.
 
 Two figures need a flag before any generator runs:
 - **Durant's "in view" totals** (~2,500 homes / ~3,100 beds) are derived from what the
-  camera sees, not from a corridor query. Keep them labelled as such or drop them.
+  camera sees, not from a corridor query. Keep them labeled as such or drop them.
 - **Anchor House 772 beds / 244 apartments** is the one place the text does arithmetic
   (3.16 beds per apartment) — it is there to refute the ratio, and it should stay
   hand-written prose, not a computed field.

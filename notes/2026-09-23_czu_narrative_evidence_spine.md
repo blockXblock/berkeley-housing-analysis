@@ -37,7 +37,7 @@ The **parcel-by-parcel ranking methodology** is not explained in any deliverable
 specified in the consultant's scope of work. → **CPRA target: the scope of work and any
 written direction regarding site-level redevelopment-potential analysis.**
 
-**The programme misses its own target.** Program 27 promised ≥2,000 units. The adopted
+**The program misses its own target.** Program 27 promised ≥2,000 units. The adopted
 approach projects **1,518**.
 
 ---
@@ -153,7 +153,7 @@ AB 2011 gates eligibility on right-of-way width. College at 60 ft may fall **bel
 statutory threshold — which would be an argument *for* rezoning it, not against. **Read the
 thresholds off the statute before using this.**
 
-The defensible finding is procedural: **the City never analysed AB 2011**, so it never
+The defensible finding is procedural: **the City never analyzed AB 2011**, so it never
 established whether it was rezoning the corridors where rezoning adds most, or the ones where
 state law already does the work.
 
@@ -194,18 +194,18 @@ agents registered at an address, not storefronts.
 
 ## 7. Food access: Berkeley is well served, and the Elmwood best of all
 
-Distance from each neighbourhood centroid to the nearest full-line grocery (NAICS 4451,
-convenience and liquor excluded), 24 official neighbourhoods:
+Distance from each neighborhood centroid to the nearest full-line grocery (NAICS 4451,
+convenience and liquor excluded), 24 official neighborhoods:
 
 | | km to full-line |
 |---|---|
-| **median, all neighbourhoods** | **0.52 km** |
-| neighbourhoods > 1 km | **3 of 24** |
+| **median, all neighborhoods** | **0.52 km** |
+| neighborhoods > 1 km | **3 of 24** |
 | **Elmwood District** | **0.59 km** (Star Grocery) — **0.01 km to any food retail** |
 | Berkeley Hills | 1.36 km — the worst served |
 | Terrace View / Cragmont | 1.16 / 1.02 km |
 
-**The three worst-served neighbourhoods are all in the hills** — which is where **24.8% of the
+**The three worst-served neighborhoods are all in the hills** — which is where **24.8% of the
 city's opportunity sites** sit, against the Elmwood's 2.7%.
 
 ⚠ Two classifier bugs to fix first: "VIV & INGRID ACCESSORIES" is miscoded NAICS 4451, and
@@ -214,9 +214,9 @@ city's opportunity sites** sit, against the Elmwood's 2.7%.
 the street network is least direct — so the hills' disadvantage is **understated** here.
 
 **Next, and worth doing properly:** walking-network distance via OSM, and the mobility-based
-approach — travel-behaviour analysis of who actually goes where, in the tradition of
+approach — travel-behavior analysis of who actually goes where, in the tradition of
 **Marta González's** urban-mobility work at UC Berkeley (mobile-phone-derived travel demand,
-human-mobility modelling). That is the honest way to ask "how well does this commercial
+human-mobility modeling). That is the honest way to ask "how well does this commercial
 district serve its residents", and it is a different question from "how many square feet of
 shopfront does it have."
 

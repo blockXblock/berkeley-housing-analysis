@@ -41,7 +41,7 @@ The hills alone are 25%.** Two years of public argument have been about roughly 
 the city's own opportunity-site inventory.
 
 *(Consistent with the AFFH framing, which directs upzoning at the highest-resource
-neighbourhoods — and the hills are the highest-resource. It is not a contradiction. It is
+neighborhoods — and the hills are the highest-resource. It is not a contradiction. It is
 simply not where the fight went.)*
 
 ## The corridor layers, which ARE the three corridors

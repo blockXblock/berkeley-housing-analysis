@@ -36,8 +36,8 @@ That distinction is the actual ignition point. People did not mobilise when the 
 proposed upzoning. They mobilised when the consultant showed them a massing diagram of
 *their* block.
 
-**3. The organising is younger than the outrage, and the gap is ~7 weeks.** The Aug 20
-workshop produced no visible email traffic in the record. The first organised Elmwood
+**3. The organizing is younger than the outrage, and the gap is ~7 weeks.** The Aug 20
+workshop produced no visible email traffic in the record. The first organized Elmwood
 meeting in the mail is **12–13 October 2025**. The name "Save Berkeley Shops" and a
 website arrive **16 October 2025**. Whatever happened in those seven weeks happened in
 person, in shops, and is not in any file I can read — see *Gaps*.
@@ -51,7 +51,7 @@ person, in shops, and is not in any file I can read — see *Gaps*.
 | City CZU page (berkeleyca.gov) | Official dated timeline: workshops, commission meetings, council worksessions, report dates | City events only; says nothing about the campaign |
 | John's Gmail (~201 SBS threads) | The campaign's own operational record: meetings, house parties, board votes, mailings | **Starts ~11 Oct 2025.** Nothing before that |
 | `~/Obsidian/MainAction/Action/` | Committee roster, Nov 6 speaker table w/ 33 video links, the 124-row written-comment tabulation, the March 2026 appeal text | Hand-kept; the appeal text is OCR'd and partly garbled |
-| `data/raw/corridors/raimi_corridors.gdb` | **The consultant's actual parcel model**, obtained by CPRA #26-2367 | Obtained 2026-09-21; not yet analysed |
+| `data/raw/corridors/raimi_corridors.gdb` | **The consultant's actual parcel model**, obtained by CPRA #26-2367 | Obtained 2026-09-21; not yet analyzed |
 | `docs/audit/2026-08-12_czu_zoning_extract.md` | The zoning tables extracted from the Existing Conditions Report | — |
 
 **Discrepancy to resolve:** the City page dates the Alternatives Report **18 Aug 2025**;
@@ -73,12 +73,12 @@ the repo audit doc records it as **15 Aug 2025**. One of the two is wrong. Check
 
 ---
 
-## Phase II — Seven weeks, then a neighbourhood (Oct 2025)
+## Phase II — Seven weeks, then a neighborhood (Oct 2025)
 
 | Date | Event |
 |---|---|
 | **10 Oct 2025** | City releases **online survey results** |
-| **11 Oct 2025** | First organised mailing: "Sunday Elmwood meeting moved to Berkeley Organic Market, 2642 Ashby." Sent via **Mailchimp from the `berkeley2050` account** — i.e. the mailing infrastructure was borrowed from an existing project, which is why this campaign had list mechanics on day one |
+| **11 Oct 2025** | First organized mailing: "Sunday Elmwood meeting moved to Berkeley Organic Market, 2642 Ashby." Sent via **Mailchimp from the `berkeley2050` account** — i.e. the mailing infrastructure was borrowed from an existing project, which is why this campaign had list mechanics on day one |
 | **12 Oct 2025** | Explanatory site stood up at `sites.google.com/view/berkeley-elmwood-zoning` |
 | **13 Oct 2025** | **First Elmwood community meeting, 3 pm, Berkeley Organic Market** (moved from a private house) |
 | **14 Oct 2025** | Two parallel tracks open the same day: an **agenda/strategy meeting (2:30)** and a **Zoom with land-use attorneys** on a letter to Planning. Recap + action items circulate to a widening list |
@@ -103,14 +103,14 @@ Two things in this record are worth the piece's whole middle section:
 - **33 named public speakers**, each with an individual YouTube link in John's table —
   shopkeepers (Berkeley Organic Market, Bill's Trading Post, Nabolom Bakery, Fern's
   Garden, In The Wood, Cheese Board Collective), realtors, a Solano social worker, an
-  urban planner, Patrick Kennedy (the developer), and **Soni Trauss and a YIMBY organiser
+  urban planner, Patrick Kennedy (the developer), and **Soni Trauss and a YIMBY organizer
   speaking the other way**. It is not a one-sided record, and the campaign archived both
   sides.
 - **124 written communications** tabulated from the supplemental packet — and **32 of
   them carry the identical subject line "Elmwood Families in Support of Corridor
   Upzoning."** A second bloc arrives via East Bay YIMBY. So the mobilisation ran in both
   directions and both sides used list infrastructure. Any honest history has to say that;
-  the interesting question is not which side organised but that *both* discovered the same
+  the interesting question is not which side organized but that *both* discovered the same
   tooling within weeks.
 
 Council "reviewed draft zoning alternatives and provided direction on next steps" (City
@@ -122,7 +122,7 @@ the City record.*
 
 ---
 
-## Phase IV — Becoming an organisation (Nov 2025 – Jan 2026)
+## Phase IV — Becoming an organization (Nov 2025 – Jan 2026)
 
 | Date | Event |
 |---|---|
@@ -133,7 +133,7 @@ the City record.*
 | **17 Nov 2025** | **SF Chronicle** covers the CZU fight. SBS site gets a **VIDEOS tab** |
 | **19, 25 Nov; 1 Dec 2025** | Weekly Zoom cadence established; minutes circulated by the Secretary |
 | **21 Nov 2025** | Postcard mock-up for storefronts; QR code to the site |
-| **26 Nov 2025** | **John asked to serve as Elmwood neighbourhood representative**; Rohini Kumar agrees to be Treasurer |
+| **26 Nov 2025** | **John asked to serve as Elmwood neighborhood representative**; Rohini Kumar agrees to be Treasurer |
 | **28–29 Nov 2025** | Non-profit status pursued; **CEQA one-pager** drafted |
 | **Dec 2025 – Jan 2026** | Structure hardens: **501(c)(4) PAC** (*Save Berkeley Shops Action Fund*, 2912 Benvenue) **+ non-profit charity**; Board of Directors with scheduled Zoom meetings |
 | **21 Jan 2026** | Co-sponsorship of a **Housing Town Hall / teach-in** approved. YouTube account created for SBS video |
@@ -180,7 +180,7 @@ the City record.*
 |---|---|
 | **1 Jul 2026** | Board meeting; sign distribution systematised |
 | **7 Jul 2026** | **Meeting with the Mayor and Councilmembers Humbert, O'Keefe and Tregub**, 11 a.m., with a memo submitted in advance. *Twenty months from a survey nobody answered to a standing meeting with the Mayor* |
-| **9 Jul 2026** | Draft letter to Mayor and Council; **signature gathering** for the referendum begins to be organised |
+| **9 Jul 2026** | Draft letter to Mayor and Council; **signature gathering** for the referendum begins to be organized |
 | **11, 19, 20, 24 Jul 2026** | **Four house parties in a fortnight** — the peak of the distributed-hosting model |
 | **28 Jul 2026** | Planning Director Jordan Klein appears with a developer/builder panel; SBS circulates it. Internal line: **"tell Jordan that SBS wants to help implement middle housing"** — the posture shifts from *stop this* to *we'll build the other thing* |
 | **31 Jul – 6 Aug 2026** | Rebrand/reframe: drafts for **"Berkeley Together"**; the newsletter **"Housing AND Shops: Our Plan for Both"** (6 Aug) |
@@ -189,7 +189,7 @@ the City record.*
 | **13 Aug 2026** | **"Save College Ave. Shops: The focused message"** — message discipline, ten months in |
 | **~14 Aug 2026** | **A candidate files against Councilmember Mark Humbert.** The zoning fight enters the November ballot |
 | **30 Aug 2026** | **Community meeting, Northbrae Church, 3–5 pm** — leafleted, three-reasons-to-come mailings, turnout tracking |
-| **13 Sept 2026** | **Solano Stroll booth**, 10 am–4 pm, 1895 Solano — the campaign takes a table at the neighbourhood's own festival |
+| **13 Sept 2026** | **Solano Stroll booth**, 10 am–4 pm, 1895 Solano — the campaign takes a table at the neighborhood's own festival |
 | **18 Sept 2026** | **District 8 candidate forum** — SBS supplies questions |
 | **27 Sept 2026** | House party scheduled |
 | **21 Sept 2026** | **CPRA #26-2367 fulfilled: Raimi + Associates' parcel geodatabase retrieved** — 8 layers, incl. 382 housing-element sites, **258 "Opportunity Sites" with 63 fields each**, 1,098 rent-controlled parcels. *The consultant's own model, in the hands of the people it was drawn about* |
@@ -206,14 +206,14 @@ Five findings that are in the evidence rather than in anybody's talking points:
 
 2. **The seven-week silence is the most interesting artefact in the file.** Aug 20 to
    Oct 11: no email, no list, no name. Then a fully-formed meeting, a website within
-   four days, and a named organisation within five. Something happened face-to-face in
+   four days, and a named organization within five. Something happened face-to-face in
    the Elmwood in September 2025 that left no digital trace. **That is the reporting
    hole**, and it is also the answer to the generational question — the thing that scaled
    was a shop-counter conversation, and what the tooling did was *catch* it.
 
 3. **Both sides discovered the same infrastructure at the same time.** 32 identical
    pro-upzoning subject lines and an East Bay YIMBY write-in call sit in the same Nov 6
-   packet as the shopkeepers' letters. The story is not NIMBY vs YIMBY organising; it is
+   packet as the shopkeepers' letters. The story is not NIMBY vs YIMBY organizing; it is
    that a municipal comment packet stopped being a record of individuals within one
    election cycle.
 

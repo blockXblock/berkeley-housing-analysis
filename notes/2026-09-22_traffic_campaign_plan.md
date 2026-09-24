@@ -72,7 +72,7 @@ and it is *neutral* — publishing the city's own model, taking no position. Tha
 is what makes it press-safe and what makes it credible to people who disagree with SBS.
 
 **Before publishing — two gates:**
-- **Analyse it first.** I have not opened the 63 fields. The story must be what the data
+- **Analyze it first.** I have not opened the 63 fields. The story must be what the data
   actually says, not what we expect it to say. If the designations are mundane, say so.
 - **Withhold the `rent_controlled` layer (1,098 parcels).** Publishing which specific
   parcels are rent-controlled is a targeting risk for tenants. The Opportunity Sites are a
@@ -127,7 +127,7 @@ story that is already on Reddit.
    keeps a post alive.
 3. **The SBS list (~1,900).** One email, one link, one sentence of why. See the caution
    below about framing.
-4. **Nextdoor, per neighbourhood** — Elmwood, Solano, North Shattuck, and your own. Highest
+4. **Nextdoor, per neighborhood** — Elmwood, Solano, North Shattuck, and your own. Highest
    conversion per impression of anything on this list, and you are already a member.
 5. **The council candidates and commissioners.** They cite data in public meetings; a cited
    map is a durable referrer.
@@ -168,7 +168,7 @@ the prediction fails, fix the model before trusting any campaign numbers.
 
 | when | what |
 |---|---|
-| this week | Analyse the Raimi geodatabase. Decide if Wave 1 has a story. |
+| this week | Analyze the Raimi geodatabase. Decide if Wave 1 has a story. |
 | this week | Verify the bandwidth prediction. |
 | by Oct 3 | **Measure U parcel tool live** — ballots arrive. Hard deadline. |
 | early Oct | Wave 1 scoop: press exclusive → Reddit → list → Nextdoor. |

@@ -69,7 +69,10 @@ def main():
         # a wall of duplicate prose on a phone. It now lives once in a <details> under the
         # stage-legend figure. So the guarantee to enforce is no longer "every block has one"
         # but "the page has exactly one, and it names every stage".
-        nleg = h.count("Colour shows where each project stands")
+        # American spelling as of 2026-09-24 (the page said "Colour" throughout; a
+        # Berkeley, California site should not). Count both so an older deploy still passes.
+        nleg = h.count("Color shows where each project stands") + \
+               h.count("Colour shows where each project stands")
         check(nleg == 1, "the shared colour legend appears exactly once", f"found {nleg}")
         stages = ["pre-application", "under review", "entitled", "permitted, not yet started",
                   "under construction", "completed and occupiable", "withdrawn"]

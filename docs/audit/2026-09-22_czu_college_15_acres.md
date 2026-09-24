@@ -57,7 +57,7 @@ the staff-recommended Option 1A:
 
 1.5 acres and 131 units are the same statement made twice, ten months apart. Against a
 6th-cycle RHNA obligation of **8,934 units** and identified citywide capacity of **19,098**,
-College Avenue is **1.5% of the obligation** and the whole three-corridor programme is 17%.
+College Avenue is **1.5% of the obligation** and the whole three-corridor program is 17%.
 
 ## Why this matters
 

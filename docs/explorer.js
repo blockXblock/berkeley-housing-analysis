@@ -901,6 +901,33 @@
         }
     }
 
+    // Deep link: explorer.html?tab=<id> opens a named tab. Added 2026-09-24 so that links
+    // from berkeleybuild.com can land on a specific tab -- until now only ?project=<id>
+    // could reach one, and only by side effect. Unknown names are ignored, not thrown.
+    function openTabDeepLink() {
+        const t = new URLSearchParams(location.search).get('tab');
+        if (!t) return false;
+        const known = ['dashboard','projects','players','skyline','spatial','analysis',
+                       'apr','costanal','econimpact','constructtech'];
+        if (!known.includes(t)) { console.warn('⚠️ deep link: unknown tab', t); return false; }
+        showTab(t);
+        // A tab's heavy content (Leaflet, Chart.js) is built lazily on FIRST CLICK, and a
+        // Leaflet map cannot size itself inside a hidden container. Arriving by URL skips
+        // that click, so the tab opened empty. Kick the renderer explicitly once layout has
+        // settled. (Found 2026-09-24: ?tab=spatial switched tabs but showed no map, because
+        // showTab's hook only calls invalidateSize() when spatialMap ALREADY exists.)
+        setTimeout(function () {
+            try {
+                if (t === 'spatial') {
+                    if (typeof spatialMap !== 'undefined' && !spatialMap &&
+                        typeof renderSpatialMap === 'function') renderSpatialMap();
+                    if (typeof spatialMap !== 'undefined' && spatialMap) spatialMap.invalidateSize();
+                }
+            } catch (e) { console.error('❌ deep-link tab render failed:', e); }
+        }, 350);
+        return true;
+    }
+
     // Deep link: explorer.html?project=<id> opens the Projects tab with that row expanded.
     function openProjectDeepLink() {
         const id = new URLSearchParams(location.search).get('project');
@@ -3660,6 +3687,7 @@
         // Wrap each init function in try-catch to prevent cascade failures
         try { initCharts(); } catch(e) { console.error('❌ initCharts failed:', e); }
         try { renderProjectTable(); } catch(e) { console.error('❌ renderProjectTable failed:', e); }
+        try { openTabDeepLink(); } catch(e) { console.error('❌ openTabDeepLink failed:', e); }
         try { openProjectDeepLink(); } catch(e) { console.error('❌ openProjectDeepLink failed:', e); }
         try { renderGantt(); } catch(e) { console.error('❌ renderGantt failed:', e); }
         try { renderAPRTable(); } catch(e) { console.error('❌ renderAPRTable failed:', e); }

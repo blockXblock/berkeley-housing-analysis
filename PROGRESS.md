@@ -8,6 +8,55 @@
 
 ---
 
+## 2026-09-24 — DEPLOYED `49e8c21`: header states the thesis, four CTAs, Explorer tab deep links
+
+**Shipped to main `49e8c21`** (from dev `7a3b194`), gate **18/18 PASS**. dev and main both 0/0 with origin.
+Propagation lags; verify with `curl -s https://berkeleybuild.com/ | grep -c hero-cta` (non-zero = landed).
+
+**Header rewritten — and it was WRONG on scope.** The old tagline started the pipeline at *entitlement*,
+one stage too late: the site tracks `app_filed` and the legend opens at pre-application. Now
+*"application, entitlement, building permit, move-in day — independently reconstructed from the city's
+own records. See if what you believe about new housing matches what Berkeley is actually building."*
+⚠ **That sentence lives in FOUR places** — the `<header>` plus three meta tags generated from
+`site_meta.py` `DESC`. Change all four together and rerun the generator or the page and every shared
+link disagree.
+
+**Hero caption now states the thesis, not the mechanism:** *"Green is finished; blue is rising now.
+Every other color is paper — approved, and not built. Purple is UC Berkeley, our largest developer,
+free from city regulation. Magenta is BART."* Two corrections from the draft: **green is finished,
+blue is under construction** (not "blue is built"), and **BART is magenta** — orange already means
+*entitled*, the commonest paper stage. UC-largest verified: **5,010 beds / 4 projects** vs NX Ventures
+1,592, Panoramic 1,177.
+
+**Four calls to action**, always-underlined (hover-only affordance would fail the ~39% on touch):
+corridors → `#tours` · **`explorer.html?tab=spatial`** · `explorer.html` · **`?tab=projects`**.
+Numbers verified against the served data: **905 projects / 14,659 units are the NON-UC figures**
+(909 − 4 UC; 19,669 − 5,010 UC beds). **Dropped "with plans"** — only **49 projects** carry an
+architect's plan set (192 plan-set docs; 703 projects have only untyped documents). Plan-set harvest
+is the real gap there.
+
+**`?tab=<id>` deep links added to `explorer.js` — plus the fix that makes them work.** `showTab()` only
+toggles CSS; Leaflet cannot size a map inside a hidden container and the lazy renderer fires on first
+CLICK, so `?tab=spatial` opened an empty tab. The handler now calls `renderSpatialMap()` +
+`invalidateSize()` after layout settles. Any page/email/Reddit post can now link a named tab.
+
+**SPELLING: 69 British → American across 14 files** (colour/coloured, neighbourhood, labelled,
+organis*, analysed, programme, modelling, behaviour, centred). `Colour` predated this session in
+`index.html` and was propagated rather than noticed. ⚠ **`deploy_gate.py` asserted on the literal
+`"Colour shows where each project stands"`** and would have failed the deploy; it now counts **both**
+spellings. **Grep the gate and generators before changing any user-visible site string.** Memory:
+`american-spelling-not-british`.
+
+**Two checks queued:** (1) the traffic baseline predicts daily bandwidth falls **~90% (1.1 GB → ~100 MB)**
+now the two autoplaying mp4s are gone — if not, the model in `docs/audit/2026-09-22_traffic_baseline.md`
+is wrong; (2) whether the four CTAs move path-level traffic off `/` (baseline ~22 real pageviews/day,
+53% on `/`). CF token expires **2026-10-22**.
+
+**Next:** Housing Headroom rework — physical buildability independent of zoning, and a meaningful
+separation of religious / industrial / government / commercial / special-agency land.
+
+---
+
 ## 2026-09-22 — DEPLOYED: hero loop first, one shared legend, Google out of the page-load path
 
 **Shipped to main `a637153`** (from dev `1c30f2f`), gate 18/18 PASS. Live propagation lags the push

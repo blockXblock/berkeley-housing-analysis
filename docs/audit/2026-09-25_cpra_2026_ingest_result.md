@@ -142,7 +142,21 @@ sat unretrieved Jul–Sep 2026.
   `data/reference/cpra_2026_units_needs_review.csv`. A `new_unit` permit creates at least one
   dwelling, so 1 is a floor, not a guess — but it is a floor.
 - **8 of 185 new projects have no coordinates** and will not appear on the map.
-- **The BP feed ends 2026-07-07.** August and September 2026 completions are not in v2.
+- **The BP feed ends 2026-07-07.** August and September 2026 completions are not in v2. (This
+  forward-edge limit is unaffected by the correction below.)
+- ⚠ **THE INGEST READ ONE OF FIVE FEED FILES — corrected 2026-09-25.** `ingest_cpra_2026.py` reads
+  only `BP_Annual Permit Report-2025-2026-07-07.xlsx`. The repo also holds **2018-2022** and
+  **2023-2025** windows, each with a 2026-07-07 rerun, in place since May. I described the
+  2025-2026 file as "the feed" throughout, and told John the missing Acheson units were "a gap my
+  ingest could not reach" — they are unlinked records in a file we have held for months, not
+  missing ones. Caught by a parallel session.
+  **Across all five, deduped on permit number: 32,897 unique permits, 1,213 classified `new_unit`,
+  321 absent from v2, and 177 of those FINALED**, carrying roughly **836 units** — largest 163u,
+  152u, 107u, 81u, then Acheson C at 65u. ⚠ That total is an **upper bound**: several are phases of
+  one building ("Phase 1 of 2", "Phase 3") and a few are classifier false positives, so it needs
+  de-duplicating per building before it is quoted.
+  ⚠ **The five files are 55% duplicate rows** — 72,445 rows for 32,897 unique permits, because both
+  reruns republish their whole windows. De-duplicate on permit number before counting.
 - **`bp_issued_date` now populates from 213 new BP-issued events.** The RHNA 6th-cycle boundary
   (first BP on/after 2022-06-30) should be re-checked before any RHNA figure is quoted; the bar
   stays held regardless, since coverage is still partial.

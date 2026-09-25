@@ -8,6 +8,48 @@
 
 ---
 
+## 2026-09-25 — ⚠ CORRECTION: the ingest read 1 of 5 CPRA files · 177 finaled permits still missing
+
+**My error, caught by a parallel session.** `ingest_cpra_2026.py` reads only
+`BP_Annual Permit Report-2025-2026-07-07.xlsx`. The repo also holds **2018-2022** and **2023-2025**
+windows, each with a 2026-07-07 rerun, **in place since May**. I called the 2025-2026 file "the
+feed" throughout, ran a membership test against it alone, and reported a whole-corpus negative as
+"verified, not inference." The test was sound; the **scope** was wrong.
+
+Consequence: I told John the 102 missing Acheson units were "a gap my ingest could not reach" and
+belonged on the CPRA filing list. **Wrong — they are unlinked records in files we have held for
+months. It is an ingest job, and it comes off the filing list.** B2015-03000 even carries a clean
+`UnitsAdded=65`, so no classifier question arises for it.
+
+**The real gap, across all five files deduped on permit number:**
+
+| | |
+|---|---|
+| unique permits | 32,897 |
+| classified `new_unit` | 1,213 |
+| **absent from v2** | **321** |
+| **...of those FINALED (built)** | **177** |
+| units in the finaled-but-missing | **~836** ⚠ upper bound |
+
+Largest: **B2019-05608 163u** (finaled 2024-10-24), **B2016-03894 152u** (2018-07-31),
+**B2016-05125 107u** (2022-08-09), **B2022-01111 81u** (2024-04-09), Acheson C 65u.
+By final year: 2018:3 2019:12 2020:10 2021:16 2022:11 2023:25 2024:26 2025:11 **2026:63**.
+
+⚠ **836 is an UPPER BOUND, not a figure.** Several are phases of one building ("Phase 1 of 2",
+"Phase 3") and a few are classifier false positives — a 3-unit solar install is in the list. It
+must be de-duplicated per building before anyone quotes it.
+
+⚠ **The five files are 55% duplicate rows** — 72,445 rows for 32,897 unique permits, because both
+reruns republish their whole windows. De-duplicate on permit number before counting anything.
+
+**The forward-edge claim still holds:** nothing after 2026-07-07 is in any file, so Aug/Sep 2026
+remains genuinely absent.
+
+**NEXT:** re-run the ingest across all five files (it already dedupes by `permit_number IS NOT NULL`
+against v2, so it is additive and safe), then re-verify. **Not done — John's call.**
+
+---
+
 ## 2026-09-25 — Stage derived from events · 214 units un-buried · zero projects now read "withdrawn"
 
 **Applied: 16 stage moves** (`scripts/migration/preview_stage_from_events.py --commit`; the apply

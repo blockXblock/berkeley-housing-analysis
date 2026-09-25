@@ -112,11 +112,17 @@ The data is **already in the repo, un-ingested**:
 - **`data/raw/cpra-downloads/BP_Annual Permit Report-2025-2026-07-07.xlsx`** — 8,047 rows, dates
   running to **2026-07-07**. This is the 2026 completion feed. v2's newest `completes` is 2025-12-11,
   so the 2026 portion has never been loaded.
-- **`data/raw/cpra-downloads/2026 Master Permits Log.xlsx`** — 9 sheets (`ZPs`, `PLN Pre-App`,
-  `PLN Prelim App- Ministerial`, `Open 2025 PLN ZRL`, `Landmarks`, `Design Review`, `SB 684 Map
-  Apps`, `Condo`) with **`New Units (Y/N)`, `Demolished Units`, `Total Units in Project`, BMR by
-  income tier, Density Bonus, SB 9 streamlining**. This is the *entitlement* side and is also
-  un-ingested. Note it is a **zoning-permit** log, so it does not itself close the CO gap.
+- **`data/raw/cpra-downloads/2026 Master Permits Log.xlsx`** — 9 sheets, 589 rows, also
+  un-ingested. ⚠ **CORRECTED 2026-09-25 (same day):** this section originally credited the file
+  with `New Units (Y/N)`, `Demolished Units`, `Total Units in Project`, BMR by income tier, Density
+  Bonus and SB 9 streamlining. **Those are HEADERS with no data.** Measured fill rates: every
+  column after `Date Received` is **100% empty**, including all unit counts, all BMR tiers, and
+  the entitlement dates (`Date Deemed Complete`, `Date of Final Action`, `Date of NOD`, `Date
+  Permit Effective`). What the file actually carries is application intake — number, type, site
+  address, applicant, res/comm, description, date received. Useful for
+  `application_submitted` events and for knowing what is in the planning queue; it does **not**
+  close the queued entitlement-event gap, because the approval dates are the missing part. See
+  `2026-09-25_cpra_2026_ingest_preview.md`. *Lesson: read fill rates, not column names.*
 
 **Recommendation, and it is the cheapest win in this document: ingest the 2026 BP report.** It needs
 the standing write discipline — snapshot, read-only preview, stop for John, transactional write with

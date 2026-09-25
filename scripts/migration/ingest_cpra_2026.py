@@ -111,6 +111,7 @@ NOT_DWELLING = re.compile(
     r"driveway|curb cut|retaining wall|landscap)", re.I)
 
 VETOED = []
+FEED_FINALED = {}          # permit_number -> finaled date, for EVERY row in the feed
 
 
 def read_new_units():
@@ -122,6 +123,7 @@ def read_new_units():
         if not r[0]:
             continue
         g = lambda k: r[idx[k]] if k in idx else None            # noqa: E731
+        FEED_FINALED[str(g("PermitNumber")).strip()] = d(g("Finaled Date"))
         role, net, note = classify(
             work_type=g("Work Type") or "", description=g("WorkDescription") or "",
             adu_flag=g("ADU"), occtype=g("OccType") or "",
@@ -221,10 +223,18 @@ def main() -> int:
         "SELECT project_id, co_issued_date FROM v_projects_flat WHERE co_issued_date IS NOT NULL")}
 
     def would_move_completion(pid, items):
+        """True when attaching would describe a DIFFERENT building than the one that completed.
+
+        Checks the issue date as well as the final. A permit merely ISSUED after the project's CO
+        is still a later, separate piece of work: attaching two of them gave projects a
+        bp_issued_date LATER than their co_issued_date (1332 Neilson: CO 2024-02-05, BP
+        2026-01-14), which is an impossible order and would hand those projects a spurious 6th-cycle
+        RHNA credit, since credit turns on a first BP on/after 2022-06-30."""
         co = completed.get(pid)
         if not co:
             return False
-        return any(i["finaled"] and i["finaled"] > co for i in items)
+        return any((i["finaled"] and i["finaled"] > co) or (i["issued"] and i["issued"] > co)
+                   for i in items)
 
     def resolve(apn):
         """-> (project_id or None, how)"""
@@ -403,6 +413,47 @@ def main() -> int:
                          f"BP {it['permit']} finaled", it["units"] or None, V["conf_high"],
                          SOURCE_URL, VERDICT_BY, now, now))
                     made["project_events"] += 1
+
+        # ---- BACK-FILL --------------------------------------------------------------------
+        # Inserting only NEW permit numbers left 3030 Telegraph's 144-unit completion behind: its
+        # permit was already in v2 carrying an EMPTY finaled_date, and the feed's 2026-04-16 final
+        # was skipped along with the permit. 12 permits are in that position and NONE disagrees
+        # with the feed, so this is missing EVIDENCE being filled in, not a correction.
+        # Two rules, both deliberate:
+        #   * verdicts are NEVER touched. 9 of the 12 are 'does_not' -- deliberate classifications
+        #     (a subsidiary permit on 3030 Telegraph among them). ADR-002 makes VERDICT the
+        #     overwrite layer, but overwriting one here would be inventing a completion.
+        #   * a permit_finaled EVENT is added only where the verdict is already 'completes',
+        #     because that event is what v_projects_flat reads for co_issued_date.
+        backfilled = events_added = 0
+        for pid_, pn_, fd_, verdict_ in db.execute(
+                """SELECT id, permit_number, finaled_date, completion_verdict FROM permits
+                   WHERE permit_number IS NOT NULL""").fetchall():
+            feed_fd = FEED_FINALED.get(pn_)
+            if not feed_fd or (fd_ or "").strip():
+                continue
+            db.execute("UPDATE permits SET finaled_date=?, updated_at=? WHERE id=?",
+                       (feed_fd, now, pid_))
+            backfilled += 1
+            if verdict_ == "completes":
+                proj_ = db.execute("SELECT project_id FROM permits WHERE id=?", (pid_,)).fetchone()[0]
+                dup = db.execute(
+                    """SELECT 1 FROM project_events e JOIN vocabulary_event_types t
+                       ON t.id = e.event_type_id
+                       WHERE e.permit_id=? AND t.code='permit_finaled'""", (pid_,)).fetchone()
+                if not dup:
+                    db.execute(
+                        """INSERT INTO project_events (project_id, event_type_id, event_date,
+                           event_date_precision, permit_id, summary, confidence_type_id,
+                           is_inferred, source_type, source_url, observed_by, observed_at, created_at)
+                           VALUES (?,?,?,'exact',?,?,?,0,'document',?,?,?,?)""",
+                        (proj_, V["ev_permit_finaled"], feed_fd, pid_,
+                         f"BP {pn_} finaled (back-filled from the 2026 CPRA feed)",
+                         V["conf_high"], SOURCE_URL, VERDICT_BY, now, now))
+                    events_added += 1
+                    made["project_events"] += 1
+        print(f"back-filled finaled_date on {backfilled} existing permits "
+              f"(+{events_added} permit_finaled events; verdicts untouched)")
 
         after = {t: db.execute(f"SELECT COUNT(*) FROM {t}").fetchone()[0] for t in before}
         problems = []

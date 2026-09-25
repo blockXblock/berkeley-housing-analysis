@@ -48,6 +48,18 @@ PASSING = "Approved"                      # NOT 'Partially Approved', NOT 'Site 
 # Only housing_rules.permit_role.classify == 'new_unit' sets a date; the rest are reported, not used.
 CO_ROLES = {"new_unit"}
 
+# VERDICT OVERRIDE (2026-09-23, after a peer session flagged proj179/proj164). The role gate must never
+# contradict ADR-002's materialized completion_verdict. Two real completions were being reported as
+# final_but_not_housing — Logan Park North (B2019-05574, 237u) and 1752 Shattuck (B2023-00774, 72u) —
+# both carrying verdict='completes' with EVIDENTIARY basis.
+# Root cause is NOT inspection coverage (both permits have 557 and 580 inspection rows): it is
+# housing_rules.permit_role.classify. B2023-00774 carries a dirty ADU='Yes' flag on a 72-unit building,
+# and RULE 5 discards UnitsAdded=72 / NumberUnits=72 / OccType R-2 to return 'ambiguous'. B2019-05574
+# has UnitsAdded blank but NumberUnits=135, which classify never reads. 150 of 726 New+R-2/R-3 primary
+# permits are affected. That defect is in shared canon code and is NOT patched here.
+# The verdict layer is the older, human-reviewed authority; where the two disagree, it wins.
+VERDICT_COMPLETES = "completes"
+
 
 def _iso(s):
     for fmt in ("%m/%d/%Y", "%Y-%m-%d"):
@@ -83,10 +95,20 @@ def permit_roles():
     return roles
 
 
-def read_inspections(roles=None):
+def completes_permits():
+    """Permits ADR-002 has already ruled complete. A role gate may not overrule these."""
+    con = sqlite3.connect(V2)
+    out = {r[0] for r in con.execute(
+        "select permit_number from permits where completion_verdict=? and permit_number is not null",
+        (VERDICT_COMPLETES,))}
+    con.close()
+    return out
+
+
+def read_inspections(roles=None, completes=None):
     """permit -> {co, role, n_inspections, n_final_rows, final_results}. co = LAST approved building
     final, and ONLY when the permit's role can create a dwelling (see CO_ROLES)."""
-    roles = roles or {}
+    roles, completes = roles or {}, completes or set()
     out = {}
     for f in sorted(INSPECTIONS.glob("*.json")):
         try:
@@ -101,8 +123,10 @@ def read_inspections(roles=None):
         dates = sorted(x for x in (_iso(i.get("date")) for i in finals
                                    if i.get("result") == PASSING) if x)
         role = roles.get(pn, "unknown")
-        if role not in CO_ROLES:
+        if role not in CO_ROLES and pn not in completes:
             dates = []                     # finaled, but not a dwelling-creating permit
+        elif role not in CO_ROLES:
+            role = f"{role}+verdict_completes"          # kept on the verdict's authority
         out[pn] = dict(co=dates[-1] if dates else None, role=role, n_inspections=len(ins),
                        n_final_rows=len(finals),
                        final_results=";".join(sorted({str(i.get("result")) for i in finals})),
@@ -117,7 +141,10 @@ def main():
     a = ap.parse_args()
 
     roles = permit_roles()
-    insp = read_inspections(roles)
+    comp = completes_permits()
+    insp = read_inspections(roles, comp)
+    print(f"  ADR-002 'completes' permits honoured over the role gate: "
+          f"{sum(1 for v in insp.values() if 'verdict_completes' in str(v.get('role')))}", file=sys.stderr)
     con = sqlite3.connect(V2)
     con.row_factory = sqlite3.Row
     permit_to_project = {}

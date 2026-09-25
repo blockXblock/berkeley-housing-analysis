@@ -8,6 +8,45 @@
 
 ---
 
+## 2026-09-25 — Tour-grade readiness: 2025 CO tour is buildable, 2026 is blocked by an un-ingested file
+
+**Assessment:** `docs/audit/2026-09-25_tour_grade_data_readiness.md` (read-only; nothing written).
+
+**The capID is NOT missing — we hold 67,494 of them.** `capdetail_href` is present on **96.8% of
+Building** and **99.9% of Planning** real records. The gap is that nothing visits those URLs, and the
+one thing that does (the inspection scraper) keeps ONLY the inspection table, discarding CapDetail's
+parcel/APN, owner, work type, occupancy type, unit counts and **Related Records**. Extending that
+extractor is the highest-leverage change available: one visit would (a) make the MH Planning↔Building
+join exact, retiring the tracker's address-join weakness, (b) feed the **starved** classifier —
+`permit_role.classify` returns **4,321 of 4,856** finaled 2025-26 permits as `ambiguous` on
+description alone, and its 22 `new_unit` hits include a 400-amp upgrade and two solar installs — and
+(c) yield APN, hence geometry without address matching.
+
+**Inspections: 206 of 7,845 issued/finaled 2025-26 permits = 2.6%.** Closing that is ~85 hours of
+scraping for a signal `Finaled` already gives. Keep them **targeted** — their unique value is proving
+a project is genuinely under construction *before* it finals (how we know 2808 Ninth is really being
+built). Fetch for watched cohorts only.
+
+**2025 CO tour — BUILDABLE NOW.** 98 projects, **96 geocoded (98%)**, 100% have address + units. Only
+gap is storeys (11%), derivable from BP description + assessor at 3.5 m/storey.
+
+**2026 CO tour — BLOCKED, and the fix is an INGEST not a scrape.** v2 holds **2** projects with a 2026
+CO; Accela shows **1,136 finaled permits in 2026**. v2's permit feed stops 2025-12-11. The data is
+already in the repo: **`BP_Annual Permit Report-2025-2026-07-07.xlsx`, 8,047 rows running to
+2026-07-07**, never loaded. Also un-ingested: **`2026 Master Permits Log.xlsx`**, 9 entitlement sheets
+carrying New Units / Demolished Units / Total Units / BMR by tier / Density Bonus / SB 9 / SB 684.
+
+**Middle-housing tour — BUILDABLE NOW**, 31/32 geocoded (miss: 1312 Addison). Caveat to state on the
+tour: footprints are generated squares at parcel centroids, and **nothing is built yet** — it is a
+tour of intentions.
+
+**Ranked next:** (1) ingest the 2026 BP report [gated write] · (2) extend the CapDetail extractor ·
+(3) build the 2025 CO tour · (4) build the MH tour with Overture footprints · (5) run the extended
+scraper over cohorts · (6) ingest the Master Permits Log entitlement sheets · (7) do NOT chase
+blanket inspection coverage.
+
+---
+
 ## 2026-09-24 — Middle Housing, eleven months in: 31 projects, largest is 4 units, ZERO built
 
 **John asked for the updated list** of applications under the Middle Housing Ordinance (effective

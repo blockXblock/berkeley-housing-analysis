@@ -8,8 +8,8 @@ area: docs/audit
 
 # CPRA 2026 build verification
 
-Output of `scripts/verify_cpra_2026_build.py` after the swap. BASE = clean pre-ingest snapshot,
-BUGGY = the archived first build, FIXED = what is now live. Read-only on all three.
+Output of `scripts/verify_cpra_2026_build.py` after the swap and the housing-flag fix.
+BASE = clean pre-ingest snapshot, BUGGY = archived first build, FIXED = live. Read-only.
 
 ```
 

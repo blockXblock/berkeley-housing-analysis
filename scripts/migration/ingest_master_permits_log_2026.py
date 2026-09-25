@@ -47,9 +47,15 @@ OBSERVED_BY = "cpra_master_permits_log_2026_ingest"
 EV_APPLICATION_SUBMITTED = 2
 CONF_HIGH = 1
 
+# Widened 2026-09-25 after a spot check on 2455 Telegraph (the Amoeba Records site): an 8-storey,
+# 68-unit, 7-VLI application read is_housing=0 because the first version of this pattern demanded
+# the words "dwelling"/"apartment"/"housing" and the description says "68 units". That one word
+# suppressed the application_submitted event that would have corrected the project's filed_date.
+# The narrow rule flagged 112 of 514 rows; this one flags 161. It now also catches bare unit counts,
+# office-to-residential conversions, SB 330, and plain "residential ... addition".
 HOUSING = re.compile(
-    r"\b(dwelling|adu|jadu|duplex|triplex|fourplex|apartment|residence|residential unit|"
-    r"middle housing|sb ?9|town ?home|housing)\b", re.I)
+    r"\b(dwelling|adu|jadu|duplex|triplex|fourplex|apartment|residence|residential|"
+    r"middle housing|sb ?9|sb ?330|town ?home|housing|\d+\s*units?\b|units?\s*\()", re.I)
 ENTITLEMENT_PREFIX = re.compile(r"^(ZP|PLN)", re.I)
 
 

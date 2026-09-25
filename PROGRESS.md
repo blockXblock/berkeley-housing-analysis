@@ -8,6 +8,62 @@
 
 ---
 
+## 2026-09-25 — CPRA 2026 ingested · ⚠ LIVE DB HOLDS THE BUGGY BUILD, SWAP PENDING JOHN
+
+**Gated by John:** full housing scope for the BP report; intake-only for the Master Permits Log plus
+a re-request for its empty columns. Full record: `docs/audit/2026-09-25_cpra_2026_ingest_result.md`.
+
+**The classifier stopped guessing.** The BP feed supplies Work Type / OccType / ADU / UnitsAdded —
+over the same 8,039 rows **ambiguity falls 82.7% → 15.4%**, new_unit 184 → 447. That is the measured
+case for extending the CapDetail extractor to capture the same fields elsewhere.
+
+**A regression was caught by the evaluation, and it mattered.** The first build loaded all 447
+new_unit rows. Two bugs: (1) this feed's **`ADU=Yes` marks a parcel that HAS an ADU, not a permit
+that creates one**, so `CONVERT EXISTING METER PANEL` classified as new_unit with the source's own
+`UnitsAdded='0'` — **100 of 447** were pools, seismic upgrades, temp power, a burned bus bar;
+(2) attaching those to completed projects **moved real completion dates**, because `co_issued_date`
+is MAX over finaled events — **122 Avenida Dr jumped 2018 → 2026**, 5 projects changed CO year.
+That made v2 **wrong** where it had only been incomplete.
+
+**Fixed at the ingest boundary, NOT in `housing_rules.permit_role`** (shared v4 classifier, own
+tests, CLAUDE.md says import-never-redefine): 121 rows vetoed and written to
+`data/reference/cpra_2026_vetoed_zero_units.csv` for review rather than dropped; permits that would
+move an existing completion get their **own sibling project** on the same parcel per the
+SHADOW-vs-ADU-PAIR rule. **Verified: 0 projects change CO year.**
+
+**⚠ STATE RIGHT NOW — the live DB is the BUGGY first build.** Overwriting it was denied by the
+auto-mode guard (Irreversible Local Destruction), correctly. The corrected database was built on a
+separate file and verified instead:
+
+| | live `berkeley_housing_v2.db` | `rebuild_2026-09-25_v2_corrected.db` |
+|---|---|---|
+| projects | 1,187 | **1,101** |
+| permits | 1,323 | **1,211** |
+| 2026 CO projects | 103 (inflated) | **45** |
+| CO-year regressions | **5** | **0** |
+
+**ACTION NEEDED FROM JOHN: approve replacing the live v2 with the corrected build.** Snapshots exist
+either way (`keep_snapshot_2026-09-25_pre-cpra-2026-ingest.db` = the clean pre-ingest state).
+
+**Accuracy vs the HCD oracle (comparison target, never a source), 2025:** recall holds **92.9%**,
+unit coverage **53.9% → 59.8%** of the oracle's 984. Precision reads lower (93.9% → 79.3%) but the
+20 projects we hold that the APR omits are largely **real and large** — 2001 Ashby 87u, 2000 Dwight
+113u, 1367 University 39u — so that is oracle incompleteness, not 20 mistakes.
+
+**Master Permits Log creates nothing.** Its unit/BMR/density-bonus/entitlement-date columns are
+**100% empty** (measured). 514 rows → new `planning_queue_2026` table; 54 `application_submitted`
+events only where a housing ZP/PLN record matches a known project.
+
+**Still wrong, not hidden:** 2024 units read 1,466 vs the oracle's 708 (**207%**, pre-existing,
+unexplained — its own pass); 20 rows carry a documented floor of 1 unit; 8 of 185 new projects have
+no coordinates; the feed ends **2026-07-07** so Aug/Sep completions are absent; `bp_issued_date` now
+populates from 213 new events so the RHNA 6th-cycle boundary needs re-checking (bar stays held).
+
+**After the swap:** re-run `export_explorer_data_v2.py` + `generate_apr_v2.py`, re-baseline the
+deploy gate, then the 2025/2026 CO tour is buildable.
+
+---
+
 ## 2026-09-25 — Tour-grade readiness: 2025 CO tour is buildable, 2026 is blocked by an un-ingested file
 
 **Assessment:** `docs/audit/2026-09-25_tour_grade_data_readiness.md` (read-only; nothing written).

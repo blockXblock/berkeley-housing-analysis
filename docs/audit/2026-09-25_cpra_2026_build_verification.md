@@ -8,8 +8,8 @@ area: docs/audit
 
 # CPRA 2026 build verification
 
-Output of `scripts/verify_cpra_2026_build.py`, comparing the clean pre-ingest snapshot (BASE),
-the first buggy build (BUGGY) and the candidate (FIXED). Read-only on all three.
+Output of `scripts/verify_cpra_2026_build.py` after the swap. BASE = clean pre-ingest snapshot,
+BUGGY = the archived first build, FIXED = what is now live. Read-only on all three.
 
 ```
 
@@ -18,9 +18,9 @@ the first buggy build (BUGGY) and the candidate (FIXED). Read-only on all three.
 ==========================================================================
                                                  BASE      BUGGY      FIXED
   integrity_check                                  ok         ok         ok
-  projects                                        909       1180       1096
-  permits                                         995       1323       1211
-  project_events                                 3916       4439       4256
+  projects                                        909       1180       1099
+  permits                                         995       1323       1215
+  project_events                                 3916       4439       4260
   orphan permits                                    0          0          0
   orphan events                                     0          0          0
   duplicate addresses                               0          0          0
@@ -56,9 +56,9 @@ the first buggy build (BUGGY) and the candidate (FIXED). Read-only on all three.
 4. BUILDING PERMITS — bp_issued_date and the RHNA 6th-cycle boundary
 ==========================================================================
                                                  BASE      BUGGY      FIXED
-  projects with a bp_issued_date                   36        327        229
-  first BP on/after 2022-06-30                     29        311        213
-    their units (6th-cycle lower bound)          1361       1685       1660
+  projects with a bp_issued_date                   36        327        232
+  first BP on/after 2022-06-30                     29        311        216
+    their units (6th-cycle lower bound)          1361       1685       1665
   bp_issued_date BEFORE filed_date                  7         10          9
   CO before BP (impossible order)                   0          3          0
 
@@ -66,10 +66,10 @@ the first buggy build (BUGGY) and the candidate (FIXED). Read-only on all three.
 5. PIPELINE TOTALS (what the site's headline counts read from)
 ==========================================================================
                                                  BASE      BUGGY      FIXED
-  total live projects                             909       1180       1096
-    with coordinates                              888       1149       1067
-    with a unit count                             907       1178       1094
-  all-time units                                19669      19957      19951
+  total live projects                             909       1180       1099
+    with coordinates                              888       1149       1070
+    with a unit count                             907       1178       1097
+  all-time units                                19669      19957      19956
   all-time completions                            704        819        768
   UC projects (kept in pipeline)                    4          4          4
 
@@ -93,7 +93,7 @@ the first buggy build (BUGGY) and the candidate (FIXED). Read-only on all three.
   [PASS] its BP carries the feed's 2026-04-16 final (back-fill)    ('2026-04-16',)
   [PASS] proj483 122 Avenida keeps its 2018 CO    ('2018-05-29',)
   [PASS] meter-panel / water-line permits kept OUT    (0,)
-  [PASS] sibling projects addressed traceably    (6,)
+  [PASS] sibling projects addressed traceably    (7,)
   [PASS] no 2026 completion missing a unit count    (0,)
 
 ==========================================================================

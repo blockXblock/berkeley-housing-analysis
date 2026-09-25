@@ -111,6 +111,7 @@ NOT_DWELLING = re.compile(
     r"driveway|curb cut|retaining wall|landscap)", re.I)
 
 VETOED = []
+PROMOTED = []
 FEED_FINALED = {}          # permit_number -> finaled date, for EVERY row in the feed
 
 
@@ -129,6 +130,23 @@ def read_new_units():
             adu_flag=g("ADU"), occtype=g("OccType") or "",
             units_added=g("UnitsAdded"), units_removed=g("UnitsRemoved"),
             permit_number=str(g("PermitNumber")))
+        # PROMOTE — the mirror image of the veto below. If an explicit UnitsAdded = 0 is
+        # authoritative enough to REFUSE a new_unit, an explicit UnitsAdded > 0 on NEW-construction
+        # work is authoritative enough to ACCEPT one. The classifier returns `ambiguous` for
+        # descriptions it cannot read -- "Construct a detached garage with a living unit above"
+        # (2808 Ninth St) reads as "ADU=Yes but no corroborating description language" -- while the
+        # city's own net-new field says 1. Without this the feed silently omitted a 72-unit
+        # apartment building (B2023-00774) and a finaled 2025 completion (B2022-01596).
+        # The non-dwelling guard still applies, so "Temporary Power Service for construction use"
+        # carrying UnitsAdded=83 is not promoted.
+        if role == "ambiguous" and "new" in str(g("Work Type") or "").lower():
+            _ua = g("UnitsAdded")
+            if (_ua not in (None, "", "None") and num(_ua) > 0
+                    and not NOT_DWELLING.search(g("WorkDescription") or "")):
+                PROMOTED.append(str(g("PermitNumber")).strip())
+                role, net, note = "new_unit", num(_ua), (
+                    f"PROMOTED at ingest: classifier said ambiguous ({note}); source Work Type="
+                    f"{g('Work Type')!r} with UnitsAdded={_ua!r}")
         if role != "new_unit":
             continue
         # VETO: the source's own UnitsAdded field is authoritative when it is explicitly 0.
@@ -264,6 +282,8 @@ def main() -> int:
             f'{v["permit"]},{v["units_added"]},{v["number_units"]},"{v["work_type"]}",'
             f'"{v["note"]}","{v["desc"][:120].replace(chr(34), chr(39))}"\n' for v in VETOED))
         print(f"VETOED (source says UnitsAdded=0): {len(VETOED)} -> {vp.name}")
+    if PROMOTED:
+        print(f"PROMOTED (ambiguous + new work + UnitsAdded>0): {len(PROMOTED)} -> {', '.join(PROMOTED)}")
     print(f"permits to insert          {len(rows)}")
     print(f"  attach to existing proj  {sum(len(v) for a, v in by_apn.items() if a in apn2proj)}")
     print(f"  on APNs with no project  {sum(len(v) for a, v in by_apn.items() if a not in apn2proj)}")

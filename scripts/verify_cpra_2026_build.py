@@ -5,7 +5,7 @@ Compares three databases on every axis that could have been damaged, so the swap
 evidence rather than on the ingest script's own say-so:
 
   BASE  keep_snapshot_2026-09-25_pre-cpra-2026-ingest.db   clean pre-ingest state
-  BUGGY berkeley_housing_v2.db                             the first build (currently live on disk)
+  BUGGY keep_snapshot_2026-09-25_buggy_build_superseded.db  the first build, archived
   FIXED rebuild_2026-09-25_v2_corrected.db                  the candidate
 
 Every check states what it is testing and what a failure would mean. A check that cannot be
@@ -23,7 +23,7 @@ from housing_rules import to_canonical_apn      # noqa: E402
 
 DBS = {
     "BASE": ROOT / "databases/keep_snapshot_2026-09-25_pre-cpra-2026-ingest.db",
-    "BUGGY": ROOT / "databases/berkeley_housing_v2.db",
+    "BUGGY": ROOT / "databases/keep_snapshot_2026-09-25_buggy_build_superseded.db",
     "FIXED": ROOT / "databases/rebuild_2026-09-25_v2_corrected.db",
 }
 UC_EXCLUDE = """project_id NOT IN (

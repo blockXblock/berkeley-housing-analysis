@@ -8,6 +8,55 @@
 
 ---
 
+## 2026-09-25 — SWAPPED. v2 is now the corrected build; document links intact; 2026 permits complete
+
+**Live `databases/berkeley_housing_v2.db` = the corrected build**, verified byte-identical to
+`rebuild_2026-09-25_v2_corrected.db`, integrity ok, **0 FK violations**. The superseded first build is
+archived at `keep_snapshot_2026-09-25_buggy_build_superseded.db`; the clean pre-ingest state remains
+at `keep_snapshot_2026-09-25_pre-cpra-2026-ingest.db`.
+
+| | BASE | BUGGY (archived) | **LIVE** |
+|---|---|---|---|
+| projects | 909 | 1,180 | **1,099** |
+| permits | 995 | 1,323 | **1,215** |
+| 2026 CO projects | 2 | 103 ⚠ | **47** |
+| CO years moved | — | 5 ⚠ | **0** |
+| CO before BP | 0 | 3 ⚠ | **0** |
+
+**DOCUMENT LINKS INTACT — verified, not assumed.** `documents` links to projects directly via
+`documents.project_id` (there is no join table). **2,255 documents across 790 projects, identical in
+BASE and LIVE: 0 lost, 0 changed counts, 0 orphaned.** The ingest only inserted projects; it never
+touched `documents`. Re-check with the per-project count diff before any Explorer regeneration.
+
+**A symmetric PROMOTE rule was added, and it mattered.** If an explicit `UnitsAdded = 0` is
+authoritative enough to VETO a new_unit, an explicit `UnitsAdded > 0` on NEW-construction work is
+authoritative enough to ACCEPT one. The classifier returns `ambiguous` for text it cannot read —
+2808 Ninth St's *"Construct a detached garage with a living unit above"* reads as "ADU=Yes but no
+corroborating description language" — while the city's own field says 1. Without it the feed silently
+omitted a **72-unit apartment building (B2023-00774)** and a finaled **2025 completion
+(B2022-01596)**. 7 promoted, 4 genuinely new; the non-dwelling guard still blocks *"Temporary Power
+Service for construction use"* despite its `UnitsAdded=83`.
+
+**2026 COVERAGE AUDIT vs the Accela sweep (fresher than CPRA — runs to 2026-09-21):**
+168 dwelling-creating 2026 records; **every ISSUED or FINALED one is now in v2.** The 11 flagged as
+absent are all filter false positives (wall heaters, sub-panels, an EQ valve, a patio cover, a
+kitchen remodel). **2026 completions = 47.**
+
+**What is genuinely NOT modelled, and it is a design question not a bug:** **153 in-progress
+applications** for new dwellings — 36 Under Review, 38 Corrections List Issued, 66 Closed, 7 Open,
+4 Pending Payment, 2 Approved w/Conditions. These have no issued permit, so they are not projects
+under v2's model. They include **3032 Mabel (3 new SFRs)** and **2649 Benvenue (3 ADUs)**. The
+entitlement intake now lives in `planning_queue_2026` (514 rows).
+
+**STRUCTURAL GAP: the CPRA feed ends 2026-07-07.** 59 of the 164 unmodelled records fall after it —
+August and September 2026 are outside the feed entirely. Re-request, or drive that window from Accela.
+
+**NEXT (not yet done):** re-run `export_explorer_data_v2.py` + `generate_apr_v2.py`, diff the
+published numbers, review, then deploy. Nothing is published yet — `docs/explorer_data.js` still
+dates from **2026-09-08**.
+
+---
+
 ## 2026-09-25 — CPRA 2026 ingested · ⚠ LIVE DB HOLDS THE BUGGY BUILD, SWAP PENDING JOHN
 
 **Gated by John:** full housing scope for the BP report; intake-only for the Master Permits Log plus

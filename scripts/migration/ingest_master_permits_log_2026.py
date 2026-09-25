@@ -54,8 +54,9 @@ CONF_HIGH = 1
 # The narrow rule flagged 112 of 514 rows; this one flags 161. It now also catches bare unit counts,
 # office-to-residential conversions, SB 330, and plain "residential ... addition".
 HOUSING = re.compile(
-    r"\b(dwelling|adu|jadu|duplex|triplex|fourplex|apartment|residence|residential|"
-    r"middle housing|sb ?9|sb ?330|town ?home|housing|\d+\s*units?\b|units?\s*\()", re.I)
+    r"(\b(dwelling|adu|jadu|duplex|triplex|fourplex|apartment|residence|residential|"
+    r"middle housing|sb ?9|sb ?330|town ?home|housing|single.family|infill development)\b"
+    r"|\d+\s*[-\s]?\s*units?\b|units?\s*\()", re.I)
 ENTITLEMENT_PREFIX = re.compile(r"^(ZP|PLN)", re.I)
 
 

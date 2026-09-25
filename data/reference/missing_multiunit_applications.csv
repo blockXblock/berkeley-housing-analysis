@@ -1,0 +1,21 @@
+# Multi-unit housing APPLICATIONS (>=3 units) filed since 2025-01-01 that have NO project in
+# berkeley_housing_v2. Derived 2026-09-25 by scripts/audit_missing_applications.py from the Accela
+# Planning sweep (data/raw/accela/date_range/Planning_*.jsonl, current through 2026-09-21).
+#
+# WHY THEY ARE ABSENT — three compounding reasons, none of them a bug:
+#   1. They are ZONING/PLANNING applications, not building permits. v2 models projects that have a
+#      permit, so an application with no BP is outside its model.
+#   2. Most postdate the CPRA feeds: BP_Annual Permit Report ends 2026-07-07, and the 2026 Master
+#      Permits Log covers 2025/early-2026. Only the Accela sweep reaches them.
+#   3. The Master Permits Log's own unit columns are 100% empty, so even the rows it does carry
+#      cannot supply a unit count.
+#
+# These are the visible top of Berkeley's pre-permit pipeline. Surfacing them needs either an
+# Accela-Planning-driven project stage or a refreshed CPRA production with units populated.
+record,filed,status,units_proposed,address,description
+PLN2026-0141,2026-06-03,Under Review,60,2201 SAN PABLO Ave,"SB 330 preliminary application to construct a new 50,640 sf building"
+ZP2026-0040,2026-03-20,In Review,23,2330 PRINCE St,"Demolition of three buildings; new construction"
+ZP2026-0091,2026-09-15,Under Review,10,2336 DWIGHT Way,"Infill: retain two existing SFH, new detached 3-story multifamily at rear; +8 net units, 10 total"
+PLN2026-0147,2026-06-24,Under Review,5,1920 TENTH St,"Pre-application meeting request"
+PLN2026-0177,2026-08-21,Under Review,3,2930 M L KING JR Way,"Phased remodel of office to residential"
+PLN2025-0001,2025-01-15,Closed,3,2930 M L KING JR Way,"Expand dental office (non-conforming use) in R-4 — NOT housing, filter artefact"

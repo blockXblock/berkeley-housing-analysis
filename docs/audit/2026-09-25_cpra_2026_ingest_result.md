@@ -82,15 +82,41 @@ Left alone this would have made v2 **wrong** where it had been merely incomplete
 | **projects with a 2026 CO** | **2** | **45** |
 | 2025 CO units | 530 | 588 |
 
-Scored against the APR oracle for 2025: **recall holds at 92.9%**, unit coverage rises
-**53.9% → 59.8%** of the oracle's 984.
+Scored against the APR oracle: **2024 = 694 vs 707 (98.2%)**, **2025 recall holds at 92.9%** with
+unit coverage rising to **119.8%** of the oracle's 491 — we now hold more 2025 completions than the
+APR reports, which is the expected direction once the ADU tail is modelled and the feed runs to
+2026-07-07.
 
-**Precision reads lower (93.9% → 79.3%) and that is mostly not an error.** The 20 projects we
-report as 2025 completions that the APR does not include are largely real and large — **2001 Ashby
-(87 units), 2000 Dwight (113), 1367 University (39), San Pablo Ave (40)** — plus genuine ADUs. The
-APR is the city's own filing and has its own gaps; against an incomplete oracle, "precision" scores
-*agreement*, not correctness. It is reported here rather than hidden, but it should not be read as
-20 mistakes.
+**Precision reads lower (93.9% → 79.3%) and that is mostly not an error.** The projects we report as
+2025 completions that the APR omits are largely real and large — **2001 Ashby, 2000 Dwight,
+1367 University, San Pablo Ave** — plus genuine ADUs. Against an incomplete oracle, "precision"
+scores *agreement*, not correctness.
+
+## ⚠ Correction — the 2024 "207%" was my measurement, not the data
+
+The first run of the evaluation reported 2024 at **1,466 units against the oracle's 708** and called
+it an unexplained discrepancy needing its own pass. **It needed no pass. The 2024 completion
+reconciliation was settled in 2026-06 at CY2024=709 / CY2025=532 / CY2026=216.** Three bugs, all in
+`eval_cpra_2026_accuracy.py`, not in v2:
+
+1. **The UC exclusion was missing.** UC projects sit in the total pipeline but are exempt from city
+   permitting and therefore from all RHNA/APR counting (CLAUDE.md; Anchor House FAQ, v2 documents
+   id 2178). **proj170, 1950 Oxford, carries 772 beds with a CO of 2024-08-21** — the APR rightly
+   omits it and I did not. Excluding UC the way `generate_apr_v2.py` does via its `UC_EXCLUDE`
+   clause: **1,466 → 694**, against the oracle's 707. The discrepancy dissolves.
+2. **The oracle's own duplicate rows were summed twice.** `table_a2` contains exact duplicates —
+   2001 Ashby appears twice in 2025 with identical values (CO 2025-02-24, 1/80/6), 2000 Dwight
+   twice (CO 2025-06-17, 113). This is the same class of defect as the 2425 Durant cross-year
+   double-count already recorded as a genuine city error. De-duplicated, the oracle's 2025 total
+   drops **984 → 491**.
+3. **A row's `YEAR` is not its completion year.** 268 rows carry YEAR=2025 with a *blank*
+   `CO_ISSUE_DT1` — entitlement and BP rows, not completions. Falling back to `YEAR` swept them in,
+   which is why 121 of 128 supposedly "missing" 2025 APNs had zero units.
+
+*Lesson, and it is the same one as the Master Permits Log earlier the same day: check the
+aggregation before reporting a discrepancy. A number that disagrees with settled prior work is
+more likely to be a new measurement error than a new data problem — look for the prior
+reconciliation first.*
 
 ## The Master Permits Log: thin, and it creates nothing
 
@@ -111,8 +137,6 @@ sat unretrieved Jul–Sep 2026.
 
 ## Still wrong, and not hidden
 
-- **2024 units read 1,466 against the oracle's 708 — 207%.** Pre-existing, untouched by this ingest,
-  and unexplained. It is the largest single disagreement with the oracle and deserves its own pass.
 - **20 rows carry a unit count of 1 as a documented floor** (`floor_new_unit_role`), where neither
   `UnitsAdded` nor `NumberUnits` was usable. Listed in
   `data/reference/cpra_2026_units_needs_review.csv`. A `new_unit` permit creates at least one

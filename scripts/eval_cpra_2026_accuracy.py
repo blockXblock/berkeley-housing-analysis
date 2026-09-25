@@ -15,6 +15,15 @@ Recall is measured on APNs, canonicalised through housing_rules.to_canonical_apn
 the assessor and the APR write APNs differently, and a bare strip-non-digits comparison is the
 890/892-false-dead trap.
 
+UC IS EXCLUDED, and leaving it out was a real error in the first version of this script. UC projects
+sit in the total pipeline but are EXEMPT from city permitting and therefore from RHNA/APR counting
+(CLAUDE.md; Anchor House FAQ, v2 documents id 2178). The first run scored 2024 at 1,466 units
+against the oracle's 708 -- 207% -- and reported it as an unexplained discrepancy. It was not a
+discrepancy: proj170, 1950 Oxford (Anchor House), carries 772 beds with a CO of 2024-08-21, and the
+APR rightly omits it. Excluding UC the same way `generate_apr_v2.py` does gives 694 against 708.
+The 2024 completion reconciliation was settled in 2026-06 at CY2024=709 / CY2025=532 / CY2026=216.
+Filter on the uc_project CLASSIFICATION, never a hardcoded id.
+
 The APR covers through 2025, so 2026 cannot be scored against it. That is stated, not papered over.
 
 Read-only on every database.
@@ -31,6 +40,12 @@ from housing_rules import to_canonical_apn      # noqa: E402
 BEFORE = ROOT / "databases/keep_snapshot_2026-09-25_pre-cpra-2026-ingest.db"
 AFTER = ROOT / "databases/berkeley_housing_v2.db"
 ORACLE = ROOT / "databases/hcd_apr_mirror.db"
+
+
+UC_EXCLUDE = """project_id NOT IN (
+    SELECT pc.project_id FROM project_classifications pc
+    JOIN vocabulary_classification_types vct ON vct.id = pc.classification_type_id
+    WHERE vct.code = 'uc_project')"""
 
 
 def ro(p):
@@ -53,37 +68,53 @@ def n(x):
 
 def ours(db, year):
     """APNs with a CO in `year`, and the unit total."""
-    q = """SELECT DISTINCT pa.apn_normalized, f.total_units
-           FROM v_projects_flat f
-           JOIN project_parcels pp ON pp.project_id = f.project_id
-           JOIN parcels pa ON pa.id = pp.parcel_id
-           WHERE f.co_issued_date LIKE ? AND pa.apn_normalized IS NOT NULL"""
-    apns, units = set(), 0
-    for apn, u in db.execute(q, (f"{year}%",)):
+    q = f"""SELECT DISTINCT pa.apn_normalized
+            FROM v_projects_flat f
+            JOIN project_parcels pp ON pp.project_id = f.project_id
+            JOIN parcels pa ON pa.id = pp.parcel_id
+            WHERE f.co_issued_date LIKE ? AND pa.apn_normalized IS NOT NULL
+              AND f.{UC_EXCLUDE}"""
+    apns = set()
+    for (apn,) in db.execute(q, (f"{year}%",)):
         c = canon(apn)
         if c:
             apns.add(c)
-    units = db.execute("SELECT IFNULL(SUM(total_units),0) FROM v_projects_flat WHERE co_issued_date LIKE ?",
-                       (f"{year}%",)).fetchone()[0]
+    units = db.execute(
+        f"""SELECT IFNULL(SUM(total_units),0) FROM v_projects_flat
+            WHERE co_issued_date LIKE ? AND {UC_EXCLUDE}""", (f"{year}%",)).fetchone()[0]
     return apns, units
 
 
 def oracle(year):
+    """The oracle's own completion rows for `year`, de-duplicated.
+
+    TWO TRAPS IN table_a2, both of which inflated the first version of this script:
+
+    1. **The APR contains exact duplicate rows.** 2001 Ashby appears twice in 2025 with identical
+       values (CO 2025-02-24, 1/80/6), and 2000 Dwight twice (CO 2025-06-17, 113). Summing rows
+       double-counts them. We de-duplicate on (APN, CO date, unit vector). This is the same class
+       of thing as the 2425 Durant cross-year double-count already recorded as a genuine city
+       error in the Table A reconciliation.
+    2. **A row's YEAR is not its completion year.** 268 rows carry YEAR=2025 with a BLANK
+       CO_ISSUE_DT1 -- they are entitlement or building-permit rows, not completions. Falling back
+       to YEAR when the CO date is blank pulled them in, which is why 121 of 128 supposedly
+       "missing" 2025 APNs had zero units. A completion row must carry a real CO_ISSUE_DT1.
+    """
     db = ro(ORACLE)
-    apns, units = set(), 0
-    for row in db.execute("""SELECT APN, CO_ISSUE_DT1, YEAR,
+    seen, apns, units = set(), set(), 0
+    for row in db.execute("""SELECT APN, CO_ISSUE_DT1,
                 CO_ACUTELY_LOW_INCOME_DR, CO_ACUTELY_LOW_INCOME_NDR, CO_EXTREMELY_LOW_INCOME_DR,
                 CO_EXTREMELY_INCOME_NDR, CO_VLOW_INCOME_DR, CO_VLOW_INCOME_NDR, CO_LOW_INCOME_DR,
                 CO_LOW_INCOME_NDR, CO_MOD_INCOME_DR, CO_MOD_INCOME_NDR, CO_ABOVE_MOD_INCOME
                 FROM table_a2"""):
-        apn, dt, yr = row[0], str(row[1] or ""), str(row[2] or "")
-        y = dt[:4] if dt[:4].isdigit() else yr[:4]
-        if y != str(year):
+        apn, dt = row[0], str(row[1] or "")
+        if dt[:4] != str(year):          # a real CO date in the year, never the YEAR column
             continue
-        u = sum(n(x) for x in row[3:])
-        if u <= 0 and not dt:
+        key = (str(apn), dt, row[2:])
+        if key in seen:                  # the APR's own duplicate rows
             continue
-        units += u
+        seen.add(key)
+        units += sum(n(x) for x in row[2:])
         c = canon(apn)
         if c:
             apns.add(c)
@@ -120,8 +151,8 @@ def main() -> int:
     print("         so 2026 CANNOT be scored against the oracle. v2's own 2026 figures moved")
     a = ro(AFTER); b = ro(BEFORE)
     for label, db in (("before", b), ("after ", a)):
-        r = db.execute("""SELECT COUNT(*), IFNULL(SUM(total_units),0) FROM v_projects_flat
-                          WHERE co_issued_date LIKE '2026%'""").fetchone()
+        r = db.execute(f"""SELECT COUNT(*), IFNULL(SUM(total_units),0) FROM v_projects_flat
+                           WHERE co_issued_date LIKE '2026%' AND {UC_EXCLUDE}""").fetchone()
         print(f"         {label}: {r[0]:>4} projects, {r[1]:>4} units")
     return 0
 

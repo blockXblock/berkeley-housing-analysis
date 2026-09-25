@@ -45,17 +45,25 @@ separate file and verified instead:
 **ACTION NEEDED FROM JOHN: approve replacing the live v2 with the corrected build.** Snapshots exist
 either way (`keep_snapshot_2026-09-25_pre-cpra-2026-ingest.db` = the clean pre-ingest state).
 
-**Accuracy vs the HCD oracle (comparison target, never a source), 2025:** recall holds **92.9%**,
-unit coverage **53.9% → 59.8%** of the oracle's 984. Precision reads lower (93.9% → 79.3%) but the
-20 projects we hold that the APR omits are largely **real and large** — 2001 Ashby 87u, 2000 Dwight
-113u, 1367 University 39u — so that is oracle incompleteness, not 20 mistakes.
+**Accuracy vs the HCD oracle (comparison target, never a source):** 2024 **694 vs 707 (98.2%)**;
+2025 recall holds **92.9%**, units **588 vs 491 = 119.8%**. Precision reads lower (93.9% → 79.3%)
+but the projects we hold that the APR omits are largely **real and large** — 2001 Ashby, 2000
+Dwight, 1367 University — so that is oracle incompleteness, not mistakes.
 
 **Master Permits Log creates nothing.** Its unit/BMR/density-bonus/entitlement-date columns are
 **100% empty** (measured). 514 rows → new `planning_queue_2026` table; 54 `application_submitted`
 events only where a housing ZP/PLN record matches a known project.
 
-**Still wrong, not hidden:** 2024 units read 1,466 vs the oracle's 708 (**207%**, pre-existing,
-unexplained — its own pass); 20 rows carry a documented floor of 1 unit; 8 of 185 new projects have
+**⚠ The 2024 "207%" I flagged was MY measurement error, not a data problem** — the reconciliation
+was settled 2026-06 (CY2024=709/CY2025=532/CY2026=216). Three bugs in `eval_cpra_2026_accuracy.py`:
+(1) **missing the UC exclusion** — proj170 1950 Oxford is 772 beds with a 2024-08-21 CO and is exempt
+from APR counting, so 1,466 → **694** vs the oracle's 707 (98.2%); (2) the APR's **own duplicate
+rows** summed twice (2001 Ashby and 2000 Dwight each appear twice in 2025), so oracle 2025 984 →
+**491**; (3) using a row's `YEAR` when `CO_ISSUE_DT1` was blank, sweeping in 268 entitlement/BP rows.
+Fixed and re-run. 2025 now reads 588 vs 491 = **119.8%** — we hold more than the APR reports, the
+expected direction once the ADU tail is modelled.
+
+**Still wrong, not hidden:** 20 rows carry a documented floor of 1 unit; 8 of 185 new projects have
 no coordinates; the feed ends **2026-07-07** so Aug/Sep completions are absent; `bp_issued_date` now
 populates from 213 new events so the RHNA 6th-cycle boundary needs re-checking (bar stays held).
 

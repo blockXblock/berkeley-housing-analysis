@@ -48,10 +48,34 @@ carry no 2025-2026 CPRA `source_url`. The mechanism is real; the cause is an ear
 | B2015-03005 | Bldg D, 2111 University | 68 | proj902 |
 | B2023-00417 | 2101 University, +1 unit at roof | 1 | **NO** |
 
-All five are `Finaled` in the Accela sweep. **None of the five is in the CPRA feed** — verified by
-membership test. `BP_Annual Permit Report-2025-2026-07-07.xlsx` covers post-dates 2025-01-01 →
-2026-07-07; these finaled in 2022. So the 2026 ingest could not have reached them, and a further
-CPRA production covering earlier post-dates is what would.
+⚠ **CORRECTED 2026-09-25 — I got this wrong, and the error mattered.** I first wrote that none of
+the five is in the CPRA feed, "verified by membership test." I tested **one of five** feed files and
+stated a whole-corpus negative. A parallel session caught it. Re-tested across every
+`BP_Annual*.xlsx`:
+
+| permit | in feed? | file |
+|---|---|---|
+| B2015-02995 | **YES** | `BP_Annual Permit Report-2018-2022.xlsx` (+ its rerun) |
+| B2015-02998 | **YES** | same |
+| B2015-03000 | **YES** (`UnitsAdded=65`, clean) | same |
+| B2015-03005 | **YES** | same |
+| B2023-00417 | no | absent from all five |
+
+**So these are an INGEST job, not a records request.** The records have been in the repo since May.
+`ingest_cpra_2026.py` reads only the 2025-2026 file, so the 2018-2022 and 2023-2025 windows have
+never passed through it. Bldg C carries a clean `UnitsAdded=65`, so no classifier or units-fallback
+question arises for it at all — it is purely unlinked.
+
+**The gap is far larger than this block.** Across all five files: 32,897 unique permits, 1,213
+classified `new_unit`, **321 of those absent from v2, and 177 of the 321 are FINALED** — completed
+buildings — carrying roughly **836 units**. The largest are 163u (B2019-05608), 152u (B2016-03894),
+107u (B2016-05125) and 81u (B2022-01111). ⚠ That unit total is an upper bound: several are phases of
+one building ("Phase 1 of 2", "Phase 3") and a few are classifier false positives, so it must be
+de-duplicated per building before anyone quotes it.
+
+**Also: the five files are 55% duplicate rows** — 72,445 rows for 32,897 unique permit numbers,
+because the 2018-2022 and 2023-2025 reruns republish their whole windows. De-duplicate on permit
+number before counting anything.
 
 Bldg C's caption is `"ACHESON COMMONS" - BUILDING "C"`, not `ACHESON BLDG C`, so a caption grep
 misses it.

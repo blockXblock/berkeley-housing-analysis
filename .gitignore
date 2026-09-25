@@ -176,3 +176,6 @@ data/raw/berkeley_gis/*.geojson
 
 # Derived block index (rebuildable via scripts/city_block_index.py)
 data/derived/city_block_index.geojson
+
+# Sanborn sheets (public-domain LoC images; refetch with scripts/fetch_sanborn_elmwood.py)
+data/raw/sanborn/*.jpg

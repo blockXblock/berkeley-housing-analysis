@@ -8,6 +8,41 @@
 
 ---
 
+## 2026-09-24 — Sanborn maps fetched: the Elmwood strip was vacant in 1911, one storey in 1950
+
+**The historical block record we went looking for exists, and it records STOREYS.** Sanborn fire
+insurance sheets draw every building footprint with its storey count, construction material and use.
+Fetched from the Library of Congress IIIF service (public domain).
+
+**What is free, verified not assumed** — being *catalogued* at LoC is not being *digitised*.
+Probing the item API: **1911 (`g00419191102`) and 1950 (`g00419195002`) serve images; 1917 and 1929
+return `resources: 0`.** The prior note's "CC can fetch all 12 editions" was wrong and is corrected.
+**1929 is now the highest-value item behind John's UC / ProQuest login** — it splits the 39-year gap.
+
+**Sheet numbers are stable across both editions here** (read off each edition's own street index):
+**179** = College even side 2800–2958, **180** = College odd side 2801–2939. Sanborn block numbers
+carry across too (5359, 5346, 5363–5365, 4152–4154).
+
+**The finding — Elmwood commercial core, block 5359, College between Russell and Ashby:**
+**1911 = empty lots.** Four detached dwellings set back in the block interior; the College Ave M.E.
+Church on the corner across Russell; the strip does not exist. **1950 = continuously built, 2901–2953
+plus the bank at 2950 — and the numeral in every footprint on that frontage is `1`.** Material grades
+southward frame → brick → reinforced concrete, a build-order signature. So the strip was infill into
+an already-settled residential neighbourhood, went up single-storey, and **has not gained a storey in
+the ~75 years since.** A measured statement about built form, where the corridor debate runs on
+intuition.
+
+- `scripts/fetch_sanborn_elmwood.py` — reproducible fetch (jpgs gitignored, sha256 manifest committed)
+- `scripts/gen_sanborn_elmwood_figure.py` → `docs/images/elmwood_sanborn_1911_1950.jpg`
+- `data/reference/elmwood_sanborn_1950_storeys.csv` — the transcription
+- `notes/2026-09-24_sanborn_elmwood_1911_1950.md` — full read, caveats, next steps
+
+**Next:** georeference 179/180 onto the real city-block layer from `scripts/city_block_index.py`, then
+historical FAR = Sanborn storeys × footprint area ÷ block area, versus the modern figures. Read the
+residential blocks (5333, 5347, 5332, 5364, 5363) as the control group.
+
+---
+
 ## 2026-09-24 — DEPLOYED `49e8c21`: header states the thesis, four CTAs, Explorer tab deep links
 
 **Shipped to main `49e8c21`** (from dev `7a3b194`), gate **18/18 PASS**. dev and main both 0/0 with origin.

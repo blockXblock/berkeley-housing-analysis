@@ -26,16 +26,27 @@ MATERIAL and USE**, which is precisely the present-day index one century earlier
 ### FREE, already indexed (no login) — Library of Congress
 `data/raw/sanborn/loc_berkeley_index.json` · **12 Berkeley editions, 235+ sheets:**
 
-| date | sheets | note |
+| date | sheets | images actually served? |
 |---|---|---|
 | 1890-04 | 6 | "East Berkeley" |
 | 1894-05 | 14 | |
-| **1911** | **104 + 111** | two volumes — the first full-city coverage |
-| 1917-11 | ? | |
-| **1929** | 3 volumes | |
-| **1950** | 4 volumes | LoC coverage ends here |
+| **1911** | **104 + 111** | **YES** — two volumes, first full-city coverage |
+| 1917-11 | ? | **NO** — `resources: 0` |
+| **1929** | 3 volumes | **NO** — `resources: 0` |
+| **1950** | 4 volumes | **YES** — LoC coverage ends here |
 
-Public domain, downloadable as high-resolution TIFF/JP2. **CC can fetch all of these now.**
+⚠ **CORRECTED 2026-09-24 — "CC can fetch all of these now" was wrong.** Being *catalogued*
+at LoC is not the same as being *digitised*. Probing the item API, **1917 and 1929 return
+`resources: 0` and `url: None`** — the sheet images are not exposed. The free, fetchable
+Berkeley set is **1890, 1894, 1911 and 1950**. That makes 1929 the single highest-value
+thing behind the UC login, because it splits the 39-year 1911→1950 gap.
+
+**Fetched and read — see
+[2026-09-24_sanborn_elmwood_1911_1950.md](2026-09-24_sanborn_elmwood_1911_1950.md).**
+1911 and 1950 sheets 179/180 cover the Elmwood commercial core, with stable sheet numbers
+across both editions. Headline: the College Ave strip between Russell and Ashby was
+**vacant land in 1911**, and by 1950 was continuously built at **one storey everywhere** —
+which is still its height today.
 
 ### NEEDS UC LOGIN — ProQuest *Digital Sanborn Maps*
 `digitalsanbornmaps.proquest.com` — the licensed set. Worth it for **post-1950 updates and the

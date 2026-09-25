@@ -221,6 +221,7 @@ def main() -> int:
     # project on the same parcel instead of attaching.
     completed = {pid: co for pid, co in db.execute(
         "SELECT project_id, co_issued_date FROM v_projects_flat WHERE co_issued_date IS NOT NULL")}
+    completed_before = set(completed)
 
     def would_move_completion(pid, items):
         """True when attaching would describe a DIFFERENT building than the one that completed.
@@ -452,8 +453,26 @@ def main() -> int:
                          V["conf_high"], SOURCE_URL, VERDICT_BY, now, now))
                     events_added += 1
                     made["project_events"] += 1
+        # A back-fill that hands a project its FIRST completion must also move its stage, or the
+        # project reads co_issued_date=2026 while status_code still says 'permitted'. 5 W Parnassus
+        # did exactly that. Scope is deliberately narrow: only projects that had NO completion date
+        # before this run and have one now. Pre-existing stage drift -- 71 projects marked
+        # 'completed' with no CO date -- is NOT touched here; it predates this ingest and is the
+        # known current_stage_type_id drift CLAUDE.md documents.
+        staged = 0
+        for (proj_,) in db.execute(
+                """SELECT project_id FROM v_projects_flat WHERE co_issued_date IS NOT NULL""").fetchall():
+            if proj_ in completed_before:
+                continue
+            cur_stage = db.execute(
+                "SELECT current_stage_type_id FROM projects WHERE id=?", (proj_,)).fetchone()[0]
+            if cur_stage != V["stage_completed"]:
+                db.execute("UPDATE projects SET current_stage_type_id=?, updated_at=? WHERE id=?",
+                           (V["stage_completed"], now, proj_))
+                staged += 1
         print(f"back-filled finaled_date on {backfilled} existing permits "
-              f"(+{events_added} permit_finaled events; verdicts untouched)")
+              f"(+{events_added} permit_finaled events; verdicts untouched); "
+              f"stage->completed on {staged} newly-completed project(s)")
 
         after = {t: db.execute(f"SELECT COUNT(*) FROM {t}").fetchone()[0] for t in before}
         problems = []

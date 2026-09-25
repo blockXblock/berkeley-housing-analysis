@@ -74,6 +74,19 @@ the first buggy build (BUGGY) and the candidate (FIXED). Read-only on all three.
   UC projects (kept in pipeline)                    4          4          4
 
 ==========================================================================
+5b. STATUS — does every project carry one, and does it agree with the evidence?
+==========================================================================
+                                                 BASE      BUGGY      FIXED
+  projects with NO stage                            0          0          0
+  rows with NULL status_code                        0          0          0
+  rows with NULL status_label                       0          0          0
+  has a CO but stage != completed                   1          1          1
+  stage = completed but NO CO date                 72         72         71
+  NOTE: 'completed with no CO date' is PRE-EXISTING drift in current_stage_type_id,
+        which CLAUDE.md records as a separate, drift-prone materialisation that no
+        longer drives the published completion display. Not introduced here.
+
+==========================================================================
 6. SPOT CHECKS — named facts, verified individually
 ==========================================================================
   [PASS] 3030 Telegraph is a 2026 completion at 144 units    ('2026-04-16', 144)

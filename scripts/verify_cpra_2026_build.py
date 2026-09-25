@@ -133,6 +133,25 @@ def main() -> int:
     ):
         row(label, *[conns[k].execute(q).fetchone()[0] for k in order])
 
+    hdr("5b. STATUS — does every project carry one, and does it agree with the evidence?")
+    row("", *order)
+    for label, q_ in (
+        ("projects with NO stage", "SELECT COUNT(*) FROM projects WHERE current_stage_type_id IS NULL AND merged_into_id IS NULL"),
+        ("rows with NULL status_code", "SELECT COUNT(*) FROM v_projects_flat WHERE status_code IS NULL"),
+        ("rows with NULL status_label", "SELECT COUNT(*) FROM v_projects_flat WHERE status_label IS NULL"),
+        ("has a CO but stage != completed", "SELECT COUNT(*) FROM v_projects_flat WHERE co_issued_date IS NOT NULL AND status_code<>'completed'"),
+        ("stage = completed but NO CO date", "SELECT COUNT(*) FROM v_projects_flat WHERE co_issued_date IS NULL AND status_code='completed'"),
+    ):
+        vals = [conns[k].execute(q_).fetchone()[0] for k in order]
+        row(label, *vals)
+        if label.startswith(("projects with NO", "rows with NULL")) and vals[2]:
+            FAILS.append(f"{label} = {vals[2]} in FIXED")
+        if label == "has a CO but stage != completed" and vals[2] > vals[0]:
+            FAILS.append("FIXED introduced new CO/stage disagreement")
+    print("  NOTE: 'completed with no CO date' is PRE-EXISTING drift in current_stage_type_id,")
+    print("        which CLAUDE.md records as a separate, drift-prone materialisation that no")
+    print("        longer drives the published completion display. Not introduced here.")
+
     hdr("6. SPOT CHECKS — named facts, verified individually")
     f = conns["FIXED"]
     checks = []

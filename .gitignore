@@ -173,3 +173,6 @@ data/raw/czu/*.pdf
 
 # Berkeley GIS layer downloads (re-fetchable via scripts/fetch_berkeley_gis.py)
 data/raw/berkeley_gis/*.geojson
+
+# Derived block index (rebuildable via scripts/city_block_index.py)
+data/derived/city_block_index.geojson

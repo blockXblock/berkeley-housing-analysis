@@ -8,6 +8,48 @@
 
 ---
 
+## 2026-09-24 — Middle Housing, eleven months in: 31 projects, largest is 4 units, ZERO built
+
+**John asked for the updated list** of applications under the Middle Housing Ordinance (effective
+**2025-11-01**, up to **8 units on almost any parcel**), with entitlement/BP/inspection/CO state.
+Last check was 26 applications with the rest unknown.
+
+**Answer, Accela sweep through 2026-09-19: 32 records / 31 distinct projects.** New tracker
+`scripts/middle_housing_tracker.py` (re-runnable) → `data/reference/middle_housing_tracker.csv`.
+
+**The funnel:** 17 Approved · 9 still in review · 6 withdrawn/closed/incomplete · **19 addresses with
+a construction BP · 7 issued · 0 passed a Building Final.** **Zero completions, zero COs.** Three
+permits at these addresses *are* finaled — two panel upgrades and a re-roof; none is the project.
+That trap is why the tracker classifies permits **construction vs incidental**; the naive address
+join reports "3 built" and is wrong. Real construction has started at exactly one site: **2808 Ninth
+St**, setbacks and anchor-bolt inspections approved 2026-06-11.
+
+**The finding that matters: nobody is building 8 units.** Largest proposal is **4** (2834 Eighth, a
+warehouse conversion, still pre-application). **9 of 31 projects add dwellings; 21 add none; 1
+REMOVES one** (2215 Grant, "decommission of one attic unit"). **Net +16 dwellings**, none built. The
+ordinance is functioning mainly as **a major-addition pathway for single-family homeowners**.
+
+**Scale check — ADUs are doing ~7× the work** in the same window: **217 ADU building records, 35
+issued, 15 FINALED** vs middle housing's 0. The accessory path is delivering units today, and it
+touches no commercial parcel.
+
+**Method discipline:** Planning↔Building joins on normalised address (no shared key in the Accela
+list view) — evidence of a permit AT an address, not proof of the same project; every description is
+printed for eye-checking and counts are stated as "addresses with a construction permit". Unit counts
+are **hand-read** into `data/reference/middle_housing_units_reviewed.csv` (a regex first pass
+over-counted by 7 — it read "addition to an existing duplex" as adding units); records missing from
+that file print **UNREVIEWED** rather than being guessed. Inspection coverage is partial — the
+tracker prints a harvester queue (6 issued permits need fetching).
+
+**PROJECT BRIEF written** — `notes/2026-09-24_PROJECT_least-disruptive-paths.md`: paths to new
+housing that least affect the small commercial district, on four evidence streams (middle housing ·
+ADUs · block-level density · Sanborn history). **Top missing join: the MH and ADU cohorts are not
+mapped to the real 1,119-block layer**, so we cannot yet say which blocks absorb gentle density.
+Also outstanding: `notes/Elmwood-housing-argument.md` counts the Elmwood as 93 Census blocks; on the
+real layer it is **73-74** — re-baseline `JN-M_corridor_density` before publishing from it.
+
+---
+
 ## 2026-09-24 — Sanborn maps fetched: the Elmwood strip was vacant in 1911, one storey in 1950
 
 **The historical block record we went looking for exists, and it records STOREYS.** Sanborn fire

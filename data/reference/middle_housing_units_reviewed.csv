@@ -1,0 +1,42 @@
+# Eye-checked dwelling-unit counts for the Middle Housing cohort. Read 2026-09-24 from the full
+# Accela Planning description of each record (the descriptions are unusually explicit — they state
+# demolitions and resulting unit counts), NOT regex-derived. scripts/middle_housing_tracker.py joins
+# on record; any record absent from this file is reported "UNREVIEWED" so new applications surface
+# for a human read rather than being silently counted.
+#
+# gross_units_proposed = dwellings the finished project would contain (blank = not stated)
+# net_units            = change in dwellings on the parcel; negative is a loss
+# basis                = the phrase in the description the reading rests on
+record,gross_units_proposed,net_units,basis
+PLN2025-0079,1,0,"major residential addition to an existing one story single-family residence"
+PLN2025-0083,3,2,"demolish an inhabitable single-family home and construct a two-story duplex with a detached two-story garage with a living unit, for a total of three living units"
+PLN2025-0101,1,0,"major residential addition to an existing one story single-family residence"
+DRSL2025-0006,3,0,"design review for the SAME project as PLN2025-0083 - counted there, zero here to avoid double-counting"
+PLN2025-0106,1,0,"Major Residential Addition"
+PLN2025-0107,3,,"construct three independent 3-story single-family town homes on a 3700 square foot lot; pre-existing unit count not stated, so net is unknown"
+PLN2025-0115,2,0,"remodel the first floor unit and legalize a basement ... to an existing duplex (withdrawn)"
+PLN2025-0118,4,2,"establish four dwelling units within an existing two-story duplex ... no expansion of the existing building is proposed"
+PLN2025-0117,3,2,"demolish an existing uninhabitable single-family dwelling and construct three three-story single-family homes"
+PLN2025-0116,1,0,"60 square-foot addition to an existing basement ... creating habitable space (withdrawn)"
+PLN2025-0126,1,0,"major residential addition to the rear of an existing ... one-story single-family dwelling"
+PLN2026-0014,1,0,"two story rear residential addition adding two bedrooms and two baths"
+PLN2026-0030,1,0,"LIFT SINGLE-FAMILY HOME AND ADD APPROXIMATELY 771 SQUARE FEET"
+PLN2026-0034,2,1,"demolish existing single-family home and construct two detached residential units"
+PLN2026-0039,1,0,"Major Residential Addition"
+PLN2026-0043,1,1,"change of use of a medical office to a single-family house ... create one dwelling unit"
+PLN2026-0047,2,1,"a new detached single-family dwelling to a lot with an existing single-family dwelling"
+PLN2026-0049,2,0,"major residential addition ... to an existing 1,840 square-foot, one-story duplex"
+PLN2026-0058,2,0,"major residential addition (700 square feet) to an existing duplex ... to create a new bedroom and bathroom"
+PLN2026-0082,1,0,"major residential addition to a one-story single family residence ... creating two new bedrooms and one bathroom"
+PLN2026-0081,1,0,"major residential addition ... to an existing 993 square-foot, one-story single-family dwelling"
+PLN2026-0087,4,4,"modify an existing warehouse into a three-story building with four residential dwelling units"
+PLN2026-0111,1,0,"major residential addition ... by creating a second floor ... to a single-story residence"
+PLN2026-0110,0,-1,"decommission of one attic unit for code compliance"
+PLN2026-0113,1,0,"major residential addition ... to increase the maximum height of a single-family house"
+PLN2026-0112,2,0,"alter and expand an existing duplex ... while retaining the same square footage and adding a second story"
+PLN2026-0131,1,0,"REMODEL INCLUDING 857 SQUARE FOOT REAR ADDITION"
+PLN2026-0143,4,2,"divide two existing 1-bedroom units to construct two additional units for a total of four studios"
+PLN2026-0156,2,2,"convert the second-floor medical office ... into two residential dwelling units, maintaining the existing medical office use on the ground floor"
+PLN2026-0161,1,0,"major residential addition ... to increase the maximum height of a single-family house"
+PLN2026-0175,1,0,"remodel and an addition to an existing single-family home ... to create a two-story structure"
+PLN2026-0180,2,0,"additions, alterations, remodel ... to an existing duplex. New Third floor."

@@ -11,8 +11,25 @@ Now that inspection events exist (625 projects with a first inspection, up from 
 stream can actually answer the question, so this proposes a stage for every project and diffs it
 against what is stored.
 
+TWO GUARDS JOHN'S LOCAL KNOWLEDGE FORCED, both of which the draft lacked:
+
+  **A passed Building Final is NOT a project completion.** The draft proposed marking 1914 Fifth
+  (257 units) and 2420 Shattuck (132 units) completed on 2017 Building Finals. 1914 Fifth is a
+  parking lot: its finaled permits are "DEMO OF EXISTING WAREHOUSE (13300 SF)" and "GRADING &
+  PAVING PARKING LOT ... BEER GARDEN PATIO". 2420 Shattuck's is "Commercial Restaurant T.I. for
+  Giovanni's" — a pizza fit-out. All five permits carry `completion_verdict='ambiguous'`, so the
+  ADR-002 verdict layer had already ruled them out and the fallback bypassed it. It affected 50
+  projects. Completion now comes from `co_issued_date` alone, which is ADR-001's 4-tier precedence
+  and respects verdicts.
+
+  **Evidence must postdate the project's own application.** A project accumulates the SITE's whole
+  permit history — demolitions, re-roofs, restaurant fit-outs — long before the development it
+  now describes. 1914 Fifth's inspections stop in 2017; the 257-unit tower was filed 2023-06-20.
+  Construction evidence older than `filed_date` describes what used to be on the lot, not the
+  proposal, and is ignored.
+
 THE RULE, highest precedence first. Each step is evidence, not inference:
-  completed           a completion date in v_projects_flat (ADR-001), or a passed Building Final
+  completed           a completion date in v_projects_flat (ADR-001) — verdict-respecting
   under_construction  a first/observed inspection, or construction_start_observed, and no completion
   permitted           a building_permit_issued event, and no construction evidence
   entitled            an entitlement_approved event, and no permit
@@ -91,6 +108,8 @@ def main() -> int:
         """SELECT project_id, MAX(inspection_date) FROM inspections
            WHERE project_id IS NOT NULL AND IFNULL(inspection_date,'') <> ''
            GROUP BY project_id""")}
+    filed_date = {pid: d for pid, d in db.execute(
+        "SELECT project_id, filed_date FROM v_projects_flat WHERE filed_date IS NOT NULL")}
     autoclosed = {pid: n for pid, n in db.execute(
         """SELECT project_id, COUNT(*) FROM project_events
            WHERE event_type_id = 19 AND IFNULL(summary,'') LIKE '%Auto-Closed%'
@@ -109,11 +128,16 @@ def main() -> int:
                 return "withdrawn", f"withdrawn {withdrawn_on}, nothing after"
         if co:
             return "completed", f"completion {co}"
-        if e.get("final_passed"):
-            return "completed", f"Building Final passed {e['final_passed']}"
-        if e.get("first_insp") or e.get("constr") or last_insp.get(pid):
-            d = e.get("first_insp") or e.get("constr") or last_insp.get(pid)
-            li = last_insp.get(pid)
+        filed = filed_date.get(pid)
+        li = last_insp.get(pid)
+        # construction evidence that predates the application belongs to the previous building
+        if li and filed and li < filed:
+            li = None
+        insp = e.get("first_insp") or e.get("constr")
+        if insp and filed and insp < filed and not li:
+            insp = None
+        if insp or li:
+            d = insp or li
             note = f"inspections from {d}" + (f", latest {li}" if li and li != d else "")
             return "under_construction", note
         if e.get("bp"):

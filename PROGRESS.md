@@ -510,6 +510,79 @@ Snapshots → `data/raw/accela_record_status/<rec>.json` + append-only `_history
 (`status_source=capdetail`, work_location fills the address): **293 projects ≥2u** (was 390 — address-less Planning rows
 merged), **194 in v2 / 99 not (55 ≥5u; 24 filed 2022+)**, address_missing 157→2, needs_status_refresh 228→77.
 
+## 2026-09-25 — CROSS-SESSION REVIEW: a classify() defect, bounded; the real target is LINKING
+
+A peer session (johngage-b3) challenged the CO harvest's role gate. Six exchanges, both sides read-only on
+canon, every claim checked by the other. Net: **one script fix made, two canon fixes recommended but NOT
+made, one filing item cancelled, and three of my own figures retracted.**
+
+**FIXED (commit f65dcdc, my script only):** a permit carrying ADR-002 `completion_verdict='completes'` can no
+longer be excluded by the role gate. Two real completions had been reported as `final_but_not_housing` —
+proj179 Logan Park North (237u, B2019-05574) and proj164 1752 Shattuck (72u, B2023-00774), both `completes`
+with EVIDENTIARY basis. Both now classify `agrees`, inspection date matching v2's `co_issued_date` TO THE DAY
+(2022-01-14, 2026-05-26). 1914 Fifth correctly REMAINS excluded (no `completes` permit — it is a parking lot),
+so the override did not reopen that false positive. Role preserved as `ambiguous+verdict_completes` so the
+disagreement stays visible. 47 permits honoured this way. `final_but_not_housing` 67 projects/1,081u -> 28/722.
+
+**ROOT CAUSE — two defects in `housing_rules.permit_role.classify` (canon, NOT patched):**
+1. **A dirty ADU flag outranks structured evidence.** B2023-00774 carries `ADU='Yes'` (a feed data error on a
+   72-unit building) alongside `WorkType='New'`, `UnitsAdded=72`, `NumberUnits=72`, OccType R-2. RULE 5 fires
+   on the flag and returns `ambiguous`, discarding all three.
+2. **`NumberUnits` is never read.** B2019-05574 has `UnitsAdded` blank but `NumberUnits=135`.
+
+**BLAST RADIUS, measured — much smaller than first reported:**
+- **Published CO figures: UNAFFECTED.** `v_projects_flat.co_issued_date` gates on the MATERIALIZED
+  `completion_verdict` column; a SQL view cannot call `classify()`. STEP 3's CPRA-evidentiary re-derivation
+  (85 ambiguous->completes) independently caught what the classifier missed. Of a 74-permit/829-unit envelope
+  of finaled-but-suppressed permits, only **5 match the defect signature, ~1-2 genuine misses, 1-2 units.**
+- **The master list is NOT exposed to defect 1.** `net_units` short-circuits: `'ambiguous'` is not in its
+  zeroing list, so a present `UnitsAdded` returns immediately. B2023-00774 IS in the master list with its
+  correct 72 units; the misrating costs it a label, not its count.
+
+**THE TWO CANON FIXES — John's call, ranked:**
+- **FIX 1 (ADU precedence): DO NOT.** 43 permits relabelled, **0 units recovered**, and it re-labels roles
+  ADR-002 materialized its verdicts against. All risk, no yield.
+- **FIX 2 (read `NumberUnits` when `net_units` returns None): worth doing, TRACKED PROJECTS ONLY**, with a
+  **same-building MAX guard** (not a `-DEF`/`-REV` filter — B2019-05575 and B2021-03302 are distinct master
+  permits on the SAME South Building, both carrying NumberUnits=69; proj157 has the same shape at 52 each).
+  Full recovery set 210 permits/1,848 units: 4 permits/242u collide, 35/642u clean, **171/964u (52%) are not
+  linked to any v2 project** — where no within-project guard can fire.
+  **Untracked remainder: QUEUE, DO NOT COUNT**, per the settled precedent in
+  `docs/audit/2026-06-14_step3_cpra_evidentiary_rederivation.md` ("69 CKAN-only held as ingestion-backlog
+  findings — NOT adopted"). Tracked-only scope ~884 units. Happy-path test B2015-02998; regression test the
+  Logan Park South pair.
+
+**CANCELLED FROM TOMORROW'S CPRA FILING: the 102 Acheson units.** A claim originating with a third session
+(berkeley-data-32) held that none of the five Acheson permits was in the CPRA feed, making them a records
+request. **False.** Per-file test: B2015-02995 (A, 37u), B2015-02998 (B, 35u), B2015-03000 (C, 65u) and
+B2015-03005 (D, 68u) are ALL in `BP_Annual Permit Report-2018-2022.xlsx` (held since May) and its 07-07 rerun;
+absent only from the 2023-2025 and 2025-2026 windows. 32's membership test was sound — it tested the
+2025-2026 file, whose window starts 2025-01-01 — but its quantifier generalised one file to the whole feed.
+**It is an INGEST job, not a records request.** 32 may have scoped other work on the same wrong belief.
+
+**MY OWN FIGURES RETRACTED:**
+- "the most consequential finding of the day" — overstated; it does not reach published figures.
+- "multiunit_master_list EXPOSED" — wrong; `net_units` short-circuits.
+- **"150 of 726" was built on an OccType R-2/R-3 filter that is UNSOUND IN BOTH DIRECTIONS** — B2019-05575
+  types an eight-story mixed-use residential building as "A-2 Assembly: Food or Drink Consumption".
+  **Do not rebuild any housing filter on OccType.** Every OccType-gated count I quoted is a floor, not a scope.
+
+**WHAT THIS ACTUALLY POINTS AT: the LINKING backlog.** Acheson Bldg C carries a perfectly good `UnitsAdded=65`
+and never enters any recovery set — its 65 units are missing for one reason, that no v2 project is linked to
+it. The peer's 102 Acheson units and my 564 untracked permits are one problem from two sides, and it is worth
+more than either classifier fix.
+
+**Feed hygiene note:** the five CPRA files hold **72,445 rows but only 32,897 unique PermitNumbers — 55%
+duplication**, because the reruns republish whole windows. Always `drop_duplicates('PermitNumber', keep='last')`;
+the peer's inflated 263/2,344 came from omitting it.
+
+**Still open for John:** (a) the two canon fixes above; (b) the N1 notebook vs `c90b7f2` contradiction —
+N1 says "Finaled = CO", c90b7f2 says "a passed Building Final is NOT a project completion", and N1 produced
+the published CY2024 = 709; (c) **124 published COs never audited by the inspection trail** — the largest
+untouched piece, which the peer explicitly declined to claim.
+
+---
+
 ## 2026-09-23 (later) — PHASES 2 + 2b COMPLETE: 1,300 inspection files; 128 ADU completions no units-list could find
 
 **Phase 2: 743/743 succeeded.** The 6 network timeouts that tripped the consecutive-failure guard ALL succeeded on

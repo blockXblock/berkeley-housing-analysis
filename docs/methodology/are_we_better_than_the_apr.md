@@ -105,11 +105,25 @@ exist. Only 5 of 842 one-unit projects have one, and those 5 are more likely err
 | 2400 Bowditch St | **1,500** | **0** |
 | 2556 Haste St | **1,113** | **0** |
 | 1950 Oxford St (Anchor House) | **772** | **0** |
-| Ashby BART | **618** | **0** |
 
-UC approves its own projects and issues its own building permits; BART likewise. **2200 Bancroft is
-under construction with zero city building permits, correctly.** These 5,010+ units can never
-complete a city-permit chain, and counting them in the denominator guarantees failure.
+UC approves its own projects and issues its own building permits. **2200 Bancroft is under
+construction with zero city building permits, correctly.** These **5,010 units across 4 UC projects**
+can never complete a city-permit chain, and counting them in the denominator guarantees failure.
+
+⚠ **CORRECTION — Ashby BART is NOT exempt, and I wrongly listed it here.** John: *"ashby bart is
+subject to city oversight… they presented several different objective design standards that change
+open area, green area, space to turn a fire engine around, window area… at last week's Planning
+Commission."* The record confirms it: **`PLN2026-0185`, filed 2026-09-18** — *"Request for an
+interdepartmental roundtable meeting to review and evaluate 50 percent schematic plans for the Ashby
+BART TOD development proposal."* BART goes through City planning review and objective design
+standards. It has 0 building permits because it is at **pre-application**, not because it is exempt —
+which is the ordinary reason, and belongs in the "entitled but not started" bucket below.
+
+v2 already had this right: Ashby BART is classified **`bart_project`**, not `uc_project`, so the
+`UC_EXCLUDE` clause never touched it and no published figure was wrong. **The error was mine and it
+came from a memory file** asserting a "BART/UC agency exemption". That memory is now corrected. It is
+a clean example of the standing rule that auto-loaded memory is a hint, not ground truth — I repeated
+it into a methodology note without checking it against the record.
 
 ### The honest denominator
 

@@ -157,3 +157,40 @@ creation rather than permit attachment** — a larger job than "attach the missi
 
 All five files carry the same 26 columns, header on row 7, with **spaces in the field names** —
 `Finaled Date`, `Parcel Number`, `Work Type`, not `FinaledDate`/`APN`/`WorkType`.
+
+---
+
+## My own veto had the same trap — and it was refusing a 56-unit building
+
+The parallel session's warning that **description-based vetoes in this feed are unsafe by
+construction** applies to my `NOT_DWELLING` guard, and I tested it against my own code rather than
+assuming it did not. It does.
+
+**14 permits, 222 units, all `Work Type = 'New'`, were being refused** because something incidental
+appeared in the description:
+
+| permit | units | why it was refused |
+|---|---|---|
+| B2016-05821 | **56** | *"New 5 story, 30,890 Sq. ft., 56 dwelling units…"* then *"**Geovanni Cortez from Power Plus added Temp power pole."* — matched "temp power" |
+| B2016-03894 | 152 | *"Phase 3: Structural for wood frame portion…"* |
+| B2018-01153 | 1 | log prefix *"Issued temporary power pole only."* then *"Construction of new Single Family Residence"* |
+| B2018-03533 | 1 | log prefix *"Issued trade (EMP) permits."* then *"New construction of detached ADU"* |
+| B2021-02227 | 1 | *"993 SF detached ADU. **Solar under B2021-05613**"* — matched a cross-reference |
+
+**The fix: the structured field outranks the prose.** Where `Work Type` says new construction, the
+permit creates a building and incidental description text cannot override it. The veto now applies
+only to non-new work — which is where solar, re-roofs and service upgrades actually live. The three
+solar rows it was written for are all `Alteration`, so it still catches them. Vetoes 54 → 40.
+
+**⚠ The fix is not free, and should not be reported as though it were.** Re-admitting the
+new-construction rows lets two questionable ones back in: **B2024-04235** (*"Temp power- 100 amp for
+single family home"*, `Work Type 'New'` — the city filed the temp-power permit under the new-build
+project) and **B2016-03894** (a Phase 3 permit that will collide with its siblings). Both are the
+per-building dedupe's job, not the veto's. Net: 14 real buildings recovered, ~2 rows that the
+dedupe must then resolve.
+
+**The durable lesson, which now has three independent instances today:** in this feed a description
+is *narrative appended over time* — dated log lines, contractor notes, cross-references to other
+permits — while `Work Type`, `OccType` and `UnitsAdded` are *structured fields*. Read the structured
+field first and use the description only to break ties it cannot. Every classification error found
+today ran the other way round.

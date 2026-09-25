@@ -170,9 +170,22 @@ def read_new_units():
         # reads as "2 new units". 2236 Grant entered as a 2-unit 2025 completion off a roof-mount
         # PV permit that way. When the source gives us no net-new figure AND the description is
         # plainly not dwelling-creating work, refuse the row rather than invent a unit count.
+        # ⚠ A DESCRIPTION-BASED VETO IS UNSAFE ON NEW CONSTRUCTION, and mine was.
+        # Descriptions in this feed routinely carry a dated log line or a trailing note that has
+        # nothing to do with the scope: B2016-05821 reads "New 5 story, 30,890 Sq. ft., 56 dwelling
+        # units..." and then "**Geovanni Cortez from Power Plus added Temp power pole." The veto
+        # matched "temp power" and refused a 56-UNIT BUILDING. Same shape for B2018-01153
+        # ("Issued temporary power pole only." then "Construction of new Single Family Residence")
+        # and B2018-03533 ("Issued trade (EMP) permits." then "New construction of detached ADU").
+        # Nine such rows, all Work Type 'New'.
+        # The structured field outranks the prose: where Work Type says NEW CONSTRUCTION, the
+        # permit creates a building and no amount of incidental description text overrides that.
+        # The veto now applies only to non-new work, where solar, re-roofs and service upgrades
+        # genuinely live -- the three solar rows it was written for are all 'Alteration'.
         desc_txt = (g("WorkDescription") or "")
+        is_new_work = "new" in str(g("Work Type") or "").lower()
         if (not str(g("UnitsAdded") or "").strip() or str(g("UnitsAdded")).strip() in ("", "None")) \
-                and NOT_DWELLING.search(desc_txt):
+                and not is_new_work and NOT_DWELLING.search(desc_txt):
             VETOED.append({"permit": str(g("PermitNumber")).strip(), "units_added": "",
                            "number_units": str(g("NumberUnits") or "").strip(),
                            "work_type": g("Work Type") or "",

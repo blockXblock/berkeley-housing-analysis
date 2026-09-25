@@ -60,10 +60,30 @@ Checked directly against Accela:
   an **off-site leasing office approved 2025-06**, and a **blade-sign permit 2026-09-01**. A
   building with a leasing office and signage is finished or nearly so.
 
-The stage derivation fixes 2902 Adeline and 2016 Ashby because they have inspection evidence. It
-does **not** fix 2587 Telegraph or 2127 Dwight, which have none — those need the mapping itself
-corrected. **Fixing the Accela status → `project_withdrawn` mapping is more urgent than the stage
-derivation**, because it is producing false negatives on the public site today.
+## ✅ TRACED AND FIXED — `migrate_v1_to_v2.py:257`
+
+        'auto-closed': 'project_withdrawn',
+
+Accela emits "Auto-Closed" when it closes a workflow TASK — in every observed case alongside a
+"Documents Uploaded" status update. The line immediately below it already handles a comparable case
+correctly (`'categorically exempt': 'status_update',  # CEQA, not modeled`).
+
+**All 64 `project_withdrawn` events in v2 came from this line. Not one was a real withdrawal.** A
+genuine one would arrive as the Accela status `Withdrawn`, which is in the vocabulary and has never
+appeared in this data.
+
+**Fixed 2026-09-25** (`scripts/migration/fix_autoclosed_mapping.py`, snapshot
+`keep_snapshot_2026-09-25_pre-autoclosed-fix.db`): the 64 events were **re-typed** to
+`status_update`, not deleted. The observation — Accela recorded Auto-Closed on that date — is
+correct and is preserved in `summary`, `event_date` and `observed_by`. What was wrong was the
+*interpretation*. That is the line ADR-002 draws between append-only EVIDENCE and the
+classification above it. Verified: `project_withdrawn` 64 → 0, `status_update` 922 → 986, total
+event count unchanged at 5,548, integrity ok, 0 FK violations. The source mapping is corrected so a
+re-run cannot reintroduce it.
+
+**All four projects now resolve to `under_construction`**, including 2587 Telegraph, whose every
+building permit reads `Issued` — the only `Finaled` one is the 2024 demolition — so the record says
+under construction even though lease-up has begun.
 
 ## The 16 proposed moves
 

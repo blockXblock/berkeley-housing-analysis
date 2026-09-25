@@ -254,7 +254,14 @@ def map_action_to_event_type(action):
         'appeal to zab': 'appeal_filed',
         'appeal to city council': 'appeal_filed',
         'no appeal': 'appeal_resolved',
-        'auto-closed': 'project_withdrawn',
+        # CORRECTED 2026-09-25. Accela emits 'Auto-Closed' when it closes a workflow TASK,
+        # in every observed case alongside a 'Documents Uploaded' status update. It is not an
+        # applicant abandoning a project. Mapping it to project_withdrawn put 214 units --
+        # 2902 Adeline, 2127 Dwight, 2587 Telegraph, 2016 Ashby -- on the public site as
+        # withdrawn while they were under construction. Every one of v2's 64 project_withdrawn
+        # events came from this line; none was a real withdrawal. A genuine one would arrive as
+        # the Accela status 'Withdrawn', which has never appeared in this data.
+        'auto-closed': 'status_update',
         'categorically exempt': 'status_update',  # CEQA, not modeled
     }
 

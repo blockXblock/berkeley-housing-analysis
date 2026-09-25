@@ -8,13 +8,38 @@ area: docs/audit
 
 # Can a model read raw Accela records and say whether a project is built?
 
-John asked for this test using Simon Willison's `llm` CLI. The harness is built
-(`scripts/llm_co_classify_test.py`) and **cannot run**: the OpenAI key on this machine has no
-credits, there is no Anthropic key, no `llm-anthropic` plugin, and no ollama.
+## RESULT: 8 / 8, every one at high confidence
 
-**I cannot stand in for the model.** I investigated every one of these cases today, so I know the
-answers. A test whose grader knows the answer is not a test. That has to wait for a model that has
-not seen the investigation.
+Run 2026-09-25 with `llm -m claude-sonnet-5` (Simon Willison's `llm` CLI, plugin `llm-anthropic`).
+Full output in `scratch/2026-09-25/llm_co_test/results.json`.
+
+**Sonnet got every case right, including the one a keyword heuristic gets wrong.** It saw only raw
+Accela rows — no unit counts, nothing from v2, no hint which cases were hard — and returned a
+judgment plus *what was actually finaled*, which is the field that matters.
+
+| project | truth | model | what it said was finaled |
+|---|---|---|---|
+| 1914 Fifth (257u) | not built | **not built** | "Demolition of old warehouse/retail building and site work (utilities, paving, **parking lot**, landscaping)" |
+| 2420 Shattuck (132u) | not built | **not built** | "**Restaurant tenant improvements (Giovanni's/Edel)** and a re-roof/demo of interior finishes" |
+| 2587 Telegraph (52u) | not built | **not built** | "Only the demolition permit was Finaled; the main construction permits remain **Issued**" |
+| 2902 Adeline (54u) | not built | **not built** | "main building permit B2021-04232 still under construction … through 2026" |
+| 1598 University (207u) | not built | **not built** | "Demolition of prior structures and temporary shoring/excavation work **only**" |
+| **2538 Durant (83u)** | not built | **not built** | "**Demolition of old apartment building**, solar PV, minor utility/seismic; the main 83-unit permit remains Issued" |
+| 3030 Telegraph (144u) | built | **built** | "Main building permit B2023-06416 for the 5-story, 144-unit mixed-use building" |
+| Acheson (205u) | built | **built** | "Rehabilitation of Acheson Building A into 37 residential units … B2015-02995" |
+
+**2538 Durant is the decisive one.** The one-line heuristic below answers *"is there a Finaled record
+that mentions housing?"* and says **yes** — because the finaled permit is the **demolition of an old
+apartment building**. Housing words, demolition permit. Sonnet read *which* permit was finaled,
+saw it was a demolition, and noticed the 83-unit construction permit was still `Issued`. No keyword
+rule makes that distinction. It required reading.
+
+It also volunteered permit numbers it was never asked for (B2023-06416, B2015-02995, B2021-04232,
+B2023-02332), which makes every judgment auditable against the source row.
+
+⚠ **n = 8, adversarially chosen.** This shows the method survives the cases that beat our regexes.
+It does not establish a rate over 32,897 permits, and it was not run blind against a random sample —
+that is the next test, not this one.
 
 ## What the harness does
 

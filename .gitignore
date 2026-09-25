@@ -170,3 +170,6 @@ data/private/
 # CZU source PDFs: 288 MB of published City documents, re-fetchable with
 # scripts/fetch_czu_documents.py (manifest carries sha256). Analysis is committed; bulk stays out.
 data/raw/czu/*.pdf
+
+# Berkeley GIS layer downloads (re-fetchable via scripts/fetch_berkeley_gis.py)
+data/raw/berkeley_gis/*.geojson

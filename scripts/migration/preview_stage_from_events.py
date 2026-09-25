@@ -67,13 +67,15 @@ withdrawal, and that mis-mapping is why the project reads withdrawn on the publi
 here; fixing the mapping is separate work. `stalled` is never proposed: no
 event asserts it, and a project sitting still is not something the stream can see.
 
-Writes nothing. Emits data/reference/stage_from_events_review.csv for John to review before any
-gated write.
+Read-only by default; `--commit` applies exactly the moves it just printed. The apply path shares
+this file's logic deliberately, so what was reviewed and what is written cannot diverge.
 
-Usage:  python scripts/migration/preview_stage_from_events.py
+Usage:  python scripts/migration/preview_stage_from_events.py [--commit]
 """
+import argparse
 import collections
 import csv
+import datetime
 import sqlite3
 from pathlib import Path
 
@@ -90,7 +92,11 @@ EV = {"pre_app": 1, "app_sub": 2, "app_complete": 3, "entitled": 9,
 
 
 def main() -> int:
-    db = sqlite3.connect(f"file:{V2}?mode=ro", uri=True)
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--commit", action="store_true", help="apply the moves printed above")
+    args = ap.parse_args()
+    db = (sqlite3.connect(str(V2)) if args.commit
+          else sqlite3.connect(f"file:{V2}?mode=ro", uri=True))
     ev = collections.defaultdict(dict)          # project -> code -> max date
     PLACEHOLDER_PRONE = {"app_sub", "app_complete", "entitled"}
     for pid, tid, d in db.execute(
@@ -205,7 +211,65 @@ def main() -> int:
             a = flat.get(p, ("", "", "", ""))
             print(f"      proj{p:<5} {str(a[1])[:26]:<26} {str(a[2]):>4}u  {n} auto-closed  stage={a[3]}")
     print(f"\n  full list -> {OUT.relative_to(ROOT)}")
-    print("\n  Nothing written to the database.")
+    if not args.commit:
+        print("\n  Nothing written to the database.")
+        return 0
+
+    stage_id = {c: i for i, c in db.execute("SELECT id, code FROM vocabulary_stage_types")}
+    now = datetime.datetime.now().isoformat(timespec="seconds")
+    before = collections.Counter(c for (c,) in db.execute("SELECT status_code FROM v_projects_flat"))
+    before_counts = {t_: db.execute(f"SELECT COUNT(*) FROM {t_}").fetchone()[0]
+                     for t_ in ("projects", "permits", "project_events", "documents")}
+    try:
+        db.execute("BEGIN")
+        moved = 0
+        for r in rows:
+            sid = stage_id.get(r["stage_proposed"])
+            if sid is None:
+                db.execute("ROLLBACK")
+                print(f"\nROLLED BACK — unknown stage {r['stage_proposed']!r}")
+                return 1
+            cur = db.execute("UPDATE projects SET current_stage_type_id=?, updated_at=? WHERE id=?",
+                             (sid, now, r["project_id"]))
+            if cur.rowcount != 1:
+                db.execute("ROLLBACK")
+                print(f"\nROLLED BACK — proj{r['project_id']} matched {cur.rowcount} rows, expected 1")
+                return 1
+            moved += 1
+        problems = []
+        if moved != len(rows):
+            problems.append(f"moved {moved}, planned {len(rows)}")
+        after_counts = {t_: db.execute(f"SELECT COUNT(*) FROM {t_}").fetchone()[0] for t_ in before_counts}
+        for t_ in before_counts:
+            if after_counts[t_] != before_counts[t_]:
+                problems.append(f"{t_} row count changed — this step only updates a stage column")
+        # every project must still carry a stage
+        if db.execute("""SELECT COUNT(*) FROM projects
+                         WHERE current_stage_type_id IS NULL AND merged_into_id IS NULL""").fetchone()[0]:
+            problems.append("a project lost its stage")
+        for r in rows:
+            got = db.execute("""SELECT s.code FROM projects p JOIN vocabulary_stage_types s
+                                ON s.id = p.current_stage_type_id WHERE p.id=?""",
+                             (r["project_id"],)).fetchone()
+            if not got or got[0] != r["stage_proposed"]:
+                problems.append(f"proj{r['project_id']} reads {got and got[0]!r}, expected {r['stage_proposed']!r}")
+        if problems:
+            db.execute("ROLLBACK")
+            print("\nROLLED BACK — verification failed:")
+            for x in problems[:8]:
+                print("   " + x)
+            return 1
+        db.execute("COMMIT")
+        after = collections.Counter(c for (c,) in db.execute("SELECT status_code FROM v_projects_flat"))
+        print(f"\nCOMMITTED  {moved} stage moves\n")
+        print(f"  {'stage':<20}{'before':>8}{'after':>8}{'delta':>8}")
+        for k in sorted(set(before) | set(after)):
+            d = after[k] - before[k]
+            print(f"  {k:<20}{before[k]:>8}{after[k]:>8}{d:>+8}" if d else
+                  f"  {k:<20}{before[k]:>8}{after[k]:>8}{'':>8}")
+    except Exception:
+        db.execute("ROLLBACK")
+        raise
     return 0
 
 

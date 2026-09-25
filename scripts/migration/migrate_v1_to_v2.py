@@ -262,6 +262,14 @@ def map_action_to_event_type(action):
         # events came from this line; none was a real withdrawal. A genuine one would arrive as
         # the Accela status 'Withdrawn', which has never appeared in this data.
         'auto-closed': 'status_update',
+        # ALSO MISSING, and the mirror of the bug above: a real Accela 'Withdrawn' status fell
+        # through to the default status_update, so v2's genuine withdrawals were buried while
+        # its project_withdrawn rows were all administrative auto-closes. Exactly backwards.
+        # NOTE for whoever reads these events: a withdrawal applies to a RECORD, not
+        # necessarily to the project. 2136 San Pablo withdrew a 2019 proposal and had a 2021
+        # six-storey version APPROVED; 2200 Fifth withdrew and re-filed. Always check for
+        # later activity before concluding a project is dead.
+        'withdrawn': 'project_withdrawn',
         'categorically exempt': 'status_update',  # CEQA, not modeled
     }
 

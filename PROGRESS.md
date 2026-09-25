@@ -8,6 +8,60 @@
 
 ---
 
+## 2026-09-25 — Stage derived from events · 214 units un-buried · zero projects now read "withdrawn"
+
+**Applied: 16 stage moves** (`scripts/migration/preview_stage_from_events.py --commit`; the apply
+path shares the preview's logic so what is reviewed and what is written cannot diverge). Snapshot
+`keep_snapshot_2026-09-25_pre-stage-derivation.db`.
+
+| stage | before | after |
+|---|---|---|
+| under_construction | 9 | **19** |
+| **withdrawn** | **5** | **0** |
+| entitled | 37 | 33 |
+| in_review | 69 | 67 |
+| completed | 838 | 839 |
+
+Verified: integrity ok · 0 FK violations · **0 projects without a stage** · documents unchanged at
+2,255/790 · **0 changes to co_issued_date, bp_issued_date, filed_date, entitled_date or total_units**.
+
+**Root cause, traced: `migrate_v1_to_v2.py:257` mapped `'auto-closed'` to `project_withdrawn`.**
+Accela emits "Auto-Closed" when it closes a workflow TASK, always beside a "Documents Uploaded"
+status. **All 64 `project_withdrawn` events came from that line; none was a real withdrawal.** Four
+projects — **214 units** — were shown dead on the public site: 2902 Adeline (inspected 2026-09-22),
+2016 Ashby (2026-09-16), 2127 Dwight, 2587 Telegraph. Events were **re-typed** to `status_update`,
+never deleted: the observation is correct, only the interpretation was wrong (the ADR-002 line
+between append-only evidence and classification). Source mapping corrected.
+
+**And the mapping was wrong in BOTH directions** — a genuine Accela `Withdrawn` had no entry and
+fell through to the default, so real withdrawals sat buried as `status_update` while fake ones were
+typed as withdrawals. `'withdrawn': 'project_withdrawn'` added. The 6 buried ones need no
+correction: 2136 San Pablo (125u) withdrew a 2019 proposal and had a 2021 six-storey version
+**approved**; 2200 Fifth withdrew and re-filed. **A withdrawal applies to a RECORD, not a project.**
+
+**⚠ TWO BUGS JOHN'S SITE KNOWLEDGE CAUGHT — the data asserted both confidently.**
+The draft proposed marking **1914 Fifth (257u)** and **2420 Shattuck (132u)** *completed* on 2017
+Building Finals. John: *"1914 Fifth Street is a parking lot; it doesn't look like any change has
+occurred at 2420 Shattuck."* The permits prove him right — 1914 Fifth's finals are **"DEMO OF
+EXISTING WAREHOUSE"** and **"GRADING & PAVING PARKING LOT ... BEER GARDEN PATIO"**; 2420 Shattuck's
+is **"Commercial Restaurant T.I. for Giovanni's"**, a pizza fit-out. Two guards added:
+1. **A passed Building Final is NOT a completion.** All five permits carry
+   `completion_verdict='ambiguous'` — ADR-002 had already ruled them out and the fallback bypassed
+   it, on **50 projects**. Completion now comes from `co_issued_date` alone.
+2. **Evidence must postdate the project's own `filed_date`.** A project inherits the SITE's whole
+   permit history; a 2017 parking-lot final says nothing about a tower filed in 2023.
+Both projects correctly stay `in_review`. **Lesson: the record describes PARCELS, not projects, and
+a parcel's history outlives whatever is proposed on it.**
+
+**Also today:** inspection events derived (+1,264; construction visible on 629 projects, was 18);
+`Built Year by Year` corrected — it is **private parcels only** (0/19 BART, 0/14 EBMUD, 1/52 UC,
+22/197 City) and **stops at 2016** while its slider runs to 2026.
+
+**NEXT:** re-run `export_explorer_data_v2.py` + `generate_apr_v2.py`, diff published numbers, review,
+deploy. `docs/explorer_data.js` still dates from **2026-09-08**.
+
+---
+
 ## 2026-09-25 — SWAPPED. v2 is now the corrected build; document links intact; 2026 permits complete
 
 **Live `databases/berkeley_housing_v2.db` = the corrected build**, verified byte-identical to

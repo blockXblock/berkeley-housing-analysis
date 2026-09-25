@@ -90,7 +90,7 @@ def d(x):
     return m.group(0) if m else None
 
 
-def units_for(units_added, number_units, net):
+def units_for(units_added, number_units, net, work_type=""):
     """Net new dwellings, with the basis recorded. UnitsAdded is the source's own net-new field and
     is present on 79% of new_unit rows. NumberUnits is TOTAL units in the building, which agrees
     with UnitsAdded on only 144/351 rows where both exist, so it is a fallback, never a substitute.
@@ -99,7 +99,13 @@ def units_for(units_added, number_units, net):
     default, which returns 1 for every such row regardless of the evidence."""
     if units_added:
         return num(units_added), "cpra_units_added"
-    if num(number_units) > 0:
+    # NumberUnits is TOTAL units in the building, not net new. That is only a safe stand-in for
+    # UnitsAdded on genuinely NEW construction, where the whole building is the addition. On an
+    # alteration or addition it is the building's size: an ADU converted into a single-family house
+    # reads NumberUnits=2 when the net gain is 1. Measured across all five feed files, 85 such rows
+    # would have over-counted by ~85 units. Non-new work therefore falls through to the documented
+    # floor below and is flagged for review rather than inheriting the building's total.
+    if num(number_units) > 0 and "new" in str(work_type or "").lower():
         return num(number_units), "cpra_number_units"
     return 1, "floor_new_unit_role"
 
@@ -182,7 +188,7 @@ def read_new_units():
                            "desc": (g("WorkDescription") or "").strip()})
             continue
         st = " ".join(str(x) for x in (g("StreetNumber"), g("StreetName"), g("StreetType")) if x).strip()
-        units, ubasis = units_for(g("UnitsAdded"), g("NumberUnits"), net)
+        units, ubasis = units_for(g("UnitsAdded"), g("NumberUnits"), net, g("Work Type"))
         out.append({
             "permit": str(g("PermitNumber")).strip(), "apn": canon(g("Parcel Number")),
             "apn_raw": str(g("Parcel Number") or "").strip(), "address": st,

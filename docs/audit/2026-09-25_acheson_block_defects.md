@@ -107,3 +107,53 @@ John reports 2125/2129/2131/2135 University are storefronts plus the main door o
 (Bldg A), and 2109/2111 are one six-storey building with the numbers running **backwards**. v2 holds
 only 2111, 2119, 2131 and 2145 of the nine. LMSA2019-0001 gives the City's own project-site
 footprint: *"1979-1987 Shattuck, 2102-2113 University, 2125-2145 University and 1922-1930 Walnut"*.
+
+---
+
+## Follow-on: one real bug found, two reported ones that were not
+
+Chasing the wider gap with the parallel sessions produced one genuine defect of mine and two claims
+that did not survive checking.
+
+**REAL — the `NumberUnits` fallback over-counted on non-new work.** `NumberUnits` is TOTAL units in
+the building, a safe stand-in for `UnitsAdded` only on genuinely NEW construction where the whole
+building is the addition. On an alteration it is the building's size: an ADU converted inside a
+single-family house reads `NumberUnits=2` when the net gain is 1. Measured across all five files,
+**85 rows would have over-counted by roughly 85 units.** Fixed — the fallback now requires a
+new-construction `Work Type`; non-new work falls to the documented floor of 1 and is flagged.
+Five regression cases pass, including the ADU-conversion and carport-conversion shapes.
+
+**NOT REAL — `B2016-05125` is not a mechanical permit.** Reported as "a MECHANICAL permit carrying
+107 units", a false positive. It is `Work Type='New'`, `OccType='R-2 Residential: Permanent,
+Multi-Unit (3+ Units)'`, and the description reads: *"2/15/19 - mechanical permit issued. | 7 story
+Apartment Building containing 107 Dwelling units. 5 stories of Type IIIA over 2 stories of Type IA
+podium."* The mechanical note is a **log prefix**; the permit is a real 107-unit building and 107 is
+the right answer. The truncated description is what misled.
+
+⚠ **This trap is general.** Many descriptions in this feed open with a dated log line — *"3/12/18 -
+Electrical permit issued"*, *"6/25/18 - Mechanical permit issued"* — before the actual scope. My own
+first instinct was to veto on mechanical/electrical keywords, which would have killed genuine ADU
+conversions. **Never classify from a truncated description in this feed.**
+
+**ALREADY HANDLED — the solar rows.** `B2024-05765`, `B2023-06165` and `B2025-05719` were reported as
+needing a filter before anyone quotes a total. All three are already refused by the existing
+non-dwelling veto (`VETOED-nondwelling`). No new filter is needed for them.
+
+## Where the missing-permit total actually stands
+
+A parallel session measured the split (130 permits / 546 units on their filter, against my 177 /
+~836 — different `Finaled` predicates, so treat the SPLIT as the finding, not either total):
+
+- **~50 permits / ~97 units on parcels v2 already holds** — a link gap. Two-thirds of it is
+  Acheson Bldg C at 65u; most of the rest is solar rows my veto already drops.
+- **~80 permits / ~449 units on parcels v2 has never seen** — genuinely unseen buildings.
+- only **5 of 130** mention a phase at all.
+
+**So the inflation is NOT mainly phase double-counting**, which both of us assumed at first. Most of
+the recoverable content is real, on parcels v2 does not hold, which makes a wider ingest **project
+creation rather than permit attachment** — a larger job than "attach the missing permits".
+
+## Feed schema note
+
+All five files carry the same 26 columns, header on row 7, with **spaces in the field names** —
+`Finaled Date`, `Parcel Number`, `Work Type`, not `FinaledDate`/`APN`/`WorkType`.

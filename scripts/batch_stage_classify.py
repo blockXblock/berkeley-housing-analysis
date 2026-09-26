@@ -91,13 +91,24 @@ def key(a):
     return (p[0], p[1]) if len(p) > 1 and p[0].isdigit() else None
 
 
-def build(limit=None):
+def build(limit=None, sample=None, seed=20260926, no_rules=False):
     db = sqlite3.connect(f"file:{ROOT/'databases/berkeley_housing_v2.db'}?mode=ro", uri=True)
     proj = [(p, u or 0, a, s) for p, u, a, s in db.execute(
         """SELECT project_id,total_units,address_display,status_code FROM v_projects_flat
            WHERE address_display IS NOT NULL ORDER BY total_units DESC""")]
     if limit:
         proj = proj[:limit]
+    if sample:
+        import random
+        rng = random.Random(seed)
+        strata = [(50, 10**9), (20, 49), (5, 19), (2, 4), (1, 1)]
+        per = max(1, sample // len(strata))
+        picked = []
+        for lo, hi in strata:
+            pool = [x for x in proj if lo <= x[1] <= hi]
+            rng.shuffle(pool)
+            picked += pool[:per]
+        proj = picked
     want = {}
     for p, u, a, s in proj:
         k = key(a)
@@ -136,7 +147,7 @@ def build(limit=None):
                        "params": {"model": MODEL, "max_tokens": 2000,
                        "messages": [{"role": "user", "content": PROMPT.format(
                            rungs=rungs, site=str(a).split(",")[0], records=lines,
-                           reading_rules=READING_RULES)}]},
+                           reading_rules=("" if no_rules else READING_RULES))}]},
         })
         meta[f"proj{p}"] = {"project_id": p, "units": u, "address": str(a)[:44],
                             "v2_stage": s, "records": len(rs)}
@@ -147,14 +158,26 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("cmd", choices=["submit", "status", "collect"])
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--no-rules", action="store_true",
+                    help="omit READING_RULES — the CONTROL arm. The delta against a rules-on run "
+                         "on the same projects is the lift the rules provide; the rules-off score "
+                         "is the model's cold ability. Without it we cannot tell reading from "
+                         "reciting, which is the question the whole rearchitecture turns on.")
+    ap.add_argument("--sample", type=int, default=None,
+                    help="stratified sample by unit size (control runs do not need all 1,099)")
+    ap.add_argument("--tag", default="", help="suffix for the output dir")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
+    global OUT, STATE
+    if args.tag:
+        OUT = OUT.parent / f"batch_stage_{args.tag}"
+        STATE = OUT / "batch_state.json"
     OUT.mkdir(parents=True, exist_ok=True)
     import anthropic
     client = anthropic.Anthropic(api_key=api_key())
 
     if args.cmd == "submit":
-        reqs, meta = build(args.limit)
+        reqs, meta = build(args.limit, args.sample, no_rules=args.no_rules)
         chars = sum(len(r["params"]["messages"][0]["content"]) for r in reqs)
         tin, tout = chars / 4, len(reqs) * 200
         print(f"  requests      {len(reqs):,}")

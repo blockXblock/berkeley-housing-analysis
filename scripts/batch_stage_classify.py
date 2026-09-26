@@ -36,7 +36,15 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from housing_rules.reading_rules import READING_RULES   # shared; see that module for provenance
+# READING_RULES is imported but DEFAULTS OFF. Two controls on 2026-09-26 found the tips do not
+# help and may hurt. At permit grain against 206 human rulings: rules-off 199/206 beat rules-on
+# 196/206, and on the rows that GENERATED the rules, 8/8 beat 6/8. At project grain here the
+# accuracy delta was noise (+1 of 168) but the DIRECTION matched: rules-on pushed rungs DOWN on 11
+# of 17 disagreements, mean -0.24 -- the tips are suppressive, exactly as their failure analysis
+# predicted (rule 4 zeroed completing phases, rule 5 rejected a mini-dorm John had ruled a dwelling).
+# Tips about the data transmit our biases. DEFINITIONS of the question do not -- and the rung
+# definitions in RUNGS below are precisely that, which is why they stay.
+from housing_rules.reading_rules import READING_RULES   # available via --rules; see that module
 OUT = ROOT / "scratch/2026-09-26/batch_stage"
 STATE = OUT / "batch_state.json"
 MODEL = "claude-sonnet-5"   # the same model the 8/8 adversarial and 75-project blind tests used
@@ -158,6 +166,9 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("cmd", choices=["submit", "status", "collect"])
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--rules", action="store_true",
+                    help="INCLUDE READING_RULES. Off by default: the controls found the tips "
+                         "neutral-to-harmful. Kept so the comparison stays reproducible.")
     ap.add_argument("--no-rules", action="store_true",
                     help="omit READING_RULES — the CONTROL arm. The delta against a rules-on run "
                          "on the same projects is the lift the rules provide; the rules-off score "
@@ -177,7 +188,7 @@ def main() -> int:
     client = anthropic.Anthropic(api_key=api_key())
 
     if args.cmd == "submit":
-        reqs, meta = build(args.limit, args.sample, no_rules=args.no_rules)
+        reqs, meta = build(args.limit, args.sample, no_rules=not args.rules)
         chars = sum(len(r["params"]["messages"][0]["content"]) for r in reqs)
         tin, tout = chars / 4, len(reqs) * 200
         print(f"  requests      {len(reqs):,}")

@@ -8,7 +8,36 @@ area: docs/audit
 
 # Can a model read raw Accela records and say whether a project is built?
 
-## RESULT: 8 / 8, every one at high confidence
+## ⚠ RESULT WITHDRAWN — the 8/8 was contaminated
+
+**Caught 2026-09-26 by the parallel session berkeley-data-3c**, reviewing my prompt rather than my
+result. The prompt contained this line:
+
+> *"A permit with status 'Finaled' means THAT permit's work passed final inspection. It does NOT
+> mean the housing development is complete. **A demolition permit, a parking-lot permit, or a
+> restaurant fit-out** can all be 'Finaled' on a site where no housing was ever built."*
+
+The test set was drawn from exactly those categories. Checked against the answers: **all 8 cases
+have a finaled permit matching a category the prompt named** — 6 mention demolition, one is the
+parking lot, one is the restaurant. I told the model the answer and then scored it for repeating it.
+
+**What survives.** The two TRUE cases — 3030 Telegraph and Acheson, both genuinely built — are
+still meaningful: the hint pushes toward "not built" and the model went the other way, correctly,
+citing the main building permit. So the honest reading is **2 clean passes and 6 contaminated**,
+not 8/8.
+
+**What this does to the other numbers.** The blind-75 prompt carries the same line, so its 96% is
+*assisted*, not cold — though the specific leaked cases were excluded from that set and the hint is
+a true general rule rather than a pointer to particular answers. The 1,099-project batch is
+production classification, not a test, so a correct rule in its prompt is appropriate there.
+
+**The general lesson, which is sharper than "don't name the cases":** when an eval set is drawn from
+the cases that *generated* the rules, **any statement of those rules leaks** — whether or not the
+permits are named. Removing the permit numbers is necessary and not sufficient. A clean measurement
+needs either a held-out set whose cases did not produce the rules, or a rules-on/rules-off control
+run to measure the lift.
+
+## Original result, as recorded (now known to be contaminated)
 
 Run 2026-09-25 with `llm -m claude-sonnet-5` (Simon Willison's `llm` CLI, plugin `llm-anthropic`).
 Full output in `scratch/2026-09-25/llm_co_test/results.json`.

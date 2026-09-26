@@ -35,6 +35,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from housing_rules.reading_rules import READING_RULES   # shared; see that module for provenance
 OUT = ROOT / "scratch/2026-09-26/batch_stage"
 STATE = OUT / "batch_state.json"
 MODEL = "claude-sonnet-5"   # the same model the 8/8 adversarial and 75-project blind tests used
@@ -62,11 +64,8 @@ Also decide the APPROVAL TRACK:
 - "discretionary" if it goes through a use permit, public hearing, design review, or a zoning permit requiring staff or commission judgment
 - "unclear" if the records do not say
 
-Reading these records:
-- Descriptions often BEGIN with a dated log line ("2/15/19 - mechanical permit issued.") that is not the scope. Read past it.
-- Descriptions may END with unrelated contractor notes ("added Temp power pole").
+{reading_rules}
 - A site accumulates its whole history; old permits may belong to a building that no longer exists.
-- "Phase 1", "Phase 2" are parts of ONE building.
 - If the records are too thin to tell, use confidence "low" rather than guessing.
 
 Reply with ONLY a JSON object, no prose:
@@ -136,7 +135,8 @@ def build(limit=None):
                        # before the JSON is emitted. The failures were valid JSON cut mid-string.
                        "params": {"model": MODEL, "max_tokens": 2000,
                        "messages": [{"role": "user", "content": PROMPT.format(
-                           rungs=rungs, site=str(a).split(",")[0], records=lines)}]},
+                           rungs=rungs, site=str(a).split(",")[0], records=lines,
+                           reading_rules=READING_RULES)}]},
         })
         meta[f"proj{p}"] = {"project_id": p, "units": u, "address": str(a)[:44],
                             "v2_stage": s, "records": len(rs)}

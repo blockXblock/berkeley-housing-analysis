@@ -8,6 +8,30 @@
 
 ---
 
+## 2026-09-26 — Classify permits by MODEL, not regex · agreed division of work (3c + 32)
+
+**Result (205 human-ruled permits: 190 grounded_counts + 18 v2 human verdicts + traps; claude-sonnet-5, Batch):**
+definitions prompt 201/205 held-out · cold (no prompt rules) 198/206 · eight regex-style "reading tips"
+195/206. Paired: definitions fixed 3 cold misses, broke 0; tips were suppressive (confirmed independently at
+project grain by 32). Remaining misses need facts outside the permit record. Code: `scripts/llm_permit_effect.py`
++ `scripts/housing_rules/reading_rules.py` (DEFINITIONS only) — commit `c3d4f2d`. Eval + runs:
+`scratch/2026-09-26_llm_permit_eval/` (eval_set.csv, run1, run1_norules, run2_definitions).
+Full run of all 32,897 unique permits measured at **≈$52** (861 in / 146 out tokens mean).
+
+**Agreed between sessions 3c (permit grain) and 32 (project grain), John deciding:**
+1. NEXT: 1,000-permit random sample of permit_role "alteration" (~$1.60) to measure hidden units
+   (400 alteration events already mention ADU); then John decides the $52 full run.
+2. Store BOTH the city's unit field and the model's count; flag disagreements in their OWN structure,
+   NOT v4 `divergences` (that table is us-vs-oracle only).
+3. Model answers = versioned evidence file read by the build; rebuild + diff. Never write into the
+   locked DBs.
+4. Order: sample → John's call → full run (emits parent_permit + cites) → 32 builds the STRUCTURES stage
+   using those permit cross-references as edges (not APN, which re-plats). 32 does not cluster before then.
+Cautions: 32's 95% is agreement with v2, not accuracy; the filed→accepted interval needs the CapDetail fetch
+(~95 of 14,936 visited), not classification. API: Batch only (serial `llm` throttled the key 2026-09-25).
+
+---
+
 ## 2026-09-26 — Machinery repair begins: 40 scripts sequestered, v1 archived
 
 **Why:** the full read of all 304 scripts + schemas (`docs/audit/2026-09-26_machinery_and_schema_audit.md`)

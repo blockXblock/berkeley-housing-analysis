@@ -43,8 +43,12 @@ scheduled task writes them (license snapshot writes CSV only). **To do an approv
 mode blocks an agent editing its own permissions (correctly). John adds them by hand (snippet in chat
 2026-09-26); until then chmod is a visible speed bump, not a wall, since an agent could chmod back.
 
-**NEXT (small, careful):** John pastes the deny rules into `.claude/settings.json`; then correct the two
-false CLAUDE.md sentences (needs John's OK).
+**Deny rules ADDED by John** (`.claude/settings.json`, backup `.bak-2026-09-26`): `Bash(chmod:*)`,
+`Bash(git push:*)`, `Edit(/databases/**)`, `Write(/databases/**)`. Tested 2026-09-26: chmod, git push
+--dry-run and a Write into databases/ were all refused. The lock is now a wall for the agent; John unlocks
+in his own terminal.
+
+**NEXT (small, careful):** correct the two false CLAUDE.md sentences (needs John's OK).
 
 ---
 

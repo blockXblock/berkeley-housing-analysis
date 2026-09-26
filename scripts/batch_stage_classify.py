@@ -105,13 +105,15 @@ def key(a):
     return (p[0], p[1]) if len(p) > 1 and p[0].isdigit() else None
 
 
-def build(limit=None, sample=None, seed=20260926, no_rules=False):
+def build(limit=None, sample=None, seed=20260926, no_rules=False, only=None):
     db = sqlite3.connect(f"file:{ROOT/'databases/berkeley_housing_v2.db'}?mode=ro", uri=True)
     proj = [(p, u or 0, a, s) for p, u, a, s in db.execute(
         """SELECT project_id,total_units,address_display,status_code FROM v_projects_flat
            WHERE address_display IS NOT NULL ORDER BY total_units DESC""")]
     if limit:
         proj = proj[:limit]
+    if only:
+        proj = [x for x in proj if x[0] in only]
     if sample:
         import random
         rng = random.Random(seed)
@@ -184,6 +186,11 @@ def main() -> int:
     ap.add_argument("--sample", type=int, default=None,
                     help="stratified sample by unit size (control runs do not need all 1,099)")
     ap.add_argument("--tag", default="", help="suffix for the output dir")
+    ap.add_argument("--retry-failures-from", default="",
+                    help="PATH to a previous run's failures.json: re-submit only those projects. "
+                         "not parse. The 89 failures in the first 1,099 run were valid JSON "
+                         "truncated mid-string by max_tokens=400, which extended thinking consumed "
+                         "before the answer; re-running only those costs cents, not $3.25.")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
     global OUT, STATE
@@ -195,7 +202,13 @@ def main() -> int:
     client = anthropic.Anthropic(api_key=api_key())
 
     if args.cmd == "submit":
-        reqs, meta = build(args.limit, args.sample, no_rules=not args.rules)
+        only = None
+        if args.retry_failures_from:
+            src = Path(args.retry_failures_from)
+            only = {int(f["custom_id"][4:]) for f in json.loads(src.read_text())}
+            print(f"  retrying {len(only)} projects that did not parse in "
+                  f"'{args.retry_failures_from}'")
+        reqs, meta = build(args.limit, args.sample, no_rules=not args.rules, only=only)
         chars = sum(len(r["params"]["messages"][0]["content"]) for r in reqs)
         tin, tout = chars / 4, len(reqs) * 200
         print(f"  requests      {len(reqs):,}")

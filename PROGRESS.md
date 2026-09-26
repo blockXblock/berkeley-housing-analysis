@@ -48,6 +48,16 @@ mode blocks an agent editing its own permissions (correctly). John adds them by 
 --dry-run and a Write into databases/ were all refused. The lock is now a wall for the agent; John unlocks
 in his own terminal.
 
+**Acheson Commons status, verified 2026-09-26 (read-only):** four buildings, 205 units, all finaled
+2022 in CPRA — A B2015-02995 37u (rehab, 2022-08-05), B B2015-02998 35u (2022-10-20), C B2015-03000 65u
+(2022-10-25), D B2015-03005 68u (2022-03-04). **v4: RESOLVED** (all four new_unit masters, 205u). **v2: NOT
+resolved** — B = proj900 and D = proj902 are correct; **A and C have no v2 project** (the 102 missing units);
+**proj178 "2131 University" is an umbrella row** (205u, stage=completed, NO completion date, no permits,
+4-APN cell, apn_normalized NULL) that overlaps B and D. Effect: CO-based outputs (Explorer, APR) are short
+102u in 2022; stage-based outputs (KML, state pages, stage totals) double-count B+D (103u) via proj178.
+Fix belongs to the build (project = Acheson Commons, four structures), not a v2 patch, unless John wants
+the site corrected sooner.
+
 **NEXT (small, careful):** correct the two false CLAUDE.md sentences (needs John's OK).
 
 ---

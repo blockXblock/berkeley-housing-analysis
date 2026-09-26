@@ -45,7 +45,7 @@ paths:
 # Database Configuration
 databases:
   master: "databases/berkeley.db"
-  housing_analysis: "databases/berkeley_housing_analysis.db"
+  housing_analysis: "databases/archive/berkeley_housing_analysis.db"  # v1, ARCHIVED read-only 2026-09-26
   housing_map: "databases/berkeley_housing_map.db"
 
 # Pipeline Stages

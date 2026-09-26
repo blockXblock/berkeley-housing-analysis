@@ -8,6 +8,39 @@
 
 ---
 
+## 2026-09-26 — Machinery repair begins: 40 scripts sequestered, v1 archived
+
+**Why:** the full read of all 304 scripts + schemas (`docs/audit/2026-09-26_machinery_and_schema_audit.md`)
+found the published outputs contradict each other because every concept is re-derived per script, rules
+are enforced only in prose, and CKAN chose 413 v2 projects. Agreed direction (John, 2026-09-26): resume
+the v4 plan as a BUILD (sources + corrections ledger -> DB), v2 becomes its output; repair in small,
+careful, verified steps.
+
+**Done (repo only; no canonical DB written):**
+- **40 scripts -> `scripts/superseded/`** via `git mv`, each now starts with `raise SystemExit` / `exit 1`:
+  destructive (`migrate_v1_to_v2.py` unlinked live v2; `update_housing_data.py`), 14 dead v1-era, 21
+  applied one-time writes (incl. the 3 CKAN-anchored ADU ingests), 1 broken, + `paste_all.sh`/
+  `paste_remaining.sh`. Verified: no live script/notebook/config imports or calls any; housing_rules
+  tests pass; publishers compile.
+- **v1 archived:** `databases/archive/berkeley_housing_analysis.db` (+2 April pre-snapshots), read-only,
+  sha256 identical, integrity ok. Verified vs v2 first: projects 179/179, fees 441/441, docs 1,406 (+17 in
+  `_quarantine_documents`), survey notes 9/9. **v1-only data exported** to `data/reference/v1_*_2026-09-26.csv`
+  (249 SF YIMBY rows; 50 empty B2025 permit stubs). `00_config/config.yaml` repointed. Three v1 notebooks
+  (MASTER_ANALYSIS, A3, F1) carry an ARCHIVAL banner. The two 0-byte root stubs (`./berkeley.db`,
+  `./berkeley_housing_analysis.db`) removed.
+
+**Held for John:** (1) `04_reporting/D2_dashboard_data_export.ipynb` (unguarded overwrite of the published
+datasette DB, but linked from `docs/technical-archive-2026.html`); (2) `permitpipeline.ipynb` +
+`parcels_active_housing_permits.ipynb` (destructive to berkeley.db, but the ONLY builders of `parcel_zones`).
+
+**⚠ CLAUDE.md is now wrong in two places (needs John's OK to edit):** "there is no v2->v4 migration and
+never was" (the 2026-06-26 handover planned exactly that); "units_affected is 100% NULL" (287 set).
+
+**NEXT (small, careful):** the write lock on canonical DBs (read-only files + Claude Code deny rules) —
+changes Claude Code config, so John's explicit go-ahead.
+
+---
+
 ## 2026-09-25 — ⚠ CORRECTION: the ingest read 1 of 5 CPRA files · 177 finaled permits still missing
 
 **My error, caught by a parallel session.** `ingest_cpra_2026.py` reads only

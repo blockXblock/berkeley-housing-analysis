@@ -44,7 +44,13 @@ sys.path.insert(0, str(ROOT / "scripts"))
 # predicted (rule 4 zeroed completing phases, rule 5 rejected a mini-dorm John had ruled a dwelling).
 # Tips about the data transmit our biases. DEFINITIONS of the question do not -- and the rung
 # definitions in RUNGS below are precisely that, which is why they stay.
-from housing_rules.reading_rules import READING_RULES   # available via --rules; see that module
+from housing_rules.reading_rules import DEFINITIONS   # shrunk from READING_RULES 2026-09-26
+# ⚠ Only PART of DEFINITIONS bears on this question. It defines a dwelling unit, net dwellings
+# created, a sub-permit, and which phase of a phased building carries the units. This script asks
+# what STAGE a project has reached, not how many units it adds -- so the two unit-counting
+# definitions are inert here, while "sub-permit" and "the completing phase carries the dwellings"
+# do bear on telling rung 6 from rung 7. Passed whole rather than excerpted, because excerpting is
+# how one shared module becomes two drifting ones.
 OUT = ROOT / "scratch/2026-09-26/batch_stage"
 STATE = OUT / "batch_state.json"
 MODEL = "claude-sonnet-5"   # the same model the 8/8 adversarial and 75-project blind tests used
@@ -155,7 +161,7 @@ def build(limit=None, sample=None, seed=20260926, no_rules=False):
                        "params": {"model": MODEL, "max_tokens": 2000,
                        "messages": [{"role": "user", "content": PROMPT.format(
                            rungs=rungs, site=str(a).split(",")[0], records=lines,
-                           reading_rules=("" if no_rules else READING_RULES))}]},
+                           reading_rules=("" if no_rules else DEFINITIONS))}]},
         })
         meta[f"proj{p}"] = {"project_id": p, "units": u, "address": str(a)[:44],
                             "v2_stage": s, "records": len(rs)}
@@ -167,8 +173,9 @@ def main() -> int:
     ap.add_argument("cmd", choices=["submit", "status", "collect"])
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--rules", action="store_true",
-                    help="INCLUDE READING_RULES. Off by default: the controls found the tips "
-                         "neutral-to-harmful. Kept so the comparison stays reproducible.")
+                    help="INCLUDE the shared DEFINITIONS. Off by default because the controls "
+                         "found the earlier TIPS neutral-to-harmful; definitions are a different "
+                         "thing and untested here, so this stays opt-in until measured.")
     ap.add_argument("--no-rules", action="store_true",
                     help="omit READING_RULES — the CONTROL arm. The delta against a rules-on run "
                          "on the same projects is the lift the rules provide; the rules-off score "

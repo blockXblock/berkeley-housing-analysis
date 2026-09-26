@@ -11,11 +11,11 @@ public explorer (berkeleybuild.com) + Datasette.
 
 ## The four versions — read this before the DB sections below
 Lineage v1 → v2 → v3 → v4, with DISTINCT roles (don't conflate file names with roles):
-- **v1** — `databases/berkeley_housing_analysis.db`, the original flat `projects` table. Frozen/superseded.
+- **v1** — `databases/archive/berkeley_housing_analysis.db` (ARCHIVED read-only 2026-09-26; its only unique rows exported to `data/reference/v1_*_2026-09-26.csv`), the original flat `projects` table. Frozen/superseded.
 - **v2** — `databases/berkeley_housing_v2.db`, the rich **SERVING database**. **Feeds berkeleybuild.com, the APR (`generate_apr_v2.py`), and the Explorer (`export_explorer_data_v2.py`).** Everything in "Canonical database", ADR-001/002, the `@112cb03` verdict layer, and the explorer/RHNA machinery below describes THIS track. **This is what's deployed.**
 - **v3** — the lean, stage-oriented **rebuild pipeline** (reproducible-from-sources; `scripts/build_v2/` S0–S9). It is **the curriculum's world** — students rebuild it from raw sources and compare. NOT a serving DB; never fed the site. Valid prior research + the comparison target.
-- **v4** — `databases/berkeley_housing_v4.db`, the **event-stream substrate. PAUSED — last written 2026-07-02.** Re-grounds housing entities on the **BP/event flow** (entities CONSTRUCTED by classification + oracle-triangulation, not parsed/migrated) — built to correct the entity errors in both v2 and v3. **It holds EVENTS, NOT ENTITIES: `events` + `event_classifications`, and `projects` is EMPTY (0 rows).** So there is **no v1/v2/v3 → v4 migration and never was** — findings flow the OTHER way: v4 → gated corrections into v2, via the adjudication ledger `corrections/v4/grounded_counts.csv` (that is how Logan Park North 135, Acheson Commons B 35 and El Jardin +55 reached v2). **85,793 is the INGESTION invariant, not the live count** (82,923 as of 2026-09-02 = invariant − documented dedup; see *Anchor checks to what stays true* below). The v4 housing-role classifier is **`housing_rules.permit_role.classify` (commit `aa6ded0`)** — NOT the v2-era `@112cb03` cited below.
-- **Where to look:** **v2 IS THE ACTIVE TRACK** — it serves the site, the APR and the Explorer, and every session since 2026-07-02 has worked in it (the owner join, Measure U, the assessor refresh, the site). Current state = TOP of `PROGRESS.md`, updated at every gated step. v4's paused state and its ranked open threads (the ~−29 CO tail; the Audit Findings page + JN-G revision watcher; the full-city BP stream that would un-hold the RHNA bar) are in `notes/v4/HANDOVER_2026-07-02.md` — read that before restarting v4. The v2 sections below are accurate for the deployed site. Apparent conflicts = different tracks, not staleness.
+- **v4** — `databases/berkeley_housing_v4.db`, the **event-stream substrate. Last written 2026-07-02; paused by drift, RESUMED 2026-09-26 as the build direction (below).** Re-grounds housing entities on the **BP/event flow** (entities CONSTRUCTED by classification + oracle-triangulation, not parsed/migrated) — built to correct the entity errors in both v2 and v3. **It holds EVENTS, NOT ENTITIES: `events` + `event_classifications`, and `projects` is EMPTY (0 rows).** **The 2026-06-26 plan WAS a migration onto v4:** re-derive from sources (never copy v2 rows), then re-point the site, curriculum and APR at the v4 spine (`notes/v4/HANDOVER_v4_2026-06-26.md` step 5). It was suspended by drift after 2026-07-02, not by decision, and **RESUMED 2026-09-26** as the repair direction: v4 becomes the BUILD (sources + corrections ledger → DB), v2 its output (see `docs/audit/2026-09-26_machinery_and_schema_audit.md`). Until cutover, findings reach v2 through the adjudication ledger `corrections/v4/grounded_counts.csv` (Logan Park North 135, El Jardin +55, Acheson Commons B 35). **Acheson Commons is resolved in v4 only:** all four buildings (A 37, B 35, C 65, D 68 = 205u, finaled 2022); v2 has B (proj900) and D (proj902) but **not A or C**, and proj178 `2131 University` is an umbrella row (205u, no CO date) overlapping B and D — left for the build's structures stage (John, 2026-09-26), not a v2 patch. **85,793 is the INGESTION invariant, not the live count** (82,923 as of 2026-09-02 = invariant − documented dedup; see *Anchor checks to what stays true* below). The v4 housing-role classifier is **`housing_rules.permit_role.classify` (commit `aa6ded0`)** — NOT the v2-era `@112cb03` cited below.
+- **Where to look:** **v2 SERVES the site, the APR and the Explorer until cutover**; the repair toward the v4 build proceeds in small gated steps listed at the TOP of `PROGRESS.md`. Every session from 2026-07-02 to 2026-09-25 worked in v2 (the owner join, Measure U, the assessor refresh, the site). Current state = TOP of `PROGRESS.md`, updated at every gated step. v4's paused state and its ranked open threads (the ~−29 CO tail; the Audit Findings page + JN-G revision watcher; the full-city BP stream that would un-hold the RHNA bar) are in `notes/v4/HANDOVER_2026-07-02.md` — read that before restarting v4. The v2 sections below are accurate for the deployed site. Apparent conflicts = different tracks, not staleness.
 
 ## Canonical database
 **`databases/berkeley_housing_v2.db`** — V2 normalized schema (46 tables):
@@ -24,14 +24,13 @@ parcels`, plus `project_events` (timeline: entitlement/BP/CO milestones via
 `vocabulary_event_types`), `permits`, `project_classifications`. The flat
 compatibility view is **`v_projects_flat`** (what `generate_apr_v2.py` and
 `export_explorer_data_v2.py` read).
-- **V1 `berkeley_housing_analysis.db`** (flat `projects` table) is frozen/superseded.
+- **V1 `databases/archive/berkeley_housing_analysis.db`** (flat `projects` table) is frozen/superseded, archived read-only.
 - **`databases/berkeley.db`** = Alameda County **assessor parcels** (29,131 Berkeley
   parcels; `APN`/`BOOK`/`PAGE`/`PARCEL`/`SUB_PARCEL`, `the_geom`+`Latitude`/`Longitude`,
   `Imps`/`Land`/`TotalNetValue`, `UseCode`, `LatestDocumentDate`) — a reference store,
   not the pipeline DB. **Refreshed 2026-06-16 (Feb-2026-current data) from data.acgov.org;
-  `Imps>0` is the built-signal — see rule 4 for the refreshed schema + 3-layer cross-walk.** ⚠ The
-  canonical file is `databases/berkeley.db`; a stray **0-byte `./berkeley.db` at repo
-  root is an empty stub** — ignore it (open the `databases/` one).
+  `Imps>0` is the built-signal — see rule 4 for the refreshed schema + 3-layer cross-walk.** The
+  canonical file is `databases/berkeley.db` (the 0-byte root stub was removed 2026-09-26).
 - **`hcd_apr_mirror.db`** = Berkeley's submitted APR mirrored from CKAN — the
   **VERIFICATION TARGET, never a data source** (see rules below).
 - There are ~40 DB files total; most are dated snapshots/backups. Inventory:
@@ -139,9 +138,9 @@ compatibility view is **`v_projects_flat`** (what `generate_apr_v2.py` and
   66) it is a **CONFLICT**, not a clean merge — report, never auto-merge.
 
 ## Structural facts (load-bearing for JN-builders — verified 2026-06-15)
-- **`project_events.units_affected` is 100% NULL** → unit-conservation / cross-stage
-  unit-drift is **IMPOSSIBLE from events**; `total_units` (versions / `v_projects_flat`)
-  is the **ONLY** unit signal. (This is the confirmed root cause D6 was under-powered.)
+- **`project_events.units_affected` was 100% NULL until 2026-09-25; the CPRA 2026 ingest filled it on 287
+  events.** Still too sparse for unit conservation / cross-stage unit-drift; `total_units` (versions /
+  `v_projects_flat`) remains the **ONLY** reliable unit signal. (This is the confirmed root cause D6 was under-powered.)
 - **The CO-only import cohort** (**713 projects** — MEASURED 2026-06-16 by `scripts/shake_detectors.py`,
   not the earlier stale ~597 estimate; = active projects in id blocks **185-279 + 280-899** with **no
   pre-CO lifecycle event**, single-/two-unit ADUs ingested from CO/CPRA finaled records) has **NO

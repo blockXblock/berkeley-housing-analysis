@@ -32,7 +32,7 @@ lot and `--all` rebuilds them.
    theirs and were silently dropped from their own sites.
 3. **Re-stamp and rebuild:**
 
-       python3 scripts/build_tour_package.py --all
+       python3 scripts/tours/build_tour_package.py --all
 
    That calls `stamp_geometry.py` (updating the document name and content sha), re-splices all
    68 packages, renames them to the new sha, **prunes the previous generation**, repoints
@@ -40,11 +40,11 @@ lot and `--all` rebuilds them.
 
 4. **Check it took:**
 
-       python3 scripts/svg_label_tour.py --tour <stem> --street <street> --all --max-labels 5
+       python3 scripts/tours/svg_label_tour.py --tour <stem> --street <street> --all --max-labels 5
 
 ## 3. Label TEXT comes from the database, not the KML
 
-Do not hand-edit units or status in a placemark name. `scripts/sync_status_from_v2.py` writes
+Do not hand-edit units or status in a placemark name. `scripts/tours/sync_status_from_v2.py` writes
 them from `v_projects_flat`, and the next run will overwrite anything typed by hand.
 
 - wrong unit count or status → fix it in **v2**, then run `sync_status_from_v2.py`

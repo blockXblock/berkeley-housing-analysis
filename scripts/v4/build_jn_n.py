@@ -1,7 +1,7 @@
 """Build JN-N_labels.ipynb — the flyover label as a DATA PRODUCT, not decoration.
 
 Why this notebook exists. The labels that ride the buildings in the berkeleybuild.com flyovers are
-generated from v2 by scripts/gen_svg_labels.py: six lines of text per project, rendered to SVG and
+generated from v2 by scripts/tours/gen_svg_labels.py: six lines of text per project, rendered to SVG and
 rasterised to a PNG that Google Earth carries as an icon. Every design question about them so far
 has been settled by John watching a video and saying what was wrong, then a 5-30 minute batch
 re-render before anyone could see the answer. svg() takes 1.3 ms. The batch is the rasteriser, not
@@ -202,7 +202,7 @@ superseded figure — which it was doing until this morning, because the PNG cac
 """)
     code("""
 import sys, sqlite3, hashlib, json, glob, os
-sys.path.insert(0, os.path.expanduser('~/berkeley-data/scripts'))
+sys.path.insert(0, os.path.expanduser('~/berkeley-data/scripts/tours'))
 import gen_svg_labels as G
 from IPython.display import SVG, display
 
@@ -343,7 +343,7 @@ try:
         print(f'  shipped label {p.name}: size {im.size}  panel pixel {im.load()[300,100]}')
         print('  (13,17,23,255) = cairosvg, faithful   (47,51,56,255) = qlmanage, flattened')
     else:
-        print('  no rendered label on disk yet — run scripts/gen_svg_labels.py')
+        print('  no rendered label on disk yet — run scripts/tours/gen_svg_labels.py')
 except ImportError:
     print('  PIL not available in this kernel; skipping the pixel check')
 """)
@@ -397,7 +397,7 @@ else:
 **Found at build time.** Gate {'PASSED' if baseline_path else 'had no baseline'} against
 `{os.path.basename(baseline_path) if baseline_path else 'NONE'}`.
 
-**Verify — prove the gate can fail.** Edit `lines_for()` in `scripts/gen_svg_labels.py` (add a word
+**Verify — prove the gate can fail.** Edit `lines_for()` in `scripts/tours/gen_svg_labels.py` (add a word
 to the address line), re-run the cell above, and confirm it FAILS and prints the old and new text.
 A gate that has never been seen to fail is not evidence of anything. This one was proven both ways;
 so was the deploy gate it is modelled on.

@@ -36,8 +36,15 @@ datasette DB, but linked from `docs/technical-archive-2026.html`); (2) `permitpi
 **⚠ CLAUDE.md is now wrong in two places (needs John's OK to edit):** "there is no v2->v4 migration and
 never was" (the 2026-06-26 handover planned exactly that); "units_affected is 100% NULL" (287 set).
 
-**NEXT (small, careful):** the write lock on canonical DBs (read-only files + Claude Code deny rules) —
-changes Claude Code config, so John's explicit go-ahead.
+**Write lock APPLIED (John: yes):** `berkeley_housing_v2.db`, `berkeley_housing_v4.db`, `berkeley.db`,
+`parcel_facts.db` are `chmod a-w` (verified: write -> "readonly database"; reads fine). No cron/launchd/
+scheduled task writes them (license snapshot writes CSV only). **To do an approved gated write:** John runs
+`chmod u+w databases/<db>`, then re-locks with `chmod a-w`. The Claude Code deny rules were NOT added: auto
+mode blocks an agent editing its own permissions (correctly). John adds them by hand (snippet in chat
+2026-09-26); until then chmod is a visible speed bump, not a wall, since an agent could chmod back.
+
+**NEXT (small, careful):** John pastes the deny rules into `.claude/settings.json`; then correct the two
+false CLAUDE.md sentences (needs John's OK).
 
 ---
 

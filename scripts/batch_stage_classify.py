@@ -132,7 +132,9 @@ def build(limit=None):
                           for r in rs) or "  (no records found)"
         reqs.append({
             "custom_id": f"proj{p}",
-            "params": {"model": MODEL, "max_tokens": 400,
+            # 400 truncated 89 of 1,099: extended thinking is ON by default and eats the budget
+                       # before the JSON is emitted. The failures were valid JSON cut mid-string.
+                       "params": {"model": MODEL, "max_tokens": 2000,
                        "messages": [{"role": "user", "content": PROMPT.format(
                            rungs=rungs, site=str(a).split(",")[0], records=lines)}]},
         })
@@ -193,7 +195,9 @@ def main() -> int:
             bad.append({"custom_id": r.custom_id, "type": r.result.type,
                         "detail": str(getattr(r.result, "error", ""))[:200]})
             continue
-        txt = r.result.message.content[0].text
+        # content[0] is a ThinkingBlock when extended thinking is on — take the TEXT block,
+        # never a positional guess.
+        txt = "".join(b.text for b in r.result.message.content if getattr(b, "type", "") == "text")
         mm = re.search(r"\{.*\}", txt, re.S)
         try:
             got = json.loads(mm.group(0)) if mm else {}

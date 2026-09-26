@@ -60,7 +60,21 @@ the site corrected sooner.
 
 **CLAUDE.md corrected (John: OK, `2205c78`):** v4 migration planned 06-26 and RESUMED 09-26 as the build; Acheson resolved in v4 only, left for the build's structures stage (John: no v2 patch); units_affected; v1 archive path.
 
-**NEXT (small, careful):** check that the v4 build still reproduces itself after 3 months: run JN-A→B→C→F into a THROWAWAY DB under scratch/ (~130 MB; canonical DBs untouched and locked) and compare to the 2026-07-02 baseline. `housing_rules` changed since (RULE 5.5, 2026-08-02), so a difference is a finding, not a failure. Still held for John: D2 notebook; the two `parcel_zones` notebooks.
+**v4 REPRODUCTION CHECK (2026-09-26, throwaway `scratch/2026-09-26_v4_repro/`, canonical DBs untouched):**
+copies of JN-A/B/C/F run with inputs PINNED to the two May CPRA files (the notebooks' glob now also matches
+the three July reruns: 72,445 rows, 55% duplicate; an undeclared-input hazard). **Ingest + dedup reproduce
+EXACTLY** (32,202 rows -> 85,793 events, 4 conservation checks PASS -> 82,923 after dedup). **Classify
+differs by design:** RULE 5.5 (4eb77df, 2026-08-07, rules-v2) classifies 113 finaled conversion-ADU events;
+82 were already adjudicated in the ledger, **31 permits / 33 units are new beyond the ledger.** Its commit
+queued a v4 re-classification that never ran. **JN-F HALTS (guard working):** 188/190 ledger rows apply;
+2 conflict with RULE 5.5 — **B2020-01591** ledger 2 ("two attached carports to ADU's") vs classifier 1
+(RULE 5.5 is always +1); **B2022-03366** ledger 1 (one JADU) vs classifier 2 (from the city's UnitsAdded=2).
+The ledger is right in both. RULE 5.5 defect: it asserts +1 but net_units then reads UnitsAdded.
+
+**NEXT (small, careful) — John's ruling needed:** let explicitly-flagged ledger rows override the classifier
+(amend these 2 rows with a `supersedes_classifier` note; the apply step honors only flagged rows), re-run the
+chain, and APPEND a 2026-09-26 baseline whose delta is documented (RULE 5.5: +31 permits). Still held for
+John: D2 notebook; the two `parcel_zones` notebooks. Throwaway DB (124 MB) kept until then.
 
 ---
 

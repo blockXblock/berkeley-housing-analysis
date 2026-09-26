@@ -58,7 +58,9 @@ resolved** — B = proj900 and D = proj902 are correct; **A and C have no v2 pro
 Fix belongs to the build (project = Acheson Commons, four structures), not a v2 patch, unless John wants
 the site corrected sooner.
 
-**NEXT (small, careful):** correct the two false CLAUDE.md sentences (needs John's OK).
+**CLAUDE.md corrected (John: OK, `2205c78`):** v4 migration planned 06-26 and RESUMED 09-26 as the build; Acheson resolved in v4 only, left for the build's structures stage (John: no v2 patch); units_affected; v1 archive path.
+
+**NEXT (small, careful):** check that the v4 build still reproduces itself after 3 months: run JN-A→B→C→F into a THROWAWAY DB under scratch/ (~130 MB; canonical DBs untouched and locked) and compare to the 2026-07-02 baseline. `housing_rules` changed since (RULE 5.5, 2026-08-02), so a difference is a finding, not a failure. Still held for John: D2 notebook; the two `parcel_zones` notebooks.
 
 ---
 

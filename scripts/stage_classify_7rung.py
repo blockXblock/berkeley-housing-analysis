@@ -123,32 +123,50 @@ def main() -> int:
                                         "s": (d.get("Status") or "").strip(),
                                         "w": (d.get("Description") or "").strip()[:280]})
     rung_txt = "\n".join(RUNGS)
-    results = []
+    results, fails = [], []
     for i, (p, u, a, s) in enumerate(proj, 1):
         rs = sorted(recs.get(p, []), key=lambda r: r["d"].split("/")[-1] + r["d"][:5])
         lines = "\n".join(f"  [{r['m']}] {r['n']} | {r['d']} | status={r['s'] or '-'}\n      {r['w']}"
                           for r in rs) or "  (no records found)"
+        # ⚠ THE FIRST VERSION OF THIS SWALLOWED EVERY FAILURE. It read .stdout, ignored the
+        # returncode, ignored stderr, and discarded the raw response -- so when all 25 calls failed
+        # the run reported 25 rows of nulls after 49 minutes with no way to find out why. Never
+        # again: check the returncode, keep stderr, keep the raw text.
+        raw, err, rc = "", "", None
         try:
-            out = subprocess.run(["llm", "-m", args.model,
-                                  PROMPT % (rung_txt, str(a).split(",")[0], lines)],
-                                 capture_output=True, text=True, timeout=180).stdout.strip()
+            r = subprocess.run(["llm", "-m", args.model,
+                                PROMPT % (rung_txt, str(a).split(",")[0], lines)],
+                               capture_output=True, text=True, timeout=180)
+            raw, err, rc = r.stdout.strip(), r.stderr.strip()[:300], r.returncode
+        except subprocess.TimeoutExpired:
+            err, rc = "TIMEOUT after 180s", -1
         except Exception as e:  # noqa: BLE001
-            out = f'{{"error":"{e}"}}'
-        m = re.search(r"\{.*\}", out, re.S)
+            err, rc = f"{type(e).__name__}: {e}"[:300], -2
+        m = re.search(r"\{.*\}", raw, re.S)
         try:
             got = json.loads(m.group(0)) if m else {}
         except Exception:
             got = {}
+        if not got:
+            fails.append({"project_id": p, "rc": rc, "stderr": err, "raw": raw[:300]})
+            print(f"    !! proj{p} returned nothing parseable  rc={rc}  stderr={err[:90]!r}", flush=True)
         results.append({"project_id": p, "units": u, "address": str(a)[:40], "v2_stage": s,
                         "records": len(rs), "rung": got.get("rung"), "rung_name": got.get("rung_name"),
                         "track": got.get("track"), "confidence": got.get("confidence"),
-                        "evidence": got.get("evidence"), "reason": got.get("reason")})
+                        "evidence": got.get("evidence"), "reason": got.get("reason"),
+                        "rc": rc, "stderr": err or None, "raw": (raw[:200] if not got else None)})
         if i % 25 == 0 or i <= 5:
             print(f"  [{i}/{len(proj)}] proj{p:<5} {u:>5}u  v2={str(s)[:18]:<18} "
                   f"rung={got.get('rung')} {str(got.get('rung_name'))[:18]:<18} track={got.get('track')}", flush=True)
     (OUT / "results.json").write_text(json.dumps(results, indent=2))
     ok = [r for r in results if r["rung"]]
     print(f"\n  classified {len(ok)}/{len(results)}")
+    if fails:
+        (OUT / "failures.json").write_text(json.dumps(fails, indent=2))
+        print(f"  FAILED {len(fails)} — see {OUT}/failures.json")
+        import collections as _c
+        for k, v in _c.Counter((f["stderr"] or "")[:60] for f in fails).most_common(3):
+            print(f"    {v:>4}x  {k or '(no stderr; empty stdout)'}")
     print("  rung distribution:", dict(sorted(collections.Counter(r["rung"] for r in ok).items())))
     print("  track distribution:", dict(collections.Counter(r["track"] for r in ok).most_common()))
     print(f"  -> {OUT}/results.json")

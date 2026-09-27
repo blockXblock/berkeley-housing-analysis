@@ -37,8 +37,115 @@ dispositions, 0 missing, 0 extra). That file holds **6 records** at the address,
   holds, the ZP→BP bridge is NOT there and permit-to-permit cross-references are the only non-APN edge
   for the build's structures stage. Measured rate over all 1,746 to follow — not estimated from ten.
 
-**Next:** finish harvest → reparse → rung-3 numbers → **read-only preview of the `application_accepted`
-events, then STOP for John.** DBs are `chmod a-w`; no write attempted.
+**FINDINGS (harvest ~1,000/1,746 fetched; nothing written to any DB):**
+- **Identity, not aggregation, is the product** — `docs/methodology/identity_is_the_product.md`. 100 of
+  v2's dated `application_complete` events name NO record, which is WHY a project-level date had to be
+  aggregated. Rung-3 identification rates: co_issued 99%, BP 95%, app_submitted 80%, entitled 65%,
+  app_complete 60% — the healthy ones hang off a `permit_id`; the weak ones are Planning-side.
+  MIN/MAX is a symptom of a lost referent, not an algorithm choice. Worked example: proj140's two
+  anonymous events are the design review's (Desiree Dougherty) and the Zoning Permit's (Sharon Gong);
+  MIN is wrong, MAX is right BY ACCIDENT, selection is right for a reason.
+- **Records state their own lineage in prose.** 72 of 2,310 ZPs cite another record; 60 are explicit
+  modifications. 19% of v2 projects (76/395) sit at an address with >1 ZP — mostly a CHAIN (original +
+  modifications = one project, rung 3 = the root), sometimes CONFLATED (separate applications stitched
+  into one v2 timeline: proj10 3000 Shattuck has filed_date from ZP2015-0229 and app_complete from the
+  unrelated 9-storey ZP2022-0046). Rule + 11 tests: `housing_rules/test_chain_resolution.py`.
+- **The ZP→BP bridge does not exist in either candidate source.** Related Records populated on 12% of
+  records (0% of Landmarks, 1% of Pre-Apps, 34% of DRC Final); and only **4 of 32,897** building permits
+  cite a Planning record in 3c's full run. Connecting an entitlement to its building permit is an
+  UNSOLVED problem, not a field to pick.
+- **Pre-Applications publish NO workflow: 272/272** (table rendered, empty; 3 spot-checks at 30s on
+  fresh sessions). All 8 Appeals likewise. So rung 1 has no dated city action at all.
+- **Ministerial vs discretionary shows up in the VOCABULARY, not a duration** (appended to
+  `seven_rungs_and_the_ministerial_shift.md`): ZCBP = Completeness Review → Zoning Certificate → Case
+  Closed, 3 tasks, only disposition `Complete` — nothing that can refuse. DRCP = 2.6 completeness
+  dispositions per record, with `Incomplete Pending Applicant` 114 and `Resubmittal Pending Staff` 56.
+  The instrument is a vocabulary share, NOT a clock (comparing their durations is a category error).
+- **Clock decomposition needs no model** (`scripts/clock_decomposition.py`): the city names the holder —
+  `Incomplete Pending Applicant` vs `Resubmittal Pending Staff`. 92/8 applicant/city of ATTRIBUTED
+  waiting. ⚠ The script PRINTS ITS OWN CAVEATS because the number is easy to misquote: one party holds
+  the pen, applicant time is mostly real redesign work, filing→first-disposition is unattributed, and
+  only 1 span so far comes from an actual ZP.
+- **Six harvest traps, each measured** (audit doc): hidden tab · placeholder-row wait · retry must
+  escalate · **Accela's session dies after ~4 CapDetail views** (A/B: 4 good then all-zero at 16.7s
+  each; fresh page per record = 4.4s/rec, 0 retries — the "73% retry rate" was entirely this) · an
+  empty capture must never count as done (`DRCP2015-0002` cached as 0 tasks, refetch gave 5) · pages
+  are durable, the parsed JSONL is derived.
+
+**Corrections to my own work, same shape each time (a rule with no addressable referent):** LMSAP
+mis-roled as a primary application · a 2-token address key collided every multi-word street · the WRONG
+canon imported (`build_v2/s0_keys` is the v3 pipeline's keying; `housing_rules.address` is rule 4c) ·
+the auto-loaded memory `apn-crosswalk-apn-norm` recommended the 890/892 strip-non-digits trap and a
+column the June refresh deleted — rewritten · three monitor-filter failures, incl. a predicate over a
+CUMULATIVE counter that fires forever (documented, then repeated minutes later).
+
+**HELD FOR JOHN:** (1) the `--commit` go-ahead on rung-3 (write path TESTED on a throwaway copy:
+rollback leaves 0 rows, idempotent, canonical DB refused the write throughout); (2) should companion
+reviews be written as events at all — writing them as `application_complete` would recreate the
+aggregation defect; (3) a CLAUDE.md line naming the ADDRESS canon (proposed, not edited); (4) the Jev
+spend for 3 questions (pathway, is-this-housing, Void/Continued-off-Calendar comments) after 3c
+withdrew 2 as answerable from the parse; (5) the structures stage is unblocked but NOT started.
+
+**HARVEST COMPLETE 2026-09-26 18:42. `verify_capdetail_complete.py`: 1,786/1,786 accounted for
+(1,500 captured · 286 verified absences · page_no_wf 0 · errored 0 · missing 0).** All 9 network
+timeouts recovered on the sweep; all 40 records the corrected filter added were fetched.
+
+**RUNG 3, measured:** 1,115 records carry a dated acceptance. 286 projects get rung 3 selected from
+their primary application (13 via a modification CHAIN resolved to its root); 217 of those have no
+`application_complete` event in v2 at all and 23 have one that is undated; 53 agree, 8 disagree.
+**filed → accepted: median 106d, mean 150d, p90 312d. Against the city's OWN due date: median +12d
+LATE, mean +53d, p90 +216d.**
+
+**19 CONFLATED projects** — separate applications sharing one address, stitched into a single v2
+timeline (proj10 3000 Shattuck: v2's 166 units are the 2022 10-storey scheme, its filed_date is a
+different 2015 application; proj828 has three unrelated primaries). Reported, never merged, never
+written.
+
+**A PREDICTION THAT CAUGHT A REAL BUG.** I predicted proj10 would flip from selected to conflated
+once ZP2022-0046 landed. It did not — because the filed_date anchor ran even when `resolve_chain`
+returned `conflated`, and ZP2015-0229 was filed the SAME DAY as v2's filed_date (0-day gap, inside
+the 60-day tolerance). A date coincidence was overriding an explicit finding that the records are
+unrelated. Fixed; conflated 4 → **19**, selected 301 → **286**. Fifteen projects would have been
+written from proximity alone.
+
+**CLOCK DECOMPOSITION, full set** (`scripts/clock_decomposition.py`, which prints its own caveats):
+1,737 attributable spans. Applicant-held n=1,150 median 46d; city-held n=587 median 27d — **84/16** of
+attributed waiting. On ZONING PERMITS specifically (the actual applications): **83/17**, 994 vs 517
+spans — far more balanced than the companion-review-only 92/8 measured mid-harvest. ⚠ Caveats stand:
+one party writes both labels; applicant time is largely real redesign; filing→first-disposition is
+unattributed.
+
+**RELATED RECORDS is effectively empty: 4% of 1,786** (Zoning Permits just **26/1,116 = 2%**; ZCBP and
+Structural Alteration 0%). Only **4** link to a building permit — and 3c's full permit run found the
+same 4 from the other side. **The ZP→BP bridge does not exist in either source; it is an UNSOLVED
+problem, not a field to pick.**
+
+**UNITS (corrected extractor):** 291 high-confidence counts; **24 program-revision trajectories**
+(proj133: 283→485→456 with v2 holding 456 exactly — v2 carries the LATEST count, which is why
+comparing it to an early record measures elapsed time, not error); latest-vs-v2 agrees 57, differs 48
+(candidate only — prose extraction is the fragile layer).
+
+**Next:** John's calls, in this order — (1) the `HOUSING` fix is in the canon but
+`ingest_planning_scope_a.py` already wrote 1,188 planning events with the BROKEN pattern, so v2's
+Planning events carry the same hole: that re-run is a separate gated write and should be settled
+BEFORE adding 286 rows on top; (2) then the rung-3 `--commit`. DBs are `chmod a-w`; nothing written.
+
+---
+
+## 2026-09-26 — HCD definitions adopted; every permit re-read; ledger amended (John)
+
+**Definitions = HCD's APR FAQ** (`scripts/housing_rules/reading_rules.py`): separate living quarters; group
+quarters (dorms, student-restricted, assisted living/residential care as a group arrangement) are NOT units;
+completions GROSS, removals separate. **Re-read under them:** Jev all 32,897 + Sonnet 5,773 routed (≈$11.60) →
+`data/derived/permit_effect_evidence_2026-09-26_hcd.json` (read by `housing_rules.permit_effect`). Eval: Sonnet
+**202/206**, Jev 196/206. **Ledger (John):** B2018-02623 2→3 (HCD gross; 1 removed) and NEW B2022-04366 1367
+University = 39 (city note: separate kitchens per unit); checksums 191/637. **2000 Dwight HELD** (113; care
+license/plans check). Mini-dorm B2018-03160 stays 1 pending John.
+**Scratch v4 rebuild with model labels + ledger: 4,070** (2018–2025) vs July baseline 4,229. Gap = HCD group
+quarters (2100 San Pablo −96, 2000 Dwight −113 held, 2435 San Pablo −40) + building-level cases the four
+regex-shaped correction layers used to patch (they now REFUSE: C2, C3-Shattuck, C3-tail, C-multifamily) — e.g.
+2510 Channing −40, Logan South counted twice +69. Diff: `scratch/2026-09-26_tierB/permit_diff_vs_live_v4_hcd.csv`.
+**NEXT:** translate the four refused layers' INTENT into ledger rulings or structures-stage cases (not regex patches).
 
 ---
 

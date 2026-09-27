@@ -16,7 +16,7 @@ import json
 import re
 from pathlib import Path
 
-EVIDENCE = Path(__file__).resolve().parents[2] / "data/derived/permit_effect_evidence_2026-09-26.json"
+EVIDENCE = Path(__file__).resolve().parents[2] / "data/derived/permit_effect_evidence_2026-09-26_hcd.json"
 ROLE = {"creates": "new_unit", "alters": "alteration", "demolishes": "demolition",
         "subpermit": "subsidiary", "not_housing": "non_housing", "unclear": "ambiguous"}
 _CHILD = re.compile(r"-(REV|DEF)\d+$")

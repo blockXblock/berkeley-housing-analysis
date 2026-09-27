@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-# ============================ SEQUESTERED 2026-09-26 ============================
-# DO NOT RUN. Original path: scripts/stage_classify_7rung.py
-# WHY: Model inference of a project's pipeline stage. Superseded for rungs 1-4 of the ~1,746 housing Planning records by the city's own CapDetail workflow facts (harvest by berkeley-data-32, NOT yet ingested as of 2026-09-26). NOT superseded for construction/inspection/CO rungs, pre-applications (they publish no workflow), or the ADU/infill tail: stage is NOT solved.
-raise SystemExit("SEQUESTERED 2026-09-26 -- see header; original path scripts/stage_classify_7rung.py")
-# ================================================================================
 """stage_classify_7rung.py — assign every project a pipeline rung, and flag the approval track.
 
 THE SEVENTH RUNG, and why John wanted it. Between "application submitted" and "entitled" sits a

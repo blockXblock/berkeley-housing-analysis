@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-09-26 ============================
+# DO NOT RUN. Original path: scripts/reconcile_project_status.py
+# WHY: A fifth definition of 'completed' (new_unit role + Building Final). Superseded by the permit-effect evidence file (Jev + Sonnet, 2026-09-26) + the finaled date.
+raise SystemExit("SEQUESTERED 2026-09-26 -- see header; original path scripts/reconcile_project_status.py")
+# ================================================================================
 """Reconcile every v2 project's status against the independent record. READ-ONLY; proposes, never writes.
 
 Provoked 2026-09-23 by proj4, 1914 Fifth St: v2 carries 257 units at "In Review", the site was cleared

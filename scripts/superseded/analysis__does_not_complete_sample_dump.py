@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-09-26 ============================
+# DO NOT RUN. Original path: analysis/audit_2026-05-16/does_not_complete_sample_dump.py
+# WHY: ONE-OFF May 2026 audit built on the retired-in-waiting permit_role_classifier; conflict_dryrun already broken. Historical.
+raise SystemExit("SEQUESTERED 2026-09-26 -- see header; original path analysis/audit_2026-05-16/does_not_complete_sample_dump.py")
+# ================================================================================
 """
 Does-not-complete permits sample field dump
 ===========================================

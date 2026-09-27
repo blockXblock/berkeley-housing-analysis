@@ -21,24 +21,37 @@ import pandas as pd
 #   BERKELEY_DATA_ROOT (repo root) and JN_A_DB_PATH (the DB to check — a throwaway in a from-raw test).
 _ROOT      = os.environ.get('BERKELEY_DATA_ROOT', os.path.expanduser('~/berkeley-data'))
 DB         = os.environ.get('JN_A_DB_PATH', os.path.join(_ROOT, 'databases', 'berkeley_housing_v4.db'))
-FEED       = sorted(glob.glob(os.path.join(_ROOT, 'data', 'raw', 'cpra-downloads', 'BP_Annual Permit Report-*.xlsx')))
+# Inputs = the files the DB itself records it was built from (sources table: locator + SHA-256 prefix), never a
+# filename pattern (a pattern silently grew from 2 to 5 files). Each file's bytes are re-checked against the record.
+import hashlib
+_con0 = sqlite3.connect(f'file:{DB}?mode=ro', uri=True)
+FEED = []
+for _loc, _ck in _con0.execute("SELECT locator, checksum FROM sources WHERE source_kind='cpra_permit_feed' ORDER BY source_id"):
+    _f = os.path.join(_ROOT, 'data', 'raw', 'cpra-downloads', os.path.basename(_loc))
+    _got = hashlib.sha256(open(_f, 'rb').read()).hexdigest()
+    assert _got.startswith(_ck), f'input changed since ingestion: {os.path.basename(_f)} {_got[:16]} != recorded {_ck}'
+    FEED.append(_f)
+_con0.close()
 HEADER_ROW = 7
 DATE_COLS  = {'Submittal Date': 'permit_submitted', 'Issuance Date': 'permit_issued',
               'Finaled Date': 'permit_finaled', 'Completed Date': 'permit_completed'}
 
 # (1) INGESTION ANCHORS — the stable invariant: per-axis non-null date cells in the source files at ingestion.
 #     These do NOT move (the files don't change); the file-truth count below must equal them.
-INGESTION_ANCHORS = {'permit_submitted': 32202, 'permit_issued': 31940, 'permit_finaled': 21650, 'permit_completed': 1}
-INGESTION_TOTAL   = 85793   # = sum(INGESTION_ANCHORS); the conserved ingestion count (ingestion_runs.rows_ingested)
-SOURCE_ROWS       = 32202   # ingestion_runs.rows_in_source
+# Epoch 2026-09-26b (John adopted): the three 2026-07-07 productions (NextRequest 26-1971), SHA-256 pinned in JN-A.
+# HISTORY — epoch 2026-06-26..09-26: the two 26-1368 productions, anchors 32202/31940/21650/1 = 85,793 events from
+# 32,202 rows, with one documented delta (event-dedup 2026-06-29: -1437/-1428/-5/0, docs/audit/2026-06-29_event_dedup_write.md).
+INGESTION_ANCHORS = {'permit_submitted': 40243, 'permit_issued': 39830, 'permit_finaled': 27300, 'permit_completed': 1}
+INGESTION_TOTAL   = 107374  # = sum(INGESTION_ANCHORS); the conserved ingestion count (ingestion_runs.rows_ingested)
+SOURCE_ROWS       = 40243   # ingestion_runs.rows_in_source
 
 # (2) DOCUMENTED DELTAS — append-only ledger of legitimate post-ingestion event removals (with provenance).
 #     live[axis] must == INGESTION_ANCHORS[axis] - sum(deltas[axis]). Add a new entry when a future gated
 #     correction removes events; NEVER edit the anchors above to chase a moved total.
 DOCUMENTED_DELTAS = [
-    {'name': 'event-dedup 2026-06-29 (cross-file duplicate milestone events)',
-     'provenance': 'docs/audit/2026-06-29_event_dedup_write.md',
-     'remove': {'permit_submitted': 1437, 'permit_issued': 1428, 'permit_finaled': 5, 'permit_completed': 0}},
+    {'name': 'JN-B event dedup on the 2026-07-07 inputs (overlapping 2025 rows across productions + cross-file duplicates)',
+     'provenance': 'scratch/2026-09-26_adopt/out/JN-B_event_dedup.ipynb; live v4 rebuilt 2026-09-26 (snapshot keep_snapshot_2026-09-26_pre-v4-rebuild.db)',
+     'remove': {'permit_submitted': 7344, 'permit_issued': 7226, 'permit_finaled': 3696, 'permit_completed': 0}},
 ]
 
 def expected_live():

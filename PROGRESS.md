@@ -139,7 +139,7 @@ re-runs + the new 2025-to-2026-07-07 window). 40,243 rows -> 107,374 events (con
 after dedup; 32,897 permits. **2018-2025 completions identical to the May inputs (4,072); +251 finaled Jan-Jul 2026 ->
 4,323; BP issued 5,288 (+146 in 2026).** Baseline `reconciliation_baseline_2026-09-26b.json`; A->B->C->F reproduce it
 (GATE PASS). Executed notebooks committed. Structural gate still halts vs the LIVE v4 DB (locked, old state) —
-**NEXT: rebuild live v4 from the chain (John unlocks), then re-pin verify_jn_a_conservation.py.**
+**DONE same day: live v4 rebuilt from the chain** (John unlocked; snapshot `keep_snapshot_2026-09-26_pre-v4-rebuild.db`, sha ea1bef0b; live now sha 4ef44a64 == the verified build; 89,108 events, all classified from model evidence; completions 4,072 / 4,323, BP 5,288). `verify_jn_a_conservation.py` re-pinned (inputs from the DB's sources table): PASS. 32's structures preview (1,126 structures / 5,249 units) predates this and is being re-run. John to re-lock v4.
 
 ---
 

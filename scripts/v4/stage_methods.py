@@ -547,7 +547,11 @@ def apply_grounded_counts(con, csv_path=os.path.join(CORR, 'grounded_counts.csv'
                 raw_nu = con.execute(
                     "SELECT CAST(json_extract(raw_payload,'$.NumberUnits') AS INT) FROM events "
                     "WHERE source_record_key=? AND event_type_code='permit_finaled'", (p,)).fetchone()[0]
-                assert raw_nu == n, \
+                # A dated ruling on a NAMED convention (anything but plain 'dwelling', e.g. dwelling+live_work)
+                # is itself the authority for the higher count: the structured field cannot express it.
+                convention_ruling = str(getattr(r, 'convention', 'dwelling')) != 'dwelling' and \
+                    str(getattr(r, 'adjudicated', '') or '') not in ('', 'nan')
+                assert raw_nu == n or convention_ruling, \
                     f'grounded_counts {p}: upgrade {nu}->{n} REFUSED — raw NumberUnits={raw_nu} does not corroborate'
             else:
                 assert (nu or 0) in (0, n), \

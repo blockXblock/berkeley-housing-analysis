@@ -132,6 +132,17 @@ BEFORE adding 286 rows on top; (2) then the rung-3 `--commit`. DBs are `chmod a-
 
 ---
 
+## 2026-09-26b — Build inputs declared and refreshed to the July productions (John adopted)
+
+JN-A reads exactly three files, SHA-256 pinned: the 2026-07-07 NextRequest 26-1971 productions (2018-22 and 2023-25
+re-runs + the new 2025-to-2026-07-07 window). 40,243 rows -> 107,374 events (conserved, anchors re-pinned) -> 89,108
+after dedup; 32,897 permits. **2018-2025 completions identical to the May inputs (4,072); +251 finaled Jan-Jul 2026 ->
+4,323; BP issued 5,288 (+146 in 2026).** Baseline `reconciliation_baseline_2026-09-26b.json`; A->B->C->F reproduce it
+(GATE PASS). Executed notebooks committed. Structural gate still halts vs the LIVE v4 DB (locked, old state) —
+**NEXT: rebuild live v4 from the chain (John unlocks), then re-pin verify_jn_a_conservation.py.**
+
+---
+
 ## 2026-09-26 — v4 build classifies from model evidence; four regex-era layers retired (John, `212b0ab`)
 
 JN-C default = model-read evidence (HCD definitions); JN-F = dedup47 + ledger (192 rulings) only. C2, C3 Shattuck,

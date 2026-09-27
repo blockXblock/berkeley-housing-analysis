@@ -182,7 +182,7 @@ def dedup_events(con, holds_path=os.path.join(CORR, 'event_dedup_holds.json')):
 
 
 # ---------------------------------------------------------------- JN-C: classify all (THE recipe)
-def classify_all(con):
+def classify_all(con, source='regex'):
     """Materialize event_classifications with the COMMITTED classifier — THE single home of the
     JN-C cell-4 recipe (the notebook calls this; never re-type the loop). DELETE + INSERT, one
     label per event, prose-blind net_units, hash from housing_rules.permit_role.classifier_hash().
@@ -190,6 +190,25 @@ def classify_all(con):
     import sys
     import datetime as dt
     from scripts.housing_rules.permit_role import classify, net_units, payload_get, classifier_hash
+    if source == 'evidence':   # model-read labels (housing_rules.permit_effect), same vocabulary
+        from scripts.housing_rules.permit_effect import permit_effect, evidence_hash
+        clf_hash, now = evidence_hash(), dt.datetime.now(dt.timezone.utc).isoformat()
+        labels, unread = [], 0
+        for ev_id, permit in con.execute('SELECT event_id, source_record_key FROM events'):
+            got = permit_effect(permit)
+            if got is None:
+                unread += 1
+                got = ('ambiguous', 0, None, 'not in the evidence file')
+            role, is_master, nu, note = got
+            labels.append((ev_id, role, is_master, nu, clf_hash, now, 'model', note))
+        con.execute('DELETE FROM event_classifications')
+        con.executemany('INSERT INTO event_classifications '
+                        '(event_id,housing_role,is_master,net_units,classifier_hash,classified_at,basis,basis_note) '
+                        'VALUES (?,?,?,?,?,?,?,?)', labels)
+        con.commit()
+        out = dict(con.execute('SELECT housing_role, COUNT(*) FROM event_classifications GROUP BY 1'))
+        out['_unread_events'] = unread
+        return out
     clf_hash = classifier_hash()
     now = dt.datetime.now(dt.timezone.utc).isoformat()
     labels = []

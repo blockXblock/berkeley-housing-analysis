@@ -31,7 +31,7 @@ Question: what does THIS permit's own scope do to the housing stock?
 
 Answer with JSON only:
 {{"effect": "creates" | "alters" | "demolishes" | "subpermit" | "not_housing" | "unclear",
-  "dwellings_created": <integer, 0 unless this permit's own scope builds new dwelling units>,
+  "dwellings_created": <integer: all new housing units this permit's own scope builds, not net of demolition>,
   "dwellings_removed": <integer>,
   "parent_permit": <permit number this is a part of, or null>,
   "cites": [<permit numbers your answer rests on>],
@@ -253,7 +253,7 @@ def main():
             g = ans.get(e.permit)
             if g is None:
                 res.append((e.permit, e.truth_kind, e.truth, None, None, "no answer", "")); continue
-            made = int(g.get("dwellings_created") or 0) - int(g.get("dwellings_removed") or 0)  # net
+            made = int(g.get("dwellings_created") or 0)  # gross, per HCD (removals are a separate figure)
             creates = g.get("effect") == "creates" and int(g.get("dwellings_created") or 0) > 0
             if g.get("units_bucket") is not None:
                 creates = g.get("effect") == "creates" and g["units_bucket"] != "0"

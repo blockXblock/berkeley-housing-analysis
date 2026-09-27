@@ -40,6 +40,24 @@ Answer with JSON only:
 
 Record:
 {record}"""
+PACKED = """You are reading {n} building-permit records from the City of Berkeley. Judge each record
+on its own; do not let one record inform another.
+
+{rules}
+Question, for EACH record: what does that permit's own scope do to the housing stock?
+
+Answer with a JSON array only, one object per record, in the same order:
+[{{"permit": <PermitNumber>,
+  "effect": "creates" | "alters" | "demolishes" | "subpermit" | "not_housing" | "unclear",
+  "dwellings_created": <integer>, "dwellings_removed": <integer>,
+  "parent_permit": <permit number or null>, "cites": [<permit numbers>],
+  "reason": <one sentence>, "confidence": "high" | "medium" | "low"}}, ...]
+
+Records:
+{records}"""
+# --trim: fields that bear on housing effect only; addresses and dates do not change what the scope does
+TRIM = ["PermitNumber", "Work Type", "SubType", "Finaled Status", "WorkDescription",
+        "UnitsAdded", "UnitsRemoved", "NumberUnits", "ADU", "Detached", "OccType"]
 
 
 def api_key():
@@ -71,30 +89,102 @@ def records(permits):
     return out
 
 
+EFFECTS = {  # the same five outcomes the Sonnet question asks for, stated as Jev choice criteria
+    "creates": "This permit's own scope builds new dwelling units (net new).",
+    "alters": "Work on existing buildings that adds no dwelling unit.",
+    "demolishes": "Demolishes a building or removes dwelling units.",
+    "subpermit": "Part of construction permitted under another permit number (phase, foundation, -DEF, -REV).",
+    "not_housing": "Work unrelated to housing (commercial, signage, site work, temporary power).",
+}
+UNIT_BUCKETS = {"0": "no new dwelling units", "1": "one", "2": "two", "3-9": "three to nine",
+                "10-49": "ten to forty-nine", "50+": "fifty or more"}
+
+
+def jev(recs, permits, out, trim):
+    """Ask TypeSafe's Jev the same question: effect as a choice, net new dwellings as a bucket choice.
+    Jev returns numbers only (no reasons, no permit citations); key from llm's keys.json 'typesafe'."""
+    import urllib.request, concurrent.futures, time
+    key = json.load(open(Path.home() / "Library/Application Support/io.datasette.llm/keys.json")).get("typesafe")
+    if not key:
+        sys.exit("no typesafe key: run `llm keys set typesafe`")
+    q = {"effect": {"type": "choice", "instructions": "What does THIS permit's own scope do to the housing stock?\n" + DEFINITIONS,
+                    "criteria": EFFECTS},
+         "net_new_units": {"type": "choice", "instructions": "How many net new dwelling units does THIS permit's own scope add?\n" + DEFINITIONS,
+                           "criteria": UNIT_BUCKETS}}
+    def ask(p):
+        state = {k: v for k, v in recs[p].items() if not trim or k in TRIM}
+        body = json.dumps({"state": state, "model": "jev-latest", "questions": q}).encode()
+        for attempt in range(6):
+            try:
+                req = urllib.request.Request("https://api.typesafe.ai/v1/systemone", body,
+                        {"Authorization": f"Bearer {key}", "Content-Type": "application/json"})
+                return p, json.load(urllib.request.urlopen(req, timeout=60))
+            except urllib.error.HTTPError as e:
+                if e.code in (429, 529, 500, 502, 503): time.sleep(2 ** attempt); continue
+                return p, {"error": f"HTTP {e.code}"}
+            except Exception as e:
+                time.sleep(2 ** attempt); err = str(e)
+        return p, {"error": err}
+    rows, tin = [], 0
+    with concurrent.futures.ThreadPoolExecutor(8) as ex:
+        for p, r in ex.map(ask, permits):
+            if "answers" not in r:
+                rows.append({"permit": p, "error": r.get("error")}); continue
+            a = r["answers"]; tin += r.get("usage", {}).get("input_tokens", 0)
+            b = a["net_new_units"]["choice"]
+            rows.append({"permit": p, "model": r.get("model"), "effect": a["effect"]["choice"],
+                         "effect_confidence": a["effect"].get("confidence"), "units_bucket": b,
+                         "units_confidence": a["net_new_units"].get("confidence"),
+                         "dwellings_created": {"0": 0, "1": 1, "2": 2}.get(b), "dwellings_removed": 0,
+                         "confidence": a["effect"].get("confidence")})
+    (out / "answers.json").write_text(json.dumps(rows, indent=1))
+    ok = [r for r in rows if "error" not in r]
+    print(f"answered {len(ok)} of {len(rows)}; input tokens per permit {tin / max(len(ok), 1):.0f}; "
+          f"projected 32,897 permits: ${32897 * tin / max(len(ok), 1) * 0.042 / 1e6:.2f}")
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["submit", "status", "collect", "score"])
+    ap.add_argument("cmd", choices=["submit", "status", "collect", "score", "jev"])
     ap.add_argument("--permits"); ap.add_argument("--out", required=True); ap.add_argument("--eval")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--pack", type=int, default=1, help="permits per request")
+    ap.add_argument("--trim", action="store_true", help="send only housing-relevant fields, compact JSON")
     ap.add_argument("--no-rules", action="store_true", help="control run: omit DEFINITIONS to measure cold ability")
     a = ap.parse_args()
     out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
     state = out / "batch_state.json"
 
+    if a.cmd == "jev":
+        import pandas as pd
+        permits = list(dict.fromkeys(pd.read_csv(a.permits, dtype=str).permit))
+        recs = records(permits)
+        (out / "meta.json").write_text(json.dumps({"model": "jev-latest", "trim": a.trim}, indent=1))
+        return jev(recs, [p for p in permits if p in recs], out, a.trim)
+
     if a.cmd == "submit":
         import pandas as pd
         rules = "" if a.no_rules else DEFINITIONS
-        prompt_hash = hashlib.sha256(QUESTION.format(rules=rules, record="").encode()).hexdigest()[:12]
         permits = list(dict.fromkeys(pd.read_csv(a.permits, dtype=str).permit))
         recs = records(permits)
         missing = [p for p in permits if p not in recs]
-        reqs = [{"custom_id": re.sub(r"[^A-Za-z0-9_-]", "_", p),
-                 "params": {"model": MODEL, "max_tokens": 4000, "messages": [{"role": "user",
-                            "content": QUESTION.format(rules=rules, record=json.dumps(recs[p], indent=1))}]}}
-                for p in permits if p in recs]
+        def show(p):
+            r = {k: v for k, v in recs[p].items() if not a.trim or k in TRIM}
+            return json.dumps(r, separators=(",", ":")) if a.trim else json.dumps(r, indent=1)
+        have = [p for p in permits if p in recs]
+        groups = [have[i:i + a.pack] for i in range(0, len(have), a.pack)]
+        template = QUESTION if a.pack == 1 else PACKED
+        prompt_hash = hashlib.sha256((template + rules + f"trim={a.trim}").encode()).hexdigest()[:12]
+        reqs, ids = [], {}
+        for i, g in enumerate(groups):
+            cid = re.sub(r"[^A-Za-z0-9_-]", "_", g[0]) if a.pack == 1 else f"g{i:05d}"
+            text = (QUESTION.format(rules=rules, record=show(g[0])) if a.pack == 1 else
+                    PACKED.format(n=len(g), rules=rules, records="\n".join(show(p) for p in g)))
+            reqs.append({"custom_id": cid, "params": {"model": MODEL, "max_tokens": 4000 * min(a.pack, 4),
+                         "messages": [{"role": "user", "content": text}]}})
+            ids[cid] = g
         (out / "meta.json").write_text(json.dumps({"model": MODEL, "prompt_hash": prompt_hash, "rules": not a.no_rules,
-            "ids": {r["custom_id"]: p for r, p in zip(reqs, [p for p in permits if p in recs])},
-            "records": recs, "missing": missing}, indent=1))
+            "pack": a.pack, "trim": a.trim, "ids": ids, "records": recs, "missing": missing}, indent=1))
         print(f"{len(reqs)} requests, {len(missing)} permits with no record {missing[:10]}; prompt {prompt_hash}, rules={not a.no_rules}")
         if a.dry_run:
             print(reqs[0]["params"]["messages"][0]["content"][:3000]); return
@@ -111,18 +201,30 @@ def main():
     elif a.cmd == "collect":
         import anthropic
         meta = json.loads((out / "meta.json").read_text())
-        rows, bad = [], []
+        rows, bad, tin, tout = [], [], 0, 0
         for r in anthropic.Anthropic(api_key=api_key()).messages.batches.results(json.loads(state.read_text())["batch_id"]):
-            p = meta["ids"][r.custom_id]
+            ps = meta["ids"][r.custom_id]
+            ps = ps if isinstance(ps, list) else [ps]
             if r.result.type != "succeeded":
-                bad.append({"permit": p, "why": r.result.type}); continue
+                bad += [{"permit": p, "why": r.result.type} for p in ps]; continue
+            tin += r.result.message.usage.input_tokens; tout += r.result.message.usage.output_tokens
             txt = "".join(b.text for b in r.result.message.content if getattr(b, "type", "") == "text")
-            m = re.search(r"\{.*\}", txt, re.S)
+            m = re.search(r"\[.*\]" if len(ps) > 1 or meta.get("pack", 1) > 1 else r"\{.*\}", txt, re.S)
             try:
                 got = json.loads(m.group(0))
             except Exception:
-                bad.append({"permit": p, "why": "unparseable", "text": txt[:300]}); continue
-            rows.append({"permit": p, "model": meta["model"], "prompt_hash": meta["prompt_hash"], **got})
+                bad += [{"permit": p, "why": "unparseable", "text": txt[:300]} for p in ps]; continue
+            if isinstance(got, dict):
+                got = [dict(got, permit=ps[0])]
+            byp = {g.get("permit"): g for g in got if isinstance(g, dict)}
+            for p in ps:
+                if p in byp:
+                    rows.append({**byp[p], "permit": p, "model": meta["model"], "prompt_hash": meta["prompt_hash"]})
+                else:
+                    bad.append({"permit": p, "why": "missing from packed answer"})
+        n = len(rows) or 1
+        print(f"tokens per answered permit: input {tin / n:.0f}, output {tout / n:.0f}; "
+              f"projected 32,897 permits on Batch: ${32897 * (tin / n * 1.0 + tout / n * 5.0) / 1e6:.0f}")
         (out / "answers.json").write_text(json.dumps(rows, indent=1))
         print(f"parsed {len(rows)}  failed {len(bad)}")
         if bad:
@@ -139,11 +241,18 @@ def main():
                 res.append((e.permit, e.truth_kind, e.truth, None, None, "no answer", "")); continue
             made = int(g.get("dwellings_created") or 0) - int(g.get("dwellings_removed") or 0)  # net
             creates = g.get("effect") == "creates" and int(g.get("dwellings_created") or 0) > 0
+            if g.get("units_bucket") is not None:
+                creates = g.get("effect") == "creates" and g["units_bucket"] != "0"
             if e.truth_kind == "v2_completion":
                 if e.truth == "ambiguous":
                     ok = None
                 else:
                     ok = creates == (e.truth == "completes")
+            elif g.get("units_bucket") is not None:   # Jev answers a range, not a count
+                t = int(float(e.truth)); lo, hi = {"0": (0, 0), "1": (1, 1), "2": (2, 2), "3-9": (3, 9),
+                                                    "10-49": (10, 49), "50+": (50, 10**6)}[g["units_bucket"]]
+                ok = lo <= t <= hi
+                creates = g.get("effect") == "creates" and hi > 0
             else:
                 ok = made == int(float(e.truth))
             res.append((e.permit, e.truth_kind, e.truth, g.get("effect"), made, ok, g.get("confidence")))

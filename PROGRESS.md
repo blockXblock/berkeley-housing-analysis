@@ -132,6 +132,18 @@ BEFORE adding 286 rows on top; (2) then the rung-3 `--commit`. DBs are `chmod a-
 
 ---
 
+## 2026-09-27 — Disk headroom (boot disk ~5.8 GB free; tour recorder wants >= 20)
+
+Done: 7 scratch v4 DB copies deleted (identical to live v4 / snapshot); `.venv-new` (stale copy) and `.venv-old`
+(py3.12, pre-consolidation) deleted — active `.venv` verified. Free: 5.8 -> 7.4 GB.
+**PENDING (John approved "all four"): move to `/Volumes/T7-2025/berkeley-data-archive/`** the 120 June-Aug
+`databases/keep_snapshot_2026-0[678]-*.db` (2.6 GB) and pre-September `scratch/2026-0[678]*` (~1 GB): copy,
+verify SHA-256 per file on the T7, then remove from the Mac. BLOCKED: writes to T7 give "Operation not permitted"
+(known: iTerm updated on disk while running -> relaunch iTerm, then retry). Remaining disk use is outside the repo
+(`~/cleanup_report/cleanup_report.md`).
+
+---
+
 ## 2026-09-26b — Build inputs declared and refreshed to the July productions (John adopted)
 
 JN-A reads exactly three files, SHA-256 pinned: the 2026-07-07 NextRequest 26-1971 productions (2018-22 and 2023-25

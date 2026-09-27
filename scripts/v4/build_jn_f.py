@@ -80,53 +80,14 @@ print(f"CO -> {ledger[-1][1]:,}")
 """)
 
 md(r"""
-## §3 — C2: the multifamily count-gap recovery (calibration: `c2_count_recovery.csv`)
-**The error.** Big multifamily permits classified `new_unit` master but with **NULL `net_units`** —
-the structured unit fields were blank, and `net_units` is prose-blind by design. Their counts exist
-in the WorkDescription ("...a 152 dwelling unit mixed use building..."). **The method.** Set
-`net_units` from the CALIBRATION's curated, noun-anchored recovered counts. **T1** = plain dwelling
-counts; **T2** = convention-dependent (live-work / sleeping-room) counts, flagged
-`convention_dependent=true` in the basis note. `B2020-03895` stays EXCLUDED (held, per calibration).
-**Provenance rule:** every count comes from the permit's own description — never the city APR.
-""")
-code(r"""
-print(M.apply_c2(con))
-ledger.append(("C2 count-gap recovery (T1+T2)", M.co_total(con)))
-print(f"CO -> {ledger[-1][1]:,}")
-""")
-
-md(r"""
-## §4 — C3: phantom-master + ADU-tail (calibrations: `c3_shattuck_collapse.csv`, `c3_tail_demote_list.json`)
-**Phantom-master (1951 Shattuck).** Two 163-unit permits are ONE 12-story building in two phases —
-demote Phase 2 to `subsidiary/0` (count-once). **ADU-tail.** 17 ancillary permits (solar / meter /
-panel / service) mis-promoted to `new_unit=1` on ADU parcels — demote each, **PROTECT-asserting the
-paired real ADU is still counted** (the shadow-vs-real-pair rule: this stage must never erase a real
-building).
-""")
-code(r"""
-print(M.apply_c3_shattuck(con))
-ledger.append(("C3 Shattuck phantom-master", M.co_total(con)))
-print(f"CO -> {ledger[-1][1]:,}")
-print(M.apply_c3_tail(con))
-ledger.append(("C3 ADU-tail ancillary demotions", M.co_total(con)))
-print(f"CO -> {ledger[-1][1]:,}")
-""")
-
-md(r"""
-## §5 — C-multifamily: phased-building collapse (calibration: `c_multifamily_collapse.csv`)
-**The error (systematic, both directions).** The classifier handles phased multifamily
-inconsistently: sometimes BOTH phases → `new_unit` (over-count — fixed here), sometimes the
-completion → `ambiguous` (under-count — **HELD**, §6). One rule fixes both: **one building, one
-count, at the unit-bearing completion phase.** **Protection guard:** every demote target's own
-WorkDescription must read as sitework (foundation/podium/grading) — a completion can never be
-demoted by this method. The bump row re-homes the C2-T2 convention flag (40→41 manager unit) —
-the reason this stage runs AFTER C2.
-""")
-code(r"""
-print(M.apply_c_multifamily(con))
-ledger.append(("C-multifamily phase-collapse", M.co_total(con)))
-print(f"CO -> {ledger[-1][1]:,}")
-con.commit()
+## §3–§5 — RETIRED 2026-09-26: the regex-era correction layers (C2, C3 Shattuck, C3 ADU-tail, C-multifamily)
+These four layers patched specific errors of the regex classifier (NULL counts on big multifamily permits,
+phantom phase masters, ancillary ADU permits counted as dwellings, both phases of a building counted).
+Since 2026-09-26 JN-C classifies from the MODEL-READ evidence (`housing_rules.permit_effect`, HCD
+definitions), which gets 38 of their 43 targets right directly (review:
+`scratch/2026-09-26_tierB/refused_layers_review.csv`); the rest are John's ledger rulings (§5b) or the
+buildings stage (open: Logan Park South counted twice, +69). Their methods and calibration files are in
+`scripts/superseded/` and `corrections/v4/superseded/`.
 """)
 
 md(r"""
@@ -253,10 +214,7 @@ from IPython.display import Markdown, display
 steps = "\n".join(
     f'  C{i}[/"{f}"/] -.-> F{i}["{m}"] --> DB' for i, (f, m) in enumerate([
         ("dedup47_permits.csv", "apply_dedup47"),
-        ("c2_count_recovery.csv", "apply_c2 (T1+T2)"),
-        ("c3_shattuck_collapse.csv", "apply_c3_shattuck"),
-        ("c3_tail_demote_list.json", "apply_c3_tail"),
-        ("c_multifamily_collapse.csv", "apply_c_multifamily"),
+        ("grounded_counts.csv", "apply_grounded_counts (John's rulings)"),
     ]))
 display(Markdown(f'''```mermaid
 flowchart LR
@@ -264,7 +222,7 @@ flowchart LR
 {steps}
   DB --> JNE["JN-E reconciliation"]
   classDef calib fill:#ffd,stroke:#b90;
-  class C0,C1,C2,C3,C4 calib;
+  class C0,C1 calib;
 ```'''))
 print("every arrow into DB is a method reading a VERSIONED calibration — none reads the city APR.")
 """)

@@ -132,6 +132,20 @@ BEFORE adding 286 rows on top; (2) then the rung-3 `--commit`. DBs are `chmod a-
 
 ---
 
+## 2026-09-26 — v4 build classifies from model evidence; four regex-era layers retired (John, `212b0ab`)
+
+JN-C default = model-read evidence (HCD definitions); JN-F = dedup47 + ledger (192 rulings) only. C2, C3 Shattuck,
+C3 ADU-tail, C-multifamily -> `scripts/superseded/v4__stage_methods_regex_layers.py`, `corrections/v4/superseded/`.
+**New baseline 2026-09-26** (July kept): completions 4,229 -> **4,072**, BP issued 3,945 -> **5,144** (old chain set
+recovered counts on the finaled event only, so large buildings were missing from the issued side). JN-C + JN-F
+reproduce it from raw (GATE PASS). **Structural gate halts vs the LIVE v4 DB** — locked, still regex state; rebuilding
+it is a gated write for John. **Open:** Logan Park South +69 double (buildings stage — needs John's go to 32); 47 units
+on 40 permits with no counted parent; 2000 Dwight held; permit_role.classify still used by multiunit_master_list,
+derive_co_from_inspections, JN-D/I/J, ingest_cpra_2026; JN-C prose still describes the regex; the build's CPRA glob
+still matches all five files (the 4,072 was computed on the two May files).
+
+---
+
 ## 2026-09-26 — HCD definitions adopted; every permit re-read; ledger amended (John)
 
 **Definitions = HCD's APR FAQ** (`scripts/housing_rules/reading_rules.py`): separate living quarters; group

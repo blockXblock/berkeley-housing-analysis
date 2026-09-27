@@ -125,9 +125,21 @@ def jev(recs, permits, out, trim):
             except Exception as e:
                 time.sleep(2 ** attempt); err = str(e)
         return p, {"error": err}
-    rows, tin = [], 0
+    log = out / "answers.jsonl"   # appended as answers arrive, so a long run can resume where it stopped
+    done = {}
+    if log.exists():
+        for line in log.read_text().splitlines():
+            r = json.loads(line)
+            if "error" not in r:
+                done[r["permit"]] = r
+    todo = [p for p in permits if p not in done]
+    print(f"{len(done)} already answered, {len(todo)} to ask")
+    rows, tin = list(done.values()), 0
+    fh = open(log, "a")
     with concurrent.futures.ThreadPoolExecutor(8) as ex:
-        for p, r in ex.map(ask, permits):
+        for i, (p, r) in enumerate(ex.map(ask, todo), 1):
+            if i % 1000 == 0:
+                print(f"  {i}/{len(todo)}", flush=True)
             if "answers" not in r:
                 rows.append({"permit": p, "error": r.get("error")}); continue
             a = r["answers"]; tin += r.get("usage", {}).get("input_tokens", 0)
@@ -137,6 +149,8 @@ def jev(recs, permits, out, trim):
                          "units_confidence": a["net_new_units"].get("confidence"),
                          "dwellings_created": {"0": 0, "1": 1, "2": 2}.get(b), "dwellings_removed": 0,
                          "confidence": a["effect"].get("confidence")})
+            fh.write(json.dumps(rows[-1]) + "\n"); fh.flush()
+    fh.close()
     (out / "answers.json").write_text(json.dumps(rows, indent=1))
     ok = [r for r in rows if "error" not in r]
     print(f"answered {len(ok)} of {len(rows)}; input tokens per permit {tin / max(len(ok), 1):.0f}; "

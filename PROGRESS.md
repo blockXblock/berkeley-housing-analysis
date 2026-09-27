@@ -8,6 +8,57 @@
 
 ---
 
+## 2026-09-26 — CapDetail harvest: rung 3 (application ACCEPTED) becomes a dated fact
+
+**Why:** filed→accepted had never been a fact in v2 — it was inferred from a list-view Status string,
+and this session had described the interval as uncomputable. It is published. Every Planning record's
+CapDetail carries PROCESSING STATUS: each department review task, **the due date the city set itself**,
+the disposition, the date marked, and the staff member who marked it. Both dates means city performance
+can be measured against the city's own deadline — the historical baseline for the ministerial shift.
+
+**Running (read-only, nothing written to any DB):** 1,746 housing Planning records (the `DEV`+`HOUSING`
+filter **imported** from `ingest_planning_scope_a.py`, not retyped; 100% have a `capdetail_href`).
+~2h at 4.2s/rec into `scratch/2026-09-26_capdetail/` — `pages/<record>.html.gz` is the durable artifact,
+the parsed JSONL is derived. Coverage before this: 14,936 capIDs held, ~95 visited, all by hand.
+
+**New machinery:** `scripts/parse_capdetail.py` · `harvest_capdetail.py` · `reparse_capdetail.py` ·
+`summarize_capdetail.py`. Full write-up + the four measured traps:
+`docs/audit/2026-09-26_capdetail_harvest.md`.
+
+**Validated, not eyeballed:** parse == the hand-captured ground truth for ZP2021-0046 exactly (6
+dispositions, 0 missing, 0 extra). That file holds **6 records** at the address, not one.
+
+**Two findings that bear on other work:**
+- **Finaled ≠ completed.** The CO workflow task carries NO disposition even on finaled buildings;
+  `Inspection → Finaled` does. But `B2018-04001` is a **demolition** and finals identically. Finaled =
+  the permitted WORK finished; what it completed is the ADR-002 verdict layer's business. Treating
+  Finaled as completion is the 1914 Fifth Street error in a new place.
+- **Related Records is thin** (1 of 10 on first sample; ZP2021-0046 reads "No records found"). If that
+  holds, the ZP→BP bridge is NOT there and permit-to-permit cross-references are the only non-APN edge
+  for the build's structures stage. Measured rate over all 1,746 to follow — not estimated from ten.
+
+**Next:** finish harvest → reparse → rung-3 numbers → **read-only preview of the `application_accepted`
+events, then STOP for John.** DBs are `chmod a-w`; no write attempted.
+
+---
+
+## 2026-09-26 — Every permit read by model: Jev (all) + Sonnet (the 4,747 that need reasoning)
+
+**Evidence file:** `scratch/2026-09-26_llm_permit_eval/permit_effect_evidence_2026-09-26.json` — 32,897 permits
+(all unique CPRA permits): Jev effect + confidence + unit range for every permit; Sonnet effect, net dwellings,
+parent_permit, cites, reason for 4,747 routed (Jev said creates/demolishes/subpermit, any units, or confidence
+<0.8, excluding numbered -REV/-DEF children whose parent is in the permit number). 0 errors either engine.
+**Cost:** Jev $1.66 measured + Sonnet ≈ $7.50 vs ≈ $52 all-Sonnet. Jev eval: category 183/189 vs Sonnet 184/189;
+found Sonnet's 5/5 hidden dwellings in 1,000 alterations. Code: `scripts/llm_permit_effect.py` (`f339acb` + resume).
+**Result, per PERMIT (not yet per building, no ledger applied):** 1,174 permits create dwellings (5,444 gross);
+finaled 2018–2025: 830 permits, **3,940 net units** vs v2 4,225 / v3 4,310 / v4 4,229 — the gap is expected to be
+building-level (phases, expired completion permits, ledger rulings) and is the structures stage's to reconcile.
+847 Sonnet answers link to another permit (edges for 32's structures stage).
+**NEXT:** retirement list of regex classifiers (file by file, for John's approval); 32 builds structures on the
+edges; Jev on the CapDetail harvest awaits John's direct approval to 32 (pathway, is-housing, Void/Continued comments).
+
+---
+
 ## 2026-09-26 — Classify permits by MODEL, not regex · agreed division of work (3c + 32)
 
 **Result (205 human-ruled permits: 190 grounded_counts + 18 v2 human verdicts + traps; claude-sonnet-5, Batch):**

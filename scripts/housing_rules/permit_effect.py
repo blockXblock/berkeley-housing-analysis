@@ -1,8 +1,8 @@
 """permit_effect.py — what each permit does to housing, READ BY A MODEL, as a lookup.
 
-Replaces the regex classifier (permit_role.classify / net_units) as the source of a permit's housing
+Replaces the regex classifier (permit_role.classify / net_units, now scripts/superseded/housing_rules__permit_role.py) as the source of a permit's housing
 role. The answers were produced once and stored as evidence (data/derived/permit_effect_evidence_*.json):
-Jev (TypeSafe) read every permit; Claude Sonnet 5 read the 4,747 that needed reasoning (Jev said
+Jev (TypeSafe) read every permit; Claude Sonnet 5 read the 5,773 that needed reasoning (Jev said
 creates / demolishes / subpermit, any units, or confidence < 0.8). Numbered -REV/-DEF children take
 their parent from the permit number. Nothing here calls a model; re-reading is a deliberate, versioned
 re-run (scripts/llm_permit_effect.py), never a side effect of a build.

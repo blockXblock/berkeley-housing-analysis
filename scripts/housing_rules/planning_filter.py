@@ -3,7 +3,7 @@ r"""planning_filter.py -- which Accela PLANNING records are housing-development 
 THE CANONICAL HOME for the DEV + HOUSING pair. Lifted here 2026-09-26 from
 scripts/migration/ingest_planning_scope_a.py, where it lived as module-level regexes inside an
 applied one-time write -- the same "drift to where nothing imports it" shape that CLAUDE.md records
-for permit_role. Two consumers now import it: the CapDetail harvest queue and that ingest.
+for the (now superseded) permit_role. Two consumers now import it: the CapDetail harvest queue and that ingest.
 
 ⚠ WHY IT HAD TO MOVE: the original HOUSING pattern had a FALSE NEGATIVE that cost a real project.
 

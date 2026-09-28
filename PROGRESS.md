@@ -132,6 +132,29 @@ BEFORE adding 286 rows on top; (2) then the rung-3 `--commit`. DBs are `chmod a-
 
 ---
 
+## 2026-09-28 — Regex permit classifier RETIRED (step 1 complete)
+
+Every consumer of `housing_rules.permit_role.classify` was switched to the model-read evidence
+(`housing_rules.permit_effect`, HCD definitions) one at a time, each compared before and after:
+`multiunit_master_list` (`9d2913b`, census 287 → 309 projects), `derive_co_from_inspections` (`3a57761`),
+`adu_mh_cohort` (`b3fb851`, 874 → 868 ADU parcels), JN-I (`f836219`, new baseline), JN-J (`00f4c97`,
+new baseline), JN-C's display cells (`62ec2fd`) and `stage_methods.classify_all`'s unused regex branch
+(`d2c0bbf`). JN-D and the one-time 2026 v2 ingest were sequestered (`f46a3b6`; `26cb42f` untracked five
+files that commit swept in). Then `permit_role.py` + `test_permit_role.py` moved to
+`scripts/superseded/housing_rules__*.py` (SystemExit banners); `housing_rules` no longer exports
+`classify`/`net_units`; `gate_canon_uniqueness` now names `permit_effect.py` as the one home of "permit role".
+**Verified each step by the chain from raw:** JN-A 4/4, conservation verifier PASS, baseline gate
+4,323 / 5,288, structural gate PASS vs live; 50 unread events unchanged (inspections on permits absent
+from the CPRA feed). Smoke tests pass.
+
+**Still regex, deliberately:** the v3 curriculum (`scripts/build_v2/`, `housing_predicates`, `cpra_dedup`) —
+teaching material, Tier C. v2's `@112cb03` verdict layer is a separate, older classifier.
+**Found, not fixed:** `gate_canon_uniqueness` FAILS on "housing filter" — four applied one-time migration
+scripts (`ingest_planning_scope_a`, `preview_accela_planning_ingest`, `ingest_master_permits_log_2026`,
+`fix_planning_filter_gap`) still carry their own `HOUSING` regex. Pre-existing; candidates to sequester.
+
+---
+
 ## 2026-09-28 — Affordability tiers sourced · `corrections/v4/affordability_rulings.csv`
 
 v2's 47 affordable-tier rows sorted by sourcing. **Approved (12 rows, 255 units):** group A (10 rows, 180u, checked in

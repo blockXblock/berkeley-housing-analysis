@@ -1,3 +1,11 @@
+# ============================ SEQUESTERED 2026-09-28 ============================
+# DO NOT RUN. Original home: scripts/housing_rules/permit_role.py.
+# WHY: the regex housing-role classifier. Replaced by model-read evidence under HCD's definitions
+# (scripts/housing_rules/permit_effect.py); its last consumers were switched one at a time, each
+# compared before and after (JN-C, stage_methods, JN-I, JN-J, multiunit_master_list,
+# derive_co_from_inspections, adu_mh_cohort). John approved retiring it 2026-09-26 ("go, step 1").
+raise SystemExit("SEQUESTERED 2026-09-28 -- regex permit classifier; see header")
+# ================================================================================
 """permit_role — the v4 housing-role classifier, lifted to an importable home.
 
 WHY THIS FILE EXISTS (the "drift pattern" fix, June-18 audit): the `classify` rule-engine + its

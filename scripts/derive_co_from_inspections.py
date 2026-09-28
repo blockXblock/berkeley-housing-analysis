@@ -53,7 +53,8 @@ CO_ROLES = {"new_unit"}
 # final_but_not_housing — Logan Park North (B2019-05574, 237u) and 1752 Shattuck (B2023-00774, 72u) —
 # both carrying verdict='completes' with EVIDENTIARY basis.
 # Root cause is NOT inspection coverage (both permits have 557 and 580 inspection rows): it is
-# housing_rules.permit_role.classify. B2023-00774 carries a dirty ADU='Yes' flag on a 72-unit building,
+# housing_rules.permit_role.classify (the regex classifier, superseded 2026-09-28; roles now come
+# from housing_rules.permit_effect). B2023-00774 carries a dirty ADU='Yes' flag on a 72-unit building,
 # and RULE 5 discards UnitsAdded=72 / NumberUnits=72 / OccType R-2 to return 'ambiguous'. B2019-05574
 # has UnitsAdded blank but NumberUnits=135, which classify never reads. 150 of 726 New+R-2/R-3 primary
 # permits are affected. That defect is in shared canon code and is NOT patched here.

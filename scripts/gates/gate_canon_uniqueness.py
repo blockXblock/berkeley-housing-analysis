@@ -36,6 +36,16 @@ CANON = {
     "housing filter": ("scripts/housing_rules/planning_filter.py",
                        r"HOUSING\s*=\s*re\.compile",
                        "a plural blindness here excluded a 166-dwelling project"),
+    "model reading call": ("scripts/model_readers.py",
+                          # Match the ENDPOINT, not my own function name. The first version of this
+                          # pattern looked for `def jev_ask(` or `Request(JEV_URL)` -- neither of
+                          # which appears in llm_permit_effect.py, the very copy the exception below
+                          # names. So the gate passed while the second copy sat there unmatched: a
+                          # check that cannot fire, reported as green. Any module that talks to
+                          # TypeSafe must name the endpoint, so the endpoint is what to match.
+                          r"api\.typesafe\.ai",
+                          "asking a model to read a record: one home for the call, the retry ladder "
+                          "and the resumable log, so a second question does not fork a third copy"),
     "building label": ("scripts/housing_rules/building_label.py",
                        r"_DESIG_LETTER\s*=\s*re\.compile",
                        "which building a permit belongs to; 'Building a new house' is not Building A"),
@@ -43,6 +53,15 @@ CANON = {
 # Known copies OUTSIDE live machinery, each named with its reason (John, 2026-09-28). Named files, not
 # skipped folders: a NEW copy anywhere, including these folders, still fails.
 ALLOWED = {
+    # llm_permit_effect.py has the ORIGINAL inline Jev call, which produced the adopted evidence file
+    # (32,897 permits, 2026-09-26). It is named rather than rewritten: re-plumbing a script whose
+    # output is already adopted, for a task that does not need it, risks a regression in load-bearing
+    # machinery. Point it at model_readers when it is next touched for its own reasons. A THIRD copy
+    # anywhere still fails this gate, which is the point.
+    "model reading call": {
+        "scripts/llm_permit_effect.py": "the original inline Jev call; produced the adopted "
+                                        "permit_effect evidence -- repoint when next edited",
+    },
     "address key": {
         "modules/address_normalizer.py": "the Feb-2026 teaching notebooks' package (01_collection-03_analysis)",
         "scripts/build_v2/s0_keys.py": "the v3 curriculum's internal keying; never imported by live code",

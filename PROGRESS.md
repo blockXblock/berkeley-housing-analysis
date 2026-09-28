@@ -291,10 +291,48 @@ here — `market_units` also went to 0 because the 309 ABOVE_MOD half was the sa
 The write was transactional with per-row `rowcount==1`, refused unless each row still held the category it was
 written against, and verified `vli=0 / total=618` before commit.
 
-**⚠ THE SERVED SITE STILL SHOWS THE OLD FIGURES.** `docs/explorer_data.js` was promoted before this write AND
-before the parcel fix (`b2cb743`), so the public explorer still carries proj151's 309 VLI, the
-`"618 units, 50% affordable"` description and the old APN `053 165200105`. A regenerate + promote clears all
-three at once — John's call.
+**Scope confirmed:** John, verbatim "yes, include the description rewrite" (relayed 2026-09-28) — which is what
+was applied, so nothing to redo.
+
+**REGENERATED, NOT PROMOTED.** `docs/explorer_data_v2_working.js` rebuilt from the corrected DB. The projects
+diff is exactly one row and exactly the four expected fields:
+`proj151  apn 053 165200105 -> 053-1597-039-04 · vli_units 309 -> 0 · market_units 309 -> 0 · description
+rewritten`. Everything else in the projects array is byte-identical (1,099 projects, 2,254 documents,
+developers 21 / architects 15 / owners 840 all unchanged). The served `docs/explorer_data.js` is untouched —
+promotion is John's.
+
+---
+
+## 2026-09-28 — ⚠ Nine scripts were published as members of Berkeley's planning staff (`69926f1`)
+
+Found while diffing the regenerated export, and **pre-existing — 8 of the 9 are on the live site now.**
+The public Staff list is built from `project_events.observed_by`, which means *the person who marked this*.
+Every ingest and fix we run stamps its own provenance token there, and the filter for that was **a list of ONE
+known name** (`migration_v1_to_v2_20260507`), hard-coded in two places. So every machine attribution written
+since 2026-05 has been published as staff:
+
+| actions | projects | published as a person |
+|---|---|---|
+| 1,264 | 625 | `derive_inspection_events@2026-09-25` |
+| 1,188 | 381 | `accela_planning_list_ingest@2026-09-25` |
+| 290 | 202 | `permit_role_classifier@4eb77df+cpra_2026_ingest` |
+| 289 | 289 | `capdetail_harvest@2026-09-26` |
+| 78 | 63 | `cpra_master_permits_log_2026_ingest` |
+| 18 | 14 | `planning_filter_gap_fix@2026-09-26` |
+| 3 | 1 | `CC entitlement-event ingest 2026-07-10 (John-approved)` |
+| 2 | 2 | `accela_verified` · `cc_bucket2_20260614` |
+
+`derive_inspection_events` was **the most active "person" on the public site**, ahead of every real planner.
+
+**A named list of one cannot keep up with writes it has never seen; a predicate can.**
+`is_machine_attribution()` now serves BOTH consumers (the staff aggregation and the per-event display) and is
+tested against all 10 machine shapes we have produced (`name@date`, `name@sha`, snake_case, bare `20YYMMDD`, the
+words ingest/migration/classifier) and 15 real staff spellings (`Allison Riemer`, `MJ PSC`, `ADM`, `Timothy`):
+**10/10 caught, 0/15 false positives.** After: 83 real names topped by `ADM` at 153 actions, and **zero events
+name a machine as staff.** Nothing else in the export moves.
+
+**ROOT CAUSE, named and left for a later step:** our writes should stamp provenance in `asserted_by`, not in a
+column that means a person. The predicate stops the leak; it does not fix the semantics.
 
 **Also noticed:** the served `docs/explorer_data.js` still carries proj151's OLD APN `053 165200105` (1099 Ashby
 Ave) — the promotion predates the parcel fix (`b2cb743`). It corrects itself at the next export + promotion,

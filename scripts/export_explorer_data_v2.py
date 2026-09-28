@@ -13,6 +13,7 @@ It queries ALL tables in the database to ensure no data is lost:
 Usage: python scripts/export_explorer_data.py
 """
 
+import re
 import sqlite3
 import json
 from datetime import datetime
@@ -415,9 +416,8 @@ def get_events(conn):
     for row in cursor.fetchall():
         project_id, address, permit, event_type_code, summary, event_date, observed_by, details, new_status, permit_type = row
 
-        # Filter out migration-attributed staff name (synthesized events have no real observer)
-        is_migration = (observed_by == 'migration_v1_to_v2_20260507')
-        display_staff = None if is_migration else observed_by
+        # A synthesized event has no real observer, so it must not name one (is_machine_attribution).
+        display_staff = None if is_machine_attribution(observed_by) else observed_by
 
         # Map v2 event_type code to a stage label (broader category for grouping/display)
         stage_label_map = {
@@ -555,6 +555,34 @@ def get_fees(conn, projects):
         "avg_per_unit": avg_per_unit
     }
 
+# ---------------------------------------------------------------- who counts as a PERSON
+# `project_events.observed_by` means "the person who marked this" -- it is what the public Staff and
+# Players lists are built from. But every ingest and fix we run stamps its own provenance token there,
+# and the filter for that was a LIST OF ONE known name ('migration_v1_to_v2_20260507'), hard-coded in
+# two places. So every machine attribution added since 2026-05 has been published as a member of
+# Berkeley's planning staff: measured 2026-09-28, 9 of 93 "staff", led by
+# `derive_inspection_events@2026-09-25` with 1,264 actions across 625 projects -- the most active
+# "person" on the public site. A named list of one cannot keep up with writes it has never seen; a
+# PREDICATE can. Shapes observed, all ours: `name@2026-09-25`, `name@4eb77df+cpra_2026_ingest`,
+# `cpra_master_permits_log_2026_ingest`, `cc_bucket2_20260614`, `migration_v1_to_v2_20260507`,
+# `CC entitlement-event ingest 2026-07-10 (John-approved)`.
+# Real staff read `Allison Riemer`, `MJ PSC`, `ADM`, `Timothy` -- no @, no snake_case, no bare date.
+# ROOT CAUSE, for a later step: our writes should stamp provenance in `asserted_by`, not in a column
+# that means a person. This predicate stops the leak; it does not fix the semantics.
+_MACHINE = re.compile(
+    r"@\d{4}-\d{2}-\d{2}"          # name@2026-09-25
+    r"|@[0-9a-f]{7,}"                # name@4eb77df
+    r"|\b20\d{6}\b"                # cc_bucket2_20260614
+    r"|\b(?:ingest|migration|classifier)\b"
+    r"|^[a-z0-9]+(?:_[a-z0-9]+)+$",  # snake_case token, never a person's name
+    re.I)
+
+
+def is_machine_attribution(name) -> bool:
+    """True when this observed_by is a script's provenance stamp, not a person."""
+    return bool(name) and bool(_MACHINE.search(str(name).strip()))
+
+
 def get_staff(conn):
     """Get staff activity from v2 project_events.observed_by.
 
@@ -592,7 +620,6 @@ def get_staff(conn):
             COUNT(DISTINCT project_id) as projects
         FROM project_events
         WHERE observed_by IS NOT NULL
-          AND observed_by != 'migration_v1_to_v2_20260507'
         GROUP BY observed_by
     ''')
 
@@ -629,7 +656,7 @@ def get_staff(conn):
         # Drop placeholders, empty, and comment-template strings
         if not norm or norm.lower() == 'unknown':
             continue
-        if is_comment_template(norm):
+        if is_comment_template(norm) or is_machine_attribution(norm):
             continue
         if norm not in normalized:
             normalized[norm] = {"actions": 0, "projects": 0}

@@ -45,7 +45,7 @@ PASSING = "Approved"                      # NOT 'Partially Approved', NOT 'Site 
 # DEMOLITION, a site-work demo and a parking-lot grading permit — all finaled in 2017, none of them a
 # 257-unit building becoming occupiable. Measured across the harvest: 19 of 834 permits producing an
 # approved Building Final are demolition/non-housing, 93 are alterations, 58 ambiguous.
-# Only housing_rules.permit_role.classify == 'new_unit' sets a date; the rest are reported, not used.
+# Only a model-read role == 'new_unit' (housing_rules.permit_effect) sets a date; the rest are reported, not used.
 CO_ROLES = {"new_unit"}
 
 # VERDICT OVERRIDE (2026-09-23, after a peer session flagged proj179/proj164). The role gate must never
@@ -71,11 +71,13 @@ def _iso(s):
 
 
 def permit_roles():
-    """permit -> role, from the CPRA feed where the permit is in it, else the census description."""
+    """permit -> role, from the model-read evidence (housing_rules.permit_effect, HCD definitions).
+    Replaced the regex 2026-09-28. Permits the model has not read (census-only, after the declared CPRA
+    inputs) get 'not_read' -- reported, never guessed from their description."""
     import pandas as pd, warnings
     warnings.filterwarnings("ignore")
     sys.path.insert(0, str(ROOT / "scripts"))
-    from housing_rules.permit_role import classify
+    from housing_rules.permit_effect import permit_effect
     from multiunit_master_list import load_census
     cp = pd.concat([pd.read_excel(f, header=7) for f in
                     glob.glob(str(ROOT / "data/raw/cpra-downloads/BP_Annual*.xlsx"))]
@@ -83,15 +85,8 @@ def permit_roles():
     census = load_census("Building", "Permit Number")
     roles = {}
     for pn in set(cp.index) | set(census):
-        if pn in cp.index:
-            r = cp.loc[pn]
-            if getattr(r, "ndim", 1) > 1:
-                r = r.iloc[0]
-            roles[pn] = classify(r.get("Work Type"), r.get("WorkDescription"), r.get("ADU"),
-                                 r.get("OccType"), r.get("UnitsAdded"), r.get("UnitsRemoved"), pn)[0]
-        else:
-            roles[pn] = classify(None, (census.get(pn) or {}).get("Description"),
-                                 None, None, None, None, pn)[0]
+        got = permit_effect(pn)
+        roles[pn] = got[0] if got else "not_read"
     return roles
 
 

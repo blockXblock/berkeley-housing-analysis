@@ -144,8 +144,26 @@ def sonnet(cmd: str, recs: dict, conf_floor: float, pack: int, dry: bool) -> int
     import re as _re
     state = OUT / "sonnet_batch_state.json"
     ids_path = OUT / "sonnet_ids.json"
+    answers_path = OUT / "sonnet_answers.json"
+
+    def already() -> set:
+        """records ALREADY answered and stored -- never re-asked.
+
+        Learned the expensive way: the first submission capped max_tokens at 400 per record, 64 of
+        260 groups stopped at max_tokens (some returning NO text at all), and 658 of 2,594 records
+        came back unparseable. Without a resume the retry would re-ask all 2,594 and pay for the
+        1,936 that were already good. Same rule as the Jev runner: an errored row is not done, and a
+        done row is never asked twice."""
+        try:
+            return {r["record"] for r in json.loads(answers_path.read_text()) if r.get("sonnet_scope")}
+        except Exception:
+            return set()
+
     if cmd == "submit":
-        want = [n for n in low_confidence(conf_floor) if n in recs]
+        have = already()
+        want = [n for n in low_confidence(conf_floor) if n in recs and n not in have]
+        if have:
+            print(f"{len(have)} already answered and stored; asking only the rest")
         groups = [want[i:i + pack] for i in range(0, len(want), pack)]
         prompt_hash = hashlib.sha256((SONNET_Q + PLANNING_SCOPE).encode()).hexdigest()[:12]
         reqs, ids = [], {}
@@ -154,7 +172,12 @@ def sonnet(cmd: str, recs: dict, conf_floor: float, pack: int, dry: bool) -> int
             text = SONNET_Q.format(n=len(g), rules=PLANNING_SCOPE, records=body)
             cid = f"g{i:05d}"
             reqs.append({"custom_id": cid,
-                         "params": {"model": mr.BATCH_MODEL, "max_tokens": 400 * len(g) + 400,
+                         # 400/record was NOT enough: a quoted reason plus five fields ran to ~330
+                         # output tokens per record, and any group that thought before answering hit
+                         # the cap and returned nothing at all. Measured 3,282 output tokens per
+                         # 10-record group, so budget double that and let the cap be slack, not a
+                         # ceiling the answer has to fit under.
+                         "params": {"model": mr.BATCH_MODEL, "max_tokens": 800 * len(g) + 800,
                                     "messages": [{"role": "user", "content": text}]}})
             ids[cid] = g
         ids_path.write_text(json.dumps({"prompt_hash": prompt_hash, "ids": ids,
@@ -193,9 +216,22 @@ def sonnet(cmd: str, recs: dict, conf_floor: float, pack: int, dry: bool) -> int
                          "two_thirds_test": g.get("two_thirds_test"),
                          "reason": g.get("reason"), "sonnet_confidence": g.get("confidence"),
                          "prompt_hash": meta["prompt_hash"], "model": mr.BATCH_MODEL})
-    (OUT / "sonnet_answers.json").write_text(json.dumps(rows, indent=1))
-    print(f"collected {len(rows)} readings, {len(bad)} unparsed/absent; "
-          f"tokens in {tin:,} out {tout:,}")
+    # MERGE, never overwrite: a retry batch covers only what failed, so overwriting would discard
+    # every reading the previous batch got right.
+    kept = {}
+    try:
+        for r in json.loads((OUT / "sonnet_answers.json").read_text()):
+            if r.get("sonnet_scope"):
+                kept[r["record"]] = r
+    except Exception:
+        pass
+    before = len(kept)
+    for r in rows:
+        if r.get("sonnet_scope"):
+            kept[r["record"]] = r
+    (OUT / "sonnet_answers.json").write_text(json.dumps(list(kept.values()), indent=1))
+    print(f"collected {len(rows)} readings ({len(bad)} unparsed/absent); "
+          f"store {before} -> {len(kept)}; tokens in {tin:,} out {tout:,}")
     if bad:
         for b in bad[:10]:
             print("   MISSING", b)

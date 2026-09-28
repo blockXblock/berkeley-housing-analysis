@@ -146,6 +146,20 @@ completion set identical. **DONE (John unlocked): live v4 rebuilt** from the ver
 
 ---
 
+## 2026-09-28 — Planning milestones: `housing_rules.planning_record.milestones(record)` (John approved the rule)
+
+Per Planning record, from the city's own Processing Status: **accepted** = the FIRST "Application Complete" (Completeness
+Review/intake; `ACCEPTED`/`ACCEPT_TASK` now defined here and imported by `capdetail_select`); **entitled** = the ruling of
+the HIGHEST body that ruled (City Council, else ZAB, else staff), and a denial there means DENIED, not entitled; the end of
+the appeal period and the case closing stay separate dates; anomalies are FLAGGED, never corrected. Over live v4's 1,116
+primary applications: accepted 959; entitled 888 (staff 800, ZAB 56, Council 32); denied 7; withdrawn/void 135; flags:
+ended after entitlement 13, accepted before filed 6, closed "Approved" after denial 4, decided before accepted 4, entitled
+without acceptance 1. Tests: 8 real records in `test_planning_record.py` (8/8; a staff-first rule fails 2). **Which
+application speaks for a project** is still the selection in `capdetail_select`, and waits on 32's buildings and projects in v4.
+John: skip capID discovery for the 4 stale permits absent from the list dumps (6 units).
+
+---
+
 ## 2026-09-28 — Buildings stage: John's ruling on borrowed completions (middle option)
 
 32's fold (`build_structures.py` @ `ca32762`) against today's chain build: 1,189 masters → **1,187 structures**;
@@ -295,7 +309,7 @@ teaching material, Tier C. v2's `@112cb03` verdict layer is a separate, older cl
 **Then (John: "do a, b"):** the four applied one-time migration scripts that still carried their own `HOUSING`
 regex (`ingest_planning_scope_a`, `preview_accela_planning_ingest`, `ingest_master_permits_log_2026`,
 `fix_planning_filter_gap`, all already run) sequestered to `scripts/superseded/migration__*.py`;
-`gate_canon_uniqueness` now passes 5/5. Ashby BART's affordability row (A900) corrected to the station
+the "housing filter" check now passes. **Correction (same day):** `gate_canon_uniqueness` has SIX checks, and "address key" still FAILS (pre-existing: `modules/address_normalizer.py` and the v3 curriculum's `scripts/build_v2/s0_keys.py` define their own); I misread a truncated output as "5/5". Ashby BART's affordability row (A900) corrected to the station
 parcels (`ae519bc`); status stays unknown, no planning record exists on either parcel.
 
 ---

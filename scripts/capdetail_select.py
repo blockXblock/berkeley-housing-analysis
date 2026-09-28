@@ -31,8 +31,7 @@ from housing_rules.address_points import resolve as resolve_address  # noqa: E40
 from housing_rules.planning_record import role        # noqa: E402  THE record-role canon
 
 EV_APP_COMPLETE = 3
-ACCEPTED = re.compile(r"^application complete$", re.I)
-ACCEPT_TASK = re.compile(r"completeness review|intake", re.I)
+from housing_rules.planning_record import ACCEPTED, ACCEPT_TASK  # noqa: E402  one definition of "accepted"
 ANCHOR_TOLERANCE_DAYS = 60
 
 # Records state their own lineage IN THE DESCRIPTION. Measured 2026-09-26 over all 2,310 Zoning

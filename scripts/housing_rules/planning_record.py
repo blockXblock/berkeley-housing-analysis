@@ -26,6 +26,8 @@ ROLES
   unknown              an unrecognised type. Returned rather than guessed, so a new city record type
                        surfaces as a gap instead of being silently bucketed.
 """
+import datetime as _dt
+import re as _re
 
 RECORD_ROLES = {
     "Zoning Permit": "primary_application",
@@ -63,3 +65,78 @@ def role(record_type: str | None) -> str:
 
 def is_primary(record_type: str | None) -> bool:
     return role(record_type) == "primary_application"
+
+
+# ---------------------------------------------------------------- MILESTONES of one Planning record
+# John approved 2026-09-28 ("approve the milestone rule"), from the city's own Processing Status on the
+# 1,116 primary applications harvested 2026-09-26:
+#   ACCEPTED = the FIRST dated "Application Complete" on the Completeness Review (or intake) task; later ones
+#              are resubmittals after changes.
+#   ENTITLED = the ruling of the HIGHEST body that ruled: City Council, else ZAB, else staff. When a hearing was
+#              held, the earlier "Staff Decision -> Approved" is not the approval. If that body's last ruling is a
+#              denial, the record is DENIED, not entitled.
+#   The end of the appeal period ("No Appeal") and the case closing are kept as separate dates, never used as
+#   the entitlement date. Date-order anomalies are FLAGGED as the city recorded them, never corrected.
+# Stage MEANING belongs to primary applications (role above); which application speaks for a PROJECT is a
+# separate selection (scripts/capdetail_select.py), never an aggregate over records.
+ACCEPTED = _re.compile(r"^application complete$", _re.I)
+ACCEPT_TASK = _re.compile(r"completeness review|intake", _re.I)
+DECIDING_BODIES = (   # highest first: (body, task, approved status, denied status)
+    ("city_council", "Public Hearing", "City Council Approved", "City Council Denied"),
+    ("zab", "Public Hearing", "ZAB Approved", "ZAB Denied"),
+    ("staff", "Staff Decision", "Approved", "Denied"),
+)
+ENDED = ("Withdrawn", "Void")
+
+
+def _dated(rec, task_re, status_re):
+    return sorted(t["status_date"] for t in (rec.get("processing_status") or [])
+                  if t.get("status_date") and _re.search(task_re, t.get("task") or "", _re.I)
+                  and _re.fullmatch(status_re, (t.get("status") or "").strip(), _re.I))
+
+
+def milestones(rec: dict) -> dict:
+    """-> dict(role, filed, accepted, entitled, entitled_by, denied, denied_by, no_appeal, closed,
+    closed_status, ended, ended_status, flags) for one parsed CapDetail Planning record."""
+    filed = None
+    if rec.get("list_date"):
+        filed = _dt.datetime.strptime(rec["list_date"], "%m/%d/%Y").date().isoformat()
+    acc = sorted(t["status_date"] for t in (rec.get("processing_status") or [])
+                 if t.get("status_date") and ACCEPTED.search((t.get("status") or "").strip())
+                 and ACCEPT_TASK.search(t.get("task") or ""))
+    out = dict(role=role(rec.get("record_type")), filed=filed, accepted=acc[0] if acc else None,
+               entitled=None, entitled_by=None, denied=None, denied_by=None,
+               no_appeal=None, closed=None, closed_status=None, ended=None, ended_status=None, flags=[])
+    for body, task, ok, no in DECIDING_BODIES:
+        rulings = sorted([(d, "approved") for d in _dated(rec, _re.escape(task), _re.escape(ok))] +
+                         [(d, "denied") for d in _dated(rec, _re.escape(task), _re.escape(no))])
+        if rulings:
+            day, outcome = rulings[-1]
+            if outcome == "approved":
+                out["entitled"], out["entitled_by"] = day, body
+            else:
+                out["denied"], out["denied_by"] = day, body
+            break
+    na = _dated(rec, r"^appeal$", r"No Appeal")
+    out["no_appeal"] = na[-1] if na else None
+    closings = sorted((t["status_date"], (t.get("status") or "").strip()) for t in (rec.get("processing_status") or [])
+                      if t.get("status_date") and (t.get("task") or "").strip().lower() == "case closed")
+    if closings:
+        out["closed"], out["closed_status"] = closings[-1]
+    ends = sorted((t["status_date"], t["status"].strip()) for t in (rec.get("processing_status") or [])
+                  if t.get("status_date") and (t.get("status") or "").strip() in ENDED)
+    if ends:
+        out["ended"], out["ended_status"] = ends[0]
+    f = out["flags"]
+    if out["accepted"] and filed and out["accepted"] < filed:
+        f.append("accepted_before_filed")
+    decided = out["entitled"] or out["denied"]
+    if decided and out["accepted"] and decided < out["accepted"]:
+        f.append("decided_before_accepted")
+    if out["entitled"] and not out["accepted"]:
+        f.append("entitled_without_acceptance")
+    if out["denied"] and out["closed_status"] == "Approved":
+        f.append("closed_approved_after_denial")
+    if out["entitled"] and out["ended"]:
+        f.append("ended_after_or_despite_entitlement")
+    return out

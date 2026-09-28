@@ -262,7 +262,7 @@ because a saved HTML error page is a "successful" download of nothing that no si
 
 ---
 
-## 2026-09-28 — Ashby BART affordability → UNKNOWN with provenance (STAGED, awaiting John's unlock)
+## 2026-09-28 — Ashby BART affordability → UNKNOWN with provenance (APPLIED)
 
 **John, verbatim "yes, mark Ashby BART unknown with provenance".** v2 asserts **309 VLI + 309 ABOVE_MOD** on
 proj151's 618 units — a **50% planning target** carried in by `migrate_v1_to_v2` (2026-05-07), not an entitled or
@@ -282,10 +282,19 @@ the DB unknown while the explorer keeps printing 50% would leave the claim where
 total becomes **776**. `total_units` stays 618 — the units do not vanish, their TIER becomes unknown. **Table A is
 unaffected** (RHNA credit is on BP issuance and Ashby BART has no BP); the explorer's affordability display is.
 
-**NOT APPLIED.** The canonical DB is `chmod a-w` and `cp` into `databases/` is denied to CC, so the snapshot
-(`keep_snapshot_2026-09-28_pre-ashby-bart-unknown.db`) and the unlock are John's. The script is transactional with
-per-row `rowcount==1`, refuses if either row no longer holds the category it was written against, verifies
-proj151 reads `vli=0 / total=618` before commit, and prints a fresh-connection fingerprint.
+**APPLIED 2026-09-28** — John took the snapshot (`keep_snapshot_2026-09-28_pre-ashby-bart-unknown.db`,
+19,931,136 bytes), unlocked, ran `--apply`, re-locked. Verified on a FRESH read-only connection:
+ids 137/138 both read `UNKNOWN` 309u with the provenance appended, confidence 3; `v_projects_flat` proj151 reads
+**total 618 · eli 0 · vli 0 · li 0 · mod 0 · market 0** (no tier breakdown at all, which is what "unknown" means
+here — `market_units` also went to 0 because the 309 ABOVE_MOD half was the same placeholder); city-wide VLI
+**1,085 → 776**; description rewritten; `integrity_check ok`, 1,106 projects, 909 affordability rows.
+The write was transactional with per-row `rowcount==1`, refused unless each row still held the category it was
+written against, and verified `vli=0 / total=618` before commit.
+
+**⚠ THE SERVED SITE STILL SHOWS THE OLD FIGURES.** `docs/explorer_data.js` was promoted before this write AND
+before the parcel fix (`b2cb743`), so the public explorer still carries proj151's 309 VLI, the
+`"618 units, 50% affordable"` description and the old APN `053 165200105`. A regenerate + promote clears all
+three at once — John's call.
 
 **Also noticed:** the served `docs/explorer_data.js` still carries proj151's OLD APN `053 165200105` (1099 Ashby
 Ave) — the promotion predates the parcel fix (`b2cb743`). It corrects itself at the next export + promotion,

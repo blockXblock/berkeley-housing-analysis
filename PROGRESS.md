@@ -8,6 +8,63 @@
 
 ---
 
+## 2026-09-28 — A definition replaces the housing regex · first reading done (`c0430a7`, `5ac3b23`)
+
+**John: "we should use JEV or a model, agree?" → agreed for MEANING, not for FORM.** Regex has never
+failed on machine-generated syntax (the `DEV` prefix, APN structure, the `-REV/-DEF` suffix). It failed
+every time it was asked to judge prose: `\bdwelling\b` vs "dwellings" (ZP2022-0046, 166 of them),
+"townhouses", spelled-out counts, and `PLN2026-0185` — the FIRST filing for Ashby BART, 618 units,
+whose only housing word was "TOD". English is not closable, so such a pattern is a floor that looks
+like a census and fails by silent omission.
+
+**The definition** (`docs/methodology/planning_record_scope_definition.md`, machine-readable text in
+`housing_rules.reading_rules.PLANNING_SCOPE`): Gov. Code **§ 65589.5(h)(2)**, quoted not paraphrased,
+verified current against leginfo 2026-09-28 (amended eff. 2026-01-01, SB 838). Same logic as adopting
+HCD's unit definitions — it is the definition the reporting regime runs on, incl. SB 330 preliminary
+applications via § 65941.1. **John ruled option "2": units-stated sufficiency** — a record stating
+dwelling units is a housing development even when the two-thirds square-footage split is unstated, with
+the unmet test recorded in the reason. Four classes, `unknown` a required answer, `units_stated` and a
+reason quoting the words relied on.
+
+**Machinery:** `scripts/model_readers.py` is now the ONE home for a model read (key, Jev call + retry
+ladder, resumable log that does not count an errored row as done, `write_evidence` stamping the
+definitions sha and refusing to overwrite a same-day file). `scripts/llm_planning_scope.py` adds only
+the question layer. Registered in `gate_canon_uniqueness` with `llm_permit_effect.py`'s original inline
+call as a NAMED exception — a third copy fails, proven both ways.
+
+**FIRST READING: 5,588 records, ~$0.36, 0 errors** → `data/derived/planning_scope_evidence_2026-09-28.json`.
+housing_development **1,259** · housing_adjacent_not_development 2,075 · not_housing 1,353 · unknown 901.
+
+**Against the regex queue of 1,857 — and the queue was wrong in BOTH directions:**
+- **88 records the regex MISSED**, each a candidate real project: "Remodel covered parking area into 2
+  new units" (the pattern needs the number adjacent to "units", so "2 new units" never matched),
+  "Four new SFRs on vacant lot", "34 income-restricted studios for seniors", "Conversion of warehouse
+  into 12 suites/units", SB-9 and SB-330 pre-applications, and a tail of **ZCBP** ministerial
+  clearances — `NEW SECOND UNIT`, `GARAGE CONVERSION TO STUDIO` — which is the ADU/infill tail.
+- **686 the regex INCLUDED and the model says are not development projects** (612
+  housing_adjacent, 39 not_housing, 35 unknown; ZP 466, PLN 106, ZCBP 59). Inspection says the model is
+  substantially right: they are **zoning research letters and determinations** ("ZR for possibility of
+  multi-family", "Determine if there are two or three units") which are INQUIRIES, and **additions,
+  remodels and decks on existing homes** which add no units ("New deck at rear yard of single family
+  dwelling", conf 0.98; "Restore existing duplex back to a single family home"). Only 25 of the 686 are
+  design-review records, so this is not the model confusing scope with role.
+- **The sharpest single case:** `ZP2021-0161`, an R&D and manufacturing building, is in the regex queue
+  because **`residential` matches inside "non-residential"**. The model called it not_housing at
+  confidence 1.0.
+
+**HONEST LIMIT: 46% of the corpus (2,594 records) came back below 0.70 confidence.** Where both agree
+confidently the agreement is 2,653 of 2,994. Jev alone is not enough — the `permit_effect` pattern used
+Sonnet on the hard 18%; here the hard subset is 2,594 and a Batch second read is ~$4.
+
+**Refinement the reading exposed:** `housing_adjacent_not_development` merges *adds no units* with
+*REMOVES units* (`ZP2015-0047` "Remove one dwelling unit"). Removals matter for the APR's demolition
+reporting and need their own class in the next reading.
+
+**Nothing written to any database. The applied planning ingest is NOT re-run** — a data error is a new
+gated write (CLAUDE.md), and both directions are John's to review.
+
+---
+
 ## 2026-09-26 — CapDetail harvest: rung 3 (application ACCEPTED) becomes a dated fact
 
 **Why:** filed→accepted had never been a fact in v2 — it was inferred from a list-view Status string,

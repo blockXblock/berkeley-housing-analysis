@@ -19,10 +19,11 @@ JN-A proved every permit row is a conserved event. JN-C **labels** those events 
 reversibly, never deleting. A re-run overwrites the label, never the event. We are *just labeling*.
 
 **This pass does two of three classification jobs and defers the third on purpose:**
-- **#1 housing vs non-housing** - description-first, NEVER UnitsAdded-first (Durant: a temp-power
-  permit carried UnitsAdded=83 and is still non-housing). `ADU=Yes` is a dirty flag (v3 found it
-  over-broad) so it requires **description corroboration** (new-ADU / conversion / legalization
-  language). Generous: signals disagree -> **inconclusive**, never guess.
+- **#1 what each permit does to housing** - read by a model, not matched by word lists. Jev (TypeSafe)
+  read every permit and Claude Sonnet 5 read the ones that needed reasoning, both under HCD's Annual
+  Progress Report definitions (`housing_rules.reading_rules.DEFINITIONS`). The answers are stored as
+  evidence (`data/derived/permit_effect_evidence_2026-09-26_hcd.json`); this notebook looks them up and
+  never calls a model. A permit the models could not settle is **ambiguous**, never guessed.
 - **#2 master-collapse** - a building = its New master permit; `-REV`/`-DEF` are children, counted
   master-only (REV restatement bug). Collapse on **permit family**, not address (avoids Logan Park).
 - **#3 phantom-master discriminator - DEFERRED.** The inconclusive set (with permit/address/APN and a
@@ -44,104 +45,48 @@ supports but is not required.
 (least-settled - divergence is a finding, not a failure).
 """)
 
-# CELL 1 - vocabulary
+# CELL 1 - setup and the evidence the labels come from
 md(r"""
 ### What this cell does
-Declares the classification vocabulary as data: housing indicators, conversion indicators,
-legalization indicators, movable-home permanence markers, and non-housing disqualifiers (the cross-ref
-trap guards). These lists are the only domain knowledge; the rules are mechanical over them.
+Opens the build database and shows where the housing roles come from: the stored model readings and the
+definitions the models were given. Nothing here decides a role; cell 4 looks each permit up.
 """)
 code(r"""
 from pathlib import Path
 import sqlite3, json, datetime as dt, hashlib, csv
 import pandas as pd
 import sys, os
-# Import the classifier + its vocabulary from its single importable home (June-7 architecture;
-# the June-18 drift fix). This NB demonstrates the real machinery — it does not redefine it.
 sys.path.insert(0, os.path.join(os.path.expanduser("~"), "berkeley-data", "scripts"))
 sys.path.insert(0, os.path.join(os.path.expanduser("~"), "berkeley-data", "scripts", "v4"))
-from housing_rules.permit_role import (
-    classify, net_units, payload_get, _norm,
-    HOUSING_TERMS, CONVERSION_TERMS, LEGALIZATION_TERMS, ADU_TERMS,
-    PERMANENCE_TERMS, MOVABLE_TERMS, MULTIFAM_TERMS, NONHOUSING_TERMS,
-)
+from housing_rules.permit_effect import EVIDENCE, evidence_hash
+from housing_rules.reading_rules import DEFINITIONS
 import stage_methods as SM   # the stage-method home; cell 4 CALLS SM.classify_all, never re-types it
 
+def _norm(s): return " ".join(str(s).split()).strip().lower() if s is not None else ""   # key for the has-docs join
+
 # DB target PARAMETERIZED (env JN_C_DB_PATH, else the chain-wide PIPELINE_DB_PATH); DEFAULT = the
-# JN-A throwaway rebuild, NEVER the live corrected DB. JN-C DELETE+INSERTs event_classifications —
-# running it against live would WIPE the C2/C3/C-multifamily/dedup47 corrections (the documented
-# hazard). Same guard pattern as JN-A (d3a3077).
+# JN-A throwaway rebuild, NEVER the live DB. JN-C DELETE+INSERTs event_classifications, and the
+# corrections JN-F applies afterwards would be lost if it ran against live.
 _LIVE   = Path.home() / "berkeley-data" / "databases" / "berkeley_housing_v4.db"
 DB_PATH = Path(os.environ.get("JN_C_DB_PATH") or os.environ.get("PIPELINE_DB_PATH")
           or str(Path.home() / "berkeley-data" / "scratch" / "jn_a_throwaway" / "berkeley_housing_v4.db"))
 if DB_PATH.resolve() == _LIVE.resolve() and os.environ.get("JN_C_ALLOW_LIVE") != "1":
     raise SystemExit(
-        f"REFUSED: DB_PATH is the LIVE corrected DB ({_LIVE}).\n"
-        f"JN-C would DELETE+INSERT event_classifications, wiping the C2/C3/C-multifamily/dedup47\n"
-        f"corrections. Point JN_C_DB_PATH at a rebuild (default: the JN-A throwaway), or set\n"
-        f"JN_C_ALLOW_LIVE=1 to override (you almost never want this).")
+        f"REFUSED: DB_PATH is the LIVE DB ({_LIVE}).\n"
+        f"JN-C would DELETE+INSERT event_classifications, losing the corrections JN-F applies.\n"
+        f"Point JN_C_DB_PATH at a rebuild (default: the JN-A throwaway), or set JN_C_ALLOW_LIVE=1.")
 V2_PATH = Path.home() / "berkeley-data" / "databases" / "berkeley_housing_v2.db"  # read-only, for has-docs bridge
 
-print("Imported classifier + vocabulary from housing_rules.permit_role:",
-      len(HOUSING_TERMS),"housing,",len(CONVERSION_TERMS),"conversion,",
-      len(LEGALIZATION_TERMS),"legalization,",len(NONHOUSING_TERMS),"disqualifiers.")
+rows = json.loads(EVIDENCE.read_text())
+print(f"Evidence: {EVIDENCE.name}  ({evidence_hash()})")
+print(f"  permits read: {len(rows):,}   read by Sonnet: {sum(1 for r in rows if r.get('sonnet_effect')):,}")
+print("\n" + DEFINITIONS)
 """)
 md(r"""
 ### What just happened
-The word lists are in memory - the whole domain knowledge of the classifier. Housing terms = real
-creation; conversion + legalization = ADU-via-alteration that *does* add a unit; permanence markers
-gate movable homes; disqualifiers stop cross-references (a "PV solar" mention in a real new-SFR, a
-siding repair on an "existing two story" building) from masquerading as housing.
-""")
-
-# CELL 2 - payload field access + rule engine
-md(r"""
-### What this cell does
-Reads the REAL payload fields (confirmed keys: `Work Type`, `WorkDescription`, `ADU`, `OccType`,
-`SubType`, `UnitsAdded`, `UnitsRemoved`, `Parcel Number`) and implements the rules in the approved
-priority order. Role from description+work-type (prose); `net_units` from the structured unit fields
-only (prose-blind). `ADU=Yes` requires description corroboration to be confident.
-""")
-code(r"""
-import inspect
-from housing_rules import permit_role
-# Demonstrate the REAL machinery: render the imported classify/net_units source so the curriculum
-# shows exactly the priority-order rule engine that runs — defined once in housing_rules, not here.
-print("classify() imported from:", permit_role.__file__)
-print(inspect.getsource(permit_role.classify))
-print(inspect.getsource(permit_role.net_units))
-print("Rule engine ready (imported from housing_rules.permit_role; ADU=Yes needs description "
-      "corroboration; net_units prose-blind).")
-""")
-md(r"""
-### What just happened
-The classifier reads real payload keys and applies the rules. `ADU=Yes` no longer auto-confirms - it
-needs ADU/conversion/legalization language (Rule 5), so the dirty flag alone -> inconclusive. Movable
-homes need permanence markers (Rule 4). Description gates housing; the structured unit fields only set
-*how many*, never *whether*. Confident roles plus the generous `ambiguous` are the output.
-""")
-
-# CELL 3 - vocabulary tests
-md(r"""
-### What this cell does
-Proves the vocabulary on real cases from prior research before classifying anything. Halts on any
-failure - we never classify with a broken vocabulary.
-""")
-code(r"""
-# The 16 vocabulary anchors + 9 deflation cases now live as REAL unit tests beside the classifier:
-# scripts/housing_rules/test_permit_role.py. Run them from their home so a vocabulary regression
-# halts the notebook (we never classify with a broken vocabulary).
-from housing_rules.test_permit_role import run as run_permit_role_tests
-run_permit_role_tests()
-""")
-md(r"""
-### What just happened
-The classifier is proven on the real cases: 2641 College siding -> alteration (the 'two story'
-describing an existing building doesn't flip it); new SFRs/apartments stay housing despite PV/Shoring
-cross-refs; Durant temp-power@83 -> inconclusive not housing; ADU conversions/legalizations WITH
-language -> confident; an ADU-flagged kitchen remodel with no ADU language -> inconclusive (the
-dirty-flag case, harvested); a movable home -> confident only with permanence markers, else
-inconclusive. A failure would halt the notebook. The vocabulary is trustworthy.
+The labels this notebook writes are lookups into that file. The hash is stamped on every label, so a
+re-reading (a new evidence file) shows up as a different hash, never as a silent change. The definitions
+are HCD's own, so these counts are comparable to the city's Annual Progress Report row for row.
 """)
 
 # CELL 4 - classify all events, write reversible labels
@@ -175,7 +120,7 @@ code(r"""
 con=sqlite3.connect(DB_PATH); con.execute("PRAGMA foreign_keys=ON")
 # THE materialization is stage_methods.classify_all — one importable home for the recipe
 # (2026-07-02 review: the loop + hash recipe were duplicated here as a cell-string, the exact
-# aa6ded0 anti-pattern). The hash comes from housing_rules.permit_role.classifier_hash().
+# aa6ded0 anti-pattern). The hash is permit_effect.evidence_hash(): the evidence file's content.
 from housing_rules.permit_effect import evidence_hash
 dist = SM.classify_all(con)
 print(f"Classified {sum(v for k, v in dist.items() if not k.startswith('_')):,} events from model-read evidence (hash={evidence_hash()}).")
@@ -384,12 +329,6 @@ events or v3. Commit nothing until John reviews.*
 """)
 
 # ============================================================ VISUALIZATIONS (derive-from-data, text-sandwiched)
-import os as _osh, subprocess as _sp
-try:
-    _PR_HASH=_sp.check_output(["git","-C",_osh.path.expanduser("~/berkeley-data"),"log","-1","--format=%h","--","scripts/housing_rules/permit_role.py"],text=True).strip()
-except Exception:
-    _PR_HASH="(unknown)"
-
 md("""
 ## Visualizations
 Per the viz convention: text-sandwiched, **derive-from-data** (read live from `event_classifications`,
@@ -425,41 +364,6 @@ events are **NOT 2,618 buildings**; the count grain is **master + finaled + new_
 `counted-CO` number in the title). (2) The ~85% `alteration` is **not noise** — it's *housing-hides-in-
 alteration* (garage/basement → ADU conversions live here), which is exactly why we classify all of it rather
 than filter at intake. (3) Log scale: the bars compress 3 orders of magnitude — read the labels, not the lengths.
-""")
-
-md(f"""
-### VIZ 2 — the `classify()` decision skeleton (structural)
-**What it shows.** The branch order of `housing_rules.permit_role.classify`: payload → non_housing? →
-demolition? → subsidiary? → new_unit? → alteration? → else ambiguous. **Stamped with the classifier's current
-commit `{_PR_HASH}`** (read live at build time, not hardcoded).
-""")
-_c2 = r'''
-from IPython.display import Markdown, display
-m = """```mermaid
-flowchart TD
-  S["event payload (work_type · description · ADU · occtype · units)"] --> NH{non-housing terms or non-residential occtype?}
-  NH -- yes --> RNH([non_housing])
-  NH -- no --> DEM{demolition terms?}
-  DEM -- yes --> RDEM([demolition])
-  DEM -- no --> SUB{REV/DEF child · ancillary · see-permit-X?}
-  SUB -- yes --> RSUB([subsidiary])
-  SUB -- no --> NEW{new-dwelling / ADU terms + unit signal?}
-  NEW -- yes --> RNEW([new_unit])
-  NEW -- no --> ALT{alteration terms?}
-  ALT -- yes --> RALT([alteration])
-  ALT -- no --> RAMB([ambiguous])
-```"""
-display(Markdown(m))
-print("DECISION SKELETON as of permit_role.classify @ HASHSTAMP")
-'''.replace('HASHSTAMP', _PR_HASH)
-code(_c2)
-md(f"""
-**⚠⚠ HIGH DRIFT RISK — read this.** This is a **decision *skeleton*, hand-drawn, as of commit `{_PR_HASH}`**.
-Unlike the quantitative charts it **cannot auto-derive its shape** from the code — so **if
-`housing_rules.permit_role.classify` changes, THIS DIAGRAM LIES until it is regenerated.** The **authoritative
-logic is always `permit_role.classify`** (+ its vocab lists + branch order), never this picture. The skeleton
-also elides the vocab detail (HOUSING_TERMS / CONVERSION_TERMS / ADU_TERMS / NONHOUSING_TERMS) and ordering
-subtleties — use it to *navigate* the logic, then read the function for truth.
 """)
 
 nb=new_notebook(cells=cells)

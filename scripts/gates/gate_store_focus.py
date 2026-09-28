@@ -23,8 +23,22 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 V2, V4 = ROOT / "databases/berkeley_housing_v2.db", ROOT / "databases/berkeley_housing_v4.db"
-# the v4 tables that must fill before v4 can replace v2
-V4_ENTITY = ("projects", "structures", "units", "parcels", "addresses")
+# TWO KINDS OF v4 TABLE, and conflating them made this gauge lie.
+#
+# On 2026-09-28 a peer loaded 29,127 parcels, 29,122 assessed values, 25,523 owner actors and 306
+# documents. The gauge then read DONE -- because its test was "any entity table has rows" -- while
+# projects, structures, units, addresses and project_structures were ALL STILL ZERO and 82 live
+# scripts still read v2. A status gauge that flips to DONE while the thing it measures is manifestly
+# unfinished is worse than no gauge, because it stops people looking. Nobody weakened it; I specified
+# it wrong, which is the harder failure to catch since there is no bad act to detect.
+#
+# REFERENCE tables describe the world (parcels, addresses, owners, assessed values, documents). They
+# are necessary and they are not the migration.
+# HOUSING-ENTITY tables are the ones that let v4 SERVE: a structure is a building, a project groups
+# structures, units are what gets counted. Until these exist, v4 cannot replace v2 for any published
+# output, so every write into v2 widens the fork.
+V4_REFERENCE = ("parcels", "parcel_identifiers", "assessed_values", "documents", "actors")
+V4_HOUSING_ENTITY = ("structures", "projects", "units", "project_structures")
 
 
 def _count(db, t):
@@ -40,10 +54,15 @@ def run() -> tuple[bool, list[str]]:
     v2 = sqlite3.connect(f"file:{V2}?mode=ro", uri=True)
 
     ev = _count(v4, "events") or 0
-    ent = {t: _count(v4, t) for t in V4_ENTITY}
+    ref = {t: _count(v4, t) for t in V4_REFERENCE}
+    ent = {t: _count(v4, t) for t in V4_HOUSING_ENTITY}
     ent_total = sum(v or 0 for v in ent.values())
-    msgs.append(f"     v4 substrate: {ev:,} events · entity layer: "
-                + " ".join(f"{t}={ent[t]}" for t in V4_ENTITY))
+    msgs.append(f"     v4 substrate:  {ev:,} events")
+    msgs.append(f"     v4 reference:  " + " ".join(f"{t}={ref[t]:,}" for t in V4_REFERENCE)
+                + "   (necessary, but NOT the migration)")
+    msgs.append(f"     v4 HOUSING ENTITIES: "
+                + " ".join(f"{t}={ent[t]}" for t in V4_HOUSING_ENTITY)
+                + "   <- these are what let v4 serve")
 
     v2_proj = _count(v2, "projects") or 0
     v2_ev = _count(v2, "project_events") or 0
@@ -63,12 +82,18 @@ def run() -> tuple[bool, list[str]]:
 
     if ev > 0 and ent_total == 0:
         ok = False
-        msgs.append("FAIL v4 has a substrate and NO entities: every one of "
-                    f"{', '.join(V4_ENTITY)} is empty. v4 cannot replace v2 in this state, so any "
-                    "work that deepens v2 widens the fork. THIS IS THE STALL -- name the next entity "
-                    "stage and build it, or say plainly that v2 is the destination after all.")
+        msgs.append(f"OPEN v4 has a substrate, reference data, and NO HOUSING ENTITIES: "
+                    f"{', '.join(V4_HOUSING_ENTITY)} are all empty. Reference rows "
+                    f"({sum(v or 0 for v in ref.values()):,} of them) do not change this: v4 still "
+                    "cannot serve a single published output, so every write into v2 widens the fork. "
+                    "Name the next entity stage and build it, or say plainly that v2 is the "
+                    "destination after all.")
     elif ent_total:
-        msgs.append(f"ok   v4 entity layer has {ent_total} rows -- the migration is moving")
+        msgs.append(f"     v4 housing entities have {ent_total} rows -- the migration is moving")
+        if r2 > 0 and r2 > max(r4, 1):
+            ok = False
+            msgs.append(f"OPEN entities exist but {r2} live scripts still read v2 against {r4} for "
+                        "v4. The cutover is the RE-POINTING, not the loading.")
     if r2 > 0 and r4 >= 0 and r2 > 3 * max(r4, 1):
         msgs.append(f"note v2 coupling is {r2}/{r4} = {r2/max(r4,1):.0f}x v4's. Re-pointing that is "
                     "the bulk of any cutover, and it is not started.")

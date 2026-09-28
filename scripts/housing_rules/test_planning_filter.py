@@ -26,6 +26,23 @@ MUST_NOT_MATCH = [
     ("PLN2015-0001", "Zoning research letter regarding permitted commercial uses", "an inquiry"),
 ]
 
+# PINNED 2026-09-28: the second false negative this filter had, found while answering John's question
+# about whether any document reasserts Ashby BART's "50% affordable". PLN2026-0185 is the FIRST city
+# filing for the 618-unit station-block project and the filter did not see it.
+MUST_MATCH.append((
+    "PLN2026-0185",
+    "Request for an interdepartmental roundtable meeting to review and evaluate 50 percent "
+    "schematic plans for the Ashby BART TOD development proposal.",
+    "the first Ashby BART filing -- TOD is the only housing word in it"))
+
+# And the trap it carries: "50 percent" here is DESIGN COMPLETION (50% schematic plans), not
+# affordability. Anything reading affordability out of a percentage in a description would misread
+# this record as reasserting Ashby BART's unsourced 50%-affordable claim.
+MUST_NOT_MATCH.append((
+    "PLN2015-9999",
+    "Review and evaluate 50 percent schematic plans for a commercial office remodel.",
+    "50 percent schematic plans is a design milestone, not housing and not affordability"))
+
 
 def main() -> int:
     fails = []

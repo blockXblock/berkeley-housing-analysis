@@ -42,7 +42,16 @@ HOUSING = re.compile(
     r"(\b(dwellings?|adus?|jadus?|duplex(?:es)?|triplex(?:es)?|fourplex(?:es)?|apartments?|"
     r"residences?|residential|middle housing|sb ?9|sb ?330|sb ?35|sb ?423|sb ?684|ab ?2011|"
     r"town ?home(?:s)?|town ?house(?:s)?|rowhouse(?:s)?|condominium(?:s)?|housing|"
-    r"single.family|multi.family|infill|live.?work|density bonus|habitable)\b"
+    r"single.family|multi.family|infill|live.?work|density bonus|habitable|"
+    # TOD / transit-oriented development. Added 2026-09-28 after the SECOND false negative, found
+    # while checking John's question about Ashby BART: PLN2026-0185 (filed 2026-09-18) is the FIRST
+    # city filing for Berkeley's largest pipeline project -- 618 units on the BART station block --
+    # and its description is "...50 percent schematic plans for the Ashby BART TOD development
+    # proposal", which uses NO word this filter knew. Measured before adding: across all 5,588 DEV
+    # records, TOD/transit-oriented appears in 2 and adds exactly THIS ONE to the queue, so the
+    # addition is precise rather than broad. "development" alone was NOT added -- it would sweep in
+    # commercial projects.
+    r"\btod\b|transit.oriented)\b"
     r"|(?:\d+|" + NUMWORD + r")\s*[-\s]?\s*(?:units?|dwellings?|bedrooms?)\b)", re.I)
 
 

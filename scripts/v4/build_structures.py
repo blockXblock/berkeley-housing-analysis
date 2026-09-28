@@ -64,6 +64,84 @@ OUT = ROOT / "scratch/2026-09-26_structures"
 SUFFIX = re.compile(r"^(?P<base>B?\d{4}-\d{3,5})[-\s]*(REV|DEF|PH|R)\s*\d*$", re.I)
 COMPLETION = ("permit_finaled", "permit_completed")
 
+# ---------------------------------------------------------------- the completion rule
+# JOHN'S RULING, 2026-09-28: "adopt the middle option".
+#
+#   A structure's completion comes from ITS OWN MASTER PERMIT. A finaled revision or
+#   deferred-submittal permit (-REV/-DEF, or any attached non-master) does NOT complete the building:
+#   it changes plans, and it does not show the building is occupiable. Where the master has no finaled
+#   event but DOES have an APPROVED "Building Final" inspection, that inspection date is the
+#   completion. Anything else is NOT COUNTED as complete, and not dropped either -- it is carried
+#   with a named reason.
+#
+# Rationale (John): HCD's phase rule -- the phase whose work completes the units carries them.
+#
+# This replaces `completed_on = MAX(completion event over ALL the structure's events)`, which the v4
+# schema comment describes and which marked 22 structures complete off an attached revision, always
+# EARLIER than the master's own evidence. The rule lives here, in code, rather than in a note.
+BUILDING_FINAL = "Building Final"
+INSPECTION_APPROVED = "Approved"
+
+# The not-complete set is NOT a "hold" in the sense of the +147, which is a number we could state and
+# deliberately do not. This is the ordinary case of a building that has not finished, plus a tail of
+# records where our evidence stops -- and those two need opposite work, so they are named apart
+# (3c's naming point, 2026-09-28, adopted):
+#   NOT_YET_COMPLETE   permit 2022 or later: plausibly still under construction. Nothing to fix.
+#   STALE_NEEDS_SOURCE permit 2021 or earlier and still no completion of its own: either it finished
+#                      and we do not hold the evidence, or it expired / was withdrawn / was
+#                      re-permitted. Each one needs a look at the city's own record.
+# The boundary is the PERMIT YEAR, not a completion date (there is none to read).
+STALE_PERMIT_BEFORE = "2022"
+
+
+def not_complete_category(master_keys) -> str:
+    """-> 'NOT_YET_COMPLETE' | 'STALE_NEEDS_SOURCE', from the newest master permit's year."""
+    yrs = [m.group(1) for k in master_keys
+           for m in [re.search(r"(\d{4})-", str(k))] if m]
+    return "NOT_YET_COMPLETE" if (yrs and max(yrs) >= STALE_PERMIT_BEFORE) else "STALE_NEEDS_SOURCE"
+
+
+def approved_building_finals(db) -> dict:
+    """permit -> latest APPROVED 'Building Final' inspection date.
+
+    Berkeley issues no standard Certificate of Occupancy; the closing artifact is an
+    inspector-signed final. Only 834 of 32,909 permits have one, so this is strong evidence where it
+    exists and never a substitute signal.
+    """
+    import json as _json
+    out = {}
+    try:
+        rows = db.execute("SELECT source_record_key, raw_payload, event_date FROM events "
+                          "WHERE event_type_code='inspection'")
+    except Exception:
+        return out
+    for key, payload, date in rows:
+        try:
+            p = _json.loads(payload or "{}")
+        except Exception:
+            continue
+        if BUILDING_FINAL in str(p.get("type_code") or "") \
+                and str(p.get("result")) == INSPECTION_APPROVED:
+            if date and (key not in out or date > out[key]):
+                out[key] = date
+    return out
+
+
+def completion_for(master_keys, permits, finals) -> tuple[str | None, str]:
+    """-> (date, basis).
+
+    basis is 'master_finaled' | 'master_building_final' (both complete, with a date) or
+    'NOT_YET_COMPLETE' | 'STALE_NEEDS_SOURCE' (no date: not counted, not dropped).
+    """
+    own = [d for k in master_keys for (_, t, d) in permits[k]["events"]
+           if t in COMPLETION and d]
+    if own:
+        return max(own), "master_finaled"
+    insp = [finals[k] for k in master_keys if k in finals]
+    if insp:
+        return max(insp), "master_building_final"
+    return None, not_complete_category(master_keys)
+
 
 def base_permit(key: str) -> str:
     m = SUFFIX.match(str(key or "").strip())
@@ -140,7 +218,34 @@ def load(db, evidence: Path | None):
     return permits
 
 
-def fold(permits: dict):
+def load_parents(csv_path):
+    r"""permit -> parent_permit, from a MODEL-DERIVED parent file. An explicit lane, never implicit.
+
+    My own lineage lanes are (a) the permit NUMBER's -REV/-DEF suffix and (b) an explicit
+    cross-reference in the description. Session 3c's evidence file adds 662 NON-SUFFIXED parents a
+    permit number cannot reveal -- and note their parents are often OLD-STYLE numbers ("B08-2450",
+    "13-0855", "05-4152") that my base_permit() pattern does not even parse, so they must be matched
+    as literal keys.
+
+    Kept OPTIONAL and separate for two reasons: the fold must stay runnable without a model pass, and
+    `cites` is NOT parentage -- a reference is not belonging, which bit me on Planning records
+    ("refer to BP # ... for Demo" is not a parent). Only parent_source='sonnet' rows are read here;
+    'permit number' rows duplicate lane (a), and blank rows carry cites only.
+    """
+    import csv as _csv
+    out = {}
+    if not csv_path:
+        return out
+    for row in _csv.DictReader(open(csv_path)):
+        if (row.get("parent_source") or "").strip() != "sonnet":
+            continue
+        pn, par = (row.get("permit") or "").strip(), (row.get("parent_permit") or "").strip()
+        if pn and par and pn != par:
+            out[pn] = par
+    return out
+
+
+def fold(permits: dict, model_parents: dict | None = None):
     masters = {k: p for k, p in permits.items() if p["is_master"]}
     # 1-2. seed, then merge masters the TEXT says are one building, within a site
     parent = {k: k for k in masters}
@@ -178,6 +283,7 @@ def fold(permits: dict):
         master_of_base.setdefault(base_permit(k), k)
     attach, unattached = collections.defaultdict(list), []
     how = collections.Counter()
+    model_parents = model_parents or {}
     for k, p in permits.items():
         if p["is_master"]:
             continue
@@ -185,7 +291,12 @@ def fold(permits: dict):
         tgt = master_of_base.get(b) if b != k else None
         if tgt:
             how["permit_number_suffix"] += 1
-        else:
+        elif model_parents.get(k):
+            par = model_parents[k]
+            tgt = (par if par in masters else master_of_base.get(base_permit(par)))
+            if tgt:
+                how["model_parent_permit"] += 1
+        if tgt is None:
             for x in p["label"].xrefs:            # demo_xrefs deliberately excluded
                 cand = master_of_base.get(base_permit(x)) or (x if x in masters else None)
                 if cand:
@@ -201,6 +312,8 @@ def fold(permits: dict):
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--evidence", default=None, help="model permit-effect evidence JSON")
+    ap.add_argument("--parents", default=None,
+                    help="model-derived permit_parents.csv; adds the non-suffixed parent lane")
     ap.add_argument("--commit", action="store_true")
     args = ap.parse_args()
     if args.commit:
@@ -231,7 +344,7 @@ def main() -> int:
                          "--evidence. Reporting '0 structures' here would be a false zero.")
 
     permits = load(db, Path(args.evidence) if args.evidence else None)
-    groups, attach, merges, how, unattached = fold(permits)
+    groups, attach, merges, how, unattached = fold(permits, load_parents(args.parents))
     if not groups:
         raise SystemExit("REFUSING: the fold produced NO structures from a non-empty substrate -- "
                          "that is a bug in the fold, not a fact about Berkeley.")
@@ -267,24 +380,31 @@ def main() -> int:
         print(f"   {label}: {len(roots)} structure(s) from {len(keys)} permits -> "
               + " | ".join(",".join(v) for v in roots.values()))
     OUT.mkdir(parents=True, exist_ok=True)
+    finals = approved_building_finals(db)
     out = OUT / "structures_preview.jsonl"
+    basis_count = collections.Counter()
     with open(out, "w") as f:
         for root, keys in sorted(groups.items()):
             ev = [e for k in keys + attach.get(root, []) for e in permits[k]["events"]]
-            comp = [d for (_, t, d) in ev if t in COMPLETION and d]
+            comp_date, basis = completion_for(keys, permits, finals)
+            basis_count[basis] += 1
+            comp = [comp_date] if comp_date else []
             f.write(json.dumps({
                 "master_permits": sorted(keys),
                 "attached_permits": sorted(attach.get(root, [])),
                 "building_label": next((permits[k]["label"].key for k in keys
                                         if permits[k]["label"].key), None),
                 "net_units": max(permits[k]["net_units"] or 0 for k in keys),
-                "completed_on": max(comp) if comp else None,
+                "completed_on": comp_date,
+                "completion_basis": basis,
                 "event_count": len(ev),
                 "site": list(permits[keys[0]]["site"] or []),
                 "cls_source": permits[keys[0]]["cls_source"],
             }) + "\n")
     import os
     mode = "read-only" if not os.access(V4, os.W_OK) else "WRITABLE (John has it unlocked)"
+    print(f"\ncompletion under John's 2026-09-28 ruling: "
+          + " ".join(f"{k}={v}" for k, v in basis_count.most_common()))
     print(f"\nPREVIEW written to {out}")
     print(f"nothing in v4 was touched -- opened mode=ro; the file is currently {mode}.")
     return 0

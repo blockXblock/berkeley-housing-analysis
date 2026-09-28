@@ -1,0 +1,37 @@
+{
+  "invariant": {
+    "master_permits": 1189,
+    "structures": 1187,
+    "text_merges": 2,
+    "non_masters_attached": 1236,
+    "attach_by_permit_number": 1019,
+    "attach_by_cross_reference": 217,
+    "units_once_per_structure": 5439,
+    "units_summed_per_master": 5548,
+    "logan_park_south_structures": 1,
+    "acheson_commons_structures": 4
+  },
+  "moves": {
+    "structures_with_any_completion": 917,
+    "units_at_completed_structures": 4432,
+    "structures_completed_2018_2025": 860,
+    "units_completed_2018_2025": 4099,
+    "units_completed_master_finaled_only_all_time": 4253
+  },
+  "provenance": {
+    "source_db": "databases/berkeley_housing_v4.db",
+    "source_sha16": "27c3e7e99e2423b9",
+    "events": 136519,
+    "classifier_hash": [
+      "permit_effect@501341414243"
+    ],
+    "fold_code": "scripts/v4/build_structures.py",
+    "label_rule": "scripts/housing_rules/building_label.py",
+    "derived_at": "2026-09-28T14:45:01",
+    "notes": {
+      "units_once_per_structure": "max(net_units) over the structure's master permits; the phase rule means the completing phase carries them",
+      "units_at_completed_structures": "completed_on = MAX over ALL the structure's events INCLUDING attached revisions, per the v4 schema comment. 22 structures are complete only because an attached permit finaled; master-only is the separate figure below. UNRESOLVED: John's ruling.",
+      "moves_why": "these change when the substrate is rebuilt or a completion ruling lands; they are recorded, never asserted"
+    }
+  }
+}

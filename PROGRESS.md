@@ -137,7 +137,7 @@ BEFORE adding 286 rows on top; (2) then the rung-3 `--commit`. DBs are `chmod a-
 32's CapDetail harvest is now a declared input: `data/raw/accela_capdetail/capdetail_2026-09-26.jsonl` (1,786 records,
 sha256 2f911aae…) + `pages_manifest_2026-09-26.csv` (sha256 + bytes for each of the 1,786 raw pages, 164 MB). Pages go
 to the T7 (John's choice): `scratch/2026-09-28_evidence/copy_capdetail_pages_to_t7.sh`, run from Terminal.app (iTerm
-lost removable-volume access); it verifies every file and writes `t7_copy_verified.txt`. **Not yet run.**
+lost removable-volume access); it verifies every file against the manifest. **DONE, VERIFIED 2026-09-28: raw pages at `/Volumes/T7-2026/berkeley-data-raw/accela_capdetail_pages_2026-09-26/` (1,786 files, 0 mismatched, 0 extra; manifest copied alongside).** The scratch copy is kept until John says otherwise.
 `stage_methods.load_planning` (JN-C): 1,786 `planning_filed` + 8,927 `planning_task` events (dated tasks only; pending
 ones stay in the record's payload), 64 city-staff actors as written, 8,927 marks; no stage meaning at load;
 `classify_all` skips planning events. 249 of 277 keyed documents now match a planning record. **Chain from raw:** gate

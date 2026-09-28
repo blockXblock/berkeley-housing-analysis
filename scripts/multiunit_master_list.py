@@ -13,7 +13,8 @@ Sources (all primary; CKAN/HCD never read — CLAUDE.md rule 1):
      - Building rows carry Address; Planning rows carry only Project Name (address in ~54%).
   2. CPRA "BP Annual Permit Report" productions  data/raw/cpra-downloads/BP_Annual Permit Report-*.xlsx
      - Issued-only extract (expired/cancelled absent by construction); 23 columns; UnitsAdded is
-       inflated on -DEF/-REV children (housing_rules.permit_role.classify undoes that).
+       inflated on -DEF/-REV children. Role and units come from housing_rules.permit_effect (a model's
+       reading of every permit under HCD's definitions), not the fields and not a regex.
      - Later productions win per permit (they are re-runs with refreshed finaled dates).
   3. v2  databases/berkeley_housing_v2.db  (v_projects_flat + permits + project_parcels/parcels)
      - the SERVING DB we are reconciling against, matched by permit number, canonical APN, and the
@@ -44,7 +45,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 from housing_rules.address import normalize_address          # noqa: E402  (rule 4c — the ONE copy)
 from housing_rules.apn import to_canonical_apn                # noqa: E402  (rule 4 — the ONE canon)
-from housing_rules.permit_role import classify, net_units     # noqa: E402
+from housing_rules.permit_effect import permit_effect      # noqa: E402  (model-read evidence; replaced the regex 2026-09-28)
 
 CENSUS = ROOT / "data/raw/accela/date_range"
 CPRA_DIR = ROOT / "data/raw/cpra-downloads"
@@ -281,17 +282,18 @@ def load_v2(a2a):
 def cpra_candidates(cpra, census_b, min_units):
     out = []
     for pn, r in cpra.items():
-        role, is_master, note = classify(r.get("Work Type"), r.get("WorkDescription"), r.get("ADU"),
-                                         r.get("OccType"), r.get("UnitsAdded"), r.get("UnitsRemoved"), pn)
+        got = permit_effect(pn)                  # role + dwellings created, read by a model (HCD definitions)
+        if got is None:
+            continue                             # never read (not in the declared CPRA inputs)
+        role, is_master, u, note = got
         if role in ("subsidiary", "demolition", "non_housing"):
             continue
-        u = net_units(r.get("UnitsAdded"), r.get("UnitsRemoved"), role, r.get("WorkDescription") or "")
         if (u or 0) < min_units:
             continue
         c = census_b.get(pn, {})
         addr = f"{str(r.get('StreetNumber') or '').split('.')[0]} {r.get('StreetName') or ''} {r.get('StreetType') or ''}".strip()
         out.append(dict(record=pn, module="Building", source="cpra", record_type=r.get("Work Type"),
-                        role=role, units=int(u), units_source="cpra_UnitsAdded", status_source="census",
+                        role=role, units=int(u), units_source="model_evidence", status_source="census",
                         address=addr, apn=to_canonical_apn(r.get("Parcel Number")),
                         filed=str(r.get("Submittal Date") or "")[:10], issued=_mdy(r.get("Issuance Date")),
                         finaled=str(r.get("Finaled Date") or "")[:10],
@@ -457,7 +459,7 @@ def build(min_units, today):
         akeys = [addr_key(r["address"]) for r in recs if addr_key(r["address"])]
         akey = akeys[0] if akeys else None
         addr = next((clean_address(r["address"]) for r in recs if addr_key(r["address"])), "")
-        best = max(recs, key=lambda r: (r["units_source"] == "cpra_UnitsAdded", r["units"]))
+        best = max(recs, key=lambda r: (r["units_source"] == "model_evidence", r["units"]))
         pl = [r for r in recs if r["module"] == "Planning"]
         bp = [r for r in recs if r["module"] == "Building"]
         latest_pl = max(pl, key=lambda r: r["filed"]) if pl else None
@@ -516,7 +518,7 @@ def main():
         print(f"  >= {lo:>3} units: {sum(1 for r in rows if r['units_best'] >= lo):>4}")
     print(f"  in v2: {sum(1 for r in rows if not r['not_in_v2'])}   NOT in v2: {sum(1 for r in rows if r['not_in_v2'])}"
           f"   (not in v2 & >=5u: {sum(1 for r in rows if r['not_in_v2'] and r['units_best'] >= 5)})")
-    print(f"  units_source=cpra: {sum(1 for r in rows if r['units_source']=='cpra_UnitsAdded')}   "
+    print(f"  units_source=model_evidence: {sum(1 for r in rows if r["units_source"]=="model_evidence")}   "
           f"description-screen only: {sum(1 for r in rows if r['units_source']=='description')}")
     print(f"  needs_status_refresh (active, status older than 30d): {sum(1 for r in rows if r['needs_status_refresh'])}")
     print(f"  units_disagree with v2 (>1): {sum(1 for r in rows if r['units_disagree'])}   address_missing: {sum(1 for r in rows if r['address_missing'])}")

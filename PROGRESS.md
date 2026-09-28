@@ -155,7 +155,7 @@ It dated 22 structures (179 units) complete from an ATTACHED revision's final wh
 **John, 2026-09-28: "adopt the middle option"** — a structure completes on its OWN master permit; a revision/-DEF
 final never completes a building; where the master has an APPROVED "Building Final" inspection (3 of the 22)
 that date is the completion; the other 19 are a named HELD set (not counted, not dropped). Basis: HCD's phase
-rule. 32 is encoding it in `build_structures.py` and writing a timestamped baseline (4b); then a JN stage and a
+rule. **John, same day, on Building Final results:** "Approved with Conditions" counts as approved (1 structure); "Partially Approved" does not (7 structures); any other result stays not-complete. 32 encoded the first ruling in `build_structures.py` with baseline `structures_baseline_2026-09-28_completion-ruling.json` (`0a2b9d5`: 2018-2025 851 structures / 4,005 units; NOT_YET_COMPLETE 197 / 945u; STALE_NEEDS_SOURCE 74 / 147u, of which the city lists 52 Closed Expired, 18 Issued, 0 Finaled) and is adding the second; then a JN stage and a
 gated write. I exported the evidence file's parent links for 32's fold:
 `scratch/2026-09-28_evidence/permit_parents.csv` (694 Sonnet-read parents new to it).
 

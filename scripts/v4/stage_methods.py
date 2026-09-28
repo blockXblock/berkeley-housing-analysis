@@ -374,3 +374,89 @@ def apply_grounded_counts(con, csv_path=os.path.join(CORR, 'grounded_counts.csv'
         con.rollback()
         raise
     return {'rows': len(rows), 'promoted': changed}
+
+
+# ---------------------------------------------------------------- EVIDENCE: inspections and stored documents
+# Loaded AFTER JN-B's dedup (so distinct inspections on one day are never collapsed) and BEFORE JN-C's
+# classification. Each original file is a `sources` row with its SHA-256; every inspection record becomes one
+# event or is rejected WITH a reason (ingestion conservation, as in JN-A). Added 2026-09-28.
+INSPECTIONS_DIR = os.path.join(ROOT, 'data', 'raw', 'accela_inspections')
+DOCUMENTS_MANIFEST = os.path.join(ROOT, 'data', 'derived', 'documents_r2_manifest_2026-09-28.csv')
+
+
+def _sha256(path):
+    import hashlib
+    return hashlib.sha256(open(path, 'rb').read()).hexdigest()
+
+
+def load_inspections(con, directory=INSPECTIONS_DIR):
+    """Harvested Accela inspection histories -> 'inspection' events (phase CONSTRUCTION), one per record.
+    Refuses to load a file twice. Returns dict(files, records, events, rejected)."""
+    import glob, datetime as dt
+    now = dt.datetime.now(dt.timezone.utc).isoformat()
+    con.execute("INSERT OR IGNORE INTO event_types VALUES ('inspection','CONSTRUCTION',0,"
+                "'Accela inspection record (type, result, inspector in raw_payload)')")
+    files = sorted(glob.glob(os.path.join(directory, '*.json')))
+    assert files, f'no inspection files in {directory}'
+    tot = dict(files=0, records=0, events=0, rejected=0)
+    try:
+        for f in files:
+            loc = os.path.relpath(f, ROOT)
+            assert not con.execute("SELECT 1 FROM sources WHERE source_kind='accela_inspection' AND locator=?",
+                                   (loc,)).fetchone(), f'already loaded: {loc}'
+            d = json.load(open(f))
+            permit, recs = d.get('permit_number'), d.get('inspections') or []
+            sid = con.execute("INSERT INTO sources (source_kind,locator,retrieved_at,checksum,notes) VALUES "
+                              "('accela_inspection',?,?,?,?)", (loc, d.get('extraction_timestamp'), _sha256(f),
+                              f"{d.get('extraction_method') or ''} {d.get('url') or ''}"[:300])).lastrowid
+            ok, rejected = [], []
+            for r in recs:
+                try:
+                    day = dt.datetime.strptime(r['date'], '%m/%d/%Y').date().isoformat()
+                except Exception:
+                    rejected.append(f"{r.get('inspection_id')}: unparseable date {r.get('date')!r}"); continue
+                ok.append((day, r))
+            rid = con.execute("INSERT INTO ingestion_runs (source_id,started_at,rows_in_source,rows_ingested,"
+                              "rows_rejected,rejected_detail,conserved) VALUES (?,?,?,?,?,?,?)",
+                              (sid, now, len(recs), len(ok), len(rejected), '; '.join(rejected)[:2000] or None,
+                               int(len(recs) == len(ok) + len(rejected)))).lastrowid
+            con.executemany("INSERT INTO events (event_type_code,event_date,event_date_precision,source_record_key,"
+                            "source_id,ingestion_run_id,raw_payload,raw_description,created_at) VALUES "
+                            "('inspection',?,'day',?,?,?,?,?,?)",
+                            [(day, permit, sid, rid, json.dumps(r), f"{r.get('type_code')} — {r.get('result')}", now)
+                             for day, r in ok])
+            tot['files'] += 1; tot['records'] += len(recs); tot['events'] += len(ok); tot['rejected'] += len(rejected)
+        con.commit()
+    except Exception:
+        con.rollback()
+        raise
+    return tot
+
+
+def load_documents(con, manifest=DOCUMENTS_MANIFEST):
+    """Stored-document manifest -> documents table (one sources row for the manifest, with its SHA-256)."""
+    import csv, datetime as dt
+    ddl = open(os.path.join(ROOT, 'schema', 'v4', 'schema_v4.sql')).read()
+    con.executescript(ddl.split('-- BEGIN documents')[1].split('-- END documents')[0])   # idempotent DDL
+    loc = os.path.relpath(manifest, ROOT)
+    assert not con.execute("SELECT 1 FROM sources WHERE locator=?", (loc,)).fetchone(), f'already loaded: {loc}'
+    rows = list(csv.DictReader(open(manifest)))
+    try:
+        sid = con.execute("INSERT INTO sources (source_kind,locator,retrieved_at,checksum,notes) VALUES "
+                          "('document_manifest',?,?,?,?)", (loc, dt.datetime.now(dt.timezone.utc).isoformat(),
+                          _sha256(manifest), 'files held in R2; exported from v2 documents with provenance')).lastrowid
+        n = con.executemany("INSERT INTO documents (record_key,record_key_source,title,doc_date,doc_type,store_url,"
+                            "sha256,file_size_bytes,page_count,address_hint,apn_hint,source_id,provenance) VALUES "
+                            "(?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                            [(r['record_key'] or None, r['record_key_source'], r['title'], r['doc_date'] or None,
+                              r['doc_type'], r['store_url'], r['sha256'] or None,
+                              int(r['file_size_bytes']) if r['file_size_bytes'] else None,
+                              int(r['page_count']) if r['page_count'] else None, r['address_hint'] or None,
+                              r['apn_hint'] or None, sid, f"v2 document {r['v2_document_id']} ({r['v2_source_system']})")
+                             for r in rows]).rowcount
+        assert n == len(rows), f'documents: inserted {n} of {len(rows)}'
+        con.commit()
+    except Exception:
+        con.rollback()
+        raise
+    return dict(rows=len(rows), inserted=n)

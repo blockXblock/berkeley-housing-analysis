@@ -62,9 +62,16 @@ def expected_live():
     return exp
 
 con = sqlite3.connect(f'file:{DB}?mode=ro', uri=True)
-events  = con.execute("SELECT COUNT(*) FROM events").fetchone()[0]
-by_type = dict(con.execute("SELECT event_type_code,COUNT(*) FROM events GROUP BY event_type_code").fetchall())
-run     = con.execute("SELECT rows_in_source,rows_ingested,rows_rejected,conserved FROM ingestion_runs ORDER BY run_id DESC LIMIT 1").fetchone()
+# Scope: the CPRA permit-feed ingestion only. Other evidence (inspection events, since 2026-09-28) has its own
+# per-file conservation records and is not part of this invariant.
+_CPRA = "SELECT source_id FROM sources WHERE source_kind='cpra_permit_feed'"
+_types = tuple(INGESTION_ANCHORS)
+events  = con.execute(f"SELECT COUNT(*) FROM events WHERE event_type_code IN {_types} AND source_id IN ({_CPRA})").fetchone()[0]
+by_type = dict(con.execute(f"SELECT event_type_code,COUNT(*) FROM events WHERE event_type_code IN {_types} "
+                           f"AND source_id IN ({_CPRA}) GROUP BY event_type_code").fetchall())
+run     = con.execute(f"SELECT rows_in_source,rows_ingested,rows_rejected,conserved FROM ingestion_runs "
+                      f"WHERE source_id IN ({_CPRA}) ORDER BY run_id DESC LIMIT 1").fetchone()
+_other  = con.execute(f"SELECT COUNT(*), COALESCE(SUM(1-conserved),0) FROM ingestion_runs WHERE source_id NOT IN ({_CPRA})").fetchone()
 
 # independent file-truth: count non-null cells in each REAL date column straight from the source files
 truth = {}
@@ -80,6 +87,7 @@ total_removed = sum(sum(d['remove'].values()) for d in DOCUMENTED_DELTAS)
 print("events in db (live)                 :", events)
 print("events by type (live)               :", by_type)
 print("ingestion_runs (in/ingested/rej/cons):", run)
+print("other evidence runs (count, not conserved):", _other)
 print("independent file-truth (date cols)  :", truth)
 print("ingestion anchors (stable)          :", INGESTION_ANCHORS)
 print("documented deltas removed (total)   :", total_removed, "->", [d['name'] for d in DOCUMENTED_DELTAS])
@@ -96,6 +104,8 @@ if run is None or run[0] != SOURCE_ROWS or run[1] != INGESTION_TOTAL or run[3] !
 for etype, exp in exp_live.items():
     if by_type.get(etype, 0) != exp:
         problems.append(("LIVE vs anchors-minus-deltas", etype, by_type.get(etype, 0), exp))
+if _other[1]:
+    problems.append(("OTHER evidence conservation", "ingestion_runs", _other, "all conserved"))
 if events != sum(exp_live.values()):
     problems.append(("LIVE total", "events", events, sum(exp_live.values())))
 

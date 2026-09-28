@@ -151,14 +151,28 @@ Loads every event, classifies on its real payload fields, writes reversible labe
 `event_classifications` (overwrite-idempotent; a re-run with a tuned vocabulary just overwrites).
 Reads `events`, writes only `event_classifications`. The event stream is never touched.
 """)
+md(r"""
+## Evidence: inspections and stored documents (loaded before classification)
+Two kinds of evidence the CPRA permit files do not carry, loaded AFTER JN-B's dedup (so distinct inspections on
+one day are never collapsed) and BEFORE classification: the harvested Accela **inspection histories**
+(`data/raw/accela_inspections/*.json`, one `sources` row per file with its SHA-256, one `inspection` event per
+record or a rejection with its reason) and the **stored documents** we hold copies of in R2
+(`data/derived/documents_r2_manifest_2026-09-28.csv` -> the `documents` table). Documents link by record number;
+all current ones belong to PLANNING records, which enter the build with the CapDetail harvest.
+""")
+code(r"""
+con=sqlite3.connect(DB_PATH); con.execute("PRAGMA foreign_keys=ON")
+print("inspections:", SM.load_inspections(con))
+print("documents:  ", SM.load_documents(con))
+""")
 code(r"""
 con=sqlite3.connect(DB_PATH); con.execute("PRAGMA foreign_keys=ON")
 # THE materialization is stage_methods.classify_all — one importable home for the recipe
 # (2026-07-02 review: the loop + hash recipe were duplicated here as a cell-string, the exact
 # aa6ded0 anti-pattern). The hash comes from housing_rules.permit_role.classifier_hash().
-from housing_rules.permit_role import classifier_hash
+from housing_rules.permit_effect import evidence_hash
 dist = SM.classify_all(con)
-print(f"Classified {sum(dist.values()):,} events (hash={classifier_hash()}).")
+print(f"Classified {sum(v for k, v in dist.items() if not k.startswith('_')):,} events from model-read evidence (hash={evidence_hash()}).")
 for r,c in sorted(dist.items(), key=lambda x: -x[1]):
     print(f"   {r:<12} {c:>7,}")
 """)

@@ -98,6 +98,30 @@ CREATE INDEX idx_events_type   ON events(event_type_code);
 CREATE INDEX idx_events_date   ON events(event_date);
 CREATE INDEX idx_events_srckey ON events(source_record_key);
 
+-- Stored documents (plan sets, tabulation forms, ZAB packets, agreements) as EVIDENCE: each row is a file we
+-- hold a copy of (store_url + sha256), linked to the city record it belongs to by record_key (a permit or
+-- planning record number — provenance, not an identity claim). address_hint/apn_hint carry the v2 project's
+-- address/APN for the buildings stage where no record key exists. Added 2026-09-28.
+-- BEGIN documents
+CREATE TABLE IF NOT EXISTS documents (
+    document_id      INTEGER PRIMARY KEY,
+    record_key       TEXT,
+    record_key_source TEXT,                -- 'permit_number' | 'capture filename' | 'none'
+    title            TEXT,
+    doc_date         TEXT,
+    doc_type         TEXT,
+    store_url        TEXT NOT NULL,
+    sha256           TEXT,
+    file_size_bytes  INTEGER,
+    page_count       INTEGER,
+    address_hint     TEXT,
+    apn_hint         TEXT,
+    source_id        INTEGER NOT NULL REFERENCES sources(source_id),
+    provenance       TEXT
+);
+CREATE INDEX IF NOT EXISTS idx_documents_key ON documents(record_key);
+-- END documents
+
 -- ============================================================================
 -- LAYER 2 — CLASSIFICATION (reversible LABELS on events; never deletes)
 -- ============================================================================

@@ -132,6 +132,19 @@ BEFORE adding 286 rows on top; (2) then the rung-3 `--commit`. DBs are `chmod a-
 
 ---
 
+## 2026-09-28 — Affordability tiers sourced · `corrections/v4/affordability_rulings.csv`
+
+v2's 47 affordable-tier rows sorted by sourcing. **Approved (12 rows, 255 units):** group A (10 rows, 180u, checked in
+June vs Accela Density Bonus Eligibility Statements / an Affordable Housing Compliance Plan) + A2 (3000 Shattuck VLI 17,
+1974 Shattuck VLI 58 — model reading of the stored DBE statements, quotes kept). **Unknown with provenance (12):** Ashby
+BART's 309 (a planning target, John) + group B's 11 projects, whose stored forms are all TABULATION forms. **Finding:
+Berkeley's 1.E tabulation form never states affordability** — tiers live only in the Density Bonus Eligibility Statement
+or the Affordable Housing Compliance Plan. Still open: group C (17 projects, 734u, no document held) and 2550 Shattuck
+(only full plan sets held). **Next source: harvest the DBE statements / AHCPs from each housing planning record's
+Accela attachments** (32's harvester reaches those pages). Model reading cost ~$0.25 (28 forms, fingerprints verified).
+
+---
+
 ## 2026-09-28 — UC and BART rulings sourced (John approved) · `corrections/v4/classification_rulings.csv`
 
 New ledger of classification rulings, each with source document and quoted passage. **UC x4 EXCLUDED** from RHNA/APR

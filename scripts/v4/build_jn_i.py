@@ -3,8 +3,7 @@
 The question: how long does each stage of housing production take — application -> issuance ->
 final — for whom, trending which way, and how does elapsed time compare to the state's statutory
 clocks? Everything derives from the v4 event stream (permit_submitted / permit_issued /
-permit_finaled are first-class events); roles from housing_rules.permit_role (aa6ded0 discipline:
-IMPORT, never re-define). Read-only on the DB; writes only its baseline (first run) and nothing else.
+permit_finaled are first-class events); roles from the build's event_classifications (model-read evidence; read, never re-derived). Read-only on the DB; writes only its baseline (first run) and nothing else.
 
 House pattern: markdown(assumption+plan) -> code -> markdown(found+verify); derive-and-compare to an
 external timestamped baseline (data/baselines/timelines_baseline_<date>.json, carrying v4 sha +
@@ -35,7 +34,7 @@ screens them against the state's statutory clocks, and names the longest waits. 
 
 **Sources & roles.** Everything derives from the v4 event stream (`permit_submitted` /
 `permit_issued` / `permit_finaled`) — the same CPRA-fed store the audit runs on. Roles come from
-`housing_rules.permit_role` (imported, never re-typed). No oracle input anywhere: these are pure
+the build's `event_classifications` (read, never re-derived). No oracle input anywhere: these are pure
 primary-source measurements.
 
 **Honesty rails (read before quoting any number):**
@@ -63,7 +62,6 @@ import pandas as pd
 ROOT = os.path.expanduser('~/berkeley-data')
 sys.path.insert(0, os.path.join(ROOT, 'scripts'))
 sys.path.insert(0, os.path.join(ROOT, 'scripts', 'build_v2'))
-from housing_rules import permit_role
 from cpra_dedup import extract_master_permit
 
 V4 = os.path.join(ROOT, 'databases', 'berkeley_housing_v4.db')
@@ -92,9 +90,14 @@ pay = pd.read_sql("""
     GROUP BY source_record_key""", con)
 df = wide.merge(pay, on='pn', how='left')
 
-roles = df.apply(lambda r: permit_role.classify(r.wt, r.descr, r.adu, r.occ, r.ua, r.ur, r.pn), axis=1)
-df['role'] = [x[0] for x in roles]; df['is_master'] = [x[1] for x in roles]
-df['units'] = [permit_role.net_units(r.ua, r.ur, role) for r, role in zip(df.itertuples(index=False), df['role'])]
+# roles and units = the BUILD's labels (event_classifications, model-read evidence under HCD definitions),
+# read from v4 -- never re-derived here (2026-09-28: the regex classifier was retired)
+lab = pd.read_sql("""
+    SELECT e.source_record_key pn, c.housing_role role, c.is_master, c.net_units units, c.classifier_hash
+    FROM events e JOIN event_classifications c USING(event_id)
+    WHERE e.event_type_code='permit_submitted' GROUP BY e.source_record_key""", con)
+df = df.merge(lab, on='pn', how='left')
+df['is_master'] = df.is_master.fillna(0).astype(bool); df['units'] = df.units.fillna(0)
 df['is_base'] = df.pn.map(lambda p: extract_master_permit(str(p)) == str(p))
 df['is_adu'] = df.adu.astype(str).str.strip().str.lower().str.startswith('y')
 
@@ -107,7 +110,7 @@ base = df[df.is_base]
 housing = base[(base.role == 'new_unit') & base.is_master & (base.units > 0)]
 adu = base[base.is_adu]
 print(f'permits {len(df):,} | base {len(base):,} | housing new-unit masters {len(housing):,} | ADU-flagged base {len(adu):,}')
-print(f'classifier: {permit_role.classifier_hash()}')
+print(f'classifier: {lab.classifier_hash.iloc[0]} (the build\'s labels)')
 ''')
 md(r"""
 📝 **Found/verify:** the universe splits into the city's whole caseload (base permits), the
@@ -251,7 +254,7 @@ display(Markdown('''```mermaid
 graph LR
   X[CPRA BP xlsx 2018-2025] -->|JN-A ingest| E[(v4 events\nsubmitted/issued/finaled)]
   E -->|MIN date per type per permit| P[per-permit frame]
-  R[housing_rules.permit_role] -->|classify + net_units| P
+  R[v4 event_classifications] -->|role + units| P
   P --> S2[waits by cohort §2]
   P --> S3[trend §3]
   P --> S4[ADU 60-day screen §4]
@@ -295,7 +298,7 @@ if snaps:
     print(f'BASELINE GATE PASS vs {os.path.basename(snaps[-1])}')
 else:
     out = os.path.join(ROOT, 'data', 'baselines', 'timelines_baseline_2026-07-03.json')
-    json.dump({'as_of': '2026-07-03', 'v4_sha': sha, 'classifier': permit_role.classifier_hash(),
+    json.dump({'as_of': '2026-07-03', 'v4_sha': sha, 'classifier': str(lab.classifier_hash.iloc[0]),
                'provenance': 'JN-I first derivation from v4 events (permit_submitted/issued/finaled)',
                'figures': figures}, open(out, 'w'), indent=1)
     print('WROTE first baseline:', out)

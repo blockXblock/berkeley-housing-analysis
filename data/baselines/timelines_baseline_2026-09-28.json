@@ -1,0 +1,19 @@
+{
+ "as_of": "2026-09-28",
+ "v4_sha": "live v4 sha 27c3e7e9 (2026-09-28 rebuild)",
+ "classifier": "permit_effect@501341414243",
+ "provenance": "JN-I re-derived after (1) the declared inputs moved to the 2026-07-07 productions (32,897 permits) and (2) roles came from the build's model-read labels instead of the regex",
+ "change_note": "Inputs alone (regex, new files): base permits 26,549 -> 28,390, housing masters 928 -> 1,100, ADU base 2,881 -> 3,351, medians within a day. Then roles from the model: housing masters 1,100 -> 1,183; median submit->issue for housing 188 -> 200.5 days (p90 537.5). Earlier baseline kept.",
+ "supersedes": "timelines_baseline_2026-07-03.json (kept)",
+ "figures": {
+  "n_base_permits": 28390,
+  "n_housing_masters": 1183,
+  "n_adu_base": 3351,
+  "review_median_all": 9.0,
+  "review_p90_all": 161.0,
+  "review_median_housing": 200.5,
+  "review_p90_housing": 537.5000000000005,
+  "adu_review_median": 3.0,
+  "adu_share_over_60d": 0.2702
+ }
+}

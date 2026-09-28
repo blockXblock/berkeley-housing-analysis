@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-09-28 ============================
+# DO NOT RUN. Original path: scripts/migration/ingest_cpra_2026.py
+# WHY: One-time v2 ingest of the 2025-2026 CPRA file (applied 2026-09-25, 220 permits). Classified with the regex and stamped the wrong classifier id. Its planned five-file re-run is replaced by the v4 build's declared, SHA-pinned inputs.
+raise SystemExit("SEQUESTERED 2026-09-28 -- see header; original path scripts/migration/ingest_cpra_2026.py")
+# ================================================================================
 """ingest_cpra_2026.py — load the 2025/2026 CPRA building-permit feed into v2.
 
 WHY. v2's permit feed stopped at 2025-12-22, so every 2026 completion was missing: v2 held 2

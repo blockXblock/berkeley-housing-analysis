@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-09-28 ============================
+# DO NOT RUN. Original path: scripts/migration/preview_cpra_2026_ingest.py
+# WHY: Preview for ingest_cpra_2026 (diverged from the commit path). Retired with it.
+raise SystemExit("SEQUESTERED 2026-09-28 -- see header; original path scripts/migration/preview_cpra_2026_ingest.py")
+# ================================================================================
 """preview_cpra_2026_ingest.py — READ-ONLY preview of the two un-ingested CPRA files.
 
 WHAT THIS IS. `docs/audit/2026-09-25_tour_grade_data_readiness.md` found two CPRA productions

@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-09-28 ============================
+# DO NOT RUN. Original path: scripts/v4/build_jn_d.py
+# WHY: JN-D built a relabel queue for the retired regex classifier, anchored on HCD/CKAN ADU counts (the oracle used as input). The build now reads model-evidence roles, so the queue has no consumer.
+raise SystemExit("SEQUESTERED 2026-09-28 -- see header; original path scripts/v4/build_jn_d.py")
+# ================================================================================
 """
 build_jn_d.py — JN-D ENGINE: v4↔HCD ADU bijection, hardened, with independent oracles.
 

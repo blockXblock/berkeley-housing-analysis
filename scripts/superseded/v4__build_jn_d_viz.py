@@ -1,3 +1,8 @@
+# ============================ SEQUESTERED 2026-09-28 ============================
+# DO NOT RUN. Original path: scripts/v4/build_jn_d_viz.py
+# WHY: Visualization for JN-D (read build_jn_d.py's source to recover constants). Retired with JN-D.
+raise SystemExit("SEQUESTERED 2026-09-28 -- see header; original path scripts/v4/build_jn_d_viz.py")
+# ================================================================================
 """Build JN-D_bijection_viz.ipynb — the VIZ COMPANION to the build_jn_d.py ADU-bijection engine.
 
 NON-DESTRUCTIVE: does not touch the engine. The engine does the heavy GIS-oracle bijection and writes its

@@ -41,6 +41,35 @@ import accela_grid as ag                      # noqa: E402  THE one grid walk
 OUT = ROOT / "scratch/2026-09-28_affordability/tier1"
 
 
+MIB, KIB = 1048576, 1024
+
+
+def size_tolerance(listed: int) -> int:
+    """how far a real download may sit from the LISTED size.
+
+    The listed size is NOT measured: it is the grid's DISPLAYED size ("3.42 MB", "89.92 KB") converted
+    back to bytes, so it carries that display's rounding -- up to ~5 KB when the grid showed MB. It
+    can never be byte-exact, and the display unit is not recoverable from the number: I tried
+    inferring it, and the test was vacuous, because 0.01 KB is 10 bytes so almost any integer looks
+    like a 2-decimal KB value. That mistake turned 21 correct downloads into SIZE-MISMATCH twice over.
+
+    So size is a SANITY band, not an integrity test: 1% (floor 2 KB), which passes display rounding
+    (worst observed 4,928 bytes on 1.2 MB = 0.39%) and still catches a wrong or truncated file. The
+    integrity test is looks_like_pdf: a saved HTML error page is a "successful" download of nothing,
+    and no size rule can see that.
+    """
+    return max(int(0.01 * listed), 2048)
+
+
+def looks_like_pdf(p: Path) -> bool:
+    """the check a size comparison cannot make: a saved HTML error page is not a document."""
+    try:
+        with open(p, "rb") as f:
+            return f.read(5) == b"%PDF-"
+    except Exception:
+        return False
+
+
 def sha256_of(p: Path) -> str:
     h = hashlib.sha256()
     with open(p, "rb") as f:
@@ -71,6 +100,9 @@ def main() -> int:
     ap.add_argument("--tier", default="1")
     ap.add_argument("--delay", type=float, default=1.5)
     ap.add_argument("--limit", type=int, default=0, help="stop after N records (smoke test)")
+    ap.add_argument("--manifest", default=None,
+                    help="manifest filename. Defaults to tier<N>_manifest.csv; pass a distinct name "
+                         "for an ADDENDUM list so it cannot overwrite the main run's manifest.")
     args = ap.parse_args()
 
     want: dict[str, dict[str, dict]] = defaultdict(dict)      # record -> filename -> row
@@ -105,7 +137,8 @@ def main() -> int:
                 # resume: a file already on disk at the listed size is done
                 for fn, row in list(todo.items()):
                     f = dest_dir / fn.replace("/", "_")
-                    if f.exists() and abs(f.stat().st_size - int(row["bytes"] or 0)) <= 2048:
+                    listed0 = int(row["bytes"] or 0)
+                    if f.exists() and abs(f.stat().st_size - listed0) <= size_tolerance(listed0):
                         got[fn] = "ok-already-on-disk"
                         todo.pop(fn)
                 if not todo or rec not in href:
@@ -139,9 +172,14 @@ def main() -> int:
                 st = got.get(fn, "FAILED-not-found-in-grid" + (f" ({err})" if err else ""))
                 size = f.stat().st_size if f.exists() else 0
                 listed = int(row["bytes"] or 0)
-                # a size check catches the download that "succeeded" and saved an error page
-                if st.startswith("ok") and listed and abs(size - listed) > 2048:
-                    st = f"SIZE-MISMATCH listed={listed} got={size}"
+                # the real integrity test is the file's own magic bytes: a saved HTML error page is
+                # a "successful" download of nothing. The size check is secondary and must respect
+                # the listing's display rounding (see size_tolerance).
+                if st.startswith("ok") and size and not looks_like_pdf(f):
+                    st = f"NOT-A-PDF (first bytes are not %PDF-, {size} bytes)"
+                elif st.startswith("ok") and listed and abs(size - listed) > size_tolerance(listed):
+                    st = (f"SIZE-MISMATCH listed={listed} got={size} "
+                          f"tol={size_tolerance(listed)}")
                 manifest.append({"project_id": row["project_id"], "record": rec, "filename": fn,
                                  "listed_bytes": listed, "bytes": size,
                                  "sha256": sha256_of(f) if size else "",
@@ -153,7 +191,7 @@ def main() -> int:
             time.sleep(args.delay)
         b.close()
 
-    mpath = OUT.parent / "tier1_manifest.csv"
+    mpath = OUT.parent / (args.manifest or f"tier{args.tier}_manifest.csv")
     with open(mpath, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(manifest[0]))
         w.writeheader()

@@ -232,6 +232,119 @@ This field shall be Berkeley's authoritative CO-equivalent statistic for HCD APR
 
 ---
 
+## The state-law question: what would make every city comparable
+
+Berkeley can fix Berkeley in the Clariti contract. It cannot make itself *comparable* to Oakland or
+Fresno, and comparability is the point — a measurement of progress that cannot be set beside another
+city's is an assertion, not a measurement. That requires a lever above the city.
+
+### The Annual Progress Report is not a record; it is a computation over records
+
+This distinction decides which law applies. The California Public Records Act gives access to records
+that **exist**. An APR is a *derived* quantity — a report assembled from permit records under HCD's
+definitions. So "extend CPRA to real-time APR calls" asks the wrong statute for the wrong object.
+
+The right ask is **real-time access to the underlying permit records**. Then any party — the City, HCD,
+a journalist, a neighbouring city's staff — computes the APR continuously, from the same inputs, by a
+published rule. The report becomes a query.
+
+### Why CPRA cannot carry a real-time feed
+
+Three structural features, none of them accidental:
+
+1. **Retrospective and per-request.** There is no standing or subscription request; each request reaches
+   records existing at that moment. A feed is a continuing obligation CPRA does not create.
+2. **Its clock is a determination in 10 days, with extensions.** "Promptly" is not real time.
+3. **It compels neither format, schema stability, nor interface.** The electronic-records provision
+   requires a format the agency *holds* — a spreadsheet export satisfies it. Agencies may also charge
+   for data compilation, extraction or programming.
+
+Making CPRA deliver a feed converts it from an access statute into a **service-provision mandate** for
+every agency in the state, including the many with no IT capacity. That is a large change, it would be
+contested for years, and it is not necessary to get what we need.
+
+### The one CPRA amendment worth wanting, and it is narrow
+
+> **No interface downgrade.** Where an agency already publishes a record to the public through an
+> interactive portal, it shall also make that record available in a documented, machine-readable form.
+
+*Public to a human, public to a machine.* This mandates no new data collection, burdens no jurisdiction
+that publishes nothing, and reaches precisely our situation. Berkeley's processing-status workflow **is
+already public** — any browser renders it. Reading 1,786 Planning records of it required a purpose-built
+browser framework and a workaround for a portal session that stops returning data after about four
+views. **The inaccessibility is an artifact of interface, not of policy**, and that is the narrowest
+possible thing to legislate.
+
+### But the primary lever is HCD, and it is rulemaking rather than legislation
+
+APRs exist under Gov. Code § 65400, with HCD specifying the forms and content. HCD already compels this
+data annually from every jurisdiction and already republishes it. If HCD required **record-level
+structured submission, continuously or quarterly, through a documented endpoint**, real-time APR
+follows without touching CPRA — and it arrives uniformly across all ~540 California cities and counties
+instead of one contract at a time.
+
+HCD also has enforcement leverage CPRA lacks: housing-element compliance findings, and SB 35
+streamlining eligibility, already turn on APR data.
+
+**This is a rulemaking petition, not a bill.**
+
+### The comparability argument, which is the strongest one
+
+HCD collects an APR from every California jurisdiction and publishes them together, which invites
+comparison. **Today that comparison is unsound, and Berkeley is the proof.**
+
+- **Berkeley issues no standard Certificate of Occupancy.** Its permitting workflow contains nine
+  distinct CofO-named review stages. Berkeley's "CO date" is therefore a *derived* value, and the
+  derivation rule is nowhere published. Every jurisdiction with a non-standard completion process is in
+  the same position, each deriving differently.
+- **An independent reconstruction of ONE city's APR, built from that city's own source records,
+  disagrees with that city's own filing in 84 of 779 rows** — 60 completions the City filed that the
+  reconstruction does not carry, 24 the reconstruction carries that the City did not file. Some of
+  those are our defects and some are the City's; the point is that **the disagreement is invisible
+  from the APR alone.**
+- If a single city cannot be reconciled against itself without record-level access, then a table
+  ranking 540 cities against each other cannot mean what it appears to mean.
+
+**What becomes genuinely comparable once record-level workflow data is exposed** — and these are
+measurements, not opinions:
+
+| metric | why it is comparable across cities |
+|---|---|
+| **days from application filed to application accepted** | every jurisdiction has an intake step; the dates are the city's own |
+| **performance against the city's OWN stated due date** | each city sets its own deadline, so the comparison is each city against its own promise, not against a state average. Berkeley's median is **12 days late**, p90 **+216** |
+| **who held the clock at each step** | the disposition vocabulary names it ("Incomplete Pending Applicant" vs "Resubmittal Pending Staff"); no model or judgement required |
+| **share of housing on a ministerial path** | measured as the fraction moving to a record type whose disposition vocabulary contains **no** refusal step. A statutory framework (SB 9, SB 35, SB 423, AB 2011) applies identically statewide, so this is the cleanest cross-city measure of by-right reform actually taking effect |
+| **iteration count before acceptance** | Berkeley's discretionary design-review records average **2.6** completeness dispositions each; the by-right path has **one** |
+
+Note what is *not* on that list: nothing requiring a jurisdiction to adopt a new definition, and nothing
+requiring HCD to arbitrate. Each metric is computed from dates and vocabulary the city already records
+for its own operational purposes.
+
+### Three levers, three horizons, and they are complementary
+
+| lever | horizon | what it needs | what it gets |
+|---|---|---|---|
+| **Clariti procurement** | now | a contract clause | Berkeley, and a working example |
+| **HCD rulemaking** | 1–2 years | a petition | all ~540 jurisdictions, uniformly |
+| **CPRA amendment** | 2+ years, contested | a bill | a backstop where portals exist but endpoints do not |
+
+The Clariti contract creates the **proof**; HCD **generalises** it; a narrow CPRA amendment **backstops**
+it. Pursuing only the third is the slowest route to the least. Pursuing the first alone fixes one city
+and leaves the comparison impossible.
+
+### The specific asks
+
+1. **Berkeley:** the contract terms above, plus publication of its CO-equivalent derivation rule — so
+   that anyone recomputing Berkeley's APR gets Berkeley's answer.
+2. **HCD:** a rulemaking petition for record-level, continuously-submitted APR data through a
+   documented endpoint, with each jurisdiction's completion-signal derivation rule published alongside.
+3. **The Legislature:** the no-interface-downgrade principle, as narrow as stated above.
+
+*This section is analysis, not legal advice; statutory citations should be confirmed against the
+current codification (the CPRA was recodified in 2023 to Gov. Code § 7920 et seq.).*
+
+---
+
 ## The vision
 
 Berkeley should aim to be the example of an independent permit pipeline database that is open to queries on all aspects of the pipeline — fees, costs, timelines, delays, and outcomes. We want to track every housing proposal to see if any project actually built and brought to market any housing at any price or income level.

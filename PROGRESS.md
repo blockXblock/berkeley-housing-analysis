@@ -63,6 +63,32 @@ reporting and need their own class in the next reading.
 **Nothing written to any database. The applied planning ingest is NOT re-run** — a data error is a new
 gated write (CLAUDE.md), and both directions are John's to review.
 
+**SECOND READ (John: "go"), Sonnet via Batch, 1,936 of 2,594 collected so far** (`c55c434`; a retry is
+reading the last 658 after a max_tokens bug — 400 tokens/record was not enough for a quoted reason, so
+64 of 260 groups truncated). **The headline is the disagreement: Jev and Sonnet differ on 1,117 of
+1,936 records — 58%.** The `permit_effect` precedent was 45% (2,625 of 5,773). So a single reader's
+label is not evidence, whatever its confidence reads, and the disagreement is recorded rather than
+averaged. The largest cells: 475 `jev=housing_adjacent → sonnet=unknown` (Sonnet more willing to
+refuse), 207 `jev=housing_development → sonnet=housing_adjacent` (the direction that shrinks coverage),
+167 `jev=housing_adjacent → sonnet=not_housing`.
+
+**John's option-2 ruling is vindicated empirically: `two_thirds_test` came back `not_evaluable` on
+1,913 of 1,936 (99%)**, `met` 20, `not_met` 3. Statutory strictness (option 1) would have marked
+almost the entire corpus unknown.
+
+**A new class the reading earned: UNIT REMOVALS.** 23 records state units removed, and on inspection
+all 23 stand up — I misjudged three of them from a truncated reason and the full text corrected me
+(`DRSL2018-0007` / `ZP2018-0108`: "**Convert existing dwelling unit into a medical office.** Construct
+duplex at rear of property" — one removed, two created). **Applying the city's own status matters
+more than the count:** 20 records on live approvals = **47 units removed**, while the single largest
+claim — `ZP2021-0048`, "eliminate 75 dwelling units within an 85-unit residential building" — is
+**Withdrawn**, so counting it would have been wrong by 75 units. Notable live ones: `DRCF2016-0006`
+demolish an 18-unit apartment building to build 71; `ZP2024-0111` nine existing apartments to tourist
+hotel use (Approved).
+
+**The quoted-reason requirement paid for itself twice:** it is what made my own three misjudgements
+visible, and it is what shows a removal claim resting on a change-of-use rather than a demolition.
+
 ---
 
 ## 2026-09-26 — CapDetail harvest: rung 3 (application ACCEPTED) becomes a dated fact

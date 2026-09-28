@@ -99,6 +99,109 @@ def questions() -> dict:
     }
 
 
+SONNET_Q = """You are reading {n} PLANNING records from the City of Berkeley. Judge each record on its
+own; do not let one record inform another.
+
+{rules}
+Question, for EACH record: is that record an application, or a step in one, for a housing development
+project as defined above?
+
+Answer with a JSON array only, one object per record, in the same order:
+[{{"record": <Record Number>,
+   "scope": "housing_development" | "housing_adjacent_not_development" | "not_housing" | "unknown",
+   "units_stated": <integer the record's own text states, or null if it states none>,
+   "removes_units": <integer the text says are removed or eliminated, or 0>,
+   "two_thirds_test": "met" | "not_met" | "not_evaluable",
+   "reason": <one sentence that QUOTES the words you relied on>,
+   "confidence": "high" | "medium" | "low"}}, ...]
+
+Records:
+{records}"""
+
+
+def low_confidence(conf_floor: float) -> list[str]:
+    """the records Jev was unsure about, from its own log -- read, never re-asked."""
+    log = OUT / "jev_answers.jsonl"
+    out = []
+    for line in log.read_text().splitlines():
+        try:
+            r = json.loads(line)
+        except Exception:
+            continue
+        if "error" in r:
+            continue
+        try:
+            c = float(r.get("scope_confidence"))
+        except (TypeError, ValueError):
+            c = 0.0
+        if c < conf_floor:
+            out.append(r["record"])
+    return out
+
+
+def sonnet(cmd: str, recs: dict, conf_floor: float, pack: int, dry: bool) -> int:
+    import hashlib
+    import re as _re
+    state = OUT / "sonnet_batch_state.json"
+    ids_path = OUT / "sonnet_ids.json"
+    if cmd == "submit":
+        want = [n for n in low_confidence(conf_floor) if n in recs]
+        groups = [want[i:i + pack] for i in range(0, len(want), pack)]
+        prompt_hash = hashlib.sha256((SONNET_Q + PLANNING_SCOPE).encode()).hexdigest()[:12]
+        reqs, ids = [], {}
+        for i, g in enumerate(groups):
+            body = "\n".join(json.dumps(recs[n], separators=(",", ":")) for n in g)
+            text = SONNET_Q.format(n=len(g), rules=PLANNING_SCOPE, records=body)
+            cid = f"g{i:05d}"
+            reqs.append({"custom_id": cid,
+                         "params": {"model": mr.BATCH_MODEL, "max_tokens": 400 * len(g) + 400,
+                                    "messages": [{"role": "user", "content": text}]}})
+            ids[cid] = g
+        ids_path.write_text(json.dumps({"prompt_hash": prompt_hash, "ids": ids,
+                                        "conf_floor": conf_floor}, indent=1))
+        print(f"{len(want)} records below {conf_floor} confidence -> {len(reqs)} requests "
+              f"of {pack}; prompt {prompt_hash}")
+        if dry:
+            print(reqs[0]["params"]["messages"][0]["content"][:2000])
+            return 0
+        mr.batch_submit(reqs, state)
+        return 0
+    if cmd == "status":
+        mr.batch_status(state)
+        return 0
+    # collect
+    meta = json.loads(ids_path.read_text())
+    rows, bad, tin, tout = [], [], 0, 0
+    for cid, got, txt, usage in mr.batch_results(state):
+        group = meta["ids"].get(cid, [])
+        if usage:
+            tin += usage.input_tokens
+            tout += usage.output_tokens
+        if got is None:
+            bad += [{"record": n, "why": txt[:120]} for n in group]
+            continue
+        got = got if isinstance(got, list) else [got]
+        by = {str(g.get("record")): g for g in got if isinstance(g, dict)}
+        for n in group:
+            g = by.get(n)
+            if not g:
+                bad.append({"record": n, "why": "absent from the answer array"})
+                continue
+            rows.append({"record": n, "sonnet_scope": g.get("scope"),
+                         "sonnet_units_stated": g.get("units_stated"),
+                         "sonnet_removes_units": g.get("removes_units"),
+                         "two_thirds_test": g.get("two_thirds_test"),
+                         "reason": g.get("reason"), "sonnet_confidence": g.get("confidence"),
+                         "prompt_hash": meta["prompt_hash"], "model": mr.BATCH_MODEL})
+    (OUT / "sonnet_answers.json").write_text(json.dumps(rows, indent=1))
+    print(f"collected {len(rows)} readings, {len(bad)} unparsed/absent; "
+          f"tokens in {tin:,} out {tout:,}")
+    if bad:
+        for b in bad[:10]:
+            print("   MISSING", b)
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
@@ -106,6 +209,12 @@ def main() -> int:
     ap.add_argument("--jev", action="store_true")
     ap.add_argument("--report", action="store_true")
     ap.add_argument("--write-evidence", action="store_true")
+    ap.add_argument("--sonnet", choices=["submit", "status", "collect"], default=None,
+                    help="second read of the records Jev was unsure about (< --conf), via the Batch "
+                         "API. A single reader's label is not evidence: on permit_effect's hard "
+                         "subset Jev and Sonnet disagreed 2,625 times out of 5,773.")
+    ap.add_argument("--conf", type=float, default=0.70)
+    ap.add_argument("--pack", type=int, default=10, help="records per request")
     args = ap.parse_args()
 
     recs = records()
@@ -114,6 +223,9 @@ def main() -> int:
     print(f"{len(recs):,} DEV Planning records · the regex queue holds {len(rq):,} of them "
           f"(a FLOOR, not a census)")
     todo = order[:args.limit] if args.limit else order
+
+    if args.sonnet:
+        return sonnet(args.sonnet, recs, args.conf, args.pack, args.dry_run)
 
     if args.dry_run:
         n = order[0]

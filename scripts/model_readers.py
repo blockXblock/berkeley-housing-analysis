@@ -127,3 +127,47 @@ def write_evidence(rows: list[dict], topic: str, definitions: str, extra: dict |
     out.write_text(json.dumps(payload, indent=1) + "\n")
     print(f"wrote {out.relative_to(ROOT)}  ({len(rows)} readings)")
     return out
+
+
+# ---------------------------------------------------------------------------------------------
+# THE BATCH API PATH. A second reader, for the records the cheap classifier is unsure about. The
+# permit_effect reading paid for itself here: on the 5,773 permits that needed reasoning, Jev and
+# Sonnet DISAGREED 2,625 times -- so a single reader's label, however confident it looks, is not
+# evidence. Batch rather than live calls: half price, and a reading is not urgent.
+BATCH_MODEL = "claude-sonnet-5"
+
+
+def batch_submit(requests: list[dict], state_path: Path) -> str:
+    """submit a batch and record its id. Returns the batch id."""
+    import anthropic
+    b = anthropic.Anthropic(api_key=key("anthropic")).messages.batches.create(requests=requests)
+    state_path.parent.mkdir(parents=True, exist_ok=True)
+    state_path.write_text(json.dumps({"batch_id": b.id, "n": len(requests),
+                                      "submitted_at": time.strftime("%Y-%m-%dT%H:%M:%S")}))
+    print(f"submitted {b.id}  ({len(requests)} requests)")
+    return b.id
+
+
+def batch_status(state_path: Path):
+    import anthropic
+    bid = json.loads(state_path.read_text())["batch_id"]
+    b = anthropic.Anthropic(api_key=key("anthropic")).messages.batches.retrieve(bid)
+    print(b.processing_status, b.request_counts)
+    return b
+
+
+def batch_results(state_path: Path):
+    """yield (custom_id, parsed_json_or_None, raw_text, usage) for every result."""
+    import anthropic
+    import re as _re
+    bid = json.loads(state_path.read_text())["batch_id"]
+    for r in anthropic.Anthropic(api_key=key("anthropic")).messages.batches.results(bid):
+        if r.result.type != "succeeded":
+            yield r.custom_id, None, r.result.type, None
+            continue
+        txt = "".join(b.text for b in r.result.message.content if getattr(b, "type", "") == "text")
+        m = _re.search(r"\[.*\]|\{.*\}", txt, _re.S)
+        try:
+            yield r.custom_id, json.loads(m.group(0)), txt, r.result.message.usage
+        except Exception:
+            yield r.custom_id, None, txt, r.result.message.usage

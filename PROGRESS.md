@@ -203,6 +203,23 @@ completion set identical. **DONE (John unlocked): live v4 rebuilt** from the ver
 
 ---
 
+## 2026-09-28 — Affordability: 22 projects sourced from the city's documents (John approved groups 1-3)
+
+32 listed every attachment on 105 Planning records (1,419 files; its pager first read page 1 only, fixed in
+`scripts/accela_grid.py`); Sonnet picked likely statements by filename, record and size; 32 fetched tier 1 (145 PDFs,
+82 MB, `scratch/2026-09-28_affordability/tier1/`, sha256 in `tier1_all_manifest.csv`); Sonnet read them per project
+(`read_tier1.py`, ~2.9M input tokens) for stated units by income level with page + quote. Each figure's source was then
+chosen BY HAND (approval document first, else the latest city/applicant statement). **Ledger
+`corrections/v4/affordability_rulings.csv`: +34 rows (A013–A046) over 22 projects:** group 1, 9 projects where the
+documents agree with v2 (85 VLI); group 2, 5 approval documents that differ (e.g. 2128 Oxford 6 ELI + 34 VLI, not 47 VLI;
+1367 University 5 VLI, not 39); group 3, 8 pre-approval statements (e.g. 1701 San Pablo 12/20/48 ELI/VLI/LI, not 110
+VLI). 8 unknown rows `superseded`. **Held (still unknown):** 2720 San Pablo (documents describe a 25-unit building, v2 has
+113), 2127 Dwight (BMR vs replacement units), 2538 Durant (the extracted figure contradicts its quote), 2001 Ashby (only a
+feasibility analysis; not in the ledger). **Open:** the 145 source PDFs are in scratch only — they need durable storage
+(R2 or T7) before the ledger's sha256 references can be followed; tier 2 (16 large files) for the held projects.
+
+---
+
 ## 2026-09-28 — Planning milestones: `housing_rules.planning_record.milestones(record)` (John approved the rule)
 
 Per Planning record, from the city's own Processing Status: **accepted** = the FIRST "Application Complete" (Completeness

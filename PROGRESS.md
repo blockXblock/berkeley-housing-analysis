@@ -132,6 +132,20 @@ BEFORE adding 286 rows on top; (2) then the rung-3 `--commit`. DBs are `chmod a-
 
 ---
 
+## 2026-09-28 — Planning records load into the build (`fa33f52`, `4453b82`) — live v4 NOT yet rebuilt
+
+32's CapDetail harvest is now a declared input: `data/raw/accela_capdetail/capdetail_2026-09-26.jsonl` (1,786 records,
+sha256 2f911aae…) + `pages_manifest_2026-09-26.csv` (sha256 + bytes for each of the 1,786 raw pages, 164 MB). Pages go
+to the T7 (John's choice): `scratch/2026-09-28_evidence/copy_capdetail_pages_to_t7.sh`, run from Terminal.app (iTerm
+lost removable-volume access); it verifies every file and writes `t7_copy_verified.txt`. **Not yet run.**
+`stage_methods.load_planning` (JN-C): 1,786 `planning_filed` + 8,927 `planning_task` events (dated tasks only; pending
+ones stay in the record's payload), 64 city-staff actors as written, 8,927 marks; no stage meaning at load;
+`classify_all` skips planning events. 249 of 277 keyed documents now match a planning record. **Chain from raw:** gate
+4,323 / 5,288 unchanged; structural gate halts on events only (147,232 vs live 136,519 = the 10,713 planning events),
+completion set identical. **Next (John):** rebuild live v4 with planning (snapshot first).
+
+---
+
 ## 2026-09-28 — Buildings stage: John's ruling on borrowed completions (middle option)
 
 32's fold (`build_structures.py` @ `ca32762`) against today's chain build: 1,189 masters → **1,187 structures**;

@@ -203,6 +203,21 @@ completion set identical. **DONE (John unlocked): live v4 rebuilt** from the ver
 
 ---
 
+## 2026-09-28 — Stages look (read-only) + JN-A fills `raw_address` (build fix; live v4 not yet rebuilt)
+
+Joining the 1,116 primary Planning applications to 32's 1,187 structures (live v4, read-only;
+`scratch/2026-09-28_stages/join_planning_structures.py`, parcel identity incl. former APNs + canonical address): 323
+applications reach a structure (279 parcel+address agree, 22 parcel only, 14 address only, 8 DISAGREE). Of 69 structures
+with 5+ units: 35 reach exactly one application, 9 reach several (needs `capdetail_select`), **25 reach none** — 14 have
+2014-16 permits whose approvals predate the harvest (Jan 2015 on); 11 recent ones (Logan Park 2352 Shattuck, 2150
+Kittredge 169u, 2137 Dwight 58u, 2016 Ashby 50u, 2067 University 50u, +5) have no approval in the harvest — cause
+unverified (ministerial? filtered? older numbering?). **Found:** JN-A never filled `events.raw_address` (0 of 89,108; the
+CPRA files split the address). **Fixed:** `ADDRESS_PARTS` in JN-A's vocabulary composes StreetNumber/Name/Type when no
+single address column exists → 89,032 filled (76 have none in the source). Chain from raw: all checks, gate 4,323 / 5,288,
+structural gate PASS vs live. **Next:** rebuild live v4 (John); then look up the 11 missing approvals in the full Planning list.
+
+---
+
 ## 2026-09-28 — Affordability: 22 projects sourced from the city's documents (John approved groups 1-3)
 
 32 listed every attachment on 105 Planning records (1,419 files; its pager first read page 1 only, fixed in

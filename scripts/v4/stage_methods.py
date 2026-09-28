@@ -182,58 +182,30 @@ def dedup_events(con, holds_path=os.path.join(CORR, 'event_dedup_holds.json')):
 
 
 # ---------------------------------------------------------------- JN-C: classify all (THE recipe)
-def classify_all(con, source='evidence'):
-    """Materialize event_classifications. DEFAULT (since 2026-09-26): the model-read evidence
-    (housing_rules.permit_effect, HCD definitions); source='regex' keeps the old rules path callable.
-    Regex path: the COMMITTED classifier — THE single home of the
-    JN-C cell-4 recipe (the notebook calls this; never re-type the loop). DELETE + INSERT, one
-    label per event, prose-blind net_units, hash from housing_rules.permit_role.classifier_hash().
-    Returns dict(role -> count)."""
-    import sys
+def classify_all(con):
+    """Materialize event_classifications from the model-read evidence (housing_rules.permit_effect,
+    HCD definitions): one label per event, DELETE + INSERT, stamped with evidence_hash(). THE single
+    home of the JN-C recipe (the notebook calls this; never re-type the loop). The regex path it
+    replaced is in scripts/superseded/v4__stage_methods_regex_layers.py. Returns dict(role -> count)."""
     import datetime as dt
-    from scripts.housing_rules.permit_role import classify, net_units, payload_get, classifier_hash
-    if source == 'evidence':   # model-read labels (housing_rules.permit_effect), same vocabulary
-        from scripts.housing_rules.permit_effect import permit_effect, evidence_hash
-        clf_hash, now = evidence_hash(), dt.datetime.now(dt.timezone.utc).isoformat()
-        labels, unread = [], 0
-        for ev_id, permit in con.execute('SELECT event_id, source_record_key FROM events'):
-            got = permit_effect(permit)
-            if got is None:
-                unread += 1
-                got = ('ambiguous', 0, None, 'not in the evidence file')
-            role, is_master, nu, note = got
-            labels.append((ev_id, role, is_master, nu, clf_hash, now, 'model', note))
-        con.execute('DELETE FROM event_classifications')
-        con.executemany('INSERT INTO event_classifications '
-                        '(event_id,housing_role,is_master,net_units,classifier_hash,classified_at,basis,basis_note) '
-                        'VALUES (?,?,?,?,?,?,?,?)', labels)
-        con.commit()
-        out = dict(con.execute('SELECT housing_role, COUNT(*) FROM event_classifications GROUP BY 1'))
-        out['_unread_events'] = unread
-        return out
-    clf_hash = classifier_hash()
-    now = dt.datetime.now(dt.timezone.utc).isoformat()
-    labels = []
-    for ev_id, payload, desc, raw_units, permit in con.execute(
-            'SELECT event_id, raw_payload, raw_description, raw_units, source_record_key FROM events'):
-        wt = payload_get(payload, 'Work Type')
-        d = desc if desc is not None else payload_get(payload, 'WorkDescription')
-        role, is_master, note = classify(wt, d, payload_get(payload, 'ADU'),
-                                         payload_get(payload, 'OccType'),
-                                         payload_get(payload, 'UnitsAdded'),
-                                         payload_get(payload, 'UnitsRemoved'), permit)
-        nu = net_units(payload_get(payload, 'UnitsAdded'), payload_get(payload, 'UnitsRemoved'), role, d)
-        labels.append((ev_id, role, is_master, nu, clf_hash, now, 'description', note))
-    try:
-        con.execute('DELETE FROM event_classifications')
-        con.executemany('INSERT INTO event_classifications '
-                        '(event_id,housing_role,is_master,net_units,classifier_hash,classified_at,basis,basis_note) '
-                        'VALUES (?,?,?,?,?,?,?,?)', labels)
-        con.commit()
-    except Exception:
-        con.rollback()
-        raise
-    return dict(con.execute('SELECT housing_role, COUNT(*) FROM event_classifications GROUP BY 1'))
+    from scripts.housing_rules.permit_effect import permit_effect, evidence_hash
+    clf_hash, now = evidence_hash(), dt.datetime.now(dt.timezone.utc).isoformat()
+    labels, unread = [], 0
+    for ev_id, permit in con.execute('SELECT event_id, source_record_key FROM events'):
+        got = permit_effect(permit)
+        if got is None:
+            unread += 1
+            got = ('ambiguous', 0, None, 'not in the evidence file')
+        role, is_master, nu, note = got
+        labels.append((ev_id, role, is_master, nu, clf_hash, now, 'model', note))
+    con.execute('DELETE FROM event_classifications')
+    con.executemany('INSERT INTO event_classifications '
+                    '(event_id,housing_role,is_master,net_units,classifier_hash,classified_at,basis,basis_note) '
+                    'VALUES (?,?,?,?,?,?,?,?)', labels)
+    con.commit()
+    out = dict(con.execute('SELECT housing_role, COUNT(*) FROM event_classifications GROUP BY 1'))
+    out['_unread_events'] = unread
+    return out
 
 
 # ---------------------------------------------------------------- JN-F: the correction methods

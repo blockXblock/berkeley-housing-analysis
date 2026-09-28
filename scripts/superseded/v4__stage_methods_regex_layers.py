@@ -208,3 +208,33 @@ def apply_c_multifamily(con, csv_path=os.path.join(CORR, 'c_multifamily_collapse
     return {'rows': len(rows), 'changed': changed, 'bumped': bumped}
 
 
+
+
+# ---------------------------------------------------------------- classify_all's regex path (retired 2026-09-28)
+# Removed from stage_methods.classify_all(source='regex'); nothing called it after JN-C switched to evidence.
+def classify_all_regex(con):
+    import datetime as dt
+    from scripts.housing_rules.permit_role import classify, net_units, payload_get, classifier_hash
+    clf_hash = classifier_hash()
+    now = dt.datetime.now(dt.timezone.utc).isoformat()
+    labels = []
+    for ev_id, payload, desc, raw_units, permit in con.execute(
+            'SELECT event_id, raw_payload, raw_description, raw_units, source_record_key FROM events'):
+        wt = payload_get(payload, 'Work Type')
+        d = desc if desc is not None else payload_get(payload, 'WorkDescription')
+        role, is_master, note = classify(wt, d, payload_get(payload, 'ADU'),
+                                         payload_get(payload, 'OccType'),
+                                         payload_get(payload, 'UnitsAdded'),
+                                         payload_get(payload, 'UnitsRemoved'), permit)
+        nu = net_units(payload_get(payload, 'UnitsAdded'), payload_get(payload, 'UnitsRemoved'), role, d)
+        labels.append((ev_id, role, is_master, nu, clf_hash, now, 'description', note))
+    try:
+        con.execute('DELETE FROM event_classifications')
+        con.executemany('INSERT INTO event_classifications '
+                        '(event_id,housing_role,is_master,net_units,classifier_hash,classified_at,basis,basis_note) '
+                        'VALUES (?,?,?,?,?,?,?,?)', labels)
+        con.commit()
+    except Exception:
+        con.rollback()
+        raise
+    return dict(con.execute('SELECT housing_role, COUNT(*) FROM event_classifications GROUP BY 1'))

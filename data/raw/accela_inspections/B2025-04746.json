@@ -1,0 +1,68 @@
+{
+  "permit_number": "B2025-04746",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00P8H&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T06:09:33.505345",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "1133664",
+      "date": "07/31/2026",
+      "time": "11:16 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1151506",
+      "date": "09/01/2026",
+      "time": "02:33 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "1149422",
+      "date": "09/01/2026",
+      "time": "02:33 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1149471",
+      "date": "09/01/2026",
+      "time": "02:34 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1149582",
+      "date": "09/01/2026",
+      "time": "02:34 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1152384",
+      "date": "09/04/2026",
+      "time": "03:28 PM",
+      "inspector": "Anthony Vergara"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 2,
+    "unique_inspection_count": 6,
+    "page_content_length": 451497,
+    "extraction_duration_seconds": 34.12
+  }
+}

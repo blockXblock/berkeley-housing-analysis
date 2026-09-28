@@ -1,0 +1,148 @@
+{
+  "permit_number": "B2020-03973",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB20&capID2=00000&capID3=00HD4&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T01:14:04.145499",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "754396",
+      "date": "06/01/2021",
+      "time": "11:44 AM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "762467",
+      "date": "07/30/2021",
+      "time": "10:43 AM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "762468",
+      "date": "07/30/2021",
+      "time": "10:45 AM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "763626",
+      "date": "08/09/2021",
+      "time": "09:04 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "763820",
+      "date": "08/10/2021",
+      "time": "02:24 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "772180",
+      "date": "10/06/2021",
+      "time": "10:56 AM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "772498",
+      "date": "10/13/2021",
+      "time": "11:19 AM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "783545",
+      "date": "01/12/2022",
+      "time": "01:34 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "783542",
+      "date": "01/12/2022",
+      "time": "01:34 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "783540",
+      "date": "01/12/2022",
+      "time": "01:34 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "789633",
+      "date": "03/03/2022",
+      "time": "10:43 AM",
+      "inspector": "Steve Rixford"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "789632",
+      "date": "03/03/2022",
+      "time": "10:44 AM",
+      "inspector": "Steve Rixford"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "789631",
+      "date": "03/03/2022",
+      "time": "10:45 AM",
+      "inspector": "Steve Rixford"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "790252",
+      "date": "03/09/2022",
+      "time": "11:36 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "790253",
+      "date": "03/09/2022",
+      "time": "11:36 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "790254",
+      "date": "03/09/2022",
+      "time": "11:36 AM",
+      "inspector": "SR"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 4,
+    "unique_inspection_count": 16,
+    "page_content_length": 454131,
+    "extraction_duration_seconds": 34.09
+  }
+}

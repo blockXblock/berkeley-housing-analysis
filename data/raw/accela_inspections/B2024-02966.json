@@ -1,0 +1,2300 @@
+{
+  "permit_number": "B2024-02966",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB24&capID2=00000&capID3=00IB6&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-05-22T18:46:20.857804",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "965283",
+      "date": "08/11/2025",
+      "time": "03:24 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "966841",
+      "date": "08/21/2025",
+      "time": "10:34 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "966770",
+      "date": "08/22/2025",
+      "time": "09:24 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "966769",
+      "date": "08/25/2025",
+      "time": "10:18 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "967569",
+      "date": "08/28/2025",
+      "time": "02:40 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "967981",
+      "date": "08/28/2025",
+      "time": "02:43 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "968095",
+      "date": "09/03/2025",
+      "time": "07:55 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "968697",
+      "date": "09/09/2025",
+      "time": "12:49 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "968912",
+      "date": "09/09/2025",
+      "time": "12:50 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "969030",
+      "date": "09/12/2025",
+      "time": "12:37 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "969405",
+      "date": "09/18/2025",
+      "time": "12:08 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "969406",
+      "date": "09/19/2025",
+      "time": "06:51 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "970415",
+      "date": "09/30/2025",
+      "time": "03:56 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "970927",
+      "date": "10/06/2025",
+      "time": "07:52 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "971543",
+      "date": "10/06/2025",
+      "time": "08:40 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2010 UFER",
+      "inspection_id": "971838",
+      "date": "10/14/2025",
+      "time": "12:57 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "972095",
+      "date": "10/14/2025",
+      "time": "12:58 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2010 UFER",
+      "inspection_id": "972176",
+      "date": "10/16/2025",
+      "time": "01:46 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "972450",
+      "date": "10/16/2025",
+      "time": "01:46 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "972453",
+      "date": "10/16/2025",
+      "time": "01:48 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "971836",
+      "date": "10/16/2025",
+      "time": "01:48 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "974749",
+      "date": "10/28/2025",
+      "time": "12:50 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "974750",
+      "date": "10/28/2025",
+      "time": "12:50 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "978625",
+      "date": "10/29/2025",
+      "time": "02:25 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "979310",
+      "date": "10/29/2025",
+      "time": "02:25 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "979074",
+      "date": "10/29/2025",
+      "time": "02:25 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "978540",
+      "date": "10/29/2025",
+      "time": "02:25 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "979501",
+      "date": "10/29/2025",
+      "time": "02:25 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "978624",
+      "date": "11/04/2025",
+      "time": "12:00 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "978623",
+      "date": "11/05/2025",
+      "time": "07:23 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "984983",
+      "date": "11/10/2025",
+      "time": "01:24 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "986144",
+      "date": "11/10/2025",
+      "time": "01:25 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "965887",
+      "date": "08/12/2025",
+      "time": "02:17 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "964267",
+      "date": "07/31/2025",
+      "time": "01:50 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "987382",
+      "date": "11/12/2025",
+      "time": "01:57 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "984984",
+      "date": "11/12/2025",
+      "time": "01:57 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "984985",
+      "date": "11/13/2025",
+      "time": "07:22 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "984986",
+      "date": "11/13/2025",
+      "time": "09:15 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "988019",
+      "date": "11/17/2025",
+      "time": "10:07 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "988020",
+      "date": "11/18/2025",
+      "time": "02:15 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "988021",
+      "date": "11/19/2025",
+      "time": "07:35 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "988022",
+      "date": "11/20/2025",
+      "time": "01:41 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "991542",
+      "date": "11/20/2025",
+      "time": "01:41 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "988023",
+      "date": "11/21/2025",
+      "time": "07:29 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "988024",
+      "date": "11/24/2025",
+      "time": "02:54 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1075 Underfloor Framing",
+      "inspection_id": "993306",
+      "date": "11/24/2025",
+      "time": "02:56 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "988025",
+      "date": "11/25/2025",
+      "time": "02:10 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "988026",
+      "date": "11/26/2025",
+      "time": "06:48 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "994459",
+      "date": "12/01/2025",
+      "time": "01:13 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "994499",
+      "date": "12/02/2025",
+      "time": "10:26 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1075 Underfloor Framing",
+      "inspection_id": "997384",
+      "date": "12/03/2025",
+      "time": "03:30 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "997034",
+      "date": "12/03/2025",
+      "time": "03:31 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "994500",
+      "date": "12/03/2025",
+      "time": "03:33 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "994460",
+      "date": "12/04/2025",
+      "time": "06:36 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "994461",
+      "date": "12/04/2025",
+      "time": "10:52 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "994462",
+      "date": "12/08/2025",
+      "time": "12:11 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "999545",
+      "date": "12/08/2025",
+      "time": "12:13 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "994539",
+      "date": "12/09/2025",
+      "time": "02:15 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1001265",
+      "date": "12/10/2025",
+      "time": "01:48 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "994540",
+      "date": "12/10/2025",
+      "time": "01:51 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "994541",
+      "date": "12/11/2025",
+      "time": "11:36 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1075 Underfloor Framing",
+      "inspection_id": "1001902",
+      "date": "12/11/2025",
+      "time": "11:37 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "994542",
+      "date": "12/11/2025",
+      "time": "03:07 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "999588",
+      "date": "12/15/2025",
+      "time": "10:12 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1004019",
+      "date": "12/15/2025",
+      "time": "10:13 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1004792",
+      "date": "12/16/2025",
+      "time": "01:56 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "999589",
+      "date": "12/16/2025",
+      "time": "01:59 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "999590",
+      "date": "12/17/2025",
+      "time": "02:07 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "999591",
+      "date": "12/18/2025",
+      "time": "01:03 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1006462",
+      "date": "12/18/2025",
+      "time": "01:09 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1006313",
+      "date": "12/18/2025",
+      "time": "01:10 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "999592",
+      "date": "12/19/2025",
+      "time": "12:50 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "999593",
+      "date": "12/22/2025",
+      "time": "01:55 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1009027",
+      "date": "12/23/2025",
+      "time": "02:06 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1009182",
+      "date": "12/23/2025",
+      "time": "02:06 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1009459",
+      "date": "12/23/2025",
+      "time": "02:07 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "999594",
+      "date": "12/23/2025",
+      "time": "02:10 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1011460",
+      "date": "12/29/2025",
+      "time": "02:11 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "999595",
+      "date": "12/29/2025",
+      "time": "02:11 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1012227",
+      "date": "12/30/2025",
+      "time": "03:24 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1012023",
+      "date": "12/30/2025",
+      "time": "03:30 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "999596",
+      "date": "12/30/2025",
+      "time": "03:28 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1006318",
+      "date": "01/05/2026",
+      "time": "01:23 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1014427",
+      "date": "01/05/2026",
+      "time": "01:25 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "1006433",
+      "date": "01/06/2026",
+      "time": "02:21 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1014629",
+      "date": "01/06/2026",
+      "time": "02:24 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1014945",
+      "date": "01/06/2026",
+      "time": "02:25 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "1015260",
+      "date": "01/06/2026",
+      "time": "02:26 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1015422",
+      "date": "01/07/2026",
+      "time": "03:06 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1006319",
+      "date": "01/07/2026",
+      "time": "03:07 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1015822",
+      "date": "01/07/2026",
+      "time": "03:09 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1006435",
+      "date": "01/08/2026",
+      "time": "02:07 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1016424",
+      "date": "01/08/2026",
+      "time": "02:12 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1016740",
+      "date": "01/08/2026",
+      "time": "02:13 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1015139",
+      "date": "01/12/2026",
+      "time": "03:40 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1018265",
+      "date": "01/12/2026",
+      "time": "03:41 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1018345",
+      "date": "01/12/2026",
+      "time": "03:41 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1018474",
+      "date": "01/12/2026",
+      "time": "03:43 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1014582",
+      "date": "01/13/2026",
+      "time": "02:38 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1014583",
+      "date": "01/14/2026",
+      "time": "02:03 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1019979",
+      "date": "01/14/2026",
+      "time": "02:06 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1019751",
+      "date": "01/14/2026",
+      "time": "02:09 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "1019750",
+      "date": "01/14/2026",
+      "time": "02:11 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1019660",
+      "date": "01/14/2026",
+      "time": "02:12 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1014584",
+      "date": "01/15/2026",
+      "time": "11:07 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "1014585",
+      "date": "01/16/2026",
+      "time": "07:04 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1014586",
+      "date": "01/20/2026",
+      "time": "02:57 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1022422",
+      "date": "01/20/2026",
+      "time": "02:59 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1022581",
+      "date": "01/20/2026",
+      "time": "03:01 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1022632",
+      "date": "01/20/2026",
+      "time": "03:02 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1014587",
+      "date": "01/21/2026",
+      "time": "02:03 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1015140",
+      "date": "01/22/2026",
+      "time": "11:43 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "1023781",
+      "date": "01/22/2026",
+      "time": "11:46 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "1025265",
+      "date": "01/26/2026",
+      "time": "02:45 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1020819",
+      "date": "01/26/2026",
+      "time": "02:48 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1025266",
+      "date": "01/26/2026",
+      "time": "02:55 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1025385",
+      "date": "01/27/2026",
+      "time": "02:04 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "1026421",
+      "date": "01/27/2026",
+      "time": "02:06 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1026460",
+      "date": "01/27/2026",
+      "time": "02:10 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1025550",
+      "date": "01/28/2026",
+      "time": "02:12 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1027143",
+      "date": "01/28/2026",
+      "time": "02:16 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1027144",
+      "date": "01/28/2026",
+      "time": "02:16 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1020859",
+      "date": "01/29/2026",
+      "time": "02:20 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "1027301",
+      "date": "01/29/2026",
+      "time": "02:23 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1020860",
+      "date": "01/30/2026",
+      "time": "02:06 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1029349",
+      "date": "02/02/2026",
+      "time": "12:45 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1020939",
+      "date": "02/02/2026",
+      "time": "12:45 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1020940",
+      "date": "02/03/2026",
+      "time": "01:43 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1030299",
+      "date": "02/03/2026",
+      "time": "01:44 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1020941",
+      "date": "02/04/2026",
+      "time": "02:30 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1020942",
+      "date": "02/05/2026",
+      "time": "09:24 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1031222",
+      "date": "02/09/2026",
+      "time": "01:33 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1032984",
+      "date": "02/09/2026",
+      "time": "01:37 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1033342",
+      "date": "02/09/2026",
+      "time": "01:39 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1033503",
+      "date": "02/09/2026",
+      "time": "01:41 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "1031259",
+      "date": "02/10/2026",
+      "time": "01:18 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "1031224",
+      "date": "02/11/2026",
+      "time": "09:35 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "1031223",
+      "date": "02/11/2026",
+      "time": "12:53 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1034667",
+      "date": "02/11/2026",
+      "time": "12:55 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1034903",
+      "date": "02/11/2026",
+      "time": "12:58 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1037147",
+      "date": "02/17/2026",
+      "time": "02:30 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1031225",
+      "date": "02/17/2026",
+      "time": "02:32 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "1031226",
+      "date": "02/18/2026",
+      "time": "10:38 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1031180",
+      "date": "02/18/2026",
+      "time": "02:15 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "1038023",
+      "date": "02/18/2026",
+      "time": "02:16 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1037903",
+      "date": "02/23/2026",
+      "time": "02:14 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1040702",
+      "date": "02/23/2026",
+      "time": "02:16 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1037904",
+      "date": "02/24/2026",
+      "time": "01:47 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1037905",
+      "date": "02/25/2026",
+      "time": "01:47 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1041622",
+      "date": "02/25/2026",
+      "time": "01:48 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1037906",
+      "date": "02/26/2026",
+      "time": "01:58 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "1042231",
+      "date": "02/26/2026",
+      "time": "02:00 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1040899",
+      "date": "03/02/2026",
+      "time": "02:09 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "1044105",
+      "date": "03/02/2026",
+      "time": "02:16 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1040900",
+      "date": "03/03/2026",
+      "time": "02:16 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "1045184",
+      "date": "03/03/2026",
+      "time": "02:25 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1045422",
+      "date": "03/03/2026",
+      "time": "02:26 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "1045261",
+      "date": "03/03/2026",
+      "time": "02:28 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "1040901",
+      "date": "03/04/2026",
+      "time": "02:35 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1046179",
+      "date": "03/04/2026",
+      "time": "02:37 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1046020",
+      "date": "03/04/2026",
+      "time": "02:38 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1045743",
+      "date": "03/04/2026",
+      "time": "02:39 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "1045712",
+      "date": "03/04/2026",
+      "time": "02:40 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1040903",
+      "date": "03/05/2026",
+      "time": "02:20 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1040902",
+      "date": "03/05/2026",
+      "time": "02:38 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "1046243",
+      "date": "03/05/2026",
+      "time": "02:39 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1046276",
+      "date": "03/05/2026",
+      "time": "02:40 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1046308",
+      "date": "03/05/2026",
+      "time": "02:42 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "1046382",
+      "date": "03/05/2026",
+      "time": "02:46 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1046542",
+      "date": "03/09/2026",
+      "time": "12:58 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "1046239",
+      "date": "03/10/2026",
+      "time": "12:35 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1049025",
+      "date": "03/10/2026",
+      "time": "12:38 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "1048821",
+      "date": "03/10/2026",
+      "time": "12:39 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1048702",
+      "date": "03/10/2026",
+      "time": "12:58 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1048822",
+      "date": "03/10/2026",
+      "time": "12:58 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1046240",
+      "date": "03/11/2026",
+      "time": "01:53 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1049627",
+      "date": "03/11/2026",
+      "time": "01:53 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1046241",
+      "date": "03/12/2026",
+      "time": "01:00 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1050304",
+      "date": "03/12/2026",
+      "time": "01:01 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "1046242",
+      "date": "03/13/2026",
+      "time": "12:49 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1050626",
+      "date": "03/13/2026",
+      "time": "12:49 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "1050745",
+      "date": "03/13/2026",
+      "time": "12:54 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1049899",
+      "date": "03/16/2026",
+      "time": "01:50 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1052224",
+      "date": "03/16/2026",
+      "time": "01:53 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1051986",
+      "date": "03/16/2026",
+      "time": "01:53 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1052223",
+      "date": "03/16/2026",
+      "time": "01:53 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1051587",
+      "date": "03/16/2026",
+      "time": "01:58 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1052782",
+      "date": "03/17/2026",
+      "time": "01:51 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1052630",
+      "date": "03/17/2026",
+      "time": "01:51 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1049939",
+      "date": "03/17/2026",
+      "time": "01:51 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1053384",
+      "date": "03/18/2026",
+      "time": "02:05 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "1053547",
+      "date": "03/18/2026",
+      "time": "02:20 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1050019",
+      "date": "03/18/2026",
+      "time": "02:25 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1050020",
+      "date": "03/19/2026",
+      "time": "02:16 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1049900",
+      "date": "03/23/2026",
+      "time": "12:43 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1056543",
+      "date": "03/24/2026",
+      "time": "01:31 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1049901",
+      "date": "03/24/2026",
+      "time": "01:41 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1049902",
+      "date": "03/25/2026",
+      "time": "01:53 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1057503",
+      "date": "03/25/2026",
+      "time": "01:54 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1057340",
+      "date": "03/25/2026",
+      "time": "01:55 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "1057435",
+      "date": "03/25/2026",
+      "time": "01:56 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1049903",
+      "date": "03/26/2026",
+      "time": "12:52 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1058582",
+      "date": "03/26/2026",
+      "time": "12:53 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1058267",
+      "date": "03/26/2026",
+      "time": "12:54 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "1058699",
+      "date": "03/26/2026",
+      "time": "12:55 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1049904",
+      "date": "03/27/2026",
+      "time": "12:20 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1059263",
+      "date": "03/27/2026",
+      "time": "12:24 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1058985",
+      "date": "03/27/2026",
+      "time": "12:24 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1058902",
+      "date": "03/27/2026",
+      "time": "12:26 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1060064",
+      "date": "03/30/2026",
+      "time": "08:22 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1049905",
+      "date": "03/31/2026",
+      "time": "01:37 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1060861",
+      "date": "03/31/2026",
+      "time": "01:46 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1060798",
+      "date": "03/31/2026",
+      "time": "01:48 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1060462",
+      "date": "03/31/2026",
+      "time": "01:53 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1061744",
+      "date": "04/01/2026",
+      "time": "01:34 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1061542",
+      "date": "04/01/2026",
+      "time": "01:36 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1061510",
+      "date": "04/01/2026",
+      "time": "01:37 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1060141",
+      "date": "04/01/2026",
+      "time": "01:37 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "1062142",
+      "date": "04/02/2026",
+      "time": "01:59 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1062103",
+      "date": "04/02/2026",
+      "time": "02:01 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1062032",
+      "date": "04/02/2026",
+      "time": "02:02 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1060144",
+      "date": "04/02/2026",
+      "time": "02:05 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1062544",
+      "date": "04/02/2026",
+      "time": "02:03 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1059980",
+      "date": "04/06/2026",
+      "time": "08:07 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1060065",
+      "date": "04/06/2026",
+      "time": "08:08 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1060061",
+      "date": "04/06/2026",
+      "time": "02:25 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1063948",
+      "date": "04/06/2026",
+      "time": "02:25 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1063864",
+      "date": "04/06/2026",
+      "time": "02:30 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1063552",
+      "date": "04/06/2026",
+      "time": "02:33 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1063551",
+      "date": "04/06/2026",
+      "time": "02:34 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1060062",
+      "date": "04/07/2026",
+      "time": "02:26 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "1064820",
+      "date": "04/07/2026",
+      "time": "02:29 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1064382",
+      "date": "04/07/2026",
+      "time": "02:36 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1065464",
+      "date": "04/08/2026",
+      "time": "01:26 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1060063",
+      "date": "04/08/2026",
+      "time": "01:26 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1065101",
+      "date": "04/08/2026",
+      "time": "01:26 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1060068",
+      "date": "04/13/2026",
+      "time": "02:35 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1068464",
+      "date": "04/13/2026",
+      "time": "02:41 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1068543",
+      "date": "04/13/2026",
+      "time": "02:44 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1060069",
+      "date": "04/14/2026",
+      "time": "02:43 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "1069033",
+      "date": "04/14/2026",
+      "time": "02:44 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1060070",
+      "date": "04/15/2026",
+      "time": "02:21 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1066662",
+      "date": "04/20/2026",
+      "time": "01:26 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1072699",
+      "date": "04/20/2026",
+      "time": "01:28 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1072066",
+      "date": "04/20/2026",
+      "time": "01:29 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1072024",
+      "date": "04/20/2026",
+      "time": "01:31 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1066900",
+      "date": "04/21/2026",
+      "time": "02:44 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "1072741",
+      "date": "04/21/2026",
+      "time": "02:45 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1072742",
+      "date": "04/21/2026",
+      "time": "02:46 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1066901",
+      "date": "04/22/2026",
+      "time": "11:44 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1073941",
+      "date": "04/22/2026",
+      "time": "11:45 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1074743",
+      "date": "04/23/2026",
+      "time": "01:47 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1067181",
+      "date": "04/23/2026",
+      "time": "01:52 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "1074591",
+      "date": "04/23/2026",
+      "time": "01:54 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1074664",
+      "date": "04/23/2026",
+      "time": "01:55 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1066902",
+      "date": "04/24/2026",
+      "time": "12:50 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1075502",
+      "date": "04/24/2026",
+      "time": "12:51 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "1075503",
+      "date": "04/24/2026",
+      "time": "12:53 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1076381",
+      "date": "04/27/2026",
+      "time": "02:04 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1076349",
+      "date": "04/27/2026",
+      "time": "02:05 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1067101",
+      "date": "04/27/2026",
+      "time": "02:08 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1076152",
+      "date": "04/27/2026",
+      "time": "02:09 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1066943",
+      "date": "04/27/2026",
+      "time": "02:09 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1067100",
+      "date": "04/28/2026",
+      "time": "01:44 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1077262",
+      "date": "04/28/2026",
+      "time": "01:50 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1077341",
+      "date": "04/28/2026",
+      "time": "01:53 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1067102",
+      "date": "04/30/2026",
+      "time": "01:52 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "1078341",
+      "date": "04/30/2026",
+      "time": "01:57 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1078821",
+      "date": "04/30/2026",
+      "time": "01:59 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1078700",
+      "date": "04/30/2026",
+      "time": "02:05 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1078902",
+      "date": "04/30/2026",
+      "time": "02:07 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "1075985",
+      "date": "05/04/2026",
+      "time": "02:47 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1080269",
+      "date": "05/04/2026",
+      "time": "02:56 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1080779",
+      "date": "05/04/2026",
+      "time": "02:58 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1075986",
+      "date": "05/05/2026",
+      "time": "02:32 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1075987",
+      "date": "05/06/2026",
+      "time": "02:28 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1082302",
+      "date": "05/06/2026",
+      "time": "02:34 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1082982",
+      "date": "05/07/2026",
+      "time": "01:47 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1082831",
+      "date": "05/07/2026",
+      "time": "01:48 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1076583",
+      "date": "05/07/2026",
+      "time": "01:49 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1082062",
+      "date": "05/11/2026",
+      "time": "01:32 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1079819",
+      "date": "05/11/2026",
+      "time": "01:59 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1084424",
+      "date": "05/11/2026",
+      "time": "02:03 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1082063",
+      "date": "05/13/2026",
+      "time": "09:38 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1082064",
+      "date": "05/13/2026",
+      "time": "01:36 PM",
+      "inspector": "A  A"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 57,
+    "unique_inspection_count": 285,
+    "page_content_length": 2281075,
+    "extraction_duration_seconds": 114.34
+  }
+}

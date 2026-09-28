@@ -1,0 +1,196 @@
+{
+  "permit_number": "B2022-06012",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB22&capID2=00000&capID3=00OGZ&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T07:28:47.211927",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "859983",
+      "date": "07/14/2023",
+      "time": "12:20 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "861914",
+      "date": "07/25/2023",
+      "time": "02:36 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "862453",
+      "date": "07/26/2023",
+      "time": "02:50 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "869762",
+      "date": "09/12/2023",
+      "time": "07:24 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "870247",
+      "date": "09/12/2023",
+      "time": "07:24 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "869763",
+      "date": "09/13/2023",
+      "time": "08:00 AM",
+      "inspector": "Tom Lutz"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "873449",
+      "date": "10/05/2023",
+      "time": "06:40 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "873758",
+      "date": "10/05/2023",
+      "time": "06:40 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "875924",
+      "date": "10/23/2023",
+      "time": "10:08 AM",
+      "inspector": "Tom Lutz"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "875923",
+      "date": "10/23/2023",
+      "time": "10:08 AM",
+      "inspector": "Tom Lutz"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "904295",
+      "date": "05/08/2024",
+      "time": "12:45 PM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "905492",
+      "date": "05/15/2024",
+      "time": "01:13 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "915825",
+      "date": "08/01/2024",
+      "time": "08:53 AM",
+      "inspector": "Tom Lutz"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "917406",
+      "date": "08/08/2024",
+      "time": "12:46 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "917726",
+      "date": "08/08/2024",
+      "time": "12:46 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "919186",
+      "date": "08/21/2024",
+      "time": "01:23 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "919738",
+      "date": "08/21/2024",
+      "time": "01:23 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "919737",
+      "date": "08/21/2024",
+      "time": "01:23 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "919736",
+      "date": "08/21/2024",
+      "time": "01:23 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "931944",
+      "date": "11/12/2024",
+      "time": "10:16 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "932954",
+      "date": "11/12/2024",
+      "time": "10:17 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "934836",
+      "date": "12/03/2024",
+      "time": "12:00 AM",
+      "inspector": "KT"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 5,
+    "unique_inspection_count": 22,
+    "page_content_length": 508281,
+    "extraction_duration_seconds": 35.94
+  }
+}

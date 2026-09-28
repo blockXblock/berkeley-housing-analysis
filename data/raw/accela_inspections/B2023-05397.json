@@ -1,0 +1,132 @@
+{
+  "permit_number": "B2023-05397",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB23&capID2=00000&capID3=00NPI&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-05-22T18:24:47.068320",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "884252",
+      "date": "12/21/2023",
+      "time": "11:49 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved with Conditions",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "884251",
+      "date": "12/21/2023",
+      "time": "11:53 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved with Conditions",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "884542",
+      "date": "12/21/2023",
+      "time": "12:02 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "884254",
+      "date": "12/22/2023",
+      "time": "10:09 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "886272",
+      "date": "01/09/2024",
+      "time": "10:31 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "885890",
+      "date": "01/09/2024",
+      "time": "10:32 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "886275",
+      "date": "01/09/2024",
+      "time": "10:36 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "887838",
+      "date": "01/22/2024",
+      "time": "09:27 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "888158",
+      "date": "01/23/2024",
+      "time": "11:55 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4050 Gas Test",
+      "inspection_id": "895293",
+      "date": "03/12/2024",
+      "time": "10:38 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "896228",
+      "date": "03/19/2024",
+      "time": "12:00 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "896269",
+      "date": "03/19/2024",
+      "time": "12:00 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "896271",
+      "date": "03/19/2024",
+      "time": "12:00 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "896272",
+      "date": "03/19/2024",
+      "time": "12:00 AM",
+      "inspector": "E"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 3,
+    "unique_inspection_count": 14,
+    "page_content_length": 477387,
+    "extraction_duration_seconds": 34.61
+  }
+}

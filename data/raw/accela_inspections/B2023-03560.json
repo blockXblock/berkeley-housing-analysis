@@ -1,0 +1,164 @@
+{
+  "permit_number": "B2023-03560",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB23&capID2=00000&capID3=00III&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T04:12:34.460851",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "913517",
+      "date": "07/12/2024",
+      "time": "09:59 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "913521",
+      "date": "07/17/2024",
+      "time": "02:37 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "913520",
+      "date": "07/17/2024",
+      "time": "02:38 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "913519",
+      "date": "07/17/2024",
+      "time": "02:38 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "913518",
+      "date": "07/17/2024",
+      "time": "02:38 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "914392",
+      "date": "07/19/2024",
+      "time": "12:47 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "917818",
+      "date": "08/13/2024",
+      "time": "11:24 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "918310",
+      "date": "08/13/2024",
+      "time": "11:25 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "919662",
+      "date": "08/26/2024",
+      "time": "10:09 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "919663",
+      "date": "08/26/2024",
+      "time": "10:09 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "931212",
+      "date": "11/07/2024",
+      "time": "08:11 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "931211",
+      "date": "11/07/2024",
+      "time": "08:12 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "931210",
+      "date": "11/07/2024",
+      "time": "08:13 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "931209",
+      "date": "11/07/2024",
+      "time": "08:13 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "935379",
+      "date": "12/04/2024",
+      "time": "07:16 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "935380",
+      "date": "12/04/2024",
+      "time": "07:20 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "935381",
+      "date": "12/04/2024",
+      "time": "07:21 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "935382",
+      "date": "12/04/2024",
+      "time": "07:21 AM",
+      "inspector": "Eric Cabana"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 4,
+    "unique_inspection_count": 18,
+    "page_content_length": 594491,
+    "extraction_duration_seconds": 34.48
+  }
+}

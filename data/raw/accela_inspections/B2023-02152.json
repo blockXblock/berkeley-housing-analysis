@@ -1,0 +1,346 @@
+{
+  "permit_number": "B2023-02152",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB23&capID2=00000&capID3=00EJI&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T03:56:36.283518",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "866244",
+      "date": "08/17/2023",
+      "time": "03:03 PM"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "866243",
+      "date": "08/17/2023",
+      "time": "03:03 PM"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "866241",
+      "date": "08/17/2023",
+      "time": "03:03 PM"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2010 UFER",
+      "inspection_id": "866242",
+      "date": "08/17/2023",
+      "time": "03:03 PM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "866554",
+      "date": "08/22/2023",
+      "time": "10:41 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "866553",
+      "date": "08/22/2023",
+      "time": "10:42 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2010 UFER",
+      "inspection_id": "866552",
+      "date": "08/22/2023",
+      "time": "10:43 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "866551",
+      "date": "08/22/2023",
+      "time": "10:44 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "866992",
+      "date": "08/22/2023",
+      "time": "10:45 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "867561",
+      "date": "08/30/2023",
+      "time": "11:38 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "867562",
+      "date": "08/30/2023",
+      "time": "11:39 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "868001",
+      "date": "09/01/2023",
+      "time": "10:36 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "868681",
+      "date": "09/01/2023",
+      "time": "10:36 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "872818",
+      "date": "10/02/2023",
+      "time": "08:49 AM"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "872816",
+      "date": "10/02/2023",
+      "time": "08:49 AM"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "872817",
+      "date": "10/02/2023",
+      "time": "08:50 AM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "873031",
+      "date": "10/11/2023",
+      "time": "11:10 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "873032",
+      "date": "10/11/2023",
+      "time": "11:12 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "873033",
+      "date": "10/11/2023",
+      "time": "11:13 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "874440",
+      "date": "10/11/2023",
+      "time": "11:13 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "874441",
+      "date": "10/11/2023",
+      "time": "11:14 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1210 Roof in Progress",
+      "inspection_id": "875684",
+      "date": "10/19/2023",
+      "time": "11:46 AM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "875744",
+      "date": "10/23/2023",
+      "time": "10:53 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "875683",
+      "date": "10/23/2023",
+      "time": "10:53 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "875685",
+      "date": "10/23/2023",
+      "time": "10:54 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "876902",
+      "date": "10/31/2023",
+      "time": "10:34 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "876903",
+      "date": "10/31/2023",
+      "time": "10:34 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "876904",
+      "date": "10/31/2023",
+      "time": "10:35 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "878259",
+      "date": "11/07/2023",
+      "time": "03:22 PM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "878262",
+      "date": "11/15/2023",
+      "time": "08:50 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "878261",
+      "date": "11/15/2023",
+      "time": "08:50 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "879242",
+      "date": "11/27/2023",
+      "time": "10:09 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "891529",
+      "date": "02/22/2024",
+      "time": "12:00 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "906230",
+      "date": "05/22/2024",
+      "time": "03:40 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "906229",
+      "date": "05/22/2024",
+      "time": "03:40 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "906208",
+      "date": "05/22/2024",
+      "time": "03:40 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "906207",
+      "date": "05/22/2024",
+      "time": "03:40 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "907726",
+      "date": "05/30/2024",
+      "time": "08:58 AM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "907905",
+      "date": "05/31/2024",
+      "time": "10:09 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "907904",
+      "date": "05/31/2024",
+      "time": "10:09 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "907903",
+      "date": "05/31/2024",
+      "time": "10:09 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "907750",
+      "date": "05/31/2024",
+      "time": "10:10 AM",
+      "inspector": "Eric Cabana"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 9,
+    "unique_inspection_count": 42,
+    "page_content_length": 677463,
+    "extraction_duration_seconds": 38.62
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "permit_number": "B2022-05181",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB22&capID2=00000&capID3=00MDT&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-05-22T18:02:06.072578",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "879989",
+      "date": "11/27/2023",
+      "time": "02:59 PM"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "880736",
+      "date": "12/01/2023",
+      "time": "10:00 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "885123",
+      "date": "12/28/2023",
+      "time": "03:58 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2200 Electrical Solar Photovoltaic",
+      "inspection_id": "884907",
+      "date": "12/28/2023",
+      "time": "03:58 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "887464",
+      "date": "01/19/2024",
+      "time": "10:44 AM",
+      "inspector": "DL"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 1,
+    "unique_inspection_count": 5,
+    "page_content_length": 388053,
+    "extraction_duration_seconds": 33.24
+  }
+}

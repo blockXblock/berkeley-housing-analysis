@@ -1,0 +1,76 @@
+{
+  "permit_number": "B2024-02508",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB24&capID2=00000&capID3=00GS8&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T19:53:05.804291",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "1085596",
+      "date": "05/14/2026",
+      "time": "10:59 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "1097192",
+      "date": "06/04/2026",
+      "time": "10:59 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1097193",
+      "date": "06/04/2026",
+      "time": "11:01 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1108221",
+      "date": "06/22/2026",
+      "time": "09:31 AM",
+      "inspector": "DENNIS MEURER"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1109300",
+      "date": "06/24/2026",
+      "time": "04:42 PM",
+      "inspector": "DENNIS MEURER"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1113379",
+      "date": "06/30/2026",
+      "time": "09:37 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1138344",
+      "date": "08/10/2026",
+      "time": "10:23 AM",
+      "inspector": "E"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 2,
+    "unique_inspection_count": 7,
+    "page_content_length": 529260,
+    "extraction_duration_seconds": 34.92
+  }
+}

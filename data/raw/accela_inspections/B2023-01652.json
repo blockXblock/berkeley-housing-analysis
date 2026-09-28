@@ -1,0 +1,380 @@
+{
+  "permit_number": "B2023-01652",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB23&capID2=00000&capID3=00CRY&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T03:49:24.404030",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "867801",
+      "date": "08/31/2023",
+      "time": "03:09 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "871080",
+      "date": "09/21/2023",
+      "time": "02:23 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "871642",
+      "date": "09/21/2023",
+      "time": "02:24 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "878035",
+      "date": "11/06/2023",
+      "time": "11:20 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "877858",
+      "date": "11/06/2023",
+      "time": "03:09 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "877859",
+      "date": "11/06/2023",
+      "time": "03:10 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "878102",
+      "date": "11/08/2023",
+      "time": "01:50 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "878101",
+      "date": "11/08/2023",
+      "time": "01:50 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "878442",
+      "date": "11/14/2023",
+      "time": "02:17 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "878443",
+      "date": "11/14/2023",
+      "time": "02:19 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "880269",
+      "date": "11/28/2023",
+      "time": "02:02 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "888776",
+      "date": "01/25/2024",
+      "time": "01:48 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "888807",
+      "date": "01/25/2024",
+      "time": "03:27 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "888808",
+      "date": "01/25/2024",
+      "time": "03:27 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "888809",
+      "date": "01/25/2024",
+      "time": "03:27 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "888108",
+      "date": "01/25/2024",
+      "time": "03:29 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "895466",
+      "date": "03/13/2024",
+      "time": "03:46 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "895465",
+      "date": "03/13/2024",
+      "time": "03:46 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "895464",
+      "date": "03/13/2024",
+      "time": "03:46 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "896038",
+      "date": "03/13/2024",
+      "time": "03:47 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "896039",
+      "date": "03/13/2024",
+      "time": "03:49 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "896260",
+      "date": "03/18/2024",
+      "time": "12:40 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "897281",
+      "date": "03/25/2024",
+      "time": "02:45 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "897285",
+      "date": "03/25/2024",
+      "time": "02:46 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "897286",
+      "date": "03/25/2024",
+      "time": "02:46 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "897748",
+      "date": "03/25/2024",
+      "time": "02:48 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "897282",
+      "date": "03/25/2024",
+      "time": "02:49 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "897283",
+      "date": "03/25/2024",
+      "time": "02:49 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "897284",
+      "date": "03/25/2024",
+      "time": "02:49 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "899187",
+      "date": "04/04/2024",
+      "time": "09:18 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "899188",
+      "date": "04/04/2024",
+      "time": "09:18 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "899417",
+      "date": "04/04/2024",
+      "time": "09:18 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "898401",
+      "date": "04/05/2024",
+      "time": "12:10 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "898402",
+      "date": "04/05/2024",
+      "time": "12:10 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "905126",
+      "date": "05/13/2024",
+      "time": "01:13 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "905127",
+      "date": "05/13/2024",
+      "time": "01:13 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4040 Water Service",
+      "inspection_id": "905308",
+      "date": "05/13/2024",
+      "time": "01:14 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "908188",
+      "date": "06/04/2024",
+      "time": "09:00 PM",
+      "inspector": "Benjamin Bechtolsheim"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "908504",
+      "date": "06/11/2024",
+      "time": "03:26 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "923198",
+      "date": "09/13/2024",
+      "time": "10:42 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "929112",
+      "date": "10/16/2024",
+      "time": "04:08 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "929110",
+      "date": "10/16/2024",
+      "time": "04:09 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "929111",
+      "date": "10/16/2024",
+      "time": "04:09 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "929113",
+      "date": "10/16/2024",
+      "time": "04:09 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "928024",
+      "date": "10/16/2024",
+      "time": "04:10 PM",
+      "inspector": "Anthony Vergara"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 9,
+    "unique_inspection_count": 45,
+    "page_content_length": 724106,
+    "extraction_duration_seconds": 38.81
+  }
+}

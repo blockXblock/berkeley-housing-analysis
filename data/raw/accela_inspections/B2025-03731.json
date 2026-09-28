@@ -1,0 +1,36 @@
+{
+  "permit_number": "B2025-03731",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00MED&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T20:05:16.371497",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "992746",
+      "date": "12/02/2025",
+      "time": "04:22 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "996588",
+      "date": "12/03/2025",
+      "time": "09:02 AM",
+      "inspector": "Lorenzo Aguilar"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 1,
+    "unique_inspection_count": 2,
+    "page_content_length": 341959,
+    "extraction_duration_seconds": 31.58
+  }
+}

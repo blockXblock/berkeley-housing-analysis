@@ -1,0 +1,300 @@
+{
+  "permit_number": "B2025-01031",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00BRW&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T08:16:14.591509",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1004 Setbacks/Survey",
+      "inspection_id": "960218",
+      "date": "06/26/2025",
+      "time": "01:48 PM",
+      "inspector": "CONSTANCE KULLBERG"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "960223",
+      "date": "07/01/2025",
+      "time": "09:49 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "960772",
+      "date": "07/01/2025",
+      "time": "09:50 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "960221",
+      "date": "07/01/2025",
+      "time": "09:51 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "960222",
+      "date": "07/01/2025",
+      "time": "09:51 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1004 Setbacks/Survey",
+      "inspection_id": "960220",
+      "date": "07/01/2025",
+      "time": "09:52 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2010 UFER",
+      "inspection_id": "960225",
+      "date": "07/01/2025",
+      "time": "09:52 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2010 UFER",
+      "inspection_id": "961241",
+      "date": "07/04/2025",
+      "time": "10:38 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "961245",
+      "date": "07/08/2025",
+      "time": "02:45 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "961242",
+      "date": "07/08/2025",
+      "time": "02:45 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2010 UFER",
+      "inspection_id": "961244",
+      "date": "07/08/2025",
+      "time": "02:46 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "962121",
+      "date": "07/14/2025",
+      "time": "05:07 PM",
+      "inspector": "CONSTANCE KULLBERG"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "962120",
+      "date": "07/14/2025",
+      "time": "05:07 PM",
+      "inspector": "CONSTANCE KULLBERG"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "962119",
+      "date": "07/14/2025",
+      "time": "05:08 PM",
+      "inspector": "CONSTANCE KULLBERG"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "962394",
+      "date": "07/16/2025",
+      "time": "01:01 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "962399",
+      "date": "07/16/2025",
+      "time": "01:07 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "962405",
+      "date": "07/16/2025",
+      "time": "01:07 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "962396",
+      "date": "07/16/2025",
+      "time": "01:07 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "962709",
+      "date": "07/16/2025",
+      "time": "01:09 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "962397",
+      "date": "07/16/2025",
+      "time": "01:22 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "962710",
+      "date": "07/16/2025",
+      "time": "01:22 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1210 Roof in Progress",
+      "inspection_id": "963071",
+      "date": "07/21/2025",
+      "time": "02:30 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "962712",
+      "date": "07/21/2025",
+      "time": "02:30 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "962711",
+      "date": "07/21/2025",
+      "time": "02:30 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "962713",
+      "date": "07/21/2025",
+      "time": "02:30 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "963223",
+      "date": "07/22/2025",
+      "time": "01:00 PM",
+      "inspector": "CONSTANCE KULLBERG"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "963224",
+      "date": "07/23/2025",
+      "time": "05:50 AM",
+      "inspector": "CONSTANCE KULLBERG"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "963505",
+      "date": "07/24/2025",
+      "time": "01:20 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "963506",
+      "date": "07/24/2025",
+      "time": "01:20 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "963507",
+      "date": "07/24/2025",
+      "time": "01:20 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "966223",
+      "date": "08/13/2025",
+      "time": "10:59 AM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "1000633",
+      "date": "12/11/2025",
+      "time": "12:00 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1000632",
+      "date": "12/11/2025",
+      "time": "12:00 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "1000635",
+      "date": "12/11/2025",
+      "time": "12:00 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "1000634",
+      "date": "12/11/2025",
+      "time": "12:00 AM",
+      "inspector": "SR"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 7,
+    "unique_inspection_count": 35,
+    "page_content_length": 647687,
+    "extraction_duration_seconds": 37.51
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "permit_number": "B2021-01872",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB21&capID2=00000&capID3=00CEA&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T01:47:32.905108",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "784385",
+      "date": "01/21/2022",
+      "time": "10:53 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "793671",
+      "date": "04/01/2022",
+      "time": "11:23 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "794255",
+      "date": "04/05/2022",
+      "time": "09:54 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "794604",
+      "date": "04/05/2022",
+      "time": "09:56 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "794923",
+      "date": "04/13/2022",
+      "time": "10:39 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "800035",
+      "date": "05/19/2022",
+      "time": "12:06 PM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "814606",
+      "date": "08/30/2022",
+      "time": "10:26 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "814636",
+      "date": "08/30/2022",
+      "time": "10:26 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "819423",
+      "date": "09/29/2022",
+      "time": "11:26 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "818514",
+      "date": "09/29/2022",
+      "time": "11:26 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "819424",
+      "date": "09/29/2022",
+      "time": "11:26 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "819399",
+      "date": "09/29/2022",
+      "time": "11:26 AM",
+      "inspector": "Jeff Jensen"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 3,
+    "unique_inspection_count": 12,
+    "page_content_length": 441141,
+    "extraction_duration_seconds": 33.62
+  }
+}

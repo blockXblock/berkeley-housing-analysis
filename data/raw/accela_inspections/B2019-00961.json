@@ -1,0 +1,148 @@
+{
+  "permit_number": "B2019-00961",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB19&capID2=00000&capID3=008KK&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T18:09:00.645730",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "667040",
+      "date": "05/30/2019",
+      "time": "01:21 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "785545",
+      "date": "02/01/2022",
+      "time": "12:10 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "786493",
+      "date": "02/04/2022",
+      "time": "10:58 AM",
+      "inspector": "Gilbert Gonzales"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "786492",
+      "date": "02/04/2022",
+      "time": "10:59 AM",
+      "inspector": "Gilbert Gonzales"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "787439",
+      "date": "02/09/2022",
+      "time": "11:21 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "786834",
+      "date": "02/09/2022",
+      "time": "11:21 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "786835",
+      "date": "02/09/2022",
+      "time": "11:21 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "789477",
+      "date": "03/03/2022",
+      "time": "09:40 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "791308",
+      "date": "03/16/2022",
+      "time": "08:34 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "792482",
+      "date": "03/23/2022",
+      "time": "10:58 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "802248",
+      "date": "06/09/2022",
+      "time": "01:54 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "802247",
+      "date": "06/09/2022",
+      "time": "01:54 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "802246",
+      "date": "06/09/2022",
+      "time": "01:54 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "808356",
+      "date": "07/22/2022",
+      "time": "12:34 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "808355",
+      "date": "07/22/2022",
+      "time": "12:34 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "808357",
+      "date": "07/22/2022",
+      "time": "12:34 PM",
+      "inspector": "Darrell Chappell"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 4,
+    "unique_inspection_count": 16,
+    "page_content_length": 442394,
+    "extraction_duration_seconds": 35.51
+  }
+}

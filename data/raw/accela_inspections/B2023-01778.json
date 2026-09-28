@@ -1,0 +1,75 @@
+{
+  "permit_number": "B2023-01778",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB23&capID2=00000&capID3=00DA2&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T03:50:52.439783",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "902941",
+      "date": "04/29/2024",
+      "time": "10:17 AM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "902942",
+      "date": "04/30/2024",
+      "time": "11:33 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "903172",
+      "date": "04/30/2024",
+      "time": "11:33 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1075 Underfloor Framing",
+      "inspection_id": "905154",
+      "date": "05/13/2024",
+      "time": "11:48 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "905264",
+      "date": "05/13/2024",
+      "time": "11:48 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "905265",
+      "date": "05/13/2024",
+      "time": "11:48 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "940134",
+      "date": "01/17/2025",
+      "time": "12:20 PM",
+      "inspector": "Eric Cabana"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 2,
+    "unique_inspection_count": 7,
+    "page_content_length": 393642,
+    "extraction_duration_seconds": 32.55
+  }
+}

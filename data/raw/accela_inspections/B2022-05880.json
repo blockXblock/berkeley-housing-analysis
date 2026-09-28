@@ -1,0 +1,2740 @@
+{
+  "permit_number": "B2022-05880",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB22&capID2=00000&capID3=00O0G&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-05-22T18:03:21.877636",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "883347",
+      "date": "12/20/2023",
+      "time": "02:42 PM",
+      "inspector": "Andrew Hoff"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "885145",
+      "date": "12/29/2023",
+      "time": "10:43 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "884993",
+      "date": "12/29/2023",
+      "time": "02:13 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "885130",
+      "date": "01/05/2024",
+      "time": "01:00 PM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "885627",
+      "date": "01/08/2024",
+      "time": "10:33 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "885515",
+      "date": "01/11/2024",
+      "time": "07:50 AM",
+      "inspector": "Andrew Hoff"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "885630",
+      "date": "01/11/2024",
+      "time": "10:20 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "885144",
+      "date": "01/08/2024",
+      "time": "11:52 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "885261",
+      "date": "01/11/2024",
+      "time": "10:23 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "886480",
+      "date": "01/16/2024",
+      "time": "11:19 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "887526",
+      "date": "01/18/2024",
+      "time": "01:55 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "886481",
+      "date": "01/22/2024",
+      "time": "07:31 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "887531",
+      "date": "01/30/2024",
+      "time": "10:24 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "889881",
+      "date": "02/01/2024",
+      "time": "08:25 AM",
+      "inspector": "Andrew Hoff"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "889782",
+      "date": "02/02/2024",
+      "time": "07:24 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "889783",
+      "date": "02/06/2024",
+      "time": "11:21 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "889879",
+      "date": "02/08/2024",
+      "time": "02:46 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "889880",
+      "date": "02/13/2024",
+      "time": "03:59 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "889882",
+      "date": "02/14/2024",
+      "time": "04:06 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "889883",
+      "date": "02/15/2024",
+      "time": "04:12 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "892272",
+      "date": "02/16/2024",
+      "time": "02:01 PM",
+      "inspector": "Andrew Hoff"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "892278",
+      "date": "02/22/2024",
+      "time": "06:42 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "892276",
+      "date": "02/23/2024",
+      "time": "11:27 AM",
+      "inspector": "Andrew Hoff"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "893216",
+      "date": "03/01/2024",
+      "time": "12:25 PM",
+      "inspector": "David Montes"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "894323",
+      "date": "03/04/2024",
+      "time": "08:16 AM",
+      "inspector": "Andrew Hoff"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "894324",
+      "date": "03/08/2024",
+      "time": "10:49 AM",
+      "inspector": "Andrew Hoff"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "894321",
+      "date": "03/11/2024",
+      "time": "07:30 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "894331",
+      "date": "03/14/2024",
+      "time": "04:38 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "894327",
+      "date": "03/19/2024",
+      "time": "10:01 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "894329",
+      "date": "03/19/2024",
+      "time": "10:03 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "896766",
+      "date": "03/22/2024",
+      "time": "03:52 PM",
+      "inspector": "David Montes"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "894330",
+      "date": "04/02/2024",
+      "time": "10:16 AM",
+      "inspector": "Andrew Hoff"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "900715",
+      "date": "04/16/2024",
+      "time": "07:09 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "900716",
+      "date": "04/16/2024",
+      "time": "06:49 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "900717",
+      "date": "04/17/2024",
+      "time": "06:50 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "900718",
+      "date": "04/18/2024",
+      "time": "04:23 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "900719",
+      "date": "04/19/2024",
+      "time": "12:59 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "902080",
+      "date": "04/22/2024",
+      "time": "01:01 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "901165",
+      "date": "04/23/2024",
+      "time": "03:27 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "901168",
+      "date": "04/24/2024",
+      "time": "10:36 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "901190",
+      "date": "04/25/2024",
+      "time": "03:19 PM",
+      "inspector": "Andrew Hoff"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "901191",
+      "date": "04/29/2024",
+      "time": "06:42 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "901192",
+      "date": "04/30/2024",
+      "time": "03:03 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "902016",
+      "date": "05/01/2024",
+      "time": "07:31 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "902017",
+      "date": "05/02/2024",
+      "time": "02:31 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "902018",
+      "date": "05/02/2024",
+      "time": "03:23 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "902019",
+      "date": "05/06/2024",
+      "time": "03:10 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "902021",
+      "date": "05/08/2024",
+      "time": "02:45 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "902023",
+      "date": "05/09/2024",
+      "time": "03:57 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "904948",
+      "date": "05/10/2024",
+      "time": "07:07 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "905107",
+      "date": "05/10/2024",
+      "time": "07:56 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "902020",
+      "date": "05/10/2024",
+      "time": "07:57 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "902024",
+      "date": "05/10/2024",
+      "time": "08:00 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "905358",
+      "date": "05/14/2024",
+      "time": "04:24 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "906098",
+      "date": "05/21/2024",
+      "time": "07:19 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "906169",
+      "date": "05/22/2024",
+      "time": "03:38 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "906968",
+      "date": "05/23/2024",
+      "time": "03:01 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "906170",
+      "date": "05/23/2024",
+      "time": "03:02 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "906171",
+      "date": "05/24/2024",
+      "time": "02:39 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "906172",
+      "date": "05/29/2024",
+      "time": "07:11 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "906173",
+      "date": "05/29/2024",
+      "time": "04:41 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "906174",
+      "date": "05/30/2024",
+      "time": "03:20 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "906812",
+      "date": "05/22/2024",
+      "time": "03:35 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "907872",
+      "date": "05/30/2024",
+      "time": "03:38 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "906175",
+      "date": "05/31/2024",
+      "time": "03:04 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "908042",
+      "date": "05/31/2024",
+      "time": "03:08 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "908043",
+      "date": "05/31/2024",
+      "time": "03:08 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "908228",
+      "date": "06/03/2024",
+      "time": "03:44 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "908249",
+      "date": "06/03/2024",
+      "time": "03:56 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "906176",
+      "date": "06/03/2024",
+      "time": "03:57 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "908484",
+      "date": "06/04/2024",
+      "time": "04:01 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "908492",
+      "date": "06/04/2024",
+      "time": "04:31 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "906178",
+      "date": "06/06/2024",
+      "time": "06:57 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "906180",
+      "date": "06/06/2024",
+      "time": "03:15 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "908896",
+      "date": "06/06/2024",
+      "time": "03:35 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "908895",
+      "date": "06/06/2024",
+      "time": "03:35 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "909263",
+      "date": "06/10/2024",
+      "time": "03:30 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "909264",
+      "date": "06/10/2024",
+      "time": "03:31 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "909265",
+      "date": "06/10/2024",
+      "time": "03:32 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "909466",
+      "date": "06/11/2024",
+      "time": "11:29 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "909467",
+      "date": "06/11/2024",
+      "time": "11:31 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "909806",
+      "date": "06/13/2024",
+      "time": "01:19 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "909807",
+      "date": "06/13/2024",
+      "time": "01:23 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "906186",
+      "date": "06/14/2024",
+      "time": "03:14 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "909960",
+      "date": "06/14/2024",
+      "time": "03:14 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "909959",
+      "date": "06/14/2024",
+      "time": "03:14 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "906191",
+      "date": "06/19/2024",
+      "time": "07:56 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "906190",
+      "date": "06/20/2024",
+      "time": "12:34 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "910827",
+      "date": "06/20/2024",
+      "time": "12:35 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "911528",
+      "date": "06/26/2024",
+      "time": "04:07 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "911551",
+      "date": "06/26/2024",
+      "time": "04:11 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "911549",
+      "date": "06/26/2024",
+      "time": "04:13 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "911734",
+      "date": "06/27/2024",
+      "time": "04:13 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "906196",
+      "date": "06/28/2024",
+      "time": "02:23 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "911735",
+      "date": "06/27/2024",
+      "time": "03:36 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "911736",
+      "date": "06/27/2024",
+      "time": "04:04 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "911737",
+      "date": "06/27/2024",
+      "time": "04:07 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "913071",
+      "date": "07/09/2024",
+      "time": "03:49 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "913073",
+      "date": "07/09/2024",
+      "time": "03:52 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "913074",
+      "date": "07/09/2024",
+      "time": "04:12 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "913072",
+      "date": "07/09/2024",
+      "time": "04:16 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "911980",
+      "date": "07/12/2024",
+      "time": "03:37 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "913608",
+      "date": "07/12/2024",
+      "time": "03:38 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "911981",
+      "date": "07/15/2024",
+      "time": "11:20 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "911982",
+      "date": "07/16/2024",
+      "time": "02:01 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "914011",
+      "date": "07/16/2024",
+      "time": "02:03 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "914012",
+      "date": "07/16/2024",
+      "time": "02:03 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "914013",
+      "date": "07/16/2024",
+      "time": "02:03 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "911983",
+      "date": "07/17/2024",
+      "time": "09:02 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "914281",
+      "date": "07/17/2024",
+      "time": "09:02 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "914282",
+      "date": "07/17/2024",
+      "time": "09:02 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "914283",
+      "date": "07/17/2024",
+      "time": "09:02 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "911984",
+      "date": "07/18/2024",
+      "time": "02:28 PM",
+      "inspector": "David Montes"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "914613",
+      "date": "07/19/2024",
+      "time": "02:39 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "911985",
+      "date": "07/19/2024",
+      "time": "02:39 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "911986",
+      "date": "07/22/2024",
+      "time": "01:41 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "911987",
+      "date": "07/23/2024",
+      "time": "01:37 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "915064",
+      "date": "07/23/2024",
+      "time": "01:45 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "915063",
+      "date": "07/23/2024",
+      "time": "01:47 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "915066",
+      "date": "07/23/2024",
+      "time": "01:52 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "915062",
+      "date": "07/23/2024",
+      "time": "01:41 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "911988",
+      "date": "07/24/2024",
+      "time": "12:57 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "915285",
+      "date": "07/24/2024",
+      "time": "01:00 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "915284",
+      "date": "07/24/2024",
+      "time": "03:16 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "911989",
+      "date": "07/25/2024",
+      "time": "12:18 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "915499",
+      "date": "07/25/2024",
+      "time": "12:22 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "911990",
+      "date": "07/26/2024",
+      "time": "01:00 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "915711",
+      "date": "07/26/2024",
+      "time": "01:01 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "911992",
+      "date": "07/30/2024",
+      "time": "08:00 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "911977",
+      "date": "07/10/2024",
+      "time": "07:22 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "911979",
+      "date": "07/11/2024",
+      "time": "07:23 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "911995",
+      "date": "08/02/2024",
+      "time": "10:53 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "917671",
+      "date": "08/08/2024",
+      "time": "03:15 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "917667",
+      "date": "08/08/2024",
+      "time": "03:18 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "917670",
+      "date": "08/08/2024",
+      "time": "03:20 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "917672",
+      "date": "08/08/2024",
+      "time": "03:23 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "912036",
+      "date": "08/08/2024",
+      "time": "03:25 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "917675",
+      "date": "08/08/2024",
+      "time": "03:31 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4040 Water Service",
+      "inspection_id": "917673",
+      "date": "08/08/2024",
+      "time": "03:34 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "912037",
+      "date": "08/09/2024",
+      "time": "12:38 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "912038",
+      "date": "08/12/2024",
+      "time": "07:13 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "918454",
+      "date": "08/14/2024",
+      "time": "07:42 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "918455",
+      "date": "08/14/2024",
+      "time": "07:43 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "918453",
+      "date": "08/14/2024",
+      "time": "02:52 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "918855",
+      "date": "08/15/2024",
+      "time": "02:39 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "918856",
+      "date": "08/15/2024",
+      "time": "02:40 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "918857",
+      "date": "08/15/2024",
+      "time": "02:42 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "918858",
+      "date": "08/15/2024",
+      "time": "02:44 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "912043",
+      "date": "08/16/2024",
+      "time": "10:09 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "919063",
+      "date": "08/16/2024",
+      "time": "02:01 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "919322",
+      "date": "08/19/2024",
+      "time": "03:06 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "919323",
+      "date": "08/19/2024",
+      "time": "03:08 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "919325",
+      "date": "08/19/2024",
+      "time": "03:09 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "919326",
+      "date": "08/19/2024",
+      "time": "03:11 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "919545",
+      "date": "08/20/2024",
+      "time": "01:55 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "919955",
+      "date": "08/21/2024",
+      "time": "03:00 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "919956",
+      "date": "08/21/2024",
+      "time": "03:02 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "912048",
+      "date": "08/23/2024",
+      "time": "12:40 PM",
+      "inspector": "Andrew Hoff"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "920699",
+      "date": "08/26/2024",
+      "time": "03:09 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "920700",
+      "date": "08/26/2024",
+      "time": "03:10 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "920701",
+      "date": "08/26/2024",
+      "time": "03:10 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "920705",
+      "date": "08/26/2024",
+      "time": "03:11 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "920990",
+      "date": "08/27/2024",
+      "time": "02:51 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "920989",
+      "date": "08/27/2024",
+      "time": "02:54 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2200 Electrical Solar Photovoltaic",
+      "inspection_id": "921542",
+      "date": "08/29/2024",
+      "time": "01:58 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "921546",
+      "date": "08/29/2024",
+      "time": "02:09 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "921796",
+      "date": "08/30/2024",
+      "time": "03:54 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "912034",
+      "date": "08/30/2024",
+      "time": "03:56 PM",
+      "inspector": "David Montes"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "922030",
+      "date": "09/03/2024",
+      "time": "02:31 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "922031",
+      "date": "09/03/2024",
+      "time": "02:33 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3030 Fire/Smoker Damper",
+      "inspection_id": "922761",
+      "date": "09/05/2024",
+      "time": "02:26 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "922773",
+      "date": "09/05/2024",
+      "time": "02:51 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "920310",
+      "date": "09/06/2024",
+      "time": "03:37 PM",
+      "inspector": "David Montes"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "923009",
+      "date": "09/06/2024",
+      "time": "03:39 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "923008",
+      "date": "09/06/2024",
+      "time": "03:39 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "923189",
+      "date": "09/09/2024",
+      "time": "02:57 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "923191",
+      "date": "09/09/2024",
+      "time": "03:13 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "923192",
+      "date": "09/09/2024",
+      "time": "03:17 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "923454",
+      "date": "09/10/2024",
+      "time": "01:31 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "923453",
+      "date": "09/10/2024",
+      "time": "01:33 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "923468",
+      "date": "09/10/2024",
+      "time": "01:48 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "923758",
+      "date": "09/11/2024",
+      "time": "03:18 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "923779",
+      "date": "09/11/2024",
+      "time": "03:19 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "923780",
+      "date": "09/11/2024",
+      "time": "03:20 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "923990",
+      "date": "09/12/2024",
+      "time": "02:43 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "923991",
+      "date": "09/12/2024",
+      "time": "02:46 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "920315",
+      "date": "09/13/2024",
+      "time": "04:20 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "924220",
+      "date": "09/13/2024",
+      "time": "04:23 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1195 T-Bar Suspended Ceiling",
+      "inspection_id": "924219",
+      "date": "09/13/2024",
+      "time": "04:23 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "924221",
+      "date": "09/13/2024",
+      "time": "04:23 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "924421",
+      "date": "09/16/2024",
+      "time": "01:57 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "924420",
+      "date": "09/16/2024",
+      "time": "01:58 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "924716",
+      "date": "09/17/2024",
+      "time": "03:42 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "924717",
+      "date": "09/17/2024",
+      "time": "03:43 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "924952",
+      "date": "09/18/2024",
+      "time": "03:39 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "924951",
+      "date": "09/18/2024",
+      "time": "03:45 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "924950",
+      "date": "09/18/2024",
+      "time": "03:46 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "924957",
+      "date": "09/18/2024",
+      "time": "03:48 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "920321",
+      "date": "09/20/2024",
+      "time": "03:27 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "925687",
+      "date": "09/24/2024",
+      "time": "03:48 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "925584",
+      "date": "09/24/2024",
+      "time": "03:53 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "925585",
+      "date": "09/24/2024",
+      "time": "03:57 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "925583",
+      "date": "09/24/2024",
+      "time": "03:58 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "925582",
+      "date": "09/24/2024",
+      "time": "04:02 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "926137",
+      "date": "09/26/2024",
+      "time": "02:33 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "926136",
+      "date": "09/26/2024",
+      "time": "02:34 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "920331",
+      "date": "09/27/2024",
+      "time": "02:07 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "926325",
+      "date": "09/27/2024",
+      "time": "02:31 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "920332",
+      "date": "09/30/2024",
+      "time": "01:08 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "920333",
+      "date": "10/01/2024",
+      "time": "07:43 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1075 Underfloor Framing",
+      "inspection_id": "920338",
+      "date": "10/04/2024",
+      "time": "04:58 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "927591",
+      "date": "10/07/2024",
+      "time": "03:53 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "928034",
+      "date": "10/09/2024",
+      "time": "02:13 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "928033",
+      "date": "10/09/2024",
+      "time": "02:14 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "928036",
+      "date": "10/09/2024",
+      "time": "02:15 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "928035",
+      "date": "10/09/2024",
+      "time": "02:16 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "920342",
+      "date": "10/10/2024",
+      "time": "10:12 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1065 Concrete Masonry Unit",
+      "inspection_id": "920343",
+      "date": "10/11/2024",
+      "time": "12:36 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "928842",
+      "date": "10/15/2024",
+      "time": "03:17 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "928843",
+      "date": "10/15/2024",
+      "time": "03:18 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "929089",
+      "date": "10/16/2024",
+      "time": "03:13 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "929090",
+      "date": "10/16/2024",
+      "time": "03:14 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "929092",
+      "date": "10/16/2024",
+      "time": "03:15 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "929094",
+      "date": "10/16/2024",
+      "time": "03:16 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "920349",
+      "date": "10/18/2024",
+      "time": "04:10 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "929598",
+      "date": "10/21/2024",
+      "time": "02:37 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "930107",
+      "date": "10/23/2024",
+      "time": "02:42 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "930109",
+      "date": "10/23/2024",
+      "time": "02:43 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "930111",
+      "date": "10/23/2024",
+      "time": "02:46 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "930110",
+      "date": "10/23/2024",
+      "time": "02:48 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "930295",
+      "date": "10/24/2024",
+      "time": "02:11 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "920354",
+      "date": "10/25/2024",
+      "time": "11:34 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "930749",
+      "date": "10/28/2024",
+      "time": "02:07 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "930750",
+      "date": "10/28/2024",
+      "time": "02:08 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "930751",
+      "date": "10/28/2024",
+      "time": "02:09 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "930752",
+      "date": "10/28/2024",
+      "time": "02:09 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "920380",
+      "date": "11/01/2024",
+      "time": "09:35 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "920382",
+      "date": "11/04/2024",
+      "time": "12:00 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "932306",
+      "date": "11/06/2024",
+      "time": "04:02 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "932308",
+      "date": "11/06/2024",
+      "time": "04:04 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "932307",
+      "date": "11/06/2024",
+      "time": "04:07 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "932311",
+      "date": "11/06/2024",
+      "time": "04:08 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "920387",
+      "date": "11/08/2024",
+      "time": "02:54 PM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "932737",
+      "date": "11/08/2024",
+      "time": "02:56 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "933041",
+      "date": "11/12/2024",
+      "time": "02:35 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "933042",
+      "date": "11/12/2024",
+      "time": "02:36 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Approved with Conditions",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "933281",
+      "date": "11/13/2024",
+      "time": "02:12 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "933282",
+      "date": "11/13/2024",
+      "time": "02:12 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1065 Concrete Masonry Unit",
+      "inspection_id": "920391",
+      "date": "11/14/2024",
+      "time": "03:19 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "933917",
+      "date": "11/18/2024",
+      "time": "01:18 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Approved with Conditions",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "934197",
+      "date": "11/19/2024",
+      "time": "02:50 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1065 Concrete Masonry Unit",
+      "inspection_id": "920397",
+      "date": "11/22/2024",
+      "time": "10:30 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "934716",
+      "date": "11/22/2024",
+      "time": "10:31 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "920480",
+      "date": "11/25/2024",
+      "time": "09:31 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "920482",
+      "date": "11/26/2024",
+      "time": "09:31 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1065 Concrete Masonry Unit",
+      "inspection_id": "920481",
+      "date": "11/26/2024",
+      "time": "09:31 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1065 Concrete Masonry Unit",
+      "inspection_id": "920483",
+      "date": "11/27/2024",
+      "time": "10:44 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "920484",
+      "date": "12/02/2024",
+      "time": "09:09 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "920485",
+      "date": "12/03/2024",
+      "time": "10:54 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "935908",
+      "date": "12/04/2024",
+      "time": "12:58 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1065 Concrete Masonry Unit",
+      "inspection_id": "920487",
+      "date": "12/04/2024",
+      "time": "12:59 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "920488",
+      "date": "12/04/2024",
+      "time": "12:59 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "920491",
+      "date": "12/05/2024",
+      "time": "03:39 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "936649",
+      "date": "12/09/2024",
+      "time": "03:13 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "936650",
+      "date": "12/09/2024",
+      "time": "03:14 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "937069",
+      "date": "12/11/2024",
+      "time": "02:59 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "920896",
+      "date": "12/12/2024",
+      "time": "02:33 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "938062",
+      "date": "12/18/2024",
+      "time": "02:24 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "938065",
+      "date": "12/18/2024",
+      "time": "02:25 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "938063",
+      "date": "12/18/2024",
+      "time": "02:26 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "938061",
+      "date": "12/18/2024",
+      "time": "02:27 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "920902",
+      "date": "12/19/2024",
+      "time": "05:12 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "938526",
+      "date": "12/23/2024",
+      "time": "02:01 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "938527",
+      "date": "12/23/2024",
+      "time": "02:04 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "920905",
+      "date": "12/26/2024",
+      "time": "09:22 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1065 Concrete Masonry Unit",
+      "inspection_id": "920906",
+      "date": "12/27/2024",
+      "time": "07:07 AM",
+      "inspector": "Eduardo Franco"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "920910",
+      "date": "01/02/2025",
+      "time": "08:22 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "920911",
+      "date": "01/03/2025",
+      "time": "11:03 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "920918",
+      "date": "01/10/2025",
+      "time": "09:22 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "940766",
+      "date": "01/16/2025",
+      "time": "02:06 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "940765",
+      "date": "01/16/2025",
+      "time": "02:07 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "940764",
+      "date": "01/16/2025",
+      "time": "02:09 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "940770",
+      "date": "01/16/2025",
+      "time": "02:12 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "940771",
+      "date": "01/16/2025",
+      "time": "02:14 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "920951",
+      "date": "01/16/2025",
+      "time": "03:18 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "920962",
+      "date": "01/23/2025",
+      "time": "03:33 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "941804",
+      "date": "01/27/2025",
+      "time": "01:18 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "942224",
+      "date": "01/29/2025",
+      "time": "02:53 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "920971",
+      "date": "01/30/2025",
+      "time": "03:44 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "921009",
+      "date": "02/06/2025",
+      "time": "03:50 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "921011",
+      "date": "02/11/2025",
+      "time": "12:48 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "943702",
+      "date": "02/11/2025",
+      "time": "12:48 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "921012",
+      "date": "02/11/2025",
+      "time": "03:32 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "921013",
+      "date": "02/13/2025",
+      "time": "03:01 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "921014",
+      "date": "02/14/2025",
+      "time": "02:23 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "944391",
+      "date": "02/18/2025",
+      "time": "11:44 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "921016",
+      "date": "02/18/2025",
+      "time": "11:44 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "921017",
+      "date": "02/19/2025",
+      "time": "01:57 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "921019",
+      "date": "02/21/2025",
+      "time": "08:10 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "921018",
+      "date": "02/20/2025",
+      "time": "07:58 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "945256",
+      "date": "02/25/2025",
+      "time": "06:53 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "921172",
+      "date": "02/27/2025",
+      "time": "04:01 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "921199",
+      "date": "03/06/2025",
+      "time": "03:52 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "921200",
+      "date": "03/10/2025",
+      "time": "10:14 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "921201",
+      "date": "03/11/2025",
+      "time": "10:52 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Public Works 6010 Public Works Rough",
+      "inspection_id": "943377",
+      "date": "03/11/2025",
+      "time": "10:52 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "921202",
+      "date": "03/12/2025",
+      "time": "02:23 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "921203",
+      "date": "03/13/2025",
+      "time": "04:13 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "921204",
+      "date": "03/13/2025",
+      "time": "06:49 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "921207",
+      "date": "03/18/2025",
+      "time": "06:25 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "921283",
+      "date": "03/20/2025",
+      "time": "03:00 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "921290",
+      "date": "03/27/2025",
+      "time": "04:07 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "921291",
+      "date": "03/31/2025",
+      "time": "05:20 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1120 Moment Frame",
+      "inspection_id": "921298",
+      "date": "04/03/2025",
+      "time": "03:58 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "921324",
+      "date": "04/10/2025",
+      "time": "04:04 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "921341",
+      "date": "04/18/2025",
+      "time": "01:43 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "921348",
+      "date": "04/23/2025",
+      "time": "07:38 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "921352",
+      "date": "04/24/2025",
+      "time": "04:06 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "921353",
+      "date": "04/24/2025",
+      "time": "04:06 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1065 Concrete Masonry Unit",
+      "inspection_id": "921537",
+      "date": "05/01/2025",
+      "time": "03:27 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1065 Concrete Masonry Unit",
+      "inspection_id": "921613",
+      "date": "05/01/2025",
+      "time": "03:28 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "921679",
+      "date": "05/09/2025",
+      "time": "01:27 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "921686",
+      "date": "05/15/2025",
+      "time": "04:20 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "921692",
+      "date": "05/22/2025",
+      "time": "04:00 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "957690",
+      "date": "06/05/2025",
+      "time": "02:30 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "957703",
+      "date": "06/06/2025",
+      "time": "01:36 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "957696",
+      "date": "06/10/2025",
+      "time": "06:58 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "957698",
+      "date": "06/13/2025",
+      "time": "02:36 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "957697",
+      "date": "06/12/2025",
+      "time": "07:08 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "957699",
+      "date": "06/16/2025",
+      "time": "06:37 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "957702",
+      "date": "06/18/2025",
+      "time": "03:36 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "957700",
+      "date": "06/17/2025",
+      "time": "08:00 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "959682",
+      "date": "06/24/2025",
+      "time": "08:39 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "959683",
+      "date": "06/25/2025",
+      "time": "06:31 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "959686",
+      "date": "06/26/2025",
+      "time": "04:07 PM",
+      "inspector": "David Montes"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "959685",
+      "date": "06/26/2025",
+      "time": "07:30 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "961839",
+      "date": "07/14/2025",
+      "time": "07:13 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "961840",
+      "date": "07/14/2025",
+      "time": "07:14 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "961841",
+      "date": "07/14/2025",
+      "time": "07:14 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "961258",
+      "date": "07/14/2025",
+      "time": "07:14 AM",
+      "inspector": "Freddie Mares"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 68,
+    "unique_inspection_count": 340,
+    "page_content_length": 2464459,
+    "extraction_duration_seconds": 131.61
+  }
+}

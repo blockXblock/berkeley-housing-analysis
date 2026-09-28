@@ -1,0 +1,236 @@
+{
+  "permit_number": "B2021-05544",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB21&capID2=00000&capID3=00M8Y&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T02:26:39.692237",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "814305",
+      "date": "08/29/2022",
+      "time": "09:54 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "819069",
+      "date": "10/03/2022",
+      "time": "11:54 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "819070",
+      "date": "10/04/2022",
+      "time": "10:59 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "819071",
+      "date": "10/04/2022",
+      "time": "02:08 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "819072",
+      "date": "10/06/2022",
+      "time": "12:56 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "820126",
+      "date": "10/07/2022",
+      "time": "07:35 AM",
+      "inspector": "Matthew Doughty"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "822016",
+      "date": "10/21/2022",
+      "time": "03:23 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "822421",
+      "date": "10/25/2022",
+      "time": "01:10 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "824320",
+      "date": "11/07/2022",
+      "time": "10:00 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "824323",
+      "date": "11/07/2022",
+      "time": "10:00 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "824321",
+      "date": "11/07/2022",
+      "time": "10:00 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "824322",
+      "date": "11/07/2022",
+      "time": "10:02 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "824556",
+      "date": "11/10/2022",
+      "time": "03:19 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "825149",
+      "date": "11/15/2022",
+      "time": "08:44 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "825150",
+      "date": "11/17/2022",
+      "time": "02:23 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "828610",
+      "date": "12/08/2022",
+      "time": "10:54 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "837124",
+      "date": "02/15/2023",
+      "time": "12:33 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "837122",
+      "date": "02/15/2023",
+      "time": "12:33 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "837123",
+      "date": "02/15/2023",
+      "time": "12:33 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "837121",
+      "date": "02/15/2023",
+      "time": "12:46 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "837128",
+      "date": "02/15/2023",
+      "time": "07:47 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "837127",
+      "date": "02/15/2023",
+      "time": "07:48 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "837126",
+      "date": "02/15/2023",
+      "time": "07:48 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "837125",
+      "date": "02/15/2023",
+      "time": "07:49 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "838450",
+      "date": "02/16/2023",
+      "time": "04:27 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "838251",
+      "date": "02/27/2023",
+      "time": "09:58 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "840147",
+      "date": "03/01/2023",
+      "time": "04:15 PM",
+      "inspector": "J"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 6,
+    "unique_inspection_count": 27,
+    "page_content_length": 532763,
+    "extraction_duration_seconds": 36.15
+  }
+}

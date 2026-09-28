@@ -1,0 +1,140 @@
+{
+  "permit_number": "B2019-04476",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB19&capID2=00000&capID3=00IEA&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T23:55:15.609590",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "702509",
+      "date": "03/02/2020",
+      "time": "11:30 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "704078",
+      "date": "03/06/2020",
+      "time": "11:59 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "703689",
+      "date": "03/06/2020",
+      "time": "11:59 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "704901",
+      "date": "03/17/2020",
+      "time": "12:05 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "705088",
+      "date": "03/17/2020",
+      "time": "12:12 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "708278",
+      "date": "05/26/2020",
+      "time": "08:35 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "708279",
+      "date": "05/26/2020",
+      "time": "08:35 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "713621",
+      "date": "07/10/2020",
+      "time": "10:13 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "713618",
+      "date": "07/10/2020",
+      "time": "10:13 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "713619",
+      "date": "07/10/2020",
+      "time": "10:13 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "713620",
+      "date": "07/10/2020",
+      "time": "10:13 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "714498",
+      "date": "07/15/2020",
+      "time": "10:02 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "715108",
+      "date": "07/15/2020",
+      "time": "10:02 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "715151",
+      "date": "07/15/2020",
+      "time": "10:02 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "715150",
+      "date": "07/15/2020",
+      "time": "10:02 AM",
+      "inspector": "Jeff Jensen"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 3,
+    "unique_inspection_count": 15,
+    "page_content_length": 486306,
+    "extraction_duration_seconds": 33.0
+  }
+}

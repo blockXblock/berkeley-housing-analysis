@@ -1,0 +1,16 @@
+{
+  "permit_number": "B2020-01331",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB20&capID2=00000&capID3=00C33&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T00:25:58.555127",
+  "extraction_method": "playwright_v2",
+  "inspections": [],
+  "errors": [
+    "Timeout waiting for inspection table",
+    "Could not locate inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "not_reached",
+    "page_title": "accela.com | 502: Bad gateway",
+    "requires_auth": false
+  }
+}

@@ -1,0 +1,212 @@
+{
+  "permit_number": "B2019-00029",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB19&capID2=00000&capID3=0007R&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T23:13:21.743834",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "664584",
+      "date": "05/08/2019",
+      "time": "11:11 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "666467",
+      "date": "05/23/2019",
+      "time": "01:35 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "671883",
+      "date": "07/08/2019",
+      "time": "11:58 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "672683",
+      "date": "07/19/2019",
+      "time": "11:10 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "672684",
+      "date": "07/19/2019",
+      "time": "11:10 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "672682",
+      "date": "07/19/2019",
+      "time": "11:10 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "672681",
+      "date": "07/19/2019",
+      "time": "11:11 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "675409",
+      "date": "07/26/2019",
+      "time": "11:17 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "674752",
+      "date": "07/26/2019",
+      "time": "11:18 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "675908",
+      "date": "08/02/2019",
+      "time": "10:39 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "675907",
+      "date": "08/02/2019",
+      "time": "10:39 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "684952",
+      "date": "10/09/2019",
+      "time": "05:12 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "685281",
+      "date": "10/15/2019",
+      "time": "11:05 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "687160",
+      "date": "10/28/2019",
+      "time": "09:24 AM",
+      "inspector": "Matthew Doughty"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "687161",
+      "date": "10/28/2019",
+      "time": "09:24 AM",
+      "inspector": "Matthew Doughty"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "687163",
+      "date": "10/28/2019",
+      "time": "09:24 AM",
+      "inspector": "Matthew Doughty"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "687165",
+      "date": "10/28/2019",
+      "time": "09:24 AM",
+      "inspector": "Matthew Doughty"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "687838",
+      "date": "10/30/2019",
+      "time": "12:49 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "687836",
+      "date": "10/30/2019",
+      "time": "12:49 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "687837",
+      "date": "10/30/2019",
+      "time": "12:49 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "689719",
+      "date": "11/07/2019",
+      "time": "03:35 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "689720",
+      "date": "11/07/2019",
+      "time": "03:35 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "689721",
+      "date": "11/07/2019",
+      "time": "03:35 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "689722",
+      "date": "11/07/2019",
+      "time": "03:35 PM",
+      "inspector": "Jeff Jensen"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 5,
+    "unique_inspection_count": 24,
+    "page_content_length": 595067,
+    "extraction_duration_seconds": 37.34
+  }
+}

@@ -1,0 +1,228 @@
+{
+  "permit_number": "B2022-01742",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB22&capID2=00000&capID3=00CMQ&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T19:21:55.306826",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "839314",
+      "date": "02/23/2023",
+      "time": "09:18 PM",
+      "inspector": "Cora Tang"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "839312",
+      "date": "02/23/2023",
+      "time": "09:19 PM",
+      "inspector": "Cora Tang"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "839313",
+      "date": "02/23/2023",
+      "time": "09:20 PM",
+      "inspector": "Cora Tang"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "839317",
+      "date": "03/06/2023",
+      "time": "12:32 PM",
+      "inspector": "Cora Tang"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "839316",
+      "date": "03/06/2023",
+      "time": "12:32 PM",
+      "inspector": "Cora Tang"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "839315",
+      "date": "03/06/2023",
+      "time": "12:33 PM",
+      "inspector": "Cora Tang"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "840736",
+      "date": "03/14/2023",
+      "time": "10:32 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "840737",
+      "date": "03/14/2023",
+      "time": "10:33 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "840735",
+      "date": "03/14/2023",
+      "time": "10:34 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "844584",
+      "date": "04/06/2023",
+      "time": "10:11 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "844585",
+      "date": "04/06/2023",
+      "time": "10:11 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "844586",
+      "date": "04/06/2023",
+      "time": "10:11 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "847861",
+      "date": "04/28/2023",
+      "time": "05:52 PM",
+      "inspector": "Cora Tang"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "847860",
+      "date": "04/28/2023",
+      "time": "05:53 PM",
+      "inspector": "Cora Tang"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "847859",
+      "date": "04/28/2023",
+      "time": "05:53 PM",
+      "inspector": "Cora Tang"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "848957",
+      "date": "04/28/2023",
+      "time": "05:54 PM",
+      "inspector": "Cora Tang"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "848958",
+      "date": "04/28/2023",
+      "time": "05:54 PM",
+      "inspector": "Cora Tang"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "915847",
+      "date": "07/30/2024",
+      "time": "07:55 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "915848",
+      "date": "07/30/2024",
+      "time": "07:56 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "915889",
+      "date": "07/30/2024",
+      "time": "07:57 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "915871",
+      "date": "08/09/2024",
+      "time": "03:24 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "915872",
+      "date": "08/09/2024",
+      "time": "03:25 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "915873",
+      "date": "08/09/2024",
+      "time": "03:25 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "923528",
+      "date": "09/11/2024",
+      "time": "10:35 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "923529",
+      "date": "09/12/2024",
+      "time": "03:45 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "923530",
+      "date": "09/12/2024",
+      "time": "03:45 PM",
+      "inspector": "Leo Bautista"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 6,
+    "unique_inspection_count": 26,
+    "page_content_length": 569188,
+    "extraction_duration_seconds": 36.63
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "permit_number": "B2022-04690",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB22&capID2=00000&capID3=00L8L&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T03:18:45.054058",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "871137",
+      "date": "09/25/2023",
+      "time": "02:10 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1220 Site Drainage",
+      "inspection_id": "874106",
+      "date": "10/12/2023",
+      "time": "02:29 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "876963",
+      "date": "10/31/2023",
+      "time": "12:24 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "879842",
+      "date": "11/17/2023",
+      "time": "01:12 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "879843",
+      "date": "11/17/2023",
+      "time": "01:12 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "878917",
+      "date": "11/17/2023",
+      "time": "01:12 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "878916",
+      "date": "11/17/2023",
+      "time": "01:12 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "878918",
+      "date": "11/17/2023",
+      "time": "01:12 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "880024",
+      "date": "11/27/2023",
+      "time": "01:12 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "881073",
+      "date": "12/04/2023",
+      "time": "01:19 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "881768",
+      "date": "12/06/2023",
+      "time": "11:12 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "883945",
+      "date": "12/19/2023",
+      "time": "01:20 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "884179",
+      "date": "12/21/2023",
+      "time": "07:36 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "884906",
+      "date": "12/28/2023",
+      "time": "01:37 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "890366",
+      "date": "02/06/2024",
+      "time": "12:26 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "905491",
+      "date": "05/16/2024",
+      "time": "01:13 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved with Conditions",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "907613",
+      "date": "05/30/2024",
+      "time": "01:27 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "916963",
+      "date": "08/07/2024",
+      "time": "12:38 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "917511",
+      "date": "08/07/2024",
+      "time": "12:38 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "917512",
+      "date": "08/07/2024",
+      "time": "12:38 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "917513",
+      "date": "08/07/2024",
+      "time": "12:38 PM",
+      "inspector": "Lorenzo Aguilar"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 5,
+    "unique_inspection_count": 21,
+    "page_content_length": 508525,
+    "extraction_duration_seconds": 34.05
+  }
+}

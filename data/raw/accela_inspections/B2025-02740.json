@@ -1,0 +1,228 @@
+{
+  "permit_number": "B2025-02740",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00J2W&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T05:58:59.716048",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1022100",
+      "date": "01/21/2026",
+      "time": "12:42 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "1023101",
+      "date": "01/21/2026",
+      "time": "12:42 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "1023384",
+      "date": "01/21/2026",
+      "time": "12:42 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1033901",
+      "date": "02/11/2026",
+      "time": "12:17 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1035625",
+      "date": "02/17/2026",
+      "time": "01:02 PM",
+      "inspector": "Mark Almeida"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1040419",
+      "date": "02/24/2026",
+      "time": "01:54 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1044506",
+      "date": "03/03/2026",
+      "time": "12:55 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1057699",
+      "date": "03/26/2026",
+      "time": "10:41 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "1057700",
+      "date": "03/26/2026",
+      "time": "10:41 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1058584",
+      "date": "03/26/2026",
+      "time": "03:33 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "1058392",
+      "date": "03/27/2026",
+      "time": "09:59 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1058104",
+      "date": "03/27/2026",
+      "time": "09:59 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "1063419",
+      "date": "04/07/2026",
+      "time": "12:14 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1074260",
+      "date": "04/23/2026",
+      "time": "10:36 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1078500",
+      "date": "05/04/2026",
+      "time": "09:50 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1084019",
+      "date": "05/11/2026",
+      "time": "10:44 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "1106663",
+      "date": "06/18/2026",
+      "time": "11:08 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4040 Water Service",
+      "inspection_id": "1119586",
+      "date": "07/13/2026",
+      "time": "12:11 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1136143",
+      "date": "08/05/2026",
+      "time": "11:00 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1136667",
+      "date": "08/05/2026",
+      "time": "11:02 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1138101",
+      "date": "08/10/2026",
+      "time": "08:33 AM",
+      "inspector": "Mark Almeida"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1140702",
+      "date": "08/13/2026",
+      "time": "01:44 PM",
+      "inspector": "Mark Almeida"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "1143303",
+      "date": "08/17/2026",
+      "time": "02:25 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "1142826",
+      "date": "08/17/2026",
+      "time": "02:25 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "1142825",
+      "date": "08/17/2026",
+      "time": "02:25 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1141427",
+      "date": "08/17/2026",
+      "time": "02:25 PM",
+      "inspector": "Lorenzo Aguilar"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 6,
+    "unique_inspection_count": 26,
+    "page_content_length": 601055,
+    "extraction_duration_seconds": 39.07
+  }
+}

@@ -1,0 +1,220 @@
+{
+  "permit_number": "B2020-03792",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB20&capID2=00000&capID3=00H1N&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T01:12:02.385830",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "740566",
+      "date": "02/16/2021",
+      "time": "11:32 AM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "744484",
+      "date": "03/16/2021",
+      "time": "12:09 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "745662",
+      "date": "03/24/2021",
+      "time": "03:56 PM",
+      "inspector": "Paul Warren"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "745660",
+      "date": "03/24/2021",
+      "time": "03:56 PM",
+      "inspector": "Paul Warren"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "746070",
+      "date": "03/24/2021",
+      "time": "03:56 PM",
+      "inspector": "Paul Warren"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "745661",
+      "date": "03/24/2021",
+      "time": "03:57 PM",
+      "inspector": "Paul Warren"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "746073",
+      "date": "03/25/2021",
+      "time": "08:47 AM",
+      "inspector": "Paul Warren"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "746072",
+      "date": "03/25/2021",
+      "time": "08:47 AM",
+      "inspector": "Paul Warren"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "746071",
+      "date": "03/25/2021",
+      "time": "08:47 AM",
+      "inspector": "Paul Warren"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "746167",
+      "date": "03/30/2021",
+      "time": "12:46 PM",
+      "inspector": "Paul Warren"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "746166",
+      "date": "03/30/2021",
+      "time": "12:46 PM",
+      "inspector": "Paul Warren"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "746165",
+      "date": "03/30/2021",
+      "time": "12:46 PM",
+      "inspector": "Paul Warren"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "747295",
+      "date": "04/05/2021",
+      "time": "03:29 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "747296",
+      "date": "04/05/2021",
+      "time": "03:29 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "747297",
+      "date": "04/05/2021",
+      "time": "03:29 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "748016",
+      "date": "04/09/2021",
+      "time": "10:58 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "748450",
+      "date": "04/13/2021",
+      "time": "10:56 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "749074",
+      "date": "04/19/2021",
+      "time": "12:05 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "749158",
+      "date": "04/19/2021",
+      "time": "12:05 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "756386",
+      "date": "06/14/2021",
+      "time": "09:35 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "756898",
+      "date": "07/06/2021",
+      "time": "09:17 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "756899",
+      "date": "07/12/2021",
+      "time": "09:17 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "756900",
+      "date": "07/12/2021",
+      "time": "09:17 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "756901",
+      "date": "07/12/2021",
+      "time": "09:17 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "759554",
+      "date": "07/12/2021",
+      "time": "09:17 AM",
+      "inspector": "Darrell Chappell"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 5,
+    "unique_inspection_count": 25,
+    "page_content_length": 515590,
+    "extraction_duration_seconds": 35.8
+  }
+}

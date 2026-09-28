@@ -1,0 +1,60 @@
+{
+  "permit_number": "B2020-04464",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB20&capID2=00000&capID3=00I96&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T09:27:56.359631",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "759111",
+      "date": "07/06/2021",
+      "time": "09:15 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "759110",
+      "date": "07/06/2021",
+      "time": "09:15 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "759839",
+      "date": "07/08/2021",
+      "time": "10:34 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "769144",
+      "date": "09/22/2021",
+      "time": "10:25 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2200 Electrical Solar Photovoltaic",
+      "inspection_id": "769145",
+      "date": "09/22/2021",
+      "time": "10:25 AM",
+      "inspector": "KT"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 1,
+    "unique_inspection_count": 5,
+    "page_content_length": 379126,
+    "extraction_duration_seconds": 32.4
+  }
+}

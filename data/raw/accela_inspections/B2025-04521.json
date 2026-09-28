@@ -1,0 +1,116 @@
+{
+  "permit_number": "B2025-04521",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00OOO&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T08:39:11.943310",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2200 Electrical Solar Photovoltaic",
+      "inspection_id": "972739",
+      "date": "10/21/2025",
+      "time": "08:47 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 2025 Service Upgrade/Restoration",
+      "inspection_id": "972117",
+      "date": "10/29/2025",
+      "time": "08:51 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 2025 Service Upgrade/Restoration",
+      "inspection_id": "979427",
+      "date": "10/29/2025",
+      "time": "08:51 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 2025 Service Upgrade/Restoration",
+      "inspection_id": "979428",
+      "date": "10/29/2025",
+      "time": "08:55 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 2025 Service Upgrade/Restoration",
+      "inspection_id": "979083",
+      "date": "10/29/2025",
+      "time": "08:56 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 2025 Service Upgrade/Restoration",
+      "inspection_id": "979084",
+      "date": "10/29/2025",
+      "time": "09:22 PM",
+      "inspector": "Yaniv Taragano"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 2025 Service Upgrade/Restoration",
+      "inspection_id": "979165",
+      "date": "10/29/2025",
+      "time": "09:26 PM",
+      "inspector": "Yaniv Taragano"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 2025 Service Upgrade/Restoration",
+      "inspection_id": "979164",
+      "date": "10/29/2025",
+      "time": "09:26 PM",
+      "inspector": "Yaniv Taragano"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "979717",
+      "date": "11/13/2025",
+      "time": "07:26 PM",
+      "inspector": "Yaniv Taragano"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "992299",
+      "date": "12/03/2025",
+      "time": "02:54 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "1005636",
+      "date": "12/23/2025",
+      "time": "01:11 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1005637",
+      "date": "12/23/2025",
+      "time": "01:12 PM",
+      "inspector": "FR"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 3,
+    "unique_inspection_count": 12,
+    "page_content_length": 416268,
+    "extraction_duration_seconds": 34.57
+  }
+}

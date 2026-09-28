@@ -1,0 +1,283 @@
+{
+  "permit_number": "B2020-04134",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB20&capID2=00000&capID3=00HMK&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T01:18:24.468355",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "751656",
+      "date": "05/04/2021",
+      "time": "05:09 PM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "751657",
+      "date": "05/05/2021",
+      "time": "10:11 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "752589",
+      "date": "05/12/2021",
+      "time": "10:14 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "757237",
+      "date": "06/16/2021",
+      "time": "11:37 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "756915",
+      "date": "06/16/2021",
+      "time": "01:19 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "760236",
+      "date": "07/14/2021",
+      "time": "11:45 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "762486",
+      "date": "07/27/2021",
+      "time": "10:01 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4040 Water Service",
+      "inspection_id": "762487",
+      "date": "07/27/2021",
+      "time": "10:01 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "762058",
+      "date": "07/27/2021",
+      "time": "10:02 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "764541",
+      "date": "08/17/2021",
+      "time": "11:44 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "764540",
+      "date": "08/17/2021",
+      "time": "11:44 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "764542",
+      "date": "08/17/2021",
+      "time": "11:45 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "764538",
+      "date": "08/17/2021",
+      "time": "11:48 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "764539",
+      "date": "08/17/2021",
+      "time": "11:48 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "765706",
+      "date": "08/19/2021",
+      "time": "11:09 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "764656",
+      "date": "08/19/2021",
+      "time": "11:09 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "765707",
+      "date": "08/19/2021",
+      "time": "11:16 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "765991",
+      "date": "08/27/2021",
+      "time": "11:20 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "767129",
+      "date": "09/02/2021",
+      "time": "11:20 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "767130",
+      "date": "09/02/2021",
+      "time": "11:20 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "756916",
+      "date": "06/16/2021",
+      "time": "11:38 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "781454",
+      "date": "01/07/2022",
+      "time": "10:47 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "781453",
+      "date": "01/07/2022",
+      "time": "10:47 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "781455",
+      "date": "01/07/2022",
+      "time": "10:47 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "781452",
+      "date": "01/07/2022",
+      "time": "10:47 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "780776",
+      "date": "01/18/2022",
+      "time": "09:30 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "783629",
+      "date": "01/18/2022",
+      "time": "09:30 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "780777",
+      "date": "01/18/2022",
+      "time": "09:30 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "780778",
+      "date": "01/18/2022",
+      "time": "09:30 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "780775",
+      "date": "01/19/2022",
+      "time": "09:16 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "784569",
+      "date": "01/19/2022",
+      "time": "09:16 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "784527",
+      "date": "01/19/2022",
+      "time": "09:16 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "784528",
+      "date": "01/19/2022",
+      "time": "09:16 AM",
+      "inspector": "Darrell Chappell"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 7,
+    "unique_inspection_count": 33,
+    "page_content_length": 557391,
+    "extraction_duration_seconds": 64.43
+  }
+}

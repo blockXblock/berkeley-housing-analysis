@@ -1,0 +1,203 @@
+{
+  "permit_number": "B2019-04140",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB19&capID2=00000&capID3=00HQI&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T23:50:22.670970",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1080 Underfloor Insulation",
+      "inspection_id": "824023",
+      "date": "11/01/2022",
+      "time": "11:55 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "824893",
+      "date": "11/05/2022",
+      "time": "09:58 PM"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "824953",
+      "date": "11/09/2022",
+      "time": "11:20 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "825175",
+      "date": "11/14/2022",
+      "time": "10:49 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3040 Hydronic Test",
+      "inspection_id": "826724",
+      "date": "11/17/2022",
+      "time": "10:41 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "825882",
+      "date": "11/17/2022",
+      "time": "10:41 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "828694",
+      "date": "12/08/2022",
+      "time": "10:36 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "833957",
+      "date": "01/20/2023",
+      "time": "10:23 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "833958",
+      "date": "01/20/2023",
+      "time": "10:23 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "833956",
+      "date": "01/20/2023",
+      "time": "10:23 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "834586",
+      "date": "01/20/2023",
+      "time": "10:24 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "833955",
+      "date": "01/20/2023",
+      "time": "10:47 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "833967",
+      "date": "01/23/2023",
+      "time": "11:38 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "834791",
+      "date": "01/23/2023",
+      "time": "11:40 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "834705",
+      "date": "01/26/2023",
+      "time": "09:37 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "838557",
+      "date": "02/17/2023",
+      "time": "03:56 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "838558",
+      "date": "02/17/2023",
+      "time": "03:56 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "838390",
+      "date": "02/26/2023",
+      "time": "06:08 PM",
+      "inspector": "Jason McDermott"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "838389",
+      "date": "02/26/2023",
+      "time": "06:08 PM",
+      "inspector": "Jason McDermott"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "850072",
+      "date": "05/05/2023",
+      "time": "02:35 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "850073",
+      "date": "05/05/2023",
+      "time": "02:35 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "850074",
+      "date": "05/05/2023",
+      "time": "02:35 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "848959",
+      "date": "05/05/2023",
+      "time": "02:36 PM",
+      "inspector": "Anthony Vergara"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 5,
+    "unique_inspection_count": 23,
+    "page_content_length": 523156,
+    "extraction_duration_seconds": 33.93
+  }
+}

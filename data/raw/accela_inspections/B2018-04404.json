@@ -1,0 +1,236 @@
+{
+  "permit_number": "B2018-04404",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB18&capID2=00000&capID3=00IVP&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T23:04:12.367890",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "691210",
+      "date": "11/21/2019",
+      "time": "12:23 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "691410",
+      "date": "11/22/2019",
+      "time": "01:48 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "697355",
+      "date": "01/13/2020",
+      "time": "12:23 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "697106",
+      "date": "01/14/2020",
+      "time": "06:37 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "698338",
+      "date": "01/21/2020",
+      "time": "12:00 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "698339",
+      "date": "01/21/2020",
+      "time": "12:00 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "714764",
+      "date": "07/13/2020",
+      "time": "10:39 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "714451",
+      "date": "07/13/2020",
+      "time": "10:40 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "714450",
+      "date": "07/13/2020",
+      "time": "10:40 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "714452",
+      "date": "07/13/2020",
+      "time": "10:40 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "714453",
+      "date": "07/14/2020",
+      "time": "08:07 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "716044",
+      "date": "07/23/2020",
+      "time": "11:08 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "716490",
+      "date": "07/29/2020",
+      "time": "06:24 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "716821",
+      "date": "07/29/2020",
+      "time": "11:23 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4050 Gas Test",
+      "inspection_id": "717000",
+      "date": "07/29/2020",
+      "time": "11:23 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "720373",
+      "date": "08/27/2020",
+      "time": "09:03 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Public Works 6020 Public Works Sewer Lateral (PSL)",
+      "inspection_id": "720374",
+      "date": "08/27/2020",
+      "time": "09:04 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Mechanical 3010 Mechanical Underfloor",
+      "inspection_id": "720619",
+      "date": "08/31/2020",
+      "time": "09:25 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "720620",
+      "date": "08/31/2020",
+      "time": "09:26 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "722495",
+      "date": "09/14/2020",
+      "time": "09:17 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "724450",
+      "date": "09/29/2020",
+      "time": "09:55 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "724774",
+      "date": "09/30/2020",
+      "time": "03:20 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4060 Gas Meter Release",
+      "inspection_id": "724773",
+      "date": "10/01/2020",
+      "time": "07:34 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4060 Gas Meter Release",
+      "inspection_id": "726651",
+      "date": "10/16/2020",
+      "time": "03:43 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4060 Gas Meter Release",
+      "inspection_id": "727399",
+      "date": "10/22/2020",
+      "time": "02:14 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "727588",
+      "date": "10/23/2020",
+      "time": "04:16 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4060 Gas Meter Release",
+      "inspection_id": "724449",
+      "date": "09/29/2020",
+      "time": "09:55 AM",
+      "inspector": "FM"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 6,
+    "unique_inspection_count": 27,
+    "page_content_length": 530992,
+    "extraction_duration_seconds": 38.06
+  }
+}

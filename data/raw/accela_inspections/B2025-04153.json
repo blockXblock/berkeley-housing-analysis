@@ -1,0 +1,164 @@
+{
+  "permit_number": "B2025-04153",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00NE6&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T06:07:22.479056",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "1010859",
+      "date": "12/29/2025",
+      "time": "01:59 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4040 Water Service",
+      "inspection_id": "1037539",
+      "date": "02/17/2026",
+      "time": "03:28 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1035621",
+      "date": "02/17/2026",
+      "time": "03:29 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "1035622",
+      "date": "02/17/2026",
+      "time": "03:30 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1035623",
+      "date": "02/17/2026",
+      "time": "03:30 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "1035624",
+      "date": "02/17/2026",
+      "time": "03:30 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1043202",
+      "date": "02/27/2026",
+      "time": "12:08 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "1043381",
+      "date": "02/27/2026",
+      "time": "12:08 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1043540",
+      "date": "02/27/2026",
+      "time": "12:08 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1042542",
+      "date": "02/27/2026",
+      "time": "12:08 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1044102",
+      "date": "03/03/2026",
+      "time": "11:43 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1047939",
+      "date": "03/10/2026",
+      "time": "03:21 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1050029",
+      "date": "03/16/2026",
+      "time": "11:19 AM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "1052140",
+      "date": "03/16/2026",
+      "time": "11:22 AM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1091345",
+      "date": "05/27/2026",
+      "time": "12:20 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "1103540",
+      "date": "06/11/2026",
+      "time": "03:55 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1102223",
+      "date": "06/11/2026",
+      "time": "03:58 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1106384",
+      "date": "06/22/2026",
+      "time": "01:50 PM",
+      "inspector": "FR"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 4,
+    "unique_inspection_count": 18,
+    "page_content_length": 528150,
+    "extraction_duration_seconds": 41.03
+  }
+}

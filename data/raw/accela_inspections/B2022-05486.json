@@ -1,0 +1,236 @@
+{
+  "permit_number": "B2022-05486",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB22&capID2=00000&capID3=00N3N&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T07:25:50.828166",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "888927",
+      "date": "01/31/2024",
+      "time": "12:04 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "888319",
+      "date": "02/01/2024",
+      "time": "07:32 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "889284",
+      "date": "02/01/2024",
+      "time": "10:41 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "889972",
+      "date": "02/05/2024",
+      "time": "11:11 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "889971",
+      "date": "02/05/2024",
+      "time": "11:11 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "894009",
+      "date": "03/05/2024",
+      "time": "11:58 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "894010",
+      "date": "03/05/2024",
+      "time": "12:04 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "894613",
+      "date": "03/05/2024",
+      "time": "12:06 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "894614",
+      "date": "03/05/2024",
+      "time": "12:07 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "897615",
+      "date": "03/27/2024",
+      "time": "01:01 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "897616",
+      "date": "03/27/2024",
+      "time": "01:01 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "897617",
+      "date": "03/27/2024",
+      "time": "01:01 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "898853",
+      "date": "04/03/2024",
+      "time": "10:09 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "899394",
+      "date": "04/05/2024",
+      "time": "09:38 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "899393",
+      "date": "04/05/2024",
+      "time": "09:40 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "899396",
+      "date": "04/08/2024",
+      "time": "03:16 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "906381",
+      "date": "05/22/2024",
+      "time": "03:16 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "907303",
+      "date": "05/29/2024",
+      "time": "09:44 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "916358",
+      "date": "08/02/2024",
+      "time": "02:40 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "916379",
+      "date": "08/02/2024",
+      "time": "02:42 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "916381",
+      "date": "08/02/2024",
+      "time": "02:43 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "916380",
+      "date": "08/02/2024",
+      "time": "02:43 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "918995",
+      "date": "08/21/2024",
+      "time": "10:17 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "930656",
+      "date": "11/04/2024",
+      "time": "10:32 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "930657",
+      "date": "11/04/2024",
+      "time": "10:32 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "930658",
+      "date": "11/04/2024",
+      "time": "10:32 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "930719",
+      "date": "11/04/2024",
+      "time": "10:33 AM",
+      "inspector": "Leo Bautista"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 6,
+    "unique_inspection_count": 27,
+    "page_content_length": 560132,
+    "extraction_duration_seconds": 35.42
+  }
+}

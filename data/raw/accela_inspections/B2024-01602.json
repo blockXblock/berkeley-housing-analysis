@@ -1,0 +1,28 @@
+{
+  "permit_number": "B2024-01602",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/./CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB24&capID2=00000&capID3=00DJW&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-05-22T18:38:11.720818",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "919195",
+      "date": "08/21/2024",
+      "time": "02:44 PM",
+      "inspector": "Lorenzo Aguilar"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 1,
+    "unique_inspection_count": 1,
+    "page_content_length": 407636,
+    "extraction_duration_seconds": 32.02
+  }
+}

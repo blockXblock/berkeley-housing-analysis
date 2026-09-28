@@ -1,0 +1,180 @@
+{
+  "permit_number": "B2023-02047",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB23&capID2=00000&capID3=00EAN&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T03:54:32.610038",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "867865",
+      "date": "08/31/2023",
+      "time": "02:53 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2010 UFER",
+      "inspection_id": "868591",
+      "date": "08/31/2023",
+      "time": "02:55 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "868593",
+      "date": "08/31/2023",
+      "time": "02:56 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "867866",
+      "date": "09/05/2023",
+      "time": "07:55 AM",
+      "inspector": "Steve Rixford"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "877066",
+      "date": "10/31/2023",
+      "time": "12:42 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "879202",
+      "date": "11/21/2023",
+      "time": "01:01 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "886218",
+      "date": "01/10/2024",
+      "time": "10:15 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "886216",
+      "date": "01/10/2024",
+      "time": "10:15 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "893769",
+      "date": "02/29/2024",
+      "time": "11:43 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "893770",
+      "date": "02/29/2024",
+      "time": "11:44 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "894034",
+      "date": "02/29/2024",
+      "time": "11:45 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "896790",
+      "date": "03/21/2024",
+      "time": "11:22 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "897806",
+      "date": "03/27/2024",
+      "time": "11:13 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "897807",
+      "date": "03/27/2024",
+      "time": "11:14 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "898489",
+      "date": "04/01/2024",
+      "time": "09:16 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "898491",
+      "date": "04/01/2024",
+      "time": "09:16 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "898794",
+      "date": "04/01/2024",
+      "time": "09:16 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "913169",
+      "date": "07/11/2024",
+      "time": "03:25 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "913170",
+      "date": "07/11/2024",
+      "time": "03:25 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "914287",
+      "date": "07/19/2024",
+      "time": "12:52 PM",
+      "inspector": "Leo Bautista"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 4,
+    "unique_inspection_count": 20,
+    "page_content_length": 546495,
+    "extraction_duration_seconds": 33.47
+  }
+}

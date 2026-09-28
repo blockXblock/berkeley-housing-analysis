@@ -1,0 +1,156 @@
+{
+  "permit_number": "B2023-03200",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB23&capID2=00000&capID3=00HIR&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T04:07:30.078086",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Building 1004 Setbacks/Survey",
+      "inspection_id": "958616",
+      "date": "06/13/2025",
+      "time": "12:00 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "958615",
+      "date": "06/13/2025",
+      "time": "12:00 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2010 UFER",
+      "inspection_id": "960981",
+      "date": "07/07/2025",
+      "time": "12:00 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "960982",
+      "date": "07/07/2025",
+      "time": "12:00 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "961623",
+      "date": "07/10/2025",
+      "time": "12:00 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "960980",
+      "date": "07/21/2025",
+      "time": "08:45 PM",
+      "inspector": "Daniel Gerber"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "963278",
+      "date": "07/24/2025",
+      "time": "11:03 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "963786",
+      "date": "07/24/2025",
+      "time": "11:03 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "965735",
+      "date": "08/13/2025",
+      "time": "10:58 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1220 Site Drainage",
+      "inspection_id": "968124",
+      "date": "09/02/2025",
+      "time": "10:09 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1118706",
+      "date": "07/07/2026",
+      "time": "04:16 PM",
+      "inspector": "Daniel Gerber"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "1118872",
+      "date": "07/14/2026",
+      "time": "09:53 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1120 Moment Frame",
+      "inspection_id": "1118705",
+      "date": "07/14/2026",
+      "time": "09:53 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1118465",
+      "date": "07/14/2026",
+      "time": "09:53 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "1135784",
+      "date": "08/05/2026",
+      "time": "12:15 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "1136385",
+      "date": "08/07/2026",
+      "time": "09:43 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "1138584",
+      "date": "08/10/2026",
+      "time": "10:50 AM",
+      "inspector": "E"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 4,
+    "unique_inspection_count": 17,
+    "page_content_length": 686125,
+    "extraction_duration_seconds": 35.23
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "permit_number": "B2017-01506",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB17&capID2=00000&capID3=00BOS&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T21:48:28.990998",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "588860",
+      "date": "07/10/2017",
+      "time": "10:02 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "590437",
+      "date": "07/24/2017",
+      "time": "11:39 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "590524",
+      "date": "07/24/2017",
+      "time": "11:39 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "590972",
+      "date": "07/31/2017",
+      "time": "03:02 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "591752",
+      "date": "08/07/2017",
+      "time": "01:44 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "670848",
+      "date": "06/24/2019",
+      "time": "10:31 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "670870",
+      "date": "06/24/2019",
+      "time": "10:31 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "670869",
+      "date": "06/24/2019",
+      "time": "10:31 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "671130",
+      "date": "06/25/2019",
+      "time": "10:53 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "671131",
+      "date": "06/25/2019",
+      "time": "10:56 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "671132",
+      "date": "06/25/2019",
+      "time": "10:56 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "680326",
+      "date": "09/04/2019",
+      "time": "01:08 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "680403",
+      "date": "09/05/2019",
+      "time": "10:53 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "680404",
+      "date": "09/05/2019",
+      "time": "10:53 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "680402",
+      "date": "09/05/2019",
+      "time": "10:53 AM",
+      "inspector": "KT"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 3,
+    "unique_inspection_count": 15,
+    "page_content_length": 448484,
+    "extraction_duration_seconds": 33.42
+  }
+}

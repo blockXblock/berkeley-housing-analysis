@@ -1,0 +1,84 @@
+{
+  "permit_number": "B2023-01554",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB23&capID2=00000&capID3=00CAC&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T03:48:45.465054",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Building 1004 Setbacks/Survey",
+      "inspection_id": "886483",
+      "date": "01/10/2024",
+      "time": "09:39 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "885707",
+      "date": "01/10/2024",
+      "time": "09:39 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "910027",
+      "date": "06/19/2024",
+      "time": "12:56 PM",
+      "inspector": "Eduardo Franco"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "914754",
+      "date": "07/26/2024",
+      "time": "10:06 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "914755",
+      "date": "07/26/2024",
+      "time": "01:29 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "925738",
+      "date": "10/01/2024",
+      "time": "11:40 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "933132",
+      "date": "11/19/2024",
+      "time": "09:36 AM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "933131",
+      "date": "11/19/2024",
+      "time": "09:37 AM",
+      "inspector": "E"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 2,
+    "unique_inspection_count": 8,
+    "page_content_length": 426751,
+    "extraction_duration_seconds": 33.64
+  }
+}

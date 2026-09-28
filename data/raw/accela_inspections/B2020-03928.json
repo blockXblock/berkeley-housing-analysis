@@ -1,0 +1,124 @@
+{
+  "permit_number": "B2020-03928",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB20&capID2=00000&capID3=00H9T&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T01:13:20.778945",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Cancelled",
+      "type_code": "Public Works 6020 Public Works Sewer Lateral (PSL)",
+      "inspection_id": "743002",
+      "date": "03/02/2021",
+      "time": "09:32 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "744047",
+      "date": "03/11/2021",
+      "time": "07:09 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "744309",
+      "date": "03/12/2021",
+      "time": "07:13 PM",
+      "inspector": "ALEX COX"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "744048",
+      "date": "03/15/2021",
+      "time": "09:54 AM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4040 Water Service",
+      "inspection_id": "744797",
+      "date": "03/17/2021",
+      "time": "12:52 PM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "744584",
+      "date": "03/17/2021",
+      "time": "12:53 PM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "748315",
+      "date": "04/12/2021",
+      "time": "10:29 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "750365",
+      "date": "04/26/2021",
+      "time": "09:17 AM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1080 Underfloor Insulation",
+      "inspection_id": "749889",
+      "date": "04/26/2021",
+      "time": "09:17 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "751447",
+      "date": "05/06/2021",
+      "time": "11:47 AM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "752820",
+      "date": "05/14/2021",
+      "time": "12:37 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "751966",
+      "date": "05/06/2021",
+      "time": "11:43 AM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "751972",
+      "date": "05/06/2021",
+      "time": "11:47 AM",
+      "inspector": "SM"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 3,
+    "unique_inspection_count": 13,
+    "page_content_length": 444327,
+    "extraction_duration_seconds": 33.66
+  }
+}

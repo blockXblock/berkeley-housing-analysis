@@ -1,0 +1,452 @@
+{
+  "permit_number": "B2021-03412",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB21&capID2=00000&capID3=00H6T&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T02:05:29.972358",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Building 1004 Setbacks/Survey",
+      "inspection_id": "783079",
+      "date": "01/10/2022",
+      "time": "09:55 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "783078",
+      "date": "01/10/2022",
+      "time": "09:55 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "783081",
+      "date": "01/10/2022",
+      "time": "05:53 PM",
+      "inspector": "NOE FIGUEROA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "783395",
+      "date": "01/10/2022",
+      "time": "05:54 PM",
+      "inspector": "NOE FIGUEROA"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "783621",
+      "date": "01/14/2022",
+      "time": "09:39 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "783622",
+      "date": "01/14/2022",
+      "time": "09:43 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "784191",
+      "date": "01/18/2022",
+      "time": "09:54 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2010 UFER",
+      "inspection_id": "784434",
+      "date": "01/18/2022",
+      "time": "09:54 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "784433",
+      "date": "01/18/2022",
+      "time": "09:55 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "784192",
+      "date": "01/19/2022",
+      "time": "01:33 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "787790",
+      "date": "02/16/2022",
+      "time": "03:20 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "787791",
+      "date": "02/16/2022",
+      "time": "03:20 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "787792",
+      "date": "02/21/2022",
+      "time": "05:14 PM",
+      "inspector": "NOE FIGUEROA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "787793",
+      "date": "02/21/2022",
+      "time": "05:15 PM",
+      "inspector": "NOE FIGUEROA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "787794",
+      "date": "02/21/2022",
+      "time": "05:16 PM",
+      "inspector": "NOE FIGUEROA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "788693",
+      "date": "02/24/2022",
+      "time": "05:13 PM",
+      "inspector": "NOE FIGUEROA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1075 Underfloor Framing",
+      "inspection_id": "788692",
+      "date": "02/24/2022",
+      "time": "05:14 PM",
+      "inspector": "NOE FIGUEROA"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "790111",
+      "date": "03/02/2022",
+      "time": "02:48 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1075 Underfloor Framing",
+      "inspection_id": "789281",
+      "date": "03/02/2022",
+      "time": "02:50 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "789280",
+      "date": "03/02/2022",
+      "time": "02:51 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "788689",
+      "date": "03/02/2022",
+      "time": "02:52 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "788688",
+      "date": "03/02/2022",
+      "time": "02:58 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "788690",
+      "date": "03/02/2022",
+      "time": "02:58 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "790339",
+      "date": "03/03/2022",
+      "time": "03:00 PM",
+      "inspector": "NOE FIGUEROA"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "790340",
+      "date": "03/09/2022",
+      "time": "03:46 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1080 Underfloor Insulation",
+      "inspection_id": "791130",
+      "date": "03/09/2022",
+      "time": "03:46 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "790342",
+      "date": "03/09/2022",
+      "time": "03:46 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "794186",
+      "date": "04/05/2022",
+      "time": "11:03 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "794185",
+      "date": "04/05/2022",
+      "time": "11:04 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "795255",
+      "date": "04/13/2022",
+      "time": "03:12 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "795989",
+      "date": "04/19/2022",
+      "time": "11:42 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "797969",
+      "date": "05/02/2022",
+      "time": "08:25 PM",
+      "inspector": "NOE FIGUEROA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "797971",
+      "date": "05/02/2022",
+      "time": "08:25 PM",
+      "inspector": "NOE FIGUEROA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "797973",
+      "date": "05/02/2022",
+      "time": "08:26 PM",
+      "inspector": "NOE FIGUEROA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "797974",
+      "date": "05/03/2022",
+      "time": "10:39 PM",
+      "inspector": "Matthew Doughty"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "797975",
+      "date": "05/05/2022",
+      "time": "09:27 AM",
+      "inspector": "Keith Thuemmler"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "798169",
+      "date": "05/05/2022",
+      "time": "09:27 AM",
+      "inspector": "Keith Thuemmler"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "798810",
+      "date": "05/09/2022",
+      "time": "11:22 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "811589",
+      "date": "08/18/2022",
+      "time": "02:41 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "813592",
+      "date": "08/23/2022",
+      "time": "06:48 AM",
+      "inspector": "NOE FIGUEROA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "813949",
+      "date": "08/23/2022",
+      "time": "06:48 AM",
+      "inspector": "NOE FIGUEROA"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "813591",
+      "date": "08/24/2022",
+      "time": "04:05 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "813950",
+      "date": "08/24/2022",
+      "time": "05:02 PM",
+      "inspector": "NOE FIGUEROA"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "815033",
+      "date": "08/29/2022",
+      "time": "12:29 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "814399",
+      "date": "08/29/2022",
+      "time": "12:29 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "819710",
+      "date": "10/04/2022",
+      "time": "04:16 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "822143",
+      "date": "10/24/2022",
+      "time": "09:09 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "822846",
+      "date": "10/24/2022",
+      "time": "09:23 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "827909",
+      "date": "12/05/2022",
+      "time": "11:30 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2200 Electrical Solar Photovoltaic",
+      "inspection_id": "832201",
+      "date": "01/05/2023",
+      "time": "10:14 AM",
+      "inspector": "Eduardo Franco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "833540",
+      "date": "01/13/2023",
+      "time": "12:33 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "833871",
+      "date": "01/13/2023",
+      "time": "12:33 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "833872",
+      "date": "01/13/2023",
+      "time": "12:33 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "833869",
+      "date": "01/13/2023",
+      "time": "12:33 PM",
+      "inspector": "SR"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 11,
+    "unique_inspection_count": 54,
+    "page_content_length": 683330,
+    "extraction_duration_seconds": 42.0
+  }
+}

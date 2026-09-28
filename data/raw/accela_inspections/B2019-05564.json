@@ -1,0 +1,428 @@
+{
+  "permit_number": "B2019-05564",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB19&capID2=00000&capID3=00KI3&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T00:05:56.619844",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "717329",
+      "date": "08/04/2020",
+      "time": "12:32 PM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1075 Underfloor Framing",
+      "inspection_id": "718601",
+      "date": "08/11/2020",
+      "time": "02:33 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1075 Underfloor Framing",
+      "inspection_id": "718606",
+      "date": "08/12/2020",
+      "time": "11:41 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1080 Underfloor Insulation",
+      "inspection_id": "718629",
+      "date": "08/12/2020",
+      "time": "12:10 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1075 Underfloor Framing",
+      "inspection_id": "719180",
+      "date": "08/14/2020",
+      "time": "11:14 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "718775",
+      "date": "08/14/2020",
+      "time": "11:14 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1080 Underfloor Insulation",
+      "inspection_id": "718947",
+      "date": "08/17/2020",
+      "time": "10:49 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "723900",
+      "date": "09/23/2020",
+      "time": "12:46 PM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "723886",
+      "date": "09/23/2020",
+      "time": "04:57 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "724096",
+      "date": "09/24/2020",
+      "time": "11:09 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "724190",
+      "date": "09/28/2020",
+      "time": "11:05 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "724560",
+      "date": "09/28/2020",
+      "time": "11:07 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "724189",
+      "date": "09/28/2020",
+      "time": "11:07 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "724546",
+      "date": "09/28/2020",
+      "time": "11:07 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "725015",
+      "date": "10/02/2020",
+      "time": "01:18 PM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "729467",
+      "date": "11/10/2020",
+      "time": "01:38 PM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "729468",
+      "date": "11/10/2020",
+      "time": "01:38 PM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "729489",
+      "date": "11/10/2020",
+      "time": "01:38 PM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "729466",
+      "date": "11/10/2020",
+      "time": "01:38 PM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "730460",
+      "date": "11/18/2020",
+      "time": "11:34 AM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "730461",
+      "date": "11/18/2020",
+      "time": "11:34 AM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "730459",
+      "date": "11/18/2020",
+      "time": "11:34 AM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "730462",
+      "date": "11/18/2020",
+      "time": "11:34 AM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "730463",
+      "date": "11/18/2020",
+      "time": "11:43 AM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "731377",
+      "date": "12/01/2020",
+      "time": "09:54 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4050 Gas Test",
+      "inspection_id": "731380",
+      "date": "12/01/2020",
+      "time": "09:54 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "733405",
+      "date": "12/11/2020",
+      "time": "10:13 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "733404",
+      "date": "12/11/2020",
+      "time": "10:13 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "759625",
+      "date": "07/12/2021",
+      "time": "09:28 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "759626",
+      "date": "07/12/2021",
+      "time": "09:28 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "759627",
+      "date": "07/12/2021",
+      "time": "09:29 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "759628",
+      "date": "07/12/2021",
+      "time": "09:29 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "760337",
+      "date": "07/14/2021",
+      "time": "05:14 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "760335",
+      "date": "07/14/2021",
+      "time": "05:15 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "760825",
+      "date": "07/14/2021",
+      "time": "05:15 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "760824",
+      "date": "07/14/2021",
+      "time": "05:15 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "760336",
+      "date": "07/14/2021",
+      "time": "05:16 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "760334",
+      "date": "07/14/2021",
+      "time": "05:17 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "760827",
+      "date": "07/29/2021",
+      "time": "10:17 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "760826",
+      "date": "07/29/2021",
+      "time": "10:17 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "760828",
+      "date": "07/29/2021",
+      "time": "10:17 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "760829",
+      "date": "07/29/2021",
+      "time": "10:18 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "787114",
+      "date": "02/09/2022",
+      "time": "10:25 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "787111",
+      "date": "02/09/2022",
+      "time": "10:42 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "787112",
+      "date": "02/09/2022",
+      "time": "10:42 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "787113",
+      "date": "02/09/2022",
+      "time": "10:42 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "787438",
+      "date": "02/14/2022",
+      "time": "11:09 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "834965",
+      "date": "01/24/2023",
+      "time": "01:29 PM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "834966",
+      "date": "01/24/2023",
+      "time": "01:29 PM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "834967",
+      "date": "01/24/2023",
+      "time": "01:30 PM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "834304",
+      "date": "01/24/2023",
+      "time": "01:30 PM",
+      "inspector": "DL"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 11,
+    "unique_inspection_count": 51,
+    "page_content_length": 658115,
+    "extraction_duration_seconds": 41.1
+  }
+}

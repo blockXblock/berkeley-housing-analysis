@@ -1,0 +1,212 @@
+{
+  "permit_number": "B2021-00811",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB21&capID2=00000&capID3=0076J&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T01:30:43.024546",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "766511",
+      "date": "08/31/2021",
+      "time": "10:36 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "766512",
+      "date": "08/31/2021",
+      "time": "10:36 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "766509",
+      "date": "08/31/2021",
+      "time": "10:36 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "766510",
+      "date": "08/31/2021",
+      "time": "10:38 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "767550",
+      "date": "09/08/2021",
+      "time": "09:47 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "768441",
+      "date": "09/08/2021",
+      "time": "09:48 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "768421",
+      "date": "09/08/2021",
+      "time": "09:48 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "768444",
+      "date": "09/08/2021",
+      "time": "09:48 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "769012",
+      "date": "09/13/2021",
+      "time": "01:43 PM",
+      "inspector": "Amer Abusafieh"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768875",
+      "date": "09/21/2021",
+      "time": "11:17 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "769131",
+      "date": "09/23/2021",
+      "time": "11:44 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "770490",
+      "date": "09/29/2021",
+      "time": "02:29 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "771800",
+      "date": "10/06/2021",
+      "time": "08:19 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "772518",
+      "date": "10/08/2021",
+      "time": "11:01 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "772151",
+      "date": "10/08/2021",
+      "time": "11:01 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "781031",
+      "date": "12/17/2021",
+      "time": "08:36 AM",
+      "inspector": "Steve Rixford"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "781030",
+      "date": "12/17/2021",
+      "time": "08:36 AM",
+      "inspector": "Steve Rixford"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "781029",
+      "date": "12/17/2021",
+      "time": "08:36 AM",
+      "inspector": "Steve Rixford"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "781008",
+      "date": "12/17/2021",
+      "time": "08:37 AM",
+      "inspector": "Steve Rixford"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "781456",
+      "date": "12/22/2021",
+      "time": "11:41 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "781459",
+      "date": "12/22/2021",
+      "time": "11:41 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "781457",
+      "date": "12/22/2021",
+      "time": "11:41 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "781458",
+      "date": "12/22/2021",
+      "time": "11:41 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "782729",
+      "date": "01/07/2022",
+      "time": "11:17 AM",
+      "inspector": "Jeff Jensen"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 5,
+    "unique_inspection_count": 24,
+    "page_content_length": 510559,
+    "extraction_duration_seconds": 35.48
+  }
+}

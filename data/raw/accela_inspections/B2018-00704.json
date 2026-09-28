@@ -1,0 +1,148 @@
+{
+  "permit_number": "B2018-00704",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB18&capID2=00000&capID3=0050T&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T08:47:38.682653",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "677544",
+      "date": "08/16/2019",
+      "time": "12:20 PM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "677543",
+      "date": "08/16/2019",
+      "time": "12:20 PM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "677545",
+      "date": "08/16/2019",
+      "time": "12:20 PM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "677546",
+      "date": "08/16/2019",
+      "time": "12:20 PM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "704430",
+      "date": "03/16/2020",
+      "time": "12:33 PM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "704432",
+      "date": "03/16/2020",
+      "time": "12:33 PM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "704433",
+      "date": "03/16/2020",
+      "time": "12:33 PM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "704431",
+      "date": "03/16/2020",
+      "time": "12:33 PM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "720462",
+      "date": "08/31/2020",
+      "time": "10:27 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "720463",
+      "date": "08/31/2020",
+      "time": "10:28 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "720464",
+      "date": "08/31/2020",
+      "time": "10:29 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "720465",
+      "date": "08/31/2020",
+      "time": "10:29 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "730893",
+      "date": "11/23/2020",
+      "time": "10:48 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "730894",
+      "date": "11/23/2020",
+      "time": "10:48 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "730895",
+      "date": "11/23/2020",
+      "time": "10:48 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "730896",
+      "date": "11/23/2020",
+      "time": "10:48 AM",
+      "inspector": "DL"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 4,
+    "unique_inspection_count": 16,
+    "page_content_length": 448836,
+    "extraction_duration_seconds": 34.84
+  }
+}

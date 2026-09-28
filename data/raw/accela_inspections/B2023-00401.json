@@ -1,0 +1,76 @@
+{
+  "permit_number": "B2023-00401",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/./CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB23&capID2=00000&capID3=0040Z&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-05-22T18:07:16.695007",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "843408",
+      "date": "03/29/2023",
+      "time": "01:39 PM",
+      "inspector": "Melissa Fluty"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "844842",
+      "date": "04/10/2023",
+      "time": "02:35 PM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "846630",
+      "date": "04/19/2023",
+      "time": "01:08 PM",
+      "inspector": "Matthew Doughty"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "847389",
+      "date": "04/19/2023",
+      "time": "01:22 PM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "847728",
+      "date": "04/21/2023",
+      "time": "10:49 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "847387",
+      "date": "04/26/2023",
+      "time": "12:01 PM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "892848",
+      "date": "02/22/2024",
+      "time": "03:07 PM",
+      "inspector": "Darrell Chappell"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 2,
+    "unique_inspection_count": 7,
+    "page_content_length": 399491,
+    "extraction_duration_seconds": 37.32
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "permit_number": "B2019-05017",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB19&capID2=00000&capID3=00JFA&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T23:57:28.452203",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "816900",
+      "date": "09/22/2022",
+      "time": "11:20 AM",
+      "inspector": "Gilbert Gonzales"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "816897",
+      "date": "09/22/2022",
+      "time": "11:21 AM",
+      "inspector": "Gilbert Gonzales"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "816898",
+      "date": "09/22/2022",
+      "time": "11:21 AM",
+      "inspector": "Gilbert Gonzales"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "816899",
+      "date": "09/22/2022",
+      "time": "11:22 AM",
+      "inspector": "Gilbert Gonzales"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "818361",
+      "date": "10/06/2022",
+      "time": "12:00 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "818362",
+      "date": "10/06/2022",
+      "time": "12:00 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "818363",
+      "date": "10/06/2022",
+      "time": "12:00 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "818364",
+      "date": "10/06/2022",
+      "time": "12:00 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "856247",
+      "date": "06/16/2023",
+      "time": "08:56 AM",
+      "inspector": "kgerwein"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "856288",
+      "date": "07/07/2023",
+      "time": "07:31 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "859118",
+      "date": "07/07/2023",
+      "time": "07:31 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "859119",
+      "date": "07/07/2023",
+      "time": "07:31 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "859120",
+      "date": "07/07/2023",
+      "time": "07:59 AM",
+      "inspector": "Anthony Vergara"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 3,
+    "unique_inspection_count": 13,
+    "page_content_length": 451767,
+    "extraction_duration_seconds": 33.22
+  }
+}

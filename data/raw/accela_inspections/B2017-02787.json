@@ -1,0 +1,36 @@
+{
+  "permit_number": "B2017-02787",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB17&capID2=00000&capID3=00EBD&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T21:58:38.529939",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Building 1005 Demolition",
+      "inspection_id": "618897",
+      "date": "05/07/2018",
+      "time": "01:14 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "625084",
+      "date": "06/25/2018",
+      "time": "12:16 PM",
+      "inspector": "E"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 1,
+    "unique_inspection_count": 2,
+    "page_content_length": 313376,
+    "extraction_duration_seconds": 32.47
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "permit_number": "B2023-00675",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/./CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB23&capID2=00000&capID3=00649&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-05-22T18:08:44.945167",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "946339",
+      "date": "03/06/2025",
+      "time": "01:38 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "948999",
+      "date": "03/27/2025",
+      "time": "07:11 AM",
+      "inspector": "Leo Bautista"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 1,
+    "unique_inspection_count": 2,
+    "page_content_length": 378942,
+    "extraction_duration_seconds": 31.58
+  }
+}

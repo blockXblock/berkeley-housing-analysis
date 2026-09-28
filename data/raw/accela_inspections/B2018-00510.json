@@ -1,0 +1,292 @@
+{
+  "permit_number": "B2018-00510",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB18&capID2=00000&capID3=003FT&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T22:23:05.847750",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "635621",
+      "date": "09/17/2018",
+      "time": "01:11 PM",
+      "inspector": "Rebecca Amato"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "635618",
+      "date": "09/17/2018",
+      "time": "01:11 PM",
+      "inspector": "Rebecca Amato"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "636109",
+      "date": "09/17/2018",
+      "time": "01:11 PM",
+      "inspector": "Rebecca Amato"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "635620",
+      "date": "09/19/2018",
+      "time": "08:58 AM",
+      "inspector": "Eduardo Franco"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "635619",
+      "date": "09/19/2018",
+      "time": "08:58 AM",
+      "inspector": "Eduardo Franco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "635617",
+      "date": "09/19/2018",
+      "time": "08:58 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved with Conditions",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "636111",
+      "date": "09/26/2018",
+      "time": "11:34 AM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Approved with Conditions",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "636110",
+      "date": "09/26/2018",
+      "time": "11:35 AM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "637133",
+      "date": "10/02/2018",
+      "time": "10:13 AM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "639456",
+      "date": "10/12/2018",
+      "time": "04:02 PM",
+      "inspector": "Rebecca Amato"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "639455",
+      "date": "10/12/2018",
+      "time": "04:03 PM",
+      "inspector": "Rebecca Amato"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "639454",
+      "date": "10/12/2018",
+      "time": "04:03 PM",
+      "inspector": "Rebecca Amato"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "639453",
+      "date": "10/12/2018",
+      "time": "04:03 PM",
+      "inspector": "Rebecca Amato"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "639452",
+      "date": "10/12/2018",
+      "time": "04:04 PM",
+      "inspector": "Rebecca Amato"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "639461",
+      "date": "10/12/2018",
+      "time": "04:14 PM",
+      "inspector": "Rebecca Amato"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "639463",
+      "date": "10/24/2018",
+      "time": "09:37 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "639464",
+      "date": "10/24/2018",
+      "time": "09:37 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "639465",
+      "date": "10/24/2018",
+      "time": "09:38 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "639459",
+      "date": "10/29/2018",
+      "time": "09:28 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "639460",
+      "date": "10/29/2018",
+      "time": "09:28 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved with Conditions",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "639462",
+      "date": "10/29/2018",
+      "time": "09:30 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved with Conditions",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "639458",
+      "date": "10/29/2018",
+      "time": "09:31 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "641586",
+      "date": "11/02/2018",
+      "time": "09:27 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "643197",
+      "date": "11/13/2018",
+      "time": "09:26 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "643468",
+      "date": "11/14/2018",
+      "time": "09:48 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "644143",
+      "date": "11/20/2018",
+      "time": "04:13 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "648407",
+      "date": "12/18/2018",
+      "time": "01:54 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "647829",
+      "date": "12/18/2018",
+      "time": "03:34 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "654614",
+      "date": "02/19/2019",
+      "time": "03:31 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "654615",
+      "date": "02/19/2019",
+      "time": "03:31 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "654616",
+      "date": "02/19/2019",
+      "time": "03:31 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "655136",
+      "date": "02/20/2019",
+      "time": "01:54 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "655137",
+      "date": "02/20/2019",
+      "time": "01:55 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "654715",
+      "date": "02/20/2019",
+      "time": "03:40 PM",
+      "inspector": "KT"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 7,
+    "unique_inspection_count": 34,
+    "page_content_length": 595225,
+    "extraction_duration_seconds": 45.7
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "permit_number": "B2020-02188",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB20&capID2=00000&capID3=00E37&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T00:45:58.458060",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Building 1004 Setbacks/Survey",
+      "inspection_id": "743372",
+      "date": "03/04/2021",
+      "time": "01:12 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "743355",
+      "date": "03/04/2021",
+      "time": "01:12 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "742874",
+      "date": "03/04/2021",
+      "time": "01:12 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "743354",
+      "date": "03/04/2021",
+      "time": "01:12 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "746157",
+      "date": "03/31/2021",
+      "time": "11:28 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "746158",
+      "date": "03/31/2021",
+      "time": "11:28 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "750505",
+      "date": "04/29/2021",
+      "time": "11:05 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "750507",
+      "date": "04/30/2021",
+      "time": "07:41 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "750506",
+      "date": "04/30/2021",
+      "time": "07:41 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "750508",
+      "date": "04/30/2021",
+      "time": "07:41 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "750509",
+      "date": "05/03/2021",
+      "time": "02:42 PM",
+      "inspector": "Dan McDunn"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "751431",
+      "date": "05/07/2021",
+      "time": "10:57 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "752938",
+      "date": "05/17/2021",
+      "time": "01:10 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "752937",
+      "date": "05/17/2021",
+      "time": "11:35 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "754391",
+      "date": "05/25/2021",
+      "time": "01:39 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "753610",
+      "date": "05/26/2021",
+      "time": "07:30 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "754515",
+      "date": "05/26/2021",
+      "time": "10:40 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "753611",
+      "date": "05/26/2021",
+      "time": "10:40 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "757943",
+      "date": "06/24/2021",
+      "time": "10:41 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "771695",
+      "date": "10/06/2021",
+      "time": "01:28 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "787769",
+      "date": "02/16/2022",
+      "time": "02:11 PM",
+      "inspector": "KT"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 5,
+    "unique_inspection_count": 21,
+    "page_content_length": 527284,
+    "extraction_duration_seconds": 34.44
+  }
+}

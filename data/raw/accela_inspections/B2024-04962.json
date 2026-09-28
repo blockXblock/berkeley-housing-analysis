@@ -1,0 +1,244 @@
+{
+  "permit_number": "B2024-04962",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB24&capID2=00000&capID3=00PP5&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T05:20:48.236633",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1005 Demolition",
+      "inspection_id": "973379",
+      "date": "10/21/2025",
+      "time": "07:27 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "975861",
+      "date": "10/23/2025",
+      "time": "10:21 AM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "975462",
+      "date": "10/23/2025",
+      "time": "10:28 AM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1005 Demolition",
+      "inspection_id": "973838",
+      "date": "10/23/2025",
+      "time": "04:13 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "978461",
+      "date": "10/30/2025",
+      "time": "03:33 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "978462",
+      "date": "10/30/2025",
+      "time": "03:34 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "982224",
+      "date": "11/05/2025",
+      "time": "04:01 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "983779",
+      "date": "11/11/2025",
+      "time": "10:42 AM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "986699",
+      "date": "11/11/2025",
+      "time": "10:43 AM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "986581",
+      "date": "11/11/2025",
+      "time": "10:44 AM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1017539",
+      "date": "01/13/2026",
+      "time": "12:07 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1210 Roof in Progress",
+      "inspection_id": "1020621",
+      "date": "01/20/2026",
+      "time": "08:25 AM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1020620",
+      "date": "01/20/2026",
+      "time": "12:00 AM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1024579",
+      "date": "01/20/2026",
+      "time": "12:00 AM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "1024421",
+      "date": "01/20/2026",
+      "time": "12:00 AM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1210 Roof in Progress",
+      "inspection_id": "1026633",
+      "date": "01/29/2026",
+      "time": "01:28 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "1053588",
+      "date": "03/19/2026",
+      "time": "02:08 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1053587",
+      "date": "03/19/2026",
+      "time": "02:09 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1053585",
+      "date": "03/19/2026",
+      "time": "02:13 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1053586",
+      "date": "03/19/2026",
+      "time": "02:13 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1098187",
+      "date": "06/05/2026",
+      "time": "03:30 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1100744",
+      "date": "06/11/2026",
+      "time": "03:15 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1100745",
+      "date": "06/11/2026",
+      "time": "03:22 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "1100746",
+      "date": "06/11/2026",
+      "time": "03:22 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1100747",
+      "date": "06/11/2026",
+      "time": "03:23 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1115868",
+      "date": "07/06/2026",
+      "time": "03:39 PM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "1153860",
+      "date": "09/09/2026",
+      "time": "10:15 AM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "1158949",
+      "date": "09/16/2026",
+      "time": "11:48 AM",
+      "inspector": "Yvette Madrid"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 6,
+    "unique_inspection_count": 28,
+    "page_content_length": 587272,
+    "extraction_duration_seconds": 36.88
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "permit_number": "B2018-01737",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB18&capID2=00000&capID3=00CRH&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T08:48:58.525355",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "636907",
+      "date": "10/01/2018",
+      "time": "04:58 PM",
+      "inspector": "Bradley Rudolph"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "638689",
+      "date": "10/11/2018",
+      "time": "08:19 PM",
+      "inspector": "Bradley Rudolph"
+    },
+    {
+      "result": "Approved with Conditions",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "643208",
+      "date": "11/14/2018",
+      "time": "05:26 PM",
+      "inspector": "Bradley Rudolph"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "652134",
+      "date": "01/23/2019",
+      "time": "03:15 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "651855",
+      "date": "01/23/2019",
+      "time": "03:50 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "657400",
+      "date": "03/12/2019",
+      "time": "03:41 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "657677",
+      "date": "03/13/2019",
+      "time": "04:18 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "657678",
+      "date": "03/13/2019",
+      "time": "04:18 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "670323",
+      "date": "06/21/2019",
+      "time": "01:22 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "670987",
+      "date": "06/25/2019",
+      "time": "01:51 PM",
+      "inspector": "KT"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 2,
+    "unique_inspection_count": 10,
+    "page_content_length": 433844,
+    "extraction_duration_seconds": 33.48
+  }
+}

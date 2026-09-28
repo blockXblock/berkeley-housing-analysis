@@ -1,0 +1,140 @@
+{
+  "permit_number": "B2022-03053",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB22&capID2=00000&capID3=00GOT&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T02:59:48.754830",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "913740",
+      "date": "07/17/2024",
+      "time": "12:00 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "914181",
+      "date": "07/17/2024",
+      "time": "12:01 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "914182",
+      "date": "07/17/2024",
+      "time": "12:01 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "914183",
+      "date": "07/17/2024",
+      "time": "12:01 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "914200",
+      "date": "07/18/2024",
+      "time": "10:34 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "914285",
+      "date": "07/18/2024",
+      "time": "10:34 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "915326",
+      "date": "07/29/2024",
+      "time": "01:10 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "915569",
+      "date": "07/29/2024",
+      "time": "01:10 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "915324",
+      "date": "07/29/2024",
+      "time": "01:15 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "924302",
+      "date": "09/18/2024",
+      "time": "11:26 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "958011",
+      "date": "06/10/2025",
+      "time": "11:38 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "958425",
+      "date": "06/10/2025",
+      "time": "11:39 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "958426",
+      "date": "06/10/2025",
+      "time": "11:39 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "958565",
+      "date": "06/11/2025",
+      "time": "09:26 AM",
+      "inspector": "David Huck"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "958566",
+      "date": "06/16/2025",
+      "time": "10:54 AM",
+      "inspector": "Yvette Madrid"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 3,
+    "unique_inspection_count": 15,
+    "page_content_length": 562133,
+    "extraction_duration_seconds": 33.87
+  }
+}

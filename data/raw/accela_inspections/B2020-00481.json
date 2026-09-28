@@ -1,0 +1,372 @@
+{
+  "permit_number": "B2020-00481",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB20&capID2=00000&capID3=0052Q&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T00:13:53.789485",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "767376",
+      "date": "09/07/2021",
+      "time": "08:18 AM",
+      "inspector": "Gilbert Gonzales"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "767365",
+      "date": "09/07/2021",
+      "time": "08:18 AM",
+      "inspector": "Gilbert Gonzales"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "768170",
+      "date": "09/14/2021",
+      "time": "03:13 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "768169",
+      "date": "09/14/2021",
+      "time": "03:15 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "767364",
+      "date": "09/15/2021",
+      "time": "06:55 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "767375",
+      "date": "09/15/2021",
+      "time": "06:56 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "772102",
+      "date": "10/06/2021",
+      "time": "02:37 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "772101",
+      "date": "10/08/2021",
+      "time": "02:48 PM",
+      "inspector": "David Montes"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1035 Post Tension Slab",
+      "inspection_id": "774828",
+      "date": "10/29/2021",
+      "time": "09:47 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "775238",
+      "date": "10/29/2021",
+      "time": "03:21 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "779658",
+      "date": "12/03/2021",
+      "time": "10:07 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Pool SPA 5185 Bonding-Cavity/Deck",
+      "inspection_id": "779477",
+      "date": "12/03/2021",
+      "time": "11:25 AM",
+      "inspector": "David Montes"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Pool SPA 5160 Pre-Gunite",
+      "inspection_id": "779455",
+      "date": "12/03/2021",
+      "time": "11:25 AM",
+      "inspector": "David Montes"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "780014",
+      "date": "12/07/2021",
+      "time": "11:16 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "780015",
+      "date": "12/07/2021",
+      "time": "11:16 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "780118",
+      "date": "12/07/2021",
+      "time": "11:20 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "786805",
+      "date": "02/07/2022",
+      "time": "01:11 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "787755",
+      "date": "02/16/2022",
+      "time": "02:16 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "802226",
+      "date": "06/06/2022",
+      "time": "10:22 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "802230",
+      "date": "06/06/2022",
+      "time": "10:22 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "802232",
+      "date": "06/06/2022",
+      "time": "10:22 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "802233",
+      "date": "06/06/2022",
+      "time": "10:22 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "803351",
+      "date": "06/14/2022",
+      "time": "12:39 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "803352",
+      "date": "06/14/2022",
+      "time": "12:39 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "803350",
+      "date": "06/14/2022",
+      "time": "12:39 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "803349",
+      "date": "06/14/2022",
+      "time": "12:39 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "803353",
+      "date": "06/14/2022",
+      "time": "12:39 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "805847",
+      "date": "06/30/2022",
+      "time": "10:57 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "807086",
+      "date": "07/12/2022",
+      "time": "10:32 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "813655",
+      "date": "08/22/2022",
+      "time": "10:56 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "817394",
+      "date": "09/15/2022",
+      "time": "11:01 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "817656",
+      "date": "09/21/2022",
+      "time": "09:16 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "831156",
+      "date": "12/27/2022",
+      "time": "01:13 PM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "832108",
+      "date": "01/04/2023",
+      "time": "09:55 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "832109",
+      "date": "01/04/2023",
+      "time": "09:55 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "838060",
+      "date": "02/15/2023",
+      "time": "11:08 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "837149",
+      "date": "02/15/2023",
+      "time": "11:08 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "838061",
+      "date": "02/15/2023",
+      "time": "11:08 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "838062",
+      "date": "02/15/2023",
+      "time": "11:08 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "843077",
+      "date": "03/30/2023",
+      "time": "07:34 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "844280",
+      "date": "03/30/2023",
+      "time": "07:34 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "844281",
+      "date": "03/30/2023",
+      "time": "07:34 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "844282",
+      "date": "03/30/2023",
+      "time": "07:34 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "847712",
+      "date": "04/20/2023",
+      "time": "04:32 PM",
+      "inspector": "J"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 9,
+    "unique_inspection_count": 44,
+    "page_content_length": 656142,
+    "extraction_duration_seconds": 39.05
+  }
+}

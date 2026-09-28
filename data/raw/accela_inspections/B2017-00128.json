@@ -1,0 +1,324 @@
+{
+  "permit_number": "B2017-00128",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB17&capID2=00000&capID3=000OH&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T21:40:52.951642",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "592959",
+      "date": "08/17/2017",
+      "time": "03:28 PM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1004 Setbacks/Survey",
+      "inspection_id": "596962",
+      "date": "09/26/2017",
+      "time": "02:22 PM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "596595",
+      "date": "09/26/2017",
+      "time": "02:23 PM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "596594",
+      "date": "09/26/2017",
+      "time": "02:24 PM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1080 Underfloor Insulation",
+      "inspection_id": "597615",
+      "date": "10/03/2017",
+      "time": "11:04 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "603521",
+      "date": "12/04/2017",
+      "time": "01:32 PM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "603522",
+      "date": "12/04/2017",
+      "time": "02:25 PM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "603758",
+      "date": "12/06/2017",
+      "time": "11:35 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "603757",
+      "date": "12/06/2017",
+      "time": "11:35 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "616681",
+      "date": "04/17/2018",
+      "time": "11:52 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "616553",
+      "date": "04/17/2018",
+      "time": "11:56 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "619848",
+      "date": "05/15/2018",
+      "time": "11:49 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "619849",
+      "date": "05/15/2018",
+      "time": "11:49 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "619850",
+      "date": "05/15/2018",
+      "time": "11:49 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "621682",
+      "date": "05/31/2018",
+      "time": "02:36 PM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "622344",
+      "date": "06/04/2018",
+      "time": "11:26 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "622345",
+      "date": "06/04/2018",
+      "time": "11:26 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "622040",
+      "date": "06/04/2018",
+      "time": "11:27 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "622811",
+      "date": "06/07/2018",
+      "time": "11:18 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "628730",
+      "date": "07/25/2018",
+      "time": "10:25 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Approved with Conditions",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "631216",
+      "date": "08/10/2018",
+      "time": "01:06 PM",
+      "inspector": "Bradley Rudolph"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "636059",
+      "date": "09/20/2018",
+      "time": "12:44 PM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "636061",
+      "date": "09/20/2018",
+      "time": "12:45 PM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "636058",
+      "date": "09/20/2018",
+      "time": "01:34 PM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "636060",
+      "date": "09/21/2018",
+      "time": "07:08 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "637521",
+      "date": "10/03/2018",
+      "time": "12:20 PM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "637522",
+      "date": "10/03/2018",
+      "time": "12:21 PM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "637523",
+      "date": "10/03/2018",
+      "time": "12:21 PM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "637520",
+      "date": "10/03/2018",
+      "time": "12:21 PM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "639376",
+      "date": "10/16/2018",
+      "time": "11:00 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "639377",
+      "date": "10/16/2018",
+      "time": "11:00 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4050 Gas Test",
+      "inspection_id": "639748",
+      "date": "10/16/2018",
+      "time": "11:02 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "639378",
+      "date": "10/16/2018",
+      "time": "11:02 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "639375",
+      "date": "10/16/2018",
+      "time": "11:02 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "642478",
+      "date": "11/05/2018",
+      "time": "11:27 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "642479",
+      "date": "11/05/2018",
+      "time": "11:27 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "642477",
+      "date": "11/05/2018",
+      "time": "11:28 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "642480",
+      "date": "11/05/2018",
+      "time": "11:28 AM",
+      "inspector": "John Cevasco"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 8,
+    "unique_inspection_count": 38,
+    "page_content_length": 591955,
+    "extraction_duration_seconds": 37.81
+  }
+}

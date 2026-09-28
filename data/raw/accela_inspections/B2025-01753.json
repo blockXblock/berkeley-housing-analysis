@@ -1,0 +1,51 @@
+{
+  "permit_number": "B2025-01753",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00FAA&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T08:18:20.425592",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4040 Water Service",
+      "inspection_id": "971937",
+      "date": "10/15/2025",
+      "time": "11:26 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4040 Water Service",
+      "inspection_id": "971939",
+      "date": "10/16/2025",
+      "time": "09:01 AM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4040 Water Service",
+      "inspection_id": "971938",
+      "date": "10/16/2025",
+      "time": "04:02 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "1064260",
+      "date": "10/16/2025",
+      "time": "08:09 AM",
+      "inspector": "FM"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 1,
+    "unique_inspection_count": 4,
+    "page_content_length": 360246,
+    "extraction_duration_seconds": 33.44
+  }
+}

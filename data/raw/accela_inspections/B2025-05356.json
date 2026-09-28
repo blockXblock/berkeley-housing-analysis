@@ -1,0 +1,132 @@
+{
+  "permit_number": "B2025-05356",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00QR4&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T06:15:12.717037",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1005 Demolition",
+      "inspection_id": "1082379",
+      "date": "05/08/2026",
+      "time": "09:19 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "1096635",
+      "date": "06/03/2026",
+      "time": "02:58 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "1101739",
+      "date": "06/11/2026",
+      "time": "10:13 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1106539",
+      "date": "06/18/2026",
+      "time": "01:26 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "1107501",
+      "date": "06/18/2026",
+      "time": "01:27 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1157779",
+      "date": "09/13/2026",
+      "time": "11:50 AM",
+      "inspector": "Phil  Chen"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "1157782",
+      "date": "09/13/2026",
+      "time": "11:51 AM",
+      "inspector": "Phil  Chen"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1157781",
+      "date": "09/13/2026",
+      "time": "11:51 AM",
+      "inspector": "Phil  Chen"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1157780",
+      "date": "09/13/2026",
+      "time": "11:52 AM",
+      "inspector": "Phil  Chen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1157819",
+      "date": "09/15/2026",
+      "time": "12:48 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "1157820",
+      "date": "09/15/2026",
+      "time": "12:59 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1157821",
+      "date": "09/15/2026",
+      "time": "12:59 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1157822",
+      "date": "09/15/2026",
+      "time": "01:13 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1159589",
+      "date": "09/22/2026",
+      "time": "01:31 PM",
+      "inspector": "Anthony Vergara"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 3,
+    "unique_inspection_count": 14,
+    "page_content_length": 571637,
+    "extraction_duration_seconds": 34.44
+  }
+}

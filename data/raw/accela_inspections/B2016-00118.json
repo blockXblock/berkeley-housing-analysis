@@ -1,0 +1,492 @@
+{
+  "permit_number": "B2016-00118",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB16&capID2=00000&capID3=0010N&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T07:14:10.180630",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "551282",
+      "date": "07/01/2016",
+      "time": "04:05 PM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "551867",
+      "date": "07/08/2016",
+      "time": "09:00 AM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "552631",
+      "date": "07/14/2016",
+      "time": "09:11 PM",
+      "inspector": "LEONARDO COLUMNA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "552630",
+      "date": "07/14/2016",
+      "time": "09:13 PM",
+      "inspector": "LEONARDO COLUMNA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "552629",
+      "date": "07/14/2016",
+      "time": "09:14 PM",
+      "inspector": "LEONARDO COLUMNA"
+    },
+    {
+      "result": "Approved with Conditions",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "552965",
+      "date": "07/19/2016",
+      "time": "11:59 AM",
+      "inspector": "Bradley Rudolph"
+    },
+    {
+      "result": "Approved with Conditions",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "552967",
+      "date": "07/19/2016",
+      "time": "11:59 AM",
+      "inspector": "Bradley Rudolph"
+    },
+    {
+      "result": "Approved with Conditions",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "552966",
+      "date": "07/19/2016",
+      "time": "11:59 AM",
+      "inspector": "Bradley Rudolph"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "553453",
+      "date": "07/25/2016",
+      "time": "03:18 PM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "553452",
+      "date": "07/25/2016",
+      "time": "03:18 PM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "556488",
+      "date": "08/18/2016",
+      "time": "08:43 PM",
+      "inspector": "Steven Messinger"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "556486",
+      "date": "08/18/2016",
+      "time": "08:43 PM",
+      "inspector": "Steven Messinger"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "556485",
+      "date": "08/18/2016",
+      "time": "08:44 PM",
+      "inspector": "Steven Messinger"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "556914",
+      "date": "08/22/2016",
+      "time": "02:33 PM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "556916",
+      "date": "08/23/2016",
+      "time": "10:25 AM",
+      "inspector": "Robert Hall"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "557407",
+      "date": "08/25/2016",
+      "time": "08:34 PM",
+      "inspector": "LEONARDO COLUMNA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "557404",
+      "date": "08/25/2016",
+      "time": "08:35 PM",
+      "inspector": "LEONARDO COLUMNA"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "557744",
+      "date": "08/30/2016",
+      "time": "08:27 AM",
+      "inspector": "RH"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "557745",
+      "date": "08/30/2016",
+      "time": "08:27 AM",
+      "inspector": "RH"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1210 Roof in Progress",
+      "inspection_id": "558124",
+      "date": "09/01/2016",
+      "time": "03:29 PM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "558125",
+      "date": "09/01/2016",
+      "time": "03:38 PM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "559422",
+      "date": "09/15/2016",
+      "time": "10:35 PM",
+      "inspector": "LEONARDO COLUMNA"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "559421",
+      "date": "09/16/2016",
+      "time": "03:31 PM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "559987",
+      "date": "09/17/2016",
+      "time": "12:20 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "560147",
+      "date": "09/27/2016",
+      "time": "04:12 PM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "564153",
+      "date": "10/27/2016",
+      "time": "02:51 PM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "564152",
+      "date": "10/27/2016",
+      "time": "04:04 PM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4050 Gas Test",
+      "inspection_id": "564154",
+      "date": "10/27/2016",
+      "time": "04:05 PM",
+      "inspector": "Greg Heidenreich"
+    },
+    {
+      "result": "Approved with Conditions",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "564892",
+      "date": "11/02/2016",
+      "time": "03:03 PM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "564893",
+      "date": "11/02/2016",
+      "time": "03:04 PM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Approved with Conditions",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "564894",
+      "date": "11/02/2016",
+      "time": "03:05 PM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "564896",
+      "date": "11/02/2016",
+      "time": "11:30 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "564895",
+      "date": "11/02/2016",
+      "time": "11:33 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "565422",
+      "date": "11/02/2016",
+      "time": "11:35 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "565421",
+      "date": "11/02/2016",
+      "time": "11:35 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "565425",
+      "date": "11/08/2016",
+      "time": "04:35 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "565426",
+      "date": "11/08/2016",
+      "time": "04:36 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "565427",
+      "date": "11/08/2016",
+      "time": "04:36 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "565428",
+      "date": "11/08/2016",
+      "time": "04:37 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "566299",
+      "date": "11/15/2016",
+      "time": "08:54 AM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "567077",
+      "date": "11/22/2016",
+      "time": "11:01 AM",
+      "inspector": "Robert Hall"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "567080",
+      "date": "11/22/2016",
+      "time": "11:01 AM",
+      "inspector": "Robert Hall"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "567078",
+      "date": "11/22/2016",
+      "time": "11:01 AM",
+      "inspector": "Robert Hall"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "567079",
+      "date": "11/22/2016",
+      "time": "11:01 AM",
+      "inspector": "Robert Hall"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "567081",
+      "date": "11/23/2016",
+      "time": "02:34 PM",
+      "inspector": "Robert Hall"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "568007",
+      "date": "11/30/2016",
+      "time": "04:09 PM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "568008",
+      "date": "12/01/2016",
+      "time": "10:01 AM",
+      "inspector": "Robert Hall"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "568346",
+      "date": "12/05/2016",
+      "time": "12:37 PM",
+      "inspector": "Robert Hall"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "569552",
+      "date": "12/13/2016",
+      "time": "03:34 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved with Conditions",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "556915",
+      "date": "12/29/2016",
+      "time": "04:14 PM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4050 Gas Test",
+      "inspection_id": "583072",
+      "date": "05/08/2017",
+      "time": "03:21 PM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "583071",
+      "date": "05/08/2017",
+      "time": "03:22 PM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4060 Gas Meter Release",
+      "inspection_id": "588609",
+      "date": "07/03/2017",
+      "time": "01:02 PM",
+      "inspector": "Robert Hall"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "588327",
+      "date": "07/03/2017",
+      "time": "01:08 PM",
+      "inspector": "Robert Hall"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "588326",
+      "date": "07/03/2017",
+      "time": "01:08 PM",
+      "inspector": "Robert Hall"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "588328",
+      "date": "07/03/2017",
+      "time": "01:08 PM",
+      "inspector": "Robert Hall"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "595654",
+      "date": "09/15/2017",
+      "time": "02:54 PM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "595653",
+      "date": "09/15/2017",
+      "time": "02:55 PM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "595652",
+      "date": "09/15/2017",
+      "time": "02:55 PM",
+      "inspector": "gh"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 12,
+    "unique_inspection_count": 59,
+    "page_content_length": 748314,
+    "extraction_duration_seconds": 41.77
+  }
+}

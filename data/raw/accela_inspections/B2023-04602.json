@@ -1,0 +1,36 @@
+{
+  "permit_number": "B2023-04602",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB23&capID2=00000&capID3=00LH1&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T07:37:38.820523",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1210 Roof in Progress",
+      "inspection_id": "870130",
+      "date": "09/12/2023",
+      "time": "09:32 AM",
+      "inspector": "Evelyn Oseguera"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1210 Roof in Progress",
+      "inspection_id": "870131",
+      "date": "09/15/2023",
+      "time": "12:54 PM",
+      "inspector": "Eric Cabana"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 1,
+    "unique_inspection_count": 2,
+    "page_content_length": 345084,
+    "extraction_duration_seconds": 33.44
+  }
+}

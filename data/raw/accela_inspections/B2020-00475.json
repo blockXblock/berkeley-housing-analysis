@@ -1,0 +1,324 @@
+{
+  "permit_number": "B2020-00475",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB20&capID2=00000&capID3=00520&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T00:13:07.763997",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "721393",
+      "date": "09/02/2020",
+      "time": "03:30 PM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "721181",
+      "date": "09/02/2020",
+      "time": "02:58 PM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "721913",
+      "date": "09/10/2020",
+      "time": "01:12 PM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "722256",
+      "date": "09/11/2020",
+      "time": "11:49 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "722828",
+      "date": "09/17/2020",
+      "time": "01:13 PM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "723680",
+      "date": "09/22/2020",
+      "time": "01:19 PM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "723871",
+      "date": "09/22/2020",
+      "time": "01:21 PM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "723872",
+      "date": "09/22/2020",
+      "time": "01:22 PM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "723857",
+      "date": "09/23/2020",
+      "time": "12:57 PM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "725589",
+      "date": "10/05/2020",
+      "time": "03:19 PM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "725568",
+      "date": "10/05/2020",
+      "time": "03:19 PM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "725576",
+      "date": "10/05/2020",
+      "time": "03:19 PM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "725262",
+      "date": "10/05/2020",
+      "time": "03:19 PM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "726823",
+      "date": "10/19/2020",
+      "time": "11:01 AM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "727356",
+      "date": "10/21/2020",
+      "time": "10:16 AM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "727569",
+      "date": "10/21/2020",
+      "time": "10:18 AM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "727570",
+      "date": "10/21/2020",
+      "time": "10:18 AM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "727563",
+      "date": "10/21/2020",
+      "time": "10:18 AM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "727948",
+      "date": "10/23/2020",
+      "time": "10:45 AM",
+      "inspector": "Moe Srifi"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "727949",
+      "date": "10/27/2020",
+      "time": "10:17 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "728769",
+      "date": "11/02/2020",
+      "time": "09:20 AM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "728939",
+      "date": "11/03/2020",
+      "time": "09:41 AM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "729043",
+      "date": "11/04/2020",
+      "time": "10:04 AM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "731673",
+      "date": "12/02/2020",
+      "time": "09:44 AM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 2025 Service Upgrade/Restoration",
+      "inspection_id": "731674",
+      "date": "12/04/2020",
+      "time": "06:21 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "733024",
+      "date": "12/09/2020",
+      "time": "05:21 PM",
+      "inspector": "Moe Srifi"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "733025",
+      "date": "12/11/2020",
+      "time": "11:56 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "733141",
+      "date": "12/13/2020",
+      "time": "01:00 PM",
+      "inspector": "Moe Srifi"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "734031",
+      "date": "12/16/2020",
+      "time": "04:49 PM",
+      "inspector": "Moe Srifi"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "734557",
+      "date": "12/19/2020",
+      "time": "09:39 AM",
+      "inspector": "Moe Srifi"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "734030",
+      "date": "12/18/2020",
+      "time": "07:48 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "734911",
+      "date": "12/30/2020",
+      "time": "12:32 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "734912",
+      "date": "12/31/2020",
+      "time": "11:22 AM",
+      "inspector": "Moe Srifi"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "735879",
+      "date": "01/01/2021",
+      "time": "02:11 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "735939",
+      "date": "01/07/2021",
+      "time": "04:13 PM",
+      "inspector": "Matthew Doughty"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "736582",
+      "date": "01/15/2021",
+      "time": "11:23 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "739086",
+      "date": "02/04/2021",
+      "time": "01:16 PM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2200 Electrical Solar Photovoltaic",
+      "inspection_id": "741580",
+      "date": "02/18/2021",
+      "time": "06:48 PM",
+      "inspector": "FM"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 8,
+    "unique_inspection_count": 38,
+    "page_content_length": 593887,
+    "extraction_duration_seconds": 40.03
+  }
+}

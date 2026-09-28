@@ -1,0 +1,188 @@
+{
+  "permit_number": "B2017-04855",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB17&capID2=00000&capID3=00IBT&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T22:14:58.054596",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "617746",
+      "date": "04/27/2018",
+      "time": "03:29 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "618340",
+      "date": "05/01/2018",
+      "time": "02:30 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "627191",
+      "date": "07/12/2018",
+      "time": "02:57 PM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "627192",
+      "date": "07/13/2018",
+      "time": "03:12 PM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4050 Gas Test",
+      "inspection_id": "627945",
+      "date": "07/17/2018",
+      "time": "04:26 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "627589",
+      "date": "07/17/2018",
+      "time": "04:27 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "626657",
+      "date": "07/09/2018",
+      "time": "12:00 AM",
+      "inspector": "Bradley Rudolph"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "626658",
+      "date": "07/09/2018",
+      "time": "12:00 AM",
+      "inspector": "Bradley Rudolph"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "626659",
+      "date": "07/09/2018",
+      "time": "12:00 AM",
+      "inspector": "Bradley Rudolph"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "628140",
+      "date": "07/09/2018",
+      "time": "12:00 AM",
+      "inspector": "Bradley Rudolph"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "636067",
+      "date": "09/20/2018",
+      "time": "08:07 AM",
+      "inspector": "Martha Ramos"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4050 Gas Test",
+      "inspection_id": "636068",
+      "date": "09/20/2018",
+      "time": "08:07 AM",
+      "inspector": "Martha Ramos"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "636513",
+      "date": "09/26/2018",
+      "time": "10:19 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4050 Gas Test",
+      "inspection_id": "636514",
+      "date": "09/26/2018",
+      "time": "10:19 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4050 Gas Test",
+      "inspection_id": "642912",
+      "date": "11/08/2018",
+      "time": "03:57 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "642910",
+      "date": "11/08/2018",
+      "time": "03:58 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "642911",
+      "date": "11/08/2018",
+      "time": "03:59 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "642908",
+      "date": "11/08/2018",
+      "time": "04:25 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "642909",
+      "date": "11/09/2018",
+      "time": "04:02 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "644102",
+      "date": "11/15/2018",
+      "time": "10:26 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "644101",
+      "date": "11/15/2018",
+      "time": "10:26 AM",
+      "inspector": "J"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 5,
+    "unique_inspection_count": 21,
+    "page_content_length": 497885,
+    "extraction_duration_seconds": 34.16
+  }
+}

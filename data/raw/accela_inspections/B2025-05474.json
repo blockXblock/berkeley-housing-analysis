@@ -1,0 +1,228 @@
+{
+  "permit_number": "B2025-05474",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00R52&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T06:15:52.129341",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1069779",
+      "date": "04/16/2026",
+      "time": "01:04 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1082263",
+      "date": "05/07/2026",
+      "time": "11:48 AM",
+      "inspector": "DEVIN  GRIMES"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1083099",
+      "date": "05/11/2026",
+      "time": "11:10 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1084346",
+      "date": "05/12/2026",
+      "time": "04:10 PM",
+      "inspector": "David Montes"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1084345",
+      "date": "05/12/2026",
+      "time": "04:10 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1086469",
+      "date": "05/14/2026",
+      "time": "12:16 PM",
+      "inspector": "Cliff  Sunkel"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1086304",
+      "date": "05/18/2026",
+      "time": "08:02 PM",
+      "inspector": "DEVIN  GRIMES"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1089022",
+      "date": "05/21/2026",
+      "time": "04:26 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1101547",
+      "date": "06/10/2026",
+      "time": "08:34 AM",
+      "inspector": "DEVIN  GRIMES"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1101548",
+      "date": "06/10/2026",
+      "time": "08:34 AM",
+      "inspector": "DEVIN  GRIMES"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1102381",
+      "date": "06/12/2026",
+      "time": "11:32 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1102382",
+      "date": "06/12/2026",
+      "time": "11:32 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1105306",
+      "date": "06/16/2026",
+      "time": "03:24 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "1105587",
+      "date": "06/16/2026",
+      "time": "03:24 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "1104262",
+      "date": "06/16/2026",
+      "time": "03:24 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1105422",
+      "date": "06/16/2026",
+      "time": "03:24 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1105588",
+      "date": "06/16/2026",
+      "time": "03:26 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1111709",
+      "date": "06/28/2026",
+      "time": "10:11 PM",
+      "inspector": "DEVIN  GRIMES"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1113899",
+      "date": "06/30/2026",
+      "time": "03:47 PM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1118059",
+      "date": "06/30/2026",
+      "time": "08:13 AM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1115705",
+      "date": "07/06/2026",
+      "time": "01:13 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1135059",
+      "date": "08/05/2026",
+      "time": "04:00 PM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1140939",
+      "date": "08/14/2026",
+      "time": "12:47 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1153464",
+      "date": "09/08/2026",
+      "time": "11:06 AM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1161221",
+      "date": "09/21/2026",
+      "time": "07:59 AM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "1161222",
+      "date": "09/21/2026",
+      "time": "07:59 AM",
+      "inspector": "Yvette Madrid"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 6,
+    "unique_inspection_count": 26,
+    "page_content_length": 602090,
+    "extraction_duration_seconds": 36.45
+  }
+}

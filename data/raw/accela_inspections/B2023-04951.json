@@ -1,0 +1,124 @@
+{
+  "permit_number": "B2023-04951",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB23&capID2=00000&capID3=00MCV&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T19:36:57.492128",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "1002112",
+      "date": "12/16/2025",
+      "time": "11:38 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "1020264",
+      "date": "01/20/2026",
+      "time": "12:51 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1063745",
+      "date": "04/13/2026",
+      "time": "02:46 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1096501",
+      "date": "06/04/2026",
+      "time": "11:32 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "1096943",
+      "date": "06/04/2026",
+      "time": "11:34 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1075 Underfloor Framing",
+      "inspection_id": "1104865",
+      "date": "06/17/2026",
+      "time": "12:24 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1106823",
+      "date": "06/22/2026",
+      "time": "12:18 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1075 Underfloor Framing",
+      "inspection_id": "1109265",
+      "date": "06/22/2026",
+      "time": "12:23 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1220 Site Drainage",
+      "inspection_id": "1129828",
+      "date": "07/27/2026",
+      "time": "07:49 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1131541",
+      "date": "07/29/2026",
+      "time": "12:37 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1075 Underfloor Framing",
+      "inspection_id": "1132824",
+      "date": "07/29/2026",
+      "time": "12:37 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1147622",
+      "date": "08/31/2026",
+      "time": "12:32 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1075 Underfloor Framing",
+      "inspection_id": "1151263",
+      "date": "08/31/2026",
+      "time": "12:32 PM",
+      "inspector": "Eric Cabana"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "Accela Citizen Access",
+    "requires_auth": false,
+    "total_pages": 3,
+    "unique_inspection_count": 13,
+    "page_content_length": 663610,
+    "extraction_duration_seconds": 35.43
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "permit_number": "B2023-06274",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/./CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB23&capID2=00000&capID3=00Q9N&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-05-22T18:26:02.767569",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1210 Roof in Progress",
+      "inspection_id": "935995",
+      "date": "12/06/2024",
+      "time": "03:39 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1210 Roof in Progress",
+      "inspection_id": "935992",
+      "date": "12/09/2024",
+      "time": "10:54 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Fire 7000 Fire Final Inspection",
+      "inspection_id": "952374",
+      "date": "04/23/2025",
+      "time": "11:02 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "953672",
+      "date": "05/01/2025",
+      "time": "12:07 PM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "953673",
+      "date": "05/05/2025",
+      "time": "11:59 AM",
+      "inspector": "E"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 1,
+    "unique_inspection_count": 5,
+    "page_content_length": 478765,
+    "extraction_duration_seconds": 32.91
+  }
+}

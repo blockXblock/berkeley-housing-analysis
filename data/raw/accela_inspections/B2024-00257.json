@@ -1,0 +1,116 @@
+{
+  "permit_number": "B2024-00257",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB24&capID2=00000&capID3=00250&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T19:41:52.283878",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "1030146",
+      "date": "02/10/2026",
+      "time": "12:20 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "1087266",
+      "date": "05/19/2026",
+      "time": "01:39 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1148144",
+      "date": "08/26/2026",
+      "time": "01:10 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1148143",
+      "date": "08/28/2026",
+      "time": "06:57 AM",
+      "inspector": "Rudolph  Burnett"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1151619",
+      "date": "09/01/2026",
+      "time": "07:47 AM",
+      "inspector": "Rudolph  Burnett"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1149739",
+      "date": "09/02/2026",
+      "time": "08:16 AM",
+      "inspector": "Rudolph  Burnett"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1151503",
+      "date": "09/03/2026",
+      "time": "08:35 AM",
+      "inspector": "Rudolph  Burnett"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1151502",
+      "date": "09/04/2026",
+      "time": "06:29 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1004 Setbacks/Survey",
+      "inspection_id": "1156063",
+      "date": "09/09/2026",
+      "time": "02:55 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "1156114",
+      "date": "09/09/2026",
+      "time": "02:55 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1153700",
+      "date": "09/09/2026",
+      "time": "02:56 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1155780",
+      "date": "09/11/2026",
+      "time": "01:11 PM",
+      "inspector": "Anthony Vergara"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 3,
+    "unique_inspection_count": 12,
+    "page_content_length": 594774,
+    "extraction_duration_seconds": 35.25
+  }
+}

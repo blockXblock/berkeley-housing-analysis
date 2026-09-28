@@ -1,0 +1,52 @@
+{
+  "permit_number": "B2015-03857",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=15B01&capID2=00000&capID3=0345G&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T17:39:09.373619",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "573030",
+      "date": "01/27/2017",
+      "time": "02:07 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "573328",
+      "date": "02/01/2017",
+      "time": "12:58 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "595574",
+      "date": "09/13/2017",
+      "time": "04:30 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "596729",
+      "date": "09/27/2017",
+      "time": "12:03 PM",
+      "inspector": "SM"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 1,
+    "unique_inspection_count": 4,
+    "page_content_length": 363001,
+    "extraction_duration_seconds": 32.82
+  }
+}

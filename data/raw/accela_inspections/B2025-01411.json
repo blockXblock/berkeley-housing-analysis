@@ -1,0 +1,76 @@
+{
+  "permit_number": "B2025-01411",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00DX7&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T05:43:55.095361",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1026641",
+      "date": "01/29/2026",
+      "time": "01:35 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1037707",
+      "date": "02/19/2026",
+      "time": "02:12 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1027899",
+      "date": "02/03/2026",
+      "time": "07:55 AM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1220 Site Drainage",
+      "inspection_id": "1043429",
+      "date": "03/02/2026",
+      "time": "03:57 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1056068",
+      "date": "03/24/2026",
+      "time": "04:02 PM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1060350",
+      "date": "04/01/2026",
+      "time": "08:06 AM",
+      "inspector": "Gilbert Gonzales"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1063707",
+      "date": "04/07/2026",
+      "time": "10:56 AM",
+      "inspector": "Lorenzo Aguilar"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 2,
+    "unique_inspection_count": 7,
+    "page_content_length": 502831,
+    "extraction_duration_seconds": 32.49
+  }
+}

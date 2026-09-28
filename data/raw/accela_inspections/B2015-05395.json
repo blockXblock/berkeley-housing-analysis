@@ -1,0 +1,44 @@
+{
+  "permit_number": "B2015-05395",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=15B01&capID2=00000&capID3=0359J&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T17:39:50.022021",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "93764",
+      "date": "12/04/2015",
+      "time": "12:00 AM",
+      "inspector": "GREGORY   HEIDENREICH"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "93763",
+      "date": "11/19/2015",
+      "time": "12:00 AM",
+      "inspector": "ROMEO   HERRERA"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "590987",
+      "date": "07/27/2017",
+      "time": "11:23 PM",
+      "inspector": "Bradley Rudolph"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 1,
+    "unique_inspection_count": 3,
+    "page_content_length": 345273,
+    "extraction_duration_seconds": 32.04
+  }
+}

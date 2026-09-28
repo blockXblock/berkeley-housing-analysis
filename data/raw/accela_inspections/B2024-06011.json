@@ -1,0 +1,36 @@
+{
+  "permit_number": "B2024-06011",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB24&capID2=00000&capID3=00TYR&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-05-22T18:56:24.460090",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2030 Temporary Power",
+      "inspection_id": "957895",
+      "date": "06/06/2025",
+      "time": "03:43 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2030 Temporary Power",
+      "inspection_id": "959536",
+      "date": "06/25/2025",
+      "time": "07:48 AM",
+      "inspector": "E"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 1,
+    "unique_inspection_count": 2,
+    "page_content_length": 415321,
+    "extraction_duration_seconds": 32.61
+  }
+}

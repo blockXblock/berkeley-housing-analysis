@@ -1,0 +1,52 @@
+{
+  "permit_number": "B2023-03067",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/./CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB23&capID2=00000&capID3=00H5J&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-05-22T18:19:29.158870",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1005 Demolition",
+      "inspection_id": "873328",
+      "date": "10/04/2023",
+      "time": "01:55 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1005 Demolition",
+      "inspection_id": "874378",
+      "date": "10/16/2023",
+      "time": "10:50 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1005 Demolition",
+      "inspection_id": "875877",
+      "date": "10/23/2023",
+      "time": "04:54 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "876159",
+      "date": "10/23/2023",
+      "time": "04:54 AM",
+      "inspector": "Lorenzo Aguilar"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 1,
+    "unique_inspection_count": 4,
+    "page_content_length": 413263,
+    "extraction_duration_seconds": 32.67
+  }
+}

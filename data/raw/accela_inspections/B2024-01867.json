@@ -1,0 +1,60 @@
+{
+  "permit_number": "B2024-01867",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB24&capID2=00000&capID3=00EO7&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T07:51:04.301536",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "924781",
+      "date": "09/23/2024",
+      "time": "12:38 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "963595",
+      "date": "07/24/2025",
+      "time": "01:35 PM",
+      "inspector": "PEDRO FELIX"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "964108",
+      "date": "07/29/2025",
+      "time": "12:59 AM",
+      "inspector": "PEDRO FELIX"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "964864",
+      "date": "08/04/2025",
+      "time": "11:38 PM",
+      "inspector": "PEDRO FELIX"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "965084",
+      "date": "08/06/2025",
+      "time": "03:01 PM",
+      "inspector": "SR"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 1,
+    "unique_inspection_count": 5,
+    "page_content_length": 380157,
+    "extraction_duration_seconds": 32.21
+  }
+}

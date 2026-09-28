@@ -1,0 +1,108 @@
+{
+  "permit_number": "B2020-00981",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB20&capID2=00000&capID3=0092Y&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T09:15:34.104974",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "716375",
+      "date": "07/28/2020",
+      "time": "11:11 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "716376",
+      "date": "07/28/2020",
+      "time": "11:11 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "719357",
+      "date": "08/17/2020",
+      "time": "10:31 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "719169",
+      "date": "08/17/2020",
+      "time": "10:31 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "719170",
+      "date": "08/17/2020",
+      "time": "10:31 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "721484",
+      "date": "09/04/2020",
+      "time": "08:47 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "721642",
+      "date": "09/08/2020",
+      "time": "11:14 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "723288",
+      "date": "09/17/2020",
+      "time": "01:37 PM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "723111",
+      "date": "09/17/2020",
+      "time": "01:37 PM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "725314",
+      "date": "10/06/2020",
+      "time": "02:27 PM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "725313",
+      "date": "10/06/2020",
+      "time": "02:27 PM",
+      "inspector": "DL"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 3,
+    "unique_inspection_count": 11,
+    "page_content_length": 395959,
+    "extraction_duration_seconds": 33.11
+  }
+}

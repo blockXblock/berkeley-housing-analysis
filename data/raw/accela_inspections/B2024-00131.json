@@ -1,0 +1,116 @@
+{
+  "permit_number": "B2024-00131",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB24&capID2=00000&capID3=0015P&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T19:41:08.350851",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "886565",
+      "date": "08/26/2022",
+      "time": "04:08 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "886566",
+      "date": "09/02/2022",
+      "time": "10:05 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "886567",
+      "date": "02/07/2023",
+      "time": "10:14 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "886568",
+      "date": "03/07/2023",
+      "time": "01:05 PM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "886590",
+      "date": "08/10/2023",
+      "time": "12:14 PM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "886589",
+      "date": "03/01/2023",
+      "time": "03:39 PM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "886591",
+      "date": "01/10/2024",
+      "time": "12:56 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "886592",
+      "date": "10/04/2023",
+      "time": "03:35 PM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "886594",
+      "date": "10/16/2023",
+      "time": "02:35 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "886593",
+      "date": "10/04/2023",
+      "time": "03:35 PM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "886595",
+      "date": "10/23/2023",
+      "time": "01:55 PM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "886596",
+      "date": "10/31/2023",
+      "time": "01:13 PM",
+      "inspector": "DL"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 3,
+    "unique_inspection_count": 12,
+    "page_content_length": 467067,
+    "extraction_duration_seconds": 34.27
+  }
+}

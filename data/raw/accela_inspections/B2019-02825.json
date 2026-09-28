@@ -1,0 +1,52 @@
+{
+  "permit_number": "B2019-02825",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB19&capID2=00000&capID3=00EXB&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T23:39:06.353161",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "673113",
+      "date": "07/16/2019",
+      "time": "01:54 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "673740",
+      "date": "07/16/2019",
+      "time": "03:35 PM",
+      "inspector": "Frankee Lenoir"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "673739",
+      "date": "07/16/2019",
+      "time": "03:35 PM",
+      "inspector": "Frankee Lenoir"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "673746",
+      "date": "07/19/2019",
+      "time": "02:36 PM",
+      "inspector": "KT"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "Accela Citizen Access",
+    "requires_auth": false,
+    "total_pages": 1,
+    "unique_inspection_count": 4,
+    "page_content_length": 359337,
+    "extraction_duration_seconds": 30.64
+  }
+}

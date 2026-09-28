@@ -1,0 +1,52 @@
+{
+  "permit_number": "B2024-01486",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB24&capID2=00000&capID3=00CVT&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T07:49:42.212911",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "901249",
+      "date": "04/17/2024",
+      "time": "08:17 AM",
+      "inspector": "Joseph Eldridge"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "901228",
+      "date": "04/17/2024",
+      "time": "08:17 AM",
+      "inspector": "Joseph Eldridge"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "901306",
+      "date": "04/23/2024",
+      "time": "11:21 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "901307",
+      "date": "04/23/2024",
+      "time": "11:22 AM",
+      "inspector": "DL"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 1,
+    "unique_inspection_count": 4,
+    "page_content_length": 383347,
+    "extraction_duration_seconds": 34.45
+  }
+}

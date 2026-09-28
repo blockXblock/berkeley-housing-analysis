@@ -1,0 +1,92 @@
+{
+  "permit_number": "B2020-02136",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB20&capID2=00000&capID3=00DZA&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T09:20:21.447005",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2030 Temporary Power",
+      "inspection_id": "718475",
+      "date": "08/18/2020",
+      "time": "10:17 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4050 Gas Test",
+      "inspection_id": "718476",
+      "date": "08/18/2020",
+      "time": "10:18 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4050 Gas Test",
+      "inspection_id": "720206",
+      "date": "08/27/2020",
+      "time": "09:58 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4060 Gas Meter Release",
+      "inspection_id": "720607",
+      "date": "08/27/2020",
+      "time": "10:03 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4060 Gas Meter Release",
+      "inspection_id": "720627",
+      "date": "08/27/2020",
+      "time": "10:05 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "720628",
+      "date": "08/27/2020",
+      "time": "10:14 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2030 Temporary Power",
+      "inspection_id": "720207",
+      "date": "08/27/2020",
+      "time": "10:14 AM",
+      "inspector": "Eduardo Franco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "730042",
+      "date": "11/16/2020",
+      "time": "12:00 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "730043",
+      "date": "11/16/2020",
+      "time": "02:55 PM",
+      "inspector": "E"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 2,
+    "unique_inspection_count": 9,
+    "page_content_length": 392952,
+    "extraction_duration_seconds": 34.08
+  }
+}

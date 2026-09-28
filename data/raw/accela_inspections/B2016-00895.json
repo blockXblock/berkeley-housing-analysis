@@ -1,0 +1,4628 @@
+{
+  "permit_number": "B2016-00895",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB16&capID2=00000&capID3=006WM&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-06-15T11:22:36.953825",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Building 1004 Setbacks/Survey",
+      "inspection_id": "679222",
+      "date": "08/27/2019",
+      "time": "01:34 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "680247",
+      "date": "09/04/2019",
+      "time": "11:58 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "680387",
+      "date": "09/05/2019",
+      "time": "10:37 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "681366",
+      "date": "09/17/2019",
+      "time": "02:43 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "681365",
+      "date": "09/17/2019",
+      "time": "02:43 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "683369",
+      "date": "09/26/2019",
+      "time": "02:42 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "683956",
+      "date": "10/01/2019",
+      "time": "02:26 PM",
+      "inspector": "Nathan  Gilmore"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "683298",
+      "date": "10/01/2019",
+      "time": "09:18 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "683299",
+      "date": "10/02/2019",
+      "time": "02:41 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "684110",
+      "date": "10/08/2019",
+      "time": "02:08 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "685098",
+      "date": "10/08/2019",
+      "time": "02:11 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "685264",
+      "date": "10/09/2019",
+      "time": "02:27 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "685407",
+      "date": "10/10/2019",
+      "time": "11:55 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "686496",
+      "date": "10/22/2019",
+      "time": "03:48 PM",
+      "inspector": "Nathan  Gilmore"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "687082",
+      "date": "10/28/2019",
+      "time": "07:39 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "687773",
+      "date": "10/28/2019",
+      "time": "09:15 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "688009",
+      "date": "10/29/2019",
+      "time": "08:54 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "690417",
+      "date": "11/15/2019",
+      "time": "09:54 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "691088",
+      "date": "11/20/2019",
+      "time": "04:08 PM",
+      "inspector": "Nathan  Gilmore"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "691087",
+      "date": "11/21/2019",
+      "time": "10:34 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "691658",
+      "date": "11/21/2019",
+      "time": "10:36 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "691086",
+      "date": "11/21/2019",
+      "time": "10:36 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "694665",
+      "date": "12/18/2019",
+      "time": "07:30 AM",
+      "inspector": "Nathan  Gilmore"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "694738",
+      "date": "12/18/2019",
+      "time": "08:38 AM",
+      "inspector": "Nathan  Gilmore"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "694746",
+      "date": "12/20/2019",
+      "time": "09:29 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "695380",
+      "date": "01/03/2020",
+      "time": "01:10 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "696186",
+      "date": "01/09/2020",
+      "time": "01:24 PM",
+      "inspector": "Nathan  Gilmore"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "697136",
+      "date": "01/10/2020",
+      "time": "02:45 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "696185",
+      "date": "01/10/2020",
+      "time": "02:59 PM",
+      "inspector": "Nathan  Gilmore"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "697702",
+      "date": "01/16/2020",
+      "time": "10:11 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "702102",
+      "date": "02/26/2020",
+      "time": "10:04 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "703485",
+      "date": "03/05/2020",
+      "time": "10:55 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "702708",
+      "date": "03/06/2020",
+      "time": "04:05 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Mechanical 3010 Mechanical Underfloor",
+      "inspection_id": "702947",
+      "date": "03/06/2020",
+      "time": "04:10 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "702945",
+      "date": "03/06/2020",
+      "time": "04:10 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "702946",
+      "date": "03/06/2020",
+      "time": "04:10 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "703968",
+      "date": "03/09/2020",
+      "time": "11:31 AM",
+      "inspector": "Nathan  Gilmore"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "704274",
+      "date": "03/12/2020",
+      "time": "02:49 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "704868",
+      "date": "03/17/2020",
+      "time": "10:23 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "707213",
+      "date": "05/12/2020",
+      "time": "02:03 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "708735",
+      "date": "05/20/2020",
+      "time": "03:32 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "708888",
+      "date": "05/22/2020",
+      "time": "02:40 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "710396",
+      "date": "06/08/2020",
+      "time": "08:02 AM",
+      "inspector": "Nathan  Gilmore"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "710018",
+      "date": "06/09/2020",
+      "time": "01:23 PM",
+      "inspector": "Nathan  Gilmore"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "710514",
+      "date": "06/11/2020",
+      "time": "02:49 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "710513",
+      "date": "06/11/2020",
+      "time": "02:52 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "710762",
+      "date": "06/15/2020",
+      "time": "02:12 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "710761",
+      "date": "06/16/2020",
+      "time": "11:39 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "711712",
+      "date": "06/19/2020",
+      "time": "01:53 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "711857",
+      "date": "06/23/2020",
+      "time": "07:24 AM",
+      "inspector": "Nathan  Gilmore"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "711858",
+      "date": "06/25/2020",
+      "time": "02:52 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "713469",
+      "date": "07/06/2020",
+      "time": "03:02 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "714316",
+      "date": "07/24/2020",
+      "time": "01:57 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "714314",
+      "date": "07/24/2020",
+      "time": "01:57 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "714315",
+      "date": "07/27/2020",
+      "time": "12:10 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "718882",
+      "date": "08/14/2020",
+      "time": "11:33 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "718883",
+      "date": "08/17/2020",
+      "time": "12:25 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "720127",
+      "date": "08/26/2020",
+      "time": "12:48 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "720152",
+      "date": "08/27/2020",
+      "time": "10:53 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "720962",
+      "date": "09/01/2020",
+      "time": "09:42 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "720642",
+      "date": "09/03/2020",
+      "time": "10:26 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "721545",
+      "date": "09/03/2020",
+      "time": "01:49 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "721130",
+      "date": "09/03/2020",
+      "time": "04:39 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "721975",
+      "date": "09/08/2020",
+      "time": "01:23 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "722013",
+      "date": "09/09/2020",
+      "time": "01:00 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "722209",
+      "date": "09/10/2020",
+      "time": "12:27 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1075 Underfloor Framing",
+      "inspection_id": "722627",
+      "date": "09/14/2020",
+      "time": "10:21 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "722470",
+      "date": "09/14/2020",
+      "time": "10:22 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "722976",
+      "date": "09/16/2020",
+      "time": "01:40 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "723106",
+      "date": "09/17/2020",
+      "time": "02:11 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "723703",
+      "date": "09/21/2020",
+      "time": "02:59 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "723479",
+      "date": "09/21/2020",
+      "time": "03:00 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "724196",
+      "date": "09/28/2020",
+      "time": "09:59 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "724630",
+      "date": "09/29/2020",
+      "time": "11:36 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "724828",
+      "date": "09/30/2020",
+      "time": "02:27 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "725237",
+      "date": "10/02/2020",
+      "time": "01:08 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2030 Temporary Power",
+      "inspection_id": "725172",
+      "date": "10/05/2020",
+      "time": "11:30 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1075 Underfloor Framing",
+      "inspection_id": "725171",
+      "date": "10/06/2020",
+      "time": "08:56 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1080 Underfloor Insulation",
+      "inspection_id": "725539",
+      "date": "10/06/2020",
+      "time": "12:08 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1075 Underfloor Framing",
+      "inspection_id": "725540",
+      "date": "10/06/2020",
+      "time": "12:10 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "726116",
+      "date": "10/13/2020",
+      "time": "10:32 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "726120",
+      "date": "10/13/2020",
+      "time": "10:32 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "726506",
+      "date": "10/15/2020",
+      "time": "01:11 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "726540",
+      "date": "10/16/2020",
+      "time": "12:17 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "726542",
+      "date": "10/20/2020",
+      "time": "10:26 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "726541",
+      "date": "10/14/2020",
+      "time": "03:11 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "726543",
+      "date": "10/21/2020",
+      "time": "09:55 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1075 Underfloor Framing",
+      "inspection_id": "726544",
+      "date": "10/22/2020",
+      "time": "10:15 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "726545",
+      "date": "10/22/2020",
+      "time": "10:19 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "727939",
+      "date": "10/27/2020",
+      "time": "10:38 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "727940",
+      "date": "10/28/2020",
+      "time": "10:21 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "727941",
+      "date": "10/29/2020",
+      "time": "10:20 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "727942",
+      "date": "10/30/2020",
+      "time": "10:12 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "728948",
+      "date": "11/02/2020",
+      "time": "02:15 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "728925",
+      "date": "11/02/2020",
+      "time": "02:17 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "727944",
+      "date": "11/03/2020",
+      "time": "10:05 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "728688",
+      "date": "11/04/2020",
+      "time": "09:04 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "728689",
+      "date": "11/05/2020",
+      "time": "10:06 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "728690",
+      "date": "11/06/2020",
+      "time": "10:04 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "729505",
+      "date": "11/10/2020",
+      "time": "09:11 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "729508",
+      "date": "11/10/2020",
+      "time": "09:11 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "729509",
+      "date": "11/12/2020",
+      "time": "01:39 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "729510",
+      "date": "11/13/2020",
+      "time": "09:55 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "729511",
+      "date": "11/16/2020",
+      "time": "01:11 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "729512",
+      "date": "11/17/2020",
+      "time": "01:23 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "729805",
+      "date": "11/18/2020",
+      "time": "09:17 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "729807",
+      "date": "11/19/2020",
+      "time": "11:41 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "731112",
+      "date": "11/24/2020",
+      "time": "09:54 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "731113",
+      "date": "11/25/2020",
+      "time": "09:34 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "731114",
+      "date": "12/01/2020",
+      "time": "09:29 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "731115",
+      "date": "12/02/2020",
+      "time": "10:00 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "732878",
+      "date": "12/04/2020",
+      "time": "12:11 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "732107",
+      "date": "12/07/2020",
+      "time": "09:55 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "733323",
+      "date": "12/08/2020",
+      "time": "11:46 AM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "732129",
+      "date": "12/09/2020",
+      "time": "09:55 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "732130",
+      "date": "12/10/2020",
+      "time": "02:11 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "732131",
+      "date": "12/11/2020",
+      "time": "10:31 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "734155",
+      "date": "12/14/2020",
+      "time": "12:44 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "732133",
+      "date": "12/15/2020",
+      "time": "12:49 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "734507",
+      "date": "12/16/2020",
+      "time": "01:08 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "732134",
+      "date": "12/16/2020",
+      "time": "01:09 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "732136",
+      "date": "12/17/2020",
+      "time": "10:44 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "734300",
+      "date": "12/18/2020",
+      "time": "10:23 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "734301",
+      "date": "12/21/2020",
+      "time": "09:29 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "734302",
+      "date": "12/22/2020",
+      "time": "09:31 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "734303",
+      "date": "12/23/2020",
+      "time": "09:35 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "734305",
+      "date": "12/28/2020",
+      "time": "01:10 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "734306",
+      "date": "12/29/2020",
+      "time": "09:19 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "734307",
+      "date": "12/30/2020",
+      "time": "10:17 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "734308",
+      "date": "12/31/2020",
+      "time": "09:20 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "736069",
+      "date": "01/04/2021",
+      "time": "09:49 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "734349",
+      "date": "01/04/2021",
+      "time": "09:50 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "734351",
+      "date": "01/05/2021",
+      "time": "10:03 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "734352",
+      "date": "01/06/2021",
+      "time": "10:47 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "736348",
+      "date": "01/06/2021",
+      "time": "10:48 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "736377",
+      "date": "01/06/2021",
+      "time": "10:51 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "734353",
+      "date": "01/07/2021",
+      "time": "11:23 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "736492",
+      "date": "01/07/2021",
+      "time": "11:24 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "734354",
+      "date": "01/08/2021",
+      "time": "10:21 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "736651",
+      "date": "01/08/2021",
+      "time": "10:22 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "736644",
+      "date": "01/08/2021",
+      "time": "10:23 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "736645",
+      "date": "01/08/2021",
+      "time": "10:24 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "736985",
+      "date": "01/12/2021",
+      "time": "12:38 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "736949",
+      "date": "01/12/2021",
+      "time": "12:38 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "737118",
+      "date": "01/13/2021",
+      "time": "09:58 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "736930",
+      "date": "01/13/2021",
+      "time": "09:58 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "737306",
+      "date": "01/14/2021",
+      "time": "10:47 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "737309",
+      "date": "01/14/2021",
+      "time": "10:48 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "737311",
+      "date": "01/14/2021",
+      "time": "10:49 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "737310",
+      "date": "01/14/2021",
+      "time": "10:50 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "736931",
+      "date": "01/14/2021",
+      "time": "10:50 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "737494",
+      "date": "01/15/2021",
+      "time": "11:09 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "737477",
+      "date": "01/15/2021",
+      "time": "11:10 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "736932",
+      "date": "01/15/2021",
+      "time": "11:11 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "736933",
+      "date": "01/19/2021",
+      "time": "07:00 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "737816",
+      "date": "01/19/2021",
+      "time": "03:31 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "736934",
+      "date": "01/19/2021",
+      "time": "03:31 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "737914",
+      "date": "01/20/2021",
+      "time": "10:07 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "736935",
+      "date": "01/20/2021",
+      "time": "10:07 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "738074",
+      "date": "01/21/2021",
+      "time": "10:51 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "736936",
+      "date": "01/21/2021",
+      "time": "10:52 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "738196",
+      "date": "01/22/2021",
+      "time": "10:01 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "736937",
+      "date": "01/22/2021",
+      "time": "10:02 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "737758",
+      "date": "01/25/2021",
+      "time": "11:07 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "737759",
+      "date": "01/26/2021",
+      "time": "11:18 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "738609",
+      "date": "01/26/2021",
+      "time": "12:48 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "738769",
+      "date": "01/27/2021",
+      "time": "09:39 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "738753",
+      "date": "01/27/2021",
+      "time": "09:40 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "737835",
+      "date": "01/27/2021",
+      "time": "09:40 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "737836",
+      "date": "01/28/2021",
+      "time": "02:21 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "737838",
+      "date": "01/29/2021",
+      "time": "09:53 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "739083",
+      "date": "01/29/2021",
+      "time": "09:54 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "737846",
+      "date": "02/01/2021",
+      "time": "07:55 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "738831",
+      "date": "02/01/2021",
+      "time": "09:55 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "739312",
+      "date": "02/01/2021",
+      "time": "09:57 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "739678",
+      "date": "02/03/2021",
+      "time": "01:45 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "738832",
+      "date": "02/03/2021",
+      "time": "01:45 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "739816",
+      "date": "02/04/2021",
+      "time": "10:45 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "737839",
+      "date": "02/04/2021",
+      "time": "10:45 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "739964",
+      "date": "02/05/2021",
+      "time": "09:41 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "740007",
+      "date": "02/05/2021",
+      "time": "01:50 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "737840",
+      "date": "02/05/2021",
+      "time": "01:51 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "740248",
+      "date": "02/08/2021",
+      "time": "01:55 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "740300",
+      "date": "02/08/2021",
+      "time": "03:28 PM",
+      "inspector": "Nathan  Gilmore"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "740444",
+      "date": "02/09/2021",
+      "time": "12:44 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "740461",
+      "date": "02/09/2021",
+      "time": "12:46 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "740446",
+      "date": "02/09/2021",
+      "time": "12:46 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "737842",
+      "date": "02/09/2021",
+      "time": "12:46 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "740579",
+      "date": "02/10/2021",
+      "time": "09:55 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "740578",
+      "date": "02/10/2021",
+      "time": "09:56 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "740577",
+      "date": "02/10/2021",
+      "time": "09:57 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "737844",
+      "date": "02/10/2021",
+      "time": "09:58 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "737845",
+      "date": "02/11/2021",
+      "time": "10:12 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "740778",
+      "date": "02/11/2021",
+      "time": "10:14 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "740779",
+      "date": "02/11/2021",
+      "time": "10:15 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "740304",
+      "date": "02/19/2021",
+      "time": "09:41 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "741635",
+      "date": "02/19/2021",
+      "time": "09:42 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "741634",
+      "date": "02/19/2021",
+      "time": "09:45 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "741765",
+      "date": "02/22/2021",
+      "time": "10:43 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "740305",
+      "date": "02/23/2021",
+      "time": "09:15 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "742038",
+      "date": "02/23/2021",
+      "time": "10:18 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "742039",
+      "date": "02/23/2021",
+      "time": "10:19 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "740306",
+      "date": "02/23/2021",
+      "time": "10:19 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "742189",
+      "date": "02/24/2021",
+      "time": "07:17 AM",
+      "inspector": "Nathan  Gilmore"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "740307",
+      "date": "02/24/2021",
+      "time": "04:03 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "742301",
+      "date": "02/24/2021",
+      "time": "04:04 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "742302",
+      "date": "02/24/2021",
+      "time": "04:04 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "742287",
+      "date": "02/24/2021",
+      "time": "04:04 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "742288",
+      "date": "02/24/2021",
+      "time": "04:04 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "742286",
+      "date": "02/24/2021",
+      "time": "04:04 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "742300",
+      "date": "02/24/2021",
+      "time": "04:05 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "742285",
+      "date": "02/24/2021",
+      "time": "04:06 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "742459",
+      "date": "02/25/2021",
+      "time": "03:30 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "742460",
+      "date": "02/25/2021",
+      "time": "03:34 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "742463",
+      "date": "02/25/2021",
+      "time": "03:36 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "740308",
+      "date": "02/25/2021",
+      "time": "03:36 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "742462",
+      "date": "02/25/2021",
+      "time": "03:36 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "742461",
+      "date": "02/25/2021",
+      "time": "03:36 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "742464",
+      "date": "02/25/2021",
+      "time": "03:36 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "740330",
+      "date": "02/26/2021",
+      "time": "10:23 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "742537",
+      "date": "02/26/2021",
+      "time": "10:23 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "742518",
+      "date": "02/26/2021",
+      "time": "10:24 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "742539",
+      "date": "02/26/2021",
+      "time": "10:24 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "742538",
+      "date": "02/26/2021",
+      "time": "10:24 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "742519",
+      "date": "02/26/2021",
+      "time": "10:24 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "742714",
+      "date": "03/01/2021",
+      "time": "10:19 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "742190",
+      "date": "03/01/2021",
+      "time": "10:20 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "742730",
+      "date": "03/01/2021",
+      "time": "10:21 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "742729",
+      "date": "03/01/2021",
+      "time": "10:21 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "742713",
+      "date": "03/01/2021",
+      "time": "10:21 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "742688",
+      "date": "03/01/2021",
+      "time": "10:21 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "742905",
+      "date": "03/02/2021",
+      "time": "10:25 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "742907",
+      "date": "03/02/2021",
+      "time": "10:25 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "742906",
+      "date": "03/02/2021",
+      "time": "10:25 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "742921",
+      "date": "03/02/2021",
+      "time": "10:25 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "742191",
+      "date": "03/02/2021",
+      "time": "10:26 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "742922",
+      "date": "03/02/2021",
+      "time": "10:27 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "743113",
+      "date": "03/03/2021",
+      "time": "10:36 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "743114",
+      "date": "03/03/2021",
+      "time": "10:36 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "743098",
+      "date": "03/03/2021",
+      "time": "10:36 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "743097",
+      "date": "03/03/2021",
+      "time": "10:36 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "742192",
+      "date": "03/03/2021",
+      "time": "10:36 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "743096",
+      "date": "03/03/2021",
+      "time": "10:38 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "743112",
+      "date": "03/03/2021",
+      "time": "10:39 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "743325",
+      "date": "03/04/2021",
+      "time": "11:57 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "743341",
+      "date": "03/04/2021",
+      "time": "11:59 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "742193",
+      "date": "03/04/2021",
+      "time": "11:59 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "742194",
+      "date": "03/05/2021",
+      "time": "03:55 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "743597",
+      "date": "03/05/2021",
+      "time": "03:56 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "743583",
+      "date": "03/05/2021",
+      "time": "03:56 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "743601",
+      "date": "03/05/2021",
+      "time": "04:00 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "743602",
+      "date": "03/05/2021",
+      "time": "04:02 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "742195",
+      "date": "03/08/2021",
+      "time": "12:06 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "744052",
+      "date": "03/09/2021",
+      "time": "02:42 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "744032",
+      "date": "03/09/2021",
+      "time": "02:42 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "742196",
+      "date": "03/09/2021",
+      "time": "02:42 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "744053",
+      "date": "03/09/2021",
+      "time": "02:42 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "744054",
+      "date": "03/09/2021",
+      "time": "02:43 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "744051",
+      "date": "03/09/2021",
+      "time": "02:46 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "744188",
+      "date": "03/10/2021",
+      "time": "02:50 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "744213",
+      "date": "03/10/2021",
+      "time": "02:51 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "742197",
+      "date": "03/10/2021",
+      "time": "02:51 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "744430",
+      "date": "03/11/2021",
+      "time": "05:38 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "742198",
+      "date": "03/11/2021",
+      "time": "05:38 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "744423",
+      "date": "03/11/2021",
+      "time": "05:39 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "744421",
+      "date": "03/11/2021",
+      "time": "05:43 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "744422",
+      "date": "03/11/2021",
+      "time": "05:43 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "744432",
+      "date": "03/11/2021",
+      "time": "05:43 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "744431",
+      "date": "03/11/2021",
+      "time": "05:43 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "742199",
+      "date": "03/12/2021",
+      "time": "04:35 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "744595",
+      "date": "03/12/2021",
+      "time": "05:29 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "744577",
+      "date": "03/12/2021",
+      "time": "05:31 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "744596",
+      "date": "03/12/2021",
+      "time": "05:32 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "744574",
+      "date": "03/12/2021",
+      "time": "05:33 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "744580",
+      "date": "03/12/2021",
+      "time": "05:33 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "744579",
+      "date": "03/12/2021",
+      "time": "05:33 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "744578",
+      "date": "03/12/2021",
+      "time": "05:33 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "742200",
+      "date": "03/15/2021",
+      "time": "10:03 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "744754",
+      "date": "03/15/2021",
+      "time": "10:06 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "744770",
+      "date": "03/15/2021",
+      "time": "10:06 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "742202",
+      "date": "03/15/2021",
+      "time": "10:39 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "745015",
+      "date": "03/16/2021",
+      "time": "04:00 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "745016",
+      "date": "03/16/2021",
+      "time": "04:01 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "742201",
+      "date": "03/16/2021",
+      "time": "04:05 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "744999",
+      "date": "03/16/2021",
+      "time": "04:05 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "745000",
+      "date": "03/16/2021",
+      "time": "04:05 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "745014",
+      "date": "03/16/2021",
+      "time": "04:05 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "745013",
+      "date": "03/16/2021",
+      "time": "04:05 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "745062",
+      "date": "03/17/2021",
+      "time": "09:46 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "745064",
+      "date": "03/17/2021",
+      "time": "09:46 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "745107",
+      "date": "03/17/2021",
+      "time": "09:46 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "745063",
+      "date": "03/17/2021",
+      "time": "09:46 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "744778",
+      "date": "03/17/2021",
+      "time": "09:48 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "745334",
+      "date": "03/18/2021",
+      "time": "02:28 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "745335",
+      "date": "03/18/2021",
+      "time": "02:28 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "745328",
+      "date": "03/18/2021",
+      "time": "02:28 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "745336",
+      "date": "03/18/2021",
+      "time": "02:28 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "745350",
+      "date": "03/18/2021",
+      "time": "02:29 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "745349",
+      "date": "03/18/2021",
+      "time": "02:30 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "742203",
+      "date": "03/18/2021",
+      "time": "02:31 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "742204",
+      "date": "03/19/2021",
+      "time": "10:36 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "745408",
+      "date": "03/19/2021",
+      "time": "10:37 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "745407",
+      "date": "03/19/2021",
+      "time": "10:40 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "745435",
+      "date": "03/19/2021",
+      "time": "10:41 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "745249",
+      "date": "03/22/2021",
+      "time": "02:49 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "745802",
+      "date": "03/23/2021",
+      "time": "09:41 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "745250",
+      "date": "03/23/2021",
+      "time": "09:41 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "745251",
+      "date": "03/24/2021",
+      "time": "10:02 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "745996",
+      "date": "03/24/2021",
+      "time": "10:02 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "745997",
+      "date": "03/24/2021",
+      "time": "10:04 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "746194",
+      "date": "03/25/2021",
+      "time": "10:05 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "746195",
+      "date": "03/25/2021",
+      "time": "10:08 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "745252",
+      "date": "03/25/2021",
+      "time": "10:08 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "746373",
+      "date": "03/26/2021",
+      "time": "02:04 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "745253",
+      "date": "03/26/2021",
+      "time": "02:04 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "746522",
+      "date": "03/29/2021",
+      "time": "10:24 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "746483",
+      "date": "03/29/2021",
+      "time": "10:24 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "745254",
+      "date": "03/29/2021",
+      "time": "10:26 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "746789",
+      "date": "03/30/2021",
+      "time": "01:50 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "746780",
+      "date": "03/30/2021",
+      "time": "01:51 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "745255",
+      "date": "03/30/2021",
+      "time": "01:52 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "747015",
+      "date": "03/31/2021",
+      "time": "03:52 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "747001",
+      "date": "03/31/2021",
+      "time": "03:53 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "747016",
+      "date": "03/31/2021",
+      "time": "03:54 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "745256",
+      "date": "03/31/2021",
+      "time": "03:56 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "747127",
+      "date": "04/01/2021",
+      "time": "02:42 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "747153",
+      "date": "04/01/2021",
+      "time": "02:44 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "747154",
+      "date": "04/01/2021",
+      "time": "02:44 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "745257",
+      "date": "04/01/2021",
+      "time": "02:45 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "747415",
+      "date": "04/02/2021",
+      "time": "07:21 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "747414",
+      "date": "04/02/2021",
+      "time": "07:22 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "747272",
+      "date": "04/05/2021",
+      "time": "10:42 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "747273",
+      "date": "04/06/2021",
+      "time": "04:05 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "748047",
+      "date": "04/07/2021",
+      "time": "09:44 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "748046",
+      "date": "04/07/2021",
+      "time": "09:46 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "747274",
+      "date": "04/07/2021",
+      "time": "09:47 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "747275",
+      "date": "04/08/2021",
+      "time": "04:06 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "748377",
+      "date": "04/08/2021",
+      "time": "04:10 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "748489",
+      "date": "04/09/2021",
+      "time": "02:11 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "747277",
+      "date": "04/09/2021",
+      "time": "02:14 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "748470",
+      "date": "04/09/2021",
+      "time": "02:15 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "747280",
+      "date": "04/12/2021",
+      "time": "03:21 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "748703",
+      "date": "04/12/2021",
+      "time": "03:21 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "748847",
+      "date": "04/13/2021",
+      "time": "03:46 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "747282",
+      "date": "04/13/2021",
+      "time": "03:47 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "747285",
+      "date": "04/14/2021",
+      "time": "03:02 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "749011",
+      "date": "04/14/2021",
+      "time": "03:04 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "749031",
+      "date": "04/14/2021",
+      "time": "03:04 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "747288",
+      "date": "04/15/2021",
+      "time": "10:55 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "749128",
+      "date": "04/15/2021",
+      "time": "10:56 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "749332",
+      "date": "04/16/2021",
+      "time": "08:07 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "747291",
+      "date": "04/16/2021",
+      "time": "08:09 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "749222",
+      "date": "04/19/2021",
+      "time": "11:56 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "749224",
+      "date": "04/20/2021",
+      "time": "09:40 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "749225",
+      "date": "04/21/2021",
+      "time": "10:07 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "749226",
+      "date": "04/22/2021",
+      "time": "11:56 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "749227",
+      "date": "04/23/2021",
+      "time": "10:45 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "749228",
+      "date": "04/26/2021",
+      "time": "10:26 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "750380",
+      "date": "04/26/2021",
+      "time": "10:27 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "750379",
+      "date": "04/26/2021",
+      "time": "10:27 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "750577",
+      "date": "04/27/2021",
+      "time": "09:43 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "750540",
+      "date": "04/27/2021",
+      "time": "09:43 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "750578",
+      "date": "04/27/2021",
+      "time": "09:43 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "749249",
+      "date": "04/27/2021",
+      "time": "09:44 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "750794",
+      "date": "04/30/2021",
+      "time": "09:59 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "751082",
+      "date": "04/30/2021",
+      "time": "10:00 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "750803",
+      "date": "05/03/2021",
+      "time": "01:46 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "750805",
+      "date": "05/04/2021",
+      "time": "09:37 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "750806",
+      "date": "05/05/2021",
+      "time": "09:12 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "750808",
+      "date": "05/06/2021",
+      "time": "08:55 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "752213",
+      "date": "05/07/2021",
+      "time": "07:07 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "752214",
+      "date": "05/07/2021",
+      "time": "07:07 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "752229",
+      "date": "05/07/2021",
+      "time": "07:07 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "752215",
+      "date": "05/07/2021",
+      "time": "07:07 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "750809",
+      "date": "05/07/2021",
+      "time": "07:08 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "750811",
+      "date": "05/10/2021",
+      "time": "03:04 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "752108",
+      "date": "05/11/2021",
+      "time": "09:54 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "752534",
+      "date": "05/11/2021",
+      "time": "09:55 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "752550",
+      "date": "05/11/2021",
+      "time": "09:56 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "752708",
+      "date": "05/12/2021",
+      "time": "09:29 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "752665",
+      "date": "05/12/2021",
+      "time": "09:30 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "752666",
+      "date": "05/12/2021",
+      "time": "09:30 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "752709",
+      "date": "05/12/2021",
+      "time": "09:30 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "752711",
+      "date": "05/12/2021",
+      "time": "09:30 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "752129",
+      "date": "05/12/2021",
+      "time": "09:30 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "752939",
+      "date": "05/13/2021",
+      "time": "02:09 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "752130",
+      "date": "05/13/2021",
+      "time": "02:10 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "753014",
+      "date": "05/14/2021",
+      "time": "09:30 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "753016",
+      "date": "05/14/2021",
+      "time": "09:30 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "753015",
+      "date": "05/14/2021",
+      "time": "09:30 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "753006",
+      "date": "05/14/2021",
+      "time": "09:30 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "752131",
+      "date": "05/14/2021",
+      "time": "09:30 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "752134",
+      "date": "05/17/2021",
+      "time": "12:52 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "752139",
+      "date": "05/18/2021",
+      "time": "08:57 AM",
+      "inspector": "Nathan  Gilmore"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "753426",
+      "date": "05/18/2021",
+      "time": "08:58 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "753446",
+      "date": "05/18/2021",
+      "time": "08:58 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "753428",
+      "date": "05/18/2021",
+      "time": "08:58 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "753427",
+      "date": "05/18/2021",
+      "time": "08:58 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "752135",
+      "date": "05/18/2021",
+      "time": "08:58 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "752137",
+      "date": "05/19/2021",
+      "time": "12:55 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "752138",
+      "date": "05/20/2021",
+      "time": "10:07 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "753448",
+      "date": "05/24/2021",
+      "time": "09:18 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "753470",
+      "date": "05/25/2021",
+      "time": "09:14 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "753471",
+      "date": "05/26/2021",
+      "time": "09:24 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "753472",
+      "date": "05/27/2021",
+      "time": "10:40 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "754701",
+      "date": "06/02/2021",
+      "time": "02:55 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "754702",
+      "date": "06/03/2021",
+      "time": "10:18 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "754705",
+      "date": "06/04/2021",
+      "time": "09:54 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "755154",
+      "date": "06/07/2021",
+      "time": "02:49 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "755156",
+      "date": "06/08/2021",
+      "time": "08:45 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "755158",
+      "date": "06/09/2021",
+      "time": "10:03 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "756452",
+      "date": "06/10/2021",
+      "time": "11:31 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "756470",
+      "date": "06/10/2021",
+      "time": "11:33 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "755160",
+      "date": "06/11/2021",
+      "time": "01:19 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "756685",
+      "date": "06/14/2021",
+      "time": "02:42 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "756855",
+      "date": "06/16/2021",
+      "time": "11:20 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "756856",
+      "date": "06/17/2021",
+      "time": "10:02 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "756857",
+      "date": "06/18/2021",
+      "time": "09:42 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "757750",
+      "date": "06/21/2021",
+      "time": "11:40 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "756858",
+      "date": "06/22/2021",
+      "time": "12:41 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "756859",
+      "date": "06/23/2021",
+      "time": "10:00 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "756860",
+      "date": "06/24/2021",
+      "time": "09:42 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "756861",
+      "date": "06/25/2021",
+      "time": "10:01 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "756863",
+      "date": "06/28/2021",
+      "time": "09:53 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "756864",
+      "date": "06/29/2021",
+      "time": "09:33 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "758847",
+      "date": "06/29/2021",
+      "time": "09:34 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "756865",
+      "date": "06/30/2021",
+      "time": "09:37 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "759000",
+      "date": "06/30/2021",
+      "time": "09:38 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "756866",
+      "date": "07/01/2021",
+      "time": "03:05 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "759431",
+      "date": "07/02/2021",
+      "time": "12:59 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "756867",
+      "date": "07/02/2021",
+      "time": "12:59 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "756869",
+      "date": "07/06/2021",
+      "time": "02:18 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "756870",
+      "date": "07/07/2021",
+      "time": "03:05 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "756871",
+      "date": "07/08/2021",
+      "time": "09:37 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "756872",
+      "date": "07/09/2021",
+      "time": "09:25 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "756874",
+      "date": "07/12/2021",
+      "time": "01:16 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "756875",
+      "date": "07/13/2021",
+      "time": "08:33 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "756876",
+      "date": "07/14/2021",
+      "time": "03:02 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "756877",
+      "date": "07/15/2021",
+      "time": "03:12 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "761092",
+      "date": "07/16/2021",
+      "time": "11:47 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "756878",
+      "date": "07/16/2021",
+      "time": "11:48 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "761093",
+      "date": "07/20/2021",
+      "time": "02:38 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "761546",
+      "date": "07/20/2021",
+      "time": "02:39 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "761547",
+      "date": "07/20/2021",
+      "time": "02:40 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "761095",
+      "date": "07/22/2021",
+      "time": "03:19 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "761096",
+      "date": "07/23/2021",
+      "time": "04:43 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "761097",
+      "date": "07/26/2021",
+      "time": "12:42 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "762313",
+      "date": "07/26/2021",
+      "time": "12:42 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "762632",
+      "date": "08/03/2021",
+      "time": "08:50 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "761791",
+      "date": "07/21/2021",
+      "time": "12:00 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "761094",
+      "date": "07/21/2021",
+      "time": "12:00 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "762459",
+      "date": "08/27/2021",
+      "time": "02:24 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "763693",
+      "date": "08/04/2021",
+      "time": "01:08 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "762919",
+      "date": "08/04/2021",
+      "time": "01:09 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "762950",
+      "date": "08/05/2021",
+      "time": "12:21 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "763839",
+      "date": "08/05/2021",
+      "time": "12:23 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "764423",
+      "date": "08/10/2021",
+      "time": "02:29 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "763684",
+      "date": "08/10/2021",
+      "time": "02:29 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "764424",
+      "date": "08/10/2021",
+      "time": "02:31 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "764440",
+      "date": "08/10/2021",
+      "time": "02:48 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "763688",
+      "date": "08/11/2021",
+      "time": "01:02 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "765337",
+      "date": "08/17/2021",
+      "time": "01:26 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "764750",
+      "date": "08/17/2021",
+      "time": "01:27 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "764753",
+      "date": "08/19/2021",
+      "time": "09:55 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "764803",
+      "date": "08/20/2021",
+      "time": "11:00 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "764804",
+      "date": "08/24/2021",
+      "time": "08:00 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "766363",
+      "date": "08/24/2021",
+      "time": "09:41 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "764805",
+      "date": "08/24/2021",
+      "time": "09:41 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "764806",
+      "date": "08/25/2021",
+      "time": "12:43 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "764808",
+      "date": "08/27/2021",
+      "time": "10:22 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "767216",
+      "date": "08/30/2021",
+      "time": "09:26 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "764829",
+      "date": "08/30/2021",
+      "time": "09:27 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "764830",
+      "date": "09/01/2021",
+      "time": "11:32 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "767759",
+      "date": "09/02/2021",
+      "time": "09:44 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "765897",
+      "date": "09/02/2021",
+      "time": "09:44 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "764807",
+      "date": "08/26/2021",
+      "time": "11:47 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "767941",
+      "date": "09/03/2021",
+      "time": "09:47 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "765898",
+      "date": "09/03/2021",
+      "time": "09:47 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "768247",
+      "date": "09/07/2021",
+      "time": "12:35 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4050 Gas Test",
+      "inspection_id": "768267",
+      "date": "09/07/2021",
+      "time": "12:35 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768268",
+      "date": "09/07/2021",
+      "time": "12:35 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "765899",
+      "date": "09/07/2021",
+      "time": "12:35 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768300",
+      "date": "09/07/2021",
+      "time": "01:15 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768442",
+      "date": "09/08/2021",
+      "time": "09:47 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "768443",
+      "date": "09/08/2021",
+      "time": "09:48 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "765901",
+      "date": "09/08/2021",
+      "time": "09:48 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "765903",
+      "date": "09/09/2021",
+      "time": "09:29 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "765904",
+      "date": "09/10/2021",
+      "time": "09:42 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768872",
+      "date": "09/10/2021",
+      "time": "09:43 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "767590",
+      "date": "09/13/2021",
+      "time": "10:04 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "769293",
+      "date": "09/14/2021",
+      "time": "03:08 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768035",
+      "date": "09/14/2021",
+      "time": "03:08 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "769464",
+      "date": "09/15/2021",
+      "time": "05:46 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "769465",
+      "date": "09/15/2021",
+      "time": "05:47 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768036",
+      "date": "09/15/2021",
+      "time": "05:48 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "769552",
+      "date": "09/16/2021",
+      "time": "10:37 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768037",
+      "date": "09/16/2021",
+      "time": "10:39 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "769528",
+      "date": "09/16/2021",
+      "time": "01:35 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768040",
+      "date": "09/17/2021",
+      "time": "09:36 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768041",
+      "date": "09/20/2021",
+      "time": "10:48 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768043",
+      "date": "09/21/2021",
+      "time": "09:53 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768045",
+      "date": "09/22/2021",
+      "time": "02:53 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768046",
+      "date": "09/23/2021",
+      "time": "09:12 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768047",
+      "date": "09/24/2021",
+      "time": "09:33 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768048",
+      "date": "09/27/2021",
+      "time": "09:38 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768069",
+      "date": "09/28/2021",
+      "time": "09:46 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768070",
+      "date": "09/29/2021",
+      "time": "09:30 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768071",
+      "date": "09/30/2021",
+      "time": "09:41 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768072",
+      "date": "10/01/2021",
+      "time": "09:18 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768073",
+      "date": "10/04/2021",
+      "time": "10:45 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768074",
+      "date": "10/05/2021",
+      "time": "03:22 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768075",
+      "date": "10/06/2021",
+      "time": "11:50 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768076",
+      "date": "10/07/2021",
+      "time": "09:23 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "772566",
+      "date": "10/08/2021",
+      "time": "02:47 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768077",
+      "date": "10/08/2021",
+      "time": "02:47 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768078",
+      "date": "10/12/2021",
+      "time": "09:37 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768081",
+      "date": "10/15/2021",
+      "time": "11:48 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "771753",
+      "date": "10/18/2021",
+      "time": "10:23 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768079",
+      "date": "10/26/2021",
+      "time": "01:27 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "768080",
+      "date": "10/14/2021",
+      "time": "01:28 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "771754",
+      "date": "10/19/2021",
+      "time": "01:29 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "771756",
+      "date": "10/20/2021",
+      "time": "01:30 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "771761",
+      "date": "10/21/2021",
+      "time": "01:32 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "771763",
+      "date": "10/22/2021",
+      "time": "01:33 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "771791",
+      "date": "10/25/2021",
+      "time": "01:35 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "771792",
+      "date": "10/26/2021",
+      "time": "01:36 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "771794",
+      "date": "10/27/2021",
+      "time": "02:56 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "771799",
+      "date": "11/01/2021",
+      "time": "12:26 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "776438",
+      "date": "11/08/2021",
+      "time": "12:46 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "775126",
+      "date": "11/09/2021",
+      "time": "09:13 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2030 Temporary Power",
+      "inspection_id": "775130",
+      "date": "11/15/2021",
+      "time": "12:42 PM",
+      "inspector": "Eduardo Franco"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "775132",
+      "date": "11/17/2021",
+      "time": "10:04 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "775133",
+      "date": "11/18/2021",
+      "time": "09:49 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "775134",
+      "date": "11/19/2021",
+      "time": "03:00 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "775135",
+      "date": "11/22/2021",
+      "time": "09:12 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "775136",
+      "date": "11/23/2021",
+      "time": "04:59 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "775137",
+      "date": "11/24/2021",
+      "time": "01:17 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "775139",
+      "date": "11/30/2021",
+      "time": "02:35 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "778342",
+      "date": "12/01/2021",
+      "time": "02:58 PM",
+      "inspector": "Eduardo Franco"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "778344",
+      "date": "12/02/2021",
+      "time": "01:53 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "778375",
+      "date": "12/03/2021",
+      "time": "02:49 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "778376",
+      "date": "12/06/2021",
+      "time": "02:35 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "780130",
+      "date": "12/07/2021",
+      "time": "11:09 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "779276",
+      "date": "12/07/2021",
+      "time": "02:10 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "780171",
+      "date": "12/07/2021",
+      "time": "02:12 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "779279",
+      "date": "12/10/2021",
+      "time": "09:58 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "779280",
+      "date": "12/13/2021",
+      "time": "11:12 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "779404",
+      "date": "12/14/2021",
+      "time": "02:06 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "779278",
+      "date": "12/09/2021",
+      "time": "02:08 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "779277",
+      "date": "12/08/2021",
+      "time": "02:10 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "779405",
+      "date": "12/15/2021",
+      "time": "02:14 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "779409",
+      "date": "12/16/2021",
+      "time": "12:40 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "780827",
+      "date": "12/17/2021",
+      "time": "09:50 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "781521",
+      "date": "12/20/2021",
+      "time": "09:31 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "781754",
+      "date": "12/21/2021",
+      "time": "02:36 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "781755",
+      "date": "12/22/2021",
+      "time": "09:30 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "781757",
+      "date": "12/23/2021",
+      "time": "09:53 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "781758",
+      "date": "12/27/2021",
+      "time": "01:02 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "781761",
+      "date": "12/28/2021",
+      "time": "09:57 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "781762",
+      "date": "12/29/2021",
+      "time": "09:52 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "781765",
+      "date": "12/30/2021",
+      "time": "09:15 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "781767",
+      "date": "01/03/2022",
+      "time": "09:42 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "782609",
+      "date": "01/04/2022",
+      "time": "10:23 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "782610",
+      "date": "01/05/2022",
+      "time": "04:34 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "782611",
+      "date": "01/06/2022",
+      "time": "11:56 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "782612",
+      "date": "01/07/2022",
+      "time": "09:34 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "783538",
+      "date": "01/12/2022",
+      "time": "10:24 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "783573",
+      "date": "01/13/2022",
+      "time": "09:42 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "790177",
+      "date": "03/08/2022",
+      "time": "03:42 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "772297",
+      "date": "04/13/2022",
+      "time": "08:52 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "795232",
+      "date": "04/13/2022",
+      "time": "08:52 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "796522",
+      "date": "04/20/2022",
+      "time": "02:48 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "796524",
+      "date": "04/20/2022",
+      "time": "02:48 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "796505",
+      "date": "04/20/2022",
+      "time": "02:48 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "796152",
+      "date": "04/20/2022",
+      "time": "02:48 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "796523",
+      "date": "04/20/2022",
+      "time": "02:48 PM",
+      "inspector": "Jeff Jensen"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 116,
+    "unique_inspection_count": 576,
+    "page_content_length": 3475147,
+    "extraction_duration_seconds": 285.34
+  }
+}

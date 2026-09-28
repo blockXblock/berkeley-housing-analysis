@@ -1,0 +1,148 @@
+{
+  "permit_number": "B2025-01610",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00EQ4&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T06:26:48.457785",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1084518",
+      "date": "05/13/2026",
+      "time": "10:17 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "1084519",
+      "date": "05/13/2026",
+      "time": "10:21 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1088670",
+      "date": "05/21/2026",
+      "time": "03:25 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "1091427",
+      "date": "05/21/2026",
+      "time": "03:26 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "1091544",
+      "date": "05/21/2026",
+      "time": "03:27 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "1088671",
+      "date": "05/21/2026",
+      "time": "03:28 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1118060",
+      "date": "07/06/2026",
+      "time": "03:37 PM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1116580",
+      "date": "07/06/2026",
+      "time": "03:36 PM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "1118061",
+      "date": "07/06/2026",
+      "time": "03:29 PM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "1116699",
+      "date": "07/06/2026",
+      "time": "03:36 PM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1210 Roof in Progress",
+      "inspection_id": "1126379",
+      "date": "07/20/2026",
+      "time": "08:49 AM",
+      "inspector": "Zafar  Shakeel"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1144145",
+      "date": "08/21/2026",
+      "time": "12:26 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1144146",
+      "date": "08/21/2026",
+      "time": "12:34 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1145751",
+      "date": "08/21/2026",
+      "time": "01:39 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "1146102",
+      "date": "08/21/2026",
+      "time": "01:39 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "1145539",
+      "date": "08/23/2026",
+      "time": "06:02 PM",
+      "inspector": "Zafar  Shakeel"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 4,
+    "unique_inspection_count": 16,
+    "page_content_length": 600115,
+    "extraction_duration_seconds": 36.36
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "permit_number": "B2021-01954",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB21&capID2=00000&capID3=00CJB&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T01:49:33.675773",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "785791",
+      "date": "01/31/2022",
+      "time": "11:52 AM",
+      "inspector": "Gilbert Gonzales"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "785790",
+      "date": "01/31/2022",
+      "time": "11:52 AM",
+      "inspector": "Gilbert Gonzales"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "785789",
+      "date": "01/31/2022",
+      "time": "11:52 AM",
+      "inspector": "Gilbert Gonzales"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "785748",
+      "date": "01/31/2022",
+      "time": "11:52 AM",
+      "inspector": "Gilbert Gonzales"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "786195",
+      "date": "02/02/2022",
+      "time": "11:59 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "786198",
+      "date": "02/02/2022",
+      "time": "11:59 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "786197",
+      "date": "02/02/2022",
+      "time": "11:59 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "786196",
+      "date": "02/02/2022",
+      "time": "11:59 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "786685",
+      "date": "02/07/2022",
+      "time": "03:00 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "786687",
+      "date": "02/07/2022",
+      "time": "03:00 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "786688",
+      "date": "02/07/2022",
+      "time": "03:00 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "786686",
+      "date": "02/07/2022",
+      "time": "03:00 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "787091",
+      "date": "02/08/2022",
+      "time": "10:56 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "787092",
+      "date": "02/08/2022",
+      "time": "10:56 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "787094",
+      "date": "02/08/2022",
+      "time": "10:56 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "787093",
+      "date": "02/08/2022",
+      "time": "10:56 AM",
+      "inspector": "J"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 4,
+    "unique_inspection_count": 16,
+    "page_content_length": 467378,
+    "extraction_duration_seconds": 35.15
+  }
+}

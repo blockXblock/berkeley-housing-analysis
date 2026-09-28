@@ -1,0 +1,300 @@
+{
+  "permit_number": "B2020-01569",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB20&capID2=00000&capID3=00CT9&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T00:34:17.700564",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "715743",
+      "date": "07/21/2020",
+      "time": "12:23 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "716492",
+      "date": "07/29/2020",
+      "time": "10:19 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2010 UFER",
+      "inspection_id": "716491",
+      "date": "07/29/2020",
+      "time": "10:19 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "716493",
+      "date": "07/29/2020",
+      "time": "10:19 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "719802",
+      "date": "08/21/2020",
+      "time": "01:28 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "719801",
+      "date": "08/21/2020",
+      "time": "01:29 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "719803",
+      "date": "08/24/2020",
+      "time": "11:52 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "722062",
+      "date": "09/09/2020",
+      "time": "07:51 AM",
+      "inspector": "Dan McDunn"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "722064",
+      "date": "09/09/2020",
+      "time": "07:52 AM",
+      "inspector": "Dan McDunn"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "722059",
+      "date": "09/11/2020",
+      "time": "11:00 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "722057",
+      "date": "09/11/2020",
+      "time": "11:00 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "722060",
+      "date": "09/11/2020",
+      "time": "11:01 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "722054",
+      "date": "09/11/2020",
+      "time": "11:01 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "722061",
+      "date": "09/11/2020",
+      "time": "03:46 PM",
+      "inspector": "Dan McDunn"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "723259",
+      "date": "09/17/2020",
+      "time": "12:40 PM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "723278",
+      "date": "09/17/2020",
+      "time": "12:41 PM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "723279",
+      "date": "09/17/2020",
+      "time": "12:41 PM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "722091",
+      "date": "09/17/2020",
+      "time": "12:41 PM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "722092",
+      "date": "09/18/2020",
+      "time": "07:02 AM",
+      "inspector": "Dan McDunn"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "723353",
+      "date": "09/22/2020",
+      "time": "10:12 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Public Works 6020 Public Works Sewer Lateral (PSL)",
+      "inspection_id": "725008",
+      "date": "09/30/2020",
+      "time": "03:23 PM",
+      "inspector": "DR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "725496",
+      "date": "10/06/2020",
+      "time": "10:48 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "725494",
+      "date": "10/06/2020",
+      "time": "10:48 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "725495",
+      "date": "10/06/2020",
+      "time": "10:48 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "725736",
+      "date": "10/07/2020",
+      "time": "08:48 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "725737",
+      "date": "10/07/2020",
+      "time": "08:49 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "726374",
+      "date": "10/14/2020",
+      "time": "12:31 PM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "732033",
+      "date": "12/03/2020",
+      "time": "12:13 PM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "732036",
+      "date": "12/03/2020",
+      "time": "12:59 PM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "732034",
+      "date": "12/03/2020",
+      "time": "01:00 PM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "732035",
+      "date": "12/03/2020",
+      "time": "01:00 PM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "732710",
+      "date": "12/09/2020",
+      "time": "11:38 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "732711",
+      "date": "12/09/2020",
+      "time": "11:39 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "732712",
+      "date": "12/09/2020",
+      "time": "11:39 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "732713",
+      "date": "12/09/2020",
+      "time": "11:39 AM",
+      "inspector": "DL"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 7,
+    "unique_inspection_count": 35,
+    "page_content_length": 586608,
+    "extraction_duration_seconds": 37.04
+  }
+}

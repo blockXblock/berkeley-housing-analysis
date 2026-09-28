@@ -1,0 +1,412 @@
+{
+  "permit_number": "B2019-04677",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB19&capID2=00000&capID3=00IR2&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T23:55:57.234096",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "702070",
+      "date": "02/26/2020",
+      "time": "12:40 PM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "702071",
+      "date": "02/26/2020",
+      "time": "12:40 PM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "702202",
+      "date": "02/26/2020",
+      "time": "01:11 PM",
+      "inspector": "Charles Clewis"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "702932",
+      "date": "03/03/2020",
+      "time": "10:04 AM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "708515",
+      "date": "05/22/2020",
+      "time": "03:11 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "708532",
+      "date": "05/22/2020",
+      "time": "03:14 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "709037",
+      "date": "06/03/2020",
+      "time": "10:26 AM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "709038",
+      "date": "06/03/2020",
+      "time": "10:29 AM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "709036",
+      "date": "06/03/2020",
+      "time": "10:29 AM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "710074",
+      "date": "06/03/2020",
+      "time": "10:29 AM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "710075",
+      "date": "06/03/2020",
+      "time": "10:27 AM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "710360",
+      "date": "06/04/2020",
+      "time": "04:30 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "710348",
+      "date": "06/04/2020",
+      "time": "04:30 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "712176",
+      "date": "06/25/2020",
+      "time": "05:42 PM",
+      "inspector": "Charles Clewis"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "712804",
+      "date": "06/25/2020",
+      "time": "05:42 PM",
+      "inspector": "Charles Clewis"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "712809",
+      "date": "06/29/2020",
+      "time": "11:21 AM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "712665",
+      "date": "07/05/2020",
+      "time": "09:07 PM",
+      "inspector": "Charles Clewis"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "712664",
+      "date": "07/05/2020",
+      "time": "09:07 PM",
+      "inspector": "Charles Clewis"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "713792",
+      "date": "07/08/2020",
+      "time": "07:17 PM",
+      "inspector": "Charles Clewis"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "713791",
+      "date": "07/13/2020",
+      "time": "01:50 AM",
+      "inspector": "Charles Clewis"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "714670",
+      "date": "07/16/2020",
+      "time": "05:55 PM",
+      "inspector": "Charles Clewis"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "714240",
+      "date": "07/16/2020",
+      "time": "05:55 PM",
+      "inspector": "Charles Clewis"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "715436",
+      "date": "07/21/2020",
+      "time": "01:44 PM",
+      "inspector": "Charles Clewis"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "715435",
+      "date": "07/21/2020",
+      "time": "01:44 PM",
+      "inspector": "Charles Clewis"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "715907",
+      "date": "07/23/2020",
+      "time": "09:14 PM",
+      "inspector": "Charles Clewis"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "715906",
+      "date": "07/23/2020",
+      "time": "09:15 PM",
+      "inspector": "Charles Clewis"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "716277",
+      "date": "07/27/2020",
+      "time": "06:11 PM",
+      "inspector": "Charles Clewis"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "716276",
+      "date": "07/27/2020",
+      "time": "06:11 PM",
+      "inspector": "Charles Clewis"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "716678",
+      "date": "07/29/2020",
+      "time": "10:44 AM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "716677",
+      "date": "07/29/2020",
+      "time": "10:45 AM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "717051",
+      "date": "07/30/2020",
+      "time": "11:55 AM",
+      "inspector": "Charles Clewis"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "717136",
+      "date": "08/04/2020",
+      "time": "11:43 PM",
+      "inspector": "Charles Clewis"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "717747",
+      "date": "08/07/2020",
+      "time": "12:35 PM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "729199",
+      "date": "11/04/2020",
+      "time": "01:39 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "729200",
+      "date": "11/04/2020",
+      "time": "01:40 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "729589",
+      "date": "11/10/2020",
+      "time": "10:10 AM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "730219",
+      "date": "11/17/2020",
+      "time": "04:52 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "731332",
+      "date": "11/26/2020",
+      "time": "09:41 PM",
+      "inspector": "Charles Clewis"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "731831",
+      "date": "11/30/2020",
+      "time": "04:28 PM",
+      "inspector": "Charles Clewis"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "732139",
+      "date": "12/07/2020",
+      "time": "04:04 PM",
+      "inspector": "Eli Chessen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "736986",
+      "date": "01/13/2021",
+      "time": "04:21 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "737286",
+      "date": "01/15/2021",
+      "time": "02:11 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "737547",
+      "date": "01/20/2021",
+      "time": "01:17 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "752460",
+      "date": "05/12/2021",
+      "time": "02:50 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "752462",
+      "date": "05/12/2021",
+      "time": "02:50 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "752461",
+      "date": "05/12/2021",
+      "time": "02:50 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "754539",
+      "date": "06/02/2021",
+      "time": "11:59 AM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "754540",
+      "date": "06/02/2021",
+      "time": "11:59 AM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "754538",
+      "date": "06/02/2021",
+      "time": "11:59 AM",
+      "inspector": "SM"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 10,
+    "unique_inspection_count": 49,
+    "page_content_length": 633052,
+    "extraction_duration_seconds": 39.65
+  }
+}

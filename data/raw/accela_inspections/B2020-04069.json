@@ -1,0 +1,52 @@
+{
+  "permit_number": "B2020-04069",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB20&capID2=00000&capID3=00HIK&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T09:26:29.692842",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1004 Setbacks/Survey",
+      "inspection_id": "746134",
+      "date": "03/29/2021",
+      "time": "10:50 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1005 Demolition",
+      "inspection_id": "746135",
+      "date": "03/29/2021",
+      "time": "10:51 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "746137",
+      "date": "03/30/2021",
+      "time": "02:45 PM",
+      "inspector": "David Montes"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "746138",
+      "date": "03/31/2021",
+      "time": "10:52 AM",
+      "inspector": "David Montes"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 1,
+    "unique_inspection_count": 4,
+    "page_content_length": 386457,
+    "extraction_duration_seconds": 33.69
+  }
+}

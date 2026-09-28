@@ -1,0 +1,68 @@
+{
+  "permit_number": "B2021-02352",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB21&capID2=00000&capID3=00EWL&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T09:34:13.792083",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "835507",
+      "date": "02/03/2023",
+      "time": "12:00 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2200 Electrical Solar Photovoltaic",
+      "inspection_id": "835508",
+      "date": "02/03/2023",
+      "time": "12:00 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2200 Electrical Solar Photovoltaic",
+      "inspection_id": "837166",
+      "date": "02/08/2023",
+      "time": "10:11 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "837165",
+      "date": "02/08/2023",
+      "time": "10:11 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "837208",
+      "date": "02/21/2023",
+      "time": "09:28 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2200 Electrical Solar Photovoltaic",
+      "inspection_id": "837207",
+      "date": "02/21/2023",
+      "time": "09:29 AM",
+      "inspector": "Leo Bautista"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 2,
+    "unique_inspection_count": 6,
+    "page_content_length": 372978,
+    "extraction_duration_seconds": 34.03
+  }
+}

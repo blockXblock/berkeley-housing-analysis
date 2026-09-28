@@ -1,0 +1,108 @@
+{
+  "permit_number": "B2024-01121",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB24&capID2=00000&capID3=00A6V&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T07:48:21.219092",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Building 1004 Setbacks/Survey",
+      "inspection_id": "925856",
+      "date": "09/30/2024",
+      "time": "10:18 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "926443",
+      "date": "09/30/2024",
+      "time": "03:11 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "925858",
+      "date": "10/01/2024",
+      "time": "08:47 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "928566",
+      "date": "10/16/2024",
+      "time": "09:29 AM",
+      "inspector": "DYNAMIC CONSTRUCTION"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1220 Site Drainage",
+      "inspection_id": "928565",
+      "date": "10/16/2024",
+      "time": "09:29 AM",
+      "inspector": "DYNAMIC CONSTRUCTION"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "929786",
+      "date": "10/25/2024",
+      "time": "10:40 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "929784",
+      "date": "10/25/2024",
+      "time": "10:41 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "965693",
+      "date": "08/12/2025",
+      "time": "12:00 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "966212",
+      "date": "08/12/2025",
+      "time": "12:00 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "966213",
+      "date": "08/12/2025",
+      "time": "12:00 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "966670",
+      "date": "08/15/2025",
+      "time": "04:32 PM",
+      "inspector": "J"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 3,
+    "unique_inspection_count": 11,
+    "page_content_length": 462150,
+    "extraction_duration_seconds": 35.65
+  }
+}

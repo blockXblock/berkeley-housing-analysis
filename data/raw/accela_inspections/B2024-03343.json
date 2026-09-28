@@ -1,0 +1,76 @@
+{
+  "permit_number": "B2024-03343",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB24&capID2=00000&capID3=00JGP&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T07:57:21.485121",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1004 Setbacks/Survey",
+      "inspection_id": "951422",
+      "date": "04/14/2025",
+      "time": "04:21 PM",
+      "inspector": "Katherine Dunham"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "951423",
+      "date": "04/14/2025",
+      "time": "04:21 PM",
+      "inspector": "Katherine Dunham"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "951424",
+      "date": "04/17/2025",
+      "time": "01:45 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1004 Setbacks/Survey",
+      "inspection_id": "951425",
+      "date": "04/17/2025",
+      "time": "01:45 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "951426",
+      "date": "04/17/2025",
+      "time": "01:45 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "951427",
+      "date": "04/17/2025",
+      "time": "01:45 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1074259",
+      "date": "04/23/2026",
+      "time": "12:00 AM",
+      "inspector": "SR"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 2,
+    "unique_inspection_count": 7,
+    "page_content_length": 469268,
+    "extraction_duration_seconds": 34.26
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "permit_number": "B2021-04178",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB21&capID2=00000&capID3=00IWY&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T02:13:27.078044",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "796854",
+      "date": "04/27/2022",
+      "time": "01:05 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "797610",
+      "date": "05/05/2022",
+      "time": "09:57 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "801573",
+      "date": "05/30/2022",
+      "time": "09:31 AM",
+      "inspector": "Kavitha Shankar"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "801569",
+      "date": "05/30/2022",
+      "time": "09:32 AM",
+      "inspector": "Kavitha Shankar"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "801571",
+      "date": "05/30/2022",
+      "time": "09:32 AM",
+      "inspector": "Kavitha Shankar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "801581",
+      "date": "06/02/2022",
+      "time": "04:21 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "802418",
+      "date": "06/06/2022",
+      "time": "10:42 AM",
+      "inspector": "Kavitha Shankar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "802980",
+      "date": "06/08/2022",
+      "time": "10:57 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "802623",
+      "date": "06/09/2022",
+      "time": "10:07 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "803528",
+      "date": "06/15/2022",
+      "time": "10:44 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "806573",
+      "date": "07/07/2022",
+      "time": "10:52 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "813697",
+      "date": "08/23/2022",
+      "time": "11:08 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4050 Gas Test",
+      "inspection_id": "813698",
+      "date": "08/23/2022",
+      "time": "11:08 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4060 Gas Meter Release",
+      "inspection_id": "813699",
+      "date": "08/23/2022",
+      "time": "11:08 AM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "814216",
+      "date": "08/27/2022",
+      "time": "11:13 PM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4060 Gas Meter Release",
+      "inspection_id": "814215",
+      "date": "08/30/2022",
+      "time": "10:21 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4060 Gas Meter Release",
+      "inspection_id": "814214",
+      "date": "08/30/2022",
+      "time": "10:50 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "818593",
+      "date": "09/28/2022",
+      "time": "11:09 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "818594",
+      "date": "09/28/2022",
+      "time": "11:09 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4060 Gas Meter Release",
+      "inspection_id": "818598",
+      "date": "09/28/2022",
+      "time": "11:09 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "818597",
+      "date": "09/28/2022",
+      "time": "11:09 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "818595",
+      "date": "09/28/2022",
+      "time": "11:09 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Fire 7000 Fire Final Inspection",
+      "inspection_id": "818596",
+      "date": "09/28/2022",
+      "time": "11:28 AM",
+      "inspector": "FM"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 5,
+    "unique_inspection_count": 23,
+    "page_content_length": 517032,
+    "extraction_duration_seconds": 34.35
+  }
+}

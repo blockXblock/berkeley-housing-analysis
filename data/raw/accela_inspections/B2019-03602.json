@@ -1,0 +1,36 @@
+{
+  "permit_number": "B2019-03602",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB19&capID2=00000&capID3=00GND&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T09:08:38.584815",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Building 1005 Demolition",
+      "inspection_id": "698491",
+      "date": "01/29/2020",
+      "time": "01:14 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "706589",
+      "date": "04/29/2020",
+      "time": "05:22 PM",
+      "inspector": "Jason McDermott"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 1,
+    "unique_inspection_count": 2,
+    "page_content_length": 367687,
+    "extraction_duration_seconds": 34.03
+  }
+}

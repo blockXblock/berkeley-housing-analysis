@@ -1,0 +1,138 @@
+{
+  "permit_number": "B2017-02860",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB17&capID2=00000&capID3=00EI0&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T21:59:58.552327",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "617914",
+      "date": "05/01/2018",
+      "time": "12:14 PM",
+      "inspector": "GB"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "617917",
+      "date": "05/01/2018",
+      "time": "12:14 PM",
+      "inspector": "GB"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "617915",
+      "date": "05/01/2018",
+      "time": "12:14 PM",
+      "inspector": "GB"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "617916",
+      "date": "05/01/2018",
+      "time": "12:14 PM",
+      "inspector": "GB"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "622866",
+      "date": "06/13/2018",
+      "time": "02:04 PM",
+      "inspector": "Robert Hall"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "622865",
+      "date": "06/13/2018",
+      "time": "02:05 PM",
+      "inspector": "Robert Hall"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "624294",
+      "date": "06/18/2018",
+      "time": "01:10 PM",
+      "inspector": "Robert Hall"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "627352",
+      "date": "07/11/2018",
+      "time": "12:32 PM",
+      "inspector": "Robert Hall"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "653052",
+      "date": "02/05/2019",
+      "time": "12:13 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "653053",
+      "date": "02/05/2019",
+      "time": "12:13 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "653054",
+      "date": "02/05/2019",
+      "time": "12:13 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "653051",
+      "date": "02/05/2019",
+      "time": "12:13 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "656032",
+      "date": "03/05/2019",
+      "time": "12:12 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "656033",
+      "date": "03/05/2019",
+      "time": "12:12 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "656034",
+      "date": "03/05/2019",
+      "time": "12:12 PM",
+      "inspector": "KT"
+    }
+  ],
+  "errors": [],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 3,
+    "unique_inspection_count": 15,
+    "page_content_length": 471526,
+    "extraction_duration_seconds": 13.85
+  }
+}

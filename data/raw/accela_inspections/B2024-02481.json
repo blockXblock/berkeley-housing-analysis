@@ -1,0 +1,244 @@
+{
+  "permit_number": "B2024-02481",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB24&capID2=00000&capID3=00GOQ&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T19:51:36.158231",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "953355",
+      "date": "05/01/2025",
+      "time": "01:03 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "953938",
+      "date": "05/07/2025",
+      "time": "01:47 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "958149",
+      "date": "06/12/2025",
+      "time": "02:06 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "958765",
+      "date": "06/12/2025",
+      "time": "02:06 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "958764",
+      "date": "06/12/2025",
+      "time": "02:06 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "958147",
+      "date": "06/12/2025",
+      "time": "02:06 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "959219",
+      "date": "06/23/2025",
+      "time": "07:47 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "965368",
+      "date": "08/08/2025",
+      "time": "03:40 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "965369",
+      "date": "08/08/2025",
+      "time": "03:42 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "965370",
+      "date": "08/08/2025",
+      "time": "03:42 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "965373",
+      "date": "08/08/2025",
+      "time": "03:42 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "966406",
+      "date": "08/20/2025",
+      "time": "09:58 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "968224",
+      "date": "09/05/2025",
+      "time": "11:11 AM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "968225",
+      "date": "09/05/2025",
+      "time": "11:12 AM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "968226",
+      "date": "09/05/2025",
+      "time": "11:17 AM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "971030",
+      "date": "10/03/2025",
+      "time": "09:31 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "971029",
+      "date": "10/03/2025",
+      "time": "09:32 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "971144",
+      "date": "10/06/2025",
+      "time": "10:55 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "971673",
+      "date": "10/14/2025",
+      "time": "02:09 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "1029503",
+      "date": "02/02/2026",
+      "time": "02:18 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved with Conditions",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1073632",
+      "date": "04/24/2026",
+      "time": "10:49 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved with Conditions",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "1073633",
+      "date": "04/24/2026",
+      "time": "10:49 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved with Conditions",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "1073634",
+      "date": "04/24/2026",
+      "time": "10:49 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved with Conditions",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "1073635",
+      "date": "04/24/2026",
+      "time": "10:49 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "1076043",
+      "date": "04/27/2026",
+      "time": "02:56 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "1076044",
+      "date": "04/27/2026",
+      "time": "02:56 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "1076667",
+      "date": "04/27/2026",
+      "time": "02:56 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1076666",
+      "date": "04/27/2026",
+      "time": "02:56 PM",
+      "inspector": "Lorenzo Aguilar"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 6,
+    "unique_inspection_count": 28,
+    "page_content_length": 675088,
+    "extraction_duration_seconds": 37.52
+  }
+}

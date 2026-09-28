@@ -1,0 +1,100 @@
+{
+  "permit_number": "B2026-01609",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB26&capID2=00000&capID3=00ECJ&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T07:11:21.949506",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1109188",
+      "date": "06/23/2026",
+      "time": "01:05 PM",
+      "inspector": "Lesley  McClurg"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "1134505",
+      "date": "08/04/2026",
+      "time": "12:51 PM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1140100",
+      "date": "08/13/2026",
+      "time": "08:04 AM",
+      "inspector": "Lesley  McClurg"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "1140101",
+      "date": "08/13/2026",
+      "time": "08:04 AM",
+      "inspector": "Lesley  McClurg"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "1140102",
+      "date": "08/13/2026",
+      "time": "08:04 AM",
+      "inspector": "Lesley  McClurg"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "1140103",
+      "date": "08/13/2026",
+      "time": "08:04 AM",
+      "inspector": "Lesley  McClurg"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1150459",
+      "date": "09/01/2026",
+      "time": "08:48 AM",
+      "inspector": "SF"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "1150460",
+      "date": "09/01/2026",
+      "time": "08:49 AM",
+      "inspector": "SF"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "1150461",
+      "date": "09/01/2026",
+      "time": "08:50 AM",
+      "inspector": "SF"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "1150462",
+      "date": "09/01/2026",
+      "time": "08:50 AM",
+      "inspector": "SF"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 2,
+    "unique_inspection_count": 10,
+    "page_content_length": 449702,
+    "extraction_duration_seconds": 33.58
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "permit_number": "B2017-03316",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB17&capID2=00000&capID3=00FG3&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T22:02:40.497561",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "599346",
+      "date": "10/20/2017",
+      "time": "10:56 AM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Approved with Conditions",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "599085",
+      "date": "10/20/2017",
+      "time": "11:02 AM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "601861",
+      "date": "11/15/2017",
+      "time": "12:02 AM",
+      "inspector": "Bradley Rudolph"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "601560",
+      "date": "11/15/2017",
+      "time": "12:02 AM",
+      "inspector": "Bradley Rudolph"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "601561",
+      "date": "11/15/2017",
+      "time": "12:02 AM",
+      "inspector": "Bradley Rudolph"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "601723",
+      "date": "11/15/2017",
+      "time": "03:43 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "603201",
+      "date": "11/29/2017",
+      "time": "03:51 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "602978",
+      "date": "11/29/2017",
+      "time": "03:51 PM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved with Conditions",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "633233",
+      "date": "08/29/2018",
+      "time": "05:28 PM",
+      "inspector": "Bradley Rudolph"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "648642",
+      "date": "12/19/2018",
+      "time": "03:49 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "648640",
+      "date": "12/19/2018",
+      "time": "03:49 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "648641",
+      "date": "12/19/2018",
+      "time": "03:49 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "647879",
+      "date": "12/19/2018",
+      "time": "03:50 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "649468",
+      "date": "12/28/2018",
+      "time": "03:25 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "649467",
+      "date": "12/28/2018",
+      "time": "03:26 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "649466",
+      "date": "12/28/2018",
+      "time": "03:26 PM",
+      "inspector": "J"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 4,
+    "unique_inspection_count": 16,
+    "page_content_length": 453645,
+    "extraction_duration_seconds": 35.3
+  }
+}

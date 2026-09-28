@@ -1,0 +1,900 @@
+{
+  "permit_number": "B2022-00248",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB22&capID2=00000&capID3=001N6&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T02:31:44.568620",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "814451",
+      "date": "08/30/2022",
+      "time": "03:33 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "814453",
+      "date": "08/30/2022",
+      "time": "03:33 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "814454",
+      "date": "09/06/2022",
+      "time": "11:35 AM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "814455",
+      "date": "09/07/2022",
+      "time": "11:15 AM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "814456",
+      "date": "09/12/2022",
+      "time": "10:45 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "815246",
+      "date": "09/13/2022",
+      "time": "09:11 AM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "815247",
+      "date": "09/13/2022",
+      "time": "09:11 AM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "822795",
+      "date": "10/28/2022",
+      "time": "11:26 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "822796",
+      "date": "11/01/2022",
+      "time": "12:15 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "825932",
+      "date": "11/15/2022",
+      "time": "04:07 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "825931",
+      "date": "11/21/2022",
+      "time": "02:53 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "825930",
+      "date": "11/22/2022",
+      "time": "07:45 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "828225",
+      "date": "11/30/2022",
+      "time": "01:03 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "828226",
+      "date": "11/30/2022",
+      "time": "01:04 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "827536",
+      "date": "11/30/2022",
+      "time": "01:05 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "833041",
+      "date": "01/10/2023",
+      "time": "11:39 AM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "833352",
+      "date": "01/13/2023",
+      "time": "04:18 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "833042",
+      "date": "01/19/2023",
+      "time": "02:05 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "834476",
+      "date": "01/19/2023",
+      "time": "02:16 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1075 Underfloor Framing",
+      "inspection_id": "834619",
+      "date": "01/20/2023",
+      "time": "01:47 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "834620",
+      "date": "01/20/2023",
+      "time": "01:48 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "833043",
+      "date": "01/20/2023",
+      "time": "01:48 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "833912",
+      "date": "01/21/2023",
+      "time": "10:44 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "834147",
+      "date": "01/21/2023",
+      "time": "10:44 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "847923",
+      "date": "04/30/2023",
+      "time": "10:49 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "847924",
+      "date": "04/30/2023",
+      "time": "10:50 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "847925",
+      "date": "04/30/2023",
+      "time": "10:50 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "848838",
+      "date": "04/30/2023",
+      "time": "10:50 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "847926",
+      "date": "04/30/2023",
+      "time": "10:51 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "848974",
+      "date": "05/07/2023",
+      "time": "07:29 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "848975",
+      "date": "05/07/2023",
+      "time": "07:29 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "850564",
+      "date": "05/10/2023",
+      "time": "11:03 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "848976",
+      "date": "05/10/2023",
+      "time": "11:03 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "848977",
+      "date": "05/10/2023",
+      "time": "08:44 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "848978",
+      "date": "05/10/2023",
+      "time": "08:45 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "850743",
+      "date": "05/18/2023",
+      "time": "09:26 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1140 Exterior Gypsum Screw",
+      "inspection_id": "851848",
+      "date": "05/18/2023",
+      "time": "09:26 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "850744",
+      "date": "05/21/2023",
+      "time": "05:58 AM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "850745",
+      "date": "05/21/2023",
+      "time": "05:58 AM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "863921",
+      "date": "08/07/2023",
+      "time": "02:26 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "863922",
+      "date": "08/09/2023",
+      "time": "12:56 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "865668",
+      "date": "08/11/2023",
+      "time": "02:15 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "865669",
+      "date": "08/11/2023",
+      "time": "02:15 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "865671",
+      "date": "08/11/2023",
+      "time": "02:15 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "865670",
+      "date": "08/11/2023",
+      "time": "02:15 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "864949",
+      "date": "08/11/2023",
+      "time": "02:15 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "864950",
+      "date": "08/14/2023",
+      "time": "12:07 AM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "866590",
+      "date": "08/23/2023",
+      "time": "04:00 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "866589",
+      "date": "08/23/2023",
+      "time": "05:01 AM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4050 Gas Test",
+      "inspection_id": "867358",
+      "date": "08/25/2023",
+      "time": "01:12 AM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "868292",
+      "date": "08/30/2023",
+      "time": "09:59 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4050 Gas Test",
+      "inspection_id": "867359",
+      "date": "08/30/2023",
+      "time": "09:59 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4050 Gas Test",
+      "inspection_id": "867556",
+      "date": "08/31/2023",
+      "time": "06:30 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "868621",
+      "date": "09/06/2023",
+      "time": "10:05 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "868622",
+      "date": "09/07/2023",
+      "time": "09:25 AM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "872030",
+      "date": "10/02/2023",
+      "time": "01:43 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "872031",
+      "date": "10/04/2023",
+      "time": "02:33 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "872032",
+      "date": "10/04/2023",
+      "time": "05:20 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4060 Gas Meter Release",
+      "inspection_id": "875678",
+      "date": "10/25/2023",
+      "time": "03:39 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4060 Gas Meter Release",
+      "inspection_id": "875679",
+      "date": "10/27/2023",
+      "time": "03:07 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "885462",
+      "date": "01/20/2024",
+      "time": "03:55 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Fire 7000 Fire Final Inspection",
+      "inspection_id": "885461",
+      "date": "01/20/2024",
+      "time": "03:55 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "885460",
+      "date": "01/20/2024",
+      "time": "03:55 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "885459",
+      "date": "01/20/2024",
+      "time": "03:56 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "885458",
+      "date": "01/20/2024",
+      "time": "03:56 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "887072",
+      "date": "01/21/2024",
+      "time": "10:56 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Fire 7000 Fire Final Inspection",
+      "inspection_id": "887071",
+      "date": "01/21/2024",
+      "time": "10:57 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "887070",
+      "date": "01/21/2024",
+      "time": "10:58 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "887069",
+      "date": "01/22/2024",
+      "time": "01:07 AM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "887068",
+      "date": "01/22/2024",
+      "time": "01:07 AM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "886167",
+      "date": "01/24/2024",
+      "time": "08:09 AM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Fire 7000 Fire Final Inspection",
+      "inspection_id": "886166",
+      "date": "01/24/2024",
+      "time": "08:09 AM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "886165",
+      "date": "01/24/2024",
+      "time": "08:09 AM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "886164",
+      "date": "01/24/2024",
+      "time": "08:09 AM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "886163",
+      "date": "01/24/2024",
+      "time": "08:09 AM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "887997",
+      "date": "01/26/2024",
+      "time": "02:16 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "887998",
+      "date": "01/26/2024",
+      "time": "02:16 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "887999",
+      "date": "01/26/2024",
+      "time": "02:16 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "888001",
+      "date": "01/26/2024",
+      "time": "02:17 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Fire 7000 Fire Final Inspection",
+      "inspection_id": "888000",
+      "date": "01/26/2024",
+      "time": "02:18 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "887077",
+      "date": "01/27/2024",
+      "time": "03:20 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Fire 7000 Fire Final Inspection",
+      "inspection_id": "887076",
+      "date": "01/27/2024",
+      "time": "03:20 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "887075",
+      "date": "01/27/2024",
+      "time": "03:20 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "887074",
+      "date": "01/27/2024",
+      "time": "03:20 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "887073",
+      "date": "01/27/2024",
+      "time": "03:20 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "887978",
+      "date": "01/27/2024",
+      "time": "03:43 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Fire 7000 Fire Final Inspection",
+      "inspection_id": "887977",
+      "date": "01/27/2024",
+      "time": "03:44 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "887976",
+      "date": "01/27/2024",
+      "time": "03:44 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "887975",
+      "date": "01/27/2024",
+      "time": "03:45 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "887974",
+      "date": "01/27/2024",
+      "time": "03:45 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "887983",
+      "date": "01/27/2024",
+      "time": "03:46 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Fire 7000 Fire Final Inspection",
+      "inspection_id": "887982",
+      "date": "01/27/2024",
+      "time": "03:46 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "887981",
+      "date": "01/27/2024",
+      "time": "03:50 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "887980",
+      "date": "01/27/2024",
+      "time": "03:50 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "887979",
+      "date": "01/27/2024",
+      "time": "03:51 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "889067",
+      "date": "01/30/2024",
+      "time": "03:29 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "889066",
+      "date": "01/30/2024",
+      "time": "03:39 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "889065",
+      "date": "01/30/2024",
+      "time": "03:39 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Fire 7000 Fire Final Inspection",
+      "inspection_id": "889064",
+      "date": "01/30/2024",
+      "time": "03:40 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "889063",
+      "date": "01/30/2024",
+      "time": "03:41 PM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "889068",
+      "date": "02/07/2024",
+      "time": "02:17 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Fire 7000 Fire Final Inspection",
+      "inspection_id": "889069",
+      "date": "02/07/2024",
+      "time": "02:18 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "889070",
+      "date": "02/07/2024",
+      "time": "02:18 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "889071",
+      "date": "02/07/2024",
+      "time": "02:19 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "889072",
+      "date": "02/07/2024",
+      "time": "02:19 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "889571",
+      "date": "02/09/2024",
+      "time": "08:44 AM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Fire 7000 Fire Final Inspection",
+      "inspection_id": "889570",
+      "date": "02/09/2024",
+      "time": "08:45 AM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "889569",
+      "date": "02/09/2024",
+      "time": "08:45 AM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "889528",
+      "date": "02/09/2024",
+      "time": "08:45 AM",
+      "inspector": "VARUN GUPTA"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "889524",
+      "date": "02/09/2024",
+      "time": "08:45 AM",
+      "inspector": "VARUN GUPTA"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 22,
+    "unique_inspection_count": 110,
+    "page_content_length": 952114,
+    "extraction_duration_seconds": 51.69
+  }
+}

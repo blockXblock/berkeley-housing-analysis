@@ -1,0 +1,124 @@
+{
+  "permit_number": "B2017-02961",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB17&capID2=00000&capID3=00EPX&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T22:00:22.422457",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Cancelled",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "637166",
+      "date": "10/02/2018",
+      "time": "11:34 AM",
+      "inspector": "Greg Heidenreich"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "637165",
+      "date": "10/02/2018",
+      "time": "11:34 AM",
+      "inspector": "Greg Heidenreich"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "637167",
+      "date": "10/02/2018",
+      "time": "11:35 AM",
+      "inspector": "Greg Heidenreich"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "637168",
+      "date": "10/02/2018",
+      "time": "11:35 AM",
+      "inspector": "Greg Heidenreich"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "637930",
+      "date": "10/12/2018",
+      "time": "07:09 AM",
+      "inspector": "sh"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "637931",
+      "date": "10/12/2018",
+      "time": "07:16 AM",
+      "inspector": "sh"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "637929",
+      "date": "10/12/2018",
+      "time": "07:11 AM",
+      "inspector": "sh"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "637932",
+      "date": "10/12/2018",
+      "time": "07:21 AM",
+      "inspector": "sh"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4050 Gas Test",
+      "inspection_id": "642277",
+      "date": "11/05/2018",
+      "time": "12:37 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "644239",
+      "date": "11/20/2018",
+      "time": "05:01 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "644240",
+      "date": "11/20/2018",
+      "time": "05:01 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "644237",
+      "date": "11/20/2018",
+      "time": "05:01 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "644238",
+      "date": "11/20/2018",
+      "time": "05:02 PM",
+      "inspector": "SM"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 3,
+    "unique_inspection_count": 13,
+    "page_content_length": 422278,
+    "extraction_duration_seconds": 35.48
+  }
+}

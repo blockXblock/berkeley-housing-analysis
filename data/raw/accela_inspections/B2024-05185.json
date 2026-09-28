@@ -1,0 +1,588 @@
+{
+  "permit_number": "B2024-05185",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB24&capID2=00000&capID3=00QB4&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-23T05:26:12.577306",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "972089",
+      "date": "10/15/2025",
+      "time": "11:47 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "976423",
+      "date": "10/24/2025",
+      "time": "02:08 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "973062",
+      "date": "10/24/2025",
+      "time": "02:08 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "982980",
+      "date": "11/06/2025",
+      "time": "02:28 PM",
+      "inspector": "Darrell Chappell"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "982979",
+      "date": "11/07/2025",
+      "time": "12:33 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "984982",
+      "date": "11/07/2025",
+      "time": "12:33 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "988540",
+      "date": "11/20/2025",
+      "time": "01:33 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "999548",
+      "date": "12/12/2025",
+      "time": "10:59 AM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1023349",
+      "date": "01/26/2026",
+      "time": "09:49 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "1025620",
+      "date": "01/27/2026",
+      "time": "12:56 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "1031189",
+      "date": "02/06/2026",
+      "time": "11:45 AM",
+      "inspector": "Elizabeth Benitez"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1032979",
+      "date": "02/09/2026",
+      "time": "12:36 AM",
+      "inspector": "Fernando Romero"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "1031945",
+      "date": "02/09/2026",
+      "time": "01:18 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1033060",
+      "date": "02/09/2026",
+      "time": "01:19 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "1033341",
+      "date": "02/09/2026",
+      "time": "01:19 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "1037867",
+      "date": "02/23/2026",
+      "time": "09:34 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "1040579",
+      "date": "02/23/2026",
+      "time": "09:35 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "1056180",
+      "date": "03/23/2026",
+      "time": "09:26 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1030 Anchor Bolt and Hold Down",
+      "inspection_id": "1052539",
+      "date": "03/23/2026",
+      "time": "09:26 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "1056179",
+      "date": "03/23/2026",
+      "time": "09:26 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "1055702",
+      "date": "03/23/2026",
+      "time": "09:26 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1056259",
+      "date": "03/23/2026",
+      "time": "09:26 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1056219",
+      "date": "03/23/2026",
+      "time": "09:26 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1078544",
+      "date": "05/01/2026",
+      "time": "08:07 AM",
+      "inspector": "Elizabeth Benitez"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1079421",
+      "date": "05/05/2026",
+      "time": "10:39 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "1082985",
+      "date": "05/08/2026",
+      "time": "10:59 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "1082986",
+      "date": "05/08/2026",
+      "time": "10:59 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1089300",
+      "date": "05/20/2026",
+      "time": "10:00 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1088940",
+      "date": "05/22/2026",
+      "time": "09:43 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1088941",
+      "date": "05/22/2026",
+      "time": "09:43 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "1088942",
+      "date": "05/22/2026",
+      "time": "09:43 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1088943",
+      "date": "05/22/2026",
+      "time": "09:43 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1090105",
+      "date": "05/22/2026",
+      "time": "09:44 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1093627",
+      "date": "05/27/2026",
+      "time": "04:26 PM",
+      "inspector": "Elizabeth Benitez"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1093628",
+      "date": "05/27/2026",
+      "time": "04:26 PM",
+      "inspector": "Elizabeth Benitez"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1093629",
+      "date": "05/27/2026",
+      "time": "04:27 PM",
+      "inspector": "Elizabeth Benitez"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "1093630",
+      "date": "05/27/2026",
+      "time": "04:27 PM",
+      "inspector": "Elizabeth Benitez"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1094151",
+      "date": "05/28/2026",
+      "time": "03:59 PM",
+      "inspector": "Elizabeth Benitez"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1094152",
+      "date": "05/28/2026",
+      "time": "03:59 PM",
+      "inspector": "Elizabeth Benitez"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1094153",
+      "date": "05/28/2026",
+      "time": "04:00 PM",
+      "inspector": "Elizabeth Benitez"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "1094154",
+      "date": "05/28/2026",
+      "time": "04:00 PM",
+      "inspector": "Elizabeth Benitez"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1095187",
+      "date": "05/28/2026",
+      "time": "04:01 PM",
+      "inspector": "Elizabeth Benitez"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1095188",
+      "date": "06/04/2026",
+      "time": "09:26 AM",
+      "inspector": "Elizabeth Benitez"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1095189",
+      "date": "06/04/2026",
+      "time": "09:26 AM",
+      "inspector": "Elizabeth Benitez"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "1095190",
+      "date": "06/04/2026",
+      "time": "09:26 AM",
+      "inspector": "Elizabeth Benitez"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1095191",
+      "date": "06/04/2026",
+      "time": "09:27 AM",
+      "inspector": "Elizabeth Benitez"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1098902",
+      "date": "06/12/2026",
+      "time": "11:09 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1098904",
+      "date": "06/12/2026",
+      "time": "11:12 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "1098903",
+      "date": "06/12/2026",
+      "time": "11:12 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1098901",
+      "date": "06/12/2026",
+      "time": "11:13 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1102268",
+      "date": "06/12/2026",
+      "time": "12:11 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1102269",
+      "date": "06/12/2026",
+      "time": "12:11 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "1102270",
+      "date": "06/12/2026",
+      "time": "12:11 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1102271",
+      "date": "06/12/2026",
+      "time": "12:11 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1105302",
+      "date": "06/18/2026",
+      "time": "02:46 PM",
+      "inspector": "Elizabeth Benitez"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1107387",
+      "date": "06/23/2026",
+      "time": "10:30 AM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1114063",
+      "date": "06/30/2026",
+      "time": "03:46 PM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1115741",
+      "date": "07/06/2026",
+      "time": "07:30 AM",
+      "inspector": "Elizabeth Benitez"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "1115742",
+      "date": "07/06/2026",
+      "time": "07:31 AM",
+      "inspector": "Elizabeth Benitez"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1117859",
+      "date": "07/07/2026",
+      "time": "08:54 AM",
+      "inspector": "Elizabeth Benitez"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "1117860",
+      "date": "07/07/2026",
+      "time": "08:54 AM",
+      "inspector": "Elizabeth Benitez"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "1118740",
+      "date": "07/10/2026",
+      "time": "01:04 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1118739",
+      "date": "07/10/2026",
+      "time": "01:07 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1121340",
+      "date": "07/14/2026",
+      "time": "08:29 AM",
+      "inspector": "Elizabeth Benitez"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1123421",
+      "date": "07/17/2026",
+      "time": "10:30 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1127262",
+      "date": "07/22/2026",
+      "time": "07:29 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1127263",
+      "date": "07/22/2026",
+      "time": "10:45 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "1139142",
+      "date": "08/11/2026",
+      "time": "09:43 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "1139144",
+      "date": "08/11/2026",
+      "time": "09:43 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1139141",
+      "date": "08/11/2026",
+      "time": "09:43 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "1139143",
+      "date": "08/11/2026",
+      "time": "09:43 AM",
+      "inspector": "Lorenzo Aguilar"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 15,
+    "unique_inspection_count": 71,
+    "page_content_length": 1069199,
+    "extraction_duration_seconds": 45.47
+  }
+}

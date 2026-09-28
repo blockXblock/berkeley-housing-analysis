@@ -1,0 +1,395 @@
+{
+  "permit_number": "B2024-05470",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/./CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB24&capID2=00000&capID3=00RB9&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-05-22T18:52:47.331937",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "959838",
+      "date": "06/25/2025",
+      "time": "06:33 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "959839",
+      "date": "06/25/2025",
+      "time": "06:40 AM",
+      "inspector": "Freddie Mares"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "960315",
+      "date": "06/30/2025",
+      "time": "07:27 AM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "964009",
+      "date": "07/28/2025",
+      "time": "10:35 AM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "964473",
+      "date": "08/01/2025",
+      "time": "03:29 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "964472",
+      "date": "08/01/2025",
+      "time": "03:30 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "964471",
+      "date": "08/01/2025",
+      "time": "03:30 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "964470",
+      "date": "08/01/2025",
+      "time": "03:30 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "970365",
+      "date": "09/29/2025",
+      "time": "09:01 AM",
+      "inspector": "Christina Franco"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "970366",
+      "date": "09/29/2025",
+      "time": "09:01 AM",
+      "inspector": "Christina Franco"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "970367",
+      "date": "09/29/2025",
+      "time": "09:01 AM",
+      "inspector": "Christina Franco"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "970368",
+      "date": "09/29/2025",
+      "time": "09:01 AM",
+      "inspector": "Christina Franco"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "970630",
+      "date": "10/01/2025",
+      "time": "09:23 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "970627",
+      "date": "10/01/2025",
+      "time": "09:23 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "970628",
+      "date": "10/01/2025",
+      "time": "09:23 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "970629",
+      "date": "10/01/2025",
+      "time": "09:24 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "970902",
+      "date": "10/07/2025",
+      "time": "07:18 AM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "970903",
+      "date": "10/07/2025",
+      "time": "07:21 AM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "970905",
+      "date": "10/07/2025",
+      "time": "07:22 AM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "970904",
+      "date": "10/07/2025",
+      "time": "07:22 AM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "971590",
+      "date": "10/09/2025",
+      "time": "12:00 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "971592",
+      "date": "10/09/2025",
+      "time": "12:00 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "971593",
+      "date": "10/09/2025",
+      "time": "12:00 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "971594",
+      "date": "10/09/2025",
+      "time": "12:00 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "974819",
+      "date": "10/22/2025",
+      "time": "12:10 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "974820",
+      "date": "10/22/2025",
+      "time": "12:11 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "974821",
+      "date": "10/22/2025",
+      "time": "12:12 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "974822",
+      "date": "10/22/2025",
+      "time": "12:12 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "975141",
+      "date": "10/27/2025",
+      "time": "07:56 AM",
+      "inspector": "Fernando Romero"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "975142",
+      "date": "10/27/2025",
+      "time": "07:57 AM",
+      "inspector": "Fernando Romero"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "975143",
+      "date": "10/27/2025",
+      "time": "07:57 AM",
+      "inspector": "Fernando Romero"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "975144",
+      "date": "10/27/2025",
+      "time": "07:57 AM",
+      "inspector": "Fernando Romero"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "977423",
+      "date": "10/28/2025",
+      "time": "07:30 AM"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "977424",
+      "date": "10/28/2025",
+      "time": "07:30 AM"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "977425",
+      "date": "10/28/2025",
+      "time": "07:30 AM"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "977426",
+      "date": "10/28/2025",
+      "time": "07:31 AM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "978103",
+      "date": "11/03/2025",
+      "time": "12:56 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "978104",
+      "date": "11/03/2025",
+      "time": "12:56 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "978105",
+      "date": "11/03/2025",
+      "time": "12:56 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "978106",
+      "date": "11/03/2025",
+      "time": "12:56 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "987903",
+      "date": "11/13/2025",
+      "time": "09:25 AM"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "987904",
+      "date": "11/13/2025",
+      "time": "09:25 AM"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "987905",
+      "date": "11/13/2025",
+      "time": "09:26 AM"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "987906",
+      "date": "11/13/2025",
+      "time": "09:26 AM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "987822",
+      "date": "11/17/2025",
+      "time": "01:16 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "987861",
+      "date": "11/17/2025",
+      "time": "01:16 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "987820",
+      "date": "11/17/2025",
+      "time": "01:16 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "987821",
+      "date": "11/17/2025",
+      "time": "01:16 PM",
+      "inspector": "J"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 10,
+    "unique_inspection_count": 48,
+    "page_content_length": 667323,
+    "extraction_duration_seconds": 40.88
+  }
+}

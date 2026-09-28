@@ -1,0 +1,394 @@
+{
+  "permit_number": "B2021-04563",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB21&capID2=00000&capID3=00JSD&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T19:07:11.807068",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "818860",
+      "date": "09/28/2022",
+      "time": "11:09 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "819842",
+      "date": "10/05/2022",
+      "time": "11:25 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "820297",
+      "date": "10/11/2022",
+      "time": "12:18 PM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "821800",
+      "date": "10/20/2022",
+      "time": "09:37 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "822513",
+      "date": "10/25/2022",
+      "time": "12:23 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "823610",
+      "date": "11/01/2022",
+      "time": "10:02 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "823717",
+      "date": "11/02/2022",
+      "time": "09:59 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "823786",
+      "date": "11/03/2022",
+      "time": "10:58 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "824634",
+      "date": "11/08/2022",
+      "time": "09:53 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "824625",
+      "date": "11/09/2022",
+      "time": "10:38 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "825181",
+      "date": "11/10/2022",
+      "time": "11:25 AM",
+      "inspector": "DL"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "825712",
+      "date": "11/15/2022",
+      "time": "09:26 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "826457",
+      "date": "11/16/2022",
+      "time": "09:28 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "825699",
+      "date": "11/16/2022",
+      "time": "09:28 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "826055",
+      "date": "11/17/2022",
+      "time": "09:48 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "826058",
+      "date": "11/18/2022",
+      "time": "11:30 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1195 T-Bar Suspended Ceiling",
+      "inspection_id": "827790",
+      "date": "11/28/2022",
+      "time": "09:35 AM",
+      "inspector": "KT"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "827072",
+      "date": "11/28/2022",
+      "time": "09:36 AM",
+      "inspector": "Keith Thuemmler"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "828424",
+      "date": "12/07/2022",
+      "time": "09:47 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1195 T-Bar Suspended Ceiling",
+      "inspection_id": "829207",
+      "date": "12/07/2022",
+      "time": "09:48 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "828425",
+      "date": "12/08/2022",
+      "time": "12:01 PM",
+      "inspector": "Keith Thuemmler"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1195 T-Bar Suspended Ceiling",
+      "inspection_id": "830334",
+      "date": "12/20/2022",
+      "time": "12:22 PM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1195 T-Bar Suspended Ceiling",
+      "inspection_id": "829876",
+      "date": "12/21/2022",
+      "time": "11:19 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1195 T-Bar Suspended Ceiling",
+      "inspection_id": "829877",
+      "date": "12/22/2022",
+      "time": "11:45 AM",
+      "inspector": "Jeff Jensen"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "838114",
+      "date": "02/28/2023",
+      "time": "10:03 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "838130",
+      "date": "02/28/2023",
+      "time": "10:08 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "838115",
+      "date": "02/28/2023",
+      "time": "10:09 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "839888",
+      "date": "03/13/2023",
+      "time": "10:06 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "841374",
+      "date": "03/20/2023",
+      "time": "11:04 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "842748",
+      "date": "03/20/2023",
+      "time": "11:23 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "842791",
+      "date": "03/29/2023",
+      "time": "09:41 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "845162",
+      "date": "04/05/2023",
+      "time": "10:20 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "845161",
+      "date": "04/05/2023",
+      "time": "10:20 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "844175",
+      "date": "04/05/2023",
+      "time": "10:20 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "846507",
+      "date": "04/13/2023",
+      "time": "01:45 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "845735",
+      "date": "04/13/2023",
+      "time": "01:45 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "846718",
+      "date": "04/17/2023",
+      "time": "02:02 PM"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "846719",
+      "date": "04/25/2023",
+      "time": "01:52 PM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "864459",
+      "date": "08/10/2023",
+      "time": "10:17 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "865702",
+      "date": "08/16/2023",
+      "time": "02:09 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "869122",
+      "date": "09/11/2023",
+      "time": "02:03 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "869174",
+      "date": "09/12/2023",
+      "time": "01:42 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "870208",
+      "date": "09/13/2023",
+      "time": "01:31 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "870204",
+      "date": "09/15/2023",
+      "time": "10:36 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "871480",
+      "date": "09/25/2023",
+      "time": "01:03 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "874176",
+      "date": "10/13/2023",
+      "time": "07:50 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "878694",
+      "date": "11/15/2023",
+      "time": "09:24 AM",
+      "inspector": "Leo Bautista"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 10,
+    "unique_inspection_count": 47,
+    "page_content_length": 628239,
+    "extraction_duration_seconds": 42.05
+  }
+}

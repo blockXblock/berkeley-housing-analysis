@@ -23,7 +23,7 @@ output/D6/
 notebooks/06_polygon_cleanup/reports/
 
 # Scrape outputs and run artifacts (regenerable from scripts in scripts/)
-data/raw/accela_inspections/
+# (data/raw/accela_inspections/ is tracked since 2026-09-28: a v4 build input; see below)
 data/raw/accela_processing_status/
 data/raw/accela_record_status/
 data/raw/accela_status/

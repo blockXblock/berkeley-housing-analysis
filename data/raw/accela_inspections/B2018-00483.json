@@ -1,0 +1,212 @@
+{
+  "permit_number": "B2018-00483",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB18&capID2=00000&capID3=00324&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-09-22T22:22:18.315749",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "630503",
+      "date": "08/06/2018",
+      "time": "03:03 PM",
+      "inspector": "Scott Meadows"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "630772",
+      "date": "08/10/2018",
+      "time": "01:39 PM",
+      "inspector": "Bradley Rudolph"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "631467",
+      "date": "08/10/2018",
+      "time": "01:39 PM",
+      "inspector": "Bradley Rudolph"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "631828",
+      "date": "08/17/2018",
+      "time": "11:39 AM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "632652",
+      "date": "08/22/2018",
+      "time": "12:05 PM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "632961",
+      "date": "08/22/2018",
+      "time": "02:38 PM",
+      "inspector": "Scott Meadows"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "632955",
+      "date": "08/27/2018",
+      "time": "11:50 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "633150",
+      "date": "08/27/2018",
+      "time": "11:50 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "633537",
+      "date": "09/04/2018",
+      "time": "12:42 PM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "634294",
+      "date": "09/07/2018",
+      "time": "08:53 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "633539",
+      "date": "09/07/2018",
+      "time": "08:54 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "635119",
+      "date": "09/10/2018",
+      "time": "11:14 AM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "635120",
+      "date": "09/10/2018",
+      "time": "11:15 AM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "634913",
+      "date": "09/10/2018",
+      "time": "11:19 AM",
+      "inspector": "Scott Meadows"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "635500",
+      "date": "09/12/2018",
+      "time": "11:01 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "634914",
+      "date": "09/12/2018",
+      "time": "11:01 AM",
+      "inspector": "John Cevasco"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "635040",
+      "date": "09/13/2018",
+      "time": "01:28 PM",
+      "inspector": "gh"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "647933",
+      "date": "12/19/2018",
+      "time": "10:55 AM",
+      "inspector": "Scott Meadows"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "655360",
+      "date": "02/27/2019",
+      "time": "12:00 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "658680",
+      "date": "03/25/2019",
+      "time": "03:31 PM",
+      "inspector": "MD"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "659887",
+      "date": "04/05/2019",
+      "time": "11:33 AM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "660642",
+      "date": "04/05/2019",
+      "time": "11:33 AM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "660643",
+      "date": "04/05/2019",
+      "time": "11:33 AM",
+      "inspector": "SM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "660644",
+      "date": "04/05/2019",
+      "time": "11:33 AM",
+      "inspector": "SM"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 5,
+    "unique_inspection_count": 24,
+    "page_content_length": 527811,
+    "extraction_duration_seconds": 39.48
+  }
+}

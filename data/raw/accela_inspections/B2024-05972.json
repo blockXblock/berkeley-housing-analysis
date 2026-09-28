@@ -1,0 +1,108 @@
+{
+  "permit_number": "B2024-05972",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/./CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB24&capID2=00000&capID3=00TI4&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-05-22T18:55:47.524121",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2200 Electrical Solar Photovoltaic",
+      "inspection_id": "960380",
+      "date": "07/01/2025",
+      "time": "08:38 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "960379",
+      "date": "07/01/2025",
+      "time": "08:39 AM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2200 Electrical Solar Photovoltaic",
+      "inspection_id": "960718",
+      "date": "07/03/2025",
+      "time": "08:28 AM",
+      "inspector": "Joel Hernandez"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "960759",
+      "date": "07/03/2025",
+      "time": "08:28 AM",
+      "inspector": "Joel Hernandez"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2200 Electrical Solar Photovoltaic",
+      "inspection_id": "961135",
+      "date": "07/07/2025",
+      "time": "12:38 PM",
+      "inspector": "Joel Hernandez"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "961134",
+      "date": "07/07/2025",
+      "time": "12:38 PM",
+      "inspector": "Joel Hernandez"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2200 Electrical Solar Photovoltaic",
+      "inspection_id": "961362",
+      "date": "07/10/2025",
+      "time": "01:04 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "961363",
+      "date": "07/10/2025",
+      "time": "01:04 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2200 Electrical Solar Photovoltaic",
+      "inspection_id": "961916",
+      "date": "07/14/2025",
+      "time": "01:19 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2200 Electrical Solar Photovoltaic",
+      "inspection_id": "962833",
+      "date": "07/22/2025",
+      "time": "12:23 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "962832",
+      "date": "07/22/2025",
+      "time": "12:23 PM",
+      "inspector": "SR"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 3,
+    "unique_inspection_count": 11,
+    "page_content_length": 457790,
+    "extraction_duration_seconds": 33.59
+  }
+}

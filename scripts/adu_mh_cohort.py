@@ -3,7 +3,8 @@
 
 Two independently-defined groups, the durable home for the 2026-08 investigation:
   ADU  — v4 events that ADD a dwelling AND are ADU-designated (city ADU flag OR description),
-         INCLUDING conversion-ADUs via the fixed classifier (housing_rules.permit_role RULE 5.5).
+         INCLUDING conversion-ADUs, which the model-read roles (housing_rules.permit_effect) count directly
+         (the RULE 5.5 regex clause was removed 2026-09-28).
          Validated vs the HCD APR oracle: ~93% recall (857 vs the APR's 842). Geocoded by the
          canonical-APN crosswalk to berkeley.db parcel centroids.
   MH   — Middle Housing = PLN Planning records whose Project Name is 'ZCMH: <address>' (the new
@@ -14,7 +15,6 @@ but the APR is the oracle, never a data source). Output feeds gen_adu_middle_hou
 """
 import sqlite3, sys, json, glob, re, csv
 from scripts.housing_rules import to_canonical_apn
-from scripts.housing_rules.permit_role import _adu_creation
 
 def canon(a):
     try: return to_canonical_apn(a, "alameda")
@@ -38,8 +38,7 @@ def adu_cohort(bmap):
         flag = str(p.get("ADU", "")).strip().lower() in ("yes", "y", "true", "1")
         d = (desc or "").upper()
         adu_desc = ("ADU" in d or "ACCESSORY DWELLING" in d or "JADU" in d)
-        keep = (role == "new_unit" and (flag or adu_desc)) or \
-               (role in ("alteration", "ambiguous") and _adu_creation((desc or "").lower()))
+        keep = role == "new_unit" and (flag or adu_desc)   # roles are model-read (conversions included)
         if keep:
             c = canon(apn)
             if c: apns.add(c)

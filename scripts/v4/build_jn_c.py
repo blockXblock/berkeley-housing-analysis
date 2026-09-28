@@ -159,11 +159,16 @@ one day are never collapsed) and BEFORE classification: the harvested Accela **i
 record or a rejection with its reason) and the **stored documents** we hold copies of in R2
 (`data/derived/documents_r2_manifest_2026-09-28.csv` -> the `documents` table). Documents link by record number;
 all current ones belong to PLANNING records, which enter the build with the CapDetail harvest.
+Also the **reference layer**: the county's parcels (`databases/berkeley.db`, Feb-2026 feed) become v4 parcels
+with a stable internal id and their APN as a time-labeled identifier (ADR-003), with assessed values; owners of
+record (`data/reference/berkeley_parcel_owners_2026-08-13.csv`) become actors with an `owner_of_record` action
+on the parcel. Rows that do not land are recorded with their reason (e.g. an APN since re-platted).
 """)
 code(r"""
 con=sqlite3.connect(DB_PATH); con.execute("PRAGMA foreign_keys=ON")
 print("inspections:", SM.load_inspections(con))
 print("documents:  ", SM.load_documents(con))
+print("parcels:    ", SM.load_parcels(con))   # assessor parcels + APN identifiers + assessed values + owners of record
 """)
 code(r"""
 con=sqlite3.connect(DB_PATH); con.execute("PRAGMA foreign_keys=ON")

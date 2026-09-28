@@ -460,3 +460,86 @@ def load_documents(con, manifest=DOCUMENTS_MANIFEST):
         con.rollback()
         raise
     return dict(rows=len(rows), inserted=n)
+
+
+# ---------------------------------------------------------------- REFERENCE: parcels, assessed values, owners
+# The county's parcels become v4 parcels with a stable internal id; APNs are time-labeled IDENTIFIERS on them
+# (parcel_identifiers), never the key (ADR-003). Assessed values and owners of record attach to the parcel with
+# their source. Owners are actors with an 'owner_of_record' action on the parcel. Added 2026-09-28.
+PARCELS_DB = os.path.join(ROOT, 'databases', 'berkeley.db')          # ArcGIS Parcels feed, refreshed 2026-06-16
+PARCELS_ASOF = '2026-02-01'                                            # the feed's own currency (Feb 2026)
+OWNERS_CSV = os.path.join(ROOT, 'data', 'reference', 'berkeley_parcel_owners_2026-08-13.csv')
+
+
+def load_parcels(con, parcels_db=PARCELS_DB, owners_csv=OWNERS_CSV):
+    """Assessor parcels -> parcels + parcel_identifiers + assessed_values; owner file -> actors + actor_actions.
+    Every source row lands or is rejected with a reason. Refuses to run twice. Returns counts."""
+    import csv, hashlib, datetime as dt
+    from scripts.housing_rules.apn import to_canonical_apn
+    from scripts.housing_rules.owner_name import is_organisation
+    now = dt.datetime.now(dt.timezone.utc).isoformat()
+    assert not con.execute("SELECT 1 FROM parcels LIMIT 1").fetchone(), 'parcels already loaded'
+    src = sqlite3.connect(f'file:{parcels_db}?mode=ro', uri=True)
+    rows = src.execute("SELECT APN, Land, Imps, TotalNetValue FROM parcels ORDER BY APN").fetchall()
+    fp = hashlib.sha256('\n'.join('|'.join(map(str, r)) for r in rows).encode()).hexdigest()
+    out = dict(source_rows=len(rows), parcels=0, duplicate_rows=0, rejected=0, owners_rows=0,
+               owners_linked=0, owners_unmatched=0, actors=0)
+    try:
+        sid = con.execute("INSERT INTO sources (source_kind,locator,retrieved_at,source_asof,checksum,notes) VALUES "
+                          "('assessor','databases/berkeley.db:parcels',?,?,?,?)", (now, PARCELS_ASOF, fp,
+                          'Alameda County Parcels FeatureServer (data.acgov.org), refreshed 2026-06-16; checksum = '
+                          'SHA-256 of the sorted APN|Land|Imps|TotalNetValue rows')).lastrowid
+        by_apn, rejected = {}, []
+        for apn, land, imps, total in rows:
+            if apn in by_apn:
+                out['duplicate_rows'] += 1; continue            # exact duplicate rows in the feed (12 APNs)
+            try:
+                canon = to_canonical_apn(apn, 'Alameda')
+            except Exception as e:
+                rejected.append(f'{apn}: {e}'); continue
+            pid = con.execute("INSERT INTO parcels (city, notes) VALUES ('Berkeley', NULL)").lastrowid
+            con.execute("INSERT INTO parcel_identifiers (parcel_id,apn_raw,apn_normalized,is_current,county,source_id) "
+                        "VALUES (?,?,?,1,'Alameda',?)", (pid, apn, canon, sid))
+            con.execute("INSERT INTO assessed_values (parcel_id,land,improvements,total_net_value,as_of_date,source_id) "
+                        "VALUES (?,?,?,?,?,?)", (pid, land, imps, total, PARCELS_ASOF, sid))
+            by_apn[apn] = (pid, canon)
+        out['parcels'], out['rejected'] = len(by_apn), len(rejected)
+        con.execute("INSERT INTO ingestion_runs (source_id,started_at,rows_in_source,rows_ingested,rows_rejected,"
+                    "rejected_detail,conserved) VALUES (?,?,?,?,?,?,?)",
+                    (sid, now, len(rows), len(by_apn) + out['duplicate_rows'], len(rejected),
+                     '; '.join(rejected)[:2000] or None,
+                     int(len(rows) == len(by_apn) + out['duplicate_rows'] + len(rejected))))
+        by_canon = {c: p for p, c in by_apn.values()}
+        orows = list(csv.DictReader(open(owners_csv)))
+        osid = con.execute("INSERT INTO sources (source_kind,locator,retrieved_at,source_asof,checksum,notes) VALUES "
+                           "('assessor_owner',?,?,?,?,?)", (os.path.relpath(owners_csv, ROOT), now, '2026-08-13',
+                           _sha256(owners_csv), 'City of Berkeley tax parcels, OwnersName (the v2 owner join of '
+                           '2026-09-02). Owner of record as of the file; APNs are not stable identifiers.')).lastrowid
+        actor_ids, links, unmatched = {}, [], []
+        for r in orows:
+            name = (r.get('OwnersName') or '').strip()
+            if not name:
+                unmatched.append(f"{r.get('APN')}: no owner name"); continue
+            try:
+                pid = by_canon.get(to_canonical_apn(r['APN'], 'Alameda'))
+            except Exception as e:
+                pid = None
+            if pid is None:
+                unmatched.append(f"{r.get('APN')}: not a current parcel"); continue
+            if name not in actor_ids:
+                actor_ids[name] = con.execute("INSERT INTO actors (actor_kind,display_name,role_class) VALUES (?,?,'owner')",
+                                              ('organization' if is_organisation(name) else 'person', name)).lastrowid
+            links.append((actor_ids[name], pid, osid))
+        con.executemany("INSERT INTO actor_actions (actor_id,entity_type,entity_id,role,source_id,coverage_note) VALUES "
+                        "(?,'parcel',?,'owner_of_record',?,'owner of record per the 2026-08-13 city tax-parcel file')",
+                        links)
+        con.execute("INSERT INTO ingestion_runs (source_id,started_at,rows_in_source,rows_ingested,rows_rejected,"
+                    "rejected_detail,conserved) VALUES (?,?,?,?,?,?,?)",
+                    (osid, now, len(orows), len(links), len(unmatched), '; '.join(unmatched)[:2000] or None,
+                     int(len(orows) == len(links) + len(unmatched))))
+        out.update(owners_rows=len(orows), owners_linked=len(links), owners_unmatched=len(unmatched), actors=len(actor_ids))
+        con.commit()
+    except Exception:
+        con.rollback()
+        raise
+    return out

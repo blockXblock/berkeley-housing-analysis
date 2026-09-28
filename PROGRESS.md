@@ -132,6 +132,21 @@ BEFORE adding 286 rows on top; (2) then the rung-3 `--commit`. DBs are `chmod a-
 
 ---
 
+## 2026-09-28 — Buildings stage: John's ruling on borrowed completions (middle option)
+
+32's fold (`build_structures.py` @ `ca32762`) against today's chain build: 1,189 masters → **1,187 structures**;
+1,236 non-masters attached; units counted once **5,439** (109 double-counted removed); Logan Park South fixed
+(one structure, block-scoped); the "47 units / 40 permits with no parent" is absent (0 non-masters carry units).
+It dated 22 structures (179 units) complete from an ATTACHED revision's final while the master never finaled.
+**John, 2026-09-28: "adopt the middle option"** — a structure completes on its OWN master permit; a revision/-DEF
+final never completes a building; where the master has an APPROVED "Building Final" inspection (3 of the 22)
+that date is the completion; the other 19 are a named HELD set (not counted, not dropped). Basis: HCD's phase
+rule. 32 is encoding it in `build_structures.py` and writing a timestamped baseline (4b); then a JN stage and a
+gated write. I exported the evidence file's parent links for 32's fold:
+`scratch/2026-09-28_evidence/permit_parents.csv` (694 Sonnet-read parents new to it).
+
+---
+
 ## 2026-09-28 — Regex permit classifier RETIRED (step 1 complete)
 
 Every consumer of `housing_rules.permit_role.classify` was switched to the model-read evidence

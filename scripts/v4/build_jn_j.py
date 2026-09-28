@@ -34,7 +34,7 @@ md(r"""
 construction site (permits issued but never finaled). This notebook measures the attrition at each
 gate — units-weighted where units exist — and names the largest casualties.
 
-**Sources & roles.** (1) v4 events + `housing_rules.permit_role` — the deep, dated, unit-carrying
+**Sources & roles.** (1) v4 events + the build's `event_classifications` (model-read roles) — the deep, dated, unit-carrying
 feed for issued→finaled survival; (2) the Accela harvest universe (82k records 2015–2026, both
 modules) — application-stage outcomes the feed never contained; (3) the Alameda assessor's `Imps`
 — the independent built-signal for corroborating the stalled register. No oracle input anywhere.
@@ -62,7 +62,6 @@ pio.renderers.default = 'notebook_connected'  # so figures embed in the nbconver
 ROOT = os.path.expanduser('~/berkeley-data')
 sys.path.insert(0, os.path.join(ROOT, 'scripts'))
 sys.path.insert(0, os.path.join(ROOT, 'scripts', 'build_v2'))
-from housing_rules import permit_role
 from cpra_dedup import extract_master_permit
 
 V4 = os.path.join(ROOT, 'databases', 'berkeley_housing_v4.db')
@@ -89,14 +88,19 @@ pay = pd.read_sql("""
     FROM events WHERE event_type_code='permit_submitted'
     GROUP BY source_record_key""", con)
 df = wide.merge(pay, on='pn', how='right')
-roles = df.apply(lambda r: permit_role.classify(r.wt, r.descr, r.adu, r.occ, r.ua, r.ur, r.pn), axis=1)
-df['role'] = [x[0] for x in roles]; df['is_master'] = [x[1] for x in roles]
-df['units'] = [permit_role.net_units(r.ua, r.ur, role) for r, role in zip(df.itertuples(index=False), df['role'])]
+# roles and units = the BUILD's labels (event_classifications, model-read evidence under HCD definitions),
+# read from v4 -- never re-derived here (2026-09-28: the regex classifier was retired)
+lab = pd.read_sql("""
+    SELECT e.source_record_key pn, c.housing_role role, c.is_master, c.net_units units, c.classifier_hash
+    FROM events e JOIN event_classifications c USING(event_id)
+    WHERE e.event_type_code='permit_submitted' GROUP BY e.source_record_key""", con)
+df = df.merge(lab, on='pn', how='left')
+df['is_master'] = df.is_master.fillna(0).astype(bool); df['units'] = df.units.fillna(0)
 df['is_base'] = df.pn.map(lambda p: extract_master_permit(str(p)) == str(p))
 housing = df[df.is_base & (df.role == 'new_unit') & df.is_master & (df.units > 0)].copy()
 housing['iy'] = housing.permit_issued.dt.year
 print(f'housing new-unit masters with units: {len(housing):,} '
-      f'({int(housing.units.sum()):,} units) | classifier {permit_role.classifier_hash()}')
+      f'({int(housing.units.sum()):,} units) | classifier {lab.classifier_hash.iloc[0]} (the build\'s labels)')
 ''')
 
 md(r"""
@@ -287,7 +291,7 @@ if snaps:
     print(f'BASELINE GATE PASS vs {os.path.basename(snaps[-1])}')
 else:
     out_p = os.path.join(ROOT, 'data', 'baselines', 'entitled_unbuilt_baseline_2026-07-04.json')
-    json.dump({'as_of': '2026-07-04', 'v4_sha': sha, 'classifier': permit_role.classifier_hash(),
+    json.dump({'as_of': '2026-07-04', 'v4_sha': sha, 'classifier': str(lab.classifier_hash.iloc[0]),
                'provenance': 'JN-J first derivation (v4 events + 2015-2026 Accela harvest + assessor)',
                'figures': figures}, open(out_p, 'w'), indent=1)
     print('WROTE first baseline:', out_p)

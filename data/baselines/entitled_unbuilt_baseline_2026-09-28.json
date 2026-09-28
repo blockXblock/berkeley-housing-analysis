@@ -1,0 +1,19 @@
+{
+ "as_of": "2026-09-28",
+ "v4_sha": "live v4 sha 27c3e7e9 (2026-09-28 rebuild)",
+ "classifier": "permit_effect@501341414243",
+ "provenance": "JN-J baseline APPEND 2026-09-01: permit_role classifier updated since 2026-07-04 (743edfb->e122a6a) reclassified permits \u2014 housing_masters 928->1042, mature_units_issued 2347->2444, finaled 2241->2326, not-finaled 106->118. closed_expired(10855)/planning_apps(14162)/stalled(11,830) unchanged. Legitimate method+data drift per JN-J's assumptions ledger.",
+ "figures": {
+  "housing_masters": 1183,
+  "mature_units_issued_2015_2022": 3469,
+  "mature_units_finaled": 3340,
+  "mature_units_not_finaled": 129,
+  "stalled_register_projects_10u": 14,
+  "stalled_register_units": 895,
+  "closed_expired_building_apps": 10855,
+  "planning_apps_2015_2025": 14162,
+  "planning_first_gate_death_share": 0.0738
+ },
+ "supersedes": "entitled_unbuilt_baseline_2026-09-01.json (kept)",
+ "change_note": "Inputs alone (2026-07-07 productions, regex): housing masters 1,042 -> 1,100, stalled register 11 -> 12 projects / 830 -> 774 units. Roles from the build's model-read labels: masters 1,100 -> 1,183; mature units issued 2015-2022 2,444 -> 3,469 (the regex left large buildings with blank unit fields uncounted), finaled 2,326 -> 3,340, not finaled 118 -> 129; stalled register 14 projects / 895 units."
+}

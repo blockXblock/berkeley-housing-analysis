@@ -112,7 +112,7 @@ def kind_token(path, address):
     return tok or "doc"
 
 
-def build_key(conn, path, project_id, digest):
+def build_key(conn, path, project_id, digest, prefix=PREFIX):
     row = conn.execute(
         "SELECT address_display FROM v_projects_flat WHERE project_id=?", (project_id,)
     ).fetchone()
@@ -120,7 +120,7 @@ def build_key(conn, path, project_id, digest):
         sys.exit(f"proj{project_id} has no address_display — refusing to invent a key.")
     m = re.match(r"(\d{4}-\d{2}-\d{2})", os.path.basename(path))
     stamp = m.group(1) if m else f"nodate_{digest[:8]}"
-    key = f"{PREFIX}/proj{project_id}_{slug(row[0])}_{stamp}.pdf"
+    key = f"{prefix}/proj{project_id}_{slug(row[0])}_{stamp}.pdf"
     base = key.split("/")[-1]
     if "/" in base or ":" in base:
         sys.exit(f"Refusing key with '/' or ':' in the basename: {key}")
@@ -133,6 +133,8 @@ def main():
     ap.add_argument("--project", type=int, help="override the inferred project id")
     ap.add_argument("--db", default=DB)
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--prefix", default=PREFIX, help="bucket folder, e.g. affordability_forms")
+    ap.add_argument("--out", default="scratch/r2_upload_rows.tsv", help="where to write the rows")
     ap.add_argument("--overwrite", action="store_true",
                     help="replace an existing key (default: skip it)")
     a = ap.parse_args()
@@ -151,7 +153,7 @@ def main():
                       region_name="auto")
     conn = sqlite3.connect(f"file:{a.db}?mode=ro", uri=True)
 
-    print(f"bucket={bucket}  prefix={PREFIX}/  files={len(a.files)}"
+    print(f"bucket={bucket}  prefix={a.prefix}/  files={len(a.files)}"
           f"{'  [DRY RUN]' if a.dry_run else ''}\n" + "-" * 78)
     rows, errors = [], []
     for path in a.files:
@@ -160,12 +162,19 @@ def main():
         pid = project_of(path, a.project)
         size = os.path.getsize(path)
         digest = sha256_file(path)
-        key, addr = build_key(conn, path, pid, digest)
+        key, addr = build_key(conn, path, pid, digest, a.prefix)
         url = f"{public}/{key}"
 
+        md5 = hashlib.md5(open(path, "rb").read()).hexdigest()
+
         def remote_len(k):
+            """the remote object's size if it holds THIS content, -1 if it holds different content, None if absent.
+            Single-part uploads carry the MD5 as ETag; a multipart ETag ('-' in it) falls back to comparing size."""
             try:
-                return s3.head_object(Bucket=bucket, Key=k)["ContentLength"]
+                h = s3.head_object(Bucket=bucket, Key=k)
+                etag = h["ETag"].strip('"')
+                same = etag == md5 if "-" not in etag else h["ContentLength"] == size
+                return h["ContentLength"] if same else -1
             except ClientError as e:
                 if e.response["Error"]["Code"] in ("404", "NoSuchKey", "NotFound"):
                     return None
@@ -173,15 +182,15 @@ def main():
 
         try:
             taken = remote_len(key)
-            if taken is not None and taken != size and not a.overwrite:
+            if taken == -1 and not a.overwrite:
                 # a DIFFERENT document already owns this key -- disambiguate, never replace
                 for cand in (f"{key[:-4]}_{kind_token(path, addr)}.pdf", f"{key[:-4]}_{digest[:8]}.pdf"):
-                    if remote_len(cand) is None:
-                        print(f"  collision on {os.path.basename(key)}"
-                              f" (remote {taken:,}B != local {size:,}B) -> {os.path.basename(cand)}")
+                    got = remote_len(cand)
+                    if got != -1:                    # free, or already holds THIS content (an earlier run)
+                        print(f"  collision on {os.path.basename(key)} (different content) -> {os.path.basename(cand)}")
                         key = cand
                         url = f"{public}/{key}"
-                        taken = None
+                        taken = got
                         break
                 else:
                     errors.append((key, "collision and both fallback keys are taken")); continue
@@ -189,7 +198,7 @@ def main():
             errors.append((key, f"head_object: {e}")); continue
 
         if taken is not None and not a.overwrite:
-            print(f"  skip (already mirrored, same size)  {key}")
+            print(f"  skip (already mirrored, same content)  {key}")
             rows.append((pid, addr, path, size, digest, url)); continue
         if a.dry_run:
             print(f"  would upload  {size/1048576:8.1f} MB  {key}")
@@ -211,7 +220,7 @@ def main():
         print(f"ERRORS ({len(errors)}):")
         for k, e in errors:
             print(f"  {k}: {e}")
-    out = "scratch/r2_upload_rows.tsv"
+    out = a.out
     os.makedirs("scratch", exist_ok=True)
     with open(out, "w", encoding="utf-8") as f:
         f.write("project_id\taddress\tlocal_path\tfile_size_bytes\tsha256\tr2_url\n")

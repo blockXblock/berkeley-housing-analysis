@@ -215,8 +215,7 @@ documents agree with v2 (85 VLI); group 2, 5 approval documents that differ (e.g
 1367 University 5 VLI, not 39); group 3, 8 pre-approval statements (e.g. 1701 San Pablo 12/20/48 ELI/VLI/LI, not 110
 VLI). 8 unknown rows `superseded`. **Held (still unknown):** 2720 San Pablo (documents describe a 25-unit building, v2 has
 113), 2127 Dwight (BMR vs replacement units), 2538 Durant (the extracted figure contradicts its quote), 2001 Ashby (only a
-feasibility analysis; not in the ledger). **Open:** the 145 source PDFs are in scratch only — they need durable storage
-(R2 or T7) before the ledger's sha256 references can be followed; tier 2 (16 large files) for the held projects.
+feasibility analysis; not in the ledger). **Stored (John: "R2"):** all 145 source PDFs uploaded to R2 `affordability_forms/` with `scripts/upload_pdfs_to_r2.py` (now `--prefix`/`--out`, and its same-content test compares the MD5 ETag, not size); every public URL checked (145/145 sizes match; 5 sampled sha256 match). List: `data/derived/affordability_documents_r2_2026-09-28.csv`; the 34 ledger rows now carry `source_url`. The r2.dev host refuses Python's default user agent (403) — send a normal UA when checking links. **Open:** tier 2 (16 large files) for the held projects.
 
 ---
 

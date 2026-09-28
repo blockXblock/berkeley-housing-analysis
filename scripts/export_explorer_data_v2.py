@@ -162,11 +162,31 @@ def get_projects(conn):
         # mod-reconciliation rule downstream. The real fix for mod-after-BP anomalies is
         # ingesting the missing entitlement events — queued as a gated write).
         # Include construction-related events for inactive detection
+        # 2026-09-26: `application_complete` now PREFERS AN IDENTIFIED EVENT over the extremum.
+        # An event that NAMES ITS RECORD (`summary` like 'Application ZP2022-0179 deemed complete',
+        # written by the CapDetail harvest with the city's own disposition, due date and signer) is the
+        # project's acceptance; MAX over every same-type event promotes whichever sibling record acted
+        # LAST -- a design-review or use-permit-modification completeness review years later. The site
+        # draws phase 1 of the timeline bar (explorer.js: "Filed to Complete") from filed_date to this
+        # value, so MAX was drawing a completeness review that never happened: measured across the 11
+        # affected projects, 10,125 days (27.7 project-years) of invented phase, worst case proj45 at
+        # 3,496 days drawn against an actual 89. The other 276 harvested projects are unchanged --
+        # MAX already equalled the identified date. Projects with NO identified event fall back to MAX
+        # exactly as before, so this is surgical.
+        # `entitled` deliberately still uses MAX: the 2026-07-10 decision stands until entitlement
+        # events carry identity too (docs/methodology/identity_is_the_product.md).
         event_cur = conn.cursor()
         event_cur.execute('''
             SELECT vet.code,
                    CASE WHEN vet.code = 'application_submitted'
-                        THEN MIN(pe.event_date) ELSE MAX(pe.event_date) END
+                        THEN MIN(pe.event_date)
+                        WHEN vet.code = 'application_complete'
+                        THEN COALESCE(
+                               MIN(CASE WHEN pe.summary LIKE 'Application %deemed complete'
+                                         AND pe.event_date IS NOT NULL
+                                    THEN pe.event_date END),
+                               MAX(pe.event_date))
+                        ELSE MAX(pe.event_date) END
             FROM project_events pe
             JOIN vocabulary_event_types vet ON vet.id = pe.event_type_id
             WHERE pe.project_id = ?

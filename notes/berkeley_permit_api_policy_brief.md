@@ -244,6 +244,93 @@ Our work over the past 60 days demonstrates what's possible when one motivated i
 
 ---
 
+## Evidence update, 2026-09-28 — what four months of building since this brief now proves
+
+Everything below is measured, not estimated, and all of it postdates the 2026-05-23 draft. It is here
+because the Clariti implementation contract is the once-a-decade moment to fix it, and because each
+item is a *missing field*, not a missing feature.
+
+### The parcel mapping is essentially solved; identity is not
+
+**32,055 of 32,897 permits (97.4%) join directly to one of the 29,122 current assessor parcels**; 841
+remain, almost all re-plats. Berkeley's permit data is small — ~33,000 permits, ~1,200 housing
+structures, on 3.7% of parcels. **The obstacle was never volume.** It is that the records do not
+contain the entity the work needs (a building), and state the facts that matter in prose.
+
+The cost of that, concretely: 259 live scripts and 183 database files to track **1,189 structures** —
+22 scripts per 100 structures. Most of that apparatus exists to parse English and reconcile
+disagreeing sources. An API with the right fields deletes it.
+
+### Six fields, each of which cost weeks
+
+**1. Unit counts as integers, not prose.** `ZP2022-0046` — 3000 Shattuck, ten storeys, *"with 166
+dwellings"* — was excluded from a housing query because the pattern matched `dwelling` and not the
+plural. A 166-dwelling tower, lost to a word boundary; two further patch rounds found more classes of
+miss. **`units_total` / `units_added` / `units_removed` as integers retires the single most expensive
+defect class in four months of work.** Where the City's own fields are known-wrong (0 on junior ADUs,
+a building total repeated on each phase permit), the API should expose the raw field *and* document the
+error, not silently correct it.
+
+**2. Workflow tasks with the City's own due dates.** This brief described scraping 107 permits. That is
+now **1,786 Planning records**, and the result is the City's own performance record: acceptance of a
+housing application runs a **median 12 days past the due date the City set for itself**, p90 **+216
+days**. Also measurable only from workflow: which party held the clock at each step, because the
+disposition strings say so (`Incomplete Pending Applicant` vs `Resubmittal Pending Staff`). None of
+this is derived or inferred — the City writes it down and publishes it to a browser.
+
+**3. `relationship` REQUIRED on related records.** Across 32,897 permits, exactly **4** link a zoning
+approval to its building permit. The entitlement→construction bridge does not exist in
+machine-readable form, and an untyped reference cannot substitute: *"refer to BP # B2016-05399 for
+Demo"* is not a parent; *"Use Permit Modification of ZP2016-0117"* is. Required values:
+`parent`, `child`, `modification_of`, `phase_of`, `references`.
+
+**4. Addresses must name their assigning authority.** One parcel, three answers: Planning files it
+"0 Le Roy Ave", the County assessor's situs is blank, the City's address-point layer says
+**1463 Le Roy Ave**. Elsewhere the County says *Grizzly Peak* where the City says *Latham*.
+"Unnumbered" was never a fact about the parcel, only about who was asked.
+
+**5. A building identifier, or a typed `phase_of`.** Logan Park South is **one** 69-unit building under
+two phase permits — counted per permit it doubles. Acheson Commons is **four** buildings at one address
+totalling 205 units — grouped by address they merge. Both are currently inferred from prose, where
+*"Building a new house"* parses as Building **A** and *"first of two detached houses"* looks like a
+phase but names a second house. **If Clariti does not maintain building identity, the contract should
+say so explicitly** — that answer is worth more than a guess.
+
+**6. APN history across re-plats.** Acheson was re-platted mid-project and its old APN vanished from
+the assessor; a parcel sweep silently missed a 308-unit development, and a naive normalizer once
+reported 890 of 892 parcels dead. `apn_prior[]` / `apn_successor[]` makes re-platting visible.
+
+### Priority, if Clariti can carry only part of it
+
+1. unit counts as integers (§1)
+2. workflow tasks with due dates (§2)
+3. stable per-document URLs
+4. `relationship` required (§3)
+5. a `changes?since=` feed — the difference between an annual APR and a current one
+
+Items 1–3 alone would let the independent reconstruction be deleted rather than maintained.
+
+### The acceptance test to write into the contract
+
+> A clean-room implementation, reading only the API, reproduces **Table A of the Housing Element
+> Annual Progress Report**, and agrees with the City's submitted APR within a stated tolerance, with
+> every disagreement attributable to a documented definitional difference rather than to missing data.
+
+That is the right test because Table A is the City's own statutory product. If it cannot be met, the
+gap between the API and Table A *is* the remaining specification.
+
+### What an API does not replace — stated so the ask is credible
+
+Collection, yes: CPRA requests, scraping, the harvester, workflow dates, record links, APN history.
+**Judgement, no.** What a permit's prose *means* for housing, correcting the City's own data-entry
+errors, applying HCD's definitions (group quarters, gross vs net, phases), affordability and tenure
+(which live in regulatory agreements, not permits), and independent verification — a check that merely
+echoes the City's own field verifies nothing. With an API the independent role shifts from
+*reconstructing* the City's numbers to *auditing* them, which is the more useful posture for both
+sides.
+
+---
+
 ## Appendix: References
 
 - [Berkeley RFP for Comprehensive Permit Management Software Solution (Oct 2024)](https://berkeleyca.gov/sites/default/files/documents/24-11661-C_Comprehensive%20Permit%20Management%20Software%20Solution.pdf)

@@ -88,3 +88,45 @@ records, 2018–2026, never loaded.**
 ⚠ Do not publish an interval trend until that ingest exists. A trend computed on 69 projects,
 selected by whichever ones happened to get a clean status, would be a selection artefact wearing the
 clothes of a policy finding.
+
+---
+
+## The ministerial shift is visible in the DISPOSITION VOCABULARY, not in a duration
+
+Added 2026-09-26 from the CapDetail harvest (`docs/audit/2026-09-26_capdetail_harvest.md`). The two
+paths through Berkeley's Planning module publish workflows of a different *shape*, and the difference
+is not speed — it is whether the workflow contains a step that can refuse.
+
+**Ministerial — `ZCBP`, Zoning Certificate for Building Permit** (46 records measured):
+
+    Completeness Review  ->  Zoning Certificate  ->  Case Closed
+
+Three tasks. The disposition on all 46 is **`Complete`** (plus `Issued`/`Completed` on Case Closed).
+There is no approval, no denial, no hearing, no continuance — **no disposition in the vocabulary that
+can go the other way.** That is what "by rule" looks like in a workflow table: the task exists to be
+discharged, not decided.
+
+**Discretionary — `DRCP`, Design Review Committee Preliminary** (107 records measured):
+
+    Completeness Review  ->  Staff Report  ->  DRC Meeting  ->  Case Closed   (+ public notification)
+
+277 Completeness Review dispositions across 107 records — **2.6 per record.** The vocabulary has
+moving parts: `Incomplete Pending Applicant` **114**, `Resubmittal Pending Staff` **56**,
+`Continued off Calendar` **27**, `Approved` 154, `Application Complete` 90.
+
+### What this means for measuring the shift
+
+**The discretionary cost is ITERATION, not a single slow decision.** 114 `Incomplete Pending
+Applicant` plus 56 `Resubmittal Pending Staff` over 107 records means the applicant is sent away and
+returns, repeatedly, *before the application is even accepted*. That is the cost the by-right reforms
+target, and it is a count from the city's own record rather than an anecdote.
+
+**So the instrument is a vocabulary share, not a duration:** what fraction of housing moves from a
+record type whose vocabulary CONTAINS `Incomplete Pending Applicant` to one that does not. That is
+cleaner than a stopwatch, needs no model, and cannot be gamed by a record being closed quickly.
+
+**Honest caveat — do NOT compare their durations.** A `ZCBP` is a zoning clearance attached to a
+building permit; a `ZP` is a discretionary land-use approval. They are not the same decision, so
+"ministerial is faster" from these two populations would be a category error. Comparing their
+**vocabularies** is fair; comparing their **clocks** is not. The legitimate before/after is the same
+record type over time, or the same project type moving between paths.

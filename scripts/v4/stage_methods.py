@@ -191,7 +191,8 @@ def classify_all(con):
     from scripts.housing_rules.permit_effect import permit_effect, evidence_hash
     clf_hash, now = evidence_hash(), dt.datetime.now(dt.timezone.utc).isoformat()
     labels, unread = [], 0
-    for ev_id, permit in con.execute('SELECT event_id, source_record_key FROM events'):
+    for ev_id, permit in con.execute("SELECT event_id, source_record_key FROM events "
+                                     "WHERE event_type_code NOT LIKE 'planning_%'"):   # a Planning record is not a building permit
         got = permit_effect(permit)
         if got is None:
             unread += 1
@@ -354,6 +355,7 @@ def apply_grounded_counts(con, csv_path=os.path.join(CORR, 'grounded_counts.csv'
 # event or is rejected WITH a reason (ingestion conservation, as in JN-A). Added 2026-09-28.
 INSPECTIONS_DIR = os.path.join(ROOT, 'data', 'raw', 'accela_inspections')
 DOCUMENTS_MANIFEST = os.path.join(ROOT, 'data', 'derived', 'documents_r2_manifest_2026-09-28.csv')
+PLANNING_RECORDS = os.path.join(ROOT, 'data', 'raw', 'accela_capdetail', 'capdetail_2026-09-26.jsonl')
 
 
 def _sha256(path):
@@ -432,6 +434,76 @@ def load_documents(con, manifest=DOCUMENTS_MANIFEST):
         con.rollback()
         raise
     return dict(rows=len(rows), inserted=n)
+
+
+def load_planning(con, path=PLANNING_RECORDS):
+    """Harvested Accela PLANNING records (CapDetail) -> events, as the city recorded them.
+    Each record -> one 'planning_filed' event on its list date, carrying the whole parsed record (every task,
+    pending ones included) as raw_payload. Each DATED processing-status task -> one 'planning_task' event
+    (task, disposition, the due date the city set itself, and who marked it, in raw_payload). What a task
+    MEANS for a project's stage (accepted, entitled) is read later by housing_rules.planning_record and the
+    rung-3 selection, never here. Whoever marked a task becomes a city_staff actor exactly as written
+    (initials are not resolved to names). Returns dict(records, filed, tasks, dated_tasks, staff, marks)."""
+    import datetime as dt
+    now = dt.datetime.now(dt.timezone.utc).isoformat()
+    loc = os.path.relpath(path, ROOT)
+    assert not con.execute("SELECT 1 FROM sources WHERE locator=?", (loc,)).fetchone(), f'already loaded: {loc}'
+    con.executemany("INSERT OR IGNORE INTO event_types VALUES (?,?,0,?)", [
+        ('planning_filed', 'ENTITLEMENT_APPLIED', 'Accela Planning record filed (list date); the parsed record in raw_payload'),
+        ('planning_task', 'ENTITLEMENT_APPLIED', 'dated city review task on a Planning record (task, disposition, '
+         'due date, marked by, in raw_payload); its stage meaning is read later, not at load')])
+    recs = [json.loads(l) for l in open(path)]
+    tot = dict(records=len(recs), filed=0, tasks=0, dated_tasks=0, staff=0, marks=0)
+    try:
+        sid = con.execute("INSERT INTO sources (source_kind,locator,retrieved_at,checksum,notes) VALUES "
+                          "('accela_capdetail',?,?,?,?)", (loc, '2026-09-26', _sha256(path),
+                          'CapDetail harvest of housing Planning records (housing_rules.planning_filter); raw pages '
+                          'pinned in data/raw/accela_capdetail/pages_manifest_2026-09-26.csv')).lastrowid
+        rejected = [r['record'] for r in recs if not r.get('list_date')]
+        rid = con.execute("INSERT INTO ingestion_runs (source_id,started_at,rows_in_source,rows_ingested,"
+                          "rows_rejected,rejected_detail,conserved) VALUES (?,?,?,?,?,?,1)",
+                          (sid, now, len(recs), len(recs) - len(rejected), len(rejected),
+                           ('no list date: ' + ' '.join(rejected)) if rejected else None)).lastrowid
+        staff, marks = {}, []
+        for r in recs:
+            tasks = r.get('processing_status') or []
+            tot['tasks'] += len(tasks)
+            if r['record'] in rejected:
+                continue
+            parcels = r.get('parcels_raw') or []
+            apn = parcels[0] if parcels else None
+            filed = dt.datetime.strptime(r['list_date'], '%m/%d/%Y').date().isoformat()
+            con.execute("INSERT INTO events (event_type_code,event_date,event_date_precision,source_record_key,"
+                        "source_id,ingestion_run_id,raw_payload,raw_address,raw_apn,raw_description,created_at) "
+                        "VALUES ('planning_filed',?,'day',?,?,?,?,?,?,?,?)",
+                        (filed, r['record'], sid, rid, json.dumps(r), r.get('work_location'), apn,
+                         f"{r.get('record_type')} — {r.get('description') or ''}"[:500], now))
+            tot['filed'] += 1
+            for t in tasks:
+                if not t.get('status_date'):
+                    continue
+                payload = dict(t, record=r['record'], record_type=r.get('record_type'))
+                ev = con.execute("INSERT INTO events (event_type_code,event_date,event_date_precision,source_record_key,"
+                                 "source_id,ingestion_run_id,raw_payload,raw_address,raw_apn,raw_description,created_at) "
+                                 "VALUES ('planning_task',?,'day',?,?,?,?,?,?,?,?)",
+                                 (t['status_date'], r['record'], sid, rid, json.dumps(payload), r.get('work_location'),
+                                  apn, f"{t.get('task')} — {t.get('status')}", now)).lastrowid
+                tot['dated_tasks'] += 1
+                who = (t.get('status_by') or '').strip()
+                if who:
+                    if who not in staff:
+                        staff[who] = con.execute("INSERT INTO actors (actor_kind,display_name,role_class,notes) VALUES "
+                                                 "('person',?,'city_staff',?)", (who, 'as written on Accela Planning '
+                                                 'records; initials are not resolved to a name')).lastrowid
+                    marks.append((staff[who], ev, 'permit_event', ev, 'marked_review_task', sid))
+        con.executemany("INSERT INTO actor_actions (actor_id,event_id,entity_type,entity_id,role,source_id) "
+                        "VALUES (?,?,?,?,?,?)", marks)
+        tot['staff'], tot['marks'] = len(staff), len(marks)
+        con.commit()
+    except Exception:
+        con.rollback()
+        raise
+    return tot
 
 
 # ---------------------------------------------------------------- REFERENCE: parcels, assessed values, owners

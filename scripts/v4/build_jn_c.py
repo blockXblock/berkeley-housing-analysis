@@ -108,6 +108,11 @@ Also the **reference layer**: the county's parcels (`databases/berkeley.db`, Feb
 with a stable internal id and their APN as a time-labeled identifier (ADR-003), with assessed values; owners of
 record (`data/reference/berkeley_parcel_owners_2026-08-13.csv`) become actors with an `owner_of_record` action
 on the parcel. Rows that do not land are recorded with their reason (e.g. an APN since re-platted).
+Last, the city's **Planning records** (`data/raw/accela_capdetail/capdetail_2026-09-26.jsonl`, the CapDetail harvest of
+all 1,786 housing Planning records): one `planning_filed` event per record carrying the whole parsed record, one
+`planning_task` event per DATED review task (task, disposition, the due date the city set itself, who marked it), and
+each marker as a city-staff actor exactly as written. Which task means "accepted" or "entitled" is decided later, not
+here. Planning events get no housing-role label: they are not building permits.
 """)
 code(r"""
 con=sqlite3.connect(DB_PATH); con.execute("PRAGMA foreign_keys=ON")
@@ -115,6 +120,7 @@ print("inspections:", SM.load_inspections(con))
 print("documents:  ", SM.load_documents(con))
 print("parcels:    ", SM.load_parcels(con))   # assessor parcels + APN identifiers + assessed values + owners of record
 print("lineage:    ", SM.load_parcel_lineage(con))   # re-plat candidates: former APNs, former parcels, candidate splits
+print("planning:   ", SM.load_planning(con))   # the city's Planning records: filed + dated review tasks, staff who marked them
 """)
 code(r"""
 con=sqlite3.connect(DB_PATH); con.execute("PRAGMA foreign_keys=ON")

@@ -26,7 +26,6 @@ from __future__ import annotations
 import argparse
 import csv
 import glob
-import importlib.util
 import json
 import re
 import sqlite3
@@ -38,10 +37,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 sys.path.insert(0, str(ROOT / "experiments/accela_scrape"))
 
-_spec = importlib.util.spec_from_file_location(
-    "hp", ROOT / "experiments/accela_scrape/harvest_plansets.py")
-hp = importlib.util.module_from_spec(_spec)
-_spec.loader.exec_module(hp)                      # read_rows, find_next, grid_size_bytes, IFRAME_ID
+import accela_grid as ag                        # noqa: E402  THE one grid walk (never re-typed)
 
 from capdetail_select import addr_key             # noqa: E402  the rule-4c canon, via the selector
 
@@ -117,86 +113,25 @@ def targets(db):
 
 
 def read_attachments(pg, href) -> list[dict]:
-    r"""click the attachments tab, then read every grid page. Returns rows; downloads nothing.
+    """every attachment filename on the record. Downloads nothing.
 
-    This follows harvest_plansets.py's PROVEN sequence exactly, because four of my own deviations
-    each produced a silent zero:
-      * the tab must be activated with handlePortletNavigation(a) -- a plain a.click() does nothing;
-      * the grid frame comes from wait_for_selector('#'+IFRAME_ID).content_frame(), then networkidle;
-      * read_rows returns DICTS {target, filename, rowtext}, not strings;
-      * and above all: POLL until rows appear. That file's own comment records why -- "reading rows
-        once after a fixed sleep yielded false 0-form results (proj27: 0 in batch, 3 on isolated
-        re-run)". A single read is how you get a zero that means "not looking".
+    The grid walk itself lives in scripts/accela_grid.py -- the tab click, the row polling, firing
+    the pager AND requiring the first row to change, and raising when fewer pages were walked than
+    the grid declared. It is a module because this session wrote it three times and got it wrong
+    once in each direction: firing the pager without checking inflated a record 8x, and checking
+    without firing truncated 33 records to page 1.
     """
-    pg.goto(BASE + href, wait_until="domcontentloaded")
-    pg.wait_for_timeout(1200)
-    ok = pg.evaluate("""() => {const a=document.querySelector('a[data-control="tab-attachments"]');
-                        if(!a||typeof handlePortletNavigation!=='function')return 'no';
-                        handlePortletNavigation(a);return 'ok';}""")
-    if ok != "ok":
-        raise RuntimeError("attachment grid activation failed")
-    pg.wait_for_timeout(2500)
-    el = pg.wait_for_selector(f"#{hp.IFRAME_ID}", state="attached", timeout=30000)
-    frame = el.content_frame()
-    try:
-        frame.wait_for_load_state("networkidle", timeout=20000)
-    except Exception:
-        pass
-    # HOW MANY PAGES THE GRID ITSELF SAYS IT HAS. The pager renders numbered links (2,3,4...)
-    # alongside "Next >", so the highest number is the page count -- an INDEPENDENT statement of
-    # size to check our reading against, instead of trusting the loop to have finished.
-    declared = frame.evaluate("""() => {
-        let mx = 1;
-        for (const a of document.querySelectorAll("a[href*='__doPostBack']")) {
-            const t = (a.innerText || '').trim();
-            if (/^[0-9]{1,3}$/.test(t)) mx = Math.max(mx, parseInt(t, 10));
-        }
-        return mx;
-    }""")
-
-    rows, pages, seen = [], 0, set()
-    while pages < 40:
-        page_rows = hp.read_rows(frame)
-        fresh = 0
+    frame = ag.open_grid(pg, href)
+    rows, seen = [], set()
+    for page_rows in ag.walk(pg, frame):
         for r in page_rows:
             fn = (r.get("filename") or "").strip()
-            txt = (r.get("rowtext") or "").strip()
             if not fn or fn in seen:
                 continue
             seen.add(fn)
-            fresh += 1
+            txt = (r.get("rowtext") or "").strip()
             rows.append({"filename": fn, "row": txt[:220],
-                         "bytes": hp.grid_size_bytes(txt) or 0})
-        pages += 1
-        nxt = hp.find_next(frame)
-        if not nxt:
-            break
-        # FIRE THE PAGER. The first version of this loop TESTED find_next and never clicked it, so
-        # the grid stayed on page 1, the content-compare guard correctly saw an unchanged page, and
-        # every record with more than 10 attachments was reported as exactly 10 -- 33 of 105 records
-        # (measured 2026-09-28 by hand: ZP2022-0021 has 46, ZP2023-0057 51, ZP2024-0029 21, each
-        # listed as 10). The guard against the earlier 8x inflation was kept while the advance it
-        # was guarding was dropped. Both halves are needed: fire __doPostBack, THEN require the
-        # grid's first row to actually change before reading it as a new page.
-        sig = (page_rows[0]["target"], page_rows[0]["filename"]) if page_rows else None
-        frame.evaluate(f"__doPostBack('{nxt['target']}','')")
-        changed = False
-        for _ in range(16):
-            pg.wait_for_timeout(500)
-            try:
-                after = hp.read_rows(frame)
-            except Exception:
-                after = []
-            if after and (after[0]["target"], after[0]["filename"]) != sig:
-                changed = True
-                break
-        if not changed:
-            break                            # the pager did not advance: last page, or stalled
-    # A truncated read must be VISIBLE, not silent. Raising means the caller records an ERROR row
-    # for the record rather than a plausible-looking short list, which is what hid the bug.
-    if pages < declared:
-        raise RuntimeError(f"truncated: read {pages} of {declared} pages "
-                           f"({len(rows)} filenames)")
+                         "bytes": ag.grid_size_bytes(txt) or 0})
     return rows
 
 

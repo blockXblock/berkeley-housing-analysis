@@ -80,7 +80,21 @@ COMPLETION = ("permit_finaled", "permit_completed")
 # schema comment describes and which marked 22 structures complete off an attached revision, always
 # EARLIER than the master's own evidence. The rule lives here, in code, rather than in a note.
 BUILDING_FINAL = "Building Final"
-INSPECTION_APPROVED = "Approved"
+# JOHN'S SECOND RULING, 2026-09-28: "yes, adopt your Building Final recommendation".
+#   "Approved with Conditions" COUNTS as an approved final -- a conditional final is still a pass;
+#   the city finaled the work. (1 structure / 1 unit.)
+#   "Partially Approved" does NOT -- part of the work did not pass, so it is not the building's
+#   completion. It stays not-complete. (7 structures / 7 units.)
+#   Every other result stays not-complete.
+INSPECTION_APPROVED = ("Approved", "Approved with Conditions")
+
+# The build's event stream now also carries PLANNING events (planning_filed / planning_task, added to
+# live v4 2026-09-28). This fold is about BUILDINGS: its unit of work is a building permit, and a
+# planning record is not one. The keys are disjoint today, so excluding them changes no structure --
+# but "changes nothing today" is not a reason to read rows a fold has no rule for, and an event_count
+# that silently grows with an unrelated ingest is how a figure drifts without anyone deciding to
+# move it.
+NOT_A_PERMIT_EVENT = ("planning_filed", "planning_task")
 
 # The not-complete set is NOT a "hold" in the sense of the +147, which is a number we could state and
 # deliberately do not. This is the ordinary case of a building that has not finished, plus a tail of
@@ -121,7 +135,7 @@ def approved_building_finals(db) -> dict:
         except Exception:
             continue
         if BUILDING_FINAL in str(p.get("type_code") or "") \
-                and str(p.get("result")) == INSPECTION_APPROVED:
+                and str(p.get("result")) in INSPECTION_APPROVED:
             if date and (key not in out or date > out[key]):
                 out[key] = date
     return out
@@ -191,7 +205,9 @@ def load(db, evidence: Path | None):
     permits: dict[str, dict] = {}
     for (eid, etype, edate, key, desc, apn, addr, units) in db.execute(
             "SELECT e.event_id, e.event_type_code, e.event_date, e.source_record_key, "
-            "e.raw_description, e.raw_apn, e.raw_address, e.raw_units FROM events e"):
+            "e.raw_description, e.raw_apn, e.raw_address, e.raw_units FROM events e "
+            "WHERE e.event_type_code NOT IN (%s)"
+            % ",".join("?" * len(NOT_A_PERMIT_EVENT)), NOT_A_PERMIT_EVENT):
         p = permits.setdefault(key, {"events": [], "description": None, "apn": None,
                                      "address": None, "units": None})
         p["events"].append((eid, etype, edate))
@@ -202,7 +218,9 @@ def load(db, evidence: Path | None):
         p["units"] = p["units"] if p["units"] is not None else units
     rows = db.execute(
         "SELECT e.source_record_key, MAX(c.is_master) m, MAX(COALESCE(c.net_units,0)) u "
-        "FROM events e JOIN event_classifications c USING(event_id) GROUP BY 1").fetchall()
+        "FROM events e JOIN event_classifications c USING(event_id) "
+        "WHERE e.event_type_code NOT IN (%s) GROUP BY 1"
+        % ",".join("?" * len(NOT_A_PERMIT_EVENT)), NOT_A_PERMIT_EVENT).fetchall()
     for key, m, u in rows:
         if key in permits:
             src = cls.get(key)

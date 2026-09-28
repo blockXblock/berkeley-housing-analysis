@@ -309,7 +309,7 @@ teaching material, Tier C. v2's `@112cb03` verdict layer is a separate, older cl
 **Then (John: "do a, b"):** the four applied one-time migration scripts that still carried their own `HOUSING`
 regex (`ingest_planning_scope_a`, `preview_accela_planning_ingest`, `ingest_master_permits_log_2026`,
 `fix_planning_filter_gap`, all already run) sequestered to `scripts/superseded/migration__*.py`;
-the "housing filter" check now passes. **Correction (same day):** `gate_canon_uniqueness` has SIX checks, and "address key" still FAILS (pre-existing: `modules/address_normalizer.py` and the v3 curriculum's `scripts/build_v2/s0_keys.py` define their own); I misread a truncated output as "5/5". Ashby BART's affordability row (A900) corrected to the station
+the "housing filter" check now passes. **Correction (same day):** `gate_canon_uniqueness` has SIX checks, and "address key" still FAILS (pre-existing: `modules/address_normalizer.py` and the v3 curriculum's `scripts/build_v2/s0_keys.py` define their own); I misread a truncated output as "5/5". **Resolved same day (John):** both copies are outside live machinery (the Feb-2026 teaching notebooks' `modules/` package; the v3 curriculum), so the gate now names them as exceptions per rule (`ALLOWED`); it passes 6/6, and a planted new copy still fails. Ashby BART's affordability row (A900) corrected to the station
 parcels (`ae519bc`); status stays unknown, no planning record exists on either parcel.
 
 ---

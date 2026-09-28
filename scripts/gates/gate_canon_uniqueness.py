@@ -40,6 +40,14 @@ CANON = {
                        r"_DESIG_LETTER\s*=\s*re\.compile",
                        "which building a permit belongs to; 'Building a new house' is not Building A"),
 }
+# Known copies OUTSIDE live machinery, each named with its reason (John, 2026-09-28). Named files, not
+# skipped folders: a NEW copy anywhere, including these folders, still fails.
+ALLOWED = {
+    "address key": {
+        "modules/address_normalizer.py": "the Feb-2026 teaching notebooks' package (01_collection-03_analysis)",
+        "scripts/build_v2/s0_keys.py": "the v3 curriculum's internal keying; never imported by live code",
+    },
+}
 # A sandbox (experiments/) and a throwaway (scratch/) may hold anything; a LIVE path may not.
 SKIP = ("/.venv/", "/superseded/", "/scripts/gates/", "/test_", "/scratch/", "/experiments/",
         "/.ipynb_checkpoints/", "/node_modules/", "/site-packages/")
@@ -63,7 +71,8 @@ def run() -> tuple[bool, list[str]]:
                     definers.append(rel)
             except Exception:
                 continue
-        extra = [d for d in definers if d != owner]
+        allowed = ALLOWED.get(concept, {})
+        extra = [d for d in definers if d != owner and d not in allowed]
         if owner not in definers:
             ok = False
             msgs.append(f"FAIL {concept}: the canon module {owner} does not define it")
@@ -72,7 +81,9 @@ def run() -> tuple[bool, list[str]]:
             msgs.append(f"FAIL {concept}: defined in {len(extra)+1} places -- {owner} (canon) "
                         f"PLUS {extra}. {why}")
         if owner in definers and not extra:
-            msgs.append(f"ok   {concept}: one definition ({owner})")
+            known = [d for d in definers if d in allowed]
+            msgs.append(f"ok   {concept}: one definition ({owner})"
+                        + (f" + {len(known)} named exception(s): {known}" if known else ""))
     return ok, msgs
 
 

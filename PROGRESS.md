@@ -132,6 +132,20 @@ BEFORE adding 286 rows on top; (2) then the rung-3 `--commit`. DBs are `chmod a-
 
 ---
 
+## 2026-09-28 — UC and BART rulings sourced (John approved) · `corrections/v4/classification_rulings.csv`
+
+New ledger of classification rulings, each with source document and quoted passage. **UC x4 EXCLUDED** from RHNA/APR
+(2200 Bancroft, 1950 Oxford/Anchor House, 2400 Bowditch/Anna Head, 2556 Haste/Heumann House student building): HCD APR
+FAQ, student-restricted housing is group quarters; UC permits its own housing. **BART x2 COUNTED** (1750 Sacramento /
+North Berkeley BART, Ashby BART): the City's Housing Element counts both stations' development toward RHNA ("Pipeline
+Sites"), and the City issues the building permits (B2025-05534/05535) — this REVERSES v2's unsourced bart_project
+"exclude" description. Checked: no publisher ever applied the BART exclusion (only tour styling reads bart_project), and
+the BART permits are not yet in the July CPRA files, so no published figure changes. **HELD (John): People's Park's
+~100-unit supportive-housing building** (SAHA) — counts only if the City issues the permits; confirm the permitting
+authority. Not yet wired into a build step (v4 has no projects to attach them to until the buildings stage).
+
+---
+
 ## 2026-09-28 — v2 inventory; inspections + stored documents load into the build (`e146382`)
 
 **v2 inventory (John approved the split):** CARRY as sourced evidence — documents, inspections, entitled program

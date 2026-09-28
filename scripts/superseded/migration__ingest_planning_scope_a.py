@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-09-28 ============================
+# DO NOT RUN. Original path: scripts/migration/ingest_planning_scope_a.py
+# WHY: One-time v2 write of planning filing/acceptance/entitlement events (applied 2026-09-25/26, 1,188 events). Its HOUSING regex had the \bdwelling\b plural blindness; the corrected filter is housing_rules.planning_filter, and the 40 missed records were added by fix_planning_filter_gap.
+raise SystemExit("SEQUESTERED 2026-09-28 -- see header; original path scripts/migration/ingest_planning_scope_a.py")
+# ================================================================================
 """ingest_planning_scope_a.py — filing, acceptance and entitlement dates onto projects v2 HAS.
 
 SCOPE A, gated by John 2026-09-25: "get the date filed for all our projects, which is ingest 1."

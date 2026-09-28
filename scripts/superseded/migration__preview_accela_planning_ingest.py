@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-09-28 ============================
+# DO NOT RUN. Original path: scripts/migration/preview_accela_planning_ingest.py
+# WHY: Read-only preview for ingest_planning_scope_a, which has been applied. Carried its own copy of the broken HOUSING regex.
+raise SystemExit("SEQUESTERED 2026-09-28 -- see header; original path scripts/migration/preview_accela_planning_ingest.py")
+# ================================================================================
 """preview_accela_planning_ingest.py — READ-ONLY preview of the Accela Planning ingest.
 
 WHY THIS IS THE BINDING CONSTRAINT. It has surfaced three separate times today:

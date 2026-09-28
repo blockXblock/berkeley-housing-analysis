@@ -204,7 +204,7 @@ compatibility view is **`v_projects_flat`** (what `generate_apr_v2.py` and
   `LMSAP`, a *Landmarks* alteration approval — mapping it to `primary_application` wrote a landmarks
   review as a project's acceptance date. · **`housing_rules.planning_filter`** (`DEV` + `HOUSING`) —
   which Planning records are housing developments. Lifted out of the APPLIED one-time write
-  `scripts/migration/ingest_planning_scope_a.py`, where it could not be tested and had a FALSE
+  `scripts/migration/ingest_planning_scope_a.py` (sequestered 2026-09-28 with the other three copies), where it could not be tested and had a FALSE
   NEGATIVE: `\bdwelling\b` **cannot match the plural "dwellings"**, so `ZP2022-0046` (3000 Shattuck,
   10 storeys, **166 dwellings**) was excluded from a housing queue. Writing `dwellings?`, never
   `\bdwelling\b`, is the rule. Corrected filter: queue 1,746 → **1,786**. ⚠ That broken pattern

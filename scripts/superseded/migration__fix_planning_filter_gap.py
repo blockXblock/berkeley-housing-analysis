@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-09-28 ============================
+# DO NOT RUN. Original path: scripts/migration/fix_planning_filter_gap.py
+# WHY: One-time gated v2 write adding the planning events the broken filter missed (applied 2026-09-28 in 8745def: 18 events). Its OLD_HOUSING regex existed only to compute that difference.
+raise SystemExit("SEQUESTERED 2026-09-28 -- see header; original path scripts/migration/fix_planning_filter_gap.py")
+# ================================================================================
 """fix_planning_filter_gap.py -- repair the v2 planning events the BROKEN housing filter missed.
 PREVIEW BY DEFAULT; --commit needs John's go-ahead and an unlocked DB.
 

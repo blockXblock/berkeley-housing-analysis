@@ -149,9 +149,11 @@ from the CPRA feed). Smoke tests pass.
 
 **Still regex, deliberately:** the v3 curriculum (`scripts/build_v2/`, `housing_predicates`, `cpra_dedup`) —
 teaching material, Tier C. v2's `@112cb03` verdict layer is a separate, older classifier.
-**Found, not fixed:** `gate_canon_uniqueness` FAILS on "housing filter" — four applied one-time migration
-scripts (`ingest_planning_scope_a`, `preview_accela_planning_ingest`, `ingest_master_permits_log_2026`,
-`fix_planning_filter_gap`) still carry their own `HOUSING` regex. Pre-existing; candidates to sequester.
+**Then (John: "do a, b"):** the four applied one-time migration scripts that still carried their own `HOUSING`
+regex (`ingest_planning_scope_a`, `preview_accela_planning_ingest`, `ingest_master_permits_log_2026`,
+`fix_planning_filter_gap`, all already run) sequestered to `scripts/superseded/migration__*.py`;
+`gate_canon_uniqueness` now passes 5/5. Ashby BART's affordability row (A900) corrected to the station
+parcels (`ae519bc`); status stays unknown, no planning record exists on either parcel.
 
 ---
 

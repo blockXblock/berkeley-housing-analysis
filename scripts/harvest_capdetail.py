@@ -9,8 +9,8 @@ itself, the disposition, and the staff member who signed it. 14,936 Planning cap
 ~95 had been visited, all by hand (data/raw/accela_status/*.txt). This fetches the housing subset.
 
 SCOPE. The record set is the SAME filter the Planning ingest already uses -- DEV (record-number
-prefix) + HOUSING (language) from scripts/migration/ingest_planning_scope_a.py, IMPORTED, not
-re-typed. 1,746 records, all with a capdetail_href.
+prefix) + HOUSING (language) from housing_rules.planning_filter, IMPORTED, not
+re-typed. 1,786 records (1,746 before the plural fix), all with a capdetail_href.
 
 READ-ONLY. Fetches a public portal and writes gzipped HTML + one JSONL row per record under
 scratch/. No DB is opened. Any v2/v4 write is a separate gated step.
@@ -53,7 +53,8 @@ OUTDIR = ROOT / "scratch/2026-09-26_capdetail"
 def _filters():
     """DEV + HOUSING from the CANON, housing_rules.planning_filter.
 
-    These used to be read out of scripts/migration/ingest_planning_scope_a.py by importing that
+    These used to be read out of scripts/migration/ingest_planning_scope_a.py (now
+    scripts/superseded/migration__ingest_planning_scope_a.py) by importing that
     applied one-time write for its module-level regexes. That was better than copying them, and it
     was still wrong: the pattern had a FALSE NEGATIVE (`\bdwelling\b` cannot match the plural
     "dwellings") which excluded ZP2022-0046 -- 3000 Shattuck, 10 storeys, 166 dwellings -- from this

@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-09-28 ============================
+# DO NOT RUN. Original path: scripts/migration/ingest_master_permits_log_2026.py
+# WHY: One-time v2 write from the 2026 Master Permits Log (applied 2026-09-25: planning_queue_2026 + 54 application_submitted events). Carried its own HOUSING regex; the canon is housing_rules.planning_filter.
+raise SystemExit("SEQUESTERED 2026-09-28 -- see header; original path scripts/migration/ingest_master_permits_log_2026.py")
+# ================================================================================
 """ingest_master_permits_log_2026.py — the entitlement-intake side of the 2026 CPRA production.
 
 WHAT THIS FILE IS, AND IS NOT. `2026 Master Permits Log.xlsx` has 9 sheets and 589 rows, and its

@@ -543,3 +543,64 @@ def load_parcels(con, parcels_db=PARCELS_DB, owners_csv=OWNERS_CSV):
         con.rollback()
         raise
     return out
+
+
+LINEAGE_CSV = os.path.join(ROOT, 'data', 'derived', 'parcel_lineage_candidates_2026-09-28.csv')
+
+
+def load_parcel_lineage(con, manifest=LINEAGE_CSV):
+    """Re-plat candidates (exported from v2 with their evidence) onto the v4 parcel layer. Requires load_parcels.
+    apn_renumber: the prior APN becomes a NON-current identifier on the current parcel (same identity).
+    condo_map / subdivision_map: each prior APN becomes a former parcel (non-current identifier) with CANDIDATE
+    lineage to its current children where they are recorded; where they are not (Acheson), the former parcel
+    carries that note. Nothing is 'confirmed' until checked against a recorded county map."""
+    import csv, datetime as dt
+    from scripts.housing_rules.apn import to_canonical_apn
+    canon = lambda a: to_canonical_apn(a, 'Alameda')
+    assert con.execute("SELECT 1 FROM parcels LIMIT 1").fetchone(), 'load_parcels first'
+    loc = os.path.relpath(manifest, ROOT)
+    assert not con.execute("SELECT 1 FROM sources WHERE locator=?", (loc,)).fetchone(), f'already loaded: {loc}'
+    cur = dict(con.execute("SELECT apn_normalized, parcel_id FROM parcel_identifiers WHERE is_current=1"))
+    rows = list(csv.DictReader(open(manifest)))
+    out = dict(rows=len(rows), prior_identifiers=0, former_parcels=0, lineage=0, rejected=[])
+    try:
+        sid = con.execute("INSERT INTO sources (source_kind,locator,retrieved_at,checksum,notes) VALUES "
+                          "('parcel_lineage_candidates',?,?,?,?)", (loc, dt.datetime.now(dt.timezone.utc).isoformat(),
+                          _sha256(manifest), 'v2 parcel_lineage (bootstrap candidates, 2026-06-16), evidence kept')).lastrowid
+        def former(apn_raw, note):
+            c = canon(apn_raw)
+            got = con.execute("SELECT parcel_id FROM parcel_identifiers WHERE apn_normalized=?", (c,)).fetchone()
+            if got:
+                return got[0]
+            pid = con.execute("INSERT INTO parcels (city, notes) VALUES ('Berkeley', ?)", (note,)).lastrowid
+            con.execute("INSERT INTO parcel_identifiers (parcel_id,apn_raw,apn_normalized,is_current,county,source_id) "
+                        "VALUES (?,?,?,0,'Alameda',?)", (pid, apn_raw, c, sid))
+            out['former_parcels'] += 1
+            return pid
+        for r in rows:
+            kind, child = r['event_type'], (r['child_apn_raw'] or '').strip()
+            parents = [a.strip() for a in r['parent_apn_raw'].split(',') if a.strip()]
+            if kind == 'apn_renumber':
+                pid = cur.get(canon(child))
+                if pid is None:
+                    out['rejected'].append(f"{r['v2_lineage_id']}: current APN {child} not a current parcel"); continue
+                con.execute("INSERT OR IGNORE INTO parcel_identifiers (parcel_id,apn_raw,apn_normalized,is_current,county,"
+                            "source_id) VALUES (?,?,?,0,'Alameda',?)", (pid, parents[0], canon(parents[0]), sid))
+                out['prior_identifiers'] += 1
+            elif child:
+                cid = cur.get(canon(child))
+                if cid is None:
+                    out['rejected'].append(f"{r['v2_lineage_id']}: child {child} not a current parcel"); continue
+                for a in parents:
+                    pid = former(a, f"former parcel ({kind}); candidate lineage from v2 row {r['v2_lineage_id']}")
+                    con.execute("INSERT OR IGNORE INTO parcel_lineage (parent_parcel_id,child_parcel_id,event_type,status,"
+                                "source_id) VALUES (?,?,?,'candidate',?)", (pid, cid, kind, sid))
+                    out['lineage'] += 1
+            else:
+                for a in parents:
+                    former(a, f"former parcel ({kind}); children NOT recorded -- {r['notes']}"[:300])
+        con.commit()
+    except Exception:
+        con.rollback()
+        raise
+    return out

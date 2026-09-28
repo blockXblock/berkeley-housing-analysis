@@ -159,6 +159,65 @@ rule. 32 is encoding it in `build_structures.py` and writing a timestamped basel
 gated write. I exported the evidence file's parent links for 32's fold:
 `scratch/2026-09-28_evidence/permit_parents.csv` (694 Sonnet-read parents new to it).
 
+**DONE (`0a2b9d5`, dev).** The ruling is in `build_structures.py` (`completion_for`, comment citing John
++ the date) and the baseline is written: `data/baselines/structures_baseline_2026-09-28_completion-ruling.json`.
+**2018-2025 at structure grain: 851 structures / 4,005 units**, against 860 / 4,099 under
+MAX-over-all-events — the ruling removes 9 structures / 94 units that were credited to a finaled revision.
+Basis across all 1,187: `master_finaled` 895, `master_building_final` **21** (not 3 — the 3 were the subset
+of the 22 borrowed-completion cases; applying the inspection rule to EVERY master with no finaled event
+finds 21). Not-complete is **271 structures / 1,092 units**, not 19 — the 19 were the rest of those 22,
+whereas the ruling's set is every structure whose own master has neither a finaled event nor an approved
+Building Final, a much larger class the 22 never bounded. Split by name (3c's point: "held" reads like the
+deliberate +147 hold, and this is not that):
+- **NOT_YET_COMPLETE** 197 structures / 945 units — master permit 2022+, plausibly still building. Nothing to fix.
+- **STALE_NEEDS_SOURCE** 74 structures / 147 units — master permit pre-2022, still no completion of its own.
+  (The 147 is a digit coincidence with the +147 held units; unrelated.)
+
+**The stale tail is mostly LAPSED permits, not missing evidence** — answerable from data already held, before
+any fetch. The Accela Building list dumps cover 70 of the 74, and the city's own status is **52 Closed Expired,
+18 Issued, ZERO Finaled**. v4's inspection events add: 30 never inspected (36 units), 16 inspected with no
+Building Final (75 units), 28 with a Building Final that was NOT approved (36 units; 54 Disapproved, 8
+Rescheduled, 7 Partially Approved, 7 Cancelled, 3 Site Cancellation). 42 of 74 have a later master on the same
+site, i.e. plausibly re-permitted. A read-only CapDetail pass (John approved queueing it) covers what only
+CapDetail carries — current status, workflow dates, Related Records — into
+`scratch/2026-09-28_stale_structures/`; raw pages kept, one retry each, no DB write and no ledger row.
+
+**For John's ruling list, small:** `'Approved with Conditions'` is a Building Final result the ruling's wording
+does not cover; the code matches `result == "Approved"` exactly. Exposure **1 structure / 1 unit**, so nothing
+changes today. `'Partially Approved'` (7 structures / 7 units) sits behind the same wording and is treated as
+not-complete.
+
+**Baseline machinery, two fixes it needed:** a `--label` so a rule change APPENDS a same-day baseline instead
+of editing one; and recording the parent-lane file's sha as part of the baseline's **identity** — without it
+the checker compared a with-parents baseline to a without-parents fold and reported "the fold changed
+behaviour on the same data — a code regression", a false failure of exactly the kind `CLAUDE.md` warns erodes
+trust in checking. Parent lane imported: suffix 1019, model parent 163, cross-reference 59, net +5 attachments,
+**316 cases claimed by both lanes with zero disagreement**.
+
+---
+
+## 2026-09-28 — Affordability statements: the listing was reporting 10 when the truth was up to 123
+
+`scripts/list_affordability_statements.py` (`389f018`) lists which of the 33 projects with unsourced affordable
+units have a statement on file. Read-only; **downloads nothing**. It reuses `harvest_plansets.py`'s proven
+`read_rows`/`find_next`/`grid_size_bytes` + `IFRAME_ID` and deliberately NOT its `classify` (tuned to plan sets
+at >=5 MiB, would reject a 0.08 MB statement).
+
+**The bug 3c caught, and it was blunter than a stall.** 33 of 105 records came back at exactly 10 attachments
+against 3 at 9 — a cap signature, not a distribution. The loop **tested `find_next` and never fired it**: no
+`__doPostBack`, so the grid could not advance, and the content-compare guard (added after an earlier run
+inflated one record to 80 by reading page 1 eight times) then correctly saw an unchanged page and stopped. The
+guard against inflation was kept while the advance it guarded was dropped. Hand check first: ZP2022-0021 has
+**46** files over 5 pages, ZP2023-0057 **51** over 6, ZP2024-0029 **21** over 3 — each listed as 10.
+**Both halves are needed:** fire the pager, then require the grid's first row to CHANGE before reading a new
+page. And the grid publishes its own page count in its numbered links, so a short read now **raises** instead
+of returning a plausible short list — that silence is what hid this.
+
+**Re-run:** 1,352 files across 104 records (was 562); nothing at exactly 10; CANDIDATEs 45 → **125 across 22
+projects** covering 493 affordable units, 430.5 MB if all were fetched. `PLN2023-0033` retried clean (2
+attachments). One record still errors — `ZP2022-0144` (proj12) — and it is the new guard firing. A model judges
+which candidates are real sources; the script does not.
+
 ---
 
 ## 2026-09-28 — Regex permit classifier RETIRED (step 1 complete)

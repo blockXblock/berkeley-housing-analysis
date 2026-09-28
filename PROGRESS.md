@@ -218,6 +218,61 @@ projects** covering 493 affordable units, 430.5 MB if all were fetched. `PLN2023
 attachments). One record still errors — `ZP2022-0144` (proj12) — and it is the new guard firing. A model judges
 which candidates are real sources; the script does not.
 
+**ONE GRID WALK (`745f66c`).** The walk now lives in **`scripts/accela_grid.py`** — `open_grid` (the tab must be
+activated with `handlePortletNavigation`; a plain `click()` does nothing and an un-clicked tab shows only the
+upload widget, which LOOKS like "no attachments"), `declared_pages`, and `walk()` as a GENERATOR (a caller that
+downloads must act while on the row's own page). `list_affordability_statements.py` imports it; so does the
+fetcher. **`ZP2022-0144` then listed clean: 67 files.** Final listing: **1,419 files across 105 records, zero
+errors.** Sonnet's judgment was made against 1,352 minus that record, so proj12's 67 files are unjudged.
+
+**TIER 1 APPROVED AND FETCHING (John: "fetch tier 1").** `scripts/fetch_affordability_statements.py` — 140
+files / 47 records / 76.4 MB into `scratch/2026-09-28_affordability/tier1/<record>/<filename>`, manifest
+`tier1_manifest.csv` (project_id, record, filename, listed_bytes, bytes, sha256, likelihood, fetched_at,
+status, local_path). **Tier 2 (16 files, 388 MB of ZAB reports/NODs) NOT fetched** — later, only for projects
+tier 1 leaves unresolved. EXACT filename match, never fuzzy: fetching an unnamed file is fetching what was not
+approved. Accela's filenames mostly carry **no `.pdf` extension**; magic bytes verified `%PDF`. Size checked
+against the listing with a 2 KB tolerance (the listing's bytes come from the grid's MiB display, not byte-exact)
+— a mismatch reports `SIZE-MISMATCH`, because a saved error page is otherwise a "successful" download.
+
+---
+
+## 2026-09-28 — John's second ruling: a conditional Building Final counts · the 74 stale structures resolved
+
+**John, verbatim "yes, adopt your Building Final recommendation"** (`745f66c`): `Approved with Conditions`
+**counts** as an approved final — a conditional final is still a pass, the city finaled the work.
+`Partially Approved` **does not** — part of the work did not pass. Every other result stays not-complete.
+Moved figures: **2018-2025 structure grain 852 structures / 4,006 units** (was 851 / 4,005); basis
+`master_finaled` 895 · `master_building_final` **22** (was 21); NOT_YET_COMPLETE 197 / 945 unchanged;
+STALE_NEEDS_SOURCE **73 / 146**. New baseline APPENDED: `structures_baseline_2026-09-28_ruling2-buildingfinal.json`.
+
+**The fold now excludes `planning_filed` / `planning_task`.** Live v4 was rebuilt 2026-09-28 with those 10,713
+planning events (sha `6edb337e`, 147,232 events). This fold is about BUILDINGS and a planning record is not a
+building permit. It changes nothing — planning keys are **disjoint** from permit keys (0 overlap, 0
+classifications) so none could become a structure — and the check is that **every invariant came out identical
+on the rebuilt DB** (1,189 masters → 1,187 structures, 1,236 attached, units-once 5,439).
+
+**The 74 STALE_NEEDS_SOURCE structures: read-only CapDetail pass, 70/70 fetched, zero failures**, raw pages kept
+in `scratch/2026-09-28_stale_structures/` (`queue.csv`, `local_evidence.csv`, `stale_structures_capdetail.csv`):
+| structures | units | category |
+|---|---|---|
+| 29 | 31 | expired, later master permit on the same site (re-permitted) |
+| 23 | 35 | expired, no successor found |
+| 10 | 66 | Issued and still inspected 2024+ — genuinely still building |
+| 8 | 9 | Issued then quiet before 2024 |
+| **0** | — | finaled-but-missing-from-CPRA |
+The "still building" 10 hold 66 of the 141 units; the largest is **B2021-04232, 2902 Adeline, 54 units, last
+inspected 2026-09-22** — a live construction site, not a data problem. CapDetail's status agreed with the list
+dump on **all 70**. Four of the 74 are absent from the Building list dumps (`B2017-03768`, `B2018-05100`,
+`B2018-05101`, `B2019-00017`, 6 units) — they need capID discovery, a separate step. **No DB write, no ledger
+row:** John rules on what changes.
+
+**A near-miss worth recording:** my workflow lookup searched for tasks named "final" and "expiration" and
+returned **zero on all 70** — building records have neither. The closing tasks are **`Certificate of Occupancy`,
+`Inspection`, `Issuance`**. A wrong key returns a silent zero, the same shape as the pager bug; re-derived from
+the saved pages, no refetch. What they say: **CO has NO disposition on all 70**, `Issuance` reads Issued on all
+70, `Inspection` is blank or Auto-Closed. So the workflow adds no completion evidence here — consistent with the
+2026-09-26 finding that the CO task carries no disposition even on finaled buildings.
+
 ---
 
 ## 2026-09-28 — Regex permit classifier RETIRED (step 1 complete)

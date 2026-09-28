@@ -132,7 +132,7 @@ BEFORE adding 286 rows on top; (2) then the rung-3 `--commit`. DBs are `chmod a-
 
 ---
 
-## 2026-09-28 — Planning records load into the build (`fa33f52`, `4453b82`) — live v4 NOT yet rebuilt
+## 2026-09-28 — Planning records load into the build (`fa33f52`, `4453b82`) — live v4 REBUILT with them
 
 32's CapDetail harvest is now a declared input: `data/raw/accela_capdetail/capdetail_2026-09-26.jsonl` (1,786 records,
 sha256 2f911aae…) + `pages_manifest_2026-09-26.csv` (sha256 + bytes for each of the 1,786 raw pages, 164 MB). Pages go
@@ -142,7 +142,7 @@ lost removable-volume access); it verifies every file against the manifest. **DO
 ones stay in the record's payload), 64 city-staff actors as written, 8,927 marks; no stage meaning at load;
 `classify_all` skips planning events. 249 of 277 keyed documents now match a planning record. **Chain from raw:** gate
 4,323 / 5,288 unchanged; structural gate halts on events only (147,232 vs live 136,519 = the 10,713 planning events),
-completion set identical. **Next (John):** rebuild live v4 with planning (snapshot first).
+completion set identical. **DONE (John unlocked): live v4 rebuilt** from the verified chain build (snapshot `keep_snapshot_2026-09-28_pre-v4-planning-rebuild.db` = sha 27c3e7e9, 136,519 events). Live sha **6edb337e** == build; integrity ok; 147,232 events; completions 4,072 / 4,323, BP 5,288; verifier PASS; **structural gate PASS** (events equal, 895-permit completion set equal). John to re-lock.
 
 ---
 

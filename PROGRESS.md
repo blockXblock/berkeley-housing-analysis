@@ -55,8 +55,17 @@ assisted-living credits), the remaining year gaps are small: 2023 ≈ +6, 2025 �
 **Housekeeping:** the planning-scope second read is COMPLETE (`4b530b6`): 2,630 second readings stored, 3
 unrecoverable of 2,594. The "55-record tail still in flight" line below is superseded.
 
-**NEXT:** John rules on assisted living (2100 San Pablo, 2000 Dwight: separate living quarters or group
-quarters?) → gated override for item 1 → Accela check for item 3 → decision set adds/drops.
+**Assisted living, checked (read-only):** the City does NOT treat either as group quarters. Every A2 row
+reports them as ordinary `5+` renter, above-moderate units at all three stages. 2100 San Pablo (RCFE,
+R-2.1, `B2019-03689`): entitled 96 **twice** (2018 `ZP2016-0034`, again 2022), BP 96 (2020), CO 96 (2023);
+the City's own 2018 note says "94 assisted living suites". 2000 Dwight (`B2021-02404`): entitled 126 (2020,
+"Senior housing"), BP 113 (2022-04-18), CO 113 (2025). Both first BPs are before 2022-06-30, so neither
+touches 6th-cycle RHNA. The model zeroed both from the RCFE / R-2.1 label, the same label-for-substance
+reading that misread Step Up; R-2.1 permits dwelling units OR sleeping units, so the label cannot decide.
+The deciding evidence is each unit's layout (own kitchen and bath), which lives on the ZP plan sets.
+
+**NEXT:** read the unit plans for 2100 San Pablo and 2000 Dwight → John rules on assisted living → gated
+override for item 1 → Accela check for item 3 → decision set adds/drops.
 
 ---
 

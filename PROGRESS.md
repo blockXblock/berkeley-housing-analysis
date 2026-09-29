@@ -38,23 +38,25 @@ group quarters). Where the City departs from HCD, the gap is the City's, not our
    69) and `B2019-05575` (Phase I, on the North parcel) are both `new_unit` 69, finaled the same day. The
    Phase II reading itself says "Phase I (B2019-05575) creating no units"; the Phase I reading disagrees.
    The City credits 69 once. Fix = a new reading/override for `B2019-05575` (0 units), gated.
-2. **1367 University (`B2022-04366`, 39) — the ledger overrides the model.** The model read "congregate
-   residence" as group quarters (0); `corrections/v4/grounded_counts.csv` restores 39, citing the City's own
-   note "GLA that has separate kitchen/sanitary facilities within each unit". The City reports no CO for it.
-   **Needs John's ruling:** under today's GLA rule it is 0, unless GLA with a private kitchen and bath is a
-   unit (the Census test is separate living quarters, not the label).
+2. **1367 University (`B2022-04366`, 39) is RIGHT at 39: the ledger overrides a model misreading.** It is
+   **Step Up Housing** (Panoramic Interests; open, CO 2025-06-18 per our `docs/table_a2_2025.csv`). John
+   approved 39 dwelling units on 2026-09-26 (`corrections/v4/grounded_counts.csv`): each room has its own
+   kitchen and bath, so each is separate living quarters, a unit under HCD. The model read the permit's
+   label "congregate residence" as group quarters, because the kitchens are not in the permit text. This is
+   consistent with the GLA ruling: GLA rooms WITHOUT their own kitchen and bath are not units. **The City
+   reported it entitled (2020) and permitted (2023) but has no CO row: a City omission of 39 in 2025.**
 3. **2021 +85 is two permits the City never reports a CO for, in any year:** `B2014-05786` (44 DU, APN
    057-2016-020) and `B2019-01789` (40, the COMPLETION-PERMIT-EXPIRED borrowed-completion convention).
    Not group quarters; next step is an Accela check that the City simply omitted them.
 
-Adjusted for items 1 and 2 plus the group-quarters difference, the remaining year gaps are small: 2023 ≈ +6,
-2025 ≈ +32.
+After the explained items (the Logan Park double count, the City's Step Up omission, and the City's
+assisted-living credits), the remaining year gaps are small: 2023 ≈ +6, 2025 ≈ +32.
 
 **Housekeeping:** the planning-scope second read is COMPLETE (`4b530b6`): 2,630 second readings stored, 3
 unrecoverable of 2,594. The "55-record tail still in flight" line below is superseded.
 
-**NEXT:** John rules on item 2 (and assisted living generally: 2100 San Pablo and 2000 Dwight follow the
-same rule) → gated override for item 1 → Accela check for item 3 → decision set adds/drops.
+**NEXT:** John rules on assisted living (2100 San Pablo, 2000 Dwight: separate living quarters or group
+quarters?) → gated override for item 1 → Accela check for item 3 → decision set adds/drops.
 
 ---
 

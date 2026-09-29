@@ -104,6 +104,7 @@ energy/
 output/
 .claude/*
 !.claude/commands/
+!.claude/skills/
 *.bak
 .env.r2
 *.env.r2

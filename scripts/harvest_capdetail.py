@@ -65,7 +65,13 @@ def _filters():
     return DEV, HOUSING
 
 
-def queue() -> list[dict]:
+def queue(named: set[str] | None = None) -> list[dict]:
+    """The housing records by the canon filter, or, with `named`, exactly those record numbers.
+
+    `named` exists because the filter is no longer the scope authority: corrections/v4/
+    planning_scope_rulings.csv (John, 2026-09-29) includes 44 records the regex never admitted, so
+    they were never fetched. A named record is taken from the same list dumps, filter bypassed; one
+    that is absent or has no capdetail_href is reported by the caller, never silently skipped."""
     DEV, HOUSING = _filters()
     recs: dict[str, dict] = {}
     for fn in glob.glob(str(ROOT / "data/raw/accela/date_range/Planning_*.jsonl")):
@@ -79,6 +85,12 @@ def queue() -> list[dict]:
                 recs[n] = d
     out = []
     for n, d in sorted(recs.items()):
+        if named is not None:
+            if n in named and d.get("capdetail_href"):
+                out.append({"record": n, "href": d["capdetail_href"],
+                            "record_type": d.get("Record Type"), "list_status": d.get("Status"),
+                            "list_date": d.get("Date")})
+            continue
         if not DEV.match(n):
             continue
         blob = " ".join(str(d.get(f, "")) for f in ("Description", "Project Name", "Record Type"))
@@ -123,11 +135,20 @@ def main() -> int:
     ap.add_argument("--settle", type=int, default=15000, help="ms to wait for the workflow block")
     ap.add_argument("--force", action="store_true", help="refetch records already on disk")
     ap.add_argument("--out", default=None)
+    ap.add_argument("--records", default=None,
+                    help="file of record numbers (one per line) to fetch instead of the filter's queue")
     args = ap.parse_args()
 
     from playwright.sync_api import sync_playwright
 
-    q = queue()
+    named = None
+    if args.records:
+        named = {l.strip() for l in open(args.records) if l.strip()}
+    q = queue(named)
+    if named is not None:
+        missing = sorted(named - {r["record"] for r in q})
+        if missing:
+            print(f"NOT IN THE LIST DUMPS (or no capdetail_href), not fetched: {missing}", flush=True)
     outdir = pathlib.Path(args.out) if args.out else OUTDIR
     (outdir / "pages").mkdir(parents=True, exist_ok=True)
     jsonl = outdir / "capdetail_parsed.jsonl"

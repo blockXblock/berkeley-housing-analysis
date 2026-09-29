@@ -2,9 +2,59 @@
 
 **Purpose:** The live current-state snapshot. Read this first (after `CLAUDE.md`) at session start. Updated at the end of every gated step (see *State-update discipline* in `CLAUDE.md`). This file is canonical; auto-loaded memory is a hint, not ground truth — verify against the DB / `git log`.
 
-
-
 ---
+
+## 2026-09-29 — GLA ruled out as units · CO by year vs the City's APR (read-only; no DB write)
+
+**John ruled: Group Living Accommodation rooms are NOT dwelling units (HCD definitions).** Our APR CO
+numbers once diverged from the City's mainly because we counted group units; the planning-scope adds are
+now **634 units** at project grain (the 676 minus `ZP2018-0229`'s 42 GLA rooms).
+
+**CO units by year: live v4 (permit_effect readings) vs City APR Table A2** (`hcd_apr_mirror_2026-06-17_fresh.db`,
+the 11 `CO_*` tier columns; oracle only, compared never derived). Ours = finaled `new_unit` master permits,
+`net_units>0`, one row per permit.
+
+| Year | Ours | City | Δ |
+|---|---|---|---|
+| 2018 | 233 | 229 | +4 |
+| 2019 | 326 | 313 | +13 |
+| 2020 | 415 | 405 | +10 |
+| 2021 | 416 | 331 | +85 |
+| 2022 | 830 | 828 | +2 |
+| 2023 | 695 | 716 | −21 |
+| 2024 | 707 | 708 | −1 |
+| 2025 | 450 | 492 | −42 |
+| **2018–25** | **4,072** | **4,022** | **+50 (1.2%)** |
+| 2026 (to 07-07) | 249 | — | CKAN ends CY2025 |
+
+**The model applies the group-quarters rule; the City does not.** `B2021-02423` "40 sleeping units and one
+manager's dwelling unit" → 1 unit. The two biggest City-only credits are group quarters the City counted as
+units: **2100 San Pablo** (2023, City 96; its 2018 row says "94 assisted living suites"; we count 0) and
+**2000 Dwight** (2025, City 113; `B2021-02404` is R-2.1 supervised senior living, which the model reads as
+group quarters). Where the City departs from HCD, the gap is the City's, not ours.
+
+**Three open items (each a ruling or a gated fix, none applied):**
+1. **Logan Park South counted twice in 2023 (+69, a model error).** `B2021-03302` (Phase II, ledger-grounded
+   69) and `B2019-05575` (Phase I, on the North parcel) are both `new_unit` 69, finaled the same day. The
+   Phase II reading itself says "Phase I (B2019-05575) creating no units"; the Phase I reading disagrees.
+   The City credits 69 once. Fix = a new reading/override for `B2019-05575` (0 units), gated.
+2. **1367 University (`B2022-04366`, 39) — the ledger overrides the model.** The model read "congregate
+   residence" as group quarters (0); `corrections/v4/grounded_counts.csv` restores 39, citing the City's own
+   note "GLA that has separate kitchen/sanitary facilities within each unit". The City reports no CO for it.
+   **Needs John's ruling:** under today's GLA rule it is 0, unless GLA with a private kitchen and bath is a
+   unit (the Census test is separate living quarters, not the label).
+3. **2021 +85 is two permits the City never reports a CO for, in any year:** `B2014-05786` (44 DU, APN
+   057-2016-020) and `B2019-01789` (40, the COMPLETION-PERMIT-EXPIRED borrowed-completion convention).
+   Not group quarters; next step is an Accela check that the City simply omitted them.
+
+Adjusted for items 1 and 2 plus the group-quarters difference, the remaining year gaps are small: 2023 ≈ +6,
+2025 ≈ +32.
+
+**Housekeeping:** the planning-scope second read is COMPLETE (`4b530b6`): 2,630 second readings stored, 3
+unrecoverable of 2,594. The "55-record tail still in flight" line below is superseded.
+
+**NEXT:** John rules on item 2 (and assisted living generally: 2100 San Pablo and 2000 Dwight follow the
+same rule) → gated override for item 1 → Accela check for item 3 → decision set adds/drops.
 
 ---
 

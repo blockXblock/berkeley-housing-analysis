@@ -217,7 +217,8 @@ _held=_json.load(open(os.path.join(ROOT,'corrections','v4','held_items.json')))
 for h in _held['held_147']:
     print(f"  HELD    {h['permit']} (city claims {h['city_count_unadopted']}): {h['reason'][:95]}")
 for h in _held.get('resolved',[]):
-    print(f"  RESOLVED {h['permit']} ({h['city_count_unadopted']}): {h['resolution'][:95]}")
+    # a resolved entry from the C2 exclusion (not the city-enumerated +147) never carried a city count
+    print(f"  RESOLVED {h['permit']} ({h.get('city_count_unadopted', 'no city count')}): {h['resolution'][:95]}")
 held_total=sum(h['city_count_unadopted'] for h in _held['held_147'])
 print(f'=> still held (city-enumerated, un-adopted): +{held_total}; resolutions enter CO only via '
       f'corrections/v4/grounded_counts.csv with document provenance.')

@@ -4,6 +4,29 @@
 
 ---
 
+## 2026-09-29 — JN-E's 94-unit gap decomposed; JN-E gates pass again up to one real double count
+
+**The 94 (read-only; `docs/audit/2026-09-29_jne_94_decomposition.md` + per-permit CSV):** a permit-by-permit
+diff of the pre-rebuild (4,229) and post-rebuild (4,323) snapshots. +94 = **+251** new 2026 window − **157**
+in 2018–25, and the 157 falls into six steps with every permit assigned: group quarters −250 (Dwight 113,
+San Pablo 96, GLA 41) · not a new unit −49 (solar, electrical, sheds, sub-permits) · 1951 Shattuck Phase 1 →
+Phase 2, 0 (same final date) · Logan Park South double count +69 · count corrections −6 (incl. Building A
+14 → 6, ending an old 8-unit double count; Buildings B and C were already counted) · newly recognized units
++79 (55 permits, mostly ADUs). Baseline `reconciliation_baseline_2026-09-29b.json` (appended) carries the
+steps; they sum to 4,342. `build_jn_e.py`: 4 hard figures PASS, sha MATCH.
+
+**Two older JN-E breaks surfaced by running it:** (1) the waterfall assert (fixed above); (2) a display line
+crashed on the one resolved held item that never carried a city count (`B2020-03895`, from the C2
+exclusion, since 2026-07-03); `build_jn_e.py` now prints "no city count" for it.
+
+**JN-E now stops, correctly, at §9 "DEDUP INCOMPLETE": `B2014-01391`** (new SFR with attached ADU, 2 units)
+is finaled twice, 2021-08-05 (2018–22 production) and 2026-02-24 (the July production), both counted. A
+re-final, not a second building. **Needs John's ruling + a v4 unlock:** count once at the FIRST final (keep
+2021, demote the 2026 event, the same keep-MIN method as dedup47). Effect: co_completions 4,342 → 4,340;
+2018–25 unchanged (4,091); then append a new baseline.
+
+---
+
 ## 2026-09-29 — APPLIED to live v4: Dwight 88, Logan Park South Phase I 0, Step Up evidence replaced
 
 **John's rulings:** Step Up = tenants (39), 2000 Dwight = 88, 2100 San Pablo = 0 (no write; the model's 0

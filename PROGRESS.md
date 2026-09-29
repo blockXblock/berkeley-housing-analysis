@@ -89,6 +89,48 @@ hotel use (Approved).
 **The quoted-reason requirement paid for itself twice:** it is what made my own three misjudgements
 visible, and it is what shows a removal claim resting on a change-of-use rather than a demolition.
 
+**BOTH DIRECTIONS SECOND-READ · the decision set is `scratch/2026-09-28_planning_scope/decision_set.csv`
+(2,106 rows; `scripts/planning_scope_decision_set.py`, `bb07a57`).** 2,578 of 2,594 low-confidence
+records re-read; a 55-record tail is still in flight at `--pack 1`. Effects: **ADD 45** (44 second-read),
+**DROP 853**, **HOLD_UNKNOWN 54**, contested-only 1,154.
+
+**THE ADD DIRECTION WAS SECOND-READ REGARDLESS OF CONFIDENCE, and that was the right call: 4 of the 39
+"confident" adds were WRONG, and all four sat in the 0.71–0.75 band — immediately above the 0.70 floor
+that would have exempted them.** `PLN2022-0102` "construction of new dorms" → unknown (dormitories are
+group quarters); `ZCBP2015-0579` "BP15-0076. **Residing**." → not_housing (re-siding, read as
+*residential*); `PLN2023-0010` "Pre-Application for SB-9 **Eligibility**" → an inquiry; `ZP2022-0085`
+lifts and remodels an existing 2bd/2ba house into a 3bd/2.5ba → no new unit. **A confidence floor
+filters for self-reported doubt, which is not the same as being right.**
+
+**The 45 adds, at PROJECT grain: 676 units** — *not* the 686 the rows sum to. **Records are not
+projects:** four texts appear on two records each (a companion design review carrying its primary
+application's text, e.g. `DRSL2018-0013` + `ZP2018-0172` "Four new SFRs on vacant lot"), so summing
+records double-counts. Largest: `ZP2018-0135` **237 units** ("237 dus" — missed because the pattern does
+not know the abbreviation), `DRCF2021-0006` 163, `ZP2026-0006` 73 (a modification raising a count 66→73),
+`PLN2023-0098` 48, `PLN2017-0061` 34 income-restricted senior studios, `ZP2026-0050` 22, `PLN2019-0018`
+12. The remainder is the 1–4-unit ADU/infill/SFR tail, incl. ZCBP clearances (`NEW SECOND UNIT`).
+
+**⚠ A DEFINITION QUESTION FOR JOHN, worth 42 of those units — and Berkeley's own records answer it.**
+`ZP2018-0229` is "New mixed-use development with **42 rooms for Group Living Accommodations**". Do GLA
+rooms count as units? **Berkeley's own practice says NO:** `ZP2021-0048` seeks "to **eliminate 75
+dwelling units** within an 85-unit residential building **through a change of use to GLA's**" — the city
+treats conversion to GLA as *removing* dwelling units. And `PLN2022-0002` is an SB 330 application "to
+add three dwelling units to an existing group living [accommodation]", so the two categories are
+distinct in the same record. HCD's definitions point the same way (group quarters are not units) while
+counting SROs as units, so GLA sits on the boundary. **34 records mention GLA**, several of them major
+SB 330 projects. Project-grain adds **excluding** GLA: **634 units**.
+
+**The 289 drops still resting on ONE label are all plainly correct categories** on inspection: 44 zoning
+research letters/determinations, ~90 landmark initiations and Mills Act contracts (`LMIN`, `LMMA` — a
+landmark designation is not a housing development), 82 additions/remodels/decks, 14 non-residential.
+
+**Machinery lessons, each now in the code, not a note:** a token budget must be slack, not a ceiling
+(400/record truncated 64 of 260 groups); submit must RESUME (the retry asked 658, not 2,594); collect
+must MERGE (overwriting would have discarded 1,936 good readings); **packing COUPLES failures** — 4
+groups burned 6,400 tokens returning *nothing*, so a stubborn tail goes out at `--pack 1`; and one
+batch-state file means one batch in flight (per-`--tag` state now, after I nearly clobbered 658
+paid-for readings).
+
 ---
 
 ## 2026-09-26 — CapDetail harvest: rung 3 (application ACCEPTED) becomes a dated fact

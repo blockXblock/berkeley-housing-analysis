@@ -183,9 +183,12 @@ def sonnet(cmd: str, recs: dict, conf_floor: float, pack: int, dry: bool,
             reqs.append({"custom_id": cid,
                          # 400/record was NOT enough: a quoted reason plus five fields ran to ~330
                          # output tokens per record, and any group that thought before answering hit
-                         # the cap and returned nothing at all. Measured 3,282 output tokens per
-                         # 10-record group, so budget double that and let the cap be slack, not a
-                         # ceiling the answer has to fit under.
+                         # the cap and returned nothing at all. 800/record cleared 603 of the 658
+                         # retries, and the residue taught the sharper lesson: 4 groups produced ZERO
+                         # text at 6,400 tokens, which is not a length problem. PACKING COUPLES
+                         # FAILURES -- one pathological record takes its seven neighbours with it.
+                         # For a stubborn tail, --pack 1: a single record cannot exhaust the budget,
+                         # and if it does it fails alone. Pack for throughput, unpack for the tail.
                          "params": {"model": mr.BATCH_MODEL, "max_tokens": 800 * len(g) + 800,
                                     "messages": [{"role": "user", "content": text}]}})
             ids[cid] = g

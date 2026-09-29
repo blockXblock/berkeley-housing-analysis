@@ -64,8 +64,37 @@ touches 6th-cycle RHNA. The model zeroed both from the RCFE / R-2.1 label, the s
 reading that misread Step Up; R-2.1 permits dwelling units OR sleeping units, so the label cannot decide.
 The deciding evidence is each unit's layout (own kitchen and bath), which lives on the ZP plan sets.
 
-**NEXT:** read the unit plans for 2100 San Pablo and 2000 Dwight → John rules on assisted living → gated
-override for item 1 → Accela check for item 3 → decision set adds/drops.
+**Unit plans read (2026-09-29; Accela Planning attachments pulled via the harvester engine to
+`scratch/2026-09-29_assisted_living/stage/`, local only, not yet in R2 or v2):**
+- **2000 Dwight (`ZP2019-0074`, Trachtenberg sheet A2.5, 2020-08-21 plans): 113 = 88 + 25.** Levels 1 and
+  3–6 are labelled "DWELLING UNIT": studio 372 sf, 1-BR 540 sf, 2-BR 780 sf, each with its own bath AND
+  kitchen. Level 2 is "MEMORY CARE" (25 rooms per the architect's 2020-08-21 unit-count letter): bedroom +
+  bath, **no kitchen**. The City's planner, 2020-04-28 ("CORR-Community Care Facility"): the project became
+  all Assisted Living, so it was reclassified a Community Care Facility "composed of individual residential
+  units", and "we are continuing to count all units, including the 2nd floor units without kitchens, as
+  residential units" (for the density bonus). The operator: "We currently don't plan to establish
+  Independent living on site." **By the Step Up test (own kitchen + bath): 88 units; the City's 113
+  over-counts by the 25 memory-care rooms; our 0 under-counts by 88.**
+- **2100 San Pablo (`ZP2018-0222`, ZAB staff report 2019-04, HKIT sheets A.14–A.15): 0 units.** "Elder
+  residential memory care and assisted living facility" (Spirit Living). The unit plans are 256–673 sf
+  rooms, many double-occupancy, each with a private bath and at most a small sink counter, **no kitchen**;
+  meals come from a central commercial kitchen and dining room. **The City's own staff report finds it
+  is NOT a "Housing Development Project" under Gov. Code § 65589.5 because it is an RCFE licensed by
+  SDSS**, and exempts it from the AHMF for the same reason; the plan set says "ninety-four (94) total
+  dwelling units". Yet the City's APR reports 96 units entitled (twice), permitted and completed. **Our 0
+  is right; the City's 96 is group quarters counted as units, by the City's own finding.**
+
+**Recommendation (John to rule):** 2100 San Pablo = 0 (keep the model); 2000 Dwight = 88 (a ledger row for
+`B2021-02404`, gated). With both: 2023 City 716 vs ours ≈ 626 after the Logan Park fix, the 96 explained;
+2025 ours ≈ 538 vs City 492.
+
+**Reading-rule lesson (three cases now: Step Up, Dwight, San Pablo):** the model decides care/congregate
+buildings from the LABEL. The unit plan decides. A licensed-care or congregate permit should be read as
+`unknown` pending the plans, not as 0 and not as the stated count.
+
+**NEXT:** John rules on San Pablo 0 / Dwight 88 → gated ledger row for Dwight + override for Logan Park
+South Phase I → store the pulled plan documents (R2 + v2 `documents`, gated) → reading-rule change for
+care/congregate permits → Accela check for item 3 → decision set adds/drops.
 
 ---
 

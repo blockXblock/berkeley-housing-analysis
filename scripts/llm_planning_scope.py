@@ -214,8 +214,18 @@ def sonnet(cmd: str, recs: dict, conf_floor: float, pack: int, dry: bool,
             tin += usage.input_tokens
             tout += usage.output_tokens
         if got is None:
-            bad += [{"record": n, "why": txt[:120]} for n in group]
-            continue
+            # SALVAGE. A response cut off mid-array still holds complete objects, and discarding them
+            # throws away readings already paid for: ZP2025-0086's verdict was sitting intact in the
+            # text this branch was about to drop. Parse whatever complete objects are present.
+            got = []
+            for m in _re.finditer(r"\{[^{}]*\}", txt or ""):
+                try:
+                    got.append(json.loads(m.group(0)))
+                except Exception:
+                    pass
+            if not got:
+                bad += [{"record": n, "why": (txt or "")[:120]} for n in group]
+                continue
         got = got if isinstance(got, list) else [got]
         by = {str(g.get("record")): g for g in got if isinstance(g, dict)}
         for n in group:

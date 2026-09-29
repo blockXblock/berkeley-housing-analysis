@@ -4,6 +4,44 @@
 
 ---
 
+## 2026-09-29 — APPLIED to live v4: Dwight 88, Logan Park South Phase I 0, Step Up evidence replaced
+
+**John's rulings:** Step Up = tenants (39), 2000 Dwight = 88, 2100 San Pablo = 0 (no write; the model's 0
+stands), Logan Park South Phase I = 0 (its 69 carried by Phase II). John approved the new `phase_carried`
+design and unlocked v4.
+
+**The write (snapshot → verify-or-rollback → fresh-connection fingerprint):**
+- Snapshot `databases/keep_snapshot_2026-09-29_pre-assisted-living.db` (integrity ok; 147,232 events /
+  136,519 classifications, identical to live).
+- Ledger `corrections/v4/grounded_counts.csv`: Step Up row's evidence REPLACED (the City APR note claiming
+  in-unit kitchens was false and was oracle-as-source); new rows `B2021-02404` = 88 and `B2019-05575` = 0
+  `phase_carried`, `carried_by` `B2021-03302` (new column; empty for older rows). Checksums 192/661 → 194/749.
+- **New machinery:** `apply_grounded_counts` gains a `phase_carried` demotion (after all promotions). It
+  demotes only if the carrier is a ledger-grounded counted master with the SAME count AND the carrier's own
+  permit text names the demoted permit ("Phase I under Permit number B2019-05575"). Test
+  `python -m scripts.v4.test_phase_carried` proves it both ways (demotes; halts with the DB unchanged when
+  the carrier is missing from the ledger, doesn't name the permit, or carries a different count).
+- Applied in one transaction: promoted 1, demoted 1, plus one guarded evidence-note update for Step Up;
+  all five permit states verified; re-run = 0/0 (idempotent). Live v4 sha256 `5cbdd158…`.
+
+**Result:** CO 2018–25 **4,072 → 4,091** (2023 695 → 626, 2025 450 → 538); JN-E `co_completions` **4,323 →
+4,342**. New baseline `data/baselines/reconciliation_baseline_2026-09-29.json` (appended; 26b kept).
+
+**⚠ PRE-EXISTING, found today: JN-E has FAILED since 2026-09-26.** Its "ledger reconciles to derived CO"
+assert: the waterfall steps sum to 4,229 in both 09-26 baselines while `co_completions` is 4,072 (09-26) and
+4,323 (09-26b). The July-productions rebuild and the permit_effect reclassification moved completions with
+no documented step. Today's +19 is a documented step; the remaining **94 is an open gap** recorded in the new
+baseline (`ledger.open_gap`). Close it by decomposing the move into documented steps, never a plug.
+
+**Also found:** `B2014-01391` is finaled twice (2021-08-05 and 2026-02-24), 2 units each, and counted twice
+(JN-E grain 4,342 vs one-per-permit 4,340).
+
+**NEXT:** re-lock v4 (`chmod a-w`) → decompose JN-E's 94 → `B2014-01391` re-final → store the Dwight plan
+documents (R2 + v2) and pull Step Up's ZP2019-0173 unit plans → reading-rule change for care/congregate
+permits → carry the ledger into v2 at the next export.
+
+---
+
 ## 2026-09-29 — GLA ruled out as units · CO by year vs the City's APR (read-only; no DB write)
 
 **John ruled: Group Living Accommodation rooms are NOT dwelling units (HCD definitions).** Our APR CO

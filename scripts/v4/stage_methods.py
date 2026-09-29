@@ -297,16 +297,23 @@ def apply_grounded_counts(con, csv_path=os.path.join(CORR, 'grounded_counts.csv'
     This is the resolution path for held items: the permit must have been moved OUT of
     held_items.json (with a resolution note) BEFORE it can appear here — enforced below.
     Promotes the FINALED event only (count-once at completion; the BP side is left untouched).
-    Only ever promotes an UNCOUNTED event; never overwrites an existing count."""
+    Only ever promotes an UNCOUNTED event; never overwrites an existing count.
+
+    The one exception is convention `phase_carried` (John, 2026-09-29): a phase permit that the reading
+    counted with the SAME units its completing phase carries (Logan Park South: Phase I and Phase II both
+    69). The row names the carrier in `carried_by`, and the demotion runs only when the carrier is itself a
+    ledger-grounded counted master with that same count AND the carrier's own permit text names the
+    demoted permit. A zero never stands alone: it points at where the units are counted."""
     rows = pd.read_csv(csv_path)
     cks = _calibration('calibration_checksums.json')['grounded_counts']
     assert len(rows) == cks['rows'] and int(rows.grounded_count.sum()) == cks['units'], \
         f'grounded_counts calibration drift: {len(rows)}/{int(rows.grounded_count.sum())} vs pinned ' \
         f'{cks["rows"]}/{cks["units"]}'
     still_held = {h['permit'] for h in json.load(open(held_path))['held_147']}
+    carried = rows[rows.convention == 'phase_carried']
     changed = 0
     try:
-        for r in rows.itertuples():
+        for r in rows.drop(carried.index).itertuples():
             p, n = r.source_record_key, int(r.grounded_count)
             assert p not in still_held, \
                 f'grounded_counts {p}: still listed in held_items.held_147 — resolve the hold ' \
@@ -342,11 +349,41 @@ def apply_grounded_counts(con, csv_path=os.path.join(CORR, 'grounded_counts.csv'
                 (n, 'evidentiary', str(r.source_document)[:180], str(r.source_ref)[:120], p)).rowcount
             assert rc == 1, f'grounded_counts {p}: rowcount={rc} (expect 1)'
             changed += rc
+        demoted = 0
+        for r in carried.itertuples():   # after every promotion, so each carrier is already grounded
+            p, carrier = r.source_record_key, str(r.carried_by)
+            assert int(r.grounded_count) == 0, f'phase_carried {p}: grounded_count must be 0'
+            crow = rows[(rows.source_record_key == carrier) & (rows.convention != 'phase_carried')]
+            assert len(crow) == 1, f'phase_carried {p}: carrier {carrier} is not a ledger-grounded row'
+            cn = int(crow.grounded_count.iloc[0])
+            cstate = _finaled_state(con, carrier)
+            assert len(cstate) == 1, f'phase_carried {p}: carrier {carrier} has {len(cstate)} finaled events'
+            crole, cmaster, cnu, cnote = cstate[0]
+            assert crole == 'new_unit' and cmaster == 1 and cnu == cn and 'grounded_counts' in (cnote or ''), \
+                f'phase_carried {p}: carrier {carrier} is not a counted grounded master ({crole}/{cmaster}/{cnu})'
+            cdesc = con.execute("SELECT raw_description FROM events WHERE source_record_key=? "
+                                "AND event_type_code='permit_finaled'", (carrier,)).fetchone()[0] or ''
+            assert p in cdesc, f'phase_carried {p}: carrier {carrier} permit text does not name {p}'
+            state = _finaled_state(con, p)
+            assert len(state) == 1, f'phase_carried {p}: {len(state)} finaled events (expect 1)'
+            role, is_master, nu, note = state[0]
+            if role == 'subsidiary' and nu == 0 and 'phase_carried' in (note or ''):
+                continue  # idempotent re-run
+            assert role == 'new_unit' and is_master == 1 and nu == cn, \
+                f'phase_carried {p}: expected a counted master carrying {cn}, found {role}/{is_master}/{nu}'
+            rc = con.execute(
+                "UPDATE event_classifications SET housing_role='subsidiary', is_master=0, net_units=0, "
+                "basis='evidentiary', basis_note=COALESCE(basis_note,'')||' | grounded_counts phase_carried "
+                "(units carried by '||?||'; src '||?||')' "
+                "WHERE event_id IN (SELECT event_id FROM events WHERE source_record_key=? AND event_type_code='permit_finaled')",
+                (carrier, str(r.source_ref)[:120], p)).rowcount
+            assert rc == 1, f'phase_carried {p}: rowcount={rc} (expect 1)'
+            demoted += rc
         con.commit()
     except Exception:
         con.rollback()
         raise
-    return {'rows': len(rows), 'promoted': changed}
+    return {'rows': len(rows), 'promoted': changed, 'demoted': demoted}
 
 
 # ---------------------------------------------------------------- EVIDENCE: inspections and stored documents

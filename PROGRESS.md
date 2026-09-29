@@ -96,7 +96,13 @@ is SEPARATE QUARTERS vs GROUP ARRANGEMENT, and a missing kitchen is evidence, no
   own finding that it is not a housing development.
 - **2000 Dwight: 88 (likely) or 0.** 88 units have full kitchens (separate quarters) but the whole building
   is licensed assisted living; the 25 memory-care rooms are group quarters either way. City: 113.
-- **Step Up: 39 or 0 (John's call).** Private room, bath and sink, off a common hall = SRO-shaped, which
+- **Step Up: RULED 39 (John, 2026-09-29: residents are TENANTS, so SRO-type separate quarters).** What the
+  City reported: entitled 39 (2020-07-31, `ZP2019-0173`, density bonus: 5 VLI + 34 above-moderate), BP 39
+  (2023-10-16, same split; after 2022-06-30, so it IS in the City's 6th-cycle RHNA credit), **no CO row**
+  in any year (a City omission; CO 2025-06-18). City data faults on the way: the 2020 row carries 2023
+  Shattuck's APN (`057 203400800`), the 2023 row's tracking id is "zc", and 34 of 39 homeless-supportive
+  units are reported ABOVE-MODERATE, which needs checking against the regulatory agreement.
+- **Step Up (superseded): 39 or 0 (John's call).** Private room, bath and sink, off a common hall = SRO-shaped, which
   HCD counts; shared kitchen and a services program for homeless residents = group-arrangement-shaped.
   It turns on whether residents hold their rooms as tenants (supportive housing, SRO: count) or live in a
   managed program with shared meals (group quarters: 0).
@@ -106,7 +112,7 @@ is SEPARATE QUARTERS vs GROUP ARRANGEMENT, and a missing kitchen is evidence, no
 San Pablo, wrong on Dwight's 88, and Step Up is open). The unit plan and the operating model decide. A
 licensed-care or congregate permit should read as `unknown` pending the plans, never 0 or the stated count.
 
-**NEXT:** John rules on Step Up (SRO vs group arrangement), Dwight 88, San Pablo 0 → fix the Step Up
+**NEXT:** John rules on Dwight 88, San Pablo 0 (Step Up ruled 39) → fix the Step Up
 ledger row's evidence (drop the CKAN note) → gated ledger row for Dwight + override for Logan Park
 South Phase I → store the pulled plan documents (R2 + v2 `documents`, gated) → reading-rule change for
 care/congregate permits → Accela check for item 3 → decision set adds/drops.

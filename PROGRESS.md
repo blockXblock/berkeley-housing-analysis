@@ -38,13 +38,14 @@ group quarters). Where the City departs from HCD, the gap is the City's, not our
    69) and `B2019-05575` (Phase I, on the North parcel) are both `new_unit` 69, finaled the same day. The
    Phase II reading itself says "Phase I (B2019-05575) creating no units"; the Phase I reading disagrees.
    The City credits 69 once. Fix = a new reading/override for `B2019-05575` (0 units), gated.
-2. **1367 University (`B2022-04366`, 39) is RIGHT at 39: the ledger overrides a model misreading.** It is
-   **Step Up Housing** (Panoramic Interests; open, CO 2025-06-18 per our `docs/table_a2_2025.csv`). John
-   approved 39 dwelling units on 2026-09-26 (`corrections/v4/grounded_counts.csv`): each room has its own
-   kitchen and bath, so each is separate living quarters, a unit under HCD. The model read the permit's
-   label "congregate residence" as group quarters, because the kitchens are not in the permit text. This is
-   consistent with the GLA ruling: GLA rooms WITHOUT their own kitchen and bath are not units. **The City
-   reported it entitled (2020) and permitted (2023) but has no CO row: a City omission of 39 in 2025.**
+2. **1367 University (`B2022-04366`, 39) = Step Up Housing (Panoramic Interests; CO 2025-06-18 per our
+   `docs/table_a2_2025.csv`). CORRECTED 2026-09-29 by John on re-examination: each room has bed, bath and
+   sink but NO kitchen; the building has a community room and kitchen; it is designed as assisted living
+   for homeless people.** So the ledger row John approved 2026-09-26 (39 dwelling units, evidence: the City
+   APR note "separate kitchen/sanitary facilities within each unit") rests on a FALSE fact, and it took that
+   fact from the CKAN mirror, which is the verification target, never a source (rule 1). The row's number
+   is now an open ruling (see *The test* below); its evidence must be replaced by primary evidence either
+   way. The City reported it entitled (2020) and permitted (2023), with no CO row.
 3. **2021 +85 is two permits the City never reports a CO for, in any year:** `B2014-05786` (44 DU, APN
    057-2016-020) and `B2019-01789` (40, the COMPLETION-PERMIT-EXPIRED borrowed-completion convention).
    Not group quarters; next step is an Accela check that the City simply omitted them.
@@ -61,8 +62,8 @@ R-2.1, `B2019-03689`): entitled 96 **twice** (2018 `ZP2016-0034`, again 2022), B
 the City's own 2018 note says "94 assisted living suites". 2000 Dwight (`B2021-02404`): entitled 126 (2020,
 "Senior housing"), BP 113 (2022-04-18), CO 113 (2025). Both first BPs are before 2022-06-30, so neither
 touches 6th-cycle RHNA. The model zeroed both from the RCFE / R-2.1 label, the same label-for-substance
-reading that misread Step Up; R-2.1 permits dwelling units OR sleeping units, so the label cannot decide.
-The deciding evidence is each unit's layout (own kitchen and bath), which lives on the ZP plan sets.
+reading; R-2.1 permits dwelling units OR sleeping units, so the label cannot decide. The deciding evidence
+is each unit's layout and how it is occupied, which lives on the ZP plan sets.
 
 **Unit plans read (2026-09-29; Accela Planning attachments pulled via the harvester engine to
 `scratch/2026-09-29_assisted_living/stage/`, local only, not yet in R2 or v2):**
@@ -73,8 +74,8 @@ The deciding evidence is each unit's layout (own kitchen and bath), which lives 
   all Assisted Living, so it was reclassified a Community Care Facility "composed of individual residential
   units", and "we are continuing to count all units, including the 2nd floor units without kitchens, as
   residential units" (for the density bonus). The operator: "We currently don't plan to establish
-  Independent living on site." **By the Step Up test (own kitchen + bath): 88 units; the City's 113
-  over-counts by the 25 memory-care rooms; our 0 under-counts by 88.**
+  Independent living on site." **88 separate units with kitchens + 25
+  memory-care rooms in a group arrangement.**
 - **2100 San Pablo (`ZP2018-0222`, ZAB staff report 2019-04, HKIT sheets A.14–A.15): 0 units.** "Elder
   residential memory care and assisted living facility" (Spirit Living). The unit plans are 256–673 sf
   rooms, many double-occupancy, each with a private bath and at most a small sink counter, **no kitchen**;
@@ -84,15 +85,29 @@ The deciding evidence is each unit's layout (own kitchen and bath), which lives 
   dwelling units". Yet the City's APR reports 96 units entitled (twice), permitted and completed. **Our 0
   is right; the City's 96 is group quarters counted as units, by the City's own finding.**
 
-**Recommendation (John to rule):** 2100 San Pablo = 0 (keep the model); 2000 Dwight = 88 (a ledger row for
-`B2021-02404`, gated). With both: 2023 City 716 vs ours ≈ 626 after the Logan Park fix, the 96 explained;
-2025 ours ≈ 538 vs City 492.
+**The test (CORRECTED 2026-09-29): "own kitchen + bath" was Claude's shorthand, NOT HCD's rule.** HCD's
+definition (`housing_rules.reading_rules.DEFINITIONS`, quoting the APR FAQ): a unit is separate living
+quarters whose occupants "live and eat separately" with direct access from outside or a common hall;
+**SRO units count** (they typically have no kitchen); group quarters are dormitories and "senior or
+assisted-living facilities where residents live in a group arrangement owned or managed by an entity
+providing housing and/or services"; senior housing of separate living quarters counts. So the question
+is SEPARATE QUARTERS vs GROUP ARRANGEMENT, and a missing kitchen is evidence, not the verdict:
+- **2100 San Pablo: 0 (clear).** Licensed care, shared rooms, central dining, no kitchens, and the City's
+  own finding that it is not a housing development.
+- **2000 Dwight: 88 (likely) or 0.** 88 units have full kitchens (separate quarters) but the whole building
+  is licensed assisted living; the 25 memory-care rooms are group quarters either way. City: 113.
+- **Step Up: 39 or 0 (John's call).** Private room, bath and sink, off a common hall = SRO-shaped, which
+  HCD counts; shared kitchen and a services program for homeless residents = group-arrangement-shaped.
+  It turns on whether residents hold their rooms as tenants (supportive housing, SRO: count) or live in a
+  managed program with shared meals (group quarters: 0).
+- The earlier GLA ruling (`ZP2018-0229`, 42 rooms) turns on the same question.
 
-**Reading-rule lesson (three cases now: Step Up, Dwight, San Pablo):** the model decides care/congregate
-buildings from the LABEL. The unit plan decides. A licensed-care or congregate permit should be read as
-`unknown` pending the plans, not as 0 and not as the stated count.
+**Reading-rule lesson:** the model decided all three from the permit LABEL (it happened to land right on
+San Pablo, wrong on Dwight's 88, and Step Up is open). The unit plan and the operating model decide. A
+licensed-care or congregate permit should read as `unknown` pending the plans, never 0 or the stated count.
 
-**NEXT:** John rules on San Pablo 0 / Dwight 88 → gated ledger row for Dwight + override for Logan Park
+**NEXT:** John rules on Step Up (SRO vs group arrangement), Dwight 88, San Pablo 0 → fix the Step Up
+ledger row's evidence (drop the CKAN note) → gated ledger row for Dwight + override for Logan Park
 South Phase I → store the pulled plan documents (R2 + v2 `documents`, gated) → reading-rule change for
 care/congregate permits → Accela check for item 3 → decision set adds/drops.
 

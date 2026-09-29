@@ -139,11 +139,19 @@ def low_confidence(conf_floor: float) -> list[str]:
     return out
 
 
-def sonnet(cmd: str, recs: dict, conf_floor: float, pack: int, dry: bool) -> int:
+def sonnet(cmd: str, recs: dict, conf_floor: float, pack: int, dry: bool,
+           tag: str = "", only: list | None = None) -> int:
+    """`tag` keeps each batch's state in its own file, because one state file means one batch in
+    flight: submitting a second pass while a retry was still running would have overwritten the batch
+    id and lost 658 readings already paid for. `only` submits a named list of records instead of the
+    low-confidence set -- the ADD rows deserve a second read whatever Jev's confidence was, since
+    confidence cannot catch a confidently-wrong label (Jev called "BP15-0076. Residing." a housing
+    development at 0.73, reading re-siding as residential)."""
     import hashlib
     import re as _re
-    state = OUT / "sonnet_batch_state.json"
-    ids_path = OUT / "sonnet_ids.json"
+    tag_suffix = f"_{tag}" if tag else ""
+    state = OUT / f"sonnet_batch_state{tag_suffix}.json"
+    ids_path = OUT / f"sonnet_ids{tag_suffix}.json"
     answers_path = OUT / "sonnet_answers.json"
 
     def already() -> set:
@@ -161,7 +169,8 @@ def sonnet(cmd: str, recs: dict, conf_floor: float, pack: int, dry: bool) -> int
 
     if cmd == "submit":
         have = already()
-        want = [n for n in low_confidence(conf_floor) if n in recs and n not in have]
+        pool = only if only is not None else low_confidence(conf_floor)
+        want = [n for n in pool if n in recs and n not in have]
         if have:
             print(f"{len(have)} already answered and stored; asking only the rest")
         groups = [want[i:i + pack] for i in range(0, len(want), pack)]
@@ -182,7 +191,8 @@ def sonnet(cmd: str, recs: dict, conf_floor: float, pack: int, dry: bool) -> int
             ids[cid] = g
         ids_path.write_text(json.dumps({"prompt_hash": prompt_hash, "ids": ids,
                                         "conf_floor": conf_floor}, indent=1))
-        print(f"{len(want)} records below {conf_floor} confidence -> {len(reqs)} requests "
+        print(f"{len(want)} records {'named' if only is not None else f'below {conf_floor} confidence'}"
+              f" -> {len(reqs)} requests "
               f"of {pack}; prompt {prompt_hash}")
         if dry:
             print(reqs[0]["params"]["messages"][0]["content"][:2000])
@@ -251,6 +261,11 @@ def main() -> int:
                          "subset Jev and Sonnet disagreed 2,625 times out of 5,773.")
     ap.add_argument("--conf", type=float, default=0.70)
     ap.add_argument("--pack", type=int, default=10, help="records per request")
+    ap.add_argument("--tag", default="", help="keeps this batch's state in its own file so two "
+                                             "batches can be in flight at once")
+    ap.add_argument("--only-file", default=None,
+                    help="a file of record numbers, one per line, to read instead of the "
+                         "low-confidence set")
     args = ap.parse_args()
 
     recs = records()
@@ -261,7 +276,9 @@ def main() -> int:
     todo = order[:args.limit] if args.limit else order
 
     if args.sonnet:
-        return sonnet(args.sonnet, recs, args.conf, args.pack, args.dry_run)
+        only = ([l.strip() for l in open(args.only_file) if l.strip()]
+                if args.only_file else None)
+        return sonnet(args.sonnet, recs, args.conf, args.pack, args.dry_run, args.tag, only)
 
     if args.dry_run:
         n = order[0]

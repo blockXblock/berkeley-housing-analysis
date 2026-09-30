@@ -5,6 +5,24 @@
 
 ---
 
+## 2026-09-30 — Funding ledger: state tax credits added (72 rows) · write-path rule adopted
+
+**John adopted the write-path rule** (CLAUDE.md `0816525`): v4 changes reach live only through the full chain
+rebuild and swap, never a direct write.
+
+**CTCAC tax credits:** CTCAC's statewide *List of Projects* (through June 2026,
+`data/raw/funding/ctcac_List_of_Projects_2026-06.xlsx`, SHA-256 in each row) lists **46 Berkeley sites under
+32 applications, 1991–2026**. Added 38 rows: annual federal credit per application (10-year credit) plus each
+state credit. All 38 amounts checked against the spreadsheet. Preliminary reservations (not yet built):
+Maudelle Miller Shirek, BUSD Workforce, St. Paul Terrace, Ephesian Legacy Court, 1740 San Pablo, Ashby Lofts
+re-syndication. Two CTCAC values are placeholders (Harmon Gardens, Erna P. Harris: federal award "100").
+**New columns `apn` (canonical) + `apn_check`:** 21 canonical APNs, **13 in the Feb-2026 assessor, 8 ABSENT**
+(Ashby Lofts, Oxford Plaza, Erna P. Harris, Berkeley Way ×2, Maudelle Miller Shirek, Ephesian Legacy Court):
+flagged per rule 4, never re-pointed. **Gap:** Blake Apartments (2527 San Pablo) is NOT in CTCAC's list although
+the City's APR names LIHTC for it; open, not concluded (CTCAC warns of omissions).
+
+---
+
 ## 2026-09-30 — Funding ledger: adoptions sourced, 2019 round added (34 rows) · write-path proposal
 
 **`corrections/v4/funding_ledger.csv`: 34 rows, 22 adopted / 9 committed-or-awarded (Measure O report) / 2

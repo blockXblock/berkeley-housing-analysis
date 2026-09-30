@@ -84,3 +84,6 @@ assumes C2's value is present). Everything else is order-independent. event-dedu
   so **never sum the amounts across rows**. Each row carries the document's City URL, the SHA-256 of the local
   copy (`data/raw/funding/`, PDFs gitignored) and a quote verified verbatim against the text. `status` says how
   far the action is confirmed: `recommended` rows still need the adopted resolution sourced.
+  State tax-credit rows come from CTCAC's statewide *List of Projects* (through June 2026): one row per
+  application for the annual federal credit (claimed over 10 years) and one for any state credit. `apn` is
+  canonical (`to_canonical_apn`); `apn_check` records the standing stale-APN guard against the Feb-2026 assessor.

@@ -1,0 +1,39 @@
+{
+ "invariant": {
+  "structures": 1188,
+  "units_once_per_structure": 5527,
+  "structure_events": 50877,
+  "events_in_two_structures": 0,
+  "logan_park_south_structures": 1,
+  "acheson_commons_structures": 4
+ },
+ "moves": {
+  "structures_complete": 918,
+  "units_complete": 4436,
+  "structures_completed_2018_2025": 853,
+  "units_completed_2018_2025": 4094,
+  "completion_basis_master_finaled": 896,
+  "completion_basis_building_final_inspection": 22,
+  "structures_NOT_YET_COMPLETE": 197,
+  "units_NOT_YET_COMPLETE": 945,
+  "structures_STALE_NEEDS_SOURCE": 73,
+  "units_STALE_NEEDS_SOURCE": 146,
+  "structure_parcels": 1115,
+  "structures_without_parcel": 74
+ },
+ "delta_vs_2026-09-28_ruling2": {
+  "structures": "+1",
+  "units": "+88",
+  "why": "2000 Dwight B2021-02404 counted 88 (John's assisted-living ruling on unit plans, 2026-09-29; ledger grounded_counts.csv); completed 2025-06-17, master_finaled"
+ },
+ "provenance": {
+  "source_db": "chain build scratch/2026-09-29_phase2/chain (JN-A->B->C->F at HEAD, then build_structures --write)",
+  "events": 147232,
+  "classifier_hash": [
+   "permit_effect@501341414243"
+  ],
+  "fold": "build_structures@ea2e0e9e28d9",
+  "derived_at": "2026-09-29T18:08:46",
+  "note": "First baseline of the WRITTEN tables (cutover phase 2). Earlier structures baselines describe the preview fold and stay as they are."
+ }
+}

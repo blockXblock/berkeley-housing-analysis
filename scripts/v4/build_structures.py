@@ -39,13 +39,22 @@ CLASSIFICATION IS AN INPUT, NOT A DECISION. The is_master/net_units labels come 
 --evidence, from a model evidence file. This stage groups; it does not judge what a permit does.
 Session 3c owns the classification layer and is retiring the regex.
 
-  .venv/bin/python scripts/v4/build_structures.py                     # preview
+  .venv/bin/python scripts/v4/build_structures.py                     # preview (live v4, read-only)
   .venv/bin/python scripts/v4/build_structures.py --evidence FILE     # use model labels
+  .venv/bin/python scripts/v4/build_structures.py --db BUILD.db --write   # the BUILD STEP
+
+THE WRITE (added 2026-09-29, cutover phase 2). `--write` fills `structures`, `structure_events`,
+`structure_parcels` and `units` in the DB named by --db, in ONE transaction, after clearing all four:
+structures are a PROJECTION of the event stream, re-derived on every build, never edited. It runs as
+the chain step after JN-F, on the chain's build DB; live v4 receives it the way it receives every
+other stage -- by being replaced with a verified build. It REFUSES the live DB unless
+BUILD_STRUCTURES_ALLOW_LIVE=1.
 """
 from __future__ import annotations
 
 import argparse
 import collections
+import os
 import json
 import re
 import sqlite3
@@ -332,12 +341,18 @@ def main() -> int:
     ap.add_argument("--evidence", default=None, help="model permit-effect evidence JSON")
     ap.add_argument("--parents", default=None,
                     help="model-derived permit_parents.csv; adds the non-suffixed parent lane")
-    ap.add_argument("--commit", action="store_true")
+    ap.add_argument("--db", default=str(V4), help="the v4 DB to fold (default: live, read-only)")
+    ap.add_argument("--write", action="store_true",
+                    help="write structures into --db (a build DB; refuses live without the env flag)")
     args = ap.parse_args()
-    if args.commit:
-        raise SystemExit("--commit is not implemented yet: this run is a PREVIEW of the fold. "
-                         "The v4 write needs John's review of these numbers first.")
-    db = sqlite3.connect(f"file:{V4}?mode=ro", uri=True)
+    dbp = Path(args.db)
+    if args.write:
+        if dbp.resolve() == V4.resolve() and os.environ.get("BUILD_STRUCTURES_ALLOW_LIVE") != "1":
+            raise SystemExit(f"REFUSED: --write targets the LIVE DB ({V4}). Structures reach live by "
+                             "replacing it with a verified build. Point --db at the chain's build DB.")
+        db = sqlite3.connect(dbp)
+    else:
+        db = sqlite3.connect(f"file:{dbp}?mode=ro", uri=True)
 
     # REFUSE ON AN EMPTY SUBSTRATE rather than report zero. A fold over no classifications yields
     # "0 structures", which is indistinguishable from a correct answer about an empty database and
@@ -419,13 +434,111 @@ def main() -> int:
                 "site": list(permits[keys[0]]["site"] or []),
                 "cls_source": permits[keys[0]]["cls_source"],
             }) + "\n")
-    import os
-    mode = "read-only" if not os.access(V4, os.W_OK) else "WRITABLE (John has it unlocked)"
     print(f"\ncompletion under John's 2026-09-28 ruling: "
           + " ".join(f"{k}={v}" for k, v in basis_count.most_common()))
     print(f"\nPREVIEW written to {out}")
-    print(f"nothing in v4 was touched -- opened mode=ro; the file is currently {mode}.")
+    if not args.write:
+        print(f"nothing in {dbp.name} was touched -- opened mode=ro.")
+        return 0
+    print("\nWRITE:", write(db, permits, groups, attach, finals))
     return 0
+
+
+def _fold_identity() -> str:
+    import hashlib
+    here = Path(__file__).read_bytes() + (ROOT / "scripts/housing_rules/building_label.py").read_bytes()
+    return "build_structures@" + hashlib.sha256(here).hexdigest()[:12]
+
+
+def write(con, permits, groups, attach, finals) -> dict:
+    """Clear and refill the four structure tables in ONE transaction; verify, else roll back.
+
+    structures        one row per folded group; identity = the ROOT master permit's issuance event
+                      (else its earliest event). status = 'complete' or the named not-complete reason.
+    structure_events  every event of the group's permits: 'master', 'attached', or 'inspection'.
+    structure_parcels every current-or-former parcel a MASTER permit's APN resolves to; primary = root's.
+    units             one row per structure with units: count once (max over the masters, the phase
+                      rule), tenure and affordability 'unknown' until the ledgers are applied (phase 5).
+    """
+    fold_id = _fold_identity()
+    canon_parcel = {}
+    for apn_n, pid, cur in con.execute(
+            "SELECT apn_normalized, parcel_id, is_current FROM parcel_identifiers "
+            "WHERE apn_normalized IS NOT NULL ORDER BY is_current"):
+        canon_parcel[apn_n] = pid                      # current wins: it is read last
+
+    def parcel_of(apn_raw):
+        if not apn_raw:
+            return None
+        try:
+            return canon_parcel.get(to_canonical_apn(apn_raw, "alameda"))
+        except Exception:
+            return None
+
+    event_meta = {eid: (t, d, src) for eid, t, d, src in con.execute(
+        "SELECT event_id, event_type_code, event_date, source_id FROM events")}
+    tables = ("units", "structure_parcels", "structure_events", "structures")
+    counts = collections.Counter()
+    con.isolation_level = None                         # explicit BEGIN/COMMIT, no implicit transaction
+    try:
+        con.execute("BEGIN")
+        for t in tables:
+            con.execute(f"DELETE FROM {t}")
+        for root, keys in sorted(groups.items()):
+            keys = sorted(keys)
+            comp_date, basis = completion_for(keys, permits, finals)
+            evs = permits[root]["events"]
+            issued = sorted((d or "9999", eid) for eid, t, d in evs if t == "permit_issued")
+            master_eid = issued[0][1] if issued else min(evs, key=lambda e: (e[2] or "9999", e[0]))[0]
+            label = next((permits[k]["label"].key for k in keys if permits[k]["label"].key), None)
+            units = max(permits[k]["net_units"] or 0 for k in keys)
+            notes = json.dumps({"fold": fold_id, "master_permits": keys,
+                                "attached_permits": len(attach.get(root, [])),
+                                "completion_basis": basis,
+                                "site": list(permits[root]["site"] or []),
+                                "cls_source": permits[root]["cls_source"]})
+            sid = con.execute(
+                "INSERT INTO structures (master_event_id, building_label, structure_type, stories, "
+                "status, completed_on, projection_run_id, notes) VALUES (?,?,?,?,?,?,?,?)",
+                (master_eid, label, None, None,
+                 "complete" if comp_date else basis, comp_date, None, notes)).lastrowid
+            counts["structures"] += 1
+            for k in keys + sorted(attach.get(root, [])):
+                role = "master" if k in keys else "attached"
+                for eid, t, _ in permits[k]["events"]:
+                    con.execute("INSERT OR IGNORE INTO structure_events VALUES (?,?,?)",
+                                (sid, eid, "inspection" if t == "inspection" else role))
+                    counts["structure_events"] += 1
+            seen = []
+            for k in [root] + [x for x in keys if x != root]:
+                pid = parcel_of(permits[k]["apn"])
+                if pid and pid not in seen:
+                    seen.append(pid)
+            for i, pid in enumerate(seen):
+                con.execute("INSERT INTO structure_parcels VALUES (?,?,?)", (sid, pid, int(i == 0)))
+                counts["structure_parcels"] += 1
+            counts["structures_without_parcel"] += int(not seen)
+            if units > 0:
+                con.execute("INSERT INTO units (structure_id, unit_count, tenure, affordability_tier, "
+                            "dr_ndr, source_id) VALUES (?,?,?,?,?,?)",
+                            (sid, units, "unknown", "unknown", None, event_meta[master_eid][2]))
+                counts["unit_rows"] += 1
+                counts["units"] += units
+        # verify before commit
+        got = {t: con.execute(f"SELECT COUNT(*) FROM {t}").fetchone()[0] for t in tables}
+        assert got["structures"] == len(groups), got
+        assert got["units"] == counts["unit_rows"], got
+        assert con.execute("SELECT COALESCE(SUM(unit_count),0) FROM units").fetchone()[0] == counts["units"]
+        orphan = con.execute("SELECT COUNT(*) FROM structure_events se LEFT JOIN events e "
+                             "USING(event_id) WHERE e.event_id IS NULL").fetchone()[0]
+        assert orphan == 0, f"{orphan} structure_events point at no event"
+        con.execute("COMMIT")
+    except Exception:
+        con.execute("ROLLBACK")
+        raise
+    counts["structure_events_distinct"] = got["structure_events"]
+    counts["fold"] = fold_id
+    return dict(counts)
 
 
 def _root_of(groups, k):

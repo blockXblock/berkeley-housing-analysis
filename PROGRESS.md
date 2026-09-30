@@ -5,6 +5,18 @@
 
 ---
 
+## 2026-09-30 — Attributing the +66: every unit assigned to a building (verification in progress)
+
+`docs/audit/2026-09-30_attributing_the_66.md` + triage CSV. Building-level match of our 849 counted completions
+against the City's 806 CO rows (Resolver + address canon + identical source APN): totals reconcile (+109); 698
+buildings agree, 4 differ only in year. Outside the verified findings: +16 (15 buildings, City reported the permit
+but no completion), +49 (28, no City row at all), +10 (9, City rows at the parcel but not this permit), −8 (8 City-
+only), −1 net (31 with different counts) = **+66, all assigned, none yet verified**. First reads: 2532 Durant +7
+(likely City omission), 1421 Arch +5 and 2501 Telegraph +4 (parent permits not in our data: Accela checks).
+The page's +66 stays "not yet attributed" until each case is verified into `audit_findings.csv`.
+
+---
+
 ## 2026-09-30 — Audit Findings: the Housing Audit page rebuilt from a findings ledger (dev; not deployed)
 
 **The live page (`berkeleybuild.com/housing-audit.html`, on main) is stale:** it shows the July state (4,229 /

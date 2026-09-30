@@ -5,6 +5,26 @@
 
 ---
 
+## 2026-09-30 — Funding ledger: state program awards, 2023 Measure O snapshot, APNs (92 rows)
+
+**+20 rows (92).** State awards: **AHSC 2019-20** (SGC list): Maudelle Miller Shirek $22,781,553; **Blake / The
+Grinnell $19,072,792** (the award list calls it "Connected Berkeley"; the City's 2020-01-21 AHSC item ties SAHA's
+application to 2527 San Pablo; City copy hosted by Berkeleyside, the City URL is gone). **NPLH 2018**: Hope Center
+PSH $5,506,779, 1601 Oxford $4,536,499; **NPLH (June 2022)**: People's Park $13,926,261 loan + $2,758,957 grant
+(City 2026-05-19 item). **IIG 2019** (HCD list, 2020-06-03): Maudelle Miller Shirek $4,000,000, Blake $3,000,000;
+1740 San Pablo IIG $3,087,650 + RCEB $1.5M + 21 BHA project-based vouchers (City 2026-01-20 item). **Measure O
+snapshot Sep 2023** (9 rows): The Grinnell $7,266,032, down from $9,125,000 in the 2022 snapshot. Every quote and
+amount verified (RCEB stated as "$1.5 million").
+**Blake Apartments = The Grinnell** (completed June 2024; City capital-projects page). Still absent from CTCAC's list.
+
+**APNs:** rows with only an address matched to the Feb-2026 assessor situs via `housing_rules.address`
+(unique match only): **58 of 92 rows carry an APN**; multi-site applications left blank. **Two APN conflicts for
+John (rule 4, never auto re-point):** 2001 Ashby (CTCAC `053-1591-018-03`, absent from the assessor, vs
+`053-1591-014-01` at the address) and Ashby Lofts 2909 Ninth (`053-1652-002-00` absent vs `053-1652-006-01`). Both
+look like re-plats.
+
+---
+
 ## 2026-09-30 — Funding ledger: state tax credits added (72 rows) · write-path rule adopted
 
 **John adopted the write-path rule** (CLAUDE.md `0816525`): v4 changes reach live only through the full chain

@@ -5,7 +5,16 @@
 
 ---
 
-## 2026-09-30 — Home-page pipeline numbers generated from the Explorer data (+ completions per year)
+## 2026-09-30 — Home-page pipeline numbers generated (+ completions per year: ours from v4, with the City's)
+
+**Revised same day (John, option 1):** the first version took completions from the v2 Explorer data, which is
+missing older permits and some unit counts (2018–25: 3,453 vs the City's 4,022 and v4's 4,126; e.g. 24 permits
+worth 276 units in 2018/2020 are not in v2 at all). Completions now come from **live v4** (the Audit page's count;
+4,375 built since 2018, through 2026-06-26), each year shown with the **City's APR figure** beside it and a link to
+the Audit. 'Not yet built' (11,222) and the project count (1,095) stay on the Explorer data until cutover. Marker
+records the v4 sha too: re-run after every export promotion AND every v4 swap.
+
+First version:
 
 The hero lines were hand-typed on 2026-09-22 ("permit pipeline — 14,659 units", "905 projects") and counted finished
 buildings as pipeline. **`scripts/site_numbers.py`** now derives them from `docs/explorer_data.js` (non-UC, as before)

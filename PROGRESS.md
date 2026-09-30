@@ -286,8 +286,22 @@ neither the roll nor the lineage), 2012 Berkeley Way (split, no address match). 
 2026-09-30; gitignored, manifest committed). Projects preview now 1,570 (207 application+buildings, 421 application-only,
 942 building-only).
 
-**NEXT:** when the sweeps finish -> scope-read the new records -> CapDetail for the housing ones -> third declared
-harvest -> re-run the projects preview -> fill the open ledger rows -> projects write step.
+**2026-09-30 (later):** 2006-2014 Planning list swept (13,748 records; 21 empty windows, all holiday weeks). John:
+pre-2015 record types mapped to roles (`b41b5a9`); record scope is now a TYPE lookup, the DEV prefix regex is gone,
+and the harvester takes named records only (`f3fc893`, `HOUSING` survives only as a comparison baseline). First
+read (Jev) of 12,387 pre-2015 records: 1,063 housing, 2,886 unknown (terse list text). Tier 1 CapDetail harvest
+(1,359 pre-2015 primary applications) RUNNING, `scratch/2026-09-30_capdetail_pre2015/`. Parser fix `ff94c85`:
+non-primary parcels were silently dropped (13 of the 1,786 2015+ pages; all pre-2015 pages) -- reparse needed.
+Regex-vs-model comparison (structures): both prose merges confirmed by the model, 0 contradictions; found a
+double-counted ADU. Bug fix `84778eb` (structures status overwritten by the parcel basis; never reached live).
+**Two new ledgers (John):** `reading_rulings.csv` (berkeley-data-25, `80da94f`: 1421 Arch B2024-05916 electrical,
+5 -> 0) and `structure_rulings.csv` (`beb7caa`: S001 merges the ADU B2019-02213 + B2025-03015, first issuance stays
+2019). Chain from raw (sha 2b797a33), baseline **2026-09-30c**: co 4,375, bp 5,283 (-5 each, Arch); buildings
+1,186 / 5,561 units; 2018-25 852 / 4,129. **Live v4 is BEHIND the build** (44 planning records, County lineage,
+status fix, both rulings): swap needs John's unlock.
+
+**NEXT:** live swap (John unlocks) -> Tier 1 harvest finishes -> reparse -> second read -> third declared harvest ->
+projects preview -> fill the open project_rulings rows -> projects write step.
 ---
 
 ## 2026-09-29 — Evidence stored (R2 + v4 manifest) · care/congregate reading rule

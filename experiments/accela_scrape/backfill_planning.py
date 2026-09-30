@@ -10,6 +10,8 @@ entitlement layer citywide (ZP/UP/AP/DR/PLN filings + status); the front half of
 timeline; planning-stage denials/withdrawals; the ZP target list for harvest_affordability.py.
 
 Run:  cd ~/berkeley-data && .venv/bin/python experiments/accela_scrape/backfill_planning.py
+      ... backfill_planning.py --start 2008-01-01 --end 2014-12-31   # any other range (2026-09-30: the
+      pre-2015 approvals of buildings permitted 2014-2019; the 2015 start was a choice, not a portal limit)
 """
 
 import json
@@ -25,19 +27,23 @@ ROOT = pathlib.Path("~/berkeley-data").expanduser()
 OUT = ROOT / "data" / "raw" / "accela" / "date_range"
 LOG = OUT / "_sweep_log.jsonl"
 
-WINDOWS = []
-d = date(2015, 1, 1)   # 5th-RHNA-cycle start; city APR PDFs begin CY2015
+def windows(start: date, end: date):
+    out, d = [], start
+    while d <= end:
+        e = min(d + timedelta(days=3), end)
+        out.append((d.strftime("%m/%d/%Y"), e.strftime("%m/%d/%Y"), f"{d.isoformat()}_{e.isoformat()}"))
+        d = e + timedelta(days=1)
+    return out
+
+
+START = date(2015, 1, 1)   # 5th-RHNA-cycle start; city APR PDFs begin CY2015
 END = date(2025, 5, 31)
-while d <= END:
-    e = min(d + timedelta(days=3), END)
-    WINDOWS.append((d.strftime("%m/%d/%Y"), e.strftime("%m/%d/%Y"), f"{d.isoformat()}_{e.isoformat()}"))
-    d = e + timedelta(days=1)
 
 
-def run():
+def run(start: date = START, end: date = END):
     OUT.mkdir(parents=True, exist_ok=True)
     done = skipped = failed = 0
-    for start, end, tag in WINDOWS:
+    for start, end, tag in windows(start, end):
         path = OUT / f"Planning_{tag}.jsonl"
         if path.exists() and path.stat().st_size > 0:
             skipped += 1
@@ -64,4 +70,9 @@ def run():
 
 
 if __name__ == "__main__":
-    run()
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--start", default=START.isoformat())
+    ap.add_argument("--end", default=END.isoformat())
+    a = ap.parse_args()
+    run(date.fromisoformat(a.start), date.fromisoformat(a.end))

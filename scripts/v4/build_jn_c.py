@@ -116,7 +116,7 @@ here. Planning events get no housing-role label: they are not building permits.
 code(r"""
 con=sqlite3.connect(DB_PATH); con.execute("PRAGMA foreign_keys=ON")
 print("inspections:", SM.load_inspections(con))
-print("documents:  ", SM.load_documents(con))
+print("documents:  ", SM.load_all_documents(con))   # every declared manifest (DOCUMENT_MANIFESTS)
 print("parcels:    ", SM.load_parcels(con))   # assessor parcels + APN identifiers + assessed values + owners of record
 print("lineage:    ", SM.load_parcel_lineage(con))   # re-plat candidates: former APNs, former parcels, candidate splits
 print("planning:   ", SM.load_all_planning(con))   # the city's Planning records: filed + dated review tasks, staff who marked them

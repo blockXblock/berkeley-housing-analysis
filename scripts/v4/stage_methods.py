@@ -392,6 +392,13 @@ def apply_grounded_counts(con, csv_path=os.path.join(CORR, 'grounded_counts.csv'
 # event or is rejected WITH a reason (ingestion conservation, as in JN-A). Added 2026-09-28.
 INSPECTIONS_DIR = os.path.join(ROOT, 'data', 'raw', 'accela_inspections')
 DOCUMENTS_MANIFEST = os.path.join(ROOT, 'data', 'derived', 'documents_r2_manifest_2026-09-28.csv')
+# Every DECLARED document manifest, in load order. A new manifest is a new row here, never an edit of an old
+# file. The 2026-09-29 file is the Accela attachments behind John's assisted-living rulings (Dwight, San Pablo,
+# Step Up), harvested straight from Accela, not exported from v2.
+DOCUMENT_MANIFESTS = (
+    DOCUMENTS_MANIFEST,
+    os.path.join(ROOT, 'data', 'derived', 'documents_r2_manifest_2026-09-29.csv'),
+)
 PLANNING_RECORDS = os.path.join(ROOT, 'data', 'raw', 'accela_capdetail', 'capdetail_2026-09-26.jsonl')
 # Every DECLARED CapDetail harvest, in load order: (file, retrieved date, what it is). A new harvest is a new row
 # here, never an edit of an old file. The 2026-09-29 file is the 44 records the planning-scope rulings INCLUDE
@@ -485,6 +492,11 @@ def load_documents(con, manifest=DOCUMENTS_MANIFEST):
         con.rollback()
         raise
     return dict(rows=len(rows), inserted=n)
+
+
+def load_all_documents(con):
+    """Load every declared manifest in DOCUMENT_MANIFESTS; -> {file: load_documents totals}."""
+    return {os.path.basename(m): load_documents(con, m) for m in DOCUMENT_MANIFESTS}
 
 
 def load_all_planning(con):

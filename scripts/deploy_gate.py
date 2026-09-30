@@ -131,6 +131,13 @@ def main():
               f"served {gen(served)} vs working {gen(working)} — "
               "run scripts/export_explorer_data_v2.py, then "
               "cp docs/explorer_data_v2_working.js docs/explorer_data.js")
+        # THE HOME PAGE'S NUMBERS ARE GENERATED FROM THAT DATA (2026-09-30). They were hand-typed ("14,659
+        # units", "905 projects") and were wrong within eight days. scripts/site_numbers.py stamps its block
+        # with the export's Generated time; a new export whose numbers were not regenerated cannot deploy.
+        if h is not None:
+            m = re.search(r'<!-- BEGIN site_numbers data="([^"]*)"', h)
+            check(m is not None and m.group(1) == gen(served), "home-page numbers match the served explorer data",
+                  f"page stamp {m.group(1) if m else 'missing'} vs data {gen(served)} — run scripts/site_numbers.py")
 
     print()
     if FAIL:

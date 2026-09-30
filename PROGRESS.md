@@ -5,6 +5,19 @@
 
 ---
 
+## 2026-09-30 — Home-page pipeline numbers generated from the Explorer data (+ completions per year)
+
+The hero lines were hand-typed on 2026-09-22 ("permit pipeline — 14,659 units", "905 projects") and counted finished
+buildings as pipeline. **`scripts/site_numbers.py`** now derives them from `docs/explorer_data.js` (non-UC, as before)
+into one marked block of `docs/index.html`: "See Berkeley's permit pipeline — 11,222 units not yet built, 3,724 built
+since 2018", "See 1,095 Berkeley building projects", and a row of units completed per year (CO): 2018 73 · 2019 259
+· 2020 289 · 2021 312 · 2022 695 · 2023 625 · 2024 612 · 2025 588 · 2026* 271 (through June 26). The block is stamped
+with the export's Generated time; **`deploy_gate.py` now fails a deploy whose stamp differs from the served data**
+("run scripts/site_numbers.py"). Checked at 1280 and 390 px. These are the v2 Explorer figures; the Audit page's v4
+count differs until cutover. **Run `scripts/site_numbers.py` after every export promotion.**
+
+---
+
 ## 2026-09-30 — Live v4 swapped by the peer session; JN-E and the Audit page re-derived (+61)
 
 Peer session swapped live v4 to its chain2 build (sha `2b797a33`; snapshot of the prior live:

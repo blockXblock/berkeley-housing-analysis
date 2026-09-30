@@ -219,8 +219,8 @@ accepted), 9 awaiting the sweep, 2 need a source (2137 Dwight, 2016 Ashby: no Pl
 loaded; `housing_rules.parcel_lineage.Resolver` is the one APN -> current-parcel rule. Chain from raw: **buildings
 with no parcel 74 -> 8**; 2001 Ashby moved to 053-1591-018-04 (the candidate 014-01 was wrong); units 5,567
 (+40 Poet's Place); 2018-25 853 / 4,134. Still unlinked: 1598 University 207u and 2300 Ellsworth 69u (APN in
-neither the roll nor the lineage), 2012 Berkeley Way (split, no address match). Raw County JSON (49 MB) is local;
-John to choose git vs local + T7. Projects preview now 1,570 (207 application+buildings, 421 application-only,
+neither the roll nor the lineage), 2012 Berkeley Way (split, no address match). Raw County JSON (49 MB) stays LOCAL (John,
+2026-09-30; gitignored, manifest committed). Projects preview now 1,570 (207 application+buildings, 421 application-only,
 942 building-only).
 
 **NEXT:** when the sweeps finish -> scope-read the new records -> CapDetail for the housing ones -> third declared

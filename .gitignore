@@ -180,3 +180,8 @@ data/derived/city_block_index.geojson
 
 # Sanborn sheets (public-domain LoC images; refetch with scripts/fetch_sanborn_elmwood.py)
 data/raw/sanborn/*.jpg
+
+# County parcel lineage raw tables (49 MB): kept LOCAL (John, 2026-09-30); the committed manifest pins their sha256.
+# Re-fetch with scripts/fetch_county_lineage.py -- the County republishes, so a re-fetch is a NEW manifest.
+data/raw/county_parcel_lineage/*.json
+!data/raw/county_parcel_lineage/lineage_hits_*.json

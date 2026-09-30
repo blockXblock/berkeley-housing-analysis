@@ -5,6 +5,20 @@
 
 ---
 
+## 2026-09-30 — Funding ledger APNs re-run through the Resolver
+
+`housing_rules.parcel_lineage.Resolver` (peer session's County-lineage build, read-only:
+`scratch/2026-09-30_lineage/chain/berkeley_housing_v4.db`, 5,352 confirmed edges; live v4 does not have them yet).
+New column **`apn_source`** (the APN exactly as the source gives it) beside **`apn`** (the CURRENT parcel, or blank):
+a retired number never sits in `apn` any more. **56 of 92 rows carry a current APN** (22 resolved from a source APN,
+34 by address match confirmed current). Resolver outcomes on source APNs: current 50, split_address_match 3
+(Ephesian → BOTH 052-1533-001-04 and -05, the building spans them; Ashby Lofts → 053-1652-006-01), lineage_one 1
+(Maudelle Miller Shirek → 053-1591-018-04: 18-5 has no living descendant), split_unresolved 4 (Berkeley Way ×2,
+Oxford Plaza; and Ashby Lofts' 2005 row, settled by its 2026 sibling row), apn_unknown 2 (Erna P. Harris
+malformed; Oceanview multi-parcel). Multi-parcel applications get no single APN (7 rows).
+
+---
+
 ## 2026-09-30 — County parcel lineage: the official split/merge record exists (and fixes two APNs)
 
 **The Alameda County Assessor publishes its parcel lineage** on the same ArcGIS account as the parcels layer:

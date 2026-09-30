@@ -32,6 +32,39 @@ course notebooks, the two held stage scripts, fees).
 **NEXT:** phase 2 -- write the structures fold into v4 (new write step in `build_structures.py`; John unlocks).
 ---
 
+## 2026-09-29 — Evidence stored (R2 + v4 manifest) · care/congregate reading rule
+
+**Documents (item 2).** Pulled Step Up's `ZP2019-0173` (approved ZAB plan set 2020-06-30, applicant
+statement, tab form). **The architect's own statement (Trachtenberg, 2020-01-31): "40 rooming units in a
+Group Living Accommodation in a Single Residential Occupancy (SRO) Residential Hotel (non dwelling units)"**;
+sheet A2.5: bed, sink counter, private toilet and shower, no kitchen; one room-sized module is the office
+(40 designed, 39 rented = the permit's 39). HCD counts SRO units, so John's "tenants" ruling now rests on
+primary evidence. Uploaded to R2 (`scripts/upload_pdfs_to_r2.py`, each verified by size): Dwight plans + 3
+letters, San Pablo staff report (renamed to its real 2019-04-25 board date) + area diagrams, Step Up plan set.
+New v4 manifest `data/derived/documents_r2_manifest_2026-09-29.csv` (7 documents; the 2 Step Up files v4
+already held are left out, matched by SHA-256). `load_documents` now takes a row's own `provenance` column
+(harvested-from-Accela rows are not v2 exports). Ledger rows for Dwight and Step Up now cite the R2 URLs
+(counts unchanged: 194 / 749). **Loading the manifest into v4 is a gated write: needs an unlock.**
+⚠ One redundant R2 object: the uploader matches keys, not content, so Step Up's applicant statement now also
+sits at `proj158_1367-university-ave_2020-01-31_resub-1-e-revised-applicant.pdf` (same bytes as `…_71be350e.pdf`).
+Deleting it is John's call.
+
+**Reading rule (item 3).** `housing_rules.reading_rules.DEFINITIONS` gains one definition: a licensed care
+facility or a congregate / group-living / rooming / SRO building answers "unclear" (maps to `ambiguous`, not
+counted) with the stated room count in the reason, never 0 and never the stated count as dwellings, because
+HCD's test (separate quarters vs group arrangement) is not answerable from a permit record. Resolution path:
+a document-grounded ledger row. Stored readings are unchanged until a re-read. Smoke test PASS.
+**Review list** of stored readings the rule reaches (`scratch/2026-09-29_care_rule/review_list.csv`, 15
+permits): 3 resolved today; **`B2021-02423` (40 sleeping units + manager, community kitchens per floor;
+counts 1 now, the old pipeline 41) is Step Up's shape and needs its plans and John's ruling (41 if SRO
+tenancies, 1 if a group arrangement)**; `B2019-02693` (small GLA house, 1 stated) low priority; the rest are
+solar, repairs and an SRO renovation.
+
+**NEXT:** unlock v4 → load the 7-document manifest → B2021-02423 plans + ruling → carry the ledger into v2
+at the next export (or skip v2 per the cutover plan).
+
+---
+
 ## 2026-09-29 — APPLIED: `B2014-01391` counted once · JN-E runs clean end to end (first time since 2026-09-26)
 
 John approved and unlocked v4. `B2014-01391` (new SFR + attached ADU, 2 units) was finaled 2021-08-05 and

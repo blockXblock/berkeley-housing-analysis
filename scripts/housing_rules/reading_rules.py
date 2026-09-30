@@ -7,6 +7,12 @@ net-new units"). Adopting the reporting form's definitions makes an independentl
 to the city's, row for row. John adopted them on 2026-09-26, replacing our own wording, which had
 counted net rather than gross and had no rule for care facilities or student housing.
 
+2026-09-29 (John): care and congregate buildings read as "unclear" until someone reads the unit plans.
+The permit label decided three such buildings on 2026-09-29 (2000 Dwight, 2100 San Pablo, Step Up) and
+the unit plans overturned or reframed each; HCD's test (separate quarters vs group arrangement) is not
+answerable from a permit record. The resolution path is a document-grounded row in
+corrections/v4/grounded_counts.csv. Stored readings are unchanged until a re-read writes a new evidence file.
+
 Definitions of what is counted, not tips about reading the data: a 2026-09-26 control showed reading
 tips added nothing and pushed the model toward crediting less. The one project convention kept is the
 phase rule, which HCD does not address.
@@ -25,6 +31,12 @@ DEFINITIONS = """Definitions used in this count (California HCD Annual Progress 
   separate living quarters; and senior or assisted-living facilities where residents live in a group
   arrangement owned or managed by an entity providing housing and/or services. Senior housing that
   consists of separate living quarters is housing units.
+- A licensed care facility (residential care, assisted living, memory care) and a building described as
+  congregate, group living, rooming or single-room occupancy can fall on either side: its rooms are
+  housing units when each is separate living quarters (for example SRO rooms held by tenants, or
+  apartments with their own kitchens) and group quarters when residents live in a group arrangement.
+  A permit record alone does not show which. For such a building answer "unclear" and give the stated
+  room or unit count in the reason; do not answer 0 and do not report the stated count as dwellings.
 - Dwellings created means ALL new housing units the permitted work builds, not net of demolition.
   Units demolished or removed are reported separately as dwellings removed.
 - A sub-permit is a permit whose own scope is part of construction permitted under another permit

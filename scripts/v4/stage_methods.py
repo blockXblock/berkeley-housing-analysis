@@ -463,7 +463,10 @@ def load_documents(con, manifest=DOCUMENTS_MANIFEST):
                               r['doc_type'], r['store_url'], r['sha256'] or None,
                               int(r['file_size_bytes']) if r['file_size_bytes'] else None,
                               int(r['page_count']) if r['page_count'] else None, r['address_hint'] or None,
-                              r['apn_hint'] or None, sid, f"v2 document {r['v2_document_id']} ({r['v2_source_system']})")
+                              r['apn_hint'] or None, sid,
+                              # a manifest harvested straight from Accela carries its own provenance; the
+                              # 2026-09-28 manifest was exported from v2 and names the v2 row instead
+                              r.get('provenance') or f"v2 document {r['v2_document_id']} ({r['v2_source_system']})")
                              for r in rows]).rowcount
         assert n == len(rows), f'documents: inserted {n} of {len(rows)}'
         con.commit()

@@ -23,8 +23,13 @@ course notebooks, the two held stage scripts, fees).
 - **Phase 0 done** (`70156cd`): 40 dead/one-time files archived with refusing banners. Gates: canon PASS,
   referent PASS, join keys FAIL (pre-existing v2 content), store convergence OPEN; smoke PASS.
 
-**NEXT:** phase 1 -- cut the v4 build loose from v2 (JN-C has-docs bridge, `llm_permit_effect` fill-ins,
-harvest queue builders), then phase 2, structures into v4 (John unlocks).
+- **Phase 1 done** (`d7a6057`): the v4 build no longer opens v2 (JN-C's has-documents bridge reads v4
+  `documents`; `llm_permit_effect` drops its v2 fallback, used for 0 permits). Chain from raw: conservation
+  PASS, baseline gate PASS (2026-09-29c: 4,340 / 5,288), structural gate PASS, 136,519 classifications
+  identical to live. About 40 non-build scripts still read v2 (publishers, project-grain harvest/analysis
+  tools, gates): they move in phase 6 or retire with v2.
+
+**NEXT:** phase 2 -- write the structures fold into v4 (new write step in `build_structures.py`; John unlocks).
 ---
 
 ## 2026-09-29 — APPLIED: `B2014-01391` counted once · JN-E runs clean end to end (first time since 2026-09-26)

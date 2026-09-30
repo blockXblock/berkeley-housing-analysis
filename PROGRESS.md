@@ -89,8 +89,14 @@ the gap closes through a sourced grouping ledger `corrections/v4/project_rulings
 The 2015 harvest start is a CHOICE (`backfill_planning.py`: "5th-RHNA-cycle start"), not a portal limit --
 Accela shows pre-2015 records (UP2012-0039, read 2026-06-06).
 
-**NEXT:** extend the Planning list sweep back before 2015 (John's go), harvest the housing records among them,
-then the grouping ledger for what is still unjoined, then the projects write step.
+**2026-09-30:** Planning list sweep extended back (`a1004d5`): 2008-2014 RUNNING, 2006-2007 queued after it
+(John). Grouping ledger `corrections/v4/project_rulings.csv` (`33085f0`): 18 rows over the 21 buildings;
+**7 APPROVED** (Acheson as one project; Kittredge -> ZP2019-0027; Bancroft -> ZP2015-0014; SB 35: Berkeley Way
+PLN2018-0048, 1701 San Pablo PLN2022-0119, 2001 Ashby PLN2019-0059; 2631 Durant -> DRCF2016-0006, 71 vs 56
+accepted), 9 awaiting the sweep, 2 need a source (2137 Dwight, 2016 Ashby: no Planning record found).
+
+**NEXT:** when the sweeps finish -> scope-read the new records -> CapDetail for the housing ones -> third declared
+harvest -> re-run the projects preview -> fill the open ledger rows -> projects write step.
 ---
 
 ## 2026-09-29 — Evidence stored (R2 + v4 manifest) · care/congregate reading rule

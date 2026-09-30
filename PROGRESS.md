@@ -5,6 +5,22 @@
 
 ---
 
+## 2026-09-30 — Reading rulings (new ledger type, John approved) · ADU merge handed to the peer session
+
+**John approved** (1) a ruling row type that overrules a misread permit and (2) merging the two-permit ADU into one
+building. **(1) is built (`80da94f`):** `corrections/v4/reading_rulings.csv` + `scripts/v4/reading_rulings.py`
+(`apply_reading_rulings`, JN-F §5c right after grounded counts). It applies to EVERY classified event of the permit
+(inspections included, so no master flag survives for the structures fold), notes every changed row, halts unless the
+live reading matches the one named, halts if the permit is also in grounded_counts, is idempotent, and is pinned
+(1/1). `test_reading_rulings` PASS both ways; dry run on live's rows with the real pin changes 3 events. First row:
+**B2024-05916 (1421 Arch) new_unit/5 → alteration/0** (Accela: an Electrical Permit). **Reaches live only at the
+peer session's next chain rebuild** (standing rule): then CO −5 (2025; 2018–25 event grain 4,131 → 4,126), BP 5,288
+→ 5,283, and JN-E needs a new baseline with a −5 waterfall step. **(2) the ADU merge** (B2019-02213 + B2025-03015,
+one building, first issuance 2019) is the peer's `structure_rulings`; it is confirming with John directly because
+the approval reached it only through this session.
+
+---
+
 ## 2026-09-30 — Attributing the +66: every unit assigned to a building (verification in progress)
 
 `docs/audit/2026-09-30_attributing_the_66.md` + triage CSV. Building-level match of our 849 counted completions

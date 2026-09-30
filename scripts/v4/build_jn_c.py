@@ -119,7 +119,7 @@ print("inspections:", SM.load_inspections(con))
 print("documents:  ", SM.load_documents(con))
 print("parcels:    ", SM.load_parcels(con))   # assessor parcels + APN identifiers + assessed values + owners of record
 print("lineage:    ", SM.load_parcel_lineage(con))   # re-plat candidates: former APNs, former parcels, candidate splits
-print("planning:   ", SM.load_planning(con))   # the city's Planning records: filed + dated review tasks, staff who marked them
+print("planning:   ", SM.load_all_planning(con))   # the city's Planning records: filed + dated review tasks, staff who marked them
 """)
 code(r"""
 con=sqlite3.connect(DB_PATH); con.execute("PRAGMA foreign_keys=ON")

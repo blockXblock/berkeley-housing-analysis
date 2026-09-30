@@ -393,6 +393,17 @@ def apply_grounded_counts(con, csv_path=os.path.join(CORR, 'grounded_counts.csv'
 INSPECTIONS_DIR = os.path.join(ROOT, 'data', 'raw', 'accela_inspections')
 DOCUMENTS_MANIFEST = os.path.join(ROOT, 'data', 'derived', 'documents_r2_manifest_2026-09-28.csv')
 PLANNING_RECORDS = os.path.join(ROOT, 'data', 'raw', 'accela_capdetail', 'capdetail_2026-09-26.jsonl')
+# Every DECLARED CapDetail harvest, in load order: (file, retrieved date, what it is). A new harvest is a new row
+# here, never an edit of an old file. The 2026-09-29 file is the 44 records the planning-scope rulings INCLUDE
+# (corrections/v4/planning_scope_rulings.csv, John 2026-09-29) that the old regex filter never fetched.
+PLANNING_HARVESTS = (
+    (PLANNING_RECORDS, '2026-09-26',
+     'CapDetail harvest of housing Planning records (housing_rules.planning_filter); raw pages pinned in '
+     'data/raw/accela_capdetail/pages_manifest_2026-09-26.csv'),
+    (os.path.join(ROOT, 'data', 'raw', 'accela_capdetail', 'capdetail_2026-09-29_adds.jsonl'), '2026-09-29',
+     'CapDetail harvest of the 44 records planning_scope_rulings.csv includes (harvest_capdetail.py --records); '
+     'raw pages pinned in data/raw/accela_capdetail/pages_manifest_2026-09-29_adds.csv'),
+)
 
 
 def _sha256(path):
@@ -476,7 +487,12 @@ def load_documents(con, manifest=DOCUMENTS_MANIFEST):
     return dict(rows=len(rows), inserted=n)
 
 
-def load_planning(con, path=PLANNING_RECORDS):
+def load_all_planning(con):
+    """Load every declared harvest in PLANNING_HARVESTS; -> {file: load_planning totals}."""
+    return {os.path.basename(p): load_planning(con, p, retrieved, note) for p, retrieved, note in PLANNING_HARVESTS}
+
+
+def load_planning(con, path=PLANNING_RECORDS, retrieved_at='2026-09-26', note=None):
     """Harvested Accela PLANNING records (CapDetail) -> events, as the city recorded them.
     Each record -> one 'planning_filed' event on its list date, carrying the whole parsed record (every task,
     pending ones included) as raw_payload. Each DATED processing-status task -> one 'planning_task' event
@@ -496,15 +512,16 @@ def load_planning(con, path=PLANNING_RECORDS):
     tot = dict(records=len(recs), filed=0, tasks=0, dated_tasks=0, staff=0, marks=0)
     try:
         sid = con.execute("INSERT INTO sources (source_kind,locator,retrieved_at,checksum,notes) VALUES "
-                          "('accela_capdetail',?,?,?,?)", (loc, '2026-09-26', _sha256(path),
-                          'CapDetail harvest of housing Planning records (housing_rules.planning_filter); raw pages '
-                          'pinned in data/raw/accela_capdetail/pages_manifest_2026-09-26.csv')).lastrowid
+                          "('accela_capdetail',?,?,?,?)", (loc, retrieved_at, _sha256(path),
+                          note or PLANNING_HARVESTS[0][2])).lastrowid
         rejected = [r['record'] for r in recs if not r.get('list_date')]
         rid = con.execute("INSERT INTO ingestion_runs (source_id,started_at,rows_in_source,rows_ingested,"
                           "rows_rejected,rejected_detail,conserved) VALUES (?,?,?,?,?,?,1)",
                           (sid, now, len(recs), len(recs) - len(rejected), len(rejected),
                            ('no list date: ' + ' '.join(rejected)) if rejected else None)).lastrowid
-        staff, marks = {}, []
+        # staff already created by an earlier harvest are REUSED: one person, one actor, across files
+        staff = dict(con.execute("SELECT display_name, actor_id FROM actors WHERE role_class='city_staff'"))
+        n_staff_before, marks = len(staff), []
         for r in recs:
             tasks = r.get('processing_status') or []
             tot['tasks'] += len(tasks)
@@ -538,7 +555,7 @@ def load_planning(con, path=PLANNING_RECORDS):
                     marks.append((staff[who], ev, 'permit_event', ev, 'marked_review_task', sid))
         con.executemany("INSERT INTO actor_actions (actor_id,event_id,entity_type,entity_id,role,source_id) "
                         "VALUES (?,?,?,?,?,?)", marks)
-        tot['staff'], tot['marks'] = len(staff), len(marks)
+        tot['staff'], tot['marks'] = len(staff) - n_staff_before, len(marks)
         con.commit()
     except Exception:
         con.rollback()

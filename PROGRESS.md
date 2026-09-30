@@ -42,8 +42,18 @@ course notebooks, the two held stage scripts, fees).
   FK clean; 1,188 structures / 5,527 units / 50,877 structure_events / 1,115 structure_parcels; 2018-25 853 / 4,094;
   conservation verifier PASS; a fresh read-only fold of live reproduces the write. **John to re-lock v4.**
 
-**NEXT:** phase 3 -- projects (a primary planning application + the structures it produced, or an application
-alone); first load the 44 included planning records as a declared build input.
+- **Phase 3 started** (`955a081`): the 44 included records are a declared build input (`PLANNING_HARVESTS`);
+  chain from raw adds exactly 226 events, everything else identical to live (JN-F's structural gate halts on
+  the event count only -- expected; live not yet rebuilt). **Projects PREVIEW** (`scripts/v4/build_projects.py`,
+  rules P1-P6 in its header; `scratch/2026-09-29_phase3/projects_preview.jsonl`): 1,001 in-scope records ->
+  626 application-anchored projects; 1,188 structures -> 251 join an application, 937 are building-only.
+  **1,563 projects:** 202 application+buildings, 424 application-only (172 entitled, 172 pending, 80
+  withdrawn/void/denied), 937 building-only. Logan Park = ZP2018-0135 (135 + 69). **Gap: 21 building-only
+  projects of 20+ units (1,429u)** -- approvals older than the Jan-2015 harvest (Acheson x4 separate),
+  a site that changed between approval and permit (2150 Kittredge, 2124 Bancroft), and unit-less
+  modification records never harvested (ZP2018-0091, 2503 Haste).
+
+**NEXT:** John rules on P1-P6 and the gap (see the chat of 2026-09-29), then the write step.
 ---
 
 ## 2026-09-29 — Evidence stored (R2 + v4 manifest) · care/congregate reading rule

@@ -5,7 +5,8 @@ A PROJECT is what the published outputs count and link: a housing development pr
 application to its buildings. v4 has the two halves as separate identities -- Planning records (the city's
 applications) and STRUCTURES (build_structures.py, one per master building permit). This stage joins them.
 
-THE RULES (proposed 2026-09-29; John rules before any write):
+THE RULES (APPROVED by John 2026-09-30, P1-P6 as written; withdrawn/void/denied applications STAY as projects,
+marked with their outcome; gaps close through corrections/v4/project_rulings.csv, never a looser site rule):
   P1 SCOPE      a Planning record is in scope unless corrections/v4/planning_scope_rulings.csv EXCLUDES it
                 (John, 2026-09-29), and unless its role is 'not_an_application' (a zoning research letter is
                 an inquiry). Everything loaded was either admitted by the old filter or INCLUDED by a ruling.

@@ -53,7 +53,13 @@ course notebooks, the two held stage scripts, fees).
   a site that changed between approval and permit (2150 Kittredge, 2124 Bancroft), and unit-less
   modification records never harvested (ZP2018-0091, 2503 Haste).
 
-**NEXT:** John rules on P1-P6 and the gap (see the chat of 2026-09-29), then the write step.
+**John, 2026-09-30:** P1-P6 APPROVED as written; withdrawn/void/denied applications STAY as projects (marked);
+the gap closes through a sourced grouping ledger `corrections/v4/project_rulings.csv`, not a looser site rule.
+The 2015 harvest start is a CHOICE (`backfill_planning.py`: "5th-RHNA-cycle start"), not a portal limit --
+Accela shows pre-2015 records (UP2012-0039, read 2026-06-06).
+
+**NEXT:** extend the Planning list sweep back before 2015 (John's go), harvest the housing records among them,
+then the grouping ledger for what is still unjoined, then the projects write step.
 ---
 
 ## 2026-09-29 — Evidence stored (R2 + v4 manifest) · care/congregate reading rule

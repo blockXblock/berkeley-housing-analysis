@@ -300,7 +300,12 @@ double-counted ADU. Bug fix `84778eb` (structures status overwritten by the parc
 1,186 / 5,561 units; 2018-25 852 / 4,129. **Live v4 is BEHIND the build** (44 planning records, County lineage,
 status fix, both rulings): swap needs John's unlock.
 
-**NEXT:** live swap (John unlocks) -> Tier 1 harvest finishes -> reparse -> second read -> third declared harvest ->
+**LIVE SWAPPED (John unlocked, 2026-09-30):** snapshot `keep_snapshot_2026-09-30_pre-v4-lineage-rulings.db` (sha 738503ba,
+integrity ok); live replaced with the verified build, **live sha 2b797a33 == build**; integrity + FK clean; 147,458 events,
+1,186 structures / 5,561 units, 8 unlinked, 5,352 confirmed lineage edges, reading ruling on 3 events; conservation
+verifier PASS; a fresh read-only fold reproduces the write. **John to re-lock v4.**
+
+**NEXT:** Tier 1 harvest finishes -> reparse -> second read -> third declared harvest ->
 projects preview -> fill the open project_rulings rows -> projects write step.
 ---
 

@@ -5,6 +5,31 @@
 
 ---
 
+## 2026-09-30 — Poet's Place ruled 41 (prepared) · funding ledger started
+
+**Poet's Place (`B2021-02423`) = 41, John: 40 SRO rooms held as tenancies + the manager's unit, paralleling
+Step Up.** Ledger row (convention `sro+dwelling`; the permit's NumberUnits=40 counts only the rooms), checksums
+194/749 → 195/790, documents in R2 + manifest `2026-09-30` (`e584328`). Dry run on an in-memory extract of live:
+promoted 1, all other rows idempotent. **Live write awaits a v4 unlock** (effect: 2025 +40; 2018–25 4,091 →
+4,131; co_completions 4,340 → 4,380; then a new JN-E baseline). Or it rides the other session's next chain rebuild.
+
+**Step Up tenancy, confirmed from a City record:** the 2023-08-22 update memo: "BOSS agreed to change the
+operating model to include tenant rent payments equal to 30% of each tenant's income"; affordability "will
+terminate at the end of the 10-year lease unless both the lease and the project funding are extended."
+
+**Funding ledger started: `corrections/v4/funding_ledger.csv`, 26 rows** (README section added). Sources: 7 City
+documents in `data/raw/funding/` (URL + SHA-256 per row; every quote and amount verified against the text).
+Step Up is funded by **Measure P**, not the Housing Trust Fund: $900,000/yr × 10 + $32,975 one-time (Res.
+70,491-N.S., 2021-02-23), + $114,660/yr × 10 (revised 2022-08-03, Measure P and/or General Fund); authorized
+by Res. 69,586-N.S. (2020-10-13). Measure O committed/awarded as of 2022-09-30 ($111.4M across 9 rows: Jordan
+Court, Berkeley Way ×3, Maudelle Miller Shirek, Blake, 1740 San Pablo, BUSD, BART) plus People's Park and
+St. Paul Terrace reserved; Housing Trust Fund rounds of 2021 and 2024 and the 2026 extension. **Status: 4
+adopted, 9 committed/awarded, 2 reserved, 11 recommended** (adoption not yet sourced). Rows are funding
+ACTIONS: never sum across rows. NEXT for the ledger: adopted resolutions for the recommended rows, the 2019
+RFP (five new-construction reservations), CTCAC/HCD award lists, and APNs to join projects.
+
+---
+
 ## 2026-09-30 — Poet's Place (B2021-02423) evidence · documents in the chain · funding sources
 
 **`B2021-02423` = Poet's Place, 2435 San Pablo** (design review `DRCF2021-0008`; staff report and 25-sheet

@@ -75,3 +75,12 @@ assumes C2's value is present). Everything else is order-independent. event-dedu
   merged site, a through-lot, an SB 35 application filed as a Pre-Application or Zoning Research Letter).
   **Only rows with `status=approved` apply**; `awaiting_sweep` / `needs_source` rows are open work, kept here so
   the gap stays visible. Seven approved by John 2026-09-30 (G001-G007).
+
+## Funding ledger (added 2026-09-30)
+- **`funding_ledger.csv`** — who funds each affordable project, from the CITY'S OWN primary records (Council
+  resolutions, City Manager reports, the Measure O impacts report), never from the APR's `FIN_ASSIST_NAME`
+  (the APR is the verification target). One row per funding ACTION: a recommendation, a reservation, an award or
+  commitment, an adoption, an extension. The same money appears in several rows as it moves through those steps,
+  so **never sum the amounts across rows**. Each row carries the document's City URL, the SHA-256 of the local
+  copy (`data/raw/funding/`, PDFs gitignored) and a quote verified verbatim against the text. `status` says how
+  far the action is confirmed: `recommended` rows still need the adopted resolution sourced.

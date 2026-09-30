@@ -10,8 +10,11 @@
 **Poet's Place (`B2021-02423`) = 41, John: 40 SRO rooms held as tenancies + the manager's unit, paralleling
 Step Up.** Ledger row (convention `sro+dwelling`; the permit's NumberUnits=40 counts only the rooms), checksums
 194/749 → 195/790, documents in R2 + manifest `2026-09-30` (`e584328`). Dry run on an in-memory extract of live:
-promoted 1, all other rows idempotent. **Live write awaits a v4 unlock** (effect: 2025 +40; 2018–25 4,091 →
-4,131; co_completions 4,340 → 4,380; then a new JN-E baseline). Or it rides the other session's next chain rebuild.
+promoted 1, all other rows idempotent. **APPLIED to live v4** (John unlocked): snapshot `keep_snapshot_2026-09-30_pre-poets-place.db` (integrity ok);
+promoted 1, verified, re-run 0/0; live sha `738503ba…`. **2018–25 4,091 → 4,131; co_completions 4,340 → 4,380.**
+Baseline `reconciliation_baseline_2026-09-30b.json`; JN-E gate PASS, notebook 0 errors. **⚠ The phase-2 structures
+still show 1 unit for Poet's Place (structure 670)**: they are folded from events by `build_structures.py`, which
+refuses live; they refresh at the next chain rebuild (peer session told). **John to re-lock v4.**
 
 **Step Up tenancy, confirmed from a City record:** the 2023-08-22 update memo: "BOSS agreed to change the
 operating model to include tenant rent payments equal to 30% of each tenant's income"; affordability "will

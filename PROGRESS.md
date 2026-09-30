@@ -5,6 +5,27 @@
 
 ---
 
+## 2026-09-30 — Audit Findings: the Housing Audit page rebuilt from a findings ledger (dev; not deployed)
+
+**The live page (`berkeleybuild.com/housing-audit.html`, on main) is stale:** it shows the July state (4,229 /
+4,099 / +130) and typed prose ("~150u", "zero rows unexplained"). Regenerating the OLD builder today would also
+have published 4,380 (co_completions, which since 2026-09-26 runs to July 2026) under a "2018–2025" label.
+
+**Rebuilt:** `corrections/v4/audit_findings.csv` (16 findings: 10 on the City's side incl. the state copy, 6 on
+ours; each with side, kind, signed 2018–25 effect, evidence, status, and `verified` date; July findings carried
+but NOT counted until re-verified). `scripts/v4/build_audit_page.py` rewritten: ours derived from live v4
+(`stage_methods.co_total` per year), the City from the APR mirror (asserted == the baseline's 4,022), findings
+rendered from the CSV, and the unattributed remainder shown instead of claimed away.
+**Figures: ours 4,131 · City 4,022 · +109 · explained +43 (Overture +44, The Den +40, Poet's Place +41, Step Up +39,
+2100 San Pablo −96, Dwight memory care −25) · not yet attributed +66** (2025 +31, 2019 +13, 2020 +10, 2023 +6, 2018
++4, 2022 +2, 2021 +1, 2024 −1). Checked at 1280 and 390 px (no horizontal scroll); deploy gate: all content checks
+PASS (only "something is staged" fails, by design outside a deploy).
+
+**Deploying = merging to main (John).** NEXT: attribute the +66 (a per-permit ours-vs-City row match for 2018–25,
+like JN-E's reverse triage), then re-verify the four July findings.
+
+---
+
 ## 2026-09-30 — Funding ledger APNs re-run through the Resolver
 
 `housing_rules.parcel_lineage.Resolver` (peer session's County-lineage build, read-only:

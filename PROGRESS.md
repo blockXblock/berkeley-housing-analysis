@@ -27,6 +27,20 @@ course notebooks, the two held stage scripts, fees).
 harvest queue builders), then phase 2, structures into v4 (John unlocks).
 ---
 
+## 2026-09-29 — APPLIED: `B2014-01391` counted once · JN-E runs clean end to end (first time since 2026-09-26)
+
+John approved and unlocked v4. `B2014-01391` (new SFR + attached ADU, 2 units) was finaled 2021-08-05 and
+again 2026-02-24 (the July production) and counted twice; added to `corrections/v4/dedup47_permits.csv`
+(checksum 4 → 5), keep-MIN keeps the 2021 final. Snapshot `keep_snapshot_2026-09-29_pre-refinal-B2014-01391.db`;
+applied in one transaction (demoted 1; verified; dedup-clean 0); re-run 0/0; live v4 sha256 `21b965c7…`.
+**co_completions 4,342 → 4,340; 2018–25 unchanged at 4,091.** Baseline `reconciliation_baseline_2026-09-29c.json`
+(appended). **JN-E executes with 0 errors:** waterfall reconciles to 4,340, dedup-clean, 4 hard figures PASS.
+
+**NEXT:** re-lock v4 → store the Dwight plan documents (R2 + v2) and pull Step Up's ZP2019-0173 unit plans →
+reading-rule change for care/congregate permits → carry the ledger into v2 at the next export.
+
+---
+
 ## 2026-09-29 — JN-E's 94-unit gap decomposed; JN-E gates pass again up to one real double count
 
 **The 94 (read-only; `docs/audit/2026-09-29_jne_94_decomposition.md` + per-permit CSV):** a permit-by-permit

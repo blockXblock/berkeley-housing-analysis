@@ -29,11 +29,13 @@ error is a new gated write, not a re-run), not something importing this module p
 
 import re
 
-# Record-number prefixes that are development records at all. UP / AUP / MODUP / MODAUP are the PRE-2015 use permits,
-# administrative use permits and their modifications (added 2026-09-30 with the old record-type roles John approved;
-# the 2015+ equivalents are all ZP). DRC/DRS/LM/ZCBP/PLN already cover the old design-review, landmarks and clearance
-# prefixes.
-DEV = re.compile(r"^(ZP|PLN|DRS|DRC|LM|ZCBP|UP|AUP|MODUP|MODAUP)", re.I)
+# DEV (a record-number PREFIX regex) was REMOVED 2026-09-30 (John): which records are development records is now an
+# exact lookup on the record's own TYPE, housing_rules.planning_record.in_reading_corpus. The prefix pattern missed
+# 127 records, 18 of them ADU clearances, and a one-character edit to it nearly dropped every design review.
+#
+# HOUSING below is NO LONGER A SCOPE AUTHORITY either: the planning-scope rulings and model readings are
+# (corrections/v4/planning_scope_rulings.csv; llm_planning_scope.py). HOUSING survives only as the named BASELINE the
+# scope reader reports against, so a reader-vs-pattern comparison stays possible. Nothing may select records with it.
 
 # Housing language. Both nouns are first-class and either may be plural; a count may attach to
 # either ("166 dwellings" and "48 units" must both match). Keep additions ANCHORED to word
@@ -58,8 +60,6 @@ HOUSING = re.compile(
     r"|(?:\d+|" + NUMWORD + r")\s*[-\s]?\s*(?:units?|dwellings?|bedrooms?)\b)", re.I)
 
 
-def is_development(record_number: str | None) -> bool:
-    return bool(DEV.match(str(record_number or "")))
 
 
 def mentions_housing(*fields: str | None) -> bool:
@@ -67,5 +67,3 @@ def mentions_housing(*fields: str | None) -> bool:
     return bool(HOUSING.search(" ".join(str(f or "") for f in fields)))
 
 
-def is_housing_development(record_number: str | None, *fields: str | None) -> bool:
-    return is_development(record_number) and mentions_housing(*fields)

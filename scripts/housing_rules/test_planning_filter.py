@@ -3,8 +3,7 @@
 The first four cases are the FALSE NEGATIVES the previous pattern produced. They are verbatim from
 the Planning store so a future edit cannot regress them by paraphrase.
 """
-from scripts.housing_rules.planning_filter import (is_development, is_housing_development,
-                                                   mentions_housing)
+from scripts.housing_rules.planning_filter import mentions_housing
 
 MUST_MATCH = [
     ("ZP2022-0046", "Demolish the existing gas station, and construct a 10-story (114 feet) "
@@ -47,16 +46,11 @@ MUST_NOT_MATCH.append((
 def main() -> int:
     fails = []
     for num, desc, note in MUST_MATCH:
-        if not is_housing_development(num, desc):
+        if not mentions_housing(desc):
             fails.append(f"MISSED {num}: {note}")
     for num, desc, note in MUST_NOT_MATCH:
         if mentions_housing(desc):
             fails.append(f"FALSE POSITIVE {num}: {note}")
-    if not is_development("ZP2022-0046") or is_development("ZCBL2015-0012") \
-            or not all(is_development(n) for n in ("UP2012-0039", "AUP2013-0146", "MODUP2008-0005",
-                                                   "MODAUP2009-0080", "DRSL2018-0003", "DRCF2016-0006")) \
-            or is_development("ZCHO2013-0146"):
-        fails.append("DEV prefix test failed")
     for f in fails:
         print("  FAIL", f)
     total = len(MUST_MATCH) + len(MUST_NOT_MATCH) + 1

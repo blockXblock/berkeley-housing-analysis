@@ -35,7 +35,8 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import model_readers as mr                                    # noqa: E402  THE model-call home
-from housing_rules.planning_filter import DEV, HOUSING        # noqa: E402  DEV is form: still regex
+from housing_rules.planning_filter import HOUSING             # noqa: E402  the named BASELINE only
+from housing_rules.planning_record import in_reading_corpus    # noqa: E402  which records to read: a TYPE lookup
 from housing_rules.reading_rules import PLANNING_SCOPE        # noqa: E402  the written definition
 
 OUT = ROOT / "scratch/2026-09-28_planning_scope"
@@ -64,7 +65,7 @@ FIELDS = ("Record Number", "Record Type", "Project Name", "Description", "Status
 
 
 def records() -> dict[str, dict]:
-    """every DEV Planning record from the list dumps, latest row per record number."""
+    """every Planning record whose TYPE has a known role (planning_record.in_reading_corpus), latest row per number."""
     out: dict[str, dict] = {}
     for fn in glob.glob(str(ROOT / "data/raw/accela/date_range/Planning_*.jsonl")):
         for line in open(fn):
@@ -73,7 +74,7 @@ def records() -> dict[str, dict]:
             except Exception:
                 continue
             n = str(d.get("Record Number") or "").strip()
-            if n and DEV.match(n):
+            if n and in_reading_corpus(d.get("Record Type")):
                 out[n] = {k: d.get(k) for k in FIELDS}
     return out
 
@@ -284,7 +285,7 @@ def main() -> int:
     recs = records()
     rq = regex_queue(recs)
     order = sorted(recs)
-    print(f"{len(recs):,} DEV Planning records · the regex queue holds {len(rq):,} of them "
+    print(f"{len(recs):,} Planning records in the reading corpus · the regex queue holds {len(rq):,} of them "
           f"(a FLOOR, not a census)")
     todo = order[:args.limit] if args.limit else order
 

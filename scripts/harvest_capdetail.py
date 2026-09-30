@@ -8,9 +8,8 @@ been inferred. It is not an inference: the city publishes it, per record, with t
 itself, the disposition, and the staff member who signed it. 14,936 Planning capIDs are held and
 ~95 had been visited, all by hand (data/raw/accela_status/*.txt). This fetches the housing subset.
 
-SCOPE. The record set is the SAME filter the Planning ingest already uses -- DEV (record-number
-prefix) + HOUSING (language) from housing_rules.planning_filter, IMPORTED, not
-re-typed. 1,786 records (1,746 before the plural fix), all with a capdetail_href.
+SCOPE. Only NAMED records (--records FILE). Until 2026-09-30 the default queue was the DEV + HOUSING regex pair; the
+1,786-record 2026-09-26 harvest was produced that way. Scope now comes from the model readings + John's rulings.
 
 READ-ONLY. Fetches a public portal and writes gzipped HTML + one JSONL row per record under
 scratch/. No DB is opened. Any v2/v4 write is a separate gated step.
@@ -25,8 +24,7 @@ DISCIPLINE.
   * APNs are canonicalised ONLY by housing_rules.to_canonical_apn; apn_raw is kept unmutated.
 
 RUN
-  .venv/bin/python scripts/harvest_capdetail.py --limit 12          # smoke test first
-  .venv/bin/python scripts/harvest_capdetail.py                     # full 1,746
+  .venv/bin/python scripts/harvest_capdetail.py --records FILE --out DIR [--limit 12]
 """
 from __future__ import annotations
 
@@ -50,29 +48,14 @@ BASE = "https://aca-prod.accela.com"
 OUTDIR = ROOT / "scratch/2026-09-26_capdetail"
 
 
-def _filters():
-    """DEV + HOUSING from the CANON, housing_rules.planning_filter.
+def queue(named: set[str]) -> list[dict]:
+    """exactly the NAMED record numbers, from the list dumps.
 
-    These used to be read out of scripts/migration/ingest_planning_scope_a.py (now
-    scripts/superseded/migration__ingest_planning_scope_a.py) by importing that
-    applied one-time write for its module-level regexes. That was better than copying them, and it
-    was still wrong: the pattern had a FALSE NEGATIVE (`\bdwelling\b` cannot match the plural
-    "dwellings") which excluded ZP2022-0046 -- 3000 Shattuck, 10 storeys, 166 dwellings -- from this
-    very queue. A rule with no canonical home cannot be tested; the corrected pair now lives in
-    housing_rules with the failing case pinned as a test.
-    """
-    from housing_rules.planning_filter import DEV, HOUSING
-    return DEV, HOUSING
-
-
-def queue(named: set[str] | None = None) -> list[dict]:
-    """The housing records by the canon filter, or, with `named`, exactly those record numbers.
-
-    `named` exists because the filter is no longer the scope authority: corrections/v4/
-    planning_scope_rulings.csv (John, 2026-09-29) includes 44 records the regex never admitted, so
-    they were never fetched. A named record is taken from the same list dumps, filter bypassed; one
-    that is absent or has no capdetail_href is reported by the caller, never silently skipped."""
-    DEV, HOUSING = _filters()
+    There is no default queue any more (John, 2026-09-30). It used to be the DEV prefix regex + the HOUSING prose
+    regex, which decided which records were housing by pattern; that judgement now belongs to the planning-scope
+    readings and John's rulings (llm_planning_scope.py, corrections/v4/planning_scope_rulings.csv), which produce
+    the list this function is given. A named record that is absent or has no capdetail_href is reported by the
+    caller, never silently skipped."""
     recs: dict[str, dict] = {}
     for fn in glob.glob(str(ROOT / "data/raw/accela/date_range/Planning_*.jsonl")):
         for line in open(fn):
@@ -83,24 +66,9 @@ def queue(named: set[str] | None = None) -> list[dict]:
             n = str(d.get("Record Number") or "").strip()
             if n and n not in recs:
                 recs[n] = d
-    out = []
-    for n, d in sorted(recs.items()):
-        if named is not None:
-            if n in named and d.get("capdetail_href"):
-                out.append({"record": n, "href": d["capdetail_href"],
-                            "record_type": d.get("Record Type"), "list_status": d.get("Status"),
-                            "list_date": d.get("Date")})
-            continue
-        if not DEV.match(n):
-            continue
-        blob = " ".join(str(d.get(f, "")) for f in ("Description", "Project Name", "Record Type"))
-        if not HOUSING.search(blob):
-            continue
-        if d.get("capdetail_href"):
-            out.append({"record": n, "href": d["capdetail_href"],
-                        "record_type": d.get("Record Type"), "list_status": d.get("Status"),
-                        "list_date": d.get("Date")})
-    return out
+    return [{"record": n, "href": d["capdetail_href"], "record_type": d.get("Record Type"),
+             "list_status": d.get("Status"), "list_date": d.get("Date")}
+            for n, d in sorted(recs.items()) if n in named and d.get("capdetail_href")]
 
 
 def fetch(page, href: str, settle_ms: int) -> str:
@@ -141,11 +109,13 @@ def main() -> int:
 
     from playwright.sync_api import sync_playwright
 
-    named = None
-    if args.records:
-        named = {l.strip() for l in open(args.records) if l.strip()}
+    if not args.records:
+        raise SystemExit("--records FILE is required: the harvester fetches only records it is NAMED. Which "
+                         "Planning records are housing is decided by the scope readings and John's rulings, "
+                         "not by a pattern here.")
+    named = {l.strip() for l in open(args.records) if l.strip()}
     q = queue(named)
-    if named is not None:
+    if True:
         missing = sorted(named - {r["record"] for r in q})
         if missing:
             print(f"NOT IN THE LIST DUMPS (or no capdetail_href), not fetched: {missing}", flush=True)

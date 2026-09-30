@@ -68,6 +68,7 @@ RECORD_ROLES = {
     "Planning/MOD/Use Permit/Standard": "primary_application",
     "MOD Use Permit Standard": "primary_application",
     "Planning/MOD/Administrative Use Permit/NA": "primary_application",
+    "MOD Administrative Use Permit": "primary_application",
     "Planning/Zoning Certificate/Building Permit/NA": "ministerial_clearance",
     "Planning/Design Review/Staff Level/NA": "companion_review",
     "Planning/Design Review/Signs/NA": "companion_review",
@@ -86,6 +87,15 @@ RECORD_ROLES = {
 def role(record_type: str | None) -> str:
     """The record's pipeline role. Unrecognised types return 'unknown', never a guess."""
     return RECORD_ROLES.get((record_type or "").strip(), "unknown")
+
+
+def in_reading_corpus(record_type: str | None) -> bool:
+    """Is this Planning record one the scope reading should read? Any record whose TYPE has a known role -- an
+    exact table lookup on the city's own record-type field, never a pattern over the record number (John,
+    2026-09-30: the DEV prefix regex it replaces missed 127 records, 18 of them ADU clearances). Zoning research
+    letters ARE read: some applications were filed under that type (2001 Ashby's SB 35 application, PLN2019-0059).
+    Unknown types (business licenses, home occupations, rezonings, plan amendments) are not."""
+    return role(record_type) != "unknown"
 
 
 def is_primary(record_type: str | None) -> bool:

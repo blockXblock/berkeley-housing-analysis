@@ -144,6 +144,11 @@ def main() -> int:
     assert role("Planning/Landmarks/SAP/NA") == "companion_review"
     assert role("Planning/Special Request/PreApplication Meeting/NA") == "not_an_application"
     assert role("Zoning Certificate Business License") == "unknown"
+    from scripts.housing_rules.planning_record import in_reading_corpus
+    assert in_reading_corpus("Zoning Certificate Accessory Dwelling Units")      # the DEV regex missed these
+    assert in_reading_corpus("Zoning Research Letter")                           # read: some are applications
+    assert not in_reading_corpus("Zoning Certificate Business License")
+    assert in_reading_corpus("MOD Administrative Use Permit")
     for t, want, got in bad:
         print(f"  FAIL {t!r}: want {want}, got {got}")
     print(f"planning_record: {len(CASES)-len(bad)}/{len(CASES)} role cases pass"

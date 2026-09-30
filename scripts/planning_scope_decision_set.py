@@ -34,7 +34,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from housing_rules.planning_filter import DEV, HOUSING       # noqa: E402
+from housing_rules.planning_filter import HOUSING            # noqa: E402  the named baseline only
+from housing_rules.planning_record import in_reading_corpus   # noqa: E402
 from housing_rules.planning_record import role               # noqa: E402
 
 SCRATCH = ROOT / "scratch/2026-09-28_planning_scope"
@@ -51,7 +52,7 @@ def records() -> dict[str, dict]:
             except Exception:
                 continue
             n = str(d.get("Record Number") or "").strip()
-            if n and DEV.match(n):
+            if n and in_reading_corpus(d.get("Record Type")):
                 out[n] = d
     return out
 
@@ -114,7 +115,7 @@ def main() -> int:
         w = csv.DictWriter(f, fieldnames=list(rows[0]))
         w.writeheader()
         w.writerows(rows)
-    print(f"{len(recs):,} DEV records · regex queue {len(rq):,} · jev {len(jev):,} · "
+    print(f"{len(recs):,} corpus records · regex queue {len(rq):,} · jev {len(jev):,} · "
           f"sonnet {len(son):,}")
     print(f"decision set: {len(rows):,} rows -> {out.relative_to(ROOT)}\n")
     for k, v in collections.Counter(r["effect"] or "contested_only" for r in rows).most_common():

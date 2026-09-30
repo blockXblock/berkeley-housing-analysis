@@ -49,9 +49,9 @@ DEFINITIONS = """Definitions used in this count (California HCD Annual Progress 
 
 # ---------------------------------------------------------------------------------------------
 # PLANNING-RECORD SCOPE. The question is which Berkeley Accela PLANNING records belong to the
-# housing pipeline. Prose written by people, so a model reads it against this text; the record
-# NUMBER's prefix stays a regex (DEV in housing_rules.planning_filter) because that is machine
-# form, not meaning. Full rationale, the measured regex misses and the review plan:
+# housing pipeline. Prose written by people, so a model reads it against this text; WHICH records
+# are read is an exact lookup on the record's TYPE (planning_record.in_reading_corpus), since
+# 2026-09-30 no longer a record-number prefix regex. Full rationale, the measured regex misses and the review plan:
 # docs/methodology/planning_record_scope_definition.md (John reviewed 2026-09-28).
 #
 # The statutory definition is quoted rather than paraphrased. JOHN'S RULING 2026-09-28, verbatim

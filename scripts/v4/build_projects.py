@@ -44,7 +44,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from housing_rules import to_canonical_apn                         # noqa: E402
 from housing_rules.address import normalize_address                # noqa: E402
 from housing_rules.planning_record import milestones               # noqa: E402
 from capdetail_select import resolve_chain, cited_records, is_modification  # noqa: E402
@@ -72,14 +71,12 @@ def main() -> int:
     args = ap.parse_args()
     db = sqlite3.connect(f"file:{args.db}?mode=ro", uri=True)
 
-    pid_of = dict(db.execute("SELECT apn_normalized, parcel_id FROM parcel_identifiers "
-                             "WHERE apn_normalized IS NOT NULL ORDER BY is_current"))
+    # P3's parcel lane goes through the County's lineage (housing_rules.parcel_lineage, John's split rule 2026-09-30)
+    from housing_rules.parcel_lineage import Resolver
+    resolver = Resolver(db)
 
-    def parcel(a):
-        try:
-            return ("parcel", pid_of.get(to_canonical_apn(a, "alameda")) or to_canonical_apn(a, "alameda"))
-        except Exception:
-            return None
+    def parcels(apn, address=None):
+        return {("parcel", pid) for pid in resolver.resolve(apn, address)[0]}
 
     # ---- P1: in-scope planning records
     excluded = {r["record"] for r in csv.DictReader(open(RULINGS)) if r["ruling"] == "exclude"}
@@ -90,7 +87,7 @@ def main() -> int:
         if r["record"] in excluded or m["role"] in ("not_an_application", "unknown"):
             continue
         r["_m"] = m
-        r["_sites"] = ({parcel(a) for a in (r.get("parcels_raw") or [])} |
+        r["_sites"] = (set().union(*[parcels(a, r.get("work_location")) for a in (r.get("parcels_raw") or [])]) |
                        {addr_key(a) for a in (r.get("work_locations_all") or [r.get("work_location")])}) - {None}
         recs[r["record"]] = r
     n_loaded = db.execute("SELECT COUNT(*) FROM events WHERE event_type_code='planning_filed'").fetchone()[0]
@@ -110,7 +107,7 @@ def main() -> int:
             "WHERE event_type_code IN ('permit_submitted','permit_issued') AND source_record_key IN (%s)"
             % ",".join("?" * len(master_of)), list(master_of)):
         s = S[master_of[key]]
-        s["sites"] |= {x for x in (parcel(apn) if apn else None, addr_key(addr)) if x}
+        s["sites"] |= parcels(apn, addr) | ({addr_key(addr)} - {None})
         if d and (t == "permit_submitted" or not s["submitted"]):
             if not s["submitted"] or d < s["submitted"]:
                 s["submitted"] = d

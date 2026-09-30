@@ -623,6 +623,29 @@ def load_parcels(con, parcels_db=PARCELS_DB, owners_csv=OWNERS_CSV):
                     (sid, now, len(rows), len(by_apn) + out['duplicate_rows'], len(rejected),
                      '; '.join(rejected)[:2000] or None,
                      int(len(rows) == len(by_apn) + out['duplicate_rows'] + len(rejected))))
+        # The County's SITUS address per parcel -> addresses + parcel_addresses (2026-09-30), read separately so the
+        # source fingerprint above is unchanged. Through the address canon; a situs with no house number or a '0'
+        # placeholder is not an address. Needed to place a building on the right child of a SPLIT parcel
+        # (housing_rules.parcel_lineage). Corner lots carry ONE frontage here (CLAUDE.md rule 4), so a non-match is
+        # not evidence against a parcel.
+        from scripts.housing_rules.address import normalize_address
+        addr_ids = {}
+        out['situs_addresses'] = 0
+        for apn, situs in src.execute("SELECT APN, SitusAddre FROM parcels"):
+            if apn not in by_apn or not situs:
+                continue
+            try:
+                num, street = normalize_address(situs)
+            except Exception:
+                continue
+            if not num or not street or num == '0':
+                continue
+            key = f"{num}|{street}"
+            if key not in addr_ids:
+                addr_ids[key] = con.execute("INSERT INTO addresses (number, street, normalized) VALUES (?,?,?)",
+                                            (num, street, key)).lastrowid
+            con.execute("INSERT OR IGNORE INTO parcel_addresses VALUES (?,?)", (by_apn[apn][0], addr_ids[key]))
+            out['situs_addresses'] += 1
         by_canon = {c: p for p, c in by_apn.values()}
         orows = list(csv.DictReader(open(owners_csv)))
         osid = con.execute("INSERT INTO sources (source_kind,locator,retrieved_at,source_asof,checksum,notes) VALUES "
@@ -659,60 +682,102 @@ def load_parcels(con, parcels_db=PARCELS_DB, owners_csv=OWNERS_CSV):
     return out
 
 
-LINEAGE_CSV = os.path.join(ROOT, 'data', 'derived', 'parcel_lineage_candidates_2026-09-28.csv')
+COUNTY_LINEAGE_MANIFEST = os.path.join(ROOT, 'data', 'raw', 'county_parcel_lineage', 'manifest_2026-09-30.csv')
+# The Alameda Assessor's own parent -> child APN lists (23 tables, 2005-2027; scripts/fetch_county_lineage.py). They
+# REPLACE the 2026-09-28 bootstrap candidates (John, 2026-09-30): ADR-003 said lineage is not authoritative until
+# confirmed against the County's record, and the County's record is what this is. One of the 30 candidates was wrong
+# (2001 Ashby, 053-1591-018-03 -> 018-04, not 014-01). The candidate CSV stays in data/derived as history.
+_L_PARENT = ('PARENT_APN', 'PARENT_PARCEL', 'PARENT_PARCEL_NUMBER')
+_L_CHILD = ('CHILD_APN', 'CHILD_PARCEL_NUMBER')
+_L_END = ('END_DT', 'END_DATE', 'INACTIVATION_DATE', 'PARENT_PARCEL_END_DATE')
 
 
-def load_parcel_lineage(con, manifest=LINEAGE_CSV):
-    """Re-plat candidates (exported from v2 with their evidence) onto the v4 parcel layer. Requires load_parcels.
-    apn_renumber: the prior APN becomes a NON-current identifier on the current parcel (same identity).
-    condo_map / subdivision_map: each prior APN becomes a former parcel (non-current identifier) with CANDIDATE
-    lineage to its current children where they are recorded; where they are not (Acheson), the former parcel
-    carries that note. Nothing is 'confirmed' until checked against a recorded county map."""
-    import csv, datetime as dt
+def load_county_lineage(con, manifest=COUNTY_LINEAGE_MANIFEST):
+    """County lineage -> former parcels + confirmed parcel_lineage edges. Requires load_parcels.
+    Every retired APN in a Berkeley book becomes a FORMER parcel (its own identity, a non-current identifier with
+    valid_to = the County's end date); each PARENT -> CHILD row becomes a 'confirmed' edge between parcels, typed
+    split (parent has several children), merger (child has several parents) or renumber. Each table's SHA-256 is
+    checked against the manifest before it is read. Returns counts."""
+    import csv, datetime as dt, json as _json
     from scripts.housing_rules.apn import to_canonical_apn
-    canon = lambda a: to_canonical_apn(a, 'Alameda')
     assert con.execute("SELECT 1 FROM parcels LIMIT 1").fetchone(), 'load_parcels first'
     loc = os.path.relpath(manifest, ROOT)
     assert not con.execute("SELECT 1 FROM sources WHERE locator=?", (loc,)).fetchone(), f'already loaded: {loc}'
+    files = list(csv.DictReader(open(manifest)))
+    base = os.path.dirname(manifest)
+
+    def pick(row, names):
+        up = {k.upper(): v for k, v in row.items()}
+        return next((up[n] for n in names if up.get(n) not in (None, '')), None)
+
+    def canon(a):
+        try:
+            return to_canonical_apn(str(a).strip(), 'Alameda') if a else None
+        except Exception:
+            return None
+
+    def iso(ms):
+        try:
+            v = int(ms)
+            return None if v < 0 else dt.datetime.fromtimestamp(v / 1000, dt.timezone.utc).date().isoformat()
+        except Exception:
+            return None
+
     cur = dict(con.execute("SELECT apn_normalized, parcel_id FROM parcel_identifiers WHERE is_current=1"))
-    rows = list(csv.DictReader(open(manifest)))
-    out = dict(rows=len(rows), prior_identifiers=0, former_parcels=0, lineage=0, rejected=[])
+    books = {a.split('-')[0] for a in cur}
+    edges, end_of, layer_of = {}, {}, {}
+    out = dict(tables=len(files), county_rows=0, unparsed=0, berkeley_edges=0, former_parcels=0,
+               split=0, merger=0, renumber=0)
+    for f in files:
+        path = os.path.join(base, f['file'])
+        assert _sha256(path) == f['sha256'], f"{f['file']}: sha256 differs from the manifest"
+        for r in _json.load(open(path))['rows']:
+            out['county_rows'] += 1
+            p, c = canon(pick(r, _L_PARENT)), canon(pick(r, _L_CHILD))
+            if not p or not c:
+                out['unparsed'] += 1
+                continue
+            if p.split('-')[0] not in books and c.split('-')[0] not in books:
+                continue
+            edges.setdefault(p, set()).add(c)
+            layer_of[(p, c)] = f['layer']
+            e = iso(pick(r, _L_END))
+            if e:
+                end_of[p] = max(end_of.get(p, e), e)
+    parents_of = {}
+    for p, cs in edges.items():
+        for c in cs:
+            parents_of.setdefault(c, set()).add(p)
     try:
         sid = con.execute("INSERT INTO sources (source_kind,locator,retrieved_at,checksum,notes) VALUES "
-                          "('parcel_lineage_candidates',?,?,?,?)", (loc, dt.datetime.now(dt.timezone.utc).isoformat(),
-                          _sha256(manifest), 'v2 parcel_lineage (bootstrap candidates, 2026-06-16), evidence kept')).lastrowid
-        def former(apn_raw, note):
-            c = canon(apn_raw)
-            got = con.execute("SELECT parcel_id FROM parcel_identifiers WHERE apn_normalized=?", (c,)).fetchone()
-            if got:
-                return got[0]
-            pid = con.execute("INSERT INTO parcels (city, notes) VALUES ('Berkeley', ?)", (note,)).lastrowid
-            con.execute("INSERT INTO parcel_identifiers (parcel_id,apn_raw,apn_normalized,is_current,county,source_id) "
-                        "VALUES (?,?,?,0,'Alameda',?)", (pid, apn_raw, c, sid))
+                          "('county_parcel_lineage',?,?,?,?)", (loc, '2026-09-30', _sha256(manifest),
+                          'Alameda County Assessor: Deleted Parcel Lists 2018-2026 + Parcels Inactivated in Roll '
+                          'Year 2005-2027 (services5.arcgis.com/ROBnTHSNjoZ2Wm1P); every table sha-checked')).lastrowid
+        pid_of = dict(cur)
+
+        def parcel(apn):
+            if apn in pid_of:
+                return pid_of[apn]
+            pid = con.execute("INSERT INTO parcels (city, notes) VALUES ('Berkeley', ?)",
+                              ('former parcel, retired per the County assessor lineage',)).lastrowid
+            con.execute("INSERT INTO parcel_identifiers (parcel_id,apn_raw,apn_normalized,valid_to,is_current,county,"
+                        "source_id) VALUES (?,?,?,?,0,'Alameda',?)", (pid, apn, apn, end_of.get(apn), sid))
+            pid_of[apn] = pid
             out['former_parcels'] += 1
             return pid
-        for r in rows:
-            kind, child = r['event_type'], (r['child_apn_raw'] or '').strip()
-            parents = [a.strip() for a in r['parent_apn_raw'].split(',') if a.strip()]
-            if kind == 'apn_renumber':
-                pid = cur.get(canon(child))
-                if pid is None:
-                    out['rejected'].append(f"{r['v2_lineage_id']}: current APN {child} not a current parcel"); continue
-                con.execute("INSERT OR IGNORE INTO parcel_identifiers (parcel_id,apn_raw,apn_normalized,is_current,county,"
-                            "source_id) VALUES (?,?,?,0,'Alameda',?)", (pid, parents[0], canon(parents[0]), sid))
-                out['prior_identifiers'] += 1
-            elif child:
-                cid = cur.get(canon(child))
-                if cid is None:
-                    out['rejected'].append(f"{r['v2_lineage_id']}: child {child} not a current parcel"); continue
-                for a in parents:
-                    pid = former(a, f"former parcel ({kind}); candidate lineage from v2 row {r['v2_lineage_id']}")
-                    con.execute("INSERT OR IGNORE INTO parcel_lineage (parent_parcel_id,child_parcel_id,event_type,status,"
-                                "source_id) VALUES (?,?,?,'candidate',?)", (pid, cid, kind, sid))
-                    out['lineage'] += 1
-            else:
-                for a in parents:
-                    former(a, f"former parcel ({kind}); children NOT recorded -- {r['notes']}"[:300])
+        for p, cs in sorted(edges.items()):
+            for c in sorted(cs):
+                kind = 'split' if len(cs) > 1 else 'merger' if len(parents_of.get(c, ())) > 1 else 'renumber'
+                n = con.execute("INSERT OR IGNORE INTO parcel_lineage (parent_parcel_id,child_parcel_id,event_type,status,"
+                                "recorded_map_ref,source_id) VALUES (?,?,?,'confirmed',?,?)",
+                                (parcel(p), parcel(c), kind, layer_of[(p, c)], sid)).rowcount
+                out['berkeley_edges'] += n
+                out[kind] += n
+        con.execute("INSERT INTO ingestion_runs (source_id,started_at,rows_in_source,rows_ingested,rows_rejected,"
+                    "rejected_detail,conserved) VALUES (?,?,?,?,?,?,1)",
+                    (sid, dt.datetime.now(dt.timezone.utc).isoformat(), out['county_rows'],
+                     out['county_rows'] - out['unparsed'], out['unparsed'],
+                     f"{out['unparsed']} County rows lack a parseable parent or child APN"))
         con.commit()
     except Exception:
         con.rollback()

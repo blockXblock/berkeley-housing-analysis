@@ -461,19 +461,11 @@ def write(con, permits, groups, attach, finals) -> dict:
                       rule), tenure and affordability 'unknown' until the ledgers are applied (phase 5).
     """
     fold_id = _fold_identity()
-    canon_parcel = {}
-    for apn_n, pid, cur in con.execute(
-            "SELECT apn_normalized, parcel_id, is_current FROM parcel_identifiers "
-            "WHERE apn_normalized IS NOT NULL ORDER BY is_current"):
-        canon_parcel[apn_n] = pid                      # current wins: it is read last
-
-    def parcel_of(apn_raw):
-        if not apn_raw:
-            return None
-        try:
-            return canon_parcel.get(to_canonical_apn(apn_raw, "alameda"))
-        except Exception:
-            return None
+    # Which CURRENT parcel(s) a building sits on: through the County's lineage and John's split rule
+    # (housing_rules.parcel_lineage, 2026-09-30) -- never a bare APN lookup, which leaves a re-platted
+    # building on a retired parcel or, worse, on a wrong one.
+    from housing_rules.parcel_lineage import Resolver
+    resolver = Resolver(con)
 
     event_meta = {eid: (t, d, src) for eid, t, d, src in con.execute(
         "SELECT event_id, event_type_code, event_date, source_id FROM events")}
@@ -492,7 +484,14 @@ def write(con, permits, groups, attach, finals) -> dict:
             master_eid = issued[0][1] if issued else min(evs, key=lambda e: (e[2] or "9999", e[0]))[0]
             label = next((permits[k]["label"].key for k in keys if permits[k]["label"].key), None)
             units = max(permits[k]["net_units"] or 0 for k in keys)
-            notes = json.dumps({"fold": fold_id, "master_permits": keys,
+            seen, pbasis = [], []
+            for k in [root] + [x for x in keys if x != root]:
+                pids, basis = resolver.resolve(permits[k]["apn"], permits[k]["address"])
+                pbasis.append(basis)
+                for pid in pids:
+                    if pid not in seen:
+                        seen.append(pid)
+            notes = json.dumps({"fold": fold_id, "master_permits": keys, "parcel_basis": pbasis[0],
                                 "attached_permits": len(attach.get(root, [])),
                                 "completion_basis": basis,
                                 "site": list(permits[root]["site"] or []),
@@ -509,11 +508,7 @@ def write(con, permits, groups, attach, finals) -> dict:
                     con.execute("INSERT OR IGNORE INTO structure_events VALUES (?,?,?)",
                                 (sid, eid, "inspection" if t == "inspection" else role))
                     counts["structure_events"] += 1
-            seen = []
-            for k in [root] + [x for x in keys if x != root]:
-                pid = parcel_of(permits[k]["apn"])
-                if pid and pid not in seen:
-                    seen.append(pid)
+            counts["parcel_basis:" + pbasis[0]] += 1
             for i, pid in enumerate(seen):
                 con.execute("INSERT INTO structure_parcels VALUES (?,?,?)", (sid, pid, int(i == 0)))
                 counts["structure_parcels"] += 1

@@ -37,7 +37,13 @@ course notebooks, the two held stage scripts, fees).
   74 structures (1,272u) lack a parcel link (new condo / re-plat APNs -> phase 4).
   **⚠ The chain is now A -> B -> C -> F -> structures.** A live rebuild that skips the last step drops them.
 
-**NEXT:** John unlocks live v4 -> snapshot -> replace live with the verified build -> verify sha/integrity -> John re-locks.
+- **Phase 2 APPLIED to live (John unlocked, 2026-09-29):** snapshot `keep_snapshot_2026-09-29_pre-v4-structures.db`
+  (sha 21b965c7, integrity ok); live replaced with the verified build, **live sha f35e59fb == build**; integrity +
+  FK clean; 1,188 structures / 5,527 units / 50,877 structure_events / 1,115 structure_parcels; 2018-25 853 / 4,094;
+  conservation verifier PASS; a fresh read-only fold of live reproduces the write. **John to re-lock v4.**
+
+**NEXT:** phase 3 -- projects (a primary planning application + the structures it produced, or an application
+alone); first load the 44 included planning records as a declared build input.
 ---
 
 ## 2026-09-29 — Evidence stored (R2 + v4 manifest) · care/congregate reading rule

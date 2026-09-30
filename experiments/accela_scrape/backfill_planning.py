@@ -49,11 +49,25 @@ def run(start: date = START, end: date = END):
             skipped += 1
             continue
         res = None
-        for attempt in (1, 2):
-            res = discover_range(start, end, "Planning", max_pages=400)
+        for attempt in (1, 2, 3):
+            # A portal timeout RAISES out of discover_range (net::ERR_TIMED_OUT, 2026-09-30: it ended a
+            # 640-window run at window 113). Treat it as a failed attempt, pause, and retry the window;
+            # after the last attempt the window is logged as flagged and the run goes on.
+            try:
+                res = discover_range(start, end, "Planning", max_pages=400)
+            except Exception as ex:
+                res = {"status": "exception", "pages": 0, "rows": [], "errors": [str(ex)[:300]]}
             if res["status"] == "ok" and res["rows"]:
                 break
-            time.sleep(5)
+            time.sleep(5 if res["status"] != "exception" else 60)
+        if res["status"] == "exception":
+            with open(LOG, "a") as f:
+                f.write(json.dumps({"ts": time.strftime("%Y-%m-%dT%H:%M:%S"), "module": "Planning",
+                                    "window": tag, "status": "exception", "pages": 0, "rows": 0,
+                                    "errors": res["errors"][:3]}) + "\n")
+            failed += 1
+            print(f"Planning {tag}: EXCEPTION after 3 attempts (no file written; a re-run retries it)", flush=True)
+            continue
         with open(path, "w") as f:
             for r in res["rows"]:
                 f.write(json.dumps(r) + "\n")

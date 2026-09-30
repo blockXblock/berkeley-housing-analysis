@@ -25,6 +25,10 @@ split-merge lineage)" CLAUDE.md lists as the queued durable fix. Query results k
 (2023-11-30); Oxford Plaza 57-2035-3-2 → five parcels on pages 2118–2121 (2007); Berkeley Way 57-2053-22-1 →
 57-2122-1/-2/-3 (2020). Erna P. Harris: CTCAC's APN is malformed, no County record.
 
+**The Grinnell (Blake, 2527 San Pablo) tax credits: still not found.** Not in CTCAC's list by address, name, or among
+SAHA's 9 Alameda County applications of 2019–2026. The City APR names LIHTC for it; unresolved (a CDLAC bond list or a
+per-project CTCAC staff report would settle it).
+
 **Proposed next (John):** harvest the County lineage layers for all Berkeley books into a declared v4 build input,
 replacing the bootstrap candidates (which the County contradicts at least once).
 

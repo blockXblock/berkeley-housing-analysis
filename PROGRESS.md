@@ -5,6 +5,37 @@
 
 ---
 
+## 2026-09-30 — Poet's Place (B2021-02423) evidence · documents in the chain · funding sources
+
+**`B2021-02423` = Poet's Place, 2435 San Pablo** (design review `DRCF2021-0008`; staff report and 25-sheet
+drawings staged in `scratch/2026-09-30_gla/stage/0`, not yet in R2). "41 Group Living Accommodation rooms"
+(40 + the manager's), **each a private room with a private bathroom (toilet, shower, sink); a shared kitchen
+and common room on each floor** (sheet A103). The DRC directed "staff reports shall reflect use as GLA, not
+co-living"; `ZP2024-0120` calls it a "Group Living Accommodation/Residential hotel building" (a residential
+hotel is an SRO building in California). Use permit: ZAB 2020-08-27, appeal dismissed by Council 2021-01-21
+(that record, which would state tenancy terms, is not in the harvest). Physically identical to Step Up.
+**Counts 1 now (the manager's unit); 41 if John rules its rooms SRO tenancies, as for Step Up.**
+
+**Correction to 2026-09-29:** Step Up's City APR split (5 VLI + 34 above-moderate) is NOT suspect. The
+ZAB conditions (`2020-07-09_ZAB_FC_FINAL`, p.17; our affordability ruling A025) require exactly five
+density-bonus BMR units at VLI; that is the LEGAL restriction the APR reports. Deeper affordability for
+homeless tenants would come from a funding or operating agreement, a different record.
+
+**Documents in the chain:** `DOCUMENT_MANIFESTS` + `load_all_documents` (JN-C calls it), so the next chain
+rebuild carries the 7 documents (313 total); tested in memory, re-load refused. Peer session berkeley-data-73
+told to regenerate JN-C. JN-E baseline `2026-09-30` (sha-only append for the phase-2 live sha f35e59fb): PASS.
+
+**Funding sources (question from John):** we hold NO structured funding data. The City APR (oracle, not a
+source) reports program names in `FIN_ASSIST_NAME` (105 of Berkeley's rows just "Other") and, for the large
+affordable projects, notes naming the **City of Berkeley Housing Trust Fund**: 2001 Ashby, 1601 Oxford,
+2527 San Pablo, 2012 Berkeley Way (plus LIHTC, NPLH, AHSC, IIG, HOME, PBS8, Alameda County A1 bonds), and a
+Housing Trust Fund predevelopment loan at 3120-30 Shattuck. Step Up: "Other", no detail. Primary sources that
+would answer it independently: Council and Housing Advisory Commission reports awarding Housing Trust Fund /
+Measure O / Measure P money, recorded City regulatory agreements, and the state award lists (CTCAC for LIHTC,
+HCD for AHSC / NPLH / IIG).
+
+---
+
 ## 2026-09-29 (3c) — One canonical DB = v4 · planning scope ruled · 40 scripts archived · cutover plan
 
 **John: v4 is the one canonical database; v2 is archived like v1 once publishers read v4** (CLAUDE.md `4fe3084`;

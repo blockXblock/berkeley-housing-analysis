@@ -5,6 +5,30 @@
 
 ---
 
+## 2026-09-30 — Funding ledger: adoptions sourced, 2019 round added (34 rows) · write-path proposal
+
+**`corrections/v4/funding_ledger.csv`: 34 rows, 22 adopted / 9 committed-or-awarded (Measure O report) / 2
+reserved / 1 recommended.** New columns `adoption_document / adoption_url / adoption_sha256 / adoption_quote`.
+Adoptions: 2019-12-10 Res. 69,231 (the 2019 round: Blake $11.5M, 1740 San Pablo $7.5M, NCLT 10th St
+$1,570,640, Maudelle Miller Shirek $15,432,000; $36,002,640 total) · 2021-12-14 Res. 70,135 (2021 round:
+Ashby Lofts, Ephesians, MLK House, St. Paul Terrace, People's Park) · 2022-06-14 Res. 70,407 (St. Paul Terrace
+$8,551,040 HTF) · 2024-01-30 Res. 71,190 (MLK House transfer to Insight Housing + $822,014) · 2025-06-24 Res.
+71,846 (2024 round, rehab: Adeline St Apts, Ashby Lofts) · 2026-02-10 Res. 72,124 (reservation extensions,
+incl. North Berkeley BART $21.5M, Ephesians $14,531,301). Still recommended: the 2021-01-19 $5.5M 2527 San Pablo
+predevelopment loan (that agenda is not at the usual URL). **Every quote, adoption quote and amount is
+verified verbatim against the saved text** (0 problems). Sources: 15 City documents in `data/raw/funding/`.
+Rows are funding ACTIONS; never sum across rows.
+
+**Write-path proposal (from peer session berkeley-data-73; John to adopt or not):** ledger changes should reach
+live v4 through the full chain rebuild (A → B → C → F → structures → swap), not a direct write, because a direct
+write leaves the structures layer (and soon projects) out of step. The Poet's Place write did exactly that
+(structure 670 still 1 unit until the next rebuild). This session has agreed to follow it from now on.
+
+**NEXT (ledger):** state awards (CTCAC tax credits, HCD AHSC/NPLH/IIG), Measure P for other supportive housing,
+APNs so rows join v4 projects, and the 2021-01-19 agenda.
+
+---
+
 ## 2026-09-30 — Poet's Place ruled 41 (prepared) · funding ledger started
 
 **Poet's Place (`B2021-02423`) = 41, John: 40 SRO rooms held as tenancies + the manager's unit, paralleling

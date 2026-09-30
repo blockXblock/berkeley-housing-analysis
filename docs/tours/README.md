@@ -65,7 +65,7 @@ geometry was loaded at record time — which is why older videos show outdated
 skylines. To re-record any tour against the current hand-edited footprints:
 
 ```bash
-python scripts/build_tour_package.py docs/tours/<tour>.kml   # or --all
+python scripts/tours/build_tour_package.py docs/tours/<tour>.kml   # or --all
 ```
 
 This emits `docs/tours/packages/<tour>__geom-<sha>.kml` — ONE self-contained

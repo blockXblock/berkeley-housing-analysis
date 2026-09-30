@@ -1,0 +1,96 @@
+category,subcategory,diff,ours,city,ours_years,city_years,address,our_permits,city_rows,apns,status
+city only,city only,-1,0,1,,2018,2434 Mcgee Ave,,row230:B2017-02417,055 191001500,to verify
+city only,city only,-1,0,1,,2018,901 Grizzly Peak Blvd,,row411:B2017-03093,063 296701703,to verify
+city only,city only,-1,0,1,,2021,2629 Woolsey,,row523:B2020-01236,052 156202300,to verify
+city only,city only,-1,0,1,,2022,1116 THE ALAMEDA,,row842:,061 260500700,to verify
+city only,city only,-1,0,1,,2019,2322 Acton,,row1185:B2018-01921,056 191701300,to verify
+city only,city only,-1,0,1,,2019,2431 Spaulding,,row1214:B2018-03595,055 191305900,to verify
+city only,city only,-1,0,1,,2019,85 Parnassus,,row1240:B2015-00442,058 223201201,to verify
+city only,city only,-1,0,1,,2024,1517 VIRGINIA,,row1273:B2022-01742,058 215301200,to verify
+count differs,count differs,-5,117,122,2021,2021,2580 BANCROFT Way; 2580 Bancroft,B2019-00478,row645:B2019-00478,055 187701902,to verify
+count differs,count differs,-3,14,17,2022 2023,2022 2023,2340 FIFTH St; 739 CHANNING; 739 CHANNING Way,B2018-02291 B2019-02824 B2019-02831,row33:B2019-02831 row1782:,056 194500600 056 194500704,to verify
+count differs,count differs,3,37,34,2022,2022,1601 OXFORD; 1601 OXFORD St,B2019-05475,row681:,058 218300100,to verify
+count differs,count differs,-2,2,4,2019 2022,2019 2020 2022,1711 M L KING JR; 1711 M L KING JR Way; 1711 M L King Jr,B2018-02288 B2019-03245,row771: row957:B2018-02288 row1174:B2018-02288,058 217001700,to verify
+count differs,count differs,2,24,22,2022,2022,2556 TELEGRAPH; 2556 TELEGRAPH Ave,B2018-05067,row610:,055 183700100,to verify
+count differs,count differs,-2,3,5,2021,2020 2021,1811 SIXTY-THIRD St; 1811 Sixty-Third,B2019-03765 B2019-03766,row479:B2019-03765 row501:B2019-03766 row958:B2019-03765,052 152701100,to verify
+count differs,count differs,2,17,15,2023,2023,1717 UNIVERSITY Ave; 1717 University Ave,B2020-00206 B2020-02801,row1692:B2020-00206,057 206101000,to verify
+count differs,count differs,2,5,3,2023,2023,1434 Fifth St; 1436 Fifth St; 776 PAGE St,B2021-05043 B2021-05365 B2021-05520,row65:B2021-05043 row144:B2021-05365 row1719:B2021-05520,059 232500400,to verify
+count differs,count differs,-2,2,4,2025,2025,2619 COLLEGE AVE; 2619 COLLEGE Ave,B2024-00819,row1612:B2024-04912 row1650:B2024-00819,055 184802400,to verify
+count differs,count differs,-1,6,7,2018,2018,2002 ADDISON St; 2002 Addison St,B2016-03148,row176:B2016-03148,057 202301701,to verify
+count differs,count differs,1,2,1,2018 2024,2024,1822 WOOLSEY St,B2017-02327 B2022-01667,row1300:B2022-01667,052 154800800,to verify
+count differs,count differs,-1,1,2,2019,2019 2022,1157 FRANCISCO; 1157 FRANCISCO St; 1157 Francisco St,B2017-04979,row881: row1245:B2017-04979,058 212900200,to verify
+count differs,count differs,1,2,1,2020,2020,1330 CARLETON St; 1330 Carleton,B2017-05024 B2017-05026,row947:B2017-05024,054 179203100,to verify
+count differs,count differs,1,2,1,2020 2023,2023,2334 JEFFERSON Ave; 2334 Jefferson Ave,B2018-01255 B2018-01256,row134:B2018-01256,055 191201800,to verify
+count differs,count differs,1,5,4,2021,2021,2813 CHANNING Way; 2813 Channing; 2815 CHANNING Way,B2018-02623 B2018-02626,row506:B2018-02623 row571:B2018-02626,055 186401000,to verify
+count differs,count differs,1,2,1,2019 2025,2019,1527 WOOLSEY St; 1527 Woolsey,B2019-00029 B2024-05661,row1225:B2019-00029,052 154200800,to verify
+count differs,count differs,-1,1,2,2021,2021,1526 SIXTH St; 1526 Sixth,B2019-00047,row564:B2019-00047 row1743:ZP2018-0086,059 231502700,to verify
+count differs,count differs,1,2,1,2022,2022,0 LATHAM; 0 LATHAM Ln,B2019-05488,row859:,063 296903437,to verify
+count differs,count differs,-1,1,2,2021,2019 2021,1284 HEARST Ave; 1284 Hearst,B2020-00906,row427:B2020-00906 row1844:ZP2019-0022,057 208100700,to verify
+count differs,count differs,1,2,1,2022,2022,2801 COLLEGE; 2801 COLLEGE Ave,B2020-01591,row683:,053 169600100,to verify
+count differs,count differs,-1,2,3,2022 2023,2022 2023 2024,1825 BERKELEY (2); 1825 BERKELEY Way; 1825 Berkeley (1),B2021-02227 B2022-02049,row633: row1370:B2022-02049 row1686:B2022-02049,057 206301100,to verify
+count differs,count differs,1,3,2,2023,2023,0 GRIZZLY PEAK Blvd; 0 Grizzly Peak Blvd; 1024 GRIZZLY PEAK Blvd,B2019-05487 B2020-00781,row92:B2019-05487 row284:B2020-00781,063 296903435,to verify
+count differs,count differs,-1,1,2,2023,2023,1074 SPRUCE St; 1074 Spruce St,B2020-04459,row48:B2020-04459,061 258802500,to verify
+count differs,count differs,-1,1,2,2023,2021 2023,2350 PROSPECT St; 2350 Prospect; 2350 Prospect St,B2021-04921,row260:B2021-04921 row476:B2019-02693,055 186300901,to verify
+count differs,count differs,-1,81,82,2024,2024,2000 UNIVERSITY Ave,B2022-01111,row1467:B2022-01111,057 202501300,to verify
+count differs,count differs,1,2,1,2025,2025,2327 OREGON St,B2022-04721,row1534:B2022-04721,053 168900900,to verify
+count differs,count differs,-1,1,2,2024,2024,1023 CRAGMONT Ave; 1023 Cragmont Ave,B2023-04195,row1359:B2023-04195-REV01 row1416:B2023-04195,063 297204600,to verify
+count differs,count differs,1,2,1,2025,2024,469 KENTUCKY Ave; 469 Kentucky Ave,B2023-04389,row1384:B2023-04472,062 294502800,to verify
+count differs,count differs,1,2,1,2025,2025,2227 CARLETON St,B2023-04737,row1590:B2023-04737,055 182801100,to verify
+count differs,count differs,1,2,1,2025,2025,2436 CHANNING Way,B2023-05281,row1491:B2023-05281,055 188002201,to verify
+count differs,count differs,1,2,1,2025,2025,1300 MONTEREY Ave,B2024-00824,row1495:B2024-00824,060 242902400,to verify
+ours only,City has no row at all,7,7,0,2019,,2532 DURANT Ave,B2016-01980,,055 187601901,to verify
+ours only,City has no row at all,4,4,0,2020,,2501 TELEGRAPH Ave,B2017-05275,,055 183900102,to verify
+ours only,City has no row at all,2,2,0,2018,,1819 FIFTH ST,B2012-01526,,057 209801604,to verify
+ours only,City has no row at all,2,2,0,2021,,1471 SCENIC AVE,B2014-01391,,059 224903002,to verify
+ours only,City has no row at all,2,2,0,2020,,2214 M L KING JR Way,B2016-04212,,057 201800800,to verify
+ours only,City has no row at all,2,2,0,2019,,1336 MILVIA St,B2016-05881,,060 245101500,to verify
+ours only,City has no row at all,2,2,0,2019,,1631 WOOLSEY St,B2017-03013,,052 154501000,to verify
+ours only,City has no row at all,2,2,0,2020,,2910 TELEGRAPH Ave,B2018-01022,,052 157900300,to verify
+ours only,City has no row at all,2,2,0,2025,,1648 M L KING JR Way,B2022-05355,,058 216601900,to verify
+ours only,City has no row at all,2,2,0,2025,,2212 MCGEE Ave,B2024-03341,,056 200800900,to verify
+ours only,City has no row at all,1,1,0,2019,,11 HILL RD,B2011-04803,,063 316001900,to verify
+ours only,City has no row at all,1,1,0,2018,,723 THE ALAMEDA,B2013-02538,,061 257500100,to verify
+ours only,City has no row at all,1,1,0,2018,,1400 QUEENS RD,B2013-06041,,060 248202300,to verify
+ours only,City has no row at all,1,1,0,2021,,2932 HARPER St,B2016-02041,,053 160301500,to verify
+ours only,City has no row at all,1,1,0,2018,,1836 CAPISTRANO Ave,B2016-05523,,062 288502900,to verify
+ours only,City has no row at all,1,1,0,2019,,3127 ETON Ave,B2016-05889,,052 156317100,to verify
+ours only,City has no row at all,1,1,0,2019,,1140 CARLETON St,B2016-05950,,054 178600100,to verify
+ours only,City has no row at all,1,1,0,2018,,2031 DEL NORTE St,B2017-01941,,061 257200300,to verify
+ours only,City has no row at all,1,1,0,2019,,2327 CURTIS St,B2017-03905,,056 192502600,to verify
+ours only,City has no row at all,1,1,0,2020,,2768 ACTON St,B2018-03143,,054 174101800,to verify
+ours only,City has no row at all,1,1,0,2019,,1627 POSEN Ave,B2019-02750,,061 260702300,to verify
+ours only,City has no row at all,1,1,0,2021,,1226 PARKER St,B2019-05493,,054 178802400,to verify
+ours only,City has no row at all,1,1,0,2021,,1612 STUART St,B2020-01025,,053 167402200,to verify
+ours only,City has no row at all,1,1,0,2024,,707 CRAGMONT AVE,B2006-03740,,063 295604100,to verify
+ours only,City has no row at all,1,1,0,2025,,2028 ESSEX St,B2023-04985,,053 159402300,to verify
+ours only,City has no row at all,1,1,0,2025,,1419 BANCROFT Way,B2024-00874,,056 199803100,to verify
+ours only,City has no row at all,1,1,0,2025,,2236 GRANT St,B2024-04949,,057 201301500,to verify
+ours only,"City has other rows at the parcel, not this permit",2,2,0,2025,,2025 DURANT Ave,B2020-01168,,055 189401401,to verify
+ours only,"City has other rows at the parcel, not this permit",1,1,0,2019,,1611 EIGHTH ST,B2013-01836,,058 212403100,to verify
+ours only,"City has other rows at the parcel, not this permit",1,1,0,2019,,1145 AMADOR Ave,B2018-01376,,061 256001500,to verify
+ours only,"City has other rows at the parcel, not this permit",1,1,0,2024,,690 GRIZZLY PEAK Blvd,B2019-01428,,063 296300500,to verify
+ours only,"City has other rows at the parcel, not this permit",1,1,0,2023,,1519 FAIRVIEW St,B2020-02097,,052 154401200,to verify
+ours only,"City has other rows at the parcel, not this permit",1,1,0,2023,,932 DELAWARE St,B2020-04540,,057 209100200,to verify
+ours only,"City has other rows at the parcel, not this permit",1,1,0,2024,,1230 CEDAR St,B2021-00856,,059 229201702,to verify
+ours only,"City has other rows at the parcel, not this permit",1,1,0,2024,,1241 TALBOT Ave,B2022-00060,,060 240901700,to verify
+ours only,"City has other rows at the parcel, not this permit",1,1,0,2025,,45 ALTA Rd,B2025-03015,,063 295101300,to verify
+ours only,"City reported the building permit, no completion",2,2,0,2023,,3028 REGENT St,B2018-00105,,052 157404400,to verify
+ours only,"City reported the building permit, no completion",1,1,0,2021,,2706 SHASTA Rd,B2017-01399,,060 246906902,to verify
+ours only,"City reported the building permit, no completion",1,1,0,2021,,1510 HEARST Ave,B2018-01311,,057 206802100,to verify
+ours only,"City reported the building permit, no completion",1,1,0,2025,,2332 CALIFORNIA St,B2020-02495,,055 191301500,to verify
+ours only,"City reported the building permit, no completion",1,1,0,2025,,2425 NINTH St,B2020-04102,,056 193502700,to verify
+ours only,"City reported the building permit, no completion",1,1,0,2025,,1158 GLEN Ave,B2021-01866,,061 255400300,to verify
+ours only,"City reported the building permit, no completion",1,1,0,2025,,1025 MILLER Ave,B2021-05697,,063 296903423,to verify
+ours only,"City reported the building permit, no completion",1,1,0,2025,,1220 BURNETT St,B2022-01276,,053 162803200,to verify
+ours only,"City reported the building permit, no completion",1,1,0,2025,,816 COLUSA Ave,B2022-05928,,062 288600200,to verify
+ours only,"City reported the building permit, no completion",1,1,0,2025,,1514 BLAKE St,B2023-05250,,054 180002200,to verify
+ours only,"City reported the building permit, no completion",1,1,0,2025,,1136 KEITH Ave,B2024-02570,,063 298803800,to verify
+ours only,"City reported the building permit, no completion",1,1,0,2025,,1139 PARKER St,B2024-03760,,054 178400400,to verify
+ours only,"City reported the building permit, no completion",1,1,0,2025,,833 KEELER Ave,B2024-04293,,063 296405200,to verify
+ours only,"City reported the building permit, no completion",1,1,0,2025,,935 MODOC St,B2024-04779,,061 261201300,to verify
+ours only,"City reported the building permit, no completion",1,1,0,2025,,1634 BLAKE St,B2025-01031,,054 180503300,to verify
+ours only,finding A03 (Poet's Place),41,41,0,2025,,0 SAN PABLO Ave,B2021-02423,,056 192801900,to verify
+timing only,timing only,0,1,1,2021,2022,2421 NINTH; 2421 NINTH St,B2016-02230,row797:,056 193502800,to verify
+timing only,timing only,0,4,4,2019 2020,2019 2025,1446 FIFTH St; 1446 Fifth St,B2018-02503 B2018-03127 B2018-03576 B2018-03577,row1099:B2018-02503 row1138:B2018-03577 row1595:B2018-03576 row1851:B2018-03127,059 232500700,to verify
+timing only,timing only,0,1,1,2020,2023,1222 CARLETON St; 1222 Carleton St,B2019-01241,row362:B2019-01241,054 178702300,to verify
+timing only,timing only,0,1,1,2022,2023,2804 M L KING JR Way; 2804 M L King Jr Way,B2020-03494,row267:B2020-03494,053 167700900,to verify

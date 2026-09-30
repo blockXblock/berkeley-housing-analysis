@@ -1,4 +1,4 @@
-# Attributing the +66 (2026-09-30, in progress)
+# Attributing the +66 (2026-09-30, in progress) — now +61 after the 1421 Arch ruling
 
 The Housing Audit page shows ours 4,131 vs the City's 4,022 for 2018–25 (+109), of which +43 is explained by
 verified findings. This memo accounts for the rest, building by building.
@@ -10,7 +10,11 @@ CO columns, 806 rows / 4,022 units) is resolved to current parcels with `housing
 current parcel, an address (the address canon), or the identical source APN (a split parcel the Resolver cannot
 place). Totals reconcile exactly (+109).
 
-**Result: every unit of the +66 is assigned to a building** (`2026-09-30_attributing_the_66_triage.csv`):
+**Update after the 2026-09-30 v4 swap (live sha 2b797a33):** 1421 Arch was our over-count (finding O07), corrected by a
+reading ruling; ours 2018–25 is 4,126, the gap +104, outside the verified findings **+61** ('no City row' is now 27
+buildings / +44). The scripts in `2026-09-30_attributing_the_66/` (match → classify → triage) re-derive the CSV from live.
+
+**Result (first run, before the swap): every unit of the +66 is assigned to a building** (`2026-09-30_attributing_the_66_triage.csv`):
 
 | Category | Buildings | Units |
 |---|---|---|

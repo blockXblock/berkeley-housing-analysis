@@ -5,7 +5,7 @@ from scripts.v4 import stage_methods as SM
 from housing_rules.parcel_lineage import Resolver
 from housing_rules.address import normalize_address
 
-LIN = sqlite3.connect('file:scratch/2026-09-30_lineage/chain/berkeley_housing_v4.db?mode=ro', uri=True)
+LIN = sqlite3.connect('file:databases/berkeley_housing_v4.db?mode=ro', uri=True)
 R = Resolver(LIN)
 HCD = sqlite3.connect('file:databases/hcd_apr_mirror_2026-06-17_fresh.db?mode=ro', uri=True)
 V4 = SM.ro(SM.LIVE)

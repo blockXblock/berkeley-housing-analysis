@@ -5,6 +5,18 @@
 
 ---
 
+## 2026-09-30 — Live v4 swapped by the peer session; JN-E and the Audit page re-derived (+61)
+
+Peer session swapped live v4 to its chain2 build (sha `2b797a33`; snapshot of the prior live:
+`keep_snapshot_2026-09-30_pre-v4-lineage-rulings.db`): County lineage, 226 planning events, the ADU building merge
+and the 1421 Arch reading ruling. **JN-E gate PASS vs baseline 30c** (co 4,375, BP 5,283, co_gap 353), notebook 0 errors.
+**Audit page regenerated from live: ours 4,126 · City 4,022 · +104 · explained +43 · not yet attributed +61.** O07 (1421
+Arch) resolved. The +66 triage re-derived on live (scripts saved in `docs/audit/2026-09-30_attributing_the_66/`, Resolver
+now on live): +16 permit-no-completion, +44 no City row (27), +10 other rows at parcel, −8 City-only, −1 count
+differences. **John to re-lock v4.** Page deploy = merge to main (John).
+
+---
+
 ## 2026-09-30 — Reading rulings (new ledger type, John approved) · ADU merge handed to the peer session
 
 **John approved** (1) a ruling row type that overrules a misread permit and (2) merging the two-permit ADU into one

@@ -214,6 +214,15 @@ Accela shows pre-2015 records (UP2012-0039, read 2026-06-06).
 PLN2018-0048, 1701 San Pablo PLN2022-0119, 2001 Ashby PLN2019-0059; 2631 Durant -> DRCF2016-0006, 71 vs 56
 accepted), 9 awaiting the sweep, 2 need a source (2137 Dwight, 2016 Ashby: no Planning record found).
 
+**County parcel lineage replaces the bootstrap candidates** (John: split rule, County as input; `0da5608`, `7089be5`).
+23 Assessor tables (211,569 rows, count-checked) -> 3,709 former parcels + 5,352 confirmed edges; situs addresses
+loaded; `housing_rules.parcel_lineage.Resolver` is the one APN -> current-parcel rule. Chain from raw: **buildings
+with no parcel 74 -> 8**; 2001 Ashby moved to 053-1591-018-04 (the candidate 014-01 was wrong); units 5,567
+(+40 Poet's Place); 2018-25 853 / 4,134. Still unlinked: 1598 University 207u and 2300 Ellsworth 69u (APN in
+neither the roll nor the lineage), 2012 Berkeley Way (split, no address match). Raw County JSON (49 MB) is local;
+John to choose git vs local + T7. Projects preview now 1,570 (207 application+buildings, 421 application-only,
+942 building-only).
+
 **NEXT:** when the sweeps finish -> scope-read the new records -> CapDetail for the housing ones -> third declared
 harvest -> re-run the projects preview -> fill the open ledger rows -> projects write step.
 ---

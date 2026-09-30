@@ -108,6 +108,23 @@ con.commit()
 """)
 
 md(r"""
+## §5c — Reading rulings: where a model reading is overruled (calibration: `reading_rulings.csv`)
+**What this is.** `grounded_counts` can only RAISE a count. When the model misread a permit (2026-09-30: B2024-05916,
+"Renew old permit B2017-02937", which Accela lists as an Electrical Permit, read as 5 new units from the permit's
+unit field), John's ruling lowers it here, with evidence. Each row names the reading it overrules and the ruling, and
+applies to EVERY classified event of the permit, so building-permit and completion counts move together. The method
+halts unless the current reading equals the one named, halts if the permit is also in `grounded_counts`, and is
+idempotent on re-run.
+""")
+code(r"""
+import reading_rulings as RR
+print(RR.apply_reading_rulings(con))
+ledger.append(("reading rulings (overruled readings)", M.co_total(con)))
+print(f"CO -> {ledger[-1][1]:,}")
+con.commit()
+""")
+
+md(r"""
 ## §6 — HELD, encoded (hold-not-apply — the deliberate non-corrections)
 - **The held under-side registry is `corrections/v4/held_items.json`** (the assert derives from it —
   originally +147; B2021-03302/69 RESOLVED 2026-07-02 via grounded_counts; **+78 remains**):
@@ -215,6 +232,7 @@ steps = "\n".join(
     f'  C{i}[/"{f}"/] -.-> F{i}["{m}"] --> DB' for i, (f, m) in enumerate([
         ("dedup47_permits.csv", "apply_dedup47"),
         ("grounded_counts.csv", "apply_grounded_counts (John's rulings)"),
+        ("reading_rulings.csv", "apply_reading_rulings (overruled readings)"),
     ]))
 display(Markdown(f'''```mermaid
 flowchart LR
@@ -222,7 +240,7 @@ flowchart LR
 {steps}
   DB --> JNE["JN-E reconciliation"]
   classDef calib fill:#ffd,stroke:#b90;
-  class C0,C1 calib;
+  class C0,C1,C2 calib;
 ```'''))
 print("every arrow into DB is a method reading a VERSIONED calibration — none reads the city APR.")
 """)

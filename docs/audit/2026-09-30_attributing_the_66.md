@@ -24,8 +24,15 @@ place). Totals reconcile exactly (+109).
 
 Assigned is not the same as explained: each row is `to verify`. First reads of the three largest:
 2532 Durant (+7): offices converted back to 7 apartments, finaled 2019-01-30, no City row — likely a City omission.
-1421 Arch (+5): "Renew old permit B2017-02937"; the 2017 permit is not in our data — Accela check needed.
-2501 Telegraph (+4): completes work "approved under B2014-04083" — Accela check needed.
+1421 Arch (+5): **OUR over-count (finding O07).** "Renew old permit B2017-02937"; the 2017 permit, found in the Accela Building sweep
+(`data/raw/accela/date_range/Building_2017-07-05_2017-07-08.jsonl`), is an ELECTRICAL permit (200-amp service, 6 meters). The model read
+the unit field (5 existing units) as 5 new units.
+2501 Telegraph (+4): completes work "approved under B2014-04083". The 2014 permit predates the Building sweep (2015→); its 2016
+revision (B2014-04083-REV01) changed "laundry room and lower porch … to storage, 2nd floor to remain as is" — reads like a renovation,
+not new units. Accela check of B2014-04083 needed.
+
+**Where parent permits live:** the Accela Building date-range sweep, `data/raw/accela/date_range/Building_*.jsonl` (1,071 files,
+2015-01-01 → 2026-09-21), plus `data/processed/permits_clean.csv`. Permits before 2015 need an Accela CapDetail fetch.
 
 **Next:** Accela checks for the parent permits behind the "no row" cases; confirm the 15 permit-but-no-completion
 cases against the City's CY2026 report when published; review the 8 City-only rows against our readings

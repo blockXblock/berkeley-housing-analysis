@@ -42,6 +42,7 @@ co_cols = [c for (c,) in sqlite3.connect(f'file:{HCD}?mode=ro', uri=True).execut
 city = dict(sqlite3.connect(f'file:{HCD}?mode=ro', uri=True).execute(
     f"SELECT YEAR, SUM({'+'.join(f'COALESCE({c},0)' for c in co_cols)}) FROM table_a2 "
     "WHERE upper(JURIS_NAME)='BERKELEY' GROUP BY YEAR").fetchall())
+city_years = sorted(y for y, v in city.items() if y)   # the years the City filed project-level rows
 city = {y: int(city.get(y, 0) or 0) for y in YEARS}
 assert sum(city.values()) == BASE['hard_gated']['city_co_total']['value'], 'City total drifted from the baseline'
 tot_ours, tot_city = sum(ours.values()), sum(city.values())
@@ -153,6 +154,26 @@ published in HCD's open data. "Explained" is the sum of the verified findings fo
 {year_rows}
 <tr><th>2018&ndash;2025</th><th class="num">{tot_ours:,}</th><th class="num">{tot_city:,}</th><th class="num">{gap:+,}</th><th class="num">{named:+,}</th><th class="num">{unattributed:+,}</th></tr>
 </table></div>
+
+<h2>Why the comparison starts in 2018</h2>
+<p><strong>Because that is where the City's building-by-building record starts.</strong> We compare against the
+City's Annual Progress Reports to the state, and the state's open-data copy holds Berkeley's project-level rows
+for {city_years[0]}&ndash;{city_years[-1]}. Each row names a project and the year it was entitled, permitted and
+completed. That is what makes a building-by-building comparison possible.</p>
+<p><strong>The start date comes from state law.</strong> Two 2017 housing laws, Assembly Bill 879 and Senate Bill 35,
+changed what cities must report. The state housing department (HCD) rewrote the report form to match, and its
+guidance draws the line at 2018: <em>&ldquo;For the years 2017 and prior, you must use the old version of the
+APR.&rdquo;</em> Berkeley's rows in the state's open data begin with 2018, the first year on the new form.
+(<a href="https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/housing-element-annual-progress-report-instructions.pdf">HCD
+report instructions</a>; <a href="https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/housing-element-annual-progress-report-faq.pdf">HCD
+FAQ</a>.)</p>
+<p><strong>Our permit records were requested to match.</strong> The City's permit reports, obtained through
+public-records requests, cover permits from 2018 onward.</p>
+<p><strong>What did not set the date.</strong> Berkeley's Measure O housing bond and Measure P transfer tax both
+passed in 2018, but their money reached projects from 2019 on, so 2018 is simply the year before the new
+local money. The current state housing-target cycle (RHNA) starts in mid-2022 and counts building permits, not
+completions. Some of our other records reach further back (state tax-credit awards to 1991; we are collecting City
+planning records back to 2006), but without the City's project-level filings there is nothing to compare them against.</p>
 
 <h2>What we found in the City's record</h2>
 <p>A positive number means the City's record undercounts relative to ours; a negative number means it counts

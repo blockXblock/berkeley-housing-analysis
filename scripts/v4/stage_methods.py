@@ -398,6 +398,7 @@ DOCUMENTS_MANIFEST = os.path.join(ROOT, 'data', 'derived', 'documents_r2_manifes
 DOCUMENT_MANIFESTS = (
     DOCUMENTS_MANIFEST,
     os.path.join(ROOT, 'data', 'derived', 'documents_r2_manifest_2026-09-29.csv'),
+    os.path.join(ROOT, 'data', 'derived', 'documents_r2_manifest_2026-09-30.csv'),   # Poet's Place (DRCF2021-0008)
 )
 PLANNING_RECORDS = os.path.join(ROOT, 'data', 'raw', 'accela_capdetail', 'capdetail_2026-09-26.jsonl')
 # Every DECLARED CapDetail harvest, in load order: (file, retrieved date, what it is). A new harvest is a new row

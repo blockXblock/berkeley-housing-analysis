@@ -2,7 +2,7 @@
 """Build JN-C_classify.ipynb (pass 1): reversible housing-role labeling over the v4 event stream.
 #1 housing/non-housing (description-first, ADU=Yes requires description corroboration, generous-
 inconclusive) + #2 master-collapse on permit family. Defers #3 (phantom-master). Emits a harvest
-queue with a has_r2_documents flag (bridged to v2.db documents by address/APN). Compares confident
+queue with a has_r2_documents flag (from v4's own documents table). Compares confident
 completions-by-year to v3 prior research as a floor..ceiling range. What-Just-Happened sandwich on
 every code cell. Field names are the REAL payload keys confirmed from the v4 db."""
 
@@ -75,7 +75,6 @@ if DB_PATH.resolve() == _LIVE.resolve() and os.environ.get("JN_C_ALLOW_LIVE") !=
         f"REFUSED: DB_PATH is the LIVE DB ({_LIVE}).\n"
         f"JN-C would DELETE+INSERT event_classifications, losing the corrections JN-F applies.\n"
         f"Point JN_C_DB_PATH at a rebuild (default: the JN-A throwaway), or set JN_C_ALLOW_LIVE=1.")
-V2_PATH = Path.home() / "berkeley-data" / "databases" / "berkeley_housing_v2.db"  # read-only, for has-docs bridge
 
 rows = json.loads(EVIDENCE.read_text())
 print(f"Evidence: {EVIDENCE.name}  ({evidence_hash()})")
@@ -238,8 +237,8 @@ small-housing volume (likely real, likely what v3's address-keyed pipeline under
 md(r"""
 ### What this cell does
 Emits the harvest queue: inconclusive permits that finaled in-window, with permit/address/APN/
-description, AND a **has_r2_documents** flag bridged to v2.db's `documents` table by address/APN (v2
-docs key on project_id; v4 keys on permit, so the bridge is via the project's address/APN). The flag
+description, AND a **has_r2_documents** flag from v4's own `documents` table, matched by record key, canonical
+APN, or canonical address (the build does not open v2). The flag
 marks which inconclusive cases are resolvable NOW by reading an existing R2 PDF, versus which need an
 Accela document-fetch. Writes the queue to CSV.
 """)
@@ -251,41 +250,35 @@ harvest=con.execute('''SELECT DISTINCT e.source_record_key permit, strftime('%Y'
      AND strftime('%Y',e.event_date) BETWEEN '2018' AND '2025'
    ORDER BY yr, permit''').fetchall()
 
-# Build the has-documents bridge from v2.db (read-only). v2.documents has BOTH a direct permit_number
-# (often blank) and project_id -> projects (canonical/normalized_address; NO apn column). We use the
-# direct permit match first, then the address path. We account for merged_into_id (absorbed projects)
-# so docs on a merged project still surface via the survivor's address.
-doc_permits=set(); doc_addrs=set()
-try:
-    v2=sqlite3.connect(f"file:{V2_PATH}?mode=ro", uri=True)
-    # (1) direct permit_number key on documents that carry an r2_url
-    for (pn,) in v2.execute("SELECT permit_number FROM documents WHERE r2_url IS NOT NULL AND permit_number IS NOT NULL AND permit_number<>''"):
-        doc_permits.add(_norm(pn))
-    # (2) address path: documents.project_id -> projects (follow merged_into_id to survivor)
-    for (caddr, naddr) in v2.execute('''
-        SELECT COALESCE(surv.canonical_address, p.canonical_address),
-               COALESCE(surv.normalized_address, p.normalized_address)
-        FROM documents d
-        JOIN projects p ON p.id = d.project_id
-        LEFT JOIN projects surv ON surv.id = p.merged_into_id
-        WHERE d.r2_url IS NOT NULL'''):
-        if caddr: doc_addrs.add(_norm(caddr))
-        if naddr: doc_addrs.add(_norm(naddr))
-    v2.close()
-    print(f"Bridge: {len(doc_permits)} permit-keyed + {len(doc_addrs)} address-keyed R2 documents in v2.")
-except Exception as ex:
-    print("has-documents bridge unavailable:", ex)
-    print("Proceeding; has_r2_documents will be 'unknown'. (Check v2 schema: documents.permit_number, projects.canonical_address/normalized_address/merged_into_id.)")
+# The has-documents bridge reads v4's OWN `documents` table (same DB as the events; 2026-09-29, phase 1 of
+# the cutover -- the build no longer opens v2). Keys: the document's record key, its canonical APN hint, and
+# its address hint through the address canon. v4 holds the 306 stored R2 documents; v2's attachment
+# listings are a RE-DERIVE item, so a "no" here means "no stored document in v4", not "none exists".
+from housing_rules import to_canonical_apn
+from housing_rules.address import normalize_address
+def _apn(a):
+    try: return to_canonical_apn(a, "Alameda") if a else None
+    except Exception: return None
+def _addr(a):
+    try: return normalize_address(a) if a else None
+    except Exception: return None
+doc_permits=set(); doc_addrs=set(); doc_apns=set()
+for key, ah, ph in con.execute("SELECT record_key, address_hint, apn_hint FROM documents"):
+    if key: doc_permits.add(_norm(key))
+    if _addr(ah): doc_addrs.add(_addr(ah))
+    if _apn(ph): doc_apns.add(_apn(ph))
+print(f"Bridge: {len(doc_permits)} record-keyed, {len(doc_apns)} APN-keyed, {len(doc_addrs)} address-keyed documents in v4.")
 
-def has_docs(permit, addr):
+def has_docs(permit, addr, apn=None):
     if not doc_permits and not doc_addrs: return "unknown"
     if permit and _norm(permit) in doc_permits: return "yes"
-    if addr and _norm(addr) in doc_addrs: return "yes"
+    if _apn(apn) and _apn(apn) in doc_apns: return "yes"
+    if _addr(addr) and _addr(addr) in doc_addrs: return "yes"
     return "no"
 
 queue=[]
 for permit,yr,addr,apn,descr,note in harvest:
-    queue.append((permit,yr,addr,apn,has_docs(permit,addr),descr,note))
+    queue.append((permit,yr,addr,apn,has_docs(permit,addr,apn),descr,note))
 
 n_yes=sum(1 for q in queue if q[4]=="yes")
 print(f"\nHarvest queue: {len(queue):,} inconclusive permits finaled 2018-2025.")
@@ -311,8 +304,8 @@ documents aren't yet in R2). This is the precise, bounded target for the next st
 Accela sweep, but exactly the inconclusive ADU permits that need evidence. Labels stay reversible, so
 each resolved case is a reversible relabel on richer evidence.
 
-*Note: the v2 bridge join (documents -> projects) assumes v2's project table is named `projects` with
-`address`/`apn` columns; if v2 differs, the flag reads 'unknown' and the join needs a one-line fix.*
+*Note: the flag reads v4's `documents` (306 stored R2 documents); a "no" means no stored document in v4,
+not that none exists.*
 """)
 
 md(r"""

@@ -66,8 +66,10 @@ def api_key():
 
 
 def records(permits):
-    """Latest CPRA row per permit across all feed files (reruns republish whole windows);
-    v2 permits row as the fallback for permits outside the CPRA windows."""
+    """Latest CPRA row per permit across all feed files (reruns republish whole windows).
+    A permit absent from every CPRA file is NOT read: it is reported and left out. (Until 2026-09-29 v2's
+    permits table was a fallback; the 2026-09-26 evidence file used it for 0 permits, and the build no
+    longer opens v2.)"""
     import pandas as pd
     frames = []
     for f in sorted(glob.glob(str(ROOT / "data/raw/cpra-downloads/BP_Annual Permit Report-*.xlsx"))):
@@ -79,13 +81,9 @@ def records(permits):
         frames.append(d[d.PermitNumber.isin(permits)])
     a = pd.concat(frames).sort_values("_rank").drop_duplicates("PermitNumber", keep="last")
     out = {r.PermitNumber: {k: r[k] for k in FIELDS if k in r and pd.notna(r[k])} for _, r in a.iterrows()}
-    v2 = sqlite3.connect(f"file:{ROOT}/databases/berkeley_housing_v2.db?mode=ro", uri=True)
-    for p in set(permits) - set(out):
-        r = v2.execute("SELECT description, filed_date, issued_date, finaled_date FROM permits "
-                       "WHERE permit_number=?", (p,)).fetchone()
-        if r:
-            out[p] = {"PermitNumber": p, "WorkDescription": r[0], "Submittal Date": r[1],
-                      "Issuance Date": r[2], "Finaled Date": r[3], "_note": "from v2 permits (outside CPRA windows)"}
+    missing = sorted(set(permits) - set(out))
+    if missing:
+        print(f"{len(missing)} permit(s) in no CPRA file, not read: {missing[:10]}", file=sys.stderr)
     return out
 
 

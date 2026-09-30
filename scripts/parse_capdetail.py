@@ -105,7 +105,11 @@ def parse_processing_status(soup: BeautifulSoup) -> list[dict]:
     return out
 
 
-_PARCEL = re.compile(r"Parcel Number:\s*([0-9A-Za-z][0-9A-Za-z \-]*?)\s*(?:\*|<|$)")
+# A parcel number ends at the primary star, a tag, the end, or the "Block:" label that follows EVERY entry.
+# Until 2026-09-30 "Block:" was missing, so only the starred (primary) parcel ever matched: multi-parcel records
+# silently lost their other parcels (13 of the 1,786 2026-09-26 pages; PLN2023-0084 lists 7, read as 1), and
+# pre-2015 pages, which have no star, lost all of them. Checked on all 1,786 pages: only those 13 change.
+_PARCEL = re.compile(r"Parcel Number:\s*([0-9A-Za-z][0-9A-Za-z \-]*?)\s*(?:\*|<|$|Block:)")
 
 
 def parse_parcels(soup: BeautifulSoup) -> list[str]:

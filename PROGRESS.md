@@ -5,6 +5,31 @@
 
 ---
 
+## 2026-09-30 — County parcel lineage: the official split/merge record exists (and fixes two APNs)
+
+**The Alameda County Assessor publishes its parcel lineage** on the same ArcGIS account as the parcels layer:
+`Assessor_Office_Deleted_Parcel_List_<year>` (2018–2026) and `Parcels_Inactivated_in_Roll_Year_<year>`
+(2005–2027), each a PARENT_APN → CHILD_APN list with the end date. This is the "parcel_crosswalk (prior-APN /
+split-merge lineage)" CLAUDE.md lists as the queued durable fix. Query results kept in
+`data/raw/county_parcel_lineage/lineage_hits_2026-09-30.json`.
+
+**Resolved (ledger APNs corrected, County evidence on each row):**
+- **Maudelle Miller Shirek:** 53-1591-18-3 split 2022-01-17 into 18-4 and 18-5 → **053-1591-018-04** (2925 Adeline
+  situs; carries the building's improvements; its 2025 permit says "publicly funded housing"). **My address match
+  (014-01) was the corner-lot trap, and so is v4's bootstrap lineage candidate** (`parcel_identifiers`: 018-03 as a
+  former identifier of parcel 2844 = 014-01, source 1307, `parcel_lineage_candidates_2026-09-28.csv`). That
+  candidate is WRONG per the County; it belongs to the peer session's lineage load.
+- **Ashby Lofts:** 53-1652-2 split 2005-11-09 into -4 and -5; -5 and -6 merged 2006-05-23 into **-6-1** (053-1652-006-01).
+
+**Multi-child splits (successors recorded, no single APN assigned):** Ephesian Legacy Court 52-1533-1-3 → 1-4, 1-5
+(2023-11-30); Oxford Plaza 57-2035-3-2 → five parcels on pages 2118–2121 (2007); Berkeley Way 57-2053-22-1 →
+57-2122-1/-2/-3 (2020). Erna P. Harris: CTCAC's APN is malformed, no County record.
+
+**Proposed next (John):** harvest the County lineage layers for all Berkeley books into a declared v4 build input,
+replacing the bootstrap candidates (which the County contradicts at least once).
+
+---
+
 ## 2026-09-30 — Funding ledger: state program awards, 2023 Measure O snapshot, APNs (92 rows)
 
 **+20 rows (92).** State awards: **AHSC 2019-20** (SGC list): Maudelle Miller Shirek $22,781,553; **Blake / The

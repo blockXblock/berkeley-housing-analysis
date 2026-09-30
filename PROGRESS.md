@@ -2,6 +2,29 @@
 
 **Purpose:** The live current-state snapshot. Read this first (after `CLAUDE.md`) at session start. Updated at the end of every gated step (see *State-update discipline* in `CLAUDE.md`). This file is canonical; auto-loaded memory is a hint, not ground truth — verify against the DB / `git log`.
 
+
+---
+
+## 2026-09-29 (3c) — One canonical DB = v4 · planning scope ruled · 40 scripts archived · cutover plan
+
+**John: v4 is the one canonical database; v2 is archived like v1 once publishers read v4** (CLAUDE.md `4fe3084`;
+"v2 its output" and the audit's "fold v4 into v2" are superseded). Plan: `notes/v4/2026-09-29_cutover_plan.md`
+(phases 0-7; v4 has the evidence but 0 structures/projects/units; 20 publishers + ~20 analysis readers and
+parts of the v4 build itself still read v2). Four decisions open for John there (unsourced v2 data, linked v1
+course notebooks, the two held stage scripts, fees).
+- **Planning scope APPROVED** (`53c5488`): `corrections/v4/planning_scope_rulings.csv`, 44 include / 857 exclude
+  (regenerated set; 58 HOLD_UNKNOWN stay). Not yet read by any build step. **v2 planning-event repair: SKIPPED**
+  (John) -- v2 is archived at cutover; 79 projects keep a filed date from an excluded record until then.
+- **The 44 includes harvested** (`10f1d39`, `harvest_capdetail.py --records`): `scratch/2026-09-29_capdetail_adds/`,
+  38 with review tasks, 6 pre-applications (publish none). Not yet a declared build input.
+- **Logan Park South at building grain is already one structure / 69** (structures fold; 2018-25 = 852 / 4,006).
+- **2021 +85 is NOT a City omission:** the City's CY2021 APR PDF reports both (1812 University 44 @ 8/31/21;
+  2510 Channing 36 @ 10/25/21); the CKAN mirror dropped the rows. No Accela check needed.
+- **Phase 0 done** (`70156cd`): 40 dead/one-time files archived with refusing banners. Gates: canon PASS,
+  referent PASS, join keys FAIL (pre-existing v2 content), store convergence OPEN; smoke PASS.
+
+**NEXT:** phase 1 -- cut the v4 build loose from v2 (JN-C has-docs bridge, `llm_permit_effect` fill-ins,
+harvest queue builders), then phase 2, structures into v4 (John unlocks).
 ---
 
 ## 2026-09-29 — JN-E's 94-unit gap decomposed; JN-E gates pass again up to one real double count

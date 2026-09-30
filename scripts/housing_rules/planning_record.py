@@ -55,6 +55,31 @@ RECORD_ROLES = {
     "Condo Conversion Local Law Compliance": "companion_review",
     "Zoning Research Letter": "not_an_application",
     "Development-Related Fee Calculations": "not_an_application",
+    # ---- PRE-2015 record-type names (the older hierarchical taxonomy), approved by John 2026-09-30. Each takes the
+    # role of its current-era equivalent, checked against its record-number prefix (every type maps to ONE prefix
+    # in the 2006-2014 sweep: UP, AUP, MODUP, MODAUP, ZCBP, DRSL, DRSA, DRCP, DRCF, LMSAP, LMIN, PLN).
+    # Business licenses (ZCBL) and home occupations (ZCHO) are deliberately NOT listed: they are not development
+    # applications, and 'unknown' keeps them out of projects.
+    "Planning/Use Permit/Standard/NA": "primary_application",
+    "Use Permit Standard": "primary_application",
+    "Planning/Administrative Use Permit/NA/NA": "primary_application",
+    "Administrative Use Permit": "primary_application",
+    # modifications: capdetail_select's chain rule makes each a CHILD of the permit it modifies
+    "Planning/MOD/Use Permit/Standard": "primary_application",
+    "MOD Use Permit Standard": "primary_application",
+    "Planning/MOD/Administrative Use Permit/NA": "primary_application",
+    "Planning/Zoning Certificate/Building Permit/NA": "ministerial_clearance",
+    "Planning/Design Review/Staff Level/NA": "companion_review",
+    "Planning/Design Review/Signs/NA": "companion_review",
+    "Planning/Design Review/Committee/Preliminary": "companion_review",
+    "Planning/Design Review/Committee/Final": "companion_review",
+    "Planning/Landmarks/SAP/NA": "companion_review",
+    "Planning/Landmarks/Initiation/NA": "companion_review",
+    "Planning/Special Request/Appeal/NA": "companion_review",
+    "Planning/Application/Subdivision/NA": "companion_review",
+    "Planning/Special Request/Zoning Research/NA": "not_an_application",
+    # a request for a MEETING, not an SB 330 preliminary application (John approved the call, 2026-09-30)
+    "Planning/Special Request/PreApplication Meeting/NA": "not_an_application",
 }
 
 

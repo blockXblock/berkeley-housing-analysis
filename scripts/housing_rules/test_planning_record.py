@@ -138,6 +138,12 @@ def main() -> int:
     assert not is_primary("Design Review Committee Final")
     assert not is_primary("Zoning Research Letter")
     assert not is_primary("Structural Alteration Permit")
+    # pre-2015 names (John, 2026-09-30)
+    assert is_primary("Planning/Use Permit/Standard/NA") and is_primary("Administrative Use Permit")
+    assert is_primary("Planning/MOD/Use Permit/Standard")
+    assert role("Planning/Landmarks/SAP/NA") == "companion_review"
+    assert role("Planning/Special Request/PreApplication Meeting/NA") == "not_an_application"
+    assert role("Zoning Certificate Business License") == "unknown"
     for t, want, got in bad:
         print(f"  FAIL {t!r}: want {want}, got {got}")
     print(f"planning_record: {len(CASES)-len(bad)}/{len(CASES)} role cases pass"

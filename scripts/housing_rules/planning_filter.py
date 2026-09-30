@@ -29,8 +29,11 @@ error is a new gated write, not a re-run), not something importing this module p
 
 import re
 
-# Record-number prefixes that are development records at all.
-DEV = re.compile(r"^(ZP|PLN|DRS|DRC|LM|ZCBP)", re.I)
+# Record-number prefixes that are development records at all. UP / AUP / MODUP / MODAUP are the PRE-2015 use permits,
+# administrative use permits and their modifications (added 2026-09-30 with the old record-type roles John approved;
+# the 2015+ equivalents are all ZP). DRC/DRS/LM/ZCBP/PLN already cover the old design-review, landmarks and clearance
+# prefixes.
+DEV = re.compile(r"^(ZP|PLN|DRS|DRC|LM|ZCBP|UP|AUP|MODUP|MODAUP)", re.I)
 
 # Housing language. Both nouns are first-class and either may be plural; a count may attach to
 # either ("166 dwellings" and "48 units" must both match). Keep additions ANCHORED to word

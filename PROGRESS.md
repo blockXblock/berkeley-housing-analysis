@@ -29,7 +29,15 @@ course notebooks, the two held stage scripts, fees).
   identical to live. About 40 non-build scripts still read v2 (publishers, project-grain harvest/analysis
   tools, gates): they move in phase 6 or retire with v2.
 
-**NEXT:** phase 2 -- write the structures fold into v4 (new write step in `build_structures.py`; John unlocks).
+- **Phase 2 built and verified** (`2e8237b`): `build_structures.py --db BUILD --write` is now a CHAIN STEP after
+  JN-F (clears and refills structures / structure_events / structure_parcels / units in one verified
+  transaction; refuses live). Chain from HEAD + the step (`scratch/2026-09-29_phase2/chain/`, sha f35e59fb):
+  **1,188 structures / 5,527 units; 2018-25 853 / 4,094**; +1/+88 vs the 09-28 baseline = 2000 Dwight.
+  Differs from live ONLY in the four new tables. Baseline `structures_baseline_2026-09-29_v4-write.json`.
+  74 structures (1,272u) lack a parcel link (new condo / re-plat APNs -> phase 4).
+  **⚠ The chain is now A -> B -> C -> F -> structures.** A live rebuild that skips the last step drops them.
+
+**NEXT:** John unlocks live v4 -> snapshot -> replace live with the verified build -> verify sha/integrity -> John re-locks.
 ---
 
 ## 2026-09-29 — Evidence stored (R2 + v4 manifest) · care/congregate reading rule

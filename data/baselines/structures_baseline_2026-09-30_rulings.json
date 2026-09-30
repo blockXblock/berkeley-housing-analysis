@@ -1,0 +1,29 @@
+{
+ "invariant": {
+  "structures": 1186,
+  "units_once_per_structure": 5561,
+  "events_in_two_structures": 0,
+  "structures_without_parcel": 8
+ },
+ "moves": {
+  "structures_complete": 917,
+  "units_complete": 4471,
+  "structures_completed_2018_2025": 852,
+  "units_completed_2018_2025": 4129,
+  "structures_NOT_YET_COMPLETE": 197,
+  "units_NOT_YET_COMPLETE": 945,
+  "structures_STALE_NEEDS_SOURCE": 72,
+  "units_STALE_NEEDS_SOURCE": 145
+ },
+ "delta_vs_2026-09-29_v4-write": {
+  "Poets Place 1->41": "+40 units",
+  "County lineage": "74 -> 8 buildings without a parcel; units unchanged",
+  "S001 ADU merge (B2019-02213 + B2025-03015)": "-1 structure, -1 unit",
+  "reading ruling 1421 Arch (B2024-05916)": "-1 structure, -5 units"
+ },
+ "provenance": {
+  "source_db": "scratch/2026-09-30_rulings/chain2",
+  "sha16": "2b797a334b4091ca",
+  "derived_at": "2026-09-30T14:29:31"
+ }
+}

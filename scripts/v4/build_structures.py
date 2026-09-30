@@ -272,6 +272,22 @@ def load_parents(csv_path):
     return out
 
 
+STRUCTURE_RULINGS = ROOT / "corrections/v4/structure_rulings.csv"
+
+
+def load_structure_rulings(path=STRUCTURE_RULINGS) -> list[dict]:
+    """Approved building-merge rulings, checked against their pin in calibration_checksums.json."""
+    import csv as _csv
+    if not Path(path).exists():
+        return []
+    rows = list(_csv.DictReader(open(path)))
+    pin = json.load(open(ROOT / "corrections/v4/calibration_checksums.json")).get("structure_rulings", {})
+    permits = sum(len([k for k in r["master_permits"].split(";") if k.strip()]) for r in rows)
+    assert (len(rows), permits) == (pin.get("rows"), pin.get("permits")), \
+        f"structure_rulings drift: {len(rows)} rows / {permits} permits vs pinned {pin}"
+    return [r for r in rows if r["status"] == "approved" and r["action"] == "merge_masters"]
+
+
 def fold(permits: dict, model_parents: dict | None = None):
     masters = {k: p for k, p in permits.items() if p["is_master"]}
     # 1-2. seed, then merge masters the TEXT says are one building, within a site
@@ -300,6 +316,17 @@ def fold(permits: dict, model_parents: dict | None = None):
                 if verdict is True:
                     union(a, b)
                     merges.append((site, a, b))
+    # 2b. BUILDING-MERGE RULINGS (corrections/v4/structure_rulings.csv, John): masters the text does not join but
+    #     the evidence shows are one building (S001: an ADU's original permit + the permit opened only to final it).
+    #     Only approved rows apply; a named permit that is not a master HALTS -- a ruling never goes stale quietly.
+    for r in load_structure_rulings():
+        keys = [k.strip() for k in r["master_permits"].split(";") if k.strip()]
+        missing = [k for k in keys if k not in masters]
+        assert not missing, f"structure ruling {r['ruling_id']}: not master permits now: {missing}"
+        for b in keys[1:]:
+            if find(keys[0]) != find(b):
+                union(keys[0], b)
+                merges.append((("ruling", r["ruling_id"]), keys[0], b))
     groups = collections.defaultdict(list)
     for k in masters:
         groups[find(k)].append(k)

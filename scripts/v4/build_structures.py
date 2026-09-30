@@ -486,8 +486,8 @@ def write(con, permits, groups, attach, finals) -> dict:
             units = max(permits[k]["net_units"] or 0 for k in keys)
             seen, pbasis = [], []
             for k in [root] + [x for x in keys if x != root]:
-                pids, basis = resolver.resolve(permits[k]["apn"], permits[k]["address"])
-                pbasis.append(basis)
+                pids, pb = resolver.resolve(permits[k]["apn"], permits[k]["address"])  # NOT `basis`: that is the
+                pbasis.append(pb)                                                      # completion basis above
                 for pid in pids:
                     if pid not in seen:
                         seen.append(pid)

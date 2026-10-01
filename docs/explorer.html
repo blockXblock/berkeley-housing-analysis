@@ -202,6 +202,21 @@
                 <p class="text-xs text-gray-500 mt-3">Assessed value shown for <strong><span id="stat-assessed-coverage">--</span>% of completed projects</strong> (<span id="stat-assessed-count">--</span> of them) — rising as the parcel crosswalk completes. The rest read "pending" (re-platted parcel or reassessment lag).</p>
             </div>
 
+            <!-- RHNA progress, 6th cycle — restored 2026-10-01 (held 2026-06-16 while building-permit coverage was tracked
+                 projects only). Filled by renderRhnaProgress() from DATA.rhna_progress = the APR generator's own Table B. -->
+            <div id="rhna-progress-panel" class="bg-white rounded-xl shadow p-6 mb-8 border-2 border-indigo-200" style="display:none">
+                <h2 class="text-xl font-semibold mb-1">RHNA Progress, 6th Cycle (2023–2031)</h2>
+                <p class="text-xs text-gray-500 mb-4">Units credited when the <strong>first building permit</strong> is issued (on or after June 30, 2022), through <span id="rhna-through-year">--</span>. Same figures as our APR Table B.</p>
+                <div class="flex items-baseline gap-3 mb-2">
+                    <div class="text-4xl font-bold text-indigo-700"><span id="rhna-total">--</span></div>
+                    <div class="text-gray-600">of <span id="rhna-goal">--</span> units (<span id="rhna-pct">--</span>%)</div>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-4 mb-4"><div id="rhna-bar" class="bg-indigo-600 h-4 rounded-full" style="width:0%"></div></div>
+                <div id="rhna-tiers" class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3"></div>
+                <p class="text-xs text-gray-500" id="rhna-to-date"></p>
+                <p class="text-xs text-gray-500 mt-2"><strong>Basis:</strong> <span id="rhna-basis"></span></p>
+            </div>
+
             <!-- Building Permits Issued — Among Tracked Projects (coverage-limited; relabeled 2026-06-16 — replaced the old mislabeled header and a false citywide-coverage note) -->
             <div class="bg-gradient-to-r from-emerald-50 to-blue-50 rounded-xl shadow p-6 mb-8 border-2 border-emerald-200">
                 <h2 class="text-xl font-semibold mb-1">Building Permits Issued — Among Tracked Projects</h2>

@@ -3498,6 +3498,42 @@
     }
 
     // Populate all dashboard statistics from DATA
+    // RHNA progress, restored 2026-10-01 (John). Reads DATA.rhna_progress, which is the APR generator's own Table B
+    // (scripts/generate_apr_v4.py), never re-derived here -- so the site and the APR cannot disagree. Shows the last
+    // full reporting year, the tiers against their targets, the current year to date, and the basis (sourced
+    // affordability; ADUs on ABAG's split, labeled as an assumption).
+    function renderRhnaProgress() {
+        const setStatText = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value; };
+        const rp = DATA.rhna_progress;
+        const panel = document.getElementById('rhna-progress-panel');
+        if (!rp || !panel) return;
+        const levels = rp.income_levels || [];
+        const total = levels.find(l => l.income_level === 'Total');
+        if (!total) return;
+        setStatText('rhna-through-year', rp.through_year);
+        setStatText('rhna-total', total.permitted.toLocaleString());
+        setStatText('rhna-goal', total.rhna_target.toLocaleString());
+        setStatText('rhna-pct', total.percent_of_target);
+        document.getElementById('rhna-bar').style.width = Math.min(100, total.percent_of_target) + '%';
+        const tiers = document.getElementById('rhna-tiers');
+        tiers.innerHTML = levels.filter(l => l.income_level !== 'Total').map(l =>
+            `<div class="bg-gray-50 rounded-lg p-3"><div class="text-xs text-gray-500">${l.income_level}</div>` +
+            `<div class="text-xl font-semibold">${l.permitted.toLocaleString()} <span class="text-sm text-gray-500">/ ` +
+            `${l.rhna_target.toLocaleString()}</span></div><div class="w-full bg-gray-200 rounded h-2 mt-1">` +
+            `<div class="bg-indigo-400 h-2 rounded" style="width:${Math.min(100, l.percent_of_target)}%"></div></div>` +
+            `<div class="text-xs text-gray-400">${l.percent_of_target}%</div></div>`).join('');
+        if (rp.to_date) {
+            document.getElementById('rhna-to-date').textContent =
+                `${rp.to_date.year} to date: ${rp.to_date.permitted.toLocaleString()} units (${rp.to_date.percent_of_goal}% of goal).`;
+        }
+        const b = (rp.summary || {}).affordability_basis || {};
+        document.getElementById('rhna-basis').textContent =
+            `Income tiers from sourced affordability records only; units without a sourced tier count as above moderate. ` +
+            `ADUs (${(rp.summary || {}).adu_count || 0}) are split 30/30/30/10 across tiers as ABAG assumes and the City's ` +
+            `APR applies: an assumption, not an observation. Source: ${rp.source}.`;
+        panel.style.display = '';
+    }
+
     function populateStats() {
         console.log('📊 populateStats() - Populating dashboard statistics from DATA');
 
@@ -3610,7 +3646,9 @@
         setStatText('stat-assessed-coverage', assessedCoverage);
         setStatText('stat-assessed-count', assessedProjects.length);
 
-        // RHNA progress BAR HELD 2026-06-16: do NOT publish a single "% toward 8,934".
+        renderRhnaProgress();
+
+        // (history) RHNA progress BAR HELD 2026-06-16, RESTORED 2026-10-01 -- see renderRhnaProgress().
         // A completions/goal ratio misframes RHNA (credit is earned at BP issuance) and our
         // BP coverage is tracked-projects only. The completions data is shown as raw per-year
         // tiles above; the BP-issued units are shown (coverage-noted) in the BP panel below.

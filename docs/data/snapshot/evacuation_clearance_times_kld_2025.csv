@@ -1,0 +1,22 @@
+region,name,summer_midweek_midday,summer_weekend_midday,summer_nighttime,fall_midweek_midday,fall_weekend_midday,fall_nighttime,summer_midweek_midday_is_100th_pct,summer_weekend_midday_is_100th_pct,summer_nighttime_is_100th_pct,fall_midweek_midday_is_100th_pct,fall_weekend_midday_is_100th_pct,fall_nighttime_is_100th_pct
+R01,Citywide Evacuation,5:10,4:25,2:30,5:35,4:00,2:30,True,True,False,True,True,False
+R02,Fire 1923,2:25,1:50,1:45,4:10,1:50,1:45,False,False,False,True,False,False
+R02,Fire 1923 Urgent Mobilization,2:25,1:50,1:35,4:10,1:45,1:35,False,False,False,True,False,False
+R03,Fire 1923 Phase a,4:25,4:30,1:40,4:30,4:15,2:10,True,True,False,True,True,False
+R03,Fire 1923 Phase a Urgent Mobilization,2:30,2:10,1:25,3:30,2:10,1:35,True,True,False,True,True,False
+R03,Fire 1923 Phase b,6:10,5:55,2:15,6:15,6:00,2:30,True,True,False,True,True,False
+R03,Fire 1923 Phase b Urgent Mobilization,4:00,4:00,1:40,4:00,2:10,1:40,True,True,False,True,True,False
+R03,Fire 1923 Phase c,4:10,4:20,4:30,4:00,4:25,4:35,False,False,False,False,False,False
+R03,Fire 1923 Phase c Urgent Mobilization,3:35,3:45,1:40,3:50,1:30,1:40,False,False,False,False,False,False
+R04,Panoramic Hill Fire,1:40,1:35,1:40,1:45,1:35,1:40,False,False,False,False,False,False
+R04,Panoramic Hill Fire Urgent Mobilization,1:05,0:50,0:45,1:45,0:50,0:50,False,False,False,False,False,False
+R05,Fire Zones 2 & 3 Combined,2:05,1:55,1:45,2:20,1:55,1:45,False,False,False,False,False,False
+R06,Tsunami - Phase 3,1:20,1:20,1:05,1:45,0:55,1:10,False,False,False,False,False,False
+R07,Tsunami - Max Phase,2:15,2:10,1:50,2:15,2:05,1:50,False,False,False,False,False,False
+R08,Berkeley Flats,4:10,2:35,2:10,4:20,2:25,2:05,True,False,False,True,False,False
+R09,North Berkeley Hills,2:10,2:00,1:50,2:05,1:50,1:45,False,False,False,False,False,False
+R10,South Berkeley Hills,1:35,1:30,1:35,2:15,1:35,1:35,False,False,False,False,False,False
+R11,West Berkeley,1:40,1:35,1:35,1:45,1:35,1:35,False,False,False,False,False,False
+R12,UC Berkeley,1:05,1:15,1:25,1:20,1:30,1:35,False,False,False,False,False,False
+R13,Lawrence Berkeley National Lab,1:25,0:45,0:45,2:15,0:45,0:45,True,False,False,True,False,False
+R14,UC Berkeley + Lawrence Berkeley National Lab,1:30,1:15,1:20,2:15,1:30,1:35,False,False,False,False,False,False

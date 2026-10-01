@@ -1,0 +1,5490 @@
+{
+ "dof": {
+  "year": 2026,
+  "rows": [
+   {
+    "year": 2020,
+    "population": 127560,
+    "household_population": 106635,
+    "group_quarters": 20925,
+    "housing_units": 52331,
+    "single_detached": 21548,
+    "single_attached": 2204,
+    "two_to_four": 10032,
+    "five_plus": 18335,
+    "mobile_homes": 212,
+    "occupied": 47606,
+    "vacancy_rate": 0.09029064990158797,
+    "persons_per_household": 2.2399487459563923
+   },
+   {
+    "year": 2021,
+    "population": 120670,
+    "household_population": 106143,
+    "group_quarters": 14527,
+    "housing_units": 52637,
+    "single_detached": 21588,
+    "single_attached": 2204,
+    "two_to_four": 10048,
+    "five_plus": 18585,
+    "mobile_homes": 212,
+    "occupied": 47600,
+    "vacancy_rate": 0.09569314360620851,
+    "persons_per_household": 2.2298949579831935
+   },
+   {
+    "year": 2022,
+    "population": 124014,
+    "household_population": 104125,
+    "group_quarters": 19889,
+    "housing_units": 52921,
+    "single_detached": 21642,
+    "single_attached": 2204,
+    "two_to_four": 10103,
+    "five_plus": 18760,
+    "mobile_homes": 212,
+    "occupied": 47793,
+    "vacancy_rate": 0.09689915156554108,
+    "persons_per_household": 2.178666331889607
+   },
+   {
+    "year": 2023,
+    "population": 125063,
+    "household_population": 104790,
+    "group_quarters": 20273,
+    "housing_units": 53734,
+    "single_detached": 21698,
+    "single_attached": 2228,
+    "two_to_four": 10105,
+    "five_plus": 19491,
+    "mobile_homes": 212,
+    "occupied": 48423,
+    "vacancy_rate": 0.09883872408530914,
+    "persons_per_household": 2.164054271730376
+   },
+   {
+    "year": 2024,
+    "population": 125477,
+    "household_population": 105239,
+    "group_quarters": 20238,
+    "housing_units": 54438,
+    "single_detached": 21770,
+    "single_attached": 2257,
+    "two_to_four": 10119,
+    "five_plus": 20080,
+    "mobile_homes": 212,
+    "occupied": 48852,
+    "vacancy_rate": 0.10261214592747714,
+    "persons_per_household": 2.154241382133792
+   },
+   {
+    "year": 2025,
+    "population": 127123,
+    "household_population": 106069,
+    "group_quarters": 21054,
+    "housing_units": 55138,
+    "single_detached": 21833,
+    "single_attached": 2291,
+    "two_to_four": 10119,
+    "five_plus": 20683,
+    "mobile_homes": 212,
+    "occupied": 49376,
+    "vacancy_rate": 0.1045014327686895,
+    "persons_per_household": 2.148189403758911
+   },
+   {
+    "year": 2026,
+    "population": 127654,
+    "household_population": 106045,
+    "group_quarters": 21609,
+    "housing_units": 55521,
+    "single_detached": 21899,
+    "single_attached": 2320,
+    "two_to_four": 10133,
+    "five_plus": 20957,
+    "mobile_homes": 212,
+    "occupied": 49719,
+    "vacancy_rate": 0.10450099962176473,
+    "persons_per_household": 2.1328868239506025
+   }
+  ]
+ },
+ "acs_city": {
+  "release": "ACS 2024 1-year",
+  "ind": {
+   "population": 121730.0,
+   "households": 47862.0,
+   "owner_households": 21974.0,
+   "renter_households": 25888.0,
+   "renter_household_pct": 54.1,
+   "residents_owner_occupied": 55870.0,
+   "residents_renter_occupied": 52873.0,
+   "median_household_income": 103727.0,
+   "per_capita_income": 70584.0,
+   "hh_income_under_50k": 14718.0,
+   "hh_income_50k_100k": 8398.0,
+   "hh_income_100k_200k": 9825.0,
+   "hh_income_200k_plus": 14921.0,
+   "age_under_18": 16859.0,
+   "age_18_24": 28708.0,
+   "age_25_34": 18231.0,
+   "age_35_64": 36888.0,
+   "age_65_plus": 21044.0,
+   "households_no_vehicle": 9710.0,
+   "no_vehicle_pct": 20.3,
+   "vehicles_available_min": 59864.0,
+   "median_gross_rent": 2024.0,
+   "median_home_value": 1429700.0,
+   "rent_burdened_30pct": 56.8,
+   "rent_burdened_50pct": 36.9,
+   "workers": 55882.0,
+   "commute_drive_alone_pct": 32.4,
+   "commute_carpool_pct": 3.5,
+   "commute_transit_pct": 14.2,
+   "commute_bicycle_pct": 4.1,
+   "commute_walk_pct": 12.9,
+   "commute_work_from_home_pct": 31.5,
+   "housing_units": 53145.0,
+   "vacant_units": 6010.0,
+   "units_1_detached_pct": 40.4,
+   "units_1_attached_pct": 3.5,
+   "units_2_4_pct": 17.8,
+   "units_5_19_pct": 18.0,
+   "units_20_plus_pct": 20.1,
+   "built_before_1940_pct": 46.3,
+   "built_2010_or_later_pct": 6.6,
+   "hispanic_pct": 14.3,
+   "white_nh_pct": 45.7,
+   "black_nh_pct": 8.3,
+   "asian_nh_pct": 21.4,
+   "bachelors_or_higher_pct": 75.2,
+   "below_poverty_pct": 17.8
+  },
+  "cols": {
+   "B01001001": [
+    121730.0,
+    66.0
+   ],
+   "B01001002": [
+    58545.0,
+    2124.0
+   ],
+   "B01001003": [
+    1953.0,
+    839.0
+   ],
+   "B01001004": [
+    2887.0,
+    1189.0
+   ],
+   "B01001005": [
+    2348.0,
+    871.0
+   ],
+   "B01001006": [
+    1650.0,
+    760.0
+   ],
+   "B01001007": [
+    5658.0,
+    1233.0
+   ],
+   "B01001008": [
+    2269.0,
+    1038.0
+   ],
+   "B01001009": [
+    2349.0,
+    961.0
+   ],
+   "B01001010": [
+    2769.0,
+    738.0
+   ],
+   "B01001011": [
+    3571.0,
+    1138.0
+   ],
+   "B01001012": [
+    5235.0,
+    1359.0
+   ],
+   "B01001013": [
+    3621.0,
+    1303.0
+   ],
+   "B01001014": [
+    4576.0,
+    1090.0
+   ],
+   "B01001015": [
+    2601.0,
+    679.0
+   ],
+   "B01001016": [
+    2515.0,
+    711.0
+   ],
+   "B01001017": [
+    1979.0,
+    628.0
+   ],
+   "B01001018": [
+    1150.0,
+    575.0
+   ],
+   "B01001019": [
+    1527.0,
+    517.0
+   ],
+   "B01001020": [
+    1643.0,
+    748.0
+   ],
+   "B01001021": [
+    1477.0,
+    585.0
+   ],
+   "B01001022": [
+    2408.0,
+    839.0
+   ],
+   "B01001023": [
+    2088.0,
+    575.0
+   ],
+   "B01001024": [
+    1363.0,
+    563.0
+   ],
+   "B01001025": [
+    908.0,
+    431.0
+   ],
+   "B01001026": [
+    63185.0,
+    2123.0
+   ],
+   "B01001027": [
+    3172.0,
+    799.0
+   ],
+   "B01001028": [
+    2125.0,
+    908.0
+   ],
+   "B01001029": [
+    1836.0,
+    704.0
+   ],
+   "B01001030": [
+    888.0,
+    526.0
+   ],
+   "B01001031": [
+    4848.0,
+    1144.0
+   ],
+   "B01001032": [
+    3164.0,
+    1258.0
+   ],
+   "B01001033": [
+    3340.0,
+    1532.0
+   ],
+   "B01001034": [
+    4311.0,
+    1436.0
+   ],
+   "B01001035": [
+    5548.0,
+    1451.0
+   ],
+   "B01001036": [
+    3877.0,
+    1033.0
+   ],
+   "B01001037": [
+    4274.0,
+    1140.0
+   ],
+   "B01001038": [
+    3339.0,
+    785.0
+   ],
+   "B01001039": [
+    2472.0,
+    755.0
+   ],
+   "B01001040": [
+    3206.0,
+    964.0
+   ],
+   "B01001041": [
+    3019.0,
+    803.0
+   ],
+   "B01001042": [
+    1267.0,
+    470.0
+   ],
+   "B01001043": [
+    1342.0,
+    574.0
+   ],
+   "B01001044": [
+    915.0,
+    464.0
+   ],
+   "B01001045": [
+    1277.0,
+    449.0
+   ],
+   "B01001046": [
+    2800.0,
+    907.0
+   ],
+   "B01001047": [
+    3148.0,
+    899.0
+   ],
+   "B01001048": [
+    1603.0,
+    582.0
+   ],
+   "B01001049": [
+    1414.0,
+    534.0
+   ],
+   "B01003001": [
+    121730.0,
+    66.0
+   ],
+   "B25003001": [
+    47862.0,
+    2130.0
+   ],
+   "B25003002": [
+    21974.0,
+    1579.0
+   ],
+   "B25003003": [
+    25888.0,
+    1837.0
+   ],
+   "B25008001": [
+    108743.0,
+    133.0
+   ],
+   "B25008002": [
+    55870.0,
+    3473.0
+   ],
+   "B25008003": [
+    52873.0,
+    3486.0
+   ],
+   "B26001001": [
+    12987.0,
+    132.0
+   ],
+   "B17021001": [
+    109434.0,
+    326.0
+   ],
+   "B17021002": [
+    19475.0,
+    2690.0
+   ],
+   "B17021003": [
+    3222.0,
+    1466.0
+   ],
+   "B17021004": [
+    1610.0,
+    1285.0
+   ],
+   "B17021005": [
+    1557.0,
+    1282.0
+   ],
+   "B17021006": [
+    53.0,
+    88.0
+   ],
+   "B17021007": [
+    1612.0,
+    941.0
+   ],
+   "B17021008": [
+    95.0,
+    159.0
+   ],
+   "B17021009": [
+    0.0,
+    225.0
+   ],
+   "B17021010": [
+    95.0,
+    159.0
+   ],
+   "B17021011": [
+    1517.0,
+    925.0
+   ],
+   "B17021012": [
+    1281.0,
+    895.0
+   ],
+   "B17021013": [
+    236.0,
+    302.0
+   ],
+   "B17021014": [
+    16253.0,
+    2425.0
+   ],
+   "B17021015": [
+    7782.0,
+    1547.0
+   ],
+   "B17021016": [
+    4495.0,
+    1303.0
+   ],
+   "B17021017": [
+    3287.0,
+    819.0
+   ],
+   "B17021018": [
+    8471.0,
+    1733.0
+   ],
+   "B17021019": [
+    89959.0,
+    2657.0
+   ],
+   "B17021020": [
+    61487.0,
+    3919.0
+   ],
+   "B17021021": [
+    48110.0,
+    4220.0
+   ],
+   "B17021022": [
+    46687.0,
+    4041.0
+   ],
+   "B17021023": [
+    1423.0,
+    1785.0
+   ],
+   "B17021024": [
+    13377.0,
+    3330.0
+   ],
+   "B17021025": [
+    3673.0,
+    1656.0
+   ],
+   "B17021026": [
+    3320.0,
+    1523.0
+   ],
+   "B17021027": [
+    353.0,
+    256.0
+   ],
+   "B17021028": [
+    9704.0,
+    3084.0
+   ],
+   "B17021029": [
+    8913.0,
+    2752.0
+   ],
+   "B17021030": [
+    791.0,
+    756.0
+   ],
+   "B17021031": [
+    28472.0,
+    3508.0
+   ],
+   "B17021032": [
+    19099.0,
+    2223.0
+   ],
+   "B17021033": [
+    11840.0,
+    1918.0
+   ],
+   "B17021034": [
+    7259.0,
+    1339.0
+   ],
+   "B17021035": [
+    9373.0,
+    2062.0
+   ],
+   "B19001001": [
+    47862.0,
+    2130.0
+   ],
+   "B19001002": [
+    3833.0,
+    1216.0
+   ],
+   "B19001003": [
+    2159.0,
+    976.0
+   ],
+   "B19001004": [
+    1029.0,
+    625.0
+   ],
+   "B19001005": [
+    1683.0,
+    918.0
+   ],
+   "B19001006": [
+    1319.0,
+    631.0
+   ],
+   "B19001007": [
+    1334.0,
+    604.0
+   ],
+   "B19001008": [
+    1204.0,
+    584.0
+   ],
+   "B19001009": [
+    881.0,
+    432.0
+   ],
+   "B19001010": [
+    1276.0,
+    646.0
+   ],
+   "B19001011": [
+    2276.0,
+    855.0
+   ],
+   "B19001012": [
+    2967.0,
+    813.0
+   ],
+   "B19001013": [
+    3155.0,
+    822.0
+   ],
+   "B19001014": [
+    2338.0,
+    739.0
+   ],
+   "B19001015": [
+    3624.0,
+    974.0
+   ],
+   "B19001016": [
+    3863.0,
+    1014.0
+   ],
+   "B19001017": [
+    14921.0,
+    1473.0
+   ],
+   "B19013001": [
+    103727.0,
+    16623.0
+   ],
+   "B19301001": [
+    70584.0,
+    5819.0
+   ],
+   "B08301001": [
+    55882.0,
+    3231.0
+   ],
+   "B08301002": [
+    20073.0,
+    2227.0
+   ],
+   "B08301003": [
+    18096.0,
+    2039.0
+   ],
+   "B08301004": [
+    1977.0,
+    810.0
+   ],
+   "B08301005": [
+    1438.0,
+    747.0
+   ],
+   "B08301006": [
+    153.0,
+    191.0
+   ],
+   "B08301007": [
+    187.0,
+    190.0
+   ],
+   "B08301008": [
+    199.0,
+    325.0
+   ],
+   "B08301009": [
+    0.0,
+    225.0
+   ],
+   "B08301010": [
+    7912.0,
+    1880.0
+   ],
+   "B08301011": [
+    3457.0,
+    1232.0
+   ],
+   "B08301012": [
+    3736.0,
+    969.0
+   ],
+   "B08301013": [
+    451.0,
+    360.0
+   ],
+   "B08301014": [
+    102.0,
+    119.0
+   ],
+   "B08301015": [
+    166.0,
+    163.0
+   ],
+   "B08301016": [
+    249.0,
+    400.0
+   ],
+   "B08301017": [
+    89.0,
+    103.0
+   ],
+   "B08301018": [
+    2289.0,
+    716.0
+   ],
+   "B08301019": [
+    7200.0,
+    2110.0
+   ],
+   "B08301020": [
+    475.0,
+    356.0
+   ],
+   "B08301021": [
+    17595.0,
+    2664.0
+   ],
+   "B08303001": [
+    38287.0,
+    2855.0
+   ],
+   "B08303002": [
+    729.0,
+    564.0
+   ],
+   "B08303003": [
+    3100.0,
+    1150.0
+   ],
+   "B08303004": [
+    5289.0,
+    1454.0
+   ],
+   "B08303005": [
+    5655.0,
+    1468.0
+   ],
+   "B08303006": [
+    5525.0,
+    1538.0
+   ],
+   "B08303007": [
+    2040.0,
+    920.0
+   ],
+   "B08303008": [
+    5385.0,
+    1147.0
+   ],
+   "B08303009": [
+    706.0,
+    417.0
+   ],
+   "B08303010": [
+    1989.0,
+    1469.0
+   ],
+   "B08303011": [
+    4325.0,
+    1111.0
+   ],
+   "B08303012": [
+    2856.0,
+    754.0
+   ],
+   "B08303013": [
+    688.0,
+    302.0
+   ],
+   "B25044001": [
+    47862.0,
+    2130.0
+   ],
+   "B25044002": [
+    21974.0,
+    1579.0
+   ],
+   "B25044003": [
+    906.0,
+    423.0
+   ],
+   "B25044004": [
+    9386.0,
+    1429.0
+   ],
+   "B25044005": [
+    8280.0,
+    1372.0
+   ],
+   "B25044006": [
+    2761.0,
+    735.0
+   ],
+   "B25044007": [
+    399.0,
+    282.0
+   ],
+   "B25044008": [
+    242.0,
+    315.0
+   ],
+   "B25044009": [
+    25888.0,
+    1837.0
+   ],
+   "B25044010": [
+    8804.0,
+    1504.0
+   ],
+   "B25044011": [
+    12480.0,
+    1716.0
+   ],
+   "B25044012": [
+    3898.0,
+    966.0
+   ],
+   "B25044013": [
+    347.0,
+    297.0
+   ],
+   "B25044014": [
+    283.0,
+    310.0
+   ],
+   "B25044015": [
+    76.0,
+    89.0
+   ],
+   "B25001001": [
+    53145.0,
+    1003.0
+   ],
+   "B25004001": [
+    6010.0,
+    598.0
+   ],
+   "B25004002": [
+    2875.0,
+    437.0
+   ],
+   "B25004003": [
+    645.0,
+    286.0
+   ],
+   "B25004004": [
+    111.0,
+    79.0
+   ],
+   "B25004005": [
+    102.0,
+    89.0
+   ],
+   "B25004006": [
+    363.0,
+    144.0
+   ],
+   "B25004007": [
+    0.0,
+    32.0
+   ],
+   "B25004008": [
+    1914.0,
+    401.0
+   ],
+   "B25024001": [
+    53145.0,
+    1003.0
+   ],
+   "B25024002": [
+    21465.0,
+    709.0
+   ],
+   "B25024003": [
+    1844.0,
+    258.0
+   ],
+   "B25024004": [
+    3839.0,
+    440.0
+   ],
+   "B25024005": [
+    5614.0,
+    540.0
+   ],
+   "B25024006": [
+    4727.0,
+    563.0
+   ],
+   "B25024007": [
+    4825.0,
+    508.0
+   ],
+   "B25024008": [
+    5099.0,
+    597.0
+   ],
+   "B25024009": [
+    5598.0,
+    652.0
+   ],
+   "B25024010": [
+    104.0,
+    81.0
+   ],
+   "B25024011": [
+    30.0,
+    27.0
+   ],
+   "B25034001": [
+    53145.0,
+    1003.0
+   ],
+   "B25034002": [
+    375.0,
+    130.0
+   ],
+   "B25034003": [
+    3109.0,
+    443.0
+   ],
+   "B25034004": [
+    2181.0,
+    448.0
+   ],
+   "B25034005": [
+    2078.0,
+    363.0
+   ],
+   "B25034006": [
+    2362.0,
+    409.0
+   ],
+   "B25034007": [
+    3893.0,
+    508.0
+   ],
+   "B25034008": [
+    6497.0,
+    636.0
+   ],
+   "B25034009": [
+    3653.0,
+    363.0
+   ],
+   "B25034010": [
+    4376.0,
+    509.0
+   ],
+   "B25034011": [
+    24621.0,
+    995.0
+   ],
+   "B25041001": [
+    53145.0,
+    1003.0
+   ],
+   "B25041002": [
+    5705.0,
+    767.0
+   ],
+   "B25041003": [
+    12413.0,
+    877.0
+   ],
+   "B25041004": [
+    16026.0,
+    947.0
+   ],
+   "B25041005": [
+    11118.0,
+    640.0
+   ],
+   "B25041006": [
+    6025.0,
+    436.0
+   ],
+   "B25041007": [
+    1858.0,
+    264.0
+   ],
+   "B25064001": [
+    2024.0,
+    113.0
+   ],
+   "B25070001": [
+    25888.0,
+    1837.0
+   ],
+   "B25070002": [
+    760.0,
+    356.0
+   ],
+   "B25070003": [
+    2246.0,
+    988.0
+   ],
+   "B25070004": [
+    2565.0,
+    915.0
+   ],
+   "B25070005": [
+    3389.0,
+    1078.0
+   ],
+   "B25070006": [
+    1403.0,
+    620.0
+   ],
+   "B25070007": [
+    1898.0,
+    696.0
+   ],
+   "B25070008": [
+    926.0,
+    493.0
+   ],
+   "B25070009": [
+    1949.0,
+    871.0
+   ],
+   "B25070010": [
+    8859.0,
+    1483.0
+   ],
+   "B25070011": [
+    1893.0,
+    834.0
+   ],
+   "B25077001": [
+    1429700.0,
+    78578.0
+   ],
+   "B25091001": [
+    21974.0,
+    1579.0
+   ],
+   "B25091002": [
+    13575.0,
+    1425.0
+   ],
+   "B25091003": [
+    1445.0,
+    497.0
+   ],
+   "B25091004": [
+    1122.0,
+    418.0
+   ],
+   "B25091005": [
+    3108.0,
+    879.0
+   ],
+   "B25091006": [
+    1704.0,
+    656.0
+   ],
+   "B25091007": [
+    1278.0,
+    438.0
+   ],
+   "B25091008": [
+    1021.0,
+    423.0
+   ],
+   "B25091009": [
+    669.0,
+    434.0
+   ],
+   "B25091010": [
+    859.0,
+    457.0
+   ],
+   "B25091011": [
+    2317.0,
+    774.0
+   ],
+   "B25091012": [
+    52.0,
+    87.0
+   ],
+   "B25091013": [
+    8399.0,
+    1370.0
+   ],
+   "B25091014": [
+    3052.0,
+    639.0
+   ],
+   "B25091015": [
+    1752.0,
+    811.0
+   ],
+   "B25091016": [
+    650.0,
+    355.0
+   ],
+   "B25091017": [
+    477.0,
+    246.0
+   ],
+   "B25091018": [
+    315.0,
+    212.0
+   ],
+   "B25091019": [
+    127.0,
+    128.0
+   ],
+   "B25091020": [
+    214.0,
+    249.0
+   ],
+   "B25091021": [
+    231.0,
+    179.0
+   ],
+   "B25091022": [
+    1498.0,
+    648.0
+   ],
+   "B25091023": [
+    83.0,
+    142.0
+   ],
+   "B03002001": [
+    121730.0,
+    66.0
+   ],
+   "B03002002": [
+    104271.0,
+    2443.0
+   ],
+   "B03002003": [
+    55647.0,
+    4257.0
+   ],
+   "B03002004": [
+    10157.0,
+    2682.0
+   ],
+   "B03002005": [
+    55.0,
+    98.0
+   ],
+   "B03002006": [
+    26075.0,
+    3150.0
+   ],
+   "B03002007": [
+    159.0,
+    191.0
+   ],
+   "B03002008": [
+    926.0,
+    574.0
+   ],
+   "B03002009": [
+    11252.0,
+    2029.0
+   ],
+   "B03002010": [
+    1579.0,
+    720.0
+   ],
+   "B03002011": [
+    9673.0,
+    2041.0
+   ],
+   "B03002012": [
+    17459.0,
+    2445.0
+   ],
+   "B03002013": [
+    2921.0,
+    1059.0
+   ],
+   "B03002014": [
+    429.0,
+    294.0
+   ],
+   "B03002015": [
+    453.0,
+    421.0
+   ],
+   "B03002016": [
+    113.0,
+    118.0
+   ],
+   "B03002017": [
+    466.0,
+    662.0
+   ],
+   "B03002018": [
+    5299.0,
+    1645.0
+   ],
+   "B03002019": [
+    7778.0,
+    1721.0
+   ],
+   "B03002020": [
+    6062.0,
+    1478.0
+   ],
+   "B03002021": [
+    1716.0,
+    895.0
+   ],
+   "B11001001": [
+    47862.0,
+    2130.0
+   ],
+   "B11001002": [
+    20981.0,
+    1297.0
+   ],
+   "B11001003": [
+    16565.0,
+    1471.0
+   ],
+   "B11001004": [
+    4416.0,
+    990.0
+   ],
+   "B11001005": [
+    1144.0,
+    539.0
+   ],
+   "B11001006": [
+    3272.0,
+    834.0
+   ],
+   "B11001007": [
+    26881.0,
+    2532.0
+   ],
+   "B11001008": [
+    16335.0,
+    2415.0
+   ],
+   "B11001009": [
+    10546.0,
+    1328.0
+   ],
+   "B15003001": [
+    76163.0,
+    2795.0
+   ],
+   "B15003002": [
+    952.0,
+    524.0
+   ],
+   "B15003003": [
+    0.0,
+    225.0
+   ],
+   "B15003004": [
+    0.0,
+    225.0
+   ],
+   "B15003005": [
+    0.0,
+    225.0
+   ],
+   "B15003006": [
+    0.0,
+    225.0
+   ],
+   "B15003007": [
+    70.0,
+    116.0
+   ],
+   "B15003008": [
+    63.0,
+    111.0
+   ],
+   "B15003009": [
+    0.0,
+    225.0
+   ],
+   "B15003010": [
+    125.0,
+    122.0
+   ],
+   "B15003011": [
+    0.0,
+    225.0
+   ],
+   "B15003012": [
+    369.0,
+    397.0
+   ],
+   "B15003013": [
+    0.0,
+    225.0
+   ],
+   "B15003014": [
+    155.0,
+    204.0
+   ],
+   "B15003015": [
+    701.0,
+    525.0
+   ],
+   "B15003016": [
+    883.0,
+    412.0
+   ],
+   "B15003017": [
+    4393.0,
+    1461.0
+   ],
+   "B15003018": [
+    634.0,
+    358.0
+   ],
+   "B15003019": [
+    1861.0,
+    673.0
+   ],
+   "B15003020": [
+    6088.0,
+    1306.0
+   ],
+   "B15003021": [
+    2629.0,
+    742.0
+   ],
+   "B15003022": [
+    24795.0,
+    2451.0
+   ],
+   "B15003023": [
+    17607.0,
+    1955.0
+   ],
+   "B15003024": [
+    6069.0,
+    1059.0
+   ],
+   "B15003025": [
+    8769.0,
+    1638.0
+   ]
+  }
+ },
+ "acs_tract": {
+  "release": "ACS 2024 5-year",
+  "n": 35
+ },
+ "acs_blockgroup": {
+  "release": "ACS 2024 5-year",
+  "n": 100,
+  "extremes": {
+   "renter_household_pct": {
+    "min": 1.3,
+    "max": 100.0,
+    "median": 55.4
+   },
+   "median_household_income": {
+    "min": 17560.0,
+    "max": 250001.0,
+    "median": 128809.5
+   },
+   "no_vehicle_pct": {
+    "min": 0.0,
+    "max": 93.5,
+    "median": 15.4
+   },
+   "age_18_24": {
+    "min": 0.0,
+    "max": 4114.0,
+    "median": 107.5
+   },
+   "median_gross_rent": {
+    "min": 1125.0,
+    "max": 3501.0,
+    "median": 2186.5
+   },
+   "rent_burdened_30pct": {
+    "min": 0.0,
+    "max": 100.0,
+    "median": 48.9
+   }
+  }
+ },
+ "lodes": {
+  "year": 2023,
+  "jobs": 73292,
+  "interior": 9773,
+  "inflow": 63519,
+  "outflow": 35492,
+  "aux_in": 418,
+  "employed_residents": 45767,
+  "blocks": 1525,
+  "job_blocks": 1075,
+  "top_in": [
+   [
+    "Oakland city",
+    10804
+   ],
+   [
+    "San Francisco city",
+    6049
+   ],
+   [
+    "Richmond city",
+    3576
+   ],
+   [
+    "El Cerrito city",
+    1551
+   ],
+   [
+    "San Jose city",
+    1519
+   ],
+   [
+    "Albany city",
+    1403
+   ],
+   [
+    "Alameda city",
+    1386
+   ],
+   [
+    "San Leandro city",
+    1183
+   ],
+   [
+    "Concord city",
+    980
+   ],
+   [
+    "Vallejo city",
+    976
+   ],
+   [
+    "Walnut Creek city",
+    967
+   ],
+   [
+    "Sacramento city",
+    897
+   ]
+  ],
+  "top_out": [
+   [
+    "San Francisco city",
+    11587
+   ],
+   [
+    "Oakland city",
+    5850
+   ],
+   [
+    "San Jose city",
+    858
+   ],
+   [
+    "Richmond city",
+    799
+   ],
+   [
+    "Emeryville city",
+    793
+   ],
+   [
+    "Los Angeles city",
+    659
+   ],
+   [
+    "Alameda city",
+    578
+   ],
+   [
+    "Sacramento city",
+    567
+   ],
+   [
+    "Walnut Creek city",
+    413
+   ],
+   [
+    "Mountain View city",
+    376
+   ],
+   [
+    "San Leandro city",
+    371
+   ],
+   [
+    "Albany city",
+    333
+   ]
+  ],
+  "sectors": [
+   [
+    "Educational services",
+    21033
+   ],
+   [
+    "Professional, scientific and technical services",
+    13212
+   ],
+   [
+    "Health care and social assistance",
+    9338
+   ],
+   [
+    "Accommodation and food services",
+    6901
+   ],
+   [
+    "Retail trade",
+    5059
+   ],
+   [
+    "Manufacturing",
+    3305
+   ],
+   [
+    "Other services",
+    3191
+   ],
+   [
+    "Construction",
+    2040
+   ],
+   [
+    "Information",
+    1667
+   ],
+   [
+    "Arts, entertainment and recreation",
+    1619
+   ],
+   [
+    "Administrative and waste services",
+    1490
+   ],
+   [
+    "Wholesale trade",
+    1144
+   ],
+   [
+    "Real estate",
+    972
+   ],
+   [
+    "Public administration",
+    941
+   ],
+   [
+    "Finance and insurance",
+    724
+   ],
+   [
+    "Management of companies",
+    367
+   ],
+   [
+    "Transportation and warehousing",
+    128
+   ],
+   [
+    "Agriculture",
+    122
+   ],
+   [
+    "Utilities",
+    20
+   ],
+   [
+    "Mining",
+    19
+   ]
+  ],
+  "earnings": [
+   11694,
+   12736,
+   48862
+  ],
+  "out_of_state_out": 502
+ },
+ "dmv": {
+  "as_of": [
+   "12/31/2025"
+  ],
+  "total": 62961,
+  "by_zip": {
+   "94702": 10244,
+   "94703": 10156,
+   "94704": 5636,
+   "94705": 8720,
+   "94707": 9434,
+   "94708": 8254,
+   "94709": 4794,
+   "94710": 5649,
+   "94720": 74
+  },
+  "fuel": {
+   "Gasoline": 42471,
+   "Hybrid Gasoline": 8668,
+   "Battery Electric": 6898,
+   "Plug-in Hybrid": 2566,
+   "Diesel and Diesel Hybrid": 1303,
+   "Flex-Fuel": 997,
+   "Hydrogen Fuel Cell": 28,
+   "Natural Gas": 27,
+   "Other": 3
+  },
+  "duty": {
+   "Heavy": 811,
+   "Light": 61619,
+   "Unk": 531
+  },
+  "ev": 9492,
+  "older_than_2010": 0
+ },
+ "assessor": {
+  "parcels": 29134,
+  "located": 29131,
+  "exempt": 1473,
+  "land": 9795722996,
+  "imps": 22043581713,
+  "net": 30515005130,
+  "by_group": [
+   {
+    "use_group": "0xxx",
+    "parcels": 458,
+    "exempt_parcels": 458,
+    "land_value": 0,
+    "improvement_value": 0,
+    "net_taxable_value": 0
+   },
+   {
+    "use_group": "1xxx",
+    "parcels": 17495,
+    "exempt_parcels": 190,
+    "land_value": 4815777463,
+    "improvement_value": 10217463210,
+    "net_taxable_value": 14909987588
+   },
+   {
+    "use_group": "2xxx",
+    "parcels": 4430,
+    "exempt_parcels": 8,
+    "land_value": 1204980348,
+    "improvement_value": 2634185785,
+    "net_taxable_value": 3815500049
+   },
+   {
+    "use_group": "3xxx",
+    "parcels": 970,
+    "exempt_parcels": 57,
+    "land_value": 715728006,
+    "improvement_value": 1080453849,
+    "net_taxable_value": 1772584174
+   },
+   {
+    "use_group": "4xxx",
+    "parcels": 419,
+    "exempt_parcels": 6,
+    "land_value": 441276809,
+    "improvement_value": 1177880528,
+    "net_taxable_value": 1657499567
+   },
+   {
+    "use_group": "6xxx",
+    "parcels": 199,
+    "exempt_parcels": 124,
+    "land_value": 115347036,
+    "improvement_value": 330383515,
+    "net_taxable_value": 122405313
+   },
+   {
+    "use_group": "7xxx",
+    "parcels": 4562,
+    "exempt_parcels": 588,
+    "land_value": 1933165663,
+    "improvement_value": 5323113541,
+    "net_taxable_value": 6714313194
+   },
+   {
+    "use_group": "8xxx",
+    "parcels": 246,
+    "exempt_parcels": 17,
+    "land_value": 207513121,
+    "improvement_value": 309042298,
+    "net_taxable_value": 330676610
+   },
+   {
+    "use_group": "9xxx",
+    "parcels": 352,
+    "exempt_parcels": 21,
+    "land_value": 362089876,
+    "improvement_value": 971928430,
+    "net_taxable_value": 1193063404
+   }
+  ],
+  "by_fire": [
+   {
+    "fire_zone": 0,
+    "parcels": 54,
+    "exempt_parcels": 29,
+    "land_value": 8631252,
+    "improvement_value": 20893176,
+    "net_taxable_value": 27836459
+   },
+   {
+    "fire_zone": 1,
+    "parcels": 20502,
+    "exempt_parcels": 1121,
+    "land_value": 6923810532,
+    "improvement_value": 16001771206,
+    "net_taxable_value": 21814599438
+   },
+   {
+    "fire_zone": 2,
+    "parcels": 8419,
+    "exempt_parcels": 308,
+    "land_value": 2820035497,
+    "improvement_value": 5927072812,
+    "net_taxable_value": 8535967599
+   },
+   {
+    "fire_zone": 3,
+    "parcels": 156,
+    "exempt_parcels": 11,
+    "land_value": 43401041,
+    "improvement_value": 94713962,
+    "net_taxable_value": 137626403
+   }
+  ],
+  "by_hood": [
+   {
+    "neighborhood": "Central Berkeley",
+    "parcels": 3164,
+    "exempt_parcels": 201,
+    "land_value": 1346008744,
+    "improvement_value": 3431704285,
+    "net_taxable_value": 4471293459
+   },
+   {
+    "neighborhood": "Berekley Hills",
+    "parcels": 3747,
+    "exempt_parcels": 102,
+    "land_value": 1179186698,
+    "improvement_value": 2436660555,
+    "net_taxable_value": 3573282491
+   },
+   {
+    "neighborhood": "South Berkeley",
+    "parcels": 4151,
+    "exempt_parcels": 175,
+    "land_value": 1063206559,
+    "improvement_value": 2296192872,
+    "net_taxable_value": 3218678207
+   },
+   {
+    "neighborhood": "Southwest Berkeley",
+    "parcels": 1519,
+    "exempt_parcels": 125,
+    "land_value": 689988627,
+    "improvement_value": 2193069507,
+    "net_taxable_value": 2822764230
+   },
+   {
+    "neighborhood": "Elmwood District",
+    "parcels": 2313,
+    "exempt_parcels": 134,
+    "land_value": 819508075,
+    "improvement_value": 1866473387,
+    "net_taxable_value": 2524927524
+   },
+   {
+    "neighborhood": "North Berkeley",
+    "parcels": 1864,
+    "exempt_parcels": 113,
+    "land_value": 487150370,
+    "improvement_value": 1062979108,
+    "net_taxable_value": 1521978621
+   },
+   {
+    "neighborhood": "Thousand Oaks",
+    "parcels": 1458,
+    "exempt_parcels": 14,
+    "land_value": 435513479,
+    "improvement_value": 922929089,
+    "net_taxable_value": 1344500310
+   },
+   {
+    "neighborhood": "Southside",
+    "parcels": 331,
+    "exempt_parcels": 47,
+    "land_value": 363343759,
+    "improvement_value": 923415739,
+    "net_taxable_value": 1128173778
+   },
+   {
+    "neighborhood": "Le Conte",
+    "parcels": 1139,
+    "exempt_parcels": 49,
+    "land_value": 366950035,
+    "improvement_value": 750405024,
+    "net_taxable_value": 1085187588
+   },
+   {
+    "neighborhood": "Claremont",
+    "parcels": 735,
+    "exempt_parcels": 20,
+    "land_value": 330188671,
+    "improvement_value": 706380895,
+    "net_taxable_value": 1031654103
+   },
+   {
+    "neighborhood": "Northwest Berkeley",
+    "parcels": 1122,
+    "exempt_parcels": 71,
+    "land_value": 381347218,
+    "improvement_value": 670122603,
+    "net_taxable_value": 1020266376
+   },
+   {
+    "neighborhood": "Northbrae",
+    "parcels": 1260,
+    "exempt_parcels": 13,
+    "land_value": 343122827,
+    "improvement_value": 671389984,
+    "net_taxable_value": 1005002046
+   },
+   {
+    "neighborhood": "Westbrae",
+    "parcels": 1471,
+    "exempt_parcels": 61,
+    "land_value": 318258149,
+    "improvement_value": 682848647,
+    "net_taxable_value": 988209602
+   },
+   {
+    "neighborhood": "Live Oak",
+    "parcels": 995,
+    "exempt_parcels": 45,
+    "land_value": 282147605,
+    "improvement_value": 617113863,
+    "net_taxable_value": 860734339
+   },
+   {
+    "neighborhood": "Upper North Berkeley",
+    "parcels": 791,
+    "exempt_parcels": 50,
+    "land_value": 237608503,
+    "improvement_value": 508255189,
+    "net_taxable_value": 730166067
+   },
+   {
+    "neighborhood": "Northside",
+    "parcels": 720,
+    "exempt_parcels": 94,
+    "land_value": 267409597,
+    "improvement_value": 568826382,
+    "net_taxable_value": 729628330
+   },
+   {
+    "neighborhood": "Terrace View",
+    "parcels": 721,
+    "exempt_parcels": 22,
+    "land_value": 231695887,
+    "improvement_value": 486146581,
+    "net_taxable_value": 712900268
+   },
+   {
+    "neighborhood": "Cragmont",
+    "parcels": 493,
+    "exempt_parcels": 6,
+    "land_value": 148526668,
+    "improvement_value": 307635912,
+    "net_taxable_value": 451779956
+   },
+   {
+    "neighborhood": "Lorin",
+    "parcels": 486,
+    "exempt_parcels": 18,
+    "land_value": 157762295,
+    "improvement_value": 322373879,
+    "net_taxable_value": 431331527
+   },
+   {
+    "neighborhood": "4th St.",
+    "parcels": 156,
+    "exempt_parcels": 22,
+    "land_value": 118807327,
+    "improvement_value": 183133425,
+    "net_taxable_value": 293140418
+   },
+   {
+    "neighborhood": "Panoramic Hill",
+    "parcels": 266,
+    "exempt_parcels": 17,
+    "land_value": 107849124,
+    "improvement_value": 249272422,
+    "net_taxable_value": 280600469
+   },
+   {
+    "neighborhood": "Gilman",
+    "parcels": 140,
+    "exempt_parcels": 22,
+    "land_value": 98372032,
+    "improvement_value": 134040642,
+    "net_taxable_value": 220262765
+   },
+   {
+    "neighborhood": "University of California Berkeley",
+    "parcels": 22,
+    "exempt_parcels": 4,
+    "land_value": 10756066,
+    "improvement_value": 24941367,
+    "net_taxable_value": 31938588
+   },
+   {
+    "neighborhood": "Berkeley Marina",
+    "parcels": 16,
+    "exempt_parcels": 15,
+    "land_value": 2753469,
+    "improvement_value": 9044705,
+    "net_taxable_value": 11798174
+   }
+  ]
+ },
+ "infra": {
+  "water_mi": 269.1,
+  "water_segments": 13396,
+  "water_pre1960_seg_pct": 63.0,
+  "water_pre1940_mi": 120.0,
+  "water_oldest": 1869,
+  "water_median_year": 1950,
+  "water_by_decade": [
+   {
+    "decade": 1860,
+    "miles": 0.0
+   },
+   {
+    "decade": 1870,
+    "miles": 0.01
+   },
+   {
+    "decade": 1880,
+    "miles": 0.01
+   },
+   {
+    "decade": 1890,
+    "miles": 1.27
+   },
+   {
+    "decade": 1900,
+    "miles": 7.72
+   },
+   {
+    "decade": 1910,
+    "miles": 5.82
+   },
+   {
+    "decade": 1920,
+    "miles": 47.09
+   },
+   {
+    "decade": 1930,
+    "miles": 58.03
+   },
+   {
+    "decade": 1940,
+    "miles": 22.78
+   },
+   {
+    "decade": 1950,
+    "miles": 47.57
+   },
+   {
+    "decade": 1960,
+    "miles": 37.48
+   },
+   {
+    "decade": 1970,
+    "miles": 3.87
+   },
+   {
+    "decade": 1980,
+    "miles": 4.51
+   },
+   {
+    "decade": 1990,
+    "miles": 7.95
+   },
+   {
+    "decade": 2000,
+    "miles": 8.5
+   },
+   {
+    "decade": 2010,
+    "miles": 12.74
+   }
+  ],
+  "water_by_dia": [
+   {
+    "diameter_in": 1.0,
+    "miles": 0.08
+   },
+   {
+    "diameter_in": 1.5,
+    "miles": 0.01
+   },
+   {
+    "diameter_in": 2.0,
+    "miles": 1.29
+   },
+   {
+    "diameter_in": 4.0,
+    "miles": 23.17
+   },
+   {
+    "diameter_in": 6.0,
+    "miles": 126.69
+   },
+   {
+    "diameter_in": 8.0,
+    "miles": 61.0
+   },
+   {
+    "diameter_in": 10.0,
+    "miles": 4.83
+   },
+   {
+    "diameter_in": 12.0,
+    "miles": 20.69
+   },
+   {
+    "diameter_in": 14.0,
+    "miles": 0.17
+   },
+   {
+    "diameter_in": 16.0,
+    "miles": 12.55
+   },
+   {
+    "diameter_in": 20.0,
+    "miles": 6.8
+   },
+   {
+    "diameter_in": 24.0,
+    "miles": 2.69
+   },
+   {
+    "diameter_in": 30.0,
+    "miles": 0.32
+   },
+   {
+    "diameter_in": 36.0,
+    "miles": 3.07
+   },
+   {
+    "diameter_in": 48.0,
+    "miles": 4.06
+   },
+   {
+    "diameter_in": 54.0,
+    "miles": 1.66
+   }
+  ],
+  "sewer_mi": 261.0,
+  "sewer_segments": 7744,
+  "sewer_by_material": [
+   {
+    "MATERIAL": " HDPE",
+    "miles": 0.03,
+    "segments": 1,
+    "planning_cost": 252054.0
+   },
+   {
+    "MATERIAL": "ABAN",
+    "miles": 0.02,
+    "segments": 1,
+    "planning_cost": 55062.0
+   },
+   {
+    "MATERIAL": "ABAND VCP",
+    "miles": 0.33,
+    "segments": 13,
+    "planning_cost": 766145.0
+   },
+   {
+    "MATERIAL": "ABS",
+    "miles": 0.15,
+    "segments": 4,
+    "planning_cost": 551616.0
+   },
+   {
+    "MATERIAL": "Aband VCP",
+    "miles": 0.03,
+    "segments": 1,
+    "planning_cost": 53136.0
+   },
+   {
+    "MATERIAL": "CI",
+    "miles": 0.41,
+    "segments": 18,
+    "planning_cost": 1129758.0
+   },
+   {
+    "MATERIAL": "CIPP",
+    "miles": 5.27,
+    "segments": 146,
+    "planning_cost": 17487247.9
+   },
+   {
+    "MATERIAL": "CIPP RCP",
+    "miles": 0.23,
+    "segments": 6,
+    "planning_cost": 1042770.0
+   },
+   {
+    "MATERIAL": "CIPP VCP",
+    "miles": 2.39,
+    "segments": 65,
+    "planning_cost": 8186550.2
+   },
+   {
+    "MATERIAL": "CIPP/HDPR",
+    "miles": 0.06,
+    "segments": 1,
+    "planning_cost": 184473.0
+   },
+   {
+    "MATERIAL": "CMP",
+    "miles": 0.39,
+    "segments": 6,
+    "planning_cost": 904803.0
+   },
+   {
+    "MATERIAL": "Cast Iron",
+    "miles": 0.03,
+    "segments": 2,
+    "planning_cost": 63700.0
+   },
+   {
+    "MATERIAL": "DIP",
+    "miles": 0.05,
+    "segments": 3,
+    "planning_cost": 139494.0
+   },
+   {
+    "MATERIAL": "DNE",
+    "miles": 0.01,
+    "segments": 1,
+    "planning_cost": 29127.0
+   },
+   {
+    "MATERIAL": "FM CI",
+    "miles": 0.27,
+    "segments": 1,
+    "planning_cost": 611478.0
+   },
+   {
+    "MATERIAL": "FM HDPE",
+    "miles": 0.1,
+    "segments": 5,
+    "planning_cost": 185192.0
+   },
+   {
+    "MATERIAL": "FM PVC",
+    "miles": 0.19,
+    "segments": 4,
+    "planning_cost": 398202.0
+   },
+   {
+    "MATERIAL": "HDPE",
+    "miles": 170.89,
+    "segments": 4939,
+    "planning_cost": 422021317.7
+   },
+   {
+    "MATERIAL": "HDPE STL CASING",
+    "miles": 0.03,
+    "segments": 2,
+    "planning_cost": 135792.0
+   },
+   {
+    "MATERIAL": "HDPE/SDRIT",
+    "miles": 0.04,
+    "segments": 1,
+    "planning_cost": 125424.0
+   },
+   {
+    "MATERIAL": "P.E.P.",
+    "miles": 0.09,
+    "segments": 2,
+    "planning_cost": 198340.0
+   },
+   {
+    "MATERIAL": "PE",
+    "miles": 0.47,
+    "segments": 12,
+    "planning_cost": 1193640.5
+   },
+   {
+    "MATERIAL": "PEP",
+    "miles": 0.17,
+    "segments": 4,
+    "planning_cost": 375158.0
+   },
+   {
+    "MATERIAL": "PRIV RCP",
+    "miles": 0.03,
+    "segments": 1,
+    "planning_cost": 131950.0
+   },
+   {
+    "MATERIAL": "PRIVATE",
+    "miles": 0.04,
+    "segments": 1,
+    "planning_cost": 78400.0
+   },
+   {
+    "MATERIAL": "PVC",
+    "miles": 41.79,
+    "segments": 1335,
+    "planning_cost": 103425179.0
+   },
+   {
+    "MATERIAL": "Private CI",
+    "miles": 0.06,
+    "segments": 7,
+    "planning_cost": 145635.0
+   },
+   {
+    "MATERIAL": "Private HDPE",
+    "miles": 0.05,
+    "segments": 3,
+    "planning_cost": 111321.0
+   },
+   {
+    "MATERIAL": "Private RCP",
+    "miles": 0.4,
+    "segments": 4,
+    "planning_cost": 1680873.0
+   },
+   {
+    "MATERIAL": "Private VCP",
+    "miles": 2.44,
+    "segments": 47,
+    "planning_cost": 6317372.5
+   },
+   {
+    "MATERIAL": "RCP",
+    "miles": 2.81,
+    "segments": 62,
+    "planning_cost": 12445406.2
+   },
+   {
+    "MATERIAL": "SLIPLINED",
+    "miles": 0.17,
+    "segments": 3,
+    "planning_cost": 640824.0
+   },
+   {
+    "MATERIAL": "SLIPLINED HDPE",
+    "miles": 0.37,
+    "segments": 8,
+    "planning_cost": 1126020.0
+   },
+   {
+    "MATERIAL": "Sliplined",
+    "miles": 0.02,
+    "segments": 1,
+    "planning_cost": 89851.5
+   },
+   {
+    "MATERIAL": "VCP",
+    "miles": 30.83,
+    "segments": 1028,
+    "planning_cost": 76019660.6
+   },
+   {
+    "MATERIAL": "VCP+CIPP",
+    "miles": 0.04,
+    "segments": 1,
+    "planning_cost": 79998.0
+   },
+   {
+    "MATERIAL": "sliplined VCP",
+    "miles": 0.16,
+    "segments": 3,
+    "planning_cost": 351904.0
+   }
+  ],
+  "sewer_planning_cost": 658816670,
+  "sewer_rehab_dated": 1267,
+  "storm_mi": 94.2,
+  "storm_segments": 6680,
+  "storm_by_material": [
+   {
+    "MATERIAL": "0",
+    "miles": 0.01
+   },
+   {
+    "MATERIAL": "ABS",
+    "miles": 0.01
+   },
+   {
+    "MATERIAL": "ACP",
+    "miles": 0.47
+   },
+   {
+    "MATERIAL": "BRI",
+    "miles": 0.11
+   },
+   {
+    "MATERIAL": "BRICK",
+    "miles": 0.06
+   },
+   {
+    "MATERIAL": "CMP",
+    "miles": 1.37
+   },
+   {
+    "MATERIAL": "CP",
+    "miles": 0.25
+   },
+   {
+    "MATERIAL": "DI",
+    "miles": 0.01
+   },
+   {
+    "MATERIAL": "ESVCP",
+    "miles": 0.02
+   },
+   {
+    "MATERIAL": "FSP",
+    "miles": 0.44
+   },
+   {
+    "MATERIAL": "GS",
+    "miles": 0.05
+   },
+   {
+    "MATERIAL": "HDPE",
+    "miles": 1.68
+   },
+   {
+    "MATERIAL": "NRCP",
+    "miles": 0.01
+   },
+   {
+    "MATERIAL": "PE",
+    "miles": 0.01
+   },
+   {
+    "MATERIAL": "PERF",
+    "miles": 0.04
+   },
+   {
+    "MATERIAL": "PERF_BFP",
+    "miles": 0.02
+   },
+   {
+    "MATERIAL": "PMP",
+    "miles": 0.29
+   },
+   {
+    "MATERIAL": "PP",
+    "miles": 0.17
+   },
+   {
+    "MATERIAL": "PVC",
+    "miles": 0.8
+   },
+   {
+    "MATERIAL": "RCP",
+    "miles": 84.5
+   },
+   {
+    "MATERIAL": "SE_OTH",
+    "miles": 0.01
+   },
+   {
+    "MATERIAL": "STL",
+    "miles": 0.05
+   },
+   {
+    "MATERIAL": "V Gutt",
+    "miles": 0.37
+   },
+   {
+    "MATERIAL": "VCP",
+    "miles": 2.72
+   },
+   {
+    "MATERIAL": "VI",
+    "miles": 0.04
+   }
+  ],
+  "poles": [
+   {
+    "POLEMAT": "Concrete",
+    "streetlights": 19
+   },
+   {
+    "POLEMAT": "Fiberglass",
+    "streetlights": 98
+   },
+   {
+    "POLEMAT": "Metal",
+    "streetlights": 3304
+   },
+   {
+    "POLEMAT": "Unknown",
+    "streetlights": 49
+   },
+   {
+    "POLEMAT": "Wood",
+    "streetlights": 4499
+   }
+  ],
+  "wood_util_pn": 4456,
+  "wood_util_pn_distinct": 4428,
+  "laterals": 29484,
+  "laterals_mi": 171.0,
+  "manholes": 7615
+ },
+ "poles": {
+  "wood": 4499,
+  "nn_median_ft": 109,
+  "nn_p25": 78,
+  "nn_p75": 140,
+  "traced": {
+   "150": {
+    "links": 2907,
+    "miles": 57.7,
+    "mean_span_ft": 105.0
+   },
+   "200": {
+    "links": 3557,
+    "miles": 78.6,
+    "mean_span_ft": 117.0
+   },
+   "250": {
+    "links": 4086,
+    "miles": 101.1,
+    "mean_span_ft": 131.0
+   },
+   "300": {
+    "links": 4399,
+    "miles": 117.0,
+    "mean_span_ft": 140.0
+   },
+   "400": {
+    "links": 4474,
+    "miles": 121.7,
+    "mean_span_ft": 144.0
+   }
+  }
+ },
+ "evac": {
+  "clear": [
+   {
+    "region": "R01",
+    "name": "Citywide Evacuation",
+    "summer_midweek_midday": "5:10",
+    "summer_weekend_midday": "4:25",
+    "summer_nighttime": "2:30",
+    "fall_midweek_midday": "5:35",
+    "fall_weekend_midday": "4:00",
+    "fall_nighttime": "2:30",
+    "summer_midweek_midday_is_100th_pct": true,
+    "summer_weekend_midday_is_100th_pct": true,
+    "summer_nighttime_is_100th_pct": false,
+    "fall_midweek_midday_is_100th_pct": true,
+    "fall_weekend_midday_is_100th_pct": true,
+    "fall_nighttime_is_100th_pct": false
+   },
+   {
+    "region": "R02",
+    "name": "Fire 1923",
+    "summer_midweek_midday": "2:25",
+    "summer_weekend_midday": "1:50",
+    "summer_nighttime": "1:45",
+    "fall_midweek_midday": "4:10",
+    "fall_weekend_midday": "1:50",
+    "fall_nighttime": "1:45",
+    "summer_midweek_midday_is_100th_pct": false,
+    "summer_weekend_midday_is_100th_pct": false,
+    "summer_nighttime_is_100th_pct": false,
+    "fall_midweek_midday_is_100th_pct": true,
+    "fall_weekend_midday_is_100th_pct": false,
+    "fall_nighttime_is_100th_pct": false
+   },
+   {
+    "region": "R02",
+    "name": "Fire 1923 Urgent Mobilization",
+    "summer_midweek_midday": "2:25",
+    "summer_weekend_midday": "1:50",
+    "summer_nighttime": "1:35",
+    "fall_midweek_midday": "4:10",
+    "fall_weekend_midday": "1:45",
+    "fall_nighttime": "1:35",
+    "summer_midweek_midday_is_100th_pct": false,
+    "summer_weekend_midday_is_100th_pct": false,
+    "summer_nighttime_is_100th_pct": false,
+    "fall_midweek_midday_is_100th_pct": true,
+    "fall_weekend_midday_is_100th_pct": false,
+    "fall_nighttime_is_100th_pct": false
+   },
+   {
+    "region": "R03",
+    "name": "Fire 1923 Phase a",
+    "summer_midweek_midday": "4:25",
+    "summer_weekend_midday": "4:30",
+    "summer_nighttime": "1:40",
+    "fall_midweek_midday": "4:30",
+    "fall_weekend_midday": "4:15",
+    "fall_nighttime": "2:10",
+    "summer_midweek_midday_is_100th_pct": true,
+    "summer_weekend_midday_is_100th_pct": true,
+    "summer_nighttime_is_100th_pct": false,
+    "fall_midweek_midday_is_100th_pct": true,
+    "fall_weekend_midday_is_100th_pct": true,
+    "fall_nighttime_is_100th_pct": false
+   },
+   {
+    "region": "R03",
+    "name": "Fire 1923 Phase a Urgent Mobilization",
+    "summer_midweek_midday": "2:30",
+    "summer_weekend_midday": "2:10",
+    "summer_nighttime": "1:25",
+    "fall_midweek_midday": "3:30",
+    "fall_weekend_midday": "2:10",
+    "fall_nighttime": "1:35",
+    "summer_midweek_midday_is_100th_pct": true,
+    "summer_weekend_midday_is_100th_pct": true,
+    "summer_nighttime_is_100th_pct": false,
+    "fall_midweek_midday_is_100th_pct": true,
+    "fall_weekend_midday_is_100th_pct": true,
+    "fall_nighttime_is_100th_pct": false
+   },
+   {
+    "region": "R03",
+    "name": "Fire 1923 Phase b",
+    "summer_midweek_midday": "6:10",
+    "summer_weekend_midday": "5:55",
+    "summer_nighttime": "2:15",
+    "fall_midweek_midday": "6:15",
+    "fall_weekend_midday": "6:00",
+    "fall_nighttime": "2:30",
+    "summer_midweek_midday_is_100th_pct": true,
+    "summer_weekend_midday_is_100th_pct": true,
+    "summer_nighttime_is_100th_pct": false,
+    "fall_midweek_midday_is_100th_pct": true,
+    "fall_weekend_midday_is_100th_pct": true,
+    "fall_nighttime_is_100th_pct": false
+   },
+   {
+    "region": "R03",
+    "name": "Fire 1923 Phase b Urgent Mobilization",
+    "summer_midweek_midday": "4:00",
+    "summer_weekend_midday": "4:00",
+    "summer_nighttime": "1:40",
+    "fall_midweek_midday": "4:00",
+    "fall_weekend_midday": "2:10",
+    "fall_nighttime": "1:40",
+    "summer_midweek_midday_is_100th_pct": true,
+    "summer_weekend_midday_is_100th_pct": true,
+    "summer_nighttime_is_100th_pct": false,
+    "fall_midweek_midday_is_100th_pct": true,
+    "fall_weekend_midday_is_100th_pct": true,
+    "fall_nighttime_is_100th_pct": false
+   },
+   {
+    "region": "R03",
+    "name": "Fire 1923 Phase c",
+    "summer_midweek_midday": "4:10",
+    "summer_weekend_midday": "4:20",
+    "summer_nighttime": "4:30",
+    "fall_midweek_midday": "4:00",
+    "fall_weekend_midday": "4:25",
+    "fall_nighttime": "4:35",
+    "summer_midweek_midday_is_100th_pct": false,
+    "summer_weekend_midday_is_100th_pct": false,
+    "summer_nighttime_is_100th_pct": false,
+    "fall_midweek_midday_is_100th_pct": false,
+    "fall_weekend_midday_is_100th_pct": false,
+    "fall_nighttime_is_100th_pct": false
+   },
+   {
+    "region": "R03",
+    "name": "Fire 1923 Phase c Urgent Mobilization",
+    "summer_midweek_midday": "3:35",
+    "summer_weekend_midday": "3:45",
+    "summer_nighttime": "1:40",
+    "fall_midweek_midday": "3:50",
+    "fall_weekend_midday": "1:30",
+    "fall_nighttime": "1:40",
+    "summer_midweek_midday_is_100th_pct": false,
+    "summer_weekend_midday_is_100th_pct": false,
+    "summer_nighttime_is_100th_pct": false,
+    "fall_midweek_midday_is_100th_pct": false,
+    "fall_weekend_midday_is_100th_pct": false,
+    "fall_nighttime_is_100th_pct": false
+   },
+   {
+    "region": "R04",
+    "name": "Panoramic Hill Fire",
+    "summer_midweek_midday": "1:40",
+    "summer_weekend_midday": "1:35",
+    "summer_nighttime": "1:40",
+    "fall_midweek_midday": "1:45",
+    "fall_weekend_midday": "1:35",
+    "fall_nighttime": "1:40",
+    "summer_midweek_midday_is_100th_pct": false,
+    "summer_weekend_midday_is_100th_pct": false,
+    "summer_nighttime_is_100th_pct": false,
+    "fall_midweek_midday_is_100th_pct": false,
+    "fall_weekend_midday_is_100th_pct": false,
+    "fall_nighttime_is_100th_pct": false
+   },
+   {
+    "region": "R04",
+    "name": "Panoramic Hill Fire Urgent Mobilization",
+    "summer_midweek_midday": "1:05",
+    "summer_weekend_midday": "0:50",
+    "summer_nighttime": "0:45",
+    "fall_midweek_midday": "1:45",
+    "fall_weekend_midday": "0:50",
+    "fall_nighttime": "0:50",
+    "summer_midweek_midday_is_100th_pct": false,
+    "summer_weekend_midday_is_100th_pct": false,
+    "summer_nighttime_is_100th_pct": false,
+    "fall_midweek_midday_is_100th_pct": false,
+    "fall_weekend_midday_is_100th_pct": false,
+    "fall_nighttime_is_100th_pct": false
+   },
+   {
+    "region": "R05",
+    "name": "Fire Zones 2 & 3 Combined",
+    "summer_midweek_midday": "2:05",
+    "summer_weekend_midday": "1:55",
+    "summer_nighttime": "1:45",
+    "fall_midweek_midday": "2:20",
+    "fall_weekend_midday": "1:55",
+    "fall_nighttime": "1:45",
+    "summer_midweek_midday_is_100th_pct": false,
+    "summer_weekend_midday_is_100th_pct": false,
+    "summer_nighttime_is_100th_pct": false,
+    "fall_midweek_midday_is_100th_pct": false,
+    "fall_weekend_midday_is_100th_pct": false,
+    "fall_nighttime_is_100th_pct": false
+   },
+   {
+    "region": "R06",
+    "name": "Tsunami - Phase 3",
+    "summer_midweek_midday": "1:20",
+    "summer_weekend_midday": "1:20",
+    "summer_nighttime": "1:05",
+    "fall_midweek_midday": "1:45",
+    "fall_weekend_midday": "0:55",
+    "fall_nighttime": "1:10",
+    "summer_midweek_midday_is_100th_pct": false,
+    "summer_weekend_midday_is_100th_pct": false,
+    "summer_nighttime_is_100th_pct": false,
+    "fall_midweek_midday_is_100th_pct": false,
+    "fall_weekend_midday_is_100th_pct": false,
+    "fall_nighttime_is_100th_pct": false
+   },
+   {
+    "region": "R07",
+    "name": "Tsunami - Max Phase",
+    "summer_midweek_midday": "2:15",
+    "summer_weekend_midday": "2:10",
+    "summer_nighttime": "1:50",
+    "fall_midweek_midday": "2:15",
+    "fall_weekend_midday": "2:05",
+    "fall_nighttime": "1:50",
+    "summer_midweek_midday_is_100th_pct": false,
+    "summer_weekend_midday_is_100th_pct": false,
+    "summer_nighttime_is_100th_pct": false,
+    "fall_midweek_midday_is_100th_pct": false,
+    "fall_weekend_midday_is_100th_pct": false,
+    "fall_nighttime_is_100th_pct": false
+   },
+   {
+    "region": "R08",
+    "name": "Berkeley Flats",
+    "summer_midweek_midday": "4:10",
+    "summer_weekend_midday": "2:35",
+    "summer_nighttime": "2:10",
+    "fall_midweek_midday": "4:20",
+    "fall_weekend_midday": "2:25",
+    "fall_nighttime": "2:05",
+    "summer_midweek_midday_is_100th_pct": true,
+    "summer_weekend_midday_is_100th_pct": false,
+    "summer_nighttime_is_100th_pct": false,
+    "fall_midweek_midday_is_100th_pct": true,
+    "fall_weekend_midday_is_100th_pct": false,
+    "fall_nighttime_is_100th_pct": false
+   },
+   {
+    "region": "R09",
+    "name": "North Berkeley Hills",
+    "summer_midweek_midday": "2:10",
+    "summer_weekend_midday": "2:00",
+    "summer_nighttime": "1:50",
+    "fall_midweek_midday": "2:05",
+    "fall_weekend_midday": "1:50",
+    "fall_nighttime": "1:45",
+    "summer_midweek_midday_is_100th_pct": false,
+    "summer_weekend_midday_is_100th_pct": false,
+    "summer_nighttime_is_100th_pct": false,
+    "fall_midweek_midday_is_100th_pct": false,
+    "fall_weekend_midday_is_100th_pct": false,
+    "fall_nighttime_is_100th_pct": false
+   },
+   {
+    "region": "R10",
+    "name": "South Berkeley Hills",
+    "summer_midweek_midday": "1:35",
+    "summer_weekend_midday": "1:30",
+    "summer_nighttime": "1:35",
+    "fall_midweek_midday": "2:15",
+    "fall_weekend_midday": "1:35",
+    "fall_nighttime": "1:35",
+    "summer_midweek_midday_is_100th_pct": false,
+    "summer_weekend_midday_is_100th_pct": false,
+    "summer_nighttime_is_100th_pct": false,
+    "fall_midweek_midday_is_100th_pct": false,
+    "fall_weekend_midday_is_100th_pct": false,
+    "fall_nighttime_is_100th_pct": false
+   },
+   {
+    "region": "R11",
+    "name": "West Berkeley",
+    "summer_midweek_midday": "1:40",
+    "summer_weekend_midday": "1:35",
+    "summer_nighttime": "1:35",
+    "fall_midweek_midday": "1:45",
+    "fall_weekend_midday": "1:35",
+    "fall_nighttime": "1:35",
+    "summer_midweek_midday_is_100th_pct": false,
+    "summer_weekend_midday_is_100th_pct": false,
+    "summer_nighttime_is_100th_pct": false,
+    "fall_midweek_midday_is_100th_pct": false,
+    "fall_weekend_midday_is_100th_pct": false,
+    "fall_nighttime_is_100th_pct": false
+   },
+   {
+    "region": "R12",
+    "name": "UC Berkeley",
+    "summer_midweek_midday": "1:05",
+    "summer_weekend_midday": "1:15",
+    "summer_nighttime": "1:25",
+    "fall_midweek_midday": "1:20",
+    "fall_weekend_midday": "1:30",
+    "fall_nighttime": "1:35",
+    "summer_midweek_midday_is_100th_pct": false,
+    "summer_weekend_midday_is_100th_pct": false,
+    "summer_nighttime_is_100th_pct": false,
+    "fall_midweek_midday_is_100th_pct": false,
+    "fall_weekend_midday_is_100th_pct": false,
+    "fall_nighttime_is_100th_pct": false
+   },
+   {
+    "region": "R13",
+    "name": "Lawrence Berkeley National Lab",
+    "summer_midweek_midday": "1:25",
+    "summer_weekend_midday": "0:45",
+    "summer_nighttime": "0:45",
+    "fall_midweek_midday": "2:15",
+    "fall_weekend_midday": "0:45",
+    "fall_nighttime": "0:45",
+    "summer_midweek_midday_is_100th_pct": true,
+    "summer_weekend_midday_is_100th_pct": false,
+    "summer_nighttime_is_100th_pct": false,
+    "fall_midweek_midday_is_100th_pct": true,
+    "fall_weekend_midday_is_100th_pct": false,
+    "fall_nighttime_is_100th_pct": false
+   },
+   {
+    "region": "R14",
+    "name": "UC Berkeley + Lawrence Berkeley National Lab",
+    "summer_midweek_midday": "1:30",
+    "summer_weekend_midday": "1:15",
+    "summer_nighttime": "1:20",
+    "fall_midweek_midday": "2:15",
+    "fall_weekend_midday": "1:30",
+    "fall_nighttime": "1:35",
+    "summer_midweek_midday_is_100th_pct": false,
+    "summer_weekend_midday_is_100th_pct": false,
+    "summer_nighttime_is_100th_pct": false,
+    "fall_midweek_midday_is_100th_pct": false,
+    "fall_weekend_midday_is_100th_pct": false,
+    "fall_nighttime_is_100th_pct": false
+   }
+  ],
+  "pop": [
+   {
+    "area": "Berkeley Flats",
+    "population_2024": 76770,
+    "resident_vehicles_2024": 32193
+   },
+   {
+    "area": "North Berkeley Hills",
+    "population_2024": 21819,
+    "resident_vehicles_2024": 9426
+   },
+   {
+    "area": "South Berkeley Hills",
+    "population_2024": 6799,
+    "resident_vehicles_2024": 2078
+   },
+   {
+    "area": "West Berkeley",
+    "population_2024": 9188,
+    "resident_vehicles_2024": 3680
+   },
+   {
+    "area": "UC Berkeley",
+    "population_2024": 2186,
+    "resident_vehicles_2024": 237
+   },
+   {
+    "area": "Lawrence Berkeley National Lab",
+    "population_2024": 0,
+    "resident_vehicles_2024": 0
+   },
+   {
+    "area": "Shadow Region",
+    "population_2024": 111443,
+    "resident_vehicles_2024": 52094
+   }
+  ]
+ },
+ "ug": {
+  "summary": {
+   "arterial": {
+    "overhead_mi": 13.08,
+    "underground_mi": 12.59,
+    "cost": 48316300,
+    "segments": 79,
+    "overhead_segments": 55,
+    "printed_commercial": 11379500,
+    "printed_residential": 34027750
+   },
+   "collector": {
+    "overhead_mi": 24.77,
+    "underground_mi": 11.36,
+    "cost": 91858150,
+    "segments": 112,
+    "overhead_segments": 82,
+    "printed_commercial": 15096700,
+    "printed_residential": 76761450
+   },
+   "report_network_totals": {
+    "arterial": [
+     11379500,
+     31549650
+    ],
+    "collector": [
+     15096700,
+     76761450
+    ],
+    "headline": 134800000
+   }
+  },
+  "disagree": [
+   {
+    "network": "arterial",
+    "street_no": 3,
+    "street": "ASHBY AVE",
+    "cost_commercial": 3053450,
+    "cost_residential": 2478100,
+    "segments_commercial": 3053450,
+    "segments_residential": 5387150
+   }
+  ],
+  "top": [
+   {
+    "network": "collector",
+    "street_no": 29,
+    "street": "KEITH AVE",
+    "seg_from": "SPRUCE ST",
+    "seg_to": "MILLER RD",
+    "length_ft": 7800,
+    "status": "overhead",
+    "sidewalk_impact": "5",
+    "traffic_impact": "4",
+    "utility_density_impact": "5",
+    "impact_total": "14",
+    "cost_m_cb_cdmu_sp_zones": 0,
+    "cost_mur_r_zones": 7800000,
+    "cost_total": 7800000
+   },
+   {
+    "network": "collector",
+    "street_no": 32,
+    "street": "MARIN AVE",
+    "seg_from": "MARIN CR",
+    "seg_to": "GRIZZLY PEAK BLVD",
+    "length_ft": 3985,
+    "status": "overhead",
+    "sidewalk_impact": "3",
+    "traffic_impact": "4",
+    "utility_density_impact": "4",
+    "impact_total": "11",
+    "cost_m_cb_cdmu_sp_zones": 0,
+    "cost_mur_r_zones": 3985000,
+    "cost_total": 3985000
+   },
+   {
+    "network": "collector",
+    "street_no": 21,
+    "street": "EUCLID AVE",
+    "seg_from": "GRIZZLY PEAK BLVD CRAGMONT AVE",
+    "seg_to": "",
+    "length_ft": 5185,
+    "status": "overhead",
+    "sidewalk_impact": "3",
+    "traffic_impact": "3",
+    "utility_density_impact": "4",
+    "impact_total": "10",
+    "cost_m_cb_cdmu_sp_zones": 0,
+    "cost_mur_r_zones": 3785050,
+    "cost_total": 3785050
+   },
+   {
+    "network": "collector",
+    "street_no": 42,
+    "street": "SPRUCE ST",
+    "seg_from": "MONTROSE RD",
+    "seg_to": "LOS ANGELES AVE",
+    "length_ft": 2900,
+    "status": "overhead",
+    "sidewalk_impact": "4",
+    "traffic_impact": "4",
+    "utility_density_impact": "4",
+    "impact_total": "12",
+    "cost_m_cb_cdmu_sp_zones": 0,
+    "cost_mur_r_zones": 2900000,
+    "cost_total": 2900000
+   },
+   {
+    "network": "collector",
+    "street_no": 11,
+    "street": "CLAREMONT AVE",
+    "seg_from": "ACACIA AVE",
+    "seg_to": "MARIN AVE",
+    "length_ft": 2825,
+    "status": "overhead",
+    "sidewalk_impact": "4",
+    "traffic_impact": "3",
+    "utility_density_impact": "4",
+    "impact_total": "11",
+    "cost_m_cb_cdmu_sp_zones": 0,
+    "cost_mur_r_zones": 2825000,
+    "cost_total": 2825000
+   },
+   {
+    "network": "collector",
+    "street_no": 25,
+    "street": "GRIZZLY PEAK BLVD",
+    "seg_from": "EUCLID AVE",
+    "seg_to": "MARIN AVE",
+    "length_ft": 2570,
+    "status": "overhead",
+    "sidewalk_impact": "5",
+    "traffic_impact": "4",
+    "utility_density_impact": "5",
+    "impact_total": "14",
+    "cost_m_cb_cdmu_sp_zones": 0,
+    "cost_mur_r_zones": 2570000,
+    "cost_total": 2570000
+   },
+   {
+    "network": "collector",
+    "street_no": 14,
+    "street": "COLUSA AVE",
+    "seg_from": "SOLANO AVE",
+    "seg_to": "VISALIA AVE",
+    "length_ft": 3430,
+    "status": "overhead",
+    "sidewalk_impact": "2",
+    "traffic_impact": "3",
+    "utility_density_impact": "4",
+    "impact_total": "9",
+    "cost_m_cb_cdmu_sp_zones": 0,
+    "cost_mur_r_zones": 2503900,
+    "cost_total": 2503900
+   },
+   {
+    "network": "collector",
+    "street_no": 25,
+    "street": "GRIZZLY PEAK BLVD",
+    "seg_from": "HILL RD",
+    "seg_to": "GOLF COURSE DR",
+    "length_ft": 2420,
+    "status": "overhead",
+    "sidewalk_impact": "4",
+    "traffic_impact": "3",
+    "utility_density_impact": "4",
+    "impact_total": "11",
+    "cost_m_cb_cdmu_sp_zones": 0,
+    "cost_mur_r_zones": 2420000,
+    "cost_total": 2420000
+   },
+   {
+    "network": "arterial",
+    "street_no": 8,
+    "street": "GILMAN ST",
+    "seg_from": "2ND ST",
+    "seg_to": "9TH ST",
+    "length_ft": 2320,
+    "status": "overhead",
+    "sidewalk_impact": "3",
+    "traffic_impact": "5",
+    "utility_density_impact": "4",
+    "impact_total": "12",
+    "cost_m_cb_cdmu_sp_zones": 2320000,
+    "cost_mur_r_zones": 0,
+    "cost_total": 2320000
+   },
+   {
+    "network": "collector",
+    "street_no": 15,
+    "street": "DELAWARE ST",
+    "seg_from": "SAN PABLO AVE",
+    "seg_to": "SACRAMENTO ST",
+    "length_ft": 3090,
+    "status": "overhead",
+    "sidewalk_impact": "2",
+    "traffic_impact": "2",
+    "utility_density_impact": "3",
+    "impact_total": "7",
+    "cost_m_cb_cdmu_sp_zones": 0,
+    "cost_mur_r_zones": 2255700,
+    "cost_total": 2255700
+   },
+   {
+    "network": "collector",
+    "street_no": 30,
+    "street": "LA LOMA AVE",
+    "seg_from": "GLENDALE AVE",
+    "seg_to": "BUENA VISTA WAY",
+    "length_ft": 2250,
+    "status": "overhead",
+    "sidewalk_impact": "4",
+    "traffic_impact": "4",
+    "utility_density_impact": "4",
+    "impact_total": "12",
+    "cost_m_cb_cdmu_sp_zones": 0,
+    "cost_mur_r_zones": 2250000,
+    "cost_total": 2250000
+   },
+   {
+    "network": "collector",
+    "street_no": 47,
+    "street": "W FRONTAGE RD",
+    "seg_from": "UNIVERSITY AVE",
+    "seg_to": "GILMAN ST",
+    "length_ft": 4500,
+    "status": "overhead",
+    "sidewalk_impact": "2",
+    "traffic_impact": "2",
+    "utility_density_impact": "1",
+    "impact_total": "5",
+    "cost_m_cb_cdmu_sp_zones": 2250000,
+    "cost_mur_r_zones": 0,
+    "cost_total": 2250000
+   },
+   {
+    "network": "collector",
+    "street_no": 28,
+    "street": "HOPKINS ST",
+    "seg_from": "MCGEE AVE",
+    "seg_to": "MARIN CR",
+    "length_ft": 4370,
+    "status": "overhead",
+    "sidewalk_impact": "2",
+    "traffic_impact": "2",
+    "utility_density_impact": "2",
+    "impact_total": "6",
+    "cost_m_cb_cdmu_sp_zones": 0,
+    "cost_mur_r_zones": 2185000,
+    "cost_total": 2185000
+   },
+   {
+    "network": "arterial",
+    "street_no": 12,
+    "street": "MARIN AVE",
+    "seg_from": "TULARE AVE",
+    "seg_to": "THE CIRCLE",
+    "length_ft": 2920,
+    "status": "overhead",
+    "sidewalk_impact": "2",
+    "traffic_impact": "3",
+    "utility_density_impact": "2",
+    "impact_total": "7",
+    "cost_m_cb_cdmu_sp_zones": 0,
+    "cost_mur_r_zones": 2131600,
+    "cost_total": 2131600
+   },
+   {
+    "network": "collector",
+    "street_no": 42,
+    "street": "SPRUCE ST",
+    "seg_from": "MICHIGAN AVE",
+    "seg_to": "MONTROSE RD",
+    "length_ft": 2860,
+    "status": "overhead",
+    "sidewalk_impact": "3",
+    "traffic_impact": "3",
+    "utility_density_impact": "4",
+    "impact_total": "10",
+    "cost_m_cb_cdmu_sp_zones": 0,
+    "cost_mur_r_zones": 2087800,
+    "cost_total": 2087800
+   }
+  ],
+  "total": 140174450,
+  "bellecci": [
+   {
+    "version": "FY2019 baseline, programmatic",
+    "street": "San Pablo Ave",
+    "complexity_level": null,
+    "overhead_centerline_miles": 0.0,
+    "unit_cost_per_mile": 0,
+    "total_cost": 0
+   },
+   {
+    "version": "FY2019 baseline, programmatic",
+    "street": "University Ave",
+    "complexity_level": 3,
+    "overhead_centerline_miles": 0.07,
+    "unit_cost_per_mile": 5440000,
+    "total_cost": 380800
+   },
+   {
+    "version": "FY2019 baseline, programmatic",
+    "street": "Ashby Ave",
+    "complexity_level": 5,
+    "overhead_centerline_miles": 2.21,
+    "unit_cost_per_mile": 6800000,
+    "total_cost": 15028000
+   },
+   {
+    "version": "FY2019 baseline, programmatic",
+    "street": "Tunnel Road",
+    "complexity_level": 3,
+    "overhead_centerline_miles": 0.6,
+    "unit_cost_per_mile": 5440000,
+    "total_cost": 3264000
+   },
+   {
+    "version": "FY2019 baseline, programmatic",
+    "street": "Gilman St",
+    "complexity_level": 5,
+    "overhead_centerline_miles": 1.16,
+    "unit_cost_per_mile": 6800000,
+    "total_cost": 7888000
+   },
+   {
+    "version": "FY2019 baseline, programmatic",
+    "street": "Dwight Way",
+    "complexity_level": 4,
+    "overhead_centerline_miles": 2.68,
+    "unit_cost_per_mile": 6120000,
+    "total_cost": 16401600
+   },
+   {
+    "version": "FY2019 baseline, programmatic",
+    "street": "Hopkins",
+    "complexity_level": 2,
+    "overhead_centerline_miles": 0.81,
+    "unit_cost_per_mile": 4760000,
+    "total_cost": 3855600
+   },
+   {
+    "version": "FY2019 baseline, programmatic",
+    "street": "Alcatraz Ave",
+    "complexity_level": 1,
+    "overhead_centerline_miles": 1.81,
+    "unit_cost_per_mile": 4080000,
+    "total_cost": 7384800
+   },
+   {
+    "version": "FY2019 baseline, programmatic",
+    "street": "Claremont Ave",
+    "complexity_level": 1,
+    "overhead_centerline_miles": 0.49,
+    "unit_cost_per_mile": 4080000,
+    "total_cost": 1999200
+   },
+   {
+    "version": "FY2019 baseline, programmatic",
+    "street": "Rose",
+    "complexity_level": 2,
+    "overhead_centerline_miles": 0.06,
+    "unit_cost_per_mile": 4760000,
+    "total_cost": 285600
+   },
+   {
+    "version": "FY2019 baseline, programmatic",
+    "street": "Marin Ave",
+    "complexity_level": 4,
+    "overhead_centerline_miles": 1.24,
+    "unit_cost_per_mile": 6120000,
+    "total_cost": 7588800
+   },
+   {
+    "version": "FY2019 baseline, programmatic",
+    "street": "Spruce St",
+    "complexity_level": 2,
+    "overhead_centerline_miles": 1.76,
+    "unit_cost_per_mile": 4760000,
+    "total_cost": 8377600
+   },
+   {
+    "version": "FY2019 baseline, programmatic",
+    "street": "Grizzly Peak",
+    "complexity_level": 2,
+    "overhead_centerline_miles": 1.35,
+    "unit_cost_per_mile": 4760000,
+    "total_cost": 6426000
+   },
+   {
+    "version": "FY2019 baseline, programmatic",
+    "street": "Oxford St",
+    "complexity_level": 2,
+    "overhead_centerline_miles": 0.25,
+    "unit_cost_per_mile": 4760000,
+    "total_cost": 1190000
+   },
+   {
+    "version": "FY2019 baseline, programmatic",
+    "street": "Sixth St",
+    "complexity_level": 3,
+    "overhead_centerline_miles": 0.56,
+    "unit_cost_per_mile": 5440000,
+    "total_cost": 3046400
+   },
+   {
+    "version": "FY2019 baseline, programmatic",
+    "street": "Cedar St",
+    "complexity_level": 3,
+    "overhead_centerline_miles": 1.87,
+    "unit_cost_per_mile": 5440000,
+    "total_cost": 10172800
+   },
+   {
+    "version": "FY2023, programmatic",
+    "street": "San Pablo Ave",
+    "complexity_level": null,
+    "overhead_centerline_miles": 0.0,
+    "unit_cost_per_mile": 0,
+    "total_cost": 0
+   },
+   {
+    "version": "FY2023, programmatic",
+    "street": "University Ave",
+    "complexity_level": 3,
+    "overhead_centerline_miles": 0.07,
+    "unit_cost_per_mile": 6364000,
+    "total_cost": 445480
+   },
+   {
+    "version": "FY2023, programmatic",
+    "street": "Ashby Ave",
+    "complexity_level": 5,
+    "overhead_centerline_miles": 2.21,
+    "unit_cost_per_mile": 7955000,
+    "total_cost": 17580550
+   },
+   {
+    "version": "FY2023, programmatic",
+    "street": "Tunnel Road",
+    "complexity_level": 3,
+    "overhead_centerline_miles": 0.6,
+    "unit_cost_per_mile": 6364000,
+    "total_cost": 3818400
+   },
+   {
+    "version": "FY2023, programmatic",
+    "street": "Gilman St",
+    "complexity_level": 5,
+    "overhead_centerline_miles": 1.16,
+    "unit_cost_per_mile": 7955000,
+    "total_cost": 9227800
+   },
+   {
+    "version": "FY2023, programmatic",
+    "street": "Dwight Way",
+    "complexity_level": 4,
+    "overhead_centerline_miles": 2.68,
+    "unit_cost_per_mile": 7160000,
+    "total_cost": 19188800
+   },
+   {
+    "version": "FY2023, programmatic",
+    "street": "Hopkins",
+    "complexity_level": 2,
+    "overhead_centerline_miles": 0.81,
+    "unit_cost_per_mile": 5569000,
+    "total_cost": 4510890
+   },
+   {
+    "version": "FY2023, programmatic",
+    "street": "Alcatraz Ave",
+    "complexity_level": 1,
+    "overhead_centerline_miles": 1.81,
+    "unit_cost_per_mile": 4773000,
+    "total_cost": 8639130
+   },
+   {
+    "version": "FY2023, programmatic",
+    "street": "Claremont Ave",
+    "complexity_level": 1,
+    "overhead_centerline_miles": 0.49,
+    "unit_cost_per_mile": 4773000,
+    "total_cost": 2338770
+   },
+   {
+    "version": "FY2023, programmatic",
+    "street": "Rose",
+    "complexity_level": 2,
+    "overhead_centerline_miles": 0.06,
+    "unit_cost_per_mile": 5569000,
+    "total_cost": 334140
+   },
+   {
+    "version": "FY2023, programmatic",
+    "street": "Marin Ave",
+    "complexity_level": 4,
+    "overhead_centerline_miles": 1.24,
+    "unit_cost_per_mile": 7160000,
+    "total_cost": 8878400
+   },
+   {
+    "version": "FY2023, programmatic",
+    "street": "Spruce St",
+    "complexity_level": 2,
+    "overhead_centerline_miles": 1.76,
+    "unit_cost_per_mile": 5569000,
+    "total_cost": 9801440
+   },
+   {
+    "version": "FY2023, programmatic",
+    "street": "Grizzly Peak",
+    "complexity_level": 2,
+    "overhead_centerline_miles": 1.35,
+    "unit_cost_per_mile": 5569000,
+    "total_cost": 7518150
+   },
+   {
+    "version": "FY2023, programmatic",
+    "street": "Oxford St",
+    "complexity_level": 2,
+    "overhead_centerline_miles": 0.25,
+    "unit_cost_per_mile": 5569000,
+    "total_cost": 1392250
+   },
+   {
+    "version": "FY2023, programmatic",
+    "street": "Sixth St",
+    "complexity_level": 3,
+    "overhead_centerline_miles": 0.56,
+    "unit_cost_per_mile": 6364000,
+    "total_cost": 3563840
+   },
+   {
+    "version": "FY2023, programmatic",
+    "street": "Cedar St",
+    "complexity_level": 3,
+    "overhead_centerline_miles": 1.87,
+    "unit_cost_per_mile": 6364000,
+    "total_cost": 11900680
+   },
+   {
+    "version": "FY2023, traditional capital program",
+    "street": "San Pablo Ave",
+    "complexity_level": null,
+    "overhead_centerline_miles": 0.0,
+    "unit_cost_per_mile": 0,
+    "total_cost": 0
+   },
+   {
+    "version": "FY2023, traditional capital program",
+    "street": "University Ave",
+    "complexity_level": 3,
+    "overhead_centerline_miles": 0.07,
+    "unit_cost_per_mile": 7394000,
+    "total_cost": 517580
+   },
+   {
+    "version": "FY2023, traditional capital program",
+    "street": "Ashby Ave",
+    "complexity_level": 5,
+    "overhead_centerline_miles": 2.21,
+    "unit_cost_per_mile": 9242000,
+    "total_cost": 20424820
+   },
+   {
+    "version": "FY2023, traditional capital program",
+    "street": "Tunnel Road",
+    "complexity_level": 3,
+    "overhead_centerline_miles": 0.6,
+    "unit_cost_per_mile": 7394000,
+    "total_cost": 4436400
+   },
+   {
+    "version": "FY2023, traditional capital program",
+    "street": "Gilman St",
+    "complexity_level": 5,
+    "overhead_centerline_miles": 1.16,
+    "unit_cost_per_mile": 9242000,
+    "total_cost": 10720720
+   },
+   {
+    "version": "FY2023, traditional capital program",
+    "street": "Dwight Way",
+    "complexity_level": 4,
+    "overhead_centerline_miles": 2.68,
+    "unit_cost_per_mile": 8318000,
+    "total_cost": 22292240
+   },
+   {
+    "version": "FY2023, traditional capital program",
+    "street": "Hopkins",
+    "complexity_level": 2,
+    "overhead_centerline_miles": 0.81,
+    "unit_cost_per_mile": 6469000,
+    "total_cost": 5239890
+   },
+   {
+    "version": "FY2023, traditional capital program",
+    "street": "Alcatraz Ave",
+    "complexity_level": 1,
+    "overhead_centerline_miles": 1.81,
+    "unit_cost_per_mile": 5545000,
+    "total_cost": 10036450
+   },
+   {
+    "version": "FY2023, traditional capital program",
+    "street": "Claremont Ave",
+    "complexity_level": 1,
+    "overhead_centerline_miles": 0.49,
+    "unit_cost_per_mile": 5545000,
+    "total_cost": 2717050
+   },
+   {
+    "version": "FY2023, traditional capital program",
+    "street": "Rose",
+    "complexity_level": 2,
+    "overhead_centerline_miles": 0.06,
+    "unit_cost_per_mile": 6469000,
+    "total_cost": 388140
+   },
+   {
+    "version": "FY2023, traditional capital program",
+    "street": "Marin Ave",
+    "complexity_level": 4,
+    "overhead_centerline_miles": 1.24,
+    "unit_cost_per_mile": 8318000,
+    "total_cost": 10314320
+   },
+   {
+    "version": "FY2023, traditional capital program",
+    "street": "Spruce St",
+    "complexity_level": 2,
+    "overhead_centerline_miles": 1.76,
+    "unit_cost_per_mile": 6469000,
+    "total_cost": 11385440
+   },
+   {
+    "version": "FY2023, traditional capital program",
+    "street": "Grizzly Peak",
+    "complexity_level": 2,
+    "overhead_centerline_miles": 1.35,
+    "unit_cost_per_mile": 6469000,
+    "total_cost": 8733150
+   },
+   {
+    "version": "FY2023, traditional capital program",
+    "street": "Oxford St",
+    "complexity_level": 2,
+    "overhead_centerline_miles": 0.25,
+    "unit_cost_per_mile": 6469000,
+    "total_cost": 1617250
+   },
+   {
+    "version": "FY2023, traditional capital program",
+    "street": "Sixth St",
+    "complexity_level": 3,
+    "overhead_centerline_miles": 0.56,
+    "unit_cost_per_mile": 7394000,
+    "total_cost": 4140640
+   },
+   {
+    "version": "FY2023, traditional capital program",
+    "street": "Cedar St",
+    "complexity_level": 3,
+    "overhead_centerline_miles": 1.87,
+    "unit_cost_per_mile": 7394000,
+    "total_cost": 13826780
+   }
+  ],
+  "bellecci_totals": [
+   {
+    "version": "FY2019 baseline, programmatic",
+    "miles": 16.92,
+    "printed_total": 93300000
+   },
+   {
+    "version": "FY2023, programmatic",
+    "miles": 16.92,
+    "printed_total": 109100000
+   },
+   {
+    "version": "FY2023, traditional capital program",
+    "miles": 16.92,
+    "printed_total": 126800000
+   }
+  ]
+ },
+ "beso": {
+  "buildings": 519,
+  "located": 449,
+  "years": {
+   "2021": {
+    "kwh": 81585722.3,
+    "kwh_n": 287,
+    "therms": 3705260.27,
+    "therms_n": 276
+   },
+   "2022": {
+    "kwh": 100303960.4,
+    "kwh_n": 339,
+    "therms": 4300379.609999999,
+    "therms_n": 329
+   },
+   "2023": {
+    "kwh": 116668299.39999999,
+    "kwh_n": 374,
+    "therms": 4855958.9,
+    "therms_n": 360
+   },
+   "2024": {
+    "kwh": 113068312.89999999,
+    "kwh_n": 374,
+    "therms": 4242654.739999999,
+    "therms_n": 354
+   }
+  },
+  "by_type": [
+   {
+    "property_type": "Commercial",
+    "buildings": 186,
+    "floor_area_sqft": 8499893,
+    "electricity_kwh_2024": 69732677.8,
+    "gas_therms_2024": 2287715.44
+   },
+   {
+    "property_type": "Multifamily (5+ Units)",
+    "buildings": 220,
+    "floor_area_sqft": 6920324,
+    "electricity_kwh_2024": 17828172.6,
+    "gas_therms_2024": 1142842.06
+   },
+   {
+    "property_type": "Mixed Use (Comm/MF)",
+    "buildings": 65,
+    "floor_area_sqft": 3283565,
+    "electricity_kwh_2024": 9173927.5,
+    "gas_therms_2024": 322271.31
+   },
+   {
+    "property_type": "Industrial",
+    "buildings": 25,
+    "floor_area_sqft": 1056544,
+    "electricity_kwh_2024": 8153618.899999999,
+    "gas_therms_2024": 177737.69
+   },
+   {
+    "property_type": "Mixed Use (Comm/Ind)",
+    "buildings": 7,
+    "floor_area_sqft": 610058,
+    "electricity_kwh_2024": 5142956.399999999,
+    "gas_therms_2024": 221102.84999999998
+   },
+   {
+    "property_type": "Mixed Use",
+    "buildings": 12,
+    "floor_area_sqft": 603050,
+    "electricity_kwh_2024": 1577409.7,
+    "gas_therms_2024": 36489.729999999996
+   },
+   {
+    "property_type": "Other",
+    "buildings": 1,
+    "floor_area_sqft": 108200,
+    "electricity_kwh_2024": 1112805.4,
+    "gas_therms_2024": 16040.38
+   }
+  ]
+ },
+ "campus_sus": {
+  "ucb": {
+   "rows": [
+    {
+     "institution": "UC Berkeley",
+     "year": 2009,
+     "scope1_net": 144059.0,
+     "scope2": 9048.0,
+     "scope3": 40524.0,
+     "compliance_offsets": null,
+     "eui_kbtu_per_sqft": 179.2,
+     "total": 193631.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2010,
+     "scope1_net": 148164.0,
+     "scope2": 8775.0,
+     "scope3": 42153.0,
+     "compliance_offsets": null,
+     "eui_kbtu_per_sqft": 181.1,
+     "total": 199092.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2011,
+     "scope1_net": 150709.0,
+     "scope2": 6479.0,
+     "scope3": 33574.0,
+     "compliance_offsets": null,
+     "eui_kbtu_per_sqft": 179.8,
+     "total": 190762.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2012,
+     "scope1_net": 146422.0,
+     "scope2": 5837.0,
+     "scope3": 33618.0,
+     "compliance_offsets": null,
+     "eui_kbtu_per_sqft": 176.2,
+     "total": 185877.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2013,
+     "scope1_net": 123962.0,
+     "scope2": 6582.0,
+     "scope3": 35000.0,
+     "compliance_offsets": null,
+     "eui_kbtu_per_sqft": 172.5,
+     "total": 165544.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2014,
+     "scope1_net": 125597.0,
+     "scope2": 6325.0,
+     "scope3": 36422.0,
+     "compliance_offsets": null,
+     "eui_kbtu_per_sqft": 170.1,
+     "total": 168344.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2015,
+     "scope1_net": 141080.0,
+     "scope2": 6191.0,
+     "scope3": 44087.0,
+     "compliance_offsets": null,
+     "eui_kbtu_per_sqft": 172.2,
+     "total": 191358.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2016,
+     "scope1_net": 128354.0,
+     "scope2": 6018.0,
+     "scope3": 41665.0,
+     "compliance_offsets": null,
+     "eui_kbtu_per_sqft": 171.1,
+     "total": 176037.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2017,
+     "scope1_net": 135076.0,
+     "scope2": 4262.0,
+     "scope3": 42290.0,
+     "compliance_offsets": null,
+     "eui_kbtu_per_sqft": 164.8,
+     "total": 181628.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2018,
+     "scope1_net": 128459.0,
+     "scope2": 4720.0,
+     "scope3": 42027.0,
+     "compliance_offsets": 9746.0,
+     "eui_kbtu_per_sqft": 168.3,
+     "total": 175206.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2019,
+     "scope1_net": 135391.0,
+     "scope2": 2320.0,
+     "scope3": 41137.0,
+     "compliance_offsets": 9912.0,
+     "eui_kbtu_per_sqft": 177.5,
+     "total": 178848.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2020,
+     "scope1_net": 125698.0,
+     "scope2": 1981.0,
+     "scope3": 20305.0,
+     "compliance_offsets": 10534.0,
+     "eui_kbtu_per_sqft": 171.0,
+     "total": 147984.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2021,
+     "scope1_net": 121220.0,
+     "scope2": 2900.0,
+     "scope3": 10679.0,
+     "compliance_offsets": 9934.0,
+     "eui_kbtu_per_sqft": 163.0,
+     "total": 134799.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2022,
+     "scope1_net": 132512.0,
+     "scope2": 1629.0,
+     "scope3": 20488.0,
+     "compliance_offsets": 4734.0,
+     "eui_kbtu_per_sqft": 163.7,
+     "total": 154629.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2023,
+     "scope1_net": 135392.0,
+     "scope2": 1227.0,
+     "scope3": 35406.0,
+     "compliance_offsets": 2090.0,
+     "eui_kbtu_per_sqft": 163.0,
+     "total": 172025.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2024,
+     "scope1_net": 125867.0,
+     "scope2": 196.0,
+     "scope3": 32117.0,
+     "compliance_offsets": 2090.0,
+     "eui_kbtu_per_sqft": 157.2,
+     "total": 158180.0
+    }
+   ],
+   "water_gal_per_person": {
+    "Baseline": 20476.0,
+    "2022": 12631.0,
+    "2023": 12366.0,
+    "2024": 11979.0,
+    "2025": 12119.0
+   },
+   "renewable_mwh": {
+    "Off-campus UC Clean Power Program": {
+     "2016": 4594.473659,
+     "2017": 4420.025773,
+     "2018": 4766.574,
+     "2019": 5198.351177,
+     "2020": 7968.658,
+     "2021": 10800.26529,
+     "2022": 13358.75671,
+     "2023": 13974.3891,
+     "2024": 20355.84567
+    },
+    "Off-campus utility programs": {
+     "2016": 0.0,
+     "2017": 0.0,
+     "2018": 3562.777,
+     "2019": 4771.423,
+     "2020": 3578.866,
+     "2021": 2445.952,
+     "2022": 2433.872,
+     "2023": 2609.084,
+     "2024": 2569.085
+    },
+    "On-campus systems": {
+     "2016": 157.81,
+     "2017": 1186.902,
+     "2018": 1236.353,
+     "2019": 1315.262,
+     "2020": 1299.756,
+     "2021": 1310.492,
+     "2022": 1307.946,
+     "2023": 1322.399,
+     "2024": 1238.26
+    }
+   }
+  },
+  "lbnl": {
+   "rows": [
+    {
+     "institution": "Berkeley Lab",
+     "year": 2009,
+     "scope1_net": 9362.0,
+     "scope2": 34174.0,
+     "scope3": 26646.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": null,
+     "total": 70182.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2010,
+     "scope1_net": 10540.0,
+     "scope2": 33341.0,
+     "scope3": 18849.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": null,
+     "total": 62730.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2011,
+     "scope1_net": 11693.0,
+     "scope2": 37317.0,
+     "scope3": 23587.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": null,
+     "total": 72597.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2012,
+     "scope1_net": 11112.0,
+     "scope2": 34923.0,
+     "scope3": 22750.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": null,
+     "total": 68785.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2013,
+     "scope1_net": 9793.0,
+     "scope2": 33776.0,
+     "scope3": 21584.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": null,
+     "total": 65153.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2014,
+     "scope1_net": 9349.0,
+     "scope2": 35329.0,
+     "scope3": 23225.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": null,
+     "total": 67903.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2015,
+     "scope1_net": 8068.0,
+     "scope2": 33850.0,
+     "scope3": 21114.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": 208.5,
+     "total": 63032.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2016,
+     "scope1_net": 9497.0,
+     "scope2": 32086.0,
+     "scope3": 15062.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": 206.6,
+     "total": 56645.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2017,
+     "scope1_net": 9356.0,
+     "scope2": 26750.0,
+     "scope3": 13593.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": 194.6,
+     "total": 49699.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2018,
+     "scope1_net": 9072.0,
+     "scope2": 26991.0,
+     "scope3": 16986.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": 182.8,
+     "total": 53049.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2019,
+     "scope1_net": 8105.0,
+     "scope2": 25899.0,
+     "scope3": 18197.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": 184.5,
+     "total": 52201.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2020,
+     "scope1_net": 7211.0,
+     "scope2": 18988.0,
+     "scope3": 8212.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": 172.5,
+     "total": 34411.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2021,
+     "scope1_net": 7026.0,
+     "scope2": 11352.0,
+     "scope3": 3242.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": 165.5,
+     "total": 21620.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2022,
+     "scope1_net": 7448.0,
+     "scope2": 22622.0,
+     "scope3": 6419.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": 156.0,
+     "total": 36489.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2023,
+     "scope1_net": 8610.0,
+     "scope2": 19273.0,
+     "scope3": 10323.0,
+     "compliance_offsets": null,
+     "eui_kbtu_per_sqft": 163.2,
+     "total": 38206.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2024,
+     "scope1_net": 7899.0,
+     "scope2": 19119.0,
+     "scope3": 10687.0,
+     "compliance_offsets": null,
+     "eui_kbtu_per_sqft": 164.8,
+     "total": 37705.0
+    }
+   ],
+   "water_gal_per_person": {
+    "Baseline": 14694.0,
+    "2022": 9304.0,
+    "2023": 8305.0,
+    "2024": 6632.0,
+    "2025": 8371.0
+   }
+  },
+  "stars": {
+   "rating": "Platinum",
+   "score": 86.76,
+   "valid_through": "April 20, 2028",
+   "submitted": "February 19, 2025"
+  }
+ },
+ "stars2025": {
+  "fields": {
+   "OP-5|Performance year for energy use": "2023",
+   "OP-5|Gross floor area of building space": "1,503,129.29 Square meters",
+   "OP-5|Electricity generated by on-site renewable systems": "1,322.40 Megawatt-hours",
+   "OP-5|Electricity from off-site sources": "46,422.30 Megawatt-hours",
+   "OP-5|Natural gas": "30,014 Megawatt-hours",
+   "OP-5|Heating oil": "400 Megawatt-hours",
+   "OP-5|Total electricity consumption": "47,744.70 Megawatt-hours",
+   "OP-5|Total annual energy consumption": "78,414.00 Megawatt-hours",
+   "OP-5|Annual energy consumption per unit of floor area": "52.17 Kilowatt-hours per square meter",
+   "OP-5|Percentage of energy from renewable sources": "23.18",
+   "OP-6|Performance year for scope 1 and 2 GHG emissions": "2023",
+   "OP-6|Scope 1 GHG emissions from stationary combustion": "134,957 Metric tons of CO2 equivalent",
+   "OP-6|Scope 1 GHG emissions from mobile combustion": "1,676 Metric tons of CO2 equivalent",
+   "OP-6|Scope 1 GHG fugitive emissions": "76 Metric tons of CO2 equivalent",
+   "OP-6|Scope 2 GHG emissions from off-site sources of electricity (market-based)": "1,256 Metric tons of CO2 equivalent",
+   "OP-6|Annual scope 1 and 2 GHG emissions": "137,965 Metric tons of CO2 equivalent",
+   "OP-6|Scope 3 GHG emissions from business travel": "19,913 Metric tons of CO2 equivalent",
+   "OP-6|Scope 3 GHG emissions from commuting": "12,836 Metric tons of CO2 equivalent",
+   "OP-3|Performance year for water use": "2023",
+   "OP-3|Annual potable water use": "2,092,006 Cubic meters",
+   "OP-3|Level of physical water quantity risk for the institution\u2019s main campus": "High",
+   "OP-14|Performance year for commute modal split": "2024",
+   "OP-14|Percentage of students that use more sustainable commuting options": "86.02",
+   "OP-14|Percentage of employees that use more sustainable commuting options": "66.51",
+   "PRE-3|Full-time equivalent student enrollment": "44,578",
+   "PRE-3|Full-time equivalent of employees": "13,678",
+   "PRE-3|Percentage of students that live in campus housing": "21.90"
+  },
+  "stationary_t": 134957.0,
+  "implied_gas_mwh": 745979.781026028,
+  "gas_mwh": 30014.0,
+  "total_mwh": 78414.0,
+  "elec_offsite_mwh": 46422.3,
+  "elec_solar_mwh": 1322.4,
+  "floor_m2": 1503129.29,
+  "water_m3": 2092006.0,
+  "commute_students": 86.02,
+  "commute_employees": 66.51,
+  "housed_pct": 21.9
+ },
+ "fema": [
+  {
+   "program_fy": 1990,
+   "program": "HMGP",
+   "disaster": 845,
+   "project": "DR-0845-0010-R",
+   "subrecipient": "Berkeley Unified School Dist.",
+   "status": "Closed",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 9648000,
+   "federal_share_obligated": 4824000,
+   "date_approved": "1997-01-14",
+   "date_closed": "2000-11-07"
+  },
+  {
+   "program_fy": 1990,
+   "program": "HMGP",
+   "disaster": 845,
+   "project": "DR-0845-0012-R",
+   "subrecipient": "Berkeley",
+   "status": "Closed",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 3106047,
+   "federal_share_obligated": 1397721,
+   "date_approved": "1991-02-21",
+   "date_closed": "1999-08-13"
+  },
+  {
+   "program_fy": 1990,
+   "program": "HMGP",
+   "disaster": 845,
+   "project": "DR-0845-0013-R",
+   "subrecipient": "Berkeley",
+   "status": "Withdrawn",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": null,
+   "federal_share_obligated": null,
+   "date_approved": "",
+   "date_closed": "1996-09-25"
+  },
+  {
+   "program_fy": 1990,
+   "program": "HMGP",
+   "disaster": 845,
+   "project": "DR-0845-0073-R",
+   "subrecipient": "Berkeley",
+   "status": "Not Approved / Denied",
+   "project_type": "201.3: Relocation of Public Structures - Riverine",
+   "project_amount": null,
+   "federal_share_obligated": null,
+   "date_approved": "",
+   "date_closed": "1991-06-11"
+  },
+  {
+   "program_fy": 1990,
+   "program": "HMGP",
+   "disaster": 845,
+   "project": "DR-0845-0092-R",
+   "subrecipient": "Berkeley",
+   "status": "Withdrawn",
+   "project_type": "205.5: Structural Retrofitting/Rehabilitating Private Structures - Seismic",
+   "project_amount": 0,
+   "federal_share_obligated": 0,
+   "date_approved": "1992-02-19",
+   "date_closed": "1994-06-15"
+  },
+  {
+   "program_fy": 1990,
+   "program": "HMGP",
+   "disaster": 845,
+   "project": "DR-0845-0093-R",
+   "subrecipient": "Berkeley",
+   "status": "Closed",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 1273500,
+   "federal_share_obligated": 175000,
+   "date_approved": "1992-02-19",
+   "date_closed": "1995-12-27"
+  },
+  {
+   "program_fy": 1990,
+   "program": "HMGP",
+   "disaster": 845,
+   "project": "DR-0845-0094-R",
+   "subrecipient": "Berkeley Unified School Dist.",
+   "status": "Closed",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 3465028,
+   "federal_share_obligated": 1732514,
+   "date_approved": "1992-04-09",
+   "date_closed": "1996-05-07"
+  },
+  {
+   "program_fy": 1990,
+   "program": "HMGP",
+   "disaster": 845,
+   "project": "DR-0845-0117-R",
+   "subrecipient": "Berkeley",
+   "status": "Closed",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 11105082,
+   "federal_share_obligated": 5552541,
+   "date_approved": "1995-07-18",
+   "date_closed": "2002-05-17"
+  },
+  {
+   "program_fy": 1992,
+   "program": "HMGP",
+   "disaster": 919,
+   "project": "DR-0919-0001-R",
+   "subrecipient": "Berkeley",
+   "status": "Closed",
+   "project_type": "300.2: Vegetation Management - Wildfire",
+   "project_amount": 250000,
+   "federal_share_obligated": 125000,
+   "date_approved": "1992-10-19",
+   "date_closed": "2002-10-25"
+  },
+  {
+   "program_fy": 1992,
+   "program": "HMGP",
+   "disaster": 919,
+   "project": "DR-0919-0010-R",
+   "subrecipient": "Berkeley",
+   "status": "Not Approved / Denied",
+   "project_type": "300.2: Vegetation Management - Wildfire",
+   "project_amount": 0,
+   "federal_share_obligated": 0,
+   "date_approved": "",
+   "date_closed": "1997-05-05"
+  },
+  {
+   "program_fy": 1992,
+   "program": "HMGP",
+   "disaster": 919,
+   "project": "DR-0919-0011-R",
+   "subrecipient": "Berkeley",
+   "status": "Not Approved / Denied",
+   "project_type": "300.2: Vegetation Management - Wildfire",
+   "project_amount": 0,
+   "federal_share_obligated": 0,
+   "date_approved": "",
+   "date_closed": "1997-08-14"
+  },
+  {
+   "program_fy": 1992,
+   "program": "HMGP",
+   "disaster": 919,
+   "project": "DR-0919-0018-R",
+   "subrecipient": "University of California - Berkeley",
+   "status": "Withdrawn",
+   "project_type": "300.2: Vegetation Management - Wildfire",
+   "project_amount": 0,
+   "federal_share_obligated": 0,
+   "date_approved": "",
+   "date_closed": "1997-11-26"
+  },
+  {
+   "program_fy": 1992,
+   "program": "HMGP",
+   "disaster": 919,
+   "project": "DR-0919-0019-R",
+   "subrecipient": "University of California - Berkeley",
+   "status": "Closed",
+   "project_type": "300.2: Vegetation Management - Wildfire",
+   "project_amount": 333500,
+   "federal_share_obligated": 166750,
+   "date_approved": "1998-09-03",
+   "date_closed": "2004-08-13"
+  },
+  {
+   "program_fy": 1992,
+   "program": "HMGP",
+   "disaster": 919,
+   "project": "DR-0919-0027-R",
+   "subrecipient": "Berkeley",
+   "status": "Closed",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 1257694,
+   "federal_share_obligated": 628847,
+   "date_approved": "1998-09-10",
+   "date_closed": "2002-05-31"
+  },
+  {
+   "program_fy": 1992,
+   "program": "HMGP",
+   "disaster": 935,
+   "project": "DR-0935-0011-R",
+   "subrecipient": "Berkeley",
+   "status": "Closed",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 398458,
+   "federal_share_obligated": 199229,
+   "date_approved": "1998-06-30",
+   "date_closed": "2002-05-17"
+  },
+  {
+   "program_fy": 1993,
+   "program": "HMGP",
+   "disaster": 979,
+   "project": "DR-0979-0033-R",
+   "subrecipient": "Berkeley",
+   "status": "Closed",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 2904070,
+   "federal_share_obligated": 1452035,
+   "date_approved": "1998-05-29",
+   "date_closed": "2002-05-17"
+  },
+  {
+   "program_fy": 1994,
+   "program": "HMGP",
+   "disaster": 1005,
+   "project": "DR-1005-96-R",
+   "subrecipient": "Berkeley",
+   "status": "Closed",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 396885,
+   "federal_share_obligated": 297664,
+   "date_approved": "1998-09-09",
+   "date_closed": "2002-05-17"
+  },
+  {
+   "program_fy": 1994,
+   "program": "HMGP",
+   "disaster": 1008,
+   "project": "DR-1008-6001-R",
+   "subrecipient": "Berkeley",
+   "status": "Closed",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 11656201,
+   "federal_share_obligated": 8742150,
+   "date_approved": "1998-09-22",
+   "date_closed": "2002-05-17"
+  },
+  {
+   "program_fy": 1994,
+   "program": "HMGP",
+   "disaster": 1008,
+   "project": "DR-1008-6029-R",
+   "subrecipient": "University of California - Berkeley",
+   "status": "Void",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 0,
+   "federal_share_obligated": 0,
+   "date_approved": "1998-09-22",
+   "date_closed": "1998-10-26"
+  },
+  {
+   "program_fy": 1994,
+   "program": "HMGP",
+   "disaster": 1008,
+   "project": "DR-1008-6030-R",
+   "subrecipient": "University of California - Berkeley",
+   "status": "Void",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 0,
+   "federal_share_obligated": 0,
+   "date_approved": "1998-09-22",
+   "date_closed": "1998-10-26"
+  },
+  {
+   "program_fy": 1994,
+   "program": "HMGP",
+   "disaster": 1008,
+   "project": "DR-1008-6031-R",
+   "subrecipient": "University of California - Berkeley",
+   "status": "Void",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 0,
+   "federal_share_obligated": 0,
+   "date_approved": "1998-09-22",
+   "date_closed": "1998-10-26"
+  },
+  {
+   "program_fy": 1994,
+   "program": "HMGP",
+   "disaster": 1008,
+   "project": "DR-1008-6153-R",
+   "subrecipient": "University of California - Berkeley",
+   "status": "Withdrawn",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 0,
+   "federal_share_obligated": 0,
+   "date_approved": "1998-09-22",
+   "date_closed": "1998-10-26"
+  },
+  {
+   "program_fy": 1994,
+   "program": "HMGP",
+   "disaster": 1008,
+   "project": "DR-1008-6529-R",
+   "subrecipient": "University of California, Berkeley",
+   "status": "Closed",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 24648640,
+   "federal_share_obligated": 17154436,
+   "date_approved": "1998-10-30",
+   "date_closed": "2004-10-18"
+  },
+  {
+   "program_fy": 1994,
+   "program": "HMGP",
+   "disaster": 1008,
+   "project": "DR-1008-6530-R",
+   "subrecipient": "University of California, Berkeley",
+   "status": "Closed",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 9078085,
+   "federal_share_obligated": 6808564,
+   "date_approved": "1998-10-30",
+   "date_closed": "2003-07-23"
+  },
+  {
+   "program_fy": 1994,
+   "program": "HMGP",
+   "disaster": 1008,
+   "project": "DR-1008-6531-R",
+   "subrecipient": "University of California, Berkeley",
+   "status": "Closed",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 15182000,
+   "federal_share_obligated": 9849000,
+   "date_approved": "1998-11-03",
+   "date_closed": "2004-01-09"
+  },
+  {
+   "program_fy": 1994,
+   "program": "HMGP",
+   "disaster": 1008,
+   "project": "DR-1008-6553-R",
+   "subrecipient": "University of California, Berkeley",
+   "status": "Closed",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 23830000,
+   "federal_share_obligated": 16747500,
+   "date_approved": "1998-11-02",
+   "date_closed": "2004-01-09"
+  },
+  {
+   "program_fy": 1998,
+   "program": "HMGP",
+   "disaster": 1203,
+   "project": "DR-1203-116-R",
+   "subrecipient": "Berkeley, City of",
+   "status": "Withdrawn",
+   "project_type": "200.1: Acquisition of Private Real Property (Structures and Land) - Riverine",
+   "project_amount": 0,
+   "federal_share_obligated": 0,
+   "date_approved": "1998-10-30",
+   "date_closed": "2000-03-14"
+  },
+  {
+   "program_fy": 2003,
+   "program": "PDM",
+   "disaster": null,
+   "project": "PDMC-PJ-09-CA-2003-003",
+   "subrecipient": "University of California, Berkeley",
+   "status": "Not Approved / Denied",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 7584376,
+   "federal_share_obligated": null,
+   "date_approved": "",
+   "date_closed": ""
+  },
+  {
+   "program_fy": 2003,
+   "program": "PDM",
+   "disaster": null,
+   "project": "PDMC-PJ-09-CA-2003-011",
+   "subrecipient": "City of Berkeley",
+   "status": "Not Approved / Denied",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 3998265,
+   "federal_share_obligated": null,
+   "date_approved": "",
+   "date_closed": ""
+  },
+  {
+   "program_fy": 2003,
+   "program": "PDM",
+   "disaster": null,
+   "project": "PDMC-PL-09-CA-2003-012",
+   "subrecipient": "University of California, Berkeley department of Capital Projects",
+   "status": "Closed",
+   "project_type": "900.1: Hazard Identification; \n91.1: Local Multihazard Mitigation Plan",
+   "project_amount": 382740,
+   "federal_share_obligated": 287055,
+   "date_approved": "2004-05-13",
+   "date_closed": "2019-12-10"
+  },
+  {
+   "program_fy": 2004,
+   "program": "PDM",
+   "disaster": 9422,
+   "project": "DR-9422-0001-R",
+   "subrecipient": "University of California - Berkeley",
+   "status": "Not Approved / Denied",
+   "project_type": "205.4: Non Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 325322,
+   "federal_share_obligated": 0,
+   "date_approved": "",
+   "date_closed": "2004-07-01"
+  },
+  {
+   "program_fy": 2004,
+   "program": "PDM",
+   "disaster": 9422,
+   "project": "DR-9422-0002-R",
+   "subrecipient": "University of California - Berkeley",
+   "status": "Not Approved / Denied",
+   "project_type": "300.2: Vegetation Management - Wildfire",
+   "project_amount": 55868,
+   "federal_share_obligated": 0,
+   "date_approved": "",
+   "date_closed": "2004-07-01"
+  },
+  {
+   "program_fy": 2004,
+   "program": "PDM",
+   "disaster": 9422,
+   "project": "DR-9422-F002-F",
+   "subrecipient": "University of California - Berkeley",
+   "status": "Closed",
+   "project_type": "90.4: Mitigation Plan - Local Multihazard Mitigation Plan",
+   "project_amount": 89467,
+   "federal_share_obligated": 67100,
+   "date_approved": "2004-07-01",
+   "date_closed": "2004-07-01"
+  },
+  {
+   "program_fy": 2004,
+   "program": "PDM",
+   "disaster": 9422,
+   "project": "DR-9422-F003-F",
+   "subrecipient": "University of California - Berkeley",
+   "status": "Closed",
+   "project_type": "90.4: Mitigation Plan - Local Multihazard Mitigation Plan",
+   "project_amount": 139940,
+   "federal_share_obligated": 99957,
+   "date_approved": "2004-07-01",
+   "date_closed": ""
+  },
+  {
+   "program_fy": 2004,
+   "program": "PDM",
+   "disaster": 9422,
+   "project": "DR-9422-M001-M",
+   "subrecipient": "University of California - Berkeley",
+   "status": "Closed",
+   "project_type": "700.1: Management Costs - Salaries",
+   "project_amount": 35608,
+   "federal_share_obligated": 26706,
+   "date_approved": "2004-07-01",
+   "date_closed": ""
+  },
+  {
+   "program_fy": 2005,
+   "program": "PDM",
+   "disaster": null,
+   "project": "PDMC-PJ-09-CA-2005-073",
+   "subrecipient": "City of Berkeley",
+   "status": "Closed",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 3850368,
+   "federal_share_obligated": 2887735,
+   "date_approved": "2006-07-07",
+   "date_closed": "2018-04-27"
+  },
+  {
+   "program_fy": 2008,
+   "program": "PDM",
+   "disaster": null,
+   "project": "PDMC-PJ-09-CA-2008-023",
+   "subrecipient": "Capital Projects, University of California, Berkeley",
+   "status": "Not Selected",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 7483000,
+   "federal_share_obligated": null,
+   "date_approved": "",
+   "date_closed": ""
+  },
+  {
+   "program_fy": 2009,
+   "program": "LPDM",
+   "disaster": null,
+   "project": "LPDM-PJ-09-CA-2009-008",
+   "subrecipient": "City of Berkeley",
+   "status": "Closed",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 1441319.9,
+   "federal_share_obligated": 727499.9,
+   "date_approved": "2014-12-30",
+   "date_closed": "2018-01-15"
+  },
+  {
+   "program_fy": 2009,
+   "program": "LPDM",
+   "disaster": null,
+   "project": "LPDM-PL-09-CA-2009-007",
+   "subrecipient": "City of Berkeley",
+   "status": "Closed",
+   "project_type": "91.1: Local Multihazard Mitigation Plan",
+   "project_amount": 20020,
+   "federal_share_obligated": 15015,
+   "date_approved": "2010-06-28",
+   "date_closed": "2014-11-25"
+  },
+  {
+   "program_fy": 2015,
+   "program": "HMGP",
+   "disaster": 4240,
+   "project": "DR-4240-0037-R",
+   "subrecipient": "Berkeley",
+   "status": "Closed",
+   "project_type": "205.6: Structural Retrofitting/Rehabilitating Public Structures - Seismic",
+   "project_amount": 2500000,
+   "federal_share_obligated": 1875000,
+   "date_approved": "2017-01-13",
+   "date_closed": "2021-01-04"
+  },
+  {
+   "program_fy": 2015,
+   "program": "HMGP",
+   "disaster": 4240,
+   "project": "DR-4240-0049-R",
+   "subrecipient": "Berkeley",
+   "status": "Closed",
+   "project_type": "205.5: Structural Retrofitting/Rehabilitating Private Structures - Seismic",
+   "project_amount": 3120489.44,
+   "federal_share_obligated": 2340367.08,
+   "date_approved": "2022-04-05",
+   "date_closed": "2022-04-05"
+  },
+  {
+   "program_fy": 2018,
+   "program": "HMGP",
+   "disaster": 4344,
+   "project": "DR-4344-0026-R",
+   "subrecipient": "Berkeley",
+   "status": "Approved",
+   "project_type": "205.5: Structural Retrofitting/Rehabilitating Private Structures - Seismic",
+   "project_amount": 6000000,
+   "federal_share_obligated": 4500000,
+   "date_approved": "2023-03-06",
+   "date_closed": ""
+  },
+  {
+   "program_fy": 2019,
+   "program": "HMGP",
+   "disaster": 4407,
+   "project": "DR-4407-0090",
+   "subrecipient": "Berkeley",
+   "status": "Pending",
+   "project_type": "205.5: Structural Retrofitting/Rehabilitating Private Structures - Seismic",
+   "project_amount": 4000000,
+   "federal_share_obligated": null,
+   "date_approved": "",
+   "date_closed": ""
+  },
+  {
+   "program_fy": 2020,
+   "program": "HMGP",
+   "disaster": 4558,
+   "project": "DR-4558-0050-R",
+   "subrecipient": "Berkeley",
+   "status": "Approved",
+   "project_type": "800.1: Miscellaneous",
+   "project_amount": 383000,
+   "federal_share_obligated": 287250,
+   "date_approved": "2022-06-07",
+   "date_closed": ""
+  },
+  {
+   "program_fy": 2020,
+   "program": "HMGP",
+   "disaster": 4558,
+   "project": "DR-4558-0066-R",
+   "subrecipient": "Berkeley",
+   "status": "Withdrawn",
+   "project_type": "800.1: Miscellaneous",
+   "project_amount": 317000,
+   "federal_share_obligated": 0,
+   "date_approved": "2023-01-25",
+   "date_closed": ""
+  },
+  {
+   "program_fy": 2023,
+   "program": "HMGP",
+   "disaster": 4683,
+   "project": "DR-4683-0087-R",
+   "subrecipient": "Berkeley",
+   "status": "Pending",
+   "project_type": "205.5: Structural Retrofitting/Rehabilitating Private Structures - Seismic",
+   "project_amount": 5000000,
+   "federal_share_obligated": null,
+   "date_approved": "",
+   "date_closed": ""
+  },
+  {
+   "program_fy": 2023,
+   "program": "HMGP",
+   "disaster": 4699,
+   "project": "DR-4699-0014",
+   "subrecipient": "Berkeley",
+   "status": "Closed",
+   "project_type": "205.5: Structural Retrofitting/Rehabilitating Private Structures - Seismic",
+   "project_amount": 5000000,
+   "federal_share_obligated": null,
+   "date_approved": "",
+   "date_closed": "2024-12-12"
+  },
+  {
+   "program_fy": 2025,
+   "program": "HMGP",
+   "disaster": 4856,
+   "project": "DR-4856-0078",
+   "subrecipient": "Hillside Association of Berkeley",
+   "status": "Pending",
+   "project_type": "300.2: Vegetation Management - Wildfire",
+   "project_amount": 817040,
+   "federal_share_obligated": null,
+   "date_approved": "",
+   "date_closed": ""
+  },
+  {
+   "program_fy": 2025,
+   "program": "HMGP",
+   "disaster": 4856,
+   "project": "DR-4856-0083-R",
+   "subrecipient": "Berkeley",
+   "status": "Pending",
+   "project_type": "205.1: Retrofitting Private Structures - Wildfire",
+   "project_amount": 8000000,
+   "federal_share_obligated": null,
+   "date_approved": "",
+   "date_closed": ""
+  },
+  {
+   "program_fy": 2025,
+   "program": "HMGP",
+   "disaster": 5545,
+   "project": "DR-5545-0013",
+   "subrecipient": "Hillside Association of Berkeley",
+   "status": "Pending",
+   "project_type": "300.2: Vegetation Management - Wildfire",
+   "project_amount": 817040,
+   "federal_share_obligated": null,
+   "date_approved": "",
+   "date_closed": ""
+  },
+  {
+   "program_fy": 2025,
+   "program": "HMGP",
+   "disaster": 5545,
+   "project": "DR-5545-0016",
+   "subrecipient": "Berkeley",
+   "status": "Pending",
+   "project_type": "205.1: Retrofitting Private Structures - Wildfire",
+   "project_amount": 8000000,
+   "federal_share_obligated": null,
+   "date_approved": "",
+   "date_closed": ""
+  }
+ ],
+ "capital": {
+  "rows": [
+   {
+    "category": "Parks, Park Buildings, Pools, Waterfront, and Camps",
+    "available_5yr": 22025000,
+    "need": 281544000,
+    "unfunded_fy2027": 285203360,
+    "unfunded_fy2031": 317380325
+   },
+   {
+    "category": "Public Buildings",
+    "available_5yr": 4500000,
+    "need": 330400000,
+    "unfunded_fy2027": 342680000,
+    "unfunded_fy2031": 396912411
+   },
+   {
+    "category": "Sidewalks & Pathways",
+    "available_5yr": 22425000,
+    "need": 66000000,
+    "unfunded_fy2027": 60760266,
+    "unfunded_fy2031": 54662494
+   },
+   {
+    "category": "Streets & Roads",
+    "available_5yr": 136376508,
+    "need": 263120000,
+    "unfunded_fy2027": 245303142,
+    "unfunded_fy2031": 166962795
+   },
+   {
+    "category": "Sewers",
+    "available_5yr": 119920000,
+    "need": 138000000,
+    "unfunded_fy2027": 117364000,
+    "unfunded_fy2031": 32670743
+   },
+   {
+    "category": "Storm Water & Green Infrastructure",
+    "available_5yr": 17305000,
+    "need": 322500000,
+    "unfunded_fy2027": 332638800,
+    "unfunded_fy2031": 372586542
+   },
+   {
+    "category": "Traffic Signals & Parking Infrastructure",
+    "available_5yr": 2000000,
+    "need": 21750000,
+    "unfunded_fy2027": 22204000,
+    "unfunded_fy2031": 24409010
+   },
+   {
+    "category": "Street Lights",
+    "available_5yr": 1455000,
+    "need": 5678000,
+    "unfunded_fy2027": 5749536,
+    "unfunded_fy2031": 5272042
+   },
+   {
+    "category": "Undergrounding",
+    "available_5yr": 0,
+    "need": 124500000,
+    "unfunded_fy2027": 129480000,
+    "unfunded_fy2031": 151473286
+   },
+   {
+    "category": "Bike & Ped Projects",
+    "available_5yr": 53668733,
+    "need": 163089980,
+    "unfunded_fy2027": 162331680,
+    "unfunded_fy2031": 137840399
+   },
+   {
+    "category": "Transit Projects",
+    "available_5yr": 23871560,
+    "need": 59617792,
+    "unfunded_fy2027": 55797454,
+    "unfunded_fy2031": 44675071
+   },
+   {
+    "category": "Vets & Old City Hall",
+    "available_5yr": 0,
+    "need": 197000000,
+    "unfunded_fy2027": 204880000,
+    "unfunded_fy2031": 239680622
+   },
+   {
+    "category": "Transfer Station",
+    "available_5yr": 1850000,
+    "need": 120000000,
+    "unfunded_fy2027": 123396000,
+    "unfunded_fy2031": 144940796
+   },
+   {
+    "category": "IT-Applications",
+    "available_5yr": 150000,
+    "need": 5350000,
+    "unfunded_fy2027": 5885000,
+    "unfunded_fy2031": 8396614
+   },
+   {
+    "category": "IT-Infrastructure",
+    "available_5yr": 200000,
+    "need": 16275000,
+    "unfunded_fy2027": 17172000,
+    "unfunded_fy2031": 21521445
+   },
+   {
+    "category": "IT-Security",
+    "available_5yr": 940000,
+    "need": 995000,
+    "unfunded_fy2027": 588000,
+    "unfunded_fy2031": 185675
+   }
+  ],
+  "total": {
+   "category": "0",
+   "available_5yr": 406696801,
+   "need": 2115819772,
+   "unfunded_fy2027": 2111433238,
+   "unfunded_fy2031": 2119570270
+  }
+ },
+ "business": {
+  "licenses": 13004,
+  "located": 8203,
+  "by_type": [
+   {
+    "type": "Construction or Contractor",
+    "licenses": 3303,
+    "located_in_berkeley": 142
+   },
+   {
+    "type": "Rental of Real Property",
+    "licenses": 3176,
+    "located_in_berkeley": 3119
+   },
+   {
+    "type": "Professional SemiProfessional",
+    "licenses": 2765,
+    "located_in_berkeley": 2085
+   },
+   {
+    "type": "Retail Trade",
+    "licenses": 1271,
+    "located_in_berkeley": 1098
+   },
+   {
+    "type": "Business Personal Repair Svs",
+    "licenses": 1100,
+    "located_in_berkeley": 687
+   },
+   {
+    "type": "Non Profit Organizations",
+    "licenses": 639,
+    "located_in_berkeley": 525
+   },
+   {
+    "type": "Entertainment Recreation",
+    "licenses": 248,
+    "located_in_berkeley": 185
+   },
+   {
+    "type": "Manufacturing",
+    "licenses": 206,
+    "located_in_berkeley": 172
+   },
+   {
+    "type": "Wholesale Trade",
+    "licenses": 122,
+    "located_in_berkeley": 58
+   },
+   {
+    "type": "Massage",
+    "licenses": 48,
+    "located_in_berkeley": 42
+   },
+   {
+    "type": "Administrative Headquarters",
+    "licenses": 42,
+    "located_in_berkeley": 40
+   },
+   {
+    "type": "Grocer",
+    "licenses": 32,
+    "located_in_berkeley": 29
+   },
+   {
+    "type": "Street Vendors",
+    "licenses": 16,
+    "located_in_berkeley": 0
+   },
+   {
+    "type": "Auto Vehicle For Hire",
+    "licenses": 13,
+    "located_in_berkeley": 3
+   },
+   {
+    "type": "Motor Vehicle Sales",
+    "licenses": 12,
+    "located_in_berkeley": 9
+   },
+   {
+    "type": "Cannabis",
+    "licenses": 10,
+    "located_in_berkeley": 9
+   },
+   {
+    "type": "Recycling",
+    "licenses": 1,
+    "located_in_berkeley": 0
+   }
+  ],
+  "by_hood": [
+   {
+    "neighborhood": "Central Berkeley",
+    "all_businesses": 1499
+   },
+   {
+    "neighborhood": "South Berkeley",
+    "all_businesses": 1010
+   },
+   {
+    "neighborhood": "Southwest Berkeley",
+    "all_businesses": 843
+   },
+   {
+    "neighborhood": "Elmwood District",
+    "all_businesses": 825
+   },
+   {
+    "neighborhood": "North Berkeley",
+    "all_businesses": 504
+   },
+   {
+    "neighborhood": "Le Conte",
+    "all_businesses": 478
+   },
+   {
+    "neighborhood": "Northwest Berkeley",
+    "all_businesses": 418
+   },
+   {
+    "neighborhood": "Southside",
+    "all_businesses": 381
+   },
+   {
+    "neighborhood": "Upper North Berkeley",
+    "all_businesses": 273
+   },
+   {
+    "neighborhood": "Northside",
+    "all_businesses": 228
+   },
+   {
+    "neighborhood": "Westbrae",
+    "all_businesses": 218
+   },
+   {
+    "neighborhood": "Thousand Oaks",
+    "all_businesses": 212
+   }
+  ],
+  "top_naics": [
+   [
+    "Offices of Mental Health Practitioners (except Physicians)",
+    328
+   ],
+   [
+    "Full-Service Restaurants",
+    177
+   ],
+   [
+    "Limited-Service Restaurants",
+    167
+   ],
+   [
+    "Beauty Salons",
+    165
+   ],
+   [
+    "Architectural Services",
+    116
+   ],
+   [
+    "Offices of Lawyers",
+    106
+   ],
+   [
+    "Other Scientific and Technical Consulting Services",
+    97
+   ],
+   [
+    "Offices of All Other Miscellaneous Health Practitioners",
+    96
+   ],
+   [
+    "Administrative Management and General Management Consulting Services",
+    89
+   ],
+   [
+    "Graphic Design Services",
+    77
+   ],
+   [
+    "Other Management Consulting Services",
+    72
+   ],
+   [
+    "Offices of Physicians (except Mental Health Specialists)",
+    70
+   ],
+   [
+    "Offices of Dentists",
+    68
+   ],
+   [
+    "All Other Personal Services",
+    62
+   ],
+   [
+    "Other Personal Care Services",
+    57
+   ]
+  ],
+  "ownership": {
+   "Sole Ownership": 5034,
+   "Corporation": 4838,
+   "LLC": 2360,
+   "Partnership": 578,
+   "": 140,
+   "Cooperative Corporation": 32,
+   "LLP/LP": 22
+  }
+ },
+ "dmv_trend": {
+  "2021": {
+   "total": 64059,
+   "plug_in": 3985,
+   "battery_electric": 2357
+  },
+  "2026": {
+   "total": 62961,
+   "plug_in": 9492,
+   "battery_electric": 6898
+  }
+ },
+ "files": [
+  {
+   "file": "dof_e5_berkeley_2020_2026.csv",
+   "grain": "city, by year",
+   "rows": 7,
+   "description": "Population, household and group-quarters population, housing units by type, occupancy, vacancy and persons per household, January 1 of each year (April 1 for 2020)."
+  },
+  {
+   "file": "acs_city_2024_1yr_all_columns.csv",
+   "grain": "city",
+   "rows": 289,
+   "description": "Every column of the 24 ACS tables used, Berkeley city, ACS 2024 1-year, with margins of error."
+  },
+  {
+   "file": "acs_tract_2020_2024_5yr.csv",
+   "grain": "census tract (GEOID)",
+   "rows": 35,
+   "description": "35 tracts within Berkeley: population, tenure, income, age, cars, rents, rent burden, commute mode, housing type and age, race/ethnicity, education, poverty (ACS 2024 5-year)."
+  },
+  {
+   "file": "berkeley_tracts.geojson",
+   "grain": "census tract polygons",
+   "rows": 35,
+   "description": "TIGER 2024 tract boundaries with every indicator above, ready to map."
+  },
+  {
+   "file": "acs_blockgroup_2020_2024_5yr.csv",
+   "grain": "census blockgroup (GEOID)",
+   "rows": 100,
+   "description": "100 blockgroups within Berkeley: population, tenure, income, age, cars, rents, rent burden, commute mode, housing type and age, race/ethnicity, education, poverty (ACS 2024 5-year)."
+  },
+  {
+   "file": "berkeley_blockgroups.geojson",
+   "grain": "census blockgroup polygons",
+   "rows": 100,
+   "description": "TIGER 2024 blockgroup boundaries with every indicator above, ready to map."
+  },
+  {
+   "file": "lodes_2023_inflow_by_home_place.csv",
+   "grain": "place (city or unincorporated county)",
+   "rows": 1022,
+   "description": "People who work in Berkeley and live elsewhere, by where they live."
+  },
+  {
+   "file": "lodes_2023_outflow_by_work_place.csv",
+   "grain": "place (city or unincorporated county)",
+   "rows": 591,
+   "description": "Berkeley residents who work elsewhere in California, by where they work."
+  },
+  {
+   "file": "lodes_2023_jobs_by_block.csv",
+   "grain": "census block (with internal-point lat/lon)",
+   "rows": 1075,
+   "description": "Jobs located in each Berkeley census block, by earnings band and industry sector."
+  },
+  {
+   "file": "lodes_2023_by_blockgroup.csv",
+   "grain": "census block group (GEOID)",
+   "rows": 99,
+   "description": "Jobs located in, and employed residents living in, each block group."
+  },
+  {
+   "file": "dmv_2026_by_zip_fuel_duty.csv",
+   "grain": "ZIP code",
+   "rows": 110,
+   "description": "Registered vehicles by ZIP code, fuel type and light/heavy duty (DMV, as of 12/31/2025)."
+  },
+  {
+   "file": "dmv_2026_by_zip.csv",
+   "grain": "ZIP code",
+   "rows": 9,
+   "description": "Registered vehicles by ZIP code and fuel type, with totals."
+  },
+  {
+   "file": "assessor_by_usecode.csv",
+   "grain": "County use code",
+   "rows": 117,
+   "description": "Parcels, exempt parcels, land, improvement and net taxable value by County use code (labels not published in machine-readable form)."
+  },
+  {
+   "file": "assessor_by_blockgroup.csv",
+   "grain": "census block group (GEOID)",
+   "rows": 99,
+   "description": "Parcels and assessed value: land, buildings, net taxable, exempt parcels."
+  },
+  {
+   "file": "assessor_by_neighborhood.csv",
+   "grain": "neighborhood (City boundaries)",
+   "rows": 24,
+   "description": "Parcels and assessed value: land, buildings, net taxable, exempt parcels."
+  },
+  {
+   "file": "assessor_by_fire_zone.csv",
+   "grain": "City hill fire zone (0-3)",
+   "rows": 4,
+   "description": "Parcels and assessed value: land, buildings, net taxable, exempt parcels."
+  },
+  {
+   "file": "water_mains_by_install_decade.csv",
+   "grain": "city",
+   "rows": 16,
+   "description": "EBMUD water mains in Berkeley, miles by decade installed."
+  },
+  {
+   "file": "water_mains_by_diameter.csv",
+   "grain": "city",
+   "rows": 16,
+   "description": "EBMUD water mains in Berkeley, miles by nominal diameter (inches)."
+  },
+  {
+   "file": "sewer_mains_by_material.csv",
+   "grain": "city",
+   "rows": 37,
+   "description": "City sanitary sewer mains by pipe material: miles, segments, and the City's planning cost."
+  },
+  {
+   "file": "sewer_mains_by_diameter.csv",
+   "grain": "city",
+   "rows": 26,
+   "description": "City sanitary sewer mains, miles by diameter (inches)."
+  },
+  {
+   "file": "storm_drains_by_material.csv",
+   "grain": "city",
+   "rows": 25,
+   "description": "City storm drain mains, miles by material."
+  },
+  {
+   "file": "streetlights_by_pole_material.csv",
+   "grain": "city",
+   "rows": 5,
+   "description": "City streetlights by the material of the pole they hang on (wood = PG&E/AT&T joint-use poles)."
+  },
+  {
+   "file": "infrastructure_by_blockgroup.csv",
+   "grain": "census block group (GEOID)",
+   "rows": 99,
+   "description": "Miles of water main (and pre-1940 miles, median install year), sewer main, storm drain, and wood utility poles carrying a streetlight, in each block group."
+  },
+  {
+   "file": "infrastructure_by_neighborhood.csv",
+   "grain": "neighborhood (City boundaries)",
+   "rows": 24,
+   "description": "The same measures by neighborhood."
+  },
+  {
+   "file": "wood_pole_lines_traced.geojson",
+   "grain": "pole-to-pole link (line)",
+   "rows": 4086,
+   "description": "Links between neighboring lit wood utility poles (spans up to 250 ft): the traced overhead pole lines. A floor: poles without a streetlight are not in the public data."
+  },
+  {
+   "file": "evacuation_clearance_times_kld_2025.csv",
+   "grain": "evacuation region (KLD R01-R14)",
+   "rows": 21,
+   "description": "Hours:minutes to clear each region, six scenarios (KLD Table 7-4; 90th-percentile vehicle unless flagged 100th)."
+  },
+  {
+   "file": "evacuation_population_by_area_kld_2025.csv",
+   "grain": "KLD study area",
+   "rows": 7,
+   "description": "Permanent residents (2024, extrapolated) and resident vehicles by area (KLD Table 3-4; excludes students in dorms)."
+  },
+  {
+   "file": "undergrounding_segments_harris_2016.csv",
+   "grain": "street segment (street, from, to)",
+   "rows": 191,
+   "description": "Every arterial and collector street segment: already undergrounded or overhead, with length, three 1-5 impact ratings and the planning-level cost to underground (2016 dollars)."
+  },
+  {
+   "file": "undergrounding_evacuation_routes_bellecci_2019.csv",
+   "grain": "street (evacuation route)",
+   "rows": 48,
+   "description": "Overhead miles, construction complexity (1-5), cost per mile and total cost to underground each evacuation route, in three versions: FY2019 baseline, FY2023 programmatic, FY2023 capital program."
+  },
+  {
+   "file": "beso_large_buildings_energy.csv",
+   "grain": "building (address; lat/lon from the Assessor parcel)",
+   "rows": 519,
+   "description": "Every building in the City's Building Emissions Saving Ordinance data: type, floor area, electricity (kWh) and gas (therms) 2021-2024, ENERGY STAR score and energy intensity."
+  },
+  {
+   "file": "beso_by_property_type.csv",
+   "grain": "building type",
+   "rows": 7,
+   "description": "2024 electricity and gas by building type."
+  },
+  {
+   "file": "campus_lab_emissions_energy_2009_2024.csv",
+   "grain": "institution \u00d7 year",
+   "rows": 32,
+   "description": "UC Berkeley and Berkeley Lab greenhouse-gas emissions by scope (metric tons CO2e; Scope 1 net of compliance offsets) and energy use intensity (kBtu per sq ft), from the UC Annual Report on Sustainable Practices 2025."
+  },
+  {
+   "file": "stars_2025_ucb_operations.csv",
+   "grain": "credit field",
+   "rows": 27,
+   "description": "UC Berkeley 2025 AASHE STARS report, operations fields as submitted (performance year 2023 unless stated)."
+  },
+  {
+   "file": "fema_hazard_mitigation_berkeley.csv",
+   "grain": "grant application",
+   "rows": 51,
+   "description": "Every FEMA hazard-mitigation grant application with a Berkeley, California subrecipient since 1990: program, disaster, project type, amount, status and dates (OpenFEMA)."
+  },
+  {
+   "file": "city_capital_needs_fy2027_2031.csv",
+   "grain": "capital category",
+   "rows": 17,
+   "description": "The City's own capital and maintenance need, funding available over five years, and unfunded capital, by category (FY2027-2031 Capital Improvement Program, adopted June 23, 2026)."
+  },
+  {
+   "file": "business_licenses_by_type.csv",
+   "grain": "license type",
+   "rows": 17,
+   "description": "Active City business licenses by type, and how many sit on a Berkeley parcel (November 2025)."
+  },
+  {
+   "file": "businesses_by_neighborhood.csv",
+   "grain": "neighborhood (City boundaries)",
+   "rows": 24,
+   "description": "Licensed businesses located on a Berkeley parcel, by neighborhood and type (rental-property licenses excluded)."
+  },
+  {
+   "file": "businesses_by_blockgroup.csv",
+   "grain": "census block group (GEOID)",
+   "rows": 99,
+   "description": "Licensed businesses located in each block group (rental-property licenses excluded)."
+  }
+ ],
+ "sources_manifest": {
+  "acs/city_0.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B01003,B01001,B25003,B25008,B26001&geo_ids=16000US0606000",
+   "fetched_at": "2026-10-01T10:32:26",
+   "sha256": "787390c2a924f6a92c3fe9a08a8785cf49d2a69b8eb31223f9b6b6f505f7a4e5"
+  },
+  "acs/city_1.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B19001,B19013,B19301,B17021&geo_ids=16000US0606000",
+   "fetched_at": "2026-10-01T10:32:26",
+   "sha256": "bda6ddd5ee70cdb03f05e922d323844e96e092032535f3f0273b5cb668387b87"
+  },
+  "acs/city_2.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25044,B08301,B08303&geo_ids=16000US0606000",
+   "fetched_at": "2026-10-01T10:32:26",
+   "sha256": "43c49a3c922bbd202aec58ea6b9acbbe8bf823480e0f3c8d2200ea2ce30ccbfb"
+  },
+  "acs/city_3.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25001,B25004,B25024,B25034,B25041&geo_ids=16000US0606000",
+   "fetched_at": "2026-10-01T10:32:26",
+   "sha256": "c32092383007f35f24a2ba73651b6a9a15950f02f71fabf25e69d2c316c388bf"
+  },
+  "acs/city_4.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25064,B25077,B25070,B25091&geo_ids=16000US0606000",
+   "fetched_at": "2026-10-01T10:32:26",
+   "sha256": "ecf6eb4ab825266f050f02eeb5cd7bf08fb15c463626b15e8580b3c924098afa"
+  },
+  "acs/city_5.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B03002,B11001,B15003&geo_ids=16000US0606000",
+   "fetched_at": "2026-10-01T10:32:26",
+   "sha256": "ff4863d5ab33900ec8d196cfb716431176b5201c88541b69809b1c46cf6ae422"
+  },
+  "acs/tract_0.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B01003,B01001,B25003,B25008,B26001&geo_ids=140|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:26",
+   "sha256": "b57bf0debede35adb1a4a2d79f0bb4e8f3efac378998dffa4c713c82414ca366"
+  },
+  "acs/tract_1.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B19001,B19013,B19301,B17021&geo_ids=140|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:27",
+   "sha256": "b294a5ec353cd9b1290d22bbaae78f315afb182851713b0ad048097650d4f6d6"
+  },
+  "acs/tract_2.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25044,B08301,B08303&geo_ids=140|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:27",
+   "sha256": "10a799aeb96247027f57ec5c4be3e2da27a18c1d835b83842f5932c362989dfe"
+  },
+  "acs/tract_3.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25001,B25004,B25024,B25034,B25041&geo_ids=140|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:27",
+   "sha256": "44a190eed359a574bc051b386e99f8683e49e72c8ac18181b79e3e9a258b6086"
+  },
+  "acs/tract_4.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25064,B25077,B25070,B25091&geo_ids=140|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:27",
+   "sha256": "1abe36394c03b3799e84eacc60139b3e965adecb80fca1012b04d0795c03e48c"
+  },
+  "acs/tract_5.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B03002,B11001,B15003&geo_ids=140|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:27",
+   "sha256": "b92192e6c02e9971a1cdc00447794cf9f14ad6d41ba06105503d40a71004023c"
+  },
+  "acs/blockgroup_B01003.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B01003&geo_ids=150|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:37",
+   "sha256": "9e4638452804df8c9985fb5d4218c206c43acf2c81952166cb3f2deee269a416"
+  },
+  "acs/blockgroup_B01001.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=150|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:37",
+   "sha256": "db53449a8c5d6e3685993f549b9177b09de604b752718c8de236a048e2a26f6b"
+  },
+  "acs/blockgroup_B25003.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25003&geo_ids=150|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:37",
+   "sha256": "115d6282b1db0ba8257d9416a24edc2b43120aee79c5aecaa7b18898d717cd8b"
+  },
+  "acs/blockgroup_B25008.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25008&geo_ids=150|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:37",
+   "sha256": "52322d6671625fc185875ff2de0d32c2e4582581402b26eff6a70f8122819722"
+  },
+  "unavailable:acs/blockgroup_B26001.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B26001&geo_ids=150|16000US0606000"
+  },
+  "acs/blockgroup_B19001.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B19001&geo_ids=150|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:37",
+   "sha256": "a49d388233aed9fa78a145e65c36592fd09c639925eed8804063ae9c5d3cf945"
+  },
+  "acs/blockgroup_B19013.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B19013&geo_ids=150|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:37",
+   "sha256": "a1c3268c8dc006f852b044cd622b4cbbd92f7ae2d19b9b29fad25491bcaa6f59"
+  },
+  "acs/blockgroup_B19301.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B19301&geo_ids=150|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:37",
+   "sha256": "65d3555ac78a1e0926a743d97f7b168b29f64fcf904d6526bb7828cff9abb38e"
+  },
+  "acs/blockgroup_B17021.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B17021&geo_ids=150|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:38",
+   "sha256": "c8e60be384ba19454365af6613af99ac177087397b4a4e7c38f880a7cbf071c7"
+  },
+  "acs/blockgroup_B25044.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25044&geo_ids=150|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:38",
+   "sha256": "79fd69a0d5f966452a2ce1c892ff2e24ac6213f547e77467bd2bb1e8a66b88e4"
+  },
+  "acs/blockgroup_B08301.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B08301&geo_ids=150|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:38",
+   "sha256": "7e2dbdaf72d1be55786408a2335db2f8221a0fc2ffa38527afa08033967154c2"
+  },
+  "acs/blockgroup_B08303.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B08303&geo_ids=150|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:38",
+   "sha256": "da07a1b77507f538304e7f3040c2035235a2bb064784e62f19644a567d371d13"
+  },
+  "acs/blockgroup_B25001.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25001&geo_ids=150|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:38",
+   "sha256": "b9741fa996278f31473e6541d13b5bf36896f27eb27388b5bbef8f32beccce5b"
+  },
+  "acs/blockgroup_B25004.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25004&geo_ids=150|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:38",
+   "sha256": "5b067b9c13ef6b66ef46bce1a29dd9160c7d75d35888218d4b0255bab03f9fc8"
+  },
+  "acs/blockgroup_B25024.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25024&geo_ids=150|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:38",
+   "sha256": "ec88a15654fbe514251cd9122c08f8920880367961e432dd4d69605254ecd343"
+  },
+  "acs/blockgroup_B25034.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25034&geo_ids=150|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:38",
+   "sha256": "c3c58ab5ec5a7e852b050b744d6e84d2f393526ebbea2b04ee354cb40fccd26d"
+  },
+  "acs/blockgroup_B25041.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25041&geo_ids=150|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:39",
+   "sha256": "15c0a5117b45fda134758d9384f1666fc221dbc707d335ff9314453fcd7f8799"
+  },
+  "acs/blockgroup_B25064.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25064&geo_ids=150|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:39",
+   "sha256": "1b0934181d02224bc77ab0ce4587f1deb87c93d7eaa81e83cffee92bc2462c1d"
+  },
+  "acs/blockgroup_B25077.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25077&geo_ids=150|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:39",
+   "sha256": "052666f36b06d4ee82b1a6366c80e6d50e5645e1856ebef2c28f08740fcdb715"
+  },
+  "acs/blockgroup_B25070.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25070&geo_ids=150|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:39",
+   "sha256": "4b099c41ccf6f09647bc509c00bf921c3000d96d70b1c4cdd571939dff41c6f8"
+  },
+  "acs/blockgroup_B25091.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25091&geo_ids=150|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:39",
+   "sha256": "e81341ea958078c51da57d6e6cddd79239769051014a2ebcfcf1bacbd80e7909"
+  },
+  "acs/blockgroup_B03002.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B03002&geo_ids=150|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:39",
+   "sha256": "31200af565d299c47e1fe18e86e46d90a0bdb1bd3799518f9e93a879b186668b"
+  },
+  "acs/blockgroup_B11001.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B11001&geo_ids=150|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:39",
+   "sha256": "40395a6b8c5a28e0b94021333c263711bd3ad84770bb74eb74542ccfaa787252"
+  },
+  "acs/blockgroup_B15003.json": {
+   "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B15003&geo_ids=150|16000US0606000",
+   "fetched_at": "2026-10-01T10:32:40",
+   "sha256": "0a6e4bba9cce78a50de7f053b1edd30c8d79ca2da98ff426146367fb813f6ed9"
+  },
+  "lodes/ca_xwalk.csv.gz": {
+   "url": "https://lehd.ces.census.gov/data/lodes/LODES8/ca/ca_xwalk.csv.gz",
+   "fetched_at": "2026-10-01T10:32:50",
+   "sha256": "6b11ae561c4b3e84799a6730f68915d29cabe5bc4355e65382aaa1d44c6fa361"
+  },
+  "lodes/ca_od_main_JT00_2023.csv.gz": {
+   "url": "https://lehd.ces.census.gov/data/lodes/LODES8/ca/od/ca_od_main_JT00_2023.csv.gz",
+   "fetched_at": "2026-10-01T10:34:34",
+   "sha256": "f50d53a90d49a227628fc218247472f8cabe05ceba72b97a4dea9d1a3a104faa"
+  },
+  "lodes/ca_od_aux_JT00_2023.csv.gz": {
+   "url": "https://lehd.ces.census.gov/data/lodes/LODES8/ca/od/ca_od_aux_JT00_2023.csv.gz",
+   "fetched_at": "2026-10-01T10:34:36",
+   "sha256": "807869bd81ad5ef2a1dc2e4d09f10e58d297fe65a821c66f42a15251459f998c"
+  },
+  "lodes/ca_wac_S000_JT00_2023.csv.gz": {
+   "url": "https://lehd.ces.census.gov/data/lodes/LODES8/ca/wac/ca_wac_S000_JT00_2023.csv.gz",
+   "fetched_at": "2026-10-01T10:34:43",
+   "sha256": "f062c82b1dd7b4d4441078c9e8d779c258a6eb71cc0312a10e3bb523c17951b6"
+  },
+  "lodes/ca_rac_S000_JT00_2023.csv.gz": {
+   "url": "https://lehd.ces.census.gov/data/lodes/LODES8/ca/rac/ca_rac_S000_JT00_2023.csv.gz",
+   "fetched_at": "2026-10-01T10:34:55",
+   "sha256": "a7ec5983e859886203dda83d54eb84da14548926918b482731bbc61e3a27f134"
+  },
+  "dmv/vehicle-fuel-type-counts-2025.csv": {
+   "url": "https://data.ca.gov/dataset/15179472-adeb-4df6-920a-20640d02b08c/resource/b459d957-5d94-4b10-999d-770419870364/download/vehicle-fuel-type-counts-2025.csv",
+   "fetched_at": "2026-10-01T10:35:24",
+   "sha256": "f0894d56e905840aab84d63be07f1cd0aa9451b511f3a84366abbcc744673a81"
+  },
+  "tiger/tl_2024_06_bg.zip": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/BG/tl_2024_06_bg.zip",
+   "fetched_at": "2026-10-01T10:35:25",
+   "sha256": "8de5b76a4e747f0eb294e8e269c75cf461cc8bb9f684cae58aca0ddfc837f77b"
+  },
+  "tiger/tl_2024_06_tract.zip": {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2024/TRACT/tl_2024_06_tract.zip",
+   "fetched_at": "2026-10-01T10:35:26",
+   "sha256": "8ad60e582b4d61be94ac072a4dd80d763255c0c987c616c7e6f9ffc7ee0bd318"
+  },
+  "dof/E-5_2026_InternetVersion.xlsx": {
+   "url": "https://dof.ca.gov/media/docs/forecasting/Demographics/estimates/e-5-population-and-housing-estimates-for-cities-counties-and-the-state-2020-2026/E-5_2026_InternetVersion.xlsx",
+   "fetched_at": "2026-10-01T10:39:20",
+   "sha256": "7d179aa625f07d4e05c78e89ca348f064b5ada9eba77d5b48c41feb33fb6f306"
+  },
+  "ebmud/UWMP_2025.pdf": {
+   "url": "https://www.ebmud.com/download_file/force/58536/735?UWMP_STANDALONE-2025-FINAL.pdf",
+   "fetched_at": "2026-10-01T10:39:23",
+   "sha256": "b73a693dac932249d3f29b2370fc6a5775ad1a346b43e2eb4a2206719c8772da"
+  },
+  "dmv/vehicle-fuel-type-count-by-zip-code-2021.csv": {
+   "url": "https://data.ca.gov/dataset/15179472-adeb-4df6-920a-20640d02b08c/resource/888bbb6c-09b4-469c-82e6-1b2a47439736/download/vehicle-fuel-type-count-by-zip-code-2021.csv",
+   "fetched_at": "2026-10-01T14:34:54",
+   "sha256": "0d864992010dd8743752870ad865c3e9aa86f7e5c920946856b19c586a375aff"
+  }
+ }
+}

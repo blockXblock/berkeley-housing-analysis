@@ -65,6 +65,10 @@ from capdetail_select import resolve_chain, cited_records, is_modification  # no
 V4 = ROOT / "databases/berkeley_housing_v4.db"
 RULINGS = ROOT / "corrections/v4/planning_scope_rulings.csv"
 PROJECT_RULINGS = ROOT / "corrections/v4/project_rulings.csv"
+# Names (John, 2026-09-30): every project is named by its ADDRESS as the City wrote it; a proper name only where the
+# City's own text states one, accepted at read time only if VERBATIM in the cited record (scripts/llm_project_names.py).
+# Keyed by the project's stable key (anchor record, else first master permit). A re-reading is a new dated file.
+NAMES_EVIDENCE = ROOT / "data/derived/project_names_evidence_2026-09-30.json"
 OUT = ROOT / "scratch/2026-09-29_phase3"
 ANCHOR_PRIORITY = ("primary_application", "pre_application", "ministerial_clearance", "companion_review")
 DEAD = ("Withdrawn", "Void")
@@ -340,13 +344,38 @@ def write(con, projects) -> dict:
         sp = collections.defaultdict(set)
         for sid, pid in con.execute("SELECT structure_id, parcel_id FROM structure_parcels"):
             sp[sid].add(pid)
+        names = {}
+        if NAMES_EVIDENCE.exists():
+            names = {r["project_key"]: r["name"] for r in json.load(open(NAMES_EVIDENCE))["readings"] if r.get("name")}
+        addr_of = {}
+        for k, a in con.execute("SELECT source_record_key, raw_address FROM events WHERE raw_address IS NOT NULL "
+                                "AND (event_type_code='planning_filed' OR event_type_code LIKE 'permit_%')"):
+            addr_of.setdefault(k, a)
+        situs = {}
+        for pid_, num, street in con.execute("SELECT pa.parcel_id, a.number, a.street FROM parcel_addresses pa "
+                                             "JOIN addresses a USING(address_id) ORDER BY a.address_id"):
+            situs.setdefault(pid_, f"{num} {street}".upper())
+        master_of_s = {sid: json.loads(n)["master_permits"] for sid, n in con.execute("SELECT structure_id, notes FROM structures")}
         for p in projects:
+            mps = sorted(m for s in p["structures"] for m in master_of_s[s])
+            key = p.get("anchor") or (mps[0] if mps else None)
+            address = (addr_of.get(p["anchor"]) if p.get("anchor") else None) or next((addr_of[m] for m in mps if addr_of.get(m)), None)
+            basis = "address" if address else None
+            if not address:                     # last fallback: the County's situs for the project's parcel
+                pars = sorted(set(p.get("parcels") or []).union(*[sp[s] for s in p["structures"]]) if p["structures"]
+                              else set(p.get("parcels") or []))
+                address = next((situs[x] for x in pars if situs.get(x)), None)
+                basis = "parcel_situs" if address else None
+            p["project_key"], p["address"] = key, address
+            p["name"] = names.get(key) or address
+            p["name_basis"] = "city_stated_name" if names.get(key) else basis
+            out["named_" + str(p["name_basis"])] += 1
             notes = {k: p.get(k) for k in ("anchor", "anchor_role", "records", "filed", "accepted", "entitled",
                                            "entitled_by", "denied", "ended", "record_status", "milestone_flags",
-                                           "ruling") if p.get(k) not in (None, [], "")}
+                                           "ruling", "project_key", "address", "name_basis") if p.get(k) not in (None, [], "")}
             notes["units"] = p["units"]
-            pid = con.execute("INSERT INTO projects (name, notes) VALUES (NULL, ?)",
-                              (json.dumps(notes),)).lastrowid
+            pid = con.execute("INSERT INTO projects (name, notes) VALUES (?, ?)",
+                              (p["name"], json.dumps(notes))).lastrowid
             out["projects"] += 1
             for sid in p["structures"]:
                 con.execute("INSERT INTO project_structures VALUES (?,?)", (pid, sid))

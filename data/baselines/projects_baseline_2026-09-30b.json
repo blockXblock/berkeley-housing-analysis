@@ -1,0 +1,29 @@
+{
+ "supersedes": "projects_baseline_2026-09-30.json",
+ "invariant": {
+  "projects": 1543,
+  "structures": 1183,
+  "structures_homed_once": 1183,
+  "units_in_projects": 5552,
+  "structures_in_two_projects": 0
+ },
+ "moves": {
+  "named_by": {
+   "address": 1520,
+   "city_stated_name": 21,
+   "null": 2
+  },
+  "with_entitlement_date": 380,
+  "parcel_geometries": 29118,
+  "structures_with_address": 1177
+ },
+ "delta_vs_2026-09-30": {
+  "reading rulings 2501 Telegraph, 2212 McGee, 2707 Hillegass": "-3 structures, -3 projects, -9 units",
+  "names": "every project named by address; 21 City-stated names (data/derived/project_names_evidence_2026-09-30.json)"
+ },
+ "provenance": {
+  "source_db": "scratch/2026-09-30_phase4/chain3",
+  "sha16": "1aa3c0453bca5541",
+  "derived_at": "2026-09-30T17:47:27"
+ }
+}

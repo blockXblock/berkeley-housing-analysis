@@ -116,18 +116,20 @@ here. Planning events get no housing-role label: they are not building permits.
 code(r"""
 con=sqlite3.connect(DB_PATH); con.execute("PRAGMA foreign_keys=ON")
 print("inspections:", SM.load_inspections(con))
-print("rent board: ", SM.load_rent_board(con))   # CPRA #26-2375: every registered unit + tenancy (John: load all)
-print("accela list:", SM.load_accela_list(con))   # every Building + Planning listing, manifest-pinned (John: commercial records)
-print("licences:   ", SM.load_business_licenses(con))   # City business licences 2025-11-15 (John 2026-10-01)
-print("ctcac:      ", SM.load_ctcac_projects(con))   # CTCAC tax-credit parties + unit mix (John 2026-10-01)
-print("bp profess.:", SM.load_building_professionals(con))   # master permits' Licensed Professionals + owner (John 2026-10-01)
-print("doc roles:  ", SM.load_document_roles(con))   # parties by stated role in plans + applications (John 2026-10-01)
 print("documents:  ", SM.load_all_documents(con))   # every declared manifest (DOCUMENT_MANIFESTS)
 print("parcels:    ", SM.load_parcels(con))   # assessor parcels + APN identifiers + assessed values + owners of record
 print("lineage:    ", SM.load_county_lineage(con))   # the County assessor's own parent -> child APN lineage (confirmed)
 print("parcel area:", SM.load_taxable_area(con))     # the City's taxable building / lot sq ft per parcel (a cross-check)
 print("planning:   ", SM.load_all_planning(con))     # the city's Planning records: filed + dated review tasks, staff who marked them
 print("planning log:", SM.load_planning_log(con))    # CPRA 26-1972 master log: applicants (its unit/BMR/pathway columns are empty)
+# the people-and-money inputs (John, 2026-10-01) come LAST: they resolve parcels through the County lineage, join
+# addresses to the parcels' situs, and anchor on documents and permits -- all loaded above
+print("rent board: ", SM.load_rent_board(con))   # CPRA #26-2375: every registered unit + tenancy (John: load all)
+print("accela list:", SM.load_accela_list(con))   # every Building + Planning listing, manifest-pinned (John: commercial records)
+print("licences:   ", SM.load_business_licenses(con))   # City business licences 2025-11-15 (John 2026-10-01)
+print("ctcac:      ", SM.load_ctcac_projects(con))   # CTCAC tax-credit parties + unit mix (John 2026-10-01)
+print("bp profess.:", SM.load_building_professionals(con))   # master permits' Licensed Professionals + owner (John 2026-10-01)
+print("doc roles:  ", SM.load_document_roles(con))   # parties by stated role in plans + applications (John 2026-10-01)
 """)
 code(r"""
 con=sqlite3.connect(DB_PATH); con.execute("PRAGMA foreign_keys=ON")

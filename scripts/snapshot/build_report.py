@@ -48,6 +48,27 @@ CITED = dict(
              hill_capacity=900, flat_capacity=1700, fire_inspections=8600,
              src='KLD Associates, City of Berkeley Evacuation Time Estimate Study, TR-1296, July 1, 2025; City of '
                  'Berkeley Evacuation StoryMaps (text version, July 2025); Community Wildfire Protection Plan (2023)'),
+    # UC Berkeley and Berkeley Lab run their own utilities and are excluded from City figures. Each value: (number, year).
+    campus=dict(
+        ucb=dict(acres=(1095, '2021'), gsf=(13858460, '2018-19'), buildings_core=(100, '2024'), beds=(11621, '2024-25'),
+                 beds_planned=(2613, 'by fall 2029'), lrdp_beds=(20750, 'LRDP buildout'), parking=(6340, '2018-19'),
+                 water_gal=(594404932, '2018'), gas_mmbtu=(2334237, '2018'), elec_mwh=(None, ''),
+                 ghg=(160270, '2024'), ghg_scope1=(127957, '2024'), ghg_cogen=(114262, '2024'), ghg_scope2=(196, '2024'),
+                 ghg_scope3=(32117, '2024'), ghg_series=[200700, 204909, 179998, 159363, 174113, 160270],
+                 employees=(13422, '2024-25'), sov_staff=('34%', '2024-25')),
+        lbnl=dict(acres=(202, '2025'), gsf=(2061500, '2024'), buildings=(170, '2025'), employees=(3350, 'spring 2024'),
+                  academics=(1200, 'spring 2024'), affiliates=(5000, 'spring 2024'), onsite_daily=(3000, '2024'),
+                  parking=(2200, '2024'), water_gal=(42600000, 'FY2023'), elec_mwh=(132397, 'FY2023'),
+                  gas_therms=(1500000, 'FY2023'), peak_mw=(21.5, '2022'), ghg=(37713, '2024'), ghg_scope1=(7826, '2024'),
+                  ghg_scope2=(19119, '2024'), sov=('about 30%', 'spring 2024')),
+        src=['UC Regents item F4, July 21, 2021 (LRDP: 1,095 acres; Table 1-2: 2018-19 floor area, beds, parking, staff)',
+             'California State Auditor report 2024-111, Table B.1, October 2025 (UC Berkeley beds)',
+             'UC Berkeley 2021 LRDP EIR, greenhouse-gas appendix (2018 water and natural gas)',
+             'UC Berkeley Office of Sustainability, greenhouse gas inventory (2019-2024)',
+             'UC Regents item F2, July 16, 2025 (Berkeley Clean Energy Campus); ACEEE 2024 paper by campus staff (core campus, cogeneration)',
+             'UC 2025 Annual Report on Sustainable Practices (commuting)',
+             'Lawrence Berkeley National Laboratory 2025 LRDP Draft EIR, April 2025 (people, energy, water, GHG, parking); '
+             'UC Regents item F1B, September 17, 2025 (202 acres, buildings, floor area)']),
     # Harris 2016 Table 1 (feet as printed): total and undergrounded, by street class. Miles are computed from the feet;
     # the table's own residential overhead figure prints 149.9 mi, but its 775,399 ft is 146.9 mi.
     table1_ft=dict(arterial=(135095, 66015), collector=(190460, 59660), residential=(832666, 57267)),
@@ -474,6 +495,48 @@ def s_fire():
     return section('fire', '11 · Fire evacuation', 'Leaving the hills', body)
 
 
+def s_campus():
+    U, B = CITED['campus']['ucb'], CITED['campus']['lbnl']
+    uc = CITED['uc']
+    v = lambda t, f=n: f"{f(t[0])} <span class=\"yr\">({t[1]})</span>" if t and t[0] is not None else '<span class="no">not published</span>'
+    mgd = lambda g: f"{g / 365 / 1e6:.2f} million gal/day"
+    rows = [
+        ['Students', f"{n(uc['students'])} <span class=\"yr\">({uc['term']})</span>", '—', f"{n(uc['students'])}"],
+        ['Employees', v(U['employees']), v(B['employees']), f"≈ {n(U['employees'][0] + B['employees'][0])}"],
+        ['Researchers and guests (Lab)', '—', f"{n(B['academics'][0])} academics, {n(B['affiliates'][0])} affiliates <span class=\"yr\">(spring 2024)</span>", 'overlap with UC'],
+        ['Land', v(U['acres'], lambda x: f"{x:,} acres"), v(B['acres'], lambda x: f"{x:,} acres"), 'the Lab sits on University land; overlap not stated'],
+        ['Floor area', v(U['gsf'], lambda x: f"{x / 1e6:.1f} million sq ft"), v(B['gsf'], lambda x: f"{x / 1e6:.1f} million sq ft"), f"≈ {(U['gsf'][0] + B['gsf'][0]) / 1e6:.1f} million sq ft"],
+        ['Student beds', v(U['beds']) + f"; {n(U['beds_planned'][0])} more by fall 2029", 'none', v(U['beds'])],
+        ['Parking spaces', v(U['parking']), v(B['parking']), f"≈ {n(U['parking'][0] + B['parking'][0])}"],
+        ['Water', v(U['water_gal'], mgd), v(B['water_gal'], mgd), f"≈ {(U['water_gal'][0] + B['water_gal'][0]) / 365 / 1e6:.2f} million gal/day (different years)"],
+        ['Electricity', '<span class="no">not published</span> (own gas-fired cogeneration plant)', v(B['elec_mwh'], lambda x: f"{x:,} MWh a year"), '—'],
+        ['Natural gas', v(U['gas_mmbtu'], lambda x: f"{x * 10 / 1e6:.1f} million therms"), v(B['gas_therms'], lambda x: f"{x / 1e6:.1f} million therms"), f"≈ {(U['gas_mmbtu'][0] * 10 + B['gas_therms'][0]) / 1e6:.1f} million therms (different years)"],
+        ['Greenhouse gas (all scopes)', v(U['ghg'], lambda x: f"{x:,} t CO₂e"), v(B['ghg'], lambda x: f"{x:,} t CO₂e"), f"{U['ghg'][0] + B['ghg'][0]:,} t CO₂e (2024)"],
+        ['Drive alone to work', f"{U['sov_staff'][0]} of faculty and staff", f"{B['sov'][0]} of employees", '—'],
+        ['Property tax', 'exempt (state constitution)', 'exempt (University land)', 'none'],
+    ]
+    beso = F['beso']['years']['2024']
+    body = f'''
+    <p class="note" style="font-size:.95rem">The University and the Lab run their own power, steam, roads and parking, and the
+    City's figures leave them out: the City's community greenhouse-gas inventory excludes both, and the City's maps stop at
+    their boundaries. The Lab straddles the city line: "the western half of the Lab campus is within the City of Berkeley;
+    the eastern half is within the city of Oakland."</p>
+    {table(['', 'UC Berkeley', 'Berkeley Lab (LBNL)', 'Together'], rows)}
+    <p class="note">For scale: the campus burned about {U['gas_mmbtu'][0] * 10 / 1e6:.0f} million therms of gas in 2018, more than five
+    times the {beso['therms'] / 1e6:.1f} million therms reported by all of the City's large buildings in 2024. Its gas-fired
+    cogeneration plant produced {n(U['ghg_cogen'][0])} of the campus's {n(U['ghg'][0])} tonnes of CO₂e in 2024; the Berkeley
+    Clean Energy Campus project (construction from 2026, completion expected by 2030) replaces it with an electric heating and
+    cooling plant serving about 32 buildings. The two institutions' {U['ghg'][0] + B['ghg'][0]:,} tonnes equal
+    {100 * (U['ghg'][0] + B['ghg'][0]) / CITED['cap']['ghg_2023']:.0f}% of the City's own community inventory
+    ({n(CITED['cap']['ghg_2023'])} tonnes, 2023), which does not include them; the inventories are compiled differently.
+    Campus totals for the six reported years to 2024: {', '.join(n(x) for x in U['ghg_series'])} tonnes.</p>
+    <p class="note">Not published: the campus's total electricity use, miles of steam lines and utility tunnels, and how the
+    campus and Lab acreage divide between Berkeley and Oakland. Several campus figures date from the 2018-19 baseline of the
+    2021 Long Range Development Plan, the most recent the University has published. The 2021 settlement with the City has
+    the University paying about $82.6 million over 16 years (press reports; the signed agreement was not available).</p>'''
+    return section('campus', '12 · The University and the Lab', 'UC Berkeley and Berkeley Lab, counted on their own', body)
+
+
 def s_catalog():
     rows = [[dl(f['file']), esc(f['grain']), n(f['rows']), esc(f['description'])] for f in F['files']]
     M = F['sources_manifest']
@@ -497,12 +560,13 @@ def s_catalog():
       <li>{esc(CITED['streets']['src'])}. {esc(CITED['ssmp']['src'])}. {esc(CITED['uc']['src'])}.</li>
       <li>{esc(CITED['kld']['src'])}.</li>
       <li>{esc(CITED['ug']['src_harris'])}. {esc(CITED['ug']['src_concept'])}. {esc(CITED['ug']['src_bellecci'])}. District 48: {esc(CITED['ug']['src_uud48'])}.</li>
+      <li>University and Lab: {esc('; '.join(CITED['campus']['src']))}.</li>
       <li>{esc(CITED['ebmud']['src'])}. {esc(CITED['water_household']['src'])}. {esc(CITED['cap']['src'])}.</li>
       <li>Large buildings: City of Berkeley Building Emissions Saving Ordinance data. Vehicles: California DMV, Vehicle
       Fuel Type Count by ZIP Code. Commuting and jobs: U.S. Census LEHD LODES 8 (2023). Residents: U.S. Census American
       Community Survey via Census Reporter; California Department of Finance E-5.</li>
     </ul>'''
-    return section('data', '12 · The data', 'Every file behind this report', body)
+    return section('data', '13 · The data', 'Every file behind this report', body)
 
 
 CSS = '''
@@ -536,6 +600,7 @@ CSS = '''
   a.dl { font-family: ui-monospace, Menlo, monospace; font-size:.82rem; overflow-wrap:anywhere; }
   ul.src { margin:.6rem 0 0 1.1rem; } ul.src li { font-size:.8rem; color:var(--dim); margin-bottom:.3rem; }
   code { font-size:.8rem; }
+  .yr { color:var(--dim); font-size:.8em; }
   .tw { position:relative; }
   button.full { display:none; margin:.15rem 0 .3rem; font:inherit; font-size:.8rem; color:var(--accent); background:var(--panel);
     border:1px solid var(--line); border-radius:6px; padding:.25rem .6rem; cursor:pointer; }
@@ -572,11 +637,11 @@ CSS = '''
 
 def main():
     sections = [s_people(), s_tenure(), s_income(), s_age(), s_tide(), s_cars(), s_land(), s_networks(), s_ug(),
-                s_water_energy(), s_fire(), s_catalog()]
+                s_water_energy(), s_fire(), s_campus(), s_catalog()]
     toc = [('people', 'People'), ('tenure', 'Renters and owners'), ('income', 'Income'), ('age', 'Ages'),
            ('tide', 'Daily tide'), ('cars', 'Cars'), ('land', 'Land and money'), ('networks', 'Under the streets'),
            ('undergrounding', 'Undergrounding'), ('water-energy', 'Water and power'), ('fire', 'Fire evacuation'),
-           ('data', 'The data')]
+           ('campus', 'University and Lab'), ('data', 'The data')]
     old = open(PAGE).read() if os.path.exists(PAGE) else ''
     meta = ''
     if '<!-- BEGIN site_meta' in old:

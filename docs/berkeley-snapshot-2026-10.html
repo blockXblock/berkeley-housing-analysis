@@ -33,6 +33,7 @@
   .yes { color:#8fd694; font-weight:600; } .no { color:#ff9f7f; font-weight:600; } .part { color:var(--num); font-weight:600; }
   .note { font-size:.86rem; color:var(--muted); margin:.4rem 0 .5rem; line-height:1.45; }
   .two { display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; }
+  .two > div { min-width:0; }      /* let a wide table scroll inside its column instead of widening the page */
   a.dl { font-family: ui-monospace, Menlo, monospace; font-size:.82rem; overflow-wrap:anywhere; }
   ul.src { margin:.6rem 0 0 1.1rem; } ul.src li { font-size:.8rem; color:var(--dim); margin-bottom:.3rem; }
   code { font-size:.8rem; }

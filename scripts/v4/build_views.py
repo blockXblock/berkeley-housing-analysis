@@ -254,7 +254,8 @@ FROM one JOIN projects p USING(project_id) JOIN events e USING(event_id)
 #   developer / tax_credit_owner / general_partner / property_manager   CTCAC's List of Projects, by the project's
 #                                      building addresses or current parcels (a UNION: a row reached both ways is one)
 # John 2026-10-01: "add any other roles we didn't, such as rental operator or manager". Developer and architect come
-# from the documents' title blocks (document_roles evidence) once loaded.
+# from the documents' title blocks: plans_owner / plans_developer / plans_architect / plans_*_engineer / ... -- the role
+# the DOCUMENT states, prefixed so a drawing's "OWNER" (the sponsor) is never confused with the assessor's owner.
 V_PROJECT_PEOPLE = r"""
 CREATE VIEW v_project_people AS
 WITH pk AS (SELECT project_id, json_extract(notes, '$.project_key') project_key FROM projects),
@@ -317,6 +318,16 @@ FROM pk JOIN project_parcels pp USING(project_id)
 JOIN events e ON e.event_type_code = 'ctcac_project'
 JOIN json_each(json_extract(e.raw_payload, '$._current_parcel_ids')) cp ON cp.value = pp.parcel_id
 JOIN actor_actions aa ON aa.event_id = e.event_id
+JOIN actors a USING(actor_id) LEFT JOIN sources s ON s.source_id = aa.source_id
+UNION ALL
+SELECT DISTINCT pk.project_key, aa.role, a.display_name, a.actor_id, s.source_kind, d.record_key,
+       d.title || ' -- ' || aa.coverage_note
+FROM pk JOIN (SELECT project_id, record_key FROM project_records
+              UNION SELECT ps.project_id, e.source_record_key FROM project_structures ps
+                    JOIN structure_events se ON se.structure_id = ps.structure_id AND se.role_in_structure IN ('master', 'phase')
+                    JOIN events e ON e.event_id = se.event_id) rk USING(project_id)
+JOIN documents d ON d.record_key = rk.record_key
+JOIN actor_actions aa ON aa.entity_type = 'document' AND aa.entity_id = d.document_id
 JOIN actors a USING(actor_id) LEFT JOIN sources s ON s.source_id = aa.source_id
 UNION ALL
 SELECT pk.project_key, 'funder', json_extract(f.value, '$.funder'), NULL, 'funding_ledger', json_extract(f.value, '$.funding_id'),

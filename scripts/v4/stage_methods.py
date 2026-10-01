@@ -992,6 +992,51 @@ def load_accela_list(con, manifest=ACCELA_LIST_MANIFEST):
                 with_address=n_addr)
 
 
+DOCUMENT_ROLES = os.path.join(ROOT, 'data', 'derived', 'document_roles_evidence_2026-10-01.json')
+
+
+def load_document_roles(con, path=DOCUMENT_ROLES):
+    """The parties the project DOCUMENTS name, by the role the document states (title blocks, cover sheets, application
+    forms; llm_document_roles.py, each kept only with a verbatim quote containing the name). Role = 'plans_' + the
+    document's own label (plans_owner, plans_developer, plans_architect, plans_landscape_architect, plans_civil_engineer,
+    ..., plans_other with its label): a drawing's "OWNER: Grosvenor Americas" is the project's sponsor as the plans name
+    it, a separate claim from the assessor's owner of record, and both stay visible. Anchored on the DOCUMENT
+    (entity_type 'document', entity_id = documents.document_id); the quote travels in the note. Run after load_documents."""
+    import datetime as dt
+    from scripts.housing_rules.owner_name import is_organisation
+    ev = json.load(open(path))
+    loc = os.path.relpath(path, ROOT)
+    assert not con.execute("SELECT 1 FROM sources WHERE locator=?", (loc,)).fetchone(), f'already loaded: {loc}'
+    have = {d for (d,) in con.execute("SELECT document_id FROM documents")}
+    sid = con.execute("INSERT INTO sources (source_kind,locator,retrieved_at,checksum,notes) VALUES "
+                      "('document_roles_evidence',?,?,?,?)", (loc, ev.get('read_at', '')[:10], _sha256(path),
+                      f"parties by stated role in project documents; model {ev.get('model')}; {ev.get('rule')}")).lastrowid
+    actors, acts, missing = {}, 0, []
+    try:
+        for r in ev['readings']:
+            if r['document_id'] not in have:
+                missing.append(r['document_id']); continue
+            for p in r['parties']:
+                name = ' '.join(p['name'].split())
+                role = 'plans_' + p['role']
+                k = (name.upper(), p['role'])
+                if k not in actors:
+                    actors[k] = con.execute("INSERT INTO actors (actor_kind,display_name,role_class,notes) VALUES (?,?,?,?)",
+                                            ('organization' if is_organisation(name) else 'person', name, p['role'],
+                                             json.dumps({"license": p.get('license')}) if p.get('license') else None)).lastrowid
+                con.execute("INSERT INTO actor_actions (actor_id,event_id,entity_type,entity_id,role,source_id,coverage_note) "
+                            "VALUES (?,NULL,'document',?,?,?,?)",
+                            (actors[k], r['document_id'], role, sid,
+                             (f"[{p['label']}] " if p.get('label') else '') + f"quote: {p['quote']}"[:400]))
+                acts += 1
+        con.commit()
+    except Exception:
+        con.rollback()
+        raise
+    assert not missing, f"document_roles evidence names documents v4 does not hold: {missing[:5]}"
+    return dict(documents=len(ev['readings']), actions=acts, actors=len(actors))
+
+
 CTCAC_LIST = os.path.join(ROOT, 'data', 'raw', 'funding', 'ctcac_List_of_Projects_2026-06.xlsx')
 
 

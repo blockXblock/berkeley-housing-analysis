@@ -1,0 +1,6809 @@
+{
+ "topic": "document_roles",
+ "read_at": "2026-10-01T13:09:35",
+ "definitions_sha16": "191425b801782be5",
+ "definitions": "From this City of Berkeley project document's own text (a plan set's cover sheet / project team / title\nblock, or an application form), list every PARTY it names with the ROLE the document gives it:\ndeveloper, owner, applicant, architect, landscape_architect, structural_engineer, civil_engineer, mep_engineer\n(mechanical / electrical / plumbing), general_contractor, property_manager, lender, investor, or other (say which in\n\"label\"). Use the role the document STATES (\"Owner/Developer:\", \"Architect:\", \"Applicant\", a title-block firm labelled\nas the architect); if a firm appears with no stated role, use other with label \"unlabelled\". A company on a copyright\nline or title block of an architecture firm is the architect only if the document makes that clear.\nFor each party give its name exactly as written, a licence number if the text states one, and copy the exact words that\nshow the name together with its role.",
+ "model": "claude-sonnet-5",
+ "pages_read": 3,
+ "chars": 7000,
+ "rule": "kept only if the quote is verbatim in the text and contains the name",
+ "unanswered": [
+  "258",
+  "136",
+  "143",
+  "169"
+ ],
+ "readings": [
+  {
+   "document_id": 34,
+   "record_key": null,
+   "doc_type": "application",
+   "parties": [
+    {
+     "name": "Amir Massih",
+     "role": "applicant",
+     "label": null,
+     "quote": "Amir Massih\n2550 Shattuck LLC\n95 Federal Street, Suite D\nSan Francisco, CA 94107\n\nRe: Application Processing \u2013 California Environmental Quality Act (CEQA) and Additional Information Required \u2013 Use Permit #ZP2023-0138 for 2550 Shattuck Avenue",
+     "license": null
+    },
+    {
+     "name": "2550 Shattuck LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "Amir Massih\n2550 Shattuck LLC",
+     "license": null
+    },
+    {
+     "name": "4terrainvestments.com",
+     "role": "other",
+     "label": "unlabelled",
+     "quote": "Sent via email:\namassih@4terrainvestments.com",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 60,
+   "record_key": "ZP2024-0067",
+   "doc_type": "plan_set",
+   "parties": []
+  },
+  {
+   "document_id": 111,
+   "record_key": "ZP2021-0046",
+   "doc_type": "plan_set",
+   "parties": []
+  },
+  {
+   "document_id": 35,
+   "record_key": null,
+   "doc_type": "application",
+   "parties": [
+    {
+     "name": "2550 Shattuck LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "Amir Massih\n2550 Shattuck LLC",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 234,
+   "record_key": "ZP2016-0014",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 115,
+   "record_key": "ZP2021-0046",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "East Bay Municipal Utility District GSA",
+     "role": "other",
+     "label": "prepared_for",
+     "quote": "PREPARED FOR \nEast Bay Municipal Utility District GSA and \nCity of Hayward GSA",
+     "license": null
+    },
+    {
+     "name": "City of Hayward GSA",
+     "role": "other",
+     "label": "prepared_for",
+     "quote": "PREPARED FOR \nEast Bay Municipal Utility District GSA and \nCity of Hayward GSA",
+     "license": null
+    },
+    {
+     "name": "Luhdorff & Scalmanini Consulting Engineers",
+     "role": "other",
+     "label": "prepared_by",
+     "quote": "PREPARED BY \nLuhdorff & Scalmanini Consulting Engineers",
+     "license": null
+    },
+    {
+     "name": "Geosyntec",
+     "role": "other",
+     "label": "prepared_by",
+     "quote": "Geosyntec",
+     "license": null
+    },
+    {
+     "name": "Brown and Caldwell",
+     "role": "other",
+     "label": "prepared_by",
+     "quote": "Brown and Caldwell",
+     "license": null
+    },
+    {
+     "name": "Environmental Science Associates",
+     "role": "other",
+     "label": "prepared_by",
+     "quote": "Environmental Science Associates",
+     "license": null
+    },
+    {
+     "name": "Dr. Jean Moran",
+     "role": "other",
+     "label": "prepared_by",
+     "quote": "Dr. Jean Moran",
+     "license": null
+    },
+    {
+     "name": "Farallon Geographics",
+     "role": "other",
+     "label": "prepared_by",
+     "quote": "Farallon Geographics",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 152,
+   "record_key": "ZP2024-0014",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "LINDSAY NEWMAN, PE",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "LINDSAY NEWMAN, PE\nCIVIL ENGINEER",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 140,
+   "record_key": "PLN2024-0010",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "BRIDGE HOUSING",
+     "role": "developer",
+     "label": null,
+     "quote": "LEAD DEVELOPER:\nBRIDGE HOUSING",
+     "license": null
+    },
+    {
+     "name": "DAVID BAKER ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDAVID BAKER ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "YES DUFFY ARCHITECTS",
+     "role": "other",
+     "label": "associate_architect",
+     "quote": "ASSOCIATE ARCHITECT:\nYES DUFFY ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "EINWILLER KUEHL",
+     "role": "landscape_architect",
+     "label": "public_realm_landscape",
+     "quote": "PUBLIC REALM/LANDSCAPE:\nEINWILLER KUEHL",
+     "license": null
+    },
+    {
+     "name": "LOTUS WATER",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL:\nLOTUS WATER",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 47,
+   "record_key": "ZP2023-0040",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "1974 Shattuck Ave, LLC",
+     "role": "owner",
+     "label": "owner/applicant",
+     "quote": "OWNER/APPLICANT:\n1974 Shattuck Ave, LLC",
+     "license": null
+    },
+    {
+     "name": "1974 Shattuck Ave, LLC",
+     "role": "applicant",
+     "label": "owner/applicant",
+     "quote": "OWNER/APPLICANT:\n1974 Shattuck Ave, LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "Isaiah Stackhouse",
+     "role": "architect",
+     "label": "Principal",
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "DE LA PE\u00d1A",
+     "role": "other",
+     "label": "unlabelled",
+     "quote": "DE LA PE\u00d1A\nTRACHTENBERG\nARCHITECTS\nSTACKHOUSE",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 54,
+   "record_key": "ZP2018-0135",
+   "doc_type": "plan_set",
+   "parties": []
+  },
+  {
+   "document_id": 119,
+   "record_key": "ZP2021-0193",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "CA VENTURES",
+     "role": "other",
+     "label": "unlabelled",
+     "quote": "BERKELEY PLAZA\nCA VENTURES",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 180,
+   "record_key": "ZP2023-0057",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 301,
+   "record_key": "ZP2020-0075",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 165,
+   "record_key": null,
+   "doc_type": "zab_packet",
+   "parties": [
+    {
+     "name": "The Austin Group LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "Applicant: The \nAustin Group LLC",
+     "license": null
+    },
+    {
+     "name": "Steven E. Schneider and Francisca M Schneider Joint Living Trust",
+     "role": "owner",
+     "label": null,
+     "quote": "Property Owner: \nSteven E. Schneider \nand Francisca M \nSchneider Joint Living \nTrust",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 272,
+   "record_key": "ZP2022-0097",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 309,
+   "record_key": "ZP2019-0074",
+   "doc_type": "correspondence",
+   "parties": []
+  },
+  {
+   "document_id": 204,
+   "record_key": "DRCF2021-0005",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "REALTEX APARTMENTS, LLC.",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nCody Fornari, Project Manager\nREALTEX APARTMENTS, LLC.",
+     "license": null
+    },
+    {
+     "name": "REALTEX APARTMENTS, LLC.",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nCody Fornari, Project Manager\nREALTEX APARTMENTS, LLC.",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "BRUCE JETT ASSOCIATES, INC.",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nBruce B. Jett, Principal\nBRUCE JETT ASSOCIATES, INC.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 92,
+   "record_key": "ZP2023-0040",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 166,
+   "record_key": null,
+   "doc_type": "zab_packet",
+   "parties": [
+    {
+     "name": "Kim Fisher, Studio KDA",
+     "role": "applicant",
+     "label": null,
+     "quote": "Applicant \nKim Fisher, Studio KDA, 1810 6th Street, Berkeley",
+     "license": null
+    },
+    {
+     "name": "Janice Yi Lee & Jonathan Yi",
+     "role": "owner",
+     "label": null,
+     "quote": "Property Owner \nJanice Yi Lee & Jonathan Yi, 3613 Pontina Court, \nPleasanton",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 209,
+   "record_key": "DRCP2015-0019",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "REALTEX APARTMENTS, LLC.",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nCody Fornari, Project Manager\nREALTEX APARTMENTS, LLC.\n2342 Shattuck Avenue #171\nBerkeley CA, 94704",
+     "license": null
+    },
+    {
+     "name": "REALTEX APARTMENTS, LLC.",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nCody Fornari, Project Manager\nREALTEX APARTMENTS, LLC.\n2342 Shattuck Avenue #171\nBerkeley CA, 94704",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS\n2421 Fourth Street\nBerkeley, CA 94710",
+     "license": null
+    },
+    {
+     "name": "BRUCE JETT ASSOCIATES, INC.",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nBruce B. Jett, Principal\nBRUCE JETT ASSOCIATES, INC.\n3 Altarinda Road, Suite 201\nOrinda, CA 94563",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 240,
+   "record_key": "ZP2024-0114",
+   "doc_type": "tabulation_form",
+   "parties": [
+    {
+     "name": "THE AUSTIN GROUP LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "APPLICANT:\nTHE AUSTIN GROUP LLC\nBILL SCHRADER\n(925) 683-8782",
+     "license": null
+    },
+    {
+     "name": "BILL SCHRADER",
+     "role": "applicant",
+     "label": null,
+     "quote": "APPLICANT NAME: BILL SCHRADER",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 280,
+   "record_key": "ZP2024-0071",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 51,
+   "record_key": "ZP2023-0163",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "FIRST MILVIA LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER\nFIRST MILVIA LLC\n1030 MARINA VILLAGE PARKWAY\nALAMEDA, CA 94501",
+     "license": null
+    },
+    {
+     "name": "KAVA MASSIH ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "KAVA MASSIH ARCHITECTS\n920 Grayson Street \u0406 Berkeley, CA 94710\n95 Federal Street \u0406 San Francisco, CA 94107",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 162,
+   "record_key": null,
+   "doc_type": "zab_packet",
+   "parties": [
+    {
+     "name": "Studio KDA, Till Houtermans",
+     "role": "applicant",
+     "label": null,
+     "quote": "Applicant: Studio KDA, Till Houtermans, 1810 Sixth Street, Berkeley, CA 94710",
+     "license": null
+    },
+    {
+     "name": "S.H. Kay, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "Property Owner: S.H. Kay, LLC, 1442A Walnut Street #349, Berkeley, CA 94709",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 12,
+   "record_key": "ZP2024-0126",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA",
+     "license": null
+    },
+    {
+     "name": "VALIANCE CAPITAL, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNERS:\nVALIANCE CAPITAL, LLC",
+     "license": null
+    },
+    {
+     "name": "GREENWOOD & MOORE, INC.",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL/TOPO:\nGREENWOOD & MOORE, INC.",
+     "license": null
+    },
+    {
+     "name": "122 WEST DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE:\n122 WEST DESIGN",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 235,
+   "record_key": "ZP2019-0070",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 89,
+   "record_key": "ZP2023-0090",
+   "doc_type": "density_bonus_application",
+   "parties": []
+  },
+  {
+   "document_id": 70,
+   "record_key": "ZP2024-0181",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "Laconia Development LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nLaconia Development LLC",
+     "license": null
+    },
+    {
+     "name": "Laconia Development LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nLaconia Development LLC",
+     "license": null
+    },
+    {
+     "name": "STACKHOUSE | DE LA PE\u00d1A | TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nISAIAH STACKHOUSE, PRINCIPAL\nSTACKHOUSE | DE LA PE\u00d1A |\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "JETT Landscape Architecture + Design",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nJETT Landscape Architecture + Design",
+     "license": null
+    },
+    {
+     "name": "BKF ENGINEERS",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL ENGINEER:\nBKF ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "Rhoades Planning Group",
+     "role": "other",
+     "label": "planning consultant",
+     "quote": "Rhoades Planning Group\n2140 Shattuck Ave. Suite 705\nBerkeley, CA 94704",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 28,
+   "record_key": null,
+   "doc_type": "application",
+   "parties": [
+    {
+     "name": "SAN PABLO INVESTORS TWO, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nSAN PABLO INVESTORS TWO, LLC",
+     "license": null
+    },
+    {
+     "name": "SAN PABLO INVESTORS TWO, LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nSAN PABLO INVESTORS TWO, LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 257,
+   "record_key": "DRCF2021-0006",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "GROSVENOR AMERICAS",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER\nGROSVENOR AMERICAS",
+     "license": null
+    },
+    {
+     "name": "SOLOMON CORDWELL BUENZ",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT\nSOLOMON CORDWELL BUENZ",
+     "license": null
+    },
+    {
+     "name": "TIPPING STRUCTURAL ENGINEERS",
+     "role": "structural_engineer",
+     "label": null,
+     "quote": "STRUCTURAL\nTIPPING STRUCTURAL ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "MEYERS+ ENGINEERS",
+     "role": "mep_engineer",
+     "label": null,
+     "quote": "MEP\nMEYERS+ ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "BKF ENGINEERS",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL\nBKF ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "PGA DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT\nPGA DESIGN",
+     "license": null
+    },
+    {
+     "name": "EDGETT WILLIAMS CONSULTING GROUP",
+     "role": "other",
+     "label": "vertical transportation consultant",
+     "quote": "VERTICAL TRANSPORTATION\nEDGETT WILLIAMS CONSULTING GROUP",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 237,
+   "record_key": "ZP2024-0169",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 5,
+   "record_key": null,
+   "doc_type": "application",
+   "parties": [
+    {
+     "name": "KTGY Architecture + Planning",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT\nKTGY Architecture + Planning",
+     "license": null
+    },
+    {
+     "name": "Rhoades Planning Group",
+     "role": "other",
+     "label": "planning_consultant",
+     "quote": "PLANNING CONSULTANT\nRhoades Planning Group",
+     "license": null
+    },
+    {
+     "name": "Gilbane Development Company",
+     "role": "developer",
+     "label": null,
+     "quote": "DEVELOPER\nGilbane Development Company",
+     "license": null
+    },
+    {
+     "name": "SANDIS",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL ENGINEER\nSANDIS",
+     "license": null
+    },
+    {
+     "name": "PGAdesign Landscape Architects",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT\nPGAdesign Landscape Architects",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 275,
+   "record_key": "ZP2021-0193",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 113,
+   "record_key": "ZP2021-0046",
+   "doc_type": "plan_set",
+   "parties": []
+  },
+  {
+   "document_id": 137,
+   "record_key": "PLN2024-0010",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "BRIDGE Housing",
+     "role": "other",
+     "label": "applicant_contact_c/o",
+     "quote": "C/O BRIDGE Housing, Attn: Jon McCall",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 243,
+   "record_key": "ZP2018-0137",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "GROSVENOR AMERICAS",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER\nGROSVENOR AMERICAS",
+     "license": null
+    },
+    {
+     "name": "SOLOMON CORDWELL BUENZ",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT\nSOLOMON CORDWELL BUENZ",
+     "license": null
+    },
+    {
+     "name": "TIPPING STRUCTURAL ENGINEERS",
+     "role": "structural_engineer",
+     "label": null,
+     "quote": "STRUCTURAL\nTIPPING STRUCTURAL ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "MEYERS+ ENGINEERS",
+     "role": "mep_engineer",
+     "label": null,
+     "quote": "MEP\nMEYERS+ ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "BKF ENGINEERS",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL\nBKF ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "PGA DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT\nPGA DESIGN",
+     "license": null
+    },
+    {
+     "name": "EDGETT WILLIAMS CONSULTING GROUP",
+     "role": "other",
+     "label": "vertical transportation consultant",
+     "quote": "VERTICAL TRANSPORTATION\nEDGETT WILLIAMS CONSULTING GROUP",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 300,
+   "record_key": "UP2012-0039",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 68,
+   "record_key": "ZP2020-0104",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "JAMESTOWN Premier Berkeley Grotto, L.P.",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER:\nJAMESTOWN Premier Berkeley Grotto, L.P.",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 75,
+   "record_key": "ZP2022-0116",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "2900 Shattuck Ave, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n2900 Shattuck Ave, LLC",
+     "license": null
+    },
+    {
+     "name": "2900 Shattuck Ave, LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n2900 Shattuck Ave, LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 117,
+   "record_key": "ZP2021-0193",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "Langan Engineering and Environmental Services, Inc.",
+     "role": "other",
+     "label": "unlabelled",
+     "quote": "135 Main Street, Suite 1500 San Francisco, CA 94105 T: 415.955.5200 F: 415.955.5201 www.langan.com Langan Engineering and Environmental Services, Inc.",
+     "license": null
+    },
+    {
+     "name": "CA VENTURES",
+     "role": "other",
+     "label": "unlabelled",
+     "quote": "BERKELEY PLAZA CA VENTURES",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 3,
+   "record_key": "ZP2022-0021",
+   "doc_type": "application",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA",
+     "license": null
+    },
+    {
+     "name": "KISTER, SAVIO & REI, INC.",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL ENGINEER / SURVEYOR:\nKISTER, SAVIO & REI, INC.",
+     "license": null
+    },
+    {
+     "name": "WILDLAND ARCHITECTURE",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT\nWILDLAND ARCHITECTURE",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 297,
+   "record_key": "UP2013-0016",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 170,
+   "record_key": "ZP2024-0079",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA\n1810 6TH ST. \nBERKELEY, CA 94710",
+     "license": null
+    },
+    {
+     "name": "RHOADES PLANNING GROUP",
+     "role": "other",
+     "label": "planning_consultant",
+     "quote": "PLANNING CONSULTANT:\nRHOADES PLANNING GROUP\n2140 SHATTUCK AVE, STE 705",
+     "license": null
+    },
+    {
+     "name": "GREENWOOD & MOORE, INC.",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL & SURVEYOR\nGREENWOOD & MOORE, INC.\n3111 CASTRO VALLEY BLVD, \nSTE 200",
+     "license": null
+    },
+    {
+     "name": "GROUNDWORKS OFFICE",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT\nGROUNDWORKS OFFICE\n1792 FIFTH STREET \nBERKELEY, CA 94710",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 83,
+   "record_key": "ZP2024-0075",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 302,
+   "record_key": null,
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "RIAZ CAPITAL",
+     "role": "developer",
+     "label": null,
+     "quote": "RIAZ CAPITAL\n2744 11TH STREET\nOAKLAND, CA 94601\nCONTACT: LISA VILHAUER\nPHONE: (925) 858-4724\nEMAIL: lvilhauer@riazcapital.com\nOWNER / DEVELOPER:",
+     "license": null
+    },
+    {
+     "name": "CARLSON, BARBEE & GIBSON, INC.",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CARLSON, BARBEE & GIBSON, INC.\n2633 CAMINO RAMON, SUITE 350\nSAN RAMON, CA 94583\nCONTACT: ANGELO OBERTELLO, P.E.\nPHONE: (925) 866-0322 x268\nEMAIL: aobertello@cbandg.com\nCIVIL:",
+     "license": null
+    },
+    {
+     "name": "LEFT COAST ARCHITECTURE INC.",
+     "role": "architect",
+     "label": null,
+     "quote": "LEFT COAST ARCHITECTURE INC.\n3800 MOUNT DIABLO BLVD., SUITE 200\nLAFAYETTE, CA 94549\nCONTACT: SCOTT THOMSEN\nPHONE: (925) 297-5688\nEMAIL: scott@leftcoastarch.com\nARCHITECT:",
+     "license": null
+    },
+    {
+     "name": "JETT LANDSCAPE ARCHITECTURE + DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "JETT LANDSCAPE ARCHITECTURE + DESIGN\n2 THEATER SQUARE, SUITE 218\nORINDA, CA 94563\nCONTACT: JESSE MARKMAN\nPHONE: (925) 254-5422\nEMAIL: jessem@jett.land\nLANDSCAPE ARCHITECT:",
+     "license": null
+    },
+    {
+     "name": "SCOTT C. THOMSEN",
+     "role": "architect",
+     "label": null,
+     "quote": "SCOTT C. THOMSEN\nC 31810\nREN: 10-31-2023",
+     "license": "C 31810"
+    }
+   ]
+  },
+  {
+   "document_id": 244,
+   "record_key": "ZP2018-0137",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "GROSVENOR AMERICAS",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER\nGROSVENOR AMERICAS",
+     "license": null
+    },
+    {
+     "name": "SOLOMON CORDWELL BUENZ",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT\nSOLOMON CORDWELL BUENZ",
+     "license": null
+    },
+    {
+     "name": "TIPPING STRUCTURAL ENGINEERS",
+     "role": "structural_engineer",
+     "label": null,
+     "quote": "STRUCTURAL\nTIPPING STRUCTURAL ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "MEYERS+ ENGINEERS",
+     "role": "mep_engineer",
+     "label": null,
+     "quote": "MEP\nMEYERS+ ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "BKF ENGINEERS",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL\nBKF ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "PGA DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT\nPGA DESIGN",
+     "license": null
+    },
+    {
+     "name": "THORNTON TOMASETTI",
+     "role": "other",
+     "label": "sustainability consultant",
+     "quote": "SUSTAINABILITY\nTHORNTON TOMASETTI",
+     "license": null
+    },
+    {
+     "name": "EDGETT WILLIAMS CONSULTING GROUP",
+     "role": "other",
+     "label": "vertical transportation consultant",
+     "quote": "VERTICAL TRANSPORTATION\nEDGETT WILLIAMS CONSULTING GROUP",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 311,
+   "record_key": "ZP2019-0074",
+   "doc_type": "correspondence",
+   "parties": []
+  },
+  {
+   "document_id": 198,
+   "record_key": "ZP2015-0177",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "REALTEX APARTMENTS, LLC.",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nCody Fornari, Project Manager\nREALTEX APARTMENTS, LLC.",
+     "license": null
+    },
+    {
+     "name": "REALTEX APARTMENTS, LLC.",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nCody Fornari, Project Manager\nREALTEX APARTMENTS, LLC.",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "BRUCE JETT ASSOCIATES, INC.",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nBruce B. Jett, Principal\nBRUCE JETT ASSOCIATES, INC.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 142,
+   "record_key": "PLN2024-0010",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "BRIDGE HOUSING",
+     "role": "developer",
+     "label": "lead developer",
+     "quote": "LEAD DEVELOPER:\nBRIDGE HOUSING",
+     "license": null
+    },
+    {
+     "name": "DAVID BAKER ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDAVID BAKER ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "YES DUFFY ARCHITECTS",
+     "role": "architect",
+     "label": "associate architect",
+     "quote": "ASSOCIATE ARCHITECT:\nYES DUFFY ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "EINWILLER KUEHL",
+     "role": "landscape_architect",
+     "label": "public realm/landscape",
+     "quote": "PUBLIC REALM/LANDSCAPE:\nEINWILLER KUEHL",
+     "license": null
+    },
+    {
+     "name": "LOTUS WATER",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL:\nLOTUS WATER",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 135,
+   "record_key": "ZP2022-0115",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "Studio KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "FROM: \nJason Andre / Studio KDA, 510-906-8919",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 19,
+   "record_key": "ZP2024-0074",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "1581 University Avenue, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n1581 University Avenue, LLC",
+     "license": null
+    },
+    {
+     "name": "1581 University Avenue, LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n1581 University Avenue, LLC",
+     "license": null
+    },
+    {
+     "name": "NX VENTURES",
+     "role": "other",
+     "label": "unlabelled",
+     "quote": "1581 University Avenue, LLC\nNX VENTURES",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 200,
+   "record_key": "ZP2015-0177",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "REALTEX APARTMENTS, LLC.",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nCody Fornari, Project Manager\nREALTEX APARTMENTS, LLC.",
+     "license": null
+    },
+    {
+     "name": "REALTEX APARTMENTS, LLC.",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nCody Fornari, Project Manager\nREALTEX APARTMENTS, LLC.",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "BRUCE JETT ASSOCIATES, INC.",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nBruce B. Jett, Principal\nBRUCE JETT ASSOCIATES, INC.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 193,
+   "record_key": "ZP2024-0059",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 24,
+   "record_key": null,
+   "doc_type": "application",
+   "parties": []
+  },
+  {
+   "document_id": 230,
+   "record_key": "ZP2022-0149",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 314,
+   "record_key": "DRCF2021-0008",
+   "doc_type": "plan_set",
+   "parties": []
+  },
+  {
+   "document_id": 296,
+   "record_key": "UP2013-0061",
+   "doc_type": "tabulation_form",
+   "parties": [
+    {
+     "name": "Lowney Architecture",
+     "role": "architect",
+     "label": null,
+     "quote": "Daniel Backman, Lowney Architecture on behalf of Panoramic Interests",
+     "license": null
+    },
+    {
+     "name": "Panoramic Interests",
+     "role": "other",
+     "label": "on_behalf_of",
+     "quote": "Daniel Backman, Lowney Architecture on behalf of Panoramic Interests",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 149,
+   "record_key": "ZP2022-0038",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "THIS DRAWING IS AN INSTRUMENT OF SERVICE, AND AS SUCH, REMAINS THE PROPERTY OF STUDIO KDA.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 31,
+   "record_key": "ZP2023-0090",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "NX Ventures",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nNX Ventures",
+     "license": null
+    },
+    {
+     "name": "NX Ventures",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nNX Ventures",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 86,
+   "record_key": "ZP2024-0066",
+   "doc_type": "density_bonus_application",
+   "parties": []
+  },
+  {
+   "document_id": 266,
+   "record_key": "ZP2024-0070",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 306,
+   "record_key": null,
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA\n1810 6TH ST. \nBERKELEY, CA 94710",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 181,
+   "record_key": "ZP2021-0095",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 80,
+   "record_key": "ZP2022-0116",
+   "doc_type": "density_bonus_application",
+   "parties": []
+  },
+  {
+   "document_id": 171,
+   "record_key": "ZP2024-0079",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA",
+     "license": null
+    },
+    {
+     "name": "RHOADES PLANNING GROUP",
+     "role": "other",
+     "label": "planning_consultant",
+     "quote": "PLANNING CONSULTANT:\nRHOADES PLANNING GROUP",
+     "license": null
+    },
+    {
+     "name": "GREENWOOD & MOORE, INC.",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL & SURVEYOR\nGREENWOOD & MOORE, INC.",
+     "license": null
+    },
+    {
+     "name": "GROUNDWORKS OFFICE",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT\nGROUNDWORKS OFFICE",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 125,
+   "record_key": "ZP2022-0178",
+   "doc_type": "plan_set",
+   "parties": []
+  },
+  {
+   "document_id": 282,
+   "record_key": "ZP2026-0039",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 6,
+   "record_key": null,
+   "doc_type": "application",
+   "parties": [
+    {
+     "name": "KTGY Architecture + Planning",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT\nKTGY Architecture + Planning",
+     "license": null
+    },
+    {
+     "name": "Rhoades Planning Group",
+     "role": "other",
+     "label": "planning_consultant",
+     "quote": "PLANNING CONSULTANT\nRhoades Planning Group",
+     "license": null
+    },
+    {
+     "name": "Gilbane Development Company",
+     "role": "developer",
+     "label": null,
+     "quote": "DEVELOPER\nGilbane Development Company",
+     "license": null
+    },
+    {
+     "name": "SANDIS",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL ENGINEER\nSANDIS",
+     "license": null
+    },
+    {
+     "name": "PGAdesign Landscape Architects",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT\nPGAdesign Landscape Architects",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 224,
+   "record_key": "ZP2021-0127",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "NATOMA ARCHITECTS INC.",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nOWNER:\nNATOMA ARCHITECTS INC.\nCONSTRUCTION MANAGER:\nLANDSCAPE:",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 67,
+   "record_key": "ZP2025-0101",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "Jared Munneke",
+     "role": "other",
+     "label": "Project Sponsor",
+     "quote": "PROJECT SPONSOR:\nJared Munneke",
+     "license": null
+    },
+    {
+     "name": "LANDMARK PROPERTIES",
+     "role": "other",
+     "label": "Project Sponsor",
+     "quote": "PROJECT SPONSOR:\nJared Munneke\nLANDMARK PROPERTIES",
+     "license": null
+    },
+    {
+     "name": "Isaiah Stackhouse, Principal",
+     "role": "architect",
+     "label": "Design Architect",
+     "quote": "DESIGN ARCHITECT:\nIsaiah Stackhouse, Principal",
+     "license": null
+    },
+    {
+     "name": "STACKHOUSE DE LA PE\u00d1A TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": "Design Architect",
+     "quote": "DESIGN ARCHITECT:\nIsaiah Stackhouse, Principal\nSTACKHOUSE DE LA PE\u00d1A TRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "John Myefski, President and Principal",
+     "role": "architect",
+     "label": "Architect of Record",
+     "quote": "ARCHITECT OF RECORD:\nJohn Myefski, President and Principal",
+     "license": null
+    },
+    {
+     "name": "MYEFSKI ARCHITECTS, INC.",
+     "role": "architect",
+     "label": "Architect of Record",
+     "quote": "ARCHITECT OF RECORD:\nJohn Myefski, President and Principal\nMYEFSKI ARCHITECTS, INC.",
+     "license": null
+    },
+    {
+     "name": "Daniel Erlandson, Landscape Architect / Partner",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nDaniel Erlandson, Landscape Architect / Partner",
+     "license": null
+    },
+    {
+     "name": "HUMPHREYS & PARTNERS LANDSCAPE ARCHITECTS",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nDaniel Erlandson, Landscape Architect / Partner\nHUMPHREYS & PARTNERS LANDSCAPE ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "SDT ARCHITECTS",
+     "role": "architect",
+     "label": "copyright/consent holder",
+     "quote": "WORK OF THE ARCHITECT AND MAY NOT BE\nDUPLICATED, USED OR DISCLOSED WITHOUT WRITTEN\nCONSENT OF SDT ARCHITECTS.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 179,
+   "record_key": "ZP2023-0089",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "RODIN HU",
+     "role": "owner",
+     "label": "contact person",
+     "quote": "RODIN HU\nUCB LECONTE LLC",
+     "license": null
+    },
+    {
+     "name": "Studio KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nStudio KDA",
+     "license": null
+    },
+    {
+     "name": "CHARLES KAHN, AIA",
+     "role": "architect",
+     "label": "individual architect",
+     "quote": "CHARLES KAHN, AIA\ncharles@studiokda.com",
+     "license": null
+    },
+    {
+     "name": "DARSHAN AMRIT",
+     "role": "architect",
+     "label": "individual architect",
+     "quote": "DARSHAN AMRIT\ndarshan@studiokda.com",
+     "license": null
+    },
+    {
+     "name": "VAN DE POL ENGINEERING",
+     "role": "other",
+     "label": "surveyor",
+     "quote": "SURVEYOR\nVAN DE POL ENGINEERING",
+     "license": null
+    },
+    {
+     "name": "HENDRICK VAN DE POL",
+     "role": "other",
+     "label": "surveyor",
+     "quote": "HENDRICK VAN DE POL\nR.C.E. #15472",
+     "license": "R.C.E. #15472"
+    },
+    {
+     "name": "BKF ENGINEERS",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL\nBKF ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "MELINDA THOMAS",
+     "role": "civil_engineer",
+     "label": "individual engineer",
+     "quote": "MELINDA THOMAS\nmelindathomas@bkf.com",
+     "license": null
+    },
+    {
+     "name": "BLOCS DESIGN GROUP",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE\nBLOCS DESIGN GROUP",
+     "license": null
+    },
+    {
+     "name": "BLAKE RHINEHART",
+     "role": "landscape_architect",
+     "label": "individual landscape designer",
+     "quote": "BLAKE RHINEHART\nblake@blocsdesigngroup.com",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 155,
+   "record_key": "ZP2024-0014",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "LINDSAY NEWMAN, PE",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "LINDSAY NEWMAN, PE\nCIVIL ENGINEER",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 242,
+   "record_key": "ZP2018-0137",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "GROSVENOR AMERICAS",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER\nGROSVENOR AMERICAS",
+     "license": null
+    },
+    {
+     "name": "SOLOMON CORDWELL BUENZ",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT\nSOLOMON CORDWELL BUENZ",
+     "license": null
+    },
+    {
+     "name": "TIPPING STRUCTURAL ENGINEERS",
+     "role": "structural_engineer",
+     "label": null,
+     "quote": "STRUCTURAL\nTIPPING STRUCTURAL ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "MEYERS+ ENGINEERS",
+     "role": "mep_engineer",
+     "label": null,
+     "quote": "MEP\nMEYERS+ ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "BKF ENGINEERS",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL\nBKF ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "PGA DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT\nPGA DESIGN",
+     "license": null
+    },
+    {
+     "name": "THORNTON TOMASETTI",
+     "role": "other",
+     "label": "sustainability",
+     "quote": "SUSTAINABILITY\nTHORNTON TOMASETTI",
+     "license": null
+    },
+    {
+     "name": "EDGETT WILLIAMS CONSULTING GROUP",
+     "role": "other",
+     "label": "vertical transportation",
+     "quote": "VERTICAL TRANSPORTATION\nEDGETT WILLIAMS CONSULTING GROUP",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 222,
+   "record_key": "ZP2021-0127",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "NATOMA ARCHITECTS INC.",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nOWNER:\nNATOMA ARCHITECTS INC.\nCONSTRUCTION MANAGER:\nLANDSCAPE:",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 175,
+   "record_key": "ZP2024-0071",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "EVANS PROPERTY COMPANY",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER:\nARCHITECT:\nSTUDIO KDA\n1810 6TH ST. \nBERKELEY, CA 94710\nTEL: (510) 841-3555\nERIK WATERMAN\nerik@studiokda.com\nGREG HOFF\ngreg@evanspc.com\nEVANS PROPERTY COMPANY\n6226 LA SALLE AVE., \nOAKLAND, CA 64611\nTEL: (510) 339-8500",
+     "license": null
+    },
+    {
+     "name": "GREG HOFF",
+     "role": "owner",
+     "label": null,
+     "quote": "GREG HOFF\ngreg@evanspc.com\nEVANS PROPERTY COMPANY",
+     "license": null
+    },
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA\n1810 6TH ST. \nBERKELEY, CA 94710\nTEL: (510) 841-3555",
+     "license": null
+    },
+    {
+     "name": "ERIK WATERMAN",
+     "role": "architect",
+     "label": null,
+     "quote": "ERIK WATERMAN\nerik@studiokda.com",
+     "license": null
+    },
+    {
+     "name": "ST.JOHN LAND CONSULTING",
+     "role": "other",
+     "label": "surveyor",
+     "quote": "SURVEYOR\nST.JOHN LAND CONSULTING\n1815 TWIN CREEKS CT., \nNAPA, CA 94559\nTEL: (707) 392-6789",
+     "license": null
+    },
+    {
+     "name": "GREG ST. JOHN",
+     "role": "other",
+     "label": "surveyor",
+     "quote": "GREG ST. JOHN, PLS\ngreg@stjohnsurveys.com",
+     "license": "PLS"
+    },
+    {
+     "name": "KSR CIVIL ENGINEERING",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL:\nMATT REI\nmattrei59@gmail.com\nKSR CIVIL ENGINEERING\n215 Lafayette Circle, Suite A\nLafayette, CA 94549\nTEL: (510) 774-5471",
+     "license": null
+    },
+    {
+     "name": "MATT REI",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL:\nMATT REI\nmattrei59@gmail.com",
+     "license": null
+    },
+    {
+     "name": "BLOCS DESIGN GROUP",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE:\nBLAKE RHINEHART\nblake@blocsdesigngroup.com\nBLOCS DESIGN GROUP\nTEL: (916) 716-9331",
+     "license": null
+    },
+    {
+     "name": "BLAKE RHINEHART",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE:\nBLAKE RHINEHART\nblake@blocsdesigngroup.com",
+     "license": null
+    },
+    {
+     "name": "PRESERVATION ARCHITECTURE",
+     "role": "other",
+     "label": "historic_preservation",
+     "quote": "HISTORIC\nMARK HULBERT\nmhulbert@earthlink.net\nPRESERVATION ARCHITECTURE\n446 17TH STREET #302\nOAKLAND, CA 94612\nTEL: (510) 418-0285",
+     "license": null
+    },
+    {
+     "name": "MARK HULBERT",
+     "role": "other",
+     "label": "historic_preservation",
+     "quote": "HISTORIC\nMARK HULBERT\nmhulbert@earthlink.net",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 255,
+   "record_key": "UP2013-0058",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "THE BAY ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "THE BAY ARCHITECTS\nthe\nbay\narchitects",
+     "license": null
+    },
+    {
+     "name": "TIPPING MAR",
+     "role": "structural_engineer",
+     "label": null,
+     "quote": "TIPPING MAR\n1906 SHATTUCK AVE\nBERKELEY, CA 94704\n(510) 549-1906\nCONTACT: STEVE TIPPING\nSTRUCTURAL ENGINEER:",
+     "license": null
+    },
+    {
+     "name": "DILLINGHAM ASSOCIATES",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "DILLINGHAM ASSOCIATES\n2927 NEWBURY STREET\nBERKELEY, CA 94703\n(510) 548-4700\nCONTACT: REED DILLINGHAM\nLANDSCAPE ARCHITECT:",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 239,
+   "record_key": "ZP2017-0004",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 158,
+   "record_key": "ZP2024-0014",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "LINDSAY NEWMAN, PE",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "LINDSAY NEWMAN, PE\nCIVIL ENGINEER",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 269,
+   "record_key": "ZP2021-0162",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 210,
+   "record_key": "ZP2023-0057",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "LEVY DESIGN PARTNERS, INC. (LDP ARCHITECTURE)",
+     "role": "architect",
+     "label": null,
+     "quote": "THESE DRAWINGS AND SPECIFICATIONS ARE THE PROPERTY AND COPYRIGHT OF LEVY DESIGN PARTNERS, INC. (LDP ARCHITECTURE)",
+     "license": null
+    },
+    {
+     "name": "TOBY LEVY",
+     "role": "other",
+     "label": "unlabelled",
+     "quote": "TOBY LEVY",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 182,
+   "record_key": "ZP2021-0095",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 160,
+   "record_key": "DRCF2026-0001",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA",
+     "license": null
+    },
+    {
+     "name": "KISTER, SAVIO & REI, INC.",
+     "role": "civil_engineer",
+     "label": "civil_engineer/surveyor",
+     "quote": "CIVIL ENGINEER / SURVEYOR:\nKISTER, SAVIO & REI, INC.",
+     "license": null
+    },
+    {
+     "name": "WILDLAND ARCHITECTURE",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT\nWILDLAND ARCHITECTURE",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 308,
+   "record_key": "ZP2019-0074",
+   "doc_type": "correspondence",
+   "parties": []
+  },
+  {
+   "document_id": 102,
+   "record_key": "ZP2022-0135",
+   "doc_type": "plan_set",
+   "parties": []
+  },
+  {
+   "document_id": 122,
+   "record_key": "ZP2021-0193",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "CA VENTURES",
+     "role": "other",
+     "label": "unlabelled",
+     "quote": "BERKELEY PLAZA CA VENTURES 2065 KITTREDGE ST",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 59,
+   "record_key": "ZP2024-0067",
+   "doc_type": "plan_set",
+   "parties": []
+  },
+  {
+   "document_id": 292,
+   "record_key": "ZP2025-0101",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 48,
+   "record_key": "ZP2023-0079",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "PANORAMIC INTERESTS",
+     "role": "owner",
+     "label": "owner/applicant",
+     "quote": "OWNER/APPLICANT:\nJP Walsh, Director\nPANORAMIC INTERESTS",
+     "license": null
+    },
+    {
+     "name": "PANORAMIC INTERESTS",
+     "role": "applicant",
+     "label": "owner/applicant",
+     "quote": "OWNER/APPLICANT:\nJP Walsh, Director\nPANORAMIC INTERESTS",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "JETT LANDSCAPE ARCHITECTURE + DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nJesse Markman, Principal\nJETT LANDSCAPE ARCHITECTURE + DESIGN",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 46,
+   "record_key": "ZP2023-0040",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "1974 Shattuck Ave, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n1974 Shattuck Ave, LLC",
+     "license": null
+    },
+    {
+     "name": "1974 Shattuck Ave, LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n1974 Shattuck Ave, LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 262,
+   "record_key": "ZP2019-0074",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 64,
+   "record_key": "ZP2024-0058",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "2700 Shattuck LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n2700 Shattuck LLC",
+     "license": null
+    },
+    {
+     "name": "2700 Shattuck LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n2700 Shattuck LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "JETT LANDSCAPE ARCHITECTURE + DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nJesse Markman\nJETT LANDSCAPE ARCHITECTURE + DESIGN",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 91,
+   "record_key": "ZP2023-0040",
+   "doc_type": "density_bonus_application",
+   "parties": []
+  },
+  {
+   "document_id": 174,
+   "record_key": "ZP2024-0071",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA",
+     "license": null
+    },
+    {
+     "name": "ST.JOHN LAND CONSULTING",
+     "role": "other",
+     "label": "surveyor",
+     "quote": "SURVEYOR\nST.JOHN LAND CONSULTING",
+     "license": null
+    },
+    {
+     "name": "KSR CIVIL ENGINEERING",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL:\nMATT REI\nmattrei59@gmail.com\nKSR CIVIL ENGINEERING",
+     "license": null
+    },
+    {
+     "name": "BLOCS DESIGN GROUP",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE:\nBLAKE RHINEHART\nblake@blocsdesigngroup.com\nBLOCS DESIGN GROUP",
+     "license": null
+    },
+    {
+     "name": "PRESERVATION ARCHITECTURE",
+     "role": "other",
+     "label": "historic_preservation",
+     "quote": "HISTORIC\nMARK HULBERT\nmhulbert@earthlink.net\nPRESERVATION ARCHITECTURE",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 163,
+   "record_key": null,
+   "doc_type": "zab_packet",
+   "parties": [
+    {
+     "name": "Brian Carter, Studio KDA",
+     "role": "applicant",
+     "label": null,
+     "quote": "Applicant: Brian Carter, Studio KDA",
+     "license": null
+    },
+    {
+     "name": "Srihari & Jyothi Vegesna",
+     "role": "owner",
+     "label": null,
+     "quote": "Property Owner: Srihari & Jyothi \nVegesna",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 103,
+   "record_key": "ZP2022-0135",
+   "doc_type": "plan_set",
+   "parties": []
+  },
+  {
+   "document_id": 42,
+   "record_key": "ZP2024-0075",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "WORK OF THE ARCHITECT AND MAY NOT BE\nDUPLICATED, USED OR DISCLOSED WITHOUT WRITTEN\nCONSENT OF TRACHTENBERG ARCHITECTS.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 295,
+   "record_key": "ZP2022-0171",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 21,
+   "record_key": "ZP2024-0096",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "WANG BROTHERS INVESTMENTS, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER:\nWANG BROTHERS INVESTMENTS, LLC",
+     "license": null
+    },
+    {
+     "name": "LOWNEY ARCHITECTURE",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nLOWNEY ARCHITECTURE",
+     "license": null
+    },
+    {
+     "name": "BKF ENGINEERING",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL:\nBKF ENGINEERING",
+     "license": null
+    },
+    {
+     "name": "TIPPING",
+     "role": "structural_engineer",
+     "label": null,
+     "quote": "STRUCTURAL:\nTIPPING",
+     "license": null
+    },
+    {
+     "name": "122 WEST LANDSCAPE ARCH.",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE:\n122 WEST LANDSCAPE ARCH.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 8,
+   "record_key": null,
+   "doc_type": "application",
+   "parties": [
+    {
+     "name": "KTGY Architecture + Planning",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT\nKTGY Architecture + Planning",
+     "license": null
+    },
+    {
+     "name": "Rhoades Planning Group",
+     "role": "other",
+     "label": "planning_consultant",
+     "quote": "PLANNING CONSULTANT\nRhoades Planning Group",
+     "license": null
+    },
+    {
+     "name": "Gilbane Development Company",
+     "role": "developer",
+     "label": null,
+     "quote": "DEVELOPER\nGilbane Development Company",
+     "license": null
+    },
+    {
+     "name": "SANDIS",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL ENGINEER\nSANDIS",
+     "license": null
+    },
+    {
+     "name": "PGAdesign Landscape Architects",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT\nPGAdesign Landscape Architects",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 32,
+   "record_key": null,
+   "doc_type": "application",
+   "parties": []
+  },
+  {
+   "document_id": 144,
+   "record_key": "ZP2022-0038",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA",
+     "license": null
+    },
+    {
+     "name": "ERIN JAEB",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER:\nERIN JAEB",
+     "license": null
+    },
+    {
+     "name": "KEVIN KELLY",
+     "role": "owner",
+     "label": null,
+     "quote": "erin.jaeb@sbcglobal.net\nKEVIN KELLY",
+     "license": null
+    },
+    {
+     "name": "GROUNDWORKS OFFICE",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE:\nGROUNDWORKS OFFICE",
+     "license": null
+    },
+    {
+     "name": "NORTHSTAR ENGINEERING GROUP",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL/TOPO:\nNORTHSTAR\nENGINEERING GROUP",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 270,
+   "record_key": "ZP2022-0148",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 150,
+   "record_key": "DRCP2022-0005",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "THIS DRAWING IS AN INSTRUMENT OF SERVICE, AND AS SUCH, REMAINS THE PROPERTY OF STUDIO KDA. PERMISSION FOR USE OF THIS DOCUMENT IS LIMITED AND CAN BE EXTENDED ONLY BY WRITTEN AGREEMENT WITH STUDIO KDA.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 148,
+   "record_key": "ZP2022-0038",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA",
+     "license": null
+    },
+    {
+     "name": "ERIN JAEB",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER:\nERIN JAEB",
+     "license": null
+    },
+    {
+     "name": "KEVIN KELLY",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER:\nERIN JAEB\nerin.jaeb@sbcglobal.net\nKEVIN KELLY",
+     "license": null
+    },
+    {
+     "name": "GROUNDWORKS OFFICE",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE:\nGROUNDWORKS OFFICE",
+     "license": null
+    },
+    {
+     "name": "NORTHSTAR ENGINEERING GROUP",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL/TOPO:\nNORTHSTAR\nENGINEERING GROUP",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 18,
+   "record_key": "ZP2023-0099",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "MILVIA BERKELEY, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nMILVIA BERKELEY, LLC",
+     "license": null
+    },
+    {
+     "name": "MILVIA BERKELEY, LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nMILVIA BERKELEY, LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 289,
+   "record_key": "ZP2015-0229",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 251,
+   "record_key": "UP2013-0058",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "THE BAY ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "THE BAY ARCHITECTS\nthe\nbay\narchitects",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 226,
+   "record_key": "ZP2022-0144",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 263,
+   "record_key": "ZP2024-0070",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 45,
+   "record_key": "ZP2023-0040",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "1974 Shattuck Ave, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n1974 Shattuck Ave, LLC",
+     "license": null
+    },
+    {
+     "name": "1974 Shattuck Ave, LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n1974 Shattuck Ave, LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 131,
+   "record_key": "ZP2024-0162",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "2425 DURANT AVENUE LLC",
+     "role": "other",
+     "label": "project_sponsor",
+     "quote": "PROJECT SPONSOR: \n2425 DURANT AVENUE LLC",
+     "license": null
+    },
+    {
+     "name": "YES COMMUNITY ARCHITECTS INC",
+     "role": "architect",
+     "label": "design architect",
+     "quote": "DESIGN ARCHITECT:\nYES COMMUNITY ARCHITECTS INC",
+     "license": "C-36175"
+    },
+    {
+     "name": "RHOADES PLANNING GROUP",
+     "role": "other",
+     "label": "development consultant",
+     "quote": "DEVELOPMENT CONSULTANT:\nRHOADES PLANNING GROUP",
+     "license": null
+    },
+    {
+     "name": "SANDIS",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL ENGINEER:\nSANDIS",
+     "license": null
+    },
+    {
+     "name": "NICOLAUS WRIGHT",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nNICOLAUS WRIGHT",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 78,
+   "record_key": "ZP2022-0171",
+   "doc_type": "density_bonus_application",
+   "parties": []
+  },
+  {
+   "document_id": 118,
+   "record_key": "ZP2021-0193",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "CA VENTURES",
+     "role": "other",
+     "label": "unlabelled",
+     "quote": "BERKELEY PLAZA\nCA VENTURES\n2065 KITTREDGE ST",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 156,
+   "record_key": "ZP2024-0014",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "LINDSAY NEWMAN, PE",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "LINDSAY NEWMAN, PE\nCIVIL ENGINEER",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 211,
+   "record_key": "ZP2023-0057",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "LEVY DESIGN PARTNERS, INC. (LDP ARCHITECTURE)",
+     "role": "architect",
+     "label": null,
+     "quote": "THESE DRAWINGS AND SPECIFICATIONS ARE THE PROPERTY AND COPYRIGHT OF LEVY DESIGN PARTNERS, INC. (LDP ARCHITECTURE)",
+     "license": null
+    },
+    {
+     "name": "TOBY LEVY",
+     "role": "other",
+     "label": "unlabelled",
+     "quote": "TOBY LEVY",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 4,
+   "record_key": null,
+   "doc_type": "application",
+   "parties": []
+  },
+  {
+   "document_id": 202,
+   "record_key": "DRCF2021-0005",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "2902 Adeline Berkeley Dev, LLC",
+     "role": "developer",
+     "label": null,
+     "quote": "Developer\n2902 Adeline Berkeley Dev, LLC",
+     "license": null
+    },
+    {
+     "name": "Trachtenberg Architects",
+     "role": "architect",
+     "label": "Design Architect",
+     "quote": "Design Architect\nTrachtenberg Architects",
+     "license": null
+    },
+    {
+     "name": "Johnson Lyman Architects",
+     "role": "architect",
+     "label": "Architect of Record",
+     "quote": "Architect of Record\nJohnson Lyman Architects",
+     "license": null
+    },
+    {
+     "name": "Humann Company",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "Civil Engineer\nHumann Company",
+     "license": null
+    },
+    {
+     "name": "RW Stover & Associates, Inc.",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "Landscape Architect\nRW Stover & Associates, Inc.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 10,
+   "record_key": "ZP2024-0126",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA",
+     "license": null
+    },
+    {
+     "name": "VALIANCE CAPITAL, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNERS:\nVALIANCE CAPITAL, LLC",
+     "license": null
+    },
+    {
+     "name": "GREENWOOD & MOORE, INC.",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL/TOPO:\nGREENWOOD & MOORE, INC.",
+     "license": null
+    },
+    {
+     "name": "122 WEST DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE:\n122 WEST DESIGN",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 246,
+   "record_key": "ZP2018-0137",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "GROSVENOR AMERICAS",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER\nGROSVENOR AMERICAS",
+     "license": null
+    },
+    {
+     "name": "SOLOMON CORDWELL BUENZ",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT\nSOLOMON CORDWELL BUENZ",
+     "license": null
+    },
+    {
+     "name": "TIPPING STRUCTURAL ENGINEERS",
+     "role": "structural_engineer",
+     "label": null,
+     "quote": "STRUCTURAL\nTIPPING STRUCTURAL ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "MEYERS+ ENGINEERS",
+     "role": "mep_engineer",
+     "label": null,
+     "quote": "MEP\nMEYERS+ ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "BKF ENGINEERS",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL\nBKF ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "PGA DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT\nPGA DESIGN",
+     "license": null
+    },
+    {
+     "name": "THORNTON TOMASETTI",
+     "role": "other",
+     "label": "sustainability",
+     "quote": "SUSTAINABILITY\nTHORNTON TOMASETTI",
+     "license": null
+    },
+    {
+     "name": "EDGETT WILLIAMS CONSULTING GROUP",
+     "role": "other",
+     "label": "vertical transportation",
+     "quote": "VERTICAL TRANSPORTATION\nEDGETT WILLIAMS CONSULTING GROUP",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 307,
+   "record_key": "ZP2019-0173",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "Patrick Kennedy",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nPatrick Kennedy",
+     "license": null
+    },
+    {
+     "name": "Patrick Kennedy",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nPatrick Kennedy",
+     "license": null
+    },
+    {
+     "name": "1367 University LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nPatrick Kennedy\n1367 University LLC,\nc/o Panoramic Interests",
+     "license": null
+    },
+    {
+     "name": "1367 University LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nPatrick Kennedy\n1367 University LLC,\nc/o Panoramic Interests",
+     "license": null
+    },
+    {
+     "name": "David Trachtenberg",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "Maya Nagasaka",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nMaya Nagasaka\nMILLER COMPANY LANDSCAPE\nARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "MILLER COMPANY LANDSCAPE ARCHITECTS",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nMaya Nagasaka\nMILLER COMPANY LANDSCAPE\nARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 177,
+   "record_key": "ZP2024-0071",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA",
+     "license": null
+    },
+    {
+     "name": "TILL HOUTERMANS",
+     "role": "other",
+     "label": "unlabelled",
+     "quote": "TILL HOUTERMANS\ntill@studiokda.com",
+     "license": null
+    },
+    {
+     "name": "GREG HOFF",
+     "role": "other",
+     "label": "unlabelled",
+     "quote": "GREG HOFF\ngreg@evanspc.com",
+     "license": null
+    },
+    {
+     "name": "ST.JOHN LAND CONSULTING",
+     "role": "other",
+     "label": "surveyor",
+     "quote": "SURVEYOR\nST.JOHN LAND CONSULTING",
+     "license": null
+    },
+    {
+     "name": "GREG ST. JOHN",
+     "role": "other",
+     "label": "surveyor",
+     "quote": "GREG ST. JOHN, PLS\ngreg@stjohnsurveys.com",
+     "license": "PLS"
+    },
+    {
+     "name": "KSR CIVIL ENGINEERING",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL:\nMATT REI\nmattrei59@gmail.com\nKSR CIVIL ENGINEERING",
+     "license": null
+    },
+    {
+     "name": "MATT REI",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL:\nMATT REI\nmattrei59@gmail.com",
+     "license": null
+    },
+    {
+     "name": "BLOCS DESIGN GROUP",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE:\nBLAKE RHINEHART\nblake@blocsdesigngroup.com\nBLOCS DESIGN GROUP",
+     "license": null
+    },
+    {
+     "name": "BLAKE RHINEHART",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE:\nBLAKE RHINEHART\nblake@blocsdesigngroup.com",
+     "license": null
+    },
+    {
+     "name": "PRESERVATION ARCHITECTURE",
+     "role": "other",
+     "label": "historic preservation architect",
+     "quote": "HISTORIC\nMARK HULBERT\nmhulbert@earthlink.net\nPRESERVATION ARCHITECTURE",
+     "license": null
+    },
+    {
+     "name": "MARK HULBERT",
+     "role": "other",
+     "label": "historic preservation architect",
+     "quote": "HISTORIC\nMARK HULBERT\nmhulbert@earthlink.net",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 271,
+   "record_key": "ZP2022-0148",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 133,
+   "record_key": "ZP2024-0162",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "2425 DURANT AVENUE LLC",
+     "role": "other",
+     "label": "project sponsor",
+     "quote": "PROJECT SPONSOR: \n2425 DURANT AVENUE LLC",
+     "license": null
+    },
+    {
+     "name": "YES COMMUNITY ARCHITECTS INC",
+     "role": "architect",
+     "label": "design architect",
+     "quote": "DESIGN ARCHITECT:\nYES COMMUNITY ARCHITECTS INC",
+     "license": "C-36175"
+    },
+    {
+     "name": "RHOADES PLANNING GROUP",
+     "role": "other",
+     "label": "development consultant",
+     "quote": "DEVELOPMENT CONSULTANT:\nRHOADES PLANNING GROUP",
+     "license": null
+    },
+    {
+     "name": "SANDIS",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL ENGINEER:\nSANDIS",
+     "license": null
+    },
+    {
+     "name": "NICOLAUS WRIGHT",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nNICOLAUS WRIGHT",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 120,
+   "record_key": "ZP2021-0193",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "CA VENTURES",
+     "role": "other",
+     "label": "unlabelled",
+     "quote": "BERKELEY PLAZA\nCA VENTURES\n2065 KITTREDGE ST\nBERKELEY, CA 94704",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 252,
+   "record_key": "UP2013-0058",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "THE BAY ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "THE BAY ARCHITECTS\nthe\nbay\narchitects",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 194,
+   "record_key": "ZP2025-0048",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "NHAN NGUYE LE",
+     "role": "owner",
+     "label": null,
+     "quote": "NHAN NGUYE LE\nnhan@valiancecap.com",
+     "license": null
+    },
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA\n1810 6TH ST.\nBERKELEY, CA 94710",
+     "license": null
+    },
+    {
+     "name": "CHARLES KAHN, AIA",
+     "role": "architect",
+     "label": null,
+     "quote": "CHARLES KAHN, AIA\ncharles@studiokda.com",
+     "license": null
+    },
+    {
+     "name": "TILL HOUTERMANS",
+     "role": "architect",
+     "label": null,
+     "quote": "TILL HOUTERMANS\ntill@studiokda.com",
+     "license": null
+    },
+    {
+     "name": "BRIAN DORWARD",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "BRIAN DORWARD\nbdorward@greenwoodmoore.com",
+     "license": null
+    },
+    {
+     "name": "ABRAMS ASSOCIATES TRAFFIC ENGINEERING",
+     "role": "other",
+     "label": "traffic_engineer",
+     "quote": "TRAFFIC\nABRAMS ASSOCIATES TRAFFIC ENGINEERING\n1875 OLYMPIC BOULEVARD, SUITE 210 WALNUT CREEK, CA 94596",
+     "license": null
+    },
+    {
+     "name": "STEPHEN ABRAMS",
+     "role": "other",
+     "label": "traffic_engineer",
+     "quote": "STEPHEN ABRAMS\nsteve@abramsassociates.com",
+     "license": null
+    },
+    {
+     "name": "HISTORICAL PRESERVATION ARCHITECTURE",
+     "role": "other",
+     "label": "historic_preservation_architect",
+     "quote": "HISTORICAL\nPRESERVATION\nARCHITECTURE\nTEL: (510) 418-0285",
+     "license": null
+    },
+    {
+     "name": "MARK HULBERT",
+     "role": "other",
+     "label": "historic_preservation_architect",
+     "quote": "MARK HULBERT\nmhulbert@earthlink.net",
+     "license": null
+    },
+    {
+     "name": "MILLER COMPANY LANDSCAPE ARCHITECTS, INC.",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE\nMILLER COMPANY LANDSCAPE ARCHITECTS, INC.\n1585 FOLSOM ST, SAN FRANCISCO, CA 94103",
+     "license": null
+    },
+    {
+     "name": "JEFFREY MILLER",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "JEFFREY MILLER\njmiller@millercomp.com",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 268,
+   "record_key": "ZP2022-0135",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 95,
+   "record_key": "ZP2025-0101",
+   "doc_type": "affordable_housing_agreement",
+   "parties": []
+  },
+  {
+   "document_id": 44,
+   "record_key": "ZP2023-0040",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "1974 Shattuck Ave, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n1974 Shattuck Ave, LLC",
+     "license": null
+    },
+    {
+     "name": "1974 Shattuck Ave, LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n1974 Shattuck Ave, LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 63,
+   "record_key": "ZP2024-0058",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "jett.land",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "CRLA #3335 \u00b7 2 Theatre Square #218 \u00b7 Orinda CA \u00b7 94563 925.254.5422 \u00b7 www.jett.land LANDSCAPE ARCHITECTURE + DESIGN",
+     "license": "CRLA #3335"
+    }
+   ]
+  },
+  {
+   "document_id": 192,
+   "record_key": "ZP2024-0162",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 71,
+   "record_key": "ZP2024-0181",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "Laconia Development LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nLaconia Development LLC",
+     "license": null
+    },
+    {
+     "name": "Laconia Development LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nLaconia Development LLC",
+     "license": null
+    },
+    {
+     "name": "Rhoades Planning Group",
+     "role": "other",
+     "label": "unlabelled",
+     "quote": "Rhoades Planning Group\n2140 Shattuck Ave. Suite 705\nBerkeley, CA 94704",
+     "license": null
+    },
+    {
+     "name": "STACKHOUSE | DE LA PE\u00d1A | TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nISAIAH STACKHOUSE, PRINCIPAL\nSTACKHOUSE | DE LA PE\u00d1A |\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "JETT Landscape Architecture + Design",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nJETT Landscape Architecture + Design",
+     "license": null
+    },
+    {
+     "name": "BKF ENGINEERS",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL ENGINEER:\nBKF ENGINEERS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 265,
+   "record_key": "ZP2024-0070",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 101,
+   "record_key": "ZP2023-0126",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "LANDMARK PROPERTIES",
+     "role": "other",
+     "label": "project_sponsor",
+     "quote": "PROJECT SPONSOR:\nJared Munneke\nLANDMARK PROPERTIES",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": "design_architect",
+     "quote": "DESIGN ARCHITECT:\nIsaiah Stackhouse, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "MYEFSKI ARCHITECTS, INC.",
+     "role": "architect",
+     "label": "architect_of_record",
+     "quote": "ARCHITECT OF RECORD:\nJohn Myefski, President and Principal\nMYEFSKI ARCHITECTS, INC.",
+     "license": null
+    },
+    {
+     "name": "HUMPHREYS & PARTNERS LANDSCAPE ARCHITECTS",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nDaniel Erlandson, Partner\nHUMPHREYS & PARTNERS LANDSCAPE ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "BKF ENGINEERS",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL ENGINEER:\nBKF ENGINEERS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 141,
+   "record_key": "PLN2024-0010",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "BRIDGE HOUSING",
+     "role": "developer",
+     "label": null,
+     "quote": "LEAD DEVELOPER:\nBRIDGE HOUSING",
+     "license": null
+    },
+    {
+     "name": "DAVID BAKER ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDAVID BAKER ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "YES DUFFY ARCHITECTS",
+     "role": "other",
+     "label": "associate_architect",
+     "quote": "ASSOCIATE ARCHITECT:\nYES DUFFY ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "EINWILLER KUEHL",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "PUBLIC REALM/LANDSCAPE:\nEINWILLER KUEHL",
+     "license": null
+    },
+    {
+     "name": "LOTUS WATER",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL:\nLOTUS WATER",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 241,
+   "record_key": "ZP2018-0137",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 273,
+   "record_key": "ZP2019-0173",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 196,
+   "record_key": "ZP2015-0177",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "REALTEX APARTMENTS, LLC.",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nCody Fornari, Project Manager\nREALTEX APARTMENTS, LLC.",
+     "license": null
+    },
+    {
+     "name": "REALTEX APARTMENTS, LLC.",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nCody Fornari, Project Manager\nREALTEX APARTMENTS, LLC.",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "BRUCE JETT ASSOCIATES, INC.",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nBruce B. Jett, Principal\nBRUCE JETT ASSOCIATES, INC.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 76,
+   "record_key": "ZP2022-0116",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "2900 Shattuck Ave, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n2900 Shattuck Ave, LLC\nNX VENTURES",
+     "license": null
+    },
+    {
+     "name": "2900 Shattuck Ave, LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n2900 Shattuck Ave, LLC\nNX VENTURES",
+     "license": null
+    },
+    {
+     "name": "David Trachtenberg",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 217,
+   "record_key": "DRCF2023-0004",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "DNM Architecture",
+     "role": "architect",
+     "label": null,
+     "quote": "DNM Architecture \u2022 1A Gate 5 Road \u2022 Sausalito, CA 94965",
+     "license": null
+    },
+    {
+     "name": "DAVID N. MARLATT",
+     "role": "architect",
+     "label": null,
+     "quote": "DAVID N. MARLATT C-27909 REN 9/30/2025",
+     "license": "C-27909"
+    }
+   ]
+  },
+  {
+   "document_id": 123,
+   "record_key": "ZP2021-0193",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "BILL SCHRADER",
+     "role": "applicant",
+     "label": null,
+     "quote": "APPLICANT:\nBILL SCHRADER",
+     "license": null
+    },
+    {
+     "name": "CA STUDENT LIVING BERKELEY, LLC",
+     "role": "developer",
+     "label": null,
+     "quote": "CA STUDENT LIVING BERKELEY, LLC\n130 E RANDOLPH STREET\nSUITE 2100\nCHICAGO, IL 60601\n(304) 238-4745\nJESSICA LEO\nDEVELOPER",
+     "license": null
+    },
+    {
+     "name": "CA VENTURES",
+     "role": "other",
+     "label": "unlabelled",
+     "quote": "BERKELEY PLAZA\nCA VENTURES\n2065 KITTREDGE ST\nBERKELEY, CA 94704",
+     "license": null
+    },
+    {
+     "name": "NILES BOLTON ASSOCIATES",
+     "role": "architect",
+     "label": null,
+     "quote": "NILES BOLTON ASSOCIATES\n3060 PEACHTREE RD. N.W.\nSUITE 600\nATLANTA, GA 30305\n(404) 365-7600\nMOHAMED MOHSEN\nARCHITECTURE",
+     "license": null
+    },
+    {
+     "name": "THOMAS BAAK AND ASSOCIATES, LLP",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "THOMAS BAAK AND ASSOCIATES, LLP\n1620 NORTH MAIN STREET\nSUITE 4\nWALNUT CREEK, CA 94596\n(925) 933-2583\nRICK STOVER\nLANDSCAPE ARCHITECTURE",
+     "license": null
+    },
+    {
+     "name": "LANGAN ENGINEERING AND ENVIRONMENTAL SERVICES, INC.",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "LANGAN ENGINEERING AND ENVIRONMENTAL SERVICES, INC.\n135 MAIN STREET\nSUITE 1500\nSAN FRANCISCO, CA 94105\n(415) 955-5200\nJASON JOH\nCIVIL ENGINEERING",
+     "license": null
+    },
+    {
+     "name": "DCI ENGINEERS",
+     "role": "structural_engineer",
+     "label": null,
+     "quote": "DCI ENGINEERS\n135 MAIN STREET\nSUITE 1800\nSAN FRANCISCO, CA 94105\n(415) 638-8913\nMICHAEL BAUER\nSTRUCTURAL ENGINEERING",
+     "license": null
+    },
+    {
+     "name": "KUCHAR",
+     "role": "other",
+     "label": "interior_design",
+     "quote": "KUCHAR\n1821 WEST HUBBARD\nSUITE 105\nCHICAGO, IL 60622\n(312) 624-9206\nSARAH KUCHAR-PARKINSON\nINTERIOR DESIGN",
+     "license": null
+    },
+    {
+     "name": "WEST BUILDERS, INC.",
+     "role": "general_contractor",
+     "label": null,
+     "quote": "WEST BUILDERS, INC.\n120 RAILROAD AVENUE\nPOINT RICHMOND, CA 94801\n(510) 307-5678\nSEAN KIRBY\nGENERAL CONTRACTOR",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 213,
+   "record_key": "ZP2021-0095",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "2018 BLAKE STREET LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNERS\n2018 BLAKE STREET LLC",
+     "license": null
+    },
+    {
+     "name": "HUAN FANG",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT\nHUAN FANG\nFIFTH ARCH",
+     "license": null
+    },
+    {
+     "name": "FIFTH ARCH",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT\nHUAN FANG\nFIFTH ARCH",
+     "license": null
+    },
+    {
+     "name": "LEA & BRAZE ENG., INC.",
+     "role": "other",
+     "label": "surveyor",
+     "quote": "SURVEYOR\nLEA & BRAZE ENG., INC.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 299,
+   "record_key": "ZP2024-0075",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 56,
+   "record_key": "ZP2018-0135",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "The Austin Group LLC",
+     "role": "other",
+     "label": "unlabelled",
+     "quote": "The Austin Group LLC\n925.743.8836 (o&f)\n925.683.8782 (c)",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 49,
+   "record_key": "ZP2023-0079",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "PANORAMIC INTERESTS",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nJP Walsh, Director\nPANORAMIC INTERESTS",
+     "license": null
+    },
+    {
+     "name": "PANORAMIC INTERESTS",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nJP Walsh, Director\nPANORAMIC INTERESTS",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "JETT LANDSCAPE ARCHITECTURE + DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nJesse Markman, Principal\nJETT LANDSCAPE ARCHITECTURE + DESIGN",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 212,
+   "record_key": "ZP2022-0107",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "Adlaim Karim",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nAdlaim Karim",
+     "license": null
+    },
+    {
+     "name": "Adlaim Karim",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nAdlaim Karim",
+     "license": null
+    },
+    {
+     "name": "David Trachtenberg",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 9,
+   "record_key": "ZP2024-0126",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA",
+     "license": null
+    },
+    {
+     "name": "VALIANCE CAPITAL, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNERS:\nVALIANCE CAPITAL, LLC",
+     "license": null
+    },
+    {
+     "name": "GREENWOOD & MOORE, INC.",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL/TOPO:\nGREENWOOD & MOORE, INC.",
+     "license": "C042628"
+    }
+   ]
+  },
+  {
+   "document_id": 2,
+   "record_key": "ZP2022-0021",
+   "doc_type": "application",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA",
+     "license": null
+    },
+    {
+     "name": "KISTER, SAVIO & REI, INC.",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL ENGINEER / SURVEYOR:\nKISTER, SAVIO & REI, INC.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 161,
+   "record_key": "DRCF2026-0001",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA",
+     "license": null
+    },
+    {
+     "name": "KISTER, SAVIO & REI, INC.",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL ENGINEER / SURVEYOR:\nKISTER, SAVIO & REI, INC.",
+     "license": null
+    },
+    {
+     "name": "WILDLAND ARCHITECTURE",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT\nWILDLAND ARCHITECTURE",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 305,
+   "record_key": null,
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 85,
+   "record_key": "ZP2022-0046",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 84,
+   "record_key": "ZP2022-0046",
+   "doc_type": "density_bonus_application",
+   "parties": []
+  },
+  {
+   "document_id": 90,
+   "record_key": "ZP2023-0090",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 176,
+   "record_key": "ZP2024-0071",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA\n1810 6TH ST. \nBERKELEY, CA 94710\nTEL: (510) 841-3555\nERIK WATERMAN",
+     "license": null
+    },
+    {
+     "name": "ST.JOHN LAND CONSULTING",
+     "role": "other",
+     "label": "surveyor",
+     "quote": "SURVEYOR\nST.JOHN LAND CONSULTING\n1815 TWIN CREEKS CT., \nNAPA, CA 94559\nTEL: (707) 392-6789\nGREG ST. JOHN, PLS",
+     "license": "PLS"
+    },
+    {
+     "name": "KSR CIVIL ENGINEERING",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL:\nMATT REI\nmattrei59@gmail.com\nKSR CIVIL ENGINEERING",
+     "license": null
+    },
+    {
+     "name": "BLOCS DESIGN GROUP",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE:\nBLAKE RHINEHART\nblake@blocsdesigngroup.com\nBLOCS DESIGN GROUP",
+     "license": null
+    },
+    {
+     "name": "PRESERVATION ARCHITECTURE",
+     "role": "other",
+     "label": "historic preservation architect",
+     "quote": "HISTORIC\nMARK HULBERT\nmhulbert@earthlink.net\nPRESERVATION ARCHITECTURE",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 197,
+   "record_key": "ZP2015-0177",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "REALTEX APARTMENTS, LLC.",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nCody Fornari, Project Manager\nREALTEX APARTMENTS, LLC.",
+     "license": null
+    },
+    {
+     "name": "REALTEX APARTMENTS, LLC.",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nCody Fornari, Project Manager\nREALTEX APARTMENTS, LLC.",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "BRUCE JETT ASSOCIATES, INC.",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nBruce B. Jett, Principal\nBRUCE JETT ASSOCIATES, INC.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 27,
+   "record_key": null,
+   "doc_type": "application",
+   "parties": [
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "CONSENT OF TRACHTENBERG ARCHITECTS.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 97,
+   "record_key": "ZP2023-0107",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "ZENGS BERKELEY LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER:\nZENGS BERKELEY LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "MILLER COMPANY LANDSCAPE ARCHITECTS",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nMichael Ingram\nMILLER COMPANY LANDSCAPE ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 127,
+   "record_key": "ZP2022-0178",
+   "doc_type": "plan_set",
+   "parties": []
+  },
+  {
+   "document_id": 72,
+   "record_key": "ZP2022-0171",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "2601 SPA, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n2601 SPA, LLC",
+     "license": null
+    },
+    {
+     "name": "2601 SPA, LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n2601 SPA, LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 216,
+   "record_key": "ZP2021-0095",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "BILL SCHRADER",
+     "role": "applicant",
+     "label": null,
+     "quote": "APPLICANT:\nBILL SCHRADER",
+     "license": null
+    },
+    {
+     "name": "CA STUDENT LIVING BERKELEY, LLC",
+     "role": "developer",
+     "label": null,
+     "quote": "CA STUDENT LIVING BERKELEY, LLC\n130 E RANDOLPH STREET\nSUITE 2100\nCHICAGO, IL 60601\n(304) 238-4745\nJESSICA LEO\nDEVELOPER",
+     "license": null
+    },
+    {
+     "name": "NILES BOLTON ASSOCIATES",
+     "role": "architect",
+     "label": null,
+     "quote": "NILES BOLTON ASSOCIATES\n3060 PEACHTREE RD. N.W.\nSUITE 600\nATLANTA, GA 30305\n(404) 365-7600\nMOHAMED MOHSEN\nARCHITECTURE",
+     "license": null
+    },
+    {
+     "name": "THOMAS BAAK AND ASSOCIATES, LLP",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "THOMAS BAAK AND ASSOCIATES, LLP\n1620 NORTH MAIN STREET\nSUITE 4\nWALNUT CREEK, CA 94596\n(925) 933-2583\nRICK STOVER\nLANDSCAPE ARCHITECTURE",
+     "license": null
+    },
+    {
+     "name": "LANGAN ENGINEERING AND ENVIRONMENTAL SERVICES, INC.",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "LANGAN ENGINEERING AND ENVIRONMENTAL SERVICES, INC.\n135 MAIN STREET\nSUITE 1500\nSAN FRANCISCO, CA 94105\n(415) 955-5200\nJASON JOH\nCIVIL ENGINEERING",
+     "license": null
+    },
+    {
+     "name": "DCI ENGINEERS",
+     "role": "structural_engineer",
+     "label": null,
+     "quote": "DCI ENGINEERS\n135 MAIN STREET\nSUITE 1800\nSAN FRANCISCO, CA 94105\n(415) 638-8913\nMICHAEL BAUER\nSTRUCTURAL ENGINEERING",
+     "license": null
+    },
+    {
+     "name": "CA VENTURES",
+     "role": "other",
+     "label": "unlabelled",
+     "quote": "BERKELEY PLAZA\nCA VENTURES\n2065 KITTREDGE ST\nBERKELEY, CA 94704",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 52,
+   "record_key": "ZP2018-0135",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "The Austin Group LLC",
+     "role": "other",
+     "label": "unlabelled",
+     "quote": "The Austin Group LLC\n925.743.8836 (o&f)\n925.683.8782 (c)",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 57,
+   "record_key": "ZP2018-0135",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "CA/AG LOGAN PARK PROPERTY OWNER, LLC",
+     "role": "developer",
+     "label": null,
+     "quote": "CA/AG LOGAN PARK PROPERTY OWNER,\nLLC\n(925) 743-8836\nBILL SCHRADER\nDEVELOPER",
+     "license": null
+    },
+    {
+     "name": "NILES BOLTON ASSOCIATES",
+     "role": "architect",
+     "label": null,
+     "quote": "NILES BOLTON ASSOCIATES\n3060 PEACHTREE RD. N.W.\nSUITE 600\nATLANTA, GA 30305\n(404) 365-7600\nMOHAMED MOHSEN\nARCHITECTURE",
+     "license": null
+    },
+    {
+     "name": "IDA STRUCTURAL ENGINEERS",
+     "role": "structural_engineer",
+     "label": null,
+     "quote": "IDA STRUCTURAL ENGINEERS\n1629 TELEGRAPH AVE.\nSUITE 300\nOAKLAND, CA 94612\n(510) 834-1629\nSTEPHEN DEJESSE\nSTRUCTURAL ENGINEERING",
+     "license": null
+    },
+    {
+     "name": "VARA DESIGN",
+     "role": "other",
+     "label": "interior_design",
+     "quote": "VARA DESIGN\n15 W. DOWNER PL.\nAURORA, IL 60506\n(630) 907-7953\nMEGAN PAUL\nINTERIOR DESIGN*",
+     "license": null
+    },
+    {
+     "name": "THOMAS BAAK AND ASSOCIATES, LLP",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "THOMAS BAAK AND ASSOCIATES, LLP\n1620 NORTH MAIN STREET\nSUITE 4\nWALNUT CREEK, CA 94596\n(925) 933-2583\nRICK STOVER\nLANDSCAPE ARCHITECTURE*",
+     "license": null
+    },
+    {
+     "name": "HUMANN COMPANY, INC.",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "HUMANN COMPANY, INC.\n1021 BROWN AVE.\nLAFAYETTE, CA 94549\n(925) 283-5000\nHANY NAOOM\nCIVIL ENGINEERING*",
+     "license": null
+    },
+    {
+     "name": "WEST BUILDERS, INC.",
+     "role": "general_contractor",
+     "label": null,
+     "quote": "WEST BUILDERS, INC.\n120 RAILROAD AVE.\nPOINT RICHMOND, CA 94801\n(510) 307-5678\nSEAN KIRBY\nGENERAL CONTRACTOR*",
+     "license": null
+    },
+    {
+     "name": "JOHNSON LYMAN ARCHITECTS",
+     "role": "other",
+     "label": "design_consultant",
+     "quote": "JOHNSON LYMAN ARCHITECTS\n1375 LOCUST ST., #202\nWALNUT CREEK, CA 94596\n(925) 930-9690\nDAVE JOHNSON\nDESIGN CONSULTANT*",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 124,
+   "record_key": "ZP2021-0193",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "BILL SCHRADER",
+     "role": "applicant",
+     "label": null,
+     "quote": "APPLICANT:\nBILL SCHRADER",
+     "license": null
+    },
+    {
+     "name": "CA VENTURES",
+     "role": "other",
+     "label": "unlabelled title block entity",
+     "quote": "BERKELEY PLAZA\nCA VENTURES\n2065 KITTREDGE ST\nBERKELEY, CA 94704",
+     "license": null
+    },
+    {
+     "name": "CA STUDENT LIVING BERKELEY, LLC",
+     "role": "developer",
+     "label": null,
+     "quote": "CA STUDENT LIVING BERKELEY, LLC\n130 E RANDOLPH STREET\nSUITE 2100\nCHICAGO, IL 60601\n(304) 238-4745\nJESSICA LEO\nDEVELOPER",
+     "license": null
+    },
+    {
+     "name": "NILES BOLTON ASSOCIATES",
+     "role": "architect",
+     "label": null,
+     "quote": "NILES BOLTON ASSOCIATES\n3060 PEACHTREE RD. N.W.\nSUITE 600\nATLANTA, GA 30305\n(404) 365-7600\nMOHAMED MOHSEN\nARCHITECTURE",
+     "license": null
+    },
+    {
+     "name": "THOMAS BAAK AND ASSOCIATES, LLP",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "THOMAS BAAK AND ASSOCIATES, LLP\n1620 NORTH MAIN STREET\nSUITE 4\nWALNUT CREEK, CA 94596\n(925) 933-2583\nRICK STOVER\nLANDSCAPE ARCHITECTURE",
+     "license": null
+    },
+    {
+     "name": "LANGAN ENGINEERING AND ENVIRONMENTAL SERVICES, INC.",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "LANGAN ENGINEERING AND ENVIRONMENTAL SERVICES, INC.\n135 MAIN STREET\nSUITE 1500\nSAN FRANCISCO, CA 94105\n(415) 955-5200\nJASON JOH\nCIVIL ENGINEERING",
+     "license": null
+    },
+    {
+     "name": "DCI ENGINEERS",
+     "role": "structural_engineer",
+     "label": null,
+     "quote": "DCI ENGINEERS\n135 MAIN STREET\nSUITE 1800\nSAN FRANCISCO, CA 94105\n(415) 638-8913\nMICHAEL BAUER\nSTRUCTURAL ENGINEERING",
+     "license": null
+    },
+    {
+     "name": "KUCHAR",
+     "role": "other",
+     "label": "interior_design",
+     "quote": "KUCHAR\n1821 WEST HUBBARD\nSUITE 105\nCHICAGO, IL 60622\n(312) 624-9206\nSARAH KUCHAR-PARKINSON\nINTERIOR DESIGN",
+     "license": null
+    },
+    {
+     "name": "WEST BUILDERS, INC.",
+     "role": "general_contractor",
+     "label": null,
+     "quote": "WEST BUILDERS, INC.\n120 RAILROAD AVENUE\nPOINT RICHMOND, CA 94801\n(510) 307-5678\nSEAN KIRBY\nGENERAL CONTRACTOR",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 203,
+   "record_key": "DRCF2021-0005",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "2902 Adeline Berkeley Dev, LLC",
+     "role": "developer",
+     "label": null,
+     "quote": "Developer\n2902 Adeline Berkeley Dev, LLC",
+     "license": null
+    },
+    {
+     "name": "Trachtenberg Architects",
+     "role": "architect",
+     "label": "Design Architect",
+     "quote": "Design Architect\nTrachtenberg Architects",
+     "license": null
+    },
+    {
+     "name": "Johnson Lyman Architects",
+     "role": "architect",
+     "label": "Architect of Record",
+     "quote": "Architect of Record\nJohnson Lyman Architects",
+     "license": null
+    },
+    {
+     "name": "Humann Company",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "Civil Engineer\nHumann Company",
+     "license": null
+    },
+    {
+     "name": "RW Stover & Associates, Inc.",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "Landscape Architect\nRW Stover & Associates, Inc.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 96,
+   "record_key": "ZP2025-0101",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 214,
+   "record_key": "ZP2021-0095",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "2018 BLAKE STREET LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNERS\n2018 BLAKE STREET LLC",
+     "license": null
+    },
+    {
+     "name": "HUAN FANG",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT\nHUAN FANG\nFIFTH ARCH",
+     "license": null
+    },
+    {
+     "name": "FIFTH ARCH",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT\nHUAN FANG\nFIFTH ARCH",
+     "license": null
+    },
+    {
+     "name": "LEA & BRAZE ENG., INC.",
+     "role": "other",
+     "label": "surveyor",
+     "quote": "SURVEYOR\nLEA & BRAZE ENG., INC.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 189,
+   "record_key": "ZP2022-0021",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 285,
+   "record_key": "ZP2019-0173",
+   "doc_type": "tabulation_form",
+   "parties": [
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "TRACHTENBERG ARCHITECTS \n2 4 2 1 F o u r t h S t r e e t B e r k e l e y , C A 9 4 7 1 0",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 98,
+   "record_key": "ZP2023-0107",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "ZENGS BERKELEY LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER:\nZENGS BERKELEY LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "MILLER COMPANY LANDSCAPE ARCHITECTS",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nMichael Ingram\nMILLER COMPANY LANDSCAPE ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 159,
+   "record_key": "ZP2022-0021",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA",
+     "license": null
+    },
+    {
+     "name": "KISTER, SAVIO & REI, INC.",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL ENGINEER / SURVEYOR:\nKISTER, SAVIO & REI, INC.",
+     "license": null
+    },
+    {
+     "name": "WILDLAND ARCHITECTURE",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT\nWILDLAND ARCHITECTURE",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 236,
+   "record_key": "ZP2019-0074",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 110,
+   "record_key": "ZP2021-0046",
+   "doc_type": "plan_set",
+   "parties": []
+  },
+  {
+   "document_id": 219,
+   "record_key": "DRCP2018-0003",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "SAN PABLO INVESTORS TWO, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nSAN PABLO INVESTORS TWO, LLC",
+     "license": null
+    },
+    {
+     "name": "SAN PABLO INVESTORS TWO, LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nSAN PABLO INVESTORS TWO, LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 88,
+   "record_key": "ZP2023-0099",
+   "doc_type": "density_bonus_application",
+   "parties": [
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "TRACHTENBERG ARCHITECTS \n2 4 2 1 F o u r t h S t r e e t B e r k e l e y , C A 9 4 7 1 0",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 283,
+   "record_key": "ZP2024-0181",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 37,
+   "record_key": "ZP2022-0046",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "3000 Shattuck Avenue, LLC",
+     "role": "other",
+     "label": "project_sponsor",
+     "quote": "PROJECT SPONSOR:\n3000 Shattuck Avenue, LLC",
+     "license": null
+    },
+    {
+     "name": "NX Ventures, LLC",
+     "role": "other",
+     "label": "project_sponsor",
+     "quote": "PROJECT SPONSOR:\n3000 Shattuck Avenue, LLC\nNX Ventures, LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "INSIDEOUT DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nPenn Phillips\nINSIDEOUT DESIGN",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 130,
+   "record_key": "ZP2024-0029",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA\n1810 6TH ST. BERKELEY, CA 94710",
+     "license": null
+    },
+    {
+     "name": "BKF ENGINEERS",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL:\nCHRISTOPHER MILLS, PE, PLS\nBKF ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "RHOADES PLANNING GROUP",
+     "role": "other",
+     "label": "planning_consultant",
+     "quote": "PLANNING CONSULTANT\nRHOADES PLANNING GROUP\n2140 SHATTUCK AVENUE, SUITE 705",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 36,
+   "record_key": null,
+   "doc_type": "application",
+   "parties": [
+    {
+     "name": "2550 SHATTUCK LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "APPLICANT:\n2550 SHATTUCK LLC",
+     "license": null
+    },
+    {
+     "name": "KAVA MASSIH ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "KMA PROJECT NO.\nKAVA MASSIH ARCHITECTS\nKAVA MASSIH ARCHITECTS\n920 Grayson Street \u0406 Berkeley, CA 94710\n95 Federal Street \u0406 San Francisco, CA 94107",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 108,
+   "record_key": "ZP2021-0162",
+   "doc_type": "plan_set",
+   "parties": []
+  },
+  {
+   "document_id": 294,
+   "record_key": "ZP2026-0049",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 40,
+   "record_key": "ZP2024-0075",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "BERKLAND FOUNDATION",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nBERKLAND FOUNDATION",
+     "license": null
+    },
+    {
+     "name": "BERKLAND FOUNDATION",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nBERKLAND FOUNDATION",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 66,
+   "record_key": "ZP2024-0058",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "2700 Shattuck LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n2700 Shattuck LLC",
+     "license": null
+    },
+    {
+     "name": "2700 Shattuck LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n2700 Shattuck LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "JETT LANDSCAPE ARCHITECTURE + DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nJesse Markman\nJETT LANDSCAPE ARCHITECTURE + DESIGN",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 228,
+   "record_key": "ZP2022-0149",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 284,
+   "record_key": "ZP2024-0182",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 304,
+   "record_key": null,
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "2700 Shattuck LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n2700 Shattuck LLC",
+     "license": null
+    },
+    {
+     "name": "2700 Shattuck LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n2700 Shattuck LLC",
+     "license": null
+    },
+    {
+     "name": "SDT ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nSDT ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "JETT LANDSCAPE ARCHITECTURE + DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nJesse Markman\nJETT LANDSCAPE ARCHITECTURE + DESIGN",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "other",
+     "label": "copyright/title block firm",
+     "quote": "WORK OF THE ARCHITECT AND MAY NOT BE\nDUPLICATED, USED OR DISCLOSED WITHOUT WRITTEN\nCONSENT OF TRACHTENBERG ARCHITECTS.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 229,
+   "record_key": "ZP2022-0149",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 187,
+   "record_key": "ZP2023-0068",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 154,
+   "record_key": "ZP2024-0014",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "LINDSAY NEWMAN, PE",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "LINDSAY NEWMAN, PE\nCIVIL ENGINEER",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 281,
+   "record_key": "ZP2024-0071",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 220,
+   "record_key": "ZP2023-0070",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "BARAN STUDIO ARCHITECTURE",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nBARAN STUDIO ARCHITECTURE",
+     "license": null
+    },
+    {
+     "name": "MATT BARAN",
+     "role": "architect",
+     "label": null,
+     "quote": "MATT BARAN\nArchitect",
+     "license": null
+    },
+    {
+     "name": "RYAN HEATH",
+     "role": "other",
+     "label": "Project Manager",
+     "quote": "RYAN HEATH\nProject Manager",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 223,
+   "record_key": "ZP2021-0127",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 1,
+   "record_key": "ZP2022-0021",
+   "doc_type": "application",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 245,
+   "record_key": "ZP2018-0137",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "GROSVENOR AMERICAS",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER\nGROSVENOR AMERICAS",
+     "license": null
+    },
+    {
+     "name": "SOLOMON CORDWELL BUENZ",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT\nSOLOMON CORDWELL BUENZ",
+     "license": null
+    },
+    {
+     "name": "TIPPING STRUCTURAL ENGINEERS",
+     "role": "structural_engineer",
+     "label": null,
+     "quote": "STRUCTURAL\nTIPPING STRUCTURAL ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "MEYERS+ ENGINEERS",
+     "role": "mep_engineer",
+     "label": null,
+     "quote": "MEP\nMEYERS+ ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "BKF ENGINEERS",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL\nBKF ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "PGA DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT\nPGA DESIGN",
+     "license": null
+    },
+    {
+     "name": "THORNTON TOMASETTI",
+     "role": "other",
+     "label": "sustainability consultant",
+     "quote": "SUSTAINABILITY\nTHORNTON TOMASETTI",
+     "license": null
+    },
+    {
+     "name": "EDGETT WILLIAMS CONSULTING GROUP",
+     "role": "other",
+     "label": "vertical transportation consultant",
+     "quote": "VERTICAL TRANSPORTATION\nEDGETT WILLIAMS CONSULTING GROUP",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 146,
+   "record_key": "ZP2022-0038",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "THIS DRAWING IS AN INSTRUMENT OF SERVICE, AND AS SUCH, REMAINS THE PROPERTY OF STUDIO KDA. PERMISSION FOR USE OF THIS DOCUMENT IS LIMITED AND CAN BE EXTENDED ONLY BY WRITTEN AGREEMENT WITH STUDIO KDA.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 23,
+   "record_key": null,
+   "doc_type": "application",
+   "parties": [
+    {
+     "name": "SAN PABLO INVESTORS TWO, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nSAN PABLO INVESTORS TWO, LLC",
+     "license": null
+    },
+    {
+     "name": "SAN PABLO INVESTORS TWO, LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nSAN PABLO INVESTORS TWO, LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 7,
+   "record_key": null,
+   "doc_type": "application",
+   "parties": [
+    {
+     "name": "KTGY Architecture + Planning",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT\nKTGY Architecture + Planning",
+     "license": null
+    },
+    {
+     "name": "Rhoades Planning Group",
+     "role": "other",
+     "label": "planning_consultant",
+     "quote": "PLANNING CONSULTANT\nRhoades Planning Group",
+     "license": null
+    },
+    {
+     "name": "Gilbane Development Company",
+     "role": "developer",
+     "label": null,
+     "quote": "DEVELOPER\nGilbane Development Company",
+     "license": null
+    },
+    {
+     "name": "SANDIS",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL ENGINEER\nSANDIS",
+     "license": null
+    },
+    {
+     "name": "PGAdesign Landscape Architects",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT\nPGAdesign Landscape Architects",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 183,
+   "record_key": "ZP2018-0112",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 172,
+   "record_key": "ZP2024-0071",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA",
+     "license": null
+    },
+    {
+     "name": "ST.JOHN LAND CONSULTING",
+     "role": "other",
+     "label": "surveyor",
+     "quote": "SURVEYOR\nST.JOHN LAND CONSULTING",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 157,
+   "record_key": "ZP2024-0014",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "LINDSAY NEWMAN, PE",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "LINDSAY NEWMAN, PE\nCIVIL ENGINEER",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 206,
+   "record_key": "DRCP2015-0019",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "WORK OF THE ARCHITECT AND MAY NOT BE DUPLICATED, USED OR DISCLOSED WITHOUT WRITTEN CONSENT OF TRACHTENBERG ARCHITECTS.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 20,
+   "record_key": "ZP2024-0096",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "WANG BROTHERS INVESTMENTS, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER:\nWANG BROTHERS INVESTMENTS, LLC",
+     "license": null
+    },
+    {
+     "name": "LOWNEY ARCHITECTURE",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nLOWNEY ARCHITECTURE",
+     "license": null
+    },
+    {
+     "name": "BKF ENGINEERING",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL:\nBKF ENGINEERING",
+     "license": null
+    },
+    {
+     "name": "TIPPING",
+     "role": "structural_engineer",
+     "label": null,
+     "quote": "STRUCTURAL:\nTIPPING",
+     "license": null
+    },
+    {
+     "name": "122 WEST LANDSCAPE ARCH.",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE:\n122 WEST LANDSCAPE ARCH.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 29,
+   "record_key": null,
+   "doc_type": "application",
+   "parties": [
+    {
+     "name": "SAN PABLO INVESTORS TWO, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nSAN PABLO INVESTORS TWO, LLC",
+     "license": null
+    },
+    {
+     "name": "SAN PABLO INVESTORS TWO, LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nSAN PABLO INVESTORS TWO, LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 191,
+   "record_key": "ZP2024-0162",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 207,
+   "record_key": "DRCP2015-0019",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "REALTEX APARTMENTS, LLC.",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nCody Fornari, Project Manager\nREALTEX APARTMENTS, LLC.",
+     "license": null
+    },
+    {
+     "name": "REALTEX APARTMENTS, LLC.",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nCody Fornari, Project Manager\nREALTEX APARTMENTS, LLC.",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "BRUCE JETT ASSOCIATES, INC.",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nBruce B. Jett, Principal\nBRUCE JETT ASSOCIATES, INC.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 87,
+   "record_key": "ZP2024-0066",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 261,
+   "record_key": "ZP2022-0099",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "1598 University Avenue, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n1598 University Avenue, LLC",
+     "license": null
+    },
+    {
+     "name": "1598 University Avenue, LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n1598 University Avenue, LLC",
+     "license": null
+    },
+    {
+     "name": "NX VENTURES",
+     "role": "other",
+     "label": "unlabelled",
+     "quote": "1598 University Avenue, LLC\nNX VENTURES",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 145,
+   "record_key": "ZP2022-0038",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA",
+     "license": null
+    },
+    {
+     "name": "ERIN JAEB",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER:\nERIN JAEB",
+     "license": null
+    },
+    {
+     "name": "KEVIN KELLY",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER:\nERIN JAEB\nerin.jaeb@sbcglobal.net\nKEVIN KELLY",
+     "license": null
+    },
+    {
+     "name": "GROUNDWORKS OFFICE",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE:\nGROUNDWORKS OFFICE",
+     "license": null
+    },
+    {
+     "name": "NORTHSTAR ENGINEERING GROUP",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL/TOPO:\nNORTHSTAR\nENGINEERING GROUP",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 277,
+   "record_key": "ZP2024-0067",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 225,
+   "record_key": "ZP2022-0144",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 62,
+   "record_key": "ZP2024-0058",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "2700 Shattuck LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n2700 Shattuck LLC",
+     "license": null
+    },
+    {
+     "name": "2700 Shattuck LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n2700 Shattuck LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "JETT LANDSCAPE ARCHITECTURE + DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nJesse Markman\nJETT LANDSCAPE ARCHITECTURE + DESIGN",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 247,
+   "record_key": "ZP2018-0137",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "GROSVENOR AMERICAS",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER\nGROSVENOR AMERICAS",
+     "license": null
+    },
+    {
+     "name": "SOLOMON CORDWELL BUENZ",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT\nSOLOMON CORDWELL BUENZ",
+     "license": null
+    },
+    {
+     "name": "TIPPING STRUCTURAL ENGINEERS",
+     "role": "structural_engineer",
+     "label": null,
+     "quote": "STRUCTURAL\nTIPPING STRUCTURAL ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "MEYERS+ ENGINEERS",
+     "role": "mep_engineer",
+     "label": null,
+     "quote": "MEP\nMEYERS+ ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "BKF ENGINEERS",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL\nBKF ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "PGA DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT\nPGA DESIGN",
+     "license": null
+    },
+    {
+     "name": "THORNTON TOMASETTI",
+     "role": "other",
+     "label": "sustainability",
+     "quote": "SUSTAINABILITY\nTHORNTON TOMASETTI",
+     "license": null
+    },
+    {
+     "name": "EDGETT WILLIAMS CONSULTING GROUP",
+     "role": "other",
+     "label": "vertical transportation",
+     "quote": "VERTICAL TRANSPORTATION\nEDGETT WILLIAMS CONSULTING GROUP",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 221,
+   "record_key": "ZP2023-0070",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "BARAN STUDIO ARCHITECTURE",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nBARAN STUDIO ARCHITECTURE",
+     "license": null
+    },
+    {
+     "name": "MATT BARAN",
+     "role": "architect",
+     "label": null,
+     "quote": "MATT BARAN\nArchitect",
+     "license": null
+    },
+    {
+     "name": "RYAN HEATH",
+     "role": "other",
+     "label": "Project Manager",
+     "quote": "RYAN HEATH\nProject Manager",
+     "license": null
+    },
+    {
+     "name": "OA.LAND",
+     "role": "other",
+     "label": "unlabelled",
+     "quote": "OA.LAND LOS ANGELES",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 53,
+   "record_key": "ZP2018-0135",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "JOHNSON LYMAN ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "JOHNSON LYMAN ARCHITECTS\n1375 Locust Street, #202, Walnut Creek, CA 94596",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 256,
+   "record_key": "DRCF2021-0006",
+   "doc_type": "plan_set",
+   "parties": []
+  },
+  {
+   "document_id": 288,
+   "record_key": "ZP2015-0229",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 259,
+   "record_key": "ZP2022-0099",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "1598 University Avenue, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n1598 University Avenue, LLC",
+     "license": null
+    },
+    {
+     "name": "1598 University Avenue, LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n1598 University Avenue, LLC",
+     "license": null
+    },
+    {
+     "name": "NX VENTURES",
+     "role": "other",
+     "label": "unlabelled",
+     "quote": "1598 University Avenue, LLC\nNX VENTURES",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 100,
+   "record_key": "ZP2023-0126",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "LANDMARK PROPERTIES",
+     "role": "other",
+     "label": "project sponsor",
+     "quote": "PROJECT SPONSOR:\nJared Munneke\nLANDMARK PROPERTIES",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": "design architect",
+     "quote": "DESIGN ARCHITECT:\nIsaiah Stackhouse, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "MYEFSKI ARCHITECTS, INC.",
+     "role": "architect",
+     "label": "architect of record",
+     "quote": "ARCHITECT OF RECORD:\nJohn Myefski, President and Principal\nMYEFSKI ARCHITECTS, INC.",
+     "license": null
+    },
+    {
+     "name": "HUMPHREYS & PARTNERS LANDSCAPE ARCHITECTS",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nDaniel Erlandson, Partner\nHUMPHREYS & PARTNERS LANDSCAPE ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "BKF ENGINEERS",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL ENGINEER:\nBKF ENGINEERS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 39,
+   "record_key": "ZP2022-0046",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "3000 Shattuck Avenue, LLC",
+     "role": "other",
+     "label": "project_sponsor",
+     "quote": "PROJECT SPONSOR:\n3000 Shattuck Avenue, LLC",
+     "license": null
+    },
+    {
+     "name": "NX Ventures, LLC",
+     "role": "other",
+     "label": "project_sponsor",
+     "quote": "PROJECT SPONSOR:\n3000 Shattuck Avenue, LLC\nNX Ventures, LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "INSIDEOUT DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nPenn Phillips\nINSIDEOUT DESIGN",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 77,
+   "record_key": "ZP2022-0116",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "2900 Shattuck Ave, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n2900 Shattuck Ave, LLC\nNX VENTURES",
+     "license": null
+    },
+    {
+     "name": "2900 Shattuck Ave, LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n2900 Shattuck Ave, LLC\nNX VENTURES",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 41,
+   "record_key": "ZP2024-0075",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "BERKLAND FOUNDATION",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nBERKLAND FOUNDATION",
+     "license": null
+    },
+    {
+     "name": "BERKLAND FOUNDATION",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nBERKLAND FOUNDATION",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 94,
+   "record_key": "ZP2022-0149",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 315,
+   "record_key": "DRCF2021-0008",
+   "doc_type": "staff_report",
+   "parties": []
+  },
+  {
+   "document_id": 134,
+   "record_key": "ZP2022-0115",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA",
+     "license": null
+    },
+    {
+     "name": "CHARLES KAHN, AIA",
+     "role": "architect",
+     "label": null,
+     "quote": "CHARLES KAHN, AIA\ncharles@studiokda.com",
+     "license": null
+    },
+    {
+     "name": "JASON ANDRE",
+     "role": "architect",
+     "label": null,
+     "quote": "JASON ANDRE\njason@studiokda.com",
+     "license": null
+    },
+    {
+     "name": "BILL HENN, P.E.",
+     "role": "structural_engineer",
+     "label": null,
+     "quote": "BILL HENN, P.E.\nbhenn@hohbach-lewin.com",
+     "license": "P.E."
+    },
+    {
+     "name": "ADAM OBACK",
+     "role": "owner",
+     "label": null,
+     "quote": "ADAM OBACK\naronhomesllc@gmail.com",
+     "license": null
+    },
+    {
+     "name": "ROALD NILSEN",
+     "role": "owner",
+     "label": null,
+     "quote": "ROALD NILSEN\naronhomesllc@gmail.com",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 93,
+   "record_key": "ZP2022-0149",
+   "doc_type": "density_bonus_application",
+   "parties": []
+  },
+  {
+   "document_id": 132,
+   "record_key": "ZP2024-0162",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "2425 DURANT AVE LLC",
+     "role": "other",
+     "label": "project_sponsor",
+     "quote": "PROJECT SPONSOR: \n2425 DURANT AVE LLC",
+     "license": null
+    },
+    {
+     "name": "YES COMMUNITY ARCHITECTS INC",
+     "role": "architect",
+     "label": null,
+     "quote": "DESIGN ARCHITECT:\nYES COMMUNITY ARCHITECTS INC",
+     "license": "C-36175"
+    },
+    {
+     "name": "RHOADES PLANNING GROUP",
+     "role": "other",
+     "label": "development_consultant",
+     "quote": "DEVELOPMENT CONSULTANT:\nRHOADES PLANNING GROUP",
+     "license": null
+    },
+    {
+     "name": "SANDIS",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL ENGINEER:\nSANDIS",
+     "license": null
+    },
+    {
+     "name": "NICOLAUS WRIGHT",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nNICOLAUS WRIGHT",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 109,
+   "record_key": "ZP2021-0046",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "SAN PABLO INVESTORS TWO, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nSAN PABLO INVESTORS TWO, LLC",
+     "license": null
+    },
+    {
+     "name": "SAN PABLO INVESTORS TWO, LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nSAN PABLO INVESTORS TWO, LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "Thomas E Baak & Associates",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nRick Stover\nThomas E Baak & Associates",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 107,
+   "record_key": "ZP2021-0162",
+   "doc_type": "plan_set",
+   "parties": []
+  },
+  {
+   "document_id": 184,
+   "record_key": "ZP2018-0112",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 164,
+   "record_key": null,
+   "doc_type": "zab_packet",
+   "parties": [
+    {
+     "name": "The Bay Architects, Jim Novosel",
+     "role": "applicant",
+     "label": null,
+     "quote": "Applicant: The Bay Architects, Jim Novosel",
+     "license": null
+    },
+    {
+     "name": "Athan Magganas",
+     "role": "owner",
+     "label": null,
+     "quote": "Property Owner: Athan Magganas",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 249,
+   "record_key": "UP2013-0058",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "THE BAY ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "THE BAY ARCHITECTS\nthe\nbay\narchitects\nCOPYRIGHT: DEC 2013\n1840b alcatraz ave\nberkeley, ca 94703\n510.420.1484\nfax 510.420.1165\nwww.bayarch.com\nbayarch@pacbell.net",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 55,
+   "record_key": "ZP2018-0135",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "The Austin Group LLC",
+     "role": "other",
+     "label": "unlabelled",
+     "quote": "The Austin Group LLC\n925.743.8836 (o&f)",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 104,
+   "record_key": "ZP2022-0135",
+   "doc_type": "plan_set",
+   "parties": []
+  },
+  {
+   "document_id": 116,
+   "record_key": "ZP2021-0046",
+   "doc_type": "plan_set",
+   "parties": []
+  },
+  {
+   "document_id": 278,
+   "record_key": "LMSAP2024-0005",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 205,
+   "record_key": "DRCP2015-0019",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "WORK OF THE ARCHITECT AND MAY NOT BE DUPLICATED, USED OR DISCLOSED WITHOUT WRITTEN CONSENT OF TRACHTENBERG ARCHITECTS.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 153,
+   "record_key": "ZP2024-0014",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "LINDSAY NEWMAN, PE",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "LINDSAY NEWMAN, PE\nCIVIL ENGINEER",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 168,
+   "record_key": "ZP2026-0007",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "THE AUSTIN GROUP, LLC.",
+     "role": "other",
+     "label": "project_sponsor",
+     "quote": "PROJECT SPONSOR:\nBill Schrader\nTHE AUSTIN GROUP, LLC.",
+     "license": null
+    },
+    {
+     "name": "STACKHOUSE DE LA PE\u00d1A TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nSTACKHOUSE DE LA PE\u00d1A\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "HUMANN COMPANY INC.",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL ENGINEER:\nHany Naoom, PE\nHUMANN COMPANY INC.",
+     "license": "PE"
+    },
+    {
+     "name": "RW STOVER AND ASSOCIATES INC.",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nRick Stover, Owner\nRW STOVER AND ASSOCIATES INC.",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "WORK OF THE ARCHITECT AND MAY NOT BE\nDUPLICATED, USED OR DISCLOSED WITHOUT WRITTEN\nCONSENT OF TRACHTENBERG ARCHITECTS.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 74,
+   "record_key": "ZP2022-0116",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "2900 Shattuck Ave, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n2900 Shattuck Ave, LLC\nNX VENTURES",
+     "license": null
+    },
+    {
+     "name": "2900 Shattuck Ave, LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n2900 Shattuck Ave, LLC\nNX VENTURES",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 276,
+   "record_key": "ZP2024-0067",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 81,
+   "record_key": "ZP2022-0116",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 178,
+   "record_key": "ZP2023-0089",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "Studio KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nStudio KDA",
+     "license": null
+    },
+    {
+     "name": "VAN DE POL ENGINEERING",
+     "role": "other",
+     "label": "surveyor",
+     "quote": "SURVEYOR\nVAN DE POL ENGINEERING",
+     "license": null
+    },
+    {
+     "name": "BKF ENGINEERS",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL\nBKF ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "BLOCS DESIGN GROUP",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE\nBLOCS DESIGN GROUP",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 33,
+   "record_key": null,
+   "doc_type": "application",
+   "parties": [
+    {
+     "name": "AMIR MASSIH",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER\nAMIR MASSIH",
+     "license": null
+    },
+    {
+     "name": "KAVA MASSIH ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "KAVA MASSIH ARCHITECTS\n920 Grayson Street \u0406 Berkeley, CA 94710",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 16,
+   "record_key": "ZP2024-0066",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "AMERICAN COMMONWEALTH ASSOCIATES, LP",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nAMERICAN COMMONWEALTH ASSOCIATES, LP",
+     "license": null
+    },
+    {
+     "name": "AMERICAN COMMONWEALTH ASSOCIATES, LP",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nAMERICAN COMMONWEALTH ASSOCIATES, LP",
+     "license": null
+    },
+    {
+     "name": "PANORAMIC INTERESTS",
+     "role": "owner",
+     "label": null,
+     "quote": "CO OWNER/APPLICANT:\nPANORAMIC INTERESTS",
+     "license": null
+    },
+    {
+     "name": "PANORAMIC INTERESTS",
+     "role": "applicant",
+     "label": null,
+     "quote": "CO OWNER/APPLICANT:\nPANORAMIC INTERESTS",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nISAIAH STACKHOUSE, PRINCIPAL\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "INSIDEOUT DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nINSIDEOUT DESIGN",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 190,
+   "record_key": "ZP2022-0021",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 25,
+   "record_key": null,
+   "doc_type": "application",
+   "parties": [
+    {
+     "name": "SAN PABLO INVESTORS TWO, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nSAN PABLO INVESTORS TWO, LLC",
+     "license": null
+    },
+    {
+     "name": "SAN PABLO INVESTORS TWO, LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nSAN PABLO INVESTORS TWO, LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 253,
+   "record_key": "UP2013-0058",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "THE BAY ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "THE BAY ARCHITECTS\nthe\nbay\narchitects",
+     "license": null
+    },
+    {
+     "name": "TIPPING MAR",
+     "role": "structural_engineer",
+     "label": null,
+     "quote": "TIPPING MAR\n1906 SHATTUCK AVE\nBERKELEY, CA 94704\n(510) 549-1906\nCONTACT: STEVE TIPPING\nSTRUCTURAL ENGINEER:",
+     "license": null
+    },
+    {
+     "name": "DILLINGHAM ASSOCIATES",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "DILLINGHAM ASSOCIATES\n2927 NEWBURY STREET\nBERKELEY, CA 94703\n(510) 548-4700\nCONTACT: REED DILLINGHAM\nLANDSCAPE ARCHITECT:",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 15,
+   "record_key": "ZP2024-0066",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "AMERICAN COMMONWEALTH ASSOCIATES, LP",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nAMERICAN COMMONWEALTH ASSOCIATES, LP",
+     "license": null
+    },
+    {
+     "name": "AMERICAN COMMONWEALTH ASSOCIATES, LP",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nAMERICAN COMMONWEALTH ASSOCIATES, LP",
+     "license": null
+    },
+    {
+     "name": "PANORAMIC INTERESTS",
+     "role": "owner",
+     "label": null,
+     "quote": "CO OWNER/APPLICANT:\nPANORAMIC INTERESTS",
+     "license": null
+    },
+    {
+     "name": "PANORAMIC INTERESTS",
+     "role": "applicant",
+     "label": null,
+     "quote": "CO OWNER/APPLICANT:\nPANORAMIC INTERESTS",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nISAIAH STACKHOUSE, PRINCIPLE\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "INSIDEOUT DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nINSIDEOUT DESIGN",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 105,
+   "record_key": "ZP2022-0135",
+   "doc_type": "plan_set",
+   "parties": []
+  },
+  {
+   "document_id": 274,
+   "record_key": "ZP2019-0173",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 303,
+   "record_key": null,
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "2700 Shattuck LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n2700 Shattuck LLC",
+     "license": null
+    },
+    {
+     "name": "2700 Shattuck LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n2700 Shattuck LLC",
+     "license": null
+    },
+    {
+     "name": "SDT ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nSDT ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "CONSENT OF TRACHTENBERG ARCHITECTS.",
+     "license": null
+    },
+    {
+     "name": "JETT LANDSCAPE ARCHITECTURE + DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nJesse Markman\nJETT LANDSCAPE ARCHITECTURE + DESIGN",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 69,
+   "record_key": "ZP2024-0181",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "Laconia Development LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nLaconia Development LLC",
+     "license": null
+    },
+    {
+     "name": "Laconia Development LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nLaconia Development LLC",
+     "license": null
+    },
+    {
+     "name": "STACKHOUSE | DE LA PE\u00d1A | TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nISAIAH STACKHOUSE, PRINCIPAL\nSTACKHOUSE | DE LA PE\u00d1A |\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "JETT Landscape Architecture + Design",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nJETT Landscape Architecture + Design",
+     "license": null
+    },
+    {
+     "name": "BKF ENGINEERS",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL ENGINEER:\nBKF ENGINEERS",
+     "license": null
+    },
+    {
+     "name": "Rhoades Planning Group",
+     "role": "other",
+     "label": "planning consultant",
+     "quote": "Rhoades Planning Group\n2140 Shattuck Ave. Suite 705\nBerkeley, CA 94704\n(510) 545-4341\nc/o: mia@rhoadesplanninggroup.com",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 112,
+   "record_key": "ZP2021-0046",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "EAST BAY MUNICIPAL UTILITY DISTRICT",
+     "role": "other",
+     "label": "publishing agency",
+     "quote": "EAST BAY MUNICIPAL UTILITY DISTRICT",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 254,
+   "record_key": "UP2013-0058",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "THE BAY ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "THE BAY ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 65,
+   "record_key": "ZP2024-0058",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "2700 Shattuck LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n2700 Shattuck LLC",
+     "license": null
+    },
+    {
+     "name": "2700 Shattuck LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n2700 Shattuck LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "JETT LANDSCAPE ARCHITECTURE + DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nJesse Markman\nJETT LANDSCAPE ARCHITECTURE + DESIGN",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 147,
+   "record_key": "ZP2022-0038",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "THIS DRAWING IS AN INSTRUMENT OF SERVICE, AND AS SUCH, REMAINS THE PROPERTY OF STUDIO KDA.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 279,
+   "record_key": "ZP2024-0071",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 99,
+   "record_key": "ZP2023-0107",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "ZENGS BERKELEY LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER:\nZENGS BERKELEY LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "MILLER COMPANY LANDSCAPE ARCHITECTS",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nMichael Ingram\nMILLER COMPANY LANDSCAPE ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 58,
+   "record_key": "ZP2024-0067",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": "architect of record",
+     "quote": "ARCHITECT OF RECORD:\nSTUDIO KDA\n1810 6TH ST.\nBERKELEY, CA 94710",
+     "license": null
+    },
+    {
+     "name": "GROUNDWORKS OFFICE",
+     "role": "landscape_architect",
+     "label": "landscape",
+     "quote": "LANDSCAPE:\nSARA PESCHEL\nsara@groundworksoffice.com\nGROUNDWORKS OFFICE\n1792 5TH STREET\nBERKELEY, CA 94710",
+     "license": null
+    },
+    {
+     "name": "FITZGERALD",
+     "role": "architect",
+     "label": "associate architect",
+     "quote": "ASSOCIATE ARCHITECT:\nFITZGERALD\n200 WEST ADAMS ST, SUITE 2100\nCHICAGO, IL 60606",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 129,
+   "record_key": "ZP2018-0239",
+   "doc_type": "plan_set",
+   "parties": []
+  },
+  {
+   "document_id": 201,
+   "record_key": "ZP2015-0177",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "REALTEX APARTMENTS, LLC.",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nCody Fornari, Project Manager\nREALTEX APARTMENTS, LLC.",
+     "license": null
+    },
+    {
+     "name": "REALTEX APARTMENTS, LLC.",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nCody Fornari, Project Manager\nREALTEX APARTMENTS, LLC.",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "BRUCE JETT ASSOCIATES, INC.",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nBruce B. Jett, Principal\nBRUCE JETT ASSOCIATES, INC.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 14,
+   "record_key": "ZP2024-0066",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "AMERICAN COMMONWEALTH ASSOCIATES, LP",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nAMERICAN COMMONWEALTH ASSOCIATES, LP",
+     "license": null
+    },
+    {
+     "name": "AMERICAN COMMONWEALTH ASSOCIATES, LP",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nAMERICAN COMMONWEALTH ASSOCIATES, LP",
+     "license": null
+    },
+    {
+     "name": "PANORAMIC INTERESTS",
+     "role": "owner",
+     "label": null,
+     "quote": "CO OWNER/APPLICANT:\nPANORAMIC INTERESTS",
+     "license": null
+    },
+    {
+     "name": "PANORAMIC INTERESTS",
+     "role": "applicant",
+     "label": null,
+     "quote": "CO OWNER/APPLICANT:\nPANORAMIC INTERESTS",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nISAIAH STACKHOUSE, PRINCIPLE\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "INSIDEOUT DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nINSIDEOUT DESIGN",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 260,
+   "record_key": "ZP2022-0099",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "1598 University Avenue, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n1598 University Avenue, LLC\nNX VENTURES",
+     "license": null
+    },
+    {
+     "name": "1598 University Avenue, LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n1598 University Avenue, LLC\nNX VENTURES",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 26,
+   "record_key": null,
+   "doc_type": "application",
+   "parties": [
+    {
+     "name": "SAN PABLO INVESTORS TWO, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nSAN PABLO INVESTORS TWO, LLC",
+     "license": null
+    },
+    {
+     "name": "SAN PABLO INVESTORS TWO, LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nSAN PABLO INVESTORS TWO, LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 218,
+   "record_key": "DRCP2018-0003",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "SAN PABLO INVESTORS TWO, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nSAN PABLO INVESTORS TWO, LLC",
+     "license": null
+    },
+    {
+     "name": "SAN PABLO INVESTORS TWO, LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nSAN PABLO INVESTORS TWO, LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 114,
+   "record_key": "ZP2021-0046",
+   "doc_type": "plan_set",
+   "parties": []
+  },
+  {
+   "document_id": 186,
+   "record_key": "ZP2024-0170",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 208,
+   "record_key": "DRCP2015-0019",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "WORK OF THE ARCHITECT AND MAY NOT BE DUPLICATED, USED OR DISCLOSED WITHOUT WRITTEN CONSENT OF TRACHTENBERG ARCHITECTS.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 30,
+   "record_key": "ZP2023-0090",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "NX Ventures",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nNX Ventures",
+     "license": null
+    },
+    {
+     "name": "NX Ventures",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nNX Ventures",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 313,
+   "record_key": "ZP2018-0222",
+   "doc_type": "zab_packet",
+   "parties": [
+    {
+     "name": "Ali Kia, Spirit Residential Group, LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "Applicant/Property Owner:\n\nAli Kia, Spirit Residential Group, LLC",
+     "license": null
+    },
+    {
+     "name": "Ali Kia, Spirit Residential Group, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "Applicant/Property Owner:\n\nAli Kia, Spirit Residential Group, LLC",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 233,
+   "record_key": "ZP2023-0024",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 79,
+   "record_key": "ZP2022-0171",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 121,
+   "record_key": "ZP2021-0193",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "CA VENTURES",
+     "role": "other",
+     "label": "unlabelled",
+     "quote": "BERKELEY PLAZA\nCA VENTURES\n2065 KITTREDGE ST\nBERKELEY, CA 94704",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 11,
+   "record_key": "ZP2024-0126",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA",
+     "license": null
+    },
+    {
+     "name": "VALIANCE CAPITAL, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNERS:\nVALIANCE CAPITAL, LLC",
+     "license": null
+    },
+    {
+     "name": "GREENWOOD & MOORE, INC.",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL/TOPO:\nGREENWOOD & MOORE, INC.",
+     "license": null
+    },
+    {
+     "name": "122 WEST DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE:\n122 WEST DESIGN",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 43,
+   "record_key": "ZP2024-0075",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "BERKLAND FOUNDATION",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nBERKLAND FOUNDATION",
+     "license": null
+    },
+    {
+     "name": "BERKLAND FOUNDATION",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nBERKLAND FOUNDATION",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "INSIDEOUT landscape architecture",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nINSIDEOUT\nlandscape architecture",
+     "license": null
+    },
+    {
+     "name": "DE LA PE\u00d1A",
+     "role": "other",
+     "label": "unlabelled",
+     "quote": "DE LA PE\u00d1A\nTRACHTENBERG\nARCHITECTS\nSTACKHOUSE",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 138,
+   "record_key": "PLN2024-0010",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "BRIDGE HOUSING",
+     "role": "developer",
+     "label": "lead_developer",
+     "quote": "LEAD DEVELOPER:\nBRIDGE HOUSING",
+     "license": null
+    },
+    {
+     "name": "DAVID BAKER ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDAVID BAKER ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "YES DUFFY ARCHITECTS",
+     "role": "other",
+     "label": "associate_architect",
+     "quote": "ASSOCIATE ARCHITECT:\nYES DUFFY ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "EINWILLER KUEHL",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "PUBLIC REALM/LANDSCAPE:\nEINWILLER KUEHL",
+     "license": null
+    },
+    {
+     "name": "LOTUS WATER",
+     "role": "civil_engineer",
+     "label": null,
+     "quote": "CIVIL:\nLOTUS WATER",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 167,
+   "record_key": null,
+   "doc_type": "zab_packet",
+   "parties": [
+    {
+     "name": "Daryoush John Davidi",
+     "role": "applicant",
+     "label": null,
+     "quote": "Applicant/Owner: Daryoush John Davidi, 3135 Kerner Blvd. San Rafael, CA 94901",
+     "license": null
+    },
+    {
+     "name": "Daryoush John Davidi",
+     "role": "owner",
+     "label": null,
+     "quote": "Applicant/Owner: Daryoush John Davidi, 3135 Kerner Blvd. San Rafael, CA 94901",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 17,
+   "record_key": "ZP2024-0066",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "AMERICAN COMMONWEALTH ASSOCIATES, LP",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nAMERICAN COMMONWEALTH ASSOCIATES, LP",
+     "license": null
+    },
+    {
+     "name": "AMERICAN COMMONWEALTH ASSOCIATES, LP",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nAMERICAN COMMONWEALTH ASSOCIATES, LP",
+     "license": null
+    },
+    {
+     "name": "PANORAMIC INTERESTS",
+     "role": "owner",
+     "label": null,
+     "quote": "CO OWNER/APPLICANT:\nPANORAMIC INTERESTS",
+     "license": null
+    },
+    {
+     "name": "PANORAMIC INTERESTS",
+     "role": "applicant",
+     "label": null,
+     "quote": "CO OWNER/APPLICANT:\nPANORAMIC INTERESTS",
+     "license": null
+    },
+    {
+     "name": "SDT ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nISAIAH STACKHOUSE, PRINCIPAL\nSDT ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "INSIDEOUT DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nINSIDEOUT DESIGN",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "CONSENT OF TRACHTENBERG ARCHITECTS.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 286,
+   "record_key": "ZP2022-0178",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 291,
+   "record_key": "ZP2023-0089",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 185,
+   "record_key": "ZP2018-0112",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 82,
+   "record_key": "ZP2024-0075",
+   "doc_type": "density_bonus_application",
+   "parties": []
+  },
+  {
+   "document_id": 267,
+   "record_key": "ZP2022-0135",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 215,
+   "record_key": "ZP2021-0095",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "RW Stover & Associates, Inc.",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "RW Stover & Associates, Inc.\nLandscape Architecture",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 232,
+   "record_key": "ZP2023-0024",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 287,
+   "record_key": "ZP2015-0229",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 310,
+   "record_key": "ZP2019-0074",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "BERKELEY RUBY WIP DEVELOPMENT",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nBERKELEY RUBY WIP DEVELOPMENT",
+     "license": null
+    },
+    {
+     "name": "BERKELEY RUBY WIP DEVELOPMENT",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nBERKELEY RUBY WIP DEVELOPMENT",
+     "license": null
+    },
+    {
+     "name": "BayRock Multifamily, LLC",
+     "role": "other",
+     "label": "c/o contact for owner/applicant",
+     "quote": "c/o BayRock Multifamily, LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "JETT LANDSCAPE ARCHITECTURE + DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nJETT LANDSCAPE ARCHITECTURE + DESIGN",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 13,
+   "record_key": "ZP2024-0066",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "AMERICAN COMMONWEALTH ASSOCIATES, LP",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nAMERICAN COMMONWEALTH ASSOCIATES, LP",
+     "license": null
+    },
+    {
+     "name": "AMERICAN COMMONWEALTH ASSOCIATES, LP",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nAMERICAN COMMONWEALTH ASSOCIATES, LP",
+     "license": null
+    },
+    {
+     "name": "PANORAMIC INTERESTS",
+     "role": "owner",
+     "label": null,
+     "quote": "CO OWNER/APPLICANT:\nPANORAMIC INTERESTS",
+     "license": null
+    },
+    {
+     "name": "PANORAMIC INTERESTS",
+     "role": "applicant",
+     "label": null,
+     "quote": "CO OWNER/APPLICANT:\nPANORAMIC INTERESTS",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nISAIAH STACKHOUSE, PRINCIPAL\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "INSIDEOUT DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nINSIDEOUT DESIGN",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 231,
+   "record_key": "ZP2023-0024",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 250,
+   "record_key": "UP2013-0058",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "THE BAY ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "THE BAY ARCHITECTS\nthe\nbay\narchitects",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 199,
+   "record_key": "ZP2015-0177",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "REALTEX APARTMENTS, LLC.",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nCody Fornari, Project Manager\nREALTEX APARTMENTS, LLC.",
+     "license": null
+    },
+    {
+     "name": "REALTEX APARTMENTS, LLC.",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\nCody Fornari, Project Manager\nREALTEX APARTMENTS, LLC.",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "BRUCE JETT ASSOCIATES, INC.",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nBruce B. Jett, Principal\nBRUCE JETT ASSOCIATES, INC.",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 61,
+   "record_key": "ZP2024-0067",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT OF RECORD:\nSTUDIO KDA\n1810 6TH ST. \nBERKELEY, CA 94710",
+     "license": null
+    },
+    {
+     "name": "GROUNDWORKS OFFICE",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE:\nSARA PESCHEL\nsara@groundworksoffice.com\nGROUNDWORKS OFFICE\n1792 5TH STREET\nBERKELEY, CA 94710",
+     "license": null
+    },
+    {
+     "name": "FITZGERALD",
+     "role": "other",
+     "label": "associate architect",
+     "quote": "ASSOCIATE ARCHITECT:\nFITZGERALD\n200 WEST ADAMS ST, SUITE 2100 \nCHICAGO, IL 60606",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 106,
+   "record_key": "ZP2022-0135",
+   "doc_type": "plan_set",
+   "parties": []
+  },
+  {
+   "document_id": 298,
+   "record_key": "LMSAP2015-0002",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 139,
+   "record_key": "PLN2024-0010",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "North Berkeley Housing Partners",
+     "role": "other",
+     "label": "submitter",
+     "quote": "Submitted by: \nNorth Berkeley Housing Partners",
+     "license": null
+    },
+    {
+     "name": "BRIDGE Housing",
+     "role": "other",
+     "label": "on behalf of",
+     "quote": "On Behalf of: \nBRIDGE Housing",
+     "license": null
+    },
+    {
+     "name": "Insight Housing",
+     "role": "other",
+     "label": "on behalf of",
+     "quote": "Insight Housing",
+     "license": null
+    },
+    {
+     "name": "East Bay Asian Local Development Corporation",
+     "role": "other",
+     "label": "on behalf of",
+     "quote": "East Bay Asian Local Development Corporation",
+     "license": null
+    },
+    {
+     "name": "AvalonBay Communities",
+     "role": "other",
+     "label": "on behalf of",
+     "quote": "AvalonBay Communities",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 264,
+   "record_key": "ZP2024-0070",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 38,
+   "record_key": "ZP2022-0046",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "3000 Shattuck Avenue, LLC",
+     "role": "other",
+     "label": "project_sponsor",
+     "quote": "PROJECT SPONSOR:\n3000 Shattuck Avenue, LLC",
+     "license": null
+    },
+    {
+     "name": "NX Ventures, LLC",
+     "role": "other",
+     "label": "project_sponsor",
+     "quote": "PROJECT SPONSOR:\n3000 Shattuck Avenue, LLC\nNX Ventures, LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nIsaiah Stackhouse, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    },
+    {
+     "name": "INSIDEOUT DESIGN",
+     "role": "landscape_architect",
+     "label": null,
+     "quote": "LANDSCAPE ARCHITECT:\nPenn Phillips\nINSIDEOUT DESIGN",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 73,
+   "record_key": "ZP2022-0171",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "2601 SPA, LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n2601 SPA, LLC",
+     "license": null
+    },
+    {
+     "name": "2601 SPA, LLC",
+     "role": "applicant",
+     "label": null,
+     "quote": "OWNER/APPLICANT:\n2601 SPA, LLC",
+     "license": null
+    },
+    {
+     "name": "TRACHTENBERG ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nDavid Trachtenberg, Principal\nTRACHTENBERG ARCHITECTS",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 126,
+   "record_key": "ZP2022-0178",
+   "doc_type": "plan_set",
+   "parties": []
+  },
+  {
+   "document_id": 50,
+   "record_key": "ZP2023-0163",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "KAVA MASSIH ARCHITECTS",
+     "role": "architect",
+     "label": null,
+     "quote": "KAVA MASSIH ARCHITECTS\n920 Grayson Street \u0406 Berkeley, CA 94710",
+     "license": null
+    },
+    {
+     "name": "FIRST MILVIA LLC",
+     "role": "owner",
+     "label": null,
+     "quote": "OWNER\nFIRST MILVIA LLC",
+     "license": null
+    }
+   ]
+  },
+  {
+   "document_id": 293,
+   "record_key": "ZP2022-0026",
+   "doc_type": "tabulation_form",
+   "parties": []
+  },
+  {
+   "document_id": 173,
+   "record_key": "ZP2024-0071",
+   "doc_type": "plan_set",
+   "parties": [
+    {
+     "name": "STUDIO KDA",
+     "role": "architect",
+     "label": null,
+     "quote": "ARCHITECT:\nSTUDIO KDA",
+     "license": null
+    }
+   ]
+  }
+ ]
+}

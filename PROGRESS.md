@@ -455,10 +455,10 @@ funding 58 of 92 attach (34 reach no project: mostly affordable buildings placed
 F006 and three BART rows need record keys -- asked berkeley-data-25). UC: `external_projects.csv`, four projects
 outside City permitting (no buildings, RHNA-excluded, beds carried from v2 with its cited UC source, NOT yet re-read).
 Ashby BART: PLN2026-0185 fetched by name + declared (4th harvest), R006 keyed to it. G004-G006 absorb the site's
-withdrawn/void ZP as a companion. Swap candidate `scratch/2026-09-30_phase5/p5.db` (sha 6c43e4e1): 1,544 projects,
+withdrawn/void ZP as a companion. Swap candidate `scratch/2026-09-30_phase5/p5.db` (sha 11b07920; funding 60 of 92 after record keys): 1,544 projects,
 1,182 buildings / 5,551 units; vs live only +1 planning record (Ashby BART); co/bp unchanged (baseline 30g holds).
 
-**NEXT:** John unlocks -> swap 6c43e4e1 -> heights (phase 4) -> phase 6 (re-point publishers; project_records table) (applicants from the
+**NEXT:** John unlocks -> swap 11b07920 -> heights (phase 4) -> phase 6 (re-point publishers; project_records table) (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.
 ---

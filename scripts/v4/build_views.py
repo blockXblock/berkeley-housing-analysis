@@ -212,8 +212,33 @@ JOIN events e ON e.event_id = ea.event_id AND e.event_type_code = 'accela_listed
 LEFT JOIN own o ON o.project_id = pa.project_id AND o.k = e.source_record_key
 """
 
+# LICENSED BUSINESSES AT A PROJECT'S BUILDINGS TODAY (John, 2026-10-01): the City's business licences (export
+# 2025-11-15) whose parcel is one of the project's buildings' CURRENT parcels, or whose location is one of their
+# addresses (aliases included). matched_by says which. Rental-property licences are the building's own rental
+# business (a rental licence names the owner); every other sub-type is a business AT the building -- the ground-floor
+# tenants of a mixed-use project.
+V_PROJECT_BUSINESSES = r"""
+CREATE VIEW v_project_businesses AS
+WITH pp AS (SELECT DISTINCT ps.project_id, pi.apn_normalized apn FROM project_structures ps
+            JOIN structure_parcels sp USING(structure_id)
+            JOIN parcel_identifiers pi ON pi.parcel_id = sp.parcel_id AND pi.is_current = 1),
+pa AS (SELECT DISTINCT ps.project_id, sa.address_id FROM project_structures ps JOIN structure_addresses sa USING(structure_id)),
+hit AS (SELECT pp.project_id, e.event_id, 'parcel' matched_by FROM pp
+        JOIN events e ON e.event_type_code = 'business_license' AND e.raw_apn = pp.apn
+        UNION
+        SELECT pa.project_id, e.event_id, 'address' FROM pa JOIN event_addresses ea USING(address_id)
+        JOIN events e ON e.event_id = ea.event_id AND e.event_type_code = 'business_license'),
+one AS (SELECT project_id, event_id, MIN(matched_by) matched_by FROM hit GROUP BY 1, 2)  -- 'address' < 'parcel'
+SELECT json_extract(p.notes, '$.project_key') AS project_key, p.name, e.source_record_key AS license,
+       json_extract(e.raw_payload, '$.b1_per_sub_type') AS sub_type, json_extract(e.raw_payload, '$.dba') AS dba,
+       json_extract(e.raw_payload, '$.b1_business_name') AS business_name, json_extract(e.raw_payload, '$.naics') AS naics,
+       e.raw_description AS business_description, json_extract(e.raw_payload, '$.employee_num') AS employees,
+       e.raw_address AS location, one.matched_by, e.event_date AS as_of
+FROM one JOIN projects p USING(project_id) JOIN events e USING(event_id)
+"""
+
 VIEWS = {"v_projects": V_PROJECTS, "v_project_timeline": V_PROJECT_RECORDS, "v_adu_rent_board": V_ADU_RENT_BOARD,
-         "v_project_records_listed": V_PROJECT_LISTED}
+         "v_project_records_listed": V_PROJECT_LISTED, "v_project_businesses": V_PROJECT_BUSINESSES}
 
 
 def main() -> int:

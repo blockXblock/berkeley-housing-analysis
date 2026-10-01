@@ -194,7 +194,7 @@ def classify_all(con):
     for ev_id, permit in con.execute("SELECT event_id, source_record_key FROM events "
                                      "WHERE event_type_code NOT LIKE 'planning_%' "      # a Planning record is not a building permit
                                      "AND event_type_code NOT LIKE 'registry_%' "      # nor a Rent Board registration (2026-10-01)
-                                     "AND event_type_code != 'accela_listed'"):        # nor a list-dump listing (2026-10-01)
+                                     "AND event_type_code NOT IN ('accela_listed', 'business_license')"):  # nor a listing or licence
         got = permit_effect(permit)
         if got is None:
             unread += 1
@@ -900,6 +900,89 @@ def load_accela_list(con, manifest=ACCELA_LIST_MANIFEST):
     return dict(files=len(m['files']), rows=rows_in, events=ok, duplicate_listings=dup, pager_rows=pager,
                 rejected_other=len(bad),
                 with_address=n_addr)
+
+
+BUSINESS_LICENSES = os.path.join(ROOT, 'data', 'raw', 'business_licenses_20251115.json')
+BUSINESS_LICENSES_ASOF = '2025-11-15'
+
+
+def load_business_licenses(con, path=BUSINESS_LICENSES):
+    """City of Berkeley business licences, export of 2025-11-15 (13,004; John 2026-10-01: load them -- which ground
+    floors have a licensed business TODAY, and who the rental owners and contractors are). A snapshot with no licence
+    dates, so every licence is dated at the snapshot:
+      business_license  one per licence; the row in raw_payload (BL number, sub-type, NAICS, dba, business name,
+                        location, employees, ownership type)
+    source_record_key = the BL number -- the same number a building permit's Licensed Professionals name
+    (BL-038324, Nibbi Bros), so a contractor's licence and its permits join on it. The licensee is an actor
+    (role business_licensee), keyed by its BL number. raw_apn = the canonical APN (none for the 'ZZZ...' placeholder);
+    the location (b1_full_address; '0 VARIOUS' for contractors working citywide) goes through THE address canon into
+    event_addresses. b1_address1 is the licensee's MAILING address and is not used as a location."""
+    import datetime as dt
+    from scripts.housing_rules.apn import to_canonical_apn
+    from scripts.housing_rules.address import normalize_address
+    from scripts.housing_rules.owner_name import is_organisation
+    now = dt.datetime.now(dt.timezone.utc).isoformat()
+    if not con.execute("SELECT 1 FROM lifecycle_phases WHERE phase_code='CITY_RECORD'").fetchone():
+        con.execute("INSERT INTO lifecycle_phases VALUES ('CITY_RECORD', 90, 'existing', "
+                    "'a City record whose stage meaning is read later (a listing, a business or use certificate)')")
+    con.execute("INSERT OR IGNORE INTO event_types VALUES ('business_license','CITY_RECORD',0,"
+                "'a City business licence in the 2025-11-15 export, dated at the snapshot; the row in raw_payload')")
+    con.execute("CREATE TABLE IF NOT EXISTS event_addresses (event_id INTEGER NOT NULL REFERENCES events(event_id), "
+                "address_id INTEGER NOT NULL REFERENCES addresses(address_id), unit TEXT, PRIMARY KEY (event_id, address_id))")
+    addr_id = dict((n, a) for a, n in con.execute("SELECT address_id, normalized FROM addresses"))
+    loc = os.path.relpath(path, ROOT)
+    assert not con.execute("SELECT 1 FROM sources WHERE locator=?", (loc,)).fetchone(), f'already loaded: {loc}'
+    rows = json.load(open(path))
+    try:
+        sid = con.execute("INSERT INTO sources (source_kind,locator,retrieved_at,source_asof,checksum,notes) VALUES "
+                          "('city_business_licenses',?,?,?,?,?)", (loc, BUSINESS_LICENSES_ASOF, BUSINESS_LICENSES_ASOF,
+                          _sha256(path), 'City of Berkeley business licence export (13,004 licences)')).lastrowid
+        rid = con.execute("INSERT INTO ingestion_runs (source_id,started_at,rows_in_source,rows_ingested,rows_rejected,"
+                          "conserved) VALUES (?,?,?,0,0,1)", (sid, now, len(rows))).lastrowid
+        ok, bad, n_apn, n_addr, actors = 0, [], 0, 0, {}
+        for i, r in enumerate(rows):
+            bl = (r.get('recordid') or '').strip()
+            if not bl:
+                bad.append(f"row {i}: no BL number"); continue
+            try:
+                apn = to_canonical_apn(r.get('apn') or '', 'Alameda')
+            except Exception:
+                apn = None
+            n_apn += bool(apn)
+            where = (r.get('b1_full_address') or '').strip()
+            ev = con.execute("INSERT INTO events (event_type_code,event_date,event_date_precision,source_record_key,"
+                             "source_id,ingestion_run_id,raw_payload,raw_address,raw_apn,raw_description,created_at) "
+                             "VALUES ('business_license',?,'day',?,?,?,?,?,?,?,?)",
+                             (BUSINESS_LICENSES_ASOF, bl, sid, rid, json.dumps(r), where or None, apn,
+                              (r.get('busdesc') or '')[:300], now)).lastrowid
+            ok += 1
+            try:
+                num, street = normalize_address(where) if where else (None, None)
+            except Exception:
+                num = street = None
+            if num and street and num != '0':
+                key = f"{num}|{street}"
+                if key not in addr_id:
+                    addr_id[key] = con.execute("INSERT INTO addresses (number, street, normalized) VALUES (?,?,?)",
+                                               (num, street, key)).lastrowid
+                con.execute("INSERT OR IGNORE INTO event_addresses VALUES (?,?,NULL)", (ev, addr_id[key]))
+                n_addr += 1
+            name = (r.get('b1_business_name') or r.get('dba') or '').strip()
+            if name:
+                if bl not in actors:
+                    actors[bl] = con.execute("INSERT INTO actors (actor_kind,display_name,role_class) VALUES (?,?,?)",
+                                             ('organization' if is_organisation(name) else 'person', name,
+                                              'business')).lastrowid
+                con.execute("INSERT INTO actor_actions (actor_id,event_id,entity_type,entity_id,role,source_id,"
+                            "coverage_note) VALUES (?,?,'permit_event',?,'business_licensee',?,?)",
+                            (actors[bl], ev, ev, sid, f'licence {bl}, as the City export lists it, 2025-11-15'))
+        con.execute("UPDATE ingestion_runs SET rows_ingested=?, rows_rejected=?, rejected_detail=?, conserved=? WHERE run_id=?",
+                    (ok, len(bad), '; '.join(bad)[:3000] or None, int(ok + len(bad) == len(rows)), rid))
+        con.commit()
+    except Exception:
+        con.rollback()
+        raise
+    return dict(rows=len(rows), events=ok, rejected=len(bad), with_apn=n_apn, with_address=n_addr, licensees=len(actors))
 
 
 RENT_BOARD_UNITS = os.path.join(ROOT, 'data', 'raw', 'rent_board', '2026-07-13 Unit Full Details.xlsx')

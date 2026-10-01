@@ -360,7 +360,12 @@ all 1,186 buildings homed once, 5,561 units, 380 with an entitlement date; basel
 table is John's call. CLAUDE.md's chain line needs updating (John's OK). **Live is behind**: +3,992 Tier 1
 planning events and no projects yet -- swap needs John's unlock.
 
-**NEXT:** John unlocks -> swap -> phase 4 (names, coordinates, geometry, heights, applicants) / phase 5 (ledgers onto projects).
+**LIVE SWAPPED -- v4 NOW HOLDS PROJECTS (John unlocked, 2026-09-30):** snapshot `keep_snapshot_2026-09-30_pre-v4-projects.db`
+(sha 2b797a33, integrity ok); **live sha 7070646d == build**; integrity + FK clean; 151,450 events (3,189 planning
+records), 1,186 structures / 5,561 units, **1,546 projects**, every structure homed once, 380 entitled; conservation
+verifier PASS; a fresh read-only projects preview reproduces the write. **John to re-lock v4.**
+
+**NEXT:** phase 4 (names, coordinates, geometry, heights, applicants) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.
 ---
 

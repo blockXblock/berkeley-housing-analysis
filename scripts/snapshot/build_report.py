@@ -136,6 +136,124 @@ def section(id_, kicker, title, body):
 
 
 # ============================================================================================ sections
+V2050 = 'berkeley2050/founding/papers/2020-05_vision2050-framework_taskforce-edition.pdf'
+DRAWDOWN = 'berkeley2050/founding/2017-08-24_berkeley-drawdown-solutions.pdf'
+
+
+def s_findings():
+    """What the numbers say: the findings, each computed from the data, linked to its section and its data file."""
+    D = F['dof']['rows'][-1]
+    i = F['acs_city']['ind']
+    L = F['lodes']
+    dm = F['dmv']
+    A = F['assessor']
+    I = F['infra']
+    U = F['ug']
+    T1 = CITED['table1_ft']
+    over = sum(a - b for a, b in T1.values()) / 5280
+    total = sum(a for a, _ in T1.values()) / 5280
+    res_over = (T1['residential'][0] - T1['residential'][1]) / 5280
+    tr = F['poles']['traced']
+    lo, hi = over * 5280 / tr['250']['mean_span_ft'], over * 5280 / tr['200']['mean_span_ft']
+    CS = F['campus_sus']
+    g24 = sum(next(r['total'] for r in CS[t]['rows'] if r['year'] == 2024) for t in ('ucb', 'lbnl'))
+    ST = F['stars2025']
+    sqft = ST['floor_m2'] * 10.7639
+    true_kbtu = (ST['total_mwh'] - ST['gas_mwh'] + ST['implied_gas_mwh']) * 3412.14 / sqft
+    stars_kbtu = ST['total_mwh'] * 3412.14 / sqft
+    d = U['disagree'][0]
+    rn = U['summary']['report_network_totals']
+    fz = {r['fire_zone']: r for r in A['by_fire']}
+    a = lambda href, text: f'<a href="{href}">{text}</a>'
+    item = lambda title, body, links: (f'<div class="finding"><h3>{title}</h3><p>{body}</p>'
+                                        f'<p class="note">{links}</p></div>')
+    F_ = [
+        item('A university city, and a commuter city',
+             f"{n(D['population'])} people live in Berkeley; {n(D['group_quarters'])} of them, one in six, live in dorms, co-ops and "
+             f"other group housing. Each workday {n(L['inflow'])} people commute in and {n(L['outflow'] + L['out_of_state_out'])} residents "
+             f"commute out, so Berkeley gains about {round(L['inflow'] - L['outflow'] - L['out_of_state_out'], -2):,.0f} workers by day, "
+             f"before counting {n(CITED['uc']['students'])} UC Berkeley students. The largest employer sector is education: "
+             f"{n(L['sectors'][0][1])} of the city's {n(L['jobs'])} jobs.",
+             f"{a('#people', 'People')} · {a('#tide', 'Daily tide')} · data: {dl('lodes_2023_inflow_by_home_place.csv')}"),
+        item('Most households rent, and most renters are stretched',
+             f"{i['renter_household_pct']}% of households rent. {i['rent_burdened_30pct']}% of renter households pay 30% or more of "
+             f"their income in rent, and {n(float(ACS['B25070010']['estimate']))}, about one in three, pay half or more. Incomes split "
+             f"at both ends: {n(i['hh_income_under_50k'])} households earn under $50,000 and {n(i['hh_income_200k_plus'])} earn "
+             f"$200,000 or more.",
+             f"{a('#tenure', 'Renters and owners')} · {a('#income', 'Income')} · maps: {dl('berkeley_blockgroups.geojson')}"),
+        item('How people move has already changed',
+             f"{i['commute_work_from_home_pct']}% of employed residents work from home, nearly as many as drive alone to work "
+             f"({i['commute_drive_alone_pct']}%). {i['no_vehicle_pct']}% of households have no car. Of {n(dm['total'])} registered "
+             f"vehicles, {n(dm['ev'])} ({100 * dm['ev'] / dm['total']:.0f}%) are electric or plug-in hybrids. In 2020 the City's "
+             f"Vision 2050 framework wrote that it was \u201cunknown what alternative forms of transportation might emerge and how "
+             f"personal transportation behaviors might change\u201d; the working-from-home figure answers part of that. Autonomous "
+             f"vehicles and home deliveries, which the 2017 Berkeley Drawdown list flagged, are not yet counted by any public source.",
+             f"{a('#cars', 'Cars')} · {a('#tide', 'Commuting')} · {a(V2050, 'Vision 2050 framework (2020)')} · "
+             f"{a(DRAWDOWN, 'Berkeley Drawdown solutions (2017)')}"),
+        item(f'{over:.0f} of {total:.0f} street miles still carry overhead wires',
+             f"Only {100 * (total - over) / total:.0f}% of Berkeley's street miles have their wires underground: half of the arterials, "
+             f"a third of the collectors, and {100 * T1['residential'][1] / T1['residential'][0]:.0f}% of residential streets. The "
+             f"{res_over:.0f} miles of overhead residential streets are priced in none of the City cost studies we found. The poles that carry the "
+             f"wires are not public; from the {n(F['poles']['wood'])} wood poles the City has hung streetlights on, we estimate about "
+             f"{round(lo, -2):,.0f}–{round(hi, -2):,.0f} street poles. Vision 2050 pictured a city whose evacuation routes had been "
+             f"undergrounded; a 2019 City study priced 16.9 miles of those routes at "
+             f"{big(sum(r['total_cost'] for r in U['bellecci'] if r['version'].startswith('FY2019')))}.",
+             f"{a('#undergrounding', 'Undergrounding')} · {a('#networks', 'Under the streets')} · data: {dl('undergrounding_segments_harris_2016.csv')}, "
+             f"{dl('wood_pole_lines_traced.geojson')}"),
+        item("The City's undergrounding cost is $5.4 million short",
+             f"The 2016 cost table behind every City undergrounding estimate prices {esc(d['street'].title())}'s five residential-zone "
+             f"segments at {usd(d['segments_residential'])} but leaves them out of its totals. Summed segment by segment, burying the "
+             f"wires on the remaining arterial and collector streets costs {usd(U['total'])}, not the {big(rn['headline'])} quoted since "
+             f"2016, in 2016 dollars and before engineering, financing and street lighting.",
+             f"{a('#undergrounding', 'Undergrounding')} · data: {dl('undergrounding_segments_harris_2016.csv')}"),
+        item('The pipes are old; the money for them shrank',
+             f"Half of the pipe segments in Berkeley's {I['water_mi']:.0f} miles of water main were laid before {I['water_median_year']}, and "
+             f"{I['water_pre1940_mi']:.0f} miles before 1940. The sewers have been rebuilt since 1986, most of them relined in plastic. "
+             f"Vision 2050 documented the City's annual infrastructure funding falling from $53 million to $40 million between FY2012 "
+             f"and FY2019, while unfunded needs grew.",
+             f"{a('#networks', 'Under the streets')} · {a(V2050, 'Vision 2050 framework (2020)')} · maps: {dl('infrastructure_by_blockgroup.csv')}"),
+        item('Leaving the hills in a fire takes hours',
+             f"The City's 2025 evacuation study finds that clearing 90% of vehicles from hill Fire Zones 2 and 3 takes 1:45 to 2:20, "
+             f"and the last vehicles 3:25 to 3:40. One hour in, most roads in the zones are over capacity. "
+             f"{n(CITED['kld']['primary_ai'][1])} residential parcels have a single way out. The hill zones hold "
+             f"{n(fz[2]['parcels'] + fz[3]['parcels'])} parcels and {big(fz[2]['net_taxable_value'] + fz[3]['net_taxable_value'])} of "
+             f"taxable value.",
+             f"{a('#fire', 'Fire evacuation')} · data: {dl('evacuation_clearance_times_kld_2025.csv')}"),
+        item("The University and the Lab sit outside the City's numbers, and the campus's reported energy use looks tenfold low",
+             f"UC Berkeley and Berkeley Lab emitted {g24:,.0f} tonnes of CO\u2082e in 2024, equal to "
+             f"{100 * g24 / CITED['cap']['ghg_2023']:.0f}% of the City's community inventory, which leaves both out. Most of the "
+             f"campus's share comes from its gas-fired power plant, whose retirement date has moved from 2028 to 2030 to 2033. In its "
+             f"2025 national sustainability report (STARS), the campus gives its 2023 energy use as {stars_kbtu:.0f} kBtu per square "
+             f"foot; the same report's emissions imply about {true_kbtu:.0f}, matching the UC system's own figure. The energy entry "
+             f"appears to leave out the power plant's gas.",
+             f"{a('#campus', 'The University and the Lab')} · data: {dl('stars_2025_ucb_operations.csv')}, "
+             f"{dl('campus_lab_emissions_energy_2009_2024.csv')}"),
+        item('A $30 billion tax base, with the University outside it',
+             f"Berkeley's {n(A['parcels'])} parcels carry {big(A['net'])} of net taxable value, about "
+             f"${round(A['net'] * 0.012323 / 1e6):,.0f} million a year in base property tax for all agencies. {n(A['exempt'])} parcels pay none: the "
+             f"University, the City, schools, churches and other exempt owners.",
+             f"{a('#land', 'Land and money')} · data: {dl('assessor_by_neighborhood.csv')}"),
+    ]
+    gaps = table(['What is not public', 'Who holds it'], [
+        ['Citywide electricity and gas use', 'PG&amp;E (by ZIP code, after registration); the City (trend only)'],
+        ["Berkeley's water use", 'EBMUD (customer data is confidential; the City could request its total)'],
+        ['Utility poles, their age and their transformers', 'PG&amp;E (Joint Use Map Portal, closed to the public)'],
+        ["The campus's total electricity", "UC Berkeley's Office of Sustainability"],
+        ['Autonomous vehicles, ride-hailing and delivery trips', 'CPUC and DMV permit data; the companies'],
+        ['Fall 2026 student enrollment', 'UC Berkeley Office of Planning &amp; Analysis (due later this fall)'],
+    ])
+    body = f'''
+    <p class="lede">Nine findings from the data in this report. Each sentence can be checked against the section and the data
+    file linked beneath it. The City's Vision 2050 work, which looks ahead to the same streets, pipes and energy systems,
+    is cited where it addressed the same question.</p>
+    {''.join(F_)}
+    <h3>What we could not find, and who has it</h3>
+    {gaps}
+    <p class="note"><strong>Draft.</strong> Two findings concern institutions' own documents: the City's undergrounding cost
+    table and UC Berkeley's STARS energy entry. Their responses will be added here before this report is circulated.</p>'''
+    return section('findings', 'What the numbers say', 'Nine findings', body)
+
+
 def s_people():
     D = F['dof']['rows']
     last = D[-1]
@@ -659,6 +777,9 @@ CSS = '''
   ul.src { margin:.6rem 0 0 1.1rem; } ul.src li { font-size:.8rem; color:var(--dim); margin-bottom:.3rem; }
   code { font-size:.8rem; }
   .yr { color:var(--dim); font-size:.8em; }
+  .finding { border-left:3px solid var(--num); padding:.1rem 0 .1rem .9rem; margin:1rem 0 1.2rem; max-width:60rem; }
+  .finding h3 { margin-top:0; color:#fff; font-size:1.12rem; }
+  .finding p { margin:.25rem 0; }
   .tw { position:relative; }
   button.full { display:none; margin:.15rem 0 .3rem; font:inherit; font-size:.8rem; color:var(--accent); background:var(--panel);
     border:1px solid var(--line); border-radius:6px; padding:.25rem .6rem; cursor:pointer; }
@@ -694,9 +815,9 @@ CSS = '''
 
 
 def main():
-    sections = [s_people(), s_tenure(), s_income(), s_age(), s_tide(), s_cars(), s_land(), s_networks(), s_ug(),
+    sections = [s_findings(), s_people(), s_tenure(), s_income(), s_age(), s_tide(), s_cars(), s_land(), s_networks(), s_ug(),
                 s_water_energy(), s_fire(), s_campus(), s_catalog()]
-    toc = [('people', 'People'), ('tenure', 'Renters and owners'), ('income', 'Income'), ('age', 'Ages'),
+    toc = [('findings', 'Findings'), ('people', 'People'), ('tenure', 'Renters and owners'), ('income', 'Income'), ('age', 'Ages'),
            ('tide', 'Daily tide'), ('cars', 'Cars'), ('land', 'Land and money'), ('networks', 'Under the streets'),
            ('undergrounding', 'Undergrounding'), ('water-energy', 'Water and power'), ('fire', 'Fire evacuation'),
            ('campus', 'University and Lab'), ('data', 'The data')]

@@ -68,6 +68,7 @@ CITED = dict(
              'UC Regents item F2, July 16, 2025 (Berkeley Clean Energy Campus); ACEEE 2024 paper by campus staff (core campus, cogeneration)',
              'UC 2025 Annual Report on Sustainable Practices (commuting; per-campus chart data from its public Google Sheets, fetched 2026-10-01)',
              'AASHE STARS, UC Berkeley report summary (submitted February 19, 2025)',
+             'UC Berkeley Clean Energy Campus fact sheet, April 5, 2023 (sustainability.berkeley.edu)',
              'Lawrence Berkeley National Laboratory 2025 LRDP Draft EIR, April 2025 (people, energy, water, GHG, parking); '
              'UC Regents item F1B, September 17, 2025 (202 acres, buildings, floor area)']),
     # Harris 2016 Table 1 (feet as printed): total and undergrounded, by street class. Miles are computed from the feet;
@@ -540,8 +541,10 @@ def s_campus():
     <p class="note">For scale: the campus burned about {U['gas_mmbtu'][0] * 10 / 1e6:.0f} million therms of gas in 2018, more than five
     times the {beso['therms'] / 1e6:.1f} million therms reported by all of the City's large buildings in 2024. Its gas-fired
     cogeneration plant produced {n(U['ghg_cogen'][0])} of the campus's {n(U['ghg'][0])} tonnes of CO₂e in 2024; the Berkeley
-    Clean Energy Campus project (construction from 2026, completion expected by 2030) replaces it with an electric heating and
-    cooling plant serving about 32 buildings. The two institutions' {gu + gl:,.0f} tonnes equal
+    Clean Energy Campus project replaces it with an electric heating and cooling plant serving about 32 buildings in its first
+    phase. The campus's April 2023 fact sheet promised $249 million of State funding, 15 MW of solar, 8 MW of fuel cells, a
+    30 MWh battery, an 85% cut in fossil-fuel combustion, and retirement of the gas plant in 2028; the Regents' July 2025
+    approval puts construction from 2026 and completion by 2030. The two institutions' {gu + gl:,.0f} tonnes equal
     {100 * (gu + gl) / CITED['cap']['ghg_2023']:.0f}% of the City's own community inventory
     ({n(CITED['cap']['ghg_2023'])} tonnes, 2023), which does not include them; the inventories are compiled differently.
     (The campus's own inventory page gives {n(U['ghg'][0])} tonnes for 2024, counting Scope 1 before its

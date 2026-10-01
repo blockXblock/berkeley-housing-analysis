@@ -550,8 +550,11 @@ APR 2025 on the build: RHNA credit 2,134 (23.9%). New views: v_adu_rent_board, v
 v_project_businesses, v_project_people (12,607 rows). Document roles loaded (`5f19695`). Snapshot of live:
 `databases/keep_snapshot_2026-10-01_pre-roles-swap.db` (integrity ok).
 
-**NEXT:** John unlocks v4 -> swap the build in -> relock -> switch the live APR generator to generate_apr_v4.py ->
-CSLB classifications -> next swap (views with
+**SWAPPED IN 2026-10-01** (John unlocked): live v4 = chain3 build, SHA-256 1d5e2cb8775d6e20..., integrity ok, 416,119
+events, Shattuck first BP 2022-09-08, v_project_people 12,607.
+
+**NEXT:** John relocks -> switch the live APR generator to generate_apr_v4.py (sequester v2's) -> CSLB classifications
+-> Datasette re-point -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

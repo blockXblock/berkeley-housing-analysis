@@ -194,7 +194,7 @@ def classify_all(con):
     for ev_id, permit in con.execute("SELECT event_id, source_record_key FROM events "
                                      "WHERE event_type_code NOT LIKE 'planning_%' "      # a Planning record is not a building permit
                                      "AND event_type_code NOT LIKE 'registry_%' "      # nor a Rent Board registration (2026-10-01)
-                                     "AND event_type_code NOT IN ('accela_listed', 'business_license', 'ctcac_project', 'fees_recorded')"):  # nor a listing, licence, CTCAC row, fee total
+                                     "AND event_type_code NOT IN ('accela_listed', 'business_license', 'ctcac_project', 'fees_recorded', 'attachment_listed')"):  # nor a listing, licence, CTCAC row, fee total
         got = permit_effect(permit)
         if got is None:
             unread += 1
@@ -1042,6 +1042,109 @@ def load_building_fees(con, harvests=BUILDING_HARVESTS):
             raise
         out[os.path.basename(path)] = dict(pages=len(recs), with_fees=ok, no_fees=none, no_fee_tab=len(no_tab))
     return out
+
+
+CAPTURES_MANIFEST = os.path.join(ROOT, 'data', 'manifests', 'accela_status_captures_2026-10-01.json')
+
+
+def load_attachment_lists(con, manifest=CAPTURES_MANIFEST):
+    """The ATTACHMENT LISTS in the Accela record captures (John 2026-10-01, the v2 -> v4 audit: v2 held ~1,236 of these
+    as 'documents' with no file). Each listed file -> one 'attachment_listed' event on its record, dated at the City's
+    upload date; raw_payload = the file name as listed (it often carries the document's own date and kind: '2022-03-01_
+    LTR Incomplete_...'), its size, the upload date, and the capture file + line it came from. The files are NOT held.
+    Read by the captures' own STRUCTURE: a record header ('PERMIT:', 'BUILDING PERMIT:', 'Permit Number:') and
+    three-field lines (name | size | upload date, in either order). A listed file before any header is rejected and
+    counted. Declared by a manifest pinning each capture by SHA-256."""
+    import datetime as dt, re as _re
+    now = dt.datetime.now(dt.timezone.utc).isoformat()
+    REC = _re.compile(r'^\s*(?:BUILDING PERMIT|PERMIT|Permit Number|Record(?: Number)?|RECORD)\s*:\s*'
+                      r'([A-Z]{1,7}\d{4}-\d{3,5}(?:-[A-Z]+\d+)?)\b', _re.I)
+    DATE = _re.compile(r'^\d\d/\d\d/\d{4}$')
+    SIZE = _re.compile(r'^\d+(?:\.\d+)?\s*(?:bytes|KB|MB|GB)$', _re.I)
+    m = json.load(open(manifest))
+    for f in m['files']:
+        assert _sha256(os.path.join(ROOT, f['path'])) == f['sha256'], f"capture changed since its manifest: {f['path']}"
+    con.execute("INSERT OR IGNORE INTO event_types VALUES ('attachment_listed','CITY_RECORD',0,"
+                "'a file listed in an Accela record''s Attachments, dated at its upload; the file is not held')")
+    loc = os.path.relpath(manifest, ROOT)
+    assert not con.execute("SELECT 1 FROM sources WHERE locator=?", (loc,)).fetchone(), f'already loaded: {loc}'
+    try:
+        sid = con.execute("INSERT INTO sources (source_kind,locator,retrieved_at,checksum,notes) VALUES "
+                          "('accela_status_captures',?,?,?,?)", (loc, m['frozen'], _sha256(manifest), m['note'])).lastrowid
+        rows, orphan = [], 0
+        for f in m['files']:
+            cur = None
+            for i, line in enumerate(open(os.path.join(ROOT, f['path']), errors='replace')):
+                h = REC.match(line)
+                if h:
+                    cur = h.group(1).upper(); continue
+                parts = [p.strip() for p in line.rstrip('\n').split(' | ')]
+                if len(parts) != 3:
+                    continue
+                d = [p for p in parts if DATE.match(p)]; z = [p for p in parts if SIZE.match(p)]
+                n = [p for p in parts if not DATE.match(p) and not SIZE.match(p)]
+                if len(d) == 1 and len(z) == 1 and len(n) == 1:
+                    if cur is None:
+                        orphan += 1; continue
+                    rows.append((cur, n[0], d[0], z[0], os.path.basename(f['path']), i + 1))
+        rid = con.execute("INSERT INTO ingestion_runs (source_id,started_at,rows_in_source,rows_ingested,rows_rejected,"
+                          "rejected_detail,conserved) VALUES (?,?,?,?,?,?,1)",
+                          (sid, now, len(rows) + orphan, len(rows), orphan,
+                           f"{orphan} listed files before any record header" if orphan else None)).lastrowid
+        for rec, name, up, size, cf, ln in rows:
+            when = dt.datetime.strptime(up, '%m/%d/%Y').date().isoformat()
+            con.execute("INSERT INTO events (event_type_code,event_date,event_date_precision,source_record_key,"
+                        "source_id,ingestion_run_id,raw_payload,raw_description,created_at) "
+                        "VALUES ('attachment_listed',?,'day',?,?,?,?,?,?)",
+                        (when, rec, sid, rid, json.dumps({"file": name, "size": size, "uploaded": up,
+                                                          "capture": cf, "line": ln}), name[:300], now))
+        con.commit()
+    except Exception:
+        con.rollback()
+        raise
+    return dict(captures=len(m['files']), attachments=len(rows), records=len({r[0] for r in rows}), orphans=orphan)
+
+
+PLANNING_FEES = os.path.join(ROOT, 'data', 'raw', 'accela_capdetail', 'planning_fees_2026-10-01.jsonl')
+
+
+def load_planning_fees(con, path=PLANNING_FEES):
+    """The FEES tab of every saved Planning page (scripts/extract_capdetail_fees.py; John 2026-10-01): application,
+    use-permit and review fees, the tab's totals as printed. Same 'fees_recorded' event type as building permits,
+    keyed by the Planning record and dated at its harvest (the manifest's date; totals are cumulative to then).
+    Cross-checked: ZP2022-0019's page total ($55,760.00) equals the independent 2026 capture file's."""
+    import datetime as dt
+    now = dt.datetime.now(dt.timezone.utc).isoformat()
+    con.execute("INSERT OR IGNORE INTO event_types VALUES ('fees_recorded','CITY_RECORD',0,"
+                "'the fees a permit or Planning record page records (paid / outstanding totals), dated at retrieval')")
+    loc = os.path.relpath(path, ROOT)
+    assert not con.execute("SELECT 1 FROM sources WHERE locator=?", (loc,)).fetchone(), f'already loaded: {loc}'
+    recs = [json.loads(l) for l in open(path)]
+    try:
+        sid = con.execute("INSERT INTO sources (source_kind,locator,retrieved_at,checksum,notes) VALUES "
+                          "('accela_capdetail_fees',?,?,?,?)", (loc, '2026-10-01', _sha256(path),
+                          'Fees tab of the saved Planning pages (pinned by their pages manifests)')).lastrowid
+        rid = con.execute("INSERT INTO ingestion_runs (source_id,started_at,rows_in_source,rows_ingested,rows_rejected,"
+                          "conserved) VALUES (?,?,?,0,0,1)", (sid, now, len(recs))).lastrowid
+        ok, none = 0, 0
+        for r in recs:
+            f = r.get('fees')
+            if not f:
+                none += 1; continue
+            when = r['manifest'][len('pages_manifest_'):len('pages_manifest_') + 10]
+            con.execute("INSERT INTO events (event_type_code,event_date,event_date_precision,source_record_key,"
+                        "source_id,ingestion_run_id,raw_payload,raw_description,created_at) "
+                        "VALUES ('fees_recorded',?,'day',?,?,?,?,?,?)",
+                        (when, r['record'], sid, rid, json.dumps(f),
+                         f"paid {f.get('total_paid', '$0.00')}; outstanding {f.get('total_outstanding', '$0.00')}", now))
+            ok += 1
+        con.execute("UPDATE ingestion_runs SET rows_ingested=?, rows_rejected=?, rejected_detail=?, conserved=? WHERE run_id=?",
+                    (ok, none, f"{none} pages with no fee tab or an empty one", int(ok + none == len(recs)), rid))
+        con.commit()
+    except Exception:
+        con.rollback()
+        raise
+    return dict(pages=len(recs), with_fees=ok, without=none)
 
 
 DOCUMENT_ROLES = os.path.join(ROOT, 'data', 'derived', 'document_roles_evidence_2026-10-01.json')

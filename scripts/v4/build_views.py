@@ -55,6 +55,10 @@ fees AS (SELECT ps.project_id,
                WHERE se.role_in_structure IN ('master', 'phase')) sp ON sp.structure_id = s.structure_id
          JOIN events f ON f.event_type_code = 'fees_recorded' AND f.source_record_key = sp.k
          GROUP BY 1),
+pfees AS (SELECT pr.project_id,
+                 SUM(CAST(REPLACE(REPLACE(json_extract(f.raw_payload, '$.total_paid'), '$', ''), ',', '') AS REAL)) paid
+          FROM project_records pr JOIN events f ON f.event_type_code = 'fees_recorded' AND f.source_record_key = pr.record_key
+          GROUP BY 1),   -- Planning fees: application / use-permit / review, on the project's own Planning records
 valuation AS (SELECT ps.project_id, SUM(CAST(json_extract(e.raw_payload, '$.JobValuation') AS REAL)) v
               FROM ps JOIN structures s USING(structure_id) JOIN events e ON e.event_id = s.master_event_id GROUP BY 1),
 par AS (SELECT project_id, MIN(parcel_id) parcel_id FROM project_parcels GROUP BY 1),
@@ -114,6 +118,7 @@ SELECT
   fe.paid                                                         AS fees_paid,
   fe.outstanding                                                  AS fees_outstanding,
   fe.fees_as_of                                                   AS fees_as_of,
+  pf.paid                                                         AS planning_fees_paid,
   json_extract(p.notes, '$.pathways')                             AS pathways,
   json_extract(p.notes, '$.filed')                                AS filed_date,
   json_extract(p.notes, '$.accepted')                             AS accepted_date,
@@ -138,7 +143,7 @@ SELECT
   json_extract(p.notes, '$.funding')                              AS funding
 FROM projects p
 LEFT JOIN built b USING(project_id) LEFT JOIN units_b u USING(project_id) LEFT JOIN first_bp fb USING(project_id)
-LEFT JOIN valuation val USING(project_id) LEFT JOIN fees fe USING(project_id) LEFT JOIN pt USING(project_id) LEFT JOIN av USING(project_id)
+LEFT JOIN valuation val USING(project_id) LEFT JOIN fees fe USING(project_id) LEFT JOIN pfees pf USING(project_id) LEFT JOIN pt USING(project_id) LEFT JOIN av USING(project_id)
 LEFT JOIN area ar USING(project_id) LEFT JOIN own o USING(project_id) LEFT JOIN appl ap USING(project_id)
 LEFT JOIN tiers t USING(project_id) LEFT JOIN adu_b adu USING(project_id)
 """
@@ -349,7 +354,20 @@ SELECT pk.project_key, 'funder', json_extract(f.value, '$.funder'), NULL, 'fundi
 FROM pk JOIN projects p USING(project_id), json_each(json_extract(p.notes, '$.funding')) f
 """
 
-VIEWS = {"v_projects": V_PROJECTS, "v_project_timeline": V_PROJECT_RECORDS, "v_adu_rent_board": V_ADU_RENT_BOARD,
+# THE CITY'S ATTACHMENT LISTS per project (John 2026-10-01): each file the City lists on one of the project's records
+# (its Planning records and building permits), dated at upload -- welcome and incomplete letters, resubmittals, staff
+# reports, notices of decision. The file name often carries the document's own date and kind. Files are not held.
+V_PROJECT_ATTACHMENTS = r"""
+CREATE VIEW v_project_attachments AS
+SELECT DISTINCT json_extract(p.notes, '$.project_key') AS project_key, e.source_record_key AS record_key,
+       e.event_date AS uploaded, json_extract(e.raw_payload, '$.file') AS file, json_extract(e.raw_payload, '$.size') AS size
+FROM projects p JOIN (SELECT project_id, record_key FROM project_records
+                      UNION SELECT ps.project_id, e2.source_record_key FROM project_structures ps
+                            JOIN structure_events se USING(structure_id) JOIN events e2 USING(event_id)) r USING(project_id)
+JOIN events e ON e.event_type_code = 'attachment_listed' AND e.source_record_key = r.record_key
+"""
+
+VIEWS = {"v_project_attachments": V_PROJECT_ATTACHMENTS, "v_projects": V_PROJECTS, "v_project_timeline": V_PROJECT_RECORDS, "v_adu_rent_board": V_ADU_RENT_BOARD,
          "v_project_records_listed": V_PROJECT_LISTED, "v_project_businesses": V_PROJECT_BUSINESSES,
          "v_project_people": V_PROJECT_PEOPLE}
 

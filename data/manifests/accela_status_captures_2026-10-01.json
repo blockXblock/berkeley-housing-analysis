@@ -1,0 +1,370 @@
+{
+ "frozen": "2026-10-01",
+ "note": "Accela record captures (Claude-in-Chrome and earlier hand captures, 2026-03..09): per record, processing status, fees, owner/applicant and the ATTACHMENTS list. v4 loads the attachment lists (titles, sizes, upload dates); the files themselves are not held.",
+ "files": [
+  {
+   "path": "data/raw/accela_status/ ZP2022-0135_2128_Oxford_St.txt",
+   "sha256": "97c186dff1acae54e94b81fbdf034687fb2c2fd793c280776626e86f2837d575"
+  },
+  {
+   "path": "data/raw/accela_status/10_majors_planning_scrape_2026-06-06.txt",
+   "sha256": "5d2d60298975a392a4214192ff9f21998d5c3f42822d41868a56eaaf83e79574"
+  },
+  {
+   "path": "data/raw/accela_status/1367_UNIVERSITY_Ave.txt",
+   "sha256": "5e713f45d2cbbace8b665849962a3cfb1dfba10cf1db2fbbff30d075d6ba311a"
+  },
+  {
+   "path": "data/raw/accela_status/1598_UNIVERSITY.txt",
+   "sha256": "a7c4af6e29fb2211f5a41c33aed44ed6e987a6520edb8fa1fd51b02037c2948c"
+  },
+  {
+   "path": "data/raw/accela_status/1701_SAN_PABLO.txt",
+   "sha256": "7beec93be8c09a3f4a91c14a59c0fa07fa3aa7234af9c0227469866547ff1927"
+  },
+  {
+   "path": "data/raw/accela_status/1708_HARMON_St.txt",
+   "sha256": "026b0ac7babf6061bacf9d22a699d762627b858da253f21d6a2e0d5074e84316"
+  },
+  {
+   "path": "data/raw/accela_status/1752_SHATTUCK_Ave.txt",
+   "sha256": "b6c9d22af15177b98247a66166b6a1054687914d01f741101fe507683b86ddf7"
+  },
+  {
+   "path": "data/raw/accela_status/2001_ASHBY_Ave.txt",
+   "sha256": "9036350ee38020e66bd2786e030226e51246f008d208382fca66dccc114fff3e"
+  },
+  {
+   "path": "data/raw/accela_status/2016_ASHBY_Ave.txt",
+   "sha256": "ab79a6e5cd8a270f20b19b800640767c5cdff9ab9c4699b7ec0fd66b003a1f45"
+  },
+  {
+   "path": "data/raw/accela_status/2018_BLAKE_St.txt",
+   "sha256": "49bfd84b5a7f69035396a2ee373e81974310fd9fcaa3c5490afa54c149186806"
+  },
+  {
+   "path": "data/raw/accela_status/2127_DWIGHT_Way.txt",
+   "sha256": "cfeb871f68b0a0132252764a21c6d5dd393526c0ddd3f5bfebcff0d085bce7a7"
+  },
+  {
+   "path": "data/raw/accela_status/2136_SAN_PABLO_Ave.txt",
+   "sha256": "8db05468fdb7038a31ea74ad02dbb1b42b87589a90f6bd31816006f98e439a3d"
+  },
+  {
+   "path": "data/raw/accela_status/2198_SAN_PABLO_Ave.txt",
+   "sha256": "3cf64451e31668a38d5c1f74b28163be4888aa03d0e8f7b0d8e928f67840d76d"
+  },
+  {
+   "path": "data/raw/accela_status/2300_ELLSWORTH_St.txt",
+   "sha256": "2a7e5f74df1c2db1756d905972ac86c99c9d308ee77f1552dc71d6986592f2a2"
+  },
+  {
+   "path": "data/raw/accela_status/2344_FULTON_St.txt",
+   "sha256": "98d825ee9ab17c42baac35171a6b30aecc61ee296b45010b8684f65319d9e67f"
+  },
+  {
+   "path": "data/raw/accela_status/2350_TELEGRAPH_Ave.txt",
+   "sha256": "bc7634444d05b8636f01c22a717f2e93357f3e85d006c1f20f8214add2cf650f"
+  },
+  {
+   "path": "data/raw/accela_status/2403_SAN_PABLO_Ave.txt",
+   "sha256": "08944d7eb152de3885492170c0991dfc6cc8992a47885b61c57351df0e92e41a"
+  },
+  {
+   "path": "data/raw/accela_status/2538_DURANT_Ave.txt",
+   "sha256": "8b8a959111653728b1703de8625c263291679ae4409194d3f35e27b430540bfe"
+  },
+  {
+   "path": "data/raw/accela_status/2550_SHATTUCK_Ave.txt",
+   "sha256": "e50d8e88d4b88805ce17ca78ff9e11ef88150a595875d1a3aa96474291f7a2b2"
+  },
+  {
+   "path": "data/raw/accela_status/2587_TELEGRAPH_Ave.txt",
+   "sha256": "88f05e4e57001c0c90f0a477f7577b25f265d0bca094ff0c04cecc034fb1b969"
+  },
+  {
+   "path": "data/raw/accela_status/2800_TELEGRAPH_Ave.txt",
+   "sha256": "3effb099dca1451c7db343a635d3f9378bceee453ee2dcc2b7e75cfaec59bfcd"
+  },
+  {
+   "path": "data/raw/accela_status/2902_ADELINE_St.txt",
+   "sha256": "01ca3578d60f41ceaf789b6d8d4da0cae80d3eadf20b3cc967cbdd6c6c76f9c1"
+  },
+  {
+   "path": "data/raw/accela_status/B2024-01268_2016_ASHBY.txt",
+   "sha256": "55204c65293d099917690b617d1cdb78af25c4a6d787b547720f028fb3240513"
+  },
+  {
+   "path": "data/raw/accela_status/B2025-05534_1750_SACRAMENTO_St.txt",
+   "sha256": "20c337d7172ad0328471b07e2cc9ad66e41bf59031338d6fb6f278d3e93d6e2e"
+  },
+  {
+   "path": "data/raw/accela_status/B_Permits_2530_Bancroft.txt",
+   "sha256": "758b278d9086ea06b77c621d1e3621c507badb836d8127abe810d403c789566e"
+  },
+  {
+   "path": "data/raw/accela_status/DRCF2023-0005_2480_BANCROFT.txt",
+   "sha256": "40f90a273bc7ab62b16162e6c267f9417d8c8c56df7cc7fd69d94e9af6cb632e"
+  },
+  {
+   "path": "data/raw/accela_status/LMSAP2024-0005_2276_SHATTUCK_Ave.txt",
+   "sha256": "6b1c949fa6b1d28a43a692ed5455cc5b6ade10520885994df4d67ae428925c75"
+  },
+  {
+   "path": "data/raw/accela_status/P2022-0038_2820_San_Pablo.txt",
+   "sha256": "0fcb91e1032b5fa5f9e0376d5f22802eeb1c780149180026564318d91b07be3e"
+  },
+  {
+   "path": "data/raw/accela_status/PLN2023-0025_1914_FIFTH_St.txt",
+   "sha256": "5af5c5ecc887de384c4d24ea97b7d6d8dc0c76dbeafff14df671a3e434561512"
+  },
+  {
+   "path": "data/raw/accela_status/PLN2023-0065_1740_SAN_PABLO_Ave.txt",
+   "sha256": "940b946a84338700e17433743bbfbf3892cd0e6a917664e5655cd8565f838834"
+  },
+  {
+   "path": "data/raw/accela_status/PLN2024-0023_2326_DURANT_Ave.txt",
+   "sha256": "7943fc3f900d469f2e5cabc5ca0035a111dc0747e4a88fa79631fbc76af441e8"
+  },
+  {
+   "path": "data/raw/accela_status/PLN2024-0024_0_LE_ROY_Ave.txt",
+   "sha256": "664b9ecec2dbed6cebd911113ac7142af2d397713c122aca1fb26ea5ffd1ce16"
+  },
+  {
+   "path": "data/raw/accela_status/PLN2024-0054_2372_ELLSWORTH_St.txt",
+   "sha256": "5278113a42dbc07954bafc04067422e796f68dcffcf1abbf2c3d9f261841afce"
+  },
+  {
+   "path": "data/raw/accela_status/PLN2025-0038_2330_DURANT_Ave.txt",
+   "sha256": "1e76c223440a95b8753862e905c10163aa598055de7dfec3c6f3a255bc20afad"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2021-0046_2136_SAN_PABLO_Ave.txt",
+   "sha256": "1e9c6a29b274c04e5e9c61d3daa78d5bfa853f667b6c5c4bc13bb9731ac95208"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2021-0127_1710_UNIVERSITY_Ave.txt",
+   "sha256": "132f2b94c96d0aa799f9abbebd205b41e5d0695e99cbec593ece952226cf81f5"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2021-0158_130_BERKELEY_Sq.txt",
+   "sha256": "6ffcb4ba8f6d131747fc6fcbc327ba3295f8a2067ca8dc1f9df860f8a2456329"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2022-0011_1598_UNIVERSITY_Ave.txt",
+   "sha256": "c2d6fc88a641c851695a1690c503797e4562d1b734da1481461cc5573a85cc66"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2022-0019_2555_COLLEGE_Ave.txt",
+   "sha256": "0cc9a6cd0fcd1ac8f474d219c52df8c38e18c8ef5fe361a037d05c1601102b9e"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2022-0021_2449_DWIGHT_Way.txt",
+   "sha256": "b13fa873ae6c4d3d77aebb038c106f661d31cef1d5a1f5fbb13801baaa3760a4"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2022-0046_3000_SHATTUCK_Ave.txt",
+   "sha256": "337366f60cc4084693db25a9a57bb3d2fa180bca7d52203a904f85bb73be78e4"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2022-0115_2427_San_Pablo.txt",
+   "sha256": "c9252a9f30d694277510601f8c26af7b53568c5d690a56a076401f7c11fb1bf2"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2022-0116_2920_SHATTUCK_Ave.txt",
+   "sha256": "fd0b51b10fcb541e9dae1e9c2e0cdcdb97aba3926666bf002e7790eca96546e8"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2022-0132_2847_SHATTUCK_Ave.txt",
+   "sha256": "594ef070d066be4d39281013becb14296fcbacc8d9bf931d74cde80f0eaf27ac"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2022-0149_2420_SHATTUCK_Ave.txt",
+   "sha256": "9a86b08c9beca0f1d047cda9ce3a1dd42564fef20f93b70dbdfd285c74d51d73"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2022-0170_3030_TELEGRAPH_Ave.txt",
+   "sha256": "ad57350a9d0e525a36f059aca0dad2ee63d74124250001aa2f5683612cdf29be"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2022-0171_2601_SAN_PABLO_Ave.txt",
+   "sha256": "8a2c5e72fca00a6896c55873adeea83d013037c2fa322f7ef1c2d777edd28a06"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2023-0040_1974_Shattuck.txt",
+   "sha256": "4a0145e07d265446044754674074f9fa3dbcdb5cd0c0611c33b2a4c10e489d78"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2023-0058_2720_SAN_PABLO_Ave.txt",
+   "sha256": "3c68357c9b74503746f10abe8b60fc89f2b778dafd62e668b22dd57088f12b0d"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2023-0064_2037_Durant.txt",
+   "sha256": "8b4391ee57962c6c442e373a85147299c07250777b8c6f69237c4c24ed810350"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2023-0070_1790_UNIVERSITY_Ave.txt",
+   "sha256": "9caab566ad120e14ff2585e0cd84882819b78a5aa8f0279b46a597cfef66fbcc"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2023-0079_2274_SHATTUCK.txt",
+   "sha256": "037c2e284bf6704dafbb9900e3bf144211e06bc4c58e9d49bc9644daef111f6f"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2023-0079_2274_Shattuck .txt",
+   "sha256": "ccfb63b2d641117ce0a8fb89b92c10a5da414b9256acc4b532746032628608dc"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2023-0089_2441_LE_CONTE_Ave.txt",
+   "sha256": "d7f3cb3b6cd28d347d44933575f016ede8017179cece6526f0bd569182fc8526"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2023-0090_2733_SAN_PABLO_Ave.txt",
+   "sha256": "5fb4b692ae1bab1834031a420baf002a3a20c7eb0cb03fb2fb6d5d98427d81ff"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2023-0095_2660_BANCROFT.txt",
+   "sha256": "4806fc598b939720ba6ef16a02e613fa8ca8803c7488227bffe9052e0e3c48f3"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2023-0099_2109_MILVIA_St.txt",
+   "sha256": "cd00d5684679c5f1b2b36a346f0aa8281009759dd13096f0027d1333bc06ebc9"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2023-0107_2462_BANCROFT.txt",
+   "sha256": "b25d188152b8cd1ba97ec9822ca01810fab47bb0624970562e613a2e08d0f5c8"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2023-0123_2833_Seventh_St.txt",
+   "sha256": "5066de4b5017c98b793b90a4019fafc990c6c8db4b2bfc5c38c67298084e1440"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2023-0126_2530_Bancroft.txt",
+   "sha256": "3c7c94014ca7bfefd2124c058f5b9e0ff9a7df7d24f2f3963d2845aeca0d5a31"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2023-0163_2100_Milvia.txt",
+   "sha256": "afdd30dc0058f9b09adf824af18fa351b03c6d0ef2e248e2ab1bffbd393a992c"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0008_1614_Sixth_St.txt",
+   "sha256": "6fd82cb880b831a555dc97c43ff52500c2a0e7b7177f0b2e6cf4d5ad4e4f0284"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0014__1048_Keith_St.txt",
+   "sha256": "d6ea45126bb1d2cf40cdac4cc9dbd02b976dd3579dc630c0d326566b6b59e272"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0029_2680_BANCROFT.txt",
+   "sha256": "540284df29787c54a720f0775c2c1f887e1b670e6e27297c245b84cb641b5f6b"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0033_2317_CHANNING_Way.txt",
+   "sha256": "1f5c1f8716dab42bac67501dad5a813aa983d11da801570f3ebc0d850fc2f549"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0047_2450_SHATTUCK_Ave.txt",
+   "sha256": "d6004322d363439f93afc9fced2db80699a9cedfa63858eb60df29089621051d"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0057_2655_SHATTUCK_Ave.txt",
+   "sha256": "95723b52251b76941b5fab0ccb975c01bfc3cc269a5f0b9c6b8b9b6b54a4f8cc"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0058_2700_SHATTUCK_Ave.txt",
+   "sha256": "462300777b401fbf7307eb3212b900f620b8cc7a1e1c0ed518e2ca5e3e43615d"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0059_2204_DWIGHT_Way.txt",
+   "sha256": "2111d5ccc913b1a12e46349f14ff356474fc8266f0fb5b08a0efe65a96edd1bc"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0066_2109_VIRGINIA_St.txt",
+   "sha256": "0134154de20aac12e7882fc487a77651c19109e28e164aa1081f9d57a96677be"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0070_2442_Haste.txt",
+   "sha256": "53ae2061ed0cab3113b61d6e112adf9ab659cca0d320d33a5ec29243e0763d99"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0071_2955_SHATTUCK_Ave.txt",
+   "sha256": "e4f303f1f5a1f45fd8d9ca772cc3a0c10624762a3063cb3c5df0e465224b7482"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0074_1581_UNIVERSITY_Ave.txt",
+   "sha256": "ab0669480978cb64524b971ffbd7e6f4930b341e562e81c1e1b841d75f3d482f"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0075_1899_OXFORD_St.txt",
+   "sha256": "f580cb41b6199158ef0b1032ce2a0bb191209e134c113edbcb08df389762b992"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0079_2036_BANCROFT_Way.txt",
+   "sha256": "7c49b4888655b50e6f59a287ab1abeb0e26949e45c24e666182af1c34832382d"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0096_2147_SAN_PABLO_Ave.txt",
+   "sha256": "48dd68064f9209a8f8fb234d71a66acb6772f08537daf5e745e20ad11bfe6e4d"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0112_3035_COLBY_St.txt",
+   "sha256": "6897643d0787904298077eba64151bb8b06dd92ef8d2d0f3ae0f6141ed5ec647"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0114_2138_KITTREDGE_St.txt",
+   "sha256": "9ffed0f63ab2573244446533e6df590c80568cff714fe46715ba9d97f784cbc6"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0116_811_Cedar.txt",
+   "sha256": "595bdcf5312fc87606408816012a20939dbaad2f5038253757e1a7ec4a93ab45"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0122_3036_REGENT_St.txt",
+   "sha256": "8d6275c2eec4ffa738fe4b4c6737221b741fa4afd940face9e7aad3e193d8585"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0126_2298_DURANT_Ave.txt",
+   "sha256": "e8259a579588145666eaff1d0e7b00be44733dddc132d11d637965859167477f"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0129_1627_Jaynes_St.txt",
+   "sha256": "d09d1671b16123326ec9e3a3fa52d30bbe97c5e4a160d6f3e707496c61f1106e"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0131_2113-15_Kittredge.txt",
+   "sha256": "cb82450c680ee199caaf2e799ea716b6643a431d0b4f5e1f6ba1bc7bb0570bf2"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0138_2145_GRANT_St.txt",
+   "sha256": "b6db51f8df588c943c068cd4fee27ccc719e2e3eaeef35d59da6fcfa26089fa4"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0162_2425_Durant_Ave.txt",
+   "sha256": "ca5331ded9d07969ec8f370212250c1eaafaee07ad63d0269352679be13992cc"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2024-0181_2029_UNIVERSITY.txt",
+   "sha256": "83882e1c2c034eda237c5abb06d0a7a39ed2b5e321cac3335c4bd66fdd434c5c"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2025-0101_2190_SHATTUCK.txt",
+   "sha256": "082716afc589548a5ac861bdb99ae9486e691fc783cae728f7de8df12fbf8f12"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2025-0105_2712_TELEGRAPH_Ave.txt",
+   "sha256": "9a2dd84027fa23dfe0ad4807bf79be8d4965079806531cb4f04ae7b34b254c6a"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2025-0107_2001_CENTER_St.txt",
+   "sha256": "4e8726894bd4b9e365b2e584872e2e8aaaf0d58d70ba6854ad40faa8308ba511"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2026-0006_2138_KITTREDGE_St.txt",
+   "sha256": "f45157b6c0637e227ffcb9dd20238ec0bc586a902ba1696830a4e9db2993a087"
+  },
+  {
+   "path": "data/raw/accela_status/ZP2026-0015_2455_TELEGRAPH_Ave.txt",
+   "sha256": "c3964322f92148ddbdeca56f0989ac21cc08de933356bd5ef7b56e04dfa31eb0"
+  }
+ ]
+}

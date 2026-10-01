@@ -164,6 +164,18 @@ big = lambda v: f'${v / 1e9:,.1f} billion' if v >= 1e9 else f'${v / 1e6:,.1f} mi
 pct = lambda a, b: f'{100 * a / b:.0f}%' if b else '—'
 
 
+def rnd(v):
+    """Round an ESTIMATE (survey, model, synthetic data) to a sensible precision: tens under 1,000, hundreds under
+    100,000, thousands above. Exact counts (registrations, assessor records, budgets, trips) are never passed here."""
+    v = float(v)
+    step = 10 if abs(v) < 1000 else (100 if abs(v) < 100000 else 1000)
+    return f"{round(v / step) * step:,.0f}"
+
+
+about = lambda v: f'about {rnd(v)}'
+pc = lambda x: f'{float(x):.0f}%'                    # survey percentages: whole numbers
+
+
 def table(head, rows, right=None, cls=''):
     right = set(right or [])
     h = ''.join(f'<th class="r">{esc(c)}</th>' if i in right else f'<th>{esc(c)}</th>' for i, c in enumerate(head))
@@ -267,20 +279,20 @@ def s_findings():
     F_ = [
         item('A university city, and a commuter city',
              f"{n(D['population'])} people live in Berkeley; {n(D['group_quarters'])} of them, one in six, live in dorms, co-ops and "
-             f"other group housing. Each workday {n(L['inflow'])} people commute in and {n(L['outflow'] + L['out_of_state_out'])} residents "
+             f"other group housing. Each workday {about(L['inflow'])} people commute in and {about(L['outflow'] + L['out_of_state_out'])} residents "
              f"commute out, so Berkeley gains about {round(L['inflow'] - L['outflow'] - L['out_of_state_out'], -2):,.0f} workers by day, "
              f"before counting {n(CITED['uc']['students'])} UC Berkeley students. The largest employer sector is education: "
-             f"{n(L['sectors'][0][1])} of the city's {n(L['jobs'])} jobs.",
+             f"{about(L['sectors'][0][1])} of {about(L['jobs'])} jobs in the city.",
              f"{a('#people', 'People')} · {a('#tide', 'Daily tide')} · data: {dl('lodes_2023_inflow_by_home_place.csv')}"),
         item('Most households rent, and most renters are stretched',
-             f"{i['renter_household_pct']}% of households rent. {i['rent_burdened_30pct']}% of renter households pay 30% or more of "
-             f"their income in rent, and {n(float(ACS['B25070010']['estimate']))}, about one in three, pay half or more. Incomes split "
-             f"at both ends: {n(i['hh_income_under_50k'])} households earn under $50,000 and {n(i['hh_income_200k_plus'])} earn "
+             f"{pc(i['renter_household_pct'])} of households rent. {pc(i['rent_burdened_30pct'])} of renter households pay 30% or more of "
+             f"their income in rent, and about one in three pay half or more. Incomes split "
+             f"at both ends: {about(i['hh_income_under_50k'])} households earn under $50,000 and {about(i['hh_income_200k_plus'])} earn "
              f"$200,000 or more.",
              f"{a('#tenure', 'Renters and owners')} · {a('#income', 'Income')} · maps: {dl('berkeley_blockgroups.geojson')}"),
         item('How people move has already changed',
-             f"{i['commute_work_from_home_pct']}% of employed residents work from home, nearly as many as drive alone to work "
-             f"({i['commute_drive_alone_pct']}%). {i['no_vehicle_pct']}% of households have no car. Of {n(dm['total'])} registered "
+             f"About a third of employed residents work from home, as many as drive alone to work "
+             f"(about {pc(i['commute_drive_alone_pct'])} each). One household in five has no car. Of {n(dm['total'])} registered "
              f"vehicles, {n(dm['ev'])} ({100 * dm['ev'] / dm['total']:.0f}%) are electric or plug-in hybrids. In 2020 the City's "
              f"Vision 2050 framework wrote that it was \u201cunknown what alternative forms of transportation might emerge and how "
              f"personal transportation behaviors might change\u201d; the working-from-home figure answers part of that. Autonomous "
@@ -321,7 +333,7 @@ def s_findings():
              f"{100 * g24 / CITED['cap']['ghg_2023']:.0f}% of the City's community inventory, which leaves both out. Most of the "
              f"campus's share comes from its gas-fired power plant, whose retirement date has moved from 2028 to 2030 to 2033. In its "
              f"2025 national sustainability report (STARS), the campus gives its 2023 energy use as {stars_kbtu:.0f} kBtu per square "
-             f"foot; the same report's emissions imply about {true_kbtu:.0f}, matching the UC system's own figure. The energy entry "
+             f"foot; the same report's emissions imply about {round(true_kbtu, -1):.0f}, matching the UC system's own figure. The energy entry "
              f"appears to leave out the power plant's gas. Under a 2021 settlement the University pays the City about $4.75 million "
              f"a year, rising 3% annually; in return the City agreed not to sue over its growth plans or enrollment.",
              f"{a('#campus', 'The University and the Lab')} · {a('#ucpay', 'What UC pays')} · data: {dl('stars_2025_ucb_operations.csv')}, "
@@ -332,7 +344,7 @@ def s_findings():
              f"earthquake would kill about {CITED['hz']['eq_deaths']} people in Berkeley, displace {CITED['hz']['eq_displaced']} "
              f"households and cut water to some homes for as long as six months. {CITED['hz']['softstory']['retrofitted']} soft-story "
              f"apartment buildings have been retrofitted under the City's mandate; {n(CITED['hz']['vulnerable'])} other potentially "
-             f"vulnerable buildings face no requirement. On the shoreline, {n(CITED['hz']['tsu_people'])} residents live in the "
+             f"vulnerable buildings face no requirement. On the shoreline, {about(CITED['hz']['tsu_people'])} residents live in the "
              f"tsunami zone, and the Bay has risen {CITED['hz']['bay_rise_since1900']} since 1900.",
              f"{a('#fire', 'Fire, flood and earthquake')} · sources: the City's 2024 Local Hazard Mitigation Plan; USGS"),
         item('A $30 billion tax base, with the University outside it',
@@ -381,7 +393,7 @@ def s_people():
     {table(['Type', 'Homes', 'Share'], [[k, n(last[c]), pct(last[c], last['housing_units'])] for k, c in
         (('Single detached', 'single_detached'), ('Single attached', 'single_attached'), ('Two to four units', 'two_to_four'),
          ('Five or more units', 'five_plus'), ('Mobile homes', 'mobile_homes'))], right={1, 2})}
-    <p class="note">The Census survey ({F['acs_city']['release']}) counts {n(i['population'])} residents: a mid-2024
+    <p class="note">The Census survey ({F['acs_city']['release']}) counts {about(i['population'])} residents: a mid-2024
     survey estimate, lower than the state's January 2026 figure, mainly in group housing. The tables below use the
     survey because only it describes residents (tenure, income, age, cars); use the state's totals for counts.</p>'''
     return section('people', '1 · The people', 'Who lives in Berkeley', body)
@@ -391,15 +403,15 @@ def s_tenure():
     i = F['acs_city']['ind']
     body = f'''
     <div class="grid">
-      {card(n(i['renter_households']), f"renter households ({i['renter_household_pct']}%)", f"{n(i['residents_renter_occupied'])} residents live in rented homes.")}
-      {card(n(i['owner_households']), f"owner households ({100 - i['renter_household_pct']:.1f}%)", f"{n(i['residents_owner_occupied'])} residents live in owned homes.")}
-      {card(usd(i['median_gross_rent']), 'median gross rent a month', 'Rent plus utilities.')}
-      {card(usd(i['median_home_value']), 'median value of an owned home', "Owners' own estimate (Census survey).")}
+      {card(rnd(i['renter_households']), f"renter households ({pc(i['renter_household_pct'])})", f"About {rnd(i['residents_renter_occupied'])} residents live in rented homes.")}
+      {card(rnd(i['owner_households']), f"owner households ({pc(100 - i['renter_household_pct'])})", f"About {rnd(i['residents_owner_occupied'])} residents live in owned homes.")}
+      {card('about $' + rnd(i['median_gross_rent']), 'median gross rent a month', 'Rent plus utilities.')}
+      {card(f"about ${i['median_home_value'] / 1e6:.1f} million", 'median value of an owned home', "Owners' own estimate (Census survey).")}
     </div>
     <p class="note">Households split 54/46 toward renting, yet residents split evenly, because owner households are larger.</p>
     <div class="two"><div>{acs_table('B25070', title='Rent as a share of household income (renters)')}</div>
     <div>{acs_table('B25034', title='Homes by year built')}</div></div>
-    <p class="note">{n(float(ACS['B25070010']['estimate']))} renter households, about one in three, pay half their income
+    <p class="note">About {rnd(float(ACS['B25070010']['estimate']))} renter households, one in three, pay half their income
     or more in rent. Nearly half of Berkeley's homes ({pct(float(ACS['B25034011']['estimate']), float(ACS['B25034001']['estimate']))})
     were built before 1940.</p>
     <div class="two"><div>{acs_table('B25041', title='Homes by number of bedrooms')}</div>
@@ -413,15 +425,15 @@ def s_income():
     i = F['acs_city']['ind']
     body = f'''
     <div class="grid">
-      {card(usd(i['median_household_income']), 'median household income', '±$' + n(F['acs_city']['cols']['B19013001'][1]) + ' (2024 dollars).')}
-      {card(usd(i['per_capita_income']), 'income per resident', 'Includes students.')}
-      {card(f"{i['below_poverty_pct']}%", 'of residents below the poverty line', 'Residents in households; students in dorms excluded.')}
-      {card(f"{i['bachelors_or_higher_pct']}%", "of adults 25+ hold a bachelor's degree or more", '')}
+      {card('about $' + rnd(i['median_household_income']), 'median household income', 'Give or take $' + rnd(F['acs_city']['cols']['B19013001'][1]) + ' (2024 dollars, survey margin).')}
+      {card('about $' + rnd(i['per_capita_income']), 'income per resident', 'Includes students.')}
+      {card(pc(i['below_poverty_pct']), 'of residents below the poverty line', 'Residents in households; students in dorms excluded.')}
+      {card(pc(i['bachelors_or_higher_pct']), "of adults 25+ hold a bachelor's degree or more", '')}
     </div>
     <div class="two"><div>{acs_table('B19001', title='Households by income (2024 dollars)')}</div>
     <div>{acs_table('B15003', skip=tuple(f'B15003{k:03d}' for k in range(3, 16)), title='Adults 25 and over by education')}</div></div>
-    <p class="note">The income distribution is a barbell: {n(i['hh_income_under_50k'])} households earn under $50,000 and
-    {n(i['hh_income_200k_plus'])} earn $200,000 or more. Student households sit in the bottom band. Incomes are published
+    <p class="note">The income distribution is a barbell: about {rnd(i['hh_income_under_50k'])} households earn under $50,000 and
+    about {rnd(i['hh_income_200k_plus'])} earn $200,000 or more. Student households sit in the bottom band. Incomes are published
     for households, never individuals. Education rows for grades 1–11 are folded out of the table (they are in the data file).</p>'''
     return section('income', '3 · Income', 'Household income, poverty and education', body)
 
@@ -433,12 +445,12 @@ def s_age():
              ('35–44', 13, 14), ('45–54', 15, 16), ('55–64', 17, 19), ('65–74', 20, 22), ('75–84', 23, 24), ('85 and over', 25, 25)]
     vals = [(b, m(a, c)) for b, a, c in bands]
     mx = max(v for _, v in vals)
-    rows = [[b, n(v), pct(v, i['population']), bar(v, mx)] for b, v in vals]
+    rows = [[b, rnd(v), pct(v, i['population']), bar(v, mx)] for b, v in vals]
     body = f'''
     {table(['Age', 'Residents', 'Share', ''], rows, right={1, 2})}
     <div class="two"><div>{acs_table('B03002', title='Residents by race and Hispanic origin')}</div>
     <div><p class="note" style="margin-top:2.2rem">One resident in four is 18–24. {n(m(7, 9))} residents are 18–21,
-    the undergraduate years. 65 and over: {n(i['age_65_plus'])} ({pct(i['age_65_plus'], i['population'])}).
+    the undergraduate years. 65 and over: about {rnd(i['age_65_plus'])} ({pct(i['age_65_plus'], i['population'])}).
     Every age column, by sex, is in {dl('acs_city_2024_1yr_all_columns.csv')}; the same bands for each block group are in
     {dl('acs_blockgroup_2020_2024_5yr.csv')}.</p></div></div>'''
     return section('age', '4 · Ages', 'A university city: ages and origins', body)
@@ -450,24 +462,24 @@ def s_tide():
     mx = sec[0][1]
     body = f'''
     <div class="grid">
-      {card(n(L['jobs']), 'jobs located in Berkeley', f"All jobs, {L['year']} (a worker with two jobs counts twice).")}
-      {card(n(L['inflow']), 'commute in each workday', f"Work here, live elsewhere ({n(L['aux_in'])} from out of state).")}
-      {card(n(L['outflow'] + L['out_of_state_out']), 'residents commute out', f"{n(L['outflow'])} to jobs elsewhere in California, {n(L['out_of_state_out'])} out of state.")}
-      {card(n(L['interior']), 'live and work here', f"{pct(L['interior'], L['employed_residents'])} of employed residents.")}
+      {card(rnd(L['jobs']), 'jobs located in Berkeley', f"All jobs, {L['year']} (a worker with two jobs counts twice).")}
+      {card(rnd(L['inflow']), 'commute in each workday', f"Work here, live elsewhere (about {rnd(L['aux_in'])} from out of state).")}
+      {card(rnd(L['outflow'] + L['out_of_state_out']), 'residents commute out', f"About {rnd(L['outflow'])} to jobs elsewhere in California, {rnd(L['out_of_state_out'])} out of state.")}
+      {card(rnd(L['interior']), 'live and work here', f"{pct(L['interior'], L['employed_residents'])} of employed residents.")}
     </div>
-    <p class="note">By day Berkeley gains about {n(L['inflow'] - L['outflow'] - L['out_of_state_out'], 0)} workers, before
+    <p class="note">By day Berkeley gains about {rnd(L['inflow'] - L['outflow'] - L['out_of_state_out'])} workers, before
     counting {n(CITED['uc']['students'])} students. Counts are jobs covered by unemployment insurance and federal
     employment; the self-employed are not included.</p>
     <div class="two"><div><h3>Where in-commuters live</h3>
-      {table(['Home', 'Workers', 'Share'], [[esc(k), n(v), pct(v, L['inflow'])] for k, v in L['top_in']], right={1, 2})}
+      {table(['Home', 'Workers', 'Share'], [[esc(k), rnd(v), pct(v, L['inflow'])] for k, v in L['top_in']], right={1, 2})}
       <p class="note">All {len(csvrows('lodes_2023_inflow_by_home_place.csv'))} places: {dl('lodes_2023_inflow_by_home_place.csv')}</p></div>
     <div><h3>Where out-commuters work</h3>
-      {table(['Work', 'Workers', 'Share'], [[esc(k), n(v), pct(v, L['outflow'])] for k, v in L['top_out']], right={1, 2})}
+      {table(['Work', 'Workers', 'Share'], [[esc(k), rnd(v), pct(v, L['outflow'])] for k, v in L['top_out']], right={1, 2})}
       <p class="note">All {len(csvrows('lodes_2023_outflow_by_work_place.csv'))} places: {dl('lodes_2023_outflow_by_work_place.csv')}</p></div></div>
     <div class="two"><div><h3>Jobs in Berkeley by industry</h3>
-      {table(['Industry', 'Jobs', 'Share', ''], [[esc(k), n(v), pct(v, L['jobs']), bar(v, mx)] for k, v in sec], right={1, 2})}</div>
+      {table(['Industry', 'Jobs', 'Share', ''], [[esc(k), rnd(v), pct(v, L['jobs']), bar(v, mx)] for k, v in sec], right={1, 2})}</div>
     <div><h3>Jobs by monthly earnings</h3>
-      {table(['Earnings', 'Jobs', 'Share'], [[k, n(v), pct(v, L['jobs'])] for k, v in zip(('$1,250 or less', '$1,251–$3,333', 'More than $3,333'), L['earnings'])], right={1, 2})}
+      {table(['Earnings', 'Jobs', 'Share'], [[k, rnd(v), pct(v, L['jobs'])] for k, v in zip(('$1,250 or less', '$1,251–$3,333', 'More than $3,333'), L['earnings'])], right={1, 2})}
       <h3>How residents get to work</h3>
       {acs_table('B08301', skip=('B08301002',) + tuple(f'B08301{k:03d}' for k in range(5, 10)) + tuple(f'B08301{k:03d}' for k in range(11, 16)), title='Means of transportation to work')}
       <p class="note">Sub-modes (carpool sizes, bus vs rail) are in the data file.</p></div></div>
@@ -488,8 +500,8 @@ def s_cars():
     <div class="grid">
       {card(n(D['total']), 'registered vehicles', f"DMV, as of {D['as_of'][0]}, Berkeley ZIP codes (Albany's 94706 excluded).")}
       {card(n(D['ev']), 'battery-electric, plug-in hybrid or fuel-cell', f"{pct(D['ev'], D['total'])} of vehicles.")}
-      {card(n(i['households_no_vehicle']), f"households with no car ({i['no_vehicle_pct']}%)", 'Census survey 2024.')}
-      {card(n(i['vehicles_available_min']), 'vehicles kept by households', 'At least; the survey tops out at "5 or more". Close to the DMV count.')}
+      {card(rnd(i['households_no_vehicle']), f"households with no car ({pc(i['no_vehicle_pct'])})", 'Census survey 2024.')}
+      {card(rnd(i['vehicles_available_min']), 'vehicles kept by households', 'At least; the survey tops out at "5 or more". Close to the DMV count.')}
     </div>
     <h3>Vehicles by ZIP code and fuel</h3>
     {table(['ZIP', 'All'] + fuels + ['Plug-in share'], rows, right=range(1, len(fuels) + 3))}
@@ -504,7 +516,7 @@ def s_cars():
     i = F['acs_city']['ind']
     body += f'''
     <h3>Bikes, e-bikes and scooters</h3>
-    <p class="note" style="font-size:.95rem">{i['commute_bicycle_pct']}% of employed residents bike to work in the 2024 survey, and
+    <p class="note" style="font-size:.95rem">About {pc(i['commute_bicycle_pct'])} of employed residents bike to work in the 2024 survey, and
     about 7% of those who still commute. Berkeley ranks well above Oakland, San Francisco and Portland, but below the college towns
     it is usually compared with. Its bike share has fallen since 2008–2012, when it was {Bk['berkeley_2008_12']}%, mostly because the
     count now includes the many who work from home. No survey counts bicycles owned in Berkeley; nationally, {Bk['us_ownership']}.</p>
@@ -811,7 +823,7 @@ def s_fire():
     <div class="grid">
       {card(n(fz[2]['parcels'] + fz[3]['parcels']), 'parcels in hill Fire Zones 2 and 3', f"Our count from the City's zone map and County parcels ({pct(fz[2]['parcels'] + fz[3]['parcels'], F['assessor']['located'])} of all parcels; {big(fz[2]['net_taxable_value'] + fz[3]['net_taxable_value'])} taxable value). The City's plan counts 8,603.")}
       {card('1:45–2:20', 'to clear 90% of Fire Zones 2 and 3', 'Hours:minutes; the last vehicles take 3:25–3:40.')}
-      {card('27,830', 'vehicles leave in a repeat of the 1923 fire', '10,330 of them from households in Fire Zones 2 and 3; clearing them takes 1:35 to 4:10.')}
+      {card('about 28,000', 'vehicles leave in a repeat of the 1923 fire', 'About 10,300 of them from households in Fire Zones 2 and 3; clearing them takes 1:35 to 4:10.')}
       {card(n(K['primary_ai'][1]), 'residential parcels with a single way out', f"{K['primary_ai'][0]} neighborhoods; {K['secondary_ai'][0]} more ({n(K['secondary_ai'][1])} parcels) have impaired secondary access.")}
     </div>
     <h3>Time to clear each area (hours:minutes)</h3>
@@ -820,15 +832,15 @@ def s_fire():
     mobilization" assumes residents leave within 30 minutes. KLD Table 7-4: {dl('evacuation_clearance_times_kld_2025.csv')}.</p>
     <p class="note" style="font-size:.95rem"><strong>How many cars leave the hills?</strong> The study counts vehicles, not
     parked cars: each household is assumed to drive out 1.14 vehicles, and workers, visitors and students drive out too. For the
-    North and South Berkeley Hills together it counts 17,888 evacuating vehicles at the busiest time of day (13,019 and 4,869),
-    11,504 of them residents'. A repeat of the 1923 fire, which burned from the hills into the neighborhoods north of campus,
-    would send about 27,830 vehicles onto the roads, 10,330 from households in Fire Zones 2 and 3; the rest come from the flats
+    North and South Berkeley Hills together it counts about 17,900 evacuating vehicles at the busiest time of day (about 13,000
+    and 4,900), about 11,500 of them residents'. A repeat of the 1923 fire, which burned from the hills into the neighborhoods north of campus,
+    would send about 28,000 vehicles onto the roads, about 10,300 from households in Fire Zones 2 and 3; the rest come from the flats
     and the campus area inside the fire's path. The study's often-quoted "approximately 90,000 vehicles" is a citywide
-    evacuation: residents' cars (47,614), commuters who work here (up to 15,256), college students (15,188), visitors (13,823)
-    and others, plus another 47,962 vehicles passing through. Many hill residents work elsewhere, so at midday on a weekday
+    evacuation: residents' cars (about 48,000), commuters who work here (up to about 15,000), college students (about 15,000),
+    visitors (about 14,000) and others, plus about 48,000 more passing through. Many hill residents work elsewhere, so at midday on a weekday
     fewer hill households are home, and more commuters' cars are in the flats.</p>
     <div class="two"><div><h3>Residents and their vehicles, by area (2024)</h3>
-      {table(['Area', 'Residents', 'Vehicles'], [[esc(r['area']), n(r['population_2024']), n(r['resident_vehicles_2024'])] for r in E['pop']], right={1, 2})}
+      {table(['Area', 'Residents', 'Vehicles'], [[esc(r['area']), rnd(r['population_2024']), rnd(r['resident_vehicles_2024'])] for r in E['pop']], right={1, 2})}
       <p class="note">Excludes students in campus housing, counted separately in the study. The Shadow Region is the
       neighboring area whose residents may leave unbidden.</p></div>
     <div><h3>How many streets jam?</h3>
@@ -862,15 +874,15 @@ def s_fire():
     <h3>Flood, tsunami and the rising Bay</h3>
     <p class="note" style="font-size:.95rem">The Bay has risen {H['bay_rise_since1900']} since 1900. The City's plan finds that
     {H['slr_i80']}, and that {H['gw']}. Vision 2050 cited the State's range of 1.1 to 2.7 feet of rise by 2050. A tsunami would
-    reach the shoreline first: {n(H['tsu_people'])} residents in {H['tsu_households']} households live in the inundation zone,
-    {n(H['tsu_daytime'])} people are there by day, and {H['tsu_businesses']} businesses employ {n(H['tsu_employees'])}; the
+    reach the shoreline first: {about(H['tsu_people'])} residents in about {rnd(H['tsu_households'])} households live in the inundation zone,
+    {about(H['tsu_daytime'])} people are there by day, and about {rnd(H['tsu_businesses'])} businesses employ {about(H['tsu_employees'])}; the
     Marina has {H['marina_households']} households living aboard. Inland, the storm drains were built for {H['storm_design']};
     the 2022–23 storms brought {H['storms_2223']}. The 100-year floodplain follows the shoreline, Aquatic Park, and Codornices
     and Strawberry creeks. The City's Stormwater Master Plan, due at the end of 2025, is still being prepared; no cost figure
     has been published.</p>'''
     fire_intro = f'''
     <h3>Fire</h3>
-    <p class="note" style="font-size:.95rem">Hill Fire Zones 2 and 3 hold {n(H['fire_parcels'])} parcels and {n(H['fire_residents'])}
+    <p class="note" style="font-size:.95rem">Hill Fire Zones 2 and 3 hold {n(H['fire_parcels'])} parcels and {about(H['fire_residents'])}
     residents. The 1923 fire destroyed {H['fire1923_structures']} structures and left about {n(H['fire1923_homeless'])} people
     homeless; {n(H['fire1923_footprint'])} buildings stand in its footprint today. The 1991 Tunnel Fire in the Oakland hills killed
     {H['tunnel_deaths']}. Measure FF (2020, {H['ff_vote']}% of the vote) funds fire prevention: ${H['ff_fy22']} million collected in
@@ -985,7 +997,7 @@ def s_campus():
     </div></div>
     <p class="note"><sup>1</sup> Best estimate: the gas implied by the campus's own reported emissions from burning fuel on site
     ({ST['stationary_t']:,.0f} tonnes of CO₂e in 2023, at its factor of 53.02 kg per MMBtu, about {round(ST['implied_gas_mwh'], -3):,.0f} MWh),
-    plus purchased electricity, solar and heating oil. That is {tot_mwh * 3412.14 / sqft:.0f} kBtu per square foot, consistent with the
+    plus purchased electricity, solar and heating oil. That is about {round(tot_mwh * 3412.14 / sqft, -1):.0f} kBtu per square foot, consistent with the
     {next(r['eui_kbtu_per_sqft'] for r in CS['ucb']['rows'] if r['year'] == 2023):.0f} the UC system reports for 2023. One of the several
     published figures appears about ten times too low: the campus's 2025 STARS report gives {ST['total_mwh']:,.0f} MWh, including only
     {ST['gas_mwh']:,.0f} MWh of gas, while calling the gas-fired plant "the primary source for electricity and heating." Data:

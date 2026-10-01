@@ -119,8 +119,9 @@ print("inspections:", SM.load_inspections(con))
 print("documents:  ", SM.load_all_documents(con))   # every declared manifest (DOCUMENT_MANIFESTS)
 print("parcels:    ", SM.load_parcels(con))   # assessor parcels + APN identifiers + assessed values + owners of record
 print("lineage:    ", SM.load_county_lineage(con))   # the County assessor's own parent -> child APN lineage (confirmed)
-print("planning:   ", SM.load_all_planning(con))
-print("planning log:", SM.load_planning_log(con))   # CPRA 26-1972 master log: applicants + the City's own density-bonus / streamlining / BMR statements   # the city's Planning records: filed + dated review tasks, staff who marked them
+print("parcel area:", SM.load_taxable_area(con))     # the City's taxable building / lot sq ft per parcel (a cross-check)
+print("planning:   ", SM.load_all_planning(con))     # the city's Planning records: filed + dated review tasks, staff who marked them
+print("planning log:", SM.load_planning_log(con))    # CPRA 26-1972 master log: applicants (its unit/BMR/pathway columns are empty)
 """)
 code(r"""
 con=sqlite3.connect(DB_PATH); con.execute("PRAGMA foreign_keys=ON")

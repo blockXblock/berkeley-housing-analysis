@@ -802,6 +802,56 @@ def load_parcels(con, parcels_db=PARCELS_DB, owners_csv=OWNERS_CSV):
     return out
 
 
+TAXABLE_AREA_CSV = os.path.join(ROOT, 'data', 'raw', 'berkeley_taxable_sqft_2026-09-15.csv')
+
+
+def load_taxable_area(con, path=TAXABLE_AREA_CSV):
+    """The City's Taxable Square Footage (data.cityofberkeley.info 9a47-nj4i, City-updated 2026-08-14) -> parcel_area:
+    taxable BUILDING square feet and lot square feet per CURRENT parcel. Phase 6 (John, 2026-09-30): an independent,
+    parcel-level cross-check on the square footage the permits and Planning records state for a new building -- it
+    covers everything taxable on the parcel, so it is labelled parcel-level, never a building's own area. Every row lands
+    or is rejected with the reason. Requires load_parcels."""
+    import csv, datetime as dt
+    from scripts.housing_rules.apn import to_canonical_apn
+    loc = os.path.relpath(path, ROOT)
+    assert not con.execute("SELECT 1 FROM sources WHERE locator=?", (loc,)).fetchone(), f'already loaded: {loc}'
+    con.execute("CREATE TABLE IF NOT EXISTS parcel_area (parcel_id INTEGER NOT NULL REFERENCES parcels(parcel_id), "
+                "building_sqft_taxable REAL, lot_sqft REAL, as_of_date TEXT NOT NULL, source_id INTEGER REFERENCES "
+                "sources(source_id), PRIMARY KEY (parcel_id, as_of_date))")
+    cur = dict(con.execute("SELECT apn_normalized, parcel_id FROM parcel_identifiers WHERE is_current=1"))
+    rows = list(csv.DictReader(open(path)))
+    out = dict(rows=len(rows), loaded=0, rejected=0)
+    rej = []
+    try:
+        sid = con.execute("INSERT INTO sources (source_kind,locator,retrieved_at,source_asof,checksum,notes) VALUES "
+                          "('city_taxable_sqft',?,?,?,?,?)", (loc, '2026-09-15', '2026-08-14', _sha256(path),
+                          'City of Berkeley Taxable Square Footage (data.cityofberkeley.info 9a47-nj4i)')).lastrowid
+        for r in rows:
+            try:
+                pid = cur.get(to_canonical_apn(r['apn'], 'Alameda'))
+            except Exception as e:
+                pid = None
+            if pid is None:
+                rej.append(f"{r['apn']}: not a current parcel"); continue
+            n = con.execute("INSERT OR IGNORE INTO parcel_area VALUES (?,?,?,?,?)",
+                            (pid, float(r['bldsqfttaxable']) if r['bldsqfttaxable'] else None,
+                             float(r['lotsqft']) if r['lotsqft'] else None, '2026-08-14', sid)).rowcount
+            if n:
+                out['loaded'] += 1
+            else:
+                rej.append(f"{r['apn']}: duplicate row for the parcel")
+        out['rejected'] = len(rej)
+        con.execute("INSERT INTO ingestion_runs (source_id,started_at,rows_in_source,rows_ingested,rows_rejected,"
+                    "rejected_detail,conserved) VALUES (?,?,?,?,?,?,?)",
+                    (sid, dt.datetime.now(dt.timezone.utc).isoformat(), len(rows), out['loaded'], len(rej),
+                     '; '.join(rej)[:4000] or None, int(len(rows) == out['loaded'] + len(rej))))
+        con.commit()
+    except Exception:
+        con.rollback()
+        raise
+    return out
+
+
 COUNTY_LINEAGE_MANIFEST = os.path.join(ROOT, 'data', 'raw', 'county_parcel_lineage', 'manifest_2026-09-30.csv')
 # The Alameda Assessor's own parent -> child APN lists (23 tables, 2005-2027; scripts/fetch_county_lineage.py). They
 # REPLACE the 2026-09-28 bootstrap candidates (John, 2026-09-30): ADR-003 said lineage is not authoritative until

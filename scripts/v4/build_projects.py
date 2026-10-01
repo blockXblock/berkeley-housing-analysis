@@ -76,6 +76,11 @@ NAMES_EVIDENCE = ROOT / "data/derived/project_names_evidence_2026-09-30.json"
 # State-law pathways (cutover phase 4): read from each project's own Planning text, kept only with a VERBATIM quote
 # (scripts/llm_project_pathways.py). Same stable key as the names.
 PATHWAYS_EVIDENCE = ROOT / "data/derived/project_pathways_evidence_2026-09-30.json"
+# Proposed units of APPLICATION-ONLY projects (phase 6 D4): read from the City's text, verbatim quote containing the number.
+UNITS_EVIDENCE = ROOT / "data/derived/project_units_evidence_2026-09-30.json"
+# Building measures (phase 6; John: square footage and parking KEPT, heights from sources -- D7): gross sq ft, parking,
+# storeys, height in feet, each kept only with a verbatim quote containing the number (scripts/llm_building_measures.py).
+MEASURES_EVIDENCE = ROOT / "data/derived/building_measures_evidence_2026-09-30.json"
 OUT = ROOT / "scratch/2026-09-29_phase3"
 ANCHOR_PRIORITY = ("primary_application", "pre_application", "ministerial_clearance", "companion_review")
 DEAD = ("Withdrawn", "Void")
@@ -461,8 +466,20 @@ def write(con, projects) -> dict:
     out = collections.Counter()
     try:
         con.execute("BEGIN")
-        for t in ("project_parcels", "project_structures", "projects"):
+        # project_records (phase 6 D6, John 2026-09-30): a project's Planning records, indexed -- the Explorer timeline
+        # and every publisher need them, and JSON in notes does not index. Created by the build, like the projection.
+        con.execute("CREATE TABLE IF NOT EXISTS project_records (project_id INTEGER NOT NULL REFERENCES projects(project_id), "
+                    "record_key TEXT NOT NULL, role TEXT NOT NULL, PRIMARY KEY (project_id, record_key))")
+        con.execute("CREATE INDEX IF NOT EXISTS idx_project_records_key ON project_records(record_key)")
+        for t in ("project_records", "project_parcels", "project_structures", "projects"):
             con.execute(f"DELETE FROM {t}")
+        measures = {}
+        if MEASURES_EVIDENCE.exists():
+            measures = {r["project_key"]: {k: v for k, v in r.items() if k != "project_key"}
+                        for r in json.load(open(MEASURES_EVIDENCE))["readings"] if len(r) > 1}
+        proposed = {}
+        if UNITS_EVIDENCE.exists():
+            proposed = {r["project_key"]: r for r in json.load(open(UNITS_EVIDENCE))["readings"] if r.get("units") is not None}
         sp = collections.defaultdict(set)
         for sid, pid in con.execute("SELECT structure_id, parcel_id FROM structure_parcels"):
             sp[sid].add(pid)
@@ -508,6 +525,13 @@ def write(con, projects) -> dict:
                 p["pathway_evidence"] = ev
                 out["with_pathway"] += 1
             p["name_basis"] = "city_stated_name" if names.get(key) else basis
+            if measures.get(key):
+                p["measures"] = measures[key]
+                out["with_measures"] += 1
+            if not p["structures"] and proposed.get(key):          # D4: an application's own stated count
+                p["proposed_units"] = proposed[key]["units"]
+                p["proposed_units_evidence"] = {k: proposed[key][k] for k in ("quote", "source")}
+                out["with_proposed_units"] += 1
             if p.get("external_id"):
                 p["name"], p["address"], p["name_basis"] = p["external_name"], p["external_address"], "external_source"
             out["named_" + str(p["name_basis"])] += 1
@@ -516,12 +540,17 @@ def write(con, projects) -> dict:
                                            "ruling", "project_key", "address", "name_basis", "pathways", "pathway_evidence",
                                            "external_id", "beds", "external_units", "permitting_authority", "status",
                                            "status_date", "source", "verification",
-                                           "affordability", "classifications", "funding")
+                                           "affordability", "classifications", "funding", "proposed_units", "proposed_units_evidence",
+                                           "measures")
                      if p.get(k) not in (None, [], "")}
             notes["units"] = p["units"]
             pid = con.execute("INSERT INTO projects (name, notes) VALUES (?, ?)",
                               (p["name"], json.dumps(notes))).lastrowid
             out["projects"] += 1
+            for rec in (p.get("records") or []):
+                con.execute("INSERT OR IGNORE INTO project_records VALUES (?,?,?)",
+                            (pid, rec, "anchor" if rec == p.get("anchor") else "member"))
+                out["project_records"] += 1
             for sid in p["structures"]:
                 con.execute("INSERT INTO project_structures VALUES (?,?)", (pid, sid))
                 out["project_structures"] += 1

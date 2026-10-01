@@ -48,6 +48,29 @@ CITED = dict(
              hill_capacity=900, flat_capacity=1700, fire_inspections=8600,
              src='KLD Associates, City of Berkeley Evacuation Time Estimate Study, TR-1296, July 1, 2025; City of '
                  'Berkeley Evacuation StoryMaps (text version, July 2025); Community Wildfire Protection Plan (2023)'),
+    # Hazards: every value verified 2026-10-01 in the saved source text (data/raw/hazards/*.txt). LHMP = City of Berkeley
+    # 2024 Local Hazard Mitigation Plan, adopted March 18, 2025 (Council item 09); page labels as printed in the plan.
+    hz=dict(
+        lhmp_actions=33, lhmp_lapse='December 10, 2024',
+        eq_bay_pct=72, eq_hayward_pct=33, eq_window='2014–2043',
+        eq_deaths=100, eq_displaced='3,000 to 12,000', eq_damage='over $2 billion', eq_destroyed=620, eq_damaged=21000,
+        eq_no_power=29000, ebmud_breaks=1800, ebmud_leaks=3900, eq_water_out='6 weeks, some as long as 6 months',
+        sewer_liq_mi=101, sewer_liq_pct=39, sewer_slide_mi=50, storm_slide_mi=13,
+        softstory=dict(asof='July 23, 2026', retrofitted=293, removed=63, permitting=6, out_of_compliance=7),
+        urm='over 99% of about 700 unreinforced masonry buildings retrofitted or demolished since 1991 (2019 plan)',
+        vulnerable=1047, transfer_rebate='up to one-third of the 1.5% transfer tax; over $12 million paid since 2002 (2019 plan)',
+        fire_parcels=8603, fire_residents=32109, fire1923_structures=584, fire1923_homeless=4000, fire1923_footprint=1858,
+        tunnel_deaths=25, ff_vote=74.2, ff_fy22=12.7, ff_fy23=9.3, ff_fy26=10969060, ff_inspections=8600,
+        calfire_grant=2.8,
+        tsu_people=1416, tsu_households=502, tsu_daytime=6840, tsu_businesses=448, tsu_employees=4821, marina_households=113,
+        bay_rise_since1900='about eight inches', slr_i80='5.5 feet of rise with a 25-year storm could flood Interstate 80 and as far east as Fifth Street',
+        gw='at 48 inches of rise, groundwater surfaces in West Berkeley north of University Avenue',
+        storm_design='a 10-year storm; many parts over 90 years old', storms_2223='more than 15 inches of rain in 20 days',
+        src=['City of Berkeley 2024 Local Hazard Mitigation Plan, adopted March 18, 2025 (Council item 09) and the 2019 plan',
+             'USGS Fact Sheet 2016-3020 (Bay Area earthquake probabilities, 2014–2043)',
+             'City of Berkeley soft-story inventory, status as of July 23, 2026',
+             'Measure FF reports to Council, December 3, 2024 and June 24, 2025; Fire Department wildfire memo, August 25, 2023',
+             'City Evacuation StoryMaps (July 2025) and the KLD Evacuation Time Estimate Study (2025)']),
     # UC Berkeley and Berkeley Lab run their own utilities and are excluded from City figures. Each value: (number, year).
     campus=dict(
         ucb=dict(acres=(1095, '2021'), gsf=(13858460, '2018-19'), buildings_core=(100, '2024'), beds=(11621, '2024-25'),
@@ -142,7 +165,7 @@ LEDE = {
     'networks': 'The streets, water mains, sewers, storm drains, gas lines and poles under and over the city, how old they are, and what is not public.',
     'undergrounding': 'How much of Berkeley still has overhead wires, and what the City\'s own studies say it costs to bury them.',
     'water-energy': 'How much water and power Berkeley uses, and what can be known about use by building, block or neighborhood.',
-    'fire': 'How long it takes to leave the hills in a wildfire, and where the roads jam.',
+    'fire': 'The three disasters Berkeley plans for: how likely each is, who and what is exposed, and the steps taken so far.',
     'campus': 'What the campus and the Lab use and emit, what they report about it, and the plan to retire the campus\'s gas plant.',
     'data': 'Every data file behind this report, what each holds, and where each source came from.',
 }
@@ -246,6 +269,15 @@ def s_findings():
              f"appears to leave out the power plant's gas.",
              f"{a('#campus', 'The University and the Lab')} · data: {dl('stars_2025_ucb_operations.csv')}, "
              f"{dl('campus_lab_emissions_energy_2009_2024.csv')}"),
+        item('The next large earthquake is the biggest single danger',
+             f"The U.S. Geological Survey gives a {CITED['hz']['eq_hayward_pct']}% chance of a magnitude 6.7 or larger earthquake on "
+             f"the Hayward or Rodgers Creek faults between 2014 and 2043. The City's hazard plan estimates that a large Hayward "
+             f"earthquake would kill about {CITED['hz']['eq_deaths']} people in Berkeley, displace {CITED['hz']['eq_displaced']} "
+             f"households and cut water to some homes for as long as six months. {CITED['hz']['softstory']['retrofitted']} soft-story "
+             f"apartment buildings have been retrofitted under the City's mandate; {n(CITED['hz']['vulnerable'])} other potentially "
+             f"vulnerable buildings face no requirement. On the shoreline, {n(CITED['hz']['tsu_people'])} residents live in the "
+             f"tsunami zone, and the Bay has risen {CITED['hz']['bay_rise_since1900']} since 1900.",
+             f"{a('#fire', 'Fire, flood and earthquake')} · sources: the City's 2024 Local Hazard Mitigation Plan; USGS"),
         item('A $30 billion tax base, with the University outside it',
              f"Berkeley's {n(A['parcels'])} parcels carry {big(A['net'])} of net taxable value, about "
              f"${round(A['net'] * 0.012323 / 1e6):,.0f} million a year in base property tax for all agencies. {n(A['exempt'])} parcels pay none: the "
@@ -261,7 +293,7 @@ def s_findings():
         ['Fall 2026 student enrollment', 'UC Berkeley Office of Planning &amp; Analysis (due later this fall)'],
     ])
     body = f'''
-    <p class="lede">Nine findings from the data in this report. Each sentence can be checked against the section and the data
+    <p class="lede">Ten findings from the data in this report. Each sentence can be checked against the section and the data
     file linked beneath it. The City's Vision 2050 work, which looks ahead to the same streets, pipes and energy systems,
     is cited where it addressed the same question.</p>
     {''.join(F_)}
@@ -270,7 +302,7 @@ def s_findings():
     <p class="note">Two findings note discrepancies we found in institutions' own documents: the City's 2016 undergrounding
     cost table and UC Berkeley's 2025 STARS energy entry. Each finding links to the document and to our arithmetic, so anyone
     can check it.</p>'''
-    return section('findings', 'What the numbers say', 'Nine findings', body)
+    return section('findings', 'What the numbers say', 'Ten findings', body)
 
 
 def s_people():
@@ -609,7 +641,7 @@ def s_fire():
     rows = [[f"{r['region']} {esc(r['name'])}"] + [r[s] + ('*' if r[s + '_is_100th_pct'] in (True, 'True') else '') for s in sc] for r in E['clear']]
     body = f'''
     <div class="grid">
-      {card(n(fz[2]['parcels'] + fz[3]['parcels']), 'parcels in hill Fire Zones 2 and 3', f"{pct(fz[2]['parcels'] + fz[3]['parcels'], F['assessor']['located'])} of the city's parcels; {big(fz[2]['net_taxable_value'] + fz[3]['net_taxable_value'])} taxable value.")}
+      {card(n(fz[2]['parcels'] + fz[3]['parcels']), 'parcels in hill Fire Zones 2 and 3', f"Our count from the City's zone map and County parcels ({pct(fz[2]['parcels'] + fz[3]['parcels'], F['assessor']['located'])} of all parcels; {big(fz[2]['net_taxable_value'] + fz[3]['net_taxable_value'])} taxable value). The City's plan counts 8,603.")}
       {card('1:45–2:20', 'to clear 90% of Fire Zones 2 and 3', 'Hours:minutes; the last vehicles take 3:25–3:40.')}
       {card(f"~{n(K['vehicles'])}", 'vehicles that may need to leave the city', f"Plus {n(K['through'])} passing through. {K['zones']} evacuation zones.")}
       {card(n(K['primary_ai'][1]), 'residential parcels with a single way out', f"{K['primary_ai'][0]} neighborhoods; {K['secondary_ai'][0]} more ({n(K['secondary_ai'][1])} parcels) have impaired secondary access.")}
@@ -630,8 +662,51 @@ def s_fire():
       and "severe congestion is expected to occur in all evacuation cases studied." The choke points are intersections,
       the Marin Avenue five-way roundabout among them, so red-curbing hill streets is "unlikely to substantially improve
       evacuation flow." Hills residents leaving early, combined with a faster departure, cut the time to clear 90% of
-      vehicles by up to 68% (the last vehicles, by up to 14%). The Fire Department inspects about {n(K['fire_inspections'])} hill parcels a year.</p></div></div>'''
-    return section('fire', '11 · Fire evacuation', 'Leaving the hills', body)
+      vehicles by up to 68% (the last vehicles, by up to 14%).</p></div></div>'''
+    H = CITED['hz']
+    ss = H['softstory']
+    quake = f'''
+    <h3>Earthquake</h3>
+    <p class="note" style="font-size:.95rem">The Hayward Fault runs along the foot of the hills. The U.S. Geological Survey puts
+    the chance of a magnitude 6.7 or larger earthquake on the Hayward or Rodgers Creek faults at {H['eq_hayward_pct']}% for
+    {H['eq_window']}, and anywhere in the Bay Area at {H['eq_bay_pct']}%. For a large Hayward Fault earthquake (scenarios of
+    magnitude 6.9 to 7.0), the City's hazard plan estimates about {H['eq_deaths']} deaths in Berkeley, {H['eq_displaced']} households displaced, {H['eq_damage']} in
+    building damage, {n(H['eq_destroyed'])} buildings destroyed, {n(H['eq_no_power'])} homes without power, and
+    {n(H['ebmud_breaks'])} breaks and {n(H['ebmud_leaks'])} leaks in EBMUD's pipes, with water out for {H['eq_water_out']}.
+    The land west of San Pablo Avenue is in the liquefaction zone, along with {H['sewer_liq_mi']} miles ({H['sewer_liq_pct']}%) of
+    the City's sewers; {H['sewer_slide_mi']} miles of sewer lie in the hills' earthquake-landslide zone.</p>
+    {table(['Step taken', 'Status'], [
+        ['Mandatory soft-story retrofit (apartment buildings over open ground floors)', f"{ss['retrofitted']} retrofitted, {ss['permitting']} in permitting, {ss['out_of_compliance']} out of compliance, {ss['removed']} removed from the list (as of {ss['asof']})"],
+        ['Unreinforced masonry program (since 1991)', H['urm']],
+        ['Transfer-tax rebate for seismic work', H['transfer_rebate']],
+        ['Other potentially vulnerable buildings (not mandated)', f"{n(H['vulnerable'])} identified in a 2018 inventory, including non-ductile concrete; no retrofit requirement"],
+    ])}'''
+    flood = f'''
+    <h3>Flood, tsunami and the rising Bay</h3>
+    <p class="note" style="font-size:.95rem">The Bay has risen {H['bay_rise_since1900']} since 1900. The City's plan finds that
+    {H['slr_i80']}, and that {H['gw']}. Vision 2050 cited the State's range of 1.1 to 2.7 feet of rise by 2050. A tsunami would
+    reach the shoreline first: {n(H['tsu_people'])} residents in {H['tsu_households']} households live in the inundation zone,
+    {n(H['tsu_daytime'])} people are there by day, and {H['tsu_businesses']} businesses employ {n(H['tsu_employees'])}; the
+    Marina has {H['marina_households']} households living aboard. Inland, the storm drains were built for {H['storm_design']};
+    the 2022–23 storms brought {H['storms_2223']}. The 100-year floodplain follows the shoreline, Aquatic Park, and Codornices
+    and Strawberry creeks. The City's Stormwater Master Plan, due at the end of 2025, is still being prepared; no cost figure
+    has been published.</p>'''
+    fire_intro = f'''
+    <h3>Fire</h3>
+    <p class="note" style="font-size:.95rem">Hill Fire Zones 2 and 3 hold {n(H['fire_parcels'])} parcels and {n(H['fire_residents'])}
+    residents. The 1923 fire destroyed {H['fire1923_structures']} structures and left about {n(H['fire1923_homeless'])} people
+    homeless; {n(H['fire1923_footprint'])} buildings stand in its footprint today. The 1991 Tunnel Fire in the Oakland hills killed
+    {H['tunnel_deaths']}. Measure FF (2020, {H['ff_vote']}% of the vote) funds fire prevention: ${H['ff_fy22']} million collected in
+    FY2022, ${H['ff_fy23']} million in FY2023, about ${H['ff_fy26'] / 1e6:.1f} million expected in FY2026. The Fire Department
+    inspects about {n(H['ff_inspections'])} hill parcels a year; a ${H['calfire_grant']} million state grant (2024–2026) funds work
+    on Grizzly Peak and evacuation routes; a 2025 ordinance sets ember-resistant zones next to homes; and in January 2024 the
+    Council asked PG&amp;E to underground its lines in the highest-risk zone.</p>'''
+    plan = f'''
+    <p class="note">The City's 2024 Local Hazard Mitigation Plan lists {H['lhmp_actions']} mitigation actions. The 2019 plan
+    lapsed on {H['lhmp_lapse']}, leaving Berkeley ineligible for some federal mitigation grants until the Council adopted the new
+    plan on March 18, 2025. Sources: {esc('; '.join(H['src']))}.</p>'''
+    body = quake + fire_intro + body + flood + plan
+    return section('fire', '11 · Fire, flood and earthquake', 'The dangers, and what is being done', body)
 
 
 def s_campus():
@@ -836,7 +911,7 @@ def main():
                 s_water_energy(), s_fire(), s_campus(), s_catalog()]
     toc = [('findings', 'Findings'), ('people', 'People'), ('tenure', 'Renters and owners'), ('income', 'Income'), ('age', 'Ages'),
            ('tide', 'Daily tide'), ('cars', 'Cars'), ('land', 'Land and money'), ('networks', 'Under the streets'),
-           ('undergrounding', 'Undergrounding'), ('water-energy', 'Water and power'), ('fire', 'Fire evacuation'),
+           ('undergrounding', 'Undergrounding'), ('water-energy', 'Water and power'), ('fire', 'Fire, flood, earthquake'),
            ('campus', 'University and Lab'), ('data', 'The data')]
     old = open(PAGE).read() if os.path.exists(PAGE) else ''
     meta = ''

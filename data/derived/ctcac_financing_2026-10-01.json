@@ -1,0 +1,479 @@
+{
+ "read_at": "2026-10-01T12:38:58",
+ "method": "page layout: table rows by word coordinates; labelled fields by their own labels; nothing classified",
+ "reports": [
+  {
+   "application": "CA-2020-416",
+   "url": "https://www.treasurer.ca.gov/sites/default/files/ctcac/CA-20-416.pdf",
+   "sha256": "c5fdd5407e555092ed67840ad55fa903cb36fd0d276ad03845b21c0ab80241de",
+   "financing": {
+    "construction": [
+     {
+      "source": "Wells Fargo",
+      "amount": "$14,132,500"
+     },
+     {
+      "source": "Alameda County - A1 Bonds",
+      "amount": "$1,700,000"
+     },
+     {
+      "source": "City of Berkeley",
+      "amount": "$6,025,000"
+     },
+     {
+      "source": "AHP",
+      "amount": "$340,000"
+     },
+     {
+      "source": "Accrued Interest",
+      "amount": "$240,313"
+     },
+     {
+      "source": "Deferred Cost",
+      "amount": "$1,598,953"
+     },
+     {
+      "source": "Land Contribution",
+      "amount": "$1"
+     },
+     {
+      "source": "Deferred Developer Fee",
+      "amount": "$374,403"
+     },
+     {
+      "source": "Tax Credit Equity",
+      "amount": "$1,330,432"
+     }
+    ],
+    "permanent": [
+     {
+      "source": "CCRC",
+      "amount": "$1,042,000"
+     },
+     {
+      "source": "HCD - No Place Like Home",
+      "amount": "$2,370,595"
+     },
+     {
+      "source": "Alameda County - A1 Bonds",
+      "amount": "$5,834,096"
+     },
+     {
+      "source": "City of Berkeley",
+      "amount": "$6,025,000"
+     },
+     {
+      "source": "AHP",
+      "amount": "$340,000"
+     },
+     {
+      "source": "Accrued Interest",
+      "amount": "$240,313"
+     },
+     {
+      "source": "Land Contribution",
+      "amount": "$1"
+     },
+     {
+      "source": "General Partner Contribution",
+      "amount": "$485,200"
+     },
+     {
+      "source": "Deferred Developer Fee",
+      "amount": "$374,403"
+     },
+     {
+      "source": "Tax Credit Equity",
+      "amount": "$9,029,994"
+     },
+     {
+      "source": "TOTAL",
+      "amount": "$25,741,602"
+     }
+    ]
+   },
+   "labelled": {
+    "Developer": "Satellite Affordable Housing Associates",
+    "Investor/Consultant": "California Housing Partnership Corporation",
+    "Management Agent": "Satellite Affordable Housing Associates PM"
+   }
+  },
+  {
+   "application": "CA-2021-613",
+   "url": "https://www.treasurer.ca.gov/sites/default/files/ctcac/21-613.pdf",
+   "sha256": "4128e8b713739a49af95604d995eab95351dc7f0349df916589013dbe9e36968",
+   "financing": {
+    "construction": [
+     {
+      "source": "Tax Exempt Bond- Chase Bank",
+      "amount": "$42,607,471"
+     },
+     {
+      "source": "Construction Loan- Chase Bank",
+      "amount": "$25,834,984"
+     },
+     {
+      "source": "City of Berkeley",
+      "amount": "$3,068,000"
+     },
+     {
+      "source": "HCD IIG",
+      "amount": "$4,000,000"
+     },
+     {
+      "source": "GP Equity",
+      "amount": "$126,840"
+     },
+     {
+      "source": "Tax Credit Equity",
+      "amount": "$3,573,371"
+     }
+    ],
+    "permanent": [
+     {
+      "source": "Permanent Bond- Chase Bank",
+      "amount": "$6,157,000"
+     },
+     {
+      "source": "HCD AHSC",
+      "amount": "$15,797,796"
+     },
+     {
+      "source": "HCD NPLH",
+      "amount": "$3,462,255"
+     },
+     {
+      "source": "HCD IIG",
+      "amount": "$4,000,000"
+     },
+     {
+      "source": "City of Berkeley",
+      "amount": "$17,000,000"
+     },
+     {
+      "source": "Deferred Developer Fee",
+      "amount": "$1,476,401"
+     },
+     {
+      "source": "GP Equity",
+      "amount": "$625,840"
+     },
+     {
+      "source": "Tax Credit Equity",
+      "amount": "$35,532,207"
+     },
+     {
+      "source": "TOTAL",
+      "amount": "$84,051,499"
+     }
+    ]
+   },
+   "labelled": {
+    "Developer": "Resources for Community Development",
+    "Bond Issuer": "California Municipal Finance Authority",
+    "Investor/Consultant": "Community Economics",
+    "Management Agent": "The John Stewart Company"
+   }
+  },
+  {
+   "application": "CA-2023-658",
+   "url": "https://www.treasurer.ca.gov/sites/default/files/ctcac/23-658.pdf",
+   "sha256": "88bcfa163de965df784826267a85713c9d050378d72603ecda756b568647ced4",
+   "financing": {
+    "construction": [
+     {
+      "source": "Berkadia: Tax-Exempt",
+      "amount": "$24,000,000"
+     },
+     {
+      "source": "Berkadia: Taxable",
+      "amount": "$5,400,000"
+     },
+     {
+      "source": "Berkadia: Bridge",
+      "amount": "$10,000,000"
+     },
+     {
+      "source": "Net Operating Income",
+      "amount": "$557,384"
+     },
+     {
+      "source": "Developer Fee Contribution",
+      "amount": "$329,438"
+     },
+     {
+      "source": "Deferred Developer Fee",
+      "amount": "$693,127"
+     },
+     {
+      "source": "Tax Credit Equity",
+      "amount": "$6,243,832"
+     }
+    ],
+    "permanent": [
+     {
+      "source": "Berkadia: Tax-Exempt",
+      "amount": "$24,000,000"
+     },
+     {
+      "source": "Berkadia: Taxable",
+      "amount": "$5,400,000"
+     },
+     {
+      "source": "Net Operating Income",
+      "amount": "$557,384"
+     },
+     {
+      "source": "Developer Fee Contribution",
+      "amount": "$329,438"
+     },
+     {
+      "source": "Deferred Developer Fee",
+      "amount": "$677,127"
+     },
+     {
+      "source": "Tax Credit Equity",
+      "amount": "$16,243,832"
+     },
+     {
+      "source": "TOTAL",
+      "amount": "$47,207,781"
+     }
+    ]
+   },
+   "labelled": {
+    "Developer": "Orbach Affordable Housing Solutions",
+    "Bond Issuer": "CalHFA",
+    "Investor/Consultant": "Berkadia",
+    "Management Agent": "Orbach Affordable Management"
+   }
+  },
+  {
+   "application": "CA-2024-489",
+   "url": "https://www.treasurer.ca.gov/sites/default/files/ctcac/CA-24-489.pdf",
+   "sha256": "9f382e197e748b1d8c7519a0f518da7b29cd698b9a46d2e4290fd5323bd2871a",
+   "financing": {
+    "construction": [
+     {
+      "source": "Silicon Valley Bank: Tax-Exempt",
+      "amount": "$39,443,118"
+     },
+     {
+      "source": "Silicon Valley Bank: Taxable",
+      "amount": "$3,940,402"
+     },
+     {
+      "source": "City of Berkeley",
+      "amount": "$22,050,000"
+     },
+     {
+      "source": "Accrued Interest",
+      "amount": "$870,178"
+     },
+     {
+      "source": "Deferred Costs",
+      "amount": "$1,653,031"
+     },
+     {
+      "source": "General Partner Equity",
+      "amount": "$100"
+     },
+     {
+      "source": "Deferred Developer Fee",
+      "amount": "$2,664,882"
+     },
+     {
+      "source": "Tax Credit Equity",
+      "amount": "$4,891,764"
+     }
+    ],
+    "permanent": [
+     {
+      "source": "CalHFA: Tax-Exempt",
+      "amount": "$10,196,000"
+     },
+     {
+      "source": "CalHFA: MIP",
+      "amount": "$4,000,000"
+     },
+     {
+      "source": "City of Berkeley",
+      "amount": "$24,500,000"
+     },
+     {
+      "source": "Accrued Interest",
+      "amount": "$870,178"
+     },
+     {
+      "source": "General Partner Equity",
+      "amount": "$100"
+     },
+     {
+      "source": "Deferred Developer Fee",
+      "amount": "$2,664,882"
+     },
+     {
+      "source": "Tax Credit Equity",
+      "amount": "$33,282,315"
+     },
+     {
+      "source": "TOTAL",
+      "amount": "$75,513,475"
+     }
+    ]
+   },
+   "labelled": {
+    "CDLAC Applicant/Bond Issuer": "California Housing Finance Agency",
+    "Bond Counsel": "Orrick, Herrington & Sutcliffe LLP",
+    "Private Placement Purchaser": "Silicon Valley Bank",
+    "Developer": "Satellite Affordable Housing Associates",
+    "Investor/Consultant": "California Housing Partnership",
+    "Management Agent": "Satellite Affordable Housing Associates"
+   }
+  },
+  {
+   "application": "CA-2025-007",
+   "url": "https://www.treasurer.ca.gov/sites/default/files/ctcac/CA-25-007.pdf",
+   "sha256": "a6b2370e166b8d225ab2d5b54621aeab610f13cfb02e977755dffa0d6487acdd",
+   "financing": {
+    "construction": [
+     {
+      "source": "Citi Community Capital",
+      "amount": "$42,075,571"
+     },
+     {
+      "source": "HCD: IIG",
+      "amount": "$4,185,472"
+     },
+     {
+      "source": "City of Berkeley",
+      "amount": "$15,754,319"
+     },
+     {
+      "source": "General Partner Equity",
+      "amount": "$3,080,100"
+     },
+     {
+      "source": "Tax Credit Equity",
+      "amount": "$2,200,000"
+     }
+    ],
+    "permanent": [
+     {
+      "source": "Citi Community Capital",
+      "amount": "$6,515,000"
+     },
+     {
+      "source": "HCD: MHP",
+      "amount": "$16,663,370"
+     },
+     {
+      "source": "HCD: IIG",
+      "amount": "$4,185,472"
+     },
+     {
+      "source": "City of Berkeley",
+      "amount": "$15,754,319"
+     },
+     {
+      "source": "General Partner Equity",
+      "amount": "$3,080,100"
+     },
+     {
+      "source": "Tax Credit Equity",
+      "amount": "$22,956,200"
+     },
+     {
+      "source": "TOTAL",
+      "amount": "$69,154,461"
+     }
+    ]
+   },
+   "labelled": {
+    "Developer": "St. Paul Terrace, LP",
+    "Investor/Consultant": "Citi Bank",
+    "Management Agent": "The John Stewart Company"
+   }
+  },
+  {
+   "application": "CA-2025-718",
+   "url": "https://www.treasurer.ca.gov/sites/default/files/ctcac/CA-25-718.pdf",
+   "sha256": "106f5dbad0ccf38f1a3ba94fb7407e1a0b622c2a8085295986b1cbc2670d264b",
+   "financing": {
+    "construction": [
+     {
+      "source": "Citibank: Tax-Exempt",
+      "amount": "$20,436,012"
+     },
+     {
+      "source": "Citibank: Taxable",
+      "amount": "$26,145,474"
+     },
+     {
+      "source": "City of Berkeley: Measure O",
+      "amount": "$14,531,301"
+     },
+     {
+      "source": "City of Berkeley: HTF",
+      "amount": "$3,556,400"
+     },
+     {
+      "source": "Deferred Costs",
+      "amount": "$5,578,459"
+     },
+     {
+      "source": "General Partner Equity",
+      "amount": "$100"
+     },
+     {
+      "source": "Tax Credit Equity",
+      "amount": "$2,028,187"
+     }
+    ],
+    "permanent": [
+     {
+      "source": "Citibank: Tax-Exempt",
+      "amount": "$6,613,000"
+     },
+     {
+      "source": "HCD: MHP",
+      "amount": "$18,718,944"
+     },
+     {
+      "source": "City of Berkeley: Measure O",
+      "amount": "$14,531,301"
+     },
+     {
+      "source": "City of Berkeley: HTF",
+      "amount": "$3,556,400"
+     },
+     {
+      "source": "Deferred Developer Fee",
+      "amount": "$1,700,000"
+     },
+     {
+      "source": "General Partner Equity",
+      "amount": "$2,685,987"
+     },
+     {
+      "source": "Tax Credit Equity",
+      "amount": "$24,470,300"
+     },
+     {
+      "source": "TOTAL",
+      "amount": "$72,275,932"
+     }
+    ]
+   },
+   "labelled": {
+    "CDLAC Applicant/Bond Issuer": "California Municipal Finance Authority",
+    "Bond Counsel": "Jones Hall, A Professional Law Corporation",
+    "Private Placement Purchaser": "Citibank, N.A.",
+    "Developer": "Community Housing Development Corporation",
+    "Investor/Consultant": "CitiBank",
+    "Management Agent": "John Stewart Company"
+   }
+  }
+ ],
+ "no_table_found": []
+}

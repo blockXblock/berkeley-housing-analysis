@@ -251,6 +251,8 @@ FROM one JOIN projects p USING(project_id) JOIN events e USING(event_id)
 #                                      Property' licence is the rental operator; any other is a business there
 #   property_manager / rental_owner / rental_owner_business   the Rent Board registry (its Manager / Owner fields)
 #   funder                             the funding ledger (public money), with program, instrument and amount
+#   developer / tax_credit_owner / general_partner / property_manager   CTCAC's List of Projects, by the project's
+#                                      building addresses or current parcels (a UNION: a row reached both ways is one)
 # John 2026-10-01: "add any other roles we didn't, such as rental operator or manager". Developer and architect come
 # from the documents' title blocks (document_roles evidence) once loaded.
 V_PROJECT_PEOPLE = r"""
@@ -301,6 +303,21 @@ FROM pk JOIN project_structures ps USING(project_id) JOIN structure_events se US
 JOIN events e ON e.event_id = se.event_id AND e.event_type_code = 'inspection'
 LEFT JOIN sources s ON s.source_id = e.source_id
 WHERE COALESCE(trim(json_extract(e.raw_payload, '$.inspector')), '') != ''
+UNION ALL
+SELECT DISTINCT pk.project_key, aa.role, a.display_name, a.actor_id, s.source_kind, e.source_record_key, aa.coverage_note
+FROM pk JOIN (SELECT DISTINCT ps.project_id, sa.address_id FROM project_structures ps JOIN structure_addresses sa USING(structure_id)) pa
+     USING(project_id)
+JOIN event_addresses ea ON ea.address_id = pa.address_id
+JOIN events e ON e.event_id = ea.event_id AND e.event_type_code = 'ctcac_project'
+JOIN actor_actions aa ON aa.event_id = e.event_id
+JOIN actors a USING(actor_id) LEFT JOIN sources s ON s.source_id = aa.source_id
+UNION ALL
+SELECT DISTINCT pk.project_key, aa.role, a.display_name, a.actor_id, s.source_kind, e.source_record_key, aa.coverage_note
+FROM pk JOIN project_parcels pp USING(project_id)
+JOIN events e ON e.event_type_code = 'ctcac_project'
+JOIN json_each(json_extract(e.raw_payload, '$._current_parcel_ids')) cp ON cp.value = pp.parcel_id
+JOIN actor_actions aa ON aa.event_id = e.event_id
+JOIN actors a USING(actor_id) LEFT JOIN sources s ON s.source_id = aa.source_id
 UNION ALL
 SELECT pk.project_key, 'funder', json_extract(f.value, '$.funder'), NULL, 'funding_ledger', json_extract(f.value, '$.funding_id'),
        json_extract(f.value, '$.program') || ' -- ' || COALESCE(json_extract(f.value, '$.instrument'), '') || ' -- $' ||

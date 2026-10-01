@@ -194,7 +194,7 @@ def classify_all(con):
     for ev_id, permit in con.execute("SELECT event_id, source_record_key FROM events "
                                      "WHERE event_type_code NOT LIKE 'planning_%' "      # a Planning record is not a building permit
                                      "AND event_type_code NOT LIKE 'registry_%' "      # nor a Rent Board registration (2026-10-01)
-                                     "AND event_type_code NOT IN ('accela_listed', 'business_license')"):  # nor a listing or licence
+                                     "AND event_type_code NOT IN ('accela_listed', 'business_license', 'ctcac_project')"):  # nor a listing, licence, CTCAC row
         got = permit_effect(permit)
         if got is None:
             unread += 1
@@ -988,6 +988,108 @@ def load_accela_list(con, manifest=ACCELA_LIST_MANIFEST):
     return dict(files=len(m['files']), rows=rows_in, events=ok, duplicate_listings=dup, pager_rows=pager,
                 rejected_other=len(bad),
                 with_address=n_addr)
+
+
+CTCAC_LIST = os.path.join(ROOT, 'data', 'raw', 'funding', 'ctcac_List_of_Projects_2026-06.xlsx')
+
+
+def load_ctcac_projects(con, path=CTCAC_LIST, city='BERKELEY'):
+    """CTCAC's statewide List of Projects (tax-credit projects through June 2026; the file the funding ledger cites),
+    the rows in one CITY (John, 2026-10-01: trace who builds, owns, runs and pays for each project). Each application
+    -> one 'ctcac_project' event (dated at its placed-in-service date, else undated), the whole row in raw_payload
+    (units by AMI level and by bedroom count, award amounts, stage). Its parties become actors in their OWN roles, as
+    CTCAC lists them: developer, tax_credit_owner (the owner partnership), general_partner (1..5), property_manager
+    (the management company). The award amounts stay in the funding ledger; this load is the parties and the unit
+    mix. APN through the canon (CTCAC's own, which can be stale -- rule 4: never re-pointed here); address -> event_addresses.
+    CTCAC's APN is often RETIRED (a split or re-plat since the award), so the County lineage resolves it to CURRENT parcel
+    ids at load (housing_rules.parcel_lineage.Resolver, the buildings' rule), kept as _current_parcel_ids with its
+    basis -- the stated APN itself stays in raw_apn untouched. Run after load_county_lineage."""
+    import datetime as dt
+    import pandas as _pd
+    from scripts.housing_rules.apn import to_canonical_apn
+    from scripts.housing_rules.address import normalize_address
+    from scripts.housing_rules.owner_name import is_organisation
+    now = dt.datetime.now(dt.timezone.utc).isoformat()
+    if not con.execute("SELECT 1 FROM lifecycle_phases WHERE phase_code='CITY_RECORD'").fetchone():
+        con.execute("INSERT INTO lifecycle_phases VALUES ('CITY_RECORD', 90, 'existing', "
+                    "'a City record whose stage meaning is read later (a listing, a business or use certificate)')")
+    con.execute("INSERT OR IGNORE INTO event_types VALUES ('ctcac_project','CITY_RECORD',0,"
+                "'a CTCAC tax-credit application in the List of Projects, dated at placed-in-service; the row in raw_payload')")
+    con.execute("CREATE TABLE IF NOT EXISTS event_addresses (event_id INTEGER NOT NULL REFERENCES events(event_id), "
+                "address_id INTEGER NOT NULL REFERENCES addresses(address_id), unit TEXT, PRIMARY KEY (event_id, address_id))")
+    addr_id = dict((n, a) for a, n in con.execute("SELECT address_id, normalized FROM addresses"))
+    loc = os.path.relpath(path, ROOT)
+    assert not con.execute("SELECT 1 FROM sources WHERE locator=?", (loc,)).fetchone(), f'already loaded: {loc}'
+    raw = _pd.read_excel(path, sheet_name='Alameda', header=None, dtype=str)
+    h = next(i for i in range(15) if raw.iloc[i].astype(str).str.contains('Project City', case=False).any())
+    raw.columns = [str(c).strip() for c in raw.iloc[h]]
+    d = raw.iloc[h + 1:]
+    rows = d[d['Project City'].astype(str).str.upper().str.strip() == city]
+    from housing_rules.parcel_lineage import Resolver
+    resolver = Resolver(con)
+    actors = {}
+
+    def actor(name, rc):
+        name = (name or '').strip()
+        if not name or name.lower() == 'nan':
+            return None
+        if (name, rc) not in actors:
+            got = con.execute("SELECT actor_id FROM actors WHERE display_name=? AND role_class=?", (name, rc)).fetchone()
+            actors[(name, rc)] = got[0] if got else con.execute(
+                "INSERT INTO actors (actor_kind,display_name,role_class) VALUES (?,?,?)",
+                ('organization' if is_organisation(name) else 'person', name, rc)).lastrowid
+        return actors[(name, rc)]
+
+    try:
+        sid = con.execute("INSERT INTO sources (source_kind,locator,retrieved_at,source_asof,checksum,notes) VALUES "
+                          "('ctcac_list_of_projects',?,?,?,?,?)", (loc, '2026-09-30', '2026-06-30', _sha256(path),
+                          f'CTCAC List of Projects, Alameda sheet, Project City = {city}')).lastrowid
+        rid = con.execute("INSERT INTO ingestion_runs (source_id,started_at,rows_in_source,rows_ingested,rows_rejected,"
+                          "conserved) VALUES (?,?,?,0,0,1)", (sid, now, len(rows))).lastrowid
+        ok, acts = 0, 0
+        for _, r in rows.iterrows():
+            row = {k: v for k, v in r.to_dict().items() if isinstance(v, str) and v.strip() and v != 'nan'}
+            try:
+                apn = to_canonical_apn(row.get("Assessor's Parcel Number (APN)") or '', 'Alameda')
+            except Exception:
+                apn = None
+            pis = (row.get('Placed in Service (PIS) Date') or '')[:10] or None
+            addr = row.get('Project Address')
+            pids, basis = resolver.resolve(row.get("Assessor's Parcel Number (APN)"), addr)
+            row['_current_parcel_ids'], row['_parcel_basis'] = list(pids), basis
+            ev = con.execute("INSERT INTO events (event_type_code,event_date,event_date_precision,source_record_key,"
+                             "source_id,ingestion_run_id,raw_payload,raw_address,raw_apn,raw_description,created_at) "
+                             "VALUES ('ctcac_project',?,?,?,?,?,?,?,?,?,?)",
+                             (pis, 'day' if pis else 'unknown', row['Application Number'], sid, rid, json.dumps(row), addr,
+                              apn, f"{row.get('Project Name', '')} -- {row.get('Housing Type', '')}"[:300], now)).lastrowid
+            ok += 1
+            try:
+                num, street = normalize_address(addr.split(',')[0]) if addr else (None, None)
+            except Exception:
+                num = street = None
+            if num and street and num != '0':
+                key = f"{num}|{street}"
+                if key not in addr_id:
+                    addr_id[key] = con.execute("INSERT INTO addresses (number, street, normalized) VALUES (?,?,?)",
+                                               (num, street, key)).lastrowid
+                con.execute("INSERT OR IGNORE INTO event_addresses VALUES (?,?,NULL)", (ev, addr_id[key]))
+            parties = [(row.get('Developer'), 'developer', 'developer'),
+                       (row.get('Owner or Applicant Name'), 'owner', 'tax_credit_owner'),
+                       (row.get('Management Company'), 'manager', 'property_manager')] + \
+                      [(row.get(f'General Partner ({i})'), 'owner', 'general_partner') for i in range(1, 6)]
+            for name, rc, role in parties:
+                a = actor(name, rc)
+                if a:
+                    con.execute("INSERT INTO actor_actions (actor_id,event_id,entity_type,entity_id,role,source_id,"
+                                "coverage_note) VALUES (?,?,'permit_event',?,?,?,?)",
+                                (a, ev, ev, role, sid, f"as CTCAC lists it for {row['Application Number']}"))
+                    acts += 1
+        con.execute("UPDATE ingestion_runs SET rows_ingested=?, conserved=? WHERE run_id=?", (ok, int(ok == len(rows)), rid))
+        con.commit()
+    except Exception:
+        con.rollback()
+        raise
+    return dict(rows=len(rows), events=ok, actor_actions=acts, actors=len(actors))
 
 
 BUSINESS_LICENSES = os.path.join(ROOT, 'data', 'raw', 'business_licenses_20251115.json')

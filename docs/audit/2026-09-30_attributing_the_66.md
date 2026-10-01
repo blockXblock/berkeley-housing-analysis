@@ -42,3 +42,17 @@ not new units. Accela check of B2014-04083 needed.
 cases against the City's CY2026 report when published; review the 8 City-only rows against our readings
 (e.g. `B2018-03595`, which our model reads as a sub-permit of the ADU under `B2018-03594`). Each verified case
 becomes a row in `corrections/v4/audit_findings.csv`, and the page's "not yet attributed" shrinks.
+
+## 2026-09-30, later: the 27 "no City row" buildings (+44), first read
+
+Read from each permit's own description (and, where needed, the Accela sweep, the assessor and a CapDetail fetch):
+- **Our errors, rulings proposed (+6):** 2501 Telegraph +4 (finding O08: a 363 sq ft rear-structure replacement; the
+  parent B2014-04083 fetched from Accela) and 2212 McGee +2 (O09: an existing duplex's electrical upgrade).
+- **Likely City omissions (~36):** real new units the City never listed — 2532 Durant (offices back to 7
+  apartments), 1819 Fifth (2 units), 1336 Milvia (new duplex), 1631 Woolsey (boarding house to duplex), 2910
+  Telegraph (2 units over commercial), 1648 MLK (office to 2 units), 2214 MLK (a relocated duplex), 1471 Scenic, 1400
+  Queens, and about a dozen ADUs and studios.
+- **Unclear (~6):** 11 Hill Rd ("create a kitchen for the second unit"), 2327 Curtis ("habitable accessory space"),
+  1226 Parker and 1836 Capistrano ("accessory building"), 1627 Posen (studio with kitchenette), 707 Cragmont (a 2006
+  permit finaled in 2024).
+None of these is in the page's "explained" figure until verified one by one.

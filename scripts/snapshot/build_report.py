@@ -267,8 +267,9 @@ def s_findings():
     {''.join(F_)}
     <h3>What we could not find, and who has it</h3>
     {gaps}
-    <p class="note"><strong>Draft.</strong> Two findings concern institutions' own documents: the City's undergrounding cost
-    table and UC Berkeley's STARS energy entry. Their responses will be added here before this report is circulated.</p>'''
+    <p class="note">Two findings note discrepancies we found in institutions' own documents: the City's 2016 undergrounding
+    cost table and UC Berkeley's 2025 STARS energy entry. Each finding links to the document and to our arithmetic, so anyone
+    can check it.</p>'''
     return section('findings', 'What the numbers say', 'Nine findings', body)
 
 

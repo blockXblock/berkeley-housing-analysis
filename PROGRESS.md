@@ -382,7 +382,15 @@ planning events and no projects yet -- swap needs John's unlock.
 records), 1,186 structures / 5,561 units, **1,546 projects**, every structure homed once, 380 entitled; conservation
 verifier PASS; a fresh read-only projects preview reproduces the write. **John to re-lock v4.**
 
-**NEXT:** phase 4 (names, coordinates, geometry, heights, applicants) / phase 5 (ledgers onto projects).
+**Phase 4 begun (2026-09-30):** parcel outlines -> geometries (29,118) and building addresses -> structure_addresses
+(`82fdf25`); **project names** (John: address by default, City-stated names only verbatim; `02ede38`): 21 City-stated
+names (Acheson Commons, El Jardin, The Overture, The Standard, Berkeley Moshav, ...), 1,520 by address, 2 none.
+Reading rulings 2-4 (2501 Telegraph, 2212 McGee, 2707 Hillegass; berkeley-data-25) folded in. Verified chain build
+**sha 1aa3c045**, baseline **2026-09-30e** (co 4,369 / bp 5,274, gate PASS): 1,183 structures / 5,552 units, 1,543
+projects. Ruling 5 (2334 Jefferson, d0123a6+) arrived after the build -> next cycle, baseline 30f.
+
+**NEXT:** John unlocks -> swap 1aa3c045 -> next cycle (Jefferson + 30f) -> phase 4 continues (applicants from the
+CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.
 ---
 

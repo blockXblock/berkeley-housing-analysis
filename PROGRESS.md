@@ -577,7 +577,15 @@ existing ADU (11, v4's reading is right); work queues (planning_queue_2026); v2-
 companies like Grosvenor Americas are masked; fix = a sourced organisation-name list for John). metadata.json + README
 generated from the build. NOT deployed (John: `cd datasette-deploy && flyctl deploy`).
 
-**NEXT:** fees harvest -> attachment lists -> geometries -> Panoramic ledger -> Explorer re-point -> archive v2 -> next swap (views with
+**Batch (v2 -> v4 audit items 1-4, 2026-10-01):** building fees (`7145d6d`, 573 projects \$38.8M), Planning fees +
+attachment lists (`1588b2e`), drawn outlines (`821098b`), historic ledger (`939add6`, 14). Item 5 resolved: 3020 San
+Pablo's phased permits expired unissued; 1700 Sacramento unsourced in v2 -- neither is a v4 project.
+**Batch rebuild verified** (`scratch/2026-10-01_batch/chain/`): baseline 30i reproduced; structural gate passes (new
+declared types attachment_listed 1,469, fees_recorded 2,221); structures/units identical; +14 historic projects (1,558);
+7 new v_projects columns; NO value changed on any existing project; APR 2025 credit 2,134. Snapshot of live:
+`databases/keep_snapshot_2026-10-01_pre-batch-swap.db`.
+
+**NEXT:** John unlocks -> swap -> relock -> Explorer re-point -> archive v2 -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

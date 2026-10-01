@@ -5,6 +5,24 @@
 
 ---
 
+## 2026-09-30 — Repo examination; CLEANUP DEFERRED until the v4 migration completes (John)
+
+**John: wait until the migration to v4 is complete, to be sure we captured the data we need; then clean.** Measured
+(read-only): repo 19 GB; disk free 41 → 29 GB over 2026-09-30. `databases/`: 196 DB files, 170 snapshots (5.0 GB; 80
+from June; six today at ~200 MB each). `scratch/`: 9.6 GB, 108 dirs, 23 chain-build DB copies (4.3 GB). Root: 21 files
+incl. legacy logs/HTML/tar.gz. `scripts/`: 96 top-level .py, both `migration/` and `migrations/`; 104 superseded. Docs:
+96 audit memos, 158 notes, 23 methodology. Untracked: 823 Accela sweep files (data/raw/accela/date_range), the funding
+PDF text extractions (the ledger's quote check uses them), `corrections/v4/external_projects.csv` (peer's?).
+**Proposed for after cutover (not started):** snapshot retention (keep those named in baselines/PROGRESS + last few
+per DB; rest copy→verify→Vault), keep only the chain build matching live, scratch older than ~30 days and
+unreferenced → Vault, tidy root and scripts/, decide tracking of the sweep files and text extractions, and write the
+retention rule into CLAUDE.md. Frees ~12 GB.
+
+Funding ledger: new `city_record_keys` column for the peer's projects join (F006 → PLN2018-0048 Berkeley Way; F026 →
+PLN2024-0010 North Berkeley BART); F013/F092 (both BART sites in one row) deliberately unkeyed.
+
+---
+
 ## 2026-09-30 — Live v4 32b7ea03 (Jefferson ruling, applicants): JN-E PASS, pages regenerated
 
 Peer swap to `32b7ea03` (baseline 30f: co 4,368, BP 5,273; snapshot `keep_snapshot_2026-09-30_pre-v4-applicants.db`).

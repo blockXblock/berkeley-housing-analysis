@@ -299,15 +299,16 @@ def s_findings():
              f"vehicles and home deliveries, which the 2017 Berkeley Drawdown list flagged, are not yet counted by any public source.",
              f"{a('#cars', 'Cars')} · {a('#tide', 'Commuting')} · {a(V2050, 'Vision 2050 framework (2020)')} · "
              f"{a(DRAWDOWN, 'Berkeley Drawdown solutions (2017)')}"),
-        item(f'{total - over:.1f} of {total:.0f} street miles have their wires underground; {over:.0f} still carry them overhead',
-             f"Only {100 * (total - over) / total:.0f}% of Berkeley's street miles have buried wires: half of the arterials, a third "
-             f"of the collectors, and {100 * T1['residential'][1] / T1['residential'][0]:.0f}% of residential streets. Of the {over:.0f} "
-             f"overhead miles, {res_over:.0f} are residential streets, and no City cost study we found prices those. Burying the wires "
-             f"on all {over:.0f} miles would cost roughly ${over * 3.25 / 1000:.1f} to ${over * 6.1 / 1000:.1f} billion<sup>1</sup>; the "
-             f"City's capital plan budgets nothing for it. Neither the poles nor the transformers on them are public. We estimate about "
-             f"{round(lo, -2):,.0f}–{round(hi, -2):,.0f} street poles<sup>2</sup> and roughly 7,000–8,000 transformers serving homes<sup>3</sup>; "
-             f"with those serving businesses, the campus and the Lab, the total could approach or pass 10,000. The transformers are "
-             f"filled with oil, and federal rules presume any made before July 1979 to contain PCBs unless tested.",
+        item(f'{over:.0f} of {total:.0f} street miles still carry overhead wires',
+             f"Only {total - over:.1f} miles ({100 * (total - over) / total:.0f}%) have their wires underground: half of the arterials, a third "
+             f"of the collectors and {100 * T1['residential'][1] / T1['residential'][0]:.0f}% of residential streets. Overhead lines are a "
+             f"hazard in each disaster Berkeley plans for. In a fire, burning poles topple across the streets fire engines and evacuees "
+             f"need, and drop live high-voltage lines on homes and people; in the 1991 Oakland fire, falling lines blocked streets, started "
+             f"new fires and cut power to the pumps that supplied the hydrants. In an earthquake or windstorm, swaying poles snap their "
+             f"wires. About {round(lo, -2):,.0f}–{round(hi, -2):,.0f} poles<sup>1</sup> line Berkeley's streets, carrying roughly "
+             f"7,000–8,000 oil-filled transformers for homes<sup>2</sup>, and perhaps 10,000 counting businesses, the campus and the Lab. "
+             f"Burying all {over:.0f} miles would cost roughly ${over * 3.25 / 1000:.1f} to ${over * 6.1 / 1000:.1f} billion<sup>3</sup>; the "
+             f"City's capital plan budgets nothing for it.",
              f"{a('#undergrounding', 'Undergrounding')} · {a('#networks', 'Under the streets')} · data: {dl('undergrounding_segments_harris_2016.csv')}, "
              f"{dl('wood_pole_lines_traced.geojson')}"),
         item("The City's undergrounding cost is $5.4 million short",
@@ -316,9 +317,14 @@ def s_findings():
              f"wires on the remaining arterial and collector streets costs {usd(U['total'])}, not the {big(rn['headline'])} quoted since "
              f"2016, in 2016 dollars and before engineering, financing and street lighting.",
              f"{a('#undergrounding', 'Undergrounding')} · data: {dl('undergrounding_segments_harris_2016.csv')}"),
-        item('The pipes are old; the money for them shrank',
+        item('The pipes are old, and the money for them shrank',
              f"Half of the pipe segments in Berkeley's {I['water_mi']:.0f} miles of water main were laid before {I['water_median_year']}, and "
-             f"{I['water_pre1940_mi']:.0f} miles before 1940. The sewers have been rebuilt since 1986, most of them relined in plastic. "
+             f"{I['water_pre1940_mi']:.0f} miles before 1940. The City has relined about 180 of its 261 miles of sewer main since "
+             f"1986, work worth about $450 million at its own current unit costs, and budgets about $24 million a year more. The weak "
+             f"link is the roughly 31,600 house laterals, most as old as the houses they serve; nearly half of Berkeley's homes were "
+             f"built before 1940. Rain leaking through cracked laterals, joints and mains can raise sewage flows more than tenfold in "
+             f"storms, which is why a federal consent decree requires each lateral to be tested, and repaired if it leaks, when a "
+             f"property is sold or substantially remodeled. "
              f"Vision 2050 documented the City's annual infrastructure funding falling from $53 million to $40 million between FY2012 "
              f"and FY2019, while unfunded needs grew.",
              f"{a('#networks', 'Under the streets')} · {a(V2050, 'Vision 2050 framework (2020)')} · maps: {dl('infrastructure_by_blockgroup.csv')}"),
@@ -369,17 +375,15 @@ def s_findings():
     <h3>What we could not find, and who has it</h3>
     {gaps}
     <h3>Notes</h3>
-    <p class="note"><sup>1</sup> At current costs per mile: PG&amp;E's 2023–2025 average of $3.25 million (its 10-year undergrounding
-    plan, September 30, 2026) and the City's 2019 average of $6.1 million including street lighting (Bellecci &amp; Associates
-    evacuation-route study). Before inflation, engineering and the cost of connecting each building.<br>
-    <sup>2</sup> From the {n(F['poles']['wood'])} wood utility poles that carry City streetlights, the only located poles that are
-    public: their spacing traces {F['poles']['traced']['250']['miles']:.0f}–{F['poles']['traced']['400']['miles']:.0f} miles of pole line, and
-    {over:.0f} overhead street miles at the traced spans of {F['poles']['traced']['200']['mean_span_ft']:.0f}–{F['poles']['traced']['250']['mean_span_ft']:.0f}
-    feet give the range. Poles along rear lot lines are additional.<br>
-    <sup>3</sup> PG&amp;E's sworn figure, "Average number of customers per residential transformer is 7" (2027 rate case,
-    A.25-05-009, rebuttal Exhibit PG&amp;E-18), applied to Berkeley's {rnd(F['dof']['rows'][-1]['occupied'])} occupied and
-    {rnd(F['dof']['rows'][-1]['housing_units'])} total homes (State Department of Finance, 2026). Includes pole-top and underground
-    units; excludes transformers serving businesses, the campus and the Lab. PG&amp;E does not publish a count.</p>
+    <p class="note"><sup>1</sup> From the spacing of the {n(F['poles']['wood'])} wood utility poles that carry City streetlights:
+    {over:.0f} overhead street miles at spans of {F['poles']['traced']['200']['mean_span_ft']:.0f}–{F['poles']['traced']['250']['mean_span_ft']:.0f}
+    feet. Poles along rear lot lines are additional.<br>
+    <sup>2</sup> PG&amp;E's "average number of customers per residential transformer is 7" (2027 rate case, A.25-05-009, rebuttal
+    Exhibit PG&amp;E-18) applied to Berkeley's {rnd(F['dof']['rows'][-1]['occupied'])}–{rnd(F['dof']['rows'][-1]['housing_units'])}
+    homes; pole-top and underground units.<br>
+    <sup>3</sup> At $3.25 million a mile (PG&amp;E's 2023–2025 average) to $6.1 million (the City's 2019 average, street lighting
+    included), before inflation, engineering and building connections. Safety quotations: the City's 2018 Conceptual Study to
+    Underground Utility Wires, citing FEMA's report on the 1991 Oakland fire.</p>
     <p class="note">Two findings note discrepancies we found in institutions' own documents: the City's 2016 undergrounding
     cost table and UC Berkeley's 2025 STARS energy entry. Both link to the documents.</p>'''
     return section('findings', 'What the numbers say', 'Ten findings', body)
@@ -660,7 +664,7 @@ def s_networks():
         ['Sanitary sewer mains (City)', n(I['sewer_mi'], 1), f"{n(I['sewer_segments'])} segments, {n(I['manholes'])} manholes, {n(I['laterals'])} house laterals ({n(I['laterals_mi'], 1)} mapped miles); {CITED['ssmp']['pump_stations']} pump stations; {CITED['ssmp']['rehab_since_1986']} miles rehabilitated since 1986."],
         ['Storm drains (City)', n(I['storm_mi'], 1), f"{n(I['storm_segments'])} pipe segments."],
         ['Gas, high pressure (PG&amp;E)', '≈ 38', 'Lines at 60 psi and above only; the low-pressure mains that feed houses are not public.'],
-        ['Utility poles (PG&amp;E, AT&amp;T)', f"{n(poles.get('Wood', 0))}+", f"Wood poles carrying a City streetlight, {n(I['wood_util_pn_distinct'])} with PG&amp;E pole numbers: a floor (estimate of all street poles below). Ages and transformers are not public."],
+        ['Utility poles (PG&amp;E, AT&amp;T)', f"{n(poles.get('Wood', 0))}+", f"Wood poles carrying a City streetlight; about {round(lo, -2):,.0f}–{round(hi, -2):,.0f} poles in all line the streets (below)."],
     ], right={1})}
     <p class="note">Two City-commissioned counts of street miles disagree by 5 miles: 214.2 in the 2022 pavement survey and
     219.4 in the 2016 undergrounding study. Neither report explains the difference; they were measured six years apart for
@@ -754,6 +758,12 @@ def s_ug():
       {card(big(U['total']), 'to underground them, segment by segment', 'Harris & Associates, 2016 dollars, construction only.')}
       {card(big(sum(r['total_cost'] for r in b19)), 'for 16.9 miles of evacuation routes', 'Bellecci, FY2019 dollars; ' + big(sum(r['total_cost'] for r in bc.values())) + ' as a FY2023 capital program.')}
     </div>
+    <p class="note" style="font-size:.95rem"><strong>Why it matters.</strong> The City's 2018 study makes the safety case: "Undergrounded
+    wires don't fall down and block roadways." In the 1991 Oakland fire, as FEMA documented, "live power lines fell from burning poles,
+    blocking streets and starting new fires," and when power to pumping stations was lost, firefighters ran out of water. First
+    responders "will not drive over fallen power lines" until the utility confirms they are dead. In an earthquake, "poles have a
+    tendency to sway in opposite directions causing wires to snap and throw sparks." Most of the overhead miles are residential
+    streets, including the narrow hill streets that are the only ways out of the fire zones.</p>
     <h3>Every street, by class: underground and overhead (miles, 2016)</h3>
     {table(['Streets', 'Total', 'Underground', 'Overhead', 'Share underground'], t1rows, right=range(1, 5))}
     <p class="note">Miles computed from the feet in Table 1 of the City's 2016 study (the table prints 149.9 overhead

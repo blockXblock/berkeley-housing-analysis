@@ -471,7 +471,12 @@ square footage and parking (the "drop" had rested only on v2's empty column). Bu
 flag-and-exclude). Full chain incl. views (`scratch/2026-10-01_phase6/chain`, sha 8daf35a0): all gates PASS incl.
 structural vs live; core columns identical to live. **The chain is now A->B->C->F->structures->projects->views.**
 
-**NEXT:** John unlocks -> swap 8daf35a0 -> re-point the APR generator to v_projects (diff vs its v2 output) (applicants from the
+**LIVE SWAPPED to 8daf35a0 -- SERVING VIEWS LIVE (John unlocked, 2026-10-01):** snapshot
+`keep_snapshot_2026-10-01_pre-v4-views.db` (sha 11b07920, integrity ok); integrity + FK clean; v_projects 1,544 rows,
+keys unique; v_project_timeline 12,162; project_records 1,056; parcel_area 29,113; conservation PASS. CLAUDE.md's chain
+line now ends at build_views (John). **John to re-lock.**
+
+**NEXT:** re-point the APR generator to v_projects (diff vs its v2 output) (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.
 ---

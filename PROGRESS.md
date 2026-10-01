@@ -463,7 +463,15 @@ withdrawn/void ZP as a companion. Swap candidate `scratch/2026-09-30_phase5/p5.d
 carrying affordability tiers, 6 classification rulings, 13 with funding; 1,182 buildings / 5,551 units; conservation
 PASS. **John to re-lock.**
 
-**NEXT:** heights (phase 4) -> phase 6 (re-point the ~20 publishers; decide project_records table) (applicants from the
+**Phase 6 begun (2026-09-30 / 10-01):** John approved D1-D8 (`notes/v4/2026-09-30_phase6_field_map.md`) and KEPT
+square footage and parking (the "drop" had rested only on v2's empty column). Built: `build_views.py` (last chain step:
+`v_projects`, `v_project_timeline`), `project_records` (1,056 records), City taxable sq ft per parcel (`parcel_area`,
+29,113), proposed units for 283 application-only projects (189 stated + 94 by_definition, John), building measures for
+742 projects (sq ft 503, storeys 386, height 109, parking 93); 3 self-contradicting pairs excluded with reasons (John:
+flag-and-exclude). Full chain incl. views (`scratch/2026-10-01_phase6/chain`, sha 8daf35a0): all gates PASS incl.
+structural vs live; core columns identical to live. **The chain is now A->B->C->F->structures->projects->views.**
+
+**NEXT:** John unlocks -> swap 8daf35a0 -> re-point the APR generator to v_projects (diff vs its v2 output) (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.
 ---

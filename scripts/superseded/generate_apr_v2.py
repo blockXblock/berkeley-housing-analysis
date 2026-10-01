@@ -1,4 +1,13 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-01 ============================
+# DO NOT RUN. Original home: scripts/generate_apr_v2.py.
+# WHY: read v2's v_projects_flat. Replaced by scripts/generate_apr_v4.py, a re-point onto v4's serving view
+# v_projects with John's logic decisions (2026-10-01): affordability from the sourced ledger only, Table B on the
+# 6th-cycle window, ADUs by the CPRA permit's own ADU field with ABAG's split as a LABELLED assumption, "Owner of
+# Record Summary". Diffed against this script's output before switching (docs: PROGRESS.md, APR re-point #1). v4
+# became live with the needed columns (adu_units, rhna_excluded) in the 2026-10-01 swap (1d5e2cb8).
+raise SystemExit("SEQUESTERED 2026-10-01 -- v2 APR generator; use scripts/generate_apr_v4.py")
+# ================================================================================
 """
 Generate APR (Annual Progress Report) Tables - V2 SCHEMA VERSION
 

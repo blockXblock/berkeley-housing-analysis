@@ -33,8 +33,8 @@ Tables generated:
 - Summary statistics
 
 Usage:
-    python scripts/generate_apr_v2.py --year 2025
-    python scripts/generate_apr_v2.py --year 2025 --output-dir /tmp/apr_v2_stage1/
+    python scripts/generate_apr_v4.py --year 2025                       # reads live v4 (databases/berkeley_housing_v4.db)
+    python scripts/generate_apr_v4.py --year 2025 --db BUILD.db --output-dir scratch/<date>/apr/
 """
 
 import argparse

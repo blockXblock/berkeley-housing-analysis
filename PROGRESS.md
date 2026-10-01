@@ -500,6 +500,15 @@ Test build: RHNA credit through 2025 **1,971 -> 2,134** (+163 Shattuck; City 2,1
 pages show per-unit rents and status, organisation owners by name, individuals as "individual owner", tenancy year.
 All of it reaches live at the next swap.
 
+**City records at each project's buildings (2026-10-01, John: "load the commercial records for mixed-use
+projects"; `aa78b14`):** the whole Accela list dump (Building + Planning) loads in JN-C as `accela_listed`, declared by
+`data/manifests/accela_list_dump_2026-10-01.json` (2,965 files by SHA-256; files local). Conserved 107,953 = 97,579 +
+2,317 duplicate listings + 8,057 page-navigation rows. New `event_addresses`. View `v_project_records_listed`: 1,131
+projects, 9,289 listings (6,283 beyond their own records). 1951 Shattuck: ground-floor retail approved (~5,000 sq ft,
+SCB plans in R2), one tenant on record -- Suite C Cold Stone, TI issued 2024-12-30 not finaled; the only licence on the
+parcel is the 163-unit rental. Larger buildings after completion: 109 listings at 29 buildings (20 business-licence
+certificates, 12 TI-type permits, signs). WHICH listings are commercial is not decided yet (record type + text).
+
 **NEXT:** licensed-professionals harvest -> load as contractor/architect roles -> developer ledger -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).

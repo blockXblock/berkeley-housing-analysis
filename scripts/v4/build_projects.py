@@ -36,11 +36,18 @@ marked with their outcome; gaps close through corrections/v4/project_rulings.csv
   P6 COMPANIONS non-anchor in-scope records at a site (design review, modifications, pre-applications) attach
                 to the anchor filed nearest them in time; they add evidence, never a project.
 
-  .venv/bin/python scripts/v4/build_projects.py --db BUILD.db     # preview -> scratch/2026-09-29_phase3/
+  .venv/bin/python scripts/v4/build_projects.py --db BUILD.db           # preview -> scratch/2026-09-29_phase3/
+  .venv/bin/python scripts/v4/build_projects.py --db BUILD.db --write   # the BUILD STEP (after build_structures)
+
+THE WRITE (2026-09-30). Clears and refills `projects`, `project_structures`, `project_parcels` in ONE transaction:
+projects are a projection of the planning records + structures + John's rulings, re-derived every build, never
+edited. v4 has no project->record table, so each project's records, anchor and milestones live in `notes` (JSON)
+until John decides on one. Refuses the live DB unless BUILD_PROJECTS_ALLOW_LIVE=1.
 """
 from __future__ import annotations
 
 import argparse
+import os
 import collections
 import csv
 import json
@@ -84,7 +91,10 @@ def addr_key(a):
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--db", default=str(V4))
+    ap.add_argument("--write", action="store_true")
     args = ap.parse_args()
+    if args.write and Path(args.db).resolve() == V4.resolve() and os.environ.get("BUILD_PROJECTS_ALLOW_LIVE") != "1":
+        raise SystemExit(f"REFUSED: --write targets the LIVE DB ({V4}); projects reach live by swapping in a verified build.")
     db = sqlite3.connect(f"file:{args.db}?mode=ro", uri=True)
 
     # P3's parcel lane goes through the County's lineage (housing_rules.parcel_lineage, John's split rule 2026-09-30)
@@ -262,8 +272,10 @@ def main() -> int:
             continue
         projects.append(dict(anchor=a, anchor_role=m["role"], records=sorted(r["record"] for r in members),
                              structures=sorted(sids), units=sum(units.get(x) or 0 for x in sids),
-                             filed=m["filed"], entitled=m["entitled"], denied=m["denied"],
-                             ended=m["ended_status"], stated_units=None))
+                             filed=m["filed"], accepted=m["accepted"], entitled=m["entitled"],
+                             entitled_by=m["entitled_by"], denied=m["denied"], ended=m["ended_status"],
+                             record_status=recs[a].get("record_status"), milestone_flags=m["flags"],
+                             parcels=sorted(x[1] for x in recs[a]["_sites"] if x[0] == "parcel" and isinstance(x[1], int))))
     grouped = collections.defaultdict(list)
     for sid, a in home.items():
         if a is None:
@@ -308,8 +320,52 @@ def main() -> int:
     for p in sorted(big, key=lambda p: -p["units"])[:12]:
         print(f"     {p['anchor']:<14} {p['units']:>4}u  {len(p['structures'])} bldg  filed {p['filed']}  "
               f"entitled {p['entitled']}  records {len(p['records'])}")
-    print(f"\nPREVIEW written to {OUT/'projects_preview.jsonl'}; nothing written to any DB.")
+    print(f"\nPREVIEW written to {OUT/'projects_preview.jsonl'}")
+    if not args.write:
+        print("nothing written to any DB.")
+        return 0
+    db.close()
+    print("WRITE:", write(sqlite3.connect(args.db), projects))
     return 0
+
+
+def write(con, projects) -> dict:
+    """Clear and refill projects / project_structures / project_parcels in ONE transaction; verify, else roll back."""
+    con.isolation_level = None
+    out = collections.Counter()
+    try:
+        con.execute("BEGIN")
+        for t in ("project_parcels", "project_structures", "projects"):
+            con.execute(f"DELETE FROM {t}")
+        sp = collections.defaultdict(set)
+        for sid, pid in con.execute("SELECT structure_id, parcel_id FROM structure_parcels"):
+            sp[sid].add(pid)
+        for p in projects:
+            notes = {k: p.get(k) for k in ("anchor", "anchor_role", "records", "filed", "accepted", "entitled",
+                                           "entitled_by", "denied", "ended", "record_status", "milestone_flags",
+                                           "ruling") if p.get(k) not in (None, [], "")}
+            notes["units"] = p["units"]
+            pid = con.execute("INSERT INTO projects (name, notes) VALUES (NULL, ?)",
+                              (json.dumps(notes),)).lastrowid
+            out["projects"] += 1
+            for sid in p["structures"]:
+                con.execute("INSERT INTO project_structures VALUES (?,?)", (pid, sid))
+                out["project_structures"] += 1
+            parcels = set(p.get("parcels") or []).union(*[sp[s] for s in p["structures"]]) if p["structures"] \
+                else set(p.get("parcels") or [])
+            for par in sorted(parcels):
+                con.execute("INSERT INTO project_parcels VALUES (?,?)", (pid, par))
+                out["project_parcels"] += 1
+        n_s = con.execute("SELECT COUNT(*) FROM structures").fetchone()[0]
+        homed = con.execute("SELECT COUNT(DISTINCT structure_id) FROM project_structures").fetchone()[0]
+        dup = con.execute("SELECT COUNT(*) FROM (SELECT structure_id FROM project_structures GROUP BY 1 "
+                          "HAVING COUNT(*) > 1)").fetchone()[0]
+        assert homed == n_s and dup == 0, f"P5 ONE HOME broken: {homed} of {n_s} structures homed, {dup} in two projects"
+        con.execute("COMMIT")
+    except Exception:
+        con.execute("ROLLBACK")
+        raise
+    return dict(out)
 
 
 def _all_keys(db):

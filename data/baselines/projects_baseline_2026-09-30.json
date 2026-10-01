@@ -1,0 +1,64 @@
+{
+ "invariant": {
+  "projects": 1546,
+  "structures_homed_once": 1186,
+  "structures": 1186,
+  "units_in_projects": 5561,
+  "structures_in_two_projects": 0
+ },
+ "moves": {
+  "application_plus_buildings": 276,
+  "application_only": 403,
+  "building_only": 867,
+  "with_entitlement_date": 380,
+  "with_acceptance_date": 476,
+  "by_anchor_role": {
+   "primary_application": 561,
+   "companion_review": 4,
+   "pre_application": 92,
+   "ministerial_clearance": 21,
+   "not_an_application": 1,
+   "structure_only": 867
+  },
+  "project_parcels": 1561
+ },
+ "named_cases": {
+  "acheson_UP2010-0078": {
+   "anchor": "UP2010-0078",
+   "anchor_role": "primary_application",
+   "records": [
+    "UP2010-0078"
+   ],
+   "filed": "2010-11-22",
+   "accepted": "2013-02-21",
+   "entitled": "2013-06-24",
+   "entitled_by": "zab",
+   "record_status": "Approved",
+   "milestone_flags": [
+    "outcome_from_case_closing",
+    "accepted_same_day_as_closing"
+   ],
+   "units": 205
+  },
+  "logan_park_ZP2018-0135": {
+   "anchor": "ZP2018-0135",
+   "anchor_role": "primary_application",
+   "records": [
+    "DRCF2020-0003",
+    "ZP2018-0135"
+   ],
+   "filed": "2018-06-28",
+   "accepted": "2019-04-12",
+   "entitled": "2019-10-24",
+   "entitled_by": "staff",
+   "record_status": "Approved",
+   "units": 204
+  }
+ },
+ "rules": "P1-P6 + P1b + P4b (scripts/v4/build_projects.py header); corrections/v4/project_rulings.csv approved rows (9)",
+ "provenance": {
+  "source_db": "scratch/2026-09-30_projects/chain2 (A->B->C->F->structures->projects)",
+  "sha16": "7070646d37202809",
+  "derived_at": "2026-09-30T17:32:34"
+ }
+}

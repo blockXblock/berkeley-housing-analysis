@@ -367,7 +367,21 @@ FROM projects p JOIN (SELECT project_id, record_key FROM project_records
 JOIN events e ON e.event_type_code = 'attachment_listed' AND e.source_record_key = r.record_key
 """
 
-VIEWS = {"v_project_attachments": V_PROJECT_ATTACHMENTS, "v_projects": V_PROJECTS, "v_project_timeline": V_PROJECT_RECORDS, "v_adu_rent_board": V_ADU_RENT_BOARD,
+# HAND-DRAWN OUTLINES per project (2026-05-18 KML: '_footprint' drawn building outlines, '_synthetic' estimated
+# massing; height in metres). Reached by the outline's address through the project's building addresses OR its
+# parcels' County situs (the UC towers are external projects with no building in v4).
+V_PROJECT_DRAWN = r"""
+CREATE VIEW v_project_drawn_outlines AS
+WITH pa AS (SELECT ps.project_id, sa.address_id FROM project_structures ps JOIN structure_addresses sa USING(structure_id)
+            UNION SELECT pp.project_id, pa2.address_id FROM project_parcels pp JOIN parcel_addresses pa2 USING(parcel_id))
+SELECT DISTINCT json_extract(p.notes, '$.project_key') AS project_key, p.name,
+       json_extract(g.geojson, '$.properties.kind') AS kind, json_extract(g.geojson, '$.properties.height_m') AS height_m,
+       json_extract(g.geojson, '$.properties.name') AS outline_name, g.geojson
+FROM geometries g JOIN pa ON pa.address_id = g.entity_id JOIN projects p USING(project_id)
+WHERE g.entity_type = 'drawn_outline'
+"""
+
+VIEWS = {"v_project_drawn_outlines": V_PROJECT_DRAWN, "v_project_attachments": V_PROJECT_ATTACHMENTS, "v_projects": V_PROJECTS, "v_project_timeline": V_PROJECT_RECORDS, "v_adu_rent_board": V_ADU_RENT_BOARD,
          "v_project_records_listed": V_PROJECT_LISTED, "v_project_businesses": V_PROJECT_BUSINESSES,
          "v_project_people": V_PROJECT_PEOPLE}
 

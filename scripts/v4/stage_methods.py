@@ -1105,6 +1105,58 @@ def load_attachment_lists(con, manifest=CAPTURES_MANIFEST):
     return dict(captures=len(m['files']), attachments=len(rows), records=len({r[0] for r in rows}), orphans=orphan)
 
 
+DRAWN_GEOMETRY_KML = os.path.join(ROOT, 'kml', 'geometry', 'versions', 'Geometry-2026-05-18-labeled.kml')
+
+
+def load_drawn_outlines(con, path=DRAWN_GEOMETRY_KML):
+    """Hand-drawn building outlines with heights (John 2026-10-01, v2 -> v4 audit item 3): the placemarks of the
+    2026-05-18 geometry KML (the file v2's kml_import read) whose OWN style marks them as drawn -- '_footprint' (a drawn
+    building outline) or '_synthetic' (estimated massing) -- never the '_parcel' lot outlines, which v4 takes from the
+    County. Each -> geometries row, entity_type 'drawn_outline', entity_id = the canonical address id of the address
+    its name begins with ('2400 Bowditch St · North · 750 units ...'); the polygon, its height (the coordinates'
+    altitude, metres), the style and the full name in the GeoJSON properties. Linked to projects in the views."""
+    import re as _re
+    from scripts.housing_rules.address import normalize_address
+    t = open(path, errors='replace').read()
+    loc = os.path.relpath(path, ROOT)
+    assert not con.execute("SELECT 1 FROM sources WHERE locator=?", (loc,)).fetchone(), f'already loaded: {loc}'
+    addr_id = dict((n, a) for a, n in con.execute("SELECT address_id, normalized FROM addresses"))
+    sid = con.execute("INSERT INTO sources (source_kind,locator,retrieved_at,checksum,notes) VALUES "
+                      "('drawn_geometry_kml',?,?,?,?)", (loc, '2026-05-18', _sha256(path),
+                      'hand-drawn building footprints / synthetic massing with heights (Google Earth)')).lastrowid
+    out, skipped = 0, []
+    try:
+        for pm in _re.findall(r'<Placemark>(.*?)</Placemark>', t, _re.S):
+            st = _re.search(r'<styleUrl>#?([^<]*)</styleUrl>', pm)
+            kind = _re.sub(r'\d+$', '', st.group(1)).rsplit('_', 1)[-1] if st else None
+            if kind not in ('footprint', 'synthetic'):
+                continue
+            name = _re.search(r'<name>([^<]*)</name>', pm).group(1).strip()
+            coords = _re.search(r'<coordinates>(.*?)</coordinates>', pm, _re.S).group(1).split()
+            pts = [tuple(float(x) for x in c.split(',')) for c in coords]
+            try:
+                num, street = normalize_address(name.split('·')[0].strip())
+            except Exception:
+                num = street = None
+            if not num or not street:
+                skipped.append(name); continue
+            key = f"{num}|{street}"
+            if key not in addr_id:
+                addr_id[key] = con.execute("INSERT INTO addresses (number, street, normalized) VALUES (?,?,?)",
+                                           (num, street, key)).lastrowid
+            gj = {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": [[[x, y] for x, y, *_ in pts]]},
+                  "properties": {"name": name, "kind": kind, "style": st.group(1),
+                                 "height_m": max((p[2] for p in pts if len(p) > 2), default=None)}}
+            con.execute("INSERT OR REPLACE INTO geometries (entity_type, entity_id, geojson, valid_from, source_id) "
+                        "VALUES ('drawn_outline', ?, ?, ?, ?)", (addr_id[key], json.dumps(gj), f'2026-05-18#{out}', sid))
+            out += 1
+        con.commit()
+    except Exception:
+        con.rollback()
+        raise
+    return dict(outlines=out, skipped=skipped)
+
+
 PLANNING_FEES = os.path.join(ROOT, 'data', 'raw', 'accela_capdetail', 'planning_fees_2026-10-01.jsonl')
 
 

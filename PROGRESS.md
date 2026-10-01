@@ -490,6 +490,16 @@ permits' Licensed Professionals (architect, contractor; `662f0d9` parser; 1,185 
 `scratch/2026-10-01_bp_capdetail/`); (b) a developer ledger from documents. Investor/lender sources to scope (County
 Recorder deeds of trust; CTCAC; Secretary of State for owner LLCs).
 
+**Rent Board + 1951 Shattuck (2026-10-01, John):** the Rent Board registry loads in JN-C (`db610f0`: 41,242 units +
+112,253 tenancies, all fields incl. tenancy dates; owner / owner business / manager as distinct actor roles). Approved
+and committed (`921e2ea`): **S002** attaches Shattuck's Phase 1 (B2019-05608) in a new `phase` role; **first BP =
+earliest issuance of master + ruled phase permits** (site work never sets it); **S003/S004** address aliases (1955/1959
+Shattuck; 2108 Berkeley Way, John's entrance observation -- he wrote "Bancroft", confirm); **ADU rule** as
+`v_adu_rent_board` (Board-labelled ADU 26 / parcel registrations only 299 / no registration found 359; never mixed).
+Test build: RHNA credit through 2025 **1,971 -> 2,134** (+163 Shattuck; City 2,120). Publishing (John): full data in v4;
+pages show per-unit rents and status, organisation owners by name, individuals as "individual owner", tenancy year.
+All of it reaches live at the next swap.
+
 **NEXT:** licensed-professionals harvest -> load as contractor/architect roles -> developer ledger -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).

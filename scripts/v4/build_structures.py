@@ -496,7 +496,9 @@ def write(con, permits, groups, attach, finals) -> dict:
 
     event_meta = {eid: (t, d, src) for eid, t, d, src in con.execute(
         "SELECT event_id, event_type_code, event_date, source_id FROM events")}
-    tables = ("units", "structure_parcels", "structure_events", "structures")
+    tables = ("units", "structure_addresses", "structure_parcels", "structure_events", "structures")
+    # addresses are SHARED with the parcels' situs (load_parcels): looked up by the canon key, created only if new
+    addr_id = dict((n, a) for a, n in con.execute("SELECT address_id, normalized FROM addresses"))
     counts = collections.Counter()
     con.isolation_level = None                         # explicit BEGIN/COMMIT, no implicit transaction
     try:
@@ -536,6 +538,19 @@ def write(con, permits, groups, attach, finals) -> dict:
                                 (sid, eid, "inspection" if t == "inspection" else role))
                     counts["structure_events"] += 1
             counts["parcel_basis:" + pbasis[0]] += 1
+            for k in keys:                                   # the building's addresses, as its master permits state them
+                try:
+                    num, street = normalize_address(permits[k]["address"]) if permits[k]["address"] else (None, None)
+                except Exception:
+                    num = street = None
+                if not num or not street or num == "0":
+                    continue
+                key = f"{num}|{street}"
+                if key not in addr_id:
+                    addr_id[key] = con.execute("INSERT INTO addresses (number, street, normalized) VALUES (?,?,?)",
+                                               (num, street, key)).lastrowid
+                n = con.execute("INSERT OR IGNORE INTO structure_addresses VALUES (?,?)", (sid, addr_id[key])).rowcount
+                counts["structure_addresses"] += n
             for i, pid in enumerate(seen):
                 con.execute("INSERT INTO structure_parcels VALUES (?,?,?)", (sid, pid, int(i == 0)))
                 counts["structure_parcels"] += 1

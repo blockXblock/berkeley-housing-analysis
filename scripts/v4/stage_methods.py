@@ -655,6 +655,25 @@ def load_parcels(con, parcels_db=PARCELS_DB, owners_csv=OWNERS_CSV):
                                             (num, street, key)).lastrowid
             con.execute("INSERT OR IGNORE INTO parcel_addresses VALUES (?,?)", (by_apn[apn][0], addr_ids[key]))
             out['situs_addresses'] += 1
+        # Each parcel's OUTLINE (the County's WKT MULTIPOLYGON) -> geometries as a GeoJSON Feature, with the County's own
+        # label point kept as a property (2026-09-30, cutover phase 4). Same declared source, read separately so the
+        # fingerprint above is unchanged. A project's or building's location is reached through its parcels.
+        from shapely import wkt as _wkt
+        from shapely.geometry import mapping as _mapping
+        out['geometries'] = out['geometry_rejected'] = 0
+        for apn, geom, lat, lon in src.execute("SELECT APN, the_geom, Latitude, Longitude FROM parcels"):
+            if apn not in by_apn or not geom:
+                continue
+            try:
+                g = _mapping(_wkt.loads(geom))
+            except Exception:
+                out['geometry_rejected'] += 1
+                continue
+            feat = {"type": "Feature", "geometry": g,
+                    "properties": {"label_point": [float(lon), float(lat)] if lat and lon else None}}
+            con.execute("INSERT OR IGNORE INTO geometries (entity_type, entity_id, geojson, valid_from, source_id) "
+                        "VALUES ('parcel', ?, ?, ?, ?)", (by_apn[apn][0], json.dumps(feat), PARCELS_ASOF, sid))
+            out['geometries'] += 1
         by_canon = {c: p for p, c in by_apn.values()}
         orows = list(csv.DictReader(open(owners_csv)))
         osid = con.execute("INSERT INTO sources (source_kind,locator,retrieved_at,source_asof,checksum,notes) VALUES "

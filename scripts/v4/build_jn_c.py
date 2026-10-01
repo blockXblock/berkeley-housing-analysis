@@ -129,6 +129,7 @@ print("accela list:", SM.load_accela_list(con))   # every Building + Planning li
 print("licences:   ", SM.load_business_licenses(con))   # City business licences 2025-11-15 (John 2026-10-01)
 print("ctcac:      ", SM.load_ctcac_projects(con))   # CTCAC tax-credit parties + unit mix (John 2026-10-01)
 print("bp profess.:", SM.load_building_professionals(con))   # master permits' Licensed Professionals + owner (John 2026-10-01)
+print("bp fees:    ", SM.load_building_fees(con))   # the Fees tab of the same pages: paid / outstanding (John 2026-10-01)
 print("doc roles:  ", SM.load_document_roles(con))   # parties by stated role in plans + applications (John 2026-10-01)
 """)
 code(r"""

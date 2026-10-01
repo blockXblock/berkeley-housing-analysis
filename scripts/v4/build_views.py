@@ -45,6 +45,16 @@ adu_b AS (SELECT ps.project_id, SUM(u.unit_count) adu_units FROM ps JOIN units u
 first_bp AS (SELECT ps.project_id, MIN(e.event_date) bp FROM ps JOIN structure_events se USING(structure_id)
              JOIN events e USING(event_id) WHERE se.role_in_structure IN ('master', 'phase') AND e.event_type_code = 'permit_issued'
              GROUP BY 1),
+-- fees the City records on the project's building permits (CapDetail Fees tab, dated at retrieval; John 2026-10-01)
+fees AS (SELECT ps.project_id,
+                SUM(CAST(REPLACE(REPLACE(json_extract(f.raw_payload, '$.total_paid'), '$', ''), ',', '') AS REAL)) paid,
+                SUM(CAST(REPLACE(REPLACE(json_extract(f.raw_payload, '$.total_outstanding'), '$', ''), ',', '') AS REAL)) outstanding,
+                MAX(f.event_date) fees_as_of
+         FROM ps JOIN structures s USING(structure_id)
+         JOIN (SELECT DISTINCT se.structure_id, e.source_record_key k FROM structure_events se JOIN events e USING(event_id)
+               WHERE se.role_in_structure IN ('master', 'phase')) sp ON sp.structure_id = s.structure_id
+         JOIN events f ON f.event_type_code = 'fees_recorded' AND f.source_record_key = sp.k
+         GROUP BY 1),
 valuation AS (SELECT ps.project_id, SUM(CAST(json_extract(e.raw_payload, '$.JobValuation') AS REAL)) v
               FROM ps JOIN structures s USING(structure_id) JOIN events e ON e.event_id = s.master_event_id GROUP BY 1),
 par AS (SELECT project_id, MIN(parcel_id) parcel_id FROM project_parcels GROUP BY 1),
@@ -101,6 +111,9 @@ SELECT
   json_extract(p.notes, '$.measures.height_feet.value')           AS height_feet,
   ar.bsf                                                          AS parcel_taxable_building_sqft,           -- parcel-level cross-check
   val.v                                                           AS construction_valuation,
+  fe.paid                                                         AS fees_paid,
+  fe.outstanding                                                  AS fees_outstanding,
+  fe.fees_as_of                                                   AS fees_as_of,
   json_extract(p.notes, '$.pathways')                             AS pathways,
   json_extract(p.notes, '$.filed')                                AS filed_date,
   json_extract(p.notes, '$.accepted')                             AS accepted_date,
@@ -125,7 +138,7 @@ SELECT
   json_extract(p.notes, '$.funding')                              AS funding
 FROM projects p
 LEFT JOIN built b USING(project_id) LEFT JOIN units_b u USING(project_id) LEFT JOIN first_bp fb USING(project_id)
-LEFT JOIN valuation val USING(project_id) LEFT JOIN pt USING(project_id) LEFT JOIN av USING(project_id)
+LEFT JOIN valuation val USING(project_id) LEFT JOIN fees fe USING(project_id) LEFT JOIN pt USING(project_id) LEFT JOIN av USING(project_id)
 LEFT JOIN area ar USING(project_id) LEFT JOIN own o USING(project_id) LEFT JOIN appl ap USING(project_id)
 LEFT JOIN tiers t USING(project_id) LEFT JOIN adu_b adu USING(project_id)
 """

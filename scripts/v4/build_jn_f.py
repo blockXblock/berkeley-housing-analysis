@@ -183,6 +183,7 @@ if _LIVE.exists() and DB_PATH.resolve() != _LIVE.resolve():
         "accela_listed": "Accela list dump, manifest accela_list_dump_2026-10-01 (load_accela_list; John 2026-10-01)",
         "business_license": "City business licences 2025-11-15 (load_business_licenses; John 2026-10-01)",
         "ctcac_project": "CTCAC List of Projects, Berkeley rows (load_ctcac_projects; John 2026-10-01)",
+        "fees_recorded": "Fees tab of the building-permit pages (load_building_fees; John 2026-10-01)",
     }
     by_r = dict(con.execute("SELECT event_type_code, COUNT(*) FROM events GROUP BY 1"))
     by_l = dict(live.execute("SELECT event_type_code, COUNT(*) FROM events GROUP BY 1"))

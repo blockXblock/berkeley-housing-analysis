@@ -161,6 +161,27 @@ def parse_licensed_professionals(soup: BeautifulSoup) -> list[dict]:
     return out
 
 
+def parse_fees(soup: BeautifulSoup) -> dict | None:
+    """The page's FEES tab (#tab-fee), 2026-10-01: the City's own totals -- 'Total paid fees: $X' and 'Total
+    outstanding fees: $Y' -- plus the invoices on the tab's FIRST page (it lists five at a time; the totals are the
+    complete figures, the invoice list is not). Amounts exactly as printed. None when the page has no fee tab;
+    {} when the tab is empty (no fees)."""
+    t = soup.find(id="tab-fee")
+    if t is None:
+        return None
+    txt = " ".join(t.get_text(" ").split())
+    out = {}
+    for key, lab in (("total_paid", "Total paid fees:"), ("total_outstanding", "Total outstanding fees:")):
+        m = re.search(re.escape(lab) + r"\s*(\$[\d,]+\.\d\d)", txt)
+        if m:
+            out[key] = m.group(1)
+    inv = re.findall(r"(\d\d/\d\d/\d{4}) (\d+) (\$[\d,]+\.\d\d)", txt)
+    if inv:
+        out["invoices_first_page"] = [{"date": d, "invoice": n, "amount": a} for d, n, a in inv]
+        out["more_pages"] = "Next >" in txt
+    return out
+
+
 def parse_related_records(soup: BeautifulSoup) -> list[dict]:
     """Related Records -> the linked records, with the RELATIONSHIP where the page states it.
 
@@ -253,6 +274,7 @@ def parse_capdetail(page_html: str) -> dict:
         **parse_record_details(soup),
         "parcels_raw": parse_parcels(soup),
         "licensed_professionals": parse_licensed_professionals(soup),
+        "fees": parse_fees(soup),
         "processing_status": parse_processing_status(soup),
         "related_records": parse_related_records(soup),
     }

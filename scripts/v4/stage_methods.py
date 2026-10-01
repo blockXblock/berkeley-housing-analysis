@@ -194,7 +194,7 @@ def classify_all(con):
     for ev_id, permit in con.execute("SELECT event_id, source_record_key FROM events "
                                      "WHERE event_type_code NOT LIKE 'planning_%' "      # a Planning record is not a building permit
                                      "AND event_type_code NOT LIKE 'registry_%' "      # nor a Rent Board registration (2026-10-01)
-                                     "AND event_type_code NOT IN ('accela_listed', 'business_license', 'ctcac_project')"):  # nor a listing, licence, CTCAC row
+                                     "AND event_type_code NOT IN ('accela_listed', 'business_license', 'ctcac_project', 'fees_recorded')"):  # nor a listing, licence, CTCAC row, fee total
         got = permit_effect(permit)
         if got is None:
             unread += 1
@@ -990,6 +990,58 @@ def load_accela_list(con, manifest=ACCELA_LIST_MANIFEST):
     return dict(files=len(m['files']), rows=rows_in, events=ok, duplicate_listings=dup, pager_rows=pager,
                 rejected_other=len(bad),
                 with_address=n_addr)
+
+
+def load_building_fees(con, harvests=BUILDING_HARVESTS):
+    """The FEES the City records on each harvested building permit (the CapDetail Fees tab; John 2026-10-01). One
+    'fees_recorded' event per permit that has any, dated at RETRIEVAL (the totals are cumulative to that day), the tab's
+    own figures in raw_payload as printed: total_paid, total_outstanding, the invoices on its first page. Not
+    itemized by fee type (that needs each invoice's detail page). Re-derived from the source pages, never copied from
+    v2's v1-era fee rows."""
+    import datetime as dt
+    now = dt.datetime.now(dt.timezone.utc).isoformat()
+    if not con.execute("SELECT 1 FROM lifecycle_phases WHERE phase_code='CITY_RECORD'").fetchone():
+        con.execute("INSERT INTO lifecycle_phases VALUES ('CITY_RECORD', 90, 'existing', "
+                    "'a City record whose stage meaning is read later (a listing, a business or use certificate)')")
+    # NOT 'permit_*': the build's permit filters are LIKE 'permit_%', and a fee total must never read as a permit event
+    # NOT 'permit_*': the build filters permit events with LIKE 'permit_%' -- a fee total must never read as one
+    con.execute("INSERT OR IGNORE INTO event_types VALUES ('fees_recorded','CITY_RECORD',0,"
+                "'the fees a building permit page records (paid / outstanding totals), dated at retrieval')")
+    out = {}
+    for path, retrieved, note in harvests:
+        loc = os.path.relpath(path, ROOT) + '#fees'
+        assert not con.execute("SELECT 1 FROM sources WHERE locator=?", (loc,)).fetchone(), f'already loaded: {loc}'
+        recs = [json.loads(l) for l in open(path)]
+        try:
+            sid = con.execute("INSERT INTO sources (source_kind,locator,retrieved_at,checksum,notes) VALUES "
+                              "('accela_capdetail_fees',?,?,?,?)", (loc, retrieved, _sha256(path),
+                              'Fees tab of the harvested building-permit pages')).lastrowid
+            rid = con.execute("INSERT INTO ingestion_runs (source_id,started_at,rows_in_source,rows_ingested,rows_rejected,"
+                              "conserved) VALUES (?,?,?,0,0,1)", (sid, now, len(recs))).lastrowid
+            ok, none, no_tab = 0, 0, []
+            for r in recs:
+                f = r.get('fees')
+                if f is None:
+                    no_tab.append(r['record']); continue
+                if not f:
+                    none += 1; continue
+                when = (r.get('fetched_at') or retrieved)[:10]
+                con.execute("INSERT INTO events (event_type_code,event_date,event_date_precision,source_record_key,"
+                            "source_id,ingestion_run_id,raw_payload,raw_description,created_at) "
+                            "VALUES ('fees_recorded',?,'day',?,?,?,?,?,?)",
+                            (when, r['record'], sid, rid, json.dumps(f),
+                             f"paid {f.get('total_paid', '$0.00')}; outstanding {f.get('total_outstanding', '$0.00')}", now))
+                ok += 1
+            # conserved: every page is a fee event, an empty fee tab (no fees), or a page with no fee tab (named)
+            con.execute("UPDATE ingestion_runs SET rows_ingested=?, rows_rejected=?, rejected_detail=?, conserved=? "
+                        "WHERE run_id=?", (ok, none + len(no_tab), f"{none} pages with an empty fee tab (no fees); no fee "
+                        f"tab: {', '.join(no_tab)}", int(ok + none + len(no_tab) == len(recs)), rid))
+            con.commit()
+        except Exception:
+            con.rollback()
+            raise
+        out[os.path.basename(path)] = dict(pages=len(recs), with_fees=ok, no_fees=none, no_fee_tab=len(no_tab))
+    return out
 
 
 DOCUMENT_ROLES = os.path.join(ROOT, 'data', 'derived', 'document_roles_evidence_2026-10-01.json')

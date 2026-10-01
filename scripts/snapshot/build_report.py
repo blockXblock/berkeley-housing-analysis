@@ -563,7 +563,9 @@ def s_ug():
     {table(['Streets', 'Total', 'Underground', 'Overhead', 'Share underground'], t1rows, right=range(1, 5))}
     <p class="note">Miles computed from the feet in Table 1 of the City's 2016 study (the table prints 149.9 overhead
     residential miles; its feet give 146.9). The study measured residential streets but priced only arterials and collectors,
-    and we found no City study that prices the rest. Lines along rear lot lines are not street miles and are not counted.</p>
+    and we found no City study that prices the rest. Lines along rear lot lines are not street miles and are not counted. We
+    computed the 34.6 underground miles (16%) from the study's own feet, before reading the City's 2024 hazard plan; the plan
+    gives the same figures.</p>
     <h3>The 2016 segment table: what it costs, street by street</h3>
     {table(['Network', 'Segments', 'Overhead', 'Underground', 'Cost (segments)', 'Report\'s printed total'], [
         ['Arterial', S['arterial']['segments'], f"{S['arterial']['overhead_mi']:.1f} mi", f"{S['arterial']['underground_mi']:.1f} mi", usd(S['arterial']['cost']), usd(sum(rn['arterial']))],
@@ -701,10 +703,25 @@ def s_fire():
     inspects about {n(H['ff_inspections'])} hill parcels a year; a ${H['calfire_grant']} million state grant (2024–2026) funds work
     on Grizzly Peak and evacuation routes; a 2025 ordinance sets ember-resistant zones next to homes; and in January 2024 the
     Council asked PG&amp;E to underground its lines in the highest-risk zone.</p>'''
+    fema = F['fema']
+    recent = [r for r in fema if (r['program_fy'] or 0) >= 2018]
     plan = f'''
-    <p class="note">The City's 2024 Local Hazard Mitigation Plan lists {H['lhmp_actions']} mitigation actions. The 2019 plan
-    lapsed on {H['lhmp_lapse']}, leaving Berkeley ineligible for some federal mitigation grants until the Council adopted the new
-    plan on March 18, 2025. Sources: {esc('; '.join(H['src']))}.</p>'''
+    <h3>The hazard plan, and the federal money it unlocks</h3>
+    <p class="note" style="font-size:.95rem">A current hazard plan is required for federal mitigation grants. The City's 2024 plan
+    lists {H['lhmp_actions']} mitigation actions. Its predecessor lapsed before the update was adopted:</p>
+    {table(['Date', 'Step'], [['June 2023', 'City staff begin the update (Fire Department)'], ['May 2024', 'First draft published for comment'],
+        ['November 2024', 'State review complete; plan sent to FEMA'], ['December 10, 2024', '2019 plan lapses; the City is "not eligible for certain mitigation grant funding"'],
+        ['January 13, 2025', 'FEMA finds the plan approvable'], ['January 22, 2025', 'Disaster and Fire Safety Commission recommends adoption'],
+        ['March 18, 2025', 'Council adopts the plan']])}
+    <p class="note">Whether the 98-day gap cost Berkeley a grant is not on the record. FEMA's data shows one Berkeley application,
+    $5 million for seismic retrofits of private buildings (DR-4699-0014), closed unfunded on December 12, 2024, two days after the
+    lapse, with no reason recorded; a near-identical $5 million application under another disaster remains pending. The most
+    recent approval was {usd(next(r['project_amount'] for r in recent if r['project'] == 'DR-4344-0026-R'))} for seismic
+    retrofits ({usd(next(r['federal_share_obligated'] for r in recent if r['project'] == 'DR-4344-0026-R'))} federal), approved in
+    March 2023. Still pending: {'; '.join(f"{usd(r['project_amount'])} ({r['project_type'].split(': ', 1)[-1].split(' - ')[0].lower()}, {r['subrecipient']}, {r['project']})" for r in recent if r['status'] == 'Pending' and r['disaster'] != 5545)}
+    (the 2025 wildfire applications also appear under a second disaster number, 5545).
+    All applications since 1990: {dl('fema_hazard_mitigation_berkeley.csv')}.</p>
+    <p class="note">Sources: {esc('; '.join(H['src']))}; OpenFEMA Hazard Mitigation Assistance Projects (fetched 2026-10-01).</p>'''
     body = quake + fire_intro + body + flood + plan
     return section('fire', '11 · Fire, flood and earthquake', 'The dangers, and what is being done', body)
 

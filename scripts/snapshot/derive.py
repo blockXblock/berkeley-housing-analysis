@@ -582,6 +582,22 @@ def stars_2025():
                               housed_pct=num(('PRE-3', 'Percentage of students that live in campus housing')))
 
 
+def fema_grants():
+    """Every FEMA Hazard Mitigation Assistance application with a Berkeley, California subrecipient (OpenFEMA
+    HazardMitigationAssistanceProjects v4, fetched 2026-10-01 into data/raw/hazards/openfema/)."""
+    rows = json.load(open(os.path.join(ROOT, 'data', 'raw', 'hazards', 'openfema', 'HMA_projects_berkeley.json')))['HazardMitigationAssistanceProjects']
+    keep = [dict(program_fy=r['programFy'], program=r['programArea'], disaster=r.get('disasterNumber'), project=r['projectIdentifier'],
+                 subrecipient=r['subrecipient'], status=r['status'], project_type=r['projectType'], project_amount=r.get('projectAmount'),
+                 federal_share_obligated=r.get('federalShareObligated'), date_approved=(r.get('dateApproved') or '')[:10],
+                 date_closed=(r.get('dateClosed') or '')[:10])
+            for r in rows if r['state'] == 'California']
+    keep.sort(key=lambda r: (r['program_fy'] or 0, r['project']))
+    write_csv('fema_hazard_mitigation_berkeley.csv', keep, 'grant application',
+              'Every FEMA hazard-mitigation grant application with a Berkeley, California subrecipient since 1990: program, '
+              'disaster, project type, amount, status and dates (OpenFEMA).')
+    FACTS['fema'] = keep
+
+
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--date', default='2026-10-01')
     src = os.path.join(ROOT, 'data', 'raw', 'snapshot', ap.parse_args().date)
@@ -600,6 +616,7 @@ def main():
     beso(pg)
     campus_sustainability()
     stars_2025()
+    fema_grants()
     FACTS['files'] = FILES
     FACTS['sources_manifest'] = {k: {kk: v[kk] for kk in ('url', 'fetched_at', 'sha256') if kk in v} for k, v in manifest.items()}
     json.dump(FACTS, open(os.path.join(OUT, 'facts.json'), 'w'), indent=1, default=lambda o: o.item() if hasattr(o, 'item') else str(o))

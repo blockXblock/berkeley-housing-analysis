@@ -494,7 +494,7 @@ Recorder deeds of trust; CTCAC; Secretary of State for owner LLCs).
 112,253 tenancies, all fields incl. tenancy dates; owner / owner business / manager as distinct actor roles). Approved
 and committed (`921e2ea`): **S002** attaches Shattuck's Phase 1 (B2019-05608) in a new `phase` role; **first BP =
 earliest issuance of master + ruled phase permits** (site work never sets it); **S003/S004** address aliases (1955/1959
-Shattuck; 2108 Berkeley Way, John's entrance observation -- he wrote "Bancroft", confirm); **ADU rule** as
+Shattuck; 2108 Berkeley Way, the main entrance per John, confirmed); **ADU rule** as
 `v_adu_rent_board` (Board-labelled ADU 26 / parcel registrations only 299 / no registration found 359; never mixed).
 Test build: RHNA credit through 2025 **1,971 -> 2,134** (+163 Shattuck; City 2,120). Publishing (John): full data in v4;
 pages show per-unit rents and status, organisation owners by name, individuals as "individual owner", tenancy year.

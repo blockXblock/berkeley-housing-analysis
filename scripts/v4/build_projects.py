@@ -436,7 +436,7 @@ def attach_ledgers(con, projects, master_of_s, sp, addr_of):
              ("ruling_id", "income_tier", "units", "restriction", "source_url")),
             ("classifications", CLASSIFICATIONS, lambda r: r["status"] == "approved", "city_record_keys",
              ("ruling_id", "classification", "value", "rhna_effect")),
-            ("funding", FUNDING, lambda r: True, None,
+            ("funding", FUNDING, lambda r: True, "city_record_keys",   # keys added by berkeley-data-25 (F006, F026)
              ("funding_id", "funder", "program", "instrument", "amount_usd", "action", "action_date", "status"))):
         for r in csv.DictReader(open(path)):
             if not ok(r):

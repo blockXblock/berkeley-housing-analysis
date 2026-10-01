@@ -5,6 +5,19 @@
 
 ---
 
+## 2026-10-01 — Berkeley Snapshot data report (docs/berkeley-snapshot-2026-10.html), on dev, not deployed
+
+**Built:** `scripts/snapshot/` (pull_sources.py pins sources by SHA-256; derive.py writes 34 map-ready files to
+`docs/data/snapshot/`; build_report.py renders the page; fetch_stars.py saves the UC Berkeley 2025 STARS report with John's
+AASHE login from `~/.aashe.env`, never printed). 14 sections: nine findings first, plain official-report voice, Vision 2050
+cited. **Findings to put to institutions before circulating (John's call):** the City's 2016 Harris undergrounding table
+omits Ashby Ave residential segments ($140.2M vs the quoted $134.8M); UC Berkeley's STARS energy entry (OP-5) omits the
+cogeneration plant's gas (~tenfold low; OP-6 emissions imply ~746,000 MWh). **Next:** hazards section (fire, flood,
+earthquake; agent research running); deploy (John). **Queued, separate document (John, 2026-10-01):** how Measure U fails to
+fund the right set of investments for Berkeley's challenges.
+
+---
+
 ## 2026-09-30 — Repo examination; CLEANUP DEFERRED until the v4 migration completes (John)
 
 **John: wait until the migration to v4 is complete, to be sure we captured the data we need; then clean.** Measured

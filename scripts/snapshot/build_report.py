@@ -131,8 +131,26 @@ def dl(name):
     return f'<a class="dl" href="data/snapshot/{name}">{esc(name)}</a>'
 
 
+LEDE = {
+    'people': 'How many people live in Berkeley, in what kinds of homes, and how that has changed since 2020.',
+    'tenure': 'Who rents and who owns, what homes cost, and what share of income rent takes.',
+    'income': 'Household income, poverty and education, citywide; the same measures for each block group are in the data files.',
+    'age': 'The ages and origins of Berkeley residents.',
+    'tide': 'Who comes into Berkeley to work, who leaves, where they come from and go, and how residents travel.',
+    'cars': 'How many vehicles are registered in Berkeley, by ZIP code and fuel, and how many households have none.',
+    'land': 'What the County assesses Berkeley\'s land and buildings at, who is exempt, and how value spreads across neighborhoods.',
+    'networks': 'The streets, water mains, sewers, storm drains, gas lines and poles under and over the city, how old they are, and what is not public.',
+    'undergrounding': 'How much of Berkeley still has overhead wires, and what the City\'s own studies say it costs to bury them.',
+    'water-energy': 'How much water and power Berkeley uses, and what can be known about use by building, block or neighborhood.',
+    'fire': 'How long it takes to leave the hills in a wildfire, and where the roads jam.',
+    'campus': 'What the campus and the Lab use and emit, what they report about it, and the plan to retire the campus\'s gas plant.',
+    'data': 'Every data file behind this report, what each holds, and where each source came from.',
+}
+
+
 def section(id_, kicker, title, body):
-    return f'<section class="page" id="{id_}"><div class="kicker">{kicker}</div><h2>{title}</h2>{body}</section>'
+    lede = f'<p class="lede" style="margin-bottom:.6rem">{LEDE[id_]}</p>' if id_ in LEDE else ''
+    return f'<section class="page" id="{id_}"><div class="kicker">{kicker}</div><h2>{title}</h2>{lede}{body}</section>'
 
 
 # ============================================================================================ sections
@@ -510,32 +528,31 @@ def s_ug():
     </div>
     <h3>Every street, by class: underground and overhead (miles, 2016)</h3>
     {table(['Streets', 'Total', 'Underground', 'Overhead', 'Share underground'], t1rows, right=range(1, 5))}
-    <p class="note">From Table 1 of the 2016 Harris study, computed from its feet. The table prints 149.9 overhead residential
-    miles, but its own 775,399 feet is 146.9 miles. Residential streets are measured but not costed in any City study.
-    Overhead lines that run behind houses, along rear lot lines, are not counted as street miles.</p>
+    <p class="note">Miles computed from the feet in Table 1 of the City's 2016 study (the table prints 149.9 overhead
+    residential miles; its feet give 146.9). The study measured residential streets but priced only arterials and collectors,
+    and we found no City study that prices the rest. Lines along rear lot lines are not street miles and are not counted.</p>
     <h3>The 2016 segment table: what it costs, street by street</h3>
     {table(['Network', 'Segments', 'Overhead', 'Underground', 'Cost (segments)', 'Report\'s printed total'], [
         ['Arterial', S['arterial']['segments'], f"{S['arterial']['overhead_mi']:.1f} mi", f"{S['arterial']['underground_mi']:.1f} mi", usd(S['arterial']['cost']), usd(sum(rn['arterial']))],
         ['Collector', S['collector']['segments'], f"{S['collector']['overhead_mi']:.1f} mi", f"{S['collector']['underground_mi']:.1f} mi", usd(S['collector']['cost']), usd(sum(rn['collector']))],
         ['<strong>Total</strong>', S['arterial']['segments'] + S['collector']['segments'], '', '', f"<strong>{usd(U['total'])}</strong>", f"{usd(sum(rn['arterial']) + sum(rn['collector']))} (headline {big(rn['headline'])})"],
     ], right=range(1, 6))}
-    <p class="note"><strong>A discrepancy in the City's table.</strong> {f"{esc(d['street'].title())}'s five residential-zone segments are priced in the table at {usd(d['segments_residential'])}, but its total row prints {usd(d['cost_residential'])}, and the arterial network's TOTAL COST leaves out all {usd(d['segments_residential'])}." if d else ''}
-    Summed segment by segment, the arterial and collector program costs {usd(U['total'])}, not the {big(rn['headline'])} quoted in the
-    2016 study and every report since. The collector network reproduces the report's totals to the dollar.
-    The costs exclude trenching on private property, service conversions, financing, engineering, construction management and street lighting.</p>
+    <p class="note">{f"The table prices {esc(d['street'].title())}'s five residential-zone segments at {usd(d['segments_residential'])}, then leaves them out of the street's total row ({usd(d['cost_residential'])}) and the arterial total." if d else ''}
+    The collector network adds up to the dollar. Costs are construction only, in 2016 dollars: no private-property trenching,
+    service conversions, engineering, financing or street lighting.</p>
     <h3>The 15 costliest overhead segments</h3>
     {table(['Street', 'From', 'To', 'Feet', 'Impact (3–15)', 'Cost'], [[esc(r['street'].title()), esc(r['seg_from'].title()), esc(r['seg_to'].title()), n(r['length_ft']), r['impact_total'], usd(r['cost_total'])] for r in U['top']], right={3, 4, 5})}
     <h3>Evacuation routes, 2019: cost per street</h3>
     {table(['Street', 'Complexity (1–5)', 'Overhead mi', 'FY2019', 'FY2023 program', 'FY2023 capital plan'],
            [[esc(r['street']), r['complexity_level'] or '—', n(r['overhead_centerline_miles'], 2), usd(r['total_cost']), usd(b23[r['street']]['total_cost']), usd(bc[r['street']]['total_cost'])] for r in sorted(b19, key=lambda r: -r['total_cost'])],
            right=range(1, 6))}
-    <p class="note">Cost per mile rises with construction complexity, from $4.08 million (level 1) to $6.8 million (level 5), street lighting included.
-    The 2018 Conceptual Study put the City's cost at {C['conceptual_per_mile']} a mile and {C['conceptual_range']} for all 37.9 miles.
-    <strong>Rule 20A</strong> (PG&amp;E ratepayer credits): about {usd(C['harris_rule20a_per_year'])} a year to Berkeley; the balance was
-    {usd(C['harris_rule20a_balance'])} in 2016 and {usd(C['bellecci_rule20a_balance'])} in 2019, most of it committed to
-    <strong>Underground Utility District 48</strong> (Grizzly Peak, Summit, Senior, Avenida: {C['uud48_parcels']} parcels along about {n(C['uud48_feet'])} feet of road).</p>
-    <p class="note">Maps: {dl('undergrounding_segments_harris_2016.csv')} ({len(csvrows('undergrounding_segments_harris_2016.csv'))} segments, each with street, from and to,
-    so it can be drawn on the City's street centerlines) and {dl('undergrounding_evacuation_routes_bellecci_2019.csv')}.</p>'''
+    <p class="note">A mile costs $4.08 million on the simplest streets and $6.8 million on the hardest, lighting included. The
+    City's 2018 Conceptual Study put its own share at {C['conceptual_per_mile']} a mile, {C['conceptual_range']} for all 37.9
+    miles. PG&amp;E ratepayer credits (Rule 20A) bring Berkeley about {usd(C['harris_rule20a_per_year'])} a year; the
+    {usd(C['bellecci_rule20a_balance'])} balance in 2019 was mostly committed to Underground Utility District 48 in the hills
+    (Grizzly Peak, Summit, Senior, Avenida: {C['uud48_parcels']} parcels).</p>
+    <p class="note">Maps: {dl('undergrounding_segments_harris_2016.csv')} ({len(csvrows('undergrounding_segments_harris_2016.csv'))}
+    segments, each named by street, from and to) and {dl('undergrounding_evacuation_routes_bellecci_2019.csv')}.</p>'''
     return section('undergrounding', '9 · Undergrounding', 'What it costs to bury the wires', body)
 
 
@@ -578,7 +595,7 @@ def s_water_energy():
         ['Street or block', '<span class="no">No: groups must have 100 homes or 15 businesses (CPUC rule)</span>', '<span class="no">No</span>'],
         ['Building', f'<span class="part">Only buildings over 25,000 sq ft (about {B["buildings"]})</span>', '<span class="no">No: accounts are confidential</span>'],
     ])}
-    <p class="note">PG&amp;E's ZIP-code files sit behind a short registration form (CPUC decision D.14-05-016); they are the next pull.
+    <p class="note">PG&amp;E's ZIP-code files sit behind a short registration form (CPUC decision D.14-05-016) and have not yet been downloaded.
     Finer grain needs a request: aggregated use by block group from PG&amp;E, or the City's metered total from EBMUD under the Public Records Act.</p>'''
     return section('water-energy', '10 · Water and power', 'What the city uses, and what can be known', body)
 
@@ -655,39 +672,39 @@ def s_campus():
                 for r in CS['ucb']['rows'] if r['year'] >= 2015]
     water_rows = [[k, n(v), n(CS['lbnl']['water_gal_per_person'].get(k))] for k, v in CS['ucb']['water_gal_per_person'].items()]
     ren_rows = [[esc(k), n(v.get('2018')), n(v.get('2024'))] for k, v in CS['ucb']['renewable_mwh'].items()]
+    tot_mwh = ST['total_mwh'] - ST['gas_mwh'] + ST['implied_gas_mwh']
+    plan_rows = [['April 2023', 'Campus fact sheet', 'Gas plant retired in 2028'],
+                 ['May 2024', 'Regents approve $476.6 million budget', 'Includes "geothermal heat exchange wells under the plant"'],
+                 ['May 2024', 'Campus report cited by a STARS reviewer', 'Completion in 2033'],
+                 ['July 2025', 'Regents approve Phase 1 design', 'Construction 2026–2030; no geothermal wells in the scope'],
+                 ['2026', 'Project schedule', 'Utility work from summer 2026; plant built spring 2027 to summer 2029; buildings converted by summer 2030']]
     body = f'''
-    <p class="note" style="font-size:.95rem">The University and the Lab run their own power, steam, roads and parking, and the
-    City's figures leave them out: the City's community greenhouse-gas inventory excludes both, and the City's maps stop at
-    their boundaries. The Lab straddles the city line: "the western half of the Lab campus is within the City of Berkeley;
-    the eastern half is within the city of Oakland."</p>
+    <p class="note" style="font-size:.95rem">The University and the Lab run their own power, steam, roads and parking. The
+    City's figures leave them out: its greenhouse-gas inventory excludes both, and its maps stop at their boundaries. The Lab
+    straddles the city line, its western half in Berkeley and its eastern half in Oakland.</p>
     {table(['', 'UC Berkeley', 'Berkeley Lab (LBNL)', 'Together'], rows)}
-    <p class="note"><strong>The campus's national sustainability report leaves out its power plant.</strong> In its 2025 STARS
-    report the campus gives its 2023 energy use as {ST['total_mwh']:,.0f} MWh, including {ST['gas_mwh']:,.0f} MWh of natural gas, while
-    describing the gas-fired cogeneration plant as "the primary source for electricity and heating for campus buildings." The same
-    report's emissions credit gives {ST['stationary_t']:,.0f} tonnes of CO₂e from burning fuel on site in 2023, which at the campus's
-    own factor (53.02 kg of CO₂ per MMBtu) means about {round(ST['implied_gas_mwh'], -3):,.0f} MWh of gas (the CO₂ factor alone slightly overstates it), some {ST['implied_gas_mwh'] / ST['gas_mwh']:.0f} times the
-    energy credit's figure. With that gas, the campus used roughly {(ST['total_mwh'] - ST['gas_mwh'] + ST['implied_gas_mwh']) / 1000:,.0f} thousand MWh,
-    about {(ST['total_mwh'] - ST['gas_mwh'] + ST['implied_gas_mwh']) * 3412.14 / sqft:.0f} kBtu per square foot, which matches the
-    {next(r['eui_kbtu_per_sqft'] for r in CS['ucb']['rows'] if r['year'] == 2023):.0f} the UC system report gives for 2023. The STARS energy figure
-    ({ST['total_mwh'] * 3412.14 / sqft:.0f} kBtu per square foot) understates the campus's energy use about tenfold. For scale, the campus's gas, about
-    {gas_therms_implied / 1e6:.0f} million therms, is six times the {beso['therms'] / 1e6:.1f} million therms reported by all of the City's large
-    buildings in 2024. Data: {dl('stars_2025_ucb_operations.csv')}.</p>
-    <p class="note"> Its gas-fired
-    cogeneration plant produced {n(U['ghg_cogen'][0])} of the campus's {n(U['ghg'][0])} tonnes of CO₂e in 2024; the Berkeley
-    Clean Energy Campus project replaces it with an electric heating and cooling plant serving about 32 buildings in its first
-    phase. The Regents approved a Phase 1 budget of $476.6 million in May 2024
-    ($249 million of it from the State, through debt service, and the rest from renewable-energy tax credits and campus funds).
-    That budget item included "geothermal heat exchange wells under the plant," the grid of boreholes Professor Kenichi Soga's
-    research tested; the scope the Regents approved in July 2025, after the campus "refined the design and scope… to align
-    with the approved project budget," mentions a 2-million-gallon chilled-water tank but no geothermal wells. The plant goes
-    under North Field, the recreation field north of Hearst Gym, with a grass field on its roof. The retirement date has slid:
-    2028 in the campus's 2023 fact sheet, "by 2030" in the Regents' 2025 approval (utility relocation from summer 2026, plant
-    construction spring 2027 to summer 2029, building conversions to summer 2030), and 2033 in a May 2024 campus report a
-    STARS reviewer cited. Until then the gas plant runs. The two institutions' {gu + gl:,.0f} tonnes equal
-    {100 * (gu + gl) / CITED['cap']['ghg_2023']:.0f}% of the City's own community inventory
-    ({n(CITED['cap']['ghg_2023'])} tonnes, 2023), which does not include them; the inventories are compiled differently.
-    (The campus's own inventory page gives {n(U['ghg'][0])} tonnes for 2024, counting Scope 1 before its
-    {n(last('ucb')['compliance_offsets'])} tonnes of compliance offsets.)</p>
+    <p class="note">Together the two emitted {gu + gl:,.0f} tonnes of CO₂e in 2024, equal to {100 * (gu + gl) / CITED['cap']['ghg_2023']:.0f}%
+    of the City's community inventory ({n(CITED['cap']['ghg_2023'])} tonnes, 2023); the inventories are compiled differently.
+    The campus's own inventory page gives {n(U['ghg'][0])} tonnes, counting before {n(last('ucb')['compliance_offsets'])} tonnes
+    of offsets.</p>
+    <h3>The campus's energy, as reported and as implied</h3>
+    <p class="note" style="font-size:.95rem">In its 2025 STARS report the campus gives its 2023 energy use as {ST['total_mwh']:,.0f} MWh,
+    {ST['gas_mwh']:,.0f} MWh of it natural gas, and calls its gas-fired cogeneration plant "the primary source for electricity and
+    heating for campus buildings." The same report counts {ST['stationary_t']:,.0f} tonnes of CO₂e from burning fuel on site; at the
+    campus's own factor of 53.02 kg per MMBtu, that is about {round(ST['implied_gas_mwh'], -3):,.0f} MWh of gas. Counting it, the
+    campus used about {round(tot_mwh, -3):,.0f} MWh, or {tot_mwh * 3412.14 / sqft:.0f} kBtu per square foot, close to the
+    {next(r['eui_kbtu_per_sqft'] for r in CS['ucb']['rows'] if r['year'] == 2023):.0f} the UC system reports. The STARS entry,
+    {ST['total_mwh'] * 3412.14 / sqft:.0f} kBtu per square foot, appears to leave the plant out. The campus's gas, about
+    {gas_therms_implied / 1e6:.0f} million therms a year, is six times what all of the City's large buildings report. Data:
+    {dl('stars_2025_ucb_operations.csv')}.</p>
+    <h3>Retiring the gas plant</h3>
+    <p class="note" style="font-size:.95rem">The plant produced {n(U['ghg_cogen'][0])} of the campus's {n(U['ghg'][0])} tonnes in 2024.
+    The Berkeley Clean Energy Campus project replaces it with an electric heating and cooling plant under North Field, north of
+    Hearst Gym, with a playing field on its roof, a 2-million-gallon chilled-water tank, and new hot- and cold-water piping to about
+    32 buildings. The State is paying $249 million of the $476.6 million first phase. The date has moved:</p>
+    {table(['When', 'Document', 'What it says'], plan_rows)}
+    <p class="note">The geothermal wells drew on Professor Kenichi Soga's 400-foot test borehole; the July 2025 scope was trimmed
+    "to align with the approved project budget." Until the new plant runs, the gas plant does.</p>
     <h3>What the two report on their own sustainability</h3>
     <p class="note" style="font-size:.95rem">Both report every year to the UC Office of the President (the UC Annual Report on
     Sustainable Practices); the Lab also files a Site Sustainability Plan with the Department of Energy, and the campus reports
@@ -706,10 +723,9 @@ def s_campus():
     {n(CS['ucb']['water_gal_per_person']['2025'])} gallons per person in 2025, against a 2025 goal of 13,105.</p>
     {table(['Campus renewable electricity (MWh)', '2018', '2024'], ren_rows, right={1, 2})}
     </div></div>
-    <p class="note">Not published: the campus's total electricity use, miles of steam lines and utility tunnels, and how the
-    campus and Lab acreage divide between Berkeley and Oakland. Several campus figures date from the 2018-19 baseline of the
-    2021 Long Range Development Plan, the most recent the University has published. The 2021 settlement with the City has
-    the University paying about $82.6 million over 16 years (press reports; the signed agreement was not available).</p>'''
+    <p class="note">Not published: the campus's total electricity use (the plant's own generation is reported nowhere), miles of
+    steam lines and tunnels, and how the campus and Lab land divides between Berkeley and Oakland. Under a 2021 settlement the
+    University pays the City about $82.6 million over 16 years (press reports; the agreement itself was not available).</p>'''
     return section('campus', '12 · The University and the Lab', 'UC Berkeley and Berkeley Lab, counted on their own', body)
 
 

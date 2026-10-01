@@ -244,8 +244,15 @@ FROM one JOIN projects p USING(project_id) JOIN events e USING(event_id)
 #   contractor_of_record / _additional the master and phase building permits' Licensed Professionals (CSLB number)
 #   licensed_professional              another licence type on those permits, its type in the note
 #   registry_owner / _owner_business / registry_manager   the Rent Board registry on the project's parcels
-#   business_licensee                  a City business licence on the project's parcels or addresses
-# Funders are not actors: they are the funding ledger on v_projects. Developer and architect have no source here yet.
+#   permit_owner                       the owner the master / phase building permit page lists
+#   city_reviewer                      City staff who marked review tasks on the project's Planning records
+#   inspector                          City inspectors on the building's inspections (as the record names them)
+#   rental_operator / business_tenant  City business licences on the project's parcels or addresses: a 'Rental of Real
+#                                      Property' licence is the rental operator; any other is a business there
+#   property_manager / rental_owner / rental_owner_business   the Rent Board registry (its Manager / Owner fields)
+#   funder                             the funding ledger (public money), with program, instrument and amount
+# John 2026-10-01: "add any other roles we didn't, such as rental operator or manager". Developer and architect come
+# from the documents' title blocks (document_roles evidence) once loaded.
 V_PROJECT_PEOPLE = r"""
 CREATE VIEW v_project_people AS
 WITH pk AS (SELECT project_id, json_extract(notes, '$.project_key') project_key FROM projects),
@@ -262,23 +269,43 @@ JOIN events e ON e.source_record_key = pr.record_key AND e.event_type_code IN ('
 JOIN actor_actions aa ON aa.event_id = e.event_id AND aa.role IN ('record_owner', 'applicant')
 JOIN actors a USING(actor_id) LEFT JOIN sources s ON s.source_id = aa.source_id
 UNION ALL
+SELECT DISTINCT pk.project_key, 'city_reviewer', a.display_name, a.actor_id, s.source_kind, e.source_record_key, NULL
+FROM pk JOIN project_records pr USING(project_id)
+JOIN events e ON e.source_record_key = pr.record_key AND e.event_type_code = 'planning_task'
+JOIN actor_actions aa ON aa.event_id = e.event_id AND aa.role = 'marked_review_task' 
+JOIN actors a USING(actor_id) LEFT JOIN sources s ON s.source_id = aa.source_id
+UNION ALL
 SELECT pk.project_key, aa.role, a.display_name, a.actor_id, s.source_kind, e.source_record_key, aa.coverage_note
 FROM pk JOIN project_structures ps USING(project_id)
 JOIN structure_events se ON se.structure_id = ps.structure_id AND se.role_in_structure IN ('master', 'phase')
 JOIN events e ON e.event_id = se.event_id
 JOIN actor_actions aa ON aa.event_id = e.event_id AND aa.role IN ('contractor_of_record', 'contractor_additional',
-                                                                 'licensed_professional')
+                                                                 'licensed_professional', 'permit_owner')
 JOIN actors a USING(actor_id) LEFT JOIN sources s ON s.source_id = aa.source_id
 UNION ALL
-SELECT DISTINCT pk.project_key, aa.role, a.display_name, a.actor_id, s.source_kind, NULL, aa.coverage_note
+SELECT DISTINCT pk.project_key, CASE aa.role WHEN 'registry_manager' THEN 'property_manager'
+       WHEN 'registry_owner' THEN 'rental_owner' WHEN 'registry_owner_business' THEN 'rental_owner_business' END,
+       a.display_name, a.actor_id, s.source_kind, NULL, 'as the Rent Board registry lists it, 2026-07-13'
 FROM pk JOIN cur USING(project_id)
 JOIN events e ON e.event_type_code = 'registry_unit' AND e.raw_apn = cur.apn
 JOIN actor_actions aa ON aa.event_id = e.event_id
 JOIN actors a USING(actor_id) LEFT JOIN sources s ON s.source_id = aa.source_id
 UNION ALL
-SELECT b.project_key, 'business_licensee', COALESCE(b.business_name, b.dba), NULL, 'city_business_licenses', b.license,
-       b.sub_type
+SELECT b.project_key, CASE WHEN b.sub_type = 'Rental of Real Property' THEN 'rental_operator' ELSE 'business_tenant' END,
+       COALESCE(b.business_name, b.dba), NULL, 'city_business_licenses', b.license, b.sub_type || ' -- ' || COALESCE(b.business_description, '')
 FROM v_project_businesses b
+UNION ALL
+SELECT DISTINCT pk.project_key, 'inspector', trim(replace(replace(json_extract(e.raw_payload, '$.inspector'), '   ', ' '), '  ', ' ')),
+       NULL, s.source_kind, NULL, 'as the inspection record names them'
+FROM pk JOIN project_structures ps USING(project_id) JOIN structure_events se USING(structure_id)
+JOIN events e ON e.event_id = se.event_id AND e.event_type_code = 'inspection'
+LEFT JOIN sources s ON s.source_id = e.source_id
+WHERE COALESCE(trim(json_extract(e.raw_payload, '$.inspector')), '') != ''
+UNION ALL
+SELECT pk.project_key, 'funder', json_extract(f.value, '$.funder'), NULL, 'funding_ledger', json_extract(f.value, '$.funding_id'),
+       json_extract(f.value, '$.program') || ' -- ' || COALESCE(json_extract(f.value, '$.instrument'), '') || ' -- $' ||
+       COALESCE(json_extract(f.value, '$.amount_usd'), '?')
+FROM pk JOIN projects p USING(project_id), json_each(json_extract(p.notes, '$.funding')) f
 """
 
 VIEWS = {"v_projects": V_PROJECTS, "v_project_timeline": V_PROJECT_RECORDS, "v_adu_rent_board": V_ADU_RENT_BOARD,

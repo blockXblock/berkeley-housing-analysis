@@ -821,7 +821,8 @@ def load_building_professionals(con, harvests=BUILDING_HARVESTS):
     Contractor' -> contractor_of_record (the first listed) / contractor_additional (the 'Additional Licensed
     Professionals'); any other type -> licensed_professional, its type in the coverage note (never guessed to be an
     architect). Anchored on the permit's issuance event, else its earliest event. A permit not in the events is
-    rejected with its reason."""
+    rejected with its reason. The page's OWNER field (NAME * mailing address, as the planning loader reads it) becomes
+    role permit_owner -- the owner the BUILDING permit lists at retrieval, a separate claim from the assessor's."""
     import datetime as dt
     from scripts.housing_rules.owner_name import is_organisation
     now = dt.datetime.now(dt.timezone.utc).isoformat()
@@ -830,7 +831,7 @@ def load_building_professionals(con, harvests=BUILDING_HARVESTS):
                                     "WHERE event_type_code LIKE 'permit_%' ORDER BY source_record_key, "
                                     "event_type_code != 'permit_issued', event_date, event_id"):
         anchor.setdefault(k, eid)
-    ident = {}
+    ident, owners = {}, {}
     out = {}
     for path, retrieved, note in harvests:
         loc = os.path.relpath(path, ROOT)
@@ -849,6 +850,16 @@ def load_building_professionals(con, harvests=BUILDING_HARVESTS):
                 if 'licensed_professionals' not in r:
                     bad.append(f"{r['record']}: parsed without the licensed-professional parser"); continue
                 ok += 1
+                oname = (r.get('owner') or '').split(' * ')[0].strip()
+                if oname:
+                    if oname not in owners:
+                        owners[oname] = con.execute("INSERT INTO actors (actor_kind,display_name,role_class) VALUES "
+                                                    "(?,?,'owner')", ('organization' if is_organisation(oname) else 'person',
+                                                                      oname)).lastrowid
+                    con.execute("INSERT INTO actor_actions (actor_id,event_id,entity_type,entity_id,role,source_id,"
+                                "coverage_note) VALUES (?,?,'permit_event',?,'permit_owner',?,'owner as the Accela building "
+                                "permit lists it, at retrieval')", (owners[oname], eid, eid, sid))
+                    acts += 1
                 for i, p in enumerate(r['licensed_professionals']):
                     names = [n for n in p.get('names') or [] if '@' not in n]
                     company = names[-1] if names else (p.get('business_license') or '?')

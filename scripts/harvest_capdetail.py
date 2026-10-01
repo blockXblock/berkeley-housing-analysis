@@ -57,16 +57,19 @@ def queue(named: set[str]) -> list[dict]:
     the list this function is given. A named record that is absent or has no capdetail_href is reported by the
     caller, never silently skipped."""
     recs: dict[str, dict] = {}
-    for fn in glob.glob(str(ROOT / "data/raw/accela/date_range/Planning_*.jsonl")):
+    # Planning AND Building lists (2026-10-01): building permits' detail pages carry the Licensed Professionals
+    # (architect, contractor) that no other public record names. The Building list keys on "Permit Number".
+    for fn in glob.glob(str(ROOT / "data/raw/accela/date_range/Planning_*.jsonl")) + \
+              glob.glob(str(ROOT / "data/raw/accela/date_range/Building_*.jsonl")):
         for line in open(fn):
             try:
                 d = json.loads(line)
             except Exception:
                 continue
-            n = str(d.get("Record Number") or "").strip()
+            n = str(d.get("Record Number") or d.get("Permit Number") or "").strip()
             if n and n not in recs:
                 recs[n] = d
-    return [{"record": n, "href": d["capdetail_href"], "record_type": d.get("Record Type"),
+    return [{"record": n, "href": d["capdetail_href"], "record_type": d.get("Record Type") or d.get("Project Name"),
              "list_status": d.get("Status"), "list_date": d.get("Date")}
             for n, d in sorted(recs.items()) if n in named and d.get("capdetail_href")]
 

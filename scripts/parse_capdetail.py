@@ -125,6 +125,42 @@ def parse_parcels(soup: BeautifulSoup) -> list[str]:
     return sorted({m.group(1).strip() for m in _PARCEL.finditer(div.get_text(" ", strip=False))})
 
 
+def parse_licensed_professionals(soup: BeautifulSoup) -> list[dict]:
+    """BUILDING permits' Licensed Professionals (2026-10-01): the contractor / architect / engineer of record, the only
+    public record that names them. Read from the page's STRUCTURE (machine layout), not its prose: each professional is
+    one cell of #tbl_licensedps -- name lines up to the business licence (BL-...), then address and phones, then a
+    licence-TYPE label ("Construction or Contractor", ...) followed by a small table holding the licence board and
+    number ("State CSLB #:", 818919). Source-faithful strings; nothing normalised or guessed."""
+    t = soup.find(id="tbl_licensedps")
+    out = []
+    if not t:
+        return out
+    for td in t.find_all("td", recursive=True):
+        if td.get("class") == ["td_child_left"] or not td.find("table") or td.find("td", class_="td_child_left"):
+            continue
+        lines, lic_type, board, number = [], None, None, None
+        for node in td.children:
+            name = getattr(node, "name", None)
+            if name is None:
+                txt = str(node).strip()
+                if txt:
+                    lines.append(txt)
+            elif name == "table":
+                cells = [c.get_text(" ", strip=True) for c in node.find_all("td")]
+                if len(cells) >= 2 and "#" in cells[0]:
+                    board, number = cells[0].rstrip(":").strip(), cells[1].strip()
+                    if lines and not lines[-1].startswith("BL-"):
+                        lic_type = lines.pop()               # the bare label right before the licence table
+        if not (number or any(l.startswith("BL-") for l in lines)):
+            continue
+        bl = next((l for l in lines if l.startswith("BL-")), None)
+        names = lines[:lines.index(bl)] if bl else lines[:1]
+        addr = lines[lines.index(bl) + 1:] if bl else lines[1:]
+        out.append({"names": names, "business_license": bl, "address": addr, "license_type": lic_type,
+                    "license_board": board, "license_number": number})
+    return out
+
+
 def parse_related_records(soup: BeautifulSoup) -> list[dict]:
     """Related Records -> the linked records, with the RELATIONSHIP where the page states it.
 
@@ -216,6 +252,7 @@ def parse_capdetail(page_html: str) -> dict:
     return {
         **parse_record_details(soup),
         "parcels_raw": parse_parcels(soup),
+        "licensed_professionals": parse_licensed_professionals(soup),
         "processing_status": parse_processing_status(soup),
         "related_records": parse_related_records(soup),
     }

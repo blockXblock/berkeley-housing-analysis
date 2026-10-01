@@ -351,7 +351,16 @@ Pablo -> UP2006-0109, the rules picked a later accessory-building AUP; G012 1698
 ("Completeness Review -> Complete", "Prepare Notice of Administrative Decision -> Completed", "Case Closed ->
 Approved") is outside the 2026-09-28 milestone rule; needs John's ruling on an extension.
 
-**NEXT:** John on G011/G012 + the pre-2015 milestone vocabulary -> projects write step (new code) -> rebuild -> swap.
+**2026-09-30 (evening):** John approved G011 (2747 San Pablo -> UP2006-0109), G012 (1698 University -> MODUP2007-0027)
+and the pre-2015 milestone wording (`053c428`: pre-2015 entitled 27 -> 161; no 2015+ application's dates moved).
+**PROJECTS WRITE STEP BUILT** (`76519ba`): the chain is now **A -> B -> C -> F -> build_structures -> build_projects**.
+Chain from raw (sha 7070646d): **1,546 projects** (276 application+buildings, 403 application-only, 867 building-only),
+all 1,186 buildings homed once, 5,561 units, 380 with an entitlement date; baseline
+`projects_baseline_2026-09-30.json`. Project->record links live in projects.notes (JSON): a `project_records`
+table is John's call. CLAUDE.md's chain line needs updating (John's OK). **Live is behind**: +3,992 Tier 1
+planning events and no projects yet -- swap needs John's unlock.
+
+**NEXT:** John unlocks -> swap -> phase 4 (names, coordinates, geometry, heights, applicants) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.
 ---
 

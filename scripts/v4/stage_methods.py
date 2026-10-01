@@ -804,6 +804,83 @@ def load_parcels(con, parcels_db=PARCELS_DB, owners_csv=OWNERS_CSV):
     return out
 
 
+BUILDING_HARVESTS = (
+    # Licensed Professionals of every master building permit (John, 2026-10-01: separate developer / owner /
+    # architect / builder). Parsed from the saved CapDetail pages with parse_licensed_professionals (662f0d9).
+    (os.path.join(ROOT, 'data', 'raw', 'accela_capdetail', 'building_capdetail_2026-10-01.jsonl'), '2026-10-01',
+     'CapDetail harvest of the master building permits (Licensed Professionals); raw pages pinned in '
+     'data/raw/accela_capdetail/pages_manifest_2026-10-01_building.csv'),
+)
+
+
+def load_building_professionals(con, harvests=BUILDING_HARVESTS):
+    """The LICENSED PROFESSIONALS a building permit names (the contractor of record, sometimes more) -> actors with
+    their own role, never inferred from another role. Identity = the licence the page states (State CSLB #, else the
+    City business licence BL-...), so one contractor across many buildings is ONE actor; the company is the last name
+    line, a contact person (if any) stays in notes as written. Role from the page's licence TYPE: 'Construction or
+    Contractor' -> contractor_of_record (the first listed) / contractor_additional (the 'Additional Licensed
+    Professionals'); any other type -> licensed_professional, its type in the coverage note (never guessed to be an
+    architect). Anchored on the permit's issuance event, else its earliest event. A permit not in the events is
+    rejected with its reason."""
+    import datetime as dt
+    from scripts.housing_rules.owner_name import is_organisation
+    now = dt.datetime.now(dt.timezone.utc).isoformat()
+    anchor = {}
+    for k, eid, t, d in con.execute("SELECT source_record_key, event_id, event_type_code, event_date FROM events "
+                                    "WHERE event_type_code LIKE 'permit_%' ORDER BY source_record_key, "
+                                    "event_type_code != 'permit_issued', event_date, event_id"):
+        anchor.setdefault(k, eid)
+    ident = {}
+    out = {}
+    for path, retrieved, note in harvests:
+        loc = os.path.relpath(path, ROOT)
+        assert not con.execute("SELECT 1 FROM sources WHERE locator=?", (loc,)).fetchone(), f'already loaded: {loc}'
+        recs = [json.loads(l) for l in open(path)]
+        try:
+            sid = con.execute("INSERT INTO sources (source_kind,locator,retrieved_at,checksum,notes) VALUES "
+                              "('accela_capdetail_building',?,?,?,?)", (loc, retrieved, _sha256(path), note)).lastrowid
+            rid = con.execute("INSERT INTO ingestion_runs (source_id,started_at,rows_in_source,rows_ingested,"
+                              "rows_rejected,conserved) VALUES (?,?,?,0,0,1)", (sid, now, len(recs))).lastrowid
+            ok, bad, acts = 0, [], 0
+            for r in recs:
+                eid = anchor.get(r['record'])
+                if eid is None:
+                    bad.append(f"{r['record']}: no permit event"); continue
+                if 'licensed_professionals' not in r:
+                    bad.append(f"{r['record']}: parsed without the licensed-professional parser"); continue
+                ok += 1
+                for i, p in enumerate(r['licensed_professionals']):
+                    names = [n for n in p.get('names') or [] if '@' not in n]
+                    company = names[-1] if names else (p.get('business_license') or '?')
+                    key = (p.get('license_board'), p.get('license_number')) if p.get('license_number') \
+                        else ('BL', p.get('business_license')) if p.get('business_license') else ('name', company)
+                    ctype = p.get('license_type') or ''
+                    if ctype.startswith('Construction'):
+                        role, rc = ('contractor_of_record' if i == 0 else 'contractor_additional'), 'contractor'
+                    else:
+                        role, rc = 'licensed_professional', 'licensed_professional'
+                    if key not in ident:
+                        ident[key] = con.execute(
+                            "INSERT INTO actors (actor_kind,display_name,role_class,notes) VALUES (?,?,?,?)",
+                            ('organization' if is_organisation(company) else 'person', company, rc,
+                             json.dumps({"license_board": p.get('license_board'), "license_number": p.get('license_number'),
+                                         "business_license": p.get('business_license'), "address": p.get('address'),
+                                         "contact_names": names[:-1]}))).lastrowid
+                    con.execute("INSERT INTO actor_actions (actor_id,event_id,entity_type,entity_id,role,source_id,"
+                                "coverage_note) VALUES (?,?,'permit_event',?,?,?,?)",
+                                (ident[key], eid, eid, role, sid, f"{r['record']} Licensed Professionals: {ctype or 'type not stated'}"))
+                    acts += 1
+            con.execute("UPDATE ingestion_runs SET rows_ingested=?, rows_rejected=?, rejected_detail=?, conserved=? "
+                        "WHERE run_id=?", (ok, len(bad), '; '.join(bad)[:3000] or None, int(ok + len(bad) == len(recs)), rid))
+            con.commit()
+        except Exception:
+            con.rollback()
+            raise
+        out[os.path.basename(path)] = dict(records=len(recs), loaded=ok, rejected=len(bad), actions=acts)
+    out['_actors'] = len(ident)
+    return out
+
+
 ACCELA_LIST_MANIFEST = os.path.join(ROOT, 'data', 'manifests', 'accela_list_dump_2026-10-01.json')
 
 

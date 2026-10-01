@@ -237,8 +237,53 @@ SELECT json_extract(p.notes, '$.project_key') AS project_key, p.name, e.source_r
 FROM one JOIN projects p USING(project_id) JOIN events e USING(event_id)
 """
 
+# PEOPLE AND MONEY BY ROLE (John, 2026-10-01: "developer is not owner of record, just as architect or builder is
+# not"). Every actor role on a project, each from ITS OWN record, never inferred from another role:
+#   owner_of_record                    County assessor roll, on the project's current parcels
+#   record_owner / applicant           the project's Planning records (CapDetail owner; the 2025-26 log's applicant)
+#   contractor_of_record / _additional the master and phase building permits' Licensed Professionals (CSLB number)
+#   licensed_professional              another licence type on those permits, its type in the note
+#   registry_owner / _owner_business / registry_manager   the Rent Board registry on the project's parcels
+#   business_licensee                  a City business licence on the project's parcels or addresses
+# Funders are not actors: they are the funding ledger on v_projects. Developer and architect have no source here yet.
+V_PROJECT_PEOPLE = r"""
+CREATE VIEW v_project_people AS
+WITH pk AS (SELECT project_id, json_extract(notes, '$.project_key') project_key FROM projects),
+cur AS (SELECT DISTINCT pp.project_id, pi.apn_normalized apn FROM project_parcels pp
+        JOIN parcel_identifiers pi ON pi.parcel_id = pp.parcel_id AND pi.is_current = 1)
+SELECT pk.project_key, aa.role, a.display_name name, a.actor_id, s.source_kind source, NULL record, aa.coverage_note note
+FROM pk JOIN project_parcels pp USING(project_id)
+JOIN actor_actions aa ON aa.entity_type = 'parcel' AND aa.entity_id = pp.parcel_id AND aa.role = 'owner_of_record'
+JOIN actors a USING(actor_id) LEFT JOIN sources s ON s.source_id = aa.source_id
+UNION ALL
+SELECT pk.project_key, aa.role, a.display_name, a.actor_id, s.source_kind, e.source_record_key, aa.coverage_note
+FROM pk JOIN project_records pr USING(project_id)
+JOIN events e ON e.source_record_key = pr.record_key AND e.event_type_code IN ('planning_filed', 'planning_log_entry')
+JOIN actor_actions aa ON aa.event_id = e.event_id AND aa.role IN ('record_owner', 'applicant')
+JOIN actors a USING(actor_id) LEFT JOIN sources s ON s.source_id = aa.source_id
+UNION ALL
+SELECT pk.project_key, aa.role, a.display_name, a.actor_id, s.source_kind, e.source_record_key, aa.coverage_note
+FROM pk JOIN project_structures ps USING(project_id)
+JOIN structure_events se ON se.structure_id = ps.structure_id AND se.role_in_structure IN ('master', 'phase')
+JOIN events e ON e.event_id = se.event_id
+JOIN actor_actions aa ON aa.event_id = e.event_id AND aa.role IN ('contractor_of_record', 'contractor_additional',
+                                                                 'licensed_professional')
+JOIN actors a USING(actor_id) LEFT JOIN sources s ON s.source_id = aa.source_id
+UNION ALL
+SELECT DISTINCT pk.project_key, aa.role, a.display_name, a.actor_id, s.source_kind, NULL, aa.coverage_note
+FROM pk JOIN cur USING(project_id)
+JOIN events e ON e.event_type_code = 'registry_unit' AND e.raw_apn = cur.apn
+JOIN actor_actions aa ON aa.event_id = e.event_id
+JOIN actors a USING(actor_id) LEFT JOIN sources s ON s.source_id = aa.source_id
+UNION ALL
+SELECT b.project_key, 'business_licensee', COALESCE(b.business_name, b.dba), NULL, 'city_business_licenses', b.license,
+       b.sub_type
+FROM v_project_businesses b
+"""
+
 VIEWS = {"v_projects": V_PROJECTS, "v_project_timeline": V_PROJECT_RECORDS, "v_adu_rent_board": V_ADU_RENT_BOARD,
-         "v_project_records_listed": V_PROJECT_LISTED, "v_project_businesses": V_PROJECT_BUSINESSES}
+         "v_project_records_listed": V_PROJECT_LISTED, "v_project_businesses": V_PROJECT_BUSINESSES,
+         "v_project_people": V_PROJECT_PEOPLE}
 
 
 def main() -> int:

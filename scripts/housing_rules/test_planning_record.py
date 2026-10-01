@@ -20,6 +20,33 @@ CASES = [
 
 # ---- milestones(): real records from the 2026-09-26 CapDetail harvest; tasks as (task, status, date)
 MILESTONE_CASES = [
+    # ---- PRE-2015 wording (John, 2026-09-30), real records from the 2006-2014 backfill
+    # UP2010-0078 Acheson Commons: "ZAB Meeting -> Completed"; outcome from "Case Closed -> Approved", date from the meeting
+    ('UP2010-0078', '11/22/2010', [
+        ('Completeness Review', 'Complete', '2013-02-21'),
+        ('ZAB Meeting', 'Completed', '2013-06-24'),
+        ('ZAB Meeting', 'Completed', '2013-06-21'),
+        ('ZAB Meeting', 'No Notice Required', '2013-06-21'),
+        ('Appeal to City Council - Certification', 'No Appeal', '2013-07-08'),
+        ('Case Closed', 'Completed', '2013-02-21'),
+        ('Case Closed', 'Approved', '2013-07-08'),
+    ], {'accepted': '2013-02-21', 'entitled': '2013-06-24', 'entitled_by': 'zab',
+        'flags': ['outcome_from_case_closing', 'accepted_same_day_as_closing']}),
+    # UP2013-0043 The Overture: "ZAB Meeting -> Approved with Changes"
+    ('UP2013-0043', '09/25/2013', [
+        ('Completeness Review', 'Incomplete Pending Applicant', '2013-10-25'),
+        ('Completeness Review', 'Application Complete', '2014-02-05'),
+        ('ZAB Meeting', 'Approved with Changes', '2014-05-22'),
+        ('Appeal to City Council - Certification', 'No Appeal', '2014-06-24'),
+        ('Case Closed', 'Approved', '2014-06-24'),
+    ], {'accepted': '2014-02-05', 'entitled': '2014-05-22', 'entitled_by': 'zab', 'flags': []}),
+    # UP2012-0039 2701 Shattuck, 70 units: "ZAB Meeting -> Denied" is a DENIAL, not an entitlement
+    ('UP2012-0039', '10/25/2012', [
+        ('Completeness Review', 'Complete', '2013-02-21'),
+        ('ZAB Meeting', 'Denied', '2013-11-15'),
+        ('Case Closed', 'Completed', '2013-02-21'),
+        ('Case Closed', 'Denied', '2014-02-03'),
+    ], {'accepted': '2013-02-21', 'denied': '2013-11-15', 'denied_by': 'zab', 'flags': ['accepted_same_day_as_closing']}),
     # ZP2021-0046: staff approval; appeal period and closing kept separate
     ('ZP2021-0046', '03/18/2021', [
         ('Completeness Review', 'Incomplete Pending Applicant', '2021-04-29'),

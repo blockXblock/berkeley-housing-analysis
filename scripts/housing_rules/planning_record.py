@@ -114,7 +114,9 @@ def is_primary(record_type: str | None) -> bool:
 #   the entitlement date. Date-order anomalies are FLAGGED as the city recorded them, never corrected.
 # Stage MEANING belongs to primary applications (role above); which application speaks for a PROJECT is a
 # separate selection (scripts/capdetail_select.py), never an aggregate over records.
-ACCEPTED = _re.compile(r"^application complete$", _re.I)
+# "Complete" is the PRE-2015 wording of the same acceptance (John, 2026-09-30): 342 of the 380 old records carrying it
+# date it on a day other than the case closing, so it is the city's acceptance, not the workflow shutting down.
+ACCEPTED = _re.compile(r"^(application )?complete$", _re.I)
 ACCEPT_TASK = _re.compile(r"completeness review|intake", _re.I)
 DECIDING_BODIES = (   # highest first: (body, task, approved status, denied status)
     ("city_council", "Public Hearing", "City Council Approved", "City Council Denied"),
@@ -122,6 +124,17 @@ DECIDING_BODIES = (   # highest first: (body, task, approved status, denied stat
     ("staff", "Staff Decision", "Approved", "Denied"),
 )
 ENDED = ("Withdrawn", "Void")
+
+# PRE-2015 WORKFLOW WORDING (John, 2026-09-30). The 2006-2014 records name their hearings "ZAB Meeting" / "ZAB 1st
+# Meeting" / "ZAB 2nd Meeting" and their rulings "Approved", "Approved with Changes" or "Project Approved"; read
+# with regexes over the city's own task labels (machine form), never over prose.
+OLD_ZAB_TASK = r"^ZAB( 1st| 2nd)? Meeting$"
+OLD_ZAB_OK = r"Approved|Approved with Changes|Project Approved"
+OLD_ZAB_NO = r"Denied"
+# Decision tasks whose status says only "Completed": the DATE is the decision task's, the OUTCOME is the case closing's
+# (Approved / Denied). The closing never supplies the date (the 2026-09-28 rule keeps closing a separate date).
+OLD_COMPLETED_DECISIONS = (("zab", r"^ZAB( 1st| 2nd)? Meeting$"),
+                           ("staff", r"^Prepare Notice of Administrative Decision$"))
 
 
 def _dated(rec, task_re, status_re):
@@ -152,6 +165,27 @@ def milestones(rec: dict) -> dict:
             else:
                 out["denied"], out["denied_by"] = day, body
             break
+    if not out["entitled"] and not out["denied"]:                       # pre-2015 wording
+        ok = _dated(rec, OLD_ZAB_TASK, OLD_ZAB_OK)
+        no = _dated(rec, OLD_ZAB_TASK, OLD_ZAB_NO)
+        rulings = sorted([(d, "approved") for d in ok] + [(d, "denied") for d in no])
+        if rulings:
+            day, outcome = rulings[-1]
+            out["entitled" if outcome == "approved" else "denied"] = day
+            out["entitled_by" if outcome == "approved" else "denied_by"] = "zab"
+        else:
+            closing = sorted((t["status_date"], (t.get("status") or "").strip()) for t in (rec.get("processing_status") or [])
+                             if t.get("status_date") and (t.get("task") or "").strip().lower() == "case closed"
+                             and (t.get("status") or "").strip() in ("Approved", "Denied"))
+            if closing:
+                outcome = closing[-1][1]
+                for body, task in OLD_COMPLETED_DECISIONS:
+                    days = _dated(rec, task, r"Completed")
+                    if days:
+                        key = "entitled" if outcome == "Approved" else "denied"
+                        out[key], out[key + "_by"] = days[-1], body
+                        out["flags"].append("outcome_from_case_closing")
+                        break
     na = _dated(rec, r"^appeal$", r"No Appeal")
     out["no_appeal"] = na[-1] if na else None
     closings = sorted((t["status_date"], (t.get("status") or "").strip()) for t in (rec.get("processing_status") or [])
@@ -170,6 +204,9 @@ def milestones(rec: dict) -> dict:
         f.append("decided_before_accepted")
     if out["entitled"] and not out["accepted"]:
         f.append("entitled_without_acceptance")
+    if out["accepted"] and any(t.get("status_date") == out["accepted"] and (t.get("task") or "").strip().lower() == "case closed"
+                               for t in (rec.get("processing_status") or [])):
+        f.append("accepted_same_day_as_closing")
     if out["denied"] and out["closed_status"] == "Approved":
         f.append("closed_approved_after_denial")
     if out["entitled"] and out["ended"]:

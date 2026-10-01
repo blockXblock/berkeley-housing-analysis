@@ -271,6 +271,11 @@ def s_findings():
     ST = F['stars2025']
     sqft = ST['floor_m2'] * 10.7639
     true_kbtu = (ST['total_mwh'] - ST['gas_mwh'] + ST['implied_gas_mwh']) * 3412.14 / sqft
+    true_mwh = ST['total_mwh'] - ST['gas_mwh'] + ST['implied_gas_mwh']
+    lab_mwh = 132397 + 1.5e6 * 0.0293071                      # LBNL FY2023: 132,397 MWh electricity + 1.5 million therms
+    ci = [r for r in F['beso']['by_type'] if r['property_type'] in ('Commercial', 'Industrial', 'Mixed Use (Comm/Ind)')]
+    bc_mwh = sum(r['electricity_kwh_2024'] / 1000 + r['gas_therms_2024'] * 0.0293071 for r in ci)
+    bc_n = sum(r['buildings'] for r in ci)
     stars_kbtu = ST['total_mwh'] * 3412.14 / sqft
     d = U['disagree'][0]
     rn = U['summary']['report_network_totals']
@@ -320,16 +325,13 @@ def s_findings():
              f"wires. About {round(lo, -2):,.0f}–{round(hi, -2):,.0f} poles<sup>1</sup> line Berkeley's streets, carrying roughly "
              f"7,000–8,000 oil-filled transformers for homes<sup>2</sup>, and perhaps 10,000 counting businesses, the campus and the Lab. "
              f"Burying all {over:.0f} miles would cost roughly ${over * 3.25 / 1000:.1f} to ${over * 6.1 / 1000:.1f} billion<sup>3</sup>; the "
-             f"City's capital plan budgets nothing for it.",
+             f"City's capital plan budgets nothing for it. Even the City's own estimate for the main streets is low: its 2016 cost table "
+             f"prices {esc(d['street'].title())}'s five residential-zone segments at {usd(d['segments_residential'])} but leaves them out of "
+             f"its totals, so the arterials and collectors cost {big(U['total'])} in 2016 dollars, not the {big(rn['headline'])} quoted "
+             f"ever since.",
              f"{a('#undergrounding', 'Undergrounding')} · {a('#networks', 'Under the streets')} · data: {dl('undergrounding_segments_harris_2016.csv')}, "
              f"{dl('wood_pole_lines_traced.geojson')}"),
-        item("The City's undergrounding cost is $5.4 million short",
-             f"The 2016 cost table behind every City undergrounding estimate prices {esc(d['street'].title())}'s five residential-zone "
-             f"segments at {usd(d['segments_residential'])} but leaves them out of its totals. Summed segment by segment, burying the "
-             f"wires on the remaining arterial and collector streets costs {usd(U['total'])}, not the {big(rn['headline'])} quoted since "
-             f"2016, in 2016 dollars and before engineering, financing and street lighting.",
-             f"{a('#undergrounding', 'Undergrounding')} · data: {dl('undergrounding_segments_harris_2016.csv')}"),
-        item('The pipes are old, and the money for them shrank',
+        item('Water and sewer pipes are old, and the money for them shrank',
              f"Half of the pipe segments in Berkeley's {I['water_mi']:.0f} miles of water main were laid before {I['water_median_year']}, and "
              f"{I['water_pre1940_mi']:.0f} miles before 1940. The City has relined about 180 of its 261 miles of sewer main since "
              f"1986, work worth about $450 million at its own current unit costs, and budgets about $24 million a year more. The weak "
@@ -347,16 +349,19 @@ def s_findings():
              f"{n(fz[2]['parcels'] + fz[3]['parcels'])} parcels and {big(fz[2]['net_taxable_value'] + fz[3]['net_taxable_value'])} of "
              f"taxable value.",
              f"{a('#fire', 'Fire evacuation')} · data: {dl('evacuation_clearance_times_kld_2025.csv')}"),
-        item("The University and the Lab sit outside the City's numbers, and the campus's reported energy use looks tenfold low",
-             f"UC Berkeley and Berkeley Lab emitted {g24:,.0f} tonnes of CO\u2082e in 2024, equal to "
-             f"{100 * g24 / CITED['cap']['ghg_2023']:.0f}% of the City's community inventory, which leaves both out. Most of the "
-             f"campus's share comes from its gas-fired power plant, whose retirement date has moved from 2028 to 2030 to 2033. In its "
-             f"2025 national sustainability report (STARS), the campus gives its 2023 energy use as {stars_kbtu:.0f} kBtu per square "
-             f"foot; the same report's emissions imply about {round(true_kbtu, -1):.0f}, matching the UC system's own figure. The energy entry "
-             f"appears to leave out the power plant's gas. Under a 2021 settlement the University pays the City about $4.75 million "
-             f"a year, rising 3% annually; in return the City agreed not to sue over its growth plans or enrollment.",
-             f"{a('#campus', 'The University and the Lab')} · {a('#ucpay', 'What UC pays')} · data: {dl('stars_2025_ucb_operations.csv')}, "
-             f"{dl('campus_lab_emissions_energy_2009_2024.csv')}"),
+        item('The University and the Lab use far more energy than all of Berkeley\'s large businesses',
+             f"UC Berkeley used about {round(true_mwh, -4):,.0f} MWh of energy in 2023, most of it gas burned in its own power plant, and "
+             f"Berkeley Lab about {round(lab_mwh, -3):,.0f} MWh. All of Berkeley's large commercial and industrial buildings, the "
+             f"{bc_n} that report under the City's energy ordinance, used about {round(bc_mwh, -3):,.0f} MWh in 2024: the University "
+             f"and the Lab together used about {(true_mwh + lab_mwh) / bc_mwh:.0f} times as much. They draw about "
+             f"{(ST['water_m3'] * 264.172 + 42.6e6) / 365 / 1e6:.1f} million gallons of water a day, roughly {100 * ((ST['water_m3'] * 264.172 + 42.6e6) / 365) / (49438e6 / 365 * F['dof']['rows'][-1]['population'] / 1.5e6):.0f}% of "
+             f"the city's estimated use. Together they emitted {g24:,.0f} tonnes of CO\u2082e in 2024, equal to "
+             f"{100 * g24 / CITED['cap']['ghg_2023']:.0f}% of the City's community inventory, which leaves both out. The campus's gas plant "
+             f"is due to be replaced by an electric heating and cooling plant, its retirement now expected between 2030 and 2033. Under a "
+             f"2021 settlement the University pays the City about $4.75 million a year, rising 3% annually; in return the City agreed not "
+             f"to sue over its growth plans or enrollment.",
+             f"{a('#campus', 'The University and the Lab')} · {a('#ucpay', 'What UC pays')} · {a('#water-energy', 'Water and power')} · data: "
+             f"{dl('campus_lab_emissions_energy_2009_2024.csv')}, {dl('beso_large_buildings_energy.csv')}"),
         item(f"{n(F['business']['licenses'])} licensed businesses, most of them small",
              f"The City licenses {n(F['business']['licenses'])} businesses, {n(F['business']['located'])} of them at a Berkeley address; "
              f"the rest are mostly contractors and firms based elsewhere that work here. Most are small: "
@@ -392,8 +397,8 @@ def s_findings():
     ]
     # findings follow the report's outline: people, businesses, infrastructure, dangers, institutions, money
     outline = ['A university city', 'Room for many more', 'Most households rent', 'How people move', 'licensed businesses',
-               'street miles', "The City's undergrounding", 'The pipes are old', 'Leaving the hills', 'The next large earthquake',
-               'The University and the Lab', 'A $30 billion tax base', "The City's needs outrun"]
+               'street miles', 'Water and sewer pipes', 'Leaving the hills', 'The next large earthquake',
+               'The University and the Lab use', 'A $30 billion tax base', "The City's needs outrun"]
     F_.sort(key=lambda h: next((k for k, key in enumerate(outline) if key in h.split('</h3>')[0]), 99))
     gaps = table(['What is not public', 'Who holds it'], [
         ['Citywide electricity and gas use', 'PG&amp;E (by ZIP code, after registration); the City (trend only)'],

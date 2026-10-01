@@ -509,6 +509,78 @@ def load_all_documents(con):
     return {os.path.basename(m): load_documents(con, m) for m in DOCUMENT_MANIFESTS}
 
 
+PLANNING_LOG = os.path.join(ROOT, 'data', 'raw', 'cpra-downloads', '2026 Master Permits Log.xlsx')
+
+
+def load_planning_log(con, path=PLANNING_LOG):
+    """CPRA 26-1972: the Planning department's own 2026 master log (2025-26 applications). Each row that names a record
+    becomes one 'planning_log_entry' event (the whole row in raw_payload, its sheet named) and its APPLICANT an actor --
+    the only public source of applicants. The row's density-bonus, streamlining and BMR statements stay in the payload
+    for the projects and ledger stages. Rows with no record number (placeholders, section headings) are rejected with
+    the reason, so the run conserves. Added 2026-09-30 (cutover phase 4)."""
+    import datetime as dt, re as _re
+    import pandas as _pd
+    from scripts.housing_rules.owner_name import is_organisation
+    now = dt.datetime.now(dt.timezone.utc).isoformat()
+    loc = os.path.relpath(path, ROOT)
+    assert not con.execute("SELECT 1 FROM sources WHERE locator=?", (loc,)).fetchone(), f'already loaded: {loc}'
+    con.execute("INSERT OR IGNORE INTO event_types VALUES ('planning_log_entry','ENTITLEMENT_APPLIED',0,"
+                "'a row of the Planning department master log (CPRA 26-1972); the row in raw_payload')")
+    out = dict(rows=0, entries=0, rejected=0, applicants=0, applicant_actions=0)
+    rej = []
+    try:
+        sid = con.execute("INSERT INTO sources (source_kind,locator,retrieved_at,checksum,notes) VALUES "
+                          "('cpra_planning_log',?,?,?,?)", (loc, '2026-09-21', _sha256(path),
+                          'CPRA 26-1972: Berkeley Planning 2026 Master Permits Log (9 sheets)')).lastrowid
+        rid = None
+        known = dict(con.execute("SELECT display_name, actor_id FROM actors WHERE role_class='applicant'"))
+        for sh in _pd.ExcelFile(path).sheet_names:
+            d = _pd.read_excel(path, sheet_name=sh, dtype=str)
+            d.columns = [_re.sub(r'\s+', ' ', str(c)).strip() for c in d.columns]
+            for i, row in d.iterrows():
+                out['rows'] += 1
+                rec = str(row.iloc[0] or '').strip()
+                if not _re.match(r'^[A-Z]+\d{4}-\d{4}$', rec):
+                    rej.append(f'{sh}#{i}: no record number ({rec[:20]!r})'); continue
+                rowd = {k: v for k, v in row.to_dict().items() if isinstance(v, str) and v.strip()}
+                rowd['_sheet'] = sh
+                date = None
+                for c in ('Date Received', 'Date received'):
+                    try:
+                        date = _pd.to_datetime(row.get(c)).date().isoformat() if row.get(c) else None
+                    except Exception:
+                        date = None
+                    if date: break
+                if rid is None:
+                    rid = con.execute("INSERT INTO ingestion_runs (source_id,started_at,rows_in_source,rows_ingested,"
+                                      "rows_rejected,conserved) VALUES (?,?,0,0,0,1)", (sid, now)).lastrowid
+                ev = con.execute("INSERT INTO events (event_type_code,event_date,event_date_precision,source_record_key,"
+                                 "source_id,ingestion_run_id,raw_payload,raw_address,raw_description,created_at) VALUES "
+                                 "('planning_log_entry',?,?,?,?,?,?,?,?,?)",
+                                 (date, 'day' if date else 'unknown', rec, sid, rid, json.dumps(rowd),
+                                  rowd.get('Site Address'), (rowd.get('Description') or '')[:500], now)).lastrowid
+                out['entries'] += 1
+                who = (rowd.get('Applicant') or '').strip()
+                if who:
+                    if who not in known:
+                        known[who] = con.execute("INSERT INTO actors (actor_kind,display_name,role_class) VALUES (?,?,'applicant')",
+                                                 ('organization' if is_organisation(who) else 'person', who)).lastrowid
+                        out['applicants'] += 1
+                    con.execute("INSERT INTO actor_actions (actor_id,event_id,entity_type,entity_id,role,source_id,coverage_note) "
+                                "VALUES (?,?,'permit_event',?,'applicant',?,'applicant as the 2026 Planning master log names it')",
+                                (known[who], ev, ev, sid))
+                    out['applicant_actions'] += 1
+        out['rejected'] = len(rej)
+        con.execute("UPDATE ingestion_runs SET rows_in_source=?, rows_ingested=?, rows_rejected=?, rejected_detail=?, "
+                    "conserved=? WHERE run_id=?", (out['rows'], out['entries'], len(rej), '; '.join(rej)[:4000] or None,
+                    int(out['rows'] == out['entries'] + len(rej)), rid))
+        con.commit()
+    except Exception:
+        con.rollback()
+        raise
+    return out
+
+
 def load_all_planning(con):
     """Load every declared harvest in PLANNING_HARVESTS; -> {file: load_planning totals}."""
     return {os.path.basename(p): load_planning(con, p, retrieved, note) for p, retrieved, note in PLANNING_HARVESTS}
@@ -543,6 +615,8 @@ def load_planning(con, path=PLANNING_RECORDS, retrieved_at='2026-09-26', note=No
                            ('no list date: ' + ' '.join(rejected)) if rejected else None)).lastrowid
         # staff already created by an earlier harvest are REUSED: one person, one actor, across files
         staff = dict(con.execute("SELECT display_name, actor_id FROM actors WHERE role_class='city_staff'"))
+        from scripts.housing_rules.owner_name import is_organisation
+        owners = dict(con.execute("SELECT display_name, actor_id FROM actors WHERE role_class='owner'"))   # one name, one actor
         n_staff_before, marks = len(staff), []
         for r in recs:
             tasks = r.get('processing_status') or []
@@ -552,12 +626,24 @@ def load_planning(con, path=PLANNING_RECORDS, retrieved_at='2026-09-26', note=No
             parcels = r.get('parcels_raw') or []
             apn = parcels[0] if parcels else None
             filed = dt.datetime.strptime(r['list_date'], '%m/%d/%Y').date().isoformat()
-            con.execute("INSERT INTO events (event_type_code,event_date,event_date_precision,source_record_key,"
+            fev = con.execute("INSERT INTO events (event_type_code,event_date,event_date_precision,source_record_key,"
                         "source_id,ingestion_run_id,raw_payload,raw_address,raw_apn,raw_description,created_at) "
                         "VALUES ('planning_filed',?,'day',?,?,?,?,?,?,?,?)",
                         (filed, r['record'], sid, rid, json.dumps(r), r.get('work_location'), apn,
-                         f"{r.get('record_type')} — {r.get('description') or ''}"[:500], now))
+                         f"{r.get('record_type')} — {r.get('description') or ''}"[:500], now)).lastrowid
             tot['filed'] += 1
+            # The OWNER the Accela record lists (2026-09-30, phase 4): the name before " * " in the record's owner
+            # field (machine-formatted: NAME * mailing address). As the record shows it at retrieval -- not proven to be
+            # the owner on the filing date, so the role says "record_owner", not "owner_at_filing".
+            oname = (r.get('owner') or '').split(' * ')[0].strip()
+            if oname:
+                if oname not in owners:
+                    owners[oname] = con.execute("INSERT INTO actors (actor_kind,display_name,role_class) VALUES (?,?,'owner')",
+                                                ('organization' if is_organisation(oname) else 'person', oname)).lastrowid
+                con.execute("INSERT INTO actor_actions (actor_id,event_id,entity_type,entity_id,role,source_id,coverage_note) "
+                            "VALUES (?,?,'permit_event',?,'record_owner',?,'owner as the Accela Planning record lists it, at "
+                            "retrieval')", (owners[oname], fev, fev, sid))
+                tot['record_owners'] = tot.get('record_owners', 0) + 1
             for t in tasks:
                 if not t.get('status_date'):
                     continue

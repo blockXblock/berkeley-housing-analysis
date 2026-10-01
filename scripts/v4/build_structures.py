@@ -309,6 +309,11 @@ def apply_phase_rulings(permits, groups, attach, unattached) -> dict:
                     lst.remove(k)
             attach[root].append(k)
             phases[root].add(k)
+            for x in [x for x in permits if x != k and base_permit(x) == k]:   # the phase's own revisions / deferred
+                for lst in list(attach.values()) + [unattached]:               # submittals come with it, as 'attached'
+                    if x in lst:
+                        lst.remove(x)
+                attach[root].append(x)
     return phases
 
 

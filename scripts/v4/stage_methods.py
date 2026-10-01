@@ -193,7 +193,8 @@ def classify_all(con):
     labels, unread = [], 0
     for ev_id, permit in con.execute("SELECT event_id, source_record_key FROM events "
                                      "WHERE event_type_code NOT LIKE 'planning_%' "      # a Planning record is not a building permit
-                                     "AND event_type_code NOT LIKE 'registry_%'"):     # nor a Rent Board registration (2026-10-01)
+                                     "AND event_type_code NOT LIKE 'registry_%' "      # nor a Rent Board registration (2026-10-01)
+                                     "AND event_type_code != 'accela_listed'"):        # nor a list-dump listing (2026-10-01)
         got = permit_effect(permit)
         if got is None:
             unread += 1
@@ -801,6 +802,104 @@ def load_parcels(con, parcels_db=PARCELS_DB, owners_csv=OWNERS_CSV):
         con.rollback()
         raise
     return out
+
+
+ACCELA_LIST_MANIFEST = os.path.join(ROOT, 'data', 'manifests', 'accela_list_dump_2026-10-01.json')
+
+
+def load_accela_list(con, manifest=ACCELA_LIST_MANIFEST):
+    """EVERY record in the Accela public list dumps (Building + Planning date-range sweeps), John 2026-10-01: "load the
+    commercial records for mixed-use projects". Which records are a project's (a retail tenant improvement, a business
+    licence certificate, a sign, a short-term rental) is decided AFTER the build, by the project's building addresses
+    (v_project_records_listed), so the load takes the whole declared dump rather than a scope it cannot know yet.
+      accela_listed  one per distinct (module, record), dated at its list Date; the list row in raw_payload
+                     (record type, description, status, address cell). Additive to the CPRA/CapDetail events of the
+                     same record -- a listing, not a permit event: it never sets an issuance or a completion.
+    The dump is DECLARED by a manifest pinning each file's SHA-256; a file that changed HALTS. Sweep windows overlap,
+    so a record listed in several files lands once (the first file in path order) and the rest are rejected as
+    'duplicate listing' -- conserved: rows = events + rejected.
+    event_addresses (created here, additive): each listing's address through THE address canon
+    (housing_rules.address.normalize_address) into the shared addresses table, with its suite ("1951 SHATTUCK Ave, C"
+    -> unit 'C') -- so a view can join listings to a building's addresses (aliases included) without re-deriving."""
+    from scripts.housing_rules.address import normalize_address
+    import datetime as dt
+    now = dt.datetime.now(dt.timezone.utc).isoformat()
+    m = json.load(open(manifest))
+    for f in m['files']:
+        got = _sha256(os.path.join(ROOT, f['path']))
+        assert got == f['sha256'], f"accela list dump changed since its manifest: {f['path']}"
+    if not con.execute("SELECT 1 FROM lifecycle_phases WHERE phase_code='CITY_RECORD'").fetchone():
+        con.execute("INSERT INTO lifecycle_phases VALUES ('CITY_RECORD', 90, 'existing', "
+                    "'a City record whose stage meaning is read later (a listing, a business or use certificate)')")
+    con.execute("INSERT OR IGNORE INTO event_types VALUES ('accela_listed','CITY_RECORD',0,"
+                "'a record in the Accela public list (Building or Planning module), dated at its list Date; the row in raw_payload')")
+    con.execute("CREATE TABLE IF NOT EXISTS event_addresses (event_id INTEGER NOT NULL REFERENCES events(event_id), "
+                "address_id INTEGER NOT NULL REFERENCES addresses(address_id), unit TEXT, PRIMARY KEY (event_id, address_id))")
+    addr_id = dict((n, a) for a, n in con.execute("SELECT address_id, normalized FROM addresses"))
+    loc = os.path.relpath(manifest, ROOT)
+    assert not con.execute("SELECT 1 FROM sources WHERE locator=?", (loc,)).fetchone(), f'already loaded: {loc}'
+    rows_in = sum(f['rows'] for f in m['files'])
+    n_addr = 0
+    try:
+        sid = con.execute("INSERT INTO sources (source_kind,locator,retrieved_at,source_asof,checksum,notes) VALUES "
+                          "('accela_list_dump',?,?,?,?,?)", (loc, m['frozen'], m['frozen'], _sha256(manifest),
+                          m['note'])).lastrowid
+        rid = con.execute("INSERT INTO ingestion_runs (source_id,started_at,rows_in_source,rows_ingested,rows_rejected,"
+                          "conserved) VALUES (?,?,?,0,0,1)", (sid, now, rows_in)).lastrowid
+        seen, ok, dup, pager, bad = set(), 0, 0, 0, []
+        for f in m['files']:
+            module = os.path.basename(f['path']).split('_')[0]
+            for i, line in enumerate(open(os.path.join(ROOT, f['path']))):
+                d = json.loads(line)
+                rec = str(d.get('Record Number') or d.get('Permit Number') or '').strip()
+                if not rec:
+                    cells = d.get('_cells') or []
+                    if cells and '< Prev' in str(cells[0]):   # the result table's page-navigation row, not a record
+                        pager += 1
+                    else:
+                        bad.append(f"{os.path.basename(f['path'])}:{i} no record number")
+                    continue
+                if (module, rec) in seen:
+                    dup += 1; continue
+                seen.add((module, rec))
+                try:
+                    when = dt.datetime.strptime(d.get('Date') or '', '%m/%d/%Y').date().isoformat()
+                except ValueError:
+                    when = None
+                addr = next((c for c in (d.get('_cells') or []) if isinstance(c, str) and ', BERKELEY CA' in c.upper()), None)
+                d['_module'] = module
+                ev = con.execute("INSERT INTO events (event_type_code,event_date,event_date_precision,source_record_key,"
+                                 "source_id,ingestion_run_id,raw_payload,raw_address,raw_apn,raw_description,created_at) "
+                                 "VALUES ('accela_listed',?,?,?,?,?,?,?,NULL,?,?)",
+                                 (when, 'day' if when else 'unknown', rec, sid, rid, json.dumps(d), addr,
+                                  (d.get('Description') or '')[:500], now)).lastrowid
+                ok += 1
+                if addr:
+                    parts = [x.strip() for x in addr.split(',')]
+                    unit = parts[1] if len(parts) > 2 and 'BERKELEY CA' not in parts[1].upper() else None
+                    try:
+                        num, street = normalize_address(parts[0])
+                    except Exception:
+                        num = street = None
+                    if num and street and num != '0':
+                        key = f"{num}|{street}"
+                        if key not in addr_id:
+                            addr_id[key] = con.execute("INSERT INTO addresses (number, street, normalized) VALUES (?,?,?)",
+                                                       (num, street, key)).lastrowid
+                        con.execute("INSERT OR IGNORE INTO event_addresses VALUES (?,?,?)", (ev, addr_id[key], unit))
+                        n_addr += 1
+        rejected = dup + pager + len(bad)
+        assert ok + rejected == rows_in, (ok, rejected, rows_in)
+        con.execute("UPDATE ingestion_runs SET rows_ingested=?, rows_rejected=?, rejected_detail=? WHERE run_id=?",
+                    (ok, rejected, f"{dup} duplicate listings (overlapping sweep windows); {pager} page-navigation rows "
+                     f"('< Prev 1 2 Next >', captured by the sweep as rows); " + '; '.join(bad)[:3000], rid))
+        con.commit()
+    except Exception:
+        con.rollback()
+        raise
+    return dict(files=len(m['files']), rows=rows_in, events=ok, duplicate_listings=dup, pager_rows=pager,
+                rejected_other=len(bad),
+                with_address=n_addr)
 
 
 RENT_BOARD_UNITS = os.path.join(ROOT, 'data', 'raw', 'rent_board', '2026-07-13 Unit Full Details.xlsx')

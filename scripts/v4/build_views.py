@@ -188,7 +188,32 @@ FROM adu a JOIN agg g USING(structure_id)
 LEFT JOIN reg l ON l.structure_id = a.structure_id AND l.board_labelled AND g.n_labelled = 1
 """
 
-VIEWS = {"v_projects": V_PROJECTS, "v_project_timeline": V_PROJECT_RECORDS, "v_adu_rent_board": V_ADU_RENT_BOARD}
+# CITY RECORDS AT A PROJECT'S BUILDINGS (John, 2026-10-01: "load the commercial records for mixed-use projects").
+# Every Accela listing (accela_listed, Building + Planning modules) whose address is one of the project's building
+# addresses -- the permit address AND the ruled aliases (S003/S004) -- with its suite. This is where a ground-floor
+# retail tenant improvement, a business-licence zoning certificate, a sign or a short-term-rental certificate shows
+# up. in_project = the record is already one of the project's own (a master, attached or Planning record); the
+# others are what happened at the building beyond its housing permits. Which of them are COMMERCIAL is the record's
+# own type and text, read later -- not decided here.
+V_PROJECT_LISTED = r"""
+CREATE VIEW v_project_records_listed AS
+WITH pa AS (SELECT DISTINCT ps.project_id, sa.address_id FROM project_structures ps JOIN structure_addresses sa USING(structure_id)),
+own AS (SELECT project_id, record_key k FROM project_records
+        UNION SELECT ps.project_id, e.source_record_key FROM project_structures ps JOIN structure_events se USING(structure_id)
+              JOIN events e USING(event_id))
+SELECT json_extract(p.notes, '$.project_key') AS project_key, p.name, e.source_record_key AS record_key,
+       json_extract(e.raw_payload, '$._module') AS module,
+       COALESCE(NULLIF(json_extract(e.raw_payload, '$."Record Type"'), ''), json_extract(e.raw_payload, '$."Project Name"')) AS record_type,
+       e.event_date AS listed_on, json_extract(e.raw_payload, '$.Status') AS status, e.raw_description AS description,
+       a.normalized AS address, ea.unit, (o.k IS NOT NULL) AS in_project
+FROM pa JOIN projects p USING(project_id) JOIN event_addresses ea ON ea.address_id = pa.address_id
+JOIN addresses a ON a.address_id = ea.address_id
+JOIN events e ON e.event_id = ea.event_id AND e.event_type_code = 'accela_listed'
+LEFT JOIN own o ON o.project_id = pa.project_id AND o.k = e.source_record_key
+"""
+
+VIEWS = {"v_projects": V_PROJECTS, "v_project_timeline": V_PROJECT_RECORDS, "v_adu_rent_board": V_ADU_RENT_BOARD,
+         "v_project_records_listed": V_PROJECT_LISTED}
 
 
 def main() -> int:

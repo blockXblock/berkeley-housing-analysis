@@ -117,6 +117,7 @@ code(r"""
 con=sqlite3.connect(DB_PATH); con.execute("PRAGMA foreign_keys=ON")
 print("inspections:", SM.load_inspections(con))
 print("rent board: ", SM.load_rent_board(con))   # CPRA #26-2375: every registered unit + tenancy (John: load all)
+print("accela list:", SM.load_accela_list(con))   # every Building + Planning listing, manifest-pinned (John: commercial records)
 print("documents:  ", SM.load_all_documents(con))   # every declared manifest (DOCUMENT_MANIFESTS)
 print("parcels:    ", SM.load_parcels(con))   # assessor parcels + APN identifiers + assessed values + owners of record
 print("lineage:    ", SM.load_county_lineage(con))   # the County assessor's own parent -> child APN lineage (confirmed)

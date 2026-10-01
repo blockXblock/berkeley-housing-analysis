@@ -458,7 +458,12 @@ Ashby BART: PLN2026-0185 fetched by name + declared (4th harvest), R006 keyed to
 withdrawn/void ZP as a companion. Swap candidate `scratch/2026-09-30_phase5/p5.db` (sha 11b07920; funding 60 of 92 after record keys): 1,544 projects,
 1,182 buildings / 5,551 units; vs live only +1 planning record (Ashby BART); co/bp unchanged (baseline 30g holds).
 
-**NEXT:** John unlocks -> swap 11b07920 -> heights (phase 4) -> phase 6 (re-point publishers; project_records table) (applicants from the
+**LIVE SWAPPED to 11b07920 -- PHASE 5 LIVE (John unlocked, 2026-09-30):** snapshot `keep_snapshot_2026-09-30_pre-v4-phase5.db`
+(sha f806b164, integrity ok); live == candidate; integrity + FK clean; 1,544 projects (4 outside City permitting), 31
+carrying affordability tiers, 6 classification rulings, 13 with funding; 1,182 buildings / 5,551 units; conservation
+PASS. **John to re-lock.**
+
+**NEXT:** heights (phase 4) -> phase 6 (re-point the ~20 publishers; decide project_records table) (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.
 ---

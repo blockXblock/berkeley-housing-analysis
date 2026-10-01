@@ -514,13 +514,42 @@ def s_tenure():
 
 def s_income():
     i = F['acs_city']['ind']
+    hh = i['hh_income_under_50k'] + i['hh_income_50k_100k'] + i['hh_income_100k_200k'] + i['hh_income_200k_plus']
+    cols = F['acs_city']['cols']
+    share = lambda a, b: f"{100 * a / b:.0f}%"
+    who = [
+        ['College and graduate students living off campus', n(round(i['poor_college'], -2)), share(i['poor_college'], i['poor_3plus']),
+         share(i['poor_college'], i['college_students'])],
+        ['Residents age 3 and over not enrolled in school', n(round(i['poor_not_enrolled'], -2)), share(i['poor_not_enrolled'], i['poor_3plus']),
+         share(i['poor_not_enrolled'], i['not_enrolled'])],
+        ['Residents 65 and over', n(round(i['poor_65plus'], -2)), share(i['poor_65plus'], i['poor_3plus']),
+         share(i['poor_65plus'], i['age_65plus_pov'])],
+        ['Children under 18', n(round(i['poor_children'], -2)), share(i['poor_children'], i['poor_3plus']),
+         share(i['poor_children'], i['children'])],
+    ]
     body = f'''
     <div class="grid">
-      {card('about $' + rnd(i['median_household_income']), 'median household income', 'Give or take $' + rnd(F['acs_city']['cols']['B19013001'][1]) + ' (2024 dollars, survey margin).')}
-      {card('about $' + rnd(i['per_capita_income']), 'income per resident', 'Includes students.')}
-      {card(pc(i['below_poverty_pct']), 'of residents below the poverty line', 'Residents in households; students in dorms excluded.')}
+      {card('about $' + rnd(i['median_household_income']), 'median household income', 'Give or take $' + rnd(cols['B19013001'][1]) + ' (2024 dollars, survey margin).')}
+      {card('$' + rnd(i['median_income_owners']) + ' vs $' + rnd(i['median_income_renters']), 'median income of owners vs renters', f"Homeowning households earn about {i['median_income_owners'] / i['median_income_renters']:.1f} times as much as renting households (give or take about $16,000 and $10,000).")}
+      {card(share(i['hh_income_under_50k'], hh) + ' / ' + share(i['hh_income_200k_plus'], hh), 'of households earn under $50,000, and as many earn $200,000 or more', f"About {rnd(i['hh_income_under_50k'])} households under $50,000; about {rnd(i['hh_income_200k_plus'])} at $200,000 or more. Many low-income households are students supported by family or aid.")}
       {card(pc(i['bachelors_or_higher_pct']), "of adults 25+ hold a bachelor's degree or more", '')}
     </div>
+    <h3>Who is poor in Berkeley</h3>
+    <p class="note" style="font-size:.95rem">About {rnd(i['poor_3plus'])} Berkeley residents ({pc(i['below_poverty_pct'])}) live below
+    the federal poverty line, but the number mostly measures students. More than half of them,
+    about {rnd(i['poor_college'])}, are college and graduate students living in apartments and houses (students in dormitories are
+    not counted at all). The Census Bureau counts a student's own earnings, not the family support, loans or scholarships most
+    depend on, so about half of off-campus students show up as poor. Among residents who are not in school, about
+    {rnd(i['poor_not_enrolled'])}, or {share(i['poor_not_enrolled'], i['not_enrolled'])}, are poor, a little above the
+    California rate for the same group (11%).
+    About {rnd(i['poor_65plus'])} are 65 or older, one senior in eight, and about {rnd(i['poor_children'])} are children, about one
+    child in {i['children'] / i['poor_children']:.0f}. Those are the residents for whom poverty means what the word suggests.</p>
+    {table(['Group', 'Below the poverty line', 'Share of all poor residents', 'Poverty rate in the group'], who, right={1, 2, 3})}
+    <p class="note">American Community Survey 2024 1-year estimates, tables B14006 (poverty by school enrollment) and B17001
+    (poverty by age); median incomes by tenure, table B25119. The first two rows plus
+    poor schoolchildren (about 500) make up the total; the last two rows overlap them. Survey margins are wide: about ±2,200 for
+    the students, ±1,900 for those not in school, and roughly ±700 for children, whose count is the least certain. California
+    comparison: the same table for the state.</p>
     <div class="two"><div>{acs_table('B19001', title='Households by income (2024 dollars)')}</div>
     <div>{acs_table('B15003', skip=tuple(f'B15003{k:03d}' for k in range(3, 16)), title='Adults 25 and over by education')}</div></div>
     <p class="note">The income distribution is a barbell: about {rnd(i['hh_income_under_50k'])} households earn under $50,000 and

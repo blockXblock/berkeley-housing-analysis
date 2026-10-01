@@ -278,5 +278,29 @@
   "fetched_at": "2026-10-01T14:34:54",
   "bytes": 33870052,
   "sha256": "0d864992010dd8743752870ad865c3e9aa86f7e5c920946856b19c586a375aff"
+ },
+ "acs/city_6.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25119,B14006,B17001&geo_ids=16000US0606000",
+  "fetched_at": "2026-10-01T16:06:41",
+  "bytes": 8540,
+  "sha256": "1203d2ca217a31692e456595e45e3afa16520f158cadbebd8395613f0d845c4f"
+ },
+ "acs/tract_6.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25119,B14006,B17001&geo_ids=140|16000US0606000",
+  "fetched_at": "2026-10-01T16:06:43",
+  "bytes": 113057,
+  "sha256": "b3cfc394c22a8b18d701724bb66878d18832ef5d761b2a7951bdf1b6334c16c4"
+ },
+ "unavailable:acs/blockgroup_B25119.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25119&geo_ids=150|16000US0606000",
+  "error": "HTTP 400"
+ },
+ "unavailable:acs/blockgroup_B14006.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B14006&geo_ids=150|16000US0606000",
+  "error": "HTTP 400"
+ },
+ "unavailable:acs/blockgroup_B17001.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B17001&geo_ids=150|16000US0606000",
+  "error": "HTTP 400"
  }
 }

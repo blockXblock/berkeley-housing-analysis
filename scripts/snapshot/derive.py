@@ -127,6 +127,15 @@ def indicators(e):
         black_nh_pct=pct(g('B03002004'), g('B03002001')), asian_nh_pct=pct(g('B03002006'), g('B03002001')),
         bachelors_or_higher_pct=pct(s('B15003022', 'B15003023', 'B15003024', 'B15003025'), pop25),
         below_poverty_pct=pct(g('B17021002'), g('B17021001')),
+        median_income_owners=e.get('B25119002'), median_income_renters=e.get('B25119003'),
+        # who is poor: B14006 (age 3+, by school enrollment) and B17001 (by age)
+        poor_3plus=g('B14006002'), poor_college=s('B14006009', 'B14006010'),
+        college_students=s('B14006009', 'B14006010', 'B14006019', 'B14006020'),
+        poor_not_enrolled=g('B14006011'), not_enrolled=s('B14006011', 'B14006021'),
+        poor_children=s(*[f'B17001{i:03d}' for i in list(range(4, 10)) + list(range(18, 24))]),
+        children=s(*[f'B17001{i:03d}' for i in list(range(4, 10)) + list(range(18, 24)) + list(range(33, 39)) + list(range(47, 53))]),
+        poor_65plus=s('B17001015', 'B17001016', 'B17001029', 'B17001030'),
+        age_65plus_pov=s('B17001015', 'B17001016', 'B17001029', 'B17001030', 'B17001044', 'B17001045', 'B17001058', 'B17001059'),
     )
     return out
 

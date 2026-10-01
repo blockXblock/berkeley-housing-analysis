@@ -20,6 +20,7 @@ ACS_GROUPS = [
     'B25001,B25004,B25024,B25034,B25041',
     'B25064,B25077,B25070,B25091',
     'B03002,B11001,B15003',
+    'B25119,B14006,B17001',                   # income by tenure; who is poor (school enrollment, age)
 ]
 LODES = 'https://lehd.ces.census.gov/data/lodes/LODES8/ca/'
 SOURCES = {

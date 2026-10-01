@@ -66,7 +66,8 @@ def table(head, rows, right=None, cls=''):
     h = ''.join(f'<th class="r">{esc(c)}</th>' if i in right else f'<th>{esc(c)}</th>' for i, c in enumerate(head))
     b = ''.join('<tr>' + ''.join(f'<td class="r">{c}</td>' if i in right else f'<td>{c}</td>' for i, c in enumerate(r))
                 + '</tr>' for r in rows)
-    return f'<div class="tw"><table class="{cls}"><thead><tr>{h}</tr></thead><tbody>{b}</tbody></table></div>'
+    return (f'<div class="tw"><button class="full" type="button">Open full table \u2922</button>'
+            f'<table class="{cls}"><thead><tr>{h}</tr></thead><tbody>{b}</tbody></table></div>')
 
 
 def bar(v, mx, w=9):
@@ -405,7 +406,7 @@ def s_fire():
     E = F['evac']
     fz = {r['fire_zone']: r for r in F['assessor']['by_fire']}
     sc = ['summer_midweek_midday', 'summer_weekend_midday', 'summer_nighttime', 'fall_midweek_midday', 'fall_weekend_midday', 'fall_nighttime']
-    rows = [[r['region'], esc(r['name'])] + [r[s] + ('*' if r[s + '_is_100th_pct'] in (True, 'True') else '') for s in sc] for r in E['clear']]
+    rows = [[f"{r['region']} {esc(r['name'])}"] + [r[s] + ('*' if r[s + '_is_100th_pct'] in (True, 'True') else '') for s in sc] for r in E['clear']]
     body = f'''
     <div class="grid">
       {card(n(fz[2]['parcels'] + fz[3]['parcels']), 'parcels in hill Fire Zones 2 and 3', f"{pct(fz[2]['parcels'] + fz[3]['parcels'], F['assessor']['located'])} of the city's parcels; {big(fz[2]['net_taxable_value'] + fz[3]['net_taxable_value'])} taxable value.")}
@@ -414,7 +415,7 @@ def s_fire():
       {card(n(K['primary_ai'][1]), 'residential parcels with a single way out', f"{K['primary_ai'][0]} neighborhoods; {K['secondary_ai'][0]} more ({n(K['secondary_ai'][1])} parcels) have impaired secondary access.")}
     </div>
     <h3>Time to clear each area (hours:minutes)</h3>
-    {table(['', 'Region', 'Summer weekday', 'Summer weekend', 'Summer night', 'Fall weekday', 'Fall weekend', 'Fall night'], rows, right=range(2, 8))}
+    {table(['Region', 'Summer weekday', 'Summer weekend', 'Summer night', 'Fall weekday', 'Fall weekend', 'Fall night'], rows, right=range(1, 7))}
     <p class="note">Weekday and weekend columns are midday. Times are for the 90th-percentile vehicle; * marks the 100th percentile (the last vehicle), used where it governs. "Urgent
     mobilization" assumes residents leave within 30 minutes. KLD Table 7-4: {dl('evacuation_clearance_times_kld_2025.csv')}.</p>
     <div class="two"><div><h3>Residents and their vehicles, by area (2024)</h3>
@@ -495,6 +496,26 @@ CSS = '''
   a.dl { font-family: ui-monospace, Menlo, monospace; font-size:.82rem; overflow-wrap:anywhere; }
   ul.src { margin:.6rem 0 0 1.1rem; } ul.src li { font-size:.8rem; color:var(--dim); margin-bottom:.3rem; }
   code { font-size:.8rem; }
+  .tw { position:relative; }
+  button.full { display:none; margin:.15rem 0 .3rem; font:inherit; font-size:.8rem; color:var(--accent); background:var(--panel);
+    border:1px solid var(--line); border-radius:6px; padding:.25rem .6rem; cursor:pointer; }
+  .tw.wide > button.full { display:inline-block; }
+  #sheet { position:fixed; inset:0; z-index:50; background:var(--bg); display:none; flex-direction:column; }
+  #sheet.open { display:flex; }
+  #sheet .bar2 { display:flex; align-items:center; gap:.8rem; padding:.5rem 16px; border-bottom:1px solid var(--line); }
+  #sheet .bar2 .t { flex:1; font-size:.85rem; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  #sheet .bar2 button { font:inherit; font-size:.9rem; color:var(--ink); background:var(--panel); border:1px solid var(--line);
+    border-radius:6px; padding:.3rem .8rem; cursor:pointer; }
+  #sheet .pane { flex:1; overflow:auto; -webkit-overflow-scrolling:touch; padding:12px 16px 40px; touch-action:pan-x pan-y pinch-zoom; }
+  #sheet .pane table { width:auto; min-width:100%; }
+  #sheet .pane td, #sheet .pane th { white-space:nowrap; font-size:.95rem; }
+  #sheet .pane table { border-collapse:separate; border-spacing:0; }
+  #sheet .pane th { position:sticky; top:-12px; background:var(--bg); z-index:2; }
+  #sheet .pane td:first-child, #sheet .pane th:first-child { position:sticky; left:-16px; background:var(--bg); z-index:1;
+    box-shadow:1px 0 0 var(--line); }
+  #sheet .pane th:first-child { z-index:3; }
+  #sheet .pane td:first-child { white-space:normal; min-width:7rem; max-width:10.5rem; }
+  @media print { button.full, #sheet { display:none !important; } }
   @media (max-width: 760px) {
     header.top, nav.toc, .page { padding-left:16px; padding-right:16px; } .two { grid-template-columns:1fr; } h1 { font-size:1.7rem; }
     .grid { grid-template-columns:1fr 1fr; gap:.5rem; } .card { padding:.6rem; } .card .n { font-size:1.3rem; }
@@ -541,6 +562,50 @@ def main():
 </header>
 <nav class="toc">{''.join(f'<a href="#{a}">{b}</a>' for a, b in toc)}</nav>
 {''.join(sections)}
+<div id="sheet" role="dialog" aria-modal="true" aria-label="Full table">
+  <div class="bar2"><span class="t"></span><button type="button" class="close">Close</button></div>
+  <div class="pane"></div>
+</div>
+<script>
+// FULL-TABLE VIEW. A table wider than its column gets a button; the button opens the table full-screen at its natural
+// width, where it scrolls in any direction and pinch-zooms. Close, Escape or the phone's Back button return to the page
+// at the same place. Nothing here is needed to read the page: without script, wide tables still scroll sideways.
+(function () {{
+  var sheet = document.getElementById('sheet'), pane = sheet.querySelector('.pane'), title = sheet.querySelector('.t');
+  function mark() {{
+    document.querySelectorAll('.tw').forEach(function (w) {{
+      var t = w.querySelector('table');
+      w.classList.toggle('wide', t.scrollWidth > w.clientWidth + 2);
+    }});
+  }}
+  function heading(w) {{
+    for (var e = w.previousElementSibling; e; e = e.previousElementSibling)
+      if (/^H[23]$/.test(e.tagName)) return e.textContent;
+    var s = w.closest('section'); return s ? s.querySelector('h2').textContent : '';
+  }}
+  var y = 0;
+  function open(w) {{
+    y = window.scrollY;
+    pane.innerHTML = ''; pane.appendChild(w.querySelector('table').cloneNode(true));
+    title.textContent = heading(w);
+    sheet.classList.add('open'); document.body.style.overflow = 'hidden';
+    history.pushState({{sheet: 1}}, '');
+    sheet.querySelector('.close').focus();
+  }}
+  function shut() {{
+    if (!sheet.classList.contains('open')) return;
+    sheet.classList.remove('open'); document.body.style.overflow = ''; pane.innerHTML = '';
+    window.scrollTo(0, y);
+  }}
+  document.addEventListener('click', function (e) {{
+    var b = e.target.closest('button.full'); if (b) open(b.parentElement);
+    if (e.target.closest('#sheet .close')) history.back();
+  }});
+  document.addEventListener('keydown', function (e) {{ if (e.key === 'Escape' && sheet.classList.contains('open')) history.back(); }});
+  window.addEventListener('popstate', shut);
+  window.addEventListener('resize', mark); mark();
+}})();
+</script>
 </body>
 </html>
 '''

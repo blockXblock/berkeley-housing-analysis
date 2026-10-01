@@ -69,6 +69,7 @@ CITED = dict(
              'UC 2025 Annual Report on Sustainable Practices (commuting; per-campus chart data from its public Google Sheets, fetched 2026-10-01)',
              'AASHE STARS, UC Berkeley 2025 report (submitted February 19, 2025): credits OP-3, OP-5, OP-6, OP-14 and PRE-3, saved 2026-10-01 with a signed-in account',
              'UC Berkeley Clean Energy Campus fact sheet, April 5, 2023 (sustainability.berkeley.edu)',
+             'UC Regents item F4, May 15, 2024 (Phase 1 budget, geothermal wells); cleanenergycampus.berkeley.edu (schedule, viewed 2026-10-01); STARS 2025 review template (completion-date note)',
              'Lawrence Berkeley National Laboratory 2025 LRDP Draft EIR, April 2025 (people, energy, water, GHG, parking); '
              'UC Regents item F1B, September 17, 2025 (202 acres, buildings, floor area)']),
     # Harris 2016 Table 1 (feet as printed): total and undergrounded, by street class. Miles are computed from the feet;
@@ -556,9 +557,15 @@ def s_campus():
     <p class="note"> Its gas-fired
     cogeneration plant produced {n(U['ghg_cogen'][0])} of the campus's {n(U['ghg'][0])} tonnes of CO₂e in 2024; the Berkeley
     Clean Energy Campus project replaces it with an electric heating and cooling plant serving about 32 buildings in its first
-    phase. The campus's April 2023 fact sheet promised $249 million of State funding, 15 MW of solar, 8 MW of fuel cells, a
-    30 MWh battery, an 85% cut in fossil-fuel combustion, and retirement of the gas plant in 2028; the Regents' July 2025
-    approval puts construction from 2026 and completion by 2030. The two institutions' {gu + gl:,.0f} tonnes equal
+    phase. The Regents approved a Phase 1 budget of $476.6 million in May 2024
+    ($249 million of it from the State, through debt service, and the rest from renewable-energy tax credits and campus funds).
+    That budget item included "geothermal heat exchange wells under the plant," the grid of boreholes Professor Kenichi Soga's
+    research tested; the scope the Regents approved in July 2025, after the campus "refined the design and scope… to align
+    with the approved project budget," mentions a 2-million-gallon chilled-water tank but no geothermal wells. The plant goes
+    under North Field, the recreation field north of Hearst Gym, with a grass field on its roof. The retirement date has slid:
+    2028 in the campus's 2023 fact sheet, "by 2030" in the Regents' 2025 approval (utility relocation from summer 2026, plant
+    construction spring 2027 to summer 2029, building conversions to summer 2030), and 2033 in a May 2024 campus report a
+    STARS reviewer cited. Until then the gas plant runs. The two institutions' {gu + gl:,.0f} tonnes equal
     {100 * (gu + gl) / CITED['cap']['ghg_2023']:.0f}% of the City's own community inventory
     ({n(CITED['cap']['ghg_2023'])} tonnes, 2023), which does not include them; the inventories are compiled differently.
     (The campus's own inventory page gives {n(U['ghg'][0])} tonnes for 2024, counting Scope 1 before its

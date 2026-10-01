@@ -110,6 +110,10 @@ SELECT
   ap.applicants                                                   AS planning_applicant,                      -- D5
   av.assessed_value, av.net_taxable AS assessed_net_taxable, av.as_of AS assessed_as_of_date,
   ROUND(av.net_taxable * 0.0125)                                  AS est_annual_tax_1pct_rule,
+  CASE WHEN json_extract(p.notes, '$.anchor_role') = 'outside_city_permitting'
+         OR EXISTS (SELECT 1 FROM json_each(json_extract(p.notes, '$.classifications')) c
+                    WHERE json_extract(c.value, '$.rhna_effect') LIKE 'EXCLUDE%')
+       THEN 1 ELSE 0 END                                          AS rhna_excluded,   -- UC (classification rulings)
   json_extract(p.notes, '$.classifications')                      AS classifications,
   json_extract(p.notes, '$.affordability')                        AS affordability_evidence,
   json_extract(p.notes, '$.funding')                              AS funding

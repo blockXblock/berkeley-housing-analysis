@@ -302,13 +302,12 @@ def s_findings():
         item(f'{total - over:.1f} of {total:.0f} street miles have their wires underground; {over:.0f} still carry them overhead',
              f"Only {100 * (total - over) / total:.0f}% of Berkeley's street miles have buried wires: half of the arterials, a third "
              f"of the collectors, and {100 * T1['residential'][1] / T1['residential'][0]:.0f}% of residential streets. Of the {over:.0f} "
-             f"overhead miles, {res_over:.0f} are residential streets, and no City cost study we found prices those. At today's costs per "
-             f"mile, from PG&E's recent average of $3.25 million to the City's 2019 estimate of $6.1 million, burying the wires on all "
-             f"{over:.0f} miles would cost roughly ${over * 3.25 / 1000:.1f} to ${over * 6.1 / 1000:.1f} billion; the City's capital plan "
-             f"budgets nothing for it. The poles are not public; from the {n(F['poles']['wood'])} wood poles the City has hung streetlights "
-             f"on, we estimate about {round(lo, -2):,.0f}–{round(hi, -2):,.0f} street poles. Nor are the transformers: PG&E's own figure of "
-             f"seven customers per residential transformer implies roughly 7,000–8,000 serving Berkeley homes, on poles and in "
-             f"underground vaults. They are oil-filled, and federal rules presume any made before July 1979 to contain PCBs unless tested.",
+             f"overhead miles, {res_over:.0f} are residential streets, and no City cost study we found prices those. Burying the wires "
+             f"on all {over:.0f} miles would cost roughly ${over * 3.25 / 1000:.1f} to ${over * 6.1 / 1000:.1f} billion<sup>1</sup>; the "
+             f"City's capital plan budgets nothing for it. Neither the poles nor the transformers on them are public. We estimate about "
+             f"{round(lo, -2):,.0f}–{round(hi, -2):,.0f} street poles<sup>2</sup> and roughly 7,000–8,000 transformers serving homes<sup>3</sup>; "
+             f"with those serving businesses, the campus and the Lab, the total could approach or pass 10,000. The transformers are "
+             f"filled with oil, and federal rules presume any made before July 1979 to contain PCBs unless tested.",
              f"{a('#undergrounding', 'Undergrounding')} · {a('#networks', 'Under the streets')} · data: {dl('undergrounding_segments_harris_2016.csv')}, "
              f"{dl('wood_pole_lines_traced.geojson')}"),
         item("The City's undergrounding cost is $5.4 million short",
@@ -369,6 +368,18 @@ def s_findings():
     {''.join(F_)}
     <h3>What we could not find, and who has it</h3>
     {gaps}
+    <h3>Notes</h3>
+    <p class="note"><sup>1</sup> At current costs per mile: PG&amp;E's 2023–2025 average of $3.25 million (its 10-year undergrounding
+    plan, September 30, 2026) and the City's 2019 average of $6.1 million including street lighting (Bellecci &amp; Associates
+    evacuation-route study). Before inflation, engineering and the cost of connecting each building.<br>
+    <sup>2</sup> From the {n(F['poles']['wood'])} wood utility poles that carry City streetlights, the only located poles that are
+    public: their spacing traces {F['poles']['traced']['250']['miles']:.0f}–{F['poles']['traced']['400']['miles']:.0f} miles of pole line, and
+    {over:.0f} overhead street miles at the traced spans of {F['poles']['traced']['200']['mean_span_ft']:.0f}–{F['poles']['traced']['250']['mean_span_ft']:.0f}
+    feet give the range. Poles along rear lot lines are additional.<br>
+    <sup>3</sup> PG&amp;E's sworn figure, "Average number of customers per residential transformer is 7" (2027 rate case,
+    A.25-05-009, rebuttal Exhibit PG&amp;E-18), applied to Berkeley's {rnd(F['dof']['rows'][-1]['occupied'])} occupied and
+    {rnd(F['dof']['rows'][-1]['housing_units'])} total homes (State Department of Finance, 2026). Includes pole-top and underground
+    units; excludes transformers serving businesses, the campus and the Lab. PG&amp;E does not publish a count.</p>
     <p class="note">Two findings note discrepancies we found in institutions' own documents: the City's 2016 undergrounding
     cost table and UC Berkeley's 2025 STARS energy entry. Both link to the documents.</p>'''
     return section('findings', 'What the numbers say', 'Ten findings', body)
@@ -645,7 +656,7 @@ def s_networks():
     body = f'''
     {table(['Network', 'Miles', 'Detail'], [
         ['Streets', n(S['centerline_mi'], 1), f"{n(S['lane_mi'], 1)} lane-miles; arterials {S['arterial_mi']} mi, collectors {S['collector_mi']}, residential {S['residential_mi']}; average pavement condition {S['pci']} of 100."],
-        ['Water mains (EBMUD)', n(I['water_mi'], 1), f"{n(I['water_segments'])} pipe segments; median year laid {I['water_median_year']}; {n(I['water_pre1940_mi'], 1)} miles laid before 1940; the oldest from {I['water_oldest']}."],
+        ['Water mains (EBMUD)', n(I['water_mi'], 1), f"Pressurized mains owned by EBMUD, not the City, in 15 of EBMUD's 120 pressure zones. Half the pipe segments were laid before {I['water_median_year']}; {n(I['water_pre1940_mi'], 1)} miles before 1940; the oldest in the {I['water_oldest'] // 10 * 10}s."],
         ['Sanitary sewer mains (City)', n(I['sewer_mi'], 1), f"{n(I['sewer_segments'])} segments, {n(I['manholes'])} manholes, {n(I['laterals'])} house laterals ({n(I['laterals_mi'], 1)} mapped miles); {CITED['ssmp']['pump_stations']} pump stations; {CITED['ssmp']['rehab_since_1986']} miles rehabilitated since 1986."],
         ['Storm drains (City)', n(I['storm_mi'], 1), f"{n(I['storm_segments'])} pipe segments."],
         ['Gas, high pressure (PG&amp;E)', '≈ 38', 'Lines at 60 psi and above only; the low-pressure mains that feed houses are not public.'],
@@ -659,27 +670,39 @@ def s_networks():
     already relined with plastic (HDPE). It is a replacement value at the City's unit costs, not a backlog.</p>
     <h3>Who owns which pipes</h3>
     {table(['System', 'Owner', 'What it covers'], [
-        ['Water supply and mains', 'EBMUD', 'Reservoirs, treatment, the 269 miles of mains under Berkeley, and meters; EBMUD serves about 1.5 million people'],
+        ['Water supply and mains', 'EBMUD', 'Reservoirs and tanks, treatment, the 269 miles of pressurized mains under Berkeley, and meters; EBMUD serves about 1.5 million people'],
         ['Sanitary sewers', 'City of Berkeley', '254 miles of mains, about 7,200 manholes, 7 pump stations, and the lower half of each house lateral, from the property-line cleanout to the main'],
         ['House sewer laterals (upper half)', 'Each property owner', 'From the house to the cleanout; a lateral certificate is required at sale (Berkeley\'s own program, separate from EBMUD\'s)'],
         ['Interceptors and treatment', 'EBMUD', 'The large pipes that collect sewage from Berkeley and six other cities, the Main Wastewater Treatment Plant at the foot of the Bay Bridge, and three wet-weather facilities'],
         ['Storm drains', 'City of Berkeley', 'About 93 miles of pipe and 5,800 structures, separate from the sewers'],
         ['Electricity and gas', 'PG&amp;E', 'Poles, wires, transformers and gas mains; Ava Community Energy, the public power provider Berkeley belongs to, buys power for customers who have not opted out'],
     ])}
+    <p class="note" style="font-size:.95rem"><strong>How water reaches a tap.</strong> EBMUD's system is built on height. Its service
+    area is divided into 120 pressure zones, from sea level to 1,450 feet; water is pumped up to tanks and reservoirs high in the
+    hills, and flows down by gravity from zone to zone. About 60% of EBMUD's treated water reaches
+    customers by gravity alone; 133 pumping plants lift the rest. Berkeley's mains fall in 15 of those zones (EBMUD 2025 Urban Water
+    Management Plan; zone codes from the mapped mains).</p>
     <p class="note">Rain that leaks into old sewers is the overlap: in storms it overwhelms EBMUD's plant, and a 2014 federal consent
     decree requires the region to cut that inflow enough to end wet-weather discharges by 2035. Sources: City Sewer System
     Management Plan (2019); EBMUD 2025 Urban Water Management Plan and private sewer lateral program (2021); EBMUD consent decree
     (2014); City private sewer lateral guide; adopted FY2027–28 budget.</p>
-    <h3>Overhead wire: an estimate from the poles</h3>
-    {table(['Measure', 'Value', 'How it is known'], [
-        ['Street miles with overhead lines', f"{over:.1f}", 'Measured: City-commissioned 2016 study, Table 1 (all street classes)'],
-        ['Lit wood poles, located', n(P['wood']), "Measured: the City's streetlight layer (pole material = wood)"],
-        ['Distance to the nearest lit wood pole', f"median {P['nn_median_ft']} ft (half within {P['nn_p25']}–{P['nn_p75']} ft)", 'Measured from those poles'],
-        ['Pole line traced by lit poles alone', f"{tr['250']['miles']:.0f}–{tr['400']['miles']:.0f} mi", 'Measured: links between neighboring lit poles up to 250–400 ft; a floor'],
-        ['Utility poles along streets', f"≈ {round(lo, -2):,.0f}–{round(hi, -2):,.0f}", f"Estimate: {over:.1f} overhead street miles ÷ a span of {tr['200']['mean_span_ft']:.0f}–{tr['250']['mean_span_ft']:.0f} ft (the traced links); rear-lot pole lines are extra"],
-        ['Transformers serving homes', '≈ 7,000–8,000', f"Estimate: Berkeley's {rnd(F['dof']['rows'][-1]['occupied'])}–{rnd(F['dof']['rows'][-1]['housing_units'])} homes ÷ PG&E's \u201caverage number of customers per residential transformer is 7\u201d (2027 rate case, rebuttal testimony). Counts pole-top and underground units; excludes transformers serving businesses"],
-        ['Aerial cable route-miles', f"≈ {4 * over:,.0f}", f"Illustration: {over:.0f} miles × 4 systems on a typical joint-use pole (electric, telephone copper, cable TV coax, fiber); each electric line carries several conductors"],
+    <h3>Overhead wire, poles and transformers</h3>
+    {table(['Measure', 'Value', 'Basis'], [
+        ['Street miles with overhead lines', f"{over:.1f}", 'Measured (City study, 2016)'],
+        ['Lit wood poles, located', n(P['wood']), "Measured (City streetlight map)"],
+        ['Distance to the nearest lit wood pole', f"median {P['nn_median_ft']} ft", 'Measured'],
+        ['Pole line traced by lit poles alone', f"{tr['250']['miles']:.0f}–{tr['400']['miles']:.0f} mi", 'Measured; a floor<sup>a</sup>'],
+        ['Utility poles along streets', f"≈ {round(lo, -2):,.0f}–{round(hi, -2):,.0f}", 'Estimate<sup>b</sup>'],
+        ['Transformers serving homes', '≈ 7,000–8,000', 'Estimate<sup>c</sup>'],
+        ['All transformers, including businesses, campus and Lab', 'not public; could approach or pass 10,000', 'Held by PG&amp;E; not public'],
+        ['Aerial cable route-miles', f"≈ {4 * over:,.0f}", 'Illustration<sup>d</sup>'],
     ])}
+    <p class="note"><sup>a</sup> Links between neighboring lit wood poles up to 250–400 feet apart; poles without a streetlight break
+    the chain. <sup>b</sup> {over:.1f} overhead street miles divided by the traced spans of {tr['200']['mean_span_ft']:.0f}–{tr['250']['mean_span_ft']:.0f}
+    feet; rear-lot pole lines are additional. <sup>c</sup> PG&amp;E's "average number of customers per residential transformer is 7"
+    (2027 rate case, rebuttal testimony) over Berkeley's {rnd(F['dof']['rows'][-1]['occupied'])}–{rnd(F['dof']['rows'][-1]['housing_units'])}
+    homes; pole-top and underground units. <sup>d</sup> {over:.0f} miles × four systems on a typical shared pole (electric, telephone
+    copper, cable TV coax, fiber).</p>
     <p class="note" style="font-size:.95rem"><strong>The transformers.</strong> Distribution transformers are filled with mineral oil.
     Under federal rules (40 CFR 761.2), any made before July 2, 1979 whose PCB content has not been tested must be presumed
     PCB-contaminated, so the age of each unit matters, and PG&amp;E does not publish it. System-wide, PG&amp;E told regulators it is

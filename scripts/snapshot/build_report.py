@@ -299,14 +299,16 @@ def s_findings():
              f"vehicles and home deliveries, which the 2017 Berkeley Drawdown list flagged, are not yet counted by any public source.",
              f"{a('#cars', 'Cars')} · {a('#tide', 'Commuting')} · {a(V2050, 'Vision 2050 framework (2020)')} · "
              f"{a(DRAWDOWN, 'Berkeley Drawdown solutions (2017)')}"),
-        item(f'{over:.0f} of {total:.0f} street miles still carry overhead wires',
-             f"Only {100 * (total - over) / total:.0f}% of Berkeley's street miles have their wires underground: half of the arterials, "
-             f"a third of the collectors, and {100 * T1['residential'][1] / T1['residential'][0]:.0f}% of residential streets. The "
-             f"{res_over:.0f} miles of overhead residential streets are priced in none of the City cost studies we found. The poles that carry the "
-             f"wires are not public; from the {n(F['poles']['wood'])} wood poles the City has hung streetlights on, we estimate about "
-             f"{round(lo, -2):,.0f}–{round(hi, -2):,.0f} street poles. Vision 2050 pictured a city whose evacuation routes had been "
-             f"undergrounded; a 2019 City study priced 16.9 miles of those routes at "
-             f"{big(sum(r['total_cost'] for r in U['bellecci'] if r['version'].startswith('FY2019')))}.",
+        item(f'{total - over:.1f} of {total:.0f} street miles have their wires underground; {over:.0f} still carry them overhead',
+             f"Only {100 * (total - over) / total:.0f}% of Berkeley's street miles have buried wires: half of the arterials, a third "
+             f"of the collectors, and {100 * T1['residential'][1] / T1['residential'][0]:.0f}% of residential streets. Of the {over:.0f} "
+             f"overhead miles, {res_over:.0f} are residential streets, and no City cost study we found prices those. At today's costs per "
+             f"mile, from PG&E's recent average of $3.25 million to the City's 2019 estimate of $6.1 million, burying the wires on all "
+             f"{over:.0f} miles would cost roughly ${over * 3.25 / 1000:.1f} to ${over * 6.1 / 1000:.1f} billion; the City's capital plan "
+             f"budgets nothing for it. The poles are not public; from the {n(F['poles']['wood'])} wood poles the City has hung streetlights "
+             f"on, we estimate about {round(lo, -2):,.0f}–{round(hi, -2):,.0f} street poles. Nor are the transformers: PG&E's own figure of "
+             f"seven customers per residential transformer implies roughly 7,000–8,000 serving Berkeley homes, on poles and in "
+             f"underground vaults. They are oil-filled, and federal rules presume any made before July 1979 to contain PCBs unless tested.",
              f"{a('#undergrounding', 'Undergrounding')} · {a('#networks', 'Under the streets')} · data: {dl('undergrounding_segments_harris_2016.csv')}, "
              f"{dl('wood_pole_lines_traced.geojson')}"),
         item("The City's undergrounding cost is $5.4 million short",
@@ -675,8 +677,14 @@ def s_networks():
         ['Distance to the nearest lit wood pole', f"median {P['nn_median_ft']} ft (half within {P['nn_p25']}–{P['nn_p75']} ft)", 'Measured from those poles'],
         ['Pole line traced by lit poles alone', f"{tr['250']['miles']:.0f}–{tr['400']['miles']:.0f} mi", 'Measured: links between neighboring lit poles up to 250–400 ft; a floor'],
         ['Utility poles along streets', f"≈ {round(lo, -2):,.0f}–{round(hi, -2):,.0f}", f"Estimate: {over:.1f} overhead street miles ÷ a span of {tr['200']['mean_span_ft']:.0f}–{tr['250']['mean_span_ft']:.0f} ft (the traced links); rear-lot pole lines are extra"],
+        ['Transformers serving homes', '≈ 7,000–8,000', f"Estimate: Berkeley's {rnd(F['dof']['rows'][-1]['occupied'])}–{rnd(F['dof']['rows'][-1]['housing_units'])} homes ÷ PG&E's \u201caverage number of customers per residential transformer is 7\u201d (2027 rate case, rebuttal testimony). Counts pole-top and underground units; excludes transformers serving businesses"],
         ['Aerial cable route-miles', f"≈ {4 * over:,.0f}", f"Illustration: {over:.0f} miles × 4 systems on a typical joint-use pole (electric, telephone copper, cable TV coax, fiber); each electric line carries several conductors"],
     ])}
+    <p class="note" style="font-size:.95rem"><strong>The transformers.</strong> Distribution transformers are filled with mineral oil.
+    Under federal rules (40 CFR 761.2), any made before July 2, 1979 whose PCB content has not been tested must be presumed
+    PCB-contaminated, so the age of each unit matters, and PG&amp;E does not publish it. System-wide, PG&amp;E told regulators it is
+    "tracking over 67,000 overloaded service transformers" while replacing 400 to 488 a year. Its wildfire filing counts 1,126
+    leaking-transformer events, none of which started a fire: the risk is oil on the ground, not ignition.</p>
     <p class="note">What would replace the estimates with counts: PG&amp;E's pole and joint-use attachment records (its Joint Use
     Map Portal is closed to the public), which list every pole and every company attached to it. Wiring for traffic signals,
     sewer pump stations and water valves is not mapped publicly at all. Map layer: {dl('wood_pole_lines_traced.geojson')}.</p>

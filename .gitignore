@@ -192,3 +192,9 @@ data/raw/snapshot/*/lodes/
 data/raw/snapshot/*/dmv/
 data/raw/snapshot/*/ebmud/*.txt
 scripts/snapshot/__pycache__/
+# AASHE STARS pages saved with a signed-in session: the HTML carries session (CSRF) tokens and stays local;
+# the plain-text pages and manifest.json are tracked. Uploaded files are large and stay local (pinned in the manifest).
+data/raw/campus/stars_2025/*.html
+data/raw/campus/stars_2025/files/
+data/raw/campus/*.html
+data/raw/campus/*.pdf

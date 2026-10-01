@@ -67,7 +67,7 @@ CITED = dict(
              'UC Berkeley Office of Sustainability, greenhouse gas inventory (2019-2024)',
              'UC Regents item F2, July 16, 2025 (Berkeley Clean Energy Campus); ACEEE 2024 paper by campus staff (core campus, cogeneration)',
              'UC 2025 Annual Report on Sustainable Practices (commuting; per-campus chart data from its public Google Sheets, fetched 2026-10-01)',
-             'AASHE STARS, UC Berkeley report summary (submitted February 19, 2025)',
+             'AASHE STARS, UC Berkeley 2025 report (submitted February 19, 2025): credits OP-3, OP-5, OP-6, OP-14 and PRE-3, saved 2026-10-01 with a signed-in account',
              'UC Berkeley Clean Energy Campus fact sheet, April 5, 2023 (sustainability.berkeley.edu)',
              'Lawrence Berkeley National Laboratory 2025 LRDP Draft EIR, April 2025 (people, energy, water, GHG, parking); '
              'UC Regents item F1B, September 17, 2025 (202 acres, buildings, floor area)']),
@@ -503,6 +503,10 @@ def s_campus():
     S = CS['stars']
     last = lambda tag: next(r for r in CS[tag]['rows'] if r['year'] == 2024)
     gu, gl = last('ucb')['total'], last('lbnl')['total']
+    ST = F['stars2025']
+    sqft = ST['floor_m2'] * 10.7639
+    wgal = ST['water_m3'] * 264.172
+    gas_therms_implied = ST['implied_gas_mwh'] / 0.0293071      # 1 therm = 0.0293071 MWh
     uc = CITED['uc']
     v = lambda t, f=n: f"{f(t[0])} <span class=\"yr\">({t[1]})</span>" if t and t[0] is not None else '<span class="no">not published</span>'
     mgd = lambda g: f"{g / 365 / 1e6:.2f} million gal/day"
@@ -511,14 +515,14 @@ def s_campus():
         ['Employees', v(U['employees']), v(B['employees']), f"≈ {n(U['employees'][0] + B['employees'][0])}"],
         ['Researchers and guests (Lab)', '—', f"{n(B['academics'][0])} academics, {n(B['affiliates'][0])} affiliates <span class=\"yr\">(spring 2024)</span>", 'overlap with UC'],
         ['Land', v(U['acres'], lambda x: f"{x:,} acres"), v(B['acres'], lambda x: f"{x:,} acres"), 'the Lab sits on University land; overlap not stated'],
-        ['Floor area', v(U['gsf'], lambda x: f"{x / 1e6:.1f} million sq ft"), v(B['gsf'], lambda x: f"{x / 1e6:.1f} million sq ft"), f"≈ {(U['gsf'][0] + B['gsf'][0]) / 1e6:.1f} million sq ft"],
+        ['Floor area', f"{sqft / 1e6:.1f} million sq ft <span class=\"yr\">(2023)</span>", v(B['gsf'], lambda x: f"{x / 1e6:.1f} million sq ft"), f"≈ {(sqft + B['gsf'][0]) / 1e6:.1f} million sq ft"],
         ['Student beds', v(U['beds']) + f"; {n(U['beds_planned'][0])} more by fall 2029", 'none', v(U['beds'])],
         ['Parking spaces', v(U['parking']), v(B['parking']), f"≈ {n(U['parking'][0] + B['parking'][0])}"],
-        ['Water', v(U['water_gal'], mgd), v(B['water_gal'], mgd), f"≈ {(U['water_gal'][0] + B['water_gal'][0]) / 365 / 1e6:.2f} million gal/day (different years)"],
-        ['Electricity', '<span class="no">not published</span> (own gas-fired cogeneration plant)', v(B['elec_mwh'], lambda x: f"{x:,} MWh a year"), '—'],
-        ['Natural gas', v(U['gas_mmbtu'], lambda x: f"{x * 10 / 1e6:.1f} million therms"), v(B['gas_therms'], lambda x: f"{x / 1e6:.1f} million therms"), f"≈ {(U['gas_mmbtu'][0] * 10 + B['gas_therms'][0]) / 1e6:.1f} million therms (different years)"],
+        ['Water', f"{wgal / 365 / 1e6:.2f} million gal/day <span class=\"yr\">(2023)</span>", v(B['water_gal'], mgd), f"≈ {(wgal + B['water_gal'][0]) / 365 / 1e6:.2f} million gal/day (2023)"],
+        ['Electricity', f"{ST['elec_offsite_mwh']:,.0f} MWh bought + {ST['elec_solar_mwh']:,.0f} MWh solar <span class=\"yr\">(2023)</span>; the gas plant's own output is not reported", v(B['elec_mwh'], lambda x: f"{x:,} MWh a year"), '—'],
+        ['Natural gas', f"≈ {gas_therms_implied / 1e6:.1f} million therms <span class=\"yr\">(2023, implied by its emissions)</span>", v(B['gas_therms'], lambda x: f"{x / 1e6:.1f} million therms"), f"≈ {(gas_therms_implied + B['gas_therms'][0]) / 1e6:.1f} million therms (2023)"],
         ['Greenhouse gas (all scopes, net)', f"{gu:,.0f} t CO₂e <span class=\"yr\">(2024)</span>", f"{gl:,.0f} t CO₂e <span class=\"yr\">(2024)</span>", f"{gu + gl:,.0f} t CO₂e (2024)"],
-        ['Drive alone to work', f"{U['sov_staff'][0]} of faculty and staff", f"{B['sov'][0]} of employees", '—'],
+        ['Commuting', f"{ST['commute_students']:.0f}% of students and {ST['commute_employees']:.0f}% of employees walk, bike, take transit or share rides <span class=\"yr\">(2024)</span>", f"{B['sov'][0]} of employees drive alone", '—'],
         ['Property tax', 'exempt (state constitution)', 'exempt (University land)', 'none'],
     ]
     beso = F['beso']['years']['2024']
@@ -538,8 +542,18 @@ def s_campus():
     their boundaries. The Lab straddles the city line: "the western half of the Lab campus is within the City of Berkeley;
     the eastern half is within the city of Oakland."</p>
     {table(['', 'UC Berkeley', 'Berkeley Lab (LBNL)', 'Together'], rows)}
-    <p class="note">For scale: the campus burned about {U['gas_mmbtu'][0] * 10 / 1e6:.0f} million therms of gas in 2018, more than five
-    times the {beso['therms'] / 1e6:.1f} million therms reported by all of the City's large buildings in 2024. Its gas-fired
+    <p class="note"><strong>The campus's national sustainability report leaves out its power plant.</strong> In its 2025 STARS
+    report the campus gives its 2023 energy use as {ST['total_mwh']:,.0f} MWh, including {ST['gas_mwh']:,.0f} MWh of natural gas, while
+    describing the gas-fired cogeneration plant as "the primary source for electricity and heating for campus buildings." The same
+    report's emissions credit gives {ST['stationary_t']:,.0f} tonnes of CO₂e from burning fuel on site in 2023, which at the campus's
+    own factor (53.02 kg of CO₂ per MMBtu) means about {round(ST['implied_gas_mwh'], -3):,.0f} MWh of gas (the CO₂ factor alone slightly overstates it), some {ST['implied_gas_mwh'] / ST['gas_mwh']:.0f} times the
+    energy credit's figure. With that gas, the campus used roughly {(ST['total_mwh'] - ST['gas_mwh'] + ST['implied_gas_mwh']) / 1000:,.0f} thousand MWh,
+    about {(ST['total_mwh'] - ST['gas_mwh'] + ST['implied_gas_mwh']) * 3412.14 / sqft:.0f} kBtu per square foot, which matches the
+    {next(r['eui_kbtu_per_sqft'] for r in CS['ucb']['rows'] if r['year'] == 2023):.0f} the UC system report gives for 2023. The STARS energy figure
+    ({ST['total_mwh'] * 3412.14 / sqft:.0f} kBtu per square foot) understates the campus's energy use about tenfold. For scale, the campus's gas, about
+    {gas_therms_implied / 1e6:.0f} million therms, is six times the {beso['therms'] / 1e6:.1f} million therms reported by all of the City's large
+    buildings in 2024. Data: {dl('stars_2025_ucb_operations.csv')}.</p>
+    <p class="note"> Its gas-fired
     cogeneration plant produced {n(U['ghg_cogen'][0])} of the campus's {n(U['ghg'][0])} tonnes of CO₂e in 2024; the Berkeley
     Clean Energy Campus project replaces it with an electric heating and cooling plant serving about 32 buildings in its first
     phase. The campus's April 2023 fact sheet promised $249 million of State funding, 15 MW of solar, 8 MW of fuel cells, a

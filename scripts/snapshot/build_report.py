@@ -6,7 +6,7 @@ which come from documents rather than data files; each carries its source. Nothi
 
 Run: .venv/bin/python scripts/snapshot/derive.py && .venv/bin/python scripts/snapshot/build_report.py
 """
-import csv, html, json, os
+import csv, html, json, os, re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DATA = os.path.join(ROOT, 'docs', 'data', 'snapshot')
@@ -71,6 +71,54 @@ CITED = dict(
              'City of Berkeley soft-story inventory, status as of July 23, 2026',
              'Measure FF reports to Council, December 3, 2024 and June 24, 2025; Fire Department wildfire memo, August 25, 2023',
              'City Evacuation StoryMaps (July 2025) and the KLD Evacuation Time Estimate Study (2025)']),
+    # City of Berkeley finances, verified 2026-10-01 in data/raw/city_finance/*.txt (adopted FY2027-28 budget, Council
+    # 2026-06-23 Special Item 01; Budget & Finance Committee presentation 2026-05-14; FY2025 ACFR; CalPERS valuations as
+    # of 6/30/2025; City Auditor, Berkeley's Financial Condition FY2016-FY2025, April 2026; Measure U resolution, item 38).
+    city=dict(
+        fte=[('Police Department', 302.00, 272.00), ('Public Works', 351.00, 337.00), ('Health, Housing & Community Services', 253.20, 195.00),
+             ('Fire Department', 214.00, 190.00), ('Library', 131.18, 131.05), ('Parks, Recreation & Waterfront', 114.00, 114.00),
+             ('Planning & Development', 109.04, 105.04), ('City Manager', 57.00, 44.00), ('Finance', 56.00, 48.00),
+             ('Information Technology', 51.00, 45.00), ('Rent Board', 29.00, 29.00), ('Human Resources', 27.00, 24.00),
+             ('Mayor and Council', 23.00, 23.00), ('City Attorney', 20.00, 19.00), ('City Auditor', 15.75, 15.75),
+             ('City Clerk', 10.00, 9.00), ('Police Accountability', 6.00, 4.00)],
+        fte_total=(1769.17, 1604.84), fte_gf=663.41, cut_fte=164.33, cut_if_no_tax=183,
+        all_funds=916.8e6, general_fund=313.8e6,
+        dept_gf=[('Police', 101111166), ('Fire', 51999702), ('Health, Housing & Community Services', 34054672),
+                 ('City Manager', 13936928), ('Parks, Recreation & Waterfront', 12213160), ('Finance', 9114584),
+                 ('Public Works', 8402866), ('Planning & Development', 3207882)],
+        deficits=[('2018-19', 10), ('2020-21', 40), ('2022', 27), ('2023', 22), ('2024', 12), ('2025', 17), ('2026', 29)],
+        deficit_fy27=31349339, deficit_fy28=29532958,
+        calpers=[('Miscellaneous', 309023056, 77.4, 72.6), ('Police', 205663030, 64.5, 60.8), ('Fire', 96115914, 74.3, 70.7)],
+        pension_paid_fy2016=36.8e6, pension_paid_fy2025=77.9e6, pension_forecast='$76 million in FY 2025 to $108 million in FY 2034',
+        net_pension_liability=686433892, opeb=43.2e6,
+        ot_police_fy2025=9.3e6, ot_fire_fy2025=7.9e6, ot_increase='$10.6 million increase in Police and Fire overtime expenditures from FY 2016 to FY 2025',
+        deferred_maint=1.8e9, bond=300e6, bond_projects=272.5e6, bond_staffing=40.5e6, bond_debt_service=610e6,
+        bond_parks=90697000, bond_pw=75135000, bond_fire=106668000, paving_plan=250e6, pci=56,
+        src='City of Berkeley adopted FY2027-28 budget and FY2027-31 Capital Improvement Program (Council, June 23, 2026); '
+            'Budget & Finance Policy Committee presentation, May 14, 2026; FY2025 Annual Comprehensive Financial Report; CalPERS '
+            'actuarial valuations as of June 30, 2025; City Auditor, Berkeley\'s Financial Condition FY2016–FY2025 (April 2026); '
+            'Police and Fire mid-biennial budget presentations (May 22, 2025); Measure U resolution (Council item 38, June 16, '
+            '2026) and project list (February 2026)'),
+    # Bikes, e-bikes, scooters (research 2026-10-01; sources in 'src').
+    bikes=dict(
+        compare=[('Davis', 11.22, 14.59), ('Boulder', 7.99, 12.18), ('Palo Alto', 7.91, 12.23), ('Cambridge, Mass.', 7.77, 11.23),
+                 ('Berkeley', 4.35, 6.92), ('Portland', 3.37, 4.71), ('San Francisco', 3.30, 4.79), ('Oakland', 1.73, 2.36),
+                 ('United States', 0.45, 0.52)],
+        berkeley_2008_12=8.1, network=[('Paths (Class I)', 19.2, 19.8), ('Painted lanes (Class II)', 12.1, 10.6),
+                 ('Upgraded painted lanes', 0.3, 1.8), ('Signed routes (Class III)', 8.2, 12.6), ('Bike boulevards', 11.9, 12.7),
+                 ('Separated bikeways (Class IV)', 0.1, 3.6)], network_total=(51.8, 61.1),
+        baywheels=[(2024, 87853, 49954), (2025, 134581, 100948)], baywheels_stations=48,
+        scooters='up to 1,200 shared scooters and e-bikes, at most three operators, a $25,000 annual permit fee and $71 per device (2026 terms); Lime and VeoRide operate now',
+        ava='Ava Community Energy pledged $10 million for over 9,000 e-bike rebates across its territory (launched July 2025; about 600 a month)',
+        us_ownership='51% of U.S. adults lived in a household with an adult bicycle in 2022 (PeopleForBikes survey)',
+        milvia=3477475, southside=16.5e6, hopkins=('$14–15 million', '$11 million', 1.2), unc_lane_median=89470,
+        vision_zero='people walking and biking are almost 80% of those killed or severely injured in collisions, while making up about 40% of trips (2013–2017)',
+        src='U.S. Census American Community Survey 2020–2024 5-year (table B08301, via Census Reporter) and the Census Bureau\'s 2008–2012 '
+            'commuting report; Berkeley Bike Plan update, FITES committee, July 2025; Bay Wheels public trip files (counted by '
+            'BerkeleyBuild: trips starting at Berkeley stations, BK- prefix); City of Berkeley shared-mobility permit terms (2026); '
+            'Ava Community Energy (July 2025); PeopleForBikes 2022 participation study; Milvia Bikeway contract (Council, January 26, '
+            '2021); Southside Complete Streets project page; Hopkins Corridor referral (Council, July 28, 2026); UNC Highway Safety '
+            'Research Center, Costs for Pedestrian and Bicyclist Infrastructure Improvements (2013); Berkeley Vision Zero Action Plan'),
     # UC Berkeley and Berkeley Lab run their own utilities and are excluded from City figures. Each value: (number, year).
     campus=dict(
         ucb=dict(acres=(1095, '2021'), gsf=(13858460, '2018-19'), buildings_core=(100, '2024'), beds=(11621, '2024-25'),
@@ -160,8 +208,9 @@ LEDE = {
     'income': 'Household income, poverty and education, citywide; the same measures for each block group are in the data files.',
     'age': 'The ages and origins of Berkeley residents.',
     'tide': 'Who comes into Berkeley to work, who leaves, where they come from and go, and how residents travel.',
-    'cars': 'How many vehicles are registered in Berkeley, by ZIP code and fuel, and how many households have none.',
+    'cars': 'Vehicles registered by ZIP code and fuel, households without a car, and the bikes, e-bikes and scooters that are changing how people move.',
     'land': 'What the County assesses Berkeley\'s land and buildings at, who is exempt, and how value spreads across neighborhoods.',
+    'city': 'How many people the City employs, what it spends and on what, its pension and overtime costs, its deficits, and the gap between its capital needs and its funding.',
     'networks': 'The streets, water mains, sewers, storm drains, gas lines and poles under and over the city, how old they are, and what is not public.',
     'undergrounding': 'How much of Berkeley still has overhead wires, and what the City\'s own studies say it costs to bury them.',
     'water-energy': 'How much water and power Berkeley uses, and what can be known about use by building, block or neighborhood.',
@@ -171,7 +220,13 @@ LEDE = {
 }
 
 
+ORDER = ['people', 'tenure', 'income', 'age', 'tide', 'cars', 'land', 'city', 'networks', 'undergrounding', 'water-energy',
+         'fire', 'campus', 'data']
+
+
 def section(id_, kicker, title, body):
+    if id_ in ORDER:                               # number sections by their order, never by hand
+        kicker = re.sub(r'^\d+ · ', f'{ORDER.index(id_) + 1} · ', kicker)
     lede = f'<p class="lede" style="margin-bottom:.6rem">{LEDE[id_]}</p>' if id_ in LEDE else ''
     return f'<section class="page" id="{id_}"><div class="kicker">{kicker}</div><h2>{title}</h2>{lede}{body}</section>'
 
@@ -444,7 +499,30 @@ def s_cars():
     vehicle's registered address is confidential under the Vehicle Code (§1808.21). ZIP codes 94707 and 94708 include
     parts of Kensington and Albany, so ZIP totals slightly overstate Berkeley. Data: {dl('dmv_2026_by_zip.csv')},
     {dl('dmv_2026_by_zip_fuel_duty.csv')}.</p>'''
-    return section('cars', '6 · Cars', 'Vehicles, by ZIP code and fuel', body)
+    Bk = CITED['bikes']
+    capb = next(r for r in F['capital']['rows'] if r['category'].startswith('Bike'))
+    i = F['acs_city']['ind']
+    body += f'''
+    <h3>Bikes, e-bikes and scooters</h3>
+    <p class="note" style="font-size:.95rem">{i['commute_bicycle_pct']}% of employed residents bike to work in the 2024 survey, and
+    about 7% of those who still commute. Berkeley ranks well above Oakland, San Francisco and Portland, but below the college towns
+    it is usually compared with. Its bike share has fallen since 2008–2012, when it was {Bk['berkeley_2008_12']}%, mostly because the
+    count now includes the many who work from home. No survey counts bicycles owned in Berkeley; nationally, {Bk['us_ownership']}.</p>
+    <div class="two"><div>{table(['City', 'Bike to work, all workers', 'Excluding work from home'], [[c, f"{a:.1f}%", f"{b:.1f}%"] for c, a, b in Bk['compare']], right={1, 2})}</div>
+    <div>{table(['Berkeley bikeways', '2017 miles', '2024 miles'], [[k, f"{a}", f"{b}"] for k, a, b in Bk['network']] + [['<strong>Total</strong>', f"<strong>{Bk['network_total'][0]}</strong>", f"<strong>{Bk['network_total'][1]}</strong>"]], right={1, 2})}</div></div>
+    <p class="note" style="font-size:.95rem">Shared bikes are growing fast. Trips starting at Berkeley's {Bk['baywheels_stations']} Bay
+    Wheels stations rose from {n(Bk['baywheels'][0][1])} in 2024 to {n(Bk['baywheels'][1][1])} in 2025, and {100 * Bk['baywheels'][1][2] / Bk['baywheels'][1][1]:.0f}%
+    of the 2025 trips were on e-bikes. The City allows {Bk['scooters']}. {Bk['ava']}.</p>
+    <p class="note" style="font-size:.95rem"><strong>What bikeways cost.</strong> Paint is cheap: a national study put the median cost
+    of a painted bike lane at about ${Bk['unc_lane_median'] / 1000:.0f},000 a mile. Concrete-separated lanes cost far more, because
+    they rebuild curbs, drainage and signals: the Milvia Bikeway's construction contract was ${Bk['milvia'] / 1e6:.1f} million (2021);
+    the Southside project, with two-way cycle tracks on Bancroft, Dana and Fulton plus repaving and bus lanes, about
+    ${Bk['southside'] / 1e6:.1f} million; and repaving 1.2 miles of Hopkins Street with bikeways is estimated at {Bk['hopkins'][0]}, against
+    {Bk['hopkins'][1]} for repaving with pedestrian safety work alone. Separated bikeways grew from 0.1 to 3.6 miles between 2017 and 2024.
+    The City's capital plan lists {big(capb['need'])} of bike and pedestrian need and funds {big(capb['available_5yr'])} over five years.
+    Safety is the stake: {Bk['vision_zero']}.</p>
+    <p class="note">Sources: {esc(Bk['src'])}.</p>'''
+    return section('cars', '6 · Cars', 'Cars, bikes and scooters', body)
 
 
 def s_land():
@@ -478,6 +556,66 @@ def s_land():
     return section('land', '7 · Land and money', 'Parcels and taxable value', body)
 
 
+def s_city():
+    C = CITED['city']
+    K = F['capital']
+    rows = sorted(K['rows'], key=lambda r: -r['need'])
+    cap_rows = [[esc(r['category']), big(r['need']), big(r['available_5yr']) if r['available_5yr'] else '$0',
+                 f"{100 * r['available_5yr'] / r['need']:.0f}%" if r['need'] else '—', big(r['unfunded_fy2031'])] for r in rows]
+    cap_rows.append(['<strong>All categories</strong>', f"<strong>{big(K['total']['need'])}</strong>", f"<strong>{big(K['total']['available_5yr'])}</strong>",
+                     f"<strong>{100 * K['total']['available_5yr'] / K['total']['need']:.0f}%</strong>", f"<strong>{big(K['total']['unfunded_fy2031'])}</strong>"])
+    allf = json.load(open(os.path.join(ROOT, 'data', 'reference', 'berkeley_budget_external_facts_2026-08-15.json')))['spend_fy2027_adopted']['by_department']
+    gf = dict(C['dept_gf'])
+    alias = {'Health, Housing & Community Services': 'Health, Housing & Community Services', 'Parks, Recreation & Waterfront': 'Parks, Recreation & Waterfront', 'Planning & Development': 'Planning and Development'}
+    dept_rows = [[esc(d), big(v), big(gf[k]) if (k := next((g for g in gf if alias.get(g, g) == d), None)) else '—'] for d, v in sorted(allf.items(), key=lambda t: -t[1])[:12]]
+    fte_rows = [[esc(d), f"{a:,.2f}".rstrip('0').rstrip('.'), f"{b:,.2f}".rstrip('0').rstrip('.'), f"{b - a:+,.2f}".rstrip('0').rstrip('.') if b != a else '0'] for d, a, b in C['fte']]
+    fte_rows.append(['<strong>Total</strong>', f"<strong>{C['fte_total'][0]:,.2f}</strong>", f"<strong>{C['fte_total'][1]:,.2f}</strong>", f"<strong>{C['fte_total'][1] - C['fte_total'][0]:+,.2f}</strong>"])
+    body = f'''
+    <div class="grid">
+      {card(big(C['all_funds']), 'City spending, all funds (FY2027)', f"{big(C['general_fund'])} of it from the General Fund, the part taxes pay for.")}
+      {card(f"{C['fte_total'][1]:,.0f}", 'City employees (full-time equivalent)', f"Down {C['cut_fte']:.0f} from {C['fte_total'][0]:,.0f} in FY2026; {C['fte_gf']:.0f} paid by the General Fund.")}
+      {card(f"${C['deficit_fy27'] / 1e6:.1f} million", 'General Fund deficit, FY2027 (before one-time money)', f"${C['deficit_fy28'] / 1e6:.1f} million projected for FY2028.")}
+      {card(big(K['total']['need']), "capital need in the City's own five-year plan", f"{big(K['total']['available_5yr'])} is funded over the five years; the unfunded gap stays above $2.1 billion every year.")}
+    </div>
+    <h3>Staff, by department</h3>
+    {table(['Department', 'FY2026 adopted', 'FY2027 adopted', 'Change'], fte_rows, right={1, 2, 3})}
+    <p class="note">The FY2027 budget cuts {C['cut_fte']:.2f} positions: 45 vacant positions frozen in FY2026, 85 more vacant and 20
+    filled. Police lose 30 positions and Fire 24. Another 33 positions are carried on one-time money pending a proposed sales tax;
+    without it, the cut reaches {C['cut_if_no_tax']} positions.</p>
+    <div class="two"><div><h3>Spending by department (FY2027 adopted)</h3>
+    {table(['Department', 'All funds', 'General Fund'], dept_rows, right={1, 2})}
+    <p class="note">All funds include fee-supported services such as sewers, refuse and permits, which is why Public Works spends
+    far more than its General Fund share. A dash means the department is not among the General Fund departments the budget
+    summary lists; the Library, for one, runs on its own parcel tax.</p></div>
+    <div><h3>General Fund deficits, as the City reports them</h3>
+    {table(['Fiscal year', 'Deficit'], [[y, f"${d} million"] for y, d in C['deficits']] + [['2027 (projected)', f"${C['deficit_fy27'] / 1e6:.1f} million"], ['2028 (projected)', f"${C['deficit_fy28'] / 1e6:.1f} million"]], right={1})}
+    <p class="note">Each year's budget was balanced on paper with reserves, one-time federal money, vacancy savings or deferred
+    projects. The City's own presentation: "These approaches never addressed the underlying structural deficit."</p></div></div>
+    <h3>Pensions and overtime</h3>
+    {table(['CalPERS plan', 'Unfunded liability (6/30/2025)', 'Funded', 'A year earlier'], [[p, big(u), f"{f}%", f"{g}%"] for p, u, f, g in C['calpers']], right={1, 2, 3})}
+    <p class="note" style="font-size:.95rem">The City paid CalPERS {big(C['pension_paid_fy2025'])} in FY2025, up from
+    {big(C['pension_paid_fy2016'])} in FY2016; the City Auditor cites a forecast rising "from {C['pension_forecast']}." The police
+    plan's employer rate is above 80% of payroll. Overtime: the Police Department expected about {big(C['ot_police_fy2025'])} in
+    FY2025, 40% of it to backfill minimum staffing, and Fire about {big(C['ot_fire_fy2025'])}; the Auditor found a
+    "{C['ot_increase']}," and that police overtime exceeded its budget three years running.</p>
+    <h3>The capital gap, by the City's own count</h3>
+    {table(['Category', 'Need', 'Funded, 5 years', 'Share funded', 'Unfunded by FY2031'], cap_rows, right={1, 2, 3, 4})}
+    <p class="note" style="font-size:.95rem">The City's five-year capital plan puts its total need at {big(K['total']['need'])} and funds
+    {big(K['total']['available_5yr'])}. Because the funded work only keeps pace with inflation, the unfunded gap does not shrink:
+    ${K['total']['unfunded_fy2027'] / 1e9:.2f} billion in FY2027, ${K['total']['unfunded_fy2031'] / 1e9:.2f} billion in FY2031. Public Works separately reports
+    "{big(C['deferred_maint'])} in deferred maintenance costs and needed improvements." Sewers are the one category close to funded,
+    paid by sewer fees; undergrounding, the Veterans Building and Old City Hall get nothing. Streets average a pavement
+    condition of {C['pci']}; the five-year paving plan costs ${C['paving_plan'] / 1e6:.0f} million.</p>
+    <p class="note" style="font-size:.95rem"><strong>Measure U against the need.</strong> The $300 million bond on the November 2026
+    ballot would fund {big(C['bond_projects'])} of projects (parks {big(C['bond_parks'])}, public works {big(C['bond_pw'])}, fire
+    {big(C['bond_fire'])}) plus {big(C['bond_staffing'])} for staffing and delivery. Issued in stages from 2027 and repaid through
+    FY2066–67, it costs ${C['bond_debt_service'] / 1e6:.0f} million in debt service. That is about {100 * C['bond'] / K['total']['need']:.0f}% of the need the City
+    itself lists, and it includes no undergrounding. Vision 2050 had put the unfunded need at $882 million in 2020.
+    Data: {dl('city_capital_needs_fy2027_2031.csv')}.</p>
+    <p class="note">Sources: {esc(C['src'])}.</p>'''
+    return section('city', '8 · The City\'s money', 'Staff, pensions, deficits and the capital gap', body)
+
+
 def s_networks():
     I = F['infra']
     S = CITED['streets']
@@ -505,6 +643,19 @@ def s_networks():
     <p class="note">The City's sewer map prices every segment at a planning cost per foot by diameter: {big(I['sewer_planning_cost'])}
     for the whole network, including the {n(sum(r['segments'] for r in I['sewer_by_material'] if r['MATERIAL'] == 'HDPE'))} segments
     already relined with plastic (HDPE). It is a replacement value at the City's unit costs, not a backlog.</p>
+    <h3>Who owns which pipes</h3>
+    {table(['System', 'Owner', 'What it covers'], [
+        ['Water supply and mains', 'EBMUD', 'Reservoirs, treatment, the 269 miles of mains under Berkeley, and meters; EBMUD serves about 1.5 million people'],
+        ['Sanitary sewers', 'City of Berkeley', '254 miles of mains, about 7,200 manholes, 7 pump stations, and the lower half of each house lateral, from the property-line cleanout to the main'],
+        ['House sewer laterals (upper half)', 'Each property owner', 'From the house to the cleanout; a lateral certificate is required at sale (Berkeley\'s own program, separate from EBMUD\'s)'],
+        ['Interceptors and treatment', 'EBMUD', 'The large pipes that collect sewage from Berkeley and six other cities, the Main Wastewater Treatment Plant at the foot of the Bay Bridge, and three wet-weather facilities'],
+        ['Storm drains', 'City of Berkeley', 'About 93 miles of pipe and 5,800 structures, separate from the sewers'],
+        ['Electricity and gas', 'PG&amp;E', 'Poles, wires, transformers and gas mains; Ava Community Energy, the public power provider Berkeley belongs to, buys power for customers who have not opted out'],
+    ])}
+    <p class="note">Rain that leaks into old sewers is the overlap: in storms it overwhelms EBMUD's plant, and a 2014 federal consent
+    decree requires the region to cut that inflow enough to end wet-weather discharges by 2035. Sources: City Sewer System
+    Management Plan (2019); EBMUD 2025 Urban Water Management Plan and private sewer lateral program (2021); EBMUD consent decree
+    (2014); City private sewer lateral guide; adopted FY2027–28 budget.</p>
     <h3>Overhead wire: an estimate from the poles</h3>
     {table(['Measure', 'Value', 'How it is known'], [
         ['Street miles with overhead lines', f"{over:.1f}", 'Measured: City-commissioned 2016 study, Table 1 (all street classes)'],
@@ -545,6 +696,7 @@ def s_ug():
     bc = {r['street']: r for r in U['bellecci'] if r['version'].endswith('capital program')}
     rn = S['report_network_totals']
     T1 = CITED['table1_ft']
+    over = sum(a - b for a, b in T1.values()) / 5280
     t1 = {k: (a / 5280, b / 5280, (a - b) / 5280) for k, (a, b) in T1.items()}
     tot = [sum(v[i] for v in t1.values()) for i in range(3)]
     t1rows = [[k.title(), f"{v[0]:.1f}", f"{v[1]:.1f}", f"{v[2]:.1f}", f"{100 * v[1] / v[0]:.0f}%"] for k, v in t1.items()]
@@ -586,6 +738,20 @@ def s_ug():
     miles. PG&amp;E ratepayer credits (Rule 20A) bring Berkeley about {usd(C['harris_rule20a_per_year'])} a year; the
     {usd(C['bellecci_rule20a_balance'])} balance in 2019 was mostly committed to Underground Utility District 48 in the hills
     (Grizzly Peak, Summit, Senior, Avenida: {C['uud48_parcels']} parcels).</p>
+    <h3>What comes next, and what it would cost</h3>
+    <p class="note" style="font-size:.95rem">The money that paid for most past undergrounding is ending. PG&amp;E ratepayer credits
+    under Rule 20A stopped accruing after 2022 under a 2021 state utilities commission decision, and unused credits expire by the
+    end of 2033. Underground Utility District 48 in the hills, started in June 2023, is due to finish in 2026. The City's five-year
+    capital plan budgets $0 for undergrounding each year against a $124.5 million need, and Measure U includes none. In January
+    2024 the Council asked PG&amp;E to underground its lines in Berkeley's highest fire-risk zone, noting that a 2021 request
+    got no reply. PG&amp;E's ten-year undergrounding plan, filed September 30, 2026, would bury about 5,000 miles statewide between
+    2028 and 2037; its first projects include one in Alameda County, in Oakland, and none in Berkeley that we could identify.</p>
+    <p class="note" style="font-size:.95rem">For scale only: at the per-mile costs now in use, from PG&amp;E's own recent average of
+    $3.25 million to the City's 2019 average of $6.1 million (lighting included), burying the wires on all {over:.0f} overhead street
+    miles would cost roughly ${over * 3.25 / 1000:.1f} to ${over * 6.1 / 1000:.1f} billion, before inflation. The evacuation routes alone,
+    16.9 miles, were priced at ${sum(r['total_cost'] for r in bc.values()) / 1e6:.0f} million as a FY2023 capital program.</p>
+    <p class="note">Sources: CPUC decisions D.21-06-013 and D.23-06-008; adopted FY2027–28 budget; Council item 28, January 30,
+    2024; PG&amp;E 10-Year Electric Undergrounding Plan, Volume 1 (September 30, 2026).</p>
     <p class="note">Maps: {dl('undergrounding_segments_harris_2016.csv')} ({len(csvrows('undergrounding_segments_harris_2016.csv'))}
     segments, each named by street, from and to) and {dl('undergrounding_evacuation_routes_bellecci_2019.csv')}.</p>'''
     return section('undergrounding', '9 · Undergrounding', 'What it costs to bury the wires', body)
@@ -934,10 +1100,10 @@ CSS = '''
 
 
 def main():
-    sections = [s_findings(), s_people(), s_tenure(), s_income(), s_age(), s_tide(), s_cars(), s_land(), s_networks(), s_ug(),
+    sections = [s_findings(), s_people(), s_tenure(), s_income(), s_age(), s_tide(), s_cars(), s_land(), s_city(), s_networks(), s_ug(),
                 s_water_energy(), s_fire(), s_campus(), s_catalog()]
     toc = [('findings', 'Findings'), ('people', 'People'), ('tenure', 'Renters and owners'), ('income', 'Income'), ('age', 'Ages'),
-           ('tide', 'Daily tide'), ('cars', 'Cars'), ('land', 'Land and money'), ('networks', 'Under the streets'),
+           ('tide', 'Daily tide'), ('cars', 'Cars and bikes'), ('land', 'Land and money'), ('city', 'The City\'s money'), ('networks', 'Under the streets'),
            ('undergrounding', 'Undergrounding'), ('water-energy', 'Water and power'), ('fire', 'Fire, flood, earthquake'),
            ('campus', 'University and Lab'), ('data', 'The data')]
     old = open(PAGE).read() if os.path.exists(PAGE) else ''

@@ -598,6 +598,42 @@ def fema_grants():
     FACTS['fema'] = keep
 
 
+def capital_needs():
+    """The City's own 'FY 2027 - FY 2031 Summary of Unfunded Capital' (adopted FY2027-28 budget, Council 2026-06-23,
+    Special Item 01, pp. 245-247), parsed from data/raw/city_finance/adopt_fy27_28_2026-06-23.txt. Checked against the
+    table's own total row (need $2,115,819,772; 5-year available $406,696,801)."""
+    # the PDF text carries a backspace (\x08) between each '$' and its number; strip it before parsing
+    t = open(os.path.join(ROOT, 'data', 'raw', 'city_finance', 'adopt_fy27_28_2026-06-23.txt')).read().replace('\x08', '').replace('\ufeff', '').split('\n')
+    start = next(i for i, l in enumerate(t) if 'Summary of Unfunded Capital' in l)
+    money = lambda x: -int(re.sub(r'[^\d]', '', x)) if '(' in x else (int(re.sub(r'[^\d]', '', x)) if re.search(r'\d', x) else 0)
+    amounts = lambda l: [money(m) for m in re.findall(r'\$\s*\(?[\d,]+\)?|\$\s*-', l)]
+    rows, name, total = [], [], None
+    for l in t[start:start + 400]:
+        st = re.sub(r'\s+', ' ', l).strip()
+        if not st or st.startswith(('Page ', 'CCity', 'City of', 'FY 2027 - FY 2031', 'Proposed', 'FY 2027 FY')):
+            continue
+        if st.startswith('Available Funding'):
+            a = amounts(st); cur = dict(category=' '.join(name).strip() or 'TOTAL', available_5yr=a[-1] if a else 0); name = []
+        elif st.startswith('Expenditures'):
+            continue
+        elif st.startswith('Capital & Maint. Need'):
+            cur['need'] = amounts(st)[0]
+        elif st.startswith('Unfunded Capital'):
+            a = amounts(st); cur['unfunded_fy2027'] = -a[0]; cur['unfunded_fy2031'] = -a[-1]
+            if cur['category'] in ('TOTAL', '0'):
+                total = cur
+                break
+            rows.append(cur)
+        elif not re.search(r'\$', st) and not st.startswith('('):
+            name.append(st)
+    assert total and total['need'] == 2115819772 and total['available_5yr'] == 406696801, total
+    assert sum(r['need'] for r in rows) == total['need'], (sum(r['need'] for r in rows), total['need'])
+    write_csv('city_capital_needs_fy2027_2031.csv', rows + [dict(total, category='All categories')], 'capital category',
+              "The City's own capital and maintenance need, funding available over five years, and unfunded capital, by "
+              "category (FY2027-2031 Capital Improvement Program, adopted June 23, 2026).")
+    FACTS['capital'] = dict(rows=rows, total=total)
+
+
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--date', default='2026-10-01')
     src = os.path.join(ROOT, 'data', 'raw', 'snapshot', ap.parse_args().date)
@@ -617,6 +653,7 @@ def main():
     campus_sustainability()
     stars_2025()
     fema_grants()
+    capital_needs()
     FACTS['files'] = FILES
     FACTS['sources_manifest'] = {k: {kk: v[kk] for kk in ('url', 'fetched_at', 'sha256') if kk in v} for k, v in manifest.items()}
     json.dump(FACTS, open(os.path.join(OUT, 'facts.json'), 'w'), indent=1, default=lambda o: o.item() if hasattr(o, 'item') else str(o))

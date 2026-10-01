@@ -4675,6 +4675,129 @@
    "date_closed": ""
   }
  ],
+ "capital": {
+  "rows": [
+   {
+    "category": "Parks, Park Buildings, Pools, Waterfront, and Camps",
+    "available_5yr": 22025000,
+    "need": 281544000,
+    "unfunded_fy2027": 285203360,
+    "unfunded_fy2031": 317380325
+   },
+   {
+    "category": "Public Buildings",
+    "available_5yr": 4500000,
+    "need": 330400000,
+    "unfunded_fy2027": 342680000,
+    "unfunded_fy2031": 396912411
+   },
+   {
+    "category": "Sidewalks & Pathways",
+    "available_5yr": 22425000,
+    "need": 66000000,
+    "unfunded_fy2027": 60760266,
+    "unfunded_fy2031": 54662494
+   },
+   {
+    "category": "Streets & Roads",
+    "available_5yr": 136376508,
+    "need": 263120000,
+    "unfunded_fy2027": 245303142,
+    "unfunded_fy2031": 166962795
+   },
+   {
+    "category": "Sewers",
+    "available_5yr": 119920000,
+    "need": 138000000,
+    "unfunded_fy2027": 117364000,
+    "unfunded_fy2031": 32670743
+   },
+   {
+    "category": "Storm Water & Green Infrastructure",
+    "available_5yr": 17305000,
+    "need": 322500000,
+    "unfunded_fy2027": 332638800,
+    "unfunded_fy2031": 372586542
+   },
+   {
+    "category": "Traffic Signals & Parking Infrastructure",
+    "available_5yr": 2000000,
+    "need": 21750000,
+    "unfunded_fy2027": 22204000,
+    "unfunded_fy2031": 24409010
+   },
+   {
+    "category": "Street Lights",
+    "available_5yr": 1455000,
+    "need": 5678000,
+    "unfunded_fy2027": 5749536,
+    "unfunded_fy2031": 5272042
+   },
+   {
+    "category": "Undergrounding",
+    "available_5yr": 0,
+    "need": 124500000,
+    "unfunded_fy2027": 129480000,
+    "unfunded_fy2031": 151473286
+   },
+   {
+    "category": "Bike & Ped Projects",
+    "available_5yr": 53668733,
+    "need": 163089980,
+    "unfunded_fy2027": 162331680,
+    "unfunded_fy2031": 137840399
+   },
+   {
+    "category": "Transit Projects",
+    "available_5yr": 23871560,
+    "need": 59617792,
+    "unfunded_fy2027": 55797454,
+    "unfunded_fy2031": 44675071
+   },
+   {
+    "category": "Vets & Old City Hall",
+    "available_5yr": 0,
+    "need": 197000000,
+    "unfunded_fy2027": 204880000,
+    "unfunded_fy2031": 239680622
+   },
+   {
+    "category": "Transfer Station",
+    "available_5yr": 1850000,
+    "need": 120000000,
+    "unfunded_fy2027": 123396000,
+    "unfunded_fy2031": 144940796
+   },
+   {
+    "category": "IT-Applications",
+    "available_5yr": 150000,
+    "need": 5350000,
+    "unfunded_fy2027": 5885000,
+    "unfunded_fy2031": 8396614
+   },
+   {
+    "category": "IT-Infrastructure",
+    "available_5yr": 200000,
+    "need": 16275000,
+    "unfunded_fy2027": 17172000,
+    "unfunded_fy2031": 21521445
+   },
+   {
+    "category": "IT-Security",
+    "available_5yr": 940000,
+    "need": 995000,
+    "unfunded_fy2027": 588000,
+    "unfunded_fy2031": 185675
+   }
+  ],
+  "total": {
+   "category": "0",
+   "available_5yr": 406696801,
+   "need": 2115819772,
+   "unfunded_fy2027": 2111433238,
+   "unfunded_fy2031": 2119570270
+  }
+ },
  "files": [
   {
    "file": "dof_e5_berkeley_2020_2026.csv",
@@ -4879,6 +5002,12 @@
    "grain": "grant application",
    "rows": 51,
    "description": "Every FEMA hazard-mitigation grant application with a Berkeley, California subrecipient since 1990: program, disaster, project type, amount, status and dates (OpenFEMA)."
+  },
+  {
+   "file": "city_capital_needs_fy2027_2031.csv",
+   "grain": "capital category",
+   "rows": 17,
+   "description": "The City's own capital and maintenance need, funding available over five years, and unfunded capital, by category (FY2027-2031 Capital Improvement Program, adopted June 23, 2026)."
   }
  ],
  "sources_manifest": {

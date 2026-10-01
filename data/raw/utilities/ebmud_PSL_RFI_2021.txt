@@ -1,0 +1,1688 @@
+Private Sewer Lateral Replacement
+
+
+
+       Request for Information
+
+
+
+
+             October 22, 2021
+
+                    1
+Private Sewer Lateral Replacement - RFI
+
+
+
+
+Table of Contents
+
+
+1.0     General Information ..................................................................................................... 3
+  1.1     Overview of EBMUD .................................................................................................... 3
+  1.2     Overview of the Private Sewer Lateral Program ........................................................... 3
+2.0     Project Overview .......................................................................................................... 5
+  2.1     Introduction of Project .................................................................................................. 5
+  2.2     Request for Information (RFI) ...................................................................................... 5
+3.0     Current Business Environment ................................................................................... 6
+  3.1     Business Environment ................................................................................................. 6
+4.0     Functional Business Requirements ............................................................................ 6
+  4.1     Functional Requirements ............................................................................................. 6
+5.0     Technical Requirements .............................................................................................. 7
+  5.1     Security and Compliance ............................................................................................. 7
+  5.2     Risk Management ........................................................................................................ 8
+  5.3     Interfaces ..................................................................................................................... 8
+  5.4     Reporting Infrastructure ............................................................................................... 9
+  5.5     Data Conversion .......................................................................................................... 9
+  5.6     Mobile Options ............................................................................................................10
+6.0     Vendor Requirements .................................................................................................10
+  6.1     Vendor Information and Experience ............................................................................10
+  6.2     Product Information and Hosting Options ....................................................................11
+  6.3     Pricing Information ......................................................................................................12
+  6.4     Product Implementation ..............................................................................................12
+  6.5     Training.......................................................................................................................13
+  6.6     Ongoing Production Support .......................................................................................13
+7.0     Vendor Information .....................................................................................................15
+  7.1     Terms and Conditions .................................................................................................15
+  7.2     Schedule and Contact Information ..............................................................................15
+8.0     Appendix ......................................................................................................................16
+
+
+
+                                                           Page 2 of 40
+Private Sewer Lateral Replacement - RFI
+
+
+1.0 General Information
+
+1.1 Overview of EBMUD
+      East Bay Municipal Utility District (EBMUD) supplies water and provides wastewater treatment for
+      parts of Alameda and Contra Costa counties on the eastern side of San Francisco Bay in Northern
+      California. EBMUD provides high-quality drinking water for 1.4 million customers. The wastewater
+      system serves 740,000 customers in an 88-square-mile area. Wastewater is collected and
+      conveyed by seven satellite collection system agencies (“Satellites”): Alameda, Albany, Berkeley,
+      Emeryville, Oakland and Piedmont, and the Stege Sanitary District (El Cerrito, Kensington, and
+      Richmond Annex). EBMUD owns and operates the large diameter interceptor pipes, the Main
+      Wastewater Treatment Plant, and three wet weather facilities, which help manage high flows
+      during significant wet weather events.
+
+      EBMUD is a publicly owned utility formed under the Municipal Utility District Act passed by the
+      California Legislature in 1921. EBMUD has a seven-member Board of Directors publicly elected
+      from wards within EBMUD’s service area. The Board of Directors and management believe that
+      EBMUD has a public responsibility to preserve the region's resources and set industry standards
+      for the way water and wastewater utilities conduct themselves. EBMUD is a customer-oriented
+      and environmentally sensitive public agency, firmly committed to serving people and the
+      environment.
+
+1.2 Overview of the Private Sewer Lateral Program
+      In 2014, EBMUD and the Satellites entered into a Consent Decree in United States, et al. v. East
+      Bay Municipal Utility District (Case Nos. CV 09-00186 and CV 09-05684, N.D. Cal.) with the United
+      States Environmental Protection Agency (EPA), state and regional water boards, and non-
+      governmental organizations (NGOs) – San Francisco Baykeeper and Our Children’s Earth
+      Foundation. This Consent Decree requires EBMUD and the Satellites to eliminate most discharges
+      from EBMUD’s three wet weather facilities by 2036 through the reduction of infiltration and
+      inflow. One component of the Consent Decree is the continued implementation of the Regional
+      Private Sewer Lateral (PSL) Program, which includes all Satellites except the city of Berkeley. The
+      Regional PSL Ordinance (Ordinance) has been in effect since 2010 and was most recently modified
+      in May 2019.
+
+      A PSL is the pipe that carries waste from the plumbing in a home or business to the public sanitary
+      sewer main, usually located in the street. A PSL consists of two sections: an upper lateral, which
+      connects the building cleanout to the curbside cleanout, and a lower lateral, which connects the
+      curbside cleanout to the public sewer main (Figure 1).
+
+
+
+
+                                              Page 3 of 40
+Private Sewer Lateral Replacement - RFI
+
+
+
+
+                           Figure 1: Typical Sewer Connection
+
+
+      The Regional Ordinance sets standards for assessing the condition and performance of PSLs in its
+      wastewater service area, specifically in the communities of Alameda, Albany, Emeryville, Oakland,
+      Piedmont, and Stege (also referred to as “satellites”). The City of Berkeley currently implements
+      its own stand-alone PSL program although it may be incorporated into the Regional Program in
+      the future.
+
+      Under the Ordinance, the majority of property owners are required to obtain a Compliance
+      Certificate demonstrating their PSL is leak-free and meets applicable EBMUD standards when they
+      meet one of three triggers: title transfer, remodeling or construction valued at over $100,000, or
+      a change in water meter size. The Regional Ordinance, however, contains special provisions for
+      two classes of properties: (1) a parcel or group of contiguous parcels with greater than 1,000 feet
+      of PSLs; and (2) properties within a Common Interest Development governed by a Homeowners’
+      Association (HOA).
+
+      Time Extension Certificates (TECs) were created to ensure that Compliance Certificate deadlines
+      will not interfere with real estate transaction timelines. For title transfers, the PSL Program allows
+      property owners to obtain a TEC prior to title transfer, allowing the transaction to proceed and for
+      compliance to be achieved within six months by the new property owner (i.e., the buyer). TECs
+      require a $4,500 deposit to EBMUD, which is refunded once the property owner obtains a
+      Compliance Certificate. The PSL Program also allows EBMUD to issue an Exemption Certificate
+      when a property owner demonstrates prior PSL replacement occurred on the parcel, and in
+      certain circumstances when certification is not required under the Regional Ordinance (e.g., an
+      exempt title transfer).
+
+                                               Page 4 of 40
+Private Sewer Lateral Replacement - RFI
+
+
+2.0 Project Overview
+
+2.1 Introduction of Project
+      The intent of the project is to improve the functionality, reliability, and integration between the
+      PSL management software and other EBMUD software programs. Key requirements include the
+      ability to:
+       • Use the parcel-based database currently maintained by the EBMUD GIS team. Existing data
+             are in an APN database that is not linked to GIS.
+       • Schedule inspectors and inspections online and track field data for each inspection
+       • Track various types of certificates for properties (Compliance Certificates, Time Extension
+             Certificates, Exemption Certificates, Compliance Agreements, etc.)
+       • Manage noncompliance, enforcement, and appeals
+       • Accept, track, and manage fees assessed to parcels, payments paid, and deposits received,
+             and deposits refunded
+       • Provide robust reporting and tracking on all elements and integration with existing EBMUD
+             financial, customer service, and other systems
+
+      EBMUD has decided to replace the existing PSL application with a new application that can be
+      used for the next 20 years. It must have transparent integrations to with EBMUD Water,
+      Wastewater and administrative systems as specified in the requirements document.
+
+      Some key Project objectives are to implement a PSL application that:
+       • Meets the business needs of EBMUD and the users
+       • Aids EBMUD to meet compliance and quality requirements
+       • Has the potential to grow as business needs change
+       • Improves business processes, efficiency, and reduces labor-intensive data processing
+       • Provides a user-friendly interface for the public and internal users
+       • Consolidates, integrates, and retires existing applications – as appropriate
+       • Provides needed mobile access to functions
+       • Provides robust reporting and tracking capabilities
+       • Provides long-term functionality
+       • Provides long-term technical stability, security, and scalability
+       • Conforms to EBMUD’s IT Audit and Security requirements
+
+2.2 Request for Information (RFI)
+      EBMUD is seeking a new software system to manage data for its Private Sewer Lateral Program to
+      address its current and future needs. This Request for Information (RFI) is intended to inform
+      EBMUD about the functionality and services available in the marketplace for managing this type
+      of information. This RFI is a vehicle for information discovery of existing, deployed solutions and
+      should not be construed as a solicitation.
+
+
+
+
+                                              Page 5 of 40
+Private Sewer Lateral Replacement - RFI
+
+
+      The RFI is intended for companies that develop solutions, as well as companies that implement a
+      developer’s solution. The RFI contains a general overview of EBMUD and an overview of our
+      current environment.
+
+      Included in the package is an attachment (Attachment 1 – Vendor Response Form) in Excel format
+      that contains tabs for Technical, Vendor and functional requirements. Please submit your
+      responses on the spreadsheet and then return the spreadsheet to EBMUD.
+
+      Vendors are encouraged to respond whether they offer technical solutions for all or some of the
+      business areas documented below. If you provide solutions to some of the business areas, it is
+      critical for you to document how your system would interface with other business areas and
+      existing systems. Select vendors will be asked to demonstrate their solutions to EBMUD
+      stakeholders. Project requirements may be revised over the course of this discovery process
+      based on any additional information acquired.
+
+       (NOTE: A response to this RFI does not constitute a bid; however, any information or
+      demonstration provided in a response to this RFI may be considered as historical data by EBMUD
+      if EBMUD decides to issue a Request for Proposal (RFP).)
+
+
+3.0 Current Business Environment
+
+3.1 Business Environment
+      The current PSL application was custom developed by a contractor and went live 2009. It is used
+      primarily for management of inspection scheduling and tracking of compliance status. The
+      system is a Java-based web application with an Oracle database backend. No automated
+      interface exists. No mobile solutions have been implemented.
+
+      The EBMUD PSL program manages inspections and issues Compliance Certificates, typically 500
+      per month, and requires the capability of up to 1,000 per month. It maintains parcel information
+      for Contra Costa County and Alameda Counties. The current system consists of two components:
+      A public user-facing web site (eastbaypsl.com) and an administration portal for internal use by
+      approximately 20 Wastewater staff members.
+
+
+4.0 Functional Business Requirements
+
+4.1 Functional Requirements
+      Please find the functional requirements for the various business units in Appendix.
+
+       1. Please use the attached spreadsheet to provide your responses for the functional Business
+          Requirements.
+
+
+
+                                              Page 6 of 40
+Private Sewer Lateral Replacement - RFI
+
+
+       2. For each item, please provide the following information:
+              a. In the Solution Type column, indicate how the business needs will be met i.e.,
+                  whether it is out-of-the-Box (Base), an extra add-on package, a customized solution
+                  or if it is not supported.
+              b. In the Availability column, indicate whether the feature is available currently or in a
+                  future release.
+              c. In the response column, please provide the following information
+                   i.     A description of the functional capabilities of your solutions.
+                  ii.     Information that EBMUD needs to provide to your solution to accomplish the
+                          business need and how that information can be supplied.
+                 iii.     Description of how users can interact with your system to accomplish the
+                          business needs (web, tablet, other mobile device, etc.)
+
+
+5.0 Technical Requirements
+
+5.1 Security and Compliance
+      Technical solutions must be designed to protect EBMUD from unauthorized access (especially any
+      financial or personally identifiable information) from internal or external parties.
+
+       1. Describe the security features of your product. Identify features at the user, application,
+          transaction, and data levels.
+
+       2. Describe the configuration features that allow for EBMUD policies to be consistently enforce
+          throughout the organization.
+
+       3. Discuss how your solution adheres to Open Web Application Security Project (OWASP)
+          security principles.
+
+       4. Describe any cryptographic technologies used by your solution in support of data privacy.
+
+       5. Describe the auditing features of your solution.
+
+       6. Discuss how your solution uses role-based access control and how to manage the roles.
+
+       7. Describe how your system authenticates users. Do you support single sign on using Active
+          Directory Federation Services (ADFS), Central Authentication Service (CAS) or Security
+          Assertion Markup Language (SAML)?
+
+       8. If your application allows for external access (mobile, external customer, vendors, etc.),
+          describe the security features associated with it.
+
+       9. If our data is to be hosted remotely, please specify location(s). Are there any international
+          locations? If yes, identify where the facilities are located.
+
+       10. What security requirements are required for your employees?
+
+
+
+
+                                              Page 7 of 40
+Private Sewer Lateral Replacement - RFI
+
+
+5.2 Risk Management
+      EBMUD plans to run its PSL system for at least the next 20 years. There are events, however, that
+      could happen that would pose a risk to the support of a system for that long.
+
+       1. Will the source code base of the vendor’s solution be made fully accessible to EBMUD? Will
+          it be readily available to be built or modified by competent EBMUD programmers should
+          EBMUD choose to support the solution in-house? If so, please describe the application
+          development environment and any tools required for enhance the source code?
+
+       2. Are clients required to upgrade to new versions of your system?
+              a. Can EBMUD decide to stay on one version of your system? Are you going to
+                  continue providing support in case of EBMUD choose to stay?
+              b. Do you publish end-of-life support dates? Are there paid options for continuing
+                  support on non-current software releases?
+              c. If function features require customization, what will happen in case of upgrade? Do
+                  you continue to provide support?
+              d. Describe upgrade process in high level. Will system need to be offline during? If so,
+                  how long?
+
+5.3 Interfaces
+       1. The EBMUD software environment consists of numerous applications with varying
+          integration requirements. This includes GIS, Customer Watch (Customer Information
+          System), APN, ELSIE (Cloud-Based Financial System), DOCS (document management system),
+          DocuSign and payment processors like Authorize.Net etc. How does your solution interface
+          with other software systems both on-premises and cloud solution?
+              a. Describe the technical architecture of your solution and what type of protocols is
+                  used to transfer information, both real-time and as needed.
+              b. Describe how data is secured while in transit from one system to another.
+              c. Does your solution utilize protocols to verify sender and recipients?
+              d. Describe data flow direction when interface with other systems? Is it two-way
+                  communication or just one direction? What’s the limitation?
+              e. There might be need to interface with County to get Parcel information. Does your
+                  solution have flexibility to access the Parcel information?
+              f. Does your software integrate with MS Outlook for real-time appointment booking?
+                  What software or hardware is required to achieve? Is there additional cost?
+              g. Does your software protect Personal Identifiable Information (PII)?
+
+       2. Describe what mechanism you use to manage time-sensitive data transmissions.
+
+       3. Describe any audit features associated with your interface architecture.
+
+       4. Describe how data can be exported from your solution to be loaded into EBMUD’s Oracle-
+          based data warehouse system.
+
+       5. Describe any important standards that your solution implements that promotes
+          interoperability with other systems.
+
+
+                                             Page 8 of 40
+Private Sewer Lateral Replacement - RFI
+
+
+       6. Describe how your system handles electronic documents, i.e., what security does it use,
+          what backup mechanism is employed, what API’s are available. Describe any electronic
+          documents generated by your system, e.g., electronic certificate/permit.
+
+       7. Describe the performance for data transition between systems such as through API.
+
+       8. For web applications, describe which browsers your product supports.
+
+       9. Describe how to view PSL Compliance Certificates by APN in the GIS map along with related
+          information like appointment, location etc.
+
+       10. Describe the capability of uploading sales records such as title transfer into your database.
+           For example, data in CSV or Excel.
+
+       11. Describe compatibility with 3rd party credit card processing software i.e., Authorize.net
+
+       12. Describe integration of your system with EBMUD.com (website runs on Concrete).
+
+5.4 Reporting Infrastructure
+       1. Provide a description on how reporting works in your systems. In particular:
+              a. What reports are standard with your systems?
+              b. What reporting software is standard with your systems?
+              c. What mechanisms are available for EBMUD to generate custom reports, ad-hoc,
+                  analytical and personalize reports? Are there additional costs associated with this? If
+                  so, please describe the fee structure.
+              d. What tools are available to schedule report generation?
+              e. What options are available for internal report distribution?
+              f. What options are available for pre-built dashboards/portals?
+              g. What options are available for real time queries?
+              h. Does your system provide interface allowing user to run SQL query directly? What
+                  are other tools available for ADHOC query and what the limitation of these tools? Is
+                  there performance constrains?
+              i. Can data be exported into CSV or Excel from your system?
+              j. Does your system provide canned/standard reports? What are they? Is there
+                  additional cost for these?
+              k. Can reports be generated in PDF format?
+
+       2. Describe the types of users who can run queries and reports?
+
+5.5 Data Conversion
+       1. What is your data conversion strategy for transitioning to your solution with minimal
+          business interruption to EBMUD?
+              a. Describe the advantages and disadvantages of your strategy.
+              b. Describe your experience in data conversion or migration activities including staffing
+                  requirements and duration.
+              c. What tools do you utilize for the data mapping phase?
+
+
+                                              Page 9 of 40
+Private Sewer Lateral Replacement - RFI
+
+
+               d. Does your solution provide a Data Dictionary that explains the meaning of your data
+                  elements to be used in mapping data from one system to another?
+               e. How do you ensure data integrity during the transition?
+
+       2. Do you provide database and data model documentation to customer including copy of your
+          database as needed?
+
+5.6 Mobile Options
+      EBMUD is seeking solutions which take advantage of current technologies to provide real-time
+      access to critical business functionality and mobile solutions to customers for scheduling and to
+      EBMUD staff for entering inspection information EBMUD is interested in tools to improve
+      productivity, ensure compliance, and provide flexibility.
+
+       1. Describe the extent to which your solution supports mobile access.
+             a. What technology platforms are compatible with your solution (e.g., tablets,
+                 smartphones, etc.)?
+
+       2. Describe any additional hardware and software that would be required to implement
+          mobile access to business functionality.
+             a. Please describe any additional fees associated with your mobile options.
+             b. Describe what additional maintenance and support activities are associated with
+                 your mobile features.
+             c. Describe what can be accessed and any limitations/restrictions.
+
+       3. Describe your application standard response time.
+
+       4. Is your application capable of adding photos from a mobile phones or tablets and then allow
+          annotation of the photos? Any additional hardware or software required? Is there an
+          additional cost associated with this functionality?
+
+
+6.0 Vendor Requirements
+
+6.1 Vendor Information and Experience
+      EBMUD is especially interested in partnering with a vendor who has demonstrated a successful
+      track record for permitting system implementations. Successful implementations are defined as
+      on-time, at or under budget, meeting all functional and technical requirements and helping the
+      customer take full advantage of the efficiencies provided by the solution for end users and their
+      business units.
+
+       1. Provide a brief history of your company, its products, and its strategic focus.
+
+       2. Provide a brief history of your experience working with governmental agencies within the
+          past five years?
+
+
+
+
+                                             Page 10 of 40
+Private Sewer Lateral Replacement - RFI
+
+
+       3. Provide a list of all government clients where you have implemented this solution, including
+          the following information:
+              a. Date of implementation
+              b. Length of engagement
+              c. Contact information for each client (name, email, and phone)
+
+       4. What makes your company uniquely qualified to provide and implement the solution?
+          Please include a description of the qualifications of your staff, effectiveness of your
+          methodologies and depth of your experience.
+
+       5. What is the size and financial stability of your company? Provide copies of your annual
+          reports for the last three years. Provide any additional information that you feel would be
+          significant in evaluating the financial soundness of your company.
+
+       6. State the nature of any pending litigation, liens or claims involving your organization. Has
+          your company filed Chapter 7 or 11 bankruptcies in the last ten years?
+
+6.2 Product Information and Hosting Options
+      EBMUD is open to exploring all hosting options available by our responding vendors.
+
+       1. If you provide an on-premises solution (a solution hosted in the EBMUD data center), please
+          address the statements below.
+               a. Describe the technical architecture of your application: presentation tier,
+                   application tier, databases supported, operating systems supported, etc.
+               b. List the hardware specifications required for each tier in your architecture.
+               c. List the software specifications required for each tier in your architecture: database
+                   versions, middleware versions, etc.
+               d. Describe whether all user-facing functionality provided by your solution is fully
+                   accessible via standards-compliant web browsers or whether there is a need to
+                   install desktop or mobile client software.
+               e. Does your solution support load balanced, high-availability architecture?
+               f. Describe how your solutions handle failover or disaster recovery scenarios. Does
+                   this require any additional licenses?
+               g. Describe any system tools included in your solutions that assists in monitoring
+                   application performance and stability.
+
+       2. If you provide a cloud-based solution (a solution not hosted in the EBMUD data center),
+          please address the statements below.
+               a. State where your data centers are located.
+               b. State whether you own and/or lease these data centers. If you do not own this
+                   center, describe your contingency plan in the event your hosting partner goes out of
+                   business.
+               c. Describe any hardware or software components of your solution that EBMUD would
+                   be expected to install or host on our own systems.
+               d. Describe whether all user-facing functionality provided by your solution is fully
+                   accessible via standards-compliant web browsers or whether there is a need to
+                   install desktop or mobile client software
+
+                                             Page 11 of 40
+Private Sewer Lateral Replacement - RFI
+
+
+                e. Describe the size and structure of your information security organization.
+                f. Describe the physical security associated with your data centers and who is
+                   responsible for it.
+                g. Describe your disaster recovery and business continuity plan.
+                h. Describe the various methods by which EBMUD can access its data. What costs or
+                   fees are associated with accessing our data?
+                i. Describe the process and timeframe required to export all EBMUD data should we
+                   decide to change hosting option or vendor.
+                j. How does your organization log and monitor system performance?
+                k. Describe your organization’s data backup strategy.
+                l. Describe your application, middleware and operating system patching strategy
+                   including frequency.
+                m. Describe your organization’s privacy program.
+                n. Describe your incident management program.
+
+       3. Please describe your product roadmap. What features or strategic goals are incorporated
+          within it?
+
+6.3 Pricing Information
+       1. Describe the pricing structure of your solution. If you offer different hosting options, please
+          clearly distinguish the difference between each option.
+              a. Itemize the fees for each component.
+              b. Does your product offer a perpetual license?
+              c. Itemize all recurring costs over the first 5 years.
+              d. Pricing for the different environments like staging, development etc.
+
+       2. Describe your implementation fee structure. Please itemize all fees associated with the
+          installation, configuration, data migration, functional, regression and integration testing of
+          your solution.
+
+6.4 Product Implementation
+      Product implementation will require the completion of numerous tasks, including but not limited
+      to testing (functional, regression, integration, acceptance), training (users, administrators) and go-
+      live through post-go-live technical support.
+
+       1. Describe your implementation methodology.
+
+       2. Provide a high-level schedule for the implementation of your solution.
+
+       3. Describe your approach to implementation. Include staff engagement, training,
+          collaboration, timing, and strategy.
+
+       4. Describe the number and skill set of EBMUD employees you need to assist in the
+          implementation of your solution. Please state the time (person hours/weeks/etc.) you
+          would require from each.
+
+
+
+                                              Page 12 of 40
+Private Sewer Lateral Replacement - RFI
+
+
+       5. Describe the support and years of experience your staff would be dedicated to this project.
+          Describe the percent of time each of your staff would be dedicated to the implementation.
+
+       6. Describe your planned testing strategy (functional, regression, integration, parallel and
+          acceptance, structural, and performance testing).
+
+       7. What environments are to be delivered (test, user acceptance test, staging, prod)?
+
+       8. Describe strategies for increasing user adoption of the new tools and systems.
+
+       9. Describe best practices you use for monitoring the system to ensure it stays up to date and
+          to understand how staff are using the tools.
+
+       10. Describe best practices for administration support for the product.
+
+6.5 Training
+       1. Please describe the training you would recommend for your solution.
+              a. Describe the different training methods you provide (e.g., online, in-person, etc.).
+              b. Provide your training fee structure (if not included in solution).
+              c. Describe how many hours of training would be optimal for your solution.
+              d. Describe what training resources you provide (e.g., manual, reference guides, user
+                  groups, etc.)
+
+       2. Describe the components of your training plan.
+
+       3. Do you conduct a needs assessment before recommending your training options?
+
+       4. What type of post-implementation or ongoing training do you provide or recommend?
+
+6.6 Ongoing Production Support
+       1. Provide a summary of your on-going customer service and support programs.
+              a. What levels of customer support are available? What are the main service level
+                  agreement (SLA) components of each? What hours/days is support available? What
+                  is the cost associated with the support? Is there a toll-free number that can be
+                  utilized to access support staff?
+              b. Describe the escalation procedure in the event that the SLA is not met.
+
+       2. Describe what is involved in a typical software upgrade (e.g., is any system down-time
+          required, and if so, how long do you typically need)
+             a. Please identify the typical tasks required for a software upgrade.
+             b. What would be a standard timeline for an upgrade?
+             c. How frequently do you release product upgrades?
+             d. Describe how disruptions to business processes are minimized during software
+                  upgrades.
+             e. Are release notes included with all your upgrades? Briefly describe the content and
+                  structure.
+
+
+
+                                             Page 13 of 40
+Private Sewer Lateral Replacement - RFI
+
+
+               f. What is the process for evaluating and incorporating specific enhancements into
+                  your system?
+               g. What is the process for evaluating and incorporating high priority bug fixes into your
+                  system?
+               h. How often have you released major software upgrades to clients in the last 5 years?
+               i. Can EBMUD decide to not implement upgrade? Can the upgrade be reviewed by
+                  EBMUD staff before it is implemented?
+
+       3. Describe what is involved in an emergency software upgrade?
+             a. What is the notification process for an emergency software upgrade?
+             b. How often have you released emergency software patches in the past 5 years?
+
+       4. In the event that an upgrade impacts the existing database schema, describe how data
+          conversion activities will be coordinated.
+
+       5. Describe the process of adding additional users to the system including any additional costs.
+
+
+
+
+                                            Page 14 of 40
+Private Sewer Lateral Replacement - RFI
+
+
+
+
+7.0 Vendor Information
+
+7.1 Terms and Conditions
+       •    This RFI requests information regarding potential product and services and no contractual
+            obligations on behalf of EBMUD whatsoever shall arise from this RFI process.
+       •    The Respondent shall be solely and fully responsible for all costs associated with the
+            development, preparation, transmittal, and submission of any material in response to this
+            RFI.
+       •    Responses to this RFI become the exclusive property of EBMUD upon receipt.
+       •    Responses received in response to this RFI may be subject to the California Public Records
+            Act.
+       •    The Respondent may designate elements in the response which are defined as business or
+            trade secrets and plainly marked as “Confidential,” “Trade Secret,” or “Proprietary.”
+
+7.2 Schedule and Contact Information
+      The schedule is shown below. Submit your responses to the address below. Email (electronic
+      documents) and/or hard copies are acceptable. To ensure all vendors have equal access to information
+      regarding this RFI, please submit any questions or requests for clarification to Suma Popat, IT Project
+      Manager via email at suma.popat@ebmud.com with subject header: Questions for PSL
+      Replacement Project, to ensure all vendors have equal access to information regarding this RFI.
+
+                                 Event                                      Dates
+                     RFI Release                      COB Friday, October 22, 2021
+                     Questions Due By                 COB Friday, October 29, 2021
+                     Answers Posted By                COB Friday, November 05, 2021
+                     Responses Due By                 COB Friday, November 12, 2021
+
+      Thank you in advance for your interest in this information request.
+      Email responses to:                 suma.popat@ebmud.com
+                                          Subject Header: RFI for PSL Replacement Project
+
+      Send RFI responses to:              East Bay Municipal Utility District
+                                          Attn: Suma Popat
+                                          RE: RFI for PSL Replacement Project
+                                          375 11th Street, MS #302
+                                          Oakland, CA 94607
+
+
+
+
+                                               Page 15 of 40
+8.0 Appendix
+
+                    Functional Requirements
+1.0 Overview
+      Feature descriptions are organized by major functional module. Each module is comprised of
+      one or more features. Each feature is defined by one or more requirement.
+
+2.0 User Groups and General System Requirements
+2.1 User Group Responsibilities
+User Group                               Responsibilities/Use Activities
+EBMUD Customers                          ▪ Determine compliance of their property
+                                         ▪ Obtain a certificate (Compliance, TEC, or exemption)
+                                         ▪ Ascertain fees owed and pay fees
+                                         ▪ Find information about program requirements
+                                         ▪ Schedule inspection
+PSL Scheduling Admin                     ▪ PSL inspection scheduling
+                                         ▪ Manage Appointments
+                                         ▪ Manage All Special Times
+                                         ▪ Add New Appointment
+                                         ▪ Customer email inbox and hotline
+                                         ▪ Queries data and compiles reports
+PSL Inspector Manager                    ▪ Manage All Appointments
+                                         ▪ Edit Inspector Priorities
+                                         ▪ Queries data and compiles reports
+PSL Inspector                            ▪ Input Inspection Results
+PSL Administrator Manager                ▪ Time Extension Certificate refunds signoff
+                                         ▪ Compliance Agreements/appeals signoff
+                                         ▪ Queries data and compiles reports
+PSL Administrator                        ▪ Edit certificate types
+                                         ▪ Edit Email text
+                                         ▪ Upload title transfer data
+                                         ▪ Review Exemption Requests
+                                         ▪ Edit parcel certificate
+                                         ▪ Record manual payment
+                                         ▪ Input Lower Lateral Waivers
+                                         ▪ Queries data and compiles reports
+Accounting Administrator                 ▪ Time Extension Certificate deposit reports
+                                         ▪ Time Extension Certificate disbursement authorization
+                                            processing
+                                         ▪ Queries data and compiles reports
+ISD Administrator                        ▪ Application support/bug fixes/maintenance
+                                         ▪ Queries data and compiles reports
+
+                                               16
+2.2 High Level Product Features
+Product Features                                                User Group
+                                                                PSL Program Administrator
+                                                                System Administrator
+
+
+
+PSL Application Capacity
+          At least 1,000 inspections per month           Must
+                                                         have
+ 2.2.1 At least 1,000 PSL Program Certificates           Must
+            issued per month                             have
+ 2.2.2      At least 500 enforcement records per         Must
+            month                                        have
+ 2.2.3      At least 100 appeal and exemption            Must
+            requests per month                           have
+ 2.2.4      Parcel database for Contra Costa County      Must
+            (El Cerrito, Kensington, and Richmond        have
+            Annex), and Alameda County (Alameda,
+            Albany, Emeryville, Piedmont, and
+            Oakland) with room to expand upon
+            creation of new parcels or parcel splits,
+            and inclusion of the City of Berkeley
+
+2.3 Application Interfaces & Interoperability
+           The system will provide standard             Must
+ 2.3.1 interfaces to existing and future EBMUD          have
+         systems/applications for incoming and
+         outgoing data
+ 2.3.1.1 The system will be able to consume data        Must
+         and export data in file formats including,     have
+         but not limited to the following:
+ 2.3.1.2         Adobe PDF                              Must
+                                                        have
+ 2.3.1.3          CSV                                   Must
+                                                        have
+ 2.3.1.4          Microsoft Excel                       Must
+                                                        have
+ 2.3.1.5          Microsoft Word                        Must
+                                                        have
+
+
+
+                                              Page 17 of 40
+        The system will consider interoperability   Must
+2.3.2 with the following EBMUD                      have
+        systems/applications:
+2.3.2.1         Customer Watch                      Must
+                                                    have
+2.3.2.2        DOCS, document management            Must
+               system                               have
+2.3.2.3        Elsie, Oracle Cloud Financial        Must
+               Information System                   have
+2.3.2.4        Utilize an EBMUD contracted          Must
+               payments processor to accept         have
+               common payment methods
+               (e.g., credit cards or ACH)
+2.3.2.5        Adhere to PCI compliance             Must
+               standards to protect personally      have
+               identifiable information
+
+2.4 User Roles and Responsibility
+2.4.1 The system will allow users to be              Must
+        assigned security levels                     have
+2.4.1.1         The system will support a            Must
+                general user level that would        have
+                allow user to add and retrieve
+                data
+2.4.1.2         The system will support a user       Must
+                level that would allow user to       have
+                only view data
+2.4.1.3         The system will support an           Must
+                administrator security level         have
+2.4.2 Protect the information that customers         Must
+        submit to the PSL Program                    have
+2.4.3 The system will allow different sites to       Must
+        have different security roles and access     have
+        levels defined for the same functionality
+2.4.4 The system will be configured to               Must
+        authorized users to gain access to other     have
+        functional group and/or site’s data
+2.4.5 The system will support the creation of        Must
+        user defined roles                           have
+2.4.6 The system administrator will have             Must
+        access to all functions of the system        have
+
+                                            Page 18 of 40
+ 2.4.6.1          The system administrator will be   Must
+                  able to add or remove system       have
+                  functions to the user defined
+                  roles
+ 2.4.6.2          The system administrators will     Must
+                  be able to assign users in the     have
+                  system to one or more user-
+                  defined roles
+ 2.4.6.3          The system administrators will     Must
+                  have the ability to add, modify    have
+                  or remove functionality
+                  (permissions) to and from users
+                  (independent of assigned role)
+ 2.4.7 The system will automatically logout a        Must
+         user if the session is dormant              have
+ 2.4.8 The system will allow the administrator       Must
+         to establish the “dormant” time.            have
+
+
+
+
+            Specific PSL
+           Requirements
+Assessor’s Parcel Number (APN) Database Management
+    ▪ Parcel Updates
+    ▪ Parcel Relationships
+    ▪ Record Keeping
+PSL Inspection                                              PSL Inspector, PSL Inspector Manager,
+    ▪ Manage Appointments                                   PSL Administrator, EBMUD Customers,
+    ▪ Inspection Records
+    ▪ Program Triggers
+                                                            PSL Inspector, PSL Administrator, PSL
+PSL Program Certificates                                    Administrator Manager, Accounting
+    ▪ Compliance Certificate                                Administrator
+    ▪ Time Extension Certificates (TECs)
+    ▪ Exemption Certificates
+Appeals                                                     PSL Administrator, PSL Administrator
+
+
+                                           Page 19 of 40
+    ▪ Customer Appeal Request                                Manager
+    ▪ Compliance Agreements
+Enforcement                                                  PSL Administrator
+    ▪ Track and Manage Enforcement
+HOA and Greater than 1,000-Ft Program Database               PSL Administrator, PSL Inspector
+    ▪ Manage appointments                                    Manager, EBMUD Customers
+    ▪ Track inspections
+    ▪ Manage compliance
+Program Accounting                                           PSL Administrator
+    ▪ Reconciliation Report                                  System Administrator
+    ▪ Processing Payments, Refunds, and
+    ▪ Walk-in payment processing
+    ▪ Enforcement non-compliance billing
+    ▪ Rate Increases
+Program Website                                              PSL Administrator
+    ▪ Content and self-service through EBMUD.com and         Web Author
+       self-service through EBMUD.com
+Data Aggregation and Regulatory Reporting                    PSL Administrator
+    ▪ Predefined and Ad-hoc Reports
+
+
+
+
+2.5 PSL Application Capacity
+2.5.1        At least 1,000 inspections per month                                       Must have
+2.5.2        At least 1,000 PSL Program Certificates issued per month                   Must have
+2.5.3        At least 500 enforcement records per month                                 Must have
+2.5.4        At least 100 appeal and exemption requests per month                       Must have
+2.5.5        Parcel database for Contra Costa County (El Cerrito, Kensington, and       Must have
+             Richmond Annex), and Alameda County (Alameda, Albany, Emeryville,
+             Piedmont, and Oakland) with room to expand upon creation of new
+             parcels or parcel splits, and inclusion of the City of Berkeley
+
+2.6 Application Interfaces & Interoperability
+             The system will provide standard interfaces to existing and future         Must have
+ 2.6.1       EBMUD systems/applications for incoming and outgoing data
+
+
+                                          Page 20 of 40
+   2.6.1.1   The system will be able to consume data and export data in file formats      Must have
+             including, but not limited to the following:
+   2.6.1.2           Adobe PDF                                                            Must have
+   2.6.1.3           CSV                                                                  Must have
+   2.6.1.4           Microsoft Excel                                                      Must have
+   2.6.1.5           Microsoft Word                                                       Must have
+             The system will consider interoperability with the following EBMUD           Must have
+2.6.2        systems/applications:
+   2.6.2.1           Customer Watch                                                       Must have
+   2.6.2.2           DOCS, document management system                                     Must have
+   2.6.2.3           Elsie, Oracle Cloud Financial Information System                     Must have
+   2.6.2.4           Utilize an EBMUD contracted payments processor to accept             Must have
+                     common payment methods (e.g., credit cards or ACH)
+   2.6.2.5           Adhere to PCI compliance standards to protect personally             Must have
+                     identifiable information
+
+2.7 User Roles and Responsibility
+2.7.1        The system will allow users to be assigned security levels                   Must have
+   2.7.1.1           The system will support a general user level that would allow        Must have
+                     user to add and retrieve data
+   2.7.1.2           The system will support a user level that would allow user to        Must have
+                     only view data
+   2.7.1.3           The system will support an administrator security level              Must have
+2.7.2        Protect the information that customers submit to the PSL Program             Must have
+2.7.3        The system will allow different sites to have different security roles and   Must have
+             access levels defined for the same functionality
+2.7.4        The system will be configured to authorized users to gain access to other    Must have
+             functional group and/or site’s data
+2.7.5        The system will support the creation of user defined roles                   Must have
+2.7.6        The system administrator will have access to all functions of the system     Must have
+   2.7.6.1           The system administrator will be able to add or remove system        Must have
+                     functions to the user defined roles
+   2.7.6.2           The system administrators will be able to assign users in the        Must have
+                     system to one or more user-defined roles
+   2.7.6.3           The system administrators will have the ability to add, modify or    Must have
+                     remove functionality (permissions) to and from users
+                     (independent of assigned role)
+2.7.7        The system will automatically logout a user if the session is dormant        Must have
+2.7.8        The system will allow the administrator to establish the “dormant” time.     Must have
+
+
+                                          Page 21 of 40
+Page 22 of 40
+               Specific PSL Requirements
+
+3.0 Assessor’s Parcel Number (APN) Database Management
+3.1 Parcel Updates
+3.1.1        Utilize parcel database for Contra Costa County (El Cerrito, Kensington,        Must have
+             and Richmond Annex), and Alameda County (Alameda, Albany,
+             Emeryville, Piedmont, and Oakland), with ability to add City of Berkeley
+             in future. Ability to utilize GIS parcel database.
+3.1.2        Get Alameda and Contra Costa County APN updates monthly from third              Must have
+             party source
+3.1.3        Provide method to upload and manage APN data                                    Must have
+3.1.4        Ability to retain the original parcels, so historical Compliance Certificates   Must have
+             and inspection data is not lost
+3.1.5        Ability to track APN splits, merges, and newly created APNs                     Must have
+3.1.6        Ability to create “parcels” for the purpose of the PSL Program that do          Must have
+             not correspond with APNs (e.g., to issue Compliance Certificates for the
+             Port of Oakland or Alameda Point)
+3.1.7        Ability to use both APN or customer water account number to track and           Must have
+             manage PSL Program data and send information to other EBMUD
+             databases such as Customer Watch and Oracle Financial System.
+3.1.8        Ability to view PSL Compliance Certificates by APN in ESRI a GIS map            Must have
+             layer
+3.1.9        Data fields required for parcel uploads:                                        Must have
+   3.1.9.1           APN                                                                     Must have
+   3.1.9.2           County                                                                  Must have
+   3.1.9.3           Property Address                                                        Must have
+   3.1.9.4           Property City                                                           Must have
+   3.1.9.5           Property state                                                          Must have
+   3.1.9.6           Property zip                                                            Must have
+   3.1.9.7           Land use code                                                           Must have
+
+3.2 Parcel Relationships
+3.2.1        Manage and create parcel relationships within the APN database:                 Must have
+   3.2.1.1           Ability to track compliance by parcel group, for example:               Must have
+                     customers searching for HOA compliance can view all
+                     Compliance Certificates for the development in one view
+
+                                            Page 23 of 40
+  3.2.1.2              Certificate issuance, billing, and inspection results can be linked   Must have
+                       to parcel groups under the same ownership or management
+
+3.3 Record Keeping
+3.3.1          Track all PSL program events to a given APN                                   Must have
+  3.3.1.1              Inspection bookings                                                   Must have
+
+  3.3.1.2              Inspection records (data directly input and reports uploaded)         Must have
+
+  3.3.1.3              Appeal requests                                                       Must have
+
+   3.3.1.3.1                    Customer program fee charges and payments                    Must have
+
+   3.3.1.3.2                    Date fee assessed; purpose of fee; amount of fee             Must have
+
+  3.3.1.4              Date of payment and link to item being paid                           Must have
+
+  3.3.1.5              Record of all Customer communication and actions taken                Must have
+
+  3.3.1.6               PSL certificate issuance (Compliance, Compliance Agreement,          Must have
+                        Exemption, Time Extension certificates)
+3.3.2          Ability to issue compliance certificates to portion of a parcel in Port of    Must have
+               Oakland or Alameda Point
+3.3.3          Ability to upload documents into the database for parcel groups or            Must have
+               individual APNs
+
+
+4.0 PSL Inspection Appointments and Records
+4.1 Manage Appointments
+4.1.1          Create open inspection windows that may be scheduled by EBMUD                 Must have
+               customers
+4.1.2          Inspection appointment mapping. See a map that shows points where all         Must have
+               the inspections are located for any given inspector, appointment
+               window, or for the day. A plotted map appears with color coded blips
+               that communicate appointment window, inspector assignment, and that
+               present complete appointment information on mouse over.
+4.1.3          Define inspector work schedules and inspection assignments in                 Must have
+               application
+4.1.4          Establish appointment waitlist if all inspection timeslots are taken          Must have
+4.1.5          Real-time appointment booking for customers, such that inspection             Must have
+               appointments or inspector’s availability can update as changes are made
+4.1.6          Manually create an inspection appointment:                                    Must have
+  4.1.6.1              APN or Address search                                                 Must have
+  4.1.6.2              Customer Name                                                         Must have
+
+                                              Page 24 of 40
+  4.1.6.3            Customer Phone                                                      Must have
+  4.1.6.4            Customer email                                                      Must have
+  4.1.6.5            Date                                                                Must have
+  4.1.6.6            Time                                                                Must have
+  4.1.6.7            Inspector                                                           Must have
+  4.1.6.8            Note if off-hours, HOA, or multi-lateral inspection appointment     Must have
+4.1.7        Link special appointments to an inspector’s time slot                       Must have
+4.1.8        Customer Relationship Management                                            Must have
+  4.1.8.1            Be able to add notes                                                Must have
+  4.1.8.2            Links to files and supporting files within the database to          Must have
+                     document customer interactions
+  4.1.8.3            Download or link to data from EBMUD central database for PSL        Must have
+                     customer inquiries and correspondence
+4.1.9        Interface that allows filterable and customizable viewing for EBMUD         Must have
+             users:
+  4.1.9.1            Inspection appointments (by date, inspector, city)                  Must have
+  4.1.9.2            Inspection results (by date, inspector, parcel group, parcel)       Must have
+  4.1.9.3            Certificates (by issue date, expiration date, city, parcel group,   Must have
+                     parcel)
+  4.1.9.4            Parcel group data (by type, compliance deadline)                    Must have
+  4.1.9.5            Events/transactions (by date, contractor, parcel, parcel group)     Must have
+4.1.10       Navigation to view related PSL inspection appointment information           Must have
+  4.1.10.1         Ability to select a property on the schedule and view APN data        Must have
+  4.1.10.2         View previous inspection results                                      Must have
+  4.1.10.3         Event/transaction history (including past PSL certificates)           Must have
+4.1.11       Automate inspection reschedules or cancellation alerts for inspectors       Must have
+4.1.12       Ability for users to upload documents into the database associated with     Must have
+             specific parcels, and inspection records
+4.1.13       Allow dispatcher to enter instructions for special appointments             Must have
+4.1.14       Have database provide twice daily email notifications (7am and 2pm) to      Must have
+             Satellite agency staff concerning upcoming PSL inspections. System must
+             allow PSL administrator to update Satellite agency email addresses.
+  4.1.14.1            Separate emails to custom email list, including PG&E, based on     Must have
+                      which city the property is in and send list of all inspections
+4.1.15       PSL Inspection Workflow                                                     Must have
+  4.1.15.1           Property owner triggers PSL Ordinance via title transfer, water     Must have
+                     meter, or construction remodel
+  4.1.15.2           Customer or Contractor submits request for PSL inspection and       Must have
+                     pays Compliance Certificate fee
+
+
+                                           Page 25 of 40
+  4.1.15.3            Customer receives email notification confirming appointment           Must have
+                      has been booked and receipt confirming payment. Appointment
+                      reminders are sent to the customer prior to their appointment.
+  4.1.15.4            Inspection is scheduled and an inspector is assigned to the           Must have
+                      inspection
+  4.1.15.5            Inspection failed – failed verification test, inspector needs         Must have
+                      additional information (possible illicit connect(s), or customer no
+                      show – customer required to reschedule/retest, inspector enters
+                      results and reschedule fee is applied to account
+  4.1.15.6            Inspection passed – inspector submits results and Compliance          Must have
+                      Certificate is issued
+  4.1.15.7            Customer who booked PSL appointment receives email with link          Must have
+                      to download a copy of their Certificate
+
+
+4.2 Inspection Records
+4.2.1         Ability to incorporate data from previous inspections for a new inspection    Must have
+              if the property has been previously inspected.
+4.2.2         Reservation data fields                                                       Must have
+   4.2.2.1            APN                                                                   Must have
+
+   4.2.2.2            Address                                                               Must have
+   4.2.2.3            City                                                                  Must have
+   4.2.2.4            Owner Name                                                            Must have
+   4.2.2.5            Owner Address                                                         Must have
+   4.2.2.6            Owner Phone                                                           Must have
+   4.2.2.7            Owner e-mail                                                          Must have
+   4.2.2.8            Special instructions                                                  Must have
+   4.2.2.9            Name of contractor performing verification test                       Must have
+   4.2.2.10           Mailing address                                                       Must have
+   4.2.2.11           Contractor office number                                              Must have
+   4.2.2.12           Contractor mobile number                                              Must have
+4.2.3         Inspection data fields                                                        Must have
+   4.2.3.1            Inspector name                                                        Must have
+   4.2.3.2            Test date                                                             Must have
+   4.2.3.3            City inspection issues - yes/no                                       Must have
+   4.2.3.4            Contractor license number                                             Must have
+   4.2.3.5            Contractor name                                                       Must have
+
+
+
+
+                                           Page 26 of 40
+  4.2.3.6             Parcel type: Single-family, Duplex/Triplex, Multi-unit                Must have
+                      Condominiums, Individual condominium, Apartment complex,
+                      government/public, institution, Homeowners association, Lateral
+                      over 1,000ft, Lot with no sewer connection, other
+  4.2.3.7             Sewer main location                                                   Must have
+  4.2.3.8             Inspector’s comment                                                   Must have
+  4.2.3.9             Upper lateral                                                         Must have
+  4.2.3.10            Lower lateral                                                         Must have
+  4.2.3.11            Total lateral length (feet)                                           Must have
+  4.2.3.12            Pipe diameter (inches)                                                Must have
+  4.2.3.13            Standpipe height (inches)                                             Must have
+  4.2.3.14            PSL, replaced or repaired?                                            Must have
+  4.2.3.15            Material used for PSL replacement: clay pipe, abs pipe, PVC SDR       Must have
+                      16, HDPE SDR 17, CIP liner, DIP iron pipe, other
+  4.2.3.16            Replacement method – CIP lined, Pipe burst, trench, other             Must have
+  4.2.3.17            Old pipe material – ABS, clay, clay/iron, iron, pvc, other, unknown   Must have
+  4.2.3.18            Pressure gauge audit – yes/no/unknown                                 Must have
+  4.2.3.19            Test Equipment – pass/fail/no result                                  Must have
+  4.2.3.20            Observable illicit connections – yes/no/unknown                       Must have
+  4.2.3.21            Lower cleanout present – yes/no                                       Must have
+  4.2.3.22            Test method – air/water                                               Must have
+  4.2.3.23            Starting pressure (psi)                                               Must have
+  4.2.3.24            Ending pressure (psi)                                                 Must have
+  4.2.3.25            Observable water loss – yes/no/unknown                                Must have
+  4.2.3.26            Lateral test pass/fail – pass/fail/No result                          Must have
+  4.2.3.27            Inspector’s comments                                                  Must have
+  4.2.3.28            Map for the parcel showing both satellite and GIS sewer               Must have
+                      information, with ability to annotate and save
+  4.2.3.29            Ability to add photo from mobile phone or tablet and then             Must have
+                      annotate photo and save as part of inspection record
+4.2.4        Ability to view past PSL inspection results                                    Must have
+4.2.5        Ability to save inspection results without generating a Compliance             Must have
+             Certificate, so user can revisit and submit data at a later time
+4.2.6        Ability to preview Compliance Certificate type prior to submitting results     Must have
+4.2.7        Ability to automatically send electronic PSL inspection receipts to            Must have
+             customer upon completion of inspection. Receipt must be read only and
+             cannot be edited by the customer.
+4.2.8        Ability to add or revise inspection data fields                                Must have
+
+
+
+
+                                           Page 27 of 40
+4.2.9        Be able to track inspection results for all laterals on a property, regardless   Must have
+             of how many there are, so the application generates the correct number
+             of input forms for collecting all the facts specific to an individual lateral
+4.2.10       Ability for users to upload documents to specific parcels, inspection            Must have
+             records, etc.
+4.2.11       Ability to create forms for data entry (i.e., inspection report forms, HOA       Must have
+             statement of responsibility forms), from which entries are loaded into the
+             system
+4.2.12       Ability for users to access version-controlled SOPs on PSL inspection and        Must have
+             data procedures
+4.2.13       Ability to incorporate SD-1 GIS map for sewer system into inspection files       Must have
+4.2.14       Ability to show inspection data when PSL administrators inquire about            Must have
+             prior results
+4.2.15       Access through Mobile Device                                                     Must have
+  4.2.15.1           Live electronic data entry into the system during inspections            Must have
+  4.2.15.2           Adjustable display so mobile device user can view entire                 Must have
+                     inspection results with minimal scrolling or paging
+  4.2.15.3           Allow data to be saved temporarily locally and then uploaded             Must have
+                     once connection is available – support offline data entry
+
+4.3 Program Triggers
+4.3.1        Title Transfers                                                                  Must have
+   4.3.1.1          Time Extension Certificate expiring                                       Must have
+   4.3.1.2          Ability to upload sales transactions into the PSL database                Must have
+   4.3.1.3          Title transfers are considered in compliance if a valid Compliance        Must have
+                    Agreement, Compliance Certificate or Time Extension Certificate
+   4.3.1.4          No history of valid certificate or expired certificate considered         Must have
+                    non-compliant
+4.3.2        Water Meter                                                                      Must have
+   4.3.2.1          Increase or decrease in water meter size requires a compliance            Must have
+                    certificate
+   4.3.2.2          PSL software must incorporate data from New Business Office to            Must have
+                    track compliance
+4.3.3        Construction Remodel                                                             Must have
+   4.3.3.1           Remodel more than $100,000 of permitted costs requires a                 Must have
+                     compliance certificate to be obtained
+   4.3.3.2           EBMUD receives data via excel file for finaled permits more than         Must have
+                     $100,000
+   4.3.3.3           Software must allow data to be uploaded into the database to             Must have
+                     provide status of compliance for all finaled permits
+
+                                           Page 28 of 40
+4.3.4        Compliance Agreement                                                        Must have
+   4.3.4.1           Software must track compliance agreement expiration,                Must have
+                     milestones, and extension deposits
+
+
+5.0 PSL Program Certificates
+5.1 Compliance Certificate
+5.1.1        Lower lateral waiver for all parcels in Alameda and Albany                  Must have
+5.1.2        Data entry fields to search for property address, determine compliance,     Must have
+             and schedule PSL inspection
+   5.1.2.1          APN                                                                  Must have
+   5.1.2.2          Property address                                                     Must have
+   5.1.2.3          Apartment number                                                     Must have
+   5.1.2.4          Property city                                                        Must have
+5.1.3        Customer can choose to use either APN or Address to lookup parcel           Must have
+5.1.4        Show available reservation dates and times; appointments will be booked     Must have
+             in 3-hour windows
+5.1.5        Customers must be able to see appointments prior to entering contact        Must have
+             information
+5.1.6        Data entry fields for booking PSL inspections                               Must have
+   5.1.6.1          Property owner name                                                  Must have
+   5.1.6.2          Property owner mailing address                                       Must have
+   5.1.6.3          Property owner email                                                 Must have
+   5.1.6.4          Contractor name                                                      Must have
+   5.1.6.5          Contractor mailing address                                           Must have
+   5.1.6.6          Contractor email address                                             Must have
+   5.1.6.7          Contractor phone number                                              Must have
+   5.1.6.8          Special instructions                                                 Must have
+5.1.7        Mobile Device Integration                                                   Must have
+   5.1.7.1           Adjustable display so mobile device user view entire                Must have
+                     appointment form without scrolling or paging
+   5.1.7.2           Allow data to be saved temporarily locally and then uploaded        Must have
+                     once connection is available
+5.1.8        Prohibit customers from booking more than one appointment for the           Must have
+             same parcel in the same appointment booking sessions.
+5.1.9        Data entry validation to prevent erroneous data being submitted by          Must have
+             customer
+5.1.10       If Compliance Certificate inspection fee is not paid the system must drop   Must have
+             the reservation within 15 minutes
+
+                                          Page 29 of 40
+5.1.11       Field for customer to list the number of PSLs to be inspected on the           Must have
+             parcel. The application must route the appointment request to the right
+             team based on the number of laterals on my property
+  5.1.11.1            < 3 to standard appointment, customer allowed to book                 Must have
+                      appointment online
+  5.1.11.2            > 3 to special appointments process, customer is asked to submit      Must have
+                      map with appointment booking
+5.1.12       Compliance Certificate types                                                   Must have
+  5.1.12.1            Compliance Certificate – Replaced Sewer Lateral (20-year              Must have
+                      certificate)
+  5.1.12.2            Compliance Certificate – Repaired Sewer Lateral (7-year               Must have
+                      certificate)
+  5.1.12.3            Compliance Certificate – Passed as-is (7-year certificate)            Must have
+  5.1.12.4            Compliance Certificate – renew – Replaced Sewer Lateral (20-          Must have
+                      year certificate, but must be renewed upon expiration)
+  5.1.12.5            Compliance Certificate – renew – Repaired Sewer Lateral (20-          Must have
+                      year certificate, but must be renewed upon expiration)
+  5.1.12.6            Compliance Certificate – renew – Passed as-is (20-year                Must have
+                      certificate, but must be renewed upon expiration)
+  5.1.12.7            Configure code to address logic for proper compliance certificate     Must have
+                      issuance
+5.1.13       Reminder email is sent to customers 24 months prior to expiration of a         Must have
+             RENEW type Compliance Certificate. PSL Administrator will be able to
+             customize the customer notification message
+5.1.14       Ability to create new certificate types or modify existing certificate types   Must have
+5.1.15       Ability to revoke compliance certificate at any time                           Must have
+5.1.16       Criteria for compliance certificate logic                                      Must have
+  5.1.16.1          Upper Sewer Lateral (UL) and Lower Sewer Lateral (LL) Replaced          Must have
+                    = 20-year certificate
+  5.1.16.2          UL replaced and LL Repaired = 7-year certificate                        Must have
+  5.1.16.3          UL replaced and LL as-is = 7-year certificate                           Must have
+  5.1.16.4          UL as-is, and LL as-is = 7-year certificate                             Must have
+  5.1.16.5          UL repaired and LL replaced = 7-year certificate                        Must have
+  5.1.16.6          UL as-is, and LL replaced = 7-year certificate                          Must have
+  5.1.16.7          UL replaced and no LL = 20-year certificate                             Must have
+  5.1.16.8          UL repaired and no LL = 7-year certificate                              Must have
+  5.1.16.9          UL as-is and no LL = 7-year certificate                                 Must have
+5.1.17       Compliance Certificate logic (HOA and 1,000ft parcel groups)                   Must have
+  5.1.17.1           UL and LL replaced = 20-year renew certificate                         Must have
+  5.1.17.2           UL replaced and LL Repaired = 20-year renew certificate                Must have
+
+                                            Page 30 of 40
+   5.1.17.3            UL replaced and LL as-is = 20-year renew certificate               Must have
+   5.1.17.4            UL as-is, and LL as-is = 20-year renew certificate                 Must have
+   5.1.17.5            UL repaired and LL replaced = 20-year renew certificate            Must have
+   5.1.17.6            UL as-is, and LL replaced = 20-year renew certificate              Must have
+   5.1.17.7            UL replaced and no LL = 20-year renew certificate                  Must have
+   5.1.17.8            UL repaired and no LL = 20-year renew certificate                  Must have
+   5.1.17.9            UL as-is and no LL = 20-year renew certificate                     Must have
+5.1.18        Ability to update property owner contact information in the event           Must have
+              property sells before Compliance Certificate expires
+
+5.2 Time Extension Certificates (TECs)
+5.2.1         TECs available on website for purchase/download                             Must have
+5.2.2         Record TEC fee and refundable deposit                                       Must have
+   5.2.2.1    TEC fee paid by credit card through website                                 Must have
+
+   5.2.2.2    TEC deposit may be paid by ACH or other electronic transfer or by mailed    Must have
+              in check (mechanism for ACH to be tracked directly in the software)
+   5.2.2.3    Address when a deposit check is returned by the bank, and document          Must have
+              event in the system so that it’s known that a refund check shouldn’t be
+              issued, until a replacement deposit check is received
+   5.2.2.4    Mailed in checks need to be linked to the property via the system (checks   Must have
+              contain parcel number)
+5.2.3         Prohibit same property owner from obtaining more than one TEC               Must have
+5.2.4         Customer TEC request data fields                                            Must have
+   5.2.4.1            Customer name                                                       Must have
+
+   5.2.4.2            Customer Email                                                      Must have
+
+   5.2.4.3            Mailing address                                                     Must have
+
+   5.2.4.4            City, State Zip                                                     Must have
+
+   5.2.4.5            Parcel number                                                       Must have
+5.2.5         Recipient refund recipient data fields                                      Must have
+   5.2.5.1            Recipient name                                                      Must have
+
+   5.2.5.2            Mailing address                                                     Must have
+
+   5.2.5.3            City, State Zip                                                     Must have
+
+   5.2.5.4            Recipient phone number                                              Must have
+
+   5.2.5.5            Recipient email                                                     Must have
+
+5.2.6         Certificate is valid for 180-days from date of purchase                     Must have
+5.2.7         Track TEC deposit within the PSL application and cross-reference TEC        Must have
+              purchase and required deposit (via accounting dept. deposit reports) so
+
+                                            Page 31 of 40
+             that one cannot occur without the other
+5.2.8        Expired TECs enter enforcement immediately after the extension has          Must have
+             expired (see Enforcement section 7.1 for more details)
+5.2.9        Automate disbursement authorizations to process (TEC) refunds either        Must have
+             hard copy or electronically
+  5.2.9.1             User can access database to run check at any time to identify      Must have
+                      Time Extension Certificate holders who have obtained a
+                      Compliance Certificate
+  5.2.9.2             System will compile the TEC refund packets after refund            Must have
+                      Compliance status check has been completed
+5.2.10       Perform query to generate TEC refund packets, and the database stores       Must have
+             the following details regarding TEC deposits
+  5.2.10.1            Accounting ID (numeric code)                                       Must have
+
+  5.2.10.2           Deposit Date                                                        Must have
+
+  5.2.10.3           Customer Name                                                       Must have
+
+  5.2.10.4           Property Address (property triggering PSL Ordinance)                Must have
+
+  5.2.10.5           Customer Mailing Address                                            Must have
+
+  5.2.10.6           Customer Phone Number                                               Must have
+
+  5.2.10.7           Customer Email                                                      Must have
+
+  5.2.10.8           Time Extension Certificate expiration date                          Must have
+
+5.2.11       Refund packet must include all files                                        Must have
+  5.2.11.1           Completed/signed disbursement authorization. Disbursement         Must have
+                     Authorization must include the following data fields: Vendor Code
+                     (numeric value), Remit Name, Remit Address, Date Prepared,
+                     Settlement amount, Invoice number (APN), invoice date, fund
+                     name, account number, and signatures of approval.
+  5.2.11.2           Copy of TEC. TEC certificate must be stored within the database   Must have
+
+  5.2.11.3           Copy of deposit check or ACH or other electronic transfer receipt   Must have
+
+  5.2.11.4           Refund recipient name and mailing address (to validate              Must have
+                     disbursement authorization since customer information is not
+                     visible due to privacy protection)
+5.2.12       Integration with the EBMUD’s financial and accounting system so that        Must have
+             when checks are received the deposit is linked to the TEC
+5.2.13       Valid EBMUD Compliance Certificate or exemption certificate is required     Must have
+             for TEC deposit to be refunded
+5.2.14       TEC workflow                                                                Must have
+  5.2.14.1           Title transfer occurs                                               Must have
+
+
+
+                                             Page 32 of 40
+   5.2.14.2           Customer who does not currently have a valid Compliance            Must have
+                      Certificate for their property purchases a TEC prior to close of
+                      escrow
+   5.2.14.3           A copy of the Time Extension Certificate along with the deposit    Must have
+                      check is mailed to EBMUD
+   5.2.14.4           Compliance Certificate is issued before the 180-day extension      Must have
+                      expires
+   5.2.14.5           TEC expires, and customer enters enforcement                       Must have
+
+   5.2.14.6            Deposit is refunded back to customer once Compliance              Must have
+                       Certificate is obtained
+   5.2.14.7   Ability to query database to find all parcels with a TEC for which a COC   Must have
+              has or has not been obtained for all data fields including deposit
+              information.
+
+5.3 Exemption Certificates
+ 5.3.1        Ability to track and process all PSL Exemption Certificate requests        Must have
+ 5.3.2        Automated email that goes to customer when exemption request is            Must have
+              submitted
+ 5.3.3        Automated email requesting additional documentation based on the           Must have
+              exemption request type
+ 5.3.4        Automated email that goes to customer when decision is made, and           Must have
+              exemption is processed
+ 5.3.5        Ability to track and store staff communication with customer               Must have
+ 5.3.6        Criteria for exemption approval                                            Must have
+   5.3.6.1            Past PSL work, and exempt title transfers                          Must have
+   5.3.6.2            Past PSL work                                                      Must have
+   5.3.6.3            Exempt title transfers                                             Must have
+   5.3.6.4            Lineal consanguinity                                               Must have
+   5.3.6.5            Pressurized PSLs                                                   Must have
+   5.3.6.6            Vacant parcels                                                     Must have
+   5.3.6.7            Septic system                                                      Must have
+   5.3.6.8            No sewer connection (septic)                                       Must have
+   5.3.6.9            Partial interest transfer                                          Must have
+   5.3.6.10           Will or inheritance                                                Must have
+   5.3.6.11           Co-owner                                                           Must have
+   5.3.6.12           Trust                                                              Must have
+   5.3.6.13           Divorce                                                            Must have
+   5.3.6.14           Foreclosure                                                        Must have
+   5.3.6.15           Transfer between business entity (LLC)                             Must have
+   5.3.6.16           Other – provide flexibility to add new criteria                    Must have
+
+                                            Page 33 of 40
+5.3.7        Ability to see what actions have been taken, track any communication,       Must have
+             and can change the state to one of the states in the PSL Exemption
+             Lifecycle
+5.3.8        Exemption workflow                                                          Must have
+  5.3.8.1           Customer submits exemption request online                            Must have
+  5.3.8.2           Customer receives automated email from EBMUD confirming              Must have
+                    receipt of exemption request
+  5.3.8.3           Exemption request is received by EBMUD                               Must have
+  5.3.8.4           PSL Administrator sends email to customer to request additional      Must have
+                    details or sends email to Satellite confirming permit details
+  5.3.8.5           Sufficient information provided – decision to approve or deny        Must have
+  5.3.8.6           If approved, PSL Administrator adds issue and expiration date,       Must have
+                    and notes reason for approval on the exemption certificate
+  5.3.8.7           Exemption duration auto populated based on compliance status         Must have
+                    (i.e., if received enforcement notice 1 month exemption, 6 month
+                    exemption if enforcement notice has not been issued)
+  5.3.8.8           Customer gets autogenerated email with final decision, if decision   Must have
+                    is denied customer is provided option to appeal; if decision is
+                    approved customer is provided a direct link to download a copy
+                    of the exemption certificate
+
+
+6.0 Appeals
+6.1 Customer Appeal Request
+             Ability to track appeal decision with PSL non-compliance enforcement        Must have
+6.1.1        process, see Enforcement section 7.0 for more details
+             Ability to track and process all PSL appeal requests and compliance         Must have
+6.1.2        agreements within database
+   6.1.2.1   Customers can request appeal online                                         Must have
+
+   6.1.2.2           Property owner name                                                 Must have
+
+   6.1.2.3           Property owner email                                                Must have
+
+   6.1.2.4           Property owner phone number                                         Must have
+
+   6.1.2.5           Property address                                                    Must have
+
+   6.1.2.6           Property APN                                                        Must have
+
+   6.1.2.7           Contact Name                                                        Must have
+
+   6.1.2.8           Contact Mailing Address                                             Must have
+
+   6.1.2.9           Contact Email                                                       Must have
+
+
+                                         Page 34 of 40
+   6.1.2.10            Contact phone number                                              Must have
+
+   6.1.2.11            Request extension of time – date                                  Must have
+
+   6.1.2.12            Appeal decision made by EBMUD – nature of decision                Must have
+
+   6.1.2.13            Have you obtained a TEC – TEC number/Expiration date              Must have
+
+   6.1.2.14            Explain reasons for appeal                                        Must have
+
+   6.1.2.15            Describe specific request                                         Must have
+
+   6.1.2.16            Attach supporting documentation                                   Must have
+
+   6.1.2.17            Automated email goes to customer after appeal request has         Must have
+                       been submitted
+   6.1.2.18            Electronic signature                                              Must have
+               The application must have stages of approval and review as well as        Must have
+6.1.3          tracking actions taken within the application
+
+               Ability to house the documents and templates within the application       Must have
+6.1.4
+
+6.2 Compliance Agreements
+6.2.1         Compliance Agreement implementation                                        Must have
+  6.2.1.1             Ability to track monetary deposits for extensions regardless of
+                      dollar amount
+  6.2.1.2             Appeal for additional time – approved, Compliance Agreement        Must have
+                      created, and certificate of extension issued to customer
+  6.2.1.3             If greater than 18-month extension, PSL Administrator can          Must have
+                      establish milestones
+  6.2.1.4             Customer gets notifications (automated emails) about upcoming      Must have
+                      milestone deadlines and one month prior to expiration of
+                      Compliance Agreement
+  6.2.1.5             Expired Compliance Agreements automatically enter                  Must have
+                      enforcement
+6.2.2         Compliance agreements will require digital signature for authorizing the   Must have
+              extension
+6.2.3         Software tracks cash deposits submitted to EBMUD for the extension         Must have
+
+
+
+
+                                           Page 35 of 40
+7.0 Enforcement
+7.1 Track and Manage Enforcement
+            Determine the status of a parcel in the context of the PSL Ordinance        Must have
+7.1.1       Enforcement process
+  7.1.1.1           Title transfer trigger via monthly sales data upload                Must have
+
+  7.1.1.2           Water meter trigger data to be entered by New Business Office       Must have
+
+  7.1.1.3           Ability to upload $100K remodel trigger via quarterly permit data   Must have
+                    received from Satellite agencies
+  7.1.1.4           Expired Time Extension and Compliance Agreement Certificates        Must have
+                    automatically enter enforcement
+7.1.2       Search and filter tools allowing user to filter enforcement data            Must have
+
+7.1.3       User ability to edit, or delete customer data records                       Must have
+
+7.1.4       Tool that allows title transfer data to be uploaded into enforcement        Must have
+            database
+7.1.5       Ability to modify enforcement steps (forwards and backwards) to change      Must have
+            the enforcement status (step) of any parcel as needed, and not
+            necessarily in any stepwise fashion.
+7.1.6       Attach trigger type (Sale upload, TEC expiration, Compliance Agreement      Must have
+            expiration, water meter, $100k remodel) to each parcel in enforcement.
+7.1.7       Enforcement Process                                                         Must have
+
+7.1.8                Parcel enters enforcement module for not obtaining a compliance    Must have
+                     certificate upon meeting one of the three program triggers
+  7.1.8.1            1st Courtesy notice                                                Must have
+  7.1.8.2            2nd Courtesy notice (sent 30 days after 1st courtesy notice)       Must have
+  7.1.8.3            Notice of Violation and Order (NOVO) (sent 30 days after 2nd       Must have
+                     courtesy notice) and assess fee
+  7.1.8.4            1st Continuing non-compliance (sent 60 days after NOVO) and        Must have
+                     assess fee
+  7.1.8.5            2nd Continuing non-compliance (sent 60 days after 1st continuing   Must have
+                     non-compliance) and assess fee
+  7.1.8.6            3rd or more Continuing non-compliance (sent 60 days after last     Must have
+                     continuing non-compliance) and assess fee
+7.1.9       Ability to add additional enforcement steps as needed                       Must have
+
+7.1.10      Ability to record and notify Accounts Receivable when fees are paid
+
+7.1.11      Parcels automatically removed from enforcement due to valid program         Must have
+            certificate
+
+
+                                         Page 36 of 40
+   7.1.11.1            Time Extension Certificate                                           Must have
+   7.1.11.2             Exemption Certificate                                               Must have
+   7.1.11.3             Compliance certificate                                              Must have
+   7.1.11.4             Compliance Agreement                                                Must have
+7.1.12         Ability to create courtesy notice templates and modify as needed,            Must have
+               database would automatically generate the letters from the list of parcels
+               to receive enforcement for a given mailer
+7.1.13         Send and track email or other communication so user can determine            Must have
+               what the PSL Team has told a customer at any given time
+7.1.14         The application presents me with choices of how to communicate, helps        Must have
+               me formulate a standard email message, and logs the communication
+7.1.15         Tool that provides summary statistics of enforcement activities              Must have
+    7.1.15.1         Number of parcels presently in enforcement, categorized by             Must have
+                     enforcement trigger type and enforcement trigger date
+    7.1.15.2         Number of parcels that entered each stage of enforcement,              Must have
+                     categorized by enforcement trigger type and enforcement trigger
+                     date
+    7.1.15.3         Number of parcels that were formerly in enforcement, but are           Must have
+                     now compliant, and percent of total, categorized by enforcement
+                     trigger type and enforcement trigger date
+    7.1.15.4         Average amount of time between each enforcement stage and              Must have
+                     compliance, by enforcement trigger type and enforcement trigger
+                     date
+7.1.16       Record and report the current and past enforcement stages applied and          Must have
+             the time between each stage and compliance for each parcel.
+
+
+8.0 Program Accounting
+8.1 Reconciliation Report
+               Report that accurately records customer transactions and assessed fees       Must have
+8.1.1          by parcel in chronological order from oldest to newest
+
+8.2 Processing Payments, Refunds, and Fees
+8.2.1          Compatibility with Oracle Financial System software (specific                Must have
+               requirements to be developed)
+8.2.2          Ability for customers to pay fees online through a contracted payment        Must have
+               processor
+8.2.3          Ability to manually apply program fees for a given parcel or parcel group    Must have
+
+
+
+                                            Page 37 of 40
+8.2.4       Ability to cancel payment records in the PSL Application and process        Must have
+            refunds
+8.2.5       Ability to access fees to Customers and/or properties                       Must have
+8.2.6       PSL fee types                                                               Must have
+  8.2.6.1           Compliance Certificate                                              Must have
+
+  8.2.6.2            Time Extension Certificate                                         Must have
+  8.2.6.3            Reschedule fee                                                     Must have
+  8.2.6.4            Extra lateral fee                                                  Must have
+  8.2.6.5            Off hours fee                                                      Must have
+  8.2.6.6            Specific appointment time                                          Must have
+  8.2.6.7            HOA oversight                                                      Must have
+  8.2.6.8            Compliance Agreement                                               Must have
+  8.2.6.9            Other fee - Ability to create new fee types                        Must have
+8.2.7       Ability to enter any dollar amount for “other fee”                          Must have
+8.2.8       Ability to refund full fee amount or specific dollar amounts, with the      Must have
+            option to generate a DA to do so (which is necessary when the credit card
+            charge is > 6 months old, or if we are refunding a duplicate TEC deposit)
+8.2.9       Ability to update and modify fees (fee updates should not impact existing   Must have
+            fees on record that are not paid)
+
+8.3 Walk-in Payment Processing
+8.3.1       PSL Software must allow for EBMUD staff to enter payment details and        Must have
+            record the transaction manually
+8.3.2       Ability for software to generate receipt for payment of the PSL program     Must have
+            fee that is sent to customer electronically via email
+8.3.3       The payment receipt should include                                          Must have
+8.3.4       Customer name                                                               Must have
+8.3.5       Customer mailing address                                                    Must have
+8.3.6       Payment type and amount paid                                                Must have
+  8.3.6.1   Date of transaction                                                         Must have
+  8.3.6.2   Transaction ID number                                                       Must have
+  8.3.6.3   Assessor’s Parcel Number                                                    Must have
+
+8.4 Enforcement Non-compliance Billing
+8.4.1       Bill and track enforcement in application                                   Must have
+8.4.2       Data needed to create customer accounts                                     Must have
+  8.4.2.1           Parcel Address                                                      Must have
+
+  8.4.2.2           Assessor’s Parcel Number                                            Must have
+
+                                          Page 38 of 40
+   8.4.2.3           Property Owner Name                                                    Must have
+
+   8.4.2.4           Property Owner Address                                                 Must have
+
+8.4.3        Non-compliance billing sequence                                                Must have
+                     1st bill issued when NOVO is mailed (approximately 90 days after       Must have
+   8.4.3.1           1st courtesy notice)
+   8.4.3.2            2nd bill issued when 1st Continuing non-compliance letter is mailed   Must have
+                      (approximately 60 days after NOVO)
+   8.4.3.3            3rd bill issued when 2nd Continuing non-compliance letter is          Must have
+                      mailed (approximately 60 days after 1st Continuing non-
+                      compliance letter is mailed)
+   8.4.3.4            4th bill issued when 3rd continuing non-compliance letter is mailed   Must have
+                      (approximately 60 days after 2nd continuing non-compliance
+                      letter is mailed)
+8.4.4        Ability to modify billing fees and frequency                                   Must have
+
+
+8.5 Rate Increases
+             Ability for the application to keep track of fee changes and apply the         Must have
+8.5.1        correct fee based on the time that the charge was applied
+8.5.2        Historical fee amounts must be retained for accurate record keeping            Must have
+
+
+
+9.0 Program Website
+9.1 Content and self-service through EBMUD.com
+9.1.1        Provide online self-service functionality through ebmud.com                    Must have
+9.1.2        website should have a responsive design to support mobile devices              Must have
+9.1.3        Customer information portal                                                    Must have
+9.1.4        Determine compliance status, download certificate, learn about what is         Must have
+             needed to gain compliance, or schedule an inspection
+9.1.5        Provide online Application Process for commercial, industrial, and             Must have
+             residential customers
+9.1.6        Provide information to customers related to PSL program requirements           Must have
+
+9.1.7        Ability to view Compliance Certificates by property address or APN             Must have
+9.1.8        Website that allows PSL administrator easy and prompt updates to keep          Must have
+             information current
+
+
+
+
+                                           Page 39 of 40
+10.0 Data Aggregation and Regulatory Reporting
+10.1 Predefined and Ad-hoc Reports
+10.1.1         Pre-set reporting functionality (include all currently reported in CD    Must have
+               Annual Report)
+   10.1.1.1             Annual Miles of PSL certified by Satellite                      Must have
+   10.1.1.2             Annual Number of Compliance Certificates by Satellite           Must have
+   10.1.1.3             Annual number of exemption certificates by Satellite            Must have
+   10.1.1.4             Annual number of Time Extension Certificate counts: active,     Must have
+                        expired/compliant, and expired/non-compliant
+   10.1.1.5             Total number of: Title transfers, $100K remodel, and water      Must have
+                        meters
+   10.1.1.6             Projected vs Actual Compliance Certificates                     Must have
+   10.1.1.7             Sales and compliance rates by month                             Must have
+   10.1.1.8             Total certificates issued - % voluntary                         Must have
+   10.1.1.9             1000ft parcel groups – Condition Assessment Plans, Corrective   Must have
+                        Action Work Plans, and compliance status
+   10.1.1.10            Number of HOAs and compliance status                            Must have
+   10.1.1.11            Port of Oakland and Alameda Point parcel compliance             Must have
+10.1.2         Ability to create new data quires within the database (ad-hoc)           Must have
+
+
+
+
+                                            Page 40 of 40
+

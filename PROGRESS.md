@@ -5,6 +5,23 @@
 
 ---
 
+## 2026-09-30 — Misread sweep · reading rulings now 5 (all John-approved) · RHNA check · audit +55
+
+**Reading rulings (`corrections/v4/reading_rulings.csv`, 5/5):** B2024-05916 1421 Arch (applied, live) · B2017-05275
+2501 Telegraph (−4) · B2024-03341 2212 McGee (−2) · B2019-02963 2707 Hillegass (BP −3 only; an electrical permit for a
+cottage counted under B2018-00483) · B2018-01255 2334 Jefferson (−1; the house remodel beside its own ADU permit
+B2018-01256). The last four apply at the peer session's next rebuild: CO −7 (4,375 → 4,368; 2018–25 4,126 → 4,119), BP
+−10 (5,283 → 5,273), structures 182, 1035, 386, 216 removed. The peer appends JN-E baseline **30e** (30d is the
+sha-only append for the projects swap). **Misread sweep** (`docs/audit/2026-09-30_misread_sweep.md`): over all 1,188
+permits counted as creating units, structured signals (Accela trade-only type; Alteration + no UnitsAdded + credit ==
+NumberUnits) flag 89; read one by one, nearly all are real (incl. JADU conversions); the misreading is rare: 5 permits,
+15 BP / 12 CO units. **RHNA check** (`docs/audit/2026-09-30_rhna_permit_credit_check.md`): at building grain by FIRST
+permit, 6th cycle through 2025 ours 1,938 vs the City's 2,120 (−8.6%); bar stays held until the −182 is named.
+**Audit page:** +55 not yet attributed (O08/O09 named). Next: re-derive JN-E + regenerate the Audit and home pages after
+the peer's swap; then the 6th-cycle permit match.
+
+---
+
 ## 2026-09-30 — Home-page pipeline numbers generated (+ completions per year: ours from v4, with the City's)
 
 **Revised same day (John, option 1):** the first version took completions from the v2 Explorer data, which is

@@ -405,12 +405,21 @@ PLANNING_RECORDS = os.path.join(ROOT, 'data', 'raw', 'accela_capdetail', 'capdet
 # here, never an edit of an old file. The 2026-09-29 file is the 44 records the planning-scope rulings INCLUDE
 # (corrections/v4/planning_scope_rulings.csv, John 2026-09-29) that the old regex filter never fetched.
 PLANNING_HARVESTS = (
-    (PLANNING_RECORDS, '2026-09-26',
-     'CapDetail harvest of housing Planning records (housing_rules.planning_filter); raw pages pinned in '
+    # the 2026-09-26 harvest RE-PARSED 2026-09-30 from its own saved pages with the parcel fix (ff94c85): identical to
+    # capdetail_2026-09-26.jsonl except 13 multi-parcel records that regain their non-primary parcels. The original
+    # file stays in the repo as history; the pages did not change, so nothing was re-fetched.
+    (os.path.join(ROOT, 'data', 'raw', 'accela_capdetail', 'capdetail_2026-09-26_reparsed-2026-09-30.jsonl'), '2026-09-26',
+     'CapDetail harvest of housing Planning records, re-parsed 2026-09-30 (parcel fix); raw pages pinned in '
      'data/raw/accela_capdetail/pages_manifest_2026-09-26.csv'),
     (os.path.join(ROOT, 'data', 'raw', 'accela_capdetail', 'capdetail_2026-09-29_adds.jsonl'), '2026-09-29',
      'CapDetail harvest of the 44 records planning_scope_rulings.csv includes (harvest_capdetail.py --records); '
      'raw pages pinned in data/raw/accela_capdetail/pages_manifest_2026-09-29_adds.csv'),
+    # Tier 1 of the 2006-2014 backfill (John, 2026-09-30): pre-2015 primary applications (use permits, AUPs, their
+    # modifications) the first reading called housing or could not decide. Projects rule P1b makes one a project only
+    # if it reaches a building; the rest are evidence.
+    (os.path.join(ROOT, 'data', 'raw', 'accela_capdetail', 'capdetail_2026-09-30_pre2015.jsonl'), '2026-09-30',
+     'CapDetail harvest of 1,359 pre-2015 primary applications (Tier 1; harvest_capdetail.py --records); raw pages '
+     'pinned in data/raw/accela_capdetail/pages_manifest_2026-09-30_pre2015.csv'),
 )
 
 

@@ -26,6 +26,13 @@ marked with their outcome; gaps close through corrections/v4/project_rulings.csv
   P5 ONE HOME   every structure is in exactly one project; a project may have many (Acheson: 4 buildings).
                 A project with no structure is an application not (yet) built: pending, entitled, denied or
                 withdrawn -- the pipeline, not an error.
+  P1b PRE-2015  (John, 2026-09-30) an application FILED BEFORE 2015 becomes a project only if it reaches a building.
+                Our building-permit stream starts around 2014, so an older application with no building here was most
+                likely built before our data, not "entitled and unbuilt"; it stays as evidence, not a project.
+  P4b DEAD      (2026-09-30) an application is dead for P4 if its milestones show a denial or a Withdrawn/Void end,
+                OR its RECORD STATUS reads Denied / Withdrawn / Void / Expired. Pre-2015 records carry a denial only in
+                the status (UP2012-0039, 70 units at 2701 Shattuck, denied 2012, was otherwise reaching the later
+                57-unit building).
   P6 COMPANIONS non-anchor in-scope records at a site (design review, modifications, pre-applications) attach
                 to the anchor filed nearest them in time; they add evidence, never a project.
 
@@ -50,9 +57,18 @@ from capdetail_select import resolve_chain, cited_records, is_modification  # no
 
 V4 = ROOT / "databases/berkeley_housing_v4.db"
 RULINGS = ROOT / "corrections/v4/planning_scope_rulings.csv"
+PROJECT_RULINGS = ROOT / "corrections/v4/project_rulings.csv"
 OUT = ROOT / "scratch/2026-09-29_phase3"
 ANCHOR_PRIORITY = ("primary_application", "pre_application", "ministerial_clearance", "companion_review")
 DEAD = ("Withdrawn", "Void")
+DEAD_STATUS = ("Denied", "Withdrawn", "Void", "Expired")
+PRE_2015 = "2015-01-01"
+
+
+def dead(rec) -> bool:
+    m = rec["_m"]
+    return bool(m["denied"] or (m["ended_status"] or "").startswith(DEAD)
+                or str(rec.get("record_status") or "").startswith(DEAD_STATUS))
 
 
 def addr_key(a):
@@ -80,15 +96,18 @@ def main() -> int:
 
     # ---- P1: in-scope planning records
     excluded = {r["record"] for r in csv.DictReader(open(RULINGS)) if r["ruling"] == "exclude"}
-    recs = {}
+    recs, held_by_type = {}, {}
     for (pl,) in db.execute("SELECT raw_payload FROM events WHERE event_type_code='planning_filed'"):
         r = json.loads(pl)
         m = milestones(r)
-        if r["record"] in excluded or m["role"] in ("not_an_application", "unknown"):
+        if r["record"] in excluded:
             continue
         r["_m"] = m
         r["_sites"] = (set().union(*[parcels(a, r.get("work_location")) for a in (r.get("parcels_raw") or [])]) |
                        {addr_key(a) for a in (r.get("work_locations_all") or [r.get("work_location")])}) - {None}
+        if m["role"] in ("not_an_application", "unknown"):
+            held_by_type[r["record"]] = r   # out by TYPE only: an approved project ruling may bring it back (G006)
+            continue
         recs[r["record"]] = r
     n_loaded = db.execute("SELECT COUNT(*) FROM events WHERE event_type_code='planning_filed'").fetchone()[0]
 
@@ -178,8 +197,7 @@ def main() -> int:
     ties, refused = [], []
     for sid, s in S.items():
         cands = set().union(*[anchor_sites[x] for x in s["sites"]]) if s["sites"] else set()
-        live = [a for a in cands if not recs[a]["_m"]["denied"]
-                and not (recs[a]["_m"]["ended_status"] or "").startswith(DEAD)]
+        live = [a for a in cands if not dead(recs[a])]
         before = [a for a in live if s["submitted"] and recs[a]["_m"]["filed"]
                   and recs[a]["_m"]["filed"] <= s["submitted"]]
         if before:
@@ -195,23 +213,65 @@ def main() -> int:
             if cands and (units.get(sid) or 0) >= 5:
                 refused.append((sid, sorted(cands)))
 
+    # ---- PROJECT RULINGS (corrections/v4/project_rulings.csv): John's approved rows override P2-P4 where the rules
+    # cannot see the evidence. anchor_record: the named record anchors the named buildings (promoted to its own project
+    # if the rules had it as a companion). group_structures: the named buildings share one project. Every name must
+    # resolve -- a missing record or permit HALTS, so a ruling never goes stale quietly.
+    groups_of, applied = {}, collections.Counter()
+    for r in csv.DictReader(open(PROJECT_RULINGS)):
+        if r["status"] != "approved":
+            continue
+        sids = []
+        for k in [x.strip() for x in r["master_permits"].split(";") if x.strip()]:
+            assert k in master_of, f"project ruling {r['ruling_id']}: {k} is not a building's master permit"
+            sids.append(master_of[k])
+        if r["action"] == "anchor_record":
+            rec = r["record"].strip()
+            if rec not in recs and rec in held_by_type:      # filed under the wrong TYPE (2001 Ashby's SB 35 application
+                recs[rec] = held_by_type[rec]                 # is typed "Zoning Research Letter"); the ruling is the authority
+            assert rec in recs, (f"project ruling {r['ruling_id']}: record {rec} is not loaded, or the planning-scope "
+                                 f"rulings exclude it")
+            if rec not in anchors:
+                for a, members in anchors.items():
+                    if any(x["record"] == rec for x in members):
+                        members[:] = [x for x in members if x["record"] != rec]
+                anchors[rec] = [recs[rec]]
+            for sid in sids:
+                home[sid] = rec
+        elif r["action"] == "group_structures":
+            homes = {home[s] for s in sids if home[s]}
+            assert len(homes) <= 1, f"project ruling {r['ruling_id']}: buildings already in different projects {homes}"
+            for sid in sids:
+                home[sid] = next(iter(homes)) if homes else None
+                if not homes:
+                    groups_of[sid] = r["ruling_id"]
+        applied[r["action"]] += 1
+
     # ---- assemble projects
     projects = []
     by_anchor = collections.defaultdict(list)
     for sid, a in home.items():
         if a:
             by_anchor[a].append(sid)
+    evidence_only = 0
     for a, members in anchors.items():
         sids = by_anchor.get(a, [])
         m = recs[a]["_m"]
+        if not sids and (m["filed"] or "9999") < PRE_2015:      # P1b
+            evidence_only += 1
+            continue
         projects.append(dict(anchor=a, anchor_role=m["role"], records=sorted(r["record"] for r in members),
                              structures=sorted(sids), units=sum(units.get(x) or 0 for x in sids),
                              filed=m["filed"], entitled=m["entitled"], denied=m["denied"],
                              ended=m["ended_status"], stated_units=None))
+    grouped = collections.defaultdict(list)
     for sid, a in home.items():
         if a is None:
-            projects.append(dict(anchor=None, anchor_role="structure_only", records=[], structures=[sid],
-                                 units=units.get(sid) or 0, filed=None, entitled=None, denied=None, ended=None))
+            grouped[groups_of.get(sid, f"s{sid}")].append(sid)
+    for g, sids in grouped.items():
+        projects.append(dict(anchor=None, anchor_role="structure_only", records=[], structures=sorted(sids),
+                             units=sum(units.get(x) or 0 for x in sids), filed=None, entitled=None, denied=None,
+                             ended=None, ruling=g if not g.startswith("s") else None))
 
     # ---- report
     OUT.mkdir(parents=True, exist_ok=True)
@@ -222,8 +282,10 @@ def main() -> int:
           f"(excluded by ruling {len(excluded & set(_all_keys(db)))}, not_an_application/unknown "
           f"{n_loaded - len(recs) - len(excluded & set(_all_keys(db)))})")
     print(f"site clusters {len(clusters)}  {dict(kinds)}")
-    print(f"anchors (application-projects) {len(anchors)}")
+    print(f"anchors (application-projects) {len(anchors)}; pre-2015 anchors with no building kept as evidence "
+          f"only (P1b): {evidence_only}")
     print(f"structures {len(S)}: {dict(basis)}")
+    print(f"project rulings applied: {dict(applied)}")
     with_b = [p for p in projects if p["anchor"] and p["structures"]]
     print(f"PROJECTS {len(projects)}: application + buildings {len(with_b)} · "
           f"application only {sum(1 for p in projects if p['anchor'] and not p['structures'])} · "

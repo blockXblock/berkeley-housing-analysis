@@ -241,7 +241,7 @@ FROM one JOIN projects p USING(project_id) JOIN events e USING(event_id)
 # not"). Every actor role on a project, each from ITS OWN record, never inferred from another role:
 #   owner_of_record                    County assessor roll, on the project's current parcels
 #   record_owner / applicant           the project's Planning records (CapDetail owner; the 2025-26 log's applicant)
-#   contractor_of_record / _additional the master and phase building permits' Licensed Professionals (CSLB number)
+#   contractor_primary / _additional the master and phase building permits' Licensed Professionals (CSLB number)
 #   licensed_professional              another licence type on those permits, its type in the note
 #   registry_owner / _owner_business / registry_manager   the Rent Board registry on the project's parcels
 #   permit_owner                       the owner the master / phase building permit page lists
@@ -281,7 +281,7 @@ SELECT pk.project_key, aa.role, a.display_name, a.actor_id, s.source_kind, e.sou
 FROM pk JOIN project_structures ps USING(project_id)
 JOIN structure_events se ON se.structure_id = ps.structure_id AND se.role_in_structure IN ('master', 'phase')
 JOIN events e ON e.event_id = se.event_id
-JOIN actor_actions aa ON aa.event_id = e.event_id AND aa.role IN ('contractor_of_record', 'contractor_additional',
+JOIN actor_actions aa ON aa.event_id = e.event_id AND aa.role IN ('contractor_primary', 'contractor_additional',
                                                                  'licensed_professional', 'permit_owner')
 JOIN actors a USING(actor_id) LEFT JOIN sources s ON s.source_id = aa.source_id
 UNION ALL

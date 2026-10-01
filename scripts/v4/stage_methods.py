@@ -818,7 +818,9 @@ def load_building_professionals(con, harvests=BUILDING_HARVESTS):
     their own role, never inferred from another role. Identity = the licence the page states (State CSLB #, else the
     City business licence BL-...), so one contractor across many buildings is ONE actor; the company is the last name
     line, a contact person (if any) stays in notes as written. Role from the page's licence TYPE: 'Construction or
-    Contractor' -> contractor_of_record (the first listed) / contractor_additional (the 'Additional Licensed
+    Contractor' -> contractor_primary (the page's primary Licensed Professional -- NOT necessarily the general
+    contractor: 1951 Shattuck's Phase 1 lists its electrician first and Webcor Builders as additional; which one is the
+    builder is the licence CLASSIFICATION, CSLB's to state) / contractor_additional (the 'Additional Licensed
     Professionals'); any other type -> licensed_professional, its type in the coverage note (never guessed to be an
     architect). Anchored on the permit's issuance event, else its earliest event. A permit not in the events is
     rejected with its reason. The page's OWNER field (NAME * mailing address, as the planning loader reads it) becomes
@@ -867,7 +869,7 @@ def load_building_professionals(con, harvests=BUILDING_HARVESTS):
                         else ('BL', p.get('business_license')) if p.get('business_license') else ('name', company)
                     ctype = p.get('license_type') or ''
                     if ctype.startswith('Construction'):
-                        role, rc = ('contractor_of_record' if i == 0 else 'contractor_additional'), 'contractor'
+                        role, rc = ('contractor_primary' if i == 0 else 'contractor_additional'), 'contractor'
                     else:
                         role, rc = 'licensed_professional', 'licensed_professional'
                     if key not in ident:

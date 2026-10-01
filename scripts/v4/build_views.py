@@ -92,7 +92,8 @@ SELECT
   json_extract(p.notes, '$.anchor_role')                          AS anchor_role,
   pt.lat AS latitude, pt.lon AS longitude,
   CASE                                                                                 -- D2
-    WHEN json_extract(p.notes, '$.anchor_role') = 'outside_city_permitting' THEN json_extract(p.notes, '$.status')
+    WHEN json_extract(p.notes, '$.anchor_role') IN ('outside_city_permitting', 'pre_coverage_historic')
+         THEN json_extract(p.notes, '$.status')
     WHEN b.n_buildings > 0 AND b.n_complete = b.n_buildings THEN 'completed'
     WHEN b.n_buildings > 0 AND b.n_stale = b.n_buildings THEN 'stale'
     WHEN b.n_buildings > 0 THEN 'under_construction'
@@ -104,6 +105,9 @@ SELECT
   COALESCE(b.n_buildings, 0)                                      AS n_buildings,
   COALESCE(u.units, 0)                                            AS units_built_or_permitted,                -- D4
   json_extract(p.notes, '$.proposed_units')                       AS proposed_units,                          -- D4
+  json_extract(p.notes, '$.external_units')                       AS units_reported_by_source,  -- UC / historic ledgers
+  json_extract(p.notes, '$.completed_year')                       AS completed_year_reported,   -- historic ledger
+  json_extract(p.notes, '$.confidence')                           AS source_confidence,         -- historic ledger
   COALESCE(adu.adu_units, 0)                                      AS adu_units,
   json_extract(p.notes, '$.beds')                                 AS beds,
   t.eli AS eli_units, t.vli AS vli_units, t.li AS li_units, t.mod AS mod_units,

@@ -66,6 +66,7 @@ V4 = ROOT / "databases/berkeley_housing_v4.db"
 RULINGS = ROOT / "corrections/v4/planning_scope_rulings.csv"
 PROJECT_RULINGS = ROOT / "corrections/v4/project_rulings.csv"
 EXTERNAL_PROJECTS = ROOT / "corrections/v4/external_projects.csv"
+HISTORIC_PROJECTS = ROOT / "corrections/v4/historic_projects.csv"
 AFFORDABILITY = ROOT / "corrections/v4/affordability_rulings.csv"
 CLASSIFICATIONS = ROOT / "corrections/v4/classification_rulings.csv"
 FUNDING = ROOT / "corrections/v4/funding_ledger.csv"
@@ -330,6 +331,26 @@ def main() -> int:
                              permitting_authority=x["permitting_authority"], status=x["status"],
                              status_date=x["status_date"] or None, source=x["source_url"], verification=x["verification"]))
 
+    # PRE-COVERAGE HISTORIC PROJECTS (corrections/v4/historic_projects.csv, John 2026-10-01 -- the v2 -> v4 audit):
+    # City-permitted buildings that predate v4's permit sources (the CPRA feed from 2018, Planning from 2006), each
+    # carried WITH its cited source and confidence. No City record, no building; parcels by the address's County situs.
+    from housing_rules.address import normalize_address
+    situs = collections.defaultdict(list)
+    for pid_, norm in db.execute("SELECT pa.parcel_id, a.normalized FROM parcel_addresses pa JOIN addresses a USING(address_id)"):
+        situs[norm].append(pid_)
+    for x in csv.DictReader(open(HISTORIC_PROJECTS)):
+        try:
+            num, street = normalize_address(x["address"])
+            par = sorted(set(situs.get(f"{num}|{street}", [])))
+        except Exception:
+            par = []
+        projects.append(dict(anchor=None, anchor_role="pre_coverage_historic", records=[], structures=[], units=0,
+                             filed=None, entitled=None, denied=None, ended=None, parcels=par,
+                             external_id=x["historic_id"], external_name=x["name"], external_address=x["address"],
+                             external_units=int(x["units"]) if x["units"] else None, status=x["status"],
+                             completed_year=x["completed_year"], use=x["use"], source=x["source"],
+                             confidence=x["confidence"], verification=x["verification"]))
+
     # ---- report
     OUT.mkdir(parents=True, exist_ok=True)
     with open(OUT / "projects_preview.jsonl", "w") as f:
@@ -560,7 +581,7 @@ def write(con, projects) -> dict:
                                            "entitled_by", "denied", "ended", "record_status", "milestone_flags",
                                            "ruling", "project_key", "address", "name_basis", "pathways", "pathway_evidence",
                                            "external_id", "beds", "external_units", "permitting_authority", "status",
-                                           "status_date", "source", "verification",
+                                           "status_date", "source", "verification", "completed_year", "use", "confidence",
                                            "affordability", "classifications", "funding", "proposed_units", "proposed_units_evidence",
                                            "measures", "measures_excluded")
                      if p.get(k) not in (None, [], "")}

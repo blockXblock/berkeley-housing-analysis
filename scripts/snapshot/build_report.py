@@ -121,8 +121,8 @@ CITED = dict(
             'Research Center, Costs for Pedestrian and Bicyclist Infrastructure Improvements (2013); Berkeley Vision Zero Action Plan'),
     # UC Berkeley and Berkeley Lab run their own utilities and are excluded from City figures. Each value: (number, year).
     campus=dict(
-        ucb=dict(acres=(1095, '2021'), gsf=(13858460, '2018-19'), buildings_core=(100, '2024'), beds=(11621, '2024-25'),
-                 beds_planned=(2738, 'by fall 2028'), lrdp_beds=(20750, 'LRDP buildout'), parking=(6340, '2018-19'),
+        ucb=dict(acres=(1095, '2021'), gsf=(13858460, '2018-19'), buildings_core=(100, '2024'), beds=(8968, '2020; Anchor House 2024'),
+                 beds_planned=(2738, 'by fall 2028'), beds_proposed=2000, lrdp_beds=(20750, 'LRDP buildout'), parking=(6340, '2018-19'),
                  water_gal=(594404932, '2018'), gas_mmbtu=(2334237, '2018'), elec_mwh=(None, ''),
                  ghg=(160270, '2024'), ghg_scope1=(127957, '2024'), ghg_cogen=(114262, '2024'), ghg_scope2=(196, '2024'),
                  ghg_scope3=(32117, '2024'), ghg_series=[200700, 204909, 179998, 159363, 174113, 160270],
@@ -133,7 +133,7 @@ CITED = dict(
                   gas_therms=(1500000, 'FY2023'), peak_mw=(21.5, '2022'), ghg=(37713, '2024'), ghg_scope1=(7826, '2024'),
                   ghg_scope2=(19119, '2024'), sov=('about 30%', 'spring 2024')),
         src=['UC Regents item F4, July 21, 2021 (LRDP: 1,095 acres; Table 1-2: 2018-19 floor area, beds, parking, staff)',
-             'California State Auditor report 2024-111, Table B.1, October 2025 (UC Berkeley beds)',
+             'UC Berkeley 2021 LRDP Draft EIR, Table 5.12-5 (existing housing by facility, UC Berkeley 2020); Anchor House FAQ (772 beds)',
              'UC Berkeley 2021 LRDP EIR, greenhouse-gas appendix (2018 water and natural gas)',
              'UC Berkeley Office of Sustainability, greenhouse gas inventory (2019-2024)',
              'UC Regents item F2, July 16, 2025 (Berkeley Clean Energy Campus); ACEEE 2024 paper by campus staff (core campus, cogeneration)',
@@ -292,14 +292,13 @@ def s_findings():
              f"before counting {n(CITED['uc']['students'])} UC Berkeley students. The largest employer sector is education: "
              f"{about(L['sectors'][0][1])} of {about(L['jobs'])} jobs in the city.",
              f"{a('#people', 'People')} · {a('#tide', 'Daily tide')} · data: {dl('lodes_2023_inflow_by_home_place.csv')}"),
-        item('Room for many more: plans point to 30,000 or more new residents',
+        item('Room for many more: plans point to nearly 30,000 new residents',
              f"Berkeley's population has held near {rnd(D['population'])} since 2020. The State requires the City to plan for 8,934 new "
-             f"homes by 2031; BerkeleyBuild's pipeline counts 11,222 homes approved or proposed but not yet built; and UC Berkeley, which "
-             f"houses about 11,600 students today, has 2,738 beds under construction for 2027 and 2028, up to 2,000 more proposed, and "
-             f"room in its long-range plan for about 9,300 beyond what it has built since 2018. Built out at today's "
-             f"{D['persons_per_household']:.2f} people per home, the pipeline alone would house about {rnd(11222 * D['persons_per_household'])} "
-             f"more people, and with UC's planned beds the city would approach "
-             f"{rnd(D['population'] + 11222 * D['persons_per_household'] + 9330)}. Every new resident adds to the daily load on the same "
+             f"homes by 2031; BerkeleyBuild's pipeline counts 11,222 homes approved or proposed but not yet built; and UC Berkeley is "
+             f"building or planning three dormitories with about 4,700 beds, on top of the about 9,800 student beds in Berkeley today. "
+             f"Built out at today's {D['persons_per_household']:.2f} people per home, the pipeline alone would house about "
+             f"{rnd(11222 * D['persons_per_household'])} more people, and with the new dormitories the city would approach "
+             f"{rnd(D['population'] + 11222 * D['persons_per_household'] + 4738)}. Every new resident adds to the daily load on the same "
              f"water mains, sewers, power lines and evacuation routes this report describes.",
              f"{a('#people', 'People')} · {a('#campus', 'The University')} · data: {dl('dof_e5_berkeley_2020_2026.csv')}"),
         item('Most households rent, and most renters are stretched',
@@ -461,21 +460,26 @@ def s_people():
     <h3>How many people Berkeley may hold</h3>
     <p class="note" style="font-size:.95rem">Berkeley's population has been flat since 2020, at about 127,600, after a pandemic dip to
     120,670 in 2021 when the campus emptied. Three plans point higher. The State requires Berkeley to plan for 8,934 new homes from
-    2023 to 2031. BerkeleyBuild's pipeline counts 11,222 homes approved or proposed but not yet built<sup>1</sup>. And UC Berkeley's
-    housing is growing fast. The University houses about 11,600 students (2024–25), 9,700 of them undergraduates, and has added
-    more than 2,400 beds since 2018. Two buildings under construction add 2,738 more: Heumann House (1,113 beds, fall 2027) and
-    Bancroft-Fulton (1,625 beds, fall 2028). A third site, at Channing Way and Bowditch Street, could house up to 2,000 students, for
-    about 4,700 new beds in all. UC's long-range plan allows up to 11,730 beds above 2018 levels, so about 9,300 remain after the
-    2,400 already built. If the pipeline were built at today's {F['dof']['rows'][-1]['persons_per_household']:.2f} people per home,
-    and UC built the rest of its plan, Berkeley would gain about {rnd(11222 * F['dof']['rows'][-1]['persons_per_household'])}
-    residents in homes and up to about 9,300 in University
-    housing: about {rnd(F['dof']['rows'][-1]['population'] + 11222 * F['dof']['rows'][-1]['persons_per_household'] + 9330)} people in
+    2023 to 2031. BerkeleyBuild's pipeline counts 11,222 homes approved or proposed but not yet built<sup>1</sup>. And student housing
+    is growing. Berkeley has about 9,800 student beds in university and nonprofit dormitories: about 9,000 run by
+    UC Berkeley (about 6,100 on the Southside, about 1,100 on the Northside, 1,000 at Clark Kerr and 772 at Anchor House downtown),
+    plus Bowles Hall (188) and International House (about 600)<sup>2</sup>. Two UC buildings under construction add 2,738: Heumann
+    House (1,113, fall 2027) and Bancroft-Fulton (1,625, fall 2028). A proposed building at Channing Way and Bowditch Street would
+    add up to 2,000 more, for about 14,500 beds in all. If the pipeline were built at today's
+    {F['dof']['rows'][-1]['persons_per_household']:.2f} people per home and the three dormitories were filled, Berkeley would gain
+    about {rnd(11222 * F['dof']['rows'][-1]['persons_per_household'])} residents in homes and about 4,700 in dormitories: about
+    {rnd(F['dof']['rows'][-1]['population'] + 11222 * F['dof']['rows'][-1]['persons_per_household'] + 4738)} people in
     all. That is a scenario, not a forecast; some approved projects will not be built, and many of UC's new beds will house students
     who now live in Berkeley apartments.</p>
     <p class="note"><sup>1</sup> Not yet built, excluding UC projects (BerkeleyBuild Pipeline Explorer, September 30, 2026). State
-    target: the City's Annual Progress Report to the State, Table B. UC beds: California State Auditor report 2024-111 (2024–25);
-    Berkeley News, March 23, 2026 (9,700 undergraduates housed; Channing–Bowditch); UC Berkeley Housing, upcoming construction
-    (2,400 since 2018; Heumann House; Bancroft-Fulton); UC Regents item F4, July 2021 (long-range plan, 11,730 beds).</p>
+    target: the City's Annual Progress Report to the State, Table B.<br>
+    <sup>2</sup> Beds inside Berkeley only. UC Berkeley 2021 Long Range Development Plan, Draft EIR, Table 5.12-5 (existing housing
+    by facility, UC Berkeley 2020): Units 1–3, Beverly Cleary, Wada, Blackwell, Martinez Commons, Channing-Bowditch, Manville,
+    Ida Jackson, Stern and Foothill, Clark Kerr (8,196), Bowles Hall (188), International House (620; "nearly 600" today); Anchor
+    House FAQ (772, opened 2024). Not counted: UC housing in Albany (University Village, xučyun ruwway) and Emeryville
+    (Intersection); two privately owned buildings UC leases to students (Enclave, Panoramic), whose beds are not published; and
+    the Berkeley Student Cooperative (about 1,250 members). New buildings: UC Berkeley Housing, upcoming construction; Berkeley
+    News, March 23, 2026.</p>
     <h3>Homes by type (Department of Finance, {F['dof']['year']})</h3>
     {table(['Type', 'Homes', 'Share'], [[k, n(last[c]), pct(last[c], last['housing_units'])] for k, c in
         (('Single detached', 'single_detached'), ('Single attached', 'single_attached'), ('Two to four units', 'two_to_four'),
@@ -1146,7 +1150,7 @@ def s_campus():
         ['Researchers and guests (Lab)', '—', f"{n(B['academics'][0])} academics, {n(B['affiliates'][0])} affiliates <span class=\"yr\">(spring 2024)</span>", 'overlap with UC'],
         ['Land', v(U['acres'], lambda x: f"{x:,} acres"), v(B['acres'], lambda x: f"{x:,} acres"), 'the Lab sits on University land; overlap not stated'],
         ['Floor area', f"{sqft / 1e6:.1f} million sq ft <span class=\"yr\">(2023)</span>", v(B['gsf'], lambda x: f"{x / 1e6:.1f} million sq ft"), f"≈ {(sqft + B['gsf'][0]) / 1e6:.1f} million sq ft"],
-        ['Student beds', v(U['beds']) + f"; {n(U['beds_planned'][0])} more by fall 2028", 'none', v(U['beds'])],
+        ['Student beds in Berkeley', v(U['beds']) + f"; {n(U['beds_planned'][0])} more by fall 2028, up to {n(U['beds_proposed'])} more proposed", 'none', v(U['beds'])],
         ['Parking spaces', v(U['parking']), v(B['parking']), f"≈ {n(U['parking'][0] + B['parking'][0])}"],
         ['Water', f"{wgal / 365 / 1e6:.2f} million gal/day <span class=\"yr\">(2023)</span>", v(B['water_gal'], mgd), f"≈ {(wgal + B['water_gal'][0]) / 365 / 1e6:.2f} million gal/day (2023)"],
         ['Buildings', 'about 100–150 on the 176-acre core campus <span class="yr">(sources differ)</span><sup>2</sup>', v(B['buildings'], lambda x: f"about {x} buildings and structures"), '—'],

@@ -1,0 +1,6205 @@
+{
+ "topic": "project_uses",
+ "read_at": "2026-10-01T10:46:46",
+ "definitions_sha16": "03fed63652d850f1",
+ "definitions": "Report what this housing project's own text states about NON-RESIDENTIAL space and about TENURE:\n- commercial_sqft: square feet of commercial / retail / office / restaurant space (\"5,000 sq.ft. of commercial space\").\n  Not residential area, not the building's gross area, not lot size. null if not stated.\n- commercial_spaces: the number of commercial spaces or storefronts, if stated as a number. null otherwise.\n- commercial_uses: the kinds of non-residential use the text names (e.g. \"retail\", \"restaurant\", \"office\",\n  \"community space\"), as a short list of the text's own words. null if none named.\n- tenure_stated: \"rental\" if the text says the homes are rental / for rent / apartments for rent; \"ownership\" if it says\n  condominiums / for sale / ownership units; \"mixed\" if it states both; null if it does not say.\nFor each, copy the exact words that state it and give the record key they come from.",
+ "model": "claude-sonnet-5",
+ "rule": "kept only if the quote is verbatim (numbers and names must appear in it; a tenure only if the quote names it)",
+ "unanswered": [],
+ "readings": [
+  {
+   "project_key": "AUP2009-0055"
+  },
+  {
+   "project_key": "AUP2009-0081"
+  },
+  {
+   "project_key": "AUP2009-0128"
+  },
+  {
+   "project_key": "AUP2009-0162"
+  },
+  {
+   "project_key": "AUP2010-0027"
+  },
+  {
+   "project_key": "AUP2010-0059"
+  },
+  {
+   "project_key": "ZP2017-0154"
+  },
+  {
+   "project_key": "ZP2017-0158"
+  },
+  {
+   "project_key": "ZP2017-0159"
+  },
+  {
+   "project_key": "ZP2017-0166"
+  },
+  {
+   "project_key": "ZP2017-0168"
+  },
+  {
+   "project_key": "ZP2017-0172"
+  },
+  {
+   "project_key": "B2019-01859"
+  },
+  {
+   "project_key": "B2019-01872"
+  },
+  {
+   "project_key": "B2019-01994"
+  },
+  {
+   "project_key": "B2019-02327"
+  },
+  {
+   "project_key": "B2019-02435"
+  },
+  {
+   "project_key": "B2019-02468"
+  },
+  {
+   "project_key": "ZP2024-0015"
+  },
+  {
+   "project_key": "ZP2024-0024"
+  },
+  {
+   "project_key": "ZP2024-0027",
+   "commercial_sqft": {
+    "value": 605,
+    "quote": "605 square foot commercial space",
+    "source": "ZP2024-0027"
+   }
+  },
+  {
+   "project_key": "ZP2024-0029",
+   "commercial_sqft": {
+    "value": 16216,
+    "quote": "16,216 square feet) on the abutting lot at 2680 Bancroft Way to commercial offices",
+    "source": "ZP2024-0029"
+   },
+   "commercial_uses": {
+    "value": [
+     "commercial offices"
+    ],
+    "quote": "convert the City Landmark Bancroft Hotel (16,216 square feet) on the abutting lot at 2680 Bancroft Way to commercial offices",
+    "source": "ZP2024-0029"
+   }
+  },
+  {
+   "project_key": "ZP2024-0047",
+   "commercial_sqft": {
+    "value": 2438,
+    "quote": "2,438-sqft of retail space",
+    "source": "ZP2024-0047"
+   },
+   "commercial_uses": {
+    "value": [
+     "retail space"
+    ],
+    "quote": "2,438-sqft of retail space",
+    "source": "ZP2024-0047"
+   }
+  },
+  {
+   "project_key": "ZP2024-0052"
+  },
+  {
+   "project_key": "B2019-04677"
+  },
+  {
+   "project_key": "B2019-04885"
+  },
+  {
+   "project_key": "B2019-05017"
+  },
+  {
+   "project_key": "B2019-05024"
+  },
+  {
+   "project_key": "B2019-05135"
+  },
+  {
+   "project_key": "B2019-05151"
+  },
+  {
+   "project_key": "B2020-04513"
+  },
+  {
+   "project_key": "B2021-00048"
+  },
+  {
+   "project_key": "B2021-00065"
+  },
+  {
+   "project_key": "B2021-00091"
+  },
+  {
+   "project_key": "B2021-00200"
+  },
+  {
+   "project_key": "B2021-00301"
+  },
+  {
+   "project_key": "ZP2015-0184"
+  },
+  {
+   "project_key": "ZP2015-0189"
+  },
+  {
+   "project_key": "ZP2015-0193"
+  },
+  {
+   "project_key": "ZP2015-0196"
+  },
+  {
+   "project_key": "ZP2015-0202"
+  },
+  {
+   "project_key": "ZP2015-0204"
+  },
+  {
+   "project_key": "B2025-03127"
+  },
+  {
+   "project_key": "B2025-03278"
+  },
+  {
+   "project_key": "B2025-03285"
+  },
+  {
+   "project_key": "B2025-03612"
+  },
+  {
+   "project_key": "B2025-03721"
+  },
+  {
+   "project_key": "B2025-03730"
+  },
+  {
+   "project_key": "PLN2026-0117"
+  },
+  {
+   "project_key": "PLN2026-0122"
+  },
+  {
+   "project_key": "PLN2026-0131"
+  },
+  {
+   "project_key": "PLN2026-0143"
+  },
+  {
+   "project_key": "PLN2026-0152"
+  },
+  {
+   "project_key": "PLN2026-0155"
+  },
+  {
+   "project_key": "B2021-04253"
+  },
+  {
+   "project_key": "B2021-04271"
+  },
+  {
+   "project_key": "B2021-04272"
+  },
+  {
+   "project_key": "B2021-04281"
+  },
+  {
+   "project_key": "B2021-04563",
+   "commercial_uses": {
+    "value": [
+     "retail",
+     "office"
+    ],
+    "quote": "The existing (3) Story mix-use building contains retail, office and residential units.",
+    "source": "B2021-04563"
+   }
+  },
+  {
+   "project_key": "B2021-04655"
+  },
+  {
+   "project_key": "ZP2014-0045"
+  },
+  {
+   "project_key": "ZP2014-0061"
+  },
+  {
+   "project_key": "ZP2014-0063"
+  },
+  {
+   "project_key": "ZP2014-0069",
+   "commercial_spaces": {
+    "value": 1,
+    "quote": "1 ground floor retail space",
+    "source": "B2016-00895"
+   },
+   "commercial_uses": {
+    "value": [
+     "retail/cafe"
+    ],
+    "quote": "2,200 square feet of retail/cafe floor area",
+    "source": "ZP2014-0069"
+   }
+  },
+  {
+   "project_key": "ZP2015-0011"
+  },
+  {
+   "project_key": "ZP2015-0014",
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "New 50 unit mixed use multi-family building with retail and parking garage.",
+    "source": "B2016-04483"
+   }
+  },
+  {
+   "project_key": "B2017-04055",
+   "commercial_sqft": {
+    "value": 1700,
+    "quote": "Convert 1700 sf of retail into residential apartments on ground floor",
+    "source": "B2017-04055"
+   },
+   "commercial_uses": {
+    "value": [
+     "retail",
+     "Commercial"
+    ],
+    "quote": "Mixed Use Residential and Commercial. Convert 1700 sf of retail into residential apartments on ground floor",
+    "source": "B2017-04055"
+   }
+  },
+  {
+   "project_key": "B2017-04092"
+  },
+  {
+   "project_key": "B2017-04149"
+  },
+  {
+   "project_key": "B2017-04158"
+  },
+  {
+   "project_key": "B2017-04165"
+  },
+  {
+   "project_key": "B2017-04413"
+  },
+  {
+   "project_key": "ZP2015-0135"
+  },
+  {
+   "project_key": "ZP2015-0141"
+  },
+  {
+   "project_key": "ZP2015-0143"
+  },
+  {
+   "project_key": "ZP2015-0146"
+  },
+  {
+   "project_key": "ZP2015-0151"
+  },
+  {
+   "project_key": "ZP2015-0157",
+   "commercial_sqft": {
+    "value": 8450,
+    "quote": "8,450 sq. ft. of retail space",
+    "source": "ZP2015-0157"
+   },
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "8,450 sq. ft. of retail space",
+    "source": "ZP2015-0157"
+   }
+  },
+  {
+   "project_key": "B2025-00880"
+  },
+  {
+   "project_key": "B2025-01012"
+  },
+  {
+   "project_key": "B2025-01031"
+  },
+  {
+   "project_key": "B2025-01063"
+  },
+  {
+   "project_key": "B2025-01124"
+  },
+  {
+   "project_key": "B2025-01220"
+  },
+  {
+   "project_key": "B2023-03328"
+  },
+  {
+   "project_key": "B2023-03347"
+  },
+  {
+   "project_key": "B2023-03417"
+  },
+  {
+   "project_key": "B2023-03480"
+  },
+  {
+   "project_key": "B2023-03522"
+  },
+  {
+   "project_key": "B2023-03560"
+  },
+  {
+   "project_key": "ZP2021-0095"
+  },
+  {
+   "project_key": "ZP2021-0110"
+  },
+  {
+   "project_key": "ZP2021-0111"
+  },
+  {
+   "project_key": "ZP2021-0113"
+  },
+  {
+   "project_key": "ZP2021-0121"
+  },
+  {
+   "project_key": "ZP2021-0129"
+  },
+  {
+   "project_key": "B2022-02858"
+  },
+  {
+   "project_key": "B2022-02980"
+  },
+  {
+   "project_key": "B2022-03063"
+  },
+  {
+   "project_key": "B2022-03080"
+  },
+  {
+   "project_key": "B2022-03086"
+  },
+  {
+   "project_key": "B2022-03219"
+  },
+  {
+   "project_key": "PLN2024-0052"
+  },
+  {
+   "project_key": "PLN2024-0053"
+  },
+  {
+   "project_key": "PLN2024-0061"
+  },
+  {
+   "project_key": "PLN2024-0062"
+  },
+  {
+   "project_key": "PLN2025-0017",
+   "commercial_spaces": {
+    "value": 1,
+    "quote": "one commercial unit",
+    "source": "PLN2025-0037"
+   }
+  },
+  {
+   "project_key": "PLN2025-0019"
+  },
+  {
+   "project_key": "ZP2022-0144",
+   "commercial_sqft": {
+    "value": 19108,
+    "quote": "live performance theater (19,108 sq. ft)",
+    "source": "ZP2022-0144"
+   },
+   "commercial_uses": {
+    "value": [
+     "live performance theater"
+    ],
+    "quote": "live performance theater (19,108 sq. ft) on the ground and basement floors",
+    "source": "ZP2022-0144"
+   }
+  },
+  {
+   "project_key": "ZP2022-0145"
+  },
+  {
+   "project_key": "ZP2022-0148",
+   "commercial_uses": {
+    "value": [
+     "restaurant"
+    ],
+    "quote": "Proposed restaurant space on the first floor serving beer and wine.",
+    "source": "ZP2022-0148"
+   }
+  },
+  {
+   "project_key": "ZP2022-0149",
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "construct a 17-story mixed-use residential building with ground-floor commercial and 132 dwelling units",
+    "source": "ZP2022-0149"
+   }
+  },
+  {
+   "project_key": "ZP2022-0162",
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "Small second story addition to existing commercial building.",
+    "source": "ZP2022-0162"
+   }
+  },
+  {
+   "project_key": "ZP2022-0170",
+   "commercial_sqft": {
+    "value": 1550,
+    "quote": "1,550 square feet of commercial area",
+    "source": "ZP2022-0170"
+   },
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "construct a 5-story mixed use building with 144 dwelling units and ground floor retail",
+    "source": "DRCP2022-0020"
+   }
+  },
+  {
+   "project_key": "B2017-04866"
+  },
+  {
+   "project_key": "B2017-05247"
+  },
+  {
+   "project_key": "B2017-05402"
+  },
+  {
+   "project_key": "B2017-05470"
+  },
+  {
+   "project_key": "B2017-05497"
+  },
+  {
+   "project_key": "B2018-00015"
+  },
+  {
+   "project_key": "B2023-04099"
+  },
+  {
+   "project_key": "B2023-04195"
+  },
+  {
+   "project_key": "B2023-04322"
+  },
+  {
+   "project_key": "B2023-04361"
+  },
+  {
+   "project_key": "B2023-04389"
+  },
+  {
+   "project_key": "B2023-04400"
+  },
+  {
+   "project_key": "ZP2015-0115"
+  },
+  {
+   "project_key": "ZP2015-0123"
+  },
+  {
+   "project_key": "ZP2015-0124"
+  },
+  {
+   "project_key": "ZP2015-0125",
+   "commercial_sqft": {
+    "value": 1175,
+    "quote": "1,175 sq. ft. of office or retail space",
+    "source": "ZP2015-0125"
+   },
+   "commercial_uses": {
+    "value": [
+     "office",
+     "retail"
+    ],
+    "quote": "office or retail space",
+    "source": "ZP2015-0125"
+   }
+  },
+  {
+   "project_key": "ZP2015-0131"
+  },
+  {
+   "project_key": "ZP2015-0132"
+  },
+  {
+   "project_key": "ZP2026-0015",
+   "commercial_uses": {
+    "value": [
+     "record store"
+    ],
+    "quote": "ground-floor record store",
+    "source": "ZP2026-0015"
+   }
+  },
+  {
+   "project_key": "ZP2026-0031",
+   "commercial_spaces": {
+    "value": 2,
+    "quote": "an existing commercial building containing two units",
+    "source": "ZP2026-0031"
+   },
+   "commercial_uses": {
+    "value": [
+     "office"
+    ],
+    "quote": "most recently used for office",
+    "source": "ZP2026-0031"
+   }
+  },
+  {
+   "project_key": "ZP2026-0039"
+  },
+  {
+   "project_key": "ZP2026-0040"
+  },
+  {
+   "project_key": "ZP2026-0049"
+  },
+  {
+   "project_key": "ZP2026-0050"
+  },
+  {
+   "project_key": "B2016-03120"
+  },
+  {
+   "project_key": "B2016-03511"
+  },
+  {
+   "project_key": "B2016-03592"
+  },
+  {
+   "project_key": "B2016-03935"
+  },
+  {
+   "project_key": "B2016-04149"
+  },
+  {
+   "project_key": "B2016-04204"
+  },
+  {
+   "project_key": "B2019-01428"
+  },
+  {
+   "project_key": "B2019-01469"
+  },
+  {
+   "project_key": "B2019-01663"
+  },
+  {
+   "project_key": "B2019-01705"
+  },
+  {
+   "project_key": "B2019-01781"
+  },
+  {
+   "project_key": "B2019-01817"
+  },
+  {
+   "project_key": "B2022-04521"
+  },
+  {
+   "project_key": "B2022-04555"
+  },
+  {
+   "project_key": "B2022-04626"
+  },
+  {
+   "project_key": "B2022-04658"
+  },
+  {
+   "project_key": "B2022-04665"
+  },
+  {
+   "project_key": "B2022-04690"
+  },
+  {
+   "project_key": "B2016-02154"
+  },
+  {
+   "project_key": "B2016-02228"
+  },
+  {
+   "project_key": "B2016-02420"
+  },
+  {
+   "project_key": "B2016-02666"
+  },
+  {
+   "project_key": "B2016-02733"
+  },
+  {
+   "project_key": "B2016-02850"
+  },
+  {
+   "project_key": "PLN2025-0116"
+  },
+  {
+   "project_key": "PLN2025-0117"
+  },
+  {
+   "project_key": "PLN2025-0118"
+  },
+  {
+   "project_key": "PLN2025-0126"
+  },
+  {
+   "project_key": "PLN2025-0132"
+  },
+  {
+   "project_key": "PLN2026-0030"
+  },
+  {
+   "project_key": "ZCBP2015-1080"
+  },
+  {
+   "project_key": "ZCBP2015-1205"
+  },
+  {
+   "project_key": "ZCBP2015-1300"
+  },
+  {
+   "project_key": "ZCBP2015-1422"
+  },
+  {
+   "project_key": "ZCBP2015-1435"
+  },
+  {
+   "project_key": "ZCBP2015-1462"
+  },
+  {
+   "project_key": "ZP2021-0011"
+  },
+  {
+   "project_key": "ZP2021-0015"
+  },
+  {
+   "project_key": "ZP2021-0027",
+   "commercial_sqft": {
+    "value": 1824,
+    "quote": "1,824 sq.ft. commercial space",
+    "source": "ZP2021-0027"
+   },
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "1,824 sq.ft. commercial space",
+    "source": "ZP2021-0027"
+   }
+  },
+  {
+   "project_key": "ZP2021-0046",
+   "commercial_spaces": {
+    "value": 3,
+    "quote": "3 are live/work",
+    "source": "ZP2021-0046"
+   },
+   "commercial_uses": {
+    "value": [
+     "mixed-use",
+     "live/work"
+    ],
+    "quote": "new 6 story mixed-use building with 126 dwelling units (of which 3 are live/work)",
+    "source": "ZP2021-0046"
+   }
+  },
+  {
+   "project_key": "ZP2021-0055"
+  },
+  {
+   "project_key": "ZP2021-0061"
+  },
+  {
+   "project_key": "B2024-01117"
+  },
+  {
+   "project_key": "B2024-01121"
+  },
+  {
+   "project_key": "B2024-01193"
+  },
+  {
+   "project_key": "B2024-01215"
+  },
+  {
+   "project_key": "B2024-01247"
+  },
+  {
+   "project_key": "B2024-01282"
+  },
+  {
+   "project_key": "ZP2015-0045"
+  },
+  {
+   "project_key": "ZP2015-0069",
+   "commercial_sqft": {
+    "value": 1300,
+    "quote": "Convert an existing 1300 sq ft. commercial space to a new residential unit",
+    "source": "ZP2015-0069"
+   }
+  },
+  {
+   "project_key": "ZP2015-0072"
+  },
+  {
+   "project_key": "ZP2015-0079"
+  },
+  {
+   "project_key": "ZP2015-0087"
+  },
+  {
+   "project_key": "ZP2015-0089"
+  },
+  {
+   "project_key": "ZP2022-0099",
+   "commercial_sqft": {
+    "value": 5787,
+    "quote": "5,787 square foot commercial space",
+    "source": "ZP2022-0099"
+   }
+  },
+  {
+   "project_key": "ZP2022-0104"
+  },
+  {
+   "project_key": "ZP2022-0106"
+  },
+  {
+   "project_key": "ZP2022-0107"
+  },
+  {
+   "project_key": "ZP2022-0110",
+   "commercial_sqft": {
+    "value": 2264,
+    "quote": "2,264 square-feet of commercial space",
+    "source": "ZP2022-0110"
+   },
+   "commercial_uses": {
+    "value": [
+     "live/work units"
+    ],
+    "quote": "including two live/work units",
+    "source": "ZP2022-0110"
+   }
+  },
+  {
+   "project_key": "ZP2022-0113",
+   "commercial_sqft": {
+    "value": 1873,
+    "quote": "approximately 1,873 square feet of commercial area",
+    "source": "ZP2022-0113"
+   },
+   "commercial_spaces": {
+    "value": 2,
+    "quote": "3,000 SF of retail (2 units)",
+    "source": "DRCP2022-0011"
+   },
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "3,000 SF of retail",
+    "source": "DRCP2022-0011"
+   }
+  },
+  {
+   "project_key": "PLN2026-0073"
+  },
+  {
+   "project_key": "PLN2026-0081"
+  },
+  {
+   "project_key": "PLN2026-0087"
+  },
+  {
+   "project_key": "PLN2026-0109"
+  },
+  {
+   "project_key": "PLN2026-0111"
+  },
+  {
+   "project_key": "PLN2026-0113"
+  },
+  {
+   "project_key": "ZP2022-0019"
+  },
+  {
+   "project_key": "ZP2022-0020"
+  },
+  {
+   "project_key": "ZP2022-0021",
+   "commercial_sqft": {
+    "value": 3600,
+    "quote": "a 3,600 square-foot ground-floor commercial space",
+    "source": "ZP2022-0021"
+   },
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "ground-floor commercial space",
+    "source": "ZP2022-0021"
+   }
+  },
+  {
+   "project_key": "ZP2022-0026",
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "ground-floor commercial",
+    "source": "ZP2022-0026"
+   }
+  },
+  {
+   "project_key": "ZP2022-0028"
+  },
+  {
+   "project_key": "ZP2022-0033"
+  },
+  {
+   "project_key": "B2020-02794"
+  },
+  {
+   "project_key": "B2020-02816"
+  },
+  {
+   "project_key": "B2020-02941"
+  },
+  {
+   "project_key": "B2020-02942"
+  },
+  {
+   "project_key": "B2020-03053"
+  },
+  {
+   "project_key": "B2020-03080"
+  },
+  {
+   "project_key": "B2022-03559"
+  },
+  {
+   "project_key": "B2022-03577"
+  },
+  {
+   "project_key": "B2022-03844"
+  },
+  {
+   "project_key": "B2022-03940"
+  },
+  {
+   "project_key": "B2022-04050"
+  },
+  {
+   "project_key": "B2022-04102"
+  },
+  {
+   "project_key": "B2021-04660"
+  },
+  {
+   "project_key": "B2021-04759"
+  },
+  {
+   "project_key": "B2021-04761"
+  },
+  {
+   "project_key": "B2021-04777"
+  },
+  {
+   "project_key": "B2021-04809"
+  },
+  {
+   "project_key": "B2021-04921"
+  },
+  {
+   "project_key": "B2020-00043"
+  },
+  {
+   "project_key": "B2020-00059"
+  },
+  {
+   "project_key": "B2020-00103"
+  },
+  {
+   "project_key": "B2020-00258"
+  },
+  {
+   "project_key": "B2020-00441"
+  },
+  {
+   "project_key": "B2020-00446"
+  },
+  {
+   "project_key": "UP2010-0078",
+   "commercial_sqft": {
+    "value": 30000,
+    "quote": "reuse approximately 30,000 square feet of existing commercial space (approximately 8,000 square feet of food service use and 22,000 square feet of retail use)",
+    "source": "UP2010-0078"
+   },
+   "commercial_uses": {
+    "value": [
+     "food service",
+     "retail"
+    ],
+    "quote": "approximately 8,000 square feet of food service use and 22,000 square feet of retail use",
+    "source": "UP2010-0078"
+   }
+  },
+  {
+   "project_key": "UP2011-0014"
+  },
+  {
+   "project_key": "UP2011-0036",
+   "commercial_uses": {
+    "value": [
+     "COMMERCIAL SPACE"
+    ],
+    "quote": "REMODEL TO CREATE COMMERCIAL SPACE AT 1819 FIFTH",
+    "source": "B2012-01526"
+   }
+  },
+  {
+   "project_key": "UP2012-0012",
+   "commercial_sqft": {
+    "value": 14000,
+    "quote": "14,000 square feet of retail area",
+    "source": "UP2012-0012"
+   },
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "14,000 square feet of retail area",
+    "source": "UP2012-0012"
+   }
+  },
+  {
+   "project_key": "UP2012-0032"
+  },
+  {
+   "project_key": "UP2012-0034",
+   "commercial_uses": {
+    "value": [
+     "office"
+    ],
+    "quote": "Convert office to 2 residential units.",
+    "source": "UP2012-0034"
+   }
+  },
+  {
+   "project_key": "UP2007-0022"
+  },
+  {
+   "project_key": "UP2008-0053"
+  },
+  {
+   "project_key": "UP2008-0054"
+  },
+  {
+   "project_key": "UP2008-0109"
+  },
+  {
+   "project_key": "UP2009-0038"
+  },
+  {
+   "project_key": "UP2010-0030"
+  },
+  {
+   "project_key": "B2021-01569"
+  },
+  {
+   "project_key": "B2021-01581"
+  },
+  {
+   "project_key": "B2021-01591"
+  },
+  {
+   "project_key": "B2021-01628"
+  },
+  {
+   "project_key": "B2021-01738"
+  },
+  {
+   "project_key": "B2021-01799"
+  },
+  {
+   "project_key": "B2022-01554"
+  },
+  {
+   "project_key": "B2022-01596"
+  },
+  {
+   "project_key": "B2022-01636"
+  },
+  {
+   "project_key": "B2022-01691"
+  },
+  {
+   "project_key": "B2022-01722"
+  },
+  {
+   "project_key": "B2022-01755"
+  },
+  {
+   "project_key": "B2018-01917"
+  },
+  {
+   "project_key": "B2018-01961"
+  },
+  {
+   "project_key": "B2018-01975"
+  },
+  {
+   "project_key": "B2018-02012"
+  },
+  {
+   "project_key": "B2018-02060"
+  },
+  {
+   "project_key": "B2018-02099"
+  },
+  {
+   "project_key": "B2014-02947"
+  },
+  {
+   "project_key": "B2016-00118"
+  },
+  {
+   "project_key": "B2016-01064"
+  },
+  {
+   "project_key": "B2016-01067"
+  },
+  {
+   "project_key": "B2016-02018"
+  },
+  {
+   "project_key": "B2016-02041"
+  },
+  {
+   "project_key": "B2025-05297"
+  },
+  {
+   "project_key": "B2025-05356"
+  },
+  {
+   "project_key": "B2025-05407"
+  },
+  {
+   "project_key": "B2025-05474"
+  },
+  {
+   "project_key": "B2025-05502"
+  },
+  {
+   "project_key": "B2025-05767"
+  },
+  {
+   "project_key": "ZP2017-0073"
+  },
+  {
+   "project_key": "ZP2017-0074"
+  },
+  {
+   "project_key": "ZP2017-0079"
+  },
+  {
+   "project_key": "ZP2017-0082"
+  },
+  {
+   "project_key": "ZP2017-0083",
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "8-story mixed use building with ground level retail and 122 dwelling units",
+    "source": "ZP2017-0083"
+   }
+  },
+  {
+   "project_key": "ZP2017-0089"
+  },
+  {
+   "project_key": "ZP2022-0115",
+   "commercial_spaces": {
+    "value": 1,
+    "quote": "one retail space",
+    "source": "PLN2022-0014"
+   },
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "retail",
+    "source": "DRCP2022-0012"
+   }
+  },
+  {
+   "project_key": "ZP2022-0116",
+   "commercial_sqft": {
+    "value": 3720,
+    "quote": "3,720 square feet of commercial space",
+    "source": "ZP2022-0116"
+   },
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "commercial space",
+    "source": "ZP2022-0116"
+   }
+  },
+  {
+   "project_key": "ZP2022-0120",
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "ground floor commercial space",
+    "source": "ZP2022-0120"
+   }
+  },
+  {
+   "project_key": "ZP2022-0122"
+  },
+  {
+   "project_key": "ZP2022-0132",
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "GROUND LEVEL LOBBIES AND COMMERCIAL SPACE",
+    "source": "ZP2022-0132"
+   }
+  },
+  {
+   "project_key": "ZP2022-0135",
+   "commercial_sqft": {
+    "value": 13500,
+    "quote": "13,500 SF of commercial space",
+    "source": "ZP2022-0135"
+   },
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "commercial space",
+    "source": "ZP2022-0135"
+   }
+  },
+  {
+   "project_key": "B2021-01987"
+  },
+  {
+   "project_key": "B2021-02006"
+  },
+  {
+   "project_key": "B2021-02085"
+  },
+  {
+   "project_key": "B2021-02151"
+  },
+  {
+   "project_key": "B2021-02219"
+  },
+  {
+   "project_key": "B2021-02307"
+  },
+  {
+   "project_key": "B2020-02014"
+  },
+  {
+   "project_key": "B2020-02078"
+  },
+  {
+   "project_key": "B2020-02097"
+  },
+  {
+   "project_key": "B2020-02125"
+  },
+  {
+   "project_key": "B2020-02131"
+  },
+  {
+   "project_key": "B2020-02167"
+  },
+  {
+   "project_key": "AUP2008-0006"
+  },
+  {
+   "project_key": "AUP2008-0030"
+  },
+  {
+   "project_key": "AUP2008-0071"
+  },
+  {
+   "project_key": "AUP2008-0126"
+  },
+  {
+   "project_key": "AUP2008-0146"
+  },
+  {
+   "project_key": "AUP2009-0004"
+  },
+  {
+   "project_key": "B2025-00312"
+  },
+  {
+   "project_key": "B2025-00495"
+  },
+  {
+   "project_key": "B2025-00528"
+  },
+  {
+   "project_key": "B2025-00541"
+  },
+  {
+   "project_key": "B2025-00609"
+  },
+  {
+   "project_key": "B2025-00629"
+  },
+  {
+   "project_key": "B2022-00005"
+  },
+  {
+   "project_key": "B2022-00032"
+  },
+  {
+   "project_key": "B2022-00059"
+  },
+  {
+   "project_key": "B2022-00060"
+  },
+  {
+   "project_key": "B2022-00090"
+  },
+  {
+   "project_key": "B2022-00248"
+  },
+  {
+   "project_key": "ZP2015-0160"
+  },
+  {
+   "project_key": "ZP2015-0168"
+  },
+  {
+   "project_key": "ZP2015-0172"
+  },
+  {
+   "project_key": "ZP2015-0177",
+   "commercial_spaces": {
+    "value": 5,
+    "quote": "five live work spaces",
+    "source": "ZP2015-0177"
+   },
+   "commercial_uses": {
+    "value": [
+     "live work spaces"
+    ],
+    "quote": "five live work spaces",
+    "source": "ZP2015-0177"
+   }
+  },
+  {
+   "project_key": "ZP2015-0180"
+  },
+  {
+   "project_key": "ZP2015-0183"
+  },
+  {
+   "project_key": "ZP2021-0066"
+  },
+  {
+   "project_key": "ZP2021-0070"
+  },
+  {
+   "project_key": "ZP2021-0072",
+   "commercial_sqft": {
+    "value": 1296,
+    "quote": "1,296 sq.ft. of ground floor commercial space",
+    "source": "ZP2021-0072"
+   },
+   "commercial_uses": {
+    "value": [
+     "restaurant"
+    ],
+    "quote": "containing a restaurant on the ground floor",
+    "source": "PLN2021-0010"
+   }
+  },
+  {
+   "project_key": "ZP2021-0073",
+   "commercial_sqft": {
+    "value": 3300,
+    "quote": "3,300 SF retail",
+    "source": "ZP2021-0073"
+   },
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "3,300 SF retail",
+    "source": "ZP2021-0073"
+   }
+  },
+  {
+   "project_key": "ZP2021-0083"
+  },
+  {
+   "project_key": "ZP2021-0084"
+  },
+  {
+   "project_key": "PLN2025-0051"
+  },
+  {
+   "project_key": "PLN2025-0058"
+  },
+  {
+   "project_key": "PLN2025-0061"
+  },
+  {
+   "project_key": "PLN2025-0065"
+  },
+  {
+   "project_key": "PLN2025-0068"
+  },
+  {
+   "project_key": "PLN2025-0073"
+  },
+  {
+   "project_key": "B2017-02517"
+  },
+  {
+   "project_key": "B2017-02581"
+  },
+  {
+   "project_key": "B2017-02662"
+  },
+  {
+   "project_key": "B2017-02721"
+  },
+  {
+   "project_key": "B2017-02775"
+  },
+  {
+   "project_key": "B2017-02782"
+  },
+  {
+   "project_key": "B2020-03633"
+  },
+  {
+   "project_key": "B2020-03702"
+  },
+  {
+   "project_key": "B2020-03753"
+  },
+  {
+   "project_key": "B2020-03762"
+  },
+  {
+   "project_key": "B2020-03772"
+  },
+  {
+   "project_key": "B2020-03794"
+  },
+  {
+   "project_key": "B2022-04803"
+  },
+  {
+   "project_key": "B2022-04888"
+  },
+  {
+   "project_key": "B2022-04896"
+  },
+  {
+   "project_key": "B2022-05138"
+  },
+  {
+   "project_key": "B2022-05275"
+  },
+  {
+   "project_key": "B2022-05356"
+  },
+  {
+   "project_key": "B2023-03581"
+  },
+  {
+   "project_key": "B2023-03614"
+  },
+  {
+   "project_key": "B2023-03731"
+  },
+  {
+   "project_key": "B2023-03756"
+  },
+  {
+   "project_key": "B2023-03761"
+  },
+  {
+   "project_key": "B2023-03870"
+  },
+  {
+   "project_key": "B2024-04949"
+  },
+  {
+   "project_key": "B2024-04962"
+  },
+  {
+   "project_key": "B2024-04977"
+  },
+  {
+   "project_key": "B2024-04991"
+  },
+  {
+   "project_key": "B2024-05069"
+  },
+  {
+   "project_key": "B2024-05116"
+  },
+  {
+   "project_key": "ZP2016-0146"
+  },
+  {
+   "project_key": "ZP2016-0147"
+  },
+  {
+   "project_key": "ZP2016-0164"
+  },
+  {
+   "project_key": "ZP2016-0165"
+  },
+  {
+   "project_key": "ZP2016-0168"
+  },
+  {
+   "project_key": "ZP2016-0172",
+   "commercial_sqft": {
+    "value": 1500,
+    "quote": "1,500 sq. ft. of retail/general commercial spae",
+    "source": "DRCP2016-0020"
+   },
+   "commercial_uses": {
+    "value": [
+     "retail/general commercial"
+    ],
+    "quote": "1,500 sq. ft. of retail/general commercial spae",
+    "source": "DRCP2016-0020"
+   }
+  },
+  {
+   "project_key": "ZP2019-0141"
+  },
+  {
+   "project_key": "ZP2019-0152"
+  },
+  {
+   "project_key": "ZP2019-0154"
+  },
+  {
+   "project_key": "ZP2019-0155",
+   "commercial_sqft": {
+    "value": 1248,
+    "quote": "1,248 sq. ft. of commercial space",
+    "source": "ZP2019-0155"
+   },
+   "commercial_uses": {
+    "value": [
+     "commercial space",
+     "commercial"
+    ],
+    "quote": "1,248 sq. ft. of commercial space",
+    "source": "ZP2019-0155"
+   }
+  },
+  {
+   "project_key": "ZP2019-0156",
+   "commercial_uses": {
+    "value": [
+     "office space"
+    ],
+    "quote": "an existing 335 square-foot office space on the mezzanine level and an existing 1,525 square-foot office space located on the second level",
+    "source": "ZP2019-0156"
+   }
+  },
+  {
+   "project_key": "ZP2019-0165"
+  },
+  {
+   "project_key": "ZP2019-0036"
+  },
+  {
+   "project_key": "ZP2019-0041",
+   "commercial_sqft": {
+    "value": 1250,
+    "quote": "a 1,250 sq. ft. ground-floor commercial space",
+    "source": "ZP2019-0041"
+   }
+  },
+  {
+   "project_key": "ZP2019-0042"
+  },
+  {
+   "project_key": "ZP2019-0043"
+  },
+  {
+   "project_key": "ZP2019-0048"
+  },
+  {
+   "project_key": "ZP2019-0051"
+  },
+  {
+   "project_key": "ZP2018-0013"
+  },
+  {
+   "project_key": "ZP2018-0021"
+  },
+  {
+   "project_key": "ZP2018-0034"
+  },
+  {
+   "project_key": "ZP2018-0035",
+   "commercial_uses": {
+    "value": [
+     "office suite"
+    ],
+    "quote": "community & conference rooms, office suite, laundry and other support/amenity spaces",
+    "source": "B2019-05475"
+   }
+  },
+  {
+   "project_key": "ZP2018-0036"
+  },
+  {
+   "project_key": "ZP2018-0038"
+  },
+  {
+   "project_key": "B2020-01331"
+  },
+  {
+   "project_key": "B2020-01359"
+  },
+  {
+   "project_key": "B2020-01376"
+  },
+  {
+   "project_key": "B2020-01421"
+  },
+  {
+   "project_key": "B2020-01422"
+  },
+  {
+   "project_key": "B2020-01498"
+  },
+  {
+   "project_key": "ZP2019-0168"
+  },
+  {
+   "project_key": "ZP2019-0171"
+  },
+  {
+   "project_key": "ZP2019-0172"
+  },
+  {
+   "project_key": "ZP2019-0173"
+  },
+  {
+   "project_key": "ZP2019-0179",
+   "commercial_spaces": {
+    "value": 3,
+    "quote": "three ground floor live/work units",
+    "source": "ZP2019-0179"
+   },
+   "commercial_uses": {
+    "value": [
+     "mixed use",
+     "live/work"
+    ],
+    "quote": "construct a new six-story mixed use building with 123 dwelling units, and three ground floor live/work units",
+    "source": "ZP2019-0179"
+   }
+  },
+  {
+   "project_key": "ZP2019-0180"
+  },
+  {
+   "project_key": "ZP2016-0083"
+  },
+  {
+   "project_key": "ZP2016-0085",
+   "commercial_spaces": {
+    "value": 9,
+    "quote": "nine retail spaces",
+    "source": "ZP2016-0085"
+   },
+   "commercial_uses": {
+    "value": [
+     "retail",
+     "live/work"
+    ],
+    "quote": "legalize the conversion of retail tenant spaces to live/work use",
+    "source": "ZP2016-0085"
+   }
+  },
+  {
+   "project_key": "ZP2016-0091",
+   "commercial_uses": {
+    "value": [
+     "live/work"
+    ],
+    "quote": "a one story live/work",
+    "source": "ZP2016-0091"
+   }
+  },
+  {
+   "project_key": "ZP2016-0096"
+  },
+  {
+   "project_key": "ZP2016-0097"
+  },
+  {
+   "project_key": "ZP2016-0101",
+   "commercial_uses": {
+    "value": [
+     "food service"
+    ],
+    "quote": "with a food service at ground floor",
+    "source": "ZP2016-0101"
+   }
+  },
+  {
+   "project_key": "ZP2016-0201"
+  },
+  {
+   "project_key": "ZP2016-0204"
+  },
+  {
+   "project_key": "ZP2016-0205"
+  },
+  {
+   "project_key": "ZP2016-0207",
+   "commercial_sqft": {
+    "value": 3500,
+    "quote": "approx. 3500 sqft. commercial",
+    "source": "PLN2015-0054"
+   },
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "ground floor retail",
+    "source": "ZP2016-0207"
+   }
+  },
+  {
+   "project_key": "ZP2016-0214"
+  },
+  {
+   "project_key": "ZP2016-0216"
+  },
+  {
+   "project_key": "ZP2025-0079",
+   "commercial_spaces": {
+    "value": 3,
+    "quote": "3 ground floor retail tenant spaces",
+    "source": "ZP2025-0079"
+   },
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "3 ground floor retail tenant spaces",
+    "source": "ZP2025-0079"
+   }
+  },
+  {
+   "project_key": "ZP2025-0086"
+  },
+  {
+   "project_key": "ZP2025-0093"
+  },
+  {
+   "project_key": "ZP2025-0107",
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "keeping ground-floor retail",
+    "source": "ZP2025-0107"
+   }
+  },
+  {
+   "project_key": "ZP2025-0112"
+  },
+  {
+   "project_key": "ZP2026-0007"
+  },
+  {
+   "project_key": "B2020-00475"
+  },
+  {
+   "project_key": "B2020-00481"
+  },
+  {
+   "project_key": "B2020-00547"
+  },
+  {
+   "project_key": "B2020-00577"
+  },
+  {
+   "project_key": "B2020-00601"
+  },
+  {
+   "project_key": "B2020-00635"
+  },
+  {
+   "project_key": "ZP2020-0126"
+  },
+  {
+   "project_key": "ZP2020-0127"
+  },
+  {
+   "project_key": "ZP2020-0128"
+  },
+  {
+   "project_key": "ZP2020-0129"
+  },
+  {
+   "project_key": "ZP2020-0134",
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "Commercial space",
+    "source": "B2022-01111"
+   }
+  },
+  {
+   "project_key": "ZP2020-0136"
+  },
+  {
+   "project_key": "B2024-01518"
+  },
+  {
+   "project_key": "B2024-01527"
+  },
+  {
+   "project_key": "B2024-01564"
+  },
+  {
+   "project_key": "B2024-01607"
+  },
+  {
+   "project_key": "B2024-01632"
+  },
+  {
+   "project_key": "B2024-01931"
+  },
+  {
+   "project_key": "ZP2023-0094"
+  },
+  {
+   "project_key": "ZP2023-0095"
+  },
+  {
+   "project_key": "ZP2023-0096"
+  },
+  {
+   "project_key": "ZP2023-0098"
+  },
+  {
+   "project_key": "ZP2023-0099",
+   "commercial_uses": {
+    "value": [
+     "commercial space"
+    ],
+    "quote": "ground level lobbies and commercial space",
+    "source": "ZP2023-0099"
+   }
+  },
+  {
+   "project_key": "ZP2023-0101"
+  },
+  {
+   "project_key": "ZP2016-0105"
+  },
+  {
+   "project_key": "ZP2016-0106"
+  },
+  {
+   "project_key": "ZP2016-0107"
+  },
+  {
+   "project_key": "ZP2016-0129"
+  },
+  {
+   "project_key": "ZP2016-0135",
+   "commercial_uses": {
+    "value": [
+     "arts and crafts uses"
+    ],
+    "quote": "1 live-work unit each for arts and crafts uses",
+    "source": "ZP2016-0135"
+   }
+  },
+  {
+   "project_key": "ZP2016-0138"
+  },
+  {
+   "project_key": "PLN2022-0094"
+  },
+  {
+   "project_key": "PLN2022-0096"
+  },
+  {
+   "project_key": "PLN2022-0106"
+  },
+  {
+   "project_key": "PLN2022-0110"
+  },
+  {
+   "project_key": "PLN2022-0112",
+   "commercial_uses": {
+    "value": [
+     "childcare facility"
+    ],
+    "quote": "commercial spaces including a childcare facility",
+    "source": "PLN2022-0112"
+   }
+  },
+  {
+   "project_key": "PLN2022-0119",
+   "commercial_uses": {
+    "value": [
+     "community amenity space"
+    ],
+    "quote": "residential and community amenity space with at grade parking garage",
+    "source": "PLN2022-0119"
+   }
+  },
+  {
+   "project_key": "B2022-06045"
+  },
+  {
+   "project_key": "B2022-06065"
+  },
+  {
+   "project_key": "B2023-00112"
+  },
+  {
+   "project_key": "B2023-00291"
+  },
+  {
+   "project_key": "B2023-00332"
+  },
+  {
+   "project_key": "B2023-00391"
+  },
+  {
+   "project_key": "B2021-00628"
+  },
+  {
+   "project_key": "B2021-00688"
+  },
+  {
+   "project_key": "B2021-00697"
+  },
+  {
+   "project_key": "B2021-00733"
+  },
+  {
+   "project_key": "B2021-00751"
+  },
+  {
+   "project_key": "B2021-00811"
+  },
+  {
+   "project_key": "B2019-05173"
+  },
+  {
+   "project_key": "B2019-05208"
+  },
+  {
+   "project_key": "B2019-05267"
+  },
+  {
+   "project_key": "B2019-05318"
+  },
+  {
+   "project_key": "B2019-05341"
+  },
+  {
+   "project_key": "B2019-05406"
+  },
+  {
+   "project_key": "B2024-03463"
+  },
+  {
+   "project_key": "B2024-03483"
+  },
+  {
+   "project_key": "B2024-03741"
+  },
+  {
+   "project_key": "B2024-03760"
+  },
+  {
+   "project_key": "B2024-03769"
+  },
+  {
+   "project_key": "B2024-03777"
+  },
+  {
+   "project_key": "ZP2024-0122"
+  },
+  {
+   "project_key": "ZP2024-0126"
+  },
+  {
+   "project_key": "ZP2024-0131",
+   "commercial_uses": {
+    "value": [
+     "live performance theater"
+    ],
+    "quote": "a live performance theater",
+    "source": "ZP2024-0131"
+   }
+  },
+  {
+   "project_key": "ZP2024-0147"
+  },
+  {
+   "project_key": "ZP2024-0162",
+   "tenure_stated": {
+    "value": "rental",
+    "quote": "All 19 existing dwelling units, when replaced, will be below-market-rate rentals.",
+    "source": "ZP2024-0162"
+   }
+  },
+  {
+   "project_key": "ZP2024-0169"
+  },
+  {
+   "project_key": "AUP2012-0041"
+  },
+  {
+   "project_key": "AUP2012-0059"
+  },
+  {
+   "project_key": "AUP2012-0073"
+  },
+  {
+   "project_key": "AUP2012-0081"
+  },
+  {
+   "project_key": "AUP2012-0098"
+  },
+  {
+   "project_key": "AUP2013-0159"
+  },
+  {
+   "project_key": "B2024-02503"
+  },
+  {
+   "project_key": "B2024-02508"
+  },
+  {
+   "project_key": "B2024-02570"
+  },
+  {
+   "project_key": "B2024-02618"
+  },
+  {
+   "project_key": "B2024-02715"
+  },
+  {
+   "project_key": "B2024-02736"
+  },
+  {
+   "project_key": "UP2014-0014"
+  },
+  {
+   "project_key": "UP2014-0016"
+  },
+  {
+   "project_key": "UP2014-0019",
+   "commercial_sqft": {
+    "value": 4996,
+    "quote": "4,996 S.F. COMMERCIAL",
+    "source": "B2014-02844"
+   },
+   "commercial_uses": {
+    "value": [
+     "retail",
+     "quick-serve food use"
+    ],
+    "quote": "replace retail floor area with quick-serve food use",
+    "source": "UP2014-0019"
+   }
+  },
+  {
+   "project_key": "ZCBP2015-0666"
+  },
+  {
+   "project_key": "ZCBP2015-0733"
+  },
+  {
+   "project_key": "ZCBP2015-1041"
+  },
+  {
+   "project_key": "B2023-05250"
+  },
+  {
+   "project_key": "B2023-05338"
+  },
+  {
+   "project_key": "B2023-05510"
+  },
+  {
+   "project_key": "B2023-05565"
+  },
+  {
+   "project_key": "B2023-05727"
+  },
+  {
+   "project_key": "B2023-05794"
+  },
+  {
+   "project_key": "ZP2015-0253"
+  },
+  {
+   "project_key": "ZP2016-0005"
+  },
+  {
+   "project_key": "ZP2016-0009",
+   "tenure_stated": {
+    "value": "ownership",
+    "quote": "construct two detached, two-story single family residences (condos)",
+    "source": "ZP2016-0009"
+   }
+  },
+  {
+   "project_key": "ZP2016-0014",
+   "commercial_uses": {
+    "value": [
+     "commercial space"
+    ],
+    "quote": "4 stories of apartments over ground floor neighborhood serving commercial space",
+    "source": "ZP2016-0014"
+   }
+  },
+  {
+   "project_key": "ZP2016-0019"
+  },
+  {
+   "project_key": "ZP2016-0020",
+   "commercial_uses": {
+    "value": [
+     "commercial space"
+    ],
+    "quote": "New seven story building with ground commercial space and parking garage for twenty-nine automobiles with parking lift, and six stories of residential apartments for a total of sixty six units.",
+    "source": "B2018-04293"
+   }
+  },
+  {
+   "project_key": "B2019-03999"
+  },
+  {
+   "project_key": "B2019-04085"
+  },
+  {
+   "project_key": "B2019-04125"
+  },
+  {
+   "project_key": "B2019-04142"
+  },
+  {
+   "project_key": "B2019-04236"
+  },
+  {
+   "project_key": "B2019-04237"
+  },
+  {
+   "project_key": "B2024-00772"
+  },
+  {
+   "project_key": "B2024-00819"
+  },
+  {
+   "project_key": "B2024-00874"
+  },
+  {
+   "project_key": "B2024-00890"
+  },
+  {
+   "project_key": "B2024-00955"
+  },
+  {
+   "project_key": "B2024-00975"
+  },
+  {
+   "project_key": "B2025-00145"
+  },
+  {
+   "project_key": "B2025-00152"
+  },
+  {
+   "project_key": "B2025-00158"
+  },
+  {
+   "project_key": "B2025-00165"
+  },
+  {
+   "project_key": "B2025-00168"
+  },
+  {
+   "project_key": "B2025-00269"
+  },
+  {
+   "project_key": "B2020-03458"
+  },
+  {
+   "project_key": "B2020-03494"
+  },
+  {
+   "project_key": "B2020-03497"
+  },
+  {
+   "project_key": "B2020-03502"
+  },
+  {
+   "project_key": "B2020-03543"
+  },
+  {
+   "project_key": "B2020-03619"
+  },
+  {
+   "project_key": "B2020-02495"
+  },
+  {
+   "project_key": "B2020-02547"
+  },
+  {
+   "project_key": "B2020-02676"
+  },
+  {
+   "project_key": "B2020-02678"
+  },
+  {
+   "project_key": "B2020-02735"
+  },
+  {
+   "project_key": "B2020-02775"
+  },
+  {
+   "project_key": "B2022-05775"
+  },
+  {
+   "project_key": "B2022-05864"
+  },
+  {
+   "project_key": "B2022-05925"
+  },
+  {
+   "project_key": "B2022-05928"
+  },
+  {
+   "project_key": "B2022-06012"
+  },
+  {
+   "project_key": "B2022-06033"
+  },
+  {
+   "project_key": "B2021-05401"
+  },
+  {
+   "project_key": "B2021-05520"
+  },
+  {
+   "project_key": "B2021-05544"
+  },
+  {
+   "project_key": "B2021-05573"
+  },
+  {
+   "project_key": "B2021-05671"
+  },
+  {
+   "project_key": "B2021-05697"
+  },
+  {
+   "project_key": "B2019-04275"
+  },
+  {
+   "project_key": "B2019-04354"
+  },
+  {
+   "project_key": "B2019-04410"
+  },
+  {
+   "project_key": "B2019-04441"
+  },
+  {
+   "project_key": "B2019-04476"
+  },
+  {
+   "project_key": "B2019-04580"
+  },
+  {
+   "project_key": "B2023-01554"
+  },
+  {
+   "project_key": "B2023-01652"
+  },
+  {
+   "project_key": "B2023-01656"
+  },
+  {
+   "project_key": "B2023-01703"
+  },
+  {
+   "project_key": "B2023-01770"
+  },
+  {
+   "project_key": "B2023-01911"
+  },
+  {
+   "project_key": "B2017-00538"
+  },
+  {
+   "project_key": "B2017-00828"
+  },
+  {
+   "project_key": "B2017-00955"
+  },
+  {
+   "project_key": "B2017-01113"
+  },
+  {
+   "project_key": "B2017-01124"
+  },
+  {
+   "project_key": "B2017-01223"
+  },
+  {
+   "project_key": "B2019-02889"
+  },
+  {
+   "project_key": "B2019-02948"
+  },
+  {
+   "project_key": "B2019-03075"
+  },
+  {
+   "project_key": "B2019-03190"
+  },
+  {
+   "project_key": "B2019-03192"
+  },
+  {
+   "project_key": "B2019-03270"
+  },
+  {
+   "project_key": "B2024-01935"
+  },
+  {
+   "project_key": "B2024-01983"
+  },
+  {
+   "project_key": "B2024-02003"
+  },
+  {
+   "project_key": "B2024-02051"
+  },
+  {
+   "project_key": "B2024-02148"
+  },
+  {
+   "project_key": "B2024-02212"
+  },
+  {
+   "project_key": "ZP2026-0064"
+  },
+  {
+   "project_key": "ZP2026-0077"
+  },
+  {
+   "project_key": "ZP2026-0083"
+  },
+  {
+   "project_key": "ZP2026-0091"
+  },
+  {
+   "project_key": "ZP2018-0196"
+  },
+  {
+   "project_key": "ZP2018-0201",
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "reduced-size retail space",
+    "source": "ZP2018-0201"
+   }
+  },
+  {
+   "project_key": "ZP2018-0208"
+  },
+  {
+   "project_key": "ZP2018-0214"
+  },
+  {
+   "project_key": "ZP2018-0220",
+   "commercial_uses": {
+    "value": [
+     "live-work units"
+    ],
+    "quote": "4 live-work units",
+    "source": "ZP2018-0220"
+   }
+  },
+  {
+   "project_key": "ZP2018-0221"
+  },
+  {
+   "project_key": "ZP2022-0171",
+   "commercial_sqft": {
+    "value": 1940,
+    "quote": "223 dwelling units over a 1,940 commercial space",
+    "source": "ZP2022-0171"
+   }
+  },
+  {
+   "project_key": "ZP2022-0172"
+  },
+  {
+   "project_key": "ZP2022-0174",
+   "commercial_sqft": {
+    "value": 7325,
+    "quote": "7,325 sq. ft. commercial area",
+    "source": "PLN2026-0184"
+   }
+  },
+  {
+   "project_key": "ZP2022-0175",
+   "commercial_uses": {
+    "value": [
+     "restaurant",
+     "commercial"
+    ],
+    "quote": "a rooftop restaurant over ground-level commercial and lobbies",
+    "source": "ZP2022-0175"
+   }
+  },
+  {
+   "project_key": "ZP2022-0179",
+   "commercial_sqft": {
+    "value": 590,
+    "quote": "590 square foot commercial space",
+    "source": "ZP2022-0179"
+   }
+  },
+  {
+   "project_key": "ZP2023-0003"
+  },
+  {
+   "project_key": "B2023-06445"
+  },
+  {
+   "project_key": "B2024-00176"
+  },
+  {
+   "project_key": "B2024-00221"
+  },
+  {
+   "project_key": "B2024-00243",
+   "tenure_stated": {
+    "value": "ownership",
+    "quote": "All four existing units on the lot were converted to condominiums in July.",
+    "source": "B2024-00243"
+   }
+  },
+  {
+   "project_key": "B2024-00257"
+  },
+  {
+   "project_key": "B2024-00594"
+  },
+  {
+   "project_key": "B2018-01207"
+  },
+  {
+   "project_key": "B2018-01245"
+  },
+  {
+   "project_key": "B2018-01256"
+  },
+  {
+   "project_key": "B2018-01311"
+  },
+  {
+   "project_key": "B2018-01346"
+  },
+  {
+   "project_key": "B2018-01347"
+  },
+  {
+   "project_key": "ZP2023-0107",
+   "commercial_sqft": {
+    "value": 1312,
+    "quote": "1,312 square feet of commercial space",
+    "source": "ZP2023-0107"
+   }
+  },
+  {
+   "project_key": "ZP2023-0112"
+  },
+  {
+   "project_key": "ZP2023-0113"
+  },
+  {
+   "project_key": "ZP2023-0123",
+   "commercial_sqft": {
+    "value": 1024,
+    "quote": "a 1,024-square-foot two-story commercial unit",
+    "source": "ZP2023-0123"
+   }
+  },
+  {
+   "project_key": "ZP2023-0126"
+  },
+  {
+   "project_key": "ZP2023-0127",
+   "commercial_uses": {
+    "value": [
+     "office"
+    ],
+    "quote": "existing office on the second floor",
+    "source": "ZP2023-0127"
+   }
+  },
+  {
+   "project_key": "AUP2010-0066"
+  },
+  {
+   "project_key": "AUP2010-0072"
+  },
+  {
+   "project_key": "AUP2011-0099"
+  },
+  {
+   "project_key": "AUP2011-0162"
+  },
+  {
+   "project_key": "AUP2012-0002"
+  },
+  {
+   "project_key": "AUP2012-0034"
+  },
+  {
+   "project_key": "ZP2018-0138"
+  },
+  {
+   "project_key": "ZP2018-0141"
+  },
+  {
+   "project_key": "ZP2018-0144"
+  },
+  {
+   "project_key": "ZP2018-0145"
+  },
+  {
+   "project_key": "ZP2018-0154"
+  },
+  {
+   "project_key": "ZP2018-0156",
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "construction of five-story mixed-use building with commercial and parking on the ground level (podium) and dwellings on floors two through five",
+    "source": "ZP2018-0156"
+   }
+  },
+  {
+   "project_key": "AUP2014-0009"
+  },
+  {
+   "project_key": "AUP2014-0014"
+  },
+  {
+   "project_key": "AUP2014-0032"
+  },
+  {
+   "project_key": "AUP2014-0033"
+  },
+  {
+   "project_key": "AUP2014-0056"
+  },
+  {
+   "project_key": "AUP2014-0064"
+  },
+  {
+   "project_key": "ZP2022-0046",
+   "commercial_sqft": {
+    "value": 1043,
+    "quote": "1,043 square-feet of commercial space",
+    "source": "ZP2022-0046"
+   }
+  },
+  {
+   "project_key": "ZP2022-0053"
+  },
+  {
+   "project_key": "ZP2022-0062"
+  },
+  {
+   "project_key": "ZP2022-0087"
+  },
+  {
+   "project_key": "ZP2022-0097",
+   "commercial_sqft": {
+    "value": 1500,
+    "quote": "1,500 sq. ft. of retail/general commercial spae",
+    "source": "DRCF2019-0005"
+   },
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "ground floor retail space",
+    "source": "ZP2022-0097"
+   }
+  },
+  {
+   "project_key": "ZP2022-0098"
+  },
+  {
+   "project_key": "B2022-01040"
+  },
+  {
+   "project_key": "B2022-01072"
+  },
+  {
+   "project_key": "B2022-01079"
+  },
+  {
+   "project_key": "B2022-01264"
+  },
+  {
+   "project_key": "B2022-01276"
+  },
+  {
+   "project_key": "B2022-01505"
+  },
+  {
+   "project_key": "B2025-05825"
+  },
+  {
+   "project_key": "B2025-05836"
+  },
+  {
+   "project_key": "B2025-05874"
+  },
+  {
+   "project_key": "B2025-05891"
+  },
+  {
+   "project_key": "B2026-00244"
+  },
+  {
+   "project_key": "B2026-00962"
+  },
+  {
+   "project_key": "B2023-01963"
+  },
+  {
+   "project_key": "B2023-01998"
+  },
+  {
+   "project_key": "B2023-02001"
+  },
+  {
+   "project_key": "B2023-02002"
+  },
+  {
+   "project_key": "B2023-02047"
+  },
+  {
+   "project_key": "B2023-02094"
+  },
+  {
+   "project_key": "ZP2024-0079"
+  },
+  {
+   "project_key": "ZP2024-0100"
+  },
+  {
+   "project_key": "ZP2024-0104"
+  },
+  {
+   "project_key": "ZP2024-0114"
+  },
+  {
+   "project_key": "ZP2024-0116",
+   "commercial_uses": {
+    "value": [
+     "office"
+    ],
+    "quote": "dwelling unit over office",
+    "source": "ZP2024-0116"
+   }
+  },
+  {
+   "project_key": "ZP2024-0120"
+  },
+  {
+   "project_key": "B2022-00304"
+  },
+  {
+   "project_key": "B2022-00337"
+  },
+  {
+   "project_key": "B2022-00339"
+  },
+  {
+   "project_key": "B2022-00343"
+  },
+  {
+   "project_key": "B2022-00430"
+  },
+  {
+   "project_key": "B2022-00473"
+  },
+  {
+   "project_key": "B2016-04519"
+  },
+  {
+   "project_key": "B2016-04602"
+  },
+  {
+   "project_key": "B2016-05136"
+  },
+  {
+   "project_key": "B2016-05191"
+  },
+  {
+   "project_key": "B2016-05318"
+  },
+  {
+   "project_key": "B2016-05739"
+  },
+  {
+   "project_key": "B2017-01688"
+  },
+  {
+   "project_key": "B2017-01699"
+  },
+  {
+   "project_key": "B2017-01805"
+  },
+  {
+   "project_key": "B2017-01850"
+  },
+  {
+   "project_key": "B2017-01941"
+  },
+  {
+   "project_key": "B2017-02125"
+  },
+  {
+   "project_key": "ZP2025-0020"
+  },
+  {
+   "project_key": "ZP2025-0021"
+  },
+  {
+   "project_key": "ZP2025-0025"
+  },
+  {
+   "project_key": "ZP2025-0051"
+  },
+  {
+   "project_key": "ZP2025-0068"
+  },
+  {
+   "project_key": "ZP2025-0069",
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "mixed-use building with ground floor commercial and three residential units at the second floor",
+    "source": "ZP2025-0069"
+   }
+  },
+  {
+   "project_key": "ZP2024-0057",
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "8-story Mixed Use residential/commercial building",
+    "source": "ZP2024-0057"
+   }
+  },
+  {
+   "project_key": "ZP2024-0058",
+   "commercial_sqft": {
+    "value": 5136,
+    "quote": "5,136 square feet of ground floor commercial space",
+    "source": "ZP2024-0058"
+   },
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "5,136 square feet of ground floor commercial space",
+    "source": "ZP2024-0058"
+   }
+  },
+  {
+   "project_key": "ZP2024-0059"
+  },
+  {
+   "project_key": "ZP2024-0060"
+  },
+  {
+   "project_key": "ZP2024-0066",
+   "commercial_sqft": {
+    "value": 1200,
+    "quote": "1,200 sf new commercial space",
+    "source": "ZP2024-0066"
+   },
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "1,200 sf new commercial space",
+    "source": "ZP2024-0066"
+   }
+  },
+  {
+   "project_key": "ZP2024-0067",
+   "commercial_sqft": {
+    "value": 7486,
+    "quote": "Reduction of existing 32,350 square feet of commercial space to 7,486 square feet",
+    "source": "ZP2024-0067"
+   },
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "Reduction of existing 32,350 square feet of commercial space to 7,486 square feet",
+    "source": "ZP2024-0067"
+   }
+  },
+  {
+   "project_key": "B2022-05486"
+  },
+  {
+   "project_key": "B2022-05577"
+  },
+  {
+   "project_key": "B2022-05608"
+  },
+  {
+   "project_key": "B2022-05663"
+  },
+  {
+   "project_key": "B2022-05670"
+  },
+  {
+   "project_key": "B2022-05694"
+  },
+  {
+   "project_key": "B2020-01816"
+  },
+  {
+   "project_key": "B2020-01851"
+  },
+  {
+   "project_key": "B2020-01864"
+  },
+  {
+   "project_key": "B2020-01885"
+  },
+  {
+   "project_key": "B2020-01978"
+  },
+  {
+   "project_key": "B2020-01988"
+  },
+  {
+   "project_key": "B2018-04005"
+  },
+  {
+   "project_key": "B2018-04041"
+  },
+  {
+   "project_key": "B2018-04312"
+  },
+  {
+   "project_key": "B2018-04354"
+  },
+  {
+   "project_key": "B2018-04427"
+  },
+  {
+   "project_key": "B2018-04609"
+  },
+  {
+   "project_key": "ZP2017-0129"
+  },
+  {
+   "project_key": "ZP2017-0134"
+  },
+  {
+   "project_key": "ZP2017-0145"
+  },
+  {
+   "project_key": "ZP2017-0146"
+  },
+  {
+   "project_key": "ZP2017-0148"
+  },
+  {
+   "project_key": "ZP2017-0149"
+  },
+  {
+   "project_key": "B2025-01784"
+  },
+  {
+   "project_key": "B2025-01813"
+  },
+  {
+   "project_key": "B2025-01862"
+  },
+  {
+   "project_key": "B2025-01928"
+  },
+  {
+   "project_key": "B2025-01930"
+  },
+  {
+   "project_key": "B2025-01965"
+  },
+  {
+   "project_key": "B2021-01034"
+  },
+  {
+   "project_key": "B2021-01081"
+  },
+  {
+   "project_key": "B2021-01114"
+  },
+  {
+   "project_key": "B2021-01192"
+  },
+  {
+   "project_key": "B2021-01297"
+  },
+  {
+   "project_key": "B2021-01329"
+  },
+  {
+   "project_key": "B2023-04424"
+  },
+  {
+   "project_key": "B2023-04429"
+  },
+  {
+   "project_key": "B2023-04456"
+  },
+  {
+   "project_key": "B2023-04611"
+  },
+  {
+   "project_key": "B2023-04736"
+  },
+  {
+   "project_key": "B2023-04737"
+  },
+  {
+   "project_key": "B2022-02055"
+  },
+  {
+   "project_key": "B2022-02366"
+  },
+  {
+   "project_key": "B2022-02472"
+  },
+  {
+   "project_key": "B2022-02547"
+  },
+  {
+   "project_key": "B2022-02623"
+  },
+  {
+   "project_key": "B2022-02628"
+  },
+  {
+   "project_key": "B2017-04626"
+  },
+  {
+   "project_key": "B2017-04713"
+  },
+  {
+   "project_key": "B2017-04756"
+  },
+  {
+   "project_key": "B2017-04758"
+  },
+  {
+   "project_key": "B2017-04815"
+  },
+  {
+   "project_key": "B2017-04855"
+  },
+  {
+   "project_key": "B2021-02315"
+  },
+  {
+   "project_key": "B2021-02335"
+  },
+  {
+   "project_key": "B2021-02411"
+  },
+  {
+   "project_key": "B2021-02467"
+  },
+  {
+   "project_key": "B2021-02470"
+  },
+  {
+   "project_key": "B2021-02473"
+  },
+  {
+   "project_key": "B2023-00406"
+  },
+  {
+   "project_key": "B2023-00475"
+  },
+  {
+   "project_key": "B2023-00510"
+  },
+  {
+   "project_key": "B2023-00520"
+  },
+  {
+   "project_key": "B2023-00578"
+  },
+  {
+   "project_key": "B2023-00581"
+  },
+  {
+   "project_key": "ZP2021-0140",
+   "commercial_sqft": {
+    "value": 1000,
+    "quote": "two approximately 1,000 sq. ft. commercial spaces",
+    "source": "ZP2021-0140"
+   },
+   "commercial_spaces": {
+    "value": 2,
+    "quote": "two approximately 1,000 sq. ft. commercial spaces",
+    "source": "ZP2021-0140"
+   }
+  },
+  {
+   "project_key": "ZP2021-0158",
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "The ground floor contains retail space and the apartments lobby, along with back of house services.",
+    "source": "DRCP2021-0019"
+   }
+  },
+  {
+   "project_key": "ZP2021-0162",
+   "commercial_sqft": {
+    "value": 10164,
+    "quote": "10,164 sq.ft. commercial",
+    "source": "ZP2021-0162"
+   }
+  },
+  {
+   "project_key": "ZP2021-0164",
+   "commercial_uses": {
+    "value": [
+     "restaurant"
+    ],
+    "quote": "Feasibility of converting restaurant at rear of building to three dwelling units.",
+    "source": "PLN2021-0007"
+   }
+  },
+  {
+   "project_key": "ZP2021-0177"
+  },
+  {
+   "project_key": "ZP2021-0181"
+  },
+  {
+   "project_key": "ZP2018-0161"
+  },
+  {
+   "project_key": "ZP2018-0162"
+  },
+  {
+   "project_key": "ZP2018-0166"
+  },
+  {
+   "project_key": "ZP2018-0168"
+  },
+  {
+   "project_key": "ZP2018-0172"
+  },
+  {
+   "project_key": "ZP2018-0178"
+  },
+  {
+   "project_key": "ZP2016-0245"
+  },
+  {
+   "project_key": "ZP2016-0247"
+  },
+  {
+   "project_key": "ZP2016-0252"
+  },
+  {
+   "project_key": "ZP2016-0253"
+  },
+  {
+   "project_key": "ZP2017-0003",
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "ground level commercial with 36 units above",
+    "source": "ZP2017-0003"
+   }
+  },
+  {
+   "project_key": "ZP2017-0004",
+   "commercial_uses": {
+    "value": [
+     "retail",
+     "theater",
+     "theater class instruction"
+    ],
+    "quote": "ground floor retail and theater, and theater class instruction on second floor",
+    "source": "ZP2017-0004"
+   },
+   "tenure_stated": {
+    "value": "rental",
+    "quote": "to allow rental of units to other non-profit organizations",
+    "source": "ZP2018-0235"
+   }
+  },
+  {
+   "project_key": "B2025-00723"
+  },
+  {
+   "project_key": "B2025-00750"
+  },
+  {
+   "project_key": "B2025-00752"
+  },
+  {
+   "project_key": "B2025-00819"
+  },
+  {
+   "project_key": "B2025-00820"
+  },
+  {
+   "project_key": "B2025-00857"
+  },
+  {
+   "project_key": "B2023-05812"
+  },
+  {
+   "project_key": "B2023-05918"
+  },
+  {
+   "project_key": "B2023-06071"
+  },
+  {
+   "project_key": "B2023-06132"
+  },
+  {
+   "project_key": "B2023-06296"
+  },
+  {
+   "project_key": "B2023-06362"
+  },
+  {
+   "project_key": "B2022-03233"
+  },
+  {
+   "project_key": "B2022-03366"
+  },
+  {
+   "project_key": "B2022-03404"
+  },
+  {
+   "project_key": "B2022-03410"
+  },
+  {
+   "project_key": "B2022-03481"
+  },
+  {
+   "project_key": "B2022-03494"
+  },
+  {
+   "project_key": "ZP2016-0031"
+  },
+  {
+   "project_key": "ZP2016-0033"
+  },
+  {
+   "project_key": "ZP2016-0034",
+   "commercial_uses": {
+    "value": [
+     "commercial",
+     "restaurants",
+     "arts/crafts studio",
+     "club/wellness center",
+     "car share",
+     "bicycle parking"
+    ],
+    "quote": "ground-floor commercial space to be used for restaurants, arts/crafts studio, club/wellness center, car share and bicycle parking",
+    "source": "ZP2018-0222"
+   }
+  },
+  {
+   "project_key": "ZP2016-0041"
+  },
+  {
+   "project_key": "ZP2016-0044"
+  },
+  {
+   "project_key": "ZP2016-0046"
+  },
+  {
+   "project_key": "B2025-01504"
+  },
+  {
+   "project_key": "B2025-01509"
+  },
+  {
+   "project_key": "B2025-01534"
+  },
+  {
+   "project_key": "B2025-01579"
+  },
+  {
+   "project_key": "B2025-01589"
+  },
+  {
+   "project_key": "B2025-01610"
+  },
+  {
+   "project_key": "MODAUP2008-0027"
+  },
+  {
+   "project_key": "MODUP2007-0027",
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "New 36-unit mixed use building with retail at ground level and structured parking below.",
+    "source": "B2014-05752"
+   }
+  },
+  {
+   "project_key": "MODUP2010-0008",
+   "commercial_uses": {
+    "value": [
+     "restaurant",
+     "storefront"
+    ],
+    "quote": "Conversion of ground floor restaurant space into 2 dwelling units, while maintaining and retaining the storefront area along Euclid avenue.",
+    "source": "B2021-03440"
+   }
+  },
+  {
+   "project_key": "MODUP2014-0005",
+   "tenure_stated": {
+    "value": "rental",
+    "quote": "proposed modifications include changing to an affordable rental project",
+    "source": "MODUP2014-0005"
+   }
+  },
+  {
+   "project_key": "MODUP2014-0012"
+  },
+  {
+   "project_key": "PLN2015-0051",
+   "commercial_sqft": {
+    "value": 1085,
+    "quote": "1,085 square feet of commercial floor area",
+    "source": "PLN2015-0051"
+   }
+  },
+  {
+   "project_key": "ZP2018-0065"
+  },
+  {
+   "project_key": "ZP2018-0067"
+  },
+  {
+   "project_key": "ZP2018-0076"
+  },
+  {
+   "project_key": "ZP2018-0080"
+  },
+  {
+   "project_key": "ZP2018-0081"
+  },
+  {
+   "project_key": "ZP2018-0085"
+  },
+  {
+   "project_key": "B2025-02439"
+  },
+  {
+   "project_key": "B2025-02497"
+  },
+  {
+   "project_key": "B2025-02654"
+  },
+  {
+   "project_key": "B2025-02740"
+  },
+  {
+   "project_key": "B2025-02837"
+  },
+  {
+   "project_key": "B2025-03021"
+  },
+  {
+   "project_key": "B2021-03913"
+  },
+  {
+   "project_key": "B2021-03915"
+  },
+  {
+   "project_key": "B2021-04004"
+  },
+  {
+   "project_key": "B2021-04128"
+  },
+  {
+   "project_key": "B2021-04178"
+  },
+  {
+   "project_key": "B2021-04244"
+  },
+  {
+   "project_key": "ZP2020-0016"
+  },
+  {
+   "project_key": "ZP2020-0022",
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "Demo existing one-story commercial building, construct one 4-story, density bonus, mixed-use building.",
+    "source": "ZP2020-0022"
+   }
+  },
+  {
+   "project_key": "ZP2020-0041",
+   "commercial_spaces": {
+    "value": 5,
+    "quote": "5 commercial parking spaces located on the ground floor to serve the existing commercial building",
+    "source": "ZP2020-0041"
+   },
+   "commercial_uses": {
+    "value": [
+     "commercial parking"
+    ],
+    "quote": "5 commercial parking spaces located on the ground floor to serve the existing commercial building",
+    "source": "ZP2020-0041"
+   }
+  },
+  {
+   "project_key": "ZP2020-0043"
+  },
+  {
+   "project_key": "ZP2020-0045"
+  },
+  {
+   "project_key": "ZP2020-0051"
+  },
+  {
+   "project_key": "ZP2018-0226",
+   "tenure_stated": {
+    "value": "ownership",
+    "quote": "New Condo w/attached garage \"C\" 2172 sq ft.",
+    "source": "B2019-05504"
+   }
+  },
+  {
+   "project_key": "ZP2018-0227"
+  },
+  {
+   "project_key": "ZP2018-0229",
+   "commercial_sqft": {
+    "value": 1000,
+    "quote": "approximately 1,000 sf of retail",
+    "source": "ZP2018-0229"
+   },
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "approximately 1,000 sf of retail",
+    "source": "ZP2018-0229"
+   }
+  },
+  {
+   "project_key": "ZP2018-0234"
+  },
+  {
+   "project_key": "ZP2018-0237"
+  },
+  {
+   "project_key": "ZP2018-0239"
+  },
+  {
+   "project_key": "ZP2023-0004"
+  },
+  {
+   "project_key": "ZP2023-0024",
+   "commercial_sqft": {
+    "value": 6500,
+    "quote": "The 6,500 square commercial building at 2300 Ellsworth will be retained.",
+    "source": "ZP2023-0024"
+   }
+  },
+  {
+   "project_key": "ZP2023-0025"
+  },
+  {
+   "project_key": "ZP2023-0036"
+  },
+  {
+   "project_key": "ZP2023-0040",
+   "commercial_uses": {
+    "value": [
+     "restaurant",
+     "commercial"
+    ],
+    "quote": "a roof-top restaurant over ground-level commercial with lobbies",
+    "source": "ZP2023-0040"
+   }
+  },
+  {
+   "project_key": "ZP2023-0045"
+  },
+  {
+   "project_key": "B2024-01316"
+  },
+  {
+   "project_key": "B2024-01337"
+  },
+  {
+   "project_key": "B2024-01364"
+  },
+  {
+   "project_key": "B2024-01417"
+  },
+  {
+   "project_key": "B2024-01429"
+  },
+  {
+   "project_key": "B2024-01452"
+  },
+  {
+   "project_key": "B2017-03194"
+  },
+  {
+   "project_key": "B2017-03281"
+  },
+  {
+   "project_key": "B2017-03316"
+  },
+  {
+   "project_key": "B2017-03353"
+  },
+  {
+   "project_key": "B2017-03440"
+  },
+  {
+   "project_key": "B2017-03447"
+  },
+  {
+   "project_key": "B2021-00818"
+  },
+  {
+   "project_key": "B2021-00856"
+  },
+  {
+   "project_key": "B2021-00868"
+  },
+  {
+   "project_key": "B2021-00975",
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "existing retail space at level 1",
+    "source": "B2021-00975"
+   }
+  },
+  {
+   "project_key": "B2021-00982"
+  },
+  {
+   "project_key": "B2021-01026"
+  },
+  {
+   "project_key": "B2018-00431"
+  },
+  {
+   "project_key": "B2018-00483"
+  },
+  {
+   "project_key": "B2018-00510"
+  },
+  {
+   "project_key": "B2018-00704"
+  },
+  {
+   "project_key": "B2018-00747"
+  },
+  {
+   "project_key": "B2018-00857"
+  },
+  {
+   "project_key": "PLN2023-0075"
+  },
+  {
+   "project_key": "PLN2023-0098",
+   "commercial_sqft": {
+    "value": 17110,
+    "quote": "17,110 sf commercial space",
+    "source": "PLN2023-0098"
+   }
+  },
+  {
+   "project_key": "PLN2024-0010",
+   "commercial_sqft": {
+    "value": 6000,
+    "quote": "over 6,000 SF of community-serving ground floor uses",
+    "source": "PLN2024-0010"
+   },
+   "commercial_uses": {
+    "value": [
+     "community-serving ground floor uses"
+    ],
+    "quote": "community-serving ground floor uses",
+    "source": "PLN2024-0010"
+   },
+   "tenure_stated": {
+    "value": "rental",
+    "quote": "over 50% of the homes at affordable rent levels",
+    "source": "PLN2024-0010"
+   }
+  },
+  {
+   "project_key": "PLN2024-0016",
+   "commercial_uses": {
+    "value": [
+     "restaurant",
+     "commercial patio storefront"
+    ],
+    "quote": "existing street-facing ground floor restaurant and commercial patio storefront would remain",
+    "source": "PLN2024-0016"
+   }
+  },
+  {
+   "project_key": "PLN2024-0023"
+  },
+  {
+   "project_key": "PLN2024-0024"
+  },
+  {
+   "project_key": "ZP2019-0213"
+  },
+  {
+   "project_key": "ZP2019-0217"
+  },
+  {
+   "project_key": "ZP2019-0220"
+  },
+  {
+   "project_key": "ZP2020-0006"
+  },
+  {
+   "project_key": "ZP2020-0009",
+   "commercial_uses": {
+    "value": [
+     "live/work"
+    ],
+    "quote": "1,680 square foot live/work building",
+    "source": "ZP2020-0009"
+   }
+  },
+  {
+   "project_key": "ZP2020-0011",
+   "commercial_sqft": {
+    "value": 652,
+    "quote": "652 square feet of commercial space",
+    "source": "ZP2020-0011"
+   }
+  },
+  {
+   "project_key": "B2025-04830"
+  },
+  {
+   "project_key": "B2025-04847"
+  },
+  {
+   "project_key": "B2025-04877"
+  },
+  {
+   "project_key": "B2025-05177"
+  },
+  {
+   "project_key": "B2025-05180"
+  },
+  {
+   "project_key": "B2025-05286"
+  },
+  {
+   "project_key": "B2021-03071"
+  },
+  {
+   "project_key": "B2021-03122"
+  },
+  {
+   "project_key": "B2021-03186"
+  },
+  {
+   "project_key": "B2021-03236"
+  },
+  {
+   "project_key": "B2021-03292"
+  },
+  {
+   "project_key": "B2021-03341"
+  },
+  {
+   "project_key": "B2020-01503"
+  },
+  {
+   "project_key": "B2020-01517"
+  },
+  {
+   "project_key": "B2020-01519"
+  },
+  {
+   "project_key": "B2020-01536"
+  },
+  {
+   "project_key": "B2020-01549"
+  },
+  {
+   "project_key": "B2020-01556"
+  },
+  {
+   "project_key": "B2019-03350"
+  },
+  {
+   "project_key": "B2019-03475"
+  },
+  {
+   "project_key": "B2019-03488"
+  },
+  {
+   "project_key": "B2019-03603"
+  },
+  {
+   "project_key": "B2019-03683"
+  },
+  {
+   "project_key": "B2019-03691"
+  },
+  {
+   "project_key": "B2018-03143"
+  },
+  {
+   "project_key": "B2018-03167"
+  },
+  {
+   "project_key": "B2018-03242"
+  },
+  {
+   "project_key": "B2018-03253"
+  },
+  {
+   "project_key": "B2018-03289"
+  },
+  {
+   "project_key": "B2018-03397"
+  },
+  {
+   "project_key": "B2024-05631"
+  },
+  {
+   "project_key": "B2024-05661"
+  },
+  {
+   "project_key": "B2024-05755"
+  },
+  {
+   "project_key": "B2024-05992"
+  },
+  {
+   "project_key": "B2024-06000"
+  },
+  {
+   "project_key": "B2024-06003"
+  },
+  {
+   "project_key": "ZP2019-0082"
+  },
+  {
+   "project_key": "ZP2019-0084"
+  },
+  {
+   "project_key": "ZP2019-0086"
+  },
+  {
+   "project_key": "ZP2019-0089",
+   "commercial_spaces": {
+    "value": 2,
+    "quote": "2 commercial retail tenant spaces",
+    "source": "ZP2019-0089"
+   },
+   "commercial_uses": {
+    "value": [
+     "commercial retail"
+    ],
+    "quote": "2 commercial retail tenant spaces",
+    "source": "ZP2019-0089"
+   }
+  },
+  {
+   "project_key": "ZP2019-0091"
+  },
+  {
+   "project_key": "ZP2019-0092"
+  },
+  {
+   "project_key": "ZP2017-0191"
+  },
+  {
+   "project_key": "ZP2017-0196"
+  },
+  {
+   "project_key": "ZP2017-0202"
+  },
+  {
+   "project_key": "ZP2017-0205",
+   "tenure_stated": {
+    "value": "ownership",
+    "quote": "to construct six (6) common ownership dwellings designed as three (3) separate duplexes arranged around a court",
+    "source": "ZP2017-0205"
+   }
+  },
+  {
+   "project_key": "ZP2017-0207"
+  },
+  {
+   "project_key": "ZP2018-0003"
+  },
+  {
+   "project_key": "B2017-02331"
+  },
+  {
+   "project_key": "B2017-02359"
+  },
+  {
+   "project_key": "B2017-02402"
+  },
+  {
+   "project_key": "B2017-02403"
+  },
+  {
+   "project_key": "B2017-02460"
+  },
+  {
+   "project_key": "B2017-02462"
+  },
+  {
+   "project_key": "ZP2024-0174"
+  },
+  {
+   "project_key": "ZP2024-0177"
+  },
+  {
+   "project_key": "ZP2024-0181"
+  },
+  {
+   "project_key": "ZP2024-0182"
+  },
+  {
+   "project_key": "ZP2025-0008"
+  },
+  {
+   "project_key": "ZP2025-0014"
+  },
+  {
+   "project_key": "ZP2020-0158"
+  },
+  {
+   "project_key": "ZP2020-0159"
+  },
+  {
+   "project_key": "ZP2020-0160"
+  },
+  {
+   "project_key": "ZP2021-0001"
+  },
+  {
+   "project_key": "ZP2021-0002"
+  },
+  {
+   "project_key": "ZP2021-0009"
+  },
+  {
+   "project_key": "ZP2018-0086",
+   "commercial_uses": {
+    "value": [
+     "office"
+    ],
+    "quote": "Convert existing ground and second floor to office use.",
+    "source": "ZP2018-0086"
+   }
+  },
+  {
+   "project_key": "ZP2018-0096"
+  },
+  {
+   "project_key": "ZP2018-0107"
+  },
+  {
+   "project_key": "ZP2018-0108",
+   "commercial_uses": {
+    "value": [
+     "medical office"
+    ],
+    "quote": "Convert existing dwelling unit into a medical office.",
+    "source": "ZP2018-0108"
+   }
+  },
+  {
+   "project_key": "ZP2018-0112"
+  },
+  {
+   "project_key": "ZP2018-0113"
+  },
+  {
+   "project_key": "PLN2025-0028"
+  },
+  {
+   "project_key": "PLN2025-0038"
+  },
+  {
+   "project_key": "PLN2025-0040",
+   "tenure_stated": {
+    "value": "ownership",
+    "quote": "SB-684 Subdivision Homeownership Project",
+    "source": "PLN2025-0047"
+   }
+  },
+  {
+   "project_key": "PLN2025-0041"
+  },
+  {
+   "project_key": "PLN2025-0043"
+  },
+  {
+   "project_key": "PLN2025-0046"
+  },
+  {
+   "project_key": "ZP2018-0040"
+  },
+  {
+   "project_key": "ZP2018-0050",
+   "commercial_uses": {
+    "value": [
+     "commercial tenant spaces"
+    ],
+    "quote": "commercial tenant spaces",
+    "source": "ZP2018-0050"
+   }
+  },
+  {
+   "project_key": "ZP2018-0052",
+   "commercial_sqft": {
+    "value": 27500,
+    "quote": "approximately 27,500 of retail, including restaurant and caf\u00e9 space",
+    "source": "ZP2018-0052"
+   },
+   "commercial_uses": {
+    "value": [
+     "retail",
+     "restaurant",
+     "caf\u00e9 space"
+    ],
+    "quote": "approximately 27,500 of retail, including restaurant and caf\u00e9 space",
+    "source": "ZP2018-0052"
+   }
+  },
+  {
+   "project_key": "ZP2018-0054"
+  },
+  {
+   "project_key": "ZP2018-0058"
+  },
+  {
+   "project_key": "ZP2018-0061",
+   "commercial_uses": {
+    "value": [
+     "restaurant",
+     "M occupancies"
+    ],
+    "quote": "A-2 (restaurant) and M occupancies",
+    "source": "B2018-01337"
+   }
+  },
+  {
+   "project_key": "ZP2016-0022"
+  },
+  {
+   "project_key": "ZP2016-0023"
+  },
+  {
+   "project_key": "ZP2016-0024"
+  },
+  {
+   "project_key": "ZP2016-0025"
+  },
+  {
+   "project_key": "ZP2016-0026"
+  },
+  {
+   "project_key": "ZP2016-0028",
+   "commercial_uses": {
+    "value": [
+     "community garden",
+     "play area"
+    ],
+    "quote": "including community garden, play area, and vehicle and bicycle parking",
+    "source": "ZP2016-0028"
+   }
+  },
+  {
+   "project_key": "ZP2017-0090"
+  },
+  {
+   "project_key": "ZP2017-0099"
+  },
+  {
+   "project_key": "ZP2017-0102"
+  },
+  {
+   "project_key": "ZP2017-0103"
+  },
+  {
+   "project_key": "ZP2017-0106"
+  },
+  {
+   "project_key": "ZP2017-0109"
+  },
+  {
+   "project_key": "ZP2017-0055"
+  },
+  {
+   "project_key": "ZP2017-0059"
+  },
+  {
+   "project_key": "ZP2017-0060"
+  },
+  {
+   "project_key": "ZP2017-0062"
+  },
+  {
+   "project_key": "ZP2017-0063"
+  },
+  {
+   "project_key": "ZP2017-0070"
+  },
+  {
+   "project_key": "B2024-02794"
+  },
+  {
+   "project_key": "B2024-03130"
+  },
+  {
+   "project_key": "B2024-03154"
+  },
+  {
+   "project_key": "B2024-03194"
+  },
+  {
+   "project_key": "B2024-03373"
+  },
+  {
+   "project_key": "B2024-03408"
+  },
+  {
+   "project_key": "B2022-01835"
+  },
+  {
+   "project_key": "B2022-01864"
+  },
+  {
+   "project_key": "B2022-01995"
+  },
+  {
+   "project_key": "B2022-02002"
+  },
+  {
+   "project_key": "B2022-02008"
+  },
+  {
+   "project_key": "B2022-02018"
+  },
+  {
+   "project_key": "ZCBP2015-1491"
+  },
+  {
+   "project_key": "ZCBP2015-1497"
+  },
+  {
+   "project_key": "ZCBP2015-1500"
+  },
+  {
+   "project_key": "ZCBP2015-1531"
+  },
+  {
+   "project_key": "ZCBP2015-1532"
+  },
+  {
+   "project_key": "ZCBP2015-1534"
+  },
+  {
+   "project_key": "B2018-00016"
+  },
+  {
+   "project_key": "B2018-00017"
+  },
+  {
+   "project_key": "B2018-00018"
+  },
+  {
+   "project_key": "B2018-00101"
+  },
+  {
+   "project_key": "B2018-00105",
+   "tenure_stated": {
+    "value": "ownership",
+    "quote": "owner-occupied duplex",
+    "source": "B2018-00105"
+   }
+  },
+  {
+   "project_key": "B2018-00429"
+  },
+  {
+   "project_key": "B2021-03412"
+  },
+  {
+   "project_key": "B2021-03651"
+  },
+  {
+   "project_key": "B2021-03710"
+  },
+  {
+   "project_key": "B2021-03801"
+  },
+  {
+   "project_key": "B2021-03815"
+  },
+  {
+   "project_key": "B2021-03896"
+  },
+  {
+   "project_key": "B2018-05115"
+  },
+  {
+   "project_key": "B2019-00017"
+  },
+  {
+   "project_key": "B2019-00029"
+  },
+  {
+   "project_key": "B2019-00276"
+  },
+  {
+   "project_key": "B2019-00281"
+  },
+  {
+   "project_key": "B2019-00301"
+  },
+  {
+   "project_key": "B2023-00589"
+  },
+  {
+   "project_key": "B2023-00606"
+  },
+  {
+   "project_key": "B2023-00762"
+  },
+  {
+   "project_key": "B2023-01058"
+  },
+  {
+   "project_key": "B2023-01199"
+  },
+  {
+   "project_key": "B2023-01505"
+  },
+  {
+   "project_key": "ZP2020-0090"
+  },
+  {
+   "project_key": "ZP2020-0096"
+  },
+  {
+   "project_key": "ZP2020-0102",
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "ground level commercial",
+    "source": "ZP2020-0102"
+   }
+  },
+  {
+   "project_key": "ZP2020-0104",
+   "commercial_sqft": {
+    "value": 5500,
+    "quote": "5,500 square feet of commercial area",
+    "source": "ZP2020-0104"
+   },
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "ground level commercial",
+    "source": "PLN2022-0039"
+   }
+  },
+  {
+   "project_key": "ZP2020-0115"
+  },
+  {
+   "project_key": "ZP2020-0123"
+  },
+  {
+   "project_key": "UP2013-0016"
+  },
+  {
+   "project_key": "UP2013-0034"
+  },
+  {
+   "project_key": "UP2013-0043",
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "retail floor area",
+    "source": "UP2013-0043"
+   }
+  },
+  {
+   "project_key": "UP2013-0046"
+  },
+  {
+   "project_key": "UP2013-0061",
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "commercial floor area",
+    "source": "B2016-03471"
+   }
+  },
+  {
+   "project_key": "UP2014-0012"
+  },
+  {
+   "project_key": "B2020-03820"
+  },
+  {
+   "project_key": "B2020-03895"
+  },
+  {
+   "project_key": "B2020-03973"
+  },
+  {
+   "project_key": "B2020-03985",
+   "tenure_stated": {
+    "value": "rental",
+    "quote": "habitable short term rental space",
+    "source": "B2020-03985"
+   }
+  },
+  {
+   "project_key": "B2020-04057"
+  },
+  {
+   "project_key": "B2020-04067"
+  },
+  {
+   "project_key": "PLN2026-0156",
+   "commercial_uses": {
+    "value": [
+     "medical office"
+    ],
+    "quote": "maintaining the existing medical office use on the ground floor",
+    "source": "PLN2026-0156"
+   }
+  },
+  {
+   "project_key": "PLN2026-0159"
+  },
+  {
+   "project_key": "PLN2026-0161"
+  },
+  {
+   "project_key": "PLN2026-0162"
+  },
+  {
+   "project_key": "PLN2026-0166"
+  },
+  {
+   "project_key": "PLN2026-0175"
+  },
+  {
+   "project_key": "AUP2006-0040"
+  },
+  {
+   "project_key": "AUP2006-0061"
+  },
+  {
+   "project_key": "AUP2006-0086"
+  },
+  {
+   "project_key": "AUP2007-0035"
+  },
+  {
+   "project_key": "AUP2007-0062"
+  },
+  {
+   "project_key": "AUP2007-0089"
+  },
+  {
+   "project_key": "B2017-02860"
+  },
+  {
+   "project_key": "B2017-02864"
+  },
+  {
+   "project_key": "B2017-02961"
+  },
+  {
+   "project_key": "B2017-03013"
+  },
+  {
+   "project_key": "B2017-03153"
+  },
+  {
+   "project_key": "B2017-03179"
+  },
+  {
+   "project_key": "B2018-03587"
+  },
+  {
+   "project_key": "B2018-03598"
+  },
+  {
+   "project_key": "B2018-03653",
+   "commercial_sqft": {
+    "value": 845,
+    "quote": "Conversion of 845 SF commercial space into residential.",
+    "source": "B2018-03653"
+   },
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "Conversion of 845 SF commercial space into residential.",
+    "source": "B2018-03653"
+   }
+  },
+  {
+   "project_key": "B2018-03725"
+  },
+  {
+   "project_key": "B2018-03850"
+  },
+  {
+   "project_key": "B2018-03979"
+  },
+  {
+   "project_key": "PLN2020-0001",
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "27 residential units over commercial and parking",
+    "source": "PLN2020-0001"
+   }
+  },
+  {
+   "project_key": "PLN2021-0036",
+   "commercial_sqft": {
+    "value": 800,
+    "quote": "800 SF of commercial",
+    "source": "PLN2021-0036"
+   },
+   "commercial_uses": {
+    "value": [
+     "offices",
+     "commercial"
+    ],
+    "quote": "church entry and offices, 800 SF of commercial",
+    "source": "PLN2021-0036"
+   },
+   "tenure_stated": {
+    "value": "rental",
+    "quote": "50 affordable rental apartments",
+    "source": "B2024-01268"
+   }
+  },
+  {
+   "project_key": "PLN2021-0037"
+  },
+  {
+   "project_key": "PLN2021-0063",
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "ground-floor commercial",
+    "source": "PLN2021-0063"
+   }
+  },
+  {
+   "project_key": "PLN2022-0026",
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "lobbies, commercial and parking",
+    "source": "PLN2022-0026"
+   }
+  },
+  {
+   "project_key": "PLN2022-0052"
+  },
+  {
+   "project_key": "B2021-02542"
+  },
+  {
+   "project_key": "B2021-02612"
+  },
+  {
+   "project_key": "B2021-02621"
+  },
+  {
+   "project_key": "B2021-02706"
+  },
+  {
+   "project_key": "B2021-02985"
+  },
+  {
+   "project_key": "B2021-03009"
+  },
+  {
+   "project_key": "ZP2015-0209",
+   "commercial_sqft": {
+    "value": 2400,
+    "quote": "construct new 2 story 2,400 commercial building",
+    "source": "DRSL2016-0005"
+   }
+  },
+  {
+   "project_key": "ZP2015-0226"
+  },
+  {
+   "project_key": "ZP2015-0229",
+   "commercial_uses": {
+    "value": [
+     "retail",
+     "caf\u00e9"
+    ],
+    "quote": "4 storied of apartments over ground floor retail/caf\u00e9",
+    "source": "ZP2015-0229"
+   }
+  },
+  {
+   "project_key": "ZP2015-0233"
+  },
+  {
+   "project_key": "ZP2015-0234"
+  },
+  {
+   "project_key": "ZP2015-0246"
+  },
+  {
+   "project_key": "B2018-04874"
+  },
+  {
+   "project_key": "B2018-04967"
+  },
+  {
+   "project_key": "B2018-04990"
+  },
+  {
+   "project_key": "B2018-05064"
+  },
+  {
+   "project_key": "B2018-05070"
+  },
+  {
+   "project_key": "B2018-05107"
+  },
+  {
+   "project_key": "B2020-00688"
+  },
+  {
+   "project_key": "B2020-00781"
+  },
+  {
+   "project_key": "B2020-00794"
+  },
+  {
+   "project_key": "B2020-00799"
+  },
+  {
+   "project_key": "B2020-00943"
+  },
+  {
+   "project_key": "B2020-01013"
+  },
+  {
+   "project_key": "B2024-03840"
+  },
+  {
+   "project_key": "B2024-03873"
+  },
+  {
+   "project_key": "B2024-04001"
+  },
+  {
+   "project_key": "B2024-04037"
+  },
+  {
+   "project_key": "B2024-04040"
+  },
+  {
+   "project_key": "B2024-04170"
+  },
+  {
+   "project_key": "PLN2017-0039",
+   "commercial_uses": {
+    "value": [
+     "retail",
+     "office"
+    ],
+    "quote": "retail and office within existing building envelope",
+    "source": "PLN2017-0039"
+   }
+  },
+  {
+   "project_key": "PLN2017-0063"
+  },
+  {
+   "project_key": "PLN2018-0048",
+   "commercial_uses": {
+    "value": [
+     "community spaces",
+     "supportive services"
+    ],
+    "quote": "affordable permanent housing, transitional housing, temporary housing, City of Berkeley public parking, community spaces, and supportive services",
+    "source": "DRCP2017-0013"
+   }
+  },
+  {
+   "project_key": "PLN2019-0018"
+  },
+  {
+   "project_key": "PLN2019-0033"
+  },
+  {
+   "project_key": "PLN2019-0059",
+   "commercial_uses": {
+    "value": [
+     "commercial tenant space"
+    ],
+    "quote": "commercial tenant space",
+    "source": "B2021-02905"
+   },
+   "tenure_stated": {
+    "value": "rental",
+    "quote": "87 affordable rental units",
+    "source": "B2021-02905"
+   }
+  },
+  {
+   "project_key": "ZP2017-0174"
+  },
+  {
+   "project_key": "ZP2017-0177"
+  },
+  {
+   "project_key": "ZP2017-0179",
+   "commercial_uses": {
+    "value": [
+     "commercial use",
+     "commercial office space"
+    ],
+    "quote": "Front Building first floor is existing permitted commercial use and the second story is a permitted dwelling unit and commercial office space.",
+    "source": "B2018-02288"
+   }
+  },
+  {
+   "project_key": "ZP2017-0181"
+  },
+  {
+   "project_key": "ZP2017-0186"
+  },
+  {
+   "project_key": "ZP2017-0188"
+  },
+  {
+   "project_key": "B2025-02231"
+  },
+  {
+   "project_key": "B2025-02280"
+  },
+  {
+   "project_key": "B2025-02284"
+  },
+  {
+   "project_key": "B2025-02286"
+  },
+  {
+   "project_key": "B2025-02289"
+  },
+  {
+   "project_key": "B2025-02295"
+  },
+  {
+   "project_key": "B2026-01077"
+  },
+  {
+   "project_key": "B2026-01609"
+  },
+  {
+   "project_key": "DRCP2017-0005",
+   "commercial_spaces": {
+    "value": 5,
+    "quote": "5 new arts and crafts studios",
+    "source": "DRCP2017-0005"
+   },
+   "commercial_uses": {
+    "value": [
+     "arts and crafts studios"
+    ],
+    "quote": "5 new arts and crafts studios",
+    "source": "DRCP2017-0005"
+   }
+  },
+  {
+   "project_key": "DRCP2019-0008",
+   "commercial_spaces": {
+    "value": 6,
+    "quote": "6 live work",
+    "source": "DRCP2019-0008"
+   },
+   "commercial_uses": {
+    "value": [
+     "live work"
+    ],
+    "quote": "6 live work",
+    "source": "DRCP2019-0008"
+   }
+  },
+  {
+   "project_key": "DRCP2020-0004",
+   "commercial_spaces": {
+    "value": 12,
+    "quote": "12 artist studios",
+    "source": "DRCP2020-0004"
+   },
+   "commercial_uses": {
+    "value": [
+     "artist studios",
+     "R&D space",
+     "fabrication shop",
+     "art gallery",
+     "live/work unit"
+    ],
+    "quote": "12 artist studios, R&D space, a fabrication shop, art gallery and one live/work unit",
+    "source": "DRCP2020-0004"
+   }
+  },
+  {
+   "project_key": "DRCP2022-0005"
+  },
+  {
+   "project_key": "ZP2020-0052"
+  },
+  {
+   "project_key": "ZP2020-0058"
+  },
+  {
+   "project_key": "ZP2020-0060"
+  },
+  {
+   "project_key": "ZP2020-0069",
+   "commercial_sqft": {
+    "value": 5666,
+    "quote": "5,666 square feet of commercial space",
+    "source": "ZP2020-0069"
+   }
+  },
+  {
+   "project_key": "ZP2020-0072",
+   "tenure_stated": {
+    "value": "rental",
+    "quote": "includes 7 rent-controlled units",
+    "source": "ZP2020-0072"
+   }
+  },
+  {
+   "project_key": "ZP2020-0075",
+   "commercial_sqft": {
+    "value": 2380,
+    "quote": "Convert existing 2,380 sq. ft. commercial space",
+    "source": "ZP2020-0075"
+   },
+   "commercial_spaces": {
+    "value": 2,
+    "quote": "two (2) existing offices",
+    "source": "ZP2020-0075"
+   },
+   "commercial_uses": {
+    "value": [
+     "offices"
+    ],
+    "quote": "two (2) existing offices",
+    "source": "ZP2020-0075"
+   }
+  },
+  {
+   "project_key": "PLN2026-0180"
+  },
+  {
+   "project_key": "PLN2026-0185"
+  },
+  {
+   "project_key": "PLN2026-0187"
+  },
+  {
+   "project_key": "UP2006-0072"
+  },
+  {
+   "project_key": "UP2006-0109",
+   "commercial_sqft": {
+    "value": 1500,
+    "quote": "1500 sq. ft. restaurant",
+    "source": "B2016-03011"
+   },
+   "commercial_uses": {
+    "value": [
+     "restaurant",
+     "live-work units"
+    ],
+    "quote": "two live-work units & 1500 sq. ft. restaurant",
+    "source": "B2016-03011"
+   },
+   "tenure_stated": {
+    "value": "ownership",
+    "quote": "39 condominium dwelling units",
+    "source": "UP2006-0109"
+   }
+  },
+  {
+   "project_key": "UP2006-0145"
+  },
+  {
+   "project_key": "ZP2017-0014",
+   "commercial_uses": {
+    "value": [
+     "caf\u00e9"
+    ],
+    "quote": "a caf\u00e9",
+    "source": "ZP2017-0014"
+   }
+  },
+  {
+   "project_key": "ZP2017-0015",
+   "commercial_sqft": {
+    "value": 2910,
+    "quote": "approx. 2,910 SF of office space",
+    "source": "ZP2017-0015"
+   },
+   "commercial_uses": {
+    "value": [
+     "office"
+    ],
+    "quote": "office space",
+    "source": "ZP2017-0015"
+   }
+  },
+  {
+   "project_key": "ZP2017-0035",
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "retail space",
+    "source": "DRCP2017-0004"
+   }
+  },
+  {
+   "project_key": "ZP2017-0039",
+   "commercial_uses": {
+    "value": [
+     "commercial arts and crafts live/work units"
+    ],
+    "quote": "5 new 3-story commercial arts and crafts live/work units",
+    "source": "ZP2017-0039"
+   }
+  },
+  {
+   "project_key": "ZP2017-0040"
+  },
+  {
+   "project_key": "ZP2017-0044"
+  },
+  {
+   "project_key": "B2021-01835"
+  },
+  {
+   "project_key": "B2021-01866"
+  },
+  {
+   "project_key": "B2021-01872"
+  },
+  {
+   "project_key": "B2021-01873"
+  },
+  {
+   "project_key": "B2021-01939"
+  },
+  {
+   "project_key": "B2021-01954"
+  },
+  {
+   "project_key": "PLN2025-0075"
+  },
+  {
+   "project_key": "PLN2025-0079"
+  },
+  {
+   "project_key": "PLN2025-0081"
+  },
+  {
+   "project_key": "PLN2025-0101"
+  },
+  {
+   "project_key": "PLN2025-0106"
+  },
+  {
+   "project_key": "PLN2025-0115"
+  },
+  {
+   "project_key": "B2018-02161"
+  },
+  {
+   "project_key": "B2018-02291"
+  },
+  {
+   "project_key": "B2018-02318"
+  },
+  {
+   "project_key": "B2018-02331"
+  },
+  {
+   "project_key": "B2018-02503"
+  },
+  {
+   "project_key": "B2018-02528"
+  },
+  {
+   "project_key": "B2020-01219"
+  },
+  {
+   "project_key": "B2020-01225"
+  },
+  {
+   "project_key": "B2020-01244"
+  },
+  {
+   "project_key": "B2020-01247"
+  },
+  {
+   "project_key": "B2020-01259"
+  },
+  {
+   "project_key": "B2020-01282"
+  },
+  {
+   "project_key": "B2024-04179"
+  },
+  {
+   "project_key": "B2024-04198"
+  },
+  {
+   "project_key": "B2024-04222"
+  },
+  {
+   "project_key": "B2024-04255"
+  },
+  {
+   "project_key": "B2024-04276"
+  },
+  {
+   "project_key": "B2024-04291"
+  },
+  {
+   "project_key": "B2019-01023"
+  },
+  {
+   "project_key": "B2019-01035"
+  },
+  {
+   "project_key": "B2019-01102"
+  },
+  {
+   "project_key": "B2019-01118"
+  },
+  {
+   "project_key": "B2019-01241"
+  },
+  {
+   "project_key": "B2019-01366"
+  },
+  {
+   "project_key": "ZP2015-0018"
+  },
+  {
+   "project_key": "ZP2015-0021"
+  },
+  {
+   "project_key": "ZP2015-0032"
+  },
+  {
+   "project_key": "ZP2015-0036"
+  },
+  {
+   "project_key": "ZP2015-0041"
+  },
+  {
+   "project_key": "ZP2015-0043",
+   "commercial_sqft": {
+    "value": 10870,
+    "quote": "10,870 SF of commercial space",
+    "source": "DRCF2017-0003"
+   }
+  },
+  {
+   "project_key": "ZP2021-0210"
+  },
+  {
+   "project_key": "ZP2021-0211"
+  },
+  {
+   "project_key": "ZP2021-0212"
+  },
+  {
+   "project_key": "ZP2021-0220",
+   "commercial_sqft": {
+    "value": 603,
+    "quote": "603 sq. ft. of retail",
+    "source": "ZP2021-0220"
+   },
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "603 sq. ft. of retail",
+    "source": "ZP2021-0220"
+   }
+  },
+  {
+   "project_key": "ZP2022-0010"
+  },
+  {
+   "project_key": "ZP2022-0011",
+   "commercial_sqft": {
+    "value": 1200,
+    "quote": "1,200 sq.ft. commercial space",
+    "source": "ZP2022-0011"
+   },
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "1,200 sq.ft. commercial space",
+    "source": "ZP2022-0011"
+   }
+  },
+  {
+   "project_key": "B2018-01348"
+  },
+  {
+   "project_key": "B2018-01352"
+  },
+  {
+   "project_key": "B2018-01649"
+  },
+  {
+   "project_key": "B2018-01758"
+  },
+  {
+   "project_key": "B2018-01833"
+  },
+  {
+   "project_key": "B2018-01872"
+  },
+  {
+   "project_key": "B2019-05408"
+  },
+  {
+   "project_key": "B2019-05479"
+  },
+  {
+   "project_key": "B2019-05487"
+  },
+  {
+   "project_key": "B2019-05488"
+  },
+  {
+   "project_key": "B2019-05493"
+  },
+  {
+   "project_key": "B2019-05502",
+   "tenure_stated": {
+    "value": "ownership",
+    "quote": "New Condo \"A\" w/Garage",
+    "source": "B2019-05502"
+   }
+  },
+  {
+   "project_key": "B2021-05291"
+  },
+  {
+   "project_key": "B2021-05304"
+  },
+  {
+   "project_key": "B2021-05315"
+  },
+  {
+   "project_key": "B2021-05343"
+  },
+  {
+   "project_key": "B2021-05365"
+  },
+  {
+   "project_key": "B2021-05366"
+  },
+  {
+   "project_key": "B2018-00936"
+  },
+  {
+   "project_key": "B2018-00955"
+  },
+  {
+   "project_key": "B2018-00964"
+  },
+  {
+   "project_key": "B2018-01022",
+   "commercial_uses": {
+    "value": [
+     "commercial space"
+    ],
+    "quote": "commercial space on the ground floor",
+    "source": "B2018-01022"
+   }
+  },
+  {
+   "project_key": "B2018-01059"
+  },
+  {
+   "project_key": "B2018-01154"
+  },
+  {
+   "project_key": "B2024-04293"
+  },
+  {
+   "project_key": "B2024-04294"
+  },
+  {
+   "project_key": "B2024-04685"
+  },
+  {
+   "project_key": "B2024-04763"
+  },
+  {
+   "project_key": "B2024-04779"
+  },
+  {
+   "project_key": "B2024-04942"
+  },
+  {
+   "project_key": "B2016-05889"
+  },
+  {
+   "project_key": "B2017-00128"
+  },
+  {
+   "project_key": "B2017-00207"
+  },
+  {
+   "project_key": "B2017-00305"
+  },
+  {
+   "project_key": "B2017-00340"
+  },
+  {
+   "project_key": "B2017-00432"
+  },
+  {
+   "project_key": "ZP2021-0186",
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "Construct a 5-story, 40-unit, mixed-use building, with ground-floor commercial.",
+    "source": "PLN2020-0030"
+   }
+  },
+  {
+   "project_key": "ZP2021-0192",
+   "commercial_sqft": {
+    "value": 7799,
+    "quote": "7,799 sq. ft. commercial space",
+    "source": "DRCP2021-0018"
+   },
+   "commercial_uses": {
+    "value": [
+     "restaurant",
+     "bar",
+     "entertainment establishment"
+    ],
+    "quote": "a restaurant, bar, and an entertainment establishment",
+    "source": "ZP2021-0192"
+   }
+  },
+  {
+   "project_key": "ZP2021-0193",
+   "commercial_sqft": {
+    "value": 4993,
+    "quote": "4,993 square feet commercial space",
+    "source": "DRCF2023-0002"
+   }
+  },
+  {
+   "project_key": "ZP2021-0201"
+  },
+  {
+   "project_key": "ZP2021-0206"
+  },
+  {
+   "project_key": "ZP2021-0207"
+  },
+  {
+   "project_key": "B2017-03507"
+  },
+  {
+   "project_key": "B2017-03691"
+  },
+  {
+   "project_key": "B2017-03830"
+  },
+  {
+   "project_key": "B2017-03905"
+  },
+  {
+   "project_key": "B2017-03938"
+  },
+  {
+   "project_key": "B2017-03973"
+  },
+  {
+   "project_key": "ZP2019-0093"
+  },
+  {
+   "project_key": "ZP2019-0096"
+  },
+  {
+   "project_key": "ZP2019-0098"
+  },
+  {
+   "project_key": "ZP2019-0100"
+  },
+  {
+   "project_key": "ZP2019-0104"
+  },
+  {
+   "project_key": "ZP2019-0106"
+  },
+  {
+   "project_key": "PLN2022-0123"
+  },
+  {
+   "project_key": "PLN2023-0005"
+  },
+  {
+   "project_key": "PLN2023-0007"
+  },
+  {
+   "project_key": "PLN2023-0032"
+  },
+  {
+   "project_key": "PLN2023-0057"
+  },
+  {
+   "project_key": "PLN2023-0061"
+  },
+  {
+   "project_key": "B2020-01569"
+  },
+  {
+   "project_key": "B2020-01576"
+  },
+  {
+   "project_key": "B2020-01591"
+  },
+  {
+   "project_key": "B2020-01658"
+  },
+  {
+   "project_key": "B2020-01744"
+  },
+  {
+   "project_key": "B2020-01793"
+  },
+  {
+   "project_key": "ZP2023-0064",
+   "commercial_sqft": {
+    "value": 1552,
+    "quote": "1,552 square feet of ground floor commercial space",
+    "source": "ZP2023-0064"
+   },
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "1552 sq ft of retail space on the ground floor",
+    "source": "PLN2023-0013"
+   }
+  },
+  {
+   "project_key": "ZP2023-0068",
+   "commercial_sqft": {
+    "value": 2500,
+    "quote": "2500 sf of ground-floor commercial space",
+    "source": "ZP2023-0068"
+   },
+   "commercial_uses": {
+    "value": [
+     "live/work units"
+    ],
+    "quote": "residential apartments over ground-floor live/work units",
+    "source": "PLN2023-0014"
+   }
+  },
+  {
+   "project_key": "ZP2023-0070",
+   "commercial_sqft": {
+    "value": 950,
+    "quote": "950 square feet of ground-floor retail",
+    "source": "ZP2023-0070"
+   },
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "950 square feet of ground-floor retail",
+    "source": "ZP2023-0070"
+   }
+  },
+  {
+   "project_key": "ZP2023-0079",
+   "commercial_uses": {
+    "value": [
+     "commercial space"
+    ],
+    "quote": "ground level lobbies, commercial space, and parking",
+    "source": "ZP2023-0079"
+   }
+  },
+  {
+   "project_key": "ZP2023-0089"
+  },
+  {
+   "project_key": "ZP2023-0090",
+   "commercial_sqft": {
+    "value": 1543,
+    "quote": "1543 sf commercial space",
+    "source": "PLN2023-0092"
+   },
+   "commercial_uses": {
+    "value": [
+     "commercial space"
+    ],
+    "quote": "ground level lobby, club room and commercial space",
+    "source": "PLN2022-0114"
+   }
+  },
+  {
+   "project_key": "ZP2016-0174"
+  },
+  {
+   "project_key": "ZP2016-0179"
+  },
+  {
+   "project_key": "ZP2016-0184"
+  },
+  {
+   "project_key": "ZP2016-0188"
+  },
+  {
+   "project_key": "ZP2016-0190"
+  },
+  {
+   "project_key": "ZP2016-0194"
+  },
+  {
+   "project_key": "B2018-02534"
+  },
+  {
+   "project_key": "B2018-02645"
+  },
+  {
+   "project_key": "B2018-02733"
+  },
+  {
+   "project_key": "B2018-02818"
+  },
+  {
+   "project_key": "B2018-03006"
+  },
+  {
+   "project_key": "B2018-03127"
+  },
+  {
+   "project_key": "B2021-05070"
+  },
+  {
+   "project_key": "B2021-05113"
+  },
+  {
+   "project_key": "B2021-05114"
+  },
+  {
+   "project_key": "B2021-05139"
+  },
+  {
+   "project_key": "B2021-05189"
+  },
+  {
+   "project_key": "B2021-05201"
+  },
+  {
+   "project_key": "B2025-03880"
+  },
+  {
+   "project_key": "B2025-04070"
+  },
+  {
+   "project_key": "B2025-04153"
+  },
+  {
+   "project_key": "B2025-04343"
+  },
+  {
+   "project_key": "B2025-04535"
+  },
+  {
+   "project_key": "B2025-04746",
+   "commercial_uses": {
+    "value": [
+     "office"
+    ],
+    "quote": "existing 2-story office condo into live/work residence",
+    "source": "B2025-04746"
+   }
+  },
+  {
+   "project_key": "ZP2019-0113"
+  },
+  {
+   "project_key": "ZP2019-0118"
+  },
+  {
+   "project_key": "ZP2019-0119"
+  },
+  {
+   "project_key": "ZP2019-0124"
+  },
+  {
+   "project_key": "ZP2019-0130"
+  },
+  {
+   "project_key": "ZP2019-0138"
+  },
+  {
+   "project_key": "B2024-05121"
+  },
+  {
+   "project_key": "B2024-05122"
+  },
+  {
+   "project_key": "B2024-05176"
+  },
+  {
+   "project_key": "B2024-05185"
+  },
+  {
+   "project_key": "B2024-05217"
+  },
+  {
+   "project_key": "B2024-05549"
+  },
+  {
+   "project_key": "ZP2019-0059"
+  },
+  {
+   "project_key": "ZP2019-0061"
+  },
+  {
+   "project_key": "ZP2019-0066"
+  },
+  {
+   "project_key": "ZP2019-0070",
+   "commercial_uses": {
+    "value": [
+     "commercial space"
+    ],
+    "quote": "ground floor lobbies and commercial space",
+    "source": "ZP2019-0070"
+   }
+  },
+  {
+   "project_key": "ZP2019-0074"
+  },
+  {
+   "project_key": "ZP2019-0081",
+   "commercial_uses": {
+    "value": [
+     "retail",
+     "commercial space"
+    ],
+    "quote": "ground floor retail/commercial space",
+    "source": "B2021-03950"
+   }
+  },
+  {
+   "project_key": "ZP2019-0006"
+  },
+  {
+   "project_key": "ZP2019-0009"
+  },
+  {
+   "project_key": "ZP2019-0013"
+  },
+  {
+   "project_key": "ZP2019-0014"
+  },
+  {
+   "project_key": "ZP2019-0015"
+  },
+  {
+   "project_key": "ZP2019-0020"
+  },
+  {
+   "project_key": "B2020-04073"
+  },
+  {
+   "project_key": "B2020-04102"
+  },
+  {
+   "project_key": "B2020-04134"
+  },
+  {
+   "project_key": "B2020-04188"
+  },
+  {
+   "project_key": "B2020-04207"
+  },
+  {
+   "project_key": "B2020-04225"
+  },
+  {
+   "project_key": "ZP2015-0090",
+   "commercial_uses": {
+    "value": [
+     "restaurants"
+    ],
+    "quote": "maintaining the existing restaurants at the ground level",
+    "source": "ZP2015-0090"
+   }
+  },
+  {
+   "project_key": "ZP2015-0096",
+   "commercial_sqft": {
+    "value": 2679,
+    "quote": "76 dwelling units above 2,679 sq. ft.. of retail space",
+    "source": "ZP2015-0096"
+   },
+   "commercial_uses": {
+    "value": [
+     "retail",
+     "live/work"
+    ],
+    "quote": "2,679 sq. ft.. of retail space and 2 live/work units",
+    "source": "ZP2015-0096"
+   }
+  },
+  {
+   "project_key": "ZP2015-0098"
+  },
+  {
+   "project_key": "ZP2015-0099"
+  },
+  {
+   "project_key": "ZP2015-0103"
+  },
+  {
+   "project_key": "ZP2015-0112"
+  },
+  {
+   "project_key": "B2018-04616"
+  },
+  {
+   "project_key": "B2018-04710"
+  },
+  {
+   "project_key": "B2018-04738"
+  },
+  {
+   "project_key": "B2018-04808"
+  },
+  {
+   "project_key": "B2018-04819"
+  },
+  {
+   "project_key": "B2018-04829"
+  },
+  {
+   "project_key": "B2022-02658"
+  },
+  {
+   "project_key": "B2022-02710"
+  },
+  {
+   "project_key": "B2022-02784"
+  },
+  {
+   "project_key": "B2022-02804"
+  },
+  {
+   "project_key": "B2022-02837"
+  },
+  {
+   "project_key": "B2022-02844"
+  },
+  {
+   "project_key": "PLN2022-0066",
+   "commercial_sqft": {
+    "value": 1811,
+    "quote": "commercial space (1,811 sq. ft.)",
+    "source": "PLN2022-0066"
+   }
+  },
+  {
+   "project_key": "PLN2022-0067",
+   "commercial_uses": {
+    "value": [
+     "LIVE THEATER"
+    ],
+    "quote": "MIXED-USED BUILDING - LIVE THEATER AND 214 RESIDENTIAL DWELLING UNITS",
+    "source": "PLN2022-0067"
+   }
+  },
+  {
+   "project_key": "PLN2022-0076"
+  },
+  {
+   "project_key": "PLN2022-0078"
+  },
+  {
+   "project_key": "PLN2022-0083"
+  },
+  {
+   "project_key": "PLN2022-0087"
+  },
+  {
+   "project_key": "B2018-03427"
+  },
+  {
+   "project_key": "B2018-03476"
+  },
+  {
+   "project_key": "B2018-03492"
+  },
+  {
+   "project_key": "B2018-03576"
+  },
+  {
+   "project_key": "B2018-03577"
+  },
+  {
+   "project_key": "B2018-03582"
+  },
+  {
+   "project_key": "B2020-02188"
+  },
+  {
+   "project_key": "B2020-02202"
+  },
+  {
+   "project_key": "B2020-02394",
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "(E) ground floor commercial spaces",
+    "source": "B2020-02394"
+   }
+  },
+  {
+   "project_key": "B2020-02422"
+  },
+  {
+   "project_key": "B2020-02423"
+  },
+  {
+   "project_key": "B2020-02428"
+  },
+  {
+   "project_key": "ZCBP2015-1557"
+  },
+  {
+   "project_key": "ZCBP2015-1685"
+  },
+  {
+   "project_key": "ZCBP2015-1705"
+  },
+  {
+   "project_key": "ZCBP2015-1746"
+  },
+  {
+   "project_key": "ZCBP2015-1754"
+  },
+  {
+   "project_key": "ZCBP2016-0060"
+  },
+  {
+   "project_key": "B2022-00482"
+  },
+  {
+   "project_key": "B2022-00662"
+  },
+  {
+   "project_key": "B2022-00713"
+  },
+  {
+   "project_key": "B2022-00877"
+  },
+  {
+   "project_key": "B2022-00935"
+  },
+  {
+   "project_key": "B2022-00960"
+  },
+  {
+   "project_key": "B2020-04271"
+  },
+  {
+   "project_key": "B2020-04419"
+  },
+  {
+   "project_key": "B2020-04459"
+  },
+  {
+   "project_key": "B2020-04487"
+  },
+  {
+   "project_key": "B2020-04505"
+  },
+  {
+   "project_key": "B2020-04509"
+  },
+  {
+   "project_key": "B2019-05503",
+   "tenure_stated": {
+    "value": "ownership",
+    "quote": "New Condo w/attached Garage",
+    "source": "B2019-05503"
+   }
+  },
+  {
+   "project_key": "B2019-05530"
+  },
+  {
+   "project_key": "B2019-05540"
+  },
+  {
+   "project_key": "B2019-05628"
+  },
+  {
+   "project_key": "B2019-05629"
+  },
+  {
+   "project_key": "B2020-00013"
+  },
+  {
+   "project_key": "B2021-01330"
+  },
+  {
+   "project_key": "B2021-01332"
+  },
+  {
+   "project_key": "B2021-01398"
+  },
+  {
+   "project_key": "B2021-01404"
+  },
+  {
+   "project_key": "B2021-01537"
+  },
+  {
+   "project_key": "B2021-01552"
+  },
+  {
+   "project_key": "B2021-00336"
+  },
+  {
+   "project_key": "B2021-00369"
+  },
+  {
+   "project_key": "B2021-00448"
+  },
+  {
+   "project_key": "B2021-00455"
+  },
+  {
+   "project_key": "B2021-00470"
+  },
+  {
+   "project_key": "B2021-00565"
+  },
+  {
+   "project_key": "B2020-01020"
+  },
+  {
+   "project_key": "B2020-01025",
+   "commercial_uses": {
+    "value": [
+     "office"
+    ],
+    "quote": "To be used as office",
+    "source": "B2020-01025"
+   }
+  },
+  {
+   "project_key": "B2020-01030"
+  },
+  {
+   "project_key": "B2020-01040"
+  },
+  {
+   "project_key": "B2020-01052"
+  },
+  {
+   "project_key": "B2020-01103"
+  },
+  {
+   "project_key": "ZP2018-0122"
+  },
+  {
+   "project_key": "ZP2018-0128"
+  },
+  {
+   "project_key": "ZP2018-0134"
+  },
+  {
+   "project_key": "ZP2018-0135"
+  },
+  {
+   "project_key": "ZP2018-0136"
+  },
+  {
+   "project_key": "ZP2018-0137",
+   "commercial_sqft": {
+    "value": 5000,
+    "quote": "5,000 sq.ft. of commercial space",
+    "source": "DRCF2021-0006"
+   },
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "ground floor retail",
+    "source": "ZP2018-0137"
+   },
+   "tenure_stated": {
+    "value": "rental",
+    "quote": "156 rental units and ground floor retail",
+    "source": "ZP2018-0137"
+   }
+  },
+  {
+   "project_key": "B2024-02286"
+  },
+  {
+   "project_key": "B2024-02377"
+  },
+  {
+   "project_key": "B2024-02435"
+  },
+  {
+   "project_key": "B2024-02444"
+  },
+  {
+   "project_key": "B2024-02481"
+  },
+  {
+   "project_key": "B2024-02487"
+  },
+  {
+   "project_key": "B2019-02517"
+  },
+  {
+   "project_key": "B2019-02641"
+  },
+  {
+   "project_key": "B2019-02673"
+  },
+  {
+   "project_key": "B2019-02700"
+  },
+  {
+   "project_key": "B2019-02804"
+  },
+  {
+   "project_key": "B2019-02831"
+  },
+  {
+   "project_key": "B2019-00401"
+  },
+  {
+   "project_key": "B2019-00439"
+  },
+  {
+   "project_key": "B2019-00524"
+  },
+  {
+   "project_key": "B2019-00584"
+  },
+  {
+   "project_key": "B2019-00717"
+  },
+  {
+   "project_key": "B2019-00801"
+  },
+  {
+   "project_key": "ZP2019-0022"
+  },
+  {
+   "project_key": "ZP2019-0026"
+  },
+  {
+   "project_key": "ZP2019-0027",
+   "commercial_sqft": {
+    "value": 20000,
+    "quote": "approximately 20,000 sq. ft. of ground floor commercial space",
+    "source": "ZP2019-0027"
+   },
+   "commercial_uses": {
+    "value": [
+     "commercial",
+     "retail"
+    ],
+    "quote": "169 units of market rate housing and ground floor retail/commercial space.",
+    "source": "B2021-00008"
+   }
+  },
+  {
+   "project_key": "ZP2019-0029"
+  },
+  {
+   "project_key": "ZP2019-0032"
+  },
+  {
+   "project_key": "ZP2019-0034"
+  },
+  {
+   "project_key": "B2023-02897"
+  },
+  {
+   "project_key": "B2023-02996"
+  },
+  {
+   "project_key": "B2023-03018"
+  },
+  {
+   "project_key": "B2023-03106"
+  },
+  {
+   "project_key": "B2023-03115"
+  },
+  {
+   "project_key": "B2023-03241"
+  },
+  {
+   "project_key": "PLN2026-0034"
+  },
+  {
+   "project_key": "PLN2026-0039"
+  },
+  {
+   "project_key": "PLN2026-0047"
+  },
+  {
+   "project_key": "PLN2026-0048"
+  },
+  {
+   "project_key": "PLN2026-0049"
+  },
+  {
+   "project_key": "PLN2026-0058"
+  },
+  {
+   "project_key": "B2023-02101"
+  },
+  {
+   "project_key": "B2023-02152"
+  },
+  {
+   "project_key": "B2023-02425"
+  },
+  {
+   "project_key": "B2023-02556"
+  },
+  {
+   "project_key": "B2023-02600"
+  },
+  {
+   "project_key": "B2023-02659"
+  },
+  {
+   "project_key": "ZP2019-0183"
+  },
+  {
+   "project_key": "ZP2019-0192",
+   "commercial_sqft": {
+    "value": 3000,
+    "quote": "3000 SF ground floor retail",
+    "source": "ZP2019-0192"
+   },
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "3000 SF ground floor retail",
+    "source": "ZP2019-0192"
+   }
+  },
+  {
+   "project_key": "ZP2019-0193"
+  },
+  {
+   "project_key": "ZP2019-0203"
+  },
+  {
+   "project_key": "ZP2019-0211"
+  },
+  {
+   "project_key": "ZP2019-0212"
+  },
+  {
+   "project_key": "B2017-01227"
+  },
+  {
+   "project_key": "B2017-01320"
+  },
+  {
+   "project_key": "B2017-01399"
+  },
+  {
+   "project_key": "B2017-01506"
+  },
+  {
+   "project_key": "B2017-01520"
+  },
+  {
+   "project_key": "B2017-01609"
+  },
+  {
+   "project_key": "ZP2024-0070"
+  },
+  {
+   "project_key": "ZP2024-0071",
+   "commercial_uses": {
+    "value": [
+     "retail"
+    ],
+    "quote": "ground level retail space",
+    "source": "ZP2024-0071"
+   }
+  },
+  {
+   "project_key": "ZP2024-0074",
+   "commercial_sqft": {
+    "value": 1788,
+    "quote": "1788 sq ft of commercial space",
+    "source": "ZP2024-0074"
+   }
+  },
+  {
+   "project_key": "ZP2024-0075",
+   "commercial_sqft": {
+    "value": 3873,
+    "quote": "3,873 commercial floor area",
+    "source": "ZP2024-0075"
+   }
+  },
+  {
+   "project_key": "ZP2024-0076",
+   "commercial_sqft": {
+    "value": 1244,
+    "quote": "1,244 sf commercial space",
+    "source": "ZP2024-0076"
+   }
+  },
+  {
+   "project_key": "ZP2024-0077",
+   "commercial_sqft": {
+    "value": 2503,
+    "quote": "2,503 sq ft commercial space",
+    "source": "ZP2024-0077"
+   }
+  },
+  {
+   "project_key": "B2019-00805"
+  },
+  {
+   "project_key": "B2019-00838"
+  },
+  {
+   "project_key": "B2019-00843"
+  },
+  {
+   "project_key": "B2019-00959"
+  },
+  {
+   "project_key": "B2019-00961"
+  },
+  {
+   "project_key": "B2019-00978"
+  },
+  {
+   "project_key": "ZP2023-0046"
+  },
+  {
+   "project_key": "ZP2023-0057"
+  },
+  {
+   "project_key": "ZP2023-0058",
+   "commercial_sqft": {
+    "value": 1244,
+    "quote": "1,244 square feet of commercial space",
+    "source": "ZP2023-0058"
+   },
+   "commercial_uses": {
+    "value": [
+     "commercial space"
+    ],
+    "quote": "1,244 square feet of commercial space",
+    "source": "ZP2023-0058"
+   }
+  },
+  {
+   "project_key": "ZP2023-0059"
+  },
+  {
+   "project_key": "ZP2023-0060"
+  },
+  {
+   "project_key": "ZP2023-0063",
+   "tenure_stated": {
+    "value": "ownership",
+    "quote": "Subdivision Homeownership project",
+    "source": "PLN2025-0050"
+   }
+  },
+  {
+   "project_key": "ZP2016-0050"
+  },
+  {
+   "project_key": "ZP2016-0053"
+  },
+  {
+   "project_key": "ZP2016-0054"
+  },
+  {
+   "project_key": "ZP2016-0062"
+  },
+  {
+   "project_key": "ZP2016-0066"
+  },
+  {
+   "project_key": "ZP2016-0068"
+  },
+  {
+   "project_key": "B2023-04863"
+  },
+  {
+   "project_key": "B2023-04866"
+  },
+  {
+   "project_key": "B2023-04951"
+  },
+  {
+   "project_key": "B2023-04985"
+  },
+  {
+   "project_key": "B2023-05114"
+  },
+  {
+   "project_key": "B2023-05179"
+  },
+  {
+   "project_key": "B2022-04111"
+  },
+  {
+   "project_key": "B2022-04122"
+  },
+  {
+   "project_key": "B2022-04181"
+  },
+  {
+   "project_key": "B2022-04253"
+  },
+  {
+   "project_key": "B2022-04367"
+  },
+  {
+   "project_key": "B2022-04483"
+  },
+  {
+   "project_key": "ZP2023-0138",
+   "commercial_sqft": {
+    "value": 3247,
+    "quote": "3,247 square feet of commercial space (including three live/work units )",
+    "source": "ZP2023-0138"
+   },
+   "commercial_spaces": {
+    "value": 2,
+    "quote": "2 commercial spaces",
+    "source": "DRCP2023-0015"
+   },
+   "commercial_uses": {
+    "value": [
+     "commercial space",
+     "live/work units"
+    ],
+    "quote": "3,247 square feet of commercial space (including three live/work units )",
+    "source": "ZP2023-0138"
+   }
+  },
+  {
+   "project_key": "ZP2023-0154",
+   "commercial_uses": {
+    "value": [
+     "commercial use"
+    ],
+    "quote": "the nonconforming commercial use on the ground floor",
+    "source": "ZP2023-0154"
+   }
+  },
+  {
+   "project_key": "ZP2023-0163",
+   "commercial_spaces": {
+    "value": 1,
+    "quote": "1 commercial space",
+    "source": "ZP2023-0163"
+   },
+   "commercial_uses": {
+    "value": [
+     "commercial space",
+     "live-work units"
+    ],
+    "quote": "4 live-work units, 1 commercial space and ground level lobby",
+    "source": "ZP2023-0163"
+   }
+  },
+  {
+   "project_key": "ZP2024-0008"
+  },
+  {
+   "project_key": "ZP2024-0011"
+  },
+  {
+   "project_key": "ZP2024-0014"
+  },
+  {
+   "project_key": "ZP2018-0180"
+  },
+  {
+   "project_key": "ZP2018-0182"
+  },
+  {
+   "project_key": "ZP2018-0183"
+  },
+  {
+   "project_key": "ZP2018-0189",
+   "commercial_uses": {
+    "value": [
+     "commercial"
+    ],
+    "quote": "legal non-confirming ground floor commercial space",
+    "source": "ZP2018-0189"
+   }
+  },
+  {
+   "project_key": "ZP2018-0193"
+  },
+  {
+   "project_key": "ZP2018-0194"
+  },
+  {
+   "project_key": "B2025-01253"
+  },
+  {
+   "project_key": "B2025-01272"
+  },
+  {
+   "project_key": "B2025-01379"
+  },
+  {
+   "project_key": "B2025-01411"
+  },
+  {
+   "project_key": "B2025-01432"
+  },
+  {
+   "project_key": "B2025-01487"
+  },
+  {
+   "project_key": "B2020-03174"
+  },
+  {
+   "project_key": "B2020-03209"
+  },
+  {
+   "project_key": "B2020-03244"
+  },
+  {
+   "project_key": "B2020-03267"
+  },
+  {
+   "project_key": "B2020-03292"
+  },
+  {
+   "project_key": "B2020-03294"
+  },
+  {
+   "project_key": "ZP2016-0223"
+  },
+  {
+   "project_key": "ZP2016-0227"
+  },
+  {
+   "project_key": "ZP2016-0232"
+  },
+  {
+   "project_key": "ZP2016-0237"
+  },
+  {
+   "project_key": "ZP2016-0240"
+  },
+  {
+   "project_key": "ZP2016-0244",
+   "commercial_sqft": {
+    "value": 600,
+    "quote": "approximately 600 square feet commercial spaces",
+    "source": "ZP2016-0244"
+   },
+   "tenure_stated": {
+    "value": "rental",
+    "quote": "For rent apartment units over a parking garage",
+    "source": "DRCF2020-0004"
+   }
+  },
+  {
+   "project_key": "AUP2014-0076"
+  },
+  {
+   "project_key": "AUP2014-0084"
+  },
+  {
+   "project_key": "B2006-03740"
+  },
+  {
+   "project_key": "B2011-04803"
+  },
+  {
+   "project_key": "B2013-05098"
+  },
+  {
+   "project_key": "B2013-06041"
+  }
+ ]
+}

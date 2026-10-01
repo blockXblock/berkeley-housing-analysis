@@ -71,7 +71,8 @@ COMPAT_VIEW = """
 CREATE TEMP VIEW v_projects_flat AS
 SELECT project_key AS project_id, address_display,
        CASE WHEN n_buildings > 0 THEN units_built_or_permitted ELSE proposed_units END AS total_units,
-       vli_units, status AS status_code, filed_date, entitled_date, bp_issued_date, co_issued_date,
+       eli_units, vli_units, li_units, mod_units, adu_units,
+       status AS status_code, filed_date, entitled_date, bp_issued_date, co_issued_date,
        owner_current AS developer, NULL AS architect, rhna_excluded
 FROM v_projects"""
 
@@ -209,6 +210,26 @@ def generate_table_a2(conn, year):
         }
     }
 
+def credit_by_tier(conn, year):
+    """6th-cycle permitted units by RHNA income tier, through the reporting year (John, 2026-10-01).
+    Non-ADU units: the SOURCED affordability ledger (ELI is reported within Very Low, as HCD's Table B does); the rest
+    above moderate. ADU units: ABAG 30/30/30/10, a labelled assumption."""
+    row = conn.execute('''
+        SELECT SUM(COALESCE(eli_units,0) + COALESCE(vli_units,0)), SUM(COALESCE(li_units,0)), SUM(COALESCE(mod_units,0)),
+               SUM(total_units), SUM(adu_units)
+        FROM v_projects_flat
+        WHERE bp_issued_date >= '2022-06-30' AND bp_issued_date <= ? AND ''' + UC_EXCLUDE, (f"{year}-12-31",)).fetchone()
+    vli, li, mod, total, adu = (x or 0 for x in row)
+    a_vli, a_li, a_mod = round(adu * 0.30), round(adu * 0.30), round(adu * 0.30)
+    a_above = adu - a_vli - a_li - a_mod
+    non_adu_above = total - adu - vli - li - mod
+    return {"very_low": vli + a_vli, "low": li + a_li, "moderate": mod + a_mod,
+            "above_moderate": non_adu_above + a_above, "total": total, "adu_units": adu,
+            "basis": {"non_adu_affordability": "sourced ledger only (corrections/v4/affordability_rulings.csv, approved rows); "
+                                               "units without a sourced tier are above moderate",
+                      "adu_affordability": f"ASSUMED: ABAG 30/30/30/10 split of {adu} ADU units, as the City's APR applies it"}}
+
+
 def generate_table_b(conn, year, adu_count=0):
     """
     Table B: RHNA Progress by Income Level
@@ -224,36 +245,13 @@ def generate_table_b(conn, year, adu_count=0):
     # while the total looked right. Import it; never re-type it.
     rhna_targets = RHNA_ALLOCATIONS["6th"]
 
-    # ADU affordability split (ABAG 30/30/30/10)
-    adu_vli = round(adu_count * 0.30)
-    adu_low = round(adu_count * 0.30)
-    adu_mod = round(adu_count * 0.30)
-    adu_above = adu_count - adu_vli - adu_low - adu_mod
-
-    # Get permitted units - ONLY projects with BP issued (RHNA credit requirement)
-    # V2 MIGRATION: Using v_projects_flat with column aliases
-    cursor.execute('''
-        SELECT
-            SUM(COALESCE(vli_units, 0)) as vli_units,
-            SUM(total_units) as total_units
-        FROM v_projects_flat
-        WHERE bp_issued_date IS NOT NULL AND bp_issued_date != ''
-          AND ''' + UC_EXCLUDE + '''
-    ''')
-    row = cursor.fetchone()
-    bp_vli = row[0] or 0
-    bp_total = row[1] or 0
-
-    # Income breakdown for BP-issued projects:
-    # - VLI: actual vli_units from database
-    # - Low/Moderate: we have no LI or MOD columns for multifamily, so 0
-    # - Above Moderate: total units minus VLI
-    # Then add ADUs with ABAG 30/30/30/10 split
-    vli_permitted = bp_vli + adu_vli
-    low_permitted = adu_low  # No Low Income data from multifamily projects
-    mod_permitted = adu_mod  # No Moderate Income data from multifamily projects
-    above_mod = (bp_total - bp_vli) + adu_above
-    total_permitted = bp_total + adu_count
+    # v4 (John, 2026-10-01): (2) the 6th-cycle window -- first master-permit issuance on/after 2022-06-30 and through
+    # the reporting year, the same rule as the RHNA query; (1) affordability ONLY from the sourced ledger, labelled;
+    # (3) ADUs identified by the CPRA permit's own ADU field and split ABAG 30/30/30/10 as a LABELLED ASSUMPTION, as the
+    # City's APR does. ADUs are counted from the data, never from a --adus argument.
+    t = credit_by_tier(conn, year)
+    vli_permitted, low_permitted, mod_permitted = t["very_low"], t["low"], t["moderate"]
+    above_mod, total_permitted, adu_count = t["above_moderate"], t["total"], t["adu_units"]
 
     income_levels = [
         {
@@ -296,13 +294,16 @@ def generate_table_b(conn, year, adu_count=0):
             "total_permitted": total_permitted,
             "total_rhna": rhna_targets["total"],
             "percent_of_goal": round(total_permitted / rhna_targets["total"] * 100, 1),
-            "adu_count": adu_count
+            "adu_count": adu_count,
+            "window": "first building-permit issuance 2022-06-30 through the reporting year",
+            "affordability_basis": t["basis"],
         }
     }
 
 def generate_developer_summary(conn, year):
     """
-    Supplemental: Developer Summary
+    Supplemental: OWNER OF RECORD Summary (John, 2026-10-01: an owner of record is not a developer -- developers come
+    from their own sourced ledger, still to be built; until then this table says what it actually is)
     Units permitted (BP issued) by developer with affordability breakdown
     """
     cursor = conn.cursor()
@@ -336,7 +337,7 @@ def generate_developer_summary(conn, year):
         })
 
     return {
-        "title": f"Supplemental: Developer Summary Through {year}",
+        "title": f"Supplemental: Owner of Record Summary Through {year} (assessor roll; NOT developers)",
         "description": f"Units permitted by developer for projects with BP issued or CO. NOTE: Stage 1 - density_bonus_projects will be 0.",
         "developers": rows,
         "summary": {
@@ -366,18 +367,11 @@ def generate_rhna_progress(conn, year, adu_count=0):
     # is BP-issued units among TRACKED projects only, NOT Berkeley's full permit stream (the
     # ADU/infill tail isn't modelled as projects). Needs the full-BP-stream acquisition before
     # any public RHNA-progress figure. (2026-06-16)
-    # v4: bp_issued_date IS the first master-permit issuance (v_projects), and UC comes from rhna_excluded.
-    cursor.execute('''
-        SELECT SUM(total_units) as total_units, SUM(COALESCE(vli_units, 0)) as vli_units
-        FROM v_projects_flat
-        WHERE bp_issued_date >= '2022-06-30' AND COALESCE(rhna_excluded, 0) = 0
-    ''')
-    bp_row = cursor.fetchone()
-    bp_issued_units = bp_row[0] or 0
-    bp_issued_vli = bp_row[1] or 0
-
-    # RHNA credit = BP-issued units + ADUs
-    rhna_credit_units = bp_issued_units + adu_count
+    # v4 (John, 2026-10-01): the SAME tier function as Table B, so the two can never disagree; ADUs are already in the
+    # units (every CPRA permit is a building) and their tiers are the labelled ABAG assumption.
+    t = credit_by_tier(conn, year)
+    bp_issued_units, bp_issued_vli, adu_count = t["total"], t["very_low"], t["adu_units"]
+    rhna_credit_units = bp_issued_units
     rhna_credit_percent = round(rhna_credit_units / rhna_allocation['total'] * 100, 1)
 
     # PIPELINE: All projects (for context, not RHNA credit)
@@ -569,9 +563,9 @@ def main():
         table_b = generate_table_b(conn, year, args.adus)
         print(f"  {table_b['summary']['total_permitted']} units permitted, {table_b['summary']['percent_of_goal']}% of RHNA goal")
 
-        print(f"\nGenerating Developer Summary...")
+        print(f"\nGenerating Owner of Record Summary...")
         developer_summary = generate_developer_summary(conn, year)
-        print(f"  {developer_summary['summary']['total_developers']} developers, {developer_summary['summary']['total_units']} units")
+        print(f"  {developer_summary['summary']['total_developers']} owners of record, {developer_summary['summary']['total_units']} units")
 
         print(f"\nGenerating RHNA Progress through {year}...")
         rhna = generate_rhna_progress(conn, year, args.adus)
@@ -617,7 +611,7 @@ def main():
             write_csv(table_a2, output_path, f'table_a2_{year}.csv')
             # Table B uses income_levels key
             write_csv({"projects": table_b.get('income_levels', [])}, output_path, f'table_b_{year}.csv')
-            write_csv(developer_summary, output_path, f'developer_summary_{year}.csv')
+            write_csv(developer_summary, output_path, f'owner_of_record_summary_{year}.csv')
             write_csv(stalled, output_path, f'stalled_{year}.csv')
 
         # Print summary
@@ -642,7 +636,7 @@ def main():
         print(f"  ADUs: {rhna['rhna_credit']['adu_units']} units")
         print(f"  Total RHNA Credit: {rhna['rhna_credit']['total_credit']} units = {rhna['rhna_credit']['percent_of_goal']}% of {rhna['allocation']['total']} goal")
         print(f"\nPipeline (NOT RHNA Credit): {rhna['pipeline']['total_units']} units")
-        print(f"\nDeveloper Summary: {developer_summary['summary']['total_developers']} known developers")
+        print(f"\nOwner of Record Summary: {developer_summary['summary']['total_developers']} owners of record")
         print(f"Stalled: {stalled['summary']['total_stalled']} projects ({stalled['summary']['total_units_at_risk']} units)")
 
         print(f"\n✓ APR {year} generated successfully! (V2 Schema - Stage 1)")

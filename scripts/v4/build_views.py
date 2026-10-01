@@ -37,6 +37,9 @@ built AS (SELECT project_id, COUNT(*) n_buildings,
                  MIN(completed_on) first_co, MAX(completed_on) last_co
           FROM ps GROUP BY project_id),
 units_b AS (SELECT ps.project_id, SUM(u.unit_count) units FROM ps JOIN units u USING(structure_id) GROUP BY 1),
+adu_b AS (SELECT ps.project_id, SUM(u.unit_count) adu_units FROM ps JOIN units u USING(structure_id)
+          JOIN structures s USING(structure_id) JOIN events e ON e.event_id = s.master_event_id
+          WHERE json_extract(e.raw_payload, '$.ADU') = 'Yes' GROUP BY 1),          -- the CPRA permit's own ADU field
 first_bp AS (SELECT ps.project_id, MIN(e.event_date) bp FROM ps JOIN structure_events se USING(structure_id)
              JOIN events e USING(event_id) WHERE se.role_in_structure = 'master' AND e.event_type_code = 'permit_issued'
              GROUP BY 1),
@@ -85,6 +88,7 @@ SELECT
   COALESCE(b.n_buildings, 0)                                      AS n_buildings,
   COALESCE(u.units, 0)                                            AS units_built_or_permitted,                -- D4
   json_extract(p.notes, '$.proposed_units')                       AS proposed_units,                          -- D4
+  COALESCE(adu.adu_units, 0)                                      AS adu_units,
   json_extract(p.notes, '$.beds')                                 AS beds,
   t.eli AS eli_units, t.vli AS vli_units, t.li AS li_units, t.mod AS mod_units,
   CASE WHEN COALESCE(u.units, 0) > 0 AND t.project_id IS NOT NULL
@@ -121,7 +125,7 @@ FROM projects p
 LEFT JOIN built b USING(project_id) LEFT JOIN units_b u USING(project_id) LEFT JOIN first_bp fb USING(project_id)
 LEFT JOIN valuation val USING(project_id) LEFT JOIN pt USING(project_id) LEFT JOIN av USING(project_id)
 LEFT JOIN area ar USING(project_id) LEFT JOIN own o USING(project_id) LEFT JOIN appl ap USING(project_id)
-LEFT JOIN tiers t USING(project_id)
+LEFT JOIN tiers t USING(project_id) LEFT JOIN adu_b adu USING(project_id)
 """
 
 V_PROJECT_RECORDS = r"""

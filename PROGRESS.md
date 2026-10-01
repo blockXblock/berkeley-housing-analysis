@@ -432,7 +432,15 @@ classifications, structures identical; 165 project notes change (164 pathways + 
 32b7ea03, integrity ok); live == candidate; integrity + FK clean; 1,182 structures / 5,551 units; 1,542 projects, 164 with
 a pathway; conservation PASS. **John to re-lock.**
 
-**NEXT:** phase 4 continues (heights) / phase 5 (affordability, UC/BART, funding onto projects) (applicants from the
+**Phase 5 built** (`8321946`, John approved 2-5): affordability 46/46 and classification rulings 6/6 attach to projects;
+funding 58 of 92 attach (34 reach no project: mostly affordable buildings placed in service before the permit data;
+F006 and three BART rows need record keys -- asked berkeley-data-25). UC: `external_projects.csv`, four projects
+outside City permitting (no buildings, RHNA-excluded, beds carried from v2 with its cited UC source, NOT yet re-read).
+Ashby BART: PLN2026-0185 fetched by name + declared (4th harvest), R006 keyed to it. G004-G006 absorb the site's
+withdrawn/void ZP as a companion. Swap candidate `scratch/2026-09-30_phase5/p5.db` (sha 6c43e4e1): 1,544 projects,
+1,182 buildings / 5,551 units; vs live only +1 planning record (Ashby BART); co/bp unchanged (baseline 30g holds).
+
+**NEXT:** John unlocks -> swap 6c43e4e1 -> heights (phase 4) -> phase 6 (re-point publishers; project_records table) (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.
 ---

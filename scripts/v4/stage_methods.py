@@ -192,7 +192,8 @@ def classify_all(con):
     clf_hash, now = evidence_hash(), dt.datetime.now(dt.timezone.utc).isoformat()
     labels, unread = [], 0
     for ev_id, permit in con.execute("SELECT event_id, source_record_key FROM events "
-                                     "WHERE event_type_code NOT LIKE 'planning_%'"):   # a Planning record is not a building permit
+                                     "WHERE event_type_code NOT LIKE 'planning_%' "      # a Planning record is not a building permit
+                                     "AND event_type_code NOT LIKE 'registry_%'"):     # nor a Rent Board registration (2026-10-01)
         got = permit_effect(permit)
         if got is None:
             unread += 1
@@ -795,6 +796,109 @@ def load_parcels(con, parcels_db=PARCELS_DB, owners_csv=OWNERS_CSV):
                     (osid, now, len(orows), len(links), len(unmatched), '; '.join(unmatched)[:2000] or None,
                      int(len(orows) == len(links) + len(unmatched))))
         out.update(owners_rows=len(orows), owners_linked=len(links), owners_unmatched=len(unmatched), actors=len(actor_ids))
+        con.commit()
+    except Exception:
+        con.rollback()
+        raise
+    return out
+
+
+RENT_BOARD_UNITS = os.path.join(ROOT, 'data', 'raw', 'rent_board', '2026-07-13 Unit Full Details.xlsx')
+RENT_BOARD_TENANCIES = os.path.join(ROOT, 'data', 'raw', 'rent_board', 'UnitHistory_2026 Database Export.xlsx')
+RENT_BOARD_ASOF = '2026-07-13'
+
+
+def load_rent_board(con, units_path=RENT_BOARD_UNITS, tenancies_path=RENT_BOARD_TENANCIES):
+    """Berkeley Rent Stabilization Board unit registry, CPRA #26-2375 (granted 2026-08-17; tenant identifiers redacted
+    by the Board). John, 2026-10-01: load ALL of it, tenancy start dates included -- the turnover of rental units and the
+    real occupancy and rent of new units (an ADU rented, owner-occupied, rent-free...) replace ABAG's guess where it
+    reaches. Two event types:
+      registry_unit     one per registered unit, dated at the snapshot (2026-07-13); the whole row in raw_payload
+                        (status, coverage, occupant type, bedrooms, tenancy start, rents, subsidy)
+      registry_tenancy  one per tenancy in the history, dated at its start; the whole row in raw_payload
+    source_record_key = 'RB:<canonical APN>:<unit designation or unit address>' so a unit's snapshot and its tenancies
+    share a key. Owner, owner business and manager become actors with DISTINCT roles (registry_owner,
+    registry_owner_business, registry_manager): an owner is not a manager. Every row lands or is rejected with its
+    reason. Run after dedup and before classify (classify_all skips registry_*)."""
+    import datetime as dt, re as _re
+    import pandas as _pd
+    from scripts.housing_rules.apn import to_canonical_apn
+    from scripts.housing_rules.owner_name import is_organisation
+    now = dt.datetime.now(dt.timezone.utc).isoformat()
+    # the schema's own TENURE phase ("Sale / lease / occupancy (usually unsourced)") -- now sourced
+    con.executemany("INSERT OR IGNORE INTO event_types VALUES (?,'TENURE',0,?)", [
+        ('registry_unit', 'a Rent Board registered unit at the registry snapshot; the row in raw_payload'),
+        ('registry_tenancy', 'a tenancy in the Rent Board history, dated at its start; the row in raw_payload')])
+
+    def canon(a):
+        try:
+            return to_canonical_apn(str(a).strip().zfill(12), 'Alameda')
+        except Exception:
+            return None
+
+    def norm_unit(x):
+        return _re.sub(r"\s+", " ", str(x or "").strip().upper())
+
+    def date(x):
+        try:
+            return _pd.to_datetime(x).date().isoformat() if x not in (None, "") else None
+        except Exception:
+            return None
+
+    actors = {}
+    def actor(name, role_class):
+        name = (name or "").strip()
+        if not name:
+            return None
+        k = (name, role_class)
+        if k not in actors:
+            got = con.execute("SELECT actor_id FROM actors WHERE display_name=? AND role_class=?", k).fetchone()
+            actors[k] = got[0] if got else con.execute(
+                "INSERT INTO actors (actor_kind,display_name,role_class) VALUES (?,?,?)",
+                ('organization' if is_organisation(name) else 'person', name, role_class)).lastrowid
+        return actors[k]
+
+    out = {}
+    try:
+        for kind, path, etype in (('units', units_path, 'registry_unit'), ('tenancies', tenancies_path, 'registry_tenancy')):
+            loc = os.path.relpath(path, ROOT)
+            assert not con.execute("SELECT 1 FROM sources WHERE locator=?", (loc,)).fetchone(), f'already loaded: {loc}'
+            sid = con.execute("INSERT INTO sources (source_kind,locator,retrieved_at,source_asof,checksum,notes) VALUES "
+                              "('rent_board_registry',?,?,?,?,?)", (loc, '2026-09-21', RENT_BOARD_ASOF, _sha256(path),
+                              'Berkeley Rent Stabilization Board, CPRA #26-2375 (tenant identifiers redacted by the Board)')).lastrowid
+            d = _pd.read_excel(path, dtype=str)
+            rid = con.execute("INSERT INTO ingestion_runs (source_id,started_at,rows_in_source,rows_ingested,rows_rejected,"
+                              "conserved) VALUES (?,?,?,0,0,1)", (sid, now, len(d))).lastrowid
+            ok, rej, acts = 0, [], 0
+            for i, r in d.iterrows():
+                row = {k: v for k, v in r.to_dict().items() if isinstance(v, str) and v.strip()}
+                apn = canon(row.get('APN') or row.get('APN Number'))
+                if not apn:
+                    rej.append(f"row {i}: no parseable APN ({row.get('APN') or row.get('APN Number')!r})"); continue
+                unit = norm_unit(row.get('Unit Designation') or row.get('Unit Name') or row.get('Unit Address')
+                                 or row.get('Address'))
+                key = f"RB:{apn}:{unit}"
+                when = RENT_BOARD_ASOF if etype == 'registry_unit' else date(row.get('Start Date Of Tenancy'))
+                ev = con.execute("INSERT INTO events (event_type_code,event_date,event_date_precision,source_record_key,"
+                                 "source_id,ingestion_run_id,raw_payload,raw_address,raw_apn,raw_description,created_at) "
+                                 "VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                                 (etype, when, 'day' if when else 'unknown', key, sid, rid, json.dumps(row),
+                                  row.get('Unit Address') or row.get('Address'), apn,
+                                  (row.get('Unit Status Code') or row.get('Reason') or '')[:200], now)).lastrowid
+                ok += 1
+                if etype == 'registry_unit':
+                    for name, rc, role in ((row.get('Owner Name'), 'owner', 'registry_owner'),
+                                           (row.get('Primary Owner Business Name'), 'owner', 'registry_owner_business'),
+                                           (row.get('Manager Name'), 'manager', 'registry_manager')):
+                        a = actor(name, rc)
+                        if a:
+                            con.execute("INSERT INTO actor_actions (actor_id,event_id,entity_type,entity_id,role,source_id,"
+                                        "coverage_note) VALUES (?,?,'permit_event',?,?,?,'as the Rent Board registry lists it, "
+                                        "2026-07-13')", (a, ev, ev, role, sid))
+                            acts += 1
+            con.execute("UPDATE ingestion_runs SET rows_ingested=?, rows_rejected=?, rejected_detail=?, conserved=? WHERE run_id=?",
+                        (ok, len(rej), '; '.join(rej)[:4000] or None, int(len(d) == ok + len(rej)), rid))
+            out[kind] = dict(rows=len(d), events=ok, rejected=len(rej), actor_actions=acts)
         con.commit()
     except Exception:
         con.rollback()

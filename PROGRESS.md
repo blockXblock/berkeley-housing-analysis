@@ -553,8 +553,27 @@ v_project_businesses, v_project_people (12,607 rows). Document roles loaded (`5f
 **SWAPPED IN 2026-10-01** (John unlocked): live v4 = chain3 build, SHA-256 1d5e2cb8775d6e20..., integrity ok, 416,119
 events, Shattuck first BP 2022-09-08, v_project_people 12,607.
 
-**NEXT:** John relocks -> switch the live APR generator to generate_apr_v4.py (sequester v2's) -> CSLB classifications
--> Datasette re-point -> next swap (views with
+**APR on v4 (2026-10-01):** generate_apr_v2.py sequestered (`0350412`); data/apr/2021-2026 regenerated from live v4
+(`c466936`): Table A from accepted_date (2025: 18 projects, 502 units), owner summary windowed + individuals pooled
+(sums to 2,134). **RHNA bar UN-HELD** (John): the Explorer reads the APR's own Table B (`8511d25`; dev only).
+
+**v2 -> v4 migration audit (2026-10-01):** 1,046 of v2's 1,099 projects have a v4 counterpart; v4 holds 1,544.
+Not yet in v4 (each to be RE-DERIVED from its source, never copied):
+1. **Fees** ($14.1M, 57 projects, v1 Accela fee-tab scrape) -- re-harvest the Fees tab (`scripts/harvest_permit_fees.py`)
+   for the master permits. The Explorer shows fees.
+2. **Attachment lists** (~1,940 v2 "documents" that are titles + dates from Accela attachment captures, e.g.
+   "LTR Incomplete", "RESUB") -- load from the capture files; dated review letters are rung-3 timeline evidence.
+3. **Hand-drawn geometries** (9 building footprints + 11 synthetic polygons with heights, kml_ingest 2026-05-18) --
+   load from the canonical kml/geometry/geometry.kml; tours/KML need them.
+4. **Pre-coverage Panoramic buildings** (13, 1990s-2010s, "panoramic_historic_reconstruction" 2026-09-06; ~500 units)
+   -- a declared research ledger (like external_projects.csv), not permits.
+5. **Two applications** in v2 not in v4 (1700 Sacramento 85u, 3020 San Pablo 29u, in review) -- check the planning scope.
+Deliberately NOT migrated (v4 supersedes or v2 was unsourced): v1-migrated affordability, developer and pathway
+classifications (v4 reads sources); centroid points; v2's single-unit "ADU" projects whose permits only alter an
+existing ADU (11, v4's reading is right); work queues (planning_queue_2026); v2-only vocabularies.
+
+**NEXT:** Datasette re-point -> fees harvest -> attachment lists -> geometries -> Panoramic ledger -> Explorer re-point
+-> archive v2 -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

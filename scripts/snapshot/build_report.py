@@ -230,12 +230,13 @@ LEDE = {
     'campus': 'What the campus and the Lab use and emit, how many buildings they run, and the plan to retire the campus\'s gas plant.',
     'ucpay': 'How much the University pays the City and County each year, under what agreement, for what, and what the City gave up in return.',
     'business': 'How many businesses are licensed in Berkeley, what kinds, where they are, and what they pay.',
+    'livability': 'The University\'s standing, the institutes and companies around it, the City\'s privacy rules, and its parks and waterfront.',
     'innovation': 'The changes already under way that will reshape streets, power and water: electric cars, e-bikes, working from home, an electric campus, undergrounding.',
     'data': 'Every data file behind this report, what each holds, and where each source came from.',
 }
 
 
-ORDER = ['people', 'tenure', 'income', 'age', 'tide', 'cars', 'business', 'networks', 'undergrounding', 'water-energy',
+ORDER = ['people', 'tenure', 'income', 'age', 'tide', 'cars', 'business', 'livability', 'networks', 'undergrounding', 'water-energy',
          'fire', 'campus', 'ucpay', 'land', 'city', 'innovation', 'data']
 
 
@@ -316,6 +317,15 @@ def s_findings():
              f"vehicles and home deliveries, which the 2017 Berkeley Drawdown list flagged, are not yet counted by any public source.",
              f"{a('#cars', 'Cars')} · {a('#tide', 'Commuting')} · {a(V2050, 'Vision 2050 framework (2020)')} · "
              f"{a(DRAWDOWN, 'Berkeley Drawdown solutions (2017)')}"),
+        item('A small city of ideas, parks and talent',
+             "UC Berkeley alumni and faculty hold about 60 Nobel Prizes; five faculty members have won since 2020. The University ranks No. 7 "
+             "in the world and first among public universities, with physics, chemistry and statistics among the world's top three, and "
+             "Cal athletes have won more than 120 Olympic gold medals. Around it cluster institutes in mathematics, theoretical computer "
+             "science and artificial intelligence, a new college of computing and data science, and new buildings for climate and "
+             "genomics startups. The City pairs this with public limits on surveillance technology and principles for its own use of AI. "
+             "Berkeley has more than fifty parks and a 100-acre waterfront with the Bay's largest public marina, though its park acreage "
+             "per resident falls short of the State standard.",
+             f"{a('#livability', 'Ideas, parks and talent')}"),
         item(f'{over:.0f} of {total:.0f} street miles still carry overhead wires',
              f"Only {total - over:.1f} miles ({100 * (total - over) / total:.0f}%) have their wires underground: half of the arterials, a third "
              f"of the collectors and {100 * T1['residential'][1] / T1['residential'][0]:.0f}% of residential streets. Overhead lines are a "
@@ -396,7 +406,7 @@ def s_findings():
              f"{a('#land', 'Land and money')} · data: {dl('assessor_by_neighborhood.csv')}"),
     ]
     # findings follow the report's outline: people, businesses, infrastructure, dangers, institutions, money
-    outline = ['A university city', 'Room for many more', 'Most households rent', 'How people move', 'licensed businesses',
+    outline = ['A university city', 'Room for many more', 'Most households rent', 'How people move', 'licensed businesses', 'A small city of ideas',
                'street miles', 'Water and sewer pipes', 'Leaving the hills', 'The next large earthquake',
                'The University and the Lab use', 'A $30 billion tax base', "The City's needs outrun"]
     F_.sort(key=lambda h: next((k for k, key in enumerate(outline) if key in h.split('</h3>')[0]), 99))
@@ -724,6 +734,54 @@ def s_business():
     Alameda County Assessor's parcels. Maps: {dl('businesses_by_blockgroup.csv')}, {dl('businesses_by_neighborhood.csv')},
     {dl('business_licenses_by_type.csv')}.</p>'''
     return section('business', '0 · Businesses', 'The businesses: what they are and where', body)
+
+
+def s_livability():
+    body = f'''
+    <p class="note" style="font-size:.95rem">Berkeley is small, about 128,000 people on ten square miles, and unusually rich in ideas,
+    open space and talent.</p>
+    <h3>Ideas</h3>
+    {table(['Measure', 'Value'], [
+        ['Nobel Prizes held by UC Berkeley alumni and faculty', 'about 60; 28 faculty members have won, five of them since 2020 (Doudna, Genzel, Card, Clarke, Yaghi)'],
+        ['Global standing', 'No. 7 in the world and No. 1 among public universities (U.S. News Best Global Universities, 2026); No. 5 in the world (ShanghaiRanking ARWU, 2026)'],
+        ['Fields at the top', 'Physics No. 3 in the world (U.S. News, 2026); chemistry and statistics No. 3 (ShanghaiRanking subject rankings, 2026); 29 graduate programs in the U.S. top five (U.S. News, 2027 edition)'],
+        ['Academic reputation', 'a perfect 100 in the QS 2027 rankings, the top public university in North America'],
+        ['Olympic gold medals won by Cal athletes', 'more than 120 all-time; at the 2024 Paris Games, Cal athletes won 23 medals, which as a country would have ranked 12th'],
+    ])}
+    <p class="note" style="font-size:.95rem">Around the campus and the Lab is a dense ring of institutes: the Simons Institute for the
+    Theory of Computing (since 2012, more than 3,400 long-term visiting researchers in its first decade), the Mathematical Sciences
+    Research Institute (now SLMath) in the hills, Berkeley AI Research, the Center for Human-Compatible AI, founded to steer AI
+    research toward "provably beneficial systems," the Institute of Governmental Studies (since 1919, home of the Berkeley IGS
+    Poll), and the Othering &amp; Belonging Institute. In 2023 the University created its first new college in more than 50 years,
+    Computing, Data Science, and Society. At the Lab, the Doudna supercomputer, due in late 2026, will serve more than 11,000
+    researchers.</p>
+    <h3>New companies</h3>
+    <p class="note" style="font-size:.95rem">Research is turning into companies close to campus. Startups backed by Berkeley SkyDeck,
+    the University's accelerator since 2012, have raised about $2.7 billion. Two buildings under way will add more room: the Bakar
+    ClimatEnginuity Hub (145,000 square feet, up to 75 companies, opening 2027–28) and the IGI–Bakar Labs building for genomics and
+    biotechnology (169,000 square feet, approved July 2025, opening 2028–29).</p>
+    <h3>Privacy as a rule</h3>
+    <p class="note" style="font-size:.95rem">Berkeley sets public limits on watching its residents. Its 2018 Surveillance Technology
+    Use and Community Safety Ordinance requires the City to weigh "the impacts … on civil rights and civil liberties" and to report
+    every November on each technology it uses; the 2024 report covered body-worn cameras, GPS trackers, fixed cameras, license-plate
+    readers, street-level imagery and drones. In March 2026 the Council adopted principles for the City's own use of artificial
+    intelligence and asked for citywide guidelines.</p>
+    <h3>Parks, the waterfront and the environment</h3>
+    <p class="note" style="font-size:.95rem">Berkeley has more than fifty parks, though at about 2 acres per 1,000 residents it falls
+    short of the State's base standard of 3. Its waterfront adds 100 acres of parks and open space and 7 miles of trails, including
+    a 90-acre park on a former landfill (renamed in 2026 the Park at the Berkeley Waterfront) and Aquatic Park; the Berkeley Marina,
+    with about 1,000 berths, is the largest public marina on the Bay. Tilden Regional Park, one of the East Bay Regional Park
+    District's three original parks, adjoins the city in the hills. The environmental record is long: the nation's first curbside
+    recycling began here in 1973, through the Ecology Center; the City set a zero-waste goal in 2005; and in 2019 it barred natural
+    gas in new buildings, a law a federal appeals court struck down in 2023.</p>
+    <p class="note">Sources: UC Berkeley "By the numbers" and Berkeley News (October 8, 2025; June 15 and September 21, 2026);
+    U.S. News &amp; World Report; ShanghaiRanking; QS; Cal Athletics (August 13, 2024); Simons Institute; Center for Human-Compatible
+    AI; Institute of Governmental Studies; Othering &amp; Belonging Institute; Berkeley SkyDeck; Berkeley News (May 16, 2024) and
+    Bakar Labs (Bakar buildings); Berkeley Lab (Doudna); City of Berkeley: parks, waterfront and marina pages, Council item 43
+    (June 25, 2024) on park standards, surveillance technology report (Council item 17, November 12, 2024); Ecology Center; City
+    zero-waste resolution (2005); U.S. Court of Appeals for the Ninth Circuit, California Restaurant Association v. City of
+    Berkeley (April 17, 2023).</p>'''
+    return section('livability', '0 · A city of ideas', 'Ideas, parks and talent', body)
 
 
 def s_innovation():
@@ -1301,10 +1359,10 @@ CSS = '''
 
 
 def main():
-    sections = [s_findings(), s_people(), s_tenure(), s_income(), s_age(), s_tide(), s_cars(), s_business(), s_networks(), s_ug(),
+    sections = [s_findings(), s_people(), s_tenure(), s_income(), s_age(), s_tide(), s_cars(), s_business(), s_livability(), s_networks(), s_ug(),
                 s_water_energy(), s_fire(), s_campus(), s_ucpay(), s_land(), s_city(), s_innovation(), s_catalog()]
     toc = [('findings', 'Findings'), ('people', 'People'), ('tenure', 'Renters and owners'), ('income', 'Income'),
-           ('age', 'Ages'), ('tide', 'Daily tide'), ('cars', 'Cars and bikes'), ('business', 'Businesses'),
+           ('age', 'Ages'), ('tide', 'Daily tide'), ('cars', 'Cars and bikes'), ('business', 'Businesses'), ('livability', 'Ideas and parks'),
            ('networks', 'Under the streets'), ('undergrounding', 'Undergrounding'), ('water-energy', 'Water and power'),
            ('fire', 'Fire, flood, earthquake'), ('campus', 'University and Lab'), ('ucpay', 'What UC pays'),
            ('land', 'Land and money'), ('city', 'The City\'s money'), ('innovation', 'What is next'), ('data', 'The data')]

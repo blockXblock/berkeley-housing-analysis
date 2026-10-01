@@ -46,6 +46,7 @@ from datetime import datetime
 from pathlib import Path
 
 from scripts.housing_rules import RHNA_ALLOCATIONS
+sys.path.insert(0, str(Path(__file__).resolve().parent))      # scripts/ -> housing_rules.owner_name (publishing rule)
 
 # Paths - V2 DATABASE
 BASE_DIR = Path('/Users/johngage/berkeley-data')
@@ -81,44 +82,44 @@ def generate_table_a(conn, year):
     Table A: Projects with applications deemed complete in the reporting year
     HCD definition: Projects where completeness review finished in the year
 
-    Stage 1: 'complete' column doesn't exist in v2, so this will return 0 rows.
+    v4: the completeness-review acceptance date on the primary application (accepted_date).
     """
     cursor = conn.cursor()
 
-    # Projects with complete date in the reporting year
-    # V2 MIGRATION: Using v_projects_flat with column aliases
-    # NOTE: 'complete' is NULL in Stage 1 - this query will return 0 rows
+    # v4 (2026-10-01): "deemed complete" = accepted_date, the City's own completeness-review acceptance on the project's
+    # PRIMARY application (rung 3: selected from that record's task list, never an aggregate). Read from v4's serving
+    # view directly -- v2 had no such column, so the re-point returned nothing. Units: a project with buildings counts
+    # them; an application-only project shows its STATED proposal (D4). Pathway flags from the sourced pathways; the
+    # architect is the one the plans' title blocks name; the owner column is the owner of record (D5).
     cursor.execute('''
-        SELECT
-            project_id AS id,
-            address_display,
-            NULL AS apn,
-            NULL AS permits,
-            total_units AS units,
-            vli_units,
-            status_code AS status,
-            filed_date AS filed,
-            NULL AS complete,
-            entitled_date AS entitled,
-            NULL AS density_bonus,
-            NULL AS sb35_flag,
-            NULL AS sb330_flag,
-            NULL AS ab2011_flag,
-            developer,
-            architect
-        FROM v_projects_flat
-        WHERE NULL LIKE ?
-        ORDER BY NULL
+        SELECT v.project_key, v.address_display, NULL, v.anchor_record,
+               COALESCE(NULLIF(v.units_built_or_permitted, 0), v.proposed_units), v.vli_units, v.status,
+               v.filed_date, v.accepted_date, v.entitled_date,
+               EXISTS (SELECT 1 FROM json_each(v.pathways) WHERE value = 'density_bonus'),
+               EXISTS (SELECT 1 FROM json_each(v.pathways) WHERE value LIKE 'sb35%'),
+               EXISTS (SELECT 1 FROM json_each(v.pathways) WHERE value LIKE 'sb330%'),
+               EXISTS (SELECT 1 FROM json_each(v.pathways) WHERE value LIKE 'ab2011%'),
+               v.owner_current,
+               (SELECT group_concat(DISTINCT p.name) FROM v_project_people p
+                 WHERE p.project_key = v.project_key AND p.role = 'plans_architect')
+        FROM v_projects v
+        WHERE v.accepted_date LIKE ? AND COALESCE(v.rhna_excluded, 0) = 0
+        ORDER BY v.accepted_date, v.project_key
     ''', (f'{year}%',))
 
     columns = ['id', 'address', 'apn', 'permits', 'net_units', 'vli_units', 'status',
                'app_filed_date', 'app_complete_date', 'entitled_date',
                'density_bonus', 'sb35_flag', 'sb330_flag', 'ab2011_flag',
-               'developer', 'architect']
+               'owner_of_record', 'architect']
 
+    # Publishing rule (John, 2026-10-01): an organisation is named; a private individual is "individual owner".
+    from housing_rules.owner_name import is_organisation
     rows = []
     for row in cursor.fetchall():
-        rows.append(dict(zip(columns, row)))
+        r = dict(zip(columns, row))
+        if r.get('owner_of_record') and not is_organisation(r['owner_of_record']):
+            r['owner_of_record'] = 'individual owner'
+        rows.append(r)
 
     return {
         "title": f"Table A: Applications Deemed Complete in {year}",
@@ -308,40 +309,33 @@ def generate_developer_summary(conn, year):
     """
     cursor = conn.cursor()
 
-    # Developer summary for projects with BP issued only (RHNA credit)
-    # V2 MIGRATION: Using v_projects_flat with column aliases
-    # NOTE: density_bonus is NULL in Stage 1
+    # v4 (2026-10-01): projects whose FIRST building permit falls in the 6th-cycle window through the reporting year
+    # (the same window as Table B and RHNA progress), grouped by the assessor's owner of record. Density-bonus count
+    # from the sourced pathways. Publishing rule (John): organisations by name, private individuals pooled as
+    # "individual owner"; no owner on the roll = "unknown (not on the roll)".
+    from housing_rules.owner_name import is_organisation
     cursor.execute('''
-        SELECT
-            COALESCE(developer, 'Unknown/Individual') as developer_name,
-            COUNT(*) as project_count,
-            SUM(total_units) as total_units,
-            SUM(COALESCE(vli_units, 0)) as vli_units,
-            SUM(CASE WHEN NULL = 1 THEN 1 ELSE 0 END) as density_bonus_projects
-        FROM v_projects_flat
-        WHERE bp_issued_date IS NOT NULL AND bp_issued_date != ''
-          AND ''' + UC_EXCLUDE + '''
-        GROUP BY COALESCE(developer, 'Unknown/Individual')
-        ORDER BY total_units DESC
-    ''')
-
-    rows = []
-    for row in cursor.fetchall():
-        rows.append({
-            "developer": row[0],
-            "project_count": row[1],
-            "total_units": row[2] or 0,
-            "vli_units": row[3] or 0,
-            "market_rate_units": (row[2] or 0) - (row[3] or 0),
-            "density_bonus_projects": row[4] or 0
-        })
+        SELECT v.owner_current, COALESCE(v.units_built_or_permitted, 0), COALESCE(v.vli_units, 0),
+               EXISTS (SELECT 1 FROM json_each(v.pathways) WHERE value = 'density_bonus')
+        FROM v_projects v
+        WHERE v.bp_issued_date >= '2022-06-30' AND v.bp_issued_date <= ? AND COALESCE(v.rhna_excluded, 0) = 0
+    ''', (f'{year}-12-31',))
+    agg = {}
+    for owner, units, vli, db in cursor.fetchall():
+        name = owner if owner and is_organisation(owner) else ('individual owner' if owner else 'unknown (not on the roll)')
+        a = agg.setdefault(name, [0, 0, 0, 0])
+        a[0] += 1; a[1] += units; a[2] += vli; a[3] += db
+    rows = [{"owner_of_record": k, "project_count": v[0], "total_units": v[1], "vli_units": v[2],
+             "market_rate_units": v[1] - v[2], "density_bonus_projects": v[3]}
+            for k, v in sorted(agg.items(), key=lambda kv: -kv[1][1])]
 
     return {
         "title": f"Supplemental: Owner of Record Summary Through {year} (assessor roll; NOT developers)",
-        "description": f"Units permitted by developer for projects with BP issued or CO. NOTE: Stage 1 - density_bonus_projects will be 0.",
+        "description": f"Units on projects whose first building permit was issued 2022-06-30 through {year}-12-31, by the "
+                       f"assessor's owner of record (individuals pooled). Not developers.",
         "developers": rows,
         "summary": {
-            "total_developers": len([r for r in rows if r['developer'] != 'Unknown/Individual']),
+            "total_developers": len([r for r in rows if r['owner_of_record'] not in ('individual owner', 'unknown (not on the roll)')]),
             "total_projects": sum(r['project_count'] for r in rows),
             "total_units": sum(r['total_units'] for r in rows),
             "total_vli": sum(r['vli_units'] for r in rows)

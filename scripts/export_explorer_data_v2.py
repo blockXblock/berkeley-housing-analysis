@@ -1008,6 +1008,32 @@ def export_data():
         else:
             print(f"  SKIPPED: {city_apr_meta.get('reason')}")
 
+        # RHNA PROGRESS, UN-HELD 2026-10-01 (John). Held 2026-06-16 because v2's building-permit coverage was tracked
+        # projects only; v4 folds every master permit (2025: 2,134 vs the City's 2,120). The figure is NOT re-derived
+        # here: it is the APR generator's own Table B (scripts/generate_apr_v4.py -> data/apr/<year>/apr_<year>.json),
+        # so the site and the APR can never disagree. The last FULL reporting year, plus the current year to date.
+        rhna_progress = None
+        try:
+            import glob as _glob
+            yrs = sorted(int(Path(f).parent.name) for f in _glob.glob(str(BASE_DIR / 'data' / 'apr' / '20*' / 'apr_20*.json'))
+                         if Path(f).parent.name.isdigit())
+            cur_year = datetime.now().year
+            full = max(y for y in yrs if y < cur_year)
+            def _tb(y):
+                d = json.loads((BASE_DIR / 'data' / 'apr' / str(y) / f'apr_{y}.json').read_text())
+                return d['table_b'], d.get('generated')
+            tb, gen = _tb(full)
+            rhna_progress = {"through_year": full, "income_levels": tb['income_levels'], "summary": tb['summary'],
+                             "generated": gen, "source": f"data/apr/{full}/apr_{full}.json (scripts/generate_apr_v4.py)"}
+            if cur_year in yrs:
+                tb2, _ = _tb(cur_year)
+                rhna_progress["to_date"] = {"year": cur_year, "permitted": tb2['summary']['total_permitted'],
+                                            "percent_of_goal": tb2['summary']['percent_of_goal']}
+            print(f"  RHNA progress: {tb['summary']['total_permitted']:,} through {full} "
+                  f"({tb['summary']['percent_of_goal']}%) from {rhna_progress['source']}")
+        except Exception as e:
+            print(f"  RHNA progress SKIPPED: {e}")
+
         # Build DATA object
         export_date = datetime.now().strftime('%Y-%m-%d %H:%M')
         data = {
@@ -1020,6 +1046,7 @@ def export_data():
             "timeline": timeline,
             "documents": documents,
             "rhna": rhna,
+            "rhna_progress": rhna_progress,
             "city_apr": city_apr,
             "city_apr_meta": city_apr_meta,
             "meta": {

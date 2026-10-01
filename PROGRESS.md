@@ -389,7 +389,12 @@ Reading rulings 2-4 (2501 Telegraph, 2212 McGee, 2707 Hillegass; berkeley-data-2
 **sha 1aa3c045**, baseline **2026-09-30e** (co 4,369 / bp 5,274, gate PASS): 1,183 structures / 5,552 units, 1,543
 projects. Ruling 5 (2334 Jefferson, d0123a6+) arrived after the build -> next cycle, baseline 30f.
 
-**NEXT:** John unlocks -> swap 1aa3c045 -> next cycle (Jefferson + 30f) -> phase 4 continues (applicants from the
+**LIVE SWAPPED to 1aa3c045 (John unlocked, 2026-09-30):** snapshot `keep_snapshot_2026-09-30_pre-v4-names.db` (sha
+7070646d, integrity ok); live == build; integrity + FK clean; 1,183 structures / 5,552 units; 1,543 projects (1,541
+named, 21 City-stated), every structure homed once; 29,118 parcel geometries; reading rulings on 11 events;
+conservation verifier PASS; a fresh read-only projects preview reproduces the write. **John to re-lock v4.**
+
+**NEXT:** next cycle (Jefferson + 30f) -> phase 4 continues (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.
 ---

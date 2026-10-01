@@ -59,6 +59,36 @@ def project_texts(dbp=V4):
     return out
 
 
+WORDS = {w: i for i, w in enumerate("zero one two three four five six seven eight nine ten eleven twelve thirteen "
+                                    "fourteen fifteen sixteen seventeen eighteen nineteen twenty".split())}
+
+
+def _has_number(q: str, n: int) -> bool:
+    """the quote states n, in digits or as a number word ("three dwelling units") -- the same test the measures use."""
+    q2 = q.replace(",", "").lower()
+    return bool(re.search(rf"(?<![\d.]){n}(?!\d)", q2)) or any(WORDS.get(w) == n for w in re.findall(r"[a-z]+", q2))
+
+
+# BY DEFINITION (John, 2026-10-01): a count the words fix without a numeral. A quote naming ONE dwelling (an ADU, JADU,
+# dwelling unit, single-family dwelling, residence, cottage) and stating no other number is 1; duplex / triplex /
+# fourplex are 2 / 3 / 4. Tagged read_as=by_definition so it can always be told apart from a count the City wrote out.
+_PLEX = {"duplex": 2, "triplex": 3, "tri-plex": 3, "fourplex": 4, "four-plex": 4, "quadplex": 4}
+_ONE = re.compile(r"\b(adu|jadu|accessory dwelling unit|dwelling unit|single[- ]family (?:home|residence|dwelling|house)|"
+                  r"residence|cottage|residential unit|live[- ]work unit|unit|house|home)\b")
+
+
+def _by_definition(q: str):
+    ql = q.lower()
+    if re.search(r"\d", ql.replace("sq", "")) and re.search(r"\b\d+\s*(units?|dwellings?|adus?)\b", ql):
+        return None                                   # a count is written -- "stated" decides, not this rule
+    if any(WORDS.get(w, 0) > 1 for w in re.findall(r"[a-z]+", ql)) or re.search(r"\b(units|dwellings|adus|homes|houses)\b", ql):
+        return None                                   # another number or a plural: not one dwelling
+    plex = [v for w, v in _PLEX.items() if re.search(rf"\b{w}\b", ql)]
+    if len(plex) == 1:
+        return plex[0]
+    return 1 if _ONE.search(ql) else None
+
+
 def verify(ans, texts):
     """keep the count only if the quote is verbatim in the cited text and contains the number."""
     n, q, s = ans.get("units"), ans.get("quote"), str(ans.get("source") or "").strip().strip("[]").strip()
@@ -70,8 +100,10 @@ def verify(ans, texts):
         return None
     norm = lambda x: re.sub(r"\s+", " ", x or "").strip().lower()
     for k, t in texts:
-        if k == s and norm(q) in norm(t) and re.search(rf"(?<!\d){n}(?!\d)", q.replace(",", "")):
-            return {"units": n, "quote": q, "source": s}
+        if k == s and norm(q) in norm(t) and _has_number(q, n):
+            return {"units": n, "quote": q, "source": s, "read_as": "stated"}
+        if k == s and norm(q) in norm(t) and _by_definition(q) == n:
+            return {"units": n, "quote": q, "source": s, "read_as": "by_definition"}
     return None
 
 

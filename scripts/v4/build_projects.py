@@ -77,7 +77,7 @@ NAMES_EVIDENCE = ROOT / "data/derived/project_names_evidence_2026-09-30.json"
 # (scripts/llm_project_pathways.py). Same stable key as the names.
 PATHWAYS_EVIDENCE = ROOT / "data/derived/project_pathways_evidence_2026-09-30.json"
 # Proposed units of APPLICATION-ONLY projects (phase 6 D4): read from the City's text, verbatim quote containing the number.
-UNITS_EVIDENCE = ROOT / "data/derived/project_units_evidence_2026-09-30.json"
+UNITS_EVIDENCE = ROOT / "data/derived/project_units_evidence_2026-10-01.json"   # incl. by_definition (John 2026-10-01)
 # Building measures (phase 6; John: square footage and parking KEPT, heights from sources -- D7): gross sq ft, parking,
 # storeys, height in feet, each kept only with a verbatim quote containing the number (scripts/llm_building_measures.py).
 MEASURES_EVIDENCE = ROOT / "data/derived/building_measures_evidence_2026-09-30.json"
@@ -526,8 +526,29 @@ def write(con, projects) -> dict:
                 out["with_pathway"] += 1
             p["name_basis"] = "city_stated_name" if names.get(key) else basis
             if measures.get(key):
-                p["measures"] = measures[key]
-                out["with_measures"] += 1
+                ms, bad = dict(measures[key]), {}
+                # SELF-CONTRADICTION (John, 2026-10-01: flag and EXCLUDE): the City's own text can contradict itself --
+                # ZP2016-0244 "a 40story, 60 feet tall" building; ZP2023-0040 "a 28-story, 28,319 sq ft" building. The
+                # verbatim check cannot catch a typo the City wrote, so a pair that cannot both be true leaves the
+                # published measures (kept in notes with the reason, never silently).
+                st = (ms.get("stories") or {}).get("value")
+                h = (ms.get("height_feet") or {}).get("value")
+                sf = (ms.get("gross_sqft") or {}).get("value")
+                if st and h and not (8 <= h / st <= 20):
+                    bad["stories"] = bad["height_feet"] = f"height/storeys = {h}/{st} ft per storey, outside 8-20"
+                # Area: only a TALL building with a tiny floor plate is impossible. Small houses and ADUs legitimately run
+                # 230-500 sq ft per floor ("1,450 square-foot, 3-story single-family dwelling"); a first draft at 1,500
+                # for every building flagged 91 projects, almost all real. Measured: this flags one (ZP2023-0040).
+                if st and sf and st >= 5 and sf / st < 2000:
+                    bad["stories"] = bad["gross_sqft"] = f"floor area/storeys = {sf}/{st} sq ft on a {st}-storey building, under 2,000"
+                for m_ in bad:
+                    ms.pop(m_, None)
+                if bad:
+                    p["measures_excluded"] = {m_: {**measures[key][m_], "why": w} for m_, w in bad.items()}
+                    out["measures_flagged_projects"] += 1
+                if ms:
+                    p["measures"] = ms
+                    out["with_measures"] += 1
             if not p["structures"] and proposed.get(key):          # D4: an application's own stated count
                 p["proposed_units"] = proposed[key]["units"]
                 p["proposed_units_evidence"] = {k: proposed[key][k] for k in ("quote", "source")}
@@ -541,7 +562,7 @@ def write(con, projects) -> dict:
                                            "external_id", "beds", "external_units", "permitting_authority", "status",
                                            "status_date", "source", "verification",
                                            "affordability", "classifications", "funding", "proposed_units", "proposed_units_evidence",
-                                           "measures")
+                                           "measures", "measures_excluded")
                      if p.get(k) not in (None, [], "")}
             notes["units"] = p["units"]
             pid = con.execute("INSERT INTO projects (name, notes) VALUES (?, ?)",

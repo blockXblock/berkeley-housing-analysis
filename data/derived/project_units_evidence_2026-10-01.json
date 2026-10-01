@@ -1,0 +1,2464 @@
+{
+ "topic": "project_units",
+ "read_at": "2026-10-01T09:10:20",
+ "definitions_sha16": "112df2bc281b217f",
+ "definitions": "Report the number of NEW DWELLING UNITS this housing application proposes, as its own text states it.\n- Count dwelling units (apartments, condominiums, townhouses, houses, ADUs, JADUs, live-work units if the text calls them\n  dwelling or residential units). Do NOT count beds, rooms, group-living rooms, hotel rooms or parking spaces.\n- If the text states a total (\"50 residential units, 6 ADUs\" -> 56 only if it says so; otherwise report 50 and quote it),\n  report the number the text states for the project's new dwellings; never add numbers the text does not add.\n- If the text proposes a CHANGE to an earlier approval (\"increase from 66 to 73 units\"), report the NEW total it states (73).\n- If units are being removed only, or no count is stated, answer null.\nCopy the exact words that state the number.",
+ "model": "claude-sonnet-5",
+ "rule": "kept only if the quote is verbatim and contains the number",
+ "unanswered": [],
+ "readings": [
+  {
+   "project_key": "ZP2019-0156",
+   "units": 1,
+   "quote": "to a dwelling unit",
+   "source": "ZP2019-0156",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2019-0165",
+   "units": 1,
+   "quote": "New ADU within the footprint on lower floor",
+   "source": "ZP2019-0165",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2019-0168",
+   "units": 1,
+   "quote": "New detached ADU in rear yard",
+   "source": "ZP2019-0168",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2019-0171",
+   "units": 1,
+   "quote": "ADU above height and within side and rear setbacks",
+   "source": "ZP2019-0171",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2019-0172",
+   "units": null
+  },
+  {
+   "project_key": "ZP2019-0179",
+   "units": 123,
+   "quote": "construct a new six-story mixed use building with 123 dwelling units",
+   "source": "ZP2019-0179",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2019-0180",
+   "units": null
+  },
+  {
+   "project_key": "ZP2019-0192",
+   "units": 104,
+   "quote": "construct a new, 99,000 SF, 6-story, mixed-use building with 104 units",
+   "source": "ZP2019-0192",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2021-0037",
+   "units": 82,
+   "quote": "82 units",
+   "source": "PLN2022-0101",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2021-0063",
+   "units": 79,
+   "quote": "79 Single-occupancy units",
+   "source": "PLN2021-0063",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2022-0026",
+   "units": 323,
+   "quote": "up to 323 dwelling units",
+   "source": "PLN2022-0026",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2022-0066",
+   "units": 48,
+   "quote": "48 residential units",
+   "source": "PLN2022-0066",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2022-0067",
+   "units": 214,
+   "quote": "214 RESIDENTIAL DWELLING UNITS",
+   "source": "PLN2022-0067",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2022-0076",
+   "units": null
+  },
+  {
+   "project_key": "PLN2022-0078",
+   "units": null
+  },
+  {
+   "project_key": "PLN2022-0083",
+   "units": 2,
+   "quote": "a duplex",
+   "source": "PLN2022-0083",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2024-0122",
+   "units": 1,
+   "quote": "create one dwelling unit",
+   "source": "PLN2026-0043",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2024-0126",
+   "units": 65,
+   "quote": "65 total units",
+   "source": "ZP2024-0126",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2024-0131",
+   "units": 148,
+   "quote": "148 dwelling units",
+   "source": "ZP2024-0131",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2024-0147",
+   "units": 4,
+   "quote": "create 4 dwelling units",
+   "source": "ZP2024-0147",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2024-0162",
+   "units": null
+  },
+  {
+   "project_key": "ZP2024-0169",
+   "units": 49,
+   "quote": "49 dwelling units",
+   "source": "ZP2024-0169",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2024-0174",
+   "units": null
+  },
+  {
+   "project_key": "ZP2024-0177",
+   "units": null
+  },
+  {
+   "project_key": "ZCBP2016-0060",
+   "units": 1,
+   "quote": "NEW SINGLE-FAMILY RESIDENCE",
+   "source": "ZCBP2016-0060",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2015-0011",
+   "units": 1,
+   "quote": "New Single Family Dwelling",
+   "source": "ZP2015-0011",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2015-0018",
+   "units": 10,
+   "quote": "new 10-unit residential building",
+   "source": "ZP2015-0018",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2015-0021",
+   "units": null
+  },
+  {
+   "project_key": "ZP2015-0032",
+   "units": null
+  },
+  {
+   "project_key": "ZP2015-0036",
+   "units": null
+  },
+  {
+   "project_key": "ZP2015-0045",
+   "units": 3,
+   "quote": "resulting in 3 living units with on-site parking",
+   "source": "ZP2015-0045",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2015-0069",
+   "units": 1,
+   "quote": "Convert an existing 1300 sq ft. commercial space to a new residential unit",
+   "source": "ZP2015-0069",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2024-0075",
+   "units": 214,
+   "quote": "214-unit mixed use housing development",
+   "source": "DRCP2024-0011",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2024-0076",
+   "units": 117,
+   "quote": "117-unit mixed-use housing development",
+   "source": "ZP2024-0076",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2024-0077",
+   "units": 136,
+   "quote": "136-unit mixed-use housing development",
+   "source": "ZP2024-0077",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2024-0079",
+   "units": 87,
+   "quote": "87 units including 4 VLI units",
+   "source": "ZP2024-0079",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2024-0100",
+   "units": 1,
+   "quote": "single-family dwelling",
+   "source": "ZP2024-0100",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2024-0104",
+   "units": null
+  },
+  {
+   "project_key": "ZP2024-0114",
+   "units": 73,
+   "quote": "increase unit count from 66 to 73",
+   "source": "ZP2026-0006",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2024-0120",
+   "units": 1,
+   "quote": "a single 1,000 square feet live work unit",
+   "source": "ZP2024-0120",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2016-0237",
+   "units": null
+  },
+  {
+   "project_key": "ZP2016-0245",
+   "units": 1,
+   "quote": "construction of an ADU on the lower level",
+   "source": "ZP2016-0245",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2016-0247",
+   "units": 4,
+   "quote": "construct four (4), three-story detached dwelling units",
+   "source": "ZP2016-0247",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2016-0252",
+   "units": null
+  },
+  {
+   "project_key": "ZP2017-0003",
+   "units": 36,
+   "quote": "ground level commercial with 36 units above",
+   "source": "ZP2017-0003",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2017-0015",
+   "units": 3,
+   "quote": "coverting ofifice to three dwelling units",
+   "source": "ZP2017-0015",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2017-0035",
+   "units": 40,
+   "quote": "5 story mixed use project with 40 residential dwelling units",
+   "source": "ZP2017-0035",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2017-0039",
+   "units": 10,
+   "quote": "10 new 3-story residential townhouses",
+   "source": "ZP2017-0039",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2019-0059",
+   "units": 1,
+   "quote": "detached 477 sq. ft. ADU",
+   "source": "ZP2019-0059",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2019-0084",
+   "units": 7,
+   "quote": "propose 1 more unit for 7 units total",
+   "source": "ZP2019-0084",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2019-0086",
+   "units": 1,
+   "quote": "new ADU",
+   "source": "ZP2019-0086",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2019-0089",
+   "units": 8,
+   "quote": "8 dwellings and 2 commercial retail tenant spaces",
+   "source": "ZP2019-0089",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2019-0092",
+   "units": 1,
+   "quote": "establishing a accessory dwelling unit",
+   "source": "ZP2019-0092",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2019-0093",
+   "units": null
+  },
+  {
+   "project_key": "ZP2019-0096",
+   "units": 1,
+   "quote": "New 627 square foot dwelling unit",
+   "source": "ZP2019-0096",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2019-0104",
+   "units": 1,
+   "quote": "Construction of an Accessory Dwelling Unit",
+   "source": "ZP2019-0104",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2026-0031",
+   "units": 1,
+   "quote": "establish one dwelling unit within the existing building",
+   "source": "ZP2026-0031",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2026-0039",
+   "units": 45,
+   "quote": "containing 45 dwellings including 2 Very-Low Income (VLI) units",
+   "source": "ZP2026-0039",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2026-0040",
+   "units": 23,
+   "quote": "23 units (including 1 Very Low-Income unit)",
+   "source": "ZP2026-0040",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2026-0049",
+   "units": 23,
+   "quote": "23 total units, including 3 VLI units",
+   "source": "ZP2026-0049",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2026-0050",
+   "units": 22,
+   "quote": "22 total units, including 2 VLI, 1 LI, and 1 MI units",
+   "source": "ZP2026-0050",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2026-0064",
+   "units": 6,
+   "quote": "CONTAINING SIX DWELLING UNITS",
+   "source": "ZP2026-0064",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2026-0077",
+   "units": 222,
+   "quote": "222 dwelling units (including at least 17 Very L",
+   "source": "ZP2026-0077",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2026-0083",
+   "units": 1,
+   "quote": "build a 9,891 s.f. single family dwelling",
+   "source": "ZP2026-0083",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2019-0106",
+   "units": 3,
+   "quote": "construct three independent 3-story single-family town homes",
+   "source": "PLN2025-0107",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2019-0118",
+   "units": 1,
+   "quote": "ADU on a street less than 26ft in width",
+   "source": "ZP2019-0118",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2019-0119",
+   "units": 1,
+   "quote": "Conversion of an existing garage within one non-conforming side setback to an ADU",
+   "source": "ZP2019-0119",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2019-0124",
+   "units": 1,
+   "quote": "To construct an ADU on a lot with an existing single family dwelling",
+   "source": "ZP2019-0124",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2019-0130",
+   "units": 1,
+   "quote": "create a new ADU",
+   "source": "ZP2019-0130",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2019-0138",
+   "units": 1,
+   "quote": "New 3-bedroom main dwelling unit on a lot with an existing dwelling",
+   "source": "ZP2019-0138",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2019-0141",
+   "units": 2,
+   "quote": "construct 2 two-story dwellings",
+   "source": "ZP2019-0141",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2019-0152",
+   "units": null
+  },
+  {
+   "project_key": "ZP2018-0038",
+   "units": null
+  },
+  {
+   "project_key": "ZP2018-0040",
+   "units": 1,
+   "quote": "the proposed by-right ADU",
+   "source": "ZP2018-0040",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2018-0052",
+   "units": 260,
+   "quote": "260 dwelling units",
+   "source": "ZP2018-0052",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2018-0058",
+   "units": 1,
+   "quote": "a new 640 square foot Accessory Dwelling Unit (ADU)",
+   "source": "ZP2018-0058",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2018-0067",
+   "units": 1,
+   "quote": "new 2-story, 3,768 square-foot single-family residence",
+   "source": "ZP2018-0067",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2018-0080",
+   "units": null
+  },
+  {
+   "project_key": "ZP2018-0081",
+   "units": null
+  },
+  {
+   "project_key": "ZP2018-0107",
+   "units": 1,
+   "quote": "adding one dwelling unit",
+   "source": "ZP2018-0107",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2018-0161",
+   "units": 2,
+   "quote": "new two-story 2-dwelling residence",
+   "source": "ZP2018-0161",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2018-0178",
+   "units": null
+  },
+  {
+   "project_key": "ZP2018-0180",
+   "units": null
+  },
+  {
+   "project_key": "ZP2018-0183",
+   "units": 1,
+   "quote": "new Accessory Dwelling Unit (ADU)",
+   "source": "ZP2018-0183",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2018-0193",
+   "units": 1,
+   "quote": "New 4,532 square foot single family house",
+   "source": "ZP2018-0193",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2018-0194",
+   "units": 1,
+   "quote": "New 3,831 square foot single family house",
+   "source": "ZP2018-0194",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2018-0220",
+   "units": 95,
+   "quote": "new 6-story mixed use building with 95 dwelling units",
+   "source": "ZP2018-0220",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2018-0227",
+   "units": 1,
+   "quote": "New 3,718 square foot single family house",
+   "source": "ZP2018-0227",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2023-0095",
+   "units": 78,
+   "quote": "78 studio units",
+   "source": "ZP2023-0095",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2023-0096",
+   "units": 15,
+   "quote": "15 dwelling units",
+   "source": "ZP2023-0096",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2023-0099",
+   "units": 105,
+   "quote": "105 dwelling",
+   "source": "ZP2023-0099",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2023-0107",
+   "units": 66,
+   "quote": "66 dwelling units",
+   "source": "ZP2023-0107",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2023-0123",
+   "units": 5,
+   "quote": "a total of five dwelling units",
+   "source": "ZP2023-0123",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2023-0126",
+   "units": 110,
+   "quote": "110 dwelling units",
+   "source": "ZP2023-0126",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2023-0127",
+   "units": 1,
+   "quote": "changing the use of the second floor office space to a dwelling unit",
+   "source": "ZP2023-0127",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2023-0138",
+   "units": 72,
+   "quote": "72 dwelling units",
+   "source": "ZP2023-0138",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2020-0160",
+   "units": 1,
+   "quote": "New 3,140 sq ft single family home",
+   "source": "ZP2020-0160",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2021-0001",
+   "units": null
+  },
+  {
+   "project_key": "ZP2021-0002",
+   "units": 1,
+   "quote": "second dwelling unit",
+   "source": "ZP2021-0002",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2021-0009",
+   "units": 3,
+   "quote": "construction of three new, detached SFDs",
+   "source": "ZP2021-0009",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2021-0011",
+   "units": null
+  },
+  {
+   "project_key": "ZP2021-0027",
+   "units": 2,
+   "quote": "two (2) Live/Work Units",
+   "source": "ZP2021-0027",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2021-0046",
+   "units": 126,
+   "quote": "126 dwelling units",
+   "source": "ZP2021-0046",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2021-0055",
+   "units": null
+  },
+  {
+   "project_key": "PLN2025-0081",
+   "units": 3,
+   "quote": "develop three new single-family homes",
+   "source": "PLN2025-0081",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2025-0101",
+   "units": null
+  },
+  {
+   "project_key": "PLN2025-0106",
+   "units": null
+  },
+  {
+   "project_key": "PLN2025-0115",
+   "units": null
+  },
+  {
+   "project_key": "PLN2025-0116",
+   "units": null
+  },
+  {
+   "project_key": "PLN2025-0117",
+   "units": 3,
+   "quote": "construct three three-story single-family homes",
+   "source": "PLN2025-0117",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2025-0118",
+   "units": 4,
+   "quote": "establish four dwelling units",
+   "source": "PLN2025-0118",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2025-0126",
+   "units": null
+  },
+  {
+   "project_key": "ZP2025-0069",
+   "units": 3,
+   "quote": "three residential units",
+   "source": "ZP2025-0069",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2025-0079",
+   "units": 12,
+   "quote": "12 residential apartments",
+   "source": "ZP2025-0079",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2025-0086",
+   "units": null
+  },
+  {
+   "project_key": "ZP2025-0093",
+   "units": 1,
+   "quote": "add a 440 square foot one-bedroom ADU",
+   "source": "ZP2025-0093",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2025-0107",
+   "units": 58,
+   "quote": "~58 residential units",
+   "source": "ZP2025-0107",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2025-0112",
+   "units": null
+  },
+  {
+   "project_key": "ZP2026-0007",
+   "units": 45,
+   "quote": "45-unit housing development",
+   "source": "ZP2026-0007",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2026-0015",
+   "units": 68,
+   "quote": "68 units (7 VLI units)",
+   "source": "ZP2026-0015",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2023-0075",
+   "units": 1,
+   "quote": "construct a new single-family residence",
+   "source": "PLN2023-0075",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "PLN2023-0098",
+   "units": 48,
+   "quote": "48 united mixed-use development",
+   "source": "PLN2023-0098",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2024-0010",
+   "units": 739,
+   "quote": "739 units",
+   "source": "PLN2024-0010",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2024-0016",
+   "units": 3,
+   "quote": "addition of 3 accessible units",
+   "source": "PLN2024-0016",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2024-0023",
+   "units": 70,
+   "quote": "70 unit development",
+   "source": "PLN2024-0023",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2024-0024",
+   "units": null
+  },
+  {
+   "project_key": "PLN2024-0061",
+   "units": 1,
+   "quote": "add new detached Accessory Dwelling Unit",
+   "source": "PLN2024-0061",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "PLN2024-0062",
+   "units": 1,
+   "quote": "install an 800 SF, HUD-Approved Manufactured Accessory Dwelling Unit (ADU)",
+   "source": "PLN2024-0062",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2018-0234",
+   "units": 1,
+   "quote": "New detached ADU",
+   "source": "ZP2018-0234",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2018-0237",
+   "units": 2,
+   "quote": "Construct 2 new dwelling units (duplex)",
+   "source": "ZP2018-0237",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2018-0239",
+   "units": 155,
+   "quote": "155 dwelling units",
+   "source": "ZP2018-0239",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2019-0006",
+   "units": null
+  },
+  {
+   "project_key": "ZP2019-0013",
+   "units": 1,
+   "quote": "converting a basement to an ADU",
+   "source": "ZP2019-0013",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2019-0029",
+   "units": 2,
+   "quote": "Create 2 new dwellings",
+   "source": "ZP2019-0029",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2019-0032",
+   "units": 1,
+   "quote": "construct an addition single-family dwelling on a lot with an existing single-family dwelling",
+   "source": "ZP2019-0032",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2019-0048",
+   "units": 4,
+   "quote": "build 3-story, 4-unit building",
+   "source": "ZP2019-0048",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2025-0132",
+   "units": 32,
+   "quote": "32 three-story dwelling units",
+   "source": "PLN2025-0132",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2026-0030",
+   "units": null
+  },
+  {
+   "project_key": "PLN2026-0034",
+   "units": 2,
+   "quote": "construct two detached residential units",
+   "source": "PLN2026-0034",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2026-0039",
+   "units": null
+  },
+  {
+   "project_key": "PLN2026-0047",
+   "units": 1,
+   "quote": "propose a new detached single-family dwelling to a lot with an existing single-family dwelling",
+   "source": "PLN2026-0047",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "PLN2026-0048",
+   "units": 1,
+   "quote": "create a new dwelling unit on the ground floor of the existing residential building",
+   "source": "PLN2026-0048",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "PLN2026-0049",
+   "units": null
+  },
+  {
+   "project_key": "PLN2026-0058",
+   "units": null
+  },
+  {
+   "project_key": "ZP2023-0060",
+   "units": null
+  },
+  {
+   "project_key": "ZP2023-0063",
+   "units": 3,
+   "quote": "construct a new 3-unit building on a vacant lot",
+   "source": "ZP2023-0063",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2023-0064",
+   "units": 74,
+   "quote": "74 units of multi-family housing",
+   "source": "ZP2023-0064",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2023-0070",
+   "units": 17,
+   "quote": "17 dwelling units",
+   "source": "ZP2023-0070",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2023-0079",
+   "units": 227,
+   "quote": "227 dwelling units",
+   "source": "ZP2023-0079",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2023-0089",
+   "units": null
+  },
+  {
+   "project_key": "ZP2023-0090",
+   "units": null
+  },
+  {
+   "project_key": "ZP2023-0094",
+   "units": 4,
+   "quote": "converting four existing office spaces into four live/work units",
+   "source": "ZP2023-0094",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2015-0193",
+   "units": 1,
+   "quote": "Construct new single family home",
+   "source": "ZP2015-0193",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2015-0202",
+   "units": 1,
+   "quote": "addition of dwelling unit",
+   "source": "ZP2015-0202",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2015-0226",
+   "units": 1,
+   "quote": "ADU to the rear of an existing SFR",
+   "source": "ZP2015-0226",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2015-0229",
+   "units": null
+  },
+  {
+   "project_key": "ZP2015-0233",
+   "units": 1,
+   "quote": "convert a church to a dwelling unit",
+   "source": "ZP2015-0233",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2015-0234",
+   "units": 1,
+   "quote": "new dwelling unit in the R-1H District",
+   "source": "ZP2015-0234",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2015-0253",
+   "units": null
+  },
+  {
+   "project_key": "ZP2016-0014",
+   "units": null
+  },
+  {
+   "project_key": "ZP2018-0112",
+   "units": 56,
+   "quote": "56-unit mixed-use building",
+   "source": "ZP2018-0112",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2018-0113",
+   "units": 2,
+   "quote": "2 new units",
+   "source": "ZP2018-0113",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2018-0134",
+   "units": null
+  },
+  {
+   "project_key": "ZP2018-0136",
+   "units": 27,
+   "quote": "approved 5-story, 27-unit mixed-use project",
+   "source": "ZP2018-0136",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2018-0144",
+   "units": 17,
+   "quote": "17 dwelling units",
+   "source": "ZP2018-0144",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2018-0145",
+   "units": 2,
+   "quote": "new 2-story duplex",
+   "source": "ZP2018-0145",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2018-0154",
+   "units": 1,
+   "quote": "Conversion of garage to ADU",
+   "source": "ZP2018-0154",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2018-0156",
+   "units": 42,
+   "quote": "42 unit, 39 parking space, mixed use bldg with ground floor commercial",
+   "source": "DRCP2017-0009",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2026-0166",
+   "units": 4,
+   "quote": "construct four single-family houses",
+   "source": "PLN2026-0166",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2026-0175",
+   "units": null
+  },
+  {
+   "project_key": "PLN2026-0180",
+   "units": null
+  },
+  {
+   "project_key": "PLN2026-0185",
+   "units": null
+  },
+  {
+   "project_key": "PLN2026-0187",
+   "units": null
+  },
+  {
+   "project_key": "ZCBP2015-0666",
+   "units": 1,
+   "quote": "Conversion of existing space to ADU and habitable space.",
+   "source": "ZCBP2015-0666",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZCBP2015-0733",
+   "units": 1,
+   "quote": "New by-right accessory dwelling unit and deck.",
+   "source": "ZCBP2015-0733",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZCBP2015-1041",
+   "units": null
+  },
+  {
+   "project_key": "ZP2026-0091",
+   "units": 8,
+   "quote": "adding approximately 8 new residential units",
+   "source": "ZP2026-0091",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2022-0144",
+   "units": 214,
+   "quote": "214 dwelling units",
+   "source": "ZP2022-0144",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2022-0145",
+   "units": null
+  },
+  {
+   "project_key": "ZP2022-0149",
+   "units": 132,
+   "quote": "132 dwelling units utilizing State Density Bonus",
+   "source": "ZP2022-0149",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2022-0171",
+   "units": 223,
+   "quote": "223 dwelling units",
+   "source": "ZP2022-0171",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2022-0172",
+   "units": null
+  },
+  {
+   "project_key": "ZP2022-0174",
+   "units": 65,
+   "quote": "65-unit",
+   "source": "PLN2026-0184",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2022-0175",
+   "units": 599,
+   "quote": "599 dwelling units",
+   "source": "ZP2022-0175",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2022-0179",
+   "units": 60,
+   "quote": "60 residential units",
+   "source": "ZP2026-0076",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2021-0186",
+   "units": 44,
+   "quote": "add three stories with 44 dwellings",
+   "source": "ZP2021-0186",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2021-0192",
+   "units": 22,
+   "quote": "construct a 36,529 square-foot, 7-story (75 feet) mixed-use building with 22 dwelling units",
+   "source": "ZP2021-0192",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2021-0193",
+   "units": 189,
+   "quote": "New multi-family residential apartment building with a total of 189 units",
+   "source": "ZP2021-0193",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2021-0210",
+   "units": 37,
+   "quote": "Construct 8-story residential building with 37 units",
+   "source": "ZP2021-0210",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2021-0211",
+   "units": 2,
+   "quote": "two single-family dwellings proposed for existing site containing one single-family dwelling",
+   "source": "ZP2021-0211",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2021-0212",
+   "units": 1,
+   "quote": "create a new dwelling unit on the first story",
+   "source": "ZP2021-0212",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2022-0010",
+   "units": 3,
+   "quote": "add three dwelling units to an existing group living accommodation",
+   "source": "ZP2022-0010",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2022-0020",
+   "units": 3,
+   "quote": "Construct new 7,020 sq.ft. building containing three live/work units on vacant 3,510 sq.ft. parcel",
+   "source": "ZP2022-0020",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2017-0044",
+   "units": 1,
+   "quote": "new dwelling unit over 14 ft. with reduced rear yard setback",
+   "source": "ZP2017-0044",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2017-0055",
+   "units": 1,
+   "quote": "New second dwelling unit on rear of lot.",
+   "source": "ZP2017-0055",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2017-0059",
+   "units": 1,
+   "quote": "Legalize attached 863 SF ADU without permits.",
+   "source": "ZP2017-0059",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2017-0062",
+   "units": null
+  },
+  {
+   "project_key": "ZP2017-0063",
+   "units": null
+  },
+  {
+   "project_key": "ZP2017-0070",
+   "units": null
+  },
+  {
+   "project_key": "ZP2017-0079",
+   "units": 1,
+   "quote": "legalize conversion and expansion of an accessory structure to an ADU",
+   "source": "ZP2017-0079",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2017-0099",
+   "units": null
+  },
+  {
+   "project_key": "PLN2025-0051",
+   "units": null
+  },
+  {
+   "project_key": "PLN2025-0058",
+   "units": 4,
+   "quote": "construct 4 residential units in 3 separate buildings",
+   "source": "PLN2025-0058",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2025-0061",
+   "units": 3,
+   "quote": "residential building including three units",
+   "source": "PLN2025-0061",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2025-0065",
+   "units": 1,
+   "quote": "construct a 2-story, 3-bed, 3-bath single family dwelling",
+   "source": "PLN2025-0065",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "PLN2025-0068",
+   "units": 4,
+   "quote": "The resultant project will be (4) new single family homes.",
+   "source": "PLN2025-0068",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2025-0073",
+   "units": 2,
+   "quote": "two new 1,653s.f. 3-story units",
+   "source": "PLN2025-0073",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2025-0075",
+   "units": 3,
+   "quote": "new three story three unit residential building",
+   "source": "PLN2025-0075",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2025-0079",
+   "units": null
+  },
+  {
+   "project_key": "ZP2024-0057",
+   "units": 97,
+   "quote": "Total of 97 units",
+   "source": "ZP2024-0057",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2024-0058",
+   "units": 359,
+   "quote": "359 dwelling units",
+   "source": "ZP2024-0058",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2024-0059",
+   "units": null
+  },
+  {
+   "project_key": "ZP2024-0060",
+   "units": null
+  },
+  {
+   "project_key": "ZP2024-0066",
+   "units": 131,
+   "quote": "131-unit mixed-use housing development",
+   "source": "ZP2024-0066",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2024-0067",
+   "units": null
+  },
+  {
+   "project_key": "ZP2024-0071",
+   "units": 74,
+   "quote": "74 dwelling units",
+   "source": "ZP2024-0071",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2024-0074",
+   "units": 158,
+   "quote": "158-unit mixed-use housing development",
+   "source": "ZP2024-0074",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2026-0131",
+   "units": null
+  },
+  {
+   "project_key": "PLN2026-0143",
+   "units": 4,
+   "quote": "construct two additional units for a total of four studios",
+   "source": "PLN2026-0143",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2026-0152",
+   "units": null
+  },
+  {
+   "project_key": "PLN2026-0155",
+   "units": 40,
+   "quote": "40-unit housing development",
+   "source": "PLN2026-0155",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2026-0156",
+   "units": 2,
+   "quote": "convert the second-floor medical office of an existing two-story commercial building into two residential dwelling units",
+   "source": "PLN2026-0156",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2026-0159",
+   "units": null
+  },
+  {
+   "project_key": "PLN2026-0161",
+   "units": null
+  },
+  {
+   "project_key": "PLN2026-0162",
+   "units": null
+  },
+  {
+   "project_key": "ZP2016-0147",
+   "units": 4,
+   "quote": "Construct 4, 3-story buildings with 1 live-work unit each",
+   "source": "ZP2016-0147",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2016-0165",
+   "units": null
+  },
+  {
+   "project_key": "ZP2016-0172",
+   "units": 32,
+   "quote": "New 5-story, 32-unit mixed-use building",
+   "source": "ZP2016-0172",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2016-0205",
+   "units": null
+  },
+  {
+   "project_key": "ZP2016-0214",
+   "units": null
+  },
+  {
+   "project_key": "ZP2016-0216",
+   "units": 44,
+   "quote": "4-story, 44-unit mixed-use building",
+   "source": "ZP2016-0216",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2016-0227",
+   "units": 1,
+   "quote": "convert portion of existing SFR to ADU",
+   "source": "ZP2016-0227",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2016-0232",
+   "units": 2,
+   "quote": "Convert SFR to a duplex",
+   "source": "ZP2016-0232",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2022-0021",
+   "units": 51,
+   "quote": "51 residential dwelling units",
+   "source": "ZP2022-0021",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2022-0026",
+   "units": 326,
+   "quote": "326 dwelling units",
+   "source": "ZP2022-0026",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2022-0033",
+   "units": 4,
+   "quote": "4 dwelling units",
+   "source": "ZP2022-0033",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2022-0046",
+   "units": 166,
+   "quote": "166 dwellings",
+   "source": "ZP2022-0046",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2022-0087",
+   "units": null
+  },
+  {
+   "project_key": "ZP2022-0104",
+   "units": null
+  },
+  {
+   "project_key": "ZP2022-0106",
+   "units": 3,
+   "quote": "three detached dwelling units",
+   "source": "ZP2022-0106",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2022-0107",
+   "units": 16,
+   "quote": "16 dwelling units",
+   "source": "ZP2022-0107",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2020-0104",
+   "units": 257,
+   "quote": "257 dwelling units",
+   "source": "ZP2020-0104",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2020-0126",
+   "units": 1,
+   "quote": "add an additional dwelling unit on a lot that exceed density",
+   "source": "ZP2020-0126",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2020-0127",
+   "units": null
+  },
+  {
+   "project_key": "ZP2020-0128",
+   "units": null
+  },
+  {
+   "project_key": "ZP2020-0129",
+   "units": null
+  },
+  {
+   "project_key": "ZP2020-0136",
+   "units": 1,
+   "quote": "construction of a new Single Family Dwelling and detached garage/Accessory Building",
+   "source": "ZP2020-0136",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2020-0158",
+   "units": 1,
+   "quote": "New 2,905 sq ft single family home",
+   "source": "ZP2020-0158",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2020-0159",
+   "units": 1,
+   "quote": "New 3,344 sq ft single family home",
+   "source": "ZP2020-0159",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2023-0003",
+   "units": 105,
+   "quote": "construction of a new 14-story mixed-use building containing 105 dwelling units",
+   "source": "ZP2023-0003",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2023-0004",
+   "units": null
+  },
+  {
+   "project_key": "ZP2023-0025",
+   "units": null
+  },
+  {
+   "project_key": "ZP2023-0036",
+   "units": 1,
+   "quote": "construct a 680 square foot single-story (14 feet) single-family residence on a vacant nonconforming lot with reduced setbacks",
+   "source": "ZP2023-0036",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2023-0040",
+   "units": 599,
+   "quote": "Construction of a 28-story, 28,319 sq ft mixed-use building with 599 dwelling units",
+   "source": "ZP2023-0040",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2023-0046",
+   "units": 1,
+   "quote": "a 638 sq ft. one bedroom ADU created within the added floor area and existing main dwelling",
+   "source": "ZP2023-0046",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2023-0058",
+   "units": 84,
+   "quote": "build an eight-story (89 foot) mixed-use building with 84 dwelling units",
+   "source": "ZP2023-0058",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2023-0059",
+   "units": 2,
+   "quote": "Legally convert a 2,535 square-foot two-story single-family dwelling unit into two individual units.",
+   "source": "ZP2023-0059",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZCBP2015-1531",
+   "units": 1,
+   "quote": "NEW 1,935 SQ FT. HOUSE",
+   "source": "ZCBP2015-1531",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZCBP2015-1532",
+   "units": 1,
+   "quote": "NEW 2011 SQ. FT. HOUSE",
+   "source": "ZCBP2015-1532",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZCBP2015-1534",
+   "units": 2,
+   "quote": "CONVERNTING A SINGLE FAMILY INTO 2 UNITS",
+   "source": "ZCBP2015-1534",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZCBP2015-1557",
+   "units": null
+  },
+  {
+   "project_key": "ZCBP2015-1685",
+   "units": 4,
+   "quote": "4 UNIT APARTMENT",
+   "source": "ZCBP2015-1685",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZCBP2015-1705",
+   "units": 1,
+   "quote": "NEW 440 SQ. FT. BY-RIGHT ADU",
+   "source": "ZCBP2015-1705",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZCBP2015-1746",
+   "units": 1,
+   "quote": "CONVERT EXISTING 644 SQ. FT. BASEMENT TO ADU",
+   "source": "ZCBP2015-1746",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZCBP2015-1754",
+   "units": null
+  },
+  {
+   "project_key": "PLN2022-0094",
+   "units": null
+  },
+  {
+   "project_key": "PLN2022-0106",
+   "units": 1,
+   "quote": "a new residential unit",
+   "source": "PLN2022-0106",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "PLN2022-0110",
+   "units": null
+  },
+  {
+   "project_key": "PLN2022-0112",
+   "units": 60,
+   "quote": "60 residential units",
+   "source": "PLN2026-0141",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2023-0007",
+   "units": 1,
+   "quote": "an ADU",
+   "source": "PLN2023-0007",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "PLN2023-0032",
+   "units": null
+  },
+  {
+   "project_key": "PLN2023-0057",
+   "units": null
+  },
+  {
+   "project_key": "PLN2023-0061",
+   "units": 39,
+   "quote": "a total of 39 flats",
+   "source": "PLN2023-0061",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2023-0154",
+   "units": null
+  },
+  {
+   "project_key": "ZP2023-0163",
+   "units": 201,
+   "quote": "201 dwelling units",
+   "source": "ZP2023-0163",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2024-0011",
+   "units": 2,
+   "quote": "construct two new three-story detached dwellings (1,470 square feet each) behind the existing house",
+   "source": "ZP2024-0011",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2024-0024",
+   "units": 2,
+   "quote": "duplex",
+   "source": "ZP2024-0024",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2024-0027",
+   "units": 32,
+   "quote": "32 dwelling units",
+   "source": "ZP2024-0027",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2024-0029",
+   "units": 79,
+   "quote": "79 dwelling units",
+   "source": "ZP2024-0029",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2024-0047",
+   "units": 94,
+   "quote": "94 residential units",
+   "source": "ZP2024-0047",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2024-0052",
+   "units": 1,
+   "quote": "construct one 2,950 square-foot single-family dwelling",
+   "source": "ZP2024-0052",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2016-0019",
+   "units": 1,
+   "quote": "Convert 400 sq ft of existing 6000 sq ft garage into ADU",
+   "source": "ZP2016-0019",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2016-0022",
+   "units": 1,
+   "quote": "New SFR home in R-1H District on a vacant lot that has no address assignment at the time of application submittal.",
+   "source": "ZP2016-0022",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2016-0028",
+   "units": 18,
+   "quote": "Residential development of 18 units",
+   "source": "ZP2016-0028",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2016-0031",
+   "units": 1,
+   "quote": "Accessory Dwelling Unit within required side/rear setback, and height taller than 14'",
+   "source": "ZP2016-0031",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2016-0033",
+   "units": 1,
+   "quote": "An Accessory Dwelling Unit over 14' in height",
+   "source": "ZP2016-0033",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2016-0034",
+   "units": null
+  },
+  {
+   "project_key": "ZP2016-0046",
+   "units": 3,
+   "quote": "Convert an existing single family home into a triplex.",
+   "source": "ZP2016-0046",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2016-0053",
+   "units": 1,
+   "quote": "Convert an existing accessory structure(garage) to an accessory dwelling unit above 10 feet in height.",
+   "source": "ZP2016-0053",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2021-0121",
+   "units": 3,
+   "quote": "construction of three three-story single-family dwellings",
+   "source": "ZP2021-0121",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2021-0129",
+   "units": null
+  },
+  {
+   "project_key": "ZP2021-0140",
+   "units": 2,
+   "quote": "Change two approximately 1,000 sq. ft. commercial spaces to residential dwelling units",
+   "source": "ZP2021-0140",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2021-0158",
+   "units": 50,
+   "quote": "50 unit multi-family mixed-use project",
+   "source": "ZP2021-0158",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2021-0162",
+   "units": 283,
+   "quote": "283 dwelling units",
+   "source": "ZP2021-0162",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2021-0164",
+   "units": 3,
+   "quote": "Convert commercial space at the back of the lot to three dwelling units",
+   "source": "ZP2021-0164",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2021-0177",
+   "units": 1,
+   "quote": "New single family dwelling",
+   "source": "ZP2021-0177",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2021-0181",
+   "units": 1,
+   "quote": "Construction of a new single-family dwelling",
+   "source": "ZP2021-0181",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2016-0062",
+   "units": 1,
+   "quote": "single family home",
+   "source": "ZP2016-0062",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2016-0066",
+   "units": 1,
+   "quote": "an Accessory Dwelling Unit",
+   "source": "ZP2016-0066",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2016-0085",
+   "units": null
+  },
+  {
+   "project_key": "ZP2016-0091",
+   "units": 8,
+   "quote": "8 du building",
+   "source": "ZP2016-0091",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2016-0097",
+   "units": 1,
+   "quote": "single family home",
+   "source": "ZP2016-0097",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2016-0107",
+   "units": 1,
+   "quote": "an Accessory Dwelling Unit",
+   "source": "ZP2016-0107",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2016-0135",
+   "units": null
+  },
+  {
+   "project_key": "ZP2016-0138",
+   "units": 1,
+   "quote": "single-family home",
+   "source": "ZP2016-0138",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2020-0022",
+   "units": 11,
+   "quote": "Pre-app for 11 dwelling units",
+   "source": "PLN2019-0020",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2020-0041",
+   "units": 3,
+   "quote": "3 dwelling units",
+   "source": "ZP2020-0041",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2020-0045",
+   "units": 11,
+   "quote": "eleven dwelling units",
+   "source": "ZP2020-0045",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2020-0060",
+   "units": null
+  },
+  {
+   "project_key": "ZP2020-0069",
+   "units": 110,
+   "quote": "110 units",
+   "source": "ZP2020-0069",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2020-0072",
+   "units": 219,
+   "quote": "a total of 219 dwelling units",
+   "source": "ZP2022-0178",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2020-0075",
+   "units": 4,
+   "quote": "four (4) dwelling units",
+   "source": "ZP2020-0075",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2020-0102",
+   "units": 82,
+   "quote": "82 dwelling units",
+   "source": "ZP2020-0102",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2024-0181",
+   "units": 240,
+   "quote": "construction of a new 23-story (256'-0\"), 240-unit housing development",
+   "source": "ZP2024-0181",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2024-0182",
+   "units": 160,
+   "quote": "construction of a new 23-story (256'-0\"), 160-unit student housing development",
+   "source": "ZP2024-0182",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2025-0014",
+   "units": null
+  },
+  {
+   "project_key": "ZP2025-0020",
+   "units": 3,
+   "quote": "Construction of three 3-story detached single-family homes",
+   "source": "ZP2025-0020",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2025-0021",
+   "units": null
+  },
+  {
+   "project_key": "ZP2025-0025",
+   "units": null
+  },
+  {
+   "project_key": "ZP2025-0051",
+   "units": null
+  },
+  {
+   "project_key": "ZP2025-0068",
+   "units": 1,
+   "quote": "700 square-foot accessory dwelling unit",
+   "source": "ZP2025-0068",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2015-0124",
+   "units": null
+  },
+  {
+   "project_key": "ZP2015-0125",
+   "units": null
+  },
+  {
+   "project_key": "ZP2015-0131",
+   "units": 1,
+   "quote": "2,935 Single Family residence",
+   "source": "ZP2015-0131",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2015-0132",
+   "units": 2,
+   "quote": "Two new dwelling units",
+   "source": "ZP2015-0132",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2015-0151",
+   "units": 1,
+   "quote": "new detached ADU",
+   "source": "ZP2015-0151",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2015-0168",
+   "units": null
+  },
+  {
+   "project_key": "ZP2015-0172",
+   "units": null
+  },
+  {
+   "project_key": "ZP2015-0180",
+   "units": 2,
+   "quote": "build two new detached, two-story homes",
+   "source": "ZP2015-0180",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2017-0106",
+   "units": 1,
+   "quote": "convert an existing permitted accessory building to an accessory dwelling unit",
+   "source": "ZP2017-0106",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2017-0129",
+   "units": 1,
+   "quote": "create a new ADU in the ground level",
+   "source": "ZP2017-0129",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2017-0134",
+   "units": 1,
+   "quote": "create a new ~750 sq. ft. attached Accessory Dwelling Unit",
+   "source": "ZP2017-0134",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2017-0191",
+   "units": null
+  },
+  {
+   "project_key": "ZP2017-0196",
+   "units": null
+  },
+  {
+   "project_key": "ZP2018-0003",
+   "units": null
+  },
+  {
+   "project_key": "ZP2018-0021",
+   "units": 9,
+   "quote": "a 9th unit",
+   "source": "ZP2018-0021",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2018-0034",
+   "units": null
+  },
+  {
+   "project_key": "PLN2026-0073",
+   "units": null
+  },
+  {
+   "project_key": "PLN2026-0081",
+   "units": null
+  },
+  {
+   "project_key": "PLN2026-0087",
+   "units": 4,
+   "quote": "four residential dwelling units",
+   "source": "PLN2026-0087",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2026-0109",
+   "units": 4,
+   "quote": "Construct four units",
+   "source": "PLN2026-0109",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2026-0111",
+   "units": null
+  },
+  {
+   "project_key": "PLN2026-0113",
+   "units": null
+  },
+  {
+   "project_key": "PLN2026-0117",
+   "units": null
+  },
+  {
+   "project_key": "PLN2026-0122",
+   "units": 1,
+   "quote": "will be converted into a second dwelling unit",
+   "source": "PLN2026-0122",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2015-0079",
+   "units": 2,
+   "quote": "Single family to duplex conversion",
+   "source": "ZP2015-0079",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2015-0087",
+   "units": 3,
+   "quote": "construct three new two-story single family residences",
+   "source": "ZP2015-0087",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2015-0098",
+   "units": 1,
+   "quote": "waive parking for new ADU",
+   "source": "ZP2015-0098",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2015-0099",
+   "units": null
+  },
+  {
+   "project_key": "ZP2015-0103",
+   "units": 1,
+   "quote": "add a third unit",
+   "source": "ZP2015-0103",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2015-0112",
+   "units": null
+  },
+  {
+   "project_key": "ZP2015-0115",
+   "units": 10,
+   "quote": "add 10 unit to an previously entitled mixed use project",
+   "source": "ZP2015-0115",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2015-0123",
+   "units": null
+  },
+  {
+   "project_key": "ZCBP2015-1080",
+   "units": null
+  },
+  {
+   "project_key": "ZCBP2015-1205",
+   "units": 1,
+   "quote": "NEW SECOND UNIT",
+   "source": "ZCBP2015-1205",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZCBP2015-1300",
+   "units": 1,
+   "quote": "NEW ADU",
+   "source": "ZCBP2015-1300",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZCBP2015-1422",
+   "units": null
+  },
+  {
+   "project_key": "ZCBP2015-1435",
+   "units": 42,
+   "quote": "NEW CONSTRUCTION OF 42 RESIDENTIAL UNITS",
+   "source": "ZCBP2015-1435",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZCBP2015-1491",
+   "units": 1,
+   "quote": "NEW ADU AT LOWER LEVEL",
+   "source": "ZCBP2015-1491",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZCBP2015-1497",
+   "units": 1,
+   "quote": "CREATING A SEPARATE ACCESSORY UNIT",
+   "source": "ZCBP2015-1497",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZCBP2015-1500",
+   "units": null
+  },
+  {
+   "project_key": "ZP2022-0110",
+   "units": 26,
+   "quote": "26 dwelling units",
+   "source": "ZP2022-0110",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2022-0113",
+   "units": null
+  },
+  {
+   "project_key": "ZP2022-0115",
+   "units": 8,
+   "quote": "8 replacement apartment units",
+   "source": "ZP2022-0115",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2022-0116",
+   "units": 242,
+   "quote": "242 dwelling units",
+   "source": "ZP2022-0116",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2022-0120",
+   "units": 9,
+   "quote": "nine residential dwelling units",
+   "source": "ZP2022-0120",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2022-0122",
+   "units": null
+  },
+  {
+   "project_key": "ZP2022-0132",
+   "units": 112,
+   "quote": "112 DWELLING UNITS",
+   "source": "ZP2022-0132",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2022-0135",
+   "units": 485,
+   "quote": "485 dwelling units",
+   "source": "ZP2022-0135",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2021-0061",
+   "units": 1,
+   "quote": "an ADU in the basement level",
+   "source": "ZP2021-0061",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2021-0066",
+   "units": 194,
+   "quote": "194 Dwelling Units",
+   "source": "ZP2021-0066",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2021-0070",
+   "units": 66,
+   "quote": "66 dwelling units",
+   "source": "ZP2021-0070",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2021-0072",
+   "units": 4,
+   "quote": "including four dwelling units",
+   "source": "ZP2021-0072",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2021-0073",
+   "units": 44,
+   "quote": "44 units for student housing",
+   "source": "ZP2021-0073",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2021-0095",
+   "units": 12,
+   "quote": "12 units",
+   "source": "ZP2021-0095",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2021-0110",
+   "units": 50,
+   "quote": "50 unit residential building",
+   "source": "ZP2021-0110",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2021-0111",
+   "units": 1,
+   "quote": "1 manager's unit",
+   "source": "ZP2021-0111",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2019-0193",
+   "units": null
+  },
+  {
+   "project_key": "ZP2019-0211",
+   "units": 2,
+   "quote": "Convert attic space to two ADU's",
+   "source": "ZP2019-0211",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2019-0212",
+   "units": null
+  },
+  {
+   "project_key": "ZP2019-0213",
+   "units": null
+  },
+  {
+   "project_key": "ZP2019-0217",
+   "units": 17,
+   "quote": "a total of 17 units (43 bedrooms)",
+   "source": "ZP2019-0217",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "ZP2020-0006",
+   "units": 1,
+   "quote": "New Single Family Dwelling on new parcel at 36 Hill Road",
+   "source": "ZP2020-0006",
+   "read_as": "by_definition"
+  },
+  {
+   "project_key": "ZP2020-0009",
+   "units": null
+  },
+  {
+   "project_key": "ZP2020-0011",
+   "units": 38,
+   "quote": "38 dwellings with a total of 135 bedrooms",
+   "source": "ZP2020-0011",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2025-0017",
+   "units": 6,
+   "quote": "into six residential units and one commercial unit",
+   "source": "PLN2025-0037",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2025-0019",
+   "units": 18,
+   "quote": "18-residential unit multi-family dwelling (apartment building)",
+   "source": "PLN2025-0019",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2025-0028",
+   "units": 2,
+   "quote": "construct two new three-story single-family dwellings",
+   "source": "PLN2025-0072",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2025-0038",
+   "units": 68,
+   "quote": "68 dwelling units",
+   "source": "PLN2025-0038",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2025-0040",
+   "units": 6,
+   "quote": "6-unit housing development",
+   "source": "PLN2025-0040",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2025-0041",
+   "units": 3,
+   "quote": "construct three detached single-family houses",
+   "source": "PLN2025-0041",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2025-0043",
+   "units": null
+  },
+  {
+   "project_key": "PLN2025-0046",
+   "units": null
+  },
+  {
+   "project_key": "DRCP2019-0008",
+   "units": 6,
+   "quote": "6 live work",
+   "source": "DRCP2019-0008",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "DRCP2020-0004",
+   "units": 1,
+   "quote": "one live/work unit",
+   "source": "DRCP2020-0004",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "DRCP2022-0005",
+   "units": 1,
+   "quote": "one single-family dwelling",
+   "source": "DRCP2022-0005",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2017-0039",
+   "units": 1,
+   "quote": "I dwelling unit and 1 accessory dwelling unit",
+   "source": "PLN2017-0039",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2017-0063",
+   "units": null
+  },
+  {
+   "project_key": "PLN2019-0018",
+   "units": 12,
+   "quote": "12 suites/units",
+   "source": "PLN2019-0018",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2019-0033",
+   "units": 6,
+   "quote": "6 live work units",
+   "source": "PLN2019-0033",
+   "read_as": "stated"
+  },
+  {
+   "project_key": "PLN2020-0001",
+   "units": 27,
+   "quote": "27 residential units",
+   "source": "PLN2020-0001",
+   "read_as": "stated"
+  }
+ ]
+}

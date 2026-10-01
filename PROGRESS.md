@@ -572,8 +572,12 @@ Deliberately NOT migrated (v4 supersedes or v2 was unsourced): v1-migrated affor
 classifications (v4 reads sources); centroid points; v2's single-unit "ADU" projects whose permits only alter an
 existing ADU (11, v4's reading is right); work queues (planning_queue_2026); v2-only vocabularies.
 
-**NEXT:** Datasette re-point -> fees harvest -> attachment lists -> geometries -> Panoramic ledger -> Explorer re-point
--> archive v2 -> next swap (views with
+**Datasette re-pointed to v4 (2026-10-01, `d63a0e5`):** gen_datasette_dbs.py reads v4's serving views; 9 tables
+(projects 1,544, people 12,607, city_records 9,289...); publishing rule applied row by row (errs safe -- unrecognized
+companies like Grosvenor Americas are masked; fix = a sourced organisation-name list for John). metadata.json + README
+generated from the build. NOT deployed (John: `cd datasette-deploy && flyctl deploy`).
+
+**NEXT:** fees harvest -> attachment lists -> geometries -> Panoramic ledger -> Explorer re-point -> archive v2 -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

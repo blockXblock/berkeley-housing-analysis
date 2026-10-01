@@ -5,6 +5,16 @@
 
 ---
 
+## 2026-09-30 — Live v4 1aa3c045 (rulings 1–4, names, outlines): JN-E PASS, Audit and home pages regenerated
+
+Peer swap to `1aa3c045` (snapshot of the prior live: `keep_snapshot_2026-09-30_pre-v4-names.db`). JN-E PASS vs baseline
+30e (co 4,369, BP 5,274), 0 errors. Findings O08/O09/O10 resolved (applied). **Audit page: ours 4,120 · City 4,022 ·
++98 · explained +44 · not yet attributed +54** (triage re-derived on live). **Home page: 4,369 built since 2018.**
+Pending: ruling 5 (2334 Jefferson) in the peer's next cycle (baseline 30f); future rulings handed over in BATCHES (peer
+request, agreed). **John to re-lock v4; site deploy = scripts/deploy.sh + push (John).**
+
+---
+
 ## 2026-09-30 — Misread sweep · reading rulings now 5 (all John-approved) · RHNA check · audit +55
 
 **Reading rulings (`corrections/v4/reading_rulings.csv`, 5/5):** B2024-05916 1421 Arch (applied, live) · B2017-05275

@@ -40,8 +40,10 @@ units_b AS (SELECT ps.project_id, SUM(u.unit_count) units FROM ps JOIN units u U
 adu_b AS (SELECT ps.project_id, SUM(u.unit_count) adu_units FROM ps JOIN units u USING(structure_id)
           JOIN structures s USING(structure_id) JOIN events e ON e.event_id = s.master_event_id
           WHERE json_extract(e.raw_payload, '$.ADU') = 'Yes' GROUP BY 1),          -- the CPRA permit's own ADU field
+-- first BP (John, 2026-10-01): the earliest issuance among a building's MASTER permits and the PHASE permits a structure
+-- ruling names (S002, 1951 Shattuck's Phase 1). Site work, temporary power, demolition, revisions never set it.
 first_bp AS (SELECT ps.project_id, MIN(e.event_date) bp FROM ps JOIN structure_events se USING(structure_id)
-             JOIN events e USING(event_id) WHERE se.role_in_structure = 'master' AND e.event_type_code = 'permit_issued'
+             JOIN events e USING(event_id) WHERE se.role_in_structure IN ('master', 'phase') AND e.event_type_code = 'permit_issued'
              GROUP BY 1),
 valuation AS (SELECT ps.project_id, SUM(CAST(json_extract(e.raw_payload, '$.JobValuation') AS REAL)) v
               FROM ps JOIN structures s USING(structure_id) JOIN events e ON e.event_id = s.master_event_id GROUP BY 1),
@@ -142,7 +144,51 @@ JOIN structure_events se USING(structure_id) JOIN events e USING(event_id)
 WHERE e.event_type_code IN ('permit_submitted', 'permit_issued', 'permit_finaled', 'permit_completed')
 """
 
-VIEWS = {"v_projects": V_PROJECTS, "v_project_timeline": V_PROJECT_RECORDS}
+# ADU TENURE FROM THE RENT BOARD (John, 2026-10-01: the ADU rule). Replaces ABAG's 30/30/30/10 GUESS with what the
+# registry records, at three strengths that are never mixed:
+#   board_labelled_adu      the Board itself labels a registered unit on the ADU's parcel as an ADU (Unit Status Code
+#                           'ADU' or a designation naming ADU/JADU): that unit IS the ADU -- its status, rent, bedrooms
+#   several_board_labelled  more than one such unit on the parcel: which one is unknown
+#   parcel_registrations    units are registered on the parcel but none is labelled ADU: evidence about the PARCEL
+#                           (n registered, how many with a tenancy begun after the ADU was finaled), never about the ADU
+#   no_registration_found   nothing registered: NOT "not rented" -- owner or family use, or an unregistered rental
+# Parcels join on the CURRENT canonical APN (registry rows on a retired APN are not reached here).
+V_ADU_RENT_BOARD = r"""
+CREATE VIEW v_adu_rent_board AS
+WITH adu AS (
+  SELECT s.structure_id, json_extract(s.notes, '$.master_permits[0]') master_permit, s.completed_on, s.status
+  FROM structures s JOIN events e ON e.event_id = s.master_event_id
+  WHERE json_extract(e.raw_payload, '$.ADU') = 'Yes'),
+reg AS (
+  SELECT a.structure_id, r.event_id, r.source_record_key unit_key,
+         json_extract(r.raw_payload, '$."Unit Status Code"') unit_status,
+         json_extract(r.raw_payload, '$."Unit Designation"') designation,
+         json_extract(r.raw_payload, '$."Occupant Type"') occupant_type,
+         json_extract(r.raw_payload, '$."Number of Bedrooms"') bedrooms,
+         substr(json_extract(r.raw_payload, '$."Tenancy start date"'), 1, 10) tenancy_start,
+         json_extract(r.raw_payload, '$."Starting Rent"') starting_rent,
+         json_extract(r.raw_payload, '$."Rent Ceiling"') rent_ceiling,
+         (json_extract(r.raw_payload, '$."Unit Status Code"') = 'ADU'
+          OR upper(json_extract(r.raw_payload, '$."Unit Designation"')) IN ('ADU', 'JADU')
+          OR upper(json_extract(r.raw_payload, '$."Unit Designation"')) LIKE '%ADU%') board_labelled
+  FROM adu a JOIN structure_parcels sp USING(structure_id)
+  JOIN parcel_identifiers pi ON pi.parcel_id = sp.parcel_id AND pi.is_current = 1
+  JOIN events r ON r.event_type_code = 'registry_unit' AND r.raw_apn = pi.apn_normalized),
+agg AS (
+  SELECT a.structure_id, COUNT(reg.event_id) n_registered, COALESCE(SUM(reg.board_labelled), 0) n_labelled,
+         COALESCE(SUM(a.completed_on IS NOT NULL AND reg.tenancy_start >= a.completed_on), 0) n_tenancy_after_final
+  FROM adu a LEFT JOIN reg USING(structure_id) GROUP BY 1)
+SELECT a.structure_id, a.master_permit, a.completed_on, a.status,
+       CASE WHEN g.n_labelled = 1 THEN 'board_labelled_adu' WHEN g.n_labelled > 1 THEN 'several_board_labelled'
+            WHEN g.n_registered > 0 THEN 'parcel_registrations' ELSE 'no_registration_found' END evidence,
+       g.n_registered, g.n_labelled, g.n_tenancy_after_final,
+       l.unit_key, l.unit_status, l.designation, l.occupant_type, l.bedrooms, l.tenancy_start, l.starting_rent,
+       l.rent_ceiling
+FROM adu a JOIN agg g USING(structure_id)
+LEFT JOIN reg l ON l.structure_id = a.structure_id AND l.board_labelled AND g.n_labelled = 1
+"""
+
+VIEWS = {"v_projects": V_PROJECTS, "v_project_timeline": V_PROJECT_RECORDS, "v_adu_rent_board": V_ADU_RENT_BOARD}
 
 
 def main() -> int:

@@ -275,8 +275,10 @@ def load_parents(csv_path):
 STRUCTURE_RULINGS = ROOT / "corrections/v4/structure_rulings.csv"
 
 
-def load_structure_rulings(path=STRUCTURE_RULINGS) -> list[dict]:
-    """Approved building-merge rulings, checked against their pin in calibration_checksums.json."""
+def load_structure_rulings(path=STRUCTURE_RULINGS, action="merge_masters") -> list[dict]:
+    """Approved structure rulings of one ACTION, checked against their pin in calibration_checksums.json:
+    merge_masters (S001), attach_phase_permit (S002: a construction phase of the building, whose issuance may be the
+    building's first permit), add_address (S003-: an address the sources give the building beyond its permit's)."""
     import csv as _csv
     if not Path(path).exists():
         return []
@@ -285,7 +287,29 @@ def load_structure_rulings(path=STRUCTURE_RULINGS) -> list[dict]:
     permits = sum(len([k for k in r["master_permits"].split(";") if k.strip()]) for r in rows)
     assert (len(rows), permits) == (pin.get("rows"), pin.get("permits")), \
         f"structure_rulings drift: {len(rows)} rows / {permits} permits vs pinned {pin}"
-    return [r for r in rows if r["status"] == "approved" and r["action"] == "merge_masters"]
+    known = {"merge_masters", "attach_phase_permit", "add_address"}
+    assert {r["action"] for r in rows} <= known, f"unknown structure ruling action: {set(r['action'] for r in rows) - known}"
+    return [r for r in rows if r["status"] == "approved" and r["action"] == action]
+
+
+def apply_phase_rulings(permits, groups, attach, unattached) -> dict:
+    """S002-style rulings: attach a named PHASE permit to the building of a named master, role 'phase'. Only a ruling
+    can make a permit a phase -- site work, temporary power, demolition and revisions stay 'attached' and never set the
+    building's first-permit date (John, 2026-10-01). A named permit that is missing or is itself a master HALTS."""
+    phases = collections.defaultdict(set)
+    for r in load_structure_rulings(action="attach_phase_permit"):
+        master, *ph = [k.strip() for k in r["master_permits"].split(";") if k.strip()]
+        root = _root_of(groups, master)
+        assert root, f"structure ruling {r['ruling_id']}: {master} is not a master permit now"
+        for k in ph:
+            assert k in permits and not permits[k]["is_master"], \
+                f"structure ruling {r['ruling_id']}: {k} is missing or is a master permit"
+            for lst in list(attach.values()) + [unattached]:
+                if k in lst:
+                    lst.remove(k)
+            attach[root].append(k)
+            phases[root].add(k)
+    return phases
 
 
 def fold(permits: dict, model_parents: dict | None = None):
@@ -405,6 +429,7 @@ def main() -> int:
 
     permits = load(db, Path(args.evidence) if args.evidence else None)
     groups, attach, merges, how, unattached = fold(permits, load_parents(args.parents))
+    phases = apply_phase_rulings(permits, groups, attach, unattached)
     if not groups:
         raise SystemExit("REFUSING: the fold produced NO structures from a non-empty substrate -- "
                          "that is a bug in the fold, not a fact about Berkeley.")
@@ -467,7 +492,7 @@ def main() -> int:
     if not args.write:
         print(f"nothing in {dbp.name} was touched -- opened mode=ro.")
         return 0
-    print("\nWRITE:", write(db, permits, groups, attach, finals))
+    print("\nWRITE:", write(db, permits, groups, attach, finals, phases))
     return 0
 
 
@@ -477,17 +502,23 @@ def _fold_identity() -> str:
     return "build_structures@" + hashlib.sha256(here).hexdigest()[:12]
 
 
-def write(con, permits, groups, attach, finals) -> dict:
+def write(con, permits, groups, attach, finals, phases=None) -> dict:
     """Clear and refill the four structure tables in ONE transaction; verify, else roll back.
 
     structures        one row per folded group; identity = the ROOT master permit's issuance event
                       (else its earliest event). status = 'complete' or the named not-complete reason.
-    structure_events  every event of the group's permits: 'master', 'attached', or 'inspection'.
+    structure_events  every event of the group's permits: 'master', 'phase' (a ruling), 'attached', or 'inspection'.
     structure_parcels every current-or-former parcel a MASTER permit's APN resolves to; primary = root's.
     units             one row per structure with units: count once (max over the masters, the phase
                       rule), tenure and affordability 'unknown' until the ledgers are applied (phase 5).
     """
     fold_id = _fold_identity()
+    phases = phases or {}
+    alias = collections.defaultdict(list)            # add_address rulings: master permit -> [(address, ruling, source)]
+    for r in load_structure_rulings(action="add_address"):
+        for a in r["value"].split(";"):
+            if a.strip():
+                alias[r["master_permits"].strip()].append((a.strip(), r["ruling_id"], r["source_ref"]))
     # Which CURRENT parcel(s) a building sits on: through the County's lineage and John's split rule
     # (housing_rules.parcel_lineage, 2026-09-30) -- never a bare APN lookup, which leaves a re-platted
     # building on a retired parcel or, worse, on a wrong one.
@@ -520,8 +551,12 @@ def write(con, permits, groups, attach, finals) -> dict:
                 for pid in pids:
                     if pid not in seen:
                         seen.append(pid)
+            aliases = [x for k in keys for x in alias.get(k, [])]
             notes = json.dumps({"fold": fold_id, "master_permits": keys, "parcel_basis": pbasis[0],
                                 "attached_permits": len(attach.get(root, [])),
+                                **({"phase_permits": sorted(phases[root])} if phases.get(root) else {}),
+                                **({"address_aliases": [{"address": a, "ruling": rid, "source": src}
+                                                        for a, rid, src in aliases]} if aliases else {}),
                                 "completion_basis": basis,
                                 "site": list(permits[root]["site"] or []),
                                 "cls_source": permits[root]["cls_source"]})
@@ -532,15 +567,15 @@ def write(con, permits, groups, attach, finals) -> dict:
                  "complete" if comp_date else basis, comp_date, None, notes)).lastrowid
             counts["structures"] += 1
             for k in keys + sorted(attach.get(root, [])):
-                role = "master" if k in keys else "attached"
+                role = "master" if k in keys else ("phase" if k in phases.get(root, ()) else "attached")
                 for eid, t, _ in permits[k]["events"]:
                     con.execute("INSERT OR IGNORE INTO structure_events VALUES (?,?,?)",
                                 (sid, eid, "inspection" if t == "inspection" else role))
                     counts["structure_events"] += 1
             counts["parcel_basis:" + pbasis[0]] += 1
-            for k in keys:                                   # the building's addresses, as its master permits state them
+            for raw in [permits[k]["address"] for k in keys] + [a for a, _, _ in aliases]:   # master permits' + ruled aliases
                 try:
-                    num, street = normalize_address(permits[k]["address"]) if permits[k]["address"] else (None, None)
+                    num, street = normalize_address(raw) if raw else (None, None)
                 except Exception:
                     num = street = None
                 if not num or not street or num == "0":

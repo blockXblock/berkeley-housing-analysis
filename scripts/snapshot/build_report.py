@@ -216,12 +216,13 @@ LEDE = {
     'water-energy': 'How much water and power Berkeley uses, and what can be known about use by building, block or neighborhood.',
     'fire': 'The three disasters Berkeley plans for: how likely each is, who and what is exposed, and the steps taken so far.',
     'campus': 'What the campus and the Lab use and emit, how many buildings they run, and the plan to retire the campus\'s gas plant.',
+    'ucpay': 'How much the University pays the City and County each year, under what agreement, for what, and what the City gave up in return.',
     'data': 'Every data file behind this report, what each holds, and where each source came from.',
 }
 
 
 ORDER = ['people', 'tenure', 'income', 'age', 'tide', 'cars', 'land', 'city', 'networks', 'undergrounding', 'water-energy',
-         'fire', 'campus', 'data']
+         'fire', 'campus', 'ucpay', 'data']
 
 
 def section(id_, kicker, title, body):
@@ -321,8 +322,9 @@ def s_findings():
              f"campus's share comes from its gas-fired power plant, whose retirement date has moved from 2028 to 2030 to 2033. In its "
              f"2025 national sustainability report (STARS), the campus gives its 2023 energy use as {stars_kbtu:.0f} kBtu per square "
              f"foot; the same report's emissions imply about {true_kbtu:.0f}, matching the UC system's own figure. The energy entry "
-             f"appears to leave out the power plant's gas.",
-             f"{a('#campus', 'The University and the Lab')} · data: {dl('stars_2025_ucb_operations.csv')}, "
+             f"appears to leave out the power plant's gas. Under a 2021 settlement the University pays the City about $4.75 million "
+             f"a year, rising 3% annually; in return the City agreed not to sue over its growth plans or enrollment.",
+             f"{a('#campus', 'The University and the Lab')} · {a('#ucpay', 'What UC pays')} · data: {dl('stars_2025_ucb_operations.csv')}, "
              f"{dl('campus_lab_emissions_energy_2009_2024.csv')}"),
         item('The next large earthquake is the biggest single danger',
              f"The U.S. Geological Survey gives a {CITED['hz']['eq_hayward_pct']}% chance of a magnitude 6.7 or larger earthquake on "
@@ -998,8 +1000,50 @@ def s_campus():
     return section('campus', '12 · The University and the Lab', 'UC Berkeley and Berkeley Lab, counted on their own', body)
 
 
+def s_ucpay():
+    sched = [(2021 + k, 4_100_000 * 1.03 ** k) for k in range(16)]          # agreement §3.1: $4.1M, +3% compounding, 2021-2036
+    total = sum(v for _, v in sched)
+    os.makedirs(DATA, exist_ok=True)
+    with open(os.path.join(DATA, 'uc_settlement_payments_2021_2036.csv'), 'w', newline='') as f:
+        w = csv.writer(f); w.writerow(['payment_year', 'scheduled_payment', 'city_acfr_actual_revenue'])
+        actual = {2023: 4507873, 2024: 4480181}                           # FY2024 and FY2025 ACFR, UC Settlement Fund
+        for y, v in sched:
+            w.writerow([y, round(v), actual.get(y, '')])
+    this_year = dict(sched)[2026]
+    rows = [
+        ['2021 settlement, annual payment', f"${this_year / 1e6:.2f} million in 2026 (${dict(sched)[2021] / 1e6:.1f} million in 2021, rising 3% a year to ${dict(sched)[2036] / 1e6:.2f} million in 2036)", 'City (UC Settlement Fund): $2.8 million of the base for fire and other services, $1.3 million for projects benefiting residents within half a mile of campus'],
+        ['City-audited receipts', '$4,507,873 (FY2024); $4,480,181 (FY2025)', 'City annual financial reports. FY2025 matches the formula to the dollar; FY2024 is $158,183 above it, unexplained'],
+        ['Sewer service fees', 'not published', 'UC pays the City\'s "public agency" sewer rate, about 40–46% of the standard rate; the agreement caps City fees at June 2021 levels and bars new ones, "including … sewer fees"'],
+        ['Stormwater, street-light and business-district contributions', 'not published', 'The agreement says UC makes annual contributions to the Stormwater and Street Light Fund, the Downtown Berkeley Association and the Telegraph Improvement District'],
+        ['Parking space rental tax (10%)', 'not published', 'Paid by people who park; UC collects it. A 2022 City report: "it is currently unclear how much"'],
+        ['Property tax', 'none on University land', 'Exempt under the state constitution. Private tenants on campus paid "nearly $62,000" a year to the City (State Auditor, FY2014–15)'],
+        ['Berkeley Lab to Alameda County Fire', '$10.6 million for 2023–2024 (about $5.3 million a year)', 'A contract for the County to staff the Lab\'s own fire station; not a payment to the City'],
+    ]
+    body = f'''
+    <div class="grid">
+      {card(f"${this_year / 1e6:.2f} million", 'scheduled UC payment to the City in 2026', 'Under the 2021 settlement: $4.1 million in 2021, rising 3% a year.')}
+      {card(f"${total / 1e6:.1f} million", 'over 16 years, 2021–2036', 'The agreement ends June 30, 2037.')}
+      {card('$21.4 million', 'a year: unreimbursed cost of UC to the City (reported)', 'A 2019 City-commissioned fiscal study, as reported in the press; the study itself was not found.')}
+    </div>
+    {table(['Payment', 'Amount', 'Notes'], rows)}
+    <p class="note" style="font-size:.95rem">The University's payment to the City is about ${this_year / 1e6:.1f} million a year now,
+    rising to about ${dict(sched)[2036] / 1e6:.1f} million by 2036. The agreement calls the payment "intended to be comprehensive." In return the City
+    agreed not to sue over the University's development plan, its housing projects or "any enrollment decision," though it may end the
+    agreement if undergraduate enrollment grows more than 1% a year. The 2005 agreement it replaced paid $1,520,124 in FY2014–15. Other payments exist but their amounts are not published. The City spends the money mainly on fire
+    services: $3.4 million of the fund's $5.75 million in FY2025 spending went to public safety, and the FY2027 budget shifts two
+    firefighter positions onto it.</p>
+    <p class="note">Sources: City–University settlement agreement (2021), printed as Attachment D to the City's December 29, 2023
+    collaborative-planning framework; City annual financial reports FY2024 and FY2025 (UC Settlement Fund); City sewer service fee
+    schedule; Council item 05, April 12, 2022 (parking tax); California State Auditor report 2015-106 (March 2016); Alameda County
+    Fire Department board item, December 6, 2022 (Berkeley Lab contract); Berkeley Daily Planet, August 1, 2021 (the 2019 fiscal
+    study). Schedule: {dl('uc_settlement_payments_2021_2036.csv')}.</p>'''
+    return section('ucpay', '14 · What the University pays', 'UC Berkeley\'s payments to the City and County', body)
+
+
 def s_catalog():
-    rows = [[dl(f['file']), esc(f['grain']), n(f['rows']), esc(f['description'])] for f in F['files']]
+    extra = [dict(file='uc_settlement_payments_2021_2036.csv', grain='year', rows=16,
+                  description="UC Berkeley's scheduled payments to the City under the 2021 settlement, with the City's audited receipts where published.")]
+    rows = [[dl(f['file']), esc(f['grain']), n(f['rows']), esc(f['description'])] for f in F['files'] + extra]
     M = F['sources_manifest']
     src = [[esc(k), f'<a href="{esc(v["url"])}">{esc(v["url"][:70])}{"…" if len(v["url"]) > 70 else ""}</a>', esc(v.get('fetched_at', '')[:10]), f'<code>{esc(v.get("sha256", "")[:12])}</code>']
            for k, v in M.items() if not k.startswith('unavailable') and not k.startswith('acs/blockgroup_')]
@@ -1102,11 +1146,11 @@ CSS = '''
 
 def main():
     sections = [s_findings(), s_people(), s_tenure(), s_income(), s_age(), s_tide(), s_cars(), s_land(), s_city(), s_networks(), s_ug(),
-                s_water_energy(), s_fire(), s_campus(), s_catalog()]
+                s_water_energy(), s_fire(), s_campus(), s_ucpay(), s_catalog()]
     toc = [('findings', 'Findings'), ('people', 'People'), ('tenure', 'Renters and owners'), ('income', 'Income'), ('age', 'Ages'),
            ('tide', 'Daily tide'), ('cars', 'Cars and bikes'), ('land', 'Land and money'), ('city', 'The City\'s money'), ('networks', 'Under the streets'),
            ('undergrounding', 'Undergrounding'), ('water-energy', 'Water and power'), ('fire', 'Fire, flood, earthquake'),
-           ('campus', 'University and Lab'), ('data', 'The data')]
+           ('campus', 'University and Lab'), ('ucpay', 'What UC pays'), ('data', 'The data')]
     old = open(PAGE).read() if os.path.exists(PAGE) else ''
     meta = ''
     if '<!-- BEGIN site_meta' in old:

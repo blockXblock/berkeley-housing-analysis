@@ -69,6 +69,9 @@ PROJECT_RULINGS = ROOT / "corrections/v4/project_rulings.csv"
 # City's own text states one, accepted at read time only if VERBATIM in the cited record (scripts/llm_project_names.py).
 # Keyed by the project's stable key (anchor record, else first master permit). A re-reading is a new dated file.
 NAMES_EVIDENCE = ROOT / "data/derived/project_names_evidence_2026-09-30.json"
+# State-law pathways (cutover phase 4): read from each project's own Planning text, kept only with a VERBATIM quote
+# (scripts/llm_project_pathways.py). Same stable key as the names.
+PATHWAYS_EVIDENCE = ROOT / "data/derived/project_pathways_evidence_2026-09-30.json"
 OUT = ROOT / "scratch/2026-09-29_phase3"
 ANCHOR_PRIORITY = ("primary_application", "pre_application", "ministerial_clearance", "companion_review")
 DEAD = ("Withdrawn", "Void")
@@ -344,6 +347,9 @@ def write(con, projects) -> dict:
         sp = collections.defaultdict(set)
         for sid, pid in con.execute("SELECT structure_id, parcel_id FROM structure_parcels"):
             sp[sid].add(pid)
+        pathways = {}
+        if PATHWAYS_EVIDENCE.exists():
+            pathways = {r["project_key"]: r["pathways"] for r in json.load(open(PATHWAYS_EVIDENCE))["readings"] if r.get("pathways")}
         names = {}
         if NAMES_EVIDENCE.exists():
             names = {r["project_key"]: r["name"] for r in json.load(open(NAMES_EVIDENCE))["readings"] if r.get("name")}
@@ -368,11 +374,16 @@ def write(con, projects) -> dict:
                 basis = "parcel_situs" if address else None
             p["project_key"], p["address"] = key, address
             p["name"] = names.get(key) or address
+            if pathways.get(key):
+                p["pathways"] = sorted({x["pathway"] for x in pathways[key]})
+                p["pathway_evidence"] = pathways[key]
+                out["with_pathway"] += 1
             p["name_basis"] = "city_stated_name" if names.get(key) else basis
             out["named_" + str(p["name_basis"])] += 1
             notes = {k: p.get(k) for k in ("anchor", "anchor_role", "records", "filed", "accepted", "entitled",
                                            "entitled_by", "denied", "ended", "record_status", "milestone_flags",
-                                           "ruling", "project_key", "address", "name_basis") if p.get(k) not in (None, [], "")}
+                                           "ruling", "project_key", "address", "name_basis", "pathways", "pathway_evidence")
+                     if p.get(k) not in (None, [], "")}
             notes["units"] = p["units"]
             pid = con.execute("INSERT INTO projects (name, notes) VALUES (?, ?)",
                               (p["name"], json.dumps(notes))).lastrowid

@@ -1,0 +1,5048 @@
+{
+ "topic": "project_pathways",
+ "read_at": "2026-09-30T18:15:26",
+ "definitions_sha16": "465e4aea5cb1d56f",
+ "definitions": "Report each California STATE-LAW PATHWAY that the record's own text says this housing project uses or applies under.\n- density_bonus: the State Density Bonus Law (Gov. Code 65915): \"density bonus\", \"DBL\", \"waivers/concessions\" under it.\n- sb330_preliminary: a Housing Crisis Act / SB 330 PRELIMINARY APPLICATION (Gov. Code 65941.1), or \"SB 330\" vesting.\n- sb35_streamlined: SB 35 / SB 423 streamlined ministerial approval (Gov. Code 65913.4).\n- ab2011: AB 2011 / the Affordable Housing and High Road Jobs Act (Gov. Code 65912.100).\n- sb9: SB 9 two-unit development or urban lot split (Gov. Code 65852.21, 66411.7).\n- sb684_small_lot: SB 684 / SB 1123 small-lot subdivision.\n- ab2162_supportive: AB 2162 by-right supportive housing.\nReport ONLY what the text states. Do not infer a pathway from a unit count, an affordability level, a building size, or a\nzoning district. A mention that a law does NOT apply (\"not an SB 35 project\") is not a pathway. If none is stated, return\nan empty list. For each pathway, copy the exact words that state it.",
+ "model": "claude-sonnet-5",
+ "rule": "kept only if the quote is verbatim in the cited text",
+ "unanswered": [],
+ "readings": [
+  {
+   "project_key": "ZP2019-0074",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0081",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "apply State DB in order to reduce setbacks and parking requirements and to increase building height",
+     "source": "ZP2019-0081"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "pre-application review of proposed density bonus project at 2099 M L King Jr. Way",
+     "source": "PLN2018-0045"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2019-0082",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0084",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0086",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0089",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0091",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0092",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0093",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0096",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2023-0032",
+   "pathways": [
+    {
+     "pathway": "sb9",
+     "quote": "SB 9 Preliminary Eligibility Determination",
+     "source": "PLN2023-0032"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2023-0057",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2023-0061",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "Density bonus addition of 13 flats",
+     "source": "PLN2023-0061"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2023-0075",
+   "pathways": [
+    {
+     "pathway": "sb9",
+     "quote": "SB 9 Preliminary Eligibility Determination",
+     "source": "PLN2023-0075"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2023-0098",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 Preliminary Application",
+     "source": "PLN2023-0098"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2024-0010",
+   "pathways": [
+    {
+     "pathway": "ab2011",
+     "quote": "AB 2011 Ministerial Application",
+     "source": "PLN2024-0010"
+    },
+    {
+     "pathway": "ab2011",
+     "quote": "AB 2011 Housing Development Application (Modification)",
+     "source": "PLN2025-0054"
+    },
+    {
+     "pathway": "ab2011",
+     "quote": "AB 2011 Housing Development Application (Modification)",
+     "source": "PLN2026-0157"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2024-0016",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2024-0023",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "the use of state density bonus with associated waivers and incentives/concessions",
+     "source": "PLN2024-0023"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2024-0024",
+   "pathways": [
+    {
+     "pathway": "sb9",
+     "quote": "SB 9 Preliminary Eligibility Determination",
+     "source": "PLN2024-0024"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2024-0052",
+   "pathways": [
+    {
+     "pathway": "sb9",
+     "quote": "SB9 Pre-application",
+     "source": "PLN2024-0052"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2021-0192",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 PreApp for 2439 Durant SB330 PreApp",
+     "source": "PLN2021-0066"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2021-0193",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "Project utilizes State Density Bonus.",
+     "source": "DRCF2023-0002"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 Preliminary Application for project to demolish the existing commercial building",
+     "source": "PLN2021-0031"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Density Bonus.",
+     "source": "PLN2021-0031"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2021-0201",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "Utilizing State Density Bonus.",
+     "source": "ZP2021-0201"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Utilizing State Density Bonus.",
+     "source": "DRCF2022-0003"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Utilizing State Density Bonus.",
+     "source": "DRCP2021-0020"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 Preliminary Application for 8-story mixed-use development",
+     "source": "PLN2021-0035"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2021-0206",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2021-0207",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2021-0210",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "(Density Bonus).",
+     "source": "ZP2021-0210"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 Preliminary Application for Density Bonus application.",
+     "source": "PLN2021-0051"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Density Bonus application.",
+     "source": "PLN2021-0051"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2021-0211",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2021-0212",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2021-0220",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2022-0010",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 application add three dwelling units to an existing group living accommodation",
+     "source": "ZP2022-0010"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application to add three dwelling units to an existing group living accommodation",
+     "source": "PLN2022-0002"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2018-0065",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0067",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0076",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0080",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0081",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0085",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0086",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0096",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0107",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0108",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0036",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0041",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "utilize a Density Bonus",
+     "source": "ZP2019-0041"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "utilize a Density Bonus",
+     "source": "DRCP2019-0002"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2019-0042",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0043",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0048",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0051",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0059",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0061",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0066",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0070",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "Density Bonus project",
+     "source": "ZP2019-0070"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Density Bonus project",
+     "source": "DRCF2021-0007"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Density Bonus project",
+     "source": "DRCP2019-0004"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2020-0115",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2020-0123",
+   "pathways": [
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "SB-684 PRE-APP: 1716 SEVENTH STREET SB 684 Eligibility Review",
+     "source": "PLN2025-0060"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2020-0126",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2020-0127",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2020-0128",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2020-0129",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2020-0134",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus",
+     "source": "ZP2020-0134"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 Preliminary Application for a Housing Development Project at 2000 University/2001 Milvia",
+     "source": "PLN2020-0045"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing Density Bonus",
+     "source": "PLN2020-0045"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2020-0136",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2020-0158",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2020-0159",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0144",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0145",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0154",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0156",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0161",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0162",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0166",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0168",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0172",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0178",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0046",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0050",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0053",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0054",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0062",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0066",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0068",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0083",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0085",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0091",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2025-0046",
+   "pathways": [
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "utilizing SB684, subdivide the 8,147 square-foot lots",
+     "source": "PLN2025-0046"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "Pre-Application: SB-330 PRE-APP",
+     "source": "PLN2025-0049"
+    },
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "utilizing SB684, subdivide the 8,147 square-foot lots",
+     "source": "PLN2025-0049"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2025-0051",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2025-0058",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "Pre-Application: SB-330 PRE-APP",
+     "source": "PLN2025-0058"
+    },
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "Utilize SB 684/SB 1123 on the MUR-designated lot",
+     "source": "PLN2025-0089"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2025-0061",
+   "pathways": [
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "utilize SB 684/SB 1123 to subdivide",
+     "source": "PLN2025-0061"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "Pre-Application: SB-330 PRE-APP",
+     "source": "PLN2025-0062"
+    },
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "utilize SB 684/SB 1123 to subdivide",
+     "source": "PLN2025-0062"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2017-0070",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0073",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0074",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0079",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0082",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0083",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0089",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0090",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0099",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0102",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0096",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0097",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0101",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "Two Density Bonus waivers.",
+     "source": "ZP2016-0101"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2016-0105",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0106",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0107",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0129",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0135",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0138",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0146",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2014-0056",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2014-0064",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2014-0076",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2014-0084",
+   "pathways": []
+  },
+  {
+   "project_key": "DRCP2017-0005",
+   "pathways": []
+  },
+  {
+   "project_key": "DRCP2019-0008",
+   "pathways": []
+  },
+  {
+   "project_key": "DRCP2020-0004",
+   "pathways": []
+  },
+  {
+   "project_key": "DRCP2022-0005",
+   "pathways": []
+  },
+  {
+   "project_key": "MODAUP2008-0027",
+   "pathways": []
+  },
+  {
+   "project_key": "MODUP2007-0027",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0179",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "Density Bonus",
+     "source": "ZP2019-0179"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Density Bonus",
+     "source": "DRCP2019-0015"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2019-0180",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0183",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0192",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "Density bonus requested, 9 VLI units.",
+     "source": "ZP2019-0192"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Density bonus requested, 9 VLI units.",
+     "source": "DRCP2019-0016"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2019-0193",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0203",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0211",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0212",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0213",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0217",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2023-0099",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "A SB-330 Project",
+     "source": "ZP2023-0099"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "This is a State of California Density Bonus Project.",
+     "source": "ZP2023-0099"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "A SB-330 Project",
+     "source": "DRCP2023-0012"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "This is a State of California Density Bonus Project.",
+     "source": "DRCP2023-0012"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0082"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "This is a State of California Density Bonus Project, utilizing a 50% bonus.",
+     "source": "PLN2023-0082"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2023-0101",
+   "pathways": []
+  },
+  {
+   "project_key": "UP2008-0109",
+   "pathways": []
+  },
+  {
+   "project_key": "UP2009-0038",
+   "pathways": [
+    {
+     "pathway": "sb9",
+     "quote": "PRE-APP for SB-9: 2707 ROSE ST. Pre-Application for SB-9 Project that proposes a lot split and two new single family dwellings on each ot.",
+     "source": "PLN2023-0009"
+    }
+   ]
+  },
+  {
+   "project_key": "UP2010-0030",
+   "pathways": []
+  },
+  {
+   "project_key": "UP2010-0078",
+   "pathways": []
+  },
+  {
+   "project_key": "UP2011-0014",
+   "pathways": []
+  },
+  {
+   "project_key": "UP2011-0036",
+   "pathways": []
+  },
+  {
+   "project_key": "UP2012-0012",
+   "pathways": []
+  },
+  {
+   "project_key": "UP2012-0032",
+   "pathways": []
+  },
+  {
+   "project_key": "UP2012-0034",
+   "pathways": []
+  },
+  {
+   "project_key": "UP2013-0016",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2026-0162",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2026-0166",
+   "pathways": [
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "SB 684 pre-application to determine eligibility to subdivide an existing lot into four fee-simple lots and construct four single-family houses",
+     "source": "PLN2026-0166"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2026-0175",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2026-0180",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2026-0187",
+   "pathways": []
+  },
+  {
+   "project_key": "UP2006-0072",
+   "pathways": []
+  },
+  {
+   "project_key": "UP2006-0109",
+   "pathways": []
+  },
+  {
+   "project_key": "UP2006-0145",
+   "pathways": []
+  },
+  {
+   "project_key": "UP2007-0021",
+   "pathways": []
+  },
+  {
+   "project_key": "UP2008-0053",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2025-0101",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2025-0106",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2025-0115",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2025-0116",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2025-0117",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2025-0118",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2025-0126",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2025-0132",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 Preliminary Application",
+     "source": "PLN2025-0132"
+    },
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "SB684",
+     "source": "PLN2026-0123"
+    },
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "SB684",
+     "source": "PLN2026-0124"
+    },
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "SB684",
+     "source": "PLN2026-0125"
+    },
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "SB684",
+     "source": "PLN2026-0126"
+    },
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "SB684",
+     "source": "PLN2026-0127"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2026-0030",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2026-0034",
+   "pathways": []
+  },
+  {
+   "project_key": "MODUP2014-0005",
+   "pathways": []
+  },
+  {
+   "project_key": "MODUP2014-0012",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2015-0051",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2017-0039",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2017-0063",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2018-0048",
+   "pathways": [
+    {
+     "pathway": "sb35_streamlined",
+     "quote": "SB 35 application",
+     "source": "PLN2018-0048"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2019-0018",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2019-0033",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2019-0059",
+   "pathways": [
+    {
+     "pathway": "sb35_streamlined",
+     "quote": "SB35 application",
+     "source": "PLN2019-0059"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2020-0001",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2024-0131",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "The density bonus project includes 24 affordable units",
+     "source": "ZP2024-0131"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2024-0147",
+   "pathways": [
+    {
+     "pathway": "sb9",
+     "quote": "pursuant to Senate Bill (SB) 9",
+     "source": "PLN2024-0047"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2024-0162",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 PROJECT",
+     "source": "ZP2024-0162"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "The State Density Bonus Project will have 13 affordable housing units",
+     "source": "ZP2024-0162"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Pre-App to construct a residential building with approximately 117 apartments.",
+     "source": "PLN2024-0049"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "This State Density Bonus Law Project will have 9 units of affordable housing",
+     "source": "PLN2024-0049"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 PRE-LIM: 2425 DURANT AVENUE",
+     "source": "PLN2024-0064"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "The State Density Bonus Project will have 13 affordable housing units",
+     "source": "PLN2024-0064"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2024-0169",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 project to demolish one existing one-story commercial building",
+     "source": "ZP2024-0169"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 Project: Demolition of existing building to construct a seven-story, 49,900-square-foot residential building.",
+     "source": "PLN2024-0054"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2024-0174",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2024-0177",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2024-0181",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "making the project eligible for a 100% density bonus, waivers, and up to 4 concessions as a State Density Bonus Law development per California Government Code \u00a7 65915.",
+     "source": "ZP2024-0181"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "making the project eligible for a 100% density bonus, waivers, and up to 4 concessions as a State Density Bonus Law development per California Government Code \u00a7 65915.",
+     "source": "DRCP2025-0001"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "making the project eligible for a 100% density bonus, waivers, and up to 4 concessions as a State Density Bonus Law development per California Government Code \u00a7 65915.",
+     "source": "DRCP2025-0002"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Pre-app to demolish a two-story commercial building",
+     "source": "PLN2024-0069"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing a State Density Bonus",
+     "source": "PLN2024-0069"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Pre-app to demolish a two-story commercial building",
+     "source": "PLN2024-0070"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing a State Density Bonus",
+     "source": "PLN2024-0070"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2024-0182",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "making the project eligible for a 100% density bonus, waivers, and up to 4 concessions as a State Density Bonus Law development per California Government Code \u00a7 65915.",
+     "source": "ZP2024-0182"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2025-0008",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2020-0052",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "20-unit housing development with Density Bonus",
+     "source": "ZP2020-0052"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "with Density Bonus to permit a 5th floor and reduce building-to-building separation",
+     "source": "ZP2020-0052"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2020-0058",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2020-0060",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2020-0069",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "Density bonus project.",
+     "source": "DRCP2020-0006"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Density bonus project.",
+     "source": "PLN2020-0025"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus",
+     "source": "ZP2022-0126"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2020-0072",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "Density bonus project.",
+     "source": "ZP2020-0072"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Density bonus project.",
+     "source": "PLN2020-0023"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application SB330 Preliminary Application for UP Modification of ZP2020-0072",
+     "source": "PLN2022-0029"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application: 2015 Blake UP-MOD SB 330 Preliminary Application",
+     "source": "PLN2022-0120"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "UPPH MOD / SB 330 - 2015 BLAKE STREET SB 330 / Modify ZP2020-0072",
+     "source": "ZP2022-0178"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2020-0075",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2020-0090",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application - Proposed development of 17 dwelling units, 4 stories, plus a basement.",
+     "source": "PLN2020-0032"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 PRE-APP: 2317 CHANNING WAY",
+     "source": "PLN2024-0018"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2020-0096",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2020-0102",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "Utilizing State Density Bonus",
+     "source": "ZP2020-0102"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2020-0104",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "pursuant to State Density Bonus law.",
+     "source": "ZP2020-0104"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "pursuant to State density bonus law.",
+     "source": "DRCP2020-0009"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 preliminary development project to remove an existing parking lot",
+     "source": "PLN2020-0044"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "pursuant to State Density Bonus law.",
+     "source": "PLN2020-0044"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application SB 330 Preliminary Application for the removal of the existing parking lot",
+     "source": "PLN2022-0039"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "with a state of California Density Bonus",
+     "source": "PLN2022-0039"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2022-0116",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus",
+     "source": "ZP2022-0116"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus",
+     "source": "DRCP2022-0013"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application to demolish existing non-residential structures, construct new 10-story mixed-use residential development with 221 dwelling units, ground floor commercial and parking",
+     "source": "PLN2022-0016"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 Preliminary application for the construction of a ten-story, 221-unit mixed-use housing development.",
+     "source": "PLN2023-0096"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "State Density Bonus Project with waivers and up to 2 concessions.",
+     "source": "PLN2023-0096"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2022-0120",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2022-0122",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2022-0132",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "WITH STATE OF CALIFORNIA DENSITY BONUS",
+     "source": "ZP2022-0132"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "WITH STATE OF CALIFORNIA DENSITY BONUS",
+     "source": "DRCP2022-0016"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application to demolish 1-story commercial building ad construct a 9-story mixed use building with 112 dwelling units, utilizing Density bonus.",
+     "source": "PLN2022-0031"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing Density bonus.",
+     "source": "PLN2022-0031"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2022-0135",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 Application",
+     "source": "ZP2022-0135"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 Application",
+     "source": "DRCP2022-0014"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application to DEMO EXISTING COMMERCIAL BUILDING; CONSTRUCT 25-STORY MIXED USE BUILDING CONTAINING 551 RESIDENTIAL UNITS PER SB 330 AND STATE DENSITY BONUS IN THE C-DMU.",
+     "source": "PLN2022-0056"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "STATE DENSITY BONUS IN THE C-DMU.",
+     "source": "PLN2022-0056"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2022-0144",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "Density Bonus Project includes 22 affordable units",
+     "source": "ZP2022-0144"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2022-0145",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2022-0148",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Pre-App 2480 Bancroft",
+     "source": "PLN2022-0091"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus.",
+     "source": "PLN2022-0091"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2022-0087",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2022-0097",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application for a Density Bonus project",
+     "source": "PLN2022-0065"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "SB 330 Preliminary Application for a Density Bonus project",
+     "source": "PLN2022-0065"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "Modification of SB-330 Project ZP2022-0097",
+     "source": "ZP2025-0048"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing waivers and concessions from the State Density Bonus Program",
+     "source": "ZP2025-0048"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2022-0098",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2022-0099",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus",
+     "source": "ZP2022-0099"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Project utilizes State Density Bonus.",
+     "source": "DRCP2022-0008"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2022-0008"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "under State Density Bonus law",
+     "source": "PLN2022-0008"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 Preliminary Application",
+     "source": "PLN2023-0038"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus",
+     "source": "PLN2023-0038"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2022-0104",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2022-0106",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2022-0107",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus",
+     "source": "ZP2022-0107"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "This is a Density Bonus project.",
+     "source": "DRCP2022-0009"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2022-0060"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0008"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "This is a Density Bonus project",
+     "source": "PLN2023-0008"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2022-0110",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing a State Density Bonus.",
+     "source": "ZP2022-0110"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Project utilizes State Density Bonus.",
+     "source": "DRCP2022-0010"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2022-0047"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "using a Density Bonus.",
+     "source": "PLN2022-0047"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2016-0194",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0201",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0204",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0205",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0207",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "Application to look at density bonus",
+     "source": "PLN2015-0054"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2016-0214",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0216",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "including Density Bonus considerations",
+     "source": "ZP2016-0216"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2016-0223",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0227",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0232",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2024-0053",
+   "pathways": [
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "SB684 existing home, Lot subdivision and development",
+     "source": "PLN2024-0053"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2024-0061",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2024-0062",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2025-0017",
+   "pathways": [
+    {
+     "pathway": "sb35_streamlined",
+     "quote": "SB 35 Preliminary Development Application",
+     "source": "PLN2025-0017"
+    },
+    {
+     "pathway": "sb35_streamlined",
+     "quote": "SB 35: 1464 SIXTH ST",
+     "source": "PLN2025-0037"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2025-0019",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2025-0028",
+   "pathways": [
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "a potential SB-684 project",
+     "source": "PLN2025-0028"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Pre-application for a project to demolish an existing storage building and construct two new three-story single-family dwellings",
+     "source": "PLN2025-0072"
+    },
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "with an SB 684 lot division to place each new unit on a separate parcel",
+     "source": "PLN2025-0072"
+    },
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "SB 684 PRE APPLICATION TO SUBDIVIDE ONE LOT INTO THREE AND CONSTRUCT TWO NEW SINGLE-FAMILY HOMES",
+     "source": "PLN2026-0026"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2025-0038",
+   "pathways": [
+    {
+     "pathway": "sb35_streamlined",
+     "quote": "SB 35 PRE APP: 2330 DURANT",
+     "source": "PLN2025-0038"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "using a state of California Density Bonus (per SB 330 provisions)",
+     "source": "PLN2025-0038"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application for the removal of all of existing structures and new construction of a 100% affordable 65,585 sq. ft. 6-story housing development with 68 dwelling units",
+     "source": "PLN2025-0053"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "using a state of California Density Bonus (per SB 330 provisions)",
+     "source": "PLN2025-0053"
+    },
+    {
+     "pathway": "sb35_streamlined",
+     "quote": "SB 35 Development Application: Removal of all of existing structures and new construction of a 100% affordable 65,585 sq. ft. 6-story housing development with 68 dwelling units",
+     "source": "PLN2025-0100"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "using a state of California Density Bonus (per SB 330 provisions)",
+     "source": "PLN2025-0100"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2017-0015",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0035",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0039",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0040",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0044",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0055",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0059",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0060",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0062",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0063",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2022-0011",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "State of California Density Bonus",
+     "source": "DRCF2023-0001"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 pre-application",
+     "source": "PLN2021-0055"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "under State Density Bonus",
+     "source": "PLN2021-0055"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "State Density Bonus project",
+     "source": "ZP2025-0046"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2022-0019",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus",
+     "source": "ZP2022-0019"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 pre-application",
+     "source": "PLN2021-0067"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "under State Density Bonus law",
+     "source": "PLN2021-0067"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2022-0020",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2022-0021",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 Preliminary Application",
+     "source": "PLN2021-0030"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2022-0026",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "under Density Bonus law",
+     "source": "ZP2022-0026"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2022-0010"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "under State Density Bonus",
+     "source": "PLN2022-0010"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 PRE-APP",
+     "source": "PLN2025-0082"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "increasing the State Density Bonus level from 25 to 34 stories",
+     "source": "PLN2025-0082"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "(SB330 PLN2025-0082)",
+     "source": "ZP2025-0101"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "increasing the State Density Bonus level from 25 to 34 stories",
+     "source": "ZP2025-0101"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2022-0028",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2022-0033",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2022-0046",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing a Density Bonus",
+     "source": "ZP2022-0046"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing a Density Bonus",
+     "source": "DRCP2022-0006"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "with State of California density bonus",
+     "source": "PLN2021-0069"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0039"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing a Density Bonus",
+     "source": "PLN2023-0039"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2022-0053",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2022-0062",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2025-0112",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2026-0007",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "making the project eligible for an 85% density bonus, waivers, and up to 3 concessions as a state density bonus law development per CA Govt Code 65915",
+     "source": "ZP2026-0007"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 PRE-APP: 2727 HASTE STREET SB330 Preliminary Application for demolition of an existing non-landmarked group living residential structure",
+     "source": "PLN2025-0055"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "making the project eligible for a 92.5% Density Bonus",
+     "source": "PLN2025-0055"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2026-0015",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 preliminary application to retain historic mural and front facade of the non-residential building at 2455 Telegraph Ave",
+     "source": "PLN2025-0066"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2026-0031",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2026-0039",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "PREAPP: 2298 DURANT AVENUE (SB 330) SB330 Pre-Application to demolish a non-residential building",
+     "source": "PLN2026-0074"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2026-0040",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 PRE-APP: 2330 PRINCE STREET SB330 Preliminary Application for the development of a 23 residential lot subdivision",
+     "source": "PLN2025-0123"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "The project will utilize the State Density Bonus and include 1 Very Low Income Unit.",
+     "source": "PLN2025-0123"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2026-0049",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330: 2437 WARRING STREET As stated in the submitted SB 330 preliminary development application materials",
+     "source": "PLN2026-0115"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2026-0050",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 PRE APP: 2709 CHANNING` SB 330 preliminary application to renovate an existing 12-unit three-story multifamily building",
+     "source": "PLN2026-0118"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2026-0064",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2026-0077",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "to add a State Density Bonus waiver for the removal of a Coast Live Oak tree on the adjacent lot at 1846 Spruce Street",
+     "source": "ZP2026-0077"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "with a State of California density bonus",
+     "source": "DRCF2026-0004"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2021-0066",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus",
+     "source": "ZP2021-0066"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus",
+     "source": "PLN2021-0004"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 Preliminary Development Application",
+     "source": "PLN2021-0004"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2021-0070",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "with density bonus",
+     "source": "ZP2021-0070"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "with density bonus",
+     "source": "PLN2021-0012"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 Preliminary Application",
+     "source": "PLN2021-0012"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2021-0072",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "Preliminary SB330 application",
+     "source": "PLN2021-0010"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2021-0073",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "Density bonus project.",
+     "source": "ZP2021-0073"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Density bonus project.",
+     "source": "DRCP2021-0008"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2021-0083",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2021-0084",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2021-0095",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "under State Density Bonus",
+     "source": "ZP2021-0095"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2021-0110",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2021-0111",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "under state density bonus",
+     "source": "ZP2021-0111"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 Pre-App for new GLA Development",
+     "source": "PLN2021-0020"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2021-0113",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0186",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0188",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0191",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0196",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0202",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0205",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "a potential Density Bonus project in the R-3 District",
+     "source": "PLN2017-0041"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2017-0207",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0003",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0013",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0021",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2026-0083",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2026-0091",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0180",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0182",
+   "pathways": [
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "subdivision pursuant to SB 684",
+     "source": "PLN2025-0013"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2018-0183",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0189",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0193",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0194",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0196",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0201",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0208",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0214",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0233",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0234",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0246",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0253",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0005",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0009",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0014",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0019",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0020",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0022",
+   "pathways": []
+  },
+  {
+   "project_key": "ZCBP2015-1531",
+   "pathways": []
+  },
+  {
+   "project_key": "ZCBP2015-1532",
+   "pathways": []
+  },
+  {
+   "project_key": "ZCBP2015-1534",
+   "pathways": []
+  },
+  {
+   "project_key": "ZCBP2015-1557",
+   "pathways": []
+  },
+  {
+   "project_key": "ZCBP2015-1685",
+   "pathways": []
+  },
+  {
+   "project_key": "ZCBP2015-1705",
+   "pathways": []
+  },
+  {
+   "project_key": "ZCBP2015-1746",
+   "pathways": []
+  },
+  {
+   "project_key": "ZCBP2015-1754",
+   "pathways": []
+  },
+  {
+   "project_key": "ZCBP2016-0060",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2014-0045",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0237",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0240",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0244",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0245",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0247",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0252",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0253",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0003",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0004",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0014",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "State Density Bonus",
+     "source": "PLN2020-0049"
+    },
+    {
+     "pathway": "sb35_streamlined",
+     "quote": "SB-35",
+     "source": "PLN2020-0049"
+    },
+    {
+     "pathway": "sb35_streamlined",
+     "quote": "SB 35 Preliminary Development Application",
+     "source": "PLN2023-0065"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "State Density Bonus",
+     "source": "PLN2023-0065"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2018-0220",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "with State of California Density Bonus",
+     "source": "ZP2018-0220"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "with State of California Density Bonus",
+     "source": "DRCP2018-0009"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2018-0221",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0226",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0227",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0229",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0234",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0237",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0239",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "Density Bonus project",
+     "source": "ZP2018-0239"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2019-0006",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0009",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2021-0121",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2021-0129",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2021-0140",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2021-0158",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2021-0162",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2021-0164",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2021-0177",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2021-0181",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2021-0186",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "Density Bonus project",
+     "source": "ZP2021-0186"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Seeking planner consultation with focus on density bonus aspect.",
+     "source": "PLN2020-0030"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 Preliminary Application",
+     "source": "PLN2021-0013"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2021-0191",
+   "pathways": [
+    {
+     "pathway": "sb35_streamlined",
+     "quote": "SB35 modification application",
+     "source": "ZP2021-0191"
+    }
+   ]
+  },
+  {
+   "project_key": "ZCBP2015-1041",
+   "pathways": []
+  },
+  {
+   "project_key": "ZCBP2015-1080",
+   "pathways": []
+  },
+  {
+   "project_key": "ZCBP2015-1205",
+   "pathways": []
+  },
+  {
+   "project_key": "ZCBP2015-1300",
+   "pathways": []
+  },
+  {
+   "project_key": "ZCBP2015-1422",
+   "pathways": []
+  },
+  {
+   "project_key": "ZCBP2015-1435",
+   "pathways": []
+  },
+  {
+   "project_key": "ZCBP2015-1462",
+   "pathways": []
+  },
+  {
+   "project_key": "ZCBP2015-1491",
+   "pathways": []
+  },
+  {
+   "project_key": "ZCBP2015-1497",
+   "pathways": []
+  },
+  {
+   "project_key": "ZCBP2015-1500",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0147",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0164",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0165",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0168",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0172",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0174",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0179",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0184",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0188",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0190",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2021-0036",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2021-0037",
+   "pathways": [
+    {
+     "pathway": "sb35_streamlined",
+     "quote": "SB 35 Preliminary Development Application",
+     "source": "PLN2022-0099"
+    },
+    {
+     "pathway": "sb35_streamlined",
+     "quote": "SB 35 Preliminary Development Application",
+     "source": "PLN2022-0101"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2021-0063",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 pre-app",
+     "source": "PLN2021-0063"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2022-0026",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2022-0026"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "using state density bonus",
+     "source": "PLN2022-0026"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2022-0052",
+   "pathways": [
+    {
+     "pathway": "sb9",
+     "quote": "pursuant to SB-9",
+     "source": "PLN2022-0052"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2022-0066",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 pre-application",
+     "source": "PLN2022-0066"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Project utilizes the California State Density Bonus.",
+     "source": "PLN2022-0066"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2022-0067",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2022-0067"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2022-0076",
+   "pathways": [
+    {
+     "pathway": "sb9",
+     "quote": "SB-9 PRE-APP",
+     "source": "PLN2022-0076"
+    },
+    {
+     "pathway": "sb9",
+     "quote": "SB-9 PRE APP",
+     "source": "PLN2026-0178"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2022-0078",
+   "pathways": [
+    {
+     "pathway": "sb9",
+     "quote": "pursuant to SB 9",
+     "source": "PLN2022-0078"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2022-0083",
+   "pathways": [
+    {
+     "pathway": "sb9",
+     "quote": "SB 9 Preliminary Eligibility Determination",
+     "source": "PLN2022-0083"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2017-0103",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0106",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0108",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0109",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0129",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0134",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0145",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0146",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0148",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0149",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0112",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0113",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0122",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0128",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0134",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0135",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0136",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0137",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0138",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0141",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0141",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0152",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0154",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0155",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing a Density Bonus",
+     "source": "ZP2019-0155"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "State of California Density Bonus",
+     "source": "DRCF2021-0002"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2019-0156",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0165",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0168",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0171",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0172",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0173",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing Density Bonus",
+     "source": "ZP2019-0173"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing Density Bonus",
+     "source": "DRCF2021-0010"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing Density Bonus",
+     "source": "DRCP2019-0014"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2025-0020",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2025-0021",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2025-0025",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2025-0051",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2025-0068",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2025-0069",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2025-0079",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2025-0086",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2025-0093",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2025-0107",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0034",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0035",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0036",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0038",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0040",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0050",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0052",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0054",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0058",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2018-0061",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "MODUP to modify project to DB for a total of 40 units and 8 stories",
+     "source": "ZP2018-0061"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2019-0098",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0100",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "Density Bonus project",
+     "source": "ZP2019-0100"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2019-0104",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0106",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0113",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0118",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0119",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0124",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0130",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0138",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2009-0081",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2009-0128",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2009-0162",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2010-0027",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2010-0059",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2010-0066",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2010-0072",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2011-0099",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2011-0162",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2012-0002",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2023-0163",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0045"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2024-0008",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2024-0011",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2024-0014",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2024-0015",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2024-0024",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2024-0027",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus",
+     "source": "ZP2024-0027"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 Mixed-Use Housing Development Project",
+     "source": "DRCP2024-0002"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0015"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0084"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2024-0029",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Mixed Use project",
+     "source": "DRCP2024-0014"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "This is a State Density Bonus project",
+     "source": "DRCP2024-0014"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0088"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2024-0047",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 Mixed-Use Housing Development Project",
+     "source": "ZP2024-0047"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0073"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2024-0052",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0141",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0143",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0146",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0151",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0157",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0160",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0168",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0172",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0177",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0180",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2012-0034",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2012-0041",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2012-0059",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2012-0073",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2012-0081",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2012-0098",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2013-0159",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2014-0009",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2014-0014",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2014-0032",
+   "pathways": []
+  },
+  {
+   "project_key": "UP2013-0034",
+   "pathways": []
+  },
+  {
+   "project_key": "UP2013-0043",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "The project is entitled to a 35% Density Bonus because 11% of the base project units will be affordable at 50% AMI.",
+     "source": "UP2013-0043"
+    }
+   ]
+  },
+  {
+   "project_key": "UP2013-0046",
+   "pathways": []
+  },
+  {
+   "project_key": "UP2013-0061",
+   "pathways": []
+  },
+  {
+   "project_key": "UP2014-0012",
+   "pathways": []
+  },
+  {
+   "project_key": "UP2014-0014",
+   "pathways": []
+  },
+  {
+   "project_key": "UP2014-0016",
+   "pathways": []
+  },
+  {
+   "project_key": "UP2014-0019",
+   "pathways": []
+  },
+  {
+   "project_key": "ZCBP2015-0666",
+   "pathways": []
+  },
+  {
+   "project_key": "ZCBP2015-0733",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2022-0170",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing a State Density Bonus",
+     "source": "ZP2022-0170"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus",
+     "source": "DRCP2022-0020"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2022-0086"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "density bonus for parking, height, setbacks",
+     "source": "PLN2022-0086"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2022-0171",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "(SB 330 application)",
+     "source": "ZP2022-0171"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing density bonus",
+     "source": "ZP2022-0171"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "with a state of California Density Bonus",
+     "source": "DRCP2023-0001"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2022-0048"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus",
+     "source": "PLN2022-0048"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0089"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2022-0172",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2022-0174",
+   "pathways": [
+    {
+     "pathway": "sb35_streamlined",
+     "quote": "SB 35 Pre-Application",
+     "source": "ZP2022-0174"
+    },
+    {
+     "pathway": "sb35_streamlined",
+     "quote": "SB 35 Preliminary Development Application",
+     "source": "PLN2022-0116"
+    },
+    {
+     "pathway": "sb35_streamlined",
+     "quote": "SB 35 Preliminary Development Application",
+     "source": "PLN2023-0017"
+    },
+    {
+     "pathway": "sb35_streamlined",
+     "quote": "Modification to an SB35 application",
+     "source": "PLN2026-0184"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus",
+     "source": "PLN2026-0184"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2022-0175",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 pre-application",
+     "source": "ZP2022-0175"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "with State of California Density Bonus",
+     "source": "ZP2022-0175"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2022-0118"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "with State of California Density Bonus",
+     "source": "PLN2022-0118"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2022-0177",
+   "pathways": [
+    {
+     "pathway": "sb35_streamlined",
+     "quote": "SB 35 Preliminary Development Application",
+     "source": "PLN2022-0093"
+    },
+    {
+     "pathway": "sb35_streamlined",
+     "quote": "SB 35 (MOD)",
+     "source": "PLN2024-0051"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2022-0179",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus",
+     "source": "ZP2022-0179"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "with the State of California Density Bonus",
+     "source": "DRCP2022-0021"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2022-0061"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0018"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "This is a density bonus project.",
+     "source": "PLN2023-0018"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Very Low-Income Density Bonus qualifying units",
+     "source": "ZP2025-0105"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "with the state of California Density Bonus",
+     "source": "ZP2026-0076"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2015-0183",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0184",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0189",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0193",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0196",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0202",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0204",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0209",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0226",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0229",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0023",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0024",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0025",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0026",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0028",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "Density Bonus requested for 5 units and one tandem parking.",
+     "source": "ZP2016-0028"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2016-0031",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0033",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0034",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0041",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2016-0044",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2026-0039",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2026-0047",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2026-0048",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2026-0049",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2026-0058",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2026-0073",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2026-0081",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2026-0087",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2026-0109",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Pre-App",
+     "source": "PLN2026-0109"
+    },
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "utilizing SB 684",
+     "source": "PLN2026-0109"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2026-0111",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2006-0086",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2007-0062",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2007-0089",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2008-0006",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2008-0030",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2008-0071",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2008-0126",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2008-0146",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2009-0004",
+   "pathways": []
+  },
+  {
+   "project_key": "AUP2009-0055",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0099",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0103",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0112",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0115",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0123",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0124",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0125",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0131",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0132",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0135",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0013",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0014",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0015",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0020",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0022",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0026",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0027",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0029",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0032",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0034",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2023-0025",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2023-0036",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2023-0040",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "State of California Density Bonus.",
+     "source": "ZP2023-0040"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "State of California Density Bonus.",
+     "source": "DRCP2023-0003"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2022-0057"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "using a Density Bonus.",
+     "source": "PLN2022-0057"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0083"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "State of California Density Bonus.",
+     "source": "PLN2023-0083"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2023-0045",
+   "pathways": [
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "SB 684 pre-application",
+     "source": "PLN2025-0064"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2023-0046",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2023-0057",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing a State Density Bonus.",
+     "source": "ZP2023-0057"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2022-0109"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2023-0058",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "using a State Density Bonus.",
+     "source": "ZP2023-0058"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "using a State Density Bonus.",
+     "source": "DRCP2023-0005"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2022-0069"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State of California Density Bonus.",
+     "source": "PLN2022-0069"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2023-0059",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2023-0060",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2023-0063",
+   "pathways": [
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "in compliance with state of California SB-684 - Subdivision Homeownership project.",
+     "source": "PLN2025-0050"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 PRE-APP",
+     "source": "PLN2025-0052"
+    },
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "in compliance with state of California SB-684 - Subdivision Homeownership project.",
+     "source": "PLN2025-0052"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2014-0061",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2014-0063",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2014-0069",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0011",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0014",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0018",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "w/density bonus",
+     "source": "ZP2015-0018"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2015-0021",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0032",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0036",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0041",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2020-0160",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2021-0001",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2021-0002",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2021-0009",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2021-0011",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2021-0015",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2021-0027",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2021-0046",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 Preliminary Application submitted - PLN2020-0041.",
+     "source": "ZP2021-0046"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 Preliminary Application submitted - PLN2020-0041.",
+     "source": "DRCP2021-0002"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 Preliminary Application.",
+     "source": "PLN2020-0041"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2021-0055",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2021-0061",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2022-0087",
+   "pathways": [
+    {
+     "pathway": "sb9",
+     "quote": "SB 9 Pre-App",
+     "source": "PLN2022-0087"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2022-0094",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2022-0096",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2022-0106",
+   "pathways": [
+    {
+     "pathway": "sb9",
+     "quote": "SB 9 Preliminary Eligibility Determination",
+     "source": "PLN2022-0106"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2022-0110",
+   "pathways": [
+    {
+     "pathway": "sb9",
+     "quote": "Two-lot split utilizing SB 9",
+     "source": "PLN2022-0110"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2022-0112",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application: 2201 SAN PABLO AVE",
+     "source": "PLN2022-0112"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "with a State of California density bonus",
+     "source": "PLN2022-0112"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application: 2201 SAN PABLO AVENUE",
+     "source": "PLN2023-0048"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "wants a State of California Density Bonus",
+     "source": "PLN2023-0048"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 preliminary application to construct a new 50,640 sf",
+     "source": "PLN2026-0141"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2022-0119",
+   "pathways": [
+    {
+     "pathway": "sb35_streamlined",
+     "quote": "SB 35 Preliminary Development Application",
+     "source": "PLN2022-0119"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2022-0123",
+   "pathways": [
+    {
+     "pathway": "sb9",
+     "quote": "SB 9 Preliminary Eligibility Determination for a lot spilt and new single-family",
+     "source": "PLN2022-0123"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2023-0005",
+   "pathways": [
+    {
+     "pathway": "sb9",
+     "quote": "SB-9 Pre-App",
+     "source": "PLN2023-0005"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2023-0007",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2026-0113",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2026-0117",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2026-0122",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2026-0131",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2026-0143",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2026-0152",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2026-0155",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 pre-application",
+     "source": "PLN2026-0155"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2026-0156",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2026-0159",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2026-0161",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0043",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "Including density bonus units, there will be approximately 170 residential units",
+     "source": "ZP2015-0043"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Including density bonus units, there will be approximately 170 residential units",
+     "source": "DRCP2015-0004"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2015-0045",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0069",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0072",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0079",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0087",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0089",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0090",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0096",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2015-0098",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2019-0220",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2020-0006",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2020-0009",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2020-0011",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2020-0016",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2020-0022",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "construct one 4-story, density bonus, mixed-use building",
+     "source": "ZP2020-0022"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "construct one 4-story mixed use building - density bonus",
+     "source": "DRCP2020-0002"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2020-0041",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2020-0043",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2020-0045",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "Density Bonus application",
+     "source": "ZP2020-0045"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2020-0051",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2024-0076",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "Entitled to 80% density bonus, waivers, and up to 4 concessions under the State Density Bonus Law.",
+     "source": "ZP2024-0076"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 Project",
+     "source": "ZP2024-0076"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 Project",
+     "source": "DRCP2024-0012"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0101"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2024-0077",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "Entitled to 46.25% density bonus, waivers, and up to 3 concessions under the State Density Bonus Law.",
+     "source": "ZP2024-0077"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 Project",
+     "source": "ZP2024-0077"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 Project",
+     "source": "DRCP2024-0013"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0102"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2024-0079",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 Project",
+     "source": "ZP2024-0079"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0094"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2024-0100",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2024-0104",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0154",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0158",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0159",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0166",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0168",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0172",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0174",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0177",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0179",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2017-0181",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2025-0040",
+   "pathways": [
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "PREAPP SB684 1745 CEDAR ST",
+     "source": "PLN2025-0040"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 Preliminary Application",
+     "source": "PLN2025-0047"
+    },
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "SB-684 Subdivision Homeownership Project",
+     "source": "PLN2025-0047"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "vests rights under zoning applicable as of the submittal date per California Government Code Section 65941.1",
+     "source": "PLN2025-0047"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2025-0041",
+   "pathways": [
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "SB 684 pre-application to determine eligibility to subdivide an existing lot into four lots",
+     "source": "PLN2025-0041"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2025-0043",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2023-0070",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus",
+     "source": "ZP2023-0070"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus",
+     "source": "DRCP2023-0007"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2022-0075"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2023-0079",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "with State of California Density Bonus",
+     "source": "ZP2023-0079"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "with State of California Density Bonus",
+     "source": "DRCP2023-0008"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2022-0072"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "with a state of California density bonus",
+     "source": "PLN2022-0072"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2023-0089",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus",
+     "source": "ZP2023-0089"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0068"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "will seek to utilize the State of California Density Bonus",
+     "source": "PLN2023-0068"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2023-0126",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "This is a State of California Density Bonus project.",
+     "source": "ZP2023-0126"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0059"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2023-0127",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2023-0138",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0026"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "using a State Density Bonus",
+     "source": "PLN2023-0026"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2024-0074",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 Project",
+     "source": "ZP2024-0074"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "project entitled to 82.5% density bonus, waviers, and up to 4 concessions under the State Density Bonus Law",
+     "source": "ZP2024-0074"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 Project",
+     "source": "DRCP2024-0010"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "project entitled to 82.5% density bonus, waviers, and up to 4 concessions under the State Density Bonus Law",
+     "source": "DRCP2024-0010"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 Preliminary Application",
+     "source": "PLN2023-0099"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "California State Density Bonus Project with 50% density bonus, waivers and up to 3 concessions",
+     "source": "PLN2023-0099"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2024-0075",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 Project",
+     "source": "ZP2024-0075"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "The project would utilize a 96.3 percent density bonus and provide 17 very-low-income units and 16 middle-income units",
+     "source": "ZP2024-0075"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 Project",
+     "source": "DRCP2024-0011"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "96.3% density bonus, waivers, and up to 4 concessions under the State Density Bonus Law is entitled",
+     "source": "DRCP2024-0011"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2022-0115"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "State of California Density Bonus",
+     "source": "PLN2022-0115"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 Preliminary Application",
+     "source": "PLN2023-0100"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "State Density Bonus Program entitlement to 50% density bonus, waivers, and up to 3 concessions",
+     "source": "PLN2023-0100"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2024-0114",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330:",
+     "source": "ZP2024-0114"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Density Bonus Project with 66 units total, 5 VLI units",
+     "source": "ZP2024-0114"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Density Bonus Project with 66 units total, 5 VLI units",
+     "source": "DRCF2026-0002"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Density Bonus Project with 66 units total, 5 VLI units",
+     "source": "DRCP2024-0015"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 PRE APP",
+     "source": "PLN2024-0011"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Pre-Application",
+     "source": "PLN2024-0011"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Density Bonus Project with 66 units total, 5 VLI units",
+     "source": "PLN2024-0011"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2023-0112",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2023-0113",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2023-0123",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2024-0067",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 UPPH-2276 Shattuck SB330 Preliminary Application",
+     "source": "ZP2024-0067"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Through utilizing a 50 percent density bonus, 28 density bonus maximum units will be included",
+     "source": "ZP2024-0067"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 project to demolish an existing three-story residential building",
+     "source": "DRCF2025-0003"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 project to demolish an existing three-story residential building",
+     "source": "DRCP2024-0008"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 Preliminary Application",
+     "source": "PLN2023-0093"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Through utilizing a 50 percent density bonus, 28 density bonus maximum units will be included",
+     "source": "PLN2023-0093"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 PRE-APP: 2442 Haste Street SB 330 Pre-App",
+     "source": "PLN2024-0009"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Density Bonus Project with 36 units total, 2 VLI units",
+     "source": "PLN2024-0009"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2024-0070",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "An SB330 Preliminary Application (PLN2023-0093) for this project was d",
+     "source": "ZP2024-0070"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2024-0071",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "State Density Bonus Project to merge two lots",
+     "source": "ZP2024-0071"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "State Density Bonus Project to merge two lots",
+     "source": "DRCP2024-0009"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 preliminary App: 2955 Shattuck SB 330 Preliminary Application",
+     "source": "PLN2023-0085"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Through utilizing a 20 % density bonus, 14 density bonus maximum units will be included",
+     "source": "PLN2023-0085"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2023-0154",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2024-0057",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0086"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "50 percent Density Bonus utilizing",
+     "source": "PLN2023-0086"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2024-0058",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0081"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "State of California Density Bonus",
+     "source": "PLN2023-0081"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2024-0059",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "UPPH SB330: 2204 Dwight Way SB330",
+     "source": "ZP2024-0059"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 PRE APP: 2204 DWIGHT SB 330 Pre-App",
+     "source": "PLN2024-0012"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2024-0060",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application: 2201-2205 Blake Street SB 330 Pre-App",
+     "source": "PLN2024-0013"
+    },
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "SB684 Pre-application at 2201-2205 Blake Street",
+     "source": "PLN2026-0142"
+    },
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "Lot subdivision pursuant to SB 684.",
+     "source": "PLN2026-0142"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2024-0066",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 UPPH: 2109 VIRGINIA STREET",
+     "source": "ZP2024-0066"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "entitling it to 92.5% density bonus, waivers, and up to 4 concessions under the state density bonus law.",
+     "source": "ZP2024-0066"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "entitling it to 92.5% density bonus, waivers, and up to 4 concessions under the state density bonus law.",
+     "source": "DRCP2024-0007"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application for the construction of a new 7-story, 132-unit mixed use housing development",
+     "source": "PLN2023-0091"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "State Density Bonus Project.",
+     "source": "PLN2023-0091"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2023-0024",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2022-0084"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "Density bonus with height and open space in R-SMU.",
+     "source": "PLN2022-0084"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0016"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2023-0064",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus",
+     "source": "ZP2023-0064"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 Preliminary Application",
+     "source": "PLN2021-0024"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "density bonus",
+     "source": "PLN2021-0024"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "PRE-APPLICATION FOR SB 330",
+     "source": "PLN2023-0013"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2023-0068",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0014"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2022-0113",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus",
+     "source": "ZP2022-0113"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 3330 Application",
+     "source": "DRCP2022-0011"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 3330 Preliminary Application",
+     "source": "PLN2022-0020"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 Pre-Application",
+     "source": "PLN2023-0056"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus",
+     "source": "PLN2023-0056"
+    },
+    {
+     "pathway": "ab2011",
+     "quote": "AB 2011 Ministerial Application",
+     "source": "PLN2026-0032"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing a State Density Bonus",
+     "source": "ZP2024-0096"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2022-0115",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus",
+     "source": "ZP2022-0115"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2022-0014"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2022-0149",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus",
+     "source": "ZP2022-0149"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "utilizing State Density Bonus",
+     "source": "DRCP2022-0018"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2022-0036"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "state of California density bonus",
+     "source": "PLN2022-0036"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0090"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "State Density Bonus project",
+     "source": "PLN2023-0090"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2023-0096",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0033"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "includes affordable housing units for State Density Bonus",
+     "source": "PLN2023-0033"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2023-0098",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2023-0107",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "3 Very Low-Income units Density Bonus qualifying units",
+     "source": "ZP2023-0107"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "State of California Density Bonus",
+     "source": "DRCP2023-0013"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2022-0104"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "with state of California density bonus",
+     "source": "PLN2022-0104"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0080"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "using State of California State Density Bonus",
+     "source": "PLN2023-0080"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2022-0162",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2023-0003",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 Pre-Application",
+     "source": "ZP2023-0003"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "State of California density bonus",
+     "source": "ZP2023-0003"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB-330 Pre-Application",
+     "source": "PLN2023-0001"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "State of California density bonus",
+     "source": "PLN2023-0001"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2023-0004",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2025-0065",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 PREAPP",
+     "source": "PLN2025-0065"
+    },
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "utilizing SB 684",
+     "source": "PLN2025-0065"
+    },
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "SB 684 PREAPP",
+     "source": "PLN2025-0091"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "Utilizing Senate Bills SB 330 and SB 684",
+     "source": "PLN2025-0091"
+    },
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "Utilizing Senate Bills SB 330 and SB 684",
+     "source": "PLN2025-0091"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2025-0068",
+   "pathways": [
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "SB684 PRE-APP",
+     "source": "PLN2025-0068"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2025-0073",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB330 PRE-APP",
+     "source": "PLN2025-0073"
+    },
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "SB684 Lot Split",
+     "source": "PLN2025-0073"
+    },
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "SB684 Pre-application to subdivide one lot into three",
+     "source": "PLN2026-0029"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2023-0090",
+   "pathways": [
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2022-0114"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "State of California Density Bonus",
+     "source": "PLN2022-0114"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application",
+     "source": "PLN2023-0092"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "State Density Bonus Project",
+     "source": "PLN2023-0092"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2023-0094",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2023-0095",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "This is a State Density Bonus project.",
+     "source": "ZP2023-0095"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 Preliminary Application for a proposed project",
+     "source": "PLN2023-0034"
+    },
+    {
+     "pathway": "density_bonus",
+     "quote": "includes affordable housing for State Density Bonus",
+     "source": "PLN2023-0034"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2024-0126",
+   "pathways": [
+    {
+     "pathway": "density_bonus",
+     "quote": "Density bonus.",
+     "source": "ZP2024-0126"
+    },
+    {
+     "pathway": "sb330_preliminary",
+     "quote": "SB 330 preliminary application",
+     "source": "PLN2024-0048"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2025-0014",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2025-0075",
+   "pathways": [
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "utilizing SB 684/SB 1123",
+     "source": "PLN2025-0075"
+    }
+   ]
+  },
+  {
+   "project_key": "PLN2025-0079",
+   "pathways": []
+  },
+  {
+   "project_key": "PLN2025-0081",
+   "pathways": [
+    {
+     "pathway": "sb684_small_lot",
+     "quote": "SB-684: 1236 DWIGHT WAY",
+     "source": "PLN2025-0081"
+    }
+   ]
+  },
+  {
+   "project_key": "ZP2024-0116",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2024-0120",
+   "pathways": []
+  },
+  {
+   "project_key": "ZP2024-0122",
+   "pathways": []
+  }
+ ]
+}

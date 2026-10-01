@@ -156,6 +156,32 @@ def batch_status(state_path: Path):
     return b
 
 
+def salvage_objects(txt: str) -> list:
+    """the COMPLETE top-level objects of a JSON array, even when the response was cut off mid-array.
+
+    A max_tokens stop leaves an array with its last object half-written; json.loads then fails and every answer in
+    the group was being discarded, including the complete ones already paid for (2026-09-28 in the scope reader,
+    again 2026-09-30 in the pathway reader, where 10 of 68 groups were lost). The scope reader's own fix matched only
+    FLAT objects; this one decodes NESTED objects one at a time and stops at the first incomplete one. ONE home now."""
+    dec = json.JSONDecoder()
+    i = (txt or "").find("[")
+    out = []
+    if i < 0:
+        return out
+    i += 1
+    while True:
+        while i < len(txt) and txt[i] in " \t\r\n,":
+            i += 1
+        if i >= len(txt) or txt[i] != "{":
+            return out
+        try:
+            obj, j = dec.raw_decode(txt, i)
+        except ValueError:
+            return out
+        out.append(obj)
+        i = j
+
+
 def batch_results(state_path: Path):
     """yield (custom_id, parsed_json_or_None, raw_text, usage) for every result."""
     import anthropic
@@ -170,4 +196,5 @@ def batch_results(state_path: Path):
         try:
             yield r.custom_id, json.loads(m.group(0)), txt, r.result.message.usage
         except Exception:
-            yield r.custom_id, None, txt, r.result.message.usage
+            got = salvage_objects(txt)           # partial, never invented: only complete objects
+            yield r.custom_id, (got or None), txt, r.result.message.usage

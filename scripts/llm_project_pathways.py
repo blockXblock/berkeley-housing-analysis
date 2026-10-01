@@ -80,7 +80,7 @@ def verify(items, texts):
     src = {k: norm(t) for k, t in texts}
     keep = []
     for it in items or []:
-        p, q, s = it.get("pathway"), it.get("quote"), it.get("source")
+        p, q, s = it.get("pathway"), it.get("quote"), str(it.get("source") or "").strip().strip("[]").strip()
         if p in PATHWAYS and q and s in src and norm(q) in src[s]:
             keep.append({"pathway": p, "quote": q, "source": s})
     return keep
@@ -93,8 +93,11 @@ def main() -> int:
     ap.add_argument("--eval", action="store_true")
     ap.add_argument("--pack", type=int, default=10)
     ap.add_argument("--db", default=str(V4), help="read projects from this v4 DB (read-only), e.g. a verified build")
+    ap.add_argument("--retry-unanswered", action="store_true",
+                    help="submit / collect ONLY the projects the stored reading left unanswered, merged into it")
     a = ap.parse_args()
-    state = OUT / "sonnet_batch_state.json"
+    tag = "_retry" if a.retry_unanswered else ""
+    state = OUT / f"sonnet_batch_state{tag}.json"
     if a.eval:
         ev = json.load(open(ROOT / "scratch/2026-09-30_cycle2/pathway_eval_set.json"))
         ed = sorted(ROOT.glob("data/derived/project_pathways_evidence_*.json"))[-1]
@@ -110,6 +113,12 @@ def main() -> int:
         return 0
     recs = project_texts(Path(a.db))
     keys = sorted(recs)
+    prior = None
+    if a.retry_unanswered:
+        prior_path = sorted(ROOT.glob("data/derived/project_pathways_evidence_*.json"))[-1]
+        prior = json.load(open(prior_path))
+        keys = sorted(set(prior["unanswered"]) & set(recs))
+        a.pack = min(a.pack, 3)
     groups = [keys[i:i + a.pack] for i in range(0, len(keys), a.pack)]
     print(f"{len(keys)} application-anchored projects with text")
 
@@ -126,15 +135,15 @@ def main() -> int:
         return 0
     if a.sonnet == "submit":
         OUT.mkdir(parents=True, exist_ok=True)
-        (OUT / "groups.json").write_text(json.dumps(groups))
-        mr.batch_submit([{"custom_id": f"g{i}", "params": {"model": mr.BATCH_MODEL, "max_tokens": 250 * len(g) + 400,
+        (OUT / f"groups{tag}.json").write_text(json.dumps(groups))
+        mr.batch_submit([{"custom_id": f"g{i}", "params": {"model": mr.BATCH_MODEL, "max_tokens": 1200 * len(g) + 800,
                           "messages": [{"role": "user", "content": prompt(g)}]}} for i, g in enumerate(groups)], state)
         return 0
     if a.sonnet == "status":
         mr.batch_status(state)
         return 0
     if a.sonnet == "collect":
-        groups = json.loads((OUT / "groups.json").read_text())
+        groups = json.loads((OUT / f"groups{tag}.json").read_text())
         rows, unanswered, dropped = [], [], 0
         for cid, parsed, raw, _ in mr.batch_results(state):
             got = {str(x.get("project")): x for x in (parsed or []) if isinstance(x, dict)}
@@ -147,6 +156,11 @@ def main() -> int:
                 rows.append({"project_key": k, "pathways": kept})
         print(f"answers {len(rows)}; projects with a pathway {sum(1 for r in rows if r['pathways'])}; pathways dropped "
               f"(not verbatim / not in vocabulary) {dropped}; unanswered {len(unanswered)}")
+        if prior is not None:                       # MERGE: keep every earlier answer, add the retried ones
+            have = {r["project_key"] for r in rows}
+            rows = [r for r in prior["readings"] if r["project_key"] not in have] + rows
+            prior_path.rename(OUT / f"{prior_path.stem}_before_retry.json")
+            print(f"merged: {len(rows)} readings; still unanswered {len(unanswered)}")
         mr.write_evidence(rows, "project_pathways", DEFINITION,
                           extra={"model": mr.BATCH_MODEL, "rule": "kept only if the quote is verbatim in the cited text",
                                  "unanswered": unanswered})

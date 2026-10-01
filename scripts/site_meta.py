@@ -58,7 +58,9 @@ DESC = {
  "mayor-briefing-2026-07.html": ("More Homes, Healthy Corridors",
    "A data briefing for the Mayor on what Berkeley's own housing records show works."),
  "berkeley-snapshot-2026-10.html": ("Berkeley Snapshot",
-   "Berkeley in numbers: residents, renters and owners, the daily commute, cars, taxable value, streets, pipes, water, power and fire evacuation, each from a named public source."),
+   "Berkeley in numbers, at the finest grain each public source allows: residents, renters and owners, income, ages, "
+   "the daily commute, cars, taxable value, streets, pipes, undergrounding costs, water, power and fire evacuation, "
+   "with every table's data downloadable for mapping."),
  "map.html": ("Housing Map", "Berkeley's tracked housing projects on a map."),
  "driving_survey_log.html": ("Driving Survey Log",
    "Field verification of the pipeline — what the buildings actually look like on the ground."),

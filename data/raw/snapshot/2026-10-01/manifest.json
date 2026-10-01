@@ -1,0 +1,276 @@
+{
+ "acs/city_0.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B01003,B01001,B25003,B25008,B26001&geo_ids=16000US0606000",
+  "fetched_at": "2026-10-01T10:32:26",
+  "bytes": 5835,
+  "sha256": "787390c2a924f6a92c3fe9a08a8785cf49d2a69b8eb31223f9b6b6f505f7a4e5"
+ },
+ "acs/city_1.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B19001,B19013,B19301,B17021&geo_ids=16000US0606000",
+  "fetched_at": "2026-10-01T10:32:26",
+  "bytes": 6173,
+  "sha256": "bda6ddd5ee70cdb03f05e922d323844e96e092032535f3f0273b5cb668387b87"
+ },
+ "acs/city_2.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25044,B08301,B08303&geo_ids=16000US0606000",
+  "fetched_at": "2026-10-01T10:32:26",
+  "bytes": 5120,
+  "sha256": "43c49a3c922bbd202aec58ea6b9acbbe8bf823480e0f3c8d2200ea2ce30ccbfb"
+ },
+ "acs/city_3.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25001,B25004,B25024,B25034,B25041&geo_ids=16000US0606000",
+  "fetched_at": "2026-10-01T10:32:26",
+  "bytes": 4139,
+  "sha256": "c32092383007f35f24a2ba73651b6a9a15950f02f71fabf25e69d2c316c388bf"
+ },
+ "acs/city_4.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25064,B25077,B25070,B25091&geo_ids=16000US0606000",
+  "fetched_at": "2026-10-01T10:32:26",
+  "bytes": 4265,
+  "sha256": "ecf6eb4ab825266f050f02eeb5cd7bf08fb15c463626b15e8580b3c924098afa"
+ },
+ "acs/city_5.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B03002,B11001,B15003&geo_ids=16000US0606000",
+  "fetched_at": "2026-10-01T10:32:26",
+  "bytes": 5860,
+  "sha256": "ff4863d5ab33900ec8d196cfb716431176b5201c88541b69809b1c46cf6ae422"
+ },
+ "acs/tract_0.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B01003,B01001,B25003,B25008,B26001&geo_ids=140|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:26",
+  "bytes": 82530,
+  "sha256": "b57bf0debede35adb1a4a2d79f0bb4e8f3efac378998dffa4c713c82414ca366"
+ },
+ "acs/tract_1.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B19001,B19013,B19301,B17021&geo_ids=140|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:27",
+  "bytes": 78646,
+  "sha256": "b294a5ec353cd9b1290d22bbaae78f315afb182851713b0ad048097650d4f6d6"
+ },
+ "acs/tract_2.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25044,B08301,B08303&geo_ids=140|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:27",
+  "bytes": 69803,
+  "sha256": "10a799aeb96247027f57ec5c4be3e2da27a18c1d835b83842f5932c362989dfe"
+ },
+ "acs/tract_3.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25001,B25004,B25024,B25034,B25041&geo_ids=140|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:27",
+  "bytes": 58586,
+  "sha256": "44a190eed359a574bc051b386e99f8683e49e72c8ac18181b79e3e9a258b6086"
+ },
+ "acs/tract_4.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25064,B25077,B25070,B25091&geo_ids=140|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:27",
+  "bytes": 54852,
+  "sha256": "1abe36394c03b3799e84eacc60139b3e965adecb80fca1012b04d0795c03e48c"
+ },
+ "acs/tract_5.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B03002,B11001,B15003&geo_ids=140|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:27",
+  "bytes": 77663,
+  "sha256": "b92192e6c02e9971a1cdc00447794cf9f14ad6d41ba06105503d40a71004023c"
+ },
+ "acs/blockgroup_B01003.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B01003&geo_ids=150|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:37",
+  "bytes": 19323,
+  "sha256": "9e4638452804df8c9985fb5d4218c206c43acf2c81952166cb3f2deee269a416"
+ },
+ "acs/blockgroup_B01001.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=150|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:37",
+  "bytes": 183460,
+  "sha256": "db53449a8c5d6e3685993f549b9177b09de604b752718c8de236a048e2a26f6b"
+ },
+ "acs/blockgroup_B25003.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25003&geo_ids=150|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:37",
+  "bytes": 26338,
+  "sha256": "115d6282b1db0ba8257d9416a24edc2b43120aee79c5aecaa7b18898d717cd8b"
+ },
+ "acs/blockgroup_B25008.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25008&geo_ids=150|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:37",
+  "bytes": 26629,
+  "sha256": "52322d6671625fc185875ff2de0d32c2e4582581402b26eff6a70f8122819722"
+ },
+ "unavailable:acs/blockgroup_B26001.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B26001&geo_ids=150|16000US0606000",
+  "error": "HTTP 400"
+ },
+ "acs/blockgroup_B19001.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B19001&geo_ids=150|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:37",
+  "bytes": 73936,
+  "sha256": "a49d388233aed9fa78a145e65c36592fd09c639925eed8804063ae9c5d3cf945"
+ },
+ "acs/blockgroup_B19013.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B19013&geo_ids=150|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:37",
+  "bytes": 19769,
+  "sha256": "a1c3268c8dc006f852b044cd622b4cbbd92f7ae2d19b9b29fad25491bcaa6f59"
+ },
+ "acs/blockgroup_B19301.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B19301&geo_ids=150|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:37",
+  "bytes": 19794,
+  "sha256": "65d3555ac78a1e0926a743d97f7b168b29f64fcf904d6526bb7828cff9abb38e"
+ },
+ "acs/blockgroup_B17021.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B17021&geo_ids=150|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:38",
+  "bytes": 137285,
+  "sha256": "c8e60be384ba19454365af6613af99ac177087397b4a4e7c38f880a7cbf071c7"
+ },
+ "acs/blockgroup_B25044.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25044&geo_ids=150|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:38",
+  "bytes": 67383,
+  "sha256": "79fd69a0d5f966452a2ce1c892ff2e24ac6213f547e77467bd2bb1e8a66b88e4"
+ },
+ "acs/blockgroup_B08301.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B08301&geo_ids=150|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:38",
+  "bytes": 87685,
+  "sha256": "7e2dbdaf72d1be55786408a2335db2f8221a0fc2ffa38527afa08033967154c2"
+ },
+ "acs/blockgroup_B08303.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B08303&geo_ids=150|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:38",
+  "bytes": 60372,
+  "sha256": "da07a1b77507f538304e7f3040c2035235a2bb064784e62f19644a567d371d13"
+ },
+ "acs/blockgroup_B25001.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25001&geo_ids=150|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:38",
+  "bytes": 19226,
+  "sha256": "b9741fa996278f31473e6541d13b5bf36896f27eb27388b5bbef8f32beccce5b"
+ },
+ "acs/blockgroup_B25004.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25004&geo_ids=150|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:38",
+  "bytes": 42706,
+  "sha256": "5b067b9c13ef6b66ef46bce1a29dd9160c7d75d35888218d4b0255bab03f9fc8"
+ },
+ "acs/blockgroup_B25024.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25024&geo_ids=150|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:38",
+  "bytes": 53430,
+  "sha256": "ec88a15654fbe514251cd9122c08f8920880367961e432dd4d69605254ecd343"
+ },
+ "acs/blockgroup_B25034.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25034&geo_ids=150|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:38",
+  "bytes": 53566,
+  "sha256": "c3c58ab5ec5a7e852b050b744d6e84d2f393526ebbea2b04ee354cb40fccd26d"
+ },
+ "acs/blockgroup_B25041.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25041&geo_ids=150|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:39",
+  "bytes": 40060,
+  "sha256": "15c0a5117b45fda134758d9384f1666fc221dbc707d335ff9314453fcd7f8799"
+ },
+ "acs/blockgroup_B25064.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25064&geo_ids=150|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:39",
+  "bytes": 19389,
+  "sha256": "1b0934181d02224bc77ab0ce4587f1deb87c93d7eaa81e83cffee92bc2462c1d"
+ },
+ "acs/blockgroup_B25077.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25077&geo_ids=150|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:39",
+  "bytes": 19782,
+  "sha256": "052666f36b06d4ee82b1a6366c80e6d50e5645e1856ebef2c28f08740fcdb715"
+ },
+ "acs/blockgroup_B25070.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25070&geo_ids=150|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:39",
+  "bytes": 53410,
+  "sha256": "4b099c41ccf6f09647bc509c00bf921c3000d96d70b1c4cdd571939dff41c6f8"
+ },
+ "acs/blockgroup_B25091.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25091&geo_ids=150|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:39",
+  "bytes": 93973,
+  "sha256": "e81341ea958078c51da57d6e6cddd79239769051014a2ebcfcf1bacbd80e7909"
+ },
+ "acs/blockgroup_B03002.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B03002&geo_ids=150|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:39",
+  "bytes": 88632,
+  "sha256": "31200af565d299c47e1fe18e86e46d90a0bdb1bd3799518f9e93a879b186668b"
+ },
+ "acs/blockgroup_B11001.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B11001&geo_ids=150|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:39",
+  "bytes": 47307,
+  "sha256": "40395a6b8c5a28e0b94021333c263711bd3ad84770bb74eb74542ccfaa787252"
+ },
+ "acs/blockgroup_B15003.json": {
+  "url": "https://api.censusreporter.org/1.0/data/show/latest?table_ids=B15003&geo_ids=150|16000US0606000",
+  "fetched_at": "2026-10-01T10:32:40",
+  "bytes": 100891,
+  "sha256": "0a6e4bba9cce78a50de7f053b1edd30c8d79ca2da98ff426146367fb813f6ed9"
+ },
+ "lodes/ca_xwalk.csv.gz": {
+  "url": "https://lehd.ces.census.gov/data/lodes/LODES8/ca/ca_xwalk.csv.gz",
+  "fetched_at": "2026-10-01T10:32:50",
+  "bytes": 9294052,
+  "sha256": "6b11ae561c4b3e84799a6730f68915d29cabe5bc4355e65382aaa1d44c6fa361"
+ },
+ "lodes/ca_od_main_JT00_2023.csv.gz": {
+  "url": "https://lehd.ces.census.gov/data/lodes/LODES8/ca/od/ca_od_main_JT00_2023.csv.gz",
+  "fetched_at": "2026-10-01T10:34:34",
+  "bytes": 97270508,
+  "sha256": "f50d53a90d49a227628fc218247472f8cabe05ceba72b97a4dea9d1a3a104faa"
+ },
+ "lodes/ca_od_aux_JT00_2023.csv.gz": {
+  "url": "https://lehd.ces.census.gov/data/lodes/LODES8/ca/od/ca_od_aux_JT00_2023.csv.gz",
+  "fetched_at": "2026-10-01T10:34:36",
+  "bytes": 1888371,
+  "sha256": "807869bd81ad5ef2a1dc2e4d09f10e58d297fe65a821c66f42a15251459f998c"
+ },
+ "lodes/ca_wac_S000_JT00_2023.csv.gz": {
+  "url": "https://lehd.ces.census.gov/data/lodes/LODES8/ca/wac/ca_wac_S000_JT00_2023.csv.gz",
+  "fetched_at": "2026-10-01T10:34:43",
+  "bytes": 6308415,
+  "sha256": "f062c82b1dd7b4d4441078c9e8d779c258a6eb71cc0312a10e3bb523c17951b6"
+ },
+ "lodes/ca_rac_S000_JT00_2023.csv.gz": {
+  "url": "https://lehd.ces.census.gov/data/lodes/LODES8/ca/rac/ca_rac_S000_JT00_2023.csv.gz",
+  "fetched_at": "2026-10-01T10:34:55",
+  "bytes": 11506476,
+  "sha256": "a7ec5983e859886203dda83d54eb84da14548926918b482731bbc61e3a27f134"
+ },
+ "dmv/vehicle-fuel-type-counts-2025.csv": {
+  "url": "https://data.ca.gov/dataset/15179472-adeb-4df6-920a-20640d02b08c/resource/b459d957-5d94-4b10-999d-770419870364/download/vehicle-fuel-type-counts-2025.csv",
+  "fetched_at": "2026-10-01T10:35:24",
+  "bytes": 26491194,
+  "sha256": "f0894d56e905840aab84d63be07f1cd0aa9451b511f3a84366abbcc744673a81"
+ },
+ "tiger/tl_2024_06_bg.zip": {
+  "url": "https://www2.census.gov/geo/tiger/TIGER2024/BG/tl_2024_06_bg.zip",
+  "fetched_at": "2026-10-01T10:35:25",
+  "bytes": 52616990,
+  "sha256": "8de5b76a4e747f0eb294e8e269c75cf461cc8bb9f684cae58aca0ddfc837f77b"
+ },
+ "tiger/tl_2024_06_tract.zip": {
+  "url": "https://www2.census.gov/geo/tiger/TIGER2024/TRACT/tl_2024_06_tract.zip",
+  "fetched_at": "2026-10-01T10:35:26",
+  "bytes": 32451946,
+  "sha256": "8ad60e582b4d61be94ac072a4dd80d763255c0c987c616c7e6f9ffc7ee0bd318"
+ },
+ "dof/E-5_2026_InternetVersion.xlsx": {
+  "url": "https://dof.ca.gov/media/docs/forecasting/Demographics/estimates/e-5-population-and-housing-estimates-for-cities-counties-and-the-state-2020-2026/E-5_2026_InternetVersion.xlsx",
+  "fetched_at": "2026-10-01T10:39:20",
+  "bytes": 785455,
+  "sha256": "7d179aa625f07d4e05c78e89ca348f064b5ada9eba77d5b48c41feb33fb6f306"
+ },
+ "ebmud/UWMP_2025.pdf": {
+  "url": "https://www.ebmud.com/download_file/force/58536/735?UWMP_STANDALONE-2025-FINAL.pdf",
+  "fetched_at": "2026-10-01T10:39:23",
+  "bytes": 22872996,
+  "sha256": "b73a693dac932249d3f29b2370fc6a5775ad1a346b43e2eb4a2206719c8772da"
+ }
+}

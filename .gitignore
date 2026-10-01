@@ -185,3 +185,10 @@ data/raw/sanborn/*.jpg
 # Re-fetch with scripts/fetch_county_lineage.py -- the County republishes, so a re-fetch is a NEW manifest.
 data/raw/county_parcel_lineage/*.json
 !data/raw/county_parcel_lineage/lineage_hits_*.json
+
+# Berkeley Snapshot raw pulls (scripts/snapshot/pull_sources.py): large federal/state files stay local; manifest.json pins
+# each by URL and SHA-256. The ACS JSON, DOF workbook and manifest are small and tracked.
+data/raw/snapshot/*/lodes/
+data/raw/snapshot/*/dmv/
+data/raw/snapshot/*/ebmud/*.txt
+scripts/snapshot/__pycache__/

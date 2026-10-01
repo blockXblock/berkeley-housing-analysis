@@ -420,6 +420,12 @@ PLANNING_HARVESTS = (
     (os.path.join(ROOT, 'data', 'raw', 'accela_capdetail', 'capdetail_2026-09-30_pre2015.jsonl'), '2026-09-30',
      'CapDetail harvest of 1,359 pre-2015 primary applications (Tier 1; harvest_capdetail.py --records); raw pages '
      'pinned in data/raw/accela_capdetail/pages_manifest_2026-09-30_pre2015.csv'),
+    # Ashby BART's first Planning filing (John, 2026-09-30, phase 5): its text ("TOD development proposal", a request
+    # for a roundtable meeting) carries no housing word, so no filter or scope reading admitted it. Fetched by name so
+    # classification ruling R006 (counts toward RHNA) has a project to attach to.
+    (os.path.join(ROOT, 'data', 'raw', 'accela_capdetail', 'capdetail_2026-09-30_ashby-bart.jsonl'), '2026-09-30',
+     'CapDetail of PLN2026-0185, the Ashby BART TOD pre-application (harvest_capdetail.py --records); page pinned in '
+     'data/raw/accela_capdetail/pages_manifest_2026-09-30_ashby-bart.csv'),
 )
 
 

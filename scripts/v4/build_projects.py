@@ -65,6 +65,10 @@ from capdetail_select import resolve_chain, cited_records, is_modification  # no
 V4 = ROOT / "databases/berkeley_housing_v4.db"
 RULINGS = ROOT / "corrections/v4/planning_scope_rulings.csv"
 PROJECT_RULINGS = ROOT / "corrections/v4/project_rulings.csv"
+EXTERNAL_PROJECTS = ROOT / "corrections/v4/external_projects.csv"
+AFFORDABILITY = ROOT / "corrections/v4/affordability_rulings.csv"
+CLASSIFICATIONS = ROOT / "corrections/v4/classification_rulings.csv"
+FUNDING = ROOT / "corrections/v4/funding_ledger.csv"
 # Names (John, 2026-09-30): every project is named by its ADDRESS as the City wrote it; a proper name only where the
 # City's own text states one, accepted at read time only if VERBATIM in the cited record (scripts/llm_project_names.py).
 # Keyed by the project's stable key (anchor record, else first master permit). A re-reading is a new dated file.
@@ -257,6 +261,21 @@ def main() -> int:
                 anchors[rec] = [recs[rec]]
             for sid in sids:
                 home[sid] = rec
+            # COMPANIONS (John 2026-09-30, G004-G006): the same site's withdrawn/void application for THIS development
+            # joins the ruled project instead of standing as a separate empty project.
+            for c in [x.strip() for x in (r.get("companion_records") or "").split(";") if x.strip()]:
+                cr = recs.get(c) or held_by_type.get(c)
+                assert cr, f"project ruling {r['ruling_id']}: companion {c} is not loaded"
+                if c in anchors and c != rec:
+                    anchors[rec].extend(x for x in anchors.pop(c) if x["record"] != rec)
+                    for sid_, h in list(home.items()):
+                        if h == c:
+                            home[sid_] = rec
+                else:
+                    for a, members in anchors.items():
+                        members[:] = [x for x in members if x["record"] != c]
+                    anchors[rec].append(cr)
+                applied["companion_absorbed"] += 1
         elif r["action"] == "group_structures":
             homes = {home[s] for s in sids if home[s]}
             assert len(homes) <= 1, f"project ruling {r['ruling_id']}: buildings already in different projects {homes}"
@@ -293,6 +312,18 @@ def main() -> int:
         projects.append(dict(anchor=None, anchor_role="structure_only", records=[], structures=sorted(sids),
                              units=sum(units.get(x) or 0 for x in sids), filed=None, entitled=None, denied=None,
                              ended=None, ruling=g if not g.startswith("s") else None))
+    # PROJECTS OUTSIDE CITY PERMITTING (corrections/v4/external_projects.csv, John 2026-09-30): no City record, no
+    # building permit -- the four UC buildings. Projects with NO buildings, beds/units and status from the UC source.
+    for x in csv.DictReader(open(EXTERNAL_PROJECTS)):
+        par = [pid_ for (pid_,) in db.execute("SELECT parcel_id FROM parcel_identifiers WHERE apn_normalized=? "
+                                              "AND is_current=1", (x["apn"],))] if x["apn"] else []
+        projects.append(dict(anchor=None, anchor_role="outside_city_permitting", records=[], structures=[], units=0,
+                             filed=None, entitled=None, denied=None, ended=None, parcels=par,
+                             external_id=x["external_id"], ruling_ref=x["ruling_ref"], external_name=x["name"],
+                             external_address=x["address"],
+                             beds=int(x["beds"]) if x["beds"] else None, external_units=int(x["units"]) if x["units"] else None,
+                             permitting_authority=x["permitting_authority"], status=x["status"],
+                             status_date=x["status_date"] or None, source=x["source_url"], verification=x["verification"]))
 
     # ---- report
     OUT.mkdir(parents=True, exist_ok=True)
@@ -338,6 +369,92 @@ def main() -> int:
     return 0
 
 
+def attach_ledgers(con, projects, master_of_s, sp, addr_of):
+    """Phase 5 (John, 2026-09-30): affordability, classification and funding ledger rows -> projects.
+
+    Lanes, strongest first: L1 a City record/permit key the project holds; L2 the row's current APN among the project's
+    parcels; L3 the row's address (address canon) against the project's addresses. A row reaching several projects
+    takes the one(s) WITH BUILDINGS when exactly one has them (funding implies construction); otherwise it stays
+    UNATTACHED with the reason -- never a guess. Only approved affordability / classification rows apply."""
+    import re as _re
+    from housing_rules import to_canonical_apn
+    from housing_rules.address import normalize_address
+
+    def ak(a):
+        try:
+            n, st = normalize_address(a)
+            return f"{n}|{st}" if n and st and n != "0" else None
+        except Exception:
+            return None
+
+    cur_apn = collections.defaultdict(set)
+    for pid_, apn in con.execute("SELECT parcel_id, apn_normalized FROM parcel_identifiers WHERE is_current=1"):
+        cur_apn[pid_].add(apn)
+    saddr = collections.defaultdict(set)
+    for sid, a in con.execute("SELECT structure_id, a.normalized FROM structure_addresses JOIN addresses a USING(address_id)"):
+        saddr[sid].add(a)
+    by_key, by_apn, by_addr = (collections.defaultdict(set) for _ in range(3))
+    for i, p in enumerate(projects):
+        for k in (p.get("records") or []) + [m for s in p["structures"] for m in master_of_s[s]]:
+            by_key[k].add(i)
+        pars = set(p.get("parcels") or []).union(*[sp[s] for s in p["structures"]]) if p["structures"] else set(p.get("parcels") or [])
+        for x in pars:
+            for a in cur_apn[x]:
+                by_apn[a].add(i)
+        for a in [ak(addr_of.get(p["anchor"])) if p.get("anchor") else None, ak(p.get("external_address"))] + \
+                 [x for s in p["structures"] for x in saddr[s]]:
+            if a:
+                by_addr[a].add(i)
+
+    def find(row, keys, apns, addrs):
+        ks = [k for k in _re.split(r"[,;\s]+", keys or "") if k]
+        hit = set().union(*[by_key.get(k, set()) for k in ks]) if ks else set()
+        lane = "record_key"
+        if not hit:
+            canon = []
+            for a in (apns or "").split(";"):
+                try:
+                    canon.append(to_canonical_apn(a.strip(), "alameda"))
+                except Exception:
+                    pass
+            hit, lane = (set().union(*[by_apn.get(a, set()) for a in canon]) if canon else set()), "apn"
+        if not hit:
+            for a in addrs:
+                if ak(a) and by_addr.get(ak(a)):
+                    hit, lane = by_addr[ak(a)], "address"
+                    break
+        if len(hit) > 1:
+            built = {i for i in hit if projects[i]["structures"]}
+            if len(built) == 1:
+                hit, lane = built, lane + "+has_buildings"
+        return hit, lane
+
+    attached = collections.defaultdict(lambda: collections.defaultdict(list))
+    unattached = collections.defaultdict(list)
+    for kind, path, ok, keyf, fields in (
+            ("affordability", AFFORDABILITY, lambda r: r["status"] == "approved", "city_record_keys",
+             ("ruling_id", "income_tier", "units", "restriction", "source_url")),
+            ("classifications", CLASSIFICATIONS, lambda r: r["status"] == "approved", "city_record_keys",
+             ("ruling_id", "classification", "value", "rhna_effect")),
+            ("funding", FUNDING, lambda r: True, None,
+             ("funding_id", "funder", "program", "instrument", "amount_usd", "action", "action_date", "status"))):
+        for r in csv.DictReader(open(path)):
+            if not ok(r):
+                continue
+            hit, lane = find(r, r.get(keyf) if keyf else None, r.get("apn"), (r.get("address"), r.get("subject")))
+            ref = [i for i, p in enumerate(projects) if p.get("ruling_ref") and p.get("ruling_ref") == r.get("ruling_id")]
+            if ref:                              # L0: a project outside City permitting NAMES its ruling (R003 Anna Head)
+                hit, lane = set(ref), "ruling_ref"
+            entry = {f: r.get(f) for f in fields if r.get(f) not in (None, "")}
+            entry["join"] = lane
+            if len(hit) == 1:
+                attached[next(iter(hit))][kind].append(entry)
+            else:
+                unattached[kind].append({**entry, "subject": r.get("subject"),
+                                         "why": "no project reaches it" if not hit else f"reaches {len(hit)} projects"})
+    return {i: dict(v) for i, v in attached.items()}, dict(unattached)
+
+
 def write(con, projects) -> dict:
     """Clear and refill projects / project_structures / project_parcels in ONE transaction; verify, else roll back."""
     con.isolation_level = None
@@ -364,9 +481,16 @@ def write(con, projects) -> dict:
                                              "JOIN addresses a USING(address_id) ORDER BY a.address_id"):
             situs.setdefault(pid_, f"{num} {street}".upper())
         master_of_s = {sid: json.loads(n)["master_permits"] for sid, n in con.execute("SELECT structure_id, notes FROM structures")}
-        for p in projects:
+        attached, unattached = attach_ledgers(con, projects, master_of_s, sp, addr_of)
+        for kind, rows in unattached.items():
+            out[f"{kind}_unattached"] = len(rows)
+        (OUT / "ledger_unattached.json").write_text(json.dumps(unattached, indent=1))
+        for i, p in enumerate(projects):
+            p.update(attached.get(i, {}))
+            for kind in ("affordability", "classifications", "funding"):
+                out[f"{kind}_rows_attached"] += len(p.get(kind) or [])
             mps = sorted(m for s in p["structures"] for m in master_of_s[s])
-            key = p.get("anchor") or (mps[0] if mps else None)
+            key = p.get("anchor") or (mps[0] if mps else None) or p.get("external_id")
             address = (addr_of.get(p["anchor"]) if p.get("anchor") else None) or next((addr_of[m] for m in mps if addr_of.get(m)), None)
             basis = "address" if address else None
             if not address:                     # last fallback: the County's situs for the project's parcel
@@ -376,15 +500,23 @@ def write(con, projects) -> dict:
                 basis = "parcel_situs" if address else None
             p["project_key"], p["address"] = key, address
             p["name"] = names.get(key) or address
-            if pathways.get(key):
-                p["pathways"] = sorted({x["pathway"] for x in pathways[key]})
-                p["pathway_evidence"] = pathways[key]
+            # pathways are read per ANCHOR record; a project that absorbed another anchor (a ruling's companion) carries
+            # both readings, each still with its own quote and source
+            ev = [x for k in dict.fromkeys([key] + list(p.get("records") or [])) for x in pathways.get(k, [])]
+            if ev:
+                p["pathways"] = sorted({x["pathway"] for x in ev})
+                p["pathway_evidence"] = ev
                 out["with_pathway"] += 1
             p["name_basis"] = "city_stated_name" if names.get(key) else basis
+            if p.get("external_id"):
+                p["name"], p["address"], p["name_basis"] = p["external_name"], p["external_address"], "external_source"
             out["named_" + str(p["name_basis"])] += 1
             notes = {k: p.get(k) for k in ("anchor", "anchor_role", "records", "filed", "accepted", "entitled",
                                            "entitled_by", "denied", "ended", "record_status", "milestone_flags",
-                                           "ruling", "project_key", "address", "name_basis", "pathways", "pathway_evidence")
+                                           "ruling", "project_key", "address", "name_basis", "pathways", "pathway_evidence",
+                                           "external_id", "beds", "external_units", "permitting_authority", "status",
+                                           "status_date", "source", "verification",
+                                           "affordability", "classifications", "funding")
                      if p.get(k) not in (None, [], "")}
             notes["units"] = p["units"]
             pid = con.execute("INSERT INTO projects (name, notes) VALUES (?, ?)",

@@ -87,3 +87,9 @@ assumes C2's value is present). Everything else is order-independent. event-dedu
   State tax-credit rows come from CTCAC's statewide *List of Projects* (through June 2026): one row per
   application for the annual federal credit (claimed over 10 years) and one for any state credit. `apn` is
   canonical (`to_canonical_apn`); `apn_check` records the standing stale-APN guard against the Feb-2026 assessor.
+
+## Projects outside City permitting (added 2026-09-30)
+- **`external_projects.csv`**: housing the City does not permit, so no City record or building permit exists for it
+  (the four UC Berkeley buildings; John, 2026-09-30). Each becomes a v4 project with NO buildings, its beds/units and
+  status from the cited UC source, and its RHNA effect. Joined by the classification rulings R001-R004. Bed counts are
+  carried from v2 WITH v2's cited UC document and are marked "not yet re-read" until checked against it.

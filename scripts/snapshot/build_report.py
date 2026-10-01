@@ -46,7 +46,7 @@ CITED = dict(
                 ('Berkeley View', 'Berkeley hills', 'not published; serves about 2,100 hill homes', 'press report (2017)')],
     kld=dict(residents=117000, zones=106, vehicles=90000, through=47000, primary_ai=(139, 1547), secondary_ai=(195, 3715),
              hill_capacity=900, flat_capacity=1700, fire_inspections=8600,
-             src='KLD Associates, City of Berkeley Evacuation Time Estimate Study, TR-1296, July 1, 2025; City of '
+             src='KLD Associates, City of Berkeley Evacuation Time Estimate Study, TR-1296, July 1, 2025 (Tables 3-14, 6-6, 7-4; section 10.2); City of '
                  'Berkeley Evacuation StoryMaps (text version, July 2025); Community Wildfire Protection Plan (2023)'),
     # Hazards: every value verified 2026-10-01 in the saved source text (data/raw/hazards/*.txt). LHMP = City of Berkeley
     # 2024 Local Hazard Mitigation Plan, adopted March 18, 2025 (Council item 09); page labels as printed in the plan.
@@ -166,7 +166,7 @@ LEDE = {
     'undergrounding': 'How much of Berkeley still has overhead wires, and what the City\'s own studies say it costs to bury them.',
     'water-energy': 'How much water and power Berkeley uses, and what can be known about use by building, block or neighborhood.',
     'fire': 'The three disasters Berkeley plans for: how likely each is, who and what is exposed, and the steps taken so far.',
-    'campus': 'What the campus and the Lab use and emit, what they report about it, and the plan to retire the campus\'s gas plant.',
+    'campus': 'What the campus and the Lab use and emit, how many buildings they run, and the plan to retire the campus\'s gas plant.',
     'data': 'Every data file behind this report, what each holds, and where each source came from.',
 }
 
@@ -645,13 +645,22 @@ def s_fire():
     <div class="grid">
       {card(n(fz[2]['parcels'] + fz[3]['parcels']), 'parcels in hill Fire Zones 2 and 3', f"Our count from the City's zone map and County parcels ({pct(fz[2]['parcels'] + fz[3]['parcels'], F['assessor']['located'])} of all parcels; {big(fz[2]['net_taxable_value'] + fz[3]['net_taxable_value'])} taxable value). The City's plan counts 8,603.")}
       {card('1:45–2:20', 'to clear 90% of Fire Zones 2 and 3', 'Hours:minutes; the last vehicles take 3:25–3:40.')}
-      {card(f"~{n(K['vehicles'])}", 'vehicles that may need to leave the city', f"Plus {n(K['through'])} passing through. {K['zones']} evacuation zones.")}
+      {card('27,830', 'vehicles leave in a repeat of the 1923 fire', '10,330 of them from households in Fire Zones 2 and 3; clearing them takes 1:35 to 4:10.')}
       {card(n(K['primary_ai'][1]), 'residential parcels with a single way out', f"{K['primary_ai'][0]} neighborhoods; {K['secondary_ai'][0]} more ({n(K['secondary_ai'][1])} parcels) have impaired secondary access.")}
     </div>
     <h3>Time to clear each area (hours:minutes)</h3>
     {table(['Region', 'Summer weekday', 'Summer weekend', 'Summer night', 'Fall weekday', 'Fall weekend', 'Fall night'], rows, right=range(1, 7))}
     <p class="note">Weekday and weekend columns are midday. Times are for the 90th-percentile vehicle; * marks the 100th percentile (the last vehicle), used where it governs. "Urgent
     mobilization" assumes residents leave within 30 minutes. KLD Table 7-4: {dl('evacuation_clearance_times_kld_2025.csv')}.</p>
+    <p class="note" style="font-size:.95rem"><strong>How many cars leave the hills?</strong> The study counts vehicles, not
+    parked cars: each household is assumed to drive out 1.14 vehicles, and workers, visitors and students drive out too. For the
+    North and South Berkeley Hills together it counts 17,888 evacuating vehicles at the busiest time of day (13,019 and 4,869),
+    11,504 of them residents'. A repeat of the 1923 fire, which burned from the hills into the neighborhoods north of campus,
+    would send about 27,830 vehicles onto the roads, 10,330 from households in Fire Zones 2 and 3; the rest come from the flats
+    and the campus area inside the fire's path. The study's often-quoted "approximately 90,000 vehicles" is a citywide
+    evacuation: residents' cars (47,614), commuters who work here (up to 15,256), college students (15,188), visitors (13,823)
+    and others, plus another 47,962 vehicles passing through. Many hill residents work elsewhere, so at midday on a weekday
+    fewer hill households are home, and more commuters' cars are in the flats.</p>
     <div class="two"><div><h3>Residents and their vehicles, by area (2024)</h3>
       {table(['Area', 'Residents', 'Vehicles'], [[esc(r['area']), n(r['population_2024']), n(r['resident_vehicles_2024'])] for r in E['pop']], right={1, 2})}
       <p class="note">Excludes students in campus housing, counted separately in the study. The Shadow Region is the
@@ -736,6 +745,7 @@ def s_campus():
     sqft = ST['floor_m2'] * 10.7639
     wgal = ST['water_m3'] * 264.172
     gas_therms_implied = ST['implied_gas_mwh'] / 0.0293071      # 1 therm = 0.0293071 MWh
+    tot_mwh = ST['total_mwh'] - ST['gas_mwh'] + ST['implied_gas_mwh']
     uc = CITED['uc']
     v = lambda t, f=n: f"{f(t[0])} <span class=\"yr\">({t[1]})</span>" if t and t[0] is not None else '<span class="no">not published</span>'
     mgd = lambda g: f"{g / 365 / 1e6:.2f} million gal/day"
@@ -748,7 +758,9 @@ def s_campus():
         ['Student beds', v(U['beds']) + f"; {n(U['beds_planned'][0])} more by fall 2029", 'none', v(U['beds'])],
         ['Parking spaces', v(U['parking']), v(B['parking']), f"≈ {n(U['parking'][0] + B['parking'][0])}"],
         ['Water', f"{wgal / 365 / 1e6:.2f} million gal/day <span class=\"yr\">(2023)</span>", v(B['water_gal'], mgd), f"≈ {(wgal + B['water_gal'][0]) / 365 / 1e6:.2f} million gal/day (2023)"],
-        ['Electricity', f"{ST['elec_offsite_mwh']:,.0f} MWh bought + {ST['elec_solar_mwh']:,.0f} MWh solar <span class=\"yr\">(2023)</span>; the gas plant's own output is not reported", v(B['elec_mwh'], lambda x: f"{x:,} MWh a year"), '—'],
+        ['Buildings', 'about 100–150 on the 176-acre core campus <span class="yr">(sources differ)</span><sup>2</sup>', v(B['buildings'], lambda x: f"about {x} buildings and structures"), '—'],
+        ['Energy, all sources', f"≈ {round(tot_mwh, -4):,.0f} MWh <span class=\"yr\">(2023, best estimate)</span><sup>1</sup>", '—', '—'],
+        ['Electricity', f"{ST['elec_offsite_mwh']:,.0f} MWh bought + {ST['elec_solar_mwh']:,.0f} MWh solar <span class=\"yr\">(2023)</span>; most is generated by the campus gas plant, whose output is not published", v(B['elec_mwh'], lambda x: f"{x:,} MWh a year"), '—'],
         ['Natural gas', f"≈ {gas_therms_implied / 1e6:.1f} million therms <span class=\"yr\">(2023, implied by its emissions)</span>", v(B['gas_therms'], lambda x: f"{x / 1e6:.1f} million therms"), f"≈ {(gas_therms_implied + B['gas_therms'][0]) / 1e6:.1f} million therms (2023)"],
         ['Greenhouse gas (all scopes, net)', f"{gu:,.0f} t CO₂e <span class=\"yr\">(2024)</span>", f"{gl:,.0f} t CO₂e <span class=\"yr\">(2024)</span>", f"{gu + gl:,.0f} t CO₂e (2024)"],
         ['Commuting', f"{ST['commute_students']:.0f}% of students and {ST['commute_employees']:.0f}% of employees walk, bike, take transit or share rides <span class=\"yr\">(2024)</span>", f"{B['sov'][0]} of employees drive alone", '—'],
@@ -765,7 +777,6 @@ def s_campus():
                 for r in CS['ucb']['rows'] if r['year'] >= 2015]
     water_rows = [[k, n(v), n(CS['lbnl']['water_gal_per_person'].get(k))] for k, v in CS['ucb']['water_gal_per_person'].items()]
     ren_rows = [[esc(k), n(v.get('2018')), n(v.get('2024'))] for k, v in CS['ucb']['renewable_mwh'].items()]
-    tot_mwh = ST['total_mwh'] - ST['gas_mwh'] + ST['implied_gas_mwh']
     plan_rows = [['April 2023', 'Campus fact sheet', 'Gas plant retired in 2028'],
                  ['May 2024', 'Regents approve $476.6 million budget', 'Includes "geothermal heat exchange wells under the plant"'],
                  ['May 2024', 'Campus report cited by a STARS reviewer', 'Completion in 2033'],
@@ -780,16 +791,6 @@ def s_campus():
     of the City's community inventory ({n(CITED['cap']['ghg_2023'])} tonnes, 2023); the inventories are compiled differently.
     The campus's own inventory page gives {n(U['ghg'][0])} tonnes, counting before {n(last('ucb')['compliance_offsets'])} tonnes
     of offsets.</p>
-    <h3>The campus's energy, as reported and as implied</h3>
-    <p class="note" style="font-size:.95rem">In its 2025 STARS report the campus gives its 2023 energy use as {ST['total_mwh']:,.0f} MWh,
-    {ST['gas_mwh']:,.0f} MWh of it natural gas, and calls its gas-fired cogeneration plant "the primary source for electricity and
-    heating for campus buildings." The same report counts {ST['stationary_t']:,.0f} tonnes of CO₂e from burning fuel on site; at the
-    campus's own factor of 53.02 kg per MMBtu, that is about {round(ST['implied_gas_mwh'], -3):,.0f} MWh of gas. Counting it, the
-    campus used about {round(tot_mwh, -3):,.0f} MWh, or {tot_mwh * 3412.14 / sqft:.0f} kBtu per square foot, close to the
-    {next(r['eui_kbtu_per_sqft'] for r in CS['ucb']['rows'] if r['year'] == 2023):.0f} the UC system reports. The STARS entry,
-    {ST['total_mwh'] * 3412.14 / sqft:.0f} kBtu per square foot, appears to leave the plant out. The campus's gas, about
-    {gas_therms_implied / 1e6:.0f} million therms a year, is six times what all of the City's large buildings report. Data:
-    {dl('stars_2025_ucb_operations.csv')}.</p>
     <h3>Retiring the gas plant</h3>
     <p class="note" style="font-size:.95rem">The plant produced {n(U['ghg_cogen'][0])} of the campus's {n(U['ghg'][0])} tonnes in 2024.
     The Berkeley Clean Energy Campus project replaces it with an electric heating and cooling plant under North Field, north of
@@ -816,6 +817,15 @@ def s_campus():
     {n(CS['ucb']['water_gal_per_person']['2025'])} gallons per person in 2025, against a 2025 goal of 13,105.</p>
     {table(['Campus renewable electricity (MWh)', '2018', '2024'], ren_rows, right={1, 2})}
     </div></div>
+    <p class="note"><sup>1</sup> Best estimate: the gas implied by the campus's own reported emissions from burning fuel on site
+    ({ST['stationary_t']:,.0f} tonnes of CO₂e in 2023, at its factor of 53.02 kg per MMBtu, about {round(ST['implied_gas_mwh'], -3):,.0f} MWh),
+    plus purchased electricity, solar and heating oil. That is {tot_mwh * 3412.14 / sqft:.0f} kBtu per square foot, consistent with the
+    {next(r['eui_kbtu_per_sqft'] for r in CS['ucb']['rows'] if r['year'] == 2023):.0f} the UC system reports for 2023. One of the several
+    published figures appears about ten times too low: the campus's 2025 STARS report gives {ST['total_mwh']:,.0f} MWh, including only
+    {ST['gas_mwh']:,.0f} MWh of gas, while calling the gas-fired plant "the primary source for electricity and heating." Data:
+    {dl('stars_2025_ucb_operations.csv')}.</p>
+    <p class="note"><sup>2</sup> About 100 (campus energy staff, ACEEE 2024 paper) or about 150 (U.S. Department of Energy Better
+    Buildings partner page) on the core campus; the campus's 1,095 acres include the hill campus and outlying stations.</p>
     <p class="note">Not published: the campus's total electricity use (the plant's own generation is reported nowhere), miles of
     steam lines and tunnels, and how the campus and Lab land divides between Berkeley and Oakland. Under a 2021 settlement the
     University pays the City about $82.6 million over 16 years (press reports; the agreement itself was not available).</p>'''

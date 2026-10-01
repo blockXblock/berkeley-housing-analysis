@@ -5,6 +5,15 @@
 
 ---
 
+## 2026-09-30 — Live v4 32b7ea03 (Jefferson ruling, applicants): JN-E PASS, pages regenerated
+
+Peer swap to `32b7ea03` (baseline 30f: co 4,368, BP 5,273; snapshot `keep_snapshot_2026-09-30_pre-v4-applicants.db`).
+JN-E PASS, 0 errors. All five reading rulings now live; O11 resolved. **Audit: ours 4,119 · City 4,022 · +97 · explained
++43 · not yet attributed +54. Home: 4,368 built since 2018.** Nothing pending from this session for the peer.
+**John: re-lock v4; deploy.**
+
+---
+
 ## 2026-09-30 — Live v4 1aa3c045 (rulings 1–4, names, outlines): JN-E PASS, Audit and home pages regenerated
 
 Peer swap to `1aa3c045` (snapshot of the prior live: `keep_snapshot_2026-09-30_pre-v4-names.db`). JN-E PASS vs baseline

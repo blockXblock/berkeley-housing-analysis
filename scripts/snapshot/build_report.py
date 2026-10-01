@@ -229,12 +229,14 @@ LEDE = {
     'fire': 'The three disasters Berkeley plans for: how likely each is, who and what is exposed, and the steps taken so far.',
     'campus': 'What the campus and the Lab use and emit, how many buildings they run, and the plan to retire the campus\'s gas plant.',
     'ucpay': 'How much the University pays the City and County each year, under what agreement, for what, and what the City gave up in return.',
+    'business': 'How many businesses are licensed in Berkeley, what kinds, where they are, and what they pay.',
+    'innovation': 'The changes already under way that will reshape streets, power and water: electric cars, e-bikes, working from home, an electric campus, undergrounding.',
     'data': 'Every data file behind this report, what each holds, and where each source came from.',
 }
 
 
-ORDER = ['people', 'tenure', 'income', 'age', 'tide', 'cars', 'land', 'city', 'networks', 'undergrounding', 'water-energy',
-         'fire', 'campus', 'ucpay', 'data']
+ORDER = ['people', 'tenure', 'income', 'age', 'tide', 'cars', 'business', 'networks', 'undergrounding', 'water-energy',
+         'fire', 'campus', 'ucpay', 'land', 'city', 'innovation', 'data']
 
 
 def section(id_, kicker, title, body):
@@ -284,6 +286,14 @@ def s_findings():
              f"before counting {n(CITED['uc']['students'])} UC Berkeley students. The largest employer sector is education: "
              f"{about(L['sectors'][0][1])} of {about(L['jobs'])} jobs in the city.",
              f"{a('#people', 'People')} · {a('#tide', 'Daily tide')} · data: {dl('lodes_2023_inflow_by_home_place.csv')}"),
+        item('Room for many more: plans point to 30,000 or more new residents',
+             f"Berkeley's population has held near {rnd(D['population'])} since 2020. The State requires the City to plan for 8,934 new "
+             f"homes by 2031; BerkeleyBuild's pipeline counts 11,222 homes approved or proposed but not yet built; and UC Berkeley's "
+             f"long-range plan adds up to 11,730 beds. Built out at today's {D['persons_per_household']:.2f} people per home, the pipeline "
+             f"alone would house about {rnd(11222 * D['persons_per_household'])} more people, and with UC's beds the city would approach "
+             f"{rnd(D['population'] + 11222 * D['persons_per_household'] + 11730)}. Every new resident adds to the daily load on the same "
+             f"water mains, sewers, power lines and evacuation routes this report describes.",
+             f"{a('#people', 'People')} · {a('#campus', 'The University')} · data: {dl('dof_e5_berkeley_2020_2026.csv')}"),
         item('Most households rent, and most renters are stretched',
              f"{pc(i['renter_household_pct'])} of households rent. {pc(i['rent_burdened_30pct'])} of renter households pay 30% or more of "
              f"their income in rent, and about one in three pay half or more. Incomes split "
@@ -293,7 +303,9 @@ def s_findings():
         item('How people move has already changed',
              f"About a third of employed residents work from home, as many as drive alone to work "
              f"(about {pc(i['commute_drive_alone_pct'])} each). One household in five has no car. Of {n(dm['total'])} registered "
-             f"vehicles, {n(dm['ev'])} ({100 * dm['ev'] / dm['total']:.0f}%) are electric or plug-in hybrids. In 2020 the City's "
+             f"vehicles, {n(dm['ev'])} ({100 * dm['ev'] / dm['total']:.0f}%) are electric or plug-in hybrids, up from "
+             f"{n(F['dmv_trend']['2021']['plug_in'])} five years earlier. Shared e-bike trips are growing fast: Bay Wheels rides from "
+             f"Berkeley stations rose 53% in 2025. In 2020 the City's "
              f"Vision 2050 framework wrote that it was \u201cunknown what alternative forms of transportation might emerge and how "
              f"personal transportation behaviors might change\u201d; the working-from-home figure answers part of that. Autonomous "
              f"vehicles and home deliveries, which the 2017 Berkeley Drawdown list flagged, are not yet counted by any public source.",
@@ -345,6 +357,16 @@ def s_findings():
              f"a year, rising 3% annually; in return the City agreed not to sue over its growth plans or enrollment.",
              f"{a('#campus', 'The University and the Lab')} · {a('#ucpay', 'What UC pays')} · data: {dl('stars_2025_ucb_operations.csv')}, "
              f"{dl('campus_lab_emissions_energy_2009_2024.csv')}"),
+        item(f"{n(F['business']['licenses'])} licensed businesses, most of them small",
+             f"The City licenses {n(F['business']['licenses'])} businesses, {n(F['business']['located'])} of them at a Berkeley address; "
+             f"the rest are mostly contractors and firms based elsewhere that work here. Most are small: "
+             f"{n(F['business']['ownership'].get('Sole Ownership', 0))} are sole proprietorships. The most common local businesses are "
+             f"therapists' and counselors' offices, restaurants, beauty salons, architects and lawyers, clustered downtown, in South and "
+             f"Southwest Berkeley and along College Avenue in the Elmwood. They paid "
+             f"${json.load(open(os.path.join(ROOT, 'data', 'reference', 'berkeley_budget_external_facts_2026-08-15.json')))['revenues_fy2025_actual']['business_license_tax'] / 1e6:.1f} million "
+             f"in business license tax in FY2025. Berkeley's {about(L['jobs'])} jobs are dominated by education, about {rnd(L['sectors'][0][1])}, "
+             f"followed by professional and technical services and health care.",
+             f"{a('#business', 'Businesses')} · {a('#tide', 'Daily tide')} · maps: {dl('businesses_by_blockgroup.csv')}"),
         item('The next large earthquake is the biggest single danger',
              f"The U.S. Geological Survey gives a {CITED['hz']['eq_hayward_pct']}% chance of a magnitude 6.7 or larger earthquake on "
              f"the Hayward or Rodgers Creek faults between 2014 and 2043. The City's hazard plan estimates that a large Hayward "
@@ -354,12 +376,25 @@ def s_findings():
              f"vulnerable buildings face no requirement. On the shoreline, {about(CITED['hz']['tsu_people'])} residents live in the "
              f"tsunami zone, and the Bay has risen {CITED['hz']['bay_rise_since1900']} since 1900.",
              f"{a('#fire', 'Fire, flood and earthquake')} · sources: the City's 2024 Local Hazard Mitigation Plan; USGS"),
+        item("The City's needs outrun its money",
+             f"The City lists {big(F['capital']['total']['need'])} of capital and maintenance needs, from buildings and storm drains "
+             f"to streets, parks and undergrounding, and funds {big(F['capital']['total']['available_5yr'])} of it over five years; the "
+             f"unfunded gap stays above $2.1 billion every year through 2031. Its General Fund has run a deficit every year since "
+             f"2018, $31.3 million projected for FY2027, closed each time with one-time money, and the FY2027 budget cuts 164 positions. "
+             f"Pension payments doubled in nine years, to $77.9 million. The $300 million Measure U bond on the November ballot would "
+             f"cover about 14% of the stated need and none of the undergrounding.",
+             f"{a('#city', 'The City\'s money')} · data: {dl('city_capital_needs_fy2027_2031.csv')}"),
         item('A $30 billion tax base, with the University outside it',
              f"Berkeley's {n(A['parcels'])} parcels carry {big(A['net'])} of net taxable value, about "
              f"${round(A['net'] * 0.012323 / 1e6):,.0f} million a year in base property tax for all agencies. {n(A['exempt'])} parcels pay none: the "
              f"University, the City, schools, churches and other exempt owners.",
              f"{a('#land', 'Land and money')} · data: {dl('assessor_by_neighborhood.csv')}"),
     ]
+    # findings follow the report's outline: people, businesses, infrastructure, dangers, institutions, money
+    outline = ['A university city', 'Room for many more', 'Most households rent', 'How people move', 'licensed businesses',
+               'street miles', "The City's undergrounding", 'The pipes are old', 'Leaving the hills', 'The next large earthquake',
+               'The University and the Lab', 'A $30 billion tax base', "The City's needs outrun"]
+    F_.sort(key=lambda h: next((k for k, key in enumerate(outline) if key in h.split('</h3>')[0]), 99))
     gaps = table(['What is not public', 'Who holds it'], [
         ['Citywide electricity and gas use', 'PG&amp;E (by ZIP code, after registration); the City (trend only)'],
         ["Berkeley's water use", 'EBMUD (customer data is confidential; the City could request its total)'],
@@ -369,7 +404,7 @@ def s_findings():
         ['Fall 2026 student enrollment', 'UC Berkeley Office of Planning &amp; Analysis (due later this fall)'],
     ])
     body = f'''
-    <p class="lede">Ten findings, each linked to its section, data and sources. Where the City's Vision 2050 work addressed the
+    <p class="lede">The findings, each linked to its section, data and sources. Where the City's Vision 2050 work addressed the
     same question, it is cited.</p>
     {''.join(F_)}
     <h3>What we could not find, and who has it</h3>
@@ -386,7 +421,7 @@ def s_findings():
     Underground Utility Wires, citing FEMA's report on the 1991 Oakland fire.</p>
     <p class="note">Two findings note discrepancies we found in institutions' own documents: the City's 2016 undergrounding
     cost table and UC Berkeley's 2025 STARS energy entry. Both link to the documents.</p>'''
-    return section('findings', 'What the numbers say', 'Ten findings', body)
+    return section('findings', 'What the numbers say', 'What we found', body)
 
 
 def s_people():
@@ -406,6 +441,18 @@ def s_people():
     {table(['Year', 'Residents', 'In households', 'In group housing', 'Homes', 'Occupied', 'Vacancy', 'Per household'], dof_rows, right=range(1, 8))}
     <p class="note">2020 is the April 1 census; other years are January 1. The 2021 drop in group housing (20,925 to
     14,527) is the campus emptying during the pandemic. Data: {dl('dof_e5_berkeley_2020_2026.csv')}</p>
+    <h3>How many people Berkeley may hold</h3>
+    <p class="note" style="font-size:.95rem">Berkeley's population has been flat since 2020, at about 127,600, after a pandemic dip to
+    120,670 in 2021 when the campus emptied. Three plans point higher. The State requires Berkeley to plan for 8,934 new homes from
+    2023 to 2031. BerkeleyBuild's pipeline counts 11,222 homes approved or proposed but not yet built<sup>1</sup>. And UC Berkeley's
+    long-range plan adds up to 11,730 student and staff beds, taking campus housing from about 9,000 to 20,750. If the pipeline were
+    built at today's {F['dof']['rows'][-1]['persons_per_household']:.2f} people per home, and UC built its beds, Berkeley would gain
+    about {rnd(11222 * F['dof']['rows'][-1]['persons_per_household'])} residents in homes and up to about 11,700 in University
+    housing: about {rnd(F['dof']['rows'][-1]['population'] + 11222 * F['dof']['rows'][-1]['persons_per_household'] + 11730)} people in
+    all. That is a scenario, not a forecast; some approved projects will not be built, and many of UC's new beds will house students
+    who now live in Berkeley apartments.</p>
+    <p class="note"><sup>1</sup> Not yet built, excluding UC projects (BerkeleyBuild Pipeline Explorer, September 30, 2026). State
+    target: the City's Annual Progress Report to the State, Table B. UC beds: UC Regents item F4, July 2021, Table 2.</p>
     <h3>Homes by type (Department of Finance, {F['dof']['year']})</h3>
     {table(['Type', 'Homes', 'Share'], [[k, n(last[c]), pct(last[c], last['housing_units'])] for k, c in
         (('Single detached', 'single_detached'), ('Single attached', 'single_attached'), ('Two to four units', 'two_to_four'),
@@ -643,6 +690,59 @@ def s_city():
     Data: {dl('city_capital_needs_fy2027_2031.csv')}.</p>
     <p class="note">Sources: {esc(C['src'])}.</p>'''
     return section('city', '8 · The City\'s money', 'Staff, pensions, deficits and the capital gap', body)
+
+
+def s_business():
+    B = F['business']
+    L = F['lodes']
+    blt = json.load(open(os.path.join(ROOT, 'data', 'reference', 'berkeley_budget_external_facts_2026-08-15.json')))['revenues_fy2025_actual']['business_license_tax']
+    t_rows = [[esc(r['type']), n(r['licenses']), n(r['located_in_berkeley'])] for r in B['by_type']]
+    body = f'''
+    <div class="grid">
+      {card(n(B['licenses']), 'active business licenses (November 2025)', f"{n(B['located'])} of them at a Berkeley address; the rest are mostly contractors and firms based elsewhere that work here.")}
+      {card(f"${blt / 1e6:.1f} million", 'business license tax collected (FY2025)', 'City annual financial report.')}
+      {card(rnd(L['jobs']), 'jobs located in Berkeley (2023)', f"About {rnd(L['sectors'][0][1])} of them in education, mostly the University.")}
+    </div>
+    <div class="two"><div><h3>Licenses by type</h3>
+    {table(['Type', 'Licenses', 'At a Berkeley address'], t_rows, right={1, 2})}</div>
+    <div><h3>Where they are</h3>
+    {table(['Neighborhood', 'Businesses'], [[esc(r['neighborhood']), n(r['all_businesses'])] for r in B['by_hood']], right={1})}
+    <h3>Most common local businesses</h3>
+    {table(['Kind (industry code)', 'Licenses'], [[esc(k), n(v)] for k, v in B['top_naics'][:10]], right={1})}</div></div>
+    <p class="note" style="font-size:.95rem">Berkeley's licensed businesses are mostly small: {n(B['ownership'].get('Sole Ownership', 0))}
+    are sole proprietorships, {n(B['ownership'].get('Corporation', 0))} corporations and {n(B['ownership'].get('LLC', 0))} limited
+    liability companies. Landlords are the second-largest group ({n(next(r['licenses'] for r in B['by_type'] if r['type'].startswith('Rental')))}
+    rental-property licenses). Among businesses at a Berkeley address, therapists' and counselors' offices are the most common
+    kind, followed by restaurants, beauty salons, architects and lawyers: a city of services, shops and professional practices
+    around a university and a national laboratory. The neighborhood and type tables exclude rental-property licenses.</p>
+    <p class="note">Source: City of Berkeley open data, Business Licenses (downloaded November 15, 2025); locations from the
+    Alameda County Assessor's parcels. Maps: {dl('businesses_by_blockgroup.csv')}, {dl('businesses_by_neighborhood.csv')},
+    {dl('business_licenses_by_type.csv')}.</p>'''
+    return section('business', '0 · Businesses', 'The businesses: what they are and where', body)
+
+
+def s_innovation():
+    T = F['dmv_trend']
+    Bk = CITED['bikes']
+    i = F['acs_city']['ind']
+    body = f'''
+    <p class="note" style="font-size:.95rem">Several changes already under way will reshape how Berkeley uses its streets, pipes and
+    power lines.</p>
+    {table(['Change', 'Where it stands', 'What it changes'], [
+        ['Electric vehicles', f"{n(T['2026']['plug_in'])} plug-in vehicles in Berkeley ZIP codes (January 2026), up from {n(T['2021']['plug_in'])} five years earlier; fully electric cars nearly tripled", 'Charging load on neighborhood transformers; less gasoline sold'],
+        ['Working from home', f"About a third of employed residents ({pc(i['commute_work_from_home_pct'])}) work from home", 'Fewer peak-hour trips; more daytime demand for power and water at home'],
+        ['E-bikes and shared mobility', f"Bay Wheels trips from Berkeley stations up 53% in 2025, three-quarters on e-bikes; up to 1,200 shared scooters and e-bikes permitted", 'More riders on streets built for cars; demand for protected lanes'],
+        ['Electric campus', 'UC Berkeley\'s Clean Energy Campus: heat-pump plant and 2-million-gallon thermal tank under North Field, 2027–2030', 'Retires a gas plant that emits about 114,000 tonnes of CO\u2082e a year'],
+        ['Undergrounding', 'PG&amp;E\'s ten-year plan (September 2026): about 5,000 miles statewide, 2028–2037', 'Fewer poles to fall in a fire or earthquake, if Berkeley\'s streets are included'],
+        ['Seismic and fire codes', 'Soft-story retrofits nearly complete; 2025 ember-resistant zone ordinance in the hills', 'Fewer collapses and house-to-house fire spread'],
+        ['Autonomous vehicles and home delivery', 'Not counted by any public source in Berkeley', 'Curb space, traffic and parking; flagged by the City\'s 2017 Drawdown list'],
+    ])}
+    <p class="note" style="font-size:.95rem">Vision 2050 anticipated most of these in 2020: buildings that make and store their own
+    energy, transportation that must "become electrified," ride-hailing and micro-mobility that "will become more prevalent," and
+    microgrids "capable of providing electricity even when the larger grid is down." What it could not foresee was the scale of
+    working from home, now about as common as driving alone to work. Sources: DMV registrations by ZIP code (January 2021 and
+    January 2026); the sections above.</p>'''
+    return section('innovation', '0 · Innovations to come', 'What is changing next', body)
 
 
 def s_networks():
@@ -1196,12 +1296,13 @@ CSS = '''
 
 
 def main():
-    sections = [s_findings(), s_people(), s_tenure(), s_income(), s_age(), s_tide(), s_cars(), s_land(), s_city(), s_networks(), s_ug(),
-                s_water_energy(), s_fire(), s_campus(), s_ucpay(), s_catalog()]
-    toc = [('findings', 'Findings'), ('people', 'People'), ('tenure', 'Renters and owners'), ('income', 'Income'), ('age', 'Ages'),
-           ('tide', 'Daily tide'), ('cars', 'Cars and bikes'), ('land', 'Land and money'), ('city', 'The City\'s money'), ('networks', 'Under the streets'),
-           ('undergrounding', 'Undergrounding'), ('water-energy', 'Water and power'), ('fire', 'Fire, flood, earthquake'),
-           ('campus', 'University and Lab'), ('ucpay', 'What UC pays'), ('data', 'The data')]
+    sections = [s_findings(), s_people(), s_tenure(), s_income(), s_age(), s_tide(), s_cars(), s_business(), s_networks(), s_ug(),
+                s_water_energy(), s_fire(), s_campus(), s_ucpay(), s_land(), s_city(), s_innovation(), s_catalog()]
+    toc = [('findings', 'Findings'), ('people', 'People'), ('tenure', 'Renters and owners'), ('income', 'Income'),
+           ('age', 'Ages'), ('tide', 'Daily tide'), ('cars', 'Cars and bikes'), ('business', 'Businesses'),
+           ('networks', 'Under the streets'), ('undergrounding', 'Undergrounding'), ('water-energy', 'Water and power'),
+           ('fire', 'Fire, flood, earthquake'), ('campus', 'University and Lab'), ('ucpay', 'What UC pays'),
+           ('land', 'Land and money'), ('city', 'The City\'s money'), ('innovation', 'What is next'), ('data', 'The data')]
     old = open(PAGE).read() if os.path.exists(PAGE) else ''
     meta = ''
     if '<!-- BEGIN site_meta' in old:

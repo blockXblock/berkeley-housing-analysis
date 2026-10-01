@@ -634,6 +634,73 @@ def capital_needs():
     FACTS['capital'] = dict(rows=rows, total=total)
 
 
+def businesses(hoods, bg):
+    """Active business licenses (City of Berkeley open data, Business Licenses, downloaded 2025-11-15:
+    data/raw/business_licenses_20251115.csv). The employee field is firm-wide (a national firm reports its whole staff), so
+    it is NOT used; jobs located in Berkeley come from LODES. Licenses without a Berkeley parcel ('ZZZ...' or blank APN:
+    mostly contractors based elsewhere) are counted but not mapped."""
+    import csv as _csv
+    sys.path.insert(0, os.path.join(ROOT, 'scripts'))
+    from housing_rules import to_canonical_apn
+    r = list(_csv.DictReader(open(os.path.join(ROOT, 'data', 'raw', 'business_licenses_20251115.csv'), encoding='utf-8', errors='ignore')))
+    con = sqlite3.connect(f"file:{os.path.join(ROOT, 'databases', 'berkeley.db')}?mode=ro", uri=True)
+    par = {}
+    for apn, lat, lon in con.execute('SELECT APN, Latitude, Longitude FROM parcels WHERE Latitude IS NOT NULL'):
+        try:
+            par[to_canonical_apn(apn, 'alameda')] = (lat, lon)
+        except Exception:
+            pass
+    rows = []
+    for x in r:
+        a = x['apn'].strip()
+        key = None
+        if a and not a.startswith('Z'):
+            try:
+                key = to_canonical_apn(a, 'alameda')
+            except Exception:
+                key = None
+        ll = par.get(key)
+        rows.append(dict(type=x['b1_per_sub_type'], naics=x['naics'], ownership=x['bus_own_type'],
+                         located=bool(ll), lat=ll[0] if ll else None, lon=ll[1] if ll else None))
+    df = pd.DataFrame(rows)
+    t = df.groupby('type').agg(licenses=('type', 'size'), located_in_berkeley=('located', 'sum')).reset_index() \
+          .sort_values('licenses', ascending=False)
+    write_csv('business_licenses_by_type.csv', t, 'license type',
+              'Active City business licenses by type, and how many sit on a Berkeley parcel (November 2025).')
+    loc = df[df.located]
+    g = gpd.GeoDataFrame(loc, geometry=gpd.points_from_xy(loc.lon, loc.lat), crs='EPSG:4326')
+    g = gpd.sjoin(g, hoods[['neighborhood', 'geometry']], how='left', predicate='within').drop(columns='index_right')
+    g = gpd.sjoin(g, bg[['GEOID', 'geometry']], how='left', predicate='within').drop(columns='index_right')
+    excl = ~g.type.isin(['Rental of Real Property'])                  # landlords are licensed but are not storefronts
+    bn = g[excl].groupby(['neighborhood', 'type']).size().unstack(fill_value=0)
+    bn['all_businesses'] = bn.sum(axis=1)
+    bn = bn.sort_values('all_businesses', ascending=False).reset_index()
+    write_csv('businesses_by_neighborhood.csv', bn, 'neighborhood (City boundaries)',
+              'Licensed businesses located on a Berkeley parcel, by neighborhood and type (rental-property licenses excluded).')
+    bb = g[excl].groupby('GEOID').size().reset_index(name='businesses')
+    write_csv('businesses_by_blockgroup.csv', bb, 'census block group (GEOID)', 'Licensed businesses located in each block group (rental-property licenses excluded).')
+    naics = df[df.located & ~df.type.isin(['Rental of Real Property'])].naics.str.split(' - ').str[1].value_counts().head(15)
+    FACTS['business'] = dict(licenses=len(df), located=int(df.located.sum()), by_type=t.to_dict('records'),
+                             by_hood=bn[['neighborhood', 'all_businesses']].head(12).to_dict('records'),
+                             top_naics=list(naics.items()),
+                             ownership=df.ownership.value_counts().to_dict())
+
+
+def dmv_trend(src):
+    """Plug-in share, Berkeley ZIPs, 1/1/2021 vs 1/1/2026 (same DMV file family)."""
+    out = {}
+    for label, f in (('2021', 'vehicle-fuel-type-count-by-zip-code-2021.csv'), ('2026', 'vehicle-fuel-type-counts-2025.csv')):
+        d = pd.read_csv(os.path.join(src, 'dmv', f), dtype={'Zip Code': str, 'ZIP Code': str})
+        d.columns = [c.strip() for c in d.columns]
+        zc = 'ZIP Code' if 'ZIP Code' in d.columns else 'Zip Code'
+        d = d[d[zc].astype(str).str[:5].isin(BERKELEY_ZIPS)]
+        tot = d.Vehicles.sum()
+        ev = d.loc[d.Fuel.isin(['Battery Electric', 'Plug-in Hybrid', 'Hydrogen Fuel Cell', 'Fuel Cell']), 'Vehicles'].sum()
+        bev = d.loc[d.Fuel == 'Battery Electric', 'Vehicles'].sum()
+        out[label] = dict(total=int(tot), plug_in=int(ev), battery_electric=int(bev))
+    FACTS['dmv_trend'] = out
+
+
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--date', default='2026-10-01')
     src = os.path.join(ROOT, 'data', 'raw', 'snapshot', ap.parse_args().date)
@@ -654,6 +721,8 @@ def main():
     stars_2025()
     fema_grants()
     capital_needs()
+    businesses(hoods, gpd.read_file(os.path.join(OUT, 'berkeley_blockgroups.geojson')))
+    dmv_trend(src)
     FACTS['files'] = FILES
     FACTS['sources_manifest'] = {k: {kk: v[kk] for kk in ('url', 'fetched_at', 'sha256') if kk in v} for k, v in manifest.items()}
     json.dump(FACTS, open(os.path.join(OUT, 'facts.json'), 'w'), indent=1, default=lambda o: o.item() if hasattr(o, 'item') else str(o))

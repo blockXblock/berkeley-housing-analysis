@@ -31,6 +31,8 @@ SOURCES = {
     'lodes/ca_rac_S000_JT00_2023.csv.gz': LODES + 'rac/ca_rac_S000_JT00_2023.csv.gz',
     # California DMV vehicle registrations by ZIP and fuel type, as of 2026-01-01
     'dmv/vehicle-fuel-type-counts-2025.csv': None,   # resolved from the data.ca.gov package below
+    # the same DMV file five years earlier (as of 1/1/2021), for the electric-vehicle trend
+    'dmv/vehicle-fuel-type-count-by-zip-code-2021.csv': 'https://data.ca.gov/dataset/15179472-adeb-4df6-920a-20640d02b08c/resource/888bbb6c-09b4-469c-82e6-1b2a47439736/download/vehicle-fuel-type-count-by-zip-code-2021.csv',
     # California Department of Finance E-5: population and housing estimates, January 1, 2026
     'dof/E-5_2026_InternetVersion.xlsx': 'https://dof.ca.gov/media/docs/forecasting/Demographics/estimates/e-5-population-and-housing-estimates-for-cities-counties-and-the-state-2020-2026/E-5_2026_InternetVersion.xlsx',
     # EBMUD 2025 Urban Water Management Plan (district demand by sector; storage)

@@ -4798,6 +4798,230 @@
    "unfunded_fy2031": 2119570270
   }
  },
+ "business": {
+  "licenses": 13004,
+  "located": 8203,
+  "by_type": [
+   {
+    "type": "Construction or Contractor",
+    "licenses": 3303,
+    "located_in_berkeley": 142
+   },
+   {
+    "type": "Rental of Real Property",
+    "licenses": 3176,
+    "located_in_berkeley": 3119
+   },
+   {
+    "type": "Professional SemiProfessional",
+    "licenses": 2765,
+    "located_in_berkeley": 2085
+   },
+   {
+    "type": "Retail Trade",
+    "licenses": 1271,
+    "located_in_berkeley": 1098
+   },
+   {
+    "type": "Business Personal Repair Svs",
+    "licenses": 1100,
+    "located_in_berkeley": 687
+   },
+   {
+    "type": "Non Profit Organizations",
+    "licenses": 639,
+    "located_in_berkeley": 525
+   },
+   {
+    "type": "Entertainment Recreation",
+    "licenses": 248,
+    "located_in_berkeley": 185
+   },
+   {
+    "type": "Manufacturing",
+    "licenses": 206,
+    "located_in_berkeley": 172
+   },
+   {
+    "type": "Wholesale Trade",
+    "licenses": 122,
+    "located_in_berkeley": 58
+   },
+   {
+    "type": "Massage",
+    "licenses": 48,
+    "located_in_berkeley": 42
+   },
+   {
+    "type": "Administrative Headquarters",
+    "licenses": 42,
+    "located_in_berkeley": 40
+   },
+   {
+    "type": "Grocer",
+    "licenses": 32,
+    "located_in_berkeley": 29
+   },
+   {
+    "type": "Street Vendors",
+    "licenses": 16,
+    "located_in_berkeley": 0
+   },
+   {
+    "type": "Auto Vehicle For Hire",
+    "licenses": 13,
+    "located_in_berkeley": 3
+   },
+   {
+    "type": "Motor Vehicle Sales",
+    "licenses": 12,
+    "located_in_berkeley": 9
+   },
+   {
+    "type": "Cannabis",
+    "licenses": 10,
+    "located_in_berkeley": 9
+   },
+   {
+    "type": "Recycling",
+    "licenses": 1,
+    "located_in_berkeley": 0
+   }
+  ],
+  "by_hood": [
+   {
+    "neighborhood": "Central Berkeley",
+    "all_businesses": 1499
+   },
+   {
+    "neighborhood": "South Berkeley",
+    "all_businesses": 1010
+   },
+   {
+    "neighborhood": "Southwest Berkeley",
+    "all_businesses": 843
+   },
+   {
+    "neighborhood": "Elmwood District",
+    "all_businesses": 825
+   },
+   {
+    "neighborhood": "North Berkeley",
+    "all_businesses": 504
+   },
+   {
+    "neighborhood": "Le Conte",
+    "all_businesses": 478
+   },
+   {
+    "neighborhood": "Northwest Berkeley",
+    "all_businesses": 418
+   },
+   {
+    "neighborhood": "Southside",
+    "all_businesses": 381
+   },
+   {
+    "neighborhood": "Upper North Berkeley",
+    "all_businesses": 273
+   },
+   {
+    "neighborhood": "Northside",
+    "all_businesses": 228
+   },
+   {
+    "neighborhood": "Westbrae",
+    "all_businesses": 218
+   },
+   {
+    "neighborhood": "Thousand Oaks",
+    "all_businesses": 212
+   }
+  ],
+  "top_naics": [
+   [
+    "Offices of Mental Health Practitioners (except Physicians)",
+    328
+   ],
+   [
+    "Full-Service Restaurants",
+    177
+   ],
+   [
+    "Limited-Service Restaurants",
+    167
+   ],
+   [
+    "Beauty Salons",
+    165
+   ],
+   [
+    "Architectural Services",
+    116
+   ],
+   [
+    "Offices of Lawyers",
+    106
+   ],
+   [
+    "Other Scientific and Technical Consulting Services",
+    97
+   ],
+   [
+    "Offices of All Other Miscellaneous Health Practitioners",
+    96
+   ],
+   [
+    "Administrative Management and General Management Consulting Services",
+    89
+   ],
+   [
+    "Graphic Design Services",
+    77
+   ],
+   [
+    "Other Management Consulting Services",
+    72
+   ],
+   [
+    "Offices of Physicians (except Mental Health Specialists)",
+    70
+   ],
+   [
+    "Offices of Dentists",
+    68
+   ],
+   [
+    "All Other Personal Services",
+    62
+   ],
+   [
+    "Other Personal Care Services",
+    57
+   ]
+  ],
+  "ownership": {
+   "Sole Ownership": 5034,
+   "Corporation": 4838,
+   "LLC": 2360,
+   "Partnership": 578,
+   "": 140,
+   "Cooperative Corporation": 32,
+   "LLP/LP": 22
+  }
+ },
+ "dmv_trend": {
+  "2021": {
+   "total": 64059,
+   "plug_in": 3985,
+   "battery_electric": 2357
+  },
+  "2026": {
+   "total": 62961,
+   "plug_in": 9492,
+   "battery_electric": 6898
+  }
+ },
  "files": [
   {
    "file": "dof_e5_berkeley_2020_2026.csv",
@@ -5008,6 +5232,24 @@
    "grain": "capital category",
    "rows": 17,
    "description": "The City's own capital and maintenance need, funding available over five years, and unfunded capital, by category (FY2027-2031 Capital Improvement Program, adopted June 23, 2026)."
+  },
+  {
+   "file": "business_licenses_by_type.csv",
+   "grain": "license type",
+   "rows": 17,
+   "description": "Active City business licenses by type, and how many sit on a Berkeley parcel (November 2025)."
+  },
+  {
+   "file": "businesses_by_neighborhood.csv",
+   "grain": "neighborhood (City boundaries)",
+   "rows": 24,
+   "description": "Licensed businesses located on a Berkeley parcel, by neighborhood and type (rental-property licenses excluded)."
+  },
+  {
+   "file": "businesses_by_blockgroup.csv",
+   "grain": "census block group (GEOID)",
+   "rows": 99,
+   "description": "Licensed businesses located in each block group (rental-property licenses excluded)."
   }
  ],
  "sources_manifest": {
@@ -5238,6 +5480,11 @@
    "url": "https://www.ebmud.com/download_file/force/58536/735?UWMP_STANDALONE-2025-FINAL.pdf",
    "fetched_at": "2026-10-01T10:39:23",
    "sha256": "b73a693dac932249d3f29b2370fc6a5775ad1a346b43e2eb4a2206719c8772da"
+  },
+  "dmv/vehicle-fuel-type-count-by-zip-code-2021.csv": {
+   "url": "https://data.ca.gov/dataset/15179472-adeb-4df6-920a-20640d02b08c/resource/888bbb6c-09b4-469c-82e6-1b2a47439736/download/vehicle-fuel-type-count-by-zip-code-2021.csv",
+   "fetched_at": "2026-10-01T14:34:54",
+   "sha256": "0d864992010dd8743752870ad865c3e9aa86f7e5c920946856b19c586a375aff"
   }
  }
 }

@@ -404,7 +404,13 @@ projects. Ruling 5 (2334 Jefferson, d0123a6+) arrived after the build -> next cy
 named, 21 City-stated), every structure homed once; 29,118 parcel geometries; reading rulings on 11 events;
 conservation verifier PASS; a fresh read-only projects preview reproduces the write. **John to re-lock v4.**
 
-**NEXT:** next cycle (Jefferson + 30f) -> phase 4 continues (applicants from the
+**Cycle 2 (2026-09-30):** applicants from CPRA 26-1972 (314 on 450 applications; the log's unit/BMR/density-bonus/
+streamlining columns are EMPTY in all 158 ZP rows -- applicants and dates only), 3,043 record owners, Jefferson ruling
+(`60516de`, baseline 30f: co 4,368 / bp 5,273). **LIVE SWAPPED to 32b7ea03** (snapshot
+`keep_snapshot_2026-09-30_pre-v4-applicants.db`, sha 1aa3c045): integrity + FK clean; 1,182 structures / 5,551 units;
+1,542 projects; conservation PASS. **John to re-lock.** Pathway read (`0185bb5`) SUBMITTED as a Batch (68 requests).
+
+**NEXT:** pathway read collect + compare with v2's 51 tags -> next cycle; phase 4 continues (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.
 ---

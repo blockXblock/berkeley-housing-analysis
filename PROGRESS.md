@@ -476,7 +476,22 @@ structural vs live; core columns identical to live. **The chain is now A->B->C->
 keys unique; v_project_timeline 12,162; project_records 1,056; parcel_area 29,113; conservation PASS. CLAUDE.md's chain
 line now ends at build_views (John). **John to re-lock.**
 
-**NEXT:** re-point the APR generator to v_projects (diff vs its v2 output) (applicants from the
+**APR re-point #1 (2026-10-01):** `scripts/generate_apr_v4.py` (`e30d07c`, `009212d`), a re-point of the v2 generator onto
+v_projects, with John's logic decisions: (1) affordability from the SOURCED ledger only, labelled (v4 VLI 56 vs v2's 236,
+which was mostly the unsourced v1 migration); (2) Table B on the 6th-cycle window (both had counted every permit ever);
+(3) ADUs by the CPRA permit's own ADU field, ABAG 30/30/30/10 as a LABELLED ASSUMPTION; (4) "Developer summary" ->
+"Owner of Record Summary". One credit_by_tier for Table B and RHNA progress: **2025: 1,971** (VL 199 / L 180 / M 132 /
+AM 1,460; 441 ADU units) vs berkeley-data-25's building-grain 1,938 and the City's 2,120. NOT yet the live generator
+(needs the views swap with rhna_excluded + adu_units).
+**People and money, by ROLE (John, 2026-10-01):** owner of record, record owner, applicant, developer, architect,
+contractor, and -- to trace the money -- funder (public: the funding ledger), investor (tax-credit / owner equity) and
+lender (deeds of trust). Each role from its own record, NEVER inferred from another. Approved: (a) harvest building
+permits' Licensed Professionals (architect, contractor; `662f0d9` parser; 1,185 master permits RUNNING,
+`scratch/2026-10-01_bp_capdetail/`); (b) a developer ledger from documents. Investor/lender sources to scope (County
+Recorder deeds of trust; CTCAC; Secretary of State for owner LLCs).
+
+**NEXT:** licensed-professionals harvest -> load as contractor/architect roles -> developer ledger -> next swap (views with
+rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.
 ---

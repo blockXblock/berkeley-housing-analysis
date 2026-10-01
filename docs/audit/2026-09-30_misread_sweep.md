@@ -15,9 +15,9 @@ Read one by one, nearly all are real units: Acheson Building A (a landmark rehab
 house and a care facility converted to duplexes, new houses, a manufactured home, and many ADU/JADU conversions (four
 "remodel" descriptions end in "creating a Junior ADU" or similar). **One new clear misreading: 2707 Hillegass,
 B2019-02963** (finding O10), an Electrical Permit credited with 3 units while the cottage it serves is counted under its
-own permit; permits only, never finaled. **Unclear: 2334 Jefferson, B2018-01255** (a remodel raising the house and
-adding finished space below; the description does not say whether a unit results).
+own permit; permits only, never finaled. **2334 Jefferson, B2018-01255, settled the same day (finding O11):** the house remodel; the ADU is counted under its own
+permit B2018-01256, so the remodel's 1 unit is a double count (CO +1 in 2020, BP +1 in 2018).
 
-**Conclusion:** with the three already ruled, the misreading is real but rare — four permits, 14 units (CO −11, BP −14).
+**Conclusion:** with the three already ruled, the misreading is real but rare — five permits, 15 units (CO −12, BP −15).
 It does not look systemic, so no re-read of the whole corpus is needed. Limitation: a misread on a permit typed "New"
 or with UnitsAdded filled would not be flagged here.

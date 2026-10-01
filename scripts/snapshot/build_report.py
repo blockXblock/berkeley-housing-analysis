@@ -350,15 +350,13 @@ def s_findings():
         ['Fall 2026 student enrollment', 'UC Berkeley Office of Planning &amp; Analysis (due later this fall)'],
     ])
     body = f'''
-    <p class="lede">Ten findings from the data in this report. Each sentence can be checked against the section and the data
-    file linked beneath it. The City's Vision 2050 work, which looks ahead to the same streets, pipes and energy systems,
-    is cited where it addressed the same question.</p>
+    <p class="lede">Ten findings, each linked to its section, data and sources. Where the City's Vision 2050 work addressed the
+    same question, it is cited.</p>
     {''.join(F_)}
     <h3>What we could not find, and who has it</h3>
     {gaps}
     <p class="note">Two findings note discrepancies we found in institutions' own documents: the City's 2016 undergrounding
-    cost table and UC Berkeley's 2025 STARS energy entry. Each finding links to the document and to our arithmetic, so anyone
-    can check it.</p>'''
+    cost table and UC Berkeley's 2025 STARS energy entry. Both link to the documents.</p>'''
     return section('findings', 'What the numbers say', 'Ten findings', body)
 
 

@@ -174,6 +174,23 @@ code(r"""
 if _LIVE.exists() and DB_PATH.resolve() != _LIVE.resolve():
     live = sqlite3.connect(f"file:{_LIVE}?mode=ro", uri=True)
     ev_r, ev_l = M.event_count(con), M.event_count(live)
+    # PER EVENT TYPE, not one raw total (CLAUDE.md: anchor to what stays true). Every type live holds must match in
+    # count; a type live does not hold yet passes ONLY if it is declared here with its source -- an undeclared new
+    # type, or any change to an existing type, still halts. Once swapped in, a declared type is simply compared.
+    NEW_TYPES_DECLARED = {
+        "registry_unit": "Rent Board registry CPRA #26-2375 (load_rent_board; John 2026-10-01)",
+        "registry_tenancy": "Rent Board tenancy history CPRA #26-2375 (load_rent_board; John 2026-10-01)",
+        "accela_listed": "Accela list dump, manifest accela_list_dump_2026-10-01 (load_accela_list; John 2026-10-01)",
+        "business_license": "City business licences 2025-11-15 (load_business_licenses; John 2026-10-01)",
+        "ctcac_project": "CTCAC List of Projects, Berkeley rows (load_ctcac_projects; John 2026-10-01)",
+    }
+    by_r = dict(con.execute("SELECT event_type_code, COUNT(*) FROM events GROUP BY 1"))
+    by_l = dict(live.execute("SELECT event_type_code, COUNT(*) FROM events GROUP BY 1"))
+    type_bad = [f"{t}: rebuild {by_r.get(t, 0):,} live {n:,}" for t, n in by_l.items() if by_r.get(t, 0) != n] + \
+               [f"{t}: NEW and undeclared ({by_r[t]:,})" for t in by_r if t not in by_l and t not in NEW_TYPES_DECLARED]
+    for t in by_r:
+        if t not in by_l:
+            print(f"   new type {t:18} {by_r[t]:>8,}  -- {NEW_TYPES_DECLARED.get(t, 'UNDECLARED')}")
     q = ("SELECT e.source_record_key, c.net_units FROM events e "
          "JOIN event_classifications c ON c.event_id=e.event_id "
          "WHERE e.event_type_code='permit_finaled' AND c.housing_role='new_unit' AND c.is_master=1 "
@@ -182,8 +199,10 @@ if _LIVE.exists() and DB_PATH.resolve() != _LIVE.resolve():
     print(f"events: rebuild={ev_r:,} live={ev_l:,}  |  completion-set: rebuild-only={len(ours-theirs)} live-only={len(theirs-ours)}")
     for s in sorted(ours - theirs)[:10]: print("   REBUILD-ONLY", s)
     for s in sorted(theirs - ours)[:10]: print("   LIVE-ONLY   ", s)
-    assert ev_r == ev_l and ours == theirs, "STRUCTURAL GATE HALT: totals may match but the rebuild diverges from live"
-    print("STRUCTURAL GATE PASS — event count and counted-completion set are identical to live.")
+    for b in type_bad: print("   TYPE MISMATCH", b)
+    assert not type_bad and ours == theirs, "STRUCTURAL GATE HALT: totals may match but the rebuild diverges from live"
+    print("STRUCTURAL GATE PASS — every event type live holds is identical in count, new types are declared, and the "
+          "counted-completion set is identical to live.")
     live.close()
 else:
     print("live DB not present (or IS the target) — structural gate skipped; baseline gate stands.")

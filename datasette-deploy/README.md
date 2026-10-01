@@ -1,55 +1,26 @@
 # Berkeley Housing Pipeline - Datasette
 
-Interactive database of the Berkeley housing pipeline — **909 projects**, rebuilt from the canonical v2 database, plus the Corridors Zoning Update parcel data obtained under CPRA #26-2367.
+**Live site:** https://berkeley-housing.fly.dev
 
-**Regenerate with `.venv/bin/python scripts/gen_datasette_dbs.py` — do not hand-build.** The previous databases were built by hand in Feb/Mar 2026, had no generator, and silently went stale (163 projects served while v2 held 909).
+**Regenerate with `.venv/bin/python scripts/gen_datasette_dbs.py` -- never hand-build.** It reads the canonical **v4**
+database's serving views (read-only; re-pointed from v2 on 2026-10-01), writes `berkeley_housing_map.db`, `czu.db`
+and `metadata.json` here, and prints a was/now table. Nothing is deployed until someone runs `flyctl deploy`.
 
-**Live Site:** https://berkeley-housing.fly.dev
+**Publishing rule (2026-10-01):** organizations are named; private individuals appear as "individual owner" (owners)
+or "individual" (applicants); Rent Board tenancy dates are shown as the year. The full data stays in v4.
 
-## Features
-- Interactive OpenStreetMap with clustering
-- SQL query interface
-- Filter by year, project size, permit type, status
-- Export data as CSV/JSON
-- **Timeline tracking** with permit events
-- **Fee tracking** for projects
+## berkeley_housing_map.db (as generated)
+| table | rows |
+|---|---|
+| projects | 1,544 |
+| timeline | 12,183 |
+| people | 12,607 |
+| businesses | 282 |
+| city_records | 9,289 |
+| adu_rent_board | 684 |
+| permits | 2,445 |
+| parcels | 1,559 |
+| documents | 263 |
 
-## Data
-- **115** housing projects
-- **5,470** total units
-- **47** permits linked
-- **58** permit events tracked
-- **$82,784** in fees recorded
-
-## Tables
-| Table | Records | Description |
-|-------|---------|-------------|
-| projects | 115 | Master project list with timeline dates |
-| project_permits | 47 | Individual permits by project |
-| permit_events | 58 | Processing status events with dates |
-| permit_fees | 12 | Fee payment records |
-| project_velocity | view | Days at each stage analysis |
-
-## Canned Queries
-- Stalled Projects (180+ days inactive)
-- Project Timeline Events
-- Fees by Project
-- Permits by Year
-
-## Data Sources
-- City of Berkeley Planning Department (Accela)
-- City of Berkeley Building Department (Accela)
-
-## Tech Stack
-- Datasette (database UI)
-- datasette-cluster-map (mapping)
-- Fly.dev (hosting)
-- SQLite (database)
-
-## Deployment
-```bash
-flyctl deploy
-```
-
-## About
-Part of [Berkeley Housing Analysis](https://blockxblock.github.io/berkeley-housing-analysis/)
+`czu.db` holds the Corridors Zoning Update layers from CPRA #26-2367; `berkeley_address_centric.db` is the older
+hand-built address database, served unchanged.

@@ -419,7 +419,16 @@ streamlining columns are EMPTY in all 158 ZP rows -- applicants and dates only),
 `keep_snapshot_2026-09-30_pre-v4-applicants.db`, sha 1aa3c045): integrity + FK clean; 1,182 structures / 5,551 units;
 1,542 projects; conservation PASS. **John to re-lock.** Pathway read (`0185bb5`) SUBMITTED as a Batch (68 requests).
 
-**NEXT:** pathway read collect + compare with v2's 51 tags -> next cycle; phase 4 continues (applicants from the
+**Pathways on projects** (`f6dfbe6`): all 672 application-anchored projects read; **164 carry a state-law pathway**
+(density bonus, SB 330, SB 684, SB 35, SB 9, AB 2011), each with a verbatim quote; agrees with v2 on 47 of 51 tags --
+the 4 misses are v2 tags the City's text never states. Two reader bugs fixed on the way, both REPEATS: a truncated
+answer lost whole groups (nested salvage now in model_readers, one home) and bracketed source keys failed the
+verbatim check. **Determinism bug fixed** (`9de9f80`): a same-day filing tie followed Python set order (project 659
+anchored differently between builds); record number now breaks every date tie, proven across two hash seeds.
+Swap candidate `scratch/2026-09-30_cycle2/det1.db` (sha f806b164) = live + projects step re-run: events,
+classifications, structures identical; 165 project notes change (164 pathways + project 659's tie).
+
+**NEXT:** John unlocks -> swap f806b164 -> phase 4 continues (heights) / phase 5 (affordability, UC/BART, funding onto projects) (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.
 ---

@@ -192,7 +192,7 @@ def main() -> int:
             for role in ANCHOR_PRIORITY[1:]:
                 cand = [r for r in members if r["_m"]["role"] == role]
                 if cand:
-                    roots = [min(cand, key=lambda r: r["_m"]["filed"] or "9999")]
+                    roots = [min(cand, key=lambda r: (r["_m"]["filed"] or "9999", r["record"]))]   # record breaks ties
                     kinds["cluster:no_primary->" + role] += 1
                     break
         for r in roots:
@@ -202,7 +202,7 @@ def main() -> int:
             if r["record"] in anchors:
                 continue
             f = r["_m"]["filed"] or ""
-            best = min(roots, key=lambda a: abs(_days(a["_m"]["filed"], f)))
+            best = min(roots, key=lambda a: (abs(_days(a["_m"]["filed"], f)), a["record"]))
             anchors[best["record"]].append(r)
 
     # ---- P4: structures to anchors
@@ -218,7 +218,9 @@ def main() -> int:
         before = [a for a in live if s["submitted"] and recs[a]["_m"]["filed"]
                   and recs[a]["_m"]["filed"] <= s["submitted"]]
         if before:
-            before.sort(key=lambda a: recs[a]["_m"]["filed"])
+            # DETERMINISTIC: the record number breaks a same-day tie. Without it the choice followed Python's set
+            # order, which varies between runs -- project 659 got UP2007-0021 in one build, UP2007-0022 in the next.
+            before.sort(key=lambda a: (recs[a]["_m"]["filed"], a))
             if len(before) > 1 and recs[before[-1]]["_m"]["filed"] == recs[before[-2]]["_m"]["filed"]:
                 ties.append((sid, before[-2:]))
             home[sid] = before[-1]

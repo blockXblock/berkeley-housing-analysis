@@ -428,7 +428,11 @@ anchored differently between builds); record number now breaks every date tie, p
 Swap candidate `scratch/2026-09-30_cycle2/det1.db` (sha f806b164) = live + projects step re-run: events,
 classifications, structures identical; 165 project notes change (164 pathways + project 659's tie).
 
-**NEXT:** John unlocks -> swap f806b164 -> phase 4 continues (heights) / phase 5 (affordability, UC/BART, funding onto projects) (applicants from the
+**LIVE SWAPPED to f806b164 (John unlocked, 2026-09-30):** snapshot `keep_snapshot_2026-09-30_pre-v4-pathways.db` (sha
+32b7ea03, integrity ok); live == candidate; integrity + FK clean; 1,182 structures / 5,551 units; 1,542 projects, 164 with
+a pathway; conservation PASS. **John to re-lock.**
+
+**NEXT:** phase 4 continues (heights) / phase 5 (affordability, UC/BART, funding onto projects) (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.
 ---

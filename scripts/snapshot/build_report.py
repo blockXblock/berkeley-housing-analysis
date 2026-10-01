@@ -66,7 +66,8 @@ CITED = dict(
              'UC Berkeley 2021 LRDP EIR, greenhouse-gas appendix (2018 water and natural gas)',
              'UC Berkeley Office of Sustainability, greenhouse gas inventory (2019-2024)',
              'UC Regents item F2, July 16, 2025 (Berkeley Clean Energy Campus); ACEEE 2024 paper by campus staff (core campus, cogeneration)',
-             'UC 2025 Annual Report on Sustainable Practices (commuting)',
+             'UC 2025 Annual Report on Sustainable Practices (commuting; per-campus chart data from its public Google Sheets, fetched 2026-10-01)',
+             'AASHE STARS, UC Berkeley report summary (submitted February 19, 2025)',
              'Lawrence Berkeley National Laboratory 2025 LRDP Draft EIR, April 2025 (people, energy, water, GHG, parking); '
              'UC Regents item F1B, September 17, 2025 (202 acres, buildings, floor area)']),
     # Harris 2016 Table 1 (feet as printed): total and undergrounded, by street class. Miles are computed from the feet;
@@ -497,6 +498,10 @@ def s_fire():
 
 def s_campus():
     U, B = CITED['campus']['ucb'], CITED['campus']['lbnl']
+    CS = F['campus_sus']
+    S = CS['stars']
+    last = lambda tag: next(r for r in CS[tag]['rows'] if r['year'] == 2024)
+    gu, gl = last('ucb')['total'], last('lbnl')['total']
     uc = CITED['uc']
     v = lambda t, f=n: f"{f(t[0])} <span class=\"yr\">({t[1]})</span>" if t and t[0] is not None else '<span class="no">not published</span>'
     mgd = lambda g: f"{g / 365 / 1e6:.2f} million gal/day"
@@ -511,11 +516,21 @@ def s_campus():
         ['Water', v(U['water_gal'], mgd), v(B['water_gal'], mgd), f"≈ {(U['water_gal'][0] + B['water_gal'][0]) / 365 / 1e6:.2f} million gal/day (different years)"],
         ['Electricity', '<span class="no">not published</span> (own gas-fired cogeneration plant)', v(B['elec_mwh'], lambda x: f"{x:,} MWh a year"), '—'],
         ['Natural gas', v(U['gas_mmbtu'], lambda x: f"{x * 10 / 1e6:.1f} million therms"), v(B['gas_therms'], lambda x: f"{x / 1e6:.1f} million therms"), f"≈ {(U['gas_mmbtu'][0] * 10 + B['gas_therms'][0]) / 1e6:.1f} million therms (different years)"],
-        ['Greenhouse gas (all scopes)', v(U['ghg'], lambda x: f"{x:,} t CO₂e"), v(B['ghg'], lambda x: f"{x:,} t CO₂e"), f"{U['ghg'][0] + B['ghg'][0]:,} t CO₂e (2024)"],
+        ['Greenhouse gas (all scopes, net)', f"{gu:,.0f} t CO₂e <span class=\"yr\">(2024)</span>", f"{gl:,.0f} t CO₂e <span class=\"yr\">(2024)</span>", f"{gu + gl:,.0f} t CO₂e (2024)"],
         ['Drive alone to work', f"{U['sov_staff'][0]} of faculty and staff", f"{B['sov'][0]} of employees", '—'],
         ['Property tax', 'exempt (state constitution)', 'exempt (University land)', 'none'],
     ]
     beso = F['beso']['years']['2024']
+    lab = {r['year']: r for r in CS['lbnl']['rows']}
+    keep = (2009, 2012, 2015, 2018, 2019, 2020, 2021, 2022, 2023, 2024)
+    ghg_rows = [[r['year'], n(r['scope1_net']), n(r['scope2']), n(r['scope3']), n(r['total'])]
+                + ([n(lab[r['year']][k]) for k in ('scope1_net', 'scope2', 'scope3', 'total')] if r['year'] in lab else ['—'] * 4)
+                for r in CS['ucb']['rows'] if r['year'] in keep]
+    eui_rows = [[r['year'], f"{r['eui_kbtu_per_sqft']:.1f}" if r['eui_kbtu_per_sqft'] else '—',
+                 f"{lab[r['year']]['eui_kbtu_per_sqft']:.1f}" if r['year'] in lab and lab[r['year']]['eui_kbtu_per_sqft'] else '—']
+                for r in CS['ucb']['rows'] if r['year'] >= 2015]
+    water_rows = [[k, n(v), n(CS['lbnl']['water_gal_per_person'].get(k))] for k, v in CS['ucb']['water_gal_per_person'].items()]
+    ren_rows = [[esc(k), n(v.get('2018')), n(v.get('2024'))] for k, v in CS['ucb']['renewable_mwh'].items()]
     body = f'''
     <p class="note" style="font-size:.95rem">The University and the Lab run their own power, steam, roads and parking, and the
     City's figures leave them out: the City's community greenhouse-gas inventory excludes both, and the City's maps stop at
@@ -526,10 +541,29 @@ def s_campus():
     times the {beso['therms'] / 1e6:.1f} million therms reported by all of the City's large buildings in 2024. Its gas-fired
     cogeneration plant produced {n(U['ghg_cogen'][0])} of the campus's {n(U['ghg'][0])} tonnes of CO₂e in 2024; the Berkeley
     Clean Energy Campus project (construction from 2026, completion expected by 2030) replaces it with an electric heating and
-    cooling plant serving about 32 buildings. The two institutions' {U['ghg'][0] + B['ghg'][0]:,} tonnes equal
-    {100 * (U['ghg'][0] + B['ghg'][0]) / CITED['cap']['ghg_2023']:.0f}% of the City's own community inventory
+    cooling plant serving about 32 buildings. The two institutions' {gu + gl:,.0f} tonnes equal
+    {100 * (gu + gl) / CITED['cap']['ghg_2023']:.0f}% of the City's own community inventory
     ({n(CITED['cap']['ghg_2023'])} tonnes, 2023), which does not include them; the inventories are compiled differently.
-    Campus totals for the six reported years to 2024: {', '.join(n(x) for x in U['ghg_series'])} tonnes.</p>
+    (The campus's own inventory page gives {n(U['ghg'][0])} tonnes for 2024, counting Scope 1 before its
+    {n(last('ucb')['compliance_offsets'])} tonnes of compliance offsets.)</p>
+    <h3>What the two report on their own sustainability</h3>
+    <p class="note" style="font-size:.95rem">Both report every year to the UC Office of the President (the UC Annual Report on
+    Sustainable Practices); the Lab also files a Site Sustainability Plan with the Department of Energy, and the campus reports
+    to AASHE's STARS, the national rating for colleges: <strong>Platinum, {S['score']} points</strong> (submitted {S['submitted']},
+    valid through {S['valid_through']}), the first STARS 3.0 Platinum. AASHE now shows each credit's data only after a login;
+    the figures below are the UC report's own data, read from the public spreadsheets behind its charts.</p>
+    {table(['Year', 'Campus Scope 1 (net)', 'Campus Scope 2', 'Campus Scope 3', 'Campus total', 'Lab Scope 1', 'Lab Scope 2', 'Lab Scope 3', 'Lab total'], ghg_rows, right=range(1, 9))}
+    <p class="note">Metric tons of CO₂e. The campus's emissions are mostly Scope 1, gas burned on site; the Lab's are mostly
+    Scope 2, purchased electricity. Scope 3 (commuting, air travel, waste) changed method in 2019 and fell during the pandemic.
+    All years 2009–2024, with energy intensity: {dl('campus_lab_emissions_energy_2009_2024.csv')}.</p>
+    <div class="two"><div>
+    {table(['Year', 'Campus EUI', 'Lab EUI'], eui_rows, right={1, 2})}
+    <p class="note">Energy use intensity, kBtu per square foot of building a year.</p></div><div>
+    {table(['Year', 'Campus gal/person', 'Lab gal/person'], water_rows, right={1, 2})}
+    <p class="note">Potable water per person a year (fiscal years; the baseline is the UC water policy's). The campus used
+    {n(CS['ucb']['water_gal_per_person']['2025'])} gallons per person in 2025, against a 2025 goal of 13,105.</p>
+    {table(['Campus renewable electricity (MWh)', '2018', '2024'], ren_rows, right={1, 2})}
+    </div></div>
     <p class="note">Not published: the campus's total electricity use, miles of steam lines and utility tunnels, and how the
     campus and Lab acreage divide between Berkeley and Oakland. Several campus figures date from the 2018-19 baseline of the
     2021 Long Range Development Plan, the most recent the University has published. The 2021 settlement with the City has

@@ -3583,6 +3583,391 @@
    }
   ]
  },
+ "campus_sus": {
+  "ucb": {
+   "rows": [
+    {
+     "institution": "UC Berkeley",
+     "year": 2009,
+     "scope1_net": 144059.0,
+     "scope2": 9048.0,
+     "scope3": 40524.0,
+     "compliance_offsets": null,
+     "eui_kbtu_per_sqft": 179.2,
+     "total": 193631.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2010,
+     "scope1_net": 148164.0,
+     "scope2": 8775.0,
+     "scope3": 42153.0,
+     "compliance_offsets": null,
+     "eui_kbtu_per_sqft": 181.1,
+     "total": 199092.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2011,
+     "scope1_net": 150709.0,
+     "scope2": 6479.0,
+     "scope3": 33574.0,
+     "compliance_offsets": null,
+     "eui_kbtu_per_sqft": 179.8,
+     "total": 190762.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2012,
+     "scope1_net": 146422.0,
+     "scope2": 5837.0,
+     "scope3": 33618.0,
+     "compliance_offsets": null,
+     "eui_kbtu_per_sqft": 176.2,
+     "total": 185877.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2013,
+     "scope1_net": 123962.0,
+     "scope2": 6582.0,
+     "scope3": 35000.0,
+     "compliance_offsets": null,
+     "eui_kbtu_per_sqft": 172.5,
+     "total": 165544.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2014,
+     "scope1_net": 125597.0,
+     "scope2": 6325.0,
+     "scope3": 36422.0,
+     "compliance_offsets": null,
+     "eui_kbtu_per_sqft": 170.1,
+     "total": 168344.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2015,
+     "scope1_net": 141080.0,
+     "scope2": 6191.0,
+     "scope3": 44087.0,
+     "compliance_offsets": null,
+     "eui_kbtu_per_sqft": 172.2,
+     "total": 191358.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2016,
+     "scope1_net": 128354.0,
+     "scope2": 6018.0,
+     "scope3": 41665.0,
+     "compliance_offsets": null,
+     "eui_kbtu_per_sqft": 171.1,
+     "total": 176037.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2017,
+     "scope1_net": 135076.0,
+     "scope2": 4262.0,
+     "scope3": 42290.0,
+     "compliance_offsets": null,
+     "eui_kbtu_per_sqft": 164.8,
+     "total": 181628.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2018,
+     "scope1_net": 128459.0,
+     "scope2": 4720.0,
+     "scope3": 42027.0,
+     "compliance_offsets": 9746.0,
+     "eui_kbtu_per_sqft": 168.3,
+     "total": 175206.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2019,
+     "scope1_net": 135391.0,
+     "scope2": 2320.0,
+     "scope3": 41137.0,
+     "compliance_offsets": 9912.0,
+     "eui_kbtu_per_sqft": 177.5,
+     "total": 178848.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2020,
+     "scope1_net": 125698.0,
+     "scope2": 1981.0,
+     "scope3": 20305.0,
+     "compliance_offsets": 10534.0,
+     "eui_kbtu_per_sqft": 171.0,
+     "total": 147984.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2021,
+     "scope1_net": 121220.0,
+     "scope2": 2900.0,
+     "scope3": 10679.0,
+     "compliance_offsets": 9934.0,
+     "eui_kbtu_per_sqft": 163.0,
+     "total": 134799.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2022,
+     "scope1_net": 132512.0,
+     "scope2": 1629.0,
+     "scope3": 20488.0,
+     "compliance_offsets": 4734.0,
+     "eui_kbtu_per_sqft": 163.7,
+     "total": 154629.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2023,
+     "scope1_net": 135392.0,
+     "scope2": 1227.0,
+     "scope3": 35406.0,
+     "compliance_offsets": 2090.0,
+     "eui_kbtu_per_sqft": 163.0,
+     "total": 172025.0
+    },
+    {
+     "institution": "UC Berkeley",
+     "year": 2024,
+     "scope1_net": 125867.0,
+     "scope2": 196.0,
+     "scope3": 32117.0,
+     "compliance_offsets": 2090.0,
+     "eui_kbtu_per_sqft": 157.2,
+     "total": 158180.0
+    }
+   ],
+   "water_gal_per_person": {
+    "Baseline": 20476.0,
+    "2022": 12631.0,
+    "2023": 12366.0,
+    "2024": 11979.0,
+    "2025": 12119.0
+   },
+   "renewable_mwh": {
+    "Off-campus UC Clean Power Program": {
+     "2016": 4594.473659,
+     "2017": 4420.025773,
+     "2018": 4766.574,
+     "2019": 5198.351177,
+     "2020": 7968.658,
+     "2021": 10800.26529,
+     "2022": 13358.75671,
+     "2023": 13974.3891,
+     "2024": 20355.84567
+    },
+    "Off-campus utility programs": {
+     "2016": 0.0,
+     "2017": 0.0,
+     "2018": 3562.777,
+     "2019": 4771.423,
+     "2020": 3578.866,
+     "2021": 2445.952,
+     "2022": 2433.872,
+     "2023": 2609.084,
+     "2024": 2569.085
+    },
+    "On-campus systems": {
+     "2016": 157.81,
+     "2017": 1186.902,
+     "2018": 1236.353,
+     "2019": 1315.262,
+     "2020": 1299.756,
+     "2021": 1310.492,
+     "2022": 1307.946,
+     "2023": 1322.399,
+     "2024": 1238.26
+    }
+   }
+  },
+  "lbnl": {
+   "rows": [
+    {
+     "institution": "Berkeley Lab",
+     "year": 2009,
+     "scope1_net": 9362.0,
+     "scope2": 34174.0,
+     "scope3": 26646.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": null,
+     "total": 70182.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2010,
+     "scope1_net": 10540.0,
+     "scope2": 33341.0,
+     "scope3": 18849.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": null,
+     "total": 62730.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2011,
+     "scope1_net": 11693.0,
+     "scope2": 37317.0,
+     "scope3": 23587.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": null,
+     "total": 72597.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2012,
+     "scope1_net": 11112.0,
+     "scope2": 34923.0,
+     "scope3": 22750.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": null,
+     "total": 68785.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2013,
+     "scope1_net": 9793.0,
+     "scope2": 33776.0,
+     "scope3": 21584.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": null,
+     "total": 65153.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2014,
+     "scope1_net": 9349.0,
+     "scope2": 35329.0,
+     "scope3": 23225.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": null,
+     "total": 67903.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2015,
+     "scope1_net": 8068.0,
+     "scope2": 33850.0,
+     "scope3": 21114.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": 208.5,
+     "total": 63032.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2016,
+     "scope1_net": 9497.0,
+     "scope2": 32086.0,
+     "scope3": 15062.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": 206.6,
+     "total": 56645.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2017,
+     "scope1_net": 9356.0,
+     "scope2": 26750.0,
+     "scope3": 13593.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": 194.6,
+     "total": 49699.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2018,
+     "scope1_net": 9072.0,
+     "scope2": 26991.0,
+     "scope3": 16986.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": 182.8,
+     "total": 53049.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2019,
+     "scope1_net": 8105.0,
+     "scope2": 25899.0,
+     "scope3": 18197.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": 184.5,
+     "total": 52201.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2020,
+     "scope1_net": 7211.0,
+     "scope2": 18988.0,
+     "scope3": 8212.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": 172.5,
+     "total": 34411.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2021,
+     "scope1_net": 7026.0,
+     "scope2": 11352.0,
+     "scope3": 3242.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": 165.5,
+     "total": 21620.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2022,
+     "scope1_net": 7448.0,
+     "scope2": 22622.0,
+     "scope3": 6419.0,
+     "compliance_offsets": 0.0,
+     "eui_kbtu_per_sqft": 156.0,
+     "total": 36489.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2023,
+     "scope1_net": 8610.0,
+     "scope2": 19273.0,
+     "scope3": 10323.0,
+     "compliance_offsets": null,
+     "eui_kbtu_per_sqft": 163.2,
+     "total": 38206.0
+    },
+    {
+     "institution": "Berkeley Lab",
+     "year": 2024,
+     "scope1_net": 7899.0,
+     "scope2": 19119.0,
+     "scope3": 10687.0,
+     "compliance_offsets": null,
+     "eui_kbtu_per_sqft": 164.8,
+     "total": 37705.0
+    }
+   ],
+   "water_gal_per_person": {
+    "Baseline": 14694.0,
+    "2022": 9304.0,
+    "2023": 8305.0,
+    "2024": 6632.0,
+    "2025": 8371.0
+   }
+  },
+  "stars": {
+   "rating": "Platinum",
+   "score": 86.76,
+   "valid_through": "April 20, 2028",
+   "submitted": "February 19, 2025"
+  }
+ },
  "files": [
   {
    "file": "dof_e5_berkeley_2020_2026.csv",
@@ -3769,6 +4154,12 @@
    "grain": "building type",
    "rows": 7,
    "description": "2024 electricity and gas by building type."
+  },
+  {
+   "file": "campus_lab_emissions_energy_2009_2024.csv",
+   "grain": "institution \u00d7 year",
+   "rows": 32,
+   "description": "UC Berkeley and Berkeley Lab greenhouse-gas emissions by scope (metric tons CO2e; Scope 1 net of compliance offsets) and energy use intensity (kBtu per sq ft), from the UC Annual Report on Sustainable Practices 2025."
   }
  ],
  "sources_manifest": {

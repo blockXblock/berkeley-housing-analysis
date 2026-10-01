@@ -502,6 +502,41 @@ def beso(parcel_gdf):
                          by_type=bt.head(12).to_dict('records'))
 
 
+def campus_sustainability():
+    """UC Berkeley and Berkeley Lab, from the UC Annual Report on Sustainable Practices 2025: the report's charts read
+    public Google Sheets (one per chart), fetched 2026-10-01 into data/raw/campus/ucop2025_sheets_{ucb,lbnl}.json.
+    Emissions are the report's own series (Scope 1 NET of compliance offsets); EUI is kBtu per square foot; water is
+    gallons per person; renewable electricity is MWh."""
+    C = os.path.join(ROOT, 'data', 'raw', 'campus')
+    num = lambda x: float(str(x).replace(',', '').strip()) if str(x).strip() not in ('', None) else None
+    out, facts = [], {}
+    for tag, name in (('ucb', 'UC Berkeley'), ('lbnl', 'Berkeley Lab')):
+        sh = json.load(open(os.path.join(C, f'ucop2025_sheets_{tag}.json')))
+        get = lambda pred: next(v['values'] for k, v in sh.items() if pred(k, v.get('values') or [[]]))
+        em = get(lambda k, v: v[0][:2] == ['Calendar year', 'Scope 1 net emissions'])
+        eui = {r[0]: num(r[1]) for r in get(lambda k, v: len(v[0]) > 1 and 'EUI' in v[0][1])[1:]}
+        wat = {r[0].rstrip('*'): num(r[1]) for r in get(lambda k, v: v[0][:1] == ['Year'])[1:]}
+        for r in em[1:]:
+            y = r[0].rstrip('*')
+            if not y.isdigit() or int(y) > 2026 or len(r) < 4 or not r[1]:
+                continue
+            row = dict(institution=name, year=int(y), scope1_net=num(r[1]), scope2=num(r[2]), scope3=num(r[3]),
+                       compliance_offsets=num(r[4]) if len(r) > 4 else None, eui_kbtu_per_sqft=eui.get(y))
+            row['total'] = sum(v or 0 for v in (row['scope1_net'], row['scope2'], row['scope3']))
+            out.append(row)
+        facts[tag] = dict(rows=[r for r in out if r['institution'] == name], water_gal_per_person=wat)
+        if tag == 'ucb':
+            ren = get(lambda k, v: v[0][:1] == ['Supply Option Type'])
+            facts[tag]['renewable_mwh'] = {r[0]: {ren[0][i]: num(x) for i, x in enumerate(r[1:], 1)} for r in ren[1:]}
+    write_csv('campus_lab_emissions_energy_2009_2024.csv', out, 'institution × year',
+              'UC Berkeley and Berkeley Lab greenhouse-gas emissions by scope (metric tons CO2e; Scope 1 net of compliance '
+              'offsets) and energy use intensity (kBtu per sq ft), from the UC Annual Report on Sustainable Practices 2025.')
+    s = open(os.path.join(C, 'stars_ucb_2025-02-19_summary.html')).read()
+    facts['stars'] = dict(rating='Platinum', score=86.76, valid_through='April 20, 2028', submitted='February 19, 2025')
+    assert 'Platinum 86.76' in re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', s)), 'STARS summary no longer reads Platinum 86.76'
+    FACTS['campus_sus'] = facts
+
+
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--date', default='2026-10-01')
     src = os.path.join(ROOT, 'data', 'raw', 'snapshot', ap.parse_args().date)
@@ -518,6 +553,7 @@ def main():
     evacuation()
     undergrounding_tables()
     beso(pg)
+    campus_sustainability()
     FACTS['files'] = FILES
     FACTS['sources_manifest'] = {k: {kk: v[kk] for kk in ('url', 'fetched_at', 'sha256') if kk in v} for k, v in manifest.items()}
     json.dump(FACTS, open(os.path.join(OUT, 'facts.json'), 'w'), indent=1, default=lambda o: o.item() if hasattr(o, 'item') else str(o))

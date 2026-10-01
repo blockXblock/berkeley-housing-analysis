@@ -23,9 +23,10 @@ CITED = dict(
     # Fall 2026's student census (taken after the fifth Friday of instruction) is not yet published as of 2026-10-01;
     # update undergrads/grads when OPA posts it. Admission offers are not enrollment.
     uc=dict(students=46151, undergrads=33122, grads=13029, term='fall 2025', staff=13422,
-            offers_2026=(13982, 5284),
+            offers_2026=(13982, 5284), convocation_2026=9000, housed_undergrads_2026=9700,
             src='UC Berkeley Office of Planning & Analysis, Quick Facts (fall 2025 enrollment); Berkeley News, July 29, '
-                '2026 (fall 2026 admission offers); IPEDS 2024-25 (faculty and staff)'),
+                '2026 (fall 2026 admission offers); Berkeley News, August 26, 2026 (Fall Convocation: "over 9,000" new '
+                'students); Berkeley News, March 23, 2026 (9,700 undergraduates in campus housing); IPEDS 2024-25 (faculty and staff)'),
     cap=dict(elec=-36, gas=-24, ghg_2023=432806, buildings_2023=168453,
              src='City of Berkeley, Climate Action Plan and Resilience Update, Council item 23, April 15, 2025 '
                  '(community inventory; UC Berkeley and Lawrence Berkeley National Laboratory excluded)'),
@@ -122,7 +123,7 @@ def s_people():
       {card(n(last['population']), f"residents, January 1, {F['dof']['year']}", 'State Department of Finance (E-5).')}
       {card(n(last['housing_units']), 'homes', f"{n(last['occupied'])} occupied; vacancy {100 * last['vacancy_rate']:.1f}%.")}
       {card(n(last['group_quarters']), 'residents in group housing', f"Dorms, co-ops, fraternities, care homes: {pct(last['group_quarters'], last['population'])} of residents.")}
-      {card(n(CITED['uc']['students']), f"UC Berkeley students ({CITED['uc']['term']})", f"{n(CITED['uc']['undergrads'])} undergraduates, {n(CITED['uc']['grads'])} graduate students; plus {n(CITED['uc']['staff'])} faculty and staff. The fall 2026 count is due later this fall; {n(sum(CITED['uc']['offers_2026']))} were offered admission.")}
+      {card(n(CITED['uc']['students']), f"UC Berkeley students ({CITED['uc']['term']})", f"{n(CITED['uc']['undergrads'])} undergraduates, {n(CITED['uc']['grads'])} graduate students; plus {n(CITED['uc']['staff'])} faculty and staff. {n(CITED['uc']['housed_undergrads_2026'])} undergraduates live in campus housing. Fall 2026: the official count is not yet published; {n(sum(CITED['uc']['offers_2026']))} were offered admission and over {n(CITED['uc']['convocation_2026'])} new students attended Fall Convocation.")}
     </div>
     <h3>Population and homes, 2020–2026</h3>
     {table(['Year', 'Residents', 'In households', 'In group housing', 'Homes', 'Occupied', 'Vacancy', 'Per household'], dof_rows, right=range(1, 8))}

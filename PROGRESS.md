@@ -339,8 +339,20 @@ integrity ok); live replaced with the verified build, **live sha 2b797a33 == bui
 1,186 structures / 5,561 units, 8 unlinked, 5,352 confirmed lineage edges, reading ruling on 3 events; conservation
 verifier PASS; a fresh read-only fold reproduces the write. **John to re-lock v4.**
 
-**NEXT:** Tier 1 harvest finishes -> reparse -> second read -> third declared harvest ->
-projects preview -> fill the open project_rulings rows -> projects write step.
+**Tier 1 harvested and in the build** (`fe5961f`; 1,359 pre-2015 primary applications; 2 transient failures
+retried). John approved **P1b** (a pre-2015 application is a project only if it reaches a building) and the **G007**
+amendment (2631 Durant anchors on UP2013-0016). Also: P4b (record STATUS Denied/Withdrawn/Void/Expired is dead),
+project_rulings APPLIED in the projects step, and the 2015+ harvest re-parsed with the parcel fix as a declared
+input. Preview on the chain build: **1,546 projects** (276 application+buildings, 403 application-only, 867
+building-only); units in building-only projects 2,196 -> 948; **all 21 large gap buildings anchored** (Acheson =
+UP2010-0078, four buildings, 205u). Ledger: 7 approved, **9 resolved by the rules**, **2 proposed** (G011 2747 San
+Pablo -> UP2006-0109, the rules picked a later accessory-building AUP; G012 1698 University -> MODUP2007-0027).
+**Gap found:** only 4 of 72 pre-2015 projects get an entitlement date -- the old workflow vocabulary
+("Completeness Review -> Complete", "Prepare Notice of Administrative Decision -> Completed", "Case Closed ->
+Approved") is outside the 2026-09-28 milestone rule; needs John's ruling on an extension.
+
+**NEXT:** John on G011/G012 + the pre-2015 milestone vocabulary -> projects write step (new code) -> rebuild -> swap.
+Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.
 ---
 
 ## 2026-09-29 — Evidence stored (R2 + v4 manifest) · care/congregate reading rule

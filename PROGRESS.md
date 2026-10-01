@@ -509,7 +509,27 @@ SCB plans in R2), one tenant on record -- Suite C Cold Stone, TI issued 2024-12-
 parcel is the 163-unit rental. Larger buildings after completion: 109 listings at 29 buildings (20 business-licence
 certificates, 12 TI-type permits, signs). WHICH listings are commercial is not decided yet (record type + text).
 
-**NEXT:** licensed-professionals harvest -> load as contractor/architect roles -> developer ledger -> next swap (views with
+**People and money by role (2026-10-01, John):** all loaded in JN-C, all reach live at the next swap.
+- Business licences 2025-11-15 (`b727eca`): 13,004; `v_project_businesses`. The export LACKS tenants permits show, so
+  "no licence" is not "vacant".
+- `v_project_people` (`22e1794`, `a3c604c`, `7269ff4`, `d7546cc`): owner_of_record, record_owner, applicant,
+  permit_owner, contractor_primary / _additional (CSLB #; "primary" is the page's, NOT general contractor -- Shattuck
+  Phase 1 lists its electrician first, Webcor additional), licensed_professional, city_reviewer, inspector,
+  rental_operator / business_tenant, property_manager / rental_owner (Rent Board), funder (ledger), developer /
+  tax_credit_owner / general_partner / property_manager (CTCAC). Harvest: 1,166 BP pages, 0 failed; 20 masters absent
+  from the list dump. Test build: 768 projects with a contractor, 440 contractors.
+- CTCAC: 46 Berkeley applications (parties + unit mix by AMI/bedrooms; APN resolved through the County lineage):
+  9 reach 8 projects. Staff reports online for 6 (2020-2025): `parse_ctcac_staff_report.py` reads construction /
+  permanent sources by page layout + labelled fields (investor/consultant, private placement purchaser = the bond
+  lender, bond issuer); gate: permanent sources = TOTAL (6/6). Older reports sit in meeting folders (not yet found).
+- Title blocks: `llm_document_roles.py` -- 315 R2 documents, 305 with text (10 scans), SHA-checked; batch submitted.
+- Bisnow 2026-07-22 panel ("Housing panel one", Build Berkeley Neighborhoods channel): captions free via yt-dlp;
+  market context only (no project lenders named); condo deposit/liability passage at 45:00. Attendee emails NOT used
+  (not evidence of financing; personal data).
+**Open:** CSLB classification per contractor (bulk file needs a browser session; per-licence lookup ~440 pages);
+investor/lender beyond CTCAC: County Recorder deeds of trust (lenders on market-rate buildings), SoS LLC members.
+
+**NEXT:** title-block read -> developer/architect roles -> CSLB classifications -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

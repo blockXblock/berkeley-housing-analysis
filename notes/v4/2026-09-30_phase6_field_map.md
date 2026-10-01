@@ -23,7 +23,9 @@ status: decided (John approved D1-D8 as recommended, 2026-09-30)
 | total_units | buildings: sum of units (ready); application-only: **no count** (scope read gives buckets only) | DECISION D4 |
 | eli / vli / li / mod_units | `notes.affordability` (approved ledger; 31 projects) | ready |
 | market_units | total minus the tiers | derivable |
-| building_sqft, parking_spaces | none | DROP (cutover plan) |
+| building_sqft | permit text (544 of 1,174 master permits state it) and Planning descriptions, read with a verbatim quote containing the number; City `taxable_sqft` (berkeley.db, per parcel) as an independent parcel-level cross-check | KEEP -- the earlier "drop" rested only on v2's empty column (2 of 1,106 filled); John 2026-09-30 |
+| construction valuation | CPRA `JobValuation` on the master permits | KEEP (already in the build) |
+| parking_spaces | none sourced yet | drop pending John |
 | height_stories / height_feet | heights not yet built | phase 4 remainder (D7) |
 | developer / architect | v2 values are unsourced; v4 has `record_owner` (all eras) and `applicant` (2025-26 log) | DECISION D5 |
 | owner_current | assessor `owner_of_record` via project parcels | derivable: 1,032/1,139 |

@@ -2,7 +2,7 @@
 title: "Phase 6: what the publishers need from v4, and the decisions it takes"
 date: 2026-09-30
 type: plan
-status: proposed (awaiting John)
+status: decided (John approved D1-D8 as recommended, 2026-09-30)
 ---
 
 # Phase 6: what the publishers need from v4
@@ -33,7 +33,7 @@ status: proposed (awaiting John)
 | assessed_value / net_taxable / exemption / est_annual_tax / as_of | `assessed_values` via parcels (+ the 1.25% rule) | derivable |
 | planning_applicant | `applicant` actions (2025-26 only) | partial by source |
 
-## Decisions
+## Decisions (APPROVED as proposed, John 2026-09-30)
 
 - **D1 Public identifier.** v4 `project_id`s shift when a ruling removes a project. Proposal: publish the stable
   `project_key` (anchor record, else first master permit, else external id) as the public id, plus a one-time v2->v4

@@ -320,7 +320,7 @@ def s_findings():
         item('A small city of ideas, parks and talent',
              "UC Berkeley alumni and faculty hold about 60 Nobel Prizes; five faculty members have won since 2020. The University ranks No. 7 "
              "in the world and first among public universities, with physics, chemistry and statistics among the world's top three, and "
-             "Cal athletes have won more than 120 Olympic gold medals. Around it cluster institutes in mathematics, theoretical computer "
+             "Cal athletes have won 246 Olympic medals, 126 of them gold: more golds than all but 13 nations in the history of the Summer Games. Around it cluster institutes in mathematics, theoretical computer "
              "science and artificial intelligence, a new college of computing and data science, and new buildings for climate and "
              "genomics startups. The City pairs this with public limits on surveillance technology and principles for its own use of AI. "
              "Berkeley has more than fifty parks and a 100-acre waterfront with the Bay's largest public marina, though its park acreage "
@@ -746,7 +746,7 @@ def s_livability():
         ['Global standing', 'No. 7 in the world and No. 1 among public universities (U.S. News Best Global Universities, 2026); No. 5 in the world (ShanghaiRanking ARWU, 2026)'],
         ['Fields at the top', 'Physics No. 3 in the world (U.S. News, 2026); chemistry and statistics No. 3 (ShanghaiRanking subject rankings, 2026); 29 graduate programs in the U.S. top five (U.S. News, 2027 edition)'],
         ['Academic reputation', 'a perfect 100 in the QS 2027 rankings, the top public university in North America'],
-        ['Olympic gold medals won by Cal athletes', 'more than 120 all-time; at the 2024 Paris Games, Cal athletes won 23 medals, which as a country would have ranked 12th'],
+        ['Olympic medals won by Cal athletes', '246 all-time, 126 of them gold: more Summer Games golds than all but 13 nations (two of them, the Soviet Union and East Germany, now defunct). At the 2024 Paris Games, Cal athletes won 23 medals, which as a country would have ranked 12th'],
     ])}
     <p class="note" style="font-size:.95rem">Around the campus and the Lab is a dense ring of institutes: the Simons Institute for the
     Theory of Computing (since 2012, more than 3,400 long-term visiting researchers in its first decade), the Mathematical Sciences
@@ -775,7 +775,8 @@ def s_livability():
     recycling began here in 1973, through the Ecology Center; the City set a zero-waste goal in 2005; and in 2019 it barred natural
     gas in new buildings, a law a federal appeals court struck down in 2023.</p>
     <p class="note">Sources: UC Berkeley "By the numbers" and Berkeley News (October 8, 2025; June 15 and September 21, 2026);
-    U.S. News &amp; World Report; ShanghaiRanking; QS; Cal Athletics (August 13, 2024); Simons Institute; Center for Human-Compatible
+    U.S. News &amp; World Report; ShanghaiRanking; QS; Cal Athletics (August 13, 2024); all-time Summer Olympic medal table
+    (Wikipedia, retrieved October 1, 2026, through the 2024 Games; Cal's count includes athletes who competed for other nations); Simons Institute; Center for Human-Compatible
     AI; Institute of Governmental Studies; Othering &amp; Belonging Institute; Berkeley SkyDeck; Berkeley News (May 16, 2024) and
     Bakar Labs (Bakar buildings); Berkeley Lab (Doudna); City of Berkeley: parks, waterfront and marina pages, Council item 43
     (June 25, 2024) on park standards, surveillance technology report (Council item 17, November 12, 2024); Ecology Center; City

@@ -43,6 +43,9 @@ CITED = dict(
              hill_capacity=900, flat_capacity=1700, fire_inspections=8600,
              src='KLD Associates, City of Berkeley Evacuation Time Estimate Study, TR-1296, July 1, 2025; City of '
                  'Berkeley Evacuation StoryMaps (text version, July 2025); Community Wildfire Protection Plan (2023)'),
+    # Harris 2016 Table 1 (feet as printed): total and undergrounded, by street class. Miles are computed from the feet;
+    # the table's own residential overhead figure prints 149.9 mi, but its 775,399 ft is 146.9 mi.
+    table1_ft=dict(arterial=(135095, 66015), collector=(190460, 59660), residential=(832666, 57267)),
     ug=dict(harris_rule20a_per_year=533000, harris_rule20a_balance=6_400_000, bellecci_rule20a_balance=9_009_095,
             uud48_parcels=175, uud48_feet=7000, conceptual_per_mile='$4.5–5.2 million', conceptual_range='$170–200 million',
             src_harris='Harris & Associates, Baseline Study for the Development of a Utility Undergrounding Program, '
@@ -285,6 +288,10 @@ def s_networks():
     sm = sorted(I['sewer_by_material'], key=lambda r: -r['miles'])[:10]
     stm = sorted(I['storm_by_material'], key=lambda r: -r['miles'])[:8]
     poles = {r['POLEMAT']: r['streetlights'] for r in I['poles']}
+    P = F['poles']
+    tr = P['traced']
+    over = sum((a - b) for a, b in CITED['table1_ft'].values()) / 5280
+    lo, hi = over * 5280 / tr['250']['mean_span_ft'], over * 5280 / tr['200']['mean_span_ft']
     body = f'''
     {table(['Network', 'Miles', 'Detail'], [
         ['Streets', n(S['centerline_mi'], 1), f"{n(S['lane_mi'], 1)} lane-miles; arterials {S['arterial_mi']} mi, collectors {S['collector_mi']}, residential {S['residential_mi']}; average pavement condition {S['pci']} of 100."],
@@ -292,15 +299,30 @@ def s_networks():
         ['Sanitary sewer mains (City)', n(I['sewer_mi'], 1), f"{n(I['sewer_segments'])} segments, {n(I['manholes'])} manholes, {n(I['laterals'])} house laterals ({n(I['laterals_mi'], 1)} mapped miles); {CITED['ssmp']['pump_stations']} pump stations; {CITED['ssmp']['rehab_since_1986']} miles rehabilitated since 1986."],
         ['Storm drains (City)', n(I['storm_mi'], 1), f"{n(I['storm_segments'])} pipe segments."],
         ['Gas, high pressure (PG&amp;E)', '≈ 38', 'Lines at 60 psi and above only; the low-pressure mains that feed houses are not public.'],
-        ['Utility poles (PG&amp;E, AT&amp;T)', f"{n(poles.get('Wood', 0))}+", f"Wood poles carrying a City streetlight, {n(I['wood_util_pn_distinct'])} with PG&amp;E pole numbers: a floor. The full pole inventory, ages and transformers are not public."],
+        ['Utility poles (PG&amp;E, AT&amp;T)', f"{n(poles.get('Wood', 0))}+", f"Wood poles carrying a City streetlight, {n(I['wood_util_pn_distinct'])} with PG&amp;E pole numbers: a floor (estimate of all street poles below). Ages and transformers are not public."],
     ], right={1})}
+    <p class="note">Two City-commissioned counts of street miles disagree by 5 miles: 214.2 in the 2022 pavement survey and
+    219.4 in the 2016 undergrounding study. Neither report explains the difference; they were measured six years apart for
+    different purposes.</p>
     <p class="note">The City's sewer map prices every segment at a planning cost per foot by diameter: {big(I['sewer_planning_cost'])}
     for the whole network, including the {n(sum(r['segments'] for r in I['sewer_by_material'] if r['MATERIAL'] == 'HDPE'))} segments
     already relined with plastic (HDPE). It is a replacement value at the City's unit costs, not a backlog.</p>
+    <h3>Overhead wire: an estimate from the poles</h3>
+    {table(['Measure', 'Value', 'How it is known'], [
+        ['Street miles with overhead lines', f"{over:.1f}", 'Measured: City-commissioned 2016 study, Table 1 (all street classes)'],
+        ['Lit wood poles, located', n(P['wood']), "Measured: the City's streetlight layer (pole material = wood)"],
+        ['Distance to the nearest lit wood pole', f"median {P['nn_median_ft']} ft (half within {P['nn_p25']}–{P['nn_p75']} ft)", 'Measured from those poles'],
+        ['Pole line traced by lit poles alone', f"{tr['250']['miles']:.0f}–{tr['400']['miles']:.0f} mi", 'Measured: links between neighboring lit poles up to 250–400 ft; a floor'],
+        ['Utility poles along streets', f"≈ {round(lo, -2):,.0f}–{round(hi, -2):,.0f}", f"Estimate: {over:.1f} overhead street miles ÷ a span of {tr['200']['mean_span_ft']:.0f}–{tr['250']['mean_span_ft']:.0f} ft (the traced links); rear-lot pole lines are extra"],
+        ['Aerial cable route-miles', f"≈ {4 * over:,.0f}", f"Illustration: {over:.0f} miles × 4 systems on a typical joint-use pole (electric, telephone copper, cable TV coax, fiber); each electric line carries several conductors"],
+    ])}
+    <p class="note">What would replace the estimates with counts: PG&amp;E's pole and joint-use attachment records (its Joint Use
+    Map Portal is closed to the public), which list every pole and every company attached to it. Wiring for traffic signals,
+    sewer pump stations and water valves is not mapped publicly at all. Map layer: {dl('wood_pole_lines_traced.geojson')}.</p>
     <div class="two"><div><h3>Water mains by decade laid</h3>
-      {table(['Decade', 'Miles', ''], [[f"{int(r['decade'])}s" if r['decade'] is not None else 'unknown', n(r['miles'], 1), bar(r['miles'], wmx)] for r in wd], right={1})}</div>
+      {table(['Decade', 'Miles', ''], [[f"{int(r['decade'])}s" if r['decade'] is not None else 'unknown', n(r['miles'], 1) if r['miles'] >= 0.05 else 'under 0.1', bar(r['miles'], wmx)] for r in wd], right={1})}</div>
     <div><h3>Water mains by diameter</h3>
-      {table(['Inches', 'Miles'], [[n(r['diameter_in']), n(r['miles'], 1)] for r in I['water_by_dia']], right={0, 1})}
+      {table(['Inches', 'Miles'], [[f"{r['diameter_in']:g}", n(r['miles'], 1) if r['miles'] >= 0.05 else 'under 0.1'] for r in I['water_by_dia']], right={0, 1})}
       <p class="note">The pipe-material field is empty in the public layer.</p></div></div>
     <div class="two"><div><h3>Sewer mains by material</h3>
       {table(['Material', 'Miles', 'Segments'], [[esc(str(r['MATERIAL'])), n(r['miles'], 1), n(r['segments'])] for r in sm], right={1, 2})}
@@ -324,13 +346,26 @@ def s_ug():
     b23 = {r['street']: r for r in U['bellecci'] if r['version'] == 'FY2023, programmatic'}
     bc = {r['street']: r for r in U['bellecci'] if r['version'].endswith('capital program')}
     rn = S['report_network_totals']
+    T1 = CITED['table1_ft']
+    t1 = {k: (a / 5280, b / 5280, (a - b) / 5280) for k, (a, b) in T1.items()}
+    tot = [sum(v[i] for v in t1.values()) for i in range(3)]
+    t1rows = [[k.title(), f"{v[0]:.1f}", f"{v[1]:.1f}", f"{v[2]:.1f}", f"{100 * v[1] / v[0]:.0f}%"] for k, v in t1.items()]
+    t1rows.append(['<strong>All streets</strong>', f"<strong>{tot[0]:.1f}</strong>", f"<strong>{tot[1]:.1f}</strong>",
+                   f"<strong>{tot[2]:.1f}</strong>", f"<strong>{100 * tot[1] / tot[0]:.0f}%</strong>"])
     body = f'''
     <div class="grid">
+      {card(f"{tot[2]:.0f} of {tot[0]:.0f} mi", 'of Berkeley streets still carry overhead wires', f"{100 * tot[2] / tot[0]:.0f}% of street miles; {tot[1]:.1f} miles are underground (2016).")}
+      {card(f"{t1['residential'][2]:.0f} mi", 'of them are residential streets', f"Only {100 * t1['residential'][1] / t1['residential'][0]:.0f}% of residential street miles are underground. The cost studies price only arterials and collectors.")}
       {card(f"{S['arterial']['underground_mi'] + S['collector']['underground_mi']:.1f} mi", 'of arterials and collectors already underground', f"Arterials {S['arterial']['underground_mi']:.1f} of {S['arterial']['underground_mi'] + S['arterial']['overhead_mi']:.1f} mi; collectors {S['collector']['underground_mi']:.1f} of {S['collector']['underground_mi'] + S['collector']['overhead_mi']:.1f}.")}
-      {card(f"{S['arterial']['overhead_mi'] + S['collector']['overhead_mi']:.1f} mi", 'still overhead', 'Arterial and collector streets (2016).')}
+      {card(f"{S['arterial']['overhead_mi'] + S['collector']['overhead_mi']:.1f} mi", 'of arterials and collectors still overhead', 'The part the cost studies price (2016).')}
       {card(big(U['total']), 'to underground them, segment by segment', 'Harris & Associates, 2016 dollars, construction only.')}
       {card(big(sum(r['total_cost'] for r in b19)), 'for 16.9 miles of evacuation routes', 'Bellecci, FY2019 dollars; ' + big(sum(r['total_cost'] for r in bc.values())) + ' as a FY2023 capital program.')}
     </div>
+    <h3>Every street, by class: underground and overhead (miles, 2016)</h3>
+    {table(['Streets', 'Total', 'Underground', 'Overhead', 'Share underground'], t1rows, right=range(1, 5))}
+    <p class="note">From Table 1 of the 2016 Harris study, computed from its feet. The table prints 149.9 overhead residential
+    miles, but its own 775,399 feet is 146.9 miles. Residential streets are measured but not costed in any City study.
+    Overhead lines that run behind houses, along rear lot lines, are not counted as street miles.</p>
     <h3>The 2016 segment table: what it costs, street by street</h3>
     {table(['Network', 'Segments', 'Overhead', 'Underground', 'Cost (segments)', 'Report\'s printed total'], [
         ['Arterial', S['arterial']['segments'], f"{S['arterial']['overhead_mi']:.1f} mi", f"{S['arterial']['underground_mi']:.1f} mi", usd(S['arterial']['cost']), usd(sum(rn['arterial']))],

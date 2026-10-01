@@ -2402,6 +2402,39 @@
   "laterals_mi": 171.0,
   "manholes": 7615
  },
+ "poles": {
+  "wood": 4499,
+  "nn_median_ft": 109,
+  "nn_p25": 78,
+  "nn_p75": 140,
+  "traced": {
+   "150": {
+    "links": 2907,
+    "miles": 57.7,
+    "mean_span_ft": 105.0
+   },
+   "200": {
+    "links": 3557,
+    "miles": 78.6,
+    "mean_span_ft": 117.0
+   },
+   "250": {
+    "links": 4086,
+    "miles": 101.1,
+    "mean_span_ft": 131.0
+   },
+   "300": {
+    "links": 4399,
+    "miles": 117.0,
+    "mean_span_ft": 140.0
+   },
+   "400": {
+    "links": 4474,
+    "miles": 121.7,
+    "mean_span_ft": 144.0
+   }
+  }
+ },
  "evac": {
   "clear": [
    {
@@ -3694,6 +3727,12 @@
    "grain": "neighborhood (City boundaries)",
    "rows": 24,
    "description": "The same measures by neighborhood."
+  },
+  {
+   "file": "wood_pole_lines_traced.geojson",
+   "grain": "pole-to-pole link (line)",
+   "rows": 4086,
+   "description": "Links between neighboring lit wood utility poles (spans up to 250 ft): the traced overhead pole lines. A floor: poles without a streetlight are not in the public data."
   },
   {
    "file": "evacuation_clearance_times_kld_2025.csv",

@@ -361,6 +361,34 @@ def infra(bg, hoods):
         poles=pm.to_dict('records'),
         wood_util_pn=int(lights.loc[lights.POLEMAT == 'Wood', 'UTIL_PN'].notna().sum()),
         wood_util_pn_distinct=int(lights.loc[lights.POLEMAT == 'Wood', 'UTIL_PN'].nunique()))
+    # POLE LINES traced from the lit wood poles (the only located utility poles that are public). Two streetlight
+    # records have no geometry but carry LATITUDE/LONGITUDE, so points are built from those attributes. A minimum
+    # spanning tree over each pole's 7 nearest neighbors, keeping links no longer than a plausible span, traces the
+    # pole lines; unlit poles break the chain, so the traced length is a FLOOR on overhead pole-line miles.
+    import numpy as np
+    from scipy.spatial import cKDTree
+    from scipy.sparse import coo_matrix
+    from scipy.sparse.csgraph import minimum_spanning_tree
+    wl = lights[lights.POLEMAT == 'Wood']
+    wl = gpd.GeoDataFrame(wl.drop(columns='geometry'), geometry=gpd.points_from_xy(wl.LONGITUDE, wl.LATITUDE),
+                          crs='EPSG:4326').to_crs(UTM)
+    xy = np.c_[wl.geometry.x, wl.geometry.y]
+    dist, idx = cKDTree(xy).query(xy, k=8)
+    g = coo_matrix((dist[:, 1:].ravel() / 0.3048, (np.repeat(np.arange(len(xy)), 7), idx[:, 1:].ravel())),
+                   shape=(len(xy), len(xy))).tocsr()
+    t = minimum_spanning_tree(g).tocoo()
+    traced = {cap: dict(links=int((t.data <= cap).sum()), miles=round(float(t.data[t.data <= cap].sum()) / 5280, 1),
+                        mean_span_ft=round(float(t.data[t.data <= cap].mean()), 0)) for cap in (150, 200, 250, 300, 400)}
+    from shapely.geometry import LineString
+    keep = t.data <= 250
+    lines = gpd.GeoDataFrame(dict(span_ft=np.round(t.data[keep], 0)),
+                             geometry=[LineString([xy[a], xy[b]]) for a, b in zip(t.row[keep], t.col[keep])], crs=UTM)
+    write_geojson('wood_pole_lines_traced.geojson', lines, 'pole-to-pole link (line)',
+                  'Links between neighboring lit wood utility poles (spans up to 250 ft): the traced overhead pole '
+                  'lines. A floor: poles without a streetlight are not in the public data.')
+    nn = dist[:, 1] / 0.3048
+    FACTS['poles'] = dict(wood=len(wl), nn_median_ft=round(float(np.median(nn))), nn_p25=round(float(np.percentile(nn, 25))),
+                          nn_p75=round(float(np.percentile(nn, 75))), traced=traced)
     laterals = gpd.read_file(os.path.join(I, 'berkeley_sanitary_sewer_laterals_2026-08-30.geojson'))
     manholes = gpd.read_file(os.path.join(I, 'berkeley_sanitary_sewer_manholes_2026-08-30.geojson'))
     FACTS['infra'].update(laterals=len(laterals), laterals_mi=round(laterals.to_crs(UTM).length.sum() / M_PER_MI, 1),

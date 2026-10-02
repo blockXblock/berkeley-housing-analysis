@@ -120,6 +120,8 @@
         'Under Construction',
         'Completed',
         'Withdrawn',
+        'Denied',
+        'Expired',
         'Stalled'
     ];
 
@@ -134,7 +136,9 @@
         'Under Construction': 7,
         'Completed': 8,
         'Withdrawn': 9,
-        'Stalled': 10
+        'Denied': 10,
+        'Expired': 11,
+        'Stalled': 12
     };
 
     const STAGE_COLORS = {
@@ -147,6 +151,8 @@
         'Under Construction': '#f97316',   // orange
         'Completed': '#22c55e',            // green
         'Withdrawn': '#ef4444',            // red
+        'Denied': '#b91c1c',               // red-700 (v4: the City denied the application)
+        'Expired': '#d1d5db',              // gray-300 (v4: the record voided or expired)
         'Stalled': '#6b7280'               // gray
     };
 
@@ -930,8 +936,10 @@
 
     // Deep link: explorer.html?project=<id> opens the Projects tab with that row expanded.
     function openProjectDeepLink() {
-        const id = new URLSearchParams(location.search).get('project');
+        let id = new URLSearchParams(location.search).get('project');
         if (!id) return false;
+        // Links made before the v4 cutover carry v2's numeric project id; DATA.v2_ids maps it to the v4 project_key.
+        if (DATA.v2_ids && DATA.v2_ids[id]) id = DATA.v2_ids[id];
         const row = document.querySelector(`#projectTableBody tr[data-project-id="${CSS.escape(id)}"]`);
         if (!row) { console.warn('⚠️ deep link: no project with id', id); return false; }
         showTab('projects');

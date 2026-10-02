@@ -95,12 +95,12 @@ v2 holds **732 `completes` permits, 2018-01-05 → 2025-12-11**. For 2025:
 | with latitude/longitude | **96 (98%)** |
 | with a display address | 98 (100%) |
 | with a unit count | 98 (100%) |
-| with a storey count | **11 (11%)** |
+| with a story count | **11 (11%)** |
 
 Everything a tour needs except height. The existing machinery (`kml/tours/`,
 `build_tour_package.py`, `docs/tours.json`) already renders per-address tours. **The two ungeocoded
-projects and the storey gap are the only work**, and heights can come from the BP-description +
-assessor method at 3.5 m/storey rather than blocking on plan sets.
+projects and the story gap are the only work**, and heights can come from the BP-description +
+assessor method at 3.5 m/story rather than blocking on plan sets.
 
 ## 4. Can we tour every CO in 2026? — **No, and the fix is an ingest, not a scrape**
 

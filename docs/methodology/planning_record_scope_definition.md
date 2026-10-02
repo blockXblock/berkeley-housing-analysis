@@ -15,7 +15,7 @@ misses, each a real project:
 
 | record | what it said | why the pattern missed it |
 |---|---|---|
-| `ZP2022-0046` | 3000 Shattuck, 10 storeys, **166 dwellings** | `\bdwelling\b` cannot match the plural |
+| `ZP2022-0046` | 3000 Shattuck, 10 stories, **166 dwellings** | `\bdwelling\b` cannot match the plural |
 | (several) | **townhouses**; "a **two-unit** building" | the noun and the spelled-out count were absent |
 | `PLN2026-0185` | "the Ashby BART **TOD development** proposal" | no word in it was a housing word |
 

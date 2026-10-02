@@ -252,7 +252,7 @@ All four are the same failure: a key or a rule with no addressable referent gets
 
 ## ⚠ THE QUEUE ITSELF HAS A FALSE-NEGATIVE BUG (found 2026-09-26, late in the harvest)
 
-**`ZP2022-0046` — 3000 Shattuck, 10 storeys, 166 dwellings, 17 very-low-income, density bonus — was
+**`ZP2022-0046` — 3000 Shattuck, 10 stories, 166 dwellings, 17 very-low-income, density bonus — was
 never fetched, because the `HOUSING` filter does not match its description.**
 
     "Demolish the existing gas station, and construct a 10-story (114 feet) mixed-use building

@@ -129,36 +129,24 @@
                 </div>
             </div>
 
-            <!-- RHNA Progress bar RESTORED 2026-07-09. It was HELD 2026-06-16 because BP coverage
-                 was ~28 tracked projects; the restore condition (full city BP stream) is met: the
-                 v4 permit-level count covers the complete CPRA feed incl. the ADU/infill tail
-                 (424 permits credited), and the 9k-triage (6a4235b) found zero city-credited
-                 housing permits missing from the feed. Derivation + provenance:
-                 scratch/2026-07-09/rhna_bar_derivation.py (fold into export_explorer_data_v2.py). -->
-            <div class="bg-white rounded-xl shadow p-6 mb-8">
-                <h2 class="text-xl font-semibold mb-1">RHNA Progress (6th cycle, 2023&ndash;2031)</h2>
-                <p class="text-sm text-gray-600 mb-4">Target: <strong><span id="rhnaTotal">8,934</span> units</strong>. RHNA credit is earned at
-                    <strong>building-permit issuance</strong>. Our independent count — first building permit issued on/after
-                    June 30, 2022, across Berkeley's <em>entire</em> permit stream (every ADU and infill permit included):</p>
-                <div class="relative w-full bg-gray-200 rounded-full h-7 mb-1">
-                    <div class="bg-emerald-500 h-7 rounded-l-full flex items-center justify-end pr-2"
-                         style="width:21.9%"><span class="text-white text-sm font-bold">1,959 units &middot; 21.9%</span></div>
-                    <div class="absolute top-0 h-7 border-l-2 border-dashed border-blue-700" style="left:18%"
-                         title="HCD's own dashboard credit: 1,608 units (18.0%) — lags the CY2025 filing"></div>
+            <!-- RHNA progress, 6th cycle. ONE panel, GENERATED (John, 2026-10-01): renderRhnaProgress() fills it from
+                 DATA.rhna_progress = the APR generator's own Table B over v4, so the site and the APR cannot disagree.
+                 It replaces the hand-typed panel of 2026-07-09 (1,959, tiers from HCD's dashboard); that panel's
+                 comparison marker is kept: HCD's own dashboard figure, the VERIFICATION TARGET, never our source. -->
+            <div id="rhna-progress-panel" class="bg-white rounded-xl shadow p-6 mb-8 border-2 border-indigo-200" style="display:none">
+                <h2 class="text-xl font-semibold mb-1">RHNA Progress, 6th Cycle (2023–2031)</h2>
+                <p class="text-xs text-gray-500 mb-4">Units credited when the <strong>first building permit</strong> is issued (on or after June 30, 2022), through <span id="rhna-through-year">--</span>. Same figures as our APR Table B.</p>
+                <div class="flex items-baseline gap-3 mb-2">
+                    <div class="text-4xl font-bold text-indigo-700"><span id="rhna-total">--</span></div>
+                    <div class="text-gray-600">of <span id="rhna-goal">--</span> units (<span id="rhna-pct">--</span>%)</div>
                 </div>
-                <p class="text-xs text-gray-500 mb-3">Dashed line: the state's own dashboard credits Berkeley
-                    <strong>1,608 units (18.0%)</strong> — it lags the CY2025 filing. Our count is a floor: 2026 issuances
-                    arrive with the next records release. By year (units first-permitted): 2022&nbsp;(from&nbsp;6/30)&nbsp;340 &middot;
-                    2023&nbsp;533 &middot; 2024&nbsp;595 &middot; 2025&nbsp;489 &middot; 2026&nbsp;2 (feed&nbsp;lag).</p>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-2">
-                    <div class="bg-purple-50 rounded p-2 text-center"><div class="text-sm font-bold text-purple-700">209 / <span data-rhna="very_low">--</span></div><div class="text-xs text-gray-500">Very-low income &middot; <span data-rhna-pct="very_low" data-rhna-num="209">--</span>%</div></div>
-                    <div class="bg-purple-50 rounded p-2 text-center"><div class="text-sm font-bold text-purple-700">213 / <span data-rhna="low">--</span></div><div class="text-xs text-gray-500">Low income &middot; <span data-rhna-pct="low" data-rhna-num="213">--</span>%</div></div>
-                    <div class="bg-blue-50 rounded p-2 text-center"><div class="text-sm font-bold text-blue-700">105 / <span data-rhna="moderate">--</span></div><div class="text-xs text-gray-500">Moderate &middot; <span data-rhna-pct="moderate" data-rhna-num="105">--</span>%</div></div>
-                    <div class="bg-gray-50 rounded p-2 text-center"><div class="text-sm font-bold text-gray-700">1,081 / <span data-rhna="above_moderate">--</span></div><div class="text-xs text-gray-500">Above-moderate &middot; <span data-rhna-pct="above_moderate" data-rhna-num="1081">--</span>%</div></div>
-                </div>
-                <p class="text-xs text-gray-500">Income-tier split is <strong>HCD's own accounting</strong> (state RHNA dashboard) — the
-                    public permit stream carries no affordability fields, so we cannot tier it independently. UC projects
-                    excluded (counted in beds, exempt from RHNA). As of 2026-07-09.</p>
+                <div class="relative w-full bg-gray-200 rounded-full h-4 mb-1"><div id="rhna-bar" class="bg-indigo-600 h-4 rounded-full" style="width:0%"></div>
+                    <div class="absolute top-0 h-4 border-l-2 border-dashed border-blue-900" style="left:18%"
+                         title="HCD's own dashboard credit: 1,608 units (18.0%), as of 2026-07-09"></div></div>
+                <p class="text-xs text-gray-500 mb-4">Dashed line: the state's own RHNA dashboard credits Berkeley <strong>1,608 units (18.0%)</strong> (as of July 9, 2026). It is the comparison, not our source.</p>
+                <div id="rhna-tiers" class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3"></div>
+                <p class="text-xs text-gray-500" id="rhna-to-date"></p>
+                <p class="text-xs text-gray-500 mt-2"><strong>Basis:</strong> <span id="rhna-basis"></span></p>
             </div>
 
             <!-- Actual Unit Completions by year -->
@@ -200,21 +188,6 @@
                     </div>
                 </div>
                 <p class="text-xs text-gray-500 mt-3">Assessed value shown for <strong><span id="stat-assessed-coverage">--</span>% of completed projects</strong> (<span id="stat-assessed-count">--</span> of them) — rising as the parcel crosswalk completes. The rest read "pending" (re-platted parcel or reassessment lag).</p>
-            </div>
-
-            <!-- RHNA progress, 6th cycle — restored 2026-10-01 (held 2026-06-16 while building-permit coverage was tracked
-                 projects only). Filled by renderRhnaProgress() from DATA.rhna_progress = the APR generator's own Table B. -->
-            <div id="rhna-progress-panel" class="bg-white rounded-xl shadow p-6 mb-8 border-2 border-indigo-200" style="display:none">
-                <h2 class="text-xl font-semibold mb-1">RHNA Progress, 6th Cycle (2023–2031)</h2>
-                <p class="text-xs text-gray-500 mb-4">Units credited when the <strong>first building permit</strong> is issued (on or after June 30, 2022), through <span id="rhna-through-year">--</span>. Same figures as our APR Table B.</p>
-                <div class="flex items-baseline gap-3 mb-2">
-                    <div class="text-4xl font-bold text-indigo-700"><span id="rhna-total">--</span></div>
-                    <div class="text-gray-600">of <span id="rhna-goal">--</span> units (<span id="rhna-pct">--</span>%)</div>
-                </div>
-                <div class="w-full bg-gray-200 rounded-full h-4 mb-4"><div id="rhna-bar" class="bg-indigo-600 h-4 rounded-full" style="width:0%"></div></div>
-                <div id="rhna-tiers" class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3"></div>
-                <p class="text-xs text-gray-500" id="rhna-to-date"></p>
-                <p class="text-xs text-gray-500 mt-2"><strong>Basis:</strong> <span id="rhna-basis"></span></p>
             </div>
 
             <!-- Building Permits Issued — Among Tracked Projects (coverage-limited; relabeled 2026-06-16 — replaced the old mislabeled header and a false citywide-coverage note) -->

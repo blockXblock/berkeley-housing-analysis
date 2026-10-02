@@ -64,7 +64,7 @@ College Avenue is **1.5% of the obligation** and the whole three-corridor progra
 **Neither campaign has been using these numbers.**
 
 - Save Berkeley Shops' March 2026 appeal describes *"8–12 story residential towers"*, later
-  *"14 stories"* and *"a 1,400% height increase"*. The staff recommendation is five storeys
+  *"14 stories"* and *"a 1,400% height increase"*. The staff recommendation is five stories
   on 1.5 acres yielding 131 units.
 - WECAN's College Avenue page names **three sites** — the Webster post office lot, the
   7-Eleven strip mall at Russell, and the Nabolom/Five Little Monkeys corner. That is

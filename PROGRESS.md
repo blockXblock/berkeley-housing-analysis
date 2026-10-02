@@ -598,7 +598,13 @@ dashboard) and the generated one I added (`8511d25`, dev; 2,134 through 2025 fro
 panel keeping the July marker "state dashboard credits 1,608 (18.0%)" as the comparison. Then promote the v4 data,
 switch deploy_gate + site_numbers to the v4 export, sequester export_explorer_data_v2.py.
 
-**NEXT:** John's RHNA-panel decision -> promote v4 Explorer data -> archive v2 -> next swap (views with
+**EXPLORER ON v4 (2026-10-01, John: "keep the generated panel with the 1,608 marker; promote"):** served
+docs/explorer_data.js = export_explorer_data_v4.py (`867662f`, site commit after it); one generated RHNA panel (2,134
+through 2025) with the July marker "state dashboard credits 1,608 (18.0%)"; deploy_gate all checks passed; every tab
+renders with no errors. export_explorer_data_v2.py sequestered. **Every publisher now reads v4** (APR, Datasette,
+Explorer). On dev -- the site changes deploy when John pushes to main; Datasette when John runs flyctl deploy.
+
+**NEXT:** archive v2 (read-only, like v1: CLAUDE.md, the remaining v2 readers -- tours/KML, analysis notebooks) -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

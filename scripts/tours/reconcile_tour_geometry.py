@@ -20,6 +20,8 @@ coordinate the pipeline inherited. So position and height are reconciled SEPARAT
 
   python3 scripts/tours/reconcile_tour_geometry.py --tour panoramic-kennedy-legacy
   python3 scripts/tours/reconcile_tour_geometry.py --tour panoramic-kennedy-legacy --adopt-heights
+
+2026-10-02: gen_svg_labels.rows() now reads v4 through v4_source; "v2" above is the history.
 """
 import argparse, math, os, re, sys
 
@@ -43,8 +45,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--tour", required=True, help="tour stem in kml/tours/ carrying its own polygons")
     ap.add_argument("--adopt-heights", action="store_true",
-                    help="rewrite the tour's polygon altitudes to the value v2 implies, for every "
-                         "building v2 knows. Position is NEVER touched -- see the module docstring.")
+                    help="rewrite the tour's polygon altitudes to the value v4 implies, for every "
+                         "building v4 knows. Position is NEVER touched -- see the module docstring.")
     a = ap.parse_args()
 
     path = f"kml/tours/{a.tour}.kml"
@@ -52,7 +54,7 @@ def main():
     v2 = {G.normkey(r["address_display"]): r for r in G.rows(False)}
 
     print(f"  {a.tour}: {len(tour)} footprints\n")
-    print(f"  {'building':26} {'tour':>7} {'canon':>7} {'v2':>7}  {'pos Δ':>7}  verdict")
+    print(f"  {'building':26} {'tour':>7} {'canon':>7} {'v4':>7}  {'pos Δ':>7}  verdict")
     print(f"  {'-'*26} {'-'*7} {'-'*7} {'-'*7}  {'-'*7}  {'-'*26}")
     fixes, only_here, agree = [], 0, 0
     for k in sorted(tour):
@@ -67,16 +69,16 @@ def main():
         d = (math.hypot((c[0]-t[0])*math.cos(math.radians(t[1]))*111320, (c[1]-t[1])*111320)
              if c else None)
         if vh is None:
-            verdict = "v2 has no height"
+            verdict = "v4 has no height"
         elif abs(t[2]-vh) < 0.5:
-            verdict = "tour matches v2"; agree += 1
+            verdict = "tour matches v4"; agree += 1
         else:
-            verdict = f"tour off by {t[2]-vh:+.1f} m — v2 says {vh:.1f}"
+            verdict = f"tour off by {t[2]-vh:+.1f} m — v4 says {vh:.1f}"
             fixes.append((k, t[2], vh))
         print(f"  {k[:26]:26} {t[2]:6.1f}m {(f'{c[2]:6.1f}m' if c else '      -')} "
               f"{(f'{vh:6.1f}m' if vh else '      -')}  {(f'{d:6.0f}m' if d is not None else '     -')}  {verdict}")
 
-    print(f"\n  {agree} match v2 · {len(fixes)} disagree · {only_here} known only to this tour")
+    print(f"\n  {agree} match v4 · {len(fixes)} disagree · {only_here} known only to this tour")
     if only_here:
         print(f"  (those {only_here} have no independent check — the tour is their only source)")
 
@@ -94,9 +96,9 @@ def main():
                     n += 1
             out.append(chunk)
         open(path, "w").write("".join(out))
-        print(f"\n  ADOPTED: {n} footprint(s) re-cut to the height v2 implies. Positions untouched.")
+        print(f"\n  ADOPTED: {n} footprint(s) re-cut to the height v4 implies. Positions untouched.")
     elif fixes:
-        print(f"\n  re-run with --adopt-heights to re-cut those {len(fixes)} to v2's height")
+        print(f"\n  re-run with --adopt-heights to re-cut those {len(fixes)} to v4's height")
 
 
 if __name__ == "__main__":

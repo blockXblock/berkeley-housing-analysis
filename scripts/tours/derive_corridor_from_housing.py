@@ -13,9 +13,12 @@ the buildings, and every orbit radius derives from the path's own closest approa
 hand-drawn Path in Google Earth still beats it -- Shattuck's needed no correction at all -- so
 treat this as a usable default, not a finished centreline.
 
-Output: kml/tours/control_points/<Corridor> Control Points DERIVED.kml
+Output: kml/tours/control_points/<Corridor> Control Points DERIVED.kml (or --outdir)
+Housing positions from v4 (v4_source: every v4 project's label point) since 2026-10-02.
 """
-import math, os, re, sqlite3, sys
+import argparse, math, os, re, sys
+
+from scripts.tours import v4_source as V
 
 OUT_DIR = "kml/tours/control_points"
 M = 111320.0
@@ -28,14 +31,18 @@ CORRIDORS = {
 
 
 def main():
-    os.makedirs(OUT_DIR, exist_ok=True)
-    c = sqlite3.connect("databases/berkeley_housing_v2.db"); c.row_factory = sqlite3.Row
-    only = sys.argv[1:] or list(CORRIDORS)
+    ap = argparse.ArgumentParser()
+    ap.add_argument("corridors", nargs="*")
+    ap.add_argument("--outdir", default=OUT_DIR)
+    a = ap.parse_args()
+    out_dir = a.outdir
+    os.makedirs(out_dir, exist_ok=True)
+    only = a.corridors or list(CORRIDORS)
     for name in only:
         pat, direction, ncp = CORRIDORS[name]
-        pts = [(r["longitude"], r["latitude"]) for r in c.execute(
-            "select longitude, latitude from v_projects_flat where upper(address_display) like ? "
-            "and latitude is not null", (pat,))]
+        word = pat.strip("%")
+        pts = [(r["longitude"], r["latitude"]) for r in V.projects()
+               if word in (r["address_display"] or "").upper() and r["latitude"] is not None]
         if len(pts) < 3:
             print(f"{name}: too few"); continue
         lons = [p[0] for p in pts]; lats = [p[1] for p in pts]
@@ -82,7 +89,7 @@ Earth Pro, or draw a Path instead (Shattuck's hand-drawn path needed no correcti
 </Document>
 </kml>
 """
-        open(f"{OUT_DIR}/{name} Control Points DERIVED.kml", "w").write(kml)
+        open(f"{out_dir}/{name} Control Points DERIVED.kml", "w").write(kml)
         print(f"{name:11} {'E-W' if ew else 'N-S'} · {len(cps)} points from {len(pts)} buildings · {direction}")
 
 

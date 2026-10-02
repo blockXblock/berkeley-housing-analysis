@@ -2,7 +2,7 @@
 """compact_labels.py — fold building labels onto two lines and shrink the type.
 
 Run after any change to geometry.kml's names. Idempotent: a label already folded is left alone,
-so this can be run repeatedly and after sync_status_from_v2.py.
+so this can be run repeatedly and after sync_status_from_v4.py.
 
   python scripts/tours/compact_labels.py --dry-run
   python scripts/tours/compact_labels.py --scale 2.0

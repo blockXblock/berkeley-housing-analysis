@@ -12,7 +12,7 @@ address onto its own line roughly halves the width, which is what actually separ
     2200 Bancroft Way
     1,625 beds · Under Construction
 
-THIS LIVES IN ONE PLACE ON PURPOSE. sync_status_from_v2.py rewrites these labels from the
+THIS LIVES IN ONE PLACE ON PURPOSE. sync_status_from_v4.py rewrites these labels from the
 database and would flatten the fold back to one line if it did its own splitting and joining;
 gen_building_loop groups sites by the address at the head of the name. Both now parse and
 compose through here, so the format cannot drift the way buildings() and the geometry sha did.

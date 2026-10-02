@@ -4,7 +4,7 @@
 Scans tour KMLs, their built packages, and known published videos; records the
 GEOMETRY SHA each video was recorded against so staleness is a query, not archaeology.
 
-Usage: python scripts/tours/build_tours_manifest.py [--write]
+Usage: python scripts/tours/build_tours_manifest.py [--write] [--out PATH]   (default docs/tours.json)
 """
 import json, re, hashlib, sys, subprocess
 from pathlib import Path
@@ -17,6 +17,8 @@ GEOM = ROOT / "kml/geometry/geometry.kml"
 TOURS = ROOT / "kml/tours"
 PKGS = TOURS / "packages"
 OUT = ROOT / "docs/tours.json"
+if "--out" in sys.argv:
+    OUT = Path(sys.argv[sys.argv.index("--out") + 1]).resolve()
 
 CURRENT_SHA = _geometry_sha(str(GEOM))
 
@@ -151,7 +153,7 @@ manifest = dict(
     generated=str(date.today()),
     canonical_geometry=dict(file="kml/geometry/geometry.kml", sha=CURRENT_SHA,
                             buildings=len(re.findall(r"<Polygon>", GEOM.read_text(errors="ignore"))),
-                            pushpins_suppressed=True, labels_source="berkeley_housing_v2.db / v_projects_flat"),
+                            pushpins_suppressed=True, labels_source="berkeley_housing_v4.db / v_projects via scripts/tours/v4_source.py"),
     tours=tours,
     orphan_packages=orphans,
     misfiled_in_tours_dir=misfiled,
@@ -162,4 +164,4 @@ print(json.dumps(dict(tours=len(tours), orphan_packages=len(orphans),
                       published=sum(1 for t in tours if t["video"])), indent=1))
 if "--write" in sys.argv:
     OUT.write_text(json.dumps(manifest, indent=1) + "\n")
-    print(f"wrote {OUT.relative_to(ROOT)}")
+    print(f"wrote {OUT}")

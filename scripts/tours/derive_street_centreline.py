@@ -25,10 +25,12 @@ are smoothed with a rolling median so a single odd parcel cannot pull the line s
 The result is still CANDIDATE geometry -- accurate to a few metres, which is well inside the
 roadway, but it should be eyeballed once in Earth Pro before a final recording.
 
-Output: kml/tours/control_points/<Corridor> Control Points DERIVED.kml
-READ-ONLY on all sources.
+Output: kml/tours/control_points/<Corridor> Control Points DERIVED.kml (or --outdir)
+READ-ONLY on all sources. Housing positions from v4 (v4_source) since 2026-10-02.
 """
-import json, math, os, statistics
+import argparse, json, math, os, statistics
+
+from scripts.tours import v4_source as V
 
 PARCELS = "data/raw/berkeley_taxparcels_2026-08-12.geojson"
 OUT_DIR = "kml/tours/control_points"
@@ -48,13 +50,10 @@ def corridor_spine(pattern, south, north):
     """(lat, lon) samples tracing the street, taken from the housing that fronts it.
     Buildings front the street, so their coordinates ARE the street's path -- which a fixed
     longitude is not, for any diagonal street."""
-    import sqlite3
-    c = sqlite3.connect("databases/berkeley_housing_v2.db")
-    pts = [(r[1], r[0]) for r in c.execute(
-        "select longitude, latitude from v_projects_flat where upper(address_display) like ? "
-        "and latitude is not null and latitude between ? and ? order by latitude",
-        (pattern, south, north))]
-    return pts
+    word = pattern.strip("%")
+    return sorted((r["latitude"], r["longitude"]) for r in V.projects()
+                  if word in (r["address_display"] or "").upper()
+                  and r["latitude"] is not None and south <= r["latitude"] <= north)
 
 
 def lon_at(spine, lat):
@@ -79,7 +78,10 @@ def rings(g):
 
 
 def main():
-    os.makedirs(OUT_DIR, exist_ok=True)
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--outdir", default=OUT_DIR)
+    out_dir = ap.parse_args().outdir
+    os.makedirs(out_dir, exist_ok=True)
     gj = json.load(open(PARCELS))
     feats = []
     for f in gj["features"]:
@@ -155,7 +157,7 @@ Flight order is {direction} — the order of these placemarks IS the flight orde
 </Document>
 </kml>
 """
-        path = f"{OUT_DIR}/{name} Control Points DERIVED.kml"
+        path = f"{out_dir}/{name} Control Points DERIVED.kml"
         open(path, "w").write(kml)
         spread = (max(p[0] for p in pts) - min(p[0] for p in pts)) * 88000
         print(f"{name:12} {len(cps)} points from {len(pts)} slices ({rejected} rejected) · "

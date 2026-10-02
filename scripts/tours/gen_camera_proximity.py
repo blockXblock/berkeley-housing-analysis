@@ -22,9 +22,12 @@ MODEL (a proxy, and honest about it):
   away from it. So this OVER-includes rather than under-includes, which is the safe direction for
   a harvest target list. Treat the ranking as "candidates the camera plausibly sees", not proof.
 
-Output: data/reference/camera_proximity.csv    READ-ONLY on all sources.
+Output: data/reference/camera_proximity.csv (or --out)    READ-ONLY on all sources.
+Data from v4 since 2026-10-02 (v4_source); project_id is now v4's project_key.
 """
-import csv, glob, math, re, sqlite3
+import argparse, csv, glob, math, re
+
+from scripts.tours import v4_source as V
 
 KML_GEOM = "kml/geometry/geometry.kml"
 TOURS = "kml/tours/*.kml"
@@ -80,25 +83,24 @@ def centroids():
 
 
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", default=OUT)
+    a = ap.parse_args()
     wps = waypoints()
     cents = centroids()
     print(f"{len(wps)} camera waypoints across {len(set(w[3] for w in wps))} tours; "
           f"{len(cents)} structure centroids")
 
-    c = sqlite3.connect("databases/berkeley_housing_v2.db"); c.row_factory = sqlite3.Row
-    tab = {r[0] for r in c.execute(
-        "select distinct project_id from documents where (title like '%1.E%' "
-        "or lower(title) like '%tabulation%') and r2_url is not null")}
-    plans = {r[0] for r in c.execute(
-        "select distinct d.project_id from documents d left join vocabulary_document_types v "
-        "on v.id=d.document_type_id where v.code='plan_set' and d.r2_url is not null")}
+    tab = V.tabulation_projects()
+    plans = V.projects_with_document("plan_set")
+    idx = V.by_address()
 
-    rows = []
-    for r in c.execute("select project_id,address_display,total_units,status_label from v_projects_flat"):
-        key = (r["address_display"] or "").upper().strip()
-        if key not in cents:
+    rows, seen = [], set()
+    for key, cen in cents.items():
+        r = V.lookup(key, idx)          # one v4 project per geometry address, or none
+        if r is None or r["project_key"] in seen:
             continue
-        cen = cents[key]
+        seen.add(r["project_key"])
         near, dwell, tours = 1e9, 0.0, set()
         for lon, lat, dur, tname, kind in wps:
             d = haversine_m(cen, (lon, lat))
@@ -106,23 +108,23 @@ def main():
             if d <= NEAR_M:
                 dwell += dur
                 tours.add(tname)
-        rows.append(dict(project_id=r["project_id"], address=r["address_display"],
-                         units=r["total_units"], status=r["status_label"],
+        rows.append(dict(project_id=r["project_key"], address=r["address_display"],
+                         units=(r["beds"] if r["uc"] else r["units"]), status=r["stage"],
                          nearest_m=round(near), dwell_s=round(dwell, 1), n_tours=len(tours),
-                         has_tabulation=int(r["project_id"] in tab),
-                         has_plan_set=int(r["project_id"] in plans)))
+                         has_tabulation=int(r["project_key"] in tab),
+                         has_plan_set=int(r["project_key"] in plans)))
     rows.sort(key=lambda x: (-x["dwell_s"], x["nearest_m"]))
     for i, x in enumerate(rows, 1):
         x["camera_rank"] = i
         # the harvest target: the camera sees it, and we do NOT yet hold a stated footprint
         x["harvest_target"] = int(x["dwell_s"] > 0 and not x["has_tabulation"])
-    with open(OUT, "w", newline="") as fh:
+    with open(a.out, "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=["camera_rank", "project_id", "address", "units", "status",
                                            "nearest_m", "dwell_s", "n_tours", "has_tabulation",
                                            "has_plan_set", "harvest_target"])
         w.writeheader(); [w.writerow(x) for x in rows]
     seen = [x for x in rows if x["dwell_s"] > 0]
-    print(f"wrote {OUT}: {len(rows)} structures")
+    print(f"wrote {a.out}: {len(rows)} structures")
     print(f"  within {NEAR_M:.0f} m of a waypoint : {len(seen)}")
     print(f"  harvest targets (seen, no 1.E)   : {sum(x['harvest_target'] for x in rows)}")
     print(f"\n  top 20 by camera dwell:")

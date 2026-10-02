@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/tours/relabel_geometry_from_v2.py.
+# WHY: relabeled geometry from v2 and flattened the two-line labels; superseded by scripts/tours/sync_status_from_v4.py.
+raise SystemExit("SEQUESTERED 2026-10-02 -- relabel_geometry_from_v2.py read v2; see header")
+# ================================================================================
 """Regenerate building labels in docs/geometry.kml from the CANONICAL v2 database.
 
 Supersedes the label half of add_labels_to_kml.py, which read the FROZEN v1

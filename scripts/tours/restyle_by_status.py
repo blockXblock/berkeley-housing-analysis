@@ -18,20 +18,24 @@ Blue for Under Construction and green for Completed are DELIBERATELY UNCHANGED: 
 site's already-published convention, stated in the "17 Largest" description, so anyone who has
 watched the existing videos has learned them.
 
-STATUS COMES FROM THE PLACEMARK'S OWN LABEL, which was verified against v2. Four buildings carry
-no status in their label and are resolved explicitly below.
+STATUS COMES FROM THE PLACEMARK'S OWN LABEL, which sync_status_from_v4.py keeps equal to the
+Explorer's stage for the building (v4, 2026-10-02). The Explorer has eleven stages and the legend
+ten colors, so v4_source.KML_BUCKET folds each stage into its legend color; a label still carrying
+a legacy v2 word ("In Review", "Permitted") maps to its own color. Four buildings carry no status
+in their label and are resolved explicitly below; a building v4 cannot resolve to one project and
+whose label carries no stage KEEPS the stage its current style records (reported, never guessed).
 
   python scripts/tours/restyle_by_status.py
   python scripts/tours/restyle_by_status.py --dry-run
 """
-import argparse, collections, re, sqlite3
+import argparse, collections, re
+
+from scripts.tours import v4_source as V
+from scripts.tours.label_format import parts as label_parts
 
 GEOM = "kml/geometry/geometry.kml"
-DB = "databases/berkeley_housing_v2.db"
 ICON = ('<Icon><href>transparent-1x1.png</href></Icon>'
         '<hotSpot x="0.5" y="0.5" xunits="fraction" yunits="fraction"/>')
-
-STATUS_BY_ADDR = {}
 
 PALETTE = [                      # order is the pipeline order, and the legend's order
     ("Pre-Application",    "9e9e9e"),
@@ -61,8 +65,9 @@ def slug(s, agency=None):
     return out + ("__" + re.sub(r"[^A-Za-z0-9]+", "_", agency).strip("_") if agency else "")
 
 
-def agency_exempt(db=DB):
-    """{ADDRESS: 'UC Project'|'BART Project'} from v2's OWN CLASSIFICATION FLAGS.
+def agency_exempt(index):
+    """{akey: 'UC Project'|'BART Project'} from v4's OWN CLASSIFICATION RULINGS
+    (uc_student_housing / bart_joint_development), via v4_source.
 
     NOT from the existing styleUrl. An earlier version read '#style_UC_Project' out of the
     placemark, which worked exactly once: after the first restyle those placemarks carry
@@ -72,18 +77,18 @@ def agency_exempt(db=DB):
     flag is both correct (CLAUDE.md: filter on the flag, never a hardcoded id or a style name)
     and idempotent.
     """
-    out = {}
-    for addr, code in sqlite3.connect(db).execute(
-            "select f.address_display, t.code from project_classifications pc "
-            "join vocabulary_classification_types t on t.id=pc.classification_type_id "
-            "join v_projects_flat f on f.project_id=pc.project_id "
-            "where t.code in ('uc_project','bart_project')"):
-        if addr:
-            out[addr.upper().strip()] = "UC Project" if code == "uc_project" else "BART Project"
-    return out
+    return {k: r["agency"] for k, r in index[0].items() if r["agency"]}
 
 
-def classify(name, pm, exempt):
+def style_stage(pm):
+    """The stage the placemark's CURRENT style records (style_status_<Stage>[__<Agency>]), or None."""
+    m = re.search(r"<styleUrl>#style_status_([^<]+?)(?:__[^<]+?)?(?:_nolabel)?</styleUrl>", pm)
+    if not m:
+        return None
+    return {slug(s)[len("style_status_"):]: s for s in COLOUR}.get(m.group(1))
+
+
+def classify(name, pm, exempt, index, kept):
     """-> (status, agency or None). AGENCY IS AN OUTLINE, NOT A FILL (John, 2026-08-28).
 
     Colouring UC and BART buildings purple/magenta outright cost their status entirely: 27
@@ -91,7 +96,7 @@ def classify(name, pm, exempt):
     and 2556 Haste at 556 units under construction -- all reading as "agency" and nothing else.
     Fill now carries the stage and the outline carries the agency, so both are legible at once.
     Their status is not in their label (a BART placemark is named "North Berkeley BART: Bridge 1
-    (8 st)"), so it comes from v2 by address, same as everything else.
+    (8 st)"), so it comes from v4 by address, same as everything else.
     """
     agency = None
     if "BART" in name:
@@ -100,23 +105,27 @@ def classify(name, pm, exempt):
     # 2400 Bowditch South and 2200 Bancroft South carry plain-text descriptions with no
     # <b>ADDRESS</b>, so a description-only lookup drops two UC wings onto their label's status.
     ad = re.search(r"<b>([^<]*)</b><br/>", pm)
-    cands = ([ad.group(1)] if ad else []) + [name.split("·")[0]]
+    cands = ([ad.group(1)] if ad else []) + [label_parts(name)[0] if label_parts(name) else ""]
     if agency is None:
         for cand in cands:
-            if cand.upper().strip() in exempt:
-                agency = exempt[cand.upper().strip()]
+            if V.akey(cand) in exempt:
+                agency = exempt[V.akey(cand)]
                 break
-    # the stage itself
-    parts = [p.strip() for p in name.split("·")]
-    if len(parts) > 1 and parts[-1] in COLOUR:
-        return parts[-1], agency
+    # the stage itself, from the label, folded to its legend color
+    parts = label_parts(name)
+    if len(parts) > 1 and V.bucket(parts[-1]) in COLOUR:
+        return V.bucket(parts[-1]), agency
     for cand in cands:                      # agency buildings carry no stage in their label
-        st = STATUS_BY_ADDR.get(cand.upper().strip())
-        if st in COLOUR:
-            return st, agency
+        r = V.lookup(cand, index)
+        if r and r["kml_status"] in COLOUR:
+            return r["kml_status"], agency
     if name in EXPLICIT:
         e = EXPLICIT[name]
         return (e, agency) if e in COLOUR else (None, agency or e)
+    st = style_stage(pm)                    # v4 cannot resolve it: keep what the map says, and say so
+    if st and not st.endswith("Project"):
+        kept.append(name)
+        return st, agency
     return (None, agency)
 
 
@@ -127,7 +136,7 @@ def kml_colour(rgb, alpha):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--file", default=GEOM)
-    ap.add_argument("--db", default=DB)
+    ap.add_argument("--out", help="write here instead of over --file")
     ap.add_argument("--label-scale", type=float, default=3.0)
     ap.add_argument("--fill-alpha", type=int, default=128)
     ap.add_argument("--dry-run", action="store_true")
@@ -135,25 +144,21 @@ def main():
     g = open(a.file, encoding="utf-8", errors="replace").read()
 
     # classify from the POLYGON twins, then apply to both twins by name
-    exempt = agency_exempt(a.db)
-    seen = collections.Counter()
-    for addr, st in sqlite3.connect(a.db).execute(
-            "select address_display, status_label from v_projects_flat where address_display is not null"):
-        seen[addr.upper().strip()] += 1
-        STATUS_BY_ADDR[addr.upper().strip()] = st
-    for k, n in seen.items():
-        if n > 1:
-            STATUS_BY_ADDR.pop(k, None)     # ambiguous address, do not guess
-    status_of, unknown = {}, []
+    index = V.by_address()
+    exempt = agency_exempt(index)
+    status_of, unknown, kept = {}, [], []
     for pm in re.findall(r"<Placemark>.*?</Placemark>", g, re.S):
         nm = re.search(r"<name>([^<]*)</name>", pm)
         if not nm or "<Polygon>" not in pm:
             continue
-        st, agency = classify(nm.group(1), pm, exempt)
+        st, agency = classify(nm.group(1), pm, exempt, index, kept)
         if st is None and agency is None:
             unknown.append(nm.group(1))
         else:
             status_of.setdefault(nm.group(1), (st, agency))
+    if kept:
+        print(f"  {len(kept)} building(s) v4 cannot resolve kept the stage their current style records: "
+              + "; ".join(k.replace(chr(10), ' · ') for k in kept))
     if unknown:
         raise SystemExit(f"REFUSING: {len(unknown)} building(s) have no resolvable status: {unknown[:5]}")
 
@@ -205,8 +210,9 @@ def main():
     dangling = sorted({u for u in re.findall(r"<styleUrl>#([^<]+)</styleUrl>", g) if u not in defined})
     if dangling:
         raise SystemExit(f"REFUSING TO WRITE — dangling styleUrl(s): {dangling[:5]}")
-    open(a.file, "w", encoding="utf-8").write(g)
-    print(f"\nrestyled {n[0]} polygon and {n[1]} label placemarks")
+    open(a.out or a.file, "w", encoding="utf-8").write(g)
+    print(f"\n-> {a.out or a.file}")
+    print(f"restyled {n[0]} polygon and {n[1]} label placemarks")
 
 
 if __name__ == "__main__":

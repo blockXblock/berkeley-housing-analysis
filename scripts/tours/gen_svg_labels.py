@@ -16,15 +16,19 @@ NO IMAGE LIBRARY IS REQUIRED. SVG is XML we write directly, and macOS rasterises
 qlmanage, which preserves alpha. Nothing is installed. The canvas is SQUARE because qlmanage
 emits a square thumbnail -- authoring square means no cropping step and no white edges.
 
-DATES ARE PRINTED TO THEIR RECORDED PRECISION. v2 marks 55% of filed_dates
-event_date_precision='year' and renders them 1 January; a label saying "filed 1 Jan 2024" would
+DATES ARE PRINTED TO THEIR RECORDED PRECISION. v2 marked 55% of filed_dates
+event_date_precision='year' and rendered them 1 January; a label saying "filed 1 Jan 2024" would
 be inventing a day the city never recorded, so a year-precision date prints as the year alone.
+
+DATA FROM v4 (2026-10-02). rows() reads the canonical v4 database through v4_source: the stage is
+the Explorer's own, owners are named only when they are organizations (the Explorer's publishing
+rule), and an address v4 holds several projects at is not labeled rather than labeled with a guess.
 
   python scripts/tours/gen_svg_labels.py --uc --outdir scratch/2026-08-31/svg-labels
 """
-import argparse, hashlib, os, pathlib, re, shutil, sqlite3, subprocess, sys, tempfile
+import argparse, hashlib, os, pathlib, re, shutil, subprocess, sys, tempfile
 
-DB = "databases/berkeley_housing_v2.db"
+from scripts.tours import v4_source as V
 # LARGER AGAIN (John, 2026-09-04: "the labels are still hard to read"). Everything scales
 # together -- canvas, box and type -- so the proportions are unchanged and only the rendered
 # pixel count grows. IconStyle scale stays put, and Earth draws the icon from its native pixel
@@ -45,6 +49,7 @@ SCALE = 1.60
 PANEL_OPACITY = 1.0
 W = int(900 * SCALE)        # square canvas; the box is centred in it
 BOX_H = int(300 * SCALE)
+# keyed by the KML legend bucket (v4_source.bucket folds the Explorer's stage into it)
 STATUS_RGB = {"Pre-Application": "9e9e9e", "In Review": "ffd400", "Entitled": "ff8000",
               "Permitted": "00e5ff", "Under Construction": "2962ff", "Completed": "00c853",
               "Stalled": "ff0000", "Withdrawn": "b0003a"}
@@ -55,14 +60,17 @@ def esc(t):
 
 
 def rows(uc_only):
-    c = sqlite3.connect(DB); c.row_factory = sqlite3.Row
-    q = """SELECT f.*, (SELECT 1 FROM project_classifications pc
-             JOIN vocabulary_classification_types v ON v.id=pc.classification_type_id
-             WHERE pc.project_id=f.project_id AND v.code='uc_project') uc
-           FROM v_projects_flat f JOIN projects p ON p.id=f.project_id
-           WHERE p.merged_into_id IS NULL"""
-    out = [r for r in c.execute(q)]
-    return [r for r in out if r["uc"]] if uc_only else out
+    """One dict per ADDRESS v4 resolves to exactly one project (v4_source.by_address), carrying the
+    field names lines_for() has always read. An ambiguous address yields no row -- two projects
+    rendering to one <slug>.png would let the last one silently win."""
+    out = []
+    for r in V.address_rows():
+        if uc_only and not r["uc"]:
+            continue
+        out.append({**r, "project_id": r["project_key"], "status_label": r["stage"],
+                    "total_units": (r["beds"] if r["uc"] else r["units"]) or None,
+                    "owner_current": r["owner"]})
+    return out
 
 
 def lines_for(r):
@@ -108,7 +116,7 @@ def lines_for(r):
 
 def svg(r):
     l1, l2, l3, l4, l5, l6 = lines_for(r)
-    accent = STATUS_RGB.get(str(r["status_label"]), "ffffff")
+    accent = STATUS_RGB.get(V.bucket(str(r["status_label"])), "ffffff")
     # SIZE THE BOX TO ITS CONTENT. A fixed height either clips a project with a full team or
     # leaves a slab of empty panel under one with none.
     # MEASURE, THEN SIZE. A formula guessing the height left 8 px under the last baseline and
@@ -173,7 +181,7 @@ def svg(r):
 
 
 def normkey(a):
-    """A slug-insensitive address key, for matching GEOMETRY names to v2 addresses.
+    """A slug-insensitive address key, for matching GEOMETRY names to database addresses.
 
     Lives here, not in svg_label_tour, because BOTH need it and a second copy is how the two
     drift apart. The tour matches rendered PNGs by this key; this module matches --address

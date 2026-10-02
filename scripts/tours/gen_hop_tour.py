@@ -17,11 +17,11 @@ screen, tucked under the roofline, moving every leg.
 
   python scripts/tours/gen_hop_tour.py --min-units 200 --exclude-agency --out kml/tours/private-200.kml
 """
-import argparse, datetime, math, os, re, sqlite3, sys
+import argparse, datetime, math, os, re, sys
 from scripts.tours.gen_building_loop import buildings as site_buildings
+from scripts.tours import v4_source as V
 
 M = 111320.0
-DB = "databases/berkeley_housing_v2.db"
 
 
 def slugify(a):
@@ -49,14 +49,11 @@ def cam(lon, lat, alt, hdg, tilt, dur, mode="smooth"):
 
 
 def picks(a):
-    c = sqlite3.connect(DB); c.row_factory = sqlite3.Row
-    q = """SELECT f.address_display a, f.total_units u,
-             (SELECT 1 FROM project_classifications pc JOIN vocabulary_classification_types v
-                ON v.id = pc.classification_type_id WHERE pc.project_id = f.project_id
-                AND v.code IN ('uc_project','bart_project')) agency
-           FROM v_projects_flat f JOIN projects p ON p.id = f.project_id
-           WHERE p.merged_into_id IS NULL AND f.total_units >= ?"""
-    rows = [r for r in c.execute(q, (a.min_units,))]
+    # v4 (v4_source), one row per address v4 resolves to a single project. Units are the
+    # Explorer's figure; UC counts beds (CLAUDE.md), as v2's total_units did for UC.
+    rows = [{"a": r["address_display"], "u": (r["beds"] if r["uc"] else r["units"]) or 0,
+             "agency": r["agency"], "key": r["project_key"]} for r in V.address_rows()]
+    rows = [r for r in rows if r["u"] >= a.min_units]
     if a.exclude_agency:
         rows = [r for r in rows if not r["agency"]]
     B = site_buildings()
@@ -65,14 +62,14 @@ def picks(a):
         head = " ".join(str(r["a"]).upper().split()[:2])
         hit = [(k, v) for k, v in B.items() if head in k]
         if hit:
-            out.append((max(hit, key=lambda kv: kv[1][3]), r["u"]))
-        else:
+            out.append((max(hit, key=lambda kv: kv[1][3]), r["u"], r["key"]))
+        elif not any(x["key"] == r["key"] for x in rows if x is not r and x["a"] != r["a"]):
             print(f"  not drawn in geometry.kml, skipped: {r['a']}")
-    # de-duplicate sites that share an address key
+    # de-duplicate sites that share an address key, and projects reached by several addresses
     seen, uniq = set(), []
-    for (k, v), u in out:
-        if k not in seen:
-            seen.add(k); uniq.append((k, v, u))
+    for (k, v), u, pk in out:
+        if k not in seen and pk not in seen:
+            seen.update((k, pk)); uniq.append((k, v, u))
     return uniq
 
 

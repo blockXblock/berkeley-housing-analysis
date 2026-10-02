@@ -15,6 +15,8 @@ a unit count taken from a ZAB packet. It does not have it.
 
   python scripts/tours/gen_kennedy_labels.py            # render all 23
   python scripts/tours/gen_kennedy_labels.py --list     # show what each would say, render nothing
+
+2026-10-02: gen_svg_labels.rows() now reads v4 through v4_source; "v2" above is the history.
 """
 import argparse, csv, glob, os, pathlib, subprocess, sys, tempfile
 
@@ -107,7 +109,7 @@ def main():
         if k in v2:
             r = v2[k]
             lines = [x for x in G.lines_for(r) if x]
-            tag = f"v2 proj{r['project_id']}"
+            tag = f"v4 {r['project_id']}"
             n_v2 += 1
             if not a.list:
                 render(([*lines] + [""] * 6)[:6], slug, out)
@@ -121,7 +123,7 @@ def main():
             tag = "NO SOURCE"; lines = []
             n_miss += 1
         print(f"  {key[:30]:30} {tag:20} {' | '.join(lines)[:78]}")
-    print(f"\n  {n_v2} from v2 (unmarked) · {n_csv} from the CSV (marked) · {n_miss} unsourced")
+    print(f"\n  {n_v2} from v4 (unmarked) · {n_csv} from the CSV (marked) · {n_miss} unsourced")
     if not a.list:
         print(f"  labels in {out}")
 

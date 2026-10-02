@@ -35,7 +35,7 @@ def placemark_name(pm):
     puts the PROJECT NAME in <name> ("GAIA Building (2001) - 91 units") and the address in a plain
     <description>. Parsing only the first found NOTHING in the second, which is why a
     self-contained tour could not be labelled at all. Address first where it exists, because that
-    is what v2 joins on; the project name only when there is no address to be had.
+    is what the database joins on; the project name only when there is no address to be had.
 
     Lives here rather than in svg_label_tour because both this module and that one need it, and a
     second copy is how the two drift apart -- the same reason normkey moved into gen_svg_labels.
@@ -216,10 +216,14 @@ def main():
             raise SystemExit(f"not found: {a.address}")
         picks = [max(hits, key=lambda kv: kv[1][3])]
     else:
-        import sqlite3
-        c = sqlite3.connect("databases/berkeley_housing_v2.db")
-        units = {(r[0] or "").upper().strip(): (r[1] or 0) for r in
-                 c.execute("select address_display,total_units from v_projects_flat")}
+        # units from v4 (v4_source), joined on the address canon; an address v4 holds several
+        # projects at counts as 0, so --all-over never picks a site on a guessed figure
+        from scripts.tours import v4_source as V
+        idx = V.by_address()
+        def n_units(k):
+            r = V.lookup(k, idx)
+            return ((r["beds"] if r["uc"] else r["units"]) or 0) if r else 0
+        units = {k: n_units(k) for k in B}
         picks = [(k, v) for k, v in B.items() if units.get(k, 0) >= (a.all_over or 0)]
         picks.sort(key=lambda kv: -units.get(kv[0], 0))
 

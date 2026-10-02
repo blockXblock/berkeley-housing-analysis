@@ -16,10 +16,12 @@ are derived from the housing that fronts the corridor: bin by latitude, take the
 longitude of nearby buildings, and place a point per bin. Buildings front the street, so their
 median longitude tracks the roadway -- approximately, which is the point. They are candidates.
 
-Output per corridor: kml/tours/control_points/<Corridor> Control Points CANDIDATE.kml
-READ-ONLY on all sources.
+Output per corridor: kml/tours/control_points/<Corridor> Control Points CANDIDATE.kml (or --outdir)
+READ-ONLY on all sources. Housing positions from v4 (v4_source) since 2026-10-02.
 """
-import math, os, re, sqlite3
+import argparse, math, os, re
+
+from scripts.tours import v4_source as V
 
 OUT_DIR = "kml/tours/control_points"
 ADU_KML = "kml/geometry/adu-middle-housing.kml"
@@ -65,19 +67,21 @@ def adu_points():
 
 
 def main():
-    os.makedirs(OUT_DIR, exist_ok=True)
-    c = sqlite3.connect("databases/berkeley_housing_v2.db"); c.row_factory = sqlite3.Row
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--outdir", default=OUT_DIR)
+    out_dir = ap.parse_args().outdir
+    os.makedirs(out_dir, exist_ok=True)
     adus = adu_points()
 
     for name, (pat, lon0, south, north, nbins, direction, anchors) in CORRIDORS.items():
         # every housing point that fronts this corridor: tracked projects by address, plus ADUs
         # within 120 m of the rough corridor line (they carry no parsable address in the KML)
         pts = []
-        for r in c.execute("""select address_display,total_units,latitude,longitude
-                              from v_projects_flat
-                              where upper(address_display) like ? and latitude is not null""", (pat,)):
-            if south <= r["latitude"] <= north:
-                pts.append((r["longitude"], r["latitude"], r["total_units"] or 0))
+        word = pat.strip("%")
+        for r in V.projects():
+            if (word in (r["address_display"] or "").upper() and r["latitude"] is not None
+                    and south <= r["latitude"] <= north):
+                pts.append((r["longitude"], r["latitude"], r["units"] or 0))
         for x, y in adus:
             if south <= y <= north and dist_m(lon0, y, x, y) < 120:
                 pts.append((x, y, 0))
@@ -130,7 +134,7 @@ this order, so reordering the placemarks reorders the flight.]]></description>
 </Document>
 </kml>
 """
-        path = f"{OUT_DIR}/{name} Control Points CANDIDATE.kml"
+        path = f"{out_dir}/{name} Control Points CANDIDATE.kml"
         open(path, "w").write(kml)
         span = dist_m(cps[0][0], cps[0][1], cps[-1][0], cps[-1][1])
         print(f"{name:12} {len(cps)} control points · {len(pts):>3} housing points · "

@@ -8,29 +8,27 @@ plain transit leg between two spirals and that whole class of bug cannot arise. 
 geometry itself is imported from gen_building_loop, not copied, so a fix there fixes both.
 
 WHY THE LIST IS DERIVED. The May 2026 hand-written tour named its four dormitories in the KML.
-UC projects are identified in v2 by the `uc_project` CLASSIFICATION FLAG, and CLAUDE.md requires
+UC projects are identified in v4 by the `uc_student_housing` CLASSIFICATION RULING (v2 called it
+`uc_project`; re-pointed to v4 2026-10-02 via v4_source), and CLAUDE.md requires
 filtering on that flag rather than hardcoded ids precisely so the tour picks up the next UC
 tower on its own. UC housing is counted in BEDS, not units -- the labels come from geometry.kml,
 which already says beds.
 
   python scripts/tours/gen_dorm_tour.py --out kml/tours/uc-dormitories.kml
 """
-import argparse, math, os, re, sqlite3, sys, datetime
+import argparse, math, os, re, sys, datetime
 from scripts.tours.gen_building_loop import buildings, cam, M
+from scripts.tours import v4_source as V
 
 CAMPANILE = (-122.2578, 37.8723)          # the opening subject, as in the May tour
 
 
-def uc_addresses(db="databases/berkeley_housing_v2.db"):
-    """Addresses flagged uc_project in v2, largest first. THE FLAG, never an id list."""
-    c = sqlite3.connect(db)
-    rows = c.execute("""
-        SELECT f.address_display, f.total_units FROM v_projects_flat f
-        JOIN project_classifications pc ON pc.project_id = f.project_id
-        JOIN vocabulary_classification_types v ON v.id = pc.classification_type_id
-        WHERE v.code = 'uc_project' AND f.address_display IS NOT NULL
-        ORDER BY f.total_units DESC""").fetchall()
-    return [(r[0].upper().strip(), r[1] or 0) for r in rows]
+def uc_addresses():
+    """Addresses of v4 projects carrying the uc_student_housing ruling, most beds first.
+    THE FLAG, never an id list."""
+    rows = [r for r in V.projects() if r["uc"] and r["address_display"]]
+    rows.sort(key=lambda r: -(r["beds"] or 0))
+    return [(r["address_display"].upper().strip(), r["beds"] or 0) for r in rows]
 
 
 def transit(lon, lat, alt, hdg, secs):
@@ -222,7 +220,7 @@ def main():
 
     stamp = datetime.datetime.now().strftime("%m-%d %H:%M")
     disp = f"UC Berkeley Student Housing · {len(picks)} projects · spirals · {stamp}"
-    desc = (f"Every UC housing project flagged uc_project in v2, flown north to south. Opens "
+    desc = (f"Every UC housing project flagged UC student housing in v4, flown north to south. Opens "
             f"east of the Campanile, then at each site ONE DESCENDING ORBIT: {a.orbit_secs:.0f} s "
             f"for {a.turns} turn, dropping {a.drop:.0f} m to roof + 10 m with the camera tilted "
             f"66-76 degrees throughout -- no look-down. It then climbs {a.rise:.0f} m before "

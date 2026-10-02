@@ -16,7 +16,7 @@ a wrong answer; both are unlikely to be wrong in the same direction.
        a. ARCHITECT FILING (data/reference/tabulation_footprints.csv) — the footprint the architect
           tabulated on the permit set. Primary-source, it is DESIGN INTENT, so it works for PROPOSED
           buildings Overture cannot see. Only ~9 projects have it today (the tabulation-form harvest
-          of 2026-08-22); the 80 tabulation_form PDFs in v2 are not yet parsed into areas.
+          of 2026-08-22); the 80 tabulation_form PDFs in the database are not yet parsed into areas.
        b. OVERTURE — the building the trace's centroid falls INSIDE (point-in-polygon, so a shed
           next door cannot be the match). Covers built structures; blind to the not-yet-built.
      Only the UNDER direction is flagged; over-size is noise (Overture undercounts, real towers
@@ -36,9 +36,9 @@ import argparse, csv, math, os, re, sqlite3, sys
 from scripts.tours.gen_building_loop import buildings
 from scripts.housing_rules.apn import to_canonical_apn
 import gen_svg_labels as G
+from scripts.tours import v4_source as V
 
 ASSESSOR = "databases/berkeley.db"
-V2 = "databases/berkeley_housing_v2.db"
 OVERTURE = "data/raw/overture_buildings_berkeley_2026-08-19.parquet"
 ARCHITECT_AREAS = "data/reference/tabulation_footprints.csv"
 PARCEL_TOL_M = 40.0
@@ -112,7 +112,6 @@ def main():
     sites = buildings(a.geom)
     traced = traced_footprints(a.geom)      # centroid + traced AREA, keyed like sites
     b = sqlite3.connect(f"file:{ASSESSOR}?mode=ro", uri=True)
-    v = sqlite3.connect(f"file:{V2}?mode=ro", uri=True)
 
     par = {}
     for apn, la, lo in b.execute("SELECT APN,Latitude,Longitude FROM parcels WHERE Latitude IS NOT NULL"):
@@ -136,12 +135,13 @@ def main():
         for r in csv.DictReader(l for l in open(a.refs) if not l.startswith("#")):
             for addr in (r.get("address"), r.get("tour_address")):
                 if addr:
-                    claim[G.normkey(addr)] = r["apn"]
-    for pid, apn in v.execute("SELECT pp.project_id,p.apn_raw FROM project_parcels pp "
-                              "JOIN parcels p ON p.id=pp.parcel_id"):
-        row = v.execute("SELECT address_display FROM v_projects_flat WHERE project_id=?", (pid,)).fetchone()
-        if row:
-            claim.setdefault(G.normkey(row[0]), apn)
+                    if V.akey(addr):
+                        claim[V.akey(addr)] = r["apn"]
+    # the parcel v4 links each project to (the Explorer's apn: its first current parcel), keyed by
+    # every address v4 resolves to exactly one project
+    for r in V.address_rows():
+        if r["apn"]:
+            claim.setdefault(r["akey"], r["apn"])
 
     ov = None
     if os.path.exists(OVERTURE):
@@ -170,7 +170,7 @@ def main():
     for k in sorted(sites):
         lon, lat = sites[k][0], sites[k][1]
         kk = math.cos(math.radians(lat))
-        raw = claim.get(G.normkey(k))
+        raw = claim.get(V.akey(k)) if V.akey(k) else None
         c = to_canonical_apn(raw, "alameda") if raw else None
         dp = None
         if c and c in par:

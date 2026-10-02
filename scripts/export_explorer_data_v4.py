@@ -116,7 +116,9 @@ def get_projects(db):
         uc = bool(v["rhna_excluded"]) and (v["anchor_role"] == "outside_city_permitting" or
                                            "uc_" in (v["classifications"] or ""))
         out.append({
-            "id": k, "address": v["address_display"], "name": v["name"], "apn": apn.get(k),
+            # two City records carry no address at all (the place is only in their prose); never invented
+            "id": k, "address": v["address_display"] or f"{k} (no address on the City record)",
+            "name": v["name"], "apn": apn.get(k),
             "owner": mask(v["owner_current"]), "units": units, "new_units": units, "old_units": 0,
             "status": stage, "pipeline_stage": st, "accela_status": stage, "accela_status_date": None,
             "year": filed[:4] if filed else None, "permits": ",".join(permits.get(k, [])),
@@ -130,10 +132,15 @@ def get_projects(db):
             "ab2011": "ab2011" in pw,
             "app_filed": filed, "app_complete": v["accepted_date"], "entitled": ent,
             "bp_issued": v["bp_issued_date"], "co_date": v["co_issued_date"], "first_co_date": v["first_co_date"],
-            "assessed_value": v["assessed_value"], "assessed_net_taxable": v["assessed_net_taxable"],
-            "assessed_exemption": None, "est_annual_tax": v["est_annual_tax_1pct_rule"],
-            "assessed_as_of_date": v["assessed_as_of_date"],
-            "assessed_tax_exempt": v["assessed_value"] is not None and v["assessed_net_taxable"] == 0,
+            # assessed values for COMPLETED projects only, as the page states ("completed housing") and v2 exported:
+            # a parcel's value before or during construction is not the new housing's value
+            **({"assessed_value": v["assessed_value"], "assessed_net_taxable": v["assessed_net_taxable"],
+                "est_annual_tax": v["est_annual_tax_1pct_rule"], "assessed_as_of_date": v["assessed_as_of_date"],
+                "assessed_tax_exempt": v["assessed_value"] is not None and v["assessed_net_taxable"] == 0}
+               if stage == "Completed" and v["co_issued_date"] else
+               {"assessed_value": None, "assessed_net_taxable": None, "est_annual_tax": None,
+                "assessed_as_of_date": None, "assessed_tax_exempt": False}),
+            "assessed_exemption": None,
             "construction_start": ins, "construction_status": None, "estimated_completion": None,
             "processing_days": pdays, "height_stories": v["height_stories"], "height_feet": v["height_feet"],
             "app_packet_mb": 0, "total_fees": fees, "fee_per_unit": (fees / units) if units else 0,

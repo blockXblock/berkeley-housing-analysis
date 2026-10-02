@@ -621,7 +621,8 @@ curriculum; will read the archived copy), the Explorer's old-link crosswalk, old
 NOTHING PUBLISHED from these (pipeline-state, players, KML, notebooks wait on the decisions below).
 
 **DECISIONS FOR JOHN (consolidated 2026-10-02):**
-1. Retire docs/data/berkeley_housing_v2_public.db from the site (July full v2 copy; private owners' names).
+1. (WITHDRAWN 2026-10-02, John: owner names are public record; v4 keeps all of them.) Whether the v2 public copy stays
+   is now only a question of serving one mirror instead of two.
 2. Players page: carry v2's SOURCED developer/architect credits (title blocks, SFYIMBY, Kennedy tour, panoramic.com)
    into a v4 attribution ledger before replacing docs/players.html (v1-carried unsourced ones stay out).
 3. New dated v4 baselines for JN-J, K, L, N, MeasureU and the pipeline-state anchor (proposed ones in

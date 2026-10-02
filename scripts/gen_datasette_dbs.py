@@ -24,6 +24,7 @@ from housing_rules.owner_name import is_organisation   # the publishing rule's o
 
 V4   = 'databases/berkeley_housing_v4.db'       # 2026-10-01: re-pointed from v2 (cutover phase 6, step 2)
 OUT  = 'datasette-deploy/berkeley_housing_map.db'
+PUBLIC = 'docs/data/berkeley_housing_public.db'   # the reporters' Datasette-Lite mirror (same masked build)
 CZU  = 'datasette-deploy/czu.db'
 GDB  = 'data/raw/corridors/raimi_corridors.gdb'
 
@@ -205,6 +206,11 @@ def write_metadata(rows):
 def main():
     rows, before, masked = build_housing()
     write_metadata(rows)
+    # THE PUBLIC MIRROR for reporters (docs/reporters.html, Datasette-Lite): the SAME masked database, published at
+    # berkeleybuild.com/data/berkeley_housing_public.db. It replaces the July one-time full copy of v2
+    # (berkeley_housing_v2_public.db), which carried private owners' names (publishing rule, 2026-10-01).
+    shutil.copyfile(OUT, PUBLIC)
+    print(f"  public mirror: {PUBLIC} ({os.path.getsize(PUBLIC)/1048576:.1f} MB) -- served when docs/ deploys")
     print("=== berkeley_housing_map.db (rebuilt from v4) ===")
     print(f"  {'table':22}{'was':>9}{'now':>9}   change")
     for t, n in rows.items():

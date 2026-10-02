@@ -1,76 +1,125 @@
 #!/usr/bin/env python3
 """Generate docs/players.html — THE PLAYERS VIEW (phase 1).
 
-Who builds Berkeley: developers, architects, owners from v2's curated participants
-(organizations + project_participants), linked by shared projects. Node size = units;
-edge weight = shared projects. Each player's pipeline mix uses the same evidence
-binning as the Pipeline-State view.
+READS v4 SINCE 2026-10-02: databases/berkeley_housing_v4.db, read-only (mode=ro). Projects (address, units, stage)
+come from the Explorer exporter's own projection (scripts/export_explorer_data_v4.get_projects over v_projects), so a
+player's pipeline mix uses the same stages as the Explorer and the Pipeline State page. Players come from the serving
+view v_project_people:
+  developer  <- roles developer (CTCAC list) and plans_developer (plans' title blocks) ONLY — an owner is never
+                relabelled a developer
+  architect  <- plans_architect
+  applicant  <- applicant (Planning log) and plans_applicant
+  owner      <- v_projects.owner_current (the Explorer's owner), organisations only
+(Before 2026-10-02 it read v2's curated organizations x project_participants.)
 
-PHASE-1 HONESTY (stated on the page): coverage is majors-heavy (the ADU fabric's
-hundreds of small builders are not in the record); an edge = co-occurrence on a
-project, not contract knowledge; investors and construction lenders are NOT yet in
-the record (County Recorder deeds of trust + SOS filings — acquisition queued).
+PUBLISHING RULE (John, 2026-10-01): organisations are named; private individuals are not. An owner is a node only if
+housing_rules.owner_name.is_organisation says so. A professional name (developer/architect/applicant) is a node if it
+is_organisation OR carries a firm word (FIRM below) — the canon is an OWNER-roll test and misses firm names such as
+"TRACHTENBERG ARCHITECTS" or "... Development Corporation"; individuals named in a professional role are left out.
 
-MACHINERY: re-run after v2 changes, commit docs/players.html.
-Run: .venv/bin/python scripts/gen_players_page.py
+Node size = units; edge weight = shared projects. An edge = co-occurrence on a project, not contract knowledge;
+investors and construction lenders are NOT yet in the record (County Recorder deeds of trust + SOS filings).
+
+MACHINERY: re-run after any v4 rebuild, commit docs/players.html.
+Run: .venv/bin/python scripts/gen_players_page.py [--out DIR]
+     (--out or env SITE_OUT: write DIR/players.html instead of docs/players.html)
 """
+import argparse
 import json
 import os
+import re
 import sqlite3
 import sys
-from collections import defaultdict
+from collections import Counter, defaultdict
 from datetime import date
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-from scripts.housing_rules.owner_name import is_organisation
-TODAY = date.today()
-v2 = sqlite3.connect(f"file:{os.path.join(ROOT, 'databases', 'berkeley_housing_v2.db')}?mode=ro", uri=True)
+sys.path.insert(0, os.path.join(ROOT, 'scripts'))
+from export_explorer_data_v4 import DB_PATH, get_projects   # noqa: E402  the Explorer's own v4 projection
+from housing_rules.owner_name import is_organisation          # noqa: E402
 
-# ---- project states (same evidence binning as gen_pipeline_state_page) ----
-activity = {r[0] for r in v2.execute("""SELECT DISTINCT project_id FROM project_events e
-    JOIN vocabulary_event_types t ON t.id=e.event_type_id
-    WHERE t.code IN ('construction_start_observed','topped_out')""")}
-STATE_NAMES = {1: 'applied', 2: 'waiting', 3: 'permit-idle', 4: 'building', 5: 'complete', 0: 'withdrawn'}
+ap = argparse.ArgumentParser()
+ap.add_argument('--out', default=os.environ.get('SITE_OUT') or os.path.join(ROOT, 'docs'),
+                help='directory to write players.html into (default docs/)')
+ARGS = ap.parse_args()
+
+TODAY = date.today()
+v4 = sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True)
+
+# ---- project states: the Explorer's stages, named as the Pipeline State page groups them ----
+STAGE_NAME = {'Under Review': 'applied', 'Pre-Application': 'applied', 'Entitled': 'waiting',
+              'Entitled but Inactive': 'waiting', 'Permitted but Inactive': 'permit-idle',
+              'Under Construction': 'building', 'Completed': 'complete', 'Withdrawn': 'withdrawn',
+              'Denied': 'denied', 'Expired': 'expired'}
 proj = {}
-for pid, addr, u, e, bp, co, status in v2.execute("""SELECT project_id, address_display, total_units,
-        entitled_date, bp_issued_date, co_issued_date, status_code FROM v_projects_flat"""):
-    if co: st = 5
-    elif bp and (pid in activity or status == 'under_construction'): st = 4
-    elif bp: st = 3
-    elif status == 'withdrawn': st = 0
-    elif e: st = 2
-    else: st = 1
-    proj[pid] = dict(addr=(addr or '').title(), u=u or 0, state=st)
+for p in get_projects(v4):
+    st = STAGE_NAME.get(p['status']) or ('waiting' if p['entitled'] else 'applied')  # Building Permits Filed
+    proj[p['id']] = dict(addr=(p['address'] or '').title(), u=p['units'] or 0, state=st, owner=p['owner'])
 
 # ---- players ----
-players = {}   # name -> {roles, projects:set}
-for name, role, pid in v2.execute("""SELECT o.name, rt.code, pp.project_id
-        FROM project_participants pp
-        JOIN vocabulary_role_types rt ON rt.id=pp.role_type_id
-        JOIN organizations o ON o.id=pp.organization_id
-        WHERE o.merged_into_id IS NULL"""):
-    p = players.setdefault(name, dict(roles=set(), projects=set()))
-    p['roles'].add({'developer_of_record': 'developer', 'architect_design': 'architect',
-                    'owner_current': 'owner'}.get(role, role))
-    p['projects'].add(pid)
-
-# WHO GETS A NODE. Owners outnumber professionals 20:1 on the record, and most are natural
-# persons — 835 of 876 nodes were owner-only when this page was first regenerated against the
-# full owner layer, the large majority of them named private homeowners. A social network graph
-# of named individuals is not what this page is for, and is a different act from the ownership
-# MAP, where a name sits on its own parcel as a record of title. So: a player is anyone with a
-# professional role (developer, architect, applicant...), plus owners that are ORGANISATIONS —
-# companies and institutions. Individuals and family trusts are excluded; housing_rules.
-# owner_name.is_organisation draws that line, and family trusts fall on the person side of it
-# because a family trust is a wrapper around natural persons. (Decision: John, 2026-09-07.)
-def is_player(name, roles):
-    return bool(set(roles) - {'owner'}) or is_organisation(name)
+ROLE = {'developer': 'developer', 'plans_developer': 'developer', 'plans_architect': 'architect',
+        'applicant': 'applicant', 'plans_applicant': 'applicant'}
+FIRM = re.compile(r"\b(ARCHITECTS?|ARCHITECTURE|STUDIO|DESIGN|CORPORATION|DEVELOPMENT|HOUSING|INTERESTS)\b")
 
 
-# Apply the filter HERE, before edges are built, so a line can never connect to a player
-# the page does not show.
-_excluded = {n for n, p in players.items() if not is_player(n, p['roles'])}
-players = {n: p for n, p in players.items() if n not in _excluded}
+def nkey(name):
+    """One node per firm however the records punctuate it ('STACKHOUSE | DE LA PEÑA ...' == 'Stackhouse De La Peña ...')."""
+    return re.sub(r"\s+", " ", re.sub(r"[^\w&]+", " ", name.upper())).strip()
+
+
+def names_a_person(name):
+    """A joint title like 'KEY ROUTE PARTNERS LLC & PAULINO EDWARD ETAL' passes is_organisation on its LLC, yet names
+    a person. Any '&'/','-separated part of two or more words that is not itself a firm is read as a person."""
+    joined = re.sub(r",\s*(LLC|L\.L\.C|INC|LP|L\.P|LTD|CORP)\b", r" \1", name, flags=re.I)   # 'X Ave, LLC' is one name
+    parts = [x.strip() for x in re.split(r"[&,]", joined) if x.strip()]
+    return len(parts) > 1 and any(len(nkey(x).split()) >= 2 and not is_organisation(x) and not FIRM.search(x.upper())
+                                  for x in parts)
+
+
+def nameable(name, roles):
+    if names_a_person(name):
+        return False
+    if is_organisation(name):
+        return True
+    return bool(set(roles) - {'owner'}) and bool(FIRM.search(name.upper()))
+
+
+def drop_person_prefix(name):
+    """'Ali Kia, Spirit Residential Group, LLC' -> 'Spirit Residential Group, LLC': a record that names the person
+    filing on a firm's behalf keeps the firm, never the person."""
+    head, _, rest = name.partition(',')
+    if (len(nkey(rest).split()) >= 2 and not nameable(head, {'applicant'})   # 'X Ave, LLC' is one firm name
+            and nameable(rest.strip(), {'applicant'})):
+        return rest.strip()
+    return name
+
+
+raw = []   # (key, display name, role, project)
+for k, role, name in v4.execute(f"""SELECT DISTINCT project_key, role, TRIM(name) FROM v_project_people
+                                    WHERE role IN ({','.join('?' * len(ROLE))}) AND TRIM(COALESCE(name, '')) != ''""",
+                                tuple(ROLE)):
+    if k in proj:
+        name = drop_person_prefix(name)
+        raw.append((nkey(name), name, ROLE[role], k))
+for k, p in proj.items():
+    if p['owner'] and p['owner'] != 'individual owner':     # the Explorer already masked individual owners
+        raw.append((nkey(p['owner']), p['owner'], 'owner', k))
+# distinct private-individual owners (named nowhere on this page; counted for the note below)
+n_individual_owners = len({o for (o,) in v4.execute("SELECT DISTINCT owner_current FROM v_projects WHERE owner_current > ''")
+                           if not is_organisation(o)})
+
+players, spellings = {}, defaultdict(Counter)   # key -> {roles, projects:set}
+for key, name, role, k in raw:
+    pl = players.setdefault(key, dict(roles=set(), projects=set()))
+    pl['roles'].add(role); pl['projects'].add(k)
+    spellings[key][name] += 1
+
+# Apply the publishing rule HERE, before edges are built, so a line can never connect to a player the page does
+# not show.
+_excluded = {kk for kk, p in players.items() if not nameable(spellings[kk].most_common(1)[0][0], p['roles'])}
+n_excluded_prof = sum(1 for kk in _excluded if players[kk]['roles'] - {'owner'})
+n_individual_owners += len(_excluded) - n_excluded_prof    # joint titles naming a person (names_a_person)
+players = {spellings[kk].most_common(1)[0][0]: p for kk, p in players.items() if kk not in _excluded}
 
 by_project = defaultdict(list)
 for name, p in players.items():
@@ -86,22 +135,21 @@ for pid, names in by_project.items():
             e['w'] += 1
             e['shared'].append(proj[pid]['addr'])
 
-ROLE_COLOR = {'developer': '#ffd166', 'architect': '#7ec8e3', 'owner': '#9d8fd8'}
+ROLE_COLOR = {'developer': '#ffd166', 'architect': '#7ec8e3', 'owner': '#9d8fd8', 'applicant': '#9fb8c8'}
 def color(roles):
-    for r in ('developer', 'architect', 'owner'):
+    for r in ('developer', 'architect', 'owner', 'applicant'):
         if r in roles: return ROLE_COLOR[r]
     return '#9fb8c8'
 
-n_excluded = len(_excluded)
 nodes = []
 for name, p in sorted(players.items(), key=lambda kv: -sum(proj[i]['u'] for i in kv[1]['projects'])):
     units = sum(proj[i]['u'] for i in p['projects'])
     mix = defaultdict(int)
-    for i in p['projects']: mix[STATE_NAMES[proj[i]['state']]] += 1
+    for i in p['projects']: mix[proj[i]['state']] += 1
     nodes.append(dict(id=name, roles=sorted(p['roles']), units=units, n=len(p['projects']),
                       color=color(p['roles']), mix=dict(mix),
                       projects=sorted(({'a': proj[i]['addr'], 'u': proj[i]['u'],
-                                        's': STATE_NAMES[proj[i]['state']]} for i in p['projects']),
+                                        's': proj[i]['state']} for i in p['projects']),
                                       key=lambda d: -d['u'])))
 links = [dict(source=a, target=b, w=e['w'], shared=e['shared']) for (a, b), e in edges.items()]
 covered = {i for p in players.values() for i in p['projects']}
@@ -149,6 +197,7 @@ html = f"""<!DOCTYPE html>
   two appear on the same project.</p>
   <p class="lg"><span style="color:#ffd166">●</span> developer &nbsp;
   <span style="color:#7ec8e3">●</span> architect &nbsp; <span style="color:#9d8fd8">●</span> owner
+  &nbsp; <span style="color:#9fb8c8">●</span> applicant
   &nbsp;·&nbsp; {len(nodes)} players · {len(covered)} projects · {cov_units:,} units across their projects, all stages</p>
   <div style="position:relative;">
     <svg id="net"></svg>
@@ -176,17 +225,21 @@ html = f"""<!DOCTYPE html>
   Recorder; investors in LLC filings with the Secretary of State. Neither is loaded yet — this
   page will say so until they are. Coverage is majors-heavy: the neighborhood fabric's hundreds
   of small builders and homeowners aren't named in the record.</p>
-  <p><b>Who appears here.</b> Everyone with a professional role — developer, architect, applicant —
-  plus owners that are <i>organisations</i>: companies and institutions. Owners who are private
-  individuals, including family trusts, are deliberately left out: {n_excluded:,} of them hold title to
-  projects in this record, and a network graph of named householders is not what this view is for.
+  <p><b>Who appears here.</b> Firms and institutions named on the record in a professional role —
+  developer, architect, applicant — plus owners that are <i>organizations</i>: companies and institutions.
+  Private individuals are deliberately left out: {n_individual_owners:,} individual owners (including family
+  trusts) hold title to projects in this record, and {n_excluded_prof:,} more names on the record in a
+  professional role are individuals rather than firms; a network graph of named people is not what this view
+  is for.
   Their parcels are still shown, as title records rather than as players, on
   <a href="maps/berkeley_ownership.html">the ownership map</a>. And a line between two players
   means they <i>appear on the same project</i> — the record does not know who hired whom.</p>
 
-  <div class="src">Derived {TODAY.isoformat()} from the canonical v2 database (organizations ×
-  project_participants: developer-of-record, design architect, current owner; pipeline mix uses the
-  same evidence binning as <a href="pipeline-state.html">the Pipeline State</a>). Cross-role
+  <div class="src">Derived {TODAY.isoformat()} from the canonical v4 database (the people named on each
+  project's records: developers from the state's tax-credit list and the plans' title blocks, architects from the
+  plans, applicants from the Planning log and the plans, current owners of record; pipeline mix uses the same
+  stages as <a href="explorer.html">the Explorer</a> and <a href="pipeline-state.html">the Pipeline State</a>).
+  Spellings of one firm are one node. Cross-role
   identities (e.g. a developer that also owns) are one node. Generator: scripts/gen_players_page.py —
   regenerates from the record; never hand-edited. <a href="index.html">← berkeleybuild.com</a></div>
 </div>
@@ -302,7 +355,8 @@ for (const n of N) {{
 </body>
 </html>
 """
-out = os.path.join(ROOT, 'docs', 'players.html')
+os.makedirs(ARGS.out, exist_ok=True)
+out = os.path.join(ARGS.out, 'players.html')
 
 # Re-stamp the site_meta block. A generator that writes a whole fresh page silently
 # STRIPS the <!-- BEGIN site_meta --> block (description, canonical, Open Graph,
@@ -320,4 +374,5 @@ except Exception as e:                                  # never block the page o
 
 open(out, 'w').write(html)
 print('wrote', out, f'({len(html)//1024}KB)')
-print(f'  excluded {n_excluded} individual/family-trust owner(s); {len(nodes)} players shown')
+print(f'  left out: {n_individual_owners} individual/family-trust owner(s), {n_excluded_prof} individual(s) in a '
+      f'professional role; {len(nodes)} players shown')

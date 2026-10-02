@@ -1,75 +1,133 @@
 #!/usr/bin/env python3
 """Generate docs/pipeline-state.html — THE PIPELINE-STATE VIEW.
 
-Every tracked (non-UC) project binned by FURTHEST HARD EVIDENCE into five states:
-  1 applied, not yet entitled          (anchor: filed_date = MIN application)
-  2 entitled, no building permit       (the waiting room; anchor: entitled_date)
-  3 BP issued, no construction activity(the stalled shelf; anchor: bp_issued_date)
-  4 under construction                 (activity = construction_start/topped_out event,
-                                        or current status under_construction — noted)
-  5 complete                           (anchor: co_issued_date, verdict-driven)
-Withdrawn (status withdrawn, no BP/CO) shown as the voluntary-exit footnote.
+READS v4 SINCE 2026-10-02: databases/berkeley_housing_v4.db, read-only (mode=ro), through the Explorer exporter's
+own projection (scripts/export_explorer_data_v4.get_projects, which reads v4's serving view v_projects). The page's
+five states are the Explorer's stage labels grouped, so the two pages always agree; no field is re-derived here.
+(Before 2026-10-02 it read v2's v_projects_flat + project_events + two July 2026 overlays keyed on v2 project ids.)
 
-ANCHOR: the >=50u subset of these bins must equal JN-K's audited funnel figures
-(completion_anatomy_baseline_* latest) — mismatch halts generation.
+Every tracked (non-UC) project, by its Explorer stage:
+  1 applied, not yet entitled        Under Review, Pre-Application            (anchor: filed date)
+  2 entitled, no building permit     Entitled, Entitled but Inactive          (anchor: entitled date)
+  3 BP issued, no construction       Permitted but Inactive: permit issued >24 months ago, no inspection ever
+  4 under construction               Under Construction: permit issued and inspected (or issued <24 months ago)
+  5 complete                         Completed: every building finaled         (anchor: last building's CO)
+  'Building Permits Filed' (a permit applied for, none issued) goes to 2 if entitled, else 1.
+  Exits (footnote): Withdrawn, Denied, Expired.
+Evidence column: states 3/4 = the latest inspection in v4's events; state 2 = BMC 23.404.060 lapse tier from the
+entitled date, plus the building-permit applications cited by the 2026-07-14 waiting-room overlay
+(data/processed/waiting_room_lapse_2026-07-14.json), matched by ADDRESS and re-checked against v4's own listing of
+that record (its current status) — never by the overlay's v2 project ids.
 
-MACHINERY: re-run after any v2 change, then commit docs/pipeline-state.html.
-Run: .venv/bin/python scripts/gen_pipeline_state_page.py
+ANCHOR: the >=50u subset is compared with JN-K's majors funnel (completion_anatomy_baseline_* latest). That baseline
+was built from v2; until a v4 JN-K baseline exists, a mismatch HALTS unless --accept-anchor-drift is given, and the
+page then does not claim the gate passed.
+
+MACHINERY: re-run after any v4 rebuild, then commit docs/pipeline-state.html.
+Run: .venv/bin/python scripts/gen_pipeline_state_page.py [--out DIR] [--accept-anchor-drift]
+     (--out or env SITE_OUT: write DIR/pipeline-state.html instead of docs/pipeline-state.html)
 """
+import argparse
 import glob
 import json
 import os
 import sqlite3
+import sys
 from datetime import date
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TODAY = date.today()
+sys.path.insert(0, os.path.join(ROOT, 'scripts'))
+from export_explorer_data_v4 import DB_PATH, get_projects   # noqa: E402  the Explorer's own v4 projection
+from housing_rules.address import normalize_address          # noqa: E402
 
-v2 = sqlite3.connect(f"file:{os.path.join(ROOT, 'databases', 'berkeley_housing_v2.db')}?mode=ro", uri=True)
-uc = {r[0] for r in v2.execute("""SELECT project_id FROM project_classifications pc
-    JOIN vocabulary_classification_types v ON pc.classification_type_id=v.id WHERE v.code='uc_project'""")}
-activity = {r[0] for r in v2.execute("""SELECT DISTINCT project_id FROM project_events e
-    JOIN vocabulary_event_types t ON t.id=e.event_type_id
-    WHERE t.code IN ('construction_start_observed','topped_out')""")}
-# INSPECTION OVERLAY (2026-07-14 harvest of all 23 primary permits in states 3/4):
-# dated inspection evidence outranks events/status for the building-vs-idle split.
-INSPECT = json.load(open(os.path.join(ROOT, 'data/processed/inspection_activity_2026-07-14.json')))
-insp = {int(k): v for k, v in INSPECT['projects'].items()}
-# LAPSE/COUNTDOWN OVERLAY (BMC 23.404.060 model + harvest BP-application evidence, 2026-07-14)
-LAPSE = json.load(open(os.path.join(ROOT, 'data/processed/waiting_room_lapse_2026-07-14.json')))
-lapse = {w['pid']: w for w in LAPSE['projects']}
-TIER_LABEL = {'mobilizing': 'MOBILIZING — BP application live', 'fresh': 'fresh (<1 yr entitled)',
-              'lapse_eligible': 'LAPSE-ELIGIBLE', 'permitted_unlinked': 'permit exists (v2 link gap)'}
+ap = argparse.ArgumentParser()
+ap.add_argument('--out', default=os.environ.get('SITE_OUT') or os.path.join(ROOT, 'docs'),
+                help='directory to write pipeline-state.html into (default docs/)')
+ap.add_argument('--accept-anchor-drift', action='store_true',
+                help='proceed when the >=50u subset differs from the (v2-built) JN-K baseline')
+ARGS = ap.parse_args()
+
+TODAY = date.today()
+v4 = sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True)
+PROJECTS = get_projects(v4)
+# latest inspection per project: v4's own inspection events on the project's buildings
+last_insp = dict(v4.execute("""SELECT json_extract(p.notes, '$.project_key'), MAX(e.event_date) FROM projects p
+    JOIN project_structures ps USING(project_id) JOIN structure_events se USING(structure_id)
+    JOIN events e USING(event_id) WHERE e.event_type_code = 'inspection' GROUP BY 1"""))
+
+
+def listed_status(record):
+    """The record's status as v4's latest Accela listing states it (None if v4 does not list it)."""
+    r = v4.execute("""SELECT json_extract(raw_payload, '$.Status') FROM events WHERE source_record_key = ?
+                      AND event_type_code = 'accela_listed' ORDER BY event_date DESC LIMIT 1""", (record,)).fetchone()
+    return r[0] if r else None
+
 
 def d10(s):
     s = str(s or '')[:10]
     try: return date.fromisoformat(s)
     except ValueError: return None
 
-STATES = {i: [] for i in range(1, 6)}
-withdrawn, unstated = [], 0
-for pid, addr, u, f, e, bp, co, status in v2.execute("""SELECT project_id, address_display,
-        total_units, filed_date, entitled_date, bp_issued_date, co_issued_date, status_code
-        FROM v_projects_flat"""):
-    if pid in uc: continue
-    u = u or 0
-    f, e, bp, co = d10(f), d10(e), d10(bp), d10(co)
-    row = dict(pid=pid, addr=(addr or '').title(), u=u, status=status)
-    iv = insp.get(pid)
-    row['last_insp'] = iv['last'] if iv else None
-    if co: STATES[5].append(row | dict(anchor=co))
-    elif bp and iv:   # inspection evidence wins where we have it
-        STATES[4 if iv['verdict'] == 'active' else 3].append(row | dict(anchor=bp))
-    elif bp and (pid in activity or status == 'under_construction'):
-        STATES[4].append(row | dict(anchor=bp))
-    elif bp: STATES[3].append(row | dict(anchor=bp))
-    elif status == 'withdrawn': withdrawn.append(row)
-    elif e: STATES[2].append(row | dict(anchor=e))
-    elif f or status in ('in_review', 'pre_application'):
-        STATES[1].append(row | dict(anchor=f))
-    else: unstated += 1
 
-# ---- ANCHOR to JN-K's audited majors funnel ----
+def akey(a):
+    try:
+        h, s = normalize_address(a)
+        return (h, s) if h and s else None
+    except Exception:
+        return None
+
+
+# THE EXPLORER'S STAGES -> THIS PAGE'S STATES (one mapping; the Explorer decides the stage)
+STAGE_STATE = {'Under Review': 1, 'Pre-Application': 1, 'Entitled': 2, 'Entitled but Inactive': 2,
+               'Permitted but Inactive': 3, 'Under Construction': 4, 'Completed': 5}
+EXITS = ('Withdrawn', 'Denied', 'Expired')
+STATES = {i: [] for i in range(1, 6)}
+exits = {x: [] for x in EXITS}
+unstated = []
+for p in PROJECTS:
+    if p['is_uc_project']: continue
+    stg = p['status']
+    st = STAGE_STATE.get(stg)
+    if stg == 'Building Permits Filed':
+        st = 2 if p['entitled'] else 1
+    row = dict(key=p['id'], addr=(p['address'] or '').title(), u=p['units'] or 0, stage=stg,
+               entitled=d10(p['entitled']), last_insp=last_insp.get(p['id']))
+    if st is None:
+        (exits[stg] if stg in exits else unstated).append(row)
+        continue
+    anchor = {1: p['app_filed'], 2: p['entitled'], 3: p['bp_issued'], 4: p['bp_issued'], 5: p['co_date']}[st]
+    STATES[st].append(row | dict(anchor=d10(anchor)))
+withdrawn = exits['Withdrawn']
+if unstated:
+    print('UNMAPPED Explorer stages (not shown):', {r['stage'] for r in unstated}, len(unstated))
+
+# ---- waiting-room tiers (BMC 23.404.060: lapse-eligible one year after approval unless exercised) ----
+LAPSE = json.load(open(os.path.join(ROOT, 'data/processed/waiting_room_lapse_2026-07-14.json')))
+overlay = {akey(w['addr']): w for w in LAPSE['projects'] if akey(w['addr'])}
+LIVE_DONE = ('Issued', 'Finaled')
+for r in STATES[2]:
+    w = overlay.get(akey(r['addr']))
+    ev = (w or {}).get('evidence')
+    now = listed_status(ev['pn']) if ev else None
+    if ev and now in LIVE_DONE:
+        r['tier'], r['ev'] = 'permitted_unlinked', f"{ev['pn']}, {now} — not yet linked to this project in v4"
+    elif ev and now and not now.startswith('Closed'):
+        r['tier'], r['ev'] = 'mobilizing', f"{ev['pn']}, {now}"
+    elif r['entitled'] and (TODAY - r['entitled']).days >= 365:
+        r['tier'] = 'lapse_eligible'
+        e = r['entitled']
+        r['ev'] = f"since {e.replace(year=e.year + 1, day=min(e.day, 28) if e.month == 2 else e.day)}"
+    else:
+        r['tier'], r['ev'] = 'fresh', ''
+TIER_LABEL = {'mobilizing': 'MOBILIZING — BP application live', 'fresh': 'fresh (<1 yr entitled)',
+              'lapse_eligible': 'LAPSE-ELIGIBLE', 'permitted_unlinked': 'permit issued'}
+tier_stats = {}
+for r in STATES[2]:
+    n, u = tier_stats.get(r['tier'], (0, 0))
+    tier_stats[r['tier']] = (n + 1, u + r['u'])
+def _t(t): return tier_stats.get(t, (0, 0))
+
+# ---- ANCHOR: JN-K's audited majors funnel (a v2-built baseline until a v4 one is written) ----
 bl = json.load(open(sorted(glob.glob(os.path.join(ROOT, 'data/baselines/completion_anatomy_baseline_*.json')))[-1]))
 fig = bl['figures']
 majors = {i: [r for r in STATES[i] if r['u'] >= 50] for i in STATES}
@@ -80,37 +138,49 @@ checks = {
     'majors_waiting': (len(majors[2]), fig['majors_entitled'] - fig['majors_permitted']),
     'majors_withdrawn': (len(mw), fig['majors_withdrawn']),
 }
+drift = {k: v for k, v in checks.items() if v[0] != v[1]}
 for k, (got, want) in checks.items():
-    assert got == want, f'ANCHOR FAIL {k}: page derives {got}, JN-K baseline says {want} — diagnose before publishing'
-print('anchor PASS vs', bl['as_of'], '| states:',
-      {i: (len(STATES[i]), sum(r['u'] for r in STATES[i])) for i in STATES}, '| withdrawn', len(withdrawn))
+    print(f"  anchor {k}: page {got}  JN-K {bl['as_of']} {want}{'' if got == want else '   <-- differs'}")
+if drift and not ARGS.accept_anchor_drift:
+    raise SystemExit(f"ANCHOR FAIL vs JN-K {bl['as_of']} (a v2-built baseline): {drift} — diagnose, or rerun with "
+                     "--accept-anchor-drift once John has accepted the v4 figures")
+anchor_passed = not drift
+print('anchor', 'PASS' if anchor_passed else 'DRIFT ACCEPTED', 'vs', bl['as_of'], '| states:',
+      {i: (len(STATES[i]), sum(r['u'] for r in STATES[i])) for i in STATES},
+      '| exits', {x: len(v) for x, v in exits.items()})
 
 # ---- render ----
+n4 = len(STATES[4])
+recent = sum(1 for r in STATES[4] if r['last_insp'] and (TODAY - d10(r['last_insp'])).days <= 183)
+older = sum(1 for r in STATES[4] if r['last_insp'] and (TODAY - d10(r['last_insp'])).days > 183)
+none4 = n4 - recent - older
 NAMES = {1: 'Applied — not yet entitled', 2: 'Entitled — waiting for a building permit',
          3: 'Permit issued — no construction activity', 4: 'Under construction', 5: 'Complete'}
 DESC = {
  1: 'In intake or under consideration at the planning counter. The clock that matters here is '
-    'deemed-complete → decision (median 410 days for majors).',
- 2: 'THE WAITING ROOM. Fully approved and legal to seek a permit — nothing is being built. '
-    'Housing dies of waiting here, not denial. Under BMC 23.404.060 a permit becomes '
-    'LAPSE-ELIGIBLE one year after approval unless exercised (a filed building-permit '
-    'application protects; the declaration is discretionary). The tiers, from the record: '
-    '{MOB_N} projects ({MOB_U} units) are MOBILIZING with live permit applications; '
-    '{FR_N} ({FR_U}) are fresh; {LE_N} projects ({LE_U} units) are ALREADY LAPSE-ELIGIBLE '
-    '— the city has declared none of them lapsed. ({PU_N} more show an issued permit not yet '
-    'linked in our record — data queue.)',
- 3: 'A permit exists but the inspection record shows no recent activity — verified against every '
-    'permit\'s full inspection history (harvested 2026-07-14). Two projects have permits and have '
-    'NEVER called an inspection.',
- 4: 'Dated inspection evidence on the record (last inspection within 6 months — several inspected '
-    'this very week). Once building starts, 95% of units reach completion.',
- 5: 'Certificate of occupancy issued — keys in doors. The audited count.',
+    'deemed-complete → decision.',
+ 2: ('THE WAITING ROOM. Fully approved and legal to seek a permit — nothing is being built. '
+     'Housing dies of waiting here, not denial. Under BMC 23.404.060 a permit becomes '
+     'LAPSE-ELIGIBLE one year after approval unless exercised (a filed building-permit '
+     'application protects; the declaration is discretionary). The tiers, from the record: '
+     f"{_t('mobilizing')[0]} projects ({_t('mobilizing')[1]:,} units) are MOBILIZING with live permit applications; "
+     f"{_t('fresh')[0]} ({_t('fresh')[1]:,}) are fresh; {_t('lapse_eligible')[0]} projects "
+     f"({_t('lapse_eligible')[1]:,} units) are ALREADY LAPSE-ELIGIBLE — the city has declared none of them lapsed. "
+     f"({_t('permitted_unlinked')[0]} more show an issued permit not yet linked to the project in our record — "
+     'data queue.)'),
+ 3: 'A building permit was issued more than two years ago and the record shows no inspection ever called '
+    f'on it. {len(STATES[3])} projects sit here.',
+ 4: f'A building permit is issued and the work is being inspected. Of these {n4} projects, {recent} had an '
+    f'inspection in the last six months, {older} were last inspected more than six months ago, and {none4} '
+    'have a permit issued within the last two years and no inspection yet. The last column gives the latest '
+    'inspection on the record.',
+ 5: 'Every building finaled — certificate of occupancy issued, keys in doors.',
 }
 COLORS = {1: '#7ec8e3', 2: '#4a6478', 3: '#ff9f7f', 4: '#ffd166', 5: '#8fd694'}
 LEVERS = [
  ('Entitlement shot-clock & extension certainty',
-  'Entitled approvals quietly age out: 2,334 units are already lapse-eligible under BMC 23.404.060 '
-  'and none has been declared lapsed. A standing extension policy with a use-it-or-lose-it horizon '
+  f"Entitled approvals quietly age out: {_t('lapse_eligible')[1]:,} units are already lapse-eligible under "
+  'BMC 23.404.060 and none has been declared lapsed. A standing extension policy with a use-it-or-lose-it horizon '
   'makes the waiting room a queue instead of a shelf.', 2),
  ('Defer city fees to certificate of occupancy',
   'Fees due at permit issuance front-load cost onto the exact moment financing is hardest. '
@@ -120,20 +190,9 @@ LEVERS = [
   'dead ones — the register stops hiding both.', 3),
 ]
 
-tier_stats = {}
-for w in LAPSE['projects']:
-    t = w.get('tier', '?')
-    n, u = tier_stats.get(t, (0, 0))
-    tier_stats[t] = (n + 1, u + (w.get('u') or 0))
-def _t(t): return tier_stats.get(t, (0, 0))
-DESC[2] = DESC[2].format(MOB_N=_t('mobilizing')[0], MOB_U=f"{_t('mobilizing')[1]:,}",
-                         FR_N=_t('fresh')[0], FR_U=f"{_t('fresh')[1]:,}",
-                         LE_N=_t('lapse_eligible')[0], LE_U=f"{_t('lapse_eligible')[1]:,}",
-                         PU_N=_t('permitted_unlinked')[0])
-
 def esc(s): return str(s).replace('&', '&amp;').replace('<', '&lt;')
 
-SECTION_CAP = {4: None}   # None = show ALL rows; under construction (16) shows in full. Others default to 12.
+SECTION_CAP = {}   # None = show ALL rows. Every state defaults to the 12 largest.
 
 def state_section(i):
     rows = sorted(STATES[i], key=lambda r: -r['u'])
@@ -145,15 +204,15 @@ def state_section(i):
         yrs = f"{(TODAY - r['anchor']).days / 365:.1f} yrs" if r.get('anchor') else '—'
         anch = r['anchor'].isoformat() if r.get('anchor') else '—'
         if i == 2:
-            lw = lapse.get(r['pid'], {})
-            ev = lw.get('evidence'); tier = lw.get('tier', '')
-            extra = TIER_LABEL.get(tier, '')
-            if ev: extra += f" ({ev['pn']})"
-            elif tier == 'lapse_eligible': extra += f" since {lw.get('lapse_eligible_date','')}"
+            extra = TIER_LABEL.get(r['tier'], '') + (f" ({r['ev']})" if r.get('ev') else '')
+        elif i in (3, 4):
+            extra = f"last inspection {r['last_insp']}" if r['last_insp'] else 'no inspection on record'
+        elif i == 1:
+            extra = r['stage']
         else:
-            extra = (r.get('last_insp') or ('never' if i in (3, 4) and r['pid'] in insp else '—')) if i in (3, 4) else ''
+            extra = ''
         trs.append(f"<tr><td>{esc(r['addr'])}</td><td class='num'>{r['u']:,}</td>"
-                   f"<td>{anch}</td><td class='num'>{yrs}</td><td>{extra}</td></tr>")
+                   f"<td>{anch}</td><td class='num'>{yrs}</td><td>{esc(extra)}</td></tr>")
     more = (f"<p class='foot'>Showing the {cap} largest by units — {len(rows):,} projects total in this state.</p>"
             if (cap is not None and len(rows) > cap) else '')
     return f"""
@@ -185,6 +244,13 @@ lever_html = ''.join(f"""
   <div class="lever"><h3>{esc(t)} <span class="tag modeled">modeled</span></h3>
   <p>{esc(body)} <b>Exposure: {sum(r['u'] for r in STATES[st]):,} units now in state {st}.</b></p></div>"""
   for t, body, st in LEVERS)
+
+def _n(x): return f"{len(exits[x])} ({sum(r['u'] for r in exits[x]):,} proposed units)"
+exit_line = (f"Exits: {_n('Withdrawn')} withdrawn by their applicants; {_n('Denied')} denied; "
+             f"{_n('Expired')} expired or voided.")
+gate_line = (f"The ≥50-unit subset is gate-checked against the audited JN-K funnel baseline ({bl['as_of']}) at "
+             'generation time.' if anchor_passed else
+             f"The JN-K funnel baseline ({bl['as_of']}) predates the v4 database; a v4 baseline is pending.")
 
 html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -218,34 +284,43 @@ html = f"""<!DOCTYPE html>
   <div class="kicker">A view of the record · berkeleybuild.com · as of {TODAY.isoformat()}</div>
   <h1>The Pipeline State</h1>
   <p>Where every tracked housing project stands <b>right now</b>, binned by the furthest <b>hard
-  evidence</b> on its record — dates and events, never status labels alone. The pattern to see:
+  evidence</b> on its record — dates, permits and inspections, never status labels alone. The pattern to see:
   Berkeley's pipe doesn't close by denial; it narrows by waiting.</p>
   {flow_svg()}
-  <p class="foot">Block width ∝ units. {len(withdrawn)} projects ({sum(r['u'] for r in withdrawn):,} proposed units)
-  were withdrawn by their applicants — the only exits are voluntary. UC projects excluded (self-permitted,
-  counted in beds).</p>
+  <p class="foot">Block width ∝ units. {exit_line} UC projects excluded (self-permitted, counted in beds).</p>
   {''.join(state_section(i) for i in (1, 2, 3, 4, 5))}
   <h2>The levers — what could move the stalled states</h2>
   <p>The record tells us the <i>exposure</i> — how many units sit in each state and for how long.
   Whether a lever moves them is policy judgment, so every lever wears its tag.</p>
   {lever_html}
-  <div class="src">Derived {TODAY.isoformat()} from the canonical v2 database (stage dates: first-application /
-  entitlement / first non-subsidiary permit / verdict-driven CO — the MIN-semantics fields corrected 2026-07-10);
-  construction activity = the harvested inspection record (all 23 primary permits of states 3/4, full histories,
-  2026-07-14 — see data/processed/inspection_activity_2026-07-14.json), falling back to observed-start/topping-out
-  events or status only where no inspection data exists; waiting-room tiers = BMC 23.404.060 one-year
-  lapse-eligibility modeled on entitlement dates + building-permit APPLICATIONS found in the 2015-2026 harvest
-  (data/processed/waiting_room_lapse_2026-07-14.json — lapse declaration is discretionary, so 'eligible' is a
-  legal state, not a prediction); permit evidence = the view's first non-subsidiary permit ONLY — the 2026-07-14 adjudication removed the
-  any-permit-event fallback after harvest verification showed the four affected majors' only permit events were
-  trades permits (three have never filed a primary building permit; 2138 Kittredge is phased mid-permitting). The ≥50-unit subset is gate-checked against the audited JN-K funnel baseline ({bl['as_of']}) at
-  generation time. Coverage: tracked projects (the full permit-level record lives in
+  <div class="src">Derived {TODAY.isoformat()} from the canonical v4 database (its serving view v_projects, through
+  the same projection as <a href="explorer.html">the Explorer</a>, so the two agree: each state is a group of the
+  Explorer's stages). Stage dates: first application / entitlement / first building permit / the last building's
+  certificate of occupancy. Construction activity = the inspections on the record for the project's buildings; a
+  permit issued more than two years ago with no inspection ever is "no construction activity". Waiting-room tiers =
+  BMC 23.404.060 one-year lapse-eligibility from the entitlement date, plus the building-permit APPLICATIONS found in
+  the 2015-2026 harvest (data/processed/waiting_room_lapse_2026-07-14.json), each re-checked against the City's
+  current listing of that record — lapse declaration is discretionary, so 'eligible' is a legal state, not a
+  prediction. {gate_line} Coverage: tracked projects (the full permit-level record lives in
   <a href="housing-audit.html">the Audit</a>). Generator: scripts/gen_pipeline_state_page.py — the page regenerates
   from the record; numbers are never hand-edited. <a href="index.html">← berkeleybuild.com</a></div>
 </div>
 </body>
 </html>
 """
-out = os.path.join(ROOT, 'docs', 'pipeline-state.html')
+
+# Re-stamp the site_meta block (description, canonical, Open Graph, favicon) that a whole fresh page would strip;
+# block() has no image dependency. Never block the page on metadata.
+try:
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('site_meta', os.path.join(ROOT, 'scripts', 'site_meta.py'))
+    site_meta = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(site_meta)
+    html = html.replace('</head>', site_meta.block('pipeline-state.html') + '</head>', 1)
+except Exception as e:
+    print(f'  WARNING: site_meta block not applied ({e})')
+
+os.makedirs(ARGS.out, exist_ok=True)
+out = os.path.join(ARGS.out, 'pipeline-state.html')
 open(out, 'w').write(html)
 print('wrote', out, f'({len(html)//1024}KB)')

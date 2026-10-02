@@ -585,7 +585,10 @@ declared types attachment_listed 1,469, fees_recorded 2,221); structures/units i
 7 new v_projects columns; NO value changed on any existing project; APR 2025 credit 2,134. Snapshot of live:
 `databases/keep_snapshot_2026-10-01_pre-batch-swap.db`.
 
-**NEXT:** John unlocks -> swap -> relock -> Explorer re-point -> archive v2 -> next swap (views with
+**SWAPPED IN 2026-10-01** (John unlocked): live v4 = batch build, SHA-256 8b391f44bff06205..., integrity ok, 419,809
+events, 1,558 projects, fees paid \$38.8M.
+
+**NEXT:** John relocks -> Explorer re-point -> archive v2 -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

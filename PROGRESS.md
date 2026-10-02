@@ -604,7 +604,37 @@ through 2025) with the July marker "state dashboard credits 1,608 (18.0%)"; depl
 renders with no errors. export_explorer_data_v2.py sequestered. **Every publisher now reads v4** (APR, Datasette,
 Explorer). On dev -- the site changes deploy when John pushes to main; Datasette when John runs flyctl deploy.
 
-**NEXT:** archive v2 (read-only, like v1: CLAUDE.md, the remaining v2 readers -- tours/KML, analysis notebooks) -> next swap (views with
+**v2 READERS RE-POINTED (2026-10-02, John: "re-point the remaining v2 readers"):** 33 v2-only tools sequestered
+(`c2f6f83` + banners `1d3d8df`, `b4c1423`); gates / harvester queues / R2 uploader (`b5d352c`); journalist kit -- masked
+public mirror berkeley_housing_public.db, reporters page, case file (`fd6c042`, `ff17b6e`); site-page generators
+(`720ec6f`); tours/KML (`ec2c276`); JN-J/K/L/N/MeasureU generators (`849690d`); Explorer architect = firm (`b4c1423`).
+Canon fix: housing_rules.address read '7TH ST' as house 7 on street 'th' (11 keys, 73 parcels) -- fixed + tests; takes
+effect at the next rebuild (gate_join_keys FAILS until then). Still naming v2, by design: scripts/build_v2/ (v3
+curriculum; will read the archived copy), the Explorer's old-link crosswalk, old executed notebooks, historical demos.
+NOTHING PUBLISHED from these (pipeline-state, players, KML, notebooks wait on the decisions below).
+
+**DECISIONS FOR JOHN (consolidated 2026-10-02):**
+1. Retire docs/data/berkeley_housing_v2_public.db from the site (July full v2 copy; private owners' names).
+2. Players page: carry v2's SOURCED developer/architect credits (title blocks, SFYIMBY, Kennedy tour, panoramic.com)
+   into a v4 attribution ledger before replacing docs/players.html (v1-carried unsourced ones stay out).
+3. New dated v4 baselines for JN-J, K, L, N, MeasureU and the pipeline-state anchor (proposed ones in
+   scratch/2026-10-02_repoint/baselines/).
+4. Split "Under Construction" (32 never inspected, 62 not inspected for 6+ months) in the Explorer + pipeline page?
+5. Possible v4 duplicates / mis-statuses: 1899 Oxford, 2115 Kittredge, 2029 University (two projects per site --
+   modification chains?), 1750 Sacramento pre-application (v2: entitled 2026-03-03), 2427 San Pablo 78 -> 8 units,
+   1598 University completed -> under construction. Check before republishing the map.
+6. Ledger corrections v2 had and v4 lacks: 2128 Oxford 456 units / 27 storeys / 285 ft (approved plan set); 2700
+   Shattuck 15 storeys (v4 reads 8). UC heights missing in v4.
+7. KML: apply the v4 sync/restyle after 5-6; legend fold ("Building Permits Filed" -> Entitled, inactive -> Stalled,
+   Denied/Expired -> Withdrawn) or adopt the Explorer's colors (breaks published videos' legend).
+8. Ashby BART placemarks -> PLN2026-0185?
+9. R2 key format for NEW uploads: <project_key>_<slug>_<date>.pdf (existing proj<id> keys untouched).
+10. housing_rules.owner_name.is_organisation misses firms (TRACHTENBERG ARCHITECTS, STUDIO KDA, BRIDGE HOUSING,
+    "HOUSING AUTHORITY") and passes joint titles naming a person: widen the canon (affects the ownership map's colors).
+11. JN-L's assessed-value benchmark picks The Standard (student, $922K/unit): keep, or median / value per sq ft?
+Do not run tours/build_tours_manifest.py --write (it would damage the live video catalog; pre-existing).
+
+**NEXT:** John's decisions -> rebuild (address canon fix) -> archive v2 read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.
@@ -3353,7 +3383,7 @@ description contradicted its own field, and I read the field.*
 two-building site, so both polygons read "1113 beds · Under Construction" —
 right for Heumann House, wrong three ways for the SAHA building (not 1,113, not
 beds, not under construction). Hand-editing the label is undone by the next
-`sync_status_from_v2.py`; the second building needs its own record. The same
+`sync_status_from_v4.py`; the second building needs its own record. The same
 question applies to 2200 Bancroft and 2400 Bowditch, whose figures are also
 unsourced migration records that merely happen to agree with their descriptions.
 
@@ -3417,7 +3447,7 @@ Bay/marina tour awaits John's drawn path.
 
 **THE TWO STANDING LANES:**
 
-- **GEOMETRY / TOURS.** Owns `kml/` (geometry, tours, control points, labels, the 61 tour packages `.kml` + self-contained `.kmz`), `docs/geometry.kml` + `.kmz`, `docs/tours.json`, and the homepage video blocks in `docs/index.html`. Derives building COLOUR from v2's `status_label` — never edits v2. Toolchain: `sync_status_from_v2.py` → `restyle_by_status.py` → `update_legend.py` → `build_tour_package.py --all`. Whole cycle ≈ 2 minutes per status change.
+- **GEOMETRY / TOURS.** Owns `kml/` (geometry, tours, control points, labels, the 61 tour packages `.kml` + self-contained `.kmz`), `docs/geometry.kml` + `.kmz`, `docs/tours.json`, and the homepage video blocks in `docs/index.html`. Derives building COLOUR from v2's `status_label` — never edits v2. Toolchain: `sync_status_from_v4.py` → `restyle_by_status.py` → `update_legend.py` → `build_tour_package.py --all`. Whole cycle ≈ 2 minutes per status change.
 - **BUILDING DATA / HARVEST.** Owns the Accela/Clariti harvesters, CPRA ingestion, and **all gated v2 writes** (snapshot → read-only preview → STOP-for-John → guarded write). Adjudicates status. Pings the geometry lane whenever a `status_label` changes.
 
 **The handoff contract:** data lane changes a status in v2 → pings geometry lane → geometry lane re-derives colours, rebuilds packages, re-stamps the catalog. Geometry lane NEVER infers a status change from absence of evidence; the data lane NEVER mass-flips on a permit alone (2800 Telegraph: a permit is not crews, and no permit is not no crews).

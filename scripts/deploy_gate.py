@@ -105,8 +105,8 @@ def main():
         gone = [t["package"] for t in cat["tours"] if t.get("package") and not os.path.exists(t["package"])]
         check(not gone, "every catalog package exists on disk", f"{len(gone)} missing")
 
-    # 4. THE SERVED DATA IS NOT STALE. export_explorer_data_v2.py writes
-    #    docs/explorer_data_v2_working.js; docs/explorer.html -- the page every link on the site
+    # 4. THE SERVED DATA IS NOT STALE. export_explorer_data_v4.py (v4, since 2026-10-01; the v2 export is
+    #    sequestered) writes docs/explorer_data_v4_working.js; docs/explorer.html -- the page every link on the site
     #    points at -- reads docs/explorer_data.js. Promotion between them is a manual copy, and
     #    on 2026-09-04 it emerged that it had not happened since the owner join landed: the live
     #    explorer had 28 owners populated out of 895 projects while the working file had 852.
@@ -116,7 +116,7 @@ def main():
     #    Compare the two directly. Byte-identical is the only safe state; anything else means an
     #    export ran and was never promoted. The header carries a "Generated:" line that differs
     #    on every run, so compare the DATA and report the dates when they disagree.
-    served, working = staged("docs/explorer_data.js"), staged("docs/explorer_data_v2_working.js")
+    served, working = staged("docs/explorer_data.js"), staged("docs/explorer_data_v4_working.js")
     if served is None or working is None:
         check(served is not None, "docs/explorer_data.js is present")
     else:
@@ -129,8 +129,8 @@ def main():
         fresh = payload(served) == payload(working)
         check(fresh, "served explorer data matches the latest export",
               f"served {gen(served)} vs working {gen(working)} — "
-              "run scripts/export_explorer_data_v2.py, then "
-              "cp docs/explorer_data_v2_working.js docs/explorer_data.js")
+              "run scripts/export_explorer_data_v4.py, then "
+              "cp docs/explorer_data_v4_working.js docs/explorer_data.js")
         # THE HOME PAGE'S NUMBERS ARE GENERATED FROM THAT DATA (2026-09-30). They were hand-typed ("14,659
         # units", "905 projects") and were wrong within eight days. scripts/site_numbers.py stamps its block
         # with the export's Generated time; a new export whose numbers were not regenerated cannot deploy.

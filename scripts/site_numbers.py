@@ -14,7 +14,7 @@ TWO SOURCES, deliberately (John, 2026-09-30):
     Housing Audit page (stage_methods.co_total). The first version took them from the v2 Explorer data, which is
     missing older permits and some unit counts: 3,453 for 2018-25 against the City's 4,022 and v4's 4,126. Each year
     also shows the City's own APR figure (HCD open-data mirror), so the comparison is on the page.
-  * NOT YET BUILT and the PROJECT COUNT come from the served Explorer data (docs/explorer_data.js, v2), because only
+  * NOT YET BUILT and the PROJECT COUNT come from the served Explorer data (docs/explorer_data.js, v4 since 2026-10-01), because only
     v2 has project stages until the cutover to v4.
 Both exclude UC Berkeley (its projects are counted in beds, not units).
 

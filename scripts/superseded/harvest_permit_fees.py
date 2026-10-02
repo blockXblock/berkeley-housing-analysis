@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/harvest_permit_fees.py.
+# WHY: AgencyCounter total_fee per permit, targets chosen from v2. v4's fees are the City's own Fees-tab totals
+# (stage_methods.load_building_fees / load_planning_fees). Its 2026-09-01 snapshot CSV stays and JN-L §8b still reads it.
+raise SystemExit("SEQUESTERED 2026-10-02 -- harvest_permit_fees.py read v2; see header")
+# ================================================================================
 """harvest_permit_fees.py — per-permit fee snapshot from AgencyCounter, for JN-L (fiscal flows).
 
 JN-L notes the itemized developer/impact/in-lieu fees are "NOT MATERIALIZED in v2 (data gap)". AgencyCounter

@@ -73,10 +73,16 @@ def get_projects(db):
     apn = dict(q("""SELECT json_extract(p.notes, '$.project_key'), MIN(pi.apn_normalized) FROM projects p
                     JOIN project_parcels pp USING(project_id)
                     JOIN parcel_identifiers pi ON pi.parcel_id = pp.parcel_id AND pi.is_current = 1 GROUP BY 1"""))
+    # ONE name per project and role: an ORGANISATION before a person (the firm, not the individual who signed), then
+    # the name the records repeat most -- not the alphabetically first (which published "Isaiah Stackhouse" over
+    # Trachtenberg Architects for 1974 Shattuck, 2026-10-02)
     people = collections.defaultdict(dict)
-    for k, role, name in q("""SELECT project_key, role, MIN(name) FROM v_project_people
-                              WHERE role IN ('developer', 'plans_developer', 'plans_architect') GROUP BY 1, 2"""):
-        people[k][role] = name
+    cand = collections.defaultdict(collections.Counter)
+    for k, role, name in q("""SELECT project_key, role, name FROM v_project_people
+                              WHERE role IN ('developer', 'plans_developer', 'plans_architect') AND name IS NOT NULL"""):
+        cand[(k, role)][name.strip()] += 1
+    for (k, role), c in cand.items():
+        people[k][role] = sorted(c, key=lambda n: (not is_organisation(n), -c[n], n))[0]
     cur = db.execute("SELECT * FROM v_projects")
     cols = [d[0] for d in cur.description]
     out = []

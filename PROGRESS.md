@@ -642,7 +642,11 @@ NOTHING PUBLISHED from these (pipeline-state, players, KML, notebooks wait on th
 11. JN-L's assessed-value benchmark picks The Standard (student, $922K/unit): keep, or median / value per sq ft?
 Do not run tours/build_tours_manifest.py --write (it would damage the live video catalog; pre-existing).
 
-**NEXT:** John's decisions -> rebuild (address canon fix) -> archive v2 read-only -> next swap (views with
+**Names published (2026-10-02, John: "show names"; `b3108b2`, `a631245`):** owner and applicant names are public record;
+the presentation mask is gone from the Explorer, Datasette + public mirror, APR, JN-N/JN-L. Players page: every
+professional named; owner nodes organisation-only (layout). Disk: test copies deleted, 16 GB free.
+
+**NEXT:** John's decisions (2-11 above) -> rebuild (address canon fix) -> archive v2 read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

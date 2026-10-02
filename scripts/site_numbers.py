@@ -94,8 +94,9 @@ def render(stamp, f):
   <p style="margin: 0.45rem 0 0; text-align: center;">
     <a href="explorer.html?tab=projects" class="hero-cta">See {f['projects']:,} Berkeley building projects &rarr;</a>
   </p>
-  <div role="group" aria-label="Units completed each year: our count and the City's" style="max-width: 42rem; margin: 0.7rem auto 0; text-align: center; color: #1a365d;">
-    <div style="color: #4a5568; font-size: 0.85rem; margin-bottom: .3rem;">Units completed each year: our count from permits, and the City&rsquo;s report to the state</div>
+  <div role="group" aria-label="Units completed each year: our count and the City's" style="max-width: 42rem; margin: 2rem auto 0; text-align: center; color: #1a365d;">
+    <div style="font-size: 1.15rem; font-weight: 700; margin-bottom: .2rem;">What Berkeley actually builds each year</div>
+    <div style="color: #4a5568; font-size: 0.85rem; margin-bottom: .4rem;">Units Completed Each Year, our count from permits, and the City&rsquo;s Annual Progress Report to the state</div>
     <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: .35rem;">{''.join(chip(y) for y in yrs)}</div>
     <div style="margin-top: .3rem; color: #718096; font-size: 0.75rem;">*{yrs[-1]} through {through}; the City&rsquo;s {yrs[-1]} report is not out yet. Why the two differ: <a href="housing-audit.html" style="color: #2b6cb0;">the Housing Audit</a>. Excludes UC Berkeley, counted in beds. &ldquo;Not yet built&rdquo; and the project count come from the Explorer&rsquo;s data, updated {html.escape(stamp[:10])}.</div>
   </div>
@@ -107,7 +108,11 @@ def main():
     f = figures(d)
     page = open(PAGE).read()
     assert BEGIN_RE.search(page), 'no site_numbers block in docs/index.html'
-    open(PAGE, 'w').write(BEGIN_RE.sub(lambda m: render(stamp, f), page, count=1))
+    page = BEGIN_RE.sub(lambda m: render(stamp, f), page, count=1)
+    # the Pipeline Explorer button below the block quotes the same project count; keep it in step
+    page, k = re.subn(r'all [\d,]+ projects, dates, values, RHNA', f"all {f['projects']:,} projects, dates, values, RHNA", page)
+    assert k == 1, f'Explorer button count: expected 1 match, found {k}'
+    open(PAGE, 'w').write(page)
     print(f"site_numbers: {f['projects']:,} projects · {f['not_built']:,} not yet built · {f['built']:,} built since "
           f"{f['first_year']} (v4 {f['v4_sha']}) · ours {f['ours']} · City {f['city']} · explorer {stamp}")
 

@@ -23,7 +23,7 @@ REAL = {
     "B2017-05297": "Building a new house 2107sqft",
     "B2017-05298": "Building a new house (rear) 1669SqFt. Address assignment in process",
     "B0000-0001": "building a 3-story addition to an existing duplex",
-    # DIFFERENT PHASE SEQUENCES on one block: an 8-storey in 2 phases and a 6-storey (El Jardin) in
+    # DIFFERENT PHASE SEQUENCES on one block: an 8-story in 2 phases and a 6-story (El Jardin) in
     # 3 phases. These merged under the old "both are phases" rule, which would erase one building.
     "B2018-01337": "Phase II of II: Superstructure and close in for a new 8 story mixed use building",
     "B2018-03422": "Phase III of III for a New 6-Story mixed use building. See Permit B2018-01337",

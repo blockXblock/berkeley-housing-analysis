@@ -52,7 +52,7 @@ them from `v_projects_flat`, and the next run will overwrite anything typed by h
 - UC projects are counted in **beds**, private in **units** — the sync knows the difference
 
 The boxed SVG labels are separate again: `gen_svg_labels.py` renders a PNG per building from v2
-(address, units/beds, status, storeys, height, floor area, architect, developer, owner) and
+(address, units/beds, status, stories, height, floor area, architect, developer, owner) and
 `svg_label_tour.py` splices them into a tour. Delete `scratch/.../svg-labels/` to force a
 re-render after a data change — it caches by filename.
 

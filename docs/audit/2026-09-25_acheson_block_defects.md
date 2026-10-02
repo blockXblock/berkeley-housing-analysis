@@ -104,7 +104,7 @@ building and project, which is consistent with the rule.
 ## Address aliasing (reported, not independently checked)
 
 John reports 2125/2129/2131/2135 University are storefronts plus the main door of **one** building
-(Bldg A), and 2109/2111 are one six-storey building with the numbers running **backwards**. v2 holds
+(Bldg A), and 2109/2111 are one six-story building with the numbers running **backwards**. v2 holds
 only 2111, 2119, 2131 and 2145 of the nine. LMSA2019-0001 gives the City's own project-site
 footprint: *"1979-1987 Shattuck, 2102-2113 University, 2125-2145 University and 1922-1930 Walnut"*.
 

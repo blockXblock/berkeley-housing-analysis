@@ -8,7 +8,7 @@ in kml/geometry/geometry.kml, and the two disagree -- on 2026-09-05 the tour dre
 without a comparison nobody knows which one a tour is flying.
 
 THE ARBITER IS v2, NOT EITHER FILE. Roof height is checkable: v2 carries height_feet, or
-height_stories at the project's 3.5 m/storey convention. Measured against that, the canonical
+height_stories at the project's 3.5 m/story convention. Measured against that, the canonical
 geometry was right on all eight buildings to 0.0 m and the tour was wrong on all eight, by 3.5 to
 40.5 m. So the rule is not "prefer canonical because it is canonical" -- it is "prefer whichever
 matches v2", and canonical wins because it is generated FROM v2.

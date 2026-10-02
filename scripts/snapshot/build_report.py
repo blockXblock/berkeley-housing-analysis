@@ -457,7 +457,7 @@ def s_people():
     {table(['Year', 'Residents', 'In households', 'In group housing', 'Homes', 'Occupied', 'Vacancy', 'Per household'], dof_rows, right=range(1, 8))}
     <p class="note">2020 is the April 1 census; other years are January 1. The 2021 drop in group housing (20,925 to
     14,527) is the campus emptying during the pandemic. Data: {dl('dof_e5_berkeley_2020_2026.csv')}</p>
-    <h3>How many people Berkeley may hold</h3>
+    <h3>How Berkeley will grow if projects are built</h3>
     <p class="note" style="font-size:.95rem">Berkeley's population has been flat since 2020, at about 127,600, after a pandemic dip to
     120,670 in 2021 when the campus emptied. Three plans point higher. The State requires Berkeley to plan for 8,934 new homes from
     2023 to 2031. BerkeleyBuild's pipeline counts 11,222 homes approved or proposed but not yet built<sup>1</sup>. And student housing

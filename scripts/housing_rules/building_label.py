@@ -134,7 +134,7 @@ def same_building(a: BuildingLabel, b: BuildingLabel) -> bool | None:
         # one names a building and the other does not -- not evidence either way
         return None
     # Neither names a building. A shared phase SEQUENCE is evidence; a bare phase number is not.
-    # "Phase II of II" (an 8-storey) and "Phase III of III" (a 6-storey) merged into one structure on
+    # "Phase II of II" (an 8-story) and "Phase III of III" (a 6-story) merged into one structure on
     # 2026-09-26 under the old rule "both are phases -> same building" -- they are different buildings
     # on one block, one of them El Jardin. A sequence of 2 and a sequence of 3 cannot be the same
     # sequence, so the TOTAL is the discriminator.

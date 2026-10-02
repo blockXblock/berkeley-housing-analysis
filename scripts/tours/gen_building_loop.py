@@ -67,8 +67,8 @@ def buildings(geom=None):
     address the LAST one in document order silently won. That is not a rare case: it is
     exactly the multi-building projects. 1750 Sacramento St carries all 13 North Berkeley
     BART buildings, so the "1750 Sacramento · 739 units" loop was orbiting *Avalon Walk-up
-    E* — a 10.5 m three-storey block at a 14 m radius, 96 m north of the site centre, with
-    the eight-storey buildings out of frame entirely. Ashby BART (5 buildings) picked MLK
+    E* — a 10.5 m three-story block at a 14 m radius, 96 m north of the site centre, with
+    the eight-story buildings out of frame entirely. Ashby BART (5 buildings) picked MLK
     Building E and missed the Adeline Tower; 2556 Haste picked the shorter South wing.
 
     So a shared address is now aggregated into ONE SITE: centroid over the union of every

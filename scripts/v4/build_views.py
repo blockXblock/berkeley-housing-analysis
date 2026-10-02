@@ -12,7 +12,7 @@ DECISIONS IT IMPLEMENTS (John, 2026-09-30, notes/v4/2026-09-30_phase6_field_map.
   D4  units: a project with buildings counts its buildings; an application-only project shows its STATED proposal
       (proposed_units), never mixed into built units.
   D5  developer/architect: not published (v2's were unsourced); record_owner and applicant instead.
-  sq ft / parking / storeys / height (John: KEEP, from sources): the verbatim-quoted measures; the City's parcel-level
+  sq ft / parking / stories / height (John: KEEP, from sources): the verbatim-quoted measures; the City's parcel-level
       taxable building sq ft alongside as a cross-check, labelled parcel-level.
 
   .venv/bin/python scripts/v4/build_views.py --db BUILD.db      # refuses live unless BUILD_VIEWS_ALLOW_LIVE=1

@@ -46,7 +46,7 @@ ANCHOR_TOLERANCE_DAYS = 60
 #   CHAIN      -- one record modifies another in the set  -> select the root, no ambiguity
 #   CONFLATED  -- several primaries with NO citation between them -> v2 has stitched one timeline
 #                 from separate applications (proj10 3000 Shattuck: filed_date from ZP2015-0229,
-#                 app_complete from the unrelated ZP2022-0046, a 9-storey gas-station scheme).
+#                 app_complete from the unrelated ZP2022-0046, a 9-story gas-station scheme).
 #                 That is a DATA FINDING to report, not a selection to make.
 # A WITHDRAWN or EXPIRED application's acceptance is not the project's rung 3 when a live application
 # exists: proj45 selected ZP2016-0091 (Withdrawn 2016) for a project whose later ZP2025-0085 also

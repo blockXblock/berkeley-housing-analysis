@@ -2,7 +2,7 @@
 """Fetch Library of Congress Sanborn fire-insurance sheets covering the Elmwood.
 
 WHY: the Sanborn sheets are the only primary source that records, block by block and
-building by building, how many STOREYS each structure had — the numeral is drawn inside
+building by building, how many STORIES each structure had — the numeral is drawn inside
 each footprint. That is the one input our modern parcel/assessor data cannot supply for
 pre-war Berkeley, and it is what makes a historical floor-area (FAR) series possible.
 
@@ -35,7 +35,7 @@ EDITIONS = {
     "1950": ("g00419195002", "00419_02_1950"),
 }
 SHEETS = ["ind1", "ind2", "ind3", "0179", "0180"]
-PCT = 50  # 50% of full res ~= 3300x3900, enough to read storey numerals
+PCT = 50  # 50% of full res ~= 3300x3900, enough to read story numerals
 
 TMPL = (
     "https://tile.loc.gov/image-services/iiif/"

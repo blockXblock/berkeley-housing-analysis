@@ -50,7 +50,7 @@ LINE_FIELDS = {
     'address':   'address_display',
     'units':     'total_units',
     'status':    'status_label',
-    'storeys':   'height_stories',
+    'stories':   'height_stories',
     'height':    'height_feet',
     'filed':     'filed_date',
     'architect': 'architect',
@@ -252,8 +252,8 @@ tour, the camera or the geometry enters into it.
 `lines_for()` produces, and render the SVG inline.
 
 **Why this project — and an open question it raises.** On 2026-09-04 a gated write in **v2** took this
-building from the 2023 SB 330 application figures (485 units, 26 storeys) to the ZAB-approved plan set
-(456 units, 27 storeys, 285 ft). **v4 does not carry that correction:** its proposed units and storeys
+building from the 2023 SB 330 application figures (485 units, 26 stories) to the ZAB-approved plan set
+(456 units, 27 stories, 285 ft). **v4 does not carry that correction:** its proposed units and stories
 come from the anchor application's own description (`ZP2022-0135`: "26-Story"), so the v4 label reads
 the application figures. Per CLAUDE.md a v2 correction reaches v4 only through the corrections ledger
 and a full rebuild — this is listed for John, not patched here.

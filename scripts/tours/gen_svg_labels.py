@@ -83,7 +83,7 @@ def lines_for(r):
     l2.append(str(r["status_label"]))
     l3 = []
     if r["height_stories"]:
-        l3.append(f"{int(r['height_stories'])} storeys")
+        l3.append(f"{int(r['height_stories'])} stories")
     if r["height_feet"]:
         l3.append(f"{int(r['height_feet'])} ft")
     if r["building_sqft"]:
@@ -258,9 +258,9 @@ def main():
         # CACHE, KEYED ON CONTENT (not on the filename). Rasterising 58 labels through qlmanage
         # takes two minutes, so a rebuild that only changes the tour must not re-render them all.
         # But the original test was "does <slug>.png exist" -- a filename the DATA never touches,
-        # so a corrected unit count or storey height left the old PNG in place forever and the
+        # so a corrected unit count or story height left the old PNG in place forever and the
         # tour silently kept showing the superseded figure. 2128 Oxford went to press at 485
-        # units / 26 storeys, rendered at 11:19, an hour and a half before the write that made it
+        # units / 26 stories, rendered at 11:19, an hour and a half before the write that made it
         # 456 / 27. Hashing the SVG makes the cache self-invalidating: the label re-renders when
         # and only when something it DISPLAYS has changed.
         body = svg(r)

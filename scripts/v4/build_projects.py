@@ -80,7 +80,7 @@ PATHWAYS_EVIDENCE = ROOT / "data/derived/project_pathways_evidence_2026-09-30.js
 # Proposed units of APPLICATION-ONLY projects (phase 6 D4): read from the City's text, verbatim quote containing the number.
 UNITS_EVIDENCE = ROOT / "data/derived/project_units_evidence_2026-10-01.json"   # incl. by_definition (John 2026-10-01)
 # Building measures (phase 6; John: square footage and parking KEPT, heights from sources -- D7): gross sq ft, parking,
-# storeys, height in feet, each kept only with a verbatim quote containing the number (scripts/llm_building_measures.py).
+# stories, height in feet, each kept only with a verbatim quote containing the number (scripts/llm_building_measures.py).
 MEASURES_EVIDENCE = ROOT / "data/derived/building_measures_evidence_2026-09-30.json"
 OUT = ROOT / "scratch/2026-09-29_phase3"
 ANCHOR_PRIORITY = ("primary_application", "pre_application", "ministerial_clearance", "companion_review")
@@ -556,12 +556,12 @@ def write(con, projects) -> dict:
                 h = (ms.get("height_feet") or {}).get("value")
                 sf = (ms.get("gross_sqft") or {}).get("value")
                 if st and h and not (8 <= h / st <= 20):
-                    bad["stories"] = bad["height_feet"] = f"height/storeys = {h}/{st} ft per storey, outside 8-20"
+                    bad["stories"] = bad["height_feet"] = f"height/stories = {h}/{st} ft per story, outside 8-20"
                 # Area: only a TALL building with a tiny floor plate is impossible. Small houses and ADUs legitimately run
                 # 230-500 sq ft per floor ("1,450 square-foot, 3-story single-family dwelling"); a first draft at 1,500
                 # for every building flagged 91 projects, almost all real. Measured: this flags one (ZP2023-0040).
                 if st and sf and st >= 5 and sf / st < 2000:
-                    bad["stories"] = bad["gross_sqft"] = f"floor area/storeys = {sf}/{st} sq ft on a {st}-storey building, under 2,000"
+                    bad["stories"] = bad["gross_sqft"] = f"floor area/stories = {sf}/{st} sq ft on a {st}-story building, under 2,000"
                 for m_ in bad:
                     ms.pop(m_, None)
                 if bad:

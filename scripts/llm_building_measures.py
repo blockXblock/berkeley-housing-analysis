@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 r"""llm_building_measures.py -- read a project's building MEASURES from the City's own text: gross square feet, parking
-spaces, storeys, height in feet.
+spaces, stories, height in feet.
 
 Phase 6 (John, 2026-09-30): square footage and parking are KEPT (the earlier "drop" rested only on v2's empty column)
 and heights are built from sources (D7). The measures are stated in prose -- "construct a 134,409 square-foot,
 eight-story (89 feet-2 inches) mixed-use building", "NEW 36,554 SQFT MIXED USE BLDG", "63 ground-level parking spaces"
 -- so a model reads them against the definition below. Each number is KEPT only if its quote appears VERBATIM in the
-cited record AND contains the number (for storeys, a number word counts: "six-story" supports 6). Nothing inferred.
+cited record AND contains the number (for stories, a number word counts: "six-story" supports 6). Nothing inferred.
 
 Read per PROJECT from its Planning descriptions and its master building-permit descriptions; keyed by the project's
 stable key. Evidence: data/derived/building_measures_evidence_<date>.json. No database write.

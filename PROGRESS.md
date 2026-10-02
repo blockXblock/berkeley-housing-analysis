@@ -588,7 +588,17 @@ declared types attachment_listed 1,469, fees_recorded 2,221); structures/units i
 **SWAPPED IN 2026-10-01** (John unlocked): live v4 = batch build, SHA-256 8b391f44bff06205..., integrity ok, 419,809
 events, 1,558 projects, fees paid \$38.8M.
 
-**NEXT:** John relocks -> Explorer re-point -> archive v2 -> next swap (views with
+**Explorer re-point, in review (2026-10-01):** `scripts/export_explorer_data_v4.py` (`5286b95`, `3a48d3c`) writes
+docs/explorer_data_v4_working.js (NOT served). Same DATA shape; 1,558 projects, stages from v4 status + v2's inactivity
+rules (+ Denied / Expired stages in explorer.js), City fees \$43.8M, staff = City reviewers, owners = organisations only,
+documents = R2 files + attachment lists, City-APR reconciliation 743 matched / 14 City-only (v2: 695 / 60), assessed
+values completed-only (885 of 888), DATA.v2_ids maps old ?project=<v2 id> links (1,057). Headless render: no errors.
+**Open for John:** TWO RHNA panels on the Dashboard -- the July 9 hand-typed one (1,959, live on main, tiers from HCD's
+dashboard) and the generated one I added (`8511d25`, dev; 2,134 through 2025 from the APR). Recommend one generated
+panel keeping the July marker "state dashboard credits 1,608 (18.0%)" as the comparison. Then promote the v4 data,
+switch deploy_gate + site_numbers to the v4 export, sequester export_explorer_data_v2.py.
+
+**NEXT:** John's RHNA-panel decision -> promote v4 Explorer data -> archive v2 -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

@@ -508,8 +508,48 @@ def s_tenure():
     <div class="two"><div>{acs_table('B25041', title='Homes by number of bedrooms')}</div>
     <div>{acs_table('B25024', title='Homes by units in the building')}</div></div>
     <div class="two"><div>{acs_table('B11001', title='Household types')}</div>
-    <div>{acs_table('B25004', title='Vacant homes by reason')}</div></div>'''
+    <div>{acs_table('B25004', title='Vacant homes by reason')}</div></div>
+    {rents_below_market(i)}'''
     return section('tenure', '2 · Renters and owners', 'Who rents, who owns, and what they pay', body)
+
+
+def rents_below_market(i):
+    R = F['rent_board']
+    M = R['median_by_band']
+    rh = i['renter_households']
+    share = lambda x: f"{100 * x / rh:.0f}%"
+    below = table(['Legal rent compared with what a new tenant pays for the same size apartment', 'Units', 'Share of renter households'], [
+        ['20% or more below', 'about ' + rnd(R['below_80']), 'about ' + share(R['below_80'])],
+        ['&nbsp;&nbsp;…of which a third or more below', 'about ' + rnd(R['below_67']), 'about ' + share(R['below_67'])],
+        ['&nbsp;&nbsp;…of which half or less', 'about ' + rnd(R['below_50']), 'about ' + share(R['below_50'])],
+    ], right={1, 2})
+    bands = ['before 2000', '2000-09', '2010-14', '2015-19', '2020-22', '2023-24', '2025-26']
+    by_start = table(['Tenancy began', 'Studio', '1 bedroom', '2 bedrooms', '3 bedrooms'],
+                     [[b.replace('-', '–')] + ['$' + n(round(M[b][k], -1)) for k in ('0', '1', '2', '3')] for b in bands],
+                     right={1, 2, 3, 4})
+    return f'''
+    <h3>Rents below market</h3>
+    <p class="note" style="font-size:.95rem">A tenant moving into a Berkeley apartment today pays market rent: among tenancies begun
+    in 2025 and 2026, a median of about ${n(round(M['2025-26']['1'], -1))} a month for a one-bedroom and
+    ${n(round(M['2025-26']['2'], -1))} for a two-bedroom. Rent control holds a tenant's rent to small annual increases for as long as
+    they stay; when they leave, state law lets the rent reset to market. So the rents that are far below market belong to tenants
+    who have stayed a long time. Of about {rnd(R['tenant_units'])} rent-controlled apartments with tenants, about
+    {rnd(R['below_80'])}, more than one Berkeley rental in four, rent for at least 20% less than a new tenant would pay for the same
+    size. A one-bedroom rented before 2000 has a median legal rent of ${n(round(M['before 2000']['1'], -1))}.</p>
+    <div class="two"><div>{below}</div><div>{by_start}</div></div>
+    <p class="note" style="font-size:.95rem">Rents for new tenancies have been roughly flat in dollars since 2020, which means they
+    have fallen after inflation. That is consistent with the dormitories opened since 2018 drawing students out of private
+    apartments, though remote work and new apartment buildings pushed the same way; the comparison is worth repeating after the
+    2027 and 2028 dormitories open. Separately from rent control, {n(R['gov_subsidized'])} registered units carry a government
+    subsidy: about {round(R['program_buildings'] / 50) * 50:,} in buildings funded by affordable-housing programs (the City's Housing Trust
+    Fund, low-income housing tax credits, project-based Section 8, HUD senior housing) and about {round(R['vouchers'] / 50) * 50:,} households
+    using Section 8 vouchers in private apartments; the two overlap, and some nonprofit and public buildings do not register, so
+    these counts are low. A count of income-restricted units in completed buildings awaits the City's inventory of its
+    affordable-housing portfolio.</p>
+    <p class="note">Rent Stabilization Board unit registry, snapshot July 13, 2026 (public records request #26-2375). Legal rent
+    is the registered rent ceiling; "what a new tenant pays" is the median ceiling of tenancies begun in 2025–26 for the same
+    number of bedrooms. Renter households: American Community Survey 2024. Data:
+    {dl('rent_control_legal_rent_by_tenancy_start.csv')}</p>'''
 
 
 def s_income():

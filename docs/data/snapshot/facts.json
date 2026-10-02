@@ -5365,6 +5365,60 @@
    "battery_electric": 6898
   }
  },
+ "rent_board": {
+  "tenant_units": 21477,
+  "analyzed": 20810,
+  "below_80": 7160,
+  "below_67": 4865,
+  "below_50": 2893,
+  "median_by_band": {
+   "before 2000": {
+    "0": 783.71,
+    "1": 921.0450000000001,
+    "2": 1069.68,
+    "3": 1529.5349999999999
+   },
+   "2000-09": {
+    "0": 1164.84,
+    "1": 1419.87,
+    "2": 1915.86,
+    "3": 2777.95
+   },
+   "2010-14": {
+    "0": 1233.23,
+    "1": 1531.77,
+    "2": 2012.16,
+    "3": 2726.14
+   },
+   "2015-19": {
+    "0": 1810.05,
+    "1": 2361.72,
+    "2": 3054.45,
+    "3": 3979.59
+   },
+   "2020-22": {
+    "0": 1844.79,
+    "1": 2206.69,
+    "2": 2942.25,
+    "3": 3944.925
+   },
+   "2023-24": {
+    "0": 1851.02,
+    "1": 2263.5,
+    "2": 2929.0,
+    "3": 3939.0
+   },
+   "2025-26": {
+    "0": 1895.0,
+    "1": 2295.0,
+    "2": 3000.0,
+    "3": 4095.0
+   }
+  },
+  "gov_subsidized": 1649,
+  "vouchers": 991,
+  "program_buildings": 1145
+ },
  "files": [
   {
    "file": "dof_e5_berkeley_2020_2026.csv",
@@ -5593,6 +5647,12 @@
    "grain": "census block group (GEOID)",
    "rows": 99,
    "description": "Licensed businesses located in each block group (rental-property licenses excluded)."
+  },
+  {
+   "file": "rent_control_legal_rent_by_tenancy_start.csv",
+   "grain": "tenancy start period x bedrooms",
+   "rows": 28,
+   "description": "Rent-controlled units with tenants (Rent Board registry, July 13, 2026): median legal rent ceiling by when the tenancy began."
   }
  ],
  "sources_manifest": {

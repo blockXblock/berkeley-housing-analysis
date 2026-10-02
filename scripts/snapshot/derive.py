@@ -695,6 +695,36 @@ def businesses(hoods, bg):
                              ownership=df.ownership.value_counts().to_dict())
 
 
+def rent_board():
+    """Rent Stabilization Board unit registry (CPRA #26-2375, snapshot 2026-07-13). Fully covered (rent-controlled) units
+    with a tenant: each unit's legal rent ceiling against the median ceiling of tenancies begun in 2025-26 for the same
+    number of bedrooms (a new tenancy starts at market rent under Costa-Hawkins). Aggregates only; no unit or tenant rows."""
+    d = pd.read_excel(os.path.join(ROOT, 'data', 'raw', 'rent_board', '2026-07-13 Unit Full Details.xlsx'))
+    r = d[(d['Type of Coverage'] == 'Fully Covered') & d['Occupant Type'].isin(['Tenant', 'Rent Subsidized Tenant'])].copy()
+    n_tenant = len(r)
+    r['start'] = pd.to_datetime(r['Tenancy start date'], errors='coerce')
+    r['ceil'] = pd.to_numeric(r['Rent Ceiling'].astype(str).str.replace(r'[$,]', '', regex=True), errors='coerce')
+    r = r[(r.ceil > 300) & (r.ceil < 15000) & r.start.notna()]      # drops placeholder ceilings ($1.11 etc.)
+    r['band'] = pd.cut(r.start.dt.year, [0, 1999, 2009, 2014, 2019, 2022, 2024, 2026],
+                       labels=['before 2000', '2000-09', '2010-14', '2015-19', '2020-22', '2023-24', '2025-26'])
+    beds = r['Number of Bedrooms']
+    market = r[r.band == '2025-26'].groupby('Number of Bedrooms').ceil.median()
+    ratio = r.ceil / beds.map(market)
+    t = r[beds.isin([0, 1, 2, 3])].groupby(['band', 'Number of Bedrooms'], observed=True).ceil.agg(['median', 'size']).reset_index()
+    t.columns = ['tenancy_began', 'bedrooms', 'median_legal_rent', 'units']
+    write_csv('rent_control_legal_rent_by_tenancy_start.csv', t, 'tenancy start period x bedrooms',
+              'Rent-controlled units with tenants (Rent Board registry, July 13, 2026): median legal rent ceiling by when the tenancy began.')
+    sub = d['Type of Subsidy'].fillna('')
+    FACTS['rent_board'] = dict(
+        tenant_units=n_tenant, analyzed=len(r),
+        below_80=int((ratio < 0.8).sum()), below_67=int((ratio < 2 / 3).sum()), below_50=int((ratio <= 0.5).sum()),
+        median_by_band={b: {str(k): float(v) for k, v in g.groupby('Number of Bedrooms').ceil.median().items() if k in (0, 1, 2, 3)}
+                        for b, g in r.groupby('band', observed=True)},
+        gov_subsidized=int((d['Gov Subsidized'] == 'Yes').sum()),
+        vouchers=int(sub.str.contains('Voucher').sum()),
+        program_buildings=int(sub.str.contains('Trust Fund|LIHTC|HTF|TCAC|HOME|236|202|Project-based|Shelter').sum()))
+
+
 def dmv_trend(src):
     """Plug-in share, Berkeley ZIPs, 1/1/2021 vs 1/1/2026 (same DMV file family)."""
     out = {}
@@ -732,6 +762,7 @@ def main():
     capital_needs()
     businesses(hoods, gpd.read_file(os.path.join(OUT, 'berkeley_blockgroups.geojson')))
     dmv_trend(src)
+    rent_board()
     FACTS['files'] = FILES
     FACTS['sources_manifest'] = {k: {kk: v[kk] for kk in ('url', 'fetched_at', 'sha256') if kk in v} for k, v in manifest.items()}
     json.dump(FACTS, open(os.path.join(OUT, 'facts.json'), 'w'), indent=1, default=lambda o: o.item() if hasattr(o, 'item') else str(o))

@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/materialize_assessed_value.py.
+# WHY: v2 write of assessed values; v4: stage_methods.load_parcels -> assessed_values, served in v_projects.
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- materialize_assessed_value.py read v2; see header")
+# ================================================================================
 """
 materialize_assessed_value.py — MACHINERY (re-runnable on each assessor refresh).
 

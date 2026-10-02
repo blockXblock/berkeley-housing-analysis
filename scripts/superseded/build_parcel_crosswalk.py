@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/build_parcel_crosswalk.py.
+# WHY: v2 APN crosswalk; v4 uses the County's own parcel lineage (housing_rules.parcel_lineage).
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- build_parcel_crosswalk.py read v2; see header")
+# ================================================================================
 """
 build_parcel_crosswalk.py — PHASE 1 MACHINERY (READ-ONLY, stages a proposal; NEVER writes).
 

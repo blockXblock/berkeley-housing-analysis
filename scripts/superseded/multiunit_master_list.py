@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/multiunit_master_list.py.
+# WHY: v2 multi-unit census; v4: structures + v_projects.
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- multiunit_master_list.py read v2; see header")
+# ================================================================================
 """Every multi-unit housing project in Berkeley, current — derived from primary sources, read-only.
 
 Built 2026-09-21 (notes/2026-09-21_multiunit_master_list_plan.md, Track C). Answers John's ask: a

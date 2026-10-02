@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/migration/load_inspections.py.
+# WHY: one-time v2 write (inspections into v2); v4: stage_methods.load_inspections.
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- load_inspections.py read v2; see header")
+# ================================================================================
 """Layer A — give the Accela inspection records a home in v2. ADDITIVE ONLY.
 
 Designed 2026-05-23 (`notes/2026-05-23_inspection_ingest_design_sketch.md`, "Design complete. Ready for

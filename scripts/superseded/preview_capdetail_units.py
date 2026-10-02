@@ -37,6 +37,13 @@ LOOKS authoritative. So this script:
   .venv/bin/python scripts/preview_capdetail_units.py
 """
 from __future__ import annotations
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/preview_capdetail_units.py.
+# WHY: preview of unit extraction for v2; v4 units come from permit_effect + llm_project_units.
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- preview_capdetail_units.py read v2; see header")
+# ================================================================================
 
 import argparse
 import collections

@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/extract_1e_forms.py.
+# WHY: 1.E form reader selecting v2 documents; to revive on v4, select from v4 `documents` (doc_type tabulation_form) by project_key.
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- extract_1e_forms.py read v2; see header")
+# ================================================================================
 """extract_1e_forms.py — read every City of Berkeley Tabulation Form 1.E we hold.
 
 THE 1.E IS THE ORACLE. It is ~200 KB, pdftotext reads it directly with no OCR, it is a STANDARD

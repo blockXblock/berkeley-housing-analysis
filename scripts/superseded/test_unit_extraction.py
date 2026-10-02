@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/test_unit_extraction.py.
+# WHY: test of preview_capdetail_units (sequestered with it).
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- test_unit_extraction.py read v2; see header")
+# ================================================================================
 """test_unit_extraction.py -- pin the unit-count extractor's behaviour.
 Run: .venv/bin/python scripts/test_unit_extraction.py
 

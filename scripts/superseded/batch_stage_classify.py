@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/batch_stage_classify.py.
+# WHY: v2 project-stage classification (batch); superseded as above.
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- batch_stage_classify.py read v2; see header")
+# ================================================================================
 """batch_stage_classify.py — classify every project's pipeline rung via the Anthropic Batch API.
 
 WHY BATCH. The serial approach failed on 2026-09-25 and the failure is instructive: 25 projects

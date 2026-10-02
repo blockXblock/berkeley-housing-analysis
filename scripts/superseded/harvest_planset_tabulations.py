@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/harvest_planset_tabulations.py.
+# WHY: tabulation harvest keyed to v2 projects; to revive on v4, select from v4 documents/project_records.
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- harvest_planset_tabulations.py read v2; see header")
+# ================================================================================
 """harvest_planset_tabulations.py — footprint + HEIGHT from architect plan-set zoning sheets, via OCR.
 
 WHY OCR AND NOT pdftotext

@@ -28,6 +28,13 @@ per-row rowcount==1 and verify-or-rollback -> fresh-connection fingerprint. Idem
   .venv/bin/python scripts/migration/ingest_capdetail_events.py --commit       # only after go-ahead
 """
 from __future__ import annotations
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/migration/ingest_capdetail_events.py.
+# WHY: one-time v2 write (CapDetail Planning events); v4 loads the harvests itself (stage_methods.load_all_planning).
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- ingest_capdetail_events.py read v2; see header")
+# ================================================================================
 
 import argparse
 import glob

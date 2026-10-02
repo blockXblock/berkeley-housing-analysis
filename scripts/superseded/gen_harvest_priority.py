@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/gen_harvest_priority.py.
+# WHY: harvest priorities from v2 projects; v4 harvests use named record lists (harvest_capdetail.py --records).
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- gen_harvest_priority.py read v2; see header")
+# ================================================================================
 """gen_harvest_priority.py — ranked list of BIG multi-parcel projects whose architect plan sets we do NOT
 yet hold, WITH the city permit/case record IDs so a Chrome/harvester run can pull the plans.
 

@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/migration/derive_inspection_events.py.
+# WHY: one-time v2 write (inspection-derived events); v4 loads inspections itself (stage_methods.load_inspections).
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- derive_inspection_events.py read v2; see header")
+# ================================================================================
 """derive_inspection_events.py — turn 47,413 inspection rows into stage-transition events.
 
 WHY. v2's stage vocabulary encodes the whole sequence John describes, but the transition DATA is

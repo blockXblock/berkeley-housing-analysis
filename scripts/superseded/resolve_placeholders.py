@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/resolve_placeholders.py.
+# WHY: v2 placeholder-date repair; v4 has no placeholder dates (events are source rows).
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- resolve_placeholders.py read v2; see header")
+# ================================================================================
 """resolve_placeholders.py — batch-resolve the migration-placeholder buildings (geometry still at the
 ~10.5 m / 3-storey default) using the proj135 method, generalized: best-available HEIGHT + real FOOTPRINT.
 

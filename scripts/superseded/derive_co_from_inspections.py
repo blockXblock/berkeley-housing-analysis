@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/derive_co_from_inspections.py.
+# WHY: v2 completion-from-inspections derivation; v4 completion = the City's finals (build_structures).
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- derive_co_from_inspections.py read v2; see header")
+# ================================================================================
 """Derive a dated CO from the Accela inspection trail, and reconcile it against v2. Read-only.
 
 THE RULE. Berkeley issues no traditional certificate of occupancy — the City FINALS permits, and the

@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/migration/preview_stage_from_events.py.
+# WHY: preview for a v2 stage write; v4 status comes from evidence (build_views D2).
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- preview_stage_from_events.py read v2; see header")
+# ================================================================================
 """preview_stage_from_events.py — READ-ONLY: what stage does the evidence say each project is at?
 
 WHY. `projects.current_stage_type_id` was never derived from the event stream; it is materialised

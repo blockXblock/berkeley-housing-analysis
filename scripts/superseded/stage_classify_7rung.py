@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/stage_classify_7rung.py.
+# WHY: v2 project-stage classification; v4 status from evidence (build_views D2) and milestones (housing_rules.planning_record).
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- stage_classify_7rung.py read v2; see header")
+# ================================================================================
 """stage_classify_7rung.py — assign every project a pipeline rung, and flag the approval track.
 
 THE SEVENTH RUNG, and why John wanted it. Between "application submitted" and "entitled" sits a

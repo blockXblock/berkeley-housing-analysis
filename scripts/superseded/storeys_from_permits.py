@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/storeys_from_permits.py.
+# WHY: storeys from v2 permits; v4: llm_building_measures.
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- storeys_from_permits.py read v2; see header")
+# ================================================================================
 """storeys_from_permits.py — storey counts from permit DESCRIPTIONS, for buildings with no 1.E.
 
 The method comes from berkeley-data-07's resolution of 2150 Kittredge: a building permit

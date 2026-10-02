@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/jev_stage_classify.py.
+# WHY: v2 project-stage classification (Jev); superseded as above.
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- jev_stage_classify.py read v2; see header")
+# ================================================================================
 """jev_stage_classify.py — assign each project a pipeline stage using TypeSafe's `jev` classifier.
 
 WHY JEV RATHER THAN A GENERAL MODEL. `llm-typesafe` (Simon Willison, 0.1a0) exposes a model built

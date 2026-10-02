@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/reconcile_apr_vs_city.py.
+# WHY: the v2 City-APR reconciliation engine; v4: export_explorer_data_v4.get_city_apr (743 matched vs v2's 695).
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- reconcile_apr_vs_city.py read v2; see header")
+# ================================================================================
 """
 reconcile_apr_vs_city.py — G1 reconciliation engine (READ-ONLY: v2 + hcd_apr_mirror).
 

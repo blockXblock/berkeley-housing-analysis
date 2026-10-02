@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/discover_planning_records.py.
+# WHY: Planning-record discovery for v2 projects; v4's Planning scope comes from the list dump + planning_filter.
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- discover_planning_records.py read v2; see header")
+# ================================================================================
 """discover_planning_records.py — for projects whose Planning (ZP/DRCP) record we do NOT hold, find
 candidate entitlement records by ADDRESS, and emit a harvest queue.
 

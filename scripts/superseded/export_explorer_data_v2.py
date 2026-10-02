@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-01 ============================
+# DO NOT RUN. Original home: scripts/export_explorer_data_v2.py.
+# WHY: built docs/explorer_data.js from v2. Replaced by scripts/export_explorer_data_v4.py (v4's serving views; same
+# DATA shape), compared field by field and rendered before promotion (John: "promote", 2026-10-01). The RHNA panel is
+# now generated from the APR's Table B; old ?project=<v2 id> links resolve through DATA.v2_ids.
+raise SystemExit("SEQUESTERED 2026-10-01 -- v2 Explorer export; use scripts/export_explorer_data_v4.py")
+# ================================================================================
 """
 Export Explorer Data Script - Single Source of Truth
 

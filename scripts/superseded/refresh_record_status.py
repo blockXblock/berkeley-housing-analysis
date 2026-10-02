@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/refresh_record_status.py.
+# WHY: driver for record_status_scraper (sequestered with it).
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- refresh_record_status.py read v2; see header")
+# ================================================================================
 """Track D — per-record STATUS REFRESH against Accela's public CapDetail pages (read-only, no DB write).
 
 Why: the date-range census (data/raw/accela/date_range/) lists records by FILING date with the status they

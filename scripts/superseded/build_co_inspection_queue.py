@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/build_co_inspection_queue.py.
+# WHY: queue for derive_co_from_inspections (sequestered with it).
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- build_co_inspection_queue.py read v2; see header")
+# ================================================================================
 """Build the CO-determination inspection queue (Phase 1) for the existing Playwright harvester.
 
 Why: Berkeley issues no traditional certificate of occupancy — it FINALS permits, and the moment that

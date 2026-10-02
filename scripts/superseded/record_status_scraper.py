@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/record_status_scraper.py.
+# WHY: refreshes v2 record status (writes v2); v4 reads status from the CapDetail harvests.
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- record_status_scraper.py read v2; see header")
+# ================================================================================
 """
 Accela Record Info scraper — extracts 4 authoritative fields per permit.
 

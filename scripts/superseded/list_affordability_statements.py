@@ -22,6 +22,13 @@ TWO THINGS LEARNED THE HARD WAY AND REUSED RATHER THAN REBUILT:
   .venv/bin/python scripts/list_affordability_statements.py --limit 5  # smoke test
 """
 from __future__ import annotations
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/list_affordability_statements.py.
+# WHY: lists affordability attachments for v2 projects; to revive on v4, take projects from v_projects and attachments from v_project_attachments.
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- list_affordability_statements.py read v2; see header")
+# ================================================================================
 
 import argparse
 import csv

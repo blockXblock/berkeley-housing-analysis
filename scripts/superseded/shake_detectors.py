@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/shake_detectors.py.
+# WHY: v2 detector suite; v4 checks are the JN gates and scripts/gates.
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- shake_detectors.py read v2; see header")
+# ================================================================================
 """
 shake_detectors.py — deterministic, READ-ONLY anomaly detector for the Berkeley
 Housing Pipeline (v2). The all-years / all-blocks replacement for the expensive

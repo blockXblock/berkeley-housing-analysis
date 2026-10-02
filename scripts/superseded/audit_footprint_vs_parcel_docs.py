@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/audit_footprint_vs_parcel_docs.py.
+# WHY: v2 footprint-vs-parcel audit; v4 parcels come from County lineage.
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- audit_footprint_vs_parcel_docs.py read v2; see header")
+# ================================================================================
 """audit_footprint_vs_parcel_docs.py — for skyline footprints that EXCEED their parcel, do we hold the
 architect-plan / tabulation PDFs that carry the true building measurements?
 

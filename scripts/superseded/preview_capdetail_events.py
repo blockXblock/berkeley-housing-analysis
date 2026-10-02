@@ -14,6 +14,13 @@ See docs/methodology/identity_is_the_product.md.
   .venv/bin/python scripts/preview_capdetail_events.py
 """
 from __future__ import annotations
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/preview_capdetail_events.py.
+# WHY: preview for the v2 CapDetail ingest; v4 loads the harvests directly.
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- preview_capdetail_events.py read v2; see header")
+# ================================================================================
 
 import argparse
 import datetime as dt

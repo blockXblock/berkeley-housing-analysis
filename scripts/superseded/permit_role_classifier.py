@@ -1,3 +1,10 @@
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/permit_role_classifier.py.
+# WHY: the v2-era @112cb03 classifier; v4's housing role is the model-read evidence (housing_rules.permit_effect).
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- permit_role_classifier.py read v2; see header")
+# ================================================================================
 """
 Permit role classifier for the Berkeley Housing Pipeline v2 database.
 

@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-02 ============================
+# DO NOT RUN. Original home: scripts/extract_stated_heights.py.
+# WHY: heights from v2 documents; v4: llm_building_measures (quoted measures).
+# Read v2 (databases/berkeley_housing_v2.db), which is being archived; v4 is the one canonical database
+# (John, 2026-09-29; every publisher re-pointed 2026-10-01/02).
+raise SystemExit("SEQUESTERED 2026-10-02 -- extract_stated_heights.py read v2; see header")
+# ================================================================================
 """extract_stated_heights.py — pull stated building HEIGHTS (stories + max feet) from the harvested
 1.E tabulation forms, with cross-check verdicts, for the KML/geometry session.
 

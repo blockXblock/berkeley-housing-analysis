@@ -5,16 +5,23 @@
 
 ---
 
-## 2026-10-01 — Berkeley Snapshot data report (docs/berkeley-snapshot-2026-10.html), on dev, not deployed
+## 2026-10-02 — Berkeley Snapshot LIVE (berkeleybuild.com/berkeley-snapshot-2026-10.html); home page reworked
 
-**Built:** `scripts/snapshot/` (pull_sources.py pins sources by SHA-256; derive.py writes 34 map-ready files to
-`docs/data/snapshot/`; build_report.py renders the page; fetch_stars.py saves the UC Berkeley 2025 STARS report with John's
-AASHE login from `~/.aashe.env`, never printed). 14 sections: nine findings first, plain official-report voice, Vision 2050
-cited. **Findings to put to institutions before circulating (John's call):** the City's 2016 Harris undergrounding table
-omits Ashby Ave residential segments ($140.2M vs the quoted $134.8M); UC Berkeley's STARS energy entry (OP-5) omits the
-cogeneration plant's gas (~tenfold low; OP-6 emissions imply ~746,000 MWh). **Next:** hazards section (fire, flood,
-earthquake; agent research running); deploy (John). **Queued, separate document (John, 2026-10-01):** how Measure U fails to
-fund the right set of investments for Berkeley's challenges.
+**Snapshot** (`scripts/snapshot/`: pull_sources.py pins sources by SHA-256; derive.py → `docs/data/snapshot/`; build_report.py
+renders): 19 sections in the outline people → businesses → ideas → infrastructure → dangers → institutions → money →
+innovations; 14 findings. Added 2026-10-01/02: Businesses (license data), "A city of ideas" (Nobels, rankings, Cal's 246
+Olympic medals / 126 gold = more golds than all but 13 nations), Innovations; student beds counted INSIDE Berkeley only
+(~9,800 = UC 8,968 by building from the 2021 LRDP Draft EIR Table 5.12-5 + Anchor House, plus Bowles 188 and I-House ~600;
+the State Auditor's 11,621 includes Albany/Emeryville — not used); "Who is poor in Berkeley" (ACS B14006/B17001: ~53% of
+the poor are off-campus college students); owner vs renter income (B25119); "Rents below market" from the Rent Board
+registry (#26-2375): ~7,200 rent-controlled tenancies 20%+ below new-tenancy rents.
+**Home page** (2026-10-02, staged as main 526c3c6, John pushes): Snapshot button replaces the Mayor button (Mayor moved
+above the flyovers); stage legend above "What Berkeley actually builds each year"; `site_numbers.py` now also keeps the
+Explorer button's project count current. US spelling sweep: storey→story in pages, docs, label scripts.
+**Open:** (1) at the NEXT TOUR UPDATE remind John — geometry.kml descriptions, tour packages and rendered video labels still
+say "storeys" (rebuild, don't hand-edit); (2) count of deed-restricted units in completed buildings needs the City's
+affordable-housing portfolio list (records request to draft); (3) UC per-building bed list from UC Housing would replace
+the 2020 EIR figures; (4) queued separate document: how Measure U fails to fund the right investments.
 
 ---
 

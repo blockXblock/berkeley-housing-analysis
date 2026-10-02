@@ -16,6 +16,7 @@ results — they live in one OFFICIAL dict and are mirrored into the baseline to
 Run:  .venv/bin/python scripts/v4/build_jn_measure_u.py
 (from repo root; executes the notebook via ExecutePreprocessor with path='.')
 """
+import os
 import nbformat as nbf
 from nbformat.v4 import new_notebook, new_markdown_cell, new_code_cell
 
@@ -39,7 +40,9 @@ charts the assumptions, and maps the parcel-by-parcel load.
 - `databases/berkeley.db` — Alameda assessor parcels (Feb-2026 refresh; gross `TotalNetValue`).
 - City of Berkeley Resolution 72,338-N.S. (June 16, 2026), Exhibit B **Tax Rate Statement**
   (Elections Code §9400-9404) + the 75-word ballot label + City Attorney impartial analysis.
-- `databases/berkeley_housing_v2.db` — completed-project evidence for the new-construction wedge.
+- `databases/berkeley_housing_v4.db` (read-only) — completed-project evidence for the
+  new-construction wedge (`v_projects` completions + the parcels v4 links them to). Re-pointed
+  from v2 on 2026-10-02; the v2-era baselines are kept unedited (see S8).
 
 **Discipline.** Every result figure is **derived** in-cell and asserted against the external
 timestamped baseline `data/baselines/measure_u_reconciliation_baseline_2026-08-15.json` at the
@@ -55,7 +58,7 @@ cells.append(md(r"""## Data flow (lineage)
 flowchart LR
   A[(berkeley.db\nAlameda assessor\nFeb-2026, 27.6k parcels)] --> C[S1 base + per-parcel AV]
   B[TRS Exhibit B\nRes. 72,338-N.S.\nofficial figures] --> D[S2 OFFICIAL dict]
-  V[(berkeley_housing_v2.db\ncompletions >=2018)] --> W[S4 new-construction wedge evidence]
+  V[(berkeley_housing_v4.db\nv_projects completions >=2018)] --> W[S4 new-construction wedge evidence]
   C --> E[S3 reconciliation identities]
   D --> E
   E --> F[S4 base-growth model + charts]
@@ -88,7 +91,7 @@ warnings.filterwarnings("ignore")
 sys.path.insert(0, "scripts")
 
 DB = "databases/berkeley.db"
-con = sqlite3.connect(DB)
+con = sqlite3.connect(f"file:{DB}?mode=ro", uri=True)       # read-only
 p = pd.read_sql("SELECT APN,TotalNetValue,Land,Imps,UseCode,Latitude,Longitude,"
                 "SitusStree,SitusStr_1 FROM parcels", con)
 for c in ["TotalNetValue","Land","Imps","Latitude","Longitude"]:
@@ -257,9 +260,14 @@ year, no sale). Restorations are bounded by the factored base, so the *structura
 turnover + construction; the arithmetic necessity is only that none of the excess growth can
 come from sitting owners at the cap.
 **Plan.** (a) Decompose the implied growth `g_avg`/`g_peak` into the 2%-cap component vs the
-newcomer wedge. (b) Ground the new-construction share with in-hand evidence: v2-pipeline
-projects (5+ units, CO ≥ 2018) joined to the assessor via the canonical APN crosswalk
-(stale-APN guard applies: unmatched = re-plat/too-new, flagged, never re-pointed).
+newcomer wedge. (b) Ground the new-construction share with in-hand evidence: v4 completed
+projects (5+ units built, CO ≥ 2018, from `v_projects`) on the parcels v4 links them to
+(`project_parcels` → current `parcel_identifiers.apn_normalized`), joined to this notebook's
+assessor base by the canonical APN (`to_canonical_apn`) so the share is taken against the same
+snapshot (stale-APN guard applies: unmatched = re-plat/too-new, flagged, never re-pointed).
+**Source change (2026-10-02):** this read v2's `v_projects_flat` until v2 was retired; v4 links
+completed buildings to parcels through its structures stage, so more projects match and the
+`newcon_*` figures legitimately move (S8 crosswalk).
 (c) Chart the trajectories and the counterfactual: what the *average advertised rate* would
 be if the base grew only at the 2% cap — i.e., if there were no newcomers to bill."""))
 
@@ -269,15 +277,16 @@ wedge_peak = 1 - 0.02/g_peak
 # counterfactual: base frozen at the 2% cap (no sales, no construction)
 avg_rate_frozen = avg_rate_for_growth(0.02)
 
-# (b) new-construction evidence: v2 completions joined to assessor AV
+# (b) new-construction evidence: v4 completions joined to assessor AV
 from housing_rules import to_canonical_apn
-v2 = sqlite3.connect("databases/berkeley_housing_v2.db")
+v4 = sqlite3.connect("file:databases/berkeley_housing_v4.db?mode=ro", uri=True)   # read-only
 proj = pd.read_sql(
-    "SELECT f.project_id, f.total_units, f.co_issued_date, pa.apn, pa.apn_raw, pa.apn_normalized "
-    "FROM v_projects_flat f "
-    "JOIN project_parcels pp ON pp.project_id=f.project_id "
-    "JOIN parcels pa ON pa.id=pp.parcel_id "
-    "WHERE f.co_issued_date >= '2018-01-01' AND f.total_units >= 5", v2)
+    "SELECT v.project_key AS project_id, v.units_built_or_permitted AS total_units, v.co_issued_date, "
+    "       pi.apn_raw, pi.apn_normalized "
+    "FROM v_projects v "
+    "JOIN project_parcels pp ON pp.project_id = v.project_id "
+    "JOIN parcel_identifiers pi ON pi.parcel_id = pp.parcel_id AND pi.is_current = 1 "
+    "WHERE v.co_issued_date >= '2018-01-01' AND v.units_built_or_permitted >= 5", v4)
 def canon(x):
     if x is None or str(x).strip()=="" : return None
     try: return to_canonical_apn(str(x), "alameda")
@@ -285,8 +294,7 @@ def canon(x):
 ap = p[["APN","TotalNetValue"]].copy()
 ap["canon"] = ap.APN.map(canon)
 ap = ap.dropna(subset=["canon"]).groupby("canon", as_index=False).TotalNetValue.sum()
-proj["canon"] = proj.apn_normalized.where(proj.apn_normalized.notna(),
-                                          proj.apn_raw.fillna(proj.apn)).map(canon)
+proj["canon"] = proj.apn_normalized.where(proj.apn_normalized.notna(), proj.apn_raw).map(canon)
 m = proj.merge(ap, on="canon", how="left")
 gg = m.groupby("project_id", dropna=False).agg(av=("TotalNetValue","sum"),
                                                units=("total_units","first"))
@@ -309,7 +317,8 @@ print(f"    counterfactual: base growing at the 2% cap only -> average rate ${av
 print(f"(b) completed 5+ unit projects (CO>=2018) matched to assessor: {len(matched)} projects, "
       f"{int(matched.units.sum()):,} units, AV ${newcon_av/1e9:.2f}B = {newcon_av/TOTAL_AV*100:.1f}% of today's base")
 print(f"    UNDERCOUNT: {len(unmatched)} projects ({int(unmatched.units.sum()):,} units) unmatched "
-      f"(re-platted/too-new APNs — flagged, not re-pointed; e.g. 2352 Shattuck, 237u, AV $117.9M in assessor)")"""))
+      f"(no positive net AV in this base: re-platted/too-new APN, or an exempt parcel — flagged, "
+      f"not re-pointed): {sorted(unmatched.index)[:8]}")"""))
 
 cells.append(code(r"""import plotly.graph_objects as go
 from plotly.subplots import make_subplots
@@ -583,7 +592,15 @@ later mismatch the cell **diagnoses (figure, baseline, computed, likely cause) a
 the legitimate response to a real change (new assessor snapshot, corrected TRS) is a **new
 appended timestamped baseline**, never an edit of the old one."""))
 
-cells.append(code(r"""BASELINE = "data/baselines/measure_u_reconciliation_baseline_2026-08-21.json"
+cells.append(code(r"""import glob, datetime
+BL_DIR = os.environ.get("JN_BASELINE_DIR") or "data/baselines"
+_all = sorted(glob.glob(os.path.join(BL_DIR, "measure_u_reconciliation_baseline_*.json")))
+_v4 = [f for f in _all if json.load(open(f)).get("db") == "v4"]
+BASELINE = (_v4 or _all)[-1] if _all else None
+V4_ERA = bool(_v4)
+WRITE = os.environ.get("JN_WRITE_BASELINE") == "1"        # appending a baseline is John's call
+# S4(b) moved v2 -> v4 on 2026-10-02: against a v2-era baseline these are a crosswalk, not a drift check
+MOVED = ("newcon_projects_matched", "newcon_units_matched", "newcon_av_b", "newcon_share_of_base_pct")
 TOL = {  # relative tolerances; official mirror must match exactly
     "n_parcels": 0, "total_av_b": .005, "implied_borrow_rate_pct": .01, "ds_peak_m": .01,
     "total_interest_m": .001, "rate_today_100k": .01, "base_peak_impl_b": .01,
@@ -598,65 +615,85 @@ TOL = {  # relative tolerances; official mirror must match exactly
     "tier_composition_av_pct": .05, "tier_composition_count": 0, "tier_entry_av": .01,
     "owner_occupied_parcels": 0, "owner_occupied_share_pct": .01,
 }
-if not os.path.exists(BASELINE):
-    payload = {"created": "2026-08-15", "provenance": {
-                   "assessor": "databases/berkeley.db (Alameda, Feb-2026 refresh)",
-                   "official": "Resolution 72,338-N.S. Exhibit B (TRS) + impartial analysis, berkeleyca.gov",
-                   "v2": "databases/berkeley_housing_v2.db v_projects_flat completions >=2018, 5+ units",
-                   "generator": "scripts/v4/build_jn_measure_u.py"},
-               "official": OFFICIAL, "derived": DERIVED}
-    os.makedirs(os.path.dirname(BASELINE), exist_ok=True)
-    json.dump(payload, open(BASELINE, "w"), indent=2, default=str)
-    print(f"*** BASELINE CREATED (bootstrap) -> {BASELINE}")
-    print("    Review the figures above; future runs assert against this file. Legitimate")
-    print("    changes APPEND a new dated baseline — never edit this one.")
+def _close(cv, bv, tol):
+    if isinstance(bv, list):
+        return isinstance(cv, list) and len(cv) == len(bv) and all(_close(x, y, tol) for x, y in zip(cv, bv))
+    if isinstance(bv, dict):
+        return isinstance(cv, dict) and set(cv) == set(bv) and all(_close(cv[k2], bv[k2], tol) for k2 in bv)
+    if bv == 0: return cv == 0
+    return abs(cv-bv)/abs(bv) <= max(tol, 1e-12)
+def _v4_payload(supersedes):
+    return {"created": datetime.date.today().isoformat(), "db": "v4", "supersedes": supersedes,
+            "provenance": {
+                "assessor": "databases/berkeley.db (Alameda parcels)",
+                "official": "Resolution 72,338-N.S. Exhibit B (TRS) + impartial analysis, berkeleyca.gov",
+                "v4": "databases/berkeley_housing_v4.db v_projects completions >=2018, 5+ units built (read-only)",
+                "generator": "scripts/v4/build_jn_measure_u.py"},
+            "official": OFFICIAL, "derived": DERIVED}
+if BASELINE is None:
+    if not WRITE:
+        raise AssertionError(f"no measure_u baseline in {BL_DIR} — set JN_WRITE_BASELINE=1 to bootstrap (John's call)")
+    out = os.path.join(BL_DIR, f"measure_u_reconciliation_baseline_{datetime.date.today().isoformat()}_v4.json")
+    json.dump(_v4_payload(None), open(out, "w"), indent=2, default=str)
+    print(f"*** BASELINE CREATED (bootstrap) -> {out}")
 else:
     b = json.load(open(BASELINE))
+    print(f"gating vs {BASELINE} ({'v4-era: all figures' if V4_ERA else 'v2-era: S4(b) newcon_* excluded'})")
     fails, new_derived = [], []
     for k, v in b["official"].items():
         if str(OFFICIAL.get(k)) != str(v):
             fails.append(("OFFICIAL:"+k, v, OFFICIAL.get(k), "official constant edited — restore or append new baseline w/ provenance"))
     new_official = [k for k in OFFICIAL if k not in b["official"]]
-    def _close(cv, bv, tol):
-        if isinstance(bv, list):
-            return isinstance(cv, list) and len(cv) == len(bv) and all(_close(x, y, tol) for x, y in zip(cv, bv))
-        if isinstance(bv, dict):
-            return isinstance(cv, dict) and set(cv) == set(bv) and all(_close(cv[k2], bv[k2], tol) for k2 in bv)
-        if bv == 0: return cv == 0
-        return abs(cv-bv)/abs(bv) <= max(tol, 1e-12)
     for k, tol in TOL.items():
+        if k in MOVED and not V4_ERA:
+            continue
         cv = DERIVED.get(k)
         if cv is None:
             fails.append((k, b["derived"].get(k), None, "generator no longer derives a gated figure")); continue
         if k not in b["derived"]:
-            new_derived.append(k); continue          # additive key — appended below, loudly
+            new_derived.append(k); continue
         if not _close(cv, b["derived"][k], tol):
             cause = ("assessor snapshot changed" if k in ("n_parcels","total_av_b","median_cost_all",
                      "sfr_n","sfr_median_cost","sfr_p90_p10","newcon_av_b","newcon_projects_matched",
                      "newcon_units_matched","newcon_share_of_base_pct","apt_share_pct","med_sfr_av",
                      "flat_parcel_cost") or k.startswith(("top","decile"))
                      else "official-figure or model change")
+            if k.startswith("newcon"):
+                cause += " / a v4 rebuild changed completions or parcel links"
             fails.append((k, b["derived"][k], cv, cause))
+    if not V4_ERA:
+        print("S4(b) changed SOURCE (v2 -> v4) — crosswalk, NOT a drift check:")
+        for k in MOVED:
+            print(f"   {k:28} v2-era {b['derived'].get(k)!s:>22}  ->  v4 {DERIVED.get(k)}")
     if fails:
         print("GATE FAIL — diagnosis (figure | baseline | computed | likely cause):")
         for f in fails: print("  ", " | ".join(str(x) for x in f))
         raise AssertionError(f"{len(fails)} figure(s) diverge from {BASELINE} — investigate; "
                             "if the change is legitimate, APPEND a new dated baseline.")
-    # ADDITIVE APPEND (evidence-append-only): brand-new keys may be added with a recorded
-    # amendment; mutating an existing value still hard-fails above.
-    if new_derived or new_official:
-        for k in new_derived:  b["derived"][k]  = DERIVED[k]
-        for k in new_official: b["official"][k] = OFFICIAL[k]
-        b.setdefault("amendments", []).append({
-            "date": "2026-08-15",
-            "added_derived": new_derived, "added_official": new_official,
-            "reason": "additive append: incidence figures surfaced for gen_bond_incidence.py and the "
-                      "measure-u site (session-coordination contract); existing values untouched"})
-        json.dump(b, open(BASELINE, "w"), indent=2, default=str)
-        print(f"*** BASELINE AMENDED (additive): +{len(new_derived)} derived {new_derived} "
-              f"+{len(new_official)} official {new_official} — existing values verified unchanged first")
-    print(f"GATE PASS — {len(TOL)} derived figures + {len(b['official'])} official constants "
-          f"match {BASELINE} within tolerance.")"""))
+    if not V4_ERA:
+        if WRITE:
+            out = os.path.join(BL_DIR, f"measure_u_reconciliation_baseline_{datetime.date.today().isoformat()}_v4.json")
+            assert not os.path.exists(out), f"{out} exists — baselines are append-only"
+            json.dump(_v4_payload(os.path.basename(BASELINE)), open(out, "w"), indent=2, default=str)
+            print(f"*** APPENDED v4-era baseline -> {out} (every other figure verified unchanged first)")
+        else:
+            print("PARTIAL GATE: S4(b) newcon_* figures are UNGATED until a v4-era baseline is appended "
+                  "(JN_WRITE_BASELINE=1 — John's call).")
+    elif new_derived or new_official:
+        # ADDITIVE APPEND (evidence-append-only): new keys recorded, existing values untouched
+        if WRITE:
+            for k in new_derived:  b["derived"][k]  = DERIVED[k]
+            for k in new_official: b["official"][k] = OFFICIAL[k]
+            b.setdefault("amendments", []).append({
+                "date": datetime.date.today().isoformat(),
+                "added_derived": new_derived, "added_official": new_official,
+                "reason": "additive append; existing values verified unchanged first"})
+            json.dump(b, open(BASELINE, "w"), indent=2, default=str)
+            print(f"*** BASELINE AMENDED (additive): +{new_derived} +{new_official}")
+        else:
+            print(f"new figures not yet in the baseline (ungated): {new_derived + new_official}")
+    print(f"GATE {'PASS' if V4_ERA else 'PASS (stable figures)'} — derived figures + "
+          f"{len(b['official'])} official constants match {BASELINE} within tolerance.")"""))
 
 cells.append(md(r"""## Conclusions
 
@@ -669,7 +706,9 @@ cells.append(md(r"""## Conclusions
    two-thirds of all assumed growth — must come from reassessment at sale and new
    construction. Were the base to grow at the cap alone, the same bond would average ~1.6x
    the advertised rate. The completed 5+ unit projects since 2018 already visible in the
-   assessor (~$1B, ~3.5% of the base, an undercount) are that wedge, arriving.
+   assessor (S4(b) prints the live figure; ~$1.1B / ~3.6% of the base in the v2 era, more
+   now that v4 links more completions to their parcels — still an undercount) are that
+   wedge, arriving.
 3. **The burden is concentrated on the same newcomers.** Top 1% of parcels ≈ a fifth of the
    bond; single-family p90/p10 ≈ 15×; the map of heaviest payers is a map of recent sales and
    recent construction.
@@ -694,9 +733,8 @@ nb = new_notebook(cells=cells, metadata={
     "kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
     "language_info": {"name": "python"}})
 
-OUT = "notebooks/v4/JN-MeasureU.ipynb"
+OUT = os.path.join(os.environ.get("JN_NB_DIR") or "notebooks/v4", "JN-MeasureU.ipynb")
 if __name__ == "__main__":
-    import os
     from nbconvert.preprocessors import ExecutePreprocessor
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     ep = ExecutePreprocessor(timeout=900, kernel_name="python3")

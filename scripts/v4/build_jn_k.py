@@ -19,7 +19,7 @@ import nbformat as nbf
 from nbformat.v4 import new_notebook, new_markdown_cell, new_code_cell
 
 ROOT = os.path.expanduser('~/berkeley-data')
-NB_OUT = os.path.join(ROOT, 'notebooks', 'v4', 'JN-K_completion_anatomy.ipynb')
+NB_OUT = os.path.join(os.environ.get('JN_NB_DIR') or os.path.join(ROOT, 'notebooks', 'v4'), 'JN-K_completion_anatomy.ipynb')
 
 cells = []
 def md(t): cells.append(new_markdown_cell(t.strip('\n')))
@@ -28,7 +28,7 @@ def code(s): cells.append(new_code_cell(s.strip('\n')))
 md(r"""
 # JN-K — Completion Anatomy (where, what size, and how long)
 
-**The question.** JN-E established *how many* homes were completed (4,229, 2018–2025, audited
+**The question.** JN-E established *how many* homes were completed (2018–2025, audited
 against the city's filing). This notebook dissects that count along the axes the policy debate
 actually argues about: **where** the homes stand (commercial corridors vs neighborhood fabric),
 **what size** of building delivered them, **how long** each stage of the process took for major
@@ -37,13 +37,16 @@ the count reconciles** with the city's filing in the one year they diverge (2025
 
 **Sources & roles.** (1) v4 events + `event_classifications` — the audited CO count, with
 location from the feed's OWN StreetName/StreetNumber fields (845/845 permits carry them);
-(2) v2 serving DB — major-project stage dates (`filed/application_complete/entitled/BP/CO`);
+(2) v4 serving view `v_projects` — major-project stage dates (`filed / accepted / entitled / bp_issued /
+co_issued`), each SELECTED from the project's anchor application, never aggregated across records
+(re-pointed from v2 on 2026-10-02);
 (3) HCD mirror — the reconcile-TARGET in §5 only, never an input.
 
 **Honesty rails:**
-1. **Count = v4, geometry = v2 — never swap.** The 2026-07-09 lesson: a v2 project-level
+1. **Count = permit-level, never project-level.** The 2026-07-09 lesson: a v2 project-level
    shortcut (3,693u) silently dropped ~750 fabric units and inflated the corridor share to
-   55%; the fine-grained count says 47.7%. Every count here derives from v4.
+   55%; the fine-grained count says 47.7%. Every count in §1–§3 derives from v4 finaled
+   master permits; `v_projects` supplies only the major-project stage clock in §4.
 2. **Corridor = street-name proxy.** The 14 named arterials include residential stretches of
    long streets and EXCLUDE downtown side-street towers (Kittredge, Berkeley Way, Milvia…) —
    it measures arterial frontage, not building scale. §3's size split is the scale story.
@@ -86,14 +89,22 @@ co = pd.DataFrame(rows)
 
 recon = sorted(glob.glob(os.path.join(ROOT, 'data', 'baselines', 'reconciliation_baseline_*.json')))[-1]
 anchor = json.load(open(recon))['hard_gated']['co_completions']['value']
-assert int(co.units.sum()) == anchor, (
-    f'ANCHOR FAIL: derived {co.units.sum()} vs {anchor} in {os.path.basename(recon)} — '
+# Since JN-E 2026-09-26b, co_completions is the WHOLE feed (finals through the 2026-07-07 production),
+# not 2018-2025. Anchor the same population, then window it -- same derivation, no extra filter.
+feed_total = con.execute("""SELECT COALESCE(SUM(c.net_units),0) FROM events e
+    JOIN event_classifications c ON e.event_id = c.event_id
+    WHERE e.event_type_code='permit_finaled' AND c.housing_role='new_unit'
+      AND c.is_master=1 AND c.net_units>0""").fetchone()[0]
+assert int(feed_total) == anchor, (
+    f'ANCHOR FAIL: derived feed total {feed_total} vs {anchor} in {os.path.basename(recon)} — '
     'JN-E moved the audited count; re-derive/diagnose BEFORE trusting any split below')
-print(f'{len(co):,} permits, {co.units.sum():,} units — anchored to {os.path.basename(recon)}')
+print(f'feed total {feed_total:,} units == {os.path.basename(recon)} co_completions; '
+      f'window 2018-2025: {len(co):,} permits, {co.units.sum():,} units (the rest are 2026 finals)')
 print(f'street-field coverage: {(co.street != "").mean():.0%} (the feed locates itself)')
 ''')
-md("📝 **Found/verify:** the total matches the audited `co_completions` exactly and 100% of the "
-   "permits carry street fields — no fallback joins, no unlocated tail.")
+md("📝 **Found/verify:** the feed total matches the audited `co_completions` exactly; the 2018–2025 "
+   "window is that population minus 2026 finals, and 100% of the permits carry street fields — no "
+   "fallback joins, no unlocated tail.")
 
 md(r"""
 ## §2 — WHERE: corridor vs neighborhood fabric
@@ -143,56 +154,57 @@ md("📝 **Mislead-guard:** stacking implies the streams are additive competitor
    "'small could replace large': 80% of the units are in the gold.")
 
 md(r"""
-## §4 — HOW LONG: the stage clock on major projects (v2, ≥50u)
-📝 **Plan:** v2 carries the deemed-complete milestone (`application_complete`, scraped from
-city-portal detail pages — 159 events / 68 projects). For majors: median intake (filed→complete)
-vs consideration (complete→entitled); then the funnel of ALL non-UC majors by furthest hard
-evidence (rail 4: events outrank status).
+## §4 — HOW LONG: the stage clock on major projects (v4 `v_projects`, ≥50u)
+📝 **Plan:** v4's `accepted_date` is the deemed-complete milestone — the Completeness Review
+*accepted* row in the anchor application's own CapDetail PROCESSING STATUS
+(`housing_rules.planning_record.milestones`), SELECTED from the primary record, never a MIN/MAX
+over the project's records (CLAUDE.md, rung 3). For majors: median intake (filed→accepted) vs
+consideration (accepted→entitled); then the funnel of ALL non-UC majors by furthest hard evidence
+(rail 4: events outrank status — v4's `bp_issued_date`/`co_issued_date` come from the buildings'
+master-permit events, not a status code).
+
+**Source change (2026-10-02).** Until v2's retirement this section read v2's `v_projects_flat`
+(`MIN(application_complete)` over all project events, `total_units`, the `uc_project` flag). v4 differs
+in three legitimate ways, so the §4 figures MOVE and are re-baselined, not compared as drift:
+(a) one row per *application-anchored* project (a withdrawn filing and its re-filing are two rows);
+(b) a major = ≥50 units by the built/permitted count, else the application's proposed count;
+(c) UC and other outside-city-permitting rows are dropped by `rhna_excluded`, and DENIED is now a
+derived status, not a constant.
 """)
 code(r'''
-V2 = os.path.join(ROOT, 'databases', 'berkeley_housing_v2.db')
-v2 = sqlite3.connect(f'file:{V2}?mode=ro', uri=True)
 def cl(s, allow_ph=False):
     if not s: return None
     try: d = date.fromisoformat(str(s)[:10])
     except ValueError: return None
     return None if (not allow_ph and d.month == 1 and d.day == 1) else d
-uc = {r[0] for r in v2.execute("""SELECT project_id FROM project_classifications pc
-    JOIN vocabulary_classification_types v ON pc.classification_type_id=v.id WHERE v.code='uc_project'""")}
-ac_map = dict(v2.execute("""SELECT project_id, MIN(substr(event_date,1,10)) FROM project_events
-    WHERE event_type_id=(SELECT id FROM vocabulary_event_types WHERE code='application_complete')
-    GROUP BY project_id"""))
 majors = []
-for pid, u, f, e, bp, cod, status in v2.execute("""SELECT project_id, total_units, filed_date,
-        entitled_date, bp_issued_date, co_issued_date, status_code FROM v_projects_flat
-        WHERE total_units >= 50"""):
-    bpm = v2.execute("""SELECT MIN(substr(pe.event_date,1,10)) FROM project_events pe
-        JOIN vocabulary_event_types v ON pe.event_type_id=v.id
-        WHERE pe.project_id=? AND v.code='building_permit_issued'
-          AND NOT EXISTS (SELECT 1 FROM project_events c JOIN vocabulary_event_types ct
-              ON ct.id=c.event_type_id WHERE ct.code='permit_classified_subsidiary'
-              AND c.permit_id=pe.permit_id)""", (pid,)).fetchone()[0]
-    # subsidiary filter added 2026-07-14: four majors' ONLY permit events were trades permits
-    # (water heater/seismic/window/repairs) — harvest-verified NO primary BP exists for
-    # 2427 San Pablo / 2680 Bancroft / 2441 Le Conte; 2138 Kittredge is phased mid-permitting.
-    majors.append(dict(pid=pid, u=u, uc=pid in uc, status=status, f=cl(f), ac=cl(ac_map.get(pid)),
-                       e=cl(e), bp=cl(bpm or bp) or cl(bpm or bp, True), co=cl(cod, True)))
+for key, u, pu, rx, f, ac, e, bp, cod, status in con.execute("""SELECT project_key,
+        units_built_or_permitted, proposed_units, rhna_excluded, filed_date, accepted_date,
+        entitled_date, bp_issued_date, co_issued_date, status FROM v_projects
+        WHERE anchor_role IN ('primary_application', 'pre_application', 'outside_city_permitting')"""):
+    units = max(int(u or 0), int(pu or 0))
+    if units < 50:
+        continue
+    majors.append(dict(pid=key, u=units, uc=bool(rx), status=status, f=cl(f), ac=cl(ac),
+                       e=cl(e), bp=cl(bp, True), co=cl(cod, True)))
 intake = [(m['ac']-m['f']).days for m in majors
           if m['f'] and m['ac'] and m['ac'] >= m['f']]
 consider = [(m['e']-m['ac']).days for m in majors if m['ac'] and m['e'] and m['e'] >= m['ac']]
 import statistics as st
 print(f'deemed-complete coverage: {sum(1 for m in majors if m["ac"])}/{len(majors)} majors')
-print(f'intake  (filed->complete):    n={len(intake)}, median {st.median(intake):.0f}d')
-print(f'consideration (complete->entitled): n={len(consider)}, median {st.median(consider):.0f}d')
+print(f'intake  (filed->accepted):    n={len(intake)}, median {st.median(intake):.0f}d')
+print(f'consideration (accepted->entitled): n={len(consider)}, median {st.median(consider):.0f}d')
 
 nonuc = [m for m in majors if not m['uc']]
-wd  = [m for m in nonuc if m['status'] == 'withdrawn' and not m['bp'] and not m['co']]
-rest = [m for m in nonuc if m not in wd]
+wd  = [m for m in nonuc if m['status'] in ('withdrawn', 'void') and not m['bp'] and not m['co']]
+dn  = [m for m in nonuc if m['status'] == 'denied' and not m['bp'] and not m['co']]
+rest = [m for m in nonuc if m not in wd and m not in dn]
 fa = [m for m in rest if m['co']]; fb = [m for m in rest if m['bp'] and not m['co']]
 fc = [m for m in rest if m['e'] and not m['bp'] and not m['co']]
 fpre = [m for m in rest if not m['e'] and not m['bp'] and not m['co']]
 print(f'\nfunnel (non-UC majors): {len(nonuc)} applications -> {len(fa)+len(fb)+len(fc)} entitled '
-      f'-> {len(fa)+len(fb)} permitted -> {len(fa)} completed | withdrawn {len(wd)}, denied 0')
+      f'-> {len(fa)+len(fb)} permitted -> {len(fa)} completed | withdrawn/void {len(wd)}, denied {len(dn)}, '
+      f'still pre-entitlement {len(fpre)}')
 ''')
 code(r'''
 fig = go.Figure(go.Funnel(
@@ -203,13 +215,14 @@ fig.update_layout(title='Major (≥50u) applications by furthest hard evidence (
                   template='plotly_dark', height=380)
 fig.show()
 ''')
-md("📝 **Mislead-guard:** the funnel narrows by WAITING, not refusal (denied = 0; one voluntary "
-   "withdrawal). The lower bands are not losses — they are projects still in a stage. A funnel "
-   "chart visually implies leakage; the annotation must carry 'still in process'.")
+md("📝 **Mislead-guard:** the funnel narrows mostly by WAITING — read the printed withdrawn/void and "
+   "denied counts above before reading any band as refusal. The lower bands are not losses — they are "
+   "projects still in a stage. A funnel chart visually implies leakage; the annotation must carry "
+   "'still in process'. v4 counts applications, so a site that re-filed appears once per filing.")
 
 md(r"""
 ## §5 — The one divergent year: 2025 ours|city, every row named
-📝 **Plan:** address-level adjudication of our 600 vs the city's 492 (oracle = compare-target
+📝 **Plan:** address-level adjudication of our 2025 count vs the city's (oracle = compare-target
 ONLY). ⚠ The two large ours-only completions are GROUP LIVING — sleeping units are arguably not
 APR dwelling units, so the city's omission may be definitional, not error. We say "omits," never "wrong."
 """)
@@ -243,7 +256,8 @@ print('largest ours-only rows:')
 for a, u in sorted(oo.items(), key=lambda x: -x[1])[:4]:
     print(f'  {u:4d}u {a}')
 ''')
-md("📝 **Found/verify:** +108 = two group-living completions (80u) + a small-completion tail. "
+md("📝 **Found/verify (as of the 2026-07-15 baseline: +108; re-read the printed decomposition above for the live figure):** "
+   "the gap was two group-living completions (80u) + a small-completion tail. "
    "3030 Telegraph is NOT a factor — its CO is 2026 on both sides.")
 
 md(r"""
@@ -253,11 +267,11 @@ code(r"""
 from IPython.display import Markdown, display
 display(Markdown('''```mermaid
 graph LR
-  E[(v4 events + classifications\nfinaled new-unit masters)] --> U[§1 located universe 4,229u]
+  E[(v4 events + classifications\nfinaled new-unit masters)] --> U[§1 located universe 2018-2025]
   R[(reconciliation baseline\nJN-E co_completions)] -->|ANCHOR| U
   U --> W[§2 corridor/fabric]
   U --> S[§3 size split]
-  V[(v2 majors ≥50u\nfiled/complete/entitled/BP/CO)] --> T[§4 stage clock + funnel]
+  V[(v4 v_projects majors ≥50u\nfiled/accepted/entitled/BP/CO)] --> T[§4 stage clock + funnel]
   M[(HCD mirror A2 2025\nORACLE - compare only)] --> G[§5 gap adjudication]
   U --> G
   W & S & T & G --> B{{baseline gate §7}}
@@ -280,30 +294,58 @@ figures = {
   'large_units_nonarterial': int(xt.loc[False, True]),
   'majors_nonuc': len(nonuc), 'majors_entitled': len(fa)+len(fb)+len(fc),
   'majors_permitted': len(fa)+len(fb), 'majors_completed': len(fa),
-  'majors_withdrawn': len(wd), 'majors_denied': 0,
+  'majors_withdrawn': len(wd), 'majors_denied': len(dn),
   'ac_majors_covered': sum(1 for m in majors if m['ac']),
   'median_intake_days': int(st.median(intake)), 'median_consideration_days': int(st.median(consider)),
   'gap2025_total': gap['ours'] - gap['city'], 'gap2025_ours_only': gap['ours_only'],
 }
 sha = subprocess.run(['git', '-C', ROOT, 'rev-parse', '--short', 'HEAD'],
                      capture_output=True, text=True).stdout.strip()
-snaps = sorted(glob.glob(os.path.join(ROOT, 'data', 'baselines', 'completion_anatomy_baseline_*.json')))
-if snaps:
-    bl = json.load(open(snaps[-1]))
-    diffs = {k: (v, bl['figures'].get(k)) for k, v in figures.items() if bl['figures'].get(k) != v}
-    if diffs:
-        print(f"BASELINE MISMATCH vs {os.path.basename(snaps[-1])} (baseline sha {bl['v4_sha']}, now {sha}):")
-        for k, (now, was) in diffs.items():
-            print(f'  {k}: computed {now} vs baseline {was}')
-        raise AssertionError('diagnose above; a legitimate change APPENDS a new timestamped baseline')
+import hashlib
+_h = hashlib.sha256()
+with open(V4, 'rb') as _f:
+    for _b in iter(lambda: _f.read(1 << 20), b''): _h.update(_b)
+v4_file_sha = _h.hexdigest()[:16]
+# §4's source moved v2 -> v4 on 2026-10-02. Baselines written before then carry v2-derived values for
+# these keys; comparing them would report a SOURCE change as drift. They are shown as a crosswalk and
+# gated only against a baseline tagged majors_source = 'v4_v_projects'.
+MOVED = {k for k in figures if k.startswith(('majors_', 'ac_majors', 'median_'))}
+BL_DIR = os.environ.get('JN_BASELINE_DIR') or os.path.join(ROOT, 'data', 'baselines')
+snaps = sorted(glob.glob(os.path.join(BL_DIR, 'completion_anatomy_baseline_*.json')))
+if not snaps:
+    raise AssertionError(f'no completion_anatomy baseline in {BL_DIR}')
+bl = json.load(open(snaps[-1]))
+v4_era = bl.get('majors_source') == 'v4_v_projects'
+keys = list(figures) if v4_era else [k for k in figures if k not in MOVED]
+diffs = {k: (figures[k], bl['figures'].get(k)) for k in keys if bl['figures'].get(k) != figures[k]}
+print(f"gating vs {os.path.basename(snaps[-1])} ({'v4-era: all keys' if v4_era else 'v2-era: stable keys only'}; "
+      f"baseline git {bl.get('v4_sha')}, now git {sha}, v4 file {v4_file_sha})")
+if not v4_era:
+    print('§4 keys changed SOURCE (v2 -> v4) -- crosswalk, NOT a drift check:')
+    for k in sorted(MOVED):
+        print(f'  {k:28} v2-era {bl["figures"].get(k)!s:>6}  ->  v4 {figures[k]}')
+if diffs:
+    print('BASELINE MISMATCH:')
+    for k, (now, was) in diffs.items():
+        print(f'  {k}: computed {now} vs baseline {was}')
+    raise AssertionError('diagnose above; a legitimate change APPENDS a new timestamped baseline')
+if v4_era:
     print(f'BASELINE GATE PASS vs {os.path.basename(snaps[-1])}')
 else:
-    out_p = os.path.join(ROOT, 'data', 'baselines', 'completion_anatomy_baseline_2026-07-09.json')
-    json.dump({'as_of': '2026-07-09', 'v4_sha': sha,
-               'anchor': os.path.basename(recon),
-               'provenance': 'JN-K first derivation (v4 located universe + v2 majors + A2-2025 compare)',
-               'figures': figures}, open(out_p, 'w'), indent=1)
-    print('WROTE first baseline:', out_p)
+    print(f'stable keys PASS ({len(keys)}).')
+    proposal = {'as_of': date.today().isoformat(), 'v4_sha': sha, 'v4_file_sha': v4_file_sha,
+                'majors_source': 'v4_v_projects', 'anchor': os.path.basename(recon),
+                'supersedes_for_moved_keys': os.path.basename(snaps[-1]),
+                'provenance': 'JN-K re-pointed to v4 (2026-10-02): §1-§3/§5 v4 events, §4 v4 v_projects majors',
+                'figures': figures}
+    if os.environ.get('JN_WRITE_BASELINE') == '1':
+        out_p = os.path.join(BL_DIR, f'completion_anatomy_baseline_{date.today().isoformat()}_v4.json')
+        assert not os.path.exists(out_p), f'{out_p} exists -- baselines are append-only'
+        json.dump(proposal, open(out_p, 'w'), indent=1)
+        print('APPENDED v4-era baseline:', out_p)
+    else:
+        print('PARTIAL GATE: §4 is UNGATED until a v4-era baseline is appended '
+              '(re-run with JN_WRITE_BASELINE=1 -- John\'s call).')
 for k, v in figures.items():
     print(f'  {k:28} {v}')
 ''')
@@ -312,7 +354,7 @@ md(r"""
 ## Assumptions ledger
 | assumption | what BREAKS if violated |
 |---|---|
-| count = v4, geometry = v2 (rail 1) | project-level counting silently drops the fabric tail and inflates corridor share (the 55% error) |
+| count = permit-level v4 events, never project-level (rail 1) | project-level counting silently drops the fabric tail and inflates corridor share (the 55% error) |
 | corridor = street-name frontage proxy (rail 2) | reading it as building-scale conflates §2 with §3; downtown side-street towers vanish |
 | durations include lawful tolling (rail 3) | quoting 410d as a violation count overstates; it is a screen |
 | events outrank status (rail 4) | status drift fabricates withdrawals of permitted projects (3 such flagged to the stalled register) |

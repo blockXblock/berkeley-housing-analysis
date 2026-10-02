@@ -19,7 +19,7 @@ import nbformat as nbf
 from nbformat.v4 import new_notebook, new_markdown_cell, new_code_cell
 
 ROOT = os.path.expanduser('~/berkeley-data')
-NB_OUT = os.path.join(ROOT, 'notebooks', 'v4', 'JN-J_entitled_unbuilt.ipynb')
+NB_OUT = os.path.join(os.environ.get('JN_NB_DIR') or os.path.join(ROOT, 'notebooks', 'v4'), 'JN-J_entitled_unbuilt.ipynb')
 
 cells = []
 def md(t): cells.append(new_markdown_cell(t.strip('\n')))
@@ -204,42 +204,52 @@ print(f'\n=== Planning applications 2015-2025: {len(pp):,}; withdrawn {int(st.eq
 """)
 
 md(r"""
-## §4b — The inflow is collapsing (the front of the funnel)
-📝 §2–§4 measure what happens to housing *once applied for*. But the funnel has a front door, and it is
-closing. Here is the **volume of large-project applications** (50+ units) filed with the City each year —
-the unit-tagged pipeline from v2, UC excluded. Watch the rise through the 2023–24 peak and the collapse
-after. ▶ Play animates the year-by-year build.
+## §4b — The inflow (the front of the funnel)
+📝 §2–§4 measure what happens to housing *once applied for*. But the funnel has a front door. Here is the
+**volume of large-project applications** (50+ units) filed with the City each year — v4's `v_projects`
+(one row per application-anchored project; the filed date is the anchor record's own Accela list date),
+UC and other outside-city-permitting rows excluded (`rhna_excluded`). The peak year is DERIVED, not
+asserted. ▶ Play animates the year-by-year build.
+
+**Source change (2026-10-02).** This cell read v2's `v_projects_flat` until v2 was retired. v4 counts
+*applications* (a withdrawn 2021 filing and its 2022 re-filing at the same site are two rows); v2 counted
+merged *projects*. The year shape legitimately differs — the v2-era chart showed a 2024 peak. Units = the
+built/permitted count where buildings exist, else the application's proposed count.
 """)
 code(r"""
 import plotly.graph_objects as go
-v2 = sqlite3.connect(f"file:{os.path.join(ROOT,'databases','berkeley_housing_v2.db')}?mode=ro", uri=True)
-ucp = {r[0] for r in v2.execute("SELECT c.project_id FROM project_classifications c "
-       "JOIN vocabulary_classification_types t ON t.id=c.classification_type_id WHERE t.code='uc_project'")}
-pf = pd.read_sql("SELECT project_id,total_units,filed_date FROM v_projects_flat WHERE total_units>=50", v2)
-pf = pf[~pf.project_id.isin(ucp)].copy()
+pf = pd.read_sql('''SELECT project_key, anchor_role, status, filed_date,
+       MAX(COALESCE(units_built_or_permitted,0), COALESCE(CAST(proposed_units AS INT),0)) units
+    FROM v_projects WHERE rhna_excluded = 0
+      AND anchor_role IN ('primary_application','pre_application')''', con)
+# anchor_role: a Zoning Research Letter is an INQUIRY, not an application (housing_rules.planning_record.role)
+pf = pf[pf.units >= 50].copy()
 pf['yr'] = pd.to_datetime(pf.filed_date, errors='coerce').dt.year
 tr = (pf[(pf.yr >= 2015) & (pf.yr <= 2026)].groupby(pf.yr.astype('Int64')).size()
       .reindex(range(2015, 2027), fill_value=0))
+print('by anchor role:', pf[pf.yr.between(2015, 2026)].anchor_role.value_counts().to_dict())
 years = [str(y) for y in tr.index]; vals = [int(v) for v in tr.values]
 cols = ['#b5371f' if v >= 20 else '#e0863a' if v >= 6 else '#c9c3b6' for v in vals]
 pk = max(vals)
+peak_y = years[vals.index(pk)]
 frames = [go.Frame(data=[go.Bar(x=years[:i+1], y=vals[:i+1], marker_color=cols[:i+1],
           text=[str(v) for v in vals[:i+1]], textposition='outside')], name=years[i]) for i in range(len(years))]
 fig = go.Figure(data=[go.Bar(x=[years[0]], y=[vals[0]], marker_color=[cols[0]])], frames=frames)
-fig.update_layout(title='Large-project applications (50+ units) filed per year — the collapse',
+fig.update_layout(title='Large-project applications (50+ units) filed per year (v4 v_projects)',
     yaxis_title='applications', yaxis_range=[0, pk+4], height=400, template='plotly_white', bargap=0.3,
     updatemenus=[dict(type='buttons', x=0.02, y=1.15, buttons=[dict(label='▶ Play', method='animate',
         args=[None, {'frame': {'duration': 380}, 'transition': {'duration': 160}}])])])
 i24, i25, i26 = years.index('2024'), years.index('2025'), years.index('2026')
-fig.add_annotation(x='2024', y=vals[i24], text=f'peak {vals[i24]}', showarrow=True, arrowhead=2, yshift=12)
-print(f"Large-project (50+u) applications: 2024 peak {vals[i24]} -> 2025 {vals[i25]} "
-      f"({(vals[i25]-vals[i24])/max(1,vals[i24]):+.0%}) -> 2026 {vals[i26]}* (partial year + ingestion gap)")
+fig.add_annotation(x=peak_y, y=pk, text=f'peak {pk}', showarrow=True, arrowhead=2, yshift=12)
+print(f"Large-project (50+u) applications: peak {peak_y} = {pk}; 2024 {vals[i24]} -> 2025 {vals[i25]} "
+      f"({(vals[i25]-vals[i24])/max(1,vals[i24]):+.0%}) -> 2026 {vals[i26]}* (partial year)")
 fig.show()
 """)
 
 md(r"""
 📝 **What this could mislead:** 2026 is a **partial year** *and* undercounted — the City permit feed lags
-~8 months, so recent applications aren't yet ingested, and this figure counts only tracked 50+-unit projects.
+~8 months for some sources; the Planning harvest is current but only to its retrieval date. It counts 50+-unit
+anchored applications only, and a proposed-unit count is the APPLICATION's figure (often revised later).
 News coverage confirms only small new proposals, no towers. But the **2024→2025 drop is on fully-resolved
 years** and is real. Read this as the *inflow*; §2–§4 are what becomes of it once inside the pipeline.
 The two stories together: **applications collapsing while the approved-but-unbuilt backlog stays full.**
@@ -257,6 +267,7 @@ graph LR
   H --> S3[stalled register §3]
   A[(assessor Imps)] --> S3
   U[(Accela harvest 82k\n2015-2026 both modules)] --> S4[application attrition §4]
+  P[(v4 v_projects\nanchored applications)] --> S4b[inflow §4b]
   S2 & S3 & S4 --> B{{baseline gate §6}}
 ```'''))
 """)
@@ -279,7 +290,8 @@ figures = {
   'planning_first_gate_death_share': round(float(died.mean()), 4),
 }
 sha = subprocess.run(['git', '-C', ROOT, 'rev-parse', '--short', 'HEAD'], capture_output=True, text=True).stdout.strip()
-snaps = sorted(glob.glob(os.path.join(ROOT, 'data', 'baselines', 'entitled_unbuilt_baseline_*.json')))
+BL_DIR = os.environ.get('JN_BASELINE_DIR') or os.path.join(ROOT, 'data', 'baselines')
+snaps = sorted(glob.glob(os.path.join(BL_DIR, 'entitled_unbuilt_baseline_*.json')))
 if snaps:
     bl = json.load(open(snaps[-1]))
     diffs = {k: (v, bl['figures'].get(k)) for k, v in figures.items() if bl['figures'].get(k) != v}
@@ -290,7 +302,7 @@ if snaps:
         raise AssertionError('diagnose above; a legitimate change APPENDS a new timestamped baseline')
     print(f'BASELINE GATE PASS vs {os.path.basename(snaps[-1])}')
 else:
-    out_p = os.path.join(ROOT, 'data', 'baselines', 'entitled_unbuilt_baseline_2026-07-04.json')
+    out_p = os.path.join(BL_DIR, 'entitled_unbuilt_baseline_2026-07-04.json')
     json.dump({'as_of': '2026-07-04', 'v4_sha': sha, 'classifier': str(lab.classifier_hash.iloc[0]),
                'provenance': 'JN-J first derivation (v4 events + 2015-2026 Accela harvest + assessor)',
                'figures': figures}, open(out_p, 'w'), indent=1)

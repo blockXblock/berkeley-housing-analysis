@@ -36,6 +36,11 @@ def test_normalize_address():
     assert normalize_address('2108 Berkeley Way') == ('2108', 'berkeley')
     assert normalize_address('1234 Sixth Street') == ('1234', '6th')       # ordinal (rule 4c)
     assert normalize_address(None) == ('', '')
+    # an UNNUMBERED situs: the ordinal is the street, never the house number (gate_join_keys, 2026-10-02)
+    assert normalize_address('7TH ST') == ('', '7th')
+    assert normalize_address('SEVENTH ST') == ('', '7th')
+    assert normalize_address('3RD ST') == ('', '3rd')
+    assert normalize_address('1600 7TH ST BERKELEY 94710') == ('1600', '7th')
     # county key is case-insensitive (2026-07-03 lesson: lowercase key silently degraded a matcher)
     assert to_canonical_apn('057 204600600', 'alameda') == '057-2046-006-00'
     print("normalize_address: ordinals + city-tail + Berkeley-Way protection + case-insensitive county — PASS")

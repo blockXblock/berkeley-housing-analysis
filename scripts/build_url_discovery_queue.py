@@ -2,23 +2,29 @@
 """
 Build the URL discovery queue.
 
-Reads the v2 database (read-only) to find in-scope B-prefix permits that
-lack a source_url, and populates the url_discovery_queue table in the
+Reads the v4 database (read-only) to find in-scope B-prefix permits that
+lack a CapDetail URL, and populates the url_discovery_queue table in the
 queue database. The URL discovery scraper (separate workstream) consumes
 this queue to resolve each permit's Accela CapDetail URL.
 
 Inputs:
-    --v2-db        Path to berkeley_housing_v2.db (READ-ONLY)
+    --v4-db        Path to berkeley_housing_v4.db (READ-ONLY; --v2-db is a retired alias)
     --queue-db     Path to cic_recon_queue.db (READ-WRITE)
 
 Outputs:
     Rows inserted into url_discovery_queue with status='pending'.
 
-In-scope criteria (mirrors notes/2026-05-22_url_discovery_design_sketch.md):
+In-scope criteria (v4, re-pointed 2026-10-02 from v2's stage-filtered `permits`):
+    - the MASTER and PHASE permits of v4 structures
+      (structure_events.role_in_structure IN ('master','phase') -> events.source_record_key)
     - permit_number LIKE 'B%'
-    - project.current_stage_type_id maps to vocabulary_stage_types.code
-      in ('completed', 'under_construction')
-    - source_url IS NULL or empty
+    - no CapDetail href in the City's Accela list for that permit
+      (no 'accela_listed' event whose raw_payload.capdetail_href points at CapDetail.aspx)
+    This is the same scope build_scrape_queue.py uses; those two partitions add up to it.
+
+Queue ids: v4 has no permit table and its event_ids renumber on every rebuild, so permit_id is
+derived from the permit number (B2015-00006 -> 201500006). A queue that still holds v2 permit ids
+is refused rather than mixed.
 
 Idempotency:
     The url_discovery_queue.permit_id column is UNIQUE. Re-running the
@@ -37,24 +43,35 @@ Exit codes:
 
 import argparse
 import logging
+import re
 import sqlite3
 import sys
 from datetime import datetime
 from pathlib import Path
 
-DEFAULT_V2_DB = "databases/berkeley_housing_v2.db"
+DEFAULT_V4_DB = "databases/berkeley_housing_v4.db"
+V2_ID_CEILING = 100_000_000   # v4-derived permit_ids are >= 2006*100000; anything below is a v2 id
 DEFAULT_QUEUE_DB = "databases/cic_recon_queue.db"
 
-V2_QUERY = """
-SELECT p.id AS permit_id, p.permit_number
-FROM permits p
-JOIN projects pr ON p.project_id = pr.id
-JOIN vocabulary_stage_types vst ON pr.current_stage_type_id = vst.id
-WHERE p.permit_number LIKE 'B%'
-  AND vst.code IN ('completed', 'under_construction')
-  AND (p.source_url IS NULL OR p.source_url = '')
-ORDER BY p.permit_number;
+V4_QUERY = """
+SELECT DISTINCT e.source_record_key AS permit_number
+FROM structure_events se JOIN events e USING (event_id)
+WHERE se.role_in_structure IN ('master', 'phase')
+  AND e.source_record_key LIKE 'B%'
+  AND NOT EXISTS (
+      SELECT 1 FROM events a
+      WHERE a.event_type_code = 'accela_listed' AND a.source_record_key = e.source_record_key
+        AND json_extract(a.raw_payload, '$.capdetail_href') LIKE '%CapDetail.aspx%')
+ORDER BY 1;
 """
+
+
+def permit_id_of(permit_number):
+    """B2015-00006 -> 201500006: a stable integer id from the permit number itself."""
+    m = re.fullmatch(r"B(\d{4})-(\d{5})", permit_number)
+    if not m:
+        raise ValueError(f"unexpected permit number shape: {permit_number!r}")
+    return int(m.group(1)) * 100000 + int(m.group(2))
 
 INSERT_SQL = """
 INSERT OR IGNORE INTO url_discovery_queue
@@ -65,7 +82,7 @@ VALUES (?, ?, 'pending', 0, ?);
 
 def parse_args(argv=None):
     parser = argparse.ArgumentParser(
-        description="Build the url_discovery_queue from v2 in-scope B-permits."
+        description="Build the url_discovery_queue from v4 in-scope B-permits."
     )
     parser.add_argument(
         "--queue-db",
@@ -73,9 +90,11 @@ def parse_args(argv=None):
         help=f"Path to queue database (default: {DEFAULT_QUEUE_DB})",
     )
     parser.add_argument(
-        "--v2-db",
-        default=DEFAULT_V2_DB,
-        help=f"Path to v2 database (default: {DEFAULT_V2_DB})",
+        "--v4-db", "--v2-db",
+        dest="v4_db",
+        default=DEFAULT_V4_DB,
+        help=f"Path to v4 database, opened read-only (default: {DEFAULT_V4_DB}); "
+             "--v2-db is a retired alias kept so old invocations still parse",
     )
     parser.add_argument(
         "--dry-run",
@@ -104,14 +123,14 @@ def configure_logging(verbose: bool):
     )
 
 
-def fetch_in_scope_permits(v2_db_path: Path, limit):
-    if not v2_db_path.exists():
-        raise SystemExit(f"ERROR: v2 database not found: {v2_db_path}")
-    uri = f"file:{v2_db_path}?mode=ro"
+def fetch_in_scope_permits(v4_db_path: Path, limit):
+    if not v4_db_path.exists():
+        raise SystemExit(f"ERROR: v4 database not found: {v4_db_path}")
+    uri = f"file:{v4_db_path}?mode=ro"
     conn = sqlite3.connect(uri, uri=True)
-    conn.row_factory = sqlite3.Row
     try:
-        rows = conn.execute(V2_QUERY).fetchall()
+        rows = [{"permit_id": permit_id_of(n), "permit_number": n}
+                for (n,) in conn.execute(V4_QUERY).fetchall()]
     finally:
         conn.close()
     if limit is not None:
@@ -132,6 +151,14 @@ def ensure_queue_table(queue_db_path: Path):
             raise SystemExit(
                 "ERROR: table 'url_discovery_queue' does not exist in "
                 f"{queue_db_path}. Create it before running this script."
+            )
+        legacy = conn.execute(
+            "SELECT COUNT(*) FROM url_discovery_queue WHERE permit_id < ?", (V2_ID_CEILING,)
+        ).fetchone()[0]
+        if legacy:
+            raise SystemExit(
+                f"ERROR: {queue_db_path} holds {legacy} v2-era rows (v2 permit ids). Point "
+                "--queue-db at a fresh queue; the v4 queue keys permits by their permit number."
             )
     finally:
         conn.close()
@@ -201,10 +228,10 @@ def main(argv=None):
     configure_logging(args.verbose)
     log = logging.getLogger("build_url_discovery_queue")
 
-    v2_db = Path(args.v2_db)
+    v4_db = Path(args.v4_db)
     queue_db = Path(args.queue_db)
 
-    log.info("v2 database: %s", v2_db)
+    log.info("v4 database: %s", v4_db)
     log.info("Queue database: %s", queue_db)
     log.info("Dry run: %s", args.dry_run)
     if args.limit is not None:
@@ -212,9 +239,9 @@ def main(argv=None):
 
     ensure_queue_table(queue_db)
 
-    log.info("Querying v2 for in-scope B-permits...")
-    permits = fetch_in_scope_permits(v2_db, args.limit)
-    log.info("v2 returned %d in-scope permits", len(permits))
+    log.info("Querying v4 for in-scope B-permits without a listed CapDetail URL...")
+    permits = fetch_in_scope_permits(v4_db, args.limit)
+    log.info("v4 returned %d in-scope permits", len(permits))
 
     if len(permits) == 0:
         log.warning("No in-scope permits found. Nothing to do.")

@@ -8,10 +8,14 @@ manifest to /tmp -- which macOS purges on restart, which is the likeliest reason
 harvest was never mirrored at all. This one takes FILES, so it works on whatever is in front of
 you, and it is re-runnable: already-uploaded keys are skipped, not clobbered.
 
-KEY CONVENTION (matches the 274 architect_plans keys already in the bucket):
+KEY CONVENTION. The 274 architect_plans keys already in the bucket read
     architect_plans/proj<id>_<address-slug>_<YYYY-MM-DD>.pdf
-The address slug comes from the DATABASE (v_projects_flat.address_display), never from the
-filename, so the key agrees with what the site calls the project. A file whose name carries no
+where <id> is a v2 project id. v2 is being archived and its ids do not exist in v4, so NEW uploads
+(2026-10-02, PROPOSED -- awaiting John's confirmation) are keyed on v4's public project id:
+    architect_plans/<project_key>_<address-slug>_<YYYY-MM-DD>.pdf      e.g. ZP2021-0011_2631-durant-ave_...
+Existing proj<id> keys are never renamed or touched; their published URLs keep working. The address
+slug comes from the DATABASE (v4 v_projects.address_display, looked up by project_key), never from
+the filename, so the key agrees with what the site calls the project. A file whose name carries no
 leading date gets _nodate_<sha8> instead, which is what the existing nodate keys look like.
 
 COLLISIONS ARE REAL AND MUST NOT OVERWRITE. proj + address + date does NOT identify a document:
@@ -40,7 +44,7 @@ that decides to take that step.
 """
 import argparse, hashlib, os, re, sqlite3, sys
 
-DB = "databases/berkeley_housing_v2.db"
+DB = "databases/berkeley_housing_v4.db"   # opened read-only
 ENV_FILE = ".env.r2"
 PREFIX = "architect_plans"
 ENV_KEYS = ("R2_ACCOUNT_ID", "R2_ACCESS_KEY_ID", "R2_SECRET_ACCESS_KEY",
@@ -82,13 +86,20 @@ def slug(text):
 
 
 def project_of(path, override):
-    """Project id from --project, else the numeric parent directory the harvester wrote."""
+    """v4 project_key from --project, else a parent directory NAMED by a project_key.
+
+    A purely numeric parent directory is a v2-era harvest folder (v2 project id). Those ids do not
+    exist in v4, so it is refused rather than guessed: pass --project <project_key>.
+    """
     if override:
         return override
     parent = os.path.basename(os.path.dirname(os.path.abspath(path)))
     if parent.isdigit():
-        return int(parent)
-    sys.exit(f"Cannot infer a project id for {path}. Pass --project.")
+        sys.exit(f"{path}: parent directory '{parent}' is a v2 project id, which v4 does not have. "
+                 "Pass --project <v4 project_key> (e.g. ZP2021-0011).")
+    if re.fullmatch(r"[A-Z][A-Z0-9-]*", parent):   # shape only; build_key refuses a key v4 lacks
+        return parent
+    sys.exit(f"Cannot infer a project_key for {path}. Pass --project.")
 
 
 def kind_token(path, address):
@@ -112,15 +123,17 @@ def kind_token(path, address):
     return tok or "doc"
 
 
-def build_key(conn, path, project_id, digest, prefix=PREFIX):
+def build_key(conn, path, project_key, digest, prefix=PREFIX):
     row = conn.execute(
-        "SELECT address_display FROM v_projects_flat WHERE project_id=?", (project_id,)
+        "SELECT address_display FROM v_projects WHERE project_key=?", (project_key,)
     ).fetchone()
-    if not row or not row[0]:
-        sys.exit(f"proj{project_id} has no address_display — refusing to invent a key.")
+    if not row:
+        sys.exit(f"{project_key} is not a v4 project_key — refusing to invent a key.")
+    if not row[0]:
+        sys.exit(f"{project_key} has no address_display — refusing to invent a key.")
     m = re.match(r"(\d{4}-\d{2}-\d{2})", os.path.basename(path))
     stamp = m.group(1) if m else f"nodate_{digest[:8]}"
-    key = f"{prefix}/proj{project_id}_{slug(row[0])}_{stamp}.pdf"
+    key = f"{prefix}/{project_key}_{slug(row[0])}_{stamp}.pdf"
     base = key.split("/")[-1]
     if "/" in base or ":" in base:
         sys.exit(f"Refusing key with '/' or ':' in the basename: {key}")
@@ -130,7 +143,7 @@ def build_key(conn, path, project_id, digest, prefix=PREFIX):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("files", nargs="+")
-    ap.add_argument("--project", type=int, help="override the inferred project id")
+    ap.add_argument("--project", help="v4 project_key (e.g. ZP2021-0011); overrides the inferred one")
     ap.add_argument("--db", default=DB)
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--prefix", default=PREFIX, help="bucket folder, e.g. affordability_forms")
@@ -223,7 +236,7 @@ def main():
     out = a.out
     os.makedirs("scratch", exist_ok=True)
     with open(out, "w", encoding="utf-8") as f:
-        f.write("project_id\taddress\tlocal_path\tfile_size_bytes\tsha256\tr2_url\n")
+        f.write("project_key\taddress\tlocal_path\tfile_size_bytes\tsha256\tr2_url\n")
         for r in rows:
             f.write("\t".join(str(x) for x in r) + "\n")
     print(f"{len(rows)} row(s) for the documents insert -> {out}")

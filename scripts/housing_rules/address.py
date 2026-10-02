@@ -30,10 +30,16 @@ def normalize_address(raw):
     s = re.sub(r'\s+berkeley\s*$', '', s)
     for w, n in _ORD.items():
         s = re.sub(r'\b' + w + r'\b', n, s)
-    m = re.match(r'\s*(\d+)', s)
+    # A leading number is the HOUSE number only when it is not an ORDINAL street name: an unnumbered situs
+    # ('7TH ST', 'SEVENTH ST' after folding) was parsed as house 7 on street 'th', so 11 such keys wrongly tied
+    # 73 parcels together (gate_join_keys, 2026-10-02). Unnumbered now returns ('', '7th').
+    HOUSE = r'^\s*(\d+)(?!\d|st\b|nd\b|rd\b|th\b)'
+    m = re.match(HOUSE, s)
     num = m.group(1) if m else ''
     street = _SUF.sub('', s)
     street = re.sub(r'[^a-z0-9 ]', ' ', street)
-    street = re.sub(r'^\s*\d+\s*', '', street).strip()
+    if num:
+        street = re.sub(r'^\s*\d+\s*', '', street)
+    street = street.strip()
     street = re.sub(r'\s+', ' ', street)
     return (num, street)

@@ -9,13 +9,12 @@ view v_project_people:
                 relabelled a developer
   architect  <- plans_architect
   applicant  <- applicant (Planning log) and plans_applicant
-  owner      <- v_projects.owner_current (the Explorer's owner), organisations only
+  owner      <- v_projects.owner_current (the Explorer's owner); organisation owners drawn as nodes
 (Before 2026-10-02 it read v2's curated organizations x project_participants.)
 
-PUBLISHING RULE (John, 2026-10-01): organisations are named; private individuals are not. An owner is a node only if
-housing_rules.owner_name.is_organisation says so. A professional name (developer/architect/applicant) is a node if it
-is_organisation OR carries a firm word (FIRM below) — the canon is an OWNER-roll test and misses firm names such as
-"TRACHTENBERG ARCHITECTS" or "... Development Corporation"; individuals named in a professional role are left out.
+NAMES (John, 2026-10-02: owner names are public record -- "show names"): every developer, architect and applicant is a
+node, firm or person. Owner nodes are organisations only -- this page's layout choice since v2 (who builds, not every
+household); individual owners are named in the Explorer and the database.
 
 Node size = units; edge weight = shared projects. An edge = co-occurrence on a project, not contract knowledge;
 investors and construction lenders are NOT yet in the record (County Recorder deeds of trust + SOS filings).
@@ -77,11 +76,12 @@ def names_a_person(name):
 
 
 def nameable(name, roles):
-    if names_a_person(name):
-        return False
-    if is_organisation(name):
+    """Names are public record and shown (John, 2026-10-02: "show names"): every developer, architect and applicant
+    is a node. OWNER nodes keep this page's design from before the v4 cutover (the v2 page also drew organisation
+    owners only, so the graph shows who builds rather than every household) -- a layout choice, not masking."""
+    if set(roles) - {'owner'}:
         return True
-    return bool(set(roles) - {'owner'}) and bool(FIRM.search(name.upper()))
+    return is_organisation(name)
 
 
 def drop_person_prefix(name):
@@ -99,10 +99,9 @@ for k, role, name in v4.execute(f"""SELECT DISTINCT project_key, role, TRIM(name
                                     WHERE role IN ({','.join('?' * len(ROLE))}) AND TRIM(COALESCE(name, '')) != ''""",
                                 tuple(ROLE)):
     if k in proj:
-        name = drop_person_prefix(name)
         raw.append((nkey(name), name, ROLE[role], k))
 for k, p in proj.items():
-    if p['owner'] and p['owner'] != 'individual owner':     # the Explorer already masked individual owners
+    if p['owner']:
         raw.append((nkey(p['owner']), p['owner'], 'owner', k))
 # distinct private-individual owners (named nowhere on this page; counted for the note below)
 n_individual_owners = len({o for (o,) in v4.execute("SELECT DISTINCT owner_current FROM v_projects WHERE owner_current > ''")
@@ -114,8 +113,7 @@ for key, name, role, k in raw:
     pl['roles'].add(role); pl['projects'].add(k)
     spellings[key][name] += 1
 
-# Apply the publishing rule HERE, before edges are built, so a line can never connect to a player the page does
-# not show.
+# Decide which players are NODES here, before edges are built, so a line never connects to one the page does not draw.
 _excluded = {kk for kk, p in players.items() if not nameable(spellings[kk].most_common(1)[0][0], p['roles'])}
 n_excluded_prof = sum(1 for kk in _excluded if players[kk]['roles'] - {'owner'})
 n_individual_owners += len(_excluded) - n_excluded_prof    # joint titles naming a person (names_a_person)
@@ -225,13 +223,11 @@ html = f"""<!DOCTYPE html>
   Recorder; investors in LLC filings with the Secretary of State. Neither is loaded yet — this
   page will say so until they are. Coverage is majors-heavy: the neighborhood fabric's hundreds
   of small builders and homeowners aren't named in the record.</p>
-  <p><b>Who appears here.</b> Firms and institutions named on the record in a professional role —
-  developer, architect, applicant — plus owners that are <i>organizations</i>: companies and institutions.
-  Private individuals are deliberately left out: {n_individual_owners:,} individual owners (including family
-  trusts) hold title to projects in this record, and {n_excluded_prof:,} more names on the record in a
-  professional role are individuals rather than firms; a network graph of named people is not what this view
-  is for.
-  Their parcels are still shown, as title records rather than as players, on
+  <p><b>Who appears here.</b> Everyone named on the record in a professional role — developer, architect,
+  applicant, firm or person — plus owners that are <i>organizations</i>. The {n_individual_owners:,} individual
+  owners (including family trusts) are named in the Explorer and the database rather than drawn here, so the
+  graph shows who builds rather than every household that holds title.
+  Their parcels are shown, as title records, on
   <a href="maps/berkeley_ownership.html">the ownership map</a>. And a line between two players
   means they <i>appear on the same project</i> — the record does not know who hired whom.</p>
 

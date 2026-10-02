@@ -60,23 +60,14 @@ LINE_FIELDS = {
 # Projects whose labels we pin, so a silent content change is caught. Looked up by the address canon
 # (v4_source.akey), because v4 can hold several projects at one address and resolves them explicitly.
 ANCHORS = ['2128 Oxford St', '1974 SHATTUCK Ave', '2700 SHATTUCK Ave']
-# Fields whose text is a NAME on the label. The publishing rule: organisations named, private
-# individuals never. housing_rules.owner_name.is_organisation is the test.
+# Fields whose text is a NAME on the label. Names are public record and printed as v4 holds them (John,
+# 2026-10-02: "show names"); the organisation count below is information about the canon, not a mask.
 NAME_FIELDS = ('architect', 'developer', 'owner_current')
 
 
 def redact(lines, r, is_org):
-    """Replace any label NAME the canon does not call an organisation with 'individual' -- for text that
-    is STORED (baseline) or PRINTED (notebook). The sha is always taken on the true lines."""
-    out = []
-    for ln in lines:
-        for f in NAME_FIELDS:
-            v = r.get(f)
-            if v and not is_org(v):
-                for frag in {str(v)[:34], str(v)[:38], str(v)[:40], str(v)}:
-                    ln = ln.replace(frag, 'individual')
-        out.append(ln)
-    return out
+    """No longer redacts (owner names are public record; John, 2026-10-02). Kept so the call sites stay simple."""
+    return list(lines)
 
 
 def v4_sha():
@@ -123,7 +114,7 @@ def derive():
         lines = [x for x in G.lines_for(r) if x]
         d['anchors'][a] = {
             'project_key': r['project_key'],
-            'lines': redact(lines, r, is_organisation),     # stored/printed text never carries an individual
+            'lines': redact(lines, r, is_organisation),     # names printed as v4 holds them (public record)
             'sha': hashlib.sha256('\n'.join(lines).encode()).hexdigest()[:16],
         }
     return d, v4_sha()
@@ -297,10 +288,9 @@ They are not. `architect`, `developer` and `owner` are sparse; `height_feet` is 
 label design that assumes rich data produces mostly-empty boxes.
 
 **Plan.** Count, for every field a label line needs, how many of the rows in scope actually carry it.
-Then count how many of the six display lines each project can fill. Then apply the **publishing
-rule** to every NAME a label would print: organisations named, private individuals never
-(`housing_rules.owner_name.is_organisation`). Counts and project keys only — the check itself must
-not print a name it is flagging.
+Then count how many of the six display lines each project can fill, and how many NAMES on a label the
+canon (`housing_rules.owner_name.is_organisation`) does not recognize as an organisation -- information
+about the canon's coverage; names are public record and printed as v4 holds them (John, 2026-10-02).
 """)
     code("""
 LINE_FIELDS = """ + json.dumps(LINE_FIELDS, indent=4) + """
@@ -324,22 +314,18 @@ for k in sorted(hist):
 
 NAME_FIELDS = """ + repr(NAME_FIELDS) + """
 not_org = {f: [x['project_key'] for x in ROWS if x[f] and not is_organisation(x[f])] for f in NAME_FIELDS}
-print('\\n  PUBLISHING RULE — label names the canon does NOT classify as an organisation:')
+print('\\n  label names the canon does NOT classify as an organisation (canon coverage, not a mask):')
 for f, keys in not_org.items():
     print(f'    {f:14} {len(keys):4}   e.g. {keys[:6]}')
 """)
     md(f"""
 **Found.** The address and stage are universal; the people are not. Of {d['n_projects']} label rows,
 **{d['coverage']['owner']} carry an owner** and **{d['coverage']['architect']} an architect**. The owner
-line is now the Explorer's: an owner of record is printed only when it is an organisation, so the
-coverage figure is lower than v2's (which printed every assessor name) by design.
+line is the Explorer's owner of record, printed as v4 holds it (owner names are public record).
 
-**The publishing check (printed above) is a finding, not a pass.** Some architect and developer names
-fail `is_organisation` — at build time {d['names_not_organisation']}. Two different things hide in that
-count: genuine **private individuals** on a plan set's title block (which must not be printed), and
-**firms the canon misses** because their names carry no LLC/INC-type word (an "…ARCHITECTS" practice, a
-"STUDIO …"). The owner line is masked upstream; architect and developer are not. Which fix — widen the
-canon, or mask the label — is John's call; see the report.
+**The organisation count (printed above) measures the canon, not the labels.** Names that fail
+`is_organisation` at build time: {d['names_not_organisation']} -- mostly **firms the canon misses** because
+their names carry no LLC/INC-type word (an "…ARCHITECTS" practice, a "STUDIO …"). Labels print every name.
 
 **Verify — and this is the point of the section.** Look at the histogram. The modal project fills
 far fewer than six lines. **Designing a six-line label for a pipeline whose typical project supports
@@ -459,16 +445,7 @@ baseline is a different database and row unit; the generator prints a crosswalk 
 """)
     code("""
 def redact(lines, r):
-    # printed text never carries a name the canon does not call an organisation (publishing rule)
-    out = []
-    for ln in lines:
-        for f in NAME_FIELDS:
-            v = r.get(f)
-            if v and not is_organisation(v):
-                for frag in {str(v)[:34], str(v)[:38], str(v)[:40], str(v)}:
-                    ln = ln.replace(frag, 'individual')
-        out.append(ln)
-    return out
+    return list(lines)   # names are public record and printed (John, 2026-10-02)
 
 BL_DIR = os.environ.get('JN_BASELINE_DIR') or os.path.join(ROOT, 'data', 'baselines')
 hits = [h for h in sorted(glob.glob(os.path.join(BL_DIR, 'label_fields_baseline_*.json')))

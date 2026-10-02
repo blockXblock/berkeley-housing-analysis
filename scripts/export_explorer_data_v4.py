@@ -5,7 +5,7 @@ Cutover phase 6, step 4 (John, 2026-10-01: "start the Explorer re-point"). Repla
 reads v2. Same DATA shape, so docs/explorer.js changes only where v4 adds something (two stages, the v2-id crosswalk).
 READ-ONLY on v4 (mode=ro). Reads v4's SERVING VIEWS (build_views.py) and never re-derives what a view already states;
 the few Explorer-only fields (the inactive stages, the first inspection, the fee aggregates) are computed here from
-v4 rows and each says how. Publishing rule (John, 2026-10-01): organisations named, private individuals not.
+v4 rows and each says how. Names: owner names are public record and published as v4 holds them (John, 2026-10-02: "show names").
 
 Writes docs/explorer_data_v4_working.js. Promotion to the served docs/explorer_data.js is a separate, reviewed copy.
 
@@ -36,7 +36,8 @@ CUT_36 = (TODAY - timedelta(days=1095)).isoformat()
 
 
 def mask(name, label="individual owner"):
-    return name if not name or is_organisation(name) else label
+    """No masking: owner names are public record and published as v4 holds them (John, 2026-10-02: "show names"). Kept as the single place a future presentation rule would go."""
+    return name
 
 
 def money(s):
@@ -233,7 +234,7 @@ def get_players(projects, db):
            for r in ("developers", "architects", "owners")}
     for p in projects:
         for r, name in (("developers", p["developer"]), ("architects", p["architect"]),
-                        ("owners", p["owner"] if p["owner"] != "individual owner" else None)):
+                        ("owners", p["owner"])):
             if name:
                 a = agg[r][name]
                 a["projects"].append(p["address"]); a["total_units"] += p["units"] or 0; a["total_fees"] += p["total_fees"]

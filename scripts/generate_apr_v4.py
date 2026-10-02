@@ -112,13 +112,11 @@ def generate_table_a(conn, year):
                'density_bonus', 'sb35_flag', 'sb330_flag', 'ab2011_flag',
                'owner_of_record', 'architect']
 
-    # Publishing rule (John, 2026-10-01): an organisation is named; a private individual is "individual owner".
+    # Owner names are public record and shown as v4 holds them (John, 2026-10-02).
     from housing_rules.owner_name import is_organisation
     rows = []
     for row in cursor.fetchall():
         r = dict(zip(columns, row))
-        if r.get('owner_of_record') and not is_organisation(r['owner_of_record']):
-            r['owner_of_record'] = 'individual owner'
         rows.append(r)
 
     return {
@@ -311,8 +309,8 @@ def generate_developer_summary(conn, year):
 
     # v4 (2026-10-01): projects whose FIRST building permit falls in the 6th-cycle window through the reporting year
     # (the same window as Table B and RHNA progress), grouped by the assessor's owner of record. Density-bonus count
-    # from the sourced pathways. Publishing rule (John): organisations by name, private individuals pooled as
-    # "individual owner"; no owner on the roll = "unknown (not on the roll)".
+    # from the sourced pathways. Owners by name as v4 holds them (public record, John 2026-10-02); no owner on the
+    # roll = "unknown (not on the roll)".
     from housing_rules.owner_name import is_organisation
     cursor.execute('''
         SELECT v.owner_current, COALESCE(v.units_built_or_permitted, 0), COALESCE(v.vli_units, 0),
@@ -322,7 +320,7 @@ def generate_developer_summary(conn, year):
     ''', (f'{year}-12-31',))
     agg = {}
     for owner, units, vli, db in cursor.fetchall():
-        name = owner if owner and is_organisation(owner) else ('individual owner' if owner else 'unknown (not on the roll)')
+        name = owner or 'unknown (not on the roll)'      # names as v4 holds them (public record; John, 2026-10-02)
         a = agg.setdefault(name, [0, 0, 0, 0])
         a[0] += 1; a[1] += units; a[2] += vli; a[3] += db
     rows = [{"owner_of_record": k, "project_count": v[0], "total_units": v[1], "vli_units": v[2],
@@ -332,10 +330,10 @@ def generate_developer_summary(conn, year):
     return {
         "title": f"Supplemental: Owner of Record Summary Through {year} (assessor roll; NOT developers)",
         "description": f"Units on projects whose first building permit was issued 2022-06-30 through {year}-12-31, by the "
-                       f"assessor's owner of record (individuals pooled). Not developers.",
+                       f"assessor's owner of record. Not developers.",
         "developers": rows,
         "summary": {
-            "total_developers": len([r for r in rows if r['owner_of_record'] not in ('individual owner', 'unknown (not on the roll)')]),
+            "total_developers": len([r for r in rows if r['owner_of_record'] not in ('unknown (not on the roll)',)]),
             "total_projects": sum(r['project_count'] for r in rows),
             "total_units": sum(r['total_units'] for r in rows),
             "total_vli": sum(r['vli_units'] for r in rows)

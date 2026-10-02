@@ -785,7 +785,7 @@ AgencyCounter records** — mostly active/recent permits — so it is a slice, *
 Fees-tab totals and **not to be summed with them** (an issued permit can appear in both). (2) These are
 amounts **charged on the permit record, not a cash-flow ledger**. (3) The chart is **truncated to the top
 15**. (4) **No party names** — this layer carries no payer identity; the payer → city network needs the
-CapDetail contacts v4 holds (`v_project_people`), with private individuals shown as "individual".
+CapDetail contacts v4 holds (`v_project_people`), names as the records give them.
 (5) The snapshot is **dated and frozen**; a re-harvest writes a NEW dated file and appends a NEW baseline.
 """)
 

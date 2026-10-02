@@ -3,7 +3,7 @@
 
 READ-ONLY on the canonical v4 database (opened mode=ro; re-pointed from v2 2026-10-01). Writes only into
 datasette-deploy/. Reads v4's SERVING VIEWS (build_views.py) -- never re-derives a field -- and applies the
-publishing rule (organisations named, private individuals not) as each row is copied.
+owner names as v4 holds them (public record; John, 2026-10-02).
 
 WHY THIS EXISTS. The deployed databases were hand-built in Feb/Mar 2026 and there was no
 generator, so they silently went stale: the live instance serves 163 projects while v2 has
@@ -38,7 +38,8 @@ APPLICANT_ROLES = {'applicant', 'plans_applicant'}
 
 
 def mask(name, label):
-    return name if not name or is_organisation(name) else label
+    """No masking: owner names are public record and published as v4 holds them (John, 2026-10-02: "show names")."""
+    return name
 
 
 # served table -> (SQL over v4, {column: transform})
@@ -160,8 +161,7 @@ TABLE_DOCS = {
     'people': ("People and organizations, by role", "Every role from its own record: owner of record (County roll), "
                "permit owner and contractors (building permit pages), architect and engineers (plan title blocks), "
                "property manager and rental owner (Rent Board), developer and general partners (CTCAC), funders "
-               "(funding ledger), City reviewers and inspectors. Private individuals are shown as 'individual owner' "
-               "or 'individual'.", ["role", "source"]),
+               "(funding ledger), City reviewers and inspectors. Names as the public records give them.", ["role", "source"]),
     'businesses': ("Licensed businesses at each project", "City business licenses (2025-11-15 export) on a project's "
                    "parcels or addresses. The export lacks some tenants that permits show, so no license does not mean vacant.",
                    ["sub_type", "matched_by"]),
@@ -194,8 +194,8 @@ def write_metadata(rows):
             "databases": dict(old.get("databases", {}))}
     meta["databases"]["berkeley_housing_map"] = {
         "title": f"Housing Pipeline ({rows['projects']:,} projects)",
-        "description": "From the canonical v4 database's serving views. Organizations are named; private individuals "
-                       "are not (publishing rule, 2026-10-01).",
+        "description": "From the canonical v4 database's serving views. Owner and applicant names are public record, "
+                       "shown as the City and County records give them.",
         "tables": {t: {"title": f"{title} ({rows[t]:,})", "description": desc, **({"facets": facets} if facets else {})}
                    for t, (title, desc, facets) in TABLE_DOCS.items() if t in rows}}
     meta["databases"]["berkeley_housing_map"]["tables"]["projects"]["plugins"] = {
@@ -216,7 +216,7 @@ def main():
     for t, n in rows.items():
         b = before.get(t)
         d = '(new)' if b is None else f'{n-b:+,}'
-        print(f"  {t:22}{(f'{b:,}' if b is not None else '-'):>9}{n:>9,}   {d}   (values masked by the publishing rule: {masked[t]:,})")
+        print(f"  {t:22}{(f'{b:,}' if b is not None else '-'):>9}{n:>9,}   {d}")
     for t, b in before.items():
         if t not in rows: print(f"  {t:22}{b:>9,}{'-':>9}   (dropped)")
     czu = build_czu()

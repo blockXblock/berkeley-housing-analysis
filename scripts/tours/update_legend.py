@@ -152,11 +152,15 @@ def main():
         if "youtube.com/embed" not in tail_of_page:
             return m.group(0)
         n += 1
-        head = body[:body.index(" <b>Colour shows")] if " <b>Colour shows" in body else body
+        cut = re.search(r" <b>Colou?r shows", body)          # either spelling: never leave the old legend behind
+        head = body[:cut.start()] if cut else body
         return m.group(1) + head.rstrip() + new + m.group(3)
     h = re.sub(r"(<h3>.*?</h3>\s*<p>)(.*?)(</p>)", swap, h, flags=re.S)
+    # the homepage's own "What the building colors mean" panel (2026-10-03): it carries the legend sentence outside any
+    # video block, so the swap above never reached it and it went stale -- rewrite it from the same census
+    h, m_panel = re.subn(r"<b>Colou?r shows where each project stands:</b>.*?(?=</p>)", new.strip(), h, flags=re.S)
     open(a.page, "w", encoding="utf-8").write(h)
-    print(f"\nrewrote the legend in {n} video description(s)")
+    print(f"\nrewrote the legend in {n} video description(s) and {m_panel} legend panel(s)")
 
 
 if __name__ == "__main__":

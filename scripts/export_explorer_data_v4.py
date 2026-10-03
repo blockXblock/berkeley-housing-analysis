@@ -169,6 +169,7 @@ def get_projects(db):
             "field_survey_date": None, "field_survey_notes": None,
             "demolition_permit_date": demo.get(k), "demolition_start_date": None, "construction_substage": None,
             "beds": v["beds"], "source_confidence": v["source_confidence"], "anchor_record": v["anchor_record"],
+            "anchor_role": v["anchor_role"],
         })
     out.sort(key=lambda p: -(p["units"] or 0))
     return out

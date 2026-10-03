@@ -93,7 +93,10 @@ for p in PROJECTS:
     if stg == 'Building Permits Filed':
         st = 2 if p['entitled'] else 1
     row = dict(key=p['id'], addr=(p['address'] or '').title(), u=p['units'] or 0, stage=stg,
-               entitled=d10(p['entitled']), last_insp=last_insp.get(p['id']))
+               entitled=d10(p['entitled']), last_insp=last_insp.get(p['id']),
+               # JN-K's "major" = a Planning-anchored APPLICATION of 50+ units (not a lone building permit, not
+               # the historic ledger); the anchor check compares like with like
+               app=p.get('anchor_role') in ('primary_application', 'pre_application', 'outside_city_permitting'))
     if st is None:
         (exits[stg] if stg in exits else unstated).append(row)
         continue
@@ -132,8 +135,8 @@ def _t(t): return tier_stats.get(t, (0, 0))
 # ---- ANCHOR: JN-K's audited majors funnel (a v2-built baseline until a v4 one is written) ----
 bl = json.load(open(sorted(glob.glob(os.path.join(ROOT, 'data/baselines/completion_anatomy_baseline_*.json')))[-1]))
 fig = bl['figures']
-majors = {i: [r for r in STATES[i] if r['u'] >= 50] for i in STATES}
-mw = [r for r in withdrawn if r['u'] >= 50]
+majors = {i: [r for r in STATES[i] if r['u'] >= 50 and r['app']] for i in STATES}
+mw = [r for r in withdrawn + exits['Expired'] if r['u'] >= 50 and r['app']]   # JN-K: withdrawn/void
 checks = {
     'majors_completed': (len(majors[5]), fig['majors_completed']),
     'majors_building+stalled': (len(majors[3]) + len(majors[4]), fig['majors_permitted'] - fig['majors_completed']),

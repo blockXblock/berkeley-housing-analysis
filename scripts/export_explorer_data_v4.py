@@ -31,6 +31,7 @@ V2_PATH = BASE_DIR / "databases" / "berkeley_housing_v2.db"      # read ONLY for
 OUTPUT_PATH = BASE_DIR / "docs" / "explorer_data_v4_working.js"
 
 TODAY = date.today()
+CUT_6 = (TODAY - timedelta(days=183)).isoformat()
 CUT_24 = (TODAY - timedelta(days=730)).isoformat()
 CUT_36 = (TODAY - timedelta(days=1095)).isoformat()
 
@@ -47,9 +48,11 @@ def money(s):
 def get_projects(db):
     """One Explorer row per v4 project (v_projects), the page's field names kept."""
     q = lambda sql, *a: db.execute(sql, a).fetchall()
-    first_insp = dict(q("""SELECT json_extract(p.notes, '$.project_key'), MIN(e.event_date) FROM projects p
-                           JOIN project_structures ps USING(project_id) JOIN structure_events se USING(structure_id)
-                           JOIN events e USING(event_id) WHERE e.event_type_code = 'inspection' GROUP BY 1"""))
+    first_insp, last_insp = {}, {}
+    for k, lo, hi in q("""SELECT json_extract(p.notes, '$.project_key'), MIN(e.event_date), MAX(e.event_date) FROM projects p
+                          JOIN project_structures ps USING(project_id) JOIN structure_events se USING(structure_id)
+                          JOIN events e USING(event_id) WHERE e.event_type_code = 'inspection' GROUP BY 1"""):
+        first_insp[k], last_insp[k] = lo, hi
     permits = collections.defaultdict(list)
     for k, rec in q("""SELECT DISTINCT json_extract(p.notes, '$.project_key'), e.source_record_key FROM projects p
                        JOIN project_structures ps USING(project_id) JOIN structure_events se USING(structure_id)
@@ -98,14 +101,20 @@ def get_projects(db):
         if st == "completed":
             stage = "Completed"
         elif st in ("under_construction", "stale"):
+            # SPLIT by the City's own inspection record (John, 2026-10-03): active = inspected in the last 6 months;
+            # quiet = inspected before, not since; never inspected = not started (inactive once the permit is 24
+            # months old, the rule v2 used)
+            last = last_insp.get(k)
             if k in submitted_only:
                 stage = "Building Permits Filed"
-            elif ins:
+            elif last and last >= CUT_6:
                 stage = "Under Construction"
+            elif last:
+                stage = "Construction Quiet"
             elif v["bp_issued_date"] and v["bp_issued_date"] < CUT_24:
                 stage = "Permitted but Inactive"
             else:
-                stage = "Under Construction"
+                stage = "Permitted, Not Started"
         elif st == "entitled":
             stage = "Entitled but Inactive" if (v["entitled_date"] or "9999") < CUT_36 else "Entitled"
         elif st == "in_review":
@@ -148,7 +157,7 @@ def get_projects(db):
                {"assessed_value": None, "assessed_net_taxable": None, "est_annual_tax": None,
                 "assessed_as_of_date": None, "assessed_tax_exempt": False}),
             "assessed_exemption": None,
-            "construction_start": ins, "construction_status": None, "estimated_completion": None,
+            "construction_start": ins, "last_inspection": last_insp.get(k), "construction_status": None, "estimated_completion": None,
             "processing_days": pdays, "height_stories": v["height_stories"], "height_feet": v["height_feet"],
             "app_packet_mb": 0, "total_fees": fees, "fee_per_unit": (fees / units) if units else 0,
             "building_fees": v["fees_paid"] or 0, "planning_fees": v["planning_fees_paid"] or 0,

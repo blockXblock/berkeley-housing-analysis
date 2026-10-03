@@ -116,7 +116,9 @@
         'Entitled',
         'Entitled but Inactive',
         'Building Permits Filed',
+        'Permitted, Not Started',
         'Permitted but Inactive',
+        'Construction Quiet',
         'Under Construction',
         'Completed',
         'Withdrawn',
@@ -132,13 +134,15 @@
         'Entitled': 3,
         'Entitled but Inactive': 4,
         'Building Permits Filed': 5,
-        'Permitted but Inactive': 6,
-        'Under Construction': 7,
-        'Completed': 8,
-        'Withdrawn': 9,
-        'Denied': 10,
-        'Expired': 11,
-        'Stalled': 12
+        'Permitted, Not Started': 6,
+        'Permitted but Inactive': 7,
+        'Construction Quiet': 8,
+        'Under Construction': 9,
+        'Completed': 10,
+        'Withdrawn': 11,
+        'Denied': 12,
+        'Expired': 13,
+        'Stalled': 14
     };
 
     const STAGE_COLORS = {
@@ -147,7 +151,9 @@
         'Entitled': '#34d399',             // emerald
         'Entitled but Inactive': '#9ca3af', // gray-400 (muted - stuck)
         'Building Permits Filed': '#a78bfa', // violet
+        'Permitted, Not Started': '#c4b5fd', // violet-300 (permit issued, no inspection yet)
         'Permitted but Inactive': '#9ca3af', // gray-400 (muted - stuck)
+        'Construction Quiet': '#fdba74',   // orange-300 (inspected before, not in the last 6 months)
         'Under Construction': '#f97316',   // orange
         'Completed': '#22c55e',            // green
         'Withdrawn': '#ef4444',            // red

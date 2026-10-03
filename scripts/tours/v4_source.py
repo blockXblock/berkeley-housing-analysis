@@ -47,6 +47,8 @@ KML_BUCKET = {
     "Building Permits Filed": "Entitled",
     "Entitled but Inactive": "Stalled",
     "Permitted but Inactive": "Stalled",
+    "Permitted, Not Started": "Permitted",        # the legend's Permitted color (2026-10-03 split)
+    "Construction Quiet": "Under Construction",   # label says "Construction Quiet"; legend has no own color
     "Under Construction": "Under Construction",
     "Completed": "Completed",
     "Withdrawn": "Withdrawn",

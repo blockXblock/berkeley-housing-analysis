@@ -9,8 +9,9 @@ five states are the Explorer's stage labels grouped, so the two pages always agr
 Every tracked (non-UC) project, by its Explorer stage:
   1 applied, not yet entitled        Under Review, Pre-Application            (anchor: filed date)
   2 entitled, no building permit     Entitled, Entitled but Inactive          (anchor: entitled date)
-  3 BP issued, no construction       Permitted but Inactive: permit issued >24 months ago, no inspection ever
-  4 under construction               Under Construction: permit issued and inspected (or issued <24 months ago)
+  3 BP issued, no construction       Permitted, Not Started (no inspection yet) + Permitted but Inactive (>24 months)
+  4 under construction               Under Construction (inspected in the last 6 months) + Construction Quiet (inspected
+                                     before, not since) -- the Explorer's split of 2026-10-03, by the City's inspections
   5 complete                         Completed: every building finaled         (anchor: last building's CO)
   'Building Permits Filed' (a permit applied for, none issued) goes to 2 if entitled, else 1.
   Exits (footnote): Withdrawn, Denied, Expired.
@@ -79,7 +80,8 @@ def akey(a):
 
 # THE EXPLORER'S STAGES -> THIS PAGE'S STATES (one mapping; the Explorer decides the stage)
 STAGE_STATE = {'Under Review': 1, 'Pre-Application': 1, 'Entitled': 2, 'Entitled but Inactive': 2,
-               'Permitted but Inactive': 3, 'Under Construction': 4, 'Completed': 5}
+               'Permitted, Not Started': 3, 'Permitted but Inactive': 3,
+               'Construction Quiet': 4, 'Under Construction': 4, 'Completed': 5}
 EXITS = ('Withdrawn', 'Denied', 'Expired')
 STATES = {i: [] for i in range(1, 6)}
 exits = {x: [] for x in EXITS}

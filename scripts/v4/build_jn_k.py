@@ -328,7 +328,11 @@ if diffs:
     print('BASELINE MISMATCH:')
     for k, (now, was) in diffs.items():
         print(f'  {k}: computed {now} vs baseline {was}')
-    raise AssertionError('diagnose above; a legitimate change APPENDS a new timestamped baseline')
+    if os.environ.get('JN_WRITE_BASELINE') != '1':
+        raise AssertionError('diagnose above; a legitimate change APPENDS a new timestamped baseline '
+                             '(re-run with JN_WRITE_BASELINE=1 -- John\'s call)')
+    print('JN_WRITE_BASELINE=1: the differences above are a reviewed change; appending a new baseline below.')
+    v4_era = False      # fall through to the append
 if v4_era:
     print(f'BASELINE GATE PASS vs {os.path.basename(snaps[-1])}')
 else:

@@ -88,9 +88,10 @@ and assert the oracle-parcel identity."""))
 cells.append(code(r"""import sqlite3, json, os, sys, warnings
 import pandas as pd, numpy as np
 warnings.filterwarnings("ignore")
-sys.path.insert(0, "scripts")
+ROOT = os.path.expanduser("~/berkeley-data")      # the repo root, wherever the notebook runs from (as JN-K)
+sys.path.insert(0, os.path.join(ROOT, "scripts"))
 
-DB = "databases/berkeley.db"
+DB = os.path.join(ROOT, "databases", "berkeley.db")
 con = sqlite3.connect(f"file:{DB}?mode=ro", uri=True)       # read-only
 p = pd.read_sql("SELECT APN,TotalNetValue,Land,Imps,UseCode,Latitude,Longitude,"
                 "SitusStree,SitusStr_1 FROM parcels", con)
@@ -279,7 +280,7 @@ avg_rate_frozen = avg_rate_for_growth(0.02)
 
 # (b) new-construction evidence: v4 completions joined to assessor AV
 from housing_rules import to_canonical_apn
-v4 = sqlite3.connect("file:databases/berkeley_housing_v4.db?mode=ro", uri=True)   # read-only
+v4 = sqlite3.connect(f"file:{os.path.join(ROOT, 'databases', 'berkeley_housing_v4.db')}?mode=ro", uri=True)   # read-only
 proj = pd.read_sql(
     "SELECT v.project_key AS project_id, v.units_built_or_permitted AS total_units, v.co_issued_date, "
     "       pi.apn_raw, pi.apn_normalized "
@@ -593,7 +594,7 @@ the legitimate response to a real change (new assessor snapshot, corrected TRS) 
 appended timestamped baseline**, never an edit of the old one."""))
 
 cells.append(code(r"""import glob, datetime
-BL_DIR = os.environ.get("JN_BASELINE_DIR") or "data/baselines"
+BL_DIR = os.environ.get("JN_BASELINE_DIR") or os.path.join(ROOT, "data", "baselines")
 _all = sorted(glob.glob(os.path.join(BL_DIR, "measure_u_reconciliation_baseline_*.json")))
 _v4 = [f for f in _all if json.load(open(f)).get("db") == "v4"]
 BASELINE = (_v4 or _all)[-1] if _all else None

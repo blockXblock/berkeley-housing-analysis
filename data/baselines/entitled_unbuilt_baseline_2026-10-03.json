@@ -1,0 +1,18 @@
+{
+ "as_of": "2026-10-03",
+ "v4_sha": "bef4545c",
+ "db": "v4",
+ "classifier": "permit_effect@501341414243",
+ "provenance": "appended after a reviewed change (JN_WRITE_BASELINE=1)",
+ "figures": {
+  "housing_masters": 1178,
+  "mature_units_issued_2015_2022": 3461,
+  "mature_units_finaled": 3335,
+  "mature_units_not_finaled": 126,
+  "stalled_register_projects_10u": 14,
+  "stalled_register_units": 895,
+  "closed_expired_building_apps": 10855,
+  "planning_apps_2015_2025": 14162,
+  "planning_first_gate_death_share": 0.0738
+ }
+}

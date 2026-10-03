@@ -1,0 +1,164 @@
+{
+  "created": "2026-10-03",
+  "db": "v4",
+  "supersedes": "measure_u_reconciliation_baseline_2026-09-16.json",
+  "provenance": {
+    "assessor": "databases/berkeley.db (Alameda parcels)",
+    "official": "Resolution 72,338-N.S. Exhibit B (TRS) + impartial analysis, berkeleyca.gov",
+    "v4": "databases/berkeley_housing_v4.db v_projects completions >=2018, 5+ units built (read-only)",
+    "generator": "scripts/v4/build_jn_measure_u.py"
+  },
+  "official": {
+    "principal": 300000000,
+    "avg_rate_100k": 22.14,
+    "peak_rate_100k": 35.0,
+    "peak_first_fy": 2040,
+    "total_debt_service": 610000000,
+    "avg_annual_revenue": 15200000,
+    "combined_avg_rate_100k": 44.13,
+    "tranche": 100000000,
+    "tranche_years": [
+      2027,
+      2032,
+      2037
+    ],
+    "final_fy": 2066,
+    "base_year": 2026
+  },
+  "derived": {
+    "n_parcels": 27661,
+    "total_av_b": 30.51500513,
+    "implied_borrow_rate_pct": 5.3643340190029445,
+    "ds_peak_m": 20.333333333318674,
+    "total_interest_m": 310.0,
+    "rate_today_100k": 66.63388469605239,
+    "base_peak_impl_b": 58.095238095196216,
+    "g_peak_pct": 4.706432662381932,
+    "base_avg_impl_b": 68.65401987353206,
+    "base_avg_multiple": 2.249844611890192,
+    "g_avg_pct": 4.236697558997547,
+    "wedge_share_avg_pct": 52.79342053216507,
+    "wedge_share_peak_pct": 57.50496940101131,
+    "avg_rate_frozen_100k": 33.23773818188082,
+    "newcon_projects_matched": 46,
+    "newcon_units_matched": 3111,
+    "newcon_av_b": 1.705717554,
+    "newcon_share_of_base_pct": 5.589766564787728,
+    "top1_share_pct": 20.869721610300775,
+    "top5_share_pct": 33.040514966480686,
+    "top10_share_pct": 42.672284440150115,
+    "top25_share_pct": 63.42268717816204,
+    "top50_share_pct": 85.1397452575162,
+    "median_cost_all": 464.84064499504933,
+    "sfr_n": 17305,
+    "sfr_median_cost": 466.5558011871257,
+    "sfr_p90_p10": 15.220408093395871,
+    "decile_share_pct": [
+      0.7334265717686936,
+      1.7078813874674252,
+      2.816240044328644,
+      4.074523408084382,
+      5.528183330834655,
+      7.225005178952102,
+      9.105543021090098,
+      11.45141605617682,
+      14.685496561147064,
+      42.672284440150115
+    ],
+    "decile_median_cost": [
+      54.73107387279655,
+      124.87623112290743,
+      207.69182154797267,
+      298.73169919164815,
+      405.3509122466842,
+      532.1258759140056,
+      668.5787449945817,
+      840.1916496738768,
+      1067.7840140557491,
+      1664.3248663054283
+    ],
+    "apt_share_pct": 22.003316615532878,
+    "flat_parcel_cost": 735.0903197035058,
+    "med_sfr_av": 700178.0,
+    "tier_composition_av_pct": {
+      "1": {
+        "apartments_mixed": 52.7,
+        "commercial_industrial": 31.1,
+        "institutional": 12.8,
+        "other": 2.3,
+        "single_family": 0.6,
+        "small_residential": 0.5
+      },
+      "5": {
+        "apartments_mixed": 42.1,
+        "commercial_industrial": 25.2,
+        "institutional": 9.6,
+        "other": 2.8,
+        "single_family": 16.7,
+        "small_residential": 3.6
+      },
+      "10": {
+        "apartments_mixed": 35.0,
+        "commercial_industrial": 21.0,
+        "condos": 0.0,
+        "institutional": 7.8,
+        "other": 2.3,
+        "single_family": 27.5,
+        "small_residential": 6.3
+      },
+      "25": {
+        "apartments_mixed": 25.4,
+        "commercial_industrial": 15.4,
+        "condos": 0.8,
+        "institutional": 5.6,
+        "other": 1.9,
+        "single_family": 40.9,
+        "small_residential": 10.0
+      }
+    },
+    "tier_composition_count": {
+      "1": {
+        "apartments_mixed": 133,
+        "commercial_industrial": 85,
+        "institutional": 39,
+        "other": 11,
+        "single_family": 6,
+        "small_residential": 2
+      },
+      "5": {
+        "single_family": 523,
+        "apartments_mixed": 380,
+        "commercial_industrial": 239,
+        "small_residential": 113,
+        "institutional": 79,
+        "other": 49
+      },
+      "10": {
+        "single_family": 1419,
+        "apartments_mixed": 527,
+        "small_residential": 330,
+        "commercial_industrial": 327,
+        "institutional": 102,
+        "other": 58,
+        "condos": 3
+      },
+      "25": {
+        "single_family": 4253,
+        "small_residential": 1062,
+        "apartments_mixed": 760,
+        "commercial_industrial": 492,
+        "institutional": 147,
+        "other": 101,
+        "condos": 100
+      }
+    },
+    "tier_entry_av": {
+      "1": 5818954.0,
+      "5": 2498000.0,
+      "10": 1886000.0,
+      "25": 1260991.0
+    },
+    "owner_occupied_parcels": 15959,
+    "owner_occupied_share_pct": 41.880779392154736
+  }
+}

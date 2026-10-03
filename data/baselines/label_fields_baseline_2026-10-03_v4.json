@@ -1,0 +1,64 @@
+{
+  "n_projects": 1446,
+  "coverage": {
+    "address": 1446,
+    "units": 1347,
+    "status": 1446,
+    "stories": 349,
+    "height": 105,
+    "filed": 625,
+    "architect": 77,
+    "developer": 37,
+    "owner": 1312
+  },
+  "lines_filled": {
+    "3": 34,
+    "4": 818,
+    "5": 582,
+    "6": 12
+  },
+  "anchors": {
+    "2128 Oxford St": {
+      "project_key": "ZP2022-0135",
+      "lines": [
+        "2128 Oxford St",
+        "456 units \u00b7 Entitled",
+        "27 stories \u00b7 285 ft \u00b7 713,664 sq ft",
+        "DLR Group \u00b7 filed 2022-10-07",
+        "owner OXFORD DEVELOPMENT GROUP LP"
+      ],
+      "sha": "f5ed1cadadf7f9f0"
+    },
+    "1974 SHATTUCK Ave": {
+      "project_key": "ZP2023-0040",
+      "lines": [
+        "1974 Shattuck Ave",
+        "599 units \u00b7 Entitled",
+        "TRACHTENBERG ARCHITECTS \u00b7 filed 2023-03-17",
+        "owner 1974 SHATTUCK AVENUE LLC"
+      ],
+      "sha": "d3a49e652d37b57c"
+    },
+    "2700 SHATTUCK Ave": {
+      "project_key": "ZP2024-0058",
+      "lines": [
+        "2700 Shattuck Ave",
+        "359 units \u00b7 Entitled",
+        "8 stories \u00b7 90 ft \u00b7 281,960 sq ft",
+        "TRACHTENBERG ARCHITECTS \u00b7 filed 2024-05-14",
+        "owner 2700 SHATTUCK LLC"
+      ],
+      "sha": "518bd9da9170b298"
+    }
+  },
+  "names_not_organisation": {
+    "architect": 4,
+    "developer": 0,
+    "owner_current": 1156
+  },
+  "db": "v4",
+  "v4_sha": "dcf247fcee6c9b1b",
+  "written_at": "2026-10-03T13:22:29",
+  "supersedes_v2_era": "label_fields_baseline_2026-09-04.json",
+  "provenance": "Derived by scripts/v4/build_jn_n.py from gen_svg_labels.rows() (v4 via scripts/tours/v4_source.address_rows) and gen_svg_labels.lines_for()."
+}

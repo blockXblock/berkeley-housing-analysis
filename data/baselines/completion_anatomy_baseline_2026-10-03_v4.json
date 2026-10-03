@@ -1,0 +1,33 @@
+{
+ "as_of": "2026-10-03",
+ "v4_sha": "bef4545c",
+ "v4_file_sha": "dcf247fcee6c9b1b",
+ "majors_source": "v4_v_projects",
+ "anchor": "reconciliation_baseline_2026-09-30i.json",
+ "supersedes_for_moved_keys": "completion_anatomy_baseline_2026-07-15.json",
+ "provenance": "JN-K re-pointed to v4 (2026-10-02): \u00a71-\u00a73/\u00a75 v4 events, \u00a74 v4 v_projects majors",
+ "figures": {
+  "co_units_2018_2025": 4119,
+  "co_permits": 845,
+  "corridor_units": 1902,
+  "corridor_permits": 96,
+  "fabric_units": 2217,
+  "fabric_permits": 749,
+  "small_units": 859,
+  "small_permits": 792,
+  "large_units": 3260,
+  "large_permits": 53,
+  "large_units_nonarterial": 1441,
+  "majors_nonuc": 98,
+  "majors_entitled": 68,
+  "majors_permitted": 35,
+  "majors_completed": 27,
+  "majors_withdrawn": 9,
+  "majors_denied": 0,
+  "ac_majors_covered": 72,
+  "median_intake_days": 157,
+  "median_consideration_days": 252,
+  "gap2025_total": 79,
+  "gap2025_ours_only": 103
+ }
+}

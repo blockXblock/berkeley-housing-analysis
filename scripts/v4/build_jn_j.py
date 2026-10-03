@@ -299,8 +299,19 @@ if snaps:
         print(f"BASELINE MISMATCH vs {os.path.basename(snaps[-1])} (baseline sha {bl['v4_sha']}, now {sha}):")
         for k, (now, was) in diffs.items():
             print(f'  {k}: computed {now} vs baseline {was}')
-        raise AssertionError('diagnose above; a legitimate change APPENDS a new timestamped baseline')
-    print(f'BASELINE GATE PASS vs {os.path.basename(snaps[-1])}')
+        if os.environ.get('JN_WRITE_BASELINE') == '1':     # a legitimate change APPENDS (John's call); never an edit
+            import datetime as _dt
+            out_p = os.path.join(BL_DIR, f'entitled_unbuilt_baseline_{_dt.date.today().isoformat()}.json')
+            json.dump({'as_of': _dt.date.today().isoformat(), 'v4_sha': sha, 'db': 'v4',
+                       'classifier': str(lab.classifier_hash.iloc[0]),
+                       'provenance': 'appended after a reviewed change (JN_WRITE_BASELINE=1)', 'figures': figures},
+                      open(out_p, 'w'), indent=1)
+            print('APPENDED baseline:', out_p)
+        else:
+            raise AssertionError('diagnose above; a legitimate change APPENDS a new timestamped baseline '
+                                 '(re-run with JN_WRITE_BASELINE=1 -- John\'s call)')
+    else:
+        print(f'BASELINE GATE PASS vs {os.path.basename(snaps[-1])}')
 else:
     out_p = os.path.join(BL_DIR, 'entitled_unbuilt_baseline_2026-07-04.json')
     json.dump({'as_of': '2026-07-04', 'v4_sha': sha, 'classifier': str(lab.classifier_hash.iloc[0]),

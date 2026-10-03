@@ -1,0 +1,213 @@
+{
+  "as_of": "2026-10-03",
+  "db": "v4",
+  "v4_sha": "dcf247fcee6c9b1b",
+  "assessor_checksum16": "96aa115db20517d4",
+  "supersedes_v2_era": "fiscal_flows_baseline_2026-09-04.json",
+  "note": "first v4-era baseline: JN-L re-pointed from v2 to databases/berkeley_housing_v4.db (2026-10-02). Fee layer = the City's own CapDetail Fees-tab TOTALS per master/phase permit and per Planning record, as of retrieval (not itemized); the small cohort = completed projects with <=2 units (replaces v2's id-block heuristic); assessor values = the snapshot v4 carries.",
+  "hard_gated": {
+    "completed_projects": {
+      "value": 888,
+      "what_would_change_it": "a building finaled / a CO ruling in the v4 build (projects stage)"
+    },
+    "completed_units": {
+      "value": 4462,
+      "what_would_change_it": "unit-count ruling or reading ruling on a completed building"
+    },
+    "assessor_matched": {
+      "value": 885,
+      "what_would_change_it": "assessor re-ingest into v4 (re-plats resolve or appear) or a parcel-link change"
+    },
+    "adu_small_n": {
+      "value": 824,
+      "what_would_change_it": "a small (<=2u) completion added, or a permit valuation newly recorded"
+    },
+    "adu_small_median_valuation": {
+      "value": 130000,
+      "what_would_change_it": "valuation corrections in the small cohort"
+    },
+    "adu_flag_units_completed": {
+      "value": 623,
+      "what_would_change_it": "CPRA ADU field on a newly finaled master permit"
+    },
+    "vli_completed_units": {
+      "value": 8,
+      "what_would_change_it": "affordability evidence added on completed projects"
+    },
+    "density_bonus_projects": {
+      "value": 97,
+      "what_would_change_it": "pathway evidence added (Planning records)"
+    },
+    "bp_fee_projects": {
+      "value": 569,
+      "what_would_change_it": "a Fees-tab re-harvest (CapDetail) of master permits"
+    },
+    "planning_fee_projects": {
+      "value": 437,
+      "what_would_change_it": "a Fees-tab re-harvest of Planning records"
+    },
+    "funding_awards": {
+      "value": 60,
+      "what_would_change_it": "a funding-ledger row added/keyed"
+    },
+    "funding_projects": {
+      "value": 13,
+      "what_would_change_it": "a funding-ledger row keyed to a project"
+    },
+    "itemized_fee_permits": {
+      "value": 131,
+      "what_would_change_it": "a NEW dated permit_fees_*.csv snapshot (re-harvest) -> append a new baseline"
+    },
+    "itemized_fee_addresses": {
+      "value": 60,
+      "what_would_change_it": "a NEW dated permit_fees_*.csv snapshot (re-harvest) -> append a new baseline"
+    }
+  },
+  "rounded_gated": {
+    "tracked_imps_m": {
+      "value": 1615.2,
+      "what_would_change_it": "County reassessment posts re-ingested into v4 (EXPECTED to rise: 1-2yr lag)"
+    },
+    "adu_small_sum_m": {
+      "value": 154.9,
+      "what_would_change_it": "valuation corrections"
+    },
+    "benchmark_per_unit_k": {
+      "value": 441,
+      "what_would_change_it": "a larger project becomes fully enrolled (benchmark ratchets up)"
+    },
+    "bp_fees_paid_m": {
+      "value": 38.8,
+      "what_would_change_it": "a Fees-tab re-harvest (the totals are as of retrieval and only grow)"
+    },
+    "bp_fees_outstanding_k": {
+      "value": 21,
+      "what_would_change_it": "a Fees-tab re-harvest (balances paid down / new invoices)"
+    },
+    "bp_fees_paid_completed_m": {
+      "value": 31.4,
+      "what_would_change_it": "a Fees-tab re-harvest or a building finaled"
+    },
+    "planning_fees_paid_m": {
+      "value": 5.0,
+      "what_would_change_it": "a Planning Fees-tab re-harvest"
+    },
+    "funding_total_m": {
+      "value": 412.4,
+      "what_would_change_it": "a funding-ledger amount added/corrected"
+    },
+    "itemized_fee_total_k": {
+      "value": 1763,
+      "what_would_change_it": "a NEW dated permit_fees snapshot (re-harvest) -> append a new baseline"
+    },
+    "itemized_bp_max_k": {
+      "value": 665,
+      "what_would_change_it": "a larger new-construction BP fee appears in a re-harvest -> append a new baseline"
+    }
+  },
+  "derived_context": {
+    "tracked_units": 3578,
+    "tracked_per_year": {
+      "2018": [
+        166,
+        74.4
+      ],
+      "2019": [
+        213,
+        100.5
+      ],
+      "2020": [
+        322,
+        226.8
+      ],
+      "2021": [
+        301,
+        196.8
+      ],
+      "2022": [
+        607,
+        261.5
+      ],
+      "2023": [
+        643,
+        353.3
+      ],
+      "2024": [
+        608,
+        216.9
+      ],
+      "2025": [
+        444,
+        140.9
+      ],
+      "2026": [
+        274,
+        44.1
+      ]
+    },
+    "benchmark_project_key": "median of 9",
+    "itemized_fee_snapshot": "permit_fees_2026-09-01.csv"
+  },
+  "external_facts": {
+    "city_share_of_1pct": {
+      "value": 0.3257,
+      "source": "City of Berkeley revenue memo (AB-8 share): https://berkeleyca.gov/sites/default/files/legislative-body-meeting-attachments/Item%202%20Revenue%20and%20Transfers%20In%20FY%202021%20vs%20FY%202020%20Comparison.pdf"
+    },
+    "allocation_approx": {
+      "value": {
+        "city": 0.3257,
+        "schools_incl_eraf": 0.45,
+        "county": 0.15,
+        "special_districts": 0.0743
+      },
+      "source": "City 32.57% exact (above); schools/county/special APPROXIMATE from AB-8 structure, Alameda Auditor-Controller glossary https://auditor.alamedacountyca.gov/tax-glossary/"
+    },
+    "ad_valorem_total_rate": {
+      "value": 0.0125,
+      "source": "approx total ad-valorem (1% base + voter debt levies ~0.23% city FY26 + school debt); the same 1.25% v4 v_projects.est_annual_tax_1pct_rule uses"
+    },
+    "city_debt_levy_rate": {
+      "value": 0.002323,
+      "source": "FY2026 City of Berkeley voter-approved ad-valorem debt rate 0.2323%, Dec-2-2025 staff report https://berkeleyca.gov/sites/default/files/documents/2025-12-02%20Special%20Item%2002%20Discussion%20Regarding%20Potential%20Ballot.pdf"
+    },
+    "gf_revenues_fy27_m": {
+      "value": {
+        "property_tax": 103.9,
+        "transfer_taxes": 34.6,
+        "business_license": 25.0,
+        "sales_and_soda": 20.5,
+        "utility_users": 18.75,
+        "other": 112.15,
+        "total": 314.9
+      },
+      "source": "PROPOSED FY27 GF revenues, May-14-2026 budget presentation slide 25 https://berkeleyca.gov/sites/default/files/legislative-body-meeting-attachments/5.14.26%20Item2%20FY%2027%20-%20FY%2028%20PROPOSED%20BIENNIAL%20BUDGET%20-%20Presentation.pdf"
+    },
+    "gf_spend_fy27_m": {
+      "value": {
+        "Police": 101.1,
+        "Fire": 52.0,
+        "Non-Departmental": 49.6,
+        "HHCS": 34.1,
+        "City Manager": 13.9,
+        "Parks Rec Waterfront": 12.2,
+        "All other": 51.0,
+        "total": 313.9
+      },
+      "source": "PROPOSED FY27 GF spend by department, May-14-2026 presentation slide 26 (same URL)"
+    },
+    "measure_o": {
+      "value": {
+        "bond_m": 135,
+        "allocated_with_p_m": 238.1,
+        "units_supported": 1421
+      },
+      "source": "2018 Measure O affordable-housing GO bond + Measure P transfer tax; Dec-2-2025 staff report (URL above)"
+    }
+  },
+  "estimation_params": {
+    "note": "assumptions for the full-enrollment estimate \u2014 parameters, not measurements",
+    "enrolled_at_cost_floor": "declared permit valuation is the FLOOR of what the assessor enrolls",
+    "benchmark_rule": "MEDIAN Imps/unit among tracked completed projects >=100 units (John, 2026-10-03); the max is reported as the high end",
+    "small_cohort_rule": "completed projects with <= 2 units use declared JobValuation, not parcel Imps (the pre-existing house dominates the parcel)"
+  }
+}

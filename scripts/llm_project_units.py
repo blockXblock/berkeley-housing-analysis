@@ -82,12 +82,14 @@ def _has_number(q: str, n: int) -> bool:
 # dwelling unit, single-family dwelling, residence, cottage) and stating no other number is 1; duplex / triplex /
 # fourplex are 2 / 3 / 4. Tagged read_as=by_definition so it can always be told apart from a count the City wrote out.
 _PLEX = {"duplex": 2, "triplex": 3, "tri-plex": 3, "fourplex": 4, "four-plex": 4, "quadplex": 4}
-_ONE = re.compile(r"\b(adu|jadu|accessory dwelling unit|dwelling unit|single[- ]family (?:home|residence|dwelling|house)|"
+_ONE = re.compile(r"\b(adu|jadu|sfd|accessory dwelling unit|dwelling unit|single[- ]family (?:home|residence|dwelling|house)|"
                   r"residence|cottage|residential unit|live[- ]work unit|unit|house|home)\b")
 
 
 def _by_definition(q: str):
     ql = q.lower()
+    # a number word that sizes the BUILDING, not the dwellings ("two-story", "three-bedroom") is not a second count
+    ql = re.sub(r"\b[a-z]+-(?:story|stories|storey|bed|bedroom|bath|car)\b", " ", ql)
     if re.search(r"\d", ql.replace("sq", "")) and re.search(r"\b\d+\s*(units?|dwellings?|adus?)\b", ql):
         return None                                   # a count is written -- "stated" decides, not this rule
     if any(WORDS.get(w, 0) > 1 for w in re.findall(r"[a-z]+", ql)) or re.search(r"\b(units|dwellings|adus|homes|houses)\b", ql):

@@ -78,7 +78,9 @@ NAMES_EVIDENCE = ROOT / "data/derived/project_names_evidence_2026-09-30.json"
 # (scripts/llm_project_pathways.py). Same stable key as the names.
 PATHWAYS_EVIDENCE = ROOT / "data/derived/project_pathways_evidence_2026-09-30.json"
 # Proposed units of APPLICATION-ONLY projects (phase 6 D4): read from the City's text, verbatim quote containing the number.
-UNITS_EVIDENCE = ROOT / "data/derived/project_units_evidence_2026-10-01.json"   # incl. by_definition (John 2026-10-01)
+UNITS_EVIDENCE = ROOT / "data/derived/project_units_evidence_2026-10-03.json"   # HCD definitions (John, 2026-10-03)
+# a project the 10-03 read left UNANSWERED (no answer is not a judgment) keeps the 10-01 reading
+UNITS_EVIDENCE_PRIOR = ROOT / "data/derived/project_units_evidence_2026-10-01.json"   # incl. by_definition (John 2026-10-01)
 # Building measures (phase 6; John: square footage and parking KEPT, heights from sources -- D7): gross sq ft, parking,
 # stories, height in feet, each kept only with a verbatim quote containing the number (scripts/llm_building_measures.py).
 MEASURES_EVIDENCE = ROOT / "data/derived/building_measures_evidence_2026-09-30.json"
@@ -521,7 +523,13 @@ def write(con, projects) -> dict:
                         for r in json.load(open(MEASURES_EVIDENCE))["readings"] if len(r) > 1}
         proposed = {}
         if UNITS_EVIDENCE.exists():
-            proposed = {r["project_key"]: r for r in json.load(open(UNITS_EVIDENCE))["readings"] if r.get("units") is not None}
+            _ev = json.load(open(UNITS_EVIDENCE))
+            proposed = {r["project_key"]: r for r in _ev["readings"] if r.get("units") is not None}
+            if UNITS_EVIDENCE_PRIOR.exists():
+                _unans = set(_ev.get("unanswered") or [])
+                for r in json.load(open(UNITS_EVIDENCE_PRIOR))["readings"]:
+                    if r["project_key"] in _unans and r.get("units") is not None:
+                        proposed[r["project_key"]] = r
         attributions = collections.defaultdict(list)
         if ATTRIBUTIONS.exists():
             for a_ in csv.DictReader(open(ATTRIBUTIONS)):

@@ -44,6 +44,15 @@ def test_normalize_address():
     # county key is case-insensitive (2026-07-03 lesson: lowercase key silently degraded a matcher)
     assert to_canonical_apn('057 204600600', 'alameda') == '057-2046-006-00'
     print("normalize_address: ordinals + city-tail + Berkeley-Way protection + case-insensitive county — PASS")
+    from scripts.housing_rules.owner_name import is_organisation, owner_type, INSTITUTIONAL, TRUST_T, INDIVIDUAL
+    for firm in ('TRACHTENBERG ARCHITECTS', 'STUDIO KDA', 'PANORAMIC INTERESTS', 'GROSVENOR AMERICAS', 'BRIDGE HOUSING'):
+        assert is_organisation(firm), firm                       # firm words (2026-10-03)
+    assert owner_type('BERKELEY HOUSING AUTHORITY') == INSTITUTIONAL
+    assert owner_type('RESOURCES FOR COMMUNITY DEVELOPMENT') == INSTITUTIONAL
+    assert owner_type('DAVID CLEARY SEPARATE PROPERTY TRUST') == TRUST_T          # a trust stays a trust
+    assert owner_type('ANN SLOBOD ET AL C/O STUDIO KDA') == INDIVIDUAL            # classify the owner, not the c/o
+    assert not is_organisation('KEEGAN MEAGHAN')
+    print("owner_name: firm words, housing institutions, trusts first, c/o -- PASS")
 
 
 def main() -> int:

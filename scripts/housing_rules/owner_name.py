@@ -18,14 +18,17 @@ is_organisation() encodes; do not re-derive it from the integer codes at each ca
 import re
 
 INVESTOR = re.compile(r"\b(LLC|L\.L\.C|INC|CORP|COMPANY|LTD|LP|L\.P|LLP|PARTNERS|PARTNERSHIP|PROPERTIES|"
-                      r"HOLDINGS|VENTURES|CAPITAL|REALTY|MANAGEMENT|INVESTMENTS?|ENTERPRISES|GROUP|ASSOCIATES|& CO)\b")
+                      r"HOLDINGS|VENTURES|CAPITAL|REALTY|MANAGEMENT|INVESTMENTS?|ENTERPRISES|GROUP|ASSOCIATES|& CO|"
+                      # firm words the roll test missed (2026-10-03, John): professional and development firms
+                      r"ARCHITECTS?|ARCHITECTURE|STUDIO|BUILDERS|CONSTRUCTION|DEVELOPMENT|HOUSING|INTERESTS|ENGINEERS?|"
+                      r"ENGINEERING|AMERICAS|PROPERTY|REAL ESTATE|HOMES|RESIDENTIAL|COMMUNITIES)\b")
 # trust — incl. assessor abbreviations TRS/TTEE, and 'X TR' only in trust context (NOT bare 'TR' = tract)
 TRUST = re.compile(r"\b(TRUST|TRUSTEE|TTEE|TRS|REVOCABLE|(?:FAMILY|LIVING|REV|FAM|LV|JOINT|SURVIVORS?)\s+TR)\b")
 # SCH and MINISTRY added 2026-09-07: "STARR KING SCH MINISTRY" (Starr King School for the
 # Ministry) classified as an individual under SCHOOL/MINISTRIES alone. This widens the
 # institutional class slightly, which also affects the published ownership map's colouring.
 INSTIT = re.compile(r"\b(UNIVERSITY|REGENTS|CITY OF|COUNTY|STATE OF|CHURCH|SCHOOL|SCH|MINISTRY|DISTRICT|CALIFORNIA|"
-                    r"HOUSING AUTH|FOUNDATION|ASSOCIATION|ASSN|CONGREGATION|TEMPLE|SOCIETY|INSTITUTE|"
+                    r"HOUSING AUTH\w*|AUTHORITY|COMMUNITY DEVELOPMENT|(?:AFFORDABLE|NON ?PROFIT) HOUSING|FOUNDATION|ASSOCIATION|ASSN|CONGREGATION|TEMPLE|SOCIETY|INSTITUTE|"
                     r"COOPERATIVE|CO-OP|MINISTRIES|DIOCESE|PARISH|NONPROFIT|COMMONS)\b")
 
 INDIVIDUAL, INVESTOR_T, TRUST_T, INSTITUTIONAL = 0, 1, 2, 3
@@ -37,6 +40,8 @@ def owner_type(name):
     """0 individual · 1 investor · 2 trust · 3 institutional. Order matters: an
     institutional name may also contain an investor word."""
     n = str(name).upper()
+    # "X C/O Y": the owner is X, held in care of Y (a manager or firm) -- classify X, never the firm it is mailed to
+    n = re.split(r"\bC/O\b", n)[0].strip() or n
     if INSTIT.search(n):
         return INSTITUTIONAL
     if TRUST.search(n):

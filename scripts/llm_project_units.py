@@ -27,14 +27,23 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import model_readers as mr  # noqa: E402
 
 V4 = ROOT / "databases/berkeley_housing_v4.db"
-OUT = ROOT / "scratch/2026-09-30_units"
+OUT = ROOT / "scratch/2026-10-03_units"
 
-DEFINITION = """Report the number of NEW DWELLING UNITS this housing application proposes, as its own text states it.
-- Count dwelling units (apartments, condominiums, townhouses, houses, ADUs, JADUs, live-work units if the text calls them
-  dwelling or residential units). Do NOT count beds, rooms, group-living rooms, hotel rooms or parking spaces.
+from housing_rules.reading_rules import DEFINITIONS as HCD_DEFINITIONS  # noqa: E402
+
+# 2026-10-03 (John approved): the question now uses HCD's own definitions (housing_rules.reading_rules), the same text
+# every permit reading uses. The 2026-10-01 definition had its own blanket exclusion of "hotel rooms, group-living
+# rooms", stricter than HCD, which counts SRO rooms that are separate living quarters (2427 San Pablo: "70
+# single-occupancy rooms ... for a total of 78 units" read as 8).
+DEFINITION = HCD_DEFINITIONS + """
+
+QUESTION. Report the number of NEW DWELLING UNITS (housing units under the definitions above) this housing
+application proposes, as its own text states it.
 - If the text states a total ("50 residential units, 6 ADUs" -> 56 only if it says so; otherwise report 50 and quote it),
-  report the number the text states for the project's new dwellings; never add numbers the text does not add.
+  report the number the text states for the project's new dwellings; never add numbers the text does not add. Where the
+  text itself totals rooms and apartments as units ("... for a total of 78 units"), report that total.
 - If the text proposes a CHANGE to an earlier approval ("increase from 66 to 73 units"), report the NEW total it states (73).
+- Group quarters (student dormitories, beds) are not dwelling units: answer null for them.
 - If units are being removed only, or no count is stated, answer null.
 Copy the exact words that state the number."""
 

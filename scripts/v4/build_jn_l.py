@@ -144,9 +144,14 @@ def derive():
         d['tracked_units'] = tracked_units
         d['tracked_imps_m'] = round(tracked_imps / 1e6, 1)
         d['tracked_per_year'] = {y: [v[0], round(v[1] / 1e6, 1)] for y, v in sorted(per_year.items())}
-        best = max(bench) if bench else (0, None)
-        d['benchmark_per_unit_k'] = round(best[0] / 1e3)
-        d['benchmark_project_key'] = best[1]
+        # BENCHMARK = the MEDIAN enrolled $/unit of large (>=100-unit) completed buildings (John, 2026-10-03). The max
+        # rule picked a student building whose units hold several beds (The Standard, ~$922K/unit) and doubled the
+        # full-enrollment estimate; the most-enrolled building is kept as the HIGH end, not the estimate.
+        meds = sorted(v for v, _ in bench)
+        d['benchmark_per_unit_k'] = round(statistics.median(meds) / 1e3) if meds else 0
+        d['benchmark_project_key'] = f"median of {len(meds)}"
+        top = max(bench) if bench else (0, None)
+        d['benchmark_high_per_unit_k'], d['benchmark_high_project_key'] = round(top[0] / 1e3), top[1]
         d['adu_small_n'] = len(vals)
         d['adu_small_median_valuation'] = round(statistics.median(vals)) if vals else 0
         d['adu_small_sum_m'] = round(sum(vals) / 1e6, 1)
@@ -247,7 +252,7 @@ EXTERNAL_FACTS = {
 ESTIMATION_PARAMS = {
     'note': 'assumptions for the full-enrollment estimate — parameters, not measurements',
     'enrolled_at_cost_floor': 'declared permit valuation is the FLOOR of what the assessor enrolls',
-    'benchmark_rule': 'max Imps/unit among tracked completed projects >=100 units (least-lagged = most-enrolled; lag only understates)',
+    'benchmark_rule': 'MEDIAN Imps/unit among tracked completed projects >=100 units (John, 2026-10-03); the max is reported as the high end',
     'small_cohort_rule': f'completed projects with <= {SMALL_MAX_UNITS} units use declared JobValuation, not parcel Imps (the pre-existing house dominates the parcel)',
 }
 
@@ -476,29 +481,33 @@ in the tracked sum only if both are ≥3 units (rare).
     md("""
 ## §3 — Enrolled value vs. the lag: what the assessor has actually posted
 **Assumption + plan.** Sum enrolled improvement value (`Imps`) for tracked projects by CO year, compute
-$/unit, and compare against the *benchmark*: the max Imps/unit among large (≥100-unit) completed
-projects — the least-lagged large building is the best proxy for what full enrollment looks like
-(lag only ever understates; it never overstates).
+$/unit, and compare against the *benchmark*: the **median** Imps/unit among large (≥100-unit) completed
+projects (John, 2026-10-03). The single most-enrolled building is shown as the high end: it was the old
+benchmark, but the largest is now a student building whose units hold several beds each.
 
 📝 **What to read from the chart:** enrolled $/unit collapses for recent CO years — that is the
 County's reassessment lag made visible, not a collapse in building value.
 """)
     code("""
 import plotly.graph_objects as go
-bench_per_unit, bench_key = max(bench)
+bench_per_unit = statistics.median(sorted(v for v, _ in bench)); bench_key = f'median of {len(bench)}'
+high_per_unit, high_key = max(bench)
 py = pd.DataFrame([(y, v[0], v[1]/1e6, (v[1]/v[0]/1e3 if v[0] else 0)) for y, v in sorted(per_year.items())],
                   columns=['co_year', 'units', 'enrolled_imps_M', 'enrolled_k_per_unit'])
 fig = go.Figure()
 fig.add_bar(x=py.co_year, y=py.enrolled_k_per_unit, name='enrolled $K/unit (derived)', marker_color='#7ec8e3')
 fig.add_scatter(x=py.co_year, y=[bench_per_unit/1e3]*len(py), mode='lines',
-                name=f'benchmark ${bench_per_unit/1e3:.0f}K/unit ({bench_key}, most enrolled)',
+                name=f'benchmark ${bench_per_unit/1e3:.0f}K/unit ({bench_key} large buildings)',
                 line=dict(color='#ffd166', dash='dash'))
+fig.add_scatter(x=py.co_year, y=[high_per_unit/1e3]*len(py), mode='lines',
+                name=f'high end ${high_per_unit/1e3:.0f}K/unit ({high_key}, most enrolled)',
+                line=dict(color='#ef8354', dash='dot'))
 fig.update_layout(template='plotly_dark', height=380,
                   title='Tracked completions: enrolled assessed $/unit by CO year vs full-enrollment benchmark (derived §3)',
                   yaxis_title='$K per unit')
 fig.show()
 print(py.to_string(index=False))
-print(f'benchmark: {bench_key} at ${bench_per_unit:,.0f}/unit')
+print(f'benchmark: {bench_key} at ${bench_per_unit:,.0f}/unit; high end {high_key} at ${high_per_unit:,.0f}/unit')
 _bn = sorted(v for v, _ in bench)
 print(f'context (not gated): {len(_bn)} tracked >=100u projects with Imps; median ${statistics.median(_bn):,.0f}/unit, '
       f'max/median {max(_bn)/statistics.median(_bn):.1f}x')

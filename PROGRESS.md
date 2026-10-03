@@ -656,7 +656,19 @@ In progress (agents, read-only drafts): (5) the duplicate/status cases incl. 175
 and Ashby BART (recent Planning Commission -- John); (2) the sourced attribution ledger.
 Data note: documents 303/304 (2700 Shattuck plans) carry no record_key in v4 -- fix in the documents manifest.
 
-**NEXT:** wire (2) and (5) rulings -> rebuild + swap -> baselines (3) -> republish players page, map (7) -> archive v2 -> next swap (views with
+**2026-10-03 rulings folded in (John approved all):** citation-hyphen fix (`5d752e9`); units read under HCD's
+definitions (`1f03ec2`, `c6275e0`); case rulings G019-G022, S005, M015-M017, R005 (`e6265ad`); attribution ledger, 88
+sourced credits (`e8d8b4a`); three document record keys (`153e210`); EIGHT SB 35 ministerial approvals from the City's
+Letters of Compliance G023-G030 + G031 (3120 Shattuck re-anchored) + G032 (1464 Sixth BP joined) + M018 (Harmon 80)
+(`3816088`). SB 35 application -> approval: median 97 days (42-200, n=8) vs discretionary filed -> entitled 427 days
+(n=89, 20+ units). 3120 Shattuck's unit count is unknown with provenance (its letter states none).
+**Verified build ready:** scratch/2026-10-03_rebuild/chain/ (gates pass; 1,553 projects; APR 2025 credit 2,134; Table A
+17 / 343). Snapshot of live: databases/keep_snapshot_2026-10-03_pre-rulings-swap.db.
+**Harvest running:** scripts/harvest_attachment_lists.py (`350899c`) on 438 pre-application / ministerial / inquiry
+records -> data/raw/accela_attachments/attachments_2026-10-03.jsonl + approval letters.
+
+**NEXT:** John unlocks -> swap -> baselines (3) -> players page + map republish (7) -> load the attachment harvest +
+a rule reading SB 35 / AB 2011 approval dates from letters -> "time to approval by pathway" view -> archive v2 -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

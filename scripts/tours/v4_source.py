@@ -202,8 +202,25 @@ def address_rows(index=None):
     return out
 
 
+PLACEMARK_RULINGS = ROOT / "corrections/v4/placemark_rulings.csv"
+
+
+def _placemark_rulings():
+    """Approved placemark rulings (John): a placemark NAME that no address can reach ('Ashby BART: Adeline Tower')
+    mapped to its v4 project_key, with evidence. Read once per process."""
+    if "placemark_rulings" not in _CACHE:
+        import csv
+        rows = list(csv.DictReader(open(PLACEMARK_RULINGS))) if PLACEMARK_RULINGS.exists() else []
+        _CACHE["placemark_rulings"] = [(r["placemark_prefix"], r["project_key"]) for r in rows if r["status"] == "approved"]
+    return _CACHE["placemark_rulings"]
+
+
 def lookup(addr, index=None):
-    """The one v4 project at an address, or None (unknown OR ambiguous -- never a guess)."""
+    """The one v4 project at an address (or a placemark name an approved ruling maps), or None (unknown OR
+    ambiguous -- never a guess)."""
+    for prefix, key in _placemark_rulings():
+        if str(addr or "").strip().startswith(prefix):
+            return next((r for r in projects() if r.get("project_key") == key or r.get("id") == key), None)
     res = (index or by_address())[0]
     return res.get(akey(addr))
 

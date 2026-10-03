@@ -1,6 +1,6 @@
 {
   "year": 2025,
-  "generated": "2026-10-02T16:41:18.201371",
+  "generated": "2026-10-03T13:18:45.742874",
   "schema_version": "v4 (phase 6 pure re-point)",
   "table_a": {
     "title": "Table A: Applications Deemed Complete in 2025",
@@ -169,24 +169,6 @@
         "architect": null
       },
       {
-        "id": "ZP2024-0182",
-        "address": "2029 UNIVERSITY Ave",
-        "apn": null,
-        "permits": "ZP2024-0182",
-        "net_units": 160,
-        "vli_units": null,
-        "status": "entitled",
-        "app_filed_date": "2024-12-19",
-        "app_complete_date": "2025-05-22",
-        "entitled_date": "2025-11-13",
-        "density_bonus": 1,
-        "sb35_flag": 0,
-        "sb330_flag": 0,
-        "ab2011_flag": 0,
-        "owner_of_record": "TALAI MOHAMMAD E & KOKAB S TRS ETAL",
-        "architect": null
-      },
-      {
         "id": "ZP2024-0181",
         "address": "2029 UNIVERSITY Ave",
         "apn": null,
@@ -281,7 +263,7 @@
         "address": "1522 JOSEPHINE St",
         "apn": null,
         "permits": "ZP2025-0014",
-        "net_units": null,
+        "net_units": 1,
         "vli_units": null,
         "status": "entitled",
         "app_filed_date": "2025-02-01",
@@ -332,10 +314,10 @@
       }
     ],
     "summary": {
-      "total_projects": 18,
-      "total_units": 502,
+      "total_projects": 17,
+      "total_units": 343,
       "vli_units": 3,
-      "density_bonus": 5,
+      "density_bonus": 4,
       "sb35": 0,
       "sb330": 5,
       "ab2011": 0
@@ -377,7 +359,7 @@
         "status": "completed",
         "app_filed_date": "2019-10-08",
         "app_complete_date": null,
-        "entitled_date": null,
+        "entitled_date": "2019-12-20",
         "bp_issued_date": "2022-02-04",
         "co_date": "2025-02-24",
         "density_bonus": null,
@@ -3061,7 +3043,7 @@
         "status": "under_construction",
         "app_filed_date": "2022-12-15",
         "app_complete_date": null,
-        "entitled_date": null,
+        "entitled_date": "2023-03-31",
         "bp_issued_date": "2025-05-06",
         "co_date": null,
         "density_bonus": null,
@@ -3228,16 +3210,16 @@
         "milestone_achieved": "BP Issued"
       },
       {
-        "id": "B2024-02508",
+        "id": "PLN2025-0017",
         "address": "1464 SIXTH St",
         "apn": null,
         "permits": null,
         "net_units": 3,
         "vli_units": null,
         "status": "under_construction",
-        "app_filed_date": null,
+        "app_filed_date": "2025-04-30",
         "app_complete_date": null,
-        "entitled_date": null,
+        "entitled_date": "2025-07-29",
         "bp_issued_date": "2025-09-18",
         "co_date": null,
         "density_bonus": null,
@@ -5692,28 +5674,6 @@
         "milestone_achieved": "Entitled"
       },
       {
-        "id": "ZP2024-0182",
-        "address": "2029 UNIVERSITY Ave",
-        "apn": null,
-        "permits": null,
-        "net_units": 160,
-        "vli_units": null,
-        "status": "entitled",
-        "app_filed_date": "2024-12-19",
-        "app_complete_date": null,
-        "entitled_date": "2025-11-13",
-        "bp_issued_date": null,
-        "co_date": null,
-        "density_bonus": null,
-        "sb35_flag": null,
-        "sb330_flag": null,
-        "ab2011_flag": null,
-        "developer": "TALAI MOHAMMAD E & KOKAB S TRS ETAL",
-        "architect": null,
-        "construction_status": null,
-        "milestone_achieved": "Entitled"
-      },
-      {
         "id": "ZP2024-0057",
         "address": "2655 SHATTUCK Ave",
         "apn": null,
@@ -6067,10 +6027,10 @@
       }
     ],
     "summary": {
-      "total_projects": 260,
-      "total_units": 2939,
+      "total_projects": 259,
+      "total_units": 2779,
       "vli_units": 104,
-      "entitled_in_year": 21,
+      "entitled_in_year": 20,
       "bp_issued_in_year": 116,
       "co_issued_in_year": 123
     }
@@ -6311,6 +6271,14 @@
         "density_bonus_projects": 0
       },
       {
+        "owner_of_record": "YOUNG M H TR",
+        "project_count": 1,
+        "total_units": 3,
+        "vli_units": 0,
+        "market_rate_units": 3,
+        "density_bonus_projects": 0
+      },
+      {
         "owner_of_record": "KHOURI JAMYLIA J TR",
         "project_count": 1,
         "total_units": 3,
@@ -6345,14 +6313,6 @@
       {
         "owner_of_record": "OXFORD LP",
         "project_count": 2,
-        "total_units": 3,
-        "vli_units": 0,
-        "market_rate_units": 3,
-        "density_bonus_projects": 0
-      },
-      {
-        "owner_of_record": "YOUNG M H TR",
-        "project_count": 1,
         "total_units": 3,
         "vli_units": 0,
         "market_rate_units": 3,
@@ -9222,7 +9182,7 @@
       "percent_of_goal": 23.9
     },
     "pipeline": {
-      "total_units": 18101,
+      "total_units": 17435,
       "vli_units": 462,
       "note": "Pipeline units do NOT count toward RHNA until BP is issued"
     },
@@ -9235,6 +9195,17 @@
     "title": "Stalled Projects",
     "description": "Projects entitled but not yet issued building permits. NOTE: Stage 1 - accela_status_date not available.",
     "projects": [
+      {
+        "id": "PLN2024-0010",
+        "address": "1750 SACRAMENTO St",
+        "net_units": 739,
+        "status": "entitled",
+        "developer": "SAN FRANCISCO BAY AREA RAPID TRANSIT DISTRICT",
+        "app_complete_date": null,
+        "entitled_date": "2024-12-11",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
       {
         "id": "ZP2023-0040",
         "address": "1974 SHATTUCK Ave",
@@ -9249,7 +9220,7 @@
       {
         "id": "ZP2022-0135",
         "address": "2128 OXFORD St",
-        "net_units": 485,
+        "net_units": 456,
         "status": "entitled",
         "developer": "OXFORD DEVELOPMENT GROUP LP",
         "app_complete_date": null,
@@ -9302,6 +9273,17 @@
         "accela_status_date": null
       },
       {
+        "id": "ZP2024-0075",
+        "address": "1899 OXFORD St",
+        "net_units": 222,
+        "status": "entitled",
+        "developer": "BERKLAND FOUNDATION INC",
+        "app_complete_date": null,
+        "entitled_date": "2026-01-22",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
         "id": "ZP2020-0072",
         "address": "2015 BLAKE St",
         "net_units": 219,
@@ -9313,20 +9295,9 @@
         "accela_status_date": null
       },
       {
-        "id": "ZP2024-0075",
-        "address": "1899 OXFORD St",
-        "net_units": 214,
-        "status": "entitled",
-        "developer": "BERKLAND FOUNDATION INC",
-        "app_complete_date": null,
-        "entitled_date": "2026-01-22",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
         "id": "ZP2022-0144",
         "address": "2115 KITTREDGE St",
-        "net_units": 214,
+        "net_units": 211,
         "status": "entitled",
         "developer": "KAO ROGER Y",
         "app_complete_date": null,
@@ -9364,17 +9335,6 @@
         "developer": "3000 SHATTUCK AVENUE LLC",
         "app_complete_date": null,
         "entitled_date": "2023-05-11",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
-        "id": "ZP2024-0182",
-        "address": "2029 UNIVERSITY Ave",
-        "net_units": 160,
-        "status": "entitled",
-        "developer": "TALAI MOHAMMAD E & KOKAB S TRS ETAL",
-        "app_complete_date": null,
-        "entitled_date": "2025-11-13",
         "bp_issued_date": null,
         "accela_status_date": null
       },
@@ -9456,6 +9416,17 @@
         "accela_status_date": null
       },
       {
+        "id": "PLN2021-0037",
+        "address": "1708 HARMON St",
+        "net_units": 80,
+        "status": "entitled",
+        "developer": null,
+        "app_complete_date": null,
+        "entitled_date": "2023-01-20",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
         "id": "ZP2024-0029",
         "address": "2680 BANCROFT Way",
         "net_units": 79,
@@ -9463,6 +9434,17 @@
         "developer": "AMI LLC ETAL",
         "app_complete_date": null,
         "entitled_date": "2025-05-22",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
+        "id": "ZP2022-0115",
+        "address": "2427 SAN PABLO Ave",
+        "net_units": 78,
+        "status": "entitled",
+        "developer": "SONG HYUN J",
+        "app_complete_date": null,
+        "entitled_date": "2024-07-11",
         "bp_issued_date": null,
         "accela_status_date": null
       },
@@ -9522,6 +9504,17 @@
         "accela_status_date": null
       },
       {
+        "id": "PLN2025-0038",
+        "address": "2330 DURANT Ave",
+        "net_units": 68,
+        "status": "entitled",
+        "developer": "FIRST CONGREGATIONAL CHURCH OF BERKELEY",
+        "app_complete_date": null,
+        "entitled_date": "2026-06-02",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
         "id": "ZP2023-0107",
         "address": "2462 BANCROFT Way",
         "net_units": 66,
@@ -9551,17 +9544,6 @@
         "developer": "AMICUS DURANT GROUP LLC",
         "app_complete_date": null,
         "entitled_date": "2025-10-30",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
-        "id": "ZP2022-0179",
-        "address": "2712 TELEGRAPH Ave",
-        "net_units": 60,
-        "status": "entitled",
-        "developer": "SPIRO BERNARD",
-        "app_complete_date": null,
-        "entitled_date": "2023-10-12",
         "bp_issued_date": null,
         "accela_status_date": null
       },
@@ -9628,6 +9610,17 @@
         "developer": null,
         "app_complete_date": null,
         "entitled_date": "2024-06-27",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
+        "id": "ZP2022-0179",
+        "address": "2712 TELEGRAPH Ave",
+        "net_units": 40,
+        "status": "entitled",
+        "developer": "SPIRO BERNARD",
+        "app_complete_date": null,
+        "entitled_date": "2023-10-12",
         "bp_issued_date": null,
         "accela_status_date": null
       },
@@ -9709,6 +9702,17 @@
         "accela_status_date": null
       },
       {
+        "id": "ZP2017-0015",
+        "address": "2236 CHANNING Way",
+        "net_units": 22,
+        "status": "entitled",
+        "developer": "LAKIREDDY PRASAD R & SANTI ETAL",
+        "app_complete_date": null,
+        "entitled_date": "2018-03-01",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
         "id": "ZP2016-0028",
         "address": "1155 HEARST Ave",
         "net_units": 18,
@@ -9771,17 +9775,6 @@
         "developer": null,
         "app_complete_date": null,
         "entitled_date": "2017-11-23",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
-        "id": "ZP2022-0115",
-        "address": "2427 SAN PABLO Ave",
-        "net_units": 8,
-        "status": "entitled",
-        "developer": "SONG HYUN J",
-        "app_complete_date": null,
-        "entitled_date": "2024-07-11",
         "bp_issued_date": null,
         "accela_status_date": null
       },
@@ -9874,17 +9867,6 @@
         "accela_status_date": null
       },
       {
-        "id": "ZP2017-0015",
-        "address": "2236 CHANNING Way",
-        "net_units": 3,
-        "status": "entitled",
-        "developer": "LAKIREDDY PRASAD R & SANTI ETAL",
-        "app_complete_date": null,
-        "entitled_date": "2018-03-01",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
         "id": "ZP2025-0020",
         "address": "1917 TENTH St",
         "net_units": 3,
@@ -9929,13 +9911,13 @@
         "accela_status_date": null
       },
       {
-        "id": "ZP2015-0079",
-        "address": "1241 ASHBY Ave",
+        "id": "ZP2018-0038",
+        "address": "3028 REGENT St",
         "net_units": 2,
         "status": "entitled",
-        "developer": "TU ERIC",
+        "developer": "3028 REGENT STREET LLC",
         "app_complete_date": null,
-        "entitled_date": "2016-04-07",
+        "entitled_date": "2018-05-07",
         "bp_issued_date": null,
         "accela_status_date": null
       },
@@ -10101,6 +10083,17 @@
         "developer": "NEUMANN OSHA TR",
         "app_complete_date": null,
         "entitled_date": "2024-01-25",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
+        "id": "ZP2018-0178",
+        "address": "1241 ASHBY Ave",
+        "net_units": 1,
+        "status": "entitled",
+        "developer": "TU ERIC",
+        "app_complete_date": null,
+        "entitled_date": "2021-04-08",
         "bp_issued_date": null,
         "accela_status_date": null
       },
@@ -10292,17 +10285,6 @@
         "accela_status_date": null
       },
       {
-        "id": "ZP2018-0040",
-        "address": "1631 GRANT St",
-        "net_units": 1,
-        "status": "entitled",
-        "developer": "MOON SUSAN TR",
-        "app_complete_date": null,
-        "entitled_date": "2018-07-16",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
         "id": "ZP2018-0058",
         "address": "1446 SCENIC Ave",
         "net_units": 1,
@@ -10325,6 +10307,17 @@
         "accela_status_date": null
       },
       {
+        "id": "ZP2018-0081",
+        "address": "3055 HILLEGASS Ave",
+        "net_units": 1,
+        "status": "entitled",
+        "developer": "JAFFE JONATHAN M & TSANG RECHENG",
+        "app_complete_date": null,
+        "entitled_date": "2018-06-13",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
         "id": "ZP2018-0154",
         "address": "1118 OXFORD St",
         "net_units": 1,
@@ -10332,17 +10325,6 @@
         "developer": "BAKER CHRISTOPHER J & TARA Z",
         "app_complete_date": null,
         "entitled_date": "2018-12-19",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
-        "id": "ZP2018-0183",
-        "address": "2350 EUNICE St",
-        "net_units": 1,
-        "status": "entitled",
-        "developer": "SMITHROWSEY DANIEL & PANDA IRENA TRS",
-        "app_complete_date": null,
-        "entitled_date": "2019-06-12",
         "bp_issued_date": null,
         "accela_status_date": null
       },
@@ -10468,6 +10450,17 @@
         "accela_status_date": null
       },
       {
+        "id": "ZP2019-0193",
+        "address": "1531 SUMMIT Rd",
+        "net_units": 1,
+        "status": "entitled",
+        "developer": "WOLFF LIE C TR",
+        "app_complete_date": null,
+        "entitled_date": "2020-08-13",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
         "id": "ZP2020-0136",
         "address": "1630 CARLETON St",
         "net_units": 1,
@@ -10534,6 +10527,17 @@
         "accela_status_date": null
       },
       {
+        "id": "ZP2022-0087",
+        "address": "469 KENTUCKY Ave",
+        "net_units": 1,
+        "status": "withdrawn",
+        "developer": "KEEFE DAVID E TR",
+        "app_complete_date": null,
+        "entitled_date": "2023-01-12",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
         "id": "ZP2023-0036",
         "address": "1804 HARMON St",
         "net_units": 1,
@@ -10545,6 +10549,17 @@
         "accela_status_date": null
       },
       {
+        "id": "ZP2023-0154",
+        "address": "1301 BERKELEY Way",
+        "net_units": 1,
+        "status": "entitled",
+        "developer": "FILMER ELIZABETH M TR",
+        "app_complete_date": null,
+        "entitled_date": "2024-06-12",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
         "id": "ZP2024-0100",
         "address": "0 PARKER St",
         "net_units": 1,
@@ -10552,6 +10567,17 @@
         "developer": null,
         "app_complete_date": null,
         "entitled_date": "2024-11-19",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
+        "id": "ZP2025-0014",
+        "address": "1522 JOSEPHINE St",
+        "net_units": 1,
+        "status": "entitled",
+        "developer": "ISHIZUE ITSUKO TR",
+        "app_complete_date": null,
+        "entitled_date": "2026-05-14",
         "bp_issued_date": null,
         "accela_status_date": null
       },
@@ -10688,17 +10714,6 @@
         "accela_status_date": null
       },
       {
-        "id": "ZP2018-0038",
-        "address": "3028 REGENT St",
-        "net_units": null,
-        "status": "entitled",
-        "developer": "3028 REGENT STREET LLC",
-        "app_complete_date": null,
-        "entitled_date": "2018-05-07",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
         "id": "ZP2021-0001",
         "address": "1643 CALIFORNIA St",
         "net_units": null,
@@ -10732,13 +10747,13 @@
         "accela_status_date": null
       },
       {
-        "id": "ZP2018-0178",
+        "id": "ZP2015-0079",
         "address": "1241 ASHBY Ave",
         "net_units": null,
         "status": "entitled",
         "developer": "TU ERIC",
         "app_complete_date": null,
-        "entitled_date": "2021-04-08",
+        "entitled_date": "2016-04-07",
         "bp_issued_date": null,
         "accela_status_date": null
       },
@@ -10864,6 +10879,17 @@
         "accela_status_date": null
       },
       {
+        "id": "ZP2018-0040",
+        "address": "1631 GRANT St",
+        "net_units": null,
+        "status": "entitled",
+        "developer": "MOON SUSAN TR",
+        "app_complete_date": null,
+        "entitled_date": "2018-07-16",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
         "id": "ZP2018-0080",
         "address": "1647 SIXTH St",
         "net_units": null,
@@ -10875,13 +10901,13 @@
         "accela_status_date": null
       },
       {
-        "id": "ZP2018-0081",
-        "address": "3055 HILLEGASS Ave",
+        "id": "ZP2018-0183",
+        "address": "2350 EUNICE St",
         "net_units": null,
         "status": "entitled",
-        "developer": "JAFFE JONATHAN M & TSANG RECHENG",
+        "developer": "SMITHROWSEY DANIEL & PANDA IRENA TRS",
         "app_complete_date": null,
-        "entitled_date": "2018-06-13",
+        "entitled_date": "2019-06-12",
         "bp_issued_date": null,
         "accela_status_date": null
       },
@@ -10919,17 +10945,6 @@
         "accela_status_date": null
       },
       {
-        "id": "ZP2019-0193",
-        "address": "1531 SUMMIT Rd",
-        "net_units": null,
-        "status": "entitled",
-        "developer": "WOLFF LIE C TR",
-        "app_complete_date": null,
-        "entitled_date": "2020-08-13",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
         "id": "ZP2019-0212",
         "address": "1850 ARCH St",
         "net_units": null,
@@ -10959,17 +10974,6 @@
         "developer": "HAN JUDY W & PEGGY C ETAL",
         "app_complete_date": null,
         "entitled_date": "2022-07-18",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
-        "id": "ZP2022-0087",
-        "address": "469 KENTUCKY Ave",
-        "net_units": null,
-        "status": "withdrawn",
-        "developer": "KEEFE DAVID E TR",
-        "app_complete_date": null,
-        "entitled_date": "2023-01-12",
         "bp_issued_date": null,
         "accela_status_date": null
       },
@@ -11040,17 +11044,6 @@
         "accela_status_date": null
       },
       {
-        "id": "ZP2023-0154",
-        "address": "1301 BERKELEY Way",
-        "net_units": null,
-        "status": "entitled",
-        "developer": "FILMER ELIZABETH M TR",
-        "app_complete_date": null,
-        "entitled_date": "2024-06-12",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
         "id": "ZP2024-0104",
         "address": "1733 DWIGHT Way",
         "net_units": null,
@@ -11069,17 +11062,6 @@
         "developer": "GARDINER ROBERT O & MARJORIE W",
         "app_complete_date": null,
         "entitled_date": "2025-10-01",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
-        "id": "ZP2025-0014",
-        "address": "1522 JOSEPHINE St",
-        "net_units": null,
-        "status": "entitled",
-        "developer": "ISHIZUE ITSUKO TR",
-        "app_complete_date": null,
-        "entitled_date": "2026-05-14",
         "bp_issued_date": null,
         "accela_status_date": null
       },
@@ -11137,11 +11119,22 @@
         "entitled_date": "2018-06-15",
         "bp_issued_date": null,
         "accela_status_date": null
+      },
+      {
+        "id": "PLN2023-0017",
+        "address": "3120 SHATTUCK Ave",
+        "net_units": null,
+        "status": "entitled",
+        "developer": "NORTHERN CALIFORNIA LAND TRUST",
+        "app_complete_date": null,
+        "entitled_date": "2023-08-23",
+        "bp_issued_date": null,
+        "accela_status_date": null
       }
     ],
     "summary": {
-      "total_stalled": 173,
-      "total_units_at_risk": 5784
+      "total_stalled": 176,
+      "total_units_at_risk": 6560
     }
   }
 }

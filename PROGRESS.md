@@ -674,6 +674,9 @@ players page (306 players, sourced attributions) published (`3ca775d`). Map: can
 v4 (204 names, 197 colors; coordinates identical; `32bc37a`), docs/geometry.kml republished; legend now American
 spelling and the homepage panel is generated (it never was) (`4bf81c9`, `3f6d305`, `af82ab5`). Tour packages
 (kml/tours/packages, derived) are NOT regenerated -- with the next video renders.
+**Datasette DEPLOYED 2026-10-03** (John signed in; flyctl deploy): https://berkeley-housing.fly.dev serves the v4 build
+-- 1,553 projects; verified live: 1951 Shattuck first BP 2022-09-08, SCB as architect, 1750 Sacramento entitled
+2024-12-11 (AB 2011).
 **Harvest running:** 128 of 436 attachment lists, 27 letters so far.
 
 **NEXT:** harvest finishes -> load it (attachment_listed) + a rule reading SB 35 / AB 2011 approval dates from the

@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tour with Street View</title>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<style>
+  :root { --ink:#2b2620; --paper:#f6f0e1; --muted:#6b5d4a; --accent:#1f5fbf; --line:#d8cdb4; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ink:#efe8d8; --paper:#1d1a16; --muted:#b5a88f; --accent:#7fb0ff; --line:#3a342b; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family: Georgia, "Times New Roman", serif; }
+  header { max-width:1100px; margin:0 auto; padding:16px 16px 8px; }
+  header a.back { color:var(--muted); text-decoration:none; font-size:.95rem; }
+  h1 { margin:4px 0 0; font-size:1.5rem; }
+  .sub { color:var(--muted); font-style:italic; margin-top:4px; }
+  main { max-width:1100px; margin:0 auto; padding:8px 16px 24px; }
+  .stage { position:relative; }
+  .video { position:relative; width:100%; aspect-ratio:16/9; background:#000; }
+  .video > div, .video iframe { position:absolute; inset:0; width:100%; height:100%; }
+  /* the map rides in the video's top-right corner, like a car's navigation screen (YouTube's controls are at the bottom) */
+  #mapwrap { position:absolute; top:12px; right:12px; width:30%; aspect-ratio:4/3; z-index:5;
+             border:2px solid #fff; border-radius:6px; overflow:hidden; box-shadow:0 4px 16px rgba(0,0,0,.45);
+             transition:width .2s; }
+  #mapwrap.big { width:52%; }
+  #map { position:absolute; inset:0; }
+  #north { position:absolute; right:8px; top:8px; z-index:3; width:30px; height:30px; border-radius:50%;
+           background:rgba(255,255,255,.92); border:1px solid #999; display:flex; align-items:center; justify-content:center;
+           font:bold 11px Georgia, serif; color:#222; transition:transform .3s; }
+  #north::before { content:""; position:absolute; top:3px; border:5px solid transparent; border-bottom:8px solid #c0392b; border-top:0; }
+  #north span { margin-top:9px; }
+  .cam { width:34px; height:34px; position:relative; }
+  .cam::before { content:""; position:absolute; left:10px; top:10px; width:14px; height:14px; border-radius:50%;
+                 border:3px solid #c0392b; background:#fff; box-sizing:border-box; }
+  .cam::after { content:""; position:absolute; left:15.5px; top:-4px; width:3px; height:15px; background:#c0392b; }
+  #grow { position:absolute; left:6px; bottom:6px; z-index:1000; padding:2px 8px; font-size:.8rem;
+          background:rgba(255,255,255,.9); color:#222; border:1px solid #999; }
+  @media (max-width: 700px) {
+    #mapwrap, #mapwrap.big { position:relative; top:auto; right:auto; width:100%; margin-top:10px; box-shadow:none; border:1px solid var(--line); }
+    #grow { display:none; }
+  }
+  .panel { display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px; margin-top:12px; }
+  #sv { width:100%; aspect-ratio:16/9; border:1px solid var(--line); background:#ddd; display:none; margin-top:12px; }
+  .status { font-size:.95rem; flex:1; min-width:16rem; }
+  .status b { color:var(--accent); }
+  button { font:inherit; padding:8px 12px; border:1px solid var(--ink); background:transparent; color:var(--ink); cursor:pointer; border-radius:4px; }
+  button:hover { background:var(--line); }
+  .note { font-size:.85rem; color:var(--muted); margin-top:10px; }
+  a { color:var(--accent); }
+</style>
+</head>
+<body>
+<header>
+  <a class="back" href="./">&larr; All flyovers</a>
+  <h1 id="title">Tour with Street View</h1>
+  <div class="sub">As the flyover plays, the map follows the camera and Street View shows the street it is passing.</div>
+</header>
+<main>
+  <div class="stage">
+    <div class="video"><div id="player"></div></div>
+    <div id="mapwrap"><div id="map"></div><div id="north" title="North"><span>N</span></div><button id="grow" type="button">Enlarge map</button></div>
+  </div>
+  <div class="panel">
+    <button id="pop">Open Street View window</button>
+    <div class="status" id="status">Press play.</div>
+  </div>
+  <iframe id="sv" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+  <div class="note"><span id="popnote">The Street View window opens beside this page and follows the video.</span>
+    Positions come from the tour file's own timing, checked against the recording
+    (<span id="check"></span>).<span id="approx"></span> Street View is Google's; the map is OpenFreeMap, from OpenStreetMap data.</div>
+</main>
+<script>
+// ---- settings -------------------------------------------------------------------------------
+// A Google Maps Embed API key (restricted to berkeleybuild.com) shows Street View inside the page.
+// Without one, the page drives a separate Street View window instead.
+const SV_KEY = "";
+const AERIAL_M = 60;        // above this the camera is airborne (swoops, high orbits): Street View goes to the ground spot it looks at
+const MOVE_M = 25;          // refresh Street View after the camera moves this far...
+const TURN_DEG = 35;        // ...or turns this much
+const MIN_GAP_MS = 3000;    // and never more often than this
+
+const params = new URLSearchParams(location.search);
+const TOUR = params.get("tour") || "telegraph-s2n";
+let OFFSET = parseFloat(params.get("offset") || "NaN");   // seconds of video before the tour starts; else the timeline's own
+
+// ---- the timeline -----------------------------------------------------------------------------
+let K = [];   // keyframes [t, lat, lon, heading, alt, tilt, kind]
+function lerpAngle(a, b, f) { const d = ((b - a + 540) % 360) - 180; return (a + d * f + 360) % 360; }
+function at(t) {
+  // camera at video time t: interpolate between the keyframes either side
+  t -= OFFSET;
+  if (!K.length) return null;
+  if (t <= K[0][0]) return { lat: K[0][1], lon: K[0][2], heading: K[0][3], alt: K[0][4], tilt: K[0][5] };
+  for (let i = 1; i < K.length; i++) {
+    if (t <= K[i][0]) {
+      const a = K[i - 1], b = K[i], f = (b[0] - a[0]) > 0 ? (t - a[0]) / (b[0] - a[0]) : 1;
+      return { lat: a[1] + (b[1] - a[1]) * f, lon: a[2] + (b[2] - a[2]) * f,
+               heading: lerpAngle(a[3], b[3], f), alt: a[4] + (b[4] - a[4]) * f, tilt: a[5] + (b[5] - a[5]) * f };
+    }
+  }
+  const z = K[K.length - 1];
+  return { lat: z[1], lon: z[2], heading: z[3], alt: z[4], tilt: z[5] };
+}
+// Where Street View should stand. Low (cruise, street-level orbits): at the camera. Airborne: on the
+// ground the camera is looking at, alt x tan(tilt) ahead, stepped back 40 m so the pano faces the target.
+function lookSpot(p) {
+  if (p.alt <= AERIAL_M) return { lat: p.lat, lon: p.lon, heading: p.heading, aerial: false };
+  if (p.tilt >= 85) return null;                                   // looking at the horizon: no ground spot
+  const d = Math.min(p.alt * Math.tan(p.tilt * Math.PI / 180), 600) - 40, r = p.heading * Math.PI / 180;
+  return { lat: p.lat + d * Math.cos(r) / 111320,
+           lon: p.lon + d * Math.sin(r) / (111320 * Math.cos(p.lat * Math.PI / 180)), heading: p.heading, aerial: true };
+}
+function metres(a, b) {
+  const k = 111320, kx = k * Math.cos(a.lat * Math.PI / 180);
+  return Math.hypot((a.lon - b.lon) * kx, (a.lat - b.lat) * k);
+}
+
+// ---- Street View: embedded with a key, else a window we steer ----------------------------------
+let svWin = null, lastShown = null, lastAt = 0;
+const svFrame = document.getElementById("sv");
+function svUrl(p) {
+  const h = Math.round(p.heading);
+  return SV_KEY
+    ? `https://www.google.com/maps/embed/v1/streetview?key=${SV_KEY}&location=${p.lat.toFixed(6)},${p.lon.toFixed(6)}&heading=${h}&pitch=0&fov=90`
+    : `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${p.lat.toFixed(6)},${p.lon.toFixed(6)}&heading=${h}&pitch=0&fov=90`;
+}
+function showStreetView(p, force) {
+  const now = Date.now();
+  if (!force && lastShown) {
+    const moved = metres(p, lastShown), turned = Math.abs(((p.heading - lastShown.heading + 540) % 360) - 180);
+    if ((moved < MOVE_M && turned < TURN_DEG) || now - lastAt < MIN_GAP_MS) return;
+  }
+  lastShown = p; lastAt = now;
+  if (SV_KEY) { svFrame.src = svUrl(p); }
+  else if (svWin && !svWin.closed) { svWin.location = svUrl(p); }
+}
+if (SV_KEY) { svFrame.style.display = "block"; document.getElementById("pop").style.display = "none";
+              document.getElementById("popnote").textContent = ""; }
+document.getElementById("pop").onclick = () => {
+  const p = at(player && player.getCurrentTime ? player.getCurrentTime() : 0) || { lat: 37.87, lon: -122.27, heading: 0 };
+  svWin = window.open(svUrl(p), "berkeley-streetview", "width=900,height=700");
+  lastShown = p; lastAt = Date.now();
+};
+
+// ---- the map ---------------------------------------------------------------------------------
+// A vector map, so it can turn without turning its labels upside down: the direction of travel
+// points up, like a car's navigation screen (John, 2026-10-03: a north-to-south tour must move up
+// the map, as it moves forward in the video). OpenFreeMap's Liberty style keeps OpenStreetMap's
+// business and building names; it is free and needs no key.
+let map = null, cam = null, BEARING = 0;
+const north = document.getElementById("north");
+function travelBearing(pts) {
+  // direction from the route's start to its end, in degrees clockwise from north
+  const a = pts[0], b = pts[pts.length - 1];
+  const dy = b[0] - a[0], dx = (b[1] - a[1]) * Math.cos(a[0] * Math.PI / 180);
+  return (Math.atan2(dx, dy) * 180 / Math.PI + 360) % 360;
+}
+function makeMap(pts, p0) {
+  BEARING = travelBearing(pts);
+  map = new maplibregl.Map({ container: "map", style: "https://tiles.openfreemap.org/styles/liberty",
+    center: [p0.lon, p0.lat], zoom: 16.3, bearing: BEARING, attributionControl: false,
+    dragRotate: false, pitchWithRotate: false, touchPitch: false });
+  map.touchZoomRotate.disableRotation();
+  map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-left");
+  const attrib = new maplibregl.AttributionControl({ compact: true });   // the style supplies the OpenFreeMap / OpenStreetMap credit
+  map.addControl(attrib);
+  const collapse = () => map.getContainer().querySelector(".maplibregl-ctrl-attrib")?.classList.remove("maplibregl-compact-show");
+  setTimeout(collapse, 0); map.once("idle", collapse);   // start as the (i) icon
+  north.style.transform = `rotate(${-BEARING}deg)`;
+  map.on("load", () => {
+    map.getContainer().querySelector(".maplibregl-ctrl-attrib")?.classList.remove("maplibregl-compact-show");  // start as the (i) icon
+    map.addSource("route", { type: "geojson",
+      data: { type: "Feature", geometry: { type: "LineString", coordinates: pts.map(q => [q[1], q[0]]) } } });
+    map.addLayer({ id: "route", type: "line", source: "route",
+      paint: { "line-color": "#1f5fbf", "line-width": 4, "line-opacity": 0.6 }, layout: { "line-cap": "round" } });
+  });
+  const el = document.createElement("div"); el.className = "cam";
+  cam = new maplibregl.Marker({ element: el, rotationAlignment: "viewport" }).setLngLat([p0.lon, p0.lat]).addTo(map);
+}
+document.getElementById("grow").onclick = (e) => {
+  const w = document.getElementById("mapwrap"); w.classList.toggle("big");
+  e.target.textContent = w.classList.contains("big") ? "Shrink map" : "Enlarge map";
+  setTimeout(() => map && map.resize(), 250);
+};
+function drawMap(p) {
+  if (!map) return;
+  cam.setLngLat([p.lon, p.lat]).setRotation(p.heading - BEARING);   // on screen: the line points where the camera looks
+  const pt = map.project([p.lon, p.lat]), c = map.getContainer();
+  const mx = c.clientWidth * 0.2, my = c.clientHeight * 0.2;
+  if (pt.x < mx || pt.x > c.clientWidth - mx || pt.y < my || pt.y > c.clientHeight - my)
+    map.easeTo({ center: [p.lon, p.lat], duration: 600 });
+}
+
+// ---- the video ---------------------------------------------------------------------------------
+let player = null;
+const status = document.getElementById("status");
+function tick() {
+  if (!player || !player.getCurrentTime) return;
+  const t = player.getCurrentTime(), p = at(t);
+  if (!p) return;
+  drawMap(p);
+  const mm = Math.floor(t / 60), ss = String(Math.floor(t % 60)).padStart(2, "0");
+  const g = lookSpot(p);
+  if (!g) {
+    status.innerHTML = `<b>${mm}:${ss}</b> · looking at the horizon: no street view`;
+  } else {
+    status.innerHTML = `<b>${mm}:${ss}</b> · ` + (g.aerial
+      ? `aerial view, ${Math.round(p.alt)} m up: Street View shows the spot the camera is looking at`
+      : `${p.lat.toFixed(5)}, ${p.lon.toFixed(5)} · heading ${Math.round(p.heading)}°`);
+    if (player.getPlayerState && player.getPlayerState() === 1) showStreetView(g, false);
+  }
+}
+function onYouTubeIframeAPIReady() {
+  fetch(`streetview/${TOUR}.json`).then(r => r.json()).then(d => {
+    K = d.keyframes;
+    if (isNaN(OFFSET)) OFFSET = d.offset_s || 0;
+    if (d.approximate) document.getElementById("approx").textContent =
+      " This video is a live screen recording, so its sync with the map is approximate (a few seconds).";
+    document.getElementById("title").textContent = d.title;
+    document.title = d.title;
+    document.getElementById("check").textContent = `${d.duration_s.toFixed(1)} s tour, ${d.checked_against_s.toFixed(1)} s video`;
+    let pts = K.filter(k => k[4] <= AERIAL_M).map(k => [k[1], k[2]]);
+    if (pts.length < 2) pts = K.map(k => [k[1], k[2]]);   // an all-aerial tour: draw its flight path
+    const p0 = at(0);
+    makeMap(pts, p0);   // turned so the route runs up the screen; drawMap follows the camera
+    player = new YT.Player("player", { host: "https://www.youtube-nocookie.com", videoId: d.youtube, playerVars: { rel: 0, modestbranding: 1 },
+      events: { onStateChange: e => { if (e.data === 1) { const p = at(player.getCurrentTime()), g = p && lookSpot(p); if (g) showStreetView(g, true); } } } });
+    setInterval(tick, 500);
+  }).catch(e => { console.error(e); status.textContent = `Could not load the timeline for "${TOUR}".`; });
+}
+</script>
+<script src="https://www.youtube.com/iframe_api"></script>
+</body>
+</html>

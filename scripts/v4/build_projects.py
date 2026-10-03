@@ -82,6 +82,10 @@ UNITS_EVIDENCE = ROOT / "data/derived/project_units_evidence_2026-10-01.json"   
 # Building measures (phase 6; John: square footage and parking KEPT, heights from sources -- D7): gross sq ft, parking,
 # stories, height in feet, each kept only with a verbatim quote containing the number (scripts/llm_building_measures.py).
 MEASURES_EVIDENCE = ROOT / "data/derived/building_measures_evidence_2026-09-30.json"
+# MEASURE RULINGS (John, 2026-10-03): a measure or an application's unit count stated in an approved plan set or the
+# UC's own documents, each with a verbatim quote, overriding the model's read of the application text (2128 Oxford:
+# the approved hearing set says 456 units / 27 storeys / 285'-4", the 2022 application said 485 / 26).
+MEASURE_RULINGS = ROOT / "corrections/v4/measure_rulings.csv"
 OUT = ROOT / "scratch/2026-09-29_phase3"
 ANCHOR_PRIORITY = ("primary_application", "pre_application", "ministerial_clearance", "companion_review")
 DEAD = ("Withdrawn", "Void")
@@ -501,6 +505,11 @@ def write(con, projects) -> dict:
         proposed = {}
         if UNITS_EVIDENCE.exists():
             proposed = {r["project_key"]: r for r in json.load(open(UNITS_EVIDENCE))["readings"] if r.get("units") is not None}
+        measure_rulings = collections.defaultdict(list)
+        if MEASURE_RULINGS.exists():
+            for mr in csv.DictReader(open(MEASURE_RULINGS)):
+                if mr["status"] == "approved":
+                    measure_rulings[mr["project_key"]].append(mr)
         sp = collections.defaultdict(set)
         for sid, pid in con.execute("SELECT structure_id, parcel_id FROM structure_parcels"):
             sp[sid].add(pid)
@@ -574,6 +583,17 @@ def write(con, projects) -> dict:
                 p["proposed_units"] = proposed[key]["units"]
                 p["proposed_units_evidence"] = {k: proposed[key][k] for k in ("quote", "source")}
                 out["with_proposed_units"] += 1
+            for mr in measure_rulings.get(key, []):                  # approved measure rulings override the read
+                val = float(mr["value"]); val = int(val) if val.is_integer() else val
+                ev = {"value": val, "quote": mr["source_quote"], "source": mr["source_ref"], "ruling": mr["ruling_id"]}
+                if mr["measure"] == "units":
+                    if not p["structures"]:                          # built units always come from the buildings
+                        p["proposed_units"], p["proposed_units_evidence"] = val, ev
+                        out["measure_rulings_applied"] += 1
+                else:
+                    p.setdefault("measures", {})[mr["measure"]] = ev
+                    (p.get("measures_excluded") or {}).pop(mr["measure"], None)
+                    out["measure_rulings_applied"] += 1
             if p.get("external_id"):
                 p["name"], p["address"], p["name_basis"] = p["external_name"], p["external_address"], "external_source"
             out["named_" + str(p["name_basis"])] += 1

@@ -11,49 +11,62 @@
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ink:#efe8d8; --paper:#1d1a16; --muted:#b5a88f; --accent:#7fb0ff; --line:#3a342b; } }
   * { box-sizing: border-box; }
   body { margin:0; background:var(--paper); color:var(--ink); font-family: Georgia, "Times New Roman", serif; }
-  header { padding:16px 20px 8px; }
-  h1 { margin:0; font-size:1.5rem; }
+  header { max-width:1100px; margin:0 auto; padding:16px 16px 8px; }
+  header a.back { color:var(--muted); text-decoration:none; font-size:.95rem; }
+  h1 { margin:4px 0 0; font-size:1.5rem; }
   .sub { color:var(--muted); font-style:italic; margin-top:4px; }
-  main { display:grid; grid-template-columns: minmax(0,3fr) minmax(0,2fr); gap:16px; padding:8px 20px 20px; }
-  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+  main { max-width:1100px; margin:0 auto; padding:8px 16px 24px; }
+  .stage { position:relative; }
   .video { position:relative; width:100%; aspect-ratio:16/9; background:#000; }
   .video > div, .video iframe { position:absolute; inset:0; width:100%; height:100%; }
-  .panel { display:flex; flex-direction:column; gap:10px; min-width:0; }
-  #sv { width:100%; aspect-ratio:4/3; border:1px solid var(--line); background:#ddd; display:none; }
-  #map { width:100%; aspect-ratio:4/3; border:1px solid var(--line); }
-  .status { font-size:.95rem; min-height:2.6em; }
+  /* the map rides in the video's top-right corner, like a car's navigation screen (YouTube's controls are at the bottom) */
+  #mapwrap { position:absolute; top:12px; right:12px; width:30%; aspect-ratio:4/3; z-index:5;
+             border:2px solid #fff; border-radius:6px; overflow:hidden; box-shadow:0 4px 16px rgba(0,0,0,.45);
+             transition:width .2s; }
+  #mapwrap.big { width:52%; }
+  #map { position:absolute; inset:0; }
+  #grow { position:absolute; left:6px; bottom:6px; z-index:1000; padding:2px 8px; font-size:.8rem;
+          background:rgba(255,255,255,.9); color:#222; border:1px solid #999; }
+  @media (max-width: 700px) {
+    #mapwrap, #mapwrap.big { position:relative; top:auto; right:auto; width:100%; margin-top:10px; box-shadow:none; border:1px solid var(--line); }
+    #grow { display:none; }
+  }
+  .panel { display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px; margin-top:12px; }
+  #sv { width:100%; aspect-ratio:16/9; border:1px solid var(--line); background:#ddd; display:none; margin-top:12px; }
+  .status { font-size:.95rem; flex:1; min-width:16rem; }
   .status b { color:var(--accent); }
   button { font:inherit; padding:8px 12px; border:1px solid var(--ink); background:transparent; color:var(--ink); cursor:pointer; border-radius:4px; }
   button:hover { background:var(--line); }
-  .note { font-size:.85rem; color:var(--muted); }
+  .note { font-size:.85rem; color:var(--muted); margin-top:10px; }
   a { color:var(--accent); }
 </style>
 </head>
 <body>
 <header>
+  <a class="back" href="./">&larr; All flyovers</a>
   <h1 id="title">Tour with Street View</h1>
   <div class="sub">As the flyover plays, the map follows the camera and Street View shows the street it is passing.</div>
 </header>
 <main>
-  <div class="video"><div id="player"></div></div>
-  <div class="panel">
-    <iframe id="sv" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-    <div>
-      <button id="pop">Open Street View window</button>
-      <span class="note" id="popnote">Opens beside this page and follows the video.</span>
-    </div>
-    <div class="status" id="status">Press play.</div>
-    <div id="map"></div>
-    <div class="note">Positions come from the tour file's own timing, checked against the recording
-      (<span id="check"></span>).<span id="approx"></span> Street View is Google's; the map is © OpenStreetMap contributors.</div>
+  <div class="stage">
+    <div class="video"><div id="player"></div></div>
+    <div id="mapwrap"><div id="map"></div><button id="grow" type="button">Enlarge map</button></div>
   </div>
+  <div class="panel">
+    <button id="pop">Open Street View window</button>
+    <div class="status" id="status">Press play.</div>
+  </div>
+  <iframe id="sv" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+  <div class="note"><span id="popnote">The Street View window opens beside this page and follows the video.</span>
+    Positions come from the tour file's own timing, checked against the recording
+    (<span id="check"></span>).<span id="approx"></span> Street View is Google's; the map is © OpenStreetMap contributors.</div>
 </main>
 <script>
 // ---- settings -------------------------------------------------------------------------------
 // A Google Maps Embed API key (restricted to berkeleybuild.com) shows Street View inside the page.
 // Without one, the page drives a separate Street View window instead.
 const SV_KEY = "";
-const AERIAL_M = 60;        // swoops fly at 100 m (no street view); orbits at ~44 m and the cruise at 25 m do get one
+const AERIAL_M = 60;        // above this the camera is airborne (swoops, high orbits): Street View goes to the ground spot it looks at
 const MOVE_M = 25;          // refresh Street View after the camera moves this far...
 const TURN_DEG = 35;        // ...or turns this much
 const MIN_GAP_MS = 3000;    // and never more often than this
@@ -69,16 +82,25 @@ function at(t) {
   // camera at video time t: interpolate between the keyframes either side
   t -= OFFSET;
   if (!K.length) return null;
-  if (t <= K[0][0]) return { lat: K[0][1], lon: K[0][2], heading: K[0][3], alt: K[0][4] };
+  if (t <= K[0][0]) return { lat: K[0][1], lon: K[0][2], heading: K[0][3], alt: K[0][4], tilt: K[0][5] };
   for (let i = 1; i < K.length; i++) {
     if (t <= K[i][0]) {
       const a = K[i - 1], b = K[i], f = (b[0] - a[0]) > 0 ? (t - a[0]) / (b[0] - a[0]) : 1;
       return { lat: a[1] + (b[1] - a[1]) * f, lon: a[2] + (b[2] - a[2]) * f,
-               heading: lerpAngle(a[3], b[3], f), alt: a[4] + (b[4] - a[4]) * f };
+               heading: lerpAngle(a[3], b[3], f), alt: a[4] + (b[4] - a[4]) * f, tilt: a[5] + (b[5] - a[5]) * f };
     }
   }
   const z = K[K.length - 1];
-  return { lat: z[1], lon: z[2], heading: z[3], alt: z[4] };
+  return { lat: z[1], lon: z[2], heading: z[3], alt: z[4], tilt: z[5] };
+}
+// Where Street View should stand. Low (cruise, street-level orbits): at the camera. Airborne: on the
+// ground the camera is looking at, alt x tan(tilt) ahead, stepped back 40 m so the pano faces the target.
+function lookSpot(p) {
+  if (p.alt <= AERIAL_M) return { lat: p.lat, lon: p.lon, heading: p.heading, aerial: false };
+  if (p.tilt >= 85) return null;                                   // looking at the horizon: no ground spot
+  const d = Math.min(p.alt * Math.tan(p.tilt * Math.PI / 180), 600) - 40, r = p.heading * Math.PI / 180;
+  return { lat: p.lat + d * Math.cos(r) / 111320,
+           lon: p.lon + d * Math.sin(r) / (111320 * Math.cos(p.lat * Math.PI / 180)), heading: p.heading, aerial: true };
 }
 function metres(a, b) {
   const k = 111320, kx = k * Math.cos(a.lat * Math.PI / 180);
@@ -118,6 +140,11 @@ const map = L.map("map", { zoomControl: true, attributionControl: true });
 // (Tried a plain style 2026-10-03: John preferred this one.)
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",
   { maxZoom: 19, attribution: "© OpenStreetMap contributors" }).addTo(map);
+document.getElementById("grow").onclick = (e) => {
+  const w = document.getElementById("mapwrap"); w.classList.toggle("big");
+  e.target.textContent = w.classList.contains("big") ? "Shrink map" : "Enlarge map";
+  setTimeout(() => map.invalidateSize(), 250);
+};
 let marker = null, cone = null;
 function drawMap(p) {
   const ll = [p.lat, p.lon];
@@ -140,11 +167,14 @@ function tick() {
   if (!p) return;
   drawMap(p);
   const mm = Math.floor(t / 60), ss = String(Math.floor(t % 60)).padStart(2, "0");
-  if (p.alt > AERIAL_M) {
-    status.innerHTML = `<b>${mm}:${ss}</b> · aerial shot (${Math.round(p.alt)} m up): no street view`;
+  const g = lookSpot(p);
+  if (!g) {
+    status.innerHTML = `<b>${mm}:${ss}</b> · looking at the horizon: no street view`;
   } else {
-    status.innerHTML = `<b>${mm}:${ss}</b> · ${p.lat.toFixed(5)}, ${p.lon.toFixed(5)} · heading ${Math.round(p.heading)}°`;
-    if (player.getPlayerState && player.getPlayerState() === 1) showStreetView(p, false);
+    status.innerHTML = `<b>${mm}:${ss}</b> · ` + (g.aerial
+      ? `aerial view, ${Math.round(p.alt)} m up: Street View shows the spot the camera is looking at`
+      : `${p.lat.toFixed(5)}, ${p.lon.toFixed(5)} · heading ${Math.round(p.heading)}°`);
+    if (player.getPlayerState && player.getPlayerState() === 1) showStreetView(g, false);
   }
 }
 function onYouTubeIframeAPIReady() {
@@ -156,13 +186,14 @@ function onYouTubeIframeAPIReady() {
     document.getElementById("title").textContent = d.title;
     document.title = d.title;
     document.getElementById("check").textContent = `${d.duration_s.toFixed(1)} s tour, ${d.checked_against_s.toFixed(1)} s video`;
-    const pts = K.filter(k => k[4] <= AERIAL_M).map(k => [k[1], k[2]]);
+    let pts = K.filter(k => k[4] <= AERIAL_M).map(k => [k[1], k[2]]);
+    if (pts.length < 2) pts = K.map(k => [k[1], k[2]]);   // an all-aerial tour: draw its flight path
     L.polyline(pts, { color: "#1f5fbf", weight: 3, opacity: 0.6 }).addTo(map);
     const p0 = at(0);
     map.setView([p0.lat, p0.lon], 17);   // close in on the camera; drawMap pans to follow it
     drawMap(p0);
     player = new YT.Player("player", { host: "https://www.youtube-nocookie.com", videoId: d.youtube, playerVars: { rel: 0, modestbranding: 1 },
-      events: { onStateChange: e => { if (e.data === 1) { const p = at(player.getCurrentTime()); if (p && p.alt <= AERIAL_M) showStreetView(p, true); } } } });
+      events: { onStateChange: e => { if (e.data === 1) { const p = at(player.getCurrentTime()), g = p && lookSpot(p); if (g) showStreetView(g, true); } } } });
     setInterval(tick, 500);
   }).catch(e => { status.textContent = `Could not load the timeline for "${TOUR}".`; });
 }

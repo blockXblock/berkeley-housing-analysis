@@ -41,9 +41,12 @@ def main():
         d["title"] = title
         f.write_text(json.dumps(d, separators=(",", ":")))
         route = [[k[1], k[2]] for k in d["keyframes"] if k[4] <= 60]
+        aerial = len(route) < 2                               # flown entirely from the air: draw the flight path
+        if aerial:
+            route = [[k[1], k[2]] for k in d["keyframes"]]
         route = route[::max(1, len(route) // 120)]           # enough points to draw, small enough to embed
         items.append({"id": tid, "title": title, "blurb": blurb, "yt": d["youtube"], "colour": colour,
-                      "minutes": round(d["duration_s"] / 60, 1), "approx": d.get("approximate", False),
+                      "minutes": round(d["duration_s"] / 60, 1), "approx": d.get("approximate", False), "aerial": aerial,
                       "route": [[round(a, 5), round(b, 5)] for a, b in route]})
 
     cards = []
@@ -51,7 +54,7 @@ def main():
         badge = '<span class="badge">sync approximate</span>' if it["approx"] else ""
         cards.append(f'''
     <a class="card" href="streetview.html?tour={html.escape(it["id"])}" data-i="{i}" style="--c:{it["colour"]}">
-      <div class="thumb"><img src="../img/thumbs/{it["yt"]}.jpg" alt="" loading="lazy"><span class="len">{it["minutes"]} min</span></div>
+      <div class="thumb"><img src="../img/tourposters/{html.escape(it["id"])}.jpg" alt="" loading="lazy"><span class="len">{it["minutes"]} min</span></div>
       <div class="body"><h2>{html.escape(it["title"])}</h2><p>{html.escape(it["blurb"])}</p>
         <span class="cta">Fly it with the map and Street View &rarr;</span>{badge}</div>
     </a>''')
@@ -70,6 +73,12 @@ def main():
   @media (prefers-color-scheme: dark) {{ :root:not([data-theme="light"]) {{ --ink:#efe8d8; --paper:#1d1a16; --muted:#b5a88f; --card:#28241e; --line:#3a342b; }} }}
   * {{ box-sizing:border-box; }}
   body {{ margin:0; background:var(--paper); color:var(--ink); font-family:Georgia,"Times New Roman",serif; }}
+  .hero {{ position:relative; min-height:clamp(260px, 42vh, 420px); display:flex; align-items:flex-end; overflow:hidden; background:#000; }}
+  .hero video, .hero img.still {{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }}
+  .hero::after {{ content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.78), rgba(0,0,0,.1) 60%); }}
+  .hero .in {{ position:relative; z-index:1; max-width:1200px; width:100%; margin:0 auto; padding:24px 16px; color:#fff; }}
+  .hero a.home {{ position:absolute; top:14px; left:16px; z-index:2; color:#fff; background:rgba(0,0,0,.55); padding:3px 9px; border-radius:4px; text-decoration:none; }}
+  .hero .lede {{ color:#f1ece0; }}
   header {{ max-width:1200px; margin:0 auto; padding:28px 16px 12px; }}
   header a.home {{ color:var(--muted); font-size:.95rem; text-decoration:none; }}
   h1 {{ font-size:clamp(1.8rem, 4vw, 2.8rem); margin:.3rem 0 .4rem; line-height:1.1; }}
@@ -93,12 +102,16 @@ def main():
 </style>
 </head>
 <body>
-<header>
+<section class="hero">
+  <video id="loop" muted loop playsinline preload="metadata" poster="../videos/hero-shattuck-loop.jpg">
+    <source src="../videos/hero-shattuck-loop.mp4" type="video/mp4"></video>
   <a class="home" href="../">&larr; berkeleybuild.com</a>
-  <h1>Fly Berkeley&rsquo;s future, street by street</h1>
-  <p class="lede">Each flyover plays beside a live map and Google Street View: watch the buildings planned for a street
-    while you see the street as it stands today. Pick a route on the map or below.</p>
-</header>
+  <div class="in">
+    <h1>Fly Berkeley&rsquo;s future, street by street</h1>
+    <p class="lede">Each flyover plays beside a live map and Google Street View: watch the buildings planned for a street
+      while you see the street as it stands today. Pick a route on the map or below.</p>
+  </div>
+</section>
 <div id="map"></div>
 <div class="grid">{"".join(cards)}
 </div>
@@ -108,12 +121,17 @@ const T = {json.dumps(items, separators=(",", ":"))};
 const map = L.map("map", {{ scrollWheelZoom: false }});
 L.tileLayer("https://tile.openstreetmap.org/{{z}}/{{x}}/{{y}}.png", {{ maxZoom: 19, attribution: "© OpenStreetMap contributors" }}).addTo(map);
 const lines = [], cards = document.querySelectorAll(".card");
+map.fitBounds(L.latLngBounds(T.flatMap(t => t.route)).pad(0.05));   // a view first: layers project against it
 function light(i, on) {{
-  lines[i].setStyle({{ weight: on ? 9 : 5, opacity: on ? 1 : 0.8 }}); if (on) lines[i].bringToFront();
+  const a = T[i].aerial;
+  lines[i].setStyle({{ weight: on ? (a ? 5 : 9) : (a ? 3 : 5), opacity: on ? 1 : (a ? 0.5 : 0.8) }}); if (on) lines[i].bringToFront();
   cards[i].classList.toggle("on", on);
 }}
+const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const loop = document.getElementById("loop");
+if (!still) loop.play().catch(() => {{}});
 T.forEach((t, i) => {{
-  const l = L.polyline(t.route, {{ color: t.colour, weight: 5, opacity: 0.8 }}).addTo(map)
+  const l = L.polyline(still ? t.route : t.route.slice(0, 2), {{ color: t.colour, weight: t.aerial ? 3 : 5, opacity: t.aerial ? 0.5 : 0.8, dashArray: t.aerial ? "2 8" : null }}).addTo(map)
     .bindTooltip(t.title, {{ sticky: true }});
   l.on("mouseover", () => light(i, true)); l.on("mouseout", () => light(i, false));
   l.on("click", () => location.href = "streetview.html?tour=" + encodeURIComponent(t.id));
@@ -122,7 +140,24 @@ T.forEach((t, i) => {{
   cards[i].addEventListener("mouseenter", () => light(i, true));
   cards[i].addEventListener("mouseleave", () => light(i, false));
 }});
-map.fitBounds(L.featureGroup(lines).getBounds().pad(0.05));
+// draw each route along its street, one after another, the first time the map comes into view
+function drawRoutes() {{
+  const DUR = 1400, GAP = 350;
+  T.forEach((t, i) => setTimeout(() => {{
+    const t0 = performance.now();
+    (function step(now) {{
+      const f = Math.min(1, (now - t0) / DUR), n = Math.max(2, Math.round(f * t.route.length));
+      lines[i].setLatLngs(t.route.slice(0, n));
+      if (f < 1) requestAnimationFrame(step);
+    }})(t0);
+  }}, i * GAP));
+}}
+let drawn = false;
+const whole = () => {{ drawn = true; T.forEach((t, i) => lines[i].setLatLngs(t.route)); }};
+if (!still) new IntersectionObserver((es, o) => {{ if (es[0].isIntersecting && !drawn) {{ drawn = true; drawRoutes(); o.disconnect();
+  setTimeout(whole, T.length * 350 + 2500); }} }},   // safety net if animation frames stall
+  {{ threshold: 0.25 }}).observe(document.getElementById("map"));
+setTimeout(() => {{ if (!drawn) whole(); }}, 6000);   // never leave the map empty, whatever the browser does
 </script>
 </body>
 </html>

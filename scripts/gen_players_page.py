@@ -56,7 +56,7 @@ for p in get_projects(v4):
     proj[p['id']] = dict(addr=(p['address'] or '').title(), u=p['units'] or 0, state=st, owner=p['owner'])
 
 # ---- players ----
-ROLE = {'developer': 'developer', 'plans_developer': 'developer', 'plans_architect': 'architect',
+ROLE = {'developer': 'developer', 'plans_developer': 'developer', 'plans_architect': 'architect', 'architect': 'architect',
         'applicant': 'applicant', 'plans_applicant': 'applicant'}
 FIRM = re.compile(r"\b(ARCHITECTS?|ARCHITECTURE|STUDIO|DESIGN|CORPORATION|DEVELOPMENT|HOUSING|INTERESTS)\b")
 

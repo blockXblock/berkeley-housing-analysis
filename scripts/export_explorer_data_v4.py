@@ -83,7 +83,7 @@ def get_projects(db):
     people = collections.defaultdict(dict)
     cand = collections.defaultdict(collections.Counter)
     for k, role, name in q("""SELECT project_key, role, name FROM v_project_people
-                              WHERE role IN ('developer', 'plans_developer', 'plans_architect') AND name IS NOT NULL"""):
+                              WHERE role IN ('developer', 'plans_developer', 'plans_architect', 'architect') AND name IS NOT NULL"""):
         cand[(k, role)][name.strip()] += 1
     for (k, role), c in cand.items():
         people[k][role] = sorted(c, key=lambda n: (not is_organisation(n), -c[n], n))[0]
@@ -164,7 +164,7 @@ def get_projects(db):
             "fee_count": 0, "permit_type": "Unknown", "construction_data_reliability": "Unknown",
             "is_uc_project": uc, "is_stalled": False,
             "developer": people[k].get("developer") or people[k].get("plans_developer"),
-            "architect": people[k].get("plans_architect"),
+            "architect": people[k].get("plans_architect") or people[k].get("architect"),
             "planning_applicant": mask(v["planning_applicant"], "individual"),
             "field_survey_date": None, "field_survey_notes": None,
             "demolition_permit_date": demo.get(k), "demolition_start_date": None, "construction_substage": None,

@@ -273,6 +273,7 @@ FROM one JOIN projects p USING(project_id) JOIN events e USING(event_id)
 #                                      Property' licence is the rental operator; any other is a business there
 #   property_manager / rental_owner / rental_owner_business   the Rent Board registry (its Manager / Owner fields)
 #   funder                             the funding ledger (public money), with program, instrument and amount
+#   developer / architect / applicant (source attribution_ledger)  corrections/v4/attribution_ledger.csv, cited
 #   developer / tax_credit_owner / general_partner / property_manager   CTCAC's List of Projects, by the project's
 #                                      building addresses or current parcels (a UNION: a row reached both ways is one)
 # John 2026-10-01: "add any other roles we didn't, such as rental operator or manager". Developer and architect come
@@ -351,6 +352,12 @@ FROM pk JOIN (SELECT project_id, record_key FROM project_records
 JOIN documents d ON d.record_key = rk.record_key
 JOIN actor_actions aa ON aa.entity_type = 'document' AND aa.entity_id = d.document_id
 JOIN actors a USING(actor_id) LEFT JOIN sources s ON s.source_id = aa.source_id
+UNION ALL
+SELECT pk.project_key, json_extract(a.value, '$.role'), json_extract(a.value, '$.name'), NULL, 'attribution_ledger',
+       json_extract(a.value, '$.attribution_id'),
+       json_extract(a.value, '$.source_kind') || ' -- ' || COALESCE(json_extract(a.value, '$.source_ref'), '') || ' -- ' ||
+       COALESCE(json_extract(a.value, '$.source_quote'), '')
+FROM pk JOIN projects p USING(project_id), json_each(json_extract(p.notes, '$.attributions')) a
 UNION ALL
 SELECT pk.project_key, 'funder', json_extract(f.value, '$.funder'), NULL, 'funding_ledger', json_extract(f.value, '$.funding_id'),
        json_extract(f.value, '$.program') || ' -- ' || COALESCE(json_extract(f.value, '$.instrument'), '') || ' -- $' ||

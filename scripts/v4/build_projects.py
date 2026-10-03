@@ -86,6 +86,10 @@ MEASURES_EVIDENCE = ROOT / "data/derived/building_measures_evidence_2026-09-30.j
 # UC's own documents, each with a verbatim quote, overriding the model's read of the application text (2128 Oxford:
 # the approved hearing set says 456 units / 27 storeys / 285'-4", the 2022 application said 485 / 26).
 MEASURE_RULINGS = ROOT / "corrections/v4/measure_rulings.csv"
+# ATTRIBUTIONS (John, 2026-10-03): who developed / designed / applied for a project, from a cited source (tabulation
+# form, title block, SFYIMBY article, the developer's own site, a tour caption) -- v2's sourced credits plus re-sourced
+# Panoramic credits and the historic buildings' architects. Names as the source writes them.
+ATTRIBUTIONS = ROOT / "corrections/v4/attribution_ledger.csv"
 OUT = ROOT / "scratch/2026-09-29_phase3"
 ANCHOR_PRIORITY = ("primary_application", "pre_application", "ministerial_clearance", "companion_review")
 DEAD = ("Withdrawn", "Void")
@@ -518,6 +522,12 @@ def write(con, projects) -> dict:
         proposed = {}
         if UNITS_EVIDENCE.exists():
             proposed = {r["project_key"]: r for r in json.load(open(UNITS_EVIDENCE))["readings"] if r.get("units") is not None}
+        attributions = collections.defaultdict(list)
+        if ATTRIBUTIONS.exists():
+            for a_ in csv.DictReader(open(ATTRIBUTIONS)):
+                if a_["status"] == "approved":
+                    attributions[a_["project_key"]].append({k: a_[k] for k in ("attribution_id", "role", "name",
+                                                            "source_kind", "source_ref", "source_quote", "confidence")})
         measure_rulings = collections.defaultdict(list)
         if MEASURE_RULINGS.exists():
             for mr in csv.DictReader(open(MEASURE_RULINGS)):
@@ -607,6 +617,9 @@ def write(con, projects) -> dict:
                     p.setdefault("measures", {})[mr["measure"]] = ev
                     (p.get("measures_excluded") or {}).pop(mr["measure"], None)
                     out["measure_rulings_applied"] += 1
+            if attributions.get(key):
+                p["attributions"] = attributions[key]
+                out["attributed_projects"] += 1
             if p.get("external_id"):
                 p["name"], p["address"], p["name_basis"] = p["external_name"], p["external_address"], "external_source"
             out["named_" + str(p["name_basis"])] += 1
@@ -616,7 +629,7 @@ def write(con, projects) -> dict:
                                            "external_id", "beds", "external_units", "permitting_authority", "status",
                                            "status_date", "source", "verification", "completed_year", "use", "confidence",
                                            "affordability", "classifications", "funding", "proposed_units", "proposed_units_evidence",
-                                           "measures", "measures_excluded")
+                                           "measures", "measures_excluded", "attributions")
                      if p.get(k) not in (None, [], "")}
             notes["units"] = p["units"]
             pid = con.execute("INSERT INTO projects (name, notes) VALUES (?, ?)",

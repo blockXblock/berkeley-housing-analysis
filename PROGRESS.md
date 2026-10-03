@@ -667,8 +667,17 @@ Letters of Compliance G023-G030 + G031 (3120 Shattuck re-anchored) + G032 (1464 
 **Harvest running:** scripts/harvest_attachment_lists.py (`350899c`) on 438 pre-application / ministerial / inquiry
 records -> data/raw/accela_attachments/attachments_2026-10-03.jsonl + approval letters.
 
-**NEXT:** John unlocks -> swap -> baselines (3) -> players page + map republish (7) -> load the attachment harvest +
-a rule reading SB 35 / AB 2011 approval dates from letters -> "time to approval by pathway" view -> archive v2 -> next swap (views with
+**SWAPPED IN 2026-10-03** (John unlocked/relocked): live v4 = dcf247fc (1,553 projects). Regenerated from it: APR
+2021-2026, Datasette + public mirror, Explorer data (`0d071fb`, `bef4545`). Baselines APPENDED for JN-J/K/L/N/MeasureU
+(`df83188`) -- all five gates PASS on a flag-free re-run. Pipeline-state page (anchor PASS vs JN-K, `70f81b0`) and
+players page (306 players, sourced attributions) published (`3ca775d`). Map: canonical geometry KML synced/restyled from
+v4 (204 names, 197 colors; coordinates identical; `32bc37a`), docs/geometry.kml republished; legend now American
+spelling and the homepage panel is generated (it never was) (`4bf81c9`, `3f6d305`, `af82ab5`). Tour packages
+(kml/tours/packages, derived) are NOT regenerated -- with the next video renders.
+**Harvest running:** 128 of 436 attachment lists, 27 letters so far.
+
+**NEXT:** harvest finishes -> load it (attachment_listed) + a rule reading SB 35 / AB 2011 approval dates from the
+letters -> "time to approval by pathway" view -> archive v2 read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

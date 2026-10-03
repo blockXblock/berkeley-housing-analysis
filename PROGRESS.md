@@ -646,7 +646,17 @@ Do not run tours/build_tours_manifest.py --write (it would damage the live video
 the presentation mask is gone from the Explorer, Datasette + public mirror, APR, JN-N/JN-L. Players page: every
 professional named; owner nodes organisation-only (layout). Disk: test copies deleted, 16 GB free.
 
-**NEXT:** John's decisions (2-11 above) -> rebuild (address canon fix) -> archive v2 read-only -> next swap (views with
+**Decisions 2-11 APPROVED as recommended (John, 2026-10-03).** Done: (4) construction split by inspections
+(`b918b05`: Under Construction 116 / Construction Quiet 62 / Permitted, Not Started 34 / Permitted but Inactive 41);
+(6) measure rulings (`02ad721`, 14 rows: 2128 Oxford 456 u / 27 st / 285 ft; 2700 Shattuck 8 st CONFIRMED; UC
+heights); (8) Ashby BART placemarks -> PLN2026-0185 (`fa74d92`); (9) R2 names <project_key>_<slug>_<date>.pdf (in
+upload_pdfs_to_r2.py since `b5d352c`); (10) organisation test widened (`936bc1a`, 65 names, 39 parcels recolor);
+(11) JN-L benchmark = median (`4eb6c4c`). (3) baselines are written AFTER the rebuild (the figures move with it).
+In progress (agents, read-only drafts): (5) the duplicate/status cases incl. 1750 Sacramento (BART property -- John)
+and Ashby BART (recent Planning Commission -- John); (2) the sourced attribution ledger.
+Data note: documents 303/304 (2700 Shattuck plans) carry no record_key in v4 -- fix in the documents manifest.
+
+**NEXT:** wire (2) and (5) rulings -> rebuild + swap -> baselines (3) -> republish players page, map (7) -> archive v2 -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

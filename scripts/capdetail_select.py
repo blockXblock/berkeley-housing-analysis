@@ -56,7 +56,9 @@ ANCHOR_TOLERANCE_DAYS = 60
 # record is still the honest answer -- so this PREFERS live applications, it does not discard dead ones.
 DEAD_STATUS = re.compile(r"^(withdrawn|expired|void|cancel)", re.I)
 
-CITE = re.compile(r"\b(ZP|UP|PLN|DRC[PF]?)\s*#?\s*(\d{4})-(\d{3,4})\b", re.I)
+# the separator also admits the City's non-ASCII hyphens and the '?' they are stored as (ZP2026-0077 cites
+# "ZP2024?0075" -- the only such citation in the records, and the one that split 1899 Oxford; John 2026-10-03)
+CITE = re.compile(r"\b(ZP|UP|PLN|DRC[PF]?)\s*#?\s*(\d{4})[-?\u2010-\u2015](\d{3,4})\b", re.I)
 MODWORD = re.compile(r"\b(modif|mod of|amend|extension of|extend|supersed)", re.I)
 
 

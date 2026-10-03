@@ -251,6 +251,7 @@ def main() -> int:
     # if the rules had it as a companion). group_structures: the named buildings share one project. Every name must
     # resolve -- a missing record or permit HALTS, so a ruling never goes stale quietly.
     groups_of, applied = {}, collections.Counter()
+    entitled_by_doc = {}       # record -> (date, by, ruling): a ministerial approval the record's own tasks never show
     for r in csv.DictReader(open(PROJECT_RULINGS)):
         if r["status"] != "approved":
             continue
@@ -286,6 +287,14 @@ def main() -> int:
                         members[:] = [x for x in members if x["record"] != c]
                     anchors[rec].append(cr)
                 applied["companion_absorbed"] += 1
+        elif r["action"] == "entitled_by_document":
+            # MINISTERIAL APPROVALS (John, 2026-10-03; G022 = North Berkeley BART, AB 2011, 2024-12-11): SB 35 / AB 2011
+            # approvals are filed as pre-application-type records with no decision workflow, so milestones() cannot see
+            # them. The ruling states the date and the deciding body, quoted from a City document.
+            rec = r["record"].strip()
+            assert rec in recs or rec in held_by_type, f"project ruling {r['ruling_id']}: record {rec} is not loaded"
+            assert r.get("entitled"), f"project ruling {r['ruling_id']}: entitled_by_document needs an entitled date"
+            entitled_by_doc[rec] = (r["entitled"].strip(), (r.get("entitled_by") or "").strip() or None, r["ruling_id"])
         elif r["action"] == "group_structures":
             homes = {home[s] for s in sids if home[s]}
             assert len(homes) <= 1, f"project ruling {r['ruling_id']}: buildings already in different projects {homes}"
@@ -310,9 +319,13 @@ def main() -> int:
             continue
         projects.append(dict(anchor=a, anchor_role=m["role"], records=sorted(r["record"] for r in members),
                              structures=sorted(sids), units=sum(units.get(x) or 0 for x in sids),
-                             filed=m["filed"], accepted=m["accepted"], entitled=m["entitled"],
-                             entitled_by=m["entitled_by"], denied=m["denied"], ended=m["ended_status"],
-                             record_status=recs[a].get("record_status"), milestone_flags=m["flags"],
+                             filed=m["filed"], accepted=m["accepted"],
+                             entitled=m["entitled"] or (entitled_by_doc.get(a) or (None,))[0],
+                             entitled_by=m["entitled_by"] or (entitled_by_doc.get(a) or (None, None))[1],
+                             denied=m["denied"], ended=m["ended_status"],
+                             record_status=recs[a].get("record_status"),
+                             milestone_flags=m["flags"] + ([f"entitled_by_document:{entitled_by_doc[a][2]}"]
+                                                           if a in entitled_by_doc and not m["entitled"] else []),
                              parcels=sorted(x[1] for x in recs[a]["_sites"] if x[0] == "parcel" and isinstance(x[1], int))))
     grouped = collections.defaultdict(list)
     for sid, a in home.items():

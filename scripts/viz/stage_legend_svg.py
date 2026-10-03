@@ -181,7 +181,7 @@ def wide(gloss, stage, agency, total_label):
            f'opacity=".85"/></g>' if len(xs) > 1 else "")
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H:.0f}" '
             f'width="{W}" height="{H:.0f}" role="img" aria-labelledby="t d">'
-            f'<title id="t">What the colours on the flyovers mean</title>'
+            f'<title id="t">What the colors on the flyovers mean</title>'
             f'<desc id="d">{esc(total_label)}</desc>'
             f'<style>{css}</style>'
             f'<rect width="{W}" height="{H:.0f}" fill="#ffffff"/>'
@@ -233,7 +233,7 @@ def narrow(gloss, stage, agency, total_label):
     css = CSS.format(travel="rideY", kx="from{}", ky=_keyframes(stops, "Y"))
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H:.0f}" '
             f'width="{W}" height="{H:.0f}" role="img" aria-labelledby="t d">'
-            f'<title id="t">What the colours on the flyovers mean</title>'
+            f'<title id="t">What the colors on the flyovers mean</title>'
             f'<desc id="d">{esc(total_label)}</desc>'
             f'<style>{css}</style>'
             f'<rect width="{W}" height="{H:.0f}" fill="#ffffff"/>'

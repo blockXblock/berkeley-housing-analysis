@@ -22,12 +22,12 @@ from scripts.viz import stage_legend_svg
 GEOM = "kml/geometry/geometry.kml"
 PAGE = "docs/index.html"
 SVG_DIR = "docs/svg"
-MARK = "Colour shows where each project stands"
+MARK = "Color shows where each project stands"   # the page's own spelling (American; the Colour marker never matched)
 
 
 # display colour (readable on white) and the phrase, in pipeline order
 GLOSS = [
-    ("Pre-Application",    "#7a7a7a", "yellow" and "grey",  "at pre-application"),
+    ("Pre-Application",    "#7a7a7a", "yellow" and "gray",  "at pre-application"),
     ("In Review",          "#b8860b", "yellow",             "under review"),
     ("Entitled",           "#ff8000", "orange",             "entitled (approved, no building permit yet)"),
     ("Permitted",          "#00b8cc", "cyan",               "permitted, not yet started"),
@@ -73,8 +73,8 @@ def sentence(stage, agency):
     """Stage clause from the fills; a second clause for the outlines, only if any exist."""
     stages = [f'<span style="color:{h}">{w}</span> {p}'
               for st, h, w, p in GLOSS if not st.endswith("Project") and stage.get(st)]
-    s = (f" <b>Colour shows where each project stands:</b> {' &middot; '.join(stages)}."
-         " Warm colours are paper stages, cool colours are physical ones.")
+    s = (f" <b>Color shows where each project stands:</b> {' &middot; '.join(stages)}."
+         " Warm colors are paper stages, cool colors are physical ones.")
     ag = [f'<span style="color:{h}">{w}</span> for {p}'
           for st, h, w, p in GLOSS if st.endswith("Project") and agency.get(st)]
     if ag:

@@ -689,7 +689,13 @@ dwellings, never built) holds the SB 35 project PLN2020-0049 (54 units, 100% aff
 building B2022-05881 (issued 2025-12-18). Proposed ruling: anchor PLN2020-0049 with B2022-05881; ZP2017-0014 stands as
 its own (unbuilt) project.
 
-**NEXT:** John on 1740 San Pablo -> rebuild + swap (letters) -> "time to approval by pathway" view -> archive v2 -> next swap (views with
+**1740 San Pablo RULED (G033, John 2026-10-04, `a899a5b`); chain rebuilt in scratch 2026-10-04**
+(`scratch/2026-10-04_rebuild/chain2/berkeley_housing_v4.db`, SHA 05da2b77..., integrity ok): JN-F GATE PASS +
+STRUCTURAL GATE PASS (the harvest passes as a declared new source, `234f162`). 1,554 projects; the diff vs live is
+exactly the ruling: + PLN2020-0049 (54u, under construction, entitled 2021-03-05 by SB 35 letter, BP 2025-12-18);
+ZP2017-0014 keeps its 2018 entitlement, 0 units. No other project changed. NOT yet swapped.
+
+**NEXT:** John unlocks -> snapshot + swap -> regenerate publishers -> "time to approval by pathway" view -> archive v2 -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

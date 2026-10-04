@@ -186,8 +186,24 @@ if _LIVE.exists() and DB_PATH.resolve() != _LIVE.resolve():
         "fees_recorded": "Fees tab of the building-permit and Planning pages (load_building_fees, load_planning_fees; John 2026-10-01)",
         "attachment_listed": "Accela capture attachment lists, manifest accela_status_captures_2026-10-01 (load_attachment_lists)",
     }
+    # A NEW SOURCE for a type live already holds (2026-10-04): declared by its sources.locator. The type passes only if
+    # rebuild - live is EXACTLY the events from that source and live holds none of them -- provenance, not a count.
+    ADDITIONS_DECLARED = {
+        "attachment_listed": ["data/raw/accela_attachments/attachments_2026-10-03.jsonl"],   # harvest (John 2026-10-03)
+    }
     by_r = dict(con.execute("SELECT event_type_code, COUNT(*) FROM events GROUP BY 1"))
     by_l = dict(live.execute("SELECT event_type_code, COUNT(*) FROM events GROUP BY 1"))
+    def _from(db, t, locs):
+        q = ("SELECT COUNT(*) FROM events e JOIN sources s ON s.source_id = e.source_id WHERE e.event_type_code = ? "
+             f"AND s.locator IN ({','.join('?' * len(locs))})")
+        return db.execute(q, (t, *locs)).fetchone()[0]
+    for t, locs in ADDITIONS_DECLARED.items():
+        if t in by_l and by_r.get(t, 0) != by_l[t]:
+            added, in_live = _from(con, t, locs), _from(live, t, locs)
+            print(f"   declared addition {t}: rebuild {by_r[t]:,} = live {by_l[t]:,} + {added:,} from {locs} "
+                  f"(live holds {in_live} of them)")
+            if in_live == 0 and by_r[t] - by_l[t] == added:
+                by_l[t] = by_r[t]
     type_bad = [f"{t}: rebuild {by_r.get(t, 0):,} live {n:,}" for t, n in by_l.items() if by_r.get(t, 0) != n] + \
                [f"{t}: NEW and undeclared ({by_r[t]:,})" for t in by_r if t not in by_l and t not in NEW_TYPES_DECLARED]
     for t in by_r:

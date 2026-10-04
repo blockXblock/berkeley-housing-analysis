@@ -1157,6 +1157,55 @@ def load_drawn_outlines(con, path=DRAWN_GEOMETRY_KML):
     return dict(outlines=out, skipped=skipped)
 
 
+ATTACHMENT_HARVESTS = (os.path.join(ROOT, 'data', 'raw', 'accela_attachments', 'attachments_2026-10-03.jsonl'),)
+
+
+def load_attachment_harvests(con, paths=ATTACHMENT_HARVESTS):
+    """The attachment lists HARVESTED from Accela (scripts/harvest_attachment_lists.py; John 2026-10-03), alongside the
+    hand captures load_attachment_lists reads. One 'attachment_listed' event per listed file, dated at the City's upload
+    date (the mm/dd/yyyy after the size in the grid row); raw_payload = file name, size, upload date and, for an approval
+    letter that was downloaded, its local path + SHA-256 (the PDFs stay local, uncommitted). A record the hand captures
+    already listed is skipped, so a file is never listed twice."""
+    import datetime as dt, re as _re
+    now = dt.datetime.now(dt.timezone.utc).isoformat()
+    have = {k for (k,) in con.execute("SELECT DISTINCT source_record_key FROM events WHERE event_type_code='attachment_listed'")}
+    out = {}
+    for path in paths:
+        loc = os.path.relpath(path, ROOT)
+        assert not con.execute("SELECT 1 FROM sources WHERE locator=?", (loc,)).fetchone(), f'already loaded: {loc}'
+        recs = [json.loads(l) for l in open(path)]
+        try:
+            sid = con.execute("INSERT INTO sources (source_kind,locator,retrieved_at,checksum,notes) VALUES "
+                              "('accela_attachment_harvest',?,?,?,?)", (loc, recs[0]['fetched_at'][:10] if recs else None,
+                              _sha256(path), "harvest_attachment_lists.py: each record's Accela attachment list")).lastrowid
+            n_rows = sum(len(r['rows']) for r in recs)
+            rid = con.execute("INSERT INTO ingestion_runs (source_id,started_at,rows_in_source,rows_ingested,rows_rejected,"
+                              "conserved) VALUES (?,?,?,0,0,1)", (sid, now, n_rows)).lastrowid
+            ok, skipped = 0, 0
+            for r in recs:
+                if r['record'] in have:
+                    skipped += len(r['rows']); continue
+                for x in r['rows']:
+                    m = _re.search(r"(\d+(?:\.\d+)?\s*(?:bytes|KB|MB|GB))\s+(\d\d/\d\d/\d{4})", x.get('rowtext') or '')
+                    up = dt.datetime.strptime(m.group(2), '%m/%d/%Y').date().isoformat() if m else None
+                    pl = {"file": x.get('filename'), "size": m.group(1) if m else None, "uploaded": up,
+                          "saved": x.get('saved'), "sha256": x.get('sha256'), "harvest": loc}
+                    con.execute("INSERT INTO events (event_type_code,event_date,event_date_precision,source_record_key,"
+                                "source_id,ingestion_run_id,raw_payload,raw_description,created_at) "
+                                "VALUES ('attachment_listed',?,?,?,?,?,?,?,?)",
+                                (up, 'day' if up else 'unknown', r['record'], sid, rid, json.dumps(pl),
+                                 (x.get('filename') or '')[:300], now))
+                    ok += 1
+            con.execute("UPDATE ingestion_runs SET rows_ingested=?, rows_rejected=?, rejected_detail=?, conserved=? WHERE run_id=?",
+                        (ok, skipped, f"{skipped} files on records the hand captures already list", int(ok + skipped == n_rows), rid))
+            con.commit()
+        except Exception:
+            con.rollback()
+            raise
+        out[os.path.basename(path)] = dict(records=len(recs), files=n_rows, loaded=ok, skipped=skipped)
+    return out
+
+
 PLANNING_FEES = os.path.join(ROOT, 'data', 'raw', 'accela_capdetail', 'planning_fees_2026-10-01.jsonl')
 
 

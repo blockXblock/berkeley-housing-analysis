@@ -53,6 +53,19 @@ def test_normalize_address():
     assert owner_type('ANN SLOBOD ET AL C/O STUDIO KDA') == INDIVIDUAL            # classify the owner, not the c/o
     assert not is_organisation('KEEGAN MEAGHAN')
     print("owner_name: firm words, housing institutions, trusts first, c/o -- PASS")
+    from scripts.housing_rules.approval_letter import approval_from_filename as af
+    assert af('2023-01-20_SB35_Compliance_1708 Harmon REDUCED.pdf') == ('2023-01-20', 'SB 35', 'approval')
+    assert af('2026-06-02_SB35_Compliance Ltr_2330 Durant.pdf') == ('2026-06-02', 'SB 35', 'approval')
+    assert af('2021-03-05_SB35 Compliance_1740 San Pablo.pdf') == ('2021-03-05', 'SB 35', 'approval')
+    assert af('2019-12-20_Approval Packet_2001 Ashby.pdf') == ('2019-12-20', None, 'approval')
+    assert af('2025-10-17_AB2011_Modification Compliance Ltr_1750 Sacramento_with attachments.pdf') == ('2025-10-17', 'AB 2011', 'modification')
+    for no in ('2025-11-26_SB 35 Non-Compliant Letter_2330 Durant.pdf', '2026-02-02_SB35 Labor Compliance Acknowledgement_2330 Durant.pdf',
+               '2025-08-20_AB2011 App_Complete Ltr_1750 Sacramento.pdf', '2025-08-08_AB 2011 Application_PLN2025-0054_1750 Sacramento St.pdf',
+               '1. NB BART_  AB2011 Comment Response R2 City.pdf', '2015-07-15_ZR_Request_1155 and 1173 Hearst.pdf',
+               '2022-03-01_SB35 Obj Std Compliance Table_2024 Ashby.pdf',
+               '2020-07-15_APP_1C_SB35 Eligibility Criteria Compliance_2527 San Pablo.pdf'):
+        assert af(no) is None, no
+    print("approval_letter: SB 35 / AB 2011 approvals, modifications, refusals and non-approvals -- PASS")
 
 
 def main() -> int:

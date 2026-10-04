@@ -310,6 +310,19 @@ def main() -> int:
                     groups_of[sid] = r["ruling_id"]
         applied[r["action"]] += 1
 
+    # ---- MINISTERIAL APPROVAL LETTERS (John, 2026-10-03): a Letter of Compliance attached to any of a project's
+    # Planning records, recognized by the City's own file-naming convention (housing_rules.approval_letter). Used only
+    # where the record's own tasks show no entitlement and no ruling states one; where a ruling also exists the two must
+    # agree, and any disagreement is printed (the ruling stands).
+    from housing_rules.approval_letter import approval_from_filename
+    letters = collections.defaultdict(list)
+    for rec_, f_ in db.execute("SELECT source_record_key, json_extract(raw_payload, '$.file') FROM events "
+                               "WHERE event_type_code = 'attachment_listed'"):
+        got = approval_from_filename(f_ or "")
+        if got and got[2] == "approval":
+            letters[rec_].append((got[0], got[1], f_))
+    letter_mismatch = []
+
     # ---- assemble projects
     projects = []
     by_anchor = collections.defaultdict(list)
@@ -323,16 +336,24 @@ def main() -> int:
         if not sids and (m["filed"] or "9999") < PRE_2015:      # P1b
             evidence_only += 1
             continue
+        ltr = min((x for r_ in members for x in letters.get(r_["record"], [])), default=None)
+        if ltr and a in entitled_by_doc and entitled_by_doc[a][0] != ltr[0]:
+            letter_mismatch.append((a, entitled_by_doc[a][0], ltr[0], ltr[2]))
+        use_letter = ltr if (ltr and not m["entitled"] and a not in entitled_by_doc) else None
         projects.append(dict(anchor=a, anchor_role=m["role"], records=sorted(r["record"] for r in members),
                              structures=sorted(sids), units=sum(units.get(x) or 0 for x in sids),
                              filed=m["filed"], accepted=m["accepted"],
-                             entitled=m["entitled"] or (entitled_by_doc.get(a) or (None,))[0],
-                             entitled_by=m["entitled_by"] or (entitled_by_doc.get(a) or (None, None))[1],
+                             entitled=m["entitled"] or (entitled_by_doc.get(a) or (None,))[0] or (use_letter or (None,))[0],
+                             entitled_by=m["entitled_by"] or (entitled_by_doc.get(a) or (None, None))[1]
+                             or (f"staff (ministerial, {use_letter[1] or 'approval'} letter)" if use_letter else None),
                              denied=m["denied"], ended=m["ended_status"],
                              record_status=recs[a].get("record_status"),
                              milestone_flags=m["flags"] + ([f"entitled_by_document:{entitled_by_doc[a][2]}"]
-                                                           if a in entitled_by_doc and not m["entitled"] else []),
+                                                           if a in entitled_by_doc and not m["entitled"] else [])
+                                             + ([f"entitled_by_letter:{use_letter[2]}"] if use_letter else []),
                              parcels=sorted(x[1] for x in recs[a]["_sites"] if x[0] == "parcel" and isinstance(x[1], int))))
+    print(f"approval letters: {sum(len(v) for v in letters.values())} on {len(letters)} records; ruling/letter "
+          f"disagreements: {len(letter_mismatch)} {letter_mismatch[:5]}")
     grouped = collections.defaultdict(list)
     for sid, a in home.items():
         if a is None:

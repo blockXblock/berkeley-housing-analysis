@@ -679,8 +679,17 @@ spelling and the homepage panel is generated (it never was) (`4bf81c9`, `3f6d305
 2024-12-11 (AB 2011).
 **Harvest running:** 128 of 436 attachment lists, 27 letters so far.
 
-**NEXT:** harvest finishes -> load it (attachment_listed) + a rule reading SB 35 / AB 2011 approval dates from the
-letters -> "time to approval by pathway" view -> archive v2 read-only -> next swap (views with
+**Attachment harvest DONE + loaded (2026-10-04, `6ec6b18`):** 436 records, 0 failed, 1,439 files, 118 letters (local,
+untracked). housing_rules.approval_letter + build_projects: entitlement from the earliest Letter of Compliance where
+no task or ruling states one -- tested in scratch: the 8 SB 35 approvals found with EXACTLY the rulings' dates (0
+disagreements). New: 1740 San Pablo SB 35 approval 2021-03-05 (PLN2020-0049); 1750 Sacramento AB 2011 modification
+2025-10-17; 2147 San Pablo AB 2011 application (incomplete, 2026-03). NOT yet swapped into live.
+**For John:** 1740 San Pablo conflates two developments -- project ZP2017-0014 (2017 use permit, 5 stories / 48
+dwellings, never built) holds the SB 35 project PLN2020-0049 (54 units, 100% affordable, approved 2021-03-05) and its
+building B2022-05881 (issued 2025-12-18). Proposed ruling: anchor PLN2020-0049 with B2022-05881; ZP2017-0014 stands as
+its own (unbuilt) project.
+
+**NEXT:** John on 1740 San Pablo -> rebuild + swap (letters) -> "time to approval by pathway" view -> archive v2 -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

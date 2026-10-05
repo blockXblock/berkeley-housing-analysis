@@ -392,9 +392,40 @@ FROM geometries g JOIN pa ON pa.address_id = g.entity_id JOIN projects p USING(p
 WHERE g.entity_type = 'drawn_outline'
 """
 
+# TIME TO APPROVAL, BY PATHWAY (John, 2026-10-05): one row per approved project (UC excluded -- the City does not
+# approve it), with the two clocks a developer faces: filing to approval, and approval to the first building permit
+# (the first-BP rule, as v_projects). ROUTE is "ministerial" only where the approval is a ministerial one (SB 35 / AB
+# 2011 Letter of Compliance or a ruling quoting it); every other approval is "discretionary". BODY_RECORDED is what the
+# City's own workflow names ("staff" = a "Staff Decision" task, which on many large projects is dated on a Zoning
+# Adjustments Board Thursday -- the body is AS RECORDED, never inferred). PUBLIC_SUBSIDY = the project has a row on
+# the funding ledger (sourced public money). FLAG: a first permit before the approval date means the approval on
+# record is a later modification; that project's second clock is left empty, never negative.
+V_PROJECT_APPROVAL_TIMES = r"""
+CREATE VIEW v_project_approval_times AS
+WITH a AS (
+  SELECT project_key, name, status, COALESCE(NULLIF(units_built_or_permitted, 0), proposed_units) AS units,
+         CASE WHEN entitled_by LIKE 'staff (ministerial%' THEN 'ministerial' ELSE 'discretionary' END AS route,
+         CASE WHEN entitled_by LIKE '%AB 2011%' THEN 'AB 2011' WHEN entitled_by LIKE '%SB 35%' THEN 'SB 35' END AS law,
+         entitled_by AS body_recorded,
+         CASE WHEN funding IS NOT NULL AND json_array_length(funding) > 0 THEN 1 ELSE 0 END AS public_subsidy,
+         filed_date, accepted_date, entitled_date, bp_issued_date AS first_bp_date
+  FROM v_projects WHERE entitled_date IS NOT NULL AND filed_date IS NOT NULL AND COALESCE(rhna_excluded, 0) = 0)
+SELECT a.*,
+  CASE WHEN units IS NULL OR units = 0 THEN 'units unknown' WHEN units < 5 THEN '1-4' WHEN units < 50 THEN '5-49'
+       ELSE '50+' END AS size_band,
+  CAST(julianday(entitled_date) - julianday(filed_date) AS INTEGER) AS days_filed_to_approved,
+  CASE WHEN first_bp_date >= entitled_date
+       THEN CAST(julianday(first_bp_date) - julianday(entitled_date) AS INTEGER) END AS days_approved_to_first_bp,
+  CASE WHEN first_bp_date >= entitled_date
+       THEN CAST(julianday(first_bp_date) - julianday(filed_date) AS INTEGER) END AS days_filed_to_first_bp,
+  CASE WHEN first_bp_date < entitled_date THEN 'first permit before the approval on record (a later modification)'
+       WHEN entitled_date < filed_date THEN 'approved before filed' END AS flag
+FROM a
+"""
+
 VIEWS = {"v_project_drawn_outlines": V_PROJECT_DRAWN, "v_project_attachments": V_PROJECT_ATTACHMENTS, "v_projects": V_PROJECTS, "v_project_timeline": V_PROJECT_RECORDS, "v_adu_rent_board": V_ADU_RENT_BOARD,
          "v_project_records_listed": V_PROJECT_LISTED, "v_project_businesses": V_PROJECT_BUSINESSES,
-         "v_project_people": V_PROJECT_PEOPLE}
+         "v_project_people": V_PROJECT_PEOPLE, "v_project_approval_times": V_PROJECT_APPROVAL_TIMES}
 
 
 def main() -> int:

@@ -714,7 +714,7 @@ SB 35 letter, pathways density bonus + SB 35; ZP2017-0014 its own entitled, unbu
 on regeneration and fixed before publishing: pathway quotes followed the reading's project key, not their source
 record (`6b0cbcf`). JN-F gate accepts a declared new source for an existing type (`234f162`). Regenerated: APR
 2021-2026 + Datasette build (`9093bfc`; RHNA credit identical every year), Explorer data, home numbers (1,550
-non-UC), pipeline-state (JN-K anchors 27/8/33 PASS), players, public mirror (`d080681`). **John to re-lock v4.**
+non-UC), pipeline-state (JN-K anchors 27/8/33 PASS), players, public mirror (`d080681`). v4 re-locked by John 2026-10-05.
 Datasette NOT redeployed (flyctl deploy); site needs a push.
 
 **NEXT:** "time to approval by pathway" view -> archive v2 read-only -> next swap (views with

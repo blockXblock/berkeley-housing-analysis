@@ -707,13 +707,17 @@ dwellings, never built) holds the SB 35 project PLN2020-0049 (54 units, 100% aff
 building B2022-05881 (issued 2025-12-18). Proposed ruling: anchor PLN2020-0049 with B2022-05881; ZP2017-0014 stands as
 its own (unbuilt) project.
 
-**1740 San Pablo RULED (G033, John 2026-10-04, `a899a5b`); chain rebuilt in scratch 2026-10-04**
-(`scratch/2026-10-04_rebuild/chain2/berkeley_housing_v4.db`, SHA 05da2b77..., integrity ok): JN-F GATE PASS +
-STRUCTURAL GATE PASS (the harvest passes as a declared new source, `234f162`). 1,554 projects; the diff vs live is
-exactly the ruling: + PLN2020-0049 (54u, under construction, entitled 2021-03-05 by SB 35 letter, BP 2025-12-18);
-ZP2017-0014 keeps its 2018 entitlement, 0 units. No other project changed. NOT yet swapped.
+**SWAPPED IN 2026-10-05** (John unlocked): live v4 = 0e137978 (1,554 projects; snapshots
+`keep_snapshot_2026-10-05_pre-v4-1740-letters.db`, `..._pre-v4-pathways-by-source.db`). In it: the attachment harvest +
+letter rule (`6ec6b18`), G033 1740 San Pablo (`a899a5b`): PLN2020-0049 54u under construction, entitled 2021-03-05 by
+SB 35 letter, pathways density bonus + SB 35; ZP2017-0014 its own entitled, unbuilt project (now in "stalled"). Found
+on regeneration and fixed before publishing: pathway quotes followed the reading's project key, not their source
+record (`6b0cbcf`). JN-F gate accepts a declared new source for an existing type (`234f162`). Regenerated: APR
+2021-2026 + Datasette build (`9093bfc`; RHNA credit identical every year), Explorer data, home numbers (1,550
+non-UC), pipeline-state (JN-K anchors 27/8/33 PASS), players, public mirror (`d080681`). **John to re-lock v4.**
+Datasette NOT redeployed (flyctl deploy); site needs a push.
 
-**NEXT:** John unlocks -> snapshot + swap -> regenerate publishers -> "time to approval by pathway" view -> archive v2 -> next swap (views with
+**NEXT:** "time to approval by pathway" view -> archive v2 read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

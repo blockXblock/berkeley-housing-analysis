@@ -717,7 +717,16 @@ record (`6b0cbcf`). JN-F gate accepts a declared new source for an existing type
 non-UC), pipeline-state (JN-K anchors 27/8/33 PASS), players, public mirror (`d080681`). v4 re-locked by John 2026-10-05.
 Datasette NOT redeployed (flyctl deploy); site needs a push.
 
-**NEXT:** "time to approval by pathway" view -> archive v2 read-only -> next swap (views with
+**Approval-time view BUILT (2026-10-05, `12558e8`):** `v_project_approval_times` in build_views (reaches live at the
+next rebuild + swap; tested on the scratch build = live). 389 approved projects. Medians, 50+ units with public subsidy:
+ministerial 106 d filed->approved (n=7), 777 d approved->1st BP (n=5); discretionary 265 d (n=4), 1,222 d (n=4). All
+5+ units: discretionary 422 d / 579 d. Finding: ministerial approval is ~2-4x faster; the long wait is AFTER approval
+(funding). OPEN: the deciding body -- "Staff Decision" on 78% of 5+ unit approvals is dated on a Thursday (ZAB day);
+the City's workflow names no hearing; ZAB agendas/minutes would settle it (body shown AS RECORDED meanwhile).
+1464 Sixth carries 3 units in v4, its SB 35 letter says 6 (G032). Timeline drawings (scripts/drawings/project_svg.py)
+already read live v4: redrawn in scratch/2026-10-05_svg (1951 Shattuck now shows its Sep 2022 first permit).
+
+**NEXT:** John: site/JN-K presentation of the approval times; ZAB agendas harvest? -> archive v2 read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

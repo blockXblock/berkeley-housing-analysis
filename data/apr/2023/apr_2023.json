@@ -1,6 +1,6 @@
 {
   "year": 2023,
-  "generated": "2026-10-03T13:16:08.721852",
+  "generated": "2026-10-05T12:50:16.125004",
   "schema_version": "v4 (phase 6 pure re-point)",
   "table_a": {
     "title": "Table A: Applications Deemed Complete in 2023",
@@ -9427,6 +9427,17 @@
         "accela_status_date": null
       },
       {
+        "id": "ZP2017-0014",
+        "address": "1740 SAN PABLO Ave",
+        "net_units": null,
+        "status": "entitled",
+        "developer": "PRATO DEVELOPMENT LLC",
+        "app_complete_date": null,
+        "entitled_date": "2018-03-01",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
         "id": "ZP2024-0162",
         "address": "2425 DURANT Ave",
         "net_units": null,
@@ -9835,7 +9846,7 @@
       }
     ],
     "summary": {
-      "total_stalled": 176,
+      "total_stalled": 177,
       "total_units_at_risk": 6560
     }
   }

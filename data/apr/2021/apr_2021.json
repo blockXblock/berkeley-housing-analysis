@@ -1,6 +1,6 @@
 {
   "year": 2021,
-  "generated": "2026-10-03T13:13:43.161703",
+  "generated": "2026-10-05T12:48:02.059855",
   "schema_version": "v4 (phase 6 pure re-point)",
   "table_a": {
     "title": "Table A: Applications Deemed Complete in 2021",
@@ -5816,6 +5816,28 @@
         "milestone_achieved": "Entitled"
       },
       {
+        "id": "PLN2020-0049",
+        "address": "1740 SAN PABLO Ave",
+        "apn": null,
+        "permits": null,
+        "net_units": 54,
+        "vli_units": null,
+        "status": "under_construction",
+        "app_filed_date": "2020-11-19",
+        "app_complete_date": null,
+        "entitled_date": "2021-03-05",
+        "bp_issued_date": "2025-12-18",
+        "co_date": null,
+        "density_bonus": null,
+        "sb35_flag": null,
+        "sb330_flag": null,
+        "ab2011_flag": null,
+        "developer": "PRATO DEVELOPMENT LLC",
+        "architect": null,
+        "construction_status": null,
+        "milestone_achieved": "Entitled"
+      },
+      {
         "id": "ZP2018-0229",
         "address": "0 SAN PABLO Ave",
         "apn": null,
@@ -6301,10 +6323,10 @@
       }
     ],
     "summary": {
-      "total_projects": 260,
-      "total_units": 1431,
+      "total_projects": 261,
+      "total_units": 1485,
       "vli_units": 0,
-      "entitled_in_year": 25,
+      "entitled_in_year": 26,
       "bp_issued_in_year": 115,
       "co_issued_in_year": 120
     }
@@ -7942,6 +7964,17 @@
         "accela_status_date": null
       },
       {
+        "id": "ZP2017-0014",
+        "address": "1740 SAN PABLO Ave",
+        "net_units": null,
+        "status": "entitled",
+        "developer": "PRATO DEVELOPMENT LLC",
+        "app_complete_date": null,
+        "entitled_date": "2018-03-01",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
         "id": "ZP2024-0162",
         "address": "2425 DURANT Ave",
         "net_units": null,
@@ -8350,7 +8383,7 @@
       }
     ],
     "summary": {
-      "total_stalled": 176,
+      "total_stalled": 177,
       "total_units_at_risk": 6560
     }
   }

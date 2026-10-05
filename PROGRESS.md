@@ -5,6 +5,24 @@
 
 ---
 
+## 2026-10-03 — Flyovers with a map and Street View LIVE (berkeleybuild.com/tours/); Shattuck drawings LIVE
+
+**/tours/** (`scripts/tours/build_tour_map_gallery.py` → `docs/tours/index.html`): all nine YouTube tours on one map
+(routes draw themselves; hero loop; posters chosen from the T7 masters → `docs/img/tourposters/`). The home page's
+"corridor by corridor" button opens it. **Tour pages** (`docs/tours/streetview.html?tour=<id>`): the YouTube flyover
+(Planned) beside embedded Google Street View (Today), with a MapLibre map (OpenFreeMap Liberty, no key) inset in the video
+corner, turned so the direction of travel points up. Timelines: `scripts/tours/tour_timeline.py` → `docs/tours/streetview/`
+— it REFUSES a tour whose schedule does not match its recording (Movie Maker renders match within 0.5 s). Street View key:
+Google Cloud project `berkeleybuild-maps`, Maps Embed API only, restricted to berkeleybuild.com + localhost:8765 (no charge).
+**Shattuck N-S** = `Shattuck-centerline-flight-with-2190-and-2276-orbits.kml` (June video X0IMsbbhjGk, a live SCREEN
+recording, not Movie Maker): published with a 3.5 s offset, marked approximate. tours.json durations corrected
+(telegraph 215.7 s, shattuck-s2n-path 470.5 s); `build_tours_manifest.py` lags the hand-edited catalog — do not rerun blind.
+**Shattuck drawings** (`docs/maps/shattuck-{cross-section,plan}.svg`, `scripts/infrastructure/draw_shattuck_*.py`).
+**Open:** (1) re-record Shattuck N-S with Movie Maker for exact sync (headroom check first); (2) the "storeys" reminder
+below still stands at the next tour RE-RENDER.
+
+---
+
 ## 2026-10-02 — Berkeley Snapshot LIVE (berkeleybuild.com/berkeley-snapshot-2026-10.html); home page reworked
 
 **Snapshot** (`scripts/snapshot/`: pull_sources.py pins sources by SHA-256; derive.py → `docs/data/snapshot/`; build_report.py

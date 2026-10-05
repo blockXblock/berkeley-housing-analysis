@@ -565,9 +565,14 @@ def write(con, projects) -> dict:
         sp = collections.defaultdict(set)
         for sid, pid in con.execute("SELECT structure_id, parcel_id FROM structure_parcels"):
             sp[sid].add(pid)
-        pathways = {}
+        # pathway quotes are attached by the RECORD each was quoted from (its "source"), not by the project key the
+        # reading was filed under: when a ruling moves a record to another project (G033, 1740 San Pablo), its quotes go
+        # with it. A quote with no source stays with the key it was read under.
+        pathways = collections.defaultdict(list)
         if PATHWAYS_EVIDENCE.exists():
-            pathways = {r["project_key"]: r["pathways"] for r in json.load(open(PATHWAYS_EVIDENCE))["readings"] if r.get("pathways")}
+            for r in json.load(open(PATHWAYS_EVIDENCE))["readings"]:
+                for x in r.get("pathways") or []:
+                    pathways[x.get("source") or r["project_key"]].append(x)
         names = {}
         if NAMES_EVIDENCE.exists():
             names = {r["project_key"]: r["name"] for r in json.load(open(NAMES_EVIDENCE))["readings"] if r.get("name")}
@@ -602,6 +607,7 @@ def write(con, projects) -> dict:
             # pathways are read per ANCHOR record; a project that absorbed another anchor (a ruling's companion) carries
             # both readings, each still with its own quote and source
             ev = [x for k in dict.fromkeys([key] + list(p.get("records") or [])) for x in pathways.get(k, [])]
+            ev = [dict(t) for t in dict.fromkeys(tuple(sorted(x.items())) for x in ev)]   # one quote, once
             if ev:
                 p["pathways"] = sorted({x["pathway"] for x in ev})
                 p["pathway_evidence"] = ev

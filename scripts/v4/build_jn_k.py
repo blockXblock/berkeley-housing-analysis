@@ -387,7 +387,9 @@ else:
                 'provenance': 'JN-K re-pointed to v4 (2026-10-02): §1-§3/§5 v4 events, §4 v4 v_projects majors',
                 'figures': figures}
     if os.environ.get('JN_WRITE_BASELINE') == '1':
-        out_p = os.path.join(BL_DIR, f'completion_anatomy_baseline_{date.today().isoformat()}_v4.json')
+        # a second reviewed change on the same day takes the next letter (_v4b, _v4c ...), which sorts after the first
+        out_p = next(p_ for p_ in (os.path.join(BL_DIR, f'completion_anatomy_baseline_{date.today().isoformat()}_v4{x}.json')
+                                   for x in ['', *'bcdefgh']) if not os.path.exists(p_))
         assert not os.path.exists(out_p), f'{out_p} exists -- baselines are append-only'
         json.dump(proposal, open(out_p, 'w'), indent=1)
         print('APPENDED v4-era baseline:', out_p)

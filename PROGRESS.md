@@ -779,7 +779,14 @@ Scratch chain `scratch/2026-10-07_rebuild/chain4`: both gates PASS, integrity ok
 additions -- proposed units 8 (Morse Block 134, 2425 Durant 169, 1200 San Pablo 57...), density bonus 7, heights 50,
 stories 37; deciding body unchanged (145), 4 citations re-pointed to the right item. NOT swapped.
 
-**NEXT:** John unlocks -> swap chain4 -> regenerate -> curriculum alignment (JN7 canon swap + v4 comparison) read-only -> next swap (views with
+**SWAPPED IN 2026-10-07** (John unlocked): live v4 = 6110324d (snapshot keep_snapshot_2026-10-07_pre-v4-zab-items.db).
+Regenerated: APR + Datasette (`efb57c2`; Table B identical, pipeline +483 units = the 8 newly sized projects), Explorer
+data / home numbers (not yet built 12,973 -> 13,456) / players / public mirror (`782da3f`). NOT regenerated: the
+pipeline-state page (its JN-K anchor: majors waiting 36 vs 33). JN-K gate on live: majors_nonuc 98->101, entitled
+68->71, ac_majors_covered 71->74, median_consideration 253->251, approval_discretionary n 104->110 / median 422->420 --
+all the newly sized projects; awaiting John's call to append. **John to re-lock v4**; Datasette deploy + site push.
+
+**NEXT:** John: JN-K append -> pipeline-state page -> deploy/push -> curriculum alignment (JN7 canon swap + v4 comparison) read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

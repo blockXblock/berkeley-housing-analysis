@@ -200,7 +200,7 @@ def scan_attaches(attach):
       cross-address family match is normally benign EXCEPT this big->small signature.)
     - review (info): benign cross-address family match (near-address / consistent units).
     - s4_queue (info): SAME-address ATTACH where CPRA units > v2 units -> v2 undercount, S4 fixes."""
-    v2 = sqlite3.connect(f'file:{os.path.join(ROOT, "databases", "berkeley_housing_v2.db")}?mode=ro', uri=True)
+    v2 = sqlite3.connect(f'file:{os.path.join(ROOT, "databases", "archive", "berkeley_housing_v2.db")}?mode=ro', uri=True)
     punits = {r[0]: (r[1] or 0) for r in v2.execute("SELECT project_id,total_units FROM v_projects_flat")}
     paddr = {r[0]: r[1] for r in v2.execute("SELECT project_id,address_display FROM v_projects_flat")}
     v2.close()
@@ -365,7 +365,7 @@ if __name__ == "__main__":
     if args.write:
         if FAIL:
             print("\n  WRITE ABORTED — acceptance gate failed."); sys.exit(1)
-        v2_path = os.path.join(ROOT, "databases", "berkeley_housing_v2.db")
+        v2_path = os.path.join(ROOT, "databases", "archive", "berkeley_housing_v2.db")
         import hashlib
         v2_before = hashlib.sha256(open(v2_path, 'rb').read()).hexdigest()
         if args.no_snapshot:

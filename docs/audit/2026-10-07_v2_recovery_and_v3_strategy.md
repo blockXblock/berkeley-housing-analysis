@@ -88,3 +88,11 @@ Explorer links keeps working from the archived copy.
 **Decisions for John:** (a) freeze the v3 database rather than rebuild it; (b) the curriculum compares students'
 rebuild against v4 rather than v2/v3; (c) the three definition questions above (2100 San Pablo residential care,
 1710 University "living spaces", the 26 projects whose proposed units v4 should re-read).
+
+## John's decisions (2026-10-07: "yes on the three calls")
+1. **2100 San Pablo** — v4's reading stands: a Residential Care Facility is not counted as housing units.
+2. **1710 University** — v4's reading stands: "religious education and living spaces" stays outside the housing scope.
+3. **Re-reads** — v4 re-reads proposed units, heights and density bonus for the projects v2 had and v4 lacks, from the
+   ZAB minutes items and the City's own descriptions (a new evidence file; never copied from v2).
+**v2 archived read-only the same day** → `databases/archive/berkeley_housing_v2.db` (SHA-256 9cec330e943e1596…,
+unchanged by the move); `scripts/build_v2/` S0–S8 and the Explorer crosswalk re-pointed (crosswalk identical: 1,057).

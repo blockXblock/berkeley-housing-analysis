@@ -766,7 +766,13 @@ residue = re-derivations (26 projects' proposed units, heights, 9 density-bonus 
 and 3 definition calls (2100 San Pablo residential care, 1710 University "living spaces"). v3: freeze the DB (it is
 v2-assisted: S0-S8 read v2); align the curriculum to v4 (compare students' rebuild with v4; JN7 canon swap).
 
-**NEXT:** John: push main; decide the review's calls -> archive v2 read-only (point build_v2 at the archive) read-only -> next swap (views with
+**Site pushed by John 2026-10-07 (origin/main = ab7bc29).** John "yes on the three calls": 2100 San Pablo and 1710
+University stay as v4 reads them; v4 re-reads proposed units / heights / density bonus from the ZAB minutes.
+**v2 ARCHIVED read-only 2026-10-07** -> databases/archive/berkeley_housing_v2.db (SHA 9cec330e..., unchanged);
+build_v2 S0-S8 + the Explorer crosswalk re-pointed (crosswalk identical, 1,057; S0 --preview runs). CLAUDE.md updated.
+
+**NEXT:** re-read proposed units / heights / density bonus from the ZAB minutes items (new evidence file) -> rebuild +
+swap -> curriculum alignment (JN7 canon swap + v4 comparison) read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

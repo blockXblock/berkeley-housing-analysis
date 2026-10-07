@@ -27,7 +27,7 @@ from scripts.build_v2.gating import snapshot_v3                          # the S
 
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 V3 = os.path.join(ROOT, 'databases', 'berkeley_housing_v3.db')
-V2 = os.path.join(ROOT, 'databases', 'berkeley_housing_v2.db')
+V2 = os.path.join(ROOT, 'databases', 'archive', 'berkeley_housing_v2.db')
 AS_OF = '2026-06-17'
 
 # stage ordering for cross-check direction (v2-higher = over-assertion; v2-lower = v2 under-stated)

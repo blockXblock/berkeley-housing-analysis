@@ -30,7 +30,7 @@ import housing_rules as hr
 
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 V3 = os.path.join(ROOT, 'databases', 'berkeley_housing_v3.db')
-V2 = os.path.join(ROOT, 'databases', 'berkeley_housing_v2.db')  # READ-ONLY cross-check substrate
+V2 = os.path.join(ROOT, 'databases', 'archive', 'berkeley_housing_v2.db')  # READ-ONLY cross-check substrate
 AS_OF = '2026-06-17'
 
 # UC measurement-basis (4 residences, uc_project classification type 6). SOURCED facts from the read-only

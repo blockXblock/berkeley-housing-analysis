@@ -222,7 +222,7 @@ if __name__ == "__main__":
         if FAIL:
             print("\n  WRITE ABORTED — acceptance gate failed."); sys.exit(1)
         import hashlib
-        V2 = os.path.join(ROOT, 'databases', 'berkeley_housing_v2.db')
+        V2 = os.path.join(ROOT, 'databases', 'archive', 'berkeley_housing_v2.db')
         v2b = hashlib.sha256(open(V2, 'rb').read()).hexdigest()
         if args.no_snapshot:
             print("\n  (--no-snapshot: idempotency re-run, NOT snapshotting — must not clobber the rollback point)")

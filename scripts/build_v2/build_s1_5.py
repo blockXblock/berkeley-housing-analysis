@@ -18,7 +18,7 @@ from scripts.housing_rules.apn import to_canonical_apn
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 V3 = os.path.join(ROOT, 'databases', 'berkeley_housing_v3.db')
-V2 = os.path.join(ROOT, 'databases', 'berkeley_housing_v2.db')
+V2 = os.path.join(ROOT, 'databases', 'archive', 'berkeley_housing_v2.db')
 # the one-line _RB_INCL widening (genuine new-housing nouns missing from the split-rule include set)
 _WIDEN = r'|\b(duplex|triplex|fourplex|town ?house|town ?home|cottage|sfd|single ?family|accessory dwelling)\b'
 

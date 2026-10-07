@@ -31,7 +31,7 @@ from scripts.cpra_dedup import extract_master_permit           # collapses -REV/
 
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 V3 = os.path.join(ROOT, 'databases', 'berkeley_housing_v3.db')
-V2 = os.path.join(ROOT, 'databases', 'berkeley_housing_v2.db')
+V2 = os.path.join(ROOT, 'databases', 'archive', 'berkeley_housing_v2.db')
 CPRA = [os.path.join(ROOT, 'data/raw/cpra-downloads', f) for f in
         ('BP_Annual Permit Report-2018-2022.xlsx', 'BP_Annual Permit Report-2023-2025.xlsx')]
 TXT = os.path.join(ROOT, 'data/raw/accela_status')

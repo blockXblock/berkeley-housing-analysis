@@ -25,7 +25,7 @@ from scripts.build_v2.gating import snapshot_v3
 
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 V3 = os.path.join(ROOT, 'databases', 'berkeley_housing_v3.db')
-V2 = os.path.join(ROOT, 'databases', 'berkeley_housing_v2.db')
+V2 = os.path.join(ROOT, 'databases', 'archive', 'berkeley_housing_v2.db')
 AS_OF = '2026-06-17'
 GENUINE_DOC_TYPES = ('density_bonus_application', 'affordable_housing_agreement', 'ahcp', 'tabulation')
 INCOME_TIERS = {'ELI', 'VLI', 'LI', 'MOD', 'ABOVE_MOD'}          # real income tiers — these MUST be doc-cited

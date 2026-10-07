@@ -27,7 +27,7 @@ sys.path.insert(0, str(BASE_DIR / "scripts"))
 from housing_rules.owner_name import is_organisation  # noqa: E402
 
 DB_PATH = BASE_DIR / "databases" / "berkeley_housing_v4.db"
-V2_PATH = BASE_DIR / "databases" / "berkeley_housing_v2.db"      # read ONLY for the old-link crosswalk
+V2_PATH = BASE_DIR / "databases" / "archive" / "berkeley_housing_v2.db"   # archived read-only 2026-10-07; ONLY the old-link crosswalk
 OUTPUT_PATH = BASE_DIR / "docs" / "explorer_data_v4_working.js"
 
 TODAY = date.today()

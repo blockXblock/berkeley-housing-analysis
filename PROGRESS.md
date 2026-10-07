@@ -758,7 +758,15 @@ with the approval-time panel, home numbers, pipeline-state (anchors PASS), playe
 JN-K gate: only the four new §4b keys (ministerial n 8 / median 192 d; discretionary n 104 / 422 d) -- John to approve
 the append. v4 re-locked by John; Datasette DEPLOYED 2026-10-07 (approval_times live, 389 rows, verified); the site needs a push.
 
-**NEXT:** JN-K §4b append (John) -> archive v2 read-only read-only -> next swap (views with
+**JN-K §4b baseline appended (John, `221e4c3`; _v4b, PASS). Site deploy STAGED on main (`ab7bc29`, gate PASS, 8 files:
+approval-time panel + data/pages) -- `git push` is denied to CC: John runs `git push origin main`.**
+**v2 recovery + v3 strategy reviewed (2026-10-07):** `docs/audit/2026-10-07_v2_recovery_and_v3_strategy.md`. Every
+source-backed v2 table is in v4 (305/305 R2 docs by hash, 47,411 inspections, fees, people, geometry, lineage);
+residue = re-derivations (26 projects' proposed units, heights, 9 density-bonus tags -- the ZAB minutes state them)
+and 3 definition calls (2100 San Pablo residential care, 1710 University "living spaces"). v3: freeze the DB (it is
+v2-assisted: S0-S8 read v2); align the curriculum to v4 (compare students' rebuild with v4; JN7 canon swap).
+
+**NEXT:** John: push main; decide the review's calls -> archive v2 read-only (point build_v2 at the archive) read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

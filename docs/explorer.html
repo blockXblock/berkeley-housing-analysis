@@ -149,6 +149,19 @@
                 <p class="text-xs text-gray-500 mt-2"><strong>Basis:</strong> <span id="rhna-basis"></span></p>
             </div>
 
+            <!-- Time to approval, by route (John, 2026-10-05). GENERATED: renderApprovalTimes() fills it from
+                 DATA.approval_times = v4's v_project_approval_times. Hidden when absent. -->
+            <div id="approval-times-panel" class="bg-white rounded-xl shadow p-6 mb-8" style="display:none">
+                <h2 class="text-xl font-semibold mb-1">How Long Approval Takes, by Route</h2>
+                <p class="text-xs text-gray-500 mb-4">Projects of 5 or more units. Each bar is the median of projects that have reached their first building permit: <span style="color:#b8860b;font-weight:600">filing to approval</span>, then <span style="color:#ff8000;font-weight:600">approval to first building permit</span>. SB 35 and AB 2011 approvals are ministerial: staff check the project against objective standards, with no hearing.</p>
+                <div id="approval-times-bars" class="space-y-4"></div>
+                <details class="mt-4 text-sm">
+                    <summary class="cursor-pointer text-indigo-700 font-medium">The ministerial approvals, one by one</summary>
+                    <div class="overflow-x-auto"><table class="min-w-full text-sm mt-2" id="approval-times-ministerial"></table></div>
+                </details>
+                <p class="text-xs text-gray-500 mt-3"><strong>Basis:</strong> <span id="approval-times-basis"></span></p>
+            </div>
+
             <!-- Actual Unit Completions by year -->
             <div class="bg-white rounded-xl shadow p-6 mb-8">
                 <h2 class="text-xl font-semibold mb-1">Actual Unit Completions</h2>

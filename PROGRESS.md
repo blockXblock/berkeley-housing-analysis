@@ -771,8 +771,15 @@ University stay as v4 reads them; v4 re-reads proposed units / heights / density
 **v2 ARCHIVED read-only 2026-10-07** -> databases/archive/berkeley_housing_v2.db (SHA 9cec330e..., unchanged);
 build_v2 S0-S8 + the Explorer crosswalk re-pointed (crosswalk identical, 1,057; S0 --preview runs). CLAUDE.md updated.
 
-**NEXT:** re-read proposed units / heights / density bonus from the ZAB minutes items (new evidence file) -> rebuild +
-swap -> curriculum alignment (JN7 canon swap + v4 comparison) read-only -> next swap (views with
+**ZAB items read (2026-10-07, `41f785d`, fixes `e9ea381`):** llm_zab_items.py over the 217 v4 projects the Board heard
+-> zab_items_evidence_2026-10-07(.json, b.json): 126 units / 159 stories / 92 heights / 37 density-bonus quotes. Used
+only where v4 has nothing, and only from an item that NAMES the record's own address (the 2532 Durant / ZP2015-0099
+typo had given 2311 Roosevelt 7 units). Parser: "8.2555 College" items no longer merge into the item before.
+Scratch chain `scratch/2026-10-07_rebuild/chain4`: both gates PASS, integrity ok, 1,554 projects; vs live ONLY
+additions -- proposed units 8 (Morse Block 134, 2425 Durant 169, 1200 San Pablo 57...), density bonus 7, heights 50,
+stories 37; deciding body unchanged (145), 4 citations re-pointed to the right item. NOT swapped.
+
+**NEXT:** John unlocks -> swap chain4 -> regenerate -> curriculum alignment (JN7 canon swap + v4 comparison) read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

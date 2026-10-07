@@ -412,7 +412,7 @@ def approval_times(db):
     rows = db.execute("""SELECT project_key, name, units, route, law, public_subsidy, days_filed_to_approved,
         days_approved_to_first_bp, entitled_date, first_bp_date FROM v_project_approval_times
         WHERE units >= 5""").fetchall()
-    med = lambda v: int(st.median(v)) if v else None
+    med = lambda v: round(st.median(v)) if v else None   # round, as JN-K: a median of an even count can end in .5
     groups = []
     for route, sub, label in (("ministerial", 1, "Ministerial (SB 35 / AB 2011), public subsidy"),
                               ("discretionary", 1, "Discretionary, public subsidy"),

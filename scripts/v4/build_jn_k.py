@@ -70,7 +70,7 @@ from datetime import date
 import pandas as pd
 
 ROOT = os.path.expanduser('~/berkeley-data')
-V4 = os.path.join(ROOT, 'databases', 'berkeley_housing_v4.db')
+V4 = os.environ.get('JN_K_DB_PATH') or os.path.join(ROOT, 'databases', 'berkeley_housing_v4.db')   # a scratch build, for a test
 con = sqlite3.connect(f'file:{V4}?mode=ro', uri=True)
 
 rows = []
@@ -221,6 +221,49 @@ md("📝 **Mislead-guard:** the funnel narrows mostly by WAITING — read the pr
    "'still in process'. v4 counts applications, so a site that re-filed appears once per filing.")
 
 md(r"""
+## §4b — HOW LONG, BY ROUTE: ministerial (SB 35 / AB 2011) vs discretionary approval
+📝 **Plan:** read v4's `v_project_approval_times` (John, 2026-10-05) — one row per City-approved project, with the
+two clocks a developer faces: **filing → approval** and **approval → first building permit** (the first-BP rule).
+Projects of 5+ units, split by route and by **public subsidy on record** (the funding ledger), because subsidized
+projects wait for financing after approval, whatever the route. Each pair of medians is taken on the **same**
+projects (those with a first permit); counts are printed beside every median. The ministerial approval date is the
+City's own Letter of Compliance (SB 35) or approval document (AB 2011), read from the record's attachment list.
+**Rail:** the deciding body is shown AS RECORDED. Most large "Staff Decision" approvals fall on a Thursday, the
+Zoning Adjustments Board's meeting day, and the City's workflow names no hearing; the Board's own minutes
+(harvested 2026-10-06) are the source that will settle it, not the weekday.
+""")
+code(r'''
+has_view = con.execute("SELECT 1 FROM sqlite_master WHERE type='view' AND name='v_project_approval_times'").fetchone()
+route_figs = {}
+if not has_view:
+    print('v_project_approval_times is not in this v4 build (added 2026-10-05; it arrives with the next swap) -- skipped.')
+else:
+    at = pd.read_sql("SELECT * FROM v_project_approval_times", con)
+    big = at[at.units.fillna(0) >= 5].copy()
+    def grp(d):
+        both = d[d.days_approved_to_first_bp.notna()]
+        return pd.Series({'approved': len(d), 'med_to_approval_all': d.days_filed_to_approved.median(),
+                          'with_permit': len(both), 'med_to_approval': both.days_filed_to_approved.median(),
+                          'med_approval_to_permit': both.days_approved_to_first_bp.median(),
+                          'med_filing_to_permit': both.days_filed_to_first_bp.median()})
+    tab = big.groupby(['route', 'public_subsidy']).apply(grp)
+    print(tab.to_string(float_format=lambda v: f'{v:,.0f}'))
+    print('\nflagged (left out of the second clock):')
+    print(at[at.flag.notna()][['project_key', 'name', 'entitled_date', 'first_bp_date', 'flag']].to_string(index=False))
+    print('\nthe ministerial approvals:')
+    print(at[at.route == 'ministerial'].sort_values('entitled_date')[['project_key', 'name', 'law', 'units',
+          'days_filed_to_approved', 'days_approved_to_first_bp', 'body_recorded']].to_string(index=False))
+    route_figs = {'approval_ministerial_n': int(len(big[big.route == 'ministerial'])),
+                  'approval_ministerial_median_days': round(big[big.route == 'ministerial'].days_filed_to_approved.median()),
+                  'approval_discretionary_n': int(len(big[big.route == 'discretionary'])),
+                  'approval_discretionary_median_days': round(big[big.route == 'discretionary'].days_filed_to_approved.median())}
+    for k, v in route_figs.items(): print(f'  {k:38} {v}')
+''')
+md("📝 **Mislead-guard:** the ministerial route shortens the **approval** clock, not the whole journey: subsidized "
+   "projects then wait for financing, so filing-to-first-permit narrows far less than filing-to-approval. The "
+   "ministerial groups are small (single digits); read the counts before the medians.")
+
+md(r"""
 ## §5 — The one divergent year: 2025 ours|city, every row named
 📝 **Plan:** address-level adjudication of our 2025 count vs the city's (oracle = compare-target
 ONLY). ⚠ The two large ours-only completions are GROUP LIVING — sleeping units are arguably not
@@ -299,6 +342,7 @@ figures = {
   'median_intake_days': int(st.median(intake)), 'median_consideration_days': int(st.median(consider)),
   'gap2025_total': gap['ours'] - gap['city'], 'gap2025_ours_only': gap['ours_only'],
 }
+figures.update(route_figs)   # §4b: present only once v_project_approval_times is in v4 (a new key = a reviewed append)
 sha = subprocess.run(['git', '-C', ROOT, 'rev-parse', '--short', 'HEAD'],
                      capture_output=True, text=True).stdout.strip()
 import hashlib

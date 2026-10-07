@@ -726,7 +726,12 @@ the City's workflow names no hearing; ZAB agendas/minutes would settle it (body 
 1464 Sixth carries 3 units in v4, its SB 35 letter says 6 (G032). Timeline drawings (scripts/drawings/project_svg.py)
 already read live v4: redrawn in scratch/2026-10-05_svg (1951 Shattuck now shows its Sep 2022 first permit).
 
-**NEXT:** John: site/JN-K presentation of the approval times; ZAB agendas harvest? -> archive v2 read-only -> next swap (views with
+**1701 San Pablo checked 2026-10-06 (John thought it finished):** the City's record says NOT finished -- B2024-02966
+still Issued, 316 inspections done, next is 1180 Drywall 10/07/2026. Readdressed to 1717 San Pablo; ruling S006
+records the alias (`30c926e6`), reaches live at the next rebuild. Recheck for the final later.
+
+**NEXT:** John: site/JN-K presentation of the approval times; ZAB agendas harvest? -> next rebuild (S006 + the
+approval-time view) -> archive v2 read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

@@ -756,7 +756,7 @@ heard on another date, 186 as recorded; carries S006 (1717 San Pablo alias) and 
 Regenerated: Datasette + approval_times table (`89e0991`; APR identical in content, not re-committed), Explorer data
 with the approval-time panel, home numbers, pipeline-state (anchors PASS), players, public mirror (`d901700`).
 JN-K gate: only the four new §4b keys (ministerial n 8 / median 192 d; discretionary n 104 / 422 d) -- John to approve
-the append. **John to re-lock v4**; Datasette needs flyctl deploy; the site needs a push.
+the append. v4 re-locked by John; Datasette DEPLOYED 2026-10-07 (approval_times live, 389 rows, verified); the site needs a push.
 
 **NEXT:** JN-K §4b append (John) -> archive v2 read-only read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the

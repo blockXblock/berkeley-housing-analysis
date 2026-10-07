@@ -786,7 +786,18 @@ pipeline-state page (its JN-K anchor: majors waiting 36 vs 33). JN-K gate on liv
 68->71, ac_majors_covered 71->74, median_consideration 253->251, approval_discretionary n 104->110 / median 422->420 --
 all the newly sized projects; awaiting John's call to append. **John to re-lock v4**; Datasette deploy + site push.
 
-**NEXT:** John: JN-K append -> pipeline-state page -> deploy/push -> curriculum alignment (JN7 canon swap + v4 comparison) read-only -> next swap (views with
+**JN-K appended (John, `2a1bcc8`, _v4c, PASS); pipeline-state page regenerated (anchors 27/8/36/9 PASS, `c6ce3e8`).
+Datasette deployed by John (Morse Block 134 live). v4 still WRITABLE -- John to re-lock.**
+**Curriculum aligned (John: "do curriculum alignment", 2026-10-07):** JN7 (`86c1ebc`) uses housing_rules.address (the
+canon; 7a still exact) and a new PHASE 7f puts the student's re-keyed record beside v4's public mirror: 753 families
+in both, 733 identical; four named classes of difference; their is_housing rule vs v4's model-read roles on master
+permits: 86% of 1,400 agree. Ending's typed July numbers removed (JN6b's dated "as of July 2026" epilogue kept).
+Course page + README updated (`a1f8007`, `c067994`); build_v2 states v3 is frozen and v2-assisted. Executed locally:
+7a/7b/7f PASS. Colab note: its R2 module bundle (July) has the canon with the same interface; refreshing the bundle is
+an R2 publish -- John's call. Site deploy restaged on main (`git push origin main`).
+
+**NEXT:** John: push main; re-lock v4; R2 curriculum bundle refresh? -> optional new modules (approval times, the ZAB
+contradiction, Rent Board) read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

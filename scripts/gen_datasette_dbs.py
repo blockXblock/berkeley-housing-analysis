@@ -51,6 +51,7 @@ EXPORTS = {
     'people': ("SELECT project_key, role, name, source, record, note FROM v_project_people", None),   # row-wise mask
     'businesses': ("SELECT * FROM v_project_businesses", None),
     'city_records': ("SELECT * FROM v_project_records_listed", {}),
+    'approval_times': ("SELECT * FROM v_project_approval_times", {}),   # John 2026-10-05/07
     'adu_rent_board': ("SELECT * FROM v_adu_rent_board", {'tenancy_start': lambda v: v[:4] if v else v}),
     'permits': ("""SELECT json_extract(p.notes, '$.project_key') AS project_key, e.source_record_key AS permit,
                           se.role_in_structure AS role, MIN(CASE WHEN e.event_type_code = 'permit_submitted' THEN e.event_date END) AS submitted,
@@ -176,6 +177,10 @@ TABLE_DOCS = {
     'parcels': ("Parcels and assessed values", "Each project's current parcels (County lineage) and the assessor's "
                 "current values.", []),
     'documents': ("Documents", "Plan sets, applications and forms held in R2, with SHA-256.", ["doc_type"]),
+    'approval_times': ("Time to approval, by route", "One row per City-approved project: filing to approval, approval to "
+                       "first building permit, route (ministerial SB 35 / AB 2011 vs discretionary), the body as the City "
+                       "recorded it, and decided_by from the Zoning Adjustments Board's own minutes where they record its "
+                       "approval (decided_by_source cites the meeting). UC excluded.", ["route", "decided_by", "size_band", "public_subsidy"]),
 }
 
 

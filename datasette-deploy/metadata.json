@@ -49,7 +49,7 @@
           ]
         },
         "city_records": {
-          "title": "City records at each project's buildings (9,289)",
+          "title": "City records at each project's buildings (9,290)",
           "description": "Every Accela Building and Planning listing at the project's building addresses (tenant improvements, business certificates, signs, short-term rentals). in_project = 1 when the record is one of the project's own.",
           "facets": [
             "module",
@@ -82,6 +82,16 @@
           "description": "Plan sets, applications and forms held in R2, with SHA-256.",
           "facets": [
             "doc_type"
+          ]
+        },
+        "approval_times": {
+          "title": "Time to approval, by route (389)",
+          "description": "One row per City-approved project: filing to approval, approval to first building permit, route (ministerial SB 35 / AB 2011 vs discretionary), the body as the City recorded it, and decided_by from the Zoning Adjustments Board's own minutes where they record its approval (decided_by_source cites the meeting). UC excluded.",
+          "facets": [
+            "route",
+            "decided_by",
+            "size_band",
+            "public_subsidy"
           ]
         }
       }

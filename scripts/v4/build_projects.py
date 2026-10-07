@@ -51,6 +51,7 @@ import os
 import collections
 import csv
 import json
+import re
 import sqlite3
 import sys
 from pathlib import Path
@@ -91,6 +92,7 @@ MEASURE_RULINGS = ROOT / "corrections/v4/measure_rulings.csv"
 # WHAT THE ZONING ADJUSTMENTS BOARD HEARD (John, 2026-10-07): units, stories, height and State Density Bonus read from
 # the Board's Action Minutes items (scripts/llm_zab_items.py), each kept only with a verbatim quote stating it. A LAST
 # fallback: used only where v4's own readings give nothing; approved measure rulings still override.
+ZAB_ITEM_OK: dict = {}
 ZAB_ITEMS_EVIDENCE = (ROOT / "data/derived/zab_items_evidence_2026-10-07.json",    # the reading
                       ROOT / "data/derived/zab_items_evidence_2026-10-07b.json")   # its re-ask of the max_tokens misses
 # ATTRIBUTIONS (John, 2026-10-03): who developed / designed / applied for a project, from a cited source (tabulation
@@ -332,11 +334,58 @@ def main() -> int:
     # the project's records ON its entitlement date, the body is the ZAB, cited to those minutes. Record AND date must both
     # match, so a mistyped number in the minutes cannot move a decision (2532 Durant: the minutes cite ZP2015-0099, a
     # different project). Heard on another date, or no minutes for the date: the body stays as the City recorded it.
+    # THE ITEM MUST BE ABOUT THIS RECORD'S SITE (2026-10-07): the minutes can mistype a record number -- 2532 Durant's
+    # item cites ZP2015-0099, which is 2311 Roosevelt. An item counts for a record only if its heading names that
+    # record's own Accela address (house number and street), so a typo can move neither a decision nor a unit count.
+    from housing_rules.address import normalize_address as _na
+    rec_addr = {}
+    for rec_, ra in db.execute("SELECT source_record_key, raw_address FROM events WHERE event_type_code = 'planning_filed' "
+                               "AND raw_address IS NOT NULL"):
+        try:
+            h_, st_ = _na(ra)
+        except Exception:
+            continue
+        if h_ and st_:
+            rec_addr.setdefault(rec_, (h_, st_))
+
+    from housing_rules.address import _ORD as _ord_words
+
+    def item_is_about(rec_, heading, item_text="", cited=None):
+        """the item names the record's site: its heading -- or, where the parser took a section title ("Consent
+        Calendar") as the heading, the opening of its text -- contains a distinctive word of the record's street
+        ("king" for M L KING JR, "9th" for NINTH, ordinals folded) and a house number within 10 of the record's (ranges
+        "2495-2497 Valley", second frontages, "23 Tanglewood" for 25); a record numbered 0 needs the street only."""
+        a_ = rec_addr.get(rec_)
+        if not a_:
+            return False
+        it = item_text or ""
+        at = it.find(cited) if cited else -1                     # a consent calendar lists several projects: read the
+        win = it[max(0, at - 300): at + 300] if at >= 0 else it[:400]   # words around the record's own citation
+        text = f"{heading or ''} {win}".lower()
+        text = re.sub(r"\b(" + "|".join(_ord_words) + r")\b", lambda m: _ord_words[m.group(1)], text)
+        words = set(re.findall(r"[a-z0-9]+", text))
+        street = [w for w in re.findall(r"[a-z0-9]+", a_[1].lower()) if len(w) >= 3 and w not in ("jr", "the")]
+        if not street or not any(w in words for w in street):
+            return False
+        n0 = re.match(r"\d+", str(a_[0]))
+        if not n0 or int(n0.group()) == 0:
+            return True
+        return any(abs(int(x) - int(n0.group())) <= 10 for x in re.findall(r"\b\d{1,5}\b", text))
+
     zab = collections.defaultdict(list)          # record -> [(date, action, minutes file, item)]
+    zab_off_site = collections.Counter()
+    zab_item_ok = ZAB_ITEM_OK                    # (date, item) -> records the item is verifiably about (module-level:
+    zab_item_ok.clear()                          # the write step reads it too)
     for rec_, d_, pl in db.execute("SELECT source_record_key, event_date, raw_payload FROM events "
                                    "WHERE event_type_code = 'zab_action'"):
         j = json.loads(pl)
+        if not item_is_about(rec_, j.get("heading"), j.get("item_text"), j.get("record_cited")):
+            zab_off_site[rec_] += 1
+            continue
         zab[rec_].append((d_, j.get("action"), j.get("minutes_file"), j.get("item")))
+        zab_item_ok.setdefault((d_, str(j.get("item"))), set()).add(rec_)
+    print(f"ZAB items not about their cited record's site (left out): {sum(zab_off_site.values())} "
+          f"on {len(zab_off_site)} records, e.g. {sorted(zab_off_site)[:6]}")
     decided = collections.Counter()
 
     def decided_by(records, entitled, recorded):
@@ -651,7 +700,12 @@ def write(con, projects) -> dict:
             # both readings, each still with its own quote and source
             ev = [x for k in dict.fromkeys([key] + list(p.get("records") or [])) for x in pathways.get(k, [])]
             ev = [dict(t) for t in dict.fromkeys(tuple(sorted(x.items())) for x in ev)]   # one quote, once
-            zi = zab_items.get(key) or {}
+            zi = dict(zab_items.get(key) or {})
+            for f_ in [f for f in list(zi) if isinstance(zi[f], dict) and str(zi[f].get("source", "")).startswith("ZAB ")]:
+                m_ = re.match(r"ZAB (\S+) item (\S+)", zi[f_]["source"])
+                if not (m_ and ZAB_ITEM_OK.get((m_[1], m_[2]), set()) & set([key] + list(p.get("records") or []))):
+                    zi.pop(f_)                        # the item is not verifiably about this project's site
+                    out["zab_value_off_site"] += 1
             if zi.get("density_bonus") and not any(x["pathway"] == "density_bonus" for x in ev):
                 ev.append({"pathway": "density_bonus", "quote": zi["density_bonus"]["quote"],
                            "source": zi["density_bonus"]["source"], "read_from": "zab_minutes"})

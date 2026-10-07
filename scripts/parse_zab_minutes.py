@@ -38,7 +38,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 REC = re.compile(r"\b((?:ZP|UP|AUP|ZAB|DRSA|LMSAP|LMCA|PLN|ZC|MODUP|MOD|V)\d{4}-\d{4})\b")
 BARE = re.compile(r"\bUse Permit\s*#?\s*(\d{4})-(\d{4})\b", re.I)
-ITEM = re.compile(r"^\s{0,6}(\d{1,2})\.\s+(\S.{3,}?)\s*$", re.M)
+# "8. 2555 College" and, in a few minutes, "8.2555 College" (no space: 5 items in 4 files merged into the item before,
+# taking ITS vote, until 2026-10-07) -- the joined form only when a house number and a capitalized street follow
+ITEM = re.compile(r"^\s{0,6}(\d{1,2})\.(?:\s+|(?=\d{2,5}\s+[A-Z]))(\S.{3,}?)\s*$", re.M)
 OUTCOME = re.compile(r"\b(APPROVED|DENIED|CONTINUED|WITHDRAWN|UPHELD|DISMISSED|REMANDED|AFFIRMED|REVERSED|TABLED|"
                      r"NO ACTION|REFERRED)\b", re.I)
 VOTE = re.compile(r"Vote:\s*([0-9]+(?:-[0-9]+){2,4})")

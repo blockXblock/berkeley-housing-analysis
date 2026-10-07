@@ -3548,6 +3548,56 @@
         panel.style.display = '';
     }
 
+    // Time to approval, by route (John, 2026-10-05). Reads DATA.approval_times (export_explorer_data_v4.approval_times,
+    // from v4's v_project_approval_times); nothing is computed here but the bar widths. One scale for every bar.
+    const BODY_NAMES = {zab: 'Zoning Adjustments Board', staff: 'staff', city_council: 'City Council (incl. appeals)'};
+    function renderApprovalTimes() {
+        const at = DATA.approval_times;
+        const panel = document.getElementById('approval-times-panel');
+        if (!at || !panel || !(at.groups || []).length) return;
+        const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+        const fmt = d => d == null ? '–' : `${d.toLocaleString()} days`;
+        const drawn = at.groups.filter(g => g.n_with_permit > 0);
+        const scale = Math.max(...drawn.map(g => g.median_to_approval + g.median_to_permit), 1);
+        document.getElementById('approval-times-bars').innerHTML = at.groups.map(g => {
+            const head = `<div class="flex flex-wrap justify-between text-sm"><span class="font-medium">${esc(g.label)}</span>` +
+                `<span class="text-gray-500">${g.n_approved} approved · ${g.n_with_permit} with a first permit</span></div>`;
+            if (!g.n_with_permit) {
+                return `<div>${head}<div class="text-xs text-gray-500 mt-1">None has a first building permit yet. ` +
+                    `Median filing to approval: ${fmt(g.median_to_approval_all)}.</div></div>`;
+            }
+            const a = 100 * g.median_to_approval / scale, b = 100 * g.median_to_permit / scale;
+            return `<div>${head}<div class="flex h-6 mt-1 rounded overflow-hidden bg-gray-100">` +
+                `<div style="width:${a}%;background:#b8860b" title="filing to approval: ${fmt(g.median_to_approval)}"></div>` +
+                `<div style="width:${b}%;background:#ff8000" title="approval to first permit: ${fmt(g.median_to_permit)}"></div></div>` +
+                `<div class="flex flex-wrap gap-x-4 text-xs text-gray-600 mt-1">` +
+                `<span><span style="color:#b8860b">■</span> to approval ${fmt(g.median_to_approval)}</span>` +
+                `<span><span style="color:#ff8000">■</span> then to first permit ${fmt(g.median_to_permit)}</span>` +
+                `<span class="text-gray-400">to approval, all ${g.n_approved} approved: ${fmt(g.median_to_approval_all)}</span></div>` +
+                (g.route === 'discretionary' && g.decided_by ? `<div class="text-xs text-gray-500 mt-1">Decided by: ` +
+                    Object.entries(g.decided_by).map(([k, n]) => `${esc(BODY_NAMES[k] || k)} ${n}`).join(' · ') +
+                    (g.recorded_as_staff_decided_by_zab ? ` (${g.recorded_as_staff_decided_by_zab} logged by the City as a ` +
+                     `"Staff Decision" are Board approvals in the Board's own minutes)` : '') + `</div>` : '') + `</div>`;
+        }).join('');
+        document.getElementById('approval-times-ministerial').innerHTML =
+            '<thead><tr class="text-left text-gray-500"><th class="pr-3">Project</th><th class="pr-3">Law</th><th class="pr-3 text-right">Units</th>' +
+            '<th class="pr-3">Approved</th><th class="pr-3 text-right">Filing to approval</th><th class="pr-3">First permit</th>' +
+            '<th class="text-right">Approval to first permit</th></tr></thead><tbody>' +
+            (at.ministerial || []).map(m => `<tr class="border-t"><td class="pr-3"><a class="text-indigo-700 hover:underline" ` +
+                `href="?tab=projects&project=${encodeURIComponent(m.id)}">${esc(m.name)}</a></td><td class="pr-3">${esc(m.law || '')}</td>` +
+                `<td class="pr-3 text-right">${m.units == null ? '' : m.units}</td><td class="pr-3">${esc(m.approved)}</td>` +
+                `<td class="pr-3 text-right">${fmt(m.days_to_approval)}</td><td class="pr-3">${esc(m.first_permit || 'not yet')}</td>` +
+                `<td class="text-right">${fmt(m.days_to_permit)}</td></tr>`).join('') + '</tbody>';
+        document.getElementById('approval-times-basis').textContent =
+            `Dates from the City's own Planning and building-permit records; a ministerial approval date is the date of the ` +
+            `City's Letter of Compliance (SB 35) or approval document (AB 2011). "Public subsidy" = public money on our ` +
+            `funding ledger (City housing funds, state tax ` +
+            `credits, grants). Medians; the ministerial groups are small. A first permit before the approval on record ` +
+            `(a later modification) is left out of the second clock. UC Berkeley projects are excluded (the City does not ` +
+            `approve them). Source: ${at.source}.`;
+        panel.style.display = '';
+    }
+
     function populateStats() {
         console.log('📊 populateStats() - Populating dashboard statistics from DATA');
 
@@ -3661,6 +3711,7 @@
         setStatText('stat-assessed-count', assessedProjects.length);
 
         renderRhnaProgress();
+        renderApprovalTimes();
 
         // (history) RHNA progress BAR HELD 2026-06-16, RESTORED 2026-10-01 -- see renderRhnaProgress().
         // A completions/goal ratio misframes RHNA (credit is earned at BP issuance) and our

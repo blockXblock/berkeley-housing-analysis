@@ -3550,6 +3550,7 @@
 
     // Time to approval, by route (John, 2026-10-05). Reads DATA.approval_times (export_explorer_data_v4.approval_times,
     // from v4's v_project_approval_times); nothing is computed here but the bar widths. One scale for every bar.
+    const BODY_NAMES = {zab: 'Zoning Adjustments Board', staff: 'staff', city_council: 'City Council (incl. appeals)'};
     function renderApprovalTimes() {
         const at = DATA.approval_times;
         const panel = document.getElementById('approval-times-panel');
@@ -3572,7 +3573,11 @@
                 `<div class="flex flex-wrap gap-x-4 text-xs text-gray-600 mt-1">` +
                 `<span><span style="color:#b8860b">■</span> to approval ${fmt(g.median_to_approval)}</span>` +
                 `<span><span style="color:#ff8000">■</span> then to first permit ${fmt(g.median_to_permit)}</span>` +
-                `<span class="text-gray-400">to approval, all ${g.n_approved} approved: ${fmt(g.median_to_approval_all)}</span></div></div>`;
+                `<span class="text-gray-400">to approval, all ${g.n_approved} approved: ${fmt(g.median_to_approval_all)}</span></div>` +
+                (g.route === 'discretionary' && g.decided_by ? `<div class="text-xs text-gray-500 mt-1">Decided by: ` +
+                    Object.entries(g.decided_by).map(([k, n]) => `${esc(BODY_NAMES[k] || k)} ${n}`).join(' · ') +
+                    (g.recorded_as_staff_decided_by_zab ? ` (${g.recorded_as_staff_decided_by_zab} logged by the City as a ` +
+                     `"Staff Decision" are Board approvals in the Board's own minutes)` : '') + `</div>` : '') + `</div>`;
         }).join('');
         document.getElementById('approval-times-ministerial').innerHTML =
             '<thead><tr class="text-left text-gray-500"><th class="pr-3">Project</th><th class="pr-3">Law</th><th class="pr-3 text-right">Units</th>' +

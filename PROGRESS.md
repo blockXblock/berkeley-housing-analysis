@@ -793,10 +793,11 @@ canon; 7a still exact) and a new PHASE 7f puts the student's re-keyed record bes
 in both, 733 identical; four named classes of difference; their is_housing rule vs v4's model-read roles on master
 permits: 86% of 1,400 agree. Ending's typed July numbers removed (JN6b's dated "as of July 2026" epilogue kept).
 Course page + README updated (`a1f8007`, `c067994`); build_v2 states v3 is frozen and v2-assisted. Executed locally:
-7a/7b/7f PASS. Colab note: its R2 module bundle (July) has the canon with the same interface; refreshing the bundle is
-an R2 publish -- John's call. Site deploy restaged on main (`git push origin main`).
+7a/7b/7f PASS. R2 curriculum module bundle PUBLISHED (John: "yes, publish to R2", 2026-10-07): build_curriculum_modules.py --upload,
+23 files, 51,615 bytes, size-verified; the public copy is byte-identical; JN7 run OUTSIDE the repo (Colab path:
+modules + data from R2, the v4 mirror from berkeleybuild.com): 7a/7b/7f PASS. Site deploy restaged on main (`git push origin main`).
 
-**NEXT:** John: push main; re-lock v4; R2 curriculum bundle refresh? -> optional new modules (approval times, the ZAB
+**NEXT:** John: push main; re-lock v4 -> optional new modules (approval times, the ZAB
 contradiction, Rent Board) read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).

@@ -1,0 +1,2102 @@
+{
+ "topic": "zab_items",
+ "read_at": "2026-10-07T12:08:17",
+ "definitions_sha16": "d4a527608d2004c6",
+ "definitions": "Definitions used in this count (California HCD Annual Progress Report rules):\n\n- A housing unit is a house, an apartment, a mobile home, a group of rooms, or a single room occupied\n  (or intended for occupancy) as separate living quarters: the occupants live and eat separately from\n  any other persons in the building, with direct access from outside or through a common hall.\n  Single-room occupancy (SRO) units, accessory dwelling units (ADUs) and junior ADUs are housing units.\n- Group quarters are not housing units: dormitories; housing restricted to students, even if it has\n  separate living quarters; and senior or assisted-living facilities where residents live in a group\n  arrangement owned or managed by an entity providing housing and/or services. Senior housing that\n  consists of separate living quarters is housing units.\n- A licensed care facility (residential care, assisted living, memory care) and a building described as\n  congregate, group living, rooming or single-room occupancy can fall on either side: its rooms are\n  housing units when each is separate living quarters (for example SRO rooms held by tenants, or\n  apartments with their own kitchens) and group quarters when residents live in a group arrangement.\n  A permit record alone does not show which. For such a building answer \"unclear\" and give the stated\n  room or unit count in the reason; do not answer 0 and do not report the stated count as dwellings.\n- Dwellings created means ALL new housing units the permitted work builds, not net of demolition.\n  Units demolished or removed are reported separately as dwellings removed.\n- A sub-permit is a permit whose own scope is part of construction permitted under another permit\n  number (for example foundation-only work, a deferred submittal \"-DEF\", or a revision \"-REV\"). It\n  creates no housing units itself.\n- When one building is built under several phase permits, the phase whose work completes the housing\n  units carries the building's units; earlier phases create none.\n\n\nQUESTION. Each PROJECT below is one housing development; its text is what the City's Zoning Adjustments Board heard\nabout it (agenda item: application, zoning, CEQA, recommendation, action). Report, from that text only:\n  units         -- the number of NEW DWELLING UNITS the project would build (housing units under the definitions\n                   above; not existing units demolished, not commercial space, not parking spaces);\n  stories       -- the building's number of stories;\n  height_feet   -- the building's height in feet;\n  density_bonus -- true only if the text says the project uses a State Density Bonus.\nFor EACH value give the exact words it comes from (copied verbatim, containing the number, or the words \"density\nbonus\") and the item they come from. A value the text does not state is null. If several buildings are described,\nreport the totals the text states, or null.",
+ "model": "claude-sonnet-5",
+ "items": "data/derived/zab_actions_2026-10-06.jsonl",
+ "rule": "kept only if the quote is verbatim in the cited item and states the value",
+ "unanswered": [
+  "ZP2024-0059",
+  "ZP2024-0060",
+  "ZP2024-0066",
+  "ZP2024-0067",
+  "ZP2024-0070",
+  "ZP2024-0075",
+  "ZP2018-0035",
+  "ZP2018-0038",
+  "ZP2018-0050",
+  "ZP2018-0061",
+  "ZP2018-0067",
+  "ZP2018-0112",
+  "ZP2016-0179",
+  "ZP2016-0184",
+  "ZP2016-0190",
+  "ZP2016-0194",
+  "ZP2016-0204",
+  "ZP2016-0207",
+  "ZP2024-0169",
+  "ZP2024-0181",
+  "ZP2025-0014",
+  "ZP2025-0020",
+  "ZP2025-0069",
+  "ZP2025-0079",
+  "ZP2017-0191",
+  "ZP2017-0202",
+  "ZP2017-0205",
+  "ZP2017-0207",
+  "ZP2018-0003",
+  "ZP2018-0013",
+  "ZP2022-0135",
+  "ZP2022-0144",
+  "ZP2022-0148",
+  "ZP2022-0149",
+  "ZP2022-0162",
+  "ZP2022-0170",
+  "ZP2022-0107",
+  "ZP2022-0110",
+  "ZP2022-0113",
+  "ZP2022-0115",
+  "ZP2022-0116",
+  "ZP2022-0122",
+  "ZP2019-0211",
+  "ZP2020-0016",
+  "ZP2020-0043",
+  "ZP2023-0123",
+  "ZP2023-0126",
+  "ZP2023-0127",
+  "ZP2023-0138",
+  "ZP2023-0163",
+  "ZP2024-0014"
+ ],
+ "readings": [
+  {
+   "project_key": "ZP2016-0024",
+   "stories": {
+    "value": 3,
+    "quote": "three-story",
+    "source": "ZAB 2016-09-08 item 7"
+   },
+   "height_feet": {
+    "value": 28,
+    "quote": "an average building height of 28 feet",
+    "source": "ZAB 2016-09-08 item 7"
+   }
+  },
+  {
+   "project_key": "ZP2016-0028",
+   "units": {
+    "value": 6,
+    "quote": "construction of six new dwelling units",
+    "source": "ZAB 2018-08-23 item 5"
+   }
+  },
+  {
+   "project_key": "ZP2016-0034",
+   "stories": {
+    "value": 4,
+    "quote": "four- story",
+    "source": "ZAB 2017-12-14 item 5"
+   },
+   "height_feet": {
+    "value": 48,
+    "quote": "48 foot tall",
+    "source": "ZAB 2017-12-14 item 5"
+   }
+  },
+  {
+   "project_key": "ZP2016-0050",
+   "units": {
+    "value": 2,
+    "quote": "accommodate two new residential units",
+    "source": "ZAB 2018-04-26 item 5"
+   },
+   "stories": {
+    "value": 2,
+    "quote": "resulting in a two-story building",
+    "source": "ZAB 2018-04-26 item 5"
+   }
+  },
+  {
+   "project_key": "ZP2016-0062"
+  },
+  {
+   "project_key": "ZP2016-0097",
+   "stories": {
+    "value": 3,
+    "quote": "three-story",
+    "source": "ZAB 2017-02-09 item 3"
+   }
+  },
+  {
+   "project_key": "ZP2026-0039",
+   "units": {
+    "value": 45,
+    "quote": "containing 45 dwelling units",
+    "source": "ZAB 2026-08-13 item 6"
+   },
+   "stories": {
+    "value": 7,
+    "quote": "seven-story",
+    "source": "ZAB 2026-08-13 item 6"
+   },
+   "height_feet": {
+    "value": 85,
+    "quote": "85-foot",
+    "source": "ZAB 2026-08-13 item 6"
+   },
+   "density_bonus": {
+    "value": true,
+    "quote": "utilizing a State Density Bonus",
+    "source": "ZAB 2026-08-13 item 6"
+   }
+  },
+  {
+   "project_key": "ZP2020-0158",
+   "stories": {
+    "value": 2,
+    "quote": "two-story single-family dwelling",
+    "source": "ZAB 2021-04-22 item 2"
+   },
+   "height_feet": {
+    "value": 22,
+    "quote": "average height of 22\u2019 10\u201d",
+    "source": "ZAB 2021-04-22 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2020-0159",
+   "stories": {
+    "value": 2,
+    "quote": "two-story single-family dwelling",
+    "source": "ZAB 2021-04-22 item 3"
+   },
+   "height_feet": {
+    "value": 26,
+    "quote": "average height of 26\u2019 3\u201d",
+    "source": "ZAB 2021-04-22 item 3"
+   }
+  },
+  {
+   "project_key": "ZP2020-0160",
+   "stories": {
+    "value": 2,
+    "quote": "two-story single-family dwelling",
+    "source": "ZAB 2021-04-22 item 4"
+   },
+   "height_feet": {
+    "value": 22,
+    "quote": "average height of 22\u2019 3\u201d",
+    "source": "ZAB 2021-04-22 item 4"
+   }
+  },
+  {
+   "project_key": "ZP2021-0001"
+  },
+  {
+   "project_key": "ZP2021-0009",
+   "units": {
+    "value": 3,
+    "quote": "construct three detached single-family dwellings",
+    "source": "ZAB 2022-02-24 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2021-0046",
+   "units": {
+    "value": 122,
+    "quote": "122 dwelling units",
+    "source": "ZAB 2024-03-28 item 2"
+   },
+   "stories": {
+    "value": 6,
+    "quote": "six-story (69 feet, 6 inches)",
+    "source": "ZAB 2024-03-28 item 2"
+   },
+   "height_feet": {
+    "value": 69,
+    "quote": "69 feet, 6 inches",
+    "source": "ZAB 2024-03-28 item 2"
+   },
+   "density_bonus": {
+    "value": true,
+    "quote": "Project utilizes State Density Bonus.",
+    "source": "ZAB 2022-09-08 item 5"
+   }
+  },
+  {
+   "project_key": "ZP2020-0045",
+   "units": {
+    "value": 11,
+    "quote": "construct a four-story residential building with eleven dwelling units",
+    "source": "ZAB 2021-10-28 item 7"
+   },
+   "stories": {
+    "value": 4,
+    "quote": "construct a four-story residential building with eleven dwelling units",
+    "source": "ZAB 2021-10-28 item 7"
+   }
+  },
+  {
+   "project_key": "ZP2020-0051",
+   "units": {
+    "value": 4,
+    "quote": "construct four detached, three-story approximately 1,500-square-foot dwelling units",
+    "source": "ZAB 2021-05-27 item 1"
+   },
+   "stories": {
+    "value": 3,
+    "quote": "construct four detached, three-story approximately 1,500-square-foot dwelling units",
+    "source": "ZAB 2021-05-27 item 1"
+   }
+  },
+  {
+   "project_key": "ZP2020-0052"
+  },
+  {
+   "project_key": "ZP2020-0058"
+  },
+  {
+   "project_key": "ZP2020-0060"
+  },
+  {
+   "project_key": "ZP2020-0069",
+   "stories": {
+    "value": 6,
+    "quote": "construct a six-story (70 feet and 6 inches), 98,338 square-foot mixed-use building",
+    "source": "ZAB 2023-04-27 item 11"
+   },
+   "height_feet": {
+    "value": 70,
+    "quote": "six-story (70 feet and 6 inches), 98,338 square-foot mixed-use building",
+    "source": "ZAB 2023-04-27 item 11"
+   }
+  },
+  {
+   "project_key": "ZP2021-0140"
+  },
+  {
+   "project_key": "ZP2021-0164",
+   "units": {
+    "value": 2,
+    "quote": "two dwelling units",
+    "source": "ZAB 2022-05-26 item 7"
+   }
+  },
+  {
+   "project_key": "ZP2021-0177",
+   "stories": {
+    "value": 2,
+    "quote": "two-story (33 feet)",
+    "source": "ZAB 2023-03-09 item 4"
+   },
+   "height_feet": {
+    "value": 33,
+    "quote": "two-story (33 feet)",
+    "source": "ZAB 2023-03-09 item 4"
+   }
+  },
+  {
+   "project_key": "ZP2021-0186",
+   "units": {
+    "value": 44,
+    "quote": "44-unit (including four Very Low- Income units) mixed-use building",
+    "source": "ZAB 2023-01-12 item 2"
+   },
+   "stories": {
+    "value": 5,
+    "quote": "five-story",
+    "source": "ZAB 2023-01-12 item 2"
+   },
+   "density_bonus": {
+    "value": true,
+    "quote": "Density Bonus project",
+    "source": "ZAB 2023-01-12 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2021-0192",
+   "units": {
+    "value": 22,
+    "quote": "22 dwelling units",
+    "source": "ZAB 2023-04-27 item 4"
+   }
+  },
+  {
+   "project_key": "ZP2021-0193",
+   "units": {
+    "value": 187,
+    "quote": "187 dwelling units",
+    "source": "ZAB 2022-09-22 item 4"
+   },
+   "stories": {
+    "value": 8,
+    "quote": "8-story",
+    "source": "ZAB 2022-09-22 item 4"
+   },
+   "density_bonus": {
+    "value": true,
+    "quote": "Project utilizes State Density Bonus.",
+    "source": "ZAB 2022-09-22 item 4"
+   }
+  },
+  {
+   "project_key": "ZP2017-0159",
+   "height_feet": {
+    "value": 20,
+    "quote": "maximum height of 20\u20197\u201d",
+    "source": "ZAB 2018-06-14 item 6"
+   }
+  },
+  {
+   "project_key": "ZP2017-0168",
+   "stories": {
+    "value": 2,
+    "quote": "two-story 1,559 sq. ft. dwelling",
+    "source": "ZAB 2018-02-22 item 4"
+   }
+  },
+  {
+   "project_key": "ZP2017-0172"
+  },
+  {
+   "project_key": "ZP2017-0174"
+  },
+  {
+   "project_key": "ZP2017-0179"
+  },
+  {
+   "project_key": "ZP2017-0186"
+  },
+  {
+   "project_key": "ZP2015-0229",
+   "units": {
+    "value": 23,
+    "quote": "23 dwellings",
+    "source": "ZAB 2018-06-28 item 2"
+   },
+   "stories": {
+    "value": 5,
+    "quote": "five-story",
+    "source": "ZAB 2018-06-28 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2015-0233"
+  },
+  {
+   "project_key": "ZP2015-0234",
+   "stories": {
+    "value": 3,
+    "quote": "three story",
+    "source": "ZAB 2018-06-14 item 2"
+   },
+   "height_feet": {
+    "value": 17,
+    "quote": "average building height of 17 feet",
+    "source": "ZAB 2018-06-14 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2016-0009",
+   "units": {
+    "value": 2,
+    "quote": "two, detached two-story dwelling units",
+    "source": "ZAB 2017-01-26 item 7"
+   },
+   "stories": {
+    "value": 2,
+    "quote": "two-story",
+    "source": "ZAB 2017-01-26 item 7"
+   },
+   "height_feet": {
+    "value": 23,
+    "quote": "average building height of 23 ft. - 2 in.",
+    "source": "ZAB 2017-01-26 item 7"
+   }
+  },
+  {
+   "project_key": "ZP2016-0022",
+   "stories": {
+    "value": 3,
+    "quote": "three-story",
+    "source": "ZAB 2016-09-08 item 5"
+   },
+   "height_feet": {
+    "value": 23,
+    "quote": "average building height of 23 feet",
+    "source": "ZAB 2016-09-08 item 5"
+   }
+  },
+  {
+   "project_key": "ZP2016-0023",
+   "stories": {
+    "value": 3,
+    "quote": "three-story",
+    "source": "ZAB 2016-09-08 item 6"
+   },
+   "height_feet": {
+    "value": 28,
+    "quote": "average building height of 28 feet",
+    "source": "ZAB 2016-09-08 item 6"
+   }
+  },
+  {
+   "project_key": "ZP2017-0003",
+   "units": {
+    "value": 36,
+    "quote": "36 dwelling units",
+    "source": "ZAB 2017-09-28 item 3"
+   },
+   "stories": {
+    "value": 7,
+    "quote": "seven-story",
+    "source": "ZAB 2017-09-28 item 3"
+   }
+  },
+  {
+   "project_key": "ZP2017-0004",
+   "units": {
+    "value": 45,
+    "quote": "45, rent-free dwelling units",
+    "source": "ZAB 2018-02-22 item 5"
+   },
+   "stories": {
+    "value": 7,
+    "quote": "seven-story mixed-use building",
+    "source": "ZAB 2018-02-22 item 5"
+   }
+  },
+  {
+   "project_key": "ZP2017-0014",
+   "units": {
+    "value": 48,
+    "quote": "48 dwelling units",
+    "source": "ZAB 2018-03-08 item 6"
+   },
+   "stories": {
+    "value": 5,
+    "quote": "5-story mixed-use building",
+    "source": "ZAB 2018-03-08 item 6"
+   }
+  },
+  {
+   "project_key": "ZP2017-0015",
+   "units": {
+    "value": 3,
+    "quote": "three new dwelling units",
+    "source": "ZAB 2018-03-08 item 5"
+   },
+   "stories": {
+    "value": 5,
+    "quote": "5-story mixed use building",
+    "source": "ZAB 2018-03-08 item 5"
+   }
+  },
+  {
+   "project_key": "ZP2017-0035",
+   "units": {
+    "value": 36,
+    "quote": "36 dwelling units",
+    "source": "ZAB 2018-08-23 item 6"
+   },
+   "stories": {
+    "value": 5,
+    "quote": "five-story",
+    "source": "ZAB 2018-08-23 item 6"
+   },
+   "height_feet": {
+    "value": 55,
+    "quote": "55-foot-tall",
+    "source": "ZAB 2018-08-23 item 6"
+   }
+  },
+  {
+   "project_key": "ZP2017-0039",
+   "units": {
+    "value": 10,
+    "quote": "10 dwellings",
+    "source": "ZAB 2017-10-26 item 8"
+   },
+   "stories": {
+    "value": 3,
+    "quote": "three-story",
+    "source": "ZAB 2017-10-26 item 8"
+   }
+  },
+  {
+   "project_key": "ZP2015-0018",
+   "units": {
+    "value": 10,
+    "quote": "10-unit townhouse development",
+    "source": "ZAB 2016-06-23 item 4"
+   },
+   "stories": {
+    "value": 4,
+    "quote": "four-story",
+    "source": "ZAB 2016-06-23 item 4"
+   }
+  },
+  {
+   "project_key": "ZP2015-0021",
+   "units": {
+    "value": 48,
+    "quote": "48 dwellings",
+    "source": "ZAB 2015-06-11 item 4"
+   },
+   "stories": {
+    "value": 5,
+    "quote": "5- story",
+    "source": "ZAB 2015-06-11 item 4"
+   },
+   "height_feet": {
+    "value": 57,
+    "quote": "57-foot tall",
+    "source": "ZAB 2015-06-11 item 4"
+   }
+  },
+  {
+   "project_key": "ZP2015-0043",
+   "units": {
+    "value": 170,
+    "quote": "170 residential units",
+    "source": "ZAB 2016-05-12 item 3"
+   },
+   "stories": {
+    "value": 5,
+    "quote": "5-story",
+    "source": "ZAB 2016-05-12 item 3"
+   },
+   "height_feet": {
+    "value": 62,
+    "quote": "62\u2019 tall",
+    "source": "ZAB 2016-05-12 item 3"
+   }
+  },
+  {
+   "project_key": "ZP2015-0045",
+   "units": {
+    "value": 107,
+    "quote": "107 dwelling units",
+    "source": "ZAB 2016-04-14 item 6"
+   },
+   "stories": {
+    "value": 7,
+    "quote": "seven-story",
+    "source": "ZAB 2016-04-14 item 6"
+   }
+  },
+  {
+   "project_key": "ZP2015-0072",
+   "stories": {
+    "value": 3,
+    "quote": "three-story",
+    "source": "ZAB 2016-02-25 item 4"
+   }
+  },
+  {
+   "project_key": "ZP2015-0079",
+   "stories": {
+    "value": 2,
+    "quote": "existing two-story",
+    "source": "ZAB 2016-03-31 item 3"
+   }
+  },
+  {
+   "project_key": "ZP2024-0015",
+   "stories": {
+    "value": 2,
+    "quote": "two-story (28 foot)",
+    "source": "ZAB 2025-03-27 item 3"
+   },
+   "height_feet": {
+    "value": 28,
+    "quote": "two-story (28 foot)",
+    "source": "ZAB 2025-03-27 item 3"
+   }
+  },
+  {
+   "project_key": "ZP2024-0024",
+   "units": {
+    "value": 2,
+    "quote": "construct a new 24 foot 4-inch-tall two-story 3,118 square-foot duplex.",
+    "source": "ZAB 2024-09-12 item 4"
+   },
+   "stories": {
+    "value": 2,
+    "quote": "two-story 3,118 square-foot duplex",
+    "source": "ZAB 2024-09-12 item 4"
+   },
+   "height_feet": {
+    "value": 24,
+    "quote": "24 foot 4-inch-tall",
+    "source": "ZAB 2024-09-12 item 4"
+   }
+  },
+  {
+   "project_key": "ZP2024-0027",
+   "units": {
+    "value": 32,
+    "quote": "containing 32 dwelling units",
+    "source": "ZAB 2026-07-09 item 6"
+   },
+   "stories": {
+    "value": 5,
+    "quote": "5-story (60 feet, 6 inches)",
+    "source": "ZAB 2026-07-09 item 6"
+   },
+   "height_feet": {
+    "value": 60,
+    "quote": "60 feet, 6 inches",
+    "source": "ZAB 2026-07-09 item 6"
+   },
+   "density_bonus": {
+    "value": true,
+    "quote": "utilizing State Density Bonus.",
+    "source": "ZAB 2026-07-09 item 6"
+   }
+  },
+  {
+   "project_key": "ZP2024-0029",
+   "units": {
+    "value": 79,
+    "quote": "with 79 dwelling units",
+    "source": "ZAB 2025-05-22 item 6"
+   },
+   "stories": {
+    "value": 8,
+    "quote": "8-story (88 feet)",
+    "source": "ZAB 2025-05-22 item 6"
+   },
+   "height_feet": {
+    "value": 88,
+    "quote": "8-story (88 feet)",
+    "source": "ZAB 2025-05-22 item 6"
+   }
+  },
+  {
+   "project_key": "ZP2024-0057",
+   "units": {
+    "value": 97,
+    "quote": "containing 97 dwelling units",
+    "source": "ZAB 2025-03-13 item 4"
+   },
+   "stories": {
+    "value": 8,
+    "quote": "eight-story (85-feet)",
+    "source": "ZAB 2025-03-13 item 4"
+   },
+   "height_feet": {
+    "value": 85,
+    "quote": "eight-story (85-feet)",
+    "source": "ZAB 2025-03-13 item 4"
+   }
+  },
+  {
+   "project_key": "ZP2024-0058",
+   "units": {
+    "value": 359,
+    "quote": "with 359 dwelling units",
+    "source": "ZAB 2026-07-09 item 7"
+   },
+   "stories": {
+    "value": 8,
+    "quote": "8-story (90 feet and 4 inches)",
+    "source": "ZAB 2026-07-09 item 7"
+   },
+   "height_feet": {
+    "value": 90,
+    "quote": "8-story (90 feet and 4 inches)",
+    "source": "ZAB 2026-07-09 item 7"
+   }
+  },
+  {
+   "project_key": "ZP2021-0201",
+   "units": {
+    "value": 40,
+    "quote": "construct an eight-story, mixed-use building with 40 Application: dwelling units",
+    "source": "ZAB 2022-05-26 item 9"
+   },
+   "stories": {
+    "value": 8,
+    "quote": "eight-story, mixed-use building",
+    "source": "ZAB 2022-05-26 item 9"
+   },
+   "height_feet": {
+    "value": 75,
+    "quote": "incorporate safety glass on all 4 sides of the building, up to 75 feet.",
+    "source": "ZAB 2022-05-26 item 9"
+   }
+  },
+  {
+   "project_key": "ZP2021-0207",
+   "stories": {
+    "value": 2,
+    "quote": "two-story single-family dwelling",
+    "source": "ZAB 2022-09-08 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2021-0210"
+  },
+  {
+   "project_key": "ZP2021-0220",
+   "units": {
+    "value": 36,
+    "quote": "36 dwelling units (condominium)",
+    "source": "ZAB 2023-03-30 item 2"
+   },
+   "stories": {
+    "value": 4,
+    "quote": "construct a four-story (50 feet) mixed-use development",
+    "source": "ZAB 2023-03-30 item 2"
+   },
+   "height_feet": {
+    "value": 50,
+    "quote": "a four-story (50 feet) mixed-use development",
+    "source": "ZAB 2023-03-30 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2022-0011",
+   "units": {
+    "value": 68,
+    "quote": "containing 68 dwelling units (including seven very-low-income units)",
+    "source": "ZAB 2023-01-12 item 8"
+   },
+   "stories": {
+    "value": 7,
+    "quote": "7-story mixed-use building",
+    "source": "ZAB 2023-01-12 item 8"
+   },
+   "density_bonus": {
+    "value": true,
+    "quote": "utilizing State Density Bonus",
+    "source": "ZAB 2023-01-12 item 8"
+   }
+  },
+  {
+   "project_key": "ZP2022-0019",
+   "units": {
+    "value": 11,
+    "quote": "multifamily residential building with 11 units (one Very-Low Income)",
+    "source": "ZAB 2023-04-27 item 7"
+   },
+   "stories": {
+    "value": 4,
+    "quote": "construct a four-story (47 feet, 3 inches), 10,024 square-foot multifamily residential building",
+    "source": "ZAB 2023-04-27 item 7"
+   },
+   "height_feet": {
+    "value": 47,
+    "quote": "four-story (47 feet, 3 inches)",
+    "source": "ZAB 2023-04-27 item 7"
+   }
+  },
+  {
+   "project_key": "ZP2016-0101",
+   "units": {
+    "value": 28,
+    "quote": "28 dwellings",
+    "source": "ZAB 2017-10-26 item 7"
+   },
+   "stories": {
+    "value": 5,
+    "quote": "five-story",
+    "source": "ZAB 2017-10-26 item 7"
+   },
+   "height_feet": {
+    "value": 57,
+    "quote": "57\u2019-8\u201d tall",
+    "source": "ZAB 2017-10-26 item 7"
+   }
+  },
+  {
+   "project_key": "ZP2016-0129",
+   "units": {
+    "value": 2,
+    "quote": "construct two detached, two-story dwellings totaling approximately 3,714 square feet",
+    "source": "ZAB 2017-08-24 item 7"
+   },
+   "stories": {
+    "value": 2,
+    "quote": "two-story",
+    "source": "ZAB 2017-08-24 item 7"
+   }
+  },
+  {
+   "project_key": "ZP2016-0146",
+   "height_feet": {
+    "value": 32,
+    "quote": "average building height of 32 feet 8 inches",
+    "source": "ZAB 2017-11-08 item 5"
+   }
+  },
+  {
+   "project_key": "ZP2016-0147",
+   "units": {
+    "value": 4,
+    "quote": "4 new, 3-story 3,000 square-foot live/work units",
+    "source": "ZAB 2018-05-10 item 4"
+   },
+   "stories": {
+    "value": 3,
+    "quote": "3-story",
+    "source": "ZAB 2018-05-10 item 4"
+   }
+  },
+  {
+   "project_key": "ZP2016-0172",
+   "units": {
+    "value": 32,
+    "quote": "32 dwelling units",
+    "source": "ZAB 2018-05-24 item 5"
+   }
+  },
+  {
+   "project_key": "ZP2016-0174",
+   "stories": {
+    "value": 3,
+    "quote": "three-story",
+    "source": "ZAB 2018-01-25 item 4"
+   }
+  },
+  {
+   "project_key": "ZP2015-0180",
+   "units": {
+    "value": 2,
+    "quote": "construct two new detached, two-story single-family dwellings",
+    "source": "ZAB 2016-01-28 item 8"
+   },
+   "stories": {
+    "value": 2,
+    "quote": "two new detached, two-story single-family dwellings",
+    "source": "ZAB 2016-01-28 item 8"
+   }
+  },
+  {
+   "project_key": "ZP2015-0184",
+   "units": {
+    "value": 2,
+    "quote": "legalize two residential units that have been converted without permits from their originally approved use as commercial spaces",
+    "source": "ZAB 2016-06-23 item 3"
+   }
+  },
+  {
+   "project_key": "ZP2015-0189",
+   "stories": {
+    "value": 2,
+    "quote": "construct a new two-story approximately 820 square foot dwelling",
+    "source": "ZAB 2017-02-09 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2015-0193",
+   "stories": {
+    "value": 3,
+    "quote": "construct a new 2,987 sq. ft., 3-story single family dwelling",
+    "source": "ZAB 2017-02-09 item 8"
+   }
+  },
+  {
+   "project_key": "ZP2015-0196",
+   "units": {
+    "value": 2,
+    "quote": "construct a new two-story, 2,501 square foot, two-unit residential building to the rear of the existing duplex",
+    "source": "ZAB 2016-09-08 item 8"
+   },
+   "stories": {
+    "value": 2,
+    "quote": "construct a new two-story, 2,501 square foot, two-unit residential building",
+    "source": "ZAB 2016-09-08 item 8"
+   }
+  },
+  {
+   "project_key": "ZP2015-0209",
+   "units": {
+    "value": 4,
+    "quote": "construct four new three-story detached single- family residences ranging from 1,275 to 1,487 square feet in size",
+    "source": "ZAB 2016-06-09 item 2"
+   },
+   "stories": {
+    "value": 3,
+    "quote": "construct four new three-story detached single- family residences",
+    "source": "ZAB 2016-06-09 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2022-0171"
+  },
+  {
+   "project_key": "ZP2022-0179",
+   "units": {
+    "value": 40,
+    "quote": "40 dwelling units",
+    "source": "ZAB 2023-10-12 item 4"
+   },
+   "stories": {
+    "value": 6,
+    "quote": "six-story",
+    "source": "ZAB 2023-10-12 item 4"
+   },
+   "height_feet": {
+    "value": 70,
+    "quote": "70 feet",
+    "source": "ZAB 2023-10-12 item 4"
+   },
+   "density_bonus": {
+    "value": true,
+    "quote": "utilizing State Density Bonus",
+    "source": "ZAB 2023-10-12 item 4"
+   }
+  },
+  {
+   "project_key": "ZP2023-0024",
+   "units": {
+    "value": 69,
+    "quote": "69 dwelling units",
+    "source": "ZAB 2024-09-26 item 2"
+   },
+   "stories": {
+    "value": 7,
+    "quote": "seven-story",
+    "source": "ZAB 2024-09-26 item 2"
+   },
+   "height_feet": {
+    "value": 87,
+    "quote": "87.5 feet",
+    "source": "ZAB 2024-09-26 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2023-0036",
+   "units": {
+    "value": 1,
+    "quote": "construct a new 676 square foot, one-story (11 feet) single-family dwelling unit",
+    "source": "ZAB 2023-11-30 item 3"
+   },
+   "stories": {
+    "value": 1,
+    "quote": "one-story",
+    "source": "ZAB 2023-11-30 item 3"
+   },
+   "height_feet": {
+    "value": 11,
+    "quote": "11 feet",
+    "source": "ZAB 2023-11-30 item 3"
+   }
+  },
+  {
+   "project_key": "ZP2023-0040",
+   "stories": {
+    "value": 28,
+    "quote": "28-story",
+    "source": "ZAB 2025-02-27 item 3"
+   },
+   "height_feet": {
+    "value": 312,
+    "quote": "312-foot tall, plus 5-foot parapet",
+    "source": "ZAB 2025-02-27 item 3"
+   },
+   "density_bonus": {
+    "value": true,
+    "quote": "58 Very Low-Income Density Bonus qualifying units",
+    "source": "ZAB 2025-02-27 item 3"
+   }
+  },
+  {
+   "project_key": "ZP2023-0045",
+   "stories": {
+    "value": 3,
+    "quote": "three-story",
+    "source": "ZAB 2023-10-26 item 5"
+   },
+   "height_feet": {
+    "value": 30,
+    "quote": "30 feet 6 inches",
+    "source": "ZAB 2023-10-26 item 5"
+   }
+  },
+  {
+   "project_key": "ZP2024-0077",
+   "units": {
+    "value": 38,
+    "quote": "construct an eight-story (85 feet) 39,646-square-foot residential building with 38 units",
+    "source": "ZAB 2025-07-24 item 6"
+   },
+   "stories": {
+    "value": 8,
+    "quote": "an eight-story (85 feet)",
+    "source": "ZAB 2025-07-24 item 6"
+   },
+   "height_feet": {
+    "value": 85,
+    "quote": "eight-story (85 feet)",
+    "source": "ZAB 2025-07-24 item 6"
+   },
+   "density_bonus": {
+    "value": true,
+    "quote": "2 Low Income Density Bonus qualifying/replacement units",
+    "source": "ZAB 2025-07-24 item 6"
+   }
+  },
+  {
+   "project_key": "ZP2024-0100",
+   "height_feet": {
+    "value": 14,
+    "quote": "an average height of 14 feet and 11 inches",
+    "source": "ZAB 2024-11-14 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2024-0114",
+   "units": {
+    "value": 66,
+    "quote": "66 units total, including three (3) Very Low Income (VLI) units, and two (2) Extremely Low Income (ELI) units",
+    "source": "ZAB 2025-09-25 item 8"
+   },
+   "stories": {
+    "value": 8,
+    "quote": "eight-story (82 feet)",
+    "source": "ZAB 2025-09-25 item 8"
+   },
+   "height_feet": {
+    "value": 82,
+    "quote": "eight-story (82 feet)",
+    "source": "ZAB 2025-09-25 item 8"
+   },
+   "density_bonus": {
+    "value": true,
+    "quote": "utilizing State Density Bonus",
+    "source": "ZAB 2025-09-25 item 8"
+   }
+  },
+  {
+   "project_key": "ZP2024-0116",
+   "stories": {
+    "value": 2,
+    "quote": "a 2-story (34 feet in maximum height) mixed-use residential building",
+    "source": "ZAB 2025-06-12 item 6"
+   },
+   "height_feet": {
+    "value": 34,
+    "quote": "2-story (34 feet in maximum height)",
+    "source": "ZAB 2025-06-12 item 6"
+   }
+  },
+  {
+   "project_key": "ZP2024-0126",
+   "units": {
+    "value": 65,
+    "quote": "with 65 units (5 Very-Low Income, 2 Low-Income), utilizing a State Density Bonus",
+    "source": "ZAB 2025-10-30 item 6"
+   },
+   "stories": {
+    "value": 8,
+    "quote": "an eight-story (92 foot), 80,000 square-foot residential building",
+    "source": "ZAB 2025-10-30 item 6"
+   },
+   "height_feet": {
+    "value": 92,
+    "quote": "eight-story (92 foot)",
+    "source": "ZAB 2025-10-30 item 6"
+   },
+   "density_bonus": {
+    "value": true,
+    "quote": "utilizing a State Density Bonus",
+    "source": "ZAB 2025-10-30 item 6"
+   }
+  },
+  {
+   "project_key": "ZP2024-0162",
+   "units": {
+    "value": 169,
+    "quote": "containing 169 dwelling units, including 6 Extremely Low-Income (ELI), 7 Very Low-Income (VLI), 6 Low-Income (LI), and 13 Moderate Income (MI) units",
+    "source": "ZAB 2025-10-09 item 7"
+   },
+   "stories": {
+    "value": 20,
+    "quote": "a 20-story (208 feet)",
+    "source": "ZAB 2025-10-09 item 7"
+   },
+   "height_feet": {
+    "value": 208,
+    "quote": "20-story (208 feet)",
+    "source": "ZAB 2025-10-09 item 7"
+   }
+  },
+  {
+   "project_key": "ZP2022-0062",
+   "units": {
+    "value": 24,
+    "quote": "multifamily building with 24 units",
+    "source": "ZAB 2023-01-12 item 4"
+   },
+   "stories": {
+    "value": 5,
+    "quote": "five-story",
+    "source": "ZAB 2023-01-12 item 4"
+   },
+   "density_bonus": {
+    "value": true,
+    "quote": "utilizing State Density Bonus",
+    "source": "ZAB 2023-01-12 item 4"
+   }
+  },
+  {
+   "project_key": "ZP2022-0087",
+   "stories": {
+    "value": 3,
+    "quote": "three-story",
+    "source": "ZAB 2023-01-12 item 7"
+   }
+  },
+  {
+   "project_key": "ZP2022-0097",
+   "units": {
+    "value": 83,
+    "quote": "83 units (including six Very Low-Income units)",
+    "source": "ZAB 2023-04-27 item 3"
+   },
+   "stories": {
+    "value": 8,
+    "quote": "eight- story",
+    "source": "ZAB 2023-04-27 item 3"
+   },
+   "height_feet": {
+    "value": 88,
+    "quote": "88 feet and 8 inches",
+    "source": "ZAB 2023-04-27 item 3"
+   },
+   "density_bonus": {
+    "value": true,
+    "quote": "Density Bonus project",
+    "source": "ZAB 2023-04-27 item 3"
+   }
+  },
+  {
+   "project_key": "ZP2022-0098",
+   "units": {
+    "value": 2,
+    "quote": "construct two new single- family dwellings",
+    "source": "ZAB 2022-12-08 item 5"
+   }
+  },
+  {
+   "project_key": "ZP2022-0099",
+   "units": {
+    "value": 207,
+    "quote": "containing 207 dwelling units",
+    "source": "ZAB 2023-05-11 item 4"
+   },
+   "stories": {
+    "value": 8,
+    "quote": "eight-story",
+    "source": "ZAB 2023-05-11 item 4"
+   },
+   "height_feet": {
+    "value": 89,
+    "quote": "89 feet- 2 inches",
+    "source": "ZAB 2023-05-11 item 4"
+   },
+   "density_bonus": {
+    "value": true,
+    "quote": "utilizing State Density Bonus",
+    "source": "ZAB 2023-05-11 item 4"
+   }
+  },
+  {
+   "project_key": "ZP2022-0104",
+   "stories": {
+    "value": 3,
+    "quote": "three-story",
+    "source": "ZAB 2023-04-27 item 10"
+   },
+   "height_feet": {
+    "value": 41,
+    "quote": "41 feet and 11 inches",
+    "source": "ZAB 2023-04-27 item 10"
+   }
+  },
+  {
+   "project_key": "ZP2021-0070",
+   "stories": {
+    "value": 6,
+    "quote": "six-story, mixed-use building",
+    "source": "ZAB 2022-04-28 item 6"
+   }
+  },
+  {
+   "project_key": "ZP2021-0083",
+   "units": {
+    "value": 3,
+    "quote": "construct three detached, three-story dwelling units",
+    "source": "ZAB 2021-10-28 item 2"
+   },
+   "stories": {
+    "value": 3,
+    "quote": "three-story dwelling units",
+    "source": "ZAB 2021-10-28 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2021-0084",
+   "units": {
+    "value": 3,
+    "quote": "construct three detached, three-story dwelling units",
+    "source": "ZAB 2021-10-28 item 3"
+   },
+   "stories": {
+    "value": 3,
+    "quote": "three-story dwelling units",
+    "source": "ZAB 2021-10-28 item 3"
+   }
+  },
+  {
+   "project_key": "ZP2021-0095",
+   "units": {
+    "value": 12,
+    "quote": "construct a six-story, multi-family, residential building with 12 units (including two Low Income units)",
+    "source": "ZAB 2022-05-26 item 10"
+   },
+   "stories": {
+    "value": 6,
+    "quote": "six-story, multi-family, residential building",
+    "source": "ZAB 2022-05-26 item 10"
+   }
+  },
+  {
+   "project_key": "ZP2021-0113",
+   "stories": {
+    "value": 3,
+    "quote": "three-story single-family dwelling",
+    "source": "ZAB 2022-01-13 item 2"
+   },
+   "height_feet": {
+    "value": 28,
+    "quote": "an average height of 28 feet",
+    "source": "ZAB 2022-01-13 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2021-0129",
+   "stories": {
+    "value": 2,
+    "quote": "lift the two-story duplex",
+    "source": "ZAB 2022-07-14 item 3"
+   }
+  },
+  {
+   "project_key": "UP2013-0046",
+   "units": {
+    "value": 1,
+    "quote": "construct a detached 1-story, 3-bedroom dwelling unit of approximately 1,200 sq. ft.",
+    "source": "ZAB 2015-07-09 item 4"
+   },
+   "stories": {
+    "value": 1,
+    "quote": "detached 1-story, 3-bedroom dwelling unit",
+    "source": "ZAB 2015-07-09 item 4"
+   }
+  },
+  {
+   "project_key": "UP2013-0061",
+   "units": {
+    "value": 70,
+    "quote": "70 dwellings",
+    "source": "ZAB 2015-06-11 item 5"
+   },
+   "stories": {
+    "value": 6,
+    "quote": "6-story",
+    "source": "ZAB 2015-06-11 item 5"
+   },
+   "height_feet": {
+    "value": 70,
+    "quote": "70\u2019 tall",
+    "source": "ZAB 2015-06-11 item 5"
+   }
+  },
+  {
+   "project_key": "UP2014-0012",
+   "height_feet": {
+    "value": 25,
+    "quote": "an average height of 25\u20198\u201d",
+    "source": "ZAB 2015-07-23 item 3"
+   }
+  },
+  {
+   "project_key": "UP2014-0014",
+   "stories": {
+    "value": 3,
+    "quote": "three-story, 2,677 square-foot addition",
+    "source": "ZAB 2015-07-23 item 5"
+   }
+  },
+  {
+   "project_key": "ZP2014-0045",
+   "units": {
+    "value": 107,
+    "quote": "107 dwelling units",
+    "source": "ZAB 2016-04-14 item 6"
+   },
+   "stories": {
+    "value": 7,
+    "quote": "seven-story multifamily development",
+    "source": "ZAB 2016-04-14 item 6"
+   }
+  },
+  {
+   "project_key": "ZP2015-0011",
+   "stories": {
+    "value": 3,
+    "quote": "3-story, single-family residence",
+    "source": "ZAB 2015-07-09 item 5"
+   },
+   "height_feet": {
+    "value": 28,
+    "quote": "average building height of 28\u2019",
+    "source": "ZAB 2015-07-09 item 5"
+   }
+  },
+  {
+   "project_key": "ZP2017-0040",
+   "units": {
+    "value": 14,
+    "quote": "for a total of 14 dwelling units",
+    "source": "ZAB 2017-09-28 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2017-0044",
+   "units": {
+    "value": 1,
+    "quote": "construct a 743 sq. ft., one-story, single- family dwelling",
+    "source": "ZAB 2017-10-12 item 5"
+   },
+   "stories": {
+    "value": 1,
+    "quote": "one-story",
+    "source": "ZAB 2017-10-12 item 5"
+   }
+  },
+  {
+   "project_key": "ZP2017-0055",
+   "stories": {
+    "value": 3,
+    "quote": "three-story",
+    "source": "ZAB 2018-03-22 item 7"
+   }
+  },
+  {
+   "project_key": "ZP2017-0060"
+  },
+  {
+   "project_key": "ZP2017-0063",
+   "stories": {
+    "value": 2,
+    "quote": "2-story single-family dwelling",
+    "source": "ZAB 2017-10-12 item 3"
+   },
+   "height_feet": {
+    "value": 22,
+    "quote": "new average height of 22\u20197\u201d",
+    "source": "ZAB 2017-10-12 item 3"
+   }
+  },
+  {
+   "project_key": "ZP2017-0073",
+   "stories": {
+    "value": 1,
+    "quote": "1-story single- family dwelling",
+    "source": "ZAB 2018-01-11 item 3"
+   },
+   "height_feet": {
+    "value": 27,
+    "quote": "new average height of 27\u20199\u201d",
+    "source": "ZAB 2018-01-11 item 3"
+   }
+  },
+  {
+   "project_key": "ZP2020-0072",
+   "units": {
+    "value": 206,
+    "quote": "206 units (including 23 Very Low-Income Density Bonus qualifying units)",
+    "source": "ZAB 2023-07-27 item 6"
+   },
+   "stories": {
+    "value": 8,
+    "quote": "eight-stories (88 feet, 6 inches)",
+    "source": "ZAB 2023-07-27 item 6"
+   },
+   "height_feet": {
+    "value": 88,
+    "quote": "eight-stories (88 feet, 6 inches)",
+    "source": "ZAB 2023-07-27 item 6"
+   },
+   "density_bonus": {
+    "value": true,
+    "quote": "23 Very Low-Income Density Bonus qualifying units",
+    "source": "ZAB 2023-07-27 item 6"
+   }
+  },
+  {
+   "project_key": "ZP2020-0075",
+   "units": {
+    "value": 4,
+    "quote": "change two commercial tenant spaces into four dwelling units",
+    "source": "ZAB 2021-01-14 item 4"
+   }
+  },
+  {
+   "project_key": "ZP2020-0090",
+   "units": {
+    "value": 22,
+    "quote": "17,033 square foot residential building with 22 dwelling units",
+    "source": "ZAB 2024-12-12 item 4"
+   }
+  },
+  {
+   "project_key": "ZP2020-0115",
+   "units": {
+    "value": 3,
+    "quote": "construct a new three-story three-unit residential",
+    "source": "ZAB 2021-12-09 item 6"
+   },
+   "stories": {
+    "value": 3,
+    "quote": "construct a new three-story three-unit residential",
+    "source": "ZAB 2021-12-09 item 6"
+   }
+  },
+  {
+   "project_key": "ZP2020-0134"
+  },
+  {
+   "project_key": "ZP2020-0136",
+   "height_feet": {
+    "value": 20,
+    "quote": "average height of 20 feet-1 inch",
+    "source": "ZAB 2021-07-08 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2022-0020",
+   "units": {
+    "value": 3,
+    "quote": "three-unit live/work building",
+    "source": "ZAB 2023-02-09 item 5"
+   },
+   "stories": {
+    "value": 3,
+    "quote": "three-story",
+    "source": "ZAB 2023-02-09 item 5"
+   },
+   "height_feet": {
+    "value": 39,
+    "quote": "(39 feet)",
+    "source": "ZAB 2023-02-09 item 5"
+   }
+  },
+  {
+   "project_key": "ZP2022-0021",
+   "units": {
+    "value": 63,
+    "quote": "63 dwelling units",
+    "source": "ZAB 2026-02-26 item 6"
+   },
+   "stories": {
+    "value": 8,
+    "quote": "8-story",
+    "source": "ZAB 2026-02-26 item 6"
+   },
+   "height_feet": {
+    "value": 85,
+    "quote": "(85 feet, plus a 5-foot 2-inch parapet)",
+    "source": "ZAB 2026-02-26 item 6"
+   },
+   "density_bonus": {
+    "value": true,
+    "quote": "utilizing State Density Bonus",
+    "source": "ZAB 2026-02-26 item 6"
+   }
+  },
+  {
+   "project_key": "ZP2022-0026",
+   "stories": {
+    "value": 25,
+    "quote": "25-story",
+    "source": "ZAB 2023-03-30 item 3"
+   },
+   "height_feet": {
+    "value": 267,
+    "quote": "(267 feet, 6 inches)",
+    "source": "ZAB 2023-03-30 item 3"
+   },
+   "density_bonus": {
+    "value": true,
+    "quote": "Density Bonus qualifying units",
+    "source": "ZAB 2023-03-30 item 3"
+   }
+  },
+  {
+   "project_key": "ZP2022-0028",
+   "units": {
+    "value": 2,
+    "quote": "two two-story single-family dwellings",
+    "source": "ZAB 2022-12-08 item 6"
+   },
+   "stories": {
+    "value": 2,
+    "quote": "two-story",
+    "source": "ZAB 2022-12-08 item 6"
+   }
+  },
+  {
+   "project_key": "ZP2022-0046",
+   "units": {
+    "value": 166,
+    "quote": "166 dwellings",
+    "source": "ZAB 2023-05-11 item 5"
+   },
+   "stories": {
+    "value": 10,
+    "quote": "10-story",
+    "source": "ZAB 2023-05-11 item 5"
+   },
+   "height_feet": {
+    "value": 114,
+    "quote": "(114 feet)",
+    "source": "ZAB 2023-05-11 item 5"
+   }
+  },
+  {
+   "project_key": "ZP2022-0053"
+  },
+  {
+   "project_key": "ZP2023-0057",
+   "units": {
+    "value": 58,
+    "quote": "58 new units",
+    "source": "ZAB 2023-11-30 item 2"
+   },
+   "stories": {
+    "value": 6,
+    "quote": "six-story",
+    "source": "ZAB 2023-11-30 item 2"
+   },
+   "height_feet": {
+    "value": 71,
+    "quote": "71-feet and five-inches",
+    "source": "ZAB 2023-11-30 item 2"
+   },
+   "density_bonus": {
+    "value": true,
+    "quote": "utilizing a State Density Bonus",
+    "source": "ZAB 2023-11-30 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2023-0059",
+   "units": {
+    "value": 2,
+    "quote": "two individual units",
+    "source": "ZAB 2023-07-27 item 4"
+   },
+   "stories": {
+    "value": 2,
+    "quote": "two-story single-family dwelling unit",
+    "source": "ZAB 2023-07-27 item 4"
+   }
+  },
+  {
+   "project_key": "ZP2023-0064",
+   "units": {
+    "value": 74,
+    "quote": "74 dwelling units",
+    "source": "ZAB 2024-05-09 item 2"
+   },
+   "stories": {
+    "value": 8,
+    "quote": "eight-story",
+    "source": "ZAB 2024-05-09 item 2"
+   },
+   "height_feet": {
+    "value": 90,
+    "quote": "90 feet",
+    "source": "ZAB 2024-05-09 item 2"
+   },
+   "density_bonus": {
+    "value": true,
+    "quote": "a Density Bonus Project",
+    "source": "ZAB 2024-05-09 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2023-0068",
+   "units": {
+    "value": 53,
+    "quote": "53 dwelling units",
+    "source": "ZAB 2025-02-27 item 2"
+   },
+   "stories": {
+    "value": 8,
+    "quote": "eight-story",
+    "source": "ZAB 2025-02-27 item 2"
+   },
+   "height_feet": {
+    "value": 89,
+    "quote": "89-feet, 1-inches",
+    "source": "ZAB 2025-02-27 item 2"
+   },
+   "density_bonus": {
+    "value": true,
+    "quote": "a State Density Bonus project",
+    "source": "ZAB 2025-02-27 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2023-0079",
+   "units": {
+    "value": 227,
+    "quote": "227 dwelling units",
+    "source": "ZAB 2024-12-12 item 6"
+   },
+   "stories": {
+    "value": 17,
+    "quote": "17-story",
+    "source": "ZAB 2024-12-12 item 6"
+   },
+   "height_feet": {
+    "value": 183,
+    "quote": "183 feet, plus 5-foot parapet",
+    "source": "ZAB 2024-12-12 item 6"
+   },
+   "density_bonus": {
+    "value": true,
+    "quote": "Very Low-Income Density Bonus qualifying units",
+    "source": "ZAB 2024-12-12 item 6"
+   }
+  },
+  {
+   "project_key": "ZP2023-0090"
+  },
+  {
+   "project_key": "ZP2015-0141",
+   "units": {
+    "value": 4,
+    "quote": "construct four new dwelling units in two detached three-story buildings",
+    "source": "ZAB 2016-07-28 item 4"
+   },
+   "stories": {
+    "value": 3,
+    "quote": "two detached three-story buildings",
+    "source": "ZAB 2016-07-28 item 4"
+   }
+  },
+  {
+   "project_key": "ZP2015-0143"
+  },
+  {
+   "project_key": "ZP2015-0157",
+   "units": {
+    "value": 152,
+    "quote": "the approved 152-Unit mixed-use project at 2001 Fourth Street",
+    "source": "ZAB 2015-10-08 item 5"
+   }
+  },
+  {
+   "project_key": "ZP2015-0160",
+   "units": {
+    "value": 2,
+    "quote": "relocate a 2-story, 2-unit building from 1922-24 Walnut Street to the rear of the subject property at 2214 Martin Luther King Jr. Way",
+    "source": "ZAB 2016-05-12 item 2"
+   },
+   "stories": {
+    "value": 2,
+    "quote": "relocate a 2-story, 2-unit building from 1922-24 Walnut Street",
+    "source": "ZAB 2016-05-12 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2015-0172",
+   "units": {
+    "value": 1,
+    "quote": "convert an existing one story, 2,172 square- foot office to a single-family dwelling",
+    "source": "ZAB 2018-05-24 item 2"
+   },
+   "stories": {
+    "value": 1,
+    "quote": "convert an existing one story, 2,172 square- foot office to a single-family dwelling",
+    "source": "ZAB 2018-05-24 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2015-0177",
+   "units": {
+    "value": 50,
+    "quote": "the construction of a 6-story, mixed-use building with 5 live/work spaces and 50 dwelling units",
+    "source": "ZAB 2016-02-25 item 6"
+   },
+   "stories": {
+    "value": 6,
+    "quote": "the construction of a 6-story, mixed-use building",
+    "source": "ZAB 2016-02-25 item 6"
+   },
+   "density_bonus": {
+    "value": true,
+    "quote": "the requested density bonus and concessions",
+    "source": "ZAB 2016-02-25 item 6"
+   }
+  },
+  {
+   "project_key": "ZP2017-0083",
+   "units": {
+    "value": 122,
+    "quote": "approximately 122 dwelling units",
+    "source": "ZAB 2018-10-25 item 3"
+   }
+  },
+  {
+   "project_key": "ZP2017-0089",
+   "stories": {
+    "value": 6,
+    "quote": "a 6-story mixed-use building",
+    "source": "ZAB 2018-07-12 item 2"
+   },
+   "height_feet": {
+    "value": 75,
+    "quote": "increase the average height from 72\u2019 to 75\u2019",
+    "source": "ZAB 2018-07-12 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2017-0103",
+   "units": {
+    "value": 37,
+    "quote": "37 dwellings (including 2 Below Market Rate units)",
+    "source": "ZAB 2018-03-08 item 4"
+   },
+   "stories": {
+    "value": 6,
+    "quote": "six-story",
+    "source": "ZAB 2018-03-08 item 4"
+   },
+   "height_feet": {
+    "value": 62,
+    "quote": "62\u2019 tall",
+    "source": "ZAB 2018-03-08 item 4"
+   }
+  },
+  {
+   "project_key": "ZP2017-0109",
+   "units": {
+    "value": 2,
+    "quote": "construct two new detached, two-story dwellings",
+    "source": "ZAB 2017-10-12 item 7"
+   },
+   "stories": {
+    "value": 2,
+    "quote": "two-story",
+    "source": "ZAB 2017-10-12 item 7"
+   }
+  },
+  {
+   "project_key": "ZP2017-0145",
+   "stories": {
+    "value": 3,
+    "quote": "three-story",
+    "source": "ZAB 2018-06-14 item 3"
+   }
+  },
+  {
+   "project_key": "ZP2017-0149",
+   "stories": {
+    "value": 2,
+    "quote": "two-story",
+    "source": "ZAB 2018-03-22 item 4"
+   }
+  },
+  {
+   "project_key": "ZP2023-0094",
+   "units": {
+    "value": 4,
+    "quote": "converting four existing office spaces into four live/work units",
+    "source": "ZAB 2025-07-10 item 6"
+   },
+   "stories": {
+    "value": 2,
+    "quote": "two-story building",
+    "source": "ZAB 2025-07-10 item 6"
+   },
+   "height_feet": {
+    "value": 32,
+    "quote": "32 feet, 1 inch in maximum height",
+    "source": "ZAB 2025-07-10 item 6"
+   }
+  },
+  {
+   "project_key": "ZP2023-0098"
+  },
+  {
+   "project_key": "ZP2023-0101",
+   "stories": {
+    "value": 2,
+    "quote": "two-story (22 feet)",
+    "source": "ZAB 2023-10-12 item 2"
+   },
+   "height_feet": {
+    "value": 22,
+    "quote": "two-story (22 feet)",
+    "source": "ZAB 2023-10-12 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2023-0107",
+   "units": {
+    "value": 66,
+    "quote": "containing 66 dwelling units",
+    "source": "ZAB 2024-05-30 item 3"
+   },
+   "density_bonus": {
+    "value": true,
+    "quote": "Density Bonus qualifying units",
+    "source": "ZAB 2024-05-30 item 3"
+   }
+  },
+  {
+   "project_key": "ZP2023-0112",
+   "units": {
+    "value": 2,
+    "quote": "construct two detached single-family dwellings",
+    "source": "ZAB 2024-02-22 item 4"
+   },
+   "stories": {
+    "value": 2,
+    "quote": "a two story (23 feet and 9 inches)",
+    "source": "ZAB 2024-02-22 item 4"
+   }
+  },
+  {
+   "project_key": "ZP2023-0113",
+   "units": {
+    "value": 2,
+    "quote": "construct two single-family dwelling units",
+    "source": "ZAB 2024-02-22 item 5"
+   },
+   "stories": {
+    "value": 2,
+    "quote": "a two-story (23 feet)",
+    "source": "ZAB 2024-02-22 item 5"
+   }
+  },
+  {
+   "project_key": "ZP2019-0070",
+   "units": {
+    "value": 45,
+    "quote": "construct one, five-story, mixed-use building with 45 units",
+    "source": "ZAB 2019-12-12 item 8"
+   },
+   "stories": {
+    "value": 5,
+    "quote": "one, five-story, mixed-use building",
+    "source": "ZAB 2019-12-12 item 8"
+   }
+  },
+  {
+   "project_key": "ZP2019-0093",
+   "stories": {
+    "value": 3,
+    "quote": "existing 2,204 sq. ft., three-story single-family residence",
+    "source": "ZAB 2019-12-12 item 3"
+   }
+  },
+  {
+   "project_key": "ZP2019-0141",
+   "stories": {
+    "value": 2,
+    "quote": "two detached, two-story",
+    "source": "ZAB 2020-05-28 item 6"
+   }
+  },
+  {
+   "project_key": "ZP2016-0214",
+   "stories": {
+    "value": 3,
+    "quote": "three-story, four-unit apartment building",
+    "source": "ZAB 2017-08-24 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2016-0223",
+   "units": {
+    "value": 2,
+    "quote": "construct two, two-story, single-family dwellings of 2,181 and 2,213 square feet each",
+    "source": "ZAB 2017-11-08 item 6"
+   },
+   "stories": {
+    "value": 2,
+    "quote": "two-story, single-family dwellings",
+    "source": "ZAB 2017-11-08 item 6"
+   }
+  },
+  {
+   "project_key": "ZP2016-0232"
+  },
+  {
+   "project_key": "ZP2016-0244",
+   "units": {
+    "value": 57,
+    "quote": "57 dwelling units",
+    "source": "ZAB 2018-07-26 item 4"
+   },
+   "stories": {
+    "value": 5,
+    "quote": "5-story",
+    "source": "ZAB 2018-07-26 item 4"
+   },
+   "height_feet": {
+    "value": 61,
+    "quote": "61 foot-tall",
+    "source": "ZAB 2018-07-26 item 4"
+   }
+  },
+  {
+   "project_key": "ZP2016-0247",
+   "units": {
+    "value": 4,
+    "quote": "construct 4 detached, 3-story, approximately 1,800 square-foot, single-family dwellings",
+    "source": "ZAB 2018-04-12 item 6"
+   },
+   "stories": {
+    "value": 3,
+    "quote": "3-story, approximately 1,800 square-foot, single-family dwellings",
+    "source": "ZAB 2018-04-12 item 6"
+   }
+  },
+  {
+   "project_key": "ZP2016-0253",
+   "stories": {
+    "value": 2,
+    "quote": "two-story single-family residence",
+    "source": "ZAB 2018-01-25 item 2"
+   },
+   "height_feet": {
+    "value": 23,
+    "quote": "23 feet in average height",
+    "source": "ZAB 2018-01-25 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2018-0156",
+   "units": {
+    "value": 60,
+    "quote": "60 dwelling units (including eight Very Low- Income and seven Low-Income)",
+    "source": "ZAB 2024-06-27 item 2"
+   },
+   "stories": {
+    "value": 7,
+    "quote": "seven-story",
+    "source": "ZAB 2024-06-27 item 2"
+   },
+   "height_feet": {
+    "value": 75,
+    "quote": "75 feet",
+    "source": "ZAB 2024-06-27 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2018-0178",
+   "stories": {
+    "value": 2,
+    "quote": "two-story",
+    "source": "ZAB 2021-04-08 item 3"
+   }
+  },
+  {
+   "project_key": "ZP2018-0220",
+   "units": {
+    "value": 99,
+    "quote": "99 dwellings (including 7 dwellings available to very low income households)",
+    "source": "ZAB 2019-12-12 item 6"
+   },
+   "stories": {
+    "value": 6,
+    "quote": "6-story",
+    "source": "ZAB 2019-12-12 item 6"
+   }
+  },
+  {
+   "project_key": "ZP2018-0229",
+   "stories": {
+    "value": 4,
+    "quote": "4-story",
+    "source": "ZAB 2019-12-12 item 7"
+   }
+  },
+  {
+   "project_key": "ZP2019-0032",
+   "stories": {
+    "value": 3,
+    "quote": "three-story",
+    "source": "ZAB 2021-05-13 item 2"
+   },
+   "height_feet": {
+    "value": 33,
+    "quote": "average and maximum height of 33\u2019",
+    "source": "ZAB 2021-05-13 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2019-0034",
+   "height_feet": {
+    "value": 13,
+    "quote": "13.5 ft. in average height",
+    "source": "ZAB 2019-12-12 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2015-0089",
+   "stories": {
+    "value": 3,
+    "quote": "three-story",
+    "source": "ZAB 2016-08-25 item 5"
+   }
+  },
+  {
+   "project_key": "ZP2015-0096",
+   "units": {
+    "value": 22,
+    "quote": "22 dwelling units",
+    "source": "ZAB 2018-01-25 item 5"
+   },
+   "height_feet": {
+    "value": 64,
+    "quote": "64\u2019-5\u201d tall",
+    "source": "ZAB 2018-01-25 item 5"
+   }
+  },
+  {
+   "project_key": "ZP2015-0099",
+   "units": {
+    "value": 7,
+    "quote": "seven dwelling units",
+    "source": "ZAB 2016-01-28 item 2"
+   }
+  },
+  {
+   "project_key": "ZP2015-0115",
+   "units": {
+    "value": 39,
+    "quote": "39 dwelling units",
+    "source": "ZAB 2015-10-08 item 3"
+   }
+  },
+  {
+   "project_key": "ZP2015-0125"
+  },
+  {
+   "project_key": "ZP2015-0135",
+   "units": {
+    "value": 6,
+    "quote": "six new dwelling units",
+    "source": "ZAB 2016-05-26 item 3"
+   },
+   "stories": {
+    "value": 5,
+    "quote": "existing five-story, mixed-use building",
+    "source": "ZAB 2016-05-26 item 3"
+   }
+  }
+ ]
+}

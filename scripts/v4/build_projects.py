@@ -88,6 +88,11 @@ MEASURES_EVIDENCE = ROOT / "data/derived/building_measures_evidence_2026-09-30.j
 # UC's own documents, each with a verbatim quote, overriding the model's read of the application text (2128 Oxford:
 # the approved hearing set says 456 units / 27 storeys / 285'-4", the 2022 application said 485 / 26).
 MEASURE_RULINGS = ROOT / "corrections/v4/measure_rulings.csv"
+# WHAT THE ZONING ADJUSTMENTS BOARD HEARD (John, 2026-10-07): units, stories, height and State Density Bonus read from
+# the Board's Action Minutes items (scripts/llm_zab_items.py), each kept only with a verbatim quote stating it. A LAST
+# fallback: used only where v4's own readings give nothing; approved measure rulings still override.
+ZAB_ITEMS_EVIDENCE = (ROOT / "data/derived/zab_items_evidence_2026-10-07.json",    # the reading
+                      ROOT / "data/derived/zab_items_evidence_2026-10-07b.json")   # its re-ask of the max_tokens misses
 # ATTRIBUTIONS (John, 2026-10-03): who developed / designed / applied for a project, from a cited source (tabulation
 # form, title block, SFYIMBY article, the developer's own site, a tour caption) -- v2's sourced credits plus re-sourced
 # Panoramic credits and the historic buildings' architects. Names as the source writes them.
@@ -605,6 +610,12 @@ def write(con, projects) -> dict:
             for r in json.load(open(PATHWAYS_EVIDENCE))["readings"]:
                 for x in r.get("pathways") or []:
                     pathways[x.get("source") or r["project_key"]].append(x)
+        zab_items = {}
+        for f_ in ZAB_ITEMS_EVIDENCE:            # the re-ask only fills projects the first reading left unanswered
+            if f_.exists():
+                for r in json.load(open(f_))["readings"]:
+                    if len(r) > 1:
+                        zab_items.setdefault(r["project_key"], r)
         names = {}
         if NAMES_EVIDENCE.exists():
             names = {r["project_key"]: r["name"] for r in json.load(open(NAMES_EVIDENCE))["readings"] if r.get("name")}
@@ -640,6 +651,11 @@ def write(con, projects) -> dict:
             # both readings, each still with its own quote and source
             ev = [x for k in dict.fromkeys([key] + list(p.get("records") or [])) for x in pathways.get(k, [])]
             ev = [dict(t) for t in dict.fromkeys(tuple(sorted(x.items())) for x in ev)]   # one quote, once
+            zi = zab_items.get(key) or {}
+            if zi.get("density_bonus") and not any(x["pathway"] == "density_bonus" for x in ev):
+                ev.append({"pathway": "density_bonus", "quote": zi["density_bonus"]["quote"],
+                           "source": zi["density_bonus"]["source"], "read_from": "zab_minutes"})
+                out["pathway_density_bonus_from_zab"] += 1
             if ev:
                 p["pathways"] = sorted({x["pathway"] for x in ev})
                 p["pathway_evidence"] = ev
@@ -669,10 +685,21 @@ def write(con, projects) -> dict:
                 if ms:
                     p["measures"] = ms
                     out["with_measures"] += 1
+            zst, zh = (zi.get("stories") or {}).get("value"), (zi.get("height_feet") or {}).get("value")
+            zok = not (zst and zh and not (8 <= zh / zst <= 20))     # the same self-contradiction screen as above
+            for m_ in ("stories", "height_feet"):
+                if zok and zi.get(m_) and m_ not in (p.get("measures") or {}) and m_ not in (p.get("measures_excluded") or {}):
+                    p.setdefault("measures", {})[m_] = {**zi[m_], "read_from": "zab_minutes"}
+                    out[f"{m_}_from_zab"] += 1
             if not p["structures"] and proposed.get(key):          # D4: an application's own stated count
                 p["proposed_units"] = proposed[key]["units"]
                 p["proposed_units_evidence"] = {k: proposed[key][k] for k in ("quote", "source")}
                 out["with_proposed_units"] += 1
+            elif not p["structures"] and zi.get("units"):          # else what the Board heard (2026-10-07)
+                p["proposed_units"] = zi["units"]["value"]
+                p["proposed_units_evidence"] = {"quote": zi["units"]["quote"], "source": zi["units"]["source"],
+                                                "read_from": "zab_minutes"}
+                out["proposed_units_from_zab"] += 1
             for mr in measure_rulings.get(key, []):                  # approved measure rulings override the read
                 val = float(mr["value"]); val = int(val) if val.is_integer() else val
                 ev = {"value": val, "quote": mr["source_quote"], "source": mr["source_ref"], "ruling": mr["ruling_id"]}

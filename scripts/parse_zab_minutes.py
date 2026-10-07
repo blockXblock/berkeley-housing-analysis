@@ -7,8 +7,8 @@ PDF listed in a ZAB harvest manifest (scripts/harvest_zab_documents.py), checks 
 (meeting, item, record):
 
   data/derived/zab_actions_<manifest date>.jsonl
-    {meeting_date, item, heading, record, record_cited, prefix_restored, action, action_text, vote, minutes_file,
-     minutes_sha256, source}
+    {meeting_date, item, heading, record, record_cited, prefix_restored, action, action_text, vote, item_text,
+     minutes_file, minutes_sha256, source}
 
 Reading rules (never a guess):
   * an ITEM starts at a numbered heading ("6. 3030 Telegraph Ave – New Public Hearing") and runs to the next;
@@ -59,6 +59,7 @@ def items(text: str):
         m = OUTCOME.search(tail)
         v = VOTE.search(body)
         yield {"item": h[1], "heading": re.sub(r"\s+", " ", h[2])[:120], "records": recs,
+               "item_text": re.sub(r"\s+", " ", body)[:1800],      # what the Board heard: application, units, stories
                "action": m[1].upper() if m else None,
                "action_text": re.sub(r"\s+", " ", tail[m.start(): m.start() + 160]).strip() if m else None,
                "vote": v[1] if v else None}
@@ -92,6 +93,7 @@ def main() -> int:
                 rows.append({"meeting_date": r["meeting_date"], "item": it["item"], "heading": it["heading"],
                              "record": rec, "record_cited": cited, "prefix_restored": restored,
                              "action": it["action"], "action_text": it["action_text"], "vote": it["vote"],
+                             "item_text": it["item_text"],
                              "minutes_file": r["file"], "minutes_sha256": r["sha256"], "source": src})
     assert not bad, f"minutes changed since the manifest: {bad[:5]}"
     best = {}

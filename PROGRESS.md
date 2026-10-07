@@ -746,8 +746,14 @@ that same day, 12 = ZAB heard on another date, 13 not found -- 11 of them have N
 2019-2020, scattered 2014-16) and 2 are parser misses (address present, record number not read). Where minutes exist,
 every large "Staff Decision" is a Board action. Small projects: 50 ZAB that day, 152 not in the minutes (administrative).
 
-**NEXT:** John: the deciding-body rule (proposed) -> machinery (parse_zab_minutes.py + zab_action events) -> next
-rebuild (S006, the view, the rule) -> JN-K baseline append (John) -> archive v2 read-only -> next swap (views with
+**Deciding-body rule APPROVED + BUILT (John 2026-10-07, `bd262ec`, Explorer `f300e56`):** parse_zab_minutes.py ->
+636 zab_action events; decided_by = zab where the minutes record APPROVED on the project's record ON its entitlement
+date. JN-K baseline appended 2026-10-07 (`f9e9104`, PASS). Scratch chain `scratch/2026-10-07_rebuild/chain2` verified:
+both JN-F gates PASS, integrity ok, 1,554 projects, no existing column changed; 91 staff -> zab, 24 zab confirmed, 78
+heard on another date, 186 as recorded; carries S006 (1717 San Pablo alias) and v_project_approval_times. NOT swapped.
+
+**NEXT:** John unlocks -> snapshot + swap chain2 -> regenerate (APR, Datasette, Explorer -- the approval-time panel
+appears, JN-K §4b keys -> a reviewed baseline append) -> archive v2 read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

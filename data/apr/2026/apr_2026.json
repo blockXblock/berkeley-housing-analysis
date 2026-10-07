@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "generated": "2026-10-05T12:53:42.633153",
+  "generated": "2026-10-07T13:44:12.957941",
   "schema_version": "v4 (phase 6 pure re-point)",
   "table_a": {
     "title": "Table A: Applications Deemed Complete in 2026",
@@ -143,7 +143,7 @@
         "app_filed_date": "2026-04-01",
         "app_complete_date": "2026-05-06",
         "entitled_date": "2026-08-13",
-        "density_bonus": 0,
+        "density_bonus": 1,
         "sb35_flag": 0,
         "sb330_flag": 1,
         "ab2011_flag": 0,
@@ -209,7 +209,7 @@
       "total_projects": 11,
       "total_units": 245,
       "vli_units": 7,
-      "density_bonus": 2,
+      "density_bonus": 3,
       "sb35": 0,
       "sb330": 4,
       "ab2011": 0
@@ -2816,6 +2816,28 @@
         "milestone_achieved": "Entitled"
       },
       {
+        "id": "ZP2024-0067",
+        "address": "2276 SHATTUCK Ave",
+        "apn": null,
+        "permits": null,
+        "net_units": 134,
+        "vli_units": null,
+        "status": "entitled",
+        "app_filed_date": "2024-06-05",
+        "app_complete_date": null,
+        "entitled_date": "2026-03-12",
+        "bp_issued_date": null,
+        "co_date": null,
+        "density_bonus": null,
+        "sb35_flag": null,
+        "sb330_flag": null,
+        "ab2011_flag": null,
+        "developer": "PASAND COURTYARD LLC",
+        "architect": null,
+        "construction_status": null,
+        "milestone_achieved": "Entitled"
+      },
+      {
         "id": "ZP2024-0066",
         "address": "2109 VIRGINIA St",
         "apn": null,
@@ -3080,28 +3102,6 @@
         "milestone_achieved": "Entitled"
       },
       {
-        "id": "ZP2024-0067",
-        "address": "2276 SHATTUCK Ave",
-        "apn": null,
-        "permits": null,
-        "net_units": null,
-        "vli_units": null,
-        "status": "entitled",
-        "app_filed_date": "2024-06-05",
-        "app_complete_date": null,
-        "entitled_date": "2026-03-12",
-        "bp_issued_date": null,
-        "co_date": null,
-        "density_bonus": null,
-        "sb35_flag": null,
-        "sb330_flag": null,
-        "ab2011_flag": null,
-        "developer": "PASAND COURTYARD LLC",
-        "architect": null,
-        "construction_status": null,
-        "milestone_achieved": "Entitled"
-      },
-      {
         "id": "ZP2025-0086",
         "address": "2705 BENVENUE Ave",
         "apn": null,
@@ -3148,7 +3148,7 @@
     ],
     "summary": {
       "total_projects": 133,
-      "total_units": 1552,
+      "total_units": 1686,
       "vli_units": 23,
       "entitled_in_year": 17,
       "bp_issued_in_year": 52,
@@ -3212,7 +3212,7 @@
         "total_units": 760,
         "vli_units": 21,
         "market_rate_units": 739,
-        "density_bonus_projects": 5
+        "density_bonus_projects": 6
       },
       {
         "owner_of_record": "BAY PROPERTIES INC",
@@ -3276,7 +3276,7 @@
         "total_units": 52,
         "vli_units": 6,
         "market_rate_units": 46,
-        "density_bonus_projects": 0
+        "density_bonus_projects": 1
       },
       {
         "owner_of_record": "SONIAS SUSHICAKES LLC",
@@ -3308,7 +3308,7 @@
         "total_units": 38,
         "vli_units": 1,
         "market_rate_units": 37,
-        "density_bonus_projects": 0
+        "density_bonus_projects": 1
       },
       {
         "owner_of_record": "LESSER UNGAPATCHKA LLC",
@@ -3332,7 +3332,7 @@
         "total_units": 24,
         "vli_units": 2,
         "market_rate_units": 22,
-        "density_bonus_projects": 0
+        "density_bonus_projects": 1
       },
       {
         "owner_of_record": "OUYETIDWELL LAVONNE TR & OUYE DENNIS ETAL",
@@ -6718,7 +6718,7 @@
       "percent_of_goal": 25.5
     },
     "pipeline": {
-      "total_units": 17435,
+      "total_units": 17918,
       "vli_units": 462,
       "note": "Pipeline units do NOT count toward RHNA until BP is issued"
     },
@@ -6864,6 +6864,17 @@
         "accela_status_date": null
       },
       {
+        "id": "ZP2024-0162",
+        "address": "2425 DURANT Ave",
+        "net_units": 169,
+        "status": "entitled",
+        "developer": "LIVING CITY INVESTMENTS LLC",
+        "app_complete_date": null,
+        "entitled_date": "2025-10-09",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
         "id": "ZP2022-0046",
         "address": "3000 SHATTUCK Ave",
         "net_units": 166,
@@ -6871,6 +6882,17 @@
         "developer": "3000 SHATTUCK AVENUE LLC",
         "app_complete_date": null,
         "entitled_date": "2023-05-11",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
+        "id": "ZP2024-0067",
+        "address": "2276 SHATTUCK Ave",
+        "net_units": 134,
+        "status": "entitled",
+        "developer": "PASAND COURTYARD LLC",
+        "app_complete_date": null,
+        "entitled_date": "2026-03-12",
         "bp_issued_date": null,
         "accela_status_date": null
       },
@@ -7084,6 +7106,17 @@
         "accela_status_date": null
       },
       {
+        "id": "ZP2017-0191",
+        "address": "1200 SAN PABLO Ave",
+        "net_units": 57,
+        "status": "entitled",
+        "developer": "COMBATALADE ALBERT E TR",
+        "app_complete_date": null,
+        "entitled_date": "2018-10-11",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
         "id": "ZP2018-0112",
         "address": "2198 SAN PABLO Ave",
         "net_units": 56,
@@ -7113,6 +7146,28 @@
         "developer": "KEEGAN MEAGHAN",
         "app_complete_date": null,
         "entitled_date": "2025-10-30",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
+        "id": "ZP2015-0021",
+        "address": "824 UNIVERSITY Ave",
+        "net_units": 48,
+        "status": "entitled",
+        "developer": null,
+        "app_complete_date": null,
+        "entitled_date": "2015-06-11",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
+        "id": "ZP2017-0014",
+        "address": "1740 SAN PABLO Ave",
+        "net_units": 48,
+        "status": "entitled",
+        "developer": "PRATO DEVELOPMENT LLC",
+        "app_complete_date": null,
+        "entitled_date": "2018-03-01",
         "bp_issued_date": null,
         "accela_status_date": null
       },
@@ -7223,6 +7278,17 @@
         "developer": "GORDON JOHN K & MITCHELL JANIS L TRS",
         "app_complete_date": null,
         "entitled_date": "2023-12-07",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
+        "id": "ZP2015-0229",
+        "address": "3000 SHATTUCK Ave",
+        "net_units": 23,
+        "status": "entitled",
+        "developer": "3000 SHATTUCK AVENUE LLC",
+        "app_complete_date": null,
+        "entitled_date": "2018-11-27",
         "bp_issued_date": null,
         "accela_status_date": null
       },
@@ -7377,6 +7443,17 @@
         "developer": null,
         "app_complete_date": null,
         "entitled_date": "2023-02-09",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
+        "id": "ZP2024-0060",
+        "address": "2201 BLAKE St",
+        "net_units": 3,
+        "status": "entitled",
+        "developer": "GEORGE ANGELA M & NATHAN D ETAL",
+        "app_complete_date": null,
+        "entitled_date": "2025-08-12",
         "bp_issued_date": null,
         "accela_status_date": null
       },
@@ -7821,6 +7898,17 @@
         "accela_status_date": null
       },
       {
+        "id": "ZP2018-0003",
+        "address": "1609 EIGHTH St",
+        "net_units": 1,
+        "status": "entitled",
+        "developer": "MANN STEPHEN & ATEN BETTY",
+        "app_complete_date": null,
+        "entitled_date": "2018-02-05",
+        "bp_issued_date": null,
+        "accela_status_date": null
+      },
+      {
         "id": "ZP2018-0058",
         "address": "1446 SCENIC Ave",
         "net_units": 1,
@@ -8162,39 +8250,6 @@
         "accela_status_date": null
       },
       {
-        "id": "ZP2024-0067",
-        "address": "2276 SHATTUCK Ave",
-        "net_units": null,
-        "status": "entitled",
-        "developer": "PASAND COURTYARD LLC",
-        "app_complete_date": null,
-        "entitled_date": "2026-03-12",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
-        "id": "ZP2015-0021",
-        "address": "824 UNIVERSITY Ave",
-        "net_units": null,
-        "status": "entitled",
-        "developer": null,
-        "app_complete_date": null,
-        "entitled_date": "2015-06-11",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
-        "id": "ZP2015-0229",
-        "address": "3000 SHATTUCK Ave",
-        "net_units": null,
-        "status": "entitled",
-        "developer": "3000 SHATTUCK AVENUE LLC",
-        "app_complete_date": null,
-        "entitled_date": "2018-11-27",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
         "id": "ZP2016-0014",
         "address": "2720 SAN PABLO Ave",
         "net_units": null,
@@ -8202,17 +8257,6 @@
         "developer": "NDG LLC & RHOADES PLANNING GROUP INC ETAL",
         "app_complete_date": null,
         "entitled_date": "2020-07-23",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
-        "id": "ZP2017-0191",
-        "address": "1200 SAN PABLO Ave",
-        "net_units": null,
-        "status": "entitled",
-        "developer": "COMBATALADE ALBERT E TR",
-        "app_complete_date": null,
-        "entitled_date": "2018-10-11",
         "bp_issued_date": null,
         "accela_status_date": null
       },
@@ -8239,17 +8283,6 @@
         "accela_status_date": null
       },
       {
-        "id": "ZP2024-0060",
-        "address": "2201 BLAKE St",
-        "net_units": null,
-        "status": "entitled",
-        "developer": "GEORGE ANGELA M & NATHAN D ETAL",
-        "app_complete_date": null,
-        "entitled_date": "2025-08-12",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
         "id": "ZP2021-0001",
         "address": "1643 CALIFORNIA St",
         "net_units": null,
@@ -8257,28 +8290,6 @@
         "developer": "OPPENHEIMER IDO & TAMAR D",
         "app_complete_date": null,
         "entitled_date": "2022-11-15",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
-        "id": "ZP2017-0014",
-        "address": "1740 SAN PABLO Ave",
-        "net_units": null,
-        "status": "entitled",
-        "developer": "PRATO DEVELOPMENT LLC",
-        "app_complete_date": null,
-        "entitled_date": "2018-03-01",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
-        "id": "ZP2024-0162",
-        "address": "2425 DURANT Ave",
-        "net_units": null,
-        "status": "entitled",
-        "developer": "LIVING CITY INVESTMENTS LLC",
-        "app_complete_date": null,
-        "entitled_date": "2025-10-09",
         "bp_issued_date": null,
         "accela_status_date": null
       },
@@ -8400,17 +8411,6 @@
         "developer": "WEISS AARON C & KATHERINE R",
         "app_complete_date": null,
         "entitled_date": "2017-12-21",
-        "bp_issued_date": null,
-        "accela_status_date": null
-      },
-      {
-        "id": "ZP2018-0003",
-        "address": "1609 EIGHTH St",
-        "net_units": null,
-        "status": "entitled",
-        "developer": "MANN STEPHEN & ATEN BETTY",
-        "app_complete_date": null,
-        "entitled_date": "2018-02-05",
         "bp_issued_date": null,
         "accela_status_date": null
       },
@@ -8681,7 +8681,7 @@
     ],
     "summary": {
       "total_stalled": 177,
-      "total_units_at_risk": 6560
+      "total_units_at_risk": 7043
     }
   }
 }

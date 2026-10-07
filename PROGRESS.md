@@ -752,8 +752,13 @@ date. JN-K baseline appended 2026-10-07 (`f9e9104`, PASS). Scratch chain `scratc
 both JN-F gates PASS, integrity ok, 1,554 projects, no existing column changed; 91 staff -> zab, 24 zab confirmed, 78
 heard on another date, 186 as recorded; carries S006 (1717 San Pablo alias) and v_project_approval_times. NOT swapped.
 
-**NEXT:** John unlocks -> snapshot + swap chain2 -> regenerate (APR, Datasette, Explorer -- the approval-time panel
-appears, JN-K §4b keys -> a reviewed baseline append) -> archive v2 read-only -> next swap (views with
+**SWAPPED IN 2026-10-07** (John unlocked): live v4 = 097f76a2 (snapshot keep_snapshot_2026-10-07_pre-v4-zab-decided-by.db).
+Regenerated: Datasette + approval_times table (`89e0991`; APR identical in content, not re-committed), Explorer data
+with the approval-time panel, home numbers, pipeline-state (anchors PASS), players, public mirror (`d901700`).
+JN-K gate: only the four new §4b keys (ministerial n 8 / median 192 d; discretionary n 104 / 422 d) -- John to approve
+the append. **John to re-lock v4**; Datasette needs flyctl deploy; the site needs a push.
+
+**NEXT:** JN-K §4b append (John) -> archive v2 read-only read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

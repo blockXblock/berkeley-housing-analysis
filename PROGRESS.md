@@ -730,8 +730,18 @@ already read live v4: redrawn in scratch/2026-10-05_svg (1951 Shattuck now shows
 still Issued, 316 inspections done, next is 1180 Drywall 10/07/2026. Readdressed to 1717 San Pablo; ruling S006
 records the alias (`30c926e6`), reaches live at the next rebuild. Recheck for the final later.
 
-**NEXT:** John: site/JN-K presentation of the approval times; ZAB agendas harvest? -> next rebuild (S006 + the
-approval-time view) -> archive v2 read-only -> next swap (views with
+**Approval times on the site + JN-K (John 2026-10-06):** Explorer panel "How Long Approval Takes, by Route" (`cf21bd4`
+export, `b2d4c35` page; hidden until the data carries it -- the view arrives with the next swap); JN-K §4b (`0557f1d`).
+JN-K's gate on live now differs by the 1740 split (ac_majors_covered 72->71, median_consideration_days 252->253: the
+SB 35 record has no completeness task) -- awaiting John's call to append a baseline (JN_WRITE_BASELINE=1).
+**ZAB minutes harvest (2026-10-06, `harvest_zab_documents.py`):** berkeleyca.gov 2021- (101 agendas, 92 minutes) +
+Records Online 2002- (356 minutes; archive gap 2019-2020). Parsed in scratch (scratch/2026-10-06_zab/parse_minutes.py):
+from 2021, ALL 40 "staff" approvals of 5+ units are in the ZAB minutes -- 32 approved by the Board THAT day, 8 heard on
+another date. The City's "Staff Decision" task records the Board's action (3030 Telegraph: ZAB 9-0, 2023-06-08).
+Small projects: 28 ZAB the same day, 22 not in the minutes (administrative).
+
+**NEXT:** finish the Records Online harvest + parse 2002-2018 -> propose the deciding-body rule to John -> next
+rebuild (S006, the view, the rule) -> JN-K baseline append (John) -> archive v2 read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).
 Optional: Tier 2/3 harvests; planning citation-regex vs model comparison; Tier 1 pages (125 MB) to the T7.

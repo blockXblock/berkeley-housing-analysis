@@ -400,6 +400,38 @@ def rhna_progress():
     return rp
 
 
+def approval_times(db):
+    """Time to approval, by route (John, 2026-10-05): read from v4's v_project_approval_times, never re-derived here.
+    Projects of 5+ units. Each group's BAR uses only projects that reached a first building permit, so its two segments
+    (filing -> approval, approval -> first permit) describe the same projects; the approval median across EVERY
+    approved project in the group is given beside it. Medians, with counts -- the ministerial groups are small.
+    Returns None where the view is absent (a v4 built before 2026-10-05), and the panel stays hidden."""
+    import statistics as st
+    if not db.execute("SELECT 1 FROM sqlite_master WHERE type='view' AND name='v_project_approval_times'").fetchone():
+        return None
+    rows = db.execute("""SELECT project_key, name, units, route, law, public_subsidy, days_filed_to_approved,
+        days_approved_to_first_bp, entitled_date, first_bp_date FROM v_project_approval_times
+        WHERE units >= 5""").fetchall()
+    med = lambda v: int(st.median(v)) if v else None
+    groups = []
+    for route, sub, label in (("ministerial", 1, "Ministerial (SB 35 / AB 2011), public subsidy"),
+                              ("discretionary", 1, "Discretionary, public subsidy"),
+                              ("ministerial", 0, "Ministerial (SB 35 / AB 2011), no subsidy on record"),
+                              ("discretionary", 0, "Discretionary, no subsidy on record")):
+        g = [r for r in rows if r[3] == route and r[5] == sub]
+        both = [r for r in g if r[7] is not None]
+        if not g:
+            continue
+        groups.append({"label": label, "route": route, "public_subsidy": sub, "n_approved": len(g),
+                       "median_to_approval_all": med([r[6] for r in g]), "n_with_permit": len(both),
+                       "median_to_approval": med([r[6] for r in both]), "median_to_permit": med([r[7] for r in both])})
+    ministerial = [{"id": r[0], "name": r[1], "units": r[2], "law": r[4], "days_to_approval": r[6],
+                    "days_to_permit": r[7], "approved": r[8], "first_permit": r[9]}
+                   for r in sorted(rows, key=lambda r: r[8]) if r[3] == "ministerial"]
+    return {"groups": groups, "ministerial": ministerial, "min_units": 5,
+            "source": "v_project_approval_times (berkeley_housing_v4.db)"}
+
+
 def main() -> int:
     from scripts.housing_rules import RHNA_ALLOCATIONS
     db = sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True)
@@ -412,7 +444,7 @@ def main() -> int:
         "export_date": datetime.now().strftime("%Y-%m-%d %H:%M"),
         "projects": projects, "events": events, "fees": fees, "staff": get_staff(db),
         "players": get_players(projects, db), "timeline": get_timeline(projects), "documents": get_documents(db),
-        "rhna": dict(RHNA_ALLOCATIONS["6th"]), "rhna_progress": rhna_progress(),
+        "rhna": dict(RHNA_ALLOCATIONS["6th"]), "rhna_progress": rhna_progress(), "approval_times": approval_times(db),
         "city_apr": city_apr, "city_apr_meta": city_meta, "v2_ids": v2_crosswalk(projects),
         "meta": {"generated": datetime.now().isoformat(), "export_date": datetime.now().strftime("%Y-%m-%d %H:%M"),
                  "source": "berkeley_housing_v4.db (serving views)", "project_count": len(projects),

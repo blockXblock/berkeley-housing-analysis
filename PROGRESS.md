@@ -740,7 +740,13 @@ from 2021, ALL 40 "staff" approvals of 5+ units are in the ZAB minutes -- 32 app
 another date. The City's "Staff Decision" task records the Board's action (3030 Telegraph: ZAB 9-0, 2023-06-08).
 Small projects: 28 ZAB the same day, 22 not in the minutes (administrative).
 
-**NEXT:** finish the Records Online harvest + parse 2002-2018 -> propose the deciding-body rule to John -> next
+**ZAB harvest DONE (549 files, 0 failed; manifest data/raw/zab/manifest_2026-10-06.csv).** Parsed 2013-2026 (720
+items with a record number; older minutes yield none): of 65 "staff"-recorded approvals of 5+ units, 40 = ZAB APPROVED
+that same day, 12 = ZAB heard on another date, 13 not found -- 11 of them have NO minutes for that date (archive gap
+2019-2020, scattered 2014-16) and 2 are parser misses (address present, record number not read). Where minutes exist,
+every large "Staff Decision" is a Board action. Small projects: 50 ZAB that day, 152 not in the minutes (administrative).
+
+**NEXT:** John: the deciding-body rule (proposed) -> machinery (parse_zab_minutes.py + zab_action events) -> next
 rebuild (S006, the view, the rule) -> JN-K baseline append (John) -> archive v2 read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).

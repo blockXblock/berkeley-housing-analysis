@@ -133,6 +133,7 @@ print("bp fees:    ", SM.load_building_fees(con))   # the Fees tab of the same p
 print("plan fees:  ", SM.load_planning_fees(con))   # the Fees tab of the saved Planning pages (John 2026-10-01)
 print("attachments:", SM.load_attachment_lists(con))   # Accela capture attachment lists (titles, uploads; files not held)
 print("attach. harv:", SM.load_attachment_harvests(con))   # harvested attachment lists (John 2026-10-03)
+print("ZAB actions:", SM.load_zab_actions(con))   # the Board's actions from its minutes (John 2026-10-07)
 print("drawn geom.:", SM.load_drawn_outlines(con))   # hand-drawn footprints / massing with heights (2026-05-18 KML)
 print("doc roles:  ", SM.load_document_roles(con))   # parties by stated role in plans + applications (John 2026-10-01)
 """)

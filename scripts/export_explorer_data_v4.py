@@ -409,8 +409,10 @@ def approval_times(db):
     import statistics as st
     if not db.execute("SELECT 1 FROM sqlite_master WHERE type='view' AND name='v_project_approval_times'").fetchone():
         return None
-    rows = db.execute("""SELECT project_key, name, units, route, law, public_subsidy, days_filed_to_approved,
-        days_approved_to_first_bp, entitled_date, first_bp_date FROM v_project_approval_times
+    cols = {c[1] for c in db.execute("PRAGMA table_info(v_project_approval_times)")}
+    body = "decided_by" if "decided_by" in cols else "body_recorded"      # decided_by arrives with the ZAB minutes rule
+    rows = db.execute(f"""SELECT project_key, name, units, route, law, public_subsidy, days_filed_to_approved,
+        days_approved_to_first_bp, entitled_date, first_bp_date, {body}, body_recorded FROM v_project_approval_times
         WHERE units >= 5""").fetchall()
     med = lambda v: round(st.median(v)) if v else None   # round, as JN-K: a median of an even count can end in .5
     groups = []
@@ -424,7 +426,9 @@ def approval_times(db):
             continue
         groups.append({"label": label, "route": route, "public_subsidy": sub, "n_approved": len(g),
                        "median_to_approval_all": med([r[6] for r in g]), "n_with_permit": len(both),
-                       "median_to_approval": med([r[6] for r in both]), "median_to_permit": med([r[7] for r in both])})
+                       "median_to_approval": med([r[6] for r in both]), "median_to_permit": med([r[7] for r in both]),
+                       "decided_by": dict(collections.Counter(r[10] or "not recorded" for r in g).most_common()),
+                       "recorded_as_staff_decided_by_zab": sum(1 for r in g if r[11] == "staff" and r[10] == "zab")})
     ministerial = [{"id": r[0], "name": r[1], "units": r[2], "law": r[4], "days_to_approval": r[6],
                     "days_to_permit": r[7], "approved": r[8], "first_permit": r[9]}
                    for r in sorted(rows, key=lambda r: r[8]) if r[3] == "ministerial"]

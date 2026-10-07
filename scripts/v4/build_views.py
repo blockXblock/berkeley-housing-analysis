@@ -128,6 +128,8 @@ SELECT
   json_extract(p.notes, '$.accepted')                             AS accepted_date,
   json_extract(p.notes, '$.entitled')                             AS entitled_date,
   json_extract(p.notes, '$.entitled_by')                          AS entitled_by,
+  json_extract(p.notes, '$.decided_by')                           AS decided_by,          -- the body, from the ZAB minutes where they say
+  json_extract(p.notes, '$.decided_by_source')                    AS decided_by_source,
   fb.bp                                                           AS bp_issued_date,
   CASE WHEN b.n_buildings > 0 AND b.n_complete = b.n_buildings THEN b.last_co
        WHEN json_extract(p.notes, '$.anchor_role') = 'outside_city_permitting'
@@ -396,8 +398,8 @@ WHERE g.entity_type = 'drawn_outline'
 # approve it), with the two clocks a developer faces: filing to approval, and approval to the first building permit
 # (the first-BP rule, as v_projects). ROUTE is "ministerial" only where the approval is a ministerial one (SB 35 / AB
 # 2011 Letter of Compliance or a ruling quoting it); every other approval is "discretionary". BODY_RECORDED is what the
-# City's own workflow names ("staff" = a "Staff Decision" task, which on many large projects is dated on a Zoning
-# Adjustments Board Thursday -- the body is AS RECORDED, never inferred). PUBLIC_SUBSIDY = the project has a row on
+# City's own workflow names ("staff" = a "Staff Decision" task); DECIDED_BY is the body from the Board's own Action
+# Minutes where they record its approval of the record on that date (John 2026-10-07), else the body as recorded. PUBLIC_SUBSIDY = the project has a row on
 # the funding ledger (sourced public money). FLAG: a first permit before the approval date means the approval on
 # record is a later modification; that project's second clock is left empty, never negative.
 V_PROJECT_APPROVAL_TIMES = r"""
@@ -406,7 +408,7 @@ WITH a AS (
   SELECT project_key, name, status, COALESCE(NULLIF(units_built_or_permitted, 0), proposed_units) AS units,
          CASE WHEN entitled_by LIKE 'staff (ministerial%' THEN 'ministerial' ELSE 'discretionary' END AS route,
          CASE WHEN entitled_by LIKE '%AB 2011%' THEN 'AB 2011' WHEN entitled_by LIKE '%SB 35%' THEN 'SB 35' END AS law,
-         entitled_by AS body_recorded,
+         entitled_by AS body_recorded, decided_by, decided_by_source,
          CASE WHEN funding IS NOT NULL AND json_array_length(funding) > 0 THEN 1 ELSE 0 END AS public_subsidy,
          filed_date, accepted_date, entitled_date, bp_issued_date AS first_bp_date
   FROM v_projects WHERE entitled_date IS NOT NULL AND filed_date IS NOT NULL AND COALESCE(rhna_excluded, 0) = 0)

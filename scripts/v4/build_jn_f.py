@@ -185,6 +185,7 @@ if _LIVE.exists() and DB_PATH.resolve() != _LIVE.resolve():
         "ctcac_project": "CTCAC List of Projects, Berkeley rows (load_ctcac_projects; John 2026-10-01)",
         "fees_recorded": "Fees tab of the building-permit and Planning pages (load_building_fees, load_planning_fees; John 2026-10-01)",
         "attachment_listed": "Accela capture attachment lists, manifest accela_status_captures_2026-10-01 (load_attachment_lists)",
+        "zab_action": "ZAB Action Minutes, data/derived/zab_actions_2026-10-06.jsonl (load_zab_actions; John 2026-10-07)",
     }
     # A NEW SOURCE for a type live already holds (2026-10-04): declared by its sources.locator. The type passes only if
     # rebuild - live is EXACTLY the events from that source and live holds none of them -- provenance, not a count.

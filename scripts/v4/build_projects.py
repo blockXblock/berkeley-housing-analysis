@@ -322,6 +322,32 @@ def main() -> int:
         if got and got[2] == "approval":
             letters[rec_].append((got[0], got[1], f_))
     letter_mismatch = []
+    # ---- THE DECIDING BODY, from the Board's own minutes (John approved 2026-10-07): the City's workflow logs many
+    # Zoning Adjustments Board decisions as a "Staff Decision". Where the Board's Action Minutes record APPROVED on one of
+    # the project's records ON its entitlement date, the body is the ZAB, cited to those minutes. Record AND date must both
+    # match, so a mistyped number in the minutes cannot move a decision (2532 Durant: the minutes cite ZP2015-0099, a
+    # different project). Heard on another date, or no minutes for the date: the body stays as the City recorded it.
+    zab = collections.defaultdict(list)          # record -> [(date, action, minutes file, item)]
+    for rec_, d_, pl in db.execute("SELECT source_record_key, event_date, raw_payload FROM events "
+                                   "WHERE event_type_code = 'zab_action'"):
+        j = json.loads(pl)
+        zab[rec_].append((d_, j.get("action"), j.get("minutes_file"), j.get("item")))
+    decided = collections.Counter()
+
+    def decided_by(records, entitled, recorded):
+        if not entitled or (recorded or "").startswith("staff (ministerial"):
+            return recorded, None, []
+        acts = [(r_, x) for r_ in records for x in zab.get(r_, [])]
+        same = [(r_, x) for r_, x in acts if x[0] == entitled and x[1] == "APPROVED"]
+        if same:
+            r_, x = same[0]
+            decided["zab_by_minutes" if recorded != "zab" else "zab_confirmed"] += 1
+            return "zab", f"ZAB Action Minutes {x[0]}, item {x[3]} ({r_}): {x[2]}", []
+        if acts:
+            decided["heard_other_date"] += 1
+            return recorded, None, ["zab_heard_other_date:" + ",".join(sorted({x[0] for _, x in acts}))]
+        decided["as_recorded"] += 1
+        return recorded, None, []
 
     # ---- assemble projects
     projects = []
@@ -340,7 +366,11 @@ def main() -> int:
         if ltr and a in entitled_by_doc and entitled_by_doc[a][0] != ltr[0]:
             letter_mismatch.append((a, entitled_by_doc[a][0], ltr[0], ltr[2]))
         use_letter = ltr if (ltr and not m["entitled"] and a not in entitled_by_doc) else None
-        projects.append(dict(anchor=a, anchor_role=m["role"], records=sorted(r["record"] for r in members),
+        ent_ = m["entitled"] or (entitled_by_doc.get(a) or (None,))[0] or (use_letter or (None,))[0]
+        rec_by_ = (m["entitled_by"] or (entitled_by_doc.get(a) or (None, None))[1]
+                   or (f"staff (ministerial, {use_letter[1] or 'approval'} letter)" if use_letter else None))
+        body_, body_src_, body_flags_ = decided_by([r["record"] for r in members], ent_, rec_by_)
+        projects.append(dict(decided_by=body_, decided_by_source=body_src_,anchor=a, anchor_role=m["role"], records=sorted(r["record"] for r in members),
                              structures=sorted(sids), units=sum(units.get(x) or 0 for x in sids),
                              filed=m["filed"], accepted=m["accepted"],
                              entitled=m["entitled"] or (entitled_by_doc.get(a) or (None,))[0] or (use_letter or (None,))[0],
@@ -350,8 +380,10 @@ def main() -> int:
                              record_status=recs[a].get("record_status"),
                              milestone_flags=m["flags"] + ([f"entitled_by_document:{entitled_by_doc[a][2]}"]
                                                            if a in entitled_by_doc and not m["entitled"] else [])
-                                             + ([f"entitled_by_letter:{use_letter[2]}"] if use_letter else []),
+                                             + ([f"entitled_by_letter:{use_letter[2]}"] if use_letter else [])
+                                             + body_flags_,
                              parcels=sorted(x[1] for x in recs[a]["_sites"] if x[0] == "parcel" and isinstance(x[1], int))))
+    print(f"deciding body from the ZAB minutes: {dict(decided)}")
     print(f"approval letters: {sum(len(v) for v in letters.values())} on {len(letters)} records; ruling/letter "
           f"disagreements: {len(letter_mismatch)} {letter_mismatch[:5]}")
     grouped = collections.defaultdict(list)
@@ -659,7 +691,8 @@ def write(con, projects) -> dict:
                 p["name"], p["address"], p["name_basis"] = p["external_name"], p["external_address"], "external_source"
             out["named_" + str(p["name_basis"])] += 1
             notes = {k: p.get(k) for k in ("anchor", "anchor_role", "records", "filed", "accepted", "entitled",
-                                           "entitled_by", "denied", "ended", "record_status", "milestone_flags",
+                                           "entitled_by", "decided_by", "decided_by_source", "denied", "ended",
+                                           "record_status", "milestone_flags",
                                            "ruling", "project_key", "address", "name_basis", "pathways", "pathway_evidence",
                                            "external_id", "beds", "external_units", "permitting_authority", "status",
                                            "status_date", "source", "verification", "completed_year", "use", "confidence",

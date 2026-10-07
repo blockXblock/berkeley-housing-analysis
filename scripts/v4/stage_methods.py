@@ -194,7 +194,7 @@ def classify_all(con):
     for ev_id, permit in con.execute("SELECT event_id, source_record_key FROM events "
                                      "WHERE event_type_code NOT LIKE 'planning_%' "      # a Planning record is not a building permit
                                      "AND event_type_code NOT LIKE 'registry_%' "      # nor a Rent Board registration (2026-10-01)
-                                     "AND event_type_code NOT IN ('accela_listed', 'business_license', 'ctcac_project', 'fees_recorded', 'attachment_listed')"):  # nor a listing, licence, CTCAC row, fee total
+                                     "AND event_type_code NOT IN ('accela_listed', 'business_license', 'ctcac_project', 'fees_recorded', 'attachment_listed', 'zab_action')"):  # nor a listing, licence, CTCAC row, fee total, Board action
         got = permit_effect(permit)
         if got is None:
             unread += 1
@@ -1204,6 +1204,41 @@ def load_attachment_harvests(con, paths=ATTACHMENT_HARVESTS):
             raise
         out[os.path.basename(path)] = dict(records=len(recs), files=n_rows, loaded=ok, skipped=skipped)
     return out
+
+
+ZAB_ACTIONS = os.path.join(ROOT, 'data', 'derived', 'zab_actions_2026-10-06.jsonl')
+
+
+def load_zab_actions(con, path=ZAB_ACTIONS):
+    """The Zoning Adjustments Board's actions, read from its own Action Minutes (scripts/parse_zab_minutes.py; John
+    approved the deciding-body rule 2026-10-07). One 'zab_action' event per (meeting, item, record): dated at the meeting,
+    keyed on the Planning record the minutes cite; raw_payload = the parsed row (action, its text, the vote, the
+    heading, the minutes file + SHA-256). build_projects reads these to name the body that decided."""
+    import datetime as dt
+    now = dt.datetime.now(dt.timezone.utc).isoformat()
+    loc = os.path.relpath(path, ROOT)
+    assert not con.execute("SELECT 1 FROM sources WHERE locator=?", (loc,)).fetchone(), f'already loaded: {loc}'
+    rows = [json.loads(l) for l in open(path)]
+    con.execute("INSERT OR IGNORE INTO event_types VALUES ('zab_action','CITY_RECORD',0,"
+                "'an action of the Zoning Adjustments Board on a Planning record, read from its Action Minutes')")
+    try:
+        sid = con.execute("INSERT INTO sources (source_kind,locator,retrieved_at,checksum,notes) VALUES "
+                          "('zab_action_minutes',?,?,?,?)", (loc, '2026-10-06', _sha256(path),
+                          'parse_zab_minutes.py over the ZAB minutes harvest (berkeleyca.gov + Records Online)')).lastrowid
+        rid = con.execute("INSERT INTO ingestion_runs (source_id,started_at,rows_in_source,rows_ingested,rows_rejected,"
+                          "conserved) VALUES (?,?,?,0,0,1)", (sid, now, len(rows))).lastrowid
+        for r in rows:
+            con.execute("INSERT INTO events (event_type_code,event_date,event_date_precision,source_record_key,"
+                        "source_id,ingestion_run_id,raw_payload,raw_description,created_at) "
+                        "VALUES ('zab_action',?,'day',?,?,?,?,?,?)",
+                        (r['meeting_date'], r['record'], sid, rid, json.dumps(r),
+                         f"ZAB {r['action'] or 'action not read'} -- {r['heading']}"[:300], now))
+        con.execute("UPDATE ingestion_runs SET rows_ingested=?, conserved=1 WHERE run_id=?", (len(rows), rid))
+        con.commit()
+    except Exception:
+        con.rollback()
+        raise
+    return dict(rows=len(rows), approved=sum(r['action'] == 'APPROVED' for r in rows))
 
 
 PLANNING_FEES = os.path.join(ROOT, 'data', 'raw', 'accela_capdetail', 'planning_fees_2026-10-01.jsonl')

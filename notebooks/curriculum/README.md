@@ -31,7 +31,7 @@ You need Python 3.10+ with `pandas`, `openpyxl`, `pyarrow`, and `jupyter`.
 | The on-ramp | JN00, JN0a–JN0h | Look at the data first; the vocabulary from zero (data, notebooks, functions, tables, charts, tools, agents) |
 | Build the record | JN1–JN5 | Ingest the messy export, build the address key, assemble projects & units, order lifecycle events, tag years & RHNA cycles |
 | Grade the answer key | JN6a, JN6b | Pull the city's own state filing (as a verification target, never an input) and score every difference |
-| Audit yourself | JN7 | Re-key buildings to permit families; run the audit's error-detectors |
+| Audit yourself | JN7 | Re-key buildings to permit families; run the audit's error-detectors; compare your record with the project's own (v4) |
 | Never stop watching | JN8 | Pin a snapshot, re-pull the live filing, diff — the record watches itself |
 
 ## Adapting it to another city

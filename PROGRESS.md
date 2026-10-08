@@ -808,7 +808,17 @@ fees, months-to-permit; labeled cost/opex/cap bands; yield-on-cost vs cap + 125 
 era-specific construction cost + cap rate (by BP year, published sources), residential vs parking/commercial floor
 area, and validation on the built buildings before any verdict on the 58 entitled-not-started.
 
-**NEXT:** John: re-lock v4 -> pro-forma calibration by year (cost index + cap-rate sources) -> developer attribution (approval times, the ZAB
+**Era calibration (2026-10-08, scratch):** each project priced in its first-BP year -- hard cost from Terner (Mar 2020:
+Bay Area >$380/sqft 2018; affordable +$48; Type I +$65-71 -> market $332 2018, tower +$68) escalated by the TBD SF bid
+index (SF AICCIE memos Oct 2022, Oct 21 2024; 2025 +3.5%); cap rate CBRE Oakland multifamily infill Class A stabilized
+(H2 2017 & H2 2019 4.25-4.75; H2 2023 & H1 2024 5.5-6.5; 2018, 2020-22 INTERPOLATED). Sources saved in
+scratch/2026-10-08_proforma/sources/. VALIDATION STILL FAILS (built median YoC 4.12% vs hurdle 5.75%; 17/45 pencil or
+marginal) -> no absolute verdicts. RELATIVE finding holds: gap to hurdle, built -1.74 pts vs entitled-not-started
+-3.51 (1 of 58 as strong as the median built building), driven by cost +38% and cap +1.5 pts since 2017-21.
+
+**NEXT:** John: what to pursue -- fix the absolute level (decision year = entitlement/financing year, commercial +
+parking income, residential vs garage floor area, opex for new buildings; 2020-22 CBRE surveys) or report the relative
+finding; then developer attribution (approval times, the ZAB
 contradiction, Rent Board) read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).

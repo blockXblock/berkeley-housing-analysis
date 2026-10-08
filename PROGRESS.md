@@ -816,9 +816,19 @@ scratch/2026-10-08_proforma/sources/. VALIDATION STILL FAILS (built median YoC 4
 marginal) -> no absolute verdicts. RELATIVE finding holds: gap to hurdle, built -1.74 pts vs entitled-not-started
 -3.51 (1 of 58 as strong as the median built building), driven by cost +38% and cap +1.5 pts since 2017-21.
 
-**NEXT:** John: what to pursue -- fix the absolute level (decision year = entitlement/financing year, commercial +
-parking income, residential vs garage floor area, opex for new buildings; 2020-22 CBRE surveys) or report the relative
-finding; then developer attribution (approval times, the ZAB
+**Option 1 done (John, 2026-10-08; scratch/2026-10-08_proforma/validate_fixes.py):** cumulative fixes -- decision year
+= entitlement year (built: median 1 yr before BP), parking income ($200/mo x 70%; Berkeley monthly parking $150-325),
+commercial income (City text states commercial sqft for 87 projects, regex PROTOTYPE with quote; $36/sqft/yr, Telegraph
+asks $28-51; 20% vacancy, 10% expenses ASSUMED) -> built median gap -1.74 -> -1.19 pts. Then ONE cost factor fitted on
+22 built buildings permitted 2017-19 (0.739: 2018 hard cost $245/gsf vs Terner-based $332 -- a catch-all, not a cost
+measurement) and TESTED out of sample on 23 built 2020-24: median gap -0.27, 14/23 pencil-or-marginal; all 15
+withdrawn fail. RESULT: of 58 entitled-not-started, 14 met the hurdle when entitled but fall short today (2015 Blake
+219u, 3031 Telegraph 110u, 1200 San Pablo 104u, 1835 San Pablo 95u...), 43 never did, 1 meets it today (2138 Kittredge
+73u). Median gap today -2.22 pts. Caveats: cap rates 2018 + 2020-22 interpolated; commercial area by regex; two
+"1200 San Pablo" projects (57u, 104u) to check.
+
+**NEXT:** John: review -> package into JN-Feasibility (model readings for commercial area; the CBRE 2020-22 surveys)
+-> developer attribution (approval times, the ZAB
 contradiction, Rent Board) read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).

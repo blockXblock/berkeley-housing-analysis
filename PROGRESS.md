@@ -797,7 +797,18 @@ Course page + README updated (`a1f8007`, `c067994`); build_v2 states v3 is froze
 23 files, 51,615 bytes, size-verified; the public copy is byte-identical; JN7 run OUTSIDE the repo (Colab path:
 modules + data from R2, the v4 mirror from berkeleybuild.com): 7a/7b/7f PASS. Site deploy restaged on main (`git push origin main`).
 
-**NEXT:** John: push main; re-lock v4 -> optional new modules (approval times, the ZAB
+**Rent calibration + project pro-forma (2026-10-08, scratch only, read-only):**
+`scratch/2026-10-08_rents/` -- the Rent Board registry registers new buildings ("Partially Covered") with each
+tenancy's initial rent: 39 of 53 completed 5+ buildings link (APN or exact address; 8 near-address candidates NOT
+linked), 27 have lease-up rents. Market 2022-24 medians: studio $2,495 / 1BR $3,056 / 2BR $4,295 / 3BR $5,886 (pooled,
+with n); affordable, group/per-bed and below-market (<60% of the building's own median) leases set aside.
+`scratch/2026-10-08_proforma/project_proforma.py` -- JN-Feasibility's model on all 190 projects (observed rents, land,
+fees, months-to-permit; labeled cost/opex/cap bands; yield-on-cost vs cap + 125 bps). RESULT NOT YET TRUSTWORTHY: 40 of
+45 BUILT market buildings "do not pencil" (median YoC 3.4%; implied hard cost ~$250/sqft) -> calibration needs
+era-specific construction cost + cap rate (by BP year, published sources), residential vs parking/commercial floor
+area, and validation on the built buildings before any verdict on the 58 entitled-not-started.
+
+**NEXT:** John: re-lock v4 -> pro-forma calibration by year (cost index + cap-rate sources) -> developer attribution (approval times, the ZAB
 contradiction, Rent Board) read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).

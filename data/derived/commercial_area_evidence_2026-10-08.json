@@ -1,0 +1,917 @@
+{
+ "topic": "commercial_area",
+ "read_at": "2026-10-08T16:59:22",
+ "definitions_sha16": "eded8efdf5811b8b",
+ "definitions": "QUESTION. Each PROJECT below is one housing development in Berkeley; its texts are the City's own Planning\nrecord descriptions and the Zoning Adjustments Board's agenda items about it. Report, from those texts only, the\nNEW COMMERCIAL FLOOR AREA the project would build, in square feet: ground-floor retail, restaurant, office, or other\nnon-residential space in the new building. Not residential floor area, not the whole building, not parking, not the\nlot, not existing commercial space that is demolished, not \"live-work\" units (those are dwellings). If several figures\nare given (e.g. \"1,550 square feet of commercial area\" and an earlier version), report the one in the most recent text\nand quote it. If the text states no commercial floor area, answer null.\nGive the exact words the figure comes from (copied verbatim, containing the number) and the source in brackets.",
+ "model": "claude-sonnet-5",
+ "rule": "kept only if the quote is verbatim and states the number",
+ "unanswered": [],
+ "readings": [
+  {
+   "project_key": "ZP2022-0097",
+   "commercial_sqft": 1460,
+   "quote": "1,460 square feet of ground floor commercial space",
+   "source": "ZAB 2023-04-27 item 3"
+  },
+  {
+   "project_key": "ZP2022-0099",
+   "commercial_sqft": 5787,
+   "quote": "5,787 square foot commercial space",
+   "source": "ZAB 2023-05-11 item 4"
+  },
+  {
+   "project_key": "ZP2022-0107",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2022-0110",
+   "commercial_sqft": 3145,
+   "quote": "3,145 square feet of commercial space on the ground floor",
+   "source": "ZAB 2023-11-30 item 4"
+  },
+  {
+   "project_key": "ZP2021-0186",
+   "commercial_sqft": 6840,
+   "quote": "6,840 square feet of ground floor commercial space",
+   "source": "ZAB 2023-01-12 item 2"
+  },
+  {
+   "project_key": "ZP2021-0192",
+   "commercial_sqft": 8332,
+   "quote": "8,332 square-feet commercial space",
+   "source": "ZAB 2023-01-12 item 3"
+  },
+  {
+   "project_key": "ZP2021-0193",
+   "commercial_sqft": 4993,
+   "quote": "4,993 square feet commercial space",
+   "source": "DRCF2023-0002"
+  },
+  {
+   "project_key": "ZP2021-0201",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2019-0179",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2019-0192",
+   "commercial_sqft": 3000,
+   "quote": "3000 SF ground floor retail",
+   "source": "DRCP2019-0016"
+  },
+  {
+   "project_key": "ZP2019-0217",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2020-0011",
+   "commercial_sqft": 652,
+   "quote": "652 square feet of commercial space on the ground floor",
+   "source": "ZP2020-0011"
+  },
+  {
+   "project_key": "ZP2015-0115",
+   "commercial_sqft": 1500,
+   "quote": "a caf\u00e9 (1,500 sq. ft.)",
+   "source": "ZAB 2015-10-08 item 3"
+  },
+  {
+   "project_key": "ZP2015-0135",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2015-0157",
+   "commercial_sqft": 9285,
+   "quote": "an increase in commercial floor area from 4,225 sq. ft. to 9,285 sq. ft.",
+   "source": "ZAB 2015-10-08 item 5"
+  },
+  {
+   "project_key": "ZP2015-0177",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2020-0134",
+   "commercial_sqft": 1415,
+   "quote": "1,415 square feet of ground floor commercial space",
+   "source": "ZAB 2021-06-24 item 1"
+  },
+  {
+   "project_key": "ZP2021-0046",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2021-0066",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2021-0070",
+   "commercial_sqft": 1680,
+   "quote": "1,680 square feet of commercial space",
+   "source": "ZAB 2022-04-28 item 6"
+  },
+  {
+   "project_key": "DRCP2019-0008",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "MODUP2007-0027",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "MODUP2014-0005",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "PLN2015-0051",
+   "commercial_sqft": 1085,
+   "quote": "1,085 square feet of commercial floor area",
+   "source": "PLN2015-0051"
+  },
+  {
+   "project_key": "PLN2024-0023",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "PLN2025-0019",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "PLN2025-0038",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "PLN2025-0040",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2026-0050",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2026-0064",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2026-0091",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2021-0095",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2021-0110",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2021-0158",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2021-0162",
+   "commercial_sqft": 10164,
+   "quote": "10,164 sq.ft. commercial",
+   "source": "ZP2021-0162"
+  },
+  {
+   "project_key": "ZP2024-0067",
+   "commercial_sqft": 4750,
+   "quote": "4,750 square feet ground floor commercial space",
+   "source": "ZAB 2026-03-12 item 6"
+  },
+  {
+   "project_key": "ZP2024-0070",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2024-0071",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2024-0074",
+   "commercial_sqft": 1788,
+   "quote": "1788 sq ft of commercial space",
+   "source": "ZP2024-0074"
+  },
+  {
+   "project_key": "ZP2019-0089",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2019-0100",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2019-0155",
+   "commercial_sqft": 1248,
+   "quote": "1,248 sq. ft. of commercial space",
+   "source": "ZP2019-0155"
+  },
+  {
+   "project_key": "ZP2019-0173",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2024-0075",
+   "commercial_sqft": 3873,
+   "quote": "3,873 commercial floor area",
+   "source": "ZP2024-0075"
+  },
+  {
+   "project_key": "ZP2024-0076",
+   "commercial_sqft": 1244,
+   "quote": "1,244 sf commercial space",
+   "source": "ZP2024-0076"
+  },
+  {
+   "project_key": "ZP2024-0077",
+   "commercial_sqft": 2503,
+   "quote": "2,503 sq ft commercial space",
+   "source": "ZP2024-0077"
+  },
+  {
+   "project_key": "ZP2024-0079",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2024-0114",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2024-0126",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2024-0162",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2024-0169",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2020-0022",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2020-0045",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2020-0052",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2020-0069",
+   "commercial_sqft": 5666,
+   "quote": "5,666 square feet of commercial space",
+   "source": "ZAB 2023-04-27 item 11"
+  },
+  {
+   "project_key": "ZP2022-0162",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2022-0170",
+   "commercial_sqft": 1550,
+   "quote": "1,550 square feet of commercial area",
+   "source": "ZAB 2023-06-08 item 6"
+  },
+  {
+   "project_key": "ZP2022-0171",
+   "commercial_sqft": 1940,
+   "quote": "223 dwelling units over a 1,940 commercial space",
+   "source": "ZP2022-0171"
+  },
+  {
+   "project_key": "ZP2022-0175",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "PLN2018-0048",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "PLN2019-0018",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "PLN2019-0033",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "PLN2019-0059",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2023-0057",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2023-0058",
+   "commercial_sqft": 1244,
+   "quote": "1,244 square feet of commercial space",
+   "source": "ZP2023-0058"
+  },
+  {
+   "project_key": "ZP2023-0064",
+   "commercial_sqft": 1552,
+   "quote": "1,552 square feet of ground floor commercial space",
+   "source": "ZAB 2024-05-09 item 2"
+  },
+  {
+   "project_key": "ZP2023-0068",
+   "commercial_sqft": 2903,
+   "quote": "2,903 square feet of ground floor commercial",
+   "source": "ZAB 2024-01-25 item 2"
+  },
+  {
+   "project_key": "ZP2015-0021",
+   "commercial_sqft": 2749,
+   "quote": "2,749 SF veterinary clinic",
+   "source": "ZAB 2015-06-11 item 4"
+  },
+  {
+   "project_key": "ZP2015-0043",
+   "commercial_sqft": 10870,
+   "quote": "approximately 170 residential units with 10,870 SF of commercial space",
+   "source": "DRCF2017-0003"
+  },
+  {
+   "project_key": "ZP2015-0090",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2015-0096",
+   "commercial_sqft": 3358,
+   "quote": "3,358 square feet of commercial space",
+   "source": "ZAB 2018-01-25 item 5"
+  },
+  {
+   "project_key": "ZP2016-0216",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2016-0244",
+   "commercial_sqft": 600,
+   "quote": "a 600 square-foot ground floor caf\u00e9",
+   "source": "ZAB 2018-07-26 item 4"
+  },
+  {
+   "project_key": "ZP2017-0003",
+   "commercial_sqft": 2500,
+   "quote": "2,500 square feet of ground level commercial space",
+   "source": "ZAB 2017-09-28 item 3"
+  },
+  {
+   "project_key": "ZP2017-0004",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "PLN2020-0001",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "PLN2020-0049",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "PLN2021-0036",
+   "commercial_sqft": 800,
+   "quote": "800 SF of commercial",
+   "source": "PLN2021-0036"
+  },
+  {
+   "project_key": "PLN2021-0037",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2017-0205",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2018-0035",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2018-0050",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2018-0052",
+   "commercial_sqft": 27500,
+   "quote": "approximately 27,500 of retail, including restaurant and caf\u00e9 space",
+   "source": "ZP2018-0052"
+  },
+  {
+   "project_key": "ZP2017-0040",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2017-0083",
+   "commercial_sqft": 11000,
+   "quote": "11,000 square feet of ground-floor commercial space",
+   "source": "ZAB 2018-10-25 item 3"
+  },
+  {
+   "project_key": "ZP2017-0103",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2017-0191",
+   "commercial_sqft": 1125,
+   "quote": "1,125 square feet of ground level commercial retail space",
+   "source": "ZAB 2018-10-11 item 2"
+  },
+  {
+   "project_key": "ZP2023-0070",
+   "commercial_sqft": 950,
+   "quote": "950 square feet of ground-floor retail",
+   "source": "ZP2023-0070"
+  },
+  {
+   "project_key": "ZP2023-0079",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2023-0090",
+   "commercial_sqft": 1543,
+   "quote": "1543 sf commercial space",
+   "source": "PLN2023-0092"
+  },
+  {
+   "project_key": "ZP2023-0095",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2023-0138",
+   "commercial_sqft": 3247,
+   "quote": "3,247 square feet of commercial space (including three live/work units)",
+   "source": "ZAB 2024-12-12 item 3"
+  },
+  {
+   "project_key": "ZP2023-0163",
+   "commercial_sqft": 3713,
+   "quote": "3,713 square feet of ground floor commercial space",
+   "source": "ZAB 2025-06-12 item 6"
+  },
+  {
+   "project_key": "ZP2024-0027",
+   "commercial_sqft": 605,
+   "quote": "605 square foot commercial space",
+   "source": "ZAB 2026-07-09 item 6"
+  },
+  {
+   "project_key": "ZP2024-0029",
+   "commercial_sqft": 16216,
+   "quote": "convert the City Landmark Bancroft Hotel (16,216 square feet) on the abutting lot at 2680 Bancroft Way to commercial offices",
+   "source": "ZAB 2025-05-22 item 6"
+  },
+  {
+   "project_key": "PLN2025-0132",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "PLN2026-0155",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "UP2006-0109",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "UP2010-0078",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2019-0070",
+   "commercial_sqft": 1125,
+   "quote": "1,125 sq. ft. of commercial space",
+   "source": "ZAB 2019-12-12 item 8"
+  },
+  {
+   "project_key": "ZP2019-0074",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2019-0081",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2019-0084",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2018-0229",
+   "commercial_sqft": 800,
+   "quote": "800 sq. ft. of ground floor commercial/retail space",
+   "source": "ZAB 2019-12-12 item 7"
+  },
+  {
+   "project_key": "ZP2018-0239",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2019-0027",
+   "commercial_sqft": 20000,
+   "quote": "approximately 20,000 sq. ft. of ground floor commercial space",
+   "source": "DRCF2021-0004"
+  },
+  {
+   "project_key": "ZP2019-0041",
+   "commercial_sqft": 1250,
+   "quote": "1,250 sq. ft. ground-floor commercial space",
+   "source": "DRCF2021-0003"
+  },
+  {
+   "project_key": "PLN2021-0063",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "PLN2022-0026",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "PLN2022-0066",
+   "commercial_sqft": 1811,
+   "quote": "commercial space (1,811 sq. ft.)",
+   "source": "PLN2022-0066"
+  },
+  {
+   "project_key": "PLN2022-0112",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2018-0061",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2018-0112",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2018-0135",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2018-0136",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2022-0179",
+   "commercial_sqft": 590,
+   "quote": "590 square foot commercial space",
+   "source": "ZAB 2023-10-12 item 4"
+  },
+  {
+   "project_key": "ZP2023-0003",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2023-0024",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2023-0040",
+   "commercial_sqft": 16142,
+   "quote": "16,142 square feet of commercial area",
+   "source": "ZAB 2025-02-27 item 3"
+  },
+  {
+   "project_key": "ZP2022-0135",
+   "commercial_sqft": 10068,
+   "quote": "10,068 square feet of commercial space",
+   "source": "ZAB 2026-04-09 item 6"
+  },
+  {
+   "project_key": "ZP2022-0144",
+   "commercial_sqft": 24273,
+   "quote": "24,273-square-foot live theater space",
+   "source": "ZAB 2024-01-11 item 4"
+  },
+  {
+   "project_key": "ZP2022-0148",
+   "commercial_sqft": 2066,
+   "quote": "2,066 square feet of commercial area",
+   "source": "ZAB 2023-07-27 item 3"
+  },
+  {
+   "project_key": "ZP2022-0149",
+   "commercial_sqft": 2314,
+   "quote": "2,314 square feet of ground floor commercial space",
+   "source": "ZAB 2024-01-11 item 2"
+  },
+  {
+   "project_key": "ZP2018-0137",
+   "commercial_sqft": 5000,
+   "quote": "5,000 sq.ft. of commercial space on the ground floor",
+   "source": "DRCF2021-0006"
+  },
+  {
+   "project_key": "ZP2018-0144",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2018-0156",
+   "commercial_sqft": 4000,
+   "quote": "approximately 4,000 square feet of commercial floor area",
+   "source": "ZAB 2024-06-27 item 2"
+  },
+  {
+   "project_key": "ZP2018-0220",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2014-0061",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2014-0069",
+   "commercial_sqft": 2200,
+   "quote": "2,200 square feet of retail/cafe floor area",
+   "source": "ZP2014-0069"
+  },
+  {
+   "project_key": "ZP2015-0014",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2015-0018",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2022-0115",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2022-0116",
+   "commercial_sqft": 4090,
+   "quote": "4,090 square feet commercial space",
+   "source": "ZAB 2023-04-27 item 6"
+  },
+  {
+   "project_key": "ZP2022-0120",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2022-0132",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2026-0015",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2026-0039",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2026-0040",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2026-0049",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2021-0210",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2021-0220",
+   "commercial_sqft": 603,
+   "quote": "603 sq. ft. of retail",
+   "source": "ZP2023-0103"
+  },
+  {
+   "project_key": "ZP2022-0011",
+   "commercial_sqft": 1210,
+   "quote": "1,210 square feet of ground floor commercial floor area",
+   "source": "ZAB 2023-01-12 item 8"
+  },
+  {
+   "project_key": "ZP2022-0019",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "UP2012-0012",
+   "commercial_sqft": 14000,
+   "quote": "14,000 square feet of retail area",
+   "source": "UP2012-0012"
+  },
+  {
+   "project_key": "UP2013-0016",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "UP2013-0043",
+   "commercial_sqft": 3087,
+   "quote": "3,087 sq. ft. of retail floor area",
+   "source": "UP2013-0043"
+  },
+  {
+   "project_key": "UP2013-0061",
+   "commercial_sqft": 5461,
+   "quote": "5,461 SF of commercial floor area",
+   "source": "ZAB 2015-06-11 item 5"
+  },
+  {
+   "project_key": "ZP2024-0047",
+   "commercial_sqft": 2438,
+   "quote": "2,438-sqft of retail space",
+   "source": "ZP2024-0047"
+  },
+  {
+   "project_key": "ZP2024-0057",
+   "commercial_sqft": 2117,
+   "quote": "2,117 square feet of commercial space",
+   "source": "ZAB 2025-03-13 item 4"
+  },
+  {
+   "project_key": "ZP2024-0058",
+   "commercial_sqft": 5136,
+   "quote": "5,136 square feet of ground floor commercial space",
+   "source": "ZAB 2026-07-09 item 7"
+  },
+  {
+   "project_key": "ZP2024-0066",
+   "commercial_sqft": 690,
+   "quote": "690 square feet of ground floor commercial space",
+   "source": "ZAB 2025-09-11 item 8"
+  },
+  {
+   "project_key": "ZP2017-0014",
+   "commercial_sqft": 800,
+   "quote": "1 approximately 800 square-foot quick-serve restaurant",
+   "source": "ZAB 2018-03-08 item 6"
+  },
+  {
+   "project_key": "ZP2017-0015",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2017-0035",
+   "commercial_sqft": 2731,
+   "quote": "2,731 square feet of ground-floor commercial space",
+   "source": "ZAB 2018-08-23 item 6"
+  },
+  {
+   "project_key": "ZP2017-0039",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2022-0021",
+   "commercial_sqft": 3703,
+   "quote": "3,703 square feet of commercial floor area",
+   "source": "ZAB 2026-02-26 item 6"
+  },
+  {
+   "project_key": "ZP2022-0026",
+   "commercial_sqft": 7500,
+   "quote": "7,500 square feet commercial space",
+   "source": "ZAB 2023-03-30 item 3"
+  },
+  {
+   "project_key": "ZP2022-0046",
+   "commercial_sqft": 1043,
+   "quote": "1,043 square-feet of commercial space",
+   "source": "ZAB 2023-05-11 item 5"
+  },
+  {
+   "project_key": "ZP2022-0062",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "UP2014-0016",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "UP2014-0019",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZCBP2015-1435",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2014-0045",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2024-0181",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2025-0079",
+   "commercial_sqft": 9666,
+   "quote": "3 ground floor retail tenant spaces with a proposed total gross area of 9,666 square feet",
+   "source": "ZP2025-0079"
+  },
+  {
+   "project_key": "ZP2025-0107",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2026-0007",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "PLN2022-0119",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "PLN2023-0061",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "PLN2023-0098",
+   "commercial_sqft": 17110,
+   "quote": "17,110 sf commercial space",
+   "source": "PLN2023-0098"
+  },
+  {
+   "project_key": "PLN2024-0010",
+   "commercial_sqft": 6000,
+   "quote": "over 6,000 SF of community-serving ground floor uses",
+   "source": "PLN2024-0010"
+  },
+  {
+   "project_key": "ZP2015-0229",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2016-0020",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2016-0028",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2016-0085",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2016-0091",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2016-0101",
+   "commercial_sqft": 1837,
+   "quote": "1,837 square feet of commercial floor area",
+   "source": "ZAB 2017-10-26 item 7"
+  },
+  {
+   "project_key": "ZP2016-0172",
+   "commercial_sqft": 1500,
+   "quote": "1,500 sq. ft. of retail/general commercial spae",
+   "source": "DRCP2016-0020"
+  },
+  {
+   "project_key": "ZP2016-0207",
+   "commercial_sqft": 3179,
+   "quote": "3,179 square feet of combined ground floor commercial space for restaurant use including incidental service of beer and wine",
+   "source": "ZAB 2017-07-27 item 3"
+  },
+  {
+   "project_key": "ZP2020-0072",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2020-0090",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2020-0102",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2020-0104",
+   "commercial_sqft": 5500,
+   "quote": "5,500 square feet of commercial area",
+   "source": "ZP2020-0104"
+  },
+  {
+   "project_key": "ZP2023-0099",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2023-0107",
+   "commercial_sqft": 1312,
+   "quote": "1,312 square feet of commercial space",
+   "source": "ZAB 2024-05-30 item 3"
+  },
+  {
+   "project_key": "ZP2023-0123",
+   "commercial_sqft": null
+  },
+  {
+   "project_key": "ZP2023-0126",
+   "commercial_sqft": 2195,
+   "quote": "2,195 square feet of ground floor commercial space",
+   "source": "ZAB 2024-11-14 item 3"
+  }
+ ]
+}

@@ -837,8 +837,15 @@ commercial area from a model reading (79 projects, quoted). Fit (28 go-aheads de
 and that post-2020 go-aheads went ahead although cited costs/caps put them 1.5-3 pts short -> developers decided on
 something this model lacks (locked costs/financing, long-term holders' lower hurdles, per-bed student rents).
 
-**NEXT:** John: package as an investigation that reports the failing test as its finding, and/or model the
-student/per-bed submarket and the decision timing -> developer attribution (approval times, the ZAB
+**JN-Feasibility Part 2 PACKAGED (John "do #3", 2026-10-08, `a29a6c30`):** 2a rents, 2b cited cost/cap by year, 2c fit +
+out-of-sample test (FAILS, reported as the finding), 2d pipeline shape (approved-no-permit 11/970u 2016 -> 49/5,703u
+2025; construction flat ~1,000u; applications within 24 months 80-100% for 2015-16 approvals -> 15% for 2024, 9%
+2025), 2e "decided in a better year", 2f per-bed submarket first look (only 2 per-bed buildings with lease-ups), 2g
+gate (feasibility_projects_baseline_2026-10-08.json, PASS on re-run). Run it from the REPO ROOT (Part 1 uses
+root-relative paths; nbclient path=ROOT). Scratch analysis: scratch/2026-10-08_pipeline/, scratch/2026-10-08_proforma/.
+
+**NEXT:** per-bed rents for near-campus buildings the registry misses -> re-run 2c; decision-timing test (locked
+costs/financing); then developer attribution (approval times, the ZAB
 contradiction, Rent Board) read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).

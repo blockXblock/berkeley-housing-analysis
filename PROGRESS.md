@@ -827,8 +827,18 @@ withdrawn fail. RESULT: of 58 entitled-not-started, 14 met the hurdle when entit
 73u). Median gap today -2.22 pts. Caveats: cap rates 2018 + 2020-22 interpolated; commercial area by regex; two
 "1200 San Pablo" projects (57u, 104u) to check.
 
-**NEXT:** John: review -> package into JN-Feasibility (model readings for commercial area; the CBRE 2020-22 surveys)
--> developer attribution (approval times, the ZAB
+**CORRECTION (2026-10-08, packaging, `98be0bb7`): the out-of-sample "pass" above does NOT hold.** It tested completed
+buildings only and used interpolated 2021-22 caps. Packaged version (scripts/v4/proforma_projects.py): outcome from v4
+status (went ahead = completed + under construction), caps 2021 4.25 / 2022 4.75 estimated from CBRE SF multifamily
+infill (H2 2021, H1 & H2 2022) + Oakland's observed 50 bps premium (SF-Oakland spread was 100 bps by H2 2023),
+commercial area from a model reading (79 projects, quoted). Fit (28 go-aheads decided <= 2019): factor 0.833 ($276
+2018). TEST (26 decided >= 2020): median gap -203 bps, 9/26 -- FAILS; near campus -293, elsewhere -144. So the
+"14 penciled-then, short-today" list is NOT established. What holds: the relative gap (waiting -2.7 to -2.9 pts today)
+and that post-2020 go-aheads went ahead although cited costs/caps put them 1.5-3 pts short -> developers decided on
+something this model lacks (locked costs/financing, long-term holders' lower hurdles, per-bed student rents).
+
+**NEXT:** John: package as an investigation that reports the failing test as its finding, and/or model the
+student/per-bed submarket and the decision timing -> developer attribution (approval times, the ZAB
 contradiction, Rent Board) read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).

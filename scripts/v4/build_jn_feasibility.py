@@ -11,6 +11,11 @@ Markdown-in-source (the text cells ARE the deliverable). Every figure is DERIVED
 external timestamped baseline (data/baselines/feasibility_baseline_2026-09-08.json) — never hardcoded.
 
 Run:  python scripts/v4/build_jn_feasibility.py     # (re)writes the .ipynb  (run from repo root)
+
+PART 2 (John, 2026-10-08): the same model on Berkeley's actual projects -- observed inputs, cited cost and cap-rate
+series, a fit on the go-aheads decided by 2019 and an out-of-sample test on the later ones (which FAILS, and says
+why that matters), the pipeline's shape over time, and a first look at the per-bed near-campus submarket. Machinery in
+scripts/v4/proforma_projects.py; gate data/baselines/feasibility_projects_baseline_<date>.json.
 """
 import nbformat as nbf
 from nbformat.v4 import new_notebook, new_markdown_cell, new_code_cell
@@ -587,6 +592,357 @@ his UrbanSim is already calibrated for exactly this. That is the ask in the outr
 **As a curriculum piece, this notebook is complete as-is:** it teaches the full arc — assemble open data →
 borrow UrbanSim's schema ideas → a transparent pro-forma → scenario-as-table-swap → the calibration lesson
 → publish to Datasette. The Elmwood *answer* waits on calibration; the *method* is fully taught.
+""")
+
+
+# =====================================================================================================================
+# PART 2 -- BERKELEY'S ACTUAL PROJECTS (John, 2026-10-08: "package it into JN-Feasibility")
+# Machinery: scripts/v4/proforma_projects.py. Every figure derived; gated against data/baselines/
+# feasibility_projects_baseline_<date>.json (append on a reviewed change, JN_WRITE_BASELINE=1).
+# =====================================================================================================================
+md(r"""
+---
+# PART 2 — Did Berkeley's actual projects pencil?
+
+Part 1 ran the pro-forma on placeholder inputs for one commercial strip. Part 2 runs **the same model, with the same
+decision rule (Step 4b: yield on cost against the exit cap rate plus a spread)**, on **every v4 project of 5 or more
+units** (UC excluded) — with what the record actually holds about each one, and cited or labeled numbers for what it
+does not. Then it does the thing a model of this kind rarely does in public: **it tests itself on the buildings that
+were actually built.**
+
+| Input | Where it comes from |
+|---|---|
+| units, stories, parking spaces | v4 `v_projects` (read from the City's own text) |
+| floor area | built: the assessor's taxable sqft of the new building · unbuilt: the area the application states · kept at 500–2,000 sqft/unit, else the built median |
+| **rents** | **the Rent Board registry**: lease-up rents of new buildings (Part 2a) |
+| land | the assessor's land value on the project's parcels |
+| City fees | the Accela Fees tab, else the median fee per unit |
+| commercial floor area | a model reading of the City's Planning text and the Zoning Adjustments Board's items, each with a verbatim quote |
+| construction cost | **cited**: Terner Center 2020 + the TBD San Francisco bid index (Part 2b) |
+| exit cap rate | **cited**: CBRE cap-rate surveys, Oakland multifamily (Part 2b) |
+| what happened | v4 status: went ahead (completed, under construction) · waiting (entitled) · abandoned (withdrawn, void) |
+
+```mermaid
+graph LR
+  CPRA[City permits<br/>CPRA + Accela] --> V4[(v4: projects,<br/>buildings, events)]
+  PLN[Planning records<br/>+ ZAB minutes] --> V4
+  RB[Rent Board registry<br/>CPRA #26-2375] --> V4
+  V4 --> R[lease-up rents<br/>Part 2a]
+  ASR[Alameda assessor<br/>berkeley.db] --> IN[observed inputs<br/>per project]
+  V4 --> IN
+  CA[commercial area<br/>model reading, quoted] --> IN
+  TER[Terner 2020<br/>hard cost] --> CAL[cost + cap by year<br/>Part 2b]
+  TBD[TBD SF bid index<br/>SF AICCIE memos] --> CAL
+  CBRE[CBRE cap-rate<br/>surveys] --> CAL
+  R --> PF[pro-forma<br/>proforma_projects.py]
+  IN --> PF
+  CAL --> PF
+  PF --> FIT[fit on go-aheads<br/>decided by 2019]
+  FIT --> TEST[test on go-aheads<br/>decided 2020+]
+  PF --> SHAPE[pipeline shape<br/>Part 2d]
+  TEST --> GATE[baseline gate]
+  SHAPE --> GATE
+```
+""")
+code(r"""
+import sys, sqlite3, statistics as st, collections
+from pathlib import Path
+ROOT = Path.cwd().resolve()
+while not (ROOT / 'scripts' / 'v4').exists() and ROOT != ROOT.parent:
+    ROOT = ROOT.parent
+sys.path.insert(0, str(ROOT / 'scripts' / 'v4')); sys.path.insert(0, str(ROOT / 'scripts'))
+import pandas as pd
+import proforma_projects as pp
+res = pp.run()
+FIG = pp.figures(res)
+mk = pd.DataFrame(res['market'])
+print(f"{FIG['projects_5plus_nonuc']} projects of 5+ units (UC excluded); {FIG['market_projects']} market-rate; "
+      f"{FIG['lease_ups_market']:,} market lease-ups; commercial area read for {FIG['commercial_area_projects']} projects")
+""")
+
+md(r"""
+## Part 2a — Rents: what new buildings actually charged
+
+📝 **Plan.** Berkeley's Rent Board registers new buildings as *"Partially Covered"* — exempt from rent ceilings, but
+registered — with each tenancy's **initial rent** and start date. A tenancy that starts within **24 months** of a
+building's first certificate of occupancy is a **lease-up rent**: what the building charged when it was new. Affordable
+buildings, per-bed (group) buildings, units the registry marks *Gov Subsidized*, and leases under 60% of the building's
+own median for the same size (most likely inclusionary units the registry does not flag) are kept out of the market
+figures. Buildings are linked to the registry by parcel or by **exact** address only — never by a nearby one.
+""")
+code(r"""
+rents = res['rents']
+names = {'0': 'studio', '1': '1 bedroom', '2': '2 bedrooms', '3': '3 bedrooms'}
+pool = pd.DataFrame([{'size': names[b], 'median lease-up rent ($/month)': round(rents['pool_rent'][b]),
+                      'leases (2022-24 openings)': rents['pool_n'][b], 'share of the mix': round(rents['pool_mix'][b], 2)}
+                     for b in sorted(rents['pool_rent'])])
+display(pool)
+try:
+    import plotly.express as px
+    fig = px.bar(pool, x='size', y='median lease-up rent ($/month)', text='leases (2022-24 openings)',
+                 title='Market lease-up rents, new Berkeley buildings opened 2022-24 (bar label = leases)',
+                 template='plotly_white', height=380)
+    fig.update_traces(texttemplate='n=%{text}')
+    fig.show()
+except ImportError:
+    pass
+""")
+md(r"""
+📝 **Found.** A model now has rents it did not invent. Part 1's flat `$45/sqft/yr` becomes rent **per unit by size**,
+times the mix — the registry gives bedrooms, not square feet.
+
+⚠️ **What this could mislead about.** These are **asking-at-lease-up** rents of buildings that **were built** — the
+survivors. They say nothing about the rents an unbuilt project would get, only what comparable new buildings got.
+Near-campus buildings leased **by the bed** are excluded here and are under-represented in the registry (Part 2f).
+""")
+
+md(r"""
+## Part 2b — Cost and cap rate, by year, from cited sources
+
+📝 **Plan.** A building is decided in one year and priced in that year's money. Two cited series:
+
+- **Construction cost.** Terner Center, *The Hard Costs of Construction* (March 2020, 240 California projects): Bay Area
+  hard costs *"more than $380 per square foot in 2018"*; affordable projects cost **$48/sqft more** than market-rate;
+  Type I (concrete/steel) **+$65–71**. → market-rate 2018 base **$332/sqft**, towers +$68. Escalated each year by the
+  **TBD Consultants San Francisco bid index** (bid prices on new construction; City & County of San Francisco, Annual
+  Infrastructure Construction Cost Inflation Estimate memos of October 2022 and October 21, 2024).
+- **Exit cap rate.** CBRE U.S. Cap Rate Survey, multifamily infill, Class A stabilized, **Oakland**: H2 2017 and H2 2019
+  4.25–4.75%, H2 2023 and H1 2024 5.5–6.5%. CBRE's 2021–22 editions list no Oakland multifamily; those years are
+  **estimated** from San Francisco (3.5–4% in H2 2021 and H1 2022, 4.5–5% in H2 2022) plus Oakland's observed 50 bps
+  premium. 2018 and 2020 are **interpolated**. Every value carries its basis below.
+""")
+code(r"""
+cal = pd.DataFrame([{'year': y, 'hard cost $/sqft (market, non-tower)': round(pp.hard_cost(y)),
+                     'escalation from prior year': pp.ESCALATION.get(y), 'exit cap rate': pp.EXIT_CAP[y],
+                     'cap-rate basis': pp.EXIT_CAP_BASIS[y], 'hurdle (cap + spread)': round(pp.EXIT_CAP[y] + pp.SPREAD, 4)}
+                    for y in range(2017, 2027)])
+display(cal)
+try:
+    import plotly.graph_objects as go
+    from plotly.subplots import make_subplots
+    fig = make_subplots(specs=[[{'secondary_y': True}]])
+    fig.add_bar(x=cal['year'], y=cal['hard cost $/sqft (market, non-tower)'], name='hard cost $/sqft')
+    fig.add_scatter(x=cal['year'], y=cal['exit cap rate'] * 100, name='exit cap rate %', mode='lines+markers',
+                    secondary_y=True)
+    fig.update_layout(title='Hard cost and exit cap rate by year (cited; dashed years estimated)', template='plotly_white',
+                      height=380)
+    fig.show()
+except ImportError:
+    pass
+""")
+md(r"""
+📝 **Found.** Between the years most built buildings were decided (2017–2019) and today, cost rose about **40%** and
+the exit cap rate **1.5 points** — two moves in the same direction.
+
+⚠️ **What this could mislead about.** The cost series is a **San Francisco** bid index applied to Berkeley, and
+Terner's sample is mostly **affordable**, **SF-weighted** projects. Its *level* is uncertain; its *trend* is the
+cited part. Part 2c fits the level to Berkeley's own outcomes.
+""")
+
+md(r"""
+## Part 2c — Fit on the buildings that went ahead early, test on the ones that went ahead later
+
+📝 **Plan.** One number in the model is genuinely unknown: the **level** of Berkeley market-rate construction cost.
+Fit it once — a single factor on the cited cost — so that the **median building that went ahead with a decision year up
+to 2019** sits exactly at the hurdle. Then **test it, without refitting,** on the buildings that went ahead with a
+decision year from 2020 on. A model that is right should put those near the hurdle too. The decision year is the
+entitlement year (built buildings got their first permit a median one year later), else the permit year less one.
+""")
+code(r"""
+fit, test = res['fit'], res['test']
+summ = pd.DataFrame([
+    {'set': 'FIT  - went ahead, decided <= 2019', 'projects': len(fit),
+     'median gap to hurdle (bps)': FIG['fit_median_gap_bps'],
+     'pencils or marginal': sum(1 for p in fit if p['verdict_decision'] != 'does not pencil')},
+    {'set': 'TEST - went ahead, decided >= 2020', 'projects': len(test),
+     'median gap to hurdle (bps)': FIG['test_median_gap_bps'], 'pencils or marginal': FIG['test_pencil_or_marginal']},
+    {'set': 'abandoned (withdrawn, void)', 'projects': FIG['abandoned_n'],
+     'median gap to hurdle (bps)': round(st.median(p['gap_decision'] for p in res['market'] if p['outcome'] == 'abandoned') * 1e4),
+     'pencils or marginal': FIG['abandoned_pencil_or_marginal']}])
+display(summ)
+print(f"fitted cost factor {FIG['cost_factor']}: 2018 market hard cost ${FIG['fitted_hard_cost_2018']}/gross sqft "
+      f"(Terner-based ${pp.HARD_2018:.0f})")
+try:
+    import plotly.express as px
+    ahead = mk[mk['outcome'] == 'went ahead'].copy()
+    ahead['gap (bps)'] = ahead['gap_decision'] * 1e4
+    ahead['where'] = ahead['near_campus'].map({True: 'near campus', False: 'elsewhere'})
+    fig = px.scatter(ahead, x='decision_year', y='gap (bps)', color='where', hover_name='name', size='units',
+                     title='Buildings that went ahead: gap to the hurdle in their decision year (0 = exactly at it)',
+                     template='plotly_white', height=420)
+    fig.add_hline(y=0, line_dash='dash')
+    fig.add_vline(x=2019.5, line_dash='dot', annotation_text='fit | test')
+    fig.show()
+except ImportError:
+    pass
+""")
+md(r"""
+📝 **Found — the model FAILS its own test, and the failure is the finding.** Fitted on the early go-aheads, it puts the
+later ones far below the hurdle: buildings decided from 2020 on went ahead **although cited costs and cap rates say
+they were well short** — worst near campus. Developers who went ahead after 2020 decided on something this model does
+not have. The candidates, each testable:
+
+1. **Locked-in costs and financing** — a contract or loan fixed before the cited rises;
+2. **Long-term holders** — an owner who keeps the building accepts a lower yield than a merchant developer's spread;
+3. **Per-bed rents near campus** — student-oriented buildings lease by the bed at rents the registry under-records
+   (Part 2f);
+4. **Rents rising into lease-up** — the model prices a building at the rents of the buildings before it.
+
+**What survives the failure is the comparison across time** (Part 2e), because it does not depend on the level.
+
+⚠️ **What this could mislead about.** "Does not pencil" here means *does not clear this model's hurdle* — not that the
+building lost money. A single factor absorbs everything the model lacks, so it is a calibration, **not** a measured
+construction cost.
+""")
+
+md(r"""
+## Part 2d — The pipeline's shape over time
+
+📝 **Plan.** John's questions: *as time went forward, did entitled projects slow down in applying for building
+permits? Did the pipeline tighten, or hold more projects and more units at each stage?* Two derived tables from v4's
+dates — the first building-permit **application** (the earliest submission on the project's master or phase permit),
+and each year-end's census of projects and units by stage (an abandoned project leaves at the date of its Withdrawn /
+Void task).
+""")
+code(r"""
+con = sqlite3.connect(f"file:{res['v4_path']}?mode=ro", uri=True)
+P = pp.pipeline_dates(con)
+speed = pd.DataFrame(pp.apply_speed(P))
+display(speed)
+shape = pd.DataFrame(pp.pipeline_shape(P))
+display(shape)
+try:
+    import plotly.graph_objects as go
+    fig = go.Figure()
+    for s_ in ('in review', 'entitled, no permit', 'under construction'):
+        fig.add_scatter(x=shape['year'], y=shape[s_ + ' units'], name=s_, mode='lines+markers')
+    fig.add_bar(x=shape['year'], y=shape['completed that year units'], name='completed that year', opacity=0.5)
+    fig.update_layout(title='Units holding in each stage at year-end (5+ unit projects)', template='plotly_white', height=420)
+    fig.show()
+except ImportError:
+    pass
+""")
+md(r"""
+📝 **Found.** The pipeline **backed up; it did not tighten.** The front of it swelled — more projects and many more
+units waiting in review and, above all, **approved but not applying for a permit** — while the number of buildings
+under construction stayed flat. Projects that do apply are not slower; **fewer apply**, and the approved ones wait
+longer and longer.
+
+⚠️ **What this could mislead about.** The newest cohorts have not had their full two years (`full_24_month_followup`
+is False) — their low shares are partly time not yet passed. Withdrawal dates come from the Planning workflow and are
+approximate for a few projects.
+""")
+
+md(r"""
+## Part 2e — What the buildings that went ahead have in common
+
+📝 **Plan.** Compare the components of the account — not the verdict — for the buildings that went ahead and the ones
+still waiting, and price both **in their own decision year** and **today**.
+""")
+code(r"""
+groups = {'completed': mk[mk['status'] == 'completed'], 'under construction': mk[mk['status'] == 'under_construction'],
+          'waiting (entitled)': mk[mk['outcome'] == 'waiting'], 'abandoned': mk[mk['outcome'] == 'abandoned']}
+def per(g, f):
+    return g.apply(f, axis=1).median() if len(g) else None
+comp = pd.DataFrame({name: {
+    'projects': len(g),
+    'decision year (median)': g['decision_year'].median(),
+    'near campus (share)': round(g['near_campus'].mean(), 2),
+    '9+ stories (share)': round((g['tier'] == 'tower').mean(), 2),
+    'hard cost per unit, own year': round(per(g, lambda p: p['sqft'] / p['units'] * pp.hard_cost(p['decision_year']) * res['factor'])),
+    'hard cost per unit, today': round(per(g, lambda p: p['sqft'] / p['units'] * pp.hard_cost(pp.TODAY) * res['factor'])),
+    'commercial space (share)': round((g['commercial_sqft'] > 0).mean(), 2),
+    'gap to hurdle, own year (bps)': round(g['gap_decision'].median() * 1e4),
+    'gap to hurdle, today (bps)': round(g['gap_today'].median() * 1e4)} for name, g in groups.items()})
+display(comp)
+w = mk[mk['outcome'] == 'waiting']
+print(f"waiting projects: {FIG['waiting_n']} -- met the hurdle in their decision year but short today "
+      f"{FIG['waiting_met_then_short_today']}; short both {FIG['waiting_never_met']}; meet it today {FIG['waiting_meets_today']}")
+""")
+md(r"""
+📝 **Found.** What the completed buildings share is **timing**: decided around 2018, when building cost about a third
+less per unit and the exit cap rate was 4.5%. Mostly mid-rise, rarely concrete towers; more of them near campus.
+**Priced at today's costs and cap rates, the completed buildings fall as far short as the waiting ones** — they were
+not better projects, they were decided in a better year.
+
+⚠️ **What this could mislead about.** For the waiting projects, rent, unit size and fees are mostly **defaults** (the
+market pool, the median size, the median fee), so the comparison is of **timing, height and place**, not of each
+project's own revenue. Land per unit is not comparable: built parcels were reassessed at purchase; waiting parcels
+often carry old Prop 13 values.
+""")
+
+md(r"""
+## Part 2f — A first look at the per-bed, near-campus submarket
+
+📝 **Plan.** The test failed worst near campus. Student-oriented buildings near campus are often leased **by the bed**;
+the registry codes some of them as group housing (Part 2a set them aside). Compare, for the buildings that went ahead,
+the gap near campus and elsewhere, and show the per-bedroom lease-up rents of the group buildings the registry does hold.
+""")
+code(r"""
+ahead = mk[mk['outcome'] == 'went ahead']
+near = ahead.groupby(['near_campus', ahead['decision_year'] >= 2020])['gap_decision'].agg(['count', 'median'])
+near['median'] = (near['median'] * 1e4).round()
+near.index = near.index.set_names(['near campus', 'decided 2020+'])
+display(near.rename(columns={'count': 'projects', 'median': 'median gap (bps)'}))
+grp = [x for x in res['rents']['leases'] if x['cls'] == 'group' and str(x['beds']).isdigit() and int(x['beds']) > 0]
+if grp:
+    per_bed = pd.DataFrame([{'project': x['project'], 'bedrooms': int(x['beds']), 'rent': x['rent'],
+                             'rent per bedroom': x['rent'] / int(x['beds'])} for x in grp])
+    display(per_bed.groupby('project')[['rent', 'rent per bedroom']].median().round())
+print('group (per-bed) buildings with lease-ups in the registry:', len({x['project'] for x in grp}))
+""")
+md(r"""
+📝 **Found (first look).** The model's shortfall is largest near campus, and the registry holds lease-ups for only a
+handful of per-bed buildings — too few to calibrate a submarket. **Next:** per-bed rents for the near-campus buildings
+the registry misses (their own leasing pages, or a second registry pull), then re-run Part 2c with them. Until then the
+near-campus gap is a hypothesis, not a result.
+""")
+
+md(r"""
+## Part 2g — Gate: derive, then assert against a timestamped baseline
+📝 Structural figures (project counts, lease-ups, readings) are stable; calibration figures move with the inputs. A
+legitimate change **appends** a baseline (`JN_WRITE_BASELINE=1`, John's call) — never an edit.
+""")
+code(r"""
+import json, glob, os, hashlib, subprocess
+from datetime import date
+BL_DIR = os.environ.get('JN_BASELINE_DIR') or str(ROOT / 'data' / 'baselines')
+snaps = sorted(glob.glob(os.path.join(BL_DIR, 'feasibility_projects_baseline_*.json')))
+h = hashlib.sha256()
+with open(res['v4_path'], 'rb') as f_:
+    for b_ in iter(lambda: f_.read(1 << 20), b''): h.update(b_)
+meta = {'as_of': date.today().isoformat(), 'v4_file_sha': h.hexdigest()[:16],
+        'git': subprocess.run(['git', '-C', str(ROOT), 'rev-parse', '--short', 'HEAD'], capture_output=True, text=True).stdout.strip(),
+        'figures': FIG}
+if not snaps or os.environ.get('JN_WRITE_BASELINE') == '1':
+    nm = f"feasibility_projects_baseline_{date.today().isoformat()}"
+    out_p = next(os.path.join(BL_DIR, f'{nm}{x}.json') for x in ['', *'bcdefgh'] if not os.path.exists(os.path.join(BL_DIR, f'{nm}{x}.json')))
+    json.dump(meta, open(out_p, 'w'), indent=1)
+    print('WROTE baseline', out_p)
+else:
+    bl = json.load(open(snaps[-1]))
+    diffs = {k: (FIG[k], bl['figures'].get(k)) for k in FIG if bl['figures'].get(k) != FIG[k]}
+    if diffs:
+        for k, (now, was) in diffs.items():
+            print(f'  {k}: computed {now} vs baseline {was}')
+        raise AssertionError(f"BASELINE MISMATCH vs {os.path.basename(snaps[-1])} (v4 then {bl.get('v4_file_sha')}, now "
+                             f"{meta['v4_file_sha']}) -- diagnose; a legitimate change APPENDS a baseline (JN_WRITE_BASELINE=1)")
+    print(f'BASELINE GATE PASS vs {os.path.basename(snaps[-1])}')
+for k, v in FIG.items():
+    print(f'  {k:32} {v}')
+""")
+
+md(r"""
+## Part 2 — assumptions ledger
+| assumption | what BREAKS if it is wrong |
+|---|---|
+| lease-up rents (first 24 months, Partially Covered) are what a new building charges | if lease-ups carry concessions the registry does not show, revenue is overstated |
+| the 60%-of-own-median rule finds unflagged inclusionary units | too tight keeps BMR leases in the market pool (rents understated); too loose drops real cheap units |
+| Terner's 2018 level less its $48 affordable premium is market-rate cost; the TBD SF index is Berkeley's trend | the fitted factor absorbs a wrong level; a wrong trend biases every comparison across years |
+| CBRE Oakland multifamily infill Class A cap rates apply to Berkeley; 2021-22 = SF + 50 bps | a different exit cap moves every hurdle in those years |
+| the decision year is the entitlement year | if costs and financing lock later or earlier, projects are priced in the wrong year (Part 2c's first candidate) |
+| one factor fitted on go-aheads decided <= 2019 | it absorbs every unmodeled difference; the out-of-sample test is what keeps it honest -- and it fails |
+| commercial area from a quoted model reading; $36/sqft/yr, 20% vacancy | ground-floor retail that sits empty or rents for less overstates income |
 """)
 
 nb["cells"] = C

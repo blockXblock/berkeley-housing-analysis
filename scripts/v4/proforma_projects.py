@@ -76,6 +76,7 @@ SOFT, OPEX = (0.25, 0.20, 0.30), (0.35, 0.30, 0.40)
 VACANCY, RETAIL_VACANCY, RETAIL_EXPENSES, PARKING_OCC = 0.05, 0.20, 0.10, 0.70
 SPREAD, CARRY, COST_BAND = 0.0125, 0.07, 0.10
 TODAY = 2025
+SATHER_GATE, NEAR_CAMPUS_MI = (37.8702, -122.2595), 0.6      # "near campus" = within 0.6 mi of Sather Gate
 WENT_AHEAD, WAITING, ABANDONED = {"completed", "under_construction"}, {"entitled"}, {"withdrawn", "void"}
 
 
@@ -190,11 +191,11 @@ def projects(con, asr, rents, commercial):
     out = []
     for r in con.execute("""SELECT project_key, name, status, COALESCE(NULLIF(units_built_or_permitted,0), proposed_units),
             height_stories, building_sqft, parcel_taxable_building_sqft, fees_paid, entitled_date, bp_issued_date,
-            COALESCE(first_co_date, co_issued_date), funding, project_id, parking_spaces
+            COALESCE(first_co_date, co_issued_date), funding, project_id, parking_spaces, latitude, longitude
             FROM v_projects WHERE COALESCE(NULLIF(units_built_or_permitted,0), proposed_units) >= 5
               AND COALESCE(rhna_excluded,0) = 0"""):
         out.append(dict(zip(["key", "name", "status", "units", "stories", "stated_sqft", "taxable_sqft", "fees", "entitled",
-                             "bp", "co", "funding", "pid", "parking"], r)))
+                             "bp", "co", "funding", "pid", "parking", "lat", "lon"], r)))
     apns = collections.defaultdict(set)
     for pid, apn in con.execute("""SELECT pp.project_id, pi.apn_normalized FROM project_parcels pp JOIN parcel_identifiers pi
             USING(parcel_id) WHERE pi.apn_normalized IS NOT NULL UNION SELECT ps.project_id, pi.apn_normalized
@@ -208,6 +209,8 @@ def projects(con, asr, rents, commercial):
         except Exception:
             pass
     for p in out:
+        p["near_campus"] = (p["lat"] is not None and
+                            ((p["lat"] - SATHER_GATE[0]) * 69.0) ** 2 + ((p["lon"] - SATHER_GATE[1]) * 54.6) ** 2 < NEAR_CAMPUS_MI ** 2)
         cand = [(p["taxable_sqft"], "assessor (built)")] if p["co"] else []
         cand.append((p["stated_sqft"], "stated in the application"))
         p["sqft"], p["sqft_basis"] = next(((v, b) for v, b in cand if v and 500 <= v / p["units"] <= 2000), (None, None))
@@ -312,3 +315,81 @@ def figures(res):
         "waiting_meets_today": sum(1 for p in waiting if p["gap_today"] >= 0),
         "waiting_median_gap_today_bps": round(st.median(p["gap_today"] for p in waiting) * 1e4),
     }
+
+
+# ---------------------------------------------------------------- THE PIPELINE'S SHAPE (John's questions, 2026-10-08)
+def _months(a, b):
+    return (int(b[:4]) - int(a[:4])) * 12 + int(b[5:7]) - int(a[5:7])
+
+
+def pipeline_dates(con):
+    """5+ unit, non-UC projects with filed / entitled / first-BP application / first BP issued / first CO / end dates.
+    The application = the earliest permit_submitted on the project's master or phase permits; the END of a withdrawn
+    or void project = the latest Withdrawn / Void task on its anchor Planning record (else its last Planning event)."""
+    P = {}
+    for k, pid, units, status, filed, ent, bp, co, anchor in con.execute("""
+        SELECT project_key, project_id, COALESCE(NULLIF(units_built_or_permitted,0), proposed_units), status, filed_date,
+               entitled_date, bp_issued_date, COALESCE(first_co_date, co_issued_date), anchor_record FROM v_projects
+        WHERE COALESCE(NULLIF(units_built_or_permitted,0), proposed_units) >= 5 AND COALESCE(rhna_excluded,0) = 0"""):
+        P[k] = dict(pid=pid, units=units, status=status, filed=filed, ent=ent, bp=bp, co=co, anchor=anchor)
+    applied = dict(con.execute("""SELECT ps.project_id, MIN(e.event_date) FROM project_structures ps JOIN structure_events se
+        USING(structure_id) JOIN events e USING(event_id) WHERE e.event_type_code='permit_submitted'
+        AND se.role_in_structure IN ('master','phase') GROUP BY 1"""))
+    ended = {}
+    for rec, d in con.execute("""SELECT source_record_key, event_date FROM events WHERE event_type_code='planning_task'
+            AND (raw_description LIKE '%Withdrawn%' OR raw_description LIKE '%Void%')"""):
+        ended[rec] = max(ended.get(rec, ''), d or '')
+    last = dict(con.execute("SELECT source_record_key, MAX(event_date) FROM events WHERE event_type_code LIKE 'planning_%' GROUP BY 1"))
+    for p in P.values():
+        p["applied"] = applied.get(p["pid"])
+        p["end"] = (ended.get(p["anchor"]) or last.get(p["anchor"])) if p["status"] in ABANDONED else None
+    return P
+
+
+def apply_speed(P, first=2015, followup_to="2026-06-30"):
+    """per entitlement-year cohort: how many applied for a building permit, how fast, and how many within 24 months."""
+    out = []
+    for y in sorted({int(p["ent"][:4]) for p in P.values() if p["ent"] and p["ent"][:4] >= str(first)}):
+        ps = [p for p in P.values() if p["ent"] and int(p["ent"][:4]) == y]
+        after = [_months(p["ent"], p["applied"]) for p in ps if p["applied"] and p["applied"] >= p["ent"]]
+        w24 = sum(1 for p in ps if p["applied"] and _months(p["ent"], p["applied"]) <= 24)
+        out.append(dict(entitled_year=y, projects=len(ps), units=sum(p["units"] for p in ps),
+                        applied=sum(1 for p in ps if p["applied"]), median_months_to_apply=st.median(after) if after else None,
+                        applied_within_24_months=w24, share_within_24=round(w24 / len(ps), 2),
+                        full_24_month_followup=f"{y + 2}-12-31" <= followup_to))
+    return out
+
+
+def pipeline_shape(P, years=range(2016, TODAY + 1)):
+    """at each year-end: projects and units holding in each stage, the completions and endings of that year, and how
+    long the waiting (entitled, no permit) projects have waited."""
+    rows = []
+    for y in years:
+        ye, ys = f"{y}-12-31", f"{y}-01-01"
+        c = collections.defaultdict(lambda: [0, 0])
+        waits = []
+        for p in P.values():
+            if p["end"] and p["end"] <= ye:
+                if p["end"] >= ys:
+                    c["ended that year"][0] += 1; c["ended that year"][1] += p["units"]
+                continue
+            if p["co"] and p["co"] <= ye:
+                if p["co"] >= ys:
+                    c["completed that year"][0] += 1; c["completed that year"][1] += p["units"]
+                continue
+            if p["bp"] and p["bp"] <= ye:
+                s_ = "under construction"
+            elif p["ent"] and p["ent"] <= ye:
+                s_ = "entitled, no permit"; waits.append(_months(p["ent"], ye))
+            elif p["filed"] and p["filed"] <= ye:
+                s_ = "in review"
+            else:
+                continue
+            c[s_][0] += 1; c[s_][1] += p["units"]
+        row = dict(year=y)
+        for s_ in ("in review", "entitled, no permit", "under construction", "completed that year", "ended that year"):
+            row[s_ + " projects"], row[s_ + " units"] = c[s_]
+        row["median months waiting"] = st.median(waits) if waits else None
+        row["waiting over 3 years"] = sum(1 for w in waits if w > 36)
+        rows.append(row)
+    return rows

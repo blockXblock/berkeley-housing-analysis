@@ -223,6 +223,28 @@ Association (landlords) as organizations, with a briefing and the data link; stu
 for the student-renter majority (~53% of Berkeley's poor are off-campus students, from the Snapshot);
 carrier-route "Resident" mail (USPS EDDM) only if John decides to spend, after FPPC advice.
 
+### 6.3a The renter join (BUILT 2026-10-12, private)
+`scratch/2026-10-12/renter_join.py` (gitignored) joins the Rent Board unit registry (CPRA #26-2375, 2026-07-13,
+41,279 units) to parcels and Measure U at the City's peak rate ($35/$100k). Outputs:
+`renter_units_measure_u_peak35.csv` (per unit) and `renter_buildings_measure_u_peak35.csv` (per building).
+- **Match:** 39,125 by APN (12-digit; 11-digit zero-padded; 10-digit = sub-parcel omitted → `00`), 870 by exact
+  house number + street via `housing_rules.address.normalize_address` (flagged `matched_by=address`; ambiguous
+  addresses refused), **1,284 unmatched** (216 APNs: stale or re-platted, per the standing guard). 96.9% matched.
+- **Tenant-occupied units:** 27,221 at 5,514 parcels. The parcels they sit on carry ~$2.66M/yr of the levy at peak.
+- **Even-split share per unit** (parcel levy ÷ registered units on the parcel), at peak:
+
+| coverage | tenant units | p10 / median / p90 per unit per yr | subsidized | on mixed-use parcels | unit # missing |
+|---|---|---|---|---|---|
+| Fully Covered (rent ceilings) | 21,163 | $9 / **$52** / $141 | 1,004 | 891 | 13% |
+| Partially Covered (market rent) | 6,058 | $0 / **$144** / $297 | 375 | 489 | 24% |
+
+- The largest-levy buildings with tenants are all **Partially Covered** new construction: 2580 Bancroft (≈ $377/unit/yr),
+  2125 University, 2108 Berkeley Way, 2150 Kittredge, 2035 Blake. The new-housing-pays-most finding, at the unit level.
+- **Caveats:** the even split overstates the share on mixed-use parcels (commercial AV); $0 shares are units on parcels
+  not yet assessed (new construction or ADUs: the assessment lag); unit numbers are missing on 13–24% of rows, so
+  "Resident" mail to those buildings goes to the street address only. Subsidized tenants' rent is set by income,
+  so they need a different message (or none).
+
 ### 6.4 The red-dot mailing list (BUILT 2026-10-12, private)
 `scratch/2026-10-12/red_dot_mailing_list.py` (gitignored; **never under docs/**) → two CSVs:
 `red_dot_owners_peak35.csv` (one row per parcel) and `red_dot_letters_peak35.csv` (one row per mailing

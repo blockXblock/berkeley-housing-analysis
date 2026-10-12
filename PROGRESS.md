@@ -844,8 +844,13 @@ out-of-sample test (FAILS, reported as the finding), 2d pipeline shape (approved
 gate (feasibility_projects_baseline_2026-10-08.json, PASS on re-run). Run it from the REPO ROOT (Part 1 uses
 root-relative paths; nbclient path=ROOT). Scratch analysis: scratch/2026-10-08_pipeline/, scratch/2026-10-08_proforma/.
 
-**NEXT:** per-bed rents for near-campus buildings the registry misses -> re-run 2c; decision-timing test (locked
-costs/financing); then developer attribution (approval times, the ZAB
+**Per-bed rents collected + test re-run (John "collect and rerun", 2026-10-12, `eb033986`):** 11 of 19 near-campus
+go-aheads have leasing-site rents (URL + snippet; The Standard, The Valiant re-verified). Test median gap -203 -> -72
+bps; near campus -293 -> -63, elsewhere -144 -> -151; 14/26 pencil or marginal. Near campus = unseen per-bed revenue;
+elsewhere unexplained. Part 2 gate HALTS on the change (v4 unchanged) -> John to approve the baseline append.
+
+**NEXT:** John: append the feasibility baseline -> decision-timing / long-term-holder test for the non-campus
+go-aheads -> developer attribution (approval times, the ZAB
 contradiction, Rent Board) read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).

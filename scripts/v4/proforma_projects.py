@@ -60,6 +60,9 @@ from housing_rules.address import normalize_address  # noqa: E402
 V4 = ROOT / "databases/berkeley_housing_v4.db"
 ASSESSOR = ROOT / "databases/berkeley.db"
 COMMERCIAL_EVIDENCE = ROOT / "data/derived/commercial_area_evidence_2026-10-08.json"
+# current (2026) asking rents from the buildings' own leasing sites -- per bed or per unit, each with URL + snippet
+# (John, 2026-10-12: "collect and rerun"); used, when asked, for buildings the Rent Board registry has no lease-ups for
+LEASING_EVIDENCE = ROOT / "data/derived/leasing_rents_evidence_2026-10-12.json"
 
 # ---- CITED
 ESCALATION = {2018: 1.0054, 2019: 1.104, 2020: 1.026, 2021: 1.036, 2022: 1.172, 2023: 1.049, 2024: 1.026, 2025: 1.035,
@@ -109,7 +112,7 @@ def lease_ups(con):
             SELECT project_key, units_built_or_permitted, COALESCE(first_co_date, co_issued_date), project_id, funding
             FROM v_projects WHERE units_built_or_permitted >= 5 AND COALESCE(rhna_excluded,0) = 0
               AND COALESCE(first_co_date, co_issued_date) IS NOT NULL"""):
-        proj[key] = dict(co=co, pid=pid, funded=bool(funding and json.loads(funding)), apns=set(), addrs=set())
+        proj[key] = dict(co=co, pid=pid, units=units, funded=bool(funding and json.loads(funding)), apns=set(), addrs=set())
     pp = collections.defaultdict(set)
     for pid, parcel in con.execute("""SELECT project_id, parcel_id FROM project_parcels UNION
             SELECT ps.project_id, sp.parcel_id FROM project_structures ps JOIN structure_parcels sp USING(structure_id)"""):
@@ -143,7 +146,7 @@ def lease_ups(con):
         _, apn, ua = key.split(":", 2)
         j = json.loads(pl)
         ten[(apn, ua)].setdefault((j.get("Start Date Of Tenancy") or "")[:10], j)
-    leases, classes = [], {}
+    leases, classes, mix = [], {}, {}
     for k, p in proj.items():
         keys = set().union(*[by_apn[a] for a in p["apns"]], *[by_addr[c] for c in p["addrs"]]) if (p["apns"] or p["addrs"]) else set()
         if not keys:
@@ -155,6 +158,9 @@ def lease_ups(con):
                     for u in us) or (beds and st.median(beds) >= 3)
         cls = "affordable" if (p["funded"] or (us and subsidized / len(us) > 0.5)) else "group" if group else "market"
         classes[k] = cls
+        if beds and len(beds) >= 0.5 * p["units"]:  # the building's own bedroom mix -- only if most units are registered
+            c_ = collections.Counter(str(min(b, 4)) for b in beds)
+            mix[k] = {b: n / len(beds) for b, n in c_.items()}
         end = str(int(p["co"][:4]) + 2) + p["co"][4:]
         rows = []
         for x in keys:
@@ -182,11 +188,30 @@ def lease_ups(con):
     own = collections.defaultdict(lambda: collections.defaultdict(list))
     for x in market:
         own[x["project"]][x["beds"]].append(x["rent"])
-    return dict(leases=leases, market=market, classes=classes, pool_rent=pool_rent, pool_mix=pool_mix, own=own,
+    return dict(leases=leases, market=market, classes=classes, mix=mix, pool_rent=pool_rent, pool_mix=pool_mix, own=own,
                 pool_n={b: len(v) for b, v in pool.items()})
 
 
-def projects(con, asr, rents, commercial):
+def leasing_rent_per_unit(reading, mix):
+    """monthly rent per unit from a building's leasing site, over a bedroom mix: a per-bed rate x bedrooms (a studio
+    = 1 bed), a per-unit rent as is; a size the site does not list takes the nearest listed size."""
+    by_b = collections.defaultdict(list)
+    for fp in reading["floor_plans"]:
+        b = int(fp["bedrooms"])
+        per_bed = fp["rent_basis"].startswith("per bed")        # "per bed", "per bedroom (double x2)"
+        per_unit = fp["rent"] * max(b, 1) if per_bed else fp["rent"]
+        by_b[b].append((per_unit, per_bed))
+    sizes = sorted(by_b)
+    total = 0.0
+    for b_s, share in mix.items():
+        b = int(b_s)
+        near = min(sizes, key=lambda x: (abs(x - b), x))
+        vals = [v / max(near, 1) * max(b, 1) if per_bed else v for v, per_bed in by_b[near]]
+        total += share * st.median(vals)
+    return total
+
+
+def projects(con, asr, rents, commercial, leasing=None):
     """every 5+ unit, non-UC v4 project with its observed inputs and their basis."""
     out = []
     for r in con.execute("""SELECT project_key, name, status, COALESCE(NULLIF(units_built_or_permitted,0), proposed_units),
@@ -227,9 +252,18 @@ def projects(con, asr, rents, commercial):
         p["kind"] = ("affordable" if (p["funding"] and json.loads(p["funding"])) or rents["classes"].get(p["key"]) == "affordable"
                      else "group" if rents["classes"].get(p["key"]) == "group" else "market")
         own = rents["own"].get(p["key"], {})
-        p["rent_basis"] = "own lease-ups" if own else "market pool 2022-24"
-        p["gross_rent"] = sum(p["units"] * share * 12 * (st.median(own[b]) if len(own.get(b, [])) >= 3 else rents["pool_rent"][b])
-                              for b, share in rents["pool_mix"].items())
+        lr = (leasing or {}).get(p["key"])
+        if lr and not own:                         # no registry lease-ups: the building's own current asking rents
+            mix = rents["mix"].get(p["key"])
+            if not mix:                            # else the floor plans the site lists, equally weighted, sizes as listed
+                c_ = collections.Counter(str(int(fp["bedrooms"])) for fp in lr["floor_plans"])
+                mix = {b: n / sum(c_.values()) for b, n in c_.items()}
+            p["rent_basis"] = f"leasing site 2026 ({lr['leasing_model']})"
+            p["gross_rent"] = p["units"] * 12 * leasing_rent_per_unit(lr, mix)
+        else:
+            p["rent_basis"] = "own lease-ups" if own else "market pool 2022-24"
+            p["gross_rent"] = sum(p["units"] * share * 12 * (st.median(own[b]) if len(own.get(b, [])) >= 3 else rents["pool_rent"][b])
+                                  for b, share in rents["pool_mix"].items())
         p["parking_noi"] = (p["parking"] or 0) * PARKING_RENT * 12 * PARKING_OCC * (1 - OPEX[0])
         c = commercial.get(p["key"])
         p["commercial_sqft"] = c["commercial_sqft"] if c else 0
@@ -269,14 +303,17 @@ def fit_factor(fit):
     return (lo + hi) / 2
 
 
-def run(v4=V4, assessor=ASSESSOR, commercial_evidence=COMMERCIAL_EVIDENCE):
+def run(v4=V4, assessor=ASSESSOR, commercial_evidence=COMMERCIAL_EVIDENCE, leasing_evidence=None):
     con = sqlite3.connect(f"file:{v4}?mode=ro", uri=True)
     asr = sqlite3.connect(f"file:{assessor}?mode=ro", uri=True)
     rents = lease_ups(con)
     commercial = {}
     if Path(commercial_evidence).exists():
         commercial = {r["project_key"]: r for r in json.load(open(commercial_evidence))["readings"] if r.get("commercial_sqft")}
-    ps, derived = projects(con, asr, rents, commercial)
+    leasing = {}
+    if leasing_evidence and Path(leasing_evidence).exists():
+        leasing = {r["project_key"]: r for r in json.load(open(leasing_evidence))["readings"]}
+    ps, derived = projects(con, asr, rents, commercial, leasing)
     mk = [p for p in ps if p["kind"] == "market"]
     ahead = [p for p in mk if p["outcome"] == "went ahead"]
     fit = [p for p in ahead if p["decision_year"] <= 2019]

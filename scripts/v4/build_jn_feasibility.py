@@ -614,7 +614,7 @@ were actually built.**
 |---|---|
 | units, stories, parking spaces | v4 `v_projects` (read from the City's own text) |
 | floor area | built: the assessor's taxable sqft of the new building · unbuilt: the area the application states · kept at 500–2,000 sqft/unit, else the built median |
-| **rents** | **the Rent Board registry**: lease-up rents of new buildings (Part 2a) |
+| **rents** | **the Rent Board registry**: lease-up rents of new buildings (Part 2a); for buildings it has none for, **their own leasing sites** (current asking, per bed or per unit; Part 2f) |
 | land | the assessor's land value on the project's parcels |
 | City fees | the Accela Fees tab, else the median fee per unit |
 | commercial floor area | a model reading of the City's Planning text and the Zoning Adjustments Board's items, each with a verbatim quote |
@@ -653,8 +653,13 @@ while not (ROOT / 'scripts' / 'v4').exists() and ROOT != ROOT.parent:
 sys.path.insert(0, str(ROOT / 'scripts' / 'v4')); sys.path.insert(0, str(ROOT / 'scripts'))
 import pandas as pd
 import proforma_projects as pp
-res = pp.run()
+res = pp.run(leasing_evidence=pp.LEASING_EVIDENCE)      # with the buildings' own leasing rents (Part 2f)
+res0 = pp.run()                                           # registry-only rents, for comparison
 FIG = pp.figures(res)
+for z, nm in ((True, 'near_campus'), (False, 'elsewhere')):
+    v = [p['gap_decision'] for p in res['test'] if p['near_campus'] == z]
+    FIG[f'test_{nm}_median_gap_bps'] = round(st.median(v) * 1e4)
+FIG['leasing_rent_buildings'] = sum(1 for p in res['market'] if p['rent_basis'].startswith('leasing'))
 mk = pd.DataFrame(res['market'])
 print(f"{FIG['projects_5plus_nonuc']} projects of 5+ units (UC excluded); {FIG['market_projects']} market-rate; "
       f"{FIG['lease_ups_market']:,} market lease-ups; commercial area read for {FIG['commercial_area_projects']} projects")
@@ -872,30 +877,43 @@ often carry old Prop 13 values.
 """)
 
 md(r"""
-## Part 2f — A first look at the per-bed, near-campus submarket
+## Part 2f — The per-bed, near-campus submarket: collected rents, and the test re-run
 
-📝 **Plan.** The test failed worst near campus. Student-oriented buildings near campus are often leased **by the bed**;
-the registry codes some of them as group housing (Part 2a set them aside). Compare, for the buildings that went ahead,
-the gap near campus and elsewhere, and show the per-bedroom lease-up rents of the group buildings the registry does hold.
+📝 **Plan.** The test failed worst near campus, where student-oriented buildings lease **by the bed** and the registry
+holds lease-ups for only a couple of them. On 2026-10-12 the current asking rents of the 19 near-campus buildings that
+went ahead without registry rents were collected from each building's own leasing site (or an aggregator reproducing
+its floor plans) — every figure with its URL and a verbatim snippet, two of them re-checked on the raw pages
+(`data/derived/leasing_rents_evidence_2026-10-12.json`; 11 buildings with rents, 8 without). A per-bed rate is
+multiplied by the bedrooms; a building's registered bedroom mix is used when most of its units are registered, else its
+listed floor plans. **The main run above already uses them**; this section shows what they changed.
 """)
 code(r"""
-ahead = mk[mk['outcome'] == 'went ahead']
-near = ahead.groupby(['near_campus', ahead['decision_year'] >= 2020])['gap_decision'].agg(['count', 'median'])
-near['median'] = (near['median'] * 1e4).round()
-near.index = near.index.set_names(['near campus', 'decided 2020+'])
-display(near.rename(columns={'count': 'projects', 'median': 'median gap (bps)'}))
-grp = [x for x in res['rents']['leases'] if x['cls'] == 'group' and str(x['beds']).isdigit() and int(x['beds']) > 0]
-if grp:
-    per_bed = pd.DataFrame([{'project': x['project'], 'bedrooms': int(x['beds']), 'rent': x['rent'],
-                             'rent per bedroom': x['rent'] / int(x['beds'])} for x in grp])
-    display(per_bed.groupby('project')[['rent', 'rent per bedroom']].median().round())
-print('group (per-bed) buildings with lease-ups in the registry:', len({x['project'] for x in grp}))
+before = {p['key']: p for p in res0['market']}
+chg = pd.DataFrame([{'project': p['name'], 'outcome': p['outcome'], 'rent basis': p['rent_basis'],
+                     'rent/unit/month before': round(before[p['key']]['gross_rent'] / p['units'] / 12),
+                     'rent/unit/month now': round(p['gross_rent'] / p['units'] / 12),
+                     'gap before (bps)': round(before[p['key']]['gap_decision'] * 1e4),
+                     'gap now (bps)': round(p['gap_decision'] * 1e4)}
+                    for p in res['market'] if p['rent_basis'].startswith('leasing')])
+display(chg)
+cmp_ = []
+for name, r_ in (('registry rents only', res0), ('+ leasing-site rents', res)):
+    for z in (True, False):
+        v = [p['gap_decision'] for p in r_['test'] if p['near_campus'] == z]
+        cmp_.append({'run': name, 'test set': 'near campus' if z else 'elsewhere', 'projects': len(v),
+                     'median gap (bps)': round(st.median(v) * 1e4)})
+display(pd.DataFrame(cmp_))
 """)
 md(r"""
-📝 **Found (first look).** The model's shortfall is largest near campus, and the registry holds lease-ups for only a
-handful of per-bed buildings — too few to calibrate a submarket. **Next:** per-bed rents for the near-campus buildings
-the registry misses (their own leasing pages, or a second registry pull), then re-run Part 2c with them. Until then the
-near-campus gap is a hypothesis, not a result.
+📝 **Found.** **Near campus, the shortfall was mostly revenue the model could not see**: per-bed student buildings earn
+far more per unit than the apartment pool assumed, and with their own rents the near-campus test sits close to the
+hurdle. **Elsewhere the shortfall remains** — something other than rent explains why those projects went ahead
+(decision timing, long-term holders): Part 2c's candidates 1 and 2, still to test.
+
+⚠️ **What this could mislead about.** These are **2026 asking** rents set against costs priced in each building's
+**decision year** — a mismatch that **favors** penciling, so the near-campus result is a best case. Some figures are
+specials, pre-leasing (Pique: fall 2027), or rented units' last asks; per-bed basis is inferred for two buildings. Eight
+buildings have no rents at all and keep the pool.
 """)
 
 md(r"""

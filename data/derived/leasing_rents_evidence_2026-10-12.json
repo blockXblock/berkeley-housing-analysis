@@ -1,0 +1,370 @@
+{
+ "topic": "leasing_rents",
+ "fetched": "2026-10-12",
+ "method": "current asking rents from each building's leasing site or an aggregator reproducing its floor plans; collected by a research agent, every figure with its URL and a verbatim snippet; The Standard and The Valiant re-verified on the raw pages",
+ "caution": "CURRENT (2026) ASKING rents -- not lease-up rents; some are specials, pre-leasing (Pique: fall 2027) or rented units' last asks",
+ "readings": [
+  {
+   "project_key": "ZP2021-0201",
+   "building_name": "The Lair (marketed 2077 Haste St)",
+   "leasing_url": "https://sgrealestate.appfolio.com/listings",
+   "source_kind": "manager listings",
+   "leasing_model": "mixed",
+   "use": "per-unit listings only",
+   "floor_plans": [
+    {
+     "bedrooms": 2,
+     "rent": 5404,
+     "rent_basis": "per unit",
+     "price_note": "exact; 1 month free",
+     "snippet": "RENT $5,404 BED / BATH 2 bd / 2 ba ... 2077 Haste St - 803"
+    },
+    {
+     "bedrooms": 3,
+     "rent": 5995,
+     "rent_basis": "per unit",
+     "price_note": "exact; 2 months free",
+     "snippet": "Fully Furnished 3 Bed / 2 Bath at The Lair! 2077 Haste St - 701"
+    }
+   ],
+   "doubts": "identity 2077 Haste = 2440 Shattuck rests on a Homes.com title and '40 Unit' in the listings; concessions not netted"
+  },
+  {
+   "project_key": "ZP2022-0097",
+   "building_name": "The Valiant",
+   "leasing_url": "https://thevaliantberkeley.com/floorplans",
+   "source_kind": "own site",
+   "leasing_model": "per bed",
+   "use": "private-room rates",
+   "floor_plans": [
+    {
+     "bedrooms": 0,
+     "rent": 3899,
+     "rent_basis": "per bed",
+     "price_note": "S1 private studio",
+     "snippet": "S1 Private Studio 1 bath 409 - 431 sq. ft. Private: $3,899"
+    },
+    {
+     "bedrooms": 1,
+     "rent": 2150,
+     "rent_basis": "per bed",
+     "price_note": "A2 private",
+     "snippet": "A2 1 bed 1 bath 403 sq. ft. Shared: $1929 Private: $2150"
+    },
+    {
+     "bedrooms": 2,
+     "rent": 2399,
+     "rent_basis": "per bed",
+     "price_note": "B1 private",
+     "snippet": "B1 2 bed 1 bath 466 - 469 sq. ft. Private: $2399 Shared: $1799"
+    },
+    {
+     "bedrooms": 3,
+     "rent": 2279,
+     "rent_basis": "per bed",
+     "price_note": "C2 private",
+     "snippet": "C2 3 bed 1 bath 643 - 649 sq. ft. Private: $2279"
+    },
+    {
+     "bedrooms": 4,
+     "rent": 2229,
+     "rent_basis": "per bed",
+     "price_note": "D1 private",
+     "snippet": "D1 4 bed 2 bath 871 sq. ft. Private: $2229 Shared: $1550"
+    },
+    {
+     "bedrooms": 5,
+     "rent": 2199,
+     "rent_basis": "per bed",
+     "price_note": "E1 private",
+     "snippet": "E1 5 bed 2 bath 993 - 1029 sq. ft. Private: $2199"
+    }
+   ],
+   "doubts": "per-bed basis inferred from Private/Shared pricing; verified on the raw page 2026-10-12"
+  },
+  {
+   "project_key": "ZP2022-0148",
+   "building_name": "The Edge",
+   "leasing_url": "https://www.rentable.co/berkeley-ca/1p-2480-bancroft-way-the-edge",
+   "source_kind": "aggregator",
+   "leasing_model": "per unit",
+   "use": "unit rents",
+   "floor_plans": [
+    {
+     "bedrooms": 4,
+     "rent": 7250,
+     "rent_basis": "per unit",
+     "price_note": "unit 701, marked Rented",
+     "snippet": "4 Beds \u2022 2 Bath $7,250 ... Unit 701 $7,250 Rented"
+    },
+    {
+     "bedrooms": 5,
+     "rent": 8450,
+     "rent_basis": "per unit",
+     "price_note": "unit 700, available",
+     "snippet": "5 Beds \u2022 2 Bath $8,450 ... Unit 700 $8,450 Available Now"
+    }
+   ],
+   "doubts": "one listing is a rented unit's last asking rent"
+  },
+  {
+   "project_key": "ZP2023-0057",
+   "building_name": "ArtHaus Dwight (2137 Dwight)",
+   "leasing_url": "https://www.arthausdwight.mov/floor-plans",
+   "source_kind": "own site",
+   "leasing_model": "per bed (inferred)",
+   "use": "'Now' prices",
+   "floor_plans": [
+    {
+     "bedrooms": 4,
+     "rent": 1600,
+     "rent_basis": "per bed",
+     "price_note": "D1 'Now'",
+     "snippet": "D1 4 Bedroom \u2022 2 Bath 850 Square Foot Starting at $2,420 Now $1,600"
+    },
+    {
+     "bedrooms": 5,
+     "rent": 1537,
+     "rent_basis": "per bed",
+     "price_note": "E1 'Now'",
+     "snippet": "E1 5 Bedroom \u2022 2 Bath 920 Square Foot Starting at $1,970 Now $1,537"
+    },
+    {
+     "bedrooms": 6,
+     "rent": 1475,
+     "rent_basis": "per bed",
+     "price_note": "F1 'Now'",
+     "snippet": "F1 6 Bedroom \u2022 2 Bath 1,025 Square Foot Starting at $1,920 Now $1,475"
+    }
+   ],
+   "doubts": "per-bed basis inferred; page still says 'Now Leasing for Fall 2026' (possibly stale); 'Now' prices include specials"
+  },
+  {
+   "project_key": "ZP2022-0019",
+   "building_name": "Calhaus (2555 College)",
+   "leasing_url": "https://www.rentable.co/berkeley-ca/calhaus",
+   "source_kind": "aggregator",
+   "leasing_model": "per unit",
+   "use": "unit rents",
+   "floor_plans": [
+    {
+     "bedrooms": 2,
+     "rent": 3500,
+     "rent_basis": "per unit",
+     "price_note": "unit 102, Rented",
+     "snippet": "2 Beds \u2022 1 Bath $3,500 ... Unit 102 $3,500 Rented"
+    },
+    {
+     "bedrooms": 3,
+     "rent": 5250,
+     "rent_basis": "per unit",
+     "price_note": "low end, Rented",
+     "snippet": "3 Beds \u2022 1 Bath $5,250 - $5,550"
+    },
+    {
+     "bedrooms": 4,
+     "rent": 6200,
+     "rent_basis": "per unit",
+     "price_note": "low end, Rented",
+     "snippet": "4 Beds \u2022 1 Bath $6,200 - $6,500"
+    },
+    {
+     "bedrooms": 5,
+     "rent": 7750,
+     "rent_basis": "per unit",
+     "price_note": "unit 303, available",
+     "snippet": "5 Beds \u2022 1 Bath $7,750 ... Unit 303 $7,750 Available Now"
+    }
+   ],
+   "doubts": "most figures are rented units' last asking rents"
+  },
+  {
+   "project_key": "ZP2023-0068",
+   "building_name": "Pique Berkeley",
+   "leasing_url": "https://piqueberkeley.com/floor-plans/",
+   "source_kind": "own site",
+   "leasing_model": "per bed (doubles/triples)",
+   "use": "per-bed 'Doubles' effective rate x 2 beds per bedroom",
+   "floor_plans": [
+    {
+     "bedrooms": 4,
+     "rent": 2798,
+     "rent_basis": "per bedroom (double x2)",
+     "price_note": "D1 doubles effective",
+     "snippet": "D1 Balcony 4 Bed / 4 Bath ... Doubles Starting at $1599 $1399"
+    },
+    {
+     "bedrooms": 5,
+     "rent": 2758,
+     "rent_basis": "per bedroom (double x2)",
+     "price_note": "E1 doubles effective",
+     "snippet": "E1 Balcony 5 Bed / 5 Bath ... Doubles Starting at $1579 $1379"
+    },
+    {
+     "bedrooms": 6,
+     "rent": 2478,
+     "rent_basis": "per bedroom (double x2)",
+     "price_note": "F1 doubles effective",
+     "snippet": "F1 6 Bed / 6 Bath ... Doubles Starting at $1439 $1239"
+    }
+   ],
+   "doubts": "fall 2027 PRE-LEASING effective rates with concessions; occupancy is doubles/triples, so a bedroom earns ~2 beds"
+  },
+  {
+   "project_key": "B2025-00168",
+   "building_name": "2330 Blake St",
+   "leasing_url": "https://www.rentable.co/berkeley-ca/2330-blake-st",
+   "source_kind": "aggregator",
+   "leasing_model": "per unit",
+   "use": "units tagged New Construction / New Building",
+   "floor_plans": [
+    {
+     "bedrooms": 0,
+     "rent": 1995,
+     "rent_basis": "per unit",
+     "price_note": "semester lease",
+     "snippet": "Studio - New Construction - Semester Leases 5-7 months $1,995"
+    },
+    {
+     "bedrooms": 2,
+     "rent": 4595,
+     "rent_basis": "per unit",
+     "price_note": "New Building",
+     "snippet": "2 Bedroom 1 Bath with In-Unit Laundry - New Building - 27-28 School Year $4,595"
+    },
+    {
+     "bedrooms": 3,
+     "rent": 5595,
+     "rent_basis": "per unit",
+     "price_note": "New Construction",
+     "snippet": "New Construction Ready for the 27-28 School Year - Secure Your Spot! $5,595"
+    }
+   ],
+   "doubts": "the address also has older units (excluded)"
+  },
+  {
+   "project_key": "ZP2017-0083",
+   "building_name": "The Standard at Berkeley",
+   "leasing_url": "https://thestandardberkeley.landmark-properties.com/floorplans",
+   "source_kind": "own site",
+   "leasing_model": "per bed",
+   "use": "lowest private-bedroom rate per configuration",
+   "floor_plans": [
+    {
+     "bedrooms": 0,
+     "rent": 3333.95,
+     "rent_basis": "per bed",
+     "price_note": "Soho studio",
+     "snippet": "Soho - Studio Studio | 403 Sq Ft Starting At Private Bedroom $3,593.95 $3,333.95 /MO"
+    },
+    {
+     "bedrooms": 1,
+     "rent": 3753.95,
+     "rent_basis": "per bed",
+     "price_note": "Arden 1x1",
+     "snippet": "Arden - 1X1 1 Bed | 1 Bath | 442 Sq Ft Starting At Private Bedroom $3,753.95 /MO"
+    },
+    {
+     "bedrooms": 2,
+     "rent": 2808.95,
+     "rent_basis": "per bed",
+     "price_note": "Bexley 2x2",
+     "snippet": "Bexley - 2X2 2 Bed | 2 Bath | 893 Sq Ft Starting At Private Bedroom $3,033.95 $2,808.95 /MO"
+    },
+    {
+     "bedrooms": 3,
+     "rent": 2433.95,
+     "rent_basis": "per bed",
+     "price_note": "Camden 3x2",
+     "snippet": "Camden - 3X2 3 Bed | 2 Bath | 1317 Sq Ft Starting At Private Bedroom $2,602.95 $2,433.95 /MO"
+    },
+    {
+     "bedrooms": 4,
+     "rent": 2018.95,
+     "rent_basis": "per bed",
+     "price_note": "Denmark 4x3",
+     "snippet": "Denmark - 4x3 4 Bed | 3 Bath | 1355 Sq Ft Starting At Private Bedroom $2,018.95 /MO"
+    },
+    {
+     "bedrooms": 5,
+     "rent": 1978.95,
+     "rent_basis": "per bed",
+     "price_note": "Fulton 5x4",
+     "snippet": "Fulton - 5X4 5 Bed | 4 Bath | 1884 Sq Ft Starting At Private Bedroom $2,008.95 $1,978.95 /MO"
+    }
+   ],
+   "doubts": "prices are inclusive monthly installments (base rent + mandatory fees); verified on the raw page 2026-10-12"
+  },
+  {
+   "project_key": "ZP2016-0020",
+   "building_name": "The Artisan",
+   "leasing_url": "https://www.laphamcompany.com/for-rent/2072-addison-street-berkeley/2bedroom",
+   "source_kind": "manager listing",
+   "leasing_model": "per unit",
+   "use": "unit rent",
+   "floor_plans": [
+    {
+     "bedrooms": 2,
+     "rent": 4100,
+     "rent_basis": "per unit",
+     "price_note": "only listing posted",
+     "snippet": "Bedrooms 2 Bathrooms 1 Rent $4,100.00/month"
+    }
+   ],
+   "doubts": "one listing only; the registry codes its units 1-bedroom"
+  },
+  {
+   "project_key": "UP2014-0019",
+   "building_name": "The SouthGate (2526 Durant)",
+   "leasing_url": "https://www.rentable.co/berkeley-ca/the-southgate-apartments",
+   "source_kind": "aggregator",
+   "leasing_model": "per unit",
+   "use": "unit rent",
+   "floor_plans": [
+    {
+     "bedrooms": 1,
+     "rent": 2650,
+     "rent_basis": "per unit",
+     "price_note": "low end, Rented",
+     "snippet": "1 Bed \u2022 1 Bath $2,650 - $2,950 ... Unit 306 $2,650 Rented"
+    }
+   ],
+   "doubts": "rented units' last asking rents; page over a month old"
+  },
+  {
+   "project_key": "PLN2015-0051",
+   "building_name": "The Berkeley Place",
+   "leasing_url": "https://sgrealestate.appfolio.com/listings",
+   "source_kind": "manager listings",
+   "leasing_model": "per unit",
+   "use": "unit rents",
+   "floor_plans": [
+    {
+     "bedrooms": 1,
+     "rent": 2895,
+     "rent_basis": "per unit",
+     "price_note": "12-month rate",
+     "snippet": "the rate will return to $2895 beginning 4/1/27"
+    },
+    {
+     "bedrooms": 2,
+     "rent": 3995,
+     "rent_basis": "per unit",
+     "price_note": "unit 704",
+     "snippet": "RENT $3,995 BED / BATH 2 bd / 1 ba ... 2067 University Ave - 704"
+    }
+   ],
+   "doubts": "two listings"
+  }
+ ],
+ "not_found": {
+  "ZP2019-0041": "no leasing page found",
+  "ZP2020-0090": "under construction, no leasing page",
+  "ZP2020-0052": "under construction, no leasing page",
+  "ZP2024-0070": "under construction, no leasing page",
+  "ZP2018-0135": "IDENTITY Logan Park: prices load from a page that blocked fetches",
+  "UP2013-0061": "fully leased; no prices shown",
+  "ZP2017-0004": "Berkeley Rep artist housing, not marketed",
+  "B2017-01850": "every listing page blocked"
+ }
+}

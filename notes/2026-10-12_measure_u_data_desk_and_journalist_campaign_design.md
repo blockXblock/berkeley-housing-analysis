@@ -122,15 +122,20 @@ Three gaps, each built the same way, as a table: **need (City's own figure + doc
 Measure U · gap · funded elsewhere?** Where the City has no figure, say so. That absence is a finding
 (Evaluation No. 1, Q2). **No number goes in this section without a citation to a City or County document.**
 
-### 4.1 Streets
-- **Known from our record:** Vision 2050 rates the streets "at risk" (PCI 57); streets are absent from
-  the project list, and our notes say they are "covered separately by Measure FF." **That claim must be
-  verified before publication**: what FF funds, for how much, and for how long.
-- **To source:** the City's latest pavement management report (MTC StreetSaver PCI, the deferred
-  maintenance backlog, the annual spend needed to hold PCI vs actual); the CIP budget's paving line.
-- **The chart:** backlog vs annual paving spend vs Measure U's $0 for paving; sidewalks ($14.6M, 50/50
-  program) shown separately as what the list *does* fund in the right-of-way.
-
+### 4.1 Streets (SOURCED 2026-10-12)
+Source: Council report, 2026-07-07 Item 10, "Five-Year Street Rehabilitation and Measure FF Plans FY2027-2031"
+(`data/raw/city_docs/2026-10-12/2026-07-07_Item10_Five-Year_Street_Rehabilitation.pdf`, SHA-256 bba21128…).
+- 213 centerline miles, replacement value > $1.2B; **PCI 57, "at risk"**; deferred-maintenance backlog **> $330M
+  (2025), > $406M by 2029** (p.16, citing the 2024 Pavement Management Program Update).
+- **Measure FF** (Nov 2024, "Safe Streets" special parcel tax): ~$15M/yr for 14 years; 45% streets, 15% sidewalks,
+  30% safety, 10% environmental/fees (p.4). Its stated goal: citywide PCI 70 (BMC 7.11.010(K)(1)).
+- City's own projection (p.12–13): baseline alone (~$20.3M/yr) → PCI falls to ~56 by 2038; **baseline + FF
+  (~$29.6M/yr) → ~62 by 2038; reaching 70 needs ~$37.6M/yr, about $8M/yr more than the City has.**
+- So: **FF has NOT failed.** It began collecting in FY2025-26 and its first five-year plan was adopted July 2026;
+  the City credits it with turning decline into improvement. The honest line is that **even with FF, the City's own
+  plan never reaches FF's goal, and Measure U, about $15M/yr of debt service for 40 years, puts $0 into paving.**
+- Rebuttal to expect: "streets are FF's job; voters just funded them." Answer: the City's own report says FF + the
+  baseline is ~$8M/yr short of FF's own target.
 ### 4.2 Fire stations and fire apparatus
 - **Known:** Measure U funds Station 4 ($56.2M), Station 6 ($20.4M) and the training center ($30.1M) =
   $106.7M, against a **~$350M Fire facilities master-plan need** cited in the Evaluation.

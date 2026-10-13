@@ -5,6 +5,28 @@
 
 ---
 
+## 2026-10-13 — Address → city-block lookup built (scratch); block canon with stable IDs; index re-keyed
+
+**Nothing existed:** no address→ or parcel→city-block table in any DB, `data/`, `scratch/`, git history or past
+sessions. The only one ever made was the August ADU table, on Census blocks (`scratch/2026-08-02/adu_by_block.csv`).
+**Block canon** `scripts/housing_rules/blocks.py` (`load_city_blocks()`): filter 0.1–1000 ac, not the old 0.2–60. That
+filter dropped the UC campus (177 ac), the Aquatic Park waterfront (107 ac) and small triangular blocks that carry
+addresses, and it adds **68 EDGE blocks**. The City layer is street-ENCLOSED land only, so the lots between the last street
+and the city limit had no polygon (4% of address points). Edge = city land (Census outline, used ONLY for the line) −
+the layer's envelope − blocks. IDs = `CB-` + 8 hex of the centroid hash; a registry carries them forward on re-fetch (99.3%
+survive a 3 m re-digitising; `test_blocks.py`). **1,129 enclosed + 68 edge = 1,197.**
+**`city_block_index.py` re-keyed** through the canon: all 1,119 old blocks map 1:1 with identical values;
+**B0210 (Acheson) → `CB-27b08582`**; crosswalk `scratch/2026-10-13_address_blocks/legacy_block_id_crosswalk.csv`.
+**Lookup** (`scratch/2026-10-13_address_blocks/`): 62,226 points → 62,064 inside + 102 nearest (≤30 m) + 60 none; 31,982
+street addresses. The spot checks pass: 1951 Shattuck = 2108 Berkeley Way, all four Acheson buildings on one block, hills.
+**Address canon fix (UNCOMMITTED, needs John):** `normalize_address` now folds the City layer's two-letter types (AV, BL,
+TE, CI, WK, HW, CM, PA). 19,169 `AV` points had been keying as `benvenue av`. It folds, never strips: Rose Walk ≠ Rose St.
+Effect on v4's 71,891 event addresses: 1 changes (`1622 Scenic Av` now matches `Scenic Ave`).
+**Open:** (1) John approves the canon fix → commit; (2) publish the lookup + `city_blocks_public.geojson`? (John's call);
+(3) Phase C: wire into `apps/block_units.py`; (4) a street-SEGMENT ("2800 block of Benvenue") column, if wanted.
+
+---
+
 ## 2026-10-03 — Flyovers with a map and Street View LIVE (berkeleybuild.com/tours/); Shattuck drawings LIVE
 
 **/tours/** (`scripts/tours/build_tour_map_gallery.py` → `docs/tours/index.html`): all nine YouTube tours on one map

@@ -10,7 +10,10 @@ See docs/audit/2026-09-24_berkeley_city_blocks_found.md.
 INPUTS
   data/raw/berkeley_gis/city_blocks.geojson   City of Berkeley, via scripts/fetch_berkeley_gis.py
       ⚠ published as 'sde_prod_DBO_Right_Of_Way'; one MultiPolygon of 1,197 parts, of which one
-        is a 5,771-acre envelope and some are slivers. FILTERED to 0.2-60 acres -> 1,119 blocks.
+        is a 5,771-acre envelope and some are slivers. Loaded through housing_rules.blocks (the block
+        canon): 1,129 enclosed blocks + 68 edge blocks closed by the city limit, IDs 'CB-xxxxxxxx'
+        that survive a re-fetch. Before 2026-10-13 this script used 0.2-60 ac and 'B%04d' by row order;
+        legacy_block_id_crosswalk.csv maps the old IDs (B0210 -> CB-27b08582).
   data/raw/overture_buildings_berkeley_2026-08-19.parquet   62,651 footprints, WKT, 71% with height
   databases/berkeley.db  addresses_arcgis (LotSqft/BldgSqft/UseCode/OwnerName per APN)
   data/raw/rent_board/... (rent-board units -- rent-CONTROLLED only, a biased sample, not a census)
@@ -26,10 +29,12 @@ WHAT IS AND IS NOT TRUSTWORTHY HERE
 
 Usage: .venv/bin/python scripts/city_block_index.py
 """
-import os, sqlite3, warnings
+import os, sys, sqlite3, warnings
 warnings.filterwarnings("ignore")
 import numpy as np, pandas as pd, geopandas as gpd
 from shapely import wkt as shapely_wkt
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__))))
+from housing_rules import blocks as hb
 
 BLOCKS = "data/raw/berkeley_gis/city_blocks.geojson"
 OVT    = "data/raw/overture_buildings_berkeley_2026-08-19.parquet"
@@ -41,13 +46,10 @@ AC     = 4046.86
 
 
 def load_blocks():
-    g = gpd.read_file(BLOCKS).to_crs(32610).explode(index_parts=False).reset_index(drop=True)
-    g["acres"] = g.geometry.area / AC
-    n0 = len(g)
-    g = g[(g.acres > 0.2) & (g.acres < 60)].reset_index(drop=True)   # drop envelope + slivers
-    g["block_id"] = ["B%04d" % i for i in range(len(g))]
-    print(f"  blocks: {n0} parts -> {len(g)} after the 0.2-60 acre filter")
-    return g[["block_id", "acres", "geometry"]]
+    # the block canon: filter, edge blocks and stable CB- IDs live in housing_rules.blocks
+    g = hb.load_city_blocks()
+    print(f"  blocks: {g.kind.value_counts().to_dict()}")
+    return g[["block_id", "kind", "acres", "geometry"]]
 
 
 def load_footprints():

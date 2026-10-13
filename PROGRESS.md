@@ -14,6 +14,16 @@ Snapshot of the prior live: `databases/keep_snapshot_2026-10-13_pre-address-cano
 to the old live). **Next:** rerun gates keyed to the v4 sha (JN-Feasibility baseline append still awaits John), then
 regenerate the Explorer export / site_numbers / Datasette from the new v4; then re-point JN-M `_street` and
 `middle_housing_tracker.norm_addr` at the canon.
+**Gates rerun on the new live (scratch/2026-10-13_gates/, each notebook also run against the pre-swap snapshot to
+attribute):** PASS: JN-A conservation, JN-E, JN-J, JN-K, JN-M. **Already failing before the swap (identical pre/live,
+baselines older than the 10-07 live):** JN-I (housing masters 1183->1178, review median 200.5->202), JN-N (labelled
+projects 1446->1431, stories/height coverage up), JN-L density_bonus_projects 97->104. **Moved BY the swap -- all one
+cause, the +148 condo unit parcels:** 2747 San Pablo (UP2006-0109, 41u) now finds its 39 unit parcels in the assessor:
+JN-MeasureU new construction 46->47 projects / 3,111->3,152 units; JN-L assessor_matched 885->887, tracked Imps
+$1,615->$1,647M; JN-Feasibility calibration cost_factor 0.855->0.774 (half from 2747 San Pablo's land $0 -> $7.96M,
+the summed unit-parcel land, half from 2597 Telegraph now ZP2015-0018 with both parcels, land $1.07M -> $2.21M).
+**Open for John:** is summed condo unit-parcel land a fair land cost for the feasibility fit (it is resale-allocated, not
+the lot's price)? No baselines appended. JN-Feasibility must execute from the repo root (relative taxparcels path).
 
 ---
 

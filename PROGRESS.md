@@ -23,6 +23,13 @@ docs/data/berkeley_housing_v2_public.db` (the July v2 copy, still served at berk
 `middle_housing_tracker.norm_addr` (strips PATH/WALK, no ordinal fold). Proposal sent to the address session
 (berkeley-data-44): re-point both at the canon with an old-vs-new diff; one folding table generated from `address.py`, used
 by the Explorer and the WASM app, with a Python/JS parity test over the 62,226 address points.
+**Re-point HELD -- the canon has two gaps (read-only diffs, scratch/2026-10-13_address_canon/):** (1) tails
+'BERKELEY CA 94705 United States' / ', Berkeley CA' survive into the street key: 7,137 v4 event addresses (12,603
+events, Accela list dump + Rent Board), 6,424 of which match an existing key once stripped; (2) unit designators after
+the street type stay in the street ('UNIVERSITY AVE  3' -> 'university 3', 'HASKELL St, Rear'): re-pointing JN-M now
+drops University 211->180 and Telegraph 152->99 parcels. Fix the canon first (John's approval; coordinate with
+berkeley-data-44), then re-point both scripts, then the Explorer search (44 agreed: JSON tables for JS only; the WASM
+app runs the byte-identical address.py).
 
 ---
 

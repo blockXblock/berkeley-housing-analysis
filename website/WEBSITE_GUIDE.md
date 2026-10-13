@@ -33,14 +33,20 @@ berkeleybuild.com is **two layers**:
 
 Load chain: `explorer.html` → `explorer_data.js` (generated) → `explorer.js` (authored).
 
-### The one generator
-`scripts/export_explorer_data_v2.py` — reads `databases/berkeley_housing_v2.db`
-(projects, permit_events, fees, staff from `permit_events.marked_by`, developer/architect players),
-writes `docs/explorer_data_v2_working.js`, which must end up as `docs/explorer_data.js` (the file the
-page loads). **This is the only thing on the site that's script-generated.**
+### The generators (updated 2026-10-13: every one reads v4)
+The canonical database is **v4** (`databases/berkeley_housing_v4.db`); v2 was archived read-only on 2026-10-07.
+- `scripts/export_explorer_data_v4.py` — reads v4's serving views, writes `docs/explorer_data_v4_working.js`,
+  promoted to `docs/explorer_data.js` (the file the page loads) after `scripts/deploy_gate.py` passes. Old
+  `?project=<v2 id>` links resolve through `DATA.v2_ids` (the one remaining read of the v2 archive).
+- `scripts/site_numbers.py` — keeps the counts on hand-written pages (home page, Explorer button) in step with the
+  export. **Run it after every export promotion.**
+- `scripts/gen_pipeline_state_page.py`, `scripts/gen_players_page.py` — generated pages from v4.
+- `scripts/gen_datasette_dbs.py` — the Fly.io Datasette databases AND the reporters' public mirror
+  `docs/data/berkeley_housing_public.db`, both from v4 (the July copy `berkeley_housing_v2_public.db` is retired).
+Every other page is hand-written HTML: a number typed into one of them is a number that can go stale.
 
 ### Branch / deploy model
-- **`dev`** = all analysis/audit/DB work; currently push-**HELD** (~15 commits ahead of origin).
+- **`dev`** = all analysis/audit/DB work; push-**HELD** (origin/dev last pushed 2026-09-30; remote sessions see that state).
 - **`main`** = the **deploy branch** GitHub Pages serves from (`main` + `/docs`). In sync with origin.
 - `origin` = `github.com/blockXblock/berkeley-housing-analysis`. Cloudflare sits in front of Pages.
 - **Rule:** site deploys go to **`main` only** and must **not** drag the held `dev` commits to origin.
@@ -69,11 +75,12 @@ Edit the relevant `.html`/`.js` directly. Homepage = `index.html`; Explorer UI =
 
 ### C. Refresh Explorer data after a DB change
 ```
-python scripts/export_explorer_data_v2.py      # writes docs/explorer_data_v2_working.js
-cp docs/explorer_data_v2_working.js docs/explorer_data.js   # the file the page actually loads
+.venv/bin/python scripts/export_explorer_data_v4.py   # writes docs/explorer_data_v4_working.js from v4
+.venv/bin/python scripts/deploy_gate.py               # then promote: cp the working file to docs/explorer_data.js
+.venv/bin/python scripts/site_numbers.py              # keep hand-written page counts in step
 ```
-**Never run the v1 `scripts/export_explorer_data.py`** (reads the frozen v1 DB; it's the source of the
-historical "data appeared/disappeared" bug). Verify the diff looks sane, then deploy (E).
+The v1 and v2 exporters are sequestered in `scripts/superseded/`; never run them. Verify the diff looks sane,
+then deploy (E: `bash scripts/deploy.sh` stages main; John pushes).
 
 ### D. Add / update a KML tour or geometry
 `python scripts/generate_kml.py` → regenerates `docs/geometry.kml` / `docs/tours/*`. Tour-authoring

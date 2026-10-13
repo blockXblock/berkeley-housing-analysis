@@ -15,7 +15,7 @@ sys.path.insert(0, "experiments/accela_scrape")
 from url_discovery_scraper import discover_url
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeout
 
-DB = "databases/berkeley_housing_v2.db"
+DB = "databases/berkeley_housing_v4.db"   # was v2 (archived 2026-10-07); v4 documents carry the sha256 dedup set
 STAGE = "/tmp/harvest_stage"
 STATE = f"{STAGE}/state.json"
 MANIFEST = f"{STAGE}/manifest.csv"
@@ -50,22 +50,17 @@ COLS = ["status", "project_id", "permit_number", "filename", "file_size_mib",
         "suggested_r2_key", "existing_stub_doc_id", "local_path"]
 
 
-# ---------- v2 read-only context (dedup + stub matching) ----------
-def load_v2():
+# ---------- v4 read-only context (dedup) ----------
+def load_v4():
+    """sha256 of every document v4 already holds (dedup). The v2 'stub' rows (filename-only documents keyed by v2
+    project id) have no v4 counterpart, so stubs is empty and existing_stub_doc_id stays blank."""
     con = sqlite3.connect(f"file:{DB}?mode=ro", uri=True)
-    sha = {r[0] for r in con.execute(
-        "SELECT sha256 FROM documents WHERE sha256 IS NOT NULL AND sha256<>''")}
-    stubs = {}   # project_id -> list[(doc_id, notes_filename_casefold)]
-    for did, pid, notes in con.execute(
-            "SELECT id, project_id, notes FROM documents WHERE source_system LIKE '%.txt'"):
-        m = re.match(r"\s*filename:\s*(.+)", notes or "")
-        if not m:
-            continue
-        fn = re.split(r"\n|\s\|\s", m.group(1))[0].strip()
-        if fn:
-            stubs.setdefault(pid, []).append((did, fn.casefold()))
+    sha = {r[0] for r in con.execute("SELECT sha256 FROM documents WHERE sha256 IS NOT NULL AND sha256<>''")}
     con.close()
-    return sha, stubs
+    return sha, {}
+
+
+load_v2 = load_v4   # old name, kept for callers (harvest_by_record.py, harvest_affordability.py)
 
 
 def match_stub(stubs, pid, filename):
@@ -407,7 +402,7 @@ def write_manifest(rows):
 
 def main():
     os.makedirs(STAGE, exist_ok=True)
-    sha_set, stubs = load_v2()
+    sha_set, stubs = load_v4()
     st = load_state()
     done = set(st["completed"])
     for i, rec in enumerate(RECORDS):

@@ -208,9 +208,23 @@ def write_metadata(rows):
     json.dump(meta, open(path, 'w'), indent=2)
 
 
+def write_readme_counts(rows, readme='datasette-deploy/README.md'):
+    """the README's row table is written by this generator, never by hand (it read 1,544 projects against 1,554)."""
+    start, end = '<!-- rows:start (written by gen_datasette_dbs.py) -->', '<!-- rows:end -->'
+    s = open(readme).read()
+    if start not in s or end not in s:
+        print(f'  {readme}: no row-table markers, not updated')
+        return
+    table = '\n'.join(['| table | rows |', '|---|---|'] + [f'| {t} | {n:,} |' for t, n in rows.items()])
+    s = s[:s.index(start) + len(start)] + '\n' + table + '\n' + s[s.index(end):]
+    open(readme, 'w').write(s)
+    print(f'  {readme}: row table rewritten')
+
+
 def main():
     rows, before, masked = build_housing()
     write_metadata(rows)
+    write_readme_counts(rows)
     # THE PUBLIC MIRROR for reporters (docs/reporters.html, Datasette-Lite): the SAME masked database, published at
     # berkeleybuild.com/data/berkeley_housing_public.db. It replaces the July one-time full copy of v2
     # (berkeley_housing_v2_public.db), which carried private owners' names (publishing rule, 2026-10-01).

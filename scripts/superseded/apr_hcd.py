@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# ============================ SEQUESTERED 2026-10-13 ============================
+# DO NOT RUN. Original path: scripts/apr_hcd.py
+# WHY: reads v2's v_projects_flat, which exists only in the archived v2 (2026-10-07). The live APR is scripts/generate_apr_v4.py (v4 serving views). Its HCD exact-column layout is not yet reproduced from v4.
+raise SystemExit("SEQUESTERED 2026-10-13 -- see header; original path scripts/apr_hcd.py")
+# ================================================================================
 """
 apr_hcd.py — reproduce the HCD APR permit-derived tables (A / A2 / B) to the OFFICIAL
 HCD column schema, from a v2 database. The Q1 deliverable + the Q2 test harness.

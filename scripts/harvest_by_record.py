@@ -73,7 +73,7 @@ def main():
         q = q[q.project_id.isin(only)]
 
     os.makedirs(STAGE, exist_ok=True)
-    sha_set, stubs = H.load_v2()
+    sha_set, stubs = H.load_v4()
     st = H.load_state()
     done = set(st["completed"])
 

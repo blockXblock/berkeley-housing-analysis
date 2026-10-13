@@ -10,17 +10,19 @@ and `metadata.json` here, and prints a was/now table. Nothing is deployed until 
 or "individual" (applicants); Rent Board tenancy dates are shown as the year. The full data stays in v4.
 
 ## berkeley_housing_map.db (as generated)
+<!-- rows:start (written by gen_datasette_dbs.py) -->
 | table | rows |
 |---|---|
-| projects | 1,544 |
-| timeline | 12,183 |
-| people | 12,607 |
+| projects | 1,554 |
+| timeline | 12,191 |
+| people | 12,741 |
 | businesses | 282 |
-| city_records | 9,289 |
+| city_records | 9,290 |
 | adu_rent_board | 684 |
-| permits | 2,445 |
-| parcels | 1,559 |
-| documents | 263 |
+| permits | 2,449 |
+| parcels | 1,572 |
+| documents | 266 |
+<!-- rows:end -->
 
 `czu.db` holds the Corridors Zoning Update layers from CPRA #26-2367; `berkeley_address_centric.db` is the older
 hand-built address database, served unchanged.

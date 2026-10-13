@@ -1,3 +1,8 @@
+# ============================ SEQUESTERED 2026-10-13 ============================
+# DO NOT RUN. Original path: experiments/accela_scrape/harvest_affordability.py
+# WHY: one-time affordability-form harvest for proj4/35/6, reconciling against v2 tiers (v2 archived 2026-10-07). Replaced by scripts/fetch_affordability_statements.py + the v4 affordability ledger.
+raise SystemExit("SEQUESTERED 2026-10-13 -- see header; original path experiments/accela_scrape/harvest_affordability.py")
+# ================================================================================
 """
 harvest_affordability.py — the AFFORDABILITY-FORM counterpart to harvest_plansets.py.
 

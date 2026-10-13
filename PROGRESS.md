@@ -5,6 +5,27 @@
 
 ---
 
+## 2026-10-13 — v2 cleanup: last v2 readers retired (`07491c49`); one public file left for John
+
+**Migration state:** every publisher reads v4 (Explorer, APR, Datasette + public mirror, pipeline-state, players, tours,
+JN-J/K/L/N/MeasureU); v2 archived 2026-10-07. Retired today: `scripts/apr_hcd.py` (v2-only `v_projects_flat`) and
+`experiments/.../harvest_affordability.py` -> `scripts/superseded/`; `harvest_plansets.load_v4()` dedups against v4
+`documents` (it pointed at the deleted v2 path, and harvest_by_record/accela_grid/JN-H import it). Datasette README row
+table now WRITTEN by `gen_datasette_dbs.py` (said 1,544 projects; the build has 1,554). WEBSITE_GUIDE + CLAUDE.md
+"where to look" now say v4 serves. **For John (my commands were blocked):** `git rm --cached
+docs/data/berkeley_housing_v2_public.db` (the July v2 copy, still served at berkeleybuild.com/data/) + change the
+`.gitignore` line 141 exception to `berkeley_housing_public.db`; the next `deploy.sh` mirror then removes it from main.
+**Left on purpose:** `docs/tours.json` "labels_source: v2" is TRUE for the published geometry.kml (rendered 2026-08-29)
+-> regenerate labels from v4 at the next geometry rebuild (with the storeys reminder). Legacy v1/v2 notebooks
+(MASTER_ANALYSIS, 04_reporting/*, 05_feasibility/F1) = cutover decision #2, still open.
+**Address matching survey:** the site's ONE visitor address input is Explorer #projectSearch (raw substring,
+`explorer.js:981`). Private matchers in live scripts: `block_density_index._street` (JN-M) and
+`middle_housing_tracker.norm_addr` (strips PATH/WALK, no ordinal fold). Proposal sent to the address session
+(berkeley-data-44): re-point both at the canon with an old-vs-new diff; one folding table generated from `address.py`, used
+by the Explorer and the WASM app, with a Python/JS parity test over the 62,226 address points.
+
+---
+
 ## 2026-10-13 — Address → city-block lookup built (scratch); block canon with stable IDs; index re-keyed
 
 **Nothing existed:** no address→ or parcel→city-block table in any DB, `data/`, `scratch/`, git history or past

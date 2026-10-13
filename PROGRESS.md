@@ -849,8 +849,15 @@ go-aheads have leasing-site rents (URL + snippet; The Standard, The Valiant re-v
 bps; near campus -293 -> -63, elsewhere -144 -> -151; 14/26 pencil or marginal. Near campus = unseen per-bed revenue;
 elsewhere unexplained. Part 2 gate HALTS on the change (v4 unchanged) -> John to approve the baseline append.
 
-**NEXT:** John: append the feasibility baseline -> decision-timing / long-term-holder test for the non-campus
-go-aheads -> developer attribution (approval times, the ZAB
+**Feasibility baseline APPENDED (John, 2026-10-12): feasibility_projects_baseline_2026-10-12.json.** Decision-timing test
+(read-only, scratch/2026-10-12_timing/): waiting projects approved 2017-21 (14, 813u) penciled AT APPROVAL as well as their
+went-ahead peers (median +33/+51 bps vs 0/-31), then lost ~150-170 bps to costs and ~150-175 to rates -> about -270 today.
+Waiting projects approved 2023+ (39, 5,064u, 23 near campus) were -286 at approval, 124 bps below the 2023+ go-aheads. Two
+caveats: near-campus waiters are priced at apartment rents (median per-bed uplift x1.69 takes them to ~-11); and the
+go-aheads' yield on cost held ~5.0-5.75% in every era (implied exit cap 4.38% for 2023+ vs the model's 6.0%) -> the
+non-campus -151 points at the hurdle (cap rate / holder type), not rent. Not yet packaged into the JN.
+
+**NEXT:** package decision timing as Part 2h (if John wants) -> developer attribution (long-term holders vs merchant builders) (approval times, the ZAB
 contradiction, Rent Board) read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).

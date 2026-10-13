@@ -1,0 +1,32 @@
+{
+ "as_of": "2026-10-12",
+ "v4_file_sha": "6110324df4695e5d",
+ "git": "60bae687",
+ "figures": {
+  "projects_5plus_nonuc": 190,
+  "market_projects": 175,
+  "lease_ups_market": 831,
+  "pool_rent_studio": 2495,
+  "pool_rent_1br": 3056,
+  "pool_rent_2br": 4295,
+  "pool_rent_3br": 5886,
+  "commercial_area_projects": 79,
+  "fit_n": 28,
+  "test_n": 26,
+  "cost_factor": 0.855,
+  "fitted_hard_cost_2018": 284,
+  "fit_median_gap_bps": 0,
+  "test_median_gap_bps": -72,
+  "test_pencil_or_marginal": 14,
+  "abandoned_n": 20,
+  "abandoned_pencil_or_marginal": 2,
+  "waiting_n": 56,
+  "waiting_met_then_short_today": 9,
+  "waiting_never_met": 46,
+  "waiting_meets_today": 1,
+  "waiting_median_gap_today_bps": -288,
+  "test_near_campus_median_gap_bps": -63,
+  "test_elsewhere_median_gap_bps": -151,
+  "leasing_rent_buildings": 11
+ }
+}

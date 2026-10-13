@@ -97,7 +97,8 @@ placed, most of them unnumbered `0 Latham Ln`-style placeholders.
 City address list has no 2012, so it is off the block map. (b) Canon gaps (city/zip tails, unit designators, ordinals above
 tenth such as SIXTY-SIXTH, MLK shorthand) were measured by peer session berkeley-data-06 (6,424 new v4 matches). The peer
 owns the proposal, which needs John's approval: it changes the next chain rebuild. Until then `parse_address()` in the app
-handles these cases for typed input.
+handles these cases for typed input. **Done:** the canon change landed (`a482957b`, peer session) and `parse_address()` now only reads
+the typed street type (Ct vs Rd); projects placed by address 24, unplaced 16 (SIXTY-SIXTH now matches).
 **Open:** John runs `uvx marimo run --sandbox apps/block_units.py` to look at it (rendered headless only; not checked in a
 browser); push main to publish `docs/data/blocks/`.
 

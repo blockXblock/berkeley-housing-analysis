@@ -236,32 +236,15 @@ def _(get_close_matches, lookup, normalize_address, pd, re):
         "common": "CM", "hwy": "HW", "highway": "HW",
     }
     _streets = sorted(lookup["street"].dropna().unique())
-    # Shorthand visitors type for one street, rewritten BEFORE the canon (typed input only; the
-    # City's own layers spell it out). A candidate for the canon itself if other sources need it.
-    VISITOR_ALIASES = [(r"\b(mlk|m\s*l\s*k|m\s*l\s+king|martin\s+l\s+king|martin\s+luther\s+king)\b(\s+jr\b)?",
-                        "martin luther king jr")]
 
     def parse_address(text):
         """Typed or recorded address -> (house_number, street key, street-type code or None).
-        Cleans what people append (units, 'Berkeley, CA', periods, MLK shorthand), then THE canon."""
-        raw = re.sub(r"\s+(apt|unit|ste|suite|#)\s*\S*.*$", "", str(text).strip(), flags=re.I)
-        raw = re.sub(r"(?<=[A-Za-z])\.", " ", raw)          # M.L.K. Jr. -> M L K Jr (keeps 2765.5)
-        raw = re.sub(r",?\s+berkeley\b.*$", "", raw, flags=re.I) if not re.match(r"^\s*\d+\s+berkeley\b", raw, flags=re.I) \
-            else raw
-        for _pat, _rep in VISITOR_ALIASES:
-            raw = re.sub(_pat, _rep, raw, flags=re.I)
-        _w = raw.replace(",", " ").split()
-        _types = [i for i, t in enumerate(_w) if i >= 2 and t.lower() in TYPE_CODE]
-        code = None
-        if _types:                             # anything after the street type is a unit or a note
-            _w = _w[: _types[-1] + 1]
-            code = TYPE_CODE[_w[-1].lower()]
-        raw = " ".join(_w)
-        _half = re.match(r"^\s*(\d+)(?:\.5|\s+1/2|\s*½)\s+(.*)$", raw)
-        if _half:                              # 2765.5 Wallace St is a real half-address
-            return f"{_half.group(1)}.5", normalize_address("1 " + _half.group(2))[1], code
-        hn, st = normalize_address(raw)
-        return hn, st, code
+        THE canon does all the normalizing (tails, units, MLK, ordinals, half-addresses); this only
+        reads the street type the canon drops, to tell Hillcrest Ct from Hillcrest Rd."""
+        hn, st = normalize_address(text)
+        _w = re.findall(r"[a-z]+", str(text).lower())
+        _types = [TYPE_CODE[t] for i, t in enumerate(_w) if i >= 1 and t in TYPE_CODE]
+        return hn, st, (_types[-1] if _types else None)
 
     def find_address(text):
         """-> (row or None, message, close-match rows). Never guesses: no match is said plainly."""

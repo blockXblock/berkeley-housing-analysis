@@ -37,6 +37,9 @@ jr'; half-addresses kept (2765.5, assessor 'ST 1/2'); a type word that IS the na
 v4 event addresses in the City address list 56,118 -> 69,667 of 71,891 (+13,549, lost 0); assessor situs 25,055 ->
 27,103 (lost 0); no new two-street key collisions (still the 6 Ct/Rd, Av/Bl ones). JN-M corridors +1/+2 (unnumbered
 situs); middle-housing join unchanged. NEEDS John + a scratch chain rebuild diff (build_structures/build_projects key on it).
+  On commit (44's requirement): rerun `scripts/build_address_block_lookup.py` IN THE SAME COMMIT (refreshes the SHA-checked
+  copy docs/data/blocks/address.py + the lookup's street keys); its gates must pass; diff address_block_lookup.csv on
+  (house_number, street, block_id): expect street-key changes only, no block changes.
 
 ---
 

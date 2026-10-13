@@ -54,6 +54,16 @@ Shattuck Lofts 26, University Lofts 29), none lost. Units 17,918 -> 17,902 (doub
 msgbatch_01Gry23TKF3njstgeSo8Gbj3): choice from City-list candidates or a stated address verbatim in the record AND in
 the list; evidence -> data/derived/address_resolution_evidence_<date>.json.
 **Multi-city address design:** `notes/2026-10-13_canonical_address_system_multi_city.md`.
+**1817 Carleton RULED (John): H015 in historic_projects.csv** (3 units, completed, completion date to harvest);
+scratch build re-run (projects+views): 1,551 projects, H015 completed / 3 units reported (`72085d26`).
+**Model read COLLECTED** (evidence `address_resolution_evidence_2026-10-13.json` + `...-13b.json` retry of 534
+empty-output answers; 2,223 of 2,224 read): **267 addresses (817 events) resolved to a City address** (Northgate -> North
+Gate Ave, Dwight Cres -> Dwight Crescent, 'Los Angels', unit/half forms); 8 by an address stated verbatim in the record;
+**276 (2,079 events) are SAME PARCEL, OTHER ADDRESS** (corner lots, campuses) -> a parcel match only, never an address
+match; **1,672 (10,905 events) not in the City list** -> stay unmatched with provenance. 363 picks failed verification
+(outside the candidates, or a stated address not verbatim / not in the list) and were dropped. Not used by the build
+yet (a separate gated step). Canon-table candidates the reading surfaced: Cres/Crescent, Northgate/North Gate,
+directional prefixes (N Valley St is a real name).
 
 ---
 

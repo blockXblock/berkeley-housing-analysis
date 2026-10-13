@@ -857,7 +857,19 @@ caveats: near-campus waiters are priced at apartment rents (median per-bed uplif
 go-aheads' yield on cost held ~5.0-5.75% in every era (implied exit cap 4.38% for 2023+ vs the model's 6.0%) -> the
 non-campus -151 points at the hurdle (cap rate / holder type), not rent. Not yet packaged into the JN.
 
-**NEXT:** package decision timing as Part 2h (if John wants) -> developer attribution (long-term holders vs merchant builders) (approval times, the ZAB
+**Part 2h PACKAGED (John "go", 2026-10-12, `53dde130`):** pp.decision_timing(res) + JN section; existing gated figures
+unchanged, the 13 new 2h figures make the gate HALT -> John to approve the append (JN_WRITE_BASELINE=1, repo root).
+**Developer attribution, step 1 (read-only, scratch/2026-10-12_developers/):** v4 already names permit_owner for 51/54
+go-aheads, owner_of_record 140/175, registry owner 60; sponsors behind the single-purpose LLCs are NOT named (developer
+8/175). Held-vs-sold by name match is unreliable: hand check of the 14 "sold" completed buildings -> 5 same sponsor or
+builder still on title (Read, Kashef, OPHCA, Evans), 4 wrong parcel (reassessment lag: max-Imps picks a neighbour --
+3030 Telegraph -> Alta Bates), ~2 clear sales. Finding: almost every completed market building is still held by its
+builder or sponsor -> no merchant-builder contrast group to test "holders accept lower returns" in Berkeley; the test
+has to be BY SPONSOR TYPE (institutional vs local family) -> needs LLC -> sponsor resolution (CA SOS managers/addresses,
+ZAB applicant names, recorder grantor/grantee index).
+
+**NEXT:** John: append the 2h baseline -> sponsor resolution for the ~54 go-aheads + 56 waiting (SOS / recorder / ZAB
+applicants), then the return-by-sponsor-type test (approval times, the ZAB
 contradiction, Rent Board) read-only -> next swap (views with
 rhna_excluded + adu_units + roles) -> switch the APR generator -> Datasette re-point (applicants from the
 CPRA planning log; state-law pathway read; heights) / phase 5 (ledgers onto projects).

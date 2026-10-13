@@ -41,6 +41,12 @@ def test_normalize_address():
     assert normalize_address('SEVENTH ST') == ('', '7th')
     assert normalize_address('3RD ST') == ('', '3rd')
     assert normalize_address('1600 7TH ST BERKELEY 94710') == ('1600', '7th')
+    # the City address-point layer's two-letter types fold to the full word (2026-10-13) ...
+    assert normalize_address('2811 Benvenue Av') == normalize_address('2811 BENVENUE AVE') == ('2811', 'benvenue')
+    assert normalize_address('1725 Eastshore Hw Berkeley CA 94710') == ('1725', 'eastshore hwy')
+    # ... and Walk/Path/Cir stay in the key: Rose Walk is not Rose St
+    assert normalize_address('2511 Rose Wk') == ('2511', 'rose walk') != normalize_address('2511 Rose St')
+    assert normalize_address('12 La Loma Av') == ('12', 'la loma')
     # county key is case-insensitive (2026-07-03 lesson: lowercase key silently degraded a matcher)
     assert to_canonical_apn('057 204600600', 'alameda') == '057-2046-006-00'
     print("normalize_address: ordinals + city-tail + Berkeley-Way protection + case-insensitive county — PASS")

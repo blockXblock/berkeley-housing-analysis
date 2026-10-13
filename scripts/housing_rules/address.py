@@ -10,6 +10,11 @@ Semantics (each choice is load-bearing):
   NAMED "Berkeley Way" (the proj136 corner-lot case, 2026-06-16).
 - Ordinal words -> numerals (SIXTH == 6TH — rule 4c).
 - Street-type suffixes dropped (ST/AVE/WAY/... — permit and assessor records disagree on them).
+- The City address-point layer's two-letter type codes (AV, BL, TE, CI, WK, HW, CM, PA) are folded to
+  the full word FIRST, on the final token only (2026-10-13: 19,169 'AV' points keyed as 'benvenue av'
+  and matched nothing). Folding, not stripping: Walk/Path/Cir/Hwy/Common stay IN the key because
+  Berkeley has Rose Walk beside Rose St and Indian Rock Path beside Indian Rock Ave -- stripping them
+  would merge distinct streets (measured: 15 false collisions in v4's event addresses).
 - Returns (house_number, street) as a TUPLE so callers can apply house-number tolerance (rule 4c)
   instead of exact-string matching.
 """
@@ -17,6 +22,8 @@ import re
 
 _ORD = {'first': '1st', 'second': '2nd', 'third': '3rd', 'fourth': '4th', 'fifth': '5th',
         'sixth': '6th', 'seventh': '7th', 'eighth': '8th', 'ninth': '9th', 'tenth': '10th'}
+_ABBR = {'av': 'ave', 'bl': 'blvd', 'te': 'ter', 'ci': 'cir', 'wk': 'walk', 'hw': 'hwy',
+         'cm': 'common', 'pa': 'path'}
 _SUF = re.compile(r'\b(ave|avenue|st|street|blvd|boulevard|way|wy|dr|drive|rd|road|ln|lane|ct|court|pl|place|ter|terrace)\b')
 
 
@@ -28,6 +35,7 @@ def normalize_address(raw):
     s = str(raw).lower()
     s = re.sub(r'\s+berkeley\s*,?\s*(ca\s*)?\d{5}(-\d+)?\s*$', '', s)
     s = re.sub(r'\s+berkeley\s*$', '', s)
+    s = re.sub(r'(?<=\s)([a-z]{2})\s*$', lambda m: _ABBR.get(m.group(1), m.group(1)), s)
     for w, n in _ORD.items():
         s = re.sub(r'\b' + w + r'\b', n, s)
     # A leading number is the HOUSE number only when it is not an ORDINAL street name: an unnumbered situs

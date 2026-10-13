@@ -30,6 +30,13 @@ the street type stay in the street ('UNIVERSITY AVE  3' -> 'university 3', 'HASK
 drops University 211->180 and Telegraph 152->99 parcels. Fix the canon first (John's approval; coordinate with
 berkeley-data-44), then re-point both scripts, then the Explorer search (44 agreed: JSON tables for JS only; the WASM
 app runs the byte-identical address.py).
+**Canon change PROPOSED (scratch/2026-10-13_address_canon/canon_proposed.py; 42/42 cases; 44 handed it to me):**
+cut at the first comma; strip city/state/zip/country tails (never California St); cut after the last street-type token
+(units/notes go; with no type, unit words go); tens ordinals (SIXTY-SIXTH -> 66th); MLK shorthand -> 'martin luther king
+jr'; half-addresses kept (2765.5, assessor 'ST 1/2'); a type word that IS the name stays (Terrace Walk). measure.py:
+v4 event addresses in the City address list 56,118 -> 69,667 of 71,891 (+13,549, lost 0); assessor situs 25,055 ->
+27,103 (lost 0); no new two-street key collisions (still the 6 Ct/Rd, Av/Bl ones). JN-M corridors +1/+2 (unnumbered
+situs); middle-housing join unchanged. NEEDS John + a scratch chain rebuild diff (build_structures/build_projects key on it).
 
 ---
 

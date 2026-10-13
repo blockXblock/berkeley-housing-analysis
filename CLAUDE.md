@@ -80,6 +80,15 @@ compatibility view is **`v_projects_flat`** (what the sequestered `generate_apr_
      like obeying 4c and isn't. **Why this line exists:** rule 4c described what address matching must
      DO and never named the function that does it, so four per-script copies were consolidated
      2026-07-03 and **two had reappeared by 2026-09-26**. An anonymous canon gets re-invented.
+     **City-layer two-letter types (2026-10-13):** the City address points write `AV`/`BL`/`TE`/`CI`/`WK`/…;
+     the canon FOLDS them to the full word (never strips Walk/Path/Cir: Rose Walk ≠ Rose St).
+   - **🟢 THE SINGLE BLOCK CANON (2026-10-13): `housing_rules.blocks.load_city_blocks()`** — a "block" is a
+     STREET-BOUNDED city block from the City's polygons (`city_blocks.geojson`, misnamed
+     `sde_prod_DBO_Right_Of_Way`), plus `kind='edge'` blocks closed by the city limit (the City layer omits
+     them; 4% of addresses). IDs `CB-xxxxxxxx` carried forward by `data/reference/city_block_registry.csv`;
+     never number blocks by row (`B%04d` is retired; `data/reference/legacy_block_id_crosswalk.csv`, B0210 →
+     CB-27b08582). Address/parcel → block + street segment: `scripts/build_address_block_lookup.py` →
+     `docs/data/blocks/`. Census blocks are NOT city blocks (`docs/audit/2026-09-24_berkeley_city_blocks_found.md`).
    - **🟢 PARCEL-IDENTITY MVP WRITTEN 2026-06-16 (ADR-003, commit `a94b8e6`):** `parcels` now carries
      **`apn_raw`** (source-faithful, NEVER mutated) + **`apn_normalized`** (the B canonical, enforced by a
      county-scoped trigger) + `assessing_county`. **`parcel_lineage`** records prior→child events with

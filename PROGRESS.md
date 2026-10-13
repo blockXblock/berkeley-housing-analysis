@@ -50,8 +50,22 @@ street addresses. The spot checks pass: 1951 Shattuck = 2108 Berkeley Way, all f
 **Address canon fix (UNCOMMITTED, needs John):** `normalize_address` now folds the City layer's two-letter types (AV, BL,
 TE, CI, WK, HW, CM, PA). 19,169 `AV` points had been keying as `benvenue av`. It folds, never strips: Rose Walk ≠ Rose St.
 Effect on v4's 71,891 event addresses: 1 changes (`1622 Scenic Av` now matches `Scenic Ave`).
-**Open:** (1) John approves the canon fix → commit; (2) publish the lookup + `city_blocks_public.geojson`? (John's call);
-(3) Phase C: wire into `apps/block_units.py`; (4) a street-SEGMENT ("2800 block of Benvenue") column, if wanted.
+**Later the same day (John: yes to all three, then Phase C).** Canon fix committed `089c3f0a`.
+**Published (dev; goes live when John pushes main):** `scripts/build_address_block_lookup.py` → `docs/data/blocks/`:
+`address_block_lookup.csv` (31,982 addresses: block + street SEGMENT, e.g. "2800 block of Benvenue Ave, Stuart St to
+Russell St"; 99.5% have a segment), `parcel_block_lookup.csv` (29,134 APNs: 28,979 inside + 101 nearest + 50 none + 4 no
+coordinates; median 24 parcels per enclosed block vs the audit's ~25), `city_blocks.geojson`, `street_segments.geojson`, and a
+verbatim, SHA-checked copy of the address canon for the browser build. The registry and crosswalk are in `data/reference/`.
+**App** `apps/block_units.py` reads v4's `berkeley_housing_public.db` (not v2) and has an address box
+(`?address=` makes a shareable link). It places projects by parcel (1,511), coordinates (3) or address (23); 17 cannot be
+placed, most of them unnumbered `0 Latham Ln`-style placeholders.
+**Findings:** (a) **2012 Berkeley Way (142 completed units) has no parcel and no coordinates in v4's public DB**, and the
+City address list has no 2012, so it is off the block map. (b) Canon gaps (city/zip tails, unit designators, ordinals above
+tenth such as SIXTY-SIXTH, MLK shorthand) were measured by peer session berkeley-data-06 (6,424 new v4 matches). The peer
+owns the proposal, which needs John's approval: it changes the next chain rebuild. Until then `parse_address()` in the app
+handles these cases for typed input.
+**Open:** John runs `uvx marimo run --sandbox apps/block_units.py` to look at it (rendered headless only; not checked in a
+browser); push main to publish `docs/data/blocks/`.
 
 ---
 

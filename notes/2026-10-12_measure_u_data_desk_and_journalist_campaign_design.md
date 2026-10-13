@@ -157,6 +157,30 @@ Source: Council report, 2026-07-07 Item 10, "Five-Year Street Rehabilitation and
 - **The chart:** the 40-year levy timeline with the ⟳ assets' replacement dates overlaid. A turf field
   bought in 2027 is replaced around 2037, 2047 and 2057 while the 2027 tranche is still being repaid.
 
+### 4.5 The City Auditor's own findings (SOURCED 2026-10-12; files + SHA-256 in `data/raw/city_docs/2026-10-12/README.md`)
+- **Financial Condition audit, 2026-04-28** (Jenny Wong): unfunded capital + deferred maintenance **$1.8B in FY2024**
+  (up from $603.5M in FY2017); "Berkeley lacks advanced planning to finance capital needs in the long term"; the CIP
+  "does not include advanced planning to determine if and when the City should propose new bond measures"; the
+  City skipped its biennial unfunded-liability report for FY2025 "due to limited staff time"; Measure FF (2024)
+  "would not generate sufficient revenue" to reach PCI 70. **Rec 4.3:** a capital financing plan that plans GO-bond
+  timing and amount "multiple years in advance". **Management: Agree; implementation date June 30, 2028.**
+  → The City's Auditor recommended the plan; the City agreed to deliver it by mid-2028; the City is asking for
+  $300M in 2026, before that plan exists. The Auditor then signed the ballot argument FOR the measure.
+- **Contracts audit, 2026-02-19:** FY2024, 94 of 218 contracts (≈ $43M, 30% of contract dollars) had no documented
+  competition; 38% of waivers didn't clearly meet the criteria; 95 service contracts amended past the $50k threshold
+  by an average of $218,026; ~$85M recycling contracts with no bids; report-back due Fall 2026. **Caveat:** findings
+  are mostly SERVICE contracts; Measure U is mostly construction (formal bidding over $200k), but its ~$40.5M of
+  program delivery/implementation runs through service contracts.
+- **Fleet Replacement Fund Short Millions (2021):** the fund that replaces vehicles, including fire apparatus, is
+  "underfunded by millions"; 11 recommendations still only partly implemented (City Manager status, 2025-10-28).
+  GO bonds fund real property, generally not vehicles, so Measure U can't fix this; that's the point.
+- **Two different Measure FFs:** 2020 (fire/emergency services tax; the Auditor's 2023 "Spending Aligned with Ballot
+  Measure FF" audit, inferred from its date) and 2024 (streets). Never write "FF" without the year.
+- **Independence:** the measure makes the City Auditor the auditor of bond spending (at least every three years); the
+  Auditor signed the primary argument FOR U and V (`notes/2026-08-24_filed_rebuttals_analysis.md`). State it as a
+  documented fact and a question of independence *in appearance* under the auditing standards her office follows
+  (GAGAS); do not allege a violation.
+
 ### 4.4 Rail
 State the City's case for each project alongside the gap. The list does fund real needs (the seawall,
 two stations, accessibility). The finding is the **gap between the City's documented need and this

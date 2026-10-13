@@ -1,0 +1,6420 @@
+{
+ "topic": "address_resolution",
+ "read_at": "2026-10-13T11:25:24",
+ "definitions_sha16": "6d8d6208a2563b76",
+ "definitions": "QUESTION. Each ITEM is an address string from a City of Berkeley record (a permit, a Planning record, the\nRent Board registry, a business license) that does not match any address in the City's own address list. Below it\nare CANDIDATES from that list: addresses on the same street with nearby house numbers, streets with similar names,\nand the City's address for the record's parcel when the record names one.\nDecide whether the item refers to one of the candidates. If none fits but the record's own text (the \"e.g.\" quote)\nnames a full street address, give it as \"stated\" (copied exactly from that text); it is kept only if it is in the\nCity's list. Pick a candidate ONLY if the item plainly means that\naddress: the same address written differently ('VINCENTE' for 'VICENTE'), or a unit / half / rear of that address\n('1707 1/4 Oxford' -> 1707 Oxford), or the City's address for the same parcel. Do NOT pick the nearest number just\nbecause it is near: a house number that is simply absent from the list is \"not_in_city_list\". If the text is not\nan address at all, answer \"not_an_address\".\nreason must be one of: same_address_different_form, spelling_or_typo, unit_or_half_of_a_listed_address, renumbered_or_replatted, not_in_city_list, not_an_address.",
+ "model": "claude-sonnet-5",
+ "canon": "housing_rules.address 2026-10-13",
+ "rule": "a pick is kept only if it is one of the City-list candidates offered",
+ "unanswered": [
+  "0 CAMELIA St, BERKELEY CA 94710"
+ ],
+ "retry_of": "data/derived/address_resolution_evidence_2026-10-13.json",
+ "readings": [
+  {
+   "raw_address": "2039 SHATTUCK AVE, 505, Berkeley CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2039 Shattuck not in list, no renumbered candidate given"
+  },
+  {
+   "raw_address": "2039 SHATTUCK AVE, Berkeley CA 94704",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2039 Shattuck not in list, no renumbered candidate given"
+  },
+  {
+   "raw_address": "2039 SHATTUCK Ave",
+   "events": 4,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "2039 Kala Bagai Way 308",
+   "city_apn": "057-2034-006-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "parcel now addressed as 2039 Kala Bagai Way"
+  },
+  {
+   "raw_address": "2039 SHATTUCK Ave, 201, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2039 Shattuck not in list, no renumbered candidate given"
+  },
+  {
+   "raw_address": "2039 SHATTUCK Ave, 204, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2039 Shattuck not in list, no renumbered candidate given"
+  },
+  {
+   "raw_address": "1602 ADDISON St",
+   "events": 6,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1602 Addison St absent from list"
+  },
+  {
+   "raw_address": "1602 ADDISON St, BERKELEY CA 94703",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1602 Addison St absent from list"
+  },
+  {
+   "raw_address": "1602 KAINS AVE BERKELEY CA 94702",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1602 Kains Ave absent from list"
+  },
+  {
+   "raw_address": "1603 LINCOLN ST BERKELEY CA 94703",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1603 Lincoln St absent from list"
+  },
+  {
+   "raw_address": "1605 WALNUT ST BERKELEY CA 94709",
+   "events": 18,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1607 Walnut St D",
+   "city_apn": "058-2179-027-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "Parcel's city address is 1607 Walnut St D"
+  },
+  {
+   "raw_address": "2147 CEDAR ST BERKELEY CA 94709",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1550 Oxford St",
+   "city_apn": "059-2259-012-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for same parcel is 1550 Oxford St"
+  },
+  {
+   "raw_address": "2149 ASHBY AVE BERKELEY CA 94705 ",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2149 Ashby Ave not present among nearby listed numbers"
+  },
+  {
+   "raw_address": "2149 CEDAR ST BERKELEY CA 94709",
+   "events": 5,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1550 Oxford St",
+   "city_apn": "059-2259-012-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for same parcel is 1550 Oxford St"
+  },
+  {
+   "raw_address": "2150 N N VALLEY St, BERKELEY CA 94702",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "spelling_or_typo",
+   "note": "Duplicate 'N' directional, same as 2150 N Valley St"
+  },
+  {
+   "raw_address": "2150 N VALLEY St",
+   "events": 3,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": "2150 N Valley St",
+   "city_apn": "056 199403704",
+   "candidate_basis": "similar street name 'valley'",
+   "reason": "same_address_different_form",
+   "note": "Matches 2150 N Valley St exactly (case only)"
+  },
+  {
+   "raw_address": "2125 MILVIA St, BERKELEY CA 94704",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2125 Milvia not in list"
+  },
+  {
+   "raw_address": "2125 WEST ST BERKELEY CA 94702",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2125 West St not in list"
+  },
+  {
+   "raw_address": "2127 MILVIA ST BERKELEY CA 94704",
+   "events": 9,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2127 Milvia not in list"
+  },
+  {
+   "raw_address": "2129 CENTER St, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2129 Center St not in list"
+  },
+  {
+   "raw_address": "2129 Center",
+   "events": 1,
+   "sources": [
+    "cpra_planning_log"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2129 Center not in list"
+  },
+  {
+   "raw_address": "2740 SAN PABLO Ave",
+   "events": 12,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": "2748 San Pablo Ave",
+   "city_apn": "054-1744-025-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City address for same parcel"
+  },
+  {
+   "raw_address": "2740 SAN PABLO Ave, BERKELEY CA 94702",
+   "events": 8,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no 2740 listed"
+  },
+  {
+   "raw_address": "2998 SAN PABLO Ave, BERKELEY CA 94710",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no 2998 listed"
+  },
+  {
+   "raw_address": "30 NORTHGATE Ave",
+   "events": 2,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": "30 North Gate Ave",
+   "city_apn": "060 246901500",
+   "candidate_basis": "similar street name 'north gate'",
+   "reason": "spelling_or_typo",
+   "note": "Northgate vs North Gate"
+  },
+  {
+   "raw_address": "30 NORTHGATE Ave, BERKELEY CA 94708",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": "30 North Gate Ave",
+   "city_apn": "060 246901500",
+   "candidate_basis": "similar street name 'north gate'",
+   "reason": "spelling_or_typo",
+   "note": "Northgate vs North Gate"
+  },
+  {
+   "raw_address": "1275 WALNUT St, BERKELEY CA 94709",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1275 Walnut not listed; candidates are different numbers"
+  },
+  {
+   "raw_address": "1277 ALCATRAZ AVE BERKELEY CA 94702",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "3250 Idaho St",
+   "city_apn": "052-1448-011-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "same_address_different_form",
+   "note": "parcel's city address is 3250 Idaho St"
+  },
+  {
+   "raw_address": "1280 DELAWARE ST, BERKELEY, CA 94702",
+   "events": 7,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1280 Delaware not in list; only 1278/1276/1274/1281 present"
+  },
+  {
+   "raw_address": "1280 DELAWARE St",
+   "events": 3,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1280 Delaware not in list; only 1278/1276/1274/1281 present"
+  },
+  {
+   "raw_address": "1280 DELAWARE St, BERKELEY CA 94702",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1280 Delaware not in list; only 1278/1276/1274/1281 present"
+  },
+  {
+   "raw_address": "12 THE BRIDGE Rd, BERKELEY CA 94705",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no matching address found, no candidates"
+  },
+  {
+   "raw_address": "12 plaza Dr, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no matching address found, no candidates"
+  },
+  {
+   "raw_address": "1200 CURTIS ST, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1200 Curtis not listed; nearby numbers only"
+  },
+  {
+   "raw_address": "1239 EVELYN AVE, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1239 Evelyn not listed; nearby numbers only"
+  },
+  {
+   "raw_address": "1239 FIFTH St",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "815 Gilman St",
+   "city_apn": "060-2359-018-03",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "city's address for same parcel is 815 Gilman St"
+  },
+  {
+   "raw_address": "1041 VIRGINIA ST BERKELEY CA 94710 ",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1041 not among listed numbers"
+  },
+  {
+   "raw_address": "1043 Pardee St",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1043 not among listed numbers"
+  },
+  {
+   "raw_address": "1043 Pardee St, BERKELEY CA 94710 United States",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1043 not among listed numbers"
+  },
+  {
+   "raw_address": "1169 CRAGMONT Ave",
+   "events": 15,
+   "sources": [
+    "accela_capdetail",
+    "cpra_permit_feed"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1169 not among listed numbers"
+  },
+  {
+   "raw_address": "1169 CRAGMONT Ave, BERKELEY CA 94708",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1169 not among listed numbers"
+  },
+  {
+   "raw_address": "2037 FOURTH St, BERKELEY CA 94710",
+   "events": 5,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2037 4th St not in city list"
+  },
+  {
+   "raw_address": "2037 SHATTUCK Ave",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "2039 Kala Bagai Way 308",
+   "city_apn": "057-2034-006-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "Shattuck renamed to Kala Bagai Way, same parcel"
+  },
+  {
+   "raw_address": "2037 SHATTUCK Ave, BERKELEY CA 94704",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "renaming project address not given in candidates"
+  },
+  {
+   "raw_address": "2039 SHATTUCK AVE",
+   "events": 5,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "2039 Kala Bagai Way 308",
+   "city_apn": "057-2034-006-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "Shattuck renamed to Kala Bagai Way, same parcel"
+  },
+  {
+   "raw_address": "2039 SHATTUCK AVE, 301, Berkeley CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "unit 301 of old Shattuck address, no matching candidate"
+  },
+  {
+   "raw_address": "1390 Tenth St, BERKELEY CA 94710 United States",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1390 10th St not in list; nearby numbers only"
+  },
+  {
+   "raw_address": "1395 NINTH ST, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1395 9th St not in list; nearby numbers only"
+  },
+  {
+   "raw_address": "1395 NINTH ST, Berkeley CA 94710",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1395 9th St not in list; nearby numbers only"
+  },
+  {
+   "raw_address": "1401 ACTON CRES 2 BERKELEY CA 94702",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "same_address_different_form",
+   "note": "CRES abbreviation for Crescent, unit 2"
+  },
+  {
+   "raw_address": "1401 ACTON CRES BERKELEY CA 94702",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1401 Acton Crescent",
+   "city_apn": "056 199706900",
+   "candidate_basis": "similar street name 'acton crescent'",
+   "reason": "same_address_different_form",
+   "note": "CRES abbreviation for Crescent"
+  },
+  {
+   "raw_address": "My wife and I are psychotherapists. \u00a0We will be seeing people in a psychotherapy office at 2811A College Avenue, Berkeley CA 94705. \u00a0But we have a business registered at our home, though we will not be seeing people there.",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "same_address_different_form",
+   "note": "unit A of College Ave address"
+  },
+  {
+   "raw_address": "Piedmont Ave, Berkeley ca 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_an_address",
+   "note": "no house number given"
+  },
+  {
+   "raw_address": "The new business is an Online Yoga Studio. All I will be doing is adding to my website yogafortimesofchange.com the ability for people to pay for and register for online yoga classes and workshops (taught over Zoom). I work from my home (1324 Peralta Avenue, Berkeley CA 94702). There will be no physical products, no additional people coming to the house (all lessons will be via video, some conducted in different parts of the US and not by me), no additional parking needed, no deliveries of anything, and nothing at all I can think of that will affect people in the neighborhood. I already work at home as a freelance writer and have everything I need installed already (basically internet and computer).",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "same_address_different_form",
+   "note": "home address stated in text"
+  },
+  {
+   "raw_address": "UNIVERSITY AVE, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_an_address",
+   "note": "no house number given"
+  },
+  {
+   "raw_address": "19 THE BRIDGE Rd, BERKELEY CA 94705",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no candidates match"
+  },
+  {
+   "raw_address": "1900 BERRYMAN ST BERKELEY CA 94709",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1911 Berryman St A",
+   "city_apn": "060-2448-001-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "parcel's city address differs"
+  },
+  {
+   "raw_address": "1900 BERRYMAN ST, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no 1900 Berryman in list"
+  },
+  {
+   "raw_address": "1900 BERRYMAN St, BERKELEY CA 94709",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no 1900 Berryman in list"
+  },
+  {
+   "raw_address": "1901 ESSEX ST BERKELEY CA 94703",
+   "events": 3,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "3031 Adeline St",
+   "city_apn": "053-1595-009-03",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "parcel's city address differs"
+  },
+  {
+   "raw_address": "3022 SACRAMENTO ST BERKELEY CA 94702 ",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "3046 Sacramento St",
+   "city_apn": "053-1614-018-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City address for same parcel 053-1614-018-00"
+  },
+  {
+   "raw_address": "3023 BATEMAN St",
+   "events": 3,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": "3019 Bateman St 5",
+   "city_apn": "052-1560-032-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City address for same parcel 052-1560-032-00"
+  },
+  {
+   "raw_address": "3023 BATEMAN St, BERKELEY CA 94705",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": "3019 Bateman St",
+   "city_apn": "052 156003200",
+   "candidate_basis": "same street, nearby number",
+   "reason": "renumbered_or_replatted",
+   "note": "Same parcel 052-1560-032-00 as City's 3019 Bateman St"
+  },
+  {
+   "raw_address": "3023 STANTON ST BERKELEY CA 94702",
+   "events": 8,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "No matching address or parcel found"
+  },
+  {
+   "raw_address": "3023 STANTON ST BERKELEY CA 94702 ",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "3046 Sacramento St",
+   "city_apn": "053-1614-018-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City address for same parcel 053-1614-018-00"
+  },
+  {
+   "raw_address": "1642 M L KING JR WAY, Berkeley CA 94709",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1642 MLK Jr Way absent from list"
+  },
+  {
+   "raw_address": "1642 M L KING JR Way, BERKELEY CA 94709",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1642 MLK Jr Way absent from list"
+  },
+  {
+   "raw_address": "1642 NINTH St",
+   "events": 3,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1642 9th St absent from list"
+  },
+  {
+   "raw_address": "1689 SCENIC AVE BERKELEY CA 94709",
+   "events": 5,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1681 Scenic Ave",
+   "city_apn": "058-2194-013-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for same parcel"
+  },
+  {
+   "raw_address": "1691 OXFORD ST, BERKELEY, CA 94709",
+   "events": 1,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1685 Oxford St",
+   "city_apn": "058-2183-015-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for same parcel"
+  },
+  {
+   "raw_address": "0 KEELER Ave",
+   "events": 6,
+   "sources": [
+    "accela_capdetail"
+   ],
+   "city_address": "1181 Keeler Ave",
+   "city_apn": "063-2984-041-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for same parcel"
+  },
+  {
+   "raw_address": "0 KEELER Ave, BERKELEY CA 94708",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "Placeholder '0' address, no match"
+  },
+  {
+   "raw_address": "0 LATHAM Ln",
+   "events": 21,
+   "sources": [
+    "accela_capdetail",
+    "cpra_permit_feed"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "Placeholder '0' address, no match"
+  },
+  {
+   "raw_address": "0 LATHAM Ln, BERKELEY CA 94708",
+   "events": 5,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "renumbered_or_replatted",
+   "note": "New address given in record text"
+  },
+  {
+   "raw_address": "0 LE ROY Ave",
+   "events": 1,
+   "sources": [
+    "accela_capdetail"
+   ],
+   "city_address": "1463 Le Roy Ave",
+   "city_apn": "058-2244-025-01",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for same parcel"
+  },
+  {
+   "raw_address": "2601 SHATTUCK Ave, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2601 Shattuck not found in list"
+  },
+  {
+   "raw_address": "2601 WEBSTER ST BERKELEY CA 94705",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "2959 Hillegass Ave",
+   "city_apn": "052-1573-023-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for same parcel"
+  },
+  {
+   "raw_address": "2601 WEBSTER St",
+   "events": 3,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": "2959 Hillegass Ave",
+   "city_apn": "052-1573-023-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for same parcel"
+  },
+  {
+   "raw_address": "2601 WEBSTER St, BERKELEY CA 94705",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no matching 2601 Webster entry"
+  },
+  {
+   "raw_address": "2631 ASHBY Ave, C, BERKELEY CA 94705",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2631 Ashby unit C not present"
+  },
+  {
+   "raw_address": "15 VIRGINIA GDNS BERKELEY CA 94702",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "15 Virginia Gardens",
+   "city_apn": "058 213902400",
+   "candidate_basis": "similar street name 'virginia gardens'",
+   "reason": "same_address_different_form",
+   "note": "15 Virginia Gardens matches exactly"
+  },
+  {
+   "raw_address": "150 BERKELEY SQ",
+   "events": 2,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "2141 Kala Bagai Way",
+   "city_apn": "057-2032-019-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "Berkeley Sq renamed to Kala Bagai Way, city address for parcel"
+  },
+  {
+   "raw_address": "150 BERKELEY SQ, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "150 Berkeley Sq not matched; candidates are different parcel"
+  },
+  {
+   "raw_address": "150 BERKELEY SQ, Berkeley CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "150 Berkeley Sq not matched; candidates are different parcel"
+  },
+  {
+   "raw_address": "150 BERKELEY Sq, BERKELEY CA 94704",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "Berkeley Square eliminated/renamed; no current city address given"
+  },
+  {
+   "raw_address": "1608 WARD St, BERKELEY CA 94703",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1608 Ward St absent from list"
+  },
+  {
+   "raw_address": "1609 1/2 SAN PABLO AVE, BERKELEY, CA 94702",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1609 San Pablo Ave",
+   "city_apn": "059 228703100",
+   "candidate_basis": "same street, nearby number",
+   "reason": "unit_or_half_of_a_listed_address",
+   "note": "1609 1/2 is half of 1609"
+  },
+  {
+   "raw_address": "161 Panoramic Way, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "161 Panoramic Way absent from list"
+  },
+  {
+   "raw_address": "1610 FRANCISCO ST BERKELEY CA 94703",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1610 Francisco St absent from list"
+  },
+  {
+   "raw_address": "1610 FRANCISCO St, BERKELEY CA 94703",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1610 Francisco St absent from list"
+  },
+  {
+   "raw_address": "1011 FOLGER Ave, BERKELEY CA 94710",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1011 Folger not listed"
+  },
+  {
+   "raw_address": "1013 DELAWARE ST BERKELEY CA 94710",
+   "events": 18,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1013 Delaware not listed"
+  },
+  {
+   "raw_address": "1015 1/2 N SHATTUCK AVE AVE , BERKELEY, CA 94707",
+   "events": 1,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1015 Shattuck Ave",
+   "city_apn": "061 255805500",
+   "candidate_basis": "similar street name 'shattuck'",
+   "reason": "unit_or_half_of_a_listed_address",
+   "note": "1015 1/2 -> 1015 Shattuck"
+  },
+  {
+   "raw_address": "1016 PARDEE ST BERKELEY CA 94710 ",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1016 Pardee not listed"
+  },
+  {
+   "raw_address": "1017 1/2 N SHATTUCK AVE AVE NA, BERKELEY, CA 94707",
+   "events": 1,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1017 Shattuck Ave",
+   "city_apn": "061 255805500",
+   "candidate_basis": "similar street name 'shattuck'",
+   "reason": "unit_or_half_of_a_listed_address",
+   "note": "1017 1/2 -> 1017 Shattuck"
+  },
+  {
+   "raw_address": "1375 FOURTH St, BERKELEY CA 94710",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1375 4th St not present in city list"
+  },
+  {
+   "raw_address": "1384 NORTHSIDE AVE BERKELEY CA 94702",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1385 Neilson St",
+   "city_apn": "060-2414-016-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for this parcel is 1385 Neilson St"
+  },
+  {
+   "raw_address": "1384 NORTHSIDE Ave, BERKELEY CA 94702",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "No parcel match given; number not in list"
+  },
+  {
+   "raw_address": "139 BERKELEY Sq, BERKELEY CA 94704",
+   "events": 5,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "Different street (Sq vs Way), no match"
+  },
+  {
+   "raw_address": "1390 TENTH ST, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1390 10th St not found among listed numbers"
+  },
+  {
+   "raw_address": "1610-1650 University",
+   "events": 1,
+   "sources": [
+    "cpra_planning_log"
+   ],
+   "city_address": "1610 University Ave",
+   "city_apn": "056 200401800",
+   "candidate_basis": "similar street name 'university'",
+   "reason": "same_address_different_form",
+   "note": "range start matches 1610 University Ave"
+  },
+  {
+   "raw_address": "1611 EIGHTH ST",
+   "events": 2,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1611 8th St not in city list"
+  },
+  {
+   "raw_address": "1611 EIGHTH ST, BERKELEY CA 94710 United States",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1611 8th St not in city list"
+  },
+  {
+   "raw_address": "1611 EIGHTH St, BERKELEY CA 94710",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1611 8th St not in city list"
+  },
+  {
+   "raw_address": "1611 Ninth Sq, Berkeley CA 94710",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1611 Ninth Sq not in city list"
+  },
+  {
+   "raw_address": "2703 WALKER ST BERKELEY CA 94705",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "2116 Derby St",
+   "city_apn": "054-1719-005-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for parcel"
+  },
+  {
+   "raw_address": "2703-2705",
+   "events": 1,
+   "sources": [
+    "cpra_planning_log"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_an_address",
+   "note": "range, not single address"
+  },
+  {
+   "raw_address": "2704 8TH ST BERKELEY CA 94710",
+   "events": 5,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2704 8th St absent from list"
+  },
+  {
+   "raw_address": "2704 SHASTA Rd",
+   "events": 15,
+   "sources": [
+    "accela_capdetail",
+    "cpra_permit_feed"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2704 Shasta Rd absent from list"
+  },
+  {
+   "raw_address": "2704 SHASTA Rd, BERKELEY CA 94708",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2704 Shasta Rd absent from list"
+  },
+  {
+   "raw_address": "937 CARLETON ST, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "937 Carleton St absent from list"
+  },
+  {
+   "raw_address": "940 PARKER St",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "940 Parker St absent from list"
+  },
+  {
+   "raw_address": "940 PARKER St, BERKELEY CA 94710",
+   "events": 4,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "940 Parker St absent from list"
+  },
+  {
+   "raw_address": "95 NORTHGATE Ave",
+   "events": 6,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": "95 North Gate Ave",
+   "city_apn": "060 246908200",
+   "candidate_basis": "similar street name 'north gate'",
+   "reason": "same_address_different_form",
+   "note": "Northgate vs North Gate spacing"
+  },
+  {
+   "raw_address": "95 NORTHGATE Ave, BERKELEY CA 94708",
+   "events": 5,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": "95 North Gate Ave",
+   "city_apn": "060 246908200",
+   "candidate_basis": "similar street name 'north gate'",
+   "reason": "same_address_different_form",
+   "note": "Northgate vs North Gate spacing"
+  },
+  {
+   "raw_address": "0 CARLETON St, BERKELEY CA 94702",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "No actual Carleton St listing; candidates are unrelated Creston Rd addresses"
+  },
+  {
+   "raw_address": "0 CENTER ST",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "2135 Martin Luther King Jr Way",
+   "city_apn": "057-2021-002-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "Farmers Market parcel's official address is 2135 Martin Luther King Jr Way"
+  },
+  {
+   "raw_address": "0 CENTER St, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "Civic Center Park installation; no real house number assigned"
+  },
+  {
+   "raw_address": "0 CRAGMONT AVE, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "Placeholder zero address, no candidates on Cragmont"
+  },
+  {
+   "raw_address": "0 CRAGMONT Ave",
+   "events": 40,
+   "sources": [
+    "accela_capdetail",
+    "cpra_permit_feed"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "Record text references 1158 Cragmont but not confirmed in city address list"
+  },
+  {
+   "raw_address": "1001 CHANNING WAY 1/2 BERKELEY CA 94710 ",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1001 Channing Way",
+   "city_apn": "056 193402101",
+   "candidate_basis": "same street, nearby number",
+   "reason": "unit_or_half_of_a_listed_address",
+   "note": "1001 Channing Way 1/2 -> 1001 Channing Way"
+  },
+  {
+   "raw_address": "1001 Dwight Walk, Berkeley CA 94710",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": "1001 Dwight Way",
+   "city_apn": "056 193502001",
+   "candidate_basis": "stated in the record text: '1001 Dwight Way'",
+   "reason": "spelling_or_typo",
+   "note": "'Dwight Walk' is typo for 'Dwight Way' per record text"
+  },
+  {
+   "raw_address": "1002 CHANNING WAY BERKELEY CA 94710 ",
+   "events": 3,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1006 Channing Way 4",
+   "city_apn": "056-1935-002-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "Parcel's city address is 1006 Channing Way 4"
+  },
+  {
+   "raw_address": "1004 CHANNING WAY BERKELEY CA 94710",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1006 Channing Way",
+   "city_apn": "056 193500200",
+   "candidate_basis": "same street, nearby number",
+   "reason": "renumbered_or_replatted",
+   "note": "1004 Channing Way maps to parcel's city address 1006 Channing Way"
+  },
+  {
+   "raw_address": "1011 FOLGER AVE, Berkeley CA",
+   "events": 4,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1011 Folger Ave not present among listed numbers"
+  },
+  {
+   "raw_address": "1814 EUCLID Ave, BERKELEY CA 94709",
+   "events": 4,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1814 Euclid not listed; 1810 is different address"
+  },
+  {
+   "raw_address": "1814 STUART ST BERKELEY CA 94703",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1814 Stuart not listed; nearby numbers differ"
+  },
+  {
+   "raw_address": "1814 STUART St",
+   "events": 2,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1814 Stuart not listed; nearby numbers differ"
+  },
+  {
+   "raw_address": "1814 STUART St, BERKELEY CA 94703",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1814 Stuart not listed; nearby numbers differ"
+  },
+  {
+   "raw_address": "19 THE BRIDGE Rd",
+   "events": 3,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": "19 Bridge Rd",
+   "city_apn": "064-4229-006-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "same_address_different_form",
+   "note": "'The Bridge Rd' matches 'Bridge Rd'"
+  },
+  {
+   "raw_address": "1614 KAINS Ave, BERKELEY CA 94702",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1614 Kains absent from list"
+  },
+  {
+   "raw_address": "1616 SIXTH St, B, BERKELEY CA 94710",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1616 6th St absent from list"
+  },
+  {
+   "raw_address": "1635 LE ROY Ave",
+   "events": 3,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": "1635 Leroy Ave",
+   "city_apn": "058 221001600",
+   "candidate_basis": "similar street name 'leroy'",
+   "reason": "spelling_or_typo",
+   "note": "Le Roy vs Leroy spelling variant"
+  },
+  {
+   "raw_address": "1635 LE ROY Ave, BERKELEY CA 94709",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": "1635 Leroy Ave",
+   "city_apn": "058 221001600",
+   "candidate_basis": "similar street name 'leroy'",
+   "reason": "spelling_or_typo",
+   "note": "Le Roy vs Leroy spelling variant"
+  },
+  {
+   "raw_address": "1640 FRANCISCO ST 1/2, BERKELEY, CA 94703",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1640 Francisco St",
+   "city_apn": "058 215803700",
+   "candidate_basis": "same street, nearby number",
+   "reason": "unit_or_half_of_a_listed_address",
+   "note": "1640 Francisco 1/2 is unit of 1640 Francisco"
+  },
+  {
+   "raw_address": "1 PANORAMIC WAY, BERKELEY CA 94704 United States",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no '1 Panoramic Way' in list; candidates are '2 Panoramic Way' units"
+  },
+  {
+   "raw_address": "1 PLAZA DR, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no candidates, address not in city list"
+  },
+  {
+   "raw_address": "1 Panoramic Way",
+   "events": 3,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": "1 Orchard Ln 1",
+   "city_apn": "055-1862-009-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "city's address for same parcel is 1 Orchard Ln 1"
+  },
+  {
+   "raw_address": "1 Panoramic Way, BERKELEY CA 94704 United States",
+   "events": 4,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no '1 Panoramic Way' in list; candidates are '2 Panoramic Way' units"
+  },
+  {
+   "raw_address": "10 E PARNASSUS CT, Berkeley CA",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": "10 E Parnassus Ct",
+   "city_apn": "058 223201000",
+   "candidate_basis": "similar street name 'parnassus'",
+   "reason": "same_address_different_form",
+   "note": "exact match to 10 E Parnassus Ct"
+  },
+  {
+   "raw_address": "100 BERKELEY SQ",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "2100 Kala Bagai Way",
+   "city_apn": "057-2032-015-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "Berkeley Square renamed to Kala Bagai Way for this parcel"
+  },
+  {
+   "raw_address": "100 BERKELEY Sq",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "2100 Kala Bagai Way",
+   "city_apn": "057-2032-015-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "Berkeley Square renamed to Kala Bagai Way for this parcel"
+  },
+  {
+   "raw_address": "100 BERKELEY Sq, BERKELEY CA 94704",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "Old Berkeley Square address, superseded by renaming, no matching candidate"
+  },
+  {
+   "raw_address": "1000 HEINZ AVE, Berkeley CA",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "House number 1000 not present on Heinz Ave list"
+  },
+  {
+   "raw_address": "1001 CAPISTRANO AVE, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "House number 1001 not present on Capistrano Ave list"
+  },
+  {
+   "raw_address": "2121 DWIGHT WAY BERKELEY CA 94704 ",
+   "events": 429,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "2107 Dwight Way 1030",
+   "city_apn": "055-1890-012-01",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "parcel address is 2107 Dwight Way 1030"
+  },
+  {
+   "raw_address": "2121 DWIGHT WAY, BERKELEY CA 94704 United States",
+   "events": 11,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2121 Dwight Way not in city list"
+  },
+  {
+   "raw_address": "2121 Dwight Way",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "2107 Dwight Way 1030",
+   "city_apn": "055-1890-012-01",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "parcel address is 2107 Dwight Way 1030"
+  },
+  {
+   "raw_address": "2121 Dwight Way, BERKELEY CA 94704 United States",
+   "events": 11,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2121 Dwight Way not in city list"
+  },
+  {
+   "raw_address": "2125 MILVIA ST BERKELEY CA 94704",
+   "events": 151,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2125 Milvia St not in city list"
+  },
+  {
+   "raw_address": "1929 FRANCISCO St, BERKELEY CA 94709",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1929 Francisco not listed"
+  },
+  {
+   "raw_address": "1930 M L KING JR WAY, BERKELEY CA 94704 United States",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1930 MLK Jr Way not listed"
+  },
+  {
+   "raw_address": "1930 M L KING JR WAY, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1930 MLK Jr Way not listed"
+  },
+  {
+   "raw_address": "1930 M L KING JR Way, BERKELEY CA 94704",
+   "events": 5,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1930 MLK Jr Way not listed"
+  },
+  {
+   "raw_address": "1942 HASTE ST, BERKELEY, CA 94704",
+   "events": 16,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1942 Haste St not listed"
+  },
+  {
+   "raw_address": "1017 MILLER AVE",
+   "events": 1,
+   "sources": [
+    "accela_capdetail"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1017 Miller Ave absent from list"
+  },
+  {
+   "raw_address": "1017 MILLER AVE, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1017 Miller Ave absent from list"
+  },
+  {
+   "raw_address": "1017 MILLER Ave",
+   "events": 2,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1017 Miller Ave absent from list"
+  },
+  {
+   "raw_address": "1017 MILLER Ave, BERKELEY CA 94708",
+   "events": 4,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1017 Miller Ave absent from list"
+  },
+  {
+   "raw_address": "1018 JONES ST, BERKELEY, CA 94710",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1018 Jones St absent from list"
+  },
+  {
+   "raw_address": "1997 EL DORADO AVE",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "2003 Hopkins St",
+   "city_apn": "061-2571-003-07",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "parcel's city address is 2003 Hopkins St"
+  },
+  {
+   "raw_address": "2025 FOURTH ST, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2025 Fourth St absent from list"
+  },
+  {
+   "raw_address": "2033 SHATTUCK AVE, BERKELEY CA 94704 United States",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2033 Shattuck Ave absent from list"
+  },
+  {
+   "raw_address": "2033 SHATTUCK Ave, BERKELEY CA 94704",
+   "events": 10,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2033 Shattuck Ave absent from list"
+  },
+  {
+   "raw_address": "2033 VINE ST BERKELEY CA 94709",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1453 Henry St",
+   "city_apn": "059-2262-008-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "parcel's city address is 1453 Henry St"
+  },
+  {
+   "raw_address": "26 NORTHGATE Ave, BERKELEY CA 94708",
+   "events": 5,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": "26 North Gate Ave",
+   "city_apn": "060 246901400",
+   "candidate_basis": "similar street name 'north gate'",
+   "reason": "spelling_or_typo",
+   "note": "Northgate = North Gate"
+  },
+  {
+   "raw_address": "2600 NINTH St, BERKELEY CA 94710",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2600 9th St absent from list"
+  },
+  {
+   "raw_address": "2601 RIDGE RD BERKELEY CA 94709",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1765 Le Roy Ave C",
+   "city_apn": "058-2205-012-01",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City address for same parcel"
+  },
+  {
+   "raw_address": "2601 RIDGE Rd",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "1765 Le Roy Ave C",
+   "city_apn": "058-2205-012-01",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City address for same parcel"
+  },
+  {
+   "raw_address": "2601 RIDGE Rd, BERKELEY CA 94709",
+   "events": 5,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no matching candidate for 2601 Ridge Rd"
+  },
+  {
+   "raw_address": "1901 FOURTH St, 107, BERKELEY CA 94710",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1901 4th St absent from list"
+  },
+  {
+   "raw_address": "1901 FOURTH St, 108, BERKELEY CA 94710",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1901 4th St absent from list"
+  },
+  {
+   "raw_address": "1901 FOURTH St, 200, BERKELEY CA 94710",
+   "events": 9,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1901 4th St absent from list"
+  },
+  {
+   "raw_address": "1901 FOURTH St, 201, BERKELEY CA 94710",
+   "events": 4,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1901 4th St absent from list"
+  },
+  {
+   "raw_address": "1928 HASTE ST, BERKELEY, CA 94704",
+   "events": 8,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1924 Haste St C",
+   "city_apn": "055-1898-025-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "city address for same parcel APN 055-1898-025-00"
+  },
+  {
+   "raw_address": "1501 1/2 OXFORD ST, BERKELEY, CA 94709",
+   "events": 5,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1501 Oxford St",
+   "city_apn": "059 225600100",
+   "candidate_basis": "same street, nearby number",
+   "reason": "unit_or_half_of_a_listed_address",
+   "note": "1501 1/2 Oxford is unit of 1501 Oxford"
+  },
+  {
+   "raw_address": "1501 HAWTHORNE Ter",
+   "events": 2,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": "2 Vine Ln",
+   "city_apn": "059-2250-036-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "parcel address is 2 Vine Ln"
+  },
+  {
+   "raw_address": "1501 HAWTHORNE Ter, BERKELEY CA 94708",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1501 Hawthorne Ter not in list, no parcel candidate given"
+  },
+  {
+   "raw_address": "1504 FAIRVIEW ST BERKELEY CA 94703",
+   "events": 5,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "3205 Sacramento St",
+   "city_apn": "052-1536-016-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "parcel address is 3205 Sacramento St"
+  },
+  {
+   "raw_address": "1506 FAIRVIEW ST BERKELEY CA 94703",
+   "events": 5,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "3205 Sacramento St",
+   "city_apn": "052-1536-016-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "parcel address is 3205 Sacramento St"
+  },
+  {
+   "raw_address": "2046 LINCOLN ST",
+   "events": 2,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "1652 Shattuck Ave",
+   "city_apn": "058-2174-001-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "city address for parcel is 1652 Shattuck Ave"
+  },
+  {
+   "raw_address": "2046 LINCOLN ST, Berkeley CA 94709",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no matching number in list"
+  },
+  {
+   "raw_address": "2107 ADDISON St, BERKELEY CA 94704",
+   "events": 6,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no candidate matches 2107"
+  },
+  {
+   "raw_address": "2107 BANCROFT Way, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no candidate matches 2107"
+  },
+  {
+   "raw_address": "2109 SHATTUCK AVE",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "2109 Kala Bagai Way 308",
+   "city_apn": "057-2032-010-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "parcel's city address is 2109 Kala Bagai Way 308"
+  },
+  {
+   "raw_address": "2040 KALA BAGAI Way",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "2031 Shattuck Ave",
+   "city_apn": "057-2033-004-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "city address for parcel is 2031 Shattuck Ave"
+  },
+  {
+   "raw_address": "2041 BANCROFT WAY",
+   "events": 5,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "2286 Shattuck Ave",
+   "city_apn": "057-2028-004-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "city address for parcel is 2286 Shattuck Ave"
+  },
+  {
+   "raw_address": "2041 BANCROFT WAY, 307, Berkeley CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2041 Bancroft not in list; no parcel match given"
+  },
+  {
+   "raw_address": "2041 BANCROFT WAY, Berkeley CA 94704",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2041 Bancroft not in list; no parcel match given"
+  },
+  {
+   "raw_address": "2041 BANCROFT Way",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "2286 Shattuck Ave",
+   "city_apn": "057-2028-004-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "city address for parcel is 2286 Shattuck Ave"
+  },
+  {
+   "raw_address": "0 Berkeley",
+   "events": 7,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_an_address",
+   "note": "placeholder 0 Berkeley, no real address"
+  },
+  {
+   "raw_address": "0 CAMELIA St",
+   "events": 18,
+   "sources": [
+    "accela_capdetail"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_an_address",
+   "note": "placeholder 0 Camelia St"
+  },
+  {
+   "raw_address": "0 CAMPUS Dr",
+   "events": 7,
+   "sources": [
+    "accela_capdetail"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_an_address",
+   "note": "placeholder 0 Campus Dr"
+  },
+  {
+   "raw_address": "0 CAMPUS Dr, BERKELEY CA 94708",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_an_address",
+   "note": "placeholder 0 Campus Dr"
+  },
+  {
+   "raw_address": "2045 FRANCISCO ST",
+   "events": 2,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2045 Francisco St absent from city list"
+  },
+  {
+   "raw_address": "2045 FRANCISCO St",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2045 Francisco St absent from city list"
+  },
+  {
+   "raw_address": "2045 FRANCISCO St, BERKELEY CA 94709",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2045 Francisco St absent from city list"
+  },
+  {
+   "raw_address": "2045 SHATTUCK Ave",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "2039 Kala Bagai Way 308",
+   "city_apn": "057-2034-006-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "Shattuck renaming gave parcel new address 2039 Kala Bagai Way"
+  },
+  {
+   "raw_address": "2045 SHATTUCK Ave, BERKELEY CA 94704",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2045 Shattuck Ave no longer a valid address, no matching candidate"
+  },
+  {
+   "raw_address": "3060 FULTON ST BERKELEY CA 94705",
+   "events": 3,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "2215 Prince St",
+   "city_apn": "052-1584-020-01",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for same parcel"
+  },
+  {
+   "raw_address": "3092 SACRAMENTO ST BERKELEY CA 94702",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "house number not in list"
+  },
+  {
+   "raw_address": "3104 SACRAMENTO ST BERKELEY CA 94702",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "house number not in list"
+  },
+  {
+   "raw_address": "3104 SACRAMENTO ST BERKELEY CA 94702 ",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "3046 Sacramento St",
+   "city_apn": "053-1614-018-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for same parcel"
+  },
+  {
+   "raw_address": "3104 SACRAMENTO St, BERKELEY CA 94702",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "house number not in list"
+  },
+  {
+   "raw_address": "2114 CHANNING WAY",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2114 Channing Way absent from list"
+  },
+  {
+   "raw_address": "2114 CHANNING WAY BERKELEY CA 94704",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2114 Channing Way absent from list"
+  },
+  {
+   "raw_address": "2114 FIFTH ST",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2114 5th St absent from list"
+  },
+  {
+   "raw_address": "2114 LOS ANGELES AVE, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2114 Los Angeles Ave absent from list"
+  },
+  {
+   "raw_address": "2115 Seventh St",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2115 7th St absent from list"
+  },
+  {
+   "raw_address": "2039 SHATTUCK Ave, 300, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "house number 2039 not in list"
+  },
+  {
+   "raw_address": "2039 SHATTUCK Ave, 301, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "house number 2039 not in list"
+  },
+  {
+   "raw_address": "2039 SHATTUCK Ave, 305, BERKELEY CA 94704",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "house number 2039 not in list"
+  },
+  {
+   "raw_address": "2039 SHATTUCK Ave, 307, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "house number 2039 not in list"
+  },
+  {
+   "raw_address": "2039 SHATTUCK Ave, 308, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "house number 2039 not in list"
+  },
+  {
+   "raw_address": "2130 WARD ST BERKELEY CA 94705",
+   "events": 6,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no 2130 Ward St in candidates"
+  },
+  {
+   "raw_address": "2131 VALLEY ST, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "different street name (N Valley St)"
+  },
+  {
+   "raw_address": "2136 OXFORD St, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "gap between 2134 and 2140"
+  },
+  {
+   "raw_address": "2137 OREGON ST BERKELEY CA 94705",
+   "events": 5,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "gap between 2136 and 2139"
+  },
+  {
+   "raw_address": "2138 OXFORD ST, Berkeley CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "gap between 2134 and 2140"
+  },
+  {
+   "raw_address": "2112 BROWNING St",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2112 Browning not listed"
+  },
+  {
+   "raw_address": "2112 BROWNING St, BERKELEY CA 94702",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2112/2110 Browning not listed"
+  },
+  {
+   "raw_address": "2112 CHANNING WAY",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2112 Channing not listed"
+  },
+  {
+   "raw_address": "2112 CHANNING Way",
+   "events": 3,
+   "sources": [
+    "accela_capdetail"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2112 Channing not listed"
+  },
+  {
+   "raw_address": "2112 CHANNING Way, BERKELEY CA 94705",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2112 Channing not listed"
+  },
+  {
+   "raw_address": "1984 SAN ANTONIO AVE, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1984 not in list"
+  },
+  {
+   "raw_address": "1984 SAN ANTONIO AVE, Berkeley CA 94707",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1984 not in list"
+  },
+  {
+   "raw_address": "1984 SAN ANTONIO Ave, BERKELEY CA 94707",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1984 not in list"
+  },
+  {
+   "raw_address": "1984 San Antonio",
+   "events": 1,
+   "sources": [
+    "cpra_planning_log"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1984 not in list"
+  },
+  {
+   "raw_address": "1988 BERKELEY WAY BERKELEY CA 94703 ",
+   "events": 3,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1942 Martin Luther King Jr Way",
+   "city_apn": "057-2060-001-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "city address for parcel is 1942 MLK Jr Way"
+  },
+  {
+   "raw_address": "2109 SHATTUCK AVE, 503, BERKELEY CA 94704 United States",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2109 not in city list; nearby evens on same parcel differ"
+  },
+  {
+   "raw_address": "2109 SHATTUCK AVE, Berkeley CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2109 not in city list; nearby evens on same parcel differ"
+  },
+  {
+   "raw_address": "2109 SHATTUCK Ave, 402, BERKELEY CA 94704",
+   "events": 4,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2109 not in city list; nearby evens on same parcel differ"
+  },
+  {
+   "raw_address": "2109 SHATTUCK Ave, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2109 not in city list; nearby evens on same parcel differ"
+  },
+  {
+   "raw_address": "2111 Bancroft Way, 350, BERKELEY CA 94704 United States",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2111 not in city list; nearby odds have different APNs"
+  },
+  {
+   "raw_address": "1169 CRAGMONT Ave, BERKELEY CA 94708 United States",
+   "events": 5,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1169 Cragmont absent from list"
+  },
+  {
+   "raw_address": "1181 KEITH Ave, BERKELEY CA 94708",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1181 Keith Ave absent from list"
+  },
+  {
+   "raw_address": "1184 EUCLID Ave",
+   "events": 3,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": "1171 Laurel St",
+   "city_apn": "061-2550-003-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "APN matches C7's parcel, city uses Laurel St address"
+  },
+  {
+   "raw_address": "1184 EUCLID Ave, BERKELEY CA 94708",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1184 Euclid Ave absent, no parcel match given"
+  },
+  {
+   "raw_address": "1190 TENTH St, BERKELEY CA 94710",
+   "events": 9,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1190 10th St absent from list"
+  },
+  {
+   "raw_address": "3028 CALIFORNIA ST, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "3028 not in list"
+  },
+  {
+   "raw_address": "3028 SACRAMENTO ST BERKELEY CA 94702 ",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "3028 not in list"
+  },
+  {
+   "raw_address": "3044 SACRAMENTO ST BERKELEY CA 94702 ",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "3044 not in list"
+  },
+  {
+   "raw_address": "3045 E TREMONT ST , BERKELEY, CA 94703",
+   "events": 6,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "3045 Tremont St",
+   "city_apn": "053 159401500",
+   "candidate_basis": "similar street name 'tremont'",
+   "reason": "spelling_or_typo",
+   "note": "E Tremont -> Tremont, same number"
+  },
+  {
+   "raw_address": "3045 SACRAMENTO ST BERKELEY CA 94703",
+   "events": 3,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "3045 not in list"
+  },
+  {
+   "raw_address": "1403 ORDWAY ST BERKELEY CA 94702",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1340 Hopkins St",
+   "city_apn": "060-2423-023-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City address for same parcel is 1340 Hopkins St"
+  },
+  {
+   "raw_address": "15 SHATTUCK Sq",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "15 Shattuck Sq not in list"
+  },
+  {
+   "raw_address": "15 SHATTUCK Sq, 208, BERKELEY CA 94704",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "15 Shattuck Sq unit 208 not in list"
+  },
+  {
+   "raw_address": "15 SHATTUCK Sq, 215, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "15 Shattuck Sq unit 215 not in list"
+  },
+  {
+   "raw_address": "15 SHATTUCK Sq, BERKELEY CA 94703",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": "2093 Addison St",
+   "city_apn": "057 203300400",
+   "candidate_basis": "stated in the record text: '2093 Addison St'",
+   "reason": "renumbered_or_replatted",
+   "note": "record states new address 2093 Addison St"
+  },
+  {
+   "raw_address": "2039 SHATTUCK Ave, 505, BERKELEY CA 94704",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2039 Shattuck not in list; nearby numbers don't match unit 505"
+  },
+  {
+   "raw_address": "2039 SHATTUCK Ave, 506, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2039 Shattuck not in list; nearby numbers don't match unit 506"
+  },
+  {
+   "raw_address": "2039 SHATTUCK Ave, BERKELEY CA 94704",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2039 Shattuck not in list despite renaming note; no matching candidate"
+  },
+  {
+   "raw_address": "2040 BANCROFT WAY",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "2322 Shattuck Ave 209",
+   "city_apn": "055-1894-017-04",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for same parcel is 2322 Shattuck Ave 209"
+  },
+  {
+   "raw_address": "2040 BANCROFT WAY, 301, Berkeley CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2040 Bancroft Way #301 not among listed candidates for this parcel"
+  },
+  {
+   "raw_address": "0 MILLER Ave, BERKELEY CA 94708",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "same_address_different_form",
+   "note": "full address named in record text"
+  },
+  {
+   "raw_address": "0 SOUTHAMPTON Ave, BERKELEY CA 94707",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_an_address",
+   "note": "no address stated; placeholder 0 number, no match to Northampton"
+  },
+  {
+   "raw_address": "0 STERLING Ave, BERKELEY CA 94708",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "same_address_different_form",
+   "note": "full address named in record text"
+  },
+  {
+   "raw_address": "0 SUMMIT Rd, BERKELEY CA 94708",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": "1330 Summit Rd",
+   "city_apn": "060 249301000",
+   "candidate_basis": "stated in the record text: '1330 Summit Rd'",
+   "reason": "same_address_different_form",
+   "note": "full address named in record text"
+  },
+  {
+   "raw_address": "0 THE ALAMEDA, BERKELEY CA 94707",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_an_address",
+   "note": "no address stated in record text"
+  },
+  {
+   "raw_address": "1606 KAINS AVE BERKELEY CA 94702",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1600 Kains Ave",
+   "city_apn": "059-2287-004-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City maps parcel to 1600 Kains Ave"
+  },
+  {
+   "raw_address": "1607 FRANKLIN ST BERKELEY CA 94702",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1607 Franklin not in list, no parcel address given"
+  },
+  {
+   "raw_address": "1607 SCENIC AVE BERKELEY CA 94708",
+   "events": 7,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "2404 Cedar St",
+   "city_apn": "058-2195-016-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City maps parcel to 2404 Cedar St"
+  },
+  {
+   "raw_address": "1608 S 62ND ST ST 4, BERKELEY, CA 94703",
+   "events": 16,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1608 62nd St D",
+   "city_apn": "052-1435-011-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "same_address_different_form",
+   "note": "Unit 4 matches 1608 62nd St D"
+  },
+  {
+   "raw_address": "1608 WARD St",
+   "events": 3,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": "1614 Ward St",
+   "city_apn": "054-1730-021-02",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City maps parcel to 1614 Ward St"
+  },
+  {
+   "raw_address": "2631 Ashby AVE, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2631 Ashby absent from list"
+  },
+  {
+   "raw_address": "2634 ETNA ST BERKELEY CA 94704",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2634 Etna absent from list"
+  },
+  {
+   "raw_address": "2636 FULTON ST BERKELEY CA 94704",
+   "events": 8,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "2638 Fulton St",
+   "city_apn": "055-1826-004-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "city address for same parcel"
+  },
+  {
+   "raw_address": "2643 REGENT ST, BERKELEY, CA 94704",
+   "events": 1,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "2639 Regent St",
+   "city_apn": "055-1841-021-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "city address for same parcel"
+  },
+  {
+   "raw_address": "2645 HILGARD AVE, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2645 Hilgard absent from list"
+  },
+  {
+   "raw_address": "0 VINCENTE Ave",
+   "events": 4,
+   "sources": [
+    "accela_capdetail"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "house number 0 not an actual listed address"
+  },
+  {
+   "raw_address": "0 VINCENTE Ave, BERKELEY CA 94707",
+   "events": 4,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "house number 0 not an actual listed address"
+  },
+  {
+   "raw_address": "0 VIRGINIA St",
+   "events": 16,
+   "sources": [
+    "accela_capdetail",
+    "cpra_permit_feed"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no matching candidate, placeholder number 0"
+  },
+  {
+   "raw_address": "0 VIRGINIA St, BERKELEY CA 94702",
+   "events": 5,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": "708 Virginia St",
+   "city_apn": "057 211400105",
+   "candidate_basis": "stated in the record text: '708 Virginia St'",
+   "reason": "same_address_different_form",
+   "note": "record text names actual address needed"
+  },
+  {
+   "raw_address": "0 WARD St, BERKELEY CA 94702",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "block reference, no real address given"
+  },
+  {
+   "raw_address": "43 LATHAM Ln, BERKELEY CA 94708",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "43 not in list; 40/50/30/29/60/70 present"
+  },
+  {
+   "raw_address": "435 KENTUCKY AVE, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "435 missing; 433/437/429/443 present"
+  },
+  {
+   "raw_address": "455 VINCENTE AVE BERKELEY CA 94707 ",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "455 missing; 451/457/461 present"
+  },
+  {
+   "raw_address": "455 VINCENTE Ave, BERKELEY CA 94707",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "455 missing; 451/457/461 present"
+  },
+  {
+   "raw_address": "455 VINCENTE Ave, BERKELEY CA 94707 United States",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "455 missing; 451/457/461 present"
+  },
+  {
+   "raw_address": "1928 MCGEE AVE",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "1646 Berkeley Way 5",
+   "city_apn": "057-2070-001-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "same_address_different_form",
+   "note": "parcel's city address is 1646 Berkeley Way 5"
+  },
+  {
+   "raw_address": "1928 MCGEE AVE BERKELEY CA 94703",
+   "events": 8,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1646 Berkeley Way 5",
+   "city_apn": "057-2070-001-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "same_address_different_form",
+   "note": "parcel's city address is 1646 Berkeley Way 5"
+  },
+  {
+   "raw_address": "1928 Stadium Rim Way, BERKELEY CA 94704 United States",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "new address assignment not yet in city list"
+  },
+  {
+   "raw_address": "1929 ASHBY AVE BERKELEY CA 94703",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1929 Ashby Ave missing from list"
+  },
+  {
+   "raw_address": "1929 FRANCISCO ST BERKELEY CA 94709",
+   "events": 8,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1929 Francisco St missing from list"
+  },
+  {
+   "raw_address": "2115 Seventh St, BERKELEY CA 94710 United States",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "No 2115 7th St in list; nearby numbers only"
+  },
+  {
+   "raw_address": "2116 MCKINLEY Ave, BERKELEY CA 94703",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2116 Mckinley Ave not listed; only 2112/2114/2118 exist"
+  },
+  {
+   "raw_address": "2117 SHATTUCK AVE",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "2109 Kala Bagai Way 308",
+   "city_apn": "057-2032-010-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "same_address_different_form",
+   "note": "City's current address for this parcel after Shattuck renaming"
+  },
+  {
+   "raw_address": "2117 SHATTUCK Ave, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2117 Shattuck not in list; no parcel-matched candidate given"
+  },
+  {
+   "raw_address": "2118 FIFTH ST, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2118 5th St absent; nearby numbers only"
+  },
+  {
+   "raw_address": "3113 SHATTUCK AVE 5 BERKELEY CA 94705 ",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "3113 Shattuck not listed; distinct from 3111"
+  },
+  {
+   "raw_address": "3113 SHATTUCK Ave",
+   "events": 2,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "3113 Shattuck not listed; distinct from 3111"
+  },
+  {
+   "raw_address": "3113 SHATTUCK Ave, 2, BERKELEY CA 94704",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "3113 Shattuck not listed; distinct from 3111"
+  },
+  {
+   "raw_address": "3306 SACRAMENTO ST BERKELEY CA 94702",
+   "events": 18,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1444 Alcatraz Av D",
+   "city_apn": "052-1439-015-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for same parcel"
+  },
+  {
+   "raw_address": "3306 SACRAMENTO St",
+   "events": 8,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": "1444 Alcatraz Av D",
+   "city_apn": "052-1439-015-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for same parcel"
+  },
+  {
+   "raw_address": "2700 EIGHTH St, BERKELEY CA 94710",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2700 8th St absent"
+  },
+  {
+   "raw_address": "2700 TENTH ST, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2700 10th St absent"
+  },
+  {
+   "raw_address": "2700 TENTH St, BERKELEY CA 94710",
+   "events": 7,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2700 10th St absent"
+  },
+  {
+   "raw_address": "2701 WALKER ST BERKELEY CA 94705",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "2116 Derby St",
+   "city_apn": "054-1719-005-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "parcel addressed as 2116 Derby St"
+  },
+  {
+   "raw_address": "2701 WEBSTER St, BERKELEY CA 94705",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2701 Webster St absent"
+  },
+  {
+   "raw_address": "2033 VINE St, BERKELEY CA 94709",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2033 Vine St not in list; nearby numbers differ"
+  },
+  {
+   "raw_address": "2034 PARKER ST BERKELEY CA 94704",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "2032 Parker St",
+   "city_apn": "055-1820-024-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for same parcel is 2032 Parker St"
+  },
+  {
+   "raw_address": "2036 LINCOLN ST, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2036 Lincoln St absent from list; only nearby numbers exist"
+  },
+  {
+   "raw_address": "2036 PARKER ST BERKELEY CA 94704",
+   "events": 5,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "2032 Parker St",
+   "city_apn": "055-1820-024-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for same parcel is 2032 Parker St"
+  },
+  {
+   "raw_address": "2037 FOURTH St",
+   "events": 2,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "731 Addison St",
+   "city_apn": "056-1960-012-03",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for same parcel is 731 Addison St"
+  },
+  {
+   "raw_address": "3309 CALIFORNIA ST BERKELEY CA 94703",
+   "events": 5,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1605 63rd St",
+   "city_apn": "052-1522-014-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for this parcel is 1605 63rd St"
+  },
+  {
+   "raw_address": "3309 CALIFORNIA St",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "1605 63rd St",
+   "city_apn": "052-1522-014-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for this parcel is 1605 63rd St"
+  },
+  {
+   "raw_address": "3309 CALIFORNIA St, BERKELEY CA 94703",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "3309 California St not in list; no parcel address given"
+  },
+  {
+   "raw_address": "3311 CALIFORNIA ST BERKELEY CA 94703",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1605 63rd St",
+   "city_apn": "052-1522-014-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for this parcel is 1605 63rd St"
+  },
+  {
+   "raw_address": "3311 CALIFORNIA St",
+   "events": 5,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": "1605 63rd St",
+   "city_apn": "052-1522-014-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for this parcel is 1605 63rd St"
+  },
+  {
+   "raw_address": "1025 MILLER Ave",
+   "events": 12,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1025 Miller not listed"
+  },
+  {
+   "raw_address": "1025 MILLER Ave, BERKELEY CA 94708",
+   "events": 5,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1025 Miller not listed"
+  },
+  {
+   "raw_address": "1026 GRIZZLY PEAK Blvd",
+   "events": 3,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1026 Grizzly Peak not listed"
+  },
+  {
+   "raw_address": "1026 GRIZZLY PEAK Blvd, BERKELEY CA 94708",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1026 Grizzly Peak not listed"
+  },
+  {
+   "raw_address": "1027 HEINZ Ave",
+   "events": 9,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1027 Heinz not listed"
+  },
+  {
+   "raw_address": "0 LE ROY Ave, BERKELEY CA 94708",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "0 Le Roy not in list"
+  },
+  {
+   "raw_address": "0 MARINA DOCKS, F-G, BERKELEY CA 94710",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_an_address",
+   "note": "marina dock pedestal location"
+  },
+  {
+   "raw_address": "0 MAYBECK TWIN Dr",
+   "events": 7,
+   "sources": [
+    "accela_capdetail"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no candidates, vacant lot addr"
+  },
+  {
+   "raw_address": "0 MAYBECK TWIN Dr, BERKELEY CA 94708",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no candidates, vacant lot addr"
+  },
+  {
+   "raw_address": "0 MILLER Ave",
+   "events": 7,
+   "sources": [
+    "accela_capdetail"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no candidates, vacant lot addr"
+  },
+  {
+   "raw_address": "1901 FOURTH St",
+   "events": 2,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "740 Hearst Ave",
+   "city_apn": "057-2100-001-04",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "parcel's city address is 740 Hearst Ave"
+  },
+  {
+   "raw_address": "1901 FOURTH St, 102, BERKELEY CA 94710",
+   "events": 7,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1901 4th St number not in list"
+  },
+  {
+   "raw_address": "1901 FOURTH St, 104, BERKELEY CA 94710",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1901 4th St number not in list"
+  },
+  {
+   "raw_address": "1901 FOURTH St, 105, BERKELEY CA 94710",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1901 4th St number not in list"
+  },
+  {
+   "raw_address": "1901 FOURTH St, 106, BERKELEY CA 94710",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1901 4th St number not in list"
+  },
+  {
+   "raw_address": "1306 THIRD St, BERKELEY CA 94710",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "house number 1306 absent from list"
+  },
+  {
+   "raw_address": "1355 FOURTH St, A, BERKELEY CA 94710",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "house number 1355 absent from list"
+  },
+  {
+   "raw_address": "1355 FOURTH St, C, BERKELEY CA 94710",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "house number 1355 absent from list"
+  },
+  {
+   "raw_address": "136 Parnassus, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "house number 136 absent from list"
+  },
+  {
+   "raw_address": "1360 FIFTH ST, Berkeley CA",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "house number 1360 absent from list"
+  },
+  {
+   "raw_address": "12 Alvardo RD, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": "12 Alvarado Rd",
+   "city_apn": "064 422701700",
+   "candidate_basis": "similar street name 'alvarado'",
+   "reason": "spelling_or_typo",
+   "note": "Alvardo -> Alvarado"
+  },
+  {
+   "raw_address": "12 E PARNASSUS CT, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": "12 E Parnassus Ct",
+   "city_apn": "058 223200900",
+   "candidate_basis": "similar street name 'parnassus'",
+   "reason": "same_address_different_form",
+   "note": "exact match"
+  },
+  {
+   "raw_address": "12 E PARNASSUS Ct, BERKELEY CA 94708",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": "12 E Parnassus Ct",
+   "city_apn": "058 223200900",
+   "candidate_basis": "similar street name 'parnassus'",
+   "reason": "same_address_different_form",
+   "note": "exact match"
+  },
+  {
+   "raw_address": "12 Parnassus East",
+   "events": 1,
+   "sources": [
+    "cpra_planning_log"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no matching candidate"
+  },
+  {
+   "raw_address": "12 THE BRIDGE Rd",
+   "events": 9,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": "14 Bridge Rd",
+   "city_apn": "064-4227-010-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "city's address for same parcel"
+  },
+  {
+   "raw_address": "3311 CALIFORNIA St, BERKELEY CA 94703",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "3311 not listed; only 3308/3304 exist"
+  },
+  {
+   "raw_address": "3351 M L KING JR Way",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "1804 62nd St 1",
+   "city_apn": "052-1433-013-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City address for this parcel is 1804 62nd St 1"
+  },
+  {
+   "raw_address": "3351 MLK JR WAY BERKELEY CA 94703",
+   "events": 3,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1804 62nd St 1",
+   "city_apn": "052-1433-013-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City address for this parcel is 1804 62nd St 1"
+  },
+  {
+   "raw_address": "42 PLAZA DR BERKELEY CA 94705",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "42 The Plaza Dr",
+   "city_apn": "064-4246-001-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "same_address_different_form",
+   "note": "Plaza Dr = The Plaza Dr"
+  },
+  {
+   "raw_address": "42 PLAZA Dr, BERKELEY CA 94705",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no candidates; address form not confirmed in list"
+  },
+  {
+   "raw_address": "628 SANTA BARBARA Rd",
+   "events": 5,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "628 absent from list"
+  },
+  {
+   "raw_address": "628 SANTA BARBARA Rd, B, BERKELEY CA 94707",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "628 B absent from list"
+  },
+  {
+   "raw_address": "90 NORTHGATE Ave, BERKELEY CA 94708",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": "90 North Gate Ave",
+   "city_apn": "060 246902202",
+   "candidate_basis": "similar street name 'north gate'",
+   "reason": "spelling_or_typo",
+   "note": "Northgate vs North Gate"
+  },
+  {
+   "raw_address": "901 CAMELIA St, BERKELEY CA 94710",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "901 absent from list"
+  },
+  {
+   "raw_address": "936 The Alameda, BERKELEY CA 94707",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "936 absent from list"
+  },
+  {
+   "raw_address": "1256 SIXTH ST, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1256 6th St not in city list; nearby numbers only"
+  },
+  {
+   "raw_address": "1257 67TH ST BERKELEY CA 94702",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1257 67th St absent; only 1256/1258 listed"
+  },
+  {
+   "raw_address": "1257 SIXTY-SEVENTH St",
+   "events": 3,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1257 67th St absent; only 1256/1258 listed"
+  },
+  {
+   "raw_address": "1257 SIXTY-SEVENTH St, BERKELEY CA 94702",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1257 67th St absent; only 1256/1258 listed"
+  },
+  {
+   "raw_address": "1260 FIFTH ST, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1260 5th St not in city list; nearby numbers only"
+  },
+  {
+   "raw_address": "2150 N VALLEY St, BERKELEY CA 94702",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": "2150 N Valley St",
+   "city_apn": "056 199403704",
+   "candidate_basis": "similar street name 'valley'",
+   "reason": "same_address_different_form",
+   "note": "exact match 2150 N Valley St"
+  },
+  {
+   "raw_address": "2150 NORTH VALLEY ST BERKELEY CA 94702",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "2150 N Valley St",
+   "city_apn": "056-1994-037-04",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "same_address_different_form",
+   "note": "matches parcel APN and address"
+  },
+  {
+   "raw_address": "2199 BANCROFT Way, BERKELEY CA 94704",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no 2199 Bancroft Way in list"
+  },
+  {
+   "raw_address": "2199 Bancroft Way, Berkeley CA 94720",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no 2199 Bancroft Way in list"
+  },
+  {
+   "raw_address": "22 PANORAMIC WAY BERKELEY CA 94704",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no 22 Panoramic Way in list"
+  },
+  {
+   "raw_address": "46 SHATTUCK SQ, 11, Berkeley CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "46 Shattuck Sq not in list"
+  },
+  {
+   "raw_address": "46 SHATTUCK SQ, 16, Berkeley CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "46 Shattuck Sq not in list"
+  },
+  {
+   "raw_address": "46 SHATTUCK SQ, 25, Berkeley CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "46 Shattuck Sq not in list"
+  },
+  {
+   "raw_address": "46 SHATTUCK SQ, Berkeley CA 94704",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "46 Shattuck Sq not in list"
+  },
+  {
+   "raw_address": "46 SHATTUCK Sq, 16, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "46 Shattuck Sq not in list"
+  },
+  {
+   "raw_address": "1360 FIFTH St, BERKELEY CA 94710",
+   "events": 9,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1360 5th St not present among nearby listed numbers"
+  },
+  {
+   "raw_address": "1360 TENTH St",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "1019 Camelia St",
+   "city_apn": "060-2352-002-01",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "Parcel's city address is 1019 Camelia St"
+  },
+  {
+   "raw_address": "1360 TENTH St, BERKELEY CA 94710",
+   "events": 5,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1360 10th St absent; no parcel address given here"
+  },
+  {
+   "raw_address": "1360 Tenth St, BERKELEY CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1360 10th St absent; no parcel address given here"
+  },
+  {
+   "raw_address": "1361 1361 Delaware St St, BERKELEY CA 94702",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "Garbled duplicate text; e.g. field empty, no stated address available"
+  },
+  {
+   "raw_address": "0 THIRD St, BERKELEY CA 94710",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_an_address",
+   "note": "0 Third St is not a real address"
+  },
+  {
+   "raw_address": "0 TUNNEL Rd",
+   "events": 2,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_an_address",
+   "note": "test record, 0 Tunnel Rd"
+  },
+  {
+   "raw_address": "0 TUNNEL Rd, BERKELEY CA 94705",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_an_address",
+   "note": "0 Tunnel Rd placeholder"
+  },
+  {
+   "raw_address": "0 Third",
+   "events": 1,
+   "sources": [
+    "cpra_planning_log"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_an_address",
+   "note": "0 Third placeholder"
+  },
+  {
+   "raw_address": "0 VARIOUS",
+   "events": 4674,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_an_address",
+   "note": "0 VARIOUS is not a specific address"
+  },
+  {
+   "raw_address": "1239 FIFTH St, BERKELEY CA 94710",
+   "events": 4,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1239 5th St not in list"
+  },
+  {
+   "raw_address": "1241 WESTVIEW DR BERKELEY CA 94705 ",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no address in e.g. text, no match"
+  },
+  {
+   "raw_address": "1249 EIGHTH St, BERKELEY CA 94710",
+   "events": 12,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1249 8th St not in list"
+  },
+  {
+   "raw_address": "125 BERKELEY Sq, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": "1239 Berkeley Way",
+   "city_apn": "057 208101700",
+   "candidate_basis": "similar street name 'berkeley'",
+   "reason": "renumbered_or_replatted",
+   "note": "Berkeley Sq eliminated, replaced by Berkeley Way address, same parcel"
+  },
+  {
+   "raw_address": "1250 NINTH ST, Berkeley CA 94710",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1250 9th St not in list"
+  },
+  {
+   "raw_address": "3012 SACRAMENTO St, BERKELEY CA 94702",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "3012 Sacramento not in list"
+  },
+  {
+   "raw_address": "3012 SACRAMENTO St, Bldg 10, BERKELEY CA 94702",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "3012 Sacramento Bldg10 not in list"
+  },
+  {
+   "raw_address": "3021 BATEMAN St",
+   "events": 3,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": "3019 Bateman St 5",
+   "city_apn": "052-1560-032-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "parcel matches 3019 Bateman St unit 5"
+  },
+  {
+   "raw_address": "3021 BATEMAN St, BERKELEY CA 94705",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": "3019 Bateman St",
+   "city_apn": "052 156003200",
+   "candidate_basis": "same street, nearby number",
+   "reason": "renumbered_or_replatted",
+   "note": "same parcel as 3019 Bateman St"
+  },
+  {
+   "raw_address": "3021 STANTON ST BERKELEY CA 94702 ",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "3046 Sacramento St",
+   "city_apn": "053-1614-018-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "parcel's city address is 3046 Sacramento St"
+  },
+  {
+   "raw_address": "2702 8TH ST BERKELEY CA 94710",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2702 8th St absent from list"
+  },
+  {
+   "raw_address": "2702 COLLEGE AVE BERKELEY CA 94705",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2702 College Ave absent from list"
+  },
+  {
+   "raw_address": "2702 SHASTA Rd",
+   "events": 12,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2702 Shasta Rd absent from list"
+  },
+  {
+   "raw_address": "2702 SHASTA Rd, BERKELEY CA 94708",
+   "events": 4,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2702 Shasta Rd absent from list"
+  },
+  {
+   "raw_address": "2703 BENVENUE AVE BERKELEY CA 94705",
+   "events": 18,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "2705 Benvenue Ave",
+   "city_apn": "054-1709-028-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for same parcel"
+  },
+  {
+   "raw_address": "2141 OREGON #5 St, 5, BERKELEY CA 94705",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": "2141 Oregon St",
+   "city_apn": "053 168504400",
+   "candidate_basis": "similar street name 'oregon'",
+   "reason": "unit_or_half_of_a_listed_address",
+   "note": "unit #5 of 2141 Oregon St"
+  },
+  {
+   "raw_address": "2143 RUSSELL ST BERKELEY CA 94705",
+   "events": 5,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2143 Russell St not present"
+  },
+  {
+   "raw_address": "2144 PARKER ST BERKELEY CA 94704",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2144 Parker St not present"
+  },
+  {
+   "raw_address": "2145 CEDAR ST BERKELEY CA 94709",
+   "events": 5,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1550 Oxford St",
+   "city_apn": "059-2259-012-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "parcel's city address is 1550 Oxford St"
+  },
+  {
+   "raw_address": "2147 ASHBY AVE BERKELEY CA 94705 ",
+   "events": 3,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2147 Ashby Ave not present"
+  },
+  {
+   "raw_address": "1506 FAIRVIEW ST, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1506 Fairview not in list"
+  },
+  {
+   "raw_address": "1512 SHATTUCK Ave, BERKELEY CA 94708",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1512 Shattuck not in list"
+  },
+  {
+   "raw_address": "1600 FAIRLAWN DR, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1600 Fairlawn not in list"
+  },
+  {
+   "raw_address": "1601 SECOND St",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1601 2nd St not in list"
+  },
+  {
+   "raw_address": "1601 SECOND St, BERKELEY CA 94710",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "proposed address not yet in list"
+  },
+  {
+   "raw_address": "3007 HARPER ST BERKELEY CA 94703",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "3007 Harper not listed"
+  },
+  {
+   "raw_address": "3010 SACRAMENTO ST BERKELEY CA 94702 ",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "3046 Sacramento St",
+   "city_apn": "053-1614-018-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City address for parcel is 3046 Sacramento"
+  },
+  {
+   "raw_address": "3010 SACRAMENTO St, BERKELEY CA 94702",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "3010 Sacramento not listed, no parcel candidate given"
+  },
+  {
+   "raw_address": "3012 SACRAMENTO ST BERKELEY CA 94702 ",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "3046 Sacramento St",
+   "city_apn": "053-1614-018-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City address for parcel is 3046 Sacramento"
+  },
+  {
+   "raw_address": "3012 SACRAMENTO St",
+   "events": 24,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": "3046 Sacramento St",
+   "city_apn": "053-1614-018-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City address for parcel is 3046 Sacramento"
+  },
+  {
+   "raw_address": "1027 HEINZ Ave, BERKELEY CA 94710",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1027 Heinz not in list"
+  },
+  {
+   "raw_address": "1028 GRAYSON St",
+   "events": 2,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": "1030 Grayson St",
+   "city_apn": "053 166100303",
+   "candidate_basis": "same street, nearby number",
+   "reason": "unit_or_half_of_a_listed_address",
+   "note": "duplex 1028/1030, 1030 listed"
+  },
+  {
+   "raw_address": "1039 PARDEE ST BERKELEY CA 94710",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1039 Pardee not in list"
+  },
+  {
+   "raw_address": "1039 VIRGINIA ST BERKELEY CA 94710 ",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1039 Virginia not in list"
+  },
+  {
+   "raw_address": "1041 PARDEE ST BERKELEY CA 94710",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1041 Pardee not in list"
+  },
+  {
+   "raw_address": "1363 1361 Delaware St St, BERKELEY CA 94702",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_an_address",
+   "note": "garbled duplicate street/number text"
+  },
+  {
+   "raw_address": "1365 FOURTH ST, BERKELEY CA 94710 United States",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "house number 1365 absent from list"
+  },
+  {
+   "raw_address": "137 BERKELEY Sq, BERKELEY CA 94704",
+   "events": 4,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": "1239 Berkeley Way",
+   "city_apn": "057 208101700",
+   "candidate_basis": "similar street name 'berkeley'",
+   "reason": "renumbered_or_replatted",
+   "note": "Berkeley Square eliminated, renamed/renumbered to Berkeley Way"
+  },
+  {
+   "raw_address": "1370 TACOMA AVE, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "house number 1370 absent from list"
+  },
+  {
+   "raw_address": "1372 STANNAGE AVE, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "house number 1372 absent from list"
+  },
+  {
+   "raw_address": "2040 BANCROFT Way, 301, BERKELEY CA 94704",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2040 Bancroft not in list"
+  },
+  {
+   "raw_address": "2040 BANCROFT Way, 302, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2040 Bancroft not in list"
+  },
+  {
+   "raw_address": "2040 BANCROFT Way, 400, BERKELEY CA 94704",
+   "events": 4,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2040 Bancroft not in list"
+  },
+  {
+   "raw_address": "2040 FOURTH ST, Berkeley CA",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2040 4th St not in list"
+  },
+  {
+   "raw_address": "2040 FOURTH St, BERKELEY CA 94710",
+   "events": 11,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2040 4th St not in list"
+  },
+  {
+   "raw_address": "10 GOLF COURSE Dr, BERKELEY CA 94708",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no nearby candidates provided"
+  },
+  {
+   "raw_address": "10 NORTHGATE Ave",
+   "events": 6,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": "10 North Gate Ave",
+   "city_apn": "060 246901202",
+   "candidate_basis": "similar street name 'north gate'",
+   "reason": "spelling_or_typo",
+   "note": "Northgate vs North Gate"
+  },
+  {
+   "raw_address": "10 NORTHGATE Ave, BERKELEY CA 94708",
+   "events": 5,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": "10 North Gate Ave",
+   "city_apn": "060 246901202",
+   "candidate_basis": "similar street name 'north gate'",
+   "reason": "spelling_or_typo",
+   "note": "Northgate vs North Gate"
+  },
+  {
+   "raw_address": "10 OAK RIDGE Rd",
+   "events": 5,
+   "sources": [
+    "city_business_licenses",
+    "cpra_permit_feed"
+   ],
+   "city_address": "48 Tunnel Rd",
+   "city_apn": "064-4234-013-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "city address for same parcel is 48 Tunnel Rd"
+  },
+  {
+   "raw_address": "10 OAK RIDGE Rd, BERKELEY CA 94705",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no matching candidate or parcel address given"
+  },
+  {
+   "raw_address": "22 PANORAMIC Way, BERKELEY CA 94704",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "22 Panoramic Way absent; nearby numbers only"
+  },
+  {
+   "raw_address": "22 THE BRIDGE Rd",
+   "events": 3,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": "22 Bridge Rd",
+   "city_apn": "064-4227-008-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "same_address_different_form",
+   "note": "'The Bridge Rd' = 'Bridge Rd', same parcel"
+  },
+  {
+   "raw_address": "22 THE BRIDGE Rd, BERKELEY CA 94705",
+   "events": 4,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "same_address_different_form",
+   "note": "matches 22 Bridge Rd parcel address"
+  },
+  {
+   "raw_address": "22 VIRGINIA GDNS BERKELEY CA 94702",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "22 Virginia Gardens",
+   "city_apn": "058 213902000",
+   "candidate_basis": "similar street name 'virginia gardens'",
+   "reason": "same_address_different_form",
+   "note": "'Virginia Gdns' = 'Virginia Gardens'"
+  },
+  {
+   "raw_address": "2201 - 05 Blake",
+   "events": 1,
+   "sources": [
+    "cpra_planning_log"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "range address, no matching single entry"
+  },
+  {
+   "raw_address": "0 WEST St, BERKELEY CA 94702",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no candidates, no other address in text"
+  },
+  {
+   "raw_address": "0 WOODSIDE Rd",
+   "events": 10,
+   "sources": [
+    "accela_capdetail"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "text names 1120 Woodside Road"
+  },
+  {
+   "raw_address": "0 WOODSIDE Rd, BERKELEY CA 94708",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "text names 1120 Woodside Road"
+  },
+  {
+   "raw_address": "1 Maybeck Twins",
+   "events": 1,
+   "sources": [
+    "cpra_planning_log"
+   ],
+   "city_address": "1 Maybeck Twin Dr",
+   "city_apn": "058 224204324",
+   "candidate_basis": "similar street name 'maybeck twin'",
+   "reason": "same_address_different_form",
+   "note": "Maybeck Twins -> Maybeck Twin Dr"
+  },
+  {
+   "raw_address": "1 PANORAMIC WAY BERKELEY CA 94704",
+   "events": 5,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1 Orchard Ln 1",
+   "city_apn": "055-1862-009-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "parcel's city address is 1 Orchard Ln 1"
+  },
+  {
+   "raw_address": "2119 SHATTUCK Ave, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2119 not in list; nearby 2118/2120 etc. differ"
+  },
+  {
+   "raw_address": "2120 OXFORD ST, BERKELEY CA 94704 United States",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2120 not in list; nearby 2128-2142 differ"
+  },
+  {
+   "raw_address": "2121 Berkeley Way, BERKELEY CA 94704 United States",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2121 not in list; nearby 2120/2116 etc. differ"
+  },
+  {
+   "raw_address": "2121 CENTER St",
+   "events": 4,
+   "sources": [
+    "city_business_licenses",
+    "cpra_permit_feed"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2121 not in list; nearby 2119/2124 differ"
+  },
+  {
+   "raw_address": "2121 CENTER St, BERKELEY CA 94704",
+   "events": 12,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2121 not in list; nearby 2119/2124 differ"
+  },
+  {
+   "raw_address": "95 PLAZA DR BERKELEY CA 94705",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "95 The Plaza Dr",
+   "city_apn": "064-4242-017-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "same_address_different_form",
+   "note": "Plaza Dr matches The Plaza Dr for same parcel"
+  },
+  {
+   "raw_address": "968 Grizzly",
+   "events": 1,
+   "sources": [
+    "cpra_planning_log"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "incomplete address, no matching candidate"
+  },
+  {
+   "raw_address": "995 Shattuck, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "house number 995 not present on Shattuck Ave list"
+  },
+  {
+   "raw_address": "CalWEA is a non-profit trade association representing the California wind energy industry. CalWEA has one employee, Nancy Rader, now working out of a home office. (Otherwise, CalWEA relies on consultants.) Prior office address was 2560 Ninth Street, Suite 213A, Berkeley CA 94710.",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "prior office address stated, not current"
+  },
+  {
+   "raw_address": "HASTE, 2433 Telegraph, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "full address given, no matching candidate"
+  },
+  {
+   "raw_address": "1260 FRANCISCO St, BERKELEY CA 94702",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1260 Francisco not in list"
+  },
+  {
+   "raw_address": "1260 WEST St, BERKELEY CA 94702",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1260 West not in list"
+  },
+  {
+   "raw_address": "1261 67TH ST BERKELEY CA 94702",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1261 67th not in list"
+  },
+  {
+   "raw_address": "1274 65TH ST BERKELEY CA 94702",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1274 65th not in list"
+  },
+  {
+   "raw_address": "1275 WALNUT ST",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1275 Walnut not in list"
+  },
+  {
+   "raw_address": "3306 SACRAMENTO St, 1, BERKELEY CA 94702",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "3306 Sacramento absent from list"
+  },
+  {
+   "raw_address": "3306 SACRAMENTO St, 2, BERKELEY CA 94702",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "3306 Sacramento absent from list"
+  },
+  {
+   "raw_address": "3306 SACRAMENTO St, 4, BERKELEY CA 94702",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "3306 Sacramento absent from list"
+  },
+  {
+   "raw_address": "3307 CALIFORNIA ST BERKELEY CA 94703",
+   "events": 5,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1605 63rd St",
+   "city_apn": "052-1522-014-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for this parcel is 1605 63rd St"
+  },
+  {
+   "raw_address": "3307 CALIFORNIA St, BERKELEY CA 94703",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "3307 California absent from list, no parcel match given"
+  },
+  {
+   "raw_address": "2203 CARLETON ST BERKELEY CA 94704",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "2615 Fulton St",
+   "city_apn": "055-1828-017-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "parcel corresponds to 2615 Fulton St (same APN as 2201 Carleton)"
+  },
+  {
+   "raw_address": "2203 FOURTH St",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "724 Allston Way",
+   "city_apn": "056-1958-001-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "parcel address for APN 056-1958-001-00 is 724 Allston Way"
+  },
+  {
+   "raw_address": "2203 FOURTH St, BERKELEY CA 94710",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2203 4th St not present in city list"
+  },
+  {
+   "raw_address": "2205 FOURTH St, BERKELEY CA 94710",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2205 4th St not present in city list"
+  },
+  {
+   "raw_address": "2205 ROSE St",
+   "events": 3,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2205 Rose St not present in city list"
+  },
+  {
+   "raw_address": "2597 TELEGRAPH Ave",
+   "events": 21,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2597 Telegraph not in candidate set; only nearby numbers listed"
+  },
+  {
+   "raw_address": "2597 TELEGRAPH Ave A",
+   "events": 5,
+   "sources": [
+    "accela_capdetail"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2597 Telegraph Ave A not in list; nearby numbers only"
+  },
+  {
+   "raw_address": "2597 TELEGRAPH Ave, A, BERKELEY CA 94704",
+   "events": 4,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "renumbered_or_replatted",
+   "note": "record text states new address is 2550 Regent St"
+  },
+  {
+   "raw_address": "2597 TELEGRAPH Ave, BERKELEY CA 94704",
+   "events": 10,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2597 Telegraph Ave not in list; nearby numbers only"
+  },
+  {
+   "raw_address": "26 NORTHGATE Ave",
+   "events": 14,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": "26 North Gate Ave",
+   "city_apn": "060 246901400",
+   "candidate_basis": "similar street name 'north gate'",
+   "reason": "spelling_or_typo",
+   "note": "Northgate vs North Gate Ave, same address"
+  },
+  {
+   "raw_address": "2205 ROSE St, BERKELEY CA 94709",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2205 not in list"
+  },
+  {
+   "raw_address": "2207 BLAKE ST BERKELEY CA 94704",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2207 not in list"
+  },
+  {
+   "raw_address": "2338 DERBY ST NA-NA, BERKELEY, CA 94705",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2338 not in list"
+  },
+  {
+   "raw_address": "2338 DERBY ST, BERKELEY, CA 94705",
+   "events": 1,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2338 not in list"
+  },
+  {
+   "raw_address": "2339 9TH ST , BERKELEY, CA 94710, CA 94710",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2339 not in list"
+  },
+  {
+   "raw_address": "3023 STANTON St, BERKELEY CA 94702",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "3023 Stanton not in list"
+  },
+  {
+   "raw_address": "3023 Stanton St, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "3023 Stanton not in list"
+  },
+  {
+   "raw_address": "3024 SACRAMENTO ST BERKELEY CA 94702 ",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "3046 Sacramento St",
+   "city_apn": "053-1614-018-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "parcel address is 3046 Sacramento St"
+  },
+  {
+   "raw_address": "3026 SACRAMENTO ST BERKELEY CA 94702 ",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "3046 Sacramento St",
+   "city_apn": "053-1614-018-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "parcel address is 3046 Sacramento St"
+  },
+  {
+   "raw_address": "3026 SACRAMENTO St, BERKELEY CA 94702",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "3026 Sacramento not in list"
+  },
+  {
+   "raw_address": "2041 Bancroft Way, 204, BERKELEY CA 94704 United States",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2041 Bancroft not in city list"
+  },
+  {
+   "raw_address": "2041 Bancroft Way, 301, BERKELEY CA 94704 United States",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2041 Bancroft not in city list"
+  },
+  {
+   "raw_address": "2041 Bancroft Way, 303, BERKELEY CA 94704 United States",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2041 Bancroft not in city list"
+  },
+  {
+   "raw_address": "2041 SHATTUCK Ave, BERKELEY CA 94704",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2041 Shattuck not in city list"
+  },
+  {
+   "raw_address": "2042 EMERSON ST BERKELEY CA 94703",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2042 Emerson not in city list"
+  },
+  {
+   "raw_address": "2040 BANCROFT WAY, 400, Berkeley CA 94704",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2040 Bancroft Way not in list; no candidate matches"
+  },
+  {
+   "raw_address": "2040 BANCROFT WAY, Berkeley CA",
+   "events": 2,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2040 Bancroft Way not in list; no candidate matches"
+  },
+  {
+   "raw_address": "2040 BANCROFT Way",
+   "events": 3,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "2322 Shattuck Ave 209",
+   "city_apn": "055-1894-017-04",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for same parcel is 2322 Shattuck Ave 209"
+  },
+  {
+   "raw_address": "2040 BANCROFT Way, 200, BERKELEY CA 94704",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2040 Bancroft Way #200 not in list; no candidate matches"
+  },
+  {
+   "raw_address": "2040 BANCROFT Way, 300, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2040 Bancroft Way #300 not in list; no candidate matches"
+  },
+  {
+   "raw_address": "2041 BANCROFT Way, 207, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2041 Bancroft Way absent from city list"
+  },
+  {
+   "raw_address": "2041 BANCROFT Way, 307, BERKELEY CA 94704",
+   "events": 3,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2041 Bancroft Way absent from city list"
+  },
+  {
+   "raw_address": "2041 BANCROFT Way, BERKELEY CA 94704",
+   "events": 16,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2041 Bancroft Way absent from city list"
+  },
+  {
+   "raw_address": "2041 Bancroft Way",
+   "events": 5,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2041 Bancroft Way absent; conflicting parcel candidates unresolved"
+  },
+  {
+   "raw_address": "2041 Bancroft Way, 202, BERKELEY CA 94704 United States",
+   "events": 5,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2041 Bancroft Way absent from city list"
+  },
+  {
+   "raw_address": "46 SHATTUCK Sq, 21, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "46 Shattuck Sq not listed"
+  },
+  {
+   "raw_address": "46 SHATTUCK Sq, B3, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "46 Shattuck Sq not listed"
+  },
+  {
+   "raw_address": "46 SHATTUCK Sq, BERKELEY CA 94704",
+   "events": 15,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "46 Shattuck Sq not listed"
+  },
+  {
+   "raw_address": "620 PAGE ST",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "1461 Eastshore Hwy",
+   "city_apn": "059-2322-001-03",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City address for parcel is 1461 Eastshore Hwy"
+  },
+  {
+   "raw_address": "625 Woodmona ST, Berkeley CA",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": "625 Woodmont Ave",
+   "city_apn": "063 311006101",
+   "candidate_basis": "similar street name 'woodmont'",
+   "reason": "spelling_or_typo",
+   "note": "Woodmona -> Woodmont"
+  },
+  {
+   "raw_address": "2129 E ROOSEVELT AVE , BERKELEY, CA 94703",
+   "events": 3,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "2129 Roosevelt Ave",
+   "city_apn": "056 201202500",
+   "candidate_basis": "similar street name 'roosevelt'",
+   "reason": "same_address_different_form",
+   "note": "E Roosevelt -> Roosevelt"
+  },
+  {
+   "raw_address": "2129 FOURTH ST, Berkeley CA 94710",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2129 4th St absent, only nearby numbers"
+  },
+  {
+   "raw_address": "2129 SHATTUCK AVE, Berkeley CA",
+   "events": 4,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2129 Shattuck Ave absent, only nearby numbers"
+  },
+  {
+   "raw_address": "2129 SHATTUCK Ave",
+   "events": 60,
+   "sources": [
+    "accela_capdetail",
+    "cpra_permit_feed"
+   ],
+   "city_address": "2119 Center St",
+   "city_apn": "057-2032-005-03",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "city address for same parcel"
+  },
+  {
+   "raw_address": "2129 SHATTUCK Ave, BERKELEY CA 94704",
+   "events": 43,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2129 Shattuck Ave absent, no parcel address given"
+  },
+  {
+   "raw_address": "1401 ACTON Cres",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "1401 Acton Crescent",
+   "city_apn": "056 199706900",
+   "candidate_basis": "similar street name 'acton crescent'",
+   "reason": "same_address_different_form",
+   "note": "1401 Acton Cres = 1401 Acton Crescent"
+  },
+  {
+   "raw_address": "1401 ACTON Cres, BERKELEY CA 94702",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": "1401 Acton Crescent",
+   "city_apn": "056 199706900",
+   "candidate_basis": "similar street name 'acton crescent'",
+   "reason": "same_address_different_form",
+   "note": "1401 Acton Cres = 1401 Acton Crescent"
+  },
+  {
+   "raw_address": "1401 Eastshore",
+   "events": 1,
+   "sources": [
+    "cpra_planning_log"
+   ],
+   "city_address": "1401 Eastshore Hwy",
+   "city_apn": "059 234100400",
+   "candidate_basis": "similar street name 'eastshore hwy'",
+   "reason": "same_address_different_form",
+   "note": "1401 Eastshore = 1401 Eastshore Hwy"
+  },
+  {
+   "raw_address": "1401 FOURTH St, B, BERKELEY CA 94710",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1401 4th St not in candidate list"
+  },
+  {
+   "raw_address": "1402 ACTON CRES BERKELEY CA 94702",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1402 Acton Crescent",
+   "city_apn": "056 199704200",
+   "candidate_basis": "similar street name 'acton crescent'",
+   "reason": "same_address_different_form",
+   "note": "1402 Acton Cres = 1402 Acton Crescent"
+  },
+  {
+   "raw_address": "3108 E HARPER ST , BERKELEY, CA 94703",
+   "events": 15,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "3108 Harper St",
+   "city_apn": "052 154900700",
+   "candidate_basis": "similar street name 'harper'",
+   "reason": "same_address_different_form",
+   "note": "3108 Harper St matches base address"
+  },
+  {
+   "raw_address": "3108 SACRAMENTO ST BERKELEY CA 94702",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "house number not found on Sacramento St"
+  },
+  {
+   "raw_address": "3113 SHATTUCK AVE #4, BERKELEY, CA 94705",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "3111 Shattuck Ave 4",
+   "city_apn": "052 155503500",
+   "candidate_basis": "same street, nearby number",
+   "reason": "renumbered_or_replatted",
+   "note": "3113->3111 Shattuck Ave, unit 4 matches"
+  },
+  {
+   "raw_address": "3113 SHATTUCK AVE 2 BERKELEY CA 94705 ",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "3111 Shattuck Ave 2",
+   "city_apn": "052 155503500",
+   "candidate_basis": "same street, nearby number",
+   "reason": "renumbered_or_replatted",
+   "note": "3113->3111 Shattuck Ave, unit 2 matches"
+  },
+  {
+   "raw_address": "3113 SHATTUCK AVE 3 BERKELEY CA 94705 ",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "3111 Shattuck Ave 3",
+   "city_apn": "052 155503500",
+   "candidate_basis": "same street, nearby number",
+   "reason": "renumbered_or_replatted",
+   "note": "3113->3111 Shattuck Ave, unit 3 matches"
+  },
+  {
+   "raw_address": "30 THE BRIDGE Rd",
+   "events": 22,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": "30 Bridge Rd",
+   "city_apn": "064-4227-006-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "same_address_different_form",
+   "note": "'The Bridge Rd' matches 'Bridge Rd' for same parcel"
+  },
+  {
+   "raw_address": "30 THE BRIDGE Rd, BERKELEY CA 94705",
+   "events": 8,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "same_address_different_form",
+   "note": "Same as A440's '30 Bridge Rd', formatting variant"
+  },
+  {
+   "raw_address": "3003 HARPER ST BERKELEY CA 94703",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "3003 Harper St not among listed numbers (3000,3002,3005,3008)"
+  },
+  {
+   "raw_address": "3006 HARPER St",
+   "events": 3,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": "3002 Harper St",
+   "city_apn": "053-1602-003-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for this parcel is 3002 Harper St, not 3006"
+  },
+  {
+   "raw_address": "3006 HARPER St, BERKELEY CA 94703",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "3006 Harper St not an existing address; true parcel address (3002) not among candidates here"
+  },
+  {
+   "raw_address": "2645 REGENT ST, BERKELEY, CA 94704",
+   "events": 1,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "2639 Regent St",
+   "city_apn": "055-1841-021-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City's address for same parcel"
+  },
+  {
+   "raw_address": "2660 BANCROFT Way",
+   "events": 3,
+   "sources": [
+    "accela_capdetail"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no matching candidate"
+  },
+  {
+   "raw_address": "2660 BANCROFT Way, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no matching candidate"
+  },
+  {
+   "raw_address": "2660 BANCROFT Way, BERKELEY CA United States",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no matching candidate"
+  },
+  {
+   "raw_address": "2700 EIGHTH St",
+   "events": 3,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "no matching candidate"
+  },
+  {
+   "raw_address": "2340 MCGEE AVE BERKELEY CA 94703",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2340 McGee missing from list"
+  },
+  {
+   "raw_address": "2341 OREGON ST, BERKELEY, CA 94705",
+   "events": 8,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "2339 Oregon St A",
+   "city_apn": "053 168900602",
+   "candidate_basis": "same street, nearby number",
+   "reason": "renumbered_or_replatted",
+   "note": "2341 Oregon is new ADU address for 2339 Oregon unit A"
+  },
+  {
+   "raw_address": "2341 OREGON St",
+   "events": 5,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": "2339 Oregon St A",
+   "city_apn": "053 168900602",
+   "candidate_basis": "same street, nearby number",
+   "reason": "renumbered_or_replatted",
+   "note": "explicitly described as renumbered ADU address #A"
+  },
+  {
+   "raw_address": "2341 OREGON St, A, BERKELEY CA 94705",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": "2339 Oregon St A",
+   "city_apn": "053 168900602",
+   "candidate_basis": "same street, nearby number",
+   "reason": "renumbered_or_replatted",
+   "note": "explicit unit A matches new ADU address"
+  },
+  {
+   "raw_address": "2597 TELEGRAPH AVE , BERKELEY, CA 94704",
+   "events": 8,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "2597 Telegraph missing from list"
+  },
+  {
+   "raw_address": "1693 OXFORD ST, BERKELEY, CA 94709",
+   "events": 1,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": "1685 Oxford St",
+   "city_apn": "058-2183-015-00",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "1693 Oxford parcel matches APN of 1685 Oxford"
+  },
+  {
+   "raw_address": "1814 8TH ST BERKELEY CA 94710",
+   "events": 4,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1814 8th St absent from list"
+  },
+  {
+   "raw_address": "1814 EIGHTH St, BERKELEY CA 94710",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1814 8th St absent from list"
+  },
+  {
+   "raw_address": "1814 EUCLID AVE, BERKELEY CA 94709 United States",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1814 Euclid Ave absent from list"
+  },
+  {
+   "raw_address": "1814 EUCLID Ave",
+   "events": 2,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1814 Euclid Ave absent from list"
+  },
+  {
+   "raw_address": "0 ADELINE ST",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "0 Adeline St is a placeholder, not a real listed address"
+  },
+  {
+   "raw_address": "0 ADELINE St",
+   "events": 2,
+   "sources": [
+    "accela_capdetail",
+    "city_business_licenses"
+   ],
+   "city_address": "3100 Adeline St",
+   "city_apn": "053-1597-039-04",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "city's address for same parcel is 3100 Adeline St"
+  },
+  {
+   "raw_address": "0 ADELINE St, BERKELEY CA 94703",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "placeholder house number 0, no match"
+  },
+  {
+   "raw_address": "0 BANCROFT Way, BERKELEY CA 94704",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": "2124 Bancroft Way",
+   "city_apn": "055 189300701",
+   "candidate_basis": "stated in the record text: '2124 Bancroft Way'",
+   "reason": "not_in_city_list",
+   "note": "record text names actual address; candidates are unrelated street"
+  },
+  {
+   "raw_address": "0 BERRYMAN St, BERKELEY CA 94709",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "placeholder house number 0, no candidates"
+  },
+  {
+   "raw_address": "1023 COLUSA AVE BERKELEY CA 94707",
+   "events": 2,
+   "sources": [
+    "rent_board_registry"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1023 Colusa not in list; nearby odds are 1021/1025"
+  },
+  {
+   "raw_address": "1024 GRIZZLY PEAK Blvd",
+   "events": 3,
+   "sources": [
+    "cpra_permit_feed"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1024 Grizzly Peak not in list; nearby evens differ"
+  },
+  {
+   "raw_address": "1024 GRIZZLY PEAK Blvd, BERKELEY CA 94708",
+   "events": 1,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "1024 Grizzly Peak not in list; nearby evens differ"
+  },
+  {
+   "raw_address": "1025 ASHBY Ave",
+   "events": 1,
+   "sources": [
+    "city_business_licenses"
+   ],
+   "city_address": "2954 San Pablo Ave",
+   "city_apn": "053-1652-001-05",
+   "candidate_basis": "the City's address for the record's parcel",
+   "reason": "renumbered_or_replatted",
+   "note": "City address for same parcel is 2954 San Pablo Ave"
+  },
+  {
+   "raw_address": "1025 ASHBY Ave, BERKELEY CA 94702",
+   "events": 18,
+   "sources": [
+    "accela_list_dump"
+   ],
+   "city_address": null,
+   "city_apn": null,
+   "candidate_basis": null,
+   "reason": "not_in_city_list",
+   "note": "No parcel-based match given; 1025 Ashby absent from list"
+  }
+ ]
+}

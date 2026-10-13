@@ -1,7 +1,7 @@
 {
-  "run": "2026-10-13T10:52:43",
+  "run": "2026-10-13T11:34:28",
   "script": "scripts/build_address_block_lookup.py",
-  "head_commit": "089c3f0a",
+  "head_commit": "6e50befd",
   "inputs": {
     "data/reference/berkeley_addresses_with_fields.csv": "49e4c154e74040a734ceb47ad323bd57d0ef84855d4011bee20145d026c88a31",
     "data/raw/berkeley_gis/city_blocks.geojson": "8c3242c303db2fa77bf10d0c656d2163338b64ec662f9adcbff8fd8c330652e6",
@@ -17,7 +17,7 @@
     "label_min_m": 25.0,
     "seg_same_street_m": 60.0
   },
-  "address_canon_sha256": "21c5a480b7b415a7149301b212b790a0307680a8b6dbcfc754c172deb12123dd",
+  "address_canon_sha256": "276c8eafc1b33b45b2f4a7581e2bdc3f8f38ab226fbac1640c9ca6819f3ffe17",
   "gates": {
     "address_points": {
       "input": 62226,

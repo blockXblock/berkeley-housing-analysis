@@ -642,6 +642,8 @@ graph LR
   PF --> SHAPE[pipeline shape<br/>Part 2d]
   TEST --> GATE[baseline gate]
   SHAPE --> GATE
+  PF --> TIMING[decision timing<br/>Part 2h]
+  TIMING --> GATE
 ```
 """)
 code(r"""
@@ -914,6 +916,76 @@ hurdle. **Elsewhere the shortfall remains** — something other than rent explai
 **decision year** — a mismatch that **favors** penciling, so the near-campus result is a best case. Some figures are
 specials, pre-leasing (Pique: fall 2027), or rented units' last asks; per-bed basis is inferred for two buildings. Eight
 buildings have no rents at all and keep the pool.
+""")
+
+md(r"""
+## Part 2h — Decision timing: did rates and costs break good decisions, or did the projects never work?
+
+📝 **Plan.** John's question (2026-10-12): did rising interest rates and building costs make earlier good decisions
+fail, or were projects proposed under faulty assumptions? Price every market project **in its approval year**, then
+move to today in two steps — **costs** first (approval-year exit cap held), then **rates** (the exit cap) — so the
+change splits into the two causes. Group by outcome and approval era, and set each waiting group against the projects
+**approved in the same years that went ahead**. Rent is held at today's level throughout, so only costs and rates move.
+
+Two checks on the recent waiting projects: **(1)** most are near campus but priced at apartment-pool rents; re-price
+them at the **median per-bed uplift** the leasing-site buildings of Part 2f show over the pool. **(2)** the yield on
+cost the go-aheads **accepted** in each era, and the exit cap that implies at the model's 125 bp spread — if builders
+kept building at a yield the model calls too low, the hurdle, not the project, is in question.
+""")
+code(r"""
+DT = pp.decision_timing(res)
+dt = pd.DataFrame(DT['rows'])
+display(dt)
+display(pd.DataFrame(DT['yield_on_cost']))
+print(f"per-bed uplift over pool rent, {len(DT['uplifts'])} near-campus leasing-site buildings: "
+      f"{[round(x, 2) for x in DT['uplifts']]}; median x{DT['uplift']:.2f}")
+print(f"near-campus waiting projects ({DT['near_campus_waiting']}): median gap at approval "
+      f"{DT['near_campus_waiting_gap_pool_bps']} bps at pool rent -> {DT['near_campus_waiting_gap_uplift_bps']} bps at the "
+      f"median uplift; meeting the hurdle today at that uplift: {len(DT['near_campus_waiting_meet_today_uplift'])} projects, "
+      f"{sum(u for _, u in DT['near_campus_waiting_meet_today_uplift'])} units")
+row = lambda o, e: dt[(dt.outcome == o) & (dt.approved == e)].iloc[0]
+for o, e, nm in (('waiting', '2017-21', 'waiting_early'), ('went ahead', '2017-21', 'ahead_early'),
+                 ('waiting', '2023+', 'waiting_recent'), ('went ahead', '2023+', 'ahead_recent')):
+    r_ = row(o, e)
+    FIG[f'{nm}_n'], FIG[f'{nm}_units'] = int(r_['projects']), int(r_['units'])
+    FIG[f'{nm}_gap_at_approval_bps'] = int(r_['at_approval (bps)'])
+FIG['waiting_early_costs_bps'] = int(row('waiting', '2017-21')['costs (bps)'])
+FIG['waiting_early_rates_bps'] = int(row('waiting', '2017-21')['rates (bps)'])
+FIG['implied_exit_cap_2023plus_bps'] = round(DT['yield_on_cost'][-1]['implied exit cap %'] * 100)
+FIG['near_campus_waiting_gap_uplift_bps'] = DT['near_campus_waiting_gap_uplift_bps']
+try:
+    import plotly.graph_objects as go
+    w = dt[dt.outcome == 'waiting']
+    fig = go.Figure()
+    for c, col in (('at_approval (bps)', '#4C78A8'), ('costs (bps)', '#E45756'), ('rates (bps)', '#F58518'),
+                   ('today (bps)', '#54A24B')):
+        fig.add_bar(x=[f"{e}<br>{n} projects, {u:,}u" for e, n, u in zip(w.approved, w.projects, w.units)],
+                    y=w[c], name=c.replace(' (bps)', '').replace('_', ' '), marker_color=col)
+    fig.add_hline(y=0, line_dash='dot', annotation_text='hurdle (exit cap + 125 bps)')
+    fig.update_layout(title='Waiting projects: gap to hurdle at approval, what costs and rates took since, today (median bps)',
+                      barmode='group', template='plotly_white', height=440, yaxis_title='bps')
+    fig.show()
+except ImportError:
+    pass
+""")
+md(r"""
+📝 **Found.** **Both — and the approval year decides which.**
+- **Approved 2017–21: good decisions that went bad.** The waiting projects penciled at approval at least as well as
+  the projects approved in the same years that went ahead; since then costs took about 150 bps and the exit cap about
+  as much again. These owners waited and the window closed. It is a small share of the backlog (see `units`).
+- **Approved 2023+: most never penciled at approval** under this model — well below the projects of the same years
+  that did go ahead, and the abandoned projects of those years look the same. Most of the backlog sits here.
+- **But "faulty assumptions" is not yet shown.** Near campus, at the per-bed uplift the leasing-site buildings show,
+  the waiting median rises to about the hurdle. And the go-aheads' yield on cost **held roughly level across every era**
+  — for 2023+ approvals it implies an exit cap well below the model's 6.0%. Either Berkeley trades tighter than CBRE's
+  Oakland survey, or the builders who went ahead are **long-term holders** who accept a lower return. That is also the
+  best candidate for Part 2f's unexplained "elsewhere" shortfall. Developer attribution is the test.
+
+⚠️ **What this could mislead about.** Rent is held at **today's** level in every year, so "at approval" is costs and
+rates of that year against current rents — the gap at approval omits rent change. The uplift is one median over 11
+buildings whose uplifts range widely; it is a sensitivity, not a reading of each waiting project's own rents. The
+grouped bars show **medians of each component**, which need not sum to the median of the totals. The 2022 groups have
+two or three projects each.
 """)
 
 md(r"""

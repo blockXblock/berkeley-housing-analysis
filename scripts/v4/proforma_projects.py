@@ -324,8 +324,11 @@ def run(v4=V4, assessor=ASSESSOR, commercial_evidence=COMMERCIAL_EVIDENCE, leasi
         p["verdict_decision"] = verdict(p, p["decision_year"], k)
         p["gap_today"] = gap(p, TODAY, k)
         p["verdict_today"] = verdict(p, TODAY, k)
+    pool_market = []
+    if leasing:                                    # the same projects at pool / registry rents, for the per-bed uplift
+        pool_market = [p for p in projects(con, asr, rents, commercial)[0] if p["kind"] == "market"]
     return dict(projects=ps, market=mk, fit=fit, test=test, factor=k, rents=rents, commercial=commercial,
-                derived=derived, v4_path=str(v4))
+                derived=derived, v4_path=str(v4), pool_market=pool_market)
 
 
 def figures(res):
@@ -352,6 +355,56 @@ def figures(res):
         "waiting_meets_today": sum(1 for p in waiting if p["gap_today"] >= 0),
         "waiting_median_gap_today_bps": round(st.median(p["gap_today"] for p in waiting) * 1e4),
     }
+
+
+# ---------------------------------------------------------------- DECISION TIMING (John, 2026-10-12)
+ERAS = (("2017-21", 2017, 2021), ("2022", 2022, 2022), ("2023+", 2023, 2026))
+
+
+def timing_parts(p, factor):
+    """the gap at approval -> today, split: costs moved (approval-year cap held), then rates moved. Rent held."""
+    y = p["decision_year"]
+    g0, g1 = gap(p, y, factor), gap(p, TODAY, factor)
+    cost_only = g1 + (EXIT_CAP[TODAY] - EXIT_CAP[y])
+    return dict(at_approval=g0, costs=cost_only - g0, rates=g1 - cost_only, today=g1)
+
+
+def decision_timing(res, uplift_quantile=0.5):
+    """by outcome x approval era: median gap at approval, the cost and rate moves since, today; the yield on cost the
+    go-aheads accepted (and the exit cap it implies); near-campus waiters re-priced at the per-bed uplift over pool rent
+    that the leasing-site buildings show (needs `res` run with leasing evidence)."""
+    k, mk = res["factor"], res["market"]
+    rows = []
+    for o in ("went ahead", "waiting", "abandoned"):
+        for e, lo, hi in ERAS:
+            s = [p for p in mk if p["outcome"] == o and lo <= p["decision_year"] <= hi]
+            if not s:
+                continue
+            P = [timing_parts(p, k) for p in s]
+            rows.append({"outcome": o, "approved": e, "projects": len(s), "units": sum(p["units"] for p in s),
+                         "near campus": sum(bool(p["near_campus"]) for p in s),
+                         **{f"{c} (bps)": round(st.median(x[c] for x in P) * 1e4) for c in ("at_approval", "costs", "rates", "today")},
+                         "at or above hurdle at approval": sum(x["at_approval"] >= 0 for x in P)})
+    yoc = []
+    for e, lo, hi in ERAS:
+        A = [p for p in mk if p["outcome"] == "went ahead" and lo <= p["decision_year"] <= hi]
+        if A:
+            y_ = st.median(gap(p, p["decision_year"], k) + EXIT_CAP[p["decision_year"]] + SPREAD for p in A)
+            yoc.append({"approved": e, "went ahead": len(A), "median yield on cost %": round(y_ * 100, 2),
+                        "implied exit cap %": round((y_ - SPREAD) * 100, 2),
+                        "model exit cap % (range)": f"{min(EXIT_CAP[y] for y in range(lo, hi + 1))*100:.2f}-"
+                                                    f"{max(EXIT_CAP[y] for y in range(lo, hi + 1))*100:.2f}"})
+    pool = {p["key"]: p for p in res.get("pool_market", [])}
+    up = sorted(p["gross_rent"] / pool[p["key"]]["gross_rent"] for p in mk
+                if p["rent_basis"].startswith("leasing") and p["near_campus"] and p["key"] in pool)
+    nc = [p for p in mk if p["outcome"] == "waiting" and p["near_campus"]]
+    uplift = up[int(uplift_quantile * (len(up) - 1))] if up else None
+    rep = [dict(p, gross_rent=p["gross_rent"] * uplift) for p in nc] if uplift else []
+    return dict(rows=rows, yield_on_cost=yoc, uplifts=up, uplift=uplift,
+                near_campus_waiting=len(nc),
+                near_campus_waiting_gap_pool_bps=round(st.median(gap(p, p["decision_year"], k) for p in nc) * 1e4),
+                near_campus_waiting_gap_uplift_bps=round(st.median(gap(p, p["decision_year"], k) for p in rep) * 1e4) if rep else None,
+                near_campus_waiting_meet_today_uplift=[(p["name"] or p["key"], p["units"]) for p in rep if gap(p, TODAY, k) >= 0])
 
 
 # ---------------------------------------------------------------- THE PIPELINE'S SHAPE (John's questions, 2026-10-08)

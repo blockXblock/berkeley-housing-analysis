@@ -5,6 +5,18 @@
 
 ---
 
+## 2026-10-13 — SWAPPED: live v4 = the address-canon build (John relocked)
+
+Live `databases/berkeley_housing_v4.db` = `scratch/2026-10-13_rebuild/chain_head` (fresh chain rebuild from committed
+`a482957b`): sha256 **1591bcbd2d3a38ae…**, mode r--r--r--, integrity ok. 1,551 projects (was 1,554), 1,182 structures
+(identical), 1,720 project_parcels (+148 condo unit parcels), H015 1817 Carleton present (3 units reported, completed).
+Snapshot of the prior live: `databases/keep_snapshot_2026-10-13_pre-address-canon.db` (sha 6110324d…, byte-identical
+to the old live). **Next:** rerun gates keyed to the v4 sha (JN-Feasibility baseline append still awaits John), then
+regenerate the Explorer export / site_numbers / Datasette from the new v4; then re-point JN-M `_street` and
+`middle_housing_tracker.norm_addr` at the canon.
+
+---
+
 ## 2026-10-13 — v2 cleanup: last v2 readers retired (`07491c49`); one public file left for John
 
 **Migration state:** every publisher reads v4 (Explorer, APR, Datasette + public mirror, pipeline-state, players, tours,

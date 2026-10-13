@@ -23,6 +23,7 @@ import difflib
 import json
 import sqlite3
 import sys
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -135,10 +136,16 @@ def main() -> int:
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--sonnet", choices=["submit", "status", "collect"])
     ap.add_argument("--pack", type=int, default=15)
+    ap.add_argument("--retry", help="an evidence file: re-ask only its 'unanswered' addresses (smaller packs, more "
+                                    "tokens), written to a lettered same-day file")
     a = ap.parse_args()
-    state = OUT / "sonnet_batch_state.json"
+    tag = "_retry" if a.retry else ""
+    state = OUT / f"sonnet_batch_state{tag}.json"
     items = unmatched()
     keys = sorted(items)
+    if a.retry:
+        keys = sorted(set(json.load(open(a.retry))["unanswered"]) & set(items))
+        a.pack = min(a.pack, 5)
     ids = {k: f"A{i}" for i, k in enumerate(keys)}
     groups = [keys[i:i + a.pack] for i in range(0, len(keys), a.pack)]
     print(f"{len(keys)} unmatched addresses ({sum(v['events'] for v in items.values()):,} events); "
@@ -162,8 +169,8 @@ def main() -> int:
         return 0
     if a.sonnet == "submit":
         OUT.mkdir(parents=True, exist_ok=True)
-        (OUT / "groups.json").write_text(json.dumps({"groups": groups, "ids": ids}))
-        mr.batch_submit([{"custom_id": f"g{i}", "params": {"model": mr.BATCH_MODEL, "max_tokens": 120 * len(g) + 600,
+        (OUT / f"groups{tag}.json").write_text(json.dumps({"groups": groups, "ids": ids}))
+        mr.batch_submit([{"custom_id": f"g{i}", "params": {"model": mr.BATCH_MODEL, "max_tokens": (900 if a.retry else 120) * len(g) + 600,
                           "messages": [{"role": "user", "content": prompt(g)}]}} for i, g in enumerate(groups)], state)
         return 0
     if a.sonnet == "status":
@@ -171,7 +178,7 @@ def main() -> int:
         return 0
     if a.sonnet == "collect":
         by_key, _ = city_list()
-        saved = json.loads((OUT / "groups.json").read_text())
+        saved = json.loads((OUT / f"groups{tag}.json").read_text())
         groups, ids = saved["groups"], saved["ids"]
         rows, unanswered, rejected = [], [], 0
         for cid, parsed, raw, _ in mr.batch_results(state):
@@ -204,7 +211,8 @@ def main() -> int:
         mr.write_evidence(rows, "address_resolution", DEFINITION,
                           extra={"model": mr.BATCH_MODEL, "canon": "housing_rules.address 2026-10-13",
                                  "rule": "a pick is kept only if it is one of the City-list candidates offered",
-                                 "unanswered": unanswered})
+                                 "unanswered": unanswered, **({"retry_of": a.retry} if a.retry else {})},
+                          date=(time.strftime("%Y-%m-%d") + "b") if a.retry else None)
         return 0
     return 0
 

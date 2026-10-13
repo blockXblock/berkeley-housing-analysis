@@ -40,6 +40,20 @@ situs); middle-housing join unchanged. NEEDS John + a scratch chain rebuild diff
   On commit (44's requirement): rerun `scripts/build_address_block_lookup.py` IN THE SAME COMMIT (refreshes the SHA-checked
   copy docs/data/blocks/address.py + the lookup's street keys); its gates must pass; diff address_block_lookup.csv on
   (house_number, street, block_id): expect street-key changes only, no block changes.
+**John APPROVED the canon change (2026-10-13). In the WORKING TREE, uncommitted:** `housing_rules/address.py` (new
+normalize_address) + `test_address.py` (42 cases); all housing_rules tests pass ('1353 Berkeley' stays unusable).
+**Scratch rebuild** `scratch/2026-10-13_rebuild/chain` (sha 8199fc9b): all JN gates PASS (structural gate: events and
+counted completions identical to live). Diff vs live (`diff_builds.py`): address keys 31,906 -> 30,052; structures
+identical (37 address texts); projects 1,554 -> 1,550: ZP2015-0018 (2597 Telegraph, 10u) and ZP2020-0075 (2980
+College, 4u) now JOIN their buildings (completed); DRCP2017-0005 attaches to ZP2017-0039 (same 10 townhouses);
+1817 Carleton A/B/C (ZCBP2015-1530/31/32, three houses on three parcels, B2015-04179/81/82) now group under
+ZP2014-0058 (filed 2014) and drop by P1b -- live already lost 1530 and showed 31/32 as in_review: a P1b gap the
+canon exposes -> needs a project ruling (John). project_parcels +147 = condo unit parcels (2747 San Pablo 39,
+Shattuck Lofts 26, University Lofts 29), none lost. Units 17,918 -> 17,902 (double counts removed); completed 902 = 902.
+**Model read of the 2,224 still-unmatched addresses SUBMITTED** (`scripts/llm_address_resolve.py`, batch
+msgbatch_01Gry23TKF3njstgeSo8Gbj3): choice from City-list candidates or a stated address verbatim in the record AND in
+the list; evidence -> data/derived/address_resolution_evidence_<date>.json.
+**Multi-city address design:** `notes/2026-10-13_canonical_address_system_multi_city.md`.
 
 ---
 

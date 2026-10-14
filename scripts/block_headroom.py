@@ -10,7 +10,7 @@ allow on top of what's there," which is the ceiling any production estimate sits
 
 FOUNDATION (established, not invented here):
   • development_potential (berkeley.db, 41 zones): per-zone base_units_5000sqft, max_stories,
-    middle_housing_eligible. Encodes the Middle Housing Ordinance (7,978-N.S., eff. 2026-11-01):
+    middle_housing_eligible. Encodes the Middle Housing Ordinance (7,978-N.S., eff. 2025-11-01):
     up to 8 units by-right on a 5,000 sf residential lot (3 stories/35 ft), ALL flatland residential
     EXCEPT high fire-hazard hills (the H-zones carry middle_housing_eligible=0 in the table).
   • parcel_zones (29,024 parcels): apn_norm → zone_class.
@@ -46,7 +46,7 @@ DB = "databases/berkeley.db"
 NEIGH = "data/reference/berkeley_neighborhoods.geojson"
 
 # --- STATED ASSUMPTIONS (the knobs) ------------------------------------------------------------
-# Middle Housing Ordinance 7,978-N.S. (eff. 2026-11-01) is a FLAT PER-LOT CAP, verified 2026-08-27
+# Middle Housing Ordinance 7,978-N.S. (eff. 2025-11-01) is a FLAT PER-LOT CAP, verified 2026-08-27
 # against the ordinance + city/advocacy explainers: up to 8 units by-right on a residential lot, up to
 # 12 with the density bonus, plus ADUs (uncounted) — NOT a lot-size-scaling density. So per-lot cap is
 # a CONSTANT, not base×lot/5000 (the linear reading fabricated 1,300 units on an 18-ac parcel).

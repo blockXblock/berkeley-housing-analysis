@@ -42,7 +42,7 @@ NEIGHBORHOODS = "data/reference/berkeley_neighborhoods.geojson"
 BID_ELMWOOD = "data/reference/berkeley_bid_elmwood.geojson"
 # city-documented corridor boundary latitudes (verified from parcel situs): Dwight 37.866, Alcatraz 37.851
 DWIGHT, ALCATRAZ = 37.866, 37.851
-# CURRENT regime = the Middle Housing Ordinance (7,978-N.S., effective 2026-11-01 [Nov 1 2025]): up to
+# CURRENT regime = the Middle Housing Ordinance (7,978-N.S., effective 2025-11-01): up to
 # 8 units by-right on a typical 5,000 sf residential lot (3 stories / 35 ft), applies to ALL primarily-
 # residential Berkeley EXCEPT high fire-hazard hill areas. This SUPERSEDES the old R-1/R-2/R-2A/R-3/R-4
 # du/ac caps (8.7/17/26/…), which are obsolete — do NOT benchmark against them.

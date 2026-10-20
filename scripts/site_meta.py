@@ -30,6 +30,12 @@ DESC = {
    "Berkeley's housing pipeline — application, entitlement, building permit, move-in day — "
    "independently reconstructed from the city's own records. See if what you believe about "
    "new housing matches what Berkeley is actually building."),
+ "berkeley.html": ("Berkeley",
+   "The city behind the housing numbers: who we are and what we do, the 30-year infrastructure vision, and maps of "
+   "who owns Berkeley, what was built when, and what zoning allows."),
+ "learn.html": ("Learn",
+   "Learn to check, rebuild and report on Berkeley's housing record: the housing data science course, the data "
+   "journalism toolkit, and how we count."),
  "explorer.html": ("Pipeline Explorer",
    "Every tracked Berkeley housing project: dates, units, affordability, assessed value and "
    "RHNA cycle, searchable and sortable."),

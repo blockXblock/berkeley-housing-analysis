@@ -79,6 +79,7 @@ Edit the relevant `.html`/`.js` directly. Homepage = `index.html`; Explorer UI =
 .venv/bin/python scripts/deploy_gate.py               # then promote: cp the working file to docs/explorer_data.js
 .venv/bin/python scripts/site_numbers.py              # keep hand-written page counts in step
 .venv/bin/python scripts/viz/pipeline_animation.py   # the home page's pipeline animation (refuses a frame != Explorer)
+.venv/bin/python scripts/site_nav.py                   # the Housing/Berkeley/Learn menu; re-run after ANY page generator
 ```
 The v1 and v2 exporters are sequestered in `scripts/superseded/`; never run them. Verify the diff looks sane,
 then deploy (E: `bash scripts/deploy.sh` stages main; John pushes).
@@ -172,3 +173,14 @@ the video list to a manifest (#1), then unify the exporter (#2), then templatize
 - **Data refresh:** `export_explorer_data_v2.py` → copy to `explorer_data.js` → deploy (C+E).
 - **Deploy = `main` only, push is publishing, get go-ahead, then Cloudflare purge.**
 - **Never** run the v1 exporter; **never** put internal docs in `docs/`; **never** merge `dev`→`main`.
+
+
+## Site structure (2026-10-21 redesign, John)
+Three doors in a menu on every page (`scripts/site_nav.py`): **Housing** = `index.html` (flyover + generated two-number
+headline, then tabs ▶ Play the pipeline · 🎥 Fly through · 🗺 Map · 🕸 Who's building · 📊 Data & methods; Mayor report;
+closing cards to the hubs), **Berkeley** = `berkeley.html` (Snapshot, Berkeley 2050, the maps), **Learn** = `learn.html`
+(curriculum, reporters, methodology, Datasette, archive). index.html is hand-structured around GENERATED blocks:
+site_meta, pipeline_headline + pipeline_animation (scripts/viz/pipeline_animation.py), site_numbers, the legend
+(scripts/tours/update_legend.py), the flyover blocks (scripts/tours/publish_video.py anchors on their exact markup inside
+`.nx-fly`). The full-screen maps and the tours page have no menu on purpose. One-time composer:
+scratch/2026-10-21_site_next/make_live.py.

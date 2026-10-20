@@ -5,7 +5,7 @@
 
 ---
 
-## 2026-10-21 — Site redesign made LIVE on dev (`db074c6a`); deploy staged main `8bf041d6` (John pushes)
+## 2026-10-21 — Site redesign made LIVE on dev (`db074c6a`); DEPLOYED main `8bf041d6`
 
 index.html is now the redesign (composer scratch/2026-10-21_site_next/make_live.py, one-time; old page saved as
 scratch/2026-10-21_site_next/index.before_redesign.html). Generated blocks: pipeline_headline + pipeline_animation

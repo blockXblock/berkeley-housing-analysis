@@ -50,7 +50,10 @@ def load_explorer():
 
 def figures(d):
     P = [p for p in d['projects'] if not p.get('is_uc_project')]
-    todo = [p for p in P if p.get('status') != 'Completed']
+    # "not yet built" = the export's in_pipeline flag, the ONE definition (withdrawn, denied and void projects have left
+    # the pipeline; until 2026-10-20 this read status != 'Completed' and counted them: 13,456 instead of 11,458)
+    assert all('in_pipeline' in p for p in P), 'Explorer data predates the in_pipeline flag: re-export first'
+    todo = [p for p in P if p['in_pipeline']]
     f = dict(projects=len(P), not_built=sum(int(p.get('units') or 0) for p in todo))
     # completions: v4, by the year the permit was finaled
     v4 = SM.ro(SM.LIVE)

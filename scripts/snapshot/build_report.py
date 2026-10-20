@@ -9,6 +9,22 @@ Run: .venv/bin/python scripts/snapshot/derive.py && .venv/bin/python scripts/sna
 import csv, html, json, os, re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+
+def explorer_pipeline():
+    """Units in the pipeline (not yet built, still alive; UC excluded) from the SERVED Explorer data's in_pipeline flag,
+    the one definition the home page and the Explorer read too. It was typed in by hand (11,222) until 2026-10-20."""
+    import datetime
+    t = open(os.path.join(ROOT, 'docs', 'explorer_data.js')).read()
+    d = json.loads(t[t.index('{'):t.rindex('}') + 1])
+    P = [p for p in d['projects'] if not p.get('is_uc_project')]
+    assert all('in_pipeline' in p for p in P), 'Explorer data predates the in_pipeline flag: re-export first'
+    day = datetime.date.fromisoformat(re.search(r'Generated:\s*(\d{4}-\d{2}-\d{2})', t).group(1))
+    return {'units': sum(int(p.get('units') or 0) for p in P if p['in_pipeline']),
+            'as_of': f"{day.strftime('%B')} {day.day}, {day.year}"}
+
+
+PIPE = explorer_pipeline()
 DATA = os.path.join(ROOT, 'docs', 'data', 'snapshot')
 PAGE = os.path.join(ROOT, 'docs', 'berkeley-snapshot-2026-10.html')
 F = json.load(open(os.path.join(DATA, 'facts.json')))
@@ -294,11 +310,11 @@ def s_findings():
              f"{a('#people', 'People')} · {a('#tide', 'Daily tide')} · data: {dl('lodes_2023_inflow_by_home_place.csv')}"),
         item('Room for many more: plans point to nearly 30,000 new residents',
              f"Berkeley's population has held near {rnd(D['population'])} since 2020. The State requires the City to plan for 8,934 new "
-             f"homes by 2031; BerkeleyBuild's pipeline counts 11,222 homes approved or proposed but not yet built; and UC Berkeley is "
+             f"homes by 2031; BerkeleyBuild's pipeline counts {PIPE['units']:,} homes approved or proposed but not yet built; and UC Berkeley is "
              f"building or planning three dormitories with about 4,700 beds, on top of the about 9,800 student beds in Berkeley today. "
              f"Built out at today's {D['persons_per_household']:.2f} people per home, the pipeline alone would house about "
-             f"{rnd(11222 * D['persons_per_household'])} more people, and with the new dormitories the city would approach "
-             f"{rnd(D['population'] + 11222 * D['persons_per_household'] + 4738)}. Every new resident adds to the daily load on the same "
+             f"{rnd(PIPE['units'] * D['persons_per_household'])} more people, and with the new dormitories the city would approach "
+             f"{rnd(D['population'] + PIPE['units'] * D['persons_per_household'] + 4738)}. Every new resident adds to the daily load on the same "
              f"water mains, sewers, power lines and evacuation routes this report describes.",
              f"{a('#people', 'People')} · {a('#campus', 'The University')} · data: {dl('dof_e5_berkeley_2020_2026.csv')}"),
         item('Most households rent, and most renters are stretched',
@@ -460,18 +476,18 @@ def s_people():
     <h3>How Berkeley will grow if projects are built</h3>
     <p class="note" style="font-size:.95rem">Berkeley's population has been flat since 2020, at about 127,600, after a pandemic dip to
     120,670 in 2021 when the campus emptied. Three plans point higher. The State requires Berkeley to plan for 8,934 new homes from
-    2023 to 2031. BerkeleyBuild's pipeline counts 11,222 homes approved or proposed but not yet built<sup>1</sup>. And student housing
+    2023 to 2031. BerkeleyBuild's pipeline counts {PIPE['units']:,} homes approved or proposed but not yet built<sup>1</sup>. And student housing
     is growing. Berkeley has about 9,800 student beds in university and nonprofit dormitories: about 9,000 run by
     UC Berkeley (about 6,100 on the Southside, about 1,100 on the Northside, 1,000 at Clark Kerr and 772 at Anchor House downtown),
     plus Bowles Hall (188) and International House (about 600)<sup>2</sup>. Two UC buildings under construction add 2,738: Heumann
     House (1,113, fall 2027) and Bancroft-Fulton (1,625, fall 2028). A proposed building at Channing Way and Bowditch Street would
     add up to 2,000 more, for about 14,500 beds in all. If the pipeline were built at today's
     {F['dof']['rows'][-1]['persons_per_household']:.2f} people per home and the three dormitories were filled, Berkeley would gain
-    about {rnd(11222 * F['dof']['rows'][-1]['persons_per_household'])} residents in homes and about 4,700 in dormitories: about
-    {rnd(F['dof']['rows'][-1]['population'] + 11222 * F['dof']['rows'][-1]['persons_per_household'] + 4738)} people in
+    about {rnd(PIPE['units'] * F['dof']['rows'][-1]['persons_per_household'])} residents in homes and about 4,700 in dormitories: about
+    {rnd(F['dof']['rows'][-1]['population'] + PIPE['units'] * F['dof']['rows'][-1]['persons_per_household'] + 4738)} people in
     all. That is a scenario, not a forecast; some approved projects will not be built, and many of UC's new beds will house students
     who now live in Berkeley apartments.</p>
-    <p class="note"><sup>1</sup> Not yet built, excluding UC projects (BerkeleyBuild Pipeline Explorer, September 30, 2026). State
+    <p class="note"><sup>1</sup> Not yet built, excluding UC projects (BerkeleyBuild Pipeline Explorer, {PIPE['as_of']}). State
     target: the City's Annual Progress Report to the State, Table B.<br>
     <sup>2</sup> Beds inside Berkeley only. UC Berkeley 2021 Long Range Development Plan, Draft EIR, Table 5.12-5 (existing housing
     by facility, UC Berkeley 2020): Units 1–3, Beverly Cleary, Wada, Blackwell, Martinez Commons, Channing-Bowditch, Manville,

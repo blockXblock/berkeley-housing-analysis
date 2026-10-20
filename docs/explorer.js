@@ -269,22 +269,25 @@
         return classes[stage] || 'bg-gray-100 text-gray-600';
     }
 
-    // Render pipeline funnel from pipeline_stage data
+    // Render pipeline funnel from each project's stage label (private projects; UC beds are never units)
     function renderPipelineFunnel() {
         const container = document.getElementById('pipelineFunnel');
         if (!container || !DATA || !DATA.projects) return;
 
-        // Aggregate by pipeline_stage using explicit ordering
+        // Aggregate by stage using explicit ordering
         const stageCounts = {};
         const stageUnits = {};
-        DATA.projects.forEach(p => {
-            const stage = p.pipeline_stage || 'Unknown';
+        const privateOnly = DATA.projects.filter(p => !p.is_uc_project);
+        privateOnly.forEach(p => {
+            // the PAGE's stage label (p.status, the export's names, which PIPELINE_STAGES lists); p.pipeline_stage is
+            // v4's raw status key ('in_review'), which matched no label and left this chart empty after the v4 cutover
+            const stage = p.status || 'Unknown';
             stageCounts[stage] = (stageCounts[stage] || 0) + 1;
             stageUnits[stage] = (stageUnits[stage] || 0) + (p.units || 0);
         });
 
         // Get total for percentage calculation
-        const totalUnits = DATA.projects.reduce((sum, p) => sum + (p.units || 0), 0);
+        const totalUnits = privateOnly.reduce((sum, p) => sum + (p.units || 0), 0);
 
         // Filter to stages with data and sort by pipeline order
         const orderedStages = PIPELINE_STAGES.filter(s => stageCounts[s] > 0)
@@ -3614,7 +3617,10 @@
         const UC_EXISTING_BEDS = 9800;  // sourced: students in UC housing today
         const privateProjects = projects.filter(p => !p.is_uc_project);
         const privateProjectCount = privateProjects.length;
-        const privateUnits = privateProjects.reduce((s, p) => s + (p.units || 0), 0);
+        // "in the pipeline" = the export's in_pipeline flag (not yet built, still alive), the same figure as the home page
+        const privateUnits = privateProjects.filter(p => p.in_pipeline).reduce((s, p) => s + (p.units || 0), 0);
+        // every unit that entered and has not left (in the pipeline + completed): the base for the permit/CO comparison
+        const privateLiveUnits = privateProjects.filter(p => !p.left_pipeline).reduce((s, p) => s + (p.units || 0), 0);
         const ucProjectsAll = projects.filter(p => p.is_uc_project);
         const ucProjectCount = ucProjectsAll.length;
         // Beds still to come = UC projects NOT yet complete. A completed one (Anchor
@@ -3731,7 +3737,7 @@
         setStatText('stat-co-vli-pct', coUnits > 0 ? ((coVLI / coUnits) * 100).toFixed(1) : '0');
 
         // Insight box (private units)
-        setStatText('stat-pipeline-units-2', privateUnits);
+        setStatText('stat-pipeline-units-2', privateLiveUnits);
         setStatText('stat-bp-units-2', bpUnits);
         setStatText('stat-co-units-2', coUnits);
 

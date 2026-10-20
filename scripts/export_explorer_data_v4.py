@@ -34,6 +34,11 @@ TODAY = date.today()
 CUT_6 = (TODAY - timedelta(days=183)).isoformat()
 CUT_24 = (TODAY - timedelta(days=730)).isoformat()
 CUT_36 = (TODAY - timedelta(days=1095)).isoformat()
+# THE ONE DEFINITION of "in the pipeline" (John, 2026-10-20): not yet built AND still alive. Completed buildings are
+# built; withdrawn, denied and void projects have LEFT the pipeline. Every page (home, Explorer, Snapshot) reads the
+# per-project flags below, never its own rule: three pages once showed three different "not yet built" totals.
+IN_PIPELINE = {"pre_application", "in_review", "entitled", "under_construction", "stale"}
+LEFT_PIPELINE = {"withdrawn", "denied", "void"}
 
 
 def mask(name, label="individual owner"):
@@ -123,6 +128,7 @@ def get_projects(db):
             stage = {"withdrawn": "Withdrawn", "denied": "Denied", "void": "Expired",
                      "pre_application": "Pre-Application", "under_construction": "Under Construction",
                      "approved": "Entitled"}.get(st, str(st).replace("_", " ").title())
+        assert st == "completed" or st in IN_PIPELINE | LEFT_PIPELINE, f"{k}: status {st!r} is in no pipeline set"
         filed, ent = v["filed_date"], v["entitled_date"]
         try:
             pdays = (date.fromisoformat(ent) - date.fromisoformat(filed)).days if filed and ent else None
@@ -136,7 +142,7 @@ def get_projects(db):
             "id": k, "address": v["address_display"] or f"{k} (no address on the City record)",
             "name": v["name"], "apn": apn.get(k),
             "owner": mask(v["owner_current"]), "units": units, "new_units": units, "old_units": 0,
-            "status": stage, "pipeline_stage": st, "accela_status": stage, "accela_status_date": None,
+            "status": stage, "pipeline_stage": st, "in_pipeline": st in IN_PIPELINE, "left_pipeline": st in LEFT_PIPELINE, "accela_status": stage, "accela_status_date": None,
             "year": filed[:4] if filed else None, "permits": ",".join(permits.get(k, [])),
             "num_permits": len(permits.get(k, [])), "description": desc.get(k),
             "project_size": "Large" if units >= 50 else "Medium" if units >= 10 else "Small",

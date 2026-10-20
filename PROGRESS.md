@@ -15,7 +15,11 @@ p90 ~5 mo; now 73 projects / 206 units permitted with no inspection (42 projects
 22% of completions have NO inspection records (harvest gap) -> started at the permit date. Open: Explorer's "UC beds
 still to come" FIXED (`e0b49d8b`, beds 4,238; UC_BEDS derived 5,010). History chart flipped (pre-app bottom) with
 green = completed in the trailing 12 months (John: option 2), shown Jan 2019 .. feed end 2026-06-26 only. Next: John's
-review, then a generated home-page block.
+review, then a generated home-page block. Added: year markers in the grid's completed block; a 12-month bar strip
+(completions by month, months after the feed end lighter, "partial"). **NextRequest checked 2026-10-20:** nothing new
+since 26-2321 (Sep 4); every 2026 request logged; NO permit-data request pending -> the feed stops at 2026-07-07.
+Recent finals could come from a harvest: 293 master new-unit permits (1,292 units) issued but not finaled in v4; the
+Accela inspection harvest after 07-07 covered only 120 records; the Building date-range sweep reaches 2026-09-21.
 
 ---
 

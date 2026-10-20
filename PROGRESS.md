@@ -14,7 +14,9 @@ file, explore, JN-BerkeleyOpenData, DEMO colab PASS. **Curriculum JN1 FAILS loca
 `BP_Annual Permit Report-*.xlsx` now matches the three 2026-07-07 CPRA reruns too** (tracked in git, so every clone
 fails): 32,897 unique permits != 30,764; JN3/4/5/6a/6b fail downstream. Fix: name the two course files (pinned by
 SHA-256, as JN-A does), not a pattern. **JN8:** bootstrap calls `sys` without importing it (NameError, local runs).
-**DEMO_apr_vs_hcd.ipynb** reads the archived v2 path: retire to archive/ or re-point to v4. None changed yet.
+**FIXED (John: yes):** all 16 curriculum notebooks with the pattern now name + checksum the two files; JN8 imports
+sys; all 17 execute (JN1 30,764 again); R2 copies for Colab match. Same pattern still in `scripts/build_v2/build_s9.py`
+(v3 S9). **DEMO_apr_vs_hcd.ipynb** reads the archived v2 path: retire to archive/ or re-point to v4 (open).
 
 ---
 

@@ -5,7 +5,15 @@
 
 ---
 
-## 2026-10-20 — Home page edits on dev (`4ccc214a`, NOT deployed); 2800 Telegraph status question
+## 2026-10-20 — Inactive-entitlement rule changed (`c634985a`) + home page edits; deploy staged main `a391e846` (John pushes)
+
+**Rule (John):** Entitled but Inactive = approved 36+ months ago, no BP issued, AND no event on any of the project's
+own records in 36 months. 12 projects / 764 u -> Entitled (2800 Telegraph among them); inactive 118/1,897 -> 106/1,133.
+Animation applies it in days (frame = month's last day; last frame = today) so its final frame == Explorer. Still
+open: link sweep building-permit applications (B2025-05618) to projects; flyover KML labels refresh at the next
+geometry rebuild.
+
+### Earlier the same day: home page edits; 2800 Telegraph status question
 
 Animation moved under "Fly through Berkeley's future, street by street" (ANCHOR comment in index.html; the generator
 moves the block there), autoplays once in view (not under prefers-reduced-motion), "Replay". Legend: "Where each

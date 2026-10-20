@@ -5,6 +5,19 @@
 
 ---
 
+## 2026-10-20 — Home page edits on dev (`4ccc214a`, NOT deployed); 2800 Telegraph status question
+
+Animation moved under "Fly through Berkeley's future, street by street" (ANCHOR comment in index.html; the generator
+moves the block there), autoplays once in view (not under prefers-reduced-motion), "Replay". Legend: "Where each
+flyover project stands", count bigger/bolder, one "Stalled or left" label (it overprinted). Map link "See the map of
+every project's status". **2800 Telegraph (ZP2022-0107)** shows "Entitled but Inactive"/stalled everywhere, but has a
+BP application B2025-05618 (Dec 2025, 18 units, under review), demo permit B2026-00307 (Jan 2026), DRCF2026-0003 (May
+2026, linked). The inactive rule = entitled 36+ months with no ISSUED BP; it ignores later activity. 12 of the 118
+inactive projects (764 u) have activity on their own linked records in the last 36 months; sweep BPs are not linked to
+projects (address matching too noisy: breakers, PG&E work). Rule change + flyover KML label refresh await John.
+
+---
+
 ## 2026-10-20 — Home-page pipeline animation DEPLOYED (main `4431a939`; "Completed, all records" `2a86792d`)
 
 `scripts/viz/pipeline_animation.py` (+ `pipeline_animation_template.html`) writes the BEGIN/END pipeline_animation block

@@ -5,6 +5,19 @@
 
 ---
 
+## 2026-10-20 — Datasette regenerated (`4fa4633a`); notebook survey after the swap
+
+Datasette rebuilt from v4 1591bcbd: 1,551 projects (fly instance still serves the March build: **John runs `cd
+datasette-deploy && flyctl deploy`**); public mirror docs/data/berkeley_housing_public.db refreshed (goes out with the
+next site deploy). **Notebook run (scratch/2026-10-20_notebooks/):** curriculum JN00-0h, JN2, JN7, FIN1, press case
+file, explore, JN-BerkeleyOpenData, DEMO colab PASS. **Curriculum JN1 FAILS locally: PERMIT_GLOB
+`BP_Annual Permit Report-*.xlsx` now matches the three 2026-07-07 CPRA reruns too** (tracked in git, so every clone
+fails): 32,897 unique permits != 30,764; JN3/4/5/6a/6b fail downstream. Fix: name the two course files (pinned by
+SHA-256, as JN-A does), not a pattern. **JN8:** bootstrap calls `sys` without importing it (NameError, local runs).
+**DEMO_apr_vs_hcd.ipynb** reads the archived v2 path: retire to archive/ or re-point to v4. None changed yet.
+
+---
+
 ## 2026-10-20 — Site numbers: one definition of "in the pipeline" (`55f483c1`; DEPLOYED main `02378d6a`)
 
 The export (`export_explorer_data_v4.py`) writes `in_pipeline` (pre_application, in_review, entitled,

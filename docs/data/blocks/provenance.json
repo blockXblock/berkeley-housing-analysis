@@ -1,0 +1,60 @@
+{
+  "run": "2026-10-13T11:34:28",
+  "script": "scripts/build_address_block_lookup.py",
+  "head_commit": "6e50befd",
+  "inputs": {
+    "data/reference/berkeley_addresses_with_fields.csv": "49e4c154e74040a734ceb47ad323bd57d0ef84855d4011bee20145d026c88a31",
+    "data/raw/berkeley_gis/city_blocks.geojson": "8c3242c303db2fa77bf10d0c656d2163338b64ec662f9adcbff8fd8c330652e6",
+    "data/raw/berkeley_gis/Street_Centerline.geojson": "f4519ca29aa173e6418dfa9f0de8e57f0071beaacf04135224f146c7b6ed3fe4",
+    "data/processed/berkeley_blocks_2020.geojson": "da08d3b1d88e2f7185d259b1ff7fffe0fe3c52a748c8d71677b6a7a6d328950e",
+    "databases/berkeley.db": "e2fe977508eb780e47898c24edfd2c053c27f0f9ec2f3cdd3c17c9d03b4b03f4"
+  },
+  "params": {
+    "min_acres": 0.1,
+    "max_acres": 1000.0,
+    "nearest_max_m": 30.0,
+    "label_buf_m": 20.0,
+    "label_min_m": 25.0,
+    "seg_same_street_m": 60.0
+  },
+  "address_canon_sha256": "276c8eafc1b33b45b2f4a7581e2bdc3f8f38ab226fbac1640c9ca6819f3ffe17",
+  "gates": {
+    "address_points": {
+      "input": 62226,
+      "inside": 62064,
+      "nearest": 102,
+      "none": 60,
+      "ok": true
+    },
+    "assessor_parcels": {
+      "input": 29134,
+      "inside": 28979,
+      "nearest": 101,
+      "none": 50,
+      "no_coordinates": 4,
+      "ok": true
+    },
+    "blocks": {
+      "enclosed": 1129,
+      "edge": 68,
+      "unique_ids": true,
+      "ok": true
+    },
+    "corner_lot_1951_shattuck_2108_berkeley_way": {
+      "blocks": [
+        "CB-27b08582",
+        "CB-27b08582"
+      ],
+      "ok": true
+    },
+    "addresses": 31982,
+    "ambiguous_keys_without_type": 5,
+    "segment_method": {
+      "address_range": 31684,
+      "none": 171,
+      "nearest_same_street": 127
+    },
+    "parcel_centroid_vs_address_point_block_disagree": 8,
+    "median_parcels_per_enclosed_block": 24.0
+  }
+}

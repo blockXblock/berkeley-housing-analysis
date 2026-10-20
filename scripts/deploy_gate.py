@@ -91,10 +91,11 @@ def main():
 
     # THE SITE MENU (2026-10-21): every page in scripts/site_nav.py PAGES carries the menu block. A page rebuilt by its
     # own generator (Snapshot, Players, Pipeline State, Audit) loses it; re-run scripts/site_nav.py.
-    import importlib.util
-    spec = importlib.util.spec_from_file_location("site_nav", "scripts/site_nav.py")
-    nav = importlib.util.module_from_spec(spec); spec.loader.exec_module(nav)
-    lost = [p for p in nav.PAGES if (staged(f"docs/{p}") or nav.BEGIN) .find(nav.BEGIN) < 0]
+    # the gate runs inside a main worktree that has no scripts/, so read the page list from dev's copy
+    import types
+    src = subprocess.run(["git", "show", "dev:scripts/site_nav.py"], capture_output=True, text=True).stdout
+    nav = types.ModuleType("site_nav"); exec(compile(src, "site_nav.py", "exec"), nav.__dict__)
+    lost = [p for p in nav.PAGES if nav.BEGIN not in (staged(f"docs/{p}") or "")]
     check(not lost, "every section page carries the site menu", ", ".join(lost[:5]) + " — run scripts/site_nav.py")
     for hub in ("docs/berkeley.html", "docs/learn.html"):
         check(staged(hub) is not None, f"{hub} is in the commit (the menu links to it)")

@@ -51,7 +51,7 @@ const STAGES = [
   {k: 'preapp',    label: 'Pre-application',            color: '#7a7a7a', group: 'On paper'},
   {k: 'review',    label: 'Under review',               color: '#b8860b', group: 'On paper'},
   {k: 'entitled',  label: 'Entitled, no permit yet',    color: '#ff8000', group: 'On paper'},
-  {k: 'stalled',   label: 'Entitled 3+ years, no permit', color: '#ff0000', group: 'On paper'},
+  {k: 'stalled',   label: 'Entitled 3+ years, inactive', color: '#ff0000', group: 'On paper'},
   {k: 'permitted', label: 'Permitted, not started',     color: '#00b8cc', group: 'Physical'},
   {k: 'building',  label: 'Under construction',         color: '#2962ff', group: 'Physical'},
   {k: 'completed', label: 'Completed, all records',     color: '#00a844', group: 'Physical'},
@@ -62,12 +62,17 @@ const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov
 const label = i => { const m = D.start[1] - 1 + i; return `${MONTHS[m % 12]} ${D.start[0] + Math.floor(m / 12)}`; };
 
 function stageAt(r, i) {
-  const [first, ent, bp, co, out, u, pre, ins] = r;
+  const [first, ent, bp, co, out, u, pre, ins, act, entd] = r;
   if (first === null || first > i) return null;
   if (out !== null && out <= i) return 'left';
   if (co !== null && co <= i) return 'completed';
   if (bp !== null && bp <= i) return ins !== null && ins <= i ? 'building' : 'permitted';
-  if (ent !== null && ent <= i) return i - ent >= 36 ? 'stalled' : 'entitled';
+  if (ent !== null && ent <= i) {     // inactive: approved 36+ months ago AND no activity on its records in 36 months
+    // in DAYS, like the Explorer: the frame stands for its month's last day (the last frame for today)
+    const T = D.frame_days[i];
+    let recent = null; for (const a of act) { if (a <= T) recent = a; else break; }
+    return T - entd > 1095 && (recent === null || T - recent > 1095) ? 'stalled' : 'entitled';
+  }
   return pre ? 'preapp' : 'review';
 }
 const FRAMES = [];
@@ -224,8 +229,8 @@ if (!still && 'IntersectionObserver' in window) {
 document.getElementById('pa-note').textContent =
   `Private projects only. UC Berkeley's dormitories are counted in beds, not homes: about ${D.uc_beds.toLocaleString()} beds are ` +
   `under construction or planned. A project that left the pipeline is shown leaving at its last recorded event; the City ` +
-  `rarely records the date of a withdrawal. "Entitled 3+ years" means approved at least 36 months earlier with no building ` +
-  `permit yet. "Permitted, not started" means a building permit is issued but the City has recorded no inspection under it. ` +
+  `rarely records the date of a withdrawal. "Entitled 3+ years, inactive" means approved at least 36 months earlier with no building ` +
+  `permit yet and nothing recorded on any of the project's records in the last 36 months. "Permitted, not started" means a building permit is issued but the City has recorded no inspection under it. ` +
   `The 6th RHNA cycle credits homes whose first building permit was issued on or after June 30, 2022. ` +
   `In the grid, completed homes run oldest to newest; a dark square with a year ('19, '20 ...) starts each year's ` +
   `completions. Completions after ${D.feed_end} come from the City's online permit records only and may be incomplete. ` +

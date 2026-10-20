@@ -68,6 +68,9 @@ def get_projects(db):
                        JOIN project_structures ps USING(project_id) JOIN structure_events se USING(structure_id)
                        JOIN events e USING(event_id) WHERE se.role_in_structure IN ('master', 'phase')
                        GROUP BY 1 HAVING SUM(e.event_type_code = 'permit_issued') = 0""")}
+    # the latest dated event on ANY record linked to the project (planning tasks, design review, listed permits): the
+    # activity signal for the inactive-entitlement rule below
+    last_activity = dict(q("SELECT project_key, MAX(event_date) FROM v_project_timeline GROUP BY project_key"))
     demo = dict(q("""SELECT json_extract(p.notes, '$.project_key'), MIN(e.event_date) FROM projects p
                      JOIN project_structures ps USING(project_id) JOIN structure_events se USING(structure_id)
                      JOIN events e USING(event_id) JOIN event_classifications c USING(event_id)
@@ -121,7 +124,11 @@ def get_projects(db):
             else:
                 stage = "Permitted, Not Started"
         elif st == "entitled":
-            stage = "Entitled but Inactive" if (v["entitled_date"] or "9999") < CUT_36 else "Entitled"
+            # INACTIVE = approved 36+ months ago, no building permit issued, AND nothing recorded on any of the project's
+            # own records in the last 36 months (John, 2026-10-20). Before, approval age alone decided it, so 2800
+            # Telegraph showed as stalled with a building permit under review and a final design review in May 2026.
+            stage = ("Entitled but Inactive" if (v["entitled_date"] or "9999") < CUT_36
+                     and (last_activity.get(k) or "") < CUT_36 else "Entitled")
         elif st == "in_review":
             stage = "Pre-Application" if v["anchor_role"] == "pre_application" else "Under Review"
         else:

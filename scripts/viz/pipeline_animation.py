@@ -59,9 +59,22 @@ def month_index(d, last):
     return min((y - START[0]) * 12 + (m - START[1]), last)    # negative = before the first frame (keeps true ages)
 
 
-def stage_at(r, i):
+def day(d):
+    """days since START, for the inactive rule (the export compares DATES, so the animation must too)"""
+    return (dt.date.fromisoformat(d[:10]) - dt.date(START[0], START[1], 1)).days if d else None
+
+
+def frame_day(i, last, today_day):
+    """the day a frame stands for: the last day of its month; the last frame is today"""
+    if i >= last:
+        return today_day
+    y, m = START[0] + (START[1] - 1 + i + 1) // 12, (START[1] - 1 + i + 1) % 12 + 1
+    return (dt.date(y, m, 1) - dt.date(START[0], START[1], 1)).days - 1
+
+
+def stage_at(r, i, last, today_day):
     """The SAME rule as the page's stageAt() -- keep the two in step."""
-    first, ent, bp, co, out, u, pre, ins = r
+    first, ent, bp, co, out, u, pre, ins, act, entd = r
     if first is None or first > i:
         return None
     if out is not None and out <= i:
@@ -71,7 +84,11 @@ def stage_at(r, i):
     if bp is not None and bp <= i:
         return "building" if ins is not None and ins <= i else "permitted"
     if ent is not None and ent <= i:
-        return "stalled" if i - ent >= 36 else "entitled"
+        # inactive = approved 36+ months ago AND no activity on the project's own records in the last 36 months (the
+        # export's rule, John 2026-10-20); act = the months with any recorded event on the project's records
+        T = frame_day(i, last, today_day)
+        recent = max((a for a in act if a <= T), default=None)
+        return "stalled" if T - entd > 1095 and (recent is None or T - recent > 1095) else "entitled"
     return "preapp" if pre else "review"
 
 
@@ -87,6 +104,9 @@ def payload():
     v = {r[0]: r[1:] for r in db.execute("SELECT project_key, status, anchor_role, filed_date, accepted_date, entitled_date, "
                                          "bp_issued_date, co_issued_date, completed_year_reported FROM v_projects")}
     first_ev = dict(db.execute("SELECT project_key, MIN(event_date) FROM v_project_timeline GROUP BY project_key"))
+    act_months = {}
+    for k, d in db.execute("SELECT DISTINCT project_key, substr(event_date, 1, 10) FROM v_project_timeline WHERE event_date IS NOT NULL"):
+        act_months.setdefault(k, set()).add(d)
     last_ev = dict(db.execute("SELECT project_key, MAX(event_date) FROM v_project_timeline GROUP BY project_key"))
     first_insp = dict(db.execute("""SELECT json_extract(p.notes, '$.project_key'), MIN(e.event_date) FROM projects p
         JOIN project_structures ps USING(project_id) JOIN structure_events se USING(structure_id) JOIN events e USING(event_id)
@@ -122,11 +142,14 @@ def payload():
         if bp and co and not ins:
             ins = bp                                               # finished with no inspection on record: started at permit
             notes["completed without inspections"] += 1
-        rows.append([f(first), f(ent), f(bp), f(co), f(out), int(p["units"] or 0), 1 if role == "pre_application" else 0, f(ins)])
+        act = sorted({day(d) for d in act_months.get(k, ()) if d >= ent}) if ent else []   # event days from the approval on
+        rows.append([f(first), f(ent), f(bp), f(co), f(out), int(p["units"] or 0), 1 if role == "pre_application" else 0, f(ins),
+                     act, day(ent)])
 
+    today_day = (today - dt.date(START[0], START[1], 1)).days
     got, want = Counter(), Counter()
     for r in rows:
-        s = stage_at(r, last)
+        s = stage_at(r, last, last, today_day)
         if s:
             got[s] += r[5]
     for p in P.values():
@@ -141,7 +164,8 @@ def payload():
         raise SystemExit(f"REFUSED: the last frame differs from the Explorer data in {bad} -- nothing written")
     return stamp, {"rows": rows, "start": START, "last": last, "stamp": stamp[:10], "uc_beds": uc_beds,
                    "cycle6": month_index(CYCLE6, last) + 1, "co_end": month_index(feed_end, last), "feed_end": feed_end,
-                   "n_historic": notes["historic"]}
+                   "n_historic": notes["historic"],
+                   "today_day": today_day, "frame_days": [frame_day(i, last, today_day) for i in range(last + 1)]}
 
 
 def main():

@@ -12,8 +12,9 @@ they have no city inspection records (media/field is the only source for those).
 Input:  scratch/2026-08-27/granular_inspection_targets.csv (project_id,address,units,permit,status,desc)
 Output: data/raw/accela_inspections/<permit>.json (per permit) + data/reference/inspection_pulse_2026-08-27.csv
 Read-only. Run in the .venv: .venv/bin/python scripts/refresh_inspections.py
+       2026-10-20 status refresh: --targets/--pulse/--state name a run's own files (defaults = the 2026-08-27 run).
 """
-import sys, os, json, csv, datetime, traceback
+import sys, os, json, csv, datetime, traceback, argparse
 
 from experiments.accela_scrape.url_discovery_scraper import discover_url
 from experiments.accela_scrape.inspection_scraper import scrape_inspections
@@ -39,7 +40,20 @@ def last_inspection(inspections):
     return (top.get("date"), top.get("type_code"), top.get("result"))
 
 
+def _iso(d):
+    """Accela MM/DD/YYYY -> YYYY-MM-DD, so dates compare correctly across years ('' if absent)."""
+    try:
+        m, dd, y = (d or "").split("/"); return f"{y}-{m}-{dd}"
+    except ValueError:
+        return ""
+
+
 def main():
+    global TARGETS, PULSE, STATE
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--targets", default=TARGETS); ap.add_argument("--pulse", default=PULSE); ap.add_argument("--state", default=STATE)
+    a = ap.parse_args()
+    TARGETS, PULSE, STATE = a.targets, a.pulse, a.state
     rows = list(csv.DictReader(open(TARGETS)))
     os.makedirs(OUTDIR, exist_ok=True)
     os.makedirs(os.path.dirname(STATE), exist_ok=True)
@@ -62,7 +76,7 @@ def main():
             else:
                 res = scrape_inspections(permit, url, headless=True)
                 insp = res.get("inspections", []) if isinstance(res, dict) else []
-                json.dump(res, open(f"{OUTDIR}/{permit}.json", "w"))
+                json.dump(res, open(f"{OUTDIR}/{permit}.json", "w"), indent=2)   # the format the tracked files use
                 d, t, rslt = last_inspection(insp)
                 rec.update(n_inspections=len(insp), last_date=d, last_type=t, last_result=rslt)
         except Exception as e:
@@ -80,9 +94,9 @@ def main():
     proj = {}
     for p in pulse:
         pid = p["project_id"]
-        if p.get("last_date") and (pid not in proj or p["last_date"] > proj[pid]["last_date"]):
+        if p.get("last_date") and (pid not in proj or _iso(p["last_date"]) > _iso(proj[pid]["last_date"])):
             proj[pid] = p
-    for pid, p in sorted(proj.items(), key=lambda kv: kv[1].get("last_date") or "", reverse=True):
+    for pid, p in sorted(proj.items(), key=lambda kv: _iso(kv[1].get("last_date")), reverse=True):
         print(f"  proj{pid:<4} {p['address'][:22]:22} last on-site {p['last_date']} ({p['last_type']} / {p['last_result']})")
 
 

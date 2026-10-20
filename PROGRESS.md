@@ -5,6 +5,21 @@
 
 ---
 
+## 2026-10-21 — Site redesign: REVIEW pages built (untracked in docs/, not deployable until approved)
+
+John chose the combination: flyover + two-number headline first, then tabs (▶ Play the pipeline · 🎥 Fly through · 🗺
+Map · 🕸 Who's building · 📊 Data & methods), title-as-button player with the self-drawing layer chart + monthly bars
+first, grid folded; Mayor report stays on Housing; a three-word menu Housing / Berkeley / Learn; hubs berkeley.html
+(Snapshot, Berkeley 2050, the five maps) and learn.html (curriculum, reporters/data journalism, methodology, Datasette,
+NICAR, archive, reading). Builder `scratch/2026-10-21_site_next/build_next.py` LIFTS the generated pieces from
+docs/index.html (site_numbers, legend, 10 flyovers, Mayor block, facade script) and reads PA.payload(); writes
+docs/index-next.html, docs/berkeley.html, docs/learn.html + docs/img/next/{map,players}_preview.jpg (UNTRACKED: deploy.sh
+skips them). Verified desktop + phone, every tab, hash links (#play #fly #map #players #data), no errors. Next on
+approval: make the generator write the new player into index.html, swap index-next -> index.html, add the menu to the
+other pages, deploy gate checks for the hubs. Later: interlink the Mayor report and the Snapshot (John).
+
+---
+
 ## 2026-10-20 — Inactive-entitlement rule changed (`c634985a`) + home page edits; DEPLOYED main `a391e846`
 
 **Rule (John):** Entitled but Inactive = approved 36+ months ago, no BP issued, AND no event on any of the project's

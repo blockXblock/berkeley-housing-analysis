@@ -94,7 +94,8 @@ def main():
     # the gate runs inside a main worktree that has no scripts/, so read the page list from dev's copy
     import types
     src = subprocess.run(["git", "show", "dev:scripts/site_nav.py"], capture_output=True, text=True).stdout
-    nav = types.ModuleType("site_nav"); exec(compile(src, "site_nav.py", "exec"), nav.__dict__)
+    nav = types.ModuleType("site_nav"); nav.__file__ = "scripts/site_nav.py"
+    exec(compile(src, "site_nav.py", "exec"), nav.__dict__)
     lost = [p for p in nav.PAGES if nav.BEGIN not in (staged(f"docs/{p}") or "")]
     check(not lost, "every section page carries the site menu", ", ".join(lost[:5]) + " — run scripts/site_nav.py")
     for hub in ("docs/berkeley.html", "docs/learn.html"):

@@ -5,7 +5,15 @@
 
 ---
 
-## 2026-10-20 — Home-page pipeline animation: PROTOTYPE in scratch (not on the site)
+## 2026-10-20 — Home-page pipeline animation BUILT INTO docs/index.html (`685ab05f`, on dev, NOT deployed)
+
+`scripts/viz/pipeline_animation.py` (+ `pipeline_animation_template.html`) writes the BEGIN/END pipeline_animation block
+under the yearly completions table; refuses a last frame != Explorer stages; deploy_gate checks its stamp; WEBSITE_GUIDE
+refresh playbook lists it after site_numbers.py. Title "Play Berkeley's whole housing pipeline, month by month" (John).
+Desktop + phone verified (no errors, no sideways scroll). **John deploys.** Status refresh of the 293 open permits
+running (scratch/2026-10-20_status_refresh/); CPRA draft `notes/2026-10-20_cpra_draft_bp_refresh_2.md` for John to file.
+
+## 2026-10-20 — Home-page pipeline animation: PROTOTYPE in scratch (superseded by the entry above)
 
 `scratch/2026-10-20_pipeline_viz/` (build.py + template.html -> pipeline_waffle.html): every private project as a
 waffle (1 square = 10 homes), monthly from Jan 2018 (John), 5th/6th RHNA cycle boundary at the 2022-06-30 credit date,

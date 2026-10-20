@@ -1,0 +1,225 @@
+<style>
+  #pipeline-anim { max-width: 760px; margin: 2.5rem auto 0; padding: 0 16px; box-sizing: border-box; color: #1a365d; text-align: left; }
+  #pipeline-anim h2 { margin: 0 0 4px; font-size: 1.35rem; }
+  #pipeline-anim .sub { color: #4a5568; font-size: .9rem; margin: 0 0 14px; }
+  #pipeline-anim .bar { display: flex; align-items: center; gap: 12px; margin: 8px 0 10px; }
+  #pipeline-anim .date { font-size: 1.6rem; font-weight: 700; font-variant-numeric: tabular-nums; min-width: 7.5rem; }
+  #pipeline-anim button { border: 0; background: #1a365d; color: #fff; border-radius: 6px; padding: .45rem .9rem;
+           font-size: .9rem; cursor: pointer; }
+  #pipeline-anim input[type=range] { flex: 1; accent-color: #1a365d; }
+  #pipeline-anim .legend { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 4px 12px;
+            font-size: .82rem; color: #4a5568; margin: 6px 0 12px; }
+  #pipeline-anim .legend b { color: #1a365d; font-variant-numeric: tabular-nums; }
+  #pipeline-anim .sw { display: inline-block; width: 11px; height: 11px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+  #pipeline-anim .group-h { font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: #718096; grid-column: 1 / -1;
+             margin-top: 4px; }
+  #pipeline-anim canvas { display: block; width: 100%; }
+  #pipeline-anim .totals { display: flex; gap: 18px; flex-wrap: wrap; margin: 10px 0 4px; font-size: .9rem; color: #4a5568; }
+  #pipeline-anim .totals b { font-size: 1.15rem; color: #1a365d; font-variant-numeric: tabular-nums; }
+  #pipeline-anim .note { color: #718096; font-size: .75rem; line-height: 1.5; margin-top: 12px; }
+  #pipeline-anim svg text { font-size: 10px; fill: #718096; }
+</style>
+<section id="pipeline-anim" aria-label="The whole housing pipeline, month by month">
+  <h2>Play Berkeley's whole housing pipeline, month by month</h2>
+  <p class="sub">Every private housing project in the City's records, since 2018. Each square is 10 homes; its color is the
+    stage the project had reached that month.</p>
+  <div class="bar">
+    <div><div class="date" id="pa-date"></div><div class="sub" id="pa-cycle" style="margin:0"></div></div>
+    <button id="pa-play">Play</button>
+    <input type="range" id="pa-slider" min="0" value="0" aria-label="Month">
+  </div>
+  <div class="totals">
+    <span>In the pipeline <b id="pa-t-pipe"></b></span>
+    <span>Completed <b id="pa-t-done"></b></span>
+    <span>Completed in the last 12 months <b id="pa-t-recent"></b></span>
+    <span>Left the pipeline <b id="pa-t-left"></b></span>
+  </div>
+  <div class="legend" id="pa-legend"></div>
+  <p class="sub" style="margin:6px 0 2px; font-size:.8rem">Homes at each stage that month, from pre-application (bottom) to
+    under construction; the green band on top is homes <b>completed in the previous 12 months</b>.</p>
+  <svg id="pa-history" width="100%" height="170" role="img" aria-label="Homes at each stage over time, with completions in the previous 12 months on top"></svg>
+  <p class="sub" style="margin:10px 0 2px; font-size:.8rem">Homes completed each month, the 12 months up to the selected
+    month. Months after the City's permit feed ends are lighter: those completions come only from its online records, so far.</p>
+  <svg id="pa-months" width="100%" height="90" role="img" aria-label="Homes completed each month, last 12 months"></svg>
+  <canvas id="pa-waffle" aria-label="Squares colored by stage" style="margin-top:10px"></canvas>
+  <p class="note" id="pa-note"></p>
+</section>
+<script>
+(() => {
+const D = __DATA__;
+const STAGES = [
+  {k: 'preapp',    label: 'Pre-application',            color: '#7a7a7a', group: 'On paper'},
+  {k: 'review',    label: 'Under review',               color: '#b8860b', group: 'On paper'},
+  {k: 'entitled',  label: 'Entitled, no permit yet',    color: '#ff8000', group: 'On paper'},
+  {k: 'stalled',   label: 'Entitled 3+ years, no permit', color: '#ff0000', group: 'On paper'},
+  {k: 'permitted', label: 'Permitted, not started',     color: '#00b8cc', group: 'Physical'},
+  {k: 'building',  label: 'Under construction',         color: '#2962ff', group: 'Physical'},
+  {k: 'completed', label: 'Completed',                  color: '#00a844', group: 'Physical'},
+  {k: 'left',      label: 'Withdrawn, denied, expired', color: '#b0003a', group: 'Left the pipeline'},
+];
+const PIPE = ['preapp', 'review', 'entitled', 'stalled', 'permitted', 'building'];
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const label = i => { const m = D.start[1] - 1 + i; return `${MONTHS[m % 12]} ${D.start[0] + Math.floor(m / 12)}`; };
+
+function stageAt(r, i) {
+  const [first, ent, bp, co, out, u, pre, ins] = r;
+  if (first === null || first > i) return null;
+  if (out !== null && out <= i) return 'left';
+  if (co !== null && co <= i) return 'completed';
+  if (bp !== null && bp <= i) return ins !== null && ins <= i ? 'building' : 'permitted';
+  if (ent !== null && ent <= i) return i - ent >= 36 ? 'stalled' : 'entitled';
+  return pre ? 'preapp' : 'review';
+}
+const FRAMES = [];
+for (let i = 0; i <= D.last; i++) {
+  const u = Object.fromEntries(STAGES.map(s => [s.k, 0]));
+  // completed in the 12 months up to month i: a FLOW, comparable to the other bands. Only where the whole window lies
+  // inside the permit feed (from Jan 2019, through the feed's last month); elsewhere null, drawn as nothing, shown as a dash
+  u.recent = i >= 12 && i <= D.co_end ? 0 : null;
+  u.byYear = {};    // completed units by the year they were completed (before 2018 = 0), for the grid's year markers
+  for (const r of D.rows) { const s = stageAt(r, i); if (s) u[s] += r[5]; if (u.recent !== null && r[3] !== null && r[3] <= i && r[3] > i - 12) u.recent += r[5];
+    if (s === 'completed') { const y = r[3] < 0 ? 0 : D.start[0] + Math.floor((D.start[1] - 1 + r[3]) / 12); u.byYear[y] = (u.byYear[y] || 0) + r[5]; } }
+  FRAMES.push(u);
+}
+
+// legend
+const lg = document.getElementById('pa-legend'); let g0 = '';
+for (const s of STAGES) {
+  if (s.group !== g0) { lg.insertAdjacentHTML('beforeend', `<div class="group-h">${s.group}</div>`); g0 = s.group; }
+  lg.insertAdjacentHTML('beforeend', `<div><span class="sw" style="background:${s.color}"></span>${s.label} <b id="pa-n-${s.k}"></b></div>`);
+}
+
+// waffle: squares in stage order; the pipeline first, then completed, then (after a gap) the projects that left
+const cv = document.getElementById('pa-waffle'), ctx = cv.getContext('2d');
+const COLS = 60;
+const maxSq = Math.max(...FRAMES.map(f => STAGES.reduce((a, s) => a + Math.round(f[s.k] / 10), 0))) + COLS;
+const ROWS = Math.ceil(maxSq / COLS);
+function draw(i) {
+  const f = FRAMES[i], W = cv.clientWidth, cell = W / COLS, dpr = window.devicePixelRatio || 1;
+  cv.width = W * dpr; cv.height = ROWS * cell * dpr; cv.style.height = ROWS * cell + 'px';
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, ROWS * cell);
+  let n = 0;
+  const sq = color => { const x = (n % COLS) * cell, y = Math.floor(n / COLS) * cell;
+                        ctx.fillStyle = color; ctx.fillRect(x + 1, y + 1, cell - 2, cell - 2); n++; };
+  for (const s of STAGES) {
+    if (s.k === 'left') n = Math.ceil(n / COLS) * COLS + COLS;      // a blank row before the projects that left
+    if (s.k !== 'completed') { for (let j = 0; j < Math.round(f[s.k] / 10); j++) sq(s.color); continue; }
+    // completed: oldest first, so the most recent completions are the last run of green. The first square of each
+    // year is darker and carries the year; squares per year by cumulative rounding, so the total stays round(units/10)
+    let cum = 0, done = 0;
+    for (const y of Object.keys(f.byYear).map(Number).sort((a, b) => a - b)) {
+      cum += f.byYear[y];
+      const k = Math.round(cum / 10) - done; done += k;
+      for (let j = 0; j < k; j++) {
+        const mark = j === 0 && y > 0, at = n;
+        sq(mark ? '#0b6b31' : s.color);
+        if (mark && cell >= 9) {
+          ctx.fillStyle = '#fff'; ctx.font = `600 ${Math.floor(cell * 0.55)}px -apple-system, sans-serif`;
+          ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+          ctx.fillText(String(y).slice(2), (at % COLS) * cell + cell / 2, Math.floor(at / COLS) * cell + cell / 2 + 0.5);
+        }
+      }
+    }
+  }
+  document.getElementById('pa-date').textContent = label(i);
+  document.getElementById('pa-cycle').textContent = i >= D.cycle6 ? '6th RHNA cycle' : '5th RHNA cycle';
+  for (const s of STAGES) document.getElementById('pa-n-' + s.k).textContent = f[s.k].toLocaleString();
+  document.getElementById('pa-t-pipe').textContent = PIPE.reduce((a, k) => a + f[k], 0).toLocaleString();
+  document.getElementById('pa-t-done').textContent = f.completed.toLocaleString();
+  document.getElementById('pa-t-recent').textContent = f.recent !== null ? f.recent.toLocaleString()
+    : i > D.co_end ? `${FRAMES[D.co_end].recent.toLocaleString()} (to ${label(D.co_end)})` : '—';   // past the feed: its last full window
+  document.getElementById('pa-t-left').textContent = f.left.toLocaleString();
+  cursor(i);
+}
+
+// history: stacked area of the pipeline stages + completed, with a cursor at the current month
+const svg = document.getElementById('pa-history'), NS = 'http://www.w3.org/2000/svg';
+let cur;
+function history() {
+  svg.innerHTML = '';
+  const W = svg.clientWidth, H = 170, pad = 14, order = ['preapp', 'review', 'entitled', 'stalled', 'permitted', 'building', 'recent'];
+  const colorOf = k => k === 'recent' ? '#00a844' : STAGES.find(s => s.k === k).color;
+  const top = Math.max(...FRAMES.map(f => order.reduce((a, k) => a + f[k], 0)));
+  const x = i => i / D.last * W, y = v => H - pad - v / top * (H - pad - 4);
+  let base = FRAMES.map(() => 0);
+  for (const k of order) {
+    const hi = FRAMES.map((f, i) => base[i] + (f[k] || 0));
+    const d = 'M' + hi.map((v, i) => `${x(i)},${y(v)}`).join('L') + 'L' + base.map((v, i) => `${x(i)},${y(v)}`).reverse().join('L') + 'Z';
+    const p = document.createElementNS(NS, 'path'); p.setAttribute('d', d);
+    p.setAttribute('fill', colorOf(k)); p.setAttribute('opacity', .85); svg.appendChild(p);
+    base = hi;
+  }
+  for (let yr = D.start[0]; yr <= D.start[0] + Math.floor(D.last / 12); yr++) {
+    const i = (yr - D.start[0]) * 12, t = document.createElementNS(NS, 'text');
+    t.setAttribute('x', x(i) + 2); t.setAttribute('y', H - 2); t.textContent = yr; svg.appendChild(t);
+  }
+  const cx = x(D.cycle6), cl = document.createElementNS(NS, 'line');
+  cl.setAttribute('x1', cx); cl.setAttribute('x2', cx); cl.setAttribute('y1', 0); cl.setAttribute('y2', H - pad);
+  cl.setAttribute('stroke', '#4a5568'); cl.setAttribute('stroke-dasharray', '3 3'); svg.appendChild(cl);
+  for (const [tx, anchor, dx] of [['5th RHNA cycle', 'end', -4], ['6th RHNA cycle', 'start', 4]]) {
+    const t = document.createElementNS(NS, 'text'); t.setAttribute('x', cx + dx); t.setAttribute('y', 10);
+    t.setAttribute('text-anchor', anchor); t.textContent = tx; svg.appendChild(t);
+  }
+  cur = document.createElementNS(NS, 'line');
+  cur.setAttribute('y1', 0); cur.setAttribute('y2', H - pad); cur.setAttribute('stroke', '#1a365d'); cur.setAttribute('stroke-width', 1.5);
+  svg.appendChild(cur);
+}
+// monthly completions (units by the month of completion), for the 12-month bar strip
+const MONTHLY = new Array(D.last + 1).fill(0);
+for (const r of D.rows) if (r[3] !== null && r[3] >= 0 && r[3] <= D.last) MONTHLY[r[3]] += r[5];
+const MAXM = Math.max(...MONTHLY.slice(12));
+const msvg = document.getElementById('pa-months');
+function months(i) {
+  msvg.innerHTML = '';
+  const W = msvg.clientWidth, H = 90, pad = 14, top = 12, n = 12, bw = W / n;
+  const y = v => H - pad - Math.min(v, MAXM) / MAXM * (H - pad - top);
+  for (let j = 0; j < n; j++) {
+    const m = i - n + 1 + j;
+    if (m < 0) continue;
+    const v = MONTHLY[m], partial = m > D.co_end;
+    const r = document.createElementNS(NS, 'rect');
+    r.setAttribute('x', j * bw + 2); r.setAttribute('width', bw - 4); r.setAttribute('y', y(v)); r.setAttribute('height', H - pad - y(v));
+    r.setAttribute('fill', partial ? '#9fdcb6' : '#00a844'); msvg.appendChild(r);
+    const t = document.createElementNS(NS, 'text'); t.setAttribute('x', j * bw + bw / 2); t.setAttribute('y', Math.min(y(v), H - pad) - 2);
+    t.setAttribute('text-anchor', 'middle'); t.textContent = v > MAXM ? v + '↑' : v; msvg.appendChild(t);
+    const l = document.createElementNS(NS, 'text'); l.setAttribute('x', j * bw + bw / 2); l.setAttribute('y', H - 2);
+    l.setAttribute('text-anchor', 'middle'); const jan = m % 12 === (13 - D.start[1]) % 12, narrow = bw < 40;    // phones: one-letter months
+    l.textContent = narrow ? label(m)[0] + (jan ? "'" + label(m).slice(-2) : '') : label(m).slice(0, 3) + (jan ? " '" + label(m).slice(-2) : '');
+    msvg.appendChild(l);
+    if (m === D.co_end + 1) {
+      const d = document.createElementNS(NS, 'line'); d.setAttribute('x1', j * bw); d.setAttribute('x2', j * bw);
+      d.setAttribute('y1', 0); d.setAttribute('y2', H - pad); d.setAttribute('stroke', '#4a5568'); d.setAttribute('stroke-dasharray', '3 3');
+      msvg.appendChild(d);
+      const pt = document.createElementNS(NS, 'text'); pt.setAttribute('x', j * bw + 3); pt.setAttribute('y', 9); pt.textContent = 'partial →';
+      msvg.appendChild(pt);
+    }
+  }
+}
+function cursor(i) {
+  months(i); if (cur) { const X = i / D.last * svg.clientWidth; cur.setAttribute('x1', X); cur.setAttribute('x2', X); } }
+
+const sl = document.getElementById('pa-slider'), btn = document.getElementById('pa-play');
+sl.max = D.last; sl.value = D.last;
+let timer = null;
+sl.oninput = () => { stop(); draw(+sl.value); };
+function stop() { clearInterval(timer); timer = null; btn.textContent = 'Play'; }
+btn.onclick = () => {
+  if (timer) return stop();
+  if (+sl.value >= D.last) sl.value = 0;
+  btn.textContent = 'Pause';
+  timer = setInterval(() => { sl.value = +sl.value + 1; draw(+sl.value); if (+sl.value >= D.last) stop(); }, 110);
+};
+window.addEventListener('resize', () => { history(); draw(+sl.value); });
+history(); draw(D.last);
+document.getElementById('pa-note').textContent =
+  `Private projects only. UC Berkeley's dormitories are counted in beds, not homes: about ${D.uc_beds.toLocaleString()} beds are ` +
+  `under construction or planned. A project that left the pipeline is shown leaving at its last recorded event; the City ` +
+  `rarely records the date of a withdrawal. "Entitled 3+ years" means approved at least 36 months earlier with no building ` +
+  `permit yet. "Permitted, not started" means a building permit is issued but the City has recorded no inspection under it. ` +
+  `The 6th RHNA cycle credits homes whose first building permit was issued on or after June 30, 2022. ` +
+  `In the grid, completed homes run oldest to newest; a dark square with a year ('19, '20 ...) starts each year's ` +
+  `completions. Completions after ${D.feed_end} come from the City's online permit records only and may be incomplete. ` +
+  `Completed includes ${D.n_historic} buildings finished before 2015. "Completed in the last 12 months" is shown from January 2019 ` +
+  `(completions are recorded from 2018) through ${D.feed_end}, the last completion in the City's permit feed.  Data: BerkeleyBuild Pipeline Explorer, ${D.stamp}.`;
+})();
+</script>

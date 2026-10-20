@@ -78,6 +78,7 @@ Edit the relevant `.html`/`.js` directly. Homepage = `index.html`; Explorer UI =
 .venv/bin/python scripts/export_explorer_data_v4.py   # writes docs/explorer_data_v4_working.js from v4
 .venv/bin/python scripts/deploy_gate.py               # then promote: cp the working file to docs/explorer_data.js
 .venv/bin/python scripts/site_numbers.py              # keep hand-written page counts in step
+.venv/bin/python scripts/viz/pipeline_animation.py   # the home page's pipeline animation (refuses a frame != Explorer)
 ```
 The v1 and v2 exporters are sequestered in `scripts/superseded/`; never run them. Verify the diff looks sane,
 then deploy (E: `bash scripts/deploy.sh` stages main; John pushes).

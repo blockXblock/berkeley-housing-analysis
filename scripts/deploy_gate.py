@@ -138,6 +138,11 @@ def main():
             m = re.search(r'<!-- BEGIN site_numbers data="([^"]*)"', h)
             check(m is not None and m.group(1) == gen(served), "home-page numbers match the served explorer data",
                   f"page stamp {m.group(1) if m else 'missing'} vs data {gen(served)} — run scripts/site_numbers.py")
+            # THE PIPELINE ANIMATION (2026-10-20) is generated from the same data by scripts/viz/pipeline_animation.py,
+            # which refuses to write unless its last frame equals the Explorer's stage totals; a stale block cannot deploy.
+            m = re.search(r'<!-- BEGIN pipeline_animation data="([^"]*)"', h)
+            check(m is not None and m.group(1) == gen(served), "home-page pipeline animation matches the served explorer data",
+                  f"block stamp {m.group(1) if m else 'missing'} vs data {gen(served)} — run scripts/viz/pipeline_animation.py")
 
     print()
     if FAIL:

@@ -13,14 +13,15 @@ or "individual" (applicants); Rent Board tenancy dates are shown as the year. Th
 <!-- rows:start (written by gen_datasette_dbs.py) -->
 | table | rows |
 |---|---|
-| projects | 1,554 |
-| timeline | 12,191 |
-| people | 12,741 |
+| projects | 1,551 |
+| timeline | 12,187 |
+| people | 12,867 |
 | businesses | 282 |
 | city_records | 9,290 |
+| approval_times | 389 |
 | adu_rent_board | 684 |
 | permits | 2,449 |
-| parcels | 1,572 |
+| parcels | 1,720 |
 | documents | 266 |
 <!-- rows:end -->
 

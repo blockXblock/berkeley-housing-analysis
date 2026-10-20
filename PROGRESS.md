@@ -5,6 +5,20 @@
 
 ---
 
+## 2026-10-20 — Site numbers: one definition of "in the pipeline" (`55f483c1`, on dev, NOT deployed)
+
+The export (`export_explorer_data_v4.py`) writes `in_pipeline` (pre_application, in_review, entitled,
+under_construction, stale) and `left_pipeline` (withdrawn, denied, void) on every project; home page
+(`site_numbers.py`), Explorer and Snapshot (`build_report.py`, was hand-typed 11,222) all read it: **11,442 units**
+(private). Before: home 13,456 (counted withdrawn/denied/void), Explorer "Private Units" 18,424 (every stage incl.
+completed). Explorer stage chart was EMPTY since the v4 cutover (keyed on raw `in_review` vs label `Under Review`);
+now page labels, private only. Legend caption says its counts are the 195 flyover buildings. Explorer data
+regenerated from v4 1591bcbd (1,551 projects). Deploy gate's site checks PASS. **John deploys.** Datasette not yet
+regenerated. Scratch: deleted 9 superseded rebuild folders (7.3 GB, DB copies + logs only); kept 09-07, 09-09,
+10-01_bp_capdetail (analysis/harvest) and the 5 folders code refers to.
+
+---
+
 ## 2026-10-13 — SWAPPED: live v4 = the address-canon build (John relocked)
 
 Live `databases/berkeley_housing_v4.db` = `scratch/2026-10-13_rebuild/chain_head` (fresh chain rebuild from committed

@@ -21,7 +21,7 @@ Imports s0_keys + housing_predicates + gating + housing_rules + cpra_dedup (all 
 collapse set is derived from the raw CPRA feed exactly as build_s1 does; reporting_year via housing_rules).
 --preview is READ-ONLY. Surfaces city-number differences; NEVER tunes toward them.
 """
-import sqlite3, sys, os, argparse, glob, hashlib
+import sqlite3, sys, os, argparse, hashlib
 from collections import defaultdict, Counter
 from datetime import date
 import pandas as pd
@@ -37,7 +37,10 @@ from scripts.cpra_dedup import extract_master_permit
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 V3 = os.path.join(ROOT, 'databases', 'berkeley_housing_v3.db')
 MIRROR = os.path.join(ROOT, 'databases', 'hcd_apr_mirror_2026-06-17_fresh.db')  # FRESH deduped oracle, READ-ONLY
-CPRA = [f for f in glob.glob(os.path.join(ROOT, 'data/raw/cpra-downloads', 'BP_Annual Permit Report-*.xlsx'))]
+# the same two files S0-S4 name (2026-10-20: was a 'BP_Annual Permit Report-*.xlsx' pattern, which also matched the three
+# 2026-07-07 CPRA re-runs added to the folder, so S9 derived its collapse set from five files while S1 used two)
+CPRA = [os.path.join(ROOT, 'data/raw/cpra-downloads', f) for f in
+        ('BP_Annual Permit Report-2018-2022.xlsx', 'BP_Annual Permit Report-2023-2025.xlsx')]
 AS_OF = '2026-06-17'
 YEARS = list(range(2018, 2026))
 

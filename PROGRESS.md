@@ -13,7 +13,9 @@ stages incl. "permitted, not started" (BP issued, no inspection recorded). Build
 Explorer data's stages (all 8 match). Permit -> first inspection: median 1.0 mo (1-4u, n=808), 1.4 mo (5+u, n=44),
 p90 ~5 mo; now 73 projects / 206 units permitted with no inspection (42 projects >2 yrs, 51 units, mostly ADUs);
 22% of completions have NO inspection records (harvest gap) -> started at the permit date. Open: Explorer's "UC beds
-still to come" sums units (0) not beds (4,238). Next: John's review, then a generated home-page block.
+still to come" FIXED (`e0b49d8b`, beds 4,238; UC_BEDS derived 5,010). History chart flipped (pre-app bottom) with
+green = completed in the trailing 12 months (John: option 2), shown Jan 2019 .. feed end 2026-06-26 only. Next: John's
+review, then a generated home-page block.
 
 ---
 

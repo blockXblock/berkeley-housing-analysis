@@ -202,15 +202,25 @@ const sl = document.getElementById('pa-slider'), btn = document.getElementById('
 sl.max = D.last; sl.value = D.last;
 let timer = null;
 sl.oninput = () => { stop(); draw(+sl.value); };
-function stop() { clearInterval(timer); timer = null; btn.textContent = 'Play'; }
+function stop() { clearInterval(timer); timer = null; btn.textContent = +sl.value >= D.last ? 'Replay' : 'Play'; }
 btn.onclick = () => {
   if (timer) return stop();
   if (+sl.value >= D.last) sl.value = 0;
   btn.textContent = 'Pause';
-  timer = setInterval(() => { sl.value = +sl.value + 1; draw(+sl.value); if (+sl.value >= D.last) stop(); }, 110);
+  timer = setInterval(() => { sl.value = +sl.value + 1; draw(+sl.value); if (+sl.value >= D.last) stop(); }, 90);
 };
 window.addEventListener('resize', () => { history(); draw(+sl.value); });
 history(); draw(D.last);
+btn.textContent = 'Replay';
+// AUTOPLAY once, when the graphic first comes into view (John 2026-10-20), from January 2018 to today; never for
+// visitors who ask for reduced motion (they see today's frame and can press Replay)
+const still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (!still && 'IntersectionObserver' in window) {
+  const io = new IntersectionObserver(es => {
+    if (es.some(e => e.isIntersecting)) { io.disconnect(); sl.value = 0; draw(0); btn.onclick(); }
+  }, {threshold: 0.35});
+  io.observe(document.getElementById('pipeline-anim'));
+}
 document.getElementById('pa-note').textContent =
   `Private projects only. UC Berkeley's dormitories are counted in beds, not homes: about ${D.uc_beds.toLocaleString()} beds are ` +
   `under construction or planned. A project that left the pipeline is shown leaving at its last recorded event; the City ` +

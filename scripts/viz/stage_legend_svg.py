@@ -86,6 +86,7 @@ CSS = """
     text {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }}
     .ttl  {{ font-size: 13px; font-weight: 700; fill: #1a365d; letter-spacing: .06em; }}
     .meta {{ font-size: 11px; fill: #718096; }}
+    .tot  {{ font-size: 15px; font-weight: 800; fill: #1a365d; }}   /* the flyover building count: bigger, bolder (John 2026-10-20) */
     .name {{ font-size: 12px; font-weight: 700; fill: #2d3748; }}
     .desc {{ font-size: 10.5px; fill: #5a6779; }}
     .cnt  {{ font-size: 17px; font-weight: 700; }}
@@ -157,10 +158,10 @@ def wide(gloss, stage, agency, total_label):
                f'<text class="band" x="{bx - 10:.1f}" y="{rail_y - 28}" text-anchor="end">'
                f'ON PAPER</text>'
                f'<text class="band" x="{bx + 10:.1f}" y="{rail_y - 28}">PHYSICAL</text>')
-    if exits:
-        for x in ex:
-            div += (f'<text class="band" x="{x:.1f}" y="{rail_y - 28}" text-anchor="middle">'
-                    f'LEFT THE PIPELINE</text>')
+    if exits:      # ONE label over the exit group (it was drawn once per exit, overprinting itself); Stalled has not
+                   # left the pipeline, so the label names both (2026-10-20)
+        div += (f'<text class="band" x="{sum(ex) / len(ex):.1f}" y="{rail_y - 28}" text-anchor="middle">'
+                f'STALLED OR LEFT</text>')
 
     agrow = ""
     if ag:
@@ -185,8 +186,8 @@ def wide(gloss, stage, agency, total_label):
             f'<desc id="d">{esc(total_label)}</desc>'
             f'<style>{css}</style>'
             f'<rect width="{W}" height="{H:.0f}" fill="#ffffff"/>'
-            f'<text class="ttl" x="{M}" y="26">WHERE EACH PROJECT STANDS</text>'
-            f'<text class="meta" x="{W - M}" y="26" text-anchor="end">{esc(total_label)}</text>'
+            f'<text class="ttl" x="{M}" y="26">WHERE EACH FLYOVER PROJECT STANDS</text>'
+            f'<text class="tot" x="{W - M}" y="27" text-anchor="end">{esc(total_label)}</text>'
             f'{rail}{div}{dot}{"".join(body)}{agrow}</svg>')
 
 
@@ -207,7 +208,7 @@ def narrow(gloss, stage, agency, total_label):
         y += 20 + len(lines) * 12 + 14
         if i == len(flow) - 1 and exits:
             rows.append(f'<text class="band" x="{x_txt}" y="{y - 2}" fill="#b9c2cd">'
-                        f'LEFT THE PIPELINE</text>')
+                        f'STALLED OR LEFT</text>')
             y += 20
     H = y + (40 if ag else 4)
 
@@ -237,6 +238,6 @@ def narrow(gloss, stage, agency, total_label):
             f'<desc id="d">{esc(total_label)}</desc>'
             f'<style>{css}</style>'
             f'<rect width="{W}" height="{H:.0f}" fill="#ffffff"/>'
-            f'<text class="ttl" x="{M}" y="26">WHERE EACH PROJECT STANDS</text>'
-            f'<text class="meta" x="{M}" y="43">{esc(total_label)}</text>'
+            f'<text class="ttl" x="{M}" y="26">WHERE EACH FLYOVER PROJECT STANDS</text>'
+            f'<text class="tot" x="{M}" y="46">{esc(total_label)}</text>'
             f'{rail}{dot}{"".join(rows)}{agrow}</svg>')

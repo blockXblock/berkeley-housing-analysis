@@ -5,6 +5,18 @@
 
 ---
 
+## 2026-10-20 — Home-page pipeline animation: PROTOTYPE in scratch (not on the site)
+
+`scratch/2026-10-20_pipeline_viz/` (build.py + template.html -> pipeline_waffle.html): every private project as a
+waffle (1 square = 10 homes), monthly from Jan 2018 (John), 5th/6th RHNA cycle boundary at the 2022-06-30 credit date,
+stages incl. "permitted, not started" (BP issued, no inspection recorded). Build asserts the final frame == the
+Explorer data's stages (all 8 match). Permit -> first inspection: median 1.0 mo (1-4u, n=808), 1.4 mo (5+u, n=44),
+p90 ~5 mo; now 73 projects / 206 units permitted with no inspection (42 projects >2 yrs, 51 units, mostly ADUs);
+22% of completions have NO inspection records (harvest gap) -> started at the permit date. Open: Explorer's "UC beds
+still to come" sums units (0) not beds (4,238). Next: John's review, then a generated home-page block.
+
+---
+
 ## 2026-10-20 — Datasette regenerated (`4fa4633a`); notebook survey after the swap
 
 Datasette rebuilt from v4 1591bcbd: 1,551 projects (fly instance still serves the March build: **John runs `cd

@@ -30,7 +30,7 @@
   </div>
   <div class="totals">
     <span>In the pipeline <b id="pa-t-pipe"></b></span>
-    <span>Completed <b id="pa-t-done"></b></span>
+    <span>Completed, all records <b id="pa-t-done"></b></span>
     <span>Completed in the last 12 months <b id="pa-t-recent"></b></span>
     <span>Left the pipeline <b id="pa-t-left"></b></span>
   </div>
@@ -54,7 +54,7 @@ const STAGES = [
   {k: 'stalled',   label: 'Entitled 3+ years, no permit', color: '#ff0000', group: 'On paper'},
   {k: 'permitted', label: 'Permitted, not started',     color: '#00b8cc', group: 'Physical'},
   {k: 'building',  label: 'Under construction',         color: '#2962ff', group: 'Physical'},
-  {k: 'completed', label: 'Completed',                  color: '#00a844', group: 'Physical'},
+  {k: 'completed', label: 'Completed, all records',     color: '#00a844', group: 'Physical'},
   {k: 'left',      label: 'Withdrawn, denied, expired', color: '#b0003a', group: 'Left the pipeline'},
 ];
 const PIPE = ['preapp', 'review', 'entitled', 'stalled', 'permitted', 'building'];

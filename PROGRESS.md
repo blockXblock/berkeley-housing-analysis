@@ -5,7 +5,15 @@
 
 ---
 
-## 2026-10-21 — Site redesign: REVIEW pages built (untracked in docs/, not deployable until approved)
+## 2026-10-21 — Site redesign made LIVE on dev (`db074c6a`); deploy staged main `8bf041d6` (John pushes)
+
+index.html is now the redesign (composer scratch/2026-10-21_site_next/make_live.py, one-time; old page saved as
+scratch/2026-10-21_site_next/index.before_redesign.html). Generated blocks: pipeline_headline + pipeline_animation
+(new title-as-button template), site_numbers, legend, flyovers (verbatim in `.nx-fly`). `scripts/site_nav.py` writes
+the Housing/Berkeley/Learn menu into 18 pages (not maps/, map.html, tours/); re-run after any page generator; gate
+checks it. Pre-existing phone overflow (not the menu): players.html 499px, pipeline-state.html 437, curriculum 429.
+
+### Earlier: review pages
 
 John chose the combination: flyover + two-number headline first, then tabs (▶ Play the pipeline · 🎥 Fly through · 🗺
 Map · 🕸 Who's building · 📊 Data & methods), title-as-button player with the self-drawing layer chart + monthly bars

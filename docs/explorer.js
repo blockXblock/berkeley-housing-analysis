@@ -646,7 +646,7 @@
             if (skylineCanvas && skylineCanvas.parentElement) {
                 const note = document.createElement('p');
                 note.className = 'text-xs text-gray-500 mt-2 text-center';
-                const ucBedsCharted = topByHeight.filter(p => p.is_uc_project).reduce((acc, p) => acc + (p.units || 0), 0);
+                const ucBedsCharted = topByHeight.filter(p => p.is_uc_project).reduce((acc, p) => acc + (p.beds || 0), 0);   // beds, never units
                 note.innerHTML = '🟡 <span class="text-yellow-600 font-medium">Yellow bars</span> = UC Berkeley projects (' + ucCount + ' projects, ' + ucBedsCharted.toLocaleString() + ' beds). UC projects are exempt from city permitting and RHNA.';
                 skylineCanvas.parentElement.appendChild(note);
             }
@@ -3612,8 +3612,9 @@
         // --- Private (city) vs UC group-quarters ---------------------------------
         // UC student housing is GROUP QUARTERS: excluded from RHNA/APR and measured in
         // sourced BEDS, never converted to "units" and never folded into a unit total.
-        // (Beds sourced: 2400 Bowditch 1500 + 2200 Bancroft 1625 + 1950 Oxford 772 + 2556 Haste 1113.)
-        const UC_BEDS = 5010;
+        // Beds from the export's beds field (sourced per project: 2400 Bowditch 1500 + 2200 Bancroft 1625 + 1950 Oxford 772
+        // + 2556 Haste 1113 = 5,010 on 2026-10-20); derived, so a new UC project changes it without a hand edit
+        const UC_BEDS = projects.filter(p => p.is_uc_project).reduce((s, p) => s + (p.beds || 0), 0);
         const UC_EXISTING_BEDS = 9800;  // sourced: students in UC housing today
         const privateProjects = projects.filter(p => !p.is_uc_project);
         const privateProjectCount = privateProjects.length;
@@ -3627,7 +3628,8 @@
         // House) is already inside the 9,800 existing-beds figure, so counting it as
         // "would add" would double-count it.
         const ucPipeline = ucProjectsAll.filter(p => (getField(p, 'status') || '') !== 'Completed');
-        const ucPipelineBeds = ucPipeline.reduce((s, p) => s + (p.units || 0), 0);
+        // BEDS from the export's beds field (2026-10-20: this summed units, which are 0 for dorms not yet built, so it showed 0)
+        const ucPipelineBeds = ucPipeline.reduce((s, p) => s + (p.beds || 0), 0);
         const ucPipelinePct = Math.round(ucPipelineBeds / UC_EXISTING_BEDS * 100);
         // Net-new CO units (completions), PRIVATE, UC-excluded, by year
         const coUnitsYear = (y) => privateProjects

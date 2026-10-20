@@ -5,7 +5,7 @@
 
 ---
 
-## 2026-10-20 — Inactive-entitlement rule changed (`c634985a`) + home page edits; deploy staged main `a391e846` (John pushes)
+## 2026-10-20 — Inactive-entitlement rule changed (`c634985a`) + home page edits; DEPLOYED main `a391e846`
 
 **Rule (John):** Entitled but Inactive = approved 36+ months ago, no BP issued, AND no event on any of the project's
 own records in 36 months. 12 projects / 764 u -> Entitled (2800 Telegraph among them); inactive 118/1,897 -> 106/1,133.

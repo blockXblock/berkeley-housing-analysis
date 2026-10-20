@@ -5,7 +5,7 @@
 
 ---
 
-## 2026-10-20 — Site numbers: one definition of "in the pipeline" (`55f483c1`, on dev, NOT deployed)
+## 2026-10-20 — Site numbers: one definition of "in the pipeline" (`55f483c1`; DEPLOYED main `02378d6a`)
 
 The export (`export_explorer_data_v4.py`) writes `in_pipeline` (pre_application, in_review, entitled,
 under_construction, stale) and `left_pipeline` (withdrawn, denied, void) on every project; home page
@@ -13,7 +13,7 @@ under_construction, stale) and `left_pipeline` (withdrawn, denied, void) on ever
 (private). Before: home 13,456 (counted withdrawn/denied/void), Explorer "Private Units" 18,424 (every stage incl.
 completed). Explorer stage chart was EMPTY since the v4 cutover (keyed on raw `in_review` vs label `Under Review`);
 now page labels, private only. Legend caption says its counts are the 195 flyover buildings. Explorer data
-regenerated from v4 1591bcbd (1,551 projects). Deploy gate's site checks PASS. **John deploys.** Datasette not yet
+regenerated from v4 1591bcbd (1,551 projects). All deploy-gate checks PASS; John pushed main `02378d6a` (also retires the July v2 public DB from the site and publishes docs/data/blocks/). Datasette not yet
 regenerated. Scratch: deleted 9 superseded rebuild folders (7.3 GB, DB copies + logs only); kept 09-07, 09-09,
 10-01_bp_capdetail (analysis/harvest) and the 5 folders code refers to.
 

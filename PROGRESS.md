@@ -5,6 +5,36 @@
 
 ---
 
+## 2026-10-23 — Affordable definition DECIDED (John); fee tracking started
+
+`docs/methodology/affordable_housing_definition.md`: legally binding cap on rent AND income at <=120% AMI; tiers by statutory
+cutoffs (<=30/50/80/120%); excluded: APR-assumed ADUs, rent control, naturally affordable, UC. **Fee-paying projects are
+tracked as money, not units** (John: follow the fee-vs-units trend and whether the fee funded units elsewhere). Source
+found: HHCS **Inclusionary Housing Program Annual Report FY25** (Council 2025-10-28 Item 34; copy in
+`data/raw/city_reports/`, sha256 b4b362ae...): per-project ordinance (AHMF/IHO), units, BMR units, fee estimate; AHMF
+revenue FY21 $3.1M, FY22 $16.2M, FY23 $14.2M, FY24 $10.7M, FY25 $0.83M; BMR program 605 units / 61 properties.
+Parsed to `scratch/2026-10-23_ahmf/fy25_fee_pipeline.csv` (23 rows, $22.6M; 20 matched to v4, 3 not: 1685 Shattuck/2109
+Virginia, 1950 University 599u, 3020 San Pablo). **Next:** earlier annual reports (Council agenda archive), a fee ledger
+design for John, then the use side (HTF awards in funding_ledger).
+
+---
+
+## 2026-10-21 — Affordability gap: lists built, first three projects read (proposals await John)
+
+Entitled 2016-2025 (v4): 9,439 u / 344 projects; city APR A2 2018-2025: 10,277 entitled, 4,022 built (v4 4,122). v4
+tiers cover 20 entitled / 3 completed projects only. Harvest lists (oracle used ONLY to rank):
+`scratch/2026-10-21_affordability_gap/` affordability_gap_list (79 entitled 5+u, APR claims 1,154 restricted) and
+completed_gap_list (47; 463 = all of the APR's completed restricted units). Fetched 6 approval docs (159 MB,
+`fetch_manifest.csv`; `fetch_affordability_statements.py` gained `--out`); attachment lists for PLN2019-0059,
+ZP2021-0191, ZP2017-0108, DRCP2017-0013 -> `data/raw/accela_attachments/attachments_2026-10-21.jsonl` (PLN2019-0059's
+grid listed each of 37 files twice: check the pager). **Proposed (not in the ledger):** `proposed_affordability_rulings.csv`
+— 1750 Sacramento 85/163/133 ELI/VLI/LI (approval letter p.2 + condition 46); 2001 Ashby 25/28/33 and 2012 Berkeley Way
+53 ELI NEED AN AMI->TIER RULE (statutory cutoffs <=30/50/80/120%); Berkeley Way BRIDGE 88 held (split unstated; next:
+CTCAC staff report CA-2019-542). Finding: the city's APR folds ELI into VLI and counted 2001 Ashby's 60% AMI units as VLI.
+Open: John approves rows + the AMI rule; upload the 6 PDFs to R2 `affordability_forms/`.
+
+---
+
 ## 2026-10-21 — Site redesign made LIVE on dev (`db074c6a`); DEPLOYED main `8bf041d6`
 
 index.html is now the redesign (composer scratch/2026-10-21_site_next/make_live.py, one-time; old page saved as

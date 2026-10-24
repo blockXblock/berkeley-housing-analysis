@@ -21,8 +21,8 @@
   folder) is the 10th card on `/tours/` as "Elmwood Future At Seven Base Stories" (John's title), with a synced
   Street View timeline. Catalog entry in `docs/tours.json` has no package (flown on the Elmwood layers, not
   geometry.kml) and `hypothetical: true`. Not added to the home page's flyover list (its legend says stage colors).
-  **Deploy staged: main `63730bd6`** (all gate checks PASS; also carries the 10-20 phones fix `0feed358` and
-  `docs/methodology/affordable_housing_definition.md`). The push from CC was refused; John runs `git push origin main`.
+  **Deployed: main `63730bd6`, pushed by John 2026-10-24** (origin/main 8bf041d6 → 63730bd6; all gate checks PASS; also
+  carries the 10-20 phones fix `0feed358` and `docs/methodology/affordable_housing_definition.md`).
   Held out of the deploy: an uncommitted 10-21 edit to `kml/geometry/geometry.kml` (2555 College description
   "Under Construction" → "Completed"; style was already Completed); stashed for the gate, restored, still uncommitted.
 - **Open:** our 8 College sites are Raimi grades + John's picks, not the City's map; the PC replaced the map with criteria

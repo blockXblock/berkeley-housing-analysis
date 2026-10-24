@@ -5,6 +5,12 @@
 
 ---
 
+## 2026-10-24 — Tours in the site menu + a tours button (dev c871c7a3, not yet deployed)
+
+- `scripts/site_nav.py` menu: Housing · Berkeley · Learn · **Tours** (-> `tours/`) on all 18 menu pages; narrow-screen
+  sizes at 480 px and 360 px keep it on one line down to 320 px. The tours page itself stays menu-free (full-screen).
+- Fly-through tab: "All tours, with map and Street View" is now a `hero-cta` button under the intro; intro says 11 flights.
+
 ## 2026-10-24 — Elmwood flyover SELF-HOSTED on R2 (DEPLOYED: main 8a8e2930 pushed by John)
 
 - R2 `berkeleybuild-pdf` bucket, new `videos/` prefix: `elmwood-orbit-1080.mp4` (132,587,774 B, sha256 71fdbe8b…)

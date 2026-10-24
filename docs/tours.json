@@ -9,6 +9,25 @@
   },
   "tours": [
     {
+      "id": "elmwood-orbit",
+      "title": "Elmwood Future At Seven Base Stories",
+      "tour_kml": "kml/tours/elmwood-orbit.kml",
+      "source_kml_missing": false,
+      "package": null,
+      "package_geometry_sha": null,
+      "flyto_legs": 366,
+      "duration_s": 184.9,
+      "video": {
+        "youtube": "__a4dfxvO3Y"
+      },
+      "recorded": "2026-10-24",
+      "recorded_geometry_era": "elmwood layers: college-opportunity-sites.kml (7-story 5-over-2 folder) + elmwood-labels.kmz; not geometry.kml",
+      "has_pushpins": false,
+      "mapping_inferred": false,
+      "needs_rerecord": false,
+      "hypothetical": true
+    },
+    {
       "id": "bancroft-e2w",
       "title": "Bancroft Way — Piedmont to Aquatic Park",
       "tour_kml": "kml/tours/bancroft-e2w.kml",

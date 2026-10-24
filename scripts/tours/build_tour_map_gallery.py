@@ -26,8 +26,12 @@ TOURS = [
     ("durant-w2e", "Durant Avenue, Milvia to Piedmont", "One block south of campus, west to east."),
     ("uc-dormitories", "UC Berkeley student housing", "5,010 beds in four projects."),
     ("tour-private-pipeline-over-200-units-2026-05-16", "Berkeley's 17 largest private projects", "Every private project planned with more than 200 homes."),
+    # John, 2026-10-24: title as he gave it. HYPOTHETICAL buildings, not projects: the 7-story 5-over-2 scenario
+    # folder of kml/geometry/college-opportunity-sites.kml, flown by kml/tours/elmwood-orbit.kml.
+    ("elmwood-orbit", "Elmwood Future At Seven Base Stories",
+     "Hypothetical: eight College Avenue sites drawn at 7 stories, a density-bonus scenario. Not proposals."),
 ]
-COLORS = ["#c0392b", "#8e44ad", "#1f5fbf", "#16a085", "#d35400", "#2c3e50", "#b7950b", "#27ae60", "#7f8c8d"]
+COLORS = ["#c0392b", "#8e44ad", "#1f5fbf", "#16a085", "#d35400", "#2c3e50", "#b7950b", "#27ae60", "#7f8c8d", "#c2185b"]
 
 
 def main():

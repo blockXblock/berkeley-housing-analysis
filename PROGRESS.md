@@ -5,6 +5,25 @@
 
 ---
 
+## 2026-10-24 — Elmwood tour: College orbit, print labels, "5 stories" attribution fixed
+
+- **Orbit** (`scripts/tours/gen_orbit_tour.py` → `kml/tours/elmwood-orbit.kml`): orbits only the 8 College (C-E)
+  FUTURE sites (`--zone`), 30 ft lower (250 ft; end 230 ft), opens 250 m from the Wells Fargo lot (was 372 m).
+- **Attribution fixed (John: "yes, fix the labels").** 5 stories on College is the **Planning Commission's** 2026-05-06
+  recommendation, not staff's: staff's Option 1A gave the C-E Mixed-Use Opportunity Areas 4 stories / 48 ft and the PC
+  added a floor (`data/raw/czu/2026-05-06_pc4__FINAL_minutes.ocr.txt`; staff report Table 2). Labels now read
+  "Planning Comm. 5"; the folder is "College at 5 stories (Planning Commission, May 2026)". Geometry and
+  `opportunity_sites_summary.json` byte-identical; text only. Pre-fix copies in `scratch/2026-10-23_print/`.
+- **Print** (24 × 45½ in at 180 dpi from GE's 8192 × 4320 save): label files at 2.5× scale,
+  `scratch/2026-10-23_print/elmwood-labels-print.kmz` and `…-print-7story.kmz` (7-story labels only). GE draws labels at
+  screen pixel size in a large save, so the normal labels print ~6 pt. Turn the GE grid off (it drew the white lines).
+- **On the site (dev, not deployed):** YouTube `__a4dfxvO3Y` (185.0 s = `elmwood-orbit.kml` 184.9 s, the 7-story
+  folder) is the 10th card on `/tours/` as "Elmwood Future At Seven Base Stories" (John's title), with a synced
+  Street View timeline. Catalog entry in `docs/tours.json` has no package (flown on the Elmwood layers, not
+  geometry.kml) and `hypothetical: true`. Not added to the home page's flyover list (its legend says stage colors).
+- **Open:** our 8 College sites are Raimi grades + John's picks, not the City's map; the PC replaced the map with criteria
+  (≥7,000 sf, ≥80 ft deep, corner, no existing units, not historic). Checking each site against them is not done.
+
 ## 2026-10-23 — Affordable definition DECIDED (John); fee tracking started
 
 `docs/methodology/affordable_housing_definition.md`: legally binding cap on rent AND income at <=120% AMI; tiers by statutory
@@ -16,6 +35,14 @@ revenue FY21 $3.1M, FY22 $16.2M, FY23 $14.2M, FY24 $10.7M, FY25 $0.83M; BMR prog
 Parsed to `scratch/2026-10-23_ahmf/fy25_fee_pipeline.csv` (23 rows, $22.6M; 20 matched to v4, 3 not: 1685 Shattuck/2109
 Virginia, 1950 University 599u, 3020 San Pablo). **Next:** earlier annual reports (Council agenda archive), a fee ledger
 design for John, then the use side (HTF awards in funding_ledger).
+**Fund 120 (AHMF) from the audited ACFRs** (FY2023-25 in `data/raw/city_reports/`; table
+`scratch/2026-10-23_ahmf/fund120_by_year.csv`): revenue matches HHCS exactly; FY23-25 collected $25.8M, spent $16.5M,
+balance $53.3M at 2025-06-30; FY25 budgeted $31.1M, spent $3.0M; FY25 opening $55.46M != FY24 close $42.99M (unexplained).
+Pre-FY2023 ACFRs not online (Wayback empty): records request or EMMA. No earlier HHCS inclusionary report found.
+**CPRA drafted (not sent):** `notes/2026-10-23_cpra_affordable_fee_and_bmr.md` — Request 1 (ACFRs FY16-22, Gov Code
+66006 reports, Fund 120 ledger by payee/project, the FY24->FY25 balance gap, earlier BMR reports); Request 2 (AHCP/fee
+tracker by project + developer, HTF awards by funding source, BMR portfolio with recording numbers, monitoring/rent
+rolls redacted). Gmail checked 2026-10-23: no NextRequest mail since 09-25; no request filed since the 10-01 backlog.
 
 ---
 

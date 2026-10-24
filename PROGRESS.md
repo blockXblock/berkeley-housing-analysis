@@ -31,7 +31,7 @@
   that is exactly the City's 1B map (staff presentation slide 16, 1.0 ac; ours 0.96). The PC adopted that map 6-2.
   It replaces the 09-23 check (wrong corners, wrong depths). **Tour sites NOT on the adopted map:** Wells Fargo lot
   (1A only, 5,750 sf), 2942 College, both "lot behind 2900 College" sites. Labels/captions not yet changed (John's call).
-- **Flyover lists made 11 and 11 (dev `867e52a9`; deploy STAGED main `3fc7e2a4`, all gate checks PASS, NOT pushed).** Live before:
+- **Flyover lists made 11 and 11 (dev `867e52a9`; deployed: main `3fc7e2a4` pushed by John 2026-10-24).** Live before:
   home page 10 videos (incl. Kennedy `9t5bdNZwhFA`, no Elmwood); /tours/ 10 cards (incl. Elmwood, no Kennedy: its catalog
   entry was an `unsourced-` placeholder). Now: Elmwood on the home page (caption: hypothetical; 4 of 8 sites on the 1B
   map); Kennedy on /tours/ from `kml/tours/panoramic-kennedy-legacy-slow20.kml` (407.6 s = video 408 s; camera unchanged

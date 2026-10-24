@@ -746,7 +746,7 @@ $('note').textContent = `Every private housing project in the City's records sin
     <div style="margin: 20px auto; max-width: 1000px; padding: 0 1.5rem;">
   <h3>Elmwood Future At Seven Base Stories</h3>
   <p><b>A hypothetical scenario, not projects in the pipeline.</b> An orbit of eight College Avenue sites in the Elmwood, drawn at 7 stories: the 5-story base the Planning Commission recommended in May 2026, plus a state density bonus. Four of them &mdash; the 7-Eleven at 2887 College, 2901 College, 2999 College and the post office lot at Webster Street &mdash; are on the Mixed-Use Opportunity Areas map the Commission adopted; the other four are not. These buildings are not colored by stage.</p>
-  <div class="vfacade" data-yt="__a4dfxvO3Y" data-loop>
+  <div class="vfacade" data-yt="__a4dfxvO3Y" data-mp4="https://pub-2cee87f70da64080ab70ee0a34b55099.r2.dev/videos/elmwood-orbit" data-loop>
     <button type="button" class="vfacade-btn" aria-label="Play video: Elmwood Future At Seven Base Stories">
       <img src="img/thumbs/__a4dfxvO3Y.jpg" alt=""
            loading="lazy" decoding="async" width="1280" height="720">
@@ -759,6 +759,7 @@ $('note').textContent = `Every private housing project in the City's records sin
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen></iframe></noscript>
   </div>
+  <p style="margin:.4rem 0 0;font-size:.9rem"><a href="https://www.youtube.com/watch?v=__a4dfxvO3Y">Watch on YouTube</a></p>
 </div>
 </div></section>
 <section class="nx-panel" id="map" role="tabpanel" aria-labelledby="tab-map" hidden>
@@ -795,8 +796,27 @@ document.addEventListener('click', function (e) {
   if (!btn) return;
   var box = btn.parentNode, id = box.getAttribute('data-yt');
   if (!id) return;
-  var f = document.createElement('iframe');
   var loop = box.hasAttribute('data-loop');
+  // SELF-HOSTED (data-mp4 = R2 base, "-1080.mp4"/"-720.mp4" appended): opens at full quality.
+  // A YouTube embed starts on Auto (often 240p) and a page can no longer force HD.
+  var mp4 = box.getAttribute('data-mp4');
+  if (mp4) {
+    var v = document.createElement('video');
+    // phones (short side under 600 CSS px) get 720p; tablets and computers 1080p, fullscreen included
+    var big = Math.min(screen.width, screen.height) >= 600;
+    v.src = mp4 + (big ? '-1080.mp4' : '-720.mp4');
+    v.poster = btn.querySelector('img').getAttribute('src');
+    v.controls = true; v.autoplay = true; v.muted = true; v.loop = loop;
+    v.playsInline = true; v.preload = 'auto';
+    v.setAttribute('aria-label', btn.getAttribute('aria-label').replace(/^Play video: /, ''));
+    v.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;background:#000';
+    box.textContent = '';
+    box.appendChild(v);
+    v.play().catch(function () {});
+    v.focus();
+    return;
+  }
+  var f = document.createElement('iframe');
   // A loop must SEEK, not use YouTube's loop=1&playlist=<id>: that reloads the video as a new
   // playlist item every pass and resets the quality to Auto (240p). Seeking keeps the stream.
   f.src = 'https://www.youtube-nocookie.com/embed/' + id +

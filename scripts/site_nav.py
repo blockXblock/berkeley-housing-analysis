@@ -9,7 +9,8 @@ State, the Audit) lose it on a rebuild, so re-run this after them; scripts/deplo
 without the block.
 
 Full-screen pages (the maps, map.html, the tours page) are left out on purpose: a bar above a 100vh map pushes it
-off-screen. The menu is position: static except on the three section pages, where it sticks.
+off-screen. The menu is position: static except on the three section pages, where it sticks. The menu still LINKS to
+the tours page (John, 2026-10-24: it was reachable only from a sentence inside the home page's Fly-through tab).
 
   .venv/bin/python scripts/site_nav.py
 """
@@ -34,7 +35,8 @@ LEGACY_NAV = re.compile(r'<nav class="bb-nav".*?</nav>\n?', re.S)   # the compos
 
 def block(page, door):
     up = "../" * page.count("/")
-    items = [("Housing", up or "./"), ("Berkeley", f"{up}berkeley.html"), ("Learn", f"{up}learn.html")]
+    items = [("Housing", up or "./"), ("Berkeley", f"{up}berkeley.html"), ("Learn", f"{up}learn.html"),
+             ("Tours", f"{up}tours/")]
     links = "".join(f'<a class="m" href="{h}"{" aria-current=page" if n == door else ""}>{n}</a>' for n, h in items)
     pos = "sticky" if page in STICKY else "static"
     return f"""{BEGIN}
@@ -48,6 +50,10 @@ def block(page, door):
   .bb-nav a.m {{ color: #4a5568; text-decoration: none; font-weight: 700; font-size: .98rem; padding: .3rem 0; border-bottom: 3px solid transparent; }}
   .bb-nav a.m[aria-current=page] {{ color: #1a365d; border-bottom-color: #ffd166; }}
   .bb-nav a.m:hover {{ color: #1a365d; }}
+  @media (max-width: 480px) {{ .bb-nav .in {{ gap: .75rem; padding: .55rem .9rem; }} .bb-nav .logo {{ font-size: 1rem; }}
+                              .bb-nav a.m {{ font-size: .9rem; }} }}
+  @media (max-width: 360px) {{ .bb-nav .in {{ gap: .45rem; padding: .5rem .5rem; }} .bb-nav .logo {{ font-size: .85rem; }}
+                              .bb-nav a.m {{ font-size: .8rem; }} }}
 </style>
 <nav class="bb-nav" aria-label="BerkeleyBuild"><div class="in"><a class="logo" href="{up or './'}">Berkeley<span>Build</span></a>{links}</div></nav>
 {END}

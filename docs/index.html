@@ -746,7 +746,7 @@ $('note').textContent = `Every private housing project in the City's records sin
     <div style="margin: 20px auto; max-width: 1000px; padding: 0 1.5rem;">
   <h3>Elmwood Future At Seven Base Stories</h3>
   <p><b>A hypothetical scenario, not projects in the pipeline.</b> An orbit of eight College Avenue sites in the Elmwood, drawn at 7 stories: the 5-story base the Planning Commission recommended in May 2026, plus a state density bonus. Four of them &mdash; the 7-Eleven at 2887 College, 2901 College, 2999 College and the post office lot at Webster Street &mdash; are on the Mixed-Use Opportunity Areas map the Commission adopted; the other four are not. These buildings are not colored by stage.</p>
-  <div class="vfacade" data-yt="__a4dfxvO3Y">
+  <div class="vfacade" data-yt="__a4dfxvO3Y" data-loop>
     <button type="button" class="vfacade-btn" aria-label="Play video: Elmwood Future At Seven Base Stories">
       <img src="img/thumbs/__a4dfxvO3Y.jpg" alt=""
            loading="lazy" decoding="async" width="1280" height="720">
@@ -797,7 +797,9 @@ document.addEventListener('click', function (e) {
   if (!id) return;
   var f = document.createElement('iframe');
   f.src = 'https://www.youtube-nocookie.com/embed/' + id +
-          '?autoplay=1&rel=0&modestbranding=1&controls=1';
+          '?autoplay=1&rel=0&modestbranding=1&controls=1' +
+          // YouTube loops a single video only when it is also its own one-item playlist
+          (box.hasAttribute('data-loop') ? '&loop=1&playlist=' + id : '');
   f.title = btn.getAttribute('aria-label').replace(/^Play video: /, '');
   f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
   f.allowFullscreen = true;

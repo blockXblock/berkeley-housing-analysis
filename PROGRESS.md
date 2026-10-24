@@ -5,6 +5,13 @@
 
 ---
 
+## 2026-10-24 — Deploy STAGED: Elmwood loop keeps its quality (main 416bf963, NOT pushed)
+
+- `86d731cb`: the playlist loop (`loop=1&playlist=<id>`) reloaded the video each pass and reset quality to Auto/240p.
+  Now IFrame API `ENDED -> seekTo(0)`; a headless test held 1080p across loops. The first play still opens on Auto;
+  only R2 self-hosting (paused; T7 encodes or a YouTube download) opens in HD with no gear click.
+- Gate: all checks passed. **John: `git push origin main`.**
+
 ## 2026-10-24 — DEPLOYED: Elmwood flyover loops; 2555 College completed (main 14965b5f pushed by John)
 
 - Home-page Elmwood video loops (`cab8e6bf`): opt-in `data-loop` on a `.vfacade` adds `&loop=1&playlist=<id>`

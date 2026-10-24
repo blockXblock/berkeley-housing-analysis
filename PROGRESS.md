@@ -5,7 +5,7 @@
 
 ---
 
-## 2026-10-24 — Tours in the site menu + a tours button (deploy STAGED: main 01c84782, NOT pushed)
+## 2026-10-24 — Tours in the site menu + a tours button (DEPLOYED: main 01c84782 pushed by John)
 
 - `scripts/site_nav.py` menu: Housing · Berkeley · Learn · **Tours** (-> `tours/`) on all 18 menu pages; narrow-screen
   sizes at 480 px and 360 px keep it on one line down to 320 px. The tours page itself stays menu-free (full-screen).

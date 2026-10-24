@@ -38,6 +38,18 @@
   since upload). geometry.kml 2555 College edit held out again, restored identical.
   Prototype: College block faces have ROW ≈ 60 ft, curb-to-curb 36 ft (City pavement layer), sidewalk ≈ 11–13 ft/side.
 
+## 2026-10-24 — Elmwood block-face table (prototype, scratch)
+
+- `scratch/2026-10-24_blockfaces/build_block_faces.py` → `elmwood_block_faces.{csv,tsv,geojson}`: 81 Elmwood blocks →
+  409 faces (block × street segment, CB-/SG- canon ids; 98% of block perimeter assigned), 25.4 mi of block face.
+  Per face: length, sidewalk (geometric est. + 2013 street-tree survey walk/strip widths), HV/LV overhead wires (tree
+  survey), wood/metal poles, Underground Utility District frontage, laterals, sewer/water/storm mains, PCI, addresses.
+- New raw pull (uncommitted): `data/raw/berkeley_gis/city_trees_2013_elmwood_bbox_2026-10-24.geojson` (6,355 = server
+  count; Parks/Trees/MapServer/0). Checks: geometric sidewalk − surveyed (walk+strip) median +2.0 ft (IQR −0.5 to +4.8);
+  tree-survey HV wires vs wood poles agree on 300/343 faces. Laterals carry no material/date (~0% filled).
+- Elmwood video on YouTube tops out at 480p though the T7 render (`New/Elmwood/7story-orbit.m4v`) is 1080p: HD still
+  processing, or a downsized upload. John to check YouTube Studio; a re-upload needs the new ID swapped on the site.
+
 ## 2026-10-23 — Affordable definition DECIDED (John); fee tracking started
 
 `docs/methodology/affordable_housing_definition.md`: legally binding cap on rent AND income at <=120% AMI; tiers by statutory

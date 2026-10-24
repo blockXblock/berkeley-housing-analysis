@@ -796,10 +796,27 @@ document.addEventListener('click', function (e) {
   var box = btn.parentNode, id = box.getAttribute('data-yt');
   if (!id) return;
   var f = document.createElement('iframe');
+  var loop = box.hasAttribute('data-loop');
+  // A loop must SEEK, not use YouTube's loop=1&playlist=<id>: that reloads the video as a new
+  // playlist item every pass and resets the quality to Auto (240p). Seeking keeps the stream.
   f.src = 'https://www.youtube-nocookie.com/embed/' + id +
-          '?autoplay=1&rel=0&modestbranding=1&controls=1' +
-          // YouTube loops a single video only when it is also its own one-item playlist
-          (box.hasAttribute('data-loop') ? '&loop=1&playlist=' + id : '');
+          '?autoplay=1&rel=0&modestbranding=1&controls=1' + (loop ? '&enablejsapi=1' : '');
+  if (loop) {
+    f.id = 'yt-' + id;
+    var start = function () {
+      new YT.Player(f.id, { events: { onStateChange: function (ev) {
+        if (ev.data === YT.PlayerState.ENDED) { ev.target.seekTo(0, true); ev.target.playVideo(); }
+      } } });
+    };
+    if (window.YT && YT.Player) setTimeout(start, 0);
+    else {
+      var prev = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = function () { if (prev) prev(); start(); };
+      var s = document.createElement('script');
+      s.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(s);
+    }
+  }
   f.title = btn.getAttribute('aria-label').replace(/^Play video: /, '');
   f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
   f.allowFullscreen = true;

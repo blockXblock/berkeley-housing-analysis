@@ -5,12 +5,12 @@
 
 ---
 
-## 2026-10-24 — Deploy STAGED: Elmwood flyover loops; 2555 College completed (main 14965b5f, NOT pushed)
+## 2026-10-24 — DEPLOYED: Elmwood flyover loops; 2555 College completed (main 14965b5f pushed by John)
 
 - Home-page Elmwood video loops (`cab8e6bf`): opt-in `data-loop` on a `.vfacade` adds `&loop=1&playlist=<id>`
   to the click-built YouTube embed; the other flyovers are unchanged. /tours/ (streetview.html) does not loop.
 - `geometry.kml`: 2555 College Ave Under Construction -> **Completed** (John confirmed; `fd1b5d1d`, docs/ copy republished).
-- `scripts/deploy.sh` gate: all checks passed. **John: `git push origin main`.**
+- `scripts/deploy.sh` gate: all checks passed; John pushed 3fc7e2a4..14965b5f.
 - Sidewalks per block (scratch only, nothing in the DB): `scratch/2026-10-24/sidewalks/` -> 1,197-block profile from
   the 2013 tree survey (width, damage, overhead wires), curb ramps, 311, OSM, UUD share, wood poles.
 

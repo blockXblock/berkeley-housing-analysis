@@ -5,6 +5,15 @@
 
 ---
 
+## 2026-10-24 — Elmwood flyover SELF-HOSTED on R2 (dev, not yet deployed)
+
+- R2 `berkeleybuild-pdf` bucket, new `videos/` prefix: `elmwood-orbit-1080.mp4` (132,587,774 B, sha256 71fdbe8b…)
+  and `-720.mp4` (64,960,205 B, sha256 e5f1453f…), the T7 web encodes of `New/Elmwood/7story-orbit.m4v`. Served from
+  the r2.dev public URL with range requests (206). r2.dev is rate-limited by Cloudflare; a custom domain on the
+  bucket (Cloudflare dashboard, John) is the production fix if traffic grows.
+- Home page: `data-mp4` on the facade -> `<video>` (1080p unless the screen's short side < 600 px), native loop,
+  click-to-play poster kept, "Watch on YouTube" link. /tours/ Street View player still uses YouTube.
+
 ## 2026-10-24 — DEPLOYED: Elmwood loop keeps its quality (main 416bf963 pushed by John)
 
 - `86d731cb`: the playlist loop (`loop=1&playlist=<id>`) reloaded the video each pass and reset quality to Auto/240p.

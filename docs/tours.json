@@ -841,21 +841,21 @@
       "needs_rerecord": null
     },
     {
-      "id": "unsourced-9t5bdNZwhFA",
+      "id": "panoramic-kennedy-legacy-slow20",
       "title": "Patrick Kennedy & Panoramic Interests — 35 Years of Berkeley Housing",
-      "tour_kml": null,
-      "source_kml_missing": true,
+      "tour_kml": "kml/tours/panoramic-kennedy-legacy-slow20.kml",
+      "source_kml_missing": false,
       "package": null,
       "package_geometry_sha": null,
-      "flyto_legs": null,
-      "duration_s": null,
+      "flyto_legs": 165,
+      "duration_s": 407.6,
       "video": {
         "youtube": "9t5bdNZwhFA"
       },
-      "recorded": null,
-      "recorded_geometry_era": "UNKNOWN — predates the catalog, no source tour in kml/tours/",
-      "has_pushpins": null,
-      "mapping_inferred": true,
+      "recorded": "2026-09-05",
+      "recorded_geometry_era": "the tour's own Panoramic placemarks as of e0db4ebe; matched 2026-10-24 by length (video 408 s = KML 407.6 s) and dates (uploaded 2026-09-06 00:57 PDT; the only later edit, af0eaf7b, changed two footprints, not the camera)",
+      "has_pushpins": false,
+      "mapping_inferred": false,
       "needs_rerecord": true
     }
   ],

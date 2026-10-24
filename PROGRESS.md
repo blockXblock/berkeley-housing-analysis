@@ -5,7 +5,7 @@
 
 ---
 
-## 2026-10-24 — Elmwood flyover SELF-HOSTED on R2 (dev, not yet deployed)
+## 2026-10-24 — Elmwood flyover SELF-HOSTED on R2 (deploy STAGED: main 8a8e2930, NOT pushed)
 
 - R2 `berkeleybuild-pdf` bucket, new `videos/` prefix: `elmwood-orbit-1080.mp4` (132,587,774 B, sha256 71fdbe8b…)
   and `-720.mp4` (64,960,205 B, sha256 e5f1453f…), the T7 web encodes of `New/Elmwood/7story-orbit.m4v`. Served from

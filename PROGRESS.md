@@ -25,8 +25,13 @@
   carries the 10-20 phones fix `0feed358` and `docs/methodology/affordable_housing_definition.md`).
   Held out of the deploy: an uncommitted 10-21 edit to `kml/geometry/geometry.kml` (2555 College description
   "Under Construction" → "Completed"; style was already Completed); stashed for the gate, restored, still uncommitted.
-- **Open:** our 8 College sites are Raimi grades + John's picks, not the City's map; the PC replaced the map with criteria
-  (≥7,000 sf, ≥80 ft deep, corner, no existing units, not historic). Checking each site against them is not done.
+- **Option 1B check DONE** (`docs/audit/2026-10-24_elmwood_option1b_parcel_check.md`; script + CSV in
+  `scratch/2026-10-24_corners/`): measured from assessor polygons and City centerlines, all 36 C-E parcels. 3 meet all
+  five tests alone (2887 College, 2701 Webster, 2901 College); with 2709 Webster + 2999 College (aggregated with 2701)
+  that is exactly the City's 1B map (staff presentation slide 16, 1.0 ac; ours 0.96). The PC adopted that map 6-2.
+  It replaces the 09-23 check (wrong corners, wrong depths). **Tour sites NOT on the adopted map:** Wells Fargo lot
+  (1A only, 5,750 sf), 2942 College, both "lot behind 2900 College" sites. Labels/captions not yet changed (John's call).
+  Prototype: College block faces have ROW ≈ 60 ft, curb-to-curb 36 ft (City pavement layer), sidewalk ≈ 11–13 ft/side.
 
 ## 2026-10-23 — Affordable definition DECIDED (John); fee tracking started
 

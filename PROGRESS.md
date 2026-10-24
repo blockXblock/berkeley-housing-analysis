@@ -38,6 +38,11 @@
   since upload). geometry.kml 2555 College edit held out again, restored identical.
   Prototype: College block faces have ROW ≈ 60 ft, curb-to-curb 36 ft (City pavement layer), sidewalk ≈ 11–13 ft/side.
 
+## 2026-10-24 — Elmwood video self-hosting on R2 (PAUSED by John)
+- Why: YouTube Auto can serve 240p and embeds can no longer force HD. John approved trying Elmwood on R2 first.
+- Done: web encodes on the T7, `/Volumes/T7-2025/Berkeley-Tours/New/Elmwood/web/`: `elmwood-orbit-1080.mp4` (133 MB, 5.7 Mb/s) and `elmwood-orbit-720.mp4` (65 MB, 2.8 Mb/s), both silent with +faststart.
+- Not done: no R2 upload yet (use `.env.r2` creds, as in `scripts/upload_pdfs_to_r2.py`); switch the Elmwood player on the home page and /tours/ to `<video>` and keep the YouTube link; commit on dev; John pushes.
+
 ## 2026-10-24 — Elmwood block-face table (prototype, scratch)
 
 - `scratch/2026-10-24_blockfaces/build_block_faces.py` → `elmwood_block_faces.{csv,tsv,geojson}`: 81 Elmwood blocks →

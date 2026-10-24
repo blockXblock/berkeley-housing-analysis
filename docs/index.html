@@ -350,8 +350,12 @@
   .bb-nav a.m { color: #4a5568; text-decoration: none; font-weight: 700; font-size: .98rem; padding: .3rem 0; border-bottom: 3px solid transparent; }
   .bb-nav a.m[aria-current=page] { color: #1a365d; border-bottom-color: #ffd166; }
   .bb-nav a.m:hover { color: #1a365d; }
+  @media (max-width: 480px) { .bb-nav .in { gap: .75rem; padding: .55rem .9rem; } .bb-nav .logo { font-size: 1rem; }
+                              .bb-nav a.m { font-size: .9rem; } }
+  @media (max-width: 360px) { .bb-nav .in { gap: .45rem; padding: .5rem .5rem; } .bb-nav .logo { font-size: .85rem; }
+                              .bb-nav a.m { font-size: .8rem; } }
 </style>
-<nav class="bb-nav" aria-label="BerkeleyBuild"><div class="in"><a class="logo" href="./">Berkeley<span>Build</span></a><a class="m" href="./" aria-current=page>Housing</a><a class="m" href="berkeley.html">Berkeley</a><a class="m" href="learn.html">Learn</a></div></nav>
+<nav class="bb-nav" aria-label="BerkeleyBuild"><div class="in"><a class="logo" href="./">Berkeley<span>Build</span></a><a class="m" href="./" aria-current=page>Housing</a><a class="m" href="berkeley.html">Berkeley</a><a class="m" href="learn.html">Learn</a><a class="m" href="tours/">Tours</a></div></nav>
 <!-- END site_nav -->
 <main class="nx">
 <figure class="nx-hero">
@@ -552,8 +556,9 @@ $('note').textContent = `Every private housing project in the City's records sin
   </div>
   <!-- END site_numbers --></div></section>
 <section class="nx-panel" id="fly" role="tabpanel" aria-labelledby="tab-fly" hidden>
-  <p class="lead">10 flights along Berkeley&rsquo;s corridors in Google Earth, every project drawn as a colored block and labeled as
-  the camera reaches it. <a href="tours/">All tours, with map and Street View &rarr;</a></p>
+  <p class="lead">11 flights along Berkeley&rsquo;s corridors in Google Earth, every project drawn as a colored block and labeled as
+  the camera reaches it.</p>
+  <p style="margin:.2rem 0 1.2rem"><a href="tours/" class="hero-cta">All tours, with map and Street View &rarr;</a></p>
   <!-- Stage-color legend. GENERATED from the geometry census by scripts/tours/update_legend.py
      (renderer: scripts/viz/stage_legend_svg.py). Do not hand-edit the SVGs; rerun the script.
      The per-video prose legends below stay: they are what a screen reader reads. -->

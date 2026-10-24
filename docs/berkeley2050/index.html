@@ -51,8 +51,12 @@ footer{padding:36px 0 60px;font-size:13px;color:var(--muted)}
   .bb-nav a.m { color: #4a5568; text-decoration: none; font-weight: 700; font-size: .98rem; padding: .3rem 0; border-bottom: 3px solid transparent; }
   .bb-nav a.m[aria-current=page] { color: #1a365d; border-bottom-color: #ffd166; }
   .bb-nav a.m:hover { color: #1a365d; }
+  @media (max-width: 480px) { .bb-nav .in { gap: .75rem; padding: .55rem .9rem; } .bb-nav .logo { font-size: 1rem; }
+                              .bb-nav a.m { font-size: .9rem; } }
+  @media (max-width: 360px) { .bb-nav .in { gap: .45rem; padding: .5rem .5rem; } .bb-nav .logo { font-size: .85rem; }
+                              .bb-nav a.m { font-size: .8rem; } }
 </style>
-<nav class="bb-nav" aria-label="BerkeleyBuild"><div class="in"><a class="logo" href="../">Berkeley<span>Build</span></a><a class="m" href="../">Housing</a><a class="m" href="../berkeley.html" aria-current=page>Berkeley</a><a class="m" href="../learn.html">Learn</a></div></nav>
+<nav class="bb-nav" aria-label="BerkeleyBuild"><div class="in"><a class="logo" href="../">Berkeley<span>Build</span></a><a class="m" href="../">Housing</a><a class="m" href="../berkeley.html" aria-current=page>Berkeley</a><a class="m" href="../learn.html">Learn</a><a class="m" href="../tours/">Tours</a></div></nav>
 <!-- END site_nav -->
 
 <header class="hero"><div class="wrap">

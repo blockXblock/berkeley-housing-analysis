@@ -28,7 +28,8 @@ TOURS = [
     ("tour-private-pipeline-over-200-units-2026-05-16", "Berkeley's 17 largest private projects", "Every private project planned with more than 200 homes."),
     ("panoramic-kennedy-legacy-slow20", "Patrick Kennedy & Panoramic Interests, 35 years",
      "Every Berkeley building by Panoramic Interests, 1990-2028: 23 buildings, 699 homes."),
-    # John, 2026-10-24: title as he gave it. HYPOTHETICAL buildings, not projects: the 7-story 5-over-2 scenario
+    # John, 2026-10-24: title as he gave it, and kept: "Seven Base Stories" refers to a City Council idea to zone
+    # all commercial at 7 stories, not to the PC's 5-story base. Do not "correct" it. HYPOTHETICAL buildings, not projects: the 7-story 5-over-2 scenario
     # folder of kml/geometry/college-opportunity-sites.kml, flown by kml/tours/elmwood-orbit.kml.
     ("elmwood-orbit", "Elmwood Future At Seven Base Stories",
      "Hypothetical: eight College Avenue sites drawn at 7 stories, a density-bonus scenario. Not proposals."),

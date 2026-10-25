@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Play all flyovers · BerkeleyBuild</title>
+<meta name="description" content="Every BerkeleyBuild flyover, back to back, full screen, in HD.">
+<style>
+  * { box-sizing:border-box; }
+  html, body { margin:0; height:100%; background:#000; color:#f1ece0; font-family:Georgia,"Times New Roman",serif; }
+  #stage { position:fixed; inset:0; background:#000; }
+  #stage video { width:100%; height:100%; object-fit:contain; background:#000; display:block; }
+  #stage.idle, #stage.idle * { cursor:none; }
+  #title { position:absolute; left:4vw; bottom:9vh; font-size:clamp(1.3rem, 3.2vw, 2.6rem); font-weight:bold; color:#fff;
+           text-shadow:0 2px 12px rgba(0,0,0,.9); opacity:0; transition:opacity .8s; pointer-events:none; max-width:80vw; }
+  #title.on { opacity:1; }
+  #title small { display:block; font-size:.5em; font-weight:normal; opacity:.85; margin-top:.3em; }
+  #bar { position:absolute; left:0; right:0; top:0; display:flex; gap:10px; align-items:center; padding:10px 14px;
+         background:linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,0)); transition:opacity .4s; }
+  #stage.idle #bar { opacity:0; }
+  #bar a, #bar button { color:#fff; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.3); border-radius:5px;
+                        padding:5px 11px; font:inherit; font-size:.95rem; text-decoration:none; cursor:pointer; }
+  #bar .n { margin-left:auto; font-size:.95rem; opacity:.85; }
+  #start { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+           gap:18px; padding:20px; background:radial-gradient(#1d1a16, #000); text-align:center; overflow:auto; }
+  #start[hidden] { display:none; }   /* display:flex above would otherwise beat the hidden attribute */
+  #start h1 { margin:0; font-size:clamp(1.6rem, 4vw, 2.8rem); }
+  #start p { margin:0; color:#b5a88f; max-width:40rem; }
+  #go { font:inherit; font-size:1.3rem; font-weight:bold; padding:14px 30px; border-radius:8px; border:0; background:#ffd166;
+        color:#1d1a16; cursor:pointer; }
+  #start ol { list-style:none; padding:0; margin:0; columns:2 18rem; column-gap:24px; text-align:left; }
+  #start li button { background:none; border:0; color:#efe8d8; font:inherit; padding:3px 0; cursor:pointer; text-align:left; }
+  #start li button:hover { color:#ffd166; }
+  #start li span { color:#b5a88f; font-size:.85em; }
+  #start .keys { font-size:.85rem; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <video id="v" playsinline muted preload="auto"></video>
+  <div id="title"></div>
+  <div id="bar"><a href="./">&larr; Tours</a><button id="prev" aria-label="Previous flyover">&#9664;&#9664;</button>
+    <button id="pp" aria-label="Pause">&#10074;&#10074;</button><button id="next" aria-label="Next flyover">&#9654;&#9654;</button>
+    <button id="fs">Full screen</button><span class="n" id="n"></span></div>
+  <div id="start">
+    <h1>All 11 flyovers, back to back</h1>
+    <p>About 70 minutes in HD, one after another, full screen. Or start from any flyover in the list.</p>
+    <button id="go">&#9654; Play all</button>
+    <ol><li><button data-i="0">Shattuck Avenue, south to north <span>7.8 min</span></button></li><li><button data-i="1">Shattuck Avenue, north to south (June 2026) <span>7.4 min</span></button></li><li><button data-i="2">Telegraph Avenue, Woolsey to UC Berkeley <span>3.6 min</span></button></li><li><button data-i="3">University Avenue, the Harbor to UC Berkeley <span>8.1 min</span></button></li><li><button data-i="4">San Pablo Avenue, north to south <span>7.2 min</span></button></li><li><button data-i="5">Bancroft Way, Piedmont to Aquatic Park <span>7.9 min</span></button></li><li><button data-i="6">Durant Avenue, Milvia to Piedmont <span>3.9 min</span></button></li><li><button data-i="7">UC Berkeley student housing <span>5.5 min</span></button></li><li><button data-i="8">Berkeley&#x27;s 17 largest private projects <span>8.8 min</span></button></li><li><button data-i="9">Patrick Kennedy &amp; Panoramic Interests, 35 years <span>6.8 min</span></button></li><li><button data-i="10">Elmwood Future At Seven Base Stories <span>3.1 min</span></button></li></ol>
+    <p class="keys">Keys: &rarr; next &middot; &larr; previous &middot; space pause &middot; F full screen &middot; Esc leave full screen</p>
+  </div>
+</div>
+<script>
+const V = [{"id":"shattuck-s2n-path","title":"Shattuck Avenue, south to north","min":7.8},{"id":"Shattuck-centerline-flight-with-2190-and-2276-orbits","title":"Shattuck Avenue, north to south (June 2026)","min":7.4},{"id":"telegraph-s2n","title":"Telegraph Avenue, Woolsey to UC Berkeley","min":3.6},{"id":"university-880-uc","title":"University Avenue, the Harbor to UC Berkeley","min":8.1},{"id":"san-pablo-n2s","title":"San Pablo Avenue, north to south","min":7.2},{"id":"bancroft-e2w","title":"Bancroft Way, Piedmont to Aquatic Park","min":7.9},{"id":"durant-w2e","title":"Durant Avenue, Milvia to Piedmont","min":3.9},{"id":"uc-dormitories","title":"UC Berkeley student housing","min":5.5},{"id":"tour-private-pipeline-over-200-units-2026-05-16","title":"Berkeley's 17 largest private projects","min":8.8},{"id":"panoramic-kennedy-legacy-slow20","title":"Patrick Kennedy & Panoramic Interests, 35 years","min":6.8},{"id":"elmwood-orbit","title":"Elmwood Future At Seven Base Stories","min":3.1}];
+const BASE = "https://pub-2cee87f70da64080ab70ee0a34b55099.r2.dev/videos";
+// phones (short side under 600 CSS px) get 720p; tablets and computers 1080p, as on the home page
+const RES = Math.min(screen.width, screen.height) >= 600 ? "-1080.mp4" : "-720.mp4";
+const stage = document.getElementById("stage"), v = document.getElementById("v"), title = document.getElementById("title");
+let i = 0, hideTitle, idle;
+function load(k, play) {
+  i = (k + V.length) % V.length;
+  v.src = BASE + "/" + V[i].id + RES;
+  document.getElementById("n").textContent = (i + 1) + " / " + V.length;
+  title.innerHTML = V[i].title.replace(/&/g, "&amp;").replace(/</g, "&lt;") + "<small>" + (i + 1) + " of " + V.length + "</small>";
+  title.classList.add("on"); clearTimeout(hideTitle); hideTitle = setTimeout(() => title.classList.remove("on"), 5000);
+  if (play) v.play().catch(() => {});
+  // warm the next file so the cut is quick
+  const nx = V[(i + 1) % V.length]; fetch(BASE + "/" + nx.id + RES, { headers: { Range: "bytes=0-2000000" } }).catch(() => {});
+}
+function full() { if (!document.fullscreenElement && stage.requestFullscreen) stage.requestFullscreen().catch(() => {}); }
+function begin(k) { document.getElementById("start").hidden = true; full(); load(k, true); wake(); }
+document.getElementById("go").onclick = () => begin(0);
+document.querySelectorAll("#start li button").forEach(b => b.onclick = () => begin(+b.dataset.i));
+v.addEventListener("ended", () => { if (i < V.length - 1) load(i + 1, true); else { document.exitFullscreen?.().catch(() => {}); document.getElementById("start").hidden = false; } });
+const pp = document.getElementById("pp");
+const toggle = () => v.paused ? v.play() : v.pause();
+v.addEventListener("play", () => { pp.innerHTML = "&#10074;&#10074;"; pp.setAttribute("aria-label", "Pause"); });
+v.addEventListener("pause", () => { pp.innerHTML = "&#9654;"; pp.setAttribute("aria-label", "Play"); });
+pp.onclick = toggle;
+document.getElementById("prev").onclick = () => load(i - 1, true);
+document.getElementById("next").onclick = () => load(i + 1, true);
+document.getElementById("fs").onclick = () => document.fullscreenElement ? document.exitFullscreen() : full();
+document.addEventListener("keydown", e => {
+  if (!document.getElementById("start").hidden) return;
+  if (e.key === "ArrowRight") load(i + 1, true);
+  else if (e.key === "ArrowLeft") load(i - 1, true);
+  else if (e.key === " ") { e.preventDefault(); toggle(); }
+  else if (e.key === "f" || e.key === "F") full();
+  else return;
+  wake();
+});
+// hide the bar and the cursor after 3 seconds without the mouse
+function wake() { stage.classList.remove("idle"); clearTimeout(idle); idle = setTimeout(() => stage.classList.add("idle"), 3000); }
+stage.addEventListener("mousemove", wake); stage.addEventListener("touchstart", wake);
+</script>
+</body>
+</html>

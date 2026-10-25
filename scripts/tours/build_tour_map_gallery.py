@@ -6,6 +6,11 @@ Reads the timelines that tour_timeline.py wrote (docs/tours/streetview/*.json), 
 here only once its sync has been checked against its recording. Writes docs/tours/index.html and
 stamps the display titles into each timeline so the tour page shows the same name.
 
+Also writes docs/tours/play-all.html: every flyover in this order, back to back, full screen, for a
+presentation (John, 2026-10-24). It plays self-hosted copies on R2 (R2_VIDEOS/<tour id>-1080.mp4 and
+-720.mp4), NOT YouTube: an embed starts each video on Auto quality (often 240p) and a page cannot force
+HD. A tour with no R2 copy is left out of play-all, with a warning, until one is uploaded.
+
   python scripts/tours/build_tour_map_gallery.py
 """
 import html, json, pathlib
@@ -13,6 +18,11 @@ import html, json, pathlib
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 TL = ROOT / "docs/tours/streetview"
 OUT = ROOT / "docs/tours/index.html"
+PLAY_ALL = ROOT / "docs/tours/play-all.html"
+R2_VIDEOS = "https://pub-2cee87f70da64080ab70ee0a34b55099.r2.dev/videos"
+# tours with both encodes uploaded to R2 videos/ (keys <id>-1080.mp4, <id>-720.mp4)
+ON_R2 = {"bancroft-e2w", "telegraph-s2n", "uc-dormitories", "shattuck-s2n-path", "university-880-uc", "durant-w2e",
+         "san-pablo-n2s", "elmwood-orbit"}
 
 # Display order and words. Titles match the home page's video titles.
 TOURS = [
@@ -66,6 +76,13 @@ def main():
         <span class="cta">Fly it with the map and Street View &rarr;</span>{badge}</div>
     </a>''')
 
+    play = [it for it in items if it["id"] in ON_R2]
+    for it in items:
+        if it["id"] not in ON_R2:
+            print(f"play-all: {it['id']} has no R2 copy, left out")
+    PLAY_ALL.write_text(play_all_page(play))
+    print(f"wrote {PLAY_ALL.relative_to(ROOT)}: {len(play)} flyovers")
+
     page = f'''<!doctype html>
 <html lang="en">
 <head>
@@ -105,6 +122,8 @@ def main():
   .body p {{ margin:0; color:var(--muted); font-size:.95rem; flex:1; }}
   .cta {{ color:var(--c); font-weight:bold; }}
   .badge {{ align-self:flex-start; font-size:.75rem; border:1px solid var(--muted); color:var(--muted); padding:1px 6px; border-radius:10px; }}
+  .playall {{ max-width:1200px; margin:0 auto 26px; padding:0 16px; font-size:1.15rem; }}
+  .playall a {{ color:var(--ink); font-weight:bold; }}
   footer {{ max-width:1200px; margin:0 auto 30px; padding:0 16px; color:var(--muted); font-size:.85rem; }}
 </style>
 </head>
@@ -122,6 +141,7 @@ def main():
 <div id="map"></div>
 <div class="grid">{"".join(cards)}
 </div>
+<p class="playall"><a href="play-all.html">&#9654; Play all the flyovers, one after another, full screen</a></p>
 <footer>Flyovers are recorded in Google Earth from the project's 3D model of planned buildings. Map © OpenStreetMap contributors.</footer>
 <script>
 const T = {json.dumps(items, separators=(",", ":"))};
@@ -171,6 +191,113 @@ setTimeout(() => {{ if (!drawn) whole(); }}, 6000);   // never leave the map emp
 '''
     OUT.write_text(page)
     print(f"wrote {OUT.relative_to(ROOT)}: {len(items)} tours")
+
+
+def play_all_page(items):
+    """One full-screen player that runs the list back to back. The CONTAINER goes full screen, not the
+    <video>, so swapping the source between flyovers never drops out of full screen."""
+    vids = [{"id": it["id"], "title": it["title"], "min": it["minutes"]} for it in items]
+    rows = "".join(f'<li><button data-i="{i}">{html.escape(v["title"])} <span>{v["min"]} min</span></button></li>'
+                   for i, v in enumerate(vids))
+    total = round(sum(v["min"] for v in vids))
+    return f'''<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Play all flyovers · BerkeleyBuild</title>
+<meta name="description" content="Every BerkeleyBuild flyover, back to back, full screen, in HD.">
+<style>
+  * {{ box-sizing:border-box; }}
+  html, body {{ margin:0; height:100%; background:#000; color:#f1ece0; font-family:Georgia,"Times New Roman",serif; }}
+  #stage {{ position:fixed; inset:0; background:#000; }}
+  #stage video {{ width:100%; height:100%; object-fit:contain; background:#000; display:block; }}
+  #stage.idle, #stage.idle * {{ cursor:none; }}
+  #title {{ position:absolute; left:4vw; bottom:9vh; font-size:clamp(1.3rem, 3.2vw, 2.6rem); font-weight:bold; color:#fff;
+           text-shadow:0 2px 12px rgba(0,0,0,.9); opacity:0; transition:opacity .8s; pointer-events:none; max-width:80vw; }}
+  #title.on {{ opacity:1; }}
+  #title small {{ display:block; font-size:.5em; font-weight:normal; opacity:.85; margin-top:.3em; }}
+  #bar {{ position:absolute; left:0; right:0; top:0; display:flex; gap:10px; align-items:center; padding:10px 14px;
+         background:linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,0)); transition:opacity .4s; }}
+  #stage.idle #bar {{ opacity:0; }}
+  #bar a, #bar button {{ color:#fff; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.3); border-radius:5px;
+                        padding:5px 11px; font:inherit; font-size:.95rem; text-decoration:none; cursor:pointer; }}
+  #bar .n {{ margin-left:auto; font-size:.95rem; opacity:.85; }}
+  #start {{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+           gap:18px; padding:20px; background:radial-gradient(#1d1a16, #000); text-align:center; overflow:auto; }}
+  #start[hidden] {{ display:none; }}   /* display:flex above would otherwise beat the hidden attribute */
+  #start h1 {{ margin:0; font-size:clamp(1.6rem, 4vw, 2.8rem); }}
+  #start p {{ margin:0; color:#b5a88f; max-width:40rem; }}
+  #go {{ font:inherit; font-size:1.3rem; font-weight:bold; padding:14px 30px; border-radius:8px; border:0; background:#ffd166;
+        color:#1d1a16; cursor:pointer; }}
+  #start ol {{ list-style:none; padding:0; margin:0; columns:2 18rem; column-gap:24px; text-align:left; }}
+  #start li button {{ background:none; border:0; color:#efe8d8; font:inherit; padding:3px 0; cursor:pointer; text-align:left; }}
+  #start li button:hover {{ color:#ffd166; }}
+  #start li span {{ color:#b5a88f; font-size:.85em; }}
+  #start .keys {{ font-size:.85rem; }}
+</style>
+</head>
+<body>
+<div id="stage">
+  <video id="v" playsinline muted preload="auto"></video>
+  <div id="title"></div>
+  <div id="bar"><a href="./">&larr; Tours</a><button id="prev" aria-label="Previous flyover">&#9664;&#9664;</button>
+    <button id="pp" aria-label="Pause">&#10074;&#10074;</button><button id="next" aria-label="Next flyover">&#9654;&#9654;</button>
+    <button id="fs">Full screen</button><span class="n" id="n"></span></div>
+  <div id="start">
+    <h1>All {len(vids)} flyovers, back to back</h1>
+    <p>About {total} minutes in HD, one after another, full screen. Or start from any flyover in the list.</p>
+    <button id="go">&#9654; Play all</button>
+    <ol>{rows}</ol>
+    <p class="keys">Keys: &rarr; next &middot; &larr; previous &middot; space pause &middot; F full screen &middot; Esc leave full screen</p>
+  </div>
+</div>
+<script>
+const V = {json.dumps(vids, separators=(",", ":"))};
+const BASE = {json.dumps(R2_VIDEOS)};
+// phones (short side under 600 CSS px) get 720p; tablets and computers 1080p, as on the home page
+const RES = Math.min(screen.width, screen.height) >= 600 ? "-1080.mp4" : "-720.mp4";
+const stage = document.getElementById("stage"), v = document.getElementById("v"), title = document.getElementById("title");
+let i = 0, hideTitle, idle;
+function load(k, play) {{
+  i = (k + V.length) % V.length;
+  v.src = BASE + "/" + V[i].id + RES;
+  document.getElementById("n").textContent = (i + 1) + " / " + V.length;
+  title.innerHTML = V[i].title.replace(/&/g, "&amp;").replace(/</g, "&lt;") + "<small>" + (i + 1) + " of " + V.length + "</small>";
+  title.classList.add("on"); clearTimeout(hideTitle); hideTitle = setTimeout(() => title.classList.remove("on"), 5000);
+  if (play) v.play().catch(() => {{}});
+  // warm the next file so the cut is quick
+  const nx = V[(i + 1) % V.length]; fetch(BASE + "/" + nx.id + RES, {{ headers: {{ Range: "bytes=0-2000000" }} }}).catch(() => {{}});
+}}
+function full() {{ if (!document.fullscreenElement && stage.requestFullscreen) stage.requestFullscreen().catch(() => {{}}); }}
+function begin(k) {{ document.getElementById("start").hidden = true; full(); load(k, true); wake(); }}
+document.getElementById("go").onclick = () => begin(0);
+document.querySelectorAll("#start li button").forEach(b => b.onclick = () => begin(+b.dataset.i));
+v.addEventListener("ended", () => {{ if (i < V.length - 1) load(i + 1, true); else {{ document.exitFullscreen?.().catch(() => {{}}); document.getElementById("start").hidden = false; }} }});
+const pp = document.getElementById("pp");
+const toggle = () => v.paused ? v.play() : v.pause();
+v.addEventListener("play", () => {{ pp.innerHTML = "&#10074;&#10074;"; pp.setAttribute("aria-label", "Pause"); }});
+v.addEventListener("pause", () => {{ pp.innerHTML = "&#9654;"; pp.setAttribute("aria-label", "Play"); }});
+pp.onclick = toggle;
+document.getElementById("prev").onclick = () => load(i - 1, true);
+document.getElementById("next").onclick = () => load(i + 1, true);
+document.getElementById("fs").onclick = () => document.fullscreenElement ? document.exitFullscreen() : full();
+document.addEventListener("keydown", e => {{
+  if (!document.getElementById("start").hidden) return;
+  if (e.key === "ArrowRight") load(i + 1, true);
+  else if (e.key === "ArrowLeft") load(i - 1, true);
+  else if (e.key === " ") {{ e.preventDefault(); toggle(); }}
+  else if (e.key === "f" || e.key === "F") full();
+  else return;
+  wake();
+}});
+// hide the bar and the cursor after 3 seconds without the mouse
+function wake() {{ stage.classList.remove("idle"); clearTimeout(idle); idle = setTimeout(() => stage.classList.add("idle"), 3000); }}
+stage.addEventListener("mousemove", wake); stage.addEventListener("touchstart", wake);
+</script>
+</body>
+</html>
+'''
 
 
 if __name__ == "__main__":

@@ -23,7 +23,7 @@ R2_VIDEOS = "https://pub-2cee87f70da64080ab70ee0a34b55099.r2.dev/videos"
 # tours with both encodes uploaded to R2 videos/ (keys <id>-1080.mp4, <id>-720.mp4)
 ON_R2 = {"bancroft-e2w", "telegraph-s2n", "uc-dormitories", "shattuck-s2n-path", "university-880-uc", "durant-w2e",
          "san-pablo-n2s", "elmwood-orbit", "panoramic-kennedy-legacy-slow20",
-         "Shattuck-centerline-flight-with-2190-and-2276-orbits"}
+         "Shattuck-centerline-flight-with-2190-and-2276-orbits", "tour-private-pipeline-over-200-units-2026-05-16"}
 
 # Display order and words. Titles match the home page's video titles.
 TOURS = [

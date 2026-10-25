@@ -25,6 +25,7 @@ higher of market land value and the existing use's value (John, 2026-10-25: "Bot
 """
 from __future__ import annotations
 
+import collections
 import csv
 import json
 import math
@@ -76,6 +77,7 @@ def scenario(name="base", **override):
         euv_rent=pick(A["existing_use_value"]["retail_nnn_rent_per_sf_yr"]),
         euv_vacancy=pick(A["existing_use_value"]["retail_vacancy"], "high"),
         euv_cap=pick(A["existing_use_value"]["retail_cap_rate"]),
+        euv_case="base" if name == "base" else ("low" if f else "high"),
     )
     s.update(override)
     return s
@@ -136,7 +138,7 @@ def bmr_rent(tier: str, bedrooms: str) -> float:
 
 # --------------------------------------------------------------------------------------- the money (one building)
 def account(*, units_mix, net_sf, res_gross, retail_sf, lobby_sf, storeys, lot_sf, s, R, affordable=None,
-            fee_mode="in_lieu", per_bed_beds=None):
+            fee_mode="in_lieu", per_bed_beds=None, loc=1.0):
     """NOI, every cost but land, value at the hurdle, residual land value -- for one building in scenario `s`.
     units_mix: {bedrooms: market+affordable unit count}; affordable: {tier: {bedrooms: n}} carved out of units_mix;
     fee_mode: 'in_lieu' (IHO fee on net area), 'on_site' (no fee: 20% on-site units), 'legacy_ahmf' (BMC 22.20.065)."""
@@ -152,7 +154,7 @@ def account(*, units_mix, net_sf, res_gross, retail_sf, lobby_sf, storeys, lot_s
         aff_units = sum(aff_by_b.values())
         market_gpr = R["per_bed"] * s["rent_mult"] * 12 * per_bed_beds * (units - aff_units) / units
     else:
-        market_gpr = sum((n - aff_by_b.get(b, 0)) * R["pool_rent"][str(min(int(b), 3))] * s["rent_mult"] * 12
+        market_gpr = sum((n - aff_by_b.get(b, 0)) * R["pool_rent"][str(min(int(b), 3))] * s["rent_mult"] * loc * 12
                          for b, n in units_mix.items())
     market_noi = market_gpr * (1 - pp.VACANCY) * (1 - s["opex"])
     bmr = A["bmr_rents_monthly"]
@@ -214,7 +216,8 @@ def site_building(site, storeys, s, R, fee_mode="in_lieu"):
         vli, li = math.ceil(k / 2), k - math.ceil(k / 2)
         affordable = {"VLI": _spread(vli, mix), "LI": _spread(li, mix)}
     acct = account(units_mix=mix, net_sf=net, res_gross=res_gross, retail_sf=retail, lobby_sf=ground - retail,
-                   storeys=storeys, lot_sf=lot, s=s, R=R, affordable=affordable, fee_mode=fee_mode)
+                   storeys=storeys, lot_sf=lot, s=s, R=R, affordable=affordable, fee_mode=fee_mode,
+                   loc=site.get("rent_factor", 1.0))
     acct.update(storeys=storeys, net_sf=net, res_gross=res_gross, retail_sf=retail, mix=mix)
     return acct
 
@@ -232,7 +235,10 @@ def _spread(k, mix):
 def land_basis(site, s):
     """the land basis: the higher of market land (lot x $/sqft) and the existing use's value (EUV)."""
     market = site["lot_sf"] * s["land_psf"]
-    euv = (site.get("existing_retail_sf") or 0) * s["euv_rent"] * (1 - s["euv_vacancy"]) / s["euv_cap"]
+    if "euv" in site:                                  # citywide: sale-derived band, picked by the scenario
+        euv = site["euv"][s.get("euv_case", "base")]
+    else:
+        euv = (site.get("existing_retail_sf") or 0) * s["euv_rent"] * (1 - s["euv_vacancy"]) / s["euv_cap"]
     return dict(market=market, euv=euv, basis=max(market, euv), binding="existing use" if euv > market else "market land")
 
 
@@ -245,10 +251,11 @@ def break_even(site, s, R, fee_mode="in_lieu"):
     for n in range(hs["min_storeys"], hs["max_storeys"] + 1):
         b = site_building(site, n, s, R, fee_mode)
         # the rent multiplier at which RLV = land basis (NOI is linear in market rent; costs do not depend on rent)
-        need = ((lb["basis"] + b["cost_ex_land"]) * b["hurdle"] - b["other_noi"]) / (b["market_noi"] / s["rent_mult"])
+        need = (((lb["basis"] + b["cost_ex_land"]) * b["hurdle"] - b["other_noi"]) / (b["market_noi"] / s["rent_mult"])
+                if b["market_noi"] > 0 else float("inf"))         # no market units fit: no rent can make it pencil
         rows.append(dict(storeys=n, height_ft=b["height_ft"], tier=b["tier"], units=b["units"], noi=b["noi"],
                          value=b["value"], cost_ex_land=b["cost_ex_land"], rlv=b["rlv"], land_basis=lb["basis"],
-                         surplus=b["rlv"] - lb["basis"], pencils=b["rlv"] >= lb["basis"], rent_mult_needed=need,
+                         surplus=b["rlv"] - lb["basis"], pencils=b["units"] > 0 and b["rlv"] >= lb["basis"], rent_mult_needed=need,
                          rlv_per_unit=b["rlv"] / b["units"] if b["units"] else None))
     first = next((r["storeys"] for r in rows if r["pencils"]), None)
     return dict(rows=rows, break_even_storeys=first, land=lb)
@@ -483,3 +490,221 @@ def run_sites(sites, fee_modes=("in_lieu", "on_site")):
                 res.append(dict(site=site["key"], name=site["name"], fee_mode=fm, scenario=sc, **{
                     k: be[k] for k in ("break_even_storeys",)}, land=be["land"], rows=be["rows"]))
     return dict(results=res, rents=R)
+
+
+# ================================================================================================= CITYWIDE PASS
+# John, 2026-10-25: "run the citywide break-even pass". The same site model on every Berkeley parcel with a usable lot.
+# Three things the Elmwood run took per site become per-parcel and RECORD-derived here:
+#   rents      -- a NEIGHBORHOOD RENT INDEX: Rent Board unit records with a tenancy started 2023+, Fully Covered (old
+#                 stock; vacancy decontrol resets the starting rent to market at each new tenancy), each rent divided by
+#                 the citywide median for its bedroom count; the neighborhood's median ratio multiplies the new-
+#                 construction lease-up pool. Shrunk toward 1.0 where a neighborhood has few tenancies.
+#   existing use -- what the parcel is worth as it stands: building sqft x the median price per building sqft of the
+#                 parcels of the same kind (residential / non-residential) that transferred 2024+ (Prop 13 resets the
+#                 assessment to the price at a sale), by neighborhood where it has enough sales, else citywide;
+#                 band = the quartiles. A vacant lot's existing use is 0, so market land governs.
+#   universe   -- every assessor parcel; condominium units (use 73xx) and lots under 2,500 sqft are excluded and counted.
+#                 Exempt (taxable value 0), landmark, and existing-rental parcels are TAGGED, not dropped.
+NEIGHBORHOODS = ROOT / "data/reference/berkeley_neighborhoods.geojson"
+LANDMARKS = ROOT / "data/reference/berkeley_landmark_build_dates.csv"
+MIN_LOT_SF = 2500
+RENT_INDEX_MIN_N = 30          # below this a neighborhood's index is shrunk toward 1.0: w = n / (n + 30)
+EUV_MIN_SALES = 25             # below this a neighborhood uses the citywide sale price per building sqft
+
+
+def bucket(uc) -> str:
+    """JN-Feasibility's two-level use-code crosswalk (leading digit), plus vacant from the second digit pattern."""
+    u = str(uc or "").zfill(4)
+    if u.startswith("73"):
+        return "condo"
+    if u.startswith("77") or u.startswith("70") or u.startswith("72"):
+        return "residential_5plus"
+    return {"1": "single_family", "2": "residential_2_4", "3": "commercial", "4": "industrial", "6": "institutional",
+            "7": "residential_5plus", "8": "vacant_or_misc", "9": "misc", "0": "public_or_common"}.get(u[0], "other")
+
+
+class _NB:
+    """neighborhood polygons with a point lookup."""
+    def __init__(self):
+        from shapely.geometry import shape, Point
+        from shapely.strtree import STRtree
+        g = json.load(open(NEIGHBORHOODS))
+        self.names = [f["properties"]["Name"] for f in g["features"]]
+        self.geoms = [shape(f["geometry"]) for f in g["features"]]
+        self.tree, self.Point = STRtree(self.geoms), Point
+
+    def of(self, lat, lon):
+        if lat is None or lon is None:
+            return None
+        p = self.Point(lon, lat)
+        for i in self.tree.query(p):
+            if self.geoms[i].contains(p):
+                return self.names[i]
+        return None
+
+
+def parcel_universe():
+    """every assessor parcel with lot, building sqft, values, neighborhood and tags; plus the exclusion counts."""
+    asr = sqlite3.connect(f"file:{pp.ASSESSOR}?mode=ro", uri=True)
+    con = sqlite3.connect(f"file:{pp.V4}?mode=ro", uri=True)
+    area = {a: (l, b) for a, l, b in con.execute("""SELECT pi.apn_normalized, pa.lot_sqft, pa.building_sqft_taxable
+                 FROM parcel_area pa JOIN parcel_identifiers pi ON pi.parcel_id = pa.parcel_id AND pi.is_current = 1""")}
+    rental = collections.Counter(a for (a,) in con.execute(
+        "SELECT raw_apn FROM events WHERE event_type_code = 'registry_unit' AND raw_apn IS NOT NULL"))
+    landmark = {r["apn"] for r in csv.DictReader(open(LANDMARKS)) if r.get("apn")}
+    nb = _NB()
+    sites, excluded = [], collections.Counter()
+    for apn, addr, uc, land, imps, net, ldd, lat, lon in asr.execute(
+            "SELECT APN, SitusAddre, UseCode, Land, Imps, TotalNetValue, LatestDocumentDate, Latitude, Longitude FROM parcels"):
+        try:
+            c = pp.to_canonical_apn(apn, "alameda")
+        except Exception:
+            excluded["unparseable APN"] += 1
+            continue
+        b = bucket(uc)
+        lot, bldg = area.get(c, (None, None))
+        if b == "condo":
+            excluded["condominium unit (73xx)"] += 1
+            continue
+        if not lot or lot < MIN_LOT_SF:
+            excluded[f"lot under {MIN_LOT_SF:,} sqft or unknown"] += 1
+            continue
+        try:
+            la, lo = float(lat), float(lon)
+        except (TypeError, ValueError):
+            la = lo = None
+        sites.append(dict(key=c, name=(addr or "").split(" BERKELEY")[0].strip() or c, apns=[c], bucket=b, use_code=uc,
+                          lot_sf=float(lot), building_sf=float(bldg or 0), assessed_land=land or 0, assessed_imps=imps or 0,
+                          exempt=(net or 0) == 0 and ((land or 0) + (imps or 0)) > 0, last_document=ldd,
+                          rental_units=rental.get(c, 0), landmark=c in landmark, lat=la, lon=lo,
+                          neighborhood=nb.of(la, lo)))
+    return sites, excluded
+
+
+def rent_index(sites):
+    """neighborhood -> (rent factor, n tenancies): Fully Covered tenancies started 2023+, rent / citywide median for the
+    same bedrooms, median per neighborhood, shrunk toward 1.0 by n / (n + RENT_INDEX_MIN_N)."""
+    con = sqlite3.connect(f"file:{pp.V4}?mode=ro", uri=True)
+    nb_of = {s["key"]: s["neighborhood"] for s in sites}
+    rows = []
+    for apn, rent, beds, gov in con.execute("""SELECT raw_apn, CAST(json_extract(raw_payload, '$."Starting Rent"') AS REAL),
+               json_extract(raw_payload, '$."Number of Bedrooms"'), json_extract(raw_payload, '$."Gov Subsidized"')
+            FROM events WHERE event_type_code = 'registry_unit'
+              AND json_extract(raw_payload, '$."Type of Coverage"') = 'Fully Covered'
+              AND substr(json_extract(raw_payload, '$."Tenancy start date"'), 1, 4) >= '2023'"""):
+        if not rent or rent < 500 or gov == "Yes" or beds in (None, ""):
+            continue
+        rows.append((nb_of.get(apn), str(min(int(float(beds)), 4)), rent))
+    med = {b: st.median(r for _, bb, r in rows if bb == b) for b in {b for _, b, _ in rows}}
+    by_nb = collections.defaultdict(list)
+    for n, b, r in rows:
+        if n:
+            by_nb[n].append(r / med[b])
+    out = {}
+    for n, v in by_nb.items():
+        w = len(v) / (len(v) + RENT_INDEX_MIN_N)
+        out[n] = dict(factor=w * st.median(v) + (1 - w), raw=st.median(v), n=len(v))
+    return dict(by_neighborhood=out, citywide_median_by_bedrooms=med, tenancies=len(rows))
+
+
+def euv_rates(sites):
+    """price per building sqft from 2024+ transfers (Prop 13 reset), residential vs non-residential, by neighborhood
+    where it has EUV_MIN_SALES sales, else citywide: quartiles (low / base / high)."""
+    res_kinds = {"single_family", "residential_2_4", "residential_5plus"}
+    comps = collections.defaultdict(list)
+    for s in sites:
+        if (s["last_document"] or "") >= "2024-01-01" and s["building_sf"] >= 400 and not s["exempt"]:
+            kind = "residential" if s["bucket"] in res_kinds else "nonresidential"
+            psf = (s["assessed_land"] + s["assessed_imps"]) / s["building_sf"]
+            if psf >= 100:                            # lower values: likely a recorded document that is not a sale
+                comps[(kind, s["neighborhood"])].append(psf)
+                comps[(kind, None)].append(psf)
+    q = {}
+    for k, v in comps.items():
+        if len(v) >= (EUV_MIN_SALES if k[1] else 10):
+            a = st.quantiles(v, n=4)
+            q[k] = dict(low=a[0], base=st.median(v), high=a[2], n=len(v))
+    return q
+
+
+def attach_citywide(sites, idx, rates):
+    """per site: the rent factor and the existing-use value band."""
+    res_kinds = {"single_family", "residential_2_4", "residential_5plus"}
+    for s in sites:
+        r = idx["by_neighborhood"].get(s["neighborhood"])
+        s["rent_factor"] = r["factor"] if r else 1.0
+        kind = "residential" if s["bucket"] in res_kinds else "nonresidential"
+        rate = rates.get((kind, s["neighborhood"])) or rates.get((kind, None))
+        s["euv_basis"] = f"{kind} sales, {'neighborhood' if (kind, s['neighborhood']) in rates else 'citywide'}"
+        s["euv"] = {k: s["building_sf"] * rate[k] for k in ("low", "base", "high")} if rate else {"low": 0, "base": 0, "high": 0}
+    return sites
+
+
+def citywide_site_result(site, R, scen, fee_modes=("in_lieu", "on_site")):
+    """one parcel: per fee mode and scenario, the lowest height that pencils, and the best height (the lowest rent
+    multiple needed) with its units, tier, rent multiple and surplus. Rows are not kept (24k parcels x 11 heights)."""
+    out = dict(key=site["key"], name=site["name"], bucket=site["bucket"], neighborhood=site["neighborhood"],
+               lot_sf=site["lot_sf"], building_sf=site["building_sf"], exempt=site["exempt"], landmark=site["landmark"],
+               rental_units=site["rental_units"], rent_factor=round(site["rent_factor"], 4), lat=site["lat"],
+               lon=site["lon"], euv_basis=site["euv_basis"])
+    for fm in fee_modes:
+        for sc, s in scen.items():
+            be = break_even(site, s, R, fm)
+            best = min(be["rows"], key=lambda x: x["rent_mult_needed"])
+            tag = f"{fm}_{sc}"
+            out[f"{tag}_break_even"] = be["break_even_storeys"]
+            out[f"{tag}_best_storeys"] = best["storeys"]
+            out[f"{tag}_best_units"] = best["units"]
+            out[f"{tag}_rent_needed"] = round(best["rent_mult_needed"], 4)
+            if sc == "base":
+                out[f"{tag}_land_basis"] = round(be["land"]["basis"])
+                out[f"{tag}_binding"] = be["land"]["binding"]
+                out[f"{tag}_best_tier"] = best["tier"]
+    return out
+
+
+def run_citywide(fee_modes=("in_lieu", "on_site"), limit=None, progress=None):
+    sites, excluded = parcel_universe()
+    idx, rates = rent_index(sites), euv_rates(sites)
+    attach_citywide(sites, idx, rates)
+    R = rents()
+    scen = {sc: scenario(sc) for sc in SCENARIOS}
+    res = []
+    for i, s in enumerate(sites[:limit] if limit else sites):
+        res.append(citywide_site_result(s, R, scen, fee_modes))
+        if progress and i % progress == 0:
+            print(f"  {i:,}/{len(sites):,}", flush=True)
+    return dict(results=res, excluded=dict(excluded), rent_index=idx,
+                euv_rates={f"{k[0]}|{k[1]}": v for k, v in rates.items()}, rents=R, universe=len(sites))
+
+
+def _sha16(path) -> str:
+    import hashlib
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for b in iter(lambda: f.read(1 << 20), b""):
+            h.update(b)
+    return h.hexdigest()[:16]
+
+
+def write_citywide(out_dir=ROOT / "data/derived/pencil_out"):
+    """run the citywide pass and write citywide_<date>.csv (one row per parcel) + citywide_<date>.meta.json (inputs'
+    hashes, exclusions, the rent index, the existing-use rates). JN-O reads these and refuses a stale pair."""
+    from datetime import date
+    r = run_citywide(progress=2000)
+    day = date.today().isoformat()
+    rows = r.pop("results")
+    with open(out_dir / f"citywide_{day}.csv", "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=list(rows[0]))
+        w.writeheader()
+        w.writerows(rows)
+    meta = dict(as_of=day, parcels=len(rows), assumptions=ASSUMPTIONS_FILE.name, assumptions_sha=_sha16(ASSUMPTIONS_FILE),
+                v4_file_sha=_sha16(pp.V4), assessor_sha=_sha16(pp.ASSESSOR), **{k: v for k, v in r.items() if k != "rents"},
+                rents=dict(pool_rent=r["rents"]["pool_rent"], pool_mix=r["rents"]["pool_mix"], lease_ups=r["rents"]["lease_ups"]))
+    json.dump(meta, open(out_dir / f"citywide_{day}.meta.json", "w"), indent=1, default=str)
+    print(f"wrote citywide_{day}.csv ({len(rows):,} parcels) + meta")
+
+
+if __name__ == "__main__":
+    if "--citywide" in sys.argv:
+        write_citywide()

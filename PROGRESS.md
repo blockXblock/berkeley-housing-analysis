@@ -5,6 +5,19 @@
 
 ---
 
+## 2026-10-25 — Pencil-out CITYWIDE pass (JN-O §8, dev; no DB writes)
+
+- `python scripts/v4/pencil_out.py --citywide` (~13 min) -> `data/derived/pencil_out/citywide_2026-10-25.csv` (24,819
+  parcels) + `.meta.json` (hashes of assumptions/v4/assessor; JN-O refuses a stale pair). Excluded: 2,967 condo units,
+  1,348 lots < 2,500 sqft. Per parcel, RECORD-derived: a neighborhood rent index (9,980 Fully Covered tenancies 2023+,
+  0.87 South Berkeley to 1.22 Panoramic Hill) and an existing-use value from 2024+ transfers' price per building sqft.
+- **At base, 0 parcels pencil at any height 2-12 storeys** (both affordability scenarios; 0 in the unfavorable case).
+  Rent needed: median 1.94x today's local rents, band ~1.8-2.2 by parcel kind; best height 6 storeys on 23,584 parcels.
+- Favorable case: 11,686 pencil (in-lieu), mostly hillside/north-side single-family lots: an ARTIFACT of no zoning /
+  slope / fire-zone layer. **Next: a citywide zoning layer** (height + use per parcel, fire zones, slope) to turn the
+  favorable set into a real potential-sites list.
+- Gate: appended `data/baselines/pencil_out_baseline_2026-10-25b.json` (new citywide keys; earlier figures unchanged).
+
 ## 2026-10-25 — Pencil-out: stalled entitlements + Elmwood break-even height (JN-O, dev; no DB writes)
 
 - **Phase A** (`docs/audit/2026-10-25_pencil_out_phase_a_inputs.md`): "Entitled 3+ yrs, inactive" = the explorer's

@@ -6,7 +6,7 @@ John, 2026-10-25 (pencil-out Phase B, after Phase A docs/audit/2026-10-25_pencil
     residual land value at low/base/high, against its land basis; verdict pencils / marginal / does_not /
     insufficient_data; RECORD vs ASSUMPTION on every input; which assumption flips each verdict
   - the Elmwood sites (7-Eleven, Five Little Monkeys, Wells Fargo lot, post office): the height at which a building
-    pencils; later every potential site in Berkeley (the site model is generic)
+    pencils; then every parcel in Berkeley (§8, the citywide pass: python scripts/v4/pencil_out.py --citywide)
 
 Machinery: scripts/v4/pencil_out.py (on scripts/v4/proforma_projects.py, JN-Feasibility Part 2). Assumptions:
 data/assumptions/pencil_out_<date>.yaml. Gate: data/baselines/pencil_out_baseline_<date>.json (first run writes it;
@@ -451,6 +451,144 @@ change is in the rent multiple at that best height: rents roughly double, or an 
 one combination that pencils is the **Wells Fargo parking lot** with every assumption favorable: no business to buy out.
 """)
 
+# ------------------------------------------------------------------------------------------------ §8 citywide
+md(r"""
+## §8 — Citywide: the same break-even search on every parcel
+
+📝 **Plan (John, 2026-10-25: "run the citywide break-even pass").** The §6 site model on every Berkeley assessor parcel
+with a usable lot. Three inputs that §6 took per site become **per parcel and RECORD-derived**:
+- **Rents by neighborhood.** A rent index from the Rent Board's unit records: tenancies started 2023+ in **Fully
+  Covered** (pre-1980) units, where vacancy decontrol resets the starting rent to market. Each rent is divided by the
+  citywide median for its bedroom count; a neighborhood's median ratio multiplies the new-construction lease-up pool,
+  shrunk toward 1.0 where it has few tenancies.
+- **Existing-use value.** Building sqft × the median price per building sqft of same-kind parcels (residential /
+  non-residential) whose last recorded document is 2024+ (Prop 13 resets assessment at a sale), by neighborhood where it
+  has 25+ such sales, else citywide; the quartiles are the band. A vacant lot's existing use is 0.
+- **Universe.** Every assessor parcel. **Excluded and counted:** condominium units (use 73xx) and lots under 2,500 sqft.
+  **Tagged, not dropped:** tax-exempt parcels (UC, City, churches, nonprofits), City landmarks, and parcels with
+  registered rental units (demolishing them brings replacement and relocation duties this model does not price).
+
+The run is machinery (`python scripts/v4/pencil_out.py --citywide`, ~13 minutes) writing
+`data/derived/pencil_out/citywide_<date>.csv` + `.meta.json`, stamped with the hashes of the assumptions file, v4 and
+the assessor roll. This cell **refuses** a file whose stamps don't match today's inputs.
+""")
+code(r"""
+import glob, hashlib
+cw_files = sorted(glob.glob(str(ROOT / 'data' / 'derived' / 'pencil_out' / 'citywide_*.meta.json')))
+CWM = json.load(open(cw_files[-1]))
+now = dict(assumptions_sha=po._sha16(po.ASSUMPTIONS_FILE), v4_file_sha=po._sha16(po.pp.V4), assessor_sha=po._sha16(po.pp.ASSESSOR))
+stale = {k: (CWM[k], v) for k, v in now.items() if CWM[k] != v}
+if stale:
+    raise AssertionError(f"citywide file {Path(cw_files[-1]).name} is STALE {stale} -- re-run "
+                         "`python scripts/v4/pencil_out.py --citywide`")
+CW = pd.read_csv(cw_files[-1].replace('.meta.json', '.csv'))
+print(f"{Path(cw_files[-1]).name}: {len(CW):,} parcels; excluded {CWM['excluded']}; inputs match today's files")
+print(f"rent index: {CWM['rent_index']['tenancies']:,} market tenancies (2023+)")
+RI = pd.DataFrame([dict(neighborhood=k, factor=round(v['factor'], 3), raw=round(v['raw'], 3), tenancies=v['n'])
+                   for k, v in CWM['rent_index']['by_neighborhood'].items()]).sort_values('factor', ascending=False)
+print(RI.to_string(index=False))
+""")
+md(r"""
+📝 **Found.** Relative rents for old stock vary within about ±15% across most of the city (hill and campus-adjacent
+neighborhoods high, South and Southwest Berkeley low). That spread is small next to the gaps §6 found: location cannot
+by itself close a building that needs about twice today's rents.
+""")
+code(r"""
+TAGS = lambda d: ('exempt' if d.exempt else 'landmark' if d.landmark else 'existing rentals' if d.rental_units else 'clear')
+CW['tag'] = CW.apply(TAGS, axis=1)
+def count(col): return int(CW[col].notna().sum())
+summ = (CW.groupby('bucket').agg(parcels=('key', 'size'),
+         pencils_base_in_lieu=('in_lieu_base_break_even', lambda s: int(s.notna().sum())),
+         pencils_base_on_site=('on_site_base_break_even', lambda s: int(s.notna().sum())),
+         pencils_favorable_in_lieu=('in_lieu_favorable_break_even', lambda s: int(s.notna().sum())),
+         pencils_favorable_on_site=('on_site_favorable_break_even', lambda s: int(s.notna().sum())),
+         median_rent_needed=('in_lieu_base_rent_needed', 'median'),
+         p10_rent_needed=('in_lieu_base_rent_needed', lambda s: s.quantile(0.10)))
+        .sort_values('parcels', ascending=False))
+summ.loc['ALL'] = [len(CW), count('in_lieu_base_break_even'), count('on_site_base_break_even'),
+                   count('in_lieu_favorable_break_even'), count('on_site_favorable_break_even'),
+                   CW.in_lieu_base_rent_needed.median(), CW.in_lieu_base_rent_needed.quantile(0.10)]
+print(summ.round(2).to_string())
+print('\nbest height (base, in-lieu):', CW.in_lieu_base_best_storeys.value_counts().sort_index().to_dict())
+print('land basis set by (base):', CW.in_lieu_base_binding.value_counts().to_dict())
+""")
+md(r"""
+📝 **Before.** The distribution of **how many times today's local rents** each parcel's best building would need, by
+kind of parcel (base case, in-lieu fee). 1.0 = pencils at today's rents.
+""")
+code(r"""
+order = ['vacant_or_misc', 'commercial', 'industrial', 'misc', 'institutional', 'public_or_common',
+         'residential_5plus', 'residential_2_4', 'single_family']
+fig = go.Figure()
+for b in [o for o in order if o in set(CW.bucket)]:
+    v = CW.loc[CW.bucket == b, 'in_lieu_base_rent_needed'].clip(upper=6)
+    fig.add_trace(go.Box(x=v, name=f"{b} ({len(v):,})", boxpoints=False, orientation='h'))
+fig.add_vline(x=1.0, line_color='#c0504d', annotation_text="today's local rents")
+fig.update_layout(title='Every Berkeley parcel: rent multiple its best building needs to pencil (base, in-lieu; clipped at 6)',
+                  xaxis_title="× today's local rents", template='plotly_white', height=480, showlegend=False)
+fig.show()
+""")
+md(r"""
+📝 **After — what this could MISLEAD about.** (1) Values are clipped at 6× so the boxes are readable. (2) The kinds
+differ less than the boxes' spread suggests: across the city the need sits in a narrow band, and **single-family lots
+have the lowest median**, because their land basis is mostly market land and many sit in the higher-rent neighborhoods.
+(3) The **existing-use values lean low**: a 2024+ recorded document is not always a sale, and a stale assessment
+understates the price, which makes development look **easier** than it is. (4) Every parcel gets the same envelope
+(ground-floor retail, 75% upper coverage) and the same costs; **zoning, slope, fire zones and setbacks are not modeled**,
+so a hillside single-family lot is priced as if it could carry a 6-storey building.
+""")
+md(r"""
+📝 **Before.** The map: each parcel colored by the rent multiple its best building needs (base, in-lieu). Darker = closer
+to penciling.
+""")
+code(r"""
+m = CW.dropna(subset=['lat', 'lon']).copy()
+m['need'] = m.in_lieu_base_rent_needed.clip(upper=4)
+fig = go.Figure(go.Scattermap(lat=m.lat, lon=m.lon, mode='markers',
+    marker=dict(size=4, color=m.need, colorscale='Viridis_r', cmin=1.5, cmax=4, colorbar=dict(title='× rents')),
+    text=m.name + ' · ' + m.bucket + ' · best ' + m.in_lieu_base_best_storeys.astype(str) + ' storeys',
+    hovertemplate='%{text}<br>needs ×%{marker.color:.2f} today\'s local rents<extra></extra>'))
+fig.update_layout(map=dict(style='open-street-map', center=dict(lat=37.87, lon=-122.27), zoom=12.2), height=650,
+                  margin=dict(l=0, r=0, t=40, b=0),
+                  title='Rent multiple needed to pencil, best height, base case (clipped 1.5–4)')
+fig.show()
+""")
+md(r"""
+📝 **After — what this could MISLEAD about.** The color scale starts at 1.5×, not 1.0×, because no parcel reaches 1.0 at
+base; a reader should not take the darkest dots as "pencils". The **ranking** follows the rent index (darkest in the hills
+and near campus) and ignores zoning, slope and fire zones, so dark hillside dots are not buildable sites.
+
+**The parcels that pencil in any scenario** (the favorable case: every assumption at its helpful end), with their tags:
+""")
+code(r"""
+fav = CW[CW.in_lieu_favorable_break_even.notna() | CW.on_site_favorable_break_even.notna()].copy()
+cols = ['name', 'neighborhood', 'bucket', 'lot_sf', 'building_sf', 'tag', 'in_lieu_favorable_break_even',
+        'on_site_favorable_break_even', 'in_lieu_base_rent_needed', 'in_lieu_base_best_storeys', 'in_lieu_base_best_units']
+print(f"{len(fav):,} parcels pencil in the favorable case; by kind:", fav.bucket.value_counts().to_dict(),
+      '| by tag:', fav.tag.value_counts().to_dict())
+print(fav.sort_values('in_lieu_base_rent_needed')[cols].head(25).to_string(index=False))
+""")
+md(r"""
+📝 **Found — citywide.** Three results, from the most to the least robust.
+1. **At base, no parcel in Berkeley pencils at any height from 2 to 12 storeys,** under either affordability scenario,
+   and none does in the unfavorable case. This holds before land is even paid for on most parcels.
+2. **The rent needed sits in a narrow band everywhere** (see the table: medians about 1.9–2.2× today's local rents, by
+   kind of parcel), and **the best height is the top of the podium tier (6 storeys) on nearly every parcel.** Location
+   moves the need by the rent index's roughly ±15%; lot size and what stands on the lot move it a little more. Nothing
+   moves it near 1.0.
+3. **In the favorable case about half the parcels pencil, and that number should not be read as "potential sites".**
+   Most are single-family lots in the higher-rent hill and north-side neighborhoods, and the lowest needs of all are on
+   Panoramic Hill, the neighborhood with the highest rent index and among the least buildable land in the city. The model
+   has **no zoning, slope or fire-zone layer**, so it prices every lot as if a 6-storey building were allowed, and the
+   favorable case stacks every helpful assumption at once (5% cap rate, low costs, +10% rents, corridor land at
+   $149/sqft).
+
+**So the citywide answer to "how tall must it be?" matches Elmwood's:** at today's rents, costs and rates, no height
+pencils anywhere; height is not the binding constraint, the rent-to-cost ratio is, and taller (past the podium tier) makes
+it worse. **What's missing for a real "potential sites" list is a zoning layer** (allowed height and use per parcel, the
+fire zones, and slope), so the favorable-case set can be cut to lots where the building is actually permitted.
+""")
+
 # ------------------------------------------------------------------------------------------------ §7 results + gate
 md(r"""
 ## §7 — Results file and gate
@@ -475,6 +613,12 @@ FIG = {
     'median_gap_bp': int(V.gap_bp.dropna().median()) if V.gap_bp.notna().any() else None,
     'elmwood_best_storeys_base': sorted({v['storeys'] for k, v in BEST.items() if k[2] == 'base'}),
     'lease_ups': R['lease_ups'],
+    'citywide_parcels': int(len(CW)), 'citywide_excluded': CWM['excluded'],
+    'citywide_pencils_base_in_lieu': count('in_lieu_base_break_even'), 'citywide_pencils_base_on_site': count('on_site_base_break_even'),
+    'citywide_pencils_favorable_in_lieu': count('in_lieu_favorable_break_even'),
+    'citywide_pencils_favorable_on_site': count('on_site_favorable_break_even'),
+    'citywide_median_rent_needed': round(float(CW.in_lieu_base_rent_needed.median()), 3),
+    'citywide_best_storeys_mode': int(CW.in_lieu_base_best_storeys.mode()[0]),
 }
 FIG['elmwood_break_even_base'] = {r['site'] + '|' + r['fee_mode']: r['break_even_storeys']
                                   for r in RUN['results'] if r['scenario'] == 'base'}
@@ -491,7 +635,7 @@ res_dir = ROOT / 'data' / 'derived' / 'pencil_out'
 results = dict(meta=meta, cohort=COH.to_dict('records'), coverage=COV.to_dict('records'), verdicts=V.to_dict('records'),
                ledger=LEDGER.to_dict('records'), flips=FLIPS.to_dict('records'),
                sensitivity={a: s_['rows'] for a, s_ in SENS.items()},
-               elmwood_sites=srows, elmwood=[dict(site=r['site'], fee_mode=r['fee_mode'], scenario=r['scenario'],
+               citywide_file=Path(cw_files[-1]).name, elmwood_sites=srows, elmwood=[dict(site=r['site'], fee_mode=r['fee_mode'], scenario=r['scenario'],
                                                   break_even_storeys=r['break_even_storeys'], land=r['land'], rows=r['rows'])
                                              for r in RUN['results']])
 out_p = res_dir / f"results_{date.today().isoformat()}.json"

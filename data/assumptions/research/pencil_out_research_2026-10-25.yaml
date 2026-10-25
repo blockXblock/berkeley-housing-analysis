@@ -1,0 +1,723 @@
+# =====================================================================================
+# PENCIL-OUT ASSUMPTIONS: RESEARCH DRAFT (for John's review; not yet adopted)
+# Researched 2026-10-25. Every number has a source; arithmetic is shown in `notes`.
+# Rule followed: HCD/CKAN APR data NOT used. CKAN not consulted.
+# Scope change from coordinator (mid-task): market rents, the Terner 2020 hard-cost level
+# + TBD SF bid index escalation, and the CBRE Oakland cap rate already live in
+# notebooks/v4/JN-Feasibility.ipynb Part 2b. Those are marked `existing_in_repo` here
+# and were NOT re-researched. Effort went to the gaps listed by the coordinator.
+#
+# SOURCES CONSULTED (used)
+#  [BFA24]  City of Berkeley, "Residential Feasibility Analysis and In-Lieu Fee
+#           Recommendations" (Council worksession 2024-05-21; Strategic Economics + Street
+#           Level Advisors; CoStar/Redfin + developer/GC interviews). THE key Berkeley source.
+#           https://berkeleyca.gov/sites/default/files/documents/2024-05-21%20Special%20Item%2001%20Residential%20Feasibility%20Analysis.pdf
+#  [BFEE26] City of Berkeley Planning, "Development Fees and Affordability Requirements"
+#           (updated 8/6/26). https://berkeleyca.gov/sites/default/files/documents/List%20of%20devt%20fees%2C%20current_0.pdf
+#  [BIHO25] City of Berkeley, Council public hearing 2025-02-25 Item 14, "Inclusionary Housing
+#           Ordinance In-Lieu Fee; Amending BMC 23.328" (includes the 2024 study as attachment).
+#           https://dev.berkeleyca.gov/sites/default/files/documents/2025-02-25%20Item%2014%20Inclusionary%20Housing%20Ordinance.pdf
+#  [BAHF25] City of Berkeley, "Affordable Housing Requirements" applicant forms, 2025-04-21.
+#           https://berkeleyca.gov/sites/default/files/documents/Affordable%20Housing%20Requirements%20Berkeley_Forms_2025-04-21_0.pdf
+#  [BPRIOR] City of Berkeley, "Prior Affordable Housing Requirements for all development projects
+#           vested on/before March 31, 2023" (BMC 22.20.065), v. 05/05/2026.
+#           https://berkeleyca.gov/sites/default/files/documents/Prior%20Affordable%20Housing%20Requirements%20%2B%20Exhibits_09252023_FINAL.pdf
+#  [B2023]  City of Berkeley, Council 2023-01-17 Item 21 (Rev2), in-lieu fee staff report.
+#           https://berkeleyca.gov/sites/default/files/documents/2023-01-17%20Item%2021%20Rev2%20Planning.pdf
+#  [BRENT25] City of Berkeley Inclusionary/BMR Program, "Income and Rent Limits for 2025"
+#           (effective 2025-06-01 through 2026-05-31). https://berkeleyca.gov/sites/default/files/2025-12/Exhibit%20A.pdf
+#  [HCD26]  CA HCD, "Revised 2026 State Income Limits" memo + tables, 2026-06-23.
+#           https://www.hcd.ca.gov/sites/default/files/docs/grants-and-funding/income-limits-2026.pdf
+#  [TERN23] Terner Center (Garcia; Carlton/Patterson/Strawn of MapCraft), "Making It Pencil:
+#           The Math Behind Housing Development, 2023 Update", December 2023.
+#           https://ternercenter.berkeley.edu/wp-content/uploads/2023/12/Making-It-Pencil-December-2023.pdf
+#  [KMA26]  Keyser Marston Associates for County of Santa Cruz, "Inclusionary Housing:
+#           Feasibility Study", 2026-05-21 (newest CA consultant pro forma found).
+#           https://www.cdi.santacruzcountyca.gov/Portals/35/CDI/Planning/Housing/SC%20County%20Inclusionary%20Housing%20Feasibility%20Study.pdf
+#  [SJ25]   City of San Jose Housing Dept, "Cost of Residential Development Study" (EPS market-rate,
+#           CSG affordable), 2025-11-21. PRIMARY PDF BLOCKED (Akamai 403 to curl and WebFetch);
+#           numbers below come from a search-engine extract of its table and press coverage. LOW confidence.
+#           https://www.sanjoseca.gov/home/showpublisheddocument/126846/638996842360170000
+#  [LA1287] City of Los Angeles Planning, "Implementation of 2023 State Density Bonus Law - AB 1287",
+#           2024-05-16. https://planning.lacity.gov/odocument/e2f5c41c-45e1-42e0-be15-8fa4a0f747b2/Implementation_of_2023_State_Density_Bonus_Law_-_AB_1287.pdf
+#  [SM1287] City of Santa Monica, "Summary of AB 1287's Changes to State Density Bonus Law", Jan 2024.
+#           https://santamonica.gov/media/Document%20Library/Topic%20Explainers/Planning%20Resources/AB1287%20FAQ.pdf
+#  [GC65915] Gov. Code 65915 text via FindLaw ("current as of January 01, 2026").
+#           https://codes.findlaw.com/ca/government-code/gov-sect-65915/  (leginfo.legislature.ca.gov returned 403)
+#  [WW22]   WoodWorks (Scarlett), "Mid-Rise Design" slides, 2022-07-27 (2018 IBC Ch. 5 tables).
+#           https://www.woodworks.org/wp-content/uploads/presentation_slides-scarlett-mid-rise-design-220727.pdf
+#  [FRED]   FRED, SOFR30DAYAVG and DPRIME series, pulled 2026-10-25.
+#           https://fred.stlouisfed.org/series/SOFR30DAYAVG
+#  [COR26]  CorAdvisors blog, "Construction Loan Rates 2026", May 2026 (broker commentary; weak).
+#           https://www.coradvisors.net/2026/05/construction-loan-rates-2026.html
+#  [WGI26]  WGI 2026 Parking Structure Cost Outlook, as reported by IPMI/Parking & Mobility 2026-09-02.
+#           https://www.parking-mobility.org/news/wgi-releases-2026-parking-structure-cost-outlook/
+#  [UCLA26] UCLA Center for Parking Policy, "No Such Thing as Free Parking: Construction Costs in
+#           17 U.S. Cities" (Feb 2026), as reported by Streetsblog Cal 2026-03-02.
+#           https://cal.streetsblog.org/2026/03/02/new-ucla-report-looks-into-the-high-cost-to-build-parking
+#  [KID26]  Kidder Mathews, "Market Trends East Bay Retail 3Q 2026" (CoStar data).
+#           https://kidder.com/wp-content/uploads/market_report/retail-market-research-east-bay-2026-3q.pdf
+#  [BOUL26] The Boulder Group Q2 2026 Net Lease Research Report, as reported by MBA Newslink 2026-07-08.
+#           https://newslink.mba.org/mba-newslinks/2026/july/mba-newslink-wednesday-july-8-2026/single-tenant-net-lease-cap-rates-rise-boulder-group-reports/
+#  [PSTL26] Postal Realty Trust (NYSE: PSTL) Q2 2026 results summary (Quartr).
+#           https://quartr.com/events/postal-realty-trust-inc-pstl-q2-2026_ontzP7nQ
+#  [LOOP]   Broker listings for 2928 and 2980 College Ave (Gordon Commercial brochure on LoopNet;
+#           LoopNet listing 35111030). UNDATED; brochure PDF blocked (returned HTML). LOW confidence.
+#  [RCAFE]  RentCafe new-apartment size reports via MTC/ABAG blog (secondary). LOW confidence.
+#
+# SOURCES CONSULTED BUT REJECTED / NOT USED
+#  - Terner "Making It Pencil" 2018 and 2020 editions: not retrieved separately; the 2023 update
+#    supersedes them and restates the 2019 baseline (2019 vs 2023 hard/soft cost bars).
+#  - Terner, "The Hard Costs of Construction" (March 2020): already in repo (JN-Feasibility Part 2b).
+#    Re-opened only to check for construction durations (it has none).
+#  - Terner/CSAC "Development Math" deck (2021-04-22): 2019 numbers, superseded by TERN23.
+#  - Keyser Marston San Diego (2019), Encinitas (2019), Monterey Co. (2019), LA County (2018),
+#    Santa Cruz city (2018), Costa Mesa (2023), Sacramento (2023), Clovis (2025): older and/or not
+#    Bay Area; KMA26 (Santa Cruz County, May 2026) used instead as the most recent KMA pro forma.
+#  - Oakland impact-fee Phase 2 feasibility study (Oct 2024) and DOSP EPS memo (2019): the 2024
+#    study's PDF was not found in search; the 2019 memo is too old. Not used.
+#  - Cumming / RLB / Turner & Townsend $/sf by building type for SF: no primary table reached
+#    (RLB gives only escalation, SF +6.73%/yr in a 2025 report). Not used.
+#  - oneestimate.ai, risingsunartscentre.org, Statista teaser pages: SEO/vendor content, no method.
+#  - Lee & Associates East Bay retail Q3 2025 ($32.70/sf NNN): seen only as a search snippet;
+#    superseded by Kidder 3Q 2026. Mentioned, not relied on.
+#  - CTCAC 2026 income limits (HUD-based AMI $169,700): Berkeley's BMR schedule and H&S 50053
+#    use HCD State Income Limits, so HCD26 ($162,800) is used instead.
+#  - HCD/CKAN APR data: excluded by project rule.
+# =====================================================================================
+
+meta:
+  drafted: "2026-10-25"
+  status: "DRAFT for review. Not adopted. No DB writes, no commits."
+  conventions:
+    gsf: "gross building square feet"
+    nrsf: "net rentable square feet"
+    yoc: "yield on cost = stabilized NOI / total development cost"
+
+# -------------------------------------------------------------------------------------
+# 1. MARKET RENT  (existing series in repo; cross-check only)
+# -------------------------------------------------------------------------------------
+market_rent:
+  existing_in_repo: "JN-Feasibility Part 2b / Part 2a + 2f: Rent Board registry lease-up rents for new buildings and collected per-bed/per-unit asking rents. Not re-researched."
+  unit: "$/month and $/nrsf/month"
+  low: null
+  base: null
+  high: null
+  cross_check_by_type:
+    # BFA24 Fig 26 rents / Fig 25 unit sizes (CoStar submarket rents + 10% new-construction premium)
+    six_story_midrise:   {studio: {rent: 2800, sf: 500, psf: 5.60}, one_br: {rent: 3250, sf: 660, psf: 4.92}, two_br: {rent: 4500, sf: 990, psf: 4.55}}
+    eight_story_midrise: {studio: {rent: 2850, sf: 510, psf: 5.59}, one_br: {rent: 3500, sf: 750, psf: 4.67}, two_br: {rent: 4300, sf: 950, psf: 4.53}}
+    eighteen_story_downtown: {studio: {rent: 3300, sf: 400, psf: 8.25}, one_br: {rent: 3750, sf: 580, psf: 6.47}, two_br: {rent: 4700, sf: 800, psf: 5.88}, three_br: {rent: 6000, sf: 1100, psf: 5.45}}
+    four_story_GLA_micro_studio: {rent: 2400, sf: 250, psf: 9.60}
+    east_bay_TERN23_psf_range: [4.80, 5.70]
+  sources:
+    - publisher: "City of Berkeley / Strategic Economics"
+      title: "Residential Feasibility Analysis and In-Lieu Fee Recommendations (BFA24), Fig. 25-26"
+      url: "https://berkeleyca.gov/sites/default/files/documents/2024-05-21%20Special%20Item%2001%20Residential%20Feasibility%20Analysis.pdf"
+      date: "2024-05-21"
+      quote: "Market rate rent assumptions were established by using CoStar data from the last year ... A new construction premium of 10 percent was applied to the rents."
+      notes: "psf = monthly rent / unit sf from Fig 25, e.g. 2800/500 = 5.60. Units above 8 floors in the 18-story prototype get +10% (Fig 26 'Above 8 Floors')."
+    - publisher: "Terner Center for Housing Innovation"
+      title: "Making It Pencil 2023, Table 4"
+      url: "https://ternercenter.berkeley.edu/wp-content/uploads/2023/12/Making-It-Pencil-December-2023.pdf"
+      date: "2023-12"
+      quote: "Table 4: Rent Ranges for Prototype New Construction Per Square Foot (Studios to Two Bedrooms) ... East Bay (e.g., Uptown and Downtown Oakland) $5.70 - $4.80"
+      notes: "Oakland, not Berkeley."
+  student_by_bed: "existing_in_repo (collected per-bed rents, JN-Feasibility Part 2f). Not re-researched."
+  confidence: medium
+  notes: "Cross-check only. BFA24 rents are 2023-24 CoStar; the repo's Rent Board lease-up rents are the primary series."
+
+# -------------------------------------------------------------------------------------
+# 2. STABILIZED VACANCY
+# -------------------------------------------------------------------------------------
+vacancy:
+  unit: "% of gross scheduled income"
+  low: 2.5
+  base: 5.0
+  high: 5.0
+  by_type: {market_rate_residential: 5.0, bmr_residential: 2.5, ground_floor_retail: 10.0}
+  sources:
+    - publisher: "City of Berkeley / Strategic Economics"
+      title: "BFA24, Fig. 29 'Retail and Rent Assumptions'"
+      url: "https://berkeleyca.gov/sites/default/files/documents/2024-05-21%20Special%20Item%2001%20Residential%20Feasibility%20Analysis.pdf"
+      date: "2024-05-21"
+      quote: "Vacancy Rate - Market Rate  % of GSI  5.0%  2.5%  10.0%"  # columns: market-rate apts, BMR apts, retail
+      notes: "Columns are Apartments-Market Rate / Apartments-BMR / Retail."
+  confidence: medium
+  notes: "Only one Berkeley-specific underwriting source found. low=BMR rate; base/high=market-rate. No independent 2025-26 Berkeley multifamily vacancy survey was searched (rents are in-repo)."
+
+# -------------------------------------------------------------------------------------
+# 3. OPERATING EXPENSES
+# -------------------------------------------------------------------------------------
+operating_expenses:
+  unit: "% of GSI, and $/unit/yr"
+  low: 30.0
+  base: 30.0
+  high: 31.6
+  by_type:
+    pct_of_GSI_BFA24: 30.0
+    pct_of_EGI_equivalent: 31.6
+    market_rate_per_unit_yr: {low: 11177, base: 11877, high: 12617}
+    bmr_per_unit_yr: 8760
+  sources:
+    - publisher: "City of Berkeley / Strategic Economics"
+      title: "BFA24, Fig. 29 and Fig. 38"
+      url: "https://berkeleyca.gov/sites/default/files/documents/2024-05-21%20Special%20Item%2001%20Residential%20Feasibility%20Analysis.pdf"
+      date: "2024-05-21"
+      quote: "Operating Expenses  % of GSI  30.0%  30.0%  0.0%"
+      notes: "Per unit from Fig 38: 6-story market-rate opex $819,540 / 69 MR units = $11,877/unit/yr; 8-story $1,207,080 / 108 = $11,177. EGI equivalent: 30% of GSI / (1 - 5% vacancy) = 31.6% of EGI."
+    - publisher: "City of Berkeley / Strategic Economics (in BIHO25 attachment)"
+      title: "Affordability-gap method table note"
+      url: "https://dev.berkeleyca.gov/sites/default/files/documents/2025-02-25%20Item%2014%20Inclusionary%20Housing%20Ordinance.pdf"
+      date: "2025-02-25"
+      quote: "(a) Assumes 2.5% vacancy and $730/month operations cost per unit."
+      notes: "BMR opex: $730 x 12 = $8,760/unit/yr."
+    - publisher: "Keyser Marston Associates for County of Santa Cruz"
+      title: "Inclusionary Housing: Feasibility Study (KMA26), p. 29"
+      url: "https://www.cdi.santacruzcountyca.gov/Portals/35/CDI/Planning/Housing/SC%20County%20Inclusionary%20Housing%20Feasibility%20Study.pdf"
+      date: "2026-05-21"
+      quote: "Operating Expenses/Unit  $12,617  $12,367"
+      notes: "Santa Cruz County, not Berkeley; used only as the high per-unit bound."
+  property_tax:
+    note: "~1.2% of assessed value per John's brief. NOT verified: Alameda County 2025-26 TRA rate table for Berkeley not retrieved. Unclear whether BFA24's 30% includes property tax on new value (Terner's NOI definition includes property taxes). At ~$650k/unit TDC, 1.2% = ~$7,800/unit/yr, so this matters; John to decide whether to model tax separately."
+  confidence: medium
+  notes: "Single Berkeley source for the ratio. Check against the Rent Board-era buildings' actual operating statements if any are available."
+
+# -------------------------------------------------------------------------------------
+# 4. CAP RATE  (existing series in repo)
+# -------------------------------------------------------------------------------------
+cap_rate_multifamily:
+  existing_in_repo: "JN-Feasibility Part 2b: CBRE U.S. Cap Rate Survey, multifamily infill Class A, Oakland (H2 2023 / H1 2024 5.5-6.5%). Not re-researched."
+  unit: "%"
+  low: null
+  base: null
+  high: null
+  incidental_cross_checks:
+    - {source: "BFA24 Fig 29", value: 5.0, quote: "Cap Rate  NOI / Project Value  5.0%  5.0%  5.0%", date: "2024-05-21"}
+    - {source: "TERN23 Fig 4", value: 5.0, quote: "Comparison of 2019 and 2023 Capitalization Rates ... East Bay 4.3 [2019] 5 [2023]", date: "2023-12"}
+  confidence: "see repo"
+  notes: "Both cross-checks sit below the CBRE Oakland range; the repo's CBRE series stays the cited one."
+
+# -------------------------------------------------------------------------------------
+# 5. TARGET YIELD ON COST / SPREAD
+# -------------------------------------------------------------------------------------
+yield_on_cost_spread:
+  unit: "basis points over exit cap rate"
+  low: 100
+  base: 125
+  high: 150
+  by_type:
+    berkeley_absolute_yoc_threshold_pct: 6.0
+    implied_spread_in_BFA24_bp: 100
+  sources:
+    - publisher: "Terner Center for Housing Innovation"
+      title: "Making It Pencil 2023, 'Measuring Return'"
+      url: "https://ternercenter.berkeley.edu/wp-content/uploads/2023/12/Making-It-Pencil-December-2023.pdf"
+      date: "2023-12"
+      quote: "In 2019, many investors were willing to invest in projects that could demonstrate a return-on-cost (ROC) that was between 0.5 and 1.0 percent higher than capitalization rates. Today, investors require project ROC to be 1.0 to 1.5 percent higher than capitalization rates"
+    - publisher: "City of Berkeley / Strategic Economics"
+      title: "BFA24, pro forma method"
+      url: "https://berkeleyca.gov/sites/default/files/documents/2024-05-21%20Special%20Item%2001%20Residential%20Feasibility%20Analysis.pdf"
+      date: "2024-05-21"
+      quote: "rental projects were deemed feasible at a yield on cost of at least six percent"
+      notes: "With BFA24's own 5.0% cap rate, 6.0% - 5.0% = 100 bp."
+    - publisher: "Keyser Marston Associates"
+      title: "KMA26, p. 29"
+      url: "https://www.cdi.santacruzcountyca.gov/Portals/35/CDI/Planning/Housing/SC%20County%20Inclusionary%20Housing%20Feasibility%20Study.pdf"
+      date: "2026-05-21"
+      quote: "significantly lower than the 6% benchmark being applied in this analysis"
+      notes: "KMA also benchmarks rental feasibility at a 6% stabilized return on total investment."
+  confidence: high
+  notes: "base = midpoint of Terner's 100-150 bp. Note the JN rule (YoC vs cap + spread) and BFA24's absolute 6% agree only if the cap is ~4.75-5.0%. With CBRE Oakland 5.5-6.5% plus 100-150 bp, the hurdle is 6.5-8.0%."
+
+# -------------------------------------------------------------------------------------
+# 6. HARD COST BY CONSTRUCTION TYPE + CODE THRESHOLDS
+# -------------------------------------------------------------------------------------
+hard_cost_by_type:
+  existing_in_repo: "JN-Feasibility Part 2b: Terner 2020 level (Bay Area >$380/sf 2018; affordable +$48; Type I +$65-71) escalated by TBD Consultants SF bid index. The values below are NEWER cross-checks for the type step."
+  unit: "$/gsf (building area; excludes parking structure, site work, soft costs unless noted)"
+  low: null
+  base: null
+  high: null
+  by_type:
+    type_V_wood_le5:            {low: 266, base: 350, high: 400}
+    type_V_III_over_I_podium:   {low: 360, base: 430, high: 530}
+    type_I_concrete_steel:      {low: 547, base: 550, high: 621}
+    step_podium_to_type_I:
+      BFA24_component_rates: "Type V $350 -> Type III $400 -> Type I $550 /gsf: Type I = +$150 (+37.5%) over Type III, +$200 (+57%) over Type V"
+      BFA24_blended_building_rates: "6-story $360, 8-story $449, 18-story $547 /gsf (Fig 33)"
+      SJ25_podium_vs_tower: "$424 vs $610 /gsf (+44%); secondary"
+      TERNER2020_in_repo: "+$65-71/sf (regression on 2009-18 projects; much smaller step than the 2024-25 prototype studies)"
+    policy_adders_berkeley:
+      hard_hats_or_southside_prevailing_wage: "+18% to +25% of hard costs for projects not otherwise union (BFA24)"
+      bird_safe_glass: "+1.5% of hard costs (BFA24)"
+  sources:
+    - publisher: "City of Berkeley / Strategic Economics"
+      title: "BFA24, Fig. 33 and Fig. 34"
+      url: "https://berkeleyca.gov/sites/default/files/documents/2024-05-21%20Special%20Item%2001%20Residential%20Feasibility%20Analysis.pdf"
+      date: "2024-05-21"
+      quote: "Residential - Type V  per gross sf ... $350  $350 ... Residential - Type III  per gross sf ... $400 ... Residential - Type I  per gross sf ... $550  $550  $550"
+      notes: "Fig 33 blended 'Cost per Square Foot': 4-Story GLA $350, 6-Story $360, 8-Story $449, 18-Story $547. Type V Missing-Middle rental $400 (high for Type V). The 6-story is Type V over a Type I podium; the 8-story is Type III over Type I. Costs are 2024 dollars; not escalated here (the repo's TBD index can do it)."
+    - publisher: "City of Berkeley / Strategic Economics"
+      title: "BFA24, HARD HATS and Bird Safe findings"
+      url: "https://berkeleyca.gov/sites/default/files/documents/2024-05-21%20Special%20Item%2001%20Residential%20Feasibility%20Analysis.pdf"
+      date: "2024-05-21"
+      quote: "This would increase costs by approximately 18 to 25 percent for projects that do not otherwise use union labor ... The Bird Safe Building requirement adds approximately 1.5 percent to the hard costs"
+    - publisher: "Terner Center for Housing Innovation"
+      title: "Making It Pencil 2023, Fig. 1 + Table 1 (East Bay 120-unit five-over-one)"
+      url: "https://ternercenter.berkeley.edu/wp-content/uploads/2023/12/Making-It-Pencil-December-2023.pdf"
+      date: "2023-12"
+      quote: "Building Size 122,364 Square Feet ... Parking 120 Spaces ... [Fig 1 East Bay hard costs] 46.1 [2019] 52.9 [2023] (in Millions)"
+      notes: "$52.9M / 122,364 gsf = $432/gsf ALL-IN hard cost incl. podium parking and 5% contingency, no prevailing wage. Used as the podium base (rounded to $430). Terner: prevailing wage 'can add $30 per square foot'."
+    - publisher: "City of San Jose Housing Dept (EPS)"
+      title: "Cost of Residential Development Study (SJ25)"
+      url: "https://www.sanjoseca.gov/home/showpublisheddocument/126846/638996842360170000"
+      date: "2025-11-21"
+      quote: "[search-engine extract of the pro forma summary table, not read first-hand] podium ~ $424/sf, tower ~ $610/sf, 11-story sample ~ $621/sf; [press summary] 'Construction costs run around $266 per square foot' (wood) and 'Steel-frame construction costs about $560 per square foot'"
+      notes: "PRIMARY PDF BLOCKED (403). Column mapping inferred by the search tool. $266 = Type V low bound; $621 = Type I high bound. Verify before use."
+  podium_high_arithmetic: "8-story blended $449 x 1.18 (low end of the HARD HATS adder) = $530"
+  code_thresholds_R2_sprinklered_NFPA13:
+    type_VA:   {max_stories: 4, max_height_ft: 70}
+    type_IIIA: {max_stories: 5, max_height_ft: 85}
+    type_IIA:  {max_stories: 5, max_height_ft: 85}
+    type_IV_HT: {max_stories: 5, max_height_ft: 85}
+    type_IB:   {max_stories: 12, max_height_ft: 180}
+    type_IA:   {max_stories: "unlimited", max_height_ft: "unlimited"}
+    podium_510_2: "Upper building (e.g. 5 storeys IIIA, or 4 storeys VA) over a Type IA podium with 3-hour horizontal separation is treated as a separate building for stories and area. Overall HEIGHT in feet stays limited to the lesser building's limit (85 ft for IIIA over IA)."
+    high_rise_403: "High-rise = occupied floor more than 75 ft above lowest fire-department vehicle access, which brings extra requirements (practical ceiling for 5-over-2 at ~85 ft)."
+    california_note: "California deleted the IBC's NFPA 13R height/story allowances for Group R (DGS/SFM 2022 intervening-cycle ISOR), so use the NFPA 13 values."
+    sources:
+      - publisher: "WoodWorks"
+        title: "Mid-Rise Design slides (2018 IBC Chapter 5)"
+        url: "https://www.woodworks.org/wp-content/uploads/presentation_slides-scarlett-mid-rise-design-220727.pdf"
+        date: "2022-07-27"
+        quote: "Residential (R1, R2 & R4) Occupancies with NFPA 13 Sprinkler System ... IIIA IIIB IV (HT) VA VB ... Stories 5 5 5 4 3 ... Height (ft) 85 75 85 70 60"
+        notes: "Same slides on 510.2: 'Overall height in feet is still limited to min of either building ... 3hr rated horizontal assembly ... Building below is Type 1A' and 'Increases allowable stories... not allowable building height'. These are model-IBC 2018 tables. The 2022 CBC (Title 24 Pt 2) was NOT read first-hand (codes.iccsafe.org returned 403)."
+      - publisher: "ICC / project code analyses (via search)"
+        title: "Type IB R-2 limits"
+        url: "https://iccsafe.org/wp-content/uploads/ctc/IBC_v_UBC_S-2_revised.doc"
+        date: "n.d."
+        quote: "Type IB ... 12 stories, 180' with sprinklers"
+        notes: "Confirmed only through a secondary search summary (S-2 table plus a 2015-IBC R-2 code analysis). MEDIUM-LOW confidence; confirm in CBC Tables 504.3/504.4."
+  confidence: medium
+  notes: "The podium-to-Type-I step is the most uncertain cost in this file: 2024-25 prototype studies put it at +37% to +57% (BFA24) or +44% (SJ25, secondary), far above Terner 2020's +$65-71. Mass-timber Types IV-A/B/C (2021 IBC / 2022 CBC) were not researched."
+
+# -------------------------------------------------------------------------------------
+# 7. STRUCTURED PARKING COST PER SPACE
+# -------------------------------------------------------------------------------------
+parking_cost_per_space:
+  unit: "$/space (hard cost, excl. land)"
+  low: 35000
+  base: 60000
+  high: 73000
+  by_type:
+    at_grade_podium_berkeley: 60000
+    above_grade_garage_freestanding_SF_2026: 43000
+    above_grade_structure_santa_cruz_2026: 35000
+    underground_17city_avg_2025: 73000
+    surface: 2500
+  sources:
+    - publisher: "City of Berkeley / Strategic Economics"
+      title: "BFA24, Hard Costs"
+      url: "https://berkeleyca.gov/sites/default/files/documents/2024-05-21%20Special%20Item%2001%20Residential%20Feasibility%20Analysis.pdf"
+      date: "2024-05-21"
+      quote: "Parking costs were assumed to be $100 per square foot for garage spaces, and $200 per square foot for podium spaces. Each space was assumed to be 300 square feet."
+      notes: "$200 x 300 = $60,000 podium; $100 x 300 = $30,000 garage (Fig 34)."
+    - publisher: "WGI (via IPMI Parking & Mobility)"
+      title: "2026 Parking Structure Cost Outlook"
+      url: "https://www.parking-mobility.org/news/wgi-releases-2026-parking-structure-cost-outlook/"
+      date: "2026-09-02"
+      quote: "San Francisco: The highest-cost market, at $43,000 per space and $126.40 per square foot ... [national median] $33,300 per space"
+      notes: "Freestanding above-grade structures. WGI EXCLUDES underground and parking beneath occupied buildings as outliers, so it is a floor for podium parking."
+    - publisher: "Keyser Marston Associates"
+      title: "KMA26, Appendix C Exhibit I Table 1"
+      url: "https://www.cdi.santacruzcountyca.gov/Portals/35/CDI/Planning/Housing/SC%20County%20Inclusionary%20Housing%20Feasibility%20Study.pdf"
+      date: "2026-05-21"
+      quote: "Surface Parking Spaces 12 Spaces $2,500 /Space ... Above-Ground Parking Spaces 90 Spaces $35,000 /Space"
+    - publisher: "UCLA Center for Parking Policy (via Streetsblog Cal)"
+      title: "No Such Thing as Free Parking: Construction Costs in 17 U.S. Cities"
+      url: "https://cal.streetsblog.org/2026/03/02/new-ucla-report-looks-into-the-high-cost-to-build-parking"
+      date: "2026-03-02 (2025 costs)"
+      quote: "Underground: $73,000 ... Aboveground: $52,000 ... Not counting the cost of the land"
+      notes: "17-city average, NOT San Francisco-specific (SF figure not given in the coverage). Bay Area underground is probably higher; no Bay Area underground $/space source found."
+  confidence: medium
+  notes: "Underground Bay Area cost per space NOT FOUND first-hand. The 17-city average is the only 2025 figure."
+
+# -------------------------------------------------------------------------------------
+# 8. SOFT COSTS
+# -------------------------------------------------------------------------------------
+soft_costs:
+  unit: "% of hard costs (EXCLUDING city fees and financing, which are modeled separately)"
+  low: 15.75
+  base: 18.0
+  high: 22.0
+  by_type:
+    BFA24_midrise_highrise: {arch_eng_consulting: 8, taxes_insurance_legal_accounting: 8, other: 3, total: 18, plus_developer_overhead_pct_hard: 4, plus_contingency_pct_hard_plus_soft: 5}
+    BFA24_missing_middle: 13
+    KMA26_rental: {AE_consulting: 8, taxes_ins_legal_acct: 2, developer_fee: 5, soft_contingency_pct_of_indirect: 5, approx_total: 15.75}
+    TERN23_all_in_incl_fees_financing_TTI: 37.2
+  sources:
+    - publisher: "City of Berkeley / Strategic Economics"
+      title: "BFA24, Soft Costs + Fig. 34"
+      url: "https://berkeleyca.gov/sites/default/files/documents/2024-05-21%20Special%20Item%2001%20Residential%20Feasibility%20Analysis.pdf"
+      date: "2024-05-21"
+      quote: "It is estimated that soft costs are 13 percent of hard costs for the Missing Middle prototypes, and 18 percent for the GLA, midrise, and high-rise prototypes ... The developer's contingency and overhead also account for an additional five and four percent of hard costs"
+      notes: "Fig 34 rows: Arch, Eng & Consulting 8%; Taxes, Insurance, Legal & Accounting 8%; Other 3% = 18% 'Excluding Fees'. Fig 34 puts contingency at 5% of hard + soft. high = 18% + 4% developer overhead = 22%."
+    - publisher: "Keyser Marston Associates"
+      title: "KMA26, Appendix C Exhibit I Table 1"
+      url: "https://www.cdi.santacruzcountyca.gov/Portals/35/CDI/Planning/Housing/SC%20County%20Inclusionary%20Housing%20Feasibility%20Study.pdf"
+      date: "2026-05-21"
+      quote: "Architecture, Engineering & Consulting 8% Direct Costs ... Taxes, Insurance, Legal & Accounting 2% Direct Costs ... Developer Fee 5% Direct Costs ... Soft Cost Contingency Allowance 5% Other Indirect Costs"
+      notes: "(8+2+5) x 1.05 = 15.75% of direct costs, excluding permits/fees ($19,600/unit) and marketing ($5,000/unit). KMA's direct costs already include a 20% contractor/GC/contingency allowance."
+    - publisher: "Terner Center for Housing Innovation"
+      title: "Making It Pencil 2023, Fig. 1-2 and Table 3"
+      url: "https://ternercenter.berkeley.edu/wp-content/uploads/2023/12/Making-It-Pencil-December-2023.pdf"
+      date: "2023-12"
+      quote: "Soft costs-which refer to costs such as fees charged by local governments, financing, consulting, and tax, title, and insurance ... prototypes include 3 percent of total costs for a 'developer fee'"
+      notes: "East Bay 2023: soft $19.7M / hard $52.9M = 37.2%, all-in (incl. $40k/unit fees, financing, TTI, 3% developer fee). Not comparable to the 18% ex-fee/ex-financing figure; shown so the model doesn't double count."
+  confidence: medium-high
+  notes: "Define the model's soft-cost line as ex-fees, ex-financing, then add fees (param 11) and financing (param 10) separately."
+
+# -------------------------------------------------------------------------------------
+# 9. CONSTRUCTION DURATION
+# -------------------------------------------------------------------------------------
+construction_months:
+  unit: "months (construction loan term)"
+  low: 18
+  base: 24
+  high: 36
+  by_type:
+    type_V_le4_or_5_story: {low: 18, base: 18, high: 18}
+    podium_6_to_8_story:   {low: 24, base: 24, high: 24}
+    type_I_highrise_18_story: {low: 36, base: 36, high: 36}
+  sources:
+    - publisher: "City of Berkeley / Strategic Economics"
+      title: "BFA24, Financing Costs + Fig. 36"
+      url: "https://berkeleyca.gov/sites/default/files/documents/2024-05-21%20Special%20Item%2001%20Residential%20Feasibility%20Analysis.pdf"
+      date: "2024-05-21"
+      quote: "It was assumed to be 18 months for the 10- Unit Small Multifamily and GLA prototypes, 24 months for the midrise prototypes, and 36 months for the high-rise."
+    - publisher: "Keyser Marston Associates"
+      title: "KMA26, Appendix C Exhibit I Table 1, note 6-7"
+      url: "https://www.cdi.santacruzcountyca.gov/Portals/35/CDI/Planning/Housing/SC%20County%20Inclusionary%20Housing%20Feasibility%20Study.pdf"
+      date: "2026-05-21"
+      quote: "Based on an 18 month construction period following receipt of entitlements"
+      notes: "Low-rise Type V rental with above-ground parking."
+  confidence: medium
+  notes: "One value per type; no source found giving a range within a type. Lease-up period is not covered here."
+
+# -------------------------------------------------------------------------------------
+# 10. CONSTRUCTION LOAN RATE + LOAN-TO-COST
+# -------------------------------------------------------------------------------------
+construction_loan:
+  unit: "% annual interest; LTC %"
+  low: 6.2
+  base: 7.1
+  high: 8.0
+  by_type:
+    interest_rate_pct: {low: 6.2, base: 7.1, high: 8.0}
+    loan_to_cost_pct: {low: 55, base: 60, high: 65}
+    average_outstanding_balance_pct: {BFA24: 55, KMA26: 50}
+    loan_fee_points: {BFA24: 1.0, KMA26: 1.5}
+    reference_rates_2026_10_23: {SOFR_30day_avg: 3.889, prime: 7.00}
+  sources:
+    - publisher: "Federal Reserve Bank of St. Louis (FRED)"
+      title: "30-Day Average SOFR (SOFR30DAYAVG); Bank Prime Loan Rate (DPRIME)"
+      url: "https://fred.stlouisfed.org/series/SOFR30DAYAVG"
+      date: "2026-10-23"
+      quote: "2026-10-23, 3.888869999 [SOFR30DAYAVG] ... 2026-10-21, 7.00 [DPRIME]"
+    - publisher: "CorAdvisors (broker/advisor blog)"
+      title: "Construction Loan Rates 2026"
+      url: "https://www.coradvisors.net/2026/05/construction-loan-rates-2026.html"
+      date: "2026-05"
+      quote: "[as summarized by search] bank construction loans price around SOFR + 275-400 bps (7.00%-8.75% all-in); debt funds run SOFR + 400-650 bps"
+      notes: "Weak source. Applied to today's SOFR: 3.889 + 2.75 = 6.64%; + 3.25 (mid) = 7.14% (base, rounded 7.1); + 4.00 = 7.89%."
+    - publisher: "Keyser Marston Associates"
+      title: "KMA26, Appendix C Exhibit I Table 1"
+      url: "https://www.cdi.santacruzcountyca.gov/Portals/35/CDI/Planning/Housing/SC%20County%20Inclusionary%20Housing%20Feasibility%20Study.pdf"
+      date: "2026-05-21"
+      quote: "Construction ... 6.2% Avg Rate ... Loan Origination Fees 60% Loan to Cost 1.5 Points"
+      notes: "low rate and base LTC."
+    - publisher: "City of Berkeley / Strategic Economics"
+      title: "BFA24, Financing Costs"
+      url: "https://berkeleyca.gov/sites/default/files/documents/2024-05-21%20Special%20Item%2001%20Residential%20Feasibility%20Analysis.pdf"
+      date: "2024-05-21"
+      quote: "55 percent of the project cost would be financed with debt, with interest rates currently in the 7 percent to 9.25 percent range. For the purpose of this study, an interest rate in the middle of this range was selected (8 percent)."
+      notes: "high rate (8%) and low LTC (55%). SOFR has fallen since 2024."
+    - publisher: "Terner Center for Housing Innovation"
+      title: "Making It Pencil 2023"
+      url: "https://ternercenter.berkeley.edu/wp-content/uploads/2023/12/Making-It-Pencil-December-2023.pdf"
+      date: "2023-12"
+      quote: "we have assumed a total interest rate of 8.5 percent for the construction loan ... In 2019, we used a 65 percent Loan to Cost (LTC) metric ... In 2023, that ratio dropped to roughly 55 percent."
+      notes: "high LTC (65%) = Terner's 2019 level; current bank leverage at 65% is claimed only by broker commentary."
+  confidence: medium
+  notes: "No primary lender survey (e.g. Fed SLOOS) with construction pricing was found. Rate base is SOFR + a broker-reported spread."
+
+# -------------------------------------------------------------------------------------
+# 11. CITY OF BERKELEY FEES FOR NEW RENTAL HOUSING
+# -------------------------------------------------------------------------------------
+berkeley_fees:
+  unit: "mixed (see by_type)"
+  low: null
+  base: null
+  high: null
+  by_type:
+    inclusionary_in_lieu_fee_current:
+      rate: "$62.83 per sf of Residential Unit Floor Area (RUFA)"
+      authority: "BMC 23.328; Reso 72,418-N.S. adopted 2026-07-28"
+      prior_rate: "$56.25/sf RUFA (Reso 71,674-N.S., effective 2025-04-11)"
+      adjustment: "biennial, California Construction Cost Index"
+      deduction: "projects paying the FULL fee deduct 5,000 sf from RUFA (MFR/MHIP); density-bonus projects with on-site units do not qualify"
+    on_site_alternative_current_IHO:
+      share_of_units: "20% of total residential units"
+      income_mix: "at least 50% of the BMR units at Very Low Income (50% AMI); remainder at <=80% AMI. 80% of VLI units first offered to Section 8 / Shelter Plus Care voucher holders (40% each)."
+      hybrid: "units + prorated fee allowed"
+    legacy_AHMF_BMC_22_20_065:
+      applies_to: "projects vested on/before 2023-03-31 (preliminary application or building permit by then). CHECK each of the 11 stalled projects. Several may be vested under the old rules."
+      formula: "[A x FEE] - [(B + C) / (A x 20%) x (A x FEE)]  (A = total units, B = VLI units, C = LI units)"
+      on_site: "20% BMR, half at 80% AMI, half at 50% AMI"
+      last_published_rate: "$46,185 per unit (2022 AHMF, as cited by City staff 2023-01-17)"
+      current_rate: "NOT FOUND. The City's 2026-05-05 handout says 'FEE = Current Fee Amount (contact HHCS)'. Fee 'automatically adjusted every two years'."
+    public_art_BMC_23_316:
+      rate: "on-site art valued at 1.75% of construction cost, OR in-lieu fee of 0.8% of construction cost, OR a combination"
+      applies: "new multifamily residential with 5+ units"
+      caution: "BFA24 Fig 37 modeled a '1% Arts Fee' of only $20,510 for a $41.8M 6-story; that does not match 0.8% of construction cost (~$180k on $22.8M building area). Use the fee-list rule."
+    school_fee_BUSD: "$5.17 per sf residential (BUSD, adopted 2024-06-12; collected by BUSD)"
+    sewer_connection: "$160.73 per Drainage Fixture Unit (non-SFR), BMC 17.05; BFA24 modeled ~$3,600/unit"
+    SOSIP_downtown_only: "$2.23/sf new residential (Downtown Area Plan only)"
+    commercial_affordable_housing_fee: "$6.61/sf office/R&D/retail/restaurant, only for >=7,500 net new commercial sf (effective 2026-07-01)"
+    commercial_child_care_fee: "$1.85/sf office/retail/restaurant, >=7,500 net new commercial sf"
+    building_permit_plan_check_other_BFA24: "6-story: permit $557,448 + plan check $362,341 + other $266,330 (75 units); 8-story: $936,523 + $608,740 + $447,425 (120 units). Valuation-based; from the City's online fee calculator."
+    all_city_fees_ex_in_lieu_per_unit_BFA24: {six_story: 22562, eight_story: 23102}
+  sources:
+    - publisher: "City of Berkeley Planning and Development"
+      title: "Development Fees and Affordability Requirements (fee list)"
+      url: "https://berkeleyca.gov/sites/default/files/documents/List%20of%20devt%20fees%2C%20current_0.pdf"
+      date: "updated 2026-08-06"
+      quote: "The in-lieu fee is $62.83 per square feet of Residential Unit Floor Area (RUFA) for all housing development projects ... Current Fee rates/terms per Reso No. 72,418-N.S., adopted 7/28/2026 ... On-site artwork valued at 1.75% of construction costs; OR in-lieu fee valued at 0.8% of the construction costs ... $5.17/sq.ft. Residential ... As revised by BUSD June 12, 2024"
+    - publisher: "City of Berkeley"
+      title: "Affordable Housing Requirements forms (BAHF25)"
+      url: "https://berkeleyca.gov/sites/default/files/documents/Affordable%20Housing%20Requirements%20Berkeley_Forms_2025-04-21_0.pdf"
+      date: "2025-04-21"
+      quote: "Projects must provide 20 percent of the total residential units as on-site BMR units ... At least 50 percent of the required Affordable Units in the Housing Development Project shall be affordable to Very Low-Income Households, and the remaining units shall be affordable to households earning no more than 80 percent"
+    - publisher: "City of Berkeley"
+      title: "Prior Affordable Housing Requirements (projects vested on/before 3/31/2023), BMC 22.20.065"
+      url: "https://berkeleyca.gov/sites/default/files/documents/Prior%20Affordable%20Housing%20Requirements%20%2B%20Exhibits_09252023_FINAL.pdf"
+      date: "v. 2026-05-05"
+      quote: "[A X FEE] - [(B + C) / (A X 20%) X (A X FEE)] ... FEE = Current Fee Amount (contact HHCS) ... The fee is automatically adjusted every two years, beginning in 2018."
+    - publisher: "City of Berkeley"
+      title: "Council 2023-01-17 Item 21 (Rev2)"
+      url: "https://berkeleyca.gov/sites/default/files/documents/2023-01-17%20Item%2021%20Rev2%20Planning.pdf"
+      date: "2023-01-17"
+      quote: "the 2022 affordable housing mitigation fee ($46,185 per unit)"
+      notes: "A search summary also reported $43,185 if paid at building permit vs $46,185 at CO; not seen first-hand."
+    - publisher: "City of Berkeley / Strategic Economics"
+      title: "BFA24, Fig. 37 City Fees by Prototype"
+      url: "https://berkeleyca.gov/sites/default/files/documents/2024-05-21%20Special%20Item%2001%20Residential%20Feasibility%20Analysis.pdf"
+      date: "2024-05-21"
+      quote: "Building Permit Fees* ... $557,448 $936,523 ... * Calculated using the City of Berkeley's online fee calculator."
+      notes: "Per unit ex in-lieu: 6-story (2,947,561 - 1,255,416) / 75 = $22,562; 8-story (3,495,849 - 723,642) / 120 = $23,102 (Fig 38 'Municipal Fees' less Fig 37 in-lieu). These are 2024 rates."
+  confidence: high
+  notes: "Correction to the brief: BMC 22.20.065 (AHMF) was replaced by the IHO (BMC 23.328) on 2023-02-14 and now governs only projects vested on/before 2023-03-31."
+
+# -------------------------------------------------------------------------------------
+# 12. AFFORDABLE (BMR / DENSITY-BONUS) RENTS, ALAMEDA COUNTY
+# -------------------------------------------------------------------------------------
+affordable_rents:
+  unit: "$/month GROSS rent (tenant-paid utility allowance must be subtracted to get net rent)"
+  low: null
+  base: null
+  high: null
+  by_type:
+    berkeley_2025_schedule_IHO_post_2023_projects:   # effective 2025-06-01 to 2026-05-31
+      VLI_50pct: {studio: 1399, one_br: 1599, two_br: 1799, three_br: 1998}
+      LI_row_80pct_capped_at_60pct: {studio: 1679, one_br: 1919, two_br: 2159, three_br: 2397}
+    berkeley_2025_schedule_AHMF_pre_2023_projects:
+      VLI_50pct: {studio: 1399, one_br: 1599, two_br: 1799, three_br: 1998}
+      LI_80pct: {studio: 2189, one_br: 2501, two_br: 2814, three_br: 3126}
+    computed_2026_from_HCD26_HSC50053:   # NOT a City-published table
+      VLI_30pct_of_50pct_median: {studio: 1424, one_br: 1628, two_br: 1831, three_br: 2035}
+      LI_30pct_of_60pct_median:  {studio: 1709, one_br: 1954, two_br: 2198, three_br: 2442}
+      AHMF_style_80pct_income_limit: {studio: 2376, one_br: 2715, two_br: 3055, three_br: 3394}
+    utility_allowance_gap_2023: "BFA24 Fig 27 vs 28 (2023): gross minus net = $100 (studio) to $235 (3BR)"
+  sources:
+    - publisher: "City of Berkeley Inclusionary Housing/BMR Program"
+      title: "Income and Rent Limits for 2025 (Exhibit A)"
+      url: "https://berkeleyca.gov/sites/default/files/2025-12/Exhibit%20A.pdf"
+      date: "effective 2025-06-01 through 2026-05-31"
+      quote: "[Updated Inclusionary Housing Ordinance, projects approved after April 1, 2023] Inclusionary Gross Rent at 50% AMI $1,399 $1,599 $1,799 $1,998 ... Inclusionary Gross Rent at 80% of AMI $1,679 $1,919 $2,159 $2,397"
+      notes: "Under the post-2023 IHO the City caps the '80% AMI' rent at the 60%-of-median level, which is H&S Code 50053's lower-income rent. The AHMF (pre-2023) table's 80% row is $2,189 / $2,501 / $2,814 / $3,126 (= 30% of the 80% income limit / 12)."
+    - publisher: "California HCD"
+      title: "Revised 2026 State Income Limits"
+      url: "https://www.hcd.ca.gov/sites/default/files/docs/grants-and-funding/income-limits-2026.pdf"
+      date: "2026-06-23"
+      quote: "Alameda County ... Area Median Income: $162,800 ... Median Income 113950 130250 146500 162800 175800 ... Low Income 95050 108600 122200 135750"
+      notes: "Household size = bedrooms + 1 (studio = 1 person), the City's convention (checked: 2025 studio 111,900 x 0.5 x 0.30 / 12 = 1,398.75 = $1,399). 2026: VLI = median x 0.50 x 0.30 / 12: 113,950 -> 1,424; 130,250 -> 1,628; 146,500 -> 1,831; 162,800 -> 2,035. LI = median x 0.60 x 0.30 / 12: 1,709 / 1,954 / 2,198 / 2,442. AHMF-style = LI income limit x 0.30 / 12: 95,050 -> 2,376; 108,600 -> 2,715; 122,200 -> 3,055; 135,750 -> 3,394."
+  confidence: high
+  notes: "A City 2026 schedule (June 2026 to May 2027) was NOT FOUND online; the 2026 rows are computed with the City's method and need confirmation. Density bonus law ties VLI/LI rents to H&S 50053 (30% x 50% / 60% of AMI), so use the IHO rows (not AHMF 80% rows) for density-bonus BMR units."
+
+# -------------------------------------------------------------------------------------
+# 13. STATE DENSITY BONUS LAW (Gov Code 65915)
+# -------------------------------------------------------------------------------------
+density_bonus:
+  unit: "% bonus over base density"
+  low: 20
+  base: 50
+  high: 100
+  by_type:
+    base_table_VLI_pct_to_bonus_pct: {5: 20, 10: 32.5, 11: 35, 15: 50}
+    max_base_bonus: "50% at 15% VLI, or 24% LI, or 44% moderate (for-sale)"
+    AB2345_effective_2021: "raised the maximum bonus from 35% (reached at 11% VLI) to 50% (reached at 15% VLI); lowered incentive thresholds"
+    AB1287_effective_2024_stackable:
+      prerequisite: "project first qualifies for the 50% bonus (15% VLI, 24% LI, or 44% moderate for-sale)"
+      additional_VLI_pct_to_additional_bonus_pct: {5: 20, 6: 23.75, 7: 27.5, 8: 31.25, 9: 35, 10: 38.75}
+      additional_moderate_pct_to_additional_bonus_pct: {5: 20, 10: 32.5, 15: 50}
+      combined_max: "100% (50% + 50%, the extra 50% via 15% additional moderate units, which may be rental)"
+      incentives: "4 for projects with >=16% VLI; 5 for 100% affordable"
+    one_hundred_pct_affordable: "80% bonus; no maximum density within 1/2 mile of a major transit stop; height increase of up to three additional stories or 33 feet"
+  sources:
+    - publisher: "FindLaw (statute text)"
+      title: "California Government Code 65915"
+      url: "https://codes.findlaw.com/ca/government-code/gov-sect-65915/"
+      date: "current as of 2026-01-01"
+      quote: "[(f)(2)] 5 | 20 ... 10 | 32.5 ... 11 | 35 ... 15 | 50; [(f)(3)(D)] the density bonus shall be 80 percent of the number of units for lower income households ... If the housing development is located within one-half mile of a major transit stop, the city, county, or city and county shall not impose any maximum controls on density; [(d)(2)(D)] the applicant shall also receive a height increase of up to three additional stories, or 33 feet."
+      notes: "leginfo.legislature.ca.gov returned 403. Statute changes enacted in 2026 (effective 2027) were not checked."
+    - publisher: "City of Los Angeles Dept. of City Planning"
+      title: "Implementation of 2023 State Density Bonus Law - AB 1287"
+      url: "https://planning.lacity.gov/odocument/e2f5c41c-45e1-42e0-be15-8fa4a0f747b2/Implementation_of_2023_State_Density_Bonus_Law_-_AB_1287.pdf"
+      date: "2024-05-16"
+      quote: "AB 1287 allows for an additional 'stackable' density bonus on top of the existing maximum 50% density bonus ... an additional density bonus of twenty percent (20%) to fifty percent (50%) when a project provides an additional set-aside of Very Low Income or Moderate-Income units ... Percentage Very Low-Income Units 5 20 ... 10 38.75"
+    - publisher: "City of Santa Monica"
+      title: "Summary of AB 1287's Changes to State Density Bonus Law"
+      url: "https://santamonica.gov/media/Document%20Library/Topic%20Explainers/Planning%20Resources/AB1287%20FAQ.pdf"
+      date: "2024-01"
+      quote: "When combined with the maximum 50% density bonus provided by State law prior to AB 1287, this could result in up to a 100% density bonus ... AB 1287 now allows an additional density bonus when additional moderate-income units are provided, which are allowed to be rental units"
+    - publisher: "SCAG"
+      title: "Legislative summary of AB 2345 - Density Bonus Law"
+      url: "https://sp.scag.ca.gov/sites/default/files/2024-05/legislative_summary_of_ab_2345_-_density_bonus_law.pdf"
+      date: "2024-05 (posted)"
+      quote: "Very Low Income 11% provided = max 35% bonus; 15% provided = max 50% bonus"
+      notes: "Seen via search snippet only."
+  confidence: high
+  notes: "Berkeley's 20% IHO on-site requirement (half VLI = 10% VLI) by itself earns 32.5% under (f)(2). Projects typically add VLI units to reach 15% VLI for 50%."
+
+# -------------------------------------------------------------------------------------
+# 14. ELMWOOD / BERKELEY NEIGHBORHOOD RETAIL (existing-use value)
+# -------------------------------------------------------------------------------------
+retail_existing_use:
+  unit: "$/sf/yr NNN; %"
+  low: null
+  base: null
+  high: null
+  by_type:
+    asking_rent_psf_yr: {low: 28.56, base: 54.00, high: 72.00}
+    vacancy_pct: {low: 5.6, base: 5.6, high: 10.0}
+    cap_rate_pct: {low: 5.0, base: 6.4, high: 7.0}
+    net_lease_national:
+      all_retail_STNL_asking_cap_Q2_2026: 6.60
+      wawa_15yr_Q1_2026: "4.90-5.20"
+      seven_eleven: "'sub-6%' (Boulder Group Q2 2025 commentary); no 2026 7-Eleven figure found"
+      usps_portfolio_acquisitions: {PSTL_2025: 7.7, PSTL_Q2_2026: 7.3}
+      usps_single_asset_range: "about 3.3% (Great Neck NY ask, 2026) to 4.9% (PSTL 2024 dispositions)"
+  sources:
+    - publisher: "Kidder Mathews (CoStar data)"
+      title: "Market Trends: East Bay Retail 3Q 2026"
+      url: "https://kidder.com/wp-content/uploads/market_report/retail-market-research-east-bay-2026-3q.pdf"
+      date: "3Q 2026"
+      quote: "Vacancy Rate 5.6% 5.7% 5.4% ... Average Asking Rents/SF/Yr $2.38 $2.39 $2.45 ... Average Cap Rate 6.4% 6.5% 6.8%"
+      notes: "The '$2.38/SF/Yr' label is evidently a MONTHLY figure (the chart axis runs to $40/yr). Assumed monthly: $2.38 x 12 = $28.56/yr. Whole East Bay, not Berkeley. Kidder 2Q 2026 cap rate 7.0% = high bound."
+    - publisher: "Gordon Commercial (broker brochure on LoopNet), via search extract"
+      title: "2928 College Ave, Berkeley, retail for lease"
+      url: "https://images1.loopnet.com/d2/imSFzEi4j0E3StmWJJX1WobX8qqYb7dR3ppWiRR0OX4/Brochure.pdf"
+      date: "UNDATED"
+      quote: "[search extract] about 1,020 RSF of retail space, listed at $4.50 per square foot per month on a triple-net basis ... in the Elmwood shopping district, just off Ashby Avenue"
+      notes: "$4.50 x 12 = $54/sf/yr NNN (base). Brochure itself was not readable (returned HTML)."
+    - publisher: "LoopNet listing"
+      title: "2980 College Ave, Berkeley"
+      url: "https://loopnet.com/Listing/2980-College-Ave-Berkeley-CA/35111030"
+      date: "UNDATED"
+      quote: "[search extract] A 500 SF ground-floor retail unit, listed at $6.00 per square foot per month, or $3,000 per month ... excludes a proportional share of electrical costs"
+      notes: "$6.00 x 12 = $72/sf/yr, closer to gross than NNN, and a very small unit. high bound only."
+    - publisher: "City of Berkeley / Strategic Economics"
+      title: "BFA24, Fig. 29"
+      url: "https://berkeleyca.gov/sites/default/files/documents/2024-05-21%20Special%20Item%2001%20Residential%20Feasibility%20Analysis.pdf"
+      date: "2024-05-21"
+      quote: "Vacancy Rate ... Retail 10.0% ... Cap Rate ... 5.0%"
+      notes: "BFA24's retail revenue in Fig 38 is $6,075-8,100/yr NOI for the ground-floor retail, which is nominal."
+    - publisher: "The Boulder Group (via MBA Newslink)"
+      title: "Q2 2026 Net Lease Research Report"
+      url: "https://newslink.mba.org/mba-newslinks/2026/july/mba-newslink-wednesday-july-8-2026/single-tenant-net-lease-cap-rates-rise-boulder-group-reports/"
+      date: "2026-07-08"
+      quote: "Single-tenant net lease cap rates increased two basis points during the second quarter to 6.82% ... retail cap rates increased five basis points to 6.60%"
+    - publisher: "Postal Realty Trust (via Quartr)"
+      title: "PSTL Q2 2026 earnings summary"
+      url: "https://quartr.com/events/postal-realty-trust-inc-pstl-q2-2026_ontzP7nQ"
+      date: "2026 Q2"
+      quote: "[search extract] 37 properties for $45.1 million in Q2 at a 7.3% cap rate"
+      notes: "Portfolio buyer yields on small USPS-leased properties nationally; a Berkeley post office would likely trade lower. Ownership of the Elmwood post office (USPS-owned vs leased) was NOT checked."
+  confidence: low
+  notes: "Thin. No Berkeley- or Elmwood-specific retail survey found. For the four sites, the assessor (berkeley.db Land/Imps) plus actual leases would be better than these asking rents."
+
+# -------------------------------------------------------------------------------------
+# 15. GROUND-FLOOR COMMERCIAL COST + LOBBY SHARE
+# -------------------------------------------------------------------------------------
+ground_floor_commercial:
+  unit: "$/gsf shell; $/nsf TI; % of ground floor"
+  low: null
+  base: null
+  high: null
+  by_type:
+    retail_shell_in_type_I_podium_psf: 200
+    tenant_improvement_allowance_per_nsf: 100
+    share_lobby_services_vs_leasable: "NOT FOUND"
+  sources:
+    - publisher: "City of Berkeley / Strategic Economics"
+      title: "BFA24, Fig. 34"
+      url: "https://berkeleyca.gov/sites/default/files/documents/2024-05-21%20Special%20Item%2001%20Residential%20Feasibility%20Analysis.pdf"
+      date: "2024-05-21"
+      quote: "Retail - Type I  per gross sf ... $200  $200  $200 ... Tenant Improvement Allowance  per net sf ... $100  $100  $100"
+      notes: "BFA24 retail shell ($200) is cheaper than Type I residential ($550) because it is podium shell space."
+    - publisher: "Terner Center"
+      title: "Making It Pencil 2023, Table 1"
+      url: "https://ternercenter.berkeley.edu/wp-content/uploads/2023/12/Making-It-Pencil-December-2023.pdf"
+      date: "2023-12"
+      quote: "Retail Space 1,500 Square Feet"
+      notes: "1,500 sf of retail in a 122,364 gsf, 30,000 sf-site building: a token ground floor."
+  confidence: low
+  notes: "Lobby/services share NOT FOUND. One general web search turned up no benchmark, only one CEQA project example and a Renton WA frontage cap (35% of facade for lobby/resident frontage), which is not a floor-area share. Suggest measuring it from the ground-floor plans of Berkeley's own entitled projects."
+
+# -------------------------------------------------------------------------------------
+# 16. EFFICIENCY + UNIT SIZES
+# -------------------------------------------------------------------------------------
+efficiency_and_unit_size:
+  unit: "net rentable / gross (%); nrsf per unit"
+  low: 79.3
+  base: 80.0
+  high: 80.0
+  by_type:
+    efficiency_pct: {six_story_podium: 79.9, eight_story_podium: 79.3, eighteen_story_tower: 79.4, four_story_GLA_micro: 64.7}
+    unit_size_nrsf:
+      studio: {low: 400, base: 500, high: 510}
+      one_br: {low: 580, base: 660, high: 750}
+      two_br: {low: 800, base: 990, high: 990}
+      three_br: {low: 1100, base: 1100, high: 1100}
+    oakland_new_apartment_avg_all_types: 771
+  sources:
+    - publisher: "City of Berkeley / Strategic Economics"
+      title: "BFA24, Fig. 7 and Fig. 25"
+      url: "https://berkeleyca.gov/sites/default/files/documents/2024-05-21%20Special%20Item%2001%20Residential%20Feasibility%20Analysis.pdf"
+      date: "2024-05-21"
+      quote: "[Fig 7] Gross Square Feet 61,930 89,984 208,727 ... Residential Square Feet 49,460 71,320 165,780 ... [Fig 25 unit sizes] Studio 500 510 400 ... One Bedroom 660 750 580 ... Two Bedroom 990 950 800 ... Three Bedroom ... 1,100"
+      notes: "Efficiency = residential sf / gross sf: 49,460/61,930 = 79.9%; 71,320/89,984 = 79.3%; 165,780/208,727 = 79.4%; GLA 9,400/14,520 = 64.7%. Check: 6-story 75 units x 659 avg = 49,425, about 49,460, so 'Residential Square Feet' is net unit area."
+    - publisher: "City of Berkeley"
+      title: "Council 2023-01-17 Item 21 (Rev2)"
+      url: "https://berkeleyca.gov/sites/default/files/documents/2023-01-17%20Item%2021%20Rev2%20Planning.pdf"
+      date: "2023-01-17"
+      quote: "The Street Level Advisors analysis assumed roughly 20% common space in a typical building, though the actual share of common area in housing development projects varies widely."
+    - publisher: "RentCafe (via MTC/ABAG blog)"
+      title: "New apartment size report"
+      url: "https://blog.bayareametro.gov/node/101822"
+      date: "n.d. (2024-25 edition)"
+      quote: "[search extract] average size of new apartments at 771 square feet [Oakland]"
+      notes: "Secondary; all unit types blended."
+  confidence: medium
+  notes: "Efficiency is well anchored at ~80% for double-loaded mid-rise and towers. Unit sizes come from one Berkeley study's prototypes; the repo's permit/assessor floor areas for built Berkeley projects would be a better local check."

@@ -1,0 +1,39 @@
+{
+ "as_of": "2026-10-25",
+ "v4_file_sha": "1591bcbd2d3a38ae",
+ "assumptions": "pencil_out_2026-10-25.yaml",
+ "record_inputs": "project_inputs_record_2026-10-25.csv",
+ "export_generated": "2026-10-20T15:31:17.655755",
+ "git": "1dbfea42",
+ "figures": {
+  "stage_projects": 106,
+  "stage_units": 1133,
+  "cohort_5plus": 19,
+  "cohort_5plus_units": 1052,
+  "excluded_not_stalled": 5,
+  "excluded_units": 161,
+  "in_scope": 14,
+  "record_rows": 58,
+  "verdict_pencils": 0,
+  "verdict_marginal": 5,
+  "verdict_does_not": 2,
+  "verdict_insufficient": 7,
+  "single_assumption_flips": 0,
+  "median_gap_bp": -260,
+  "elmwood_best_storeys_base": [
+   5,
+   6
+  ],
+  "lease_ups": 831,
+  "elmwood_break_even_base": {
+   "7-eleven|in_lieu": null,
+   "7-eleven|on_site": null,
+   "five-monkeys|in_lieu": null,
+   "five-monkeys|on_site": null,
+   "wells-fargo|in_lieu": null,
+   "wells-fargo|on_site": null,
+   "post-office|in_lieu": null,
+   "post-office|on_site": null
+  }
+ }
+}

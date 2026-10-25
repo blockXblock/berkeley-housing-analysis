@@ -1,0 +1,547 @@
+"""Build notebooks/v4/JN-O_pencil_out.ipynb -- do Berkeley's stalled entitlements pencil, and how tall would a building on
+an Elmwood site have to be to pencil?
+
+John, 2026-10-25 (pencil-out Phase B, after Phase A docs/audit/2026-10-25_pencil_out_phase_a_inputs.md and the harvest):
+  - per project in the explorer's "Entitled 3+ yrs, inactive" stage: NOI -> total development cost -> yield on cost ->
+    residual land value at low/base/high, against its land basis; verdict pencils / marginal / does_not /
+    insufficient_data; RECORD vs ASSUMPTION on every input; which assumption flips each verdict
+  - the Elmwood sites (7-Eleven, Five Little Monkeys, Wells Fargo lot, post office): the height at which a building
+    pencils; later every potential site in Berkeley (the site model is generic)
+
+Machinery: scripts/v4/pencil_out.py (on scripts/v4/proforma_projects.py, JN-Feasibility Part 2). Assumptions:
+data/assumptions/pencil_out_<date>.yaml. Gate: data/baselines/pencil_out_baseline_<date>.json (first run writes it;
+a reviewed change APPENDS one with JN_WRITE_BASELINE=1). Results: data/derived/pencil_out/results_<date>.json.
+
+  .venv/bin/python scripts/v4/build_jn_o.py            # write the notebook
+  .venv/bin/jupyter nbconvert --to notebook --execute notebooks/v4/JN-O_pencil_out.ipynb --output /tmp/x.ipynb
+"""
+import os
+
+import nbformat as nbf
+from nbformat.v4 import new_code_cell, new_markdown_cell, new_notebook
+
+nb = new_notebook()
+C = []
+
+
+def md(s): C.append(new_markdown_cell(s.strip()))
+def code(s): C.append(new_code_cell(s.strip()))
+
+
+md(r"""
+# JN-O — Does it pencil? Berkeley's stalled entitlements, and how tall an Elmwood building would have to be
+
+**Two questions (John, 2026-10-25).**
+1. **The stalled projects.** For each project in the explorer's *"Entitled 3+ yrs, inactive"* stage: does it pencil at
+   its approved size? *Do these projects stall because they don't pencil, or for other reasons?*
+2. **The Elmwood sites.** For the 7-Eleven, the Five Little Monkeys / Nabolom building, the Wells Fargo parking lot and
+   the post office: *how high must each building be to have enough units to pencil?* Later, every potential building
+   site in Berkeley, so the site model here is generic: give it a lot size and what stands on the lot.
+
+**The decision rule** is JN-Feasibility's (Part 1, Step 4b), never `profit > 0`: a building pencils when its **yield on
+cost** (stabilized NOI ÷ total development cost) reaches the **exit cap rate plus a spread**. Equivalently, its
+**residual land value** (what the finished building is worth at that hurdle, less every cost except land) is at least its
+**land basis**. For an Elmwood site the land basis is the **higher** of market land value and the value of the business
+already there (John: *"Both, take the higher"*), because an owner doesn't sell below what the current use is worth.
+
+**Every input is labeled.** **RECORD** = from the City's or the assessor's records (ZAB staff reports, Accela plan sets,
+the Rent Board registry, the assessment roll). **ASSUMPTION** = from one versioned file,
+`data/assumptions/pencil_out_2026-10-25.yaml`, where each value has a low/base/high, a source and a date. Nothing in this
+notebook is a typed-in market number. A project missing a core RECORD input is **`insufficient_data`**; gaps are never
+filled with guesses.
+
+**Verdicts are four-valued:** `pencils` (clears the hurdle even with every assumption at its unfavorable end) ·
+`marginal` (clears it only in the base or the favorable case) · `does_not` (fails even when every assumption breaks
+favorably at once) · `insufficient_data`.
+
+> ⚠️ **What this is not.** A model of *a* developer, not *the* developer: no project's actual pro forma, loan or land deal
+> is known. The verdicts say whether the **public-record facts plus sourced market assumptions** support building, which
+> is exactly the question of whether stalling is explained by the numbers.
+""")
+
+md(r"""
+## Data lineage — sources → inputs → verdict
+
+```mermaid
+graph LR
+  EXP[docs/explorer_data.js<br/>stage 'Entitled but Inactive'] --> COH[cohort: 5+ units]
+  V4[(v4 v_projects)] --> COH
+  COH --> SUP[superseded / built / conversion<br/>excluded]
+  SR[ZAB staff reports<br/>data/raw/zab/staff_reports] --> REC[RECORD inputs CSV<br/>units · floor area · mix · affordable]
+  PS[Accela plan sets<br/>harvester 2026-10-25] --> REC
+  RB[Rent Board registry<br/>lease-up rents · Part 2a] --> RENT[market rents by bedroom]
+  LS[leasing sites · Part 2f] --> RENT
+  ASR[(assessor roll<br/>berkeley.db + v4)] --> LAND[land basis]
+  YAML[[assumptions YAML<br/>low · base · high · source]] --> PF
+  REC --> PF[pencil_out.py<br/>NOI → TDC → YoC → RLV]
+  RENT --> PF
+  LAND --> PF
+  SITES[Elmwood parcels<br/>lot · building sqft] --> HT[break-even height search]
+  YAML --> HT
+  RENT --> HT
+  PF --> V[verdicts + sensitivity]
+  HT --> E[height curves]
+  V --> GATE[baseline gate]
+  E --> GATE
+  V --> OUT[(results JSON)]
+  E --> OUT
+```
+""")
+
+code(r"""
+import sys, json, re, csv, collections, sqlite3
+from pathlib import Path
+ROOT = Path.cwd().resolve()
+while not (ROOT / 'scripts' / 'v4').exists() and ROOT != ROOT.parent:
+    ROOT = ROOT.parent
+sys.path.insert(0, str(ROOT / 'scripts' / 'v4')); sys.path.insert(0, str(ROOT / 'scripts'))
+import pandas as pd
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import pencil_out as po
+A = po.A
+print('assumptions file:', po.ASSUMPTIONS_FILE.relative_to(ROOT), '| version', A['version'], '| prices in', A['price_year'])
+""")
+
+# ------------------------------------------------------------------------------------------------ §1 the cohort
+md(r"""
+## §1 — The cohort: who is "Entitled 3+ yrs, inactive"?
+
+📝 **Plan.** Use the explorer's own definition, not a new one. `scripts/export_explorer_data_v4.py` (lines 127–131) sets
+the stage **Entitled but Inactive** when v4's status is `entitled`, the approval is more than 1,095 days old, and nothing
+has been recorded on any of the project's records for 1,095 days. The home page labels it *"Entitled 3+ yrs, inactive"*.
+The cut moves with the export date, so this reads the **published** export. A pro forma only means something for
+buildings of **5 or more units**.
+
+Before any finance, the Phase A audit found entitlements in this stage that are **not stalled**: a later project on the
+same address went ahead, or the "units" are a conversion. Those are derived here, not typed in: another v4 project at the
+same street address with a **later** approval or a building permit, and descriptions that convert space without new
+construction.
+""")
+code(r"""
+s = open(ROOT / 'docs' / 'explorer_data.js').read()
+EXP = json.loads(s[s.index('{'):s.rindex('}') + 1])
+stage = [p for p in EXP['projects'] if p.get('status') == 'Entitled but Inactive']
+big = [p for p in stage if (p['units'] or 0) >= 5]
+print(f"export {EXP['meta']['generated'][:10]}: {len(stage)} projects / {sum(p['units'] or 0 for p in stage):,} units "
+      f"in the stage; {len(big)} with 5+ units / {sum(p['units'] for p in big):,} units")
+
+def same_address(a, b):
+    m = re.match(r'(\d+)\s+(\w+)', a or ''); n = re.match(r'(\d+)\s+(\w+)', b or '')
+    return bool(m and n and m.groups() == n.groups())
+GONE = {'Withdrawn', 'Denied', 'Expired'}
+rows = []
+for p in sorted(big, key=lambda p: -p['units']):
+    # a LATER project on the same parcel or street address that went ahead or holds a later approval
+    later = [q for q in EXP['projects'] if q['id'] != p['id'] and q['status'] not in GONE
+             and ((p['apn'] and q.get('apn') == p['apn']) or same_address(q['address'], p['address']))
+             and (q.get('bp_issued') or (q.get('entitled') or '') > (p.get('entitled') or ''))]
+    conversion = bool(re.search(r'\bconvert', p['description'] or '', re.I)) and not re.search(r'\bconstruct', p['description'] or '', re.I)
+    why = (f"superseded: {later[0]['id']} {later[0]['address']} ({later[0]['units']} units, {later[0]['status']})" if later
+           else 'conversion of existing space' if conversion else '')
+    rows.append(dict(anchor=p['id'], address=p['address'], units=p['units'], entitled=p['entitled'], excluded=why))
+COH = pd.DataFrame(rows)
+EXCLUDED = COH[COH.excluded != '']
+IN_SCOPE = COH[COH.excluded == '']
+print(f"\nnot stalled ({len(EXCLUDED)} projects, {EXCLUDED.units.sum()} units):")
+print(EXCLUDED.to_string(index=False))
+""")
+md(r"""
+📝 **Found.** The "inactive" stage carries entitlements that a later project on the same address replaced or built.
+That's an identity error in the build (the successor is not linked to the entitlement it replaced), to be fixed in the
+projects stage of the v4 chain rebuild, not here. These are excluded from the finance question. Two more need human
+checks before they could be evaluated (Phase A §2): **824 University** (the parcel carries large existing improvements) and
+**1155 Hearst** (a 2025 ZAB action that may be a minutes-parse misattribution).
+""")
+
+# ------------------------------------------------------------------------------------------------ §2 the inputs
+md(r"""
+## §2 — Inputs: what the record holds, and what is assumed
+
+📝 **Plan.** The RECORD inputs were harvested on 2026-10-25: the **ZAB staff reports** for 6 projects (each has a
+development-standards table: lot area, gross floor area, units, height; and a project description with the bedroom mix
+and the affordable units by tier) and the **Accela plan sets** for 1835 San Pablo, 1200 San Pablo and 1915 Berryman. Every
+value carries its file and page in `data/derived/pencil_out/project_inputs_record_2026-10-25.csv`.
+
+**Core inputs** (missing any → `insufficient_data`): units, floor area, the unit mix, storeys, lot area. Floor area may be
+gross (the staff report) or net (the sum of unit areas on a plan sheet). A floor area flagged PARTIAL on the record doesn't
+count.
+""")
+code(r"""
+RECS = po.record_inputs()
+in_scope = list(IN_SCOPE.anchor)
+cov = []
+for a in in_scope:
+    r = RECS.get(a, {})
+    has = lambda f: 'have' if f in r and 'PARTIAL' not in (r[f].get('note') or '') else ('partial' if f in r else 'missing')
+    cov.append(dict(anchor=a, address=COH.set_index('anchor').loc[a, 'address'], units=has('units'),
+                    floor_area=('have' if has('gross_floor_area') == 'have' or has('net_unit_area') == 'have'
+                                else 'partial' if 'gross_floor_area' in r else 'missing'),
+                    unit_mix=has('unit_mix') if 'unit_mix' in r else ('partial' if 'bedrooms' in r else 'missing'),
+                    stories=has('stories'), lot=has('lot_area'), affordable=has('affordable')))
+COV = pd.DataFrame(cov)
+print(COV.to_string(index=False))
+""")
+md(r"""
+📝 **Found.** The staff reports turned *missing* into *have* for six projects. What's still missing is concentrated in
+projects heard **before 2022**: their staff reports were on the retired City site, and the plan sets show the units only as
+labels on floor plans, which this notebook does not count by hand. The **100%-affordable** senior project (1708 Harmon)
+needs a subsidy-gap model, not a market residual, so it's `insufficient_data` for this question by design.
+
+**The assumptions file**, every row with its source (the ASSUMPTION side of the ledger):
+""")
+code(r"""
+def band(e):
+    return {k: e.get(k) for k in ('low', 'base', 'high')} if isinstance(e, dict) and 'base' in e else {}
+led = []
+for k, e in A.items():
+    if isinstance(e, dict) and ('source' in e):
+        b = band(e)
+        led.append(dict(assumption=k, low=b.get('low'), base=b.get('base'), high=b.get('high'),
+                        kind=e.get('kind'), as_of=e.get('as_of'), source=str(e.get('source'))[:110]))
+ASSUME = pd.DataFrame(led)
+pd.set_option('display.max_colwidth', 110)
+print(ASSUME.to_string(index=False))
+""")
+
+# ------------------------------------------------------------------------------------------------ §3 the pro forma
+md(r"""
+## §3 — The pro forma, project by project
+
+📝 **Plan.** For each project at its **approved** size, three scenarios (every assumption at its favorable end, at base,
+at its unfavorable end):
+- **NOI** = market units × Rent Board lease-up rent by bedrooms (RECORD; per-bed rents for 4–5-bedroom group layouts)
+  × (1 − vacancy) × (1 − opex) + below-market units at the City's 2025 rents + retail.
+- **Total development cost** = hard cost by construction tier (set by storeys and height) + soft costs + City fees
+  (the legacy per-unit mitigation fee formula, because these projects were vested before 2023-03-31; the 2022 rate, as
+  the current one is not published) + construction interest + **land basis**.
+- **Land basis**: RECORD when the parcels' last recorded document is a 2018+ transfer (Prop 13 resets assessment at a
+  sale); otherwise ASSUMPTION (lot × market $/sqft). Every project's choice is in its ledger.
+""")
+code(r"""
+RES = po.evaluate_stalled()
+R = RES['rents']
+P = {p['anchor']: p for p in RES['projects']}
+out = []
+for a in in_scope:
+    p = P.get(a)
+    if p is None:
+        out.append(dict(anchor=a, address=COH.set_index('anchor').loc[a, 'address'], verdict='insufficient_data',
+                        why='no RECORD inputs harvested' if a != 'PLN2021-0037' else '100% affordable: subsidy-gap model needed'))
+        continue
+    if p['verdict'] == 'insufficient_data':
+        out.append(dict(anchor=a, address=p['address'], verdict='insufficient_data', why='missing ' + ', '.join(p['missing'])))
+        continue
+    ac = p['acct']
+    out.append(dict(anchor=a, address=p['address'], verdict=p['verdict'], units=p['units'], storeys=p['stories'],
+                    tier=ac['tier'], yoc=round(p['yoc'] * 100, 2), hurdle=round(ac['hurdle'] * 100, 2),
+                    gap_bp=round(p['gap'] * 1e4), gap_fav_bp=round(p['runs']['favorable']['gap'] * 1e4),
+                    gap_unf_bp=round(p['runs']['unfavorable']['gap'] * 1e4),
+                    rlv_m=round(p['rlv'] / 1e6, 1), land_m=round(p['land_basis'] / 1e6, 1), land=p['land_label'],
+                    cost_per_unit_k=round((ac['cost_ex_land'] + p['land_basis']) / p['units'] / 1e3),
+                    rent_needed_x=round(p['rent_mult_needed'], 2), why=''))
+V = pd.DataFrame(out)
+print(f"market rents: {R['lease_ups']} Rent Board lease-ups; per-bed median ${R['per_bed']:,.0f} ({R['per_bed_n']} floor plans)")
+print(V.to_string(index=False))
+VERDICTS = V.verdict.value_counts().to_dict()
+print('\nverdicts:', VERDICTS)
+""")
+md(r"""
+📝 **Found.** Read `gap_bp` (yield on cost minus the hurdle, in basis points, base case) and `rent_needed_x` (how many
+times today's lease-up rents the project needs to clear the hurdle with everything else at base). At base, the projects
+priced with apartment rents fall short by hundreds of basis points. The `marginal` ones clear only when **every**
+assumption breaks favorably **at once**, including BFA24's 5% cap rate. The one that clears at base is a **group-living**
+layout (4- and 5-bedroom units) priced at per-bed rents.
+
+⚠️ **What this could mislead about.** (1) Rents are **by bedroom count**, not size: a project of large 2-bedroom units
+(1915 Berryman's average 1,190 sqft) is under-rented by the pool, so its gap is overstated. (2) The per-bed rent is the
+median 2026 **asking** rent of near-campus buildings, a best case for a building half a mile out. (3) The gross floor
+area on a staff report may include garage space, which this model costs at the residential rate (2015 Blake's
+underground garage).
+
+**Every input, labeled** (one project shown; the full ledger is in the results file):
+""")
+code(r"""
+LEDGER = pd.DataFrame([row for p in RES['projects'] for row in p['ledger']])
+print(LEDGER[LEDGER.anchor == 'ZP2021-0186'][['field', 'value', 'label', 'source']].to_string(index=False))
+print('\nlabels across all projects:', LEDGER.label.value_counts().to_dict())
+""")
+
+# ------------------------------------------------------------------------------------------------ §4 RLV chart
+md(r"""
+## §4 — Residual land value against land basis
+
+📝 **Before.** Each project: its **residual land value** (what the finished building is worth at the hurdle, less every
+cost except land), with a bar from the unfavorable to the favorable case, against its **land basis** (◆). A project
+pencils where the bar reaches the diamond. Read the distance, not just the side.
+""")
+code(r"""
+ev = [p for p in RES['projects'] if p.get('verdict') not in (None, 'insufficient_data')]
+ev.sort(key=lambda p: p['runs']['base']['rlv'] - p['land_basis'])
+fig = go.Figure()
+names = [f"{p['address']} ({p['units']}u)" for p in ev]
+fig.add_trace(go.Scatter(
+    x=[p['runs']['base']['rlv'] / 1e6 for p in ev], y=names, mode='markers', name='residual land value (base)',
+    marker=dict(size=11, color='#2f6fb3'),
+    error_x=dict(type='data', symmetric=False,
+                 array=[(p['runs']['favorable']['rlv'] - p['runs']['base']['rlv']) / 1e6 for p in ev],
+                 arrayminus=[(p['runs']['base']['rlv'] - p['runs']['unfavorable']['rlv']) / 1e6 for p in ev],
+                 thickness=2, width=0, color='#2f6fb3')))
+fig.add_trace(go.Scatter(x=[p['land_basis'] / 1e6 for p in ev], y=names, mode='markers', name='land basis (base)',
+                         marker=dict(symbol='diamond', size=11, color='#c0504d'),
+                         text=[p['land_label'] for p in ev], hovertemplate='%{x:.1f}M (%{text})'))
+fig.add_vline(x=0, line_width=1, line_color='#888')
+fig.update_layout(title='Stalled projects: residual land value (unfavorable → favorable) vs land basis, $ millions',
+                  xaxis_title='$ millions', height=120 + 45 * len(ev), template='plotly_white',
+                  legend=dict(orientation='h', y=-0.15))
+fig.show()
+""")
+md(r"""
+📝 **After — what this chart could MISLEAD about.** (1) The bars are **joint** extremes: every assumption at one end at
+once, which is less likely than any single move. (2) A negative residual land value is not a measurement error: it means
+the building is worth less than it costs **before** anyone pays for the land. (3) The land basis is RECORD for some
+projects and ASSUMPTION for others (hover shows which); an assumed basis moves with the market land range.
+""")
+
+# ------------------------------------------------------------------------------------------------ §5 sensitivity
+md(r"""
+## §5 — Sensitivity: which assumption could flip each verdict?
+
+📝 **Plan.** One assumption at a time to each end of its sourced band (all others at base). A flip is a change in
+whether the project clears the hurdle. Then the **flip points**: the single value that would make it clear: the rent
+multiplier, the exit cap rate, or the hard-cost multiplier.
+""")
+code(r"""
+SENS = {p['anchor']: po.sensitivity_stalled(p['anchor'], R) for p in ev}
+flip_rows, tor = [], []
+for a, s_ in SENS.items():
+    fl = [r['assumption'] for r in s_['rows'] if r['flips']]
+    fp = s_['flip_points']
+    flip_rows.append(dict(anchor=a, address=P[a]['address'], base_gap_bp=round(s_['base_gap'] * 1e4),
+                          single_flips=', '.join(fl) or 'none', rent_needed_x=round(fp['rent_mult'], 2),
+                          exit_cap_needed=round(fp['exit_cap'] * 100, 2),
+                          hard_cost_needed_x=round(fp['hard_mult'], 2) if fp['hard_mult'] else None))
+    for r in s_['rows'][:6]:
+        tor.append(dict(address=P[a]['address'], assumption=r['assumption'], fav=r['favorable_gap'] * 1e4,
+                        unf=r['unfavorable_gap'] * 1e4, base=s_['base_gap'] * 1e4))
+FLIPS = pd.DataFrame(flip_rows)
+print(FLIPS.to_string(index=False))
+FLIPPERS = [a for a, s_ in SENS.items() if any(r['flips'] for r in s_['rows'])]
+TOP = collections.Counter(s_['rows'][0]['assumption'] for s_ in SENS.values())
+print('\nprojects with a single-assumption flip:', FLIPPERS or 'none', '| largest swing, by project count:', dict(TOP))
+""")
+md(r"""
+📝 **Before.** A tornado per project: the six assumptions that move its gap most, each bar from its favorable to its
+unfavorable end, centered on the base gap. Zero is the hurdle.
+""")
+code(r"""
+T = pd.DataFrame(tor)
+addrs = list(dict.fromkeys(T.address))
+fig = make_subplots(rows=len(addrs), cols=1, subplot_titles=addrs, vertical_spacing=0.05)
+for i, ad in enumerate(addrs, 1):
+    t = T[T.address == ad].iloc[::-1]
+    fig.add_trace(go.Bar(y=t.assumption, x=t.fav - t.unf, base=t.unf, orientation='h', marker_color='#7f9fc7',
+                         showlegend=False, hovertemplate='%{y}: %{base:.0f} → %{x:.0f} bp'), row=i, col=1)
+    fig.add_vline(x=0, line_color='#c0504d', line_width=1.5, row=i, col=1)
+    fig.add_vline(x=t.base.iloc[0], line_color='#444', line_dash='dot', row=i, col=1)
+fig.update_layout(height=230 * len(addrs), template='plotly_white',
+                  title='Gap to the hurdle (bp): one assumption at a time, favorable → unfavorable end; red = hurdle, dotted = base')
+fig.show()
+""")
+md(r"""
+📝 **After — what this could MISLEAD about.** The band ends are the sources' ranges, not probabilities: a short bar can
+mean a tightly sourced value **or** a thinly sourced one with no range given (marked `low: null` in the file). The
+flip points answer *how far* one thing would have to move; in practice rents, costs and cap rates move together.
+
+**Found (§3–§5 together).** No single sourced assumption flips a verdict. **Cap rate, hard cost and rent** move every
+project most, in that order for most. The flip points are far outside the sourced bands: rents well above today's
+lease-ups, exit cap rates below 2019's, or hard costs cut by about half. **So, to John's question: the numbers alone
+explain the stalling.** At today's costs and rates these approvals don't pencil, consistent with JN-Feasibility Part 2h
+(approvals of 2017–21 penciled at approval and broke on costs and rates since). The one that pencils at base is the
+exception that needs its own explanation (it's a by-the-bed layout; ownership, financing, or the per-bed rent being a
+best case).
+""")
+
+# ------------------------------------------------------------------------------------------------ §6 Elmwood
+md(r"""
+## §6 — The Elmwood sites: how tall must a building be to pencil?
+
+📝 **Plan.** Each site (RECORD: lot from the assessor polygon, the existing building's taxable sqft, assessed values),
+a building of 2 to 12 storeys: a 15-ft ground floor (retail + lobby) and 10-ft residential floors; lot coverage, floor
+efficiency and unit sizes from the assumptions file; units over the **Rent Board bedroom mix**. Height sets the
+construction tier (Type V wood to 4 storeys / 70 ft; Type V over a concrete podium to 6 / 75 ft; Type III over podium to
+8 / 85 ft; Type I concrete or steel above), and the tier sets cost per sqft and months to build.
+
+Two affordability scenarios (John): **in-lieu**, all units market-rate plus Berkeley's in-lieu fee on residential floor
+area; **on-site**, 20% of units below market (half very-low-income, half low-income), the City's on-site alternative,
+which also earns a state density bonus.
+
+A height pencils when residential land value ≥ land basis = **max(market land, existing-use value)**.
+""")
+code(r"""
+SITES = po.elmwood_sites()
+S0 = po.scenario('base')
+srows = []
+for s_ in SITES:
+    lb = po.land_basis(s_, S0)
+    srows.append(dict(site=s_['name'], lot_sf=round(s_['lot_sf']), existing_bldg_sf=round(s_['existing_retail_sf']),
+                      assessed_land=round(s_['assessed_land']), market_land_m=round(lb['market'] / 1e6, 2),
+                      existing_use_m=round(lb['euv'] / 1e6, 2), basis_m=round(lb['basis'] / 1e6, 2), binding=lb['binding']))
+print(pd.DataFrame(srows).to_string(index=False))
+RUN = po.run_sites(SITES)
+BE = pd.DataFrame([dict(site=r['name'], fee_mode=r['fee_mode'], scenario=r['scenario'],
+                        break_even_storeys=r['break_even_storeys']) for r in RUN['results']])
+print('\nlowest height that pencils (None = no height from 2 to 12 storeys):')
+print(BE.pivot_table(index=['site', 'fee_mode'], columns='scenario', values='break_even_storeys', aggfunc='first',
+                     dropna=False)[list(po.SCENARIOS)].to_string())
+""")
+md(r"""
+📝 **Found.** The assessed land values (Prop 13) are a fraction of either basis: the 7-Eleven parcel's land was last
+reassessed in 1976. For the two retail buildings the **existing use** binds: a buyer must pay at least what the shops are
+worth as shops. For the parking lot and the post office pair, market land binds. The existing-use value rests on the
+**thinnest** assumption in the file (a single undated College Ave retail listing), so read it with its band.
+""")
+md(r"""
+📝 **Before.** For each site and height, **how many times today's lease-up rents** the building would need to pencil
+(base case, in-lieu fee). Below 1.0 would pencil at today's rents. Shading marks the construction tiers.
+""")
+code(r"""
+fig = go.Figure()
+tier_spans = collections.OrderedDict()
+for r in RUN['results']:
+    if r['fee_mode'] != 'in_lieu' or r['scenario'] != 'base':
+        continue
+    xs = [x['storeys'] for x in r['rows']]
+    fig.add_trace(go.Scatter(x=xs, y=[x['rent_mult_needed'] for x in r['rows']], mode='lines+markers', name=r['name'],
+                             customdata=[[x['units'], x['tier'], x['height_ft']] for x in r['rows']],
+                             hovertemplate='%{x} storeys (%{customdata[2]:.0f} ft, %{customdata[0]} units, %{customdata[1]}): ×%{y:.2f}'))
+    for x in r['rows']:
+        tier_spans.setdefault(x['tier'], [x['storeys'], x['storeys']])[1] = x['storeys']
+shade = ['#f4f4f4', '#e8eef6', '#f4f4f4', '#e8eef6']
+for i, (t, (a0, a1)) in enumerate(tier_spans.items()):
+    fig.add_vrect(x0=a0 - 0.5, x1=a1 + 0.5, fillcolor=shade[i % 4], line_width=0, layer='below',
+                  annotation_text=t, annotation_position='top left', annotation_font_size=10)
+fig.add_hline(y=1.0, line_color='#c0504d', annotation_text="today's lease-up rents", annotation_position='bottom right')
+fig.update_layout(title='Elmwood sites: rent multiple needed to pencil, by height (base case, in-lieu fee)',
+                  xaxis_title='storeys', yaxis_title='× today\'s lease-up rents', template='plotly_white', height=520,
+                  legend=dict(orientation='h', y=-0.2))
+fig.show()
+BEST = {}
+for r in RUN['results']:
+    best = min(r['rows'], key=lambda x: x['rent_mult_needed'])
+    BEST[(r['site'], r['fee_mode'], r['scenario'])] = dict(storeys=best['storeys'], tier=best['tier'],
+                                                         rent_needed=best['rent_mult_needed'], units=best['units'])
+print(pd.DataFrame([dict(site=k[0], fee_mode=k[1], best_storeys=v['storeys'], units=v['units'], tier=v['tier'],
+                         rent_needed_x=round(v['rent_needed'], 2))
+                    for k, v in BEST.items() if k[2] == 'base']).to_string(index=False))
+""")
+md(r"""
+📝 **After — what this chart could MISLEAD about.** (1) The y-axis is a **multiple**, so a curve that looks flat at
+×2 is still a building needing double today's rents. (2) Each jump sits where the **construction tier** changes; the size
+of the jump comes from BFA24's three prototype costs ($360 → $449 → $547 per sqft), the least certain step in the file.
+(3) The units are what fits the envelope, not what Berkeley's zoning or the 2026 Elmwood proposal (4–5 storeys, a
+hypothetical 7) allows.
+
+**Found.** The answer to *"how high must it be?"* is that, at today's rents, costs and cap rates, **no height pencils on
+any of the four sites**, under either affordability scenario. Taller is not the lever it seems: within a tier each added
+floor spreads the land over more units and the rent needed falls, but at each tier boundary the cost per sqft jumps and
+the need rises. **The most efficient height on every site is the top of the podium tier, 6 storeys (about 65 ft).** Going
+to 7–8 storeys costs more per unit than it adds, and above 85 ft concrete construction is worse still. What would have to
+change is in the rent multiple at that best height: rents roughly double, or an equivalent cut in cost or cap rate. The
+one combination that pencils is the **Wells Fargo parking lot** with every assumption favorable: no business to buy out.
+""")
+
+# ------------------------------------------------------------------------------------------------ §7 results + gate
+md(r"""
+## §7 — Results file and gate
+
+📝 The derived results (every verdict, ledger row, sensitivity row and height row) go to
+`data/derived/pencil_out/results_<date>.json`. The headline figures are gated against
+`data/baselines/pencil_out_baseline_<date>.json`: **structural** figures (cohort counts, record coverage) are stable for a
+given export and harvest; **calibration** figures (verdicts, gaps, break-even heights) move when the assumptions file
+changes. A reviewed change **appends** a baseline (`JN_WRITE_BASELINE=1`), never an edit.
+""")
+code(r"""
+import os, glob, hashlib, subprocess
+from datetime import date
+FIG = {
+    'stage_projects': len(stage), 'stage_units': int(sum(p['units'] or 0 for p in stage)),
+    'cohort_5plus': len(big), 'cohort_5plus_units': int(sum(p['units'] for p in big)),
+    'excluded_not_stalled': len(EXCLUDED), 'excluded_units': int(EXCLUDED.units.sum()),
+    'in_scope': len(IN_SCOPE), 'record_rows': int(len(LEDGER[LEDGER.label == 'RECORD'])),
+    'verdict_pencils': VERDICTS.get('pencils', 0), 'verdict_marginal': VERDICTS.get('marginal', 0),
+    'verdict_does_not': VERDICTS.get('does_not', 0), 'verdict_insufficient': VERDICTS.get('insufficient_data', 0),
+    'single_assumption_flips': len(FLIPPERS),
+    'median_gap_bp': int(V.gap_bp.dropna().median()) if V.gap_bp.notna().any() else None,
+    'elmwood_best_storeys_base': sorted({v['storeys'] for k, v in BEST.items() if k[2] == 'base'}),
+    'lease_ups': R['lease_ups'],
+}
+FIG['elmwood_break_even_base'] = {r['site'] + '|' + r['fee_mode']: r['break_even_storeys']
+                                  for r in RUN['results'] if r['scenario'] == 'base'}
+h = hashlib.sha256()
+with open(po.pp.V4, 'rb') as f_:
+    for b_ in iter(lambda: f_.read(1 << 20), b''): h.update(b_)
+meta = {'as_of': date.today().isoformat(), 'v4_file_sha': h.hexdigest()[:16],
+        'assumptions': po.ASSUMPTIONS_FILE.name, 'record_inputs': po.RECORD_INPUTS.name,
+        'export_generated': EXP['meta']['generated'],
+        'git': subprocess.run(['git', '-C', str(ROOT), 'rev-parse', '--short', 'HEAD'], capture_output=True, text=True).stdout.strip(),
+        'figures': FIG}
+# the results file
+res_dir = ROOT / 'data' / 'derived' / 'pencil_out'
+results = dict(meta=meta, cohort=COH.to_dict('records'), coverage=COV.to_dict('records'), verdicts=V.to_dict('records'),
+               ledger=LEDGER.to_dict('records'), flips=FLIPS.to_dict('records'),
+               sensitivity={a: s_['rows'] for a, s_ in SENS.items()},
+               elmwood_sites=srows, elmwood=[dict(site=r['site'], fee_mode=r['fee_mode'], scenario=r['scenario'],
+                                                  break_even_storeys=r['break_even_storeys'], land=r['land'], rows=r['rows'])
+                                             for r in RUN['results']])
+out_p = res_dir / f"results_{date.today().isoformat()}.json"
+json.dump(results, open(out_p, 'w'), indent=1, default=float)
+print('wrote', out_p.relative_to(ROOT))
+# the gate
+BL_DIR = os.environ.get('JN_BASELINE_DIR') or str(ROOT / 'data' / 'baselines')
+snaps = sorted(glob.glob(os.path.join(BL_DIR, 'pencil_out_baseline_*.json')))
+if not snaps or os.environ.get('JN_WRITE_BASELINE') == '1':
+    nm = f"pencil_out_baseline_{date.today().isoformat()}"
+    bp = next(os.path.join(BL_DIR, f'{nm}{x}.json') for x in ['', *'bcdefgh'] if not os.path.exists(os.path.join(BL_DIR, f'{nm}{x}.json')))
+    json.dump(meta, open(bp, 'w'), indent=1)
+    print('WROTE baseline', bp)
+else:
+    bl = json.load(open(snaps[-1]))
+    diffs = {k: (FIG[k], bl['figures'].get(k)) for k in FIG if bl['figures'].get(k) != FIG[k]}
+    if diffs:
+        for k, (now, was) in diffs.items():
+            print(f'  {k}: computed {now} vs baseline {was}')
+        raise AssertionError(f"BASELINE MISMATCH vs {os.path.basename(snaps[-1])} (assumptions then {bl.get('assumptions')}, "
+                             f"now {meta['assumptions']}; v4 then {bl.get('v4_file_sha')}, now {meta['v4_file_sha']}; export then "
+                             f"{bl.get('export_generated')}, now {meta['export_generated']}) -- diagnose; a legitimate change "
+                             f"APPENDS a baseline (JN_WRITE_BASELINE=1)")
+    print(f'BASELINE GATE PASS vs {os.path.basename(snaps[-1])}')
+for k, v in FIG.items():
+    print(f'  {k:28} {v}')
+""")
+
+md(r"""
+## Assumptions ledger — what BREAKS if each is wrong
+
+| assumption | source quality | what breaks if it is wrong |
+|---|---|---|
+| market rents = Rent Board lease-ups by bedroom (2022–24) | RECORD, 831 leases | rents by bedroom ignore unit size: large units are under-rented; concessions not in the registry overstate rent |
+| per-bed rent = median 2026 asking rent of near-campus buildings | collected, 2026 asks | a best case for a building farther out; group-living verdicts lean favorable |
+| hard cost by tier = BFA24's prototype costs (2024 $ × TBD index) | cited, one Berkeley study | the **tier steps** set the best height; Terner 2020's Type I step was far smaller |
+| exit cap rate 6.0% (CBRE Oakland, H1 2024 carried) | cited, Oakland not Berkeley; BFA24 and Terner used 5.0% | the single largest swing on every project |
+| opex 35% of effective rent | labeled; BFA24 implies 31.6% | unclear whether property tax on the new value is inside BFA24's ratio |
+| legacy mitigation fee at the 2022 rate | cited; current rate NOT FOUND | the fee is a few percent of cost; it does not decide any verdict |
+| existing-use value from one undated College Ave listing | **thin** | it sets the land basis for the two retail sites; the height result does not depend on it (no height pencils even at market land) |
+| lot coverage, ground-floor retail share, floor heights | labeled (checked against staff reports) | the unit count at each height; not the sign of the result |
+
+**Next.** (1) The pre-2022 staff reports (1835 and 1200 San Pablo) via the Wayback Machine would move two projects off
+`insufficient_data`. (2) Rents by unit **size** (the registry has bedrooms only; staff reports give sizes) would fix the
+large-unit bias. (3) The same `break_even()` runs on any parcel: the citywide pass needs only lot size and what stands on
+each lot.
+""")
+
+nb["cells"] = C
+nb.metadata["kernelspec"] = {"name": "python3", "display_name": "Python 3", "language": "python"}
+os.makedirs("notebooks/v4", exist_ok=True)
+nbf.write(nb, "notebooks/v4/JN-O_pencil_out.ipynb")
+print("wrote notebooks/v4/JN-O_pencil_out.ipynb —", len(C), "cells")

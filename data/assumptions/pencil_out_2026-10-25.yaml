@@ -1,0 +1,343 @@
+# pencil_out_2026-10-25.yaml -- every market assumption the pro-formas use, in one versioned file.
+#
+# John, 2026-10-25 (pencil-out Phase B): "Put every market assumption in one versioned assumptions file ... each with a
+# low/base/high value, a source, and a date ... Never hardcode these in the notebook."
+#
+# Readers: scripts/v4/proforma_projects.py (JN-Feasibility Part 2) and the pencil-out module built on it.
+# A changed assumption is a NEW dated file, never an edit to this one; the gates compare against timestamped baselines.
+#
+# Every entry: base (the value used), low/high (the band; null where the source gives one number and no band is
+# defensible), unit, source, as_of (the source's date), kind:
+#   cited    -- taken from a named source
+#   labeled  -- a judgment, stated as such; the band is the sensitivity range
+#   derived  -- computed from a cited series (the arithmetic is in `note`)
+#
+# Section 1 holds the values JN-Feasibility Part 2 used on 2026-10-08..12, moved here from proforma_projects.py
+# unchanged (the move is verified by re-running Part 2 to identical figures).
+
+version: "2026-10-25"
+
+# ---------------------------------------------------------------------------------------------------------------
+# 1. Moved from scripts/v4/proforma_projects.py (values unchanged)
+# ---------------------------------------------------------------------------------------------------------------
+
+hard_cost_2018_per_gsf:
+  base: 332.0
+  low: null
+  high: null
+  unit: "$/gross sqft, market-rate, non-Type-I, 2018"
+  kind: derived
+  source: "Terner Center, The Hard Costs of Construction: Recent Trends in Labor and Materials Costs for Apartment Buildings in California (March 2020)"
+  as_of: "2020-03"
+  note: "Bay Area 'more than $380 per square foot in 2018' less the $48/sqft affordable premium Terner reports = $332 market-rate."
+
+type_i_premium_per_gsf:
+  base: 68.0
+  low: 65.0
+  high: 71.0
+  unit: "$/gross sqft added for Type I (concrete/steel)"
+  kind: cited
+  source: "Terner Center, The Hard Costs of Construction (March 2020): Type I +$65-71/sqft"
+  as_of: "2020-03"
+
+hard_cost_escalation:
+  unit: "year-on-year multiplier to June"
+  kind: cited
+  source: "TBD Consultants San Francisco bid index, via City & County of San Francisco Annual Infrastructure Construction Cost Inflation Estimate memos (Oct 2022; Oct 21 2024); 2025-26 = the City's adopted +3.5%"
+  as_of: "2024-10-21"
+  by_year: {2018: 1.0054, 2019: 1.104, 2020: 1.026, 2021: 1.036, 2022: 1.172, 2023: 1.049, 2024: 1.026, 2025: 1.035, 2026: 1.035}
+
+exit_cap_rate:
+  unit: "cap rate, multifamily infill Class A stabilized (midpoint)"
+  kind: cited
+  source: "CBRE U.S. Cap Rate Survey, Oakland: H2 2017 & H2 2019 4.25-4.75%; H2 2023 & H1 2024 5.5-6.5%. 2021-22 estimated from San Francisco + Oakland's observed 50 bps premium; 2018 and 2020 interpolated; 2025-26 carry H1 2024"
+  as_of: "2024-H1"
+  by_year: {2017: 0.045, 2018: 0.045, 2019: 0.045, 2020: 0.04375, 2021: 0.0425, 2022: 0.0475, 2023: 0.06, 2024: 0.06, 2025: 0.06, 2026: 0.06}
+  basis: {2017: "CBRE H2 2017", 2018: "interpolated", 2019: "CBRE H2 2019", 2020: "interpolated", 2021: "SF H2 2021 + 50 bps", 2022: "SF H1+H2 2022 + 50 bps", 2023: "CBRE H2 2023", 2024: "CBRE H1 2024", 2025: "H1 2024 carried", 2026: "H1 2024 carried"}
+  band_2024: {low: 0.055, high: 0.065}
+
+retail_rent_per_sf_yr:
+  base: 36.0
+  low: 28.0
+  high: 51.0
+  unit: "$/sqft/yr, ground-floor retail asking"
+  kind: cited
+  source: "Telegraph Ave asking rents $28-51 (listings, 2026-10), as recorded in proforma_projects.py"
+  as_of: "2026-10"
+
+parking_rent_per_month:
+  base: 200.0
+  low: 150.0
+  high: 325.0
+  unit: "$/space/month"
+  kind: cited
+  source: "Berkeley monthly parking $150-325 (2026-10), as recorded in proforma_projects.py"
+  as_of: "2026-10"
+
+soft_cost_share:
+  base: 0.25
+  low: 0.20
+  high: 0.30
+  unit: "share of hard cost"
+  kind: labeled
+  source: "JN-Feasibility Part 2 labeled assumption"
+  as_of: "2026-10-08"
+
+opex_share:
+  base: 0.35
+  low: 0.30
+  high: 0.40
+  unit: "share of effective rent"
+  kind: labeled
+  source: "JN-Feasibility Part 2 labeled assumption"
+  as_of: "2026-10-08"
+
+residential_vacancy:
+  base: 0.05
+  low: null
+  high: null
+  unit: "share of gross rent"
+  kind: labeled
+  source: "JN-Feasibility Part 2 labeled assumption"
+  as_of: "2026-10-08"
+
+retail_vacancy:
+  base: 0.20
+  low: null
+  high: null
+  unit: "share of retail rent"
+  kind: labeled
+  source: "JN-Feasibility Part 2 labeled assumption"
+  as_of: "2026-10-08"
+
+retail_expenses:
+  base: 0.10
+  low: null
+  high: null
+  unit: "share of retail rent"
+  kind: labeled
+  source: "JN-Feasibility Part 2 labeled assumption"
+  as_of: "2026-10-08"
+
+parking_occupancy:
+  base: 0.70
+  low: null
+  high: null
+  unit: "share of spaces rented"
+  kind: labeled
+  source: "JN-Feasibility Part 2 labeled assumption"
+  as_of: "2026-10-08"
+
+yield_spread_over_exit_cap:
+  base: 0.0125
+  low: 0.010
+  high: 0.015
+  unit: "yield on cost needed above the exit cap rate"
+  kind: labeled
+  source: "JN-Feasibility Part 1 Step 4b: the 100-150 bps rule of thumb"
+  as_of: "2026-10-08"
+
+land_carry_rate:
+  base: 0.07
+  low: null
+  high: null
+  unit: "per year on land, approval to permit"
+  kind: labeled
+  source: "JN-Feasibility Part 2 labeled assumption"
+  as_of: "2026-10-08"
+
+hard_cost_band:
+  base: 0.10
+  low: null
+  high: null
+  unit: "+/- share applied to hard cost for the best/worst case"
+  kind: labeled
+  source: "JN-Feasibility Part 2 labeled assumption"
+  as_of: "2026-10-08"
+
+# ---------------------------------------------------------------------------------------------------------------
+# 2. Pencil-out (stalled entitlements + break-even height), added 2026-10-25
+#    Research notes with every quote: data/assumptions/research/pencil_out_research_2026-10-25.yaml
+#    Source PDFs (SHA-256): data/raw/pencil_out_sources/manifest_2026-10-25.csv
+#    BFA24 = City of Berkeley / Strategic Economics + Street Level Advisors, "Residential Feasibility Analysis and
+#            In-Lieu Fee Recommendations", Council worksession 2024-05-21 (CoStar data + developer/GC interviews)
+# ---------------------------------------------------------------------------------------------------------------
+
+price_year: 2025          # every $ below is carried to this year; BFA24's 2024 dollars x hard_cost_escalation[2025]
+
+construction_tiers:
+  # hard cost $/gross sqft, ALL-IN building cost (BFA24 Fig 33 blended 'Cost per Square Foot' for its prototypes),
+  # 2024 dollars. The tier is set by storeys AND height (CBC Ch. 5 limits, sprinklered R-2, via IBC 2018 tables).
+  kind: cited
+  source: "BFA24 Fig 33 (blended by prototype) and Fig 34 (by type: Type V $350, Type III $400, Type I $550 /gsf); code limits: WoodWorks Mid-Rise Design (2018 IBC Ch. 5), 2022-07-27"
+  as_of: "2024-05-21"
+  tiers:
+    - {name: "Type V (wood)",              max_storeys: 4,  max_height_ft: 70,  per_gsf_2024: 350, construction_months: 18, basis: "BFA24 4-storey prototype $350; Type VA limit 4 storeys / 70 ft"}
+    - {name: "Type V over Type I podium",  max_storeys: 6,  max_height_ft: 75,  per_gsf_2024: 360, construction_months: 24, basis: "BFA24 6-storey prototype (Type V over a Type I podium) $360"}
+    - {name: "Type III over Type I podium", max_storeys: 8, max_height_ft: 85,  per_gsf_2024: 449, construction_months: 24, basis: "BFA24 8-storey prototype (Type III over Type I) $449; Type IIIA limit 85 ft, high-rise rules above 75 ft"}
+    - {name: "Type I (concrete/steel)",    max_storeys: 99, max_height_ft: 999, per_gsf_2024: 547, construction_months: 36, basis: "BFA24 18-storey prototype $547"}
+  band: {low: 0.90, high: 1.18}
+  band_note: "low = -10% (Part 2's hard-cost band); high = +18%, the low end of BFA24's 18-25% adder for Berkeley's labor standards (HARD HATS / Southside) on non-union projects"
+  cross_check: "Part 2's cited series (Terner 2018 $332 x TBD index) is ~$509/gsf in 2025 for non-Type-I; times Part 2's fitted Berkeley factor (0.774) it is ~$394, inside BFA24's $360-449 mid-rise range"
+
+floor_to_floor_ft:
+  base: {ground: 15, upper: 10}
+  kind: labeled
+  source: "labeled: 15 ft retail ground floor, 10 ft residential floors (8 storeys = 85 ft, the Type IIIA limit, as in the 8-storey staff reports: 2015 Blake 88.5 ft, 2435 Haste 90 ft)"
+  as_of: "2026-10-25"
+
+efficiency:
+  base: 0.80
+  low: 0.79
+  high: 0.80
+  unit: "net unit area / gross residential area"
+  kind: cited
+  source: "BFA24 Fig 7: 6-storey 49,460/61,930 = 79.9%; 8-storey 71,320/89,984 = 79.3%; 18-storey 79.4%"
+  as_of: "2024-05-21"
+
+unit_size_sf:
+  kind: cited
+  source: "BFA24 Fig 25, 6-storey prototype (net sf)"
+  as_of: "2024-05-21"
+  by_bedrooms: {"0": 500, "1": 660, "2": 990, "3": 1100}
+
+lot_coverage:
+  base: {ground: 0.90, upper: 0.75}
+  low: {ground: 0.85, upper: 0.65}
+  high: {ground: 0.95, upper: 0.85}
+  kind: labeled
+  source: "labeled: upper floors lose area to light courts, setbacks and open space; checked against the staff reports' gross floor area / (lot x storeys): 2435 Haste 0.71, 1820 San Pablo 0.74, 1201 San Pablo 0.60, 2018 Blake 0.43"
+  as_of: "2026-10-25"
+
+ground_floor_retail_share:
+  base: 0.50
+  low: 0.30
+  high: 0.70
+  unit: "share of the ground floor that is leasable retail (the rest lobby, services, bikes, trash)"
+  kind: labeled
+  source: "NOT FOUND in the research (see research notes #15); labeled. Staff reports: 1820 San Pablo 6,840 sf commercial on 11,627 sf lot; 1201 San Pablo 1,680 on 13,000"
+  as_of: "2026-10-25"
+
+retail_shell_cost_per_gsf_2024:
+  base: 200
+  kind: cited
+  source: "BFA24 Fig 34: Retail - Type I $200/gsf; tenant improvements $100/nsf (not modeled: assumed paid by tenants)"
+  as_of: "2024-05-21"
+
+soft_costs_ex_fees_ex_financing:
+  base: 0.27
+  low: 0.18
+  high: 0.30
+  unit: "share of hard cost"
+  kind: cited
+  source: "BFA24: soft costs 18% of hard (ex-fees) + developer contingency 5% + overhead 4% = 27%; low = 18% alone; high = Part 2's labeled 30%"
+  as_of: "2024-05-21"
+
+construction_financing:
+  rate: {base: 0.071, low: 0.062, high: 0.080}
+  loan_to_cost: 0.60
+  average_outstanding: 0.55
+  points: 0.01
+  kind: cited
+  source: "rate: SOFR 30-day 3.89% (FRED, 2026-10-23) + bank construction spread 275-400 bp (CorAdvisors 2026-05; weak source); low = KMA Santa Cruz County 2026-05-21 6.2%; high = BFA24 8%. LTC 60% (KMA26), average outstanding 55% and 1 point (BFA24)"
+  as_of: "2026-10-23"
+  formula: "interest = (hard + soft) x loan_to_cost x average_outstanding x rate x months / 12; + points x loan"
+
+exit_cap_rate_today:
+  base: 0.060
+  low: 0.050
+  high: 0.065
+  kind: cited
+  source: "base/high: CBRE Oakland multifamily infill Class A H1 2024 5.5-6.5% (Part 2's series, carried); low: BFA24 Fig 29 and Terner Making It Pencil 2023 (East Bay 2023), both 5.0%"
+  as_of: "2024-H1 / 2024-05-21 / 2023-12"
+
+operating_expenses_share_of_egi:
+  base: 0.35
+  low: 0.316
+  high: 0.40
+  kind: cited
+  source: "low: BFA24 30% of gross scheduled income = 31.6% of effective income at 5% vacancy; base/high: Part 2's labeled 35% (40%). Base kept above BFA24 because it is unclear whether BFA24's 30% includes property tax on the new value (~1.2% of value)"
+  as_of: "2024-05-21"
+
+berkeley_fees:
+  kind: cited
+  source: "City of Berkeley, Development Fees and Affordability Requirements, updated 2026-08-06 (Reso 72,418-N.S. adopted 2026-07-28); BFA24 Fig 37-38 for permit, plan check and other fees"
+  as_of: "2026-08-06"
+  inclusionary_in_lieu_per_rufa_sf: 62.83        # $/sf of Residential Unit Floor Area (= net unit area here)
+  in_lieu_rufa_deduction_sf: 5000                 # projects paying the full fee deduct 5,000 sf (not with on-site units)
+  on_site_share: 0.20                             # IHO on-site alternative: 20% of units, at least half VLI, rest <= 80% AMI (rent capped at 60% AMI)
+  public_art_in_lieu_share: 0.008                 # 0.8% of construction cost (BMC 23.316)
+  school_fee_per_residential_sf: 5.17             # BUSD, revised 2024-06-12 (applied to net unit area)
+  other_city_fees_per_unit_2024: 22562            # BFA24 6-storey: permit + plan check + sewer + other, ex in-lieu ($2,947,561 - $1,255,416) / 75
+  legacy_ahmf_note: "BMC 22.20.065 (AHMF, per unit) governs only projects vested on/before 2023-03-31; its current per-unit rate is NOT FOUND (2022: $46,185). The stalled projects approved before 2023 may fall under it."
+
+bmr_rents_monthly:
+  kind: cited
+  source: "City of Berkeley BMR Program, Income and Rent Limits for 2025 (Exhibit A), Updated Inclusionary Housing Ordinance, effective 2025-06-01 to 2026-05-31: gross rents"
+  as_of: "2025-06-01"
+  vli_50_ami_gross: {"0": 1399, "1": 1599, "2": 1799, "3": 1998}
+  li_capped_60_ami_gross: {"0": 1679, "1": 1919, "2": 2159, "3": 2397}
+  utility_allowance: {"0": 100, "1": 145, "2": 190, "3": 235}
+  utility_allowance_note: "BFA24 Figs 27-28 (2023): gross minus net = $100 (studio) to $235 (3BR); 1BR and 2BR interpolated (labeled)"
+  bmr_vacancy: 0.025
+  bmr_opex_per_unit_yr: 8760                      # BFA24 / 2025 IHO staff report: $730/month
+
+land_market_per_lot_sf:
+  base: 325
+  low: 149
+  high: 500
+  unit: "$ per sqft of land, mid-rise development site"
+  kind: cited
+  source: "base/high: BFA24 Fig 34 land costs per sqft, 6-storey $325 and 8-storey $500 (prototypes sited in South & Southwest Berkeley); low: median of 30 corridor transfers 2021+ (record: data/derived/pencil_out/land_comps_corridor_2026-10-25.csv; quartiles $105/$149/$218)"
+  as_of: "2024-05-21 / 2026-10-25"
+  caveat: "the record comps are Prop 13 assessed values after a recorded document; a document that is not a reassessing sale makes the value stale (values under $50/sqft dropped as likely non-sales)"
+
+existing_use_value:
+  # what the current use is worth to its owner: the floor below which a site is not sold for redevelopment
+  retail_nnn_rent_per_sf_yr: {base: 54.0, low: 28.56, high: 72.0}
+  retail_vacancy: {base: 0.056, low: 0.056, high: 0.10}
+  retail_cap_rate: {base: 0.064, low: 0.070, high: 0.050}   # low/high = the case that makes EUV low/high
+  kind: cited
+  source: "rent base: 2928 College Ave listing $4.50/sf/mo NNN (Gordon Commercial, UNDATED, low confidence); low: Kidder Mathews East Bay retail 3Q 2026 average $2.38/sf/mo; high: 2980 College Ave listing $6.00/sf/mo (500 sf, near-gross). Vacancy and cap rate: Kidder Mathews 3Q 2026 (5.6%, 6.4%; 2Q 7.0%); BFA24 retail cap 5.0%"
+  as_of: "2026-3Q"
+  confidence: low
+  note: "EUV = existing building sqft (assessor taxable) x rent x (1 - vacancy) / cap rate. A parking lot's EUV is set to 0 here (its parking income is not in any source we hold), so market land governs."
+
+market_rent_multiplier:
+  base: 1.00
+  low: 0.90
+  high: 1.10
+  unit: "multiplier on the Rent Board lease-up pool rents (record: JN-Feasibility Part 2a, 2022-24 lease-ups)"
+  kind: cited
+  source: "high: BFA24 Fig 26 6-storey rents (CoStar + 10% new-construction premium) run 5-12% above the pool (studio $2,800 vs $2,495; 1BR $3,250 vs $3,056; 2BR $4,500 vs $4,295) -> +10%; low: -10% labeled (symmetric)"
+  as_of: "2024-05-21"
+
+site_work_per_land_sf_2024:
+  base: 25
+  low: 20
+  high: 35
+  kind: cited
+  source: "BFA24 Fig 34: demolition and site work per sf of land, $20-35 by prototype ($25 for the 6- and 8-storey)"
+  as_of: "2024-05-21"
+
+legacy_ahmf_per_unit:
+  base: 46185
+  low: null
+  high: null
+  kind: cited
+  source: "City of Berkeley Council 2023-01-17 Item 21 (Rev2): 'the 2022 affordable housing mitigation fee ($46,185 per unit)'. Current rate NOT FOUND (City handout: 'contact HHCS'); 2022 rate used unescalated"
+  as_of: "2023-01-17"
+  formula: "fee = A x FEE x (1 - (VLI + LI) / (0.20 x A)), floored at 0 (BMC 22.20.065; A = total units)"
+
+eli_rent_share_of_vli:
+  base: 0.60
+  kind: derived
+  source: "ELI rent = 30% of 30% AMI / 12 vs VLI = 30% of 50% AMI / 12 -> 30/50 = 0.60 of the VLI gross rent (City Exhibit A income tiers)"
+  as_of: "2025-06-01"
+
+height_search:
+  min_storeys: 2
+  max_storeys: 12
+  kind: labeled
+  source: "labeled search range for the break-even height"
+  as_of: "2026-10-25"

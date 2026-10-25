@@ -90,11 +90,57 @@ def records_online(out: Path, failed: list) -> list[dict]:
     return rows
 
 
+def staff_reports(out: Path, addresses: list[str]) -> int:
+    """THIRD SOURCE, the staff reports: an agenda saved above links each item's staff report PDF (2022 on, directly on
+    berkeleyca.gov). The report's project-data table carries lot area, floor area, units by bedroom and affordable units
+    by tier, which no City record field holds (pencil-out Phase A, 2026-10-25). Only links whose file name contains one of
+    the given addresses are fetched, into data/raw/zab/staff_reports/, listed in staff_reports_manifest_<date>.csv.
+    The 2021 agendas link pages on the retired cityofberkeley.info site instead; those are not handled here."""
+    import fitz
+    want = [a.lower() for a in addresses]
+    links = {}
+    for agenda in sorted((out / "agenda").glob("*.pdf")):
+        for page in fitz.open(agenda):
+            for link in page.get_links():
+                u = link.get("uri") or ""
+                name = urllib.parse.unquote(u.rsplit("/", 1)[-1])
+                if u.lower().endswith(".pdf") and "berkeleyca.gov" in u and any(a in name.lower() for a in want):
+                    links[u] = agenda.name
+    print(f"{len(links)} staff-report links match {len(want)} addresses", flush=True)
+    rows, failed = [], []
+    for url, agenda in sorted(links.items()):
+        f = out / "staff_reports" / urllib.parse.unquote(url.rsplit("/", 1)[1]).lstrip("_")
+        f.parent.mkdir(parents=True, exist_ok=True)
+        if not f.exists():
+            try:
+                f.write_bytes(get(url))
+                time.sleep(1)
+            except Exception as e:
+                failed.append(f"{url}: {e}")
+                continue
+        b = f.read_bytes()
+        m = DATE.search(f.name)
+        rows.append({"url": url, "kind": "staff_report", "agenda": agenda,
+                     "meeting_date": dt.date(int(m[1]), int(m[2]), int(m[3])).isoformat() if m else "",
+                     "file": str(f.relative_to(ROOT)), "bytes": len(b), "sha256": hashlib.sha256(b).hexdigest()})
+    man = out / f"staff_reports_manifest_{dt.date.today().isoformat()}.csv"
+    with open(man, "w", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=["url", "kind", "agenda", "meeting_date", "file", "bytes", "sha256"])
+        w.writeheader()
+        w.writerows(sorted(rows, key=lambda r: (r["meeting_date"], r["file"])))
+    print(f"saved {len(rows)}; failed {len(failed)} {failed[:5]} -> {man.relative_to(ROOT)}")
+    return 1 if failed else 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--pages", default="0-6", help="listing pages, e.g. 0-6")
     ap.add_argument("--records-online", action="store_true", help="also the Clerk's archive of ZAB minutes, 2002-")
+    ap.add_argument("--staff-reports", nargs="+", metavar="ADDRESS",
+                    help="instead: fetch the staff reports the saved agendas link for these addresses, e.g. '2435 Haste'")
     a = ap.parse_args()
+    if a.staff_reports:
+        return staff_reports(ROOT / "data/raw/zab", a.staff_reports)
     lo, hi = (int(x) for x in a.pages.split("-"))
     out = ROOT / "data/raw/zab"
     links, failed = {}, []

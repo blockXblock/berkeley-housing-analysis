@@ -63,7 +63,9 @@ def main():
     ap.add_argument("--no-tabulation", action="store_true", help="disable the 1.E/tabulation branch")
     ap.add_argument("--tabulation-only", action="store_true",
                     help="1.E-PRIMARY: stage ONLY tabulation forms, skip plan sets (fast camera-gap sweep)")
+    ap.add_argument("--stage", default=STAGE, help=f"stage dir for state + manifest + files (default {STAGE})")
     a = ap.parse_args()
+    H.STAGE, H.STATE, H.MANIFEST = a.stage, f"{a.stage}/state.json", f"{a.stage}/manifest.csv"
     only = {int(x) for x in a.only.split(",") if x.strip()} if a.only else None
     if not a.no_tabulation:
         enable_tabulation_branch(only=a.tabulation_only)
@@ -72,12 +74,12 @@ def main():
     if only is not None:
         q = q[q.project_id.isin(only)]
 
-    os.makedirs(STAGE, exist_ok=True)
+    os.makedirs(H.STAGE, exist_ok=True)
     sha_set, stubs = H.load_v4()
     st = H.load_state()
     done = set(st["completed"])
 
-    print(f"harvesting {len(q)} record(s); stage={STAGE}; tabulation={'off' if a.no_tabulation else 'ON'}")
+    print(f"harvesting {len(q)} record(s); stage={H.STAGE}; tabulation={'off' if a.no_tabulation else 'ON'}")
     recs = list(q.itertuples(index=False))
     for i, row in enumerate(recs):
         permit = str(row.permit).strip()

@@ -34,7 +34,7 @@ CITED
                               H2 2019); INTERPOLATED 2018 and 2020
   retail rent ............... $36/sqft/yr (Telegraph Ave asking rents $28-51, listings 2026-10)
   parking ................... $200/month (Berkeley monthly parking $150-325, 2026-10)
-LABELED ASSUMPTIONS (central, band)
+LABELED ASSUMPTIONS (central, band) -- values and sources now in data/assumptions/pencil_out_<date>.yaml
   soft costs 25% (20-30) . operating costs 35% of effective rent (30-40) . residential vacancy 5% . retail vacancy 20%,
   retail expenses 10% . parking occupancy 70% . spread over the exit cap 125 bps . land carry 7%/yr . hard-cost band +-10%
 CALIBRATED
@@ -64,20 +64,27 @@ COMMERCIAL_EVIDENCE = ROOT / "data/derived/commercial_area_evidence_2026-10-08.j
 # (John, 2026-10-12: "collect and rerun"); used, when asked, for buildings the Rent Board registry has no lease-ups for
 LEASING_EVIDENCE = ROOT / "data/derived/leasing_rents_evidence_2026-10-12.json"
 
-# ---- CITED
-ESCALATION = {2018: 1.0054, 2019: 1.104, 2020: 1.026, 2021: 1.036, 2022: 1.172, 2023: 1.049, 2024: 1.026, 2025: 1.035,
-              2026: 1.035}
-HARD_2018, TYPE_I_PREMIUM = 332.0, 68.0
-EXIT_CAP = {2017: 0.045, 2018: 0.045, 2019: 0.045, 2020: 0.04375, 2021: 0.0425, 2022: 0.0475, 2023: 0.06,
-            2024: 0.06, 2025: 0.06, 2026: 0.06}
-EXIT_CAP_BASIS = {2017: "CBRE H2 2017", 2018: "interpolated", 2019: "CBRE H2 2019", 2020: "interpolated",
-                  2021: "SF H2 2021 + 50 bps", 2022: "SF H1+H2 2022 + 50 bps", 2023: "CBRE H2 2023",
-                  2024: "CBRE H1 2024", 2025: "H1 2024 carried", 2026: "H1 2024 carried"}
-RETAIL_RENT, PARKING_RENT = 36.0, 200.0
+# ---- CITED + LABELED: every value, with its source and band, lives in the versioned assumptions file (John,
+# 2026-10-25: "never hardcode these"); the names below are the ones the model has always used
+ASSUMPTIONS = ROOT / "data/assumptions/pencil_out_2026-10-25.yaml"
+
+
+def load_assumptions(path=ASSUMPTIONS) -> dict:
+    import yaml
+    return yaml.safe_load(open(path))
+
+
+A = load_assumptions()
+ESCALATION = A["hard_cost_escalation"]["by_year"]
+HARD_2018, TYPE_I_PREMIUM = A["hard_cost_2018_per_gsf"]["base"], A["type_i_premium_per_gsf"]["base"]
+EXIT_CAP, EXIT_CAP_BASIS = A["exit_cap_rate"]["by_year"], A["exit_cap_rate"]["basis"]
+RETAIL_RENT, PARKING_RENT = A["retail_rent_per_sf_yr"]["base"], A["parking_rent_per_month"]["base"]
 # ---- LABELED ASSUMPTIONS (central, low, high)
-SOFT, OPEX = (0.25, 0.20, 0.30), (0.35, 0.30, 0.40)
-VACANCY, RETAIL_VACANCY, RETAIL_EXPENSES, PARKING_OCC = 0.05, 0.20, 0.10, 0.70
-SPREAD, CARRY, COST_BAND = 0.0125, 0.07, 0.10
+SOFT = tuple(A["soft_cost_share"][k] for k in ("base", "low", "high"))
+OPEX = tuple(A["opex_share"][k] for k in ("base", "low", "high"))
+VACANCY, RETAIL_VACANCY = A["residential_vacancy"]["base"], A["retail_vacancy"]["base"]
+RETAIL_EXPENSES, PARKING_OCC = A["retail_expenses"]["base"], A["parking_occupancy"]["base"]
+SPREAD, CARRY, COST_BAND = A["yield_spread_over_exit_cap"]["base"], A["land_carry_rate"]["base"], A["hard_cost_band"]["base"]
 TODAY = 2025
 SATHER_GATE, NEAR_CAMPUS_MI = (37.8702, -122.2595), 0.6      # "near campus" = within 0.6 mi of Sather Gate
 WENT_AHEAD, WAITING, ABANDONED = {"completed", "under_construction"}, {"entitled"}, {"withdrawn", "void"}

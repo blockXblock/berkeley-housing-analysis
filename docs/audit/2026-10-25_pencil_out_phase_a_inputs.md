@@ -118,7 +118,7 @@ their identity is resolved.
    basis.
 
 **A record-derived cost cross-check for Phase B.** Declared `JobValuation` on *issued* BPs for comparable
-5–8 storey Berkeley buildings is a RECORD benchmark to set beside the Terner hard-cost assumptions (e.g.
+5–8 story Berkeley buildings is a RECORD benchmark to set beside the Terner hard-cost assumptions (e.g.
 2538 Durant B2023-02332: $16.44M / 83 units; 1740 SP B2022-05881: $11.55M / 54 units). Permit valuations
 usually understate true hard cost, so this would be a floor, not a replacement.
 

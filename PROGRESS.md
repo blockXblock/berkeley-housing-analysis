@@ -5,6 +5,30 @@
 
 ---
 
+## 2026-10-25 — Pencil-out ZONED citywide pass (JN-O §9, dev; no DB writes)
+
+- **Zoning lookup table:** `data/reference/berkeley_zoning_standards_2026-10-25.yaml` (41 districts = every ZONECLASS in
+  the City layer; per row: height ft/storeys, FAR, density, lot coverage, ground floor, permit, BMC section + the copy
+  read). berkeley.municipal.codes refuses scripts (403) and Chrome was not connected, so the sections came from Wayback
+  copies (commercial chapter current through Ord. 8001-N.S., Feb 2026) + the City's Ord. 7995/8007 PDFs; manifest with
+  SHA-256 `data/reference/berkeley_zoning_sources_2026-10-25.csv`. **Gaps:** R-4 (no Wayback copy; 2025 consultant
+  report), MRD/SP standards unread; no Southside / C-U node / C-SA Subarea One / Adeline South Shattuck boundaries (lower
+  envelope used); use-permit heights not used; AB 2011 / SB 79 / SB 35 not modeled.
+- Layers in `data/reference/`: `berkeley_zoning_districts_2026-10-25.geojson` (City `Portal_Planning/MapServer/7`),
+  `berkeley_fhsz_{very_high,high}_2025.geojson` (City 2025 FHSZ). Corrected the 2026-08-12 corridor audit's "no
+  citywide zoning layer".
+- `python scripts/v4/pencil_out.py --citywide --zoned` (~30 min) -> `citywide_zoned_2026-10-25.csv` (+ meta with zoning
+  hashes): §8's columns + `z_*` columns; replaces `citywide_2026-10-25.csv` (removed). Zoned universe 24,175 (644 not
+  permitted / no district). **Base: 0 pencil, either scenario.** Median need 2.17x zoned vs 1.94x unzoned; most of the
+  city allows 3 storeys; Southside (R-SMU/C-T 85 ft) still ~2x. On-site + bonus needs MORE than the in-lieu fee except
+  where the base envelope is tiny (C-SO, MUR, C-AC with its local tier 2). Favorable set 11,686 -> 2,085 (in-lieu), ~4
+  in 10 in a 2025 High/Very High fire zone.
+- **Bug fixed:** on-site results depended on the process hash seed (Part 2's bedroom pool comes out in set order ->
+  largest-remainder ties); `pencil_out.rents()` now sorts it. Moved one figure (favorable on-site 2,379 -> 2,380).
+  JN-Feasibility Part 2 (`proforma_projects.py`) builds the pool the same way, which may explain its gate drift (not
+  fixed).
+- Gate: appended `pencil_out_baseline_2026-10-25c.json` (zoned keys + the one moved figure; PASS on re-run).
+
 ## 2026-10-25 — Pencil-out CITYWIDE pass (JN-O §8, dev; no DB writes)
 
 - `python scripts/v4/pencil_out.py --citywide` (~13 min) -> `data/derived/pencil_out/citywide_2026-10-25.csv` (24,819

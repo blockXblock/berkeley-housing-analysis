@@ -6,7 +6,8 @@ John, 2026-10-25 (pencil-out Phase B, after Phase A docs/audit/2026-10-25_pencil
     residual land value at low/base/high, against its land basis; verdict pencils / marginal / does_not /
     insufficient_data; RECORD vs ASSUMPTION on every input; which assumption flips each verdict
   - the Elmwood sites (7-Eleven, Five Little Monkeys, Wells Fargo lot, post office): the height at which a building
-    pencils; then every parcel in Berkeley (§8, the citywide pass: python scripts/v4/pencil_out.py --citywide)
+    pencils; then every parcel in Berkeley (§8, the citywide pass) and every parcel inside its zoning envelope (§9):
+    python scripts/v4/pencil_out.py --citywide --zoned  (one run writes both: citywide_zoned_<date>.csv)
 
 Machinery: scripts/v4/pencil_out.py (on scripts/v4/proforma_projects.py, JN-Feasibility Part 2). Assumptions:
 data/assumptions/pencil_out_<date>.yaml. Gate: data/baselines/pencil_out_baseline_<date>.json (first run writes it;
@@ -81,6 +82,10 @@ graph LR
   RENT --> HT
   PF --> V[verdicts + sensitivity]
   HT --> E[height curves]
+  ZL[City zoning layer<br/>+ fire hazard zones 2025] --> ZJ[parcel → district]
+  ZS[[zoning standards YAML<br/>BMC sections cited]] --> ENV[envelope: storeys · FAR · density]
+  ZJ --> ENV
+  ENV --> HT
   V --> GATE[baseline gate]
   E --> GATE
   V --> OUT[(results JSON)]
@@ -468,19 +473,21 @@ with a usable lot. Three inputs that §6 took per site become **per parcel and R
   **Tagged, not dropped:** tax-exempt parcels (UC, City, churches, nonprofits), City landmarks, and parcels with
   registered rental units (demolishing them brings replacement and relocation duties this model does not price).
 
-The run is machinery (`python scripts/v4/pencil_out.py --citywide`, ~13 minutes) writing
-`data/derived/pencil_out/citywide_<date>.csv` + `.meta.json`, stamped with the hashes of the assumptions file, v4 and
-the assessor roll. This cell **refuses** a file whose stamps don't match today's inputs.
+The run is machinery (`python scripts/v4/pencil_out.py --citywide --zoned`, ~30 minutes) writing
+`data/derived/pencil_out/citywide_zoned_<date>.csv` + `.meta.json` (this section's columns and §9's zoned `z_*` columns),
+stamped with the hashes of the assumptions file, v4, the assessor roll and the zoning inputs. This cell **refuses** a
+file whose stamps don't match today's inputs.
 """)
 code(r"""
 import glob, hashlib
-cw_files = sorted(glob.glob(str(ROOT / 'data' / 'derived' / 'pencil_out' / 'citywide_*.meta.json')))
+cw_files = sorted(glob.glob(str(ROOT / 'data' / 'derived' / 'pencil_out' / 'citywide_zoned_*.meta.json')))
 CWM = json.load(open(cw_files[-1]))
-now = dict(assumptions_sha=po._sha16(po.ASSUMPTIONS_FILE), v4_file_sha=po._sha16(po.pp.V4), assessor_sha=po._sha16(po.pp.ASSESSOR))
+now = dict(assumptions_sha=po._sha16(po.ASSUMPTIONS_FILE), v4_file_sha=po._sha16(po.pp.V4), assessor_sha=po._sha16(po.pp.ASSESSOR),
+           zoning_standards_sha=po._sha16(po.ZONING_STANDARDS), zoning_districts_sha=po._sha16(po.ZONING_DISTRICTS))
 stale = {k: (CWM[k], v) for k, v in now.items() if CWM[k] != v}
 if stale:
     raise AssertionError(f"citywide file {Path(cw_files[-1]).name} is STALE {stale} -- re-run "
-                         "`python scripts/v4/pencil_out.py --citywide`")
+                         "`python scripts/v4/pencil_out.py --citywide --zoned`")
 CW = pd.read_csv(cw_files[-1].replace('.meta.json', '.csv'))
 print(f"{Path(cw_files[-1]).name}: {len(CW):,} parcels; excluded {CWM['excluded']}; inputs match today's files")
 print(f"rent index: {CWM['rent_index']['tenancies']:,} market tenancies (2023+)")
@@ -534,8 +541,8 @@ differ less than the boxes' spread suggests: across the city the need sits in a 
 have the lowest median**, because their land basis is mostly market land and many sit in the higher-rent neighborhoods.
 (3) The **existing-use values lean low**: a 2024+ recorded document is not always a sale, and a stale assessment
 understates the price, which makes development look **easier** than it is. (4) Every parcel gets the same envelope
-(ground-floor retail, 75% upper coverage) and the same costs; **zoning, slope, fire zones and setbacks are not modeled**,
-so a hillside single-family lot is priced as if it could carry a 6-storey building.
+(ground-floor retail, 75% upper coverage) and the same costs; **zoning, slope, fire zones and setbacks are not modeled
+here** (§9 adds zoning and fire zones), so a hillside single-family lot is priced as if it could carry a 6-storey building.
 """)
 md(r"""
 📝 **Before.** The map: each parcel colored by the rent multiple its best building needs (base, in-lieu). Darker = closer
@@ -579,14 +586,156 @@ md(r"""
 3. **In the favorable case about half the parcels pencil, and that number should not be read as "potential sites".**
    Most are single-family lots in the higher-rent hill and north-side neighborhoods, and the lowest needs of all are on
    Panoramic Hill, the neighborhood with the highest rent index and among the least buildable land in the city. The model
-   has **no zoning, slope or fire-zone layer**, so it prices every lot as if a 6-storey building were allowed, and the
+   ignores **zoning, slope and fire zones** in this section, so it prices every lot as if a 6-storey building were allowed, and the
    favorable case stacks every helpful assumption at once (5% cap rate, low costs, +10% rents, corridor land at
    $149/sqft).
 
 **So the citywide answer to "how tall must it be?" matches Elmwood's:** at today's rents, costs and rates, no height
 pencils anywhere; height is not the binding constraint, the rent-to-cost ratio is, and taller (past the podium tier) makes
-it worse. **What's missing for a real "potential sites" list is a zoning layer** (allowed height and use per parcel, the
-fire zones, and slope), so the favorable-case set can be cut to lots where the building is actually permitted.
+it worse. §9 cuts the favorable-case set to what each parcel's zoning actually allows.
+""")
+# ------------------------------------------------------------------------------------------------ §9 zoned
+md(r"""
+## §9 — Zoned: the same search inside each parcel's zoning envelope
+
+📝 **Plan (John, 2026-10-25: "build the zoning lookup table and rerun the citywide pass").** §8 let every parcel build
+any height. Here each parcel stops at what its zoning allows.
+- **District** — the City's zoning layer (`Portal_Planning/MapServer/7`, 42 district polygons), joined by the point in
+  polygon of each parcel's assessor coordinates.
+- **Envelope** — `data/reference/berkeley_zoning_standards_2026-10-25.yaml`, one row per district with its BMC section
+  and the copy it was read from (RECORD): maximum height and storeys, FAR and density caps, lot coverage, and whether
+  the ground floor is homes (residential districts and residential-only envelopes) or the model's retail + lobby.
+  Use-permit height increases are recorded there but **not used**: this is the standard envelope.
+- **Two scenarios, as before.** *In-lieu fee*: the standard envelope. *On-site affordable*: the state density bonus for
+  10% very-low-income units (32.5%, Gov. Code 65915(f)) added as storeys and as a multiple of the FAR and density caps,
+  or the district's **own** bonus where it allows more (the Adeline Corridor's tier 2 for 14% affordable).
+- **Not permitted** — districts where multi-unit housing is not allowed (manufacturing, MU-LI, ES-R, green space,
+  unclassified/UC land, and the specific-plan and research districts whose standards were not read) leave the zoned
+  universe and are counted. **Fire hazard zones** (the City's 2025 Very High and High maps) are **tagged**, not excluded.
+""")
+code(r"""
+ZST, BONUS = po.zoning_standards()
+CW['residential_ok'] = CW.district.map(lambda d: bool(ZST.get(d, {}).get('residential')) if isinstance(d, str) else False)
+ZU = CW[CW.residential_ok].copy()
+print(f"zoned universe: {len(ZU):,} of {len(CW):,} parcels in districts that permit multi-unit housing")
+print('not permitted / no district:', CW[~CW.residential_ok].district.fillna('(no district)').value_counts().to_dict())
+print('fire hazard zone (2025):', CW.fire_zone.fillna('none').value_counts().to_dict())
+""")
+code(r"""
+def zsumm(df):
+    g = df.groupby('district')
+    out = g.agg(parcels=('key', 'size'), allowed_in_lieu=('z_in_lieu_allowed_storeys', 'first'),
+                allowed_on_site=('z_on_site_allowed_storeys', 'first'),
+                pencils_base=('z_in_lieu_base_break_even', lambda s: int(s.notna().sum())),
+                pencils_fav_in_lieu=('z_in_lieu_favorable_break_even', lambda s: int(s.notna().sum())),
+                pencils_fav_on_site=('z_on_site_favorable_break_even', lambda s: int(s.notna().sum())),
+                need_unzoned=('in_lieu_base_rent_needed', 'median'), need_zoned=('z_in_lieu_base_rent_needed', 'median'),
+                need_zoned_on_site=('z_on_site_base_rent_needed', 'median'))
+    return out.sort_values('parcels', ascending=False)
+ZS = zsumm(ZU)
+zcount = lambda col, df=ZU: int(df[col].notna().sum())
+print(ZS.round(2).to_string())
+print(f"\nALL zoned: pencils base in-lieu {zcount('z_in_lieu_base_break_even')}, base on-site {zcount('z_on_site_base_break_even')}, "
+      f"favorable in-lieu {zcount('z_in_lieu_favorable_break_even')}, favorable on-site {zcount('z_on_site_favorable_break_even')}; "
+      f"median need {ZU.z_in_lieu_base_rent_needed.median():.2f}x zoned vs {ZU.in_lieu_base_rent_needed.median():.2f}x unzoned")
+""")
+md(r"""
+📝 **Before.** For each district, the median rent multiple a parcel's best building needs: **unzoned** (§8, any height)
+against **zoned** (its envelope), in-lieu fee, base case. The gap between the two markers is what the zoning envelope
+costs. Bubble size = parcels.
+""")
+code(r"""
+zs = ZS[ZS.parcels >= 20].sort_values('need_zoned')
+fig = go.Figure()
+for _, r in zs.iterrows():
+    fig.add_trace(go.Scatter(x=[r.need_unzoned, r.need_zoned], y=[r.name, r.name], mode='lines',
+                             line=dict(color='#bbbbbb', width=2), showlegend=False, hoverinfo='skip'))
+fig.add_trace(go.Scatter(x=zs.need_unzoned, y=zs.index, mode='markers', name='unzoned (§8)',
+                         marker=dict(color='#8da0cb', size=9)))
+fig.add_trace(go.Scatter(x=zs.need_zoned, y=zs.index, mode='markers', name='inside the zoning envelope',
+                         marker=dict(color='#d95f02', size=(zs.parcels ** 0.5).clip(6, 30)),
+                         text=[f"{p:,} parcels · {int(a)} storeys allowed" for p, a in zip(zs.parcels, zs.allowed_in_lieu)],
+                         hovertemplate='%{y}: needs ×%{x:.2f} · %{text}<extra></extra>'))
+fig.add_vline(x=1.0, line_color='#c0504d', annotation_text="today's local rents")
+fig.update_layout(title='Median rent multiple needed to pencil, by zoning district (base, in-lieu)',
+                  xaxis_title="× today's local rents", template='plotly_white', height=640)
+fig.show()
+""")
+md(r"""
+📝 **After — what this could MISLEAD about.** (1) Medians hide the spread inside a district; a district's best parcels
+are in the table below. (2) Where the layer has no sub-area boundary the **lower** envelope is used (R-3 outside the
+Southside Plan, C-U Avenue not Node, C-SA outside Subarea One, C-AC's Adeline subareas), so those districts are
+understated. (3) R-4 comes from a 2025 consultant report, not the code. (4) Use-permit heights (downtown 75 ft, R-5
+65 ft) are not used.
+
+**Where the zoning allows the most, and what pencils there** (favorable case, either scenario):
+""")
+code(r"""
+zf = ZU[ZU.z_in_lieu_favorable_break_even.notna() | ZU.z_on_site_favorable_break_even.notna()].copy()
+zf['tag'] = zf.apply(TAGS, axis=1)
+print(f"{len(zf):,} parcels pencil inside their envelope in the favorable case; by district:",
+      zf.district.value_counts().to_dict())
+print('  by fire zone:', zf.fire_zone.fillna('none').value_counts().to_dict(), '| by tag:', zf.tag.value_counts().to_dict())
+cols = ['name', 'district', 'neighborhood', 'lot_sf', 'tag', 'fire_zone', 'z_in_lieu_allowed_storeys',
+        'z_in_lieu_favorable_break_even', 'z_on_site_favorable_break_even', 'z_in_lieu_base_rent_needed', 'z_in_lieu_base_best_units']
+print(zf.sort_values('z_in_lieu_base_rent_needed')[cols].head(25).to_string(index=False))
+""")
+md(r"""
+📝 **Before.** The map of the zoned universe: each parcel colored by the rent multiple its best **permitted** building
+needs (base, in-lieu). Grey = multi-unit housing not permitted.
+""")
+code(r"""
+m = CW.dropna(subset=['lat', 'lon']).copy()
+no = m[~m.residential_ok]
+ok = m[m.residential_ok].copy()
+ok['need'] = ok.z_in_lieu_base_rent_needed.clip(upper=4)
+fig = go.Figure()
+fig.add_trace(go.Scattermap(lat=no.lat, lon=no.lon, mode='markers', marker=dict(size=3, color='#cccccc'),
+                            name='not permitted', hoverinfo='skip'))
+fig.add_trace(go.Scattermap(lat=ok.lat, lon=ok.lon, mode='markers', name='zoned universe',
+    marker=dict(size=4, color=ok.need, colorscale='Viridis_r', cmin=1.5, cmax=4, colorbar=dict(title='× rents')),
+    text=ok.name + ' · ' + ok.district + ' · ' + ok.z_in_lieu_allowed_storeys.astype('Int64').astype(str) + ' storeys allowed',
+    hovertemplate='%{text}<br>needs ×%{marker.color:.2f} today\'s local rents<extra></extra>'))
+fig.update_layout(map=dict(style='open-street-map', center=dict(lat=37.87, lon=-122.27), zoom=12.2), height=650,
+                  margin=dict(l=0, r=0, t=40, b=0),
+                  title='Inside the zoning envelope: rent multiple needed to pencil (base, in-lieu; clipped 1.5–4)')
+fig.show()
+""")
+md(r"""
+📝 **After — what this could MISLEAD about.** The scale starts at 1.5×, so the darkest dots are the closest, not "pencils".
+A parcel inside a fire hazard zone is shown like any other; the table above carries the tag.
+""")
+md(r"""
+📝 **Found — zoned.** Four results.
+1. **Still nothing pencils at base, in any district, under either scenario.** Zoning makes the gap wider, not narrower:
+   the median parcel's best permitted building needs about **2.2× today's local rents**, against about 1.9× when any
+   height was allowed (§8). Across most of the city the envelope is **3 storeys** (the Middle Housing districts R-1,
+   R-2, R-2A and their hillside versions hold three quarters of the zoned universe), below the 6-storey podium building
+   §8 found to be the cheapest per unit of rent.
+2. **Where zoning allows height, it isn't what binds.** In the Southside districts (R-SMU, C-T up to 85 ft; R-S 55 ft)
+   the envelope reaches or passes the 6-storey optimum, and the need there is the same as unzoned, about 2×. Height was
+   never the constraint in those places; the rent-to-cost ratio is.
+3. **The density bonus helps only where the base envelope is tiny.** In most districts the on-site scenario needs
+   **more** rent than paying the in-lieu fee, even with the bonus storey: the 20% affordable units cost more than the
+   extra market units earn. It needs less only where the base envelope is very small: Solano (2 storeys), the West
+   Berkeley MU-R (FAR 1.5 and a density cap), and the Adeline Corridor, where the City's own tier-2 bonus (14%
+   affordable → 5 storeys) beats the state bonus. That answers the earlier question with this model's numbers:
+   zoning low and letting the bonus do the work produces a building only where the bonus envelope pencils, and at
+   today's rents none does.
+4. **The favorable-case set shrinks from about half the city to about 2,100 parcels**, and its character doesn't change:
+   mostly single-family and 2–4-unit lots in R-1, R-2 and R-1H, where a 3-storey Middle Housing building of a handful of
+   units would pencil only with every assumption at its helpful end. **Roughly 4 in 10 of them sit in a 2025 High or
+   Very High fire hazard zone.** Corridor commercial parcels almost vanish from the set: their 2–3 storey envelopes
+   (C-E, C-NS, C-SO, C-U Avenue, C-AC tier 1) need 2.3–3.9× rents.
+
+**So, "how tall must it be, and is that allowed?"** The cheapest building per unit of rent is the 6-storey podium
+building; most of Berkeley allows 3 storeys, and the places that allow 6+ (Southside, downtown at 60 ft) still need
+about twice today's rents. Neither upzoning nor the bonus closes that gap alone; it moves only with rents, costs, rates
+or subsidy.
+
+**What the table can't see yet** (each would raise some districts' envelopes): the Southside, C-U node, C-SA Subarea One
+and Adeline South Shattuck boundaries; use-permit heights; the state laws that override local height on qualifying
+sites (AB 2011 on commercial corridors, SB 79 near transit, SB 35/423); and the R-4 section, read from a secondary source.
 """)
 
 # ------------------------------------------------------------------------------------------------ §7 results + gate
@@ -619,6 +768,13 @@ FIG = {
     'citywide_pencils_favorable_on_site': count('on_site_favorable_break_even'),
     'citywide_median_rent_needed': round(float(CW.in_lieu_base_rent_needed.median()), 3),
     'citywide_best_storeys_mode': int(CW.in_lieu_base_best_storeys.mode()[0]),
+    'zoned_universe': int(len(ZU)), 'zoned_not_permitted': int((~CW.residential_ok).sum()),
+    'zoned_pencils_base_in_lieu': zcount('z_in_lieu_base_break_even'), 'zoned_pencils_base_on_site': zcount('z_on_site_base_break_even'),
+    'zoned_pencils_favorable_in_lieu': zcount('z_in_lieu_favorable_break_even'),
+    'zoned_pencils_favorable_on_site': zcount('z_on_site_favorable_break_even'),
+    'zoned_median_rent_needed': round(float(ZU.z_in_lieu_base_rent_needed.median()), 3),
+    'zoned_median_rent_needed_on_site': round(float(ZU.z_on_site_base_rent_needed.median()), 3),
+    'fire_zone_parcels': CW.fire_zone.fillna('none').value_counts().to_dict(),
 }
 FIG['elmwood_break_even_base'] = {r['site'] + '|' + r['fee_mode']: r['break_even_storeys']
                                   for r in RUN['results'] if r['scenario'] == 'base'}
@@ -627,6 +783,7 @@ with open(po.pp.V4, 'rb') as f_:
     for b_ in iter(lambda: f_.read(1 << 20), b''): h.update(b_)
 meta = {'as_of': date.today().isoformat(), 'v4_file_sha': h.hexdigest()[:16],
         'assumptions': po.ASSUMPTIONS_FILE.name, 'record_inputs': po.RECORD_INPUTS.name,
+        'zoning_standards': po.ZONING_STANDARDS.name,
         'export_generated': EXP['meta']['generated'],
         'git': subprocess.run(['git', '-C', str(ROOT), 'rev-parse', '--short', 'HEAD'], capture_output=True, text=True).stdout.strip(),
         'figures': FIG}

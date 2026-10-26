@@ -117,8 +117,10 @@ def rents():
         for fp in rd["floor_plans"]:
             if str(fp.get("rent_basis", "")).startswith("per bed") and fp.get("rent"):
                 beds.append(fp["rent"])
-    return dict(pool_rent={k: float(v) for k, v in r["pool_rent"].items()},
-                pool_mix={k: float(v) for k, v in r["pool_mix"].items()},
+    # sorted by bedrooms: Part 2's pool comes out in set order, which changes with the process's hash seed, and the
+    # largest-remainder ties in mix_units / _spread then gave a different on-site result on each run (found 2026-10-25)
+    return dict(pool_rent={k: float(r["pool_rent"][k]) for k in sorted(r["pool_rent"])},
+                pool_mix={k: float(r["pool_mix"][k]) for k in sorted(r["pool_mix"])},
                 lease_ups=len(r["market"]), per_bed=st.median(beds) if beds else None, per_bed_n=len(beds))
 
 
@@ -202,14 +204,29 @@ def mix_units(net_sf: float, R) -> dict:
     return out
 
 
-def site_building(site, storeys, s, R, fee_mode="in_lieu"):
-    """a hypothetical building of `storeys` on a site: ground floor retail + lobby, residential above."""
+def site_building(site, storeys, s, R, fee_mode="in_lieu", env=None):
+    """a hypothetical building of `storeys` on a site: ground floor retail + lobby, residential above.
+    env (the zoned pass, allowed_envelope): a residential ground floor and the district's lot coverage where the
+    envelope is residential-only, and its FAR and density caps -- floor area beyond a cap is not built."""
     lot = site["lot_sf"]
-    ground = lot * s["cov_ground"]
-    retail = ground * s["retail_share"]
-    res_gross = lot * s["cov_upper"] * (storeys - 1)
+    if env and env.get("ground") == "residential":
+        cov = env.get("lot_coverage") or s["cov_upper"]
+        ground = retail = 0.0
+        res_gross = lot * cov * storeys
+    else:
+        ground = lot * s["cov_ground"]
+        retail = ground * s["retail_share"]
+        res_gross = lot * s["cov_upper"] * (storeys - 1)
+    if env and env.get("far"):
+        res_gross = min(res_gross, max(0.0, env["far"] * lot - ground))
     net = res_gross * s["efficiency"]
     mix = mix_units(net, R)
+    if env and env.get("du_ac") and sum(mix.values()) > int(env["du_ac"] * lot / 43560):
+        cap = int(env["du_ac"] * lot / 43560)          # the density cap: fewer units, and the floor area they need
+        avg = sum(R["pool_mix"][b] * A["unit_size_sf"]["by_bedrooms"][b] for b in R["pool_mix"])
+        net = (cap + 1e-9) * avg
+        res_gross = net / s["efficiency"]
+        mix = mix_units(net, R)
     affordable = None
     if fee_mode == "on_site":                          # 20% of units on site: half VLI, half LI (rent capped at 60% AMI)
         k = math.ceil(A["berkeley_fees"]["on_site_share"] * sum(mix.values()))
@@ -242,14 +259,15 @@ def land_basis(site, s):
     return dict(market=market, euv=euv, basis=max(market, euv), binding="existing use" if euv > market else "market land")
 
 
-def break_even(site, s, R, fee_mode="in_lieu"):
+def break_even(site, s, R, fee_mode="in_lieu", env=None):
     """every height in the search range: RLV vs land basis, the rent multiplier that would make it pencil; and the lowest
-    height that pencils (None if none does)."""
+    height that pencils (None if none does). With env (the zoned pass) the heights stop at the envelope's storeys."""
     hs = A["height_search"]
     lb = land_basis(site, s)
+    top = min(hs["max_storeys"], env["storeys"]) if env else hs["max_storeys"]
     rows = []
-    for n in range(hs["min_storeys"], hs["max_storeys"] + 1):
-        b = site_building(site, n, s, R, fee_mode)
+    for n in range(min(hs["min_storeys"], top), top + 1):
+        b = site_building(site, n, s, R, fee_mode, env)
         # the rent multiplier at which RLV = land basis (NOI is linear in market rent; costs do not depend on rent)
         need = (((lb["basis"] + b["cost_ex_land"]) * b["hurdle"] - b["other_noi"]) / (b["market_noi"] / s["rent_mult"])
                 if b["market_noi"] > 0 else float("inf"))         # no market units fit: no rent can make it pencil
@@ -640,14 +658,21 @@ def attach_citywide(sites, idx, rates):
     return sites
 
 
-def citywide_site_result(site, R, scen, fee_modes=("in_lieu", "on_site")):
+def citywide_site_result(site, R, scen, fee_modes=("in_lieu", "on_site"), zoning=None):
     """one parcel: per fee mode and scenario, the lowest height that pencils, and the best height (the lowest rent
-    multiple needed) with its units, tier, rent multiple and surplus. Rows are not kept (24k parcels x 11 heights)."""
+    multiple needed) with its units, tier, rent multiple and surplus. Rows are not kept (24k parcels x 11 heights).
+    zoning (the zoned pass, zoning_standards()): the same again inside the district's envelope, as z_* columns."""
     out = dict(key=site["key"], name=site["name"], bucket=site["bucket"], neighborhood=site["neighborhood"],
                lot_sf=site["lot_sf"], building_sf=site["building_sf"], exempt=site["exempt"], landmark=site["landmark"],
                rental_units=site["rental_units"], rent_factor=round(site["rent_factor"], 4), lat=site["lat"],
                lon=site["lon"], euv_basis=site["euv_basis"])
+    if zoning:
+        out.update(district=site.get("district"), fire_zone=site.get("fire_zone"))
     for fm in fee_modes:
+        env = allowed_envelope(zoning[0].get(site.get("district")), fm, zoning[1]) if zoning else None
+        if zoning:
+            out[f"z_{fm}_allowed_storeys"] = env["storeys"] if env else None
+            out[f"z_{fm}_envelope"] = env["basis"] if env else None
         for sc, s in scen.items():
             be = break_even(site, s, R, fm)
             best = min(be["rows"], key=lambda x: x["rent_mult_needed"])
@@ -660,22 +685,121 @@ def citywide_site_result(site, R, scen, fee_modes=("in_lieu", "on_site")):
                 out[f"{tag}_land_basis"] = round(be["land"]["basis"])
                 out[f"{tag}_binding"] = be["land"]["binding"]
                 out[f"{tag}_best_tier"] = best["tier"]
+            if zoning:
+                zb = break_even(site, s, R, fm, env) if env else None
+                zbest = min(zb["rows"], key=lambda x: x["rent_mult_needed"]) if zb else None
+                out[f"z_{tag}_break_even"] = zb["break_even_storeys"] if zb else None
+                out[f"z_{tag}_best_storeys"] = zbest["storeys"] if zb else None
+                out[f"z_{tag}_best_units"] = zbest["units"] if zb else None
+                out[f"z_{tag}_rent_needed"] = round(zbest["rent_mult_needed"], 4) if zb else None
     return out
 
 
-def run_citywide(fee_modes=("in_lieu", "on_site"), limit=None, progress=None):
+def run_citywide(fee_modes=("in_lieu", "on_site"), limit=None, progress=None, zoned=False):
     sites, excluded = parcel_universe()
     idx, rates = rent_index(sites), euv_rates(sites)
     attach_citywide(sites, idx, rates)
+    zoning = None
+    if zoned:
+        zoning = zoning_standards()
+        attach_zoning(sites)
     R = rents()
     scen = {sc: scenario(sc) for sc in SCENARIOS}
     res = []
     for i, s in enumerate(sites[:limit] if limit else sites):
-        res.append(citywide_site_result(s, R, scen, fee_modes))
+        res.append(citywide_site_result(s, R, scen, fee_modes, zoning))
         if progress and i % progress == 0:
             print(f"  {i:,}/{len(sites):,}", flush=True)
     return dict(results=res, excluded=dict(excluded), rent_index=idx,
                 euv_rates={f"{k[0]}|{k[1]}": v for k, v in rates.items()}, rents=R, universe=len(sites))
+
+
+# ---------------------------------------------------------------------------------- part D: the zoned citywide pass
+# John, 2026-10-25: "build the zoning lookup table and rerun the citywide pass". The citywide pass above prices every
+# parcel as if any height were allowed; this one stops each parcel at its district's envelope (RECORD: the zoning
+# layer + data/reference/berkeley_zoning_standards_<date>.yaml, every row citing its BMC section). The in-lieu scenario
+# builds the standard envelope; the on-site scenario adds the state density bonus (or the district's local bonus where
+# it is larger). Fire hazard zones are TAGGED, not excluded.
+ZONING_STANDARDS = ROOT / "data/reference/berkeley_zoning_standards_2026-10-25.yaml"
+ZONING_DISTRICTS = ROOT / "data/reference/berkeley_zoning_districts_2026-10-25.geojson"
+FIRE_ZONES = (("very_high", ROOT / "data/reference/berkeley_fhsz_very_high_2025.geojson"),
+              ("high", ROOT / "data/reference/berkeley_fhsz_high_2025.geojson"))
+
+
+def _xy(coords):
+    """GeoJSON coordinates without the z / m values the City's layers write ([x, y, 0, null])."""
+    if coords and isinstance(coords[0], (int, float)):
+        return coords[:2]
+    return [_xy(c) for c in coords]
+
+
+class _Polys:
+    """a GeoJSON layer with a point lookup -> the `field` of the polygon containing the point (True if no field)."""
+    def __init__(self, path, field=None):
+        from shapely.geometry import shape, Point
+        from shapely.strtree import STRtree
+        g = json.load(open(path))
+        self.vals = [f["properties"].get(field) if field else True for f in g["features"]]
+        self.geoms = [shape(dict(type=f["geometry"]["type"], coordinates=_xy(f["geometry"]["coordinates"])))
+                      for f in g["features"]]
+        self.tree, self.Point = STRtree(self.geoms), Point
+
+    def of(self, lat, lon):
+        if lat is None or lon is None:
+            return None
+        p = self.Point(lon, lat)
+        for i in self.tree.query(p):
+            if self.geoms[i].contains(p):
+                return self.vals[i]
+        return None
+
+
+def zoning_standards(path=ZONING_STANDARDS):
+    """(district code -> standards row, the state density bonus) from the reference YAML."""
+    import yaml
+    z = yaml.safe_load(open(path))
+    return {r["district"]: r for r in z["districts"]}, z["state_density_bonus"]
+
+
+def storeys_under(ft: float) -> int:
+    """the most storeys whose height (the assumptions file's floor-to-floor) fits under `ft`."""
+    n = 1
+    while height_ft(n + 1) <= ft:
+        n += 1
+    return n
+
+
+def allowed_envelope(row, fee_mode, bonus):
+    """the envelope a district allows: storeys, FAR cap, density cap, ground floor and coverage; None where multi-unit
+    housing is not permitted. on_site: the state bonus (storeys by the YAML's rule, caps x (1 + share)) or the
+    district's local bonus where it allows more storeys."""
+    if not row or not row["residential"]:
+        return None
+    caps = [x for x in (row["max_storeys"], storeys_under(row["max_height_ft"]) if row["max_height_ft"] else None) if x]
+    env = dict(storeys=min(caps), far=row["far_max"], du_ac=row["density_max"], ground=row.get("ground"),
+               lot_coverage=row.get("lot_coverage"), basis=f"{row['district']} standard")
+    if fee_mode != "on_site":
+        return env
+    m = 1 + bonus["bonus_share"]
+    state = dict(env, storeys=round(env["storeys"] * m), far=env["far"] and env["far"] * m,
+                 du_ac=env["du_ac"] and env["du_ac"] * m, basis=f"{row['district']} + state bonus {bonus['bonus_share']:.1%}")
+    lb = row.get("local_bonus")
+    if lb and A["berkeley_fees"]["on_site_share"] >= lb["min_affordable_share"]:
+        local = dict(env, storeys=min(lb["max_storeys"], storeys_under(lb["max_height_ft"])), far=lb["far_max"],
+                     du_ac=lb["density_max"], basis=f"{row['district']} + {lb['name']}")
+        if local["storeys"] > state["storeys"]:
+            return local
+    return state
+
+
+def attach_zoning(sites):
+    """per site: the zoning district its point falls in, and the 2025 City fire hazard zone (very_high / high / None)."""
+    zd = _Polys(ZONING_DISTRICTS, "ZONECLASS")
+    fire = [(name, _Polys(path)) for name, path in FIRE_ZONES]
+    for s in sites:
+        s["district"] = zd.of(s["lat"], s["lon"])
+        s["fire_zone"] = next((name for name, p in fire if p.of(s["lat"], s["lon"])), None)
+    return sites
 
 
 def _sha16(path) -> str:
@@ -687,24 +811,30 @@ def _sha16(path) -> str:
     return h.hexdigest()[:16]
 
 
-def write_citywide(out_dir=ROOT / "data/derived/pencil_out"):
+def write_citywide(out_dir=ROOT / "data/derived/pencil_out", zoned=False):
     """run the citywide pass and write citywide_<date>.csv (one row per parcel) + citywide_<date>.meta.json (inputs'
-    hashes, exclusions, the rent index, the existing-use rates). JN-O reads these and refuses a stale pair."""
+    hashes, exclusions, the rent index, the existing-use rates). JN-O reads these and refuses a stale pair.
+    zoned: citywide_zoned_<date>.* -- the same columns plus the z_* (zoned) columns, and the zoning inputs' hashes."""
     from datetime import date
-    r = run_citywide(progress=2000)
+    r = run_citywide(progress=2000, zoned=zoned)
     day = date.today().isoformat()
+    stem = f"citywide_zoned_{day}" if zoned else f"citywide_{day}"
     rows = r.pop("results")
-    with open(out_dir / f"citywide_{day}.csv", "w", newline="") as f:
+    with open(out_dir / f"{stem}.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0]))
         w.writeheader()
         w.writerows(rows)
     meta = dict(as_of=day, parcels=len(rows), assumptions=ASSUMPTIONS_FILE.name, assumptions_sha=_sha16(ASSUMPTIONS_FILE),
                 v4_file_sha=_sha16(pp.V4), assessor_sha=_sha16(pp.ASSESSOR), **{k: v for k, v in r.items() if k != "rents"},
                 rents=dict(pool_rent=r["rents"]["pool_rent"], pool_mix=r["rents"]["pool_mix"], lease_ups=r["rents"]["lease_ups"]))
-    json.dump(meta, open(out_dir / f"citywide_{day}.meta.json", "w"), indent=1, default=str)
-    print(f"wrote citywide_{day}.csv ({len(rows):,} parcels) + meta")
+    if zoned:
+        meta.update(zoning_standards=ZONING_STANDARDS.name, zoning_standards_sha=_sha16(ZONING_STANDARDS),
+                    zoning_districts_sha=_sha16(ZONING_DISTRICTS),
+                    fire_zones_sha={name: _sha16(path) for name, path in FIRE_ZONES})
+    json.dump(meta, open(out_dir / f"{stem}.meta.json", "w"), indent=1, default=str)
+    print(f"wrote {stem}.csv ({len(rows):,} parcels) + meta")
 
 
 if __name__ == "__main__":
     if "--citywide" in sys.argv:
-        write_citywide()
+        write_citywide(zoned="--zoned" in sys.argv)

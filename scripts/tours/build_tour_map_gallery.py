@@ -19,7 +19,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 TL = ROOT / "docs/tours/streetview"
 OUT = ROOT / "docs/tours/index.html"
 PLAY_ALL = ROOT / "docs/tours/play-all.html"
-R2_VIDEOS = "https://pub-2cee87f70da64080ab70ee0a34b55099.r2.dev/videos"
+R2_VIDEOS = "https://docs.berkeleybuild.com/videos"
 # tours with both encodes uploaded to R2 videos/ (keys <id>-1080.mp4, <id>-720.mp4)
 ON_R2 = {"bancroft-e2w", "telegraph-s2n", "uc-dormitories", "shattuck-s2n-path", "university-880-uc", "durant-w2e",
          "san-pablo-n2s", "elmwood-orbit", "panoramic-kennedy-legacy-slow20",

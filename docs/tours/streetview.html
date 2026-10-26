@@ -233,7 +233,7 @@ function tick() {
 }
 // The video plays from our own copy on R2 at full quality (a YouTube embed opens on Auto, often 240p);
 // player wraps the <video> in the two calls tick() uses. If R2 fails, the YouTube embed takes over.
-const R2_VIDEOS = "https://pub-2cee87f70da64080ab70ee0a34b55099.r2.dev/videos";
+const R2_VIDEOS = "https://docs.berkeleybuild.com/videos";
 let tourData = null;
 function onPlaying() { const p = at(player.getCurrentTime()), g = p && lookSpot(p); if (g) showStreetView(g, true); }
 function r2Player(d) {

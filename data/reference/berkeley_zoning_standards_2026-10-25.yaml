@@ -7,7 +7,7 @@
 # data/reference/berkeley_zoning_districts_2026-10-25.geojson.
 #
 # How the pencil-out uses a row (scripts/v4/pencil_out.py, allowed_envelope):
-#   storeys      = min(max_storeys, the storeys that fit under max_height_ft at the assumptions file's floor-to-floor)
+#   stories      = min(max_stories, the stories that fit under max_height_ft at the assumptions file's floor-to-floor)
 #   far_max      = cap on gross floor area / lot area (null = no cap)
 #   density_max  = cap on dwelling units per acre (null = no cap)
 #   residential  = false -> the parcel is out of the zoned universe (multi-unit housing not permitted)
@@ -15,7 +15,7 @@
 # and says so in `note`; the model does not pick between them.
 #   ground       = 'residential' -> the ground floor is homes (residential districts and residential-only envelopes);
 #                  absent -> the model's default ground floor (retail + lobby) and its default coverages
-#   lot_coverage = the district's maximum lot coverage for the envelope's storeys (null = the model's default)
+#   lot_coverage = the district's maximum lot coverage for the envelope's stories (null = the model's default)
 # Use-permit (discretionary) height increases are recorded but NOT used: the zoned pass is the standard envelope.
 
 version: 2026-10-25
@@ -26,108 +26,108 @@ state_density_bonus:
   # The pencil-out's on-site scenario is 20% affordable, half VLI and half LI = 10% VLI of total units.
   bonus_share: 0.325
   source: "Cal. Gov. Code 65915(f)(2) (AB 2345, 2020): VLI 10% -> 32.5% density bonus"
-  # ASSUMPTION: waivers (65915(e)) grant the height needed to fit the bonus units, so the bonus adds storeys:
-  # allowed storeys = round(base storeys x (1 + bonus_share)); FAR and density caps are multiplied by (1 + bonus_share).
-  storeys_rule: round
-  label: "ASSUMPTION (waiver height = the bonus floor area stacked as storeys)"
+  # ASSUMPTION: waivers (65915(e)) grant the height needed to fit the bonus units, so the bonus adds stories:
+  # allowed stories = round(base stories x (1 + bonus_share)); FAR and density caps are multiplied by (1 + bonus_share).
+  stories_rule: round
+  label: "ASSUMPTION (waiver height = the bonus floor area stacked as stories)"
 
 # A district's local bonus, where the code has one, replaces the state bonus in the on-site scenario if it is larger.
 districts:
-  - {district: R-1,   residential: true, ground: residential, lot_coverage: 0.6,  permit: ZC, max_height_ft: 35, max_storeys: 3, far_max: null, density_max: 70, density_min: 10,
+  - {district: R-1,   residential: true, ground: residential, lot_coverage: 0.6,  permit: ZC, max_height_ft: 35, max_stories: 3, far_max: null, density_max: 70, density_min: 10,
      source: "BMC 23.202.050 Table 23.202-2; Ord. 8007-N.S. s.1-2 (Middle Housing: multi-unit by ZC)", copy: "Wayback 2025-12-24 (through Ord. 7978-N.S.); Ord. 8007 PDF", confidence: high,
      note: "22 ft within 15 ft of rear line; 60% lot coverage"}
-  - {district: R-2,   residential: true, ground: residential, lot_coverage: 0.6,  permit: ZC, max_height_ft: 35, max_storeys: 3, far_max: null, density_max: 70, density_min: 10,
+  - {district: R-2,   residential: true, ground: residential, lot_coverage: 0.6,  permit: ZC, max_height_ft: 35, max_stories: 3, far_max: null, density_max: 70, density_min: 10,
      source: "BMC 23.202.080 Table 23.202-5; Ord. 8007-N.S. s.3", copy: "Wayback 2025-12-25; Ord. 8007 PDF", confidence: high, note: "60% lot coverage"}
-  - {district: R-2A,  residential: true, ground: residential, lot_coverage: 0.6,  permit: ZC, max_height_ft: 35, max_storeys: 3, far_max: null, density_max: 70, density_min: 20,
+  - {district: R-2A,  residential: true, ground: residential, lot_coverage: 0.6,  permit: ZC, max_height_ft: 35, max_stories: 3, far_max: null, density_max: 70, density_min: 20,
      source: "BMC 23.202.090 Table 23.202-9 per Ord. 8007-N.S. s.4; Middle Housing tabulation form 2025-10-27", copy: "Ord. 8007 PDF; City form", confidence: high, note: "60% lot coverage"}
-  - {district: R-1H,  residential: true, ground: residential, lot_coverage: 0.6,  permit: ZC, max_height_ft: 35, max_storeys: 3, far_max: null, density_max: 70, density_min: 10,
+  - {district: R-1H,  residential: true, ground: residential, lot_coverage: 0.6,  permit: ZC, max_height_ft: 35, max_stories: 3, far_max: null, density_max: 70, density_min: 10,
      source: "BMC 23.202.050 (hillside table) + 23.210.020 Hillside Overlay", copy: "Wayback 2025-12-24", confidence: medium,
-     note: "hillside: average 28 ft and 3 storeys, maximum 35 ft"}
-  - {district: R-2H,  residential: true, ground: residential, lot_coverage: 0.6,  permit: ZC, max_height_ft: 35, max_storeys: 3, far_max: null, density_max: 70, density_min: 10,
-     source: "BMC 23.202.080 (hillside table) + 23.210.020", copy: "Wayback 2025-12-25", confidence: medium, note: "hillside: average 28 ft and 3 storeys, maximum 35 ft"}
-  - {district: R-2AH, residential: true, ground: residential, lot_coverage: 0.6,  permit: ZC, max_height_ft: 35, max_storeys: 3, far_max: null, density_max: 70, density_min: 20,
+     note: "hillside: average 28 ft and 3 stories, maximum 35 ft"}
+  - {district: R-2H,  residential: true, ground: residential, lot_coverage: 0.6,  permit: ZC, max_height_ft: 35, max_stories: 3, far_max: null, density_max: 70, density_min: 10,
+     source: "BMC 23.202.080 (hillside table) + 23.210.020", copy: "Wayback 2025-12-25", confidence: medium, note: "hillside: average 28 ft and 3 stories, maximum 35 ft"}
+  - {district: R-2AH, residential: true, ground: residential, lot_coverage: 0.6,  permit: ZC, max_height_ft: 35, max_stories: 3, far_max: null, density_max: 70, density_min: 20,
      source: "BMC 23.202.090 + 23.210.020", copy: "Ord. 8007 PDF", confidence: medium, note: "hillside standards inferred from R-1H/R-2H"}
-  - {district: ES-R,  residential: false, ground: residential, lot_coverage: 0.3, permit: NP, max_height_ft: 24, max_storeys: 2, far_max: 0.3, density_max: null, density_min: null,
+  - {district: ES-R,  residential: false, ground: residential, lot_coverage: 0.3, permit: NP, max_height_ft: 24, max_stories: 2, far_max: 0.3, density_max: null, density_min: null,
      source: "BMC 23.202.070 Table 23.202-4; Table 23.202-1 (multi-family NP)", copy: "Wayback 2024-12-25 (through Ord. 7933-N.S.)", confidence: high,
      note: "Environmental Safety-Residential (Panoramic Hill): single-family only, 25,000 sf new lots"}
-  - {district: R-3,   residential: true, ground: residential, lot_coverage: 0.4,  permit: UP(PH), max_height_ft: 35, max_storeys: 3, far_max: null, density_max: null, density_min: null,
+  - {district: R-3,   residential: true, ground: residential, lot_coverage: 0.4,  permit: UP(PH), max_height_ft: 35, max_stories: 3, far_max: null, density_max: null, density_min: null,
      source: "BMC 23.202.100 Table 23.202-11 per Ord. 7995-N.S. s.5", copy: "Ord. 7995 PDF (adopted 2025-12-02)", confidence: medium,
      note: "OUTSIDE the Southside Plan. Inside: 45 ft, FAR 3.0, min 60 du/ac -- the layer has no Southside boundary, so every R-3 parcel gets the outside envelope (understates Southside R-3)"}
-  - {district: R-3H,  residential: true, ground: residential, lot_coverage: 0.4,  permit: UP(PH), max_height_ft: 35, max_storeys: 3, far_max: null, density_max: null, density_min: null,
+  - {district: R-3H,  residential: true, ground: residential, lot_coverage: 0.4,  permit: UP(PH), max_height_ft: 35, max_stories: 3, far_max: null, density_max: null, density_min: null,
      source: "BMC 23.202.100 + 23.210.020", copy: "Ord. 7995 PDF", confidence: medium, note: "as R-3 outside Southside"}
-  - {district: R-4,   residential: true, ground: residential, lot_coverage: null,  permit: UP(PH), max_height_ft: 35, max_storeys: 3, far_max: null, density_max: null, density_min: null,
+  - {district: R-4,   residential: true, ground: residential, lot_coverage: null,  permit: UP(PH), max_height_ft: 35, max_stories: 3, far_max: null, density_max: null, density_min: null,
      source: "Corridors Existing Conditions Report (Raimi + Assoc., 2025-03-05) Table 5, via docs/audit/2026-08-12_czu_zoning_extract.md", copy: "SECONDARY: BMC 23.202.110 has no Wayback copy", confidence: low,
-     note: "3 storeys, no density or FAR cap per the 2025 report; 35 ft assumed from the 3-storey limit; any use-permit height not known"}
-  - {district: R-4H,  residential: true, ground: residential, lot_coverage: null,  permit: UP(PH), max_height_ft: 35, max_storeys: 3, far_max: null, density_max: null, density_min: null,
+     note: "3 stories, no density or FAR cap per the 2025 report; 35 ft assumed from the 3-story limit; any use-permit height not known"}
+  - {district: R-4H,  residential: true, ground: residential, lot_coverage: null,  permit: UP(PH), max_height_ft: 35, max_stories: 3, far_max: null, density_max: null, density_min: null,
      source: "as R-4", copy: "SECONDARY", confidence: low, note: "as R-4"}
-  - {district: R-5,   residential: true, ground: residential, lot_coverage: 0.45,  permit: UP(PH), max_height_ft: 40, max_storeys: 4, far_max: null, density_max: null, density_min: null,
+  - {district: R-5,   residential: true, ground: residential, lot_coverage: 0.45,  permit: UP(PH), max_height_ft: 40, max_stories: 4, far_max: null, density_max: null, density_min: null,
      source: "BMC 23.202.120 Table 23.202-15", copy: "Wayback 2026 capture (through Ord. 7910-N.S.)", confidence: high,
-     note: "average 40 ft and 4 storeys; 65 ft and 6 storeys with a Use Permit (not used). 40 ft fits 3 storeys at 15/10 ft floor-to-floor"}
-  - {district: R-5H,  residential: true, ground: residential, lot_coverage: 0.45,  permit: UP(PH), max_height_ft: 40, max_storeys: 4, far_max: null, density_max: null, density_min: null,
+     note: "average 40 ft and 4 stories; 65 ft and 6 stories with a Use Permit (not used). 40 ft fits 3 stories at 15/10 ft floor-to-floor"}
+  - {district: R-5H,  residential: true, ground: residential, lot_coverage: 0.45,  permit: UP(PH), max_height_ft: 40, max_stories: 4, far_max: null, density_max: null, density_min: null,
      source: "BMC 23.202.120 + 23.210.020", copy: "Wayback", confidence: medium, note: "as R-5"}
-  - {district: R-S,   residential: true, ground: residential, lot_coverage: null,  permit: UP(PH), max_height_ft: 55, max_storeys: null, far_max: 4.0, density_max: null, density_min: 100,
+  - {district: R-S,   residential: true, ground: residential, lot_coverage: null,  permit: UP(PH), max_height_ft: 55, max_stories: null, far_max: 4.0, density_max: null, density_min: 100,
      source: "BMC 23.202.130 Table 23.202-18", copy: "Wayback (through Ord. 7897-N.S., 2024-02-13)", confidence: high, note: "Southside"}
-  - {district: R-SH,  residential: true, ground: residential, lot_coverage: null,  permit: UP(PH), max_height_ft: 55, max_storeys: null, far_max: 4.0, density_max: null, density_min: 100,
+  - {district: R-SH,  residential: true, ground: residential, lot_coverage: null,  permit: UP(PH), max_height_ft: 55, max_stories: null, far_max: 4.0, density_max: null, density_min: 100,
      source: "BMC 23.202.130 + 23.210.020", copy: "Wayback", confidence: medium, note: "as R-S"}
-  - {district: R-SMU, residential: true,  permit: UP(PH), max_height_ft: 85, max_storeys: null, far_max: 7.0, density_max: null, density_min: 150,
+  - {district: R-SMU, residential: true,  permit: UP(PH), max_height_ft: 85, max_stories: null, far_max: 7.0, density_max: null, density_min: 150,
      source: "BMC 23.202.140 Table 23.202-21", copy: "Wayback 2026-04-11 (through Ord. 8001-N.S.)", confidence: high, note: "Southside mixed use"}
-  - {district: R-BMU, residential: true,  permit: UP(PH), max_height_ft: 80, max_storeys: 7, far_max: 4.2, density_max: null, density_min: 75,
+  - {district: R-BMU, residential: true,  permit: UP(PH), max_height_ft: 80, max_stories: 7, far_max: 4.2, density_max: null, density_min: 75,
      source: "BMC 23.202.150 Table 23.202-23", copy: "Wayback 2026-04-11 (through Ord. 8001-N.S.)", confidence: high, note: "BART stations (Master Development Permit)"}
-  - {district: C-C,   residential: true,  permit: UP(PH), max_height_ft: 40, max_storeys: 3, far_max: 3.0, density_max: null, density_min: null,
+  - {district: C-C,   residential: true,  permit: UP(PH), max_height_ft: 40, max_stories: 3, far_max: 3.0, density_max: null, density_min: null,
      source: "BMC 23.204.050 Table 23.204-8", copy: "Wayback 2026-04-11 (through Ord. 8001-N.S.)", confidence: high,
-     note: "mixed use 40 ft and 3 storeys; residential-only 35 ft and 3; FAR 3.0 read as the non-residential/mixed column"}
-  - {district: C-U,   residential: true,  permit: UP(PH), max_height_ft: 36, max_storeys: 3, far_max: 2.2, density_max: null, density_min: null,
+     note: "mixed use 40 ft and 3 stories; residential-only 35 ft and 3; FAR 3.0 read as the non-residential/mixed column"}
+  - {district: C-U,   residential: true,  permit: UP(PH), max_height_ft: 36, max_stories: 3, far_max: 2.2, density_max: null, density_min: null,
      source: "BMC 23.204.060 Table 23.204-11", copy: "Wayback 2026-04-11", confidence: medium,
-     note: "Avenue area (36 ft / 3 storeys, FAR 2.2 north side). Node areas allow mixed use 48 ft / 4 storeys, FAR 2.5-3.0; the layer has no node boundary, so every C-U parcel gets the Avenue envelope"}
-  - {district: C-N,   residential: true,  permit: UP(PH), max_height_ft: 35, max_storeys: 3, far_max: 3.0, density_max: null, density_min: null,
+     note: "Avenue area (36 ft / 3 stories, FAR 2.2 north side). Node areas allow mixed use 48 ft / 4 stories, FAR 2.5-3.0; the layer has no node boundary, so every C-U parcel gets the Avenue envelope"}
+  - {district: C-N,   residential: true,  permit: UP(PH), max_height_ft: 35, max_stories: 3, far_max: 3.0, density_max: null, density_min: null,
      source: "BMC 23.204.070 Table 23.204-17", copy: "Wayback 2026-04-11", confidence: high, note: ""}
-  - {district: C-N(H), residential: true, permit: UP(PH), max_height_ft: 35, max_storeys: 3, far_max: 3.0, density_max: null, density_min: null,
+  - {district: C-N(H), residential: true, permit: UP(PH), max_height_ft: 35, max_stories: 3, far_max: 3.0, density_max: null, density_min: null,
      source: "BMC 23.204.070 + 23.210.020", copy: "Wayback 2026-04-11", confidence: medium, note: "as C-N"}
-  - {district: C-E,   residential: true, ground: residential, lot_coverage: 0.4,  permit: UP(PH), max_height_ft: 35, max_storeys: 3, far_max: null, density_max: null, density_min: null,
+  - {district: C-E,   residential: true, ground: residential, lot_coverage: 0.4,  permit: UP(PH), max_height_ft: 35, max_stories: 3, far_max: null, density_max: null, density_min: null,
      source: "BMC 23.204.080 Table 23.204-21", copy: "Wayback 2026-04-11", confidence: high,
-     note: "RESIDENTIAL-ONLY envelope (35 ft, 3 storeys, no FAR) -- more floor area than mixed use (28 ft, 2 storeys, FAR 0.8 / 1.0 corner); residential-only lot coverage 40-50%"}
-  - {district: C-NS,  residential: true, ground: residential, lot_coverage: 0.45,  permit: UP(PH), max_height_ft: 28, max_storeys: 2, far_max: null, density_max: null, density_min: null,
+     note: "RESIDENTIAL-ONLY envelope (35 ft, 3 stories, no FAR) -- more floor area than mixed use (28 ft, 2 stories, FAR 0.8 / 1.0 corner); residential-only lot coverage 40-50%"}
+  - {district: C-NS,  residential: true, ground: residential, lot_coverage: 0.45,  permit: UP(PH), max_height_ft: 28, max_stories: 2, far_max: null, density_max: null, density_min: null,
      source: "BMC 23.204.090 Table 23.204-24", copy: "Wayback 2026-04-11", confidence: high,
-     note: "RESIDENTIAL-ONLY envelope (28 ft, 2 storeys, no FAR) -- more floor area than mixed use (35 ft, 3 storeys, FAR 1.0)"}
-  - {district: C-NS(H), residential: true, ground: residential, lot_coverage: 0.45, permit: UP(PH), max_height_ft: 28, max_storeys: 2, far_max: null, density_max: null, density_min: null,
+     note: "RESIDENTIAL-ONLY envelope (28 ft, 2 stories, no FAR) -- more floor area than mixed use (35 ft, 3 stories, FAR 1.0)"}
+  - {district: C-NS(H), residential: true, ground: residential, lot_coverage: 0.45, permit: UP(PH), max_height_ft: 28, max_stories: 2, far_max: null, density_max: null, density_min: null,
      source: "BMC 23.204.090 + 23.210.020", copy: "Wayback 2026-04-11", confidence: medium, note: "as C-NS"}
-  - {district: C-SA,  residential: true,  permit: UP(PH), max_height_ft: 36, max_storeys: 3, far_max: 4.0, density_max: null, density_min: null,
+  - {district: C-SA,  residential: true,  permit: UP(PH), max_height_ft: 36, max_stories: 3, far_max: 4.0, density_max: null, density_min: null,
      source: "BMC 23.204.100 Tables 23.204-27/-28", copy: "Wayback 2026-04-11", confidence: medium,
-     note: "all parcels outside Subarea One; Subarea One allows 60 ft and 5 storeys -- no boundary in the layer, so it is understated"}
-  - {district: C-T,   residential: true,  permit: UP(PH), max_height_ft: 85, max_storeys: null, far_max: 8.0, density_max: null, density_min: 200,
+     note: "all parcels outside Subarea One; Subarea One allows 60 ft and 5 stories -- no boundary in the layer, so it is understated"}
+  - {district: C-T,   residential: true,  permit: UP(PH), max_height_ft: 85, max_stories: null, far_max: 8.0, density_max: null, density_min: 200,
      source: "BMC 23.204.110 Table 23.204-32", copy: "Wayback 2026-04-11", confidence: high, note: "Telegraph (Southside 2023 standards)"}
-  - {district: C-SO,  residential: true,  permit: UP(PH), max_height_ft: 28, max_storeys: 2, far_max: null, density_max: null, density_min: null,
-     source: "BMC 23.204.120 Table 23.204-33", copy: "Wayback 2026-04-11", confidence: high, note: "28 ft and 2 storeys for every use; FAR 2.0 mixed use, none residential-only"}
-  - {district: C-DMU Core, residential: true, permit: UP(PH), max_height_ft: 60, max_storeys: null, far_max: null, density_max: null, density_min: null,
+  - {district: C-SO,  residential: true,  permit: UP(PH), max_height_ft: 28, max_stories: 2, far_max: null, density_max: null, density_min: null,
+     source: "BMC 23.204.120 Table 23.204-33", copy: "Wayback 2026-04-11", confidence: high, note: "28 ft and 2 stories for every use; FAR 2.0 mixed use, none residential-only"}
+  - {district: C-DMU Core, residential: true, permit: UP(PH), max_height_ft: 60, max_stories: null, far_max: null, density_max: null, density_min: null,
      source: "BMC 23.204.130 Table 23.204-36", copy: "Wayback (through Ord. 7926-N.S., 2024-07-09)", confidence: medium,
      note: "75 ft with a Use Permit; up to five buildings 75-180 ft by Use Permit (Table 23.204-37); C-DMU FAR not checked"}
-  - {district: C-DMU Outer Core, residential: true, permit: UP(PH), max_height_ft: 60, max_storeys: null, far_max: null, density_max: null, density_min: null,
+  - {district: C-DMU Outer Core, residential: true, permit: UP(PH), max_height_ft: 60, max_stories: null, far_max: null, density_max: null, density_min: null,
      source: "BMC 23.204.130 Table 23.204-36", copy: "Wayback", confidence: medium, note: "maximum shares the Core row (60 ft; 75 ft with UP)"}
-  - {district: C-DMU Corridor, residential: true, permit: UP(PH), max_height_ft: 60, max_storeys: null, far_max: null, density_max: null, density_min: null,
+  - {district: C-DMU Corridor, residential: true, permit: UP(PH), max_height_ft: 60, max_stories: null, far_max: null, density_max: null, density_min: null,
      source: "BMC 23.204.130 Table 23.204-36", copy: "Wayback", confidence: medium, note: "maximum shares the Core row (60 ft; 75 ft with UP)"}
-  - {district: C-DMU Buffer, residential: true, permit: UP(PH), max_height_ft: 50, max_storeys: null, far_max: null, density_max: null, density_min: null,
+  - {district: C-DMU Buffer, residential: true, permit: UP(PH), max_height_ft: 50, max_stories: null, far_max: null, density_max: null, density_min: null,
      source: "BMC 23.204.130 Table 23.204-36", copy: "Wayback", confidence: medium, note: "60 ft with a Use Permit"}
-  - {district: C-W,   residential: true,  permit: UP(PH), max_height_ft: 40, max_storeys: 3, far_max: 3.0, density_max: null, density_min: null,
+  - {district: C-W,   residential: true,  permit: UP(PH), max_height_ft: 40, max_stories: 3, far_max: 3.0, density_max: null, density_min: null,
      source: "BMC 23.204.140 Table 23.204-41", copy: "Wayback (through Ord. 7926-N.S.)", confidence: high, note: ""}
-  - {district: C-AC,  residential: true,  permit: UP(PH), max_height_ft: 35, max_storeys: 3, far_max: 2.0, density_max: 100, density_min: null,
+  - {district: C-AC,  residential: true,  permit: UP(PH), max_height_ft: 35, max_stories: 3, far_max: 2.0, density_max: 100, density_min: null,
      source: "BMC 23.204.150 Table 23.204-44 (North and South Adeline, Tier 1)", copy: "Wayback (through Ord. 7897-N.S., 2024-02-13)", confidence: medium,
-     note: "Tier 1 (<14% affordable). South Shattuck subarea Tier 1 is 45 ft / 4 storeys, FAR 2.5, 120 du/ac -- no subarea boundary in the layer, so the Adeline envelope is used",
-     local_bonus: {name: "Adeline Corridor tier 2 (14% affordable)", min_affordable_share: 0.14, max_height_ft: 55, max_storeys: 5, far_max: 3.5, density_max: 150,
+     note: "Tier 1 (<14% affordable). South Shattuck subarea Tier 1 is 45 ft / 4 stories, FAR 2.5, 120 du/ac -- no subarea boundary in the layer, so the Adeline envelope is used",
+     local_bonus: {name: "Adeline Corridor tier 2 (14% affordable)", min_affordable_share: 0.14, max_height_ft: 55, max_stories: 5, far_max: 3.5, density_max: 150,
                    source: "BMC 23.204.150 Table 23.204-44"}}
-  - {district: MUR,   residential: true,  permit: UP(PH), max_height_ft: 35, max_storeys: 3, far_max: 1.5, density_max: 34.8, density_min: null,
+  - {district: MUR,   residential: true,  permit: UP(PH), max_height_ft: 35, max_stories: 3, far_max: 1.5, density_max: 34.8, density_min: null,
      source: "BMC 23.206.090 Table 23.206-14", copy: "Wayback (through Ord. 7888-N.S., 2023-10-10)", confidence: high,
-     note: "residential or mixed use 35 ft / 3 storeys; FAR 1.5 for buildings at least half residential; 1,250 sf of lot per unit = 34.8 du/ac"}
-  - {district: MULI,  residential: false, permit: NP, max_height_ft: 45, max_storeys: null, far_max: 2.0, density_max: null, density_min: null,
+     note: "residential or mixed use 35 ft / 3 stories; FAR 1.5 for buildings at least half residential; 1,250 sf of lot per unit = 34.8 du/ac"}
+  - {district: MULI,  residential: false, permit: NP, max_height_ft: 45, max_stories: null, far_max: 2.0, density_max: null, density_min: null,
      source: "BMC 23.206.080 Table 23.206-12; Table 23.206-1", copy: "Wayback 2024-09-11; 2022-11-19", confidence: high, note: "dwellings not permitted"}
-  - {district: M,     residential: false, permit: NP, max_height_ft: null, max_storeys: null, far_max: null, density_max: null, density_min: null,
+  - {district: M,     residential: false, permit: NP, max_height_ft: null, max_stories: null, far_max: null, density_max: null, density_min: null,
      source: "BMC 23.206.020 Table 23.206-1", copy: "Wayback 2022-11-19", confidence: high, note: "dwellings not permitted"}
-  - {district: MM,    residential: false, permit: NP, max_height_ft: null, max_storeys: null, far_max: null, density_max: null, density_min: null,
+  - {district: MM,    residential: false, permit: NP, max_height_ft: null, max_stories: null, far_max: null, density_max: null, density_min: null,
      source: "BMC 23.206.020 Table 23.206-1", copy: "Wayback 2022-11-19", confidence: high, note: "dwellings not permitted"}
-  - {district: MRD,   residential: false, permit: unknown, max_height_ft: null, max_storeys: null, far_max: null, density_max: null, density_min: null,
+  - {district: MRD,   residential: false, permit: unknown, max_height_ft: null, max_stories: null, far_max: null, density_max: null, density_min: null,
      source: "not read", copy: "", confidence: low, note: "Manufacturing Research District: standards not read; treated as not residential"}
-  - {district: SP,    residential: false, permit: unknown, max_height_ft: null, max_storeys: null, far_max: null, density_max: null, density_min: null,
+  - {district: SP,    residential: false, permit: unknown, max_height_ft: null, max_stories: null, far_max: null, density_max: null, density_min: null,
      source: "not read", copy: "", confidence: low, note: "Specific Plan area: standards set by the plan, not read"}
-  - {district: U,     residential: false, permit: unknown, max_height_ft: null, max_storeys: null, far_max: null, density_max: null, density_min: null,
+  - {district: U,     residential: false, permit: unknown, max_height_ft: null, max_stories: null, far_max: null, density_max: null, density_min: null,
      source: "zoning layer ZONEDESC 'Unclassified'", copy: "", confidence: low, note: "largely UC / state land outside City zoning"}
-  - {district: X,     residential: false, permit: NP, max_height_ft: null, max_storeys: null, far_max: null, density_max: null, density_min: null,
+  - {district: X,     residential: false, permit: NP, max_height_ft: null, max_stories: null, far_max: null, density_max: null, density_min: null,
      source: "zoning layer ZONEDESC 'Green Space'", copy: "", confidence: medium, note: "parks / open space"}

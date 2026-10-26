@@ -1,12 +1,12 @@
 {
  "meta": {
-  "as_of": "2026-10-25",
+  "as_of": "2026-10-26",
   "v4_file_sha": "1591bcbd2d3a38ae",
   "assumptions": "pencil_out_2026-10-25.yaml",
   "record_inputs": "project_inputs_record_2026-10-25.csv",
   "zoning_standards": "berkeley_zoning_standards_2026-10-25.yaml",
   "export_generated": "2026-10-20T15:31:17.655755",
-  "git": "b1ea7030",
+  "git": "43f6826b",
   "figures": {
    "stage_projects": 106,
    "stage_units": 1133,
@@ -22,7 +22,7 @@
    "verdict_insufficient": 7,
    "single_assumption_flips": 0,
    "median_gap_bp": -260,
-   "elmwood_best_storeys_base": [
+   "elmwood_best_stories_base": [
     5,
     6
    ],
@@ -37,7 +37,7 @@
    "citywide_pencils_favorable_in_lieu": 11686,
    "citywide_pencils_favorable_on_site": 2380,
    "citywide_median_rent_needed": 1.941,
-   "citywide_best_storeys_mode": 6,
+   "citywide_best_stories_mode": 6,
    "zoned_universe": 24175,
    "zoned_not_permitted": 644,
    "zoned_pencils_base_in_lieu": 0,
@@ -346,7 +346,7 @@
    "address": "2015 Blake St",
    "verdict": "does_not",
    "units": 212.0,
-   "storeys": 8.0,
+   "stories": 8.0,
    "tier": "Type III over Type I podium",
    "yoc": 2.99,
    "hurdle": 7.25,
@@ -365,7 +365,7 @@
    "address": "3031 Telegraph Ave",
    "verdict": "marginal",
    "units": 127.0,
-   "storeys": 6.0,
+   "stories": 6.0,
    "tier": "Type V over Type I podium",
    "yoc": 4.19,
    "hurdle": 7.25,
@@ -384,7 +384,7 @@
    "address": "1835 SAN PABLO Ave",
    "verdict": "insufficient_data",
    "units": NaN,
-   "storeys": NaN,
+   "stories": NaN,
    "tier": NaN,
    "yoc": NaN,
    "hurdle": NaN,
@@ -403,7 +403,7 @@
    "address": "1708 HARMON St",
    "verdict": "insufficient_data",
    "units": NaN,
-   "storeys": NaN,
+   "stories": NaN,
    "tier": NaN,
    "yoc": NaN,
    "hurdle": NaN,
@@ -422,7 +422,7 @@
    "address": "1201 San Pablo Ave",
    "verdict": "marginal",
    "units": 66.0,
-   "storeys": 6.0,
+   "stories": 6.0,
    "tier": "Type V over Type I podium",
    "yoc": 4.65,
    "hurdle": 7.25,
@@ -441,7 +441,7 @@
    "address": "1200 SAN PABLO Ave",
    "verdict": "insufficient_data",
    "units": NaN,
-   "storeys": NaN,
+   "stories": NaN,
    "tier": NaN,
    "yoc": NaN,
    "hurdle": NaN,
@@ -460,7 +460,7 @@
    "address": "2198 San Pablo Ave",
    "verdict": "insufficient_data",
    "units": NaN,
-   "storeys": NaN,
+   "stories": NaN,
    "tier": NaN,
    "yoc": NaN,
    "hurdle": NaN,
@@ -479,7 +479,7 @@
    "address": "824 UNIVERSITY Ave",
    "verdict": "insufficient_data",
    "units": NaN,
-   "storeys": NaN,
+   "stories": NaN,
    "tier": NaN,
    "yoc": NaN,
    "hurdle": NaN,
@@ -498,7 +498,7 @@
    "address": "1820 San Pablo Ave",
    "verdict": "marginal",
    "units": 44.0,
-   "storeys": 5.0,
+   "stories": 5.0,
    "tier": "Type V over Type I podium",
    "yoc": 5.08,
    "hurdle": 7.25,
@@ -517,7 +517,7 @@
    "address": "2210 Harold Way",
    "verdict": "insufficient_data",
    "units": NaN,
-   "storeys": NaN,
+   "stories": NaN,
    "tier": NaN,
    "yoc": NaN,
    "hurdle": NaN,
@@ -536,7 +536,7 @@
    "address": "2435 Haste St",
    "verdict": "marginal",
    "units": 37.0,
-   "storeys": 8.0,
+   "stories": 8.0,
    "tier": "Type III over Type I podium",
    "yoc": 4.71,
    "hurdle": 7.25,
@@ -555,7 +555,7 @@
    "address": "1155 HEARST Ave",
    "verdict": "insufficient_data",
    "units": NaN,
-   "storeys": NaN,
+   "stories": NaN,
    "tier": NaN,
    "yoc": NaN,
    "hurdle": NaN,
@@ -574,7 +574,7 @@
    "address": "2018 Blake St",
    "verdict": "marginal",
    "units": 12.0,
-   "storeys": 6.0,
+   "stories": 6.0,
    "tier": "Type V over Type I podium",
    "yoc": 9.0,
    "hurdle": 7.25,
@@ -593,7 +593,7 @@
    "address": "1915 Berryman St",
    "verdict": "does_not",
    "units": 11.0,
-   "storeys": 4.0,
+   "stories": 4.0,
    "tier": "Type V (wood)",
    "yoc": 2.74,
    "hurdle": 7.25,
@@ -2007,7 +2007,7 @@
    }
   ]
  },
- "citywide_file": "citywide_zoned_2026-10-25.meta.json",
+ "citywide_file": "citywide_zoned_2026-10-26.meta.json",
  "elmwood_sites": [
   {
    "site": "2887 College Ave (7-Eleven)",
@@ -2055,7 +2055,7 @@
    "site": "7-eleven",
    "fee_mode": "in_lieu",
    "scenario": "favorable",
-   "break_even_storeys": null,
+   "break_even_stories": null,
    "land": {
     "market": 2141428.0,
     "euv": 3340051.1999999993,
@@ -2064,7 +2064,7 @@
    },
    "rows": [
     {
-     "storeys": 2,
+     "stories": 2,
      "height_ft": 25,
      "tier": "Type V (wood)",
      "units": 13,
@@ -2079,7 +2079,7 @@
      "rlv_per_unit": 53746.81573045941
     },
     {
-     "storeys": 3,
+     "stories": 3,
      "height_ft": 35,
      "tier": "Type V (wood)",
      "units": 26,
@@ -2094,7 +2094,7 @@
      "rlv_per_unit": 34357.2622277607
     },
     {
-     "storeys": 4,
+     "stories": 4,
      "height_ft": 45,
      "tier": "Type V (wood)",
      "units": 40,
@@ -2109,7 +2109,7 @@
      "rlv_per_unit": 49653.8673336898
     },
     {
-     "storeys": 5,
+     "stories": 5,
      "height_ft": 55,
      "tier": "Type V over Type I podium",
      "units": 53,
@@ -2124,7 +2124,7 @@
      "rlv_per_unit": 25173.36092227641
     },
     {
-     "storeys": 6,
+     "stories": 6,
      "height_ft": 65,
      "tier": "Type V over Type I podium",
      "units": 67,
@@ -2139,7 +2139,7 @@
      "rlv_per_unit": 32199.43181496903
     },
     {
-     "storeys": 7,
+     "stories": 7,
      "height_ft": 75,
      "tier": "Type III over Type I podium",
      "units": 80,
@@ -2154,7 +2154,7 @@
      "rlv_per_unit": -69846.90253913654
     },
     {
-     "storeys": 8,
+     "stories": 8,
      "height_ft": 85,
      "tier": "Type III over Type I podium",
      "units": 94,
@@ -2169,7 +2169,7 @@
      "rlv_per_unit": -68388.56291787303
     },
     {
-     "storeys": 9,
+     "stories": 9,
      "height_ft": 95,
      "tier": "Type I (concrete/steel)",
      "units": 107,
@@ -2184,7 +2184,7 @@
      "rlv_per_unit": -189858.10522403283
     },
     {
-     "storeys": 10,
+     "stories": 10,
      "height_ft": 105,
      "tier": "Type I (concrete/steel)",
      "units": 121,
@@ -2199,7 +2199,7 @@
      "rlv_per_unit": -184196.16357244458
     },
     {
-     "storeys": 11,
+     "stories": 11,
      "height_ft": 115,
      "tier": "Type I (concrete/steel)",
      "units": 134,
@@ -2214,7 +2214,7 @@
      "rlv_per_unit": -187155.3220116427
     },
     {
-     "storeys": 12,
+     "stories": 12,
      "height_ft": 125,
      "tier": "Type I (concrete/steel)",
      "units": 148,
@@ -2234,7 +2234,7 @@
    "site": "7-eleven",
    "fee_mode": "in_lieu",
    "scenario": "base",
-   "break_even_storeys": null,
+   "break_even_stories": null,
    "land": {
     "market": 4670900.0,
     "euv": 7244964.0,
@@ -2243,7 +2243,7 @@
    },
    "rows": [
     {
-     "storeys": 2,
+     "stories": 2,
      "height_ft": 25,
      "tier": "Type V (wood)",
      "units": 11,
@@ -2258,7 +2258,7 @@
      "rlv_per_unit": -442769.4486660076
     },
     {
-     "storeys": 3,
+     "stories": 3,
      "height_ft": 35,
      "tier": "Type V (wood)",
      "units": 23,
@@ -2273,7 +2273,7 @@
      "rlv_per_unit": -305776.90255497204
     },
     {
-     "storeys": 4,
+     "stories": 4,
      "height_ft": 45,
      "tier": "Type V (wood)",
      "units": 35,
@@ -2288,7 +2288,7 @@
      "rlv_per_unit": -257465.74766884357
     },
     {
-     "storeys": 5,
+     "stories": 5,
      "height_ft": 55,
      "tier": "Type V over Type I podium",
      "units": 47,
@@ -2303,7 +2303,7 @@
      "rlv_per_unit": -252496.77467015712
     },
     {
-     "storeys": 6,
+     "stories": 6,
      "height_ft": 65,
      "tier": "Type V over Type I podium",
      "units": 59,
@@ -2318,7 +2318,7 @@
      "rlv_per_unit": -235445.41135732143
     },
     {
-     "storeys": 7,
+     "stories": 7,
      "height_ft": 75,
      "tier": "Type III over Type I podium",
      "units": 71,
@@ -2333,7 +2333,7 @@
      "rlv_per_unit": -353193.6870998979
     },
     {
-     "storeys": 8,
+     "stories": 8,
      "height_ft": 85,
      "tier": "Type III over Type I podium",
      "units": 83,
@@ -2348,7 +2348,7 @@
      "rlv_per_unit": -341079.3874772194
     },
     {
-     "storeys": 9,
+     "stories": 9,
      "height_ft": 95,
      "tier": "Type I (concrete/steel)",
      "units": 95,
@@ -2363,7 +2363,7 @@
      "rlv_per_unit": -487114.66145731375
     },
     {
-     "storeys": 10,
+     "stories": 10,
      "height_ft": 105,
      "tier": "Type I (concrete/steel)",
      "units": 107,
@@ -2378,7 +2378,7 @@
      "rlv_per_unit": -479323.8635842485
     },
     {
-     "storeys": 11,
+     "stories": 11,
      "height_ft": 115,
      "tier": "Type I (concrete/steel)",
      "units": 119,
@@ -2393,7 +2393,7 @@
      "rlv_per_unit": -474471.22894492856
     },
     {
-     "storeys": 12,
+     "stories": 12,
      "height_ft": 125,
      "tier": "Type I (concrete/steel)",
      "units": 130,
@@ -2413,7 +2413,7 @@
    "site": "7-eleven",
    "fee_mode": "in_lieu",
    "scenario": "unfavorable",
-   "break_even_storeys": null,
+   "break_even_stories": null,
    "land": {
     "market": 7186000.0,
     "euv": 12364738.559999999,
@@ -2422,7 +2422,7 @@
    },
    "rows": [
     {
-     "storeys": 2,
+     "stories": 2,
      "height_ft": 25,
      "tier": "Type V (wood)",
      "units": 10,
@@ -2437,7 +2437,7 @@
      "rlv_per_unit": -924742.9304578822
     },
     {
-     "storeys": 3,
+     "stories": 3,
      "height_ft": 35,
      "tier": "Type V (wood)",
      "units": 20,
@@ -2452,7 +2452,7 @@
      "rlv_per_unit": -640609.4233502571
     },
     {
-     "storeys": 4,
+     "stories": 4,
      "height_ft": 45,
      "tier": "Type V (wood)",
      "units": 30,
@@ -2467,7 +2467,7 @@
      "rlv_per_unit": -549980.4518143822
     },
     {
-     "storeys": 5,
+     "stories": 5,
      "height_ft": 55,
      "tier": "Type V over Type I podium",
      "units": 40,
@@ -2482,7 +2482,7 @@
      "rlv_per_unit": -526619.5668078894
     },
     {
-     "storeys": 6,
+     "stories": 6,
      "height_ft": 65,
      "tier": "Type V over Type I podium",
      "units": 50,
@@ -2497,7 +2497,7 @@
      "rlv_per_unit": -499569.6751829407
     },
     {
-     "storeys": 7,
+     "stories": 7,
      "height_ft": 75,
      "tier": "Type III over Type I podium",
      "units": 61,
@@ -2512,7 +2512,7 @@
      "rlv_per_unit": -625968.4126714685
     },
     {
-     "storeys": 8,
+     "stories": 8,
      "height_ft": 85,
      "tier": "Type III over Type I podium",
      "units": 71,
@@ -2527,7 +2527,7 @@
      "rlv_per_unit": -614676.9480598111
     },
     {
-     "storeys": 9,
+     "stories": 9,
      "height_ft": 95,
      "tier": "Type I (concrete/steel)",
      "units": 81,
@@ -2542,7 +2542,7 @@
      "rlv_per_unit": -795831.5829840336
     },
     {
-     "storeys": 10,
+     "stories": 10,
      "height_ft": 105,
      "tier": "Type I (concrete/steel)",
      "units": 91,
@@ -2557,7 +2557,7 @@
      "rlv_per_unit": -786197.3526778959
     },
     {
-     "storeys": 11,
+     "stories": 11,
      "height_ft": 115,
      "tier": "Type I (concrete/steel)",
      "units": 101,
@@ -2572,7 +2572,7 @@
      "rlv_per_unit": -776314.0051056466
     },
     {
-     "storeys": 12,
+     "stories": 12,
      "height_ft": 125,
      "tier": "Type I (concrete/steel)",
      "units": 112,
@@ -2592,7 +2592,7 @@
    "site": "7-eleven",
    "fee_mode": "on_site",
    "scenario": "favorable",
-   "break_even_storeys": null,
+   "break_even_stories": null,
    "land": {
     "market": 2141428.0,
     "euv": 3340051.1999999993,
@@ -2601,7 +2601,7 @@
    },
    "rows": [
     {
-     "storeys": 2,
+     "stories": 2,
      "height_ft": 25,
      "tier": "Type V (wood)",
      "units": 13,
@@ -2616,7 +2616,7 @@
      "rlv_per_unit": 16390.718868920867
     },
     {
-     "storeys": 3,
+     "stories": 3,
      "height_ft": 35,
      "tier": "Type V (wood)",
      "units": 26,
@@ -2631,7 +2631,7 @@
      "rlv_per_unit": 178.55290468381003
     },
     {
-     "storeys": 4,
+     "stories": 4,
      "height_ft": 45,
      "tier": "Type V (wood)",
      "units": 40,
@@ -2646,7 +2646,7 @@
      "rlv_per_unit": 29384.98029368976
     },
     {
-     "storeys": 5,
+     "stories": 5,
      "height_ft": 55,
      "tier": "Type V over Type I podium",
      "units": 53,
@@ -2661,7 +2661,7 @@
      "rlv_per_unit": 4662.004982653864
     },
     {
-     "storeys": 6,
+     "stories": 6,
      "height_ft": 65,
      "tier": "Type V over Type I podium",
      "units": 67,
@@ -2676,7 +2676,7 @@
      "rlv_per_unit": 11524.029964222726
     },
     {
-     "storeys": 7,
+     "stories": 7,
      "height_ft": 75,
      "tier": "Type III over Type I podium",
      "units": 80,
@@ -2691,7 +2691,7 @@
      "rlv_per_unit": -94607.6879791366
     },
     {
-     "storeys": 8,
+     "stories": 8,
      "height_ft": 85,
      "tier": "Type III over Type I podium",
      "units": 94,
@@ -2706,7 +2706,7 @@
      "rlv_per_unit": -85236.51341148997
     },
     {
-     "storeys": 9,
+     "stories": 9,
      "height_ft": 95,
      "tier": "Type I (concrete/steel)",
      "units": 107,
@@ -2721,7 +2721,7 @@
      "rlv_per_unit": -213739.96763150944
     },
     {
-     "storeys": 10,
+     "stories": 10,
      "height_ft": 105,
      "tier": "Type I (concrete/steel)",
      "units": 121,
@@ -2736,7 +2736,7 @@
      "rlv_per_unit": -206732.01924847762
     },
     {
-     "storeys": 11,
+     "stories": 11,
      "height_ft": 115,
      "tier": "Type I (concrete/steel)",
      "units": 134,
@@ -2751,7 +2751,7 @@
      "rlv_per_unit": -206289.16698179182
     },
     {
-     "storeys": 12,
+     "stories": 12,
      "height_ft": 125,
      "tier": "Type I (concrete/steel)",
      "units": 148,
@@ -2771,7 +2771,7 @@
    "site": "7-eleven",
    "fee_mode": "on_site",
    "scenario": "base",
-   "break_even_storeys": null,
+   "break_even_stories": null,
    "land": {
     "market": 4670900.0,
     "euv": 7244964.0,
@@ -2780,7 +2780,7 @@
    },
    "rows": [
     {
-     "storeys": 2,
+     "stories": 2,
      "height_ft": 25,
      "tier": "Type V (wood)",
      "units": 11,
@@ -2795,7 +2795,7 @@
      "rlv_per_unit": -468575.40470362525
     },
     {
-     "storeys": 3,
+     "stories": 3,
      "height_ft": 35,
      "tier": "Type V (wood)",
      "units": 23,
@@ -2810,7 +2810,7 @@
      "rlv_per_unit": -312873.9729477757
     },
     {
-     "storeys": 4,
+     "stories": 4,
      "height_ft": 45,
      "tier": "Type V (wood)",
      "units": 35,
@@ -2825,7 +2825,7 @@
      "rlv_per_unit": -259236.10621859724
     },
     {
-     "storeys": 5,
+     "stories": 5,
      "height_ft": 55,
      "tier": "Type V over Type I podium",
      "units": 47,
@@ -2840,7 +2840,7 @@
      "rlv_per_unit": -251522.70416685552
     },
     {
-     "storeys": 6,
+     "stories": 6,
      "height_ft": 65,
      "tier": "Type V over Type I podium",
      "units": 59,
@@ -2855,7 +2855,7 @@
      "rlv_per_unit": -234676.26342044235
     },
     {
-     "storeys": 7,
+     "stories": 7,
      "height_ft": 75,
      "tier": "Type III over Type I podium",
      "units": 71,
@@ -2870,7 +2870,7 @@
      "rlv_per_unit": -352127.9939750801
     },
     {
-     "storeys": 8,
+     "stories": 8,
      "height_ft": 85,
      "tier": "Type III over Type I podium",
      "units": 83,
@@ -2885,7 +2885,7 @@
      "rlv_per_unit": -341757.13979628874
     },
     {
-     "storeys": 9,
+     "stories": 9,
      "height_ft": 95,
      "tier": "Type I (concrete/steel)",
      "units": 95,
@@ -2900,7 +2900,7 @@
      "rlv_per_unit": -482980.0965963337
     },
     {
-     "storeys": 10,
+     "stories": 10,
      "height_ft": 105,
      "tier": "Type I (concrete/steel)",
      "units": 107,
@@ -2915,7 +2915,7 @@
      "rlv_per_unit": -480435.9589061951
     },
     {
-     "storeys": 11,
+     "stories": 11,
      "height_ft": 115,
      "tier": "Type I (concrete/steel)",
      "units": 119,
@@ -2930,7 +2930,7 @@
      "rlv_per_unit": -473820.03270036174
     },
     {
-     "storeys": 12,
+     "stories": 12,
      "height_ft": 125,
      "tier": "Type I (concrete/steel)",
      "units": 130,
@@ -2950,7 +2950,7 @@
    "site": "7-eleven",
    "fee_mode": "on_site",
    "scenario": "unfavorable",
-   "break_even_storeys": null,
+   "break_even_stories": null,
    "land": {
     "market": 7186000.0,
     "euv": 12364738.559999999,
@@ -2959,7 +2959,7 @@
    },
    "rows": [
     {
-     "storeys": 2,
+     "stories": 2,
      "height_ft": 25,
      "tier": "Type V (wood)",
      "units": 10,
@@ -2974,7 +2974,7 @@
      "rlv_per_unit": -931503.8972318822
     },
     {
-     "storeys": 3,
+     "stories": 3,
      "height_ft": 35,
      "tier": "Type V (wood)",
      "units": 20,
@@ -2989,7 +2989,7 @@
      "rlv_per_unit": -629909.217624257
     },
     {
-     "storeys": 4,
+     "stories": 4,
      "height_ft": 45,
      "tier": "Type V (wood)",
      "units": 30,
@@ -3004,7 +3004,7 @@
      "rlv_per_unit": -539281.355255049
     },
     {
-     "storeys": 5,
+     "stories": 5,
      "height_ft": 55,
      "tier": "Type V over Type I podium",
      "units": 40,
@@ -3019,7 +3019,7 @@
      "rlv_per_unit": -512431.7360818895
     },
     {
-     "storeys": 6,
+     "stories": 6,
      "height_ft": 65,
      "tier": "Type V over Type I podium",
      "units": 50,
@@ -3034,7 +3034,7 @@
      "rlv_per_unit": -482587.13495694066
     },
     {
-     "storeys": 7,
+     "stories": 7,
      "height_ft": 75,
      "tier": "Type III over Type I podium",
      "units": 61,
@@ -3049,7 +3049,7 @@
      "rlv_per_unit": -612458.2066295013
     },
     {
-     "storeys": 8,
+     "stories": 8,
      "height_ft": 85,
      "tier": "Type III over Type I podium",
      "units": 71,
@@ -3064,7 +3064,7 @@
      "rlv_per_unit": -599308.9955834731
     },
     {
-     "storeys": 9,
+     "stories": 9,
      "height_ft": 95,
      "tier": "Type I (concrete/steel)",
      "units": 81,
@@ -3079,7 +3079,7 @@
      "rlv_per_unit": -781306.0952299595
     },
     {
-     "storeys": 10,
+     "stories": 10,
      "height_ft": 105,
      "tier": "Type I (concrete/steel)",
      "units": 91,
@@ -3094,7 +3094,7 @@
      "rlv_per_unit": -769426.9544324013
     },
     {
-     "storeys": 11,
+     "stories": 11,
      "height_ft": 115,
      "tier": "Type I (concrete/steel)",
      "units": 101,
@@ -3109,7 +3109,7 @@
      "rlv_per_unit": -761134.4843373297
     },
     {
-     "storeys": 12,
+     "stories": 12,
      "height_ft": 125,
      "tier": "Type I (concrete/steel)",
      "units": 112,
@@ -3129,7 +3129,7 @@
    "site": "five-monkeys",
    "fee_mode": "in_lieu",
    "scenario": "favorable",
-   "break_even_storeys": null,
+   "break_even_stories": null,
    "land": {
     "market": 1063860.0,
     "euv": 3498681.5999999996,
@@ -3138,7 +3138,7 @@
    },
    "rows": [
     {
-     "storeys": 2,
+     "stories": 2,
      "height_ft": 25,
      "tier": "Type V (wood)",
      "units": 6,
@@ -3153,7 +3153,7 @@
      "rlv_per_unit": 32465.381004328374
     },
     {
-     "storeys": 3,
+     "stories": 3,
      "height_ft": 35,
      "tier": "Type V (wood)",
      "units": 13,
@@ -3168,7 +3168,7 @@
      "rlv_per_unit": 57941.761767590346
     },
     {
-     "storeys": 4,
+     "stories": 4,
      "height_ft": 45,
      "tier": "Type V (wood)",
      "units": 20,
@@ -3183,7 +3183,7 @@
      "rlv_per_unit": 53754.063096568825
     },
     {
-     "storeys": 5,
+     "stories": 5,
      "height_ft": 55,
      "tier": "Type V over Type I podium",
      "units": 26,
@@ -3198,7 +3198,7 @@
      "rlv_per_unit": 21650.206118884424
     },
     {
-     "storeys": 6,
+     "stories": 6,
      "height_ft": 65,
      "tier": "Type V over Type I podium",
      "units": 33,
@@ -3213,7 +3213,7 @@
      "rlv_per_unit": 23956.601092909772
     },
     {
-     "storeys": 7,
+     "stories": 7,
      "height_ft": 75,
      "tier": "Type III over Type I podium",
      "units": 40,
@@ -3228,7 +3228,7 @@
      "rlv_per_unit": -61505.560460413995
     },
     {
-     "storeys": 8,
+     "stories": 8,
      "height_ft": 85,
      "tier": "Type III over Type I podium",
      "units": 46,
@@ -3243,7 +3243,7 @@
      "rlv_per_unit": -71121.71663914087
     },
     {
-     "storeys": 9,
+     "stories": 9,
      "height_ft": 95,
      "tier": "Type I (concrete/steel)",
      "units": 53,
@@ -3258,7 +3258,7 @@
      "rlv_per_unit": -189776.5608772623
     },
     {
-     "storeys": 10,
+     "stories": 10,
      "height_ft": 105,
      "tier": "Type I (concrete/steel)",
      "units": 60,
@@ -3273,7 +3273,7 @@
      "rlv_per_unit": -183201.29300599545
     },
     {
-     "storeys": 11,
+     "stories": 11,
      "height_ft": 115,
      "tier": "Type I (concrete/steel)",
      "units": 67,
@@ -3288,7 +3288,7 @@
      "rlv_per_unit": -178751.01412275434
     },
     {
-     "storeys": 12,
+     "stories": 12,
      "height_ft": 125,
      "tier": "Type I (concrete/steel)",
      "units": 73,
@@ -3308,7 +3308,7 @@
    "site": "five-monkeys",
    "fee_mode": "in_lieu",
    "scenario": "base",
-   "break_even_storeys": null,
+   "break_even_stories": null,
    "land": {
     "market": 2320500.0,
     "euv": 7589051.999999999,
@@ -3317,7 +3317,7 @@
    },
    "rows": [
     {
-     "storeys": 2,
+     "stories": 2,
      "height_ft": 25,
      "tier": "Type V (wood)",
      "units": 5,
@@ -3332,7 +3332,7 @@
      "rlv_per_unit": -535182.901137681
     },
     {
-     "storeys": 3,
+     "stories": 3,
      "height_ft": 35,
      "tier": "Type V (wood)",
      "units": 11,
@@ -3347,7 +3347,7 @@
      "rlv_per_unit": -298513.76419027685
     },
     {
-     "storeys": 4,
+     "stories": 4,
      "height_ft": 45,
      "tier": "Type V (wood)",
      "units": 17,
@@ -3362,7 +3362,7 @@
      "rlv_per_unit": -251941.7221266387
     },
     {
-     "storeys": 5,
+     "stories": 5,
      "height_ft": 55,
      "tier": "Type V over Type I podium",
      "units": 23,
@@ -3377,7 +3377,7 @@
      "rlv_per_unit": -256408.75827500346
     },
     {
-     "storeys": 6,
+     "stories": 6,
      "height_ft": 65,
      "tier": "Type V over Type I podium",
      "units": 29,
@@ -3392,7 +3392,7 @@
      "rlv_per_unit": -241385.29035916147
     },
     {
-     "storeys": 7,
+     "stories": 7,
      "height_ft": 75,
      "tier": "Type III over Type I podium",
      "units": 35,
@@ -3407,7 +3407,7 @@
      "rlv_per_unit": -354997.09504391043
     },
     {
-     "storeys": 8,
+     "stories": 8,
      "height_ft": 85,
      "tier": "Type III over Type I podium",
      "units": 41,
@@ -3422,7 +3422,7 @@
      "rlv_per_unit": -342159.24942571856
     },
     {
-     "storeys": 9,
+     "stories": 9,
      "height_ft": 95,
      "tier": "Type I (concrete/steel)",
      "units": 47,
@@ -3437,7 +3437,7 @@
      "rlv_per_unit": -486792.6274663797
     },
     {
-     "storeys": 10,
+     "stories": 10,
      "height_ft": 105,
      "tier": "Type I (concrete/steel)",
      "units": 53,
@@ -3452,7 +3452,7 @@
      "rlv_per_unit": -479416.7982436667
     },
     {
-     "storeys": 11,
+     "stories": 11,
      "height_ft": 115,
      "tier": "Type I (concrete/steel)",
      "units": 59,
@@ -3467,7 +3467,7 @@
      "rlv_per_unit": -471755.1154671866
     },
     {
-     "storeys": 12,
+     "stories": 12,
      "height_ft": 125,
      "tier": "Type I (concrete/steel)",
      "units": 65,
@@ -3487,7 +3487,7 @@
    "site": "five-monkeys",
    "fee_mode": "in_lieu",
    "scenario": "unfavorable",
-   "break_even_storeys": null,
+   "break_even_stories": null,
    "land": {
     "market": 3570000.0,
     "euv": 12951982.079999998,
@@ -3496,7 +3496,7 @@
    },
    "rows": [
     {
-     "storeys": 2,
+     "stories": 2,
      "height_ft": 25,
      "tier": "Type V (wood)",
      "units": 5,
@@ -3511,7 +3511,7 @@
      "rlv_per_unit": -916360.4416247758
     },
     {
-     "storeys": 3,
+     "stories": 3,
      "height_ft": 35,
      "tier": "Type V (wood)",
      "units": 10,
@@ -3526,7 +3526,7 @@
      "rlv_per_unit": -625328.7732432276
     },
     {
-     "storeys": 4,
+     "stories": 4,
      "height_ft": 45,
      "tier": "Type V (wood)",
      "units": 15,
@@ -3541,7 +3541,7 @@
      "rlv_per_unit": -525739.8698693787
     },
     {
-     "storeys": 5,
+     "stories": 5,
      "height_ft": 55,
      "tier": "Type V over Type I podium",
      "units": 20,
@@ -3556,7 +3556,7 @@
      "rlv_per_unit": -517289.91608138476
     },
     {
-     "storeys": 6,
+     "stories": 6,
      "height_ft": 65,
      "tier": "Type V over Type I podium",
      "units": 25,
@@ -3571,7 +3571,7 @@
      "rlv_per_unit": -488543.5074984964
     },
     {
-     "storeys": 7,
+     "stories": 7,
      "height_ft": 75,
      "tier": "Type III over Type I podium",
      "units": 30,
@@ -3586,7 +3586,7 @@
      "rlv_per_unit": -634984.1055532321
     },
     {
-     "storeys": 8,
+     "stories": 8,
      "height_ft": 85,
      "tier": "Type III over Type I podium",
      "units": 35,
@@ -3601,7 +3601,7 @@
      "rlv_per_unit": -617591.5036194205
     },
     {
-     "storeys": 9,
+     "stories": 9,
      "height_ft": 95,
      "tier": "Type I (concrete/steel)",
      "units": 40,
@@ -3616,7 +3616,7 @@
      "rlv_per_unit": -797246.5812698059
     },
     {
-     "storeys": 10,
+     "stories": 10,
      "height_ft": 105,
      "tier": "Type I (concrete/steel)",
      "units": 45,
@@ -3631,7 +3631,7 @@
      "rlv_per_unit": -788221.6247520427
     },
     {
-     "storeys": 11,
+     "stories": 11,
      "height_ft": 115,
      "tier": "Type I (concrete/steel)",
      "units": 50,
@@ -3646,7 +3646,7 @@
      "rlv_per_unit": -778231.4595378317
     },
     {
-     "storeys": 12,
+     "stories": 12,
      "height_ft": 125,
      "tier": "Type I (concrete/steel)",
      "units": 55,
@@ -3666,7 +3666,7 @@
    "site": "five-monkeys",
    "fee_mode": "on_site",
    "scenario": "favorable",
-   "break_even_storeys": null,
+   "break_even_stories": null,
    "land": {
     "market": 1063860.0,
     "euv": 3498681.5999999996,
@@ -3675,7 +3675,7 @@
    },
    "rows": [
     {
-     "storeys": 2,
+     "stories": 2,
      "height_ft": 25,
      "tier": "Type V (wood)",
      "units": 6,
@@ -3690,7 +3690,7 @@
      "rlv_per_unit": -41558.02566233821
     },
     {
-     "storeys": 3,
+     "stories": 3,
      "height_ft": 35,
      "tier": "Type V (wood)",
      "units": 13,
@@ -3705,7 +3705,7 @@
      "rlv_per_unit": 20283.307613744113
     },
     {
-     "storeys": 4,
+     "stories": 4,
      "height_ft": 45,
      "tier": "Type V (wood)",
      "units": 20,
@@ -3720,7 +3720,7 @@
      "rlv_per_unit": 34790.167696568926
     },
     {
-     "storeys": 5,
+     "stories": 5,
      "height_ft": 55,
      "tier": "Type V over Type I podium",
      "units": 26,
@@ -3735,7 +3735,7 @@
      "rlv_per_unit": -12830.860496500149
     },
     {
-     "storeys": 6,
+     "stories": 6,
      "height_ft": 65,
      "tier": "Type V over Type I podium",
      "units": 33,
@@ -3750,7 +3750,7 @@
      "rlv_per_unit": -3035.1435737569223
     },
     {
-     "storeys": 7,
+     "stories": 7,
      "height_ft": 75,
      "tier": "Type III over Type I podium",
      "units": 40,
@@ -3765,7 +3765,7 @@
      "rlv_per_unit": -82069.24586041411
     },
     {
-     "storeys": 8,
+     "stories": 8,
      "height_ft": 85,
      "tier": "Type III over Type I podium",
      "units": 46,
@@ -3780,7 +3780,7 @@
      "rlv_per_unit": -92026.83924783645
     },
     {
-     "storeys": 9,
+     "stories": 9,
      "height_ft": 95,
      "tier": "Type I (concrete/steel)",
      "units": 53,
@@ -3795,7 +3795,7 @@
      "rlv_per_unit": -210584.56925462067
     },
     {
-     "storeys": 10,
+     "stories": 10,
      "height_ft": 105,
      "tier": "Type I (concrete/steel)",
      "units": 60,
@@ -3810,7 +3810,7 @@
      "rlv_per_unit": -202764.84713932872
     },
     {
-     "storeys": 11,
+     "stories": 11,
      "height_ft": 115,
      "tier": "Type I (concrete/steel)",
      "units": 67,
@@ -3825,7 +3825,7 @@
      "rlv_per_unit": -199719.74767499327
     },
     {
-     "storeys": 12,
+     "stories": 12,
      "height_ft": 125,
      "tier": "Type I (concrete/steel)",
      "units": 73,
@@ -3845,7 +3845,7 @@
    "site": "five-monkeys",
    "fee_mode": "on_site",
    "scenario": "base",
-   "break_even_storeys": null,
+   "break_even_stories": null,
    "land": {
     "market": 2320500.0,
     "euv": 7589051.999999999,
@@ -3854,7 +3854,7 @@
    },
    "rows": [
     {
-     "storeys": 2,
+     "stories": 2,
      "height_ft": 25,
      "tier": "Type V (wood)",
      "units": 5,
@@ -3869,7 +3869,7 @@
      "rlv_per_unit": -568423.3149307845
     },
     {
-     "storeys": 3,
+     "stories": 3,
      "height_ft": 35,
      "tier": "Type V (wood)",
      "units": 11,
@@ -3884,7 +3884,7 @@
      "rlv_per_unit": -324635.01259153074
     },
     {
-     "storeys": 4,
+     "stories": 4,
      "height_ft": 45,
      "tier": "Type V (wood)",
      "units": 17,
@@ -3899,7 +3899,7 @@
      "rlv_per_unit": -260129.1265079774
     },
     {
-     "storeys": 5,
+     "stories": 5,
      "height_ft": 55,
      "tier": "Type V over Type I podium",
      "units": 23,
@@ -3914,7 +3914,7 @@
      "rlv_per_unit": -263807.412667807
     },
     {
-     "storeys": 6,
+     "stories": 6,
      "height_ft": 65,
      "tier": "Type V over Type I podium",
      "units": 29,
@@ -3929,7 +3929,7 @@
      "rlv_per_unit": -246318.24469923272
     },
     {
-     "storeys": 7,
+     "stories": 7,
      "height_ft": 75,
      "tier": "Type III over Type I podium",
      "units": 35,
@@ -3944,7 +3944,7 @@
      "rlv_per_unit": -357064.72925080697
     },
     {
-     "storeys": 8,
+     "stories": 8,
      "height_ft": 85,
      "tier": "Type III over Type I podium",
      "units": 41,
@@ -3959,7 +3959,7 @@
      "rlv_per_unit": -344994.35694464215
     },
     {
-     "storeys": 9,
+     "stories": 9,
      "height_ft": 95,
      "tier": "Type I (concrete/steel)",
      "units": 47,
@@ -3974,7 +3974,7 @@
      "rlv_per_unit": -486113.72428222717
     },
     {
-     "storeys": 10,
+     "stories": 10,
      "height_ft": 105,
      "tier": "Type I (concrete/steel)",
      "units": 53,
@@ -3989,7 +3989,7 @@
      "rlv_per_unit": -479399.34026058286
     },
     {
-     "storeys": 11,
+     "stories": 11,
      "height_ft": 115,
      "tier": "Type I (concrete/steel)",
      "units": 59,
@@ -4004,7 +4004,7 @@
      "rlv_per_unit": -471279.8841404771
     },
     {
-     "storeys": 12,
+     "stories": 12,
      "height_ft": 125,
      "tier": "Type I (concrete/steel)",
      "units": 65,
@@ -4024,7 +4024,7 @@
    "site": "five-monkeys",
    "fee_mode": "on_site",
    "scenario": "unfavorable",
-   "break_even_storeys": null,
+   "break_even_stories": null,
    "land": {
     "market": 3570000.0,
     "euv": 12951982.079999998,
@@ -4033,7 +4033,7 @@
    },
    "rows": [
     {
-     "storeys": 2,
+     "stories": 2,
      "height_ft": 25,
      "tier": "Type V (wood)",
      "units": 5,
@@ -4048,7 +4048,7 @@
      "rlv_per_unit": -938662.7416247757
     },
     {
-     "storeys": 3,
+     "stories": 3,
      "height_ft": 35,
      "tier": "Type V (wood)",
      "units": 10,
@@ -4063,7 +4063,7 @@
      "rlv_per_unit": -632386.5615032276
     },
     {
-     "storeys": 4,
+     "stories": 4,
      "height_ft": 45,
      "tier": "Type V (wood)",
      "units": 15,
@@ -4078,7 +4078,7 @@
      "rlv_per_unit": -522521.876462712
     },
     {
-     "storeys": 5,
+     "stories": 5,
      "height_ft": 55,
      "tier": "Type V over Type I podium",
      "units": 20,
@@ -4093,7 +4093,7 @@
      "rlv_per_unit": -506886.5318413846
     },
     {
-     "storeys": 6,
+     "stories": 6,
      "height_ft": 65,
      "tier": "Type V over Type I podium",
      "units": 25,
@@ -4108,7 +4108,7 @@
      "rlv_per_unit": -479193.7887584965
     },
     {
-     "storeys": 7,
+     "stories": 7,
      "height_ft": 75,
      "tier": "Type III over Type I podium",
      "units": 30,
@@ -4123,7 +4123,7 @@
      "rlv_per_unit": -624581.8304798988
     },
     {
-     "storeys": 8,
+     "stories": 8,
      "height_ft": 85,
      "tier": "Type III over Type I podium",
      "units": 35,
@@ -4138,7 +4138,7 @@
      "rlv_per_unit": -605864.2375937061
     },
     {
-     "storeys": 9,
+     "stories": 9,
      "height_ft": 95,
      "tier": "Type I (concrete/steel)",
      "units": 40,
@@ -4153,7 +4153,7 @@
      "rlv_per_unit": -783355.5720298061
     },
     {
-     "storeys": 10,
+     "stories": 10,
      "height_ft": 105,
      "tier": "Type I (concrete/steel)",
      "units": 45,
@@ -4168,7 +4168,7 @@
      "rlv_per_unit": -773232.9991231537
     },
     {
-     "storeys": 11,
+     "stories": 11,
      "height_ft": 115,
      "tier": "Type I (concrete/steel)",
      "units": 50,
@@ -4183,7 +4183,7 @@
      "rlv_per_unit": -761545.7407978317
     },
     {
-     "storeys": 12,
+     "stories": 12,
      "height_ft": 125,
      "tier": "Type I (concrete/steel)",
      "units": 55,
@@ -4203,7 +4203,7 @@
    "site": "wells-fargo",
    "fee_mode": "in_lieu",
    "scenario": "favorable",
-   "break_even_storeys": 4,
+   "break_even_stories": 4,
    "land": {
     "market": 856750.0,
     "euv": 0.0,
@@ -4212,7 +4212,7 @@
    },
    "rows": [
     {
-     "storeys": 2,
+     "stories": 2,
      "height_ft": 25,
      "tier": "Type V (wood)",
      "units": 5,
@@ -4227,7 +4227,7 @@
      "rlv_per_unit": 17391.535750401206
     },
     {
-     "storeys": 3,
+     "stories": 3,
      "height_ft": 35,
      "tier": "Type V (wood)",
      "units": 10,
@@ -4242,7 +4242,7 @@
      "rlv_per_unit": 26907.312477694264
     },
     {
-     "storeys": 4,
+     "stories": 4,
      "height_ft": 45,
      "tier": "Type V (wood)",
      "units": 16,
@@ -4257,7 +4257,7 @@
      "rlv_per_unit": 58971.36842511769
     },
     {
-     "storeys": 5,
+     "stories": 5,
      "height_ft": 55,
      "tier": "Type V over Type I podium",
      "units": 21,
@@ -4272,7 +4272,7 @@
      "rlv_per_unit": 34213.48793646276
     },
     {
-     "storeys": 6,
+     "stories": 6,
      "height_ft": 65,
      "tier": "Type V over Type I podium",
      "units": 26,
@@ -4287,7 +4287,7 @@
      "rlv_per_unit": 19190.433497304453
     },
     {
-     "storeys": 7,
+     "stories": 7,
      "height_ft": 75,
      "tier": "Type III over Type I podium",
      "units": 32,
@@ -4302,7 +4302,7 @@
      "rlv_per_unit": -70047.90783164906
     },
     {
-     "storeys": 8,
+     "stories": 8,
      "height_ft": 85,
      "tier": "Type III over Type I podium",
      "units": 37,
@@ -4317,7 +4317,7 @@
      "rlv_per_unit": -69193.43141741517
     },
     {
-     "storeys": 9,
+     "stories": 9,
      "height_ft": 95,
      "tier": "Type I (concrete/steel)",
      "units": 43,
@@ -4332,7 +4332,7 @@
      "rlv_per_unit": -180409.8913920448
     },
     {
-     "storeys": 10,
+     "stories": 10,
      "height_ft": 105,
      "tier": "Type I (concrete/steel)",
      "units": 48,
@@ -4347,7 +4347,7 @@
      "rlv_per_unit": -189496.41045100498
     },
     {
-     "storeys": 11,
+     "stories": 11,
      "height_ft": 115,
      "tier": "Type I (concrete/steel)",
      "units": 53,
@@ -4362,7 +4362,7 @@
      "rlv_per_unit": -192013.38251770815
     },
     {
-     "storeys": 12,
+     "stories": 12,
      "height_ft": 125,
      "tier": "Type I (concrete/steel)",
      "units": 59,
@@ -4382,7 +4382,7 @@
    "site": "wells-fargo",
    "fee_mode": "in_lieu",
    "scenario": "base",
-   "break_even_storeys": null,
+   "break_even_stories": null,
    "land": {
     "market": 1868750.0,
     "euv": 0.0,
@@ -4391,7 +4391,7 @@
    },
    "rows": [
     {
-     "storeys": 2,
+     "stories": 2,
      "height_ft": 25,
      "tier": "Type V (wood)",
      "units": 4,
@@ -4406,7 +4406,7 @@
      "rlv_per_unit": -525754.3189918884
     },
     {
-     "storeys": 3,
+     "stories": 3,
      "height_ft": 35,
      "tier": "Type V (wood)",
      "units": 9,
@@ -4421,7 +4421,7 @@
      "rlv_per_unit": -317948.77075904753
     },
     {
-     "storeys": 4,
+     "stories": 4,
      "height_ft": 45,
      "tier": "Type V (wood)",
      "units": 14,
@@ -4436,7 +4436,7 @@
      "rlv_per_unit": -231723.3542688761
     },
     {
-     "storeys": 5,
+     "stories": 5,
      "height_ft": 55,
      "tier": "Type V over Type I podium",
      "units": 19,
@@ -4451,7 +4451,7 @@
      "rlv_per_unit": -236490.1711989169
     },
     {
-     "storeys": 6,
+     "stories": 6,
      "height_ft": 65,
      "tier": "Type V over Type I podium",
      "units": 23,
@@ -4466,7 +4466,7 @@
      "rlv_per_unit": -246267.72268622313
     },
     {
-     "storeys": 7,
+     "stories": 7,
      "height_ft": 75,
      "tier": "Type III over Type I podium",
      "units": 28,
@@ -4481,7 +4481,7 @@
      "rlv_per_unit": -355216.92258250236
     },
     {
-     "storeys": 8,
+     "stories": 8,
      "height_ft": 85,
      "tier": "Type III over Type I podium",
      "units": 33,
@@ -4496,7 +4496,7 @@
      "rlv_per_unit": -346048.8474626563
     },
     {
-     "storeys": 9,
+     "stories": 9,
      "height_ft": 95,
      "tier": "Type I (concrete/steel)",
      "units": 38,
@@ -4511,7 +4511,7 @@
      "rlv_per_unit": -480309.5930687501
     },
     {
-     "storeys": 10,
+     "stories": 10,
      "height_ft": 105,
      "tier": "Type I (concrete/steel)",
      "units": 42,
@@ -4526,7 +4526,7 @@
      "rlv_per_unit": -487888.2097625104
     },
     {
-     "storeys": 11,
+     "stories": 11,
      "height_ft": 115,
      "tier": "Type I (concrete/steel)",
      "units": 47,
@@ -4541,7 +4541,7 @@
      "rlv_per_unit": -481401.61691101466
     },
     {
-     "storeys": 12,
+     "stories": 12,
      "height_ft": 125,
      "tier": "Type I (concrete/steel)",
      "units": 52,
@@ -4561,7 +4561,7 @@
    "site": "wells-fargo",
    "fee_mode": "in_lieu",
    "scenario": "unfavorable",
-   "break_even_storeys": null,
+   "break_even_stories": null,
    "land": {
     "market": 2875000.0,
     "euv": 0.0,
@@ -4570,7 +4570,7 @@
    },
    "rows": [
     {
-     "storeys": 2,
+     "stories": 2,
      "height_ft": 25,
      "tier": "Type V (wood)",
      "units": 4,
@@ -4585,7 +4585,7 @@
      "rlv_per_unit": -912639.0898603748
     },
     {
-     "storeys": 3,
+     "stories": 3,
      "height_ft": 35,
      "tier": "Type V (wood)",
      "units": 8,
@@ -4600,7 +4600,7 @@
      "rlv_per_unit": -598738.9945358124
     },
     {
-     "storeys": 4,
+     "stories": 4,
      "height_ft": 45,
      "tier": "Type V (wood)",
      "units": 12,
@@ -4615,7 +4615,7 @@
      "rlv_per_unit": -522979.1311984584
     },
     {
-     "storeys": 5,
+     "stories": 5,
      "height_ft": 55,
      "tier": "Type V over Type I podium",
      "units": 16,
@@ -4630,7 +4630,7 @@
      "rlv_per_unit": -516278.79757886246
     },
     {
-     "storeys": 6,
+     "stories": 6,
      "height_ft": 65,
      "tier": "Type V over Type I podium",
      "units": 20,
@@ -4645,7 +4645,7 @@
      "rlv_per_unit": -491845.38444438996
     },
     {
-     "storeys": 7,
+     "stories": 7,
      "height_ft": 75,
      "tier": "Type III over Type I podium",
      "units": 24,
@@ -4660,7 +4660,7 @@
      "rlv_per_unit": -633641.1636606121
     },
     {
-     "storeys": 8,
+     "stories": 8,
      "height_ft": 85,
      "tier": "Type III over Type I podium",
      "units": 28,
@@ -4675,7 +4675,7 @@
      "rlv_per_unit": -619509.4233196194
     },
     {
-     "storeys": 9,
+     "stories": 9,
      "height_ft": 95,
      "tier": "Type I (concrete/steel)",
      "units": 32,
@@ -4690,7 +4690,7 @@
      "rlv_per_unit": -805974.1280512753
     },
     {
-     "storeys": 10,
+     "stories": 10,
      "height_ft": 105,
      "tier": "Type I (concrete/steel)",
      "units": 36,
@@ -4705,7 +4705,7 @@
      "rlv_per_unit": -789366.6109803572
     },
     {
-     "storeys": 11,
+     "stories": 11,
      "height_ft": 115,
      "tier": "Type I (concrete/steel)",
      "units": 40,
@@ -4720,7 +4720,7 @@
      "rlv_per_unit": -781526.7335736225
     },
     {
-     "storeys": 12,
+     "stories": 12,
      "height_ft": 125,
      "tier": "Type I (concrete/steel)",
      "units": 44,
@@ -4740,7 +4740,7 @@
    "site": "wells-fargo",
    "fee_mode": "on_site",
    "scenario": "favorable",
-   "break_even_storeys": null,
+   "break_even_stories": null,
    "land": {
     "market": 856750.0,
     "euv": 0.0,
@@ -4749,7 +4749,7 @@
    },
    "rows": [
     {
-     "storeys": 2,
+     "stories": 2,
      "height_ft": 25,
      "tier": "Type V (wood)",
      "units": 5,
@@ -4764,7 +4764,7 @@
      "rlv_per_unit": -32482.508249598835
     },
     {
-     "storeys": 3,
+     "stories": 3,
      "height_ft": 35,
      "tier": "Type V (wood)",
      "units": 10,
@@ -4779,7 +4779,7 @@
      "rlv_per_unit": -8989.039122305625
     },
     {
-     "storeys": 4,
+     "stories": 4,
      "height_ft": 45,
      "tier": "Type V (wood)",
      "units": 16,
@@ -4794,7 +4794,7 @@
      "rlv_per_unit": 24131.452425117663
     },
     {
-     "storeys": 5,
+     "stories": 5,
      "height_ft": 55,
      "tier": "Type V over Type I podium",
      "units": 21,
@@ -4809,7 +4809,7 @@
      "rlv_per_unit": -1882.434730203911
     },
     {
-     "storeys": 6,
+     "stories": 6,
      "height_ft": 65,
      "tier": "Type V over Type I podium",
      "units": 26,
@@ -4824,7 +4824,7 @@
      "rlv_per_unit": -14978.416348849352
     },
     {
-     "storeys": 7,
+     "stories": 7,
      "height_ft": 75,
      "tier": "Type III over Type I podium",
      "units": 32,
@@ -4839,7 +4839,7 @@
      "rlv_per_unit": -99485.30951914896
     },
     {
-     "storeys": 8,
+     "stories": 8,
      "height_ft": 85,
      "tier": "Type III over Type I podium",
      "units": 37,
@@ -4854,7 +4854,7 @@
      "rlv_per_unit": -94415.1506606585
     },
     {
-     "storeys": 9,
+     "stories": 9,
      "height_ft": 95,
      "tier": "Type I (concrete/steel)",
      "units": 43,
@@ -4869,7 +4869,7 @@
      "rlv_per_unit": -202198.46190367284
     },
     {
-     "storeys": 10,
+     "stories": 10,
      "height_ft": 105,
      "tier": "Type I (concrete/steel)",
      "units": 48,
@@ -4884,7 +4884,7 @@
      "rlv_per_unit": -207955.02403433822
     },
     {
-     "storeys": 11,
+     "stories": 11,
      "height_ft": 115,
      "tier": "Type I (concrete/steel)",
      "units": 53,
@@ -4899,7 +4899,7 @@
      "rlv_per_unit": -212515.06500827422
     },
     {
-     "storeys": 12,
+     "stories": 12,
      "height_ft": 125,
      "tier": "Type I (concrete/steel)",
      "units": 59,
@@ -4919,7 +4919,7 @@
    "site": "wells-fargo",
    "fee_mode": "on_site",
    "scenario": "base",
-   "break_even_storeys": null,
+   "break_even_stories": null,
    "land": {
     "market": 1868750.0,
     "euv": 0.0,
@@ -4928,7 +4928,7 @@
    },
    "rows": [
     {
-     "storeys": 2,
+     "stories": 2,
      "height_ft": 25,
      "tier": "Type V (wood)",
      "units": 4,
@@ -4943,7 +4943,7 @@
      "rlv_per_unit": -575373.129336716
     },
     {
-     "storeys": 3,
+     "stories": 3,
      "height_ft": 35,
      "tier": "Type V (wood)",
      "units": 9,
@@ -4958,7 +4958,7 @@
      "rlv_per_unit": -343052.337808856
     },
     {
-     "storeys": 4,
+     "stories": 4,
      "height_ft": 45,
      "tier": "Type V (wood)",
      "units": 14,
@@ -4973,7 +4973,7 @@
      "rlv_per_unit": -244249.83086986135
     },
     {
-     "storeys": 5,
+     "stories": 5,
      "height_ft": 55,
      "tier": "Type V over Type I podium",
      "units": 19,
@@ -4988,7 +4988,7 @@
      "rlv_per_unit": -240680.85722432527
     },
     {
-     "storeys": 6,
+     "stories": 6,
      "height_ft": 65,
      "tier": "Type V over Type I podium",
      "units": 23,
@@ -5003,7 +5003,7 @@
      "rlv_per_unit": -253354.95881815712
     },
     {
-     "storeys": 7,
+     "stories": 7,
      "height_ft": 75,
      "tier": "Type III over Type I podium",
      "units": 28,
@@ -5018,7 +5018,7 @@
      "rlv_per_unit": -361941.6824347192
     },
     {
-     "storeys": 8,
+     "stories": 8,
      "height_ft": 85,
      "tier": "Type III over Type I podium",
      "units": 33,
@@ -5033,7 +5033,7 @@
      "rlv_per_unit": -351200.514651789
     },
     {
-     "storeys": 9,
+     "stories": 9,
      "height_ft": 95,
      "tier": "Type I (concrete/steel)",
      "units": 38,
@@ -5048,7 +5048,7 @@
      "rlv_per_unit": -482943.15568218025
     },
     {
-     "storeys": 10,
+     "stories": 10,
      "height_ft": 105,
      "tier": "Type I (concrete/steel)",
      "units": 42,
@@ -5063,7 +5063,7 @@
      "rlv_per_unit": -489067.11329288816
     },
     {
-     "storeys": 11,
+     "stories": 11,
      "height_ft": 115,
      "tier": "Type I (concrete/steel)",
      "units": 47,
@@ -5078,7 +5078,7 @@
      "rlv_per_unit": -480417.92138643644
     },
     {
-     "storeys": 12,
+     "stories": 12,
      "height_ft": 125,
      "tier": "Type I (concrete/steel)",
      "units": 52,
@@ -5098,7 +5098,7 @@
    "site": "wells-fargo",
    "fee_mode": "on_site",
    "scenario": "unfavorable",
-   "break_even_storeys": null,
+   "break_even_stories": null,
    "land": {
     "market": 2875000.0,
     "euv": 0.0,
@@ -5107,7 +5107,7 @@
    },
    "rows": [
     {
-     "storeys": 2,
+     "stories": 2,
      "height_ft": 25,
      "tier": "Type V (wood)",
      "units": 4,
@@ -5122,7 +5122,7 @@
      "rlv_per_unit": -945632.396110375
     },
     {
-     "storeys": 3,
+     "stories": 3,
      "height_ft": 35,
      "tier": "Type V (wood)",
      "units": 8,
@@ -5137,7 +5137,7 @@
      "rlv_per_unit": -618772.6935983124
     },
     {
-     "storeys": 4,
+     "stories": 4,
      "height_ft": 45,
      "tier": "Type V (wood)",
      "units": 12,
@@ -5152,7 +5152,7 @@
      "rlv_per_unit": -530168.1031776249
     },
     {
-     "storeys": 5,
+     "stories": 5,
      "height_ft": 55,
      "tier": "Type V over Type I podium",
      "units": 16,
@@ -5167,7 +5167,7 @@
      "rlv_per_unit": -514486.0310163624
     },
     {
-     "storeys": 6,
+     "stories": 6,
      "height_ft": 65,
      "tier": "Type V over Type I podium",
      "units": 20,
@@ -5182,7 +5182,7 @@
      "rlv_per_unit": -481135.4997568899
     },
     {
-     "storeys": 7,
+     "stories": 7,
      "height_ft": 75,
      "tier": "Type III over Type I podium",
      "units": 24,
@@ -5197,7 +5197,7 @@
      "rlv_per_unit": -625515.0335564454
     },
     {
-     "storeys": 8,
+     "stories": 8,
      "height_ft": 85,
      "tier": "Type III over Type I podium",
      "units": 28,
@@ -5212,7 +5212,7 @@
      "rlv_per_unit": -611348.4750606909
     },
     {
-     "storeys": 9,
+     "stories": 9,
      "height_ft": 95,
      "tier": "Type I (concrete/steel)",
      "units": 32,
@@ -5227,7 +5227,7 @@
      "rlv_per_unit": -797160.1669575253
     },
     {
-     "storeys": 10,
+     "stories": 10,
      "height_ft": 105,
      "tier": "Type I (concrete/steel)",
      "units": 36,
@@ -5242,7 +5242,7 @@
      "rlv_per_unit": -778744.7510150793
     },
     {
-     "storeys": 11,
+     "stories": 11,
      "height_ft": 115,
      "tier": "Type I (concrete/steel)",
      "units": 40,
@@ -5257,7 +5257,7 @@
      "rlv_per_unit": -767329.2238861226
     },
     {
-     "storeys": 12,
+     "stories": 12,
      "height_ft": 125,
      "tier": "Type I (concrete/steel)",
      "units": 44,
@@ -5277,7 +5277,7 @@
    "site": "post-office",
    "fee_mode": "in_lieu",
    "scenario": "favorable",
-   "break_even_storeys": null,
+   "break_even_stories": null,
    "land": {
     "market": 2406946.0,
     "euv": 1702706.4,
@@ -5286,7 +5286,7 @@
    },
    "rows": [
     {
-     "storeys": 2,
+     "stories": 2,
      "height_ft": 25,
      "tier": "Type V (wood)",
      "units": 15,
@@ -5301,7 +5301,7 @@
      "rlv_per_unit": 67179.96164122783
     },
     {
-     "storeys": 3,
+     "stories": 3,
      "height_ft": 35,
      "tier": "Type V (wood)",
      "units": 30,
@@ -5316,7 +5316,7 @@
      "rlv_per_unit": 41953.4599381956
     },
     {
-     "storeys": 4,
+     "stories": 4,
      "height_ft": 45,
      "tier": "Type V (wood)",
      "units": 45,
@@ -5331,7 +5331,7 @@
      "rlv_per_unit": 44318.74323718515
     },
     {
-     "storeys": 5,
+     "stories": 5,
      "height_ft": 55,
      "tier": "Type V over Type I podium",
      "units": 60,
@@ -5346,7 +5346,7 @@
      "rlv_per_unit": 29642.867572829065
     },
     {
-     "storeys": 6,
+     "stories": 6,
      "height_ft": 65,
      "tier": "Type V over Type I podium",
      "units": 75,
@@ -5361,7 +5361,7 @@
      "rlv_per_unit": 26581.343391967417
     },
     {
-     "storeys": 7,
+     "stories": 7,
      "height_ft": 75,
      "tier": "Type III over Type I podium",
      "units": 90,
@@ -5376,7 +5376,7 @@
      "rlv_per_unit": -71672.5508370445
     },
     {
-     "storeys": 8,
+     "stories": 8,
      "height_ft": 85,
      "tier": "Type III over Type I podium",
      "units": 106,
@@ -5391,7 +5391,7 @@
      "rlv_per_unit": -66131.21129999394
     },
     {
-     "storeys": 9,
+     "stories": 9,
      "height_ft": 95,
      "tier": "Type I (concrete/steel)",
      "units": 121,
@@ -5406,7 +5406,7 @@
      "rlv_per_unit": -184765.85405720555
     },
     {
-     "storeys": 10,
+     "stories": 10,
      "height_ft": 105,
      "tier": "Type I (concrete/steel)",
      "units": 136,
@@ -5421,7 +5421,7 @@
      "rlv_per_unit": -185325.70357353645
     },
     {
-     "storeys": 11,
+     "stories": 11,
      "height_ft": 115,
      "tier": "Type I (concrete/steel)",
      "units": 151,
@@ -5436,7 +5436,7 @@
      "rlv_per_unit": -185971.71759655658
     },
     {
-     "storeys": 12,
+     "stories": 12,
      "height_ft": 125,
      "tier": "Type I (concrete/steel)",
      "units": 166,
@@ -5456,7 +5456,7 @@
    "site": "post-office",
    "fee_mode": "in_lieu",
    "scenario": "base",
-   "break_even_storeys": null,
+   "break_even_stories": null,
    "land": {
     "market": 5250050.0,
     "euv": 3693370.5,
@@ -5465,7 +5465,7 @@
    },
    "rows": [
     {
-     "storeys": 2,
+     "stories": 2,
      "height_ft": 25,
      "tier": "Type V (wood)",
      "units": 13,
@@ -5480,7 +5480,7 @@
      "rlv_per_unit": -419114.82100797404
     },
     {
-     "storeys": 3,
+     "stories": 3,
      "height_ft": 35,
      "tier": "Type V (wood)",
      "units": 26,
@@ -5495,7 +5495,7 @@
      "rlv_per_unit": -304308.2641574654
     },
     {
-     "storeys": 4,
+     "stories": 4,
      "height_ft": 45,
      "tier": "Type V (wood)",
      "units": 40,
@@ -5510,7 +5510,7 @@
      "rlv_per_unit": -243499.02177538938
     },
     {
-     "storeys": 5,
+     "stories": 5,
      "height_ft": 55,
      "tier": "Type V over Type I podium",
      "units": 53,
@@ -5525,7 +5525,7 @@
      "rlv_per_unit": -251101.04208796183
     },
     {
-     "storeys": 6,
+     "stories": 6,
      "height_ft": 65,
      "tier": "Type V over Type I podium",
      "units": 66,
@@ -5540,7 +5540,7 @@
      "rlv_per_unit": -240048.2720120116
     },
     {
-     "storeys": 7,
+     "stories": 7,
      "height_ft": 75,
      "tier": "Type III over Type I podium",
      "units": 80,
@@ -5555,7 +5555,7 @@
      "rlv_per_unit": -348378.33305163484
     },
     {
-     "storeys": 8,
+     "stories": 8,
      "height_ft": 85,
      "tier": "Type III over Type I podium",
      "units": 93,
@@ -5570,7 +5570,7 @@
      "rlv_per_unit": -344827.4528476913
     },
     {
-     "storeys": 9,
+     "stories": 9,
      "height_ft": 95,
      "tier": "Type I (concrete/steel)",
      "units": 107,
@@ -5585,7 +5585,7 @@
      "rlv_per_unit": -484526.2905710798
     },
     {
-     "storeys": 10,
+     "stories": 10,
      "height_ft": 105,
      "tier": "Type I (concrete/steel)",
      "units": 120,
@@ -5600,7 +5600,7 @@
      "rlv_per_unit": -482500.8338892622
     },
     {
-     "storeys": 11,
+     "stories": 11,
      "height_ft": 115,
      "tier": "Type I (concrete/steel)",
      "units": 133,
@@ -5615,7 +5615,7 @@
      "rlv_per_unit": -478265.05528317444
     },
     {
-     "storeys": 12,
+     "stories": 12,
      "height_ft": 125,
      "tier": "Type I (concrete/steel)",
      "units": 147,
@@ -5635,7 +5635,7 @@
    "site": "post-office",
    "fee_mode": "in_lieu",
    "scenario": "unfavorable",
-   "break_even_storeys": null,
+   "break_even_stories": null,
    "land": {
     "market": 8077000.0,
     "euv": 6303352.319999999,
@@ -5644,7 +5644,7 @@
    },
    "rows": [
     {
-     "storeys": 2,
+     "stories": 2,
      "height_ft": 25,
      "tier": "Type V (wood)",
      "units": 11,
@@ -5659,7 +5659,7 @@
      "rlv_per_unit": -935034.1358304423
     },
     {
-     "storeys": 3,
+     "stories": 3,
      "height_ft": 35,
      "tier": "Type V (wood)",
      "units": 22,
@@ -5674,7 +5674,7 @@
      "rlv_per_unit": -659092.0280182776
     },
     {
-     "storeys": 4,
+     "stories": 4,
      "height_ft": 45,
      "tier": "Type V (wood)",
      "units": 34,
@@ -5689,7 +5689,7 @@
      "rlv_per_unit": -539064.4031961574
     },
     {
-     "storeys": 5,
+     "stories": 5,
      "height_ft": 55,
      "tier": "Type V over Type I podium",
      "units": 45,
@@ -5704,7 +5704,7 @@
      "rlv_per_unit": -529404.4336807461
     },
     {
-     "storeys": 6,
+     "stories": 6,
      "height_ft": 65,
      "tier": "Type V over Type I podium",
      "units": 57,
@@ -5719,7 +5719,7 @@
      "rlv_per_unit": -487147.57217877486
     },
     {
-     "storeys": 7,
+     "stories": 7,
      "height_ft": 75,
      "tier": "Type III over Type I podium",
      "units": 68,
@@ -5734,7 +5734,7 @@
      "rlv_per_unit": -635391.6296938487
     },
     {
-     "storeys": 8,
+     "stories": 8,
      "height_ft": 85,
      "tier": "Type III over Type I podium",
      "units": 80,
@@ -5749,7 +5749,7 @@
      "rlv_per_unit": -610328.8197192472
     },
     {
-     "storeys": 9,
+     "stories": 9,
      "height_ft": 95,
      "tier": "Type I (concrete/steel)",
      "units": 91,
@@ -5764,7 +5764,7 @@
      "rlv_per_unit": -797711.0681814229
     },
     {
-     "storeys": 10,
+     "stories": 10,
      "height_ft": 105,
      "tier": "Type I (concrete/steel)",
      "units": 103,
@@ -5779,7 +5779,7 @@
      "rlv_per_unit": -778981.7519184989
     },
     {
-     "storeys": 11,
+     "stories": 11,
      "height_ft": 115,
      "tier": "Type I (concrete/steel)",
      "units": 114,
@@ -5794,7 +5794,7 @@
      "rlv_per_unit": -774254.5414096599
     },
     {
-     "storeys": 12,
+     "stories": 12,
      "height_ft": 125,
      "tier": "Type I (concrete/steel)",
      "units": 125,
@@ -5814,7 +5814,7 @@
    "site": "post-office",
    "fee_mode": "on_site",
    "scenario": "favorable",
-   "break_even_storeys": null,
+   "break_even_stories": null,
    "land": {
     "market": 2406946.0,
     "euv": 1702706.4,
@@ -5823,7 +5823,7 @@
    },
    "rows": [
     {
-     "storeys": 2,
+     "stories": 2,
      "height_ft": 25,
      "tier": "Type V (wood)",
      "units": 15,
@@ -5838,7 +5838,7 @@
      "rlv_per_unit": 39880.33641456117
     },
     {
-     "storeys": 3,
+     "stories": 3,
      "height_ft": 35,
      "tier": "Type V (wood)",
      "units": 30,
@@ -5853,7 +5853,7 @@
      "rlv_per_unit": 17407.570578195653
     },
     {
-     "storeys": 4,
+     "stories": 4,
      "height_ft": 45,
      "tier": "Type V (wood)",
      "units": 45,
@@ -5868,7 +5868,7 @@
      "rlv_per_unit": 25836.053032740703
     },
     {
-     "storeys": 5,
+     "stories": 5,
      "height_ft": 55,
      "tier": "Type V over Type I podium",
      "units": 60,
@@ -5883,7 +5883,7 @@
      "rlv_per_unit": 10332.811546162517
     },
     {
-     "storeys": 6,
+     "stories": 6,
      "height_ft": 65,
      "tier": "Type V over Type I podium",
      "units": 75,
@@ -5898,7 +5898,7 @@
      "rlv_per_unit": 9862.040191967388
     },
     {
-     "storeys": 7,
+     "stories": 7,
      "height_ft": 75,
      "tier": "Type III over Type I podium",
      "units": 90,
@@ -5913,7 +5913,7 @@
      "rlv_per_unit": -86058.0188192668
     },
     {
-     "storeys": 8,
+     "stories": 8,
      "height_ft": 85,
      "tier": "Type III over Type I podium",
      "units": 106,
@@ -5928,7 +5928,7 @@
      "rlv_per_unit": -91003.38289244677
     },
     {
-     "storeys": 9,
+     "stories": 9,
      "height_ft": 95,
      "tier": "Type I (concrete/steel)",
      "units": 121,
@@ -5943,7 +5943,7 @@
      "rlv_per_unit": -207342.66866216427
     },
     {
-     "storeys": 10,
+     "stories": 10,
      "height_ft": 105,
      "tier": "Type I (concrete/steel)",
      "units": 136,
@@ -5958,7 +5958,7 @@
      "rlv_per_unit": -207815.97467353643
     },
     {
-     "storeys": 11,
+     "stories": 11,
      "height_ft": 115,
      "tier": "Type I (concrete/steel)",
      "units": 151,
@@ -5973,7 +5973,7 @@
      "rlv_per_unit": -206859.27553033127
     },
     {
-     "storeys": 12,
+     "stories": 12,
      "height_ft": 125,
      "tier": "Type I (concrete/steel)",
      "units": 166,
@@ -5993,7 +5993,7 @@
    "site": "post-office",
    "fee_mode": "on_site",
    "scenario": "base",
-   "break_even_storeys": null,
+   "break_even_stories": null,
    "land": {
     "market": 5250050.0,
     "euv": 3693370.5,
@@ -6002,7 +6002,7 @@
    },
    "rows": [
     {
-     "storeys": 2,
+     "stories": 2,
      "height_ft": 25,
      "tier": "Type V (wood)",
      "units": 13,
@@ -6017,7 +6017,7 @@
      "rlv_per_unit": -435783.10411672737
     },
     {
-     "storeys": 3,
+     "stories": 3,
      "height_ft": 35,
      "tier": "Type V (wood)",
      "units": 26,
@@ -6032,7 +6032,7 @@
      "rlv_per_unit": -314728.5446136988
     },
     {
-     "storeys": 4,
+     "stories": 4,
      "height_ft": 45,
      "tier": "Type V (wood)",
      "units": 40,
@@ -6047,7 +6047,7 @@
      "rlv_per_unit": -243680.59435814797
     },
     {
-     "storeys": 5,
+     "stories": 5,
      "height_ft": 55,
      "tier": "Type V over Type I podium",
      "units": 53,
@@ -6062,7 +6062,7 @@
      "rlv_per_unit": -250830.36735016087
     },
     {
-     "storeys": 6,
+     "stories": 6,
      "height_ft": 65,
      "tier": "Type V over Type I podium",
      "units": 66,
@@ -6077,7 +6077,7 @@
      "rlv_per_unit": -239503.42648432092
     },
     {
-     "storeys": 7,
+     "stories": 7,
      "height_ft": 75,
      "tier": "Type III over Type I podium",
      "units": 80,
@@ -6092,7 +6092,7 @@
      "rlv_per_unit": -350460.7064964624
     },
     {
-     "storeys": 8,
+     "stories": 8,
      "height_ft": 85,
      "tier": "Type III over Type I podium",
      "units": 93,
@@ -6107,7 +6107,7 @@
      "rlv_per_unit": -342397.16924517
     },
     {
-     "storeys": 9,
+     "stories": 9,
      "height_ft": 95,
      "tier": "Type I (concrete/steel)",
      "units": 107,
@@ -6122,7 +6122,7 @@
      "rlv_per_unit": -485679.2547528395
     },
     {
-     "storeys": 10,
+     "stories": 10,
      "height_ft": 105,
      "tier": "Type I (concrete/steel)",
      "units": 120,
@@ -6137,7 +6137,7 @@
      "rlv_per_unit": -476962.4800352392
     },
     {
-     "storeys": 11,
+     "stories": 11,
      "height_ft": 115,
      "tier": "Type I (concrete/steel)",
      "units": 133,
@@ -6152,7 +6152,7 @@
      "rlv_per_unit": -476058.8751742816
     },
     {
-     "storeys": 12,
+     "stories": 12,
      "height_ft": 125,
      "tier": "Type I (concrete/steel)",
      "units": 147,
@@ -6172,7 +6172,7 @@
    "site": "post-office",
    "fee_mode": "on_site",
    "scenario": "unfavorable",
-   "break_even_storeys": null,
+   "break_even_stories": null,
    "land": {
     "market": 8077000.0,
     "euv": 6303352.319999999,
@@ -6181,7 +6181,7 @@
    },
    "rows": [
     {
-     "storeys": 2,
+     "stories": 2,
      "height_ft": 25,
      "tier": "Type V (wood)",
      "units": 11,
@@ -6196,7 +6196,7 @@
      "rlv_per_unit": -946091.2391422604
     },
     {
-     "storeys": 3,
+     "stories": 3,
      "height_ft": 35,
      "tier": "Type V (wood)",
      "units": 22,
@@ -6211,7 +6211,7 @@
      "rlv_per_unit": -653441.7472391865
     },
     {
-     "storeys": 4,
+     "stories": 4,
      "height_ft": 45,
      "tier": "Type V (wood)",
      "units": 34,
@@ -6226,7 +6226,7 @@
      "rlv_per_unit": -528432.6747929221
     },
     {
-     "storeys": 5,
+     "stories": 5,
      "height_ft": 55,
      "tier": "Type V over Type I podium",
      "units": 45,
@@ -6241,7 +6241,7 @@
      "rlv_per_unit": -514160.5702523018
     },
     {
-     "storeys": 6,
+     "stories": 6,
      "height_ft": 65,
      "tier": "Type V over Type I podium",
      "units": 57,
@@ -6256,7 +6256,7 @@
      "rlv_per_unit": -473465.569234038
     },
     {
-     "storeys": 7,
+     "stories": 7,
      "height_ft": 75,
      "tier": "Type III over Type I podium",
      "units": 68,
@@ -6271,7 +6271,7 @@
      "rlv_per_unit": -619451.8130553191
     },
     {
-     "storeys": 8,
+     "stories": 8,
      "height_ft": 85,
      "tier": "Type III over Type I podium",
      "units": 80,
@@ -6286,7 +6286,7 @@
      "rlv_per_unit": -597151.4916568722
     },
     {
-     "storeys": 9,
+     "stories": 9,
      "height_ft": 95,
      "tier": "Type I (concrete/steel)",
      "units": 91,
@@ -6301,7 +6301,7 @@
      "rlv_per_unit": -780981.7966587854
     },
     {
-     "storeys": 10,
+     "stories": 10,
      "height_ft": 105,
      "tier": "Type I (concrete/steel)",
      "units": 103,
@@ -6316,7 +6316,7 @@
      "rlv_per_unit": -763575.1296162659
     },
     {
-     "storeys": 11,
+     "stories": 11,
      "height_ft": 115,
      "tier": "Type I (concrete/steel)",
      "units": 114,
@@ -6331,7 +6331,7 @@
      "rlv_per_unit": -759080.7255263266
     },
     {
-     "storeys": 12,
+     "stories": 12,
      "height_ft": 125,
      "tier": "Type I (concrete/steel)",
      "units": 125,

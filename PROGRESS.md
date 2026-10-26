@@ -5,10 +5,18 @@
 
 ---
 
+## 2026-10-26 — Pencil-out: "storey" -> "story" (John: "could we use the American spelling of story?")
+- Renamed throughout the pencil-out module: `pencil_out.py`, `build_jn_o.py`, the zoning standards YAML (`max_stories`,
+  `stories_rule`), the assumptions + research YAMLs, the Phase A audit, CSV columns (`*_best_stories`,
+  `z_*_allowed_stories`) and figure keys. Older repo files named `storeys_*` (reference CSVs, KML, site) left as is.
+- Re-ran `--citywide --zoned` -> `citywide_zoned_2026-10-26.csv`: **identical** to the 10-25 file once column names are
+  mapped (pandas `equals`); 10-25 csv/meta/results removed. Gate: appended `pencil_out_baseline_2026-10-26.json` (only
+  the two renamed keys differed, same values); PASS on re-run.
+
 ## 2026-10-25 — Pencil-out ZONED citywide pass (JN-O §9, dev; no DB writes)
 
 - **Zoning lookup table:** `data/reference/berkeley_zoning_standards_2026-10-25.yaml` (41 districts = every ZONECLASS in
-  the City layer; per row: height ft/storeys, FAR, density, lot coverage, ground floor, permit, BMC section + the copy
+  the City layer; per row: height ft/stories, FAR, density, lot coverage, ground floor, permit, BMC section + the copy
   read). berkeley.municipal.codes refuses scripts (403) and Chrome was not connected, so the sections came from Wayback
   copies (commercial chapter current through Ord. 8001-N.S., Feb 2026) + the City's Ord. 7995/8007 PDFs; manifest with
   SHA-256 `data/reference/berkeley_zoning_sources_2026-10-25.csv`. **Gaps:** R-4 (no Wayback copy; 2025 consultant
@@ -20,7 +28,7 @@
 - `python scripts/v4/pencil_out.py --citywide --zoned` (~30 min) -> `citywide_zoned_2026-10-25.csv` (+ meta with zoning
   hashes): §8's columns + `z_*` columns; replaces `citywide_2026-10-25.csv` (removed). Zoned universe 24,175 (644 not
   permitted / no district). **Base: 0 pencil, either scenario.** Median need 2.17x zoned vs 1.94x unzoned; most of the
-  city allows 3 storeys; Southside (R-SMU/C-T 85 ft) still ~2x. On-site + bonus needs MORE than the in-lieu fee except
+  city allows 3 stories; Southside (R-SMU/C-T 85 ft) still ~2x. On-site + bonus needs MORE than the in-lieu fee except
   where the base envelope is tiny (C-SO, MUR, C-AC with its local tier 2). Favorable set 11,686 -> 2,085 (in-lieu), ~4
   in 10 in a 2025 High/Very High fire zone.
 - **Bug fixed:** on-site results depended on the process hash seed (Part 2's bedroom pool comes out in set order ->
@@ -35,8 +43,8 @@
   parcels) + `.meta.json` (hashes of assumptions/v4/assessor; JN-O refuses a stale pair). Excluded: 2,967 condo units,
   1,348 lots < 2,500 sqft. Per parcel, RECORD-derived: a neighborhood rent index (9,980 Fully Covered tenancies 2023+,
   0.87 South Berkeley to 1.22 Panoramic Hill) and an existing-use value from 2024+ transfers' price per building sqft.
-- **At base, 0 parcels pencil at any height 2-12 storeys** (both affordability scenarios; 0 in the unfavorable case).
-  Rent needed: median 1.94x today's local rents, band ~1.8-2.2 by parcel kind; best height 6 storeys on 23,584 parcels.
+- **At base, 0 parcels pencil at any height 2-12 stories** (both affordability scenarios; 0 in the unfavorable case).
+  Rent needed: median 1.94x today's local rents, band ~1.8-2.2 by parcel kind; best height 6 stories on 23,584 parcels.
 - Favorable case: 11,686 pencil (in-lieu), mostly hillside/north-side single-family lots: an ARTIFACT of no zoning /
   slope / fire-zone layer. **Next: a citywide zoning layer** (height + use per parcel, fire zones, slope) to turn the
   favorable set into a real potential-sites list.
@@ -63,9 +71,9 @@
 - **JN-O** (`scripts/v4/build_jn_o.py` -> `notebooks/v4/JN-O_pencil_out.ipynb`; machinery `scripts/v4/pencil_out.py`;
   gate `data/baselines/pencil_out_baseline_2026-10-25.json`, both-ways tested; results `data/derived/pencil_out/results_2026-10-25.json`).
   Of 14 in scope: **0 pencils, 5 marginal, 2 does_not, 7 insufficient_data**; median gap -260 bp to a 7.25% hurdle; no
-  single sourced assumption flips any verdict (cap rate swings most). **Elmwood: no height 2-12 storeys pencils on any
-  of the 4 sites at base, either affordability scenario**; the best height is the top of the podium tier (6 storeys),
-  needing ~1.9-2.9x today's lease-up rents. Only the Wells Fargo lot pencils, at 4 storeys, all-favorable.
+  single sourced assumption flips any verdict (cap rate swings most). **Elmwood: no height 2-12 stories pencils on any
+  of the 4 sites at base, either affordability scenario**; the best height is the top of the podium tier (6 stories),
+  needing ~1.9-2.9x today's lease-up rents. Only the Wells Fargo lot pencils, at 4 stories, all-favorable.
 - **Next:** Wayback for the 1835/1200 San Pablo staff reports; rents by unit size; the citywide `break_even()` pass.
 
 ---
@@ -335,7 +343,7 @@ table now WRITTEN by `gen_datasette_dbs.py` (said 1,544 projects; the build has 
 docs/data/berkeley_housing_v2_public.db` (the July v2 copy, still served at berkeleybuild.com/data/) + change the
 `.gitignore` line 141 exception to `berkeley_housing_public.db`; the next `deploy.sh` mirror then removes it from main.
 **Left on purpose:** `docs/tours.json` "labels_source: v2" is TRUE for the published geometry.kml (rendered 2026-08-29)
--> regenerate labels from v4 at the next geometry rebuild (with the storeys reminder). Legacy v1/v2 notebooks
+-> regenerate labels from v4 at the next geometry rebuild (with the stories reminder). Legacy v1/v2 notebooks
 (MASTER_ANALYSIS, 04_reporting/*, 05_feasibility/F1) = cutover decision #2, still open.
 **Address matching survey:** the site's ONE visitor address input is Explorer #projectSearch (raw substring,
 `explorer.js:981`). Private matchers in live scripts: `block_density_index._street` (JN-M) and
@@ -436,7 +444,7 @@ Google Cloud project `berkeleybuild-maps`, Maps Embed API only, restricted to be
 recording, not Movie Maker): published with a 3.5 s offset, marked approximate. tours.json durations corrected
 (telegraph 215.7 s, shattuck-s2n-path 470.5 s); `build_tours_manifest.py` lags the hand-edited catalog — do not rerun blind.
 **Shattuck drawings** (`docs/maps/shattuck-{cross-section,plan}.svg`, `scripts/infrastructure/draw_shattuck_*.py`).
-**Open:** (1) re-record Shattuck N-S with Movie Maker for exact sync (headroom check first); (2) the "storeys" reminder
+**Open:** (1) re-record Shattuck N-S with Movie Maker for exact sync (headroom check first); (2) the "stories" reminder
 below still stands at the next tour RE-RENDER.
 
 ---
@@ -453,9 +461,9 @@ the poor are off-campus college students); owner vs renter income (B25119); "Ren
 registry (#26-2375): ~7,200 rent-controlled tenancies 20%+ below new-tenancy rents.
 **Home page** (2026-10-02, staged as main 526c3c6, John pushes): Snapshot button replaces the Mayor button (Mayor moved
 above the flyovers); stage legend above "What Berkeley actually builds each year"; `site_numbers.py` now also keeps the
-Explorer button's project count current. US spelling sweep: storey→story in pages, docs, label scripts.
+Explorer button's project count current. US spelling sweep: story→story in pages, docs, label scripts.
 **Open:** (1) at the NEXT TOUR UPDATE remind John — geometry.kml descriptions, tour packages and rendered video labels still
-say "storeys" (rebuild, don't hand-edit); (2) count of deed-restricted units in completed buildings needs the City's
+say "stories" (rebuild, don't hand-edit); (2) count of deed-restricted units in completed buildings needs the City's
 affordable-housing portfolio list (records request to draft); (3) UC per-building bed list from UC Housing would replace
 the 2020 EIR figures; (4) queued separate document: how Measure U fails to fund the right investments.
 
@@ -923,7 +931,7 @@ PASS. **John to re-lock.**
 square footage and parking (the "drop" had rested only on v2's empty column). Built: `build_views.py` (last chain step:
 `v_projects`, `v_project_timeline`), `project_records` (1,056 records), City taxable sq ft per parcel (`parcel_area`,
 29,113), proposed units for 283 application-only projects (189 stated + 94 by_definition, John), building measures for
-742 projects (sq ft 503, storeys 386, height 109, parking 93); 3 self-contradicting pairs excluded with reasons (John:
+742 projects (sq ft 503, stories 386, height 109, parking 93); 3 self-contradicting pairs excluded with reasons (John:
 flag-and-exclude). Full chain incl. views (`scratch/2026-10-01_phase6/chain`, sha 8daf35a0): all gates PASS incl.
 structural vs live; core columns identical to live. **The chain is now A->B->C->F->structures->projects->views.**
 
@@ -1067,8 +1075,8 @@ NOTHING PUBLISHED from these (pipeline-state, players, KML, notebooks wait on th
 5. Possible v4 duplicates / mis-statuses: 1899 Oxford, 2115 Kittredge, 2029 University (two projects per site --
    modification chains?), 1750 Sacramento pre-application (v2: entitled 2026-03-03), 2427 San Pablo 78 -> 8 units,
    1598 University completed -> under construction. Check before republishing the map.
-6. Ledger corrections v2 had and v4 lacks: 2128 Oxford 456 units / 27 storeys / 285 ft (approved plan set); 2700
-   Shattuck 15 storeys (v4 reads 8). UC heights missing in v4.
+6. Ledger corrections v2 had and v4 lacks: 2128 Oxford 456 units / 27 stories / 285 ft (approved plan set); 2700
+   Shattuck 15 stories (v4 reads 8). UC heights missing in v4.
 7. KML: apply the v4 sync/restyle after 5-6; legend fold ("Building Permits Filed" -> Entitled, inactive -> Stalled,
    Denied/Expired -> Withdrawn) or adopt the Explorer's colors (breaks published videos' legend).
 8. Ashby BART placemarks -> PLN2026-0185?
@@ -1683,7 +1691,7 @@ dispositions, 0 missing, 0 extra). That file holds **6 records** at the address,
   modifications. 19% of v2 projects (76/395) sit at an address with >1 ZP — mostly a CHAIN (original +
   modifications = one project, rung 3 = the root), sometimes CONFLATED (separate applications stitched
   into one v2 timeline: proj10 3000 Shattuck has filed_date from ZP2015-0229 and app_complete from the
-  unrelated 9-storey ZP2022-0046). Rule + 11 tests: `housing_rules/test_chain_resolution.py`.
+  unrelated 9-story ZP2022-0046). Rule + 11 tests: `housing_rules/test_chain_resolution.py`.
 - **The ZP→BP bridge does not exist in either candidate source.** Related Records populated on 12% of
   records (0% of Landmarks, 1% of Pre-Apps, 34% of DRC Final); and only **4 of 32,897** building permits
   cite a Planning record in 3c's full run. Connecting an entitlement to its building permit is an
@@ -1731,7 +1739,7 @@ their primary application (13 via a modification CHAIN resolved to its root); 21
 LATE, mean +53d, p90 +216d.**
 
 **19 CONFLATED projects** — separate applications sharing one address, stitched into a single v2
-timeline (proj10 3000 Shattuck: v2's 166 units are the 2022 10-storey scheme, its filed_date is a
+timeline (proj10 3000 Shattuck: v2's 166 units are the 2022 10-story scheme, its filed_date is a
 different 2015 application; proj828 has three unrelated primaries). Reported, never merged, never
 written.
 
@@ -2351,7 +2359,7 @@ between append-only evidence and classification). Source mapping corrected.
 **And the mapping was wrong in BOTH directions** — a genuine Accela `Withdrawn` had no entry and
 fell through to the default, so real withdrawals sat buried as `status_update` while fake ones were
 typed as withdrawals. `'withdrawn': 'project_withdrawn'` added. The 6 buried ones need no
-correction: 2136 San Pablo (125u) withdrew a 2019 proposal and had a 2021 six-storey version
+correction: 2136 San Pablo (125u) withdrew a 2019 proposal and had a 2021 six-story version
 **approved**; 2200 Fifth withdrew and re-filed. **A withdrawal applies to a RECORD, not a project.**
 
 **⚠ TWO BUGS JOHN'S SITE KNOWLEDGE CAUGHT — the data asserted both confidently.**
@@ -2510,7 +2518,7 @@ a project is genuinely under construction *before* it finals (how we know 2808 N
 built). Fetch for watched cohorts only.
 
 **2025 CO tour — BUILDABLE NOW.** 98 projects, **96 geocoded (98%)**, 100% have address + units. Only
-gap is storeys (11%), derivable from BP description + assessor at 3.5 m/storey.
+gap is stories (11%), derivable from BP description + assessor at 3.5 m/story.
 
 **2026 CO tour — BLOCKED, and the fix is an INGEST not a scrape.** v2 holds **2** projects with a 2026
 CO; Accela shows **1,136 finaled permits in 2026**. v2's permit feed stops 2025-12-11. The data is
@@ -2571,10 +2579,10 @@ real layer it is **73-74** — re-baseline `JN-M_corridor_density` before publis
 
 ---
 
-## 2026-09-24 — Sanborn maps fetched: the Elmwood strip was vacant in 1911, one storey in 1950
+## 2026-09-24 — Sanborn maps fetched: the Elmwood strip was vacant in 1911, one story in 1950
 
-**The historical block record we went looking for exists, and it records STOREYS.** Sanborn fire
-insurance sheets draw every building footprint with its storey count, construction material and use.
+**The historical block record we went looking for exists, and it records STORIES.** Sanborn fire
+insurance sheets draw every building footprint with its story count, construction material and use.
 Fetched from the Library of Congress IIIF service (public domain).
 
 **What is free, verified not assumed** — being *catalogued* at LoC is not being *digitised*.
@@ -2591,7 +2599,7 @@ carry across too (5359, 5346, 5363–5365, 4152–4154).
 Church on the corner across Russell; the strip does not exist. **1950 = continuously built, 2901–2953
 plus the bank at 2950 — and the numeral in every footprint on that frontage is `1`.** Material grades
 southward frame → brick → reinforced concrete, a build-order signature. So the strip was infill into
-an already-settled residential neighbourhood, went up single-storey, and **has not gained a storey in
+an already-settled residential neighbourhood, went up single-story, and **has not gained a story in
 the ~75 years since.** A measured statement about built form, where the corridor debate runs on
 intuition.
 
@@ -2601,7 +2609,7 @@ intuition.
 - `notes/2026-09-24_sanborn_elmwood_1911_1950.md` — full read, caveats, next steps
 
 **Next:** georeference 179/180 onto the real city-block layer from `scripts/city_block_index.py`, then
-historical FAR = Sanborn storeys × footprint area ÷ block area, versus the modern figures. Read the
+historical FAR = Sanborn stories × footprint area ÷ block area, versus the modern figures. Read the
 residential blocks (5333, 5347, 5332, 5364, 5363) as the control group.
 
 ---
@@ -3570,7 +3578,7 @@ live explorer was serving data whose own header read **2026-08-10**: 28 owners p
 file nobody serves, and `deploy_gate.py` passed 15/15 while shipping month-old data.
 
 Promoted and deployed (`db51945`, main `2129539`, pushed): owners 28 -> 852, architects 44 -> 49,
-plus 2128 Oxford's corrected 456 units / 27 storeys. Shape was checked BEFORE copying -- both files
+plus 2128 Oxford's corrected 456 units / 27 stories. Shape was checked BEFORE copying -- both files
 declare the same `DATA` variable and the same 9 top-level keys -- rather than discovering a break
 after. The deploy also carried `docs/methodology/geometry_and_tours.md` and the recovered
 `kml/tours/panoramic-kennedy-legacy.kml`, both committed earlier and never published.
@@ -3581,7 +3589,7 @@ evidence of anything.
 
 **The same bug was in the labels, and had already shipped a wrong number.** `gen_svg_labels.py`
 cached on "does `<slug>.png` exist" -- a filename no data change can touch. `2128-oxford-st.png`
-was rendered at 11:19 saying *485 units / 26 storeys*, ninety minutes before the write that made it
+was rendered at 11:19 saying *485 units / 26 stories*, ninety minutes before the write that made it
 456 / 27; any tour built after would still have shown 485. The cache now hashes the SVG into a
 `.sha` sidecar and re-renders when and only when something DISPLAYED changes. All 894 re-rendered.
 SCALE 1.20 -> 1.60 (John: "still hard to read"); John also set Earth to Large, so size is settled --
@@ -3687,7 +3695,7 @@ threshold. For the 15-project subset reported to John on 2026-09-02: **4,558 →
 - **1974 Shattuck — 599 CONFIRMED**, plan set matches v2 exactly.
 - **2700 Shattuck — 359 CONFIRMED**, 2026-08-20 scope: "8-story mixed-use residential development
   with 359 dwelling units… with State of California density bonus".
-- **2190 Shattuck — consistent but unverified on units.** Feb-2026 scope confirms the 34-storey
+- **2190 Shattuck — consistent but unverified on units.** Feb-2026 scope confirms the 34-story
   density-bonus increase and the architect v2 already carries; the 452 count was not independently
   checked.
 - **2128 Oxford — corrected, above.**
@@ -3697,7 +3705,7 @@ proj133; any ≥200 or citywide unit sum). A new timestamped baseline must be ap
 `total_units` for proj133 is now 456, not 485.
 
 **Not yet done downstream:** `docs/explorer_data.js` re-export, the 2128 Oxford label PNG
-(units, storeys and height all appear on it), and re-recording any tour that flies it.
+(units, stories and height all appear on it), and re-recording any tour that flies it.
 
 ---
 
@@ -3902,7 +3910,7 @@ sources, ranked by cost:
 
 **The label system.** KML cannot fold text — Earth renders a `<name>` as one line
 however long — so a label is now a rendered PNG carrying four lines: address;
-beds or units and status in the status colour; storeys, height, floor area;
+beds or units and status in the status colour; stories, height, floor area;
 architect and date. `gen_svg_labels.py` writes the SVG directly (it is just XML)
 and rasterises with `qlmanage`, which is already on the machine and preserves
 alpha. No image library is installed. Dates print to their RECORDED PRECISION —
@@ -3975,8 +3983,8 @@ item F3, 19 March 2025, is the approved scope: ~583 units containing ~1,625 beds
 ~353,000 gsf / 222,000 asf, ~500-seat dining commons, budget $443,503,000,
 construction Jan 2026 → summer 2028. Corrected `height_feet` 253 → **263**,
 `building_sqft` null → **353,000**, unit placeholder 550 → **583**. v2 had also
-never recorded the **ten-storey Durant wing** (~134 ft) — the building is
-L-shaped with two heights, not a single 23-storey tower.
+never recorded the **ten-story Durant wing** (~134 ft) — the building is
+L-shaped with two heights, not a single 23-story tower.
 
 **2400 Bowditch — left at 1,500 on purpose.** UC Capital Strategies says "more
 than 1,500 beds"; **SOM, the design architect, says "up to 2,000"**. The project
@@ -4110,7 +4118,7 @@ Bay/marina tour awaits John's drawn path.
 ## 2026-08-26 [tours/cameras — session berkeley-data-2c] — 🎥 building loops: 3 were orbiting the wrong building (site-collision bug) — FIXED, 53 packages rebuilt · UNCOMMITTED, awaiting John review
 
 **`scripts/gen_building_loop.py` indexed placemarks as `out[address] = ...`, so where several placemarks share ONE address the LAST in document order silently won.** That is not an edge case — it is precisely the multi-building projects, and it had put three loops on the wrong building:
-- **1750 Sacramento (North Berkeley BART, 739 u, 13 buildings)** — the loop was orbiting **Avalon Walk-up E**, a 10.5 m three-storey block, at a **14 m radius, 96 m north of the site centre**. The eight-storey buildings were out of frame for the entire 59 s. Now a **site loop**: centroid of all 13, roof 28.0 m, radius 235 m (farthest corner is 107 m — every building is inside the orbit, verified).
+- **1750 Sacramento (North Berkeley BART, 739 u, 13 buildings)** — the loop was orbiting **Avalon Walk-up E**, a 10.5 m three-story block, at a **14 m radius, 96 m north of the site centre**. The eight-story buildings were out of frame for the entire 59 s. Now a **site loop**: centroid of all 13, roof 28.0 m, radius 235 m (farthest corner is 107 m — every building is inside the orbit, verified).
 - **Ashby BART (618 u, 5 buildings)** — was orbiting **MLK Building E**, 104 m north of centre, missing the Adeline Tower entirely. Now roof 28.0 m, radius 286 m.
 - **2556 Haste (556 u, 2 buildings)** — was orbiting the shorter **South** wing (35.0 m) rather than the 40.2 m main mass. Now roof 40.2 m, radius 177 m.
 - **2065 Kittredge** — height was stale at 28.0 m; the loops were generated at `7f58ba7` and **six geometry-correcting commits landed after them**, so the loop set never saw b26b561's 1.E-precedence sweep. Re-cut at the corrected **26.5 m**.
@@ -4125,13 +4133,13 @@ Bay/marina tour awaits John's drawn path.
 
 **Files (uncommitted, dev):** `scripts/gen_building_loop.py`, 4 loop KMLs, 5 packages. Nothing pushed.
 
-**2036 BANCROFT REFIT — gated write DONE (snapshot `scratch/2026-08-26/geometry_pre-2036-bancroft-refit.kml`).** John spotted the footprint sitting inside an existing building. It was: a 11,636 sf box floating in the INTERIOR of APN 055-1894-017-04, **19 m short of Bancroft and 8 m short of Shattuck — touching no street.** The 2025-10-02 RESUB Entitlement Plan Set (local, `scratch/2026-08-23/harvest_stage_batch2/20/`) is text-native and settles it: **the project is a LOT LINE ADJUSTMENT.** APN -016 grows 6,595 -> 14,582 sf, -017-04 shrinks 37,696 -> 29,709 sf; **7,987 sf transfers, both sides matching to the square foot.** The 8-storey / 85 ft tower sits on the ENLARGED -016 at 80% coverage with a stated **FRONT YARD SETBACK 0'-0"**. Derived: 30.8 m of Bancroft frontage (13.7 existing + 17.0 taken) x 35.0 m deep = 11,608 sf vs the stated 11,610. Written; **north face verified 0.00-0.05 m off the Bancroft property line**, SW corner in -016 and SE in the transferred strip. -017-04 keeps the existing 4-storey 2300 Shattuck building (31,115 -> 24,535 sf, height NO CHANGE).
+**2036 BANCROFT REFIT — gated write DONE (snapshot `scratch/2026-08-26/geometry_pre-2036-bancroft-refit.kml`).** John spotted the footprint sitting inside an existing building. It was: a 11,636 sf box floating in the INTERIOR of APN 055-1894-017-04, **19 m short of Bancroft and 8 m short of Shattuck — touching no street.** The 2025-10-02 RESUB Entitlement Plan Set (local, `scratch/2026-08-23/harvest_stage_batch2/20/`) is text-native and settles it: **the project is a LOT LINE ADJUSTMENT.** APN -016 grows 6,595 -> 14,582 sf, -017-04 shrinks 37,696 -> 29,709 sf; **7,987 sf transfers, both sides matching to the square foot.** The 8-story / 85 ft tower sits on the ENLARGED -016 at 80% coverage with a stated **FRONT YARD SETBACK 0'-0"**. Derived: 30.8 m of Bancroft frontage (13.7 existing + 17.0 taken) x 35.0 m deep = 11,608 sf vs the stated 11,610. Written; **north face verified 0.00-0.05 m off the Bancroft property line**, SW corner in -016 and SE in the transferred strip. -017-04 keeps the existing 4-story 2300 Shattuck building (31,115 -> 24,535 sf, height NO CHANGE).
 **Units 85 -> 87, PRIMARY-SOURCED, not from APR Table A.** The plan set's own unit table reads 31 studio + 8 one-bed + 13 two-bed + 35 three-bed = **87**, and a sheet states "TOTAL UNITS 87 UNITS" (8 below-market-rate). Table A agrees at 87 but is the verification target, never the input — the figure stands on the plan set alone. Label and description body both updated (they disagreed at 85/85 before only by luck; see the four survivors below).
 **53 packages rebuilt at `geom-c4284bfe1833`, catalog repointed + verified (11 entries, 0 missing), `docs/geometry.kml` republished in sync.** **Pruned the 53 superseded `geom-a8f468e28e3c` packages** — one generation on disk is the standing convention (verified across the last 8 commits), but **`build_tour_package.py --all` does NOT prune**, so every geometry edit leaves a full stale generation behind. Worth a guard next to the catalog one.
 
 **FOUND, HELD FOR JOHN — 2920 Shattuck (proj8) is wrong in three ways, all settled by its 1.E** (`documents` 2162, Tabulation Form dated 09/22/2025, fetched from R2):
 - **Footprint 5.0 m west of the Shattuck property line** (measured against assessor parcel 53-1590-5-1's frontage). The 1.E states **FRONT YARD SETBACK "VARIES; 0 to 2'"** — the east face belongs ON the line. The polygon was synthesised as a box from the AREA only (lot 19,586 x 52%), never placed from a site plan.
-- **HEIGHT UNDER by 3.2 m.** 1.E says **11 stories, 125'-2" average AND maximum = 38.2 m**; geometry carries 10 storeys / 35.0 m. Feet beat storeys x 3.5 (the standing rule), so 38.2 m. **This is a Shattuck-corridor building the tours orbit** (one of the 6 orbits in `shattuck-s2n-path.kml`, orbit altitude = roof + 10 m), so the orbit re-cuts when it lands.
+- **HEIGHT UNDER by 3.2 m.** 1.E says **11 stories, 125'-2" average AND maximum = 38.2 m**; geometry carries 10 stories / 35.0 m. Feet beat stories x 3.5 (the standing rule), so 38.2 m. **This is a Shattuck-corridor building the tours orbit** (one of the 6 orbits in `shattuck-s2n-path.kml`, orbit altitude = roof + 10 m), so the orbit re-cuts when it lands.
 - **Description body says 221 units against a 242 label**; the 1.E says **242** proposed dwelling units, so the label is right and the body is stale.
 - **Four label-vs-body unit disagreements survive the eadd312 sweep**: 1950 Oxford (772/300), 2920 Shattuck (242/221), 1752 Shattuck (72/68), 2733 San Pablo (152/32). 1950 Oxford is the UC beds-not-units case.
 
@@ -4168,7 +4176,7 @@ Bay/marina tour awaits John's drawn path.
 **LESSON — EXHAUST THE DRAWING BEFORE DERIVING FROM THE TABLE.** A zoning tabulation gives areas; a SITE PLAN gives position, and position is what a skyline needs. The same set had the answer on a sheet I had already listed by name and not opened. Sequence for any placement question: key map / site plan dimensions FIRST, tabulation second, arithmetic last. 53 packages rebuilt at **`geom-4999f40cceb2`**, catalog verified.
 
 **2920 + 2955 SHATTUCK FIXED (gated write, snapshot `scratch/2026-08-26/geometry_pre-2920-2955-fix.kml`).**
-- **2920 Shattuck (proj8)** — everything from its own **1.E Tabulation Form dated 09/22/2025** (`documents` 2162, fetched from R2), PROPOSED column. Moved **4.97 m EAST** onto the Shattuck frontage of APN 53-1590-5-1 (the 1.E states FRONT YARD SETBACK "VARIES; 0 to 2'"); the polygon had been synthesised as a box from the AREA alone and floated 5 m behind the sidewalk. **Height 35.0 -> 38.2 m and 10 -> 11 storeys** (form says 11 stories, 125'-2" average AND maximum; feet beat storeys x 3.5). Body units **221 -> 242** (label was already right).
+- **2920 Shattuck (proj8)** — everything from its own **1.E Tabulation Form dated 09/22/2025** (`documents` 2162, fetched from R2), PROPOSED column. Moved **4.97 m EAST** onto the Shattuck frontage of APN 53-1590-5-1 (the 1.E states FRONT YARD SETBACK "VARIES; 0 to 2'"); the polygon had been synthesised as a box from the AREA alone and floated 5 m behind the sidewalk. **Height 35.0 -> 38.2 m and 10 -> 11 stories** (form says 11 stories, 125'-2" average AND maximum; feet beat stories x 3.5). Body units **221 -> 242** (label was already right).
 - **2955 Shattuck (proj22)** — **1.84 m EAST**. **My first check measured the wrong edge:** 2955 is on the EAST side of Shattuck, so its frontage is its WEST edge, not its east. The west edge overhung the property line into the roadway. Site is TWO parcels — 53-1589-18-1 (2925 Shattuck, 12,235 sf) + -19 (2921, 4,831 sf) = 17,066 sf vs the 1.E's stated 16,968 sf lot; at **92% coverage** the building nearly fills the site, so any placement error shows up immediately as street intrusion. **Lesson: determine which side of the street a parcel is on before calling an edge the frontage.**
 - Both verified at **-0.00 m** from their property lines after the write. **The 2920 height change propagated**: its building loop re-cut (eye 45.0 -> 48.2 m) and the Shattuck orbit tour re-cut (orbit altitude 45.0 -> 48.2 m). Tours regenerated (`08-26 21:06 · cp-f9cc42`), 53 packages rebuilt at **`geom-80719d22b81f`**, catalog verified.
 - **⚠ PRUNE BUG, CAUGHT AND FIXED IN-SESSION:** I pruned superseded packages by picking the most FREQUENT filename suffix. With 53 old and 53 new that is a TIE, and it deleted the NEW generation, leaving `docs/tours.json` pointing at 11 files that no longer existed — **re-creating the exact sitewide 404 the catalog guard exists to prevent.** Rebuilt and re-pruned against the **actual current sha read from the catalog**, never frequency. **`build_tour_package.py --all` still does not prune at all** — worth folding a sha-anchored prune into the same guard so this cannot be done by hand again.
@@ -4185,27 +4193,27 @@ Bay/marina tour awaits John's drawn path.
 
 **geometry.kml now 196 buildings, `geom-e112113faf25`**, `docs/geometry.kml` in sync. Four gated writes today, snapshots in `scratch/geometry_pre-*.kml`:
 
-**1. BP-description heights (`f654fce`)** — `scripts/storeys_from_permits.py` (mine) derives storeys from the building-permit description for buildings with no 1.E; resolves 183 projects, 22 of the placeholders. **The 1.E column trap recurs here as a DEMOLITION trap:** a permit description narrates the demolition first, so the first storey figure is usually the building being torn down (proj66 "Demolish existing 1-story garage and construct a new 3-story" → naive read returns 1). Only figures inside a construction clause are accepted; demolition-only permits (proj130) yield nothing. 17 of 183 contain a demo figure a naive read would have taken. 07 had the same bug and adopted the guard (`5634b3a`). At 3.5 m/storey, 13 of the 22 CONFIRM 10.5 m rather than change it (10.5 m *is* 3 storeys — never arbitrary); 9 moved. Placeholders 74 → 65.
+**1. BP-description heights (`f654fce`)** — `scripts/storeys_from_permits.py` (mine) derives stories from the building-permit description for buildings with no 1.E; resolves 183 projects, 22 of the placeholders. **The 1.E column trap recurs here as a DEMOLITION trap:** a permit description narrates the demolition first, so the first story figure is usually the building being torn down (proj66 "Demolish existing 1-story garage and construct a new 3-story" → naive read returns 1). Only figures inside a construction clause are accepted; demolition-only permits (proj130) yield nothing. 17 of 183 contain a demo figure a naive read would have taken. 07 had the same bug and adopted the guard (`5634b3a`). At 3.5 m/story, 13 of the 22 CONFIRM 10.5 m rather than change it (10.5 m *is* 3 stories — never arbitrary); 9 moved. Placeholders 74 → 65.
 
-**2. 1.E precedence sweep (`b26b561`)** — first cross-check of geometry.kml against 07's `stated_heights.csv`. **5 heights contradicted the oracle**, 3 badly: 2720 San Pablo 35.7→20.1 m (15.6 m TOO TALL, and on the San Pablo tour route — it was inflating the corridor), 2449 Dwight 14.0→25.7 m, 2437 Warring 7.0→18.5 m; plus 2425 Durant 61.0→63.4, 2065 Kittredge 28.0→26.5. **RULE ESTABLISHED: where a 1.E states a height in FEET, the stated height beats storeys×3.5.** Proof = 2190 Shattuck, 34 st implies 119.0 m but the form states 360.8 ft = 110.0 m, and 110.0 is correct. 3.5 m/storey is the fallback, not an override of a measured figure.
+**2. 1.E precedence sweep (`b26b561`)** — first cross-check of geometry.kml against 07's `stated_heights.csv`. **5 heights contradicted the oracle**, 3 badly: 2720 San Pablo 35.7→20.1 m (15.6 m TOO TALL, and on the San Pablo tour route — it was inflating the corridor), 2449 Dwight 14.0→25.7 m, 2437 Warring 7.0→18.5 m; plus 2425 Durant 61.0→63.4, 2065 Kittredge 28.0→26.5. **RULE ESTABLISHED: where a 1.E states a height in FEET, the stated height beats stories×3.5.** Proof = 2190 Shattuck, 34 st implies 119.0 m but the form states 360.8 ft = 110.0 m, and 110.0 is correct. 3.5 m/story is the fallback, not an override of a measured figure.
 
 **3. Duplicate merge (`4df61b2`)** — 198 → 196. Both pairs shared a byte-identical footprint ring (a short box inside the tall one). **Neither was a plain delete:** the two 2099 MLK copies each held a DIFFERENT correct field (24.5 m copy had the right height but "Units: 0 / Application Submitted"; 10.5 m copy had "Units: 72 / Completed" + correct style). Survivor = the Completed/72-unit placemark raised to 24.5 m, renamed "2099 MLK Jr Way", provenance note → BP B2021-03950. 2740 Shasta copies differed only in status; In Review copy survives. **2205/2201 Blake deliberately NOT merged** — distinct addresses + statuses = two real projects (shadow-vs-ADU-pair rule); they share a centroid only via the parcel_id 52 artifact.
 
 **4. All 53 tour packages rebuilt + tours.json repaired (`e754535`)** — packages embed a geometry snapshot, so every pre-today package carried the wrong skyline. All 53 rebuilt on the corrected geometry (stamp `geom-76bdc9396ff7`); corrections verified inside the packages. **Separately found and fixed: `docs/tours.json` pointed all 11 served entries at `geom-5bb87b9b029c`, a generation that exists nowhere on disk — every tour download the site offered was a 404, and had been before this session.** All 11 now resolve, verified against the filesystem before writing.
 
-**5. Overture heights RESOLVED by primary sources (`521232c`, `eadd312`)** — both disputed Overture-derived heights are now primary-sourced from DRC staff reports, verified firsthand from the PDFs (not taken on the peer's report). **2000 University**: DRCF2022-0001 states "a new 84' tall 8 story mixed use" + "81 studio dwelling units" → Overture's 8 was RIGHT, and the stated 84 ft refines 28.0 → **25.6 m** via feet-beats-storeys. **2009 Addison**: DRCP2017-0001 states "7-story" → 7 confirmed, no stated feet, so **24.5 m unchanged**; provenance only. **No Overture-derived heights remain in the skyline.**
-  - **The density check was decisive in NEITHER direction, and both its readings were wrong.** 07 called 2000 University "impossible" at 610 gross sf/u — it is 81 STUDIOS, and the objection conflated gross with net. 07 called 2009 Addison corroborated at 1,510 sf/u — that was over the ceiling only because the check assumed all 7 floors residential; the report says units occupy the **5 upper floors** (ground floor commercial), giving 1,103 sf/u, in band. **LESSON: the per-unit gate must use RESIDENTIAL floors, not total storeys, or every mixed-use building false-flags.** Three inference methods (Overture-as-class, density, storeys×3.5) all failed where one cheap text-native document stated the answer outright.
+**5. Overture heights RESOLVED by primary sources (`521232c`, `eadd312`)** — both disputed Overture-derived heights are now primary-sourced from DRC staff reports, verified firsthand from the PDFs (not taken on the peer's report). **2000 University**: DRCF2022-0001 states "a new 84' tall 8 story mixed use" + "81 studio dwelling units" → Overture's 8 was RIGHT, and the stated 84 ft refines 28.0 → **25.6 m** via feet-beats-stories. **2009 Addison**: DRCP2017-0001 states "7-story" → 7 confirmed, no stated feet, so **24.5 m unchanged**; provenance only. **No Overture-derived heights remain in the skyline.**
+  - **The density check was decisive in NEITHER direction, and both its readings were wrong.** 07 called 2000 University "impossible" at 610 gross sf/u — it is 81 STUDIOS, and the objection conflated gross with net. 07 called 2009 Addison corroborated at 1,510 sf/u — that was over the ceiling only because the check assumed all 7 floors residential; the report says units occupy the **5 upper floors** (ground floor commercial), giving 1,103 sf/u, in band. **LESSON: the per-unit gate must use RESIDENTIAL floors, not total stories, or every mixed-use building false-flags.** Three inference methods (Overture-as-class, density, stories×3.5) all failed where one cheap text-native document stated the answer outright.
 
 **6. 39 stale description bodies synced (`eadd312`)** — a placemark's description balloon (what a viewer sees on click) had drifted from its own label: 3030 Telegraph read "Under Construction" for a Completed 144-unit project, 3000 San Pablo read 29 units against a real 78. Labels verified against v2 (exact match) before treating the body as stale. 0 disagreements remain.
 
 **7. Catalog auto-repoint (`c6b622e`)** — `build_tour_package.py --all` now repoints `docs/tours.json` and verifies every entry resolves BEFORE writing, exiting non-zero rather than publishing broken links. Fired correctly on 4 subsequent real rebuilds. **This is what stops John's path edits from re-404-ing the site.**
 
-**OPEN / NEXT:** (a) **65 placeholders remain; the BP-description method cannot reach them** (43 state no floor count, 9 match no v2 project, rest demolition-only). **THE BIG LEVER, sized but not run:** the question is NOT "which have a 1.E" (that lever is spent — only 1 of the 65 has one and it's image-only). 2000 University had NO 1.E, yet its **DRC staff report stated storeys AND feet in clean pdftotext-readable prose**. Staff reports reach exactly the buildings BP-description can't — a Design-Review project has one even when its permit says only "construct ADU". Cheap (~250–380 KB), text-native, explicit. **07 is ready to run a discovery sizing pass across the 65 the moment John greenlights scope.** (b) The catalog lists only 11 of 53 packages — corridor tours + 11 single-building loops are built but unlisted; **the website menu for building loops is still to be designed** (John's stated intent). (c) Still open for John: the 2205/2201 Blake APN fix (gated v2 write, 07 flagged); label colour (tier vs white); canonical set (184 towers vs full 1,060). (d) John draws GE Paths for corridors — derivation agreed to be not worth the effort.
+**OPEN / NEXT:** (a) **65 placeholders remain; the BP-description method cannot reach them** (43 state no floor count, 9 match no v2 project, rest demolition-only). **THE BIG LEVER, sized but not run:** the question is NOT "which have a 1.E" (that lever is spent — only 1 of the 65 has one and it's image-only). 2000 University had NO 1.E, yet its **DRC staff report stated stories AND feet in clean pdftotext-readable prose**. Staff reports reach exactly the buildings BP-description can't — a Design-Review project has one even when its permit says only "construct ADU". Cheap (~250–380 KB), text-native, explicit. **07 is ready to run a discovery sizing pass across the 65 the moment John greenlights scope.** (b) The catalog lists only 11 of 53 packages — corridor tours + 11 single-building loops are built but unlisted; **the website menu for building loops is still to be designed** (John's stated intent). (c) Still open for John: the 2205/2201 Blake APN fix (gated v2 write, 07 flagged); label colour (tier vs white); canonical set (184 towers vs full 1,060). (d) John draws GE Paths for corridors — derivation agreed to be not worth the effort.
 
 ## 2026-08-25 [geometry/1.E/BART — session berkeley-data-07] — 🏗️ 1.E harvest + heights + footprints + BART placeholders — WRAPPED + DEPLOYED
 **✅ DEPLOYED to origin/main (`d90540a`, `bcd1e06..d90540a`) — SELECTIVE, John-approved: 110 map+tour files (3 maps w/ Chronicle-clipboard + Regrid link; docs/geometry.kml 196 placemarks; docs/tours.json catalog-repointed = FIXES the tour-download 404s; kml/ tour packages/loops/control-points). berkeley2050/notes/team EXCLUDED (safety-gated). berkeley2050 is INTENTIONALLY public (John, leave it). CF propagation may lag ~4h. Video-record inputs (geometry.kml + 53 kml/tours/packages) ready locally on dev.**
 **HEIGHT THREAD CLOSED: every camera-relevant building is primary-sourced. 2000 University 8st/84ft/25.6m + 2009 Addison 7st/24.5m confirmed via DRC STAFF REPORTS (the cheap text-native source — beats 1.E OCR + parcel arithmetic). Overture = SKIP (validate each value; it was right on these two but wrong on 1951 Shattuck). Staff-report sizing pass: only 8/65 no-height placeholders reachable (`data/reference/staff_report_sizing.csv`); the other 57 = ministerial ADUs, no DR record, hold. 2200 Fifth (proj45) calibration PASSED (staff report 3st == BP-description 3st), validating 2b's 22 BP-derived heights. Density gate BUG (2b): use RESIDENTIAL floors not total for mixed-use, treat mixed-use as unresolved-not-failed. Third trap: strip [...] annotations (they quote old wrong values) — guarded in resolve_placeholders.**
-**Collaborating with berkeley-data-2b (owns geometry.kml + tour packages) — SESSION ENDED. DIVISION was: HEIGHTS = 2b (1.E stated wins ties, else storeys_from_permits.py BP-description demo-guarded; FEET beats storeys×3.5 where stated); FOOTPRINTS = me (assessor via project_parcels→berkeley.db). Convention 3.5 m/storey.**
+**Collaborating with berkeley-data-2b (owns geometry.kml + tour packages) — SESSION ENDED. DIVISION was: HEIGHTS = 2b (1.E stated wins ties, else storeys_from_permits.py BP-description demo-guarded; FEET beats stories×3.5 where stated); FOOTPRINTS = me (assessor via project_parcels→berkeley.db). Convention 3.5 m/story.**
 
 **1.E TABULATION HARVEST — DONE.** 41 projects now have a `tabulation_form` (document_type_id=25) on R2 (was 8). Harvested via `scripts/harvest_by_record.py --tabulation-only` (1.E-primary; plan sets yield ~0 usable footprints, the standalone 1.E parses cleanly). Discovery via `scripts/discover_planning_records.py` (Planning address-search fix `27a24f7` — date-fill broke it). Ingested in batches (2245 docs). **KEY: plan sets/1.E live on the PLANNING (ZP/DRCP/PLN) record, NOT the Building permit (BP grids are empty in public ACA).** Cross-run R2 key-collision guard: harvest rewrites keys to proj_slug_date; re-key sha8 + verify-all-match before every ingest.
 
@@ -4223,7 +4231,7 @@ Bay/marina tour awaits John's drawn path.
 
 **CORRECTIONS from 2b (post my snapshot, all on dev — f654fce/b26b561/4df61b2/e754535/c6b622e):**
 - **geometry.kml = 196 placemarks, stamp `geom-e112113faf25`** (not 198). Dup-placemark deletions DONE (2099 MLK survivor = Completed/72u raised to 24.5m; 2740 Shasta In-Review survivor) — NOT pending. Each dup held a different correct field, so neither was a plain delete.
-- **FEET beats storeys×3.5 where a 1.E states a height in feet** — the measured figure wins; 3.5 m/storey is ONLY the fallback for a storey count with no stated feet. 2190 Shattuck = 360.8 ft = **110.0 m**, NOT 34×3.5=119 m. `stated_heights.csv` carries both `stories_proposed` + `height_ft_proposed`; use `height_ft_proposed × 0.3048` where present. (2b's 1.E-precedence sweep b26b561 corrected 5 geometry.kml heights, worst 2720 San Pablo 35.7→20.1 m, which had been inflating the San Pablo corridor.)
+- **FEET beats stories×3.5 where a 1.E states a height in feet** — the measured figure wins; 3.5 m/story is ONLY the fallback for a story count with no stated feet. 2190 Shattuck = 360.8 ft = **110.0 m**, NOT 34×3.5=119 m. `stated_heights.csv` carries both `stories_proposed` + `height_ft_proposed`; use `height_ft_proposed × 0.3048` where present. (2b's 1.E-precedence sweep b26b561 corrected 5 geometry.kml heights, worst 2720 San Pablo 35.7→20.1 m, which had been inflating the San Pablo corridor.)
 - **tours.json / served catalog was 404-ing EVERY tour download** (catalog pointed at a geom generation absent on disk). Root cause structural: every rebuild changes the geom sha → every package filename → catalog re-orphans. FIXED c6b622e: `build_tour_package.py --all` now repoints the catalog + verifies every entry resolves on disk BEFORE writing (non-zero exit on a missing generation). **Correction to my earlier note: `--all` does NOT silently keep tours.json in sync — the guard does.**
 
 **OPEN for John (gated):** 2205/2201 Blake footprints stay unpromoted until the 13,288 sf double lot is split geometrically (2b holds them; the co-located pair is deliberate, the only one left). Snapshots this session: `keep_snapshot_2026-08-25_pre-{tower,camera,major,bart-classification}-ingest.db`. **Bond-map Chronicle links now copy the address to clipboard on click (aff877f, all 3 maps) — awaiting John's deploy.**
@@ -4309,7 +4317,7 @@ Bay/marina tour awaits John's drawn path.
 Footprints: **3 corrected from an architect tabulation** (2920 Shattuck 10,232sf · 3030 Telegraph
 19,811sf · 2036 Bancroft 11,610sf) · **137 still the county PARCEL** · 36 other. Heights: **5
 corrected** (1951 Shattuck 12, 2000 University 8, 2099 MLK 7, 2009 Addison 7 from Overture
-`num_floors`; 3030 Telegraph 5 + 63ft from its tabulation) · **67 still on the 3.0-storey
+`num_floors`; 3030 Telegraph 5 + 63ft from its tabulation) · **67 still on the 3.0-story
 `migration_v1_to_v2_20260507` default**. Stated-footprint supply **8 → 17 of 171** via the
 John-approved Phase-2 ingest (`5babbb3`).
 
@@ -4332,10 +4340,10 @@ cols). Taking the wrong one yields the demolished building — *plausible and wr
 **degenerate validator** that passed "BUILDING STORIES 1" for a 110-unit building. **Every real
 error was caught by a cross-check, none by better parsing.** Validator stack (`scripts/
 harvest_planset_tabulations.py`): polygon/parcel <0.95 · OCR'd lot vs county parcel · derived
-footprint/lot vs stated coverage% · **GFA/footprint ≈ storeys** · **Σ(existing lots)==Σ(proposed
+footprint/lot vs stated coverage% · **GFA/footprint ≈ stories** · **Σ(existing lots)==Σ(proposed
 lots)** proves column order free on any lot-line-adjustment · **PASS requires ≥2 independent,
 non-degenerate checks**. **Multi-APN footprints are NEVER summed** — 2036 Bancroft's APN -017-04
-reads "NO CHANGE" (an EXISTING 4-storey building RETAINED); the new tower is 11,610sf on -016
+reads "NO CHANGE" (an EXISTING 4-story building RETAINED); the new tower is 11,610sf on -016
 alone. 3 projects held as `NEEDS-MANUAL-SPLIT`.
 
 **🚫 `generate_kml.py` OVERWRITES the hand-edited canonical `geometry.kml`** — it now refuses

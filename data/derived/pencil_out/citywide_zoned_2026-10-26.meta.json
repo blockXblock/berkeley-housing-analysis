@@ -1,8 +1,8 @@
 {
- "as_of": "2026-10-25",
+ "as_of": "2026-10-26",
  "parcels": 24819,
  "assumptions": "pencil_out_2026-10-25.yaml",
- "assumptions_sha": "bb967998adaebe66",
+ "assumptions_sha": "3908afa1ac1e9f60",
  "v4_file_sha": "1591bcbd2d3a38ae",
  "assessor_sha": "e2fe977508eb780e",
  "excluded": {
@@ -123,10 +123,10 @@
    }
   },
   "citywide_median_by_bedrooms": {
+   "4": 5895.0,
    "3": 4000.0,
    "0": 1880.0,
    "2": 2995.0,
-   "4": 5895.0,
    "1": 2250.0
   },
   "tenancies": 9980
@@ -282,7 +282,7 @@
   "lease_ups": 831
  },
  "zoning_standards": "berkeley_zoning_standards_2026-10-25.yaml",
- "zoning_standards_sha": "d9a12b4fe977fbbe",
+ "zoning_standards_sha": "04ddfb8d960ac8df",
  "zoning_districts_sha": "1288caca8d5743c4",
  "fire_zones_sha": {
   "very_high": "203aca11f2c9b0dc",

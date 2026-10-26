@@ -83,7 +83,7 @@ graph LR
   PF --> V[verdicts + sensitivity]
   HT --> E[height curves]
   ZL[City zoning layer<br/>+ fire hazard zones 2025] --> ZJ[parcel → district]
-  ZS[[zoning standards YAML<br/>BMC sections cited]] --> ENV[envelope: storeys · FAR · density]
+  ZS[[zoning standards YAML<br/>BMC sections cited]] --> ENV[envelope: stories · FAR · density]
   ZJ --> ENV
   ENV --> HT
   V --> GATE[baseline gate]
@@ -168,7 +168,7 @@ development-standards table: lot area, gross floor area, units, height; and a pr
 and the affordable units by tier) and the **Accela plan sets** for 1835 San Pablo, 1200 San Pablo and 1915 Berryman. Every
 value carries its file and page in `data/derived/pencil_out/project_inputs_record_2026-10-25.csv`.
 
-**Core inputs** (missing any → `insufficient_data`): units, floor area, the unit mix, storeys, lot area. Floor area may be
+**Core inputs** (missing any → `insufficient_data`): units, floor area, the unit mix, stories, lot area. Floor area may be
 gross (the staff report) or net (the sum of unit areas on a plan sheet). A floor area flagged PARTIAL on the record doesn't
 count.
 """)
@@ -217,7 +217,7 @@ md(r"""
 at its unfavorable end):
 - **NOI** = market units × Rent Board lease-up rent by bedrooms (RECORD; per-bed rents for 4–5-bedroom group layouts)
   × (1 − vacancy) × (1 − opex) + below-market units at the City's 2025 rents + retail.
-- **Total development cost** = hard cost by construction tier (set by storeys and height) + soft costs + City fees
+- **Total development cost** = hard cost by construction tier (set by stories and height) + soft costs + City fees
   (the legacy per-unit mitigation fee formula, because these projects were vested before 2023-03-31; the 2022 rate, as
   the current one is not published) + construction interest + **land basis**.
 - **Land basis**: RECORD when the parcels' last recorded document is a 2018+ transfer (Prop 13 resets assessment at a
@@ -238,7 +238,7 @@ for a in in_scope:
         out.append(dict(anchor=a, address=p['address'], verdict='insufficient_data', why='missing ' + ', '.join(p['missing'])))
         continue
     ac = p['acct']
-    out.append(dict(anchor=a, address=p['address'], verdict=p['verdict'], units=p['units'], storeys=p['stories'],
+    out.append(dict(anchor=a, address=p['address'], verdict=p['verdict'], units=p['units'], stories=p['stories'],
                     tier=ac['tier'], yoc=round(p['yoc'] * 100, 2), hurdle=round(ac['hurdle'] * 100, 2),
                     gap_bp=round(p['gap'] * 1e4), gap_fav_bp=round(p['runs']['favorable']['gap'] * 1e4),
                     gap_unf_bp=round(p['runs']['unfavorable']['gap'] * 1e4),
@@ -372,9 +372,9 @@ md(r"""
 ## §6 — The Elmwood sites: how tall must a building be to pencil?
 
 📝 **Plan.** Each site (RECORD: lot from the assessor polygon, the existing building's taxable sqft, assessed values),
-a building of 2 to 12 storeys: a 15-ft ground floor (retail + lobby) and 10-ft residential floors; lot coverage, floor
+a building of 2 to 12 stories: a 15-ft ground floor (retail + lobby) and 10-ft residential floors; lot coverage, floor
 efficiency and unit sizes from the assumptions file; units over the **Rent Board bedroom mix**. Height sets the
-construction tier (Type V wood to 4 storeys / 70 ft; Type V over a concrete podium to 6 / 75 ft; Type III over podium to
+construction tier (Type V wood to 4 stories / 70 ft; Type V over a concrete podium to 6 / 75 ft; Type III over podium to
 8 / 85 ft; Type I concrete or steel above), and the tier sets cost per sqft and months to build.
 
 Two affordability scenarios (John): **in-lieu**, all units market-rate plus Berkeley's in-lieu fee on residential floor
@@ -395,9 +395,9 @@ for s_ in SITES:
 print(pd.DataFrame(srows).to_string(index=False))
 RUN = po.run_sites(SITES)
 BE = pd.DataFrame([dict(site=r['name'], fee_mode=r['fee_mode'], scenario=r['scenario'],
-                        break_even_storeys=r['break_even_storeys']) for r in RUN['results']])
-print('\nlowest height that pencils (None = no height from 2 to 12 storeys):')
-print(BE.pivot_table(index=['site', 'fee_mode'], columns='scenario', values='break_even_storeys', aggfunc='first',
+                        break_even_stories=r['break_even_stories']) for r in RUN['results']])
+print('\nlowest height that pencils (None = no height from 2 to 12 stories):')
+print(BE.pivot_table(index=['site', 'fee_mode'], columns='scenario', values='break_even_stories', aggfunc='first',
                      dropna=False)[list(po.SCENARIOS)].to_string())
 """)
 md(r"""
@@ -416,27 +416,27 @@ tier_spans = collections.OrderedDict()
 for r in RUN['results']:
     if r['fee_mode'] != 'in_lieu' or r['scenario'] != 'base':
         continue
-    xs = [x['storeys'] for x in r['rows']]
+    xs = [x['stories'] for x in r['rows']]
     fig.add_trace(go.Scatter(x=xs, y=[x['rent_mult_needed'] for x in r['rows']], mode='lines+markers', name=r['name'],
                              customdata=[[x['units'], x['tier'], x['height_ft']] for x in r['rows']],
-                             hovertemplate='%{x} storeys (%{customdata[2]:.0f} ft, %{customdata[0]} units, %{customdata[1]}): ×%{y:.2f}'))
+                             hovertemplate='%{x} stories (%{customdata[2]:.0f} ft, %{customdata[0]} units, %{customdata[1]}): ×%{y:.2f}'))
     for x in r['rows']:
-        tier_spans.setdefault(x['tier'], [x['storeys'], x['storeys']])[1] = x['storeys']
+        tier_spans.setdefault(x['tier'], [x['stories'], x['stories']])[1] = x['stories']
 shade = ['#f4f4f4', '#e8eef6', '#f4f4f4', '#e8eef6']
 for i, (t, (a0, a1)) in enumerate(tier_spans.items()):
     fig.add_vrect(x0=a0 - 0.5, x1=a1 + 0.5, fillcolor=shade[i % 4], line_width=0, layer='below',
                   annotation_text=t, annotation_position='top left', annotation_font_size=10)
 fig.add_hline(y=1.0, line_color='#c0504d', annotation_text="today's lease-up rents", annotation_position='bottom right')
 fig.update_layout(title='Elmwood sites: rent multiple needed to pencil, by height (base case, in-lieu fee)',
-                  xaxis_title='storeys', yaxis_title='× today\'s lease-up rents', template='plotly_white', height=520,
+                  xaxis_title='stories', yaxis_title='× today\'s lease-up rents', template='plotly_white', height=520,
                   legend=dict(orientation='h', y=-0.2))
 fig.show()
 BEST = {}
 for r in RUN['results']:
     best = min(r['rows'], key=lambda x: x['rent_mult_needed'])
-    BEST[(r['site'], r['fee_mode'], r['scenario'])] = dict(storeys=best['storeys'], tier=best['tier'],
+    BEST[(r['site'], r['fee_mode'], r['scenario'])] = dict(stories=best['stories'], tier=best['tier'],
                                                          rent_needed=best['rent_mult_needed'], units=best['units'])
-print(pd.DataFrame([dict(site=k[0], fee_mode=k[1], best_storeys=v['storeys'], units=v['units'], tier=v['tier'],
+print(pd.DataFrame([dict(site=k[0], fee_mode=k[1], best_stories=v['stories'], units=v['units'], tier=v['tier'],
                          rent_needed_x=round(v['rent_needed'], 2))
                     for k, v in BEST.items() if k[2] == 'base']).to_string(index=False))
 """)
@@ -444,14 +444,14 @@ md(r"""
 📝 **After — what this chart could MISLEAD about.** (1) The y-axis is a **multiple**, so a curve that looks flat at
 ×2 is still a building needing double today's rents. (2) Each jump sits where the **construction tier** changes; the size
 of the jump comes from BFA24's three prototype costs ($360 → $449 → $547 per sqft), the least certain step in the file.
-(3) The units are what fits the envelope, not what Berkeley's zoning or the 2026 Elmwood proposal (4–5 storeys, a
+(3) The units are what fits the envelope, not what Berkeley's zoning or the 2026 Elmwood proposal (4–5 stories, a
 hypothetical 7) allows.
 
 **Found.** The answer to *"how high must it be?"* is that, at today's rents, costs and cap rates, **no height pencils on
 any of the four sites**, under either affordability scenario. Taller is not the lever it seems: within a tier each added
 floor spreads the land over more units and the rent needed falls, but at each tier boundary the cost per sqft jumps and
-the need rises. **The most efficient height on every site is the top of the podium tier, 6 storeys (about 65 ft).** Going
-to 7–8 storeys costs more per unit than it adds, and above 85 ft concrete construction is worse still. What would have to
+the need rises. **The most efficient height on every site is the top of the podium tier, 6 stories (about 65 ft).** Going
+to 7–8 stories costs more per unit than it adds, and above 85 ft concrete construction is worse still. What would have to
 change is in the rent multiple at that best height: rents roughly double, or an equivalent cut in cost or cap rate. The
 one combination that pencils is the **Wells Fargo parking lot** with every assumption favorable: no business to buy out.
 """)
@@ -516,7 +516,7 @@ summ.loc['ALL'] = [len(CW), count('in_lieu_base_break_even'), count('on_site_bas
                    count('in_lieu_favorable_break_even'), count('on_site_favorable_break_even'),
                    CW.in_lieu_base_rent_needed.median(), CW.in_lieu_base_rent_needed.quantile(0.10)]
 print(summ.round(2).to_string())
-print('\nbest height (base, in-lieu):', CW.in_lieu_base_best_storeys.value_counts().sort_index().to_dict())
+print('\nbest height (base, in-lieu):', CW.in_lieu_base_best_stories.value_counts().sort_index().to_dict())
 print('land basis set by (base):', CW.in_lieu_base_binding.value_counts().to_dict())
 """)
 md(r"""
@@ -542,7 +542,7 @@ have the lowest median**, because their land basis is mostly market land and man
 (3) The **existing-use values lean low**: a 2024+ recorded document is not always a sale, and a stale assessment
 understates the price, which makes development look **easier** than it is. (4) Every parcel gets the same envelope
 (ground-floor retail, 75% upper coverage) and the same costs; **zoning, slope, fire zones and setbacks are not modeled
-here** (§9 adds zoning and fire zones), so a hillside single-family lot is priced as if it could carry a 6-storey building.
+here** (§9 adds zoning and fire zones), so a hillside single-family lot is priced as if it could carry a 6-story building.
 """)
 md(r"""
 📝 **Before.** The map: each parcel colored by the rent multiple its best building needs (base, in-lieu). Darker = closer
@@ -553,7 +553,7 @@ m = CW.dropna(subset=['lat', 'lon']).copy()
 m['need'] = m.in_lieu_base_rent_needed.clip(upper=4)
 fig = go.Figure(go.Scattermap(lat=m.lat, lon=m.lon, mode='markers',
     marker=dict(size=4, color=m.need, colorscale='Viridis_r', cmin=1.5, cmax=4, colorbar=dict(title='× rents')),
-    text=m.name + ' · ' + m.bucket + ' · best ' + m.in_lieu_base_best_storeys.astype(str) + ' storeys',
+    text=m.name + ' · ' + m.bucket + ' · best ' + m.in_lieu_base_best_stories.astype(str) + ' stories',
     hovertemplate='%{text}<br>needs ×%{marker.color:.2f} today\'s local rents<extra></extra>'))
 fig.update_layout(map=dict(style='open-street-map', center=dict(lat=37.87, lon=-122.27), zoom=12.2), height=650,
                   margin=dict(l=0, r=0, t=40, b=0),
@@ -570,23 +570,23 @@ and near campus) and ignores zoning, slope and fire zones, so dark hillside dots
 code(r"""
 fav = CW[CW.in_lieu_favorable_break_even.notna() | CW.on_site_favorable_break_even.notna()].copy()
 cols = ['name', 'neighborhood', 'bucket', 'lot_sf', 'building_sf', 'tag', 'in_lieu_favorable_break_even',
-        'on_site_favorable_break_even', 'in_lieu_base_rent_needed', 'in_lieu_base_best_storeys', 'in_lieu_base_best_units']
+        'on_site_favorable_break_even', 'in_lieu_base_rent_needed', 'in_lieu_base_best_stories', 'in_lieu_base_best_units']
 print(f"{len(fav):,} parcels pencil in the favorable case; by kind:", fav.bucket.value_counts().to_dict(),
       '| by tag:', fav.tag.value_counts().to_dict())
 print(fav.sort_values('in_lieu_base_rent_needed')[cols].head(25).to_string(index=False))
 """)
 md(r"""
 📝 **Found — citywide.** Three results, from the most to the least robust.
-1. **At base, no parcel in Berkeley pencils at any height from 2 to 12 storeys,** under either affordability scenario,
+1. **At base, no parcel in Berkeley pencils at any height from 2 to 12 stories,** under either affordability scenario,
    and none does in the unfavorable case. This holds before land is even paid for on most parcels.
 2. **The rent needed sits in a narrow band everywhere** (see the table: medians about 1.9–2.2× today's local rents, by
-   kind of parcel), and **the best height is the top of the podium tier (6 storeys) on nearly every parcel.** Location
+   kind of parcel), and **the best height is the top of the podium tier (6 stories) on nearly every parcel.** Location
    moves the need by the rent index's roughly ±15%; lot size and what stands on the lot move it a little more. Nothing
    moves it near 1.0.
 3. **In the favorable case about half the parcels pencil, and that number should not be read as "potential sites".**
    Most are single-family lots in the higher-rent hill and north-side neighborhoods, and the lowest needs of all are on
    Panoramic Hill, the neighborhood with the highest rent index and among the least buildable land in the city. The model
-   ignores **zoning, slope and fire zones** in this section, so it prices every lot as if a 6-storey building were allowed, and the
+   ignores **zoning, slope and fire zones** in this section, so it prices every lot as if a 6-story building were allowed, and the
    favorable case stacks every helpful assumption at once (5% cap rate, low costs, +10% rents, corridor land at
    $149/sqft).
 
@@ -603,11 +603,11 @@ any height. Here each parcel stops at what its zoning allows.
 - **District** — the City's zoning layer (`Portal_Planning/MapServer/7`, 42 district polygons), joined by the point in
   polygon of each parcel's assessor coordinates.
 - **Envelope** — `data/reference/berkeley_zoning_standards_2026-10-25.yaml`, one row per district with its BMC section
-  and the copy it was read from (RECORD): maximum height and storeys, FAR and density caps, lot coverage, and whether
+  and the copy it was read from (RECORD): maximum height and stories, FAR and density caps, lot coverage, and whether
   the ground floor is homes (residential districts and residential-only envelopes) or the model's retail + lobby.
   Use-permit height increases are recorded there but **not used**: this is the standard envelope.
 - **Two scenarios, as before.** *In-lieu fee*: the standard envelope. *On-site affordable*: the state density bonus for
-  10% very-low-income units (32.5%, Gov. Code 65915(f)) added as storeys and as a multiple of the FAR and density caps,
+  10% very-low-income units (32.5%, Gov. Code 65915(f)) added as stories and as a multiple of the FAR and density caps,
   or the district's **own** bonus where it allows more (the Adeline Corridor's tier 2 for 14% affordable).
 - **Not permitted** — districts where multi-unit housing is not allowed (manufacturing, MU-LI, ES-R, green space,
   unclassified/UC land, and the specific-plan and research districts whose standards were not read) leave the zoned
@@ -624,8 +624,8 @@ print('fire hazard zone (2025):', CW.fire_zone.fillna('none').value_counts().to_
 code(r"""
 def zsumm(df):
     g = df.groupby('district')
-    out = g.agg(parcels=('key', 'size'), allowed_in_lieu=('z_in_lieu_allowed_storeys', 'first'),
-                allowed_on_site=('z_on_site_allowed_storeys', 'first'),
+    out = g.agg(parcels=('key', 'size'), allowed_in_lieu=('z_in_lieu_allowed_stories', 'first'),
+                allowed_on_site=('z_on_site_allowed_stories', 'first'),
                 pencils_base=('z_in_lieu_base_break_even', lambda s: int(s.notna().sum())),
                 pencils_fav_in_lieu=('z_in_lieu_favorable_break_even', lambda s: int(s.notna().sum())),
                 pencils_fav_on_site=('z_on_site_favorable_break_even', lambda s: int(s.notna().sum())),
@@ -654,7 +654,7 @@ fig.add_trace(go.Scatter(x=zs.need_unzoned, y=zs.index, mode='markers', name='un
                          marker=dict(color='#8da0cb', size=9)))
 fig.add_trace(go.Scatter(x=zs.need_zoned, y=zs.index, mode='markers', name='inside the zoning envelope',
                          marker=dict(color='#d95f02', size=(zs.parcels ** 0.5).clip(6, 30)),
-                         text=[f"{p:,} parcels · {int(a)} storeys allowed" for p, a in zip(zs.parcels, zs.allowed_in_lieu)],
+                         text=[f"{p:,} parcels · {int(a)} stories allowed" for p, a in zip(zs.parcels, zs.allowed_in_lieu)],
                          hovertemplate='%{y}: needs ×%{x:.2f} · %{text}<extra></extra>'))
 fig.add_vline(x=1.0, line_color='#c0504d', annotation_text="today's local rents")
 fig.update_layout(title='Median rent multiple needed to pencil, by zoning district (base, in-lieu)',
@@ -676,7 +676,7 @@ zf['tag'] = zf.apply(TAGS, axis=1)
 print(f"{len(zf):,} parcels pencil inside their envelope in the favorable case; by district:",
       zf.district.value_counts().to_dict())
 print('  by fire zone:', zf.fire_zone.fillna('none').value_counts().to_dict(), '| by tag:', zf.tag.value_counts().to_dict())
-cols = ['name', 'district', 'neighborhood', 'lot_sf', 'tag', 'fire_zone', 'z_in_lieu_allowed_storeys',
+cols = ['name', 'district', 'neighborhood', 'lot_sf', 'tag', 'fire_zone', 'z_in_lieu_allowed_stories',
         'z_in_lieu_favorable_break_even', 'z_on_site_favorable_break_even', 'z_in_lieu_base_rent_needed', 'z_in_lieu_base_best_units']
 print(zf.sort_values('z_in_lieu_base_rent_needed')[cols].head(25).to_string(index=False))
 """)
@@ -694,7 +694,7 @@ fig.add_trace(go.Scattermap(lat=no.lat, lon=no.lon, mode='markers', marker=dict(
                             name='not permitted', hoverinfo='skip'))
 fig.add_trace(go.Scattermap(lat=ok.lat, lon=ok.lon, mode='markers', name='zoned universe',
     marker=dict(size=4, color=ok.need, colorscale='Viridis_r', cmin=1.5, cmax=4, colorbar=dict(title='× rents')),
-    text=ok.name + ' · ' + ok.district + ' · ' + ok.z_in_lieu_allowed_storeys.astype('Int64').astype(str) + ' storeys allowed',
+    text=ok.name + ' · ' + ok.district + ' · ' + ok.z_in_lieu_allowed_stories.astype('Int64').astype(str) + ' stories allowed',
     hovertemplate='%{text}<br>needs ×%{marker.color:.2f} today\'s local rents<extra></extra>'))
 fig.update_layout(map=dict(style='open-street-map', center=dict(lat=37.87, lon=-122.27), zoom=12.2), height=650,
                   margin=dict(l=0, r=0, t=40, b=0),
@@ -709,27 +709,27 @@ md(r"""
 📝 **Found — zoned.** Four results.
 1. **Still nothing pencils at base, in any district, under either scenario.** Zoning makes the gap wider, not narrower:
    the median parcel's best permitted building needs about **2.2× today's local rents**, against about 1.9× when any
-   height was allowed (§8). Across most of the city the envelope is **3 storeys** (the Middle Housing districts R-1,
-   R-2, R-2A and their hillside versions hold three quarters of the zoned universe), below the 6-storey podium building
+   height was allowed (§8). Across most of the city the envelope is **3 stories** (the Middle Housing districts R-1,
+   R-2, R-2A and their hillside versions hold three quarters of the zoned universe), below the 6-story podium building
    §8 found to be the cheapest per unit of rent.
 2. **Where zoning allows height, it isn't what binds.** In the Southside districts (R-SMU, C-T up to 85 ft; R-S 55 ft)
-   the envelope reaches or passes the 6-storey optimum, and the need there is the same as unzoned, about 2×. Height was
+   the envelope reaches or passes the 6-story optimum, and the need there is the same as unzoned, about 2×. Height was
    never the constraint in those places; the rent-to-cost ratio is.
 3. **The density bonus helps only where the base envelope is tiny.** In most districts the on-site scenario needs
-   **more** rent than paying the in-lieu fee, even with the bonus storey: the 20% affordable units cost more than the
-   extra market units earn. It needs less only where the base envelope is very small: Solano (2 storeys), the West
+   **more** rent than paying the in-lieu fee, even with the bonus story: the 20% affordable units cost more than the
+   extra market units earn. It needs less only where the base envelope is very small: Solano (2 stories), the West
    Berkeley MU-R (FAR 1.5 and a density cap), and the Adeline Corridor, where the City's own tier-2 bonus (14%
-   affordable → 5 storeys) beats the state bonus. That answers the earlier question with this model's numbers:
+   affordable → 5 stories) beats the state bonus. That answers the earlier question with this model's numbers:
    zoning low and letting the bonus do the work produces a building only where the bonus envelope pencils, and at
    today's rents none does.
 4. **The favorable-case set shrinks from about half the city to about 2,100 parcels**, and its character doesn't change:
-   mostly single-family and 2–4-unit lots in R-1, R-2 and R-1H, where a 3-storey Middle Housing building of a handful of
+   mostly single-family and 2–4-unit lots in R-1, R-2 and R-1H, where a 3-story Middle Housing building of a handful of
    units would pencil only with every assumption at its helpful end. **Roughly 4 in 10 of them sit in a 2025 High or
-   Very High fire hazard zone.** Corridor commercial parcels almost vanish from the set: their 2–3 storey envelopes
+   Very High fire hazard zone.** Corridor commercial parcels almost vanish from the set: their 2–3 story envelopes
    (C-E, C-NS, C-SO, C-U Avenue, C-AC tier 1) need 2.3–3.9× rents.
 
-**So, "how tall must it be, and is that allowed?"** The cheapest building per unit of rent is the 6-storey podium
-building; most of Berkeley allows 3 storeys, and the places that allow 6+ (Southside, downtown at 60 ft) still need
+**So, "how tall must it be, and is that allowed?"** The cheapest building per unit of rent is the 6-story podium
+building; most of Berkeley allows 3 stories, and the places that allow 6+ (Southside, downtown at 60 ft) still need
 about twice today's rents. Neither upzoning nor the bonus closes that gap alone; it moves only with rents, costs, rates
 or subsidy.
 
@@ -760,14 +760,14 @@ FIG = {
     'verdict_does_not': VERDICTS.get('does_not', 0), 'verdict_insufficient': VERDICTS.get('insufficient_data', 0),
     'single_assumption_flips': len(FLIPPERS),
     'median_gap_bp': int(V.gap_bp.dropna().median()) if V.gap_bp.notna().any() else None,
-    'elmwood_best_storeys_base': sorted({v['storeys'] for k, v in BEST.items() if k[2] == 'base'}),
+    'elmwood_best_stories_base': sorted({v['stories'] for k, v in BEST.items() if k[2] == 'base'}),
     'lease_ups': R['lease_ups'],
     'citywide_parcels': int(len(CW)), 'citywide_excluded': CWM['excluded'],
     'citywide_pencils_base_in_lieu': count('in_lieu_base_break_even'), 'citywide_pencils_base_on_site': count('on_site_base_break_even'),
     'citywide_pencils_favorable_in_lieu': count('in_lieu_favorable_break_even'),
     'citywide_pencils_favorable_on_site': count('on_site_favorable_break_even'),
     'citywide_median_rent_needed': round(float(CW.in_lieu_base_rent_needed.median()), 3),
-    'citywide_best_storeys_mode': int(CW.in_lieu_base_best_storeys.mode()[0]),
+    'citywide_best_stories_mode': int(CW.in_lieu_base_best_stories.mode()[0]),
     'zoned_universe': int(len(ZU)), 'zoned_not_permitted': int((~CW.residential_ok).sum()),
     'zoned_pencils_base_in_lieu': zcount('z_in_lieu_base_break_even'), 'zoned_pencils_base_on_site': zcount('z_on_site_base_break_even'),
     'zoned_pencils_favorable_in_lieu': zcount('z_in_lieu_favorable_break_even'),
@@ -776,7 +776,7 @@ FIG = {
     'zoned_median_rent_needed_on_site': round(float(ZU.z_on_site_base_rent_needed.median()), 3),
     'fire_zone_parcels': CW.fire_zone.fillna('none').value_counts().to_dict(),
 }
-FIG['elmwood_break_even_base'] = {r['site'] + '|' + r['fee_mode']: r['break_even_storeys']
+FIG['elmwood_break_even_base'] = {r['site'] + '|' + r['fee_mode']: r['break_even_stories']
                                   for r in RUN['results'] if r['scenario'] == 'base'}
 h = hashlib.sha256()
 with open(po.pp.V4, 'rb') as f_:
@@ -793,7 +793,7 @@ results = dict(meta=meta, cohort=COH.to_dict('records'), coverage=COV.to_dict('r
                ledger=LEDGER.to_dict('records'), flips=FLIPS.to_dict('records'),
                sensitivity={a: s_['rows'] for a, s_ in SENS.items()},
                citywide_file=Path(cw_files[-1]).name, elmwood_sites=srows, elmwood=[dict(site=r['site'], fee_mode=r['fee_mode'], scenario=r['scenario'],
-                                                  break_even_storeys=r['break_even_storeys'], land=r['land'], rows=r['rows'])
+                                                  break_even_stories=r['break_even_stories'], land=r['land'], rows=r['rows'])
                                              for r in RUN['results']])
 out_p = res_dir / f"results_{date.today().isoformat()}.json"
 json.dump(results, open(out_p, 'w'), indent=1, default=float)

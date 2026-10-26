@@ -283,7 +283,7 @@ hard_cost_by_type:
     type_IV_HT: {max_stories: 5, max_height_ft: 85}
     type_IB:   {max_stories: 12, max_height_ft: 180}
     type_IA:   {max_stories: "unlimited", max_height_ft: "unlimited"}
-    podium_510_2: "Upper building (e.g. 5 storeys IIIA, or 4 storeys VA) over a Type IA podium with 3-hour horizontal separation is treated as a separate building for stories and area. Overall HEIGHT in feet stays limited to the lesser building's limit (85 ft for IIIA over IA)."
+    podium_510_2: "Upper building (e.g. 5 stories IIIA, or 4 stories VA) over a Type IA podium with 3-hour horizontal separation is treated as a separate building for stories and area. Overall HEIGHT in feet stays limited to the lesser building's limit (85 ft for IIIA over IA)."
     high_rise_403: "High-rise = occupied floor more than 75 ft above lowest fire-department vehicle access, which brings extra requirements (practical ceiling for 5-over-2 at ~85 ft)."
     california_note: "California deleted the IBC's NFPA 13R height/story allowances for Group R (DGS/SFM 2022 intervening-cycle ISOR), so use the NFPA 13 values."
     sources:

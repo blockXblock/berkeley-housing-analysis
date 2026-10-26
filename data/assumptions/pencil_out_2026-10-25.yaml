@@ -167,15 +167,15 @@ price_year: 2025          # every $ below is carried to this year; BFA24's 2024 
 
 construction_tiers:
   # hard cost $/gross sqft, ALL-IN building cost (BFA24 Fig 33 blended 'Cost per Square Foot' for its prototypes),
-  # 2024 dollars. The tier is set by storeys AND height (CBC Ch. 5 limits, sprinklered R-2, via IBC 2018 tables).
+  # 2024 dollars. The tier is set by stories AND height (CBC Ch. 5 limits, sprinklered R-2, via IBC 2018 tables).
   kind: cited
   source: "BFA24 Fig 33 (blended by prototype) and Fig 34 (by type: Type V $350, Type III $400, Type I $550 /gsf); code limits: WoodWorks Mid-Rise Design (2018 IBC Ch. 5), 2022-07-27"
   as_of: "2024-05-21"
   tiers:
-    - {name: "Type V (wood)",              max_storeys: 4,  max_height_ft: 70,  per_gsf_2024: 350, construction_months: 18, basis: "BFA24 4-storey prototype $350; Type VA limit 4 storeys / 70 ft"}
-    - {name: "Type V over Type I podium",  max_storeys: 6,  max_height_ft: 75,  per_gsf_2024: 360, construction_months: 24, basis: "BFA24 6-storey prototype (Type V over a Type I podium) $360"}
-    - {name: "Type III over Type I podium", max_storeys: 8, max_height_ft: 85,  per_gsf_2024: 449, construction_months: 24, basis: "BFA24 8-storey prototype (Type III over Type I) $449; Type IIIA limit 85 ft, high-rise rules above 75 ft"}
-    - {name: "Type I (concrete/steel)",    max_storeys: 99, max_height_ft: 999, per_gsf_2024: 547, construction_months: 36, basis: "BFA24 18-storey prototype $547"}
+    - {name: "Type V (wood)",              max_stories: 4,  max_height_ft: 70,  per_gsf_2024: 350, construction_months: 18, basis: "BFA24 4-story prototype $350; Type VA limit 4 stories / 70 ft"}
+    - {name: "Type V over Type I podium",  max_stories: 6,  max_height_ft: 75,  per_gsf_2024: 360, construction_months: 24, basis: "BFA24 6-story prototype (Type V over a Type I podium) $360"}
+    - {name: "Type III over Type I podium", max_stories: 8, max_height_ft: 85,  per_gsf_2024: 449, construction_months: 24, basis: "BFA24 8-story prototype (Type III over Type I) $449; Type IIIA limit 85 ft, high-rise rules above 75 ft"}
+    - {name: "Type I (concrete/steel)",    max_stories: 99, max_height_ft: 999, per_gsf_2024: 547, construction_months: 36, basis: "BFA24 18-story prototype $547"}
   band: {low: 0.90, high: 1.18}
   band_note: "low = -10% (Part 2's hard-cost band); high = +18%, the low end of BFA24's 18-25% adder for Berkeley's labor standards (HARD HATS / Southside) on non-union projects"
   cross_check: "Part 2's cited series (Terner 2018 $332 x TBD index) is ~$509/gsf in 2025 for non-Type-I; times Part 2's fitted Berkeley factor (0.774) it is ~$394, inside BFA24's $360-449 mid-rise range"
@@ -183,7 +183,7 @@ construction_tiers:
 floor_to_floor_ft:
   base: {ground: 15, upper: 10}
   kind: labeled
-  source: "labeled: 15 ft retail ground floor, 10 ft residential floors (8 storeys = 85 ft, the Type IIIA limit, as in the 8-storey staff reports: 2015 Blake 88.5 ft, 2435 Haste 90 ft)"
+  source: "labeled: 15 ft retail ground floor, 10 ft residential floors (8 stories = 85 ft, the Type IIIA limit, as in the 8-story staff reports: 2015 Blake 88.5 ft, 2435 Haste 90 ft)"
   as_of: "2026-10-25"
 
 efficiency:
@@ -192,12 +192,12 @@ efficiency:
   high: 0.80
   unit: "net unit area / gross residential area"
   kind: cited
-  source: "BFA24 Fig 7: 6-storey 49,460/61,930 = 79.9%; 8-storey 71,320/89,984 = 79.3%; 18-storey 79.4%"
+  source: "BFA24 Fig 7: 6-story 49,460/61,930 = 79.9%; 8-story 71,320/89,984 = 79.3%; 18-story 79.4%"
   as_of: "2024-05-21"
 
 unit_size_sf:
   kind: cited
-  source: "BFA24 Fig 25, 6-storey prototype (net sf)"
+  source: "BFA24 Fig 25, 6-story prototype (net sf)"
   as_of: "2024-05-21"
   by_bedrooms: {"0": 500, "1": 660, "2": 990, "3": 1100}
 
@@ -206,7 +206,7 @@ lot_coverage:
   low: {ground: 0.85, upper: 0.65}
   high: {ground: 0.95, upper: 0.85}
   kind: labeled
-  source: "labeled: upper floors lose area to light courts, setbacks and open space; checked against the staff reports' gross floor area / (lot x storeys): 2435 Haste 0.71, 1820 San Pablo 0.74, 1201 San Pablo 0.60, 2018 Blake 0.43"
+  source: "labeled: upper floors lose area to light courts, setbacks and open space; checked against the staff reports' gross floor area / (lot x stories): 2435 Haste 0.71, 1820 San Pablo 0.74, 1201 San Pablo 0.60, 2018 Blake 0.43"
   as_of: "2026-10-25"
 
 ground_floor_retail_share:
@@ -268,7 +268,7 @@ berkeley_fees:
   on_site_share: 0.20                             # IHO on-site alternative: 20% of units, at least half VLI, rest <= 80% AMI (rent capped at 60% AMI)
   public_art_in_lieu_share: 0.008                 # 0.8% of construction cost (BMC 23.316)
   school_fee_per_residential_sf: 5.17             # BUSD, revised 2024-06-12 (applied to net unit area)
-  other_city_fees_per_unit_2024: 22562            # BFA24 6-storey: permit + plan check + sewer + other, ex in-lieu ($2,947,561 - $1,255,416) / 75
+  other_city_fees_per_unit_2024: 22562            # BFA24 6-story: permit + plan check + sewer + other, ex in-lieu ($2,947,561 - $1,255,416) / 75
   legacy_ahmf_note: "BMC 22.20.065 (AHMF, per unit) governs only projects vested on/before 2023-03-31; its current per-unit rate is NOT FOUND (2022: $46,185). The stalled projects approved before 2023 may fall under it."
 
 bmr_rents_monthly:
@@ -288,7 +288,7 @@ land_market_per_lot_sf:
   high: 500
   unit: "$ per sqft of land, mid-rise development site"
   kind: cited
-  source: "base/high: BFA24 Fig 34 land costs per sqft, 6-storey $325 and 8-storey $500 (prototypes sited in South & Southwest Berkeley); low: median of 30 corridor transfers 2021+ (record: data/derived/pencil_out/land_comps_corridor_2026-10-25.csv; quartiles $105/$149/$218)"
+  source: "base/high: BFA24 Fig 34 land costs per sqft, 6-story $325 and 8-story $500 (prototypes sited in South & Southwest Berkeley); low: median of 30 corridor transfers 2021+ (record: data/derived/pencil_out/land_comps_corridor_2026-10-25.csv; quartiles $105/$149/$218)"
   as_of: "2024-05-21 / 2026-10-25"
   caveat: "the record comps are Prop 13 assessed values after a recorded document; a document that is not a reassessing sale makes the value stale (values under $50/sqft dropped as likely non-sales)"
 
@@ -309,7 +309,7 @@ market_rent_multiplier:
   high: 1.10
   unit: "multiplier on the Rent Board lease-up pool rents (record: JN-Feasibility Part 2a, 2022-24 lease-ups)"
   kind: cited
-  source: "high: BFA24 Fig 26 6-storey rents (CoStar + 10% new-construction premium) run 5-12% above the pool (studio $2,800 vs $2,495; 1BR $3,250 vs $3,056; 2BR $4,500 vs $4,295) -> +10%; low: -10% labeled (symmetric)"
+  source: "high: BFA24 Fig 26 6-story rents (CoStar + 10% new-construction premium) run 5-12% above the pool (studio $2,800 vs $2,495; 1BR $3,250 vs $3,056; 2BR $4,500 vs $4,295) -> +10%; low: -10% labeled (symmetric)"
   as_of: "2024-05-21"
 
 site_work_per_land_sf_2024:
@@ -317,7 +317,7 @@ site_work_per_land_sf_2024:
   low: 20
   high: 35
   kind: cited
-  source: "BFA24 Fig 34: demolition and site work per sf of land, $20-35 by prototype ($25 for the 6- and 8-storey)"
+  source: "BFA24 Fig 34: demolition and site work per sf of land, $20-35 by prototype ($25 for the 6- and 8-story)"
   as_of: "2024-05-21"
 
 legacy_ahmf_per_unit:
@@ -336,8 +336,8 @@ eli_rent_share_of_vli:
   as_of: "2025-06-01"
 
 height_search:
-  min_storeys: 2
-  max_storeys: 12
+  min_stories: 2
+  max_stories: 12
   kind: labeled
   source: "labeled search range for the break-even height"
   as_of: "2026-10-25"

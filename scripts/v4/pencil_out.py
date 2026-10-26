@@ -94,16 +94,16 @@ ASSUMPTION_KEYS = {
 }
 
 
-def tier_for(storeys: int, height_ft: float) -> dict:
+def tier_for(stories: int, height_ft: float) -> dict:
     for t in A["construction_tiers"]["tiers"]:
-        if storeys <= t["max_storeys"] and height_ft <= t["max_height_ft"]:
+        if stories <= t["max_stories"] and height_ft <= t["max_height_ft"]:
             return t
     return A["construction_tiers"]["tiers"][-1]
 
 
-def height_ft(storeys: int) -> float:
+def height_ft(stories: int) -> float:
     f = A["floor_to_floor_ft"]["base"]
-    return f["ground"] + f["upper"] * (storeys - 1)
+    return f["ground"] + f["upper"] * (stories - 1)
 
 
 # ------------------------------------------------------------------------------------------------- rents (RECORD)
@@ -139,7 +139,7 @@ def bmr_rent(tier: str, bedrooms: str) -> float:
 
 
 # --------------------------------------------------------------------------------------- the money (one building)
-def account(*, units_mix, net_sf, res_gross, retail_sf, lobby_sf, storeys, lot_sf, s, R, affordable=None,
+def account(*, units_mix, net_sf, res_gross, retail_sf, lobby_sf, stories, lot_sf, s, R, affordable=None,
             fee_mode="in_lieu", per_bed_beds=None, loc=1.0):
     """NOI, every cost but land, value at the hurdle, residual land value -- for one building in scenario `s`.
     units_mix: {bedrooms: market+affordable unit count}; affordable: {tier: {bedrooms: n}} carved out of units_mix;
@@ -165,7 +165,7 @@ def account(*, units_mix, net_sf, res_gross, retail_sf, lobby_sf, storeys, lot_s
     retail_noi = retail_sf * pp.RETAIL_RENT * (1 - pp.RETAIL_VACANCY) * (1 - pp.RETAIL_EXPENSES)
     noi = market_noi + bmr_noi + retail_noi
     # cost (no land)
-    t = tier_for(storeys, height_ft(storeys))
+    t = tier_for(stories, height_ft(stories))
     esc = ESC_2024_TO_PRICE_YEAR
     hard = ((res_gross + lobby_sf) * t["per_gsf_2024"] + retail_sf * A["retail_shell_cost_per_gsf_2024"]["base"]
             + lot_sf * s["site_work"]) * esc * s["hard_mult"]
@@ -188,7 +188,7 @@ def account(*, units_mix, net_sf, res_gross, retail_sf, lobby_sf, storeys, lot_s
     return dict(units=units, noi=noi, market_noi=market_noi, other_noi=bmr_noi + retail_noi, hard=hard, soft=soft,
                 fees=other + school + art + afford_fee, afford_fee=afford_fee, interest=interest,
                 cost_ex_land=cost_ex_land, hurdle=hurdle, value=value, rlv=value - cost_ex_land, tier=t["name"],
-                height_ft=height_ft(storeys))
+                height_ft=height_ft(stories))
 
 
 # ------------------------------------------------------------------------------------------ part A: hypothetical sites
@@ -204,19 +204,19 @@ def mix_units(net_sf: float, R) -> dict:
     return out
 
 
-def site_building(site, storeys, s, R, fee_mode="in_lieu", env=None):
-    """a hypothetical building of `storeys` on a site: ground floor retail + lobby, residential above.
+def site_building(site, stories, s, R, fee_mode="in_lieu", env=None):
+    """a hypothetical building of `stories` on a site: ground floor retail + lobby, residential above.
     env (the zoned pass, allowed_envelope): a residential ground floor and the district's lot coverage where the
     envelope is residential-only, and its FAR and density caps -- floor area beyond a cap is not built."""
     lot = site["lot_sf"]
     if env and env.get("ground") == "residential":
         cov = env.get("lot_coverage") or s["cov_upper"]
         ground = retail = 0.0
-        res_gross = lot * cov * storeys
+        res_gross = lot * cov * stories
     else:
         ground = lot * s["cov_ground"]
         retail = ground * s["retail_share"]
-        res_gross = lot * s["cov_upper"] * (storeys - 1)
+        res_gross = lot * s["cov_upper"] * (stories - 1)
     if env and env.get("far"):
         res_gross = min(res_gross, max(0.0, env["far"] * lot - ground))
     net = res_gross * s["efficiency"]
@@ -233,9 +233,9 @@ def site_building(site, storeys, s, R, fee_mode="in_lieu", env=None):
         vli, li = math.ceil(k / 2), k - math.ceil(k / 2)
         affordable = {"VLI": _spread(vli, mix), "LI": _spread(li, mix)}
     acct = account(units_mix=mix, net_sf=net, res_gross=res_gross, retail_sf=retail, lobby_sf=ground - retail,
-                   storeys=storeys, lot_sf=lot, s=s, R=R, affordable=affordable, fee_mode=fee_mode,
+                   stories=stories, lot_sf=lot, s=s, R=R, affordable=affordable, fee_mode=fee_mode,
                    loc=site.get("rent_factor", 1.0))
-    acct.update(storeys=storeys, net_sf=net, res_gross=res_gross, retail_sf=retail, mix=mix)
+    acct.update(stories=stories, net_sf=net, res_gross=res_gross, retail_sf=retail, mix=mix)
     return acct
 
 
@@ -261,22 +261,22 @@ def land_basis(site, s):
 
 def break_even(site, s, R, fee_mode="in_lieu", env=None):
     """every height in the search range: RLV vs land basis, the rent multiplier that would make it pencil; and the lowest
-    height that pencils (None if none does). With env (the zoned pass) the heights stop at the envelope's storeys."""
+    height that pencils (None if none does). With env (the zoned pass) the heights stop at the envelope's stories."""
     hs = A["height_search"]
     lb = land_basis(site, s)
-    top = min(hs["max_storeys"], env["storeys"]) if env else hs["max_storeys"]
+    top = min(hs["max_stories"], env["stories"]) if env else hs["max_stories"]
     rows = []
-    for n in range(min(hs["min_storeys"], top), top + 1):
+    for n in range(min(hs["min_stories"], top), top + 1):
         b = site_building(site, n, s, R, fee_mode, env)
         # the rent multiplier at which RLV = land basis (NOI is linear in market rent; costs do not depend on rent)
         need = (((lb["basis"] + b["cost_ex_land"]) * b["hurdle"] - b["other_noi"]) / (b["market_noi"] / s["rent_mult"])
                 if b["market_noi"] > 0 else float("inf"))         # no market units fit: no rent can make it pencil
-        rows.append(dict(storeys=n, height_ft=b["height_ft"], tier=b["tier"], units=b["units"], noi=b["noi"],
+        rows.append(dict(stories=n, height_ft=b["height_ft"], tier=b["tier"], units=b["units"], noi=b["noi"],
                          value=b["value"], cost_ex_land=b["cost_ex_land"], rlv=b["rlv"], land_basis=lb["basis"],
                          surplus=b["rlv"] - lb["basis"], pencils=b["units"] > 0 and b["rlv"] >= lb["basis"], rent_mult_needed=need,
                          rlv_per_unit=b["rlv"] / b["units"] if b["units"] else None))
-    first = next((r["storeys"] for r in rows if r["pencils"]), None)
-    return dict(rows=rows, break_even_storeys=first, land=lb)
+    first = next((r["stories"] for r in rows if r["pencils"]), None)
+    return dict(rows=rows, break_even_stories=first, land=lb)
 
 
 # ----------------------------------------------------------------------------------------- part B: stalled projects
@@ -410,7 +410,7 @@ def stalled_project(anchor, rec, R, con_v4, asr, s, use_record_land=True):
     note("affordable_housing_fee", "BMC 22.20.065 formula, 2022 rate", "ASSUMPTION",
          f"{ASSUMPTIONS_FILE.name}: legacy_ahmf_per_unit (projects vested before 2023-03-31)")
     acct = account(units_mix=mix, net_sf=net, res_gross=res_gross, retail_sf=commercial,
-                   lobby_sf=0.0, storeys=stories, lot_sf=lot, s=s, R=R, affordable=affordable, fee_mode=fee_mode,
+                   lobby_sf=0.0, stories=stories, lot_sf=lot, s=s, R=R, affordable=affordable, fee_mode=fee_mode,
                    per_bed_beds=per_bed_beds)
     yoc = acct["noi"] / (acct["cost_ex_land"] + basis)
     # the market-rent multiplier at which the project meets the hurdle (NOI is linear in market rent)
@@ -506,7 +506,7 @@ def run_sites(sites, fee_modes=("in_lieu", "on_site")):
             for sc in SCENARIOS:
                 be = break_even(site, scenario(sc), R, fm)
                 res.append(dict(site=site["key"], name=site["name"], fee_mode=fm, scenario=sc, **{
-                    k: be[k] for k in ("break_even_storeys",)}, land=be["land"], rows=be["rows"]))
+                    k: be[k] for k in ("break_even_stories",)}, land=be["land"], rows=be["rows"]))
     return dict(results=res, rents=R)
 
 
@@ -671,14 +671,14 @@ def citywide_site_result(site, R, scen, fee_modes=("in_lieu", "on_site"), zoning
     for fm in fee_modes:
         env = allowed_envelope(zoning[0].get(site.get("district")), fm, zoning[1]) if zoning else None
         if zoning:
-            out[f"z_{fm}_allowed_storeys"] = env["storeys"] if env else None
+            out[f"z_{fm}_allowed_stories"] = env["stories"] if env else None
             out[f"z_{fm}_envelope"] = env["basis"] if env else None
         for sc, s in scen.items():
             be = break_even(site, s, R, fm)
             best = min(be["rows"], key=lambda x: x["rent_mult_needed"])
             tag = f"{fm}_{sc}"
-            out[f"{tag}_break_even"] = be["break_even_storeys"]
-            out[f"{tag}_best_storeys"] = best["storeys"]
+            out[f"{tag}_break_even"] = be["break_even_stories"]
+            out[f"{tag}_best_stories"] = best["stories"]
             out[f"{tag}_best_units"] = best["units"]
             out[f"{tag}_rent_needed"] = round(best["rent_mult_needed"], 4)
             if sc == "base":
@@ -688,8 +688,8 @@ def citywide_site_result(site, R, scen, fee_modes=("in_lieu", "on_site"), zoning
             if zoning:
                 zb = break_even(site, s, R, fm, env) if env else None
                 zbest = min(zb["rows"], key=lambda x: x["rent_mult_needed"]) if zb else None
-                out[f"z_{tag}_break_even"] = zb["break_even_storeys"] if zb else None
-                out[f"z_{tag}_best_storeys"] = zbest["storeys"] if zb else None
+                out[f"z_{tag}_break_even"] = zb["break_even_stories"] if zb else None
+                out[f"z_{tag}_best_stories"] = zbest["stories"] if zb else None
                 out[f"z_{tag}_best_units"] = zbest["units"] if zb else None
                 out[f"z_{tag}_rent_needed"] = round(zbest["rent_mult_needed"], 4) if zb else None
     return out
@@ -761,8 +761,8 @@ def zoning_standards(path=ZONING_STANDARDS):
     return {r["district"]: r for r in z["districts"]}, z["state_density_bonus"]
 
 
-def storeys_under(ft: float) -> int:
-    """the most storeys whose height (the assumptions file's floor-to-floor) fits under `ft`."""
+def stories_under(ft: float) -> int:
+    """the most stories whose height (the assumptions file's floor-to-floor) fits under `ft`."""
     n = 1
     while height_ft(n + 1) <= ft:
         n += 1
@@ -770,24 +770,24 @@ def storeys_under(ft: float) -> int:
 
 
 def allowed_envelope(row, fee_mode, bonus):
-    """the envelope a district allows: storeys, FAR cap, density cap, ground floor and coverage; None where multi-unit
-    housing is not permitted. on_site: the state bonus (storeys by the YAML's rule, caps x (1 + share)) or the
-    district's local bonus where it allows more storeys."""
+    """the envelope a district allows: stories, FAR cap, density cap, ground floor and coverage; None where multi-unit
+    housing is not permitted. on_site: the state bonus (stories by the YAML's rule, caps x (1 + share)) or the
+    district's local bonus where it allows more stories."""
     if not row or not row["residential"]:
         return None
-    caps = [x for x in (row["max_storeys"], storeys_under(row["max_height_ft"]) if row["max_height_ft"] else None) if x]
-    env = dict(storeys=min(caps), far=row["far_max"], du_ac=row["density_max"], ground=row.get("ground"),
+    caps = [x for x in (row["max_stories"], stories_under(row["max_height_ft"]) if row["max_height_ft"] else None) if x]
+    env = dict(stories=min(caps), far=row["far_max"], du_ac=row["density_max"], ground=row.get("ground"),
                lot_coverage=row.get("lot_coverage"), basis=f"{row['district']} standard")
     if fee_mode != "on_site":
         return env
     m = 1 + bonus["bonus_share"]
-    state = dict(env, storeys=round(env["storeys"] * m), far=env["far"] and env["far"] * m,
+    state = dict(env, stories=round(env["stories"] * m), far=env["far"] and env["far"] * m,
                  du_ac=env["du_ac"] and env["du_ac"] * m, basis=f"{row['district']} + state bonus {bonus['bonus_share']:.1%}")
     lb = row.get("local_bonus")
     if lb and A["berkeley_fees"]["on_site_share"] >= lb["min_affordable_share"]:
-        local = dict(env, storeys=min(lb["max_storeys"], storeys_under(lb["max_height_ft"])), far=lb["far_max"],
+        local = dict(env, stories=min(lb["max_stories"], stories_under(lb["max_height_ft"])), far=lb["far_max"],
                      du_ac=lb["density_max"], basis=f"{row['district']} + {lb['name']}")
-        if local["storeys"] > state["storeys"]:
+        if local["stories"] > state["stories"]:
             return local
     return state
 

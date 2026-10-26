@@ -83,7 +83,7 @@
 - Home page: all 11 `.vfacade` boxes carry `data-mp4` (R2 base; 1080p, phones 720p) + a "Watch on YouTube" link.
 - `docs/tours/streetview.html` (map + Street View): a `<video>` from R2 drives the map clock; the YouTube embed loads only
   if R2 fails (tested by blocking r2.dev). All 11 R2 durations match their timelines (within 0.3 s).
-- Videos now come from **`docs.berkeleybuild.com/videos/`** (dev 397621df): the bucket's existing R2 custom domain, not the
+- Videos now come from **`docs.berkeleybuild.com/videos/`** (DEPLOYED: main 4730b67c pushed by John 2026-10-26): the bucket's existing R2 custom domain, not the
   rate-limited `r2.dev`. PDF links (explorer data, public DB, housing-audit) still use `r2.dev`: a separate switch.
 - `scripts/tours/publish_video.py` still writes YouTube-only facades for NEW videos: add `data-mp4` once uploaded.
 

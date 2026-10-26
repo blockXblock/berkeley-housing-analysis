@@ -78,7 +78,7 @@
 
 ---
 
-## 2026-10-26 — Every flyover on the site plays HD from R2 (deploy STAGED: main 55281184, not pushed)
+## 2026-10-26 — Every flyover on the site plays HD from R2 (DEPLOYED: main 55281184 pushed by John 2026-10-26)
 
 - Home page: all 11 `.vfacade` boxes carry `data-mp4` (R2 base; 1080p, phones 720p) + a "Watch on YouTube" link.
 - `docs/tours/streetview.html` (map + Street View): a `<video>` from R2 drives the map clock; the YouTube embed loads only

@@ -8,6 +8,13 @@ area: audit
 
 # Corridor housing-density investigation (2026-08-12)
 
+> **Correction (2026-10-25).** A citywide zoning layer does exist: the City's on-premises server,
+> `gis.cityofberkeley.info/arcgis/rest/services/Public/Portal_Planning/MapServer/7` (42 districts, `ZONECLASS`; it was
+> already in `data/raw/infrastructure/berkeley_arcgis_inventory_2026-08-30.json`). It is saved as
+> `data/reference/berkeley_zoning_districts_2026-10-25.geojson`, with district standards in
+> `data/reference/berkeley_zoning_standards_2026-10-25.yaml`. The "no clean citywide zoning layer" line below searched
+> only the City's ArcGIS Online org.
+
 **Question:** does College Ave / Elmwood carry more multi-unit housing per block than its "single-family"
 zoning label implies, and are households adding backyard ADUs there? Compare to other corridors + the rest
 of Berkeley. Consolidated as **JN-M** (`notebooks/v4/JN-M_corridor_density.ipynb`, generator

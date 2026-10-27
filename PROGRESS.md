@@ -5,6 +5,17 @@
 
 ---
 
+## 2026-10-27 — Pencil-out band chart + SVG (JN-O §4 and end of §6; John: "build the band chart and export the svg")
+- §4's dollar chart (RLV vs land basis) replaced by a **band chart**: one row per stalled project, x = rent needed as a
+  multiple of today's lease-up rents, band = favorable -> unfavorable, dot = base, shaded column = the rent assumption's
+  own band (0.90-1.10x, read from the assumptions file). The geometry IS the verdict rule; the notebook asserts that each
+  band's verdict equals the model's. The 7 `insufficient_data` projects keep gray rows with the reason. RLV / land
+  figures stay in the §3 table.
+- After §6: the same chart with the Elmwood sites added (base-case best height, plus a row at the favorable-case best
+  height where it differs: Wells Fargo at 4 stories is marginal, at 6 does not pencil). Written to
+  `data/derived/pencil_out/pencil_out_bands_<date>.svg` (plotly + kaleido, regenerated on each run).
+- Gate unchanged (PASS vs `pencil_out_baseline_2026-10-26.json`); results file now `results_2026-10-27.json`.
+
 ## 2026-10-26 — Pencil-out: "storey" -> "story" (John: "could we use the American spelling of story?")
 - Renamed throughout the pencil-out module: `pencil_out.py`, `build_jn_o.py`, the zoning standards YAML (`max_stories`,
   `stories_rule`), the assumptions + research YAMLs, the Phase A audit, CSV columns (`*_best_stories`,

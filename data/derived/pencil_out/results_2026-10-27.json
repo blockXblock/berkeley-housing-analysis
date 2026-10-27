@@ -1,12 +1,12 @@
 {
  "meta": {
-  "as_of": "2026-10-26",
+  "as_of": "2026-10-27",
   "v4_file_sha": "1591bcbd2d3a38ae",
   "assumptions": "pencil_out_2026-10-25.yaml",
   "record_inputs": "project_inputs_record_2026-10-25.csv",
   "zoning_standards": "berkeley_zoning_standards_2026-10-25.yaml",
   "export_generated": "2026-10-20T15:31:17.655755",
-  "git": "43f6826b",
+  "git": "d8c171ba",
   "figures": {
    "stage_projects": 106,
    "stage_units": 1133,
@@ -1144,24 +1144,6 @@
  ],
  "flips": [
   {
-   "anchor": "ZP2020-0072",
-   "address": "2015 Blake St",
-   "base_gap_bp": -426,
-   "single_flips": "none",
-   "rent_needed_x": 2.49,
-   "exit_cap_needed": 1.74,
-   "hard_cost_needed_x": 0.31
-  },
-  {
-   "anchor": "ZP2020-0069",
-   "address": "3031 Telegraph Ave",
-   "base_gap_bp": -306,
-   "single_flips": "none",
-   "rent_needed_x": 1.79,
-   "exit_cap_needed": 2.94,
-   "hard_cost_needed_x": 0.43
-  },
-  {
    "anchor": "ZP2021-0070",
    "address": "1201 San Pablo Ave",
    "base_gap_bp": -260,
@@ -1169,6 +1151,15 @@
    "rent_needed_x": 1.59,
    "exit_cap_needed": 3.4,
    "hard_cost_needed_x": 0.52
+  },
+  {
+   "anchor": "ZP2021-0095",
+   "address": "2018 Blake St",
+   "base_gap_bp": 175,
+   "single_flips": "none",
+   "rent_needed_x": 0.8,
+   "exit_cap_needed": 7.75,
+   "hard_cost_needed_x": 1.3
   },
   {
    "anchor": "ZP2021-0210",
@@ -1189,6 +1180,24 @@
    "hard_cost_needed_x": 0.63
   },
   {
+   "anchor": "ZP2020-0069",
+   "address": "3031 Telegraph Ave",
+   "base_gap_bp": -306,
+   "single_flips": "none",
+   "rent_needed_x": 1.79,
+   "exit_cap_needed": 2.94,
+   "hard_cost_needed_x": 0.43
+  },
+  {
+   "anchor": "ZP2020-0072",
+   "address": "2015 Blake St",
+   "base_gap_bp": -426,
+   "single_flips": "none",
+   "rent_needed_x": 2.49,
+   "exit_cap_needed": 1.74,
+   "hard_cost_needed_x": 0.31
+  },
+  {
    "anchor": "ZP2020-0045",
    "address": "1915 Berryman St",
    "base_gap_bp": -451,
@@ -1196,246 +1205,9 @@
    "rent_needed_x": 2.92,
    "exit_cap_needed": 1.49,
    "hard_cost_needed_x": 0.18
-  },
-  {
-   "anchor": "ZP2021-0095",
-   "address": "2018 Blake St",
-   "base_gap_bp": 175,
-   "single_flips": "none",
-   "rent_needed_x": 0.8,
-   "exit_cap_needed": 7.75,
-   "hard_cost_needed_x": 1.3
   }
  ],
  "sensitivity": {
-  "ZP2020-0072": [
-   {
-    "assumption": "cap",
-    "file_key": "exit_cap_rate_today",
-    "favorable_gap": -0.03260745525367925,
-    "unfavorable_gap": -0.04760745525367925,
-    "flips": false
-   },
-   {
-    "assumption": "hard_mult",
-    "file_key": "construction_tiers.band",
-    "favorable_gap": -0.039803733586325565,
-    "unfavorable_gap": -0.04660445639170001,
-    "flips": false
-   },
-   {
-    "assumption": "rent_mult",
-    "file_key": "market_rent_multiplier",
-    "favorable_gap": -0.03975489038251515,
-    "unfavorable_gap": -0.04546002012484333,
-    "flips": false
-   },
-   {
-    "assumption": "spread",
-    "file_key": "yield_spread_over_exit_cap",
-    "favorable_gap": -0.040107455253679244,
-    "unfavorable_gap": -0.04510745525367925,
-    "flips": false
-   },
-   {
-    "assumption": "opex",
-    "file_key": "operating_expenses_share_of_egi",
-    "favorable_gap": -0.04111534439799342,
-    "unfavorable_gap": -0.044801735923805465,
-    "flips": false
-   },
-   {
-    "assumption": "soft",
-    "file_key": "soft_costs_ex_fees_ex_financing",
-    "favorable_gap": -0.04068565668958346,
-    "unfavorable_gap": -0.043197477856896746,
-    "flips": false
-   },
-   {
-    "assumption": "land_psf",
-    "file_key": "land_market_per_lot_sf",
-    "favorable_gap": -0.04129999382134179,
-    "unfavorable_gap": -0.04380318566683723,
-    "flips": false
-   },
-   {
-    "assumption": "rate",
-    "file_key": "construction_financing.rate",
-    "favorable_gap": -0.04246300496497978,
-    "unfavorable_gap": -0.04275052284611075,
-    "flips": false
-   },
-   {
-    "assumption": "site_work",
-    "file_key": "site_work_per_land_sf_2024",
-    "favorable_gap": -0.04255782800909781,
-    "unfavorable_gap": -0.0427062178494083,
-    "flips": false
-   },
-   {
-    "assumption": "efficiency",
-    "file_key": "efficiency",
-    "favorable_gap": -0.04260745525367925,
-    "unfavorable_gap": -0.04260535558172443,
-    "flips": false
-   },
-   {
-    "assumption": "cov_ground",
-    "file_key": "lot_coverage.ground",
-    "favorable_gap": -0.04260745525367925,
-    "unfavorable_gap": -0.04260745525367925,
-    "flips": false
-   },
-   {
-    "assumption": "cov_upper",
-    "file_key": "lot_coverage.upper",
-    "favorable_gap": -0.04260745525367925,
-    "unfavorable_gap": -0.04260745525367925,
-    "flips": false
-   },
-   {
-    "assumption": "retail_share",
-    "file_key": "ground_floor_retail_share",
-    "favorable_gap": -0.04260745525367925,
-    "unfavorable_gap": -0.04260745525367925,
-    "flips": false
-   },
-   {
-    "assumption": "euv_rent",
-    "file_key": "existing_use_value.retail_nnn_rent_per_sf_yr",
-    "favorable_gap": -0.04260745525367925,
-    "unfavorable_gap": -0.04260745525367925,
-    "flips": false
-   },
-   {
-    "assumption": "euv_vacancy",
-    "file_key": "existing_use_value.retail_vacancy",
-    "favorable_gap": -0.04260745525367925,
-    "unfavorable_gap": -0.04260745525367925,
-    "flips": false
-   },
-   {
-    "assumption": "euv_cap",
-    "file_key": "existing_use_value.retail_cap_rate",
-    "favorable_gap": -0.04260745525367925,
-    "unfavorable_gap": -0.04260745525367925,
-    "flips": false
-   }
-  ],
-  "ZP2020-0069": [
-   {
-    "assumption": "cap",
-    "file_key": "exit_cap_rate_today",
-    "favorable_gap": -0.020583293965528285,
-    "unfavorable_gap": -0.035583293965528284,
-    "flips": false
-   },
-   {
-    "assumption": "hard_mult",
-    "file_key": "construction_tiers.band",
-    "favorable_gap": -0.027217108533168687,
-    "unfavorable_gap": -0.0355300978400146,
-    "flips": false
-   },
-   {
-    "assumption": "rent_mult",
-    "file_key": "market_rent_multiplier",
-    "favorable_gap": -0.02670940536496188,
-    "unfavorable_gap": -0.03445718256609469,
-    "flips": false
-   },
-   {
-    "assumption": "land_psf",
-    "file_key": "land_market_per_lot_sf",
-    "favorable_gap": -0.02684150976759791,
-    "unfavorable_gap": -0.03374156100607412,
-    "flips": false
-   },
-   {
-    "assumption": "opex",
-    "file_key": "operating_expenses_share_of_egi",
-    "favorable_gap": -0.028556952236001243,
-    "unfavorable_gap": -0.03356320827365628,
-    "flips": false
-   },
-   {
-    "assumption": "spread",
-    "file_key": "yield_spread_over_exit_cap",
-    "favorable_gap": -0.028083293965528278,
-    "unfavorable_gap": -0.03308329396552828,
-    "flips": false
-   },
-   {
-    "assumption": "soft",
-    "file_key": "soft_costs_ex_fees_ex_financing",
-    "favorable_gap": -0.028266973139982464,
-    "unfavorable_gap": -0.03130241591839537,
-    "flips": false
-   },
-   {
-    "assumption": "site_work",
-    "file_key": "site_work_per_land_sf_2024",
-    "favorable_gap": -0.030446987342290975,
-    "unfavorable_gap": -0.03085327341815229,
-    "flips": false
-   },
-   {
-    "assumption": "rate",
-    "file_key": "construction_financing.rate",
-    "favorable_gap": -0.03040781277331349,
-    "unfavorable_gap": -0.030757318079556693,
-    "flips": false
-   },
-   {
-    "assumption": "efficiency",
-    "file_key": "efficiency",
-    "favorable_gap": -0.03058329396552828,
-    "unfavorable_gap": -0.030580250116805173,
-    "flips": false
-   },
-   {
-    "assumption": "cov_ground",
-    "file_key": "lot_coverage.ground",
-    "favorable_gap": -0.03058329396552828,
-    "unfavorable_gap": -0.03058329396552828,
-    "flips": false
-   },
-   {
-    "assumption": "cov_upper",
-    "file_key": "lot_coverage.upper",
-    "favorable_gap": -0.03058329396552828,
-    "unfavorable_gap": -0.03058329396552828,
-    "flips": false
-   },
-   {
-    "assumption": "retail_share",
-    "file_key": "ground_floor_retail_share",
-    "favorable_gap": -0.03058329396552828,
-    "unfavorable_gap": -0.03058329396552828,
-    "flips": false
-   },
-   {
-    "assumption": "euv_rent",
-    "file_key": "existing_use_value.retail_nnn_rent_per_sf_yr",
-    "favorable_gap": -0.03058329396552828,
-    "unfavorable_gap": -0.03058329396552828,
-    "flips": false
-   },
-   {
-    "assumption": "euv_vacancy",
-    "file_key": "existing_use_value.retail_vacancy",
-    "favorable_gap": -0.03058329396552828,
-    "unfavorable_gap": -0.03058329396552828,
-    "flips": false
-   },
-   {
-    "assumption": "euv_cap",
-    "file_key": "existing_use_value.retail_cap_rate",
-    "favorable_gap": -0.03058329396552828,
-    "unfavorable_gap": -0.03058329396552828,
-    "flips": false
-   }
-  ],
   "ZP2021-0070": [
    {
     "assumption": "cap",
@@ -1547,6 +1319,120 @@
     "file_key": "existing_use_value.retail_cap_rate",
     "favorable_gap": -0.02600322392134482,
     "unfavorable_gap": -0.02600322392134482,
+    "flips": false
+   }
+  ],
+  "ZP2021-0095": [
+   {
+    "assumption": "hard_mult",
+    "file_key": "construction_tiers.band",
+    "favorable_gap": 0.02540203561765636,
+    "unfavorable_gap": 0.006066175862341178,
+    "flips": false
+   },
+   {
+    "assumption": "rent_mult",
+    "file_key": "market_rent_multiplier",
+    "favorable_gap": 0.026104618143013833,
+    "unfavorable_gap": 0.008879539028712802,
+    "flips": false
+   },
+   {
+    "assumption": "cap",
+    "file_key": "exit_cap_rate_today",
+    "favorable_gap": 0.02749207858586332,
+    "unfavorable_gap": 0.01249207858586332,
+    "flips": false
+   },
+   {
+    "assumption": "opex",
+    "file_key": "operating_expenses_share_of_egi",
+    "favorable_gap": 0.021997099277295873,
+    "unfavorable_gap": 0.010867048157285994,
+    "flips": false
+   },
+   {
+    "assumption": "soft",
+    "file_key": "soft_costs_ex_fees_ex_financing",
+    "favorable_gap": 0.022923134149706786,
+    "unfavorable_gap": 0.015816551634569104,
+    "flips": false
+   },
+   {
+    "assumption": "spread",
+    "file_key": "yield_spread_over_exit_cap",
+    "favorable_gap": 0.019992078585863327,
+    "unfavorable_gap": 0.014992078585863322,
+    "flips": false
+   },
+   {
+    "assumption": "site_work",
+    "file_key": "site_work_per_land_sf_2024",
+    "favorable_gap": 0.01787375488326086,
+    "unfavorable_gap": 0.016738316604597223,
+    "flips": false
+   },
+   {
+    "assumption": "rate",
+    "file_key": "construction_financing.rate",
+    "favorable_gap": 0.01790170146312267,
+    "unfavorable_gap": 0.017086151082562992,
+    "flips": false
+   },
+   {
+    "assumption": "efficiency",
+    "file_key": "efficiency",
+    "favorable_gap": 0.017492078585863324,
+    "unfavorable_gap": 0.01749938329512958,
+    "flips": false
+   },
+   {
+    "assumption": "cov_ground",
+    "file_key": "lot_coverage.ground",
+    "favorable_gap": 0.017492078585863324,
+    "unfavorable_gap": 0.017492078585863324,
+    "flips": false
+   },
+   {
+    "assumption": "cov_upper",
+    "file_key": "lot_coverage.upper",
+    "favorable_gap": 0.017492078585863324,
+    "unfavorable_gap": 0.017492078585863324,
+    "flips": false
+   },
+   {
+    "assumption": "retail_share",
+    "file_key": "ground_floor_retail_share",
+    "favorable_gap": 0.017492078585863324,
+    "unfavorable_gap": 0.017492078585863324,
+    "flips": false
+   },
+   {
+    "assumption": "land_psf",
+    "file_key": "land_market_per_lot_sf",
+    "favorable_gap": 0.017492078585863324,
+    "unfavorable_gap": 0.017492078585863324,
+    "flips": false
+   },
+   {
+    "assumption": "euv_rent",
+    "file_key": "existing_use_value.retail_nnn_rent_per_sf_yr",
+    "favorable_gap": 0.017492078585863324,
+    "unfavorable_gap": 0.017492078585863324,
+    "flips": false
+   },
+   {
+    "assumption": "euv_vacancy",
+    "file_key": "existing_use_value.retail_vacancy",
+    "favorable_gap": 0.017492078585863324,
+    "unfavorable_gap": 0.017492078585863324,
+    "flips": false
+   },
+   {
+    "assumption": "euv_cap",
+    "file_key": "existing_use_value.retail_cap_rate",
+    "favorable_gap": 0.017492078585863324,
+    "unfavorable_gap": 0.017492078585863324,
     "flips": false
    }
   ],
@@ -1778,6 +1664,234 @@
     "flips": false
    }
   ],
+  "ZP2020-0069": [
+   {
+    "assumption": "cap",
+    "file_key": "exit_cap_rate_today",
+    "favorable_gap": -0.020583293965528285,
+    "unfavorable_gap": -0.035583293965528284,
+    "flips": false
+   },
+   {
+    "assumption": "hard_mult",
+    "file_key": "construction_tiers.band",
+    "favorable_gap": -0.027217108533168687,
+    "unfavorable_gap": -0.0355300978400146,
+    "flips": false
+   },
+   {
+    "assumption": "rent_mult",
+    "file_key": "market_rent_multiplier",
+    "favorable_gap": -0.02670940536496188,
+    "unfavorable_gap": -0.03445718256609469,
+    "flips": false
+   },
+   {
+    "assumption": "land_psf",
+    "file_key": "land_market_per_lot_sf",
+    "favorable_gap": -0.02684150976759791,
+    "unfavorable_gap": -0.03374156100607412,
+    "flips": false
+   },
+   {
+    "assumption": "opex",
+    "file_key": "operating_expenses_share_of_egi",
+    "favorable_gap": -0.028556952236001243,
+    "unfavorable_gap": -0.03356320827365628,
+    "flips": false
+   },
+   {
+    "assumption": "spread",
+    "file_key": "yield_spread_over_exit_cap",
+    "favorable_gap": -0.028083293965528278,
+    "unfavorable_gap": -0.03308329396552828,
+    "flips": false
+   },
+   {
+    "assumption": "soft",
+    "file_key": "soft_costs_ex_fees_ex_financing",
+    "favorable_gap": -0.028266973139982464,
+    "unfavorable_gap": -0.03130241591839537,
+    "flips": false
+   },
+   {
+    "assumption": "site_work",
+    "file_key": "site_work_per_land_sf_2024",
+    "favorable_gap": -0.030446987342290975,
+    "unfavorable_gap": -0.03085327341815229,
+    "flips": false
+   },
+   {
+    "assumption": "rate",
+    "file_key": "construction_financing.rate",
+    "favorable_gap": -0.03040781277331349,
+    "unfavorable_gap": -0.030757318079556693,
+    "flips": false
+   },
+   {
+    "assumption": "efficiency",
+    "file_key": "efficiency",
+    "favorable_gap": -0.03058329396552828,
+    "unfavorable_gap": -0.030580250116805173,
+    "flips": false
+   },
+   {
+    "assumption": "cov_ground",
+    "file_key": "lot_coverage.ground",
+    "favorable_gap": -0.03058329396552828,
+    "unfavorable_gap": -0.03058329396552828,
+    "flips": false
+   },
+   {
+    "assumption": "cov_upper",
+    "file_key": "lot_coverage.upper",
+    "favorable_gap": -0.03058329396552828,
+    "unfavorable_gap": -0.03058329396552828,
+    "flips": false
+   },
+   {
+    "assumption": "retail_share",
+    "file_key": "ground_floor_retail_share",
+    "favorable_gap": -0.03058329396552828,
+    "unfavorable_gap": -0.03058329396552828,
+    "flips": false
+   },
+   {
+    "assumption": "euv_rent",
+    "file_key": "existing_use_value.retail_nnn_rent_per_sf_yr",
+    "favorable_gap": -0.03058329396552828,
+    "unfavorable_gap": -0.03058329396552828,
+    "flips": false
+   },
+   {
+    "assumption": "euv_vacancy",
+    "file_key": "existing_use_value.retail_vacancy",
+    "favorable_gap": -0.03058329396552828,
+    "unfavorable_gap": -0.03058329396552828,
+    "flips": false
+   },
+   {
+    "assumption": "euv_cap",
+    "file_key": "existing_use_value.retail_cap_rate",
+    "favorable_gap": -0.03058329396552828,
+    "unfavorable_gap": -0.03058329396552828,
+    "flips": false
+   }
+  ],
+  "ZP2020-0072": [
+   {
+    "assumption": "cap",
+    "file_key": "exit_cap_rate_today",
+    "favorable_gap": -0.03260745525367925,
+    "unfavorable_gap": -0.04760745525367925,
+    "flips": false
+   },
+   {
+    "assumption": "hard_mult",
+    "file_key": "construction_tiers.band",
+    "favorable_gap": -0.039803733586325565,
+    "unfavorable_gap": -0.04660445639170001,
+    "flips": false
+   },
+   {
+    "assumption": "rent_mult",
+    "file_key": "market_rent_multiplier",
+    "favorable_gap": -0.03975489038251515,
+    "unfavorable_gap": -0.04546002012484333,
+    "flips": false
+   },
+   {
+    "assumption": "spread",
+    "file_key": "yield_spread_over_exit_cap",
+    "favorable_gap": -0.040107455253679244,
+    "unfavorable_gap": -0.04510745525367925,
+    "flips": false
+   },
+   {
+    "assumption": "opex",
+    "file_key": "operating_expenses_share_of_egi",
+    "favorable_gap": -0.04111534439799342,
+    "unfavorable_gap": -0.044801735923805465,
+    "flips": false
+   },
+   {
+    "assumption": "soft",
+    "file_key": "soft_costs_ex_fees_ex_financing",
+    "favorable_gap": -0.04068565668958346,
+    "unfavorable_gap": -0.043197477856896746,
+    "flips": false
+   },
+   {
+    "assumption": "land_psf",
+    "file_key": "land_market_per_lot_sf",
+    "favorable_gap": -0.04129999382134179,
+    "unfavorable_gap": -0.04380318566683723,
+    "flips": false
+   },
+   {
+    "assumption": "rate",
+    "file_key": "construction_financing.rate",
+    "favorable_gap": -0.04246300496497978,
+    "unfavorable_gap": -0.04275052284611075,
+    "flips": false
+   },
+   {
+    "assumption": "site_work",
+    "file_key": "site_work_per_land_sf_2024",
+    "favorable_gap": -0.04255782800909781,
+    "unfavorable_gap": -0.0427062178494083,
+    "flips": false
+   },
+   {
+    "assumption": "efficiency",
+    "file_key": "efficiency",
+    "favorable_gap": -0.04260745525367925,
+    "unfavorable_gap": -0.04260535558172443,
+    "flips": false
+   },
+   {
+    "assumption": "cov_ground",
+    "file_key": "lot_coverage.ground",
+    "favorable_gap": -0.04260745525367925,
+    "unfavorable_gap": -0.04260745525367925,
+    "flips": false
+   },
+   {
+    "assumption": "cov_upper",
+    "file_key": "lot_coverage.upper",
+    "favorable_gap": -0.04260745525367925,
+    "unfavorable_gap": -0.04260745525367925,
+    "flips": false
+   },
+   {
+    "assumption": "retail_share",
+    "file_key": "ground_floor_retail_share",
+    "favorable_gap": -0.04260745525367925,
+    "unfavorable_gap": -0.04260745525367925,
+    "flips": false
+   },
+   {
+    "assumption": "euv_rent",
+    "file_key": "existing_use_value.retail_nnn_rent_per_sf_yr",
+    "favorable_gap": -0.04260745525367925,
+    "unfavorable_gap": -0.04260745525367925,
+    "flips": false
+   },
+   {
+    "assumption": "euv_vacancy",
+    "file_key": "existing_use_value.retail_vacancy",
+    "favorable_gap": -0.04260745525367925,
+    "unfavorable_gap": -0.04260745525367925,
+    "flips": false
+   },
+   {
+    "assumption": "euv_cap",
+    "file_key": "existing_use_value.retail_cap_rate",
+    "favorable_gap": -0.04260745525367925,
+    "unfavorable_gap": -0.04260745525367925,
+    "flips": false
+   }
+  ],
   "ZP2020-0045": [
    {
     "assumption": "cap",
@@ -1889,120 +2003,6 @@
     "file_key": "existing_use_value.retail_cap_rate",
     "favorable_gap": -0.04506861068800517,
     "unfavorable_gap": -0.04506861068800517,
-    "flips": false
-   }
-  ],
-  "ZP2021-0095": [
-   {
-    "assumption": "hard_mult",
-    "file_key": "construction_tiers.band",
-    "favorable_gap": 0.02540203561765636,
-    "unfavorable_gap": 0.006066175862341178,
-    "flips": false
-   },
-   {
-    "assumption": "rent_mult",
-    "file_key": "market_rent_multiplier",
-    "favorable_gap": 0.026104618143013833,
-    "unfavorable_gap": 0.008879539028712802,
-    "flips": false
-   },
-   {
-    "assumption": "cap",
-    "file_key": "exit_cap_rate_today",
-    "favorable_gap": 0.02749207858586332,
-    "unfavorable_gap": 0.01249207858586332,
-    "flips": false
-   },
-   {
-    "assumption": "opex",
-    "file_key": "operating_expenses_share_of_egi",
-    "favorable_gap": 0.021997099277295873,
-    "unfavorable_gap": 0.010867048157285994,
-    "flips": false
-   },
-   {
-    "assumption": "soft",
-    "file_key": "soft_costs_ex_fees_ex_financing",
-    "favorable_gap": 0.022923134149706786,
-    "unfavorable_gap": 0.015816551634569104,
-    "flips": false
-   },
-   {
-    "assumption": "spread",
-    "file_key": "yield_spread_over_exit_cap",
-    "favorable_gap": 0.019992078585863327,
-    "unfavorable_gap": 0.014992078585863322,
-    "flips": false
-   },
-   {
-    "assumption": "site_work",
-    "file_key": "site_work_per_land_sf_2024",
-    "favorable_gap": 0.01787375488326086,
-    "unfavorable_gap": 0.016738316604597223,
-    "flips": false
-   },
-   {
-    "assumption": "rate",
-    "file_key": "construction_financing.rate",
-    "favorable_gap": 0.01790170146312267,
-    "unfavorable_gap": 0.017086151082562992,
-    "flips": false
-   },
-   {
-    "assumption": "efficiency",
-    "file_key": "efficiency",
-    "favorable_gap": 0.017492078585863324,
-    "unfavorable_gap": 0.01749938329512958,
-    "flips": false
-   },
-   {
-    "assumption": "cov_ground",
-    "file_key": "lot_coverage.ground",
-    "favorable_gap": 0.017492078585863324,
-    "unfavorable_gap": 0.017492078585863324,
-    "flips": false
-   },
-   {
-    "assumption": "cov_upper",
-    "file_key": "lot_coverage.upper",
-    "favorable_gap": 0.017492078585863324,
-    "unfavorable_gap": 0.017492078585863324,
-    "flips": false
-   },
-   {
-    "assumption": "retail_share",
-    "file_key": "ground_floor_retail_share",
-    "favorable_gap": 0.017492078585863324,
-    "unfavorable_gap": 0.017492078585863324,
-    "flips": false
-   },
-   {
-    "assumption": "land_psf",
-    "file_key": "land_market_per_lot_sf",
-    "favorable_gap": 0.017492078585863324,
-    "unfavorable_gap": 0.017492078585863324,
-    "flips": false
-   },
-   {
-    "assumption": "euv_rent",
-    "file_key": "existing_use_value.retail_nnn_rent_per_sf_yr",
-    "favorable_gap": 0.017492078585863324,
-    "unfavorable_gap": 0.017492078585863324,
-    "flips": false
-   },
-   {
-    "assumption": "euv_vacancy",
-    "file_key": "existing_use_value.retail_vacancy",
-    "favorable_gap": 0.017492078585863324,
-    "unfavorable_gap": 0.017492078585863324,
-    "flips": false
-   },
-   {
-    "assumption": "euv_cap",
-    "file_key": "existing_use_value.retail_cap_rate",
-    "favorable_gap": 0.017492078585863324,
-    "unfavorable_gap": 0.017492078585863324,
     "flips": false
    }
   ]

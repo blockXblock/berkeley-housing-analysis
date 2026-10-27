@@ -90,6 +90,8 @@ graph LR
   E --> GATE
   V --> OUT[(results JSON)]
   E --> OUT
+  V --> BANDS[band chart §4/§6<br/>pencil_out_bands_date.svg]
+  E --> BANDS
 ```
 """)
 
@@ -272,40 +274,92 @@ print(LEDGER[LEDGER.anchor == 'ZP2021-0186'][['field', 'value', 'label', 'source
 print('\nlabels across all projects:', LEDGER.label.value_counts().to_dict())
 """)
 
-# ------------------------------------------------------------------------------------------------ §4 RLV chart
+# ------------------------------------------------------------------------------------------------ §4 band chart
 md(r"""
-## §4 — Residual land value against land basis
+## §4 — How far each project is from penciling
 
-📝 **Before.** Each project: its **residual land value** (what the finished building is worth at the hurdle, less every
-cost except land), with a bar from the unfavorable to the favorable case, against its **land basis** (◆). A project
-pencils where the bar reaches the diamond. Read the distance, not just the side.
+📝 **Before.** One horizontal band per project, on one axis: **how many times today's lease-up rents** the building
+needs to clear the hurdle at its approved size. The band runs from the **favorable** case (every other assumption at its
+helpful end) to the **unfavorable** case, with a dot at the **base** case. The shaded column is the rent assumption's own
+band (`market_rent_multiplier` in the assumptions file): what new buildings may actually rent for, relative to today's
+lease-ups. The geometry **is** the verdict rule:
+
+- the band lies entirely right of the shaded column → **does not pencil**, even with everything favorable;
+- the dot is left of 1.0×, or the favorable end is inside the column → **marginal**;
+- the unfavorable end is left of the column → **pencils**, even with everything unfavorable.
+
+Projects without enough RECORD inputs keep a gray row, so half the cohort isn't silently dropped.
 """)
 code(r"""
+RB = A['market_rent_multiplier']          # ASSUMPTION: today's rents could be RB['low']..RB['high'] x the lease-up pool
+VCOL = {'pencils': '#0ca30c', 'marginal': '#fab219', 'does_not': '#d03b3b', 'insufficient_data': '#b4b2a9'}
+VLAB = {'pencils': 'pencils', 'marginal': 'marginal', 'does_not': 'does not pencil', 'insufficient_data': 'not enough record'}
+
+def band_verdict(fav, base, unf):
+    # rent needed <= the scenario's own rent assumption  <=>  residual land value >= land basis
+    return 'pencils' if unf <= RB['low'] else 'marginal' if (base <= RB['base'] or fav <= RB['high']) else 'does_not'
+
+def band_chart(groups, title):
+    # groups: [(header, [dict(label, verdict, fav, base, unf, why)])]; rows with verdict insufficient_data have no numbers
+    order, fig, seen = [], go.Figure(), set()
+    for header, rows in groups:
+        order.append(f'<b>{header}</b>')
+        for r in rows:
+            order.append(r['label'])
+            c = VCOL[r['verdict']]
+            if r['verdict'] == 'insufficient_data':
+                fig.add_annotation(x=RB['high'], y=r['label'], text=r['why'], showarrow=False, xanchor='left',
+                                   font=dict(size=11, color='#52514e'))
+                continue
+            show = r['verdict'] not in seen
+            seen.add(r['verdict'])
+            fig.add_trace(go.Scatter(x=[r['fav'], r['unf']], y=[r['label']] * 2, mode='lines', line=dict(width=10, color=c),
+                                     opacity=0.55, legendgroup=r['verdict'], name=VLAB[r['verdict']], showlegend=show,
+                                     hoverinfo='skip'))
+            fig.add_trace(go.Scatter(x=[r['base']], y=[r['label']], mode='markers', legendgroup=r['verdict'], showlegend=False,
+                                     marker=dict(size=12, color=c, line=dict(width=2, color='#fcfcfb')),
+                                     customdata=[[r['fav'], r['unf'], VLAB[r['verdict']]]],
+                                     hovertemplate='%{y}<br>base ×%{x:.2f} (favorable ×%{customdata[0]:.2f}, '
+                                                   'unfavorable ×%{customdata[1]:.2f})<br>%{customdata[2]}<extra></extra>'))
+            fig.add_annotation(x=r['unf'], y=r['label'], text=VLAB[r['verdict']], showarrow=False, xanchor='left', xshift=8,
+                               font=dict(size=11, color='#52514e'))
+    fig.add_vrect(x0=RB['low'], x1=RB['high'], fillcolor='#e8eef6', line_width=0, layer='below')
+    fig.add_vline(x=RB['base'], line_color='#52514e', line_width=1.5,
+                  annotation_text=f"today's lease-up rents (shaded: ×{RB['low']:.2f}–×{RB['high']:.2f})",
+                  annotation_position='top', annotation_font=dict(size=11, color='#52514e'))
+    xmax = max([r['unf'] for _, rows in groups for r in rows if r['unf'] is not None] + [RB['high']])
+    fig.update_yaxes(categoryorder='array', categoryarray=order[::-1], showgrid=False)
+    fig.update_xaxes(range=[0, xmax * 1.25], dtick=0.5, ticksuffix='×', gridcolor='#ececea', zeroline=False,
+                     title="rent needed to pencil, as a multiple of today's lease-up rents")
+    fig.update_layout(title=title, template='plotly_white', plot_bgcolor='#fcfcfb', paper_bgcolor='#fcfcfb',
+                      height=140 + 34 * len(order), width=1000, margin=dict(l=230, r=40, t=80, b=60),
+                      legend=dict(orientation='h', y=-0.12, x=0), font=dict(family='Helvetica, Arial, sans-serif'))
+    return fig
+
 ev = [p for p in RES['projects'] if p.get('verdict') not in (None, 'insufficient_data')]
-ev.sort(key=lambda p: p['runs']['base']['rlv'] - p['land_basis'])
-fig = go.Figure()
-names = [f"{p['address']} ({p['units']}u)" for p in ev]
-fig.add_trace(go.Scatter(
-    x=[p['runs']['base']['rlv'] / 1e6 for p in ev], y=names, mode='markers', name='residual land value (base)',
-    marker=dict(size=11, color='#2f6fb3'),
-    error_x=dict(type='data', symmetric=False,
-                 array=[(p['runs']['favorable']['rlv'] - p['runs']['base']['rlv']) / 1e6 for p in ev],
-                 arrayminus=[(p['runs']['base']['rlv'] - p['runs']['unfavorable']['rlv']) / 1e6 for p in ev],
-                 thickness=2, width=0, color='#2f6fb3')))
-fig.add_trace(go.Scatter(x=[p['land_basis'] / 1e6 for p in ev], y=names, mode='markers', name='land basis (base)',
-                         marker=dict(symbol='diamond', size=11, color='#c0504d'),
-                         text=[p['land_label'] for p in ev], hovertemplate='%{x:.1f}M (%{text})'))
-fig.add_vline(x=0, line_width=1, line_color='#888')
-fig.update_layout(title='Stalled projects: residual land value (unfavorable → favorable) vs land basis, $ millions',
-                  xaxis_title='$ millions', height=120 + 45 * len(ev), template='plotly_white',
-                  legend=dict(orientation='h', y=-0.15))
+STALLED_BANDS = []
+for p in ev:
+    n = {sc: p['runs'][sc]['rent_mult_needed'] for sc in po.SCENARIOS}
+    v = band_verdict(n['favorable'], n['base'], n['unfavorable'])
+    assert v == p['verdict'], (p['anchor'], v, p['verdict'])    # the chart's geometry must reproduce the model's verdict
+    STALLED_BANDS.append(dict(label=f"{p['address'].title()} · {p['stories']} st, {p['units']}u", verdict=v,
+                              fav=n['favorable'], base=n['base'], unf=n['unfavorable'], why=''))
+STALLED_BANDS.sort(key=lambda r: r['base'])
+for r in V[V.verdict == 'insufficient_data'].itertuples():
+    STALLED_BANDS.append(dict(label=r.address.title(), verdict='insufficient_data', fav=None, base=None, unf=None,
+                              why=r.why))
+fig = band_chart([('Stalled entitlements (approved size, legacy fee)', STALLED_BANDS)],
+                 'Stalled projects: rent needed to pencil (favorable ▸ base ● ▸ unfavorable)')
 fig.show()
+print(pd.DataFrame(STALLED_BANDS)[['label', 'verdict', 'fav', 'base', 'unf']].round(2).to_string(index=False))
 """)
 md(r"""
-📝 **After — what this chart could MISLEAD about.** (1) The bars are **joint** extremes: every assumption at one end at
-once, which is less likely than any single move. (2) A negative residual land value is not a measurement error: it means
-the building is worth less than it costs **before** anyone pays for the land. (3) The land basis is RECORD for some
-projects and ASSUMPTION for others (hover shows which); an assumed basis moves with the market land range.
+📝 **After — what this chart could MISLEAD about.** (1) The band ends are **joint** extremes: every assumption at one end
+at once, which is less likely than any single move (§5 shows them one at a time). (2) The favorable end excludes the rent
+assumption itself; the shaded column carries it, so read a band's left end against the column's right edge, not against
+1.0×. (3) The rent pool is by bedroom count, not size, and a group-living layout is priced per bed, its best case
+(see §3). (4) The dollar view, residual land value against land basis, is in the §3 table (`rlv_m`, `land_m`); this chart
+restates the same test in rent terms. (5) A gray row is a **gap in the record**, not a verdict.
 """)
 
 # ------------------------------------------------------------------------------------------------ §5 sensitivity
@@ -454,6 +508,43 @@ the need rises. **The most efficient height on every site is the top of the podi
 to 7–8 stories costs more per unit than it adds, and above 85 ft concrete construction is worse still. What would have to
 change is in the rent multiple at that best height: rents roughly double, or an equivalent cut in cost or cap rate. The
 one combination that pencils is the **Wells Fargo parking lot** with every assumption favorable: no business to buy out.
+""")
+
+md(r"""
+📝 **Before.** The Elmwood sites on §4's axis, each at its **most efficient height** (the base case's lowest rent need,
+in-lieu fee), plus a second row where the favorable case's best height differs, under the stalled projects. Same bands, same verdict rule. This chart is also written as an SVG file for
+the site or slides: `data/derived/pencil_out/pencil_out_bands_<date>.svg`.
+""")
+code(r"""
+from datetime import date
+SITE_BANDS = []
+for site in dict.fromkeys(r['site'] for r in RUN['results']):
+    run = {r['scenario']: r for r in RUN['results'] if r['site'] == site and r['fee_mode'] == 'in_lieu'}
+    nm = re.search(r'\(([^)]*)\)', run['base']['name'])                 # '2887 College Ave (7-Eleven)' -> '7-Eleven'
+    # the base case's best height; and the favorable case's, when it differs (a cheaper tier can pencil lower)
+    for sc_best in dict.fromkeys((BEST[(site, 'in_lieu', 'base')]['stories'], BEST[(site, 'in_lieu', 'favorable')]['stories'])):
+        n = {sc: next(x['rent_mult_needed'] for x in run[sc]['rows'] if x['stories'] == sc_best) for sc in po.SCENARIOS}
+        u = next(x['units'] for x in run['base']['rows'] if x['stories'] == sc_best)
+        SITE_BANDS.append(dict(label=f"{nm.group(1) if nm else run['base']['name']} · {sc_best} st, {u}u",
+                               verdict=band_verdict(n['favorable'], n['base'], n['unfavorable']),
+                               fav=n['favorable'], base=n['base'], unf=n['unfavorable'], why=''))
+SITE_BANDS.sort(key=lambda r: r['base'])
+fig = band_chart([('Stalled entitlements (approved size, legacy fee)', STALLED_BANDS),
+                  ('Elmwood sites (hypothetical, best height, in-lieu fee)', SITE_BANDS)],
+                 'Does it pencil? Rent needed, as a multiple of today\'s lease-up rents')
+fig.show()
+SVG = ROOT / 'data' / 'derived' / 'pencil_out' / f'pencil_out_bands_{date.today().isoformat()}.svg'
+fig.write_image(str(SVG))
+print('wrote', SVG.relative_to(ROOT))
+print(pd.DataFrame(SITE_BANDS)[['label', 'verdict', 'fav', 'base', 'unf']].round(2).to_string(index=False))
+""")
+md(r"""
+📝 **After — what this could MISLEAD about.** (1) The stalled projects are at their **approved** size and pay the
+**legacy** fee; the Elmwood sites are at a **modeled** height and pay today's in-lieu fee, so the two groups share an axis,
+not a cost basis. (2) Each site's band is drawn at a fixed height (the base case's best, and the favorable case's best when it
+differs), so a site can carry two rows with different verdicts: a lower wood building can pencil in the favorable case
+while the taller podium building does not. (3) The SVG is a static copy: no hover, and it is
+regenerated, never edited, when the notebook runs.
 """)
 
 # ------------------------------------------------------------------------------------------------ §8 citywide

@@ -60,7 +60,7 @@ DESC = {
    "A reporter's guide to querying the housing record with a local model, nothing leaving your "
    "machine."),
  "data-science-curriculum.html": ("Data Science Curriculum",
-   "Rebuild Berkeley's housing record yourself, from the raw sources, across 19 notebooks."),
+   "Rebuild Berkeley's housing record yourself, from the raw sources, across 18 notebooks."),
  "mayor-briefing-2026-07.html": ("More Homes, Healthy Corridors",
    "A data briefing for the Mayor on what Berkeley's own housing records show works."),
  "berkeley-snapshot-2026-10.html": ("Berkeley Snapshot",

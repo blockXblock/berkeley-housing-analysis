@@ -196,7 +196,10 @@ def write_metadata(rows):
             "source": "City of Berkeley (Accela, CPRA productions, Rent Board), Alameda County assessor, CTCAC",
             "source_url": "https://github.com/blockXblock/berkeley-housing-analysis",
             "license": "Public Domain (CC0)",
-            "databases": dict(old.get("databases", {}))}
+            "databases": dict(old.get("databases", {})),
+            # Crawlers were walking every table, facet and query page on the 256 MB machine (2026-10-27: queries
+            # interrupted, the front page timing out). robots.txt keeps them to the index; people are unaffected.
+            "plugins": {"datasette-block-robots": {"allow_only_index": True}}}
     meta["databases"]["berkeley_housing_map"] = {
         "title": f"Housing Pipeline ({rows['projects']:,} projects)",
         "description": "From the canonical v4 database's serving views. Owner and applicant names are public record, "

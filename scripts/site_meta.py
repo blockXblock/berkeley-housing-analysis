@@ -70,6 +70,9 @@ DESC = {
  "map.html": ("Housing Map", "Berkeley's tracked housing projects on a map."),
  "driving_survey_log.html": ("Driving Survey Log",
    "Field verification of the pipeline — what the buildings actually look like on the ground."),
+ "apr-classroom.html": ("Students and planners, one APR",
+   "A high-school class and its city's planning staff build the city's Annual Progress Report from the city's own "
+   "records, and check it against the state filing."),
  "possibility-lab-test.html": ("Possibility Lab Test",
    "A multi-city open-data APR experiment."),
  "technical-archive-2026.html": ("Technical Archive 2026",

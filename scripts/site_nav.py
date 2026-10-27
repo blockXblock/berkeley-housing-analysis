@@ -27,7 +27,7 @@ PAGES = {
     "berkeley.html": "Berkeley", "berkeley-snapshot-2026-10.html": "Berkeley", "berkeley2050/index.html": "Berkeley",
     "learn.html": "Learn", "data-science-curriculum.html": "Learn", "reporters.html": "Learn",
     "reporters-local-models.html": "Learn", "methodology.html": "Learn", "technical-archive-2026.html": "Learn",
-    "possibility-lab-test.html": "Learn",
+    "possibility-lab-test.html": "Learn", "apr-classroom.html": "Learn",
 }
 STICKY = {"index.html", "berkeley.html", "learn.html"}
 LEGACY_NAV = re.compile(r'<nav class="bb-nav".*?</nav>\n?', re.S)   # the composer's first copy, before markers existed

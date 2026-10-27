@@ -89,6 +89,25 @@
 
 ---
 
+## 2026-10-27 — Possibility Lab / HCD pitch: site fixes + draft landing page (dev, NOT deployed)
+
+John's goal: persuade Amy Lerner, the Possibility Lab and HCD to adopt the curriculum in high schools, students + city
+planners preparing the APR (eventually real-time). Review found the site didn't make that argument. Fixed on dev:
+- **Curriculum notebooks** (18) fetch from `docs.berkeleybuild.com/curriculum` (a1c31a77), off rate-limited r2.dev;
+  JN1 run outside the repo fetched all 7 files, JN6a checkpoints PASS.
+- **Audit page links** (bea3abca): `build_audit_page.py` links only to sources that exist (tracked file / folder for a
+  wildcard / R2 copy). They point at `blob/dev`, so they resolve **once John pushes dev** (origin/dev is at 2026-09-30).
+  Regeneration also published ledger rows A11, A12 (another lane's 1712382c); totals unchanged (4,119 / 4,022 / +97).
+- **Notebook counts** (dd39d9e1): 18 (9 on-ramp + 9 main).
+- **methodology.html rewritten** (e964cf01): the April page said the City's APR was used "to cross-check and occasionally
+  to correct", excluded ADUs, and described a daily scraper/Zenodo that don't exist.
+- **Datasette** (cdbb9dc9): crawlers were walking every table/facet page on the 256 MB fly machine (queries interrupted,
+  front page timing out). `datasette-block-robots` (allow_only_index); tested locally. **Needs `flyctl deploy` (John).**
+- **Draft landing page `docs/apr-classroom.html`** (462070ae): proposal, what HCD gains, outputs, roles, time/standards,
+  adoption, real-time, privacy, FAQ, link order. Not linked from any page; John reviews before it is sent.
+- NEXT: John's review of the draft; then a second-city test run (San Francisco first: DataSF has dated permits + units;
+  Oakland's free export has File Date only, see notes/2026-07-03_oakland_probe.md).
+
 ## 2026-10-26 — Every flyover on the site plays HD from R2 (DEPLOYED: main 55281184 pushed by John 2026-10-26)
 
 - Home page: all 11 `.vfacade` boxes carry `data-mp4` (R2 base; 1080p, phones 720p) + a "Watch on YouTube" link.

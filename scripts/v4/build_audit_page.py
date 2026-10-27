@@ -15,6 +15,7 @@ import html
 import json
 import os
 import sqlite3
+import subprocess
 import sys
 
 import pandas as pd
@@ -60,6 +61,22 @@ def esc(s):
     return html.escape(str(s))
 
 
+# Files kept out of git (too large) but published in the curriculum bundle on R2.
+ON_R2 = {'data/processed/permits_clean.csv': 'https://docs.berkeleybuild.com/curriculum/data/permits_clean.csv'}
+
+
+def source_link(path):
+    """A link only to something that exists: the git-tracked file, its folder for a wildcard, the R2 copy;
+    otherwise the path as plain text (a dead link reads as a missing source)."""
+    if '*' in path:
+        folder = path.rsplit('/', 1)[0]
+        return f'<a href="{REPO.replace("/blob/", "/tree/")}{esc(folder)}"><code>{esc(path)}</code></a>'
+    if path in ON_R2:
+        return f'<a href="{ON_R2[path]}"><code>{esc(path)}</code></a>'
+    tracked = subprocess.run(['git', 'ls-files', '--error-unmatch', path], cwd=ROOT, capture_output=True).returncode == 0
+    return f'<a href="{REPO}{esc(path)}"><code>{esc(path)}</code></a>' if tracked else f'<code>{esc(path)}</code>'
+
+
 def evidence(s):
     out = []
     for part in [p.strip() for p in str(s).split(';') if p.strip()]:
@@ -68,7 +85,7 @@ def evidence(s):
             label = head.rsplit('/', 1)[-1].replace('%20', ' ')[:48]
             out.append(f'<a href="{esc(head)}">{esc(label)}</a>{(" " + esc(rest)) if rest else ""}')
         elif head.startswith(('docs/', 'corrections/', 'scripts/', 'data/')):
-            out.append(f'<a href="{REPO}{esc(head)}"><code>{esc(head)}</code></a>{(" " + esc(rest)) if rest else ""}')
+            out.append(f'{source_link(head)}{(" " + esc(rest)) if rest else ""}')
         else:
             out.append(esc(part))
     return '<br>'.join(out)

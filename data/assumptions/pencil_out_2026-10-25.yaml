@@ -329,6 +329,14 @@ legacy_ahmf_per_unit:
   as_of: "2023-01-17"
   formula: "fee = A x FEE x (1 - (VLI + LI) / (0.20 x A)), floored at 0 (BMC 22.20.065; A = total units)"
 
+iho_combination:
+  kind: cited
+  source: "City of Berkeley, Affordable Housing Requirements page (berkeleyca.gov, read 2026-10-28): projects may provide fewer than 20% of units as BMR (at least half VLI) and pay a prorated fee = $/sf RUFA x project RUFA x share of the requirement unmet by on-site BMR units; density-bonus projects pay on the base project's RUFA. Projects vested before 2023-04-01 follow the older requirements (legacy_ahmf_per_unit)."
+  as_of: "2026-10-28"
+  formula: "fee = inclusionary_in_lieu_per_rufa_sf x net unit area x max(0, 1 - (ELI + VLI + LI) / (on_site_share x units))"
+  applied_to: "projects whose Planning application was filed on/after 2023-04-01 (filed date as the vesting proxy; an earlier SB 330 preliminary application could vest the older rules)"
+  limitation: "the base project's area is not in the record, so the full net area is used: overstates the fee for density-bonus projects"
+
 eli_rent_share_of_vli:
   base: 0.60
   kind: derived

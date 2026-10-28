@@ -1,8 +1,8 @@
 {
- "as_of": "2026-10-26",
+ "as_of": "2026-10-28",
  "parcels": 24819,
  "assumptions": "pencil_out_2026-10-25.yaml",
- "assumptions_sha": "3908afa1ac1e9f60",
+ "assumptions_sha": "ce10f27077d57605",
  "v4_file_sha": "1591bcbd2d3a38ae",
  "assessor_sha": "e2fe977508eb780e",
  "excluded": {
@@ -123,11 +123,11 @@
    }
   },
   "citywide_median_by_bedrooms": {
-   "4": 5895.0,
-   "3": 4000.0,
-   "0": 1880.0,
+   "1": 2250.0,
    "2": 2995.0,
-   "1": 2250.0
+   "3": 4000.0,
+   "4": 5895.0,
+   "0": 1880.0
   },
   "tenancies": 9980
  },

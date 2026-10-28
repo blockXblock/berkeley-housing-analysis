@@ -90,7 +90,8 @@ graph LR
   E --> GATE
   V --> OUT[(results JSON)]
   E --> OUT
-  V --> BANDS[band chart §4/§6<br/>pencil_out_bands_date.svg]
+  BR[built projects' RECORD inputs<br/>staff reports · tabulation forms] --> PF
+  V --> BANDS[band chart §4/§6/§10<br/>pencil_out_bands_*.svg]
   E --> BANDS
 ```
 """)
@@ -829,6 +830,124 @@ and Adeline South Shattuck boundaries; use-permit heights; the state laws that o
 sites (AB 2011 on commercial corridors, SB 79 near transit, SB 35/423); and the R-4 section, read from a secondary source.
 """)
 
+# ------------------------------------------------------------------------------------------------ §10 built recently
+md(r"""
+## §10 — The control group: projects that did get built
+
+**Why (John, 2026-10-27: "we only examined the stalled projects ... can we analyze ten or twenty more interesting
+projects?").** §3–§5 say the stalled projects stall because the numbers don't work at today's costs, rates and rents.
+If that's right, the projects developers actually **started** under about the same conditions should pencil, or come
+close. If the model says *they* don't pencil either, the model is too pessimistic, or something it doesn't see is
+carrying them (land bought long ago, a by-the-bed student layout, a cheaper loan, an owner who builds to hold). This
+section runs the identical model on them.
+
+📝 **Plan.**
+1. **The cohort, derived from v4:** projects whose first building permit was issued on or after 2022-07-01, now
+   under construction or completed, with 10+ units and **no public funding** (the 100% affordable projects need a
+   subsidy-gap model, not this one).
+2. **RECORD inputs** from the ZAB staff reports (the latest approved version: four had modifications, all approved) and,
+   where no report is online, the Planning record's tabulation form and plan set:
+   `data/derived/pencil_out/project_inputs_record_built_2026-10-28.csv`, each value with file and page.
+3. **The same rules,** with two changes, both labeled ASSUMPTION in the ledger:
+   - **Affordable-housing fee by filing date.** Filed before 2023-04-01: the old per-unit fee (BMC 22.20.065), reduced by
+     on-site units. Filed on or after: today's ordinance, on-site units plus the in-lieu fee prorated by the unmet share
+     of 20% (`iho_combination` in the assumptions file).
+   - **Land at market, not from the roll.** A finished building's assessed value includes the building, so it can't
+     stand for what the site cost; the lot is priced at the market land assumption instead.
+""")
+code(r"""
+con4 = sqlite3.connect(f"file:{po.pp.V4}?mode=ro", uri=True)
+BUILT = pd.read_sql_query(
+    "SELECT anchor_record AS anchor, address_display AS address, status, units_built_or_permitted AS units, "
+    "       filed_date, entitled_date, bp_issued_date, co_issued_date, funding "
+    "  FROM v_projects "
+    " WHERE bp_issued_date >= '2022-07-01' AND status IN ('completed', 'under_construction') "
+    "   AND COALESCE(units_built_or_permitted, 0) >= 10 AND COALESCE(rhna_excluded, 0) = 0", con4)
+BUILT['public_funding'] = BUILT.funding.fillna('').str.len() > 2
+BUILT_FUNDED = BUILT[BUILT.public_funding]
+BUILT = BUILT[~BUILT.public_funding].sort_values('bp_issued_date').reset_index(drop=True)
+BUILT['fee_regime'] = ['iho_combo' if (f or '') >= '2023-04-01' else 'legacy_ahmf' for f in BUILT.filed_date]
+print(f"first BP 2022-07-01+, 10+ units, built or building: {len(BUILT) + len(BUILT_FUNDED)}; "
+      f"publicly funded (out of scope): {len(BUILT_FUNDED)} ({', '.join(BUILT_FUNDED.address)}); in scope: {len(BUILT)}")
+print(BUILT[['anchor', 'address', 'status', 'units', 'entitled_date', 'bp_issued_date', 'fee_regime']].to_string(index=False))
+""")
+code(r"""
+recs_b = po.record_inputs(po.RECORD_INPUTS_BUILT)
+NO_RECORD = [a for a in BUILT.anchor if a not in recs_b]            # no staff report or plan set found online
+RB_RES = po.evaluate_stalled(anchors=[a for a in BUILT.anchor if a in recs_b], record_path=po.RECORD_INPUTS_BUILT,
+                             fee_modes=dict(zip(BUILT.anchor, BUILT.fee_regime)), record_land=False)
+BV = [dict(anchor=a, address=BUILT.set_index('anchor').loc[a, 'address'], verdict='insufficient_data',
+           why='no staff report or plan set found') for a in NO_RECORD]
+for p in RB_RES['projects']:
+    if p['verdict'] == 'insufficient_data':
+        BV.append(dict(anchor=p['anchor'], address=p['address'], verdict='insufficient_data', why='; '.join(p['missing'])))
+        continue
+    n = {sc: p['runs'][sc]['rent_mult_needed'] for sc in po.SCENARIOS}
+    BV.append(dict(anchor=p['anchor'], address=p['address'], verdict=p['verdict'], units=p['units'], stories=p['stories'],
+                   layout='by the bed' if p['group'] else 'apartments', gap_bp=round(p['gap'] * 1e4),
+                   land_m=round(p['land_basis'] / 1e6, 1),
+                   cost_per_unit_k=round((p['acct']['cost_ex_land'] + p['land_basis']) / p['units'] / 1e3),
+                   need_fav=round(n['favorable'], 2), need_base=round(n['base'], 2), need_unf=round(n['unfavorable'], 2), why=''))
+BV = pd.DataFrame(BV)
+print(BV.drop(columns=['anchor']).to_string(index=False))
+BUILT_VERDICTS = BV.verdict.value_counts().to_dict()
+print('\nverdicts:', BUILT_VERDICTS)
+BUILT_MED = float(BV.need_base.dropna().median())
+STALLED_MED = float(pd.Series([r['base'] for r in STALLED_BANDS if r['base'] is not None]).median())
+BUILT_AT_BASE = int((BV.need_base.dropna() <= A['market_rent_multiplier']['base']).sum())
+BED_AT_BASE = int(((BV.need_base <= A['market_rent_multiplier']['base']) & (BV.layout == 'by the bed')).sum())
+print(f"median rent needed at base: built {BUILT_MED:.2f}x vs stalled {STALLED_MED:.2f}x; "
+      f"built projects that pencil at base: {BUILT_AT_BASE} ({BED_AT_BASE} of them by the bed)")
+""")
+md(r"""
+📝 **Before.** §4's band chart with this cohort added, so the two groups share one axis: built (or building) above,
+stalled below. If the model were well calibrated, the built bands would sit mostly left of the shaded column and the
+stalled ones right of it. "·bed" marks a by-the-bed layout.
+""")
+code(r"""
+BUILT_BANDS = []
+for p in RB_RES['projects']:
+    if p['verdict'] == 'insufficient_data':
+        continue
+    n = {sc: p['runs'][sc]['rent_mult_needed'] for sc in po.SCENARIOS}
+    v = band_verdict(n['favorable'], n['base'], n['unfavorable'])
+    assert v == p['verdict'], (p['anchor'], v, p['verdict'])
+    BUILT_BANDS.append(dict(label=f"{p['address'].title()} · {p['stories']} st, {p['units']}u{' ·bed' if p['group'] else ''}",
+                            verdict=v, fav=n['favorable'], base=n['base'], unf=n['unfavorable'], why=''))
+BUILT_BANDS.sort(key=lambda r: r['base'])
+for r in BV[BV.verdict == 'insufficient_data'].itertuples():
+    BUILT_BANDS.append(dict(label=r.address.title(), verdict='insufficient_data', fav=None, base=None, unf=None, why=r.why))
+fig = band_chart([('Built or under construction (first permit 2022-07+)', BUILT_BANDS),
+                  ('Stalled entitlements', [r for r in STALLED_BANDS if r['verdict'] != 'insufficient_data'])],
+                 'Built vs stalled: rent needed to pencil (favorable ▸ base ● ▸ unfavorable)')
+fig.show()
+SVG_B = ROOT / 'data' / 'derived' / 'pencil_out' / f'pencil_out_bands_built_{date.today().isoformat()}.svg'
+fig.write_image(str(SVG_B))
+print('wrote', SVG_B.relative_to(ROOT))
+""")
+md(r"""
+📝 **After — what this could MISLEAD about.** (1) The built projects were **underwritten** one to three years before
+today, at their own costs and rates; the model prices them at today's assumptions, which is the right test of the
+model but not a replay of the developer's decision. (2) Their land is priced at the **market assumption**, not what they
+paid; a site bought years earlier cost less, which would move their bands left. (3) "·bed" rows are priced at the
+per-bed rent of new Southside student buildings. (4) The income tiers of a few projects' affordable units disagree
+within their own staff reports (the ledger notes say where); the headline figures are used. (5) A gray row is a gap in
+the record: a for-sale project, a group-living building priced by the room, or a unit table that exists only as an image.
+
+**Found.** Read the printed comparison above with the chart:
+- **The model ranks the projects the right way round.** The built projects need less rent than the stalled ones (the
+  medians above), and the ones that pencil at base are all **by-the-bed** student layouts near campus.
+- **The model is pessimistic about the level.** Developers went ahead with projects the model calls marginal at base,
+  and with two it says **don't pencil** even with every assumption favorable: **2440 Shattuck** (40 large apartments,
+  about 1,450 gross sq ft each, priced here by bedroom count) and **1951 Shattuck** (12 stories, concrete, the costliest
+  construction tier). What the model can't see is the likely gap: land bought cheaply years earlier, a loan locked
+  before rates rose, an owner who holds the building rather than selling it at a cap rate, rents for large or high-floor
+  units above the lease-up pool, or a builder who is its own general contractor.
+- **So for the stalled projects:** the numbers explain why they stall *relative to the ones that went ahead* (compare
+  the two medians printed above), but a "marginal" or even "does not pencil" verdict is a statement about a typical developer
+  at today's market prices, not a forecast that no one will build.
+""")
+
 # ------------------------------------------------------------------------------------------------ §7 results + gate
 md(r"""
 ## §7 — Results file and gate
@@ -866,6 +985,9 @@ FIG = {
     'zoned_median_rent_needed': round(float(ZU.z_in_lieu_base_rent_needed.median()), 3),
     'zoned_median_rent_needed_on_site': round(float(ZU.z_on_site_base_rent_needed.median()), 3),
     'fire_zone_parcels': CW.fire_zone.fillna('none').value_counts().to_dict(),
+    'built_cohort': int(len(BUILT) + len(BUILT_FUNDED)), 'built_public_funding': int(len(BUILT_FUNDED)),
+    'built_in_scope': int(len(BUILT)), 'built_verdicts': {k: int(v) for k, v in BUILT_VERDICTS.items()},
+    'built_median_rent_needed': round(BUILT_MED, 3), 'stalled_median_rent_needed': round(STALLED_MED, 3),
 }
 FIG['elmwood_break_even_base'] = {r['site'] + '|' + r['fee_mode']: r['break_even_stories']
                                   for r in RUN['results'] if r['scenario'] == 'base'}
@@ -874,6 +996,7 @@ with open(po.pp.V4, 'rb') as f_:
     for b_ in iter(lambda: f_.read(1 << 20), b''): h.update(b_)
 meta = {'as_of': date.today().isoformat(), 'v4_file_sha': h.hexdigest()[:16],
         'assumptions': po.ASSUMPTIONS_FILE.name, 'record_inputs': po.RECORD_INPUTS.name,
+        'record_inputs_built': po.RECORD_INPUTS_BUILT.name,
         'zoning_standards': po.ZONING_STANDARDS.name,
         'export_generated': EXP['meta']['generated'],
         'git': subprocess.run(['git', '-C', str(ROOT), 'rev-parse', '--short', 'HEAD'], capture_output=True, text=True).stdout.strip(),
@@ -885,7 +1008,8 @@ results = dict(meta=meta, cohort=COH.to_dict('records'), coverage=COV.to_dict('r
                sensitivity={a: s_['rows'] for a, s_ in SENS.items()},
                citywide_file=Path(cw_files[-1]).name, elmwood_sites=srows, elmwood=[dict(site=r['site'], fee_mode=r['fee_mode'], scenario=r['scenario'],
                                                   break_even_stories=r['break_even_stories'], land=r['land'], rows=r['rows'])
-                                             for r in RUN['results']])
+                                             for r in RUN['results']],
+               built=BV.to_dict('records'))
 out_p = res_dir / f"results_{date.today().isoformat()}.json"
 json.dump(results, open(out_p, 'w'), indent=1, default=float)
 print('wrote', out_p.relative_to(ROOT))

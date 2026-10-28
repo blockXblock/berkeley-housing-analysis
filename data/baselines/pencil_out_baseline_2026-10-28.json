@@ -1,0 +1,75 @@
+{
+ "as_of": "2026-10-28",
+ "v4_file_sha": "1591bcbd2d3a38ae",
+ "assumptions": "pencil_out_2026-10-25.yaml",
+ "record_inputs": "project_inputs_record_2026-10-25.csv",
+ "record_inputs_built": "project_inputs_record_built_2026-10-28.csv",
+ "zoning_standards": "berkeley_zoning_standards_2026-10-25.yaml",
+ "export_generated": "2026-10-20T15:31:17.655755",
+ "git": "dbeafc09",
+ "figures": {
+  "stage_projects": 106,
+  "stage_units": 1133,
+  "cohort_5plus": 19,
+  "cohort_5plus_units": 1052,
+  "excluded_not_stalled": 5,
+  "excluded_units": 161,
+  "in_scope": 14,
+  "record_rows": 58,
+  "verdict_pencils": 0,
+  "verdict_marginal": 5,
+  "verdict_does_not": 2,
+  "verdict_insufficient": 7,
+  "single_assumption_flips": 0,
+  "median_gap_bp": -260,
+  "elmwood_best_stories_base": [
+   5,
+   6
+  ],
+  "lease_ups": 831,
+  "citywide_parcels": 24819,
+  "citywide_excluded": {
+   "lot under 2,500 sqft or unknown": 1348,
+   "condominium unit (73xx)": 2967
+  },
+  "citywide_pencils_base_in_lieu": 0,
+  "citywide_pencils_base_on_site": 0,
+  "citywide_pencils_favorable_in_lieu": 11686,
+  "citywide_pencils_favorable_on_site": 2380,
+  "citywide_median_rent_needed": 1.941,
+  "citywide_best_stories_mode": 6,
+  "zoned_universe": 24175,
+  "zoned_not_permitted": 644,
+  "zoned_pencils_base_in_lieu": 0,
+  "zoned_pencils_base_on_site": 0,
+  "zoned_pencils_favorable_in_lieu": 2085,
+  "zoned_pencils_favorable_on_site": 107,
+  "zoned_median_rent_needed": 2.173,
+  "zoned_median_rent_needed_on_site": 2.317,
+  "fire_zone_parcels": {
+   "none": 17914,
+   "high": 6683,
+   "very_high": 222
+  },
+  "built_cohort": 26,
+  "built_public_funding": 5,
+  "built_in_scope": 21,
+  "built_verdicts": {
+   "marginal": 13,
+   "insufficient_data": 6,
+   "does_not": 2
+  },
+  "built_median_rent_needed": 1.21,
+  "stalled_median_rent_needed": 1.593,
+  "elmwood_break_even_base": {
+   "7-eleven|in_lieu": null,
+   "7-eleven|on_site": null,
+   "five-monkeys|in_lieu": null,
+   "five-monkeys|on_site": null,
+   "wells-fargo|in_lieu": null,
+   "wells-fargo|on_site": null,
+   "post-office|in_lieu": null,
+   "post-office|on_site": null
+  }
+ }
+}

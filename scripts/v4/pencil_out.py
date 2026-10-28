@@ -41,6 +41,7 @@ import proforma_projects as pp  # noqa: E402
 A = pp.A                                    # the same versioned assumptions file Part 2 reads
 ASSUMPTIONS_FILE = pp.ASSUMPTIONS
 RECORD_INPUTS = ROOT / "data/derived/pencil_out/project_inputs_record_2026-10-25.csv"
+RECORD_INPUTS_BUILT = ROOT / "data/derived/pencil_out/project_inputs_record_built_2026-10-28.csv"
 ESC_2024_TO_PRICE_YEAR = A["hard_cost_escalation"]["by_year"][A["price_year"]]   # BFA24 2024 $ -> price year
 
 SCENARIOS = ("favorable", "base", "unfavorable")
@@ -143,7 +144,8 @@ def account(*, units_mix, net_sf, res_gross, retail_sf, lobby_sf, stories, lot_s
             fee_mode="in_lieu", per_bed_beds=None, loc=1.0):
     """NOI, every cost but land, value at the hurdle, residual land value -- for one building in scenario `s`.
     units_mix: {bedrooms: market+affordable unit count}; affordable: {tier: {bedrooms: n}} carved out of units_mix;
-    fee_mode: 'in_lieu' (IHO fee on net area), 'on_site' (no fee: 20% on-site units), 'legacy_ahmf' (BMC 22.20.065)."""
+    fee_mode: 'in_lieu' (IHO fee on net area), 'on_site' (no fee: 20% on-site units), 'legacy_ahmf' (BMC 22.20.065),
+    'iho_combo' (IHO combination: fewer than 20% on-site units plus the in-lieu fee prorated by the unmet share)."""
     affordable = affordable or {}
     fees_a, fin = A["berkeley_fees"], A["construction_financing"]
     units = sum(units_mix.values())
@@ -175,6 +177,10 @@ def account(*, units_mix, net_sf, res_gross, retail_sf, lobby_sf, stories, lot_s
     art = fees_a["public_art_in_lieu_share"] * hard
     if fee_mode == "in_lieu":
         afford_fee = fees_a["inclusionary_in_lieu_per_rufa_sf"] * max(0.0, net_sf - fees_a["in_lieu_rufa_deduction_sf"])
+    elif fee_mode == "iho_combo":
+        bmr = sum(n for tr, by_b in affordable.items() if tr in ("ELI", "VLI", "LI") for n in by_b.values())
+        afford_fee = (fees_a["inclusionary_in_lieu_per_rufa_sf"] * net_sf
+                      * max(0.0, 1 - bmr / (fees_a["on_site_share"] * units)))
     elif fee_mode == "legacy_ahmf":
         vli_li = sum(n for tr, by_b in affordable.items() if tr in ("ELI", "VLI", "LI") for n in by_b.values())
         afford_fee = max(0.0, units * A["legacy_ahmf_per_unit"]["base"] * (1 - vli_li / (0.20 * units)))
@@ -296,7 +302,8 @@ def parse_mix(text: str) -> dict:
     out = {}
     for part in text.split(";"):
         k, n = part.strip().rsplit(" ", 1)
-        b = "0" if k.lower() == "studio" else k.upper().replace("BR", "")
+        # a junior unit ('JR2BR') is counted at its bedroom number: priced as the larger type, a slight overstatement
+        b = "0" if k.lower() == "studio" else k.upper().replace("BR", "").replace("JR", "")
         out[b] = out.get(b, 0) + int(n)
     return out
 
@@ -304,6 +311,8 @@ def parse_mix(text: str) -> dict:
 def parse_affordable(text: str, mix: dict) -> dict:
     """'VLI 23; LI 2' -> {'VLI': {...}, 'LI': {...}} spread over the mix (MOD units rent near market: left in market)."""
     tiers = {}
+    if text.strip() in ("0", "none"):                              # stated as no on-site affordable units
+        return tiers
     for part in text.split(";"):
         t, n = part.strip().split(" ")
         if t in ("ELI", "VLI", "LI"):
@@ -345,7 +354,7 @@ def land_basis_record(con_v4, asr, anchor: str, lot_sf: float, s):
                 linked_lot=linked_lot, partial_site=partial, market=(lot_sf or 0) * s["land_psf"])
 
 
-def stalled_project(anchor, rec, R, con_v4, asr, s, use_record_land=True):
+def stalled_project(anchor, rec, R, con_v4, asr, s, use_record_land=True, fee_mode="legacy_ahmf"):
     """one stalled project at its approved size: inputs with labels, the account, and missing core inputs."""
     g = lambda f: rec.get(f, {}).get("value")                     # noqa: E731
     ledger, missing = [], []
@@ -381,6 +390,10 @@ def stalled_project(anchor, rec, R, con_v4, asr, s, use_record_land=True):
         missing.append("unit_mix")
     else:
         missing.append("unit_mix")
+    if g("tenure") == "ownership":                                 # condominiums for sale: a rental pro forma doesn't apply
+        missing.insert(0, "for-sale project (needs a for-sale pro forma)")
+    if g("not_modeled"):                                           # a building this rental model can't price, with the reason
+        missing.insert(0, g("not_modeled"))
     if missing:
         return dict(anchor=anchor, address=rec["address"], verdict="insufficient_data", missing=missing, ledger=ledger)
     # areas: residential gross = gross less commercial; net = gross x efficiency (ASSUMPTION) unless net is on record
@@ -403,12 +416,17 @@ def stalled_project(anchor, rec, R, con_v4, asr, s, use_record_land=True):
         note("land_basis", round(basis), "RECORD", f"assessed value, parcels {lb['apns']}, last document {lb['last_documents']}")
     else:
         basis, basis_label = lb["market"], "ASSUMPTION"
-        why = (f"v4 links {lb['linked_lot']:,.0f} sf of the {lot:,.0f} sf site" if lb["partial_site"] else
+        why = ("built or under construction: the roll's value includes the new building" if not use_record_land else
+               f"v4 links {lb['linked_lot']:,.0f} sf of the {lot:,.0f} sf site" if lb["partial_site"] else
                "no 2018+ transfer on record (assessment is stale)" if lb["apns"] else "no parcel linked")
         note("land_basis", round(basis), "ASSUMPTION", f"lot x market $/sqft ({why}; {ASSUMPTIONS_FILE.name}: land_market_per_lot_sf)")
-    fee_mode = "legacy_ahmf"
-    note("affordable_housing_fee", "BMC 22.20.065 formula, 2022 rate", "ASSUMPTION",
-         f"{ASSUMPTIONS_FILE.name}: legacy_ahmf_per_unit (projects vested before 2023-03-31)")
+    if fee_mode == "legacy_ahmf":
+        note("affordable_housing_fee", "BMC 22.20.065 formula, 2022 rate", "ASSUMPTION",
+             f"{ASSUMPTIONS_FILE.name}: legacy_ahmf_per_unit (projects vested before 2023-04-01)")
+    else:
+        note("affordable_housing_fee", "IHO combination: in-lieu fee x full net area x unmet share of 20%", "ASSUMPTION",
+             f"{ASSUMPTIONS_FILE.name}: iho_combination (filed on/after 2023-04-01; the City applies the fee to the "
+             "density-bonus base project's area, unknown here, so the full area overstates the fee)")
     acct = account(units_mix=mix, net_sf=net, res_gross=res_gross, retail_sf=commercial,
                    lobby_sf=0.0, stories=stories, lot_sf=lot, s=s, R=R, affordable=affordable, fee_mode=fee_mode,
                    per_bed_beds=per_bed_beds)
@@ -420,15 +438,19 @@ def stalled_project(anchor, rec, R, con_v4, asr, s, use_record_land=True):
                 gap=yoc - acct["hurdle"], rlv=acct["rlv"], rlv_minus_basis=acct["rlv"] - basis, group=group)
 
 
-def evaluate_stalled(anchors=None):
-    """every stalled project with RECORD inputs: three scenarios -> four-valued verdict, plus RLV vs land basis."""
+def evaluate_stalled(anchors=None, record_path=RECORD_INPUTS, fee_modes=None, record_land=True):
+    """every project with RECORD inputs: three scenarios -> four-valued verdict, plus RLV vs land basis.
+    record_land=False for buildings already built or under construction: the current roll's value includes the new
+    building, so it can't stand for what the site cost."""
     R = rents()
-    recs = record_inputs()
+    recs = record_inputs(record_path)
+    fee_modes = fee_modes or {}
     con = sqlite3.connect(f"file:{pp.V4}?mode=ro", uri=True)
     asr = sqlite3.connect(f"file:{pp.ASSESSOR}?mode=ro", uri=True)
     out = []
     for anchor in (anchors or recs):
-        runs = {sc: stalled_project(anchor, recs[anchor], R, con, asr, scenario(sc)) for sc in SCENARIOS}
+        runs = {sc: stalled_project(anchor, recs[anchor], R, con, asr, scenario(sc),
+                                    use_record_land=record_land, fee_mode=fee_modes.get(anchor, "legacy_ahmf")) for sc in SCENARIOS}
         b = runs["base"]
         if b["verdict"] == "insufficient_data":
             out.append(b)

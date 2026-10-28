@@ -5,6 +5,30 @@
 
 ---
 
+## 2026-10-28 — Pencil-out control group: projects that DID get built (JN-O §10, dev cbf6132f; no DB writes)
+- John: "can we analyze ten or twenty more interesting projects?" -> chose "Built recently". Cohort derived from v4: first
+  BP on/after 2022-07-01, completed or under construction, 10+ units: 26; 5 publicly funded out of scope; **21 in scope**.
+- **Harvest:** `harvest_zab_documents.py --staff-reports` -> 17 staff reports for 14 projects (manifest
+  `data/raw/zab/staff_reports_manifest_2026-10-28.csv`; PDFs untracked); `harvest_by_record.py` -> tabulation forms and
+  plan sets for 7 more (scratch/2026-10-28/harvest_stage{,2}; some from the R2 bucket). Four agents read the tables;
+  spot-checked against the PDFs. RECORD inputs: `data/derived/pencil_out/project_inputs_record_built_2026-10-28.csv`.
+  The four later modifications (1752 Shattuck, 2538 Durant, 2587 Telegraph, 2317 Channing) are all approved in v4.
+- **Model changes (pencil_out.py):** `iho_combo` fee (today's ordinance: on-site units + in-lieu fee prorated by the
+  unmet share of 20%; City page read 2026-10-28, `iho_combination` in the assumptions file) for projects filed on/after
+  2023-04-01; `record_land=False` (a finished building's roll value includes the building -> market land); `tenure:
+  ownership` and `not_modeled` fields -> insufficient_data with the reason; junior units (JR2BR) parse.
+- **Result:** 13 marginal, 2 does not pencil (2440 Shattuck, 1951 Shattuck), 6 insufficient (2099 MLK: no record online;
+  2435 San Pablo group living by the room; 2000 Dwight senior assisted living; 1773 Oxford and 2328 Channing: stated mix
+  doesn't sum; 2403 San Pablo condos for sale). **Median rent needed at base: built 1.21x vs stalled 1.59x.** The 5 that
+  pencil at base are all by-the-bed student layouts. The model ranks built vs stalled correctly but is pessimistic in
+  level: two projects it says don't pencil even all-favorable were built.
+- **v4 unit discrepancies found** (record vs v4): 1752 Shattuck 68 (v4 72), 2555 College 11 (12), 2317 Channing 22 (17),
+  2587 Telegraph 53 (52), 1951 Shattuck 156 (163), 2000 Dwight 124 incl. 27 memory care (88), 2000 University 82 (81),
+  2127 Dwight 66 incl. 8 retained (58), 2328 Channing 14 incl. retained house (13), "0 SAN PABLO" = 2435 San Pablo, 42 rooms (41).
+  Candidates for the corrections ledger; not written.
+- Citywide zoned pass re-run (assumptions file changed): `citywide_zoned_2026-10-28.csv` identical to 10-26's. Chart
+  `pencil_out_bands_built_2026-10-28.svg`. Gate: appended `pencil_out_baseline_2026-10-28.json` (new built_* keys only); PASS.
+
 ## 2026-10-28 — Map labels: 2274/2276 Shattuck, 2425 Durant; harvester one-record fix
 - **Units, from documents already held** (no harvest needed): ZAB action minutes. 2276 Shattuck ZP2024-0067 = **134**
   (2026-03-12); 2425 Durant ZP2024-0162 = **169** (2025-10-09); 2274 Shattuck ZP2023-0079 = **227**. v4 already has

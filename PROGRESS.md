@@ -40,8 +40,15 @@
   2190 Shattuck, 2065 Kittredge, 2800 Telegraph, 2147 San Pablo plain "Entitled". John, 2026-10-28: "use plain Entitled".
 - **PREVIEW, NOT APPLIED:** `scratch/2026-10-28/label_preview/` (`preview.py`, `preview.tsv`, `geometry_preview.kml`):
   74 buildings change: 6 labels, popup Status lines to the label's stage, popup Units lines to the label's own count
-  (never the project total: North Berkeley BART's 13 outlines would each get 739). Hold 2435 San Pablo: v2 had a
-  40-unit proposal there; v4 has only a 1-unit ZP2024-0120, so the label may name the wrong project.
+  (never the project total: North Berkeley BART's 13 outlines would each get 739).
+- **2435 San Pablo = Poet's Place** (John: SF YIMBY's 40-unit group-living project + manager's apartment, Wang Brothers).
+  v4 has it right as **ZP2018-0229** (completed 2025-03-20, 41 = John's 2026-09-30 ruling on B2021-02423, structure
+  667) but with address **"0 SAN PABLO Ave"**, so the map's address lookup lands on ZP2024-0120, a later 1-unit
+  live-work conversion in the same building. PROPOSED placemark ruling **K002** `2435 SAN PABLO` -> ZP2018-0229
+  (in the preview in memory only; not in `placemark_rulings.csv`): label becomes 41 units · Completed, green.
+- **Finding: 33 v4 projects carry house number 0.** Most are hillside lots the City itself records as "0 <street>";
+  Poet's Place has a real address (2435) and shows as "0 San Pablo Ave" in the Explorer. Fixing the v4 address is a
+  ledger row + chain rebuild, not this map step.
 - **Harvester fix:** `harvest_address.py` read a one-record address as 0 (Accela opens the record instead of a list).
   The redirect check is now `url_discovery_scraper.detect_single_result_redirect`, shared by both searches.
   Tested: 2276/2425 return their one record, 2274 its 6, `url_discovery_scraper.py B2023-06319` still found.

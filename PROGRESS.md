@@ -5,6 +5,20 @@
 
 ---
 
+## 2026-10-28 — publish_video.py uploads the HD copy to R2 (John: "make publish_video.py upload to R2")
+- New `--video <1080p master>`: makes `web/<tour>-{1080,720}.mp4` beside the master (the 11 live flyovers' encodes),
+  uploads both to R2 `videos/`, checks docs.berkeleybuild.com serves the same byte count, then writes `data-mp4` and a
+  "Watch on YouTube" line into the homepage block. Uploads happen before any file is written. Same bytes already in
+  the bucket are skipped; different bytes are refused without `--overwrite`.
+- `--replaces <id>` without `--video` now strips an old `data-mp4` (it would play the superseded recording);
+  `--replaces X --youtube X --video ...` adds HD to an already-published video.
+- The new-block path no longer deletes an existing block by regex (the Watch line would let it run into the next
+  block): it refuses and points to `--replaces`.
+- The play-all list (`build_tour_map_gallery.py` ON_R2) is read from the homepage's data-mp4, not a hand-kept set.
+  Regenerated: the same 11, no file changes.
+- Tested on Elmwood (reuse, skip, public check, refuse-different). Found and fixed: Cloudflare returns 403 to Python's
+  default User-Agent. Not run end to end: the dirty geometry.kml has no current package, so the package check stops it.
+
 ## 2026-10-27 — Pencil-out band chart + SVG (JN-O §4 and end of §6; John: "build the band chart and export the svg")
 - §4's dollar chart (RLV vs land basis) replaced by a **band chart**: one row per stalled project, x = rent needed as a
   multiple of today's lease-up rents, band = favorable -> unfavorable, dot = base, shaded column = the rent assumption's

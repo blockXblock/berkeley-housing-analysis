@@ -13,17 +13,18 @@ HD. A tour with no R2 copy is left out of play-all, with a warning, until one is
 
   python scripts/tours/build_tour_map_gallery.py
 """
-import html, json, pathlib
+import html, json, pathlib, re
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 TL = ROOT / "docs/tours/streetview"
 OUT = ROOT / "docs/tours/index.html"
 PLAY_ALL = ROOT / "docs/tours/play-all.html"
 R2_VIDEOS = "https://docs.berkeleybuild.com/videos"
-# tours with both encodes uploaded to R2 videos/ (keys <id>-1080.mp4, <id>-720.mp4)
-ON_R2 = {"bancroft-e2w", "telegraph-s2n", "uc-dormitories", "shattuck-s2n-path", "university-880-uc", "durant-w2e",
-         "san-pablo-n2s", "elmwood-orbit", "panoramic-kennedy-legacy-slow20",
-         "Shattuck-centerline-flight-with-2190-and-2276-orbits", "tour-private-pipeline-over-200-units-2026-05-16"}
+# tours with both encodes uploaded to R2 videos/ (keys <id>-1080.mp4, <id>-720.mp4). Read from the home page's
+# data-mp4 attributes, which publish_video.py writes only after it has uploaded and checked both files. A hand-kept
+# set here went stale the first time a video was published without editing it. Not the catalog: a
+# build_tours_manifest.py regeneration re-seeds the older videos' "video" field and would drop an r2 key.
+ON_R2 = set(re.findall(r'data-mp4="' + re.escape(R2_VIDEOS) + r'/([^"]+)"', (ROOT / "docs/index.html").read_text()))
 
 # Display order and words. Titles match the home page's video titles.
 TOURS = [

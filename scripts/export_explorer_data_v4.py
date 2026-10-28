@@ -335,9 +335,9 @@ def get_city_apr(db, projects):
                                  JOIN addresses a USING(address_id)"""):
         if k in ours:
             by_addr.setdefault(norm, k)
-    CO = ["CO_VLOW_INCOME_DR", "CO_VLOW_INCOME_NDR", "CO_LOW_INCOME_DR", "CO_LOW_INCOME_NDR", "CO_MOD_INCOME_DR",
-          "CO_MOD_INCOME_NDR", "CO_ABOVE_MOD_INCOME", "CO_EXTREMELY_LOW_INCOME_DR", "CO_EXTREMELY_INCOME_NDR"]
+    from housing_rules.apr_columns import co_unit_columns
     m = sqlite3.connect(f"file:{mirror_path}?mode=ro", uri=True)
+    CO = co_unit_columns(m)   # all 11 CO income columns as this mirror spells them (HCD renames between pulls)
     num = lambda x: float(x or 0) if str(x or "0").replace(".", "", 1).isdigit() else 0.0
     city = [{"apn": canon(a), "address": ad, "units": sum(num(c) for c in cs)}
             for a, ad, d, *cs in m.execute(f"SELECT APN, STREET_ADDRESS, CO_ISSUE_DT1, {','.join(CO)} FROM table_a2 "

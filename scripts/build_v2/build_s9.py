@@ -32,6 +32,7 @@ from scripts.build_v2 import housing_predicates
 from scripts.build_v2.housing_predicates import is_housing, net_units
 from scripts.build_v2.gating import snapshot_v3
 import housing_rules as hr
+from housing_rules.apr_columns import co_units_sql
 from scripts.cpra_dedup import extract_master_permit
 
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
@@ -44,10 +45,6 @@ CPRA = [os.path.join(ROOT, 'data/raw/cpra-downloads', f) for f in
 AS_OF = '2026-06-17'
 YEARS = list(range(2018, 2026))
 
-CO_COLS = ['CO_ACUTELY_LOW_INCOME_DR', 'CO_ACUTELY_LOW_INCOME_NDR', 'CO_EXTREMELY_LOW_INCOME_DR',
-           'CO_EXTREMELY_INCOME_NDR', 'CO_VLOW_INCOME_DR', 'CO_VLOW_INCOME_NDR', 'CO_LOW_INCOME_DR',
-           'CO_LOW_INCOME_NDR', 'CO_MOD_INCOME_DR', 'CO_MOD_INCOME_NDR', 'CO_ABOVE_MOD_INCOME']
-CO_SUM = '+'.join(f"CAST(NULLIF({c},'') AS INT)" for c in CO_COLS)
 
 # 3 developments the CITY ALSO collapsed (1 mirror row) -> S9 cannot externally check S1.5 there.
 CITY_COLLAPSED = {('1136', 'KEITH'), ('1310', 'PARKER'), ('2587', 'TELEGRAPH')}
@@ -79,6 +76,7 @@ def gather():
     v3_bldg = dict(v3.execute(
         "SELECT reporting_year, COUNT(*) FROM s7_cycle "
         "WHERE event_type='co_issued' AND reporting_year BETWEEN 2018 AND 2025 GROUP BY reporting_year"))
+    CO_SUM = co_units_sql(mir)   # the CO income columns as this mirror spells them (HCD renames between pulls)
     city_year = dict(mir.execute(
         f"SELECT CAST(YEAR AS INT), SUM({CO_SUM}) FROM table_a2 WHERE CO_ISSUE_DT1<>'' "
         f"AND CAST(YEAR AS INT) BETWEEN 2018 AND 2025 GROUP BY CAST(YEAR AS INT)"))

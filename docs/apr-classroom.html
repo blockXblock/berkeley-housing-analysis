@@ -199,7 +199,7 @@
 <!-- END site_nav -->
 
 <div class="container">
-    <p class="meta" style="margin-top:0">For the Possibility Lab and the California Department of Housing and Community Development &middot; draft, 2026-10-27</p>
+    <p class="meta" style="margin-top:0">For the Possibility Lab and the California Department of Housing and Community Development &middot; draft, 2026-10-28</p>
     <h1>Students and planners, one APR</h1>
     <p class="subtitle">A high-school class and its city's planning staff build the city's Annual Progress Report together, from the
     city's own records, and check it against what the city files with the state. Then they keep it current all year.</p>
@@ -213,8 +213,36 @@
     own city has to answer by law.</p>
     <p>The course exists. In Berkeley, the full build has been done from public-records productions and the County assessor,
     and it is written up as <a href="data-science-curriculum.html">18 free notebooks</a> that run in a browser.
-    What has not been done yet is the classroom: <strong>it has not been taught to high-school students.</strong>
-    We propose a pilot.</p>
+    It has now been tested in a second city: <a href="#sf">San Francisco</a>, from public data alone, came within about
+    10 percent of the city's own filing. What has not been done yet is the classroom: <strong>it has not been taught to
+    high-school students.</strong> We propose a pilot.</p>
+
+    <h2 id="sf">Tested in a second city: San Francisco</h2>
+    <p>In October 2026 we ran the course's method on San Francisco, a city about seven times Berkeley's population, using only data the
+    city already publishes. No public-records request was needed.</p>
+    <ul>
+        <li><strong>The inputs:</strong> the Department of Building Inspection's permit table on DataSF (219,481 permits
+        issued or completed 2018&ndash;2025), DBI's record of certificates of occupancy (2,559 certificates), and, as the
+        answer key only, San Francisco's APR Table A2 from HCD's portal (5,899 rows).</li>
+        <li><strong>The result:</strong> 26,658 completed units for 2018&ndash;2025, against 29,685 in the city's filings,
+        a gap of 10 percent. <strong>2,017 buildings agree exactly</strong>, on both the number of units and the year
+        they were completed.</li>
+        <li><strong>The gap has named causes,</strong> the kind a class would hand to planning staff. San Francisco's filing
+        counts about 1,200 units that have no city building permit: UC Law SF's student housing at 198 McAllister (657 units)
+        and Mission Rock, on Port land, where the Port issues its own permits. Several occupied towers were never closed out
+        in DBI's permit record. And about 1,000 units are our own errors: hotel rooms, and alteration permits that restate a
+        whole building's units, which our first pass counted as new homes.</li>
+    </ul>
+    <table style="border-collapse:collapse;margin:1rem 0;font-size:.95rem">
+        <tr><th style="text-align:left;padding:.3rem .8rem;border-bottom:2px solid #cbd5e0">San Francisco, 2018&ndash;2025</th>
+            <th style="text-align:right;padding:.3rem .8rem;border-bottom:2px solid #cbd5e0"></th></tr>
+        <tr><td style="padding:.3rem .8rem">Completed units, rebuilt from DBI's permits and certificates</td><td style="text-align:right;padding:.3rem .8rem">26,658</td></tr>
+        <tr><td style="padding:.3rem .8rem">Completed units in the city's APR filings (HCD's portal)</td><td style="text-align:right;padding:.3rem .8rem">29,685</td></tr>
+        <tr><td style="padding:.3rem .8rem">Buildings that agree exactly, units and year</td><td style="text-align:right;padding:.3rem .8rem">2,017</td></tr>
+    </table>
+    <p>The test also showed what a second city takes, which is more than changing a file name (see
+    <a href="#adopt">how another city starts</a>). And it paid Berkeley back: it caught a column HCD had renamed in its
+    statewide data, which would have broken the Berkeley comparison on the next download. That is fixed.</p>
 
     <h2 id="hcd">What HCD gains</h2>
     <ul>
@@ -223,7 +251,8 @@
         named, sourced finding. In Berkeley, that comparison has turned up differences in both directions, the city's and
         our own (<a href="housing-audit.html">the Housing Audit</a>).</li>
         <li><strong>A method that travels.</strong> HCD's portal carries every city's APR, so the answer key exists for every
-        jurisdiction. What changes from city to city is the permit data, which every city holds.</li>
+        jurisdiction. What changes from city to city is the permit data, which every city holds. San Francisco, the first
+        test outside Berkeley, came within 10 percent from public data alone.</li>
         <li><strong>Earlier, steadier reporting.</strong> A record rebuilt from the permit stream can be kept current month by
         month, not assembled once a year (see <a href="#realtime">the real-time APR</a>).</li>
         <li><strong>Local people who understand the numbers.</strong> Students and their teachers learn what the APR measures
@@ -264,15 +293,20 @@
     </ul>
 
     <h2 id="adopt">How another city starts</h2>
+    <p>San Francisco showed the steps, and where the work is.</p>
     <ol>
-        <li><strong>Get the permit data.</strong> Some cities publish it: San Francisco's full permit table is on DataSF, with
-        unit counts. Others export it from their permit portal, or produce it under a public-records request for the
-        annual permit report, as Berkeley did.</li>
-        <li><strong>Fit the first notebook to that city's columns.</strong> Each city's export names its columns differently;
-        the first notebook maps them once. The later notebooks then run unchanged.</li>
-        <li><strong>Point the answer key at the city.</strong> The comparison notebook pulls the city's APR from HCD's portal by
-        jurisdiction name.</li>
+        <li><strong>Get the permit data.</strong> Some cities publish it: San Francisco's permit table and its certificates of
+        occupancy are both on DataSF. Others export it from their permit portal, or produce it under a public-records
+        request for the annual permit report, as Berkeley did.</li>
+        <li><strong>Map that city's columns onto the course's.</strong> This is the real work. San Francisco records existing
+        and proposed units rather than units added, so "new homes" has to be worked out, and its permit table does not
+        mark every finished building complete, so the certificates of occupancy are a second source. The counting rules
+        themselves (what is a new home, when is it complete, which cycle it counts toward) carried over unchanged.</li>
+        <li><strong>Point the answer key at the city.</strong> The city's APR comes from HCD's portal by jurisdiction name. In
+        San Francisco it records DBI's permit number on most rows, which makes the comparison easier than in Berkeley.</li>
     </ol>
+    <p>Today the notebooks carry Berkeley's settings in each notebook. Gathering a city's settings into one place, so a
+    class changes them once, is work we will finish before a pilot.</p>
 
     <h2 id="realtime">The real-time APR</h2>
     <p>The APR is an annual snapshot of a stream: permits are filed, issued and finaled every week. In Berkeley we already
@@ -300,10 +334,13 @@
         <dd>The notebooks and their hosting are free to use. The costs are teacher time, planner time, and the pilot's
         evaluation.</dd>
         <dt>Does it work outside Berkeley?</dt>
-        <dd>The method does, because every city files the same APR. Each new city needs its permit columns mapped once, in the
-        first notebook. Testing a second city is the next step.</dd>
+        <dd>Yes. San Francisco, from public data alone, came within 10 percent of its own filings, with 2,017 buildings
+        agreeing exactly (<a href="#sf">above</a>). Each new city needs its permit columns mapped, and sometimes a second
+        source for completions.</dd>
         <dt>Who maintains it?</dt>
-        <dd>The notebooks and data are public on GitHub. A pilot would settle who supports teachers during the term.</dd>
+        <dd>The notebooks and data are public on GitHub, and every rebuild re-runs its own checks: the San Francisco test
+        caught a column HCD had renamed, and it was fixed the same day. A pilot would settle who supports teachers during
+        the term.</dd>
     </dl>
 
     <h2 id="links">Where to look</h2>
@@ -316,7 +353,7 @@
         <li><a href="pipeline-state.html"><strong>The Pipeline State</strong></a>: where every Berkeley project stands today,
         the kind of view a year-round record makes possible.</li>
         <li><a href="possibility-lab-test.html"><strong>Other cities</strong></a>: our July note on what permit data San
-        Francisco, Oakland, Fresno and Delano make available.</li>
+        Francisco, Oakland, Fresno and Delano make available. The San Francisco test above followed it.</li>
     </ol>
 
     <p class="meta">Contact: John Gage, through <a href="https://github.com/blockXblock/berkeley-housing-analysis">the project's GitHub</a>.</p>

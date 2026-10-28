@@ -5,6 +5,15 @@
 
 ---
 
+## 2026-10-28 — HCD column rename fixed (dev b9ccccfd); apr-classroom.html rewritten with the SF result
+- `housing_rules.apr_columns` (`co_unit_columns`, `co_units_sql`): reads Table A2's CO columns from the table, either
+  spelling, raises on a new rename. Used by JN0g, JN6a, JN6b, build_s9, export_explorer_data_v4. Berkeley unchanged:
+  6a/6b checkpoints PASS, JN0g 708, S9 city 4,022, get_city_apr identical to HEAD. Test `test_apr_columns.py` PASS.
+- **Colab bundle rebuilt locally, NOT uploaded** (`build_curriculum_modules.py --upload` = John's call). Must be uploaded
+  before the edited notebooks reach main (Colab links open main; deploy.sh mirrors only docs/ and kml/).
+- `docs/apr-classroom.html` (still unlinked draft): new "Tested in a second city: San Francisco" section, honest "How
+  another city starts", FAQ answers updated. Not deployed.
+
 ## 2026-10-28 — San Francisco test run of the curriculum chain (read-only; notes/2026-10-28_sf_test_run.md)
 - Inputs, public, pinned: DataSF permits `i98e-djp9` (219,481 permits issued/completed 2018-25), DBI unit-completion
   certificates `j67f-aayr` (2,559), SF APR Table A2 from HCD CKAN (5,899 rows; answer key only). Work: `scratch/2026-10-28/sf/`.

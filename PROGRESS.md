@@ -5,6 +5,17 @@
 
 ---
 
+## 2026-10-28 — San Francisco test run of the curriculum chain (read-only; notes/2026-10-28_sf_test_run.md)
+- Inputs, public, pinned: DataSF permits `i98e-djp9` (219,481 permits issued/completed 2018-25), DBI unit-completion
+  certificates `j67f-aayr` (2,559), SF APR Table A2 from HCD CKAN (5,899 rows; answer key only). Work: `scratch/2026-10-28/sf/`.
+- **Result (CO years 2018-25): ours 26,658 vs SF's APR 29,685 (−10.2%); 2,017 buildings agree exactly on units and year.**
+  Residual: APR units with no DBI permit (UC Law SF "Academe" 657, Mission Rock on Port land 541), towers DBI never closed,
+  phased towers, and ~1,000 u of hotel/alteration phantoms our adapter still passes.
+- **What a second city needed:** 9 items (note lists them). Not "two values": every notebook's config, a column adapter,
+  a second completion source, APN code, a cascade join. **One hits Berkeley too: HCD renamed CO_EXTREMELY_INCOME_NDR ->
+  CO_EXTREMELY_LOW_INCOME_NDR; JN6a/JN6b's SQL fails on a fresh pull.**
+- Next (John's call): fix the renamed column; one CITY config cell; SF in APN_FORMATS; whether R-1 belongs in is_housing.
+
 ## 2026-10-28 — Pencil-out control group: projects that DID get built (JN-O §10, dev cbf6132f; no DB writes)
 - John: "can we analyze ten or twenty more interesting projects?" -> chose "Built recently". Cohort derived from v4: first
   BP on/after 2022-07-01, completed or under construction, 10+ units: 26; 5 publicly funded out of scope; **21 in scope**.

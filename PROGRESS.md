@@ -5,6 +5,24 @@
 
 ---
 
+## 2026-10-28 — Map labels: 2274/2276 Shattuck, 2425 Durant; harvester one-record fix
+- **Units, from documents already held** (no harvest needed): ZAB action minutes. 2276 Shattuck ZP2024-0067 = **134**
+  (2026-03-12); 2425 Durant ZP2024-0162 = **169** (2025-10-09); 2274 Shattuck ZP2023-0079 = **227**. v4 already has
+  all three. The map's 336 / 117 / 299 are early-application figures (2024 CSV; SB 330 preliminary letters) carried from v2.
+- **Status, Accela Building by address (2026-10-28):** no building permit for any of the three. 2274 has only 2016-17
+  records; 2276 has PREAPP000936 (closed); 2425 has B2023-06319 (2 ADUs, Closed Expired). Popups saying "Under
+  Construction" are wrong. Results: `scratch/2026-10-28/accela/`.
+- **"Entitled but Inactive":** John's 2026-10-20 rule (36+ months since approval AND no activity for 36 months) makes
+  2190 Shattuck, 2065 Kittredge, 2800 Telegraph, 2147 San Pablo plain "Entitled". John, 2026-10-28: "use plain Entitled".
+- **PREVIEW, NOT APPLIED:** `scratch/2026-10-28/label_preview/` (`preview.py`, `preview.tsv`, `geometry_preview.kml`):
+  74 buildings change: 6 labels, popup Status lines to the label's stage, popup Units lines to the label's own count
+  (never the project total: North Berkeley BART's 13 outlines would each get 739). Hold 2435 San Pablo: v2 had a
+  40-unit proposal there; v4 has only a 1-unit ZP2024-0120, so the label may name the wrong project.
+- **Harvester fix:** `harvest_address.py` read a one-record address as 0 (Accela opens the record instead of a list).
+  The redirect check is now `url_discovery_scraper.detect_single_result_redirect`, shared by both searches.
+  Tested: 2276/2425 return their one record, 2274 its 6, `url_discovery_scraper.py B2023-06319` still found.
+  Any earlier single-ADDRESS search that reported 0 may have hidden one record.
+
 ## 2026-10-28 — publish_video.py uploads the HD copy to R2 (John: "make publish_video.py upload to R2")
 - New `--video <1080p master>`: makes `web/<tour>-{1080,720}.mp4` beside the master (the 11 live flyovers' encodes),
   uploads both to R2 `videos/`, checks docs.berkeleybuild.com serves the same byte count, then writes `data-mp4` and a

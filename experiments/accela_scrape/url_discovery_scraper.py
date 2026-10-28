@@ -286,6 +286,47 @@ def _results_page_next_postback(page):
         return None
 
 
+_CAPID_RE = re.compile(r"CapDetail\.aspx\?.*?capID1=([^&]+)&capID2=([^&]+)&capID3=([^&]+)")
+_FORM_ACTION_JS = """() => {
+    for (const f of document.querySelectorAll('form')) {
+        const a = f.getAttribute('action') || '';
+        if (a.includes('CapDetail.aspx') && a.includes('capID1=')) {
+            return a;
+        }
+    }
+    return null;
+}"""
+
+
+def detect_single_result_redirect(page, wait_s=5.0):
+    """(capID regex match, CapDetail url) when a search landed on ONE record's CapDetail page, else (None, None).
+
+    When Accela's CapHome search returns exactly one matching record, it auto-navigates directly to that
+    record's CapDetail page rather than rendering the multi-row results-list page, so `_walk_all_result_pages`
+    finds 0 anchors (the CapDetail page has no `a[href*='CapDetail.aspx']` link to itself) and the search
+    falsely reads as empty. Two signals, either sufficient:
+      (1) page.url is the CapDetail.aspx URL with capID1/2/3 -- a hard redirect after the search submit.
+      (2) the page's main form has action="./CapDetail.aspx?capID1=..." -- an UpdatePanel content swap that
+          left the browser URL on CapHome.aspx but loaded CapDetail's DOM in place.
+    Polled, because the UpdatePanel swap can land ~1-5 s after networkidle; diagnosis on B2023-02303 showed
+    1-in-4 single-shot checks lose this race. Cost: at most `wait_s` on a genuinely empty search.
+    Shared by the permit-number search below and harvest_address.py (which missed it until 2026-10-28)."""
+    deadline = time.time() + wait_s
+    while time.time() < deadline:
+        m_url = _CAPID_RE.search(page.url or "")
+        if m_url:
+            return m_url, page.url
+        try:
+            form_action = page.evaluate(_FORM_ACTION_JS)
+        except Exception:
+            form_action = None
+        m_form = _CAPID_RE.search(form_action) if form_action else None
+        if m_form:
+            return m_form, _absolutize(form_action)
+        time.sleep(0.5)
+    return None, None
+
+
 def _walk_all_result_pages(page, search_query, errors, max_pages=30):
     """
     Walk every page of the results table, accumulating record dicts with
@@ -512,65 +553,10 @@ def _discover_with_page(
     # =========================================================
     # Step 2.5: single-result auto-redirect detection
     # =========================================================
-    # When Accela's CapHome search returns exactly one matching record,
-    # it auto-navigates directly to that record's CapDetail page rather
-    # than rendering the multi-row results-list page. The result is that
-    # `_walk_all_result_pages` finds 0 anchors (the CapDetail page has no
-    # `a[href*='CapDetail.aspx']` link to itself) and falsely reports
-    # `not_found`. Detect this case via two signals:
-    #
-    #   (1) page.url is the CapDetail.aspx URL with capID1/2/3 — Accela
-    #       performed a hard redirect after the search submit.
-    #   (2) The page's main form has action="./CapDetail.aspx?capID1=…"
-    #       — UpdatePanel content swap that left the browser URL pointing
-    #       at CapHome.aspx but loaded CapDetail's DOM in place.
-    #
-    # Either signal is sufficient. The check is wrapped in a short
-    # polling loop because Accela's ASP.NET UpdatePanel content swap
-    # can take an extra ~1-5s past `wait_for_load_state('networkidle')`;
-    # diagnosis on B2023-02303 showed 1-in-4 single-shot checks lose
-    # this race. Cost: at most ~5s on legitimate not_found cases;
-    # negligible when the signal arrives quickly.
-    sr_triplet_match = None
-    sr_capdetail_url = None
-    _CAPID_RE = re.compile(
-        r"CapDetail\.aspx\?.*?capID1=([^&]+)&capID2=([^&]+)&capID3=([^&]+)"
-    )
-    _FORM_ACTION_JS = """() => {
-        for (const f of document.querySelectorAll('form')) {
-            const a = f.getAttribute('action') || '';
-            if (a.includes('CapDetail.aspx') && a.includes('capID1=')) {
-                return a;
-            }
-        }
-        return null;
-    }"""
-
+    # One matching record -> Accela opens its CapDetail page instead of a results list; see
+    # detect_single_result_redirect for the two signals and why it polls.
     poll_start = time.time()
-    poll_deadline = poll_start + 5.0
-    while time.time() < poll_deadline:
-        # Signal 1: page.url
-        current_url = page.url or ""
-        m_url = _CAPID_RE.search(current_url)
-        if m_url:
-            sr_triplet_match = m_url
-            sr_capdetail_url = current_url
-            break
-
-        # Signal 2: form action via JS eval
-        try:
-            form_action = page.evaluate(_FORM_ACTION_JS)
-        except Exception:
-            form_action = None
-        if form_action:
-            m_form = _CAPID_RE.search(form_action)
-            if m_form:
-                sr_triplet_match = m_form
-                sr_capdetail_url = _absolutize(form_action)
-                break
-
-        time.sleep(0.5)
-
+    sr_triplet_match, sr_capdetail_url = detect_single_result_redirect(page)
     metadata["auto_redirect_poll_seconds"] = round(time.time() - poll_start, 2)
 
     if sr_triplet_match:

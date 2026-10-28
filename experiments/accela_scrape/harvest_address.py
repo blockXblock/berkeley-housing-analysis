@@ -26,8 +26,9 @@ from playwright.sync_api import sync_playwright
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from url_discovery_scraper import (            # reuse the proven machinery
     DEFAULT_HOST, _build_search_url, _try_click_search, _parse_result_rows,
-    _walk_all_result_pages, _is_login_or_block, _save_debug,
+    _walk_all_result_pages, _is_login_or_block, _save_debug, detect_single_result_redirect,
 )
+import re
 
 # ACA General Search address inputs — field ids CONFIRMED live via Claude-in-Chrome (2026-08-13), same
 # across the Building and Business-Licenses modules (both use generalSearchForm). Street number is a
@@ -107,9 +108,30 @@ def search_by_address(page, street_name, street_no=None, module="Building",
     block = _is_login_or_block(page)
     if block:
         return {"records": [], "blocked": block, "errors": errors}
+    # ONE record at the address -> Accela opens it instead of listing it, and the results walker read that as
+    # zero (2026-10-28: 2276 Shattuck and 2425 Durant both came back "records=0"; each has exactly one record).
+    match, url = detect_single_result_redirect(page)
+    if match:
+        return {"records": [_record_from_capdetail(page, match, url)], "pages_walked": 0, "blocked": None,
+                "errors": errors, "fill_ok": True, "match_path": "single_result_redirect"}
     query = f"{street_no or ''} {street_name}".strip()
     records, pages = _walk_all_result_pages(page, query, errors)
-    return {"records": records, "pages_walked": pages, "blocked": None, "errors": errors, "fill_ok": True}
+    return {"records": records, "pages_walked": pages, "blocked": None, "errors": errors, "fill_ok": True,
+            "match_path": "results_list"}
+
+
+def _record_from_capdetail(page, match, url):
+    """The one record a search landed on, in the same shape _parse_result_rows gives a results-list row,
+    plus the status and description the CapDetail header shows."""
+    text = page.inner_text("body")
+    head = re.search(r"Record\s+([A-Z0-9][A-Z0-9-]+):\s*\n\s*([^\n]*)", text)
+    status = re.search(r"Record Status:\s*([^\n]+)", text)
+    desc = re.search(r"Project Description:\s*\n?\s*([^\n]+)", text)
+    return {"permit_number_displayed": head.group(1) if head else None, "href": url,
+            "capid1": match.group(1), "capid2": match.group(2), "capid3": match.group(3),
+            "kind": "other", "record_type": (head.group(2).strip() if head else None) or "OTHER",
+            "status": status.group(1).strip() if status else None,
+            "description": desc.group(1).strip() if desc else None}
 
 def run(street_name, street_no=None, module="Building", headless=True,
         storage_state=None, debug_dir=None):

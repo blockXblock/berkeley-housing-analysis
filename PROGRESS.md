@@ -5,6 +5,36 @@
 
 ---
 
+## 2026-10-29 — "Does It Pencil?" game at docs/play/ (dev; not deployed; no DB writes)
+- John, 2026-10-28: "Can we build a BerkeleyBuild game that shows developers looking at parcels all over Berkeley to see
+  if any might pencil out? or re-examine projects in the pipeline to see if any new laws make a project more
+  profitable ... try playing with the under-construction project at 2800 Telegraph". 2026-10-29: "move to docs/".
+- **What it is:** a three.js massing model of the 24,819 parcels of the 2026-10-28 zoned citywide pass, colored by the
+  rent multiple needed to pencil; click a parcel to design a building (zoning as written / State Density Bonus /
+  SB 79 / SB 79 + bonus; apartments or by the bed), click a pin to re-pencil one of 30 pipeline projects (JN-O's
+  stalled + built cohorts, and 2800 Telegraph). Market dials bounded by the assumptions file's bands; five missions.
+- **The model is JN-O's, ported:** `docs/play/pencil.js` is a line-for-line port of `pencil_out.py`;
+  `scripts/v4/pencil_js_parity.mjs` checks it against the Python results: 24,819 parcels x 5 citywide columns (worst
+  |d| 5e-5 = the CSV's rounding) and 69 pipeline-project runs (exact). PASS. Data: `scripts/v4/export_game_data.py` ->
+  `docs/play/game_data.json` (4.5 MB). Re-run both after any change to pencil_out, the assumptions or the citywide pass.
+- **GAME extensions, labeled in the page:** by-the-bed layout on any lot (360 sf/bed, 3.2 beds/unit, DERIVED from 2800
+  Telegraph's plan set); density bonus caps UNIT COUNT with height/FAR waived (2800 Telegraph got 6 stories on a
+  3-story base); SB 79 Tier 1 standards from ABAG's SB 79 Summary (updated 2026-07-01, Table 1), BART station
+  centroids (MTC's map is the legal test), sites with >2 rent-registered units excluded; AB 1287 additional VLI table.
+  Not modeled: AB 2011 (no corridor widths), SB 35/423 time savings, for-sale.
+- **2800 Telegraph (ZP2022-0107), RECORD from the 2023-04-27 ZAB plan set (A0.1, A0.3B):** 16 units (1 studio, 10 3BR,
+  5 4BR; 51 beds), 19,936 gsf, 6 stories, lot 3,695 sf, 1 VLI = 8% of a 12-unit base -> 27.5% bonus. Land RECORD:
+  assessed $1.2M after the 2025-12-09 transfer. Base: yield 6.84% vs hurdle 7.25% (-41 bp), needs rents 1.06x;
+  favorable +319 bp. Today's IHO fee instead of the vested legacy AHMF: -51 bp ($689k vs $508k). The BP application's
+  18 units = the plan set's own row for 2 VLI / 15% / 50% bonus; stacked as a 7th floor it turns Type III, -160 bp.
+  SB 79 does not reach it (0.73 mi from Ashby BART). **Candidates, not written:** add its rows to a
+  project_inputs_record CSV (the exporter holds them inline, with locators); v4 status "entitled" vs demolition under
+  way (B2026-00307 issued 2026-07-28; B2025-05618 not issued).
+- **Finding (the model's):** at base market NO parcel pencils under any pathway; SB 79 reaches 5,775 parcels and lowers
+  the rent needed on some (2310 Haste by the bed: 1.19x vs 1.21x) but flips none. The market dials decide it.
+- Not linked from any page yet (full-screen, so outside site_nav.PAGES, like the maps). Private preview artifact:
+  https://claude.ai/artifact/ErkfCrdYaaM6APpkYSgkqd. Deploy = John.
+
 ## 2026-10-28 — HCD column rename fixed (dev b9ccccfd); apr-classroom.html rewritten with the SF result
 - `housing_rules.apr_columns` (`co_unit_columns`, `co_units_sql`): reads Table A2's CO columns from the table, either
   spelling, raises on a new rename. Used by JN0g, JN6a, JN6b, build_s9, export_explorer_data_v4. Berkeley unchanged:

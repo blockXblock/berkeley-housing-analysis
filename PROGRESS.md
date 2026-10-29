@@ -5,7 +5,9 @@
 
 ---
 
-## 2026-10-29 — "Does It Pencil?" game at docs/play/ (dev; not deployed; no DB writes)
+## 2026-10-29 — "Can It Pencil?" game at docs/play/ (dev; not deployed; no DB writes)
+- **Renamed 2026-10-29** from "Does It Pencil?" (John, relayed: Terner Center's 2023 interactive at
+  ternercenter.app/demystifying-development-math is already called "Does it Pencil?"; the game is going to Ben Metcalf).
 - John, 2026-10-28: "Can we build a BerkeleyBuild game that shows developers looking at parcels all over Berkeley to see
   if any might pencil out? or re-examine projects in the pipeline to see if any new laws make a project more
   profitable ... try playing with the under-construction project at 2800 Telegraph". 2026-10-29: "move to docs/".

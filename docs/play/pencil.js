@@ -1,5 +1,5 @@
 // pencil.js -- a line-for-line JavaScript port of scripts/v4/pencil_out.py (the pencil-out model, JN-O), for the
-// "Does it pencil?" game. Same inputs (game_data.json, exported from the Python model's own files), same arithmetic.
+// "Can it pencil?" game. Same inputs (game_data.json, exported from the Python model's own files), same arithmetic.
 // parity_test.mjs checks this file reproduces the Python results for every parcel and pipeline project.
 //
 // Section 1 is the port (names follow pencil_out.py). Section 2 holds the game's EXTENSIONS, each labeled: the

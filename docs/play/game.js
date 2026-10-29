@@ -1,4 +1,4 @@
-// game.js -- "Does it pencil?" A Berkeley developer's game on the JN-O pencil-out model (pencil.js, a verified port).
+// game.js -- "Can it pencil?" A Berkeley developer's game on the JN-O pencil-out model (pencil.js, a verified port).
 import * as THREE from "three";
 import { MapControls } from "three/addons/controls/MapControls.js";
 import * as P from "./pencil.js";

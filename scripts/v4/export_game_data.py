@@ -1,4 +1,4 @@
-"""export_game_data.py -- the data file for the "Does it pencil?" game (docs/play/). MACHINERY, read-only.
+"""export_game_data.py -- the data file for the "Can it pencil?" game (docs/play/). MACHINERY, read-only.
 
 John, 2026-10-28: "Can we build a BerkeleyBuild game that shows developers looking at parcels all over Berkeley to see
 if any might pencil out? or re-examine projects in the pipeline to see if any new laws make a project more profitable

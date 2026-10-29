@@ -1,0 +1,97 @@
+{
+  "written": "2026-10-29",
+  "script": "scripts/v4/pencil_backtest.py",
+  "assumptions": "pencil_out_2026-10-25.yaml",
+  "assumptions_sha16": "ce10f27077d57605",
+  "record_inputs": "project_inputs_record_built_2026-10-28.csv",
+  "record_inputs_sha16": "725402403dece31f",
+  "v4_sha16": "1591bcbd2d3a38ae",
+  "summary": {
+    "all": {
+      "n": 15,
+      "today": {
+        "pencil": 5,
+        "worth_cost": 7,
+        "median_vc": 0.9954221120267213,
+        "median_need": 1.2138903875393283
+      },
+      "bp": {
+        "pencil": 5,
+        "worth_cost": 8,
+        "median_vc": 1.0134428896211,
+        "median_need": 1.2138903875393283
+      },
+      "ent": {
+        "pencil": 6,
+        "worth_cost": 11,
+        "median_vc": 1.1892620652906891,
+        "median_need": 1.086720299409936
+      },
+      "filed": {
+        "pencil": 9,
+        "worth_cost": 11,
+        "median_vc": 1.308400552753388,
+        "median_need": 0.9252177936164562
+      }
+    },
+    "apartments": {
+      "n": 6,
+      "today": {
+        "pencil": 0,
+        "worth_cost": 1,
+        "median_vc": 0.7124062205194981,
+        "median_need": 1.7477600116474143
+      },
+      "bp": {
+        "pencil": 0,
+        "worth_cost": 2,
+        "median_vc": 0.7384050348410737,
+        "median_need": 1.6832433727767504
+      },
+      "ent": {
+        "pencil": 0,
+        "worth_cost": 3,
+        "median_vc": 0.9355693353181602,
+        "median_need": 1.373987208887224
+      },
+      "filed": {
+        "pencil": 1,
+        "worth_cost": 3,
+        "median_vc": 1.0879715053923473,
+        "median_need": 1.1882031251893248
+      },
+      "own": {
+        "n": 3,
+        "median_need": 1.6078683323100416,
+        "pencil": 0
+      }
+    },
+    "by the bed": {
+      "n": 9,
+      "today": {
+        "pencil": 5,
+        "worth_cost": 6,
+        "median_vc": 1.2659801704989606,
+        "median_need": 0.9534693627555353
+      },
+      "bp": {
+        "pencil": 5,
+        "worth_cost": 6,
+        "median_vc": 1.2291307439556824,
+        "median_need": 0.982709736814482
+      },
+      "ent": {
+        "pencil": 6,
+        "worth_cost": 8,
+        "median_vc": 1.352148523689506,
+        "median_need": 0.889487034266315
+      },
+      "filed": {
+        "pencil": 8,
+        "worth_cost": 8,
+        "median_vc": 1.3991130429099696,
+        "median_need": 0.8614799631172357
+      }
+    }
+  }
+}

@@ -5,6 +5,44 @@
 
 ---
 
+## 2026-10-29 — Pencil-out back-test: as underwritten vs as delivered (read-only; scratch/2026-10-29/)
+- John: "run the year-of-permit back-test", then "check costs against the permit valuations", then "add those two"
+  (commitment-year market + value/cost). Cohort = JN-O §10's 15 scoreable built buildings (first BP 2022-07-01+).
+  **Back-test graduated to `scripts/v4/pencil_backtest.py`** -> `data/derived/pencil_out/backtest_built_2026-10-29.csv`
+  (+ `.meta.json`: assumptions / record-inputs / v4 hashes and the summary counts, taken unrounded). Re-run after any
+  change to pencil_out, the assumptions or the built RECORD inputs; the game's "What the record shows" table quotes it.
+  Still in scratch/2026-10-29/: `cost_vs_valuation.py/.csv`, `cost_vs_assessor.csv`, `two_buildings.py`.
+- **Method:** each building at its RECORD size, priced at the market of a given year: CBRE cap rate
+  (`exit_cap_rate.by_year`) and hard costs at that year's price level (`hard_cost_escalation.by_year`); construction
+  rate, land $/sf, opex, spread held at base. Years: today, first-BP, entitlement, planning-FILING. Filing year is a
+  PROXY for when the developer committed to the site (no deed history in v4 or the assessor; press dates 2538 Durant's
+  purchase to 2022-12 = its filing year). value/cost = (NOI / cap) / (cost ex land + land), no developer margin.
+- **Result:** as underwritten (filing-year market) 11 of 15 are worth >= cost (today 7) and 9 of 15 clear the
+  hurdle (cap + 1.25%; today 5) -- unrounded: 1598 University 0.9993 underwritten, 2317 Channing 0.9954 today; apartments median v/c 1.09, rent needed 1.19x. As delivered (today) apartments median v/c 0.71 (BP-year
+  0.74), rent needed 1.75x, 0 of 6 pencil; by-the-bed 5 of 9 pencil, median v/c 1.27. Committed in the cheap-money
+  years, delivered after cap rates rose. Timing explains little for 2022-23 filings (1598 University still 1.63x at
+  its entitlement year): the rest of the apartment gap is the model's hurdle or costs.
+- **Corrections to what was said earlier this session:** the cohort is 2022-25 permits, not 2019-21 deals; the pool
+  rents are new-building lease-up rents (Rent Board initial rents, first 2 years after CO), not older stock.
+- **2538 Durant / 1752 Shattuck** (both built and renting): yield 6.05% / 6.11% vs cap 6.0% = worth about what they cost
+  (v/c 1.01 / 1.02); "does not pencil" only because of the 1.25% spread. Each pencils with the full margin at a 4.80% /
+  4.86% cap rate, i.e. the 2022 market (4.75%) when they were committed.
+- **Costs:** permit JobValuation is a fee basis, not a cost (median 0.45 of model hard cost, $120-271/gsf; sub-permits
+  repeat the parent's valuation; 1598 University's 207-unit master says $2.5M). Assessor improvements on the two fully
+  reassessed buildings: 0.76 (2000 University) and 0.48 (1951 Shattuck) of model cost ex land; ambiguous (an income-
+  approach value below cost is what "doesn't pencil" looks like). **1951 Shattuck's cost is probably overstated** (Type
+  I tier, $644k/unit hard; permits $77.6M = Phase 1 B2019-05608 $25M + master B2021-04893 $50M + grading $2.6M;
+  v4's construction_valuation counts the master only, $50.0M). 1752
+  Shattuck's $30M BHI construction loan (2024-08) implies ~$46-55M total at 55-65% LTC vs the model's $36M: no evidence
+  its costs were lower. 1752 Shattuck asking rents (Redfin, undated): studio 1.12x pool, 2BR 0.82x, 3BR 0.84-0.93x, 1
+  month free.
+- **Candidates, not written:** v4 2538 Durant status under_construction (John: renting); 1752 Shattuck 68 vs press 73;
+  duplicate "withdrawn" project rows at 2000 University and 2317 Channing on the built projects' parcels; 1598
+  University and 2300 Ellsworth have no assessor rows linked; check 2587 Telegraph's inputs ($1.49M/unit model cost).
+- **Into the game (sent to the game session, uncommitted):** lead with as-underwritten vs as-delivered; a value/cost
+  line on every card. Draft note to Ben Metcalf in this session: wait until deployed and reframed; ask Terner for East
+  Bay budgets and its read on US modular.
+
 ## 2026-10-29 — "Can It Pencil?" game at docs/play/ (dev; not deployed; no DB writes)
 - **Renamed 2026-10-29** from "Does It Pencil?" (John, relayed: Terner Center's 2023 interactive at
   ternercenter.app/demystifying-development-math is already called "Does it Pencil?"; the game is going to Ben Metcalf).
@@ -34,6 +72,14 @@
   way (B2026-00307 issued 2026-07-28; B2025-05618 not issued).
 - **Finding (the model's):** at base market NO parcel pencils under any pathway; SB 79 reaches 5,775 parcels and lowers
   the rent needed on some (2310 Haste by the bed: 1.19x vs 1.21x) but flips none. The market dials decide it.
+- **2026-10-29 (John, relayed), UNCOMMITTED for review:** (1) the brief now LEADS with "Underwritten vs delivered", the
+  15-building back-test from `scratch/2026-10-29/backtest_year_of_permit.py` (filing-year market vs today): worth
+  at least their cost 11 -> 7 of 15; clear the hurdle 9 -> 5; apartments median value/cost 1.09 -> 0.71. Counts
+  re-checked unrounded through the JS port (1598 University 0.999 as underwritten; 2317 Channing 0.995 today, so
+  both count as under). Figures come from a SCRATCH script: graduate it to scripts/v4 + a committed CSV before deploy.
+  (2) every project card and parcel design shows a value/cost line (`pencil.valueCost`: NOI / exit cap vs cost incl.
+  land basis, beside the hurdle verdict); 2800 Telegraph 1.14, i.e. worth more than it cost but short of the margin.
+  Parity PASS after both.
 - Not linked from any page yet (full-screen, so outside site_nav.PAGES, like the maps). Private preview artifact:
   https://claude.ai/artifact/ErkfCrdYaaM6APpkYSgkqd. Deploy = John.
 

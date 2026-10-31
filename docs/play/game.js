@@ -288,6 +288,11 @@ function verdictHTML(pencils, gapBp, needX, blocked) {
   return `<div class="verdict ${pencils ? "yes" : "no"}"><b>${pencils ? "Pencils" : "Doesn't pencil"}</b>
     <span class="mono">${gapBp >= 0 ? "+" : ""}${gapBp} bp vs hurdle<br>needs rents ${needX.toFixed(2)}× today's</span></div>`;
 }
+function vcHTML(acct, landBasis) {
+  const v = P.valueCost(acct, landBasis, market.cap);
+  return `<div class="vc ${v.ratio >= 1 ? "ok" : "under"}"><span class="eyebrow">Value / cost</span>
+    <b class="mono">${v.ratio.toFixed(2)}</b><span>${money(v.value)} (NOI ÷ ${pct(market.cap)} cap) vs ${money(v.cost)}: ${esc(v.reading)}</span></div>`;
+}
 function gaugeHTML(yoc, hurdle) {
   const max = 0.12, w = Math.max(0, Math.min(1, yoc / max)) * 100, h = Math.min(1, hurdle / max) * 100;
   return `<div><div class="eyebrow" style="margin-bottom:4px">Yield on cost vs the hurdle</div>
@@ -362,7 +367,7 @@ function renderSite(el) {
   let body = "";
   if (!d.blocked) {
     const b = d.b, bmr = d.vliUnits || (b.affordable ? Object.values(b.affordable).reduce((a, x) => a + Object.values(x).reduce((p, q) => p + q, 0), 0) : 0);
-    body = verdictHTML(d.pencils, Math.round(d.gap * 1e4), d.need) + gaugeHTML(d.yoc, b.hurdle)
+    body = verdictHTML(d.pencils, Math.round(d.gap * 1e4), d.need) + vcHTML(b, d.land.basis) + gaugeHTML(d.yoc, b.hurdle)
       + factsHTML([[card.layout === "beds" ? "Beds / units" : "Units", card.layout === "beds" ? `${b.beds}/${b.units}` : b.units],
                    ["Stories", `${d.stories} · ${Math.round(b.height_ft)} ft`], ["Below-market", bmr]])
       + `<div class="note">${esc(b.tier)}. Land basis: ${esc(d.land.binding)} (${money(d.land.basis)}).</div>`
@@ -414,7 +419,7 @@ function renderProject(el) {
     const r = P.recordVariant(p, market, data, { vli: card.vli, addUnits: card.addUnits, fee_mode: card.fee });
     const bmr = r.affordable ? Object.values(r.affordable).reduce((a, x) => a + Object.values(x).reduce((q, w) => q + w, 0), 0) : 0;
     const bonusLine = r.bonus ? `<p class="note">${r.bonus.ok ? "Legal" : "Not legal"} under the State Density Bonus: ${r.units} units on a ${r.bonus.base_units}-unit base is a ${r.bonus.needPct.toFixed(1)}% bonus; ${r.bonus.vliPct.toFixed(1)}% VLI buys ${+r.bonus.have.toFixed(2)}% (up to ${r.bonus.max_units} units).</p>` : "";
-    body = verdictHTML(r.gap >= 0, Math.round(r.gap * 1e4), r.rent_mult_needed) + gaugeHTML(r.yoc, r.hurdle)
+    body = verdictHTML(r.gap >= 0, Math.round(r.gap * 1e4), r.rent_mult_needed) + vcHTML(r, r.land_basis) + gaugeHTML(r.yoc, r.hurdle)
       + factsHTML([[r.per_bed_beds ? "Beds / units" : "Units", r.per_bed_beds ? `${r.per_bed_beds}/${r.units}` : r.units],
                    ["Stories", `${r.stories} · ${Math.round(r.height_ft)} ft`], ["Below-market", bmr]])
       + bonusLine + napkinHTML(r, r.land_basis, r.land_label === "RECORD" ? "assessed after a 2018+ sale" : "market land, assumed", r.rent_mult_needed)

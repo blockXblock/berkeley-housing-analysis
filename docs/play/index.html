@@ -118,6 +118,20 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 .verdict b { font: 800 26px/1 var(--display); text-transform: uppercase; letter-spacing: .02em; }
 .verdict .mono { font-size: 12.5px; text-align: right; }
 .verdict.yes { color: var(--good); } .verdict.no { color: var(--bad); } .verdict.blocked { color: var(--muted); }
+.vc { display: grid; grid-template-columns: auto auto 1fr; gap: 4px 10px; align-items: baseline; font-size: 12.5px; }
+.vc b { font-size: 20px; } .vc.ok b { color: var(--good); } .vc.under b { color: var(--bad); }
+.vc span:last-child { color: var(--muted); grid-column: 1 / -1; }
+.finding { display: flex; flex-direction: column; gap: 7px; padding: 10px 12px; border: 1px solid var(--rule); border-radius: 5px; background: var(--bg); }
+.finding h2 { margin: 0; font: 800 21px/1 var(--display); text-transform: uppercase; letter-spacing: .02em; text-wrap: balance; }
+.finding p { color: var(--ink) !important; font-size: 13px; }
+.uvd { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.uvd th, .uvd td { padding: 3px 0; border-bottom: 1px dotted var(--rule); text-align: right; font-weight: 500; }
+.uvd th:first-child, .uvd td:first-child { text-align: left; color: var(--muted); font-weight: 400; padding-right: 8px; }
+.uvd thead th { font: 500 10.5px/1.2 var(--body); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); vertical-align: bottom; }
+.uvd td.v { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.uvd td.down { color: var(--bad); }
+.finding details { font-size: 12px; color: var(--muted); }
+.finding details p { color: var(--muted) !important; font-size: 12px; margin-top: 5px; }
 .gauge { position: relative; height: 26px; border-radius: 3px; background: var(--bg); border: 1px solid var(--rule); overflow: hidden; }
 .gauge .fill { position: absolute; inset: 0 auto 0 0; }
 .gauge .mark { position: absolute; top: -2px; bottom: -2px; width: 2px; background: var(--ink); }
@@ -170,7 +184,28 @@ details summary { cursor: pointer; font-size: 12.5px; color: var(--accent); }
 <section id="brief" class="panel" aria-label="Game brief">
   <a class="home" href="../">← BerkeleyBuild</a>
   <h1>Can it <span>pencil?</span></h1>
-  <p>You are a Berkeley developer. Every block is a parcel; color shows how much higher rents would have to be for a new building there to pay for itself. Click one to draw up a building. Click a pin to re-examine a project in the pipeline.</p>
+  <section class="finding" aria-label="Underwritten vs delivered">
+    <span class="eyebrow">What the record shows</span>
+    <h2>Underwritten vs delivered</h2>
+    <p>The 15 market-rate buildings Berkeley permitted since mid-2022 made sense when their developers committed. Priced at the market of the year each one filed, 11 of 15 were worth at least what they cost. At today's market the same apartment buildings are worth about 71 cents per dollar of cost; the student buildings, rented by the bed, mostly still work.</p>
+    <table class="uvd">
+      <thead><tr><th>15 buildings, first permit since 2022-07-01</th><th>As under&shy;written</th><th>Delivered (today)</th></tr></thead>
+      <tbody>
+        <tr><td>Worth at least their cost</td><td class="v">11 of 15</td><td class="v down">7 of 15</td></tr>
+        <tr><td>Clear the full hurdle (cap rate + 1.25%)</td><td class="v">9 of 15</td><td class="v down">5 of 15</td></tr>
+        <tr><td>Apartments: median value / cost</td><td class="v">1.09</td><td class="v down">0.71</td></tr>
+        <tr><td>Apartments: rents needed vs lease-ups</td><td class="v">1.19×</td><td class="v down">1.75×</td></tr>
+        <tr><td>Apartments that pencil</td><td class="v">1 of 6</td><td class="v down">0 of 6</td></tr>
+        <tr><td>By the bed that pencil</td><td class="v">8 of 9</td><td class="v down">5 of 9</td></tr>
+      </tbody>
+    </table>
+    <details><summary>How the back-test works</summary>
+      <p><b>As underwritten</b> prices each building at its recorded size in the market of its planning-filing year: that year's CBRE exit cap rate and that year's construction cost level. The filing year is a proxy for when the developer committed to the site; we hold no deed history, and press reports date 2538 Durant's purchase to December 2022, its filing year. Those construction costs are what a developer would have expected, not what they paid. <b>Delivered</b> is the same building at today's market (2026 cap rate, 2025 costs). At the permit year the apartments' median value / cost is 0.74. Rents are the 2022–24 lease-up pool in both runs.</p>
+      <p><b>Two cost inputs to check, not findings:</b> 1951 Shattuck is worth 0.87 of its cost even as underwritten, but the model's hard cost ($644k a unit at the concrete-and-steel tier) is far above the City's permit valuations and the assessor's improvement value. 2587 Telegraph (0.81) models at $1.49M a unit.</p>
+      <p><b>Starting a building today:</b> at today's market, no Berkeley parcel pencils as apartments under any pathway on this model. That is what the map shows.</p>
+    </details>
+  </section>
+  <p>Play the developer. Every block is a parcel; its color shows how much higher rents would have to be for a new building there to pay for itself today. Click one to draw up a building. Click a pin to re-examine a project in the pipeline.</p>
   <div class="eyebrow">Map lens</div>
   <div class="seg" id="lens" role="group" aria-label="Map lens">
     <button data-lens="zoning" aria-pressed="true">Zoning</button>

@@ -388,3 +388,14 @@ export function recordVariant(p, s, data, { vli = null, addUnits = 0, fee_mode =
   }
   return { ...r, units, stories, bonus };
 }
+
+// (d) value / cost, beside the hurdle verdict. value = NOI / the exit cap rate (no developer's margin); cost = every
+//     cost but land + the land basis. >= 1: the finished building is worth at least what it cost; the hurdle verdict
+//     says whether it also clears the developer's spread (cap + 1.25%). Computed from fields the port returns.
+export function valueCost(acct, landBasis, cap) {
+  const value = acct.noi / cap, cost = acct.cost_ex_land + landBasis, ratio = value / cost;
+  const clears = acct.noi / cost >= acct.hurdle;
+  const worth = ratio < 1 ? "worth less than it cost" : ratio < 1.05 ? "worth about what it cost" : "worth more than it cost";
+  const reading = ratio < 1 ? worth : `${worth}, ${clears ? "clearing" : "short of"} a developer's margin`;
+  return { value, cost, ratio, clears, reading };
+}

@@ -17,7 +17,9 @@
 - **Yearly table now runs through today (John; `719ee405`):** site_numbers adds, for the unreported year only, the
   structures v4 holds complete without a finaled permit (Building Final / completion ruling): 2026 249 -> 490 (33
   buildings, 241 units; through 2026-10-22), built since 2018 4,368 -> 4,609; 2018-25 unchanged (= Housing Audit).
-  Still CPRA-cut: the pipeline animation's "485 finished in the 12 months to Jun 2026".
+  Pipeline animation extended the same way (`b537534a`): co_end = latest non-finaled completion (2026-10-22);
+  headline 485 to Jun 2026 -> **513 finished in the 12 months to Oct 2026**; headless check: no JS errors, the
+  "Can it pencil?" tab opens. All committed on dev; deploy (push main) + flyctl are John's.
 - **John:** deploy (push main, playbook E) and `cd datasette-deploy && flyctl deploy`. `scripts/tours/sync_status_from_v4.py`
   carries another session's uncommitted 10-21 edit (Status-line check), used in this run, left uncommitted.
   Tour packages / video renders not rebuilt (the tours step).

@@ -17,6 +17,9 @@ TWO SOURCES, deliberately (John, 2026-09-30):
   * NOT YET BUILT and the PROJECT COUNT come from the served Explorer data (docs/explorer_data.js, v4 since 2026-10-01), because only
     v2 has project stages until the cutover to v4.
 Both exclude UC Berkeley (its projects are counted in beds, not units).
+The year the City has not yet reported also counts buildings v4 holds complete without a finaled permit (an approved
+Building Final inspection, or a completion ruling), so it runs through the latest final, not the permit report's date
+(John, 2026-10-31). Reported years are unchanged.
 
 The BEGIN marker records the Explorer export's "Generated:" stamp; scripts/deploy_gate.py compares it with the
 served file, so a new export whose numbers were not regenerated cannot deploy. It also records the v4 sha, for
@@ -66,7 +69,19 @@ def figures(d):
     f['ours'] = {y: SM.co_total(v4, y, y) for y in years}
     f['built'] = sum(f['ours'].values())
     assert f['built'] == SM.co_all_positive(v4), 'per-year completions do not sum to the v4 total'
-    f['first_year'], f['latest'] = years[0], last[:10]
+    f['first_year'], f['latest'], f['report_through'] = years[0], last[:10], last[:10]
+    # THE YEAR THE CITY HAS NOT REPORTED runs through today (John, 2026-10-31): the permit report stops at its production
+    # date and leaves out some finals, so buildings v4 counts complete WITHOUT a finaled permit (an approved Building
+    # Final inspection, or a completion ruling) are added for that year ONLY. Every year the City has reported stays the
+    # Housing Audit's figure (co_total), and a building with a finaled permit is never added twice (completion_for
+    # takes the finaled permit first).
+    late = v4.execute(
+        "SELECT substr(s.completed_on,1,4), SUM(u.unit_count), MAX(s.completed_on) FROM structures s "
+        "JOIN units u ON u.structure_id = s.structure_id WHERE s.status = 'complete' "
+        "AND json_extract(s.notes, '$.completion_basis') <> 'master_finaled' AND NOT EXISTS (SELECT 1 FROM "
+        "project_structures ps JOIN v_projects v ON v.project_id = ps.project_id WHERE ps.structure_id = s.structure_id "
+        "AND v.rhna_excluded = 1) GROUP BY 1").fetchall()
+    late = {y: (int(n or 0), mx) for y, n, mx in late}
     # the City's own annual progress reports (verification target, shown beside ours, never used to compute ours)
     h = sqlite3.connect(f'file:{HCD}?mode=ro', uri=True)
     co = [c for (c,) in h.execute("SELECT name FROM pragma_table_info('table_a2') WHERE name LIKE 'CO\\_%' ESCAPE '\\' "
@@ -76,6 +91,21 @@ def figures(d):
     f['city'] = {y: int(city[y]) for y in years if city.get(y)}
     base = json.load(open(sorted(__import__('glob').glob(os.path.join(ROOT, 'data', 'baselines', 'reconciliation_baseline_*.json')))[-1]))
     assert sum(f['city'].values()) == base['hard_gated']['city_co_total']['value'], 'City total drifted from the Audit baseline'
+    return add_unreported_year(f, late)
+
+
+def add_unreported_year(f, late):
+    years = list(f['ours'])
+    cur = max(years[-1], max(late, default=years[-1]))
+    for y in range(int(years[-1]) + 1, int(cur) + 1):
+        f['ours'][str(y)] = 0
+    if cur in f['city'] or cur not in late:
+        return f
+    n, mx = late[cur]
+    f['ours'][cur] += n
+    f['built'] += n
+    f['added'] = n
+    f['latest'] = max(f['latest'], mx)
     return f
 
 
@@ -83,6 +113,9 @@ def render(stamp, f):
     yrs = list(f['ours'])
     last = datetime.date.fromisoformat(f['latest'])
     through = f"{last.strftime('%B')} {last.day}"
+    rt = datetime.date.fromisoformat(f['report_through'])
+    added_note = (f", including {f['added']:,} units the City&rsquo;s permit report (through {rt.strftime('%B')} {rt.day}) "
+                  f"does not yet show as finished") if f.get('added') else ""
     def chip(y):
         c = f['city'].get(y)
         city = f'<div style="font-size: .7rem; color: #4a5568;">City {c:,}</div>' if c is not None else \
@@ -101,7 +134,7 @@ def render(stamp, f):
     <div style="font-size: 1.15rem; font-weight: 700; margin-bottom: .2rem;">What Berkeley actually builds each year</div>
     <div style="color: #4a5568; font-size: 0.85rem; margin-bottom: .4rem;">Units Completed Each Year, our count from permits, and the City&rsquo;s Annual Progress Report to the state</div>
     <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: .35rem;">{''.join(chip(y) for y in yrs)}</div>
-    <div style="margin-top: .3rem; color: #718096; font-size: 0.75rem;">*{yrs[-1]} through {through}; the City&rsquo;s {yrs[-1]} report is not out yet. Why the two differ: <a href="housing-audit.html" style="color: #2b6cb0;">the Housing Audit</a>. Excludes UC Berkeley, counted in beds. &ldquo;Not yet built&rdquo; and the project count come from the Explorer&rsquo;s data, updated {html.escape(stamp[:10])}.</div>
+    <div style="margin-top: .3rem; color: #718096; font-size: 0.75rem;">*{yrs[-1]} through {through}{added_note}; the City&rsquo;s {yrs[-1]} report is not out yet. Why the two differ: <a href="housing-audit.html" style="color: #2b6cb0;">the Housing Audit</a>. Excludes UC Berkeley, counted in beds. &ldquo;Not yet built&rdquo; and the project count come from the Explorer&rsquo;s data, updated {html.escape(stamp[:10])}.</div>
   </div>
   <!-- END site_numbers -->'''
 

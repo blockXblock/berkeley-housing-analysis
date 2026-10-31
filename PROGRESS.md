@@ -14,8 +14,10 @@
   completed 27 -> 29 = 2538 Durant + 2587 Telegraph, building+stalled 8 -> 6), players, public mirror DB, game data
   (parity PASS), tour geometry: sync_status_from_v4 (90 placemarks) + restyle_by_status, docs/geometry.kml republished.
   deploy_gate.py: all checks passed. Home tab + game `f06bf741`.
-- **Not moved, by design:** the home page's "built since 2018" (4,368) and yearly table come from CPRA permit
-  finals ("2026 through June 26"); the inspection-based completions since then show in the Explorer, not that table.
+- **Yearly table now runs through today (John; `719ee405`):** site_numbers adds, for the unreported year only, the
+  structures v4 holds complete without a finaled permit (Building Final / completion ruling): 2026 249 -> 490 (33
+  buildings, 241 units; through 2026-10-22), built since 2018 4,368 -> 4,609; 2018-25 unchanged (= Housing Audit).
+  Still CPRA-cut: the pipeline animation's "485 finished in the 12 months to Jun 2026".
 - **John:** deploy (push main, playbook E) and `cd datasette-deploy && flyctl deploy`. `scripts/tours/sync_status_from_v4.py`
   carries another session's uncommitted 10-21 edit (Status-line check), used in this run, left uncommitted.
   Tour packages / video renders not rebuilt (the tours step).

@@ -1,7 +1,7 @@
 {
   "permit_number": "B2023-02332",
   "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB23&capID2=00000&capID3=00F15&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-05-22T18:11:56.007382",
+  "extraction_timestamp": "2026-10-20T13:31:51.864074",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -282,7 +282,7 @@
       "inspection_id": "940607",
       "date": "02/03/2025",
       "time": "03:43 PM",
-      "inspector": "Freddie Mares"
+      "inspector": "FM"
     },
     {
       "result": "Partially Approved",
@@ -3430,6 +3430,194 @@
       "date": "05/21/2026",
       "time": "09:14 AM",
       "inspector": "E"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1093502",
+      "date": "05/28/2026",
+      "time": "03:56 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1093503",
+      "date": "05/29/2026",
+      "time": "04:00 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1093542",
+      "date": "06/01/2026",
+      "time": "01:48 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1097143",
+      "date": "06/02/2026",
+      "time": "12:00 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1096666",
+      "date": "06/03/2026",
+      "time": "11:20 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1098381",
+      "date": "06/05/2026",
+      "time": "03:36 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1098106",
+      "date": "06/08/2026",
+      "time": "12:00 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1099667",
+      "date": "06/09/2026",
+      "time": "12:15 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1099668",
+      "date": "06/10/2026",
+      "time": "09:42 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1099669",
+      "date": "06/11/2026",
+      "time": "08:20 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1099670",
+      "date": "06/12/2026",
+      "time": "07:45 AM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1105702",
+      "date": "06/17/2026",
+      "time": "03:30 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1109144",
+      "date": "06/24/2026",
+      "time": "04:11 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1109145",
+      "date": "06/26/2026",
+      "time": "07:20 AM"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1109146",
+      "date": "06/26/2026",
+      "time": "02:14 PM"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1114381",
+      "date": "06/30/2026",
+      "time": "03:51 PM"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1114383",
+      "date": "07/01/2026",
+      "time": "03:14 PM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1114382",
+      "date": "07/01/2026",
+      "time": "04:12 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1117899",
+      "date": "07/07/2026",
+      "time": "01:48 PM",
+      "inspector": "E"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1117900",
+      "date": "07/09/2026",
+      "time": "07:12 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1120659",
+      "date": "07/09/2026",
+      "time": "12:00 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "1120660",
+      "date": "07/09/2026",
+      "time": "12:00 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "1120661",
+      "date": "07/09/2026",
+      "time": "12:00 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "1120664",
+      "date": "07/09/2026",
+      "time": "12:00 AM",
+      "inspector": "E"
     }
   ],
   "errors": [
@@ -3439,9 +3627,9 @@
     "final_pagination_state": "last_page",
     "page_title": "City of Berkeley",
     "requires_auth": false,
-    "total_pages": 86,
-    "unique_inspection_count": 429,
-    "page_content_length": 2893615,
-    "extraction_duration_seconds": 180.8
+    "total_pages": 91,
+    "unique_inspection_count": 453,
+    "page_content_length": 2975670,
+    "extraction_duration_seconds": 166.33
   }
 }

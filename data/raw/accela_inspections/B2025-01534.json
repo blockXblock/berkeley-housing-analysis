@@ -1,7 +1,7 @@
 {
   "permit_number": "B2025-01534",
   "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00EEX&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-23T05:46:35.090607",
+  "extraction_timestamp": "2026-10-20T17:00:17.712810",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -203,6 +203,22 @@
       "date": "06/15/2026",
       "time": "11:33 AM",
       "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "1173713",
+      "date": "10/14/2026",
+      "time": "09:57 AM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "1173714",
+      "date": "10/14/2026",
+      "time": "09:58 AM",
+      "inspector": "Yvette Madrid"
     }
   ],
   "errors": [
@@ -212,9 +228,9 @@
     "final_pagination_state": "last_page",
     "page_title": "City of Berkeley",
     "requires_auth": false,
-    "total_pages": 5,
-    "unique_inspection_count": 25,
-    "page_content_length": 590012,
-    "extraction_duration_seconds": 35.52
+    "total_pages": 6,
+    "unique_inspection_count": 27,
+    "page_content_length": 594201,
+    "extraction_duration_seconds": 35.03
   }
 }

@@ -1,7 +1,7 @@
 {
   "permit_number": "B2025-03285",
   "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00KZZ&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-23T06:02:36.259267",
+  "extraction_timestamp": "2026-10-20T17:22:24.445354",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -163,6 +163,54 @@
       "date": "04/08/2026",
       "time": "12:39 PM",
       "inspector": "SR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "1160031",
+      "date": "09/30/2026",
+      "time": "09:57 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "1171701",
+      "date": "10/14/2026",
+      "time": "03:28 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1175919",
+      "date": "10/19/2026",
+      "time": "09:50 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "1175922",
+      "date": "10/19/2026",
+      "time": "09:59 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "1175921",
+      "date": "10/19/2026",
+      "time": "09:59 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "1175920",
+      "date": "10/19/2026",
+      "time": "09:59 AM",
+      "inspector": "E"
     }
   ],
   "errors": [
@@ -172,9 +220,9 @@
     "final_pagination_state": "last_page",
     "page_title": "City of Berkeley",
     "requires_auth": false,
-    "total_pages": 4,
-    "unique_inspection_count": 20,
-    "page_content_length": 614584,
-    "extraction_duration_seconds": 34.8
+    "total_pages": 6,
+    "unique_inspection_count": 26,
+    "page_content_length": 599555,
+    "extraction_duration_seconds": 36.91
   }
 }

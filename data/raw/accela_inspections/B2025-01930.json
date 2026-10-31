@@ -1,7 +1,7 @@
 {
   "permit_number": "B2025-01930",
-  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00FUV&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-23T05:51:40.772843",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/./CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00FUV&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-10-20T17:07:39.216998",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -107,6 +107,22 @@
       "date": "08/12/2026",
       "time": "10:19 AM",
       "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1162300",
+      "date": "09/24/2026",
+      "time": "02:31 PM",
+      "inspector": "J"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1162301",
+      "date": "09/24/2026",
+      "time": "02:31 PM",
+      "inspector": "J"
     }
   ],
   "errors": [
@@ -117,8 +133,8 @@
     "page_title": "City of Berkeley",
     "requires_auth": false,
     "total_pages": 3,
-    "unique_inspection_count": 13,
-    "page_content_length": 584151,
-    "extraction_duration_seconds": 33.99
+    "unique_inspection_count": 15,
+    "page_content_length": 585642,
+    "extraction_duration_seconds": 35.91
   }
 }

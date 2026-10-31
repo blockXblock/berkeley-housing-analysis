@@ -1,9 +1,18 @@
 {
   "permit_number": "B2025-02231",
-  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00H7T&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-23T05:53:34.221463",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/./CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00H7T&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-10-20T17:10:05.548485",
   "extraction_method": "playwright_v2",
-  "inspections": [],
+  "inspections": [
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1164106",
+      "date": "09/30/2026",
+      "time": "03:29 PM",
+      "inspector": "FR"
+    }
+  ],
   "errors": [
     "Timeout waiting for inspection table"
   ],
@@ -12,8 +21,8 @@
     "page_title": "City of Berkeley",
     "requires_auth": false,
     "total_pages": 1,
-    "unique_inspection_count": 0,
-    "page_content_length": 404223,
-    "extraction_duration_seconds": 33.2
+    "unique_inspection_count": 1,
+    "page_content_length": 440712,
+    "extraction_duration_seconds": 34.74
   }
 }

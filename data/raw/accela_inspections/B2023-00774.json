@@ -1,7 +1,7 @@
 {
   "permit_number": "B2023-00774",
-  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB23&capID2=00000&capID3=006TG&agencyCode=BERKELEY&IsToShowInspection=Y",
-  "extraction_timestamp": "2026-06-14T21:16:40.101536",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB23&capID2=00000&capID3=006TG&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-10-20T13:35:20.385222",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -1506,7 +1506,7 @@
       "inspection_id": "960710",
       "date": "07/14/2025",
       "time": "09:29 AM",
-      "inspector": "Freddie Mares"
+      "inspector": "FM"
     },
     {
       "result": "Partially Approved",
@@ -1770,7 +1770,7 @@
       "inspection_id": "963730",
       "date": "07/28/2025",
       "time": "09:38 AM",
-      "inspector": "Freddie Mares"
+      "inspector": "FM"
     },
     {
       "result": "Partially Approved",
@@ -3584,7 +3584,7 @@
       "inspection_id": "990739",
       "date": "12/01/2025",
       "time": "09:14 AM",
-      "inspector": "Freddie Mares"
+      "inspector": "FM"
     },
     {
       "result": "Partially Approved",
@@ -4620,14 +4620,6 @@
     },
     {
       "result": "Approved",
-      "type_code": "Building 1200 Building Final",
-      "inspection_id": "1091141",
-      "date": "05/26/2026",
-      "time": "10:59 AM",
-      "inspector": "SR"
-    },
-    {
-      "result": "Approved",
       "type_code": "Plumbing 4100 Plumbing Final Inspection",
       "inspection_id": "1093700",
       "date": "05/26/2026",
@@ -4641,6 +4633,14 @@
       "date": "05/26/2026",
       "time": "10:59 AM",
       "inspector": "SR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1091141",
+      "date": "05/26/2026",
+      "time": "10:59 AM",
+      "inspector": "Jeff Jensen"
     }
   ],
   "errors": [
@@ -4652,7 +4652,7 @@
     "requires_auth": false,
     "total_pages": 116,
     "unique_inspection_count": 580,
-    "page_content_length": 3550690,
-    "extraction_duration_seconds": 255.29
+    "page_content_length": 3528639,
+    "extraction_duration_seconds": 246.24
   }
 }

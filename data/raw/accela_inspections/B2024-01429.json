@@ -1,7 +1,7 @@
 {
   "permit_number": "B2024-01429",
   "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB24&capID2=00000&capID3=00CRW&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-22T19:48:48.163363",
+  "extraction_timestamp": "2026-10-20T14:17:18.323278",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -43,6 +43,46 @@
       "date": "08/18/2026",
       "time": "02:55 PM",
       "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1130 Roof Sheathing Nailing",
+      "inspection_id": "1170827",
+      "date": "10/06/2026",
+      "time": "11:35 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1170504",
+      "date": "10/06/2026",
+      "time": "11:36 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1100 Exterior Shear Wall",
+      "inspection_id": "1170505",
+      "date": "10/06/2026",
+      "time": "11:37 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1110 Exterior Sheating",
+      "inspection_id": "1170542",
+      "date": "10/06/2026",
+      "time": "11:37 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1170026",
+      "date": "10/06/2026",
+      "time": "11:37 AM",
+      "inspector": "Anthony Vergara"
     }
   ],
   "errors": [
@@ -52,9 +92,9 @@
     "final_pagination_state": "last_page",
     "page_title": "City of Berkeley",
     "requires_auth": false,
-    "total_pages": 1,
-    "unique_inspection_count": 5,
-    "page_content_length": 636282,
-    "extraction_duration_seconds": 35.13
+    "total_pages": 2,
+    "unique_inspection_count": 10,
+    "page_content_length": 668997,
+    "extraction_duration_seconds": 35.81
   }
 }

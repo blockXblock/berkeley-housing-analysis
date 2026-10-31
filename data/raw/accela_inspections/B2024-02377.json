@@ -1,7 +1,7 @@
 {
   "permit_number": "B2024-02377",
   "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB24&capID2=00000&capID3=00GCZ&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-22T19:50:14.083523",
+  "extraction_timestamp": "2026-10-20T14:19:06.962364",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -131,6 +131,38 @@
       "date": "09/09/2026",
       "time": "01:21 PM",
       "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "1170028",
+      "date": "10/06/2026",
+      "time": "08:47 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1175908",
+      "date": "10/19/2026",
+      "time": "04:03 PM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "1178460",
+      "date": "10/19/2026",
+      "time": "04:09 PM",
+      "inspector": "Leo Bautista"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1175909",
+      "date": "10/19/2026",
+      "time": "04:10 PM",
+      "inspector": "FM"
     }
   ],
   "errors": [
@@ -141,8 +173,8 @@
     "page_title": "City of Berkeley",
     "requires_auth": false,
     "total_pages": 4,
-    "unique_inspection_count": 16,
-    "page_content_length": 575297,
-    "extraction_duration_seconds": 35.71
+    "unique_inspection_count": 20,
+    "page_content_length": 614168,
+    "extraction_duration_seconds": 35.12
   }
 }

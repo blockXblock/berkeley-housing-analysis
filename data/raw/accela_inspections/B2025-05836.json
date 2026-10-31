@@ -1,0 +1,268 @@
+{
+  "permit_number": "B2025-05836",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00SAX&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-10-20T17:41:27.765944",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1088020",
+      "date": "05/15/2026",
+      "time": "12:20 PM",
+      "inspector": "Trishala Vinnakota"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1088021",
+      "date": "05/15/2026",
+      "time": "12:22 PM",
+      "inspector": "Trishala Vinnakota"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1088023",
+      "date": "05/15/2026",
+      "time": "12:22 PM",
+      "inspector": "Trishala Vinnakota"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1088024",
+      "date": "05/15/2026",
+      "time": "12:23 PM",
+      "inspector": "Trishala Vinnakota"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1088025",
+      "date": "05/15/2026",
+      "time": "12:25 PM",
+      "inspector": "Trishala Vinnakota"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1088026",
+      "date": "05/15/2026",
+      "time": "12:27 PM",
+      "inspector": "Trishala Vinnakota"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1087981",
+      "date": "05/15/2026",
+      "time": "12:28 PM",
+      "inspector": "Trishala Vinnakota"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1087982",
+      "date": "05/15/2026",
+      "time": "12:29 PM",
+      "inspector": "Trishala Vinnakota"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1087864",
+      "date": "06/01/2026",
+      "time": "07:29 PM",
+      "inspector": "Trishala Vinnakota"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1096545",
+      "date": "06/01/2026",
+      "time": "09:22 PM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1096982",
+      "date": "06/05/2026",
+      "time": "02:52 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1096983",
+      "date": "06/08/2026",
+      "time": "06:59 AM",
+      "inspector": "Trishala Vinnakota"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1100459",
+      "date": "06/12/2026",
+      "time": "07:30 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1103904",
+      "date": "06/12/2026",
+      "time": "12:00 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1104229",
+      "date": "06/12/2026",
+      "time": "12:00 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "1105419",
+      "date": "06/18/2026",
+      "time": "07:56 AM",
+      "inspector": "Trishala Vinnakota"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1109859",
+      "date": "06/19/2026",
+      "time": "12:00 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "1107659",
+      "date": "06/30/2026",
+      "time": "03:38 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1126630",
+      "date": "07/24/2026",
+      "time": "02:43 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1131747",
+      "date": "07/30/2026",
+      "time": "09:39 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1136784",
+      "date": "08/11/2026",
+      "time": "01:22 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1156427",
+      "date": "09/10/2026",
+      "time": "01:37 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "1156666",
+      "date": "09/10/2026",
+      "time": "01:37 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1156702",
+      "date": "09/10/2026",
+      "time": "01:37 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1156582",
+      "date": "09/10/2026",
+      "time": "02:59 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1156785",
+      "date": "09/10/2026",
+      "time": "02:59 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1159827",
+      "date": "09/18/2026",
+      "time": "08:18 AM",
+      "inspector": "Steve Rixford"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1160179",
+      "date": "09/23/2026",
+      "time": "03:10 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "1164022",
+      "date": "09/28/2026",
+      "time": "10:37 AM",
+      "inspector": "Trishala Vinnakota"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "1166024",
+      "date": "09/30/2026",
+      "time": "04:03 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "1167779",
+      "date": "09/30/2026",
+      "time": "04:03 PM",
+      "inspector": "SR"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 7,
+    "unique_inspection_count": 31,
+    "page_content_length": 544422,
+    "extraction_duration_seconds": 37.0
+  }
+}

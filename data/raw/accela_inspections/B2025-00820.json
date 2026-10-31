@@ -1,7 +1,7 @@
 {
   "permit_number": "B2025-00820",
   "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=009IJ&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-23T05:37:03.257754",
+  "extraction_timestamp": "2026-10-20T16:48:25.022197",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -275,6 +275,22 @@
       "date": "09/10/2026",
       "time": "12:00 AM",
       "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1065 Concrete Masonry Unit",
+      "inspection_id": "1164349",
+      "date": "09/28/2026",
+      "time": "03:58 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2020 Underground / Under Floor",
+      "inspection_id": "1171318",
+      "date": "10/08/2026",
+      "time": "01:58 PM",
+      "inspector": "FR"
     }
   ],
   "errors": [
@@ -284,9 +300,9 @@
     "final_pagination_state": "last_page",
     "page_title": "City of Berkeley",
     "requires_auth": false,
-    "total_pages": 7,
-    "unique_inspection_count": 34,
-    "page_content_length": 671899,
-    "extraction_duration_seconds": 37.01
+    "total_pages": 8,
+    "unique_inspection_count": 36,
+    "page_content_length": 674761,
+    "extraction_duration_seconds": 37.32
   }
 }

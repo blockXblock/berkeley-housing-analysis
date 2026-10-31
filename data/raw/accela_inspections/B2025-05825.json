@@ -1,0 +1,44 @@
+{
+  "permit_number": "B2025-05825",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00S90&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-10-20T17:40:32.509301",
+  "extraction_method": "playwright_v2",
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1127379",
+      "date": "07/22/2026",
+      "time": "08:52 AM",
+      "inspector": "SF"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "1127380",
+      "date": "07/22/2026",
+      "time": "08:55 AM",
+      "inspector": "SF"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "1127381",
+      "date": "07/22/2026",
+      "time": "08:55 AM",
+      "inspector": "SF"
+    }
+  ],
+  "errors": [
+    "Timeout waiting for inspection table"
+  ],
+  "metadata": {
+    "final_pagination_state": "last_page",
+    "page_title": "City of Berkeley",
+    "requires_auth": false,
+    "total_pages": 1,
+    "unique_inspection_count": 3,
+    "page_content_length": 410640,
+    "extraction_duration_seconds": 32.2
+  }
+}

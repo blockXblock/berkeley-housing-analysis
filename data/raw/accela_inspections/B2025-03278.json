@@ -1,7 +1,7 @@
 {
   "permit_number": "B2025-03278",
   "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00KZC&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-23T06:01:51.427614",
+  "extraction_timestamp": "2026-10-20T17:21:25.006891",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -291,6 +291,22 @@
       "date": "09/18/2026",
       "time": "02:50 PM",
       "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "1169028",
+      "date": "10/06/2026",
+      "time": "10:55 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1169027",
+      "date": "10/06/2026",
+      "time": "10:55 AM",
+      "inspector": "J"
     }
   ],
   "errors": [
@@ -301,8 +317,8 @@
     "page_title": "City of Berkeley",
     "requires_auth": false,
     "total_pages": 8,
-    "unique_inspection_count": 36,
-    "page_content_length": 605241,
-    "extraction_duration_seconds": 39.24
+    "unique_inspection_count": 38,
+    "page_content_length": 624922,
+    "extraction_duration_seconds": 37.39
   }
 }

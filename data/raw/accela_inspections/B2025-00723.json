@@ -1,7 +1,7 @@
 {
   "permit_number": "B2025-00723",
   "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=008BG&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-23T05:36:25.363245",
+  "extraction_timestamp": "2026-10-20T16:46:30.713225",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -27,6 +27,22 @@
       "date": "08/26/2026",
       "time": "07:16 AM",
       "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1163434",
+      "date": "09/25/2026",
+      "time": "07:02 AM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1015 Piers prior to pour",
+      "inspection_id": "1163626",
+      "date": "09/25/2026",
+      "time": "07:03 AM",
+      "inspector": "FR"
     }
   ],
   "errors": [
@@ -37,8 +53,8 @@
     "page_title": "City of Berkeley",
     "requires_auth": false,
     "total_pages": 1,
-    "unique_inspection_count": 3,
-    "page_content_length": 493116,
-    "extraction_duration_seconds": 33.91
+    "unique_inspection_count": 5,
+    "page_content_length": 509658,
+    "extraction_duration_seconds": 32.51
   }
 }

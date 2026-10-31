@@ -1,7 +1,7 @@
 {
   "permit_number": "B2025-00168",
   "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=0021P&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-22T20:01:24.509582",
+  "extraction_timestamp": "2026-10-20T14:01:08.700402",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -891,6 +891,94 @@
       "date": "09/21/2026",
       "time": "02:14 PM",
       "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1163379",
+      "date": "09/23/2026",
+      "time": "12:00 AM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "1163940",
+      "date": "09/23/2026",
+      "time": "12:00 AM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1163939",
+      "date": "09/23/2026",
+      "time": "12:00 AM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1166023",
+      "date": "09/30/2026",
+      "time": "03:57 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "1165179",
+      "date": "10/01/2026",
+      "time": "11:29 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1171225",
+      "date": "10/08/2026",
+      "time": "01:58 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1172579",
+      "date": "10/08/2026",
+      "time": "08:49 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Mechanical 3020 Mechanical Rough",
+      "inspection_id": "1172581",
+      "date": "10/08/2026",
+      "time": "08:51 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1172580",
+      "date": "10/08/2026",
+      "time": "08:52 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1173259",
+      "date": "10/14/2026",
+      "time": "07:44 AM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1220 Site Drainage",
+      "inspection_id": "1174142",
+      "date": "10/15/2026",
+      "time": "02:19 PM",
+      "inspector": "FR"
     }
   ],
   "errors": [
@@ -900,9 +988,9 @@
     "final_pagination_state": "last_page",
     "page_title": "City of Berkeley",
     "requires_auth": false,
-    "total_pages": 23,
-    "unique_inspection_count": 111,
-    "page_content_length": 1076139,
-    "extraction_duration_seconds": 57.32
+    "total_pages": 25,
+    "unique_inspection_count": 122,
+    "page_content_length": 1147558,
+    "extraction_duration_seconds": 58.31
   }
 }

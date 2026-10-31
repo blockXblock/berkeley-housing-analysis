@@ -1,7 +1,7 @@
 {
   "permit_number": "B2025-03433",
   "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00LFM&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-23T06:03:17.139278",
+  "extraction_timestamp": "2026-10-20T17:24:04.093824",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -147,6 +147,22 @@
       "date": "09/02/2026",
       "time": "11:47 AM",
       "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "1174355",
+      "date": "10/15/2026",
+      "time": "02:14 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "1174356",
+      "date": "10/15/2026",
+      "time": "02:16 PM",
+      "inspector": "FR"
     }
   ],
   "errors": [
@@ -157,8 +173,8 @@
     "page_title": "City of Berkeley",
     "requires_auth": false,
     "total_pages": 4,
-    "unique_inspection_count": 18,
-    "page_content_length": 584620,
-    "extraction_duration_seconds": 33.52
+    "unique_inspection_count": 20,
+    "page_content_length": 602938,
+    "extraction_duration_seconds": 35.31
   }
 }

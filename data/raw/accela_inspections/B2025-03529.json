@@ -1,7 +1,7 @@
 {
   "permit_number": "B2025-03529",
   "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00LRJ&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-22T20:04:32.378226",
+  "extraction_timestamp": "2026-10-20T13:53:15.863317",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -99,6 +99,70 @@
       "date": "09/21/2026",
       "time": "09:19 AM",
       "inspector": "Allen  Fregoso"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "1166299",
+      "date": "09/25/2026",
+      "time": "06:36 AM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1163901",
+      "date": "09/29/2026",
+      "time": "12:00 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "1164109",
+      "date": "09/29/2026",
+      "time": "12:00 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1168064",
+      "date": "10/05/2026",
+      "time": "07:16 AM",
+      "inspector": "FM"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "1172039",
+      "date": "10/13/2026",
+      "time": "08:13 AM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "1175899",
+      "date": "10/15/2026",
+      "time": "03:38 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1050 Shotcrete",
+      "inspection_id": "1174859",
+      "date": "10/16/2026",
+      "time": "03:48 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1175980",
+      "date": "10/19/2026",
+      "time": "11:11 AM",
+      "inspector": "E"
     }
   ],
   "errors": [
@@ -108,9 +172,9 @@
     "final_pagination_state": "last_page",
     "page_title": "City of Berkeley",
     "requires_auth": false,
-    "total_pages": 3,
-    "unique_inspection_count": 12,
-    "page_content_length": 584452,
-    "extraction_duration_seconds": 36.09
+    "total_pages": 4,
+    "unique_inspection_count": 20,
+    "page_content_length": 734432,
+    "extraction_duration_seconds": 45.84
   }
 }

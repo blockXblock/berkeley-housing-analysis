@@ -1,7 +1,7 @@
 {
   "permit_number": "B2025-03497",
   "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00LNU&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-23T06:04:41.963819",
+  "extraction_timestamp": "2026-10-20T17:25:46.326089",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -139,6 +139,46 @@
       "date": "07/07/2026",
       "time": "09:38 AM",
       "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "1164100",
+      "date": "09/24/2026",
+      "time": "10:57 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "1164023",
+      "date": "09/24/2026",
+      "time": "10:57 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "1164185",
+      "date": "09/24/2026",
+      "time": "10:57 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1162740",
+      "date": "09/24/2026",
+      "time": "11:04 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1170899",
+      "date": "10/06/2026",
+      "time": "08:35 AM",
+      "inspector": "SR"
     }
   ],
   "errors": [
@@ -148,9 +188,9 @@
     "final_pagination_state": "last_page",
     "page_title": "City of Berkeley",
     "requires_auth": false,
-    "total_pages": 4,
-    "unique_inspection_count": 17,
-    "page_content_length": 561544,
-    "extraction_duration_seconds": 34.35
+    "total_pages": 5,
+    "unique_inspection_count": 22,
+    "page_content_length": 548950,
+    "extraction_duration_seconds": 34.75
   }
 }

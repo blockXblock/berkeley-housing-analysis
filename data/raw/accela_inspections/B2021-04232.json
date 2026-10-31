@@ -1,7 +1,7 @@
 {
   "permit_number": "B2021-04232",
   "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB21&capID2=00000&capID3=00J22&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-22T19:05:15.533451",
+  "extraction_timestamp": "2026-10-20T13:44:32.422595",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -2491,6 +2491,158 @@
       "date": "09/22/2026",
       "time": "02:49 PM",
       "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1160142",
+      "date": "09/23/2026",
+      "time": "01:59 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1160143",
+      "date": "09/24/2026",
+      "time": "02:50 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1160144",
+      "date": "09/25/2026",
+      "time": "02:29 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1165019",
+      "date": "09/29/2026",
+      "time": "11:31 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1166541",
+      "date": "09/29/2026",
+      "time": "12:00 AM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1165021",
+      "date": "09/30/2026",
+      "time": "03:30 PM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1165022",
+      "date": "10/01/2026",
+      "time": "11:33 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1170 Insulation",
+      "inspection_id": "1169262",
+      "date": "10/02/2026",
+      "time": "02:38 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1165023",
+      "date": "10/02/2026",
+      "time": "02:39 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1168899",
+      "date": "10/05/2026",
+      "time": "03:06 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1168900",
+      "date": "10/06/2026",
+      "time": "01:54 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1168820",
+      "date": "10/07/2026",
+      "time": "02:13 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "1172461",
+      "date": "10/08/2026",
+      "time": "03:38 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1168869",
+      "date": "10/08/2026",
+      "time": "03:53 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1168871",
+      "date": "10/09/2026",
+      "time": "03:12 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1172305",
+      "date": "10/13/2026",
+      "time": "02:52 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1172306",
+      "date": "10/14/2026",
+      "time": "02:27 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1172540",
+      "date": "10/15/2026",
+      "time": "09:53 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1172307",
+      "date": "10/16/2026",
+      "time": "03:20 PM",
+      "inspector": "Anthony Vergara"
     }
   ],
   "errors": [
@@ -2500,9 +2652,9 @@
     "final_pagination_state": "last_page",
     "page_title": "City of Berkeley",
     "requires_auth": false,
-    "total_pages": 63,
-    "unique_inspection_count": 311,
-    "page_content_length": 2149083,
-    "extraction_duration_seconds": 108.71
+    "total_pages": 66,
+    "unique_inspection_count": 330,
+    "page_content_length": 2277351,
+    "extraction_duration_seconds": 124.35
   }
 }

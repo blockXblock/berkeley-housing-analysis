@@ -1,7 +1,7 @@
 {
   "permit_number": "B2025-00819",
   "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=009IA&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-23T08:15:32.006202",
+  "extraction_timestamp": "2026-10-20T16:47:24.788820",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -251,6 +251,14 @@
       "date": "09/10/2026",
       "time": "02:59 PM",
       "inspector": "FM"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1164301",
+      "date": "09/28/2026",
+      "time": "09:23 AM",
+      "inspector": "E"
     }
   ],
   "errors": [
@@ -261,8 +269,8 @@
     "page_title": "City of Berkeley",
     "requires_auth": false,
     "total_pages": 7,
-    "unique_inspection_count": 31,
-    "page_content_length": 649959,
-    "extraction_duration_seconds": 36.17
+    "unique_inspection_count": 32,
+    "page_content_length": 658733,
+    "extraction_duration_seconds": 38.64
   }
 }

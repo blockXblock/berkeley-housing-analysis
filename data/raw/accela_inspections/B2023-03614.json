@@ -1,7 +1,7 @@
 {
   "permit_number": "B2023-03614",
   "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB23&capID2=00000&capID3=00IPI&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-23T04:13:52.853877",
+  "extraction_timestamp": "2026-10-20T15:58:01.987764",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -348,6 +348,14 @@
       "inspection_id": "1158305",
       "date": "09/15/2026",
       "time": "01:39 PM"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "1167861",
+      "date": "10/14/2026",
+      "time": "03:26 PM",
+      "inspector": "Yvette Madrid"
     }
   ],
   "errors": [
@@ -357,9 +365,9 @@
     "final_pagination_state": "last_page",
     "page_title": "City of Berkeley",
     "requires_auth": false,
-    "total_pages": 9,
-    "unique_inspection_count": 45,
-    "page_content_length": 734811,
-    "extraction_duration_seconds": 39.13
+    "total_pages": 10,
+    "unique_inspection_count": 46,
+    "page_content_length": 746199,
+    "extraction_duration_seconds": 41.58
   }
 }

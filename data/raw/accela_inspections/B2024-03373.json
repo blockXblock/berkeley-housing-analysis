@@ -1,7 +1,7 @@
 {
   "permit_number": "B2024-03373",
   "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB24&capID2=00000&capID3=00JM0&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-23T05:06:00.647115",
+  "extraction_timestamp": "2026-10-20T16:23:16.165192",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -243,6 +243,46 @@
       "date": "07/10/2026",
       "time": "03:28 PM",
       "inspector": "SR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "1163558",
+      "date": "09/25/2026",
+      "time": "02:37 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1168949",
+      "date": "10/02/2026",
+      "time": "02:11 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1190 Wet Wall Tile Backing",
+      "inspection_id": "1167739",
+      "date": "10/02/2026",
+      "time": "02:11 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4030 Shower Pan Test",
+      "inspection_id": "1168948",
+      "date": "10/02/2026",
+      "time": "02:11 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "1172139",
+      "date": "10/13/2026",
+      "time": "07:33 AM",
+      "inspector": "FR"
     }
   ],
   "errors": [
@@ -252,9 +292,9 @@
     "final_pagination_state": "last_page",
     "page_title": "City of Berkeley",
     "requires_auth": false,
-    "total_pages": 6,
-    "unique_inspection_count": 30,
-    "page_content_length": 600521,
-    "extraction_duration_seconds": 36.28
+    "total_pages": 7,
+    "unique_inspection_count": 35,
+    "page_content_length": 632047,
+    "extraction_duration_seconds": 37.54
   }
 }

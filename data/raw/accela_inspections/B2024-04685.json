@@ -1,7 +1,7 @@
 {
   "permit_number": "B2024-04685",
   "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB24&capID2=00000&capID3=00ON4&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-23T05:17:12.860271",
+  "extraction_timestamp": "2026-10-31T11:44:45.917441",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -195,6 +195,54 @@
       "date": "06/26/2026",
       "time": "11:43 PM",
       "inspector": "FR"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1162099",
+      "date": "09/23/2026",
+      "time": "10:17 AM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1175273",
+      "date": "10/19/2026",
+      "time": "08:10 AM",
+      "inspector": "Arles Garcia"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "1179502",
+      "date": "10/21/2026",
+      "time": "02:41 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "1179664",
+      "date": "10/21/2026",
+      "time": "02:41 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "1179701",
+      "date": "10/21/2026",
+      "time": "02:42 PM",
+      "inspector": "Anthony Vergara"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1177820",
+      "date": "10/21/2026",
+      "time": "02:42 PM",
+      "inspector": "Anthony Vergara"
     }
   ],
   "errors": [
@@ -204,9 +252,9 @@
     "final_pagination_state": "last_page",
     "page_title": "City of Berkeley",
     "requires_auth": false,
-    "total_pages": 5,
-    "unique_inspection_count": 24,
-    "page_content_length": 591246,
-    "extraction_duration_seconds": 35.41
+    "total_pages": 6,
+    "unique_inspection_count": 30,
+    "page_content_length": 590563,
+    "extraction_duration_seconds": 93.45
   }
 }

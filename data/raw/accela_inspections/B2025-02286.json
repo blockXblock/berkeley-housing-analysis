@@ -1,7 +1,7 @@
 {
   "permit_number": "B2025-02286",
-  "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00HEX&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-23T05:54:47.722346",
+  "url": "https://aca-prod.accela.com/BERKELEY/Cap/./CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00HEX&agencyCode=BERKELEY&IsToShowInspection=",
+  "extraction_timestamp": "2026-10-20T17:12:42.413729",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -323,6 +323,30 @@
       "date": "08/27/2026",
       "time": "07:26 AM",
       "inspector": "J"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "1165825",
+      "date": "10/01/2026",
+      "time": "09:47 AM",
+      "inspector": "J"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "1168101",
+      "date": "10/02/2026",
+      "time": "07:16 AM",
+      "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4050 Gas Test",
+      "inspection_id": "1170382",
+      "date": "10/07/2026",
+      "time": "02:21 PM",
+      "inspector": "FR"
     }
   ],
   "errors": [
@@ -332,9 +356,9 @@
     "final_pagination_state": "last_page",
     "page_title": "City of Berkeley",
     "requires_auth": false,
-    "total_pages": 8,
-    "unique_inspection_count": 40,
-    "page_content_length": 635679,
-    "extraction_duration_seconds": 36.92
+    "total_pages": 9,
+    "unique_inspection_count": 43,
+    "page_content_length": 646285,
+    "extraction_duration_seconds": 39.83
   }
 }

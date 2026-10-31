@@ -1,7 +1,7 @@
 {
   "permit_number": "B2023-04951",
   "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB23&capID2=00000&capID3=00MCV&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-22T19:36:57.492128",
+  "extraction_timestamp": "2026-10-20T14:09:59.136348",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -107,6 +107,54 @@
       "date": "08/31/2026",
       "time": "12:32 PM",
       "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "1166462",
+      "date": "10/01/2026",
+      "time": "11:47 AM",
+      "inspector": "Lutfi Maaz"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "1166463",
+      "date": "10/01/2026",
+      "time": "02:42 PM",
+      "inspector": "Lutfi Maaz"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "1168263",
+      "date": "10/06/2026",
+      "time": "05:43 PM",
+      "inspector": "Lutfi Maaz"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1040 Slab/Concrete floor",
+      "inspection_id": "1168432",
+      "date": "10/07/2026",
+      "time": "01:20 PM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1170703",
+      "date": "10/09/2026",
+      "time": "11:58 AM",
+      "inspector": "Lutfi Maaz"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1172981",
+      "date": "10/13/2026",
+      "time": "03:17 PM",
+      "inspector": "Lutfi Maaz"
     }
   ],
   "errors": [
@@ -114,11 +162,11 @@
   ],
   "metadata": {
     "final_pagination_state": "last_page",
-    "page_title": "Accela Citizen Access",
+    "page_title": "City of Berkeley",
     "requires_auth": false,
-    "total_pages": 3,
-    "unique_inspection_count": 13,
-    "page_content_length": 663610,
-    "extraction_duration_seconds": 35.43
+    "total_pages": 4,
+    "unique_inspection_count": 19,
+    "page_content_length": 764099,
+    "extraction_duration_seconds": 36.44
   }
 }

@@ -1,7 +1,7 @@
 {
   "permit_number": "B2020-03077",
   "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB20&capID2=00000&capID3=00FOM&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-22T18:34:54.941097",
+  "extraction_timestamp": "2026-10-20T14:07:01.905624",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -259,6 +259,14 @@
       "date": "08/20/2026",
       "time": "11:24 AM",
       "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1090 Interior Shear Wall",
+      "inspection_id": "1175260",
+      "date": "10/15/2026",
+      "time": "10:30 AM",
+      "inspector": "Eric Cabana"
     }
   ],
   "errors": [
@@ -269,8 +277,8 @@
     "page_title": "City of Berkeley",
     "requires_auth": false,
     "total_pages": 7,
-    "unique_inspection_count": 32,
-    "page_content_length": 683480,
-    "extraction_duration_seconds": 38.8
+    "unique_inspection_count": 33,
+    "page_content_length": 692132,
+    "extraction_duration_seconds": 38.36
   }
 }

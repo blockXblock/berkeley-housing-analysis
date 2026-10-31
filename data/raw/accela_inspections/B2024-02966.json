@@ -1,7 +1,7 @@
 {
   "permit_number": "B2024-02966",
   "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB24&capID2=00000&capID3=00IB6&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-05-22T18:46:20.857804",
+  "extraction_timestamp": "2026-10-20T13:29:15.825061",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -10,7 +10,7 @@
       "inspection_id": "965283",
       "date": "08/11/2025",
       "time": "03:24 PM",
-      "inspector": "Freddie Mares"
+      "inspector": "FM"
     },
     {
       "result": "Approved",
@@ -106,7 +106,7 @@
       "inspection_id": "970415",
       "date": "09/30/2025",
       "time": "03:56 PM",
-      "inspector": "Freddie Mares"
+      "inspector": "FM"
     },
     {
       "result": "Cancelled",
@@ -122,7 +122,7 @@
       "inspection_id": "971543",
       "date": "10/06/2025",
       "time": "08:40 AM",
-      "inspector": "Freddie Mares"
+      "inspector": "FM"
     },
     {
       "result": "Site Cancellation",
@@ -2283,6 +2283,262 @@
       "date": "05/13/2026",
       "time": "01:36 PM",
       "inspector": "A  A"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1160 Exterior Lath",
+      "inspection_id": "1090467",
+      "date": "05/26/2026",
+      "time": "01:16 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1093514",
+      "date": "05/26/2026",
+      "time": "01:19 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1093741",
+      "date": "05/26/2026",
+      "time": "01:24 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1090468",
+      "date": "05/27/2026",
+      "time": "01:31 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1090470",
+      "date": "05/28/2026",
+      "time": "06:11 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Cancelled",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1090469",
+      "date": "05/28/2026",
+      "time": "10:44 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1101899",
+      "date": "06/15/2026",
+      "time": "12:41 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1150 Framing",
+      "inspection_id": "1104784",
+      "date": "06/15/2026",
+      "time": "12:42 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Disapproved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1104744",
+      "date": "06/16/2026",
+      "time": "02:57 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "1107101",
+      "date": "06/17/2026",
+      "time": "02:03 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1104745",
+      "date": "06/17/2026",
+      "time": "02:03 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1115059",
+      "date": "07/01/2026",
+      "time": "02:38 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1195 T-Bar Suspended Ceiling",
+      "inspection_id": "1115982",
+      "date": "07/01/2026",
+      "time": "02:39 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1124779",
+      "date": "07/20/2026",
+      "time": "01:49 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1126632",
+      "date": "07/20/2026",
+      "time": "01:54 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1195 T-Bar Suspended Ceiling",
+      "inspection_id": "1127023",
+      "date": "07/20/2026",
+      "time": "01:55 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "1127427",
+      "date": "07/30/2026",
+      "time": "02:25 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1134945",
+      "date": "08/03/2026",
+      "time": "12:33 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "1134099",
+      "date": "08/03/2026",
+      "time": "12:34 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "1135103",
+      "date": "08/04/2026",
+      "time": "01:04 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1135945",
+      "date": "08/04/2026",
+      "time": "01:05 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "1135104",
+      "date": "08/05/2026",
+      "time": "11:03 AM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Rescheduled",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "1135106",
+      "date": "08/06/2026",
+      "time": "11:30 AM",
+      "inspector": "A  A"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "1135105",
+      "date": "08/06/2026",
+      "time": "01:43 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1137821",
+      "date": "08/06/2026",
+      "time": "01:44 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "1137742",
+      "date": "08/10/2026",
+      "time": "12:00 AM",
+      "inspector": "E"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Electrical 2040 Electrical Meter Release",
+      "inspection_id": "1137819",
+      "date": "08/11/2026",
+      "time": "01:50 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2050 Electrical Rough",
+      "inspection_id": "1140026",
+      "date": "08/11/2026",
+      "time": "01:52 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1140259",
+      "date": "08/13/2026",
+      "time": "02:11 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1140260",
+      "date": "08/17/2026",
+      "time": "02:11 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Partially Approved",
+      "type_code": "Building 1200 Building Final",
+      "inspection_id": "1140261",
+      "date": "08/18/2026",
+      "time": "02:27 PM",
+      "inspector": "Lorenzo Aguilar"
+    },
+    {
+      "result": "Site Cancellation",
+      "type_code": "Building 1180 Drywall",
+      "inspection_id": "1170224",
+      "date": "10/07/2026",
+      "time": "10:12 AM",
+      "inspector": "E"
     }
   ],
   "errors": [
@@ -2292,9 +2548,9 @@
     "final_pagination_state": "last_page",
     "page_title": "City of Berkeley",
     "requires_auth": false,
-    "total_pages": 57,
-    "unique_inspection_count": 285,
-    "page_content_length": 2281075,
-    "extraction_duration_seconds": 114.34
+    "total_pages": 64,
+    "unique_inspection_count": 317,
+    "page_content_length": 2322452,
+    "extraction_duration_seconds": 121.37
   }
 }

@@ -1,7 +1,7 @@
 {
   "permit_number": "B2025-01928",
   "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00FUO&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-23T08:19:41.438603",
+  "extraction_timestamp": "2026-10-20T17:06:56.150254",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -163,6 +163,30 @@
       "date": "03/17/2026",
       "time": "03:46 PM",
       "inspector": "FR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4100 Plumbing Final Inspection",
+      "inspection_id": "1169259",
+      "date": "10/02/2026",
+      "time": "03:35 PM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Electrical 2100 Final Inspection",
+      "inspection_id": "1169220",
+      "date": "10/02/2026",
+      "time": "03:42 PM",
+      "inspector": "Yvette Madrid"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 3100 Mechanical Final",
+      "inspection_id": "1169180",
+      "date": "10/02/2026",
+      "time": "03:43 PM",
+      "inspector": "Yvette Madrid"
     }
   ],
   "errors": [
@@ -172,9 +196,9 @@
     "final_pagination_state": "last_page",
     "page_title": "City of Berkeley",
     "requires_auth": false,
-    "total_pages": 4,
-    "unique_inspection_count": 20,
-    "page_content_length": 517525,
-    "extraction_duration_seconds": 35.77
+    "total_pages": 5,
+    "unique_inspection_count": 23,
+    "page_content_length": 575322,
+    "extraction_duration_seconds": 35.26
   }
 }

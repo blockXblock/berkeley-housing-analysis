@@ -1,9 +1,26 @@
 {
   "permit_number": "B2024-04170",
   "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB24&capID2=00000&capID3=00MOS&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-23T05:13:10.457574",
+  "extraction_timestamp": "2026-10-20T16:27:08.463044",
   "extraction_method": "playwright_v2",
-  "inspections": [],
+  "inspections": [
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "1164820",
+      "date": "09/29/2026",
+      "time": "10:50 AM",
+      "inspector": "Eric Cabana"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Building 1020 Foundation Prior to pour",
+      "inspection_id": "1172328",
+      "date": "10/15/2026",
+      "time": "12:36 PM",
+      "inspector": "J"
+    }
+  ],
   "errors": [
     "Timeout waiting for inspection table"
   ],
@@ -12,8 +29,8 @@
     "page_title": "City of Berkeley",
     "requires_auth": false,
     "total_pages": 1,
-    "unique_inspection_count": 0,
-    "page_content_length": 427811,
-    "extraction_duration_seconds": 33.93
+    "unique_inspection_count": 2,
+    "page_content_length": 472344,
+    "extraction_duration_seconds": 33.5
   }
 }

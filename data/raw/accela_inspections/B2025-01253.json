@@ -1,7 +1,7 @@
 {
   "permit_number": "B2025-01253",
   "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00D4N&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-23T05:41:15.123329",
+  "extraction_timestamp": "2026-10-20T16:54:06.046737",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -110,7 +110,7 @@
     "requires_auth": false,
     "total_pages": 3,
     "unique_inspection_count": 12,
-    "page_content_length": 520147,
-    "extraction_duration_seconds": 35.47
+    "page_content_length": 520219,
+    "extraction_duration_seconds": 36.21
   }
 }

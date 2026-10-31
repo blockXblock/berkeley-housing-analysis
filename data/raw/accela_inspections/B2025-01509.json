@@ -1,7 +1,7 @@
 {
   "permit_number": "B2025-01509",
   "url": "https://aca-prod.accela.com/BERKELEY/Cap/CapDetail.aspx?Module=Building&TabName=Building&capID1=DUB25&capID2=00000&capID3=00EB9&agencyCode=BERKELEY&IsToShowInspection=",
-  "extraction_timestamp": "2026-09-23T05:45:57.456145",
+  "extraction_timestamp": "2026-10-20T16:59:24.431012",
   "extraction_method": "playwright_v2",
   "inspections": [
     {
@@ -155,6 +155,30 @@
       "date": "09/22/2026",
       "time": "11:15 AM",
       "inspector": "E"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4040 Water Service",
+      "inspection_id": "1164904",
+      "date": "09/25/2026",
+      "time": "02:31 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4020 Plumbing Rough",
+      "inspection_id": "1165224",
+      "date": "09/25/2026",
+      "time": "02:31 PM",
+      "inspector": "SR"
+    },
+    {
+      "result": "Approved",
+      "type_code": "Plumbing 4010 Underground/Underfloor",
+      "inspection_id": "1163436",
+      "date": "09/25/2026",
+      "time": "02:31 PM",
+      "inspector": "SR"
     }
   ],
   "errors": [
@@ -164,9 +188,9 @@
     "final_pagination_state": "last_page",
     "page_title": "City of Berkeley",
     "requires_auth": false,
-    "total_pages": 4,
-    "unique_inspection_count": 19,
-    "page_content_length": 546761,
-    "extraction_duration_seconds": 34.0
+    "total_pages": 5,
+    "unique_inspection_count": 22,
+    "page_content_length": 557232,
+    "extraction_duration_seconds": 37.2
   }
 }

@@ -5,6 +5,91 @@
 
 ---
 
+## 2026-10-31 — SWAPPED: live v4 = b93c51c1 (inspection refresh + S007); site regenerated (dev `7cf9eb76`)
+- John ran the swap (my cp was denied by permissions). Snapshot `databases/keep_snapshot_2026-10-31_pre-inspection-
+  refresh.db` (sha 1591bcbd, integrity ok). Live: sha **b93c51c1853f58cf**, r--r--r--, integrity ok; completed 919,
+  under_construction 176, stale 62.
+- Regenerated (playbook C) and committed `7cf9eb76`: Explorer export promoted (status Completed 903 -> 919), site
+  numbers (not yet built 11,442 -> 11,291), pipeline animation, pipeline-state (`--accept-anchor-drift`: majors
+  completed 27 -> 29 = 2538 Durant + 2587 Telegraph, building+stalled 8 -> 6), players, public mirror DB, game data
+  (parity PASS), tour geometry: sync_status_from_v4 (90 placemarks) + restyle_by_status, docs/geometry.kml republished.
+  deploy_gate.py: all checks passed. Home tab + game `f06bf741`.
+- **Not moved, by design:** the home page's "built since 2018" (4,368) and yearly table come from CPRA permit
+  finals ("2026 through June 26"); the inspection-based completions since then show in the Explorer, not that table.
+- **John:** deploy (push main, playbook E) and `cd datasette-deploy && flyctl deploy`. `scripts/tours/sync_status_from_v4.py`
+  carries another session's uncommitted 10-21 edit (Status-line check), used in this run, left uncommitted.
+  Tour packages / video renders not rebuilt (the tours step).
+
+## 2026-10-31 — Follow-ups: inspections for the 6 undated finals, CapDetail retries, list sweep 09-22..10-31 (read-only)
+- **Inspections** (`scratch/2026-10-31/inspections/`, NOT yet copied over `data/raw/accela_inspections/`): approved
+  Building Final for all 6: 2853 Stanton B2023-03761 10/20, 1220 Spruce B2024-04255 10/21 (2nd run; 1st broke at
+  page 5), 2231 Roosevelt B2024-04685 10/21, 2721 Belrose B2025-01220 10/16, 835 Contra Costa B2025-05874 10/22
+  (1 unit each) -> **149 units finaled since the CPRA cutoff**. 1145 Amador B2018-01376 (v4 2 units, under_construction):
+  building final **2019-11-22** — an old completion v4 misses, like 1415 Fifth.
+- **CapDetail retries** (`scratch/2026-10-31/capdetail_retry/`): B2022-02109 2523 Tenth **Closed Expired** (now 15
+  projects / 16 units); B2022-02547 1657 Chestnut and B2022-02628 1707 Rose Issued; B2022-00339, B2023-02996 blank
+  again at 30 s. discover_url found none of B2017-03768, B2022-01079, B2023-01529, B2023-05510 (one try; retry due).
+- **Sweep** `sweep_recent_permits.py --start 2026-09-22 --end 2026-10-31`: all windows ok; Building 936 rows (592 B-
+  permits), Planning ~55. **The list `Date` is the record's OPENED date** (B2025-05635 shows 12/08/2025), so the sweep
+  catches new applications, not new issuances of older applications; issuance needs a status re-pull of open BPs.
+  New housing applications: 1899 Oxford Phase II B2026-04461 (7 storeys, six of modular units over a podium; v4
+  entitled 222), 2812 Eighth (4 residences, 3 BPs), 1917 Tenth (3 BPs), 1922 Francisco duplex (SB 684 split), ~8
+  ADU/JADU; ZP2026-0103 (40-unit 6-storey ownership, address blank in the list). 2800 Telegraph's temp-power permit
+  cites B2025-05618 as "6 story, 18 unit" (v4 proposed 16).
+- **The 15 expired masters are a v4 RULE gap, not missing data:** all 15 already read "Closed Expired" in the list
+  dumps v4 is built from. `build_projects.py` DEAD_STATUS matches by `startswith(("Denied","Withdrawn","Void",
+  "Expired"))` (and build_views.py:102 `IN ('Void','Expired')`), so "Closed Expired" never matches. A machinery fix.
+- **CORRECTION (same day):** that DEAD_STATUS rule is for PLANNING records. Building structures never read a permit's
+  current list status (the list dumps are not a build input); structure status = master finaled / approved Building
+  Final, else NOT_YET_COMPLETE (permit 2022+) / STALE_NEEDS_SOURCE. Counting "Closed Expired" masters as not-building
+  needs a declared building-status input + a structure rule: a DESIGN step for John, not a one-line fix.
+- **Preview chain rebuild** `scratch/2026-10-31_rebuild/chain/berkeley_housing_v4.db` (working tree: the 10-20
+  inspection refresh, 278 files, + the 6 files copied in today; replaced originals backed up in
+  `scratch/2026-10-31/inspections_replaced_backup/`). **JN-F's structural gate HALTED, correctly:** inspection events
+  49,454 vs live 47,411 (+2,043); completion set identical. ADDITIONS_DECLARED covers a NEW locator only; a REFRESHED
+  file at the same locator has no declaration. JN-F committed before the gate, so structures/projects/views were run
+  by hand on the scratch DB (preview only). Diff (`scratch/2026-10-31/diff_status.py`): 16 projects -> completed
+  (+150 units: 2538 Durant 83, 2587 Telegraph 52, 14 small incl. 34 Oak Ridge CO 2023-07-14 and 1516 Alcatraz from
+  stale); **1752 Shattuck completed -> under_construction (72u)**: the City changed inspection 1091141 (Building Final
+  05/26/2026) from Approved (June capture) to **Disapproved** (10-20 capture; both full 116-page scrapes); permit still
+  Issued; floors on "Partially Approved" finals = occupied before a final. 2026 completed units 342 -> 420.
+  1145 Amador / 1415 Fifth stay under_construction: each has a 2nd structure that is STALE (B2018-02352 Closed
+  Expired; B2017-03768 = "Building B", removed from scope by B2017-03769 REV-01) -> same design step as expired.
+- **John's three decisions (2026-10-31), done:** (1) gate declaration `REFRESHES_DECLARED` in build_jn_f.py; (2) S007
+  `completion_ruling` (new structure-ruling action in build_structures.completion_for, after the City's own
+  completions) counts 1752 Shattuck complete 2026-05-26; (3) inspection files committed `4533f3ba` (237 refreshed +
+  42 new). Code + ledger `fb0ce6da`. **Swap candidate `scratch/2026-10-31_rebuild/chain2/berkeley_housing_v4.db`, sha
+  b93c51c1**, integrity ok, gate PASS (207 re-harvested + 38 new files; 999 unchanged identical): completed 903 -> 919,
+  under_construction 191 -> 176, 2026 completed units 342 -> 492. **Awaiting John's go-ahead to swap** (snapshot
+  live 1591bcbd first). Then: Explorer export / Datasette / tours from the new v4; regenerate the game's data.
+- **Site:** home page tab "🧮 Can it pencil?" -> `play/`, with the game session's record-first brief + value/cost line,
+  committed `f06bf741` on dev. Deploy (push main, deploy_gate.py) is John's.
+
+## 2026-10-30 — Live CapDetail harvest of under-construction permits; 2712 Telegraph; CPRA draft (read-only)
+- **Why:** v4's permit issued/finaled dates stop at the #26-1971 CPRA production (issued 2026-07-07, finaled
+  2026-07-06); no NextRequest mail since 2026-09-20. A real-time APR needs completions since July.
+- **Harvest:** `harvest_capdetail.py` on the 202 master permits behind v4's 191 under_construction projects ->
+  `scratch/2026-10-30/capdetail_under_construction/` (195 ok, 2 empty after retry, 3 failed; 4 not in the list dumps:
+  B2017-03768, B2022-01079, B2023-01529, B2023-05510; 2 projects have no master permit). Live status: Issued 162,
+  **Finaled 16, Closed Expired 14**, none 5, corrections 1. The CapDetail "Certificate of Occupancy" task is EMPTY on
+  every record (Berkeley doesn't use it); the completion date is the approved "Building 1200 Building Final"
+  inspection in `data/raw/accela_inspections/` (files refreshed 2026-10-20).
+- **Finaled since the CPRA cutoff (building final, units per v4):** 2587 Telegraph 52 (06/30, absent from the CPRA
+  finals), 2538 Durant 83 (07/09), 1528 Sacramento 1, 1003 Merced 1 (07/22), 1291 Rose 1 (09/03), 2331 Eighth 2
+  (09/24), 2909 Ellis 1 (10/06), 2524 McGee 1 (10/08), 2124 Parker 2 (10/20) = **144 units**. Finaled with no
+  approved building final in the 10-20 inspection files (need a refresh): 2853 Stanton, 1220 Spruce, 2231 Roosevelt,
+  2721 Belrose, 835 Contra Costa (1 each); 1145 Amador B2018-01376 (no inspection file; its sibling B2018-02352 is
+  Closed Expired). Older: 1415 Fifth 2 (building final 2024-10-31; v4 still under_construction).
+- **14 "under construction" projects whose master permit is Closed Expired** (15 units; mostly 2022 single ADUs, e.g.
+  1600 Milvia, 2223 Stuart): v4 counts them as building. Candidates, not written.
+- **2712/2714 Telegraph:** not under construction. Demolition permits B2026-00532/-00551 issued 2026-08-20; BP
+  B2025-05635 (56 units) in plan check (corrections 2026-10-14, resubmitted 10-20). Affordability (ZAB 2026-04-09
+  staff report, Att. 3): **5 VLI on site** (15% of a 33-unit base, 50% bonus -> 50 units); inclusionary minimum 7
+  (4 VLI, 3 LI), the remainder as in-lieu fee; perpetual (IHO) / 55-yr (DBL). ZP2026-0076 (60 units, staff-approved
+  2026-10-06) has no documents posted yet. Staff reports in `data/raw/zab/staff_reports/` (manifest 2026-10-30).
+- **CPRA draft** for 2026-01-01 to date (+ status, finaled date, CO date, applicant/fees):
+  `notes/2026-10-30_cpra_bp_refresh_jul_to_date.md`. Not submitted (John).
+
 ## 2026-10-29 — Pencil-out back-test: as underwritten vs as delivered (read-only; scratch/2026-10-29/)
 - John: "run the year-of-permit back-test", then "check costs against the permit valuations", then "add those two"
   (commitment-year market + value/cost). Cohort = JN-O §10's 15 scoreable built buildings (first BP 2022-07-01+).

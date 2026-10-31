@@ -157,7 +157,7 @@ document.querySelector('#pipeline-anim details.pn-more').addEventListener('toggl
 $('note').textContent = `Every private housing project in the City's records since 2018. Each layer is homes at one stage that month; ` +
   `green on top is homes finished in the previous 12 months ("Entitled 3+ yrs, inactive": approved at least 36 months earlier, ` +
   `no building permit, and nothing recorded on the project's records in 36 months; "Permitted, not started": no inspection yet). ` +
-  `The bars are homes finished each month; lighter bars come after the City's permit feed ends (${D.feed_end}), so they are ` +
-  `incomplete. UC Berkeley's dormitories are counted in beds, not homes (${D.uc_beds.toLocaleString()} beds under construction ` +
+  `The bars are homes finished each month. After the City's permit feed ends (${D.feed_end}), finishes come from the City's ` +
+  `final inspections of the buildings in these records, through ${D.done_end}; a lighter bar is a month not yet covered. UC Berkeley's dormitories are counted in beds, not homes (${D.uc_beds.toLocaleString()} beds under construction ` +
   `or planned). Data: Pipeline Explorer, ${D.stamp}.`;
 })();</script>

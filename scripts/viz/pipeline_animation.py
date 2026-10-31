@@ -120,6 +120,12 @@ def payload():
     feed_end = db.execute("""SELECT MAX(e.event_date) FROM events e JOIN event_classifications c USING(event_id)
         WHERE e.event_type_code='permit_finaled' AND c.housing_role='new_unit' AND c.is_master=1
         AND COALESCE(c.net_units,0)>0""").fetchone()[0]
+    # ...and past it, through today, from the buildings v4 holds complete WITHOUT a finaled permit (an approved Building
+    # Final inspection, or a completion ruling) -- the same extension as the yearly table (site_numbers.py; John,
+    # 2026-10-31: "extend the pipeline animation through today too")
+    insp_end = db.execute("""SELECT MAX(completed_on) FROM structures WHERE status = 'complete'
+        AND json_extract(notes, '$.completion_basis') <> 'master_finaled'""").fetchone()[0]
+    done_end = max(feed_end, insp_end or feed_end)
     today = dt.date.today()
     last = (today.year - START[0]) * 12 + (today.month - START[1])
     f = lambda d: month_index(d, last)
@@ -167,7 +173,7 @@ def payload():
     if bad:
         raise SystemExit(f"REFUSED: the last frame differs from the Explorer data in {bad} -- nothing written")
     return stamp, {"rows": rows, "start": START, "last": last, "stamp": stamp[:10], "uc_beds": uc_beds,
-                   "cycle6": month_index(CYCLE6, last) + 1, "co_end": month_index(feed_end, last), "feed_end": feed_end,
+                   "cycle6": month_index(CYCLE6, last) + 1, "co_end": month_index(done_end, last), "feed_end": feed_end, "done_end": done_end,
                    "n_historic": notes["historic"],
                    "today_day": today_day, "frame_days": [frame_day(i, last, today_day) for i in range(last + 1)]}
 

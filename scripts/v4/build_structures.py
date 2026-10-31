@@ -153,7 +153,7 @@ def approved_building_finals(db) -> dict:
 def completion_for(master_keys, permits, finals) -> tuple[str | None, str]:
     """-> (date, basis).
 
-    basis is 'master_finaled' | 'master_building_final' (both complete, with a date) or
+    basis is 'master_finaled' | 'master_building_final' | 'completion_ruling' (complete, with a date) or
     'NOT_YET_COMPLETE' | 'STALE_NEEDS_SOURCE' (no date: not counted, not dropped).
     """
     own = [d for k in master_keys for (_, t, d) in permits[k]["events"]
@@ -163,7 +163,25 @@ def completion_for(master_keys, permits, finals) -> tuple[str | None, str]:
     insp = [finals[k] for k in master_keys if k in finals]
     if insp:
         return max(insp), "master_building_final"
+    ruled = [d for k in master_keys for d in [completion_rulings().get(k)] if d]
+    if ruled:
+        return max(ruled), "completion_ruling"
     return None, not_complete_category(master_keys)
+
+
+_COMPLETION_RULINGS = None
+
+
+def completion_rulings() -> dict:
+    """master permit -> completion date, from approved completion_ruling rows (structure_rulings.csv, John). Applied
+    only where the City's own record gives no completion: a ruling never outranks a finaled permit or an approved
+    Building Final. S007: 1752 Shattuck is occupied and renting, while the City re-marked its 2026-05-26 Building
+    Final from Approved to Disapproved (John, 2026-10-31)."""
+    global _COMPLETION_RULINGS
+    if _COMPLETION_RULINGS is None:
+        _COMPLETION_RULINGS = {r["master_permits"].strip(): r["value"].strip()
+                               for r in load_structure_rulings(action="completion_ruling")}
+    return _COMPLETION_RULINGS
 
 
 def base_permit(key: str) -> str:
@@ -278,7 +296,8 @@ STRUCTURE_RULINGS = ROOT / "corrections/v4/structure_rulings.csv"
 def load_structure_rulings(path=STRUCTURE_RULINGS, action="merge_masters") -> list[dict]:
     """Approved structure rulings of one ACTION, checked against their pin in calibration_checksums.json:
     merge_masters (S001), attach_phase_permit (S002: a construction phase of the building, whose issuance may be the
-    building's first permit), add_address (S003-: an address the sources give the building beyond its permit's)."""
+    building's first permit), add_address (S003-: an address the sources give the building beyond its permit's),
+    completion_ruling (S007: a completion date where the City's record gives none, value = the date)."""
     import csv as _csv
     if not Path(path).exists():
         return []
@@ -287,7 +306,7 @@ def load_structure_rulings(path=STRUCTURE_RULINGS, action="merge_masters") -> li
     permits = sum(len([k for k in r["master_permits"].split(";") if k.strip()]) for r in rows)
     assert (len(rows), permits) == (pin.get("rows"), pin.get("permits")), \
         f"structure_rulings drift: {len(rows)} rows / {permits} permits vs pinned {pin}"
-    known = {"merge_masters", "attach_phase_permit", "add_address"}
+    known = {"merge_masters", "attach_phase_permit", "add_address", "completion_ruling"}
     assert {r["action"] for r in rows} <= known, f"unknown structure ruling action: {set(r['action'] for r in rows) - known}"
     return [r for r in rows if r["status"] == "approved" and r["action"] == action]
 

@@ -205,6 +205,30 @@ if _LIVE.exists() and DB_PATH.resolve() != _LIVE.resolve():
                   f"(live holds {in_live} of them)")
             if in_live == 0 and by_r[t] - by_l[t] == added:
                 by_l[t] = by_r[t]
+    # A REFRESHED SOURCE (2026-10-31): the same files re-harvested in place, so the locators match and the checksums do
+    # not. Declared per type. Passes only if every file whose checksum is UNCHANGED gives identical event counts and no
+    # live file is missing from the rebuild; the delta is then exactly the re-harvested and newly harvested files.
+    REFRESHES_DECLARED = {
+        "inspection": "data/raw/accela_inspections/ re-harvested 2026-10-20 (refresh_inspections.py) + 6 finaled "
+                      "permits 2026-10-31 (John 2026-10-31: 'yes')",
+    }
+    def _per_file(db, t):
+        return {loc: (ck, n) for loc, ck, n in db.execute(
+            "SELECT s.locator, s.checksum, COUNT(e.event_id) FROM sources s JOIN events e ON e.source_id = s.source_id "
+            "WHERE e.event_type_code = ? GROUP BY s.source_id", (t,))}
+    for t, why in REFRESHES_DECLARED.items():
+        if t in by_l and by_r.get(t, 0) != by_l[t]:
+            fr, fl = _per_file(con, t), _per_file(live, t)
+            same = [loc for loc in fl if loc in fr and fr[loc][0] == fl[loc][0]]
+            drift = [loc for loc in same if fr[loc][1] != fl[loc][1]]
+            gone = sorted(set(fl) - set(fr))
+            changed = [loc for loc in fl if loc in fr and fr[loc][0] != fl[loc][0]]
+            added = sorted(set(fr) - set(fl))
+            print(f"   declared refresh {t}: rebuild {by_r[t]:,} = live {by_l[t]:,} {by_r[t] - by_l[t]:+,} from "
+                  f"{len(changed)} re-harvested + {len(added)} new files; {len(same)} unchanged files identical: "
+                  f"{not drift}; live files missing: {len(gone)}  -- {why}")
+            if not drift and not gone:
+                by_l[t] = by_r[t]
     type_bad = [f"{t}: rebuild {by_r.get(t, 0):,} live {n:,}" for t, n in by_l.items() if by_r.get(t, 0) != n] + \
                [f"{t}: NEW and undeclared ({by_r[t]:,})" for t in by_r if t not in by_l and t not in NEW_TYPES_DECLARED]
     for t in by_r:

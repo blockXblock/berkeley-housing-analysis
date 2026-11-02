@@ -152,7 +152,11 @@ map.on('load',()=>{
    const q=encodeURIComponent(a+' Berkeley CA');
    new maplibregl.Popup().setLngLat(e.lngLat).setHTML(
      '<b>'+a+'</b>'
-     +(p.own?'<br>owner: '+p.own+(p.ot?' <span style="color:#777">('+p.ot+')</span>':''):'')
+     +(p.lo?'<br>owner: '+p.lo+' <span style="color:#777">(2025 City rental licence)</span>'
+        +(p.own&&p.own!==p.lo?'<br><span style="color:#777">owner of record in 2017: '+p.own+'</span>':'')
+       :(p.own?'<br>owner of record in 2017: '+p.own+(p.ot?' <span style="color:#777">('+p.ot+')</span>':'')
+        +(p.sy?'<br><span style="color:#c0392b">sold in '+p.sy+'; this name predates the sale</span>'
+         :(p.xy?'<br><span style="color:#777">ownership transferred in '+p.xy+'; this name may predate it</span>':'')):''))
      +(p.yb?'<br>built: '+p.yb:'')+(p.ub?' &middot; '+p.ub.replace(/_/g,' '):'')
      +(p.oo?'<br><span style="color:#1a9850">owner-occupied</span> (homeowner\'s exemption)':'<br><span style="color:#c0392b">rental / non-owner-occupied</span>')
      +'<br>assessed value: '+usd(p.v*1000)
